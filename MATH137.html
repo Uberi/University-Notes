@@ -6,9 +6,1194 @@
 <link rel="stylesheet" href="http://benweet.github.io/stackedit/res-min/themes/default.css" />
 <script type="text/javascript" src="http://benweet.github.io/stackedit/lib/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
-<body><div class="container"><p><span class="MathJax_Preview"></span><div class="MathJax_Display" role="textbox" aria-readonly="true" style="text-align: center;"><span class="MathJax" id="MathJax-Element-759-Frame" style=""><nobr><span class="math" id="MathJax-Span-6954" style="width: 5.252em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.953em; height: 0px; font-size: 132%;"><span style="position: absolute; clip: rect(1.356em 1000.003em 2.438em -0.376em); top: -2.162em; left: 0.003em;"><span class="mrow" id="MathJax-Span-6955"><span class="mn" id="MathJax-Span-6956" style="font-family: MathJax_Main;">1</span><span class="mo" id="MathJax-Span-6957" style="font-family: MathJax_Main; padding-left: 0.219em;">+</span><span class="mn" id="MathJax-Span-6958" style="font-family: MathJax_Main; padding-left: 0.219em;">2</span><span class="mo" id="MathJax-Span-6959" style="font-family: MathJax_Main; padding-left: 0.273em;">=</span><span class="mn" id="MathJax-Span-6960" style="font-family: MathJax_Main; padding-left: 0.273em;">3</span></span><span style="display: inline-block; width: 0px; height: 2.167em;"></span></span></span><span style="border-left-width: 0.004em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.146em; vertical-align: -0.211em;"></span></span></nobr></span></div><script type="math/tex; mode=display" id="MathJax-Element-759">
-1 + 2 = 3
-</script></p></div>
+<body><div class="container"><h1 class="wmd-title" id="math-137">MATH 137</h1>
+
+<p>Calculus I:</p>
+
+<pre><code>Section 003
+</code></pre>
+
+<p>Instructor:</p>
+
+<pre><code>Name: Sean Spezaile
+Email: sspezail@uwaterloo.ca
+Office: M3 2128
+Advising Hours: Monday, Wednesday at 12:00-13:30, MC 4023
+Office hours: starts week 3, details TBA ;wip
+</code></pre>
+
+<p><span class="MathJax_Preview">
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\dee}{\mathrm{d}\!}
+</span><script type="math/tex; mode=display" id="MathJax-Element-1304">
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\dee}{\mathrm{d}\!}
+</script></p>
+
+<h1 class="wmd-title" id="9/9/13">9/9/13</h1>
+
+<h2 class="wmd-title" id="preliminaries">Preliminaries</h2>
+
+<p>Ben's email: wangtianhui.ben@gmail.com</p>
+
+<p>Integers: <span class="MathJax_Preview">\mb{Z} = \ldots, -2, -1, 0, 1, 2, \ldots</span><script type="math/tex" id="MathJax-Element-1305">\mb{Z} = \ldots, -2, -1, 0, 1, 2, \ldots</script></p>
+
+<p>Rational  numbers: <span class="MathJax_Preview">\mb{Q} = p/q, p \in \mb{Z}, q \in \mb{Z}</span><script type="math/tex" id="MathJax-Element-1306">\mb{Q} = p/q, p \in \mb{Z}, q \in \mb{Z}</script></p>
+
+<p>Irrational numbers: cannot be expressed as ratio, non-terminating and non-repeating decimal expansions - <span class="MathJax_Preview">\pi</span><script type="math/tex" id="MathJax-Element-1307">\pi</script>, <span class="MathJax_Preview">e</span><script type="math/tex" id="MathJax-Element-1308">e</script>, <span class="MathJax_Preview">\sqrt{2}</span><script type="math/tex" id="MathJax-Element-1309">\sqrt{2}</script>, <span class="MathJax_Preview">ln(2)</span><script type="math/tex" id="MathJax-Element-1310">ln(2)</script>.</p>
+
+<p>Real number (denoted <span class="MathJax_Preview">\mb{R}</span><script type="math/tex" id="MathJax-Element-1311">\mb{R}</script>): contains <span class="MathJax_Preview">\mb{Z}</span><script type="math/tex" id="MathJax-Element-1312">\mb{Z}</script>, <span class="MathJax_Preview">\mb{Q}</span><script type="math/tex" id="MathJax-Element-1313">\mb{Q}</script>, and irrationals; any number with decimal expansion as opposed to complex/imaginary numbers.</p>
+
+<p>Complex number (denoted <span class="MathJax_Preview">\mb{C}</span><script type="math/tex" id="MathJax-Element-1314">\mb{C}</script>): contains real and imaginary parts.</p>
+
+<h2 class="wmd-title" id="intervals/sets">Intervals/Sets</h2>
+
+<p><span class="MathJax_Preview">[a, b]</span><script type="math/tex" id="MathJax-Element-1315">[a, b]</script> - inclusive (closed) interval from <span class="MathJax_Preview">a</span><script type="math/tex" id="MathJax-Element-1316">a</script> to <span class="MathJax_Preview">b</span><script type="math/tex" id="MathJax-Element-1317">b</script>.</p>
+
+<p><span class="MathJax_Preview">(a, b]</span><script type="math/tex" id="MathJax-Element-1318">(a, b]</script> - left exclusive (left open) interval from <span class="MathJax_Preview">a</span><script type="math/tex" id="MathJax-Element-1319">a</script> to <span class="MathJax_Preview">b</span><script type="math/tex" id="MathJax-Element-1320">b</script>, not including <span class="MathJax_Preview">a</span><script type="math/tex" id="MathJax-Element-1321">a</script>.</p>
+
+<p><span class="MathJax_Preview">[a, b)</span><script type="math/tex" id="MathJax-Element-1322">[a, b)</script> - right exclusive (right open) interval from <span class="MathJax_Preview">a</span><script type="math/tex" id="MathJax-Element-1323">a</script> to <span class="MathJax_Preview">b</span><script type="math/tex" id="MathJax-Element-1324">b</script>, not including <span class="MathJax_Preview">b</span><script type="math/tex" id="MathJax-Element-1325">b</script>.</p>
+
+<p><span class="MathJax_Preview">x \in (a, b)</span><script type="math/tex" id="MathJax-Element-1326">x \in (a, b)</script> - <span class="MathJax_Preview">x</span><script type="math/tex" id="MathJax-Element-1327">x</script> is an element of <span class="MathJax_Preview">(a, b)</span><script type="math/tex" id="MathJax-Element-1328">(a, b)</script> and <span class="MathJax_Preview">\set{x \in R \middle| a &lt; x &lt; b}</span><script type="math/tex" id="MathJax-Element-1329">\set{x \in R \middle| a < x < b}</script>.</p>
+
+<p>Infinity can be used as an interval endpoint, but is always excluded as it is a limit, not a number: <span class="MathJax_Preview">[4, \infty)</span><script type="math/tex" id="MathJax-Element-1330">[4, \infty)</script>.</p>
+
+<h2 class="wmd-title" id="inequalities">Inequalities</h2>
+
+<p><span class="MathJax_Preview">\Leftrightarrow</span><script type="math/tex" id="MathJax-Element-1331">\Leftrightarrow</script> - if and only if; first implies second, and second implies first.</p>
+
+<p>Solve <span class="MathJax_Preview">6 &lt; 1 - 3*x \le 10</span><script type="math/tex" id="MathJax-Element-1332">6 < 1 - 3*x \le 10</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+6 &lt; 1 - 3x \le 10 \\
+\text{Isolate } x: 5 &lt; -3x \le 9 \\
+-5 &gt; 3x \le -9 \\
+-5/3 &gt; x &gt; -3
+</span><script type="math/tex; mode=display" id="MathJax-Element-1333">
+6 < 1 - 3x \le 10 \\
+\text{Isolate } x: 5 < -3x \le 9 \\
+-5 > 3x \le -9 \\
+-5/3 > x > -3
+</script></p>
+</blockquote>
+
+<p>Solve <span class="MathJax_Preview">\frac{1}{x} &lt; 2</span><script type="math/tex" id="MathJax-Element-1334">\frac{1}{x} < 2</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\frac{1}{x} &lt; 2 \\
+\text{When } x &gt; 0, 1 &lt; 2x, x \ne 0, \text{ then } x &gt; \frac{1}{2} \\
+\text{When } x &lt; 0, 1 &gt; 2x, x \ne 0, \text{ then } x &lt; \frac{1}{2} \\
+\text{If } x &gt; 0 \text{ and } x &gt; \frac{1}{2}, \text{ then } x &gt; \frac{1}{2} \\
+\text{If } x &lt; 0 \text{ and } x &lt; \frac{1}{2}, \text{ then } x &lt; 0 \\
+\text{Therefore, } x \in (-\infty, 0) \cup (1/2, \infty)
+</span><script type="math/tex; mode=display" id="MathJax-Element-1335">
+\frac{1}{x} < 2 \\
+\text{When } x > 0, 1 < 2x, x \ne 0, \text{ then } x > \frac{1}{2} \\
+\text{When } x < 0, 1 > 2x, x \ne 0, \text{ then } x < \frac{1}{2} \\
+\text{If } x > 0 \text{ and } x > \frac{1}{2}, \text{ then } x > \frac{1}{2} \\
+\text{If } x < 0 \text{ and } x < \frac{1}{2}, \text{ then } x < 0 \\
+\text{Therefore, } x \in (-\infty, 0) \cup (1/2, \infty)
+</script></p>
+</blockquote>
+
+<h2 class="wmd-title" id="absolute-value">Absolute Value</h2>
+
+<p>Distance between number and 0 on the real number line.</p>
+
+<p><span class="MathJax_Preview">
+\abs{x} = \begin{cases}
+    x,  &amp;\text{if } x &gt;= 0 \\
+    -x, &amp;\text{if } x &lt; 0
+\end{cases}
+</span><script type="math/tex; mode=display" id="MathJax-Element-1336">
+\abs{x} = \begin{cases}
+    x,  &\text{if } x >= 0 \\
+    -x, &\text{if } x < 0
+\end{cases}
+</script></p>
+
+<p><span class="MathJax_Preview">\abs{x-a}</span><script type="math/tex" id="MathJax-Element-1337">\abs{x-a}</script> is the distance between <span class="MathJax_Preview">x</span><script type="math/tex" id="MathJax-Element-1338">x</script> and <span class="MathJax_Preview">a</span><script type="math/tex" id="MathJax-Element-1339">a</script> on the real number line:</p>
+
+<p><span class="MathJax_Preview">
+\abs{x} = \begin{cases}
+    x-a, &amp;\text{if } x &gt;= 0 \\
+    a-x, &amp;\text{if } x &lt; 0
+\end{cases}
+</span><script type="math/tex; mode=display" id="MathJax-Element-1340">
+\abs{x} = \begin{cases}
+    x-a, &\text{if } x >= 0 \\
+    a-x, &\text{if } x < 0
+\end{cases}
+</script></p>
+
+<p>Solve by considering both cases. Deal with each case separately.</p>
+
+<p>Solve <span class="MathJax_Preview">\abs{2x-3} &lt; 4</span><script type="math/tex" id="MathJax-Element-1341">\abs{2x-3} < 4</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\text{Open the inequality: } -4 &lt; 2x-3 &lt; 4 \\
+\abs{f} &lt; g \implies -g &lt; f &lt; g \\
+-1 &lt; 2x &lt; 7 \implies -\frac{1}{2} &lt; x &lt; \frac{7}{2}
+</span><script type="math/tex; mode=display" id="MathJax-Element-1342">
+\text{Open the inequality: } -4 < 2x-3 < 4 \\
+\abs{f} < g \implies -g < f < g \\
+-1 < 2x < 7 \implies -\frac{1}{2} < x < \frac{7}{2}
+</script></p>
+</blockquote>
+
+<p>Sketch <span class="MathJax_Preview">\abs{x} + y \le 1</span><script type="math/tex" id="MathJax-Element-1343">\abs{x} + y \le 1</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\abs{x} \le 1 - y \\
+\begin{align}
+    \text{Two cases: }
+    x &amp;\le 1 - y \\
+    -x \le 1 - y \implies x &amp;\ge y - 1
+\end{align} \\
+;wip
+</span><script type="math/tex; mode=display" id="MathJax-Element-1344">
+\abs{x} \le 1 - y \\
+\begin{align}
+    \text{Two cases: }
+    x &\le 1 - y \\
+    -x \le 1 - y \implies x &\ge y - 1
+\end{align} \\
+;wip
+</script></p>
+</blockquote>
+
+<p>Sketch <span class="MathJax_Preview">\abs{x} + \abs{y} \le 1</span><script type="math/tex" id="MathJax-Element-1345">\abs{x} + \abs{y} \le 1</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\begin{align}
+\text{Four cases: } ;wip \\
+\end{align}
+</span><script type="math/tex; mode=display" id="MathJax-Element-1346">
+\begin{align}
+\text{Four cases: } ;wip \\
+\end{align}
+</script></p>
+</blockquote>
+
+<h1 class="wmd-title" id="11/9/13">11/9/13</h1>
+
+<h2 class="wmd-title" id="functions">Functions</h2>
+
+<p>A <strong>function</strong> is a rule that assigns a single output to an input.</p>
+
+<pre><code>x (independent variable) -&gt; f -&gt; f(x) or y (dependent variable)
+</code></pre>
+
+<p>A function maps values in the set known as a domain into values in the set known as a range.</p>
+
+<p>Domain: set of allowable values for the independent variable.</p>
+
+<p>Common exclusions from domains:</p>
+
+<ul>
+<li>Dividing by 0.</li>
+<li>Log of non-positive number.</li>
+<li>Even root of negative number.</li>
+</ul>
+
+<p>A function has an inverse if and only if every unique value of the independent variable in the domain has a unique value of the dependent variable - i.e., "one-to-one".</p>
+
+<p>Range: set of possible values for the dependent variable.</p>
+
+<p>Finding the range can be significantly more difficult than finding the domain, which is simply a matter of looking at the function.</p>
+
+<p><span class="MathJax_Preview">
+f(x) = \sqrt{x - 1} \\
+\text{Restriction: } x &gt; 1 \\
+\mb{D} = [1, \infty) \\
+\mb{R} = [0, \infty)
+</span><script type="math/tex; mode=display" id="MathJax-Element-1347">
+f(x) = \sqrt{x - 1} \\
+\text{Restriction: } x > 1 \\
+\mb{D} = [1, \infty) \\
+\mb{R} = [0, \infty)
+</script></p>
+
+<p><span class="MathJax_Preview">
+f(x) = \frac{1}{1 - x^2} \\
+\text{Restriction: } x \ne 0 \\
+\mb{D} = (\infty, -1) \cup (-1, 1) \cup (1, \infty) \\
+\mb{R} = (-\infty, 0) \cup [1, \infty)
+</span><script type="math/tex; mode=display" id="MathJax-Element-1348">
+f(x) = \frac{1}{1 - x^2} \\
+\text{Restriction: } x \ne 0 \\
+\mb{D} = (\infty, -1) \cup (-1, 1) \cup (1, \infty) \\
+\mb{R} = (-\infty, 0) \cup [1, \infty)
+</script></p>
+
+<p>A <strong>true function</strong> must have a unique output for each input. Graphically, the vertical line test passes for all points (vertical line drawn on graph will only intersect it at most once if it is a graph of a true function).</p>
+
+<p>Non-functions can be described using functions by using multiple:</p>
+
+<p>Unit circle: <span class="MathJax_Preview">y = \pm \sqrt{x^2+y^2}</span><script type="math/tex" id="MathJax-Element-1349">y = \pm \sqrt{x^2+y^2}</script></p>
+
+<p>This can be written as two functions: <span class="MathJax_Preview">y = -\sqrt{x^2+y^2}</span><script type="math/tex" id="MathJax-Element-1350">y = -\sqrt{x^2+y^2}</script> and <span class="MathJax_Preview">y = \sqrt{x^2+y^2}</span><script type="math/tex" id="MathJax-Element-1351">y = \sqrt{x^2+y^2}</script>.</p>
+
+<p>Horizontal line test: a function is one-to-one if any horizontal line drawn on its graph intersects it at most once.</p>
+
+<p>Function examples:</p>
+
+<ul>
+<li>Polynomial: <span class="MathJax_Preview">x^n</span><script type="math/tex" id="MathJax-Element-1352">x^n</script>, n is a positive integer (domain real numbers)</li>
+<li>Rational: <span class="MathJax_Preview">f(x)/g(x)</span><script type="math/tex" id="MathJax-Element-1353">f(x)/g(x)</script> (domain real numbers such that <span class="MathJax_Preview">g(x) \ne 0</span><script type="math/tex" id="MathJax-Element-1354">g(x) \ne 0</script>)</li>
+<li>Trigonometric/Inverse trigonometric</li>
+<li>Exponential: <span class="MathJax_Preview">x^n</span><script type="math/tex" id="MathJax-Element-1355">x^n</script>, <span class="MathJax_Preview">x</span><script type="math/tex" id="MathJax-Element-1356">x</script> is a positive real number (domain real numbers)</li>
+<li>Logarithm: <span class="MathJax_Preview">log(x)</span><script type="math/tex" id="MathJax-Element-1357">log(x)</script> (domain positive real numbers)</li>
+</ul>
+
+<h1 class="wmd-title" id="13/9/13">13/9/13</h1>
+
+<h2 class="wmd-title" id="transformations">Transformations</h2>
+
+<p>Sketch <span class="MathJax_Preview">y = x^2</span><script type="math/tex" id="MathJax-Element-1358">y = x^2</script>, <span class="MathJax_Preview">y = x^2-1</span><script type="math/tex" id="MathJax-Element-1359">y = x^2-1</script>, <span class="MathJax_Preview">y = (x + 1)^2</span><script type="math/tex" id="MathJax-Element-1360">y = (x + 1)^2</script>:</p>
+
+<p>;wip</p>
+
+<p>Given fuunction <span class="MathJax_Preview">f(x)</span><script type="math/tex" id="MathJax-Element-1361">f(x)</script>:</p>
+
+<ul>
+<li><span class="MathJax_Preview">f(x)+c</span><script type="math/tex" id="MathJax-Element-1362">f(x)+c</script> is a vertical translation <span class="MathJax_Preview">c</span><script type="math/tex" id="MathJax-Element-1363">c</script> units upward.</li>
+<li><span class="MathJax_Preview">f(x+c)</span><script type="math/tex" id="MathJax-Element-1364">f(x+c)</script> is a horizontal translation <span class="MathJax_Preview">c</span><script type="math/tex" id="MathJax-Element-1365">c</script> units to the left.</li>
+<li><span class="MathJax_Preview">cf(x)</span><script type="math/tex" id="MathJax-Element-1366">cf(x)</script> is a vertical stretch by a factor of <span class="MathJax_Preview">c</span><script type="math/tex" id="MathJax-Element-1367">c</script>.</li>
+<li><span class="MathJax_Preview">f(cx)</span><script type="math/tex" id="MathJax-Element-1368">f(cx)</script> is a horizontal compression by a factor of <span class="MathJax_Preview">c</span><script type="math/tex" id="MathJax-Element-1369">c</script>.</li>
+<li><span class="MathJax_Preview">-f(x)</span><script type="math/tex" id="MathJax-Element-1370">-f(x)</script> is a reflection along the x-axis.</li>
+<li><span class="MathJax_Preview">f(-x)</span><script type="math/tex" id="MathJax-Element-1371">f(-x)</script> is a reflection along the y-axis.</li>
+<li><span class="MathJax_Preview">\abs{f(x)}</span><script type="math/tex" id="MathJax-Element-1372">\abs{f(x)}</script> is a reflection of all parts of the function below the x-axis along the x-axis.</li>
+<li><span class="MathJax_Preview">f(\abs{x})</span><script type="math/tex" id="MathJax-Element-1373">f(\abs{x})</script> is a reflection of all parts of the function to the right of the y-axis along the y-axis replacing what was on the left.</li>
+</ul>
+
+<h2 class="wmd-title" id="compositions">Compositions</h2>
+
+<p>Given two functions <span class="MathJax_Preview">f(x)</span><script type="math/tex" id="MathJax-Element-1374">f(x)</script> and <span class="MathJax_Preview">g(x)</span><script type="math/tex" id="MathJax-Element-1375">g(x)</script>:</p>
+
+<p><span class="MathJax_Preview">f \circ g</span><script type="math/tex" id="MathJax-Element-1376">f \circ g</script> (equivalent to <span class="MathJax_Preview">f(g(x))</span><script type="math/tex" id="MathJax-Element-1377">f(g(x))</script>) is a composition of <span class="MathJax_Preview">f</span><script type="math/tex" id="MathJax-Element-1378">f</script> and <span class="MathJax_Preview">g</span><script type="math/tex" id="MathJax-Element-1379">g</script>.</p>
+
+<p>The domain of <span class="MathJax_Preview">f \circ g</span><script type="math/tex" id="MathJax-Element-1380">f \circ g</script> is all values of <span class="MathJax_Preview">x</span><script type="math/tex" id="MathJax-Element-1381">x</script> in the domain of <span class="MathJax_Preview">g</span><script type="math/tex" id="MathJax-Element-1382">g</script> for which <span class="MathJax_Preview">g(x)</span><script type="math/tex" id="MathJax-Element-1383">g(x)</script> is in the domain of <span class="MathJax_Preview">f</span><script type="math/tex" id="MathJax-Element-1384">f</script>.</p>
+
+<p>Given <span class="MathJax_Preview">f(x) = \frac{1}{x}, g(x) = \sqrt{1 - x}</span><script type="math/tex" id="MathJax-Element-1385">f(x) = \frac{1}{x}, g(x) = \sqrt{1 - x}</script>, find <span class="MathJax_Preview">f \circ g</span><script type="math/tex" id="MathJax-Element-1386">f \circ g</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">f \circ g</span><script type="math/tex" id="MathJax-Element-1387">f \circ g</script> is equivalent to <span class="MathJax_Preview">\frac{1}{\sqrt{1 - x}}</span><script type="math/tex" id="MathJax-Element-1388">\frac{1}{\sqrt{1 - x}}</script>. <br>
+  Restriction on square root: <span class="MathJax_Preview">1 - x \ge 0</span><script type="math/tex" id="MathJax-Element-1389">1 - x \ge 0</script>, so <span class="MathJax_Preview">x \le 1</span><script type="math/tex" id="MathJax-Element-1390">x \le 1</script>. <br>
+  Restriction on division: <span class="MathJax_Preview">g(x) \ne 0</span><script type="math/tex" id="MathJax-Element-1391">g(x) \ne 0</script>, so <span class="MathJax_Preview">x \ne 1</span><script type="math/tex" id="MathJax-Element-1392">x \ne 1</script>. <br>
+  Domain of <span class="MathJax_Preview">f \circ g</span><script type="math/tex" id="MathJax-Element-1393">f \circ g</script>: <span class="MathJax_Preview">(-\infty, 1] \cup ((-\infty, 1) \cup (1, \infty))</span><script type="math/tex" id="MathJax-Element-1394">(-\infty, 1] \cup ((-\infty, 1) \cup (1, \infty))</script> is equal to <span class="MathJax_Preview">(-\infty, 1)</span><script type="math/tex" id="MathJax-Element-1395">(-\infty, 1)</script>.</p>
+</blockquote>
+
+<h1 class="wmd-title" id="16/9/13">16/9/13</h1>
+
+<h2 class="wmd-title" id="symmetry">Symmetry</h2>
+
+<p>A function is <strong>even</strong> if <span class="MathJax_Preview">f(-x) = f(x)</span><script type="math/tex" id="MathJax-Element-1396">f(-x) = f(x)</script> - the function is symmetric about the y-axis.</p>
+
+<p>Examples include <span class="MathJax_Preview">y = \abs{x}</span><script type="math/tex" id="MathJax-Element-1397">y = \abs{x}</script> and <span class="MathJax_Preview">y = x^2</span><script type="math/tex" id="MathJax-Element-1398">y = x^2</script>.</p>
+
+<p>A function is <strong>odd</strong> if <span class="MathJax_Preview">f(-x) = -f(x)</span><script type="math/tex" id="MathJax-Element-1399">f(-x) = -f(x)</script>.</p>
+
+<p>Examples include <span class="MathJax_Preview">y = x</span><script type="math/tex" id="MathJax-Element-1400">y = x</script> and <span class="MathJax_Preview">y = \sin(x)</span><script type="math/tex" id="MathJax-Element-1401">y = \sin(x)</script>.</p>
+
+<h2 class="wmd-title" id="one-to-one-functions">One-to-one Functions</h2>
+
+<p>A function is known as one-to-one on an interval if it never takes the same value twice - it passes the horizontal line test.</p>
+
+<p>Methematically, for any two numbers <span class="MathJax_Preview">x_1 \in I, x_2 \in I</span><script type="math/tex" id="MathJax-Element-1402">x_1 \in I, x_2 \in I</script>, <span class="MathJax_Preview">f(x_1) \ne f(x_2)</span><script type="math/tex" id="MathJax-Element-1403">f(x_1) \ne f(x_2)</script> whenever <span class="MathJax_Preview">x_1 \ne x_2</span><script type="math/tex" id="MathJax-Element-1404">x_1 \ne x_2</script>.</p>
+
+<p>Graphically, when we take the inverse of a function, we reflect it along the line <span class="MathJax_Preview">y = x</span><script type="math/tex" id="MathJax-Element-1405">y = x</script>. So the horizontal line test is actually the vertical line test of the inverse.</p>
+
+<p>A function is <strong>monotonically increasing</strong> on an interval <span class="MathJax_Preview">I</span><script type="math/tex" id="MathJax-Element-1406">I</script> if for any <span class="MathJax_Preview">x_1 \in I, x_2 \in I</span><script type="math/tex" id="MathJax-Element-1407">x_1 \in I, x_2 \in I</script>, <span class="MathJax_Preview">x_1 &lt; x_2 \Leftrightarrow f(x_1) &lt; f(x_1)</span><script type="math/tex" id="MathJax-Element-1408">x_1 < x_2 \Leftrightarrow f(x_1) < f(x_1)</script>.</p>
+
+<p>Likewise, a function is <strong>monotonically decreasing</strong> on an interval <span class="MathJax_Preview">I</span><script type="math/tex" id="MathJax-Element-1409">I</script> if for any <span class="MathJax_Preview">x_1 \in I, x_2 \in I</span><script type="math/tex" id="MathJax-Element-1410">x_1 \in I, x_2 \in I</script>, <span class="MathJax_Preview">x_1 &lt; x_2 \Leftrightarrow f(x_1) &gt; f(x_1)</span><script type="math/tex" id="MathJax-Element-1411">x_1 < x_2 \Leftrightarrow f(x_1) > f(x_1)</script>.</p>
+
+<p>A function that is monotonically increasing or monotonically decreasing on an interval is always one-to-one oon that interval.</p>
+
+<p>Show that <span class="MathJax_Preview">f(x) = x^2</span><script type="math/tex" id="MathJax-Element-1412">f(x) = x^2</script> is not one-to-one over <span class="MathJax_Preview">\mb{R}</span><script type="math/tex" id="MathJax-Element-1413">\mb{R}</script> but is over <span class="MathJax_Preview">[0, \infty)</span><script type="math/tex" id="MathJax-Element-1414">[0, \infty)</script>:</p>
+
+<blockquote>
+  <p>Counterexample: Since, <span class="MathJax_Preview">f(-1) = f(1)</span><script type="math/tex" id="MathJax-Element-1415">f(-1) = f(1)</script>, the function is not one-to-one. <br>
+  We can prove the latter statement by proving that the function is increasing over the interval. <br>
+  Let <span class="MathJax_Preview">x_1 \in [0, \infty)</span><script type="math/tex" id="MathJax-Element-1416">x_1 \in [0, \infty)</script> and <span class="MathJax_Preview">x_2 \in [0, \infty)</span><script type="math/tex" id="MathJax-Element-1417">x_2 \in [0, \infty)</script> represent two arbitrary values such that <span class="MathJax_Preview">x_1 &lt; x_2</span><script type="math/tex" id="MathJax-Element-1418">x_1 < x_2</script>. <br>
+  Then <span class="MathJax_Preview">f(x_2) - f(x_1) = x_2^2 - x_1^2 = (x_2 - x_1)(x_1 + x_2)</span><script type="math/tex" id="MathJax-Element-1419">f(x_2) - f(x_1) = x_2^2 - x_1^2 = (x_2 - x_1)(x_1 + x_2)</script>. <br>
+  Both terms are always positive, so <span class="MathJax_Preview">f(x_2) - f(x_1) &gt; 0</span><script type="math/tex" id="MathJax-Element-1420">f(x_2) - f(x_1) > 0</script> and <span class="MathJax_Preview">f(x_2) &gt; f(x_1)</span><script type="math/tex" id="MathJax-Element-1421">f(x_2) > f(x_1)</script>. <br>
+  Therefore, the function is monotonically increasing.  </p>
+</blockquote>
+
+<h2 class="wmd-title" id="inverse">Inverse</h2>
+
+<p>A function has an inverse if and only if it is one-to-one. By definition:</p>
+
+<p>Let <span class="MathJax_Preview">f(x)</span><script type="math/tex" id="MathJax-Element-1422">f(x)</script> be a one-to-one function with domain <span class="MathJax_Preview">A</span><script type="math/tex" id="MathJax-Element-1423">A</script> and range <span class="MathJax_Preview">B</span><script type="math/tex" id="MathJax-Element-1424">B</script>.</p>
+
+<p>The inverse function of <span class="MathJax_Preview">f(x)</span><script type="math/tex" id="MathJax-Element-1425">f(x)</script>, denoted <span class="MathJax_Preview">f^{-1}(x)</span><script type="math/tex" id="MathJax-Element-1426">f^{-1}(x)</script>, is defined by <span class="MathJax_Preview">f^{-1}(y) = x \Leftrightarrow f(x) = y</span><script type="math/tex" id="MathJax-Element-1427">f^{-1}(y) = x \Leftrightarrow f(x) = y</script>.</p>
+
+<p>The range of the inverse is the domain of the function, and the domain of the inverse is the range of the function.</p>
+
+<p>An inverse of a function "undoes" the operation applied by the function. In other words, the cancellation equations <span class="MathJax_Preview">\forall x \in A, f^{-1}(f(x)) = x</span><script type="math/tex" id="MathJax-Element-1428">\forall x \in A, f^{-1}(f(x)) = x</script> and <span class="MathJax_Preview">\forall x \in B, f(f^{-1}(x)) = x</span><script type="math/tex" id="MathJax-Element-1429">\forall x \in B, f(f^{-1}(x)) = x</script> hold for all functions with inverses.</p>
+
+<p>Note that <span class="MathJax_Preview">f^{-1}(x)</span><script type="math/tex" id="MathJax-Element-1430">f^{-1}(x)</script> is not the same as <span class="MathJax_Preview">f(x)^{-1}</span><script type="math/tex" id="MathJax-Element-1431">f(x)^{-1}</script> - the former is the inverse and the latter is the reciprocal.</p>
+
+<p>The inverse is found by swapping the variables and isolating variables.</p>
+
+<p>If a function is not one-to-one over <span class="MathJax_Preview">\mb{R}</span><script type="math/tex" id="MathJax-Element-1432">\mb{R}</script>, we may restrict the domain to a region where it is, and define the inverse there. This is useful with things like trigonometric functions, for example.</p>
+
+<p>Find the inverse of <span class="MathJax_Preview">f(x) = \sqrt{10 - 3x}</span><script type="math/tex" id="MathJax-Element-1433">f(x) = \sqrt{10 - 3x}</script>:</p>
+
+<p><span class="MathJax_Preview">\mb{D} = (-\infty, \frac{10}{3}]</span><script type="math/tex" id="MathJax-Element-1434">\mb{D} = (-\infty, \frac{10}{3}]</script></p>
+
+<p><span class="MathJax_Preview">\mb{R} = [0, \infty)</span><script type="math/tex" id="MathJax-Element-1435">\mb{R} = [0, \infty)</script></p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+x = \sqrt{10 - 3 f^{-1}(x)} \\
+x^2 = 10 - 3 f^{-1}(x) \\
+x^2 - 10 = -3 f^{-1}(x) \\
+\frac{10 - x^2}{3} = f^{-1}(x) \\
+\mb{D} = [0, \infty) \\
+\mb{R} = (-\infty, \frac{10}{3}]
+</span><script type="math/tex; mode=display" id="MathJax-Element-1436">
+x = \sqrt{10 - 3 f^{-1}(x)} \\
+x^2 = 10 - 3 f^{-1}(x) \\
+x^2 - 10 = -3 f^{-1}(x) \\
+\frac{10 - x^2}{3} = f^{-1}(x) \\
+\mb{D} = [0, \infty) \\
+\mb{R} = (-\infty, \frac{10}{3}]
+</script></p>
+</blockquote>
+
+<p>Graphically, if the point <span class="MathJax_Preview">(a, b)</span><script type="math/tex" id="MathJax-Element-1437">(a, b)</script> is on the graph of <span class="MathJax_Preview">f(x)</span><script type="math/tex" id="MathJax-Element-1438">f(x)</script>, then <span class="MathJax_Preview">(b, a)</span><script type="math/tex" id="MathJax-Element-1439">(b, a)</script> is on the graph of <span class="MathJax_Preview">f^{-1}(x)</span><script type="math/tex" id="MathJax-Element-1440">f^{-1}(x)</script>. Using this information, we can sketch the inverse of a graph by reflecting it along the line <span class="MathJax_Preview">y = x</span><script type="math/tex" id="MathJax-Element-1441">y = x</script>.</p>
+
+<h1 class="wmd-title" id="18/9/13">18/9/13</h1>
+
+<h2 class="wmd-title" id="the-constant-e">The Constant e</h2>
+
+<p><span class="MathJax_Preview">e</span><script type="math/tex" id="MathJax-Element-1442">e</script> is a constant used in many places in mathematics. It is approximately equal to 2.718.</p>
+
+<p>There are several ways to define <span class="MathJax_Preview">e</span><script type="math/tex" id="MathJax-Element-1443">e</script>:</p>
+
+<ul>
+<li>As a limit: <span class="MathJax_Preview">e = \displaystyle\lim_{x \to \infty}{(1 + \frac{1}{x})^n}</span><script type="math/tex" id="MathJax-Element-1444">e = \displaystyle\lim_{x \to \infty}{(1 + \frac{1}{x})^n}</script>.</li>
+<li>As an infinite series: <span class="MathJax_Preview">e = \sum\limits_{n = 0}^\infty \frac{1}{n!}</span><script type="math/tex" id="MathJax-Element-1445">e = \sum\limits_{n = 0}^\infty \frac{1}{n!}</script>.</li>
+<li>Graphically with tangents: of all exponential equations of the form <span class="MathJax_Preview">y = a^x, a &gt; 0</span><script type="math/tex" id="MathJax-Element-1446">y = a^x, a > 0</script>, only where <span class="MathJax_Preview">a = e</span><script type="math/tex" id="MathJax-Element-1447">a = e</script> does the tangent of the graph have a slope of 1 at <span class="MathJax_Preview">x = 0</span><script type="math/tex" id="MathJax-Element-1448">x = 0</script>.</li>
+</ul>
+
+<h2 class="wmd-title" id="exponentials/logarithms">Exponentials/Logarithms</h2>
+
+<p>The function <span class="MathJax_Preview">f(x) = e^x</span><script type="math/tex" id="MathJax-Element-1449">f(x) = e^x</script> is called the natural exponential function, just as <span class="MathJax_Preview">f(x) = \ln(x)</span><script type="math/tex" id="MathJax-Element-1450">f(x) = \ln(x)</script> is called the natural logarithm.</p>
+
+<p>Sketch <span class="MathJax_Preview">f(x) = 3 + 2e^x</span><script type="math/tex" id="MathJax-Element-1451">f(x) = 3 + 2e^x</script>:</p>
+
+<ul>
+<li>Start with graph of <span class="MathJax_Preview">f(x) = e^x</span><script type="math/tex" id="MathJax-Element-1452">f(x) = e^x</script>.</li>
+<li>Reflect the graph along the Y axis.</li>
+<li>Stretch graph vertically by a factor of 2.</li>
+<li>Move the graph up by 3 units.</li>
+</ul>
+
+<p>The function <span class="MathJax_Preview">f(x) = a^x</span><script type="math/tex" id="MathJax-Element-1453">f(x) = a^x</script> is either increasing for <span class="MathJax_Preview">a &gt; 1</span><script type="math/tex" id="MathJax-Element-1454">a > 1</script> or decreasing for <span class="MathJax_Preview">0 &lt; a &lt; 1</span><script type="math/tex" id="MathJax-Element-1455">0 < a < 1</script>, and therefore has an inverse. This inverse is called <span class="MathJax_Preview">\log_a(x)</span><script type="math/tex" id="MathJax-Element-1456">\log_a(x)</script>. <span class="MathJax_Preview">\log_a(x) = y \Leftrightarrow a^y = x</span><script type="math/tex" id="MathJax-Element-1457">\log_a(x) = y \Leftrightarrow a^y = x</script>.</p>
+
+<p>The domain of <span class="MathJax_Preview">f(x) = a^x</span><script type="math/tex" id="MathJax-Element-1458">f(x) = a^x</script> is <span class="MathJax_Preview">\mb{R}</span><script type="math/tex" id="MathJax-Element-1459">\mb{R}</script>, and the range is <span class="MathJax_Preview">\set{ y \in \mb{R} \middle| x &gt; 0}</span><script type="math/tex" id="MathJax-Element-1460">\set{ y \in \mb{R} \middle| x > 0}</script>. Therefore, the domain of <span class="MathJax_Preview">f(x) = log_a(x)</span><script type="math/tex" id="MathJax-Element-1461">f(x) = log_a(x)</script> is <span class="MathJax_Preview">\set{ y \in \mb{R} \middle| x &gt; 0}</span><script type="math/tex" id="MathJax-Element-1462">\set{ y \in \mb{R} \middle| x > 0}</script> and the range is <span class="MathJax_Preview">\mb{R}</span><script type="math/tex" id="MathJax-Element-1463">\mb{R}</script>.</p>
+
+<p><span class="MathJax_Preview">\ln(e) = \log_e(x)</span><script type="math/tex" id="MathJax-Element-1464">\ln(e) = \log_e(x)</script></p>
+
+<p><span class="MathJax_Preview">\ln(e) = 1</span><script type="math/tex" id="MathJax-Element-1465">\ln(e) = 1</script></p>
+
+<p><span class="MathJax_Preview">\log_a(x^r) = r \log_a(x^r)</span><script type="math/tex" id="MathJax-Element-1466">\log_a(x^r) = r \log_a(x^r)</script>. So <span class="MathJax_Preview">\log(\sqrt{x}) = \frac{1}{2} \log(x)</span><script type="math/tex" id="MathJax-Element-1467">\log(\sqrt{x}) = \frac{1}{2} \log(x)</script>.</p>
+
+<p>Find the inverse of <span class="MathJax_Preview">f(x) = e^{2x + 1}</span><script type="math/tex" id="MathJax-Element-1468">f(x) = e^{2x + 1}</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+x = e^{2 f^{-1}(x) + 1} \\
+\ln(x) = 2 f^{-1}(x) + 1 \\
+f^{-1}(x) = \frac{1}{2} \ln(x) - \frac{1}{2} \\
+</span><script type="math/tex; mode=display" id="MathJax-Element-1469">
+x = e^{2 f^{-1}(x) + 1} \\
+\ln(x) = 2 f^{-1}(x) + 1 \\
+f^{-1}(x) = \frac{1}{2} \ln(x) - \frac{1}{2} \\
+</script></p>
+</blockquote>
+
+<h1 class="wmd-title" id="20/9/13">20/9/13</h1>
+
+<h2 class="wmd-title" id="trignomonetric-functions">Trignomonetric Functions</h2>
+
+<p>Angles are measured in radians. Radians are the ratio of the associated arc and the radius: <span class="MathJax_Preview">\theta = \frac{a}{r}</span><script type="math/tex" id="MathJax-Element-1470">\theta = \frac{a}{r}</script>.</p>
+
+<p>For a full circle, <span class="MathJax_Preview">a = 2 \pi r</span><script type="math/tex" id="MathJax-Element-1471">a = 2 \pi r</script>, so <span class="MathJax_Preview">\theta = \frac{2 \pi r}{r} = 2 \pi</span><script type="math/tex" id="MathJax-Element-1472">\theta = \frac{2 \pi r}{r} = 2 \pi</script>.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Radians</th>
+  <th>Degrees</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td><span class="MathJax_Preview">\pi</span><script type="math/tex" id="MathJax-Element-1473">\pi</script></td>
+  <td>180</td>
+</tr>
+<tr>
+  <td><span class="MathJax_Preview">\frac{\pi}{2}</span><script type="math/tex" id="MathJax-Element-1474">\frac{\pi}{2}</script></td>
+  <td>90</td>
+</tr>
+<tr>
+  <td><span class="MathJax_Preview">\frac{\pi}{3}</span><script type="math/tex" id="MathJax-Element-1475">\frac{\pi}{3}</script></td>
+  <td>60</td>
+</tr>
+<tr>
+  <td><span class="MathJax_Preview">\frac{\pi}{4}    | 45      |
+| </span><script type="math/tex" id="MathJax-Element-1476">\frac{\pi}{4}    | 45      |
+| </script>\frac{pi}{6}</td>
+  <td>30</td>
+</tr>
+</tbody></table>
+
+
+<p>These are based on the special triangles:</p>
+
+<ul>
+<li>Right triangle with side lengths <span class="MathJax_Preview">1, 1, \sqrt{2}</span><script type="math/tex" id="MathJax-Element-1477">1, 1, \sqrt{2}</script>.</li>
+<li>Right triangle with side lengths <span class="MathJax_Preview">1, \sqrt{3}, 2</span><script type="math/tex" id="MathJax-Element-1478">1, \sqrt{3}, 2</script></li>
+</ul>
+
+<p>Parametric equations of unit circle (<span class="MathJax_Preview">x^2 + y^2 = 1</span><script type="math/tex" id="MathJax-Element-1479">x^2 + y^2 = 1</script>):</p>
+
+<ul>
+<li>Cosine: <span class="MathJax_Preview">x = \cos \theta</span><script type="math/tex" id="MathJax-Element-1480">x = \cos \theta</script></li>
+<li>Sine: <span class="MathJax_Preview">y = \sin \theta</span><script type="math/tex" id="MathJax-Element-1481">y = \sin \theta</script></li>
+</ul>
+
+<p><span class="MathJax_Preview">
+x^2 + y^2 = 1 \\
+\sin^2 \theta + \cos^2 \theta = 1 \\
+</span><script type="math/tex; mode=display" id="MathJax-Element-1482">
+x^2 + y^2 = 1 \\
+\sin^2 \theta + \cos^2 \theta = 1 \\
+</script></p>
+
+<h3 class="wmd-title" id="properties">Properties</h3>
+
+<p>Bounds: <span class="MathJax_Preview">-1 \le \sin \theta \le 1</span><script type="math/tex" id="MathJax-Element-1483">-1 \le \sin \theta \le 1</script>, <span class="MathJax_Preview">-1 \le \cos \theta \le 1</span><script type="math/tex" id="MathJax-Element-1484">-1 \le \cos \theta \le 1</script></p>
+
+<p>Periodicity: <span class="MathJax_Preview">\sin(\theta + 2 \pi k) = \sin \theta, k \in \mb{Z}</span><script type="math/tex" id="MathJax-Element-1485">\sin(\theta + 2 \pi k) = \sin \theta, k \in \mb{Z}</script>, <span class="MathJax_Preview">\cos(\theta + 2 \pi k) = \cos \theta, k \in \mb{Z}</span><script type="math/tex" id="MathJax-Element-1486">\cos(\theta + 2 \pi k) = \cos \theta, k \in \mb{Z}</script></p>
+
+<p>Odd/even: <span class="MathJax_Preview">\sin(-\theta) = -\sin(\theta)\$ - odd function, </span><script type="math/tex" id="MathJax-Element-1487">\sin(-\theta) = -\sin(\theta)\$ - odd function, </script>\cos(-\theta) = \cos(\theta)$ - even function</p>
+
+<p>Sign: <span class="MathJax_Preview">\cos</span><script type="math/tex" id="MathJax-Element-1488">\cos</script> is positive to the right of the y-axis, <span class="MathJax_Preview">\sin</span><script type="math/tex" id="MathJax-Element-1489">\sin</script> is positive above the x-axis</p>
+
+<p>Other trigoometric functions:</p>
+
+<ul>
+<li>Tangent: <span class="MathJax_Preview">\tan \theta = \frac{\sin \theta}{\cos \theta}</span><script type="math/tex" id="MathJax-Element-1490">\tan \theta = \frac{\sin \theta}{\cos \theta}</script></li>
+<li>Cosecant <span class="MathJax_Preview">\csc \theta = \frac{1}{\sin \theta}</span><script type="math/tex" id="MathJax-Element-1491">\csc \theta = \frac{1}{\sin \theta}</script></li>
+<li>Secant: <span class="MathJax_Preview">\sec \theta = \frac{1}{\cos \theta}</span><script type="math/tex">\sec \theta = \frac{1}{\cos \theta}</script></li>
+<li>Cotangent: <span class="MathJax_Preview">\cot \theta = \frac{\cos \theta}{\sin \theta}</span><script type="math/tex">\cot \theta = \frac{\cos \theta}{\sin \theta}</script></li>
+</ul>
+
+<h3 class="wmd-title" id="identities">Identities</h3>
+
+<p>Square Identity: <span class="MathJax_Preview">\sin^2 \theta + \cos^2 \theta = 1</span><script type="math/tex">\sin^2 \theta + \cos^2 \theta = 1</script></p>
+
+<p>Addition formulas: <span class="MathJax_Preview">\sin(x + y) = \sin x \cos y + \cos x \sin y</span><script type="math/tex">\sin(x + y) = \sin x \cos y + \cos x \sin y</script>, <span class="MathJax_Preview">\cos(x + y) = \cos x \cos y - \sin x \sin y</span><script type="math/tex">\cos(x + y) = \cos x \cos y - \sin x \sin y</script></p>
+
+<p>Find the subtraction formulas:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\sin(x - y) = \sin x \cos(-y) + \cos x \sin(-y) \\
+\sin(x - y) = \sin x \cos y - \cos x \sin y \\
+\cos(x - y) = \cos x \cos(-y) - \sin x \sin(-y) \\
+\cos(x - y) = \cos x \cos y + \sin x \sin y \\
+</span><script type="math/tex; mode=display">
+\sin(x - y) = \sin x \cos(-y) + \cos x \sin(-y) \\
+\sin(x - y) = \sin x \cos y - \cos x \sin y \\
+\cos(x - y) = \cos x \cos(-y) - \sin x \sin(-y) \\
+\cos(x - y) = \cos x \cos y + \sin x \sin y \\
+</script></p>
+</blockquote>
+
+<h2 class="wmd-title" id="inverse-trigonometric-functions">Inverse Trigonometric Functions</h2>
+
+<p>Trignometric functions are periodic. Therefore, they are not one-to-one on the real number line and cannot have an inverse on this interval.</p>
+
+<p>However, they are one-to-one if we restrict the domain. Conventionally, we use <span class="MathJax_Preview">[-\frac{\pi}{2}, \frac{\pi}{2}]</span><script type="math/tex">[-\frac{\pi}{2}, \frac{\pi}{2}]</script> for sine and <span class="MathJax_Preview">[0, \pi]</span><script type="math/tex">[0, \pi]</script> for cosine.</p>
+
+<p>The inverse of the sine function is denoted <span class="MathJax_Preview">x = \arcsin \theta</span><script type="math/tex">x = \arcsin \theta</script>, or <span class="MathJax_Preview">x = sin^{-1} \theta</span><script type="math/tex">x = sin^{-1} \theta</script> - "the angle whose sine is <span class="MathJax_Preview">x</span><script type="math/tex">x</script> in the restricted domain". Its domain is <span class="MathJax_Preview">[-1, 1]</span><script type="math/tex">[-1, 1]</script> and its range is <span class="MathJax_Preview">[-\frac{\pi}{2}, \frac{\pi}{2}]</span><script type="math/tex">[-\frac{\pi}{2}, \frac{\pi}{2}]</script>.</p>
+
+<p>The inverse of the cosine function is denoted <span class="MathJax_Preview">\arccos \theta</span><script type="math/tex">\arccos \theta</script>, or <span class="MathJax_Preview">\cos^{-1} \theta</span><script type="math/tex">\cos^{-1} \theta</script> - "the angle whose cosine is x in the restricted domain". Its domain is <span class="MathJax_Preview">[-1, 1]</span><script type="math/tex">[-1, 1]</script> and its range is <span class="MathJax_Preview">[0, \pi]</span><script type="math/tex">[0, \pi]</script>.</p>
+
+<p>The inverse of the tangent function is denoted <span class="MathJax_Preview">\arctan \theta</span><script type="math/tex">\arctan \theta</script>, or <span class="MathJax_Preview">\tan^{-1} \theta</span><script type="math/tex">\tan^{-1} \theta</script> - "the angle whose tangent is x in the restricted domain". Its domain is <span class="MathJax_Preview">\mb{R}</span><script type="math/tex">\mb{R}</script> and its range is <span class="MathJax_Preview">(-\frac{\pi}{2}, \frac{\pi}{2})</span><script type="math/tex">(-\frac{\pi}{2}, \frac{\pi}{2})</script>.</p>
+
+<p>Evaluate <span class="MathJax_Preview">\cos(\arctan \sqrt{3})</span><script type="math/tex">\cos(\arctan \sqrt{3})</script>:</p>
+
+<p><span class="MathJax_Preview">
+\frac{\sqrt{3}}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} = \sqrt{3} \\
+\text{adjacent} = 1 \\
+\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\cos(\arctan \sqrt{3}) = \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\cos(\arctan \sqrt{3}) = \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
+</span><script type="math/tex; mode=display">
+\frac{\sqrt{3}}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} = \sqrt{3} \\
+\text{adjacent} = 1 \\
+\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\cos(\arctan \sqrt{3}) = \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\cos(\arctan \sqrt{3}) = \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
+</script></p>
+
+<p>;wip: solve this by drawing a special triangle with the ratio specified and then do it algebriacally</p>
+
+<p>Simplify <span class="MathJax_Preview">\sin(\arctan x)</span><script type="math/tex">\sin(\arctan x)</script></p>
+
+<p><span class="MathJax_Preview">
+\frac{x}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} = x \\
+\text{adjacent} = 1 \\
+\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\sin(\arctan x) = \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\sin(\arctan x) = \frac{x}{\sqrt{x^2 + 1}} \\
+</span><script type="math/tex; mode=display">
+\frac{x}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} = x \\
+\text{adjacent} = 1 \\
+\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\sin(\arctan x) = \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\sin(\arctan x) = \frac{x}{\sqrt{x^2 + 1}} \\
+</script></p>
+
+<p><span class="MathJax_Preview">\frac{x}{\sqrt{x^2 + 1}}</span><script type="math/tex">\frac{x}{\sqrt{x^2 + 1}}</script></p>
+
+<p>Evaluate <span class="MathJax_Preview">\arccos(\sin(-\frac{\pi}{3}))</span><script type="math/tex">\arccos(\sin(-\frac{\pi}{3}))</script>:</p>
+
+<p>;wip: solve by drawing special triangle</p>
+
+<p><span class="MathJax_Preview">\frac{5 \pi}{6}</span><script type="math/tex">\frac{5 \pi}{6}</script></p>
+
+<h1 class="wmd-title" id="23/9/13">23/9/13</h1>
+
+<h2 class="wmd-title" id="hyperbolic-functions">Hyperbolic Functions</h2>
+
+<p>The <strong>hyperbolic functions</strong> are expressible as combinations of exponential functions.</p>
+
+<ul>
+<li><span class="MathJax_Preview">\sinh x = \frac{e^x - e^{-x}}{2}</span><script type="math/tex">\sinh x = \frac{e^x - e^{-x}}{2}</script> ("sinch ex") - hyperbolic sine function. Domain and range is <span class="MathJax_Preview">\mb{R}</span><script type="math/tex">\mb{R}</script>.</li>
+<li><span class="MathJax_Preview">\cosh x = \frac{e^x + e^{-x}}{2}</span><script type="math/tex">\cosh x = \frac{e^x + e^{-x}}{2}</script> ("cosh ex") - hyperbolic cosine function. Domain is <span class="MathJax_Preview">\mb{R}</span><script type="math/tex">\mb{R}</script> and range is <span class="MathJax_Preview">[1, \infty]</span><script type="math/tex">[1, \infty]</script>.</li>
+<li><span class="MathJax_Preview">\tanh x = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{\sinh x}{\cosh x}</span><script type="math/tex">\tanh x = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{\sinh x}{\cosh x}</script> - hyperbolic tangent function. Domain is <span class="MathJax_Preview">\mb{R}</span><script type="math/tex">\mb{R}</script> and range is <span class="MathJax_Preview">(-1, 1)</span><script type="math/tex">(-1, 1)</script>.</li>
+</ul>
+
+<p>There are also hyperbolic secant, cosecant, and cotangent functions, but they are rarely used.</p>
+
+<ul>
+<li>Hyperbolic sin is an odd function: <span class="MathJax_Preview">\sinh(-x) = \frac{e^{-x} - e^x}{2} = -\sinh x</span><script type="math/tex">\sinh(-x) = \frac{e^{-x} - e^x}{2} = -\sinh x</script>. As <span class="MathJax_Preview">x \to \infty</span><script type="math/tex">x \to \infty</script>, <span class="MathJax_Preview">\sinh x</span><script type="math/tex">\sinh x</script> approaches <span class="MathJax_Preview">\frac{1}{2} e^x</span><script type="math/tex">\frac{1}{2} e^x</script> asymptotically. As <span class="MathJax_Preview">x \to -\infty</span><script type="math/tex">x \to -\infty</script>, <span class="MathJax_Preview">\sinh x</span><script type="math/tex">\sinh x</script> approaches <span class="MathJax_Preview">-\frac{1}{2} e^{-x}</span><script type="math/tex">-\frac{1}{2} e^{-x}</script> asymptotically.</li>
+<li>Hyperbolic cosine is an even function: <span class="MathJax_Preview">\cosh(-x) = \frac{e^{-x} + e^x}{2} = \cosh x</span><script type="math/tex">\cosh(-x) = \frac{e^{-x} + e^x}{2} = \cosh x</script>. As <span class="MathJax_Preview">x \to \infty</span><script type="math/tex">x \to \infty</script>, <span class="MathJax_Preview">\sinh x</span><script type="math/tex">\sinh x</script> approaches <span class="MathJax_Preview">\frac{1}{2} e^x</span><script type="math/tex">\frac{1}{2} e^x</script> asymptotically. As <span class="MathJax_Preview">x \to -\infty</span><script type="math/tex">x \to -\infty</script>, <span class="MathJax_Preview">\sinh x</span><script type="math/tex">\sinh x</script> approaches <span class="MathJax_Preview">\frac{1}{2} e^{-x}</span><script type="math/tex">\frac{1}{2} e^{-x}</script> asymptotically.</li>
+<li>Hyperbolic tangent is an odd function: <span class="MathJax_Preview">\tanh(-x) = \frac{e^{-x} - e^x}{e^{-x} + e^x} = -\tanh x</span><script type="math/tex">\tanh(-x) = \frac{e^{-x} - e^x}{e^{-x} + e^x} = -\tanh x</script>. As <span class="MathJax_Preview">x \to \infty</span><script type="math/tex">x \to \infty</script>, <span class="MathJax_Preview">\tanh x</span><script type="math/tex">\tanh x</script> approaches 1 asymptotically. As <span class="MathJax_Preview">x \to -\infty</span><script type="math/tex">x \to -\infty</script>, <span class="MathJax_Preview">\tanh x</span><script type="math/tex">\tanh x</script> approaches -1 asymptotically.</li>
+</ul>
+
+<p>If we let <span class="MathJax_Preview">x = \cosh t</span><script type="math/tex">x = \cosh t</script> and <span class="MathJax_Preview">y = \sinh t</span><script type="math/tex">y = \sinh t</script>, then <span class="MathJax_Preview">x^2 - y^2 = 1</span><script type="math/tex">x^2 - y^2 = 1</script>. This is a hyperbola. The graph appears as an hourglass shape.</p>
+
+<h1 class="wmd-title" id="25/9/13">25/9/13</h1>
+
+<h2 class="wmd-title" id="inverse-hyperbolic-functions">Inverse Hyperbolic Functions</h2>
+
+<p>Hyperbolic sine is one-to-one over <span class="MathJax_Preview">\mb{R}</span><script type="math/tex">\mb{R}</script>.</p>
+
+<p>To find the inverse functions, we solve for <span class="MathJax_Preview">y</span><script type="math/tex">y</script> where <span class="MathJax_Preview">x = \sinh y = \frac{e^y - e^{-y}}{2}</span><script type="math/tex">x = \sinh y = \frac{e^y - e^{-y}}{2}</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+x = \sinh y = \frac{e^y - e^{-y}}{2} \\
+2x = e^y - e^{-y} \\
+0 = e^y - 2x - e^{-y} \\
+0 = e^y e^y - e^y 2x - e^y e^{-y} \\
+(e^y)^2 - 2x e^y - 1 = 0 \\
+e^y = \frac{2x \pm \sqrt{(-2x)^2 - 4(1)(-1)}}{2} = x \pm \sqrt{x^2 + 1} \\
+\text{Since } x - \sqrt{x^2 + 1} &lt; 0 \text{, } e^y = x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
+e^y = x + \sqrt{x^2 + 1} \\
+y = \ln(x + \sqrt{x^2 + 1}) \\
+</span><script type="math/tex; mode=display">
+x = \sinh y = \frac{e^y - e^{-y}}{2} \\
+2x = e^y - e^{-y} \\
+0 = e^y - 2x - e^{-y} \\
+0 = e^y e^y - e^y 2x - e^y e^{-y} \\
+(e^y)^2 - 2x e^y - 1 = 0 \\
+e^y = \frac{2x \pm \sqrt{(-2x)^2 - 4(1)(-1)}}{2} = x \pm \sqrt{x^2 + 1} \\
+\text{Since } x - \sqrt{x^2 + 1} < 0 \text{, } e^y = x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
+e^y = x + \sqrt{x^2 + 1} \\
+y = \ln(x + \sqrt{x^2 + 1}) \\
+</script></p>
+</blockquote>
+
+<p>With this technique, we discover the inverses of the hyperbolic functions are:</p>
+
+<ul>
+<li><span class="MathJax_Preview">\sinh^{-1} x = \ln(x + \sqrt{x^2 + 1})</span><script type="math/tex">\sinh^{-1} x = \ln(x + \sqrt{x^2 + 1})</script></li>
+<li><span class="MathJax_Preview">\cosh^{-1} x = \ln(x + \sqrt{x^2 - 1}), x \ge 1</span><script type="math/tex">\cosh^{-1} x = \ln(x + \sqrt{x^2 - 1}), x \ge 1</script></li>
+<li><span class="MathJax_Preview">\tanh^{-1} x = \frac{1}{2} \ln(\frac{1 + x}{1 - x}), -1 &lt; x &lt; 1</span><script type="math/tex">\tanh^{-1} x = \frac{1}{2} \ln(\frac{1 + x}{1 - x}), -1 < x < 1</script></li>
+</ul>
+
+<h2 class="wmd-title" id="limits">Limits</h2>
+
+<p>Limits are a core concept in calculus, because they appear in the definitions of derivatives and definite integrals, the two main branches of calculus.</p>
+
+<p>A limit does not depend on what the value of the function is at the point it is approaching. Consider the following function:</p>
+
+<p><span class="MathJax_Preview">
+g(x) = \begin{cases}
+3x - 1 &amp;\text{if } x \ne 1 \\
+0      &amp;\text{if } x = 1
+\end{cases}
+</span><script type="math/tex; mode=display">
+g(x) = \begin{cases}
+3x - 1 &\text{if } x \ne 1 \\
+0      &\text{if } x = 1
+\end{cases}
+</script></p>
+
+<p>When we say the limit of <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> is <span class="MathJax_Preview">L</span><script type="math/tex">L</script> as <span class="MathJax_Preview">x \to a</span><script type="math/tex">x \to a</script>, we mean <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> gets closer and closer to <span class="MathJax_Preview">L</span><script type="math/tex">L</script> as <span class="MathJax_Preview">x</span><script type="math/tex">x</script> gets closer and closer to <span class="MathJax_Preview">a</span><script type="math/tex">a</script>.</p>
+
+<p>The precise definition of a limit:</p>
+
+<blockquote>
+  <p>Let <span class="MathJax_Preview">f</span><script type="math/tex">f</script> be a function defined on an open interval that contains the number <span class="MathJax_Preview">a</span><script type="math/tex">a</script>, except possibly at <span class="MathJax_Preview">a</span><script type="math/tex">a</script> itself. <br>
+  Then we say the <strong>limit</strong> of <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> as <span class="MathJax_Preview">x</span><script type="math/tex">x</script> approaches <span class="MathJax_Preview">a</span><script type="math/tex">a</script> is <span class="MathJax_Preview">L</span><script type="math/tex">L</script>, if for every number <span class="MathJax_Preview">\epsilon &gt; 0</span><script type="math/tex">\epsilon > 0</script> there exists a number <span class="MathJax_Preview">\delta &gt; 0</span><script type="math/tex">\delta > 0</script> such that <span class="MathJax_Preview">0 &lt; \abs{x - a} &lt; \delta \implies \abs{f(x) - L} &lt; \epsilon</span><script type="math/tex">0 < \abs{x - a} < \delta \implies \abs{f(x) - L} < \epsilon</script>.
+  We write this as <span class="MathJax_Preview">\displaystyle\lim_{x \to a} f(x) = L</span><script type="math/tex">\displaystyle\lim_{x \to a} f(x) = L</script>, or <span class="MathJax_Preview">f(x) \to L</span><script type="math/tex">f(x) \to L</script> as <span class="MathJax_Preview">x \to a</span><script type="math/tex">x \to a</script>.  </p>
+</blockquote>
+
+<p><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script> is Epsilon (Greek) and is associated with error.</p>
+
+<p><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script> is Delta (Greek) and is associated with difference.</p>
+
+<p>The key point is that the limit exists if the distance between <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> and <span class="MathJax_Preview">L</span><script type="math/tex">L</script> (the error, <span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script>) <strong>can be made as small as needed</strong> by making the distance between <span class="MathJax_Preview">x</span><script type="math/tex">x</script> and <span class="MathJax_Preview">a</span><script type="math/tex">a</script> (the difference, <span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script>) sufficiently small. However, <span class="MathJax_Preview">x \ne a</span><script type="math/tex">x \ne a</script>.</p>
+
+<p><span class="MathJax_Preview">a - \delta &lt; x &lt; a + \delta \implies L - \epsilon &lt; f(x) &lt; L + \epsilon</span><script type="math/tex; mode=display">a - \delta < x < a + \delta \implies L - \epsilon < f(x) < L + \epsilon</script></p>
+
+<p><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script> depends on <span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script>.</p>
+
+<h1 class="wmd-title" id="27/9/13">27/9/13</h1>
+
+<p>Geometry and intuition are useful tools, but do not prove anything.</p>
+
+<p>Consider <span class="MathJax_Preview">f(x) = \sin\left(\frac{1}{x}\right)</span><script type="math/tex">f(x) = \sin\left(\frac{1}{x}\right)</script>. The graph has higher and higher frequency oscillations as it approaches 0 from either direction, to a limit of infinity.</p>
+
+<p>Consider the following function:</p>
+
+<p><span class="MathJax_Preview">
+f(x) = \begin{cases}
+3x - 1 &amp;\text{if }x \ne 1 \\
+0      &amp;\text{if } x = 1
+\end{cases}
+</span><script type="math/tex; mode=display">
+f(x) = \begin{cases}
+3x - 1 &\text{if }x \ne 1 \\
+0      &\text{if } x = 1
+\end{cases}
+</script></p>
+
+<p>How close must <span class="MathJax_Preview">x</span><script type="math/tex">x</script> be to 1 to ensure that <span class="MathJax_Preview">h(x)</span><script type="math/tex">h(x)</script> is within 0.1 of 2?</p>
+
+<blockquote>
+  <p>0.1 plays the role of <span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script>. <br>
+  We need to find the corresponding value of <span class="MathJax_Preview">\delta &gt; 0</span><script type="math/tex">\delta > 0</script> such that <span class="MathJax_Preview">0 &lt; \abs{x - 1} &lt; \delta \implies \abs{h(x) - 2} &lt; 0.1</span><script type="math/tex">0 < \abs{x - 1} < \delta \implies \abs{h(x) - 2} < 0.1</script>. <br>
+  So <span class="MathJax_Preview">\abs{3x - 1 - 2} &lt; 0.1</span><script type="math/tex">\abs{3x - 1 - 2} < 0.1</script>, or <span class="MathJax_Preview">3 \abs{x - 1} &lt; 0.1</span><script type="math/tex">3 \abs{x - 1} < 0.1</script>. <br>
+  So <span class="MathJax_Preview">\abs{x - 1} &lt; \frac{0.1}{3}</span><script type="math/tex">\abs{x - 1} < \frac{0.1}{3}</script>, or <span class="MathJax_Preview">\frac{1}{30}</span><script type="math/tex">\frac{1}{30}</script>.  </p>
+</blockquote>
+
+<p>To prove that a limit exists, we need to use an arbitrary <span class="MathJax_Preview">\epsilon &gt; 0</span><script type="math/tex">\epsilon > 0</script>:</p>
+
+<blockquote>
+  <p>We need to find the corresponding value of <span class="MathJax_Preview">\delta &gt; 0</span><script type="math/tex">\delta > 0</script> such that <span class="MathJax_Preview">0 &lt; \abs{x - 1} &lt; \delta \implies \abs{h(x) - 2} &lt; \epsilon</span><script type="math/tex">0 < \abs{x - 1} < \delta \implies \abs{h(x) - 2} < \epsilon</script>. <br>
+  So <span class="MathJax_Preview">\abs{3x - 1 - 2} &lt; \epsilon</span><script type="math/tex">\abs{3x - 1 - 2} < \epsilon</script>, or <span class="MathJax_Preview">3 \abs{x - 1} &lt; \epsilon</span><script type="math/tex">3 \abs{x - 1} < \epsilon</script>. <br>
+  So <span class="MathJax_Preview">\abs{x - 1} &lt; \frac{\epsilon}{3}</span><script type="math/tex">\abs{x - 1} < \frac{\epsilon}{3}</script>. <br>
+  So if we choose <span class="MathJax_Preview">\delta = \frac{\epsilon}{3}</span><script type="math/tex">\delta = \frac{\epsilon}{3}</script>, then we know that <span class="MathJax_Preview">0 &lt; \abs{x - 1} &lt; \delta \implies \abs{h(x) - 2} &lt; \epsilon</span><script type="math/tex">0 < \abs{x - 1} < \delta \implies \abs{h(x) - 2} < \epsilon</script>. <br>
+  Therefore, the limit exists, by definition.</p>
+</blockquote>
+
+<h3 class="wmd-title" id="heaviside-function">Heaviside Function</h3>
+
+<p><span class="MathJax_Preview">
+H(x) = \begin{cases}
+1 &amp;\text{if } x \ge 0 \\
+0 &amp;\text{if } x &lt; 0
+\end{cases}
+</span><script type="math/tex; mode=display">
+H(x) = \begin{cases}
+1 &\text{if } x \ge 0 \\
+0 &\text{if } x < 0
+\end{cases}
+</script></p>
+
+<p>Prove that the limit does not exist at <span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script>:</p>
+
+<blockquote>
+  <p>Proof by contradiction. <br>
+  Suppose the limit does exist. <br>
+  So <span class="MathJax_Preview">\forall \epsilon &gt; 0, \exists \delta &gt; 0, 0 &lt; \abs{x} &lt; \delta \implies \abs{H(x) - L} &lt; \epsilon</span><script type="math/tex">\forall \epsilon > 0, \exists \delta > 0, 0 < \abs{x} < \delta \implies \abs{H(x) - L} < \epsilon</script>. <br>
+  Consider <span class="MathJax_Preview">\epsilon = 0.2</span><script type="math/tex">\epsilon = 0.2</script>. <br>
+  So <span class="MathJax_Preview">0 &lt; \abs{x} &lt; \delta \implies L - 0.2 &lt; H(x) &lt; L + 0.2</span><script type="math/tex">0 < \abs{x} < \delta \implies L - 0.2 < H(x) < L + 0.2</script>. <br>
+  So the distance between <span class="MathJax_Preview">L - 0.2</span><script type="math/tex">L - 0.2</script> and <span class="MathJax_Preview">L + 0.2</span><script type="math/tex">L + 0.2</script> is 0.4. <br>
+  Let <span class="MathJax_Preview">-\delta &lt; x_1 &lt; 0</span><script type="math/tex">-\delta < x_1 < 0</script> and <span class="MathJax_Preview">0 &lt; x_2 &lt; \delta</span><script type="math/tex">0 < x_2 < \delta</script>. <br>
+  So it must be that <span class="MathJax_Preview">H(x_1) = 0</span><script type="math/tex">H(x_1) = 0</script> and <span class="MathJax_Preview">H(x_2) = 1</span><script type="math/tex">H(x_2) = 1</script>. <br>
+  So the distance between the two is 1. <br>
+  But the distance between the two must be less than 0.4. <br>
+  Therefore, the limit cannot exist for <span class="MathJax_Preview">\epsilon \le \frac{1}{2}</span><script type="math/tex">\epsilon \le \frac{1}{2}</script>.  </p>
+</blockquote>
+
+<h1 class="wmd-title" id="30/9/13">30/9/13</h1>
+
+<h2 class="wmd-title" id="limit-laws/theorems">Limit Laws/Theorems</h2>
+
+<p>For complicated functions it is often impractical to use the definition to prove limits. Instead, we use limit laws, which can be proved from the definition.</p>
+
+<h3 class="wmd-title" id="limit-sum-law">Limit sum law</h3>
+
+<p>If <span class="MathJax_Preview">\lim_{x \to a} f(x) = L</span><script type="math/tex">\lim_{x \to a} f(x) = L</script> and <span class="MathJax_Preview">\lim_{x \to a} g(x) = M</span><script type="math/tex">\lim_{x \to a} g(x) = M</script>, then <span class="MathJax_Preview">\lim_{x \to a} (f(x) + g(x)) = L + M</span><script type="math/tex">\lim_{x \to a} (f(x) + g(x)) = L + M</script>.</p>
+
+<p>Proof:</p>
+
+<blockquote>
+  <p>If <span class="MathJax_Preview">\lim_{x \to a} (f(x) + g(x)) = L + M</span><script type="math/tex">\lim_{x \to a} (f(x) + g(x)) = L + M</script>, then <span class="MathJax_Preview">\forall \epsilon &gt; 0, \exists \delta &gt; 0, 0 &lt; \abs{x - a} &lt; \delta \implies \abs{(f(x) + g(x)) - (L + M)} &lt; \epsilon</span><script type="math/tex">\forall \epsilon > 0, \exists \delta > 0, 0 < \abs{x - a} < \delta \implies \abs{(f(x) + g(x)) - (L + M)} < \epsilon</script>. <br>
+  Clearly, <span class="MathJax_Preview">0 &lt; \abs{x - a} &lt; \delta \implies \abs{(f(x) + g(x)) - (L + M)} &lt; \epsilon</span><script type="math/tex">0 < \abs{x - a} < \delta \implies \abs{(f(x) + g(x)) - (L + M)} < \epsilon</script> is equivalent to <span class="MathJax_Preview">0 &lt; \abs{x - a} &lt; \delta \implies \abs{(f(x) - L) + (g(x) - M)} &lt; \epsilon</span><script type="math/tex">0 < \abs{x - a} < \delta \implies \abs{(f(x) - L) + (g(x) - M)} < \epsilon</script>. <br>
+  By the triangle inequality, <span class="MathJax_Preview">\abs{(f(x) - L) + (g(x) - M)} \le \abs{f(x) - L} + \abs{g(x) - M}</span><script type="math/tex">\abs{(f(x) - L) + (g(x) - M)} \le \abs{f(x) - L} + \abs{g(x) - M}</script>. <br>
+  We want to make each term less than <span class="MathJax_Preview">\frac{\epsilon}{2}</span><script type="math/tex">\frac{\epsilon}{2}</script>, so later we can add them together to get <span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script>. <br>
+  Since <span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script> is arbitrary, <span class="MathJax_Preview">\forall \epsilon &gt; 0, \exists \delta_1 &gt; 0</span><script type="math/tex">\forall \epsilon > 0, \exists \delta_1 > 0</script>, <span class="MathJax_Preview">0 &lt; \abs{x - a} &lt; \delta_1 \implies \abs{f(x) - L} &lt; \frac{\epsilon}{2}</span><script type="math/tex">0 < \abs{x - a} < \delta_1 \implies \abs{f(x) - L} < \frac{\epsilon}{2}</script>. <br>
+  In the same way, <span class="MathJax_Preview">\forall \epsilon &gt; 0, \exists \delta_2 &gt; 0</span><script type="math/tex">\forall \epsilon > 0, \exists \delta_2 > 0</script>, <span class="MathJax_Preview">0 &lt; \abs{x - a} &lt; \delta_2 \implies \abs{g(x) - M} &lt; \frac{\epsilon}{2}</span><script type="math/tex">0 < \abs{x - a} < \delta_2 \implies \abs{g(x) - M} < \frac{\epsilon}{2}</script>. <br>
+  Choose <span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script> as the smaller of <span class="MathJax_Preview">\delta_1</span><script type="math/tex">\delta_1</script> and <span class="MathJax_Preview">\delta_2</span><script type="math/tex">\delta_2</script>. <br>
+  Assume <span class="MathJax_Preview">0 &lt; \abs{x - a} &lt; \delta</span><script type="math/tex">0 < \abs{x - a} < \delta</script>. <br>
+  So <span class="MathJax_Preview">0 &lt; \abs{x - a} &lt; \delta_1</span><script type="math/tex">0 < \abs{x - a} < \delta_1</script>, <span class="MathJax_Preview">0 &lt; \abs{x - a} &lt; \delta_2</span><script type="math/tex">0 < \abs{x - a} < \delta_2</script>. <br>
+  Clearly, <span class="MathJax_Preview">\abs{f(x) - L} + \abs{g(x) - M} &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2}</span><script type="math/tex">\abs{f(x) - L} + \abs{g(x) - M} < \frac{\epsilon}{2} + \frac{\epsilon}{2}</script>. <br>
+  So <span class="MathJax_Preview">\abs{(f(x) + g(x)) - (L + M)} &lt; \epsilon</span><script type="math/tex">\abs{(f(x) + g(x)) - (L + M)} < \epsilon</script>. <br>
+  Therefore, by the definition of the limit, <span class="MathJax_Preview">\lim_{x \to a} (f(x) + g(x)) = L + M</span><script type="math/tex">\lim_{x \to a} (f(x) + g(x)) = L + M</script>.  </p>
+</blockquote>
+
+<h3 class="wmd-title" id="limit-difference-law">Limit difference law</h3>
+
+<p>If <span class="MathJax_Preview">\lim_{x \to a} f(x) = L</span><script type="math/tex">\lim_{x \to a} f(x) = L</script> and <span class="MathJax_Preview">\lim_{x \to a} g(x) = M</span><script type="math/tex">\lim_{x \to a} g(x) = M</script>, then <span class="MathJax_Preview">\lim_{x \to a} (f(x) - g(x)) = L - M</span><script type="math/tex">\lim_{x \to a} (f(x) - g(x)) = L - M</script>.</p>
+
+<h3 class="wmd-title" id="limit-constant-multiple-law">Limit constant multiple law</h3>
+
+<p>If <span class="MathJax_Preview">\lim_{x \to a} f(x) = L</span><script type="math/tex">\lim_{x \to a} f(x) = L</script>, then <span class="MathJax_Preview">\lim_{x \to a} (c \cdot f(x)) = cL</span><script type="math/tex">\lim_{x \to a} (c \cdot f(x)) = cL</script>.</p>
+
+<h3 class="wmd-title" id="limit-product-law">Limit product law</h3>
+
+<p>If <span class="MathJax_Preview">\lim_{x \to a} f(x) = L</span><script type="math/tex">\lim_{x \to a} f(x) = L</script> and <span class="MathJax_Preview">\lim_{x \to a} g(x) = M</span><script type="math/tex">\lim_{x \to a} g(x) = M</script>, then <span class="MathJax_Preview">\lim_{x \to a} (f(x) \cdot g(x)) = L \cdot M</span><script type="math/tex">\lim_{x \to a} (f(x) \cdot g(x)) = L \cdot M</script>.</p>
+
+<h3 class="wmd-title" id="limit-quotient-law">Limit quotient law</h3>
+
+<p>If <span class="MathJax_Preview">\lim_{x \to a} f(x) = L</span><script type="math/tex">\lim_{x \to a} f(x) = L</script> and <span class="MathJax_Preview">\lim_{x \to a} g(x) = M</span><script type="math/tex">\lim_{x \to a} g(x) = M</script>, then <span class="MathJax_Preview">\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{L}{M}</span><script type="math/tex">\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{L}{M}</script>.</p>
+
+<h3 class="wmd-title" id="limit-power-law">Limit power law</h3>
+
+<p>If <span class="MathJax_Preview">\lim_{x \to a} f(x) = L</span><script type="math/tex">\lim_{x \to a} f(x) = L</script>, then <span class="MathJax_Preview">\lim_{x \to a} f(x)^n = L^n</span><script type="math/tex">\lim_{x \to a} f(x)^n = L^n</script>.</p>
+
+<h3 class="wmd-title" id="limit-constant-law">Limit constant law</h3>
+
+<p>If <span class="MathJax_Preview">c</span><script type="math/tex">c</script> is a constant, <span class="MathJax_Preview">\lim_{x \to a} c = c</span><script type="math/tex">\lim_{x \to a} c = c</script>.</p>
+
+<h3 class="wmd-title" id="limit-identity-law">Limit identity law</h3>
+
+<p><span class="MathJax_Preview">\lim_{x \to a} x = x</span><script type="math/tex">\lim_{x \to a} x = x</script>.</p>
+
+<p>Evaluate <span class="MathJax_Preview">\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7}</span><script type="math/tex">\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7}</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\begin{align}
+\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} &amp;= \lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} \frac{\sqrt{x + 2} + 3}{\sqrt{x + 2} + 3} \\
+&amp;= \lim_{x \to 7} \frac{x - 7}{(x - 7)(\sqrt{x + 2} + 3)} \\
+&amp;= \lim_{x \to 7} \frac{1}{\sqrt{x + 2} + 3} \\
+&amp;= \frac{1}{6} \\
+\end{align}
+</span><script type="math/tex; mode=display">
+\begin{align}
+\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} &= \lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} \frac{\sqrt{x + 2} + 3}{\sqrt{x + 2} + 3} \\
+&= \lim_{x \to 7} \frac{x - 7}{(x - 7)(\sqrt{x + 2} + 3)} \\
+&= \lim_{x \to 7} \frac{1}{\sqrt{x + 2} + 3} \\
+&= \frac{1}{6} \\
+\end{align}
+</script></p>
+</blockquote>
+
+<h2 class="wmd-title" id="squeeze-theorem">Squeeze Theorem</h2>
+
+<p>If <span class="MathJax_Preview">f(x) \le g(x) \le h(x)</span><script type="math/tex">f(x) \le g(x) \le h(x)</script> for all <span class="MathJax_Preview">x</span><script type="math/tex">x</script> in an interval containing <span class="MathJax_Preview">a</span><script type="math/tex">a</script> (except possibly at <span class="MathJax_Preview">a</span><script type="math/tex">a</script>), and <span class="MathJax_Preview">\lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L</span><script type="math/tex">\lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L</script>, then <span class="MathJax_Preview">\lim_{x \to a} g(x) = L</span><script type="math/tex">\lim_{x \to a} g(x) = L</script>.</p>
+
+<p>;wip: prove it with a technique similar to the sum law (answer is also in textbook)</p>
+
+<p>This is usually used on bounded functions like sine or cosine.</p>
+
+<p>Consider <span class="MathJax_Preview">\lim_{x \to 0} x \sin\left(\frac{1}{x}\right)</span><script type="math/tex">\lim_{x \to 0} x \sin\left(\frac{1}{x}\right)</script>. <span class="MathJax_Preview">\lim_{x \to 0} \sin\left(\frac{1}{x}\right)</span><script type="math/tex">\lim_{x \to 0} \sin\left(\frac{1}{x}\right)</script> does not exist, but we know that <span class="MathJax_Preview">\sin\left(\frac{1}{x}\right)</span><script type="math/tex">\sin\left(\frac{1}{x}\right)</script> is bounded: <span class="MathJax_Preview">-1 \le \sin\left(\frac{1}{x}\right) \le 1</span><script type="math/tex">-1 \le \sin\left(\frac{1}{x}\right) \le 1</script>.</p>
+
+<p>So <span class="MathJax_Preview">-x \le x \sin\left(\frac{1}{x}\right) \le x</span><script type="math/tex">-x \le x \sin\left(\frac{1}{x}\right) \le x</script>. Since <span class="MathJax_Preview">\lim_{x \to 0} (-x)</span><script type="math/tex">\lim_{x \to 0} (-x)</script> and <span class="MathJax_Preview">\lim_{x \to 0} x = 0</span><script type="math/tex">\lim_{x \to 0} x = 0</script>, then by the squeeze theorem, <span class="MathJax_Preview">\lim_{x \to 0} x \sin\left(\frac{1}{x}\right) = 0</span><script type="math/tex">\lim_{x \to 0} x \sin\left(\frac{1}{x}\right) = 0</script>.</p>
+
+<h2 class="wmd-title" id="one-sided-limits">One sided limits</h2>
+
+<p>Find <span class="MathJax_Preview">\lim_{x \to 0} \frac{\abs{x}}{x}</span><script type="math/tex">\lim_{x \to 0} \frac{\abs{x}}{x}</script>:</p>
+
+<blockquote>
+  <p>Clearly, this is equivalent to <span class="MathJax_Preview">\begin{cases}
+\frac{x}{x} &amp;\text{if } x \ge 0 \\
+\frac{-x}{x} &amp;\text{if } x &lt; 0 \\
+\end{cases}</span><script type="math/tex">\begin{cases}
+\frac{x}{x} &\text{if } x \ge 0 \\
+\frac{-x}{x} &\text{if } x < 0 \\
+\end{cases}</script>. <br>
+  Clearly, this is equivalent to <span class="MathJax_Preview">\begin{cases}
+1 &amp;\text{if } x &gt; 0 \\
+-1 &amp;\text{if } x &lt; 0 \\
+\end{cases}</span><script type="math/tex">\begin{cases}
+1 &\text{if } x > 0 \\
+-1 &\text{if } x < 0 \\
+\end{cases}</script>. 
+  Since the left side limit does not equal the right side limit, the limit does not exist.  </p>
+</blockquote>
+
+<p>Approaching from either side gives different results. This leads to the idea of a one sided limit.</p>
+
+<p><span class="MathJax_Preview">\lim_{x \to a^-} f(x)</span><script type="math/tex">\lim_{x \to a^-} f(x)</script> is the left side limit - approaching <span class="MathJax_Preview">a</span><script type="math/tex">a</script> from below/left.</p>
+
+<p><span class="MathJax_Preview">\lim_{x \to a^+} f(x)</span><script type="math/tex">\lim_{x \to a^+} f(x)</script> is the right side limit - approaching <span class="MathJax_Preview">a</span><script type="math/tex">a</script> from above/right.</p>
+
+<p><span class="MathJax_Preview">\lim_{x \to a} f(x) = L \Leftrightarrow \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L</span><script type="math/tex; mode=display">\lim_{x \to a} f(x) = L \Leftrightarrow \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L</script></p>
+
+<p>The limit exists if and only if the limits on either side exist.</p>
+
+<h1 class="wmd-title" id="2/10/13">2/10/13</h1>
+
+<h2 class="wmd-title" id="vertical-asymptotes">Vertical Asymptotes</h2>
+
+<p>At vertical asymptotes, the limit approaches positive or negative infinity.</p>
+
+<p>Consider <span class="MathJax_Preview">f(x) = \frac{1}{x^2}</span><script type="math/tex">f(x) = \frac{1}{x^2}</script> near <span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script>. As <span class="MathJax_Preview">x \to 0</span><script type="math/tex">x \to 0</script>, <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> grows without bound.</p>
+
+<p>We say that <span class="MathJax_Preview">f(x) \to \infty</span><script type="math/tex">f(x) \to \infty</script> as <span class="MathJax_Preview">x \to a</span><script type="math/tex">x \to a</script>, or <span class="MathJax_Preview">\lim_{x \to a} f(x) = \infty</span><script type="math/tex">\lim_{x \to a} f(x) = \infty</script>, if for every <span class="MathJax_Preview">M &gt; 0</span><script type="math/tex">M > 0</script> there exists <span class="MathJax_Preview">\delta &gt; 0</span><script type="math/tex">\delta > 0</script> such that <span class="MathJax_Preview">f(x) &gt; M</span><script type="math/tex">f(x) > M</script> whenever <span class="MathJax_Preview">0 &lt; \abs{x - a} &lt; \delta</span><script type="math/tex">0 < \abs{x - a} < \delta</script>.</p>
+
+<p>In other words, the value of <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> can become arbitrarily large for some value of <span class="MathJax_Preview">x</span><script type="math/tex">x</script> close enough to <span class="MathJax_Preview">a</span><script type="math/tex">a</script>.</p>
+
+<p>Likewise, with a downwards asymptote like <span class="MathJax_Preview">f(x) = -\frac{1}{x^2}</span><script type="math/tex">f(x) = -\frac{1}{x^2}</script> near <span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script>, the same behavior applies, except <span class="MathJax_Preview">f(x) \to -\infty</span><script type="math/tex">f(x) \to -\infty</script> as <span class="MathJax_Preview">x \to a</span><script type="math/tex">x \to a</script>, or <span class="MathJax_Preview">\lim_{x \to a} f(x) = -\infty</span><script type="math/tex">\lim_{x \to a} f(x) = -\infty</script>.</p>
+
+<p>Given <span class="MathJax_Preview">f(x) = e^{\frac{1}{x^2}}</span><script type="math/tex">f(x) = e^{\frac{1}{x^2}}</script>, determine how close must <span class="MathJax_Preview">x</span><script type="math/tex">x</script> be to 0 so that <span class="MathJax_Preview">f(x) &gt; 10^6</span><script type="math/tex">f(x) > 10^6</script>:</p>
+
+<blockquote>
+  <p>In other words, find <span class="MathJax_Preview">\delta &gt; 0</span><script type="math/tex">\delta > 0</script> such that <span class="MathJax_Preview">f(x) &gt; 10^6</span><script type="math/tex">f(x) > 10^6</script> when <span class="MathJax_Preview">0 &lt; \abs{x} &lt; \delta</span><script type="math/tex">0 < \abs{x} < \delta</script>. <br>
+  Clearly, <span class="MathJax_Preview">f(x) = 10^6</span><script type="math/tex">f(x) = 10^6</script> is equivalent to <span class="MathJax_Preview">\frac{1}{x^2} = 6 \ln(10)</span><script type="math/tex">\frac{1}{x^2} = 6 \ln(10)</script>, and <span class="MathJax_Preview">\frac{1}{x^2} = 6 \ln(10)</span><script type="math/tex">\frac{1}{x^2} = 6 \ln(10)</script>.
+  So <span class="MathJax_Preview">x^2 = \frac{1}{6 \ln 10}</span><script type="math/tex">x^2 = \frac{1}{6 \ln 10}</script>. <br>
+  So <span class="MathJax_Preview">\abs{x} &lt; \frac{1}{\sqrt{6 \ln 10}}</span><script type="math/tex">\abs{x} < \frac{1}{\sqrt{6 \ln 10}}</script>.  </p>
+</blockquote>
+
+<p>In rational functions, vertical asymptotes usually occur when the denominator becomes 0.</p>
+
+<p>Find the left and right hand limits of <span class="MathJax_Preview">f(x) = \frac{x^2 + 1}{3x - 2x^2}</span><script type="math/tex">f(x) = \frac{x^2 + 1}{3x - 2x^2}</script> at each asymptote:</p>
+
+<blockquote>
+  <p>Clearly, <span class="MathJax_Preview">f(x) = \frac{x^2 + 1}{x(-2x + 3)}</span><script type="math/tex">f(x) = \frac{x^2 + 1}{x(-2x + 3)}</script>.
+  So the asymptotes are at <span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script> and <span class="MathJax_Preview">x = \frac{3}{2}</span><script type="math/tex">x = \frac{3}{2}</script>. <br>
+  As <span class="MathJax_Preview">x \to 0^-</span><script type="math/tex">x \to 0^-</script>, <span class="MathJax_Preview">x^2 + 1 &gt; 0</span><script type="math/tex">x^2 + 1 > 0</script>, <span class="MathJax_Preview">x &lt; 0</span><script type="math/tex">x < 0</script>, and <span class="MathJax_Preview">-2x + 3 &gt; 0</span><script type="math/tex">-2x + 3 > 0</script>. <br>
+  So <span class="MathJax_Preview">f(x) &lt; 0</span><script type="math/tex">f(x) < 0</script> for <span class="MathJax_Preview">x = 0^-</span><script type="math/tex">x = 0^-</script>. <br>
+  So <span class="MathJax_Preview">f(x) \to </span><script type="math/tex">f(x) \to </script>
+  ;wip: use the sign analysis with infinismals</p>
+</blockquote>
+
+<h2 class="wmd-title" id="continuity">Continuity</h2>
+
+<p>We say <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> is continuous at <span class="MathJax_Preview">a</span><script type="math/tex">a</script> if <span class="MathJax_Preview">\lim_{x \to a} f(x) = f(a)</span><script type="math/tex">\lim_{x \to a} f(x) = f(a)</script>.</p>
+
+<p>If this is true for all <span class="MathJax_Preview">a \in I</span><script type="math/tex">a \in I</script>, with <span class="MathJax_Preview">I</span><script type="math/tex">I</script> being an interval, we say <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> is continuous on <span class="MathJax_Preview">I</span><script type="math/tex">I</script>.</p>
+
+<p>This implies the following conditions must be met:</p>
+
+<ul>
+<li><span class="MathJax_Preview">f(a)</span><script type="math/tex">f(a)</script> must be defined - <span class="MathJax_Preview">a</span><script type="math/tex">a</script> must be in the domain of <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script>.</li>
+<li>The left and right limits are equal.</li>
+</ul>
+
+<p>The most common discontinuities are:</p>
+
+<ul>
+<li>Infinite discontinuity - vertical asymptote: <span class="MathJax_Preview">\frac{1}{x}</span><script type="math/tex">\frac{1}{x}</script>.</li>
+<li>Removable discontinuity (hole) - where the limit exists but the function is not defined.</li>
+<li>Jump discontinuity - where the limit doesn't exist because the left and right limits are different.</li>
+<li>Wild oscillations discontinuity - where the function oscillates too much to have a limit: <span class="MathJax_Preview">f(x) = \sin \frac{1}{x}</span><script type="math/tex">f(x) = \sin \frac{1}{x}</script></li>
+</ul>
+
+<p>For removable discontinuities, we can remove the discontinuity by writing a related function filling in the undefined point:</p>
+
+<p><span class="MathJax_Preview">
+f(x) = x \sin \frac{1}{x} \\
+\text{becomes } f(x) = \begin{cases}
+x \sin \frac{1}{x} &amp;\text{if } x \ne 0 \\
+i &amp;\text{if } x = 0 \\
+\end{cases}
+</span><script type="math/tex; mode=display">
+f(x) = x \sin \frac{1}{x} \\
+\text{becomes } f(x) = \begin{cases}
+x \sin \frac{1}{x} &\text{if } x \ne 0 \\
+i &\text{if } x = 0 \\
+\end{cases}
+</script></p>
+
+<p>If <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> and <span class="MathJax_Preview">g(x)</span><script type="math/tex">g(x)</script> are continuous at <span class="MathJax_Preview">a</span><script type="math/tex">a</script>, then <span class="MathJax_Preview">f(x) \pm g(x)</span><script type="math/tex">f(x) \pm g(x)</script>, <span class="MathJax_Preview">f(x) g(x)</span><script type="math/tex">f(x) g(x)</script>, and <span class="MathJax_Preview">\frac{f(x)}{g(x)}, g(x) \ne 0</span><script type="math/tex">\frac{f(x)}{g(x)}, g(x) \ne 0</script> are also continuous at <span class="MathJax_Preview">a</span><script type="math/tex">a</script>.</p>
+
+<p>Determine where <span class="MathJax_Preview">f(x) = \frac{\ln(x - 1) + \sqrt{16 - x^2}}{x^3 - 8}</span><script type="math/tex">f(x) = \frac{\ln(x - 1) + \sqrt{16 - x^2}}{x^3 - 8}</script> is continuous:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">\ln(x - 1)</span><script type="math/tex">\ln(x - 1)</script> is continuous for all <span class="MathJax_Preview">x \in (1, \infty)</span><script type="math/tex">x \in (1, \infty)</script>. <br>
+  <span class="MathJax_Preview">\sqrt{16 - x^2}</span><script type="math/tex">\sqrt{16 - x^2}</script> is continuous for all <span class="MathJax_Preview">x \in (-4, 4)</span><script type="math/tex">x \in (-4, 4)</script>. <br>
+  The denominator must not be 0, so <span class="MathJax_Preview">x^3 - 8 \ne 0</span><script type="math/tex">x^3 - 8 \ne 0</script>, or <span class="MathJax_Preview">x \in (-\infty, 2) \cup (2, \infty)</span><script type="math/tex">x \in (-\infty, 2) \cup (2, \infty)</script>. <br>
+  The function is continuous over <span class="MathJax_Preview">x \in (1, \infty) \cap (-4, 4) \cap ((-\infty, 2) \cup (2, \infty))</span><script type="math/tex">x \in (1, \infty) \cap (-4, 4) \cap ((-\infty, 2) \cup (2, \infty))</script>, or <span class="MathJax_Preview">x \in (1, 2) \cup (2, 4)</span><script type="math/tex">x \in (1, 2) \cup (2, 4)</script>.  </p>
+</blockquote>
+
+<h3 class="wmd-title" id="continuity-theorem">Continuity theorem</h3>
+
+<p>If <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> is continuous at <span class="MathJax_Preview">x = b</span><script type="math/tex">x = b</script>, and <span class="MathJax_Preview">\lim_{x \to a} g(x) = b</span><script type="math/tex">\lim_{x \to a} g(x) = b</script>, then <span class="MathJax_Preview">\lim_{x \to a} f(g(x)) = f(b)</span><script type="math/tex">\lim_{x \to a} f(g(x)) = f(b)</script>.</p>
+
+<p>In other words, the imit can be moved within compositions.</p>
+
+<p>Evaluate <span class="MathJax_Preview">\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2})</span><script type="math/tex">\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2})</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\begin{align}
+\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2}) &amp;= \arcsin(\lim_{x \to 0.5} \sqrt{1 - x^2}) \\
+&amp;= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
+&amp;= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
+&amp;= \arcsin(\frac{\sqrt{3}}{2}) \\
+&amp;= \frac{\pi}{3} \\
+\end{align}
+</span><script type="math/tex; mode=display">
+\begin{align}
+\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2}) &= \arcsin(\lim_{x \to 0.5} \sqrt{1 - x^2}) \\
+&= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
+&= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
+&= \arcsin(\frac{\sqrt{3}}{2}) \\
+&= \frac{\pi}{3} \\
+\end{align}
+</script></p>
+</blockquote>
+
+<h3 class="wmd-title" id="intermediate-value-theorem-(ivt)">Intermediate value theorem (IVT)</h3>
+
+<p>Suppose <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> is continuous over <span class="MathJax_Preview">[a, b]</span><script type="math/tex">[a, b]</script> and n is any number between <span class="MathJax_Preview">f(a)</span><script type="math/tex">f(a)</script> and <span class="MathJax_Preview">f(b)</span><script type="math/tex">f(b)</script> exclusive. Then there exists a number <span class="MathJax_Preview">c \in (a, b)</span><script type="math/tex">c \in (a, b)</script> such that <span class="MathJax_Preview">f(c) = n</span><script type="math/tex">f(c) = n</script>.</p>
+
+<p>In other words, for a function continuous on an interval, any value of the function in a range has a corresponding value of <span class="MathJax_Preview">x</span><script type="math/tex">x</script>.</p>
+
+<p>This is used most often to find the roots of complicated equations - when <span class="MathJax_Preview">n = 0</span><script type="math/tex">n = 0</script>.</p>
+
+<p>This is an <strong>existance theorem</strong> - it tells us that a certain number with a certain property exists, but not its value.</p>
+
+<p>Prove that <span class="MathJax_Preview">\ln x = 3 - 2x</span><script type="math/tex">\ln x = 3 - 2x</script> has at least one real root.</p>
+
+<blockquote>
+  <p>Construct <span class="MathJax_Preview">f(x) = \ln x - (3 - 2x)</span><script type="math/tex">f(x) = \ln x - (3 - 2x)</script>. <br>
+  We want to prove there exists <span class="MathJax_Preview">x</span><script type="math/tex">x</script> such that <span class="MathJax_Preview">f(x) = 0</span><script type="math/tex">f(x) = 0</script>. <br>
+  Clearly, this is continuous over <span class="MathJax_Preview">x &gt; 0</span><script type="math/tex">x > 0</script>. <br>
+  Construct <span class="MathJax_Preview">a = 1</span><script type="math/tex">a = 1</script>, <span class="MathJax_Preview">b = 2</span><script type="math/tex">b = 2</script> (we could find these values using a graph). <br>
+  Clearly, <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> is continuous over the interval. <br>
+  Clearly, <span class="MathJax_Preview">f(1) = -1</span><script type="math/tex">f(1) = -1</script> and <span class="MathJax_Preview">f(2) = \ln 2 - 1</span><script type="math/tex">f(2) = \ln 2 - 1</script>. <br>
+  Clearly, <span class="MathJax_Preview">f(1) &lt; 0</span><script type="math/tex">f(1) < 0</script> and <span class="MathJax_Preview">f(2) &gt; 0</span><script type="math/tex">f(2) > 0</script>. <br>
+  So by the IVT, there must exist <span class="MathJax_Preview">c \in [a, b]</span><script type="math/tex">c \in [a, b]</script> such that <span class="MathJax_Preview">f(c) = 0</span><script type="math/tex">f(c) = 0</script>. <br>
+  So there must be a real root.  </p>
+</blockquote>
+
+<p>This is a trancendental function and cannot be solved analytically.</p>
+
+<h3 class="wmd-title" id="bisection-method">Bisection method</h3>
+
+<p>We can use the bisection to get a better approximation. Currently, we know the root is in <span class="MathJax_Preview">[1, 2]</span><script type="math/tex">[1, 2]</script>.</p>
+
+<p>We can divide <span class="MathJax_Preview">[a, b]</span><script type="math/tex">[a, b]</script> into two equally sized intervals. Using IVT, we can determine that the root must be in one of the two intervals.</p>
+
+<p>So we have made the possible interval smaller, and therefore gotten a better estimate.</p>
+
+<p>This process can be repeated as many times as needed to get as good an estimate as needed.</p>
+
+<h2 class="wmd-title" id="limits-at-infinity">Limits at Infinity</h2>
+
+<p><span class="MathJax_Preview">\lim_{x \to \infty} f(x) = L</span><script type="math/tex">\lim_{x \to \infty} f(x) = L</script> means <span class="MathJax_Preview">\forall \epsilon &gt; 0, \exists N &gt; 0, x &gt; n \implies \abs{f(x) - L} &lt; \epsilon</span><script type="math/tex">\forall \epsilon > 0, \exists N > 0, x > n \implies \abs{f(x) - L} < \epsilon</script>.</p>
+
+<p>So once <span class="MathJax_Preview">x</span><script type="math/tex">x</script> exceeds some value <span class="MathJax_Preview">n</span><script type="math/tex">n</script>, <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> must stay within <span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script> of <span class="MathJax_Preview">n</span><script type="math/tex">n</script>. Here, <span class="MathJax_Preview">n</span><script type="math/tex">n</script> has a role similar to <span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script>.</p>
+
+<p><span class="MathJax_Preview">\lim_{x \to -\infty} f(x) = L</span><script type="math/tex">\lim_{x \to -\infty} f(x) = L</script> means <span class="MathJax_Preview">\forall \epsilon &gt; 0, \exists N &lt; 0, x &lt; n \implies \abs{f(x) - L} &lt; \epsilon</span><script type="math/tex">\forall \epsilon > 0, \exists N < 0, x < n \implies \abs{f(x) - L} < \epsilon</script>.</p>
+
+<p>Limit laws also apply as <span class="MathJax_Preview">x \to \pm \infty</span><script type="math/tex">x \to \pm \infty</script>, including the squeeze theorem.</p>
+
+<p>Prove <span class="MathJax_Preview">\lim_{x \to \infty} \frac{1}{x} = 0</span><script type="math/tex">\lim_{x \to \infty} \frac{1}{x} = 0</script>:</p>
+
+<p>;wip</p>
+
+<p>Infinite limit theorem: for <span class="MathJax_Preview">r \in \mb{Q}, r &gt; 0</span><script type="math/tex">r \in \mb{Q}, r > 0</script>, when <span class="MathJax_Preview">x^r</span><script type="math/tex">x^r</script> is defined, <span class="MathJax_Preview">\lim_{x \to \infty} \frac{1}{x^r} = 0</span><script type="math/tex">\lim_{x \to \infty} \frac{1}{x^r} = 0</script>. In other words, when <span class="MathJax_Preview">r</span><script type="math/tex">r</script> is rational and defined, <span class="MathJax_Preview">\lim_{x \to \infty} \frac{1}{x^r} = 0</span><script type="math/tex">\lim_{x \to \infty} \frac{1}{x^r} = 0</script>.</p>
+
+<p>Evaluate <span class="MathJax_Preview">\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x}</span><script type="math/tex">\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x}</script>:</p>
+
+<p><span class="MathJax_Preview">
+\begin{align}
+\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x} &amp;= \lim_{x \to \infty} \frac{\frac{x^2 + 2}{x^2}}{\frac{3x^2 - 4x}{x^2}} \\
+&amp;= \lim_{x \to \infty} \frac{\frac{x^2}{x^2} + \frac{2}{x^2}}{\frac{3x^2}{x^2} - \frac{4x}{x^2}} \\
+&amp;= \lim_{x \to \infty} \frac{1 + \frac{2}{x^2}}{3 - \frac{4}{x}} \\
+&amp;= \frac{1 + 0}{3 - 0} \\
+&amp;= \frac{1}{3} \\
+\end{align}
+</span><script type="math/tex; mode=display">
+\begin{align}
+\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x} &= \lim_{x \to \infty} \frac{\frac{x^2 + 2}{x^2}}{\frac{3x^2 - 4x}{x^2}} \\
+&= \lim_{x \to \infty} \frac{\frac{x^2}{x^2} + \frac{2}{x^2}}{\frac{3x^2}{x^2} - \frac{4x}{x^2}} \\
+&= \lim_{x \to \infty} \frac{1 + \frac{2}{x^2}}{3 - \frac{4}{x}} \\
+&= \frac{1 + 0}{3 - 0} \\
+&= \frac{1}{3} \\
+\end{align}
+</script></p>
+
+<p>Evaluate <span class="MathJax_Preview">\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x)</span><script type="math/tex">\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x)</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\begin{align}
+\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) &amp;= \lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) \frac{\sqrt{9x^2 + x} + 3x}{\sqrt{9x^2 + x} + 3x} \\
+&amp;= \lim_{x \to \infty} \frac{9x^2 + x - 9x^2}{\sqrt{9x^2 + x} + 3x} \\
+&amp;= \lim_{x \to \infty} \frac{1}{\frac{\sqrt{9x^2 + x}}{x} + 3} \\
+&amp;= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{9x^2 + x}{x^2}} + 3} \\
+&amp;= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{x^2(9 + \frac{1}{x})}{x^2}} + 3} \\
+&amp;= \lim_{x \to \infty} \frac{1}{\sqrt{9} + 3} \\
+&amp;= \frac{1}{6} \\
+\end{align}
+</span><script type="math/tex; mode=display">
+\begin{align}
+\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) &= \lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) \frac{\sqrt{9x^2 + x} + 3x}{\sqrt{9x^2 + x} + 3x} \\
+&= \lim_{x \to \infty} \frac{9x^2 + x - 9x^2}{\sqrt{9x^2 + x} + 3x} \\
+&= \lim_{x \to \infty} \frac{1}{\frac{\sqrt{9x^2 + x}}{x} + 3} \\
+&= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{9x^2 + x}{x^2}} + 3} \\
+&= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{x^2(9 + \frac{1}{x})}{x^2}} + 3} \\
+&= \lim_{x \to \infty} \frac{1}{\sqrt{9} + 3} \\
+&= \frac{1}{6} \\
+\end{align}
+</script></p>
+</blockquote>
+
+<p>Evaluate <span class="MathJax_Preview">\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}</span><script type="math/tex">\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}</script>:</p>
+
+<blockquote>
+  <p>;wip</p>
+</blockquote>
+
+<p>Evaluate <span class="MathJax_Preview">\lim_{x \to \infty}  e^{-x} \sin x</span><script type="math/tex">\lim_{x \to \infty}  e^{-x} \sin x</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\begin{align}
+-1 &amp;\le \sin x \le 1 \\
+e^{-x} &amp;= \frac{1}{e^x} \\
+\lim_{x \to \infty}  e^{-x} &amp;= 0 \\
+\text{By the squeeze theorem: } \lim_{x \to \infty}  e^{-x} \cdot -1 &amp;\le \lim_{x \to \infty}  e^{-x} \sin x \le \lim_{x \to \infty}  e^{-x} \cdot 1 \\
+0 \le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
+\lim_{x \to \infty}  e^{-x} \sin x = 0 \\
+\end{align}
+</span><script type="math/tex; mode=display">
+\begin{align}
+-1 &\le \sin x \le 1 \\
+e^{-x} &= \frac{1}{e^x} \\
+\lim_{x \to \infty}  e^{-x} &= 0 \\
+\text{By the squeeze theorem: } \lim_{x \to \infty}  e^{-x} \cdot -1 &\le \lim_{x \to \infty}  e^{-x} \sin x \le \lim_{x \to \infty}  e^{-x} \cdot 1 \\
+0 \le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
+\lim_{x \to \infty}  e^{-x} \sin x = 0 \\
+\end{align}
+</script></p>
+</blockquote>
+
+<h1 class="wmd-title" id="7/10/13">7/10/13</h1>
+
+<p>General technique for <span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script>-<span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script> proofs:</p>
+
+<ol>
+<li>Let <span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script> be an arbitrary positive real number.</li>
+<li>Construct a particular <span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script> as some function of <span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script>.</li>
+<li>Prove <span class="MathJax_Preview">\abs{f(x) - L} &lt; \epsilon</span><script type="math/tex">\abs{f(x) - L} < \epsilon</script> is equivalent to <span class="MathJax_Preview">\abs{x - a} &lt; \delta</span><script type="math/tex">\abs{x - a} < \delta</script>.</li>
+<li>By the definition of the limit, <span class="MathJax_Preview">\lim_{x \to a} f(x) = L</span><script type="math/tex">\lim_{x \to a} f(x) = L</script>.</li>
+</ol>
+
+<p>A <strong>horizontal asymptote</strong> exists at <span class="MathJax_Preview">y = L</span><script type="math/tex">y = L</script> if and only if <span class="MathJax_Preview">\lim_{x \to \infty} f(x) = L</span><script type="math/tex">\lim_{x \to \infty} f(x) = L</script> or <span class="MathJax_Preview">\lim_{x \to -\infty} f(x) = L</span><script type="math/tex">\lim_{x \to -\infty} f(x) = L</script>.</p>
+
+<p>Consider <span class="MathJax_Preview">f(x) = e^{\frac{1}{x}}</span><script type="math/tex">f(x) = e^{\frac{1}{x}}</script>. As <span class="MathJax_Preview">x \to 0-</span><script type="math/tex">x \to 0-</script>, <span class="MathJax_Preview">f(x) \to 0</span><script type="math/tex">f(x) \to 0</script>. But as <span class="MathJax_Preview">x \to 0^+</span><script type="math/tex">x \to 0^+</script>, <span class="MathJax_Preview">f(x) \to \infty</span><script type="math/tex">f(x) \to \infty</script>. This is a one-sided asymptote - a vertical asymptote from the right.</p>
+
+<h2 class="wmd-title" id="derivatives">Derivatives</h2>
+
+<p>The derivative of a function <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> at the point <span class="MathJax_Preview">a</span><script type="math/tex">a</script>, denoted <span class="MathJax_Preview">f(a)</span><script type="math/tex">f(a)</script>:</p>
+
+<p><span class="MathJax_Preview">f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}</span><script type="math/tex; mode=display">f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}</script></p>
+
+<p>This can also be written as follows:</p>
+
+<p><span class="MathJax_Preview">f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}</span><script type="math/tex; mode=display">f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}</script></p>
+
+<p>If the limit exists at <span class="MathJax_Preview">a</span><script type="math/tex">a</script>, the function is <strong>differentiable</strong> at <span class="MathJax_Preview">a</span><script type="math/tex">a</script>.</p>
+
+<p>Two interpretations:</p>
+
+<ul>
+<li><span class="MathJax_Preview">f'(x)</span><script type="math/tex">f'(x)</script> is the slope of a tangent of <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script> drawn at <span class="MathJax_Preview">x</span><script type="math/tex">x</script>.</li>
+<li><span class="MathJax_Preview">f'(x)</span><script type="math/tex">f'(x)</script> is the instantaneous rate of change of <span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script>.</li>
+</ul>
+
+<p>The following are equivalent notations: <span class="MathJax_Preview">f'(x), y', \frac{\dee y}{\dee x}, \frac{\dee f}{\dee x}, \frac{\dee}{\dee x} f(x)</span><script type="math/tex">f'(x), y', \frac{\dee y}{\dee x}, \frac{\dee f}{\dee x}, \frac{\dee}{\dee x} f(x)</script>. ;wip</p>
+
+<p>Determine whether <span class="MathJax_Preview">f(x) = \begin{cases} x \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}</span><script type="math/tex">f(x) = \begin{cases} x \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\begin{align}
+f'(0) &amp;= \lim_{x \to 0} \frac{x \sin \frac{1}{x} - 0}{x - 0} \\
+&amp;= \lim_{x \to 0} \sin \frac{1}{x} \\
+\text{The limit does not exist}
+\end{align}
+</span><script type="math/tex; mode=display">
+\begin{align}
+f'(0) &= \lim_{x \to 0} \frac{x \sin \frac{1}{x} - 0}{x - 0} \\
+&= \lim_{x \to 0} \sin \frac{1}{x} \\
+\text{The limit does not exist}
+\end{align}
+</script></p>
+</blockquote>
+
+<p>Determine whether <span class="MathJax_Preview">f(x) = \begin{cases} x^2 \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}</span><script type="math/tex">f(x) = \begin{cases} x^2 \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}</script>:</p>
+
+<blockquote>
+  <p><span class="MathJax_Preview">
+\begin{align}
+f'(0) &amp;= \lim_{x \to 0} \frac{x^2 \sin \frac{1}{x} - 0}{x - 0} \\
+&amp;= \lim_{x \to 0} x \sin \frac{1}{x} \\
+&amp;= 0 \text{ by the squeeze theorem}
+\end{align}
+</span><script type="math/tex; mode=display">
+\begin{align}
+f'(0) &= \lim_{x \to 0} \frac{x^2 \sin \frac{1}{x} - 0}{x - 0} \\
+&= \lim_{x \to 0} x \sin \frac{1}{x} \\
+&= 0 \text{ by the squeeze theorem}
+\end{align}
+</script></p>
+</blockquote>
+
+<h3 class="wmd-title" id="power-law">Power law</h3>
+
+<blockquote>
+  <p>Consider <span class="MathJax_Preview">\frac{\dee}{\dee x} x^n</span><script type="math/tex">\frac{\dee}{\dee x} x^n</script>. <br>
+  By definition, <span class="MathJax_Preview">\frac{\dee}{\dee x} x^n = \lim_{h \to 0} \frac{(x + h)^n - x^n}{h}</span><script type="math/tex">\frac{\dee}{\dee x} x^n = \lim_{h \to 0} \frac{(x + h)^n - x^n}{h}</script>. <br>
+  Using the binomial theorem: <span class="MathJax_Preview">(x + h)^n - x^n = (x^n + nx^{n - 1}h + \frac{n(n - 1)}{2} x^{n - 2} h^2 + \ldots + nxh^{n - 1} + h^n) - x^n</span><script type="math/tex">(x + h)^n - x^n = (x^n + nx^{n - 1}h + \frac{n(n - 1)}{2} x^{n - 2} h^2 + \ldots + nxh^{n - 1} + h^n) - x^n</script>. <br>
+  Divide all terms by <span class="MathJax_Preview">h</span><script type="math/tex">h</script>: <span class="MathJax_Preview">\frac{(x + h)^n - x^n}{h} = nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}</span><script type="math/tex">\frac{(x + h)^n - x^n}{h} = nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}</script>. <br>
+  Clearly, <span class="MathJax_Preview">\lim_{h \to 0} (nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}) = nx^{x - 1}</span><script type="math/tex">\lim_{h \to 0} (nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}) = nx^{x - 1}</script>. <br>
+  So <span class="MathJax_Preview">\frac{\dee}{\dee x} x^n = nx^{n - 1}</span><script type="math/tex">\frac{\dee}{\dee x} x^n = nx^{n - 1}</script>.  </p>
+</blockquote></div>
+<p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
 </body>
 </html>
