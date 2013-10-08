@@ -3,6 +3,8 @@ University-Notes
 
 Notes from various courses at the University of Waterloo.
 
+# [VIEW INDEX](http://uberi.github.io/University-Notes/)
+
 License
 -------
 
