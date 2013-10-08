@@ -1,0 +1,924 @@
+MATH 137
+========
+Calculus I:
+
+    Section 003
+
+Instructor:
+
+    Name: Sean Spezaile
+    Email: sspezail@uwaterloo.ca
+    Office: M3 2128
+    Advising Hours: Monday, Wednesday at 12:00-13:30, MC 4023
+    Office hours: starts week 3, details TBA ;wip
+
+$$
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\dee}{\mathrm{d}\!}
+$$
+
+# 9/9/13
+
+Preliminaries
+-------------
+
+Ben's email: wangtianhui.ben@gmail.com
+
+Integers: $\mb{Z} = \ldots, -2, -1, 0, 1, 2, \ldots$
+
+Rational  numbers: $\mb{Q} = p/q, p \in \mb{Z}, q \in \mb{Z}$
+
+Irrational numbers: cannot be expressed as ratio, non-terminating and non-repeating decimal expansions - $\pi$, $e$, $\sqrt{2}$, $ln(2)$.
+
+Real number (denoted $\mb{R}$): contains $\mb{Z}$, $\mb{Q}$, and irrationals; any number with decimal expansion as opposed to complex/imaginary numbers.
+
+Complex number (denoted $\mb{C}$): contains real and imaginary parts.
+
+Intervals/Sets
+--------------
+
+$[a, b]$ - inclusive (closed) interval from $a$ to $b$.
+
+$(a, b]$ - left exclusive (left open) interval from $a$ to $b$, not including $a$.
+
+$[a, b)$ - right exclusive (right open) interval from $a$ to $b$, not including $b$.
+
+$x \in (a, b)$ - $x$ is an element of $(a, b)$ and $\set{x \in R \middle| a < x < b}$.
+
+Infinity can be used as an interval endpoint, but is always excluded as it is a limit, not a number: $[4, \infty)$.
+
+Inequalities
+------------
+
+$\Leftrightarrow$ - if and only if; first implies second, and second implies first.
+
+Solve $6 < 1 - 3*x \le 10$:
+
+>$$
+6 < 1 - 3x \le 10 \\
+\text{Isolate } x: 5 < -3x \le 9 \\
+-5 > 3x \le -9 \\
+-5/3 > x > -3
+$$
+
+Solve $\frac{1}{x} < 2$:
+
+>$$
+\frac{1}{x} < 2 \\
+\text{When } x > 0, 1 < 2x, x \ne 0, \text{ then } x > \frac{1}{2} \\
+\text{When } x < 0, 1 > 2x, x \ne 0, \text{ then } x < \frac{1}{2} \\
+\text{If } x > 0 \text{ and } x > \frac{1}{2}, \text{ then } x > \frac{1}{2} \\
+\text{If } x < 0 \text{ and } x < \frac{1}{2}, \text{ then } x < 0 \\
+\text{Therefore, } x \in (-\infty, 0) \cup (1/2, \infty)
+$$
+
+Absolute Value
+--------------
+Distance between number and 0 on the real number line.
+
+$$
+\abs{x} = \begin{cases}
+    x,  &\text{if } x >= 0 \\
+    -x, &\text{if } x < 0
+\end{cases}
+$$
+
+$\abs{x-a}$ is the distance between $x$ and $a$ on the real number line:
+
+$$
+\abs{x} = \begin{cases}
+    x-a, &\text{if } x >= 0 \\
+    a-x, &\text{if } x < 0
+\end{cases}
+$$
+
+Solve by considering both cases. Deal with each case separately.
+
+Solve $\abs{2x-3} < 4$:
+
+>$$
+\text{Open the inequality: } -4 < 2x-3 < 4 \\
+\abs{f} < g \implies -g < f < g \\
+-1 < 2x < 7 \implies -\frac{1}{2} < x < \frac{7}{2}
+$$
+
+Sketch $\abs{x} + y \le 1$:
+
+>$$
+\abs{x} \le 1 - y \\
+\begin{align}
+    \text{Two cases: }
+    x &\le 1 - y \\
+    -x \le 1 - y \implies x &\ge y - 1
+\end{align} \\
+;wip
+$$
+
+Sketch $\abs{x} + \abs{y} \le 1$:
+
+>$$
+\begin{align}
+\text{Four cases: } ;wip \\
+\end{align}
+$$
+
+# 11/9/13
+
+Functions
+---------
+
+A **function** is a rule that assigns a single output to an input.
+
+    x (independent variable) -> f -> f(x) or y (dependent variable)
+
+A function maps values in the set known as a domain into values in the set known as a range.
+
+Domain: set of allowable values for the independent variable.
+
+Common exclusions from domains:
+
+* Dividing by 0.
+* Log of non-positive number.
+* Even root of negative number.
+
+A function has an inverse if and only if every unique value of the independent variable in the domain has a unique value of the dependent variable - i.e., "one-to-one".
+
+Range: set of possible values for the dependent variable.
+
+Finding the range can be significantly more difficult than finding the domain, which is simply a matter of looking at the function.
+
+$$
+f(x) = \sqrt{x - 1} \\
+\text{Restriction: } x > 1 \\
+\mb{D} = [1, \infty) \\
+\mb{R} = [0, \infty)
+$$
+
+$$
+f(x) = \frac{1}{1 - x^2} \\
+\text{Restriction: } x \ne 0 \\
+\mb{D} = (\infty, -1) \cup (-1, 1) \cup (1, \infty) \\
+\mb{R} = (-\infty, 0) \cup [1, \infty)
+$$
+
+A **true function** must have a unique output for each input. Graphically, the vertical line test passes for all points (vertical line drawn on graph will only intersect it at most once if it is a graph of a true function).
+
+Non-functions can be described using functions by using multiple:
+
+Unit circle: $y = \pm \sqrt{x^2+y^2}$
+
+This can be written as two functions: $y = -\sqrt{x^2+y^2}$ and $y = \sqrt{x^2+y^2}$.
+
+Horizontal line test: a function is one-to-one if any horizontal line drawn on its graph intersects it at most once.
+
+Function examples:
+
+* Polynomial: $x^n$, n is a positive integer (domain real numbers)
+* Rational: $f(x)/g(x)$ (domain real numbers such that $g(x) \ne 0$)
+* Trigonometric/Inverse trigonometric
+* Exponential: $x^n$, $x$ is a positive real number (domain real numbers)
+* Logarithm: $log(x)$ (domain positive real numbers)
+
+# 13/9/13
+
+Transformations
+---------------
+
+Sketch $y = x^2$, $y = x^2-1$, $y = (x + 1)^2$:
+
+;wip
+
+Given fuunction $f(x)$:
+
+* $f(x)+c$ is a vertical translation $c$ units upward.
+* $f(x+c)$ is a horizontal translation $c$ units to the left.
+* $cf(x)$ is a vertical stretch by a factor of $c$.
+* $f(cx)$ is a horizontal compression by a factor of $c$.
+* $-f(x)$ is a reflection along the x-axis.
+* $f(-x)$ is a reflection along the y-axis.
+* $\abs{f(x)}$ is a reflection of all parts of the function below the x-axis along the x-axis.
+* $f(\abs{x})$ is a reflection of all parts of the function to the right of the y-axis along the y-axis replacing what was on the left.
+
+Compositions
+------------
+
+Given two functions $f(x)$ and $g(x)$:
+
+$f \circ g$ (equivalent to $f(g(x))$) is a composition of $f$ and $g$.
+
+The domain of $f \circ g$ is all values of $x$ in the domain of $g$ for which $g(x)$ is in the domain of $f$.
+
+Given $f(x) = \frac{1}{x}, g(x) = \sqrt{1 - x}$, find $f \circ g$:
+
+>$f \circ g$ is equivalent to $\frac{1}{\sqrt{1 - x}}$.  
+>Restriction on square root: $1 - x \ge 0$, so $x \le 1$.  
+>Restriction on division: $g(x) \ne 0$, so $x \ne 1$.  
+>Domain of $f \circ g$: $(-\infty, 1] \cup ((-\infty, 1) \cup (1, \infty))$ is equal to $(-\infty, 1)$.
+
+# 16/9/13
+
+Symmetry
+--------
+
+A function is **even** if $f(-x) = f(x)$ - the function is symmetric about the y-axis.
+
+Examples include $y = \abs{x}$ and $y = x^2$.
+
+A function is **odd** if $f(-x) = -f(x)$.
+
+Examples include $y = x$ and $y = \sin(x)$.
+
+One-to-one Functions
+--------------------
+
+A function is known as one-to-one on an interval if it never takes the same value twice - it passes the horizontal line test.
+
+Methematically, for any two numbers $x_1 \in I, x_2 \in I$, $f(x_1) \ne f(x_2)$ whenever $x_1 \ne x_2$.
+
+Graphically, when we take the inverse of a function, we reflect it along the line $y = x$. So the horizontal line test is actually the vertical line test of the inverse.
+
+A function is **monotonically increasing** on an interval $I$ if for any $x_1 \in I, x_2 \in I$, $x_1 < x_2 \Leftrightarrow f(x_1) < f(x_1)$.
+
+Likewise, a function is **monotonically decreasing** on an interval $I$ if for any $x_1 \in I, x_2 \in I$, $x_1 < x_2 \Leftrightarrow f(x_1) > f(x_1)$.
+
+A function that is monotonically increasing or monotonically decreasing on an interval is always one-to-one oon that interval.
+
+Show that $f(x) = x^2$ is not one-to-one over $\mb{R}$ but is over $[0, \infty)$:
+
+> Counterexample: Since, $f(-1) = f(1)$, the function is not one-to-one.  
+> We can prove the latter statement by proving that the function is increasing over the interval.  
+> Let $x_1 \in [0, \infty)$ and $x_2 \in [0, \infty)$ represent two arbitrary values such that $x_1 < x_2$.  
+> Then $f(x_2) - f(x_1) = x_2^2 - x_1^2 = (x_2 - x_1)(x_1 + x_2)$.  
+> Both terms are always positive, so $f(x_2) - f(x_1) > 0$ and $f(x_2) > f(x_1)$.  
+> Therefore, the function is monotonically increasing.  
+
+Inverse
+-------
+
+A function has an inverse if and only if it is one-to-one. By definition:
+
+Let $f(x)$ be a one-to-one function with domain $A$ and range $B$.
+
+The inverse function of $f(x)$, denoted $f^{-1}(x)$, is defined by $f^{-1}(y) = x \Leftrightarrow f(x) = y$.
+
+The range of the inverse is the domain of the function, and the domain of the inverse is the range of the function.
+
+An inverse of a function "undoes" the operation applied by the function. In other words, the cancellation equations $\forall x \in A, f^{-1}(f(x)) = x$ and $\forall x \in B, f(f^{-1}(x)) = x$ hold for all functions with inverses.
+
+Note that $f^{-1}(x)$ is not the same as $f(x)^{-1}$ - the former is the inverse and the latter is the reciprocal.
+
+The inverse is found by swapping the variables and isolating variables.
+
+If a function is not one-to-one over $\mb{R}$, we may restrict the domain to a region where it is, and define the inverse there. This is useful with things like trigonometric functions, for example.
+
+Find the inverse of $f(x) = \sqrt{10 - 3x}$:
+
+$\mb{D} = (-\infty, \frac{10}{3}]$
+
+$\mb{R} = [0, \infty)$
+
+> $$
+x = \sqrt{10 - 3 f^{-1}(x)} \\
+x^2 = 10 - 3 f^{-1}(x) \\
+x^2 - 10 = -3 f^{-1}(x) \\
+\frac{10 - x^2}{3} = f^{-1}(x) \\
+\mb{D} = [0, \infty) \\
+\mb{R} = (-\infty, \frac{10}{3}]
+$$
+
+Graphically, if the point $(a, b)$ is on the graph of $f(x)$, then $(b, a)$ is on the graph of $f^{-1}(x)$. Using this information, we can sketch the inverse of a graph by reflecting it along the line $y = x$.
+
+#18/9/13
+
+The Constant e
+--------------
+
+$e$ is a constant used in many places in mathematics. It is approximately equal to 2.718.
+
+There are several ways to define $e$:
+
+* As a limit: $e = \displaystyle\lim_{x \to \infty}{(1 + \frac{1}{x})^n}$.
+* As an infinite series: $e = \sum\limits_{n = 0}^\infty \frac{1}{n!}$.
+* Graphically with tangents: of all exponential equations of the form $y = a^x, a > 0$, only where $a = e$ does the tangent of the graph have a slope of 1 at $x = 0$.
+
+Exponentials/Logarithms
+-----------------------
+
+The function $f(x) = e^x$ is called the natural exponential function, just as $f(x) = \ln(x)$ is called the natural logarithm.
+
+Sketch $f(x) = 3 + 2e^x$:
+
+* Start with graph of $f(x) = e^x$.
+* Reflect the graph along the Y axis.
+* Stretch graph vertically by a factor of 2.
+* Move the graph up by 3 units.
+
+The function $f(x) = a^x$ is either increasing for $a > 1$ or decreasing for $0 < a < 1$, and therefore has an inverse. This inverse is called $\log_a(x)$. $\log_a(x) = y \Leftrightarrow a^y = x$.
+
+The domain of $f(x) = a^x$ is $\mb{R}$, and the range is $\set{ y \in \mb{R} \middle| x > 0}$. Therefore, the domain of $f(x) = log_a(x)$ is $\set{ y \in \mb{R} \middle| x > 0}$ and the range is $\mb{R}$.
+
+$\ln(e) = \log_e(x)$
+
+$\ln(e) = 1$
+
+$\log_a(x^r) = r \log_a(x^r)$. So $\log(\sqrt{x}) = \frac{1}{2} \log(x)$.
+
+Find the inverse of $f(x) = e^{2x + 1}$:
+
+>$$
+x = e^{2 f^{-1}(x) + 1} \\
+\ln(x) = 2 f^{-1}(x) + 1 \\
+f^{-1}(x) = \frac{1}{2} \ln(x) - \frac{1}{2} \\
+$$
+
+# 20/9/13
+
+Trignomonetric Functions
+------------------------
+
+Angles are measured in radians. Radians are the ratio of the associated arc and the radius: $\theta = \frac{a}{r}$.
+
+For a full circle, $a = 2 \pi r$, so $\theta = \frac{2 \pi r}{r} = 2 \pi$.
+
+| Radians           | Degrees |
+|-------------------|---------|
+| $\pi$             | 180     |
+| $\frac{\pi}{2}$   | 90      |
+| $\frac{\pi}{3}$   | 60      |
+| $\frac{\pi}{4}    | 45      |
+| $\frac{pi}{6}     | 30      |
+
+These are based on the special triangles:
+
+* Right triangle with side lengths $1, 1, \sqrt{2}$.
+* Right triangle with side lengths $1, \sqrt{3}, 2$
+
+Parametric equations of unit circle ($x^2 + y^2 = 1$):
+
+* Cosine: $x = \cos \theta$
+* Sine: $y = \sin \theta$
+
+$$
+x^2 + y^2 = 1 \\
+\sin^2 \theta + \cos^2 \theta = 1 \\
+$$
+
+### Properties
+
+Bounds: $-1 \le \sin \theta \le 1$, $-1 \le \cos \theta \le 1$
+
+Periodicity: $\sin(\theta + 2 \pi k) = \sin \theta, k \in \mb{Z}$, $\cos(\theta + 2 \pi k) = \cos \theta, k \in \mb{Z}$
+
+Odd/even: $\sin(-\theta) = -\sin(\theta)\$ - odd function, $\cos(-\theta) = \cos(\theta)$ - even function
+
+Sign: $\cos$ is positive to the right of the y-axis, $\sin$ is positive above the x-axis
+
+Other trigoometric functions:
+
+* Tangent: $\tan \theta = \frac{\sin \theta}{\cos \theta}$
+* Cosecant $\csc \theta = \frac{1}{\sin \theta}$
+* Secant: $\sec \theta = \frac{1}{\cos \theta}$
+* Cotangent: $\cot \theta = \frac{\cos \theta}{\sin \theta}$
+
+### Identities
+
+Square Identity: $\sin^2 \theta + \cos^2 \theta = 1$
+
+Addition formulas: $\sin(x + y) = \sin x \cos y + \cos x \sin y$, $\cos(x + y) = \cos x \cos y - \sin x \sin y$
+
+Find the subtraction formulas:
+
+> $$
+\sin(x - y) = \sin x \cos(-y) + \cos x \sin(-y) \\
+\sin(x - y) = \sin x \cos y - \cos x \sin y \\
+\cos(x - y) = \cos x \cos(-y) - \sin x \sin(-y) \\
+\cos(x - y) = \cos x \cos y + \sin x \sin y \\
+$$
+
+Inverse Trigonometric Functions
+-------------------------------
+
+Trignometric functions are periodic. Therefore, they are not one-to-one on the real number line and cannot have an inverse on this interval.
+
+However, they are one-to-one if we restrict the domain. Conventionally, we use $[-\frac{\pi}{2}, \frac{\pi}{2}]$ for sine and $[0, \pi]$ for cosine.
+
+The inverse of the sine function is denoted $x = \arcsin \theta$, or $x = sin^{-1} \theta$ - "the angle whose sine is $x$ in the restricted domain". Its domain is $[-1, 1]$ and its range is $[-\frac{\pi}{2}, \frac{\pi}{2}]$.
+
+The inverse of the cosine function is denoted $\arccos \theta$, or $\cos^{-1} \theta$ - "the angle whose cosine is x in the restricted domain". Its domain is $[-1, 1]$ and its range is $[0, \pi]$.
+
+The inverse of the tangent function is denoted $\arctan \theta$, or $\tan^{-1} \theta$ - "the angle whose tangent is x in the restricted domain". Its domain is $\mb{R}$ and its range is $(-\frac{\pi}{2}, \frac{\pi}{2})$.
+
+Evaluate $\cos(\arctan \sqrt{3})$:
+
+$$
+\frac{\sqrt{3}}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} = \sqrt{3} \\
+\text{adjacent} = 1 \\
+\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\cos(\arctan \sqrt{3}) = \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\cos(\arctan \sqrt{3}) = \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
+$$
+
+;wip: solve this by drawing a special triangle with the ratio specified and then do it algebriacally
+
+Simplify $\sin(\arctan x)$
+
+$$
+\frac{x}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} = x \\
+\text{adjacent} = 1 \\
+\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\sin(\arctan x) = \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\sin(\arctan x) = \frac{x}{\sqrt{x^2 + 1}} \\
+$$
+
+$\frac{x}{\sqrt{x^2 + 1}}$
+
+Evaluate $\arccos(\sin(-\frac{\pi}{3}))$:
+
+;wip: solve by drawing special triangle
+
+$\frac{5 \pi}{6}$
+
+# 23/9/13
+
+Hyperbolic Functions
+--------------------
+
+The **hyperbolic functions** are expressible as combinations of exponential functions.
+
+* $\sinh x = \frac{e^x - e^{-x}}{2}$ ("sinch ex") - hyperbolic sine function. Domain and range is $\mb{R}$.
+* $\cosh x = \frac{e^x + e^{-x}}{2}$ ("cosh ex") - hyperbolic cosine function. Domain is $\mb{R}$ and range is $[1, \infty]$.
+* $\tanh x = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{\sinh x}{\cosh x}$ - hyperbolic tangent function. Domain is $\mb{R}$ and range is $(-1, 1)$.
+
+There are also hyperbolic secant, cosecant, and cotangent functions, but they are rarely used.
+
+* Hyperbolic sin is an odd function: $\sinh(-x) = \frac{e^{-x} - e^x}{2} = -\sinh x$. As $x \to \infty$, $\sinh x$ approaches $\frac{1}{2} e^x$ asymptotically. As $x \to -\infty$, $\sinh x$ approaches $-\frac{1}{2} e^{-x}$ asymptotically.
+* Hyperbolic cosine is an even function: $\cosh(-x) = \frac{e^{-x} + e^x}{2} = \cosh x$. As $x \to \infty$, $\sinh x$ approaches $\frac{1}{2} e^x$ asymptotically. As $x \to -\infty$, $\sinh x$ approaches $\frac{1}{2} e^{-x}$ asymptotically.
+* Hyperbolic tangent is an odd function: $\tanh(-x) = \frac{e^{-x} - e^x}{e^{-x} + e^x} = -\tanh x$. As $x \to \infty$, $\tanh x$ approaches 1 asymptotically. As $x \to -\infty$, $\tanh x$ approaches -1 asymptotically.
+
+If we let $x = \cosh t$ and $y = \sinh t$, then $x^2 - y^2 = 1$. This is a hyperbola. The graph appears as an hourglass shape.
+
+# 25/9/13
+
+Inverse Hyperbolic Functions
+----------------------------
+
+Hyperbolic sine is one-to-one over $\mb{R}$.
+
+To find the inverse functions, we solve for $y$ where $x = \sinh y = \frac{e^y - e^{-y}}{2}$:
+
+> $$
+x = \sinh y = \frac{e^y - e^{-y}}{2} \\
+2x = e^y - e^{-y} \\
+0 = e^y - 2x - e^{-y} \\
+0 = e^y e^y - e^y 2x - e^y e^{-y} \\
+(e^y)^2 - 2x e^y - 1 = 0 \\
+e^y = \frac{2x \pm \sqrt{(-2x)^2 - 4(1)(-1)}}{2} = x \pm \sqrt{x^2 + 1} \\
+\text{Since } x - \sqrt{x^2 + 1} < 0 \text{, } e^y = x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
+e^y = x + \sqrt{x^2 + 1} \\
+y = \ln(x + \sqrt{x^2 + 1}) \\
+$$
+
+With this technique, we discover the inverses of the hyperbolic functions are:
+
+* $\sinh^{-1} x = \ln(x + \sqrt{x^2 + 1})$
+* $\cosh^{-1} x = \ln(x + \sqrt{x^2 - 1}), x \ge 1$
+* $\tanh^{-1} x = \frac{1}{2} \ln(\frac{1 + x}{1 - x}), -1 < x < 1$
+
+Limits
+------
+
+Limits are a core concept in calculus, because they appear in the definitions of derivatives and definite integrals, the two main branches of calculus.
+
+A limit does not depend on what the value of the function is at the point it is approaching. Consider the following function:
+
+$$
+g(x) = \begin{cases}
+3x - 1 &\text{if } x \ne 1 \\
+0      &\text{if } x = 1
+\end{cases}
+$$
+
+When we say the limit of $f(x)$ is $L$ as $x \to a$, we mean $f(x)$ gets closer and closer to $L$ as $x$ gets closer and closer to $a$.
+
+The precise definition of a limit:
+
+> Let $f$ be a function defined on an open interval that contains the number $a$, except possibly at $a$ itself.  
+> Then we say the **limit** of $f(x)$ as $x$ approaches $a$ is $L$, if for every number $\epsilon > 0$ there exists a number $\delta > 0$ such that $0 < \abs{x - a} < \delta \implies \abs{f(x) - L} < \epsilon$.
+> We write this as $\displaystyle\lim_{x \to a} f(x) = L$, or $f(x) \to L$ as $x \to a$.  
+
+$\epsilon$ is Epsilon (Greek) and is associated with error.
+
+$\delta$ is Delta (Greek) and is associated with difference.
+
+The key point is that the limit exists if the distance between $f(x)$ and $L$ (the error, $\epsilon$) **can be made as small as needed** by making the distance between $x$ and $a$ (the difference, $\delta$) sufficiently small. However, $x \ne a$.
+
+$$a - \delta < x < a + \delta \implies L - \epsilon < f(x) < L + \epsilon$$
+
+$\delta$ depends on $\epsilon$.
+
+# 27/9/13
+
+Geometry and intuition are useful tools, but do not prove anything.
+
+Consider $f(x) = \sin\left(\frac{1}{x}\right)$. The graph has higher and higher frequency oscillations as it approaches 0 from either direction, to a limit of infinity.
+
+Consider the following function:
+
+$$
+f(x) = \begin{cases}
+3x - 1 &\text{if }x \ne 1 \\
+0      &\text{if } x = 1
+\end{cases}
+$$
+
+How close must $x$ be to 1 to ensure that $h(x)$ is within 0.1 of 2?
+
+> 0.1 plays the role of $\epsilon$.  
+> We need to find the corresponding value of $\delta > 0$ such that $0 < \abs{x - 1} < \delta \implies \abs{h(x) - 2} < 0.1$.  
+> So $\abs{3x - 1 - 2} < 0.1$, or $3 \abs{x - 1} < 0.1$.  
+> So $\abs{x - 1} < \frac{0.1}{3}$, or $\frac{1}{30}$.  
+
+To prove that a limit exists, we need to use an arbitrary $\epsilon > 0$:
+
+> We need to find the corresponding value of $\delta > 0$ such that $0 < \abs{x - 1} < \delta \implies \abs{h(x) - 2} < \epsilon$.  
+> So $\abs{3x - 1 - 2} < \epsilon$, or $3 \abs{x - 1} < \epsilon$.  
+> So $\abs{x - 1} < \frac{\epsilon}{3}$.  
+> So if we choose $\delta = \frac{\epsilon}{3}$, then we know that $0 < \abs{x - 1} < \delta \implies \abs{h(x) - 2} < \epsilon$.  
+> Therefore, the limit exists, by definition.
+
+### Heaviside Function
+
+$$
+H(x) = \begin{cases}
+1 &\text{if } x \ge 0 \\
+0 &\text{if } x < 0
+\end{cases}
+$$
+
+Prove that the limit does not exist at $x = 0$:
+
+> Proof by contradiction.  
+> Suppose the limit does exist.  
+> So $\forall \epsilon > 0, \exists \delta > 0, 0 < \abs{x} < \delta \implies \abs{H(x) - L} < \epsilon$.  
+> Consider $\epsilon = 0.2$.  
+> So $0 < \abs{x} < \delta \implies L - 0.2 < H(x) < L + 0.2$.  
+> So the distance between $L - 0.2$ and $L + 0.2$ is 0.4.  
+> Let $-\delta < x_1 < 0$ and $0 < x_2 < \delta$.  
+> So it must be that $H(x_1) = 0$ and $H(x_2) = 1$.  
+> So the distance between the two is 1.  
+> But the distance between the two must be less than 0.4.  
+> Therefore, the limit cannot exist for $\epsilon \le \frac{1}{2}$.  
+
+# 30/9/13
+
+Limit Laws/Theorems
+-------------------
+
+For complicated functions it is often impractical to use the definition to prove limits. Instead, we use limit laws, which can be proved from the definition.
+
+### Limit sum law
+
+If $\lim_{x \to a} f(x) = L$ and $\lim_{x \to a} g(x) = M$, then $\lim_{x \to a} (f(x) + g(x)) = L + M$.
+
+Proof:
+
+> If $\lim_{x \to a} (f(x) + g(x)) = L + M$, then $\forall \epsilon > 0, \exists \delta > 0, 0 < \abs{x - a} < \delta \implies \abs{(f(x) + g(x)) - (L + M)} < \epsilon$.  
+> Clearly, $0 < \abs{x - a} < \delta \implies \abs{(f(x) + g(x)) - (L + M)} < \epsilon$ is equivalent to $0 < \abs{x - a} < \delta \implies \abs{(f(x) - L) + (g(x) - M)} < \epsilon$.  
+> By the triangle inequality, $\abs{(f(x) - L) + (g(x) - M)} \le \abs{f(x) - L} + \abs{g(x) - M}$.  
+> We want to make each term less than $\frac{\epsilon}{2}$, so later we can add them together to get $\epsilon$.  
+> Since $\epsilon$ is arbitrary, $\forall \epsilon > 0, \exists \delta_1 > 0$, $0 < \abs{x - a} < \delta_1 \implies \abs{f(x) - L} < \frac{\epsilon}{2}$.  
+> In the same way, $\forall \epsilon > 0, \exists \delta_2 > 0$, $0 < \abs{x - a} < \delta_2 \implies \abs{g(x) - M} < \frac{\epsilon}{2}$.  
+> Choose $\delta$ as the smaller of $\delta_1$ and $\delta_2$.  
+> Assume $0 < \abs{x - a} < \delta$.  
+> So $0 < \abs{x - a} < \delta_1$, $0 < \abs{x - a} < \delta_2$.  
+> Clearly, $\abs{f(x) - L} + \abs{g(x) - M} < \frac{\epsilon}{2} + \frac{\epsilon}{2}$.  
+> So $\abs{(f(x) + g(x)) - (L + M)} < \epsilon$.  
+> Therefore, by the definition of the limit, $\lim_{x \to a} (f(x) + g(x)) = L + M$.  
+
+### Limit difference law
+
+If $\lim_{x \to a} f(x) = L$ and $\lim_{x \to a} g(x) = M$, then $\lim_{x \to a} (f(x) - g(x)) = L - M$.
+
+### Limit constant multiple law
+
+If $\lim_{x \to a} f(x) = L$, then $\lim_{x \to a} (c \cdot f(x)) = cL$.
+
+### Limit product law
+
+If $\lim_{x \to a} f(x) = L$ and $\lim_{x \to a} g(x) = M$, then $\lim_{x \to a} (f(x) \cdot g(x)) = L \cdot M$.
+
+### Limit quotient law
+
+If $\lim_{x \to a} f(x) = L$ and $\lim_{x \to a} g(x) = M$, then $\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{L}{M}$.
+
+### Limit power law
+
+If $\lim_{x \to a} f(x) = L$, then $\lim_{x \to a} f(x)^n = L^n$.
+
+### Limit constant law
+
+If $c$ is a constant, $\lim_{x \to a} c = c$.
+
+### Limit identity law
+
+$\lim_{x \to a} x = x$.
+
+Evaluate $\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7}$:
+
+> $$
+\begin{align}
+\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} &= \lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} \frac{\sqrt{x + 2} + 3}{\sqrt{x + 2} + 3} \\
+&= \lim_{x \to 7} \frac{x - 7}{(x - 7)(\sqrt{x + 2} + 3)} \\
+&= \lim_{x \to 7} \frac{1}{\sqrt{x + 2} + 3} \\
+&= \frac{1}{6} \\
+\end{align}
+$$
+
+Squeeze Theorem
+---------------
+
+If $f(x) \le g(x) \le h(x)$ for all $x$ in an interval containing $a$ (except possibly at $a$), and $\lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L$, then $\lim_{x \to a} g(x) = L$.
+
+;wip: prove it with a technique similar to the sum law (answer is also in textbook)
+
+This is usually used on bounded functions like sine or cosine.
+
+Consider $\lim_{x \to 0} x \sin\left(\frac{1}{x}\right)$. $\lim_{x \to 0} \sin\left(\frac{1}{x}\right)$ does not exist, but we know that $\sin\left(\frac{1}{x}\right)$ is bounded: $-1 \le \sin\left(\frac{1}{x}\right) \le 1$.
+
+So $-x \le x \sin\left(\frac{1}{x}\right) \le x$. Since $\lim_{x \to 0} (-x)$ and $\lim_{x \to 0} x = 0$, then by the squeeze theorem, $\lim_{x \to 0} x \sin\left(\frac{1}{x}\right) = 0$.
+
+One sided limits
+----------------
+
+Find $\lim_{x \to 0} \frac{\abs{x}}{x}$:
+
+> Clearly, this is equivalent to $\begin{cases}
+\frac{x}{x} &\text{if } x \ge 0 \\
+\frac{-x}{x} &\text{if } x < 0 \\
+\end{cases}$.  
+> Clearly, this is equivalent to $\begin{cases}
+1 &\text{if } x > 0 \\
+-1 &\text{if } x < 0 \\
+\end{cases}$. 
+> Since the left side limit does not equal the right side limit, the limit does not exist.  
+
+Approaching from either side gives different results. This leads to the idea of a one sided limit.
+
+$\lim_{x \to a^-} f(x)$ is the left side limit - approaching $a$ from below/left.
+
+$\lim_{x \to a^+} f(x)$ is the right side limit - approaching $a$ from above/right.
+
+$$\lim_{x \to a} f(x) = L \Leftrightarrow \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L$$
+
+The limit exists if and only if the limits on either side exist.
+
+# 2/10/13
+
+Vertical Asymptotes
+-------------------
+
+At vertical asymptotes, the limit approaches positive or negative infinity.
+
+Consider $f(x) = \frac{1}{x^2}$ near $x = 0$. As $x \to 0$, $f(x)$ grows without bound.
+
+We say that $f(x) \to \infty$ as $x \to a$, or $\lim_{x \to a} f(x) = \infty$, if for every $M > 0$ there exists $\delta > 0$ such that $f(x) > M$ whenever $0 < \abs{x - a} < \delta$.
+
+In other words, the value of $f(x)$ can become arbitrarily large for some value of $x$ close enough to $a$.
+
+Likewise, with a downwards asymptote like $f(x) = -\frac{1}{x^2}$ near $x = 0$, the same behavior applies, except $f(x) \to -\infty$ as $x \to a$, or $\lim_{x \to a} f(x) = -\infty$.
+
+Given $f(x) = e^{\frac{1}{x^2}}$, determine how close must $x$ be to 0 so that $f(x) > 10^6$:
+
+> In other words, find $\delta > 0$ such that $f(x) > 10^6$ when $0 < \abs{x} < \delta$.  
+> Clearly, $f(x) = 10^6$ is equivalent to $\frac{1}{x^2} = 6 \ln(10)$, and $\frac{1}{x^2} = 6 \ln(10)$.
+> So $x^2 = \frac{1}{6 \ln 10}$.  
+> So $\abs{x} < \frac{1}{\sqrt{6 \ln 10}}$.  
+
+In rational functions, vertical asymptotes usually occur when the denominator becomes 0.
+
+Find the left and right hand limits of $f(x) = \frac{x^2 + 1}{3x - 2x^2}$ at each asymptote:
+
+> Clearly, $f(x) = \frac{x^2 + 1}{x(-2x + 3)}$.
+> So the asymptotes are at $x = 0$ and $x = \frac{3}{2}$.  
+> As $x \to 0^-$, $x^2 + 1 > 0$, $x < 0$, and $-2x + 3 > 0$.  
+> So $f(x) < 0$ for $x = 0^-$.  
+> So $f(x) \to $
+> ;wip: use the sign analysis with infinismals
+
+Continuity
+----------
+
+We say $f(x)$ is continuous at $a$ if $\lim_{x \to a} f(x) = f(a)$.
+
+If this is true for all $a \in I$, with $I$ being an interval, we say $f(x)$ is continuous on $I$.
+
+This implies the following conditions must be met:
+
+* $f(a)$ must be defined - $a$ must be in the domain of $f(x)$.
+* The left and right limits are equal.
+
+The most common discontinuities are:
+
+* Infinite discontinuity - vertical asymptote: $\frac{1}{x}$.
+* Removable discontinuity (hole) - where the limit exists but the function is not defined.
+* Jump discontinuity - where the limit doesn't exist because the left and right limits are different.
+* Wild oscillations discontinuity - where the function oscillates too much to have a limit: $f(x) = \sin \frac{1}{x}$
+
+For removable discontinuities, we can remove the discontinuity by writing a related function filling in the undefined point:
+
+$$
+f(x) = x \sin \frac{1}{x} \\
+\text{becomes } f(x) = \begin{cases}
+x \sin \frac{1}{x} &\text{if } x \ne 0 \\
+i &\text{if } x = 0 \\
+\end{cases}
+$$
+
+If $f(x)$ and $g(x)$ are continuous at $a$, then $f(x) \pm g(x)$, $f(x) g(x)$, and $\frac{f(x)}{g(x)}, g(x) \ne 0$ are also continuous at $a$.
+
+Determine where $f(x) = \frac{\ln(x - 1) + \sqrt{16 - x^2}}{x^3 - 8}$ is continuous:
+
+> $\ln(x - 1)$ is continuous for all $x \in (1, \infty)$.  
+> $\sqrt{16 - x^2}$ is continuous for all $x \in (-4, 4)$.  
+> The denominator must not be 0, so $x^3 - 8 \ne 0$, or $x \in (-\infty, 2) \cup (2, \infty)$.  
+> The function is continuous over $x \in (1, \infty) \cap (-4, 4) \cap ((-\infty, 2) \cup (2, \infty))$, or $x \in (1, 2) \cup (2, 4)$.  
+
+### Continuity theorem
+
+If $f(x)$ is continuous at $x = b$, and $\lim_{x \to a} g(x) = b$, then $\lim_{x \to a} f(g(x)) = f(b)$.
+
+In other words, the imit can be moved within compositions.
+
+Evaluate $\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2})$:
+
+> $$
+\begin{align}
+\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2}) &= \arcsin(\lim_{x \to 0.5} \sqrt{1 - x^2}) \\
+&= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
+&= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
+&= \arcsin(\frac{\sqrt{3}}{2}) \\
+&= \frac{\pi}{3} \\
+\end{align}
+$$
+
+### Intermediate value theorem (IVT)
+
+Suppose $f(x)$ is continuous over $[a, b]$ and n is any number between $f(a)$ and $f(b)$ exclusive. Then there exists a number $c \in (a, b)$ such that $f(c) = n$.
+
+In other words, for a function continuous on an interval, any value of the function in a range has a corresponding value of $x$.
+
+This is used most often to find the roots of complicated equations - when $n = 0$.
+
+This is an **existance theorem** - it tells us that a certain number with a certain property exists, but not its value.
+
+Prove that $\ln x = 3 - 2x$ has at least one real root.
+
+> Construct $f(x) = \ln x - (3 - 2x)$.  
+> We want to prove there exists $x$ such that $f(x) = 0$.  
+> Clearly, this is continuous over $x > 0$.  
+> Construct $a = 1$, $b = 2$ (we could find these values using a graph).  
+> Clearly, $f(x)$ is continuous over the interval.  
+> Clearly, $f(1) = -1$ and $f(2) = \ln 2 - 1$.  
+> Clearly, $f(1) < 0$ and $f(2) > 0$.  
+> So by the IVT, there must exist $c \in [a, b]$ such that $f(c) = 0$.  
+> So there must be a real root.  
+
+This is a trancendental function and cannot be solved analytically.
+
+### Bisection method
+
+We can use the bisection to get a better approximation. Currently, we know the root is in $[1, 2]$.
+
+We can divide $[a, b]$ into two equally sized intervals. Using IVT, we can determine that the root must be in one of the two intervals.
+
+So we have made the possible interval smaller, and therefore gotten a better estimate.
+
+This process can be repeated as many times as needed to get as good an estimate as needed.
+
+Limits at Infinity
+------------------
+
+$\lim_{x \to \infty} f(x) = L$ means $\forall \epsilon > 0, \exists N > 0, x > n \implies \abs{f(x) - L} < \epsilon$.
+
+So once $x$ exceeds some value $n$, $f(x)$ must stay within $\epsilon$ of $n$. Here, $n$ has a role similar to $\delta$.
+
+$\lim_{x \to -\infty} f(x) = L$ means $\forall \epsilon > 0, \exists N < 0, x < n \implies \abs{f(x) - L} < \epsilon$.
+
+Limit laws also apply as $x \to \pm \infty$, including the squeeze theorem.
+
+Prove $\lim_{x \to \infty} \frac{1}{x} = 0$:
+
+;wip
+
+Infinite limit theorem: for $r \in \mb{Q}, r > 0$, when $x^r$ is defined, $\lim_{x \to \infty} \frac{1}{x^r} = 0$. In other words, when $r$ is rational and defined, $\lim_{x \to \infty} \frac{1}{x^r} = 0$.
+
+Evaluate $\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x}$:
+
+$$
+\begin{align}
+\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x} &= \lim_{x \to \infty} \frac{\frac{x^2 + 2}{x^2}}{\frac{3x^2 - 4x}{x^2}} \\
+&= \lim_{x \to \infty} \frac{\frac{x^2}{x^2} + \frac{2}{x^2}}{\frac{3x^2}{x^2} - \frac{4x}{x^2}} \\
+&= \lim_{x \to \infty} \frac{1 + \frac{2}{x^2}}{3 - \frac{4}{x}} \\
+&= \frac{1 + 0}{3 - 0} \\
+&= \frac{1}{3} \\
+\end{align}
+$$
+
+Evaluate $\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x)$:
+
+> $$
+\begin{align}
+\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) &= \lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) \frac{\sqrt{9x^2 + x} + 3x}{\sqrt{9x^2 + x} + 3x} \\
+&= \lim_{x \to \infty} \frac{9x^2 + x - 9x^2}{\sqrt{9x^2 + x} + 3x} \\
+&= \lim_{x \to \infty} \frac{1}{\frac{\sqrt{9x^2 + x}}{x} + 3} \\
+&= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{9x^2 + x}{x^2}} + 3} \\
+&= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{x^2(9 + \frac{1}{x})}{x^2}} + 3} \\
+&= \lim_{x \to \infty} \frac{1}{\sqrt{9} + 3} \\
+&= \frac{1}{6} \\
+\end{align}
+$$
+
+Evaluate $\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}$:
+
+> ;wip
+
+Evaluate $\lim_{x \to \infty}  e^{-x} \sin x$:
+
+> $$
+\begin{align}
+-1 &\le \sin x \le 1 \\
+e^{-x} &= \frac{1}{e^x} \\
+\lim_{x \to \infty}  e^{-x} &= 0 \\
+\text{By the squeeze theorem: } \lim_{x \to \infty}  e^{-x} \cdot -1 &\le \lim_{x \to \infty}  e^{-x} \sin x \le \lim_{x \to \infty}  e^{-x} \cdot 1 \\
+0 \le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
+\lim_{x \to \infty}  e^{-x} \sin x = 0 \\
+\end{align}
+$$
+
+# 7/10/13
+
+General technique for $\epsilon$-$\delta$ proofs:
+
+1. Let $\epsilon$ be an arbitrary positive real number.
+2. Construct a particular $\delta$ as some function of $\epsilon$.
+3. Show that $\delta > 0$, so it's still in the domain.
+4. Assume $0 < \abs{x - a} < \delta$.
+3. Prove $\abs{f(x) - L} < \epsilon$.
+4. By the definition of the limit, $\lim_{x \to a} f(x) = L$.
+
+A **horizontal asymptote** exists at $y = L$ if and only if $\lim_{x \to \infty} f(x) = L$ or $\lim_{x \to -\infty} f(x) = L$.
+
+Consider $f(x) = e^{\frac{1}{x}}$. As $x \to 0-$, $f(x) \to 0$. But as $x \to 0^+$, $f(x) \to \infty$. This is a one-sided asymptote - a vertical asymptote from the right.
+
+Derivatives
+-----------
+
+The derivative of a function $f(x)$ at the point $a$, denoted $f(a)$:
+
+$$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}$$
+
+This can also be written as follows:
+
+$$f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$$
+
+If the limit exists at $a$, the function is **differentiable** at $a$.
+
+Two interpretations:
+
+* $f'(x)$ is the slope of a tangent of $f(x)$ drawn at $x$.
+* $f'(x)$ is the instantaneous rate of change of $f(x)$.
+
+The following are equivalent notations: $f'(x), y', \frac{\dee y}{\dee x}, \frac{\dee f}{\dee x}, \frac{\dee}{\dee x} f(x)$. ;wip
+
+Determine whether $f(x) = \begin{cases} x \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}$:
+
+> $$
+\begin{align}
+f'(0) &= \lim_{x \to 0} \frac{x \sin \frac{1}{x} - 0}{x - 0} \\
+&= \lim_{x \to 0} \sin \frac{1}{x} \\
+\text{The limit does not exist}
+\end{align}
+$$
+
+Determine whether $f(x) = \begin{cases} x^2 \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}$:
+
+> $$
+\begin{align}
+f'(0) &= \lim_{x \to 0} \frac{x^2 \sin \frac{1}{x} - 0}{x - 0} \\
+&= \lim_{x \to 0} x \sin \frac{1}{x} \\
+&= 0 \text{ by the squeeze theorem}
+\end{align}
+$$
+
+### Power law
+
+> Consider $\frac{\dee}{\dee x} x^n$.  
+> By definition, $\frac{\dee}{\dee x} x^n = \lim_{h \to 0} \frac{(x + h)^n - x^n}{h}$.  
+> Using the binomial theorem: $(x + h)^n - x^n = (x^n + nx^{n - 1}h + \frac{n(n - 1)}{2} x^{n - 2} h^2 + \ldots + nxh^{n - 1} + h^n) - x^n$.  
+> Divide all terms by $h$: $\frac{(x + h)^n - x^n}{h} = nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}$.  
+> Clearly, $\lim_{h \to 0} (nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}) = nx^{x - 1}$.  
+> So $\frac{\dee}{\dee x} x^n = nx^{n - 1}$.  
