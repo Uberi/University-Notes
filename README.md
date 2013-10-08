@@ -5,6 +5,13 @@ Notes from various courses at the University of Waterloo. Written by Anthony Zha
 
 # [VIEW NOTES](http://uberi.github.io/University-Notes/)
 
+About
+-----
+
+I write these during lectures, and then add to them occasionally when mistakes or omissions are discovered.
+
+They're written in [StackEdit](http://benweet.github.io/stackedit/), an excellent Markdown editor. The source files are written in Markdown with LaTeX for math.
+
 License
 -------
 
