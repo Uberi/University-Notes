@@ -808,7 +808,7 @@ Proof:
 
 There are often multiple possible values of $x$ and $y$ that can result in a linear combination.
 
-EEA Table: technique for finding the GCD and integers $x$ and $y$ all at the same time.
+EEA Table: technique for finding $\gcd(a, b)$ and integers $x$ and $y$ such that $ax + by = \gcd(a, b)$ all at the same time.
 
 We start by constructing a table, always with the same initial configuration:
 
@@ -830,13 +830,29 @@ y_n &= x_{n - 2} - q_n \cdot y_{n - 1} \\
 \end{align}
 $$
 
+We stop when r_n = 0. The value of $r$ in the row before this is the GCD.
+
+Note that $ax_n + by_n = r_n$. So the last nonzero remainder has corresponding $x$ and $y$ values that are coefficients for a linear combination of $a$ and $b$ equal to it. In other words, the $x$ and $y$ values in that row are a certificate of correctness for the GCD.
+
 For example, finding $\gcd(42042, 1071)$:
 
 | x | y | r     | q |
 |:--|:--|:------|:--|
 | 1 | 0 | 42042 | 0 |
 | 0 | 1 | 1071  | 0 |
+|---|---|-------|---|
+| 0 | 1 | 1071  | 0 |
 ;wip
+
+$$
+\begin{align}
+q_3 &= \floor{\frac{42042}{1071}} = 39
+42042 &= 1071 q_3 + r_3 \text{ } \\
+r_3 &= r_1 - r_2 \cdot q_3 = 42042 - 15 q_3 \\
+x_3 &= x_1 - 1 \cdot x_2 \\
+y_3 &= y_1 - 1 \cdot y_2 \\
+\end{align}
+$$
 
 Certificates of Correctness
 ---------------------------
@@ -924,3 +940,18 @@ Prove via induction that $\sum\limits_{i = 1}^n = 1 - \frac{1}{2^n}$ for integer
 > So $\text{RHS}_{k + 1} = 1 - \frac{1}{2} \frac{1}{2^k}$, and $\text{RHS}_{k + 1} = 1 - \frac{1}{2^{k + 1}}$.  
 > Inductive conclusion: Clearly, if $\sum\limits_{i = 1}^k = 1 - \frac{1}{2^k}$, then $\sum\limits_{i = 1}^{k + 1} = 1 - \frac{1}{2^{k + 1}}$.  
 > Therefore, $\sum\limits_{i = 1}^n = 1 - \frac{1}{2^n}$, by the POMI.  
+
+# 9/10/13
+
+GCD-CT says that if a certificate exists, the GCD is correct.
+
+EEA says that a certificate always exists for any GCD.
+
+So for any GCD, we can have a certificate verifying its correctness.
+
+Coprimality
+-----------
+
+Two integers $a$ and $b$ are **coprime** if $\gcd(a, b)$ - if they have no common factors other than 1 and -1.
+
+For example, 4 and 9 are coprime.
