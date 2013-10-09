@@ -885,6 +885,8 @@ This can also be written as follows:
 
 $$f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$$
 
+The first form is better for determining differentiability at a point, while the second is better for finding the derivative.
+
 If the limit exists at $a$, the function is **differentiable** at $a$.
 
 Two interpretations:
@@ -917,8 +919,84 @@ $$
 ### Power law
 
 > Consider $\frac{\dee}{\dee x} x^n$.  
+> Let $n$ be a positive integer.  
 > By definition, $\frac{\dee}{\dee x} x^n = \lim_{h \to 0} \frac{(x + h)^n - x^n}{h}$.  
 > Using the binomial theorem: $(x + h)^n - x^n = (x^n + nx^{n - 1}h + \frac{n(n - 1)}{2} x^{n - 2} h^2 + \ldots + nxh^{n - 1} + h^n) - x^n$.  
 > Divide all terms by $h$: $\frac{(x + h)^n - x^n}{h} = nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}$.  
 > Clearly, $\lim_{h \to 0} (nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}) = nx^{x - 1}$.  
 > So $\frac{\dee}{\dee x} x^n = nx^{n - 1}$.  
+
+# 9/10/13
+
+$$
+\begin{align}
+\frac{\dee}{\dee x} \sqrt{x} &= \lim_{h \to 0} \frac{\sqrt{x + h} - \sqrt{x}}{h} \\
+&= \lim_{h \to 0} \frac{\sqrt{x + h} - \sqrt{x}}{h} \frac{\sqrt{x + h} + \sqrt{x}}{\sqrt{x + h} + \sqrt{x}} \\
+&= \lim_{h \to 0} \frac{x + h - x}{h(\sqrt{x + h} + \sqrt{x})} \\
+&= \lim_{h \to 0} \frac{1}{\sqrt{x + h} + \sqrt{x}} \\
+&= \frac{1}{2 \sqrt{x}} \\
+\end{align}
+$$
+
+If $f(x)$ is differentiable at $x = a$, then it is also continuous at that point. Likewise, if a function is not continuous at $x = a$, then it is also not differentiable - the contrapositive.
+
+Proof:
+
+> $f(x)$ is continuous at $x = a$ if and only if $\lim_{x \to a} f(x) = f(a)$, or $\lim_{x \to a} (f(x) - f(a)) \frac{x - a}{x - a} = 0$.  
+> Clearly, this is equivalent to $\lim_{x \to a} \frac{f(x) - f(a)}{x - a} (x - a) = 0$, or $\lim_{x \to a} \frac{f(x) - f(a)}{x - a} \lim_{x \to a} (x - a) = 0$.  
+> Clearly, this is equivalent to $f'(a) \cdot 0 = 0$.  
+> Clearly, this is true whenever $f'(a)$ is defined.  
+> So $f(x)$ is continuous at $x = a$ only if $f'(a)$ is defined - the function is differentiable at $x = a$.  
+
+Some continuous functions are not differentiable.
+
+Consider $f(x) = \abs{x}$. Clearly, $f'(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{\abs{x}}{x} = \text{undefined}$. So the function is not differentiable at $x = 0$ due to a **cusp**. Others include piecewise functions and $x^\frac{2}{3}$.
+
+Consider $f(x) = \sqrt[3]{x}$. Clearly, $f'(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{1}{x^\frac{2}{3}} = \infty$. So the function is not differentiable at $x = 0$ due to a **vertical tangent**. Others include $\arcsin x$ and $x^\frac{2}{3}$.
+
+### Exponential functions
+
+Consider $f(x) = a^x$.
+
+$$
+\begin{align}
+f'(x) &= \lim_{h \to 0} \frac{a^{x + h} - a^x}{h} \\
+&= \lim_{h \to 0} \frac{a^x(a^h - 1)}{h} \\
+&= a^x \lim_{h \to 0} \frac{a^h - 1}{h} \\
+\end{align}
+$$
+
+So the derivative of any power function is just a power function multiplied by a **constant of proportionality** $\lim_{h \to 0} \frac{a^h - 1}{h}$.
+
+Consider $f'(0) = \lim_{h \to 0} \frac{a^h - 1}{h}$. Clearly, the constant of propertionality is the slope of the tangent at $x = 0$.
+
+We know that the slope of the tangent of $f(x)$ is 1 only when $a = e$. So we know that $\lim_{h \to 0} \frac{e^h - 1}{h} = 1$, and so $\frac{\dee}{\dee x} e^x = e^x$.
+
+Derivative Rules
+----------------
+
+If $c$ is a constant, $\frac{\dee}{\dee x} c = 0$.
+
+### Sum/difference rule
+
+If $f(x)$ and $g(x)$ are differentiable at $x$, $\frac{\dee}{\dee x} (f(x) \pm g(x))$ is differentiable at $x$ and $\frac{\dee}{\dee x} (f(x) \pm g(x)) = \frac{\dee}{\dee x} f(x) \pm \frac{\dee}{\dee x} g(x)$.
+
+### Constant multiple rule
+
+If $c$ is a constant and $f(x)$ is differentiable at $x$, $\frac{\dee}{\dee x} c f(x)$ is differentiable at $x$ and $\frac{\dee}{\dee x} c f(x) = c \frac{\dee}{\dee x} f(x)$.
+
+### Product rule
+
+If $f(x)$ and $g(x)$ are differentiable at $x$, then $\frac{\dee}{\dee x} f(x) g(x)$ is differentiable at $x$ and $\frac{\dee}{\dee x} f(x) g(x) = f'(x) g(x) + f(x) g'(x)$.
+
+Proof:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} f(x) g(x) &= \lim_{h \to 0} \frac{f(x + h) g(x + h) - f(x) g(x)}{h} \\
+&= \lim_{h \to 0} \frac{f(x + h) g(x + h) - f(x) g(x) + (f(x) g(x + h) - f(x) g(x + h))}{h} \\
+&= \lim_{h \to 0} \left( g(x + h) \frac{f(x + h) - f(x)}{h} + f(x) \frac{g(x + h) - g(x)}{h} \right) \\
+&= \lim_{h \to 0} g(x + h) \frac{f(x + h) - f(x)}{h} + \lim_{h \to 0} f(x) \frac{g(x + h) - g(x)}{h} \\
+&= g(x) f'(x) + f(x) g'(x) \\
+\end{align}
+$$
