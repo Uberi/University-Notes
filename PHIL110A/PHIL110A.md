@@ -440,3 +440,63 @@ Clarity and Distinctness
 Descartes finds that the cogito ergo sum argument is **clear** and **distinct**. He finds that there must exist a good god, and that such a being would only give arguments this clear and distinct feeling if it were absolutely true.
 
 As a result, Descartes looks for other similar ones that also give this feeling, and when he finds them, he knows that they are true.
+
+# 10/10/13
+
+;wip: paper due on Oct. 24. Topic: Do you prefer Descartes Rationalist approach, or Locke’s mechanical empirical approach
+to understanding the relationship between our ideas and things in the world? What are
+the reasons for your preference?
+
+Formal writing, but personal pronouns allowed. Use size 12 black font and double space. Submit on LEARN in Word document form. Writing style is discretionary. Should be around 3 pages. Cite everything, including material in lectures.
+
+Locke
+-----
+
+Physician, 1632-1701, proponent of **experimental philosophy** and the scientific method.
+
+Locke had previously read Descartes' work, but disagreed on the rationalist view. He focused on the question, "how can we know about the external world?".
+
+The scientific method emphasizes **evidence**, **hypotheses**, and **experiments**. Locke thinks absolute knowledge would be nice for mathematicians like Descartes, but a scientist and physician should rely on evidence to draw conclusions from.
+
+> Descartes: what do we know?  
+> Locke: that's not important; how do we know?  
+
+Locke believes the mind starts off as a tabula rasa - a blank slate. Our sense perceptions are the means by which we gain knowledge of the external world.
+
+Locke is an **empiricist** - we know the world through observations and experience. This contrasts with **rationalism**, which states that there are innate ideas and we can know everything though reasoning on that knowledge.
+
+Locke is a **dualist** - he believes that ideas and minds exist outside of the world, while there is also a world in which things exist. In other words, there are things in the world, and things outside of it. The idea of white or black is one thing, while the texture and material of an object needed to make it appear white or black is another.
+
+**Sensation** is the process in which an object causes a perception in a mind and brings an idea into the mind. A particular sensation is a perception bringing about an idea.
+
+A dog sees a canteloupe and the idea of a canteloupe appears in its brain.
+
+An **idea** is what a mind perceives in itself. It is whatever is the target of perception, thought, or understanding.
+
+As a result, **ideas exist only in the mind**. They are actually the patterns and movements of the particles in the brain.
+
+We infer the existance of a real thing from the idea of it.
+
+A dog sees canteloupe and the immediate object of perception is the idea of canteloupe.
+
+1. There is an idea of a canteloupe in my mind
+2. This idea implies a similar thing exists in the world
+3. A canteloupe exists in the world
+
+The **power** (ability or capacity) to produce an idea in a mind is a **quality** (property) of an object.
+
+There are two types of properties:
+
+* **Primary qualities**
+  * Are those inseparable from the object - they stay with the object no matter how much it is changed.
+  * These include solidity, extension, shape, motion/rest, and number.
+  * For example, a canteloupe will **always have a quantity**, no matter how many pieces we cut it.
+  * Exist within and resemble the object.
+* **Secondary qualities**
+  * Are the abilities of an object to produce sensations in minds.
+  * Caused by the interactions of the primary qualities of an object with our senses.
+  * These include colors, sounds, and tastes.
+  * For example, an **ability to reflect of light around 450 nm** (primary quality) has the **ability to produce the sensation of blue** (secondary quality).
+  * Exists only in the mind and may not resemble the object.
+
+The **representational theory of the mind** is that ideas are caused by things in the world, and that ideas resemble these things in the world.
