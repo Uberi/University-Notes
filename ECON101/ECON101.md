@@ -219,7 +219,7 @@ The **opportunity cost** of making more pizzas is the colas not produced.
 
 If by producing 1 million more pizzas (moving 1 unit right), we produce 5 million fewer colas (moving 5 units down), the cost of those pizzas is 5 colas each. Likewise, by moving 5 units down, we produce 1 million fewer pizzas, the cost of one cola is 1/5 pizzas.
 
-This cost is not necessarily fixed, and depends on the current state of the economy. The **slope** of the frontier the cost. For example, if the graph is quadratic, the cost of pizzzas increases linearly as more are produced.
+This cost is not necessarily fixed, and depends on the current state of the economy. The **slope** of the frontier determines the cost. For example, if the graph is quadratic, the cost of pizzas increases linearly as more are produced.
 
 ### Graph Shape
 
@@ -256,7 +256,7 @@ The **substitution effect** is a phenomena that occurs when the relative price o
 
 The **income effect** is a phenomenon that occurs when the relative price of a good or service increases compared to income, so people cannot afford it as much, reducing the quantity demanded.
 
-The **demand curve** shows the relationship between the relationship between the quantity demanded of a good and its price, all other influences on consumers' planned purchases remain the same. The **demand schedule** is the table of values for this curve.
+The **demand curve** shows the relationship between the relationship between the quantity demanded of a good and the largest price people are willing to pay for it, all other influences on consumers' planned purchases remain the same. The **demand schedule** is the table of values for this curve.
 
 Demand is a measure of marginal benefit - the willingness and ability to pay given a marginal cost - the price.
 
@@ -314,11 +314,11 @@ This is a result of the general tendency for the marginal cost of producing a go
 
 Producers will only supply a good if they can at least cover the marginal cost of production - if they can profit from it.
 
-The **supply curve** shows the relationship between the quantity supplied of a good and its price, all other influences remaining the same. The **supply schedule** is the table of values for this curve.
+The **supply curve** shows the relationship between the quantity supplied of a good and the price it is sold at, all other influences remaining the same. The **supply schedule** is the table of values for this curve.
 
 For example, the supply curve for energy bars might appear as follows:
 
-                Price vs. Supply               
+                Price vs. Quantity Supplied    
     v 3.00
       |                                        
       |                         ....           
@@ -445,7 +445,7 @@ According to the law of demand, the **own price elasticity is always negative**.
 
 Elasticity is not the same thing as the slope of the demand curve. It measures percentage changes. Consider a linear demand curve:
 
-             Price vs. Demand
+             Price vs. Quantity
     v 3.00
       |                                        
       | ***               Inelastic            
@@ -487,7 +487,7 @@ When demand is inelastic, there is an incentive to raise prices. This is because
 
 **Revenue is maximized at unit elasticity** - when revenue would decrease from any changes in the price.
 
-             Price vs. Demand
+             Price vs. Quantity
     v 3.00
       |                                        
     R |             ....X....                  
@@ -572,7 +572,7 @@ Scarce resources are allocated by a number of factors. The goal is to operate on
 
 People who can and do pay the price get the good or service. This works for many goods and is the most common allocation scheme.
 
-Markets are very efficient since they adjust themselves.
+Markets are very efficient since they adjust themselves. This is because price is an efficient regulating mechanism.
 
 For example, cars are bought by those who can afford it.
 
@@ -630,6 +630,8 @@ For example, war, revolution, theft, and robbery allocate resources to the taker
 
 This is an effective but inefficient way to allocate resources, and makes the creation of markets possible.
 
+There is no single resource allocation mechanism resulting in full efficiency.
+
 Demand and Marginal Benefit
 ---------------------------
 
@@ -641,4 +643,177 @@ We measure value as the **maximum price** that a person is willing to pay.
 
 Demand is determined by the willingness to pay. So a **demand curve is a marginal benefit curve**.
 
-**Individual demand** is demand in terms of one person. **Market demand** is demand in terms of all the buyers in the market.
+**Individual demand** is demand in terms of one consumer. **Market demand** is demand in terms of all the buyers in the market. The quantity demanded for market demand is the sum of all the quantities demanded for each buyer.
+
+Supply and Marginal Benefit
+---------------------------
+
+**Cost** is what the producer gives up. **Price** is what the producer receives.
+
+The cost of obtaining one more unit of a good or service is the **marginal cost**.
+
+We measure cost as the **minimum cost** the producer is willing to accept.
+
+Supply is determined by the minimum supply price. So a **supply curve is a marginal cost curve**.
+
+**Individual supply** is supply in terms of one producer. **Market supply** is supply in terms of all the sellers in the market. The quantity supplied for market supply is the sum of all the quantities supplied for each producer.
+
+# 10/10/13
+
+Profit is total revenue minus total cost.
+
+Total revenue is price times quantity.
+
+Surplus/shortage
+----------------
+
+### Consumers
+
+The **consumer surplus** for a given person is the area between the amount 
+willing to be paid for a good/service and the actual price that must be paid for it. It is the amount someone is willing to pay above the actual price.
+
+                Price vs. Quantity Demanded    
+    v 3.00
+      |                                        
+      |....                                    
+    P |    .....                               
+    r |     ####....                           
+    i |     ########....                       
+    c |-----------------....---------          
+    e |     ^               .....              
+      |     Consumer surplus      ...          
+      |________________________________________
+     0              Quantity Demanded         ^ 10
+
+This means the consumer saved 2 units on the first 4 units he or she wanted to buy, and 1 unit on the next 4 units, before the price is the maximum he or she is willing to pay.
+
+When there is a consumer surplus, suppliers raise prices to reduce the surplus and therefore make more profit.
+
+### Producers
+
+**Producer surplus** is the area between the price received for selling a good and the minimum supply-price, summed over the quantity sold. It is the price above what it actually costs to produce.
+
+                Price vs. Quantity Supplied    
+    v 3.00
+      |     Producer surplus                   
+      |     v                   ....           
+    P |--------------------.....--------       
+    r |     ###########....                    
+    i |     #######....                        
+    c |     ###....                            
+    e |   .....                                
+      |...                                     
+      |________________________________________
+     0              Supply                    ^ 25 million
+
+This means the producer made 3 extra units of profit for the first units, 2 extra units on the next 4, and 1 on the next 4.
+
+When there is a producer surplus, competitors are willing to sell for less and therefore make more profit by selling more. This causes prices to be reduced.
+
+### Equilibrium
+
+Markets are efficient when marginal cost equals the marginal benefit - when quantity supplied equals quantity demanded. This is efficient because consumer surplus plus producer surplus - the total surplus - is at its highest.
+
+When there is underproduction or overproduction, the total surplus is reduced and efficiency lowers. The reduction in surplus is a social loss known as **deadweight loss**.
+
+Underproduction and overproduction can occur for a few reasons:
+
+**Price/quantity regulations** may limit price or production quantities to a certain value and lead to underproduction.
+
+**Taxes** increase the price paid by buyers and reduce the prices received by sellers, leading to underproduction. **Subsidies** decrease the prices pair by buyers and increase the prices received by sellers, leading to overproduction.
+
+**Externalities** are costs/benefits affecting someone other than the producer or consumer, such as acid rain caused by pollution. The producer, acting out of self interest, does not consider this cost and overproduces or underproduces.
+
+**Public goods** benefit and are available to everyone. The **free-rider problem** states that everyone wants to use the good, but nobody wants to pay for it, leading to underproduction.
+
+**Common goods** are owned by nobody and can be used by everyone. The **tragedy of the commons** states that each user ignores the costs that fall on everyone, leading to overproduction.
+
+**Monopolies** are the only provider of a particular good or service. As a result, there are no competitors to force them to lower prices, leading to underproduction.
+
+**Transaction costs** cause underproduction due to the additional overhead of making each trade.
+
+Fairness
+--------
+
+Fairness can be categorized into two main groups.
+
+The first states that **fairness only occurs when the result is fair**. The view that equality is fairness is known as **utilitarianism** - that we should attempt to achieve the greatest happiness for the most people.
+
+According to this view, since marginal benefit of income decreases as income increases, and everyone gets the same marginal benefit from the same income, then taking wealth from the rich and giving it to the poor increases total benefit. Equal income means maximum benefit.
+
+The second states that **fairness only occurs when the rules are fair**. This is based on the **symmetry principle** - similar situations should be treated similarly.
+
+According to this view, there should be equality of opportunity. So private property should be protected, and exchange should be purely voluntary.
+
+Government Intervention
+-----------------------
+
+### Price controls
+
+Price controls are put in place when policy makers think prices are unfair to buyers or sellers. They limit prices to a certain range to try to increase total benefit.
+
+For example, a **rent ceiling** might be used to ensure poorer people can afford housing if normal market prices are too high.
+
+If the ceiling is above or equal to the equilibrium price, the market is unaffected since it will continue to operate at the equilibrium price.
+
+If the ceiling is below the equilibrium price, supply is decreased and demand is increased. This causes a shortage, but it cannot be resolved because the price cannot be raised.
+
+In shortages, there is also the cost of **search activity** - the effort of finding someone to do business with.
+
+A rent ceiling is unfair because it blocks voluntary exchange and does not benefit everyone. Since the resources cannot be allocated by the market properly, they are then allocated by other means like lottery, which are less efficient and fair.
+
+Another example would be the **minimum wage**, which sets a price floor on labour.
+
+If the floor is below or equal to the equilibrium price, the market is unaffected since it will continue to operate at the equilibrium price.
+
+If the floor is above the equilibrium price, supply is increased and demand is increased. This causes a surplus, but it cannot be resolved because the price cannot be lowered.
+
+As a result, people have trouble finding jobs, since not enough employers are willing to pay the minimum wage.
+
+Price floors lead to overproduction. These surpluses are wasted since they can't be put on the open market, since there isn't enough demand.
+
+### Taxes
+
+Taxes can reduce supply and demand, when applied to the supplier and consumer, respectively.
+
+Taxes include income tax, HST, and social insurance tax (paid by employers).
+
+**Tax incidence** is the way the burden of taxes is divided between buyers and sellers. If the price rises by the full amount of the tax, buyers pay the tax. If the price doesn't rise, the sellers pay the price.
+
+This depends on elasticity - the more inelastic the demand, the more the burden of the tax is put on the buyer. Perfectly inelastic demand means buyers pay the tax. Perfectly elastic demand means sellers pay the tax.
+
+Taxes on suppliers shift the supply curve upward.
+
+Taxes on consumers shift the demand curve down.
+
+Taxes are usually put on goods and services with inelastic supply or demand. Gasoline has inelastic demand, so the buyer pays more of the tax, while labour has inelastic supply, so the employer pays more of the tax.
+
+             Price vs. Supply & Demand
+    v 3.00
+      |    Quantity with tax                   
+      | ***|                    ....           
+    P |####*****           .....               
+    r |    |    ****   ....                    
+    i |    |       ...X**                      # represents surplus
+    c |    |   ....   ^  ****                  
+    e |###.....       |      *****             
+      |... |    Equilibrium       ***
+      |________________________________________
+     0              Quantity                  ^ 25 million
+
+There are conflicting principles of fairness when considering a tax system:
+
+* people should pay taxes according to the benefits they receive from them - taxes based on use
+* people should pay taxes according to their ability to bear the burden of the tax - taxes based on income
+
+### Subsidies
+
+Subsidies act like taxes, but have the opposite effect.
+
+They shift the supply curve down and the demand curve up.
+
+## Quotas
+
+Quotas restrict the quantity that can be sold, generally an upper limit.
+
+For example, fishing licenses limit how much fish can be sold in order to prevent overfishing. This increases the price paid by the consumer.
