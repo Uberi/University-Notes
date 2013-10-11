@@ -1,10 +1,11 @@
 @echo off
 
 set DATADIR=%CD%
+set MATHJAX=http://benweet.github.io/stackedit/lib/MathJax/MathJax.js?config=TeX-AMS_HTML
 
 pushd MATH135
 %APPDATA%\..\Local\Pandoc\pandoc --output=MATH135.html ^
-	--mathjax=/MathJax.js ^
+	--mathjax=%MATHJAX% ^
 	--data-dir=%DATADIR% ^
 	--template=template.html ^
 	"--variable=pagetitle:MATH135 | Anthony Zhang" ^
@@ -13,7 +14,7 @@ popd
 
 pushd MATH137
 %APPDATA%\..\Local\Pandoc\pandoc --output=MATH137.html ^
-	--mathjax=/MathJax.js ^
+	--mathjax=%MATHJAX% ^
 	--data-dir=%DATADIR% ^
 	--template=template.html ^
 	"--variable=pagetitle:MATH137 | Anthony Zhang" ^
@@ -22,7 +23,7 @@ popd
 
 pushd ECON101
 %APPDATA%\..\Local\Pandoc\pandoc --output=ECON101.html ^
-	--mathjax=/MathJax.js ^
+	--mathjax=%MATHJAX% ^
 	--data-dir=%DATADIR% ^
 	--template=template.html ^
 	"--variable=pagetitle:ECON101 | Anthony Zhang" ^
@@ -31,7 +32,7 @@ popd
 
 pushd PHIL110A
 %APPDATA%\..\Local\Pandoc\pandoc --output=PHIL110A.html ^
-	--mathjax=/MathJax.js ^
+	--mathjax=%MATHJAX% ^
 	--data-dir=%DATADIR% ^
 	--template=template.html ^
 	"--variable=pagetitle:PHIL110A | Anthony Zhang" ^
