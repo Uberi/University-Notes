@@ -900,7 +900,7 @@ $$
 
 Using these equations, we can find the linear combination:
 
-> Write it as the linear combination of the previous values: $21 &= 273 - 1 \cdot 252$.  
+> Write it as the linear combination of the previous values: $21 = 273 - 1 \cdot 252$.  
 > Rewrite term: $21 = 273 - 1 \cdot (1071 - 3 \cdot 273)$.  
 > Expand and simplify: $21 = 4 \cdot 273 - 1071$.  
 > Rewrite term: $21 = 4 cdot (42042 - 39 \cdot 1071) - 1071$.  
@@ -943,11 +943,13 @@ Prove via induction that $\sum\limits_{i = 1}^n = 1 - \frac{1}{2^n}$ for integer
 
 # 9/10/13
 
-GCD-CT says that if a certificate exists, the GCD is correct.
+GCD-CT says that if a certificate of a GCD exists, the GCD exists.
 
-EEA says that a certificate always exists for any GCD.
+EEA says that if a GCD exists, a certificate of its correctness exists.
 
 So for any GCD, we can have a certificate verifying its correctness.
+
+EEA is the converse of GCD-CT.
 
 Coprimality
 -----------
@@ -955,3 +957,91 @@ Coprimality
 Two integers $a$ and $b$ are **coprime** if $\gcd(a, b)$ - if they have no common factors other than 1 and -1.
 
 For example, 4 and 9 are coprime.
+
+# 11/10/13
+
+### Coprimeness and Divisibility (CAD)
+
+Proposition: for any integers $a, b, d$, if $d \mid ab$ and $\gcd(d, a) = 1$, then $a \mid b$.
+
+Proof:
+
+> Let $a, b, d$ be arbitrary integers.  
+> Assume d \mid ab$ and $\gcd(d, a) = 1$.  
+> We want to prove $d \mid b$.  
+> By EEA, there exist integers $x, y$ such that $dx + ay = 1$.  
+> Clearly, this is equivalent $b(dx + ay) = b$.  
+> Clearly, this is equivalent to $d(bx) + (ab)y = b$.  
+> Clearly, $d \mid d$, and $d \mid ab$.  
+> By DIC, $d$ divides every integer linear combination of $d$ and $ab$.  
+> So $d \mid (d(bx) + (ab)y)$.  
+> So $d \mid b$.  
+
+Proof by elimination
+--------------------
+
+To prove a statement of the form $P \vee Q$, we assume $\neg Q$ and from that prove $Q$.
+
+This is based on the observation that $P \vee Q \equiv \neg (\neg P) \vee Q \equiv \neg P \implies Q$.
+
+Primality
+---------
+
+An integer $p > 1$ is **prime** if an only if its only positive divisors are 1 and $p$.
+
+Negative numbers, 0, and 1 cannot be prime.
+
+Lemma: given integers $p$, $a$, if $p$ is prime and $p \nmid a$, then $\gcd(p, a) = 1$.
+
+In other words, a prime that does not divide a number is coprime to it.
+
+Proof:
+
+> Assume $p$ is prime and $p \nmid a$.  
+> Clearly, the divisors of $p$ are $-p, -1, 1, p$.  
+> Clearly, the divisors of $a$ include -1 and 1.  
+> Since $p \nmid a$, $a \ne p$.  
+> So the only possible common divisors are -1 and 1.  
+> So $\gcd(p, a) = 1$.  
+
+## Primes and Divisibility (PAD)
+
+Corollary: given integers $p, a, b$, if $p$ is prime and $p \mid ab$, then $p \mid a \vee p \mid b$.
+
+> Let $p, a, b$ be arbitrary integers.  
+> Proof by elimination.  
+> Assume $p$ is prime and $p \mid ab$.  
+> Assume $p \nmid a$.  
+> By the previous lemma, since $p$ is prime and $p \nmid a$, $\gcd(p, a) = 1$.  
+> By CAD, since $p \mid ab$ and $\gcd(p, a) = 1$, $p \mid b$.  
+
+### GCD of One (GCD OO)
+
+Proposition: given integers $a, b$, if there are integers $x, y$ such that $ax + by = 1$, then $\gcd(a, b) = 1$.
+
+Proof:
+
+> Clearly, $1 > 0, 1 \mid a, 1 \mid b$.  
+> By GCD-CT, $ax + by = 1$ implies $\gcd(a, b) = 1$.  
+
+By EEA, the proposition's converse is also true. So we can write the following:
+
+Proposition: given integers $a, b$, $\gcd(a, b) = 1$ if and only if there are integers $x, y$ such that $ax + by = 1$.
+
+### Division by the GCD (DB GCD)
+
+Proposition: given integers $a, b$, if $\gcd(a, b) = d, d \ne 0$, then $\gcd(\frac{a}{d}, \frac{b}{d}) = 1$
+
+Proof:
+
+> By EEA, there are integers $x, y$ such that $ax + by = d$.  
+> Since $\frac{a}{d}$ and $\frac{b}{d}$ are integers, $\frac{a}{d} x + \frac{b}{d} y = \frac{d}{d}$.  
+> So $\frac{a}{d} x + \frac{b}{d} y = 1$.  
+> By GCD-OO, $\gcd(\frac{a}{d}, \frac{b}{d}) = 1$.  
+
+Linear Diophantine Equations
+----------------------------
+
+A linear equation in the style of Diophantus, a Greek mathemetician who invented a theory of the integers.
+
+They are equations having **integer solutions only**.
