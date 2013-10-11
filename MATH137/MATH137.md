@@ -104,24 +104,14 @@ Solve $\abs{2x-3} < 4$:
 -1 < 2x < 7 \implies -\frac{1}{2} < x < \frac{7}{2}
 $$
 
-Sketch $\abs{x} + y \le 1$:
+Simplify $\abs{x} + y \le 1$:
 
 >$$
-\abs{x} \le 1 - y \\
-\begin{align}
-    \text{Two cases: }
-    x &\le 1 - y \\
-    -x \le 1 - y \implies x &\ge y - 1
-\end{align} \\
-;wip
-$$
-
-Sketch $\abs{x} + \abs{y} \le 1$:
-
->$$
-\begin{align}
-\text{Four cases: } ;wip \\
-\end{align}
+y \le 1 - \abs{x} \\
+y \le \begin{cases}
+    1 - x &\text{if } x \ge 0 \\
+    1 + x &\text{if } x < 0 \\
+\end{cases} \\
 $$
 
 # 11/9/13
@@ -412,7 +402,7 @@ The inverse of the tangent function is denoted $\arctan \theta$, or $\tan^{-1} \
 
 Evaluate $\cos(\arctan \sqrt{3})$:
 
-$$
+> $$
 \frac{\sqrt{3}}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
 \text{opposite} = \sqrt{3} \\
 \text{adjacent} = 1 \\
@@ -421,11 +411,9 @@ $$
 \cos(\arctan \sqrt{3}) = \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
 $$
 
-;wip: solve this by drawing a special triangle with the ratio specified and then do it algebriacally
-
 Simplify $\sin(\arctan x)$
 
-$$
+> $$
 \frac{x}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
 \text{opposite} = x \\
 \text{adjacent} = 1 \\
@@ -434,13 +422,22 @@ $$
 \sin(\arctan x) = \frac{x}{\sqrt{x^2 + 1}} \\
 $$
 
-$\frac{x}{\sqrt{x^2 + 1}}$
+Evaluate $\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)$:
 
-Evaluate $\arccos(\sin(-\frac{\pi}{3}))$:
+           pi/6
+            |\
+            | \ 2
+    sqrt(3) |  \
+            |___\
+        pi/2  1  pi/3
 
-;wip: solve by drawing special triangle
-
-$\frac{5 \pi}{6}$
+> $$
+\sin \left( \frac{-pi}{3} \right) = \frac{\text{opposite}}{\text{hypotenuse}} = -\frac{\sqrt{3}}{2} \\
+\text{opposite} = \sqrt{3} \\
+\text{hypotenuse} = 2 \\
+\text{adjacent} = \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
+\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) = \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\ ;wip: how do I trignometry
+$$
 
 # 23/9/13
 
@@ -767,7 +764,7 @@ $$
 
 ### Intermediate value theorem (IVT)
 
-Suppose $f(x)$ is continuous over $[a, b]$ and n is any number between $f(a)$ and $f(b)$ exclusive. Then there exists a number $c \in (a, b)$ such that $f(c) = n$.
+Suppose $f(x)$ is continuous over $[a, b]$ and $f(a) < n < f(b)$. Then there exists a number $c \in (a, b)$ such that $f(c) = n$.
 
 In other words, for a function continuous on an interval, any value of the function in a range has a corresponding value of $x$.
 
@@ -979,15 +976,15 @@ If $c$ is a constant, $\frac{\dee}{\dee x} c = 0$.
 
 ### Sum/difference rule
 
-If $f(x)$ and $g(x)$ are differentiable at $x$, $\frac{\dee}{\dee x} (f(x) \pm g(x))$ is differentiable at $x$ and $\frac{\dee}{\dee x} (f(x) \pm g(x)) = \frac{\dee}{\dee x} f(x) \pm \frac{\dee}{\dee x} g(x)$.
+If $f(x)$ and $g(x)$ are differentiable at $x$, $\frac{\dee}{\dee x} (f(x) \pm g(x))$ is defined at $x$ and $\frac{\dee}{\dee x} (f(x) \pm g(x)) = \frac{\dee}{\dee x} f(x) \pm \frac{\dee}{\dee x} g(x)$.
 
 ### Constant multiple rule
 
-If $c$ is a constant and $f(x)$ is differentiable at $x$, $\frac{\dee}{\dee x} c f(x)$ is differentiable at $x$ and $\frac{\dee}{\dee x} c f(x) = c \frac{\dee}{\dee x} f(x)$.
+If $c$ is a constant and $f(x)$ is differentiable at $x$, $\frac{\dee}{\dee x} c f(x)$ is defined at $x$ and $\frac{\dee}{\dee x} c f(x) = c \frac{\dee}{\dee x} f(x)$.
 
 ### Product rule
 
-If $f(x)$ and $g(x)$ are differentiable at $x$, then $\frac{\dee}{\dee x} f(x) g(x)$ is differentiable at $x$ and $\frac{\dee}{\dee x} f(x) g(x) = f'(x) g(x) + f(x) g'(x)$.
+If $f(x)$ and $g(x)$ are differentiable at $x$, then $\frac{\dee}{\dee x} f(x) g(x)$ is defined at $x$ and $\frac{\dee}{\dee x} f(x) g(x) = f'(x) g(x) + f(x) g'(x)$.
 
 Proof:
 
@@ -1000,3 +997,55 @@ Proof:
 &= g(x) f'(x) + f(x) g'(x) \\
 \end{align}
 $$
+
+# 11/10/13
+
+Differentiate $x^2 e^x$:
+
+> $$
+\frac{\dee}{\dee x} (x^2 e^x) = e^x \frac{\dee}{\dee x} x^2 + x^2 \frac{\dee}{\dee x} e^x = 2xe^x + x^2 e^x
+$$
+
+### Reciprocal rule
+
+If $g(x)$ is differentiable at $x$, then $\frac{\dee}{\dee x} \frac{1}{g(x)}$ is defined at $x$ and $\frac{\dee}{\dee x} \frac{1}{g(x)} = -\frac{g'(x)}{g(x)^2}$.
+
+Proof:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} \frac{1}{g(x)} &= \lim_{h \to 0} \frac{\frac{1}{g(x + h)} - \frac{1}{g(x)}}{h} \\
+&= \lim_{h \to 0} \frac{g(x) - g(x + h)}{h(g(x + h) g(x))} \\
+&= \lim_{h \to 0} -\frac{g(x + h) - g(x)}{h} \cdot \lim_{h \to 0} \frac{1}{g(x + h) g(x)} \\
+&= -g'(x) \cdot \frac{1}{g(x)^2}
+\end{align}
+$$
+
+### Quotient rule
+
+If $f(x)$ and $g(x)$ are differentiable at $x$ and $g(x) \ne 0$, then $\frac{\dee}{\dee x} \frac{f(x)}{g(x)}$ is defined at $x$ and $\frac{\dee}{\dee x} \frac{f(x)}{g(x)} = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}$
+
+;wip: prove it
+
+The function $f(x) = \frac{x}{1 + x^2}$ is known as a serpentine curve. Find the equations of the tangents where they have a slope of $\frac{1}{8}$:
+
+> ;wip
+
+Higher order derivatives
+------------------------
+
+The second order derivative of $f(x)$ is $\frac{\dee^2}{\dee x^2} f(x) = \frac{\dee}{\dee x} \left( \frac{\dee}{\dee x} f(x) \right) = f''(x)$.
+
+It can be interpreted as the rate of change of the rate of change.
+
+In the same way, we can define arbitrarily high orders of derivatives, but this is rarely used.
+
+Consider $\frac{\dee}{\dee x}$ as an operator.
+
+Find $\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2}$:
+
+> ;wip
+
+Show that $\lim_{x \to 0} \frac{\sin x}{x} = 1$:
+
+> ;wip: use squeeze theorem
