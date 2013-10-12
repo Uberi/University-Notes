@@ -1,0 +1,820 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>CS135 | Anthony Zhang</title>
+  <style type="text/css">
+  body {
+    font-family: "Segoe UI", Verdana, Arial, Helvetica, sans-serif;
+    background: #fffefe;
+    padding: 5em;
+  }
+  
+  pre {
+    border: solid 1px black;
+    background: #665555;
+    color: white;
+    padding: 1em;
+    border-radius: 0.5em;
+    display: inline-block;
+    margin-left: 2em;
+  }
+  
+  h1 {
+    font-size: 4em;
+  }
+  
+  table {
+    margin: 0 auto;
+  }
+  
+  td, th {
+    padding: 0.5em;
+    border: 1px solid grey;
+  }
+  
+  tr {
+    padding:: 0;
+  }
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="http://benweet.github.io/stackedit/lib/MathJax/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
+</head>
+<body>
+<h1 id="cs135">CS135</h1>
+<pre><code>Designing Functional Programs</code></pre>
+<p>Instructor:</p>
+<pre><code>Name: Sandra (Sandy) Graham
+Email: sandy.graham@uwaterloo.ca
+Office: MC 6423
+Office hours: Tuesdays in MC 2062/2063, Thursdays in MC 4065, 1:15-2:15 PM</code></pre>
+<p>ISA = instructional support assistant</p>
+<p>Drop by the Tutorial Center (MC 4065) during the <a href="https://www.student.cs.uwaterloo.ca/~cs135/TutorOfficeHours">scheduled hours</a> for assistance, no appointments needed.</p>
+<h2 id="i-clicker">i-clicker</h2>
+<p>Do this before every class:</p>
+<ol style="list-style-type: decimal">
+<li>Hold On/Off until power button blinks.</li>
+<li>There is an i-clicker sticker on the wall, says DA. Press D and then A.</li>
+<li>The Vote Status light should flash green.</li>
+</ol>
+<h2 id="programming-language-design">Programming Language Design</h2>
+<p>Imperative: frequent changes to data - Java, C++ Functional: computation of new values rather than changing old ones - LISP, ML, Haskell, Erlang, F# - closely connected to math, easier to reason about/design programs</p>
+<h2 id="scheme">Scheme</h2>
+<p>Member of the LISP family of languages.</p>
+<ul>
+<li>Usually no side effects - operations do not affect other ones</li>
+<li>Functional language</li>
+</ul>
+<p>Basic Scheme forms:</p>
+<pre><code>;; block comment
+5 ; inline comment
+6 ; atom number
+&quot;abc&quot; ; atom string</code></pre>
+<p>Stylistically, single line comments should use two semicolons; however, this is not required by the syntax.</p>
+<p>Primary aspects of course:</p>
+<ul>
+<li>Design</li>
+<li>Abstraction</li>
+<li>Refinement of old ideas</li>
+<li>Syntax, expressiveness, semantics</li>
+<li>Communication with human and computer</li>
+</ul>
+<h3 id="functions">Functions</h3>
+<p>In math, functions generalize similar expressions:</p>
+<pre><code>f(x) = x^2+4*x+2
+g(x,y) = x+y</code></pre>
+<p>Function consist of:</p>
+<ul>
+<li>Function name</li>
+<li>Parameters</li>
+<li>Algebraic expression of parameters</li>
+</ul>
+<p>Application of function:</p>
+<pre><code>f(3)
+g(5,6)</code></pre>
+<p>Application supplies arguments (the values) that correspond to the parameters.</p>
+<p>In math, application is evaluated by substitution:</p>
+<pre><code>f(g(5,6)) = f(5+6) = f(11) = 11^2+4*11+2 = 167</code></pre>
+<p>Evaluation can be done in any order:</p>
+<pre><code>g(g(1,3),f(2)) = g(1+3,f(2)) or g(1,3) + f(2)</code></pre>
+<p>The Scheme interpreter (program that evaluates Scheme code) uses a left to right, depth-first evaluation order - inside-out, left to right.</p>
+<p>Math is written in infix notation - the operator is placed between its operands. There are also notations known as prefix and postfix notation - operator before operands, and operator after operands, respectively.</p>
+<p>Scheme uses prefix notation. Prefix notation needs no order of operations because there is no ambiguity.</p>
+<p>Convert infix to prefix:</p>
+<pre><code>(6-4)/(5+7)
+What is the last operator to be applied?
+/ (6-4) (5+7)
+Repeat process.
+/ - 6 4 + 5 7
+This is valid prefix notation, but not valid Scheme.
+Since in Scheme arbitrary numbers of operands are supported, we need t add brackets to make it explicit.
+(/ (- 6 4) (+ 5 7))</code></pre>
+<p>Conversion is done by moving the last operator to be applied to the beginning of the subexpression until no infix operators remain. Operand order remains the same.</p>
+<h2 id="prefix-notation">Prefix Notation</h2>
+<p>If we treat infix operators as functions, we don't need to use parentheses to specify order of operations:</p>
+<pre><code>3 - 2 ;infix notation
+-(3, 2) ;prefix notation</code></pre>
+<p>Convert to prefix notation:</p>
+<pre><code>(((3+8)-(7+9))/12) ;infix notation
+/ ((3+8)-(7+9)) 12
+/ - (3+8) (7+9) 12
+/ - + 3 8 + 7 9 12 ;prefix expression
+(/ (- (+ 3 8) (+ 7 9) 12)) ;scheme code</code></pre>
+<p>Scheme code needs the brackets in order to support arbitrary numbers of parameters.</p>
+<h2 id="drracket">DrRacket</h2>
+<p>Racket (Scheme) development environment.</p>
+<p>DrRacket has interactions and definitions panes. Definitions are persistent and are saved on permanent storage. Interactions are realtime and users interact with programs here, but are not saved.</p>
+<p>The interactions pane is a REPL (read-eval-print-loop), a way to write some code, execute it, and get results immediately.</p>
+<p>Integers in Scheme are unbounded - they can be arbitrarily large without fear of overflows.</p>
+<p>Rational numbers in Scheme are represented and computed exactly, without any loss in precision. Scheme tries to use exact numbers whenever possible.</p>
+<p>When an exact value is not possible, such as with irrational numbers, they are marked as <strong>inexact</strong>. Inexact values taint all computations it is used in with inexactness.</p>
+<pre><code>(sqrt 2) evaluates to #i1.414213562370951 ; #iX represents a literal inexact value
+(expt 2 100) evaluates to 1267650600228229401496703205376 ;exact
+(/ -5 12) evaluates to $-\frac{5}{12}$ ;exact
+#i1.23 ;inexact
+1.2e12 ;exact
+1.234567 ;exact
+12345 ;exact</code></pre>
+<p>Common errors:</p>
+<ul>
+<li>Mismatched brackets: <code>(+ 1 2</code></li>
+<li>Infix operators: <code>(1 + 2)</code></li>
+<li>Runtime errors: <code>(/ 3 (- 2 2))</code> (division by 0)</li>
+</ul>
+<p>The stepper tool is useful for tracing execution one step at a time.</p>
+<p>Scheme is a dynamically typed language - types do not need to be declared. Contracts are not enforced by the language since they are just comments. However, we can explicitly check for types to catch errors.</p>
+<p>This contrasts with statically typed languages such as Java, where the type is associated with identifiers and only certain values are allowed to be stored in them.</p>
+<p>Types are associated with <strong>values</strong>, but not with identifiers such as parameters or constants.</p>
+<h2 id="definitions">Definitions</h2>
+<p>Defining functions in math:</p>
+<p><span class="math">\(f(x) = x^2\)</span></p>
+<p>This follows the general pattern of <code>name(formal_parameters) = body</code></p>
+<p>In Scheme, this is written <code>(define (name formal_parameters) body)</code>. For example:</p>
+<pre><code>(define (sum x y) (+ x y)) is equivalent to sum(x,y) = x + y</code></pre>
+<p>This is called with something like the following:</p>
+<pre><code>(sum 5 6) ; 5 and 6 are the arguments</code></pre>
+<p><code>define</code> is a <strong>special form</strong>. It looks like a Scheme function, but its arguments are not necessarily evaluated, and this form may do something special normal functions cannot. <code>define</code> <strong>binds</strong> a name to an expression.</p>
+<p>A definition can only be defined once - <code>define</code> cannot be used twice on the same identifier. However, redefinition is possible in the full Scheme language.</p>
+<p>All operators in scheme are actually just functions: <code>+</code>, <code>-</code>, <code>sqrt</code> are predefined in the environment when the program starts. This means that they can be redefined, too.</p>
+<p>Evaluate <code>(* (- 6 4) (+ 3 2))</code>:</p>
+<pre><code>(* (- 6 4) (+ 3 2))
+(* 2 (+ 3 2))
+(* 2 5)
+10</code></pre>
+<p>On paper:</p>
+<p><span class="math">\[
+\text{(* (- 6 4) (+ 3 2))}
+\implies \text{(* 2 (+ 3 2))}
+\implies \text{(* 2 5)}
+\implies 10
+\]</span></p>
+<p>Functions are applied via substitution, as in math. There is only one solution to every possible expression - there is no ambiguity. Functions can only return one value.</p>
+<h2 id="constants">Constants</h2>
+<p>Constants do not accept parameters, and simply have a constant value:</p>
+<pre><code>(define pi 3.1415926535)
+(define density (/ mass volume))</code></pre>
+<p>Orders of definitions are not important at this point. Definitions can be done in any order.</p>
+<p>Constants are a special case of definitions. Constants are only evaluated once, and are not evaluated again upon substitution.</p>
+<h2 id="scope">Scope</h2>
+<p>Inner scopes override outer scopes:</p>
+<pre><code>(define x 3)
+(define (f x) (* x x))
+(f 4) ; in the body of f, x is 4, since the parameter is in the inner scope and overrides x=3 in the outer scope</code></pre>
+<p>Every function has its own scope. Scopes are environments where bindings exist.</p>
+<h1 id="section">17/9/13</h1>
+<p>Constants have various advantages:</p>
+<ul>
+<li>Gives meaningful names to magic numbers.</li>
+<li>Reduces typing and errors if values need to be changed.</li>
+<li>Makes programs easier to understand.</li>
+</ul>
+<p>Constants are sometimes called variables, but are generally not changed.</p>
+<p>Unevaluated code is highlighted in black. Tests try to evaluate all possible code paths and all the highlighting should disappear.</p>
+<p>Scheme programs are sequences of definitions and expressions.</p>
+<p>Expressions are evaluated using substitution to produce values.</p>
+<p>Expressions may use special forms such as <code>define</code>, which may not necessarily behave in the same way as normal expressions.</p>
+<h2 id="the-design-recipe">The Design Recipe</h2>
+<p>Programs are acts of communication: between person and computer, between person and same person in the future, and between person and others.</p>
+<pre><code>; comments start with a semicoolon and go on until the end of the line</code></pre>
+<p><strong>Block comments</strong> are comments that generally go on for multiple lines. These are, by convention, written with two semicolons:</p>
+<pre><code>;; block comments
+;; generally apepar at the beginning of files
+;; and before functions</code></pre>
+<p>Every function must follow the design recipe - a development process that leaves behind a written explanation of development.</p>
+<p>Design recipes result in robust and reliable functions that are easy to understand.</p>
+<p>The five parts of the design recipe are, in order of submission:</p>
+<ul>
+<li>Contract: information for the user - function signature - argument types and descriptions, return types and descriptions.</li>
+<li>Purpose: description of what the function is designed to compute - what it produces or returns.</li>
+<li>Examples: clarification of the general use of the function and what usage of it looks like.</li>
+<li>Definition: The Scheme header and body of the function.</li>
+<li>Tests: a representative set of inputs and expected outputs showing that the function works - expected outputs must be calculated by hand or some other source.</li>
+</ul>
+<p>Examples are similar to tests, but tests generally only show the function works while examples show people how to use it. There are usually more tests than examples.</p>
+<p>Recommended order of execution:</p>
+<ul>
+<li>Write contract.</li>
+<li>Write purpose.</li>
+<li>Write examples.</li>
+<li>Write definition body.</li>
+<li>Write tests.</li>
+</ul>
+<p>Write a function that sums the squres of two numbers:</p>
+<pre><code>Contract:
+;; sum-of-squares: Num Num -&gt; Num
+Purpose:
+;; Purpose: produces the sum of squares of arg1 and arg24
+Examples:
+;; Examples:
+(check-expect (sum-of-squares 3 4) 25)
+(check-expect (sum-of-squares 0 2.5) 6.25)
+Body:
+(define (sum-of-squares arg1 arg2)
+    (+ (sqr arg1) (sqr arg2)))
+Tests:
+(check-expect (sum-of-squares -1 2) 5)
+(check-expect (sum-of-squares 0.01 1000) 1000000.0001)
+(check-expect (sum-of-squares 50 -28) 3284)
+(check-expect (sum-of-squares 1/25 65) 4225.0016)</code></pre>
+<p>Types used in contract (case sensitive):</p>
+<ul>
+<li>Num: any Scheme numeric value</li>
+<li>Int: any integers</li>
+<li>Nat: natural numbers</li>
+<li>Boolean: Boolean value</li>
+<li>Symbol: symbolic value</li>
+<li>String: string value</li>
+<li>Char: character value</li>
+<li>Any: any type of value</li>
+</ul>
+<p>Tests should be written after the code body. They should be small and focused with a clear purpose.</p>
+<pre><code>(check-expect (+ 1 2) 3) ; checks that a value is exactly equal to another
+(check-within (sqrt 2) 1.414 0.001) ; checks that a value is equal to another within a tolerance
+(check-error (/ 1 0) &quot;/: division by zero&quot;) ;checks that a certain error occurs</code></pre>
+<p>These are special forms and are evaluated at the end. A summary of the test results are shown in the interactions window.</p>
+<p>Write a function that rounds to a given number of decimal places:</p>
+<pre><code>;; round-to: Num Int -&gt; Num
+;; Purpose: produces the value given rounded to a given number of decimal places
+;; Examples:
+(check-expect (round-to 1.25 1) 1.2)
+(check-expect (round-to 23.45 -1) 20)
+
+(define (round-to value decimal-places)
+    (/ (round (* value
+                 (expt 10 decimal-places)))
+       (expt 10 decimal-places)))
+
+;; Tests
+(check-expect (round-to 1.25 1) 1.2) ; round down towards even number
+(check-expect (round-to 1.35 1) 1.4) ; round up towards even number
+(check-expect (round-to 12.3 5) 12.3) ; fewer decimal places than requested
+(check-expect (round-to 12 0) 12) ; boundary condition</code></pre>
+<p>We can put <code>...</code> as a placeholder for the function body before actually writing the body.</p>
+<p>If the contract is violated, the result may be undefined. For example, <code>(round-to 3 0.5)</code>.</p>
+<h1 id="section-1">19/9/13</h1>
+<h2 id="boolean-values">Boolean Values</h2>
+<p>Scheme represents Boolean values with the literals <code>#t</code> and <code>#f</code> (<code>true</code> and <code>false</code> are also usable in the Scheme teaching languages), representing true and false respectively.</p>
+<p>The equality function <code>(= x y)</code> (<code>(= Num Num) -&gt; Boolean</code>) tests whether two numbers are equal and results in a boolean value. Similarly, <code>(&lt; x y)</code> and <code>(&gt;= x y)</code> behave similarly.</p>
+<p><strong>Predicates</strong> are expressions that result in Boolean values. They are, by convention, given names that end with a question mark. For example, <code>(even? x)</code> is clearly a predicate.</p>
+<p>The most common Boolean operators are <code>(and x y ...)</code>, <code>(or x y ...)</code>, and <code>(not x)</code>. They represent <span class="math">\(x \wedge y\)</span>, <span class="math">\(x \vee y\)</span>, and <span class="math">\(\neg x\)</span>, respectively.</p>
+<p>Scheme has no inequality (not-equals) operator. However, it can be implemented as follows: <code>(not (= x y))</code>.</p>
+<p>Scheme uses short circuit evaluation. For <code>and</code> and <code>or</code>, if the result of the expression is known before the evaluation is complete, the rest is not evaluated:</p>
+<ul>
+<li>If <code>or</code> has a true argument, it knows that the result must be true regardless of other arguments - <code>(or #t (/ 1  0))</code> will not give an error, since the division is never evaluated.</li>
+<li>If <code>and</code> has a false argument, it knows that the result must be false regardless of other arguments - <code>(and #f (/ 1 0))</code> will not give an error, since the division is never evaluated.</li>
+</ul>
+<p>This is made possible by <code>and</code> and <code>or</code> being special forms.</p>
+<p>Many types have an equality predicate, like <code>symbol=?</code> and <code>string=?</code>, which should be used whenever possible. However, if the types of the operands are not known befrehand, <code>(equal? x y ...)</code> can be used to check that they are compatible types and that they have the same value. This does not work with inexact numbers.</p>
+<h2 id="strings">Strings</h2>
+<p>Strings are denoted by double quotes: <code>&quot;CS135&quot;</code>, <code>&quot;abc&quot;</code>, <code>&quot;&quot;</code>.</p>
+<p>The length of a string is determined with <code>(string-length x)</code>. We determine if a value is a string with the predicate function <code>(string? x)</code>. We concatenate strings using <code>(string-append x y ...)</code></p>
+<p>String comparisons are done based on ASCII values.</p>
+<h2 id="symbols">Symbols</h2>
+<p>Symbols are denoted by a single quote: <code>'symbol</code>. A symbol represents a particular idea. They are used to define a finite set of values, each one with a name.</p>
+<p>Symbols can only be compared, not manipulated like with strings.</p>
+<p>Write a predicate function that checks if the input is a valid multiple choice answer:</p>
+<pre><code>;; valid-choice: Any -&gt; Boolean
+;; Purpose: produces true when the answer is one of &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, false otherwise.
+;; Examples:
+(check-expect (valid-choice? 123) #f)
+(check-expect (valid-choice? &quot;C&quot;) #t)
+
+(define (valid-choice? value)
+    (and (string? value)
+         (or (string=? value &quot;A&quot;)
+             (string=? value &quot;B&quot;)
+             (string=? value &quot;C&quot;)
+             (string=? value &quot;D&quot;))))
+
+;; Tests
+(check-expect (valid-choice? &quot;A&quot;) true)
+(check-expect (valid-choice? &quot;B&quot;) true)
+(check-expect (valid-choice? &quot;C&quot;) true)
+(check-expect (valid-choice? &quot;D&quot;) true)
+(check-expect (valid-choice? &quot;potato&quot;) false)
+(check-expect (valid-choice? 123) false)</code></pre>
+<h2 id="conditional-expressions">Conditional Expressions</h2>
+<p>The special form <code>cond</code> is used to write conditionaal expressions in Scheme. Each argument is a question/answer pair, where the question is a boolean expression:</p>
+<pre><code>(cond
+    [(&lt; x 0) (- x)]
+    [(&gt;= x 0) x])</code></pre>
+<p>The above results in the absolute value of <code>x</code>.</p>
+<p>Square brackets are used by convention. Square brackets are equivalent to parentheses in the teaching languages.</p>
+<p><code>cond</code> evaluates the question in each pair from top to bottom. As soon as one is true, its associated answer is evaluated and returned. If no pair matches, a runtime error is generated.</p>
+<p>The last pair can use the question <code>else</code> to always match:</p>
+<pre><code>(cond
+    [(= 1 2) 3]
+    [(= 4 5) 6]
+    [else 7])</code></pre>
+<p>Write a program that converts a numeric grade to a letter grade:</p>
+<pre><code>(define (convert-grade percentage advanced?)
+    (string-append
+        (cond
+            [(&gt;= percentage 80) &quot;A&quot;]
+            [(&gt;= percentage 70) &quot;B&quot;]
+            [(&gt;= percentage 60) &quot;C&quot;]
+            [(&gt;= percentage 50) &quot;D&quot;]
+            [else &quot;F&quot;])
+        (cond
+            [advanced? &quot;+&quot;]
+            [else &quot;&quot;])))</code></pre>
+<p>When testing <code>cond</code> statements, test values on boundaries, and test values for each case. A statement with 4 cases might need 7 tests.</p>
+<h1 id="section-2">24/9/13</h1>
+<h3 id="simplifying-conditionals">Simplifying Conditionals</h3>
+<p>If a question is asked, we know that all the questions before it are false.</p>
+<p>For example, we can simplify the following:</p>
+<pre><code>(cond
+    [(&lt; grade 50) &#39;fail]
+    [(and (&lt; grade 60) (&gt;= 50)) &#39;poor]
+    [(&gt;= grade 60) &#39;acceptable])</code></pre>
+<p>Into the following:</p>
+<pre><code>(cond
+    [(&lt; grade 50) &#39;fail]
+    [(&lt; grade 60) &#39;poor]
+    [else &#39;acceptable])</code></pre>
+<p>For conditional expressions, each question and answer should have one corresponding tests. The tests should be simple and directly test a particular answer. More tests are appropriate at boundary points as well.</p>
+<p>In the above case, good test values would be 40, 50, 55, 60, and 70.</p>
+<p>Every way each argument could be false needs to be false, and each one needs a test.</p>
+<p>Some tests are based on the problem description - these are <strong>black-box tests</strong>. They are not based on anything in the code, such as implementation details.</p>
+<p>Some tests are based on the code itself - these are <strong>white-box tests</strong>. They may check things like specific conditionals or boolean expressions.</p>
+<p>Both types of testing are important.</p>
+<p>Helper functions generalize similar expressions, and help avoid overly complex expressions. Helper functions should use meaningful names and must follow the design recipe.</p>
+<h2 id="syntaxsemantics">Syntax/Semantics</h2>
+<p><strong>Syntax</strong> is the way we're allowed to say things.</p>
+<p><strong>Semantics</strong> is the meaning of what we say.</p>
+<p><strong>Ambiguity</strong> is the property of sentence having multiple meanings.</p>
+<p>Scheme programs must have correct syntax, meaningful semantics, and be unambiguous.</p>
+<h3 id="syntax">Syntax</h3>
+<p>Grammars enforce syntax and avoid ambiguity. For example, an English sentence might be described as follows:</p>
+<pre><code>&lt;sentence&gt; = &lt;subject&gt; &lt;verb&gt; &lt;object&gt;</code></pre>
+<p>The grammar is the <strong>syntactic model</strong> of the Scheme language.</p>
+<h3 id="semantics">Semantics</h3>
+<p>A <strong>semantic model</strong> provides a way to predict the result of running any program.</p>
+<p>Ellipses (<code>...</code>) can represent omissions, indicate patterns, and more. Pattern ellipses often represent multiple arguments or parameters.</p>
+<p>A semantic model for Scheme is based on substitution, where we step through the program one substitution at a time:</p>
+<ol style="list-style-type: decimal">
+<li>Find the leftmost (from beginning) expression that can have a rule applied to it.
+<ul>
+<li>A rule can only be applied if the expression depends only on simple values.</li>
+<li>Otherwise, the non-simple values need to be simplified first.</li>
+</ul></li>
+<li>Rewrite it according to the substitution rules:
+<ul>
+<li><strong>Built-in functions</strong> become their values.
+<ul>
+<li><code>(f ...)</code> =&gt; <code>(result of evaluating f(...))</code></li>
+</ul></li>
+<li><strong>User defined functions</strong> become their bodies, with arguments inserted.
+<ul>
+<li>when <code>(define (f ...) e)</code> occurs to the left, <code>(f ...)</code> =&gt; <code>(e with substitution of parameters for arguments)</code></li>
+</ul></li>
+<li><strong>Constants</strong> become their values.
+<ul>
+<li>when <code>(define x ...)</code> occurs to the left, <code>x</code> =&gt; <code>...</code></li>
+</ul></li>
+<li><strong>Conditional expressions</strong> become an answer if a question is true, or lose a question/answer pair otherwise.
+<ul>
+<li><code>(cond [true e])</code> =&gt; <code>e</code></li>
+<li><code>(cond [false e] ...)</code> =&gt; <code>(cond ...)</code></li>
+<li><code>(cond [else e])</code> =&gt; <code>e</code></li>
+</ul></li>
+<li><strong>And</strong> and <strong>or</strong> become short circuiting arguments, and lose non-short-circuiting arguments.
+<ul>
+<li><code>(and false ...)</code> =&gt; <code>false</code></li>
+<li><code>(and true ...)</code> =&gt; <code>(and ...)</code></li>
+<li><code>(and)</code> =&gt; <code>true</code></li>
+<li><code>(or true ...)</code> =&gt; <code>true</code></li>
+<li><code>(or false ...)</code> =&gt; <code>(or ...)</code></li>
+<li><code>(or)</code> =&gt; <code>false</code></li>
+</ul></li>
+<li><strong>Structure constructors</strong> stay as-is, though arguments are simplified.
+<ul>
+<li><code>(make-posn ...)</code> =&gt; <code>(make-posn ...)</code></li>
+<li><code>(make-posn 8 1)</code> =&gt; <code>(make-posn 8 1)</code></li>
+</ul></li>
+<li><strong>Structure selectors</strong> become the value of its corresponding field.
+<ul>
+<li><code>(posn-x (make-posn 4 2))</code> =&gt; <code>4</code></li>
+</ul></li>
+<li><strong>Structure predicates</strong> become a boolean representing whether the argument is an instance of the structure.
+<ul>
+<li><code>(posn? (make-posn 1 2))</code> =&gt; <code>true</code></li>
+<li><code>(posn? 5)</code> =&gt; <code>false</code></li>
+</ul></li>
+<li><strong>Lists</strong> stay as-is, though arguments are simplified.
+<ul>
+<li><code>(cons 1 (cons 2 empty))</code> =&gt; <code>(cons 1 (cons 2 empty))</code></li>
+</ul></li>
+</ul></li>
+<li>This is one <strong>evaluation step</strong>. Return to step 1 until the entire expression is in the simplest possible form, or results in an error.</li>
+</ol>
+<p>These rules may differ from those in DrRacket's stepper feature.</p>
+<p>Evaluating a program by stepping through is called <strong>tracing</strong>. In more complex programs, <strong>condensed traces</strong> are used - traces that can skip multiple steps to show only important parts.</p>
+<p>Trace <code>(term (- 3 1) (+ 1 2))</code> given <code>(define (term x y) (* x (sqr y)))</code>:</p>
+<pre><code>(term (- 3 1) (+ 1 2))
+=&gt; (term 2 (+ 1 2))
+=&gt; (term 2 3)
+=&gt; (* 2 (sqr 3))
+=&gt; (* 2 9)
+=&gt; 18
+=&gt; (simplest form)</code></pre>
+<p>Trace <code>(cond [( &gt; 3 4) x])</code>:</p>
+<pre><code>(cond [( &gt; 3 4) x])
+=&gt; (cond [false x])
+=&gt; (cond)
+=&gt; (error: no questions answered)</code></pre>
+<h2 id="templates">Templates</h2>
+<p>The form of a program should mirror the form of the data.</p>
+<p>A template is a general framework within which we fill in to create a program.</p>
+<p>We start by making the template of a function, and then flesh out the template to create the finished function.</p>
+<p>For every form of data, we create a template and use it to write functions that work with that type of data.</p>
+<h2 id="structures">Structures</h2>
+<p>Structures are a bundling of several values into one. They are complex values.</p>
+<p>They work only with finite sets of values, and have a fixed size and field count.</p>
+<p>For example, a structure might represent a product in an online store. It would store, for example, the name (String), product ID (Nat), price (Num), and availability (Boolean).</p>
+<p>The two parts of a structure is the code, and the actual information itself. ;wip</p>
+<pre><code>;; this is the code part
+(define-struct product
+    (name product-id price availability))
+
+;; this is the data definition part
+;; A Product = (make-product String Nat Num Boolean) ; use CamelCase in data definitions</code></pre>
+<p><code>define-struct</code> is a special form that defines a structure and a set of corresponding helper functions.</p>
+<p>Here, Racket has made a number of functions automatically:</p>
+<ul>
+<li><code>make-product</code> - the <strong>constructor</strong> creates an instance of the struture, and is named <code>make-{x}</code>, where <code>{x}</code> is the structure name.</li>
+<li><code>product-name</code>, <code>product-product-id</code>, <code>product-price</code>, <code>product-availability</code> - the <strong>selector functions</strong> obtain a particular field in the structure, and are named <code>{x}-{y}</code>, where <code>{x}</code> is the structure name and <code>{y}</code> is a field name.</li>
+<li><code>product?</code> - the <strong>type predicate</strong> checks if a particular value is an instance of the structure, and are named <code>{x}?</code>, where <code>{x}</code> is the structure name.</li>
+</ul>
+<p>We can now work with this structure:</p>
+<pre><code>(define item (make-product &quot;Television&quot; 412 899.99 false))
+(product? item) =&gt; true
+(product-name item) =&gt; &quot;Television&quot;</code></pre>
+<p>Structures are <strong>immutable</strong> - they cannot be changed. Once created, they remain the same.</p>
+<p>Structures can contain structures.</p>
+<p>In contracts, product structures can now be referenced as <code>Product</code>. For example: <code>fake-product: String Boolean -&gt; Product</code>.</p>
+<p>In the Scheme teaching languages, the <code>Posn</code> structure is defined, and is designed to represent a 2D coordinate.</p>
+<pre><code>;; distance: Posn Posn -&gt; Num
+;; Purpose: productes the Euclidean distance between `p1` and `p2`
+;; Examples:
+(check-expect (distance (make-posn 1 1) (make-posn 4 5)) 5)
+
+(define (distance p1 p2)
+    (sqrt (+ (sqr (- (posn-x p2) (posn-x p1)))
+             (sqr (- (posn-y p2) (posn-y p1))))))</code></pre>
+<p>In code, the structure name is lowercase. In contracts, data definitions, and a few other places, the name is written in CamelCase - each word is capitalized, and dashes are removed.</p>
+<h3 id="templates-1">Templates</h3>
+<p>The template is written right after the data definition.</p>
+<p>A template for a function that consumes a structure selects every field in the structure, even if the function itself doesn't use all of them. When we want to write a function, we write it based on the template:</p>
+<pre><code>;; product-fn: Product -&gt; Any
+(define (product-fn prod)
+    (... (product-name prod) ...
+     ... (product-id prod) ...
+     ... (product-price prod) ...
+     ... (product-availability prod)))</code></pre>
+<p>We use Any since we don't know what it returns yet. This needs to be reviewed later when actually writing the function.</p>
+<p>We then fill in the placeholders, <code>...</code>, to create the finished function:</p>
+<pre><code>(define (change-price prod price)
+    (make-product (product-name prod)
+                  (product-id prod)
+                  price
+                  (product-availability prod)))</code></pre>
+<h1 id="section-3">1/10/13</h1>
+<p>For each new structure type, we need:</p>
+<ul>
+<li><strong>data analysis</strong>: looking at the problem, we need to determine if there is a need for compound data type.</li>
+<li><strong>data definition</strong>: describe the compound data type - what each field is, what they are used for.</li>
+<li><strong>template</strong>: describe the basic structure of functions that consume this type, after the data definition.</li>
+</ul>
+<p>In contracts, we can use atomic data types as well as data definition names (capitalized).</p>
+<p>It is best to define constants for tests and examples to represent structures, in order to shorten the code.</p>
+<h2 id="data-definitions">Data definitions</h2>
+<h3 id="unions">Unions</h3>
+<pre><code>(define-struct movieinfo (name director))
+;; A MovieInfo = (make-movieinfo String String)
+
+(define-struct mp3info (title length))
+;; An Mp3Info = (make-mp3info String Num)
+
+;; THIS IS A UNION TYPE
+;; A MultimediaInfo is one of:
+;; * a MovieInfo
+;; * an Mp3Info
+
+;; THIS IS THE TEMPLATE FOR A FUNCTION THAT CONSUMES THE UNION TYPE
+;; my-multimediainfo-fn: MultimediaInfo -&gt; Any
+(define (my-multimediainfo-fn info)
+    (cond [(movieinfo? info)
+           (... (movieinfo-name info) ...
+            ... (movieinfo-director info) ...)]
+          [(mp3info? info)
+           (... (mp3info-title info) ...
+            ... (mp3info-length info) ...)]))</code></pre>
+<p>Now when we write a function, we use the template as a basis:</p>
+<pre><code>;; multimediainfo-identifier: MultimediaInfo -&gt; String
+;; WE CAN ALSO WRITE THE CONTRACT AS ;; multimediainfo-identifier: (union MovieInfo Mp3Info) -&gt; String
+(define (multimediainfo-identifier info)
+    (cond [(movieinfo? info)
+           (movieinfo-name info)]
+          [(mp3info? info)
+           (mp3info-title info)]))</code></pre>
+<p>In the above code, the union data type <code>MultimediaInfo</code> (also known as <code>(union MovieInfo Mp3Info)</code>) represents either a <code>MovieInfo</code> or an <code>Mp3Info</code>.</p>
+<p>Data definitions do not necessarily need to correspond to any structures in the code:</p>
+<pre><code>;; A Nat is an integer greater than or equal to zero</code></pre>
+<p>Above we defined the natural number, but there is no data type in Scheme that corresponds to this. It is intended for the human readers.</p>
+<h2 id="error-checking">Error Checking</h2>
+<pre><code>(define (safe-make-posn x y)
+    (cond [(and (number? x) (number? y)) (make-posn x y)]
+          [else (error &quot;numerical arguments required&quot;)]))
+
+;; Tests
+(check-expect (safe-make-posn 2 3) (make-posn 2 3))
+(check-error (safe-make-posn 2 &#39;abc) &quot;numerical arguments required&quot;)</code></pre>
+<p>We generally assume inputs are valid unless explicitly required to do error checking.</p>
+<h2 id="lists">Lists</h2>
+<p>A recursive definition defines something in terms of itself.</p>
+<p>A list is a compound data type. It is a recursively defined. They are known as &quot;cons&quot; types.</p>
+<blockquote>
+<p>A list of 5 numbers is a number followed by a list of 4 numbers. A list of 4 numbers is a number followed by a list of 3 numbers. A list of 3 numbers is a number followed by a list of 2 numbers. A list of 2 numbers is a number followed by a list of 1 numbers. A list of 1 numbers is a number followed by a list of 0 numbers. A list of 0 numbers is the base case and handled specially.</p>
+</blockquote>
+<p>Lists in Scheme are similar to singly linked lists.</p>
+<p>We have access only to the first element of a list.</p>
+<h3 id="basic-list-constructs">Basic list constructs</h3>
+<ul>
+<li><code>empty</code> - list of 0 elements.</li>
+<li><code>(cons element rest)</code> (construct) - creates a list with <code>value</code> followed by <code>rest</code>.</li>
+<li><code>(first list)</code> - obtains the first element of non-empty list <code>list</code>.</li>
+<li><code>(rest list)</code> - obtains the (possibly empty) list of all the elements of non-empty list <code>list</code>, excluding the first.</li>
+<li><code>(empty? list)</code> - determines whether list <code>list</code> is empty.</li>
+<li><code>(cons? value)</code> - determines whether value <code>value</code> is a cons type (except for <code>empty</code>).</li>
+<li><code>(member? element list)</code> - determines whether <code>element</code> is contained in <code>list</code>.</li>
+<li><code>(length list)</code> - obtains the number of elements in <code>list</code>.</li>
+</ul>
+<h3 id="list-operations">List operations</h3>
+<pre><code>(cons &#39;a (cons &#39;b (cons &#39;c empty)))</code></pre>
+<p>This is a list of <code>'a</code>, <code>'b</code>, and <code>'c</code>, in that order.</p>
+<p>To append lists, we cannot use <code>(cons list1 list2)</code>. This would simply create a list with the first element being <code>list1</code>, and the rest being <code>list2</code>. For list appending, we can use other built-in functions.</p>
+<h1 id="section-4">3/10/13</h1>
+<p>A list is one of:</p>
+<ul>
+<li><code>empty</code> - the empty list.</li>
+<li><code>(cons element list)</code> - a recursive list definition.</li>
+</ul>
+<h3 id="data-definitions-and-templates">Data Definitions and Templates</h3>
+<p>For each new list type, we need:</p>
+<ul>
+<li><strong>data analysis</strong>: looking at the problem, we need to determine if there is a need for a recursive data type.</li>
+<li><strong>data definition</strong>: describe the recursive data type - what each element is, what the base cases are.</li>
+<li><strong>template</strong>: describe the basic structure of functions that consume this type, after the data definition.</li>
+</ul>
+<p>The template is written right after the data definition. It is based on the data definition and so appears generally as a <code>cond</code> expression with one qeustion/answer pair for each possibility.</p>
+<p>Self-referential data definition clauses lead to recursion in the template, while base cases do not.</p>
+<p>Example of a list of strings:</p>
+<pre><code>;; A ListOfStrings is either
+;; * empty or
+;; * (cons String ListOfStrings)
+
+;; Template for ListOfStrings
+;; my-los-fn: ListOfStrings -&gt; Any
+(define (my-los-fn los)
+    (cond [(empty? los) ...] ; base case
+          [else (... (first los) ...
+                     ... (my-los-fn (rest los) ...))]))</code></pre>
+<p>We can write <code>ListOfStrings</code> (or alternatively, <code>(listof String)</code>) in data definitions. The <code>(listof X)</code> notation is shorter and does not require any other definitions. Here, <code>X</code> represents any type, even a list or structure.</p>
+<p>The implicit template when using <code>(listof X)</code> is as follows:</p>
+<pre><code>;; my-listof-X-fn: (listof X) -&gt; Any
+(define (my-listof-X-fn lst)
+    (cond [(empty? lst) ...]
+          [else (... (first lst)
+                     ... (my-listof-X-fn (rest lst)) ...)]))</code></pre>
+<p>Sometimes we need non-empty lists. A data definition could be written as <code>(ne-listof X)</code>, or using a definition like the following:</p>
+<pre><code>;; A NeListOfStrings is either
+;; * (cons String empty) or
+;; * (cons String NeListOfStrings)
+
+;; Template for NeListOfStrings
+;; my-nelos-fn: NeListOfStrings -&gt; Any
+(define (my-nelos-fn nelos)
+    (cond [(empty? (rest nelos)) ; base case
+           (... (first nelos) ...)]
+          [else (... (first nelos) ...
+                     ... (my-los-fn (rest nelos) ...))]))</code></pre>
+<p>Function that makes an acronym from a list of strings:</p>
+<pre><code>;; make-acronym: ListOfStrings -&gt; String
+;; Purpose: produces an acronym formed by the first letter of each of the elements of `strings`.
+;; Examples:
+(check-expect (make-acronym (cons &quot;Kentucky&quot; (cons &quot;Fried&quot; (cons &quot;Chicken&quot; empty)))) &quot;KFC&quot;)
+
+(define (make-acronym strings)
+    (cond [(empty? strings) &quot;&quot;]
+          [else (string-append (substring (first strings) 0 1)
+                               (make-acronym (rest strings)))]))</code></pre>
+<h2 id="recursion">Recursion</h2>
+<p>Recursive definitions should have a <strong>base case</strong>. This allows the recursion to eventually terminate.</p>
+<p>It should also always be possible to get <strong>closer to the base case</strong> upon each step. It may not have to happen for every call, but it must eventually reach the base case.</p>
+<p>If either of these are not true, it may result in <strong>infinite recursion</strong>, when the function calls itself indefinitely.</p>
+<p><strong>Structural recursion</strong>, as opposed to <strong>generative recursion</strong>, is recursion guided by the data definition - the form of the code matches the form of the data definition.</p>
+<p>In other words, our functions should follow the template closely and work with the first element of the list and recurse only with the rest of the list.</p>
+<p><strong>Pure structural recursion</strong> requires that at every call of the recursive function, all parameters are either unchanged or one step closer to the base case. The parameters should be driving the recursion, while everything else stays unchanged.</p>
+<h2 id="condensed-traces">Condensed Traces</h2>
+<p>A condensed trace is a way of writing traces that skips the excessive detail that would result from a full trace. Here, we skip steps to show only the most important information.</p>
+<p>It is always important to specify whether a trace is condensed or full.</p>
+<p>For example, we might do a condensed trace of a function as follows:</p>
+<pre><code>(make-acronym (cons &quot;Kentucky&quot; (cons &quot;Fried&quot; (cons &quot;Chicken&quot; empty))))
+=&gt; (string-append &quot;K&quot; (make-acronym (cons &quot;Fried&quot; (cons &quot;Chicken&quot; empty))))
+=&gt; (string-append &quot;K&quot; (string-append &quot;F&quot; (make-acronym (cons &quot;Chicken&quot; empty))))
+=&gt; (string-append &quot;K&quot; (string-append &quot;F&quot; (string-append &quot;C&quot; (make-acronym empty))))
+=&gt; (string-append &quot;K&quot; (string-append &quot;F&quot; (string-append &quot;C&quot; &quot;&quot;)))
+=&gt; &quot;KFC&quot;</code></pre>
+<p>This better shows the way the application of the recursive function leads to the application of that function to a smaller list, until the base case is reached.</p>
+<p>There aren't strict rules for condensed traces, since everyone might have a different idea of what is an important step. It is possible to condense more or less depending on whether it makes the trace more clear.</p>
+<h1 id="section-5">8/10/13</h1>
+<p>Strings are used to represent text. In Scheme, strings are actually sequences of characters.</p>
+<pre><code>(string-&gt;list &quot;abc &quot;) -&gt; (cons #\a (cons #\b (cons #\c (cons #\space empty))))
+(list-&gt;string (cons #\a (cons #\b (cons #\c (cons #\space empty))))) -&gt; &quot;abc &quot;</code></pre>
+<p>Characters are denoted by <code>#\a</code>, where <code>a</code> represents the character value - in this case, a lowercase A.</p>
+<pre><code>;; replace-space: String -&gt; String
+;; Purpose: produces a copy of `str` where all spaces are replaced by underscores.
+;; Examples:
+(check-expect (replace-space &quot;&quot;) &quot;&quot;)
+(check-expect (replace-space &quot;CS 135&quot;) &quot;CS_135&quot;)
+
+;; THIS IS A WRAPPER FUNCTION; IT MAINLY CALLS ANOTHER FUNCTION TO DO THE ACTUAL WORK
+(define (replace-space str)
+    (list-&gt;string (replace-space-list (string-&gt;list str))))
+
+;; Tests:
+;; NOT INCLUDED FOR BREVITY
+
+;; replace-space-list: (listof Char) -&gt; (listof Char)
+;; Purpose: produces a copy of `loc` where all #\space is replaced by #\_
+;; Examples:
+(check-expect (replace-space-list empty) &quot;&quot;)
+(check-expect (replace-space (cons #\C (cons #\S (cons #\space (cons #\1 (cons #\3 (cons #\5 empty)))))))
+              (cons #\C (cons #\S (cons #\_ (cons #\1 (cons #\3 (cons #\5 empty)))))))
+
+(define (replace-space-list loc)
+    (cond [(empty? loc) empty]
+          [else (cons (cond [(char=? (first loc) #\space) #\_]
+                            [else #\_])
+                      (replace-space-list (rest loc)))]))
+
+;; Tests:
+;; NOT INCLUDED FOR BREVITY</code></pre>
+<h2 id="nested-templates">Nested Templates</h2>
+<p>Template for a Polygon:</p>
+<pre><code>;; A Polygon is one of:
+;; * empty
+;; * (cons Posn Polygon)
+
+(define (my-polygon-fn poly)
+    (cond [(empty? poly) ...]
+          [else (... (first poly) ...
+                 ... (my-polygon-fn (rest poly)) ...)]))</code></pre>
+<p>However, we know that <code>(first poly)</code> is a Posn. So we should refer to its template:</p>
+<pre><code>(define (my-polygon-fn poly)
+    (cond [(empty? poly) ...]
+          [else (... (my-posn-fn (first poly)) ...
+                 ... (my-polygon-fn (rest poly)) ...)]))
+
+(define (my-posn-fn p)
+    (... (posn-x p) ...
+     ... (posn-y p) ...))</code></pre>
+<p>Alternatively, it is possible to combine the two templates:</p>
+<pre><code>(define (my-polygon-fn poly)
+    (cond [(empty? poly) ...]
+          [else (... (... (posn-x p) ...
+                      ... (posn-y p) ...) ...
+                 ... (my-polygon-fn (rest poly)) ...)]))</code></pre>
+<p>A data definition for Nat:</p>
+<pre><code>;; A Nat is one of:
+;; * 0
+;; * (add1 Nat)
+
+;; NATURAL NUMBERS START AT 0 IN COMPUTER SCIENCE AND LOGIC
+
+;; TEMPLATE FOR NATURAL NUMBERS
+(define (my-nat-fn n)
+    (cond [(&lt;= n 0) ...] ; WE USE &lt;= HERE INSTEAD OF zero? IN ORDER TO CATCH NEGATIVE OR FRACTIONAL INPUTS. THIS IS DEFENSIVE PROGRAMMING
+          [else (... (my-nat-fn (sub1 n)) ...)]))
+;; WE USE THE INVERSE OF THE `add1` FUNCTION TO GET THE NUMBER `x` SUCH THAT `(add1 x)` IS `n`</code></pre>
+<p>A natural number like 5 would therefore be representable as something like <code>(add1 (add1 (add1 (add1 (add1 0)))))</code>. This is similar to the recursive formulation of a list.</p>
+<p>Since in each call we need to get closer to the base case, we need to invert the function, so we use <code>sub1</code> to get closer to the base case.</p>
+<p>This isn't the usual way we'd think of numbers, but writing it in the form of a data definition allows us to make good templates that consume this type of data.</p>
+<p>Countdown example:</p>
+<pre><code>;; countdown-to: Int Int -&gt; (listof Int)
+;; Purpose: produces a list of integers from `start` to `end`
+;; Examples:
+;; NOT INCLUDED FOR BREVITY
+
+(define (countdown-to start end)
+    (cond [(&lt;= start end) (cons end empty)]
+          [else (cons start (countdown-to (sub1 start) end))]))</code></pre>
+<h1 id="section-6">10/10/13</h1>
+<p>We can denote subsets of certain sets using subscript notation:</p>
+<ul>
+<li>Natural numbers: <span class="math">\(\mathbb{Z}_{\ge 0}\)</span></li>
+<li>Negative integers: <span class="math">\(\mathbb{Z}_{&lt; 0}\)</span></li>
+<li>Real numbers greater than 100: <span class="math">\(\mathbb{R}_{&gt; 100}\)</span></li>
+</ul>
+<p>In data definitions, we can represent this as follows:</p>
+<pre><code>;; ascii-&gt;listofchar: Nat[&lt;256] Nat[&lt;256] -&gt; (listof Char)</code></pre>
+<p>Here, <code>Nat[&lt;256]</code> is equivalent to <span class="math">\(\mb{N}_{&lt;256}\)</span>, or natural numbers less than 256. Other possible uses of the square braket notation are <code>Int[&gt;=20]</code>, <code>String[&lt;&quot;abc&quot;]</code>.</p>
+<p>Primality test:</p>
+<pre><code>;; prime?: Nat[&gt;0] -&gt; Boolean
+;; Purpose: produces true if `n` is prime and false otherwise
+;; Examples:
+(check-expect (prime? 1) false)
+(check-expect (prime? 2) true)
+(check-expect (prime? 4) false)
+
+(define (prime? n)
+    (not (or (= n 1)
+             (has-factors? 2 n))))
+
+;; Tests:
+;; OMITTED FOR BREVITY
+
+;; has-factors?: Nat[&gt;1] Nat[&gt;0] -&gt; Boolean
+;; Purpose: produces true if any numbers between `factor` and one less than `n` divide `n`, and false otherwise
+;; Examples:
+;; OMITTED FOR BREVITY
+
+(define (has-factors? factor n)
+    (cond [(&gt;= factor n) #f]
+          [(zero? (remainder n factor)) #t]
+          [else (has-factors? (add1 factor) n)]))
+
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>Consider a basic list sorting function template:</p>
+<pre><code>(define (sort list)
+    (cond [(empty? list) ...]
+          [else (... (first list) ... (sort (rest list)) ...)]))</code></pre>
+<p>Now we need to do something with the first element of the list and the (assumed sorted) rest of the list. What we can do is use <code>insert</code>, a helper function that inserts an element into a list in sorted order:</p>
+<pre><code>(define (sort list)
+    (cond [(empty? list) empty]
+          [else (insert (first list) (sort (rest list)))]))</code></pre>
+<p>We simply need to assume that when we call <code>sort</code>, we will get a sorted list, and that <code>insert</code> will correctly insert the element in sorted order.</p>
+<p>We start with a template for the insertion function:</p>
+<pre><code>(define (insert element list)
+    (cond [(empty? list) ...]
+          [else (... (first list) ... (insert element (rest list)) ...)]))</code></pre>
+<p>We can assume the list is in sorted order since it will only ever be called on the result of <code>sort</code>. So we just need to put it at the beginning if it's already in the proper place, or recurse to put it in the correct place in the rest of the list:</p>
+<pre><code>(define (insert element list)
+    (cond [(empty? list) (cons element empty)]
+          [(&lt;= element (first list)) (cons element list)]
+          [else (cons (first list) (insert element (rest list)))]))</code></pre>
+<p>Together, this forms a sorting function based on the <strong>insertion sort</strong> algorithm.</p>
+<h2 id="list-abbreviations">List Abbreviations</h2>
+<p>Lists can be written in a few ways. All of the following are equivalent:</p>
+<ul>
+<li><code>(cons 3 (cons (cons 'a (cons 'b empty)) (cons &quot;test&quot; empty)))</code></li>
+<li><code>(list 3 (list 'a 'b) &quot;test&quot;)</code></li>
+<li><code>'(3 (a b) &quot;test&quot;)</code> - only available starting in &quot;Beginning Student with List Abbreviations&quot;. In the quoted part, only symbols, numbers, strings, and lists are allowed. No quotes are used inside the outer brackets. <code>'()</code> is the same as <code>empty</code>.</li>
+</ul>
+<p>We use <code>list</code> for lists of fixed size, where the length of the list is known beforehand. We still need <code>cons</code> for constructing a list of variable length.</p>
+<p>In data definitions, we can use notation like <code>(list String Num)</code> to represent a list with the first element being a string, and the second a number.</p>
+<p>We can <strong>simulate structures with lists</strong> - each element could hold a field, and the list itself would be a collection of fields, just like a structure. This could be useful for things like type unions, where instead of writing very similar code for two different types of structures, we simply use lists for both and assume the needed fields are at the same place in both types of lists.</p>
+<p>Beginning Student with List Abbreviations also has extra functions for working with lists:</p>
+<ul>
+<li><code>(second list)</code> is equivalent to <code>(first (rest list))</code>. It obtains the second element of a list.</li>
+<li><code>(third list)</code> is equivalent to <code>(first (rest (rest list)))</code>. It obtains the third element of a lsit.</li>
+<li>...</li>
+<li><code>(eighth list)</code> is equivalent to <code>(first (rest (rest (rest (rest (rest (rest (rest list))))))))</code>. It obtains the eighth element of a list.</li>
+</ul>
+<hr>
+<p>Copyright 2013 Anthony Zhang</p>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>

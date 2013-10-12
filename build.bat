@@ -38,3 +38,12 @@ pushd PHIL110A
 	"--variable=pagetitle:PHIL110A | Anthony Zhang" ^
 PHIL110A.md
 popd
+
+pushd CS135
+%APPDATA%\..\Local\Pandoc\pandoc --output=CS135.html ^
+	--mathjax=%MATHJAX% ^
+	--data-dir=%DATADIR% ^
+	--template=template.html ^
+	"--variable=pagetitle:CS135 | Anthony Zhang" ^
+CS135.md
+popd
