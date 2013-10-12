@@ -12,6 +12,8 @@ I write these during lectures, and then add to them occasionally when mistakes o
 
 They're written in [StackEdit](http://benweet.github.io/stackedit/), an excellent Markdown editor. The source files are written in Markdown with LaTeX for math.
 
+There's a build script that uses [Pandoc](http://johnmacfarlane.net/pandoc/). This is more convenient for building everything at once.
+
 License
 -------
 
