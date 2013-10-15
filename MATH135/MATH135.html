@@ -39,7 +39,7 @@
   }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
-  <script src="http://benweet.github.io/stackedit/lib/MathJax/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
 </head>
 <body>
 <h1 id="math-135">MATH 135</h1>
@@ -53,7 +53,8 @@ Office Hours: Tuesdays 9:00AM-10:00AM , Fridays 1:00PM-2:00PM, in MC 5058
 Tutorials: Tuesdays 4:30PM-7:20PM (Drop-in to Biology 1 Room 271)</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \]</span></p>
 <h1 id="section">9/9/13</h1>
@@ -453,7 +454,8 @@ Which is in fact:
 <h2 id="studying-divisibility">Studying Divisibility</h2>
 <p>Recall that if <span class="math">\(n \in \mb{Z}\)</span> and <span class="math">\(m \in \mb{Z}\)</span>,</p>
 <p><span class="math">\(m \mid n \Leftrightarrow \exists k \in \mb{Z}, n = km\)</span></p>
-<p>Proposition: transitivity of divisibility: for integers <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, <span class="math">\(c\)</span>, if <span class="math">\(a \mid b\)</span> and <span class="math">\(b \mid c\)</span>, then <span class="math">\(a \mid c\)</span>.</p>
+<h3 id="transitivity-of-divisibiilty-td">Transitivity of divisibiilty (TD)</h3>
+<p>Proposition: for integers <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, <span class="math">\(c\)</span>, if <span class="math">\(a \mid b\)</span> and <span class="math">\(b \mid c\)</span>, then <span class="math">\(a \mid c\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
 <p>Let <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, and <span class="math">\(c\)</span> be arbitrary integers.<br />Assume that <span class="math">\(a \mid b\)</span> and <span class="math">\(b \mid c\)</span>.<br />This means <span class="math">\(\exists r \in \mb{Z}, b = ra\)</span> and <span class="math">\(\exists s \in \mb{Z}, c = sb\)</span>.<br />Let <span class="math">\(k = sr\)</span>, so <span class="math">\(k \in \mb{Z}\)</span>.<br />Clearly, <span class="math">\(c = sb = s(ra) = (sr)a = ka\)</span>.<br />So <span class="math">\(\exists k \in \mb{Z}, c = ka\)</span>.<br />Since <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, and <span class="math">\(c\)</span> are arbitrary, this is true for all integers.</p>
@@ -535,15 +537,15 @@ Which is in fact:
 <p>In other words, if a positive integer is a common divisor of <span class="math">\(a\)</span> and <span class="math">\(b\)</span> and is a linear combination of them, then it is the GCD of <span class="math">\(a\)</span> and <span class="math">\(b\)</span>.</p>
 <p>Use GCD-CT to verify <span class="math">\(14 = \gcd(322, 98)\)</span>:</p>
 <blockquote>
-<p>Let <span class="math">\(a = 322\)</span>, <span class="math">\(b = 98\)</span>.<br />Let <span class="math">\(x = -3\)</span>, <span class="math">\(y = 10\)</span>.<br />Let <span class="math">\(d = 14\)</span>.<br />Clearly, <span class="math">\(d &gt; 0, d \mid a, d \mid b\)</span>.<br />Clearly, <span class="math">\(d = ax + by\)</span>.<br />So <span class="math">\(d = \gcd(a, b)\)</span> ;wip: the combination is -3 and 10</p>
+<p>Let <span class="math">\(a = 322\)</span>, <span class="math">\(b = 98\)</span>.<br />Let <span class="math">\(x = -3\)</span>, <span class="math">\(y = 10\)</span>.<br />Let <span class="math">\(d = 14\)</span>.<br />Clearly, <span class="math">\(d &gt; 0, d \mid a, d \mid b\)</span>.<br />Clearly, <span class="math">\(d = ax + by\)</span>.<br />So <span class="math">\(d = \gcd(a, b)\)</span>.</p>
 </blockquote>
 <p>This theorem does not tell us how to find <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, or if they even exist.</p>
 <p>Proof:</p>
 <blockquote>
-<p>Let <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, <span class="math">\(d\)</span> be arbitrary integers.<br />Let <span class="math">\(x\)</span>, <span class="math">\(y\)</span> be arbitrary integers.<br />Let <span class="math">\(d \in \mb{Z}, d &gt; 0, d \mid a \wedge d \mid b, d = ax + by\)</span>.<br />Let <span class="math">\(c \in \mb{Z}\)</span> be an arbitrary common divisor of <span class="math">\(a\)</span> and <span class="math">\(b\)</span>.<br />Then <span class="math">\(c \mid (ax + by)\)</span>, by DIC.<br />So <span class="math">\(c \mid d\)</span>.<br />Since <span class="math">\(d \ne 0\)</span>, <span class="math">\(\abs{c} \le \abs{d}\)</span>, and <span class="math">\(c \le d\)</span>, by BBD.<br />So <span class="math">\(d = \gcd(a, b)\)</span>.</p>
+<p>Let <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, <span class="math">\(d\)</span> be arbitrary integers.<br />Let <span class="math">\(x\)</span>, <span class="math">\(y\)</span> be arbitrary integers.<br />Let <span class="math">\(d \in \mb{Z}, d &gt; 0\)</span>.<br />Assume <span class="math">\(d \mid a \wedge d \mid b, d = ax + by\)</span>.<br />Let <span class="math">\(c \in \mb{Z}\)</span> be an arbitrary common divisor of <span class="math">\(a\)</span> and <span class="math">\(b\)</span>.<br />Then <span class="math">\(c \mid (ax + by)\)</span>, by DIC.<br />So <span class="math">\(c \mid d\)</span>.<br />Since <span class="math">\(d \ne 0\)</span>, <span class="math">\(\abs{c} \le \abs{d}\)</span>, and <span class="math">\(c \le d\)</span>, by BBD.<br />So <span class="math">\(d = \gcd(a, b)\)</span>.</p>
 </blockquote>
 <h3 id="extended-euclidean-algorithm-eea">Extended Euclidean Algorithm (EEA)</h3>
-<p>Proposition: given integers <span class="math">\(a\)</span> and <span class="math">\(b\)</span>, we can compute <span class="math">\(\gcd(a, b)\)</span>, and we can find at least two integers <span class="math">\(x\)</span> and <span class="math">\(y\)</span> such that <span class="math">\(ax + by = \gcd(a, b)\)</span>.</p>
+<p>Proposition: given integers <span class="math">\(a\)</span> and <span class="math">\(b\)</span>, we can compute <span class="math">\(\gcd(a, b)\)</span>, and there exist at least one pair of integers <span class="math">\(x\)</span> and <span class="math">\(y\)</span> such that <span class="math">\(ax + by = \gcd(a, b)\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
 <p>;wip</p>
@@ -580,7 +582,7 @@ Which is in fact:
 \begin{align}
 q_1 &amp;= 0 \\
 q_2 &amp;= 0 \\
-q_n &amp;= \left\lfloor \frac{r_{n - 2}}{r_{n - 1}} \right\rfloor \\
+q_n &amp;= \floor{\frac{r_{n - 2}}{r_{n - 1}}} \\
 r_n &amp;= r_{n - 2} - q_n \cdot r_{n - 1} \\
 x_n &amp;= x_{n - 2} - q_n \cdot x_{n - 1} \\
 y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
@@ -589,16 +591,63 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>We stop when r_n = 0. The value of <span class="math">\(r\)</span> in the row before this is the GCD.</p>
 <p>Note that <span class="math">\(ax_n + by_n = r_n\)</span>. So the last nonzero remainder has corresponding <span class="math">\(x\)</span> and <span class="math">\(y\)</span> values that are coefficients for a linear combination of <span class="math">\(a\)</span> and <span class="math">\(b\)</span> equal to it. In other words, the <span class="math">\(x\)</span> and <span class="math">\(y\)</span> values in that row are a certificate of correctness for the GCD.</p>
 <p>For example, finding <span class="math">\(\gcd(42042, 1071)\)</span>:</p>
-<p>| x | y | r | q | |:--|:--|:------|:--| | 1 | 0 | 42042 | 0 | | 0 | 1 | 1071 | 0 | |---|---|-------|---| | 0 | 1 | 1071 | 0 | ;wip</p>
-<p><span class="math">\[
-\begin{align}
-q_3 &amp;= \floor{\frac{42042}{1071}} = 39
-42042 &amp;= 1071 q_3 + r_3 \text{ } \\
-r_3 &amp;= r_1 - r_2 \cdot q_3 = 42042 - 15 q_3 \\
-x_3 &amp;= x_1 - 1 \cdot x_2 \\
-y_3 &amp;= y_1 - 1 \cdot y_2 \\
-\end{align}
-\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">x</th>
+<th align="left">y</th>
+<th align="left">r</th>
+<th align="left">q</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">42042</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1071</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">-39</td>
+<td align="left">273</td>
+<td align="left">39</td>
+</tr>
+<tr class="odd">
+<td align="left">-3</td>
+<td align="left">118</td>
+<td align="left">252</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">-157</td>
+<td align="left">21</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">0</td>
+<td align="left">12</td>
+</tr>
+</tbody>
+</table>
+<p>We stop here since the remainder is 0. Now we can read the values of <span class="math">\(x\)</span>, <span class="math">\(y\)</span>, and <span class="math">\(r = \gcd(42042, 1071)\)</span> from the next-to-last row.</p>
+<p>Since <span class="math">\(\gcd(a, b) = \gcd(b, a)\)</span>, we can save a few steps by swapping the two if the second value is greater, so the bigger value is always in the first row.</p>
+<p>EEA works with positive inputs only. However, since <span class="math">\(\gcd(a, b) = \gcd(\abs{a}, \abs{b})\)</span>, we can simply make them positive and proceed with the algorithm.</p>
 <h2 id="certificates-of-correctness">Certificates of Correctness</h2>
 <p>If <span class="math">\(P(n)\)</span> is a statement depending on <span class="math">\(n\)</span>, <span class="math">\(a \in \mb{Z}\)</span>, then some data <span class="math">\(D\)</span> and knowledge <span class="math">\(K\)</span> give a <strong>certificate of correctness</strong> of <span class="math">\(P(a)\)</span> if some easy calculations with <span class="math">\(D\)</span> and <span class="math">\(a\)</span> and <span class="math">\(K\)</span> prove <span class="math">\(P(a)\)</span>.</p>
 <p>Example: <span class="math">\(P(529)\)</span>: &quot;529 is a perfect square&quot;</p>
@@ -620,17 +669,13 @@ y_3 &amp;= y_1 - 1 \cdot y_2 \\
 \gcd(42042, 1071) &amp;= \gcd(1071, 273) \\
 1071 &amp;= 3 \cdot 273 + 252 \\
 \gcd(1071, 273) &amp;= \gcd(273, 252) \\
-273 = 1 \cdot 252 + 21 \\
+273 &amp;= 1 \cdot 252 + 21 \\
 \gcd(273, 252) &amp;= \gcd(252, 21) \\
-252 = 12 \cdot 21 + 0 \\
+252 &amp;= 12 \cdot 21 + 0 \\
 \gcd(252, 21) &amp;= \gcd(21, 0) \\
 &amp;= 21 \\
 \end{align}
-\]</span></p>
-</blockquote>
-<p>Using these equations, we can find the linear combination:</p>
-<blockquote>
-<p>Write it as the linear combination of the previous values: <span class="math">\(21 = 273 - 1 \cdot 252\)</span>.<br />Rewrite term: <span class="math">\(21 = 273 - 1 \cdot (1071 - 3 \cdot 273)\)</span>.<br />Expand and simplify: <span class="math">\(21 = 4 \cdot 273 - 1071\)</span>.<br />Rewrite term: <span class="math">\(21 = 4 cdot (42042 - 39 \cdot 1071) - 1071\)</span>.<br />Expand and simplify: <span class="math">\(4 \cdot 42042 - 157 \cdot 1071\)</span>.<br />Clearly, <span class="math">\(x = 4, y = -157\)</span>.</p>
+\]</span><br />Write the last value as a linear combination of the previous values: <span class="math">\(21 = 273 - 1 \cdot 252\)</span>.<br />Rewrite term: <span class="math">\(21 = 273 - 1 \cdot (1071 - 3 \cdot 273)\)</span>.<br />Expand and simplify: <span class="math">\(21 = 4 \cdot 273 - 1071\)</span>.<br />Rewrite term: <span class="math">\(21 = 4 cdot (42042 - 39 \cdot 1071) - 1071\)</span>.<br />Expand and simplify: <span class="math">\(4 \cdot 42042 - 157 \cdot 1071\)</span>.<br />Clearly, <span class="math">\(x = 4, y = -157\)</span>.<br />Clearly, <span class="math">\(4 \cdot 42042 - 157 \cdot 1071 = 21\)</span>, and</p>
 </blockquote>
 <h1 id="section-11">7/10/13</h1>
 <h2 id="summary-1">Summary</h2>

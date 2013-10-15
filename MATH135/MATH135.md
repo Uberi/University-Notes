@@ -14,7 +14,8 @@ Instructor:
 
 $$
 \newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
 $$
 
@@ -606,7 +607,9 @@ Recall that if $n \in \mb{Z}$ and $m \in \mb{Z}$,
 
 $m \mid n \Leftrightarrow \exists k \in \mb{Z}, n = km$
 
-Proposition: transitivity of divisibility: for integers $a$, $b$, $c$, if $a \mid b$ and $b \mid c$, then $a \mid c$.
+### Transitivity of divisibiilty (TD)
+
+Proposition: for integers $a$, $b$, $c$, if $a \mid b$ and $b \mid c$, then $a \mid c$.
 
 Proof:
 
@@ -782,8 +785,7 @@ Use GCD-CT to verify $14 = \gcd(322, 98)$:
 > Let $d = 14$.  
 > Clearly, $d > 0, d \mid a, d \mid b$.  
 > Clearly, $d = ax + by$.  
-> So $d = \gcd(a, b)$
-> ;wip: the combination is -3 and 10
+> So $d = \gcd(a, b)$.  
 
 This theorem does not tell us how to find $x$ and $y$, or if they even exist.
 
@@ -791,7 +793,8 @@ Proof:
 
 > Let $a$, $b$, $d$ be arbitrary integers.  
 > Let $x$, $y$ be arbitrary integers.  
-> Let $d \in \mb{Z}, d > 0, d \mid a \wedge d \mid b, d = ax + by$.  
+> Let $d \in \mb{Z}, d > 0$.  
+> Assume $d \mid a \wedge d \mid b, d = ax + by$.  
 > Let $c \in \mb{Z}$ be an arbitrary common divisor of $a$ and $b$.  
 > Then $c \mid (ax + by)$, by DIC.  
 > So $c \mid d$.  
@@ -800,7 +803,7 @@ Proof:
 
 ### Extended Euclidean Algorithm (EEA)
 
-Proposition: given integers $a$ and $b$, we can compute $\gcd(a, b)$, and we can find at least two integers $x$ and $y$ such that $ax + by = \gcd(a, b)$.
+Proposition: given integers $a$ and $b$, we can compute $\gcd(a, b)$, and there exist at least one pair of integers $x$ and $y$ such that $ax + by = \gcd(a, b)$.
 
 Proof:
 
@@ -823,7 +826,7 @@ $$
 \begin{align}
 q_1 &= 0 \\
 q_2 &= 0 \\
-q_n &= \left\lfloor \frac{r_{n - 2}}{r_{n - 1}} \right\rfloor \\
+q_n &= \floor{\frac{r_{n - 2}}{r_{n - 1}}} \\
 r_n &= r_{n - 2} - q_n \cdot r_{n - 1} \\
 x_n &= x_{n - 2} - q_n \cdot x_{n - 1} \\
 y_n &= x_{n - 2} - q_n \cdot y_{n - 1} \\
@@ -836,23 +839,21 @@ Note that $ax_n + by_n = r_n$. So the last nonzero remainder has corresponding $
 
 For example, finding $\gcd(42042, 1071)$:
 
-| x | y | r     | q |
-|:--|:--|:------|:--|
-| 1 | 0 | 42042 | 0 |
-| 0 | 1 | 1071  | 0 |
-|---|---|-------|---|
-| 0 | 1 | 1071  | 0 |
-;wip
+| x  | y    | r     | q  |
+|:---|:-----|:------|:---|
+|  1 |    0 | 42042 |  0 |
+|  0 |    1 |  1071 |  0 |
+|    |      |       |    |
+|  1 |  -39 |   273 | 39 |
+| -3 |  118 |   252 |  3 |
+|  4 | -157 |    21 |  1 |
+|  - |    - |     0 | 12 |
 
-$$
-\begin{align}
-q_3 &= \floor{\frac{42042}{1071}} = 39
-42042 &= 1071 q_3 + r_3 \text{ } \\
-r_3 &= r_1 - r_2 \cdot q_3 = 42042 - 15 q_3 \\
-x_3 &= x_1 - 1 \cdot x_2 \\
-y_3 &= y_1 - 1 \cdot y_2 \\
-\end{align}
-$$
+We stop here since the remainder is 0. Now we can read the values of $x$, $y$, and $r = \gcd(42042, 1071)$ from the next-to-last row.
+
+Since $\gcd(a, b) = \gcd(b, a)$, we can save a few steps by swapping the two if the second value is greater, so the bigger value is always in the first row.
+
+EEA works with positive inputs only. However, since $\gcd(a, b) = \gcd(\abs{a}, \abs{b})$, we can simply make them positive and proceed with the algorithm.
 
 Certificates of Correctness
 ---------------------------
@@ -890,22 +891,20 @@ Consider $42042x + 1071y = gcd(42042, 1071) = 21$. How do we find $x$ and $y$?
 \gcd(42042, 1071) &= \gcd(1071, 273) \\
 1071 &= 3 \cdot 273 + 252 \\
 \gcd(1071, 273) &= \gcd(273, 252) \\
-273 = 1 \cdot 252 + 21 \\
+273 &= 1 \cdot 252 + 21 \\
 \gcd(273, 252) &= \gcd(252, 21) \\
-252 = 12 \cdot 21 + 0 \\
+252 &= 12 \cdot 21 + 0 \\
 \gcd(252, 21) &= \gcd(21, 0) \\
 &= 21 \\
 \end{align}
-$$
-
-Using these equations, we can find the linear combination:
-
-> Write it as the linear combination of the previous values: $21 = 273 - 1 \cdot 252$.  
+$$  
+> Write the last value as a linear combination of the previous values: $21 = 273 - 1 \cdot 252$.  
 > Rewrite term: $21 = 273 - 1 \cdot (1071 - 3 \cdot 273)$.  
 > Expand and simplify: $21 = 4 \cdot 273 - 1071$.  
 > Rewrite term: $21 = 4 cdot (42042 - 39 \cdot 1071) - 1071$.  
 > Expand and simplify: $4 \cdot 42042 - 157 \cdot 1071$.  
 > Clearly, $x = 4, y = -157$.  
+> Clearly, $4 \cdot 42042 - 157 \cdot 1071 = 21$, and 
 
 # 7/10/13
 

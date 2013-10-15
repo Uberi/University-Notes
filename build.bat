@@ -1,7 +1,7 @@
 @echo off
 
 set DATADIR=%CD%
-set MATHJAX=http://benweet.github.io/stackedit/lib/MathJax/MathJax.js?config=TeX-AMS_HTML
+set MATHJAX=http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML
 
 pushd MATH135
 %APPDATA%\..\Local\Pandoc\pandoc --output=MATH135.html ^
