@@ -340,7 +340,7 @@ Descartes wants to be a realist - to have what he sees in his mind be the same a
 
 This is done through **methodical doubt** - using skepticism to find at least one belief that cannot be doubted. When a belief cannot be doubted, it must be true.
 
-Descartes is a **dualist** - he believes there are two types of substances in the world:
+Descartes is a **mind-body dualist** - he believes there are two types of substances in the world:
 
 * **material** (things with time and space) - "res extensa" - extended in space and time.
 * **immaterial** (souls, minds, ideas) - "res cogitans" - not part of space and time.
@@ -367,7 +367,7 @@ The realist response is that this **breaks the rules of Pirrhonian skepticism** 
 
 The third skeptical attack **doubts whether he is dreaming or awake**. He states that he has previously had dreams that appeared as real as reality while dreaming, and that he cannot be sure whether he is dreaming at this instant.
 
-The realist response is that dreams are **paintings of reality** - there must exist a reality for dreams to reflect. In other words, there must be a world in order to have dreams. Descartes assumes that there are no innate ideas.
+The realist response is that dreams are **paintings of reality** - there must exist a reality for dreams to reflect. In other words, there must be a world in order to have dreams.
 
 Sub-argument counterpoint: to continue the analogy, abstract paintings would not be inspired by reality. In response, the realist response is that there are things like quantity, shape, and color that are also inspired by reality.
 
@@ -441,13 +441,13 @@ Descartes finds that the cogito ergo sum argument is **clear** and **distinct**.
 
 As a result, Descartes looks for other similar ones that also give this feeling, and when he finds them, he knows that they are true.
 
+Descartes thinks there are **innate ideas** that we are born with and can discover via reasoning. To Descartes, **clear and distinct** ideas are innate.
+
 # 10/10/13
 
-;wip: paper due on Oct. 24. Topic: Do you prefer Descartes Rationalist approach, or Locke’s mechanical empirical approach
+;wip: paper due on Oct. 24. Topic: Do you prefer Descartes Rationalist approach, or Locke's mechanical empirical approach
 to understanding the relationship between our ideas and things in the world? What are
-the reasons for your preference?
-
-Formal writing, but personal pronouns allowed. Use size 12 black font and double space. Submit on LEARN in Word document form. Writing style is discretionary. Should be around 3 pages. Cite everything, including material in lectures.
+the reasons for your preference? Formal writing, but personal pronouns allowed. Use size 12 black font and double space. Submit on LEARN in Word document form. Writing style is discretionary. Should be around 3 pages. Cite everything, including material in lectures. Include student number, course, name, instructor, date.
 
 Locke
 -----
@@ -463,19 +463,21 @@ The scientific method emphasizes **evidence**, **hypotheses**, and **experiments
 
 Locke believes the mind starts off as a tabula rasa - a blank slate. Our sense perceptions are the means by which we gain knowledge of the external world.
 
-Locke is an **empiricist** - we know the world through observations and experience. This contrasts with **rationalism**, which states that there are innate ideas and we can know everything though reasoning on that knowledge.
+Locke is an **empiricist** - we know the world through observations and experience, and that our minds start off empty and accumulate knowledge from the world. This contrasts with **rationalism**, which states that there are innate ideas and we can know everything though reasoning on that knowledge.
 
-Locke is a **dualist** - he believes that ideas and minds exist outside of the world, while there is also a world in which things exist. In other words, there are things in the world, and things outside of it. The idea of white or black is one thing, while the texture and material of an object needed to make it appear white or black is another.
+Locke is a **dualist**, but a different type from that of Descartes (there are many types of dualism). Locke thinks there is a difference between a thing in the world, and the idea of that thing - that they are different kinds of things. However, to Locke **ideas are still matter** - specifically, an arrangement or pattern of matter, such as the electrical impulses in the brain.
+
+Dualism is the view that the universe is made of two different kinds of things.
 
 **Sensation** is the process in which an object causes a perception in a mind and brings an idea into the mind. A particular sensation is a perception bringing about an idea.
 
 A dog sees a canteloupe and the idea of a canteloupe appears in its brain.
 
-An **idea** is what a mind perceives in itself. It is whatever is the target of perception, thought, or understanding.
+An **idea** is what a mind perceives in itself - anything appearing inside the mind. It is whatever is the target of perception, thought, or understanding.
 
 As a result, **ideas exist only in the mind**. They are actually the patterns and movements of the particles in the brain.
 
-We infer the existance of a real thing from the idea of it.
+We infer the existence of a real thing from the idea of it.
 
 A dog sees canteloupe and the immediate object of perception is the idea of canteloupe.
 
@@ -493,10 +495,26 @@ There are two types of properties:
   * For example, a canteloupe will **always have a quantity**, no matter how many pieces we cut it.
   * Exist within and resemble the object.
 * **Secondary qualities**
-  * Are the abilities of an object to produce sensations in minds.
+  * Are the abilities/powers of an object to produce sensations in minds.
   * Caused by the interactions of the primary qualities of an object with our senses.
   * These include colors, sounds, and tastes.
-  * For example, an **ability to reflect of light around 450 nm** (primary quality) has the **ability to produce the sensation of blue** (secondary quality).
+  * For example, an object with the **ability to reflect of light around 450 nm** (primary quality) has the **ability to produce the sensation of blue** (secondary quality).
   * Exists only in the mind and may not resemble the object.
 
-The **representational theory of the mind** is that ideas are caused by things in the world, and that ideas resemble these things in the world.
+The **representational theory of the mind** is that ideas resemble things in the world, because they are caused by things in the world.
+
+This allows us to know that ideas caused by primary qualities are correct, while ideas caused by secondary qualities will often resemble those things in the world.
+
+# 15/10/13
+
+Review of the last lecture.
+
+Locke vs. Descartes: each view addresses epistemology in a different way, with a different set of assumptions.
+
+One criticism of Locke would be that the view assumes that the world exists at all, and is not a fabrication of a deceiver.
+
+One criticism of Descartes would be that the view assumes that the mind possesses innate ideas.
+
+Descartes thinks knowledge comes from reason alone. Locke thinks knowledge comes from sensations alone. These are mutually exclusive.
+
+Locke believed there are also **tertiary qualities**. These are basically secondary qualities that apply to other objects instead of minds. For example, a key has the tertiary quality of having the power of opening a lock.

@@ -449,6 +449,7 @@ Tests:
 <p>A template is a general framework within which we fill in to create a program.</p>
 <p>We start by making the template of a function, and then flesh out the template to create the finished function.</p>
 <p>For every form of data, we create a template and use it to write functions that work with that type of data.</p>
+<p>Templates should be <strong>commented out</strong> in Scheme code due to issues with MarkUs.</p>
 <h2 id="structures">Structures</h2>
 <p>Structures are a bundling of several values into one. They are complex values.</p>
 <p>They work only with finite sets of values, and have a fixed size and field count.</p>
@@ -804,6 +805,101 @@ Tests:
 <li>...</li>
 <li><code>(eighth list)</code> is equivalent to <code>(first (rest (rest (rest (rest (rest (rest (rest list))))))))</code>. It obtains the eighth element of a list.</li>
 </ul>
+<h1 id="section-7">15/10/13</h1>
+<h2 id="dictionaries">Dictionaries</h2>
+<p><strong>Dictionaries</strong> are abstract data types (not a primitive type, but a commonly used pattern). They are associations of <strong>keys</strong> with <strong>values</strong>.</p>
+<p>A telephone directory is a dictionary - the names are the key, which we use to look up phone numbers, which are the values.</p>
+<p>Keys must be <strong>unique</strong> in a dictionary - there can be no duplicates. However, values do not need to be unique.</p>
+<p>The most important operations on dictionaries are:</p>
+<ul>
+<li><strong>Lookup</strong> - given a key, produce the value associated with it.</li>
+<li><strong>Add</strong> - add a new key and its associated value.</li>
+<li><strong>Remove</strong> - given a key remove it and the value associated with it.</li>
+</ul>
+<p>The actual implementation of the dictionary is dependent on what we want from it. For example, some implementations might have faster lookup but slower add and remove.</p>
+<h3 id="association-lists">Association Lists</h3>
+<p>This is simply a list of key/value pairs:</p>
+<pre><code>;; An AL is one of:
+* empty
+* (cons (list Num String) AL)
+
+;; Template for AL:
+;; my-al-fn: AL -&gt; Any
+(define (my-al-fn al)
+    (cond [(empty? al) ...]
+          [else (... (first (first al)) ...
+                 ... (second (first al)) ...
+                 ... (my-al-fn (rest al)) ...)]))
+
+;; OR USE (listof (list Num String))</code></pre>
+<p>Now we can implement a few operations on this data type:</p>
+<pre><code>;; al-lookup: AL Num -&gt; (union String false)
+;; Purpose: produces the value associated with `key` in `al` if it exists, and false otherwise
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (al-lookup al key)
+    (cond [(empty? al) false] ; false represents the element not being found
+          [(= key (first (first al))) (second (first al))]
+          [else (al-lookup (rest al) key))]))
+;; Tests:
+;; OMITTED FOR BREVITY
+
+;; al-remove: AL Num -&gt; AL
+;; Purpose: produces an AL equal to `al` without the key `key`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (al-remove al key)
+    (cond [(empty? al) empty]
+          [(= key (first (first al)))
+           (al-remove (rest al) key)]
+          [else (cons (first al) (al-remove (rest al) key))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h2 id="processing-multiple-lists">Processing Multiple Lists</h2>
+<h3 id="processing-one-list">Processing one list</h3>
+<p>Consider an appending function:</p>
+<pre><code>;; my-append: (listof Any) (listof Any) -&gt; (listof Any)
+(define (my-append list1 list2)
+    (cond [(empty? list1) list2]
+          [else (cons (first list1) (my-append (rest list1) list2))]))</code></pre>
+<p>This uses only structural recursion - <code>list2</code> does not change between calls.</p>
+<p>Note that the run time of this function depends on the length of <code>list1</code>. If <code>list1</code> is very large, the function may need a significant amount of time to run.</p>
+<h3 id="processing-in-lockstep">Processing in lockstep</h3>
+<p>If both lists are of the same length, we can assume that the first list will be empty if and only if the second is.</p>
+<p>Consider a dot product function:</p>
+<pre><code>;; dot-product: (listof Num) (listof Num) -&gt; Num
+(define (dot-product vec1 vec2)
+    (cond [(empty? vec1) 0]
+          [else (+ (* (first list1) (first list2))
+                   (dot-product (rest vec1) (rest vec2)))]))</code></pre>
+<h3 id="processing-at-different-rates">Processing at different rates</h3>
+<p>There are four possible cases to consider if the two lists are of differing lengths.</p>
+<ul>
+<li>Both are empty.</li>
+<li>The first is empty, but the second isn't.</li>
+<li>The second is empty, but the first isn't.</li>
+<li>Both are non-empty.</li>
+</ul>
+<p>This is reflected in the template:</p>
+<pre><code>;; my-double-list-fn: (listof Any) (listof Any) -&gt; Any
+(define (my-double-list-fn list1 list2)
+    (cond [(and (empty? list1) (empty? list2)) ...]
+          [(and (empty? list1) (cons? list2)) ...]
+          [(and (cons? list1) (empty? list2)) ...]
+          [else ...]))</code></pre>
+<p>Consider an element count function:</p>
+<pre><code>;; minimum-occurrences?: (listof Any) Any Nat -&gt; Boolean
+;; Purpose: produces true if `value` appears in `list` at least `count` times, and false otherwise
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (minimum-occurrences? list value count)
+    (cond [(&lt;= count 0) true]
+          [(empty? list) false]
+          [(equal? value (first list))
+           (minimum-occurrences? (rest list) (sub1 count))]
+          [else (minimum-occurrences? (rest list) count)]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
