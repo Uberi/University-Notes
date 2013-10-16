@@ -1038,9 +1038,79 @@ Proof:
 > So $\frac{a}{d} x + \frac{b}{d} y = 1$.  
 > By GCD-OO, $\gcd(\frac{a}{d}, \frac{b}{d}) = 1$.  
 
-Linear Diophantine Equations
-----------------------------
+Linear Diophantine Equations (LDE)
+----------------------------------
 
 A linear equation in the style of Diophantus, a Greek mathemetician who invented a theory of the integers.
 
 They are equations having **integer solutions only**.
+
+### 16/10/13
+
+;wip: there's a new assignment coming out today.
+
+A linear Diophantine equation **in two variables** is any equation of the form $ax + by = c$, with $a, b, c \in \mb{Z}$, and we seek $x, y \in \mb{Z}$.
+
+In other words, we seek only integer solutions.
+
+* $2x + 3y = 4$ - solutions include $x = 2, y = 0$ and $x = -1, y = 2$.
+* $6x + 9y = 10$ - no solutions
+
+These equations will have either infinitely many solutions, or no solutions.
+
+## Linear Diophantine equation theorem, part 1 (LDET 1)
+
+Proposition: given integers $a, b, c \in \mb{Z}$, $d = \gcd(a, b)$, the linear Diophantine equation $ax + by = c$ has solutions fi and only if $d \mid c$.
+
+Proof:
+
+> We want to show that $ax + by = c$ having solutions in $\mb{Z}$ $\Leftrightarrow$ $d \mid c$.  
+> First we will prove that $ax + by = c$ having solutions in $\mb{Z}$ $\implies$ $d \mid c$.  
+> Assume $ax + by = c$ has solutions in $\mb{Z}$.  
+> So $\exists x, y \in \mb{Z}, ax + by = c$ (the $x$ and $y$ here are no longer variables, and are specific integers).  
+> We know that $d = \gcd(a, b)$.  
+> So $d \mid a$ and $d \mid b$.  
+> By DIC, $d \mid (au + bv), u, v \in \mb{Z}$.  
+> So $d \mid (ax + by)$, and so $d \mid c$.  
+> Now we will prove the converse, that $d \mid c$ $\implies$ $ax + by = c$ has solutions in $\mb{Z}$.  
+> Assume $d \mid c$.  
+> So $\exists k \in \mb{Z}, c = kd$.  
+> By EEA, $\exists x, y \in \mb{Z}, d = ax + by$.  
+> So $kd = a(kx) + b(ky) = c$.  
+> So $kx$ and $ky$ are integer solutions to the equation.  
+> So the equation must have solutions in $\mb{Z}$.  
+> Since the implication and its converse are true, $ax + by = c$ having solutions in $\mb{Z}$ $\Leftrightarrow$ $d \mid c$.  
+
+The proof in the backwards direction shows us how to find at least one solution to the equation.
+
+Find one solution to the LDE $21x + 15y = 12$:
+
+> Clearly, $a = 21, b = 15, c = 12, d = \gcd(21, 15) = 3$.  
+> Since $d \mid c$, there are solutions to the equation.  
+> Using EEA, we find that $d = -2a + 3b$.  
+> We know that $c = kd, k \in \mb{Z}$.  
+> Specifically, $12 = 4 \cdot 3$, so $k = 4$.  
+> Clearly, ($k)d = -2ka + (3k)b = c$.  
+> So $12 = (-2 \cdot 4) a + (3 \cdot 4) b = -8a + 12b$.  
+> So $x = -8, y = 12$ is a solution to the LDE.  
+
+### Linear Diophantine equation theorem, part 2 (LDET 2)
+
+Proposition: given integers $a, b, c$, $ab \ne 0$, $d = \gcd(a, b)$, if the LDE $ax + by = c$ and $x_0, y_0$ is one particular integer solution, then the **complete integer solution** is $x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k, k \in \m{Z}$.
+
+So the solutions to an LDE, if they exist, are integer multiples of $\frac{b}{\gcd(a, b)}, -\frac{a}{\gcd(a, b)}$ at an offset of given solutions $x_0, y_0$.
+
+> We will fix one particular solution as $x_0, y_0$.  
+> Let $S$ be $\set{(x, y) \middle| ax + by = c}$.  
+> Let $T$ be $\set{(x, y) \middle| x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k, k \in \m{Z}}$.  
+> We want to prove $S = T$, so we will prove $S \subseteq T$ and $T \subseteq S$.  
+> First we will prove $S \subseteq T$.  
+> ;wip
+> Now we will prove $T \subseteq S$.  
+> Let $(x, y)$ be an arbitrary element of $T$.  
+> So $\exists k \in \m{Z}, x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k$.  
+> We know that $ax_0 + bx_0 = c$ is given.  
+> Clearly, $ax + by = a \left(x_0 + \frac{b}{d} k \right) + b \left(y_0 - \frac{a}{d} k \right)$.  
+> Clearly, $ax + by = ax_0 + \frac{ab}{d} k + by_0 - \frac{ba}{d} k = ax_0 + by_0 = c$.  
+> Since $ax + by = c$, $(x, y) \in S$.  
+> Since $(x, y)$ is arbitrary, $T \subseteq S$.  
