@@ -496,7 +496,7 @@ H(x) = \begin{cases}
 <h2 id="squeeze-theorem">Squeeze Theorem</h2>
 <p>If <span class="math">\(f(x) \le g(x) \le h(x)\)</span> for all <span class="math">\(x\)</span> in an interval containing <span class="math">\(a\)</span> (except possibly at <span class="math">\(a\)</span>), and <span class="math">\(\lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L\)</span>, then <span class="math">\(\lim_{x \to a} g(x) = L\)</span>.</p>
 <p>;wip: prove it with a technique similar to the sum law (answer is also in textbook)</p>
-<p>This is usually used on bounded functions like sine or cosine.</p>
+<p>This also works for one-sided limits. It is usually used on bounded functions like sine or cosine.</p>
 <p>Consider <span class="math">\(\lim_{x \to 0} x \sin\left(\frac{1}{x}\right)\)</span>. <span class="math">\(\lim_{x \to 0} \sin\left(\frac{1}{x}\right)\)</span> does not exist, but we know that <span class="math">\(\sin\left(\frac{1}{x}\right)\)</span> is bounded: <span class="math">\(-1 \le \sin\left(\frac{1}{x}\right) \le 1\)</span>.</p>
 <p>So <span class="math">\(-x \le x \sin\left(\frac{1}{x}\right) \le x\)</span>. Since <span class="math">\(\lim_{x \to 0} (-x)\)</span> and <span class="math">\(\lim_{x \to 0} x = 0\)</span>, then by the squeeze theorem, <span class="math">\(\lim_{x \to 0} x \sin\left(\frac{1}{x}\right) = 0\)</span>.</p>
 <h2 id="one-sided-limits">One sided limits</h2>
@@ -753,10 +753,34 @@ f&#39;(x) &amp;= \lim_{h \to 0} \frac{a^{x + h} - a^x}{h} \\
 </blockquote>
 <h3 id="quotient-rule">Quotient rule</h3>
 <p>If <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span> are differentiable at <span class="math">\(x\)</span> and <span class="math">\(g(x) \ne 0\)</span>, then <span class="math">\(\frac{\dee}{\dee x} \frac{f(x)}{g(x)}\)</span> is defined at <span class="math">\(x\)</span> and <span class="math">\(\frac{\dee}{\dee x} \frac{f(x)}{g(x)} = \frac{f&#39;(x) g(x) - f(x) g&#39;(x)}{g(x)^2}\)</span></p>
-<p>;wip: prove it</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee}{\dee x} \frac{f(x)}{g(x)} &amp;= \frac{\dee}{\dee x} (f(x) g(x)^{-1}) \\
+&amp;= f&#39;(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
+&amp;= f&#39;(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
+&amp;= f&#39;(x) g(x)^{-1} + f(x) \frac{-g&#39;(x)}{g(x)^2} \\
+&amp;= \frac{f&#39;(x) g(x) - f(x) g&#39;(x)}{g(x)^2} \\
+\end{align}
+\]</span></p>
+</blockquote>
 <p>The function <span class="math">\(f(x) = \frac{x}{1 + x^2}\)</span> is known as a serpentine curve. Find the equations of the tangents where they have a slope of <span class="math">\(\frac{1}{8}\)</span>:</p>
 <blockquote>
-<p>;wip</p>
+<p><span class="math">\[
+\begin{align}
+f&#39;(x) = \frac{1}{8} &amp;= \frac{1 + x^2 - 2x^2}{(1 + x^2)^2} \\
+\frac{1}{8} &amp;= \frac{1 - x^2}{(1 + x^2)^2} \\
+(1 + x^2)^2 &amp;= 8 - 8x^2 \\
+x^4 + 10x^2 - 7 &amp;= 0 \\
+x^2 &amp;= \frac{-10 \pm \sqrt{100 + 4 \cdot 1 \cdot 7}}{2} \\
+x &amp;= \pm \sqrt{-5 \pm \sqrt{\frac{128}{4}}} \\
+x &amp;= \pm \sqrt{4 \sqrt{2} - 5} \\
+t_1(-\sqrt{4 \sqrt{2} - 5}) = f(-\sqrt{4 \sqrt{2} - 5}) &amp;= \frac{1}{8} \sqrt{4 \sqrt{2} - 5} + b \\
+t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{\sqrt{4 \sqrt{2} - 5}}{4 \sqrt{2} - 4} &amp;= \frac{1}{8} \sqrt{4 \sqrt{2} - 5} + b \\
+t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sqrt{2} - 1)} - \frac{\sqrt{(\sqrt{2} - 1)(4 \sqrt{2} - 5)}}{8(\sqrt{2} - 1)} &amp;= b \\
+\end{align}
+\]</span></p>
 </blockquote>
 <h2 id="higher-order-derivatives">Higher order derivatives</h2>
 <p>The second order derivative of <span class="math">\(f(x)\)</span> is <span class="math">\(\frac{\dee^2}{\dee x^2} f(x) = \frac{\dee}{\dee x} \left( \frac{\dee}{\dee x} f(x) \right) = f&#39;&#39;(x)\)</span>.</p>
@@ -765,11 +789,124 @@ f&#39;(x) &amp;= \lim_{h \to 0} \frac{a^{x + h} - a^x}{h} \\
 <p>Consider <span class="math">\(\frac{\dee}{\dee x}\)</span> as an operator.</p>
 <p>Find <span class="math">\(\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2}\)</span>:</p>
 <blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2} &amp;= \frac{\dee}{\dee x} \frac{\dee}{\dee x} \frac{x}{1 + x^2} \\
+&amp;= \frac{\dee}{\dee x} \frac{1 + x^2 - 2x^2}{(x^2 + 1)^2} \\
+&amp;= \frac{\dee}{\dee x} \frac{1 - x^2}{(x^2 + 1)^2} \\
+&amp;= \frac{-2x(x^2 + 1)^2 - (1 - x^2)(4x^3 + 4x)}{(x^2 + 1)^4} \\
+&amp;= \frac{-2x(x^2 + 1)^2 - (1 - x^2)(4x^3 + 4x)}{(x^2 + 1)^4} \\
+&amp;= \frac{-2x(x^2 + 1)^2 - 4x(1 - x^2)(x^2 + 1)}{(x^2 + 1)^4} \\
+&amp;= \frac{-2x(x^2 + 1) - 4x(1 - x^2)}{(x^2 + 1)^3} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h1 id="section-14">16/10/13</h1>
+<h2 id="derivatives-of-trigonometric-and-hyperbolic-functions">Derivatives of Trigonometric and Hyperbolic Functions</h2>
+<p>Consider <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x} = 1\)</span></p>
+<p>;wip: big ugly geometric proof, maybe find something better here: http://www.proofwiki.org/wiki/Limit_of_Sine_of_X_over_X</p>
+<h3 id="sine-rule">Sine rule</h3>
+<p><span class="math">\(\frac{\dee}{\dee x} \sin(x) = \cos(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee}{\dee x} \sin(x) &amp;= \lim_{h \to 0} \frac{\sin(x + h) - \sin(x)}{h} \\
+&amp;= \lim_{h \to 0} \frac{\sin(x) \cos(h) + \sin(h) \cos(x) - \sin(x)}{h} \\
+&amp;= \sin(x) \lim_{h \to 0} \frac{\cos(x) - 1}{h} + \cos(x) \lim_{h \to 0} \frac{\sin(h)}{h} \\
+&amp;= \sin(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} + \cos(x) \cdot 1 \\
+\lim_{h \to 0} \frac{\cos(h) - 1}{h} &amp;= \lim_{h \to 0} \frac{\cos(h) - 1}{h} \cdot \frac{\cos(h) + 1}{\cos(h) + 1} \\
+&amp;= \lim_{h \to 0} \frac{\cos^2(h) - 1}{h(\cos(h) + 1)} \\
+&amp;= \frac{1}{\cos(x) + 1} \lim_{h \to 0} \frac{(1 - \sin^2(h)) - 1}{h} \\
+&amp;= \lim_{h \to 0} \frac{(-\sin^2(h)}{h} \\
+&amp;= -\lim_{h \to 0} \sin(h) \cdot \lim_{h \to 0} \frac{(\sin(h)}{h} \\
+&amp;= -0 \cdot 1 = 0 \\
+\frac{\dee}{\dee x} \sin(x) &amp;= \sin(x) \cdot 0 + \cos(x) \cdot 1 \\
+&amp;= \cos(x) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="cosine-rule">Cosine rule</h3>
+<p><span class="math">\(\frac{\dee}{\dee x} \cos(x) = -\sin(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee}{\dee x} \cos(x) &amp;= \lim_{h \to 0} \frac{\cos(x + h) - \cos(x)}{h} \\
+&amp;= \lim_{h \to 0} \frac{\cos(x) \cos(h) - \sin(h) \sin(x) - \cos(x)}{h} \\
+&amp;= \cos(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} - \sin(x) \lim_{h \to 0} \frac{\sin(h)}{h} \\
+&amp;= \cos(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} - \sin(x) \cdot 1 \\
+\lim_{h \to 0} \frac{\cos(h) - 1}{h} &amp;= 0 \text{, from the proof of the sine rule} \\
+\frac{\dee}{\dee x} \sin(x) &amp;= \cos(x) \cdot 0 - \sin(x) \cdot 1 \\
+&amp;= -\sin(x) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="tangent-rule">Tangent rule</h3>
+<p><span class="math">\(\frac{\dee}{\dee x} \tan(x) = \sec(x)^2\)</span></p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee}{\dee x} \tan(x) &amp;= \frac{\dee}{\dee x} \frac{\sin(x)}{\cos(x)} \\
+&amp;= \frac{\cos(x) \frac{\dee}{\dee x} \sin(x) - \sin(x) \frac{\dee}{\dee x} \cos(x)}{\cos(x)^2} \\
+&amp;= \frac{\cos(x)^2 + \sin(x)^2}{\cos(x)^2} \\
+&amp;= \frac{1}{\cos(x)^2} \\
+&amp;= \sec(x)^2 \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="hyperbolic-sine-rule">Hyperbolic sine rule</h3>
+<p><span class="math">\(\frac{\dee}{\dee x} \sinh(x) = \cosh(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee}{\dee x} \sinh(x) &amp;= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
+&amp;= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
+&amp;= \frac{1}{2} \left( e^x - \frac{-1}{e^x} \right) \\
+&amp;= \frac{e^x + e^{-x}}{2} = \cosh(x) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="hyperbolic-cosine-rule">Hyperbolic cosine rule</h3>
+<p><span class="math">\(\frac{\dee}{\dee x} \cosh(x) = \sinh(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee}{\dee x} \cosh(x) &amp;= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
+&amp;= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
+&amp;= \frac{1}{2} \left( e^x + \frac{-1}{e^x} \right) \\
+&amp;= \frac{e^x - e^{-x}}{2} = \sinh(x) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="hyperbolic-tangent-rule">Hyperbolic tangent rule</h3>
+<p><span class="math">\(\frac{\dee}{\dee x} \tanh(x) = \sech(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee}{\dee x} \tanh(x) &amp;= \frac{\dee}{\dee x} \frac{\sinh(x)}{\cosh(x)} \\
+&amp;= \frac{\cosh(x) \frac{\dee}{\dee x} \sinh(x) - \sinh(x) \frac{\dee}{\dee x} \cosh(x)}{\cosh(x)^2} \\
+&amp;= \frac{\cosh(x)^2 - \sinh(x)^2}{\cosh(x)^2} \\
+&amp;= \frac{1}{\cosh(x)^2} = \sech(x)^2 \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Alternatively, we cab prove it from the definition and derivative rules.</p>
+<h2 id="chain-rule">Chain Rule</h2>
+<p><span class="math">\(f&#39;(x) = g&#39;(h(x)) h&#39;(x) = \frac{\dee g \circ h}{\dee x} = \frac{\dee g}{\dee h} \frac{\dee h}{\dee x}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
 <p>;wip</p>
 </blockquote>
-<p>Show that <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x} = 1\)</span>:</p>
+<p>Simplify <span class="math">\(\frac{\dee}{\dee x} \cos(3x)\)</span>:</p>
 <blockquote>
-<p>;wip: use squeeze theorem</p>
+<p><span class="math">\[
+\frac{\dee}{\dee x} \cos(3x) = -\sin(3x) \frac{\dee}{\dee x} 3x = -3 \sin(3x)
+\]</span></p>
 </blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>

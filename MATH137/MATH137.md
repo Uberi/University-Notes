@@ -642,7 +642,7 @@ If $f(x) \le g(x) \le h(x)$ for all $x$ in an interval containing $a$ (except po
 
 ;wip: prove it with a technique similar to the sum law (answer is also in textbook)
 
-This is usually used on bounded functions like sine or cosine.
+This also works for one-sided limits. It is usually used on bounded functions like sine or cosine.
 
 Consider $\lim_{x \to 0} x \sin\left(\frac{1}{x}\right)$. $\lim_{x \to 0} \sin\left(\frac{1}{x}\right)$ does not exist, but we know that $\sin\left(\frac{1}{x}\right)$ is bounded: $-1 \le \sin\left(\frac{1}{x}\right) \le 1$.
 
@@ -1025,11 +1025,34 @@ $$
 
 If $f(x)$ and $g(x)$ are differentiable at $x$ and $g(x) \ne 0$, then $\frac{\dee}{\dee x} \frac{f(x)}{g(x)}$ is defined at $x$ and $\frac{\dee}{\dee x} \frac{f(x)}{g(x)} = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}$
 
-;wip: prove it
+Proof:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} \frac{f(x)}{g(x)} &= \frac{\dee}{\dee x} (f(x) g(x)^{-1}) \\
+&= f'(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
+&= f'(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
+&= f'(x) g(x)^{-1} + f(x) \frac{-g'(x)}{g(x)^2} \\
+&= \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2} \\
+\end{align}
+$$
 
 The function $f(x) = \frac{x}{1 + x^2}$ is known as a serpentine curve. Find the equations of the tangents where they have a slope of $\frac{1}{8}$:
 
-> ;wip
+> $$
+\begin{align}
+f'(x) = \frac{1}{8} &= \frac{1 + x^2 - 2x^2}{(1 + x^2)^2} \\
+\frac{1}{8} &= \frac{1 - x^2}{(1 + x^2)^2} \\
+(1 + x^2)^2 &= 8 - 8x^2 \\
+x^4 + 10x^2 - 7 &= 0 \\
+x^2 &= \frac{-10 \pm \sqrt{100 + 4 \cdot 1 \cdot 7}}{2} \\
+x &= \pm \sqrt{-5 \pm \sqrt{\frac{128}{4}}} \\
+x &= \pm \sqrt{4 \sqrt{2} - 5} \\
+t_1(-\sqrt{4 \sqrt{2} - 5}) = f(-\sqrt{4 \sqrt{2} - 5}) &= \frac{1}{8} \sqrt{4 \sqrt{2} - 5} + b \\
+t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{\sqrt{4 \sqrt{2} - 5}}{4 \sqrt{2} - 4} &= \frac{1}{8} \sqrt{4 \sqrt{2} - 5} + b \\
+t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sqrt{2} - 1)} - \frac{\sqrt{(\sqrt{2} - 1)(4 \sqrt{2} - 5)}}{8(\sqrt{2} - 1)} &= b \\
+\end{align}
+$$
 
 Higher order derivatives
 ------------------------
@@ -1044,8 +1067,142 @@ Consider $\frac{\dee}{\dee x}$ as an operator.
 
 Find $\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2}$:
 
+> $$
+\begin{align}
+\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2} &= \frac{\dee}{\dee x} \frac{\dee}{\dee x} \frac{x}{1 + x^2} \\
+&= \frac{\dee}{\dee x} \frac{1 + x^2 - 2x^2}{(x^2 + 1)^2} \\
+&= \frac{\dee}{\dee x} \frac{1 - x^2}{(x^2 + 1)^2} \\
+&= \frac{-2x(x^2 + 1)^2 - (1 - x^2)(4x^3 + 4x)}{(x^2 + 1)^4} \\
+&= \frac{-2x(x^2 + 1)^2 - (1 - x^2)(4x^3 + 4x)}{(x^2 + 1)^4} \\
+&= \frac{-2x(x^2 + 1)^2 - 4x(1 - x^2)(x^2 + 1)}{(x^2 + 1)^4} \\
+&= \frac{-2x(x^2 + 1) - 4x(1 - x^2)}{(x^2 + 1)^3} \\
+\end{align}
+$$
+
+# 16/10/13
+
+Derivatives of Trigonometric and Hyperbolic Functions
+-----------------------------------------------------
+
+Consider $\lim_{x \to 0} \frac{\sin x}{x} = 1$
+
+;wip: big ugly geometric proof, maybe find something better here: http://www.proofwiki.org/wiki/Limit_of_Sine_of_X_over_X
+
+### Sine rule
+
+$\frac{\dee}{\dee x} \sin(x) = \cos(x)$.
+
+Proof:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} \sin(x) &= \lim_{h \to 0} \frac{\sin(x + h) - \sin(x)}{h} \\
+&= \lim_{h \to 0} \frac{\sin(x) \cos(h) + \sin(h) \cos(x) - \sin(x)}{h} \\
+&= \sin(x) \lim_{h \to 0} \frac{\cos(x) - 1}{h} + \cos(x) \lim_{h \to 0} \frac{\sin(h)}{h} \\
+&= \sin(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} + \cos(x) \cdot 1 \\
+\lim_{h \to 0} \frac{\cos(h) - 1}{h} &= \lim_{h \to 0} \frac{\cos(h) - 1}{h} \cdot \frac{\cos(h) + 1}{\cos(h) + 1} \\
+&= \lim_{h \to 0} \frac{\cos^2(h) - 1}{h(\cos(h) + 1)} \\
+&= \frac{1}{\cos(x) + 1} \lim_{h \to 0} \frac{(1 - \sin^2(h)) - 1}{h} \\
+&= \lim_{h \to 0} \frac{(-\sin^2(h)}{h} \\
+&= -\lim_{h \to 0} \sin(h) \cdot \lim_{h \to 0} \frac{(\sin(h)}{h} \\
+&= -0 \cdot 1 = 0 \\
+\frac{\dee}{\dee x} \sin(x) &= \sin(x) \cdot 0 + \cos(x) \cdot 1 \\
+&= \cos(x) \\
+\end{align}
+$$
+
+### Cosine rule
+
+$\frac{\dee}{\dee x} \cos(x) = -\sin(x)$.
+
+Proof:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} \cos(x) &= \lim_{h \to 0} \frac{\cos(x + h) - \cos(x)}{h} \\
+&= \lim_{h \to 0} \frac{\cos(x) \cos(h) - \sin(h) \sin(x) - \cos(x)}{h} \\
+&= \cos(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} - \sin(x) \lim_{h \to 0} \frac{\sin(h)}{h} \\
+&= \cos(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} - \sin(x) \cdot 1 \\
+\lim_{h \to 0} \frac{\cos(h) - 1}{h} &= 0 \text{, from the proof of the sine rule} \\
+\frac{\dee}{\dee x} \sin(x) &= \cos(x) \cdot 0 - \sin(x) \cdot 1 \\
+&= -\sin(x) \\
+\end{align}
+$$
+
+### Tangent rule
+
+$\frac{\dee}{\dee x} \tan(x) = \sec(x)^2$
+
+Proof:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} \tan(x) &= \frac{\dee}{\dee x} \frac{\sin(x)}{\cos(x)} \\
+&= \frac{\cos(x) \frac{\dee}{\dee x} \sin(x) - \sin(x) \frac{\dee}{\dee x} \cos(x)}{\cos(x)^2} \\
+&= \frac{\cos(x)^2 + \sin(x)^2}{\cos(x)^2} \\
+&= \frac{1}{\cos(x)^2} \\
+&= \sec(x)^2 \\
+\end{align}
+$$
+
+### Hyperbolic sine rule
+
+$\frac{\dee}{\dee x} \sinh(x) = \cosh(x)$.
+
+Proof:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} \sinh(x) &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
+&= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
+&= \frac{1}{2} \left( e^x - \frac{-1}{e^x} \right) \\
+&= \frac{e^x + e^{-x}}{2} = \cosh(x) \\
+\end{align}
+$$
+
+### Hyperbolic cosine rule
+
+$\frac{\dee}{\dee x} \cosh(x) = \sinh(x)$.
+
+Proof:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} \cosh(x) &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
+&= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
+&= \frac{1}{2} \left( e^x + \frac{-1}{e^x} \right) \\
+&= \frac{e^x - e^{-x}}{2} = \sinh(x) \\
+\end{align}
+$$
+
+### Hyperbolic tangent rule
+
+$\frac{\dee}{\dee x} \tanh(x) = \sech(x)$.
+
+Proof:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} \tanh(x) &= \frac{\dee}{\dee x} \frac{\sinh(x)}{\cosh(x)} \\
+&= \frac{\cosh(x) \frac{\dee}{\dee x} \sinh(x) - \sinh(x) \frac{\dee}{\dee x} \cosh(x)}{\cosh(x)^2} \\
+&= \frac{\cosh(x)^2 - \sinh(x)^2}{\cosh(x)^2} \\
+&= \frac{1}{\cosh(x)^2} = \sech(x)^2 \\
+\end{align}
+$$
+
+Alternatively, we cab prove it from the definition and derivative rules.
+
+Chain Rule
+----------
+
+$f'(x) = g'(h(x)) h'(x) = \frac{\dee g \circ h}{\dee x} = \frac{\dee g}{\dee h} \frac{\dee h}{\dee x}$.
+
+Proof:
+
 > ;wip
 
-Show that $\lim_{x \to 0} \frac{\sin x}{x} = 1$:
+Simplify $\frac{\dee}{\dee x} \cos(3x)$:
 
-> ;wip: use squeeze theorem
+> $$
+\frac{\dee}{\dee x} \cos(3x) = -\sin(3x) \frac{\dee}{\dee x} 3x = -3 \sin(3x)
+$$
