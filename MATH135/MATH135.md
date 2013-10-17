@@ -1047,8 +1047,6 @@ They are equations having **integer solutions only**.
 
 ### 16/10/13
 
-;wip: there's a new assignment coming out today.
-
 A linear Diophantine equation **in two variables** is any equation of the form $ax + by = c$, with $a, b, c \in \mb{Z}$, and we seek $x, y \in \mb{Z}$.
 
 In other words, we seek only integer solutions.

@@ -16,7 +16,7 @@ $$
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\dee}{\mathrm{d}\!}
+\newcommand{\dee}{\operatorname{d}}
 $$
 
 # 9/9/13
