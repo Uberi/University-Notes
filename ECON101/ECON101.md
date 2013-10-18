@@ -75,6 +75,8 @@ Entrepreneurship earns **profit**.
 
 It is helpful and reasonably accurate to assume that people make choices in their own self-interest - choices that people believe are best for them.
 
+However, this does not always hold - people can often be irrational or act in a way contrary to self interest, due to psychological factors such as mental capacity and willpower.
+
 The goal is to have everyone make choices in the **social interest** - choices that are best for society as a whole. This is the case if it uses resources efficiently and distributes goods and services fairly.
 
 Adam Smith's "Invisible Hand": phenomenon in which economic agents acting purely out of self-interest also promote social interest:
@@ -128,8 +130,6 @@ Rational people make choices **at the margin**; they look at the consequences of
 The benefit from incremental increase is the **marginal benefit**.
 
 The **marginal benefit curve** measures the marginal benefit as units of a good or service available changes. It measures the most people are willing to pay for one more unit of a good or service, and is not derivable from the PPF.
-
-Marginal benefit decreases as more of a good or service becomes available. For example, water is priced lower than diamonds because water is abundant, and obtaining some water would only have a minor benefit - as opposed to diamonds, where obtaining one has a large benefit.
 
 The opportunity cost from an incremental increase (benefit of not pursuing the increase) is the **marginal cost**.
 
@@ -448,11 +448,11 @@ Elasticity is not the same thing as the slope of the demand curve. It measures p
              Price vs. Quantity
     v 3.00
       |                                        
-      | ***               Inelastic            
-    P |    *****         ___________           
-    r |         ****    v           v          
+      | ***                                    
+    P |    *****          Inelastic            
+    r |         ****    v-----------v          
     i |             *****                      
-    c | ^___________^ ^  ****                  
+    c | ^-----------^ ^  ****                  
     e |    Elastic    |      *****             
       |         Unit Elastic      ***
       |________________________________________
@@ -793,9 +793,9 @@ Taxes are usually put on goods and services with inelastic supply or demand. Gas
       |    Quantity with tax                   
       | ***|                    ....           
     P |####*****           .....               
-    r |    |    ****   ....                    
-    i |    |       ...X**                      # represents surplus
-    c |    |   ....   ^  ****                  
+    r |$$$$|$$$$****   ....                    
+    i |$$$$|$$$$$$$...X**                      # represents surplus with tax
+    c |$$$$|$$$....   ^  ****                  $ represents difference in surplus from without tax
     e |###.....       |      *****             
       |... |    Equilibrium       ***
       |________________________________________
@@ -817,3 +817,83 @@ They shift the supply curve down and the demand curve up.
 Quotas restrict the quantity that can be sold, generally an upper limit.
 
 For example, fishing licenses limit how much fish can be sold in order to prevent overfishing. This increases the price paid by the consumer.
+
+# 17/10/13
+
+Utility and Demand
+------------------
+
+Choices made by consumers can be categorized into **consumption possiblities** and **preferences**.
+
+### Utility
+
+**Utility** is the satisfaction or benefit obtained by consuming a good or service. We can give it an imaginary unit to quantify and measure it. This is like temperature, which is also an abstract concept we measure with arbitrary units.
+
+For example, the first sip of a drink might give 50 utility units, the second 80 utility units, and the twentieth 30 utility units.
+
+**Total utility** is the total benefit obtained by consuming a good or service. In general, **total utility is correlated with quantity consumed**.
+
+**Marginal** means "change in".
+
+**Marginal utility** is the change in total utility caused by consuming one more unit of a good or service. In other words, it is the benefit received from consuming one more unit of a good or service.
+
+The **principle of diminishing marginal utility** states that **as quantity consumed increases, the marginal utility decreases**.
+
+**Marginal utility per dollar of a good or service** is the marginal utility from **spending one more dollar** on the good or service. It is equivalent to the marginal utility of a good ($\mathrm{MU}$) divided by its price ($P$).
+
+### Consumption possibilities
+
+This measures everything that is possible for a consumer to consume, given constraints such as time and money. We can represent it using something similar to the PPF - we call this the **budget line**.
+
+The budget line shows various combinations that income can be spent on two particular goods or services, everything else remaining the same.
+
+       Monthly Cola vs. Pizza Consumption
+    v 30
+      |                                   
+      |             Unaffordable          
+      |####                               
+    C |#########                          
+    o |############                       
+    l |################                   
+    a |#####################              
+      |##### Affordable ########          
+      |############################       
+      |##############################     
+      |___________________________________
+    0               Pizza                ^ 15
+
+When the spending takes place on the frontier - the budget line - the consumer has **reached the limits of their consumption possibilities**. So the budget line represents the limits of consumption possibilities.
+
+On the budget line, income ($M$) equals expenditure (price of cola * quantity of cola + price of pizza times quantity of pizza - $p_c x_c + p_p + x_p$). So $M = p_c x_c + p_p x_p$.
+
+Every consumer seeks to make choices that **maximise utility**. To find the total utility in the budget line shown above, we add the utility obtained by the amount of cola and the utility obtained by the amount of pizza.
+
+When a consumer is spending in a way that maximises utility, the situation is known as **consumer equilibrium**.
+
+We can find consumer equilibrium by calculating the total utility of every combination and picking the one that results in the highest value.
+
+However, a more natural way to find consumer equilibrium is to **compare the marginal utility per dollar of a good or service**:
+
+* When the marginal utility per dollar of cola is less than that of pizza, total utility would be increased by spending more on pizza.
+* When the marginal utility per dollar of pizza is less than that of cola, total utility would be increased by spending more on cola.
+* **When the marginal utility per dollar of both are equal, there is consumer equilibrium**.
+
+This is because the more we spend on something, the less its marginal benefit, from the principle of diminishing marginal utility.
+
+So to maximise utility, we **spend all available income** and **equalize the marginal utility per dollar** of all goods.
+
+For example, if the price of pizza decreased, its marginal benefit per dollar increases and we would buy more of it to make it equal to the marginal benefits per dollar of other goods.
+
+Essentially, we want to ensure $\frac{\mathrm{MU}_\mathrm{pizza}}{\mathrm{P}_\mathrm{pizza}} = \frac{\mathrm{MU}_\mathrm{cola}}{\mathrm{P}_\mathrm{cola}}$.
+
+Marginal utility theory helps explain things like the **paradox of value**:
+
+> Why are diamonds more expensive than water, even though water is so essential, and diamonds not essential at all?
+
+We distinguish between total utility and marginal utility to resolve the paradox.
+
+The explanation is that we **consume a lot of water, so marginal utility is small while total utility is large**, while **we consume few diamonds, so marginal utility is large while total utility is small**. However, note that the marginal utility per dollar is the same for both water and diamonds.
+
+The consumer surplus of water is very high while the consumer surplus of diamonds is very low.
+
+;wip: midterm coming up on Oct. 25 4:30PM location to be announced covering chapters 4, 5, 6, 8

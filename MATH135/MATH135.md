@@ -1096,19 +1096,71 @@ Find one solution to the LDE $21x + 15y = 12$:
 
 Proposition: given integers $a, b, c$, $ab \ne 0$, $d = \gcd(a, b)$, if the LDE $ax + by = c$ and $x_0, y_0$ is one particular integer solution, then the **complete integer solution** is $x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k, k \in \m{Z}$.
 
+So $ax + by = c \implies x = x_0 + \frac{b}{d} n, y = y_0 - \frac{a}{d}$.
+
 So the solutions to an LDE, if they exist, are integer multiples of $\frac{b}{\gcd(a, b)}, -\frac{a}{\gcd(a, b)}$ at an offset of given solutions $x_0, y_0$.
 
 > We will fix one particular solution as $x_0, y_0$.  
-> Let $S$ be $\set{(x, y) \middle| ax + by = c}$.  
+> Let $S$ be $\set{(x, y) \in \mb{Z} \middle| ax + by = c}$.  
 > Let $T$ be $\set{(x, y) \middle| x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k, k \in \m{Z}}$.  
 > We want to prove $S = T$, so we will prove $S \subseteq T$ and $T \subseteq S$.  
-> First we will prove $S \subseteq T$.  
-> ;wip
-> Now we will prove $T \subseteq S$.  
+
+> First we will prove $T \subseteq S$.  
 > Let $(x, y)$ be an arbitrary element of $T$.  
 > So $\exists k \in \m{Z}, x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k$.  
-> We know that $ax_0 + bx_0 = c$ is given.  
+> We know that $ax_0 + bx_0 = c$ is a given.  
 > Clearly, $ax + by = a \left(x_0 + \frac{b}{d} k \right) + b \left(y_0 - \frac{a}{d} k \right)$.  
-> Clearly, $ax + by = ax_0 + \frac{ab}{d} k + by_0 - \frac{ba}{d} k = ax_0 + by_0 = c$.  
+> So $ax + by = ax_0 + \frac{ab}{d} k + by_0 - \frac{ba}{d} k = ax_0 + by_0 = c$.  
 > Since $ax + by = c$, $(x, y) \in S$.  
 > Since $(x, y)$ is arbitrary, $T \subseteq S$.  
+
+> Now we will prove $S \subseteq T$.  
+> Let $(x, y)$ be an arbitrary element of $S$.  
+> So $\exists x, y, \in \mb{Z}, ax + by = c$.  
+> We know that $ax_0 + bx_0 = c$ is a given.  
+> Clearly, $(ax + by) - (ax_0 + bx_0) = c - c$, so $a(x - x_0) + b(y - y_0) = 0$
+> Clearly, $d \mid a \wedge d \mid b$, so $\exists k, l \in \mb{Z}, a = kd, b = ld$.  
+> So $k = \frac{a}{d}, l = \frac{b}{d}$.  
+> We know that $ab \ne 0$ is a given.  ;wip: do we still need this given the assumption below?
+> Assume $b \ne 0$.  ;wip: we make this assumption to simplify things, but should provide a full proof later
+> Clearly, $kd(x - x_0) + ld(y - y_0) = 0 = k(x - x_0) + l(y - y_0)$.  
+
+> So $k(x -  x_0) = -l(y - y_0) = l(y_0 - y)$.  
+> So $l \mid k(x - x_0)$.  
+> By the DB-GCD theorem, $\gcd(k, l) = \gcd \left( \frac{a}{d}, \frac{b}{d} \right) = 1$.  
+> Since $l \mid k(x - x_0)$ and $\gcd(k, l) = 1$, $l \mid (x - x_0)$, by the CAD theorem.  
+> So $\exists n \in \mb{Z}, x - x_0 = ln$
+> So $x = x_0 + ln$, and $x = x_0 + \frac{b}{d}n$.  
+
+> We need to use another technique here in order to ensure we can use the same value of $n$.  
+> Since $k(x - x_0) + l(y - y_0) = 0$, $l(y - y_0) = -k(x - x_0) = k(x_0 - x)$.  
+> Since $x - x_0 = ln$, $l(y - y_0) = kln$.  
+> Since we assumed $b \ne 0$, $y - y_0 = kn$.  ;wip: this may not be a good assumption
+> Clearly, $l \ne 0$ since $b \ne 0$.  
+> So $y = y_0 - kn$, and $y = y_0 + \frac{a}{d}n$.  
+
+> Since $\exists n \in \mb{Z}, x = x_0 + \frac{b}{d}n, y = y_0 + \frac{a}{d}n$, $(x, y) \in T$.  
+> So $S \subseteq T$.  
+> Since $T \subseteq S \wedge S \subseteq T$, $S = T$
+
+# 18/10/13
+
+Find the complete integer solutions to $14x - 10y = 26$:
+
+> Clearly, $\gcd(14, 10) = 2$, and $2 \mid 26$, so there are infinite integer solutions, by LDET1.  
+> Using EEA, we determine that $\gcd(14, 10) = 2 = 14 \cdot -2 - 10 \cdot -3$, with $x = -2, y = -3$.  
+> Clearly, $14 \cdot -2 - 10 \cdot -3 = 2$ can be multiplied by $\frac{26}{2} = 13$ to obtain $14 \cdot -26 - 10 \cdot -39 = 26$.  
+> So $x = -26, y = -39$.  
+> By LDET 2, $x = -26 + \frac{-10}{2}n = -26 - 5n, y = -39 - \frac{14}{2} = -39 - 7n, n \in \mb{Z}$.  
+
+For the above, find the unique positive solution ($x > 0, y > 0$) which minimizes $x + y$:
+
+> We want to find $x, y$ such that $x > 0 \wedge y > 0$.  
+> Assume $x > 0, y > 0$.  
+> Clearly, $x > 0 \Leftrightarrow -26 - 5n > 0 \Leftrightarrow n < -\frac{26}{5}$.  
+> Clearly, $y > 0 \Leftrightarrow -39 - 7n > 0 \Leftrightarrow n < -\frac{39}{7}$.  
+> Since $n < -\frac{26}{5} \wedge n < -\frac{39}{7}$, $n < \floor{\min(-\frac{26}{5}, -\frac{39}{7})}$, so $n < -6$.  
+> Since $x$ and $y$ increase as $n$ decreases, the smallest value of $x$ and $y$ results from the largest value of $n$.  
+> For $n = 6$, $x = -26 - 5 \cdot -6 = 4$ and $y = -39 - 7 \cdot -6 = 3$.  
+
+By the way, **iff** means **if and only if** ($\Leftrightarrow$).
