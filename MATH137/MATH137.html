@@ -238,6 +238,7 @@ x^2 - 10 = -3 f^{-1}(x) \\
 <li>As a limit: <span class="math">\(e = \displaystyle\lim_{x \to \infty}{(1 + \frac{1}{x})^n}\)</span>.</li>
 <li>As an infinite series: <span class="math">\(e = \sum\limits_{n = 0}^\infty \frac{1}{n!}\)</span>.</li>
 <li>Graphically with tangents: of all exponential equations of the form <span class="math">\(y = a^x, a &gt; 0\)</span>, only where <span class="math">\(a = e\)</span> does the tangent of the graph have a slope of 1 at <span class="math">\(x = 0\)</span>.</li>
+<li>Also, <span class="math">\(a = e\)</span> is the only value for which <span class="math">\(\displaystyle\lim_{h \to 0} \frac{a^h - 1}{h} = 1\)</span>.</li>
 </ul>
 <h2 id="exponentialslogarithms">Exponentials/Logarithms</h2>
 <p>The function <span class="math">\(f(x) = e^x\)</span> is called the natural exponential function, just as <span class="math">\(f(x) = \ln(x)\)</span> is called the natural logarithm.</p>
@@ -895,7 +896,9 @@ t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sqrt{2} - 1)} -
 \end{align}
 \]</span></p>
 </blockquote>
-<p>Alternatively, we cab prove it from the definition and derivative rules.</p>
+<p>Alternatively, we can prove it from the definition and derivative rules.</p>
+<h1 id="section-15">18/10/13</h1>
+<p>The <strong>triangle inequality</strong> states that <span class="math">\(\abs{x + y} \le \abs{x} + \abs{y}, x \in \mb{R}^n, y \in \mb{R}^n\)</span></p>
 <h2 id="chain-rule">Chain Rule</h2>
 <p><span class="math">\(f&#39;(x) = g&#39;(h(x)) h&#39;(x) = \frac{\dee g \circ h}{\dee x} = \frac{\dee g}{\dee h} \frac{\dee h}{\dee x}\)</span>.</p>
 <p>Proof:</p>
@@ -907,6 +910,23 @@ t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sqrt{2} - 1)} -
 <p><span class="math">\[
 \frac{\dee}{\dee x} \cos(3x) = -\sin(3x) \frac{\dee}{\dee x} 3x = -3 \sin(3x)
 \]</span></p>
+</blockquote>
+<p>Let <span class="math">\(T(x)\)</span> be the temperature at a height above the surface of the earth. Let <span class="math">\(h(t)\)</span> be the height of a skydiver above the earth at time <span class="math">\(t\)</span>. What does <span class="math">\(\frac{\dee T}{\dee t}\)</span> represent?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\frac{\dee T}{\dee t} = \frac{\dee T}{\dee h} \frac{\dee h}{\dee t}\)</span>.<br />So <span class="math">\(\frac{\dee T}{\dee t}\)</span> is the rate of change in temperature with respect to height times rate of change in height with respect to time.<br />So it is the rate of change in temperature with respect to height time velocity.<br />Note that <span class="math">\(\frac{\dee T}{\dee h}\)</span> is independent of the skydiver - it is simply the change in temperature in the atmosphere.<br />Likewise, <span class="math">\(\frac{\dee h}{\dee t}\)</span> is independent of the atmospheric temperature.<br />So <span class="math">\(\frac{\dee T}{\dee t}\)</span> represents the rate of change in temperature with respect to time <strong>felt by the skydiver</strong>.</p>
+</blockquote>
+<p>;wip: MATH137 midterm Monday Oct. 21 7pm to 8:50pm ;wip: section 3 location: last name A-H in RCH211, I-M in RCH307, N-Z in RCH 301 ;wip: midterm covers appendix D, chapters 1 without 1.4, 2, 3.1, 3.2, 3.3 (no hyperbolic derivatives), lecture content, everything up and including to assignment 5 ;wip: need to know definitions (limits including at infinity, derivatives, continuity), theorems (squeeze theorem, IVT, differentiability implies continuity), concepts (inverse functions and their domain and range for trigonometric/exponential/hyperbolic functions) ;wip: review the sample midterms on LEARN</p>
+<h2 id="exponential-rule">Exponential Rule</h2>
+<p>We can use the chain rule to find <span class="math">\(\frac{\dee}{\dee x} a^x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\frac{\dee}{\dee x} a^x = \frac{\dee}{\dee x} e^{\ln(a^x)} = \frac{\dee}{\dee x} e^{x \ln a}\)</span>.<br />By the chain rule, <span class="math">\(\frac{\dee}{\dee x} a^x = \frac{\dee}{\dee x \ln a} e^{x \ln a} \cdot \frac{\dee}{\dee x} x \ln a\)</span>.<br />Clearly, <span class="math">\(\frac{\dee}{\dee x \ln a} e^{x \ln a} \cdot \frac{\dee}{\dee x} x \ln a = (e^{\ln a})^x \cdot \ln a = a^x \cdot \ln a\)</span>, since <span class="math">\(\frac{\dee}{\dee x} e^x = e^x\)</span>.</p>
+</blockquote>
+<p>So <span class="math">\(\frac{\dee}{\dee x} a^x = a^x \ln x\)</span></p>
+<h2 id="power-rule">Power Rule</h2>
+<p>If <span class="math">\(g(x)\)</span> is differentiable at <span class="math">\(x\)</span>, then <span class="math">\(\frac{\dee}{\dee x} g(x)^n\)</span> is defined at <span class="math">\(x\)</span> and <span class="math">\(\frac{\dee}{\dee x} g(x)^n = n \cdot g(x)^{n - 1} \cdot g&#39;(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(u = g(x), y = u^n\)</span>.<br />Note that in this case, <span class="math">\(u\)</span> is called an <strong>intermediate variable</strong>, since it is dependent on <span class="math">\(x\)</span> but treated as an independent variable in <span class="math">\(\frac{\dee y}{\dee u}\)</span>.<br />Clearly, <span class="math">\(\frac{\dee}{\dee x} g(x)^n = \frac{\dee y}{\dee x} = \frac{\dee y}{\dee u} \frac{\dee u}{\dee x} = nu^{n - 1}u&#39; = ng(x)^{n - 1}g&#39;(x)\)</span>.</p>
 </blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>

@@ -292,6 +292,7 @@ There are several ways to define $e$:
 * As a limit: $e = \displaystyle\lim_{x \to \infty}{(1 + \frac{1}{x})^n}$.
 * As an infinite series: $e = \sum\limits_{n = 0}^\infty \frac{1}{n!}$.
 * Graphically with tangents: of all exponential equations of the form $y = a^x, a > 0$, only where $a = e$ does the tangent of the graph have a slope of 1 at $x = 0$.
+* Also, $a = e$ is the only value for which $\displaystyle\lim_{h \to 0} \frac{a^h - 1}{h} = 1$.
 
 Exponentials/Logarithms
 -----------------------
@@ -1190,7 +1191,11 @@ Proof:
 \end{align}
 $$
 
-Alternatively, we cab prove it from the definition and derivative rules.
+Alternatively, we can prove it from the definition and derivative rules.
+
+# 18/10/13
+
+The **triangle inequality** states that $\abs{x + y} \le \abs{x} + \abs{y}, x \in \mb{R}^n, y \in \mb{R}^n$
 
 Chain Rule
 ----------
@@ -1206,3 +1211,40 @@ Simplify $\frac{\dee}{\dee x} \cos(3x)$:
 > $$
 \frac{\dee}{\dee x} \cos(3x) = -\sin(3x) \frac{\dee}{\dee x} 3x = -3 \sin(3x)
 $$
+
+Let $T(x)$ be the temperature at a height above the surface of the earth. Let $h(t)$ be the height of a skydiver above the earth at time $t$. What does $\frac{\dee T}{\dee t}$ represent?
+
+> Clearly, $\frac{\dee T}{\dee t} = \frac{\dee T}{\dee h} \frac{\dee h}{\dee t}$.  
+> So $\frac{\dee T}{\dee t}$ is the rate of change in temperature with respect to height times rate of change in height with respect to time.  
+> So it is the rate of change in temperature with respect to height time velocity.  
+> Note that $\frac{\dee T}{\dee h}$ is independent of the skydiver - it is simply the change in temperature in the atmosphere.  
+> Likewise, $\frac{\dee h}{\dee t}$ is independent of the atmospheric temperature.  
+> So $\frac{\dee T}{\dee t}$ represents the rate of change in temperature with respect to time **felt by the skydiver**.  
+
+;wip: MATH137 midterm Monday Oct. 21 7pm to 8:50pm
+;wip: section 3 location: last name A-H in RCH211, I-M in RCH307, N-Z in RCH 301
+;wip: midterm covers appendix D, chapters 1 without 1.4, 2, 3.1, 3.2, 3.3 (no hyperbolic derivatives), lecture content, everything up and including to assignment 5
+;wip: need to know definitions (limits including at infinity, derivatives, continuity), theorems (squeeze theorem, IVT, differentiability implies continuity), concepts (inverse functions and their domain and range for trigonometric/exponential/hyperbolic functions)
+;wip: review the sample midterms on LEARN
+
+Exponential Rule
+----------------
+
+We can use the chain rule to find $\frac{\dee}{\dee x} a^x$:
+
+> Clearly, $\frac{\dee}{\dee x} a^x = \frac{\dee}{\dee x} e^{\ln(a^x)} = \frac{\dee}{\dee x} e^{x \ln a}$.  
+> By the chain rule, $\frac{\dee}{\dee x} a^x = \frac{\dee}{\dee x \ln a} e^{x \ln a} \cdot \frac{\dee}{\dee x} x \ln a$.  
+> Clearly, $\frac{\dee}{\dee x \ln a} e^{x \ln a} \cdot \frac{\dee}{\dee x} x \ln a = (e^{\ln a})^x \cdot \ln a = a^x \cdot \ln a$, since $\frac{\dee}{\dee x} e^x = e^x$.  
+
+So $\frac{\dee}{\dee x} a^x = a^x \ln x$
+
+Power Rule
+----------
+
+If $g(x)$ is differentiable at $x$, then $\frac{\dee}{\dee x} g(x)^n$ is defined at $x$ and $\frac{\dee}{\dee x} g(x)^n = n \cdot g(x)^{n - 1} \cdot g'(x)$.
+
+Proof:
+
+> Let $u = g(x), y = u^n$.  
+> Note that in this case, $u$ is called an **intermediate variable**, since it is dependent on $x$ but treated as an independent variable in $\frac{\dee y}{\dee u}$.  
+> Clearly, $\frac{\dee}{\dee x} g(x)^n = \frac{\dee y}{\dee x} = \frac{\dee y}{\dee u} \frac{\dee u}{\dee x} = nu^{n - 1}u' = ng(x)^{n - 1}g'(x)$.  
