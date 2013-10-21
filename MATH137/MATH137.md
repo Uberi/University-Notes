@@ -59,8 +59,8 @@ Solve $6 < 1 - 3x \le 10$:
 >$$
 6 < 1 - 3x \le 10 \\
 \text{Isolate } x: 5 < -3x \le 9 \\
--5 > 3x \le -9 \\
--5/3 > x > -3
+-5 > 3x \ge -9 \\
+-5/3 > x \ge -3
 $$
 
 Solve $\frac{1}{x} < 2$:
