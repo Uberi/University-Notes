@@ -810,9 +810,15 @@ $\lim_{x \to -\infty} f(x) = L$ means $\forall \epsilon > 0, \exists n < 0, x < 
 
 Limit laws also apply as $x \to \pm \infty$, including the squeeze theorem.
 
-Prove $\lim_{x \to \infty} \frac{1}{x} = 0$:
+Prove $\lim_{x \to \infty} \frac{1}{x^k} = 0, k > 0$:
 
-;wip
+> Let $\epsilon$ be an arbitrary positive real number.  
+> Construct $n = \frac{1}{\sqrt[k]{\epsilon}}$.  
+> Assume $x > n$.  
+> So $x > \frac{1}{\sqrt[k]{\epsilon}}$.  
+> So $\frac{1}{x} < \sqrt[k]{\epsilon}$.  
+> So $\frac{1}{x^k} - 0 < \epsilon$.  
+> Therefore, $\lim_{x \to \infty} \frac{1}{x^k} = 0, k > 0$.  
 
 Infinite limit theorem: for $r \in \mb{Q}, r > 0$, when $x^r$ is defined, $\lim_{x \to \infty} \frac{1}{x^r} = 0$. In other words, when $r$ is rational and defined, $\lim_{x \to \infty} \frac{1}{x^r} = 0$.
 
@@ -873,6 +879,20 @@ General technique for $\epsilon$-$\delta$ proofs:
 A **horizontal asymptote** exists at $y = L$ if and only if $\lim_{x \to \infty} f(x) = L$ or $\lim_{x \to -\infty} f(x) = L$.
 
 Consider $f(x) = e^{\frac{1}{x}}$. As $x \to 0-$, $f(x) \to 0$. But as $x \to 0^+$, $f(x) \to \infty$. This is a one-sided asymptote - a vertical asymptote from the right.
+
+Evaluate $\lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}}$:
+
+> $$
+\begin{align}
+\lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}} &= \lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}} \cdot \frac{1 + \sqrt{x}}{1 + \sqrt{x}} \\
+&= \lim_{x \to 1} \frac{(\sqrt{x} - x^2)(1 + \sqrt{x})}{1 - x} \\
+&= \lim_{x \to 1} \frac{\sqrt{x} - x^2 + x - x^{2.5}}{1 - x} \\
+&= \lim_{x \to 1} \frac{x(1 - x) + \sqrt{x}(1 - x^2)}{1 - x} \\
+&= \lim_{x \to 1} \frac{(1 - x)(x + \sqrt{x}(1 + x))}{1 - x} \\
+&= \lim_{x \to 1} (x + \sqrt{x}(1 + x)) \\
+&= 1 + \sqrt{1}(1 + 1)) = 3 \\
+\end{align}
+$$
 
 Derivatives
 -----------
@@ -1092,6 +1112,16 @@ Consider $\lim_{x \to 0} \frac{\sin x}{x} = 1$
 
 ;wip: big ugly geometric proof, maybe find something better here: http://www.proofwiki.org/wiki/Limit_of_Sine_of_X_over_X
 
+Evaluate $\lim_{x \to 0} \frac{\sin(3x)}{x}$:
+
+> $$
+\begin{align}
+\lim_{x \to 0} \frac{\sin(3x)}{x} &= \lim_{x \to 0} \frac{3 \sin(3x)}{3x} \\
+&= 3 \lim_{x \to 0} \frac{\sin(3x)}{3x} \\
+&= 3 \\
+\end{align}
+$$
+
 ### Sine rule
 
 $\frac{\dee}{\dee x} \sin(x) = \cos(x)$.
@@ -1228,7 +1258,6 @@ Let $T(x)$ be the temperature at a height above the surface of the earth. Let $h
 ;wip: section 3 location: last name A-H in RCH211, I-M in RCH307, N-Z in RCH 301
 ;wip: midterm covers appendix D, chapters 1 without 1.4, 2, 3.1, 3.2, 3.3 (no hyperbolic derivatives), lecture content, everything up and including to assignment 5
 ;wip: need to know definitions (limits including at infinity, derivatives, continuity), theorems (squeeze theorem, IVT, differentiability implies continuity), concepts (inverse functions and their domain and range for trigonometric/exponential/hyperbolic functions)
-;wip: review the sample midterms on LEARN
 
 Exponential Rule
 ----------------
@@ -1251,3 +1280,92 @@ Proof:
 > Let $u = g(x), y = u^n$.  
 > Note that in this case, $u$ is called an **intermediate variable**, since it is dependent on $x$ but treated as an independent variable in $\frac{\dee y}{\dee u}$.  
 > Clearly, $\frac{\dee}{\dee x} g(x)^n = \frac{\dee y}{\dee x} = \frac{\dee y}{\dee u} \frac{\dee u}{\dee x} = nu^{n - 1}u' = ng(x)^{n - 1}g'(x)$.  
+
+# 21/10/13
+
+Implicit Differentiation
+------------------------
+
+Useful when we do not have an explicit relation like $y = f(x)$. For example, $x^2 + y^2 = 1$ or $y^5 + 2x^2y^2 + x^4 = 1$.
+
+Useful for finding the derivatives of inverse functions.
+
+Contrasts with ordinary differentiation. This is differentiating for a general curve.
+
+Find $\frac{\dee y}{\dee x}$ for $x^2 + y^2 = 1$:
+
+> $$
+\begin{align}
+\frac{\dee}{\dee x} (x^2 + y^2) = \frac{\dee}{\dee x} 1 \\
+&= \frac{\dee}{\dee x} x^2 + \frac{\dee}{\dee x} y^2 = \frac{\dee}{\dee x} 1
+&= 2x + \frac{\dee}{\dee x} y^2 = 0 \\
+&= 2x + \frac{\dee}{\dee x} y(x)^2 \\
+&= 2x + \frac{\dee}{\dee y} y^2 \cdot \frac{\dee}{\dee x} y \\
+&= 2x + 2y \frac{\dee}{\dee x} y \\
+2x + 2y \frac{\dee}{\dee x} y &= 0 \\
+\frac{\dee}{\dee x} y &= \frac{-2x}{2y} = \frac{-x}{y} \\
+\end{align}
+$$
+
+Where does $x^3 + y^3 = 3xy$ have a horizontal tangent?
+
+> $$
+\begin{align}
+\text{find points where } \frac{\dee y}{\dee x} &= 0 \\
+\frac{\dee}{\dee x} x^3 + \frac{\dee}{\dee x} y^3 &= \frac{\dee}{\dee x} 3xy \\
+&= 3x^2 + \frac{\dee}{\dee x} y^3 = \frac{\dee}{\dee x} 3xy \\
+;wip
+\end{align}
+$$
+
+We can use implicit differentiation to find the derivative of inverse functions.
+
+Consider $y = \log_a x$:
+
+> Clearly, $x = a^y$.  
+> So $\frac{\dee}{\dee x} x = \frac{\dee}{\dee x} a^y = \frac{\dee}{\dee y} a^y \cdot \frac{\dee y}{\dee x}$.  
+> So $1 = a^y \ln a \cdot \frac{\dee y}{\dee x}$.  
+> Clearly, $\frac{\dee y}{\dee x} = \frac{1}{a^y \ln a}$.  
+> ;wip: write this as a rule
+
+Now we can prove the power rule for all real exponents:
+
+> Clearly, $x^n = e^{\ln x^n} = e^{n \ln x}$.  
+> So $\frac{\dee}{\dee x} x^n = \frac{\dee}{\dee x} e^{n \ln x} = e^{n \ln x} \cdot \frac{\dee}{\dee x} (n \ln x)$.  
+> So $\frac{\dee}{\dee x} x^n = e^{n \ln x} \cdot n \cdot \frac{1}{x} = n\frac{x^n}{x} = nx^{n - 1}$.  
+> ;wip: write this as a rule
+
+Derivative of Inverse Trignonometric Functions
+----------------------------------------------
+
+### Arcsine rule
+
+$\frac{\dee}{\dee x} \arcsin x = \frac{1}{\sqrt{1 - x^2}}$.
+
+Proof:
+
+> Let $y = \arcsin x$. Then $x = \sin y$.  
+> Implicitly differentiating, $1 = \cos y \frac{\dee y}{\dee x}$.  
+> So $\frac{\dee y}{\dee x} = \frac{1}{\cos y}$.  
+> We want to write this in terms of $x$.  
+> Clearly, $\cos y = \pm \sqrt{1 - \sin^2 y}$.  
+> We pick the positive answer since $\cos y > 0$ whenever $-\frac{\pi}{2} \le y \le \frac{\pi}{2}$.  
+> So $\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - \sin^2 y}}$.  
+> So $\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - x^2}}$.  
+
+### Arccosine rule
+
+$\frac{\dee}{\dee x} \arccos x = -\frac{1}{\sqrt{1 - x^2}}$.
+
+Proof:
+
+> Let $y = \arccos x$. Then $x = \cos y$.  
+> ;wip
+
+### Arctangent rule
+
+$\frac{\dee}{\dee x} \arctan x = \frac{1}{1 + x}$.
+
+Proof:
+
+> ;wip: do this for arctan

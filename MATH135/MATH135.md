@@ -1164,3 +1164,69 @@ For the above, find the unique positive solution ($x > 0, y > 0$) which minimize
 > For $n = 6$, $x = -26 - 5 \cdot -6 = 4$ and $y = -39 - 7 \cdot -6 = 3$.  
 
 By the way, **iff** means **if and only if** ($\Leftrightarrow$).
+
+# 21/10/13
+
+Congruence
+----------
+
+Given $a, b, m \in \mb{Z}$, $a \equiv b$ (mod $m$) - $a$ is **congruent to** $b$ modulo $m$ - if and only if $m \mid (a - b)$.
+
+If $m \nmid (a - b)$, then $a \nequiv b$ (mod $m$) - $a$ is not congruent to $b$ modulo $m$.
+
+When proving things involving congruence, we often use the definition.
+
+### Congruent iff Same Remainder (CISR)
+
+Proposition: given $m \in \mb{N}$, $\forall a, b \in \mb{Z}, a \equiv b$ (mod $m$) if and only if $a$ and $b$ have the same remainder when divided by $m$.
+
+In other words, $\rem(a, m) = \rem(b, m) \Leftrightarrow$
+
+;wip: prove it - proof in course notes
+
+### Congruence is an Equivalence Relation (CER)
+
+Given $m \in \mb{N}, \forall a, b, c \in \mb{Z}$:
+
+* $a \equiv a$ (mod $m$): reflexive property
+* $a \equiv b \Leftrightarrow b \equiv a$ (mod $m$): symmetric property
+* $a \equiv b \wedge b \equiv c \implies a \equiv c$ (mod $m$): transitive property
+
+The first two are trivially proved. The last one is proved below:
+
+> Assume $a \equiv b$ (mod $m$) and $b \equiv c$ (mod $m$).  
+> So $m \mid a - b$ and $m \mid b - c$.  
+> By DIC, $m$ divides every integer linear combination of $a - b$ and $b - c$.  
+> In particular, $m \mid (a - b) + (b - c)$, so $m \mid a - c$.  
+> So $a \equiv c$ (mod $m$).
+
+### Properties of Congruence
+
+Given $m \in \mb{N}, a, a', b, b' \in \mb{Z}$, if $a \equiv a'$ (mod $m$) and $b \equiv b'$ (mod $m$), then:
+
+* $a + b \equiv a' + b'$ (mod $m$)
+* $a - b \equiv a' - b'$ (mod $m$)
+* $ab \equiv a'b'$ (mod $m$)
+
+Proof:
+
+> Proof of first point.  
+> Assume $a \equiv a'$ (mod $m$) and $b \equiv b'$ (mod $m$).  
+> So $m \mid a - a'$ and $m \mid b - b'$.  
+> By DIC, $m \mid (a - a') + (b - b')$, so $m \mid (a + b) - (a' + b')$.  
+> So $a + b \equiv a' + b'$ (mod $m$).
+> The second point is proved similarly.  
+
+> The third point is proved slightly differently.  
+> Assume $a \equiv a'$ (mod $m$) and $b \equiv b'$ (mod $m$).  
+> We want to prove $m \mid ab - a'b'$.  
+> Clearly, $ab - a'b' = ab - ab' + ab' - a'b' = a(b - b') + b'(a - a')$.  
+> ;wip
+
+### ;wip: what was the name of the proposition? look at the slides later
+
+Note that $ac \equiv bc, c \ne 0$ does not imply $a \equiv b$ (mod $m$).
+
+However, if $c$ is coprime to $m$ ($\gcd(c, m) = 1$), then $a \equiv b$.
+
+In other words, given $m \in \mb{N}, a, b, c \in \mb{Z}, c \ne 0$, if $ac \equiv bc$ and $\gcd(c, m) = 1$, then $a \equiv b$.

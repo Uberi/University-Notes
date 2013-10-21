@@ -792,6 +792,44 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>We want to find <span class="math">\(x, y\)</span> such that <span class="math">\(x &gt; 0 \wedge y &gt; 0\)</span>.<br />Assume <span class="math">\(x &gt; 0, y &gt; 0\)</span>.<br />Clearly, <span class="math">\(x &gt; 0 \Leftrightarrow -26 - 5n &gt; 0 \Leftrightarrow n &lt; -\frac{26}{5}\)</span>.<br />Clearly, <span class="math">\(y &gt; 0 \Leftrightarrow -39 - 7n &gt; 0 \Leftrightarrow n &lt; -\frac{39}{7}\)</span>.<br />Since <span class="math">\(n &lt; -\frac{26}{5} \wedge n &lt; -\frac{39}{7}\)</span>, <span class="math">\(n &lt; \floor{\min(-\frac{26}{5}, -\frac{39}{7})}\)</span>, so <span class="math">\(n &lt; -6\)</span>.<br />Since <span class="math">\(x\)</span> and <span class="math">\(y\)</span> increase as <span class="math">\(n\)</span> decreases, the smallest value of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> results from the largest value of <span class="math">\(n\)</span>.<br />For <span class="math">\(n = 6\)</span>, <span class="math">\(x = -26 - 5 \cdot -6 = 4\)</span> and <span class="math">\(y = -39 - 7 \cdot -6 = 3\)</span>.</p>
 </blockquote>
 <p>By the way, <strong>iff</strong> means <strong>if and only if</strong> (<span class="math">\(\Leftrightarrow\)</span>).</p>
+<h1 id="section-16">21/10/13</h1>
+<h2 id="congruence">Congruence</h2>
+<p>Given <span class="math">\(a, b, m \in \mb{Z}\)</span>, <span class="math">\(a \equiv b\)</span> (mod <span class="math">\(m\)</span>) - <span class="math">\(a\)</span> is <strong>congruent to</strong> <span class="math">\(b\)</span> modulo <span class="math">\(m\)</span> - if and only if <span class="math">\(m \mid (a - b)\)</span>.</p>
+<p>If <span class="math">\(m \nmid (a - b)\)</span>, then <span class="math">\(a \nequiv b\)</span> (mod <span class="math">\(m\)</span>) - <span class="math">\(a\)</span> is not congruent to <span class="math">\(b\)</span> modulo <span class="math">\(m\)</span>.</p>
+<p>When proving things involving congruence, we often use the definition.</p>
+<h3 id="congruent-iff-same-remainder-cisr">Congruent iff Same Remainder (CISR)</h3>
+<p>Proposition: given <span class="math">\(m \in \mb{N}\)</span>, <span class="math">\(\forall a, b \in \mb{Z}, a \equiv b\)</span> (mod <span class="math">\(m\)</span>) if and only if <span class="math">\(a\)</span> and <span class="math">\(b\)</span> have the same remainder when divided by <span class="math">\(m\)</span>.</p>
+<p>In other words, <span class="math">\(\rem(a, m) = \rem(b, m) \Leftrightarrow\)</span></p>
+<p>;wip: prove it - proof in course notes</p>
+<h3 id="congruence-is-an-equivalence-relation-cer">Congruence is an Equivalence Relation (CER)</h3>
+<p>Given <span class="math">\(m \in \mb{N}, \forall a, b, c \in \mb{Z}\)</span>:</p>
+<ul>
+<li><span class="math">\(a \equiv a\)</span> (mod <span class="math">\(m\)</span>): reflexive property</li>
+<li><span class="math">\(a \equiv b \Leftrightarrow b \equiv a\)</span> (mod <span class="math">\(m\)</span>): symmetric property</li>
+<li><span class="math">\(a \equiv b \wedge b \equiv c \implies a \equiv c\)</span> (mod <span class="math">\(m\)</span>): transitive property</li>
+</ul>
+<p>The first two are trivially proved. The last one is proved below:</p>
+<blockquote>
+<p>Assume <span class="math">\(a \equiv b\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv c\)</span> (mod <span class="math">\(m\)</span>).<br />So <span class="math">\(m \mid a - b\)</span> and <span class="math">\(m \mid b - c\)</span>.<br />By DIC, <span class="math">\(m\)</span> divides every integer linear combination of <span class="math">\(a - b\)</span> and <span class="math">\(b - c\)</span>.<br />In particular, <span class="math">\(m \mid (a - b) + (b - c)\)</span>, so <span class="math">\(m \mid a - c\)</span>.<br />So <span class="math">\(a \equiv c\)</span> (mod <span class="math">\(m\)</span>).</p>
+</blockquote>
+<h3 id="properties-of-congruence">Properties of Congruence</h3>
+<p>Given <span class="math">\(m \in \mb{N}, a, a&#39;, b, b&#39; \in \mb{Z}\)</span>, if <span class="math">\(a \equiv a&#39;\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv b&#39;\)</span> (mod <span class="math">\(m\)</span>), then:</p>
+<ul>
+<li><span class="math">\(a + b \equiv a&#39; + b&#39;\)</span> (mod <span class="math">\(m\)</span>)</li>
+<li><span class="math">\(a - b \equiv a&#39; - b&#39;\)</span> (mod <span class="math">\(m\)</span>)</li>
+<li><span class="math">\(ab \equiv a&#39;b&#39;\)</span> (mod <span class="math">\(m\)</span>)</li>
+</ul>
+<p>Proof:</p>
+<blockquote>
+<p>Proof of first point.<br />Assume <span class="math">\(a \equiv a&#39;\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv b&#39;\)</span> (mod <span class="math">\(m\)</span>).<br />So <span class="math">\(m \mid a - a&#39;\)</span> and <span class="math">\(m \mid b - b&#39;\)</span>.<br />By DIC, <span class="math">\(m \mid (a - a&#39;) + (b - b&#39;)\)</span>, so <span class="math">\(m \mid (a + b) - (a&#39; + b&#39;)\)</span>.<br />So <span class="math">\(a + b \equiv a&#39; + b&#39;\)</span> (mod <span class="math">\(m\)</span>). The second point is proved similarly.</p>
+</blockquote>
+<blockquote>
+<p>The third point is proved slightly differently.<br />Assume <span class="math">\(a \equiv a&#39;\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv b&#39;\)</span> (mod <span class="math">\(m\)</span>).<br />We want to prove <span class="math">\(m \mid ab - a&#39;b&#39;\)</span>.<br />Clearly, <span class="math">\(ab - a&#39;b&#39; = ab - ab&#39; + ab&#39; - a&#39;b&#39; = a(b - b&#39;) + b&#39;(a - a&#39;)\)</span>.<br />;wip</p>
+</blockquote>
+<h3 id="wip-what-was-the-name-of-the-proposition-look-at-the-slides-later">;wip: what was the name of the proposition? look at the slides later</h3>
+<p>Note that <span class="math">\(ac \equiv bc, c \ne 0\)</span> does not imply <span class="math">\(a \equiv b\)</span> (mod <span class="math">\(m\)</span>).</p>
+<p>However, if <span class="math">\(c\)</span> is coprime to <span class="math">\(m\)</span> (<span class="math">\(\gcd(c, m) = 1\)</span>), then <span class="math">\(a \equiv b\)</span>.</p>
+<p>In other words, given <span class="math">\(m \in \mb{N}, a, b, c \in \mb{Z}, c \ne 0\)</span>, if <span class="math">\(ac \equiv bc\)</span> and <span class="math">\(\gcd(c, m) = 1\)</span>, then <span class="math">\(a \equiv b\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
