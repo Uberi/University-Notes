@@ -28,7 +28,7 @@ Ben's email: wangtianhui.ben@gmail.com
 
 Integers: $\mb{Z} = \ldots, -2, -1, 0, 1, 2, \ldots$
 
-Rational  numbers: $\mb{Q} = p/q, p \in \mb{Z}, q \in \mb{Z}$
+Rational  numbers: $\mb{Q} = \frac{p}{q}, p \in \mb{Z}, q \in \mb{Z}$
 
 Irrational numbers: cannot be expressed as ratio, non-terminating and non-repeating decimal expansions - $\pi$, $e$, $\sqrt{2}$, $ln(2)$.
 
@@ -45,7 +45,7 @@ $(a, b]$ - left exclusive (left open) interval from $a$ to $b$, not including $a
 
 $[a, b)$ - right exclusive (right open) interval from $a$ to $b$, not including $b$.
 
-$x \in (a, b)$ - $x$ is an element of $(a, b)$ and $\set{x \in R \middle| a < x < b}$.
+$x \in (a, b)$ - $x$ is an element of $(a, b)$ and $\set{x \in R ~ \middle| ~ a < x < b}$.
 
 Infinity can be used as an interval endpoint, but is always excluded as it is a limit, not a number: $[4, \infty)$.
 
@@ -54,7 +54,7 @@ Inequalities
 
 $\Leftrightarrow$ - if and only if; first implies second, and second implies first.
 
-Solve $6 < 1 - 3*x \le 10$:
+Solve $6 < 1 - 3x \le 10$:
 
 >$$
 6 < 1 - 3x \le 10 \\
@@ -98,7 +98,7 @@ Solve by considering both cases. Deal with each case separately.
 
 Solve $\abs{2x-3} < 4$:
 
->$$
+> $$
 \text{Open the inequality: } -4 < 2x-3 < 4 \\
 \abs{f} < g \implies -g < f < g \\
 -1 < 2x < 7 \implies -\frac{1}{2} < x < \frac{7}{2}
@@ -106,7 +106,7 @@ $$
 
 Simplify $\abs{x} + y \le 1$:
 
->$$
+> $$
 y \le 1 - \abs{x} \\
 y \le \begin{cases}
     1 - x &\text{if } x \ge 0 \\
@@ -155,7 +155,7 @@ $$
 
 A **true function** must have a unique output for each input. Graphically, the vertical line test passes for all points (vertical line drawn on graph will only intersect it at most once if it is a graph of a true function).
 
-Non-functions can be described using functions by using multiple:
+Non-functions can be described using functions by combining multiple functions into one:
 
 Unit circle: $y = \pm \sqrt{x^2+y^2}$
 
@@ -169,7 +169,7 @@ Function examples:
 * Rational: $f(x)/g(x)$ (domain real numbers such that $g(x) \ne 0$)
 * Trigonometric/Inverse trigonometric
 * Exponential: $x^n$, $x$ is a positive real number (domain real numbers)
-* Logarithm: $log(x)$ (domain positive real numbers)
+* Logarithm: $\log(x)$ (domain positive real numbers)
 
 # 13/9/13
 
@@ -362,7 +362,7 @@ Bounds: $-1 \le \sin \theta \le 1$, $-1 \le \cos \theta \le 1$
 
 Periodicity: $\sin(\theta + 2 \pi k) = \sin \theta, k \in \mb{Z}$, $\cos(\theta + 2 \pi k) = \cos \theta, k \in \mb{Z}$
 
-Odd/even: $\sin(-\theta) = -\sin(\theta)\$ - odd function, $\cos(-\theta) = \cos(\theta)$ - even function
+Odd/even: $\sin(-\theta) = -\sin(\theta)$ - odd function, $\cos(-\theta) = \cos(\theta)$ - even function
 
 Sign: $\cos$ is positive to the right of the y-axis, $\sin$ is positive above the x-axis
 
@@ -395,7 +395,7 @@ Trignometric functions are periodic. Therefore, they are not one-to-one on the r
 
 However, they are one-to-one if we restrict the domain. Conventionally, we use $[-\frac{\pi}{2}, \frac{\pi}{2}]$ for sine and $[0, \pi]$ for cosine.
 
-The inverse of the sine function is denoted $x = \arcsin \theta$, or $x = sin^{-1} \theta$ - "the angle whose sine is $x$ in the restricted domain". Its domain is $[-1, 1]$ and its range is $[-\frac{\pi}{2}, \frac{\pi}{2}]$.
+The inverse of the sine function is denoted $x = \arcsin \theta$, or $x = \sin^{-1} \theta$ - "the angle whose sine is $x$ in the restricted domain". Its domain is $[-1, 1]$ and its range is $[-\frac{\pi}{2}, \frac{\pi}{2}]$.
 
 The inverse of the cosine function is denoted $\arccos \theta$, or $\cos^{-1} \theta$ - "the angle whose cosine is x in the restricted domain". Its domain is $[-1, 1]$ and its range is $[0, \pi]$.
 
@@ -433,7 +433,7 @@ Evaluate $\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)$:
         pi/2  1  pi/3
 
 > $$
-\sin \left( \frac{-pi}{3} \right) = \frac{\text{opposite}}{\text{hypotenuse}} = -\frac{\sqrt{3}}{2} \\
+\sin \left( \frac{-\pi}{3} \right) = \frac{\text{opposite}}{\text{hypotenuse}} = -\frac{\sqrt{3}}{2} \\
 \text{opposite} = \sqrt{3} \\
 \text{hypotenuse} = 2 \\
 \text{adjacent} = \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
@@ -469,15 +469,17 @@ Hyperbolic sine is one-to-one over $\mb{R}$.
 To find the inverse functions, we solve for $y$ where $x = \sinh y = \frac{e^y - e^{-y}}{2}$:
 
 > $$
-x = \sinh y = \frac{e^y - e^{-y}}{2} \\
-2x = e^y - e^{-y} \\
-0 = e^y - 2x - e^{-y} \\
-0 = e^y e^y - e^y 2x - e^y e^{-y} \\
-(e^y)^2 - 2x e^y - 1 = 0 \\
-e^y = \frac{2x \pm \sqrt{(-2x)^2 - 4(1)(-1)}}{2} = x \pm \sqrt{x^2 + 1} \\
-\text{Since } x - \sqrt{x^2 + 1} < 0 \text{, } e^y = x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
-e^y = x + \sqrt{x^2 + 1} \\
-y = \ln(x + \sqrt{x^2 + 1}) \\
+\begin{align}
+x = \sinh y &= \frac{e^y - e^{-y}}{2} \\
+2x &= e^y - e^{-y} \\
+0 &= e^y - 2x - e^{-y} \\
+0 &= e^y e^y - e^y 2x - e^y e^{-y} \\
+(e^y)^2 - 2x e^y - 1 &= 0 \\
+e^y &= \frac{2x \pm \sqrt{(-2x)^2 - 4(1)(-1)}}{2} = x \pm \sqrt{x^2 + 1} \\
+\text{Since } x - \sqrt{x^2 + 1} < 0 \text{, } e^y &= x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
+e^y &= x + \sqrt{x^2 + 1} \\
+y &= \ln(x + \sqrt{x^2 + 1}) \\
+\end{align}
 $$
 
 With this technique, we discover the inverses of the hyperbolic functions are:
@@ -732,7 +734,7 @@ $$
 f(x) = x \sin \frac{1}{x} \\
 \text{becomes } f(x) = \begin{cases}
 x \sin \frac{1}{x} &\text{if } x \ne 0 \\
-i &\text{if } x = 0 \\
+0 &\text{if } x = 0 \\
 \end{cases}
 $$
 
@@ -749,7 +751,7 @@ Determine where $f(x) = \frac{\ln(x - 1) + \sqrt{16 - x^2}}{x^3 - 8}$ is continu
 
 If $f(x)$ is continuous at $x = b$, and $\lim_{x \to a} g(x) = b$, then $\lim_{x \to a} f(g(x)) = f(b)$.
 
-In other words, the imit can be moved within compositions.
+In other words, the limit can be moved within compositions.
 
 Evaluate $\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2})$:
 
@@ -800,11 +802,11 @@ This process can be repeated as many times as needed to get as good an estimate 
 Limits at Infinity
 ------------------
 
-$\lim_{x \to \infty} f(x) = L$ means $\forall \epsilon > 0, \exists N > 0, x > n \implies \abs{f(x) - L} < \epsilon$.
+$\lim_{x \to \infty} f(x) = L$ means $\forall \epsilon > 0, \exists n > 0, x > n \implies \abs{f(x) - L} < \epsilon$.
 
 So once $x$ exceeds some value $n$, $f(x)$ must stay within $\epsilon$ of $n$. Here, $n$ has a role similar to $\delta$.
 
-$\lim_{x \to -\infty} f(x) = L$ means $\forall \epsilon > 0, \exists N < 0, x < n \implies \abs{f(x) - L} < \epsilon$.
+$\lim_{x \to -\infty} f(x) = L$ means $\forall \epsilon > 0, \exists n < 0, x < n \implies \abs{f(x) - L} < \epsilon$.
 
 Limit laws also apply as $x \to \pm \infty$, including the squeeze theorem.
 
@@ -1045,13 +1047,14 @@ The function $f(x) = \frac{x}{1 + x^2}$ is known as a serpentine curve. Find the
 f'(x) = \frac{1}{8} &= \frac{1 + x^2 - 2x^2}{(1 + x^2)^2} \\
 \frac{1}{8} &= \frac{1 - x^2}{(1 + x^2)^2} \\
 (1 + x^2)^2 &= 8 - 8x^2 \\
-x^4 + 10x^2 - 7 &= 0 \\
+(1 + x^2)^2 - (8 - 8x^2) = x^4 + 10x^2 - 7 &= 0 \\
 x^2 &= \frac{-10 \pm \sqrt{100 + 4 \cdot 1 \cdot 7}}{2} \\
 x &= \pm \sqrt{-5 \pm \sqrt{\frac{128}{4}}} \\
 x &= \pm \sqrt{4 \sqrt{2} - 5} \\
 t_1(-\sqrt{4 \sqrt{2} - 5}) = f(-\sqrt{4 \sqrt{2} - 5}) &= \frac{1}{8} \sqrt{4 \sqrt{2} - 5} + b \\
 t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{\sqrt{4 \sqrt{2} - 5}}{4 \sqrt{2} - 4} &= \frac{1}{8} \sqrt{4 \sqrt{2} - 5} + b \\
-t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sqrt{2} - 1)} - \frac{\sqrt{(\sqrt{2} - 1)(4 \sqrt{2} - 5)}}{8(\sqrt{2} - 1)} &= b \\
+t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sqrt{2} - 1)} - \frac{\sqrt{(\sqrt{2} - 1)(4 \sqrt{2} - 5)}}{8(\sqrt{2} - 1)} &= b \\
+;wip
 \end{align}
 $$
 
@@ -1103,10 +1106,10 @@ Proof:
 &= \sin(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} + \cos(x) \cdot 1 \\
 \lim_{h \to 0} \frac{\cos(h) - 1}{h} &= \lim_{h \to 0} \frac{\cos(h) - 1}{h} \cdot \frac{\cos(h) + 1}{\cos(h) + 1} \\
 &= \lim_{h \to 0} \frac{\cos^2(h) - 1}{h(\cos(h) + 1)} \\
-&= \frac{1}{\cos(x) + 1} \lim_{h \to 0} \frac{(1 - \sin^2(h)) - 1}{h} \\
-&= \lim_{h \to 0} \frac{(-\sin^2(h)}{h} \\
-&= -\lim_{h \to 0} \sin(h) \cdot \lim_{h \to 0} \frac{(\sin(h)}{h} \\
-&= -0 \cdot 1 = 0 \\
+&= \lim_{h \to 0} \frac{1}{\cos(h) + 1} \lim_{h \to 0} \frac{(1 - \sin^2(h)) - 1}{h} \\
+&= \frac{1}{2} \lim_{h \to 0} \frac{-\sin^2(h)}{h} \\
+&= \frac{1}{2} \cdot -\lim_{h \to 0} \sin(h) \cdot \lim_{h \to 0} \frac{\sin(h)}{h} \\
+&= \frac{1}{2} \cdot -0 \cdot 1 = 0 \\
 \frac{\dee}{\dee x} \sin(x) &= \sin(x) \cdot 0 + \cos(x) \cdot 1 \\
 &= \cos(x) \\
 \end{align}

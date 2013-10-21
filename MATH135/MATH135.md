@@ -953,7 +953,7 @@ EEA is the converse of GCD-CT.
 Coprimality
 -----------
 
-Two integers $a$ and $b$ are **coprime** if $\gcd(a, b)$ - if they have no common factors other than 1 and -1.
+Two integers $a$ and $b$ are **coprime** if $\gcd(a, b) = 1$ - if they have no common factors other than 1 and -1.
 
 For example, 4 and 9 are coprime.
 
@@ -1094,7 +1094,7 @@ Find one solution to the LDE $21x + 15y = 12$:
 
 ### Linear Diophantine equation theorem, part 2 (LDET 2)
 
-Proposition: given integers $a, b, c$, $ab \ne 0$, $d = \gcd(a, b)$, if the LDE $ax + by = c$ and $x_0, y_0$ is one particular integer solution, then the **complete integer solution** is $x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k, k \in \m{Z}$.
+Proposition: given integers $a, b, c$, $ab \ne 0$, $d = \gcd(a, b)$, if the LDE $ax + by = c$ and $x_0, y_0$ is one particular integer solution, then the **complete integer solution** is $x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k, k \in \mb{Z}$.
 
 So $ax + by = c \implies x = x_0 + \frac{b}{d} n, y = y_0 - \frac{a}{d}$.
 
@@ -1102,12 +1102,12 @@ So the solutions to an LDE, if they exist, are integer multiples of $\frac{b}{\g
 
 > We will fix one particular solution as $x_0, y_0$.  
 > Let $S$ be $\set{(x, y) \in \mb{Z} \middle| ax + by = c}$.  
-> Let $T$ be $\set{(x, y) \middle| x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k, k \in \m{Z}}$.  
+> Let $T$ be $\set{(x, y) \middle| x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k, k \in \mb{Z}}$.  
 > We want to prove $S = T$, so we will prove $S \subseteq T$ and $T \subseteq S$.  
 
 > First we will prove $T \subseteq S$.  
 > Let $(x, y)$ be an arbitrary element of $T$.  
-> So $\exists k \in \m{Z}, x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k$.  
+> So $\exists k \in \mb{Z}, x = x_0 + \frac{b}{d} k, y = y_0 - \frac{a}{d} k$.  
 > We know that $ax_0 + bx_0 = c$ is a given.  
 > Clearly, $ax + by = a \left(x_0 + \frac{b}{d} k \right) + b \left(y_0 - \frac{a}{d} k \right)$.  
 > So $ax + by = ax_0 + \frac{ab}{d} k + by_0 - \frac{ba}{d} k = ax_0 + by_0 = c$.  
