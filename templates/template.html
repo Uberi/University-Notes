@@ -43,6 +43,22 @@ $endif$
   tr {
     padding:: 0;
   }
+  
+  a.button {
+    display: inline-block;
+    padding: 1em;
+    font-family: monospace;
+    color: black;
+    text-decoration: none;
+    border: 0.2em solid black;
+    border-radius: 0.5em;
+    background: white;
+  }
+  
+  a.button:hover, a.button:focus, a.button:active {
+    background: black;
+    color: white;
+  }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
 $if(quotes)$
@@ -59,33 +75,14 @@ $endfor$
 $if(math)$
   $math$
 $endif$
-$for(header-includes)$
-  $header-includes$
-$endfor$
 </head>
 <body>
-$for(include-before)$
-$include-before$
-$endfor$
-$if(title)$
-<div id="$idprefix$header">
-<h1 class="title">$title$</h1>
-$if(subtitle)$
-<h1 class="subtitle">$subtitle$</h1>
-$endif$
-$for(author)$
-<h2 class="author">$author$</h2>
-$endfor$
-$if(date)$
-<h3 class="date">$date$</h3>
-$endif$
-</div>
-$endif$
 $if(toc)$
 <div id="$idprefix$TOC">
 $toc$
 </div>
 $endif$
+<a class="button" href="..">&#8666; Return to University Notes index</a>
 $body$
 $for(include-after)$
 $include-after$

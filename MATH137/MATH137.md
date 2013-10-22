@@ -52,7 +52,7 @@ Infinity can be used as an interval endpoint, but is always excluded as it is a 
 Inequalities
 ------------
 
-$\Leftrightarrow$ - if and only if; first implies second, and second implies first.
+$\iff$ - if and only if; first implies second, and second implies first.
 
 Solve $6 < 1 - 3x \le 10$:
 
@@ -180,7 +180,7 @@ Sketch $y = x^2$, $y = x^2-1$, $y = (x + 1)^2$:
 
 ;wip
 
-Given fuunction $f(x)$:
+Given function $f(x)$:
 
 * $f(x)+c$ is a vertical translation $c$ units upward.
 * $f(x+c)$ is a horizontal translation $c$ units to the left.
@@ -229,9 +229,9 @@ Methematically, for any two numbers $x_1 \in I, x_2 \in I$, $f(x_1) \ne f(x_2)$ 
 
 Graphically, when we take the inverse of a function, we reflect it along the line $y = x$. So the horizontal line test is actually the vertical line test of the inverse.
 
-A function is **monotonically increasing** on an interval $I$ if for any $x_1 \in I, x_2 \in I$, $x_1 < x_2 \Leftrightarrow f(x_1) < f(x_1)$.
+A function is **monotonically increasing** on an interval $I$ if for any $x_1 \in I, x_2 \in I$, $x_1 < x_2 \iff f(x_1) < f(x_1)$.
 
-Likewise, a function is **monotonically decreasing** on an interval $I$ if for any $x_1 \in I, x_2 \in I$, $x_1 < x_2 \Leftrightarrow f(x_1) > f(x_1)$.
+Likewise, a function is **monotonically decreasing** on an interval $I$ if for any $x_1 \in I, x_2 \in I$, $x_1 < x_2 \iff f(x_1) > f(x_1)$.
 
 A function that is monotonically increasing or monotonically decreasing on an interval is always one-to-one oon that interval.
 
@@ -251,7 +251,7 @@ A function has an inverse if and only if it is one-to-one. By definition:
 
 Let $f(x)$ be a one-to-one function with domain $A$ and range $B$.
 
-The inverse function of $f(x)$, denoted $f^{-1}(x)$, is defined by $f^{-1}(y) = x \Leftrightarrow f(x) = y$.
+The inverse function of $f(x)$, denoted $f^{-1}(x)$, is defined by $f^{-1}(y) = x \iff f(x) = y$.
 
 The range of the inverse is the domain of the function, and the domain of the inverse is the range of the function.
 
@@ -306,7 +306,7 @@ Sketch $f(x) = 3 + 2e^x$:
 * Stretch graph vertically by a factor of 2.
 * Move the graph up by 3 units.
 
-The function $f(x) = a^x$ is either increasing for $a > 1$ or decreasing for $0 < a < 1$, and therefore has an inverse. This inverse is called $\log_a(x)$. $\log_a(x) = y \Leftrightarrow a^y = x$.
+The function $f(x) = a^x$ is either increasing for $a > 1$ or decreasing for $0 < a < 1$, and therefore has an inverse. This inverse is called $\log_a(x)$. $\log_a(x) = y \iff a^y = x$.
 
 The domain of $f(x) = a^x$ is $\mb{R}$, and the range is $\set{ y \in \mb{R} \middle| x > 0}$. Therefore, the domain of $f(x) = log_a(x)$ is $\set{ y \in \mb{R} \middle| x > 0}$ and the range is $\mb{R}$.
 
@@ -338,13 +338,13 @@ For a full circle, $a = 2 \pi r$, so $\theta = \frac{2 \pi r}{r} = 2 \pi$.
 | $\pi$             | 180     |
 | $\frac{\pi}{2}$   | 90      |
 | $\frac{\pi}{3}$   | 60      |
-| $\frac{\pi}{4}    | 45      |
-| $\frac{pi}{6}     | 30      |
+| $\frac{\pi}{4}$   | 45      |
+| $\frac{\pi}{6}$   | 30      |
 
 These are based on the special triangles:
 
-* Right triangle with side lengths $1, 1, \sqrt{2}$.
-* Right triangle with side lengths $1, \sqrt{3}, 2$
+* Right triangle with side lengths $1, 1, \sqrt{2}$ and internal angles $\frac{\pi}{4}, \frac{\pi}{4}. \frac{\pi}{2}$.
+* Right triangle with side lengths $1, \sqrt{3}, 2$ and internal angles $\frac{\pi}{6}, \frac{\pi}{3}. \frac{\pi}{2}$.
 
 Parametric equations of unit circle ($x^2 + y^2 = 1$):
 
@@ -437,7 +437,7 @@ Evaluate $\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)$:
 \text{opposite} = \sqrt{3} \\
 \text{hypotenuse} = 2 \\
 \text{adjacent} = \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
-\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) = \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\ ;wip: how do I trignometry
+\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) = \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\ ;wip: why and how does this even work
 $$
 
 # 23/9/13
@@ -509,6 +509,8 @@ The precise definition of a limit:
 > Let $f$ be a function defined on an open interval that contains the number $a$, except possibly at $a$ itself.  
 > Then we say the **limit** of $f(x)$ as $x$ approaches $a$ is $L$, if for every number $\epsilon > 0$ there exists a number $\delta > 0$ such that $0 < \abs{x - a} < \delta \implies \abs{f(x) - L} < \epsilon$.
 > We write this as $\displaystyle\lim_{x \to a} f(x) = L$, or $f(x) \to L$ as $x \to a$.  
+
+In other words, $(\forall \epsilon > 0, \exists \delta > 0, 0 < \abs{x - a} < \delta \implies \abs{f(x) - L} < \epsilon) \iff (\lim_{x \to a} f(x) = L)$.
 
 $\epsilon$ is Epsilon (Greek) and is associated with error.
 
@@ -672,7 +674,7 @@ $\lim_{x \to a^-} f(x)$ is the left side limit - approaching $a$ from below/left
 
 $\lim_{x \to a^+} f(x)$ is the right side limit - approaching $a$ from above/right.
 
-$$\lim_{x \to a} f(x) = L \Leftrightarrow \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L$$
+$$\lim_{x \to a} f(x) = L \iff \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L$$
 
 The limit exists if and only if the limits on either side exist.
 
@@ -720,6 +722,7 @@ This implies the following conditions must be met:
 
 * $f(a)$ must be defined - $a$ must be in the domain of $f(x)$.
 * The left and right limits are equal.
+* $f(a)$ is equal to the limit at that location
 
 The most common discontinuities are:
 

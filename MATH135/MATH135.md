@@ -37,7 +37,7 @@ Proofs:
 * Avoid starting with thing trying to be proved (assuming the thing is true)
 * Use english sentences to give details.
 
-Prove that $x^2 \ge 2x \Leftrightarrow x \le 0 \wedge x \ge 2$:
+Prove that $x^2 \ge 2x \iff x \le 0 \wedge x \ge 2$:
 
 > Let x represent a real number. ;start by declaring assumptions  
 > Assume $x^2 \ge 2x$.  
@@ -141,7 +141,7 @@ These statements commonly take the following forms:
 
 This implication is **true**, since the hypothesis is false. Implications are always true as long as the hypothesis is not true while the conclusion is false.
 
-If A and B are statements, then $A \Leftrightarrow B$ (`A` if and only if `B`) means "`A` is true only when `B` is true".
+If A and B are statements, then $A \iff B$ (`A` if and only if `B`) means "`A` is true only when `B` is true".
 
 `T` represents true, `F` represents false.
 
@@ -242,11 +242,11 @@ $\set{ x \middle | x \in \mb{R}}$ - valid type II set builder notation; "set of 
 Basic Set Operations
 --------------------
 
-The **union** of $A$ and $B$ is $A \cup B$. This is the set of all elements belonging to either $A$ or $B$. This can be written as $x \in A \cup B \Leftrightarrow x \in A \vee x \in B$, and is sometimes defined as $A \cup B = \set{x \mid x \in A \vee x \in B}$.
+The **union** of $A$ and $B$ is $A \cup B$. This is the set of all elements belonging to either $A$ or $B$. This can be written as $x \in A \cup B \iff x \in A \vee x \in B$, and is sometimes defined as $A \cup B = \set{x \mid x \in A \vee x \in B}$.
 
-The **intersection** of $A$ and $B$ is $A \cap B$. This is the set of all elements belonging to both A and B. This can be written as $x \in A \cap B \Leftrightarrow x \in A \wedge x \in B$, and is sometimes defined as $A \cap B = \set{x \in A \middle| x \in B}$.
+The **intersection** of $A$ and $B$ is $A \cap B$. This is the set of all elements belonging to both A and B. This can be written as $x \in A \cap B \iff x \in A \wedge x \in B$, and is sometimes defined as $A \cap B = \set{x \in A \middle| x \in B}$.
 
-The **difference** of $A$ and $B$ is $A - B$ or $A \setminus B$. This is the set of all elements belonging to $A$, but not to $B$. This can be written as $x \in A - B \Leftrightarrow x \in A \text{ and } x \notin B$, and is sometimes defined as $A - B = \set{x \in A \middle| x \notin B}$.
+The **difference** of $A$ and $B$ is $A - B$ or $A \setminus B$. This is the set of all elements belonging to $A$, but not to $B$. This can be written as $x \in A - B \iff x \in A \text{ and } x \notin B$, and is sometimes defined as $A - B = \set{x \in A \middle| x \notin B}$.
 
 The **complement** of a set $A$ is $\overline{A}$. This is the set of all elements in the **universe of dicourse** that are not in $A$.
 
@@ -320,7 +320,7 @@ Technique 1: prove $A \subseteq B$, and then prove $B \subseteq A$, using the ab
 
 # 18/9/13
 
-Technique 2: Prove that $\forall x, x \in A \Leftrightarrow x \in B$:
+Technique 2: Prove that $\forall x, x \in A \iff x \in B$:
 
 > Let $x$ be an arbitrary object.  
 > ;wip
@@ -328,9 +328,9 @@ Technique 2: Prove that $\forall x, x \in A \Leftrightarrow x \in B$:
 Prove that for any sets $R$, $S$, $T$, $R \cap (S \cup T) = (R \cap S) \cup (R \cap T)$.
 
 > Let $x$ be an arbitrary object.  
-> We know that $x \in R \cap (S \cup T) \Leftrightarrow x \in R \wedge (x \in S \vee x \in T)$.  
+> We know that $x \in R \cap (S \cup T) \iff x \in R \wedge (x \in S \vee x \in T)$.  
 > Recall that $P \wedge (Q \vee R \equiv (P \wedge Q) \vee (P \wedge R)$.  
->Clearly, $x \in R \wedge (x \in S \vee x \in T) \Leftrightarrow (x \in R \wedge x \in S) \vee (x \in R \wedge x \in T)$.  
+>Clearly, $x \in R \wedge (x \in S \vee x \in T) \iff (x \in R \wedge x \in S) \vee (x \in R \wedge x \in T)$.  
 
 This technique is only usable in certain situations. At other times, technique 1 is a better choice.
 
@@ -388,7 +388,7 @@ General rules:
 * $\neg (\exists x \in S, P) = \forall x \in S, \neg P$
 * ;wip
 
-;wip: Figure out $\neg (P \Leftrightarrow Q)$. It's XOR, I think
+;wip: Figure out $\neg (P \iff Q)$. It's XOR, I think
 
 ### Proving quantified statements
 
@@ -474,7 +474,7 @@ The core technique for proving an implication is known as **direct proof**:
 1. Assume the hypothesis.
 2. From the hypothesis, deduce the conclusion.
 
-The **converse** of an implication $P \implies Q$ is $Q \implies P$. This is very different from the original implication. When we prove a statement and its converse, we have proved that $P \Leftrightarrow Q$.
+The **converse** of an implication $P \implies Q$ is $Q \implies P$. This is very different from the original implication. When we prove a statement and its converse, we have proved that $P \iff Q$.
 
 For an implication with a quantifier, the quantifier is preserved for its converse; the converse of $\forall x \in S, P(x) \implies Q(x)$ is $\forall x \in S, Q(x) \implies P(x)$.
 
@@ -502,7 +502,7 @@ Another technique for proving is **proof by contradiction**:
 2. Derive a contradiction, such as $1 = 0$.
 3. Since the implication cannot be false and result in a contradiction, it is true.
 
-To prove $A \Leftrightarrow B$, we can prove $A \implies B$ and $B \implies A$.
+To prove $A \iff B$, we can prove $A \implies B$ and $B \implies A$.
 
 Proof Technique: Induction
 --------------------------
@@ -605,7 +605,7 @@ Studying Divisibility
 
 Recall that if $n \in \mb{Z}$ and $m \in \mb{Z}$,
 
-$m \mid n \Leftrightarrow \exists k \in \mb{Z}, n = km$
+$m \mid n \iff \exists k \in \mb{Z}, n = km$
 
 ### Transitivity of divisibiilty (TD)
 
@@ -1062,7 +1062,7 @@ Proposition: given integers $a, b, c \in \mb{Z}$, $d = \gcd(a, b)$, the linear D
 
 Proof:
 
-> We want to show that $ax + by = c$ having solutions in $\mb{Z}$ $\Leftrightarrow$ $d \mid c$.  
+> We want to show that $ax + by = c$ having solutions in $\mb{Z}$ $\iff$ $d \mid c$.  
 > First we will prove that $ax + by = c$ having solutions in $\mb{Z}$ $\implies$ $d \mid c$.  
 > Assume $ax + by = c$ has solutions in $\mb{Z}$.  
 > So $\exists x, y \in \mb{Z}, ax + by = c$ (the $x$ and $y$ here are no longer variables, and are specific integers).  
@@ -1077,7 +1077,7 @@ Proof:
 > So $kd = a(kx) + b(ky) = c$.  
 > So $kx$ and $ky$ are integer solutions to the equation.  
 > So the equation must have solutions in $\mb{Z}$.  
-> Since the implication and its converse are true, $ax + by = c$ having solutions in $\mb{Z}$ $\Leftrightarrow$ $d \mid c$.  
+> Since the implication and its converse are true, $ax + by = c$ having solutions in $\mb{Z}$ $\iff$ $d \mid c$.  
 
 The proof in the backwards direction shows us how to find at least one solution to the equation.
 
@@ -1157,13 +1157,13 @@ For the above, find the unique positive solution ($x > 0, y > 0$) which minimize
 
 > We want to find $x, y$ such that $x > 0 \wedge y > 0$.  
 > Assume $x > 0, y > 0$.  
-> Clearly, $x > 0 \Leftrightarrow -26 - 5n > 0 \Leftrightarrow n < -\frac{26}{5}$.  
-> Clearly, $y > 0 \Leftrightarrow -39 - 7n > 0 \Leftrightarrow n < -\frac{39}{7}$.  
+> Clearly, $x > 0 \iff -26 - 5n > 0 \iff n < -\frac{26}{5}$.  
+> Clearly, $y > 0 \iff -39 - 7n > 0 \iff n < -\frac{39}{7}$.  
 > Since $n < -\frac{26}{5} \wedge n < -\frac{39}{7}$, $n < \floor{\min(-\frac{26}{5}, -\frac{39}{7})}$, so $n < -6$.  
 > Since $x$ and $y$ increase as $n$ decreases, the smallest value of $x$ and $y$ results from the largest value of $n$.  
 > For $n = 6$, $x = -26 - 5 \cdot -6 = 4$ and $y = -39 - 7 \cdot -6 = 3$.  
 
-By the way, **iff** means **if and only if** ($\Leftrightarrow$).
+By the way, **iff** means **if and only if** ($\iff$).
 
 # 21/10/13
 
@@ -1180,7 +1180,7 @@ When proving things involving congruence, we often use the definition.
 
 Proposition: given $m \in \mb{N}$, $\forall a, b \in \mb{Z}, a \equiv b$ (mod $m$) if and only if $a$ and $b$ have the same remainder when divided by $m$.
 
-In other words, $\rem(a, m) = \rem(b, m) \Leftrightarrow$
+In other words, $\rem(a, m) = \rem(b, m) \iff$
 
 ;wip: prove it - proof in course notes
 
@@ -1189,7 +1189,7 @@ In other words, $\rem(a, m) = \rem(b, m) \Leftrightarrow$
 Given $m \in \mb{N}, \forall a, b, c \in \mb{Z}$:
 
 * $a \equiv a$ (mod $m$): reflexive property
-* $a \equiv b \Leftrightarrow b \equiv a$ (mod $m$): symmetric property
+* $a \equiv b \iff b \equiv a$ (mod $m$): symmetric property
 * $a \equiv b \wedge b \equiv c \implies a \equiv c$ (mod $m$): transitive property
 
 The first two are trivially proved. The last one is proved below:
@@ -1221,9 +1221,10 @@ Proof:
 > Assume $a \equiv a'$ (mod $m$) and $b \equiv b'$ (mod $m$).  
 > We want to prove $m \mid ab - a'b'$.  
 > Clearly, $ab - a'b' = ab - ab' + ab' - a'b' = a(b - b') + b'(a - a')$.  
-> ;wip
+> Since $m \mid a - a'$ and $m \mid b - b'$, $m \mid a(b - b') + b'(a - a')$, by DIC.  
+> So $m \mid ab - a'b'$, and $ab \equiv a'b'$ (mod $m$)
 
-### ;wip: what was the name of the proposition? look at the slides later
+### Congruences and Division (CD)
 
 Note that $ac \equiv bc, c \ne 0$ does not imply $a \equiv b$ (mod $m$).
 

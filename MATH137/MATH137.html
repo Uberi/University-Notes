@@ -37,11 +37,28 @@
   tr {
     padding:: 0;
   }
+  
+  a.button {
+    display: inline-block;
+    padding: 1em;
+    font-family: monospace;
+    color: black;
+    text-decoration: none;
+    border: 0.2em solid black;
+    border-radius: 0.5em;
+    background: white;
+  }
+  
+  a.button:hover, a.button:focus, a.button:active {
+    background: black;
+    color: white;
+  }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
 </head>
 <body>
+<a class="button" href="..">&#8666; Return to University Notes index</a>
 <h1 id="math-137">MATH 137</h1>
 <p>Calculus I:</p>
 <pre><code>Section 003</code></pre>
@@ -72,7 +89,7 @@ Office hours: starts week 3, details TBA ;wip</code></pre>
 <p><span class="math">\(x \in (a, b)\)</span> - <span class="math">\(x\)</span> is an element of <span class="math">\((a, b)\)</span> and <span class="math">\(\set{x \in R ~ \middle| ~ a &lt; x &lt; b}\)</span>.</p>
 <p>Infinity can be used as an interval endpoint, but is always excluded as it is a limit, not a number: <span class="math">\([4, \infty)\)</span>.</p>
 <h2 id="inequalities">Inequalities</h2>
-<p><span class="math">\(\Leftrightarrow\)</span> - if and only if; first implies second, and second implies first.</p>
+<p><span class="math">\(\iff\)</span> - if and only if; first implies second, and second implies first.</p>
 <p>Solve <span class="math">\(6 &lt; 1 - 3x \le 10\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
@@ -171,7 +188,7 @@ f(x) = \frac{1}{1 - x^2} \\
 <h2 id="transformations">Transformations</h2>
 <p>Sketch <span class="math">\(y = x^2\)</span>, <span class="math">\(y = x^2-1\)</span>, <span class="math">\(y = (x + 1)^2\)</span>:</p>
 <p>;wip</p>
-<p>Given fuunction <span class="math">\(f(x)\)</span>:</p>
+<p>Given function <span class="math">\(f(x)\)</span>:</p>
 <ul>
 <li><span class="math">\(f(x)+c\)</span> is a vertical translation <span class="math">\(c\)</span> units upward.</li>
 <li><span class="math">\(f(x+c)\)</span> is a horizontal translation <span class="math">\(c\)</span> units to the left.</li>
@@ -200,8 +217,8 @@ f(x) = \frac{1}{1 - x^2} \\
 <p>A function is known as one-to-one on an interval if it never takes the same value twice - it passes the horizontal line test.</p>
 <p>Methematically, for any two numbers <span class="math">\(x_1 \in I, x_2 \in I\)</span>, <span class="math">\(f(x_1) \ne f(x_2)\)</span> whenever <span class="math">\(x_1 \ne x_2\)</span>.</p>
 <p>Graphically, when we take the inverse of a function, we reflect it along the line <span class="math">\(y = x\)</span>. So the horizontal line test is actually the vertical line test of the inverse.</p>
-<p>A function is <strong>monotonically increasing</strong> on an interval <span class="math">\(I\)</span> if for any <span class="math">\(x_1 \in I, x_2 \in I\)</span>, <span class="math">\(x_1 &lt; x_2 \Leftrightarrow f(x_1) &lt; f(x_1)\)</span>.</p>
-<p>Likewise, a function is <strong>monotonically decreasing</strong> on an interval <span class="math">\(I\)</span> if for any <span class="math">\(x_1 \in I, x_2 \in I\)</span>, <span class="math">\(x_1 &lt; x_2 \Leftrightarrow f(x_1) &gt; f(x_1)\)</span>.</p>
+<p>A function is <strong>monotonically increasing</strong> on an interval <span class="math">\(I\)</span> if for any <span class="math">\(x_1 \in I, x_2 \in I\)</span>, <span class="math">\(x_1 &lt; x_2 \iff f(x_1) &lt; f(x_1)\)</span>.</p>
+<p>Likewise, a function is <strong>monotonically decreasing</strong> on an interval <span class="math">\(I\)</span> if for any <span class="math">\(x_1 \in I, x_2 \in I\)</span>, <span class="math">\(x_1 &lt; x_2 \iff f(x_1) &gt; f(x_1)\)</span>.</p>
 <p>A function that is monotonically increasing or monotonically decreasing on an interval is always one-to-one oon that interval.</p>
 <p>Show that <span class="math">\(f(x) = x^2\)</span> is not one-to-one over <span class="math">\(\mb{R}\)</span> but is over <span class="math">\([0, \infty)\)</span>:</p>
 <blockquote>
@@ -210,7 +227,7 @@ f(x) = \frac{1}{1 - x^2} \\
 <h2 id="inverse">Inverse</h2>
 <p>A function has an inverse if and only if it is one-to-one. By definition:</p>
 <p>Let <span class="math">\(f(x)\)</span> be a one-to-one function with domain <span class="math">\(A\)</span> and range <span class="math">\(B\)</span>.</p>
-<p>The inverse function of <span class="math">\(f(x)\)</span>, denoted <span class="math">\(f^{-1}(x)\)</span>, is defined by <span class="math">\(f^{-1}(y) = x \Leftrightarrow f(x) = y\)</span>.</p>
+<p>The inverse function of <span class="math">\(f(x)\)</span>, denoted <span class="math">\(f^{-1}(x)\)</span>, is defined by <span class="math">\(f^{-1}(y) = x \iff f(x) = y\)</span>.</p>
 <p>The range of the inverse is the domain of the function, and the domain of the inverse is the range of the function.</p>
 <p>An inverse of a function &quot;undoes&quot; the operation applied by the function. In other words, the cancellation equations <span class="math">\(\forall x \in A, f^{-1}(f(x)) = x\)</span> and <span class="math">\(\forall x \in B, f(f^{-1}(x)) = x\)</span> hold for all functions with inverses.</p>
 <p>Note that <span class="math">\(f^{-1}(x)\)</span> is not the same as <span class="math">\(f(x)^{-1}\)</span> - the former is the inverse and the latter is the reciprocal.</p>
@@ -249,7 +266,7 @@ x^2 - 10 = -3 f^{-1}(x) \\
 <li>Stretch graph vertically by a factor of 2.</li>
 <li>Move the graph up by 3 units.</li>
 </ul>
-<p>The function <span class="math">\(f(x) = a^x\)</span> is either increasing for <span class="math">\(a &gt; 1\)</span> or decreasing for <span class="math">\(0 &lt; a &lt; 1\)</span>, and therefore has an inverse. This inverse is called <span class="math">\(\log_a(x)\)</span>. <span class="math">\(\log_a(x) = y \Leftrightarrow a^y = x\)</span>.</p>
+<p>The function <span class="math">\(f(x) = a^x\)</span> is either increasing for <span class="math">\(a &gt; 1\)</span> or decreasing for <span class="math">\(0 &lt; a &lt; 1\)</span>, and therefore has an inverse. This inverse is called <span class="math">\(\log_a(x)\)</span>. <span class="math">\(\log_a(x) = y \iff a^y = x\)</span>.</p>
 <p>The domain of <span class="math">\(f(x) = a^x\)</span> is <span class="math">\(\mb{R}\)</span>, and the range is <span class="math">\(\set{ y \in \mb{R} \middle| x &gt; 0}\)</span>. Therefore, the domain of <span class="math">\(f(x) = log_a(x)\)</span> is <span class="math">\(\set{ y \in \mb{R} \middle| x &gt; 0}\)</span> and the range is <span class="math">\(\mb{R}\)</span>.</p>
 <p><span class="math">\(\ln(e) = \log_e(x)\)</span></p>
 <p><span class="math">\(\ln(e) = 1\)</span></p>
@@ -287,15 +304,19 @@ f^{-1}(x) = \frac{1}{2} \ln(x) - \frac{1}{2} \\
 <td align="left">60</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(\frac{\pi}{4}    | 45      | | \)</span></td>
+<td align="left"><span class="math">\(\frac{\pi}{4}\)</span></td>
+<td align="left">45</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(\frac{\pi}{6}\)</span></td>
 <td align="left">30</td>
 </tr>
 </tbody>
 </table>
 <p>These are based on the special triangles:</p>
 <ul>
-<li>Right triangle with side lengths <span class="math">\(1, 1, \sqrt{2}\)</span>.</li>
-<li>Right triangle with side lengths <span class="math">\(1, \sqrt{3}, 2\)</span></li>
+<li>Right triangle with side lengths <span class="math">\(1, 1, \sqrt{2}\)</span> and internal angles <span class="math">\(\frac{\pi}{4}, \frac{\pi}{4}. \frac{\pi}{2}\)</span>.</li>
+<li>Right triangle with side lengths <span class="math">\(1, \sqrt{3}, 2\)</span> and internal angles <span class="math">\(\frac{\pi}{6}, \frac{\pi}{3}. \frac{\pi}{2}\)</span>.</li>
 </ul>
 <p>Parametric equations of unit circle (<span class="math">\(x^2 + y^2 = 1\)</span>):</p>
 <ul>
@@ -371,7 +392,7 @@ sqrt(3) |  \
 \text{opposite} = \sqrt{3} \\
 \text{hypotenuse} = 2 \\
 \text{adjacent} = \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
-\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) = \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\ ;wip: how do I trignometry
+\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) = \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\ ;wip: why and how does this even work
 \]</span></p>
 </blockquote>
 <h1 id="section-6">23/9/13</h1>
@@ -428,6 +449,7 @@ g(x) = \begin{cases}
 <blockquote>
 <p>Let <span class="math">\(f\)</span> be a function defined on an open interval that contains the number <span class="math">\(a\)</span>, except possibly at <span class="math">\(a\)</span> itself.<br />Then we say the <strong>limit</strong> of <span class="math">\(f(x)\)</span> as <span class="math">\(x\)</span> approaches <span class="math">\(a\)</span> is <span class="math">\(L\)</span>, if for every number <span class="math">\(\epsilon &gt; 0\)</span> there exists a number <span class="math">\(\delta &gt; 0\)</span> such that <span class="math">\(0 &lt; \abs{x - a} &lt; \delta \implies \abs{f(x) - L} &lt; \epsilon\)</span>. We write this as <span class="math">\(\displaystyle\lim_{x \to a} f(x) = L\)</span>, or <span class="math">\(f(x) \to L\)</span> as <span class="math">\(x \to a\)</span>.</p>
 </blockquote>
+<p>In other words, <span class="math">\((\forall \epsilon &gt; 0, \exists \delta &gt; 0, 0 &lt; \abs{x - a} &lt; \delta \implies \abs{f(x) - L} &lt; \epsilon) \iff (\lim_{x \to a} f(x) = L)\)</span>.</p>
 <p><span class="math">\(\epsilon\)</span> is Epsilon (Greek) and is associated with error.</p>
 <p><span class="math">\(\delta\)</span> is Delta (Greek) and is associated with difference.</p>
 <p>The key point is that the limit exists if the distance between <span class="math">\(f(x)\)</span> and <span class="math">\(L\)</span> (the error, <span class="math">\(\epsilon\)</span>) <strong>can be made as small as needed</strong> by making the distance between <span class="math">\(x\)</span> and <span class="math">\(a\)</span> (the difference, <span class="math">\(\delta\)</span>) sufficiently small. However, <span class="math">\(x \ne a\)</span>.</p>
@@ -510,7 +532,7 @@ H(x) = \begin{cases}
 <p>Approaching from either side gives different results. This leads to the idea of a one sided limit.</p>
 <p><span class="math">\(\lim_{x \to a^-} f(x)\)</span> is the left side limit - approaching <span class="math">\(a\)</span> from below/left.</p>
 <p><span class="math">\(\lim_{x \to a^+} f(x)\)</span> is the right side limit - approaching <span class="math">\(a\)</span> from above/right.</p>
-<p><span class="math">\[\lim_{x \to a} f(x) = L \Leftrightarrow \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L\]</span></p>
+<p><span class="math">\[\lim_{x \to a} f(x) = L \iff \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L\]</span></p>
 <p>The limit exists if and only if the limits on either side exist.</p>
 <h1 id="section-10">2/10/13</h1>
 <h2 id="vertical-asymptotes">Vertical Asymptotes</h2>
@@ -535,6 +557,7 @@ H(x) = \begin{cases}
 <ul>
 <li><span class="math">\(f(a)\)</span> must be defined - <span class="math">\(a\)</span> must be in the domain of <span class="math">\(f(x)\)</span>.</li>
 <li>The left and right limits are equal.</li>
+<li><span class="math">\(f(a)\)</span> is equal to the limit at that location</li>
 </ul>
 <p>The most common discontinuities are:</p>
 <ul>

@@ -37,11 +37,28 @@
   tr {
     padding:: 0;
   }
+  
+  a.button {
+    display: inline-block;
+    padding: 1em;
+    font-family: monospace;
+    color: black;
+    text-decoration: none;
+    border: 0.2em solid black;
+    border-radius: 0.5em;
+    background: white;
+  }
+  
+  a.button:hover, a.button:focus, a.button:active {
+    background: black;
+    color: white;
+  }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
 </head>
 <body>
+<a class="button" href="..">&#8666; Return to University Notes index</a>
 <h1 id="math-135">MATH 135</h1>
 <pre><code>Mathematical proofs.
 Section 004</code></pre>
@@ -71,7 +88,7 @@ Tutorials: Tuesdays 4:30PM-7:20PM (Drop-in to Biology 1 Room 271)</code></pre>
 <li>Avoid starting with thing trying to be proved (assuming the thing is true)</li>
 <li>Use english sentences to give details.</li>
 </ul>
-<p>Prove that <span class="math">\(x^2 \ge 2x \Leftrightarrow x \le 0 \wedge x \ge 2\)</span>:</p>
+<p>Prove that <span class="math">\(x^2 \ge 2x \iff x \le 0 \wedge x \ge 2\)</span>:</p>
 <blockquote>
 <p>Let x represent a real number. ;start by declaring assumptions<br />Assume <span class="math">\(x^2 \ge 2x\)</span>.<br />Then <span class="math">\(x^2-2x \ge 0\)</span>.<br />Then <span class="math">\(x(x-2) \ge 0\)</span>.<br />This implies that either <span class="math">\(x \ge 0\)</span> and <span class="math">\(x \ge 2\)</span>, or that <span class="math">\(x \le 0\)</span> and <span class="math">\(x \le 2\)</span>.<br />If <span class="math">\(x \ge 0\)</span> and <span class="math">\(x \ge 2\)</span>, then <span class="math">\(x \ge 2\)</span>.<br />If <span class="math">\(x \le 0\)</span> and <span class="math">\(x \le 2\)</span>, then <span class="math">\(x \le 0\)</span>.<br />In conclusion, <span class="math">\(x \le 0\)</span> and <span class="math">\(x \ge 2\)</span> if <span class="math">\(x^2 \ge 2x\)</span>.</p>
 </blockquote>
@@ -128,7 +145,7 @@ Which is in fact:
 <p>If 1 = 2, then 1 = 0.</p>
 </blockquote>
 <p>This implication is <strong>true</strong>, since the hypothesis is false. Implications are always true as long as the hypothesis is not true while the conclusion is false.</p>
-<p>If A and B are statements, then <span class="math">\(A \Leftrightarrow B\)</span> (<code>A</code> if and only if <code>B</code>) means &quot;<code>A</code> is true only when <code>B</code> is true&quot;.</p>
+<p>If A and B are statements, then <span class="math">\(A \iff B\)</span> (<code>A</code> if and only if <code>B</code>) means &quot;<code>A</code> is true only when <code>B</code> is true&quot;.</p>
 <p><code>T</code> represents true, <code>F</code> represents false.</p>
 <p>If <code>A</code> is a statement, then <span class="math">\(\neg A\)</span> (not <code>A</code>) means &quot;not <code>A</code>&quot;.</p>
 <h3 id="truth-tables">Truth tables</h3>
@@ -223,9 +240,9 @@ Which is in fact:
 <p><span class="math">\(\set{ x \middle | x \in \mb{R}}\)</span> - valid type II set builder notation; &quot;set of all x such that x is a real number&quot;</p>
 <h1 id="section-3">16/9/13</h1>
 <h2 id="basic-set-operations">Basic Set Operations</h2>
-<p>The <strong>union</strong> of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is <span class="math">\(A \cup B\)</span>. This is the set of all elements belonging to either <span class="math">\(A\)</span> or <span class="math">\(B\)</span>. This can be written as <span class="math">\(x \in A \cup B \Leftrightarrow x \in A \vee x \in B\)</span>, and is sometimes defined as <span class="math">\(A \cup B = \set{x \mid x \in A \vee x \in B}\)</span>.</p>
-<p>The <strong>intersection</strong> of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is <span class="math">\(A \cap B\)</span>. This is the set of all elements belonging to both A and B. This can be written as <span class="math">\(x \in A \cap B \Leftrightarrow x \in A \wedge x \in B\)</span>, and is sometimes defined as <span class="math">\(A \cap B = \set{x \in A \middle| x \in B}\)</span>.</p>
-<p>The <strong>difference</strong> of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is <span class="math">\(A - B\)</span> or <span class="math">\(A \setminus B\)</span>. This is the set of all elements belonging to <span class="math">\(A\)</span>, but not to <span class="math">\(B\)</span>. This can be written as <span class="math">\(x \in A - B \Leftrightarrow x \in A \text{ and } x \notin B\)</span>, and is sometimes defined as <span class="math">\(A - B = \set{x \in A \middle| x \notin B}\)</span>.</p>
+<p>The <strong>union</strong> of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is <span class="math">\(A \cup B\)</span>. This is the set of all elements belonging to either <span class="math">\(A\)</span> or <span class="math">\(B\)</span>. This can be written as <span class="math">\(x \in A \cup B \iff x \in A \vee x \in B\)</span>, and is sometimes defined as <span class="math">\(A \cup B = \set{x \mid x \in A \vee x \in B}\)</span>.</p>
+<p>The <strong>intersection</strong> of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is <span class="math">\(A \cap B\)</span>. This is the set of all elements belonging to both A and B. This can be written as <span class="math">\(x \in A \cap B \iff x \in A \wedge x \in B\)</span>, and is sometimes defined as <span class="math">\(A \cap B = \set{x \in A \middle| x \in B}\)</span>.</p>
+<p>The <strong>difference</strong> of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is <span class="math">\(A - B\)</span> or <span class="math">\(A \setminus B\)</span>. This is the set of all elements belonging to <span class="math">\(A\)</span>, but not to <span class="math">\(B\)</span>. This can be written as <span class="math">\(x \in A - B \iff x \in A \text{ and } x \notin B\)</span>, and is sometimes defined as <span class="math">\(A - B = \set{x \in A \middle| x \notin B}\)</span>.</p>
 <p>The <strong>complement</strong> of a set <span class="math">\(A\)</span> is <span class="math">\(\overline{A}\)</span>. This is the set of all elements in the <strong>universe of dicourse</strong> that are not in <span class="math">\(A\)</span>.</p>
 <p>The <strong>cardinality</strong> of a set <span class="math">\(A\)</span> is <span class="math">\(\abs{A}\)</span>. This is the number of elements it contains.</p>
 <p>We can construct a truth table of these operations:</p>
@@ -295,13 +312,13 @@ Which is in fact:
 <p>Let <span class="math">\(x\)</span> be an arbitrary element of <span class="math">\(A\)</span>.<br />So <span class="math">\(x \in A\)</span> and <span class="math">\(x \notin B\)</span>.<br />If <span class="math">\(x \in A \cap B\)</span>, then <span class="math">\(x \in A\)</span> and <span class="math">\(x \in B\)</span>.<br />However, we know that <span class="math">\(x \notin B\)</span>.<br />Therefore, <span class="math">\(x \notin A \cap B\)</span>.<br />Since <span class="math">\(x \in A\)</span> and <span class="math">\(x \notin A \cap B\)</span>, <span class="math">\(x \in A - (A \cap B)\)</span>.<br />Since <span class="math">\(x \in B ~ \forall x\)</span>, <span class="math">\(A - B \subseteq A - (A \cap B)\)</span>.<br />Now we prove the reverse.<br />Let <span class="math">\(y\)</span> be an arbitrary element of <span class="math">\(A - (A \cap B)\)</span>. So <span class="math">\(x \in A\)</span> and <span class="math">\(x \notin A \cap B\)</span>.<br />So (by DeMorgan's Law) <span class="math">\(x \notin A\)</span>, or <span class="math">\(x \notin B\)</span>.<br />However, <span class="math">\(x \in A\)</span>, so <span class="math">\(x \notin B\)</span>.<br />Since x is representative, <span class="math">\(\forall x, x \in (A \cap B)\)</span>, and <span class="math">\(A - (A \cap B) \subseteq A - B\)</span>.<br />Since both sides are subsets of or equal to each other, they are equal.</p>
 </blockquote>
 <h1 id="section-4">18/9/13</h1>
-<p>Technique 2: Prove that <span class="math">\(\forall x, x \in A \Leftrightarrow x \in B\)</span>:</p>
+<p>Technique 2: Prove that <span class="math">\(\forall x, x \in A \iff x \in B\)</span>:</p>
 <blockquote>
 <p>Let <span class="math">\(x\)</span> be an arbitrary object.<br />;wip</p>
 </blockquote>
 <p>Prove that for any sets <span class="math">\(R\)</span>, <span class="math">\(S\)</span>, <span class="math">\(T\)</span>, <span class="math">\(R \cap (S \cup T) = (R \cap S) \cup (R \cap T)\)</span>.</p>
 <blockquote>
-<p>Let <span class="math">\(x\)</span> be an arbitrary object.<br />We know that <span class="math">\(x \in R \cap (S \cup T) \Leftrightarrow x \in R \wedge (x \in S \vee x \in T)\)</span>.<br />Recall that <span class="math">\(P \wedge (Q \vee R \equiv (P \wedge Q) \vee (P \wedge R)\)</span>.<br />Clearly, <span class="math">\(x \in R \wedge (x \in S \vee x \in T) \Leftrightarrow (x \in R \wedge x \in S) \vee (x \in R \wedge x \in T)\)</span>.</p>
+<p>Let <span class="math">\(x\)</span> be an arbitrary object.<br />We know that <span class="math">\(x \in R \cap (S \cup T) \iff x \in R \wedge (x \in S \vee x \in T)\)</span>.<br />Recall that <span class="math">\(P \wedge (Q \vee R \equiv (P \wedge Q) \vee (P \wedge R)\)</span>.<br />Clearly, <span class="math">\(x \in R \wedge (x \in S \vee x \in T) \iff (x \in R \wedge x \in S) \vee (x \in R \wedge x \in T)\)</span>.</p>
 </blockquote>
 <p>This technique is only usable in certain situations. At other times, technique 1 is a better choice.</p>
 <p><span class="math">\(A \equiv B\)</span> is not equality, it works on two logical propositions <span class="math">\(A\)</span> and <span class="math">\(B\)</span>.</p>
@@ -344,7 +361,7 @@ Which is in fact:
 <li><span class="math">\(\neg (\exists x \in S, P) = \forall x \in S, \neg P\)</span></li>
 <li>;wip</li>
 </ul>
-<p>;wip: Figure out <span class="math">\(\neg (P \Leftrightarrow Q)\)</span>. It's XOR, I think</p>
+<p>;wip: Figure out <span class="math">\(\neg (P \iff Q)\)</span>. It's XOR, I think</p>
 <h3 id="proving-quantified-statements">Proving quantified statements</h3>
 <p>To prove <span class="math">\(\forall x \in S, P\)</span>, use the <strong>select method</strong>:</p>
 <blockquote>
@@ -386,7 +403,7 @@ Which is in fact:
 <li>Assume the hypothesis.</li>
 <li>From the hypothesis, deduce the conclusion.</li>
 </ol>
-<p>The <strong>converse</strong> of an implication <span class="math">\(P \implies Q\)</span> is <span class="math">\(Q \implies P\)</span>. This is very different from the original implication. When we prove a statement and its converse, we have proved that <span class="math">\(P \Leftrightarrow Q\)</span>.</p>
+<p>The <strong>converse</strong> of an implication <span class="math">\(P \implies Q\)</span> is <span class="math">\(Q \implies P\)</span>. This is very different from the original implication. When we prove a statement and its converse, we have proved that <span class="math">\(P \iff Q\)</span>.</p>
 <p>For an implication with a quantifier, the quantifier is preserved for its converse; the converse of <span class="math">\(\forall x \in S, P(x) \implies Q(x)\)</span> is <span class="math">\(\forall x \in S, Q(x) \implies P(x)\)</span>.</p>
 <p>The converse of &quot;If Bob is a student at uWaterloo, then Bob is a student in Canada&quot; is &quot;If Bob is a student in Canada, Bob is a student at uWaterloo&quot;.</p>
 <p>The <strong>contrapositive</strong> of an implication <span class="math">\(P \implies Q\)</span> is <span class="math">\(\neg Q \implies \neg P\)</span>. This is logically equivalent to the original statement; in other words, <span class="math">\(P \implies Q \equiv \neg Q \implies \neg P\)</span>. It is occasionally easier to prove the contrapositive rather than the original statement, usually when there are binary choices in the hypothesis and conclusion.</p>
@@ -403,7 +420,7 @@ Which is in fact:
 <li>Derive a contradiction, such as <span class="math">\(1 = 0\)</span>.</li>
 <li>Since the implication cannot be false and result in a contradiction, it is true.</li>
 </ol>
-<p>To prove <span class="math">\(A \Leftrightarrow B\)</span>, we can prove <span class="math">\(A \implies B\)</span> and <span class="math">\(B \implies A\)</span>.</p>
+<p>To prove <span class="math">\(A \iff B\)</span>, we can prove <span class="math">\(A \implies B\)</span> and <span class="math">\(B \implies A\)</span>.</p>
 <h2 id="proof-technique-induction">Proof Technique: Induction</h2>
 <p>Full name is &quot;Principle of Mathematical Induction&quot;.</p>
 <p>Useful for proving statements of the form <span class="math">\(\forall n \in \mb{N}, P(n)\)</span>, where <span class="math">\(P(n)\)</span> is a statement.</p>
@@ -453,7 +470,7 @@ Which is in fact:
 <p>How many cases should be verified (i.e., what is the value of <span class="math">\(b\)</span>?)? As a general rule, if the proof of <span class="math">\(P(k + 1)\)</span> requires that <span class="math">\(k \ge x\)</span>, then <span class="math">\(x\)</span> is the smallest possible value for <span class="math">\(b\)</span>.</p>
 <h2 id="studying-divisibility">Studying Divisibility</h2>
 <p>Recall that if <span class="math">\(n \in \mb{Z}\)</span> and <span class="math">\(m \in \mb{Z}\)</span>,</p>
-<p><span class="math">\(m \mid n \Leftrightarrow \exists k \in \mb{Z}, n = km\)</span></p>
+<p><span class="math">\(m \mid n \iff \exists k \in \mb{Z}, n = km\)</span></p>
 <h3 id="transitivity-of-divisibiilty-td">Transitivity of divisibiilty (TD)</h3>
 <p>Proposition: for integers <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, <span class="math">\(c\)</span>, if <span class="math">\(a \mid b\)</span> and <span class="math">\(b \mid c\)</span>, then <span class="math">\(a \mid c\)</span>.</p>
 <p>Proof:</p>
@@ -753,7 +770,7 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>Proposition: given integers <span class="math">\(a, b, c \in \mb{Z}\)</span>, <span class="math">\(d = \gcd(a, b)\)</span>, the linear Diophantine equation <span class="math">\(ax + by = c\)</span> has solutions fi and only if <span class="math">\(d \mid c\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>We want to show that <span class="math">\(ax + by = c\)</span> having solutions in <span class="math">\(\mb{Z}\)</span> <span class="math">\(\Leftrightarrow\)</span> <span class="math">\(d \mid c\)</span>.<br />First we will prove that <span class="math">\(ax + by = c\)</span> having solutions in <span class="math">\(\mb{Z}\)</span> <span class="math">\(\implies\)</span> <span class="math">\(d \mid c\)</span>.<br />Assume <span class="math">\(ax + by = c\)</span> has solutions in <span class="math">\(\mb{Z}\)</span>.<br />So <span class="math">\(\exists x, y \in \mb{Z}, ax + by = c\)</span> (the <span class="math">\(x\)</span> and <span class="math">\(y\)</span> here are no longer variables, and are specific integers).<br />We know that <span class="math">\(d = \gcd(a, b)\)</span>.<br />So <span class="math">\(d \mid a\)</span> and <span class="math">\(d \mid b\)</span>.<br />By DIC, <span class="math">\(d \mid (au + bv), u, v \in \mb{Z}\)</span>.<br />So <span class="math">\(d \mid (ax + by)\)</span>, and so <span class="math">\(d \mid c\)</span>.<br />Now we will prove the converse, that <span class="math">\(d \mid c\)</span> <span class="math">\(\implies\)</span> <span class="math">\(ax + by = c\)</span> has solutions in <span class="math">\(\mb{Z}\)</span>.<br />Assume <span class="math">\(d \mid c\)</span>.<br />So <span class="math">\(\exists k \in \mb{Z}, c = kd\)</span>.<br />By EEA, <span class="math">\(\exists x, y \in \mb{Z}, d = ax + by\)</span>.<br />So <span class="math">\(kd = a(kx) + b(ky) = c\)</span>.<br />So <span class="math">\(kx\)</span> and <span class="math">\(ky\)</span> are integer solutions to the equation.<br />So the equation must have solutions in <span class="math">\(\mb{Z}\)</span>.<br />Since the implication and its converse are true, <span class="math">\(ax + by = c\)</span> having solutions in <span class="math">\(\mb{Z}\)</span> <span class="math">\(\Leftrightarrow\)</span> <span class="math">\(d \mid c\)</span>.</p>
+<p>We want to show that <span class="math">\(ax + by = c\)</span> having solutions in <span class="math">\(\mb{Z}\)</span> <span class="math">\(\iff\)</span> <span class="math">\(d \mid c\)</span>.<br />First we will prove that <span class="math">\(ax + by = c\)</span> having solutions in <span class="math">\(\mb{Z}\)</span> <span class="math">\(\implies\)</span> <span class="math">\(d \mid c\)</span>.<br />Assume <span class="math">\(ax + by = c\)</span> has solutions in <span class="math">\(\mb{Z}\)</span>.<br />So <span class="math">\(\exists x, y \in \mb{Z}, ax + by = c\)</span> (the <span class="math">\(x\)</span> and <span class="math">\(y\)</span> here are no longer variables, and are specific integers).<br />We know that <span class="math">\(d = \gcd(a, b)\)</span>.<br />So <span class="math">\(d \mid a\)</span> and <span class="math">\(d \mid b\)</span>.<br />By DIC, <span class="math">\(d \mid (au + bv), u, v \in \mb{Z}\)</span>.<br />So <span class="math">\(d \mid (ax + by)\)</span>, and so <span class="math">\(d \mid c\)</span>.<br />Now we will prove the converse, that <span class="math">\(d \mid c\)</span> <span class="math">\(\implies\)</span> <span class="math">\(ax + by = c\)</span> has solutions in <span class="math">\(\mb{Z}\)</span>.<br />Assume <span class="math">\(d \mid c\)</span>.<br />So <span class="math">\(\exists k \in \mb{Z}, c = kd\)</span>.<br />By EEA, <span class="math">\(\exists x, y \in \mb{Z}, d = ax + by\)</span>.<br />So <span class="math">\(kd = a(kx) + b(ky) = c\)</span>.<br />So <span class="math">\(kx\)</span> and <span class="math">\(ky\)</span> are integer solutions to the equation.<br />So the equation must have solutions in <span class="math">\(\mb{Z}\)</span>.<br />Since the implication and its converse are true, <span class="math">\(ax + by = c\)</span> having solutions in <span class="math">\(\mb{Z}\)</span> <span class="math">\(\iff\)</span> <span class="math">\(d \mid c\)</span>.</p>
 </blockquote>
 <p>The proof in the backwards direction shows us how to find at least one solution to the equation.</p>
 <p>Find one solution to the LDE <span class="math">\(21x + 15y = 12\)</span>:</p>
@@ -789,9 +806,9 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 </blockquote>
 <p>For the above, find the unique positive solution (<span class="math">\(x &gt; 0, y &gt; 0\)</span>) which minimizes <span class="math">\(x + y\)</span>:</p>
 <blockquote>
-<p>We want to find <span class="math">\(x, y\)</span> such that <span class="math">\(x &gt; 0 \wedge y &gt; 0\)</span>.<br />Assume <span class="math">\(x &gt; 0, y &gt; 0\)</span>.<br />Clearly, <span class="math">\(x &gt; 0 \Leftrightarrow -26 - 5n &gt; 0 \Leftrightarrow n &lt; -\frac{26}{5}\)</span>.<br />Clearly, <span class="math">\(y &gt; 0 \Leftrightarrow -39 - 7n &gt; 0 \Leftrightarrow n &lt; -\frac{39}{7}\)</span>.<br />Since <span class="math">\(n &lt; -\frac{26}{5} \wedge n &lt; -\frac{39}{7}\)</span>, <span class="math">\(n &lt; \floor{\min(-\frac{26}{5}, -\frac{39}{7})}\)</span>, so <span class="math">\(n &lt; -6\)</span>.<br />Since <span class="math">\(x\)</span> and <span class="math">\(y\)</span> increase as <span class="math">\(n\)</span> decreases, the smallest value of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> results from the largest value of <span class="math">\(n\)</span>.<br />For <span class="math">\(n = 6\)</span>, <span class="math">\(x = -26 - 5 \cdot -6 = 4\)</span> and <span class="math">\(y = -39 - 7 \cdot -6 = 3\)</span>.</p>
+<p>We want to find <span class="math">\(x, y\)</span> such that <span class="math">\(x &gt; 0 \wedge y &gt; 0\)</span>.<br />Assume <span class="math">\(x &gt; 0, y &gt; 0\)</span>.<br />Clearly, <span class="math">\(x &gt; 0 \iff -26 - 5n &gt; 0 \iff n &lt; -\frac{26}{5}\)</span>.<br />Clearly, <span class="math">\(y &gt; 0 \iff -39 - 7n &gt; 0 \iff n &lt; -\frac{39}{7}\)</span>.<br />Since <span class="math">\(n &lt; -\frac{26}{5} \wedge n &lt; -\frac{39}{7}\)</span>, <span class="math">\(n &lt; \floor{\min(-\frac{26}{5}, -\frac{39}{7})}\)</span>, so <span class="math">\(n &lt; -6\)</span>.<br />Since <span class="math">\(x\)</span> and <span class="math">\(y\)</span> increase as <span class="math">\(n\)</span> decreases, the smallest value of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> results from the largest value of <span class="math">\(n\)</span>.<br />For <span class="math">\(n = 6\)</span>, <span class="math">\(x = -26 - 5 \cdot -6 = 4\)</span> and <span class="math">\(y = -39 - 7 \cdot -6 = 3\)</span>.</p>
 </blockquote>
-<p>By the way, <strong>iff</strong> means <strong>if and only if</strong> (<span class="math">\(\Leftrightarrow\)</span>).</p>
+<p>By the way, <strong>iff</strong> means <strong>if and only if</strong> (<span class="math">\(\iff\)</span>).</p>
 <h1 id="section-16">21/10/13</h1>
 <h2 id="congruence">Congruence</h2>
 <p>Given <span class="math">\(a, b, m \in \mb{Z}\)</span>, <span class="math">\(a \equiv b\)</span> (mod <span class="math">\(m\)</span>) - <span class="math">\(a\)</span> is <strong>congruent to</strong> <span class="math">\(b\)</span> modulo <span class="math">\(m\)</span> - if and only if <span class="math">\(m \mid (a - b)\)</span>.</p>
@@ -799,13 +816,13 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>When proving things involving congruence, we often use the definition.</p>
 <h3 id="congruent-iff-same-remainder-cisr">Congruent iff Same Remainder (CISR)</h3>
 <p>Proposition: given <span class="math">\(m \in \mb{N}\)</span>, <span class="math">\(\forall a, b \in \mb{Z}, a \equiv b\)</span> (mod <span class="math">\(m\)</span>) if and only if <span class="math">\(a\)</span> and <span class="math">\(b\)</span> have the same remainder when divided by <span class="math">\(m\)</span>.</p>
-<p>In other words, <span class="math">\(\rem(a, m) = \rem(b, m) \Leftrightarrow\)</span></p>
+<p>In other words, <span class="math">\(\rem(a, m) = \rem(b, m) \iff\)</span></p>
 <p>;wip: prove it - proof in course notes</p>
 <h3 id="congruence-is-an-equivalence-relation-cer">Congruence is an Equivalence Relation (CER)</h3>
 <p>Given <span class="math">\(m \in \mb{N}, \forall a, b, c \in \mb{Z}\)</span>:</p>
 <ul>
 <li><span class="math">\(a \equiv a\)</span> (mod <span class="math">\(m\)</span>): reflexive property</li>
-<li><span class="math">\(a \equiv b \Leftrightarrow b \equiv a\)</span> (mod <span class="math">\(m\)</span>): symmetric property</li>
+<li><span class="math">\(a \equiv b \iff b \equiv a\)</span> (mod <span class="math">\(m\)</span>): symmetric property</li>
 <li><span class="math">\(a \equiv b \wedge b \equiv c \implies a \equiv c\)</span> (mod <span class="math">\(m\)</span>): transitive property</li>
 </ul>
 <p>The first two are trivially proved. The last one is proved below:</p>
@@ -824,9 +841,9 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>Proof of first point.<br />Assume <span class="math">\(a \equiv a&#39;\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv b&#39;\)</span> (mod <span class="math">\(m\)</span>).<br />So <span class="math">\(m \mid a - a&#39;\)</span> and <span class="math">\(m \mid b - b&#39;\)</span>.<br />By DIC, <span class="math">\(m \mid (a - a&#39;) + (b - b&#39;)\)</span>, so <span class="math">\(m \mid (a + b) - (a&#39; + b&#39;)\)</span>.<br />So <span class="math">\(a + b \equiv a&#39; + b&#39;\)</span> (mod <span class="math">\(m\)</span>). The second point is proved similarly.</p>
 </blockquote>
 <blockquote>
-<p>The third point is proved slightly differently.<br />Assume <span class="math">\(a \equiv a&#39;\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv b&#39;\)</span> (mod <span class="math">\(m\)</span>).<br />We want to prove <span class="math">\(m \mid ab - a&#39;b&#39;\)</span>.<br />Clearly, <span class="math">\(ab - a&#39;b&#39; = ab - ab&#39; + ab&#39; - a&#39;b&#39; = a(b - b&#39;) + b&#39;(a - a&#39;)\)</span>.<br />;wip</p>
+<p>The third point is proved slightly differently.<br />Assume <span class="math">\(a \equiv a&#39;\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv b&#39;\)</span> (mod <span class="math">\(m\)</span>).<br />We want to prove <span class="math">\(m \mid ab - a&#39;b&#39;\)</span>.<br />Clearly, <span class="math">\(ab - a&#39;b&#39; = ab - ab&#39; + ab&#39; - a&#39;b&#39; = a(b - b&#39;) + b&#39;(a - a&#39;)\)</span>.<br />Since <span class="math">\(m \mid a - a&#39;\)</span> and <span class="math">\(m \mid b - b&#39;\)</span>, <span class="math">\(m \mid a(b - b&#39;) + b&#39;(a - a&#39;)\)</span>, by DIC.<br />So <span class="math">\(m \mid ab - a&#39;b&#39;\)</span>, and <span class="math">\(ab \equiv a&#39;b&#39;\)</span> (mod <span class="math">\(m\)</span>)</p>
 </blockquote>
-<h3 id="wip-what-was-the-name-of-the-proposition-look-at-the-slides-later">;wip: what was the name of the proposition? look at the slides later</h3>
+<h3 id="congruences-and-division-cd">Congruences and Division (CD)</h3>
 <p>Note that <span class="math">\(ac \equiv bc, c \ne 0\)</span> does not imply <span class="math">\(a \equiv b\)</span> (mod <span class="math">\(m\)</span>).</p>
 <p>However, if <span class="math">\(c\)</span> is coprime to <span class="math">\(m\)</span> (<span class="math">\(\gcd(c, m) = 1\)</span>), then <span class="math">\(a \equiv b\)</span>.</p>
 <p>In other words, given <span class="math">\(m \in \mb{N}, a, b, c \in \mb{Z}, c \ne 0\)</span>, if <span class="math">\(ac \equiv bc\)</span> and <span class="math">\(\gcd(c, m) = 1\)</span>, then <span class="math">\(a \equiv b\)</span>.</p>
