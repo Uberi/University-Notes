@@ -24,8 +24,6 @@ $$
 Preliminaries
 -------------
 
-Ben's email: wangtianhui.ben@gmail.com
-
 Integers: $\mb{Z} = \ldots, -2, -1, 0, 1, 2, \ldots$
 
 Rational  numbers: $\mb{Q} = \frac{p}{q}, p \in \mb{Z}, q \in \mb{Z}$
@@ -941,6 +939,10 @@ $$
 
 ### Power law
 
+$\frac{\dee}{\dee x} x^n = nx^{n - 1}$.
+
+Proof for positive integer $n$:
+
 > Consider $\frac{\dee}{\dee x} x^n$.  
 > Let $n$ be a positive integer.  
 > By definition, $\frac{\dee}{\dee x} x^n = \lim_{h \to 0} \frac{(x + h)^n - x^n}{h}$.  
@@ -948,6 +950,12 @@ $$
 > Divide all terms by $h$: $\frac{(x + h)^n - x^n}{h} = nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}$.  
 > Clearly, $\lim_{h \to 0} (nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}) = nx^{x - 1}$.  
 > So $\frac{\dee}{\dee x} x^n = nx^{n - 1}$.  
+
+Proof for all real $n$ (requires implicit differentiation, described later):
+
+> Clearly, $x^n = e^{\ln x^n} = e^{n \ln x}$.  
+> So $\frac{\dee}{\dee x} x^n = \frac{\dee}{\dee x} e^{n \ln x} = e^{n \ln x} \cdot \frac{\dee}{\dee x} (n \ln x)$.  
+> So $\frac{\dee}{\dee x} x^n = e^{n \ln x} \cdot n \cdot \frac{1}{x} = n\frac{x^n}{x} = nx^{n - 1}$.  
 
 # 9/10/13
 
@@ -1257,11 +1265,6 @@ Let $T(x)$ be the temperature at a height above the surface of the earth. Let $h
 > Likewise, $\frac{\dee h}{\dee t}$ is independent of the atmospheric temperature.  
 > So $\frac{\dee T}{\dee t}$ represents the rate of change in temperature with respect to time **felt by the skydiver**.  
 
-;wip: MATH137 midterm Monday Oct. 21 7pm to 8:50pm
-;wip: section 3 location: last name A-H in RCH211, I-M in RCH307, N-Z in RCH 301
-;wip: midterm covers appendix D, chapters 1 without 1.4, 2, 3.1, 3.2, 3.3 (no hyperbolic derivatives), lecture content, everything up and including to assignment 5
-;wip: need to know definitions (limits including at infinity, derivatives, continuity), theorems (squeeze theorem, IVT, differentiability implies continuity), concepts (inverse functions and their domain and range for trigonometric/exponential/hyperbolic functions)
-
 Exponential Rule
 ----------------
 
@@ -1314,10 +1317,16 @@ Where does $x^3 + y^3 = 3xy$ have a horizontal tangent?
 
 > $$
 \begin{align}
-\text{find points where } \frac{\dee y}{\dee x} &= 0 \\
 \frac{\dee}{\dee x} x^3 + \frac{\dee}{\dee x} y^3 &= \frac{\dee}{\dee x} 3xy \\
-&= 3x^2 + \frac{\dee}{\dee x} y^3 = \frac{\dee}{\dee x} 3xy \\
-;wip
+&= 3x^2 + y' 3y^2 = 3y + 3xy' \\
+3x^2 - 3y &= (3x - 3y^2)y' \\
+3x^2 - 3y &= (3x - 3y^2)y' \\
+y' &= \frac{3x^2 - 3y}{3x - 3y^2} = \frac{x^2 - y}{x - y^2} = 0 \\
+x^2 - y = 0 \wedge x - y^2 \ne 0 \equiv y = x^2 \wedge y \ne \sqrt{x} \equiv y = x^2 \wedge x \ne 0 \wedge y \ne 0 \\
+x^3 + (x^2)^3 = 3xx^2 \equiv x^3 + x^6 = 3x^3 \equiv x^3(x^3 - 1) = 0 \\
+x = 0 \text{ extraneous}, x = 1 \\
+y = 1^2 = 1 \\
+\text{There is a horizontal tangent at } (1, 1)
 \end{align}
 $$
 
@@ -1329,13 +1338,6 @@ Consider $y = \log_a x$:
 > So $\frac{\dee}{\dee x} x = \frac{\dee}{\dee x} a^y = \frac{\dee}{\dee y} a^y \cdot \frac{\dee y}{\dee x}$.  
 > So $1 = a^y \ln a \cdot \frac{\dee y}{\dee x}$.  
 > Clearly, $\frac{\dee y}{\dee x} = \frac{1}{a^y \ln a}$.  
-> ;wip: write this as a rule
-
-Now we can prove the power rule for all real exponents:
-
-> Clearly, $x^n = e^{\ln x^n} = e^{n \ln x}$.  
-> So $\frac{\dee}{\dee x} x^n = \frac{\dee}{\dee x} e^{n \ln x} = e^{n \ln x} \cdot \frac{\dee}{\dee x} (n \ln x)$.  
-> So $\frac{\dee}{\dee x} x^n = e^{n \ln x} \cdot n \cdot \frac{1}{x} = n\frac{x^n}{x} = nx^{n - 1}$.  
 > ;wip: write this as a rule
 
 Derivative of Inverse Trignonometric Functions
@@ -1352,7 +1354,7 @@ Proof:
 > So $\frac{\dee y}{\dee x} = \frac{1}{\cos y}$.  
 > We want to write this in terms of $x$.  
 > Clearly, $\cos y = \pm \sqrt{1 - \sin^2 y}$.  
-> We pick the positive answer since $\cos y > 0$ whenever $-\frac{\pi}{2} \le y \le \frac{\pi}{2}$.  
+> We pick the positive answer since $\cos y \ge 0$ whenever $-\frac{\pi}{2} \le y \le \frac{\pi}{2}$, the range of $\arcsin$.  
 > So $\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - \sin^2 y}}$.  
 > So $\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - x^2}}$.  
 
@@ -1363,12 +1365,123 @@ $\frac{\dee}{\dee x} \arccos x = -\frac{1}{\sqrt{1 - x^2}}$.
 Proof:
 
 > Let $y = \arccos x$. Then $x = \cos y$.  
-> ;wip
+> Implicitly differentiating, $1 = -\sin y \frac{\dee y}{\dee x}$.  
+> So $\frac{\dee y}{\dee x} = -\frac{1}{\sin y}$.  
+> We want to write this is terms of $x$.  
+> Clearly, $\sin y = \pm \sqrt{1 - \cos^2 y}$.  
+> We pick the positive answer since $\sin y \ge 0$ whenever $0 \le y \le \pi$, the range of $\arccos$.  
+> So $\frac{\dee y}{\dee x} = -\frac{1}{\sqrt{1 - \cos^2 y}}$.  
+> So $\frac{\dee y}{\dee x} = -\frac{1}{\sqrt{1 - x^2}}$.  
 
 ### Arctangent rule
 
-$\frac{\dee}{\dee x} \arctan x = \frac{1}{1 + x}$.
+$\frac{\dee}{\dee x} \arctan x = \frac{1}{1 + x^2}$.
 
 Proof:
 
-> ;wip: do this for arctan
+> Let $y = \arctan x$. Then $x = \tan y$.  
+> Implicitly differentiating, $1 = sec^2 y \frac{\dee y}{\dee x}$.  
+> So $\frac{\dee y}{\dee x} = -\frac{1}{\sec^2 y}$.  
+> We want to write this in terms of $x$.  
+> Clearly, $\frac{\sin^2 x}{\cos^2 x} + \frac{\cos^2 x}{\cos^2 x} = \frac{1}{\cos^2 x}$.  
+> Clearly, $\tan^2 x + 1 = \sec^2 x$.  
+> So $\frac{\dee y}{\dee x} = -\frac{1}{tan^2 x + 1}$.  
+> So $\frac{\dee y}{\dee x} = -\frac{1}{x^2 + 1}$.  
+
+# 23/10/13
+
+Logarithmic Differentiation
+---------------------------
+
+**Logarithmic differentiation** is a technique useful for differentiating complicated products and quotients with powers, or functions of the form $f(x) = g(x)^{h(x)}$.
+
+The general process is as follows:
+
+1. Take the natural logarithm of both sides of the equation. Now we can use logarithm rules to turn products and quotients to sums and differences.
+2. Differentiate implicitly.
+3. Solve for $y'$.
+
+Find $y'$ if $y = \frac{(2x - 3)^3 (7x - 1)^4}$:
+
+> $$
+\begin{align}
+y &= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \\
+\ln y &= \ln \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \\
+\ln y &= \ln (2x - 3)^3 + \ln (7x - 1)^4 - \ln (5x + 1)^5 \\
+\ln y &= 3 \ln (2x - 3) + 4 \ln (7x - 1) - 5 \ln (5x + 1) \\
+\frac{\dee}{\dee x} \ln y &= \frac{\dee}{\dee x} (3 \ln (2x - 3) + 4 \ln (7x - 1) - 5 \ln (5x + 1)) \\
+y' \frac{\dee}{\dee y} \ln y &= 3 \frac{\dee}{\dee x} \ln (2x - 3) + 4 \frac{\dee}{\dee x} \ln (7x - 1) - 5 \frac{\dee}{\dee x} \ln (5x + 1) \\
+\frac{y'}{y} &= 3 \frac{1}{2x - 3} \frac{\dee}{\dee x} (2x - 3) + 4 \frac{1}{7x - 1} \frac{\dee}{\dee x} (7x - 1) - 5 \frac{1}{5x + 1} \frac{\dee}{\dee x} (5x + 1) \\
+\frac{y'}{y} &= 3 \frac{1}{2x - 3} 2 + 4 \frac{1}{7x - 1} 7 - 5 \frac{1}{5x + 1} 5 \\
+\frac{y'} &= y \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
+y' &= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
+\end{align}
+$$
+
+We can use this technique to differentiate functions like $f(x) = g(x)^{h(x)}$:
+
+> $$
+\begin{align}
+f(x) &= g(x)^{h(x)} \\
+\ln f(x) &= \ln g(x)^{h(x)} \\
+\ln f(x) &= h(x) \ln g(x) \\
+\frac{\dee}{\dee x} \ln f(x) &= \frac{\dee}{\dee x} h(x) \ln g(x) \\
+f'(x) \frac{1}{f(x)} &= h'(x) \ln g(x) + h(x) \frac{\dee}{\dee x} \ln g(x) \\
+f'(x) &= f(x) (h'(x) \ln g(x) + \frac{h(x) g'(x)}{g(x)}) \\
+\end{align}
+$$
+
+Find the equations of the tangents of $y = x^{\ln x}$ at $(1, 1)$ and $(e, e)$:
+
+> $$
+\begin{align}
+y &= x^{\ln x} \\
+\ln y &= \ln x \ln x = (\ln x)^2 \\
+\frac{\dee}{\dee x} \ln y &= \frac{\dee}{\dee x} (\ln x)^2 \\
+\frac{y'}{y} &= 2 \ln x \frac{1}{x} \\
+y' &= \frac{2 x^{\ln x} \ln x}{x} \\
+t_1(1) = 1 &= \frac{2 1^{\ln 1} \ln 1}{1} 1 + b = 0 \cdot 1 + b = b \\
+t_1(a) &= 1 \\
+t_e(a) = e &= \frac{2 e^{\ln e} \ln e}{e} a + b = 2a + b \\
+t_e(e) = e &= 2e + b \\
+t_e(a) = 2a - e \\
+\end{align}
+$$
+
+Find $\lim_{x \to 0^+} x^{\ln x}$:
+
+> $\lim_{x \to 0^+} x^{\ln x}$ is an **indeterminate form** - $0^{-\infty}$. This simply means that we can't determine its value as it is.  
+> Clearly, $\lim_{x \to 0^+} x^{\ln x} = e^{\ln \lim_{x \to 0^+} x^{\ln x}}$.  
+> Since $\ln$ is continuous, $e^{\ln \lim_{x \to 0^+} x^{\ln x}} = e^{\lim_{x \to 0^+} \ln x^{\ln x}} = e^{\lim_{x \to 0^+} (\ln x)^2}$.  
+> Clearly, $\lim_{x \to 0^+} (\ln x)^2 = \infty$.  
+> So $\lim_{x \to 0^+} x^{\ln x} = e^\infty = \infty$.  
+
+Suppose $f(x)$ has a domain and range $[a, b]$ and is continuous. Show that the graph of $f(x)$ intersects $y = x$ - show that $\exists c \in [a, b], f(c) = c$:
+
+> Clearly, $f(a) \ge a$ and $f(b) \le b$.  
+> If $f(a) = a$ or $f(b) = b$, then $c$ exists.  
+> Otherwise, we can use the IVT to prove $c$ exists.  
+> Let $g(x) = f(x) - x$.  
+> So $g(a) = f(a) - a$ and $g(b) = f(b) - b$.  
+> Clearly, $g(a) > 0$ and $g(b) < 0$, and so $g(x)$ is continuous.  
+
+### The constant e as a limit
+
+We can also write $e$ as a limit:
+
+> $$
+\begin{align}
+f(x) &= \ln x \\
+f'(x) &= \frac{1}{x} \\
+f'(1) &= 1 \\
+f'(x) &= \lim_{h \to 0} \frac{\ln(1 + h) - \ln(1)}{h}\\
+&= \lim_{h \to 0} \frac{\ln(1 + h)}{h} \\
+&= \lim_{h \to 0} \frac{1}{h} \ln(1 + h) \\
+&= \lim_{h \to 0} \ln(1 + h)^\frac{1}{h} = 1 \\
+e^{\lim_{h \to 0} \ln(1 + h)^\frac{1}{h}} &= e^1 = e^{\ln \lim_{h \to 0} (1 + h)^\frac{1}{h}} \\
+e &= \lim_{h \to 0} (1 + h)^\frac{1}{h} \\
+\end{align}
+$$
+> Consider $f(x) = \ln x$.
+
+Alternatively, if $n = \frac{1}{x}$, we can write the limit as $e = \lim_{n \to \infty} (1 + \frac{1}{n})^n$.

@@ -76,7 +76,6 @@ Office hours: starts week 3, details TBA ;wip</code></pre>
 \]</span></p>
 <h1 id="section">9/9/13</h1>
 <h2 id="preliminaries">Preliminaries</h2>
-<p>Ben's email: wangtianhui.ben@gmail.com</p>
 <p>Integers: <span class="math">\(\mb{Z} = \ldots, -2, -1, 0, 1, 2, \ldots\)</span></p>
 <p>Rational numbers: <span class="math">\(\mb{Q} = \frac{p}{q}, p \in \mb{Z}, q \in \mb{Z}\)</span></p>
 <p>Irrational numbers: cannot be expressed as ratio, non-terminating and non-repeating decimal expansions - <span class="math">\(\pi\)</span>, <span class="math">\(e\)</span>, <span class="math">\(\sqrt{2}\)</span>, <span class="math">\(ln(2)\)</span>.</p>
@@ -720,8 +719,14 @@ f&#39;(0) &amp;= \lim_{x \to 0} \frac{x^2 \sin \frac{1}{x} - 0}{x - 0} \\
 \]</span></p>
 </blockquote>
 <h3 id="power-law">Power law</h3>
+<p><span class="math">\(\frac{\dee}{\dee x} x^n = nx^{n - 1}\)</span>.</p>
+<p>Proof for positive integer <span class="math">\(n\)</span>:</p>
 <blockquote>
 <p>Consider <span class="math">\(\frac{\dee}{\dee x} x^n\)</span>.<br />Let <span class="math">\(n\)</span> be a positive integer.<br />By definition, <span class="math">\(\frac{\dee}{\dee x} x^n = \lim_{h \to 0} \frac{(x + h)^n - x^n}{h}\)</span>.<br />Using the binomial theorem: <span class="math">\((x + h)^n - x^n = (x^n + nx^{n - 1}h + \frac{n(n - 1)}{2} x^{n - 2} h^2 + \ldots + nxh^{n - 1} + h^n) - x^n\)</span>.<br />Divide all terms by <span class="math">\(h\)</span>: <span class="math">\(\frac{(x + h)^n - x^n}{h} = nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}\)</span>.<br />Clearly, <span class="math">\(\lim_{h \to 0} (nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}) = nx^{x - 1}\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x^n = nx^{n - 1}\)</span>.</p>
+</blockquote>
+<p>Proof for all real <span class="math">\(n\)</span> (requires implicit differentiation, described later):</p>
+<blockquote>
+<p>Clearly, <span class="math">\(x^n = e^{\ln x^n} = e^{n \ln x}\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x^n = \frac{\dee}{\dee x} e^{n \ln x} = e^{n \ln x} \cdot \frac{\dee}{\dee x} (n \ln x)\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x^n = e^{n \ln x} \cdot n \cdot \frac{1}{x} = n\frac{x^n}{x} = nx^{n - 1}\)</span>.</p>
 </blockquote>
 <h1 id="section-12">9/10/13</h1>
 <p><span class="math">\[
@@ -967,7 +972,6 @@ t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sq
 <blockquote>
 <p>Clearly, <span class="math">\(\frac{\dee T}{\dee t} = \frac{\dee T}{\dee h} \frac{\dee h}{\dee t}\)</span>.<br />So <span class="math">\(\frac{\dee T}{\dee t}\)</span> is the rate of change in temperature with respect to height times rate of change in height with respect to time.<br />So it is the rate of change in temperature with respect to height time velocity.<br />Note that <span class="math">\(\frac{\dee T}{\dee h}\)</span> is independent of the skydiver - it is simply the change in temperature in the atmosphere.<br />Likewise, <span class="math">\(\frac{\dee h}{\dee t}\)</span> is independent of the atmospheric temperature.<br />So <span class="math">\(\frac{\dee T}{\dee t}\)</span> represents the rate of change in temperature with respect to time <strong>felt by the skydiver</strong>.</p>
 </blockquote>
-<p>;wip: MATH137 midterm Monday Oct. 21 7pm to 8:50pm ;wip: section 3 location: last name A-H in RCH211, I-M in RCH307, N-Z in RCH 301 ;wip: midterm covers appendix D, chapters 1 without 1.4, 2, 3.1, 3.2, 3.3 (no hyperbolic derivatives), lecture content, everything up and including to assignment 5 ;wip: need to know definitions (limits including at infinity, derivatives, continuity), theorems (squeeze theorem, IVT, differentiability implies continuity), concepts (inverse functions and their domain and range for trigonometric/exponential/hyperbolic functions)</p>
 <h2 id="exponential-rule">Exponential Rule</h2>
 <p>We can use the chain rule to find <span class="math">\(\frac{\dee}{\dee x} a^x\)</span>:</p>
 <blockquote>
@@ -1004,10 +1008,16 @@ t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sq
 <blockquote>
 <p><span class="math">\[
 \begin{align}
-\text{find points where } \frac{\dee y}{\dee x} &amp;= 0 \\
 \frac{\dee}{\dee x} x^3 + \frac{\dee}{\dee x} y^3 &amp;= \frac{\dee}{\dee x} 3xy \\
-&amp;= 3x^2 + \frac{\dee}{\dee x} y^3 = \frac{\dee}{\dee x} 3xy \\
-;wip
+&amp;= 3x^2 + y&#39; 3y^2 = 3y + 3xy&#39; \\
+3x^2 - 3y &amp;= (3x - 3y^2)y&#39; \\
+3x^2 - 3y &amp;= (3x - 3y^2)y&#39; \\
+y&#39; &amp;= \frac{3x^2 - 3y}{3x - 3y^2} = \frac{x^2 - y}{x - y^2} = 0 \\
+x^2 - y = 0 \wedge x - y^2 \ne 0 \equiv y = x^2 \wedge y \ne \sqrt{x} \equiv y = x^2 \wedge x \ne 0 \wedge y \ne 0 \\
+x^3 + (x^2)^3 = 3xx^2 \equiv x^3 + x^6 = 3x^3 \equiv x^3(x^3 - 1) = 0 \\
+x = 0 \text{ extraneous}, x = 1 \\
+y = 1^2 = 1 \\
+\text{There is a horizontal tangent at } (1, 1)
 \end{align}
 \]</span></p>
 </blockquote>
@@ -1016,29 +1026,107 @@ t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sq
 <blockquote>
 <p>Clearly, <span class="math">\(x = a^y\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x = \frac{\dee}{\dee x} a^y = \frac{\dee}{\dee y} a^y \cdot \frac{\dee y}{\dee x}\)</span>.<br />So <span class="math">\(1 = a^y \ln a \cdot \frac{\dee y}{\dee x}\)</span>.<br />Clearly, <span class="math">\(\frac{\dee y}{\dee x} = \frac{1}{a^y \ln a}\)</span>.<br />;wip: write this as a rule</p>
 </blockquote>
-<p>Now we can prove the power rule for all real exponents:</p>
-<blockquote>
-<p>Clearly, <span class="math">\(x^n = e^{\ln x^n} = e^{n \ln x}\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x^n = \frac{\dee}{\dee x} e^{n \ln x} = e^{n \ln x} \cdot \frac{\dee}{\dee x} (n \ln x)\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x^n = e^{n \ln x} \cdot n \cdot \frac{1}{x} = n\frac{x^n}{x} = nx^{n - 1}\)</span>.<br />;wip: write this as a rule</p>
-</blockquote>
 <h2 id="derivative-of-inverse-trignonometric-functions">Derivative of Inverse Trignonometric Functions</h2>
 <h3 id="arcsine-rule">Arcsine rule</h3>
 <p><span class="math">\(\frac{\dee}{\dee x} \arcsin x = \frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>Let <span class="math">\(y = \arcsin x\)</span>. Then <span class="math">\(x = \sin y\)</span>.<br />Implicitly differentiating, <span class="math">\(1 = \cos y \frac{\dee y}{\dee x}\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = \frac{1}{\cos y}\)</span>.<br />We want to write this in terms of <span class="math">\(x\)</span>.<br />Clearly, <span class="math">\(\cos y = \pm \sqrt{1 - \sin^2 y}\)</span>.<br />We pick the positive answer since <span class="math">\(\cos y &gt; 0\)</span> whenever <span class="math">\(-\frac{\pi}{2} \le y \le \frac{\pi}{2}\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - \sin^2 y}}\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
+<p>Let <span class="math">\(y = \arcsin x\)</span>. Then <span class="math">\(x = \sin y\)</span>.<br />Implicitly differentiating, <span class="math">\(1 = \cos y \frac{\dee y}{\dee x}\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = \frac{1}{\cos y}\)</span>.<br />We want to write this in terms of <span class="math">\(x\)</span>.<br />Clearly, <span class="math">\(\cos y = \pm \sqrt{1 - \sin^2 y}\)</span>.<br />We pick the positive answer since <span class="math">\(\cos y \ge 0\)</span> whenever <span class="math">\(-\frac{\pi}{2} \le y \le \frac{\pi}{2}\)</span>, the range of <span class="math">\(\arcsin\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - \sin^2 y}}\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
 </blockquote>
 <h3 id="arccosine-rule">Arccosine rule</h3>
 <p><span class="math">\(\frac{\dee}{\dee x} \arccos x = -\frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>Let <span class="math">\(y = \arccos x\)</span>. Then <span class="math">\(x = \cos y\)</span>.<br />;wip</p>
+<p>Let <span class="math">\(y = \arccos x\)</span>. Then <span class="math">\(x = \cos y\)</span>.<br />Implicitly differentiating, <span class="math">\(1 = -\sin y \frac{\dee y}{\dee x}\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = -\frac{1}{\sin y}\)</span>.<br />We want to write this is terms of <span class="math">\(x\)</span>.<br />Clearly, <span class="math">\(\sin y = \pm \sqrt{1 - \cos^2 y}\)</span>.<br />We pick the positive answer since <span class="math">\(\sin y \ge 0\)</span> whenever <span class="math">\(0 \le y \le \pi\)</span>, the range of <span class="math">\(\arccos\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = -\frac{1}{\sqrt{1 - \cos^2 y}}\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = -\frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
 </blockquote>
 <h3 id="arctangent-rule">Arctangent rule</h3>
-<p><span class="math">\(\frac{\dee}{\dee x} \arctan x = \frac{1}{1 + x}\)</span>.</p>
+<p><span class="math">\(\frac{\dee}{\dee x} \arctan x = \frac{1}{1 + x^2}\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>;wip: do this for arctan</p>
+<p>Let <span class="math">\(y = \arctan x\)</span>. Then <span class="math">\(x = \tan y\)</span>.<br />Implicitly differentiating, <span class="math">\(1 = sec^2 y \frac{\dee y}{\dee x}\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = -\frac{1}{\sec^2 y}\)</span>.<br />We want to write this in terms of <span class="math">\(x\)</span>.<br />Clearly, <span class="math">\(\frac{\sin^2 x}{\cos^2 x} + \frac{\cos^2 x}{\cos^2 x} = \frac{1}{\cos^2 x}\)</span>.<br />Clearly, <span class="math">\(\tan^2 x + 1 = \sec^2 x\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = -\frac{1}{tan^2 x + 1}\)</span>.<br />So <span class="math">\(\frac{\dee y}{\dee x} = -\frac{1}{x^2 + 1}\)</span>.</p>
 </blockquote>
+<h1 id="section-17">23/10/13</h1>
+<h2 id="logarithmic-differentiation">Logarithmic Differentiation</h2>
+<p><strong>Logarithmic differentiation</strong> is a technique useful for differentiating complicated products and quotients with powers, or functions of the form <span class="math">\(f(x) = g(x)^{h(x)}\)</span>.</p>
+<p>The general process is as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Take the natural logarithm of both sides of the equation. Now we can use logarithm rules to turn products and quotients to sums and differences.</li>
+<li>Differentiate implicitly.</li>
+<li>Solve for <span class="math">\(y&#39;\)</span>.</li>
+</ol>
+<p>Find <span class="math">\(y&#39;\)</span> if <span class="math">\(y = \frac{(2x - 3)^3 (7x - 1)^4}\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+y &amp;= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \\
+\ln y &amp;= \ln \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \\
+\ln y &amp;= \ln (2x - 3)^3 + \ln (7x - 1)^4 - \ln (5x + 1)^5 \\
+\ln y &amp;= 3 \ln (2x - 3) + 4 \ln (7x - 1) - 5 \ln (5x + 1) \\
+\frac{\dee}{\dee x} \ln y &amp;= \frac{\dee}{\dee x} (3 \ln (2x - 3) + 4 \ln (7x - 1) - 5 \ln (5x + 1)) \\
+y&#39; \frac{\dee}{\dee y} \ln y &amp;= 3 \frac{\dee}{\dee x} \ln (2x - 3) + 4 \frac{\dee}{\dee x} \ln (7x - 1) - 5 \frac{\dee}{\dee x} \ln (5x + 1) \\
+\frac{y&#39;}{y} &amp;= 3 \frac{1}{2x - 3} \frac{\dee}{\dee x} (2x - 3) + 4 \frac{1}{7x - 1} \frac{\dee}{\dee x} (7x - 1) - 5 \frac{1}{5x + 1} \frac{\dee}{\dee x} (5x + 1) \\
+\frac{y&#39;}{y} &amp;= 3 \frac{1}{2x - 3} 2 + 4 \frac{1}{7x - 1} 7 - 5 \frac{1}{5x + 1} 5 \\
+\frac{y&#39;} &amp;= y \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
+y&#39; &amp;= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>We can use this technique to differentiate functions like <span class="math">\(f(x) = g(x)^{h(x)}\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+f(x) &amp;= g(x)^{h(x)} \\
+\ln f(x) &amp;= \ln g(x)^{h(x)} \\
+\ln f(x) &amp;= h(x) \ln g(x) \\
+\frac{\dee}{\dee x} \ln f(x) &amp;= \frac{\dee}{\dee x} h(x) \ln g(x) \\
+f&#39;(x) \frac{1}{f(x)} &amp;= h&#39;(x) \ln g(x) + h(x) \frac{\dee}{\dee x} \ln g(x) \\
+f&#39;(x) &amp;= f(x) (h&#39;(x) \ln g(x) + \frac{h(x) g&#39;(x)}{g(x)}) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Find the equations of the tangents of <span class="math">\(y = x^{\ln x}\)</span> at <span class="math">\((1, 1)\)</span> and <span class="math">\((e, e)\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+y &amp;= x^{\ln x} \\
+\ln y &amp;= \ln x \ln x = (\ln x)^2 \\
+\frac{\dee}{\dee x} \ln y &amp;= \frac{\dee}{\dee x} (\ln x)^2 \\
+\frac{y&#39;}{y} &amp;= 2 \ln x \frac{1}{x} \\
+y&#39; &amp;= \frac{2 x^{\ln x} \ln x}{x} \\
+t_1(1) = 1 &amp;= \frac{2 1^{\ln 1} \ln 1}{1} 1 + b = 0 \cdot 1 + b = b \\
+t_1(a) &amp;= 1 \\
+t_e(a) = e &amp;= \frac{2 e^{\ln e} \ln e}{e} a + b = 2a + b \\
+t_e(e) = e &amp;= 2e + b \\
+t_e(a) = 2a - e \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Find <span class="math">\(\lim_{x \to 0^+} x^{\ln x}\)</span>:</p>
+<blockquote>
+<p><span class="math">\(\lim_{x \to 0^+} x^{\ln x}\)</span> is an <strong>indeterminate form</strong> - <span class="math">\(0^{-\infty}\)</span>. This simply means that we can't determine its value as it is.<br />Clearly, <span class="math">\(\lim_{x \to 0^+} x^{\ln x} = e^{\ln \lim_{x \to 0^+} x^{\ln x}}\)</span>.<br />Since <span class="math">\(\ln\)</span> is continuous, <span class="math">\(e^{\ln \lim_{x \to 0^+} x^{\ln x}} = e^{\lim_{x \to 0^+} \ln x^{\ln x}} = e^{\lim_{x \to 0^+} (\ln x)^2}\)</span>.<br />Clearly, <span class="math">\(\lim_{x \to 0^+} (\ln x)^2 = \infty\)</span>.<br />So <span class="math">\(\lim_{x \to 0^+} x^{\ln x} = e^\infty = \infty\)</span>.</p>
+</blockquote>
+<p>Suppose <span class="math">\(f(x)\)</span> has a domain and range <span class="math">\([a, b]\)</span> and is continuous. Show that the graph of <span class="math">\(f(x)\)</span> intersects <span class="math">\(y = x\)</span> - show that <span class="math">\(\exists c \in [a, b], f(c) = c\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(f(a) \ge a\)</span> and <span class="math">\(f(b) \le b\)</span>.<br />If <span class="math">\(f(a) = a\)</span> or <span class="math">\(f(b) = b\)</span>, then <span class="math">\(c\)</span> exists.<br />Otherwise, we can use the IVT to prove <span class="math">\(c\)</span> exists.<br />Let <span class="math">\(g(x) = f(x) - x\)</span>.<br />So <span class="math">\(g(a) = f(a) - a\)</span> and <span class="math">\(g(b) = f(b) - b\)</span>.<br />Clearly, <span class="math">\(g(a) &gt; 0\)</span> and <span class="math">\(g(b) &lt; 0\)</span>, and so <span class="math">\(g(x)\)</span> is continuous.</p>
+</blockquote>
+<h3 id="the-constant-e-as-a-limit">The constant e as a limit</h3>
+<p>We can also write <span class="math">\(e\)</span> as a limit:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+f(x) &amp;= \ln x \\
+f&#39;(x) &amp;= \frac{1}{x} \\
+f&#39;(1) &amp;= 1 \\
+f&#39;(x) &amp;= \lim_{h \to 0} \frac{\ln(1 + h) - \ln(1)}{h}\\
+&amp;= \lim_{h \to 0} \frac{\ln(1 + h)}{h} \\
+&amp;= \lim_{h \to 0} \frac{1}{h} \ln(1 + h) \\
+&amp;= \lim_{h \to 0} \ln(1 + h)^\frac{1}{h} = 1 \\
+e^{\lim_{h \to 0} \ln(1 + h)^\frac{1}{h}} &amp;= e^1 = e^{\ln \lim_{h \to 0} (1 + h)^\frac{1}{h}} \\
+e &amp;= \lim_{h \to 0} (1 + h)^\frac{1}{h} \\
+\end{align}
+\]</span> Consider <span class="math">\(f(x) = \ln x\)</span>.</p>
+</blockquote>
+<p>Alternatively, if <span class="math">\(n = \frac{1}{x}\)</span>, we can write the limit as <span class="math">\(e = \lim_{n \to \infty} (1 + \frac{1}{n})^n\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
