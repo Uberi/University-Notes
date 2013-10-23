@@ -17,7 +17,7 @@ $$
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\modn}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
 $$
 
 # 9/9/13
@@ -1179,7 +1179,7 @@ Congruence
 
 Given $a, b, m \in \mb{Z}$, $a \equiv b \pmod{m}$ - $a$ is **congruent to** $b$ modulo $m$ - if and only if $m \mid (a - b)$.
 
-If $m \nmid (a - b)$, then $a \nequiv b \pmod{m}$ - $a$ is not congruent to $b$ modulo $m$.
+If $m \nmid (a - b)$, then $a \not\equiv b \pmod{m}$ - $a$ is not congruent to $b$ modulo $m$.
 
 When proving things involving congruence, we often use the definition.
 

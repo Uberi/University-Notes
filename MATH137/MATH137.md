@@ -6,8 +6,8 @@ Calculus I:
 
 Instructor:
 
-    Name: Sean Spezaile
-    Email: sspezail@uwaterloo.ca
+    Name: Sean Speziale
+    Email: sspezial@uwaterloo.ca
     Office: M3 2128
     Advising Hours: Monday, Wednesday at 12:00-13:30, MC 4023
     Office hours: starts week 3, details TBA ;wip
@@ -1401,7 +1401,7 @@ The general process is as follows:
 2. Differentiate implicitly.
 3. Solve for $y'$.
 
-Find $y'$ if $y = \frac{(2x - 3)^3 (7x - 1)^4}$:
+Find $y'$ if $y = \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5}$:
 
 > $$
 \begin{align}
@@ -1413,7 +1413,7 @@ y &= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \\
 y' \frac{\dee}{\dee y} \ln y &= 3 \frac{\dee}{\dee x} \ln (2x - 3) + 4 \frac{\dee}{\dee x} \ln (7x - 1) - 5 \frac{\dee}{\dee x} \ln (5x + 1) \\
 \frac{y'}{y} &= 3 \frac{1}{2x - 3} \frac{\dee}{\dee x} (2x - 3) + 4 \frac{1}{7x - 1} \frac{\dee}{\dee x} (7x - 1) - 5 \frac{1}{5x + 1} \frac{\dee}{\dee x} (5x + 1) \\
 \frac{y'}{y} &= 3 \frac{1}{2x - 3} 2 + 4 \frac{1}{7x - 1} 7 - 5 \frac{1}{5x + 1} 5 \\
-\frac{y'} &= y \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
+y' &= y \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
 y' &= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
 \end{align}
 $$
