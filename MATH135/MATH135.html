@@ -73,6 +73,7 @@ Tutorials: Tuesdays 4:30PM-7:20PM (Drop-in to Biology 1 Room 271)</code></pre>
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\modn}[1]{\mathbb{#1}}
 \]</span></p>
 <h1 id="section">9/9/13</h1>
 <p>Show <span class="math">\(\sqrt{x}(x-\sqrt{x}) = x(1-\sqrt{x})\)</span>:</p>
@@ -569,6 +570,8 @@ Which is in fact:
 </blockquote>
 <p>There are often multiple possible values of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> that can result in a linear combination.</p>
 <p>EEA Table: technique for finding <span class="math">\(\gcd(a, b)\)</span> and integers <span class="math">\(x\)</span> and <span class="math">\(y\)</span> such that <span class="math">\(ax + by = \gcd(a, b)\)</span> all at the same time.</p>
+<p>EEA works with <strong>positive inputs only</strong>.</p>
+<p>However, since <span class="math">\(\gcd(a, b) = \gcd(\abs{a}, \abs{b})\)</span>, we can simply work with <span class="math">\(\abs{a}\)</span> and <span class="math">\(\abs{b}\)</span> and proceed with the algorithm. Then, <span class="math">\(x\sgn(a)\)</span> and <span class="math">\(y\sgn(b)\)</span> are the solutions to the original equation.</p>
 <p>We start by constructing a table, always with the same initial configuration:</p>
 <table>
 <thead>
@@ -664,7 +667,6 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 </table>
 <p>We stop here since the remainder is 0. Now we can read the values of <span class="math">\(x\)</span>, <span class="math">\(y\)</span>, and <span class="math">\(r = \gcd(42042, 1071)\)</span> from the next-to-last row.</p>
 <p>Since <span class="math">\(\gcd(a, b) = \gcd(b, a)\)</span>, we can save a few steps by swapping the two if the second value is greater, so the bigger value is always in the first row.</p>
-<p>EEA works with positive inputs only. However, since <span class="math">\(\gcd(a, b) = \gcd(\abs{a}, \abs{b})\)</span>, we can simply make them positive and proceed with the algorithm.</p>
 <h2 id="certificates-of-correctness">Certificates of Correctness</h2>
 <p>If <span class="math">\(P(n)\)</span> is a statement depending on <span class="math">\(n\)</span>, <span class="math">\(a \in \mb{Z}\)</span>, then some data <span class="math">\(D\)</span> and knowledge <span class="math">\(K\)</span> give a <strong>certificate of correctness</strong> of <span class="math">\(P(a)\)</span> if some easy calculations with <span class="math">\(D\)</span> and <span class="math">\(a\)</span> and <span class="math">\(K\)</span> prove <span class="math">\(P(a)\)</span>.</p>
 <p>Example: <span class="math">\(P(529)\)</span>: &quot;529 is a perfect square&quot;</p>
@@ -767,7 +769,7 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 </ul>
 <p>These equations will have either infinitely many solutions, or no solutions.</p>
 <h2 id="linear-diophantine-equation-theorem-part-1-ldet-1">Linear Diophantine equation theorem, part 1 (LDET 1)</h2>
-<p>Proposition: given integers <span class="math">\(a, b, c \in \mb{Z}\)</span>, <span class="math">\(d = \gcd(a, b)\)</span>, the linear Diophantine equation <span class="math">\(ax + by = c\)</span> has solutions fi and only if <span class="math">\(d \mid c\)</span>.</p>
+<p>Proposition: given integers <span class="math">\(a, b, c \in \mb{Z}\)</span>, <span class="math">\(d = \gcd(a, b)\)</span>, the linear Diophantine equation <span class="math">\(ax + by = c\)</span> has solutions if and only if <span class="math">\(d \mid c\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
 <p>We want to show that <span class="math">\(ax + by = c\)</span> having solutions in <span class="math">\(\mb{Z}\)</span> <span class="math">\(\iff\)</span> <span class="math">\(d \mid c\)</span>.<br />First we will prove that <span class="math">\(ax + by = c\)</span> having solutions in <span class="math">\(\mb{Z}\)</span> <span class="math">\(\implies\)</span> <span class="math">\(d \mid c\)</span>.<br />Assume <span class="math">\(ax + by = c\)</span> has solutions in <span class="math">\(\mb{Z}\)</span>.<br />So <span class="math">\(\exists x, y \in \mb{Z}, ax + by = c\)</span> (the <span class="math">\(x\)</span> and <span class="math">\(y\)</span> here are no longer variables, and are specific integers).<br />We know that <span class="math">\(d = \gcd(a, b)\)</span>.<br />So <span class="math">\(d \mid a\)</span> and <span class="math">\(d \mid b\)</span>.<br />By DIC, <span class="math">\(d \mid (au + bv), u, v \in \mb{Z}\)</span>.<br />So <span class="math">\(d \mid (ax + by)\)</span>, and so <span class="math">\(d \mid c\)</span>.<br />Now we will prove the converse, that <span class="math">\(d \mid c\)</span> <span class="math">\(\implies\)</span> <span class="math">\(ax + by = c\)</span> has solutions in <span class="math">\(\mb{Z}\)</span>.<br />Assume <span class="math">\(d \mid c\)</span>.<br />So <span class="math">\(\exists k \in \mb{Z}, c = kd\)</span>.<br />By EEA, <span class="math">\(\exists x, y \in \mb{Z}, d = ax + by\)</span>.<br />So <span class="math">\(kd = a(kx) + b(ky) = c\)</span>.<br />So <span class="math">\(kx\)</span> and <span class="math">\(ky\)</span> are integer solutions to the equation.<br />So the equation must have solutions in <span class="math">\(\mb{Z}\)</span>.<br />Since the implication and its converse are true, <span class="math">\(ax + by = c\)</span> having solutions in <span class="math">\(\mb{Z}\)</span> <span class="math">\(\iff\)</span> <span class="math">\(d \mid c\)</span>.</p>
@@ -804,6 +806,8 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 <blockquote>
 <p>Clearly, <span class="math">\(\gcd(14, 10) = 2\)</span>, and <span class="math">\(2 \mid 26\)</span>, so there are infinite integer solutions, by LDET1.<br />Using EEA, we determine that <span class="math">\(\gcd(14, 10) = 2 = 14 \cdot -2 - 10 \cdot -3\)</span>, with <span class="math">\(x = -2, y = -3\)</span>.<br />Clearly, <span class="math">\(14 \cdot -2 - 10 \cdot -3 = 2\)</span> can be multiplied by <span class="math">\(\frac{26}{2} = 13\)</span> to obtain <span class="math">\(14 \cdot -26 - 10 \cdot -39 = 26\)</span>.<br />So <span class="math">\(x = -26, y = -39\)</span>.<br />By LDET 2, <span class="math">\(x = -26 + \frac{-10}{2}n = -26 - 5n, y = -39 - \frac{14}{2} = -39 - 7n, n \in \mb{Z}\)</span>.</p>
 </blockquote>
+<p>In general, we can solve any LDE of the form <span class="math">\(ax + by = c\)</span> that has solutions simply by using EEA to find <span class="math">\(x\)</span> and <span class="math">\(y\)</span> for <span class="math">\(ax + by = \gcd(a, b)\)</span>, and multiplying both sides of the equation by <span class="math">\(\frac{c}{\gcd(a, b)}\)</span>.</p>
+<p>This is possible since <span class="math">\(\gcd(a, b) \mid c\)</span>, assuming the LDE has solutions (by LDET1).</p>
 <p>For the above, find the unique positive solution (<span class="math">\(x &gt; 0, y &gt; 0\)</span>) which minimizes <span class="math">\(x + y\)</span>:</p>
 <blockquote>
 <p>We want to find <span class="math">\(x, y\)</span> such that <span class="math">\(x &gt; 0 \wedge y &gt; 0\)</span>.<br />Assume <span class="math">\(x &gt; 0, y &gt; 0\)</span>.<br />Clearly, <span class="math">\(x &gt; 0 \iff -26 - 5n &gt; 0 \iff n &lt; -\frac{26}{5}\)</span>.<br />Clearly, <span class="math">\(y &gt; 0 \iff -39 - 7n &gt; 0 \iff n &lt; -\frac{39}{7}\)</span>.<br />Since <span class="math">\(n &lt; -\frac{26}{5} \wedge n &lt; -\frac{39}{7}\)</span>, <span class="math">\(n &lt; \floor{\min(-\frac{26}{5}, -\frac{39}{7})}\)</span>, so <span class="math">\(n &lt; -6\)</span>.<br />Since <span class="math">\(x\)</span> and <span class="math">\(y\)</span> increase as <span class="math">\(n\)</span> decreases, the smallest value of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> results from the largest value of <span class="math">\(n\)</span>.<br />For <span class="math">\(n = 6\)</span>, <span class="math">\(x = -26 - 5 \cdot -6 = 4\)</span> and <span class="math">\(y = -39 - 7 \cdot -6 = 3\)</span>.</p>
@@ -811,42 +815,74 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>By the way, <strong>iff</strong> means <strong>if and only if</strong> (<span class="math">\(\iff\)</span>).</p>
 <h1 id="section-16">21/10/13</h1>
 <h2 id="congruence">Congruence</h2>
-<p>Given <span class="math">\(a, b, m \in \mb{Z}\)</span>, <span class="math">\(a \equiv b\)</span> (mod <span class="math">\(m\)</span>) - <span class="math">\(a\)</span> is <strong>congruent to</strong> <span class="math">\(b\)</span> modulo <span class="math">\(m\)</span> - if and only if <span class="math">\(m \mid (a - b)\)</span>.</p>
-<p>If <span class="math">\(m \nmid (a - b)\)</span>, then <span class="math">\(a \nequiv b\)</span> (mod <span class="math">\(m\)</span>) - <span class="math">\(a\)</span> is not congruent to <span class="math">\(b\)</span> modulo <span class="math">\(m\)</span>.</p>
+<p>Given <span class="math">\(a, b, m \in \mb{Z}\)</span>, <span class="math">\(a \equiv b \pmod{m}\)</span> - <span class="math">\(a\)</span> is <strong>congruent to</strong> <span class="math">\(b\)</span> modulo <span class="math">\(m\)</span> - if and only if <span class="math">\(m \mid (a - b)\)</span>.</p>
+<p>If <span class="math">\(m \nmid (a - b)\)</span>, then <span class="math">\(a \nequiv b \pmod{m}\)</span> - <span class="math">\(a\)</span> is not congruent to <span class="math">\(b\)</span> modulo <span class="math">\(m\)</span>.</p>
 <p>When proving things involving congruence, we often use the definition.</p>
 <h3 id="congruent-iff-same-remainder-cisr">Congruent iff Same Remainder (CISR)</h3>
-<p>Proposition: given <span class="math">\(m \in \mb{N}\)</span>, <span class="math">\(\forall a, b \in \mb{Z}, a \equiv b\)</span> (mod <span class="math">\(m\)</span>) if and only if <span class="math">\(a\)</span> and <span class="math">\(b\)</span> have the same remainder when divided by <span class="math">\(m\)</span>.</p>
-<p>In other words, <span class="math">\(\rem(a, m) = \rem(b, m) \iff\)</span></p>
+<p>Proposition: given <span class="math">\(m \in \mb{N}\)</span>, <span class="math">\(\forall a, b \in \mb{Z}, a \equiv b \pmod{m}\)</span> if and only if <span class="math">\(a\)</span> and <span class="math">\(b\)</span> have the same remainder when divided by <span class="math">\(m\)</span>.</p>
+<p>In other words, <span class="math">\(\rem(a, m) = \rem(b, m) \iff a \equiv b \pmod{m}\)</span>.</p>
 <p>;wip: prove it - proof in course notes</p>
 <h3 id="congruence-is-an-equivalence-relation-cer">Congruence is an Equivalence Relation (CER)</h3>
 <p>Given <span class="math">\(m \in \mb{N}, \forall a, b, c \in \mb{Z}\)</span>:</p>
 <ul>
-<li><span class="math">\(a \equiv a\)</span> (mod <span class="math">\(m\)</span>): reflexive property</li>
-<li><span class="math">\(a \equiv b \iff b \equiv a\)</span> (mod <span class="math">\(m\)</span>): symmetric property</li>
-<li><span class="math">\(a \equiv b \wedge b \equiv c \implies a \equiv c\)</span> (mod <span class="math">\(m\)</span>): transitive property</li>
+<li><span class="math">\(a \equiv a \pmod{m}\)</span>: reflexive property</li>
+<li><span class="math">\(a \equiv b \pmod{m} \iff b \equiv a \pmod{m}\)</span>: symmetric property</li>
+<li><span class="math">\(a \equiv b \pmod{m} \wedge b \equiv c \pmod{m} \implies a \equiv c \pmod{m}\)</span>: transitive property</li>
 </ul>
 <p>The first two are trivially proved. The last one is proved below:</p>
 <blockquote>
-<p>Assume <span class="math">\(a \equiv b\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv c\)</span> (mod <span class="math">\(m\)</span>).<br />So <span class="math">\(m \mid a - b\)</span> and <span class="math">\(m \mid b - c\)</span>.<br />By DIC, <span class="math">\(m\)</span> divides every integer linear combination of <span class="math">\(a - b\)</span> and <span class="math">\(b - c\)</span>.<br />In particular, <span class="math">\(m \mid (a - b) + (b - c)\)</span>, so <span class="math">\(m \mid a - c\)</span>.<br />So <span class="math">\(a \equiv c\)</span> (mod <span class="math">\(m\)</span>).</p>
+<p>Assume <span class="math">\(a \equiv b \pmod{m}\)</span> and <span class="math">\(b \equiv c \pmod{m}\)</span>.<br />So <span class="math">\(m \mid a - b\)</span> and <span class="math">\(m \mid b - c\)</span>.<br />By DIC, <span class="math">\(m\)</span> divides every integer linear combination of <span class="math">\(a - b\)</span> and <span class="math">\(b - c\)</span>.<br />In particular, <span class="math">\(m \mid (a - b) + (b - c)\)</span>, so <span class="math">\(m \mid a - c\)</span>.<br />So <span class="math">\(a \equiv c \pmod{m}\)</span>.</p>
 </blockquote>
-<h3 id="properties-of-congruence">Properties of Congruence</h3>
-<p>Given <span class="math">\(m \in \mb{N}, a, a&#39;, b, b&#39; \in \mb{Z}\)</span>, if <span class="math">\(a \equiv a&#39;\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv b&#39;\)</span> (mod <span class="math">\(m\)</span>), then:</p>
+<h3 id="properties-of-congruence-pc">Properties of Congruence (PC)</h3>
+<p>Given <span class="math">\(m \in \mb{N}, a, a&#39;, b, b&#39; \in \mb{Z}\)</span>, if <span class="math">\(a \equiv a&#39; \pmod{m}\)</span> and <span class="math">\(b \equiv b&#39; \pmod{m}\)</span>, then:</p>
 <ul>
-<li><span class="math">\(a + b \equiv a&#39; + b&#39;\)</span> (mod <span class="math">\(m\)</span>)</li>
-<li><span class="math">\(a - b \equiv a&#39; - b&#39;\)</span> (mod <span class="math">\(m\)</span>)</li>
-<li><span class="math">\(ab \equiv a&#39;b&#39;\)</span> (mod <span class="math">\(m\)</span>)</li>
+<li><span class="math">\(a + b \equiv a&#39; + b&#39; \pmod{m}\)</span></li>
+<li><span class="math">\(a - b \equiv a&#39; - b&#39; \pmod{m}\)</span></li>
+<li><span class="math">\(ab \equiv a&#39;b&#39; \pmod{m}\)</span></li>
 </ul>
 <p>Proof:</p>
 <blockquote>
-<p>Proof of first point.<br />Assume <span class="math">\(a \equiv a&#39;\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv b&#39;\)</span> (mod <span class="math">\(m\)</span>).<br />So <span class="math">\(m \mid a - a&#39;\)</span> and <span class="math">\(m \mid b - b&#39;\)</span>.<br />By DIC, <span class="math">\(m \mid (a - a&#39;) + (b - b&#39;)\)</span>, so <span class="math">\(m \mid (a + b) - (a&#39; + b&#39;)\)</span>.<br />So <span class="math">\(a + b \equiv a&#39; + b&#39;\)</span> (mod <span class="math">\(m\)</span>). The second point is proved similarly.</p>
+<p>Proof of first point.<br />Assume <span class="math">\(a \equiv a&#39; \pmod{m}\)</span> and <span class="math">\(b \equiv b&#39; \pmod{m}\)</span>.<br />So <span class="math">\(m \mid a - a&#39;\)</span> and <span class="math">\(m \mid b - b&#39;\)</span>.<br />By DIC, <span class="math">\(m \mid (a - a&#39;) + (b - b&#39;)\)</span>, so <span class="math">\(m \mid (a + b) - (a&#39; + b&#39;)\)</span>.<br />So <span class="math">\(a + b \equiv a&#39; + b&#39; \pmod{m}\)</span>. The second point is proved similarly.</p>
 </blockquote>
 <blockquote>
-<p>The third point is proved slightly differently.<br />Assume <span class="math">\(a \equiv a&#39;\)</span> (mod <span class="math">\(m\)</span>) and <span class="math">\(b \equiv b&#39;\)</span> (mod <span class="math">\(m\)</span>).<br />We want to prove <span class="math">\(m \mid ab - a&#39;b&#39;\)</span>.<br />Clearly, <span class="math">\(ab - a&#39;b&#39; = ab - ab&#39; + ab&#39; - a&#39;b&#39; = a(b - b&#39;) + b&#39;(a - a&#39;)\)</span>.<br />Since <span class="math">\(m \mid a - a&#39;\)</span> and <span class="math">\(m \mid b - b&#39;\)</span>, <span class="math">\(m \mid a(b - b&#39;) + b&#39;(a - a&#39;)\)</span>, by DIC.<br />So <span class="math">\(m \mid ab - a&#39;b&#39;\)</span>, and <span class="math">\(ab \equiv a&#39;b&#39;\)</span> (mod <span class="math">\(m\)</span>)</p>
+<p>The third point is proved slightly differently.<br />Assume <span class="math">\(a \equiv a&#39; \pmod{m}\)</span> and <span class="math">\(b \equiv b&#39; \pmod{m}\)</span>.<br />We want to prove <span class="math">\(m \mid ab - a&#39;b&#39;\)</span>.<br />Clearly, <span class="math">\(ab - a&#39;b&#39; = ab - ab&#39; + ab&#39; - a&#39;b&#39; = a(b - b&#39;) + b&#39;(a - a&#39;)\)</span>.<br />Since <span class="math">\(m \mid a - a&#39;\)</span> and <span class="math">\(m \mid b - b&#39;\)</span>, <span class="math">\(m \mid a(b - b&#39;) + b&#39;(a - a&#39;)\)</span>, by DIC.<br />So <span class="math">\(m \mid ab - a&#39;b&#39;\)</span>, and <span class="math">\(ab \equiv a&#39;b&#39; \pmod{m}\)</span></p>
 </blockquote>
+<p>Special case: if <span class="math">\(u \equiv v \pmod{m}\)</span>, then <span class="math">\(u^2 \equiv v^2 \pmod{m}\)</span>. Here, <span class="math">\(a = u, a&#39; = u\)</span> and <span class="math">\(b = v, b&#39; = v\)</span>.</p>
+<p>We can apply this again: if <span class="math">\(a^2 \equiv c^2 \pmod{m}\)</span>, then <span class="math">\(a^3 \equiv c^3 \pmod{m}\)</span>. Here, <span class="math">\(a = a^2, a&#39; = a\)</span> and <span class="math">\(b = c^2, b&#39;, c\)</span></p>
+<p>By induction, we can prove that <span class="math">\(a^n \equiv c^n \pmod{m}\)</span>.</p>
+<p>Special case: if <span class="math">\(a_1 \equiv b_1 \pmod{m} \wedge \ldots \wedge a_2 \equiv b_2 \pmod{m}\)</span>, then <span class="math">\(a_1 + \ldots + a_n \equiv b_1 \pmod{m} + \ldots + b_n\)</span>.</p>
+<p>Application: remainder when divided by 9</p>
+<blockquote>
+<p>Clearly, <span class="math">\(10 \equiv 1 \pmod{9}\)</span>.<br />Clearly, <span class="math">\(10^n \equiv 1^n \pmod{9}\)</span>.<br />Consider <span class="math">\(k = 3141592\)</span>. What is the remainder when divided by 9?<br />Clearly, <span class="math">\(k = 3 \cdot 10^6 + 1 \cdot 10^5 + 4 \cdot 10^4 + 1 \cdot 10^3 + 5 \cdot 10^2 + 9 \cdot 10^1 + 2 \cdot 10^0\)</span>.<br />Clearly, <span class="math">\(10^n \equiv 1 \pmod{9}\)</span> and <span class="math">\(3 \equiv 3 \pmod{9}, 1 \equiv 1 \pmod{9}, 4 \equiv 4 \pmod{9}, 1 \equiv 1 \pmod{9}, 5 \equiv 5 \pmod{9}, 9 \equiv 9, \pmod{9} 2 \equiv 2 \pmod{9}\)</span>.<br />So each term of the sum is congruent to the digit: <span class="math">\(3 \cdot 10^6 \equiv 3 \pmod{9}, 2 \cdot 10^0 \equiv 2 \pmod{9}\)</span>.<br />Clearly, <span class="math">\(k \equiv 3 + 1 + 4 + 1 + 5 + 9 + 2 \pmod{9}\)</span>, so <span class="math">\(k \equiv 25 \pmod{9}\)</span>.<br />Repeating, we get <span class="math">\(k \equiv 2 + 5 \pmod{9}\)</span>, so <span class="math">\(k \equiv 7 \pmod{9}\)</span>.<br />Since <span class="math">\(0 \le 7 \le 9\)</span>, 7 is the remainder when 3141592 is divided by 9.</p>
+</blockquote>
+<p>So to find the remainder of a number divided by 9, we can ;wip</p>
 <h3 id="congruences-and-division-cd">Congruences and Division (CD)</h3>
-<p>Note that <span class="math">\(ac \equiv bc, c \ne 0\)</span> does not imply <span class="math">\(a \equiv b\)</span> (mod <span class="math">\(m\)</span>).</p>
-<p>However, if <span class="math">\(c\)</span> is coprime to <span class="math">\(m\)</span> (<span class="math">\(\gcd(c, m) = 1\)</span>), then <span class="math">\(a \equiv b\)</span>.</p>
-<p>In other words, given <span class="math">\(m \in \mb{N}, a, b, c \in \mb{Z}, c \ne 0\)</span>, if <span class="math">\(ac \equiv bc\)</span> and <span class="math">\(\gcd(c, m) = 1\)</span>, then <span class="math">\(a \equiv b\)</span>.</p>
+<p>Note that <span class="math">\(ac \equiv bc \pmod{m}, c \ne 0\)</span> does not imply <span class="math">\(a \equiv b \pmod{m}\)</span>.</p>
+<p>However, if <span class="math">\(c\)</span> is coprime to <span class="math">\(m\)</span> (<span class="math">\(\gcd(c, m) = 1\)</span>), then <span class="math">\(a \equiv b \pmod{m}\)</span>.</p>
+<p>In other words, given <span class="math">\(m \in \mb{N}, a, b, c \in \mb{Z}, c \ne 0\)</span>, if <span class="math">\(ac \equiv bc \pmod{m}\)</span> and <span class="math">\(\gcd(c, m) = 1\)</span>, then <span class="math">\(a \equiv b \pmod{m}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Assume <span class="math">\(ac \equiv bc \pmod{m}\)</span> and <span class="math">\(\gcd(c, m) = 1\)</span>.<br />So <span class="math">\(m \mid ac - bc\)</span> and <span class="math">\(m \mid c(a - b)\)</span>.<br />Since <span class="math">\(\gcd(m, c)\)</span>, <span class="math">\(m \mid a - b\)</span>, by CAD.<br />So <span class="math">\(a \equiv b \pmod{m}\)</span>.</p>
+</blockquote>
+<h1 id="section-17">23/10/13</h1>
+<h2 id="linear-congruence">Linear Congruence</h2>
+<p>A <strong>linear congruence</strong> is a mathematical form. It takes the general form of the following:</p>
+<blockquote>
+<p>Given a fixed <span class="math">\(a, c, m \in \mb{Z}, m &gt; 0, ax \equiv c \pmod{m}\)</span>.</p>
+</blockquote>
+<p>Consider <span class="math">\(4x \equiv 2 \pmod{6}\)</span>. Possible solutions are <span class="math">\(-1, 2, 5, 8, 11\)</span>. Note that the solutions differ by 3.</p>
+<p>Consider <span class="math">\(4x \equiv 3 \pmod{6}\)</span>. There are no solutions.</p>
+<h3 id="solving">Solving</h3>
+<blockquote>
+<p><span class="math">\(x_1\)</span> is a solution if and only if <span class="math">\(ax_1 \equiv x \pmod{m}\)</span>, or <span class="math">\(m \mid ax_1 - c\)</span>.<br />So <span class="math">\(x_1\)</span> is a solution if and only if <span class="math">\(-m \mid ax_1 - c\)</span>, or <span class="math">\(\exists k \in \mb{Z}, ax_1 - c = -mk\)</span>.<br />So <span class="math">\(x_1\)</span> is a solution if and only if <span class="math">\(\exists k \in \mb{Z}, ax_1 + mk = c\)</span>.<br />This is an LDE. So the linear congruence has solutions if and only if the related linear diophantine equation has solutions.</p>
+</blockquote>
+<p><span class="math">\(ax \equiv c \pmod{m}\)</span> is closely related to <span class="math">\(ax + my = c\)</span>.</p>
+<p>If <span class="math">\(x_0, y_0\)</span> is a particular solution to <span class="math">\(ax + my = c\)</span>, then the complete solution is <span class="math">\(x = x_0 + \frac{m}{d}n, y = y_0 - \frac{a}{d}n, n \in \mb{Z}, d = \gcd(a, m)\)</span>.</p>
+<p>Solve <span class="math">\(4x \equiv 2\)</span> (mod 6):</p>
+<blockquote>
+<p>The corresponding LDE is <span class="math">\(4x + 6y = 2\)</span>.<br />By inspection (though we could also use EEA), we find that one possible solution is <span class="math">\(x = -1, y = 1\)</span>.<br />By LDET2, <span class="math">\(x = -1 + \frac{6}{2}n, n \in \mb{Z}\)</span>.<br />In both the linear congruence and the LDE, <span class="math">\(x\)</span> represents the same thing.<br />So the complete solution to the linear congruence is <span class="math">\(x = -1 + \frac{6}{2}n, n \in \mb{Z}\)</span>.</p>
+</blockquote>
+<p>In general <span class="math">\(x = x_0 + \frac{m}{d}n, n \in \mb{Z}\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

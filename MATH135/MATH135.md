@@ -17,6 +17,7 @@ $$
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\modn}[1]{\mathbb{#1}}
 $$
 
 # 9/9/13
@@ -813,6 +814,10 @@ There are often multiple possible values of $x$ and $y$ that can result in a lin
 
 EEA Table: technique for finding $\gcd(a, b)$ and integers $x$ and $y$ such that $ax + by = \gcd(a, b)$ all at the same time.
 
+EEA works with **positive inputs only**.
+
+However, since $\gcd(a, b) = \gcd(\abs{a}, \abs{b})$, we can simply work with $\abs{a}$ and $\abs{b}$ and proceed with the algorithm. Then, $x\sgn(a)$ and $y\sgn(b)$ are the solutions to the original equation.
+
 We start by constructing a table, always with the same initial configuration:
 
 | x | y | r | q |
@@ -852,8 +857,6 @@ For example, finding $\gcd(42042, 1071)$:
 We stop here since the remainder is 0. Now we can read the values of $x$, $y$, and $r = \gcd(42042, 1071)$ from the next-to-last row.
 
 Since $\gcd(a, b) = \gcd(b, a)$, we can save a few steps by swapping the two if the second value is greater, so the bigger value is always in the first row.
-
-EEA works with positive inputs only. However, since $\gcd(a, b) = \gcd(\abs{a}, \abs{b})$, we can simply make them positive and proceed with the algorithm.
 
 Certificates of Correctness
 ---------------------------
@@ -1058,7 +1061,7 @@ These equations will have either infinitely many solutions, or no solutions.
 
 ## Linear Diophantine equation theorem, part 1 (LDET 1)
 
-Proposition: given integers $a, b, c \in \mb{Z}$, $d = \gcd(a, b)$, the linear Diophantine equation $ax + by = c$ has solutions fi and only if $d \mid c$.
+Proposition: given integers $a, b, c \in \mb{Z}$, $d = \gcd(a, b)$, the linear Diophantine equation $ax + by = c$ has solutions if and only if $d \mid c$.
 
 Proof:
 
@@ -1153,6 +1156,10 @@ Find the complete integer solutions to $14x - 10y = 26$:
 > So $x = -26, y = -39$.  
 > By LDET 2, $x = -26 + \frac{-10}{2}n = -26 - 5n, y = -39 - \frac{14}{2} = -39 - 7n, n \in \mb{Z}$.  
 
+In general, we can solve any LDE of the form $ax + by = c$ that has solutions simply by using EEA to find $x$ and $y$ for $ax + by = \gcd(a, b)$, and multiplying both sides of the equation by $\frac{c}{\gcd(a, b)}$.
+
+This is possible since $\gcd(a, b) \mid c$, assuming the LDE has solutions (by LDET1).
+
 For the above, find the unique positive solution ($x > 0, y > 0$) which minimizes $x + y$:
 
 > We want to find $x, y$ such that $x > 0 \wedge y > 0$.  
@@ -1170,17 +1177,17 @@ By the way, **iff** means **if and only if** ($\iff$).
 Congruence
 ----------
 
-Given $a, b, m \in \mb{Z}$, $a \equiv b$ (mod $m$) - $a$ is **congruent to** $b$ modulo $m$ - if and only if $m \mid (a - b)$.
+Given $a, b, m \in \mb{Z}$, $a \equiv b \pmod{m}$ - $a$ is **congruent to** $b$ modulo $m$ - if and only if $m \mid (a - b)$.
 
-If $m \nmid (a - b)$, then $a \nequiv b$ (mod $m$) - $a$ is not congruent to $b$ modulo $m$.
+If $m \nmid (a - b)$, then $a \nequiv b \pmod{m}$ - $a$ is not congruent to $b$ modulo $m$.
 
 When proving things involving congruence, we often use the definition.
 
 ### Congruent iff Same Remainder (CISR)
 
-Proposition: given $m \in \mb{N}$, $\forall a, b \in \mb{Z}, a \equiv b$ (mod $m$) if and only if $a$ and $b$ have the same remainder when divided by $m$.
+Proposition: given $m \in \mb{N}$, $\forall a, b \in \mb{Z}, a \equiv b \pmod{m}$ if and only if $a$ and $b$ have the same remainder when divided by $m$.
 
-In other words, $\rem(a, m) = \rem(b, m) \iff$
+In other words, $\rem(a, m) = \rem(b, m) \iff a \equiv b \pmod{m}$.
 
 ;wip: prove it - proof in course notes
 
@@ -1188,46 +1195,109 @@ In other words, $\rem(a, m) = \rem(b, m) \iff$
 
 Given $m \in \mb{N}, \forall a, b, c \in \mb{Z}$:
 
-* $a \equiv a$ (mod $m$): reflexive property
-* $a \equiv b \iff b \equiv a$ (mod $m$): symmetric property
-* $a \equiv b \wedge b \equiv c \implies a \equiv c$ (mod $m$): transitive property
+* $a \equiv a \pmod{m}$: reflexive property
+* $a \equiv b \pmod{m} \iff b \equiv a \pmod{m}$: symmetric property
+* $a \equiv b \pmod{m} \wedge b \equiv c \pmod{m} \implies a \equiv c \pmod{m}$: transitive property
 
 The first two are trivially proved. The last one is proved below:
 
-> Assume $a \equiv b$ (mod $m$) and $b \equiv c$ (mod $m$).  
+> Assume $a \equiv b \pmod{m}$ and $b \equiv c \pmod{m}$.  
 > So $m \mid a - b$ and $m \mid b - c$.  
 > By DIC, $m$ divides every integer linear combination of $a - b$ and $b - c$.  
 > In particular, $m \mid (a - b) + (b - c)$, so $m \mid a - c$.  
-> So $a \equiv c$ (mod $m$).
+> So $a \equiv c \pmod{m}$.
 
-### Properties of Congruence
+### Properties of Congruence (PC)
 
-Given $m \in \mb{N}, a, a', b, b' \in \mb{Z}$, if $a \equiv a'$ (mod $m$) and $b \equiv b'$ (mod $m$), then:
+Given $m \in \mb{N}, a, a', b, b' \in \mb{Z}$, if $a \equiv a' \pmod{m}$ and $b \equiv b' \pmod{m}$, then:
 
-* $a + b \equiv a' + b'$ (mod $m$)
-* $a - b \equiv a' - b'$ (mod $m$)
-* $ab \equiv a'b'$ (mod $m$)
+* $a + b \equiv a' + b' \pmod{m}$
+* $a - b \equiv a' - b' \pmod{m}$
+* $ab \equiv a'b' \pmod{m}$
 
 Proof:
 
 > Proof of first point.  
-> Assume $a \equiv a'$ (mod $m$) and $b \equiv b'$ (mod $m$).  
+> Assume $a \equiv a' \pmod{m}$ and $b \equiv b' \pmod{m}$.  
 > So $m \mid a - a'$ and $m \mid b - b'$.  
 > By DIC, $m \mid (a - a') + (b - b')$, so $m \mid (a + b) - (a' + b')$.  
-> So $a + b \equiv a' + b'$ (mod $m$).
+> So $a + b \equiv a' + b' \pmod{m}$.
 > The second point is proved similarly.  
 
 > The third point is proved slightly differently.  
-> Assume $a \equiv a'$ (mod $m$) and $b \equiv b'$ (mod $m$).  
+> Assume $a \equiv a' \pmod{m}$ and $b \equiv b' \pmod{m}$.  
 > We want to prove $m \mid ab - a'b'$.  
 > Clearly, $ab - a'b' = ab - ab' + ab' - a'b' = a(b - b') + b'(a - a')$.  
 > Since $m \mid a - a'$ and $m \mid b - b'$, $m \mid a(b - b') + b'(a - a')$, by DIC.  
-> So $m \mid ab - a'b'$, and $ab \equiv a'b'$ (mod $m$)
+> So $m \mid ab - a'b'$, and $ab \equiv a'b' \pmod{m}$
+
+Special case: if $u \equiv v \pmod{m}$, then $u^2 \equiv v^2 \pmod{m}$. Here, $a = u, a' = u$ and $b = v, b' = v$.
+
+We can apply this again: if $a^2 \equiv c^2 \pmod{m}$, then $a^3 \equiv c^3 \pmod{m}$. Here, $a = a^2, a' = a$ and $b = c^2, b', c$
+
+By induction, we can prove that $a^n \equiv c^n \pmod{m}$.
+
+Special case: if $a_1 \equiv b_1 \pmod{m} \wedge \ldots \wedge a_2 \equiv b_2 \pmod{m}$, then $a_1 + \ldots + a_n \equiv b_1 \pmod{m} + \ldots + b_n$.
+
+Application: remainder when divided by 9
+
+> Clearly, $10 \equiv 1 \pmod{9}$.  
+> Clearly, $10^n \equiv 1^n \pmod{9}$.  
+> Consider $k = 3141592$. What is the remainder when divided by 9?  
+> Clearly, $k = 3 \cdot 10^6 + 1 \cdot 10^5 + 4 \cdot 10^4 + 1 \cdot 10^3 + 5 \cdot 10^2 + 9 \cdot 10^1 + 2 \cdot 10^0$.  
+> Clearly, $10^n \equiv 1 \pmod{9}$ and $3 \equiv 3 \pmod{9}, 1 \equiv 1 \pmod{9}, 4 \equiv 4 \pmod{9}, 1 \equiv 1 \pmod{9}, 5 \equiv 5 \pmod{9}, 9 \equiv 9, \pmod{9} 2 \equiv 2 \pmod{9}$.  
+> So each term of the sum is congruent to the digit: $3 \cdot 10^6 \equiv 3 \pmod{9}, 2 \cdot 10^0 \equiv 2 \pmod{9}$.  
+> Clearly, $k \equiv 3 + 1 + 4 + 1 + 5 + 9 + 2 \pmod{9}$, so $k \equiv 25 \pmod{9}$.  
+> Repeating, we get $k \equiv 2 + 5 \pmod{9}$, so $k \equiv 7 \pmod{9}$.  
+> Since $0 \le 7 \le 9$, 7 is the remainder when 3141592 is divided by 9.  
+
+So to find the remainder of a number divided by 9, we can ;wip
 
 ### Congruences and Division (CD)
 
-Note that $ac \equiv bc, c \ne 0$ does not imply $a \equiv b$ (mod $m$).
+Note that $ac \equiv bc \pmod{m}, c \ne 0$ does not imply $a \equiv b \pmod{m}$.
 
-However, if $c$ is coprime to $m$ ($\gcd(c, m) = 1$), then $a \equiv b$.
+However, if $c$ is coprime to $m$ ($\gcd(c, m) = 1$), then $a \equiv b \pmod{m}$.
 
-In other words, given $m \in \mb{N}, a, b, c \in \mb{Z}, c \ne 0$, if $ac \equiv bc$ and $\gcd(c, m) = 1$, then $a \equiv b$.
+In other words, given $m \in \mb{N}, a, b, c \in \mb{Z}, c \ne 0$, if $ac \equiv bc \pmod{m}$ and $\gcd(c, m) = 1$, then $a \equiv b \pmod{m}$.
+
+Proof:
+
+> Assume $ac \equiv bc \pmod{m}$ and $\gcd(c, m) = 1$.  
+> So $m \mid ac - bc$ and $m \mid c(a - b)$.  
+> Since $\gcd(m, c)$, $m \mid a - b$, by CAD.  
+> So $a \equiv b \pmod{m}$.  
+
+# 23/10/13
+
+Linear Congruence
+-----------------
+
+A **linear congruence** is a mathematical form. It takes the general form of the following:
+
+> Given a fixed $a, c, m \in \mb{Z}, m > 0, ax \equiv c \pmod{m}$.  
+
+Consider $4x \equiv 2 \pmod{6}$. Possible solutions are $-1, 2, 5, 8, 11$. Note that the solutions differ by 3.
+
+Consider $4x \equiv 3 \pmod{6}$. There are no solutions.
+
+### Solving
+
+> $x_1$ is a solution if and only if $ax_1 \equiv x \pmod{m}$, or $m \mid ax_1 - c$.  
+> So $x_1$ is a solution if and only if $-m \mid ax_1 - c$, or $\exists k \in \mb{Z}, ax_1 - c = -mk$.  
+> So $x_1$ is a solution if and only if $\exists k \in \mb{Z}, ax_1 + mk = c$.  
+> This is an LDE. So the linear congruence has solutions if and only if the related linear diophantine equation has solutions.
+
+$ax \equiv c \pmod{m}$ is closely related to $ax + my = c$.
+
+If $x_0, y_0$ is a particular solution to $ax + my = c$, then the complete solution is $x = x_0 + \frac{m}{d}n, y = y_0 - \frac{a}{d}n, n \in \mb{Z}, d = \gcd(a, m)$.
+
+Solve $4x \equiv 2$ (mod 6):
+
+> The corresponding LDE is $4x + 6y = 2$.  
+> By inspection (though we could also use EEA), we find that one possible solution is $x = -1, y = 1$.  
+> By LDET2, $x = -1 + \frac{6}{2}n, n \in \mb{Z}$.  
+> In both the linear congruence and the LDE, $x$ represents the same thing.  
+> So the complete solution to the linear congruence is $x = -1 + \frac{6}{2}n, n \in \mb{Z}$.  
+
+In general $x = x_0 + \frac{m}{d}n, n \in \mb{Z}$.
