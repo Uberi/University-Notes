@@ -423,6 +423,7 @@ We measure how the quantity demanded and supplied is affected by changes in pric
 **Price elasticity of demand** is the ratio of the percentage change in quantity demanded per percentage change in price. The percentage change is a percentage of the average of the initial and new values. This is also known as **own price elasticity**.
 
 * Dimensionless value, a ratio.
+* Negative due to law of demand.
 * Values larger in magnitude mean higher sensitivity to price changes.
 * Values smaller in magnitude mean lower sensitivity to price changes.
 * Values larger in magnitude than 1 are called **elastic demand**.
@@ -896,4 +897,25 @@ The explanation is that we **consume a lot of water, so marginal utility is smal
 
 The consumer surplus of water is very high while the consumer surplus of diamonds is very low.
 
-;wip: midterm coming up on Oct. 25 4:30PM location to be announced covering chapters 4, 5, 6, 8
+# 24/10/13
+
+Review for first half. MIDTERM TOMORROW AT 4:30 PM COVERING CHAPTERS 4, 5, 6, 8
+
+A **determinant** of something is a factor affecting it, like whether it happens or not.
+
+Economics seek to **optimize**.
+
+Organizing Production
+---------------------
+
+A **firm** is an institution that hires and organizes factors of production to produce and sell goods and services.
+
+The goal of a firm is to **maximise profit**. If it does not, it is **eliminated or bought out by other firms**.
+
+Most firms don't make anything themselves. For example, Apple's iPod has its parts manufactured by Toshiba and is assembled by Inventec.
+
+Accountants are responsible for measuring profit - revenue minus explicit costs. **Explicit costs** are those costs paid directly to run the firm. Accountants do not take implicit costs into account and so may overestimate profit.
+
+Economists are concerned with **implicit costs** - the opportunity cost resulting from using something instead of renting or selling it. The **total costs** are the sum of the implicit and explicit costs, and is always greater than or equal to the explicit costs.
+
+**Accounting profit** is revenue minus explicit costs. **Economic profit** is revenue minus the total costs. ;wip: is this 
