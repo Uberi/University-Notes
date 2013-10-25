@@ -518,3 +518,66 @@ One criticism of Descartes would be that the view assumes that the mind possesse
 Descartes thinks knowledge comes from reason alone. Locke thinks knowledge comes from sensations alone. These are mutually exclusive.
 
 Locke believed there are also **tertiary qualities**. These are basically secondary qualities that apply to other objects instead of minds. For example, a key has the tertiary quality of having the power of opening a lock.
+
+# 24/10/13
+
+George Berkeley
+---------------
+
+"Bark-ellie"
+
+Irishman, Anglican bishop, after Descartes' time, contemporary of Locke. British empiricist. Mind starts off as tabula rasa.
+
+Berkeley was not only an empiricist (knowledge comes from the senses), but an **idealist**. Berkely thought that there is **no such thing as matter** - **everything is an idea**.
+
+This contrasts with Locke, who thought everything was matter. Descartes thought there were both.
+
+As a result, Berkeley **did not run into the mind-body problem** that Descartes did.
+
+Berekely thought there were three objects of knowledge:
+
+* **Sense ideas** - ideas that are passively (not controllably) brought into the mind by the **actions of the senses**.
+* **Inner sense** - ideas that are the result of **introspection**, thinking about the things in one's thought bubble.
+* **Memory/imagination** - ideas that are the result of the **mixing of other ideas**.
+
+Ideas are immaterial things that exist either in **one's own thought bubble, or God's thought bubble**.
+
+Everything is an idea in the mind of God. We exist in the thought bubble of God, and we have our own thought bubble inside of God's thought bubble.
+
+Since God is an all-good being, we can be sure that what is in our minds corresponds to what is outside of it.
+
+Since we are made in God's image, we also have control over our own thought bubble.
+
+So God is all-knowing because everything **is God's knowledge**. This is offered as an explanation for God's omnipotence and omniscience.
+
+A mind is a **thing that perceives ideas**.
+
+Ideas only exist when they are perceived by a mind. So if a person dies, the ideas in that person's mind no longer exist.
+
+> To be is to be perceived - without perception, there is no existance.
+
+So if something is not being perceived, it doesn't exist. However, God is always perceiving everything, and so things don't pop out of existance when nobody is looking at them.
+
+What is a thing? Locke might say it is a collection of matter exhibiting primary qualities.
+
+According to Berkeley, a **thing** is an idea - any idea. Qualities stick together with an object because God did it.
+
+Berkeley is a foundationalist, as he believes that God is a certain truth and then builds all knowledge on top of that.
+
+Berkeley takes empiricism to the extremes. He criticises Locke's view as not empiricist enough, in a few ways:
+
+* Primary qualities and secondary qualities are very similar. In fact, both of them exist in the mind.
+  * A primary quality is something that we can't perceive an object without.
+  * But secondary qualities are also necessary to perceive objects - imagine an object with shape but not temperature!
+  * So primary qualitites and secondary qualities are the same.
+  * But secondary qualities **must exist in the mind** since they depend on context.
+  * But primary qualities could exist in the mind too.
+  * So all qualities exist in the mind.
+* Some perceptions are dependent on the conditions. Things can appear differently to different people. Even things like shape and dimension depend on the angle from which we view it.
+  * Primary qualities depend on the observer too!
+  * So there are no primary qualities, only secondary ones.
+* Empiricism conflicts with materialism.
+  * Locke has never seen an atom, yet explains things with them - Locke has no experience with atoms, yet says all knowledge comes from interaction of atoms.
+  * What do we see when we look at an object? We see color, shape, dimension, but we never actually see matter. We **can't perceive matter**.
+
+Berkeley says that if one is an empiricist, one should also be an idealist, and cannot be a materialist.

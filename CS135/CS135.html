@@ -224,7 +224,7 @@ Since in Scheme arbitrary numbers of operands are supported, we need t add brack
 <ul>
 <li>Contract: information for the user - function signature - argument types and descriptions, return types and descriptions.</li>
 <li>Purpose: description of what the function is designed to compute - what it produces or returns.</li>
-<li>Examples: clarification of the general use of the function and what usage of it looks like.</li>
+<li>Examples: clarification of the general use of the function and what usage of it looks like. Should represent each part of the data definition.</li>
 <li>Definition: The Scheme header and body of the function.</li>
 <li>Tests: a representative set of inputs and expected outputs showing that the function works - expected outputs must be calculated by hand or some other source.</li>
 </ul>
@@ -655,7 +655,15 @@ Tests:
 <p><strong>Structural recursion</strong>, as opposed to <strong>generative recursion</strong>, is recursion guided by the data definition - the form of the code matches the form of the data definition.</p>
 <p>In other words, our functions should follow the template closely and work with the first element of the list and recurse only with the rest of the list.</p>
 <p><strong>Pure structural recursion</strong> requires that at every call of the recursive function, all parameters are either unchanged or one step closer to the base case. The parameters should be driving the recursion, while everything else stays unchanged.</p>
-<p><strong>Mutual recursion</strong> is recursion involving two or more functions that call each other recursively. Care must be taken to ensure that the base case is eventually reached.</p>
+<p><strong>Mutual recursion</strong> is recursion involving two or more functions that call each other recursively. It occurs when we have data definitions that refer to each other.</p>
+<p>Care must be taken to ensure that the base case is eventually reached. Data definitions can be mutually recursive:</p>
+<pre><code>A NestedThing is one of:
+* empty
+* (listof OtherThing)
+
+A OtherThing is one of:
+* Symbol
+* (list Symbol NestedThing)</code></pre>
 <h2 id="condensed-traces">Condensed Traces</h2>
 <p>A condensed trace is a way of writing traces that skips the excessive detail that would result from a full trace. Here, we skip steps to show only the most important information.</p>
 <p>It is always important to specify whether a trace is condensed or full.</p>
@@ -1088,6 +1096,258 @@ Tests:
                    (traverse-binexp (bae-arg1 tree))
                    (traverse-binexp (bae-arg2 tree)))]))</code></pre>
 <p>In a similar way, in-order and post-order traversal can be done by switching the order of the arguments to <code>append</code>.</p>
+<h1 id="section-10">24/10/13</h1>
+<h2 id="binary-search">Binary Search</h2>
+<p>Dictionaries were previously implemented using an association list of two-element lists. However, this had the problem that it could potentially require us to search through thte entire list to lookup a value.</p>
+<p>We could instead put the key-value pairs into a <strong>binary tree</strong>:</p>
+<pre><code>(define-struct node (key val left right))
+
+;; A binary tree (BT) is one of:
+;; * empty
+;; * (make-node Num String BT BT)</code></pre>
+<p>Here, if a node has <code>empty</code> as its left and right branches, it is a leaf node. Otherwise, it refers to other values and is an internal node.</p>
+<p>Template for a binary tree:</p>
+<pre><code>;; my-bt-fn: BT -&gt; Any
+(define (my-bt-fn tree)
+    (cond [(empty? tree) ...]
+          [else (... (node-key tree) ...
+                     (node-val tree) ...
+                     (my-bt-fn (node-left tree)) ...
+                     (my-bt-fn (node-right tree)) ...)]))</code></pre>
+<p>Consider a function that counts the number of nodes equal to a certain value in a tree:</p>
+<pre><code>;; count-bt-equal: BT Any -&gt; Any
+;; Purpose: returns the number of nodes in `tree` equal to `value`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (count-bt-equal tree value)
+    (cond [(empty? tree) ...]
+          [else (+ (cond [(equal? (node-val tree) value) 1]
+                         [else 0])
+                   (count-bt-equal (node-left tree))
+                   (count-bt-equal (node-right tree)))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>We can search through this type of tree pretty easily - if not found or empty, search through the left and right subtrees recursively.</p>
+<p>However, this is no more efficient than an association list - we could still potentially search through the whole thing in order to lookup a value.</p>
+<p>Draw the tree <code>(make-node 5 'a (make-node 1 'b empty empty) (make-node 6 'c empty (make-node 14 'd empty empty)))</code>:</p>
+<pre><code>  5
+ / \
+1   6
+     \
+      14</code></pre>
+<p>We do not represent the <code>value</code> field - only keys matter here.</p>
+<h3 id="ordering-property">Ordering property</h3>
+<p>We can add a constraint that makes this much more efficient:</p>
+<pre><code>(define-struct node (key val left right))
+
+;; A binary search tree (BST) is one of:
+;; * empty
+;; * (make-node Num String BST BST)
+
+;; And satisfies the ordering property:
+;; * every key in `left` is less than `key`
+;; * every key in `right` is greater than `key`</code></pre>
+<p>The <strong>ordering property</strong> allows us to make the following assumptions:</p>
+<ul>
+<li>if a key is less than a given node's key, it is <strong>not in the right subtree</strong>.</li>
+<li>if a key is greater than a given node's key, it is <strong>not in the left subtree</strong>.</li>
+</ul>
+<p>This is very useful for operations like searching and insertion.</p>
+<h3 id="searching">Searching</h3>
+<p>Searching is made more efficient because we can use these assumptions to get a faster algorithm:</p>
+<ul>
+<li>If the tree is empty, the search key does not exist. Otherwise, we know we have a node.</li>
+<li>If the search key is equal to a node's key, we found the node.</li>
+<li>If the search key is less than a node's key, then we <strong>only need to search in the left subtree</strong>.</li>
+<li>If the search key is greater than a node's key, then we <strong>only need to search in the right subtree</strong>.</li>
+</ul>
+<p>Basically, we avoid doing one recursive call each time - so we would only need to make as many recursive calls as the tree is deep.</p>
+<p>If a tree is nicely <strong>balanced</strong> (internal nodes try to have both subtrees non-empty as much as possible), we can do a search in only <span class="math">\(\log_2 n\)</span> calls, where <span class="math">\(n\)</span> is the number of leaf nodes.</p>
+<p>Otherwise, degenerate trees such as one with all internal nodes having empty left or right subtrees are no more efficient than an association list.</p>
+<p>This can be implemented as follows:</p>
+<pre><code>;; search-bst: Num BST -&gt; (union Any false)
+;; Purpose: produces the value associated with `key` in `tree`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (search-bst key tree)
+    (cond [(empty? tree) false]
+          [(= key (node-key tree)) (node-val tree)]
+          [(&lt; key (node-key tree)) (search-bst key (node-left tree))]
+          [(&gt; key (node-key tree)) (search-bst key (node-right tree))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h3 id="adding">Adding</h3>
+<p>We can add an element to a binary search tree in a similar fashion:</p>
+<ul>
+<li>If the tree is empty, we can simply produce the new node.</li>
+<li>If the new node's key is equal to the node's key, we have a duplicate. We often handle this by replacing the node's value with the new node's value.</li>
+<li>If the new node's key is less than the node's key, we try to insert recursively in the left subtree of the node.</li>
+<li>If the new node's key is greater than the node's key, we try to insert recursively in the right subtree of the node.</li>
+</ul>
+<p>This can be implemented as follows:</p>
+<pre><code>;; insert-bst: Num Any BST -&gt; BST
+;; Purpose: produces `tree` with `key` associated with `value`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (insert-bst key value tree)
+    (cond [(empty? tree) (make-node key value empty empty)]
+          [(= key (node-key tree)) (make-node key value (node-left tree) (node-right tree))]
+          [(&lt; key (node-key tree)) (insert-bst key value (node-left tree))]
+          [(&gt; key (node-key tree)) (insert-bst key value (node-right tree))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h3 id="removing">Removing</h3>
+<p>Removing is a bit more complex. There are three cases to consider:</p>
+<ul>
+<li>No subtrees - leaf node. We can remove this directly.</li>
+<li>One subtree - internal node. We can remove the node and promote its child to the node's original place without violating the ordering property.</li>
+<li>Two subtrees - internal node. We can remove the node and promote the rightmost node of the left subtree of the node being removed, or the leftmost node of the right subtree of the node being removed, to the node's original place without violating the ordering property. This works because:</li>
+<li>Here, the <strong>rightmost node</strong> is the node we get if we keep taking the right subtree, never taking any left subtrees, until we get to a node without a right subtree.</li>
+<li>Likewise, the <strong>leftmost node</strong> is the node we get if we keep taking the left subtree, never taking any right subtrees, until we get to a node without a left subtree.</li>
+<li>The rightmost element of the left subtree is the largest element of the left subtree, yet is still smaller than every element of the right subtree.</li>
+<li>The leftmost element of the right subtree is the smallest element of the right subtree, yet is still larger than every element of the left subtree.</li>
+</ul>
+<p>This can be implemented as follows:</p>
+<pre><code>;; remove-min-bst: Node -&gt; BST
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (remove-min-bst tree)
+    (cond [(empty? (node-left tree)) empty]
+          [else (make-node (node-key tree) (node-val tree)
+                           (remove-min-bst (node-left tree))
+                           (node-right tree))]))
+
+;; min-bst: Node -&gt; Node
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (min-bst tree)
+    (cond [(empty? (node-left tree)) tree]
+          [else (min-bst (node-left tree))]))
+
+;; remove-bst: Num BST -&gt; BST
+;; Purpose: produces `tree` without the node with key `key`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (remove-bst key tree)
+    (cond [(empty? tree) empty]
+          [(= key (node-key tree))
+           (cond [(and (empty? (node-left tree)) ; leaf node
+                       (empty? (node-right tree)))
+                  empty])]
+                 [(empty? (node-left tree)) (node-right tree)] ; right child only
+                 [(empty? (node-right tree)) (node-left tree)] ; left child only
+                 [else ; two children
+                  (make-node (node-key (min-bst (node-right tree)))
+                             (node-val (min-bst (node-right tree)))
+                             (node-left tree)
+                             (remove-min-bst (node-right tree))]
+          [(&lt; key (node-key tree))
+           (make-node (node-key tree) (node-val tree)
+                      (remove-bst key (node-left tree))
+                      (node-right tree))]
+          [(&gt; key (node-key tree))
+           (make-node (node-key tree) (node-val tree)
+                      (node-left tree)
+                      (remove-bst key (node-right tree)))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h2 id="general-trees">General Trees</h2>
+<p>Binary trees are useful, but it is occasionally useful to allow a larger, fixed number of children. For example, a ternary tree has at most 3 elements.</p>
+<p>Here, we would modify our implementation to use a different definition for a node structure with additional fields.</p>
+<p>However, if there could be any number of children, we should represent a node's subtrees as a list.</p>
+<h3 id="scheme-expressions">Scheme expressions</h3>
+<p>Scheme expressions could be represented using one of these general trees:</p>
+<pre><code>(define-struct ae (operation args))
+
+;; An arithmetic expression (AE) is one of:
+;; * Num
+;; * (make-ae Symbol (listof AE))
+
+;; Template for AE:
+
+;; my-ae-fn: AE -&gt; Any
+(define (my-ae-fn ae)
+    (cond [(number? ae) ...]
+          [else (... (ae-operation ae) ...
+                     (my-ae-args-fn (ae-args ae)) ...)]))
+
+;; my-ae-args-fn: (listof AE) -&gt; Any
+(define (my-ae-args-fn args)
+    (cond [(empty? args) ...]
+          [else (... (my-ae-fn (first args)) ...
+                     (my-ae-args-fn (rest args)) ...)]))</code></pre>
+<p>Note the mutually recursive data definition results in a mutually recursive set of functions.</p>
+<p>Now we can write an evaluator for arithmetic expressions:</p>
+<pre><code>;; eval: AE -&gt; Num
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (eval ae)
+    (cond [(number? ae) ae]
+          [else (apply (ae-operation ae) (ae-args ae))]))
+
+;; apply: (listof AE) -&gt; Num
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (apply operation args)
+    (cond [(empty? args) (cond [(symbol=? operation &#39;*) 1]
+                               [(symbol=? operation &#39;+) 0])]
+          [(symbol=? operation &#39;*)
+           (* (eval (first args)) (apply operation (rest args)))]
+          [(symbol=? operation &#39;+)
+           (+ (eval (first args)) (apply operation (rest args)))]))</code></pre>
+<p>However, we could also write the expression with just lists: <code>'(+ 1 2 (* 4 5 6) 3)</code>. The data definition would look something like this:</p>
+<pre><code>;; An arithmetic expression (AE) is one of:
+;; * Num
+;; * (cons Symbol (listof AE))
+
+;; Template for AE:
+
+;; my-ae-fn: AE -&gt; Any
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (my-ae-fn ae)
+    (cond [(number? ae) ...]
+          [else (... (first ae) ...
+                     (my-ae-args-fn (rest ae)) ...)]))
+
+;; SEE DEFINITION OF my-ae-args-fn ABOVE</code></pre>
+<p>The evaluator function for this representation would look something like this:</p>
+<pre><code>;; eval: AE -&gt; Num
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (eval ae)
+    (cond [(number? ae) ae]
+          [else (apply (first ae) (rest ae))]))
+
+;; SEE DEFINITION OF apply ABOVE</code></pre>
+<p>Note that <code>apply</code> did not change when the data definition did not change.</p>
+<p>This is the beginnings of a full Scheme interpreter.</p>
+<h3 id="nested-lists">Nested lists</h3>
+<p>Nested lists can also be represented as <strong>leaf-labelled</strong> trees. Leaves correspond to list elements, and internal nodes correspond to nesting:</p>
+<pre><code>&#39;(1 (2 3) 4)
+
+      *
+     /|\
+    / * \
+   / / \ \
+  1 2   3 4</code></pre>
+<p>The data definition looks like this:</p>
+<pre><code>A NestedList is one of:
+* empty
+* (cons Num NestedList)
+* (cons NestedList NestedList)
+
+;; Template for NestedList
+;; my-nestedlist-fn: NestedList -&gt; Any
+(define (my-nestedlist-fn list)
+    (cond [(empty? list) ...]
+          [(number? (first list))
+           (... (first list) ...
+                (my-nestedlist-fn (rest list)) ...)]
+          [else (... (my-nestedlist-fn (first list)) ...
+                     (my-nestedlist-fn (rest list)) ...]))</code></pre>
+<p>Consider a list flattening function:</p>
+<pre><code>;; flatten: NestedList -&gt; Any
+(define (flatten list)
+    (cond [(empty? list) empty]
+          [(number? (first list))
+           (cons (first list) (flatten (rest list)))]
+          [else (append (flatten (first list))
+                        (flatten (rest list)))]))</code></pre>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
