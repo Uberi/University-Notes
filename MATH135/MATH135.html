@@ -878,11 +878,43 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 </blockquote>
 <p><span class="math">\(ax \equiv c \pmod{m}\)</span> is closely related to <span class="math">\(ax + my = c\)</span>.</p>
 <p>If <span class="math">\(x_0, y_0\)</span> is a particular solution to <span class="math">\(ax + my = c\)</span>, then the complete solution is <span class="math">\(x = x_0 + \frac{m}{d}n, y = y_0 - \frac{a}{d}n, n \in \mb{Z}, d = \gcd(a, m)\)</span>.</p>
-<p>Solve <span class="math">\(4x \equiv 2\)</span> (mod 6):</p>
+<p>Solve <span class="math">\(4x \equiv 2 \pmod{6}\)</span>:</p>
 <blockquote>
 <p>The corresponding LDE is <span class="math">\(4x + 6y = 2\)</span>.<br />By inspection (though we could also use EEA), we find that one possible solution is <span class="math">\(x = -1, y = 1\)</span>.<br />By LDET2, <span class="math">\(x = -1 + \frac{6}{2}n, n \in \mb{Z}\)</span>.<br />In both the linear congruence and the LDE, <span class="math">\(x\)</span> represents the same thing.<br />So the complete solution to the linear congruence is <span class="math">\(x = -1 + \frac{6}{2}n, n \in \mb{Z}\)</span>.</p>
 </blockquote>
-<p>In general <span class="math">\(x = x_0 + \frac{m}{d}n, n \in \mb{Z}\)</span>.</p>
+<p>In general <span class="math">\(x = x_0 + \frac{m}{\gcd(a, m)}n, n \in \mb{Z}\)</span>.</p>
+<h1 id="section-18">25/10/13</h1>
+<p>General process of solving a linear congruence <span class="math">\(ax \equiv c \pmod{m}\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math">\(d = \gcd(a, m)\)</span>.</li>
+<li>Assume <span class="math">\(x_0\)</span> is a solution. Find <span class="math">\(x_0\)</span> with the associated LDE.</li>
+<li>The complete solution is <span class="math">\(x = x_0 + \frac{m}{d}n, n \in \mb{Z}\)</span>.</li>
+</ol>
+<p>However, this is not a preferred way of writing the answer. We could also write:</p>
+<ul>
+<li><span class="math">\(x \in \set{x_0 + \frac{m}{d}n \middle| n \in \mb{Z}}\)</span> - set notation</li>
+<li><span class="math">\(x \in \set{\ldots, x_0 - 2\frac{m}{d}, x_0 - \frac{m}{d}, x_0, x_0 + \frac{m}{d}, x_0 + 2\frac{m}{d}, \ldots}\)</span> - write out all answers</li>
+<li><span class="math">\(x \equiv x_0 \pmod{\frac{m}{d}}\)</span> - linear congruence (can be negative)</li>
+<li><span class="math">\(x \equiv x_0 \pmod{\frac{m}{d}}\)</span> - linear congruence in range <span class="math">\(0 \le x_0 &lt; \frac{m}{d}\)</span> (take <span class="math">\(x_0\)</span> modulo <span class="math">\(\frac{m}{d}\)</span> to get this)</li>
+</ul>
+<p>The best way of writing the solutions, though, is to write it out modulo <span class="math">\(m\)</span>.</p>
+<p>Note that in the set of all answers, if we take every answer modulo <span class="math">\(m\)</span>, there are <span class="math">\(d\)</span> different possible answers: <span class="math">\(x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}\)</span>.</p>
+<p>x 2  5  ;wip</p>
+<h3 id="linear-congruence-theorem-version-1-lct-1">Linear Congruence Theorem, Version 1 (LCT 1)</h3>
+<p>Proposition: given <span class="math">\(a, c, m \in \mb{Z}, m &gt; 0\)</span>, with <span class="math">\(d = \gcd(a, m)\)</span>:</p>
+<ul>
+<li>the linear congruence <span class="math">\(ax \equiv c \pmod{m}\)</span> has a solution if and only if <span class="math">\(d \mid c\)</span></li>
+<li>if it does have a solution <span class="math">\(x_0\)</span>, then it has infinite solutions <span class="math">\(x = x_0 \pmod{\frac{m}{d}}\)</span></li>
+<li>alternatively, we can write this as <span class="math">\(x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}\)</span>.</li>
+</ul>
+<p>Solve <span class="math">\(4x \equiv 5 \pmod{21}\)</span>:</p>
+<blockquote>
+<p>The corresponding LDE is <span class="math">\(4x + 21y = 5\)</span>.<br />A possible solution is <span class="math">\(x_0 = -25, y_0 = 5\)</span>, found by inspection.<br />So by LCT 1, the complete solution is <span class="math">\(x = -25 + \frac{21}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 3 + 7n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 3 or 10 or 17 \pmod{21}\)</span>.</p>
+</blockquote>
+<p>Solve <span class="math">\(33x \equiv 6 \pmod{42}\)</span>:</p>
+<blockquote>
+<p>The corresponding LDE is <span class="math">\(33x + 42y = 6\)</span> A particular solution is <span class="math">\(x_0 = -5, y_0 = 4\)</span>, found by EEA.<br />So by LCT 1, the complete solution is <span class="math">\(x = -5 + \frac{42}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 9 + 14n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 9 or 23 or 37 \pmod{42}\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -1292,7 +1292,7 @@ $ax \equiv c \pmod{m}$ is closely related to $ax + my = c$.
 
 If $x_0, y_0$ is a particular solution to $ax + my = c$, then the complete solution is $x = x_0 + \frac{m}{d}n, y = y_0 - \frac{a}{d}n, n \in \mb{Z}, d = \gcd(a, m)$.
 
-Solve $4x \equiv 2$ (mod 6):
+Solve $4x \equiv 2 \pmod{6}$:
 
 > The corresponding LDE is $4x + 6y = 2$.  
 > By inspection (though we could also use EEA), we find that one possible solution is $x = -1, y = 1$.  
@@ -1300,4 +1300,47 @@ Solve $4x \equiv 2$ (mod 6):
 > In both the linear congruence and the LDE, $x$ represents the same thing.  
 > So the complete solution to the linear congruence is $x = -1 + \frac{6}{2}n, n \in \mb{Z}$.  
 
-In general $x = x_0 + \frac{m}{d}n, n \in \mb{Z}$.
+In general $x = x_0 + \frac{m}{\gcd(a, m)}n, n \in \mb{Z}$.
+
+# 25/10/13
+
+General process of solving a linear congruence $ax \equiv c \pmod{m}$:
+
+1. Let $d = \gcd(a, m)$.
+2. Assume $x_0$ is a solution. Find $x_0$ with the associated LDE.
+3. The complete solution is $x = x_0 + \frac{m}{d}n, n \in \mb{Z}$.
+
+However, this is not a preferred way of writing the answer. We could also write:
+
+* $x \in \set{x_0 + \frac{m}{d}n \middle| n \in \mb{Z}}$ - set notation
+* $x \in \set{\ldots, x_0 - 2\frac{m}{d}, x_0 - \frac{m}{d}, x_0, x_0 + \frac{m}{d}, x_0 + 2\frac{m}{d}, \ldots}$ - write out all answers
+* $x \equiv x_0 \pmod{\frac{m}{d}}$ - linear congruence (can be negative)
+* $x \equiv x_0 \pmod{\frac{m}{d}}$ - linear congruence in range $0 \le x_0 < \frac{m}{d}$ (take $x_0$ modulo $\frac{m}{d}$ to get this)
+
+The best way of writing the solutions, though, is to write it out modulo $m$.
+
+Note that in the set of all answers, if we take every answer modulo $m$, there are $d$ different possible answers: $x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}$.
+
+x \equiv 2 \text{ or } 5 \pmod{6} ;wip
+
+### Linear Congruence Theorem, Version 1 (LCT 1)
+
+Proposition: given $a, c, m \in \mb{Z}, m > 0$, with $d = \gcd(a, m)$:
+
+* the linear congruence $ax \equiv c \pmod{m}$ has a solution if and only if $d \mid c$
+* if it does have a solution $x_0$, then it has infinite solutions $x = x_0 \pmod{\frac{m}{d}}$
+* alternatively, we can write this as $x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}$.
+
+Solve $4x \equiv 5 \pmod{21}$:
+
+> The corresponding LDE is $4x + 21y = 5$.  
+> A possible solution is $x_0 = -25, y_0 = 5$, found by inspection.  
+> So by LCT 1, the complete solution is $x = -25 + \frac{21}{3}n, n \in \mb{Z}$, or $x = 3 + 7n, n \in \mb{Z}$.  
+> So we write $x \equiv 3 or 10 or 17 \pmod{21}$.  
+
+Solve $33x \equiv 6 \pmod{42}$:
+
+> The corresponding LDE is $33x + 42y = 6$
+> A particular solution is $x_0 = -5, y_0 = 4$, found by EEA.  
+> So by LCT 1, the complete solution is $x = -5 + \frac{42}{3}n, n \in \mb{Z}$, or $x = 9 + 14n, n \in \mb{Z}$.  
+> So we write $x \equiv 9 or 23 or 37 \pmod{42}$.  
