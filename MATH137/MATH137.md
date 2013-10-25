@@ -1485,3 +1485,34 @@ $$
 > Consider $f(x) = \ln x$.
 
 Alternatively, if $n = \frac{1}{x}$, we can write the limit as $e = \lim_{n \to \infty} (1 + \frac{1}{n})^n$.
+
+# 25/10/13
+
+Related Rates
+-------------
+
+A train departs moving Eastward traveling at 45 km/h while another departs 1 hour later moving South at 60 km/h. How fast is the distance between the trains changing 4 hours after the first train departs?
+
+> Let $P$ be the point of departure of the two trains.  
+> Let $t$ represent the time in hours.  
+> Let $x(t)$ represent the distance train 1 travels East in km.  
+> Let $y(t)$ represent the distance train 2 travels South in km.  
+> Let $z(t)$ represent the distance between the trains in km.  
+> We want to find $z'(4)$.
+> Clearly, $x' = 45, y' = 60$.  
+> Clearly, $z^2 = x^2 + y^2$.  
+> So $\frac{\dee}{\dee t} z^2 = \frac{\dee}{\dee t} x^2 + \frac{\dee}{\dee t} y^2 = 2zz' = 2xx' + 2yy'$.  
+> So $z' = \frac{xx' + yy'}{z} = \frac{45x + 60y}{z}$.  
+> Clearly, at $t = 4$, $x = x(4) = 4 \cdot 45 = 180, y = y(3) = 3 \cdot 60 = 180$.  
+> So $z = \sqrt{180^2 + 180^2} = 180 \sqrt{2}$.  
+> So $z'(4) = \frac{45 \cdot 180 + 60 \cdot 60 \cdot 180}{180 \sqrt{2}} = \frac{105}{\sqrt{2}}$.  
+
+How fast is the shadow cast by a 50 foot tall vertical pole lengthening when the angle of elevation of the sum is $\frac{\pi}{4} rad$ and decreasing by $\frac{1}{4}$ rad per hour?
+
+> Let $\theta$ be the angle of elevation in radians.  
+> Let $x$ be the length of the shadow in feet.  
+> Clearly, $x(\theta) = \frac{50}{\tan \theta}$.  
+> We know that $\theta = \frac{\pi}{4}, \frac{\dee \theta}{\dee t} = -\frac{1}{4}$.  
+> We want to find $\frac{\dee x}{\dee t}$ when $\theta = (\frac{\pi}{4})$.  
+> Clearly, $\frac{\dee x}{\dee t} = 50 \frac{\dee}{\dee t} \frac{1}{\tan \theta} = 50 \frac{-\sec^2 \theta \frac{\dee \theta}{\dee t}}{\tan^2 \theta} = \frac{50}{4 \sin^2 \theta}$.  
+> So $x'(\frac{\pi}{4}) = \frac{50}{4 \sin^2 \frac{\pi}{4}} = 25$.  
