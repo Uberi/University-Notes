@@ -234,7 +234,7 @@ If the cost stays the same regardless of quantity, the graph is a straight downw
 Demand
 ------
 
-Supply and demand are very common terms in economics - they are the forces that make the markets work. Microeconomics is the study of supply demand, and market equilibrium.
+Supply and demand are very common terms in economics - they are the forces that make the markets work. Microeconomics is the study of supply, demand, and market equilibrium.
 
 A **market** is a group of buyers and sellers of a particular good or service, and an arrangement where they can get information and do business with each other. Supply and demand describes the behaviour of people as they interact in markets.
 
@@ -817,7 +817,7 @@ They shift the supply curve down and the demand curve up.
 
 Quotas restrict the quantity that can be sold, generally an upper limit.
 
-For example, fishing licenses limit how much fish can be sold in order to prevent overfishing. This increases the price paid by the consumer.
+For example, fishing licenses limit how much fish can be sold in order to prevent overfishing. This increases the price paid by the consumer because quantity supplied is restricted.
 
 # 17/10/13
 

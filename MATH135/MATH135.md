@@ -1344,3 +1344,79 @@ Solve $33x \equiv 6 \pmod{42}$:
 > A particular solution is $x_0 = -5, y_0 = 4$, found by EEA.  
 > So by LCT 1, the complete solution is $x = -5 + \frac{42}{3}n, n \in \mb{Z}$, or $x = 9 + 14n, n \in \mb{Z}$.  
 > So we write $x \equiv 9 or 23 or 37 \pmod{42}$.  
+
+# 28/10/13
+
+Modular Arithmetic
+------------------
+
+Modular arithmetic is a device that relates congruences with equalities.
+
+There are two ways to do this - with remainders or with congruence classes. The latter is generally cleaner.
+
+### Congruence classes
+
+Given $m > 0, a \in \mb{Z}$, the congruence class modulo $m$ of $a$ is the set $\set{x \in \mb{Z} \middle| x \equiv a \pmod{m}}$. We denote this set $[a]$ when $m$ is understood (known from the context).
+
+So if we already know $m = 10$, $[3] = \set{\ldots, -17, -7, 3, 13, 23, 33, 43, \ldots}$.
+
+Consider for $m = 4$, $[-5] = \set{\ldots, -9, -5, -1, 3, 7, 11, 15, \ldots} = [3]$. -5 and 3 are **representatives** of the congruence class. Note that there are infinite possible representative.
+
+A congruence class is simply a set. Any element of the set is a representative of the set. This is like fractions, which represent rational numbers but are not unique, like $\frac{1}{2}$ and $\frac{2}{4}$.
+
+### Modulo
+
+The integers modulo $m$ is the number system whose set of numbers is $\mb{Z}_m = \set{[0], [1], [2], \ldots, [m - 1]}$.
+
+Basically, the numbers in this system are infinite sets of integers, and we add and multiply these sets by considering them as single objects.
+
+In this number system, come operations can be defined by the representatives:
+
+* $[a] + [b] = [a + b]$ - Addition
+* $[a] \cdot [b] = [a \cdot b]$
+
+Fix $m = 4$. So $[2] \cdot [3] = [6] = [2]$. Likewise, $[2] + [3] = [5] = [1]$.
+
+We know that $[6] = [2]$ because $6 \equiv 2 \pmod{m}$.
+
+The advantage of using operations over congruence classes is because **we can write congruence of two numbers as equality of two congruence classes**.
+
+### Multiplicative inverse
+
+Note that $[2] \cdot [3] = [1]$. So $[2]$ is the **multiplicative inverse** of $[3]$ and write $[3]^{-1}$.
+
+In general, the inverse of a given number is the number which, when multiplied with the given number, results in the congruence class $[1]$.
+
+In other words, $[a]^{-1}$ is the value such that $[a]^{-1} \cdot [a] = 1$.
+
+$[1]$ always has the inverse $[1]$. $[0]$ never has an inverse.
+
+The multiplicative inverse is **always unique**.
+
+Proof:
+
+> We want to see if it is possible that $[a] \cdot [b] = [1] = [a] \cdot [c]$, and $[b] \ne [c]$.  
+> Assume $[a] \cdot [b] = 1 = [a] \cdot c$.  
+> Clearly, $[b] = [b] \cdot 1 = [b] \cdot [a] \cdot [c] = 1 \cdot [c] = [c]$.  
+> So $[b] = [c]$.  
+
+Find $[15]^{-1}$ in $\mb{Z}_{38}$:
+
+> Clearly, $\gcd(15, 38) = 1$, so $[15]^{-1}$ exists.  
+> Let $x$ represent $[15]^{-1}$.  
+> We can solve $[15] \cdot x = 1$ by writing it as a linear congruence, and then a LDE.  
+> So $15x \equiv 1 \pmod{38}$ and $15x + 38y = 1$.  
+> Applying EEA, we get $x = -5, y = 2$.  
+> By LCT 1, $x = -5 + 38n, n \in \mb{Z}$, or $x \equiv -5 \pmod{38}$.  
+> So $x = [-5] = [-5 + 38] = [33]$, and $[15]^{-1} = [33]$.  
+
+### Unnamed Theorem
+
+Proposition: given $m > 0$ and $a \in \mb{Z}_m$, $[a]$ has a multiplicative inverse in $\mb{Z}_m$ if and only if $\gcd(a, m) = 1$.
+
+Proof:
+
+> Clearly, this is equivalent to $\exists [x] \in \mb{Z}_m, [a] \cdot [x] = [1]$.  
+> Clearly, this is equivalent to $\exists [x] is \mb{Z}_m, ax \equiv 1 \pmod{m}$.  
+> Clearly, $x$ exists if only if $\gcd(a, m) \mid 1$, by LCT 1.  
+> So $x$ exists of and only if $\gcd(a, m) = 1$.  

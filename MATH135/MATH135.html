@@ -915,6 +915,46 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 <blockquote>
 <p>The corresponding LDE is <span class="math">\(33x + 42y = 6\)</span> A particular solution is <span class="math">\(x_0 = -5, y_0 = 4\)</span>, found by EEA.<br />So by LCT 1, the complete solution is <span class="math">\(x = -5 + \frac{42}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 9 + 14n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 9 or 23 or 37 \pmod{42}\)</span>.</p>
 </blockquote>
+<h1 id="section-19">28/10/13</h1>
+<h2 id="modular-arithmetic">Modular Arithmetic</h2>
+<p>Modular arithmetic is a device that relates congruences with equalities.</p>
+<p>There are two ways to do this - with remainders or with congruence classes. The latter is generally cleaner.</p>
+<h3 id="congruence-classes">Congruence classes</h3>
+<p>Given <span class="math">\(m &gt; 0, a \in \mb{Z}\)</span>, the congruence class modulo <span class="math">\(m\)</span> of <span class="math">\(a\)</span> is the set <span class="math">\(\set{x \in \mb{Z} \middle| x \equiv a \pmod{m}}\)</span>. We denote this set <span class="math">\([a]\)</span> when <span class="math">\(m\)</span> is understood (known from the context).</p>
+<p>So if we already know <span class="math">\(m = 10\)</span>, <span class="math">\([3] = \set{\ldots, -17, -7, 3, 13, 23, 33, 43, \ldots}\)</span>.</p>
+<p>Consider for <span class="math">\(m = 4\)</span>, <span class="math">\([-5] = \set{\ldots, -9, -5, -1, 3, 7, 11, 15, \ldots} = [3]\)</span>. -5 and 3 are <strong>representatives</strong> of the congruence class. Note that there are infinite possible representative.</p>
+<p>A congruence class is simply a set. Any element of the set is a representative of the set. This is like fractions, which represent rational numbers but are not unique, like <span class="math">\(\frac{1}{2}\)</span> and <span class="math">\(\frac{2}{4}\)</span>.</p>
+<h3 id="modulo">Modulo</h3>
+<p>The integers modulo <span class="math">\(m\)</span> is the number system whose set of numbers is <span class="math">\(\mb{Z}_m = \set{[0], [1], [2], \ldots, [m - 1]}\)</span>.</p>
+<p>Basically, the numbers in this system are infinite sets of integers, and we add and multiply these sets by considering them as single objects.</p>
+<p>In this number system, come operations can be defined by the representatives:</p>
+<ul>
+<li><span class="math">\([a] + [b] = [a + b]\)</span> - Addition</li>
+<li><span class="math">\([a] \cdot [b] = [a \cdot b]\)</span></li>
+</ul>
+<p>Fix <span class="math">\(m = 4\)</span>. So <span class="math">\([2] \cdot [3] = [6] = [2]\)</span>. Likewise, <span class="math">\([2] + [3] = [5] = [1]\)</span>.</p>
+<p>We know that <span class="math">\([6] = [2]\)</span> because <span class="math">\(6 \equiv 2 \pmod{m}\)</span>.</p>
+<p>The advantage of using operations over congruence classes is because <strong>we can write congruence of two numbers as equality of two congruence classes</strong>.</p>
+<h3 id="multiplicative-inverse">Multiplicative inverse</h3>
+<p>Note that <span class="math">\([2] \cdot [3] = [1]\)</span>. So <span class="math">\([2]\)</span> is the <strong>multiplicative inverse</strong> of <span class="math">\([3]\)</span> and write <span class="math">\([3]^{-1}\)</span>.</p>
+<p>In general, the inverse of a given number is the number which, when multiplied with the given number, results in the congruence class <span class="math">\([1]\)</span>.</p>
+<p>In other words, <span class="math">\([a]^{-1}\)</span> is the value such that <span class="math">\([a]^{-1} \cdot [a] = 1\)</span>.</p>
+<p><span class="math">\([1]\)</span> always has the inverse <span class="math">\([1]\)</span>. <span class="math">\([0]\)</span> never has an inverse.</p>
+<p>The multiplicative inverse is <strong>always unique</strong>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>We want to see if it is possible that <span class="math">\([a] \cdot [b] = [1] = [a] \cdot [c]\)</span>, and <span class="math">\([b] \ne [c]\)</span>.<br />Assume <span class="math">\([a] \cdot [b] = 1 = [a] \cdot c\)</span>.<br />Clearly, <span class="math">\([b] = [b] \cdot 1 = [b] \cdot [a] \cdot [c] = 1 \cdot [c] = [c]\)</span>.<br />So <span class="math">\([b] = [c]\)</span>.</p>
+</blockquote>
+<p>Find <span class="math">\([15]^{-1}\)</span> in <span class="math">\(\mb{Z}_{38}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\gcd(15, 38) = 1\)</span>, so <span class="math">\([15]^{-1}\)</span> exists.<br />Let <span class="math">\(x\)</span> represent <span class="math">\([15]^{-1}\)</span>.<br />We can solve <span class="math">\([15] \cdot x = 1\)</span> by writing it as a linear congruence, and then a LDE.<br />So <span class="math">\(15x \equiv 1 \pmod{38}\)</span> and <span class="math">\(15x + 38y = 1\)</span>.<br />Applying EEA, we get <span class="math">\(x = -5, y = 2\)</span>.<br />By LCT 1, <span class="math">\(x = -5 + 38n, n \in \mb{Z}\)</span>, or <span class="math">\(x \equiv -5 \pmod{38}\)</span>.<br />So <span class="math">\(x = [-5] = [-5 + 38] = [33]\)</span>, and <span class="math">\([15]^{-1} = [33]\)</span>.</p>
+</blockquote>
+<h3 id="unnamed-theorem">Unnamed Theorem</h3>
+<p>Proposition: given <span class="math">\(m &gt; 0\)</span> and <span class="math">\(a \in \mb{Z}_m\)</span>, <span class="math">\([a]\)</span> has a multiplicative inverse in <span class="math">\(\mb{Z}_m\)</span> if and only if <span class="math">\(\gcd(a, m) = 1\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Clearly, this is equivalent to <span class="math">\(\exists [x] \in \mb{Z}_m, [a] \cdot [x] = [1]\)</span>.<br />Clearly, this is equivalent to <span class="math">\(\exists [x] is \mb{Z}_m, ax \equiv 1 \pmod{m}\)</span>.<br />Clearly, <span class="math">\(x\)</span> exists if only if <span class="math">\(\gcd(a, m) \mid 1\)</span>, by LCT 1.<br />So <span class="math">\(x\)</span> exists of and only if <span class="math">\(\gcd(a, m) = 1\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
