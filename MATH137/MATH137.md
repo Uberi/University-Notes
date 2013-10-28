@@ -1516,3 +1516,69 @@ How fast is the shadow cast by a 50 foot tall vertical pole lengthening when the
 > We want to find $\frac{\dee x}{\dee t}$ when $\theta = (\frac{\pi}{4})$.  
 > Clearly, $\frac{\dee x}{\dee t} = 50 \frac{\dee}{\dee t} \frac{1}{\tan \theta} = 50 \frac{-\sec^2 \theta \frac{\dee \theta}{\dee t}}{\tan^2 \theta} = \frac{50}{4 \sin^2 \theta}$.  
 > So $x'(\frac{\pi}{4}) = \frac{50}{4 \sin^2 \frac{\pi}{4}} = 25$.  
+
+# 28/10/13
+
+Linear Approximations
+---------------------
+
+In math and science we often use approximations to solve problems. This is because some problems are complex or impossible to solve analytically, and it can simplify things considerably.
+
+The **linear approximation** to a function $f(x)$ near a point $x = a$ is a first order polynomial (linear equation) which best approximates $f(x)$ near $x = a$.
+
+It is simply the tangent line, since it has the same **slope** and **value** at the point.
+
+So if the linear approximation is $L(x)$, it is required that $L(a) = f(a)$ and $L'(a) = f'(a)$.
+
+The linear approximation can be found as follows:
+
+$$
+L(x) = f'(a)(x - a) + f(a) = f'(a)x + f(a) - f'(a)a
+$$
+
+Find the linear approximation of $f(x) = \sqrt{x}$ near $x = 9$ and use it to estimate $\sqrt{10}$:
+
+$$
+\begin{align}
+L(x) &= \frac{1}{6}(x - 9) + 3 \\
+L(10) &= \frac{1}{6} + 3 = \frac{19}{6} \\
+\end{align}
+$$
+
+The further away from the point we get, the worse the approximation gets. To regain accuracy, we need to use another linear approximation at a closer point.
+
+The key to making good approximations is being able to find a **bound on the error** - $\exists M, \abs{f(x) - L(x)} < M$ whenever $x$ is close to $a$. This is similar to the definition of a limit. We would like to find $M$, or know that it exists.
+
+Ideally, we want to be able to find the $x$ values that would make $\abs{f(x) - L(x)} < M$, and vice versa. This is often difficult since it needs integration.
+
+Given $f(x) = x^2, L(x) = 1 + 2(x - 1)$ for $x$ near 1, find where the error is less than 0.1:
+
+> We want to find where $\abs{f(x) - L(x)} < 0.1$.  
+> This is equivalent to $\abs{(x - 1)^2} < 0.1$.  
+> This is equivalent to $\abs{x - 1} < \sqrt{0.1}$.  
+> This is equivalent to $-\sqrt{0.1} < x - 1 < \sqrt{0.1}$.  
+> This is equivalent to $1 - \sqrt{0.1} < x < \sqrt{0.1} + 1$.  
+
+Higher Order Approximations
+---------------------------
+
+Suppose we want a better approximation of $\sqrt{10}$. We could use a quadratic instead: $P_{2, 9}(x)$. Here, 2 represents the degree and 9 represents the a-value.
+
+$P_{2, 9}(x)$ must have the **same value** and **same slope** at $x = 9$, and the **same concavity**.
+
+So if the quadratic approximation is $P_{2, 9}(x)$, then $P_{2, 9}(a) = f(a)$, $P_{2, 9}'(a) = f'(a)$, and $P_{2, 9}''(a) = f''(a)$.
+
+Find the quadratic approximation of $f(x) = \sqrt{x}$ near $x = 9$ and use it to estimate $\sqrt{10}$:
+
+$$f(a) + f'(a)(x - a) + \frac{1}{2} f''(a) (x - a)^2$$
+
+$$
+\begin{align}
+Q(x) &= 3 + \frac{1}{6}(x - 9) + \frac{1}{108} (x - 9)^2 \\
+Q(10) &= 3 + \frac{1}{6} + \frac{1}{108} = \frac{1029}{324} \\
+\end{align}
+$$
+
+We don't have to stop at quadratics. We can use any order of polynomial to get better approximations. This is known as a Taylor series.
+
+For example, $e^x = \sum\limits_{n = 0}^\infty \frac{x^n}{n!}$.

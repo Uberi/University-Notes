@@ -1137,6 +1137,44 @@ e &amp;= \lim_{h \to 0} (1 + h)^\frac{1}{h} \\
 <blockquote>
 <p>Let <span class="math">\(\theta\)</span> be the angle of elevation in radians.<br />Let <span class="math">\(x\)</span> be the length of the shadow in feet.<br />Clearly, <span class="math">\(x(\theta) = \frac{50}{\tan \theta}\)</span>.<br />We know that <span class="math">\(\theta = \frac{\pi}{4}, \frac{\dee \theta}{\dee t} = -\frac{1}{4}\)</span>.<br />We want to find <span class="math">\(\frac{\dee x}{\dee t}\)</span> when <span class="math">\(\theta = (\frac{\pi}{4})\)</span>.<br />Clearly, <span class="math">\(\frac{\dee x}{\dee t} = 50 \frac{\dee}{\dee t} \frac{1}{\tan \theta} = 50 \frac{-\sec^2 \theta \frac{\dee \theta}{\dee t}}{\tan^2 \theta} = \frac{50}{4 \sin^2 \theta}\)</span>.<br />So <span class="math">\(x&#39;(\frac{\pi}{4}) = \frac{50}{4 \sin^2 \frac{\pi}{4}} = 25\)</span>.</p>
 </blockquote>
+<h1 id="section-19">28/10/13</h1>
+<h2 id="linear-approximations">Linear Approximations</h2>
+<p>In math and science we often use approximations to solve problems. This is because some problems are complex or impossible to solve analytically, and it can simplify things considerably.</p>
+<p>The <strong>linear approximation</strong> to a function <span class="math">\(f(x)\)</span> near a point <span class="math">\(x = a\)</span> is a first order polynomial (linear equation) which best approximates <span class="math">\(f(x)\)</span> near <span class="math">\(x = a\)</span>.</p>
+<p>It is simply the tangent line, since it has the same <strong>slope</strong> and <strong>value</strong> at the point.</p>
+<p>So if the linear approximation is <span class="math">\(L(x)\)</span>, it is required that <span class="math">\(L(a) = f(a)\)</span> and <span class="math">\(L&#39;(a) = f&#39;(a)\)</span>.</p>
+<p>The linear approximation can be found as follows:</p>
+<p><span class="math">\[
+L(x) = f&#39;(a)(x - a) + f(a) = f&#39;(a)x + f(a) - f&#39;(a)a
+\]</span></p>
+<p>Find the linear approximation of <span class="math">\(f(x) = \sqrt{x}\)</span> near <span class="math">\(x = 9\)</span> and use it to estimate <span class="math">\(\sqrt{10}\)</span>:</p>
+<p><span class="math">\[
+\begin{align}
+L(x) &amp;= \frac{1}{6}(x - 9) + 3 \\
+L(10) &amp;= \frac{1}{6} + 3 = \frac{19}{6} \\
+\end{align}
+\]</span></p>
+<p>The further away from the point we get, the worse the approximation gets. To regain accuracy, we need to use another linear approximation at a closer point.</p>
+<p>The key to making good approximations is being able to find a <strong>bound on the error</strong> - <span class="math">\(\exists M, \abs{f(x) - L(x)} &lt; M\)</span> whenever <span class="math">\(x\)</span> is close to <span class="math">\(a\)</span>. This is similar to the definition of a limit. We would like to find <span class="math">\(M\)</span>, or know that it exists.</p>
+<p>Ideally, we want to be able to find the <span class="math">\(x\)</span> values that would make <span class="math">\(\abs{f(x) - L(x)} &lt; M\)</span>, and vice versa. This is often difficult since it needs integration.</p>
+<p>Given <span class="math">\(f(x) = x^2, L(x) = 1 + 2(x - 1)\)</span> for <span class="math">\(x\)</span> near 1, find where the error is less than 0.1:</p>
+<blockquote>
+<p>We want to find where <span class="math">\(\abs{f(x) - L(x)} &lt; 0.1\)</span>.<br />This is equivalent to <span class="math">\(\abs{(x - 1)^2} &lt; 0.1\)</span>.<br />This is equivalent to <span class="math">\(\abs{x - 1} &lt; \sqrt{0.1}\)</span>.<br />This is equivalent to <span class="math">\(-\sqrt{0.1} &lt; x - 1 &lt; \sqrt{0.1}\)</span>.<br />This is equivalent to <span class="math">\(1 - \sqrt{0.1} &lt; x &lt; \sqrt{0.1} + 1\)</span>.</p>
+</blockquote>
+<h2 id="higher-order-approximations">Higher Order Approximations</h2>
+<p>Suppose we want a better approximation of <span class="math">\(\sqrt{10}\)</span>. We could use a quadratic instead: <span class="math">\(P_{2, 9}(x)\)</span>. Here, 2 represents the degree and 9 represents the a-value.</p>
+<p><span class="math">\(P_{2, 9}(x)\)</span> must have the <strong>same value</strong> and <strong>same slope</strong> at <span class="math">\(x = 9\)</span>, and the <strong>same concavity</strong>.</p>
+<p>So if the quadratic approximation is <span class="math">\(P_{2, 9}(x)\)</span>, then <span class="math">\(P_{2, 9}(a) = f(a)\)</span>, <span class="math">\(P_{2, 9}&#39;(a) = f&#39;(a)\)</span>, and <span class="math">\(P_{2, 9}&#39;&#39;(a) = f&#39;&#39;(a)\)</span>.</p>
+<p>Find the quadratic approximation of <span class="math">\(f(x) = \sqrt{x}\)</span> near <span class="math">\(x = 9\)</span> and use it to estimate <span class="math">\(\sqrt{10}\)</span>:</p>
+<p><span class="math">\[f(a) + f&#39;(a)(x - a) + \frac{1}{2} f&#39;&#39;(a) (x - a)^2\]</span></p>
+<p><span class="math">\[
+\begin{align}
+Q(x) &amp;= 3 + \frac{1}{6}(x - 9) + \frac{1}{108} (x - 9)^2 \\
+Q(10) &amp;= 3 + \frac{1}{6} + \frac{1}{108} = \frac{1029}{324} \\
+\end{align}
+\]</span></p>
+<p>We don't have to stop at quadratics. We can use any order of polynomial to get better approximations. This is known as a Taylor series.</p>
+<p>For example, <span class="math">\(e^x = \sum\limits_{n = 0}^\infty \frac{x^n}{n!}\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
