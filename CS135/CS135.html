@@ -12,13 +12,21 @@
   }
   
   pre {
+    margin-left: 2em;
+  }
+  
+  code {
     border: solid 1px black;
     background: #665555;
     color: white;
+    padding: 0.1em;
+    border-radius: 0.3em;
+    display: inline-block;
+  }
+  
+  pre code {
     padding: 1em;
     border-radius: 0.5em;
-    display: inline-block;
-    margin-left: 2em;
   }
   
   h1 {
@@ -76,7 +84,11 @@ Office hours: Tuesdays in MC 2062/2063, Thursdays in MC 4065, 1:15-2:15 PM</code
 <li>The Vote Status light should flash green.</li>
 </ol>
 <h2 id="programming-language-design">Programming Language Design</h2>
-<p>Imperative: frequent changes to data - Java, C++ Functional: computation of new values rather than changing old ones - LISP, ML, Haskell, Erlang, F# - closely connected to math, easier to reason about/design programs</p>
+<p>Two important branches of language design:</p>
+<ul>
+<li>Imperative: frequent changes to data - Java, C++</li>
+<li>Functional: computation of new values rather than changing old ones - LISP, ML, Haskell, Erlang, F# - closely connected to math, easier to reason about/design programs</li>
+</ul>
 <h2 id="scheme">Scheme</h2>
 <p>Member of the LISP family of languages.</p>
 <ul>
@@ -125,7 +137,7 @@ What is the last operator to be applied?
 Repeat process.
 / - 6 4 + 5 7
 This is valid prefix notation, but not valid Scheme.
-Since in Scheme arbitrary numbers of operands are supported, we need t add brackets to make it explicit.
+Since in Scheme arbitrary numbers of operands are supported, we need to add brackets to make it explicit.
 (/ (- 6 4) (+ 5 7))</code></pre>
 <p>Conversion is done by moving the last operator to be applied to the beginning of the subexpression until no infix operators remain. Operand order remains the same.</p>
 <h2 id="prefix-notation">Prefix Notation</h2>
@@ -292,7 +304,7 @@ Tests:
 <h1 id="section-1">19/9/13</h1>
 <h2 id="boolean-values">Boolean Values</h2>
 <p>Scheme represents Boolean values with the literals <code>#t</code> and <code>#f</code> (<code>true</code> and <code>false</code> are also usable in the Scheme teaching languages), representing true and false respectively.</p>
-<p>The equality function <code>(= x y)</code> (<code>(= Num Num) -&gt; Boolean</code>) tests whether two numbers are equal and results in a boolean value. Similarly, <code>(&lt; x y)</code> and <code>(&gt;= x y)</code> behave similarly.</p>
+<p>The equality function <code>(= x y)</code> (<code>(= Num Num) -&gt; Boolean</code>) tests whether two numbers are equal and results in a boolean value. <code>(&lt; x y)</code> and <code>(&gt;= x y)</code> behave similarly.</p>
 <p><strong>Predicates</strong> are expressions that result in Boolean values. They are, by convention, given names that end with a question mark. For example, <code>(even? x)</code> is clearly a predicate.</p>
 <p>The most common Boolean operators are <code>(and x y ...)</code>, <code>(or x y ...)</code>, and <code>(not x)</code>. They represent <span class="math">\(x \wedge y\)</span>, <span class="math">\(x \vee y\)</span>, and <span class="math">\(\neg x\)</span>, respectively.</p>
 <p>Scheme has no inequality (not-equals) operator. However, it can be implemented as follows: <code>(not (= x y))</code>.</p>
@@ -511,7 +523,7 @@ Tests:
      ... (product-id prod) ...
      ... (product-price prod) ...
      ... (product-availability prod)))</code></pre>
-<p>We use Any since we don't know what it returns yet. This needs to be reviewed later when actually writing the function.</p>
+<p>We use <code>Any</code> since we don't know what it returns yet. This needs to be reviewed later when actually writing the function.</p>
 <p>We then fill in the placeholders, <code>...</code>, to create the finished function:</p>
 <pre><code>(define (change-price prod price)
     (make-product (product-name prod)
@@ -574,10 +586,10 @@ Tests:
 <p>A recursive definition defines something in terms of itself.</p>
 <p>A list is a compound data type. It is a recursively defined. They are known as &quot;cons&quot; types.</p>
 <blockquote>
-<p>A list of 5 numbers is a number followed by a list of 4 numbers. A list of 4 numbers is a number followed by a list of 3 numbers. A list of 3 numbers is a number followed by a list of 2 numbers. A list of 2 numbers is a number followed by a list of 1 numbers. A list of 1 numbers is a number followed by a list of 0 numbers. A list of 0 numbers is the base case and handled specially.</p>
+<p>A list of 5 numbers is a number followed by a list of 4 numbers.<br />A list of 4 numbers is a number followed by a list of 3 numbers.<br />A list of 3 numbers is a number followed by a list of 2 numbers.<br />A list of 2 numbers is a number followed by a list of 1 numbers.<br />A list of 1 numbers is a number followed by a list of 0 numbers.<br />A list of 0 numbers is the base case and handled specially.</p>
 </blockquote>
 <p>Lists in Scheme are similar to singly linked lists.</p>
-<p>We have access only to the first element of a list.</p>
+<p>We have access only to the first element and the rest of the list.</p>
 <h3 id="basic-list-constructs">Basic list constructs</h3>
 <ul>
 <li><code>empty</code> - list of 0 elements.</li>
@@ -925,7 +937,7 @@ A OtherThing is one of:
           [(and (empty? list1) (cons? list2)) ...]
           [(and (cons? list1) (empty? list2)) ...]
           [else ...]))</code></pre>
-<p>Consider an element count function:</p>
+<p>Consider an element count test function:</p>
 <pre><code>;; minimum-occurrences?: (listof Any) Any Nat -&gt; Boolean
 ;; Purpose: produces true if `value` appears in `list` at least `count` times, and false otherwise
 ;; Examples:
