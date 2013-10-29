@@ -491,6 +491,7 @@ There are two types of properties:
 
 * **Primary qualities**
   * Are those inseparable from the object - they stay with the object no matter how much it is changed.
+  * Are **part of an object**.
   * These include solidity, extension, shape, motion/rest, and number.
   * For example, a canteloupe will **always have a quantity**, no matter how many pieces we cut it.
   * Exist within and resemble the object.
@@ -499,7 +500,7 @@ There are two types of properties:
   * Caused by the interactions of the primary qualities of an object with our senses.
   * These include colors, sounds, and tastes.
   * For example, an object with the **ability to reflect of light around 450 nm** (primary quality) has the **ability to produce the sensation of blue** (secondary quality).
-  * Exists only in the mind and may not resemble the object.
+  * Exists **only in minds** and may not resemble the object.
 
 The **representational theory of the mind** is that ideas resemble things in the world, because they are caused by things in the world.
 
@@ -528,7 +529,7 @@ George Berkeley
 
 Irishman, Anglican bishop, after Descartes' time, contemporary of Locke. British empiricist. Mind starts off as tabula rasa.
 
-Berkeley was not only an empiricist (knowledge comes from the senses), but an **idealist**. Berkely thought that there is **no such thing as matter** - **everything is an idea**.
+Berkeley was not only an empiricist (knowledge comes from the senses), but an **idealist**. Berkely thought that there is **no such thing as matter** - **everything is an idea or a mind**.
 
 This contrasts with Locke, who thought everything was matter. Descartes thought there were both.
 
@@ -536,9 +537,9 @@ As a result, Berkeley **did not run into the mind-body problem** that Descartes 
 
 Berekely thought there were three objects of knowledge:
 
-* **Sense ideas** - ideas that are passively (not controllably) brought into the mind by the **actions of the senses**.
-* **Inner sense** - ideas that are the result of **introspection**, thinking about the things in one's thought bubble.
-* **Memory/imagination** - ideas that are the result of the **mixing of other ideas**.
+* **Sense ideas** - ideas that are passively (not controllably) brought into the mind by the **actions of the senses**. What am I seeing?
+* **Inner sense** - ideas that are the result of **introspection**, thinking about the things in one's thought bubble. What am I thinking about right now?
+* **Memory/imagination** - ideas that are the result of the **mixing of other ideas**. For example, thinking about a unicorn.
 
 Ideas are immaterial things that exist either in **one's own thought bubble, or God's thought bubble**.
 
@@ -555,6 +556,8 @@ A mind is a **thing that perceives ideas**.
 Ideas only exist when they are perceived by a mind. So if a person dies, the ideas in that person's mind no longer exist.
 
 > To be is to be perceived - without perception, there is no existance.
+
+- Berkeley
 
 So if something is not being perceived, it doesn't exist. However, God is always perceiving everything, and so things don't pop out of existance when nobody is looking at them.
 
@@ -578,6 +581,49 @@ Berkeley takes empiricism to the extremes. He criticises Locke's view as not emp
   * So there are no primary qualities, only secondary ones.
 * Empiricism conflicts with materialism.
   * Locke has never seen an atom, yet explains things with them - Locke has no experience with atoms, yet says all knowledge comes from interaction of atoms.
-  * What do we see when we look at an object? We see color, shape, dimension, but we never actually see matter. We **can't perceive matter**.
+  * What do we see when we look at an object? We see color, shape, dimension, but we never actually see matter. We **can't perceive matter**. If we can't perceive it, then why should we believe it exists?
 
 Berkeley says that if one is an empiricist, one should also be an idealist, and cannot be a materialist.
+
+# 29/10/13
+
+> Why do the qualities of an object stay with the object? Why isn't the color of an object separable from the object?
+
+In materialism, the qualities of an object are stuck to the matter of the object.
+
+In idealism, the qualitites of an object stay with the objet because a good God makes it so to be coherent and consistent.
+
+Berkeley was **not a skeptic**. He knows that there is a reality out there, because God makes it correspond to the idea that he knows in his mind. Also, skepticism might lead to the doubting of the existance of God, which is something he wants to prevent. Berkeley was "willing to give up matter to block skepticism".
+
+### God
+
+Instead of viewing God as an assumption on which we base Berkeley's view, we can also view the whole thing as Berkeley's proof of God's existance.
+
+The most likely reason that objects don't stop existing when we stop observing them, that we each perceive the same thing when we view the same object, and various other problems, is that there is a good God. Well, we don't actually know that objects don't stop existing when we stop observing them, but by "common sense" we assume this is true.
+
+God is a good explanation for the phenomena that we observe is probably true.
+
+### Parsimony
+
+Parsimony: the virtue of simplicity.
+
+Occam's razor: the simplest answer is often the best.
+
+Simplicity can be defined as making the fewest and most reasonable assumptions.
+
+Berkeley thought that if there are multiple answers to a question, the simplest one - the one with the fewest assumptions - is the best.
+
+Since assuming the existance of a good God is a "single assumption", it is the simple answer. With Locke's view, we have to assume there is matter, and qualities of matter, and all those other things.
+
+So the simplest answer is idealism, and so it's the one we should use.
+
+Review
+------
+
+| Philosopher | Source of ideas | Metaphysics            | Relation of knowledge to the world | Causation              | Skepticism                     |
+|:------------|:----------------|:-----------------------|:-----------------------------------|:-----------------------|:-------------------------------|
+| ALL         | Various         | Various                | Representational theory of mind    | Various                | Various                        |
+| Aristotle   | Observation     | Form/matter            | Observation                        | Four causes            | Don't care                     |
+| Descartes   | Rationalist     | Dualist - mind/body    | ??? Mind/body problem ???          | Efficient cause        | Methodic doubt test            |
+| Locke       | Empiricist      | Materialist            | Physical interactions with brains  | Efficient cause        | Doubt only secondary qualities |
+| Berkeley    | Empiricist      | Idealist - minds/ideas | Mental causation                   | Efficient cause        | Not at all                     |

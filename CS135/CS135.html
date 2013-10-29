@@ -841,9 +841,9 @@ A OtherThing is one of:
 <h2 id="list-abbreviations">List Abbreviations</h2>
 <p>Lists can be written in a few ways. All of the following are equivalent:</p>
 <ul>
-<li><code>(cons 3 (cons (cons 'a (cons 'b empty)) (cons &quot;test&quot; empty)))</code></li>
-<li><code>(list 3 (list 'a 'b) &quot;test&quot;)</code></li>
-<li><code>'(3 (a b) &quot;test&quot;)</code> - only available starting in &quot;Beginning Student with List Abbreviations&quot;. In the quoted part, only symbols, numbers, strings, and lists are allowed. No quotes are used inside the outer brackets. <code>'()</code> is the same as <code>empty</code>.</li>
+<li><code>(cons 3 (cons (cons 'a (cons 'b empty)) (cons &quot;test&quot; (cons #\a empty))))</code></li>
+<li><code>(list 3 (list 'a 'b) &quot;test&quot; #\a)</code></li>
+<li><code>'(3 (a b) &quot;test&quot; #\a)</code> - only available starting in &quot;Beginning Student with List Abbreviations&quot;. In the quoted part, only symbols, numbers, strings, and lists are allowed. No quotes are used inside the outer brackets. <code>'()</code> is the same as <code>empty</code>.</li>
 </ul>
 <p>We use <code>list</code> for lists of fixed size, where the length of the list is known beforehand. We still need <code>cons</code> for constructing a list of variable length.</p>
 <p>In data definitions, we can use notation like <code>(list String Num)</code> to represent a list with the first element being a string, and the second a number.</p>
@@ -1338,6 +1338,16 @@ A OtherThing is one of:
     / * \
    / / \ \
   1 2   3 4</code></pre>
+<p>Note that the empty list is simply a single node:</p>
+<pre><code>&#39;()
+
+(nothing here)</code></pre>
+<p>Also, a tree containing empty has an empty tree as its value:</p>
+<pre><code>&#39;(1 empty 2)
+
+      *
+     /|\
+    1   2</code></pre>
 <p>The data definition looks like this:</p>
 <pre><code>A NestedList is one of:
 * empty
@@ -1361,6 +1371,64 @@ A OtherThing is one of:
            (cons (first list) (flatten (rest list)))]
           [else (append (flatten (first list))
                         (flatten (rest list)))]))</code></pre>
+<h1 id="section-11">29/10/13</h1>
+<p>Consider now a representation for algebraic expressions. These are simply the expressions we saw earlier, except now with support for variables. For example, <code>'(+ 4 #\x (* 5 3 #\x))</code>:</p>
+<pre><code>An AlgExp is one of:
+* Num
+* Char ;WE USE CHAR HERE BECAUSE AN OPERATOR IS A SYMBOL AND IT WOULD BE CONFUSING TO HAVE SYMBOLS MEAN TWO DIFFERENT THINGS
+* (cons Symbol (listof AlgExp))
+
+;; my-listof-algexp-fn: (listof AlgExp) -&gt; Any
+(define (my-listof-algexp-fn alglist)
+    (cond [(empty? alglist) ...]
+          [else (... (my-algexp-fn (first alglist)) ...
+                     (my-listof-algexp-fn (rest alglist)))]))
+
+;; my-algexp-fn: AlgExp -&gt; Any
+(define (my-algexp-fn alg)
+    (cond [(number? alg) ...]
+          [(char? alg) ...]
+          [else (... (first alg) ...
+                     (my-listof-algexp-fn (rest alg)) ...)]))</code></pre>
+<p>;wip: look into the design recipe updates for mutual recursion</p>
+<p>Now we can write a substitution function:</p>
+<pre><code>;; substitute-list: (listof AlgExp) Char Num -&gt; (listof AlgExp)
+;; Purpose: produces `alglist` where `var` is replaced by `value`
+;; Examples:
+;wip: is this needed?
+(define (substitute-list alglist var value)
+    (cond [(empty? alglist) empty]
+          [else (cons (my-algexp-fn (first alglist) var value)
+                      (substitute-list (rest alglist) var value))]))
+;; Tests:
+;wip: is this needed?
+
+;; substitute: AlgExp Char Num -&gt; AlgExp
+;; Purpose: produces `alg` where `var` is replaced by `value`
+;; Examples:
+(check-expect (substitute &#39;(+ 1 #\x 2 #\y #\x) #\x 5) &#39;(+ 1 5 2 #\y 5))
+(check-expect (substitute #\x #\x 5) 5)
+(define (substitute alg var value)
+    (cond [(number? alg) alg]
+          [(char? alg) (cond [(char=? alg var) value]
+                             [else alg])]
+          [else (cons (first alg)
+                      (my-listof-algexp-fn (rest alg)))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>General trees are useful for representing any sort of nested data. For example, a book might be represented as follows:</p>
+<pre><code>&#39;(chapter (section (paragraph &quot;First sentence.&quot;
+                              &quot;Second sentence.&quot;)
+                   (paragraph &quot;Continued.&quot;))
+          (section ...)
+          ...)</code></pre>
+<h2 id="local-definitions-and-lexical-scope">Local Definitions and Lexical Scope</h2>
+<p>Only available beginning with Intermediate Student. Not part of Standard Scheme, but there are similar constructs available there which are simpler, but not as general.</p>
+<p>Definitions have to this point been made at the &quot;top level&quot;, outside of any expressions.</p>
+<p>However, there is also a special form <code>local</code>, which allows us to make definitions inside an expression and use them only inside that expression:</p>
+<pre><code>(local [(define a x) (define b y) (define c z) ...]
+       ...) ; do something with those definitions</code></pre>
+<p>;wip: we can also define functions too</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
