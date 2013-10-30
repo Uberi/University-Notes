@@ -249,7 +249,7 @@ The **intersection** of $A$ and $B$ is $A \cap B$. This is the set of all elemen
 
 The **difference** of $A$ and $B$ is $A - B$ or $A \setminus B$. This is the set of all elements belonging to $A$, but not to $B$. This can be written as $x \in A - B \iff x \in A \text{ and } x \notin B$, and is sometimes defined as $A - B = \set{x \in A \middle| x \notin B}$.
 
-The **complement** of a set $A$ is $\overline{A}$. This is the set of all elements in the **universe of dicourse** that are not in $A$.
+The **complement** of a set $A$ is $\overline{A}$. This is the set of all elements in the **universe of discourse** that are not in $A$.
 
 The **cardinality** of a set $A$ is $\abs{A}$. This is the number of elements it contains.
 
@@ -834,7 +834,7 @@ q_2 &= 0 \\
 q_n &= \floor{\frac{r_{n - 2}}{r_{n - 1}}} \\
 r_n &= r_{n - 2} - q_n \cdot r_{n - 1} \\
 x_n &= x_{n - 2} - q_n \cdot x_{n - 1} \\
-y_n &= x_{n - 2} - q_n \cdot y_{n - 1} \\
+y_n &= y_{n - 2} - q_n \cdot y_{n - 1} \\
 \end{align}
 $$
 
@@ -1321,14 +1321,14 @@ The best way of writing the solutions, though, is to write it out modulo $m$.
 
 Note that in the set of all answers, if we take every answer modulo $m$, there are $d$ different possible answers: $x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}$.
 
-x \equiv 2 \text{ or } 5 \pmod{6} ;wip
+$x \equiv 2 \text{ or } 5 \pmod{6}$ ;wip
 
 ### Linear Congruence Theorem, Version 1 (LCT 1)
 
 Proposition: given $a, c, m \in \mb{Z}, m > 0$, with $d = \gcd(a, m)$:
 
 * the linear congruence $ax \equiv c \pmod{m}$ has a solution if and only if $d \mid c$
-* if it does have a solution $x_0$, then it has infinite solutions $x = x_0 \pmod{\frac{m}{d}}$
+* if it does have a solution $x_0$, then it has infinite solutions $x \equiv x_0 \pmod{\frac{m}{d}}$
 * alternatively, we can write this as $x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}$.
 
 Solve $4x \equiv 5 \pmod{21}$:
@@ -1336,14 +1336,14 @@ Solve $4x \equiv 5 \pmod{21}$:
 > The corresponding LDE is $4x + 21y = 5$.  
 > A possible solution is $x_0 = -25, y_0 = 5$, found by inspection.  
 > So by LCT 1, the complete solution is $x = -25 + \frac{21}{3}n, n \in \mb{Z}$, or $x = 3 + 7n, n \in \mb{Z}$.  
-> So we write $x \equiv 3 or 10 or 17 \pmod{21}$.  
+> So we write $x \equiv 3 \text{ or } 10 \text{ or } 17 \pmod{21}$.  
 
 Solve $33x \equiv 6 \pmod{42}$:
 
 > The corresponding LDE is $33x + 42y = 6$
 > A particular solution is $x_0 = -5, y_0 = 4$, found by EEA.  
 > So by LCT 1, the complete solution is $x = -5 + \frac{42}{3}n, n \in \mb{Z}$, or $x = 9 + 14n, n \in \mb{Z}$.  
-> So we write $x \equiv 9 or 23 or 37 \pmod{42}$.  
+> So we write $x \equiv 9 \text{ or } 23 \text{ or } 37 \pmod{42}$.  
 
 # 28/10/13
 
@@ -1356,7 +1356,7 @@ There are two ways to do this - with remainders or with congruence classes. The 
 
 ### Congruence classes
 
-Given $m > 0, a \in \mb{Z}$, the congruence class modulo $m$ of $a$ is the set $\set{x \in \mb{Z} \middle| x \equiv a \pmod{m}}$. We denote this set $[a]$ when $m$ is understood (known from the context).
+Given $m > 0, a \in \mb{Z}$, the congruence class modulo $m$ of $a$ is the set $\set{x \in \mb{Z} \middle| x \equiv a \pmod{m}}$. We denote this set $[a]$ when $m$ is understood (known from the context). This is called the "integers mod $m$"
 
 So if we already know $m = 10$, $[3] = \set{\ldots, -17, -7, 3, 13, 23, 33, 43, \ldots}$.
 
@@ -1420,3 +1420,72 @@ Proof:
 > Clearly, this is equivalent to $\exists [x] is \mb{Z}_m, ax \equiv 1 \pmod{m}$.  
 > Clearly, $x$ exists if only if $\gcd(a, m) \mid 1$, by LCT 1.  
 > So $x$ exists of and only if $\gcd(a, m) = 1$.  
+
+# 30/10/13
+
+;wip: read Chapters 26 today, chapters 28 and 29 on Friday
+
+Fermat's Little Theorem (FLT)
+-----------------------------
+
+"Feir-mah"
+
+If $p$ is a prime number, $a \in \mb{Z}$, $p \nmid a$, then $a^{pp - 1} \equiv 1 \pmod{p}$.
+
+In other words, if $p$ is prime, $[a] \in \mb{Z}_p \wedge [a] \ne 0 \implies [a]^{p - 1} = [1]$.
+
+This is also writable as $[a] \cdot [a]^{p - 2} = [1]$.
+
+So by the definition of the multiplicative inverse, $[a]^{-1} = [a]^{p - 2}$0
+
+Proof:
+
+> Fix a prime $p$.  
+> Let $a \in \mb{Z}$.  
+> Assume $p \nmid a$.  
+> Consider the first $p$ multiples of $a$: $0, 1a, \ldots, (p - 1)a$.  
+
+> We claim that these numbers represent distinct congruence classes modulo $p$.  
+> We will prove this claim by contradiction.  
+> Suppose for some $r, s$, $r \ne s, 0 \le r \le p - 1, 0 \le s \le p - 1$, that $ra \equiv sa \pmod{p}$.
+> Then $p \mid ra - sa$, so $p \mid (r - s)a$.  
+> Since $p \nmid a$, then $p \mid r - s$, by PAD.  
+> But we know that $r - s \ne 0$, so $\abs{r - s} \ge p$, by BBD.  
+> But this is impossible since $\abs{r - s} \le p - 1$.  ;wip: this doesn't seem to be a contradiction...
+> So the claim is true.  
+
+> Clearly, there are exactly $p$ distinct congruence classes modulo $p$.  
+> Since each of the numbers represents a distinct congruence class, and there are $p$ numbers and only $p$ distinct congruence classes modulo $p$, then these numbers must represent all distinct congruence classes, modulo $p$.
+> So $[0], [1a], \ldots, [(p - 1)a]$ is some permutation of $[0], [1], \ldots, [p - 1]$.  
+> We know that $[0] = [0]$, so $[1a], [2a], \ldots, [(p - 1)a]$ is some permutation of $[1], [2], \ldots, [p - 1]$.  
+> So $[1a] \cdot [2a] \ldots \cdot [(p - 1)a] = [1] \cdot [2] \ldots \cdot [p - 1]$.  
+> Clearly, $[1a \cdot 2a \ldots \cdot (p - 1)a] = [(p - 1)! a^{p - 1}]$.  
+> Clearly, $[1] \cdot [2] \ldots \cdot [p - 1] = [(p - 1)!]$.  
+> So $[(p - 1)! a^{p - 1}] = [(p - 1)!]$.  
+> So $(p - 1)! a^{p - 1} \equiv (p - 1)! \pmod{p}$.  
+> So $p \mid (p - 1)! a^{p - 1} - (p - 1)!$, and $p \mid (p - 1)! (a^{p - 1} - 1)$.  
+
+> We claim that $p \nmid (p - 1)!$.  
+> We will prove this claim by contradiction.  
+> Suppose $p \mid 1 \cdot 2 \cdot \ldots \cdot (p - 1)$.  
+> Then $p \mid (1 \cdot 2 \cdot \ldots (p - 2))$ or $p \mid (p - 1)$, by PAD.  
+> Clearly, $p \nmid (p - 1)$, so $p \mid $1 \cdot 2 \cdot \ldots (p - 2)$.  
+> By applying this repeatedly, we find that $p \nmid p - 2, p \nmid p - 3, \ldots, p \nmid 2$, and $p \mid 1$.  
+> But this is impossible, since $p \nmid 1$, by BBD.  
+> So the claim is true.  
+
+> So $p \mid a^{p - 1} - 1$, by PAD.  
+> So $a^{p - 1} \equiv 1 \pmod{p}$.  
+
+For example, 5 is prime and $5 \nmid 3$, so $3^4 \equiv 1 \pmod{5}$.
+
+Find the remainder when $8^{1000}$ is divided by 13:
+
+> We want to find $r$ such that $8^{1000} \equiv r \pmod{13}$, $0 \le r < 13$.  
+> Since 13 is prime and $13 \nmid 8$, $8^{12} \equiv 1 \pmod{13}$, by FLT.  
+> By PC, $(8^{12})^n \equiv 1^n \equiv 8^{12 \cdot 83} \equiv 8^{996} \pmod{13}$.  
+> So $8^{1000} \equiv 8^{4} \cdot 8^{996} \equiv 1 \cdot 2^{12} \pmod{13}$.  
+> Since 13 is prime and $13 \nmid 2$, $2^{12} \equiv 1 \pmod{13}$, by FLT.  
+> So $8^{1000} \equiv 1 \cdot 1 \equiv 1 \pmod{13}$.  
+
+This only works in certain cases, but is occasionally useful.

@@ -1582,3 +1582,77 @@ $$
 We don't have to stop at quadratics. We can use any order of polynomial to get better approximations. This is known as a Taylor series.
 
 For example, $e^x = \sum\limits_{n = 0}^\infty \frac{x^n}{n!}$.
+
+# 30/10/13
+
+Min/Max Values
+--------------
+
+A function $f$ has an **absolute/global maximum** at $c$ if $f(c) \ge f(x)$ for all $x$ in the domain of $f$.
+
+A function $f$ has a **local maximum** at $c$ if $f(c) \ge f(x)$ for $x$ near $c$.
+
+Absolute/global and local minimum are defined similarly. **Local extrema** and **absolute/global extrema** refers to both the minimum and the maximum.
+
+Consider $f(x) = x^2$. At $x = c$, there is a local and absolute minimum. There are no local or absolute maxima since the function tends off towards infinity.
+
+Consider $f(x) = \arctan x$. There are horizontal asymptotes at $f(x) = \frac{\pi}{2}$ and $f(x) = -\frac{\pi}{2}$. There are no local maxima or minima, and no absolute max/min since for any possible value of $f(x)$, there must be another value that is greater or less than it.
+
+Consider $f(x) = 0$. We would say that **every point is both the absolute minimum and maximum, and the local minimum and maximum**.
+
+### Extreme value theorem (EVT)
+
+If $f$ is continuous over $[a, b]$, then there exists an absolute minimum $f(c)$ and maximum $f(d)$ for $c, d \in [a, b]$.
+
+This does not apply to things like $\arctan$ because its domain, $\mb{R}$, is **not a closed interval**.
+
+This also does not apply to things like $\frac{1}{x}, x \in [-1, 1]$ because it is **not continuous in the interval**.
+
+This is an **existance theorem** - it tells us that a certain number with a certain property exists, but not its value.
+
+To actually find the absolute extrema, we start with the local extrema.
+
+### Fermat's theorem
+
+If $f$ has a local extreme at $c$, and $f'(c)$ exists, then $f'(c) = 0$.
+
+Proof:
+
+> We will prove this folds for the maximum. The proof for the minimum is very similar.  
+> Assume there is a local maximum at $c$ and $f'(c)$ exists.  
+> If $f$ has a local maximum at $c$, then $f(c) \ge f(x)$ for all $x$ near $c$.  
+> So for some small nonzero $h$, $f(c) \ge f(c + h)$, or $f(c + h) - f(c) \le 0$.  
+> Divide both sides by $h$ and take the limit as $h \to 0$. There are two cases:
+> First, $h$ might be positive.
+> So $\lim_{h \to 0^+} \frac{f(c + h) - f(c)}{h} \le \lim_{h \to 0^+} \frac{0}{h}$. Note that we don't need to check the left hand limit since we assumed the left side limit exists.  
+> Clearly, this is the derivative, and $f'(c) \le 0$.  
+> Second, $h$ might be negative.  
+> So $\lim_{h \to 0^+} \frac{f(c + h) - f(c)}{h} \ge -\lim_{h \to 0^+} \frac{0}{h}$, and $\lim_{h \to 0^+} \frac{f(c + h) - f(c)}{h} \ge 0$.  
+> Clearly, this is the derivative, and $f'(c) \ge 0$.  
+> So $f'(c) = 0$.  
+
+The converse is not true. Counterexample: $f(x) = x^3$ at $c = 0$.
+
+### Closed interval method
+
+A **critical number** of a function $f$ is a number $c$ in the domain of $f$ such that $f'(c) = 0$ or $f'(c)$ does not exist.
+
+The **critical number** of $f(x) = \abs(x)$ is $c = 0$, since $f'(0)$ does not exist.
+
+To find the absolute extrema of $f$ in $[a, b]$:
+
+1. Find the critical numbers in $(a, b)$ and evaluate the function at those values.
+2. Evaluate the function at $a$ and $b$.
+3. The smallest and largest of the $f$ values are the absolute minimum and maximum, respectively.
+
+Find the absolute extrema of $f(x) = x^2 - 4x + 1$ on $[-1, 3]$:
+
+> $f$ is continuous over $\mb{R}$, so the only critical numbers are at $f'(x) = 0 = 2x - 4$, or $x = 2$.  
+> Clearly, $f(2) = -3, f(-1) = 6, f(3) = -2$.  
+> So the absolute minimum is $f(2) = -3$, and the absolute maximum is $f(-1) = 6$
+
+### Rolles theorem
+
+If $f$ is continuous over $[a, b]$, differentiable over $(a, b)$, and $f(a) = f(b)$, then $\exists c \in (a, b), f'(c) = 0$.
+
+Used to prove mean value theorem.

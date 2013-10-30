@@ -1183,6 +1183,43 @@ Q(10) &amp;= 3 + \frac{1}{6} + \frac{1}{108} = \frac{1029}{324} \\
 \]</span></p>
 <p>We don't have to stop at quadratics. We can use any order of polynomial to get better approximations. This is known as a Taylor series.</p>
 <p>For example, <span class="math">\(e^x = \sum\limits_{n = 0}^\infty \frac{x^n}{n!}\)</span>.</p>
+<h1 id="section-20">30/10/13</h1>
+<h2 id="minmax-values">Min/Max Values</h2>
+<p>A function <span class="math">\(f\)</span> has an <strong>absolute/global maximum</strong> at <span class="math">\(c\)</span> if <span class="math">\(f(c) \ge f(x)\)</span> for all <span class="math">\(x\)</span> in the domain of <span class="math">\(f\)</span>.</p>
+<p>A function <span class="math">\(f\)</span> has a <strong>local maximum</strong> at <span class="math">\(c\)</span> if <span class="math">\(f(c) \ge f(x)\)</span> for <span class="math">\(x\)</span> near <span class="math">\(c\)</span>.</p>
+<p>Absolute/global and local minimum are defined similarly. <strong>Local extrema</strong> and <strong>absolute/global extrema</strong> refers to both the minimum and the maximum.</p>
+<p>Consider <span class="math">\(f(x) = x^2\)</span>. At <span class="math">\(x = c\)</span>, there is a local and absolute minimum. There are no local or absolute maxima since the function tends off towards infinity.</p>
+<p>Consider <span class="math">\(f(x) = \arctan x\)</span>. There are horizontal asymptotes at <span class="math">\(f(x) = \frac{\pi}{2}\)</span> and <span class="math">\(f(x) = -\frac{\pi}{2}\)</span>. There are no local maxima or minima, and no absolute max/min since for any possible value of <span class="math">\(f(x)\)</span>, there must be another value that is greater or less than it.</p>
+<p>Consider <span class="math">\(f(x) = 0\)</span>. We would say that <strong>every point is both the absolute minimum and maximum, and the local minimum and maximum</strong>.</p>
+<h3 id="extreme-value-theorem-evt">Extreme value theorem (EVT)</h3>
+<p>If <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span>, then there exists an absolute minimum <span class="math">\(f(c)\)</span> and maximum <span class="math">\(f(d)\)</span> for <span class="math">\(c, d \in [a, b]\)</span>.</p>
+<p>This does not apply to things like <span class="math">\(\arctan\)</span> because its domain, <span class="math">\(\mb{R}\)</span>, is <strong>not a closed interval</strong>.</p>
+<p>This also does not apply to things like <span class="math">\(\frac{1}{x}, x \in [-1, 1]\)</span> because it is <strong>not continuous in the interval</strong>.</p>
+<p>This is an <strong>existance theorem</strong> - it tells us that a certain number with a certain property exists, but not its value.</p>
+<p>To actually find the absolute extrema, we start with the local extrema.</p>
+<h3 id="fermats-theorem">Fermat's theorem</h3>
+<p>If <span class="math">\(f\)</span> has a local extreme at <span class="math">\(c\)</span>, and <span class="math">\(f&#39;(c)\)</span> exists, then <span class="math">\(f&#39;(c) = 0\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>We will prove this folds for the maximum. The proof for the minimum is very similar.<br />Assume there is a local maximum at <span class="math">\(c\)</span> and <span class="math">\(f&#39;(c)\)</span> exists.<br />If <span class="math">\(f\)</span> has a local maximum at <span class="math">\(c\)</span>, then <span class="math">\(f(c) \ge f(x)\)</span> for all <span class="math">\(x\)</span> near <span class="math">\(c\)</span>.<br />So for some small nonzero <span class="math">\(h\)</span>, <span class="math">\(f(c) \ge f(c + h)\)</span>, or <span class="math">\(f(c + h) - f(c) \le 0\)</span>.<br />Divide both sides by <span class="math">\(h\)</span> and take the limit as <span class="math">\(h \to 0\)</span>. There are two cases: First, <span class="math">\(h\)</span> might be positive. So <span class="math">\(\lim_{h \to 0^+} \frac{f(c + h) - f(c)}{h} \le \lim_{h \to 0^+} \frac{0}{h}\)</span>. Note that we don't need to check the left hand limit since we assumed the left side limit exists.<br />Clearly, this is the derivative, and <span class="math">\(f&#39;(c) \le 0\)</span>.<br />Second, <span class="math">\(h\)</span> might be negative.<br />So <span class="math">\(\lim_{h \to 0^+} \frac{f(c + h) - f(c)}{h} \ge -\lim_{h \to 0^+} \frac{0}{h}\)</span>, and <span class="math">\(\lim_{h \to 0^+} \frac{f(c + h) - f(c)}{h} \ge 0\)</span>.<br />Clearly, this is the derivative, and <span class="math">\(f&#39;(c) \ge 0\)</span>.<br />So <span class="math">\(f&#39;(c) = 0\)</span>.</p>
+</blockquote>
+<p>The converse is not true. Counterexample: <span class="math">\(f(x) = x^3\)</span> at <span class="math">\(c = 0\)</span>.</p>
+<h3 id="closed-interval-method">Closed interval method</h3>
+<p>A <strong>critical number</strong> of a function <span class="math">\(f\)</span> is a number <span class="math">\(c\)</span> in the domain of <span class="math">\(f\)</span> such that <span class="math">\(f&#39;(c) = 0\)</span> or <span class="math">\(f&#39;(c)\)</span> does not exist.</p>
+<p>The <strong>critical number</strong> of <span class="math">\(f(x) = \abs(x)\)</span> is <span class="math">\(c = 0\)</span>, since <span class="math">\(f&#39;(0)\)</span> does not exist.</p>
+<p>To find the absolute extrema of <span class="math">\(f\)</span> in <span class="math">\([a, b]\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Find the critical numbers in <span class="math">\((a, b)\)</span> and evaluate the function at those values.</li>
+<li>Evaluate the function at <span class="math">\(a\)</span> and <span class="math">\(b\)</span>.</li>
+<li>The smallest and largest of the <span class="math">\(f\)</span> values are the absolute minimum and maximum, respectively.</li>
+</ol>
+<p>Find the absolute extrema of <span class="math">\(f(x) = x^2 - 4x + 1\)</span> on <span class="math">\([-1, 3]\)</span>:</p>
+<blockquote>
+<p><span class="math">\(f\)</span> is continuous over <span class="math">\(\mb{R}\)</span>, so the only critical numbers are at <span class="math">\(f&#39;(x) = 0 = 2x - 4\)</span>, or <span class="math">\(x = 2\)</span>.<br />Clearly, <span class="math">\(f(2) = -3, f(-1) = 6, f(3) = -2\)</span>.<br />So the absolute minimum is <span class="math">\(f(2) = -3\)</span>, and the absolute maximum is <span class="math">\(f(-1) = 6\)</span></p>
+</blockquote>
+<h3 id="rolles-theorem">Rolles theorem</h3>
+<p>If <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span>, differentiable over <span class="math">\((a, b)\)</span>, and <span class="math">\(f(a) = f(b)\)</span>, then <span class="math">\(\exists c \in (a, b), f&#39;(c) = 0\)</span>.</p>
+<p>Used to prove mean value theorem.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

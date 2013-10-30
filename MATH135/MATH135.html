@@ -252,7 +252,7 @@ Which is in fact:
 <p>The <strong>union</strong> of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is <span class="math">\(A \cup B\)</span>. This is the set of all elements belonging to either <span class="math">\(A\)</span> or <span class="math">\(B\)</span>. This can be written as <span class="math">\(x \in A \cup B \iff x \in A \vee x \in B\)</span>, and is sometimes defined as <span class="math">\(A \cup B = \set{x \mid x \in A \vee x \in B}\)</span>.</p>
 <p>The <strong>intersection</strong> of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is <span class="math">\(A \cap B\)</span>. This is the set of all elements belonging to both A and B. This can be written as <span class="math">\(x \in A \cap B \iff x \in A \wedge x \in B\)</span>, and is sometimes defined as <span class="math">\(A \cap B = \set{x \in A \middle| x \in B}\)</span>.</p>
 <p>The <strong>difference</strong> of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is <span class="math">\(A - B\)</span> or <span class="math">\(A \setminus B\)</span>. This is the set of all elements belonging to <span class="math">\(A\)</span>, but not to <span class="math">\(B\)</span>. This can be written as <span class="math">\(x \in A - B \iff x \in A \text{ and } x \notin B\)</span>, and is sometimes defined as <span class="math">\(A - B = \set{x \in A \middle| x \notin B}\)</span>.</p>
-<p>The <strong>complement</strong> of a set <span class="math">\(A\)</span> is <span class="math">\(\overline{A}\)</span>. This is the set of all elements in the <strong>universe of dicourse</strong> that are not in <span class="math">\(A\)</span>.</p>
+<p>The <strong>complement</strong> of a set <span class="math">\(A\)</span> is <span class="math">\(\overline{A}\)</span>. This is the set of all elements in the <strong>universe of discourse</strong> that are not in <span class="math">\(A\)</span>.</p>
 <p>The <strong>cardinality</strong> of a set <span class="math">\(A\)</span> is <span class="math">\(\abs{A}\)</span>. This is the number of elements it contains.</p>
 <p>We can construct a truth table of these operations:</p>
 <table>
@@ -613,7 +613,7 @@ q_2 &amp;= 0 \\
 q_n &amp;= \floor{\frac{r_{n - 2}}{r_{n - 1}}} \\
 r_n &amp;= r_{n - 2} - q_n \cdot r_{n - 1} \\
 x_n &amp;= x_{n - 2} - q_n \cdot x_{n - 1} \\
-y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
+y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 \end{align}
 \]</span></p>
 <p>We stop when r_n = 0. The value of <span class="math">\(r\)</span> in the row before this is the GCD.</p>
@@ -907,28 +907,28 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 </ul>
 <p>The best way of writing the solutions, though, is to write it out modulo <span class="math">\(m\)</span>.</p>
 <p>Note that in the set of all answers, if we take every answer modulo <span class="math">\(m\)</span>, there are <span class="math">\(d\)</span> different possible answers: <span class="math">\(x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}\)</span>.</p>
-<p>x 2  5  ;wip</p>
+<p><span class="math">\(x \equiv 2 \text{ or } 5 \pmod{6}\)</span> ;wip</p>
 <h3 id="linear-congruence-theorem-version-1-lct-1">Linear Congruence Theorem, Version 1 (LCT 1)</h3>
 <p>Proposition: given <span class="math">\(a, c, m \in \mb{Z}, m &gt; 0\)</span>, with <span class="math">\(d = \gcd(a, m)\)</span>:</p>
 <ul>
 <li>the linear congruence <span class="math">\(ax \equiv c \pmod{m}\)</span> has a solution if and only if <span class="math">\(d \mid c\)</span></li>
-<li>if it does have a solution <span class="math">\(x_0\)</span>, then it has infinite solutions <span class="math">\(x = x_0 \pmod{\frac{m}{d}}\)</span></li>
+<li>if it does have a solution <span class="math">\(x_0\)</span>, then it has infinite solutions <span class="math">\(x \equiv x_0 \pmod{\frac{m}{d}}\)</span></li>
 <li>alternatively, we can write this as <span class="math">\(x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}\)</span>.</li>
 </ul>
 <p>Solve <span class="math">\(4x \equiv 5 \pmod{21}\)</span>:</p>
 <blockquote>
-<p>The corresponding LDE is <span class="math">\(4x + 21y = 5\)</span>.<br />A possible solution is <span class="math">\(x_0 = -25, y_0 = 5\)</span>, found by inspection.<br />So by LCT 1, the complete solution is <span class="math">\(x = -25 + \frac{21}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 3 + 7n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 3 or 10 or 17 \pmod{21}\)</span>.</p>
+<p>The corresponding LDE is <span class="math">\(4x + 21y = 5\)</span>.<br />A possible solution is <span class="math">\(x_0 = -25, y_0 = 5\)</span>, found by inspection.<br />So by LCT 1, the complete solution is <span class="math">\(x = -25 + \frac{21}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 3 + 7n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 3 \text{ or } 10 \text{ or } 17 \pmod{21}\)</span>.</p>
 </blockquote>
 <p>Solve <span class="math">\(33x \equiv 6 \pmod{42}\)</span>:</p>
 <blockquote>
-<p>The corresponding LDE is <span class="math">\(33x + 42y = 6\)</span> A particular solution is <span class="math">\(x_0 = -5, y_0 = 4\)</span>, found by EEA.<br />So by LCT 1, the complete solution is <span class="math">\(x = -5 + \frac{42}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 9 + 14n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 9 or 23 or 37 \pmod{42}\)</span>.</p>
+<p>The corresponding LDE is <span class="math">\(33x + 42y = 6\)</span> A particular solution is <span class="math">\(x_0 = -5, y_0 = 4\)</span>, found by EEA.<br />So by LCT 1, the complete solution is <span class="math">\(x = -5 + \frac{42}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 9 + 14n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 9 \text{ or } 23 \text{ or } 37 \pmod{42}\)</span>.</p>
 </blockquote>
 <h1 id="section-19">28/10/13</h1>
 <h2 id="modular-arithmetic">Modular Arithmetic</h2>
 <p>Modular arithmetic is a device that relates congruences with equalities.</p>
 <p>There are two ways to do this - with remainders or with congruence classes. The latter is generally cleaner.</p>
 <h3 id="congruence-classes">Congruence classes</h3>
-<p>Given <span class="math">\(m &gt; 0, a \in \mb{Z}\)</span>, the congruence class modulo <span class="math">\(m\)</span> of <span class="math">\(a\)</span> is the set <span class="math">\(\set{x \in \mb{Z} \middle| x \equiv a \pmod{m}}\)</span>. We denote this set <span class="math">\([a]\)</span> when <span class="math">\(m\)</span> is understood (known from the context).</p>
+<p>Given <span class="math">\(m &gt; 0, a \in \mb{Z}\)</span>, the congruence class modulo <span class="math">\(m\)</span> of <span class="math">\(a\)</span> is the set <span class="math">\(\set{x \in \mb{Z} \middle| x \equiv a \pmod{m}}\)</span>. We denote this set <span class="math">\([a]\)</span> when <span class="math">\(m\)</span> is understood (known from the context). This is called the &quot;integers mod <span class="math">\(m\)</span>&quot;</p>
 <p>So if we already know <span class="math">\(m = 10\)</span>, <span class="math">\([3] = \set{\ldots, -17, -7, 3, 13, 23, 33, 43, \ldots}\)</span>.</p>
 <p>Consider for <span class="math">\(m = 4\)</span>, <span class="math">\([-5] = \set{\ldots, -9, -5, -1, 3, 7, 11, 15, \ldots} = [3]\)</span>. -5 and 3 are <strong>representatives</strong> of the congruence class. Note that there are infinite possible representative.</p>
 <p>A congruence class is simply a set. Any element of the set is a representative of the set. This is like fractions, which represent rational numbers but are not unique, like <span class="math">\(\frac{1}{2}\)</span> and <span class="math">\(\frac{2}{4}\)</span>.</p>
@@ -963,6 +963,36 @@ y_n &amp;= x_{n - 2} - q_n \cdot y_{n - 1} \\
 <blockquote>
 <p>Clearly, this is equivalent to <span class="math">\(\exists [x] \in \mb{Z}_m, [a] \cdot [x] = [1]\)</span>.<br />Clearly, this is equivalent to <span class="math">\(\exists [x] is \mb{Z}_m, ax \equiv 1 \pmod{m}\)</span>.<br />Clearly, <span class="math">\(x\)</span> exists if only if <span class="math">\(\gcd(a, m) \mid 1\)</span>, by LCT 1.<br />So <span class="math">\(x\)</span> exists of and only if <span class="math">\(\gcd(a, m) = 1\)</span>.</p>
 </blockquote>
+<h1 id="section-20">30/10/13</h1>
+<p>;wip: read Chapters 26 today, chapters 28 and 29 on Friday</p>
+<h2 id="fermats-little-theorem-flt">Fermat's Little Theorem (FLT)</h2>
+<p>&quot;Feir-mah&quot;</p>
+<p>If <span class="math">\(p\)</span> is a prime number, <span class="math">\(a \in \mb{Z}\)</span>, <span class="math">\(p \nmid a\)</span>, then <span class="math">\(a^{pp - 1} \equiv 1 \pmod{p}\)</span>.</p>
+<p>In other words, if <span class="math">\(p\)</span> is prime, <span class="math">\([a] \in \mb{Z}_p \wedge [a] \ne 0 \implies [a]^{p - 1} = [1]\)</span>.</p>
+<p>This is also writable as <span class="math">\([a] \cdot [a]^{p - 2} = [1]\)</span>.</p>
+<p>So by the definition of the multiplicative inverse, $[a]^{-1} = [a]^{p - 2}$0</p>
+<p>Proof:</p>
+<blockquote>
+<p>Fix a prime <span class="math">\(p\)</span>.<br />Let <span class="math">\(a \in \mb{Z}\)</span>.<br />Assume <span class="math">\(p \nmid a\)</span>.<br />Consider the first <span class="math">\(p\)</span> multiples of <span class="math">\(a\)</span>: <span class="math">\(0, 1a, \ldots, (p - 1)a\)</span>.</p>
+</blockquote>
+<blockquote>
+<p>We claim that these numbers represent distinct congruence classes modulo <span class="math">\(p\)</span>.<br />We will prove this claim by contradiction.<br />Suppose for some <span class="math">\(r, s\)</span>, <span class="math">\(r \ne s, 0 \le r \le p - 1, 0 \le s \le p - 1\)</span>, that <span class="math">\(ra \equiv sa \pmod{p}\)</span>. Then <span class="math">\(p \mid ra - sa\)</span>, so <span class="math">\(p \mid (r - s)a\)</span>.<br />Since <span class="math">\(p \nmid a\)</span>, then <span class="math">\(p \mid r - s\)</span>, by PAD.<br />But we know that <span class="math">\(r - s \ne 0\)</span>, so <span class="math">\(\abs{r - s} \ge p\)</span>, by BBD.<br />But this is impossible since <span class="math">\(\abs{r - s} \le p - 1\)</span>. ;wip: this doesn't seem to be a contradiction... So the claim is true.</p>
+</blockquote>
+<blockquote>
+<p>Clearly, there are exactly <span class="math">\(p\)</span> distinct congruence classes modulo <span class="math">\(p\)</span>.<br />Since each of the numbers represents a distinct congruence class, and there are <span class="math">\(p\)</span> numbers and only <span class="math">\(p\)</span> distinct congruence classes modulo <span class="math">\(p\)</span>, then these numbers must represent all distinct congruence classes, modulo <span class="math">\(p\)</span>. So <span class="math">\([0], [1a], \ldots, [(p - 1)a]\)</span> is some permutation of <span class="math">\([0], [1], \ldots, [p - 1]\)</span>.<br />We know that <span class="math">\([0] = [0]\)</span>, so <span class="math">\([1a], [2a], \ldots, [(p - 1)a]\)</span> is some permutation of <span class="math">\([1], [2], \ldots, [p - 1]\)</span>.<br />So <span class="math">\([1a] \cdot [2a] \ldots \cdot [(p - 1)a] = [1] \cdot [2] \ldots \cdot [p - 1]\)</span>.<br />Clearly, <span class="math">\([1a \cdot 2a \ldots \cdot (p - 1)a] = [(p - 1)! a^{p - 1}]\)</span>.<br />Clearly, <span class="math">\([1] \cdot [2] \ldots \cdot [p - 1] = [(p - 1)!]\)</span>.<br />So <span class="math">\([(p - 1)! a^{p - 1}] = [(p - 1)!]\)</span>.<br />So <span class="math">\((p - 1)! a^{p - 1} \equiv (p - 1)! \pmod{p}\)</span>.<br />So <span class="math">\(p \mid (p - 1)! a^{p - 1} - (p - 1)!\)</span>, and <span class="math">\(p \mid (p - 1)! (a^{p - 1} - 1)\)</span>.</p>
+</blockquote>
+<blockquote>
+<p>We claim that <span class="math">\(p \nmid (p - 1)!\)</span>.<br />We will prove this claim by contradiction.<br />Suppose <span class="math">\(p \mid 1 \cdot 2 \cdot \ldots \cdot (p - 1)\)</span>.<br />Then <span class="math">\(p \mid (1 \cdot 2 \cdot \ldots (p - 2))\)</span> or <span class="math">\(p \mid (p - 1)\)</span>, by PAD.<br />Clearly, <span class="math">\(p \nmid (p - 1)\)</span>, so $p <span class="math">\(1 \cdot 2 \cdot \ldots (p - 2)\)</span>.<br />By applying this repeatedly, we find that <span class="math">\(p \nmid p - 2, p \nmid p - 3, \ldots, p \nmid 2\)</span>, and <span class="math">\(p \mid 1\)</span>.<br />But this is impossible, since <span class="math">\(p \nmid 1\)</span>, by BBD.<br />So the claim is true.</p>
+</blockquote>
+<blockquote>
+<p>So <span class="math">\(p \mid a^{p - 1} - 1\)</span>, by PAD.<br />So <span class="math">\(a^{p - 1} \equiv 1 \pmod{p}\)</span>.</p>
+</blockquote>
+<p>For example, 5 is prime and <span class="math">\(5 \nmid 3\)</span>, so <span class="math">\(3^4 \equiv 1 \pmod{5}\)</span>.</p>
+<p>Find the remainder when <span class="math">\(8^{1000}\)</span> is divided by 13:</p>
+<blockquote>
+<p>We want to find <span class="math">\(r\)</span> such that <span class="math">\(8^{1000} \equiv r \pmod{13}\)</span>, <span class="math">\(0 \le r &lt; 13\)</span>.<br />Since 13 is prime and <span class="math">\(13 \nmid 8\)</span>, <span class="math">\(8^{12} \equiv 1 \pmod{13}\)</span>, by FLT.<br />By PC, <span class="math">\((8^{12})^n \equiv 1^n \equiv 8^{12 \cdot 83} \equiv 8^{996} \pmod{13}\)</span>.<br />So <span class="math">\(8^{1000} \equiv 8^{4} \cdot 8^{996} \equiv 1 \cdot 2^{12} \pmod{13}\)</span>.<br />Since 13 is prime and <span class="math">\(13 \nmid 2\)</span>, <span class="math">\(2^{12} \equiv 1 \pmod{13}\)</span>, by FLT.<br />So <span class="math">\(8^{1000} \equiv 1 \cdot 1 \equiv 1 \pmod{13}\)</span>.</p>
+</blockquote>
+<p>This only works in certain cases, but is occasionally useful.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
