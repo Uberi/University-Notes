@@ -429,7 +429,7 @@ x = \sinh y &amp;= \frac{e^y - e^{-y}}{2} \\
 0 &amp;= e^y - 2x - e^{-y} \\
 0 &amp;= e^y e^y - e^y 2x - e^y e^{-y} \\
 (e^y)^2 - 2x e^y - 1 &amp;= 0 \\
-e^y &amp;= \frac{2x \pm \sqrt{(-2x)^2 - 4(1)(-1)}}{2} = x \pm \sqrt{x^2 + 1} \\
+e^y &amp;= \frac{2x \pm \sqrt{(-2x)^2 - 4 \cdot 1 \cdot -1}}{2} = x \pm \sqrt{x^2 + 1} \\
 \text{Since } x - \sqrt{x^2 + 1} &lt; 0 \text{, } e^y &amp;= x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
 e^y &amp;= x + \sqrt{x^2 + 1} \\
 y &amp;= \ln(x + \sqrt{x^2 + 1}) \\
@@ -442,6 +442,22 @@ y &amp;= \ln(x + \sqrt{x^2 + 1}) \\
 <li><span class="math">\(\cosh^{-1} x = \ln(x + \sqrt{x^2 - 1}), x \ge 1\)</span></li>
 <li><span class="math">\(\tanh^{-1} x = \frac{1}{2} \ln(\frac{1 + x}{1 - x}), -1 &lt; x &lt; 1\)</span></li>
 </ul>
+<p>Find <span class="math">\(tanh^{-1} x\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+x = \tanh y &amp;= \frac{e^y - e^{-y}}{e^y + e^{-y}} \\
+xe^y + xe^{-y} &amp;= e^y - e^{-y} \\
+xe^{2y} + x &amp;= e^{2y} - 1 \\
+(x - 1)e^{2y} &amp;= x + 1 \\
+e^y &amp;= \pm \sqrt{\frac{x + 1}{x - 1}} \\
+\text{Since } -\sqrt{\frac{x + 1}{x - 1}} &lt; 0 \text{, the negative solution is extraneous.} \\
+e^y &amp;= \sqrt{\frac{x + 1}{x - 1}} \\
+y &amp;= \ln \left( \frac{x + 1}{x - 1} \right)^\frac{1}{2} \\
+y &amp;= \frac{1}{2} \ln \frac{x + 1}{x - 1} \\
+\end{align}
+\]</span></p>
+</blockquote>
 <h2 id="limits">Limits</h2>
 <p>Limits are a core concept in calculus, because they appear in the definitions of derivatives and definite integrals, the two main branches of calculus.</p>
 <p>A limit does not depend on what the value of the function is at the point it is approaching. Consider the following function:</p>

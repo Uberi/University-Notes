@@ -627,3 +627,99 @@ Review
 | Descartes   | Rationalist     | Dualist - mind/body    | ??? Mind/body problem ???          | Efficient cause        | Methodic doubt test            |
 | Locke       | Empiricist      | Materialist            | Physical interactions with brains  | Efficient cause        | Doubt only secondary qualities |
 | Berkeley    | Empiricist      | Idealist - minds/ideas | Mental causation                   | Efficient cause        | Not at all                     |
+
+# 31/10/13
+
+Justified True Belief (JTB)
+---------------------------
+
+For a belief to be knowledge, it can't just be true by coincidence, it has to be:
+
+* Justified: the belief must be supported by something
+* True: it must be true
+* Believed: one must believe it is true
+
+So guessing something and being right is not knowledge.
+
+### Justification
+
+Philosophers often focus on the justification. For example, Descartes would justify things using reason and Locke would use the senses.
+
+### Truth
+
+Truth is a difficult thing to define. There are two main theories of truth:
+
+* Correspondence: a belief is true if it accurately corresponds to something in the world.
+    * Some issues would be:
+        * How do we know they accurately map onto the world?
+        * How do we know there is a world?
+    * We want to find an objective viewer that we can compare our beliefs with. But there is no objective viewer that we can know is objective and can trust.
+* **Coherence**: a belief is true if it does not conflict with the other beliefs that one holds.
+    * Some issues would be:
+        * Easy to think something is true that doesn't correspond to the world.
+        * Hard to resolve multiple webs of beliefs.
+        * One false belief messes everything else up.
+    * Associated with the philosopher Quine.
+    * A "web of belief".
+    * A set of beliefs is strong together, and weak alone.
+* **Pragmatic**: a belief is true if it supports our interacting with the world successfully.
+    * For example, we believe the door is closed because we can better interact with the world by not walking into doors.
+    * Some issues would be:
+        * What does it mean to be successful?
+        * Even if we had a criteria for success, how do we know we are being successful?
+    * There is also a social viewpoint to the pragmatic theory of truth.
+        * Something is true if a community of knowers has come to consensus/majority on it - if everyone agrees on it.
+        * Whose opinion is worth more?
+        * How do we know everyone isn't wrong - that we haven't all made the same mistake?
+        * Also depends on psychology.
+
+### Belief
+
+Our beliefs are our own - we can freely hold and form our own opinion. However, the bar for knowledge is much higher.
+
+For example, "I believe that I like chocolate" is a belief.
+
+S knows that P
+--------------
+
+> $S$ knows that $P$.  
+> I know that the desk is solid.  
+
+$S$ is the holder of the knowledge. $P$ is a statement.
+
+For Descartes and Locke, they assume that $S$ is themselves, and that the same thing applies to others.
+
+For them, $S$ is everyone.
+
+Lorraine Code
+-------------
+
+Influential contemporary philosopher.
+
+Lorraine Code's contribution was asking, is the value of $S$ significant? Would it matter if $S$ was a man or a woman? If $S$ was of a minority?
+
+> Is the sex of the knower epistemologically significant?
+
+The main point is, **different perspectives can affect what people know**.
+
+It is important to consider when some $S$ knows $P$, it does not imply that all $S$ knows $P$.
+
+When a lot of philosophers talk about $S$ being a rational knower, they were making a lot of stereotypically masculine assumptions, like rationality, assertiveness, logical thought.
+
+However, this rules out a bunch of people. We can only say something is true for those people who fit the criteria. Can we extend this to include more people?
+
+So **knowledge is dependent on the knower**.
+
+The identity of $S$ is significant.
+
+Instead of asking "why is the chalk white?", we should instead ask questions that have more of a bearing on human well-being.
+
+> How do we know other people? What does it mean to know someone?
+
+A **situated knower** is a particular $S$, a knower with a particular background and context. **Situated knowledge** is knowledge that reflects the particular background and context of a situated knower.
+
+For example, bats can know things that humans can never know because we can't echolocate.
+
+An example within humans might be women being more cautious situationally due to a greater risk of violence against women, compared to men. This impacts the way people see the world. For example, women might be more likely to know that the windows are locked, due to increased situational awareness.
+
+Some people are in a better position to know certain things than others.

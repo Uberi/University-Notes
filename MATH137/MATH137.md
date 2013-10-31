@@ -473,7 +473,7 @@ x = \sinh y &= \frac{e^y - e^{-y}}{2} \\
 0 &= e^y - 2x - e^{-y} \\
 0 &= e^y e^y - e^y 2x - e^y e^{-y} \\
 (e^y)^2 - 2x e^y - 1 &= 0 \\
-e^y &= \frac{2x \pm \sqrt{(-2x)^2 - 4(1)(-1)}}{2} = x \pm \sqrt{x^2 + 1} \\
+e^y &= \frac{2x \pm \sqrt{(-2x)^2 - 4 \cdot 1 \cdot -1}}{2} = x \pm \sqrt{x^2 + 1} \\
 \text{Since } x - \sqrt{x^2 + 1} < 0 \text{, } e^y &= x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
 e^y &= x + \sqrt{x^2 + 1} \\
 y &= \ln(x + \sqrt{x^2 + 1}) \\
@@ -485,6 +485,22 @@ With this technique, we discover the inverses of the hyperbolic functions are:
 * $\sinh^{-1} x = \ln(x + \sqrt{x^2 + 1})$
 * $\cosh^{-1} x = \ln(x + \sqrt{x^2 - 1}), x \ge 1$
 * $\tanh^{-1} x = \frac{1}{2} \ln(\frac{1 + x}{1 - x}), -1 < x < 1$
+
+Find $tanh^{-1} x$:
+
+> $$
+\begin{align}
+x = \tanh y &= \frac{e^y - e^{-y}}{e^y + e^{-y}} \\
+xe^y + xe^{-y} &= e^y - e^{-y} \\
+xe^{2y} + x &= e^{2y} - 1 \\
+(x - 1)e^{2y} &= x + 1 \\
+e^y &= \pm \sqrt{\frac{x + 1}{x - 1}} \\
+\text{Since } -\sqrt{\frac{x + 1}{x - 1}} < 0 \text{, the negative solution is extraneous.} \\
+e^y &= \sqrt{\frac{x + 1}{x - 1}} \\
+y &= \ln \left( \frac{x + 1}{x - 1} \right)^\frac{1}{2} \\
+y &= \frac{1}{2} \ln \frac{x + 1}{x - 1} \\
+\end{align}
+$$
 
 Limits
 ------
