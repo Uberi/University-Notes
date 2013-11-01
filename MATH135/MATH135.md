@@ -971,7 +971,7 @@ Proof:
 > Let $a, b, d$ be arbitrary integers.  
 > Assume d \mid ab$ and $\gcd(d, a) = 1$.  
 > We want to prove $d \mid b$.  
-> By EEA, there exist integers $x, y$ such that $dx + ay = 1$.  
+> By EEA, $\exists x, y \in \mb{Z}, dx + ay = 1$.  
 > Clearly, this is equivalent $b(dx + ay) = b$.  
 > Clearly, this is equivalent to $d(bx) + (ab)y = b$.  
 > Clearly, $d \mid d$, and $d \mid ab$.  
@@ -1410,7 +1410,9 @@ Find $[15]^{-1}$ in $\mb{Z}_{38}$:
 > By LCT 1, $x = -5 + 38n, n \in \mb{Z}$, or $x \equiv -5 \pmod{38}$.  
 > So $x = [-5] = [-5 + 38] = [33]$, and $[15]^{-1} = [33]$.  
 
-### Unnamed Theorem
+### Unamed Theorem
+
+This is a slight generalization of "Existance of Inverses in $\mb{Z}_p$ (INV $\mb{Z}_p$)".
 
 Proposition: given $m > 0$ and $a \in \mb{Z}_m$, $[a]$ has a multiplicative inverse in $\mb{Z}_m$ if and only if $\gcd(a, m) = 1$.
 
@@ -1423,12 +1425,10 @@ Proof:
 
 # 30/10/13
 
-;wip: read Chapters 26 today, chapters 28 and 29 on Friday
-
 Fermat's Little Theorem (FLT)
 -----------------------------
 
-"Feir-mah"
+"Feir-mah" - Pierre de Fermat.
 
 If $p$ is a prime number, $a \in \mb{Z}$, $p \nmid a$, then $a^{pp - 1} \equiv 1 \pmod{p}$.
 
@@ -1436,7 +1436,7 @@ In other words, if $p$ is prime, $[a] \in \mb{Z}_p \wedge [a] \ne 0 \implies [a]
 
 This is also writable as $[a] \cdot [a]^{p - 2} = [1]$.
 
-So by the definition of the multiplicative inverse, $[a]^{-1} = [a]^{p - 2}$0
+So by the definition of the multiplicative inverse, $[a]^{-1} = [a]^{p - 2}$.
 
 Proof:
 
@@ -1450,8 +1450,8 @@ Proof:
 > Suppose for some $r, s$, $r \ne s, 0 \le r \le p - 1, 0 \le s \le p - 1$, that $ra \equiv sa \pmod{p}$.
 > Then $p \mid ra - sa$, so $p \mid (r - s)a$.  
 > Since $p \nmid a$, then $p \mid r - s$, by PAD.  
-> But we know that $r - s \ne 0$, so $\abs{r - s} \ge p$, by BBD.  
-> But this is impossible since $\abs{r - s} \le p - 1$.  ;wip: this doesn't seem to be a contradiction...
+> But we know that $r - s \ne 0$, so $\abs{r - s} \ne 0 \ne 0$ and $\abs{r - s} \ge p$, by BBD.  
+> But this is impossible since $\abs{r - s} \le p - 1$.  
 > So the claim is true.  
 
 > Clearly, there are exactly $p$ distinct congruence classes modulo $p$.  

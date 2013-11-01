@@ -301,8 +301,14 @@ Tests:
 (check-expect (round-to 12 0) 12) ; boundary condition</code></pre>
 <p>We can put <code>...</code> as a placeholder for the function body before actually writing the body.</p>
 <p>If the contract is violated, the result may be undefined. For example, <code>(round-to 3 0.5)</code>.</p>
-<p>Starting with the Intermediate Student teaching language, helper functions that supplement a wrapper function need only a contract and purpose.</p>
+<p>Starting with the Intermediate Student teaching language, helper functions that supplement a wrapper function need only a contract and purpose if the wrapper function obeys all of the following:</p>
+<ul>
+<li><strong>One line of code</strong> in the body.</li>
+<li>Includes a function application of the helper function with <strong>modified or additional</strong> parameters.</li>
+</ul>
+<p><strong>Mutually recursive functions</strong>, should be directly adjacent. They only need one set of examples and tests for all of them, but each one still neesd a contract and purpose.</p>
 <p>The tests for the wrapper function, however, must fully test the helper function as well.</p>
+<p>Templates are useful, but are <strong>not required</strong> to unless <strong>specifically requested to</strong>, or <strong>for custom data types</strong>.</p>
 <h1 id="section-1">19/9/13</h1>
 <h2 id="boolean-values">Boolean Values</h2>
 <p>Scheme represents Boolean values with the literals <code>#t</code> and <code>#f</code> (<code>true</code> and <code>false</code> are also usable in the Scheme teaching languages), representing true and false respectively.</p>
@@ -456,6 +462,12 @@ Tests:
 <li><strong>Lists</strong> stay as-is, though arguments are simplified.
 <ul>
 <li><code>(cons 1 (cons 2 empty))</code> =&gt; <code>(cons 1 (cons 2 empty))</code></li>
+<li><code>(list 1 2 3 4 5)</code> =&gt; <code>(list 1 2 3 4 5)</code> in &quot;Beginner Student with List Abbreviations&quot; and above.</li>
+</ul></li>
+<li><strong>Local definitions</strong> are renamed, rebound, and hoisted. See &quot;Local Definitions and Lexical Scope&quot; for more details.
+<ul>
+<li><code>(local [(define x ...) ...] ...)</code> =&gt; <code>(define (new name for x) ...) (body of local with x substituted with the new name for x)</code></li>
+<li><code>(local [(define (f ...) ...) ...] ...)</code> =&gt; <code>(define ((new name for f) ...) ...) (body of local with f substituted with the new name for f)</code></li>
 </ul></li>
 </ul></li>
 <li>This is one <strong>evaluation step</strong>. Return to step 1 until the entire expression is in the simplest possible form, or results in an error.</li>
@@ -477,15 +489,25 @@ Tests:
 =&gt; (error: no questions answered)</code></pre>
 <h2 id="templates">Templates</h2>
 <p>The form of a program should mirror the form of the data.</p>
-<p>A template is a general framework within which we fill in to create a program.</p>
+<p>A template is a general outline of code that consumes some type of data, that we can fill in to create a program.</p>
+<p>Templates must appear <strong>after data definitions</strong> and <strong>before function definitions</strong>.</p>
 <p>We start by making the template of a function, and then flesh out the template to create the finished function.</p>
 <p>For every form of data, we create a template and use it to write functions that work with that type of data.</p>
 <p>Templates should be <strong>commented out</strong> in Scheme code due to issues with MarkUs.</p>
+<p>For example, a template for a list of a datatype called <code>X</code> might appear as follows:</p>
+<pre><code>;; my-listof-x-fn: (listof X) -&gt; Any
+;; (define (my-listof-x-fn lox)
+;;    (cond
+;;       [(empty? lox) ...]
+;;       [else (... (first lox) ...
+;;                  (my-listof-x-fn (rest lox)) ...)]))</code></pre>
+<p>The template must always produce <code>Any</code> since we don't know what type of data it will give.</p>
+<p>Templates only require the contract, but functions written using a template still require the full design recipe.</p>
 <h2 id="structures">Structures</h2>
 <p>Structures are a bundling of several values into one. They are complex values.</p>
 <p>They work only with finite sets of values, and have a fixed size and field count.</p>
 <p>For example, a structure might represent a product in an online store. It would store, for example, the name (String), product ID (Nat), price (Num), and availability (Boolean).</p>
-<p>The two parts of a structure is the code, and the actual information itself. ;wip</p>
+<p>The two parts of a structure definition is the code and the data definition:</p>
 <pre><code>;; this is the code part
 (define-struct product
     (name product-id price availability))
@@ -1041,8 +1063,8 @@ A OtherThing is one of:
 <p>If two nodes have the same parent, then they are <strong>siblings</strong>.</p>
 <p>Additional constraints for trees are:</p>
 <ul>
-<li>A node cannot be both a descendent and an ancestor of another (although it can for itself).</li>
-<li>;wip: what other constraints are there?</li>
+<li>A node cannot have a descendent that is its ancestor.</li>
+<li>A node can have only one parent.</li>
 </ul>
 <p>The very top node is known as the <strong>root node</strong>.</p>
 <p>Trees have various classifying properties:</p>
@@ -1392,18 +1414,17 @@ A OtherThing is one of:
           [(char? alg) ...]
           [else (... (first alg) ...
                      (my-listof-algexp-fn (rest alg)) ...)]))</code></pre>
-<p>;wip: look into the design recipe updates for mutual recursion</p>
 <p>Now we can write a substitution function:</p>
 <pre><code>;; substitute-list: (listof AlgExp) Char Num -&gt; (listof AlgExp)
 ;; Purpose: produces `alglist` where `var` is replaced by `value`
 ;; Examples:
-;wip: is this needed?
+;; NOT REQUIRED DUE TO MUTUAL RECURSION
 (define (substitute-list alglist var value)
     (cond [(empty? alglist) empty]
-          [else (cons (my-algexp-fn (first alglist) var value)
+          [else (cons (substitute (first alglist) var value)
                       (substitute-list (rest alglist) var value))]))
 ;; Tests:
-;wip: is this needed?
+;; NOT REQUIRED DUE TO MUTUAL RECURSION
 
 ;; substitute: AlgExp Char Num -&gt; AlgExp
 ;; Purpose: produces `alg` where `var` is replaced by `value`
@@ -1415,7 +1436,7 @@ A OtherThing is one of:
           [(char? alg) (cond [(char=? alg var) value]
                              [else alg])]
           [else (cons (first alg)
-                      (my-listof-algexp-fn (rest alg)))]))
+                      (substitute-list (rest alg)))]))
 ;; Tests:
 ;; OMITTED FOR BREVITY</code></pre>
 <p>General trees are useful for representing any sort of nested data. For example, a book might be represented as follows:</p>
@@ -1494,7 +1515,6 @@ A OtherThing is one of:
 (sqrt (* s_0 (- s_0 a) (- s_0 b) (- s_0 c)))
 
 ;; ONE STEP ENDS</code></pre>
-<p>;wip: finish this and move it to the semantic model</p>
 <h3 id="purpose">Purpose</h3>
 <p>We use <code>local</code> to make code more readable, by factoring out common subexpressions.</p>
 <p>This is also useful for efficiency purposes. Recall the exponential-time list maximum function:</p>

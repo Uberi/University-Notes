@@ -135,7 +135,7 @@ The opportunity cost from an incremental increase (benefit of not pursuing the i
 
 Example: speeding tickets give a negative incentive against speeding, which goes against the social interest.
 
-If an economy is operating on the PPF, one good cannot be produced without giving up another. So as the marginal benefit of a good or service decreases, its marginal cost increases. If they are equal, we say that the economy is working at **allocative efficiency**. This is where the graphs of marginal cost and benefit intersect.
+If an economy is operating on the PPF, one good cannot be produced without giving up another. So as the marginal benefit of a good or service decreases, its marginal cost increases. If they are equal, we say that the economy is working at **allocative efficiency**. This is where the graphs of marginal cost and benefit intersect. This is efficient because the most possible people get access to the good, while each one enjoys a benefit.
 
 For example, at allocative efficiency, the pizzas would be worth a number of colas such that if more pizzas were produced, they would not be worth the cola foregone, and if more colas were produced, they would not be worth the pizza foregone. 
 
@@ -914,8 +914,129 @@ The goal of a firm is to **maximise profit**. If it does not, it is **eliminated
 
 Most firms don't make anything themselves. For example, Apple's iPod has its parts manufactured by Toshiba and is assembled by Inventec.
 
-Accountants are responsible for measuring profit - revenue minus explicit costs. **Explicit costs** are those costs paid directly to run the firm. Accountants do not take implicit costs into account and so may overestimate profit.
+Accountants are responsible for measuring profit - revenue minus explicit costs - to pay taxes and show investors how their funds are being used.
+
+**Explicit costs** are those costs paid directly to run the firm. Accountants do not take implicit costs into account and so may overestimate profit.
 
 Economists are concerned with **implicit costs** - the opportunity cost resulting from using something instead of renting or selling it. The **total costs** are the sum of the implicit and explicit costs, and is always greater than or equal to the explicit costs.
 
-**Accounting profit** is revenue minus explicit costs. **Economic profit** is revenue minus the total costs. ;wip: is this 
+The **total costs** are the explicit costs plus implicit costs.
+
+**Accounting profit** is revenue minus explicit costs. **Economic profit** is revenue minus the total costs.
+
+# 31/10/13
+
+A positive economic profit means that going ahead with the plan earns more than any other possible option.
+
+    AccountingCost = Wage*Labour + CapitalCost*CapitalAmount
+
+$$C = WL + rK$$
+
+A firm's opportunity cost of production is the value of the best alternative use of the resources used.
+
+The three main types of opportunity costs for firms are:
+
+* **bought in the market** - the firm could have bought different resources to produce something different
+* **owned by the firm** - the firm could have sold or rented those resources, and using them means implicitly renting them from themselves; the cost is called the **implicit rental rate** of the resource
+* **supplied by the firm owner** - the firm owner could supply entrepreneurship and labour, where the forgone profit for entrepreneurship, or the forgone wages for labour, is an opportunity cost
+
+The use of resources owned by the first incurs a cost from renting it from themselves - the cost of having had the potential of renting it to other people. The cost is also made up of **economic depreciation** and **forgone interest**.
+
+**Economic depreciation** is the change in the market value of some particular capital over time.
+
+**Interest forgone** is the interest that could have been earned using the funds used to the acquire the capital - the return on the funds used to acquire the capital.
+
+The return on entrepreneurship is **profit**. In other words, entrepreneurship earns profit.
+
+The profit that an entrepreneur can expect to receive on average is known as **normal profit**. It is the opportunity cost of applying entrepreneurship.
+
+The wages given up by not taking wages for labour is the opportunity cost working at a firm.
+
+Decisions made by Firms
+-----------------------
+
+A firm can make several different choices to maximise profit:
+
+* What and how much to produce.
+* How to produce.
+* How to organize and compensate managers and workers.
+* How to market and price products.
+* What to produce or buy from other firms.
+
+Profit is limited by constraints in **technology**, **information**, and **markets**:
+
+* **Technology** is any method of producing a good or service. It tends to improve over time. With available technology, a firm can only produce more if it hires more resources. This would increase costs and limits profits.
+* A firm never has complete **information** about the past, present, and future. The cost of coping with limited information limits profit, such as not knowing the plans of its competitors or future consumer choices.
+* The price and quantity a firm can sell a product at depends on the customers' willingness to pay, and the prices and marketing of the competition. The resources a firm can obtain is limited by the willingness of people to work or invest in it. The cost of overcoming this limits profits.
+
+**Technological efficiency** is the state in which it is impossible to decrease any inputs when holding other inputs constant.
+
+**Economic efficiency** is the state in which a firm produces a given amount of output with the least cost. This depends on the relative costs of capital and labour.
+
+Technological efficiency is concerned with the quantity of inputs, while economic efficiency is concerned with the costs of the inputs.
+
+Economic efficiency implies technological efficiency, but it may not be the other way around.
+
+### Organization
+
+A firm organizes production by combining and coordinating resources using **command systems** and **incentive systems**.
+
+**Command systems** are systems where a firm issues commands to be completed by the resources. A firm would directly control the process of production.
+
+**Incentive systems** are systems where a firm provides incentives to induce the resources to behave in the desired way. A firm would guide the process of production.
+
+Most firms mix the systems, using command when it is easy to monitor performance, or when it is important to have the ideal performance, and incentive systems when monitoring performance is impractical.
+
+The **principal-agent problem** is the problem of finding incentives that induce **agents** to act in the interests of **principals**. For example, the managers of a firm are agents, and the goal is to induce them to act in the interest of the stockholders, the principals.
+
+There are three main ways to do this:
+
+* **Ownership** - if managers (agents) are made also to be stockholders (principals), then they are induced to act in the interest of the principals, themselves.
+* **Incentive pay** - if the pay of workers/managers (agents) are linked to performance, then they are induced to perform better, in the interest of the principals.
+* **long-term contracts** - if the long-term rewards of workers/managers (agents) is linked to the long-term success of the firm, then they are induced to make the firm more successful, which is in the principals' interests.
+
+There are three main types of business organization:
+
+* **Sole proprietorship** - a single owner with **unlimited liability** - they are responsible for all the debts of the firm - who receives all of the profits and makes all the decisions. Profits are taxed the same as the owner's other income.
+* **Partnership** - two or more owners share **unlimited liability**, split profits somehow, and must agree on management decisions. Profits are taxed as personal income.
+* **Corporation** - owned by one or more stockholders with **limited liability** - they are responsible only for what they invested initially - who make decisions using some system and receive profits as **dividends** on their stocks. Profits are **taxed twice** as corporate tax on the firm, then income tax on the stockholders.
+
+Sole proprietership generally dies with the owner; partnerships and corporations can still survive.
+
+Market Types
+------------
+
+### Perfect competition
+
+Identical product, many firms, many buyers, no barrier of entry for new firms, everyone informed of prices and products available.
+
+### Monopolistic competition
+
+Similar product (known as **product differentiation**), many firms, no barrier of entry for new firms, each firm has some market power.
+
+### Oligopoly
+
+Identical or similar product, few firms, barriers of entry limit new firms.
+
+### Monopoly
+
+Product without close substitutes, one firm, barriers of entry prevent new firms.
+
+**Market concentration** is a measure of the amount of competition. High concentration means low competition; low concentration means high competition.
+
+We measure market concentration using:
+
+* Four-firm concentration ratio - percentage of total sales in the industry by the four largest firms.
+* Herfindahl-Hirschman Index - sum of squares of percentage market shares for largest 50 firms.
+
+However, these do not reflect **differences specific to geographic regions**, **barriers to entry**, and **relations with the industry**. As a result, they are not fully accurate in determining the structure of a market.
+
+Markets and firms both coordinate production. An example of market coordination is outsourcing - buying parts or products from other firms.
+
+However, firms do more production because they are more efficient than markets. This is caused by:
+
+* **Lower transaction costs** - lower costs of finding someone to do business with and ensuring the transaction is successful.
+* **Economies of scale** - the cost of producing a good or service falls as a firm gets bigger. This does not violate the law of supply because we are shifting the supply curve rightwards, rather than moving along it.
+* **Economies of scope** - specializing in a particular area allows lower costs of production.
+
+Firms can engage in *team production**, where they each specialize in mutually supportive tasks.
