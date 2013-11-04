@@ -1051,6 +1051,56 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <blockquote>
 <p>We know that <span class="math">\(35 = 5 \cdot 7\)</span>, and <span class="math">\(\gcd(5, 7) = 1\)</span>. So <span class="math">\(x^{43} + 28x^9 + 10x \equiv 1 \pmod{35} \equiv \begin{cases} x^{43} + 28x^9 + 10x \equiv 1 \pmod{5} \\ x^{43} + 28x^9 + 10x \equiv 1 \pmod{7} \\ \end{cases}\)</span>.<br />We already know that if <span class="math">\(x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}\)</span>, then <span class="math">\(x \equiv 3 \or 4 \pmod{5}\)</span>.<br />;wip: solve for mod 7 Now we resolve the cases: either <span class="math">\(\begin{cases} x \equiv 3 \pmod{5} \\ x \equiv 2 \pmod{7} \\ \end{cases}\)</span> or <span class="math">\(\begin{cases} x \equiv 4 \pmod{5} \\ x \equiv 2 \pmod{7} \\ \end{cases}\)</span>.</p>
 </blockquote>
+<h1 id="section-22">4/11/13</h1>
+<h2 id="rsa">RSA</h2>
+<p>Previously, it was shown that <span class="math">\(x^p \equiv x^1 \pmod{p}\)</span> for any prime <span class="math">\(p\)</span>.</p>
+<h3 id="mathematical-basis">Mathematical basis</h3>
+<p>More generally, for any <span class="math">\(r, s \in \mb{N}\)</span>, <span class="math">\(r \equiv s \pmod{p - 1} \implies x^r \equiv r^s \pmod{p}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Assume <span class="math">\(r \equiv s \pmod{p - 1}\)</span>.<br />Note that either <span class="math">\(r &lt; s\)</span>, <span class="math">\(r = s\)</span>, or <span class="math">\(r &gt; s\)</span>.<br />If <span class="math">\(r = s\)</span>, then clearly <span class="math">\(x^r \equiv r^s \pmod{p}\)</span>.<br />The result for <span class="math">\(r &gt; s\)</span> is the same as <span class="math">\(r &lt; s\)</span>, except with variables swapped.<br />So we will only consider <span class="math">\(r &gt; s\)</span>.<br />Assume <span class="math">\(r &gt; s\)</span>.<br />So <span class="math">\(p - 1 \mid r - s\)</span>.<br />So <span class="math">\(\exists k \in \mb{Z}, r = k(p - 1) + s\)</span>.<br />Clearly, <span class="math">\(k \in \mb{N}\)</span> since <span class="math">\(r &gt; s\)</span>.<br />We need these to be positive so we can use them in exponents.<br />Clearly, <span class="math">\(x^r = x^{k{p - 1} + s}\)</span>.<br />Either <span class="math">\(p \mid x\)</span> or <span class="math">\(p \nmid x\)</span>.<br />If <span class="math">\(p \nmid x\)</span>, then FLT states <span class="math">\(x^{p - 1} \equiv 1\)</span> and <span class="math">\((x^{p - 1})^k \equiv 1^k \equiv 1.   So \)</span>x^r = (x^{p - 1}) x^s 1 x^s x^s<span class="math">\(.   If \)</span>p x<span class="math">\(, then \)</span>x 0 $ and <span class="math">\(x^r = 0^r = 0 = x^s\)</span>.</p>
+</blockquote>
+<p>Given primes <span class="math">\(p, q, p \ne q\)</span>, for any <span class="math">\(x \in \mb{Z}, r, s \in \mb{N}\)</span>, <span class="math">\(r \equiv s \pmod{(p - 1)(q - 1)} \implies x^r \equiv x^s \pmod{pq}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Assume <span class="math">\(r \equiv s \pmod{(p - 1)(q - 1)}\)</span>.<br />So <span class="math">\((p - 1)(q - 1) \mid r - s\)</span>.<br />Clearly, <span class="math">\(p - 1 \mid (p - 1)(q - 1)\)</span>.<br />So <span class="math">\(p - 1 \mid r - s\)</span>, by TD.<br />So <span class="math">\(r \equiv s \pmod{p - 1}\)</span>.<br />In the same way, <span class="math">\(r \equiv s \pmod{q - 1}\)</span>.<br />By the previous claim, <span class="math">\(x^r \equiv r^s \pmod{p}\)</span> and <span class="math">\(x^r \equiv r^s \pmod{q}\)</span>.<br />Clearly, <span class="math">\(\gcd(p, q) = 1\)</span>.<br />By CRT, <span class="math">\(x^r \equiv x^s \pmod{pq}\)</span>.</p>
+</blockquote>
+<p>We can generalize further:</p>
+<p>Suppose <span class="math">\(p_1, \ldots, p_k\)</span> be primes, all different. Let <span class="math">\(n = p_1 \cdot \ldots \cdot p_k\)</span> and <span class="math">\(\phi(n) = (p_1 - 1) \cdot \ldots \cdot (p_k - 1)\)</span>. For any <span class="math">\(x \in \mb{Z}, r, s \in \mb{N}\)</span>, <span class="math">\(r \equiv s \pmod{\phi(n)} \implies x^r \equiv x^s \pmod{n}\)</span>.</p>
+<p><span class="math">\(\phi\)</span> is called the <strong>Euler phi function</strong>.</p>
+<p>Consider <span class="math">\((x^3)^7 \equiv x \pmod{33}\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(n = 33 = 3 \cdot 11\)</span>.<br />So <span class="math">\(\phi(n) = 2 \cdot 10 = 20\)</span>.<br />So <span class="math">\(21 \equiv 1 \pmod{20}\)</span>, so <span class="math">\(x^{21} \equiv (x^3)^7 \equiv x \pmod{21}\)</span>.</p>
+</blockquote>
+<p>Now say we are given <span class="math">\(x^3 \equiv 6 \pmod{33}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\((x^3)^7 \equiv 6^7 \equiv 30 \pmod{33}\)</span>.<br />Since we know <span class="math">\((x^3)^7 \equiv 1 \pmod{33}\)</span>, <span class="math">\((x^3)^7 \equiv 6^7 \equiv 30 \pmod{33}\)</span>.</p>
+</blockquote>
+<h3 id="algorithm">Algorithm</h3>
+<p>We can use <span class="math">\((x^3)^7 \equiv x \pmod{33}\)</span> to <strong>encrypt messages</strong>. People can take a number <span class="math">\(m\)</span> and send <span class="math">\(v = m^3\)</span> it to the recipient as the encrypted message. The recipient would then decrypt it by taking <span class="math">\(v^7\)</span> mod <span class="math">\(n\)</span> to obtain <span class="math">\(m\)</span>.</p>
+<p>For example, we can represent each letter A-Z as congruence classes <span class="math">\([2]\)</span> to <span class="math">\([27]\)</span> (we skip 0 and 1 because <span class="math">\(1^3 = 1\)</span> and <span class="math">\(0^3 = 0\)</span>). We now make a table with each one cubed mod <span class="math">\(n\)</span> to obtain <span class="math">\([8], [27], [31], [26], \ldots\)</span>.</p>
+<p>;wip: go through a simple example</p>
+<p>If someone gives us the modulus, 33, and the power, 3, we can undo the encryption by taking each number to the seventh power.</p>
+<p>This is the basic idea behind RSA (Rivest-Shamir-Adleman), a <strong>public key cryptography algorithm</strong>.</p>
+<p>Alice wants to communicate with other people in a secure way. So she announces that the messages are encrypted using RSA.</p>
+<p>Then, she:</p>
+<ol style="list-style-type: decimal">
+<li>Chooses 2 large primes <span class="math">\(p, q\)</span>.</li>
+<li>Computes <span class="math">\(\phi(n)\)</span> for <span class="math">\((p - 1)(q - 1)\)</span>.</li>
+<li>Selects <span class="math">\(e \in \mb{N}\)</span>, such that <span class="math">\(\gcd(e, \phi(n))\)</span> and <span class="math">\(1 &lt; e &lt; \phi(n)\)</span>.</li>
+<li>Finds a solution <span class="math">\(d \in \mb{N}\)</span> to <span class="math">\(ed \equiv 1 \pmod{\phi(n)}, 1 &lt; d &lt; \phi(n)\)</span>.</li>
+<li>Publishes <span class="math">\((e, n)\)</span>. <span class="math">\((e, n)\)</span> is the <strong>public encryption key</strong>.</li>
+<li>Keeps <span class="math">\(d\)</span> secret. <span class="math">\((d, n)\)</span> is the <strong>private decryption key</strong>.</li>
+</ol>
+<p>The public encrypts messages by using <span class="math">\(x \wierdarrow? x^e \pmod{n}\)</span>.</p>
+<p>Alice can decrypt messages using <span class="math">\(x \wierdarrow? x^e \pmod{n}\)</span>.</p>
+<h3 id="security">Security</h3>
+<p>Alice's public key <span class="math">\((e, n)\)</span> is known to everyone, including the malicious attacker Bob.</p>
+<p>Suppose Bob intercepts a message intended for Alice. To read it, he needs <span class="math">\((d, n)\)</span>.</p>
+<p>Bob knows <span class="math">\(n, e\)</span>. To find <span class="math">\(d\)</span>, he must solve <span class="math">\(ed \equiv 1 \pmod{\phi(n)}\)</span>.</p>
+<p>To solve this, Bob needs to know <span class="math">\(\phi(n)\)</span>, and so needs to find <span class="math">\(p, q\)</span>.</p>
+<p>If <span class="math">\(n\)</span> is large enough, around 1024 binary digits, <span class="math">\(p, q\)</span> are impractical to find using today's technology.</p>
+<p>Therefore, it is impractical to decrypt the message without already knowing <span class="math">\(d\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

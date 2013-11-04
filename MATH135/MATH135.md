@@ -1619,3 +1619,104 @@ x \equiv 2 \pmod{7} \\
 x \equiv 4 \pmod{5} \\
 x \equiv 2 \pmod{7} \\
 \end{cases}$.  
+
+# 4/11/13
+
+RSA
+---
+
+Previously, it was shown that $x^p \equiv x^1 \pmod{p}$ for any prime $p$.
+
+### Mathematical basis
+
+More generally, for any $r, s \in \mb{N}$, $r \equiv s \pmod{p - 1} \implies x^r \equiv r^s \pmod{p}$.
+
+Proof:
+
+> Assume $r \equiv s \pmod{p - 1}$.  
+> Note that either $r < s$, $r = s$, or $r > s$.  
+> If $r = s$, then clearly $x^r \equiv r^s \pmod{p}$.  
+> The result for $r > s$ is the same as $r < s$, except with variables swapped.  
+> So we will only consider $r > s$.  
+> Assume $r > s$.  
+> So $p - 1 \mid r - s$.  
+> So $\exists k \in \mb{Z}, r = k(p - 1) + s$.  
+> Clearly, $k \in \mb{N}$ since $r > s$.  
+> We need these to be positive so we can use them in exponents.  
+> Clearly, $x^r = x^{k{p - 1} + s}$.  
+> Either $p \mid x$ or $p \nmid x$.  
+> If $p \nmid x$, then FLT states $x^{p - 1} \equiv 1$ and $(x^{p - 1})^k \equiv 1^k \equiv 1.  
+> So $x^r = (x^{p - 1}) \cdot x^s \equiv 1 \cdot x^s \equiv x^s$.  
+> If $p \mid x$, then $x \equiv 0 \pmod{p}$ and $x^r = 0^r = 0 = x^s$.  
+
+Given primes $p, q, p \ne q$, for any $x \in \mb{Z}, r, s \in \mb{N}$, $r \equiv s \pmod{(p - 1)(q - 1)} \implies x^r \equiv x^s \pmod{pq}$.
+
+Proof:
+
+> Assume $r \equiv s \pmod{(p - 1)(q - 1)}$.  
+> So $(p - 1)(q - 1) \mid r - s$.  
+> Clearly, $p - 1 \mid (p - 1)(q - 1)$.  
+> So $p - 1 \mid r - s$, by TD.  
+> So $r \equiv s \pmod{p - 1}$.  
+> In the same way, $r \equiv s \pmod{q - 1}$.  
+> By the previous claim, $x^r \equiv r^s \pmod{p}$ and $x^r \equiv r^s \pmod{q}$.  
+> Clearly, $\gcd(p, q) = 1$.  
+> By CRT, $x^r \equiv x^s \pmod{pq}$.  
+
+We can generalize further:
+
+Suppose $p_1, \ldots, p_k$ be primes, all different. Let $n = p_1 \cdot \ldots \cdot p_k$ and $\phi(n) = (p_1 - 1) \cdot \ldots \cdot (p_k - 1)$. For any $x \in \mb{Z}, r, s \in \mb{N}$, $r \equiv s \pmod{\phi(n)} \implies x^r \equiv x^s \pmod{n}$.
+
+$\phi$ is called the **Euler phi function**.
+
+Consider $(x^3)^7 \equiv x \pmod{33}$:
+
+> Let $n = 33 = 3 \cdot 11$.  
+> So $\phi(n) = 2 \cdot 10 = 20$.  
+> So $21 \equiv 1 \pmod{20}$, so $x^{21} \equiv (x^3)^7 \equiv x \pmod{21}$.  
+
+Now say we are given $x^3 \equiv 6 \pmod{33}$:
+
+> Clearly, $(x^3)^7 \equiv 6^7 \equiv 30 \pmod{33}$.  
+> Since we know $(x^3)^7 \equiv 1 \pmod{33}$, $(x^3)^7 \equiv 6^7 \equiv 30 \pmod{33}$.  
+
+### Algorithm
+
+We can use $(x^3)^7 \equiv x \pmod{33}$ to **encrypt messages**. People can take a number $m$ and send $v = m^3$ it to the recipient as the encrypted message. The recipient would then decrypt it by taking $v^7$ mod $n$ to obtain $m$.
+
+For example, we can represent each letter A-Z as congruence classes $[2]$ to $[27]$ (we skip 0 and 1 because $1^3 = 1$ and $0^3 = 0$). We now make a table with each one cubed mod $n$ to obtain $[8], [27], [31], [26], \ldots$.
+
+;wip: go through a simple example
+
+If someone gives us the modulus, 33, and the power, 3, we can undo the encryption by taking each number to the seventh power.
+
+This is the basic idea behind RSA (Rivest-Shamir-Adleman), a **public key cryptography algorithm**.
+
+Alice wants to communicate with other people in a secure way. So she announces that the messages are encrypted using RSA.
+
+Then, she:
+
+1. Chooses 2 large primes $p, q$.
+2. Computes $\phi(n)$ for $(p - 1)(q - 1)$.
+3. Selects $e \in \mb{N}$, such that $\gcd(e, \phi(n))$ and $1 < e < \phi(n)$.
+4. Finds a solution $d \in \mb{N}$ to $ed \equiv 1 \pmod{\phi(n)}, 1 < d < \phi(n)$.
+5. Publishes $(e, n)$. $(e, n)$ is the **public encryption key**.
+6. Keeps $d$ secret. $(d, n)$ is the **private decryption key**.
+
+The public encrypts messages by using $x \wierdarrow? x^e \pmod{n}$.
+
+Alice can decrypt messages using $x \wierdarrow? x^e \pmod{n}$.
+
+### Security
+
+Alice's public key $(e, n)$ is known to everyone, including the malicious attacker Bob.
+
+Suppose Bob intercepts a message intended for Alice. To read it, he needs $(d, n)$.
+
+Bob knows $n, e$. To find $d$, he must solve $ed \equiv 1 \pmod{\phi(n)}$.
+
+To solve this, Bob needs to know $\phi(n)$, and so needs to find $p, q$.
+
+If $n$ is large enough, around 1024 binary digits, $p, q$ are impractical to find using today's technology.
+
+Therefore, it is impractical to decrypt the message without already knowing $d$.
