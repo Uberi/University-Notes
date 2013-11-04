@@ -115,7 +115,6 @@ Tutorials: Tuesdays 4:30PM-7:20PM (Drop-in to Biology 1 Room 271)</code></pre>
 <p>A <strong>lemma</strong> is a helper proposition used in the proof of a theorem.</p>
 <p>A <strong>corollary</strong> is a proposition that follows almost immediately from a theorem.</p>
 <p>An <strong>axiom</strong> is a statement is assumed to be true, no proof needed. Propositions are derived from these.</p>
-<p>;wip: Read textbook ch. 1, 2, 4, except section 2.4, 5, 6, 7, 8, 13</p>
 <h2 id="summary">Summary</h2>
 <p>Written solutions are primarily done in English. Proofs start with relevant assumptions or known true statements, and ends with the thing to be proved.</p>
 <h1 id="section-1">11/9/13</h1>
@@ -157,6 +156,12 @@ Which is in fact:
 <p>If A and B are statements, then <span class="math">\(A \iff B\)</span> (<code>A</code> if and only if <code>B</code>) means &quot;<code>A</code> is true only when <code>B</code> is true&quot;.</p>
 <p><code>T</code> represents true, <code>F</code> represents false.</p>
 <p>If <code>A</code> is a statement, then <span class="math">\(\neg A\)</span> (not <code>A</code>) means &quot;not <code>A</code>&quot;.</p>
+<h3 id="laws-of-logic">Laws of Logic</h3>
+<ul>
+<li><span class="math">\(A \wedge (B \vee C) \equiv (A \wedge B) \vee (A \wedge C)\)</span>, <span class="math">\(A \vee (B \wedge C) \equiv (A \vee B) \wedge (A \vee C)\)</span> - distributivity law</li>
+<li><span class="math">\(A \wedge B \equiv B \wedge A\)</span>, <span class="math">\(A \vee B \equiv B \vee A\)</span> - commutativity law</li>
+<li><span class="math">\((A \wedge B) \wedge C \equiv A \wedge (B \wedge C)\)</span>, <span class="math">\((A \vee B) \vee C \equiv A \vee (B \vee C)\)</span> - associativity law</li>
+</ul>
 <h3 id="truth-tables">Truth tables</h3>
 <p>Truth tables show the truth value of a compound statement by determining the values of the component statements.</p>
 <p>Two statements <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are logically equivalent if and only if they have the same truth values in the truth table. We write <span class="math">\(A \equiv B\)</span> to represent this.</p>
@@ -323,7 +328,7 @@ Which is in fact:
 <h1 id="section-4">18/9/13</h1>
 <p>Technique 2: Prove that <span class="math">\(\forall x, x \in A \iff x \in B\)</span>:</p>
 <blockquote>
-<p>Let <span class="math">\(x\)</span> be an arbitrary object.<br />;wip</p>
+<p>Let <span class="math">\(x\)</span> be an arbitrary object.<br />If <span class="math">\(x \in A\)</span>, then <span class="math">\(x \in B\)</span>.<br />If <span class="math">\(x \notin A\)</span>, then <span class="math">\(x \notin B\)</span>.<br />Therefore, <span class="math">\(x \in A \iff x \in B\)</span>.</p>
 </blockquote>
 <p>Prove that for any sets <span class="math">\(R\)</span>, <span class="math">\(S\)</span>, <span class="math">\(T\)</span>, <span class="math">\(R \cap (S \cup T) = (R \cap S) \cup (R \cap T)\)</span>.</p>
 <blockquote>
@@ -364,13 +369,15 @@ Which is in fact:
 <blockquote>
 <p><span class="math">\(A: \forall x \in \mb{Z}, 2 \mid x \implies x \text{ is a power of } 2\)</span>.<br /><span class="math">\(\neg A: \exists x \in \mb{Z}, \neg (2 \mid x \implies x \text{ is a power of } 2)\)</span>.<br />Recall that <span class="math">\(\neg (P \implies Q) = P \wedge \neg Q\)</span>.<br />So the above is equivalent to: <span class="math">\(\neg A: \exists x \in \mb{Z}, 2 \mid x \implies x \text{ is not a power of } 2\)</span>.<br />There exists an integer which is even but is not a power of 2.</p>
 </blockquote>
-<p>General rules:</p>
+<p>General rules for negation:</p>
 <ul>
-<li><span class="math">\(\neg (\forall x \in S, P) = \exists x \in S, \neg P\)</span></li>
-<li><span class="math">\(\neg (\exists x \in S, P) = \forall x \in S, \neg P\)</span></li>
-<li>;wip</li>
+<li><span class="math">\(\neg (\forall x \in S, P) \equiv \exists x \in S, \neg P\)</span></li>
+<li><span class="math">\(\neg (\exists x \in S, P) \equiv \forall x \in S, \neg P\)</span></li>
+<li><span class="math">\(\neg (P \wedge Q) \equiv (\neg P) \vee (\neg Q)\)</span> - DeMorgan's law</li>
+<li><span class="math">\(\neg (P \vee Q) \equiv (\neg P) \wedge (\neg Q)\)</span> - DeMorgan's law</li>
+<li><span class="math">\(\neg (P \implies Q) \equiv P \wedge (\neg Q)\)</span></li>
+<li><span class="math">\(\neg (P \iff Q) \equiv P \iff (\neg Q)\)</span></li>
 </ul>
-<p>;wip: Figure out <span class="math">\(\neg (P \iff Q)\)</span>. It's XOR, I think</p>
 <h3 id="proving-quantified-statements">Proving quantified statements</h3>
 <p>To prove <span class="math">\(\forall x \in S, P\)</span>, use the <strong>select method</strong>:</p>
 <blockquote>
@@ -419,7 +426,7 @@ Which is in fact:
 <p>The <strong>negation</strong> of an implication <span class="math">\(P \implies Q\)</span> is <span class="math">\(P \wedge \neg Q\)</span>. This is a statement that is true whenever the original statement is true, and false whenever the original statement is true. This can be proven using truth tables.</p>
 <p>Prove that <span class="math">\(\forall x \in \mb{Z}, 32 \nmid (a^2 + 3)(a^2 + 7) \implies 2 \mid a\)</span>:</p>
 <blockquote>
-<p>This is difficult to prove since &quot;not divisible&quot; has few useful properties.<br />We replace the statement with its contrapositive to simplify it.<br />The contrapositive is <span class="math">\(\forall x \in \mb{Z}, 2 \nmid a \implies 32 \mid (a^2 + 3)(a^2 + 7)\)</span>.<br />Assume <span class="math">\(2 \nmid a\)</span>.<br />Clearly, <span class="math">\(a\)</span> can be written as <span class="math">\(2k + 1, k \in \mb{Z}\)</span>.<br />;wip</p>
+<p>This is difficult to prove since &quot;not divisible&quot; has few useful properties.<br />We replace the statement with its contrapositive to simplify it.<br />The contrapositive is <span class="math">\(\forall x \in \mb{Z}, 2 \nmid a \implies 32 \mid (a^2 + 3)(a^2 + 7)\)</span>.<br />Assume <span class="math">\(2 \nmid a\)</span>.<br />Clearly, <span class="math">\(a\)</span> can be written as <span class="math">\(2k + 1, k \in \mb{Z}\)</span>.<br />Clearly, <span class="math">\((a^2 + 3)(a^2 + 7)\)</span> is equivalent to <span class="math">\((4k^2 + 4k + 4)(4k^2 + 4k + 8)\)</span>, or <span class="math">\(16(k^2 + k + 1)(k^2 + k + 2)\)</span>.<br />CLearly, either <span class="math">\(2 \mid k^2 + k + 1\)</span> or <span class="math">\(2 \mid k^2 + k + 2\)</span>.<br />So <span class="math">\(\exists l \in \mb{Z}, (k^2 + k + 1)(k^2 + k + 2) = 2l\)</span>.<br />Clearly, <span class="math">\(16(k^2 + k + 1)(k^2 + k + 2)\)</span> is equivalent to <span class="math">\(32l\)</span>.<br />Clearly, <span class="math">\(32 \mid 32l\)</span>, so <span class="math">\(32 \mid (a^2 + 3)(a^2 + 7)\)</span>.<br />Therefore, <span class="math">\(\forall x \in \mb{Z}, 32 \nmid (a^2 + 3)(a^2 + 7) \implies 2 \mid a\)</span>.</p>
 </blockquote>
 <p>The <strong>inverse</strong> of an implication <span class="math">\(P \implies Q\)</span> is <span class="math">\(\neg P \implies \neg Q\)</span>. Like the converse, this is also very different from the original implication.</p>
 <p>Another technique for proving is <strong>proof by contradiction</strong>:</p>
@@ -912,17 +919,33 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>Proposition: given <span class="math">\(a, c, m \in \mb{Z}, m &gt; 0\)</span>, with <span class="math">\(d = \gcd(a, m)\)</span>:</p>
 <ul>
 <li>the linear congruence <span class="math">\(ax \equiv c \pmod{m}\)</span> has a solution if and only if <span class="math">\(d \mid c\)</span></li>
-<li>if it does have a solution <span class="math">\(x_0\)</span>, then it has infinite solutions <span class="math">\(x \equiv x_0 \pmod{\frac{m}{d}}\)</span></li>
+<li>if it does have a solution <span class="math">\(x = x_0\)</span>, then its complete solution is <span class="math">\(x \equiv x_0 \pmod{\frac{m}{d}}\)</span></li>
 <li>alternatively, we can write this as <span class="math">\(x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}\)</span>.</li>
 </ul>
+<p>;wip: prove this</p>
 <p>Solve <span class="math">\(4x \equiv 5 \pmod{21}\)</span>:</p>
 <blockquote>
 <p>The corresponding LDE is <span class="math">\(4x + 21y = 5\)</span>.<br />A possible solution is <span class="math">\(x_0 = -25, y_0 = 5\)</span>, found by inspection.<br />So by LCT 1, the complete solution is <span class="math">\(x = -25 + \frac{21}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 3 + 7n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 3 \text{ or } 10 \text{ or } 17 \pmod{21}\)</span>.</p>
 </blockquote>
 <p>Solve <span class="math">\(33x \equiv 6 \pmod{42}\)</span>:</p>
 <blockquote>
-<p>The corresponding LDE is <span class="math">\(33x + 42y = 6\)</span> A particular solution is <span class="math">\(x_0 = -5, y_0 = 4\)</span>, found by EEA.<br />So by LCT 1, the complete solution is <span class="math">\(x = -5 + \frac{42}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 9 + 14n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 9 \text{ or } 23 \text{ or } 37 \pmod{42}\)</span>.</p>
+<p>The corresponding LDE is <span class="math">\(33x + 42y = 6\)</span>.<br />A particular solution is <span class="math">\(x_0 = -5, y_0 = 4\)</span>, found by EEA.<br />So by LCT 1, the complete solution is <span class="math">\(x = -5 + \frac{42}{3}n, n \in \mb{Z}\)</span>, or <span class="math">\(x = 9 + 14n, n \in \mb{Z}\)</span>.<br />So we write <span class="math">\(x \equiv 9 \text{ or } 23 \text{ or } 37 \pmod{42}\)</span>.</p>
 </blockquote>
+<h3 id="linear-congruence-theorem-version-2-lct-2">Linear Congruence Theorem, Version 2 (LCT 2)</h3>
+<p>This is simply a reformulation of LCT 1 with congruence classes.</p>
+<p>Note that <span class="math">\(ax \equiv c \pmod{m}\)</span> is equivalent to <span class="math">\([a][x] = [c]\)</span> in <span class="math">\(\mb{Z}_m\)</span>.</p>
+<p>Proposition: given <span class="math">\(a, c, m \in \mb{Z}, m &gt; 0\)</span>, with <span class="math">\(d = \gcd(a, m)\)</span>:</p>
+<ul>
+<li>the linear congruence <span class="math">\(ax \equiv c \pmod{m}\)</span> has a solution if and only if <span class="math">\(d \mid c\)</span></li>
+<li>if it does have a solution <span class="math">\(x = x_0\)</span>, then its complete solution is <span class="math">\(x = \set{[x_0], [x_0 + \frac{m}{d}], [x_0 + 2\frac{m}{d}], \ldots, [x_0 + (d - 1)\frac{m}{d}]}\)</span> in <span class="math">\(\mb{Z}_m\)</span></li>
+</ul>
+<p>Together, we can say the following are equivalent to each other:</p>
+<ul>
+<li><span class="math">\([a][x] = [c]\)</span> has a solution in <span class="math">\(\mb{Z}_m\)</span> - congruence class form</li>
+<li><span class="math">\(ax \equiv c \pmod{m}\)</span> has a solution - congruence form</li>
+<li><span class="math">\(\exists x_0 \in \mb{Z}, ax_0 \equiv c \pmod{m}\)</span> - solution form</li>
+<li><span class="math">\(\exists x_0, y_0 \in \mb{Z}, ax_0 + my_0 = c\)</span> - LDE form</li>
+</ul>
 <h1 id="section-19">28/10/13</h1>
 <h2 id="modular-arithmetic">Modular Arithmetic</h2>
 <p>Modular arithmetic is a device that relates congruences with equalities.</p>
@@ -966,7 +989,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 </blockquote>
 <h1 id="section-20">30/10/13</h1>
 <h2 id="fermats-little-theorem-flt">Fermat's Little Theorem (FLT)</h2>
-<p>&quot;Feir-mah&quot; - Pierre de Fermat.</p>
+<p>&quot;Fair-mah&quot; - Pierre de Fermat.</p>
 <p>If <span class="math">\(p\)</span> is a prime number, <span class="math">\(a \in \mb{Z}\)</span>, <span class="math">\(p \nmid a\)</span>, then <span class="math">\(a^{pp - 1} \equiv 1 \pmod{p}\)</span>.</p>
 <p>In other words, if <span class="math">\(p\)</span> is prime, <span class="math">\([a] \in \mb{Z}_p \wedge [a] \ne 0 \implies [a]^{p - 1} = [1]\)</span>.</p>
 <p>This is also writable as <span class="math">\([a] \cdot [a]^{p - 2} = [1]\)</span>.</p>
@@ -993,6 +1016,41 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>We want to find <span class="math">\(r\)</span> such that <span class="math">\(8^{1000} \equiv r \pmod{13}\)</span>, <span class="math">\(0 \le r &lt; 13\)</span>.<br />Since 13 is prime and <span class="math">\(13 \nmid 8\)</span>, <span class="math">\(8^{12} \equiv 1 \pmod{13}\)</span>, by FLT.<br />By PC, <span class="math">\((8^{12})^n \equiv 1^n \equiv 8^{12 \cdot 83} \equiv 8^{996} \pmod{13}\)</span>.<br />So <span class="math">\(8^{1000} \equiv 8^{4} \cdot 8^{996} \equiv 1 \cdot 2^{12} \pmod{13}\)</span>.<br />Since 13 is prime and <span class="math">\(13 \nmid 2\)</span>, <span class="math">\(2^{12} \equiv 1 \pmod{13}\)</span>, by FLT.<br />So <span class="math">\(8^{1000} \equiv 1 \cdot 1 \equiv 1 \pmod{13}\)</span>.</p>
 </blockquote>
 <p>This only works in certain cases, but is occasionally useful.</p>
+<h1 id="section-21">1/11/13</h1>
+<h2 id="nonlinear-polynomial-congruences">Nonlinear (polynomial) Congruences</h2>
+<p><span class="math">\(ax \equiv b\)</span> is linear because <span class="math">\(x\)</span>, the variable, only occurs in power 1 at the highest.</p>
+<p>Solve <span class="math">\(x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}\)</span>:</p>
+<blockquote>
+<p>Clearly, if <span class="math">\(x_0\)</span> is one solution and <span class="math">\(x_1 \equiv x_0 \pmod{5}\)</span>, then <span class="math">\(x_1^{43} \equiv x_0^{43} \pmod{5}\)</span> and <span class="math">\(x_1^9 \equiv x_0^9 \pmod{5}\)</span>, by PC.<br />So <span class="math">\(x_0^{43} + 28x_0^9 + 10x_0 \equiv x_1^{43} + 28x_1^9 + 10x_1 \equiv 1 \pmod{5}\)</span>.<br />So if solutions exist, then the complete solution has one or more congruence classes mod 5. ;what? So all we need to do is test all possible representatives: 0, 1, 2, 3, 4. ;wip: evaluate it for all those values We want to test the values for all possible representatives: <span class="math">\(0^43\)</span> Use Fermat's Little Theorem with two cases, <span class="math">\(5 \mid x\)</span> and <span class="math">\(5 \nmmid x\)</span>, to prove <span class="math">\(x^4 \equiv 1\)</span> ;wip Simplify: <span class="math">\(28 \equiv 3 \pmod{5}\)</span> and <span class="math">\(10 \equiv 0 \pmod{5}\)</span>, so <span class="math">\(x^{43} + 3x^9\)</span>.<br />Clearly, <span class="math">\(x^{43} \equiv x^4 x^{39} \equiv 1 x^{39}\)</span>, because <span class="math">\(x^4 \equiv 1\)</span>.<br />If we repeat this, we get <span class="math">\(x^{39} \equiv x^{35} \equiv \ldots \equiv x^{3}\)</span>.<br />Likewise, we can do this for <span class="math">\(x^9\)</span> to find that <span class="math">\(x^9 \equiv x\)</span>. So <span class="math">\(x^{43} + 28x^9 + 10x \equiv x^3 + 3x \pmod{5}\)</span>.<br />;wip: rewrite this whole thing and do it properly</p>
+</blockquote>
+<p>In general, there is no theorem that allows us to solve these directly. However, we do know that we can always find any solutions that exist by testing all the the representatives mod 5, and we can use tricks like FLT to simplify expressions.</p>
+<h2 id="chinese-remainder-theorem">Chinese Remainder Theorem</h2>
+<blockquote>
+<p>An unknown number, when repeatedly divided by 3, the remainder is 2; by 5, the remainder is 3; and by 7, the remainder is 2. What is the number?</p>
+</blockquote>
+<ul>
+<li>Sun Tsu</li>
+</ul>
+<p>This is a <strong>system</strong> of linear congruences.</p>
+<p>Essentially, we want to solve for <span class="math">\(n\)</span> in the system <span class="math">\(\begin{cases} n \equiv 2 \pmod{3} \\ n \equiv 3 \pmod{5} \\ n \equiv 2 \pmod{7} \\ \end{cases}\)</span>.</p>
+<p>A linear congruence of the form <span class="math">\(x \equiv n \pmod{m}\)</span> (where <span class="math">\(a = 0\)</span>) always has solutions.</p>
+<p>We can always solve these systems when the moduli are pairwise coprime ;wip: why? prove it</p>
+<p>Solve the system:</p>
+<blockquote>
+<p>Note that <span class="math">\(n \equiv 2 \pmod{3} \iff 3 \mid n - 2 \iff \exists x \in \mb{Z}, n - 2 = 3x \iff n = 3x + 2\)</span>.<br />Since <span class="math">\(n \equiv 3 \pmod{5}\)</span>, <span class="math">\(3x + 2 \equiv 3 \pmod{5} \iff 3x \equiv 1 \pmod{5}\)</span>.<br />Solving for the linear congruence, we get <span class="math">\(x \equiv 2 \pmod{5}\)</span>.<br />So <span class="math">\(5 \mid x - 2 \iff \exists y \in \mb{Z}, x - 2 = 5y \iff x = 5y + 2\)</span>.<br />So <span class="math">\(n = 3x + 2 = 3(5y + 2) + 2 = 15y + 8 \iff n - 8 = 15y \iff 15 \mid n - 8\)</span>.<br />So <span class="math">\(n \equiv 8 \pmod{15}\)</span>.</p>
+</blockquote>
+<blockquote>
+<p>Note that we simplified two congruences into one. Now we have a system of two congruences again, <span class="math">\(\begin{cases} n \equiv 8 \pmod{15} \\ n \equiv 2 \pmod{7} \\ \end{cases}\)</span>.<br />We apply the same technique again.<br />Note that <span class="math">\(n \equiv 8 \pmod{15} \iff 15 \mid n - 8 \iff \exists x \in \mb{Z}, n - 8 = 15x \iff n = 15x + 8\)</span>.<br />Since <span class="math">\(n \equiv 2 \pmod{7}\)</span>, <span class="math">\(15x + 8 \equiv 2 \pmod{7} \iff 15x \equiv -6 \pmod{7}\)</span>.<br />Solving for the linear congruence, we get <span class="math">\(x \equiv 1 \pmod{7}\)</span>.<br />So <span class="math">\(7 \mid x - 1 \iff \exists y \in \mb{Z}, x - 1 = 7y \iff x = 7y + 1\)</span>.<br />So <span class="math">\(n = 15x + 8 = 15(7y + 1) + 8 = 105y + 23 \iff n - 23 = 105y \iff 105 \mid n - 23\)</span>.<br />So <span class="math">\(n \equiv 23 \pmod{105}\)</span>.</p>
+</blockquote>
+<p>Proposition: Given integers <span class="math">\(a_1\)</span> and positive integers <span class="math">\(m_1, m_2\)</span>, if <span class="math">\(\gcd(m_1, m_2) = 1\)</span>, then the system <span class="math">\(\begin{cases} n \equiv a_1 \pmod{m_1} \\ n \equiv a_2 \pmod{m_2} \\ \end{cases}\)</span> has a unique solution mod <span class="math">\(m_1 m_2\)</span>. So if <span class="math">\(n = n_0\)</span> is one solution, then the complete solution is <span class="math">\(n \equiv n_0 \pmod{m_1 m_2}\)</span>.</p>
+<p>Basically, if we can find a single solution to a system of two linear congruences, then we can immediately write the complete solution.</p>
+<p>For more than two linear congruences, we can solve the first two, then solve for the solution and the third one, and then solve for that solution, and so on, until there is only one left.</p>
+<p>Application: if <span class="math">\(a \in \mb{Z}, m_1, m_2 \in \mb{Z}, \gcd(m_1, m_2) = 1\)</span>, then <span class="math">\(x \equiv a \pmod{m_1 m_1} \iff \begin{cases} x \equiv a \pmod{m_1} \\ x \equiv a \pmod{m_2} \\ \end{cases}\)</span>.</p>
+<p>;wip: prove this using LCT 1</p>
+<p>Solve <span class="math">\(x^{43} + 28x^9 + 10x \equiv 1 \pmod{35}\)</span>:</p>
+<blockquote>
+<p>We know that <span class="math">\(35 = 5 \cdot 7\)</span>, and <span class="math">\(\gcd(5, 7) = 1\)</span>. So <span class="math">\(x^{43} + 28x^9 + 10x \equiv 1 \pmod{35} \equiv \begin{cases} x^{43} + 28x^9 + 10x \equiv 1 \pmod{5} \\ x^{43} + 28x^9 + 10x \equiv 1 \pmod{7} \\ \end{cases}\)</span>.<br />We already know that if <span class="math">\(x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}\)</span>, then <span class="math">\(x \equiv 3 \or 4 \pmod{5}\)</span>.<br />;wip: solve for mod 7 Now we resolve the cases: either <span class="math">\(\begin{cases} x \equiv 3 \pmod{5} \\ x \equiv 2 \pmod{7} \\ \end{cases}\)</span> or <span class="math">\(\begin{cases} x \equiv 4 \pmod{5} \\ x \equiv 2 \pmod{7} \\ \end{cases}\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

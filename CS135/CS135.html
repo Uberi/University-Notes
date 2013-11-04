@@ -418,11 +418,11 @@ Tests:
 </ul></li>
 <li>Rewrite it according to the substitution rules:
 <ul>
-<li><strong>Built-in functions</strong> become their values.
+<li><strong>Built-in function applications</strong> become their values.
 <ul>
 <li><code>(f ...)</code> =&gt; <code>(result of evaluating f(...))</code></li>
 </ul></li>
-<li><strong>User defined functions</strong> become their bodies, with arguments inserted.
+<li><strong>User defined function applications</strong> become their bodies, with arguments inserted.
 <ul>
 <li>when <code>(define (f ...) e)</code> occurs to the left, <code>(f ...)</code> =&gt; <code>(e with substitution of parameters for arguments)</code></li>
 </ul></li>
@@ -472,6 +472,7 @@ Tests:
 </ul></li>
 <li>This is one <strong>evaluation step</strong>. Return to step 1 until the entire expression is in the simplest possible form, or results in an error.</li>
 </ol>
+<p>Note that constant and function definitions are already in their simplest form.</p>
 <p>These rules may differ from those in DrRacket's stepper feature.</p>
 <p>Evaluating a program by stepping through is called <strong>tracing</strong>. In more complex programs, <strong>condensed traces</strong> are used - traces that can skip multiple steps to show only important parts.</p>
 <p>Trace <code>(term (- 3 1) (+ 1 2))</code> given <code>(define (term x y) (* x (sqr y)))</code>:</p>

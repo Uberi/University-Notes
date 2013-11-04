@@ -627,6 +627,7 @@ x \sin \frac{1}{x} &amp;\text{if } x \ne 0 \\
 <p>Construct <span class="math">\(f(x) = \ln x - (3 - 2x)\)</span>.<br />We want to prove there exists <span class="math">\(x\)</span> such that <span class="math">\(f(x) = 0\)</span>.<br />Clearly, this is continuous over <span class="math">\(x &gt; 0\)</span>.<br />Construct <span class="math">\(a = 1\)</span>, <span class="math">\(b = 2\)</span> (we could find these values using a graph).<br />Clearly, <span class="math">\(f(x)\)</span> is continuous over the interval.<br />Clearly, <span class="math">\(f(1) = -1\)</span> and <span class="math">\(f(2) = \ln 2 - 1\)</span>.<br />Clearly, <span class="math">\(f(1) &lt; 0\)</span> and <span class="math">\(f(2) &gt; 0\)</span>.<br />So by the IVT, there must exist <span class="math">\(c \in [a, b]\)</span> such that <span class="math">\(f(c) = 0\)</span>.<br />So there must be a real root.</p>
 </blockquote>
 <p>This is a trancendental function and cannot be solved analytically.</p>
+<p>;wip: prove this theorem</p>
 <h3 id="bisection-method">Bisection method</h3>
 <p>We can use the bisection to get a better approximation. Currently, we know the root is in <span class="math">\([1, 2]\)</span>.</p>
 <p>We can divide <span class="math">\([a, b]\)</span> into two equally sized intervals. Using IVT, we can determine that the root must be in one of the two intervals.</p>
@@ -1233,9 +1234,39 @@ Q(10) &amp;= 3 + \frac{1}{6} + \frac{1}{108} = \frac{1029}{324} \\
 <blockquote>
 <p><span class="math">\(f\)</span> is continuous over <span class="math">\(\mb{R}\)</span>, so the only critical numbers are at <span class="math">\(f&#39;(x) = 0 = 2x - 4\)</span>, or <span class="math">\(x = 2\)</span>.<br />Clearly, <span class="math">\(f(2) = -3, f(-1) = 6, f(3) = -2\)</span>.<br />So the absolute minimum is <span class="math">\(f(2) = -3\)</span>, and the absolute maximum is <span class="math">\(f(-1) = 6\)</span></p>
 </blockquote>
-<h3 id="rolles-theorem">Rolles theorem</h3>
+<h3 id="rolles-theorem">Rolle's theorem</h3>
 <p>If <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span>, differentiable over <span class="math">\((a, b)\)</span>, and <span class="math">\(f(a) = f(b)\)</span>, then <span class="math">\(\exists c \in (a, b), f&#39;(c) = 0\)</span>.</p>
 <p>Used to prove mean value theorem.</p>
+<h1 id="section-21">1/11/13</h1>
+<h2 id="mean-value-theorem-mvt">Mean Value Theorem (MVT)</h2>
+<p>Suppose the function <span class="math">\(f\)</span> is continuous on <span class="math">\([a, b]\)</span> and differentiable on <span class="math">\((a, b)\)</span>. Then <span class="math">\(\exists c \in (a, b), f&#39;(c) = \frac{f(b) - f(a)}{b - a}\)</span>.</p>
+<p>In other words, there is at least one point at which the slope of the tangent is equal to the slope of the secant of the endpoints - there must be at least one place where the instantaneous rate of change is equal to the average rate of change.</p>
+<p>There could be multiple points where this is true. For example, a line's secant and tangent slopes are always equal. MVT simple states there must be at least one.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(f\)</span> be continuous on <span class="math">\([a, b]\)</span> and differentiable on <span class="math">\((a, b)\)</span>.<br />Clearly, the equation of the secant line joining points <span class="math">\((a, f(a))\)</span> and <span class="math">\((b, f(b))\)</span> is <span class="math">\(y = \frac{f(b) - f(a)}{b - a}(x - a) + f(a)\)</span>.<br />Construct <span class="math">\(g(x) = f(x) - y\)</span>. The secant is continuous and differentiable everywhere, so <span class="math">\(g(x)\)</span> is continuous on <span class="math">\([a, b]\)</span> and differentiable on <span class="math">\((a, b)\)</span>.<br />Note that by definition, <span class="math">\(f(x) = y\)</span> at <span class="math">\(x = a\)</span> and <span class="math">\(x = b\)</span>.<br />So <span class="math">\(g(a) = 0 = g(b)\)</span>, and by Rolle's theorem, <span class="math">\(\exists c \in (a, b), g&#39;(c) = 0\)</span>.<br />So <span class="math">\(\exists c \in (a, b), f&#39;(c) - y&#39; = 0\)</span>, or <span class="math">\(\exists c \in (a, b), f&#39;(c) = y&#39; = \frac{f(b) - f(a)}{b - a}\)</span>.</p>
+</blockquote>
+<p>Find <span class="math">\(x\)</span> where <span class="math">\(f&#39;(c) = \frac{f(3) - f(1)}{3 - 1}\)</span> for <span class="math">\(f(x) = x^3\)</span> over <span class="math">\([1, 3]\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+3x^2 &amp;= \frac{27 - 1}{2} \\
+x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>The MVT is important because of its use in proving the <strong>fundemental theorem of calculus</strong> and <strong>Taylor's Theorem with Lagrange remainder</strong>, the two most important theorems in calculus. It is also used to prove several other results.</p>
+<h3 id="constant-function-theorem">Constant Function Theorem</h3>
+<p>If <span class="math">\(f&#39;(x) = 0\)</span> for all <span class="math">\(x\)</span> in <span class="math">\((a, b)\)</span>, then <span class="math">\(f\)</span> is a constant function (<span class="math">\(f(x) = k\)</span>).</p>
+<blockquote>
+<p>Note that <span class="math">\(f&#39;(x) = k\)</span> if and only if for an arbitrary <span class="math">\(x_1, x_2 \in (a, b), x_1 &lt; x_2\)</span>, <span class="math">\(f(x_1) = f(x_2)\)</span>.<br />Since <span class="math">\(f\)</span> is differentiable on <span class="math">\((a, b)\)</span>, then <span class="math">\(f\)</span> is differentiable on <span class="math">\((x_1, x_2)\)</span> and continuous on <span class="math">\([x_1, x_2]\)</span>.<br />By the MVT, <span class="math">\(\exists c \in [x_1, x_2], f&#39;(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}\)</span>.<br />Since <span class="math">\(f(c) = 0\)</span>, <span class="math">\(\frac{f(x_2) - f(x_1)}{x_2 - x_1} = 0\)</span>.<br />Since <span class="math">\(x_1, x_2\)</span> are arbitrary, <span class="math">\(\forall x_1, x_2 \in (a, b), x_1 &lt; x_2, f(x_1) = f(x_2)\)</span>.<br />Therefore, the function is constant.</p>
+</blockquote>
+<h3 id="unnamed-theorem">Unnamed Theorem</h3>
+<p>If <span class="math">\(f&#39;(x) = g&#39;(x)\)</span> over <span class="math">\((a, b)\)</span>, then <span class="math">\(f(x) = g(x) + c\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(h(x) = f(x) - g(x)\)</span>. So <span class="math">\(h&#39;(x) = f&#39;(x) - g&#39;(x) = 0\)</span>.<br />So by the constant function theorem, <span class="math">\(h(x) = c\)</span>, and <span class="math">\(f(x) = g(x) + c\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

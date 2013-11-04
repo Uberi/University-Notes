@@ -78,8 +78,6 @@ A **corollary** is a proposition that follows almost immediately from a theorem.
 
 An **axiom** is a statement is assumed to be true, no proof needed. Propositions are derived from these.
 
-;wip: Read textbook ch. 1, 2, 4, except section 2.4, 5, 6, 7, 8, 13
-
 Summary
 -------
 
@@ -147,6 +145,12 @@ If A and B are statements, then $A \iff B$ (`A` if and only if `B`) means "`A` i
 `T` represents true, `F` represents false.
 
 If `A` is a statement, then $\neg A$ (not `A`) means "not `A`".
+
+### Laws of Logic
+
+* $A \wedge (B \vee C) \equiv (A \wedge B) \vee (A \wedge C)$, $A \vee (B \wedge C) \equiv (A \vee B) \wedge (A \vee C)$ - distributivity law
+* $A \wedge B \equiv B \wedge A$, $A \vee B \equiv B \vee A$ - commutativity law
+* $(A \wedge B) \wedge C \equiv A \wedge (B \wedge C)$, $(A \vee B) \vee C \equiv A \vee (B \vee C)$ - associativity law
 
 ### Truth tables
 
@@ -324,7 +328,9 @@ Technique 1: prove $A \subseteq B$, and then prove $B \subseteq A$, using the ab
 Technique 2: Prove that $\forall x, x \in A \iff x \in B$:
 
 > Let $x$ be an arbitrary object.  
-> ;wip
+> If $x \in A$, then $x \in B$.  
+> If $x \notin A$, then $x \notin B$.  
+> Therefore, $x \in A \iff x \in B$.  
 
 Prove that for any sets $R$, $S$, $T$, $R \cap (S \cup T) = (R \cap S) \cup (R \cap T)$.
 
@@ -383,13 +389,14 @@ Negate the statement `every even integer is a power of 2`.
 >So the above is equivalent to: $\neg A: \exists x \in \mb{Z}, 2 \mid x \implies x \text{ is not a power of } 2$.  
 >There exists an integer which is even but is not a power of 2.  
 
-General rules:
+General rules for negation:
 
-* $\neg (\forall x \in S, P) = \exists x \in S, \neg P$
-* $\neg (\exists x \in S, P) = \forall x \in S, \neg P$
-* ;wip
-
-;wip: Figure out $\neg (P \iff Q)$. It's XOR, I think
+* $\neg (\forall x \in S, P) \equiv \exists x \in S, \neg P$
+* $\neg (\exists x \in S, P) \equiv \forall x \in S, \neg P$
+* $\neg (P \wedge Q) \equiv (\neg P) \vee (\neg Q)$ - DeMorgan's law
+* $\neg (P \vee Q) \equiv (\neg P) \wedge (\neg Q)$ - DeMorgan's law
+* $\neg (P \implies Q) \equiv P \wedge (\neg Q)$
+* $\neg (P \iff Q) \equiv P \iff (\neg Q)$
 
 ### Proving quantified statements
 
@@ -492,7 +499,12 @@ Prove that $\forall x \in \mb{Z}, 32 \nmid (a^2 + 3)(a^2 + 7) \implies 2 \mid a$
 > The contrapositive is $\forall x \in \mb{Z}, 2 \nmid a \implies 32 \mid (a^2 + 3)(a^2 + 7)$.  
 > Assume $2 \nmid a$.  
 > Clearly, $a$ can be written as $2k + 1, k \in \mb{Z}$.  
-> ;wip
+> Clearly, $(a^2 + 3)(a^2 + 7)$ is equivalent to $(4k^2 + 4k + 4)(4k^2 + 4k + 8)$, or $16(k^2 + k + 1)(k^2 + k + 2)$.  
+> CLearly, either $2 \mid k^2 + k + 1$ or $2 \mid k^2 + k + 2$.  
+> So $\exists l \in \mb{Z}, (k^2 + k + 1)(k^2 + k + 2) = 2l$.  
+> Clearly, $16(k^2 + k + 1)(k^2 + k + 2)$ is equivalent to $32l$.  
+> Clearly, $32 \mid 32l$, so $32 \mid (a^2 + 3)(a^2 + 7)$.  
+> Therefore, $\forall x \in \mb{Z}, 32 \nmid (a^2 + 3)(a^2 + 7) \implies 2 \mid a$.  
 
 The **inverse** of an implication $P \implies Q$ is $\neg P \implies \neg Q$. Like the converse, this is also very different from the original implication.
 
@@ -1328,8 +1340,10 @@ $x \equiv 2 \text{ or } 5 \pmod{6}$ ;wip
 Proposition: given $a, c, m \in \mb{Z}, m > 0$, with $d = \gcd(a, m)$:
 
 * the linear congruence $ax \equiv c \pmod{m}$ has a solution if and only if $d \mid c$
-* if it does have a solution $x_0$, then it has infinite solutions $x \equiv x_0 \pmod{\frac{m}{d}}$
+* if it does have a solution $x = x_0$, then its complete solution is $x \equiv x_0 \pmod{\frac{m}{d}}$
 * alternatively, we can write this as $x \equiv x_0, x_0 + \frac{m}{d} x_0 + 2\frac{m}{d}, \ldots, x_0 + (d - 1)\frac{m}{d}$.
+
+;wip: prove this
 
 Solve $4x \equiv 5 \pmod{21}$:
 
@@ -1340,10 +1354,28 @@ Solve $4x \equiv 5 \pmod{21}$:
 
 Solve $33x \equiv 6 \pmod{42}$:
 
-> The corresponding LDE is $33x + 42y = 6$
+> The corresponding LDE is $33x + 42y = 6$.  
 > A particular solution is $x_0 = -5, y_0 = 4$, found by EEA.  
 > So by LCT 1, the complete solution is $x = -5 + \frac{42}{3}n, n \in \mb{Z}$, or $x = 9 + 14n, n \in \mb{Z}$.  
 > So we write $x \equiv 9 \text{ or } 23 \text{ or } 37 \pmod{42}$.  
+
+### Linear Congruence Theorem, Version 2 (LCT 2)
+
+This is simply a reformulation of LCT 1 with congruence classes.
+
+Note that $ax \equiv c \pmod{m}$ is equivalent to $[a][x] = [c]$ in $\mb{Z}_m$.
+
+Proposition: given $a, c, m \in \mb{Z}, m > 0$, with $d = \gcd(a, m)$:
+
+* the linear congruence $ax \equiv c \pmod{m}$ has a solution if and only if $d \mid c$
+* if it does have a solution $x = x_0$, then its complete solution is $x = \set{[x_0], [x_0 + \frac{m}{d}], [x_0 + 2\frac{m}{d}], \ldots, [x_0 + (d - 1)\frac{m}{d}]}$ in $\mb{Z}_m$
+
+Together, we can say the following are equivalent to each other:
+
+* $[a][x] = [c]$ has a solution in $\mb{Z}_m$ - congruence class form
+* $ax \equiv c \pmod{m}$ has a solution - congruence form
+* $\exists x_0 \in \mb{Z}, ax_0 \equiv c \pmod{m}$ - solution form
+* $\exists x_0, y_0 \in \mb{Z}, ax_0 + my_0 = c$ - LDE form
 
 # 28/10/13
 
@@ -1428,7 +1460,7 @@ Proof:
 Fermat's Little Theorem (FLT)
 -----------------------------
 
-"Feir-mah" - Pierre de Fermat.
+"Fair-mah" - Pierre de Fermat.
 
 If $p$ is a prime number, $a \in \mb{Z}$, $p \nmid a$, then $a^{pp - 1} \equiv 1 \pmod{p}$.
 
@@ -1489,3 +1521,101 @@ Find the remainder when $8^{1000}$ is divided by 13:
 > So $8^{1000} \equiv 1 \cdot 1 \equiv 1 \pmod{13}$.  
 
 This only works in certain cases, but is occasionally useful.
+
+# 1/11/13
+
+Nonlinear (polynomial) Congruences
+----------------------------------
+
+$ax \equiv b$ is linear because $x$, the variable, only occurs in power 1 at the highest.
+
+Solve $x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}$:
+
+> Clearly, if $x_0$ is one solution and $x_1 \equiv x_0 \pmod{5}$, then $x_1^{43} \equiv x_0^{43} \pmod{5}$ and $x_1^9 \equiv x_0^9 \pmod{5}$, by PC.  
+> So $x_0^{43} + 28x_0^9 + 10x_0 \equiv x_1^{43} + 28x_1^9 + 10x_1 \equiv 1 \pmod{5}$.  
+> So if solutions exist, then the complete solution has one or more congruence classes mod 5. ;what?
+> So all we need to do is test all possible representatives: 0, 1, 2, 3, 4.
+> ;wip: evaluate it for all those values
+> We want to test the values for all possible representatives: $0^43$
+> Use Fermat's Little Theorem with two cases, $5 \mid x$ and $5 \nmmid x$, to prove $x^4 \equiv 1$ ;wip
+> Simplify: $28 \equiv 3 \pmod{5}$ and $10 \equiv 0 \pmod{5}$, so $x^{43} + 3x^9$.  
+> Clearly, $x^{43} \equiv x^4 x^{39} \equiv 1 x^{39}$, because $x^4 \equiv 1$.  
+> If we repeat this, we get $x^{39} \equiv x^{35} \equiv \ldots \equiv x^{3}$.  
+> Likewise, we can do this for $x^9$ to find that $x^9 \equiv x$.
+> So $x^{43} + 28x^9 + 10x \equiv x^3 + 3x \pmod{5}$.  
+;wip: rewrite this whole thing and do it properly
+
+In general, there is no theorem that allows us to solve these directly. However, we do know that we can always find any solutions that exist by testing all the the representatives mod 5, and we can use tricks like FLT to simplify expressions.
+
+Chinese Remainder Theorem
+-------------------------
+
+> An unknown number, when repeatedly divided by 3, the remainder is 2; by 5, the remainder is 3; and by 7, the remainder is 2. What is the number?
+
+- Sun Tsu
+
+This is a **system** of linear congruences.
+
+Essentially, we want to solve for $n$ in the system $\begin{cases}
+n \equiv 2 \pmod{3} \\
+n \equiv 3 \pmod{5} \\
+n \equiv 2 \pmod{7} \\
+\end{cases}$.
+
+A linear congruence of the form $x \equiv n \pmod{m}$ (where $a = 0$) always has solutions.
+
+We can always solve these systems when the moduli are pairwise coprime ;wip: why? prove it
+
+Solve the system:
+
+> Note that $n \equiv 2 \pmod{3} \iff 3 \mid n - 2 \iff \exists x \in \mb{Z}, n - 2 = 3x \iff n = 3x + 2$.  
+> Since $n \equiv 3 \pmod{5}$, $3x + 2 \equiv 3 \pmod{5} \iff 3x \equiv 1 \pmod{5}$.  
+> Solving for the linear congruence, we get $x \equiv 2 \pmod{5}$.  
+> So $5 \mid x - 2 \iff \exists y \in \mb{Z}, x - 2 = 5y \iff x = 5y + 2$.  
+> So $n = 3x + 2 = 3(5y + 2) + 2 = 15y + 8 \iff n - 8 = 15y \iff 15 \mid n - 8$.  
+> So $n \equiv 8 \pmod{15}$.  
+
+> Note that we simplified two congruences into one. Now we have a system of two congruences again, $\begin{cases}
+n \equiv 8 \pmod{15} \\
+n \equiv 2 \pmod{7} \\
+\end{cases}$.  
+> We apply the same technique again.  
+> Note that $n \equiv 8 \pmod{15} \iff 15 \mid n - 8 \iff \exists x \in \mb{Z}, n - 8 = 15x \iff n = 15x + 8$.  
+> Since $n \equiv 2 \pmod{7}$, $15x + 8 \equiv 2 \pmod{7} \iff 15x \equiv -6 \pmod{7}$.  
+> Solving for the linear congruence, we get $x \equiv 1 \pmod{7}$.  
+> So $7 \mid x - 1 \iff \exists y \in \mb{Z}, x - 1 = 7y \iff x = 7y + 1$.  
+> So $n = 15x + 8 = 15(7y + 1) + 8 = 105y + 23 \iff n - 23 = 105y \iff 105 \mid n - 23$.  
+> So $n \equiv 23 \pmod{105}$.  
+
+Proposition: Given integers $a_1$ and positive integers $m_1, m_2$, if $\gcd(m_1, m_2) = 1$, then the system $\begin{cases}
+n \equiv a_1 \pmod{m_1} \\
+n \equiv a_2 \pmod{m_2} \\
+\end{cases}$ has a unique solution mod $m_1 m_2$. So if $n = n_0$ is one solution, then the complete solution is $n \equiv n_0 \pmod{m_1 m_2}$.
+
+Basically, if we can find a single solution to a system of two linear congruences, then we can immediately write the complete solution.
+
+For more than two linear congruences, we can solve the first two, then solve for the solution and the third one, and then solve for that solution, and so on, until there is only one left.
+
+Application: if $a \in \mb{Z}, m_1, m_2 \in \mb{Z}, \gcd(m_1, m_2) = 1$, then $x \equiv a \pmod{m_1 m_1} \iff \begin{cases}
+x \equiv a \pmod{m_1} \\
+x \equiv a \pmod{m_2} \\
+\end{cases}$.
+
+;wip: prove this using LCT 1
+
+Solve $x^{43} + 28x^9 + 10x \equiv 1 \pmod{35}$:
+
+> We know that $35 = 5 \cdot 7$, and $\gcd(5, 7) = 1$.
+> So $x^{43} + 28x^9 + 10x \equiv 1 \pmod{35} \equiv \begin{cases}
+x^{43} + 28x^9 + 10x \equiv 1 \pmod{5} \\
+x^{43} + 28x^9 + 10x \equiv 1 \pmod{7} \\
+\end{cases}$.  
+> We already know that if $x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}$, then $x \equiv 3 \or 4 \pmod{5}$.  
+> ;wip: solve for mod 7
+> Now we resolve the cases: either $\begin{cases}
+x \equiv 3 \pmod{5} \\
+x \equiv 2 \pmod{7} \\
+\end{cases}$ or $\begin{cases}
+x \equiv 4 \pmod{5} \\
+x \equiv 2 \pmod{7} \\
+\end{cases}$.  

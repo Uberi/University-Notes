@@ -806,6 +806,8 @@ Prove that $\ln x = 3 - 2x$ has at least one real root.
 
 This is a trancendental function and cannot be solved analytically.
 
+;wip: prove this theorem
+
 ### Bisection method
 
 We can use the bisection to get a better approximation. Currently, we know the root is in $[1, 2]$.
@@ -1667,8 +1669,60 @@ Find the absolute extrema of $f(x) = x^2 - 4x + 1$ on $[-1, 3]$:
 > Clearly, $f(2) = -3, f(-1) = 6, f(3) = -2$.  
 > So the absolute minimum is $f(2) = -3$, and the absolute maximum is $f(-1) = 6$
 
-### Rolles theorem
+### Rolle's theorem
 
 If $f$ is continuous over $[a, b]$, differentiable over $(a, b)$, and $f(a) = f(b)$, then $\exists c \in (a, b), f'(c) = 0$.
 
 Used to prove mean value theorem.
+
+# 1/11/13
+
+Mean Value Theorem (MVT)
+------------------------
+
+Suppose the function $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$. Then $\exists c \in (a, b), f'(c) = \frac{f(b) - f(a)}{b - a}$.
+
+In other words, there is at least one point at which the slope of the tangent is equal to the slope of the secant of the endpoints - there must be at least one place where the instantaneous rate of change is equal to the average rate of change.
+
+There could be multiple points where this is true. For example, a line's secant and tangent slopes are always equal. MVT simple states there must be at least one.
+
+Proof:
+
+> Let $f$ be continuous on $[a, b]$ and differentiable on $(a, b)$.  
+> Clearly, the equation of the secant line joining points $(a, f(a))$ and $(b, f(b))$ is $y = \frac{f(b) - f(a)}{b - a}(x - a) + f(a)$.  
+> Construct $g(x) = f(x) - y$. The secant is continuous and differentiable everywhere, so $g(x)$ is continuous on $[a, b]$ and differentiable on $(a, b)$.  
+> Note that by definition, $f(x) = y$ at $x = a$ and $x = b$.  
+> So $g(a) = 0 = g(b)$, and by Rolle's theorem, $\exists c \in (a, b), g'(c) = 0$.  
+> So $\exists c \in (a, b), f'(c) - y' = 0$, or $\exists c \in (a, b), f'(c) = y' = \frac{f(b) - f(a)}{b - a}$.  
+
+Find $x$ where $f'(c) = \frac{f(3) - f(1)}{3 - 1}$ for $f(x) = x^3$ over $[1, 3]$:
+
+> $$
+\begin{align}
+3x^2 &= \frac{27 - 1}{2} \\
+x = \sqrt{\frac{26}{6}} &= \sqrt{\frac{13}{3}} \\
+\end{align}
+$$
+
+The MVT is important because of its use in proving the **fundemental theorem of calculus** and **Taylor's Theorem with Lagrange remainder**, the two most important theorems in calculus. It is also used to prove several other results.
+
+### Constant Function Theorem
+
+If $f'(x) = 0$ for all $x$ in $(a, b)$, then $f$ is a constant function ($f(x) = k$).
+
+> Note that $f'(x) = k$ if and only if for an arbitrary $x_1, x_2 \in (a, b), x_1 < x_2$, $f(x_1) = f(x_2)$.  
+> Since $f$ is differentiable on $(a, b)$, then $f$ is differentiable on $(x_1, x_2)$ and continuous on $[x_1, x_2]$.  
+> By the MVT, $\exists c \in [x_1, x_2], f'(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}$.  
+> Since $f(c) = 0$, $\frac{f(x_2) - f(x_1)}{x_2 - x_1} = 0$.  
+> Since $x_1, x_2$ are arbitrary, $\forall x_1, x_2 \in (a, b), x_1 < x_2, f(x_1) = f(x_2)$.  
+> Therefore, the function is constant.  
+
+### Unnamed Theorem
+
+If $f'(x) = g'(x)$ over $(a, b)$, then $f(x) = g(x) + c$.
+
+Proof:
+
+> Let $h(x) = f(x) - g(x)$.
+> So $h'(x) = f'(x) - g'(x) = 0$.  
+> So by the constant function theorem, $h(x) = c$, and $f(x) = g(x) + c$.  
