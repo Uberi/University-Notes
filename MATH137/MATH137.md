@@ -1726,3 +1726,85 @@ Proof:
 > Let $h(x) = f(x) - g(x)$.
 > So $h'(x) = f'(x) - g'(x) = 0$.  
 > So by the constant function theorem, $h(x) = c$, and $f(x) = g(x) + c$.  
+
+# 4/11/13
+
+### Increasing/Decreasing Function Theorem
+
+If $f'(x) > 0$ over $(a, b)$, then $f$ is increasing on $(a, b)$.
+
+If $f'(x) < 0$ over $(a, b)$, then $f$ is decreasing on $(a, b)$.
+
+Proof:
+
+> Let $x_1, x_2 \in (a, b)$, and $x_1 < x_2$.  
+> Assume $f'(x) > 0$ over $(a, b)$.  
+> Since $f'(x)$ exists, $f$ is differentiable and continuous over $(a, b)$ and $[x_1, x_2]$.  
+> By the MVT, $\exists c \in (x_1, x_2), f'(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}$.  
+> Clearly, $\forall x \in (a, b), f'(c) > 0$.  
+> So $\frac{f(x_2) - f(x_1)}{x_2 - x_1} > 0$, and $f(x_2) - f(x_1) > 0$, or $f(x_2) > f(x_1)$.  
+> So for arbitrary $x_1, x_2 \in (a, b), x_1 < x_2 \iff f(x_1) < f(x_2)$, the definition of an increasing function.  
+> The proof for decreasing function follows the same technique and is left as an exercise.  
+
+We can use these results to classify critical numbers.
+
+Recall that if $f$ has a local extreme at $x = c$, then $c$ is a critical number, although the converse can be false.
+
+First Derivative Test
+---------------------
+
+Suppose $c$ is a critical number of $f$.
+
+If $f' > 0$ to the left of $c$ and $f' < 0$ to the right of $c$, then $f$ has a **local maximum** at $c$.
+
+If $f' < 0$ to the left of $c$ and $f' > 0$ to the right of $c$, then $f$ has a **local minimum** at $c$.
+
+If $f'$ does not change sign, then $f$ has no local extrema at $c$.
+
+Find the intervals of increase/decrease and classify the critical numbers of $f(x) = x^4 - 2x^2 + 3$:
+
+> Clearly, $f'(x) = 4x^3 - 4x$.  
+> When $f'(x) = 0 = 4x(x - 1)(x + 1)$, $x = -1, 0, 1$.  
+> Clearly, $f'(x)$ is defined over $\mb{R}$.  
+> Note that the critical numbers divide the number line into the intervals $(-\infty, -1), (-1, 0), (0, 1), (1, \infty)$.  
+> We test the derivative in these intervals to obtain $f'(-2) = -24, f(-0.5) = 1.5, f(0.5) = -1.5, f(2) = 24$.  
+> So the function is increasing over $(-1, 0) \cup (1, \infty)$ and decreasing over $(-infty, -1) \cup (0, 1)$.  
+> So $x = -1, 1$ are local minima and $x = 0$ is a local maximum.  
+
+Second Derivative Test
+----------------------
+
+Concavity is defined in terms of where the graph sits in terms of its tangent line.
+
+A **concave up** function is always above at at its tangent line. Likewise, a **concave down** function is always below its tangent line.
+
+We usually think about this in terms of the second derivative. $f''(x) > 0$ means the function is concave up at $x$, and $f''(x) < 0$ means the function is concave down at $x$.
+
+A point $y = f(x)$ is a **point of inflection** if and only if the function changes concavity. This is not necessarily the same thing as $f''(x) = 0$ since the sign may not change.
+
+For example, $f(x) = x^3$ has a point of inflection at $(0, 0)$ since $f''(x) = 6x$ and $f''(x) < 0$ when $x < 0$ and $f''(x) > 0$ when $x > 0$.
+
+Theorem: if $(c, f(c))$ is a point of inflection, then $f''(x) = 0$, or $f''(x)$ does not exist.
+
+However, the converse can be false. For example, consider $f(x) = 0$ or $f(x) = x^4$.
+
+The **second derivaive test** allows us to classify critical numbers using concavity.
+
+Suppose $f''(x)$ is continuous near $c$ and that $f'(c) = 0$.
+
+If $f''(c) > 0$, then $f$ has a **local minimum** at $c$.
+
+If $f''(c) < 0$, then $f$ has a **local maximum** at $c$.
+
+If $f''(c) = 0$ or $f''(c)$ does not exist, the test is inconclusive.
+
+Find the inflection points and intervals of concavity of $f(x) = x^4 - 2x^2 + 3$, and verify the local extrema found previously:
+
+> Clearly, $f'(x) = 4x^3 - 4x$ and $f''(x) = 12x^2 - 4$.  
+> When $f''(x) = 0$, $x = -\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}}$.  
+> Clearly, $f'(x)$ and $f''(x)$ are defined over $\mb{R}$.  
+> Clearly, the number line is divided into the intervals $(-infty, -\sqrt{\frac{1}{3}}), (-\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}}), (\sqrt{\frac{1}{3}}, \infty)$.  
+> We test the second derivative in these intervals to obtain $f''(-1) = 8, f''(0) = -4, f''(1) = 8$.  
+> So the function is concave up over $(-infty, -\sqrt{\frac{1}{3}}), (\sqrt{\frac{1}{3}}, \infty)$ and concave down over $(-\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}})$.
+> So there are points of inflection at $(-\sqrt{\frac{1}{3}}, \frac{22}{9}), (\sqrt{\frac{1}{3}}, \frac{22}{9})$.  
+> Clearly, $f''(-1) > 0, f''(0) < 0, f''(1) > 0$, so the local extrema found previously are correct.

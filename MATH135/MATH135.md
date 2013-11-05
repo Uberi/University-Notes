@@ -981,7 +981,7 @@ Proposition: for any integers $a, b, d$, if $d \mid ab$ and $\gcd(d, a) = 1$, th
 Proof:
 
 > Let $a, b, d$ be arbitrary integers.  
-> Assume d \mid ab$ and $\gcd(d, a) = 1$.  
+> Assume $d \mid ab$ and $\gcd(d, a) = 1$.  
 > We want to prove $d \mid b$.  
 > By EEA, $\exists x, y \in \mb{Z}, dx + ay = 1$.  
 > Clearly, this is equivalent $b(dx + ay) = b$.  
@@ -1462,7 +1462,7 @@ Fermat's Little Theorem (FLT)
 
 "Fair-mah" - Pierre de Fermat.
 
-If $p$ is a prime number, $a \in \mb{Z}$, $p \nmid a$, then $a^{pp - 1} \equiv 1 \pmod{p}$.
+If $p$ is a prime number, $a \in \mb{Z}$, $p \nmid a$, then $a^{p - 1} \equiv 1 \pmod{p}$.
 
 In other words, if $p$ is prime, $[a] \in \mb{Z}_p \wedge [a] \ne 0 \implies [a]^{p - 1} = [1]$.
 
@@ -1501,7 +1501,7 @@ Proof:
 > We will prove this claim by contradiction.  
 > Suppose $p \mid 1 \cdot 2 \cdot \ldots \cdot (p - 1)$.  
 > Then $p \mid (1 \cdot 2 \cdot \ldots (p - 2))$ or $p \mid (p - 1)$, by PAD.  
-> Clearly, $p \nmid (p - 1)$, so $p \mid $1 \cdot 2 \cdot \ldots (p - 2)$.  
+> Clearly, $p \nmid (p - 1)$, so $p \mid 1 \cdot 2 \cdot \ldots (p - 2)$.  
 > By applying this repeatedly, we find that $p \nmid p - 2, p \nmid p - 3, \ldots, p \nmid 2$, and $p \mid 1$.  
 > But this is impossible, since $p \nmid 1$, by BBD.  
 > So the claim is true.  
@@ -1610,7 +1610,7 @@ Solve $x^{43} + 28x^9 + 10x \equiv 1 \pmod{35}$:
 x^{43} + 28x^9 + 10x \equiv 1 \pmod{5} \\
 x^{43} + 28x^9 + 10x \equiv 1 \pmod{7} \\
 \end{cases}$.  
-> We already know that if $x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}$, then $x \equiv 3 \or 4 \pmod{5}$.  
+> We already know that if $x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}$, then $x \equiv 3 \text{ or } 4 \pmod{5}$.  
 > ;wip: solve for mod 7
 > Now we resolve the cases: either $\begin{cases}
 x \equiv 3 \pmod{5} \\
@@ -1645,7 +1645,7 @@ Proof:
 > We need these to be positive so we can use them in exponents.  
 > Clearly, $x^r = x^{k{p - 1} + s}$.  
 > Either $p \mid x$ or $p \nmid x$.  
-> If $p \nmid x$, then FLT states $x^{p - 1} \equiv 1$ and $(x^{p - 1})^k \equiv 1^k \equiv 1.  
+> If $p \nmid x$, then FLT states $x^{p - 1} \equiv 1$ and $(x^{p - 1})^k \equiv 1^k \equiv 1$.  
 > So $x^r = (x^{p - 1}) \cdot x^s \equiv 1 \cdot x^s \equiv x^s$.  
 > If $p \mid x$, then $x \equiv 0 \pmod{p}$ and $x^r = 0^r = 0 = x^s$.  
 

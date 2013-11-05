@@ -1579,6 +1579,102 @@ A OtherThing is one of:
               [else (insert (first list) (sort (rest list)))])))
 ;; Tests:
 ;; OMITTED FOR BREVITY</code></pre>
+<h1 id="section-13">5/11/13</h1>
+<p>Functions are <strong>first-class values</strong>. This means functions can be passed as arguments to other functions, returned as values, and otherwise treated just like other values like numbers or strings.</p>
+<p>Consider the sorting funtion example shown previously. What would we need to change to make it work with strings rather than numbers?</p>
+<pre><code>(define (sort list)
+    (local [;; insert: Num (listof Num) -&gt; (listof Num)
+            ;; Purpose: produces `list` with `element` inserted in sorted order
+            (define (insert element list)
+                (cond [(empty? list) (cons element empty)]
+                      [(string&lt;=? element (first list)) (cons element list)]
+                      [else (cons (first list) (insert element (rest list)))]))]
+        (cond [(empty? list) empty]
+              [else (insert (first list) (sort (rest list)))])))</code></pre>
+<p>This is not very elegant - for every type, we need to define a new function.</p>
+<h2 id="abstract-list-functions">Abstract List Functions</h2>
+<h3 id="sort">Sort</h3>
+<p>Instead, we can pass a comparison function as an argument to the sort, which will <strong>abstract</strong> away the details of comparison:</p>
+<pre><code>;;sort: (X X -&gt; Boolean) (listof X) -&gt; (listof X)
+(define (sort list less-equal?)
+    (local [;; insert: Num (listof Num) -&gt; (listof Num)
+            ;; Purpose: produces `list` with `element` inserted in sorted order
+            (define (insert element list)
+                (cond [(empty? list) (cons element empty)]
+                      [(less-equal? element (first list)) (cons element list)]
+                      [else (cons (first list) (insert element (rest list)))]))]
+        (cond [(empty? list) empty]
+              [else (insert (first list) (sort (rest list) less-equal))])))</code></pre>
+<p>Note the use of <code>X</code> to represent a particular type (that is possibly a union), in order to show that the input types and output types are the same.</p>
+<p>We also used <code>(X X -&gt; Boolean)</code> to represent a function type</p>
+<p>Now we can call the function thus</p>
+<pre><code>(sort (&quot;b&quot; &quot;d&quot; &quot;a&quot; &quot;c&quot;) string&lt;=?)
+(sort (5 2 9 1 3) &lt;=)</code></pre>
+<p>We can also define custom comparators:</p>
+<pre><code>(define (posn-less-equal? p1 p2)
+    (&lt;= (+ (sqr (posn-x p1)) (sqr (posn-y p1)))
+        (+ (sqr (posn-x p2)) (sqr (posn-y p2)))))
+(sort (list (make-posn 1 2) (make-posn 4 3) (make-posn 0 0))) -&gt; (list (make-posn 0 0) (make-posn 1 2) (make-posn 4 3))</code></pre>
+<p>The built-in function <code>(quicksort list less-equal?)</code> does the same thing. These are <strong>abstract list functions</strong> - they work on a whole class of lists.</p>
+<h3 id="map">Map</h3>
+<p>Using this technique, we find that there are a lot of different abstract list operations that we often do. For example, applying a function to every element in a list:</p>
+<pre><code>;; map: (X -&gt; Y) (listof X) -&gt; (listof Y)
+(define (map f list)
+    (cond [(empty? list) empty]
+          [else (cons (f (first list)) (map f (rest list)))]))</code></pre>
+<p>Note that <code>map</code> is also a built-in function that does the same thing.</p>
+<p>How do we use this?</p>
+<pre><code>(map sqr &#39;(1 2 3 4 5)) -&gt; &#39;(1 4 9 16 25)
+(map even? &#39;(1 2 3 4 5)) -&gt; &#39;(#f #t #f #t #f)</code></pre>
+<h3 id="filter">Filter</h3>
+<p>Another example is removing elements that do not fit a certain criteria:</p>
+<pre><code>;; filter: (X -&gt; Boolean) (listof X) -&gt; (listof X)
+(define (filter keep? list)
+    (cond [(empty? list) empty]
+          [(keep? (first list)) (cons (f (first list)) (map f (rest list)))]
+          [else (filter keep? (rest list))]))</code></pre>
+<p>Note that <code>filter</code> is also a built-in function that does the same thing.</p>
+<p>How do we use this?</p>
+<p>(filter negative? '(1 -5 -7 3 0)) -&gt; '(-5 -7) (filter #t '(1 2 3 4 5)) -&gt; '(1 2 3 4 5) (list-&gt;string (filter char-alphabetic? (string-&gt;list &quot;a89erha ae 23*%$%44 yusdh&quot;))) -&gt; &quot;aerhaaeyusdh&quot;</p>
+<h3 id="fold-right">Fold Right</h3>
+<p>How do we add up a list of numbers?</p>
+<pre><code>;; total: (listof Num) -&gt; Num
+(define (total lon)
+    (cond [(empty? lon) 0]
+          [else (+ (first lon) (total (rest lon)))]))</code></pre>
+<p>This basic form is also used in <code>make-acronym</code>, as well as many other places. How do we abstract this?</p>
+<p>An abstract list function could apply a function to the first element of a list and the result of applying it to the rest of the list:</p>
+<pre><code>foldr: (X Y -&gt; Y) Y (listof X) -&gt; Y
+(define (foldr f base-case list)
+    (cond [(empty? list) base-case]
+          [else (f (first list) (foldr f base-case (rest list)))]))</code></pre>
+<p>Note that <code>foldr</code> is also a built-in function that does the same thing.</p>
+<p>How do we use this?</p>
+<pre><code>(foldr + 0 &#39;(5 2 3 7)) -&gt; 17
+
+(define (glue-first word acronym)
+    (string-append (substring word 0 1) acronym))
+(foldr glue-first &quot;&quot; &#39;(&quot;Kentucky&quot; &quot;Fried&quot; &quot;Chicken&quot;)) -&gt; &quot;KFC&quot;</code></pre>
+<h3 id="fold-left">Fold Left</h3>
+<p>This is less commonly used.</p>
+<p>We can implement it as follows:</p>
+<pre><code>foldl: (Y X -&gt; Y) Y (listof X) -&gt; Y
+(define (foldl f base-case list)
+    (local [;; fold-from-left: (Y X -&gt; Y) Y (listof X) -&gt; Y
+            (define (fold-from-left f previous list)
+                (cond [(empty? list) previous]
+                      [else (fold-from-left f (f previous (first list)) (rest list))]))]
+        (fold-from-left f base-case list)))</code></pre>
+<p>Consider the original <code>elements-more-than</code> in assignment 4, question 2a. Now we can write it much more simply using the abstract list functions:</p>
+<pre><code>;; elements-more-than: (listof Num) -&gt; (listof Num)
+;; Purpose: produces the elements of `lon` strictly greater than `n`
+(define (elements-more-than lon n)
+    (local [;; keep?: Num -&gt; Boolean
+            ;; Purpose: produces `true` if `number` is greater than `n` ;wip: figure out how to refer to `n`
+            (define (keep? number)
+                (&gt; number n))]
+           (filter keep? lon)))</code></pre>
+<p>From now on, we should use the abstract list function whenever possible, rather than dealing with <code>first</code> and <code>rest</code>. The opposite of abstract list functions is <strong>explicit recursion</strong>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

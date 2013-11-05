@@ -633,7 +633,7 @@ Review
 Justified True Belief (JTB)
 ---------------------------
 
-For a belief to be knowledge, it can't just be true by coincidence, it has to be:
+It is generally accepted that for a belief to be knowledge, it can't just be true by coincidence, it has to be:
 
 * Justified: the belief must be supported by something
 * True: it must be true
@@ -682,21 +682,27 @@ For example, "I believe that I like chocolate" is a belief.
 S knows that P
 --------------
 
-> $S$ knows that $P$.  
-> I know that the desk is solid.  
+This is a common form of statement.
 
-$S$ is the holder of the knowledge. $P$ is a statement.
+> $S$ knows that $P$.  
+> **I** know that **the desk is solid**.  
+
+$S$ is the holder of the knowledge. $P$ is a statement describing something $S$ knows.
 
 For Descartes and Locke, they assume that $S$ is themselves, and that the same thing applies to others.
 
-For them, $S$ is everyone.
+For them, $S$ is everyone - we can slot in any person as $S$.
+
+Lorraine Code criticized this, asking whether who $S$ is affects $P$.
 
 Lorraine Code
 -------------
 
-Influential contemporary philosopher.
+Influential contemporary philosopher - wrote CODE in 1981.
 
 Lorraine Code's contribution was asking, is the value of $S$ significant? Would it matter if $S$ was a man or a woman? If $S$ was of a minority?
+
+Does the gender of $S$ affect $P$?
 
 > Is the sex of the knower epistemologically significant?
 
@@ -708,18 +714,96 @@ When a lot of philosophers talk about $S$ being a rational knower, they were mak
 
 However, this rules out a bunch of people. We can only say something is true for those people who fit the criteria. Can we extend this to include more people?
 
-So **knowledge is dependent on the knower**.
-
-The identity of $S$ is significant.
+So **knowledge is dependent on the knower** - the identity of $S$ is significant.
 
 Instead of asking "why is the chalk white?", we should instead ask questions that have more of a bearing on human well-being.
 
 > How do we know other people? What does it mean to know someone?
 
-A **situated knower** is a particular $S$, a knower with a particular background and context. **Situated knowledge** is knowledge that reflects the particular background and context of a situated knower.
+### Situated Knowers
+
+Before, $S$ is a general everyman. A **situated knower** is a particular $S$, a knower with a particular background and context - what is it about one's situation that affects what and how one knows?
+
+For example, an upper class white woman is a situated knower.
+
+**Situated knowledge** is knowledge that reflects the particular background and context of a situated knower - knowledge specific to a certain situation.
 
 For example, bats can know things that humans can never know because we can't echolocate.
 
 An example within humans might be women being more cautious situationally due to a greater risk of violence against women, compared to men. This impacts the way people see the world. For example, women might be more likely to know that the windows are locked, due to increased situational awareness.
 
 Some people are in a better position to know certain things than others.
+
+# 5/11/13
+
+Focus now switches to **feminist epistemology** - the way gender does and ought to influence our concepts of knowledge, the knower, and how we acquire knowledge.
+
+Before this, we focused on the "knows that" part of "$S$ knows that $P$". Feminist philosophy additionally asks "who is $S$?" and "how does $S$ affect the knowing?"
+
+Why does what one person says sound correct to that person?
+
+;wip: PHIL110A quiz 2 covers everything up to but not including Popper
+
+**Intersectionality** is the study of the intersections between different groups of minorities - the study of interactions between multiple systems of discrimination or oppression.
+
+;wip: philosophy of the mind
+
+## The Knower
+
+Lorraine Code asks us to look at the nature of the people who know.
+
+Now $S$ is an actual person. We assume these people **have bodies**, and that these bodies affect how we think and how we know.
+
+$S$ has a **social** location - where your place is in society, the social groups that affect who $S$ is.
+
+$S$ also has a **material** location - where your body is physically located.
+
+The material location and social location has a significant influence on $P$. Race, class, gender, economic status, community, all affect social location.
+
+The **interests** of $S$ - the goals that they stand for influences $P$.
+
+**Credibility** is the measure of confidence of one's peers in oneself. People make a lot of judgements based on the information available to them.
+
+We want to think about the social and material locations, interests, and credibility of $S$, and how this affects what and how $S$ knows.
+
+### Knowledge is relational
+
+Code changes the examples that we use for $P$. How do I know my friends?
+
+This is a different meaning of **know** - instead of "having information about", it means "having knowledge of other people", or having a relation with the other people.
+
+We know ourselves through our knowledge of others.
+
+;wip
+
+### Testimony, trust, credibility
+
+In a biology class, the textbook author or lecturer is testifying to the student.
+
+In fact, **most of the knowledge a person has is based on testimony**, rather than being derived from reason or observations as Descartes and Locke sought to.
+
+How are we justified in trusting the author? The author may have a PhD in the subject, and be an expert.
+
+The student's credibility affects the credibility of the teacher.
+
+The social position and material position of a person significantly affects credibility and trust.
+
+> My senses have before deceived me. Should I trust my senses? My friend has before deceived me. Should I trust my friend?
+
+Helen Longino
+-------------
+
+Knowledge is a **matter of degree**.
+
+Longino bridges epistemology to science. She switches the perspective from thinking about knowing something to thinking about **what we do to actually create knowledge**.
+
+> How did we figure that out?  
+> What did we do to arrive at this conclusion?  
+
+Longino is focused on the practice of obtaining knowledge.
+
+Longino shifts the thinking of knowledge from individuals to groups of people - "knowledge-collecting communities". As an individual, one cannot have high quality, due to our internal biases.
+
+In communities with various perspectives, we can mostly overcome our biases. We can see things from many perspectives to see as much of the issue as possible.
+
+Even scientists cannot uncover their own biases. The best way to uncover them is to have a discussion with someone who has a different set of biases.
