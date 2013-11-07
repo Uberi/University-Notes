@@ -1303,6 +1303,62 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <blockquote>
 <p>Clearly, <span class="math">\(f&#39;(x) = 4x^3 - 4x\)</span> and <span class="math">\(f&#39;&#39;(x) = 12x^2 - 4\)</span>.<br />When <span class="math">\(f&#39;&#39;(x) = 0\)</span>, <span class="math">\(x = -\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}}\)</span>.<br />Clearly, <span class="math">\(f&#39;(x)\)</span> and <span class="math">\(f&#39;&#39;(x)\)</span> are defined over <span class="math">\(\mb{R}\)</span>.<br />Clearly, the number line is divided into the intervals <span class="math">\((-infty, -\sqrt{\frac{1}{3}}), (-\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}}), (\sqrt{\frac{1}{3}}, \infty)\)</span>.<br />We test the second derivative in these intervals to obtain <span class="math">\(f&#39;&#39;(-1) = 8, f&#39;&#39;(0) = -4, f&#39;&#39;(1) = 8\)</span>.<br />So the function is concave up over <span class="math">\((-infty, -\sqrt{\frac{1}{3}}), (\sqrt{\frac{1}{3}}, \infty)\)</span> and concave down over <span class="math">\((-\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}})\)</span>. So there are points of inflection at <span class="math">\((-\sqrt{\frac{1}{3}}, \frac{22}{9}), (\sqrt{\frac{1}{3}}, \frac{22}{9})\)</span>.<br />Clearly, <span class="math">\(f&#39;&#39;(-1) &gt; 0, f&#39;&#39;(0) &lt; 0, f&#39;&#39;(1) &gt; 0\)</span>, so the local extrema found previously are correct.</p>
 </blockquote>
+<h1 id="section-23">6/11/13</h1>
+<h2 id="indeterminate-forms-and-lhôpitals-rule">Indeterminate Forms and l'Hôpital's Rule</h2>
+<p>We have seen previously the limits <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x} = 1\)</span> and <span class="math">\(\lim_{x \to \infty} \frac{x^2 - 1}{2x^2 + 4x + 1} = \frac{1}{2}\)</span>.</p>
+<p>If we just plug in the limit value, we get <span class="math">\(\frac{0}{0}\)</span> or <span class="math">\(\frac{infty}{\infty}\)</span>, which are <strong>indeterminate forms</strong> - in the form that they are in, we cannot evaluate it.</p>
+<p>We need some other way of making them solvable.</p>
+<p>L'Hôpital's rule is a very general method of removing indeterminate forms</p>
+<h3 id="lhôpitals-rule">L'Hôpital's Rule</h3>
+<p>If <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span> are differentiable and <span class="math">\(g&#39;(x) \ne 0\)</span> near <span class="math">\(a\)</span> (though the value at <span class="math">\(a\)</span> is unimportant), and one of the following is true:</p>
+<ul>
+<li><span class="math">\(\lim_{x \to a} f(x) = 0 = \lim_{x \to a} g(x)\)</span></li>
+<li><span class="math">\(\lim_{x \to a} f(x) = \pm \infty = \lim_{x \to a} g(x)\)</span></li>
+</ul>
+<p>Then <span class="math">\(\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{f&#39;(x)}{g&#39;(x)}\)</span>.</p>
+<p>Proof of this is beyond this course, so let's just assume it's true for now.</p>
+<p>The rule works even if <span class="math">\(a\)</span> is infinite, and works with one-sided limits too.</p>
+<p>Note that it <strong>only works for the indeterminate forms</strong> <span class="math">\(\frac{0}{0}\)</span> and <span class="math">\(\frac{\infty}{\infty}\)</span>.</p>
+<p>Now we have a much easier way of evaluating <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x}\)</span>:</p>
+<blockquote>
+<p><span class="math">\[\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{\cos x}{1} = 1\]</span></p>
+</blockquote>
+<p>Consider <span class="math">\(\lim_{x \to \infty} \frac{x^n}{e^x} = 0, n \in \mb{N}\)</span>:</p>
+<blockquote>
+<p>If <span class="math">\(n = 1\)</span>, then <span class="math">\(\lim_{x \to \infty} \frac{nx^{n - 1}}{e^x} = 0\)</span>.<br />Otherwise, we get the indeterminate form <span class="math">\(\frac{\infty}{\infty}\)</span> and <span class="math">\(\lim_{x \to \infty} \frac{nx^{n - 1}}{e^x} = \lim_{x \to \infty} \frac{n(n - 1)x^{n - 2}}{e^x}\)</span>.<br />If <span class="math">\(n = 2\)</span>, then <span class="math">\(\lim_{x \to \infty} \frac{n(n - 1)x^{n - 2}}{e^x} = 0\)</span>.<br />Otherwise, we get the indeterminate form <span class="math">\(\frac{\infty}{\infty}\)</span> and <span class="math">\(\lim_{x \to \infty} \frac{n(n - 1)x^{n - 2}}{e^x} = \lim_{x \to \infty} \frac{n(n - 1)(n - 2)x^{n - 3}}{e^x}\)</span>.<br />If <span class="math">\(n = 3\)</span>, then <span class="math">\(\lim_{x \to \infty} \frac{n(n - 1)(n - 2)x^{n - 3}}{e^x} = 0\)</span>.<br />In fact, this applies to all <span class="math">\(n\)</span>, and <span class="math">\(\lim_{x \to \infty} \frac{x^n}{e^x} = 0\)</span>. We could potentially prove this through induction.</p>
+</blockquote>
+<p>This shows that <strong>exponential functions grow faster than polynomial functions</strong>.</p>
+<p>Consider <span class="math">\(\lim_{x \to \infty} \frac{\ln x}{x^n} = 0, n \in \mb{N}\)</span>:</p>
+<blockquote>
+<p>Indeterminate form <span class="math">\(\frac{\infty}{\infty}\)</span>.<br /><span class="math">\(\lim_{x \to \infty} \frac{\ln x}{x^n} = \lim_{x \to \infty} \frac{1}{nx^n} = \frac{1}{\infty} = 0\)</span>.</p>
+</blockquote>
+<p>This shows that <strong>logarithmic functions grow slower than polynomial functions</strong>.</p>
+<h3 id="other-indeterminate-forms">Other indeterminate forms</h3>
+<p><span class="math">\(0 \cdot \infty\)</span> is a common indeterminate form.</p>
+<p>Consider <span class="math">\(\lim_{x \to a} f(x) g(x)\)</span> where <span class="math">\(\lim_{x \to a} f(x) = 0\)</span> and <span class="math">\(\lim_{x \to a} g(x) = \pm \infty\)</span>.</p>
+<p>We can rewrite this as <span class="math">\(\lim_{x \to a} \frac{f(x)}{\frac{1}{g(x)}}\)</span> or <span class="math">\(\lim_{x \to a} \frac{g(x)}{\frac{1}{f(x)}}\)</span>. Now we can apply l'Hôpital's rule.</p>
+<p>Evaluate <span class="math">\(\lim_{x \to 0^+} x \ln x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\lim_{x \to 0^+} x \ln x = \lim_{x \to 0^+} \frac{\ln x}{\frac{1}{x}}\)</span>.<br />Indeterminate form <span class="math">\(\frac{\infty}{\infty}\)</span>.<br />So <span class="math">\(\lim_{x \to 0^+} \frac{\ln x}{\frac{1}{x}} = \lim_{x \to 0^+} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \to 0^+} -x = 0\)</span>.</p>
+</blockquote>
+<p><span class="math">\(\infty - \infty\)</span> is another indeterminate form.</p>
+<p>We want to write this as a fraction. This is not always possible, but is occasionally.</p>
+<p>Consider <span class="math">\(\lim_{x \to 0} \frac{1}{x} - \frac{1}{\sin x}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\lim_{x \to 0} \frac{1}{x} - \frac{1}{\sin x} = \lim_{x \to 0} \frac{\sin x - x}{x \sin x}\)</span>.<br />Indeterminate form <span class="math">\(\frac{0}{0}\)</span>.<br />Clearly, <span class="math">\(\lim_{x \to 0} \frac{\sin x - x}{x \sin x} = \lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x}\)</span>.<br />Indeterminate form <span class="math">\(\frac{0}{0}\)</span>/<br />Clearly, <span class="math">\(\lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x} = \lim_{x \to 0} \frac{-\sin x}{2 \cos x - x \sin x} = 0\)</span></p>
+</blockquote>
+<h3 id="indeterminate-powers">Indeterminate powers</h3>
+<p><span class="math">\(0^0\)</span>, <span class="math">\(\infty^0\)</span>, and <span class="math">\(1^\infty\)</span> are indeterminate.</p>
+<p><span class="math">\(0^\infty\)</span> and <span class="math">\(\infty^\infty\)</span> are determinate.</p>
+<p>Consider <span class="math">\(\lim_{x \to a} f(x)^{g(x)}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\lim_{x \to a} f(x)^{g(x)} = \lim_{x \to a} e^{\ln f(x)^{g(x)}} = \lim_{x \to a} e^{g(x) \ln f(x)} = e^{\lim_{x \to a} g(x) \ln f(x)}\)</span>.<br />Note that <span class="math">\(\lim_{x \to a} g(x) \ln f(x)\)</span> can be infinite too.</p>
+</blockquote>
+<p>Depending on how <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span> approach their values, the resulting limit differs. So it is indeterminate because there is no determinate value.</p>
+<p>Evaluate <span class="math">\(\lim_{x \to 0} (1 - 2x)^\frac{1}{x}\)</span>:</p>
+<blockquote>
+<p><span class="math">\(\lim_{x \to 0} (1 - 2x)^\frac{1}{x} = e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}}\)</span>.<br />Indeterminate form <span class="math">\(\frac{\infty}{\infty}\)</span>.<br />Clearly, <span class="math">\(e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}} = e^{\lim_{x \to 0} \frac{\frac{-2}{1 - 2x}}{1}} = \frac{1}{e^2}\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

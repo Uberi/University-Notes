@@ -1020,6 +1020,8 @@ Proof:
 
 ## Primes and Divisibility (PAD)
 
+Commonly known as **Euclid's Lemma**.
+
 Corollary: given integers $p, a, b$, if $p$ is prime and $p \mid ab$, then $p \mid a \vee p \mid b$.
 
 > Let $p, a, b$ be arbitrary integers.  
@@ -1537,7 +1539,7 @@ Solve $x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}$:
 > So all we need to do is test all possible representatives: 0, 1, 2, 3, 4.
 > ;wip: evaluate it for all those values
 > We want to test the values for all possible representatives: $0^43$
-> Use Fermat's Little Theorem with two cases, $5 \mid x$ and $5 \nmmid x$, to prove $x^4 \equiv 1$ ;wip
+> Use Fermat's Little Theorem with two cases, $5 \mid x$ and $5 \nmid x$, to prove $x^4 \equiv 1$ ;wip
 > Simplify: $28 \equiv 3 \pmod{5}$ and $10 \equiv 0 \pmod{5}$, so $x^{43} + 3x^9$.  
 > Clearly, $x^{43} \equiv x^4 x^{39} \equiv 1 x^{39}$, because $x^4 \equiv 1$.  
 > If we repeat this, we get $x^{39} \equiv x^{35} \equiv \ldots \equiv x^{3}$.  
@@ -1601,6 +1603,10 @@ x \equiv a \pmod{m_1} \\
 x \equiv a \pmod{m_2} \\
 \end{cases}$.
 
+In other words, the solutions to a system of congruences with coprime moduli are also the solutions to the congruence with the product of the moduli.
+
+Solving one is equivalent to solving the other.
+
 ;wip: prove this using LCT 1
 
 Solve $x^{43} + 28x^9 + 10x \equiv 1 \pmod{35}$:
@@ -1610,8 +1616,16 @@ Solve $x^{43} + 28x^9 + 10x \equiv 1 \pmod{35}$:
 x^{43} + 28x^9 + 10x \equiv 1 \pmod{5} \\
 x^{43} + 28x^9 + 10x \equiv 1 \pmod{7} \\
 \end{cases}$.  
-> We already know that if $x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}$, then $x \equiv 3 \text{ or } 4 \pmod{5}$.  
-> ;wip: solve for mod 7
+> We already know that $x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}$.  
+> By FLT, if $[x] \ne 0$, then $x^4 \equiv 1 \pmod{5}$.  
+> By testing, $x = 0$ is not a solution. So $x^4 \equiv 1 \pmod{5}$. 
+> So $x^3 + 8x \equiv 1 \pmod{5}$.  
+> Testing each value, $x \equiv 3 \text{ or } 4 \pmod{5}$.  
+> We already know that $x^{43} + 28x^9 + 10x \equiv 1 \pmod{7}$.  
+> By FLT, if $[x] \ne 0$, then $x^6 \equiv 1 \pmod{7}$.  
+> By testing, $x = 0$ is not a solution. So $x^6 \equiv 1 \pmod{7}$. 
+> So $x + 10x \equiv 11x \equiv 1 \pmod{7}$.  
+> By inspection, $x \equiv 2 \pmod{7}$.  
 > Now we resolve the cases: either $\begin{cases}
 x \equiv 3 \pmod{5} \\
 x \equiv 2 \pmod{7} \\
@@ -1619,6 +1633,13 @@ x \equiv 2 \pmod{7} \\
 x \equiv 4 \pmod{5} \\
 x \equiv 2 \pmod{7} \\
 \end{cases}$.  
+> We will solve the first case.  
+> Clearly, $\exists k \in \mb{Z}, x = 5k + 3$ and $5k \equiv 6 \pmod{7}$. So $k \equiv 4 \pmod{7}$, by inspection.  
+> So $\exists l \in \mb{Z}, k = 7l + 4$ and $x = 35l + 23$, so $x \equiv 23 \pmod{35}$.  
+> We will solve the second case.  
+> Clearly, $\exists k \in \mb{Z}, x = 5k + 4$ and $5k \equiv 5 \pmod{7}$. So $k \equiv 1 \pmod{7}$, by inspection.  
+> So $\exists l \in \mb{Z}, k = 7l + 1$ and $x = 35l + 9$, so $x \equiv 9 \pmod{35}$.  
+> The complete solution is $x \equiv 9 \text{ or } x \equiv 23 \pmod{35}$.  
 
 # 4/11/13
 
@@ -1720,3 +1741,81 @@ To solve this, Bob needs to know $\phi(n)$, and so needs to find $p, q$.
 If $n$ is large enough, around 1024 binary digits, $p, q$ are impractical to find using today's technology.
 
 Therefore, it is impractical to decrypt the message without already knowing $d$.
+
+# 6/11/13
+
+;wip: download the lecture slides
+
+;wip: proof that \sqrt{2} is irrational
+
+### Prime Factorization (PF)
+
+A very famous theorem with a very famous proof.
+
+Proposition: every integer $n > 1$ can be expressed as a product of primes.
+
+Note that a product can have just one factor - when $n$ is prime.
+
+Proof:
+
+> Proof by contradiction.  
+> Suppose there exists an integer $n > 1$ that cannot be written as a product of primes.  
+> Let $N$ be the smallest integer that cannot be written as a product of primes.  
+> So $N$ cannot be prime, or else it would be writable as a product with one factor, a prime.  
+> So $N$ has a positive divisor $1 < r < N$, and $r \mid N$.  
+> So $\exists s \in \mb{Z}, N = rs$. Since $r > 1$, $s < N$.  
+> Clearly, $r$ and $s$ can be written as a product of primes, since $r < N \wedge s < N$, which is the smallest.  
+> So $N$ can be written as a product of primes, which is impossible.  
+> So all integers $n > 1$ can be written as a product of primes.  
+
+### Infinitely Many Primes (INF P)
+
+Proposition: the number of primes is infinite.
+
+Proof:
+
+> This proposition is Euclid book 9, proposition 20.  
+> Proof by contradiction.  
+> Suppose the number of primes is finite.  
+> Therefore we can list them as $p_1, \ldots, p_n$, the complete list of all primes.  
+> Construct $N = (p_1 \cdot \ldots \cdot p_n) + 1$.  
+> Clearly, $N > 1$, so $N$ can be expressed as a product of primes.  
+> So $N$ has at least one prime factor $p_i$ from the complete list above.  
+> So $p_i \mid p_1 \cdot \ldots \cdot p_n$ (since $p_i$ is a factor), and $p_i \mid (p_1 \cdot \ldots \cdot p_n) + 1$ (since $p_i \mid N$).  
+> By DIC, $p_i \mid (p_1 \cdot \ldots \cdot p_n) + 1 - p_i \mid p_1 \cdot \ldots \cdot p_n$.  
+> So $p_i \mid 1$, which is impossible by BBD since $p_i > 1$.  
+> So the number of primes is infinite.  
+
+### Unique Factorization Theorem (UFT)
+
+Proposition: no integer $n > 1$ can be expressed as a product of primes in more than one way, apart from rearrangements of the factors.
+
+In other words, the **prime factorization of a number is unique**.
+
+Proof:
+
+> This claim is Euclid book 9, proposition 14.  
+> We claim that given prime numbers, $p, q_1, \ldots, q_l$, if $p \mid q_1 \cdot \ldots \cdot q_l$, then $\exists 1 \le j \le l, p = q_j$.  
+> Proof by contradiction.  
+> Clearly, $p \ne q_j \implies p \nmid q_j$, since both numbers are prime.  
+> Suppose $p \mid q_1 \cdot \ldots \cdot q_l$ and $\forall 1 \le j \le l, p \nmid q_j$.  
+> If $p \nmid q_1$, then $p \mid q_2 \cdot \ldots \cdot q_l$, by PAD.  
+> Repeating this, we get $p \mid q_l$, which is impossible.  
+> So $\forall 1 \le j \le l, p \ne q_j$ is impossible.  
+> So $\exists 1 \le j \le l, p = q_j$, and the claim is true.  
+
+> Proof by contradiction.  
+> Let $n$ be an arbitrary integer such that $n > 1$.  
+> Suppose $n$ can be expressed in **two ways** as a product of primes: $n = p_1 \cdot \ldots \cdot p_l = q_1 \cdot \ldots \cdot q_l$.  
+> We know from the claim that since $p_1 \mid p_1 \cdot \ldots \cdot p_l$, $p \mid q_1 \cdot \ldots \cdot q_l$.  
+> Cancelling $p_1$, $p_1 \cdot \ldots \cdot p_l = q_1 \cdot \ldots \cdot q_l$ becomes $p_2 \cdot \ldots \cdot p_l = q_1 \cdot \ldots \cdot q_{j - 1} \cdot q_{j + 1} \cdot \ldots \cdot q_l$.  
+> If we repeat this argument, we get $p_2 = k$ for some $k \ne j$.  
+> Every $p$ is matched with some $q$, so the first list is a rearrangement of the second.  
+> So the product of primes is unique.  
+
+If we put together the PF and UFT, we get the **fundemental theorem of arithmetic**:
+
+> Every integer $n > 1$ can be expressed as a product of primes in **exactly one way**, apart from the re-ordering of factors.  
+> This unique product is called the **prime factorization**.  
+
+;wip: CHIP is in MC 1052

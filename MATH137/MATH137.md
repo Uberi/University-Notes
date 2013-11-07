@@ -1808,3 +1808,98 @@ Find the inflection points and intervals of concavity of $f(x) = x^4 - 2x^2 + 3$
 > So the function is concave up over $(-infty, -\sqrt{\frac{1}{3}}), (\sqrt{\frac{1}{3}}, \infty)$ and concave down over $(-\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}})$.
 > So there are points of inflection at $(-\sqrt{\frac{1}{3}}, \frac{22}{9}), (\sqrt{\frac{1}{3}}, \frac{22}{9})$.  
 > Clearly, $f''(-1) > 0, f''(0) < 0, f''(1) > 0$, so the local extrema found previously are correct.
+
+# 6/11/13
+
+Indeterminate Forms and l'Hôpital's Rule
+----------------------------------------
+
+We have seen previously the limits $\lim_{x \to 0} \frac{\sin x}{x} = 1$ and $\lim_{x \to \infty} \frac{x^2 - 1}{2x^2 + 4x + 1} = \frac{1}{2}$.
+
+If we just plug in the limit value, we get $\frac{0}{0}$ or $\frac{infty}{\infty}$, which are **indeterminate forms** - in the form that they are in, we cannot evaluate it.
+
+We need some other way of making them solvable.
+
+L'Hôpital's rule is a very general method of removing indeterminate forms
+
+### L'Hôpital's Rule
+
+If $f(x)$ and $g(x)$ are differentiable and $g'(x) \ne 0$ near $a$ (though the value at $a$ is unimportant), and one of the following is true:
+
+* $\lim_{x \to a} f(x) = 0 = \lim_{x \to a} g(x)$
+* $\lim_{x \to a} f(x) = \pm \infty = \lim_{x \to a} g(x)$
+
+Then $\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{f'(x)}{g'(x)}$.
+
+Proof of this is beyond this course, so let's just assume it's true for now.
+
+The rule works even if $a$ is infinite, and works with one-sided limits too.
+
+Note that it **only works for the indeterminate forms** $\frac{0}{0}$ and $\frac{\infty}{\infty}$.
+
+Now we have a much easier way of evaluating $\lim_{x \to 0} \frac{\sin x}{x}$:
+
+> $$\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{\cos x}{1} = 1$$
+
+Consider $\lim_{x \to \infty} \frac{x^n}{e^x} = 0, n \in \mb{N}$:
+
+> If $n = 1$, then $\lim_{x \to \infty} \frac{nx^{n - 1}}{e^x} = 0$.  
+> Otherwise, we get the indeterminate form $\frac{\infty}{\infty}$ and $\lim_{x \to \infty} \frac{nx^{n - 1}}{e^x} = \lim_{x \to \infty} \frac{n(n - 1)x^{n - 2}}{e^x}$.  
+> If $n = 2$, then $\lim_{x \to \infty} \frac{n(n - 1)x^{n - 2}}{e^x} = 0$.  
+> Otherwise, we get the indeterminate form $\frac{\infty}{\infty}$ and $\lim_{x \to \infty} \frac{n(n - 1)x^{n - 2}}{e^x} = \lim_{x \to \infty} \frac{n(n - 1)(n - 2)x^{n - 3}}{e^x}$.  
+> If $n = 3$, then $\lim_{x \to \infty} \frac{n(n - 1)(n - 2)x^{n - 3}}{e^x} = 0$.  
+> In fact, this applies to all $n$, and $\lim_{x \to \infty} \frac{x^n}{e^x} = 0$. We could potentially prove this through induction.  
+
+This shows that **exponential functions grow faster than polynomial functions**.
+
+Consider $\lim_{x \to \infty} \frac{\ln x}{x^n} = 0, n \in \mb{N}$:
+
+> Indeterminate form $\frac{\infty}{\infty}$.  
+> $\lim_{x \to \infty} \frac{\ln x}{x^n} = \lim_{x \to \infty} \frac{1}{nx^n} = \frac{1}{\infty} = 0$.  
+
+This shows that **logarithmic functions grow slower than polynomial functions**.
+
+### Other indeterminate forms
+
+$0 \cdot \infty$ is a common indeterminate form.
+
+Consider $\lim_{x \to a} f(x) g(x)$ where $\lim_{x \to a} f(x) = 0$ and $\lim_{x \to a} g(x) = \pm \infty$.
+
+We can rewrite this as $\lim_{x \to a} \frac{f(x)}{\frac{1}{g(x)}}$ or $\lim_{x \to a} \frac{g(x)}{\frac{1}{f(x)}}$. Now we can apply l'Hôpital's rule.
+
+Evaluate $\lim_{x \to 0^+} x \ln x$:
+
+> Clearly, $\lim_{x \to 0^+} x \ln x = \lim_{x \to 0^+} \frac{\ln x}{\frac{1}{x}}$.  
+> Indeterminate form $\frac{\infty}{\infty}$.  
+> So $\lim_{x \to 0^+} \frac{\ln x}{\frac{1}{x}} = \lim_{x \to 0^+} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \to 0^+} -x = 0$.  
+
+$\infty - \infty$ is another indeterminate form.
+
+We want to write this as a fraction. This is not always possible, but is occasionally.
+
+Consider $\lim_{x \to 0} \frac{1}{x} - \frac{1}{\sin x}$:
+
+> Clearly, $\lim_{x \to 0} \frac{1}{x} - \frac{1}{\sin x} = \lim_{x \to 0} \frac{\sin x - x}{x \sin x}$.  
+> Indeterminate form $\frac{0}{0}$.  
+> Clearly, $\lim_{x \to 0} \frac{\sin x - x}{x \sin x} = \lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x}$.  
+> Indeterminate form $\frac{0}{0}$/  
+> Clearly, $\lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x} = \lim_{x \to 0} \frac{-\sin x}{2 \cos x - x \sin x} = 0$
+
+### Indeterminate powers
+
+$0^0$, $\infty^0$, and $1^\infty$ are indeterminate.
+
+$0^\infty$ and $\infty^\infty$ are determinate.
+
+Consider $\lim_{x \to a} f(x)^{g(x)}$:
+
+> Clearly, $\lim_{x \to a} f(x)^{g(x)} = \lim_{x \to a} e^{\ln f(x)^{g(x)}} = \lim_{x \to a} e^{g(x) \ln f(x)} = e^{\lim_{x \to a} g(x) \ln f(x)}$.  
+> Note that $\lim_{x \to a} g(x) \ln f(x)$ can be infinite too.  
+
+Depending on how $f(x)$ and $g(x)$ approach their values, the resulting limit differs. So it is indeterminate because there is no determinate value.
+
+Evaluate $\lim_{x \to 0} (1 - 2x)^\frac{1}{x}$:
+
+> $\lim_{x \to 0} (1 - 2x)^\frac{1}{x} = e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}}$.  
+> Indeterminate form $\frac{\infty}{\infty}$.  
+> Clearly, $e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}} = e^{\lim_{x \to 0} \frac{\frac{-2}{1 - 2x}}{1}} = \frac{1}{e^2}$.  
