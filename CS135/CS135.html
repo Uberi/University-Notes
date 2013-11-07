@@ -469,6 +469,10 @@ Tests:
 <li><code>(local [(define x ...) ...] ...)</code> =&gt; <code>(define (new name for x) ...) (body of local with x substituted with the new name for x)</code></li>
 <li><code>(local [(define (f ...) ...) ...] ...)</code> =&gt; <code>(define ((new name for f) ...) ...) (body of local with f substituted with the new name for f)</code></li>
 </ul></li>
+<li><strong>Anonymous functions</strong> become their bodies, with arguments inserted.
+<ul>
+<li><code>((lambda (x) (* x 2)) 5)</code> =&gt; <code>(* 5 2)</code></li>
+</ul></li>
 </ul></li>
 <li>This is one <strong>evaluation step</strong>. Return to step 1 until the entire expression is in the simplest possible form, or results in an error.</li>
 </ol>
@@ -1606,7 +1610,9 @@ A OtherThing is one of:
         (cond [(empty? list) empty]
               [else (insert (first list) (sort (rest list) less-equal))])))</code></pre>
 <p>Note the use of <code>X</code> to represent a particular type (that is possibly a union), in order to show that the input types and output types are the same.</p>
-<p>We also used <code>(X X -&gt; Boolean)</code> to represent a function type</p>
+<p>This is known as a <strong>type variable</strong>. We can also use ones like <code>W</code>, <code>Y</code>, or <code>Z</code>, as long as the meaning is clear. We use type variables whenever two or more places within a contract need to have the same type.</p>
+<p>The function works with many different types of data. THis makes it <strong>generic</strong> or <strong>polymorphic</strong>, a positive quality.</p>
+<p>We also used <code>(X X -&gt; Boolean)</code> to represent a function type. The <strong>type of a function is its contract</strong>.</p>
 <p>Now we can call the function thus</p>
 <pre><code>(sort (&quot;b&quot; &quot;d&quot; &quot;a&quot; &quot;c&quot;) string&lt;=?)
 (sort (5 2 9 1 3) &lt;=)</code></pre>
@@ -1649,6 +1655,7 @@ A OtherThing is one of:
     (cond [(empty? list) base-case]
           [else (f (first list) (foldr f base-case (rest list)))]))</code></pre>
 <p>Note that <code>foldr</code> is also a built-in function that does the same thing.</p>
+<p>The function <code>f</code> should accept an element and the &quot;folded&quot; rest of the list.</p>
 <p>How do we use this?</p>
 <pre><code>(foldr + 0 &#39;(5 2 3 7)) -&gt; 17
 
@@ -1675,6 +1682,66 @@ A OtherThing is one of:
                 (&gt; number n))]
            (filter keep? lon)))</code></pre>
 <p>From now on, we should use the abstract list function whenever possible, rather than dealing with <code>first</code> and <code>rest</code>. The opposite of abstract list functions is <strong>explicit recursion</strong>.</p>
+<h1 id="section-14">7/11/13</h1>
+<p>Create a function that when given a list of numbers, produces the list of those numbers greater than the average:</p>
+<pre><code>(define (above-average lon)
+    (local [(define average (/ (foldr + 0 lon) (length lon)))
+            (define (higher? n)
+                (&gt; n average))]
+        (filter higher? lon)))</code></pre>
+<p>Create a funciton that checks if a given list of strings is a word chain - where the last letter of each word is the first letter of the next word:</p>
+<pre><code>(define (word-chain? los)
+    (local [(define (check-letter word1 word2-or-bool)
+                (local [(define word1-length (string-length word1))]
+                    (cond [(boolean? word2-or-bool)
+                           (cond [word2-or-bool word1] ; ignore the starting case
+                                 [else false])] ; already failed test
+                          [(string=? (substring word1 (sub1 word1-length) word1-length)
+                                     (substring word2-or-bool 0 1))
+                           word1]
+                          [else false])))]
+        (string? (foldr check-letter true los))))</code></pre>
+<p>We can have lists and structures that produce functions. We can also have functions that produce functions:</p>
+<pre><code>;; generate-line: Posn Posn -&gt; (Num -&gt; Num)
+;; Purpose: produces a function that represents a line passing through `p1` and `p2`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (generate-line p1 p2)
+    (local [(define slope (/ (- (posn-y p2) (- (posn-y p1)))
+                             (- (posn-y p2) (- (posn-y p1)))))
+            (define intercept (- (posn-y p1) (* slope (posn-x p1))))]
+        (lambda (x) (+ (* slope x) b))))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>Note that due to the halting problem, we cannot compare two functions for equality. Therefore, we can't directly test the function that <code>generate-line</code> produces. However, we can just test the function that it produces instead of <code>generate-line</code> itself.</p>
+<p>We can use it like this:</p>
+<pre><code>((generate-line (make-posn 0 0) (make-posn 1 2)) 5) -&gt; 10</code></pre>
+<h2 id="lambda">Lambda</h2>
+<pre><code>(lambda (arg1 arg2 ...) body)</code></pre>
+<p><code>lambda</code> creates an <strong>anonymous/unnamed function</strong> - a function that is not bound to a name. This is roughly equivalent to the following:</p>
+<pre><code>(local [(define (temporary-function arg1 arg2 ...)
+            body)]
+    temporary-function)</code></pre>
+<p>This is simply a function like any other, except there are no names that refer to them.</p>
+<p>A lambda is an anonymous function.</p>
+<p>This is very useful for the abstract list functions. Where we previously made small helper functions in local definitions, now we can simply use <code>laambda</code>.</p>
+<p>Anonymous functions <strong>do not need any parts of the design recipe</strong>.</p>
+<p><code>(define (f ...) ...)</code> is actually a shrot form for <code>(define f (lambda (...) ...))</code>.</p>
+<h3 id="stepping-1">Stepping</h3>
+<p>Lambdas by themselves are values and are in their simplest form.</p>
+<p>When applied, lambdas are substituted for their bodies, with arguments inserted in the place of parameters, just like with normal functions.</p>
+<p>In Intermediate Student, function applications and definitions with zero arguments are allowed. Note that <code>(+)</code> is 0 and <code>(*)</code> is 1.</p>
+<p><strong>Functional abstraction</strong> is the process of creating abstract functions like <code>filter</code>. When we abstract the details into an abstract function, we reduce code size and make it easier to fix bugs.</p>
+<h3 id="scope-1">Scope</h3>
+<p>Consider the following function:</p>
+<pre><code>(define (make-adder n)
+    (lambda (x) (+ x n)))</code></pre>
+<p>We use it as follows:</p>
+<pre><code>(define add5 (make-adder 5))
+(add5 6) =&gt; 11</code></pre>
+<p>The binding occurrence of <code>n</code> is outside of the lambda. <code>(make-adder 5)</code> creates a new function that is equivalent to <code>(lambda (x) (+ x 5))</code>.</p>
+<p>Note that <code>add5</code> still has access to <code>n</code> inside <code>make-adder</code>, even though we are no longer inside of <code>make-adder</code> when we are calling <code>add5</code>. This is because the function body itself is still inside <code>make-adder</code>, and so still follows the rules of lexical scoping.</p>
+<p>Functions that consume or produce functions are sometimes known as <strong>higher-order</strong> functions.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -334,7 +334,7 @@ Empiricism is reminiscent of Aristotle's view on observations being the source o
 **Pirrhonian skepticism** is skepticism with a point in mind - not doubting for the sake of doubting. Skepticism is simply the doubting of knowledge. It follows two rules:
 
 * Acceptance of appearances qua appearances - what is presented before the mind must be accepted; it cannot be doubted what a person thinks they are thinking of. If someone says they saw a ghost, it must be accepted that they think they saw a ghost. There is first person authority - one is the authority on what oneself thinks.
-* A method of opposition. Either stating that the world doesn't actually exist, or that there is an alternative explanation for what they think. If someone says they saw a ghost, a Pirrhonian skeptic might say it was a man with a sheet, or that the world does not exist for ghosts to be seen in.
+* A method of opposition. Either stating that the world doesn't actually exist, or that there is an alternative explanation for what they think. If someone says they saw a ghost, a Pirrhonian skeptic might say it was a man with a sheet, or that the world does not exist for ghosts to be seen in, rather than doubting that the someone thinks they saw a ghost.
 
 Descartes wants to be a realist - to have what he sees in his mind be the same as what is out there. To do this, it is necessary to test everything he knows.
 
@@ -649,7 +649,7 @@ Philosophers often focus on the justification. For example, Descartes would just
 
 Truth is a difficult thing to define. There are two main theories of truth:
 
-* Correspondence: a belief is true if it accurately corresponds to something in the world.
+* **Correspondence**: a belief is true if it accurately corresponds to something in the world.
     * Some issues would be:
         * How do we know they accurately map onto the world?
         * How do we know there is a world?
