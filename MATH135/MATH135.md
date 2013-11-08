@@ -1819,3 +1819,67 @@ If we put together the PF and UFT, we get the **fundemental theorem of arithmeti
 > This unique product is called the **prime factorization**.  
 
 ;wip: CHIP is in MC 1052
+
+# 8/11/13
+
+;wip: assignment 8 question 5, addition required: $p > q$
+
+Prime factorization for 180: $2 \cdot 2 \cdot 3 \cdot 3 \cdot 5 = 2^2 \cdot 3^2 \cdot 5$
+
+When we write $n = p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}$, we generally assume that $p_n$ is distinct from all the others and $a_n > 0$.
+
+### Divisors from prime factorization (DFPF)
+
+Given $n \in \mb{Z}$ whose prime factorization is $p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}$, and $d \in \mb{Z}$, then $d \mid n \iff \exists 0 \le b_i \le a_i, 1 \le i \le k, d = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}$
+
+In other words, every combination of exponents of the prime factorization of a number such that the exponents are between 0 and the exponent in the number is a positive divisor of the number.
+
+Consider the positive divisors of 36. Clearly, $36 = 2^2 \cdot 3^3$ ;wip: show the combinations of the exponents being divisors
+
+Proof:
+
+> First we will prove $\exists 0 \le b_i \le a_i, 1 \le i \le k, d = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k} \implies d \mid n$.  
+> Assume $d = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}$.  
+> Construct $e = p_1^{a_1 - b_1} \cdot p_2^{a_2 - b_2} \cdot \ldots \cdot p_k^{a_k - b_k}$.  
+> Clearly, $de = n$. So $d \mid n$.  
+> Now we will prove the converse.  
+> If $d = 1$, then obviously $\forall 1 \le i \le k, b_i = 0$.  
+> Otherwise, $d$ has some prime factorization, by PF.  
+> Let $q$ be a prime factor of $d$.  
+> Clearly, $q \mid n$, by TD.  
+> By Euclid proposition 14, $q = p_i$ for some $1 \le i \le k$.  
+> So each prime factor of $d$ must also be a prime factor of $n$.  
+> So $d = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}$.  
+> We now want to prove that each $0 \le b_i \le a_i$.  
+> We will show it for the first factor, $p_1^{b_1}$. The rest can be proven in a similar way.  
+> $d \mid n$ means $\exists e \in \mb{Z}, n = de$.  
+> So $p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k} = e \cdot p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}$.  
+> Proof by contradiction.  
+> Suppose $a_1 < b_1$.  
+> So we can divide both sides by $p_1^{a_1}$.  
+> Now we have $p_2^{a_2} \cdot \ldots \cdot p_k^{a_k} = e \cdot p_1^{a_1 - b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}.  
+> Note that $p_1$ divides the right hand side since $b_1 - a_1 \ge 1$. However, $p_1$ does not divide the left side, by the contrapositive of Euclid proposition 14.  
+> But this is a contradiction, since we can't have two things that are equal where a number divides one but not another.  
+> So it must be that $a_1 \ge b_1$.  
+
+Determine the number of positive divisors of $n = p_1^2 \cdot p_2 \cdot p_3^5$:
+
+> We want to count the number of expressions of the form $p_1^a \cdot p_2^b \cdot p_3^c, 0 \le a \le 2, 0 \le b \le 1, 0 \le c \le 5$.  
+> So the number of positive divisors are $3 \cdot 2 \cdot 6 = 36$
+
+Find $\gcd(x, y)$ if $x = p_1^2 \cdot p_2 \cdot p_3^5$ and $y = p_2^4 \cdot p_3^2 \cdot p_4^2$:
+
+> All divisors are listed in the factorization.  
+> So the greatest common factor of both expressions is the GCD.  
+> Clearly, the common divisors are $p_2^a \cdot p_3^b, 0 \le a \le 1, 0 \le b \le 2$.  
+> So the greatest common divisor and $\gcd(x, y)$ is $p_2 \cdot p_3^2$.  
+
+### GCD from prime factorization (GCD PF)
+
+Suppose $a, b > 1$ with the prime factorizations $a = p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}$
+
+;wip: finish writing it!
+
+Proof is not required.
+
+GCD PF is a lot easier for very small numbers, because we can easily find the prime factorization. However, it is difficult and impractical for larger numbers because prime factorization is hard.

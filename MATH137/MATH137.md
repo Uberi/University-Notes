@@ -176,7 +176,9 @@ Transformations
 
 Sketch $y = x^2$, $y = x^2-1$, $y = (x + 1)^2$:
 
-;wip
+> $y = x^2$ is simply a parabola.  
+> $y = x^2-1$ is the same parabola moved down 1 unit.  
+> $y = (x + 1)^2$ is the same parabola moved left one unit.  
 
 Given function $f(x)$:
 
@@ -869,7 +871,10 @@ $$
 
 Evaluate $\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}$:
 
-> ;wip
+> $$
+\text{Note that } x^2 > 2x \text{ for all } x > 2 \\
+\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}} = \frac{-2}{-\infty - \sqrt{\infty - \infty}} = \frac{-2}{-\infty} = 0 \\
+$$
 
 Evaluate $\lim_{x \to \infty}  e^{-x} \sin x$:
 
@@ -933,7 +938,7 @@ Two interpretations:
 * $f'(x)$ is the slope of a tangent of $f(x)$ drawn at $x$.
 * $f'(x)$ is the instantaneous rate of change of $f(x)$.
 
-The following are equivalent notations: $f'(x), y', \frac{\dee y}{\dee x}, \frac{\dee f}{\dee x}, \frac{\dee}{\dee x} f(x)$. ;wip
+The following are equivalent notations: $f'(x), y', \frac{\dee y}{\dee x}, \frac{\dee f}{\dee x}, \frac{\dee}{\dee x} f(x)$.
 
 Determine whether $f(x) = \begin{cases} x \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}$:
 
@@ -1903,3 +1908,63 @@ Evaluate $\lim_{x \to 0} (1 - 2x)^\frac{1}{x}$:
 > $\lim_{x \to 0} (1 - 2x)^\frac{1}{x} = e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}}$.  
 > Indeterminate form $\frac{\infty}{\infty}$.  
 > Clearly, $e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}} = e^{\lim_{x \to 0} \frac{\frac{-2}{1 - 2x}}{1}} = \frac{1}{e^2}$.  
+
+# 8/11/13
+
+Curve Sketching
+---------------
+
+A systematic way of sketching the graph of a function, using information about $f$, $f'$, and $f''$.
+
+To sketch a function:
+
+1. Figure out domain.
+2. Figure out intercepts.
+3. Figure out symmetry - even, odd, periodicity.
+4. Figure out asymptotes and behavior near asymptotes using one-sided limits for vertical and infinite limits for horizontal.
+5. Find the derivative $f'$.
+6. Figure out the critical points.
+7. Figure out intervals of increase/decrease.
+8. Classify the critical numbers as local maxima/minima.
+9. Find the derivative $f''$.
+10. Find the points of inflection and invervals of concavity.
+11. Pick reasonable axis limits based on important points like the critical numbers and points of inflection.
+12. Draw the critical points, points of inflection, and asymptotes on the graph.
+13. Indicate the intervals of increase/decrease and concavity on the graph.
+14. Draw the curve, taking into account all the information.
+
+Sketch $f(x) = \frac{x}{(x + 1)^2}$:
+
+1. The domain is $\mb{R}$.
+2. The intercepts are $(0, 0)$.
+3. Not symmetric.
+4. Vertical asymptote at $x = -1$, going to negative infinity from both sides. Horizontal asymptote at $y = 0$.
+5. $f'(x) = \frac{(x + 1)^2 - x(2x + 2)}{(x + 1)^4} = \frac{1 - x}{(x + 1)^3}$.
+6. $f'(x) = 0$ when $x = 1$, and does not exist when $x = -1$. 1 is a critical point but (-1, f(-1)) is not because it is not in the domain - $f(-1)$ is undefined.
+7. There are three intervals $(-\infty, -1), (-1, 1), (1, \infty)$. Note that we considered -1 even though it is not a critical number - we use all the intervals where $f'$ is discontinuous or 0. Testing, we find that $f$ is increasing on $(-\infty, -1) \cup (1, \infty)$ and decreasing on $(-1, 1)$.
+8. There is a local maximum at $x = 1$.
+9. $f''(x) = \frac{-(x + 1)^2 - (1 - x)(3(x + 1)^2)}{x + 1}^6 = \frac{2x - 4}{(x + 1)^4}$.
+10. $f''(x) = 0$ when $x = 2$, is defined everywhere in the domain, and we find that $f$ is concave upward left of $x = 2$ and concave down right of $x = 2$. So $(2, f(2))$ is a point of inflection, $(-\infty, 2)$ is a concave up interval, and $(2, \infty)$ is a concave down interval.
+11. We want to show the critical points and points of inflection. So $x \in [-2, 3]$ and $y \in [-0.5, 0.5]$ are reasonable axis limits.
+12. The rest is left as an exercise.
+
+Consider $x^\frac{5}{3} - x^\frac{2}{3}$:
+
+> $f(x) = x^\frac{2}{3}(x - 1)$.  
+> The denominator of the fractional exponent determines the domain.  
+> The numerator determines the range and symmetry.  
+
+1. The domain is $\mb{R}$.
+2. The intercepts are $(0, 0)$ and $(1, 0)$.
+3. Not symmetric, though each term is symmetric by itself.
+4. No asymptotes.
+5. $f'(x) = \frac{5}{3}x^\frac{2}{3} - \frac{2}{3}x^\frac{-1}{3} = \frac{1}{3 \sqrt[3]{x}} (5x - 2)$.
+6. $f'(x) = 0$ when $x = \frac{2}{5}$, and undefined when $x = 0$. So $(0, 0)$ and $(\frac{2}{5}, f(\frac{2}{5}))$ are critical points.
+7. The intervals are $(-\infty, 0), (0, \frac{2}{5}), (\frac{2}{5}, \infty)$. The function is increasing on $(-\infty, 0) \cup (\frac{2}{5}, \infty)$ and decreasing on $(0, \frac{2}{5})$.
+8. There is a local maximum at $(0, 0)$ and a local minimum at $(\frac{2}{5}, f(\frac{2}{5}))$.
+9. $f''(x) = \frac{10}{9}x^\frac{-1}{3} + \frac{2}{9}x^\frac{-4}{3} = \frac{2x^\frac{-1}{3}}{9}(5x + 1)$.
+10. $f''(x)$ does not exist when $x = 0$, and is 0 when $x = -\frac{1}{5}$. $f$ is concave up left of $-\frac{1}{5}$ and concave down right of $-\frac{1}{5}$. $(-\frac{1}{5}, f(-\frac{1}{5}))$ is a point of inflection.
+11. Reasonable axis limits are $x \in [-0.5, 1.5]$ and $y \in [-0.5, 0.5]$.
+12. The rest is left as an exercise. Notice the cusp at $x = 0$.
+
+Exercises: $f(x) = x^2 \ln x$, $f(x) = \arctan(\frac{1}{x})$.

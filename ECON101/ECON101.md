@@ -127,6 +127,8 @@ Incentives
 
 Rational people make choices **at the margin**; they look at the consequences of making **incremental changes** in usage of resources. For example, the decision whether to buy something might depend on the cost of buying it, compared to the benefit of buying it.
 
+People look at doing the next unit of something, rather than looking at and considering everything in the past.
+
 The benefit from incremental increase is the **marginal benefit**.
 
 The **marginal benefit curve** measures the marginal benefit as units of a good or service available changes. It measures the most people are willing to pay for one more unit of a good or service, and is not derivable from the PPF.
@@ -1040,3 +1042,179 @@ However, firms do more production because they are more efficient than markets. 
 * **Economies of scope** - specializing in a particular area allows lower costs of production.
 
 Firms can engage in *team production**, where they each specialize in mutually supportive tasks.
+
+# 7/11/13
+
+Output
+------
+
+The main objective of a firm is to maximize profit - the difference between total revenue and total cost.
+
+Total revenue is the quantity times the price. Total cost is the explicit cost plus the implicit cost.
+
+Firms also face resource constraints.
+
+Firms need to decide:
+
+* How much to produce.
+* How many people to employ.
+* How much capital and what kind of capital to use.
+
+Decisions are made in two possible time frames:
+
+* A **short-run period** is a time frame less than a year such that at least one resource is fixed.
+    * For most firms, the plant (capital) is fixed in the short run and labour, raw materials, and energy are not.
+    * Decisions made in the short run are easily reversed, since firms can take a temporary loss.
+* A **long-run period** is a time frame longer than a year such that all resources are variable.
+    * The plant size can change in the long run.
+    * Over time, substitutes and alternatives appear.
+    * Decisions made in the long run are difficult to reverse, since losses cannot be sustained in the long run.
+
+A **sunk cost** is a cost incurred by a firm that cannot be recovered or changed. For example, if a firm's plant has no resale value, it is a sunk cost. These costs are irrelevant to a firm's current decisions or the profit calculations.
+
+### Output
+
+To increase output, a firm must increase capital or labour. The relationship between the amount of labour and output is described by total product, marginal product, and average product.
+
+**Total product** is the total output produced in the given time period.
+
+**Marginal product of labour** is the change in total product resulting from an increase in the amount of labour by 1 unit, all other factors remaining the same.
+
+**Average product of labour** is the average product per unit of labour - the total product divided by the amount of labour.
+
+For example, a labour unit may be 5 workers per day, a total product may be 80 sweaters per day, a marginal product may be 4 sweaters per additional worker, and average product may be 7 sweaters per worker.
+
+As the quantity of labour increases most production processes undergo the following:
+
+* Total product increases.
+* Marginal product increases and then decreases - **diminishing marginal returns**.
+* Average product increases and then decreases.
+
+### Product curves
+
+Product curves are graphs of total, marginal, or average product over labour.
+
+           Total Product vs. Labour            
+    v 300 units
+      |                                        
+      |                         ....           
+    P |                    .....               
+    r |  Impossible    ....                    
+    i |            ....                        
+    c |        ....                            
+    e |   .....           Possible             
+      |...                                     
+      |________________________________________
+     0           Total Product                ^ 25 workers/day
+
+This is similar to the PPF - everything below or on the total product line is attainable, while everything above is not.
+
+         Marginal Product vs. Labour           
+    v 300 units
+      |                                        
+      |       ...                              
+    P |     ..   ..                            
+    r |    .       ..                          
+    i |   .          ..                        
+    c |  .             ..                      
+    e | .                ...                   
+      |.                    ...                
+      |________________________________________
+     0           Marginal Product             ^ 25 workers/day
+
+### Law of diminishing returns
+
+> As a firm uses more of a variable input with all other inputs remaining constant, the marginal product with respect to the variable input **eventually diminishes/decreases**.
+
+As labour is increased, marginal product increases initially since the workers can divide the work and specialize better.
+
+As labour is increased even more, the marginal product starts to diminish since each worker has access to less capital and space with which to work.
+
+When the **marginal product equals the average cost**, the **average product is at its maximum**.
+
+Costs
+-----
+
+### Short-run cost
+
+To increase total product, a firm must employ more labour. As a result, costs increase.
+
+**Total cost** is the cost of all resources used - the total fixed cost plus the total variable cost.
+
+**Total fixed cost** is the cost of a firm's fixed inputs. These do not depend on the output. This is usually capital like ovens for a bakery.
+
+**Total variable cost** is the cost of a firm's variable inputs. These depend on the output. This is usually labour like employees.
+
+$$\mathrm{TC} = \mathrm{TFC} + \mathrm{TVC}$$
+
+Total cost usually does not start from 0. There is usually a fixed cost even if there isn't any output.
+
+As output increases, the total variable cost increases. The marginal variable cost is inversely correlated with the marginal product - if the total product curve is increasing, then the total variable cost curve is decreasing.
+
+The **marginal cost** is the increase in total cost resulting from an increase in total product by 1 unit.
+
+When the marginal product is increasing, the marginal cost is decreasing. When the marginal product is decreasing, the marginal cost is increasing.
+
+**Average total cost** is the total cost per unit of output - the average fixed cost plus the average variable cost.
+
+**Average fixed cost** is the total fixed cost per unit of output - the total fixed cost divided by the output. This is decreasing since the fixed costs are constant.
+
+**Average variable cost** is the total variable cost per unit of output - the total variable cost divided by the output.
+
+$$\mathrm{ATC} = \mathrm{AFC} + \mathrm{AVC} = \frac{\mathrm{TC}}{Q} = \frac{\mathrm{TFC}}{Q} + \frac{\mathrm{TVC}}{Q}$$
+
+Where $Q$ is the output quantity.
+
+The average variable cost curve is U-shaped, and as a result, so is the average total cost curve. This is because the average product is initially increasing, but later decreases - so the average cost is initially decreasing, but later increases.
+
+Average variable cost and average total cost are decreasing when the MC curve is below them, and increasing when the MC curve is above. When they intersect, the average variable cost and average total cost are at their minimum.
+
+The exact shape of the cost curves are determined by the technology. 
+
+Marginal cost is at its minimum when marginal product is at its maximum, and vice versa, with respect to output.
+
+Average variable cost is at its minimum when average product is at its maximum, and vice versa, with respect to output.
+
+### Changes
+
+**Technology** influences the product and cost curves. Improvements in technology shift the product curves upwards and the cost curves downwards.
+
+If a technological improvement uses more capital and less labour, then fixed costs increase and variable costs decrease.
+
+An **increase in prices of factors of production** increases costs. An increase shifts the product curves downwards and the cost curves upwards, and vice versa.
+
+### Long-run cost
+
+In the long run, we are not guaranteed that some resources are fixed. So the inputs can change and all costs are variable.
+
+The behavior of long-run cost depends on the **production function** of the firm - the relationship between the maximum attainable output and the quantities of inputs like capital and labour.
+
+As the firm's labour increases, the marginal product of labour increases.
+
+As the amount of labour employed per plant increases, the marginal product of capital decreases.
+
+The **marginal product of capital** is the increase in output resulting from an increase in the amount of capital used by 1 unit, all other factors like labour being constant.
+
+For each possible plant size, there are a set of corresponding curves for marginal cost, average variable cost, and average total cost.
+
+The larger the plant, the greater the output at which the average total cost is at a minimum.
+
+So for a given output quantity desired, we would consider each possible plant and see which possibility has the lowest average total cost.
+
+The **long-run average cost curve** is the minimum of all the possible curves. It has parts of many different curves that correspond to different plant sizes.
+
+We can use this to find the plant size with the minimum average total cost for a given output quantity. This is the plant size with the lowest cost per output.
+
+### Economies
+
+**Economies of scale** are aspects of the firm's technology that lead to decreasing long-run average cost with respect to output.
+
+**Diseconomies of scale** are the opposite, with increasing long-run average cost.
+
+**Constant returns to scale** are similar, with constant long-run average cost.
+
+A firm experiences economies of scale up to a certain output quantity, before going into diseconomies of scale or constant returns to scale.
+
+The **minimum efficient scale** is the smallest output quantity resulting in the minimum long-run average cost.
+
+If the long-run average cost curve is U-shaped, the minimum point identifies the output level achieving the minimum efficient scale.

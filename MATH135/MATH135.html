@@ -1136,6 +1136,31 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>Every integer <span class="math">\(n &gt; 1\)</span> can be expressed as a product of primes in <strong>exactly one way</strong>, apart from the re-ordering of factors.<br />This unique product is called the <strong>prime factorization</strong>.</p>
 </blockquote>
 <p>;wip: CHIP is in MC 1052</p>
+<h1 id="section-24">8/11/13</h1>
+<p>;wip: assignment 8 question 5, addition required: <span class="math">\(p &gt; q\)</span></p>
+<p>Prime factorization for 180: <span class="math">\(2 \cdot 2 \cdot 3 \cdot 3 \cdot 5 = 2^2 \cdot 3^2 \cdot 5\)</span></p>
+<p>When we write <span class="math">\(n = p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}\)</span>, we generally assume that <span class="math">\(p_n\)</span> is distinct from all the others and <span class="math">\(a_n &gt; 0\)</span>.</p>
+<h3 id="divisors-from-prime-factorization-dfpf">Divisors from prime factorization (DFPF)</h3>
+<p>Given <span class="math">\(n \in \mb{Z}\)</span> whose prime factorization is <span class="math">\(p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}\)</span>, and <span class="math">\(d \in \mb{Z}\)</span>, then <span class="math">\(d \mid n \iff \exists 0 \le b_i \le a_i, 1 \le i \le k, d = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}\)</span></p>
+<p>In other words, every combination of exponents of the prime factorization of a number such that the exponents are between 0 and the exponent in the number is a positive divisor of the number.</p>
+<p>Consider the positive divisors of 36. Clearly, <span class="math">\(36 = 2^2 \cdot 3^3\)</span> ;wip: show the combinations of the exponents being divisors</p>
+<p>Proof:</p>
+<blockquote>
+<p>First we will prove <span class="math">\(\exists 0 \le b_i \le a_i, 1 \le i \le k, d = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k} \implies d \mid n\)</span>.<br />Assume <span class="math">\(d = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}\)</span>.<br />Construct <span class="math">\(e = p_1^{a_1 - b_1} \cdot p_2^{a_2 - b_2} \cdot \ldots \cdot p_k^{a_k - b_k}\)</span>.<br />Clearly, <span class="math">\(de = n\)</span>. So <span class="math">\(d \mid n\)</span>.<br />Now we will prove the converse.<br />If <span class="math">\(d = 1\)</span>, then obviously <span class="math">\(\forall 1 \le i \le k, b_i = 0\)</span>.<br />Otherwise, <span class="math">\(d\)</span> has some prime factorization, by PF.<br />Let <span class="math">\(q\)</span> be a prime factor of <span class="math">\(d\)</span>.<br />Clearly, <span class="math">\(q \mid n\)</span>, by TD.<br />By Euclid proposition 14, <span class="math">\(q = p_i\)</span> for some <span class="math">\(1 \le i \le k\)</span>.<br />So each prime factor of <span class="math">\(d\)</span> must also be a prime factor of <span class="math">\(n\)</span>.<br />So <span class="math">\(d = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}\)</span>.<br />We now want to prove that each <span class="math">\(0 \le b_i \le a_i\)</span>.<br />We will show it for the first factor, <span class="math">\(p_1^{b_1}\)</span>. The rest can be proven in a similar way.<br /><span class="math">\(d \mid n\)</span> means <span class="math">\(\exists e \in \mb{Z}, n = de\)</span>.<br />So <span class="math">\(p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k} = e \cdot p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}\)</span>.<br />Proof by contradiction.<br />Suppose <span class="math">\(a_1 &lt; b_1\)</span>.<br />So we can divide both sides by <span class="math">\(p_1^{a_1}\)</span>.<br />Now we have <span class="math">\(p_2^{a_2} \cdot \ldots \cdot p_k^{a_k} = e \cdot p_1^{a_1 - b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}.   Note that \)</span>p_1$ divides the right hand side since <span class="math">\(b_1 - a_1 \ge 1\)</span>. However, <span class="math">\(p_1\)</span> does not divide the left side, by the contrapositive of Euclid proposition 14.<br />But this is a contradiction, since we can't have two things that are equal where a number divides one but not another.<br />So it must be that <span class="math">\(a_1 \ge b_1\)</span>.</p>
+</blockquote>
+<p>Determine the number of positive divisors of <span class="math">\(n = p_1^2 \cdot p_2 \cdot p_3^5\)</span>:</p>
+<blockquote>
+<p>We want to count the number of expressions of the form <span class="math">\(p_1^a \cdot p_2^b \cdot p_3^c, 0 \le a \le 2, 0 \le b \le 1, 0 \le c \le 5\)</span>.<br />So the number of positive divisors are <span class="math">\(3 \cdot 2 \cdot 6 = 36\)</span></p>
+</blockquote>
+<p>Find <span class="math">\(\gcd(x, y)\)</span> if <span class="math">\(x = p_1^2 \cdot p_2 \cdot p_3^5\)</span> and <span class="math">\(y = p_2^4 \cdot p_3^2 \cdot p_4^2\)</span>:</p>
+<blockquote>
+<p>All divisors are listed in the factorization.<br />So the greatest common factor of both expressions is the GCD.<br />Clearly, the common divisors are <span class="math">\(p_2^a \cdot p_3^b, 0 \le a \le 1, 0 \le b \le 2\)</span>.<br />So the greatest common divisor and <span class="math">\(\gcd(x, y)\)</span> is <span class="math">\(p_2 \cdot p_3^2\)</span>.</p>
+</blockquote>
+<h3 id="gcd-from-prime-factorization-gcd-pf">GCD from prime factorization (GCD PF)</h3>
+<p>Suppose <span class="math">\(a, b &gt; 1\)</span> with the prime factorizations <span class="math">\(a = p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}\)</span></p>
+<p>;wip: finish writing it!</p>
+<p>Proof is not required.</p>
+<p>GCD PF is a lot easier for very small numbers, because we can easily find the prime factorization. However, it is difficult and impractical for larger numbers because prime factorization is hard.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

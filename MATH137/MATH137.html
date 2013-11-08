@@ -194,7 +194,9 @@ f(x) = \frac{1}{1 - x^2} \\
 <h1 id="section-2">13/9/13</h1>
 <h2 id="transformations">Transformations</h2>
 <p>Sketch <span class="math">\(y = x^2\)</span>, <span class="math">\(y = x^2-1\)</span>, <span class="math">\(y = (x + 1)^2\)</span>:</p>
-<p>;wip</p>
+<blockquote>
+<p><span class="math">\(y = x^2\)</span> is simply a parabola.<br /><span class="math">\(y = x^2-1\)</span> is the same parabola moved down 1 unit.<br /><span class="math">\(y = (x + 1)^2\)</span> is the same parabola moved left one unit.</p>
+</blockquote>
 <p>Given function <span class="math">\(f(x)\)</span>:</p>
 <ul>
 <li><span class="math">\(f(x)+c\)</span> is a vertical translation <span class="math">\(c\)</span> units upward.</li>
@@ -669,7 +671,10 @@ x \sin \frac{1}{x} &amp;\text{if } x \ne 0 \\
 </blockquote>
 <p>Evaluate <span class="math">\(\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}\)</span>:</p>
 <blockquote>
-<p>;wip</p>
+<p><span class="math">\[
+\text{Note that } x^2 &gt; 2x \text{ for all } x &gt; 2 \\
+\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}} = \frac{-2}{-\infty - \sqrt{\infty - \infty}} = \frac{-2}{-\infty} = 0 \\
+\]</span></p>
 </blockquote>
 <p>Evaluate <span class="math">\(\lim_{x \to \infty}  e^{-x} \sin x\)</span>:</p>
 <blockquote>
@@ -722,7 +727,7 @@ e^{-x} &amp;= \frac{1}{e^x} \\
 <li><span class="math">\(f&#39;(x)\)</span> is the slope of a tangent of <span class="math">\(f(x)\)</span> drawn at <span class="math">\(x\)</span>.</li>
 <li><span class="math">\(f&#39;(x)\)</span> is the instantaneous rate of change of <span class="math">\(f(x)\)</span>.</li>
 </ul>
-<p>The following are equivalent notations: <span class="math">\(f&#39;(x), y&#39;, \frac{\dee y}{\dee x}, \frac{\dee f}{\dee x}, \frac{\dee}{\dee x} f(x)\)</span>. ;wip</p>
+<p>The following are equivalent notations: <span class="math">\(f&#39;(x), y&#39;, \frac{\dee y}{\dee x}, \frac{\dee f}{\dee x}, \frac{\dee}{\dee x} f(x)\)</span>.</p>
 <p>Determine whether <span class="math">\(f(x) = \begin{cases} x \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
@@ -1359,6 +1364,60 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <blockquote>
 <p><span class="math">\(\lim_{x \to 0} (1 - 2x)^\frac{1}{x} = e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}}\)</span>.<br />Indeterminate form <span class="math">\(\frac{\infty}{\infty}\)</span>.<br />Clearly, <span class="math">\(e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}} = e^{\lim_{x \to 0} \frac{\frac{-2}{1 - 2x}}{1}} = \frac{1}{e^2}\)</span>.</p>
 </blockquote>
+<h1 id="section-24">8/11/13</h1>
+<h2 id="curve-sketching">Curve Sketching</h2>
+<p>A systematic way of sketching the graph of a function, using information about <span class="math">\(f\)</span>, <span class="math">\(f&#39;\)</span>, and <span class="math">\(f&#39;&#39;\)</span>.</p>
+<p>To sketch a function:</p>
+<ol style="list-style-type: decimal">
+<li>Figure out domain.</li>
+<li>Figure out intercepts.</li>
+<li>Figure out symmetry - even, odd, periodicity.</li>
+<li>Figure out asymptotes and behavior near asymptotes using one-sided limits for vertical and infinite limits for horizontal.</li>
+<li>Find the derivative <span class="math">\(f&#39;\)</span>.</li>
+<li>Figure out the critical points.</li>
+<li>Figure out intervals of increase/decrease.</li>
+<li>Classify the critical numbers as local maxima/minima.</li>
+<li>Find the derivative <span class="math">\(f&#39;&#39;\)</span>.</li>
+<li>Find the points of inflection and invervals of concavity.</li>
+<li>Pick reasonable axis limits based on important points like the critical numbers and points of inflection.</li>
+<li>Draw the critical points, points of inflection, and asymptotes on the graph.</li>
+<li>Indicate the intervals of increase/decrease and concavity on the graph.</li>
+<li>Draw the curve, taking into account all the information.</li>
+</ol>
+<p>Sketch <span class="math">\(f(x) = \frac{x}{(x + 1)^2}\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>The domain is <span class="math">\(\mb{R}\)</span>.</li>
+<li>The intercepts are <span class="math">\((0, 0)\)</span>.</li>
+<li>Not symmetric.</li>
+<li>Vertical asymptote at <span class="math">\(x = -1\)</span>, going to negative infinity from both sides. Horizontal asymptote at <span class="math">\(y = 0\)</span>.</li>
+<li><span class="math">\(f&#39;(x) = \frac{(x + 1)^2 - x(2x + 2)}{(x + 1)^4} = \frac{1 - x}{(x + 1)^3}\)</span>.</li>
+<li><span class="math">\(f&#39;(x) = 0\)</span> when <span class="math">\(x = 1\)</span>, and does not exist when <span class="math">\(x = -1\)</span>. 1 is a critical point but (-1, f(-1)) is not because it is not in the domain - <span class="math">\(f(-1)\)</span> is undefined.</li>
+<li>There are three intervals <span class="math">\((-\infty, -1), (-1, 1), (1, \infty)\)</span>. Note that we considered -1 even though it is not a critical number - we use all the intervals where <span class="math">\(f&#39;\)</span> is discontinuous or 0. Testing, we find that <span class="math">\(f\)</span> is increasing on <span class="math">\((-\infty, -1) \cup (1, \infty)\)</span> and decreasing on <span class="math">\((-1, 1)\)</span>.</li>
+<li>There is a local maximum at <span class="math">\(x = 1\)</span>.</li>
+<li><span class="math">\(f&#39;&#39;(x) = \frac{-(x + 1)^2 - (1 - x)(3(x + 1)^2)}{x + 1}^6 = \frac{2x - 4}{(x + 1)^4}\)</span>.</li>
+<li><span class="math">\(f&#39;&#39;(x) = 0\)</span> when <span class="math">\(x = 2\)</span>, is defined everywhere in the domain, and we find that <span class="math">\(f\)</span> is concave upward left of <span class="math">\(x = 2\)</span> and concave down right of <span class="math">\(x = 2\)</span>. So <span class="math">\((2, f(2))\)</span> is a point of inflection, <span class="math">\((-\infty, 2)\)</span> is a concave up interval, and <span class="math">\((2, \infty)\)</span> is a concave down interval.</li>
+<li>We want to show the critical points and points of inflection. So <span class="math">\(x \in [-2, 3]\)</span> and <span class="math">\(y \in [-0.5, 0.5]\)</span> are reasonable axis limits.</li>
+<li>The rest is left as an exercise.</li>
+</ol>
+<p>Consider <span class="math">\(x^\frac{5}{3} - x^\frac{2}{3}\)</span>:</p>
+<blockquote>
+<p><span class="math">\(f(x) = x^\frac{2}{3}(x - 1)\)</span>.<br />The denominator of the fractional exponent determines the domain.<br />The numerator determines the range and symmetry.</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li>The domain is <span class="math">\(\mb{R}\)</span>.</li>
+<li>The intercepts are <span class="math">\((0, 0)\)</span> and <span class="math">\((1, 0)\)</span>.</li>
+<li>Not symmetric, though each term is symmetric by itself.</li>
+<li>No asymptotes.</li>
+<li><span class="math">\(f&#39;(x) = \frac{5}{3}x^\frac{2}{3} - \frac{2}{3}x^\frac{-1}{3} = \frac{1}{3 \sqrt[3]{x}} (5x - 2)\)</span>.</li>
+<li><span class="math">\(f&#39;(x) = 0\)</span> when <span class="math">\(x = \frac{2}{5}\)</span>, and undefined when <span class="math">\(x = 0\)</span>. So <span class="math">\((0, 0)\)</span> and <span class="math">\((\frac{2}{5}, f(\frac{2}{5}))\)</span> are critical points.</li>
+<li>The intervals are <span class="math">\((-\infty, 0), (0, \frac{2}{5}), (\frac{2}{5}, \infty)\)</span>. The function is increasing on <span class="math">\((-\infty, 0) \cup (\frac{2}{5}, \infty)\)</span> and decreasing on <span class="math">\((0, \frac{2}{5})\)</span>.</li>
+<li>There is a local maximum at <span class="math">\((0, 0)\)</span> and a local minimum at <span class="math">\((\frac{2}{5}, f(\frac{2}{5}))\)</span>.</li>
+<li><span class="math">\(f&#39;&#39;(x) = \frac{10}{9}x^\frac{-1}{3} + \frac{2}{9}x^\frac{-4}{3} = \frac{2x^\frac{-1}{3}}{9}(5x + 1)\)</span>.</li>
+<li><span class="math">\(f&#39;&#39;(x)\)</span> does not exist when <span class="math">\(x = 0\)</span>, and is 0 when <span class="math">\(x = -\frac{1}{5}\)</span>. <span class="math">\(f\)</span> is concave up left of <span class="math">\(-\frac{1}{5}\)</span> and concave down right of <span class="math">\(-\frac{1}{5}\)</span>. <span class="math">\((-\frac{1}{5}, f(-\frac{1}{5}))\)</span> is a point of inflection.</li>
+<li>Reasonable axis limits are <span class="math">\(x \in [-0.5, 1.5]\)</span> and <span class="math">\(y \in [-0.5, 0.5]\)</span>.</li>
+<li>The rest is left as an exercise. Notice the cusp at <span class="math">\(x = 0\)</span>.</li>
+</ol>
+<p>Exercises: <span class="math">\(f(x) = x^2 \ln x\)</span>, <span class="math">\(f(x) = \arctan(\frac{1}{x})\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
