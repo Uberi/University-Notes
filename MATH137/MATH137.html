@@ -1372,7 +1372,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <li>Figure out domain.</li>
 <li>Figure out intercepts.</li>
 <li>Figure out symmetry - even, odd, periodicity.</li>
-<li>Figure out asymptotes and behavior near asymptotes using one-sided limits for vertical and infinite limits for horizontal.</li>
+<li>Figure out asymptotes and behavior near asymptotes/discontinuities using one-sided limits for vertical and infinite limits for horizontal.</li>
 <li>Find the derivative <span class="math">\(f&#39;\)</span>.</li>
 <li>Figure out the critical points.</li>
 <li>Figure out intervals of increase/decrease.</li>
@@ -1417,7 +1417,36 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <li>Reasonable axis limits are <span class="math">\(x \in [-0.5, 1.5]\)</span> and <span class="math">\(y \in [-0.5, 0.5]\)</span>.</li>
 <li>The rest is left as an exercise. Notice the cusp at <span class="math">\(x = 0\)</span>.</li>
 </ol>
-<p>Exercises: <span class="math">\(f(x) = x^2 \ln x\)</span>, <span class="math">\(f(x) = \arctan(\frac{1}{x})\)</span>.</p>
+<h1 id="section-25">11/11/13</h1>
+<p>;wip: Maple is installed on all the 3rd floor labs in MC</p>
+<p>Sketch <span class="math">\(f(x) = x^2 \ln x\)</span>:</p>
+<blockquote>
+<p>;wip: find the limit near <span class="math">\(x = 0\)</span></p>
+</blockquote>
+<p>Sketch <span class="math">\(f(x) = \arctan(\frac{1}{x})\)</span>:</p>
+<blockquote>
+<p>;wip: the graph is a well defined curve</p>
+</blockquote>
+<h2 id="optimization-problems">Optimization Problems</h2>
+<p>Word problems where we need to find an extreme value of a certain function given a constraint.</p>
+<p>A farmer wishes to build a rectangular fence enclosing the maximum area possible with 1000m of fence. One wall of the area is a river and does not need fencing. What are the dimensions?</p>
+<blockquote>
+<p>Let <span class="math">\(x\)</span> and <span class="math">\(y\)</span> represent the dimensions of the rectangular fenced area, with <span class="math">\(y\)</span> being the side opposite the river.<br />We are constrained in that <span class="math">\(2x + y = 1000\)</span>, so <span class="math">\(y = 1000 - 2x\)</span>.<br />We want to maximize the area <span class="math">\(A = xy = -2x^2 + 1000x\)</span>.<br />This is a quadratic equation and the maximum value is at the vertex, at <span class="math">\(x = 250\)</span>.<br />So <span class="math">\(x = 250, y = 500\)</span>.</p>
+</blockquote>
+<p>General steps to solving optimization problems:</p>
+<ol style="list-style-type: decimal">
+<li>Determine the input variables.</li>
+<li>Write the problem constraint in terms of a function over the variables.</li>
+<li>Write the goal in terms of a function over the variables.</li>
+<li>Write the goal function in terms of a single variable, usually using the constraint.</li>
+<li>Determine the interval to consider.</li>
+<li>Find the extreme of the goal function as required.</li>
+<li>Write the conclusion statement.</li>
+</ol>
+<p>Find the points on <span class="math">\(f(x) = 1 - x^2\)</span> closest to the origin:</p>
+<blockquote>
+<p>The constraint is that the point must be on the function's curve.<br />The goal is to minimize <span class="math">\(g(x) = \sqrt{x^2 + f(x)^2} = \sqrt{x^2 + 1 - 2x^2 + x^4} = \sqrt{x^4 - x^2 + 1}\)</span>.<br />Here, we will instead minimize <span class="math">\(g(x)^2\)</span> since the extrema occur at the same <span class="math">\(x\)</span> values.<br /><span class="math">\(\frac{\dee}{\dee x} g(x)^2 = 4x^3 - 2x = 2x(2x^2 - 1) = 0\)</span> when <span class="math">\(x = 0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\)</span>.<br />We test to find <span class="math">\(g(0) = 1, g(-\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}, g(\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}\)</span>.<br />Since <span class="math">\(g(x) \to \infty\)</span> as <span class="math">\(x \to \pm \infty\)</span>, this is both a local and global minimum.<br />So the points are <span class="math">\((-\frac{1}{\sqrt}{2}, \frac{1}{2})\)</span> and <span class="math">\((\frac{1}{\sqrt}{2}, \frac{1}{2})\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

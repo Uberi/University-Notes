@@ -218,10 +218,10 @@ Which is in fact:
 <p>Conventionally, we use capital letters to name identifiers that are sets.</p>
 <p>Common sets:</p>
 <ul>
-<li><span class="math">\(\mb{N}\)</span> - natural numbers</li>
-<li><span class="math">\(\mb{Z}\)</span> - integers</li>
+<li><span class="math">\(\mb{N}\)</span> - natural numbers - <span class="math">\(\set{1, 2, 3, \ldots}\)</span></li>
+<li><span class="math">\(\mb{Z}\)</span> - integers - <span class="math">\(\set{\ldots, -2, -1, 0, 1, 2, \ldots}\)</span></li>
 <li><span class="math">\(\mb{R}\)</span> - real numbers</li>
-<li><span class="math">\(\mb{Q}\)</span> - rational numbers</li>
+<li><span class="math">\(\mb{Q}\)</span> - rational numbers -</li>
 <li><span class="math">\(\overline{\mb{Q}}\)</span> - irrational numbers</li>
 <li><span class="math">\(\mb{C}\)</span> - complex numbers</li>
 <li><span class="math">\(\emptyset\)</span> - empty set</li>
@@ -943,7 +943,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>Together, we can say the following are equivalent to each other:</p>
 <ul>
 <li><span class="math">\([a][x] = [c]\)</span> has a solution in <span class="math">\(\mb{Z}_m\)</span> - congruence class form</li>
-<li><span class="math">\(ax \equiv c \pmod{m}\)</span> has a solution - congruence form</li>
+<li><span class="math">\(ax \equiv c \pmod{m}\)</span> has a solution - linear congruence form</li>
 <li><span class="math">\(\exists x_0 \in \mb{Z}, ax_0 \equiv c \pmod{m}\)</span> - solution form</li>
 <li><span class="math">\(\exists x_0, y_0 \in \mb{Z}, ax_0 + my_0 = c\)</span> - LDE form</li>
 </ul>
@@ -962,7 +962,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>In this number system, come operations can be defined by the representatives:</p>
 <ul>
 <li><span class="math">\([a] + [b] = [a + b]\)</span> - Addition</li>
-<li><span class="math">\([a] \cdot [b] = [a \cdot b]\)</span></li>
+<li><span class="math">\([a] \cdot [b] = [a \cdot b]\)</span> - Multiplication</li>
 </ul>
 <p>Fix <span class="math">\(m = 4\)</span>. So <span class="math">\([2] \cdot [3] = [6] = [2]\)</span>. Likewise, <span class="math">\([2] + [3] = [5] = [1]\)</span>.</p>
 <p>We know that <span class="math">\([6] = [2]\)</span> because <span class="math">\(6 \equiv 2 \pmod{m}\)</span>.</p>
@@ -994,7 +994,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>If <span class="math">\(p\)</span> is a prime number, <span class="math">\(a \in \mb{Z}\)</span>, <span class="math">\(p \nmid a\)</span>, then <span class="math">\(a^{p - 1} \equiv 1 \pmod{p}\)</span>.</p>
 <p>In other words, if <span class="math">\(p\)</span> is prime, <span class="math">\([a] \in \mb{Z}_p \wedge [a] \ne 0 \implies [a]^{p - 1} = [1]\)</span>.</p>
 <p>This is also writable as <span class="math">\([a] \cdot [a]^{p - 2} = [1]\)</span>.</p>
-<p>So by the definition of the multiplicative inverse, <span class="math">\([a]^{-1} = [a]^{p - 2}\)</span>.</p>
+<p>So by the definition of the multiplicative inverse, <span class="math">\([a]^{-1} = [a]^{p - 2}\)</span> if the modulus is prime and <span class="math">\(a\)</span> is not divisible by it.</p>
 <p>Proof:</p>
 <blockquote>
 <p>Fix a prime <span class="math">\(p\)</span>.<br />Let <span class="math">\(a \in \mb{Z}\)</span>.<br />Assume <span class="math">\(p \nmid a\)</span>.<br />Consider the first <span class="math">\(p\)</span> multiples of <span class="math">\(a\)</span>: <span class="math">\(0, 1a, \ldots, (p - 1)a\)</span>.</p>
@@ -1025,7 +1025,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>Clearly, if <span class="math">\(x_0\)</span> is one solution and <span class="math">\(x_1 \equiv x_0 \pmod{5}\)</span>, then <span class="math">\(x_1^{43} \equiv x_0^{43} \pmod{5}\)</span> and <span class="math">\(x_1^9 \equiv x_0^9 \pmod{5}\)</span>, by PC.<br />So <span class="math">\(x_0^{43} + 28x_0^9 + 10x_0 \equiv x_1^{43} + 28x_1^9 + 10x_1 \equiv 1 \pmod{5}\)</span>.<br />So if solutions exist, then the complete solution has one or more congruence classes mod 5. ;what? So all we need to do is test all possible representatives: 0, 1, 2, 3, 4. ;wip: evaluate it for all those values We want to test the values for all possible representatives: <span class="math">\(0^43\)</span> Use Fermat's Little Theorem with two cases, <span class="math">\(5 \mid x\)</span> and <span class="math">\(5 \nmid x\)</span>, to prove <span class="math">\(x^4 \equiv 1\)</span> ;wip Simplify: <span class="math">\(28 \equiv 3 \pmod{5}\)</span> and <span class="math">\(10 \equiv 0 \pmod{5}\)</span>, so <span class="math">\(x^{43} + 3x^9\)</span>.<br />Clearly, <span class="math">\(x^{43} \equiv x^4 x^{39} \equiv 1 x^{39}\)</span>, because <span class="math">\(x^4 \equiv 1\)</span>.<br />If we repeat this, we get <span class="math">\(x^{39} \equiv x^{35} \equiv \ldots \equiv x^{3}\)</span>.<br />Likewise, we can do this for <span class="math">\(x^9\)</span> to find that <span class="math">\(x^9 \equiv x\)</span>. So <span class="math">\(x^{43} + 28x^9 + 10x \equiv x^3 + 3x \pmod{5}\)</span>.<br />;wip: rewrite this whole thing and do it properly</p>
 </blockquote>
 <p>In general, there is no theorem that allows us to solve these directly. However, we do know that we can always find any solutions that exist by testing all the the representatives mod 5, and we can use tricks like FLT to simplify expressions.</p>
-<h2 id="chinese-remainder-theorem">Chinese Remainder Theorem</h2>
+<h2 id="chinese-remainder-theorem-crt">Chinese Remainder Theorem (CRT)</h2>
 <blockquote>
 <p>An unknown number, when repeatedly divided by 3, the remainder is 2; by 5, the remainder is 3; and by 7, the remainder is 2. What is the number?</p>
 </blockquote>
@@ -1154,13 +1154,69 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 </blockquote>
 <p>Find <span class="math">\(\gcd(x, y)\)</span> if <span class="math">\(x = p_1^2 \cdot p_2 \cdot p_3^5\)</span> and <span class="math">\(y = p_2^4 \cdot p_3^2 \cdot p_4^2\)</span>:</p>
 <blockquote>
-<p>All divisors are listed in the factorization.<br />So the greatest common factor of both expressions is the GCD.<br />Clearly, the common divisors are <span class="math">\(p_2^a \cdot p_3^b, 0 \le a \le 1, 0 \le b \le 2\)</span>.<br />So the greatest common divisor and <span class="math">\(\gcd(x, y)\)</span> is <span class="math">\(p_2 \cdot p_3^2\)</span>.</p>
+<p>All divisors are listed in the factorization.<br />The positive divisors of <span class="math">\(x\)</span> are <span class="math">\(p_1^a \cdot p_2^b \cdot p_3^c \cdot p_4^d, 0 \le a \le 2, 0 \le b \le 1, 0 \le c \le 5, 0 \le d \le 0\)</span>.<br />The positive divisors of <span class="math">\(y\)</span> are <span class="math">\(p_1^a \cdot p_2^b \cdot p_3^c \cdot p_4^d, 0 \le a \le 0, 0 \le b \le 4, 0 \le c \le 2, 0 \le d \le 2\)</span>.<br />So <span class="math">\(0 \le a \le 2 \wedge 0 \le a \le 0 \implies a = 0\)</span>, <span class="math">\(0 \le b \le 1 \wedge 0 \le b \le 4 \implies 0 \le b \le 1\)</span>, <span class="math">\(0 \le c \le 5 \wedge 0 \le c \le 2 \implies 0 \le c \le 2\)</span>, <span class="math">\(0 \le d \le 0 \wedge 0 \le d \le 2 \implies d = 0\)</span>.<br />So the greatest common divisor and <span class="math">\(\gcd(x, y)\)</span> is <span class="math">\(p_1^0 \cdot p_2^1 \cdot p_3^2 \cdot p_4^0\)</span>, or <span class="math">\(p_2 \cdot p_3^2\)</span>.</p>
 </blockquote>
 <h3 id="gcd-from-prime-factorization-gcd-pf">GCD from prime factorization (GCD PF)</h3>
-<p>Suppose <span class="math">\(a, b &gt; 1\)</span> with the prime factorizations <span class="math">\(a = p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}\)</span></p>
-<p>;wip: finish writing it!</p>
-<p>Proof is not required.</p>
+<p>Suppose <span class="math">\(a, b &gt; 1\)</span> with the prime factorizations <span class="math">\(a = p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}\)</span>, <span class="math">\(b = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}\)</span>, where some of the exponents may be 0 (so the sets of prime factors are the same), then <span class="math">\(\gcd(a, b) = p_1^{d_1} \cdot p_2^{d_2} \cdot \ldots \cdot p_k^{d_k}\)</span>, where <span class="math">\(d_i = \min(a_i, b_i), 1 \le i \le k\)</span>.</p>
+<p>In other words, the GCD of two prime factorizations is the greatest common factor of the two expressions.</p>
+<p>Proof is not required. ;wip: yes it is</p>
 <p>GCD PF is a lot easier for very small numbers, because we can easily find the prime factorization. However, it is difficult and impractical for larger numbers because prime factorization is hard.</p>
+<p>;wip: read chapters 26, 28, 29</p>
+<h1 id="section-25">11/11/13</h1>
+<p>We move away from number theory into complex numbers.</p>
+<p>;wip: read chapters 35-38</p>
+<h2 id="complex-numbers">Complex Numbers</h2>
+<p><span class="math">\[\mb{N} \subset \mb{Z} \subset \mb{Q} \subset \mb{R}\]</span></p>
+<p><span class="math">\(x + 2 = 0\)</span> has no solution in <span class="math">\(\mb{N}\)</span>, but it does in <span class="math">\(\mb{Z}\)</span>. Many of these larger number systems were invented in order to solve equations that couldn't be solved before.</p>
+<p>Likewise, <span class="math">\(3x + 3 = 0\)</span>, <span class="math">\(x^2 - 2 = 0\)</span>, and <span class="math">\(x^2 + 2 = 0\)</span> has no solutions in <span class="math">\(\mb{Z}, \mb{Q}, \mb{R}\)</span>, respectively.</p>
+<p>In the last one, however, there is a solution in <strong>complex numbers</strong>.</p>
+<p>A <strong>complex number</strong> in <strong>standard form</strong> is any expression of the form <span class="math">\(x + yi, x, y \in \mb{Z}\)</span>. The set of complex numbers is <span class="math">\(\mb{C} = \set{x + yi \middle| x, y \in \mb{R}}\)</span>.</p>
+<p>The <span class="math">\(+\)</span> is required for standard form; it must be retained in order to be standard form.</p>
+<p>Examples:</p>
+<ul>
+<li><span class="math">\(2.7 + 3.2i\)</span></li>
+<li><span class="math">\(-2 + (-3)i\)</span> (plus sign is needed in standard form)</li>
+<li><span class="math">\(8 + 0i\)</span></li>
+</ul>
+<p>Every real number is a complex number of the form <span class="math">\(x + 0i, x \in \mb{Z}\)</span></p>
+<p>We generally denote complex variables with <span class="math">\(w\)</span> and <span class="math">\(z\)</span> rather than <span class="math">\(x\)</span> and <span class="math">\(y\)</span>. If <span class="math">\(z = a + bi\)</span>, <span class="math">\(\gothic{R}(z) = a\)</span> (the real component), <span class="math">\(\gothic{I}(z) = b\)</span> (the imaginary component).</p>
+<h3 id="sumdifference">Sum/Difference</h3>
+<p>Let <span class="math">\(w = a + bi\)</span> and <span class="math">\(z = c + di\)</span>.</p>
+<p><span class="math">\(w\)</span> and <span class="math">\(z\)</span> are <strong>equal</strong> if and only if <span class="math">\(a = c \wedge b = d\)</span>. In other words, their real and imaginary parts are equal.</p>
+<p><strong>Addition</strong> is defined as <span class="math">\(w + z = (a + c) + (b + d)i\)</span>. In other words, we simply add the components.</p>
+<p>Likewise, <strong>subtraction</strong> is defined as <span class="math">\(w - z = (a - c) + (b - d)i\)</span>. In other words, we simply subtract the components.</p>
+<h3 id="multiplication">Multiplication</h3>
+<p><strong>Multiplication</strong> is defined as <span class="math">\(wz = (ac - bd) + (ad + bc)i\)</span>.</p>
+<p>This is derived from the formula for multiplying a polynomial of the form <span class="math">\((a + bx)(c + dx) = ac + (ad + bc)x + bdx^2\)</span>.</p>
+<h3 id="inverse">Inverse</h3>
+<p>How do we find the inverse of a complex number?</p>
+<blockquote>
+<p>Let <span class="math">\(z = a + bi\)</span> and <span class="math">\(z \ne 0\)</span>.<br />The inverse is <span class="math">\(\frac{1}{a + bi} = \frac{1}{a + bi} \cdot \frac{a - bi}{a - bi} = \frac{a - bi}{a^2 + b^2}\)</span>.<br />We can write this in standard form: <span class="math">\(z^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i\)</span>.</p>
+</blockquote>
+<p>In this way, we find that <span class="math">\(\frac{1}{i} = -i\)</span>.</p>
+<h3 id="conjugatemodulus">Conjugate/Modulus</h3>
+<p>Let <span class="math">\(z = a + bi\)</span>.</p>
+<p><span class="math">\(z\)</span> has the <strong>conjugate</strong> <span class="math">\(\bar{z} = a - bi\)</span>. For example, <span class="math">\(\bar{3 + 2i} = 3 - 2i\)</span>.</p>
+<p>Note that the conjugate of any real number is the same number.</p>
+<p><span class="math">\(z\)</span> has the <strong>modulus</strong> <span class="math">\(\abs{z} = \sqrt{a^2 + b^2}\)</span>. For example, <span class="math">\(\abs{3 - 2i} = \sqrt{9 + 4} = \sqrt{13}\)</span>.</p>
+<p>Note that the modulus of any real number is the absolute value - <span class="math">\(\sqrt{x^2}\)</span>. This is why we use the absolute value notation.</p>
+<p>So <span class="math">\(z^{-1} = \frac{\bar{z}}{\abs{z}^2}\)</span>.</p>
+<h3 id="operations">Operations</h3>
+<p>Notice that operations on complex numbers work like linear polynomials.</p>
+<p>Proposition: for all <span class="math">\(u, v, z \in \mb{Z}\)</span>:</p>
+<ul>
+<li><span class="math">\((u + v) + z = u + (v + z)\)</span></li>
+<li><span class="math">\(u + v = v + u\)</span></li>
+<li><span class="math">\(z + 0 = z\)</span></li>
+<li>If <span class="math">\(z = a + bi\)</span>, <span class="math">\(-z = (-a) + (-b)i\)</span></li>
+<li><span class="math">\(uv = vu\)</span></li>
+<li><span class="math">\(1z = z\)</span> (<span class="math">\(1 = 1 + 0i\)</span>)</li>
+<li><span class="math">\(z(u + v) = zu + zv\)</span></li>
+</ul>
+<h3 id="i">i</h3>
+<p>What is <span class="math">\(i^2\)</span>, according to the multiplication formula?</p>
+<p><span class="math">\(ii = (0 + 1i)(0 + 1i) = 0 \cdot (0 - 1 \cdot 1) + (0 \cdot 1 + 1 \cdot 0) = -1 + 0i = -1\)</span></p>
+<p>So <span class="math">\(i^2 = -1\)</span>, and <span class="math">\(i\)</span> is the square root of -1. Sometimes, people write <span class="math">\(\sqrt{-1}\)</span>. However, <span class="math">\(\sqrt{\ldots}\)</span> should only formally be written for non-negative real numbers.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

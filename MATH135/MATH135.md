@@ -192,10 +192,10 @@ Conventionally, we use capital letters to name identifiers that are sets.
 
 Common sets:
 
-* $\mb{N}$ - natural numbers
-* $\mb{Z}$ - integers
+* $\mb{N}$ - natural numbers - $\set{1, 2, 3, \ldots}$
+* $\mb{Z}$ - integers - $\set{\ldots, -2, -1, 0, 1, 2, \ldots}$
 * $\mb{R}$ - real numbers
-* $\mb{Q}$ - rational numbers
+* $\mb{Q}$ - rational numbers - 
 * $\overline{\mb{Q}}$ - irrational numbers
 * $\mb{C}$ - complex numbers
 * $\emptyset$ - empty set
@@ -1375,7 +1375,7 @@ Proposition: given $a, c, m \in \mb{Z}, m > 0$, with $d = \gcd(a, m)$:
 Together, we can say the following are equivalent to each other:
 
 * $[a][x] = [c]$ has a solution in $\mb{Z}_m$ - congruence class form
-* $ax \equiv c \pmod{m}$ has a solution - congruence form
+* $ax \equiv c \pmod{m}$ has a solution - linear congruence form
 * $\exists x_0 \in \mb{Z}, ax_0 \equiv c \pmod{m}$ - solution form
 * $\exists x_0, y_0 \in \mb{Z}, ax_0 + my_0 = c$ - LDE form
 
@@ -1407,7 +1407,7 @@ Basically, the numbers in this system are infinite sets of integers, and we add 
 In this number system, come operations can be defined by the representatives:
 
 * $[a] + [b] = [a + b]$ - Addition
-* $[a] \cdot [b] = [a \cdot b]$
+* $[a] \cdot [b] = [a \cdot b]$ - Multiplication
 
 Fix $m = 4$. So $[2] \cdot [3] = [6] = [2]$. Likewise, $[2] + [3] = [5] = [1]$.
 
@@ -1470,7 +1470,7 @@ In other words, if $p$ is prime, $[a] \in \mb{Z}_p \wedge [a] \ne 0 \implies [a]
 
 This is also writable as $[a] \cdot [a]^{p - 2} = [1]$.
 
-So by the definition of the multiplicative inverse, $[a]^{-1} = [a]^{p - 2}$.
+So by the definition of the multiplicative inverse, $[a]^{-1} = [a]^{p - 2}$ if the modulus is prime and $a$ is not divisible by it.
 
 Proof:
 
@@ -1549,8 +1549,8 @@ Solve $x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}$:
 
 In general, there is no theorem that allows us to solve these directly. However, we do know that we can always find any solutions that exist by testing all the the representatives mod 5, and we can use tricks like FLT to simplify expressions.
 
-Chinese Remainder Theorem
--------------------------
+Chinese Remainder Theorem (CRT)
+-------------------------------
 
 > An unknown number, when repeatedly divided by 3, the remainder is 2; by 5, the remainder is 3; and by 7, the remainder is 2. What is the number?
 
@@ -1870,16 +1870,112 @@ Determine the number of positive divisors of $n = p_1^2 \cdot p_2 \cdot p_3^5$:
 Find $\gcd(x, y)$ if $x = p_1^2 \cdot p_2 \cdot p_3^5$ and $y = p_2^4 \cdot p_3^2 \cdot p_4^2$:
 
 > All divisors are listed in the factorization.  
-> So the greatest common factor of both expressions is the GCD.  
-> Clearly, the common divisors are $p_2^a \cdot p_3^b, 0 \le a \le 1, 0 \le b \le 2$.  
-> So the greatest common divisor and $\gcd(x, y)$ is $p_2 \cdot p_3^2$.  
+> The positive divisors of $x$ are $p_1^a \cdot p_2^b \cdot p_3^c \cdot p_4^d, 0 \le a \le 2, 0 \le b \le 1, 0 \le c \le 5, 0 \le d \le 0$.  
+> The positive divisors of $y$ are $p_1^a \cdot p_2^b \cdot p_3^c \cdot p_4^d, 0 \le a \le 0, 0 \le b \le 4, 0 \le c \le 2, 0 \le d \le 2$.  
+> So $0 \le a \le 2 \wedge 0 \le a \le 0 \implies a = 0$, $0 \le b \le 1 \wedge 0 \le b \le 4 \implies 0 \le b \le 1$, $0 \le c \le 5 \wedge 0 \le c \le 2 \implies 0 \le c \le 2$, $0 \le d \le 0 \wedge 0 \le d \le 2 \implies d = 0$.  
+> So the greatest common divisor and $\gcd(x, y)$ is $p_1^0 \cdot p_2^1 \cdot p_3^2 \cdot p_4^0$, or $p_2 \cdot p_3^2$.  
 
 ### GCD from prime factorization (GCD PF)
 
-Suppose $a, b > 1$ with the prime factorizations $a = p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}$
+Suppose $a, b > 1$ with the prime factorizations $a = p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}$, $b = p_1^{b_1} \cdot p_2^{b_2} \cdot \ldots \cdot p_k^{b_k}$, where some of the exponents may be 0 (so the sets of prime factors are the same), then $\gcd(a, b) = p_1^{d_1} \cdot p_2^{d_2} \cdot \ldots \cdot p_k^{d_k}$, where $d_i = \min(a_i, b_i), 1 \le i \le k$.
 
-;wip: finish writing it!
+In other words, the GCD of two prime factorizations is the greatest common factor of the two expressions.
 
-Proof is not required.
+Proof is not required. ;wip: yes it is
 
 GCD PF is a lot easier for very small numbers, because we can easily find the prime factorization. However, it is difficult and impractical for larger numbers because prime factorization is hard.
+
+;wip: read chapters 26, 28, 29
+
+# 11/11/13
+
+We move away from number theory into complex numbers.
+
+;wip: read chapters 35-38
+
+Complex Numbers
+---------------
+
+$$\mb{N} \subset \mb{Z} \subset \mb{Q} \subset \mb{R}$$
+
+$x + 2 = 0$ has no solution in $\mb{N}$, but it does in $\mb{Z}$. Many of these larger number systems were invented in order to solve equations that couldn't be solved before.
+
+Likewise, $3x + 3 = 0$, $x^2 - 2 = 0$, and $x^2 + 2 = 0$ has no solutions in $\mb{Z}, \mb{Q}, \mb{R}$, respectively.
+
+In the last one, however, there is a solution in **complex numbers**.
+
+A **complex number** in **standard form** is any expression of the form $x + yi, x, y \in \mb{Z}$. The set of complex numbers is $\mb{C} = \set{x + yi \middle| x, y \in \mb{R}}$.
+
+The $+$ is required for standard form; it must be retained in order to be standard form.
+
+Examples:
+
+* $2.7 + 3.2i$
+* $-2 + (-3)i$ (plus sign is needed in standard form)
+* $8 + 0i$
+
+Every real number is a complex number of the form $x + 0i, x \in \mb{Z}$
+
+We generally denote complex variables with $w$ and $z$ rather than $x$ and $y$. If $z = a + bi$, $\gothic{R}(z) = a$ (the real component), $\gothic{I}(z) = b$ (the imaginary component).
+
+### Sum/Difference
+
+Let $w = a + bi$ and $z = c + di$.
+
+$w$ and $z$ are **equal** if and only if $a = c \wedge b = d$. In other words, their real and imaginary parts are equal.
+
+**Addition** is defined as $w + z = (a + c) + (b + d)i$. In other words, we simply add the components.
+
+Likewise, **subtraction** is defined as $w - z = (a - c) + (b - d)i$. In other words, we simply subtract the components.
+
+### Multiplication
+
+**Multiplication** is defined as $wz = (ac - bd) + (ad + bc)i$.
+
+This is derived from the formula for multiplying a polynomial of the form $(a + bx)(c + dx) = ac + (ad + bc)x + bdx^2$.
+
+### Inverse
+
+How do we find the inverse of a complex number?
+
+> Let $z = a + bi$ and $z \ne 0$.  
+> The inverse is $\frac{1}{a + bi} = \frac{1}{a + bi} \cdot \frac{a - bi}{a - bi} = \frac{a - bi}{a^2 + b^2}$.  
+> We can write this in standard form: $z^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i$.  
+
+In this way, we find that $\frac{1}{i} = -i$.
+
+### Conjugate/Modulus
+
+Let $z = a + bi$.
+
+$z$ has the **conjugate** $\bar{z} = a - bi$. For example, $\bar{3 + 2i} = 3 - 2i$.
+
+Note that the conjugate of any real number is the same number.
+
+$z$ has the **modulus** $\abs{z} = \sqrt{a^2 + b^2}$. For example, $\abs{3 - 2i} = \sqrt{9 + 4} = \sqrt{13}$.
+
+Note that the modulus of any real number is the absolute value - $\sqrt{x^2}$. This is why we use the absolute value notation.
+
+So $z^{-1} = \frac{\bar{z}}{\abs{z}^2}$.
+
+### Operations
+
+Notice that operations on complex numbers work like linear polynomials.
+
+Proposition: for all $u, v, z \in \mb{Z}$:
+
+* $(u + v) + z = u + (v + z)$
+* $u + v = v + u$
+* $z + 0 = z$
+* If $z = a + bi$, $-z = (-a) + (-b)i$
+* $uv = vu$
+* $1z = z$ ($1 = 1 + 0i$)
+* $z(u + v) = zu + zv$
+
+### i
+
+What is $i^2$, according to the multiplication formula?
+
+$ii = (0 + 1i)(0 + 1i) = 0 \cdot (0 - 1 \cdot 1) + (0 \cdot 1 + 1 \cdot 0) = -1 + 0i = -1$
+
+So $i^2 = -1$, and $i$ is the square root of -1. Sometimes, people write $\sqrt{-1}$. However, $\sqrt{\ldots}$ should only formally be written for non-negative real numbers.

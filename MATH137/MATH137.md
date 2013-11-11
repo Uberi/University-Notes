@@ -1921,7 +1921,7 @@ To sketch a function:
 1. Figure out domain.
 2. Figure out intercepts.
 3. Figure out symmetry - even, odd, periodicity.
-4. Figure out asymptotes and behavior near asymptotes using one-sided limits for vertical and infinite limits for horizontal.
+4. Figure out asymptotes and behavior near asymptotes/discontinuities using one-sided limits for vertical and infinite limits for horizontal.
 5. Find the derivative $f'$.
 6. Figure out the critical points.
 7. Figure out intervals of increase/decrease.
@@ -1967,4 +1967,47 @@ Consider $x^\frac{5}{3} - x^\frac{2}{3}$:
 11. Reasonable axis limits are $x \in [-0.5, 1.5]$ and $y \in [-0.5, 0.5]$.
 12. The rest is left as an exercise. Notice the cusp at $x = 0$.
 
-Exercises: $f(x) = x^2 \ln x$, $f(x) = \arctan(\frac{1}{x})$.
+# 11/11/13
+
+;wip: Maple is installed on all the 3rd floor labs in MC
+
+Sketch $f(x) = x^2 \ln x$:
+
+> ;wip: find the limit near $x = 0$
+
+Sketch $f(x) = \arctan(\frac{1}{x})$:
+
+> ;wip: the graph is a well defined curve
+
+Optimization Problems
+---------------------
+
+Word problems where we need to find an extreme value of a certain function given a constraint.
+
+A farmer wishes to build a rectangular fence enclosing the maximum area possible with 1000m of fence. One wall of the area is a river and does not need fencing. What are the dimensions?
+
+> Let $x$ and $y$ represent the dimensions of the rectangular fenced area, with $y$ being the side opposite the river.  
+> We are constrained in that $2x + y = 1000$, so $y = 1000 - 2x$.  
+> We want to maximize the area $A = xy = -2x^2 + 1000x$.  
+> This is a quadratic equation and the maximum value is at the vertex, at $x = 250$.  
+> So $x = 250, y = 500$.  
+
+General steps to solving optimization problems:
+
+1. Determine the input variables.
+2. Write the problem constraint in terms of a function over the variables.
+3. Write the goal in terms of a function over the variables.
+4. Write the goal function in terms of a single variable, usually using the constraint.
+5. Determine the interval to consider.
+6. Find the extreme of the goal function as required.
+7. Write the conclusion statement.
+
+Find the points on $f(x) = 1 - x^2$ closest to the origin:
+
+> The constraint is that the point must be on the function's curve.  
+> The goal is to minimize $g(x) = \sqrt{x^2 + f(x)^2} = \sqrt{x^2 + 1 - 2x^2 + x^4} = \sqrt{x^4 - x^2 + 1}$.  
+> Here, we will instead minimize $g(x)^2$ since the extrema occur at the same $x$ values.  
+> $\frac{\dee}{\dee x} g(x)^2 = 4x^3 - 2x = 2x(2x^2 - 1) = 0$ when $x = 0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}$.  
+> We test to find $g(0) = 1, g(-\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}, g(\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}$.  
+> Since $g(x) \to \infty$ as $x \to \pm \infty$, this is both a local and global minimum.  
+> So the points are $(-\frac{1}{\sqrt}{2}, \frac{1}{2})$ and $(\frac{1}{\sqrt}{2}, \frac{1}{2})$.  
