@@ -1056,9 +1056,12 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 </blockquote>
 <h1 id="section-22">4/11/13</h1>
 <h2 id="rsa">RSA</h2>
-<p>Previously, it was shown that <span class="math">\(x^p \equiv x^1 \pmod{p}\)</span> for any prime <span class="math">\(p\)</span>.</p>
+<p>It can be shown that <span class="math">\(x^p \equiv x^1 \pmod{p}\)</span> for any prime <span class="math">\(p\)</span>:</p>
+<blockquote>
+<p>Either <span class="math">\(p \mid x\)</span> or <span class="math">\(p \nmid x\)</span>.<br />If <span class="math">\(p \mid x\)</span>, then <span class="math">\(x^p \equiv x^1 \pmod{p}\)</span> is obviously true.<br />If <span class="math">\(p \nmid x\)</span>, FLT states <span class="math">\(x^{p - 1} \equiv 1 \pmod{p}\)</span>, and <span class="math">\(x^p \equiv x \pmod{p}\)</span>.</p>
+</blockquote>
 <h3 id="mathematical-basis">Mathematical basis</h3>
-<p>More generally, for any <span class="math">\(r, s \in \mb{N}\)</span>, <span class="math">\(r \equiv s \pmod{p - 1} \implies x^r \equiv r^s \pmod{p}\)</span>.</p>
+<p>More generally, for any <span class="math">\(r, s \in \mb{N}\)</span>, <span class="math">\(r \equiv s \pmod{p - 1} \implies x^r \equiv x^s \pmod{p}\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
 <p>Assume <span class="math">\(r \equiv s \pmod{p - 1}\)</span>.<br />Note that either <span class="math">\(r &lt; s\)</span>, <span class="math">\(r = s\)</span>, or <span class="math">\(r &gt; s\)</span>.<br />If <span class="math">\(r = s\)</span>, then clearly <span class="math">\(x^r \equiv r^s \pmod{p}\)</span>.<br />The result for <span class="math">\(r &gt; s\)</span> is the same as <span class="math">\(r &lt; s\)</span>, except with variables swapped.<br />So we will only consider <span class="math">\(r &gt; s\)</span>.<br />Assume <span class="math">\(r &gt; s\)</span>.<br />So <span class="math">\(p - 1 \mid r - s\)</span>.<br />So <span class="math">\(\exists k \in \mb{Z}, r = k(p - 1) + s\)</span>.<br />Clearly, <span class="math">\(k \in \mb{N}\)</span> since <span class="math">\(r &gt; s\)</span>.<br />We need these to be positive so we can use them in exponents.<br />Clearly, <span class="math">\(x^r = x^{k{p - 1} + s}\)</span>.<br />Either <span class="math">\(p \mid x\)</span> or <span class="math">\(p \nmid x\)</span>.<br />If <span class="math">\(p \nmid x\)</span>, then FLT states <span class="math">\(x^{p - 1} \equiv 1\)</span> and <span class="math">\((x^{p - 1})^k \equiv 1^k \equiv 1\)</span>.<br />So <span class="math">\(x^r = (x^{p - 1}) \cdot x^s \equiv 1 \cdot x^s \equiv x^s\)</span>.<br />If <span class="math">\(p \mid x\)</span>, then <span class="math">\(x \equiv 0 \pmod{p}\)</span> and <span class="math">\(x^r = 0^r = 0 = x^s\)</span>.</p>
@@ -1082,21 +1085,28 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <h3 id="algorithm">Algorithm</h3>
 <p>We can use <span class="math">\((x^3)^7 \equiv x \pmod{33}\)</span> to <strong>encrypt messages</strong>. People can take a number <span class="math">\(m\)</span> and send <span class="math">\(v = m^3\)</span> it to the recipient as the encrypted message. The recipient would then decrypt it by taking <span class="math">\(v^7\)</span> mod <span class="math">\(n\)</span> to obtain <span class="math">\(m\)</span>.</p>
 <p>For example, we can represent each letter A-Z as congruence classes <span class="math">\([2]\)</span> to <span class="math">\([27]\)</span> (we skip 0 and 1 because <span class="math">\(1^3 = 1\)</span> and <span class="math">\(0^3 = 0\)</span>). We now make a table with each one cubed mod <span class="math">\(n\)</span> to obtain <span class="math">\([8], [27], [31], [26], \ldots\)</span>.</p>
-<p>;wip: go through a simple example</p>
+<p>Now we encrypt a simple message, &quot;CANDY&quot;:</p>
+<blockquote>
+<p>We have <span class="math">\(C, A, N, D, Y\)</span> as the <strong>plaintext</strong> - the original message.<br /><span class="math">\(C, A, N, D, Y\)</span> becomes <span class="math">\([4], [2], [15], [5], [26]\)</span> when represented using congruence classes.<br />If we take each congruence class to the power of 3, we obtain <span class="math">\([31], [8], [9], [26], [20]\)</span>.<br />This is the encrypted message. We do not need to re-express it in terms of letters.</p>
+</blockquote>
 <p>If someone gives us the modulus, 33, and the power, 3, we can undo the encryption by taking each number to the seventh power.</p>
+<p>Now we decrypt the above message:</p>
+<blockquote>
+<p>We have <span class="math">\([31], [8], [9], [26], [20]\)</span> as the <strong>ciphertext</strong> - the encrypted message.<br />We take each congruence class to the power of 7, to &quot;undo the cubing&quot;: <span class="math">\([4], [2], [15], [5], [26]\)</span>.<br />If we lookup the values in our table, they correspond to the letters <span class="math">\(C, A, N, D, Y\)</span>. This is the original message.</p>
+</blockquote>
 <p>This is the basic idea behind RSA (Rivest-Shamir-Adleman), a <strong>public key cryptography algorithm</strong>.</p>
 <p>Alice wants to communicate with other people in a secure way. So she announces that the messages are encrypted using RSA.</p>
 <p>Then, she:</p>
 <ol style="list-style-type: decimal">
 <li>Chooses 2 large primes <span class="math">\(p, q\)</span>.</li>
 <li>Computes <span class="math">\(\phi(n)\)</span> for <span class="math">\((p - 1)(q - 1)\)</span>.</li>
-<li>Selects <span class="math">\(e \in \mb{N}\)</span>, such that <span class="math">\(\gcd(e, \phi(n))\)</span> and <span class="math">\(1 &lt; e &lt; \phi(n)\)</span>.</li>
+<li>Selects <span class="math">\(e \in \mb{N}\)</span>, such that <span class="math">\(\gcd(e, \phi(n)) = 1\)</span> and <span class="math">\(1 &lt; e &lt; \phi(n)\)</span>. This can be done by randomly choosing a number and testing, since it is likely that a random number will satisfy this property.</li>
 <li>Finds a solution <span class="math">\(d \in \mb{N}\)</span> to <span class="math">\(ed \equiv 1 \pmod{\phi(n)}, 1 &lt; d &lt; \phi(n)\)</span>.</li>
 <li>Publishes <span class="math">\((e, n)\)</span>. <span class="math">\((e, n)\)</span> is the <strong>public encryption key</strong>.</li>
 <li>Keeps <span class="math">\(d\)</span> secret. <span class="math">\((d, n)\)</span> is the <strong>private decryption key</strong>.</li>
 </ol>
-<p>The public encrypts messages by using <span class="math">\(x \wierdarrow? x^e \pmod{n}\)</span>.</p>
-<p>Alice can decrypt messages using <span class="math">\(x \wierdarrow? x^e \pmod{n}\)</span>.</p>
+<p>The public encrypts messages by using <span class="math">\(x \longmapsto x^e \pmod{n}\)</span>.</p>
+<p>Alice can decrypt messages using <span class="math">\(x \longmapsto x^d \pmod{n}\)</span> (taking each <span class="math">\(x\)</span> to the power <span class="math">\(d\)</span>).</p>
 <h3 id="security">Security</h3>
 <p>Alice's public key <span class="math">\((e, n)\)</span> is known to everyone, including the malicious attacker Bob.</p>
 <p>Suppose Bob intercepts a message intended for Alice. To read it, he needs <span class="math">\((d, n)\)</span>.</p>
@@ -1179,7 +1189,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <li><span class="math">\(8 + 0i\)</span></li>
 </ul>
 <p>Every real number is a complex number of the form <span class="math">\(x + 0i, x \in \mb{Z}\)</span></p>
-<p>We generally denote complex variables with <span class="math">\(w\)</span> and <span class="math">\(z\)</span> rather than <span class="math">\(x\)</span> and <span class="math">\(y\)</span>. If <span class="math">\(z = a + bi\)</span>, <span class="math">\(\gothic{R}(z) = a\)</span> (the real component), <span class="math">\(\gothic{I}(z) = b\)</span> (the imaginary component).</p>
+<p>We generally denote complex variables with <span class="math">\(w\)</span> and <span class="math">\(z\)</span> rather than <span class="math">\(x\)</span> and <span class="math">\(y\)</span>. If <span class="math">\(z = a + bi\)</span>, <span class="math">\(\mathfrak{R}(z) = a\)</span> (the real component), <span class="math">\(\mathfrak{I}(z) = b\)</span> (the imaginary component). Both of these are simply real numbers.</p>
 <h3 id="sumdifference">Sum/Difference</h3>
 <p>Let <span class="math">\(w = a + bi\)</span> and <span class="math">\(z = c + di\)</span>.</p>
 <p><span class="math">\(w\)</span> and <span class="math">\(z\)</span> are <strong>equal</strong> if and only if <span class="math">\(a = c \wedge b = d\)</span>. In other words, their real and imaginary parts are equal.</p>
@@ -1196,11 +1206,12 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>In this way, we find that <span class="math">\(\frac{1}{i} = -i\)</span>.</p>
 <h3 id="conjugatemodulus">Conjugate/Modulus</h3>
 <p>Let <span class="math">\(z = a + bi\)</span>.</p>
-<p><span class="math">\(z\)</span> has the <strong>conjugate</strong> <span class="math">\(\bar{z} = a - bi\)</span>. For example, <span class="math">\(\bar{3 + 2i} = 3 - 2i\)</span>.</p>
+<p><span class="math">\(z\)</span> has the <strong>conjugate</strong> <span class="math">\(\overline{z} = a - bi\)</span>. For example, <span class="math">\(\overline{3 + 2i} = 3 - 2i\)</span>.</p>
+<p>The conjugate of a number simply has the opposite sign for the imaginary part.</p>
 <p>Note that the conjugate of any real number is the same number.</p>
 <p><span class="math">\(z\)</span> has the <strong>modulus</strong> <span class="math">\(\abs{z} = \sqrt{a^2 + b^2}\)</span>. For example, <span class="math">\(\abs{3 - 2i} = \sqrt{9 + 4} = \sqrt{13}\)</span>.</p>
 <p>Note that the modulus of any real number is the absolute value - <span class="math">\(\sqrt{x^2}\)</span>. This is why we use the absolute value notation.</p>
-<p>So <span class="math">\(z^{-1} = \frac{\bar{z}}{\abs{z}^2}\)</span>.</p>
+<p>So <span class="math">\(z^{-1} = \frac{\overline{z}}{\abs{z}^2}\)</span>.</p>
 <h3 id="operations">Operations</h3>
 <p>Notice that operations on complex numbers work like linear polynomials.</p>
 <p>Proposition: for all <span class="math">\(u, v, z \in \mb{Z}\)</span>:</p>
@@ -1217,6 +1228,46 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>What is <span class="math">\(i^2\)</span>, according to the multiplication formula?</p>
 <p><span class="math">\(ii = (0 + 1i)(0 + 1i) = 0 \cdot (0 - 1 \cdot 1) + (0 \cdot 1 + 1 \cdot 0) = -1 + 0i = -1\)</span></p>
 <p>So <span class="math">\(i^2 = -1\)</span>, and <span class="math">\(i\)</span> is the square root of -1. Sometimes, people write <span class="math">\(\sqrt{-1}\)</span>. However, <span class="math">\(\sqrt{\ldots}\)</span> should only formally be written for non-negative real numbers.</p>
+<h1 id="section-26">13/11/13</h1>
+<h3 id="properties-of-conjugates-pcj">Properties of Conjugates (PCJ)</h3>
+<p>Proposition: for all <span class="math">\(z, w, \in \mb{C}\)</span>:</p>
+<ul>
+<li><span class="math">\(\overline{z + w} = \overline{z} + \overline{w}\)</span></li>
+<li><span class="math">\(\overline{z \cdot w} = \overline{z} \cdot \overline{w}\)</span></li>
+<li><span class="math">\(\overline{\overline{z}} = z\)</span></li>
+<li><span class="math">\(z + \overline{z} = 2 \mathfrak{R}(z)\)</span></li>
+<li><span class="math">\(z - \overline{z} = 2 i \mathfrak{I}(z)\)</span></li>
+</ul>
+<p>These are trivially proved by using the definitions.</p>
+<p>Interestingly, <span class="math">\(\overline{z} - z = z - \overline{z}\)</span>.</p>
+<h3 id="properties-of-modulus-pm">Properties of Modulus (PM)</h3>
+<p>Proposition: for all <span class="math">\(z, w \in \mb{C}\)</span>:</p>
+<ul>
+<li><span class="math">\(\abs{z} = 0 \iff z = 0\)</span></li>
+<li><span class="math">\(\abs{z} = \abs{\overline{z}}\)</span></li>
+<li><span class="math">\(z \overline{z} = \abs{z}^2\)</span></li>
+<li><span class="math">\(\abs{zw} = \abs{z} \abs{w}\)</span></li>
+<li><span class="math">\(\abs{z + w} \le \abs{z} + \abs{w}\)</span> - triangle inequality</li>
+</ul>
+<p>Proof of first:</p>
+<blockquote>
+<p>Assume <span class="math">\(z = 0\)</span>. So <span class="math">\(\abs{z} = 0\)</span>.<br />Assume <span class="math">\(\abs{z} = 0\)</span>. So <span class="math">\(0^2 = \mathfrak{R}(z)^2 + \mathfrak{I}(z)^2\)</span>.<br />Clearly, <span class="math">\(\mathfrak{R}(z)^2 \ge 0, \mathfrak{I}(z)^2 \ge 0\)</span>. So <span class="math">\(\mathfrak{R}(z) = 0, \mathfrak{I}(z) = 0\)</span>.</p>
+</blockquote>
+<p>Proof of fourth:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\abs{z}, \abs{w}, \abs{zw}\)</span> are non-negative real numbers.<br />So we can just prove <span class="math">\(\abs{zw}^2 = \abs{z}^2 \abs{w}^2\)</span>.<br />Let <span class="math">\(z = a + bi, w = c + di\)</span>. So <span class="math">\(\abs{zw}^2 = (ac - bd)^2 + (ad + bc)^2 = (a^2 + b^2)(c^2 + d^2) = \abs{z}^2 \abs{w}^2\)</span>.</p>
+</blockquote>
+<p>The rest is either trivial to prove or I'm too tired to.</p>
+<h3 id="the-complex-plane">The Complex Plane</h3>
+<p>We can picture a complex number <span class="math">\(z = x + yi\)</span> as a point <span class="math">\((x, y)\)</span> in a 2D plane.</p>
+<p>In this representation, we call the x-axis the &quot;real axis&quot; and the y-axis the &quot;imaginary axis&quot;.</p>
+<p><span class="math">\((x, y)\)</span> are the <strong>Cartesian coordinates</strong> of <span class="math">\(z\)</span>.</p>
+<p>Points on a plane can also be described by polar coordinates. Here, <span class="math">\(r = \abs{z}\)</span> and <span class="math">\(\theta = \arccos \left(\frac{x}{r}\right)\)</span>, making sure to keep the quandrant in mind.</p>
+<p>In polar coordinates, <span class="math">\(x = r \cos \theta, y = r \sin \theta\)</span></p>
+<p>Geometrically speaking, the modulus of <span class="math">\(z\)</span> is the length of the hypotenuse of the triangle formed with the point and the origin.</p>
+<p>The <strong>polar form</strong> of <span class="math">\(z\)</span> is <span class="math">\(z = (r \cos \theta) + (r \sin \theta)i = r(\cos \theta + i \sin \theta)\)</span>. The <strong>polar coordinates</strong> of <span class="math">\(z\)</span> are <span class="math">\((r, \theta)\)</span>.</p>
+<p>The <strong>argument</strong> of <span class="math">\(z\)</span> is <span class="math">\(\theta\)</span>.</p>
+<p>For example, <span class="math">\(z = 1 + i = \sqrt{2} \left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)\)</span></p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

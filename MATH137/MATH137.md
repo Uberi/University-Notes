@@ -1549,6 +1549,8 @@ In math and science we often use approximations to solve problems. This is becau
 
 The **linear approximation** to a function $f(x)$ near a point $x = a$ is a first order polynomial (linear equation) which best approximates $f(x)$ near $x = a$.
 
+This is also known as the **linearization**.
+
 It is simply the tangent line, since it has the same **slope** and **value** at the point.
 
 So if the linear approximation is $L(x)$, it is required that $L(a) = f(a)$ and $L'(a) = f'(a)$.
@@ -2011,3 +2013,71 @@ Find the points on $f(x) = 1 - x^2$ closest to the origin:
 > We test to find $g(0) = 1, g(-\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}, g(\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}$.  
 > Since $g(x) \to \infty$ as $x \to \pm \infty$, this is both a local and global minimum.  
 > So the points are $(-\frac{1}{\sqrt}{2}, \frac{1}{2})$ and $(\frac{1}{\sqrt}{2}, \frac{1}{2})$.  
+
+# 13/11/13
+
+Newton's Method
+---------------
+
+Suppose we wanted to find the root of $x = e^{-x}$. We know that the root exists, but we can't solve it analytically.
+
+So we need to use approximation methods. Recall the **bisection method**.
+
+Let $f(x) = e^{-x} - x$. So $f(0) > 0 \wedge f(1) < 0$ and by IVT, a root exists in $[0, 1]$.
+
+We bisect to obtain two intervals $[0, 0.5], [0.5, 1]$. Clearly, $f(0.5) > 0$ and by IVT, a root exists in $[0.5, 1]$.
+
+We bisect to obtain two intervas $[0.5, 0.75], [0.75, 1]$. Clearly, $f(0.75) < 0$ and by IVT, a root exists in $[0.5, 0.75]$.
+
+We repeat this to obtain successively more accurate results, though we never obtain the true value itself using this method.
+
+The problem with this method is that it takes a lot of iterations to get to high accuracy - it converges relatively slowly.
+
+**Newton's method** converges faster. It is based on linear approximations.
+
+If we can't solve $f(x) = 0$, then we find the linear approximation $L(x)$ and then solve $L(x) = 0$ instead.
+
+The process goes generally as follows:
+
+1. We determine an initial guess $x_0$.
+2. We find the linear approximation: $L(x) = f'(x_0)(x - x_0) + f(x_0)$.
+3. Let $x_1$ be the next guess such that $L(x_1) = 0$: $f'(x_0)(x_1 - x_0) + f(x_0) = 0$, $x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}$.
+4. Now our guess is $x_1$. We can repeat the process to obtain successively more accuracte results.
+
+So the approximation $x_n = x_{n - 1} - \frac{f(x_{n - 1})}{f'(x_{n - 1})}$ given initial guess $x_0$.
+
+Find $x$ to 8 decimal places if $f(x) = e^{-x} - x = 0$, using Newton's method:
+
+> Clearly, $f'(x) = -e^{-x} - 1$
+> We take an initial guess $x_0 = 0$, on the interval $[0, 1]$ as found above. Generally, using the middle of the interval (in our case 0.5) is a better guess, but 0 makes foor simpler computations.  
+> So $x_1 = 0 - \frac{1}{-2} = 0.5$.  
+> So $x_2 = 0.5 - \frac{f(0.5)}{f'(0.5)}$.  
+> ;wip
+
+We know that our guess has 8 correct decimal places because between two guesses, those decimal places did not change.
+
+Note that the initial guess is generally taken from an interval on which we prove the root exists, using IVT. However, any value will usually work.
+
+Note that the method does not converge when:
+
+* $f'(x) = 0$, so the linear approximation has no roots.
+* $f'(x)$ does not exist, so we have no linear approximation.
+* $f'(x)$ is not continuous.
+* If there are multiple roots, different guesses might result in different resulting roots.
+
+Antiderivatives
+---------------
+
+If $f'(x) = 2x$, then the most general form of $f(x)$ is $x^2 + c$, where $c$ is a constant.
+
+The **antiderivative** of a function $f$ is the function $F$ such that $F' = f$. Antidifferentiation is the opposite of differentiation - it undoes differentiation as subtraction undoes addition.
+
+We can modify our existing derivative laws to obtain the antiderivative laws:
+
+### Power Law
+
+Let $f(x) = x^n$. So $F'(x) = f(x)$.
+
+Since $\frac{\dee}{\dee x} x^n = nx^{n - 1}$, $F(x) = \frac{x^{n + 1}}{n + 1}$.
+
+Note that this doesn't work for $n = -1$.

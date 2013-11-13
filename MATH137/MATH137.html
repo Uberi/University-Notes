@@ -1171,6 +1171,7 @@ e &amp;= \lim_{h \to 0} (1 + h)^\frac{1}{h} \\
 <h2 id="linear-approximations">Linear Approximations</h2>
 <p>In math and science we often use approximations to solve problems. This is because some problems are complex or impossible to solve analytically, and it can simplify things considerably.</p>
 <p>The <strong>linear approximation</strong> to a function <span class="math">\(f(x)\)</span> near a point <span class="math">\(x = a\)</span> is a first order polynomial (linear equation) which best approximates <span class="math">\(f(x)\)</span> near <span class="math">\(x = a\)</span>.</p>
+<p>This is also known as the <strong>linearization</strong>.</p>
 <p>It is simply the tangent line, since it has the same <strong>slope</strong> and <strong>value</strong> at the point.</p>
 <p>So if the linear approximation is <span class="math">\(L(x)\)</span>, it is required that <span class="math">\(L(a) = f(a)\)</span> and <span class="math">\(L&#39;(a) = f&#39;(a)\)</span>.</p>
 <p>The linear approximation can be found as follows:</p>
@@ -1447,6 +1448,46 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <blockquote>
 <p>The constraint is that the point must be on the function's curve.<br />The goal is to minimize <span class="math">\(g(x) = \sqrt{x^2 + f(x)^2} = \sqrt{x^2 + 1 - 2x^2 + x^4} = \sqrt{x^4 - x^2 + 1}\)</span>.<br />Here, we will instead minimize <span class="math">\(g(x)^2\)</span> since the extrema occur at the same <span class="math">\(x\)</span> values.<br /><span class="math">\(\frac{\dee}{\dee x} g(x)^2 = 4x^3 - 2x = 2x(2x^2 - 1) = 0\)</span> when <span class="math">\(x = 0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\)</span>.<br />We test to find <span class="math">\(g(0) = 1, g(-\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}, g(\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}\)</span>.<br />Since <span class="math">\(g(x) \to \infty\)</span> as <span class="math">\(x \to \pm \infty\)</span>, this is both a local and global minimum.<br />So the points are <span class="math">\((-\frac{1}{\sqrt}{2}, \frac{1}{2})\)</span> and <span class="math">\((\frac{1}{\sqrt}{2}, \frac{1}{2})\)</span>.</p>
 </blockquote>
+<h1 id="section-26">13/11/13</h1>
+<h2 id="newtons-method">Newton's Method</h2>
+<p>Suppose we wanted to find the root of <span class="math">\(x = e^{-x}\)</span>. We know that the root exists, but we can't solve it analytically.</p>
+<p>So we need to use approximation methods. Recall the <strong>bisection method</strong>.</p>
+<p>Let <span class="math">\(f(x) = e^{-x} - x\)</span>. So <span class="math">\(f(0) &gt; 0 \wedge f(1) &lt; 0\)</span> and by IVT, a root exists in <span class="math">\([0, 1]\)</span>.</p>
+<p>We bisect to obtain two intervals <span class="math">\([0, 0.5], [0.5, 1]\)</span>. Clearly, <span class="math">\(f(0.5) &gt; 0\)</span> and by IVT, a root exists in <span class="math">\([0.5, 1]\)</span>.</p>
+<p>We bisect to obtain two intervas <span class="math">\([0.5, 0.75], [0.75, 1]\)</span>. Clearly, <span class="math">\(f(0.75) &lt; 0\)</span> and by IVT, a root exists in <span class="math">\([0.5, 0.75]\)</span>.</p>
+<p>We repeat this to obtain successively more accurate results, though we never obtain the true value itself using this method.</p>
+<p>The problem with this method is that it takes a lot of iterations to get to high accuracy - it converges relatively slowly.</p>
+<p><strong>Newton's method</strong> converges faster. It is based on linear approximations.</p>
+<p>If we can't solve <span class="math">\(f(x) = 0\)</span>, then we find the linear approximation <span class="math">\(L(x)\)</span> and then solve <span class="math">\(L(x) = 0\)</span> instead.</p>
+<p>The process goes generally as follows:</p>
+<ol style="list-style-type: decimal">
+<li>We determine an initial guess <span class="math">\(x_0\)</span>.</li>
+<li>We find the linear approximation: <span class="math">\(L(x) = f&#39;(x_0)(x - x_0) + f(x_0)\)</span>.</li>
+<li>Let <span class="math">\(x_1\)</span> be the next guess such that <span class="math">\(L(x_1) = 0\)</span>: <span class="math">\(f&#39;(x_0)(x_1 - x_0) + f(x_0) = 0\)</span>, <span class="math">\(x_1 = x_0 - \frac{f(x_0)}{f&#39;(x_0)}\)</span>.</li>
+<li>Now our guess is <span class="math">\(x_1\)</span>. We can repeat the process to obtain successively more accuracte results.</li>
+</ol>
+<p>So the approximation <span class="math">\(x_n = x_{n - 1} - \frac{f(x_{n - 1})}{f&#39;(x_{n - 1})}\)</span> given initial guess <span class="math">\(x_0\)</span>.</p>
+<p>Find <span class="math">\(x\)</span> to 8 decimal places if <span class="math">\(f(x) = e^{-x} - x = 0\)</span>, using Newton's method:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(f&#39;(x) = -e^{-x} - 1\)</span> We take an initial guess <span class="math">\(x_0 = 0\)</span>, on the interval <span class="math">\([0, 1]\)</span> as found above. Generally, using the middle of the interval (in our case 0.5) is a better guess, but 0 makes foor simpler computations.<br />So <span class="math">\(x_1 = 0 - \frac{1}{-2} = 0.5\)</span>.<br />So <span class="math">\(x_2 = 0.5 - \frac{f(0.5)}{f&#39;(0.5)}\)</span>.<br />;wip</p>
+</blockquote>
+<p>We know that our guess has 8 correct decimal places because between two guesses, those decimal places did not change.</p>
+<p>Note that the initial guess is generally taken from an interval on which we prove the root exists, using IVT. However, any value will usually work.</p>
+<p>Note that the method does not converge when:</p>
+<ul>
+<li><span class="math">\(f&#39;(x) = 0\)</span>, so the linear approximation has no roots.</li>
+<li><span class="math">\(f&#39;(x)\)</span> does not exist, so we have no linear approximation.</li>
+<li><span class="math">\(f&#39;(x)\)</span> is not continuous.</li>
+<li>If there are multiple roots, different guesses might result in different resulting roots.</li>
+</ul>
+<h2 id="antiderivatives">Antiderivatives</h2>
+<p>If <span class="math">\(f&#39;(x) = 2x\)</span>, then the most general form of <span class="math">\(f(x)\)</span> is <span class="math">\(x^2 + c\)</span>, where <span class="math">\(c\)</span> is a constant.</p>
+<p>The <strong>antiderivative</strong> of a function <span class="math">\(f\)</span> is the function <span class="math">\(F\)</span> such that <span class="math">\(F&#39; = f\)</span>. Antidifferentiation is the opposite of differentiation - it undoes differentiation as subtraction undoes addition.</p>
+<p>We can modify our existing derivative laws to obtain the antiderivative laws:</p>
+<h3 id="power-law-1">Power Law</h3>
+<p>Let <span class="math">\(f(x) = x^n\)</span>. So <span class="math">\(F&#39;(x) = f(x)\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} x^n = nx^{n - 1}\)</span>, <span class="math">\(F(x) = \frac{x^{n + 1}}{n + 1}\)</span>.</p>
+<p>Note that this doesn't work for <span class="math">\(n = -1\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

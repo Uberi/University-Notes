@@ -807,3 +807,89 @@ Longino shifts the thinking of knowledge from individuals to groups of people - 
 In communities with various perspectives, we can mostly overcome our biases. We can see things from many perspectives to see as much of the issue as possible.
 
 Even scientists cannot uncover their own biases. The best way to uncover them is to have a discussion with someone who has a different set of biases.
+
+# 12/11/13
+
+Philosophy of Science
+---------------------
+
+Two main perpectives:
+
+* What is the intrinsic value of the scientific method? For example, asking what kind of knowledge is scientific?
+* How can philosophers contribute to and help science? For example, clarifying what evolution means in the philosophy of biology to allow for tighter experiments.
+
+There is also philosophy of science in general, and philosophy of special sciences, like biology or psychology.
+
+Karl Popper was one of the best known philosophers in the philosophy of science.
+
+He focused on two questions:
+
+* How do we know if some piece of knowledge is scientific of not? - the **demarcation problem**.
+    * We are trying to draw the line between what we can place trust and credibility in and what we cannot.
+* What is the scientific method? - his answer to this is the **falsification test**
+
+### Induction
+
+Before Popper's time, the scientific method had three steps: observation (premises), generalization (hypothesis), more observations (testing).
+
+For example:
+
+    Observation:
+    The geese outside of Hagey Hall are jerks
+    The geese outside V1 green are jerks
+    The geese outside RCH are jerks
+    Hypothesis:
+    All geese are jerks
+    Testing:
+    The geese in North Carolina are jerks too
+
+However, Popper found several issues with this method:
+
+* Logical problem: inductive arguments always have new information; the conclusion is only likely to be true.
+    * A test is just another premise of the argument - it offers no proof.
+    * A single counterexample will disprove the argument.
+* Psychological problem: confirmation bias - ignoring conflicting evidence.
+    * This is subtle and is often done unconsciously.
+    * Humans are very good at seeing only what they want to see.
+    * We are more likely to only see the jerk geese and ignore the nice ones.
+* Methodological problem: we can't collect observations unless we already have some sort of theory already.
+    * How could a person make observations about geese without some assumptions about what geese or jerks are?
+    * In the first step, what do we observe? We need to have some idea of what we are looking for before making observations.
+
+### Falsificationism
+
+Popper has a better idea - **falsificationism**. According to this method, scientists should not be trying to find evidence tht proves their theory right. Instead, they should try to prove the theory wrong.
+
+The test involves imagining figuring out what could potentially make it false.
+
+We first figure out what the theory predicts: "if all geese are jerks, then the geese in North Carolina should be jerks".
+
+We assume this implication is true.
+
+So there is a good way to disprove the antecedent - we can just find the negation of the conclusion: "The geese in North Carolina are not jerks".
+
+If a scientist travels there and finds that there are geese that are not jerks, then the theory is disproven.
+
+A theory is scientific if and only if we can imagine a practical situation in which we could **disprove** the hypothesis.
+
+If it is impractical to disprove it, or it is impossible to find a counterexample, then the theory is not scientific.
+
+For example, a horoscope might say "you will meet a strong character today". This is not a scientific statement because there isn't any imaginable or practical way of proving this false.
+
+This test does not depend on actually testing it; we only need to imagine the situations. Actually doing the tests are necessary too but does not affect whether something is scientific.
+
+With Popper's method, science progresses by **ruling out what is false**.
+
+Popper says that his method doesn't have the issues mentioned above because:
+
+* This method is deductive - a counterexample allows us to conclude with certainty that a theory is false.
+* We eliminate confirmation bias by specifically going against it.
+* We are trying to prove something false rather than true, so we are specifically trying to look for a specific thing.
+
+Although we cannot determine the truth of the hypothesis by observation, we can increase the our **confidence** in it.
+
+Our confidence in a theory is determined through **strong tests**. A stronger test makes risky predictions, predictions that are unlikely to be the case. A weaker test makes predictions that we would expect to see anyways.
+
+So when the prediction is actually true - there was a very risky test, and yet the theory still passed it - then our confidence in the theory is significantly increased. If it only passed a weak test, then our confidence is increased very little.
+
+An example would be Einsteinian mechanics. Newtonian mechanics predicted that light travelled in straight lines, but Einstein says it can bend. This was a very risky prediction, and when light was observed to bend during a solar eclipse, our confidence in Einstein's theory was increased a lot.

@@ -1646,11 +1646,15 @@ x \equiv 2 \pmod{7} \\
 RSA
 ---
 
-Previously, it was shown that $x^p \equiv x^1 \pmod{p}$ for any prime $p$.
+It can be shown that $x^p \equiv x^1 \pmod{p}$ for any prime $p$:
+
+> Either $p \mid x$ or $p \nmid x$.  
+> If $p \mid x$, then $x^p \equiv x^1 \pmod{p}$ is obviously true.  
+> If $p \nmid x$, FLT states $x^{p - 1} \equiv 1 \pmod{p}$, and $x^p \equiv x \pmod{p}$.  
 
 ### Mathematical basis
 
-More generally, for any $r, s \in \mb{N}$, $r \equiv s \pmod{p - 1} \implies x^r \equiv r^s \pmod{p}$.
+More generally, for any $r, s \in \mb{N}$, $r \equiv s \pmod{p - 1} \implies x^r \equiv x^s \pmod{p}$.
 
 Proof:
 
@@ -1707,9 +1711,20 @@ We can use $(x^3)^7 \equiv x \pmod{33}$ to **encrypt messages**. People can take
 
 For example, we can represent each letter A-Z as congruence classes $[2]$ to $[27]$ (we skip 0 and 1 because $1^3 = 1$ and $0^3 = 0$). We now make a table with each one cubed mod $n$ to obtain $[8], [27], [31], [26], \ldots$.
 
-;wip: go through a simple example
+Now we encrypt a simple message, "CANDY":
+
+> We have $C, A, N, D, Y$ as the **plaintext** - the original message.  
+> $C, A, N, D, Y$ becomes $[4], [2], [15], [5], [26]$ when represented using congruence classes.  
+> If we take each congruence class to the power of 3, we obtain $[31], [8], [9], [26], [20]$.  
+> This is the encrypted message. We do not need to re-express it in terms of letters.  
 
 If someone gives us the modulus, 33, and the power, 3, we can undo the encryption by taking each number to the seventh power.
+
+Now we decrypt the above message:
+
+> We have $[31], [8], [9], [26], [20]$ as the **ciphertext** - the encrypted message.  
+> We take each congruence class to the power of 7, to "undo the cubing": $[4], [2], [15], [5], [26]$.  
+> If we lookup the values in our table, they correspond to the letters $C, A, N, D, Y$. This is the original message.  
 
 This is the basic idea behind RSA (Rivest-Shamir-Adleman), a **public key cryptography algorithm**.
 
@@ -1719,14 +1734,14 @@ Then, she:
 
 1. Chooses 2 large primes $p, q$.
 2. Computes $\phi(n)$ for $(p - 1)(q - 1)$.
-3. Selects $e \in \mb{N}$, such that $\gcd(e, \phi(n))$ and $1 < e < \phi(n)$.
+3. Selects $e \in \mb{N}$, such that $\gcd(e, \phi(n)) = 1$ and $1 < e < \phi(n)$. This can be done by randomly choosing a number and testing, since it is likely that a random number will satisfy this property.
 4. Finds a solution $d \in \mb{N}$ to $ed \equiv 1 \pmod{\phi(n)}, 1 < d < \phi(n)$.
 5. Publishes $(e, n)$. $(e, n)$ is the **public encryption key**.
 6. Keeps $d$ secret. $(d, n)$ is the **private decryption key**.
 
-The public encrypts messages by using $x \wierdarrow? x^e \pmod{n}$.
+The public encrypts messages by using $x \longmapsto x^e \pmod{n}$.
 
-Alice can decrypt messages using $x \wierdarrow? x^e \pmod{n}$.
+Alice can decrypt messages using $x \longmapsto x^d \pmod{n}$ (taking each $x$ to the power $d$).
 
 ### Security
 
@@ -1916,7 +1931,7 @@ Examples:
 
 Every real number is a complex number of the form $x + 0i, x \in \mb{Z}$
 
-We generally denote complex variables with $w$ and $z$ rather than $x$ and $y$. If $z = a + bi$, $\gothic{R}(z) = a$ (the real component), $\gothic{I}(z) = b$ (the imaginary component).
+We generally denote complex variables with $w$ and $z$ rather than $x$ and $y$. If $z = a + bi$, $\mathfrak{R}(z) = a$ (the real component), $\mathfrak{I}(z) = b$ (the imaginary component). Both of these are simply real numbers.
 
 ### Sum/Difference
 
@@ -1948,7 +1963,9 @@ In this way, we find that $\frac{1}{i} = -i$.
 
 Let $z = a + bi$.
 
-$z$ has the **conjugate** $\bar{z} = a - bi$. For example, $\bar{3 + 2i} = 3 - 2i$.
+$z$ has the **conjugate** $\overline{z} = a - bi$. For example, $\overline{3 + 2i} = 3 - 2i$.
+
+The conjugate of a number simply has the opposite sign for the imaginary part.
 
 Note that the conjugate of any real number is the same number.
 
@@ -1956,7 +1973,7 @@ $z$ has the **modulus** $\abs{z} = \sqrt{a^2 + b^2}$. For example, $\abs{3 - 2i}
 
 Note that the modulus of any real number is the absolute value - $\sqrt{x^2}$. This is why we use the absolute value notation.
 
-So $z^{-1} = \frac{\bar{z}}{\abs{z}^2}$.
+So $z^{-1} = \frac{\overline{z}}{\abs{z}^2}$.
 
 ### Operations
 
@@ -1979,3 +1996,63 @@ What is $i^2$, according to the multiplication formula?
 $ii = (0 + 1i)(0 + 1i) = 0 \cdot (0 - 1 \cdot 1) + (0 \cdot 1 + 1 \cdot 0) = -1 + 0i = -1$
 
 So $i^2 = -1$, and $i$ is the square root of -1. Sometimes, people write $\sqrt{-1}$. However, $\sqrt{\ldots}$ should only formally be written for non-negative real numbers.
+
+# 13/11/13
+
+### Properties of Conjugates (PCJ)
+
+Proposition: for all $z, w, \in \mb{C}$:
+
+* $\overline{z + w} = \overline{z} + \overline{w}$
+* $\overline{z \cdot w} = \overline{z} \cdot \overline{w}$
+* $\overline{\overline{z}} = z$
+* $z + \overline{z} = 2 \mathfrak{R}(z)$
+* $z - \overline{z} = 2 i \mathfrak{I}(z)$
+
+These are trivially proved by using the definitions.
+
+Interestingly, $\overline{z} - z = z - \overline{z}$.
+
+### Properties of Modulus (PM)
+
+Proposition: for all $z, w \in \mb{C}$:
+
+* $\abs{z} = 0 \iff z = 0$
+* $\abs{z} = \abs{\overline{z}}$
+* $z \overline{z} = \abs{z}^2$
+* $\abs{zw} = \abs{z} \abs{w}$
+* $\abs{z + w} \le \abs{z} + \abs{w}$ - triangle inequality
+
+Proof of first:
+
+> Assume $z = 0$. So $\abs{z} = 0$.  
+> Assume $\abs{z} = 0$. So $0^2 = \mathfrak{R}(z)^2 + \mathfrak{I}(z)^2$.  
+> Clearly, $\mathfrak{R}(z)^2 \ge 0, \mathfrak{I}(z)^2 \ge 0$. So $\mathfrak{R}(z) = 0, \mathfrak{I}(z) = 0$.  
+
+Proof of fourth:
+
+> Clearly, $\abs{z}, \abs{w}, \abs{zw}$ are non-negative real numbers.  
+> So we can just prove $\abs{zw}^2 = \abs{z}^2 \abs{w}^2$.  
+> Let $z = a + bi, w = c + di$. So $\abs{zw}^2 = (ac - bd)^2 + (ad + bc)^2 = (a^2 + b^2)(c^2 + d^2) = \abs{z}^2 \abs{w}^2$.  
+
+The rest is either trivial to prove or I'm too tired to.
+
+### The Complex Plane
+
+We can picture a complex number $z = x + yi$ as a point $(x, y)$ in a 2D plane.
+
+In this representation, we call the x-axis the "real axis" and the y-axis the "imaginary axis".
+
+$(x, y)$ are the **Cartesian coordinates** of $z$.
+
+Points on a plane can also be described by polar coordinates. Here, $r = \abs{z}$ and $\theta = \arccos \left(\frac{x}{r}\right)$, making sure to keep the quandrant in mind.
+
+In polar coordinates, $x = r \cos \theta, y = r \sin \theta$
+
+Geometrically speaking, the modulus of $z$ is the length of the hypotenuse of the triangle formed with the point and the origin.
+
+The **polar form** of $z$ is $z = (r \cos \theta) + (r \sin \theta)i = r(\cos \theta + i \sin \theta)$. The **polar coordinates** of $z$ are $(r, \theta)$.
+
+The **argument** of $z$ is $\theta$.
+
+For example, $z = 1 + i = \sqrt{2} \left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)$

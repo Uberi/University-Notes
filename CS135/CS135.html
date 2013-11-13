@@ -1716,6 +1716,10 @@ A OtherThing is one of:
 <p>Note that due to the halting problem, we cannot compare two functions for equality. Therefore, we can't directly test the function that <code>generate-line</code> produces. However, we can just test the function that it produces instead of <code>generate-line</code> itself.</p>
 <p>We can use it like this:</p>
 <pre><code>((generate-line (make-posn 0 0) (make-posn 1 2)) 5) -&gt; 10</code></pre>
+<p>We can test it like this:</p>
+<pre><code>(check-expect ((generate-line (make-posn 0 0) (make-posn 1 2)) 5) 10)
+(check-expect ((generate-line (make-posn 0 0) (make-posn 1 2)) 0) 0)
+(check-expect ((generate-line (make-posn 0 0) (make-posn 1 2)) 1) 2)</code></pre>
 <h2 id="lambda">Lambda</h2>
 <pre><code>(lambda (arg1 arg2 ...) body)</code></pre>
 <p><code>lambda</code> creates an <strong>anonymous/unnamed function</strong> - a function that is not bound to a name. This is roughly equivalent to the following:</p>
@@ -1726,7 +1730,7 @@ A OtherThing is one of:
 <p>A lambda is an anonymous function.</p>
 <p>This is very useful for the abstract list functions. Where we previously made small helper functions in local definitions, now we can simply use <code>laambda</code>.</p>
 <p>Anonymous functions <strong>do not need any parts of the design recipe</strong>.</p>
-<p><code>(define (f ...) ...)</code> is actually a shrot form for <code>(define f (lambda (...) ...))</code>.</p>
+<p><code>(define (f ...) ...)</code> is actually a short form for <code>(define f (lambda (...) ...))</code>.</p>
 <h3 id="stepping-1">Stepping</h3>
 <p>Lambdas by themselves are values and are in their simplest form.</p>
 <p>When applied, lambdas are substituted for their bodies, with arguments inserted in the place of parameters, just like with normal functions.</p>
@@ -1742,6 +1746,13 @@ A OtherThing is one of:
 <p>The binding occurrence of <code>n</code> is outside of the lambda. <code>(make-adder 5)</code> creates a new function that is equivalent to <code>(lambda (x) (+ x 5))</code>.</p>
 <p>Note that <code>add5</code> still has access to <code>n</code> inside <code>make-adder</code>, even though we are no longer inside of <code>make-adder</code> when we are calling <code>add5</code>. This is because the function body itself is still inside <code>make-adder</code>, and so still follows the rules of lexical scoping.</p>
 <p>Functions that consume or produce functions are sometimes known as <strong>higher-order</strong> functions.</p>
+<h1 id="section-15">12/11/13</h1>
+<p>We are actually not as behind as we thought. So today we will go through module 10 again, but slower this time.</p>
+<p>We can actually implement <code>map</code> and <code>filter</code> all using <code>foldr</code>:</p>
+<pre><code>(define (my-map f l)
+    (foldr (lambda (x y) (cons (f x) y)) empty l))
+(define (my-filter f l)
+    (foldr (lambda (x y) (cond [(f x) (cons x y)] [else y])) empty l))</code></pre>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
