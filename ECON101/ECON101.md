@@ -1218,3 +1218,120 @@ A firm experiences economies of scale up to a certain output quantity, before go
 The **minimum efficient scale** is the smallest output quantity resulting in the minimum long-run average cost.
 
 If the long-run average cost curve is U-shaped, the minimum point identifies the output level achieving the minimum efficient scale.
+
+# 14/11/13
+
+Perfectly Competitive Markets
+-----------------------------
+
+**Perfect competition** is an industry where there are:
+
+* Many firms selling.
+* Everyone is selling the same product.
+* There are many buyers.
+* There are no restrictions to entering the industry (e.g., patents, exclusive rights to needed inputs).
+* Established firms have no advantage over new ones.
+* Sellers and buyers are perfectly informed about all prices.
+
+The actions of each individual buyer or seller have a negligible effect because there are so many of them.
+
+As a result, **no single firm has the power to control prices**. The price comes from the market supply and demand, and firms must take the price.
+
+When a firm cannot control prices, it is called a **price taker** - it has to take the price.
+
+Each firm's product is a perfect substitute for the others. This means the **demand for each product is perfectly elastic**.
+
+### Initiation
+
+Perfect competition begins when buyers don't care about which firm they buy from. This is generally caused by the products sold by each firm being perceived as the same.
+
+### Actions
+
+The **marginal revenue** is the change in total revenue resulting from an increase in the quantity sold by 1 unit.
+
+A firm in a perfectly competitive market must decide **how to produce at minimum cost**, **how much to produce**, and **whether to enter/exit the market**.
+
+How much should a firm produce? The firm has the highest economic profit when the quantity produced results in a point on the economic profit graph at the maximum.
+
+The maximum economic profit occurs when the marginal revenue equals the marginal cost. This is because at this point, the derivative of the economic profit is 0, and the marginal cost eventually must increase. At this point, the economic profit decreases if the quantity produced changes in any direction.
+
+A firm needs to decide whether to stay or exit the market if it takes an economic loss. If the firm decides to stay, it must decide whether to continue prodcing, or shut down temporarily. The decision is based on the one that minimizes the firm's loss.
+
+If a firm decides to shut down, it has **no variable costs or revenue**, but still has to **pay the fixed costs** (e.g., rent, insurance, security).
+
+Whether a firm should continue producing is determined by whether a firm has **enough revenue to cover the variable costs**. If it does, then it is better to keep producing. Otherwise, it should stop producing and take a loss of only the fixed costs. In other words, a firm shuts down if and only if `price*quantity < total variable costs`, or `price < average variable costs`
+
+### Short-run Supply
+
+In the short run, firms do not enter or exit the market.
+
+A firm in a perfectly competitive market has a supply curve similar to the following:
+
+             Price vs. Quantity Supplied
+    v $30
+      |                                        
+      |                         ....           
+    P |                    .....               
+    r |                ....                    
+    i |            ....                        
+    c |............--------- SHUTDOWN POINT    
+    e |.                                       
+      |.                                       
+      |________________________________________
+     0           Quantity Supplied            ^ 25
+
+When the price falls below the shutdown point, the firm stops producing in order to minimize losses. The shutdown price is determined by the point where the price becomes less than the average variable cost, or where the marginal cost equals the marginal revenue.
+
+The maximum economic profit is not necessarily positive. If the economic profit is 0, the firm is **breaking even**.
+
+### Long-run Supply
+
+In the long run, firms can enter or exit the market. Firms cannot shut down in the long run.
+
+New firms enter a market when exising firms in the market are making an economic profit. Firms exit markets where they make economic losses.
+
+When a firm **enters the market**, the market supply (price vs. quantity supplied for the whole market) increases, so the market price decreases.
+
+This decreases the economic profit of all firms, which can result in some firms exiting the market or shutting down. The economic profit decreases until it reaches 0.
+
+When a firm **exits the market**, the market supply decreases, so the market price increases.
+
+This increases the economic profit of all firms, which can result in some new firms entering the market. The economic profit increases until it reaches 0.
+
+As a result, the economic profit is held around 0.
+
+When **demand decreases permanently**, the price falls, which causes firms to exit and decrease supply. The price then rises again until firms stop leaving - economic profit is 0. Afterwards, there are fewer firms than before.
+
+When **demand increases permanently**, the price rises, which causes new firms to enter and increase supply. The price then falls again until firms stop entering - economic profit is 0. Afterwards, there are more firms than before.
+
+In the long run, **firms make the normal rate of return**. This is because economic profit considers opportunity costs in addition to the explicit costs.
+
+The **long-run market supply curve** is the measure of the equilibrium price over quantity supplied. This curve is useful because it takes into account things like plant changes and the number of firms in the market.
+
+Improvements in technology reduces the average costs and creates economic profit. Firms either adopt the new technology or exit the market. New firms then join the market and increase supply until the economic profit is 0.
+
+### Economies
+
+**External economies** are factors beyond a single firm's control that lower a firm's costs as the market quantity supplied increases.
+
+**External diseconomies** are factors beyond a single firm's control that increase a firm's costs as the market quantity supplied increases.
+
+These affect the new equilibrium price in the long run after a permanent change in demand.
+
+If there are no external economies or diseconomies, then **each firm's costs remain constant as the market output changes** - changes in the total quantity produced in a market. In this case, **after a change in demand, price stays constant**. The long-run market supply curve is constant.
+
+If there are external economies, the price decreases if demand increases, because quantity supplied also increases. The long-run market supply curve has a negative slope.
+
+If there are external diseconomies, the price increases if demand increases, because quantity supplied also increases. The long-run market supply curve has a positive slope.
+
+### Efficiency
+
+Resources are used efficiency when no person can be made better off without making another person worse off. This occurs when marginal social benefit equals marginal social cost.
+
+A consumer's demand curve shows the best budget allocation over changes in the price of a good. Consumers are **efficient at all points on the demand curve**. Without external benefits, the **market demand curve is the marginal social benefit curve**.
+
+A firm's supply curve shows the best profit maximization over changes in the price of a good. Firms are **efficient at all points on the supply curve**. Without external cost, the **market supply curve is the marginal social cost curve**.
+
+Because of this, **competitive markets are efficient** - marginal social benefit equals marginal social cost. The gains from trade for consumers and producers are consumer and producer surplus, respectively. The sum of these is the total surplus.
+
+At long-run equilibrium, **total surplus is maximized**.

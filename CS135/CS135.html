@@ -1020,13 +1020,18 @@ A OtherThing is one of:
 <p>Here, we recurse at most once per call. The extra parameter allows us to move extra data downwards through the calls so we don't need to restructure it to move data upwards only.</p>
 <p>We can use as many extra parameters as needed. The key is that we make extra data available to the callee.</p>
 <p>Generally, the accumulatively recursive function needs a wrapper function to start it off with initial values for the extra parameters.</p>
+<p>Consider a function that reverses a list:</p>
+<pre><code>;; list-reverse: (listof Any) -&gt; (listof Any)
+(define (list-reverse list current)
+    (cond [(empty? list) current]
+          [else (list-reverse (rest list) (cons (first list) current))]))</code></pre>
 <h3 id="generativegeneral-recursion">Generative/general recursion</h3>
 <p><strong>Generative/general recursion</strong> allows us to get closer to a base case in any way we want - we can calculate the parameters freely.</p>
 <p>If there is even just one generated parameter, it is generative recursion.</p>
 <p>Consider the GCD for <span class="math">\(m &gt; 0\)</span>:</p>
 <ul>
 <li><span class="math">\(\gcd(n, 0) = n\)</span></li>
-<li><span class="math">\(\gcd(n, m) = \gcd(m, n \operatorname{mod} m)\)</span></li>
+<li><span class="math">\(\gcd(n, m) = \gcd(m, n \mod m)\)</span></li>
 </ul>
 <p>We do not have a data definition. Here, we use generative recursion to create a function to compute the GCD of two numbers:</p>
 <pre><code>(define (gcd n m)
@@ -1664,6 +1669,7 @@ A OtherThing is one of:
 (foldr glue-first &quot;&quot; &#39;(&quot;Kentucky&quot; &quot;Fried&quot; &quot;Chicken&quot;)) -&gt; &quot;KFC&quot;</code></pre>
 <h3 id="fold-left">Fold Left</h3>
 <p>This is less commonly used.</p>
+<p>It does the same thing as <code>foldr</code>, but in the opposite order.</p>
 <p>We can implement it as follows:</p>
 <pre><code>foldl: (Y X -&gt; Y) Y (listof X) -&gt; Y
 (define (foldl f base-case list)
@@ -1672,6 +1678,8 @@ A OtherThing is one of:
                 (cond [(empty? list) previous]
                       [else (fold-from-left f (f previous (first list)) (rest list))]))]
         (fold-from-left f base-case list)))</code></pre>
+<p>Note that <code>foldr</code> is also a built-in function that does the same thing.</p>
+<p><code>foldr</code> abstracts the list template.</p>
 <p>Consider the original <code>elements-more-than</code> in assignment 4, question 2a. Now we can write it much more simply using the abstract list functions:</p>
 <pre><code>;; elements-more-than: (listof Num) -&gt; (listof Num)
 ;; Purpose: produces the elements of `lon` strictly greater than `n`
@@ -1681,6 +1689,32 @@ A OtherThing is one of:
             (define (keep? number)
                 (&gt; number n))]
            (filter keep? lon)))</code></pre>
+<h3 id="build-list">Build List</h3>
+<p>How do we apply a function to numbers from 1 to <code>n</code>?</p>
+<pre><code>;; even-numbers: Nat -&gt; (listof Nat)
+;; Purpose: produces a list of even numbers including 0 up to but not including `n`
+(define (even-numbers n)
+    (local [(define (even-numbers-from start)
+                (cond [(&gt;= start n) empty]
+                      [else (cons (* start 2) (even-numbers-from (add1 start)))]))]
+        (even-numbers-from 0)))</code></pre>
+<p>How can we abstract this?</p>
+<p>An abstract list function could apply a function to every number from 0 to the target value:</p>
+<pre><code>;; build-list: Nat (Nat -&gt; X) -&gt; (listof X)
+(define (build-list n f)
+    (local [(define (build-list-from start)
+                (cond [(&gt;= start n) empty]
+                      [else (cons (f start) (build-list (add1 start)))]))]
+        (build-list-from 0)))</code></pre>
+<p>Note that <code>build-list</code> is also a built-in function that does the same thing.</p>
+<p>The function <code>f</code> should accept a natural number and produce an element of the resulting list.</p>
+<p><code>build-list</code> abstracts the count-up pattern.</p>
+<p><code>(string-ref String Nat) -&gt; Char</code> obtains the character at a given index in a given string. The first character is at index 0.</p>
+<p>We can use this to implement <code>string-&gt;list</code> ourselves using <code>build-list</code>:</p>
+<pre><code>;; string-&gt;list: String -&gt; (listof Char)
+;; Purpose: produces a list of characters for each character in `s`
+(define (string-&gt;list s)
+    (build-list (string-length s) (lambda (i) (string-ref s i))))</code></pre>
 <p>From now on, we should use the abstract list function whenever possible, rather than dealing with <code>first</code> and <code>rest</code>. The opposite of abstract list functions is <strong>explicit recursion</strong>.</p>
 <h1 id="section-14">7/11/13</h1>
 <p>Create a function that when given a list of numbers, produces the list of those numbers greater than the average:</p>
@@ -1753,6 +1787,54 @@ A OtherThing is one of:
     (foldr (lambda (x y) (cons (f x) y)) empty l))
 (define (my-filter f l)
     (foldr (lambda (x y) (cond [(f x) (cons x y)] [else y])) empty l))</code></pre>
+<h1 id="section-16">14/11/13</h1>
+<p>Everything that can be done with the list template can be done via <code>foldr</code>, unless it terminates the recursion before the base case, like <code>insert</code>.</p>
+<p>Abstract list functions should be used in addition to the list template, when it makes for more understandable code.</p>
+<h2 id="generative-recursion">Generative Recursion</h2>
+<p>Structural recursion is a way of writing code that results in the code following the form of the data definition.</p>
+<p>In contrast, generative recursion has the recursive cases and base cases <strong>generated based on the problem to be solved</strong>.</p>
+<p>Consider the GCD function using the Euclidean algorithm:</p>
+<pre><code>(define (gcd n m)
+    (cond [(zero? m) n]
+          [else (gcd m (remainder n m))]))</code></pre>
+<p>We know this is <strong>correct</strong> because we have proven it in MATH135 - see the proof of GCD-WR. In other words, we know that it will give the correct result.</p>
+<h3 id="termination">Termination</h3>
+<p>We want to know if the function terminates - if an application of the function results in a simplest form in finite time.</p>
+<p>For structurally recursive functions, this is easy because we know that each recursive case recurses on a value closer to the base case, and so it <strong>must eventually terminate</strong>.</p>
+<p>Therefore, we can always bound the <strong>depth of recursion</strong> based on certain characteristics of the input.</p>
+<p>For generatively recursive functions, we must be able to make a similar proof of termination. This will depend on the function itself.</p>
+<p>For <code>gcd</code>, we know that <code>(remainder n m) &lt; m</code> and that both are positive or 0. So <code>m</code> is <strong>decreasing on every call</strong>. Since it can never shoot past 0 into the negatives, it must eventually reach 0, the base case.</p>
+<p>Therefore, for any input, the depth of recursion is bounded by the argument <code>m</code>.</p>
+<p>It is not possible to analyze an arbitrary function to see if it will terminate due to the <strong>halting problem</strong>.</p>
+<p>Consider the Collatz conjecture, which states that the hailstone sequence, <span class="math">\(x_n = \begin{cases} \frac{x_{n - 1}}{2} &amp;\text{ if } x_{n - 1} \text{ is even} 3x_{n - 1} + 1 &amp;\text{ if } x_{n - 1} \text{ is odd} \end{cases}\)</span>, must eventually result in the sequence <span class="math">\(1, 4, 2, 1, 4, 2, \ldots\)</span>.</p>
+<p>This is, as of 2013, an unsolved problem in mathematics. We do not know if an arbitrary starting value will eventually result in 1.</p>
+<p>As a result, whether the following function terminates is also an unsolved problem in mathematics:</p>
+<pre><code>(define (collatz n)
+    (cond [(= n 1) 1]
+          [(even? n) (/ n 2)]
+          [else (add1 (* n 3))]))</code></pre>
+<h2 id="quicksort">Quicksort</h2>
+<p>Consider a more practical example of generative recursion. Quicksort is a sorting algorithm used very widely due to its performance in real-world situations.</p>
+<p>This is generative recursion because we are not following the data definition for a list.</p>
+<p>It is a <strong>divide and conquer</strong> algorithm - we divide the problem into smaller subproblems, then recursively solve each one. Afterwards, we combine the results together to obtain the final result.</p>
+<p>Quicksort works by picking a pivot, then recursively sorting all the elements lower than the pivot, and all the elements higher than the pivot. Afterwards, the two sorted sublists and the pivots are simply put back together again.</p>
+<p>Now we will implement it.</p>
+<p>We can simply select the first element of the list as a pivot. This is done with <code>(first list)</code>.</p>
+<p>Now we need to obtain those elements less than the pivot, excluding the pivot itself: <code>(filter (lambda (x) (&lt; x (first list))) (rest list))</code>.</p>
+<p>Now we need to obtain those elements greater than the pivot, excluding the pivot itself: <code>(filter (lambda (x) (&gt;= x (first list))) (rest list))</code>.</p>
+<p>We can combine the results as follows: <code>(append sorted-less pivot sorted-greater)</code>.</p>
+<p>We can now implement the function as follows:</p>
+<pre><code>(define (quicksort l)
+    (cond [(empty? l) empty]
+          [else (local [(define pivot (first l))
+                        (define less (filter (lambda (x) (&lt; x pivot)) (rest l)))
+                        (define greater (filter (lambda (x) (&gt;= x pivot)) (rest l)))]
+                    (append less (list l) greater)))</code></pre>
+<p>We know that this function terminates because each recursive call is given a smaller list, which is closer to the base case. Therefore, the function is bounded by the size of the list.</p>
+<p>Note that if the list is already sorted, our choice of pivot causes the <code>less</code> list to be empty and the <code>greater</code> list to have every elemetn except the pivot. This would cause it to have the worst-case behavior - quadratic time based on the size of the list. Likewise with lists sorted in descending order.</p>
+<p>This is caused by our choice of pivot. Choosing a better pivot in this case would probably help, but it wouldn't work in every case. Consider a list where all elements are equal. This would exhibit worst-case behavior regardless of the pivot choice.</p>
+<p>;wip: talk about its relation to treesort</p>
+<p>;wip: talk about the design recipe amendments</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -854,6 +854,7 @@ However, Popper found several issues with this method:
     * We are more likely to only see the jerk geese and ignore the nice ones.
 * Methodological problem: we can't collect observations unless we already have some sort of theory already.
     * How could a person make observations about geese without some assumptions about what geese or jerks are?
+    * We can't observe entirely objectively.
     * In the first step, what do we observe? We need to have some idea of what we are looking for before making observations.
 
 ### Falsificationism
@@ -893,3 +894,37 @@ Our confidence in a theory is determined through **strong tests**. A stronger te
 So when the prediction is actually true - there was a very risky test, and yet the theory still passed it - then our confidence in the theory is significantly increased. If it only passed a weak test, then our confidence is increased very little.
 
 An example would be Einsteinian mechanics. Newtonian mechanics predicted that light travelled in straight lines, but Einstein says it can bend. This was a very risky prediction, and when light was observed to bend during a solar eclipse, our confidence in Einstein's theory was increased a lot.
+
+# 14/11/13
+
+;wip: paper 2 is due on tuesday, though possibly not since we didn't learn about Kuhn yet
+
+Notes on paper 1:
+
+* When the assignment asked to prove that the premises support the conclusion, it meant **validity**, not soundness, which most people talked about.
+
+For example, the thesis "I think R's theory is more empirically adequate than G's" might have the premises "R's has more cultural evidence", "R's theory is based on a larger sample", and "R's theory has been verified by experiment"
+
+Now in the validity paragraph, we would need to start off by notifying the reader that this in in fact the validity paragraph. We would not attempt to **prove the truth of the premises**, only the validity of the argument.
+
+the validity paragraph is the one where we explain why we chose the premises we did, describing all three arguments in one paragraph
+
+Actually, I misunderstood. A lot of people only talked about the soundness of the **premises** rather than the validity of the argument.
+
+We are writing why the premises are used, not that the premises are true.
+
+* Arguments should focus on the thesis and the thesis alone. Do not talk about anything else.
+
+;wip: read the feedback on the first paper and the marking rubric - the "mechanics" grade marks the wording, style, and general aesthetics of the paper
+
+* the assessment paragraphs were lacking. we should point out weaknesses and rebuttals to those weaknesses
+
+Do/don't:
+
+* do write exactly according to the instructions, do not deviate
+* do use more originality - avoid points that were already given in class or presented by the philosophers themselves
+* do use more signposting - tell the reader what each paragraph is about before jumping into the topic at the beginning
+* don't write cryptically - use simple words, use simple sentences
+* don't use gender-specific pronouns to describe generic people
+* don't go over the page limit - 1 mark deducted per extra page
+* don't talk about the theories too much - just talk about what background the reader needs to understand the argument in the paper
