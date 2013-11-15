@@ -309,6 +309,7 @@ Tests:
 <p><strong>Mutually recursive functions</strong>, should be directly adjacent. They only need one set of examples and tests for all of them, but each one still neesd a contract and purpose.</p>
 <p>The tests for the wrapper function, however, must fully test the helper function as well.</p>
 <p>Templates are useful, but are <strong>not required</strong> to unless <strong>specifically requested to</strong>, or <strong>for custom data types</strong>.</p>
+<p>See &quot;Generative Recursion and the Design Recipe&quot; for more concerns when using the design recipe with generative recursion.</p>
 <h1 id="section-1">19/9/13</h1>
 <h2 id="boolean-values">Boolean Values</h2>
 <p>Scheme represents Boolean values with the literals <code>#t</code> and <code>#f</code> (<code>true</code> and <code>false</code> are also usable in the Scheme teaching languages), representing true and false respectively.</p>
@@ -1025,6 +1026,9 @@ A OtherThing is one of:
 (define (list-reverse list current)
     (cond [(empty? list) current]
           [else (list-reverse (rest list) (cons (first list) current))]))</code></pre>
+<p>Note that <code>reverse</code> is actually a built-in function that has teh same functionality, though it doesn't require the second parameter.</p>
+<p>We use the function as follows:</p>
+<pre><code>(list-reverse &#39;(a b c) empty) -&gt; &#39;(c b a)</code></pre>
 <h3 id="generativegeneral-recursion">Generative/general recursion</h3>
 <p><strong>Generative/general recursion</strong> allows us to get closer to a base case in any way we want - we can calculate the parameters freely.</p>
 <p>If there is even just one generated parameter, it is generative recursion.</p>
@@ -1833,8 +1837,16 @@ A OtherThing is one of:
 <p>We know that this function terminates because each recursive call is given a smaller list, which is closer to the base case. Therefore, the function is bounded by the size of the list.</p>
 <p>Note that if the list is already sorted, our choice of pivot causes the <code>less</code> list to be empty and the <code>greater</code> list to have every elemetn except the pivot. This would cause it to have the worst-case behavior - quadratic time based on the size of the list. Likewise with lists sorted in descending order.</p>
 <p>This is caused by our choice of pivot. Choosing a better pivot in this case would probably help, but it wouldn't work in every case. Consider a list where all elements are equal. This would exhibit worst-case behavior regardless of the pivot choice.</p>
-<p>;wip: talk about its relation to treesort</p>
-<p>;wip: talk about the design recipe amendments</p>
+<p>Quicksort has similarities to constructing a binary search search tree out of the elements in the list, and then flattening the tree into a list using in-order traversal. Quicksort can be seen as doing all of this, except without explicitly using trees.</p>
+<p>To continue the metaphor, we would simply choose the first element in the list as the root node of the current tree, and then add the rest of the elements of the tree recursively according to their value.</p>
+<p>The tree sorting technique would use structural recursion, with accumulators. Quicksort uses generative recursion to do the same task but more efficiently.</p>
+<h2 id="generative-recursion-and-the-design-recipe">Generative Recursion and the Design Recipe</h2>
+<p>When doing generative recursion, the following must also be taken into consideration when writing the design recipe:</p>
+<ul>
+<li>Purpose statements should also describe <strong>how the function works</strong> in addition to what it does.</li>
+<li>Examples must reflect the algorithm - more <strong>white-box testing</strong>.</li>
+<li>Templates are <strong>not used as often</strong>.</li>
+</ul>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -1957,6 +1957,8 @@ How do we find the inverse of a complex number?
 > The inverse is $\frac{1}{a + bi} = \frac{1}{a + bi} \cdot \frac{a - bi}{a - bi} = \frac{a - bi}{a^2 + b^2}$.  
 > We can write this in standard form: $z^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i$.  
 
+So $z^{-1} = \frac{1}{z} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i$
+
 In this way, we find that $\frac{1}{i} = -i$.
 
 ### Conjugate/Modulus
@@ -2056,3 +2058,59 @@ The **polar form** of $z$ is $z = (r \cos \theta) + (r \sin \theta)i = r(\cos \t
 The **argument** of $z$ is $\theta$.
 
 For example, $z = 1 + i = \sqrt{2} \left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)$
+
+# 15/11/13
+
+Visualizing Complex Numbers
+---------------------------
+
+On the complex plane, we can visualize various operations on complex numbers in simple ways.
+
+We can consider a complex number $z = a + bi$ as the vector $(a, b)$ to reason about it visually.
+
+Note that $\abs{z} = 1$ is the unit circle.
+
+### Addition/subtraction
+
+Adding/subtracting two complex numbers is equivalent to **adding/subtracting their vectors**.
+
+### Conjugate/modulus
+
+The conjugate of a complex number is equivalent to reflecting the number across the real axis. In polar coordinates, the conjugate of $(r, \theta)$ is $(r, -\theta)$.
+
+The modulus of a complex number is equivalent to its distance from the origin/magnitude of its vector.
+
+### Multiplication
+
+Multiplying a complex number by a real number is simply a scalar multiplication of its vector - we scale its vector by the scalar.
+
+The multiplicative inverse is not immediately obvious. Note that $z^{-1} = \frac{\overline{z}}{\abs{z}^2} = \frac{1}{\abs{z}} \frac{\overline{z}}{\abs{z}}$.
+
+Clearly, $\overline{z}$ is the reflection along the real axis and dividing by $\abs{z}$ normalizes the vector into a unit vector. We then scale by $\frac{1}{z}$ to obtain the multiplicative inverse.
+
+The inverse of a complex number is the reflection of the number across the real axis, scaled to a unit vector, and then scaled again by the reciprocal of the length of the original number.
+
+Multiplying two complex numbers is more difficult.
+
+### Polar Multiplication of Complex Numbers (PMCN)
+
+Proposition: given $z_1, z_2 \in \mb{C}$ in polar form $z_1 = (r_1, \theta_1), z_2 = (r_2, \theta_2)$, $z_1 z_2 = (r_1 r_2, \theta_1 + \theta_2)$.
+
+Proof:
+
+> This is equivalent to saying that if $z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)$, then $z_1 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i \sin (\theta_1 + \theta_2))$.  
+> Assume $z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)$.  
+> Then $z_1 z_2 = r_1(\cos \theta_1 + i \sin \theta_1) \cdot r_2(\cos \theta_2 + i \sin \theta_2) = r_1 r_2 (\cos \theta_1 \cos \theta_2 - \sin \theta_1 \sin \theta_2) + i(\cos \theta_1 \sin \theta_2 + \sin \theta_1 \cos \theta_2) = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))$.  
+> So $z_1 z_2 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))$.  
+
+This is useful for analyzing powers of a complex numbers.
+
+### De Moivre' Theorem (DMT)
+
+If $z = r(\cos \theta + i \sin \theta)$, then $z^n = r^n(\cos n\theta + i \sin n\theta)$, by PMCN.
+
+This is true for all $n \in \mb{Z}$.
+
+Proof:
+
+> ;wip: proof by induction for $n \ge 1$, check for $n = 0$, for negative we want to show $(\cos \theta + i \sin \theta)^{-1} = \cos -\theta + i \sin -\theta = \cos \theta - i \sin \theta$ so we just need to check that $(\cos \theta + i \sin \theta)(\cos \theta - i \sin \theta) = 1$ then using $(\cos \theta + i \sin \theta)^{-n} = ((\cos \theta + i \sin \theta)^{-1})^n$

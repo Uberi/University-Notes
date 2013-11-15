@@ -1203,6 +1203,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <blockquote>
 <p>Let <span class="math">\(z = a + bi\)</span> and <span class="math">\(z \ne 0\)</span>.<br />The inverse is <span class="math">\(\frac{1}{a + bi} = \frac{1}{a + bi} \cdot \frac{a - bi}{a - bi} = \frac{a - bi}{a^2 + b^2}\)</span>.<br />We can write this in standard form: <span class="math">\(z^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i\)</span>.</p>
 </blockquote>
+<p>So <span class="math">\(z^{-1} = \frac{1}{z} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i\)</span></p>
 <p>In this way, we find that <span class="math">\(\frac{1}{i} = -i\)</span>.</p>
 <h3 id="conjugatemodulus">Conjugate/Modulus</h3>
 <p>Let <span class="math">\(z = a + bi\)</span>.</p>
@@ -1268,6 +1269,36 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>The <strong>polar form</strong> of <span class="math">\(z\)</span> is <span class="math">\(z = (r \cos \theta) + (r \sin \theta)i = r(\cos \theta + i \sin \theta)\)</span>. The <strong>polar coordinates</strong> of <span class="math">\(z\)</span> are <span class="math">\((r, \theta)\)</span>.</p>
 <p>The <strong>argument</strong> of <span class="math">\(z\)</span> is <span class="math">\(\theta\)</span>.</p>
 <p>For example, <span class="math">\(z = 1 + i = \sqrt{2} \left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)\)</span></p>
+<h1 id="section-27">15/11/13</h1>
+<h2 id="visualizing-complex-numbers">Visualizing Complex Numbers</h2>
+<p>On the complex plane, we can visualize various operations on complex numbers in simple ways.</p>
+<p>We can consider a complex number <span class="math">\(z = a + bi\)</span> as the vector <span class="math">\((a, b)\)</span> to reason about it visually.</p>
+<p>Note that <span class="math">\(\abs{z} = 1\)</span> is the unit circle.</p>
+<h3 id="additionsubtraction">Addition/subtraction</h3>
+<p>Adding/subtracting two complex numbers is equivalent to <strong>adding/subtracting their vectors</strong>.</p>
+<h3 id="conjugatemodulus-1">Conjugate/modulus</h3>
+<p>The conjugate of a complex number is equivalent to reflecting the number across the real axis. In polar coordinates, the conjugate of <span class="math">\((r, \theta)\)</span> is <span class="math">\((r, -\theta)\)</span>.</p>
+<p>The modulus of a complex number is equivalent to its distance from the origin/magnitude of its vector.</p>
+<h3 id="multiplication-1">Multiplication</h3>
+<p>Multiplying a complex number by a real number is simply a scalar multiplication of its vector - we scale its vector by the scalar.</p>
+<p>The multiplicative inverse is not immediately obvious. Note that <span class="math">\(z^{-1} = \frac{\overline{z}}{\abs{z}^2} = \frac{1}{\abs{z}} \frac{\overline{z}}{\abs{z}}\)</span>.</p>
+<p>Clearly, <span class="math">\(\overline{z}\)</span> is the reflection along the real axis and dividing by <span class="math">\(\abs{z}\)</span> normalizes the vector into a unit vector. We then scale by <span class="math">\(\frac{1}{z}\)</span> to obtain the multiplicative inverse.</p>
+<p>The inverse of a complex number is the reflection of the number across the real axis, scaled to a unit vector, and then scaled again by the reciprocal of the length of the original number.</p>
+<p>Multiplying two complex numbers is more difficult.</p>
+<h3 id="polar-multiplication-of-complex-numbers-pmcn">Polar Multiplication of Complex Numbers (PMCN)</h3>
+<p>Proposition: given <span class="math">\(z_1, z_2 \in \mb{C}\)</span> in polar form <span class="math">\(z_1 = (r_1, \theta_1), z_2 = (r_2, \theta_2)\)</span>, <span class="math">\(z_1 z_2 = (r_1 r_2, \theta_1 + \theta_2)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>This is equivalent to saying that if <span class="math">\(z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)\)</span>, then <span class="math">\(z_1 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i \sin (\theta_1 + \theta_2))\)</span>.<br />Assume <span class="math">\(z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)\)</span>.<br />Then <span class="math">\(z_1 z_2 = r_1(\cos \theta_1 + i \sin \theta_1) \cdot r_2(\cos \theta_2 + i \sin \theta_2) = r_1 r_2 (\cos \theta_1 \cos \theta_2 - \sin \theta_1 \sin \theta_2) + i(\cos \theta_1 \sin \theta_2 + \sin \theta_1 \cos \theta_2) = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))\)</span>.<br />So <span class="math">\(z_1 z_2 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))\)</span>.</p>
+</blockquote>
+<p>This is useful for analyzing powers of a complex numbers.</p>
+<h3 id="de-moivre-theorem-dmt">De Moivre' Theorem (DMT)</h3>
+<p>If <span class="math">\(z = r(\cos \theta + i \sin \theta)\)</span>, then <span class="math">\(z^n = r^n(\cos n\theta + i \sin n\theta)\)</span>, by PMCN.</p>
+<p>This is true for all <span class="math">\(n \in \mb{Z}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>;wip: proof by induction for <span class="math">\(n \ge 1\)</span>, check for <span class="math">\(n = 0\)</span>, for negative we want to show <span class="math">\((\cos \theta + i \sin \theta)^{-1} = \cos -\theta + i \sin -\theta = \cos \theta - i \sin \theta\)</span> so we just need to check that <span class="math">\((\cos \theta + i \sin \theta)(\cos \theta - i \sin \theta) = 1\)</span> then using <span class="math">\((\cos \theta + i \sin \theta)^{-n} = ((\cos \theta + i \sin \theta)^{-1})^n\)</span></p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

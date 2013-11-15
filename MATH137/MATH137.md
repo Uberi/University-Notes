@@ -2070,14 +2070,135 @@ Antiderivatives
 
 If $f'(x) = 2x$, then the most general form of $f(x)$ is $x^2 + c$, where $c$ is a constant.
 
-The **antiderivative** of a function $f$ is the function $F$ such that $F' = f$. Antidifferentiation is the opposite of differentiation - it undoes differentiation as subtraction undoes addition.
+An **antiderivative** of a function $f$ is a function $F$ such that $F' = f$.
+
+Antidifferentiation is the opposite of differentiation - it undoes differentiation as subtraction undoes addition.
 
 We can modify our existing derivative laws to obtain the antiderivative laws:
 
-### Power Law
+# 15/11/13
 
-Let $f(x) = x^n$. So $F'(x) = f(x)$.
+If $F(x)$ is the antiderivative of $f(x)$, then the most general antiderivative is $F(x) + c$, where $c$ is a constant. There can be infinitely many antiderivatives due to this.
 
-Since $\frac{\dee}{\dee x} x^n = nx^{n - 1}$, $F(x) = \frac{x^{n + 1}}{n + 1}$.
+To find antiderivatives, we invert our differentiation laws. ;wip: how?
 
-Note that this doesn't work for $n = -1$.
+Let $F'(x) = f(x)$.
+
+### Power Functions
+
+Let $f(x) = x^n$.
+
+Since $\frac{\dee}{\dee x} (x^n + c) = nx^{n - 1}$, $F(x) = \frac{x^{n + 1}}{n + 1} + c$.
+
+Note that this doesn't work for $n = -1$. If this is the case, $\frac{\dee}{\dee x} \ln \abs{x} + c = x^{-1}$.
+
+If $n = -1$, then $F(x) = \ln \abs{x}$.
+
+### Exponential Functions
+
+Let $f(x) = e^x$.
+
+Since $\frac{\dee}{\dee x} (e^x + c) = e^x$, $F(x) = e^x + c$.
+
+Since $\frac{\dee}{\dee x} (a^x + c) = a^x \ln x$, $F(x) = \frac{a^x}{\n a} + c$.
+
+### Trigonometric Functions
+
+Let $f(x) = \sin x$.
+
+Since $\frac{\dee}{\dee x} (\cos x + c) = -\sin x$, $F(x) = -\cos x$.
+
+Let $f(x) = \cos x$.
+
+Since $\frac{\dee}{\dee x} (\sin x + c) = \cos x$, $F(x) = \sin x$.
+
+Let $f(x) = \sec^2 x$.
+
+Since $\frac{\dee}{\dee x} (\tan x + c) = \sec^2 x$, $F(x) = \tan x$.
+
+### Inverse Trigonometric Function
+
+Let $f(x) = \frac{1}{\sqrt{1 - x^2}}$.
+
+Since $\frac{\dee}{\dee x} (\arcsin x + c) = \frac{1}{\sqrt{1 - x^2}}$, $F(x) = \arcsin x + c$.
+
+Let $f(x) = -\frac{1}{\sqrt{1 - x^2}}$
+
+Then $F(x) = \arccos x + c$, or alternatively, $-\arcsin x + c$.
+
+Let $f(x) = -\frac{1}{1 + x^2}$.
+
+Since $\frac{\dee}{\dee x} (\arctan x + c) = \frac{1}{1 + x^2}$, $F(x) = \arctan x + c$.
+
+---
+
+Antidifferentiate $\cos 2x$:
+
+> Clearly, $\frac{\dee}{\dee x} (\sin 2x + c) = 2 \cos 2x$.  
+> Then $\frac{\dee}{\dee x} (\frac{\sin 2x}{2} + c) = \cos 2x$.  
+
+Antidifferentiate $e^{-7x}$:
+
+> Clearly, $\frac{\dee}{\dee x} (e^{-7x} + c) = -7e^{-7x}$.  
+> Then $\frac{\dee}{\dee x} (\frac{e^{-7x}{-7} + c) = e^{-7x}$.  
+
+Antidifferentiate $\sqrt{x}(1 + x)$:
+
+> It is difficult to find antiderivatives of products (requires integration by parts).  
+> So we expand: $\sqrt{x}(1 + x) = x^\frac{1}{2} + x^\frac{3}{2}$.  
+> Then $\frac{\dee}{\dee x} (\frac{2}{3}x^\frac{3}{2} + \frac{2}{5}x^\frac{5}{2} + c) = x^\frac{1}{2} + x^\frac{3}{2}$.  
+
+Antidifferentiate $x^2 + \frac{2}{1 + x^2}$:
+
+> Clearly, $x^2 + \frac{2}{1 + x^2} = x^2 + 2 \frac{\dee}{\dee x} \arctan x$.
+> Then $\frac{\dee}{\dee x} x^2 + \frac{2}{1 + x^2} = \frac{x^3}{3} + 2 \arctan x + c$.  
+
+### Antidifferentiation
+
+There is no set method of finding the antiderivative of a function. Although there are techniques such as integration by parts, for now we will still need to try to manipulate the expressions into forms that we can antidifferentiate individually.
+
+Some useful identities used so far are:
+
+* $f(x) \pm g(x) = \frac{\dee}{\dee x} (F(x) \pm G(x))$
+* $cf(x) = \frac{\dee}{\dee x} cF(x)$
+* $x^n = \frac{\dee}{\dee x} \frac{x^{n + 1}}{n + 1}$
+
+;wip: use indefinite integrals and the integral notation to make things cleaner
+
+Consider projectile motion in 1D. A stone is launched upwards from a certain height at a certain velocity. What does its motion look like?
+
+> Let $y(t)$ represent position above the reference, $v(t)$ represent velocity, and $a(t)$ represent acceleration.  
+> Clearly, $a(t)$ is constant and $a(t) = g = -9.81 m/s^2$, the acceleration due to gravity on the surface of the Earth.  
+> Clearly, $\frac{\dee}{\dee x} v(t) = a(t)$, so $v(t) = gt + c$. Here, $c$ represents the initial velocity, the vecloity when $t = 0$. We write this as $v(t) = gt + v_0$.  
+> Clearly, $\frac{\dee}{\dee x} y(t) = v(t)$, so $y(t) = \frac{1}{2}gt^2 + v_0t + v_0 + c$. Here, $c$ represents the initial height, the height when $t = 0$. We write this as $y(t) = x_0 + v_0t + \frac{1}{2}gt^2$.  
+
+A stone is launched upwards from the surface of the earth with initial velocity $v_0$. When does it return to the surface and where is the highest point?
+
+> We want to find where $y(t) = 0$ and where it has its maximum.  
+> Clearly, $x_0 = 0$ since the starting point is the surface of the Earth.  
+> Assume $y(t) = 0$.  
+> So $x_0 + v_0t + \frac{1}{2}gt^2 = 0 = t(v_0 + \frac{1}{2}gt)$ and $t = 0, \frac{-2v_0}{g}$.  
+> So the stone returns to the ground at $t = \frac{-2v_0}{g}$.  
+> The maximum is at $t = \frac{-v_0}{2}$ since the maximum of $ax^2 + bx + c$ is at $\frac{-b}{2a}$.  
+> So the stone is at the highest point at $\left(\frac{-v_0}{2}, \frac{gv_0^2}{8} - \frac{v_0^2}{2}\right)$.  
+
+Sigma Notation
+--------------
+
+$\sum$ is the Greek letter "sigma", and generally represents a sum.
+
+Let $a_1, \ldots, a_n$ be real numbers. Let $m, n$ be integers, $m \le n$.
+
+Then $\sum\limits_{i = m}^n a_i = a_1 + \ldots + a_n$ - the "sum of $a_i$ from $i = 1$ to $i = n$".
+
+It does not have to start at 1 - the number below can be any integer.
+
+An infinite sum is when $n = \infty$.
+
+### Properties
+
+If $c$ is a constant (doesn't depend on $i$), then $\sum\limits_{i = m}^n cf(i) = c\sum\limits_{i = m}^n f(i)$.
+
+$\sum\limits_{i = m}^n (f(i) \pm g(i)) = (\sum\limits_{i = m}^n f(i)) \pm (\sum\limits_{i = m}^n g(i))$. Note that this does not work for infinite sums.
+
+$\sum\limits_{i = m}^n 1 = n - m + 1$.

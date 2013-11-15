@@ -1482,12 +1482,80 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 </ul>
 <h2 id="antiderivatives">Antiderivatives</h2>
 <p>If <span class="math">\(f&#39;(x) = 2x\)</span>, then the most general form of <span class="math">\(f(x)\)</span> is <span class="math">\(x^2 + c\)</span>, where <span class="math">\(c\)</span> is a constant.</p>
-<p>The <strong>antiderivative</strong> of a function <span class="math">\(f\)</span> is the function <span class="math">\(F\)</span> such that <span class="math">\(F&#39; = f\)</span>. Antidifferentiation is the opposite of differentiation - it undoes differentiation as subtraction undoes addition.</p>
+<p>An <strong>antiderivative</strong> of a function <span class="math">\(f\)</span> is a function <span class="math">\(F\)</span> such that <span class="math">\(F&#39; = f\)</span>.</p>
+<p>Antidifferentiation is the opposite of differentiation - it undoes differentiation as subtraction undoes addition.</p>
 <p>We can modify our existing derivative laws to obtain the antiderivative laws:</p>
-<h3 id="power-law-1">Power Law</h3>
-<p>Let <span class="math">\(f(x) = x^n\)</span>. So <span class="math">\(F&#39;(x) = f(x)\)</span>.</p>
-<p>Since <span class="math">\(\frac{\dee}{\dee x} x^n = nx^{n - 1}\)</span>, <span class="math">\(F(x) = \frac{x^{n + 1}}{n + 1}\)</span>.</p>
-<p>Note that this doesn't work for <span class="math">\(n = -1\)</span>.</p>
+<h1 id="section-27">15/11/13</h1>
+<p>If <span class="math">\(F(x)\)</span> is the antiderivative of <span class="math">\(f(x)\)</span>, then the most general antiderivative is <span class="math">\(F(x) + c\)</span>, where <span class="math">\(c\)</span> is a constant. There can be infinitely many antiderivatives due to this.</p>
+<p>To find antiderivatives, we invert our differentiation laws. ;wip: how?</p>
+<p>Let <span class="math">\(F&#39;(x) = f(x)\)</span>.</p>
+<h3 id="power-functions">Power Functions</h3>
+<p>Let <span class="math">\(f(x) = x^n\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} (x^n + c) = nx^{n - 1}\)</span>, <span class="math">\(F(x) = \frac{x^{n + 1}}{n + 1} + c\)</span>.</p>
+<p>Note that this doesn't work for <span class="math">\(n = -1\)</span>. If this is the case, <span class="math">\(\frac{\dee}{\dee x} \ln \abs{x} + c = x^{-1}\)</span>.</p>
+<p>If <span class="math">\(n = -1\)</span>, then <span class="math">\(F(x) = \ln \abs{x}\)</span>.</p>
+<h3 id="exponential-functions-1">Exponential Functions</h3>
+<p>Let <span class="math">\(f(x) = e^x\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} (e^x + c) = e^x\)</span>, <span class="math">\(F(x) = e^x + c\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} (a^x + c) = a^x \ln x\)</span>, <span class="math">\(F(x) = \frac{a^x}{\n a} + c\)</span>.</p>
+<h3 id="trigonometric-functions">Trigonometric Functions</h3>
+<p>Let <span class="math">\(f(x) = \sin x\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} (\cos x + c) = -\sin x\)</span>, <span class="math">\(F(x) = -\cos x\)</span>.</p>
+<p>Let <span class="math">\(f(x) = \cos x\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} (\sin x + c) = \cos x\)</span>, <span class="math">\(F(x) = \sin x\)</span>.</p>
+<p>Let <span class="math">\(f(x) = \sec^2 x\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} (\tan x + c) = \sec^2 x\)</span>, <span class="math">\(F(x) = \tan x\)</span>.</p>
+<h3 id="inverse-trigonometric-function">Inverse Trigonometric Function</h3>
+<p>Let <span class="math">\(f(x) = \frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} (\arcsin x + c) = \frac{1}{\sqrt{1 - x^2}}\)</span>, <span class="math">\(F(x) = \arcsin x + c\)</span>.</p>
+<p>Let <span class="math">\(f(x) = -\frac{1}{\sqrt{1 - x^2}}\)</span></p>
+<p>Then <span class="math">\(F(x) = \arccos x + c\)</span>, or alternatively, <span class="math">\(-\arcsin x + c\)</span>.</p>
+<p>Let <span class="math">\(f(x) = -\frac{1}{1 + x^2}\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} (\arctan x + c) = \frac{1}{1 + x^2}\)</span>, <span class="math">\(F(x) = \arctan x + c\)</span>.</p>
+<hr />
+<p>Antidifferentiate <span class="math">\(\cos 2x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\frac{\dee}{\dee x} (\sin 2x + c) = 2 \cos 2x\)</span>.<br />Then <span class="math">\(\frac{\dee}{\dee x} (\frac{\sin 2x}{2} + c) = \cos 2x\)</span>.</p>
+</blockquote>
+<p>Antidifferentiate <span class="math">\(e^{-7x}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\frac{\dee}{\dee x} (e^{-7x} + c) = -7e^{-7x}\)</span>.<br />Then <span class="math">\(\frac{\dee}{\dee x} (\frac{e^{-7x}{-7} + c) = e^{-7x}\)</span>.</p>
+</blockquote>
+<p>Antidifferentiate <span class="math">\(\sqrt{x}(1 + x)\)</span>:</p>
+<blockquote>
+<p>It is difficult to find antiderivatives of products (requires integration by parts).<br />So we expand: <span class="math">\(\sqrt{x}(1 + x) = x^\frac{1}{2} + x^\frac{3}{2}\)</span>.<br />Then <span class="math">\(\frac{\dee}{\dee x} (\frac{2}{3}x^\frac{3}{2} + \frac{2}{5}x^\frac{5}{2} + c) = x^\frac{1}{2} + x^\frac{3}{2}\)</span>.</p>
+</blockquote>
+<p>Antidifferentiate <span class="math">\(x^2 + \frac{2}{1 + x^2}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(x^2 + \frac{2}{1 + x^2} = x^2 + 2 \frac{\dee}{\dee x} \arctan x\)</span>. Then <span class="math">\(\frac{\dee}{\dee x} x^2 + \frac{2}{1 + x^2} = \frac{x^3}{3} + 2 \arctan x + c\)</span>.</p>
+</blockquote>
+<h3 id="antidifferentiation">Antidifferentiation</h3>
+<p>There is no set method of finding the antiderivative of a function. Although there are techniques such as integration by parts, for now we will still need to try to manipulate the expressions into forms that we can antidifferentiate individually.</p>
+<p>Some useful identities used so far are:</p>
+<ul>
+<li><span class="math">\(f(x) \pm g(x) = \frac{\dee}{\dee x} (F(x) \pm G(x))\)</span></li>
+<li><span class="math">\(cf(x) = \frac{\dee}{\dee x} cF(x)\)</span></li>
+<li><span class="math">\(x^n = \frac{\dee}{\dee x} \frac{x^{n + 1}}{n + 1}\)</span></li>
+</ul>
+<p>;wip: use indefinite integrals and the integral notation to make things cleaner</p>
+<p>Consider projectile motion in 1D. A stone is launched upwards from a certain height at a certain velocity. What does its motion look like?</p>
+<blockquote>
+<p>Let <span class="math">\(y(t)\)</span> represent position above the reference, <span class="math">\(v(t)\)</span> represent velocity, and <span class="math">\(a(t)\)</span> represent acceleration.<br />Clearly, <span class="math">\(a(t)\)</span> is constant and <span class="math">\(a(t) = g = -9.81 m/s^2\)</span>, the acceleration due to gravity on the surface of the Earth.<br />Clearly, <span class="math">\(\frac{\dee}{\dee x} v(t) = a(t)\)</span>, so <span class="math">\(v(t) = gt + c\)</span>. Here, <span class="math">\(c\)</span> represents the initial velocity, the vecloity when <span class="math">\(t = 0\)</span>. We write this as <span class="math">\(v(t) = gt + v_0\)</span>.<br />Clearly, <span class="math">\(\frac{\dee}{\dee x} y(t) = v(t)\)</span>, so <span class="math">\(y(t) = \frac{1}{2}gt^2 + v_0t + v_0 + c\)</span>. Here, <span class="math">\(c\)</span> represents the initial height, the height when <span class="math">\(t = 0\)</span>. We write this as <span class="math">\(y(t) = x_0 + v_0t + \frac{1}{2}gt^2\)</span>.</p>
+</blockquote>
+<p>A stone is launched upwards from the surface of the earth with initial velocity <span class="math">\(v_0\)</span>. When does it return to the surface and where is the highest point?</p>
+<blockquote>
+<p>We want to find where <span class="math">\(y(t) = 0\)</span> and where it has its maximum.<br />Clearly, <span class="math">\(x_0 = 0\)</span> since the starting point is the surface of the Earth.<br />Assume <span class="math">\(y(t) = 0\)</span>.<br />So <span class="math">\(x_0 + v_0t + \frac{1}{2}gt^2 = 0 = t(v_0 + \frac{1}{2}gt)\)</span> and <span class="math">\(t = 0, \frac{-2v_0}{g}\)</span>.<br />So the stone returns to the ground at <span class="math">\(t = \frac{-2v_0}{g}\)</span>.<br />The maximum is at <span class="math">\(t = \frac{-v_0}{2}\)</span> since the maximum of <span class="math">\(ax^2 + bx + c\)</span> is at <span class="math">\(\frac{-b}{2a}\)</span>.<br />So the stone is at the highest point at <span class="math">\(\left(\frac{-v_0}{2}, \frac{gv_0^2}{8} - \frac{v_0^2}{2}\right)\)</span>.</p>
+</blockquote>
+<h2 id="sigma-notation">Sigma Notation</h2>
+<p><span class="math">\(\sum\)</span> is the Greek letter &quot;sigma&quot;, and generally represents a sum.</p>
+<p>Let <span class="math">\(a_1, \ldots, a_n\)</span> be real numbers. Let <span class="math">\(m, n\)</span> be integers, <span class="math">\(m \le n\)</span>.</p>
+<p>Then <span class="math">\(\sum\limits_{i = m}^n a_i = a_1 + \ldots + a_n\)</span> - the &quot;sum of <span class="math">\(a_i\)</span> from <span class="math">\(i = 1\)</span> to <span class="math">\(i = n\)</span>&quot;.</p>
+<p>It does not have to start at 1 - the number below can be any integer.</p>
+<p>An infinite sum is when <span class="math">\(n = \infty\)</span>.</p>
+<h3 id="properties-1">Properties</h3>
+<p>If <span class="math">\(c\)</span> is a constant (doesn't depend on <span class="math">\(i\)</span>), then <span class="math">\(\sum\limits_{i = m}^n cf(i) = c\sum\limits_{i = m}^n f(i)\)</span>.</p>
+<p><span class="math">\(\sum\limits_{i = m}^n (f(i) \pm g(i)) = (\sum\limits_{i = m}^n f(i)) \pm (\sum\limits_{i = m}^n g(i))\)</span>. Note that this does not work for infinite sums.</p>
+<p><span class="math">\(\sum\limits_{i = m}^n 1 = n - m + 1\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
