@@ -2202,3 +2202,61 @@ If $c$ is a constant (doesn't depend on $i$), then $\sum\limits_{i = m}^n cf(i) 
 $\sum\limits_{i = m}^n (f(i) \pm g(i)) = (\sum\limits_{i = m}^n f(i)) \pm (\sum\limits_{i = m}^n g(i))$. Note that this does not work for infinite sums.
 
 $\sum\limits_{i = m}^n 1 = n - m + 1$.
+
+# 18/11/13
+
+$\sum\limits_{i = 1}^n i = \frac{n(n + 1)}{2}$.
+
+Proof:
+
+> Clearly, $\sum\limits_{i = 1}^n i = 1 + \ldots + n = n + \ldots + 1$.  
+> So $2\sum\limits_{i = 1}^n i = (1 + \ldots + n) + (n + \ldots + 1) = (n + 1) + \ldots + (n + 1) = n(n + 1)$.  
+> So $\sum\limits_{i = 1}^n i = \frac{n(n + 1)}{2}$.  
+
+$\sum\limits_{i = 1}^n i^2 = \frac{n(n + 1)(2n + 1)}{6}$.
+
+Integral Calculus
+-----------------
+
+Given a continuous function $f(x) > 0$ over $[a, b]$, what is the area below the curve and above the x-axis?
+
+This is easy for things like rectangles, but there is no formula for the area below a general curve.
+
+However, we can approximate the area by approximating the curve using shapes we can calculate the area of.
+
+Find the area below $y = x^2$ for $x \in [0, 1]$:
+
+> We can approximate the curve using rectangles. First, we would split the interval into multiple subintervals: $[0, 0.25], [0.25, 0.5], [0.5, 0.75], [0.75, 1]$.  
+> The width of each rectangle is 0.25, and the height is the largest value of the function in the interval - at the right endpoint, in our case.  
+> So the rectangle dimensions are $0.25 \times 0.0625, 0.25 \times 0.25, 0.25 \times 0.5625, 0.25 \times 1$.  
+> So the area under the curve is $0.25 \cdot 0.0625 + 0.25 \cdot 0.25 + 0.25 \cdot 0.5625 + 0.25 \cdot 1 = 0.46875$.  
+> Note that the approximation of the area is always greater than the actual area because we make the rectangle height based on the largest value in their interval.  
+> This means the approximation is an upper bound.  
+> Now we want to find a lower bound. We can do this by making the rectangle height based on the smallest value of the function in the interval - at the left endpoint, in our case.  
+> So the area under the curve is $0.25 \cdot 0 + 0.25 \cdot 0.0625 + 0.25 \cdot 0.25 + 0.25 \cdot 0.5625 = 0.21875$.  
+> So the area is between 0.21875 and 0.46875.  
+
+To get a better estimate, we would increase the number of rectangles. This would refine the estimate and make the bounds closer. The idea is that the bounds eventually converge towards the same value.
+
+To get the exact value, we need to use infinitely many rectangles that are each infinitely thin. In other words, we take the limit of the bounds as the number of rectangles approaches infinity, or the subinterval length approaches 0.
+
+We divide the interval $[a, b]$ into $n$ subintervals. So now there are $the intervals $[x_0, x_1], \ldots, [x_{n - 1}, x_n], x_0 = a, x_n = b$.
+
+Often, we will use equally sized intervals. In this case, each interval has the width $\frac{b - a}{2}$.
+
+Now we construct a rectangle on each interval. It has the same width as the interval. We choose a $c_i \in [x_{i - 1}, x_i]$ and make the rectangle height $f(c_i)$. Often, we use the midpoint as $c_i$, so $c_i = \frac{x_{i - 1} + x_i}{2}$. The choice of sample point is largely irrelevant since the area will eventually converge.
+
+The area of the rectangle is $(x_i - x_{i - 1})f(c)$. The area of all of the rectangles is an approximation of the function's area.
+
+We write this as $\sum\limits_{i = 1}^n f(c_i) \delta x$. This is called the **Riemann Sum**.
+
+So the exact area under the curve is $\lim_{n \to \infty} \sum\limits_{i = 1}^n f(c_i) \delta x$. This is the **definition of the definite integral**.
+
+This can be written as $\lim_{n \to \infty} \sum\limits_{i = 1}^n f(a) \frac{b - a}{n}$ if we use the left endpoint and equally sized intervals.
+
+Now we apply this to the example.
+
+> We want to find $\lim_{n \to \infty} \sum\limits_{i = 1}^n c_i^2 \frac{1}{n}$.  
+> Clearly, $c_i = i\frac{1}{n}$ - the index times the width of an interval.  
+> So $\lim_{n \to \infty} \sum\limits_{i = 1}^n c_i^2 \frac{1}{n} = \lim_{n \to \infty} \sum\limits_{i = 1}^n i^2\frac{1}{n^2} \frac{1}{n} = \lim_{n \to \infty} \frac{1}{n^3} \sum\limits_{i = 1}^n i^2 = \lim_{n \to \infty} \frac{1}{n^3} \frac{n(n + 1)(2n + 1)}{6} = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \frac{1}{3}$.  
+> So the area is $\frac{1}{3}$ square units.

@@ -1263,7 +1263,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>We can picture a complex number <span class="math">\(z = x + yi\)</span> as a point <span class="math">\((x, y)\)</span> in a 2D plane.</p>
 <p>In this representation, we call the x-axis the &quot;real axis&quot; and the y-axis the &quot;imaginary axis&quot;.</p>
 <p><span class="math">\((x, y)\)</span> are the <strong>Cartesian coordinates</strong> of <span class="math">\(z\)</span>.</p>
-<p>Points on a plane can also be described by polar coordinates. Here, <span class="math">\(r = \abs{z}\)</span> and <span class="math">\(\theta = \arccos \left(\frac{x}{r}\right)\)</span>, making sure to keep the quandrant in mind.</p>
+<p>Points on a plane can also be described by polar coordinates. Here, <span class="math">\(r = \abs{z}\)</span> and <span class="math">\(\theta = \arccos \left(\frac{x}{r}\right) = \arccos \left(\frac{\mathfrak{R}(z)}{\abs{z}}\right)\)</span>, making sure to keep the quandrant in mind.</p>
 <p>In polar coordinates, <span class="math">\(x = r \cos \theta, y = r \sin \theta\)</span></p>
 <p>Geometrically speaking, the modulus of <span class="math">\(z\)</span> is the length of the hypotenuse of the triangle formed with the point and the origin.</p>
 <p>The <strong>polar form</strong> of <span class="math">\(z\)</span> is <span class="math">\(z = (r \cos \theta) + (r \sin \theta)i = r(\cos \theta + i \sin \theta)\)</span>. The <strong>polar coordinates</strong> of <span class="math">\(z\)</span> are <span class="math">\((r, \theta)\)</span>.</p>
@@ -1292,12 +1292,27 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>This is equivalent to saying that if <span class="math">\(z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)\)</span>, then <span class="math">\(z_1 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i \sin (\theta_1 + \theta_2))\)</span>.<br />Assume <span class="math">\(z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)\)</span>.<br />Then <span class="math">\(z_1 z_2 = r_1(\cos \theta_1 + i \sin \theta_1) \cdot r_2(\cos \theta_2 + i \sin \theta_2) = r_1 r_2 (\cos \theta_1 \cos \theta_2 - \sin \theta_1 \sin \theta_2) + i(\cos \theta_1 \sin \theta_2 + \sin \theta_1 \cos \theta_2) = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))\)</span>.<br />So <span class="math">\(z_1 z_2 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))\)</span>.</p>
 </blockquote>
 <p>This is useful for analyzing powers of a complex numbers.</p>
-<h3 id="de-moivre-theorem-dmt">De Moivre' Theorem (DMT)</h3>
-<p>If <span class="math">\(z = r(\cos \theta + i \sin \theta)\)</span>, then <span class="math">\(z^n = r^n(\cos n\theta + i \sin n\theta)\)</span>, by PMCN.</p>
+<h3 id="de-moivres-theorem-dmt">De Moivre's Theorem (DMT)</h3>
+<p>Proposition: given <span class="math">\(z = r(\cos \theta + i \sin \theta)\)</span>, then <span class="math">\(z^n = r^n(\cos n\theta + i \sin n\theta)\)</span>.</p>
+<p>As a result, if <span class="math">\(z = r(\cos \theta + i \sin \theta)\)</span>, then <span class="math">\(z^n = r^n(\cos n\theta + i \sin n\theta)\)</span>.</p>
 <p>This is true for all <span class="math">\(n \in \mb{Z}\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>;wip: proof by induction for <span class="math">\(n \ge 1\)</span>, check for <span class="math">\(n = 0\)</span>, for negative we want to show <span class="math">\((\cos \theta + i \sin \theta)^{-1} = \cos -\theta + i \sin -\theta = \cos \theta - i \sin \theta\)</span> so we just need to check that <span class="math">\((\cos \theta + i \sin \theta)(\cos \theta - i \sin \theta) = 1\)</span> then using <span class="math">\((\cos \theta + i \sin \theta)^{-n} = ((\cos \theta + i \sin \theta)^{-1})^n\)</span></p>
+<p>;wip: proof by induction and PMCN for <span class="math">\(n \ge 1\)</span>, check for <span class="math">\(n = 0\)</span>, for negative we want to show <span class="math">\((\cos \theta + i \sin \theta)^{-1} = \cos -\theta + i \sin -\theta = \cos \theta - i \sin \theta\)</span> so we just need to check that <span class="math">\((\cos \theta + i \sin \theta)(\cos \theta - i \sin \theta) = 1\)</span> then using <span class="math">\((\cos \theta + i \sin \theta)^{-n} = ((\cos \theta + i \sin \theta)^{-1})^n\)</span></p>
+</blockquote>
+<h1 id="section-28">18/11/13</h1>
+<p>Find <span class="math">\((\sqrt{3} + i)^6\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(r = \sqrt{3 + 1} = 2\)</span>. The argument is <span class="math">\(\theta = \frac{\pi}{6} = \arccos \left(\frac{\sqrt{3}}{1}\right)\)</span>.<br />So <span class="math">\(\sqrt{3} + i = 2\left(\cos \frac{\pi}{6} + i \sin \frac{\pi}{6}\right)\)</span>.<br />By DMT, <span class="math">\((\sqrt{3} + i)^6 = 2^6\left(\cos 6 \frac{\pi}{6} + i \sin 6 \frac{\pi}{6}\right) = 64(-1 + i0) = -64\)</span>.</p>
+</blockquote>
+<p>Solve <span class="math">\(z^2 = \overline{z}\)</span> using Cartesian coordinates:</p>
+<blockquote>
+<p>Let <span class="math">\(z = a + bi\)</span>.<br />Clearly, <span class="math">\((a + bi)^2 = a - bi = (a^2 - b^2) + 2abi\)</span>.<br />In order to be equal, the real and imaginary parts must be equal.<br />So <span class="math">\(a = a^2 + b^2\)</span> and <span class="math">\(-b = 2ab\)</span>.<br />So <span class="math">\(b = \pm \sqrt{-a(a - 1)}\)</span> and <span class="math">\(0 = b(2a + 1)\)</span>.<br />So <span class="math">\(0 = \pm \sqrt{-a(a - 1)}(2a + 1)\)</span>.<br />So <span class="math">\(a = -\frac{1}{2}\)</span> or <span class="math">\(a = 0, 1\)</span>.<br />So <span class="math">\(z = 0, 1, -\frac{1}{2} - \frac{\sqrt{3}}{2}i, -\frac{1}{2} + \frac{\sqrt{3}}{2}i\)</span>.</p>
+</blockquote>
+<p>Two numbers in polar form are equal if and only if their <strong>moduli are equal</strong> and their arguments are congruent mod <span class="math">\(2 \pi\)</span>: <span class="math">\(r_1 = r_2 \wedge \theta_1 = \theta_2 + 2k\pi, k \in \mb{Z}\)</span>.</p>
+<p>Solve <span class="math">\(z^6 = 1 + i\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(z = a + bi\)</span>, <span class="math">\(r = \sqrt{a^2 + b^2}\)</span>, and <span class="math">\(\theta = \arccos \frac{\mathfrak{R}}{\sqrt{a^2 + b^2}}\)</span>.<br />So <span class="math">\(z = r (\cos \theta + i \sin \theta) = 1 + i = \sqrt{2}\left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)\)</span>.<br />So <span class="math">\(r^6 = \sqrt{2}\)</span> and <span class="math">\(6\theta = \frac{\pi}{4} + 2k\pi, k \in \mb{Z}\)</span>.<br />So <span class="math">\(r = \sqrt{12}{2}\)</span> and <span class="math">\(\theta = \frac{\pi}{24} + \frac{k\pi}{3} = \frac{\pi(8k + 1)}{24}, k \in \mb{Z}\)</span>.<br />So <span class="math">\(\theta = \frac{\pi}{24}, \frac{9\pi}{24}, \frac{17\pi}{24}, \frac{25\pi}{24}, \frac{33\pi}{24}, \frac{41\pi}{24}\)</span>.</p>
 </blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>

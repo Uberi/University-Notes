@@ -2047,7 +2047,7 @@ In this representation, we call the x-axis the "real axis" and the y-axis the "i
 
 $(x, y)$ are the **Cartesian coordinates** of $z$.
 
-Points on a plane can also be described by polar coordinates. Here, $r = \abs{z}$ and $\theta = \arccos \left(\frac{x}{r}\right)$, making sure to keep the quandrant in mind.
+Points on a plane can also be described by polar coordinates. Here, $r = \abs{z}$ and $\theta = \arccos \left(\frac{x}{r}\right) = \arccos \left(\frac{\mathfrak{R}(z)}{\abs{z}}\right)$, making sure to keep the quandrant in mind.
 
 In polar coordinates, $x = r \cos \theta, y = r \sin \theta$
 
@@ -2105,12 +2105,43 @@ Proof:
 
 This is useful for analyzing powers of a complex numbers.
 
-### De Moivre' Theorem (DMT)
+### De Moivre's Theorem (DMT)
 
-If $z = r(\cos \theta + i \sin \theta)$, then $z^n = r^n(\cos n\theta + i \sin n\theta)$, by PMCN.
+Proposition: given $z = r(\cos \theta + i \sin \theta)$, then $z^n = r^n(\cos n\theta + i \sin n\theta)$.
+
+As a result, if $z = r(\cos \theta + i \sin \theta)$, then $z^n = r^n(\cos n\theta + i \sin n\theta)$.
 
 This is true for all $n \in \mb{Z}$.
 
 Proof:
 
-> ;wip: proof by induction for $n \ge 1$, check for $n = 0$, for negative we want to show $(\cos \theta + i \sin \theta)^{-1} = \cos -\theta + i \sin -\theta = \cos \theta - i \sin \theta$ so we just need to check that $(\cos \theta + i \sin \theta)(\cos \theta - i \sin \theta) = 1$ then using $(\cos \theta + i \sin \theta)^{-n} = ((\cos \theta + i \sin \theta)^{-1})^n$
+> ;wip: proof by induction and PMCN for $n \ge 1$, check for $n = 0$, for negative we want to show $(\cos \theta + i \sin \theta)^{-1} = \cos -\theta + i \sin -\theta = \cos \theta - i \sin \theta$ so we just need to check that $(\cos \theta + i \sin \theta)(\cos \theta - i \sin \theta) = 1$ then using $(\cos \theta + i \sin \theta)^{-n} = ((\cos \theta + i \sin \theta)^{-1})^n$
+
+# 18/11/13
+
+Find $(\sqrt{3} + i)^6$:
+
+> Clearly, $r = \sqrt{3 + 1} = 2$. The argument is $\theta = \frac{\pi}{6} = \arccos \left(\frac{\sqrt{3}}{1}\right)$.  
+> So $\sqrt{3} + i = 2\left(\cos \frac{\pi}{6} + i \sin \frac{\pi}{6}\right)$.  
+> By DMT, $(\sqrt{3} + i)^6 = 2^6\left(\cos 6 \frac{\pi}{6} + i \sin 6 \frac{\pi}{6}\right) = 64(-1 + i0) = -64$.  
+
+Solve $z^2 = \overline{z}$ using Cartesian coordinates:
+
+> Let $z = a + bi$.  
+> Clearly, $(a + bi)^2 = a - bi = (a^2 - b^2) + 2abi$.  
+> In order to be equal, the real and imaginary parts must be equal.  
+> So $a = a^2 + b^2$ and $-b = 2ab$.  
+> So $b = \pm \sqrt{-a(a - 1)}$ and $0 = b(2a + 1)$.  
+> So $0 = \pm \sqrt{-a(a - 1)}(2a + 1)$.  
+> So $a = -\frac{1}{2}$ or $a = 0, 1$.  
+> So $z = 0, 1, -\frac{1}{2} - \frac{\sqrt{3}}{2}i, -\frac{1}{2} + \frac{\sqrt{3}}{2}i$.  
+
+Two numbers in polar form are equal if and only if their **moduli are equal** and their arguments are congruent mod $2 \pi$: $r_1 = r_2 \wedge \theta_1 = \theta_2 + 2k\pi, k \in \mb{Z}$.
+
+Solve $z^6 = 1 + i$:
+
+> Let $z = a + bi$, $r = \sqrt{a^2 + b^2}$, and $\theta = \arccos \frac{\mathfrak{R}}{\sqrt{a^2 + b^2}}$.  
+> So $z = r (\cos \theta + i \sin \theta) = 1 + i = \sqrt{2}\left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)$.  
+> So $r^6 = \sqrt{2}$ and $6\theta = \frac{\pi}{4} + 2k\pi, k \in \mb{Z}$.  
+> So $r = \sqrt{12}{2}$ and $\theta = \frac{\pi}{24} + \frac{k\pi}{3} = \frac{\pi(8k + 1)}{24}, k \in \mb{Z}$.  
+> So $\theta = \frac{\pi}{24}, \frac{9\pi}{24}, \frac{17\pi}{24}, \frac{25\pi}{24}, \frac{33\pi}{24}, \frac{41\pi}{24}$.  
