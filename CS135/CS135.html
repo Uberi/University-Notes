@@ -1651,6 +1651,15 @@ A OtherThing is one of:
 <p>Note that <code>filter</code> is also a built-in function that does the same thing.</p>
 <p>How do we use this?</p>
 <p>(filter negative? '(1 -5 -7 3 0)) -&gt; '(-5 -7) (filter #t '(1 2 3 4 5)) -&gt; '(1 2 3 4 5) (list-&gt;string (filter char-alphabetic? (string-&gt;list &quot;a89erha ae 23*%$%44 yusdh&quot;))) -&gt; &quot;aerhaaeyusdh&quot;</p>
+<p>Consider the original <code>elements-more-than</code> in assignment 4, question 2a. Now we can write it much more simply using the abstract list functions:</p>
+<pre><code>;; elements-more-than: (listof Num) -&gt; (listof Num)
+;; Purpose: produces the elements of `lon` strictly greater than `n`
+(define (elements-more-than lon n)
+    (local [;; keep?: Num -&gt; Boolean
+            ;; Purpose: produces `true` if `number` is greater than `n` ;wip: figure out how to refer to `n`
+            (define (keep? number)
+                (&gt; number n))]
+           (filter keep? lon)))</code></pre>
 <h3 id="fold-right">Fold Right</h3>
 <p>How do we add up a list of numbers?</p>
 <pre><code>;; total: (listof Num) -&gt; Num
@@ -1671,6 +1680,8 @@ A OtherThing is one of:
 (define (glue-first word acronym)
     (string-append (substring word 0 1) acronym))
 (foldr glue-first &quot;&quot; &#39;(&quot;Kentucky&quot; &quot;Fried&quot; &quot;Chicken&quot;)) -&gt; &quot;KFC&quot;</code></pre>
+<p><code>foldr</code> abstracts the list template using pure structural recursion.</p>
+<p>Intuitively, <code>(foldr f base '(a b c ...))</code> is equivalent to <code>(f a (f b (f c ...)))</code></p>
 <h3 id="fold-left">Fold Left</h3>
 <p>This is less commonly used.</p>
 <p>It does the same thing as <code>foldr</code>, but in the opposite order.</p>
@@ -1683,16 +1694,8 @@ A OtherThing is one of:
                       [else (fold-from-left f (f previous (first list)) (rest list))]))]
         (fold-from-left f base-case list)))</code></pre>
 <p>Note that <code>foldr</code> is also a built-in function that does the same thing.</p>
-<p><code>foldr</code> abstracts the list template.</p>
-<p>Consider the original <code>elements-more-than</code> in assignment 4, question 2a. Now we can write it much more simply using the abstract list functions:</p>
-<pre><code>;; elements-more-than: (listof Num) -&gt; (listof Num)
-;; Purpose: produces the elements of `lon` strictly greater than `n`
-(define (elements-more-than lon n)
-    (local [;; keep?: Num -&gt; Boolean
-            ;; Purpose: produces `true` if `number` is greater than `n` ;wip: figure out how to refer to `n`
-            (define (keep? number)
-                (&gt; number n))]
-           (filter keep? lon)))</code></pre>
+<p><code>foldl</code> abstracts the list template using structural recursion with one accumulator.</p>
+<p>Intuitively, <code>(foldl f base '(... x y z))</code> is equivalent to <code>(f z (f y (f x ...)))</code></p>
 <h3 id="build-list">Build List</h3>
 <p>How do we apply a function to numbers from 1 to <code>n</code>?</p>
 <pre><code>;; even-numbers: Nat -&gt; (listof Nat)
@@ -1847,6 +1850,52 @@ A OtherThing is one of:
 <li>Examples must reflect the algorithm - more <strong>white-box testing</strong>.</li>
 <li>Templates are <strong>not used as often</strong>.</li>
 </ul>
+<h1 id="section-17">19/11/13</h1>
+<h2 id="mergesort">Mergesort</h2>
+<p>Mergesort recursively merges sorted sublists together, and eventually merges two lists into one sorted ist.</p>
+<p>We want to implement mergesort. This function is generatively recursive because we need to split the list into two halves.</p>
+<pre><code>;; mergesort: (listof Num) -&gt; (listof Num)
+(define (mergesort values)
+    (local [;; merge: (listof Num) (listof Num) -&gt; (listof Num)
+            (define (merge list1 list2)
+                (cond [(empty? list1) list2]
+                      [(empty? list2) list1]
+                      [(&lt;= (first list1) (first list2))
+                       (cons (first list1) (merge (rest list1) list2))]
+                      [else
+                       (cons (first list2) (merge list1 (rest list2)))]))]
+        (cond [(empty? values) empty]
+            (merge (mergesort (left-half-of values)
+                              (right-half-of values))))))</code></pre>
+<p>However, it is difficult and computationally expensive to split a list in two - we can't implement <code>left-half-of</code> and <code>right-half-of</code> in a simple way.</p>
+<p>Instead, we take a different approach - we work from the bottom, and convert a list of lists into a smaller list of lists. Eventually, we merge two lists into one sorted list.</p>
+<pre><code>(define (mergesort values)
+    (cond [(empty? values) empty]
+          [(empty? (rest values)) (first values)] ; one element
+          [else (mergesort (merge-pairs (map list values)))]))
+
+(define (merge-pairs values)
+    (cond [(empty? values) empty] ; no elements
+          [(empty? (rest values)) (first values)] ; one element
+          [else (cons (merge (first values) (second values)) ; merge two adjacent elements together
+                      (rest (rest values)))]))
+
+;; (listof Num) (listof Num) -&gt; (listof Num)
+(define (merge list1 list2)
+    (cond [(empty? list1) list2]
+          [(empty? list2) list1]
+          [(&lt;= (first list1) (first list2))
+           (cons (first list1) (merge (rest list1) list2))]
+          [else
+           (cons (first list2) (merge list1 (rest list2)))]))</code></pre>
+<p>We can also simplify <code>mergesort</code> by using a local definition:</p>
+<pre><code>(define (mergesort values)
+    (local [(define (mergesort-ne values)
+                (cond [(empty? (rest values)) (first values)] ; one element
+                      [else (mergesort-ne (merge-pairs (map list values)))]))]
+        (cond [(empty? values) empty]
+              [else (mergesort-ne values)]))</code></pre>
+<p>We know this terminates because <code>merge-pairs</code> always produces a list that is around half the given list. As a result, if we call it enough times, we will get a list of length 1, the base case.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

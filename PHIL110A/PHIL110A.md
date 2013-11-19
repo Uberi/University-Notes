@@ -273,8 +273,6 @@ The area within the innermost sphere is the **sublunary realm**. This area is mo
 
 The area outside is the **superlunary realm**. This area is perfect, everything moves in perfect circles (considered the perfect shape). This is the area where the heavens, the stars, and sun are.
 
-;wip: the structure of scientific revolutions
-
 ### Science
 
 A scientist is concerned with formal and final causes - to find the definition and purpose of objects.
@@ -445,7 +443,7 @@ Descartes thinks there are **innate ideas** that we are born with and can discov
 
 # 10/10/13
 
-;wip: paper due on Oct. 24. Topic: Do you prefer Descartes Rationalist approach, or Locke's mechanical empirical approach
+Paper 1 due on Oct. 24. Topic: Do you prefer Descartes Rationalist approach, or Locke's mechanical empirical approach
 to understanding the relationship between our ideas and things in the world? What are
 the reasons for your preference? Formal writing, but personal pronouns allowed. Use size 12 black font and double space. Submit on LEARN in Word document form. Writing style is discretionary. Should be around 3 pages. Cite everything, including material in lectures. Include student number, course, name, instructor, date.
 
@@ -742,8 +740,6 @@ Before this, we focused on the "knows that" part of "$S$ knows that $P$". Femini
 
 Why does what one person says sound correct to that person?
 
-;wip: PHIL110A quiz 2 covers everything up to but not including Popper
-
 **Intersectionality** is the study of the intersections between different groups of minorities - the study of interactions between multiple systems of discrimination or oppression.
 
 ;wip: philosophy of the mind
@@ -773,8 +769,6 @@ Code changes the examples that we use for $P$. How do I know my friends?
 This is a different meaning of **know** - instead of "having information about", it means "having knowledge of other people", or having a relation with the other people.
 
 We know ourselves through our knowledge of others.
-
-;wip
 
 ### Testimony, trust, credibility
 
@@ -861,9 +855,11 @@ However, Popper found several issues with this method:
 
 Popper has a better idea - **falsificationism**. According to this method, scientists should not be trying to find evidence tht proves their theory right. Instead, they should try to prove the theory wrong.
 
+A hypothesis is **scientific** if and only if it can be falsified.
+
 The test involves imagining figuring out what could potentially make it false.
 
-We first figure out what the theory predicts: "if all geese are jerks, then the geese in North Carolina should be jerks".
+We first figure out what the hypothesis predicts: "if all geese are jerks, then the geese in North Carolina should be jerks".
 
 We assume this implication is true.
 
@@ -885,7 +881,7 @@ Popper says that his method doesn't have the issues mentioned above because:
 
 * This method is deductive - a counterexample allows us to conclude with certainty that a theory is false.
 * We eliminate confirmation bias by specifically going against it.
-* We are trying to prove something false rather than true, so we are specifically trying to look for a specific thing.
+* We are trying to prove something false rather than true, so we are specifically trying to look for a specific thing. We are starting with the hypothesis in this case, the 
 
 Although we cannot determine the truth of the hypothesis by observation, we can increase the our **confidence** in it.
 
@@ -894,6 +890,8 @@ Our confidence in a theory is determined through **strong tests**. A stronger te
 So when the prediction is actually true - there was a very risky test, and yet the theory still passed it - then our confidence in the theory is significantly increased. If it only passed a weak test, then our confidence is increased very little.
 
 An example would be Einsteinian mechanics. Newtonian mechanics predicted that light travelled in straight lines, but Einstein says it can bend. This was a very risky prediction, and when light was observed to bend during a solar eclipse, our confidence in Einstein's theory was increased a lot.
+
+To Popper, science is looking at the world and eliminating the false things. Eventually, we must converge on a set of all truths. This is reminiscent of methodical doubt used by Descartes.
 
 # 14/11/13
 
@@ -928,3 +926,82 @@ Do/don't:
 * don't use gender-specific pronouns to describe generic people
 * don't go over the page limit - 1 mark deducted per extra page
 * don't talk about the theories too much - just talk about what background the reader needs to understand the argument in the paper
+
+# 19/11/13
+
+Thomas Kuhn
+-----------
+
+As a physics teacher for the humanities, he presented science in the context of history - he added a narrative structure to the history of science.
+
+As a result, Kuhn decided to pursue the avenue further and study the history of science in more detail.
+
+While Popper tried to determine what is science and what isn't, Kuhn states that scientists are mostly trying to build on top of an existing body of knowledge.
+
+Most scientists are, most of the time, not trying to falsify theories. Instead, they are usually trying to do **normal science** - building on top of the current paridigm.
+
+Scientists are trying to solve a system of problems using a system of tools that are all generally agreed upon. This is called a **paradigm**.
+
+A paradigm is a general worldview, a set of theories, questions, and techniques that everyone agrees on. Scientists try to improve and build upon a picture they already think is there.
+
+Where Popper's falsificationism would require that the entire paradigm be torn down every time something is falsified. Kuhn says that in practice, this happens very rarely.
+
+A good example is geocentrism, which was false but still was a useful worldview that supported science for a long time. It was a paradigm that managed to explain what we saw, allowed ships to navigate by the stars, and was generally rather practical. Scientists of the time were trying to build upon geocentrism, not try to tear it down.
+
+When scientists find something that doesn't fit with the paradigm - an **anomaly** - instead of falsifying the whole paradigm, we change the paradigm slightly to accomodate the anomalies or just drop the anomalies entirely.
+
+An anomaly is an observation that does not fit with the paradigm. For example, Galileo observed that Jupiter had moons orbiting it rather than the Earth in a geocentric time.
+
+However, though many anomalies just get ignored, **anomalies stack up**.
+
+If there is another viable theory while the anomalies are piling up, then there is a **scientific revolution**, also known as a **paradigm shift** or **Gestalt shift** - we look at the puzzle in a different way and see two faces instead of a vase.
+
+The scientific revolution takes place dramatically and quickly, and often in less than a generation the new paradigm is widely accepted.
+
+Paradigm shifts take place in between periods of normal science.
+
+People often think that the current paradigm is absolutely true. However, as Popper stated, it would only be more likely to be true as it survived more attempts to falsify it.
+
+**Incommensurability** according to Kuhn is the idea that the truths in one paradigm don't apply to those of the other.
+
+The truths of one paradigm is **incommensurable** with the truths of another. We observe the the world through the lens of our paradigm, and so when we change paradigms, the observations are no longer valid. We can't help but see the world through our theoretical and cultural perspective. This is called **theory ladenness**.
+
+This is similar to the psychological problem raised by Popper - confirmation bias.
+
+The ideas of the old paradigm are neither true nor false after a paradigm shift - they simply become invalid.
+
+Aristotle and Galileo could be looking at the same sunrise, but one would see the sun going around the Earth, and the other would see the Earth going around the sun.
+
+As time passes, Popper thinks we will know **more than we do now**. Kuhn thinks we will know **different from what we know now**.
+
+The goal of research when we know there might be a paradigm shift is the possibility that the current paradigm is actually the true paradigm. In addition, there is the practical, useful aspect of the discoveries.
+
+Kuhn thinks paradigm shifts often happen when the strongest proponents of the current paradigm die off and the new scientists bring about a change.
+
+To Kuhn, **truth is relative to a paradigm**.
+
+A **descriptive statement** is one that accurately describes the world. A **normative statement** is one that describes how things should be.
+
+Kuhn's theory simply talks about how science is - it is descriptive. Popper's theory talks about how science should be - it is normative.
+
+Willard Van Orman Quine
+-----------------------
+
+Quine was a philosopher of science, focusing on the philosophy itself rather than practical science. Quine criticized Popper's falsificationism.
+
+> Hypotheses stand or fall in groups.
+
+For example, if `Mary is an excellent student`, we would expect that `Mary does well on an exam`. The general form is $H \implies O$ - hypothesis implies observation.
+
+Suppose `Mary does not do well on an exam`. Then could we say that `Mary is not an excellent student`?
+
+No, because there are a variety of other possibilities, like `Mary is sick` or `the world ended`.
+
+Quine says there are two categories we can use to see if a hypothesis is connected with a given observation:
+
+* Initial conditions - the things that have to happen in order to connect the observation to the hypothesis. For example, `the world did not end`.
+* Auxilary hypotheses - the things we must assume in order to connect the observation to the hypothesis. For example, `mary is not sick`.
+
+Now we have $H \wedge IC \wedge AH \implies O$ - **the hypothesis and initial conditions and auxilary hypotheses together imply the observation will take place**. So if $\neg O$, then we only know that $\neg H \vee \neg IC \vee \neg AH$ - we only know that one or more of these are false.
+
+It is not practical to find all the possible initial conditions or auxilary hypotheses. As a result, we cannot simply falsify our hypotheses.
