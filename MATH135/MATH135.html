@@ -1314,6 +1314,41 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <blockquote>
 <p>Let <span class="math">\(z = a + bi\)</span>, <span class="math">\(r = \sqrt{a^2 + b^2}\)</span>, and <span class="math">\(\theta = \arccos \frac{\mathfrak{R}}{\sqrt{a^2 + b^2}}\)</span>.<br />So <span class="math">\(z = r (\cos \theta + i \sin \theta) = 1 + i = \sqrt{2}\left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)\)</span>.<br />So <span class="math">\(r^6 = \sqrt{2}\)</span> and <span class="math">\(6\theta = \frac{\pi}{4} + 2k\pi, k \in \mb{Z}\)</span>.<br />So <span class="math">\(r = \sqrt{12}{2}\)</span> and <span class="math">\(\theta = \frac{\pi}{24} + \frac{k\pi}{3} = \frac{\pi(8k + 1)}{24}, k \in \mb{Z}\)</span>.<br />So <span class="math">\(\theta = \frac{\pi}{24}, \frac{9\pi}{24}, \frac{17\pi}{24}, \frac{25\pi}{24}, \frac{33\pi}{24}, \frac{41\pi}{24}\)</span>.</p>
 </blockquote>
+<h1 id="section-29">20/11/13</h1>
+<h3 id="complex-n-th-roots-theorem-cnrt">Complex n-th Roots Theorem (CNRT)</h3>
+<p>Proposition: given <span class="math">\(z = r(\cos \theta + i \sin \theta)\)</span> and <span class="math">\(z^n = c\)</span>, <span class="math">\(n \in \mb{N}\)</span>, <span class="math">\(z\)</span> has exactly <span class="math">\(n\)</span> distinct complex n-th roots, which are <span class="math">\(z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k &lt; n\)</span>.</p>
+<p>In other words, <span class="math">\(\sqrt[n]{z} = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k &lt; n\)</span> for all <span class="math">\(n \in \mb{N}\)</span>.</p>
+<h2 id="polynomials">Polynomials</h2>
+<p>Polynomials may have <strong>integer solutions</strong>, <strong>rational solutions</strong>, or <strong>complex solutions</strong>. We can also find the solutions in <span class="math">\(\mb{Z}_m\)</span>.</p>
+<p>The possible solutions in particular number systems are dependent on the coefficients of the polynomial.</p>
+<p>Our primary number systems are <span class="math">\(\mb{Z}, \mb{Q}, \mb{R}, \mb{C}, \mb{Z}_m\)</span>. Note that we omit <span class="math">\(\mb{N}\)</span> because we can't always subtract so it isn't very useful.</p>
+<p>A <strong>number system</strong> is also called a <strong>commutative ring</strong>.</p>
+<p>A <strong>field</strong> is a number system where every nonzero element has a multiplicative inverse.</p>
+<p>Some examples of fields are <span class="math">\(\mb{Q}\)</span>, <span class="math">\(\mb{R}\)</span>, <span class="math">\(\mb{C}\)</span>, and <span class="math">\(\mb{Z}_p\)</span> for a prime <span class="math">\(p\)</span>.</p>
+<p>An arbitrary field can be represented as <span class="math">\(\mb{F}\)</span>.</p>
+<h3 id="definition">Definition</h3>
+<p>A <strong>polynomial</strong> in <span class="math">\(x\)</span> over <span class="math">\(\mb{F}\)</span> is any expression of the form <span class="math">\(a_nx^n + a_{n - 1}x^{n - 1} + \ldots + a_2x^2 + a_1x^1 + a_0\)</span>, where <span class="math">\(a_i, 0 \le i \le n\)</span> are fixed, <span class="math">\(x\)</span> is unknown, and <span class="math">\(n \ge 0\)</span>.</p>
+<p>We can also write this as <span class="math">\(\sum\limits_{i = 0}^n a_i x^i\)</span>.</p>
+<p><span class="math">\(x^2 + 7x - 1\)</span> is a polynomial over <span class="math">\(\mb{Q}, \mb{R}, \mb{C}\)</span>.</p>
+<p><span class="math">\(x^3 + (1 + i)x + (2 - i)\)</span> is a polynomial over <span class="math">\(\mb{C}\)</span>.</p>
+<p><span class="math">\([3]x^5 + [2]x^3 + [6]\)</span> is a polynomial over <span class="math">\(\mb{Z}_7\)</span>. The missing powers have the congruence class 0 as the coefficients.</p>
+<h3 id="notation">Notation</h3>
+<p>If <span class="math">\(\mb{F}\)</span> is a field, then <span class="math">\(\mb{F}[x]\)</span> is the set of all polynomials over <span class="math">\(\mb{F}\)</span>, and infinite set.</p>
+<p><span class="math">\(f(x) \in \mb{F}\)</span> is equivalent to &quot;<span class="math">\(f(x)\)</span> is a polynomial over <span class="math">\(\mb{F}\)</span>&quot;. For example, <span class="math">\(x^2 \in \mb{R}[x]\)</span>.</p>
+<h3 id="degree">Degree</h3>
+<p>Given <span class="math">\(\sum\limits_{i = 0}^n a_i x^i\)</span>, the <strong>leading coefficient</strong> is the largest <span class="math">\(n\)</span> such that <span class="math">\(a_n \ne 0\)</span>. The <strong>degree</strong> of this polynomial is this <span class="math">\(n\)</span>.</p>
+<p>In other words, the degree of a polynomial is the first nonzero coefficient.</p>
+<p>Polynomials of degree 1 are <strong>linear polynomials</strong>.</p>
+<p>Polynomials of degree 2 are <strong>quadratic polynomials</strong>.</p>
+<p>Polynomials of degree 3 are <strong>cubic polynomials</strong>.</p>
+<p>There are a lot more names but these ought to be enough for now.</p>
+<p>The <strong>constants</strong> <span class="math">\(f(x) = a_0, a_0 \ne 0\)</span> have a degree of 0, since there is only one nonzero coefficients.</p>
+<p>The <strong>zero polynomial</strong> <span class="math">\(f(x) = 0\)</span> has an undefined degree, since it has no nonzero coefficients.</p>
+<h3 id="operations-1">Operations</h3>
+<p>Given a field <span class="math">\(\mb{F}\)</span>, and <span class="math">\(f(x), g(x) \in \mb{F}, f(x) = \sum\limits_{i = 0}^n a_i x^i, g(x) = \sum\limits_{i = 0}^o b_i x^i\)</span>:</p>
+<p><strong>Addition</strong> is defined as <span class="math">\(f(x) + g(x) = \sum\limits_{i = 0}^{\max{n, o}} (a_i + b_i) x^i\)</span>, where out of range coefficients are assumed to be 0.</p>
+<p><strong>Multiplication</strong> is defined as <span class="math">\(f(x) \cdot g(x) = \sum\limits_{i = 0}^{n + o} c_i x^i, c_i = \sum\limits_{j = 0}^i a_j b_{i - j} = a_0 b_i + \ldots + a_i b_0\)</span>.</p>
+<p>When we multiply <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span>, the resulting polynomial has a degree that is the sum of the degrees of <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

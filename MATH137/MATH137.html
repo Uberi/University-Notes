@@ -1566,6 +1566,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <h2 id="integral-calculus">Integral Calculus</h2>
 <p>Given a continuous function <span class="math">\(f(x) &gt; 0\)</span> over <span class="math">\([a, b]\)</span>, what is the area below the curve and above the x-axis?</p>
 <p>This is easy for things like rectangles, but there is no formula for the area below a general curve.</p>
+<h3 id="rectangle-approximation">Rectangle Approximation</h3>
 <p>However, we can approximate the area by approximating the curve using shapes we can calculate the area of.</p>
 <p>Find the area below <span class="math">\(y = x^2\)</span> for <span class="math">\(x \in [0, 1]\)</span>:</p>
 <blockquote>
@@ -1577,13 +1578,37 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <p>Often, we will use equally sized intervals. In this case, each interval has the width <span class="math">\(\frac{b - a}{2}\)</span>.</p>
 <p>Now we construct a rectangle on each interval. It has the same width as the interval. We choose a <span class="math">\(c_i \in [x_{i - 1}, x_i]\)</span> and make the rectangle height <span class="math">\(f(c_i)\)</span>. Often, we use the midpoint as <span class="math">\(c_i\)</span>, so <span class="math">\(c_i = \frac{x_{i - 1} + x_i}{2}\)</span>. The choice of sample point is largely irrelevant since the area will eventually converge.</p>
 <p>The area of the rectangle is <span class="math">\((x_i - x_{i - 1})f(c)\)</span>. The area of all of the rectangles is an approximation of the function's area.</p>
-<p>We write this as <span class="math">\(\sum\limits_{i = 1}^n f(c_i) \delta x\)</span>. This is called the <strong>Riemann Sum</strong>.</p>
+<p>We write this as <span class="math">\(\sum\limits_{i = 1}^n f(c_i) \delta x\)</span>. This is called the <strong>Riemann Sum</strong>. We can use <span class="math">\(\delta x = \frac{b - a}{2}\)</span> if the intervals are equal in width.</p>
 <p>So the exact area under the curve is <span class="math">\(\lim_{n \to \infty} \sum\limits_{i = 1}^n f(c_i) \delta x\)</span>. This is the <strong>definition of the definite integral</strong>.</p>
 <p>This can be written as <span class="math">\(\lim_{n \to \infty} \sum\limits_{i = 1}^n f(a) \frac{b - a}{n}\)</span> if we use the left endpoint and equally sized intervals.</p>
 <p>Now we apply this to the example.</p>
 <blockquote>
 <p>We want to find <span class="math">\(\lim_{n \to \infty} \sum\limits_{i = 1}^n c_i^2 \frac{1}{n}\)</span>.<br />Clearly, <span class="math">\(c_i = i\frac{1}{n}\)</span> - the index times the width of an interval.<br />So <span class="math">\(\lim_{n \to \infty} \sum\limits_{i = 1}^n c_i^2 \frac{1}{n} = \lim_{n \to \infty} \sum\limits_{i = 1}^n i^2\frac{1}{n^2} \frac{1}{n} = \lim_{n \to \infty} \frac{1}{n^3} \sum\limits_{i = 1}^n i^2 = \lim_{n \to \infty} \frac{1}{n^3} \frac{n(n + 1)(2n + 1)}{6} = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \frac{1}{3}\)</span>.<br />So the area is <span class="math">\(\frac{1}{3}\)</span> square units.</p>
 </blockquote>
+<h1 id="section-29">20/11/13</h1>
+<p>We can use different subinterval sizes based on the behaviour of the function. For example, if a function has some oscillation near the origin but levels out elsewhere, we would use smaller subintervals near the origin and larger ones elsewhere.</p>
+<h2 id="integration">Integration</h2>
+<p>Let <span class="math">\(v(t)\)</span> be the speed, <span class="math">\(d(t)\)</span> be the distance.</p>
+<p>For <span class="math">\(v(t) = k\)</span>, <span class="math">\(d(t) = v(t) \cdot t\)</span>.</p>
+<p>Problems involving finding the distance given speed are called <strong>distance problems</strong>.</p>
+<p>Distance is the area under the curve of the velocity graph.</p>
+<p>If we have a table of times and corresponding speeds, we can pretend it forms a curve and estimate the distance using the rectangle approximation.</p>
+<p>Velocity is the derivative of displacement - <span class="math">\(v(t) = d&#39;(t)\)</span>. So <strong>displacement is the antiderivative of velocity</strong>.</p>
+<h3 id="definite-integral">Definite Integral</h3>
+<p>The <strong>definite integral</strong> of <span class="math">\(f\)</span> from <span class="math">\(a\)</span> to <span class="math">\(b\)</span> is <span class="math">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum\limits_{i = 1}^n f(c_i) \delta x, c_i \in [x_{i - 1}, x_i]\)</span>.</p>
+<p>If the limit exists, we say <span class="math">\(f\)</span> is <strong>integrable</strong>.</p>
+<p>There are a lot more types of functions that can be integrated compared to those that can be differentiated. Integrable functions can even be discontinuous.</p>
+<p>Note that the definition says nothing about the area under the curve. The area is simply a geometric interpretation of the integral - like the derivative being interpreted as the slope of the tangent.</p>
+<p>The <span class="math">\(\int\)</span> symbol is an elongated &quot;S&quot;, for &quot;sum&quot;, because it is the limit of a sum.</p>
+<p><span class="math">\(\int_a^b f(x) \dee x\)</span> is a number. <span class="math">\(x\)</span> does not matter here - we could use any value here. So <span class="math">\(\int_a^b f(x) \dee x = \int_a^b f(t) \dee t = \int_a^b f(\theta) \dee \theta\)</span>.</p>
+<h3 id="terminology">Terminology</h3>
+<p>Given <span class="math">\(\int_a^b f(x) \dee x\)</span>:</p>
+<ul>
+<li><span class="math">\(f(x)\)</span> is the <strong>integrand</strong>.</li>
+<li><span class="math">\(a\)</span> and <span class="math">\(b\)</span> are the <strong>limits of integration</strong>, the <strong>lower</strong> and <strong>upper</strong> limits, repsectively.</li>
+<li><span class="math">\(\dee x\)</span> is the <strong>differential</strong>.</li>
+</ul>
+<p>The differential simply identifies the variable of integration. It also has dimensions. So for <span class="math">\(\int_a^b v(t) \dee t\)</span>, the unit is <span class="math">\(m\)</span>, because <span class="math">\(v(t)\)</span> has the units <span class="math">\(m/s\)</span> and <span class="math">\(t\)</span> still carries the unit <span class="math">\(s\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -2222,6 +2222,8 @@ Given a continuous function $f(x) > 0$ over $[a, b]$, what is the area below the
 
 This is easy for things like rectangles, but there is no formula for the area below a general curve.
 
+### Rectangle Approximation
+
 However, we can approximate the area by approximating the curve using shapes we can calculate the area of.
 
 Find the area below $y = x^2$ for $x \in [0, 1]$:
@@ -2248,7 +2250,7 @@ Now we construct a rectangle on each interval. It has the same width as the inte
 
 The area of the rectangle is $(x_i - x_{i - 1})f(c)$. The area of all of the rectangles is an approximation of the function's area.
 
-We write this as $\sum\limits_{i = 1}^n f(c_i) \delta x$. This is called the **Riemann Sum**.
+We write this as $\sum\limits_{i = 1}^n f(c_i) \delta x$. This is called the **Riemann Sum**. We can use $\delta x = \frac{b - a}{2}$ if the intervals are equal in width.
 
 So the exact area under the curve is $\lim_{n \to \infty} \sum\limits_{i = 1}^n f(c_i) \delta x$. This is the **definition of the definite integral**.
 
@@ -2260,3 +2262,46 @@ Now we apply this to the example.
 > Clearly, $c_i = i\frac{1}{n}$ - the index times the width of an interval.  
 > So $\lim_{n \to \infty} \sum\limits_{i = 1}^n c_i^2 \frac{1}{n} = \lim_{n \to \infty} \sum\limits_{i = 1}^n i^2\frac{1}{n^2} \frac{1}{n} = \lim_{n \to \infty} \frac{1}{n^3} \sum\limits_{i = 1}^n i^2 = \lim_{n \to \infty} \frac{1}{n^3} \frac{n(n + 1)(2n + 1)}{6} = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \frac{1}{3}$.  
 > So the area is $\frac{1}{3}$ square units.
+
+# 20/11/13
+
+We can use different subinterval sizes based on the behaviour of the function. For example, if a function has some oscillation near the origin but levels out elsewhere, we would use smaller subintervals near the origin and larger ones elsewhere.
+
+Integration
+-----------
+
+Let $v(t)$ be the speed, $d(t)$ be the distance.
+
+For $v(t) = k$, $d(t) = v(t) \cdot t$.
+
+Problems involving finding the distance given speed are called **distance problems**.
+
+Distance is the area under the curve of the velocity graph.
+
+If we have a table of times and corresponding speeds, we can pretend it forms a curve and estimate the distance using the rectangle approximation.
+
+Velocity is the derivative of displacement - $v(t) = d'(t)$. So **displacement is the antiderivative of velocity**.
+
+### Definite Integral
+
+The **definite integral** of $f$ from $a$ to $b$ is $\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum\limits_{i = 1}^n f(c_i) \delta x, c_i \in [x_{i - 1}, x_i]$.
+
+If the limit exists, we say $f$ is **integrable**.
+
+There are a lot more types of functions that can be integrated compared to those that can be differentiated. Integrable functions can even be discontinuous.
+
+Note that the definition says nothing about the area under the curve. The area is simply a geometric interpretation of the integral - like the derivative being interpreted as the slope of the tangent.
+
+The $\int$ symbol is an elongated "S", for "sum", because it is the limit of a sum.
+
+$\int_a^b f(x) \dee x$ is a number. $x$ does not matter here - we could use any value here. So $\int_a^b f(x) \dee x = \int_a^b f(t) \dee t = \int_a^b f(\theta) \dee \theta$.
+
+### Terminology
+
+Given $\int_a^b f(x) \dee x$:
+
+* $f(x)$ is the **integrand**.
+* $a$ and $b$ are the **limits of integration**, the **lower** and **upper** limits, repsectively.
+* $\dee x$ is the **differential**.
+
+The differential simply identifies the variable of integration. It also has dimensions. So for $\int_a^b v(t) \dee t$, the unit is $m$, because $v(t)$ has the units $m/s$ and $t$ still carries the unit $s$.

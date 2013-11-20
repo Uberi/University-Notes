@@ -2145,3 +2145,74 @@ Solve $z^6 = 1 + i$:
 > So $r^6 = \sqrt{2}$ and $6\theta = \frac{\pi}{4} + 2k\pi, k \in \mb{Z}$.  
 > So $r = \sqrt{12}{2}$ and $\theta = \frac{\pi}{24} + \frac{k\pi}{3} = \frac{\pi(8k + 1)}{24}, k \in \mb{Z}$.  
 > So $\theta = \frac{\pi}{24}, \frac{9\pi}{24}, \frac{17\pi}{24}, \frac{25\pi}{24}, \frac{33\pi}{24}, \frac{41\pi}{24}$.  
+
+# 20/11/13
+
+### Complex n-th Roots Theorem (CNRT)
+
+Proposition: given $z = r(\cos \theta + i \sin \theta)$ and $z^n = c$, $n \in \mb{N}$, $z$ has exactly $n$ distinct complex n-th roots, which are $z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k < n$.
+
+In other words, $\sqrt[n]{z} = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k < n$ for all $n \in \mb{N}$.
+
+Polynomials
+-----------
+
+Polynomials may have **integer solutions**, **rational solutions**, or **complex solutions**. We can also find the solutions in $\mb{Z}_m$.
+
+The possible solutions in particular number systems are dependent on the coefficients of the polynomial.
+
+Our primary number systems are $\mb{Z}, \mb{Q}, \mb{R}, \mb{C}, \mb{Z}_m$. Note that we omit $\mb{N}$ because we can't always subtract so it isn't very useful.
+
+A **number system** is also called a **commutative ring**.
+
+A **field** is a number system where every nonzero element has a multiplicative inverse.
+
+Some examples of fields are $\mb{Q}$, $\mb{R}$, $\mb{C}$, and $\mb{Z}_p$ for a prime $p$.
+
+An arbitrary field can be represented as $\mb{F}$.
+
+### Definition
+
+A **polynomial** in $x$ over $\mb{F}$ is any expression of the form $a_nx^n + a_{n - 1}x^{n - 1} + \ldots + a_2x^2 + a_1x^1 + a_0$, where $a_i, 0 \le i \le n$ are fixed, $x$ is unknown, and $n \ge 0$.
+
+We can also write this as $\sum\limits_{i = 0}^n a_i x^i$.
+
+$x^2 + 7x - 1$ is a polynomial over $\mb{Q}, \mb{R}, \mb{C}$.
+
+$x^3 + (1 + i)x + (2 - i)$ is a polynomial over $\mb{C}$.
+
+$[3]x^5 + [2]x^3 + [6]$ is a polynomial over $\mb{Z}_7$. The missing powers have the congruence class 0 as the coefficients.
+
+### Notation
+
+If $\mb{F}$ is a field, then $\mb{F}[x]$ is the set of all polynomials over $\mb{F}$, and infinite set.
+
+$f(x) \in \mb{F}$ is equivalent to "$f(x)$ is a polynomial over $\mb{F}$". For example, $x^2 \in \mb{R}[x]$.
+
+### Degree
+
+Given $\sum\limits_{i = 0}^n a_i x^i$, the **leading coefficient** is the largest $n$ such that $a_n \ne 0$. The **degree** of this polynomial is this $n$.
+
+In other words, the degree of a polynomial is the first nonzero coefficient.
+
+Polynomials of degree 1 are **linear polynomials**.
+
+Polynomials of degree 2 are **quadratic polynomials**.
+
+Polynomials of degree 3 are **cubic polynomials**.
+
+There are a lot more names but these ought to be enough for now.
+
+The **constants** $f(x) = a_0, a_0 \ne 0$ have a degree of 0, since there is only one nonzero coefficients.
+
+The **zero polynomial** $f(x) = 0$ has an undefined degree, since it has no nonzero coefficients.
+
+### Operations
+
+Given a field $\mb{F}$, and $f(x), g(x) \in \mb{F}, f(x) = \sum\limits_{i = 0}^n a_i x^i, g(x) = \sum\limits_{i = 0}^o b_i x^i$:
+
+**Addition** is defined as $f(x) + g(x) = \sum\limits_{i = 0}^{\max{n, o}} (a_i + b_i) x^i$, where out of range coefficients are assumed to be 0.
+
+**Multiplication** is defined as $f(x) \cdot g(x) = \sum\limits_{i = 0}^{n + o} c_i x^i, c_i = \sum\limits_{j = 0}^i a_j b_{i - j} = a_0 b_i + \ldots + a_i b_0$.
+
+When we multiply $f(x)$ and $g(x)$, the resulting polynomial has a degree that is the sum of the degrees of $f(x)$ and $g(x)$.
