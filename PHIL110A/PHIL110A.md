@@ -995,13 +995,59 @@ For example, if `Mary is an excellent student`, we would expect that `Mary does 
 
 Suppose `Mary does not do well on an exam`. Then could we say that `Mary is not an excellent student`?
 
-No, because there are a variety of other possibilities, like `Mary is sick` or `the world ended`.
+No, because there are a variety of other possibilities, like `Mary is sick` or `the world ended`. There are almost unlimited other possibilities.
 
 Quine says there are two categories we can use to see if a hypothesis is connected with a given observation:
 
-* Initial conditions - the things that have to happen in order to connect the observation to the hypothesis. For example, `the world did not end`.
-* Auxilary hypotheses - the things we must assume in order to connect the observation to the hypothesis. For example, `mary is not sick`.
+* Initial conditions - things that already have to be in place in order to make the observation at all. For example, `mary took the test`.
+* Auxilary hypotheses - things we must assume in order to connect the observation to the hypothesis. For example, `the test was graded fairly`.
+
+The difference is not always perfectly clear and can overlap.
 
 Now we have $H \wedge IC \wedge AH \implies O$ - **the hypothesis and initial conditions and auxilary hypotheses together imply the observation will take place**. So if $\neg O$, then we only know that $\neg H \vee \neg IC \vee \neg AH$ - we only know that one or more of these are false.
 
 It is not practical to find all the possible initial conditions or auxilary hypotheses. As a result, we cannot simply falsify our hypotheses.
+
+Quine's point is that we can only falsify hypotheses in groups. It is difficult to obtain a hypothesis by itself 
+
+We can't have certainty, but we can try to prove as many of the auxilary hypotheses and initial conditions as possible. This increases our confidence that the hypothesis is false.
+
+There is also no way to know whether we have found all the auxilary hypotheses or initial conditions.
+
+# 21/11/13
+
+Fox Keller
+----------
+
+Feminist philosophy of science. Scientist trained in biology. Studies systematic cultural bias in biology with respect to race, gender, etc.
+
+Feminism is based on three main ideas:
+
+* Sexism is morally wrong.
+* Sexism has and does hurt people.
+* We want do something about it.
+
+Sexism is not necessarily explicit. For example, the structure of university makes it difficult to raise children properly for women, even though it wasn't done on purpose.
+
+Studies show that between 25% and 12% of women experience sexual violence in their lifetimes. Sexual vioence is a problem. In everyday life, women have to take many more measures to avoid sexual violence, compared to men.
+
+There is still a significant salary and income gap between genders. There are entrenched gender roles in terms of things like housework and raising children.
+
+Doing something about sexism can range from running for office and enacting new laws and policies to not laughing at sexist jokes.
+
+Feminism is not about just women - it is about fighting sexism against all genders.
+
+Keller is looking at feminism as it relates to science - **whether science contributes to sexism**, and **how we can be more inclusive and objective in doing science**.
+
+### Science Criticism
+
+There is a continuum of science criticism, from **liberal** to **radical**:
+
+* Liberal science criticism tries to remove biases from the various aspects of science - the rules themselves are good, but the people need change.
+    * Employement, access to education, opportunities.
+    * Science is fine as it is, but scientists need to be less biased.
+* In between these two is a variety of viewpoints.
+    * More liberal views look into biases in the culture of science and how it affects the types of science that get done, as well as where these biases come from.
+    * More radical views look into the way experiments are designed - drug testing must include men and women, and so on.
+* Radical science criticism tries to change the rules of science itself - science is inherently sexist, and needs to be reformed.
+    * ;wip

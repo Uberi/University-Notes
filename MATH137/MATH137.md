@@ -2215,6 +2215,8 @@ Proof:
 
 $\sum\limits_{i = 1}^n i^2 = \frac{n(n + 1)(2n + 1)}{6}$.
 
+$\sum\limits_{i = 1}^n i^3 = \frac{n^2(n + 1)^2}{4}$.
+
 Integral Calculus
 -----------------
 

@@ -1896,6 +1896,82 @@ A OtherThing is one of:
         (cond [(empty? values) empty]
               [else (mergesort-ne values)]))</code></pre>
 <p>We know this terminates because <code>merge-pairs</code> always produces a list that is around half the given list. As a result, if we call it enough times, we will get a list of length 1, the base case.</p>
+<h1 id="section-18">21/11/13</h1>
+<h2 id="graphs">Graphs</h2>
+<p>A graph is simply a collection of nodes where each node can refer to zero or more nodes, including themselves.</p>
+<p>A <strong>directed graph</strong> is a collection of <strong>nodes</strong> together with a collection of <strong>edges</strong>.</p>
+<p>In a directed graph, <strong>edges have direction</strong> - the edges <span class="math">\((A, B)\)</span> is different from <span class="math">\((B, A)\)</span>. The first points from <span class="math">\(A\)</span> to <span class="math">\(B\)</span>, while the second points from <span class="math">\(B\)</span> to <span class="math">\(A\)</span>.</p>
+<p>There are also <strong>undirected graphs</strong> where edges have no direction**.</p>
+<p>Trees are always graphs, but graphs are not always trees. Trees are graphs that obey some additional constraints.</p>
+<p>We can draw graphs graphically. Nodes can be represented as dots with or without labels, and edges can be represented as arrows leading from one node to another.</p>
+<p>A graph is useful for solving a lot of different types of problems. For example, internet routing, solving sliding puzzles, and finding road directions.</p>
+<h3 id="definitions-1">Definitions</h3>
+<p>In a graph, a <strong>vertex</strong> is a node.</p>
+<p>An edge connects two nodes together.</p>
+<p>An <strong>edge</strong> is an ordered pair of nodes like <span class="math">\((A, B)\)</span>, where <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are nodes.</p>
+<p><span class="math">\((A, B)\)</span> is an edge connecting <span class="math">\(A\)</span> and <span class="math">\(B\)</span>. <span class="math">\(A\)</span> is an <strong>in-neighbor</strong> of <span class="math">\(B\)</span> (<span class="math">\(A\)</span> points inward to <span class="math">\(B\)</span>), and <span class="math">\(B\)</span> is an <strong>out-neighbor</strong> of <span class="math">\(A\)</span> (<span class="math">\(A\)</span> points outward towards <span class="math">\(B\)</span>).</p>
+<p>A sequence of nodes <span class="math">\(v_1, \ldots, v_k\)</span> is a <strong>path</strong> or <strong>route</strong> with length <span class="math">\(k - 1\)</span> if <span class="math">\((v_1, v_2), (v_2, v_3), \ldots, (v_{k - 1}, v_k)\)</span> are edges in the graph.</p>
+<p>The length of a path is the number of edges that make it up.</p>
+<p>A <strong>cycle</strong> is a path where <span class="math">\(v_1 = v_k\)</span> - the path starts and ends at the same node.</p>
+<p>A <strong>directed acyclic graph</strong> (DAG) is a graph with no possible cycles.</p>
+<h3 id="representations">Representations</h3>
+<p>We can represent a graph as a list of nodes, each of which has a list of the nodes it points to. This is called the <strong>adjecency list representation</strong>.</p>
+<p>We will be using the adjacency list representation unless otherwise specified.</p>
+<p>This is basically an association list with nodes as keys and a list of their out-neighbors as values.</p>
+<p>In Scheme, we can represent a graph with <code>(listof (list Symbol (listof Symbol)))</code>:</p>
+<pre><code>;; A Node is a Symbol. It is a vertex in a graph.
+;; A NodeEntry is a (list Node (listof Node)). It stores a vertex and a list of vertices that the vertex points to.
+;; A Graph is a (listof NodeEntry). It is a collection of vertices and their out-neighbors.</code></pre>
+<p>An example graph in this representation would be:</p>
+<pre><code>&#39;((P (Q))
+  (Q (Z))
+  (W (X Y))
+  (X (Q Z))
+  (Y ())
+  (Z ()))</code></pre>
+<p>Note that the order of the nodes in each list is completely arbitrary and does not matter.</p>
+<p>Since in this representation, a graph is a list, we can use a list template:</p>
+<pre><code>;; my-graph-fn: Graph -&gt; Any
+(define (my-graph-fn graph)
+    (cond [(empty? graph) ...]
+          [else (... (first (first graph)) ... ; node
+                     (second (first graph)) ... ; node out-neighbors
+                     (my-graph-fn (rest graph)) ...)]))</code></pre>
+<h3 id="working-with-graphs">Working with Graphs</h3>
+<p>Backtracking algorithms try to find a route from an origin to a destination. They try a possibility, and if it doesn't work out, goes back and tries another, until either there are no possibilities or a route is found.</p>
+<p>Suppose we wanted to write <code>find-route</code>, a function that finds a path from one node to another in a DAG. First we write a <code>neighbor</code> function:</p>
+<pre><code>;; neighbors: Node Graph -&gt; (listof Node)
+;; Purpose: looks up the list of out-neighbors of `node` in `graph`
+(define (neighbors node graph)
+    (cond [(symbol=? node (first (first graph))) ; we do not use a base case because the node is known to be in the graph
+           (second (first graph))]
+          [else (my-graph-fn (rest graph))]))</code></pre>
+<p>If there is a path, either the starting location is equal to the target location (base case), or the path exists in one of the node's out-neighbors.</p>
+<pre><code>;; find-route: Node Graph -&gt; (listof Node)
+;; Purpose: produces a path leading from `start` to `end` in `graph`
+(define (find-route start end graph)
+    (cond [(symbol=? start end) (list end)]
+          [else
+           (local [(define found-paths
+                       (filter cons?
+                           (map (lambda (node) (find-route node graph))
+                                (neighbors start))))]
+               (cond [(empty? found-paths) false]
+                     [else (first found-paths)]))]))</code></pre>
+<p>This works, but it isn't very efficient since we only really care about one possible path, and it would be more efficient to stop searchign when we've found a path already:</p>
+<pre><code>;; find-route: Node Node Graph -&gt; (union (listof Node) false)
+;; Purpose: produces a path leading from `start` to `end` in `graph` or false if not possible
+(define (find-route start end graph)
+    (cond [(symbol=? start end) (list end)]
+          [else (local [;; find-route-list: (listof Node) Graph -&gt; (union (listof Node) false)
+                        ;; Purpose: produces a path leading from one of `nodes` or false if not possible
+                        (define (find-route-list nodes)
+                            (cond [(empty? nodes) false]
+                                  [else (local [(define route (find-route (first nodes) end graph))]
+                                            (cond [(cons? route) route]
+                                                  [else (find-route-list (rest nodes))]))]))]
+                    (cons start (find-route-list (neighbors start))))]))</code></pre>
+<p>;wip</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
