@@ -260,6 +260,8 @@ The **income effect** is a phenomenon that occurs when the relative price of a g
 
 The **demand curve** shows the relationship between the relationship between the quantity demanded of a good and the largest price people are willing to pay for it, all other influences on consumers' planned purchases remain the same. The **demand schedule** is the table of values for this curve.
 
+It slopes downward because more people demand a product when the price is lower, and fewer people demand a product when the price is higher.
+
 Demand is a measure of marginal benefit - the willingness and ability to pay given a marginal cost - the price.
 
 For example, the demand curve for energy bars might appear as follows:
@@ -1263,7 +1265,7 @@ Whether a firm should continue producing is determined by whether a firm has **e
 
 ### Short-run Supply
 
-In the short run, firms do not enter or exit the market.
+In the short run, it is difficult for firms to enter or exit the market.
 
 A firm in a perfectly competitive market has a supply curve similar to the following:
 
@@ -1335,3 +1337,83 @@ A firm's supply curve shows the best profit maximization over changes in the pri
 Because of this, **competitive markets are efficient** - marginal social benefit equals marginal social cost. The gains from trade for consumers and producers are consumer and producer surplus, respectively. The sum of these is the total surplus.
 
 At long-run equilibrium, **total surplus is maximized**.
+
+#  21/11/13
+
+Monopoly
+--------
+
+A **monopoly** is a market that produces a good **without good substitutes** and **with only one supplier protected from competition by barriers of entry**.
+
+A **monopoly** is characterized by not having any competition.
+
+If a good has any close substitutes, then the firm faces competition from the producers of the substitute. So it is only a monopoly if there are no close substitutes.
+
+### Barriers to entry
+
+The main causes of a monopoly are the **barriers to entry**. Some barriers to entry are:
+
+* A single firm has ownership of a needed resource.
+    * This is rare because other firms can often find other instances of the resource needed.
+    * For example, De Beers has exclusive use of most African natural diamonds.
+* The government gives one firm exclusive rights to produce/sell the good.
+    * For example, patents and copyright.
+    * Another example is cable companies being given regions where they have exclusive rights to sell service.
+
+Barriers to entry fall under three categories:
+
+* Natural barriers to entry
+    * **Natural monopoly** caused by economies of scale allowing the biggest firm to supply the good at the lowest cost, making it difficult for new, smaller firms to enter the market.
+    * For example, Walmart can sell products at a lower price than some small supermarkets because they have much higher outputs.
+* Ownership barriers to entry
+    * Monopoly caused by one firm owning a significant part of a key resource needed in producing a good.
+    * For example, De Beers owns 90% of the world's diamond sources, making it difficult or impossible for other firms to produce the good.
+* Legal barriers to entry
+    * **Legal monopoly** caused by competition and entry restricted by government intervention.
+    * For example, public franchises like Canada Post are to deliver first-class mail.
+    * For example, there might be a government license needed to produce the good or service, like a license to practice law or medicine.
+    * For example, a patent or copyright granted to one firm would disallow other firms from producing it.
+
+### Pricing
+
+A **single-price monopoly** has each unit of the good or service **sold at the same price to all customers**.
+
+A monopoly is a **price setter**. The market demand is the demand for the monopoly's output.
+
+To increase quantity sold, the monopoly must reduce prices.
+
+**Total revenue** (TR) is the product of price and quantity sold. **Marginal revenue** (MR) is the change in total revenue resulting from the quantity sold increasing by 1 unit.
+
+The **marginal revenue is less than the price of the good** ($MR < P$) at all levels of output in a single-price monopoly.
+
+If a firm cuts the price of a good, it will also sell more. The marginal revenue is the difference between the revenue gain from selling more and the revenue loss from lower price.
+
+The price depends on the elasticity of the good. If the demand is elastic, a fall in the price brings an increase in total revenue. If the demand is inelastic, a rise in price brings an increase in total revenue.
+
+So the profit is maximized when the marginal revenue is 0, when the quantity demanded is unit elastic. 
+
+In a monopoly, the demand is always elastic. So a monopoly always seeks to lower price.
+
+### Efficiency
+
+A monopoly faces technology constraints like a firm in a competitive market, but does not need to worry about competition. Monopolies set their price at such a value that they sell the quantity that maximizes profit.
+
+It is possible to make an economic profit in a monopolistic market. If a firm incurs an economic loss, it may shut down temporarily in the short run or exit the market in the long run.
+
+Compared to a perfectly competitive market, a good in a monopoly is sold at a **higher price** and **lower quantity**.
+
+A monopoly is inefficient because the marginal social benefit is greater than the marginal social cost, causing deadweight losses. Some of the consumer surplus also becomes producer surplus.
+
+**Economic rent** is any type of surplus, including consumer surpus, producer surplus, and economic profit.
+
+**Rent seeking** is the pursuit of wealth by capturing economic rent rather than creating more wealth. This can be done by buying a monopoly or creating one. Often, rent seekers work by manipulating the social and politicial environment in which economic activities happen.
+
+Profits spent rent seeking can use up all the producer surplus, and is considered a deadweight loss. Rent seeking increases deadweight loss.
+
+### Price discrimination
+
+Some firms practice **price discrimination** - goods or services are sold at different prices to different customers.
+
+A firm does not need to be a monopoly to price discriminate, but it happens most often in monopolies.
+
+For example, an energy company might sell electricity at higher prices during certain hours of the day and lower prices at other times.

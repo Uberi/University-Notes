@@ -82,6 +82,7 @@ Tutorials: Tuesdays 4:30PM-7:20PM (Drop-in to Biology 1 Room 271)</code></pre>
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
+\newcommand{\imag}{\boldsymbol{i}}
 \]</span></p>
 <h1 id="section">9/9/13</h1>
 <p>Show <span class="math">\(\sqrt{x}(x-\sqrt{x}) = x(1-\sqrt{x})\)</span>:</p>
@@ -1180,38 +1181,38 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p><span class="math">\(x + 2 = 0\)</span> has no solution in <span class="math">\(\mb{N}\)</span>, but it does in <span class="math">\(\mb{Z}\)</span>. Many of these larger number systems were invented in order to solve equations that couldn't be solved before.</p>
 <p>Likewise, <span class="math">\(3x + 3 = 0\)</span>, <span class="math">\(x^2 - 2 = 0\)</span>, and <span class="math">\(x^2 + 2 = 0\)</span> has no solutions in <span class="math">\(\mb{Z}, \mb{Q}, \mb{R}\)</span>, respectively.</p>
 <p>In the last one, however, there is a solution in <strong>complex numbers</strong>.</p>
-<p>A <strong>complex number</strong> in <strong>standard form</strong> is any expression of the form <span class="math">\(x + yi, x, y \in \mb{Z}\)</span>. The set of complex numbers is <span class="math">\(\mb{C} = \set{x + yi \middle| x, y \in \mb{R}}\)</span>.</p>
-<p>The <span class="math">\(+\)</span> is required for standard form; it must be retained in order to be standard form.</p>
+<p>A <strong>complex number</strong> in <strong>standard form</strong> is any expression of the form <span class="math">\(x + y\imag, x, y \in \mb{Z}\)</span>. The set of complex numbers is <span class="math">\(\mb{C} = \set{x + y\imag \middle| x, y \in \mb{R}}\)</span>.</p>
+<p>The <span class="math">\(+\)</span> is required for standard form; it must be retained.</p>
 <p>Examples:</p>
 <ul>
-<li><span class="math">\(2.7 + 3.2i\)</span></li>
-<li><span class="math">\(-2 + (-3)i\)</span> (plus sign is needed in standard form)</li>
-<li><span class="math">\(8 + 0i\)</span></li>
+<li><span class="math">\(2.7 + 3.2\imag\)</span></li>
+<li><span class="math">\(-2 + (-3)\imag\)</span> (plus sign is needed in standard form)</li>
+<li><span class="math">\(8 + 0\imag\)</span></li>
 </ul>
-<p>Every real number is a complex number of the form <span class="math">\(x + 0i, x \in \mb{Z}\)</span></p>
-<p>We generally denote complex variables with <span class="math">\(w\)</span> and <span class="math">\(z\)</span> rather than <span class="math">\(x\)</span> and <span class="math">\(y\)</span>. If <span class="math">\(z = a + bi\)</span>, <span class="math">\(\mathfrak{R}(z) = a\)</span> (the real component), <span class="math">\(\mathfrak{I}(z) = b\)</span> (the imaginary component). Both of these are simply real numbers.</p>
+<p>Every real number is a complex number of the form <span class="math">\(x + 0\imag, x \in \mb{Z}\)</span></p>
+<p>We generally denote complex variables with <span class="math">\(w\)</span> and <span class="math">\(z\)</span> rather than <span class="math">\(x\)</span> and <span class="math">\(y\)</span>. If <span class="math">\(z = a + b\imag\)</span>, <span class="math">\(\Re(z) = \operatorname{Re}(z) = a\)</span> (the real component), <span class="math">\(\Im(z) = \operatorname{Im}(z) = b\)</span> (the imaginary component). Both of these are simply real numbers.</p>
 <h3 id="sumdifference">Sum/Difference</h3>
 <p>Let <span class="math">\(w = a + bi\)</span> and <span class="math">\(z = c + di\)</span>.</p>
 <p><span class="math">\(w\)</span> and <span class="math">\(z\)</span> are <strong>equal</strong> if and only if <span class="math">\(a = c \wedge b = d\)</span>. In other words, their real and imaginary parts are equal.</p>
-<p><strong>Addition</strong> is defined as <span class="math">\(w + z = (a + c) + (b + d)i\)</span>. In other words, we simply add the components.</p>
-<p>Likewise, <strong>subtraction</strong> is defined as <span class="math">\(w - z = (a - c) + (b - d)i\)</span>. In other words, we simply subtract the components.</p>
+<p><strong>Addition</strong> is defined as <span class="math">\(w + z = (a + c) + (b + d)\imag\)</span>. In other words, we simply add the components.</p>
+<p>Likewise, <strong>subtraction</strong> is defined as <span class="math">\(w - z = (a - c) + (b - d)\imag\)</span>. In other words, we simply subtract the components.</p>
 <h3 id="multiplication">Multiplication</h3>
-<p><strong>Multiplication</strong> is defined as <span class="math">\(wz = (ac - bd) + (ad + bc)i\)</span>.</p>
+<p><strong>Multiplication</strong> is defined as <span class="math">\(wz = (ac - bd) + (ad + bc)\imag\)</span>.</p>
 <p>This is derived from the formula for multiplying a polynomial of the form <span class="math">\((a + bx)(c + dx) = ac + (ad + bc)x + bdx^2\)</span>.</p>
 <h3 id="inverse">Inverse</h3>
 <p>How do we find the inverse of a complex number?</p>
 <blockquote>
-<p>Let <span class="math">\(z = a + bi\)</span> and <span class="math">\(z \ne 0\)</span>.<br />The inverse is <span class="math">\(\frac{1}{a + bi} = \frac{1}{a + bi} \cdot \frac{a - bi}{a - bi} = \frac{a - bi}{a^2 + b^2}\)</span>.<br />We can write this in standard form: <span class="math">\(z^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i\)</span>.</p>
+<p>Let <span class="math">\(z = a + b\imag\)</span> and <span class="math">\(z \ne 0\)</span>.<br />The inverse is <span class="math">\(\frac{1}{a + b\imag} = \frac{1}{a + b\imag} \cdot \frac{a - b\imag}{a - b\imag} = \frac{a - b\imag}{a^2 + b^2}\)</span>.<br />We can write this in standard form: <span class="math">\(z^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}\imag\)</span>.</p>
 </blockquote>
-<p>So <span class="math">\(z^{-1} = \frac{1}{z} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i\)</span></p>
-<p>In this way, we find that <span class="math">\(\frac{1}{i} = -i\)</span>.</p>
+<p>So <span class="math">\(z^{-1} = \frac{1}{z} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}\imag\)</span></p>
+<p>In this way, we find that <span class="math">\(\frac{1}{\imag} = -\imag\)</span>.</p>
 <h3 id="conjugatemodulus">Conjugate/Modulus</h3>
-<p>Let <span class="math">\(z = a + bi\)</span>.</p>
-<p><span class="math">\(z\)</span> has the <strong>conjugate</strong> <span class="math">\(\overline{z} = a - bi\)</span>. For example, <span class="math">\(\overline{3 + 2i} = 3 - 2i\)</span>.</p>
+<p>Let <span class="math">\(z = a + b\imag\)</span>.</p>
+<p><span class="math">\(z\)</span> has the <strong>conjugate</strong> <span class="math">\(\overline{z} = a - b\imag\)</span>. For example, <span class="math">\(\overline{3 + 2\imag} = 3 - 2\imag\)</span>.</p>
 <p>The conjugate of a number simply has the opposite sign for the imaginary part.</p>
 <p>Note that the conjugate of any real number is the same number.</p>
-<p><span class="math">\(z\)</span> has the <strong>modulus</strong> <span class="math">\(\abs{z} = \sqrt{a^2 + b^2}\)</span>. For example, <span class="math">\(\abs{3 - 2i} = \sqrt{9 + 4} = \sqrt{13}\)</span>.</p>
-<p>Note that the modulus of any real number is the absolute value - <span class="math">\(\sqrt{x^2}\)</span>. This is why we use the absolute value notation.</p>
+<p><span class="math">\(z\)</span> has the <strong>modulus</strong> <span class="math">\(\abs{z} = \sqrt{a^2 + b^2}\)</span>. For example, <span class="math">\(\abs{3 - 2\imag} = \sqrt{9 + 4} = \sqrt{13}\)</span>.</p>
+<p>Note that the modulus of any real number is its absolute value - <span class="math">\(\sqrt{x^2}\)</span>. This is why we use the absolute value notation.</p>
 <p>So <span class="math">\(z^{-1} = \frac{\overline{z}}{\abs{z}^2}\)</span>.</p>
 <h3 id="operations">Operations</h3>
 <p>Notice that operations on complex numbers work like linear polynomials.</p>
@@ -1220,15 +1221,15 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <li><span class="math">\((u + v) + z = u + (v + z)\)</span></li>
 <li><span class="math">\(u + v = v + u\)</span></li>
 <li><span class="math">\(z + 0 = z\)</span></li>
-<li>If <span class="math">\(z = a + bi\)</span>, <span class="math">\(-z = (-a) + (-b)i\)</span></li>
+<li>If <span class="math">\(z = a + b\imag\)</span>, <span class="math">\(-z = (-a) + (-b)\imag\)</span></li>
 <li><span class="math">\(uv = vu\)</span></li>
 <li><span class="math">\(1z = z\)</span> (<span class="math">\(1 = 1 + 0i\)</span>)</li>
 <li><span class="math">\(z(u + v) = zu + zv\)</span></li>
 </ul>
 <h3 id="i">i</h3>
-<p>What is <span class="math">\(i^2\)</span>, according to the multiplication formula?</p>
-<p><span class="math">\(ii = (0 + 1i)(0 + 1i) = 0 \cdot (0 - 1 \cdot 1) + (0 \cdot 1 + 1 \cdot 0) = -1 + 0i = -1\)</span></p>
-<p>So <span class="math">\(i^2 = -1\)</span>, and <span class="math">\(i\)</span> is the square root of -1. Sometimes, people write <span class="math">\(\sqrt{-1}\)</span>. However, <span class="math">\(\sqrt{\ldots}\)</span> should only formally be written for non-negative real numbers.</p>
+<p>What is <span class="math">\(\imag^2\)</span>, according to the multiplication formula?</p>
+<p><span class="math">\(ii = (0 + 1\imag)(0 + 1\imag) = 0 \cdot (0 - 1 \cdot 1) + (0 \cdot 1 + 1 \cdot 0) = -1 + 0i = -1\)</span></p>
+<p>So <span class="math">\(\imag^2 = -1\)</span>, and <span class="math">\(\imag\)</span> is the square root of -1. Sometimes, people write <span class="math">\(\sqrt{-1}\)</span>. However, <span class="math">\(\sqrt{\ldots}\)</span> should only formally be written for non-negative real numbers.</p>
 <h1 id="section-26">13/11/13</h1>
 <h3 id="properties-of-conjugates-pcj">Properties of Conjugates (PCJ)</h3>
 <p>Proposition: for all <span class="math">\(z, w, \in \mb{C}\)</span>:</p>
@@ -1236,8 +1237,8 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <li><span class="math">\(\overline{z + w} = \overline{z} + \overline{w}\)</span></li>
 <li><span class="math">\(\overline{z \cdot w} = \overline{z} \cdot \overline{w}\)</span></li>
 <li><span class="math">\(\overline{\overline{z}} = z\)</span></li>
-<li><span class="math">\(z + \overline{z} = 2 \mathfrak{R}(z)\)</span></li>
-<li><span class="math">\(z - \overline{z} = 2 i \mathfrak{I}(z)\)</span></li>
+<li><span class="math">\(z + \overline{z} = 2\Re(z)\)</span></li>
+<li><span class="math">\(z - \overline{z} = 2\imag\Im(z)\)</span></li>
 </ul>
 <p>These are trivially proved by using the definitions.</p>
 <p>Interestingly, <span class="math">\(\overline{z} - z = z - \overline{z}\)</span>.</p>
@@ -1252,27 +1253,27 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 </ul>
 <p>Proof of first:</p>
 <blockquote>
-<p>Assume <span class="math">\(z = 0\)</span>. So <span class="math">\(\abs{z} = 0\)</span>.<br />Assume <span class="math">\(\abs{z} = 0\)</span>. So <span class="math">\(0^2 = \mathfrak{R}(z)^2 + \mathfrak{I}(z)^2\)</span>.<br />Clearly, <span class="math">\(\mathfrak{R}(z)^2 \ge 0, \mathfrak{I}(z)^2 \ge 0\)</span>. So <span class="math">\(\mathfrak{R}(z) = 0, \mathfrak{I}(z) = 0\)</span>.</p>
+<p>Assume <span class="math">\(z = 0\)</span>. So <span class="math">\(\abs{z} = 0\)</span>.<br />Assume <span class="math">\(\abs{z} = 0\)</span>. So <span class="math">\(0^2 = \Re(z)^2 + \Im(z)^2\)</span>.<br />Clearly, <span class="math">\(\Re(z)^2 \ge 0, \Im(z)^2 \ge 0\)</span>. So <span class="math">\(\Re(z) = 0, \Im(z) = 0\)</span>.</p>
 </blockquote>
 <p>Proof of fourth:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\abs{z}, \abs{w}, \abs{zw}\)</span> are non-negative real numbers.<br />So we can just prove <span class="math">\(\abs{zw}^2 = \abs{z}^2 \abs{w}^2\)</span>.<br />Let <span class="math">\(z = a + bi, w = c + di\)</span>. So <span class="math">\(\abs{zw}^2 = (ac - bd)^2 + (ad + bc)^2 = (a^2 + b^2)(c^2 + d^2) = \abs{z}^2 \abs{w}^2\)</span>.</p>
+<p>Clearly, <span class="math">\(\abs{z}, \abs{w}, \abs{zw}\)</span> are non-negative real numbers.<br />So we can just prove <span class="math">\(\abs{zw}^2 = \abs{z}^2 \abs{w}^2\)</span>.<br />Let <span class="math">\(z = a + b\imag, w = c + di\)</span>. So <span class="math">\(\abs{zw}^2 = (ac - bd)^2 + (ad + bc)^2 = (a^2 + b^2)(c^2 + d^2) = \abs{z}^2 \abs{w}^2\)</span>.</p>
 </blockquote>
 <p>The rest is either trivial to prove or I'm too tired to.</p>
 <h3 id="the-complex-plane">The Complex Plane</h3>
-<p>We can picture a complex number <span class="math">\(z = x + yi\)</span> as a point <span class="math">\((x, y)\)</span> in a 2D plane.</p>
+<p>We can picture a complex number <span class="math">\(z = x + y\imag\)</span> as a point <span class="math">\((x, y)\)</span> in a 2D plane.</p>
 <p>In this representation, we call the x-axis the &quot;real axis&quot; and the y-axis the &quot;imaginary axis&quot;.</p>
 <p><span class="math">\((x, y)\)</span> are the <strong>Cartesian coordinates</strong> of <span class="math">\(z\)</span>.</p>
-<p>Points on a plane can also be described by polar coordinates. Here, <span class="math">\(r = \abs{z}\)</span> and <span class="math">\(\theta = \arccos \left(\frac{x}{r}\right) = \arccos \left(\frac{\mathfrak{R}(z)}{\abs{z}}\right)\)</span>, making sure to keep the quandrant in mind.</p>
+<p>Points on a plane can also be described by polar coordinates. Here, <span class="math">\(r = \abs{z}\)</span> and <span class="math">\(\theta = \arccos \left(\frac{x}{r}\right) = \arccos \left(\frac{\Re(z)}{\abs{z}}\right)\)</span>, making sure to keep the quandrant in mind.</p>
 <p>In polar coordinates, <span class="math">\(x = r \cos \theta, y = r \sin \theta\)</span></p>
 <p>Geometrically speaking, the modulus of <span class="math">\(z\)</span> is the length of the hypotenuse of the triangle formed with the point and the origin.</p>
-<p>The <strong>polar form</strong> of <span class="math">\(z\)</span> is <span class="math">\(z = (r \cos \theta) + (r \sin \theta)i = r(\cos \theta + i \sin \theta)\)</span>. The <strong>polar coordinates</strong> of <span class="math">\(z\)</span> are <span class="math">\((r, \theta)\)</span>.</p>
+<p>The <strong>polar form</strong> of <span class="math">\(z\)</span> is <span class="math">\(z = (r \cos \theta) + (r \sin \theta)\imag = r(\cos \theta + \imag\sin \theta)\)</span>. The <strong>polar coordinates</strong> of <span class="math">\(z\)</span> are <span class="math">\((r, \theta)\)</span>.</p>
 <p>The <strong>argument</strong> of <span class="math">\(z\)</span> is <span class="math">\(\theta\)</span>.</p>
-<p>For example, <span class="math">\(z = 1 + i = \sqrt{2} \left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)\)</span></p>
+<p>For example, <span class="math">\(z = 1 + \imag = \sqrt{2} \left(\cos \frac{\pi}{4} + \imag\sin \frac{\pi}{4}\right)\)</span>.</p>
 <h1 id="section-27">15/11/13</h1>
 <h2 id="visualizing-complex-numbers">Visualizing Complex Numbers</h2>
 <p>On the complex plane, we can visualize various operations on complex numbers in simple ways.</p>
-<p>We can consider a complex number <span class="math">\(z = a + bi\)</span> as the vector <span class="math">\((a, b)\)</span> to reason about it visually.</p>
+<p>We can consider a complex number <span class="math">\(z = a + b\imag\)</span> as the vector <span class="math">\((a, b)\)</span> to reason about it visually.</p>
 <p>Note that <span class="math">\(\abs{z} = 1\)</span> is the unit circle.</p>
 <h3 id="additionsubtraction">Addition/subtraction</h3>
 <p>Adding/subtracting two complex numbers is equivalent to <strong>adding/subtracting their vectors</strong>.</p>
@@ -1289,48 +1290,48 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>Proposition: given <span class="math">\(z_1, z_2 \in \mb{C}\)</span> in polar form <span class="math">\(z_1 = (r_1, \theta_1), z_2 = (r_2, \theta_2)\)</span>, <span class="math">\(z_1 z_2 = (r_1 r_2, \theta_1 + \theta_2)\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>This is equivalent to saying that if <span class="math">\(z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)\)</span>, then <span class="math">\(z_1 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i \sin (\theta_1 + \theta_2))\)</span>.<br />Assume <span class="math">\(z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)\)</span>.<br />Then <span class="math">\(z_1 z_2 = r_1(\cos \theta_1 + i \sin \theta_1) \cdot r_2(\cos \theta_2 + i \sin \theta_2) = r_1 r_2 (\cos \theta_1 \cos \theta_2 - \sin \theta_1 \sin \theta_2) + i(\cos \theta_1 \sin \theta_2 + \sin \theta_1 \cos \theta_2) = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))\)</span>.<br />So <span class="math">\(z_1 z_2 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))\)</span>.</p>
+<p>This is equivalent to saying that if <span class="math">\(z_1 = r_1(\cos \theta_1 + \imag\sin \theta_1), z_2 = r_2(\cos \theta_2 + \imag\sin \theta_2)\)</span>, then <span class="math">\(z_1 = r_1 r_2 (\cos (\theta_1 + \theta_2) + \imag \sin (\theta_1 + \theta_2))\)</span>.<br />Assume <span class="math">\(z_1 = r_1(\cos \theta_1 + \imag\sin \theta_1), z_2 = r_2(\cos \theta_2 + \imag\sin \theta_2)\)</span>.<br />Then <span class="math">\(z_1 z_2 = r_1(\cos \theta_1 + \imag\sin \theta_1) \cdot r_2(\cos \theta_2 + \imag\sin \theta_2) = r_1 r_2 (\cos \theta_1 \cos \theta_2 - \sin \theta_1 \sin \theta_2) + \imag(\cos \theta_1 \sin \theta_2 + \sin \theta_1 \cos \theta_2) = r_1 r_2 (\cos (\theta_1 + \theta_2) + \imag\sin(\theta_1 + \theta_2))\)</span>.<br />So <span class="math">\(z_1 z_2 = r_1 r_2 (\cos (\theta_1 + \theta_2) + \imag\sin(\theta_1 + \theta_2))\)</span>.</p>
 </blockquote>
 <p>This is useful for analyzing powers of a complex numbers.</p>
 <h3 id="de-moivres-theorem-dmt">De Moivre's Theorem (DMT)</h3>
-<p>Proposition: given <span class="math">\(z = r(\cos \theta + i \sin \theta)\)</span>, then <span class="math">\(z^n = r^n(\cos n\theta + i \sin n\theta)\)</span>.</p>
-<p>As a result, if <span class="math">\(z = r(\cos \theta + i \sin \theta)\)</span>, then <span class="math">\(z^n = r^n(\cos n\theta + i \sin n\theta)\)</span>.</p>
+<p>Proposition: given <span class="math">\(z = r(\cos \theta + \imag\sin \theta), n \in \mb{Z}\)</span>, then <span class="math">\(z^n = r^n(\cos n\theta + \imag\sin n\theta)\)</span>.</p>
+<p>As a result, if <span class="math">\(z = r(\cos \theta + \imag\sin \theta)\)</span>, then <span class="math">\(z^n = r^n(\cos n\theta + \imag\sin n\theta)\)</span>.</p>
 <p>This is true for all <span class="math">\(n \in \mb{Z}\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>;wip: proof by induction and PMCN for <span class="math">\(n \ge 1\)</span>, check for <span class="math">\(n = 0\)</span>, for negative we want to show <span class="math">\((\cos \theta + i \sin \theta)^{-1} = \cos -\theta + i \sin -\theta = \cos \theta - i \sin \theta\)</span> so we just need to check that <span class="math">\((\cos \theta + i \sin \theta)(\cos \theta - i \sin \theta) = 1\)</span> then using <span class="math">\((\cos \theta + i \sin \theta)^{-n} = ((\cos \theta + i \sin \theta)^{-1})^n\)</span></p>
+<p>;wip: proof by induction and PMCN for <span class="math">\(n \ge 1\)</span>, check for <span class="math">\(n = 0\)</span>, for negative we want to show <span class="math">\((\cos \theta + \imag\sin \theta)^{-1} = \cos -\theta + \imag\sin -\theta = \cos \theta - \imag\sin \theta\)</span> so we just need to check that <span class="math">\((\cos \theta + \imag\sin \theta)(\cos \theta - \imag\sin \theta) = 1\)</span> then using <span class="math">\((\cos \theta + \imag\sin \theta)^{-n} = ((\cos \theta + \imag\sin \theta)^{-1})^n\)</span></p>
 </blockquote>
 <h1 id="section-28">18/11/13</h1>
-<p>Find <span class="math">\((\sqrt{3} + i)^6\)</span>:</p>
+<p>Find <span class="math">\((\sqrt{3} + \imag)^6\)</span>:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(r = \sqrt{3 + 1} = 2\)</span>. The argument is <span class="math">\(\theta = \frac{\pi}{6} = \arccos \left(\frac{\sqrt{3}}{1}\right)\)</span>.<br />So <span class="math">\(\sqrt{3} + i = 2\left(\cos \frac{\pi}{6} + i \sin \frac{\pi}{6}\right)\)</span>.<br />By DMT, <span class="math">\((\sqrt{3} + i)^6 = 2^6\left(\cos 6 \frac{\pi}{6} + i \sin 6 \frac{\pi}{6}\right) = 64(-1 + i0) = -64\)</span>.</p>
+<p>Clearly, <span class="math">\(r = \sqrt{3 + 1} = 2\)</span>. The argument is <span class="math">\(\theta = \frac{\pi}{6} = \arccos \left(\frac{\sqrt{3}}{1}\right)\)</span>.<br />So <span class="math">\(\sqrt{3} + \imag = 2\left(\cos \frac{\pi}{6} + \imag\sin \frac{\pi}{6}\right)\)</span>.<br />By DMT, <span class="math">\((\sqrt{3} + \imag)^6 = 2^6\left(\cos 6 \frac{\pi}{6} + \imag\sin 6 \frac{\pi}{6}\right) = 64(-1 + i0) = -64\)</span>.</p>
 </blockquote>
 <p>Solve <span class="math">\(z^2 = \overline{z}\)</span> using Cartesian coordinates:</p>
 <blockquote>
-<p>Let <span class="math">\(z = a + bi\)</span>.<br />Clearly, <span class="math">\((a + bi)^2 = a - bi = (a^2 - b^2) + 2abi\)</span>.<br />In order to be equal, the real and imaginary parts must be equal.<br />So <span class="math">\(a = a^2 + b^2\)</span> and <span class="math">\(-b = 2ab\)</span>.<br />So <span class="math">\(b = \pm \sqrt{-a(a - 1)}\)</span> and <span class="math">\(0 = b(2a + 1)\)</span>.<br />So <span class="math">\(0 = \pm \sqrt{-a(a - 1)}(2a + 1)\)</span>.<br />So <span class="math">\(a = -\frac{1}{2}\)</span> or <span class="math">\(a = 0, 1\)</span>.<br />So <span class="math">\(z = 0, 1, -\frac{1}{2} - \frac{\sqrt{3}}{2}i, -\frac{1}{2} + \frac{\sqrt{3}}{2}i\)</span>.</p>
+<p>Let <span class="math">\(z = a + b\imag\)</span>.<br />Clearly, <span class="math">\((a + b\imag)^2 = a - b\imag = (a^2 - b^2) + 2ab\imag\)</span>.<br />In order to be equal, the real and imaginary parts must be equal.<br />So <span class="math">\(a = a^2 + b^2\)</span> and <span class="math">\(-b = 2ab\)</span>.<br />So <span class="math">\(b = \pm \sqrt{-a(a - 1)}\)</span> and <span class="math">\(0 = b(2a + 1)\)</span>.<br />So <span class="math">\(0 = \pm \sqrt{-a(a - 1)}(2a + 1)\)</span>.<br />So <span class="math">\(a = -\frac{1}{2}\)</span> or <span class="math">\(a = 0, 1\)</span>.<br />So <span class="math">\(z = 0, 1, -\frac{1}{2} - \frac{\sqrt{3}}{2}\imag, -\frac{1}{2} + \frac{\sqrt{3}}{2}\imag\)</span>.</p>
 </blockquote>
 <p>Two numbers in polar form are equal if and only if their <strong>moduli are equal</strong> and their arguments are congruent mod <span class="math">\(2 \pi\)</span>: <span class="math">\(r_1 = r_2 \wedge \theta_1 = \theta_2 + 2k\pi, k \in \mb{Z}\)</span>.</p>
 <p>Solve <span class="math">\(z^6 = 1 + i\)</span>:</p>
 <blockquote>
-<p>Let <span class="math">\(z = a + bi\)</span>, <span class="math">\(r = \sqrt{a^2 + b^2}\)</span>, and <span class="math">\(\theta = \arccos \frac{\mathfrak{R}}{\sqrt{a^2 + b^2}}\)</span>.<br />So <span class="math">\(z = r (\cos \theta + i \sin \theta) = 1 + i = \sqrt{2}\left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)\)</span>.<br />So <span class="math">\(r^6 = \sqrt{2}\)</span> and <span class="math">\(6\theta = \frac{\pi}{4} + 2k\pi, k \in \mb{Z}\)</span>.<br />So <span class="math">\(r = \sqrt{12}{2}\)</span> and <span class="math">\(\theta = \frac{\pi}{24} + \frac{k\pi}{3} = \frac{\pi(8k + 1)}{24}, k \in \mb{Z}\)</span>.<br />So <span class="math">\(\theta = \frac{\pi}{24}, \frac{9\pi}{24}, \frac{17\pi}{24}, \frac{25\pi}{24}, \frac{33\pi}{24}, \frac{41\pi}{24}\)</span>.</p>
+<p>Let <span class="math">\(z = a + b\imag\)</span>, <span class="math">\(r = \sqrt{a^2 + b^2}\)</span>, and <span class="math">\(\theta = \arccos \frac{\Re(z)}{\sqrt{a^2 + b^2}}\)</span>.<br />So <span class="math">\(z = r (\cos \theta + \imag\sin \theta) = 1 + \imag = \sqrt{2}\left(\cos \frac{\pi}{4} + \imag\sin \frac{\pi}{4}\right)\)</span>.<br />So <span class="math">\(r^6 = \sqrt{2}\)</span> and <span class="math">\(6\theta = \frac{\pi}{4} + 2k\pi, k \in \mb{Z}\)</span>.<br />So <span class="math">\(r = \sqrt{12}{2}\)</span> and <span class="math">\(\theta = \frac{\pi}{24} + \frac{k\pi}{3} = \frac{\pi(8k + 1)}{24}, k \in \mb{Z}\)</span>.<br />So <span class="math">\(\theta = \frac{\pi}{24}, \frac{9\pi}{24}, \frac{17\pi}{24}, \frac{25\pi}{24}, \frac{33\pi}{24}, \frac{41\pi}{24}\)</span>.</p>
 </blockquote>
 <h1 id="section-29">20/11/13</h1>
 <h3 id="complex-n-th-roots-theorem-cnrt">Complex n-th Roots Theorem (CNRT)</h3>
-<p>Proposition: given <span class="math">\(z = r(\cos \theta + i \sin \theta)\)</span> and <span class="math">\(z^n = c\)</span>, <span class="math">\(n \in \mb{N}\)</span>, <span class="math">\(z\)</span> has exactly <span class="math">\(n\)</span> distinct complex n-th roots, which are <span class="math">\(z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k &lt; n\)</span>.</p>
-<p>In other words, <span class="math">\(\sqrt[n]{z} = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k &lt; n\)</span> for all <span class="math">\(n \in \mb{N}\)</span>.</p>
+<p>Proposition: given <span class="math">\(z = r(\cos \theta + \imag\sin \theta)\)</span> and <span class="math">\(z^n = c\)</span>, <span class="math">\(n \in \mb{N}\)</span>, <span class="math">\(z\)</span> has exactly <span class="math">\(n\)</span> distinct complex n-th roots, which are <span class="math">\(z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k &lt; n\)</span>.</p>
+<p>In other words, <span class="math">\(\sqrt[n]{z} = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\left(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k &lt; n\)</span> for all <span class="math">\(n \in \mb{N}\)</span>.</p>
 <h2 id="polynomials">Polynomials</h2>
 <p>Polynomials may have <strong>integer solutions</strong>, <strong>rational solutions</strong>, or <strong>complex solutions</strong>. We can also find the solutions in <span class="math">\(\mb{Z}_m\)</span>.</p>
 <p>The possible solutions in particular number systems are dependent on the coefficients of the polynomial.</p>
 <p>Our primary number systems are <span class="math">\(\mb{Z}, \mb{Q}, \mb{R}, \mb{C}, \mb{Z}_m\)</span>. Note that we omit <span class="math">\(\mb{N}\)</span> because we can't always subtract so it isn't very useful.</p>
 <p>A <strong>number system</strong> is also called a <strong>commutative ring</strong>.</p>
-<p>A <strong>field</strong> is a number system where every nonzero element has a multiplicative inverse.</p>
+<p>A <strong>field</strong> is a number system where every nonzero element has a multiplicative inverse: <span class="math">\(\forall x \in \mb{F}\)</span>.</p>
 <p>Some examples of fields are <span class="math">\(\mb{Q}\)</span>, <span class="math">\(\mb{R}\)</span>, <span class="math">\(\mb{C}\)</span>, and <span class="math">\(\mb{Z}_p\)</span> for a prime <span class="math">\(p\)</span>.</p>
 <p>An arbitrary field can be represented as <span class="math">\(\mb{F}\)</span>.</p>
 <h3 id="definition">Definition</h3>
 <p>A <strong>polynomial</strong> in <span class="math">\(x\)</span> over <span class="math">\(\mb{F}\)</span> is any expression of the form <span class="math">\(a_nx^n + a_{n - 1}x^{n - 1} + \ldots + a_2x^2 + a_1x^1 + a_0\)</span>, where <span class="math">\(a_i, 0 \le i \le n\)</span> are fixed, <span class="math">\(x\)</span> is unknown, and <span class="math">\(n \ge 0\)</span>.</p>
 <p>We can also write this as <span class="math">\(\sum\limits_{i = 0}^n a_i x^i\)</span>.</p>
 <p><span class="math">\(x^2 + 7x - 1\)</span> is a polynomial over <span class="math">\(\mb{Q}, \mb{R}, \mb{C}\)</span>.</p>
-<p><span class="math">\(x^3 + (1 + i)x + (2 - i)\)</span> is a polynomial over <span class="math">\(\mb{C}\)</span>.</p>
+<p><span class="math">\(x^3 + (1 + \imag)x + (2 - \imag)\)</span> is a polynomial over <span class="math">\(\mb{C}\)</span>.</p>
 <p><span class="math">\([3]x^5 + [2]x^3 + [6]\)</span> is a polynomial over <span class="math">\(\mb{Z}_7\)</span>. The missing powers have the congruence class 0 as the coefficients.</p>
 <h3 id="notation">Notation</h3>
 <p>If <span class="math">\(\mb{F}\)</span> is a field, then <span class="math">\(\mb{F}[x]\)</span> is the set of all polynomials over <span class="math">\(\mb{F}\)</span>, and infinite set.</p>
@@ -1349,6 +1350,61 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p><strong>Addition</strong> is defined as <span class="math">\(f(x) + g(x) = \sum\limits_{i = 0}^{\max{n, o}} (a_i + b_i) x^i\)</span>, where out of range coefficients are assumed to be 0.</p>
 <p><strong>Multiplication</strong> is defined as <span class="math">\(f(x) \cdot g(x) = \sum\limits_{i = 0}^{n + o} c_i x^i, c_i = \sum\limits_{j = 0}^i a_j b_{i - j} = a_0 b_i + \ldots + a_i b_0\)</span>.</p>
 <p>When we multiply <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span>, the resulting polynomial has a degree that is the sum of the degrees of <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span>.</p>
+<h1 id="section-30">22/11/13</h1>
+<p><strong>Division</strong> on polynomials is defined similar to how it is defined in numbers: <span class="math">\(g(x) \mid f(x) \iff \exists h(x) \in \mb{F}[x], f(x) = g(x) h(x)\)</span>.</p>
+<p>In the same way, <span class="math">\(\frac{f(x)}{g(x)} = h(x)\)</span>.</p>
+<p>For example, in <span class="math">\(\mb{Q}[x], x + 1 \mid x^4 - 1\)</span>.</p>
+<p>We use <strong>long division</strong> to divide polynomials. Long division over two polynomials finds their quotient and remainder.</p>
+<p>Is <span class="math">\(2x^2 - 1 \mid x^4 + x^3 + x^2 + x + 1\)</span> true?</p>
+<blockquote>
+<p>We apply long division to find the quotient and remainder:</p>
+</blockquote>
+<blockquote>
+<pre><code>                       1/2x^2 + 1/2x + 3/4     quotient
+         __________________________________    
+2x^2 - 1 ) x^4 + x^3 +    x^2 +    x +   1     1. initial condition
+           x^4       - 1/2x^2                  2. cancel term with highest degree: 1/2x^2(2x^2 - 1) = x^4 - 1/2x^2
+           -------------------------------     
+                 x^3 + 3/2x^2 +    x +   1     3. subtract the two polynomials
+                 x^3          - 1/2x           4. cancel term with highest degree: 1/2x(2x^2 - 1) = x^3 - 1/2x
+                 -------------------------     
+                       3/2x^2 + 3/2x +   1     5. subtract the two polynomials
+                       3/2x^2        - 3/4     6. cancel term with highest degree: 3/4(2x^2 - 1) = 3/2x^2 - 3/4
+                       -------------------     
+                                3/2x + 7/4     7. degree less than divisor, this is the remainder</code></pre>
+</blockquote>
+<blockquote>
+<p>Since the remainder is nonzero, <span class="math">\(2x^2 - 1 \nmid x^4 + x^3 + x^2 + x + 1\)</span>.</p>
+</blockquote>
+<h3 id="division-algorithm-for-polynomials-dap">Division Algorithm for Polynomials (DAP)</h3>
+<p>Proposition: given field <span class="math">\(\mb{F}, f(x), g(x) \in \mb{F}[x], g(x) \ne 0\)</span>, there exists a unique <span class="math">\(q(x), r(x) \in \mb{F}[x]\)</span> such that <span class="math">\(f(x) = q(x) g(x) + r(x)\)</span> and the degree of <span class="math">\(r(x)\)</span> is less than the degree of <span class="math">\(g(x)\)</span> or <span class="math">\(r = 0\)</span>.</p>
+<p><span class="math">\(q(x)\)</span> is called the quotient, and <span class="math">\(r(x)\)</span> is called the remainder.</p>
+<p><span class="math">\(g(x) \mid f(x) \iff r(x) = 0\)</span>.</p>
+<p>There is a special case when the degree of <span class="math">\(g(x)\)</span> is 1. Then the degree of <span class="math">\(r(x)\)</span> must be 0 or <span class="math">\(r(x) = 0\)</span>. So <span class="math">\(r\)</span> must be a constant.</p>
+<p>Corollary: given field <span class="math">\(\mb{F}, f(x), g(x) \in \mb{F}[x]\)</span> with <span class="math">\(g(x)\)</span> being linear, there exists a unique <span class="math">\(q(x), r\)</span> such that <span class="math">\(f(x) = q(x) g(x) + r\)</span> and the degree of <span class="math">\(r(x)\)</span> is less than the degree of <span class="math">\(g(x)\)</span> or <span class="math">\(r = 0\)</span> - <span class="math">\(r\)</span> is a constant.</p>
+<h3 id="remainder-theorem-rt">Remainder Theorem (RT)</h3>
+<p>Proposition: the remainder when <span class="math">\(f(x)\)</span> is divided by <span class="math">\(x - c\)</span> is <span class="math">\(f(c)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(x - c\)</span> is linear. So by the previous corollary, <span class="math">\(f(x) = q(x)(x - c) + r\)</span>.<br />When <span class="math">\(x = c\)</span>, then <span class="math">\(f(c) = q(c) (c - c) + r = r\)</span>.<br />So the remainder is <span class="math">\(f(c)\)</span>.</p>
+</blockquote>
+<p>This works for complex <span class="math">\(c\)</span> as well.</p>
+<h3 id="factor-theorem-version-1-ft-1">Factor Theorem Version 1 (FT 1)</h3>
+<p>Proposition: <span class="math">\(x - c \mid f(x) \iff f(c) = 0\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(x - c \mid f(x)\)</span> if and only if the remainder of <span class="math">\(f(x)\)</span> divided by <span class="math">\(x - c\)</span> is 0.<br />By RT, the remainder of <span class="math">\(f(x)\)</span> divided by <span class="math">\(x - c\)</span> is <span class="math">\(f(c)\)</span>.<br />So <span class="math">\(x - c \mid f(x) \iff f(c) = 0\)</span>.</p>
+</blockquote>
+<h3 id="factor-theorem-version-2-ft-2">Factor Theorem Version 2 (FT 2)</h3>
+<p>Proposition: <span class="math">\(x - c\)</span> is a factor of <span class="math">\(f(x)\)</span> if and only if <span class="math">\(c\)</span> is a root of <span class="math">\(f(x)\)</span>.</p>
+<p>A root <span class="math">\(k\)</span> of <span class="math">\(f(x)\)</span> is a value such that <span class="math">\(f(k) = 0\)</span>.</p>
+<p>This is a restatement of FT 1.</p>
+<p>So if we can find roots, we can find factors of the form <span class="math">\(x - c\)</span>.</p>
+<p>Factor <span class="math">\(4x^2 - 8x + 5\)</span>:</p>
+<blockquote>
+<p>The roots are <span class="math">\(\frac{8 \pm \sqrt{8^2 - 4 \cdot 4 \cdot 5}}{2 \cdot 4} = 1 \pm \frac{\sqrt{-16}}{8} = 1 \pm \frac{1}{2}i\)</span>.<br />So <span class="math">\(4x^2 - 8x + 5 = 4 \cdot (x - (1 + \frac{1}{2}i))(x - (1 - \frac{1}{2}i))\)</span>.</p>
+</blockquote>
+<p>Note that the leading coefficient of the term with the highest degree was factored out.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

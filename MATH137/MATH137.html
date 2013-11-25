@@ -1610,6 +1610,96 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <li><span class="math">\(\dee x\)</span> is the <strong>differential</strong>.</li>
 </ul>
 <p>The differential simply identifies the variable of integration. It also has dimensions. So for <span class="math">\(\int_a^b v(t) \dee t\)</span>, the unit is <span class="math">\(m\)</span>, because <span class="math">\(v(t)\)</span> has the units <span class="math">\(m/s\)</span> and <span class="math">\(t\)</span> still carries the unit <span class="math">\(s\)</span>.</p>
+<h1 id="section-30">22/11/13</h1>
+<h2 id="integrability">Integrability</h2>
+<p>There are several ways to determine whether a function is integrable:</p>
+<ul>
+<li>Continuous functions - they are bounded such that the area under the curve is finite.
+<ul>
+<li>All continuous functions are integrable.</li>
+</ul></li>
+<li>Discontinuous functions - some are integrable, some are not, depending on the type of discontinuity.
+<ul>
+<li>Removable discontinuities (<span class="math">\(\int_{-\pi}^\pi \frac{\sin x}{x} \dee x\)</span>) can be integrated even though the function may not be defined at a point.
+<ul>
+<li>We fill in the hole when integrating - we sum the integral on the left of the hole, and the integral on the right of the hole.</li>
+<li>These are called <strong>improper integrals</strong>.</li>
+</ul></li>
+<li>Jump discontinuities (heaviside function) can be integrated.
+<ul>
+<li>We sum the integral to the left of the discontinuity and the integral to the right of the discontinuity, ignoring the function at the jump.</li>
+<li>This is also an improper integral.</li>
+</ul></li>
+<li>Infinite discontinuities (vertical asymptotes) can be integrated but require improper integrals to study properly.
+<ul>
+<li>For example, <span class="math">\(\int_0^1 \frac{1}{x} \dee x\)</span> has no meaning - we say it is <strong>divergent</strong>.</li>
+<li>For example, <span class="math">\(\int_0^1 \frac{1}{\sqrt{x}} \dee x = 2\)</span>.</li>
+<li>The value depends on how the function approaches the asymptote.</li>
+</ul></li>
+<li>The Riemann Pathological Function (infinite series) is integrable, yet it has an infinite number of jump discontinuities over a finite interval.</li>
+<li>Thomae's Function (ruler function) is integrable, yet it is continuous at the irrationals, and discontinuous at the rationals.</li>
+<li>Dirichlet's Function (<span class="math">\(\phi(x) = \begin{cases} 1 &amp;\text{if } x \text{ is rational} \\ 0 &amp;\text{if } x \text{ is irrational} \end{cases}\)</span>) is not integrable using the Riemann integral, yet is integrable using something like the <strong>Lebesque integral</strong>, which is in the realm of analysis.</li>
+</ul></li>
+</ul>
+<h2 id="properties-of-definite-integrals">Properties of Definite Integrals</h2>
+<p>Let <span class="math">\(f, g\)</span> be integrable functions. Let <span class="math">\(c\)</span> be a constant.</p>
+<ul>
+<li><span class="math">\(\int_a^a f(x) \dee x = 0\)</span> - a region of zero width has zero area.</li>
+<li><span class="math">\(\int_a^b f(x) \dee x = -\int_b^a \dee x\)</span> - switching the endpoints switches the sign (this is because <span class="math">\(\delta x = \frac{a - b}{n} = -\frac{b - a}{n}\)</span>).</li>
+<li><span class="math">\(\int_a^b c \dee x = c(b - a)\)</span> - integrating a constant is the area under the rectangle.</li>
+<li><span class="math">\(\int_a^b (f(x) \pm g(x)) \dee x = \int_a^b f(x) \dee x \pm \int_a^b g(x) \dee x\)</span> - integrals have linearity.</li>
+<li><span class="math">\(\int_a^b cf(x) \dee x = c\int_a^b f(x) \dee x\)</span> - constants can be moved outside the integral.</li>
+<li><span class="math">\(\int_a^b f(x) \dee x = \int_a^c f(x) \dee x + \int_c^b f(x) \dee x\)</span> - we can split the integral on any intervals we want. Note that <span class="math">\(c\)</span> does not have to be between <span class="math">\(a\)</span> and <span class="math">\(b\)</span>.</li>
+<li>If <span class="math">\(f(x) \ge g(x)\)</span> over <span class="math">\([a, b]\)</span>, then <span class="math">\(\int_a^b f(x) \dee x \ge \int_a^b g(x) \dee x\)</span>. This works for any type of inequality or equality.</li>
+<li>If <span class="math">\(u \le f(x) \le v\)</span> over <span class="math">\([a, b]\)</span>, <span class="math">\(\int_a^b u \dee x \le \int_a^b f(x) \dee x \le \int_a^b v \dee x\)</span>, or <span class="math">\(u(b - a) \dee x \le \int_a^b f(x) \dee x \le v(b - a)\)</span> - the area under a function can be bounded.</li>
+</ul>
+<h2 id="mean-value-theorem-for-integrals">Mean Value Theorem for Integrals</h2>
+<p>If <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span>, then <span class="math">\(\exists c \in (a, b), \int_a^b f(x) \dee x = f(c)(b - a)\)</span>.</p>
+<p>In other words, if a function is continuous, there must exist a function value equal to the mean value of the function.</p>
+<p><span class="math">\(f(c)(b - a)\)</span> is the area under <span class="math">\(f(x) = c\)</span>.</p>
+<p>Note that <span class="math">\(\frac{1}{b - a} \int_a^b f(x) \dee x\)</span> is the <strong>average value of the function</strong> over <span class="math">\([a, b]\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Assume <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span>.<br />By EVT, <span class="math">\(\exists u, v, u \le f(x) \le v\)</span> over <span class="math">\([a, b]\)</span>.<br />So <span class="math">\(u(b - a) \le \int_a^b f(x) \dee x \le v(b - a)\)</span>.<br />So <span class="math">\(u \le \frac{1}{b - a}\int_a^b f(x) \dee x \le v\)</span>.<br />By IVT, <span class="math">\(\exists c \in (a, b), f(c) = \frac{1}{b - a} \int_a^b f(x) \dee x\)</span>.<br />So <span class="math">\(\exists c \in (a, b), \int_a^b f(x) \dee x = f(c)(b - a)\)</span>.</p>
+</blockquote>
+<h2 id="integral-and-differential-calculus">Integral and Differential Calculus</h2>
+<p>Consider <span class="math">\(f(t) = 2t + 1\)</span>. If we plot this and geometrically find the area under the curve, we find that the area function is <span class="math">\(A(t) = t^2 + t + 2\)</span>.</p>
+<p>Note that <span class="math">\(A&#39;(t) = f(t)\)</span>. The area under the curve is an antiderivative of the curve.</p>
+<p>In effect, the differential &quot;undoes&quot; the effect of the integral. They could be thought of as the inverse operations of each other.</p>
+<h1 id="section-31">25/11/13</h1>
+<h2 id="the-fundemental-theorem-of-calculus">The Fundemental Theorem of Calculus</h2>
+<h3 id="part-1">Part 1</h3>
+<p>If <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span>, then <span class="math">\(g(x) = \int_a^x f(t) \dee t\)</span> is continuous over <span class="math">\([a, b]\)</span> and differentiable on <span class="math">\((a, b)\)</span>, and <span class="math">\(g&#39;(x) = f(x)\)</span>.</p>
+<p>In other words, <span class="math">\(\frac{\dee}{\dee x} \int_a^x f(x) \dee t = f(x)\)</span>.</p>
+<p>Differentiation and integration are inverse operations.</p>
+<p><span class="math">\(g(x)\)</span> is an antiderivative of <span class="math">\(f(x)\)</span> - the &quot;area under the curve from <span class="math">\(a\)</span> to <span class="math">\(x\)</span> function&quot;.</p>
+<p>Any continuous function has an antiderivative.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(g(x) = \int_a^x f(t) \dee t\)</span> and <span class="math">\(g(x + h) = \int_a^{x + h} f(t) \dee t\)</span>.<br />So <span class="math">\(g(x + h) - g(x) = \int_a^{x + h} f(t) \dee t - \int_a^x f(t) \dee t = \int_a^{x + h} f(t) \dee t + \int_x^a f(t) \dee t = \int_x^{x + h} f(t) \dee t\)</span>.<br />By the MVT, <span class="math">\(\exists c \in (x, x + h), \int_x^{x + h} = f(c)(x + h - x) = hf(c) = g(x + h) - g(x)\)</span>.<br />Recall that the definition of continuity is that <span class="math">\(\lim_{h \to 0} f(x + h) = f(x)\)</span>, or <span class="math">\(\lim_{h \to 0} (f(x + h) - f(x)) = 0\)</span>.<br />We take the limit of both sides to get <span class="math">\(\lim_{h \to 0} hf(c) = \lim_{h \to 0} (g(x + h) - g(x))\)</span>. Note that we can't evalutate the limit of <span class="math">\(hf(c)\)</span> since <span class="math">\(f(c)\)</span> could be infinite and make an indeterminate form.<br />So <span class="math">\(\lim_{h \to 0} hf(c) = \lim_{h \to 0} (g(x + h) - g(x)) = \lim_{h \to 0} h \cdot \lim_{h \to 0} f(c)\)</span>. We know that <span class="math">\(c \in (x, x + h)\)</span>, so as <span class="math">\(h \to 0\)</span>, <span class="math">\(c = x\)</span>. So <span class="math">\(\lim_{h \to 0} h \cdot \lim_{h \to 0} f(c) = 0 \cdot f(x) = 0\)</span>.<br />So the function is continuous.<br />We divide both sides of <span class="math">\(hf(c) = g(x + h) - g(x)\)</span> by <span class="math">\(h\)</span> to get <span class="math">\(f(c) = \frac{g(x + h) - g(x)}{h}\)</span>.<br />We take the limit of both sides to get <span class="math">\(\lim_{h \to 0} f(c) = \lim_{h \to 0} \frac{g(x + h) - g(x)}{h} = g&#39;(x)\)</span>, by the definition of the derivative.<br />So <span class="math">\(g&#39;(x) = f(x)\)</span>.</p>
+</blockquote>
+<p>If <span class="math">\(f(x) = \int_1^x \frac{1}{t^3} \dee t\)</span>, then by Part 1, <span class="math">\(f&#39;(x) = \frac{1}{x^3 + 1}\)</span>.</p>
+<p>If <span class="math">\(f(x) = \int_x^0 \sin t^2 \dee t\)</span>, then by Part 1, <span class="math">\(f(x) = -\int_0^x \sin t^2 \dee t = -\sin x^2\)</span>.</p>
+<p>Differentiate <span class="math">\(f(x) = \int_x^{x^2} t^2 e^t \dee t\)</span>:</p>
+<blockquote>
+<p>Both integral endpoints are functions.<br />We can split it into two integrals <span class="math">\(f(x) = \int_x^c t^2 e^t \dee t + \int_c^{x^2} t^2 e^t \dee t\)</span> for some constant <span class="math">\(c\)</span>.<br />Clearly, <span class="math">\(\int_x^c t^2 e^t \dee t = -x^2 e^x\)</span>.<br />Let <span class="math">\(u = x^2\)</span>. Then <span class="math">\(\frac{\dee}{\dee x} \int_c^{x^2} t^2 e^t \dee t = \frac{\dee u}{\dee x} \frac{\dee}{\dee u} \int_c^u t^2 e^t \dee t = 2x(u^2 e^u) = 2x(x^4 e^{x^2}) = 2x^5 e^{x^2}\)</span>.<br />So <span class="math">\(f&#39;(x) = -x^2 e^x + 2x^5 e^{x^2}\)</span>.</p>
+</blockquote>
+<h3 id="part-2">Part 2</h3>
+<p>If <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span> and <span class="math">\(F\)</span> is any antiderivative of <span class="math">\(f\)</span>, then <span class="math">\(\int_a^b f(x) \dee x = F(b) - F(a)\)</span>.</p>
+<p>This allows us to easily evaluate integrals simply by finding antiderivatives. This is much simpler than using the Riemann sum or whatever.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(g(x) = \int_a^x f(x) \dee t\)</span>. So <span class="math">\(g&#39;(x) = f(x)\)</span>, by Part 1, and <span class="math">\(g\)</span> is an antiderivative.<br />Let <span class="math">\(F\)</span> be another antiderivative. Then <span class="math">\(\frac{\dee}{\dee x} (F(x) - g(x)) = F&#39;(x) - g&#39;(x) = f(x) - f(x) = 0\)</span>.<br />By the Constant Function Theorem, <span class="math">\(F(x) = g(x) + c\)</span>.<br />Since <span class="math">\(g(a) = 0\)</span>, <span class="math">\(F(x) - F(a) = g(x) + c - g(a) - c = g(x) = \int_a^x f(t) \dee t\)</span>.</p>
+</blockquote>
+<p>Note that <span class="math">\(\left. f(x) \right|_a^b\)</span> means &quot;evaluated at&quot; and <span class="math">\(\left. f(x) \right|_a^b = f(b) - f(a)\)</span>.</p>
+<p>Evaluate <span class="math">\(\int_0^1 x^2 \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(F&#39;(x) = x^2\)</span>. One possible <span class="math">\(F(x)\)</span> is <span class="math">\(\frac{1}{3} x^3\)</span>.<br />By Part 2, <span class="math">\(\int_0^1 x^2 \dee x = F(1) - F(0) = \frac{1}{3}\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math">\(\int_0^\pi \sin x \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(F&#39;(x) = \sin x\)</span>. One possible <span class="math">\(F(x)\)</span> is <span class="math">\(-\cos x\)</span>.<br />By Part 2, <span class="math">\(\int_0^\pi \sin x \dee x = F(\pi) - F(0) = 2\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

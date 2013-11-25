@@ -18,6 +18,7 @@ $$
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
+\newcommand{\imag}{\boldsymbol{i}}
 $$
 
 # 9/9/13
@@ -1919,19 +1920,19 @@ Likewise, $3x + 3 = 0$, $x^2 - 2 = 0$, and $x^2 + 2 = 0$ has no solutions in $\m
 
 In the last one, however, there is a solution in **complex numbers**.
 
-A **complex number** in **standard form** is any expression of the form $x + yi, x, y \in \mb{Z}$. The set of complex numbers is $\mb{C} = \set{x + yi \middle| x, y \in \mb{R}}$.
+A **complex number** in **standard form** is any expression of the form $x + y\imag, x, y \in \mb{Z}$. The set of complex numbers is $\mb{C} = \set{x + y\imag \middle| x, y \in \mb{R}}$.
 
-The $+$ is required for standard form; it must be retained in order to be standard form.
+The $+$ is required for standard form; it must be retained.
 
 Examples:
 
-* $2.7 + 3.2i$
-* $-2 + (-3)i$ (plus sign is needed in standard form)
-* $8 + 0i$
+* $2.7 + 3.2\imag$
+* $-2 + (-3)\imag$ (plus sign is needed in standard form)
+* $8 + 0\imag$
 
-Every real number is a complex number of the form $x + 0i, x \in \mb{Z}$
+Every real number is a complex number of the form $x + 0\imag, x \in \mb{Z}$
 
-We generally denote complex variables with $w$ and $z$ rather than $x$ and $y$. If $z = a + bi$, $\mathfrak{R}(z) = a$ (the real component), $\mathfrak{I}(z) = b$ (the imaginary component). Both of these are simply real numbers.
+We generally denote complex variables with $w$ and $z$ rather than $x$ and $y$. If $z = a + b\imag$, $\Re(z) = \operatorname{Re}(z) = a$ (the real component), $\Im(z) = \operatorname{Im}(z) = b$ (the imaginary component). Both of these are simply real numbers.
 
 ### Sum/Difference
 
@@ -1939,13 +1940,13 @@ Let $w = a + bi$ and $z = c + di$.
 
 $w$ and $z$ are **equal** if and only if $a = c \wedge b = d$. In other words, their real and imaginary parts are equal.
 
-**Addition** is defined as $w + z = (a + c) + (b + d)i$. In other words, we simply add the components.
+**Addition** is defined as $w + z = (a + c) + (b + d)\imag$. In other words, we simply add the components.
 
-Likewise, **subtraction** is defined as $w - z = (a - c) + (b - d)i$. In other words, we simply subtract the components.
+Likewise, **subtraction** is defined as $w - z = (a - c) + (b - d)\imag$. In other words, we simply subtract the components.
 
 ### Multiplication
 
-**Multiplication** is defined as $wz = (ac - bd) + (ad + bc)i$.
+**Multiplication** is defined as $wz = (ac - bd) + (ad + bc)\imag$.
 
 This is derived from the formula for multiplying a polynomial of the form $(a + bx)(c + dx) = ac + (ad + bc)x + bdx^2$.
 
@@ -1953,27 +1954,27 @@ This is derived from the formula for multiplying a polynomial of the form $(a + 
 
 How do we find the inverse of a complex number?
 
-> Let $z = a + bi$ and $z \ne 0$.  
-> The inverse is $\frac{1}{a + bi} = \frac{1}{a + bi} \cdot \frac{a - bi}{a - bi} = \frac{a - bi}{a^2 + b^2}$.  
-> We can write this in standard form: $z^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i$.  
+> Let $z = a + b\imag$ and $z \ne 0$.  
+> The inverse is $\frac{1}{a + b\imag} = \frac{1}{a + b\imag} \cdot \frac{a - b\imag}{a - b\imag} = \frac{a - b\imag}{a^2 + b^2}$.  
+> We can write this in standard form: $z^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}\imag$.  
 
-So $z^{-1} = \frac{1}{z} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i$
+So $z^{-1} = \frac{1}{z} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}\imag$
 
-In this way, we find that $\frac{1}{i} = -i$.
+In this way, we find that $\frac{1}{\imag} = -\imag$.
 
 ### Conjugate/Modulus
 
-Let $z = a + bi$.
+Let $z = a + b\imag$.
 
-$z$ has the **conjugate** $\overline{z} = a - bi$. For example, $\overline{3 + 2i} = 3 - 2i$.
+$z$ has the **conjugate** $\overline{z} = a - b\imag$. For example, $\overline{3 + 2\imag} = 3 - 2\imag$.
 
 The conjugate of a number simply has the opposite sign for the imaginary part.
 
 Note that the conjugate of any real number is the same number.
 
-$z$ has the **modulus** $\abs{z} = \sqrt{a^2 + b^2}$. For example, $\abs{3 - 2i} = \sqrt{9 + 4} = \sqrt{13}$.
+$z$ has the **modulus** $\abs{z} = \sqrt{a^2 + b^2}$. For example, $\abs{3 - 2\imag} = \sqrt{9 + 4} = \sqrt{13}$.
 
-Note that the modulus of any real number is the absolute value - $\sqrt{x^2}$. This is why we use the absolute value notation.
+Note that the modulus of any real number is its absolute value - $\sqrt{x^2}$. This is why we use the absolute value notation.
 
 So $z^{-1} = \frac{\overline{z}}{\abs{z}^2}$.
 
@@ -1986,18 +1987,18 @@ Proposition: for all $u, v, z \in \mb{Z}$:
 * $(u + v) + z = u + (v + z)$
 * $u + v = v + u$
 * $z + 0 = z$
-* If $z = a + bi$, $-z = (-a) + (-b)i$
+* If $z = a + b\imag$, $-z = (-a) + (-b)\imag$
 * $uv = vu$
 * $1z = z$ ($1 = 1 + 0i$)
 * $z(u + v) = zu + zv$
 
 ### i
 
-What is $i^2$, according to the multiplication formula?
+What is $\imag^2$, according to the multiplication formula?
 
-$ii = (0 + 1i)(0 + 1i) = 0 \cdot (0 - 1 \cdot 1) + (0 \cdot 1 + 1 \cdot 0) = -1 + 0i = -1$
+$ii = (0 + 1\imag)(0 + 1\imag) = 0 \cdot (0 - 1 \cdot 1) + (0 \cdot 1 + 1 \cdot 0) = -1 + 0i = -1$
 
-So $i^2 = -1$, and $i$ is the square root of -1. Sometimes, people write $\sqrt{-1}$. However, $\sqrt{\ldots}$ should only formally be written for non-negative real numbers.
+So $\imag^2 = -1$, and $\imag$ is the square root of -1. Sometimes, people write $\sqrt{-1}$. However, $\sqrt{\ldots}$ should only formally be written for non-negative real numbers.
 
 # 13/11/13
 
@@ -2008,8 +2009,8 @@ Proposition: for all $z, w, \in \mb{C}$:
 * $\overline{z + w} = \overline{z} + \overline{w}$
 * $\overline{z \cdot w} = \overline{z} \cdot \overline{w}$
 * $\overline{\overline{z}} = z$
-* $z + \overline{z} = 2 \mathfrak{R}(z)$
-* $z - \overline{z} = 2 i \mathfrak{I}(z)$
+* $z + \overline{z} = 2\Re(z)$
+* $z - \overline{z} = 2\imag\Im(z)$
 
 These are trivially proved by using the definitions.
 
@@ -2028,36 +2029,36 @@ Proposition: for all $z, w \in \mb{C}$:
 Proof of first:
 
 > Assume $z = 0$. So $\abs{z} = 0$.  
-> Assume $\abs{z} = 0$. So $0^2 = \mathfrak{R}(z)^2 + \mathfrak{I}(z)^2$.  
-> Clearly, $\mathfrak{R}(z)^2 \ge 0, \mathfrak{I}(z)^2 \ge 0$. So $\mathfrak{R}(z) = 0, \mathfrak{I}(z) = 0$.  
+> Assume $\abs{z} = 0$. So $0^2 = \Re(z)^2 + \Im(z)^2$.  
+> Clearly, $\Re(z)^2 \ge 0, \Im(z)^2 \ge 0$. So $\Re(z) = 0, \Im(z) = 0$.  
 
 Proof of fourth:
 
 > Clearly, $\abs{z}, \abs{w}, \abs{zw}$ are non-negative real numbers.  
 > So we can just prove $\abs{zw}^2 = \abs{z}^2 \abs{w}^2$.  
-> Let $z = a + bi, w = c + di$. So $\abs{zw}^2 = (ac - bd)^2 + (ad + bc)^2 = (a^2 + b^2)(c^2 + d^2) = \abs{z}^2 \abs{w}^2$.  
+> Let $z = a + b\imag, w = c + di$. So $\abs{zw}^2 = (ac - bd)^2 + (ad + bc)^2 = (a^2 + b^2)(c^2 + d^2) = \abs{z}^2 \abs{w}^2$.  
 
 The rest is either trivial to prove or I'm too tired to.
 
 ### The Complex Plane
 
-We can picture a complex number $z = x + yi$ as a point $(x, y)$ in a 2D plane.
+We can picture a complex number $z = x + y\imag$ as a point $(x, y)$ in a 2D plane.
 
 In this representation, we call the x-axis the "real axis" and the y-axis the "imaginary axis".
 
 $(x, y)$ are the **Cartesian coordinates** of $z$.
 
-Points on a plane can also be described by polar coordinates. Here, $r = \abs{z}$ and $\theta = \arccos \left(\frac{x}{r}\right) = \arccos \left(\frac{\mathfrak{R}(z)}{\abs{z}}\right)$, making sure to keep the quandrant in mind.
+Points on a plane can also be described by polar coordinates. Here, $r = \abs{z}$ and $\theta = \arccos \left(\frac{x}{r}\right) = \arccos \left(\frac{\Re(z)}{\abs{z}}\right)$, making sure to keep the quandrant in mind.
 
 In polar coordinates, $x = r \cos \theta, y = r \sin \theta$
 
 Geometrically speaking, the modulus of $z$ is the length of the hypotenuse of the triangle formed with the point and the origin.
 
-The **polar form** of $z$ is $z = (r \cos \theta) + (r \sin \theta)i = r(\cos \theta + i \sin \theta)$. The **polar coordinates** of $z$ are $(r, \theta)$.
+The **polar form** of $z$ is $z = (r \cos \theta) + (r \sin \theta)\imag = r(\cos \theta + \imag\sin \theta)$. The **polar coordinates** of $z$ are $(r, \theta)$.
 
 The **argument** of $z$ is $\theta$.
 
-For example, $z = 1 + i = \sqrt{2} \left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)$
+For example, $z = 1 + \imag = \sqrt{2} \left(\cos \frac{\pi}{4} + \imag\sin \frac{\pi}{4}\right)$.
 
 # 15/11/13
 
@@ -2066,7 +2067,7 @@ Visualizing Complex Numbers
 
 On the complex plane, we can visualize various operations on complex numbers in simple ways.
 
-We can consider a complex number $z = a + bi$ as the vector $(a, b)$ to reason about it visually.
+We can consider a complex number $z = a + b\imag$ as the vector $(a, b)$ to reason about it visually.
 
 Note that $\abs{z} = 1$ is the unit circle.
 
@@ -2098,50 +2099,50 @@ Proposition: given $z_1, z_2 \in \mb{C}$ in polar form $z_1 = (r_1, \theta_1), z
 
 Proof:
 
-> This is equivalent to saying that if $z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)$, then $z_1 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i \sin (\theta_1 + \theta_2))$.  
-> Assume $z_1 = r_1(\cos \theta_1 + i \sin \theta_1), z_2 = r_2(\cos \theta_2 + i \sin \theta_2)$.  
-> Then $z_1 z_2 = r_1(\cos \theta_1 + i \sin \theta_1) \cdot r_2(\cos \theta_2 + i \sin \theta_2) = r_1 r_2 (\cos \theta_1 \cos \theta_2 - \sin \theta_1 \sin \theta_2) + i(\cos \theta_1 \sin \theta_2 + \sin \theta_1 \cos \theta_2) = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))$.  
-> So $z_1 z_2 = r_1 r_2 (\cos (\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))$.  
+> This is equivalent to saying that if $z_1 = r_1(\cos \theta_1 + \imag\sin \theta_1), z_2 = r_2(\cos \theta_2 + \imag\sin \theta_2)$, then $z_1 = r_1 r_2 (\cos (\theta_1 + \theta_2) + \imag \sin (\theta_1 + \theta_2))$.  
+> Assume $z_1 = r_1(\cos \theta_1 + \imag\sin \theta_1), z_2 = r_2(\cos \theta_2 + \imag\sin \theta_2)$.  
+> Then $z_1 z_2 = r_1(\cos \theta_1 + \imag\sin \theta_1) \cdot r_2(\cos \theta_2 + \imag\sin \theta_2) = r_1 r_2 (\cos \theta_1 \cos \theta_2 - \sin \theta_1 \sin \theta_2) + \imag(\cos \theta_1 \sin \theta_2 + \sin \theta_1 \cos \theta_2) = r_1 r_2 (\cos (\theta_1 + \theta_2) + \imag\sin(\theta_1 + \theta_2))$.  
+> So $z_1 z_2 = r_1 r_2 (\cos (\theta_1 + \theta_2) + \imag\sin(\theta_1 + \theta_2))$.  
 
 This is useful for analyzing powers of a complex numbers.
 
 ### De Moivre's Theorem (DMT)
 
-Proposition: given $z = r(\cos \theta + i \sin \theta)$, then $z^n = r^n(\cos n\theta + i \sin n\theta)$.
+Proposition: given $z = r(\cos \theta + \imag\sin \theta), n \in \mb{Z}$, then $z^n = r^n(\cos n\theta + \imag\sin n\theta)$.
 
-As a result, if $z = r(\cos \theta + i \sin \theta)$, then $z^n = r^n(\cos n\theta + i \sin n\theta)$.
+As a result, if $z = r(\cos \theta + \imag\sin \theta)$, then $z^n = r^n(\cos n\theta + \imag\sin n\theta)$.
 
 This is true for all $n \in \mb{Z}$.
 
 Proof:
 
-> ;wip: proof by induction and PMCN for $n \ge 1$, check for $n = 0$, for negative we want to show $(\cos \theta + i \sin \theta)^{-1} = \cos -\theta + i \sin -\theta = \cos \theta - i \sin \theta$ so we just need to check that $(\cos \theta + i \sin \theta)(\cos \theta - i \sin \theta) = 1$ then using $(\cos \theta + i \sin \theta)^{-n} = ((\cos \theta + i \sin \theta)^{-1})^n$
+> ;wip: proof by induction and PMCN for $n \ge 1$, check for $n = 0$, for negative we want to show $(\cos \theta + \imag\sin \theta)^{-1} = \cos -\theta + \imag\sin -\theta = \cos \theta - \imag\sin \theta$ so we just need to check that $(\cos \theta + \imag\sin \theta)(\cos \theta - \imag\sin \theta) = 1$ then using $(\cos \theta + \imag\sin \theta)^{-n} = ((\cos \theta + \imag\sin \theta)^{-1})^n$
 
 # 18/11/13
 
-Find $(\sqrt{3} + i)^6$:
+Find $(\sqrt{3} + \imag)^6$:
 
 > Clearly, $r = \sqrt{3 + 1} = 2$. The argument is $\theta = \frac{\pi}{6} = \arccos \left(\frac{\sqrt{3}}{1}\right)$.  
-> So $\sqrt{3} + i = 2\left(\cos \frac{\pi}{6} + i \sin \frac{\pi}{6}\right)$.  
-> By DMT, $(\sqrt{3} + i)^6 = 2^6\left(\cos 6 \frac{\pi}{6} + i \sin 6 \frac{\pi}{6}\right) = 64(-1 + i0) = -64$.  
+> So $\sqrt{3} + \imag = 2\left(\cos \frac{\pi}{6} + \imag\sin \frac{\pi}{6}\right)$.  
+> By DMT, $(\sqrt{3} + \imag)^6 = 2^6\left(\cos 6 \frac{\pi}{6} + \imag\sin 6 \frac{\pi}{6}\right) = 64(-1 + i0) = -64$.  
 
 Solve $z^2 = \overline{z}$ using Cartesian coordinates:
 
-> Let $z = a + bi$.  
-> Clearly, $(a + bi)^2 = a - bi = (a^2 - b^2) + 2abi$.  
+> Let $z = a + b\imag$.  
+> Clearly, $(a + b\imag)^2 = a - b\imag = (a^2 - b^2) + 2ab\imag$.  
 > In order to be equal, the real and imaginary parts must be equal.  
 > So $a = a^2 + b^2$ and $-b = 2ab$.  
 > So $b = \pm \sqrt{-a(a - 1)}$ and $0 = b(2a + 1)$.  
 > So $0 = \pm \sqrt{-a(a - 1)}(2a + 1)$.  
 > So $a = -\frac{1}{2}$ or $a = 0, 1$.  
-> So $z = 0, 1, -\frac{1}{2} - \frac{\sqrt{3}}{2}i, -\frac{1}{2} + \frac{\sqrt{3}}{2}i$.  
+> So $z = 0, 1, -\frac{1}{2} - \frac{\sqrt{3}}{2}\imag, -\frac{1}{2} + \frac{\sqrt{3}}{2}\imag$.  
 
 Two numbers in polar form are equal if and only if their **moduli are equal** and their arguments are congruent mod $2 \pi$: $r_1 = r_2 \wedge \theta_1 = \theta_2 + 2k\pi, k \in \mb{Z}$.
 
 Solve $z^6 = 1 + i$:
 
-> Let $z = a + bi$, $r = \sqrt{a^2 + b^2}$, and $\theta = \arccos \frac{\mathfrak{R}}{\sqrt{a^2 + b^2}}$.  
-> So $z = r (\cos \theta + i \sin \theta) = 1 + i = \sqrt{2}\left(\cos \frac{\pi}{4} + i \sin \frac{\pi}{4}\right)$.  
+> Let $z = a + b\imag$, $r = \sqrt{a^2 + b^2}$, and $\theta = \arccos \frac{\Re(z)}{\sqrt{a^2 + b^2}}$.  
+> So $z = r (\cos \theta + \imag\sin \theta) = 1 + \imag = \sqrt{2}\left(\cos \frac{\pi}{4} + \imag\sin \frac{\pi}{4}\right)$.  
 > So $r^6 = \sqrt{2}$ and $6\theta = \frac{\pi}{4} + 2k\pi, k \in \mb{Z}$.  
 > So $r = \sqrt{12}{2}$ and $\theta = \frac{\pi}{24} + \frac{k\pi}{3} = \frac{\pi(8k + 1)}{24}, k \in \mb{Z}$.  
 > So $\theta = \frac{\pi}{24}, \frac{9\pi}{24}, \frac{17\pi}{24}, \frac{25\pi}{24}, \frac{33\pi}{24}, \frac{41\pi}{24}$.  
@@ -2150,9 +2151,9 @@ Solve $z^6 = 1 + i$:
 
 ### Complex n-th Roots Theorem (CNRT)
 
-Proposition: given $z = r(\cos \theta + i \sin \theta)$ and $z^n = c$, $n \in \mb{N}$, $z$ has exactly $n$ distinct complex n-th roots, which are $z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k < n$.
+Proposition: given $z = r(\cos \theta + \imag\sin \theta)$ and $z^n = c$, $n \in \mb{N}$, $z$ has exactly $n$ distinct complex n-th roots, which are $z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k < n$.
 
-In other words, $\sqrt[n]{z} = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k < n$ for all $n \in \mb{N}$.
+In other words, $\sqrt[n]{z} = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\left(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k < n$ for all $n \in \mb{N}$.
 
 Polynomials
 -----------
@@ -2165,7 +2166,7 @@ Our primary number systems are $\mb{Z}, \mb{Q}, \mb{R}, \mb{C}, \mb{Z}_m$. Note 
 
 A **number system** is also called a **commutative ring**.
 
-A **field** is a number system where every nonzero element has a multiplicative inverse.
+A **field** is a number system where every nonzero element has a multiplicative inverse: $\forall x \in \mb{F}$.
 
 Some examples of fields are $\mb{Q}$, $\mb{R}$, $\mb{C}$, and $\mb{Z}_p$ for a prime $p$.
 
@@ -2179,7 +2180,7 @@ We can also write this as $\sum\limits_{i = 0}^n a_i x^i$.
 
 $x^2 + 7x - 1$ is a polynomial over $\mb{Q}, \mb{R}, \mb{C}$.
 
-$x^3 + (1 + i)x + (2 - i)$ is a polynomial over $\mb{C}$.
+$x^3 + (1 + \imag)x + (2 - \imag)$ is a polynomial over $\mb{C}$.
 
 $[3]x^5 + [2]x^3 + [6]$ is a polynomial over $\mb{Z}_7$. The missing powers have the congruence class 0 as the coefficients.
 
@@ -2216,3 +2217,83 @@ Given a field $\mb{F}$, and $f(x), g(x) \in \mb{F}, f(x) = \sum\limits_{i = 0}^n
 **Multiplication** is defined as $f(x) \cdot g(x) = \sum\limits_{i = 0}^{n + o} c_i x^i, c_i = \sum\limits_{j = 0}^i a_j b_{i - j} = a_0 b_i + \ldots + a_i b_0$.
 
 When we multiply $f(x)$ and $g(x)$, the resulting polynomial has a degree that is the sum of the degrees of $f(x)$ and $g(x)$.
+
+# 22/11/13
+
+**Division** on polynomials is defined similar to how it is defined in numbers: $g(x) \mid f(x) \iff \exists h(x) \in \mb{F}[x], f(x) = g(x) h(x)$.
+
+In the same way, $\frac{f(x)}{g(x)} = h(x)$.
+
+For example, in $\mb{Q}[x], x + 1 \mid x^4 - 1$.
+
+We use **long division** to divide polynomials. Long division over two polynomials finds their quotient and remainder.
+
+Is $2x^2 - 1 \mid x^4 + x^3 + x^2 + x + 1$ true?
+
+> We apply long division to find the quotient and remainder:  
+
+>                            1/2x^2 + 1/2x + 3/4     quotient
+>              __________________________________    
+>     2x^2 - 1 ) x^4 + x^3 +    x^2 +    x +   1     1. initial condition
+>                x^4       - 1/2x^2                  2. cancel term with highest degree: 1/2x^2(2x^2 - 1) = x^4 - 1/2x^2
+>                -------------------------------     
+>                      x^3 + 3/2x^2 +    x +   1     3. subtract the two polynomials
+>                      x^3          - 1/2x           4. cancel term with highest degree: 1/2x(2x^2 - 1) = x^3 - 1/2x
+>                      -------------------------     
+>                            3/2x^2 + 3/2x +   1     5. subtract the two polynomials
+>                            3/2x^2        - 3/4     6. cancel term with highest degree: 3/4(2x^2 - 1) = 3/2x^2 - 3/4
+>                            -------------------     
+>                                     3/2x + 7/4     7. degree less than divisor, this is the remainder
+
+> Since the remainder is nonzero, $2x^2 - 1 \nmid x^4 + x^3 + x^2 + x + 1$.  
+
+### Division Algorithm for Polynomials (DAP)
+
+Proposition: given field $\mb{F}, f(x), g(x) \in \mb{F}[x], g(x) \ne 0$, there exists a unique $q(x), r(x) \in \mb{F}[x]$ such that $f(x) = q(x) g(x) + r(x)$ and the degree of $r(x)$ is less than the degree of $g(x)$ or $r = 0$.
+
+$q(x)$ is called the quotient, and $r(x)$ is called the remainder.
+
+$g(x) \mid f(x) \iff r(x) = 0$.
+
+There is a special case when the degree of $g(x)$ is 1. Then the degree of $r(x)$ must be 0 or $r(x) = 0$. So $r$ must be a constant.
+
+Corollary: given field $\mb{F}, f(x), g(x) \in \mb{F}[x]$ with $g(x)$ being linear, there exists a unique $q(x), r$ such that $f(x) = q(x) g(x) + r$ and the degree of $r(x)$ is less than the degree of $g(x)$ or $r = 0$ - $r$ is a constant.
+
+### Remainder Theorem (RT)
+
+Proposition: the remainder when $f(x)$ is divided by $x - c$ is $f(c)$.
+
+Proof:
+
+> Clearly, $x - c$ is linear. So by the previous corollary, $f(x) = q(x)(x - c) + r$.  
+> When $x = c$, then $f(c) = q(c) (c - c) + r = r$.  
+> So the remainder is $f(c)$.  
+
+This works for complex $c$ as well.
+
+### Factor Theorem Version 1 (FT 1)
+
+Proposition: $x - c \mid f(x) \iff f(c) = 0$.
+
+Proof:
+
+> Clearly, $x - c \mid f(x)$ if and only if the remainder of $f(x)$ divided by $x - c$ is 0.  
+> By RT, the remainder of $f(x)$ divided by $x - c$ is $f(c)$.  
+> So $x - c \mid f(x) \iff f(c) = 0$.  
+
+### Factor Theorem Version 2 (FT 2)
+
+Proposition: $x - c$ is a factor of $f(x)$ if and only if $c$ is a root of $f(x)$.
+
+A root $k$ of $f(x)$ is a value such that $f(k) = 0$.
+
+This is a restatement of FT 1.
+
+So if we can find roots, we can find factors of the form $x - c$.
+
+Factor $4x^2 - 8x + 5$:
+
+> The roots are $\frac{8 \pm \sqrt{8^2 - 4 \cdot 4 \cdot 5}}{2 \cdot 4} = 1 \pm \frac{\sqrt{-16}}{8} = 1 \pm \frac{1}{2}i$.  
+> So $4x^2 - 8x + 5 = 4 \cdot (x - (1 + \frac{1}{2}i))(x - (1 - \frac{1}{2}i))$.  
+
+Note that the leading coefficient of the term with the highest degree was factored out.

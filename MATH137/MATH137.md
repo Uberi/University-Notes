@@ -2307,3 +2307,138 @@ Given $\int_a^b f(x) \dee x$:
 * $\dee x$ is the **differential**.
 
 The differential simply identifies the variable of integration. It also has dimensions. So for $\int_a^b v(t) \dee t$, the unit is $m$, because $v(t)$ has the units $m/s$ and $t$ still carries the unit $s$.
+
+# 22/11/13
+
+Integrability
+-------------
+
+There are several ways to determine whether a function is integrable:
+
+* Continuous functions - they are bounded such that the area under the curve is finite.
+    * All continuous functions are integrable.
+* Discontinuous functions - some are integrable, some are not, depending on the type of discontinuity.
+    * Removable discontinuities ($\int_{-\pi}^\pi \frac{\sin x}{x} \dee x$) can be integrated even though the function may not be defined at a point.
+        * We fill in the hole when integrating - we sum the integral on the left of the hole, and the integral on the right of the hole.
+        * These are called **improper integrals**.
+    * Jump discontinuities (heaviside function) can be integrated.
+        * We sum the integral to the left of the discontinuity and the integral to the right of the discontinuity, ignoring the function at the jump.
+        * This is also an improper integral.
+    * Infinite discontinuities (vertical asymptotes) can be integrated but require improper integrals to study properly.
+        * For example, $\int_0^1 \frac{1}{x} \dee x$ has no meaning - we say it is **divergent**.
+        * For example, $\int_0^1 \frac{1}{\sqrt{x}} \dee x = 2$.
+        * The value depends on how the function approaches the asymptote.
+    * The Riemann Pathological Function (infinite series) is integrable, yet it has an infinite number of jump discontinuities over a finite interval.
+    * Thomae's Function (ruler function) is integrable, yet it is continuous at the irrationals, and discontinuous at the rationals.
+    * Dirichlet's Function ($\phi(x) = \begin{cases} 1 &\text{if } x \text{ is rational} \\ 0 &\text{if } x \text{ is irrational} \end{cases}$) is not integrable using the Riemann integral, yet is integrable using something like the **Lebesque integral**, which is in the realm of analysis.
+
+Properties of Definite Integrals
+--------------------------------
+
+Let $f, g$ be integrable functions. Let $c$ be a constant.
+
+* $\int_a^a f(x) \dee x = 0$ - a region of zero width has zero area.
+* $\int_a^b f(x) \dee x = -\int_b^a \dee x$ - switching the endpoints switches the sign (this is because $\delta x = \frac{a - b}{n} = -\frac{b - a}{n}$).
+* $\int_a^b c \dee x = c(b - a)$ - integrating a constant is the area under the rectangle.
+* $\int_a^b (f(x) \pm g(x)) \dee x = \int_a^b f(x) \dee x \pm \int_a^b g(x) \dee x$ - integrals have linearity.
+* $\int_a^b cf(x) \dee x = c\int_a^b f(x) \dee x$ - constants can be moved outside the integral.
+* $\int_a^b f(x) \dee x = \int_a^c f(x) \dee x + \int_c^b f(x) \dee x$ - we can split the integral on any intervals we want. Note that $c$ does not have to be between $a$ and $b$.
+* If $f(x) \ge g(x)$ over $[a, b]$, then $\int_a^b f(x) \dee x \ge \int_a^b g(x) \dee x$. This works for any type of inequality or equality.
+* If $u \le f(x) \le v$ over $[a, b]$, $\int_a^b u \dee x \le \int_a^b f(x) \dee x \le \int_a^b v \dee x$, or $u(b - a) \dee x \le \int_a^b f(x) \dee x \le v(b - a)$ - the area under a function can be bounded.
+
+Mean Value Theorem for Integrals
+--------------------------------
+
+If $f$ is continuous over $[a, b]$, then $\exists c \in (a, b), \int_a^b f(x) \dee x = f(c)(b - a)$.
+
+In other words, if a function is continuous, there must exist a function value equal to the mean value of the function.
+
+$f(c)(b - a)$ is the area under $f(x) = c$.
+
+Note that $\frac{1}{b - a} \int_a^b f(x) \dee x$ is the **average value of the function** over $[a, b]$.
+
+Proof:
+
+> Assume $f$ is continuous over $[a, b]$.  
+> By EVT, $\exists u, v, u \le f(x) \le v$ over $[a, b]$.  
+> So $u(b - a) \le \int_a^b f(x) \dee x \le v(b - a)$.  
+> So $u \le \frac{1}{b - a}\int_a^b f(x) \dee x \le v$.  
+> By IVT, $\exists c \in (a, b), f(c) = \frac{1}{b - a} \int_a^b f(x) \dee x$.  
+> So $\exists c \in (a, b), \int_a^b f(x) \dee x = f(c)(b - a)$.  
+
+Integral and Differential Calculus
+----------------------------------
+
+Consider $f(t) = 2t + 1$. If we plot this and geometrically find the area under the curve, we find that the area function is $A(t) = t^2 + t + 2$.
+
+Note that $A'(t) = f(t)$. The area under the curve is an antiderivative of the curve.
+
+In effect, the differential "undoes" the effect of the integral. They could be thought of as the inverse operations of each other.
+
+# 25/11/13
+
+The Fundemental Theorem of Calculus
+-----------------------------------
+
+### Part 1
+
+If $f$ is continuous over $[a, b]$, then $g(x) = \int_a^x f(t) \dee t$ is continuous over $[a, b]$ and differentiable on $(a, b)$, and $g'(x) = f(x)$.
+
+In other words, $\frac{\dee}{\dee x} \int_a^x f(x) \dee t = f(x)$.
+
+Differentiation and integration are inverse operations.
+
+$g(x)$ is an antiderivative of $f(x)$ - the "area under the curve from $a$ to $x$ function".
+
+Any continuous function has an antiderivative.
+
+Proof:
+
+> Let $g(x) = \int_a^x f(t) \dee t$ and $g(x + h) = \int_a^{x + h} f(t) \dee t$.  
+> So $g(x + h) - g(x) = \int_a^{x + h} f(t) \dee t - \int_a^x f(t) \dee t = \int_a^{x + h} f(t) \dee t + \int_x^a f(t) \dee t = \int_x^{x + h} f(t) \dee t$.  
+> By the MVT, $\exists c \in (x, x + h), \int_x^{x + h} = f(c)(x + h - x) = hf(c) = g(x + h) - g(x)$.  
+> Recall that the definition of continuity is that $\lim_{h \to 0} f(x + h) = f(x)$, or $\lim_{h \to 0} (f(x + h) - f(x)) = 0$.  
+> We take the limit of both sides to get $\lim_{h \to 0} hf(c) = \lim_{h \to 0} (g(x + h) - g(x))$. Note that we can't evalutate the limit of $hf(c)$ since $f(c)$ could be infinite and make an indeterminate form.  
+> So $\lim_{h \to 0} hf(c) = \lim_{h \to 0} (g(x + h) - g(x)) = \lim_{h \to 0} h \cdot \lim_{h \to 0} f(c)$. We know that $c \in (x, x + h)$, so as $h \to 0$, $c = x$.
+> So $\lim_{h \to 0} h \cdot \lim_{h \to 0} f(c) = 0 \cdot f(x) = 0$.  
+> So the function is continuous.  
+> We divide both sides of $hf(c) = g(x + h) - g(x)$ by $h$ to get $f(c) = \frac{g(x + h) - g(x)}{h}$.  
+> We take the limit of both sides to get $\lim_{h \to 0} f(c) = \lim_{h \to 0} \frac{g(x + h) - g(x)}{h} = g'(x)$, by the definition of the derivative.  
+> So $g'(x) = f(x)$.  
+
+If $f(x) = \int_1^x \frac{1}{t^3} \dee t$, then by Part 1, $f'(x) = \frac{1}{x^3 + 1}$.
+
+If $f(x) = \int_x^0 \sin t^2 \dee t$, then by Part 1, $f(x) = -\int_0^x \sin t^2 \dee t = -\sin x^2$.
+
+Differentiate $f(x) = \int_x^{x^2} t^2 e^t \dee t$:
+
+> Both integral endpoints are functions.  
+> We can split it into two integrals $f(x) = \int_x^c t^2 e^t \dee t + \int_c^{x^2} t^2 e^t \dee t$ for some constant $c$.  
+> Clearly, $\int_x^c t^2 e^t \dee t = -x^2 e^x$.  
+> Let $u = x^2$. Then $\frac{\dee}{\dee x} \int_c^{x^2} t^2 e^t \dee t = \frac{\dee u}{\dee x} \frac{\dee}{\dee u} \int_c^u t^2 e^t \dee t = 2x(u^2 e^u) = 2x(x^4 e^{x^2}) = 2x^5 e^{x^2}$.  
+> So $f'(x) = -x^2 e^x + 2x^5 e^{x^2}$.  
+
+### Part 2
+
+If $f$ is continuous over $[a, b]$ and $F$ is any antiderivative of $f$, then $\int_a^b f(x) \dee x = F(b) - F(a)$.
+
+This allows us to easily evaluate integrals simply by finding antiderivatives. This is much simpler than using the Riemann sum or whatever.
+
+Proof:
+
+> Let $g(x) = \int_a^x f(x) \dee t$. So $g'(x) = f(x)$, by Part 1, and $g$ is an antiderivative.  
+> Let $F$ be another antiderivative. Then $\frac{\dee}{\dee x} (F(x) - g(x)) = F'(x) - g'(x) = f(x) - f(x) = 0$.  
+> By the Constant Function Theorem, $F(x) = g(x) + c$.  
+> Since $g(a) = 0$, $F(x) - F(a) = g(x) + c - g(a) - c = g(x) = \int_a^x f(t) \dee t$.  
+
+Note that $\left. f(x) \right|_a^b$ means "evaluated at" and $\left. f(x) \right|_a^b = f(b) - f(a)$.
+
+Evaluate $\int_0^1 x^2 \dee x$:
+
+> Let $F'(x) = x^2$. One possible $F(x)$ is $\frac{1}{3} x^3$.  
+> By Part 2, $\int_0^1 x^2 \dee x = F(1) - F(0) = \frac{1}{3}$.  
+
+Evaluate $\int_0^\pi \sin x \dee x$:
+
+> Let $F'(x) = \sin x$. One possible $F(x)$ is $-\cos x$.  
+> By Part 2, $\int_0^\pi \sin x \dee x = F(\pi) - F(0) = 2$.  
