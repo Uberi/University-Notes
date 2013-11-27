@@ -16,7 +16,8 @@ $$
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\dee}{\operatorname{d}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\evalat}[1]{\left.#1\right|}
 $$
 
 # 9/9/13
@@ -2431,7 +2432,7 @@ Proof:
 > By the Constant Function Theorem, $F(x) = g(x) + c$.  
 > Since $g(a) = 0$, $F(x) - F(a) = g(x) + c - g(a) - c = g(x) = \int_a^x f(t) \dee t$.  
 
-Note that $\left. f(x) \right|_a^b$ means "evaluated at" and $\left. f(x) \right|_a^b = f(b) - f(a)$.
+Note that $\evalat{f(x)}_a^b$ means "evaluated at" and $\evalat{f(x)}_a^b = f(b) - f(a)$.
 
 Evaluate $\int_0^1 x^2 \dee x$:
 
@@ -2442,3 +2443,82 @@ Evaluate $\int_0^\pi \sin x \dee x$:
 
 > Let $F'(x) = \sin x$. One possible $F(x)$ is $-\cos x$.  
 > By Part 2, $\int_0^\pi \sin x \dee x = F(\pi) - F(0) = 2$.  
+
+# 27/11/13
+
+The integral geometricallly represents the area under the curve and above the x-axis. If it is negative, it represents the area bove the curve and below the x-axis.
+
+If $f$ is an odd function, then $\int_{-a}^a f(x) \dee x = 0$.
+
+If $f$ is an even function, then $\int_{-a}^a f(x) \dee x = 2\int_0^a f(x) \dee x$.
+
+So $\int_{-\frac{\pi}{4}}^{\frac{\pi}{4}} \tan x^2 \dee x = 0$.
+
+Evaluate $\int_{-1}^3 x \abs{x} \dee x$:
+
+> Clearly, $\abs{x}$ is discontinuous at $x = 0$.  
+> Instead, we can evaluate $\int_{-1}^3 x \abs{x} \dee x = \int_{-1}^0 -x^2 \dee x + \int_0^3 x^2 \dee x$.  
+> So $\int_{-1}^3 x \abs{x} \dee x = \evalat{-\frac{x^3}{3}}_{-1}^0 + \evalat{\frac{x^3}{3}}_0^3 = \frac{-1}{3} + \frac{27}{3} = \frac{26}{3}$.  
+> Alternatively, we can take advantage of the fact that $x \abs{x}$ is an odd function and that $\int_{-1}^3 x \abs{x} \dee x = \int_{-1}^1 x \abs{x} \dee x + \int_1^3 x \abs{x} \dee x$.  
+
+Evaluate $\int_0^\pi \sin^2 x \dee x$:
+
+> It is difficult to find the antiderivative if the chain rule is used in differentiating it. Instead, we use the half-angle formula: $\sin^2 x = \frac{1}{2} (1 - \cos 2x)$.  
+> Now we can find the antiderivative: $\frac{1}{2}\left(x - \frac{1}{2}\sin 2x\right)$.  
+> So $\int_0^\pi \sin^2 x \dee x = \frac{1}{2}\left(\pi - \frac{1}{2}\sin 2\pi\right) - \frac{1}{2}\left(0 - \frac{1}{2}\sin 2 \cdot 0\right)$
+
+Evaluate $\int_1^4 \frac{x + 1}{\sqrt} \dee x$:
+
+> $$
+\begin{align}
+\int_1^4 \frac{x + 1}{\sqrt{x}} \dee x &= \int_1^4 \frac{x}{\sqrt{x}} \dee x + \int_1^4 \frac{1}{\sqrt{x}} \dee x \\
+&= \int_1^4 \sqrt{x} \dee x + \int_1^4 \frac{1}{\sqrt{x}} \dee x \\
+&= \evalat{\frac{2}{3}x^\frac{3}{2}}_1^4 + \evalat{2\sqrt{x}}_1^4 \\
+&= \frac{2}{3}4^\frac{3}{2} - \frac{2}{3} + 2\sqrt{4} - 2 \\
+&= \frac{20}{3} \\
+\end{align}
+$$
+
+Evaluate $\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2} + \frac{1}{1 - x}\right) \dee x$:
+
+> $$
+\begin{align}
+\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2} + \frac{1}{1 - x}\right) \dee x &= \int_0^{\frac{1}{\sqrt{2}}} \frac{4}{\sqrt{1 - x^2} \dee x + \int_0^{\frac{1}{\sqrt{2}}} \frac{1}{1 - x} \dee x \\
+&= \evalat{4 \arcsin x}_0^{\frac{1}{\sqrt{2}}} + \evalat{-\ln(1 - x)}_0^{\frac{1}{\sqrt{2}}} \\
+&= \pi - 0 + -\ln \frac{\sqrt{2} - 1}{\sqrt{2}} - 0 = \pi + \ln \frac{\sqrt{2}}{\sqrt{2} - 1} \\
+&= \pi + \ln \frac{2 + \sqrt{2}} \\
+\end{align}
+$$
+
+Indefinite Integrals
+--------------------
+
+The **indefinite integral** of $f$ is $\int f \dee x$. It is written with no integration limits.
+
+It is the **collection of all possible antiderivatives** of $f(x)$.
+
+$\int_a^b f(x) \dee x$ is a number, while $\int f(x) \dee x$ is a function.
+
+* $\int x^n \dee x = \frac{x^{n + 1}}{n + 1} + c, n \ne -1$
+* $\int \frac{1}{x} = \ln \abs{x} + c$
+* other antiderivative rules...
+
+### Method of substitution
+
+Based on the integrated form of the chain rule.
+
+> Recall that $\frac{\dee}{\dee x} f(g(x) = \frac{\dee}{\dee g} f(g) \cdot \frac{\dee}{\dee x} g(x)$.  
+> So $\int \frac{\dee}{\dee x} f(g(x) \dee x = \int \frac{\dee}{\dee g} f(g) \cdot \frac{\dee}{\dee x} g(x) \dee x$.  
+> So $f(g(x)) + c = \int \frac{\dee}{\dee g} f(g) \cdot \frac{\dee}{\dee x} g(x) \dee x$.  
+
+> Let $u = g(x)$. So $\frac{\dee u}{\dee x} = g'(x)$. Then $\dee u = g'(x) \dee x$.  
+> So $\int \frac{\dee}{\dee g} f(g(x)) \cdot \frac{\dee}{\dee x} g(x) \dee x = \int \frac{\dee}{\dee u} f(u) \dee u = f(u) + c = f(g(x)) + c$.  
+
+The basic rule is $\int \frac{\dee}{\dee g} f(g(x)) \cdot \frac{\dee}{\dee x} g(x) \dee x = f(g(x)) + c$.
+
+This is generally useful when we have a function and choose a $u$ that makes it simple to integrate both the function with respect to $u$ and $u$ itself and also the .
+
+Find $\int \frac{x}{x^2 + 1} \dee x$:
+
+> Let $u = x^2 + 1$.  
+> So $\dee u = 2x \dee x$ and $\int \frac{x}{x^2 + 1} \dee x = \int \frac{x \dee x}{x^2 + 1} = \int \frac{\dee u}{2u} = \frac{1}{2} \ln \abs{u} + c = \frac{\ln \abs{x^2 + 1}}{2} + c$.  

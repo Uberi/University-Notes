@@ -1044,10 +1044,58 @@ Keller is looking at feminism as it relates to science - **whether science contr
 There is a continuum of science criticism, from **liberal** to **radical**:
 
 * Liberal science criticism tries to remove biases from the various aspects of science - the rules themselves are good, but the people need change.
-    * Employement, access to education, opportunities.
-    * Science is fine as it is, but scientists need to be less biased.
+    * Science does not need to change, but scientists need to remove biases.
+    * If most physicists are working on weapons, does this affect opportunities available for the genders?
 * In between these two is a variety of viewpoints.
-    * More liberal views look into biases in the culture of science and how it affects the types of science that get done, as well as where these biases come from.
-    * More radical views look into the way experiments are designed - drug testing must include men and women, and so on.
+    * More liberal views look into biases in the culture of science and how it affects the types of science that get done, as well as where these biases come from - science employment, access to education, opportunities available.
+    * More radical views look into the way experiments are designed - drug testing must include men and women, lack of research into breast cancer.
+    * Most radical views look into objectivity and rationality and our biases in these,
 * Radical science criticism tries to change the rules of science itself - science is inherently sexist, and needs to be reformed.
+    * Science and its institutions are biased, and need to change.
     * ;wip
+
+# 26/11/13
+
+Radical Science Criticism
+-------------------------
+
+The differences between genders is significant when asking the question, "what does it mean to be human?".
+
+Humanity is often defined in terms of our rationality - "rational animals". This is problematic because in this view women and children may be considered less human due to gender biases.
+
+People often associate rationality with the men and the emotional with women.
+
+If science is a rational practice, then people will associate it with masculinity. This could potentially affect the way we do science and the way science influences our lives.
+
+Gender biases can sneak into scientific studies even if we try to control for them - consider confirmation bias.
+
+### Critiques of objectivity
+
+What does objectivity mean?
+
+* Unbiased, guided by evidence.
+* Dispassionate, not due to preferences.
+* Facts instead of inferences.
+* $S$ knows that $P$, where $S$ doesn't matter (subjective is when the subject $S$ matters).
+
+We can apply objectivity to a person (integrity, honesty), a method (falsification, methodical doubt), or a fact (accurately describes the world, not dependent on the observer).
+
+An objective view is a **god's eye view/view from nowhere**. We want to see the world as it actually is, regardless of who is observing it. We are trying to erase what is particular about our perspective. This view is called **aperspectival** or **neutral**.
+
+**Objectivity as intersubjectivity**: the concept that knowledge is more objective if more people observe the same thing. This is because we reduce the influence of situated knowledge.
+
+Feminist criticism of objectivity has several arguments regarding this:
+
+* Perfectly objective knowledge is impossible because there is no neutral person - we can only view the world from our own perspective and situated knowledge.
+* We cannot know that we have found all of our auxilary hypotheses. We would be misleading ourselves to give an "objective" fact our ful endorsement.
+* We sometimes discard outliers. This negatively impacts our objectivity.
+* Even the average of all humans cannot perceive everything - human beings can only see what is available to our senses.
+* Intersubjectivity is vulnerable to everyone who is also observing the same thing having the same biases and situated knowledge. It is important who the subjects actually are.
+
+### Improving objectivity
+
+We want to control for as many factors as we can, even though it may not be possible to entirely eliminate biases.
+
+Fox Keller states that traditionally, we need to be distant and dispassionate from our work in order to be objective. But men and women are raised differently, and we might be able to be more objective by being close and passionate about our work.
+
+For example, I might not be able to judge my friend objectively because we are close, but Fox Keller might say that I could be more objective by being able to see things other people would not about the subject.

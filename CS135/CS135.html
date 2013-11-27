@@ -1971,7 +1971,16 @@ A OtherThing is one of:
                                             (cond [(cons? route) route]
                                                   [else (find-route-list (rest nodes))]))]))]
                     (cons start (find-route-list (neighbors start))))]))</code></pre>
-<p>;wip</p>
+<p>We could trace this, but in this case it is more useful to do a <strong>trace tree</strong>. This is a tree drawn with the recursive call as each node.</p>
+<h1 id="section-19">26/11/13</h1>
+<p><code>find-route</code> is designed to work with acyclic graphs. If there is a cycle, it could potentially loop through the cycle infinitely.</p>
+<p>For example, the graph <code>'((A (B)) (B (C)) (C (A)) (D ()))</code> would result in infinite recursion if we tried to find a route from <code>A</code> to <code>D</code>.</p>
+<p>For directed acyclic graphs, any route must have no more nodes in it than the number of nodes in the graph. So <code>find-route</code> has an upper bound on the number of times it recurses - the number of routes to any destination in the graph. So the function always terminates if there are no cycles.</p>
+<h2 id="implicit-graphs">Implicit Graphs</h2>
+<p>Sometimes it is impractical or inefficient to build the entire graph explicitly. An <strong>implicit graph</strong> is one that isn't explicitly represented as a graph.</p>
+<p>For example, the possible legal moves in a chess game could be an implicit graph, with nodes representing possible game states and edges representing legal moves between these states. It is not practical to represent all the possible moves explicitly, so we do not.</p>
+<p>What if we wanted to use <code>find-route</code> to search for a path through an implicit graph?</p>
+<p>Note that the only part of the function that actually does anything with the graph is <code>neighbors</code>. In fact, all we have to do is implement a different <code>neighbors</code> function. A neighbor function that returned the list of legal moves given the possible</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

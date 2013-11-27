@@ -80,7 +80,8 @@ Office hours: starts week 3, details TBA ;wip</code></pre>
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\dee}{\operatorname{d}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\evalat}[1]{\left.#1\right|}
 \]</span></p>
 <h1 id="section">9/9/13</h1>
 <h2 id="preliminaries">Preliminaries</h2>
@@ -1691,7 +1692,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <blockquote>
 <p>Let <span class="math">\(g(x) = \int_a^x f(x) \dee t\)</span>. So <span class="math">\(g&#39;(x) = f(x)\)</span>, by Part 1, and <span class="math">\(g\)</span> is an antiderivative.<br />Let <span class="math">\(F\)</span> be another antiderivative. Then <span class="math">\(\frac{\dee}{\dee x} (F(x) - g(x)) = F&#39;(x) - g&#39;(x) = f(x) - f(x) = 0\)</span>.<br />By the Constant Function Theorem, <span class="math">\(F(x) = g(x) + c\)</span>.<br />Since <span class="math">\(g(a) = 0\)</span>, <span class="math">\(F(x) - F(a) = g(x) + c - g(a) - c = g(x) = \int_a^x f(t) \dee t\)</span>.</p>
 </blockquote>
-<p>Note that <span class="math">\(\left. f(x) \right|_a^b\)</span> means &quot;evaluated at&quot; and <span class="math">\(\left. f(x) \right|_a^b = f(b) - f(a)\)</span>.</p>
+<p>Note that <span class="math">\(\evalat{f(x)}_a^b\)</span> means &quot;evaluated at&quot; and <span class="math">\(\evalat{f(x)}_a^b = f(b) - f(a)\)</span>.</p>
 <p>Evaluate <span class="math">\(\int_0^1 x^2 \dee x\)</span>:</p>
 <blockquote>
 <p>Let <span class="math">\(F&#39;(x) = x^2\)</span>. One possible <span class="math">\(F(x)\)</span> is <span class="math">\(\frac{1}{3} x^3\)</span>.<br />By Part 2, <span class="math">\(\int_0^1 x^2 \dee x = F(1) - F(0) = \frac{1}{3}\)</span>.</p>
@@ -1699,6 +1700,65 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <p>Evaluate <span class="math">\(\int_0^\pi \sin x \dee x\)</span>:</p>
 <blockquote>
 <p>Let <span class="math">\(F&#39;(x) = \sin x\)</span>. One possible <span class="math">\(F(x)\)</span> is <span class="math">\(-\cos x\)</span>.<br />By Part 2, <span class="math">\(\int_0^\pi \sin x \dee x = F(\pi) - F(0) = 2\)</span>.</p>
+</blockquote>
+<h1 id="section-32">27/11/13</h1>
+<p>The integral geometricallly represents the area under the curve and above the x-axis. If it is negative, it represents the area bove the curve and below the x-axis.</p>
+<p>If <span class="math">\(f\)</span> is an odd function, then <span class="math">\(\int_{-a}^a f(x) \dee x = 0\)</span>.</p>
+<p>If <span class="math">\(f\)</span> is an even function, then <span class="math">\(\int_{-a}^a f(x) \dee x = 2\int_0^a f(x) \dee x\)</span>.</p>
+<p>So <span class="math">\(\int_{-\frac{\pi}{4}}^{\frac{\pi}{4}} \tan x^2 \dee x = 0\)</span>.</p>
+<p>Evaluate <span class="math">\(\int_{-1}^3 x \abs{x} \dee x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\abs{x}\)</span> is discontinuous at <span class="math">\(x = 0\)</span>.<br />Instead, we can evaluate <span class="math">\(\int_{-1}^3 x \abs{x} \dee x = \int_{-1}^0 -x^2 \dee x + \int_0^3 x^2 \dee x\)</span>.<br />So <span class="math">\(\int_{-1}^3 x \abs{x} \dee x = \evalat{-\frac{x^3}{3}}_{-1}^0 + \evalat{\frac{x^3}{3}}_0^3 = \frac{-1}{3} + \frac{27}{3} = \frac{26}{3}\)</span>.<br />Alternatively, we can take advantage of the fact that <span class="math">\(x \abs{x}\)</span> is an odd function and that <span class="math">\(\int_{-1}^3 x \abs{x} \dee x = \int_{-1}^1 x \abs{x} \dee x + \int_1^3 x \abs{x} \dee x\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math">\(\int_0^\pi \sin^2 x \dee x\)</span>:</p>
+<blockquote>
+<p>It is difficult to find the antiderivative if the chain rule is used in differentiating it. Instead, we use the half-angle formula: <span class="math">\(\sin^2 x = \frac{1}{2} (1 - \cos 2x)\)</span>.<br />Now we can find the antiderivative: <span class="math">\(\frac{1}{2}\left(x - \frac{1}{2}\sin 2x\right)\)</span>.<br />So <span class="math">\(\int_0^\pi \sin^2 x \dee x = \frac{1}{2}\left(\pi - \frac{1}{2}\sin 2\pi\right) - \frac{1}{2}\left(0 - \frac{1}{2}\sin 2 \cdot 0\right)\)</span></p>
+</blockquote>
+<p>Evaluate <span class="math">\(\int_1^4 \frac{x + 1}{\sqrt} \dee x\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\int_1^4 \frac{x + 1}{\sqrt{x}} \dee x &amp;= \int_1^4 \frac{x}{\sqrt{x}} \dee x + \int_1^4 \frac{1}{\sqrt{x}} \dee x \\
+&amp;= \int_1^4 \sqrt{x} \dee x + \int_1^4 \frac{1}{\sqrt{x}} \dee x \\
+&amp;= \evalat{\frac{2}{3}x^\frac{3}{2}}_1^4 + \evalat{2\sqrt{x}}_1^4 \\
+&amp;= \frac{2}{3}4^\frac{3}{2} - \frac{2}{3} + 2\sqrt{4} - 2 \\
+&amp;= \frac{20}{3} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Evaluate <span class="math">\(\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2} + \frac{1}{1 - x}\right) \dee x\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2} + \frac{1}{1 - x}\right) \dee x &amp;= \int_0^{\frac{1}{\sqrt{2}}} \frac{4}{\sqrt{1 - x^2} \dee x + \int_0^{\frac{1}{\sqrt{2}}} \frac{1}{1 - x} \dee x \\
+&amp;= \evalat{4 \arcsin x}_0^{\frac{1}{\sqrt{2}}} + \evalat{-\ln(1 - x)}_0^{\frac{1}{\sqrt{2}}} \\
+&amp;= \pi - 0 + -\ln \frac{\sqrt{2} - 1}{\sqrt{2}} - 0 = \pi + \ln \frac{\sqrt{2}}{\sqrt{2} - 1} \\
+&amp;= \pi + \ln \frac{2 + \sqrt{2}} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h2 id="indefinite-integrals">Indefinite Integrals</h2>
+<p>The <strong>indefinite integral</strong> of <span class="math">\(f\)</span> is <span class="math">\(\int f \dee x\)</span>. It is written with no integration limits.</p>
+<p>It is the <strong>collection of all possible antiderivatives</strong> of <span class="math">\(f(x)\)</span>.</p>
+<p><span class="math">\(\int_a^b f(x) \dee x\)</span> is a number, while <span class="math">\(\int f(x) \dee x\)</span> is a function.</p>
+<ul>
+<li><span class="math">\(\int x^n \dee x = \frac{x^{n + 1}}{n + 1} + c, n \ne -1\)</span></li>
+<li><span class="math">\(\int \frac{1}{x} = \ln \abs{x} + c\)</span></li>
+<li>other antiderivative rules...</li>
+</ul>
+<h3 id="method-of-substitution">Method of substitution</h3>
+<p>Based on the integrated form of the chain rule.</p>
+<blockquote>
+<p>Recall that <span class="math">\(\frac{\dee}{\dee x} f(g(x) = \frac{\dee}{\dee g} f(g) \cdot \frac{\dee}{\dee x} g(x)\)</span>.<br />So <span class="math">\(\int \frac{\dee}{\dee x} f(g(x) \dee x = \int \frac{\dee}{\dee g} f(g) \cdot \frac{\dee}{\dee x} g(x) \dee x\)</span>.<br />So <span class="math">\(f(g(x)) + c = \int \frac{\dee}{\dee g} f(g) \cdot \frac{\dee}{\dee x} g(x) \dee x\)</span>.</p>
+</blockquote>
+<blockquote>
+<p>Let <span class="math">\(u = g(x)\)</span>. So <span class="math">\(\frac{\dee u}{\dee x} = g&#39;(x)\)</span>. Then <span class="math">\(\dee u = g&#39;(x) \dee x\)</span>.<br />So <span class="math">\(\int \frac{\dee}{\dee g} f(g(x)) \cdot \frac{\dee}{\dee x} g(x) \dee x = \int \frac{\dee}{\dee u} f(u) \dee u = f(u) + c = f(g(x)) + c\)</span>.</p>
+</blockquote>
+<p>The basic rule is <span class="math">\(\int \frac{\dee}{\dee g} f(g(x)) \cdot \frac{\dee}{\dee x} g(x) \dee x = f(g(x)) + c\)</span>.</p>
+<p>This is generally useful when we have a function and choose a <span class="math">\(u\)</span> that makes it simple to integrate both the function with respect to <span class="math">\(u\)</span> and <span class="math">\(u\)</span> itself and also the .</p>
+<p>Find <span class="math">\(\int \frac{x}{x^2 + 1} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = x^2 + 1\)</span>.<br />So <span class="math">\(\dee u = 2x \dee x\)</span> and <span class="math">\(\int \frac{x}{x^2 + 1} \dee x = \int \frac{x \dee x}{x^2 + 1} = \int \frac{\dee u}{2u} = \frac{1}{2} \ln \abs{u} + c = \frac{\ln \abs{x^2 + 1}}{2} + c\)</span>.</p>
 </blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>

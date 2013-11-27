@@ -1234,7 +1234,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <h3 id="properties-of-conjugates-pcj">Properties of Conjugates (PCJ)</h3>
 <p>Proposition: for all <span class="math">\(z, w, \in \mb{C}\)</span>:</p>
 <ul>
-<li><span class="math">\(\overline{z + w} = \overline{z} + \overline{w}\)</span></li>
+<li><span class="math">\(\overline{z \pm w} = \overline{z} \pm \overline{w}\)</span></li>
 <li><span class="math">\(\overline{z \cdot w} = \overline{z} \cdot \overline{w}\)</span></li>
 <li><span class="math">\(\overline{\overline{z}} = z\)</span></li>
 <li><span class="math">\(z + \overline{z} = 2\Re(z)\)</span></li>
@@ -1338,7 +1338,8 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p><span class="math">\(f(x) \in \mb{F}\)</span> is equivalent to &quot;<span class="math">\(f(x)\)</span> is a polynomial over <span class="math">\(\mb{F}\)</span>&quot;. For example, <span class="math">\(x^2 \in \mb{R}[x]\)</span>.</p>
 <h3 id="degree">Degree</h3>
 <p>Given <span class="math">\(\sum\limits_{i = 0}^n a_i x^i\)</span>, the <strong>leading coefficient</strong> is the largest <span class="math">\(n\)</span> such that <span class="math">\(a_n \ne 0\)</span>. The <strong>degree</strong> of this polynomial is this <span class="math">\(n\)</span>.</p>
-<p>In other words, the degree of a polynomial is the first nonzero coefficient.</p>
+<p>In other words, the degree of a polynomial is the index of the first nonzero coefficient.</p>
+<p><span class="math">\(\deg(f)\)</span> is the degree of <span class="math">\(f(x) \in \mb{F}[x]\)</span>.</p>
 <p>Polynomials of degree 1 are <strong>linear polynomials</strong>.</p>
 <p>Polynomials of degree 2 are <strong>quadratic polynomials</strong>.</p>
 <p>Polynomials of degree 3 are <strong>cubic polynomials</strong>.</p>
@@ -1400,11 +1401,79 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>A root <span class="math">\(k\)</span> of <span class="math">\(f(x)\)</span> is a value such that <span class="math">\(f(k) = 0\)</span>.</p>
 <p>This is a restatement of FT 1.</p>
 <p>So if we can find roots, we can find factors of the form <span class="math">\(x - c\)</span>.</p>
+<p>This is useful because we can apply things like the quadratic formula to factor quadratic equations.</p>
 <p>Factor <span class="math">\(4x^2 - 8x + 5\)</span>:</p>
 <blockquote>
 <p>The roots are <span class="math">\(\frac{8 \pm \sqrt{8^2 - 4 \cdot 4 \cdot 5}}{2 \cdot 4} = 1 \pm \frac{\sqrt{-16}}{8} = 1 \pm \frac{1}{2}i\)</span>.<br />So <span class="math">\(4x^2 - 8x + 5 = 4 \cdot (x - (1 + \frac{1}{2}i))(x - (1 - \frac{1}{2}i))\)</span>.</p>
 </blockquote>
 <p>Note that the leading coefficient of the term with the highest degree was factored out.</p>
+<h1 id="section-31">25/11/13</h1>
+<h3 id="conjugate-roots-theorem-cjrt">Conjugate Roots Theorem (CJRT)</h3>
+<p>Proposition: given <span class="math">\(f(x) = a_nx^n + \ldots + a_0 x^0, f(x) \in \mb{R}[x]\)</span>, if <span class="math">\(c\)</span> is a root of <span class="math">\(f(x)\)</span> (<span class="math">\(c \in \mb{C}, f(c) = 0\)</span>), then <span class="math">\(\overline{c}\)</span> is also a root of <span class="math">\(f(x)\)</span>.</p>
+<p>In other words, if <span class="math">\(c\)</span> is a root of a polynomial in the real field, then its conjugate is also a root.</p>
+<p>This is useful for factoring polynomials into their linear factors.</p>
+<p>Factor <span class="math">\(x^4 + x^3 - 3x^2 + 4x + 2\)</span> given the root <span class="math">\(1 + \imag\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(x - (1 + \imag)\)</span> is a factor.<br />Since the polynomial is in <span class="math">\(\mb{R}[x]\)</span>, <span class="math">\(x - (1 - \imag)\)</span> is also a factor, by CJRT.<br />Clearly, <span class="math">\((x - (1 + \imag))(x - (1 - \imag)) = x^2 - 2x + 2\)</span>.<br />Through long division (or quite possibly Wolfram|Alpha), we get <span class="math">\((x - (1 + \imag))(x - (1 - \imag))(x^2 + 3x + 1)\)</span>.<br />By FT2, this is equivalent to <span class="math">\((x - (1 + \imag))(x - (1 - \imag))(x + \frac{3}{2} - \frac{\sqrt{5}}{2})(x + \frac{3}{2} + \frac{\sqrt{5}}{2})\)</span>.<br />This is the fully factored polynomial.</p>
+</blockquote>
+<p>Proof:</p>
+<blockquote>
+<p>;wip: this is an assignment question and will not be published until after the assignment is due</p>
+</blockquote>
+<h3 id="rational-roots-theorem-rrt">Rational Roots Theorem (RRT)</h3>
+<p>Proposition: given <span class="math">\(f(x) = a_nx^n + \ldots + a_0 x^0, a_i \in \mb{Z}, 0 \le i \le n\)</span>, if <span class="math">\(f\left(\frac{p}{q}\right) = 0, \gcd(p, q) = 1\)</span>, then <span class="math">\(p \mid a_0\)</span> and <span class="math">\(q \mid a_n\)</span>.</p>
+<p>In other words, given a polynomial with integer coefficients, a rational root written in the lowest terms has its denominator divide the coeffcient of the highest term and the numerator divides the coefficient of the constant term.</p>
+<p>Proof:</p>
+<blockquote>
+<p>The rational roots of <span class="math">\(x\)</span> can be written as <span class="math">\(\frac{p}{q}\)</span>.<br />So <span class="math">\(f(x) = a_n\frac{p^n}{q^n} + \ldots + a_0 \frac{p^0}{q^0} = 0\)</span>.<br />We multiply both sides by <span class="math">\(q^n\)</span> to get <span class="math">\(a_n p^n + \ldots + a_0 q^n = 0\)</span>.<br />Clearly, this is equivalent to <span class="math">\(a_n p^n + \ldots + a_1 p q^{n - 1} = -a_0 q^n\)</span>.<br />Since <span class="math">\(p \mid a_n p^n + \ldots + a_1 p q^{n - 1}\)</span>, <span class="math">\(p \mid a_0 q^n\)</span>.<br />Since <span class="math">\(\gcd(p, q) = 1\)</span>, <span class="math">\(p \mid a_0\)</span>, by CAD.<br />Clearly, this is equivalent to <span class="math">\(a_{n - 1} p^{n - 1} q + \ldots + a_0 q^n = -a_n p^n\)</span>.<br />Since <span class="math">\(q \mid a_{n - 1} p^{n - 1} q + \ldots + a_0 q^n\)</span>, <span class="math">\(q \mid a_n p^n\)</span>.<br />Since <span class="math">\(\gcd(p, q) = 1\)</span>, <span class="math">\(q \mid a_n\)</span>, by CAD.<br />For a more in depth look at this proof, see Assignment 5, Question 3b.</p>
+</blockquote>
+<p>This is useful because we can <strong>find the rational roots of a function</strong> by testing certain function values. Note that this doesn't allow us to find the irrational roots.</p>
+<p>A useful thing the proposition says (contrapositive) is that if a value <span class="math">\(x\)</span> cannot be expressed as a fraction of the factors of the constant term and the factors of the highest term, it cannot be a root. So if we want to find roots, we can actually test all possible fractions of these factors.</p>
+<p>Find one root of <span class="math">\(f(x) = 2x^3 - x^2 + 5x + 3\)</span>, then use it to factor the polynomial into linear factors:</p>
+<blockquote>
+<p>By RRT, all rational roots are one of <span class="math">\(\pm \frac{1}{1}, \pm \frac{2}{1}, \pm \frac{1}{3}, \pm \frac{2}{3}\)</span>.<br />Applying <span class="math">\(f(x)\)</span> to each value, we find that <span class="math">\(-\frac{1}{2}\)</span> is a root.<br />Through long division, we get <span class="math">\(f(x) = (x + \frac{1}{2})(2x^2 - 2x + 6)\)</span>.<br />Through the quadratic formula, <span class="math">\(f(x) = 2(x + \frac{1}{2})(x - \frac{1}{2} - \frac{i\sqrt{11}}{2})(x - \frac{1}{2} + \frac{i\sqrt{11}}{2})\)</span>.<br />This is the fully factored polynomial.</p>
+</blockquote>
+<p>This is also useful for finding <strong>whether a root is rational</strong>.</p>
+<p>Prove <span class="math">\(\sqrt[4]{5}\)</span> is irrational:</p>
+<blockquote>
+<p>Let <span class="math">\(c = \sqrt[4]{5}\)</span>. Then <span class="math">\(c^4 = 5\)</span> and <span class="math">\(c\)</span> is a root of <span class="math">\(x^4 - 5\)</span>.<br />Suppose <span class="math">\(c\)</span> is rational. Then <span class="math">\(\exists p, q \in \mb{Z}, \gcd(p, q) = 1 \implies \frac{p}{q} = c\)</span>.<br />By RRT, <span class="math">\(p \mid -5 \wedge q \mid 1\)</span>. So <span class="math">\(c = 1, 5\)</span>.<br />But 1 or 5 are not roots to <span class="math">\(x^4 - 5\)</span>, which is a contradiction.<br />So <span class="math">\(\sqrt[4]{5}\)</span> must be irrational.</p>
+</blockquote>
+<p>This can work generally, but for larger amounts of factors it becomes impractical to test all of them.</p>
+<p>Factor <span class="math">\(f(x) = x^4 - \sqrt[4]{5}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(x^4 = 5 = 5(\cos 0 + \imag \sin 0)\)</span>.<br />By CNRT, <span class="math">\(x = \sqrt[4]{5} = \sqrt[4]{5}\left(\cos 0 + \imag \sin 0\right), \sqrt[4]{5}\left(\cos \frac{\pi}{2} + \imag \sin \frac{\pi}{2}\right), \sqrt[4]{5}\left(\cos \pi + \imag \sin \pi\right), \sqrt[4]{5}\left(\cos \frac{3\pi}{2} + \imag \sin \frac{3\pi}{2}\right)\)</span>.<br />So <span class="math">\(x = \sqrt[4]{5}, \imag\sqrt[4]{5}, -\sqrt[4]{5}, -\imag\sqrt[4]{5}\)</span>.<br />By FT1, <span class="math">\(x^4 - 5 = (x - \sqrt[4]{5})(x - \imag\sqrt[4]{5})(x + \sqrt[4]{5})(x + \imag\sqrt[4]{5})\)</span>.</p>
+</blockquote>
+<h1 id="section-32">27/11/13</h1>
+<h2 id="fundemental-theorem-of-algebra-fta">Fundemental Theorem of Algebra (FTA)</h2>
+<p>Proved by Gauss, 1799</p>
+<p>Proposition: every <span class="math">\(f(x) \in \mb{C}[x]\)</span> of degree <span class="math">\(n &gt; 0\)</span> has a root <span class="math">\(c \in \mb{C}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>;wip</p>
+</blockquote>
+<h3 id="unnamed-proposition-cpn">Unnamed Proposition (CPN)</h3>
+<p>Proposition: every <span class="math">\(f(x) \in \mb{C}[x]\)</span> of degree <span class="math">\(n \ge 1\)</span> can be written as a product of <span class="math">\(n\)</span> linear factors.</p>
+<p>Also, if <span class="math">\(f(x) = a_nx^n + \ldots + a_0\)</span>, then in factored form it is written as <span class="math">\(f(x) = a_n(x - c_1) \cdots (x - c_n)\)</span>. In other words, the leading coefficient of a polynomial is the constant factor.</p>
+<p>So every <span class="math">\(f(x) \in \mb{C}[x]\)</span> of degree <span class="math">\(n &gt; 0\)</span> has <span class="math">\(n\)</span> roots, counting duplicated roots. A function of degree <span class="math">\(n\)</span> will have <span class="math">\(n\)</span> roots, if we consider the multiplicities.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Suppose <span class="math">\(f(x) \in \mb{C}[x]\)</span> of degree <span class="math">\(n &gt; 0\)</span>. Then by FTA, <span class="math">\(\exists c_1 \in \mb{C}, f(c_1) = 0\)</span>, and <span class="math">\((x - c_1)\)</span> is a factor.<br />So <span class="math">\(\exists g(x) \in \mb{C}[x], f(x) = g(x)(x - c_1)\)</span>, where the degree of <span class="math">\(g(x)\)</span> is one less than that of <span class="math">\(f(x)\)</span>.<br />If the degree of We can repeat this on <span class="math">\(g(x)\)</span> to get another linear factor, and so on, until the degree is 0.<br />So <span class="math">\(f(x) = k(x - c_1) \cdots (x - c_n)\)</span>.</p>
+</blockquote>
+<h3 id="roots">Roots</h3>
+<p>Roots can be repeated multiple times. The number of times <span class="math">\((x - c)\)</span> occurs in the factored form of <span class="math">\(f(x)\)</span> is the <strong>multiplicity</strong> of the root <span class="math">\(c\)</span>.</p>
+<p>Note that <span class="math">\(f(x) = x^2 - 2x + 1 = (x + 1)^2\)</span> has <strong>one root</strong>, of <strong>multiplicity two</strong>. There is only one root, but it appears twice.</p>
+<h3 id="unnamed-proposition">Unnamed Proposition</h3>
+<p>Proposition: if <span class="math">\(f(x) \in \mb{R}[x]\)</span> with degree <span class="math">\(n &gt; 0\)</span>, then <span class="math">\(f(x)\)</span> factors in <span class="math">\(\mb{R}[x]\)</span> as a product of linear and quadratic polynomials.</p>
+<p>In other words, if we work purely in real numbers, we can always factor polynomials in real numbers into linear and quadratic polynomials.</p>
+<p>Proof:</p>
+<blockquote>
+<p>;wip: proof in course notes</p>
+</blockquote>
+<p>Factor <span class="math">\(x^4 + 1\)</span>:</p>
+<blockquote>
+<p>Clearly, this is equivalent to <span class="math">\(x^4 = -1\)</span>, and by CNRT, <span class="math">\(x = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag, \frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}\imag, -\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag, -\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}\imag\)</span>.<br />Note that there are two conjugate pairs, which both form quadratic polynomials.<br />So <span class="math">\(x^4 + 1 = ((\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag)(\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag))((-\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag)(-\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}\imag))\)</span>.<br />So <span class="math">\(x^4 + 1 = (x^2 - \sqrt{2}x + 1)(x^2 + \sqrt{2}x + 1)\)</span>.</p>
+</blockquote>
+<p>Galois proved in the early 1800s that finding the factorizations in impossible for the general case for polynomials of degree 5 or more.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -2006,7 +2006,7 @@ So $\imag^2 = -1$, and $\imag$ is the square root of -1. Sometimes, people write
 
 Proposition: for all $z, w, \in \mb{C}$:
 
-* $\overline{z + w} = \overline{z} + \overline{w}$
+* $\overline{z \pm w} = \overline{z} \pm \overline{w}$
 * $\overline{z \cdot w} = \overline{z} \cdot \overline{w}$
 * $\overline{\overline{z}} = z$
 * $z + \overline{z} = 2\Re(z)$
@@ -2194,7 +2194,9 @@ $f(x) \in \mb{F}$ is equivalent to "$f(x)$ is a polynomial over $\mb{F}$". For e
 
 Given $\sum\limits_{i = 0}^n a_i x^i$, the **leading coefficient** is the largest $n$ such that $a_n \ne 0$. The **degree** of this polynomial is this $n$.
 
-In other words, the degree of a polynomial is the first nonzero coefficient.
+In other words, the degree of a polynomial is the index of the first nonzero coefficient.
+
+$\deg(f)$ is the degree of $f(x) \in \mb{F}[x]$.
 
 Polynomials of degree 1 are **linear polynomials**.
 
@@ -2291,9 +2293,138 @@ This is a restatement of FT 1.
 
 So if we can find roots, we can find factors of the form $x - c$.
 
+This is useful because we can apply things like the quadratic formula to factor quadratic equations.
+
 Factor $4x^2 - 8x + 5$:
 
 > The roots are $\frac{8 \pm \sqrt{8^2 - 4 \cdot 4 \cdot 5}}{2 \cdot 4} = 1 \pm \frac{\sqrt{-16}}{8} = 1 \pm \frac{1}{2}i$.  
 > So $4x^2 - 8x + 5 = 4 \cdot (x - (1 + \frac{1}{2}i))(x - (1 - \frac{1}{2}i))$.  
 
 Note that the leading coefficient of the term with the highest degree was factored out.
+
+# 25/11/13
+
+### Conjugate Roots Theorem (CJRT)
+
+Proposition: given $f(x) = a_nx^n + \ldots + a_0 x^0, f(x) \in \mb{R}[x]$, if $c$ is a root of $f(x)$ ($c \in \mb{C}, f(c) = 0$), then $\overline{c}$ is also a root of $f(x)$.
+
+In other words, if $c$ is a root of a polynomial in the real field, then its conjugate is also a root.
+
+This is useful for factoring polynomials into their linear factors.
+
+Factor $x^4 + x^3 - 3x^2 + 4x + 2$ given the root $1 + \imag$:
+
+> Clearly, $x - (1 + \imag)$ is a factor.  
+> Since the polynomial is in $\mb{R}[x]$, $x - (1 - \imag)$ is also a factor, by CJRT.  
+> Clearly, $(x - (1 + \imag))(x - (1 - \imag)) = x^2 - 2x + 2$.  
+> Through long division (or quite possibly Wolfram|Alpha), we get $(x - (1 + \imag))(x - (1 - \imag))(x^2 + 3x + 1)$.  
+> By FT2, this is equivalent to $(x - (1 + \imag))(x - (1 - \imag))(x + \frac{3}{2} - \frac{\sqrt{5}}{2})(x + \frac{3}{2} + \frac{\sqrt{5}}{2})$.  
+> This is the fully factored polynomial.  
+
+Proof:
+
+> ;wip: this is an assignment question and will not be published until after the assignment is due
+
+### Rational Roots Theorem (RRT)
+
+Proposition: given $f(x) = a_nx^n + \ldots + a_0 x^0, a_i \in \mb{Z}, 0 \le i \le n$, if $f\left(\frac{p}{q}\right) = 0, \gcd(p, q) = 1$, then $p \mid a_0$ and $q \mid a_n$.
+
+In other words, given a polynomial with integer coefficients, a rational root written in the lowest terms has its denominator divide the coeffcient of the highest term and the numerator divides the coefficient of the constant term.
+
+Proof:
+
+> The rational roots of $x$ can be written as $\frac{p}{q}$.  
+> So $f(x) = a_n\frac{p^n}{q^n} + \ldots + a_0 \frac{p^0}{q^0} = 0$.  
+> We multiply both sides by $q^n$ to get $a_n p^n + \ldots + a_0 q^n = 0$.  
+> Clearly, this is equivalent to $a_n p^n + \ldots + a_1 p q^{n - 1} = -a_0 q^n$.  
+> Since $p \mid a_n p^n + \ldots + a_1 p q^{n - 1}$, $p \mid a_0 q^n$.  
+> Since $\gcd(p, q) = 1$, $p \mid a_0$, by CAD.  
+> Clearly, this is equivalent to $a_{n - 1} p^{n - 1} q + \ldots + a_0 q^n = -a_n p^n$.  
+> Since $q \mid a_{n - 1} p^{n - 1} q + \ldots + a_0 q^n$, $q \mid a_n p^n$.  
+> Since $\gcd(p, q) = 1$, $q \mid a_n$, by CAD.  
+> For a more in depth look at this proof, see Assignment 5, Question 3b.  
+
+This is useful because we can **find the rational roots of a function** by testing certain function values. Note that this doesn't allow us to find the irrational roots.
+
+A useful thing the proposition says (contrapositive) is that if a value $x$ cannot be expressed as a fraction of the factors of the constant term and the factors of the highest term, it cannot be a root. So if we want to find roots, we can actually test all possible fractions of these factors.
+
+Find one root of $f(x) = 2x^3 - x^2 + 5x + 3$, then use it to factor the polynomial into linear factors:
+
+> By RRT, all rational roots are one of $\pm \frac{1}{1}, \pm \frac{2}{1}, \pm \frac{1}{3}, \pm \frac{2}{3}$.  
+> Applying $f(x)$ to each value, we find that $-\frac{1}{2}$ is a root.  
+> Through long division, we get $f(x) = (x + \frac{1}{2})(2x^2 - 2x + 6)$.  
+> Through the quadratic formula, $f(x) = 2(x + \frac{1}{2})(x - \frac{1}{2} - \frac{i\sqrt{11}}{2})(x - \frac{1}{2} + \frac{i\sqrt{11}}{2})$.  
+> This is the fully factored polynomial.  
+
+This is also useful for finding **whether a root is rational**.
+
+Prove $\sqrt[4]{5}$ is irrational:
+
+> Let $c = \sqrt[4]{5}$. Then $c^4 = 5$ and $c$ is a root of $x^4 - 5$.  
+> Suppose $c$ is rational. Then $\exists p, q \in \mb{Z}, \gcd(p, q) = 1 \implies \frac{p}{q} = c$.  
+> By RRT, $p \mid -5 \wedge q \mid 1$. So $c = 1, 5$.  
+> But 1 or 5 are not roots to $x^4 - 5$, which is a contradiction.  
+> So $\sqrt[4]{5}$ must be irrational.  
+
+This can work generally, but for larger amounts of factors it becomes impractical to test all of them.
+
+Factor $f(x) = x^4 - \sqrt[4]{5}$:
+
+> Clearly, $x^4 = 5 = 5(\cos 0 + \imag \sin 0)$.  
+> By CNRT, $x = \sqrt[4]{5} = \sqrt[4]{5}\left(\cos 0 + \imag \sin 0\right), \sqrt[4]{5}\left(\cos \frac{\pi}{2} + \imag \sin \frac{\pi}{2}\right), \sqrt[4]{5}\left(\cos \pi + \imag \sin \pi\right), \sqrt[4]{5}\left(\cos \frac{3\pi}{2} + \imag \sin \frac{3\pi}{2}\right)$.  
+> So $x = \sqrt[4]{5}, \imag\sqrt[4]{5}, -\sqrt[4]{5}, -\imag\sqrt[4]{5}$.  
+> By FT1, $x^4 - 5 = (x - \sqrt[4]{5})(x - \imag\sqrt[4]{5})(x + \sqrt[4]{5})(x + \imag\sqrt[4]{5})$.  
+
+# 27/11/13
+
+Fundemental Theorem of Algebra (FTA)
+------------------------------------
+
+Proved by Gauss, 1799
+
+Proposition: every $f(x) \in \mb{C}[x]$ of degree $n > 0$ has a root $c \in \mb{C}$.
+
+Proof:
+
+> ;wip
+
+### Unnamed Proposition (CPN)
+
+Proposition: every $f(x) \in \mb{C}[x]$ of degree $n \ge 1$ can be written as a product of $n$ linear factors.
+
+Also, if $f(x) = a_nx^n + \ldots + a_0$, then in factored form it is written as $f(x) = a_n(x - c_1) \cdots (x - c_n)$. In other words, the leading coefficient of a polynomial is the constant factor.
+
+So every $f(x) \in \mb{C}[x]$ of degree $n > 0$ has $n$ roots, counting duplicated roots. A function of degree $n$ will have $n$ roots, if we consider the multiplicities.
+
+Proof:
+
+> Suppose $f(x) \in \mb{C}[x]$ of degree $n > 0$. Then by FTA, $\exists c_1 \in \mb{C}, f(c_1) = 0$, and $(x - c_1)$ is a factor.  
+> So $\exists g(x) \in \mb{C}[x], f(x) = g(x)(x - c_1)$, where the degree of $g(x)$ is one less than that of $f(x)$.  
+> If the degree of 
+> We can repeat this on $g(x)$ to get another linear factor, and so on, until the degree is 0.  
+> So $f(x) = k(x - c_1) \cdots (x - c_n)$.  
+
+### Roots
+
+Roots can be repeated multiple times. The number of times $(x - c)$ occurs in the factored form of $f(x)$ is the **multiplicity** of the root $c$.
+
+Note that $f(x) = x^2 - 2x + 1 = (x + 1)^2$ has **one root**, of **multiplicity two**. There is only one root, but it appears twice.
+
+### Unnamed Proposition
+
+Proposition: if $f(x) \in \mb{R}[x]$ with degree $n > 0$, then $f(x)$ factors in $\mb{R}[x]$ as a product of linear and quadratic polynomials.
+
+In other words, if we work purely in real numbers, we can always factor polynomials in real numbers into linear and quadratic polynomials.
+
+Proof:
+
+> ;wip: proof in course notes
+
+Factor $x^4 + 1$:
+
+> Clearly, this is equivalent to $x^4 = -1$, and by CNRT, $x = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag, \frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}\imag, -\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag, -\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}\imag$.  
+> Note that there are two conjugate pairs, which both form quadratic polynomials.  
+> So $x^4 + 1 = ((\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag)(\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag))((-\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag)(-\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}\imag))$.  
+> So $x^4 + 1 = (x^2 - \sqrt{2}x + 1)(x^2 + \sqrt{2}x + 1)$.  
+
+Galois proved in the early 1800s that finding the factorizations in impossible for the general case for polynomials of degree 5 or more.
