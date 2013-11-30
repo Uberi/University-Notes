@@ -291,7 +291,7 @@ $e$ is a constant used in many places in mathematics. It is approximately equal 
 There are several ways to define $e$:
 
 * As a limit: $e = \displaystyle\lim_{x \to \infty}{(1 + \frac{1}{x})^n}$.
-* As an infinite series: $e = \sum\limits_{n = 0}^\infty \frac{1}{n!}$.
+* As an infinite series: $e = \sum_{n = 0}^\infty \frac{1}{n!}$.
 * Graphically with tangents: of all exponential equations of the form $y = a^x, a > 0$, only where $a = e$ does the tangent of the graph have a slope of 1 at $x = 0$.
 * Also, $a = e$ is the only value for which $\displaystyle\lim_{h \to 0} \frac{a^h - 1}{h} = 1$.
 
@@ -1607,7 +1607,7 @@ $$
 
 We don't have to stop at quadratics. We can use any order of polynomial to get better approximations. This is known as a Taylor series.
 
-For example, $e^x = \sum\limits_{n = 0}^\infty \frac{x^n}{n!}$.
+For example, $e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}$.
 
 # 30/10/13
 
@@ -2190,7 +2190,7 @@ $\sum$ is the Greek letter "sigma", and generally represents a sum.
 
 Let $a_1, \ldots, a_n$ be real numbers. Let $m, n$ be integers, $m \le n$.
 
-Then $\sum\limits_{i = m}^n a_i = a_1 + \ldots + a_n$ - the "sum of $a_i$ from $i = 1$ to $i = n$".
+Then $\sum_{i = m}^n a_i = a_1 + \ldots + a_n$ - the "sum of $a_i$ from $i = 1$ to $i = n$".
 
 It does not have to start at 1 - the number below can be any integer.
 
@@ -2198,25 +2198,25 @@ An infinite sum is when $n = \infty$.
 
 ### Properties
 
-If $c$ is a constant (doesn't depend on $i$), then $\sum\limits_{i = m}^n cf(i) = c\sum\limits_{i = m}^n f(i)$.
+If $c$ is a constant (doesn't depend on $i$), then $\sum_{i = m}^n cf(i) = c\sum_{i = m}^n f(i)$.
 
-$\sum\limits_{i = m}^n (f(i) \pm g(i)) = (\sum\limits_{i = m}^n f(i)) \pm (\sum\limits_{i = m}^n g(i))$. Note that this does not work for infinite sums.
+$\sum_{i = m}^n (f(i) \pm g(i)) = (\sum_{i = m}^n f(i)) \pm (\sum_{i = m}^n g(i))$. Note that this does not work for infinite sums.
 
-$\sum\limits_{i = m}^n 1 = n - m + 1$.
+$\sum_{i = m}^n 1 = n - m + 1$.
 
 # 18/11/13
 
-$\sum\limits_{i = 1}^n i = \frac{n(n + 1)}{2}$.
+$\sum_{i = 1}^n i = \frac{n(n + 1)}{2}$.
 
 Proof:
 
-> Clearly, $\sum\limits_{i = 1}^n i = 1 + \ldots + n = n + \ldots + 1$.  
-> So $2\sum\limits_{i = 1}^n i = (1 + \ldots + n) + (n + \ldots + 1) = (n + 1) + \ldots + (n + 1) = n(n + 1)$.  
-> So $\sum\limits_{i = 1}^n i = \frac{n(n + 1)}{2}$.  
+> Clearly, $\sum_{i = 1}^n i = 1 + \ldots + n = n + \ldots + 1$.  
+> So $2\sum_{i = 1}^n i = (1 + \ldots + n) + (n + \ldots + 1) = (n + 1) + \ldots + (n + 1) = n(n + 1)$.  
+> So $\sum_{i = 1}^n i = \frac{n(n + 1)}{2}$.  
 
-$\sum\limits_{i = 1}^n i^2 = \frac{n(n + 1)(2n + 1)}{6}$.
+$\sum_{i = 1}^n i^2 = \frac{n(n + 1)(2n + 1)}{6}$.
 
-$\sum\limits_{i = 1}^n i^3 = \frac{n^2(n + 1)^2}{4}$.
+$\sum_{i = 1}^n i^3 = \frac{n^2(n + 1)^2}{4}$.
 
 Integral Calculus
 -----------------
@@ -2245,7 +2245,7 @@ To get a better estimate, we would increase the number of rectangles. This would
 
 To get the exact value, we need to use infinitely many rectangles that are each infinitely thin. In other words, we take the limit of the bounds as the number of rectangles approaches infinity, or the subinterval length approaches 0.
 
-We divide the interval $[a, b]$ into $n$ subintervals. So now there are $the intervals $[x_0, x_1], \ldots, [x_{n - 1}, x_n], x_0 = a, x_n = b$.
+We divide the interval $[a, b]$ into $n$ subintervals. So now there are the intervals $[x_0, x_1], \ldots, [x_{n - 1}, x_n], x_0 = a, x_n = b$.
 
 Often, we will use equally sized intervals. In this case, each interval has the width $\frac{b - a}{2}$.
 
@@ -2253,17 +2253,17 @@ Now we construct a rectangle on each interval. It has the same width as the inte
 
 The area of the rectangle is $(x_i - x_{i - 1})f(c)$. The area of all of the rectangles is an approximation of the function's area.
 
-We write this as $\sum\limits_{i = 1}^n f(c_i) \delta x$. This is called the **Riemann Sum**. We can use $\delta x = \frac{b - a}{2}$ if the intervals are equal in width.
+We write this as $\sum_{i = 1}^n f(c_i) \delta x$. This is called the **Riemann Sum**. We can use $\delta x = \frac{b - a}{2}$ if the intervals are equal in width.
 
-So the exact area under the curve is $\lim_{n \to \infty} \sum\limits_{i = 1}^n f(c_i) \delta x$. This is the **definition of the definite integral**.
+So the exact area under the curve is $\lim_{n \to \infty} \sum_{i = 1}^n f(c_i) \delta x$. This is the **definition of the definite integral**.
 
-This can be written as $\lim_{n \to \infty} \sum\limits_{i = 1}^n f(a) \frac{b - a}{n}$ if we use the left endpoint and equally sized intervals.
+This can be written as $\lim_{n \to \infty} \sum_{i = 1}^n f(\frac{b - a}{n}i + a) \frac{b - a}{n}$ if we use the left endpoint and equally sized intervals.
 
 Now we apply this to the example.
 
-> We want to find $\lim_{n \to \infty} \sum\limits_{i = 1}^n c_i^2 \frac{1}{n}$.  
+> We want to find $\lim_{n \to \infty} \sum_{i = 1}^n c_i^2 \frac{1}{n}$.  
 > Clearly, $c_i = i\frac{1}{n}$ - the index times the width of an interval.  
-> So $\lim_{n \to \infty} \sum\limits_{i = 1}^n c_i^2 \frac{1}{n} = \lim_{n \to \infty} \sum\limits_{i = 1}^n i^2\frac{1}{n^2} \frac{1}{n} = \lim_{n \to \infty} \frac{1}{n^3} \sum\limits_{i = 1}^n i^2 = \lim_{n \to \infty} \frac{1}{n^3} \frac{n(n + 1)(2n + 1)}{6} = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \frac{1}{3}$.  
+> So $\lim_{n \to \infty} \sum_{i = 1}^n c_i^2 \frac{1}{n} = \lim_{n \to \infty} \sum_{i = 1}^n i^2\frac{1}{n^2} \frac{1}{n} = \lim_{n \to \infty} \frac{1}{n^3} \sum_{i = 1}^n i^2 = \lim_{n \to \infty} \frac{1}{n^3} \frac{n(n + 1)(2n + 1)}{6} = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \frac{1}{3}$.  
 > So the area is $\frac{1}{3}$ square units.
 
 # 20/11/13
@@ -2287,7 +2287,9 @@ Velocity is the derivative of displacement - $v(t) = d'(t)$. So **displacement i
 
 ### Definite Integral
 
-The **definite integral** of $f$ from $a$ to $b$ is $\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum\limits_{i = 1}^n f(c_i) \delta x, c_i \in [x_{i - 1}, x_i]$.
+The **definite integral** of $f$ from $a$ to $b$ is $\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n f(c_i) \delta x, c_i \in [x_{i - 1}, x_i], \delta x = x_i - x_{i - 1}$.
+
+If we are using equal partition sizes, this is more easily written as $\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n f\left(\frac{b - a}{n}i + a\right) \frac{b - a}{n}$
 
 If the limit exists, we say $f$ is **integrable**.
 
@@ -2383,11 +2385,13 @@ The Fundemental Theorem of Calculus
 
 ### Part 1
 
-If $f$ is continuous over $[a, b]$, then $g(x) = \int_a^x f(t) \dee t$ is continuous over $[a, b]$ and differentiable on $(a, b)$, and $g'(x) = f(x)$.
+If $f$ is continuous over $[a, b]$, then $g(x) = \int_a^x f(t) \dee t$ is continuous over $[a, b]$ and differentiable on $(a, b)$, and $\frac{\dee}{\dee x} g(x) = f(x)$.
 
 In other words, $\frac{\dee}{\dee x} \int_a^x f(x) \dee t = f(x)$.
 
 Differentiation and integration are inverse operations.
+
+So $\frac{\dee}{\dee x} \int_a^x f(t) \dee t = f(x)$
 
 $g(x)$ is an antiderivative of $f(x)$ - the "area under the curve from $a$ to $x$ function".
 
@@ -2516,9 +2520,81 @@ Based on the integrated form of the chain rule.
 
 The basic rule is $\int \frac{\dee}{\dee g} f(g(x)) \cdot \frac{\dee}{\dee x} g(x) \dee x = f(g(x)) + c$.
 
-This is generally useful when we have a function and choose a $u$ that makes it simple to integrate both the function with respect to $u$ and $u$ itself and also the .
-
 Find $\int \frac{x}{x^2 + 1} \dee x$:
 
 > Let $u = x^2 + 1$.  
-> So $\dee u = 2x \dee x$ and $\int \frac{x}{x^2 + 1} \dee x = \int \frac{x \dee x}{x^2 + 1} = \int \frac{\dee u}{2u} = \frac{1}{2} \ln \abs{u} + c = \frac{\ln \abs{x^2 + 1}}{2} + c$.  
+> So $\dee u = 2x \dee x$ and $\int \frac{x}{x^2 + 1} \dee x = \int \frac{x \dee x}{x^2 + 1} = \int \frac{1}{x^2 + 1} \dee 2x = \int \frac{1}{u} \dee u = \frac{1}{2} \ln \abs{u} + c = \frac{\ln \abs{x^2 + 1}}{2} + c$.  
+
+# 29/11/13
+
+The method of substitution is useful when we can use the derivative of one part of the function to cancel out another part.
+
+The method of substitution doesn't work everywhere. There are a few forms that it is most often used on:
+
+* $\int f(x^n) \cdot x^{n - 1} \dee x$.
+* $\int f(e^x) e^x \dee x$.
+* $\int \frac{f(\ln x)}{x} \dee x$.
+* $\int \frac{f(\arctan x)}{1 + x^2} \dee x$.
+* $\int \frac{f(\arcsin x)}{\sqrt{1 - x^2}}$.
+* $\int f(\sin x) \cos x \dee x$.
+
+The method is usually useful if $g'(x)$ is a factor in the integrand.
+
+Evaluate $\int \tan x \dee x$:
+
+> Clearly, $\int \tan x \dee x = \int \frac{\sin x}{\cos x} \dee x$.  
+> We have two choices for substitution here, $\sin x$ and $\cos x$.  
+> Let $u = \cos x$. Then $\dee u = -\sin x \dee x$  
+> Then $\int \tan x \dee x = -\int \frac{1}{u} \dee u = -\ln \abs{u} + c = -\ln \abs{\cos x} + c = \ln \abs{\sec x} + c$.  
+
+Evaluate $\int e^x \sqrt{1 + e^x} \dee x$:
+
+> Let $u = 1 + e^x$ (we also include the constant to avoid dealing with it later).  
+> Then $\dee x = \dee u \frac{1}{e^x}$.  
+> So $\int e^x \sqrt{1 + e^x} \dee x = \int e^x \sqrt{u} \dee u \frac{1}{e^x} = \int \sqrt{u} \dee u = \frac{2}{3}u^\frac{3}{2} = \frac{2}{3}(1 + e^x)^\frac{3}{2} + c$.  
+
+Evaluate $\int x^2 \sqrt{1 + x^3} \dee x$:
+
+> Let $u = 1 + x^3$.  
+> Then $\dee x = \dee u \frac{1}{3x^2}$.  
+> So $\int x^2 \sqrt{1 + x^3} \dee x = \int x^2 \sqrt{u} \dee u \frac{1}{3x^2} = \frac{1}{3} \int \sqrt{u} \dee u = \frac{1}{3} \frac{2}{3}u^\frac{3}{2} = \frac{2}{9}(1 + x^3)^\frac{3}{2} + c$.  
+
+Evaluate $\int x^3 \sqrt{1 + x^2} \dee x$:
+
+> Let $u = 1 + x^2$.  
+> Then $\dee x = \dee u \frac{1}{2x}$.  
+> So $\int x^3 \sqrt{1 + x^2} \dee x = \int x^3 \sqrt{u} \dee u \frac{1}{2x} = \int x^2 \sqrt{u} \dee u \frac{1}{2}$.  
+> We still have an $x^2$ factor. But that's OK, because clearly, $x^2 = u - 1$.  
+> So $\int x^3 \sqrt{1 + x^2} \dee x = \frac{1}{2} \int (u - 1) \sqrt{u} \dee u = \frac{1}{2} \int u^\frac{3}{2} - \sqrt{u} \dee u = \frac{1}{2} \left(\frac{2}{5}u^\frac{5}{2} - \frac{2}{3}u^\frac{3}{2}\right + c) = \frac{1}{5}u^\frac{5}{2} - \frac{1}{3}u^\frac{3}{2} + c$.  
+
+We can check our answer by integrating it again. It should result in the integrand if it is correct.
+
+Exercises:
+
+* $\int \sqrt[3]{3 + x^5} x^4 \dee x$
+* $\int \frac{e^x}{1 + e^{2x}} \dee x$
+* $\int \frac{\sin(2 \ln x)}{x} \dee x$
+* $\int \frac{e^{\arctan x}}{1 + x^2} \dee x$
+
+### Definite Integrals
+
+When using definite integrals, we need to be aware of the limits of integration.
+
+Consider $\int_1^2 xe^{-x^2} \dee x$:
+
+> Let $u = x^2$. Then $\dee u = 2x \dee x$.  
+> So $\int_{u(1)}^{u(2)} xe^{-u} \dee x$.  
+> ;wip: -\frac{1}{2}(e^{-4} - e^{-1})
+
+Areas Between Curves
+--------------------
+
+Given functions $f(x)$ and $g(x)$, with $g(x) \ge f(x)$ over $[a, b]$, the area between the curves is $\int_a^b g(x) - f(x) \dee x$.
+
+Proof:
+
+> ;wip: go through the riemann integral
+
+Find the area of the region bounded by $x^2$ and $\sqrt{x}$:
+
+> ;wip: integrate from 0 to 1 and then do \int_0^1 \sqrt{x} - x^2 \dee x

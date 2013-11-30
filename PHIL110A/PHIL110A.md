@@ -895,8 +895,6 @@ To Popper, science is looking at the world and eliminating the false things. Eve
 
 # 14/11/13
 
-;wip: paper 2 is due on tuesday, though possibly not since we didn't learn about Kuhn yet
-
 Notes on paper 1:
 
 * When the assignment asked to prove that the premises support the conclusion, it meant **validity**, not soundness, which most people talked about.
@@ -989,7 +987,7 @@ Willard Van Orman Quine
 
 Quine was a philosopher of science, focusing on the philosophy itself rather than practical science. Quine criticized Popper's falsificationism.
 
-> Hypotheses stand or fall in groups.
+> Hypotheses are falsified in groups.
 
 For example, if `Mary is an excellent student`, we would expect that `Mary does well on an exam`. The general form is $H \implies O$ - hypothesis implies observation.
 
@@ -1099,3 +1097,53 @@ We want to control for as many factors as we can, even though it may not be poss
 Fox Keller states that traditionally, we need to be distant and dispassionate from our work in order to be objective. But men and women are raised differently, and we might be able to be more objective by being close and passionate about our work.
 
 For example, I might not be able to judge my friend objectively because we are close, but Fox Keller might say that I could be more objective by being able to see things other people would not about the subject.
+
+# 28/11/13
+
+Objectivity
+-----------
+
+The goal is to know better. When we say something is objective, we mean that we believe it is true and we have persuasive evidence that it is true.
+
+However, it isn't always possible to erase our own perspective. Everyone's auxilary hypotheses are different.
+
+### Critical Contextual Empiricism
+
+View put forth by Helen Longino. Cleans up objectivity by intersubjectivity.
+
+Objectivity is not a yes or no thing - it is a continuum. Things can be more or less objective.
+
+Individual people cannot be objective. Objectivity is the result of communities interacting. This is because the auxilary hypotheses are best found through debating with other people.
+
+A community needs to be **diverse** to maximise objectivity. The best way to see the values one holds is to argue with a person who holds a different set of values.
+
+A community needs to be set up to promote **democratic debate**. Everyone needs to have a voice and a chance to speak, and people should not be ignored even if they are disagreeable. People should keep an open mind and be able to change their views.
+
+We know our knowledge is not perfect. Our job is to make it as strong as we can.
+
+Overview
+--------
+
+### Philisophy of Science
+
+* Popper
+    * Falsificationism - falsify hypotheses
+    * Demarcation - separate what is science and what isn't
+    * Example: Einstein eclipse relativity test in 1919 was very risky but passing it boosted confidence in relativity significantly.
+    * Normative, logical approach, how things should be
+* Kuhn
+    * Normal science
+    * Paradigms
+    * Scientific revolution
+    * Descriptive, historical approach, how things are
+* Quine
+    * Auxilary hypotheses, initial conditions
+    * Hypotheses are falsified in groups
+    * Normative, logical approach
+* Keller
+    * Feminist philosophy of science - pointing out problems in the activities (liberal) or rules (radical) of science
+    * Goal is to trying to make sure we do science the best we can
+    * Gender biases affecting objectivity
+    * Biases in objectivity sneak in our auxilary hypotheses
+
+**APPLAUSE**

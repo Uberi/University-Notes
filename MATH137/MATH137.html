@@ -263,7 +263,7 @@ x^2 - 10 = -3 f^{-1}(x) \\
 <p>There are several ways to define <span class="math">\(e\)</span>:</p>
 <ul>
 <li>As a limit: <span class="math">\(e = \displaystyle\lim_{x \to \infty}{(1 + \frac{1}{x})^n}\)</span>.</li>
-<li>As an infinite series: <span class="math">\(e = \sum\limits_{n = 0}^\infty \frac{1}{n!}\)</span>.</li>
+<li>As an infinite series: <span class="math">\(e = \sum_{n = 0}^\infty \frac{1}{n!}\)</span>.</li>
 <li>Graphically with tangents: of all exponential equations of the form <span class="math">\(y = a^x, a &gt; 0\)</span>, only where <span class="math">\(a = e\)</span> does the tangent of the graph have a slope of 1 at <span class="math">\(x = 0\)</span>.</li>
 <li>Also, <span class="math">\(a = e\)</span> is the only value for which <span class="math">\(\displaystyle\lim_{h \to 0} \frac{a^h - 1}{h} = 1\)</span>.</li>
 </ul>
@@ -1206,7 +1206,7 @@ Q(10) &amp;= 3 + \frac{1}{6} + \frac{1}{108} = \frac{1029}{324} \\
 \end{align}
 \]</span></p>
 <p>We don't have to stop at quadratics. We can use any order of polynomial to get better approximations. This is known as a Taylor series.</p>
-<p>For example, <span class="math">\(e^x = \sum\limits_{n = 0}^\infty \frac{x^n}{n!}\)</span>.</p>
+<p>For example, <span class="math">\(e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}\)</span>.</p>
 <h1 id="section-20">30/10/13</h1>
 <h2 id="minmax-values">Min/Max Values</h2>
 <p>A function <span class="math">\(f\)</span> has an <strong>absolute/global maximum</strong> at <span class="math">\(c\)</span> if <span class="math">\(f(c) \ge f(x)\)</span> for all <span class="math">\(x\)</span> in the domain of <span class="math">\(f\)</span>.</p>
@@ -1550,21 +1550,21 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <h2 id="sigma-notation">Sigma Notation</h2>
 <p><span class="math">\(\sum\)</span> is the Greek letter &quot;sigma&quot;, and generally represents a sum.</p>
 <p>Let <span class="math">\(a_1, \ldots, a_n\)</span> be real numbers. Let <span class="math">\(m, n\)</span> be integers, <span class="math">\(m \le n\)</span>.</p>
-<p>Then <span class="math">\(\sum\limits_{i = m}^n a_i = a_1 + \ldots + a_n\)</span> - the &quot;sum of <span class="math">\(a_i\)</span> from <span class="math">\(i = 1\)</span> to <span class="math">\(i = n\)</span>&quot;.</p>
+<p>Then <span class="math">\(\sum_{i = m}^n a_i = a_1 + \ldots + a_n\)</span> - the &quot;sum of <span class="math">\(a_i\)</span> from <span class="math">\(i = 1\)</span> to <span class="math">\(i = n\)</span>&quot;.</p>
 <p>It does not have to start at 1 - the number below can be any integer.</p>
 <p>An infinite sum is when <span class="math">\(n = \infty\)</span>.</p>
 <h3 id="properties-1">Properties</h3>
-<p>If <span class="math">\(c\)</span> is a constant (doesn't depend on <span class="math">\(i\)</span>), then <span class="math">\(\sum\limits_{i = m}^n cf(i) = c\sum\limits_{i = m}^n f(i)\)</span>.</p>
-<p><span class="math">\(\sum\limits_{i = m}^n (f(i) \pm g(i)) = (\sum\limits_{i = m}^n f(i)) \pm (\sum\limits_{i = m}^n g(i))\)</span>. Note that this does not work for infinite sums.</p>
-<p><span class="math">\(\sum\limits_{i = m}^n 1 = n - m + 1\)</span>.</p>
+<p>If <span class="math">\(c\)</span> is a constant (doesn't depend on <span class="math">\(i\)</span>), then <span class="math">\(\sum_{i = m}^n cf(i) = c\sum_{i = m}^n f(i)\)</span>.</p>
+<p><span class="math">\(\sum_{i = m}^n (f(i) \pm g(i)) = (\sum_{i = m}^n f(i)) \pm (\sum_{i = m}^n g(i))\)</span>. Note that this does not work for infinite sums.</p>
+<p><span class="math">\(\sum_{i = m}^n 1 = n - m + 1\)</span>.</p>
 <h1 id="section-28">18/11/13</h1>
-<p><span class="math">\(\sum\limits_{i = 1}^n i = \frac{n(n + 1)}{2}\)</span>.</p>
+<p><span class="math">\(\sum_{i = 1}^n i = \frac{n(n + 1)}{2}\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\sum\limits_{i = 1}^n i = 1 + \ldots + n = n + \ldots + 1\)</span>.<br />So <span class="math">\(2\sum\limits_{i = 1}^n i = (1 + \ldots + n) + (n + \ldots + 1) = (n + 1) + \ldots + (n + 1) = n(n + 1)\)</span>.<br />So <span class="math">\(\sum\limits_{i = 1}^n i = \frac{n(n + 1)}{2}\)</span>.</p>
+<p>Clearly, <span class="math">\(\sum_{i = 1}^n i = 1 + \ldots + n = n + \ldots + 1\)</span>.<br />So <span class="math">\(2\sum_{i = 1}^n i = (1 + \ldots + n) + (n + \ldots + 1) = (n + 1) + \ldots + (n + 1) = n(n + 1)\)</span>.<br />So <span class="math">\(\sum_{i = 1}^n i = \frac{n(n + 1)}{2}\)</span>.</p>
 </blockquote>
-<p><span class="math">\(\sum\limits_{i = 1}^n i^2 = \frac{n(n + 1)(2n + 1)}{6}\)</span>.</p>
-<p><span class="math">\(\sum\limits_{i = 1}^n i^3 = \frac{n^2(n + 1)^2}{4}\)</span>.</p>
+<p><span class="math">\(\sum_{i = 1}^n i^2 = \frac{n(n + 1)(2n + 1)}{6}\)</span>.</p>
+<p><span class="math">\(\sum_{i = 1}^n i^3 = \frac{n^2(n + 1)^2}{4}\)</span>.</p>
 <h2 id="integral-calculus">Integral Calculus</h2>
 <p>Given a continuous function <span class="math">\(f(x) &gt; 0\)</span> over <span class="math">\([a, b]\)</span>, what is the area below the curve and above the x-axis?</p>
 <p>This is easy for things like rectangles, but there is no formula for the area below a general curve.</p>
@@ -1576,16 +1576,16 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 </blockquote>
 <p>To get a better estimate, we would increase the number of rectangles. This would refine the estimate and make the bounds closer. The idea is that the bounds eventually converge towards the same value.</p>
 <p>To get the exact value, we need to use infinitely many rectangles that are each infinitely thin. In other words, we take the limit of the bounds as the number of rectangles approaches infinity, or the subinterval length approaches 0.</p>
-<p>We divide the interval <span class="math">\([a, b]\)</span> into <span class="math">\(n\)</span> subintervals. So now there are <span class="math">\(the intervals \)</span>[x_0, x_1], , [x_{n - 1}, x_n], x_0 = a, x_n = b$.</p>
+<p>We divide the interval <span class="math">\([a, b]\)</span> into <span class="math">\(n\)</span> subintervals. So now there are the intervals <span class="math">\([x_0, x_1], \ldots, [x_{n - 1}, x_n], x_0 = a, x_n = b\)</span>.</p>
 <p>Often, we will use equally sized intervals. In this case, each interval has the width <span class="math">\(\frac{b - a}{2}\)</span>.</p>
 <p>Now we construct a rectangle on each interval. It has the same width as the interval. We choose a <span class="math">\(c_i \in [x_{i - 1}, x_i]\)</span> and make the rectangle height <span class="math">\(f(c_i)\)</span>. Often, we use the midpoint as <span class="math">\(c_i\)</span>, so <span class="math">\(c_i = \frac{x_{i - 1} + x_i}{2}\)</span>. The choice of sample point is largely irrelevant since the area will eventually converge.</p>
 <p>The area of the rectangle is <span class="math">\((x_i - x_{i - 1})f(c)\)</span>. The area of all of the rectangles is an approximation of the function's area.</p>
-<p>We write this as <span class="math">\(\sum\limits_{i = 1}^n f(c_i) \delta x\)</span>. This is called the <strong>Riemann Sum</strong>. We can use <span class="math">\(\delta x = \frac{b - a}{2}\)</span> if the intervals are equal in width.</p>
-<p>So the exact area under the curve is <span class="math">\(\lim_{n \to \infty} \sum\limits_{i = 1}^n f(c_i) \delta x\)</span>. This is the <strong>definition of the definite integral</strong>.</p>
-<p>This can be written as <span class="math">\(\lim_{n \to \infty} \sum\limits_{i = 1}^n f(a) \frac{b - a}{n}\)</span> if we use the left endpoint and equally sized intervals.</p>
+<p>We write this as <span class="math">\(\sum_{i = 1}^n f(c_i) \delta x\)</span>. This is called the <strong>Riemann Sum</strong>. We can use <span class="math">\(\delta x = \frac{b - a}{2}\)</span> if the intervals are equal in width.</p>
+<p>So the exact area under the curve is <span class="math">\(\lim_{n \to \infty} \sum_{i = 1}^n f(c_i) \delta x\)</span>. This is the <strong>definition of the definite integral</strong>.</p>
+<p>This can be written as <span class="math">\(\lim_{n \to \infty} \sum_{i = 1}^n f(\frac{b - a}{n}i + a) \frac{b - a}{n}\)</span> if we use the left endpoint and equally sized intervals.</p>
 <p>Now we apply this to the example.</p>
 <blockquote>
-<p>We want to find <span class="math">\(\lim_{n \to \infty} \sum\limits_{i = 1}^n c_i^2 \frac{1}{n}\)</span>.<br />Clearly, <span class="math">\(c_i = i\frac{1}{n}\)</span> - the index times the width of an interval.<br />So <span class="math">\(\lim_{n \to \infty} \sum\limits_{i = 1}^n c_i^2 \frac{1}{n} = \lim_{n \to \infty} \sum\limits_{i = 1}^n i^2\frac{1}{n^2} \frac{1}{n} = \lim_{n \to \infty} \frac{1}{n^3} \sum\limits_{i = 1}^n i^2 = \lim_{n \to \infty} \frac{1}{n^3} \frac{n(n + 1)(2n + 1)}{6} = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \frac{1}{3}\)</span>.<br />So the area is <span class="math">\(\frac{1}{3}\)</span> square units.</p>
+<p>We want to find <span class="math">\(\lim_{n \to \infty} \sum_{i = 1}^n c_i^2 \frac{1}{n}\)</span>.<br />Clearly, <span class="math">\(c_i = i\frac{1}{n}\)</span> - the index times the width of an interval.<br />So <span class="math">\(\lim_{n \to \infty} \sum_{i = 1}^n c_i^2 \frac{1}{n} = \lim_{n \to \infty} \sum_{i = 1}^n i^2\frac{1}{n^2} \frac{1}{n} = \lim_{n \to \infty} \frac{1}{n^3} \sum_{i = 1}^n i^2 = \lim_{n \to \infty} \frac{1}{n^3} \frac{n(n + 1)(2n + 1)}{6} = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \frac{1}{3}\)</span>.<br />So the area is <span class="math">\(\frac{1}{3}\)</span> square units.</p>
 </blockquote>
 <h1 id="section-29">20/11/13</h1>
 <p>We can use different subinterval sizes based on the behaviour of the function. For example, if a function has some oscillation near the origin but levels out elsewhere, we would use smaller subintervals near the origin and larger ones elsewhere.</p>
@@ -1597,7 +1597,8 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <p>If we have a table of times and corresponding speeds, we can pretend it forms a curve and estimate the distance using the rectangle approximation.</p>
 <p>Velocity is the derivative of displacement - <span class="math">\(v(t) = d&#39;(t)\)</span>. So <strong>displacement is the antiderivative of velocity</strong>.</p>
 <h3 id="definite-integral">Definite Integral</h3>
-<p>The <strong>definite integral</strong> of <span class="math">\(f\)</span> from <span class="math">\(a\)</span> to <span class="math">\(b\)</span> is <span class="math">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum\limits_{i = 1}^n f(c_i) \delta x, c_i \in [x_{i - 1}, x_i]\)</span>.</p>
+<p>The <strong>definite integral</strong> of <span class="math">\(f\)</span> from <span class="math">\(a\)</span> to <span class="math">\(b\)</span> is <span class="math">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n f(c_i) \delta x, c_i \in [x_{i - 1}, x_i], \delta x = x_i - x_{i - 1}\)</span>.</p>
+<p>If we are using equal partition sizes, this is more easily written as <span class="math">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n f\left(\frac{b - a}{n}i + a\right) \frac{b - a}{n}\)</span></p>
 <p>If the limit exists, we say <span class="math">\(f\)</span> is <strong>integrable</strong>.</p>
 <p>There are a lot more types of functions that can be integrated compared to those that can be differentiated. Integrable functions can even be discontinuous.</p>
 <p>Note that the definition says nothing about the area under the curve. The area is simply a geometric interpretation of the integral - like the derivative being interpreted as the slope of the tangent.</p>
@@ -1670,9 +1671,10 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <h1 id="section-31">25/11/13</h1>
 <h2 id="the-fundemental-theorem-of-calculus">The Fundemental Theorem of Calculus</h2>
 <h3 id="part-1">Part 1</h3>
-<p>If <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span>, then <span class="math">\(g(x) = \int_a^x f(t) \dee t\)</span> is continuous over <span class="math">\([a, b]\)</span> and differentiable on <span class="math">\((a, b)\)</span>, and <span class="math">\(g&#39;(x) = f(x)\)</span>.</p>
+<p>If <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span>, then <span class="math">\(g(x) = \int_a^x f(t) \dee t\)</span> is continuous over <span class="math">\([a, b]\)</span> and differentiable on <span class="math">\((a, b)\)</span>, and <span class="math">\(\frac{\dee}{\dee x} g(x) = f(x)\)</span>.</p>
 <p>In other words, <span class="math">\(\frac{\dee}{\dee x} \int_a^x f(x) \dee t = f(x)\)</span>.</p>
 <p>Differentiation and integration are inverse operations.</p>
+<p>So <span class="math">\(\frac{\dee}{\dee x} \int_a^x f(t) \dee t = f(x)\)</span></p>
 <p><span class="math">\(g(x)\)</span> is an antiderivative of <span class="math">\(f(x)\)</span> - the &quot;area under the curve from <span class="math">\(a\)</span> to <span class="math">\(x\)</span> function&quot;.</p>
 <p>Any continuous function has an antiderivative.</p>
 <p>Proof:</p>
@@ -1755,10 +1757,61 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <p>Let <span class="math">\(u = g(x)\)</span>. So <span class="math">\(\frac{\dee u}{\dee x} = g&#39;(x)\)</span>. Then <span class="math">\(\dee u = g&#39;(x) \dee x\)</span>.<br />So <span class="math">\(\int \frac{\dee}{\dee g} f(g(x)) \cdot \frac{\dee}{\dee x} g(x) \dee x = \int \frac{\dee}{\dee u} f(u) \dee u = f(u) + c = f(g(x)) + c\)</span>.</p>
 </blockquote>
 <p>The basic rule is <span class="math">\(\int \frac{\dee}{\dee g} f(g(x)) \cdot \frac{\dee}{\dee x} g(x) \dee x = f(g(x)) + c\)</span>.</p>
-<p>This is generally useful when we have a function and choose a <span class="math">\(u\)</span> that makes it simple to integrate both the function with respect to <span class="math">\(u\)</span> and <span class="math">\(u\)</span> itself and also the .</p>
 <p>Find <span class="math">\(\int \frac{x}{x^2 + 1} \dee x\)</span>:</p>
 <blockquote>
-<p>Let <span class="math">\(u = x^2 + 1\)</span>.<br />So <span class="math">\(\dee u = 2x \dee x\)</span> and <span class="math">\(\int \frac{x}{x^2 + 1} \dee x = \int \frac{x \dee x}{x^2 + 1} = \int \frac{\dee u}{2u} = \frac{1}{2} \ln \abs{u} + c = \frac{\ln \abs{x^2 + 1}}{2} + c\)</span>.</p>
+<p>Let <span class="math">\(u = x^2 + 1\)</span>.<br />So <span class="math">\(\dee u = 2x \dee x\)</span> and <span class="math">\(\int \frac{x}{x^2 + 1} \dee x = \int \frac{x \dee x}{x^2 + 1} = \int \frac{1}{x^2 + 1} \dee 2x = \int \frac{1}{u} \dee u = \frac{1}{2} \ln \abs{u} + c = \frac{\ln \abs{x^2 + 1}}{2} + c\)</span>.</p>
+</blockquote>
+<h1 id="section-33">29/11/13</h1>
+<p>The method of substitution is useful when we can use the derivative of one part of the function to cancel out another part.</p>
+<p>The method of substitution doesn't work everywhere. There are a few forms that it is most often used on:</p>
+<ul>
+<li><span class="math">\(\int f(x^n) \cdot x^{n - 1} \dee x\)</span>.</li>
+<li><span class="math">\(\int f(e^x) e^x \dee x\)</span>.</li>
+<li><span class="math">\(\int \frac{f(\ln x)}{x} \dee x\)</span>.</li>
+<li><span class="math">\(\int \frac{f(\arctan x)}{1 + x^2} \dee x\)</span>.</li>
+<li><span class="math">\(\int \frac{f(\arcsin x)}{\sqrt{1 - x^2}}\)</span>.</li>
+<li><span class="math">\(\int f(\sin x) \cos x \dee x\)</span>.</li>
+</ul>
+<p>The method is usually useful if <span class="math">\(g&#39;(x)\)</span> is a factor in the integrand.</p>
+<p>Evaluate <span class="math">\(\int \tan x \dee x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\int \tan x \dee x = \int \frac{\sin x}{\cos x} \dee x\)</span>.<br />We have two choices for substitution here, <span class="math">\(\sin x\)</span> and <span class="math">\(\cos x\)</span>.<br />Let <span class="math">\(u = \cos x\)</span>. Then <span class="math">\(\dee u = -\sin x \dee x\)</span><br />Then <span class="math">\(\int \tan x \dee x = -\int \frac{1}{u} \dee u = -\ln \abs{u} + c = -\ln \abs{\cos x} + c = \ln \abs{\sec x} + c\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math">\(\int e^x \sqrt{1 + e^x} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = 1 + e^x\)</span> (we also include the constant to avoid dealing with it later).<br />Then <span class="math">\(\dee x = \dee u \frac{1}{e^x}\)</span>.<br />So <span class="math">\(\int e^x \sqrt{1 + e^x} \dee x = \int e^x \sqrt{u} \dee u \frac{1}{e^x} = \int \sqrt{u} \dee u = \frac{2}{3}u^\frac{3}{2} = \frac{2}{3}(1 + e^x)^\frac{3}{2} + c\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math">\(\int x^2 \sqrt{1 + x^3} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = 1 + x^3\)</span>.<br />Then <span class="math">\(\dee x = \dee u \frac{1}{3x^2}\)</span>.<br />So <span class="math">\(\int x^2 \sqrt{1 + x^3} \dee x = \int x^2 \sqrt{u} \dee u \frac{1}{3x^2} = \frac{1}{3} \int \sqrt{u} \dee u = \frac{1}{3} \frac{2}{3}u^\frac{3}{2} = \frac{2}{9}(1 + x^3)^\frac{3}{2} + c\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math">\(\int x^3 \sqrt{1 + x^2} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = 1 + x^2\)</span>.<br />Then <span class="math">\(\dee x = \dee u \frac{1}{2x}\)</span>.<br />So <span class="math">\(\int x^3 \sqrt{1 + x^2} \dee x = \int x^3 \sqrt{u} \dee u \frac{1}{2x} = \int x^2 \sqrt{u} \dee u \frac{1}{2}\)</span>.<br />We still have an <span class="math">\(x^2\)</span> factor. But that's OK, because clearly, <span class="math">\(x^2 = u - 1\)</span>.<br />So <span class="math">\(\int x^3 \sqrt{1 + x^2} \dee x = \frac{1}{2} \int (u - 1) \sqrt{u} \dee u = \frac{1}{2} \int u^\frac{3}{2} - \sqrt{u} \dee u = \frac{1}{2} \left(\frac{2}{5}u^\frac{5}{2} - \frac{2}{3}u^\frac{3}{2}\right + c) = \frac{1}{5}u^\frac{5}{2} - \frac{1}{3}u^\frac{3}{2} + c\)</span>.</p>
+</blockquote>
+<p>We can check our answer by integrating it again. It should result in the integrand if it is correct.</p>
+<p>Exercises:</p>
+<ul>
+<li><span class="math">\(\int \sqrt[3]{3 + x^5} x^4 \dee x\)</span></li>
+<li><span class="math">\(\int \frac{e^x}{1 + e^{2x}} \dee x\)</span></li>
+<li><span class="math">\(\int \frac{\sin(2 \ln x)}{x} \dee x\)</span></li>
+<li><span class="math">\(\int \frac{e^{\arctan x}}{1 + x^2} \dee x\)</span></li>
+</ul>
+<h3 id="definite-integrals">Definite Integrals</h3>
+<p>When using definite integrals, we need to be aware of the limits of integration.</p>
+<p>Consider <span class="math">\(\int_1^2 xe^{-x^2} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = x^2\)</span>. Then <span class="math">\(\dee u = 2x \dee x\)</span>.<br />So <span class="math">\(\int_{u(1)}^{u(2)} xe^{-u} \dee x\)</span>.<br />;wip: -(e^{-4} - e^{-1})</p>
+</blockquote>
+<h2 id="areas-between-curves">Areas Between Curves</h2>
+<p>Given functions <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span>, with <span class="math">\(g(x) \ge f(x)\)</span> over <span class="math">\([a, b]\)</span>, the area between the curves is <span class="math">\(\int_a^b g(x) - f(x) \dee x\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>;wip: go through the riemann integral</p>
+</blockquote>
+<p>Find the area of the region bounded by <span class="math">\(x^2\)</span> and <span class="math">\(\sqrt{x}\)</span>:</p>
+<blockquote>
+<p>;wip: integrate from 0 to 1 and then do _0^1  - x^2 x</p>
 </blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
