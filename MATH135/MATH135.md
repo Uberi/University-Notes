@@ -2428,3 +2428,43 @@ Factor $x^4 + 1$:
 > So $x^4 + 1 = (x^2 - \sqrt{2}x + 1)(x^2 + \sqrt{2}x + 1)$.  
 
 Galois proved in the early 1800s that finding the factorizations in impossible for the general case for polynomials of degree 5 or more.
+
+# 2/12/13
+
+Office hours this week:
+
+Tuesday: 2-3:30pm
+Wednesday-Friday: 10-11:30pm
+
+Question 12 from practice exam 1: Let $n \in \mb{N}, a, b \in \mb{Z}$. Prove $n \mid \gcd(a, n) \gcd(b, n) \iff n \mid ab$:
+
+> Let $d = \gcd(a, n), e = \gcd(b, n)$. We will first prove $n \mid de \implies n \mid ab$.  
+> Assume $n \mid de$.  
+> Clearly, $d \mid a \wedge e \mid b$. So $\frac{a}{d}, \frac{b}{e} \in \mb{Z}$.  
+> So $n \mid de \frac{a}{d} \frac{b}{e}$ and $n \mid ab$.  
+> Now we will prove $n \mid ab \implies n \mid de$.  
+> Assume $n \mid ab$.  
+> Since $d, e$ are the greatest common factors, $\gcd(\frac{a}{d}, n) = 1 \wedge \gcd(\frac{b}{e}, n) = 1$.  ;wip: not sure if this is true
+> So by CAD, ;wip
+
+Question 6b from practice exam 2: Express $\gcd(8n + 3, 5n - 2)$ as a function of $n$:
+
+> Let $d = \gcd(8n + 3, 5n - 2)$.  
+> So $d \mid 8n + 3 \wedge d \mid 5n - 2$.  
+> Conjecture: $\forall n \in \mb{N}, d = 1$.  
+> Then $d \mid x(8n + 3) + y(5n - 2)$ by DIC, and $d \mid 8nx + 5ny + 3x + 2y$.  
+> When ;wip: find x and y that makes d \mid 1 so then d = 1
+
+Question 11 from practice exam 2: For $z, w \in \mb{C}$, prove $\abs{1 - z\overline{w}}^2 - \abs{z - w}^2 = (1 - \abs{z}^2)(1 - \abs{w}^2)$:
+
+> Clearly, $\abs{1 - z\overline{w}}^2 = \left(1 - z\overline{w}\right) \cdot \overline{\left(1 - z\overline{w}\right)} = \left(1 - z\overline{w}\right) \cdot \left(1 - \overline{z}w\right) = 1 - \overline{z}w - z \overline{w} + z \overline{z} + w \overline{w}$
+> ;wip
+
+Question 12 from practice exam 2: Given $a, b, m \in \mb{Z}, \gcd(a, b) = 1, ab = m^2$, prove that $a, b$ are perfect squares:
+
+> Clearly, $\exists x, y \in \mb{Z}, ax + by = 1$.  
+> Then $\exists x \in \mb{Z}, a = x^2 \wedge \exists y \in \mb{Z}, b = y^2$.  
+> Clearly, $a = p_1^{k_1} \cdots p_n^{k_n}, b = p_{n + 1}^{k_{n + 1}} \cdots p_{n + m + 1}^{k_{n + m + 1}}$ where $p, q$ are primes.  
+> Since $\gcd(a, b) = 1$, none of the prime factors of $a$ are prime factors of $b$, and vice versa.  
+> Then the prime factorization of $a$ and $b$ has each prime to an even exponent.  
+> Then $a$ and $b$ are perfect squares.  

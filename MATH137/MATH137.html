@@ -1160,6 +1160,7 @@ e &amp;= \lim_{h \to 0} (1 + h)^\frac{1}{h} \\
 <p>Alternatively, if <span class="math">\(n = \frac{1}{x}\)</span>, we can write the limit as <span class="math">\(e = \lim_{n \to \infty} (1 + \frac{1}{n})^n\)</span>.</p>
 <h1 id="section-18">25/10/13</h1>
 <h2 id="related-rates">Related Rates</h2>
+<p>Related rates have multiple variables that are related in some way, and involve the derivatives of these variables.</p>
 <p>A train departs moving Eastward traveling at 45 km/h while another departs 1 hour later moving South at 60 km/h. How fast is the distance between the trains changing 4 hours after the first train departs?</p>
 <blockquote>
 <p>Let <span class="math">\(P\)</span> be the point of departure of the two trains.<br />Let <span class="math">\(t\)</span> represent the time in hours.<br />Let <span class="math">\(x(t)\)</span> represent the distance train 1 travels East in km.<br />Let <span class="math">\(y(t)\)</span> represent the distance train 2 travels South in km.<br />Let <span class="math">\(z(t)\)</span> represent the distance between the trains in km.<br />We want to find <span class="math">\(z&#39;(4)\)</span>. Clearly, <span class="math">\(x&#39; = 45, y&#39; = 60\)</span>.<br />Clearly, <span class="math">\(z^2 = x^2 + y^2\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee t} z^2 = \frac{\dee}{\dee t} x^2 + \frac{\dee}{\dee t} y^2 = 2zz&#39; = 2xx&#39; + 2yy&#39;\)</span>.<br />So <span class="math">\(z&#39; = \frac{xx&#39; + yy&#39;}{z} = \frac{45x + 60y}{z}\)</span>.<br />Clearly, at <span class="math">\(t = 4\)</span>, <span class="math">\(x = x(4) = 4 \cdot 45 = 180, y = y(3) = 3 \cdot 60 = 180\)</span>.<br />So <span class="math">\(z = \sqrt{180^2 + 180^2} = 180 \sqrt{2}\)</span>.<br />So <span class="math">\(z&#39;(4) = \frac{45 \cdot 180 + 60 \cdot 60 \cdot 180}{180 \sqrt{2}} = \frac{105}{\sqrt{2}}\)</span>.</p>
@@ -1315,7 +1316,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <p>We have seen previously the limits <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x} = 1\)</span> and <span class="math">\(\lim_{x \to \infty} \frac{x^2 - 1}{2x^2 + 4x + 1} = \frac{1}{2}\)</span>.</p>
 <p>If we just plug in the limit value, we get <span class="math">\(\frac{0}{0}\)</span> or <span class="math">\(\frac{infty}{\infty}\)</span>, which are <strong>indeterminate forms</strong> - in the form that they are in, we cannot evaluate it.</p>
 <p>We need some other way of making them solvable.</p>
-<p>L'Hôpital's rule is a very general method of removing indeterminate forms</p>
+<p>L'Hôpital's rule is a very general method of removing indeterminate forms.</p>
 <h3 id="lhôpitals-rule">L'Hôpital's Rule</h3>
 <p>If <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span> are differentiable and <span class="math">\(g&#39;(x) \ne 0\)</span> near <span class="math">\(a\)</span> (though the value at <span class="math">\(a\)</span> is unimportant), and one of the following is true:</p>
 <ul>
@@ -1354,6 +1355,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <blockquote>
 <p>Clearly, <span class="math">\(\lim_{x \to 0} \frac{1}{x} - \frac{1}{\sin x} = \lim_{x \to 0} \frac{\sin x - x}{x \sin x}\)</span>.<br />Indeterminate form <span class="math">\(\frac{0}{0}\)</span>.<br />Clearly, <span class="math">\(\lim_{x \to 0} \frac{\sin x - x}{x \sin x} = \lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x}\)</span>.<br />Indeterminate form <span class="math">\(\frac{0}{0}\)</span>/<br />Clearly, <span class="math">\(\lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x} = \lim_{x \to 0} \frac{-\sin x}{2 \cos x - x \sin x} = 0\)</span></p>
 </blockquote>
+<p>These are not values themselves. For example, <span class="math">\(0 \cdot \infty\)</span> being indeterminate means that a function that approaches 0 times a function that approaches infinity does not have a single determinate value.</p>
 <h3 id="indeterminate-powers">Indeterminate powers</h3>
 <p><span class="math">\(0^0\)</span>, <span class="math">\(\infty^0\)</span>, and <span class="math">\(1^\infty\)</span> are indeterminate.</p>
 <p><span class="math">\(0^\infty\)</span> and <span class="math">\(\infty^\infty\)</span> are determinate.</p>
@@ -1580,7 +1582,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <p>Often, we will use equally sized intervals. In this case, each interval has the width <span class="math">\(\frac{b - a}{2}\)</span>.</p>
 <p>Now we construct a rectangle on each interval. It has the same width as the interval. We choose a <span class="math">\(c_i \in [x_{i - 1}, x_i]\)</span> and make the rectangle height <span class="math">\(f(c_i)\)</span>. Often, we use the midpoint as <span class="math">\(c_i\)</span>, so <span class="math">\(c_i = \frac{x_{i - 1} + x_i}{2}\)</span>. The choice of sample point is largely irrelevant since the area will eventually converge.</p>
 <p>The area of the rectangle is <span class="math">\((x_i - x_{i - 1})f(c)\)</span>. The area of all of the rectangles is an approximation of the function's area.</p>
-<p>We write this as <span class="math">\(\sum_{i = 1}^n f(c_i) \delta x\)</span>. This is called the <strong>Riemann Sum</strong>. We can use <span class="math">\(\delta x = \frac{b - a}{2}\)</span> if the intervals are equal in width.</p>
+<p>We write this as <span class="math">\(\sum_{i = 1}^n f(c_i) \delta x\)</span>. This is called the <strong>Riemann Sum</strong> (ree-men). We can use <span class="math">\(\delta x = \frac{b - a}{2}\)</span> if the intervals are equal in width.</p>
 <p>So the exact area under the curve is <span class="math">\(\lim_{n \to \infty} \sum_{i = 1}^n f(c_i) \delta x\)</span>. This is the <strong>definition of the definite integral</strong>.</p>
 <p>This can be written as <span class="math">\(\lim_{n \to \infty} \sum_{i = 1}^n f(\frac{b - a}{n}i + a) \frac{b - a}{n}\)</span> if we use the left endpoint and equally sized intervals.</p>
 <p>Now we apply this to the example.</p>
@@ -1803,16 +1805,60 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <blockquote>
 <p>Let <span class="math">\(u = x^2\)</span>. Then <span class="math">\(\dee u = 2x \dee x\)</span>.<br />So <span class="math">\(\int_{u(1)}^{u(2)} xe^{-u} \dee x\)</span>.<br />;wip: -(e^{-4} - e^{-1})</p>
 </blockquote>
+<p>Note that <code>u</code> was applied to the limits of integration when we switched the variables.</p>
 <h2 id="areas-between-curves">Areas Between Curves</h2>
 <p>Given functions <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span>, with <span class="math">\(g(x) \ge f(x)\)</span> over <span class="math">\([a, b]\)</span>, the area between the curves is <span class="math">\(\int_a^b g(x) - f(x) \dee x\)</span>.</p>
-<p>Proof:</p>
-<blockquote>
-<p>;wip: go through the riemann integral</p>
-</blockquote>
 <p>Find the area of the region bounded by <span class="math">\(x^2\)</span> and <span class="math">\(\sqrt{x}\)</span>:</p>
 <blockquote>
 <p>;wip: integrate from 0 to 1 and then do _0^1  - x^2 x</p>
 </blockquote>
+<h1 id="section-34">2/12/13</h1>
+<p>If the curves cross over (<span class="math">\(g(x) \ge f(x)\)</span> or <span class="math">\(f(x) \ge g(x)\)</span> does not hold over the entire interval), we can still find the area between the two curves. This can be done by finding the points of intersection.</p>
+<p>The points of intersection divide the interval into multiple subintervals such that <span class="math">\(g(x) \ge f(x)\)</span> or <span class="math">\(f(x) \ge g(x)\)</span> over each subinterval. The area between curves is then the sum of the areas of the subintervals.</p>
+<p>Find the area between <span class="math">\(y = \sin x\)</span> and <span class="math">\(y = \cos x\)</span> over <span class="math">\([0, \frac{\pi}{2}]\)</span>:</p>
+<blockquote>
+<p>The points of intersection are <span class="math">\((0, \frac{\pi}{4})\)</span>.<br />The area between curves is the sum of the area between the curves over <span class="math">\([0, \frac{\pi}{4}]\)</span> and the area between the curves over <span class="math">\([\frac{\pi}{4}, \frac{\pi}{2}]\)</span>.<br />So the area is <span class="math">\(\int_0^\frac{\pi}{4} \cos x - \sin x \dee x + \int_\frac{\pi}{4}^\frac{\pi}{2} \sin x - \cos x \dee x = \evalat{\sin x + \cos x}_0^\frac{\pi}{4} + \evalat{-\sin x - \cos x}_\frac{\pi}{4}^\frac{\pi}{2} = \sqrt{2} - 1 - 1 + \sqrt{2} = 2\sqrt{2} - 2\)</span>.</p>
+</blockquote>
+<p>Find the area of the region in the first quadrant bounded by the <span class="math">\(y = \frac{1}{4}x^2\)</span> and <span class="math">\(y = x - 1\)</span>:</p>
+<blockquote>
+<p>We find points of intersection: <span class="math">\(\frac{1}{4}x^2 = x - 1 \equiv x^2 - 4x + 4 = 0 \equiv (x - 2)^2\)</span>, so <span class="math">\(x = 2\)</span> is the point of intersection.<br />Note that the area is not <span class="math">\(\int_0^2 (\frac{1]{4}x^2 - (x - 1)) \dee x\)</span>, because that would include the area in quadrant 4.<br />So we split the interval into two intervals <span class="math">\([0, 1]\)</span> and <span class="math">\([1, 2]\)</span>, since <span class="math">\(x = 1\)</span> is where <span class="math">\(y = x - 1\)</span> passes below the x-axis.<br />In the left, we find the area between <span class="math">\(y = \frac{1}{4}x^2\)</span> and the x-axis (since <span class="math">\(y = x - 1\)</span> is outside of the first quadrant here).<br />On the right, we find the area between <span class="math">\(y = \frac{1}{4}x^2\)</span> and <span class="math">\(y = x - 1\)</span>.<br />So the area is <span class="math">\(\int_0^1 \frac{1}{4}x^2 \dee x + \int_1^2 (\frac{1}{4}x^2 - (x - 1)) \dee x = \evalat{\frac{1}{12}x^3}_0^1 + \evalat{\frac{1}{12}x^3 - \frac{1}{2}x^2 + x}_1^2 = \frac{1}{6}\)</span>.</p>
+</blockquote>
+<p>Exam stuff:</p>
+<ul>
+<li>Wednesday Dec. 11, 12:30pm to 3:00pm in the PAC</li>
+<li>Office hours will be posted on LEARN today.</li>
+<li>Covers everything except Newton's Method. See the course outline for a listing of topics.</li>
+<li>Basically everything from textbook chapters 1-5 plus or minus a few things.</li>
+<li>About 20% pre-midterm content, and 80% post-midterm content.</li>
+<li>Know the definitions and theorems.
+<ul>
+<li>Pre-midterm:
+<ul>
+<li>Limits</li>
+<li>Continuity</li>
+<li>Differentiability</li>
+<li>Intermediate value theorem</li>
+<li>Differentiability implies continuity</li>
+<li>Epsilon-delta proofs</li>
+</ul></li>
+<li>Post-midterm:
+<ul>
+<li>Definite integrals</li>
+<li>Indefinite integrals</li>
+<li>Mean value theorem</li>
+<li>Fundemental theorem of calculus</li>
+</ul></li>
+</ul></li>
+<li>Other things to know post-midterm:
+<ul>
+<li>Differentiation rules, implicit and logarithmic differentiation</li>
+<li>Linear approximation, related rates, optimization (just a little bit)</li>
+<li>Curve sketching</li>
+<li>l'Hopital's rule</li>
+<li>Integral definition (Riemann sum), integral properties, substitution method</li>
+<li>Areas between curves</li>
+</ul></li>
+</ul>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

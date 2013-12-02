@@ -1515,6 +1515,8 @@ Alternatively, if $n = \frac{1}{x}$, we can write the limit as $e = \lim_{n \to 
 Related Rates
 -------------
 
+Related rates have multiple variables that are related in some way, and involve the derivatives of these variables.
+
 A train departs moving Eastward traveling at 45 km/h while another departs 1 hour later moving South at 60 km/h. How fast is the distance between the trains changing 4 hours after the first train departs?
 
 > Let $P$ be the point of departure of the two trains.  
@@ -1828,7 +1830,7 @@ If we just plug in the limit value, we get $\frac{0}{0}$ or $\frac{infty}{\infty
 
 We need some other way of making them solvable.
 
-L'Hôpital's rule is a very general method of removing indeterminate forms
+L'Hôpital's rule is a very general method of removing indeterminate forms.
 
 ### L'Hôpital's Rule
 
@@ -1892,6 +1894,8 @@ Consider $\lim_{x \to 0} \frac{1}{x} - \frac{1}{\sin x}$:
 > Clearly, $\lim_{x \to 0} \frac{\sin x - x}{x \sin x} = \lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x}$.  
 > Indeterminate form $\frac{0}{0}$/  
 > Clearly, $\lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x} = \lim_{x \to 0} \frac{-\sin x}{2 \cos x - x \sin x} = 0$
+
+These are not values themselves. For example, $0 \cdot \infty$ being indeterminate means that a function that approaches 0 times a function that approaches infinity does not have a single determinate value.
 
 ### Indeterminate powers
 
@@ -2253,7 +2257,7 @@ Now we construct a rectangle on each interval. It has the same width as the inte
 
 The area of the rectangle is $(x_i - x_{i - 1})f(c)$. The area of all of the rectangles is an approximation of the function's area.
 
-We write this as $\sum_{i = 1}^n f(c_i) \delta x$. This is called the **Riemann Sum**. We can use $\delta x = \frac{b - a}{2}$ if the intervals are equal in width.
+We write this as $\sum_{i = 1}^n f(c_i) \delta x$. This is called the **Riemann Sum** (ree-men). We can use $\delta x = \frac{b - a}{2}$ if the intervals are equal in width.
 
 So the exact area under the curve is $\lim_{n \to \infty} \sum_{i = 1}^n f(c_i) \delta x$. This is the **definition of the definite integral**.
 
@@ -2586,15 +2590,62 @@ Consider $\int_1^2 xe^{-x^2} \dee x$:
 > So $\int_{u(1)}^{u(2)} xe^{-u} \dee x$.  
 > ;wip: -\frac{1}{2}(e^{-4} - e^{-1})
 
+Note that `u` was applied to the limits of integration when we switched the variables.
+
 Areas Between Curves
 --------------------
 
 Given functions $f(x)$ and $g(x)$, with $g(x) \ge f(x)$ over $[a, b]$, the area between the curves is $\int_a^b g(x) - f(x) \dee x$.
 
-Proof:
-
-> ;wip: go through the riemann integral
-
 Find the area of the region bounded by $x^2$ and $\sqrt{x}$:
 
 > ;wip: integrate from 0 to 1 and then do \int_0^1 \sqrt{x} - x^2 \dee x
+
+# 2/12/13
+
+If the curves cross over ($g(x) \ge f(x)$ or $f(x) \ge g(x)$ does not hold over the entire interval), we can still find the area between the two curves. This can be done by finding the points of intersection.
+
+The points of intersection divide the interval into multiple subintervals such that $g(x) \ge f(x)$ or $f(x) \ge g(x)$ over each subinterval. The area between curves is then the sum of the areas of the subintervals.
+
+Find the area between $y = \sin x$ and $y = \cos x$ over $[0, \frac{\pi}{2}]$:
+
+> The points of intersection are $(0, \frac{\pi}{4})$.  
+> The area between curves is the sum of the area between the curves over $[0, \frac{\pi}{4}]$ and the area between the curves over $[\frac{\pi}{4}, \frac{\pi}{2}]$.  
+> So the area is $\int_0^\frac{\pi}{4} \cos x - \sin x \dee x + \int_\frac{\pi}{4}^\frac{\pi}{2} \sin x - \cos x \dee x = \evalat{\sin x + \cos x}_0^\frac{\pi}{4} + \evalat{-\sin x - \cos x}_\frac{\pi}{4}^\frac{\pi}{2} = \sqrt{2} - 1 - 1 + \sqrt{2} = 2\sqrt{2} - 2$.  
+
+Find the area of the region in the first quadrant bounded by the $y = \frac{1}{4}x^2$ and $y = x - 1$:
+
+> We find points of intersection: $\frac{1}{4}x^2 = x - 1 \equiv x^2 - 4x + 4 = 0 \equiv (x - 2)^2$, so $x = 2$ is the point of intersection.  
+> Note that the area is not $\int_0^2 (\frac{1]{4}x^2 - (x - 1)) \dee x$, because that would include the area in quadrant 4.  
+> So we split the interval into two intervals $[0, 1]$ and $[1, 2]$, since $x = 1$ is where $y = x - 1$ passes below the x-axis.  
+> In the left, we find the area between $y = \frac{1}{4}x^2$ and the x-axis (since $y = x - 1$ is outside of the first quadrant here).  
+> On the right, we find the area between $y = \frac{1}{4}x^2$ and $y = x - 1$.  
+> So the area is $\int_0^1 \frac{1}{4}x^2 \dee x + \int_1^2 (\frac{1}{4}x^2 - (x - 1)) \dee x = \evalat{\frac{1}{12}x^3}_0^1 + \evalat{\frac{1}{12}x^3 - \frac{1}{2}x^2 + x}_1^2 = \frac{1}{6}$.  
+
+Exam stuff:
+
+* Wednesday Dec. 11, 12:30pm to 3:00pm in the PAC
+* Office hours will be posted on LEARN today.
+* Covers everything except Newton's Method. See the course outline for a listing of topics.
+* Basically everything from textbook chapters 1-5 plus or minus a few things.
+* About 20% pre-midterm content, and 80% post-midterm content.
+* Know the definitions and theorems.
+    * Pre-midterm:
+        * Limits
+        * Continuity
+        * Differentiability
+        * Intermediate value theorem
+        * Differentiability implies continuity
+        * Epsilon-delta proofs
+    * Post-midterm:
+        * Definite integrals
+        * Indefinite integrals
+        * Mean value theorem
+        * Fundemental theorem of calculus
+* Other things to know post-midterm:
+    * Differentiation rules, implicit and logarithmic differentiation
+    * Linear approximation, related rates, optimization (just a little bit)
+    * Curve sketching
+    * l'Hopital's rule
+    * Integral definition (Riemann sum), integral properties, substitution method
+    * Areas between curves

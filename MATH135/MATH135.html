@@ -1474,6 +1474,25 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 <p>Clearly, this is equivalent to <span class="math">\(x^4 = -1\)</span>, and by CNRT, <span class="math">\(x = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag, \frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}\imag, -\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag, -\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}\imag\)</span>.<br />Note that there are two conjugate pairs, which both form quadratic polynomials.<br />So <span class="math">\(x^4 + 1 = ((\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag)(\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag))((-\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}\imag)(-\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}\imag))\)</span>.<br />So <span class="math">\(x^4 + 1 = (x^2 - \sqrt{2}x + 1)(x^2 + \sqrt{2}x + 1)\)</span>.</p>
 </blockquote>
 <p>Galois proved in the early 1800s that finding the factorizations in impossible for the general case for polynomials of degree 5 or more.</p>
+<h1 id="section-33">2/12/13</h1>
+<p>Office hours this week:</p>
+<p>Tuesday: 2-3:30pm Wednesday-Friday: 10-11:30pm</p>
+<p>Question 12 from practice exam 1: Let <span class="math">\(n \in \mb{N}, a, b \in \mb{Z}\)</span>. Prove <span class="math">\(n \mid \gcd(a, n) \gcd(b, n) \iff n \mid ab\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(d = \gcd(a, n), e = \gcd(b, n)\)</span>. We will first prove <span class="math">\(n \mid de \implies n \mid ab\)</span>.<br />Assume <span class="math">\(n \mid de\)</span>.<br />Clearly, <span class="math">\(d \mid a \wedge e \mid b\)</span>. So <span class="math">\(\frac{a}{d}, \frac{b}{e} \in \mb{Z}\)</span>.<br />So <span class="math">\(n \mid de \frac{a}{d} \frac{b}{e}\)</span> and <span class="math">\(n \mid ab\)</span>.<br />Now we will prove <span class="math">\(n \mid ab \implies n \mid de\)</span>.<br />Assume <span class="math">\(n \mid ab\)</span>.<br />Since <span class="math">\(d, e\)</span> are the greatest common factors, <span class="math">\(\gcd(\frac{a}{d}, n) = 1 \wedge \gcd(\frac{b}{e}, n) = 1\)</span>. ;wip: not sure if this is true So by CAD, ;wip</p>
+</blockquote>
+<p>Question 6b from practice exam 2: Express <span class="math">\(\gcd(8n + 3, 5n - 2)\)</span> as a function of <span class="math">\(n\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(d = \gcd(8n + 3, 5n - 2)\)</span>.<br />So <span class="math">\(d \mid 8n + 3 \wedge d \mid 5n - 2\)</span>.<br />Conjecture: <span class="math">\(\forall n \in \mb{N}, d = 1\)</span>.<br />Then <span class="math">\(d \mid x(8n + 3) + y(5n - 2)\)</span> by DIC, and <span class="math">\(d \mid 8nx + 5ny + 3x + 2y\)</span>.<br />When ;wip: find x and y that makes d 1 so then d = 1</p>
+</blockquote>
+<p>Question 11 from practice exam 2: For <span class="math">\(z, w \in \mb{C}\)</span>, prove <span class="math">\(\abs{1 - z\overline{w}}^2 - \abs{z - w}^2 = (1 - \abs{z}^2)(1 - \abs{w}^2)\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\abs{1 - z\overline{w}}^2 = \left(1 - z\overline{w}\right) \cdot \overline{\left(1 - z\overline{w}\right)} = \left(1 - z\overline{w}\right) \cdot \left(1 - \overline{z}w\right) = 1 - \overline{z}w - z \overline{w} + z \overline{z} + w \overline{w}\)</span> ;wip</p>
+</blockquote>
+<p>Question 12 from practice exam 2: Given <span class="math">\(a, b, m \in \mb{Z}, \gcd(a, b) = 1, ab = m^2\)</span>, prove that <span class="math">\(a, b\)</span> are perfect squares:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\exists x, y \in \mb{Z}, ax + by = 1\)</span>.<br />Then <span class="math">\(\exists x \in \mb{Z}, a = x^2 \wedge \exists y \in \mb{Z}, b = y^2\)</span>.<br />Clearly, <span class="math">\(a = p_1^{k_1} \cdots p_n^{k_n}, b = p_{n + 1}^{k_{n + 1}} \cdots p_{n + m + 1}^{k_{n + m + 1}}\)</span> where <span class="math">\(p, q\)</span> are primes.<br />Since <span class="math">\(\gcd(a, b) = 1\)</span>, none of the prime factors of <span class="math">\(a\)</span> are prime factors of <span class="math">\(b\)</span>, and vice versa.<br />Then the prime factorization of <span class="math">\(a\)</span> and <span class="math">\(b\)</span> has each prime to an even exponent.<br />Then <span class="math">\(a\)</span> and <span class="math">\(b\)</span> are perfect squares.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
