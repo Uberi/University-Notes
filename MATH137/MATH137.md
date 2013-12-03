@@ -17,7 +17,8 @@ $$
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\evalat}[1]{\left.#1\right|}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
 $$
 
 # 9/9/13
@@ -56,22 +57,22 @@ $\iff$ - if and only if; first implies second, and second implies first.
 Solve $6 < 1 - 3x \le 10$:
 
 >$$
-6 < 1 - 3x \le 10 \\
-\text{Isolate } x: 5 < -3x \le 9 \\
--5 > 3x \ge -9 \\
--5/3 > x \ge -3
+\begin{align}
+6 &< 1 - 3x \le 10 \\
+\text{Isolate } x \text{: } 5 &< -3x \le 9 \\
+-5 &> 3x \ge -9 \\
+-5/3 &> x \ge -3
+\end{align}
 $$
 
 Solve $\frac{1}{x} < 2$:
 
->$$
-\frac{1}{x} < 2 \\
-\text{When } x > 0, 1 < 2x, x \ne 0, \text{ then } x > \frac{1}{2} \\
-\text{When } x < 0, 1 > 2x, x \ne 0, \text{ then } x < \frac{1}{2} \\
-\text{If } x > 0 \text{ and } x > \frac{1}{2}, \text{ then } x > \frac{1}{2} \\
-\text{If } x < 0 \text{ and } x < \frac{1}{2}, \text{ then } x < 0 \\
-\text{Therefore, } x \in (-\infty, 0) \cup (1/2, \infty)
-$$
+> We know that $\frac{1}{x} < 2$.  
+> If $x > 0$, $1 < 2x$, so $x > \frac{1}{2}$.  
+> If $x < 0$, $1 > 2x$, so $x < \frac{1}{2}$.  
+> If $x > 0$ and $x > \frac{1}{2}$, then $x > \frac{1}{2}$.  
+> If $x < 0$ and $x < \frac{1}{2}$, then $x < 0$.  
+> Therefore, $x \in (-\infty, 0) \cup (1/2, \infty)$.  
 
 Absolute Value
 --------------
@@ -98,9 +99,11 @@ Solve by considering both cases. Deal with each case separately.
 Solve $\abs{2x-3} < 4$:
 
 > $$
-\text{Open the inequality: } -4 < 2x-3 < 4 \\
-\abs{f} < g \implies -g < f < g \\
--1 < 2x < 7 \implies -\frac{1}{2} < x < \frac{7}{2}
+\begin{align}
+\text{Open the inequality: } -4 &< 2x-3 < 4 \\
+\abs{f} < g &\implies -g < f < g \\
+-1 < 2x < 7 &\implies -\frac{1}{2} < x < \frac{7}{2}
+\end{align}
 $$
 
 Simplify $\abs{x} + y \le 1$:
@@ -129,7 +132,7 @@ Domain: set of allowable values for the independent variable.
 Common exclusions from domains:
 
 * Dividing by 0.
-* Log of non-positive number.
+* Logarithm of non-positive number.
 * Even root of negative number.
 
 A function has an inverse if and only if every unique value of the independent variable in the domain has a unique value of the dependent variable - i.e., "one-to-one".
@@ -139,17 +142,21 @@ Range: set of possible values for the dependent variable.
 Finding the range can be significantly more difficult than finding the domain, which is simply a matter of looking at the function.
 
 $$
-f(x) = \sqrt{x - 1} \\
-\text{Restriction: } x > 1 \\
-\mb{D} = [1, \infty) \\
-\mb{R} = [0, \infty)
+\begin{align}
+f(x) &= \sqrt{x - 1} \\
+\text{Restriction: } x &> 1 \\
+\mb{D} &= [1, \infty) \\
+\mb{R} &= [0, \infty)
+\end{align}
 $$
 
 $$
-f(x) = \frac{1}{1 - x^2} \\
-\text{Restriction: } x \ne 0 \\
-\mb{D} = (\infty, -1) \cup (-1, 1) \cup (1, \infty) \\
-\mb{R} = (-\infty, 0) \cup [1, \infty)
+\begin{align}
+f(x) &= \frac{1}{1 - x^2} \\
+\text{Restriction: } x &\ne 0 \\
+\mb{D} &= (\infty, -1) \cup (-1, 1) \cup (1, \infty) \\
+\mb{R} &= (-\infty, 0) \cup [1, \infty)
+\end{align}
 $$
 
 A **true function** must have a unique output for each input. Graphically, the vertical line test passes for all points (vertical line drawn on graph will only intersect it at most once if it is a graph of a true function).
@@ -266,17 +273,17 @@ If a function is not one-to-one over $\mb{R}$, we may restrict the domain to a r
 
 Find the inverse of $f(x) = \sqrt{10 - 3x}$:
 
-$\mb{D} = (-\infty, \frac{10}{3}]$
-
-$\mb{R} = [0, \infty)$
-
 > $$
-x = \sqrt{10 - 3 f^{-1}(x)} \\
-x^2 = 10 - 3 f^{-1}(x) \\
-x^2 - 10 = -3 f^{-1}(x) \\
-\frac{10 - x^2}{3} = f^{-1}(x) \\
-\mb{D} = [0, \infty) \\
-\mb{R} = (-\infty, \frac{10}{3}]
+\begin{align}
+\mb{D} &= (-\infty, \frac{10}{3}] \\
+\mb{R} &= [0, \infty) \\
+x &= \sqrt{10 - 3 f^{-1}(x)} \\
+x^2 &= 10 - 3 f^{-1}(x) \\
+x^2 - 10 &= -3 f^{-1}(x) \\
+\frac{10 - x^2}{3} &= f^{-1}(x) \\
+\mb{D} &= [0, \infty) \\
+\mb{R} &= (-\infty, \frac{10}{3}]
+\end{align}
 $$
 
 Graphically, if the point $(a, b)$ is on the graph of $f(x)$, then $(b, a)$ is on the graph of $f^{-1}(x)$. Using this information, we can sketch the inverse of a graph by reflecting it along the line $y = x$.
@@ -320,9 +327,11 @@ $\log_a(x^r) = r \log_a(x^r)$. So $\log(\sqrt{x}) = \frac{1}{2} \log(x)$.
 Find the inverse of $f(x) = e^{2x + 1}$:
 
 >$$
-x = e^{2 f^{-1}(x) + 1} \\
-\ln(x) = 2 f^{-1}(x) + 1 \\
-f^{-1}(x) = \frac{1}{2} \ln(x) - \frac{1}{2} \\
+\begin{align}
+x &= e^{2 f^{-1}(x) + 1} \\
+\ln(x) &= 2 f^{-1}(x) + 1 \\
+f^{-1}(x) &= \frac{1}{2} \ln(x) - \frac{1}{2} \\
+\end{align}
 $$
 
 # 20/9/13
@@ -347,14 +356,13 @@ These are based on the special triangles:
 * Right triangle with side lengths $1, 1, \sqrt{2}$ and internal angles $\frac{\pi}{4}, \frac{\pi}{4}. \frac{\pi}{2}$.
 * Right triangle with side lengths $1, \sqrt{3}, 2$ and internal angles $\frac{\pi}{6}, \frac{\pi}{3}. \frac{\pi}{2}$.
 
-Parametric equations of unit circle ($x^2 + y^2 = 1$):
-
-* Cosine: $x = \cos \theta$
-* Sine: $y = \sin \theta$
+Parametric equations of unit circle ($x^2 + y^2 = 1$): $x = \cos \theta$ and $y = \sin \theta$ together form a unit circle from polar coordinates.
 
 $$
-x^2 + y^2 = 1 \\
-\sin^2 \theta + \cos^2 \theta = 1 \\
+\begin{align}
+x^2 + y^2 &= 1 \\
+\sin^2 \theta + \cos^2 \theta &= 1 \\
+\end{align}
 $$
 
 ### Properties
@@ -376,17 +384,19 @@ Other trigoometric functions:
 
 ### Identities
 
-Square Identity: $\sin^2 \theta + \cos^2 \theta = 1$
+Square Identity: $\sin^2 \theta + \cos^2 \theta = 1$.
 
-Addition formulas: $\sin(x + y) = \sin x \cos y + \cos x \sin y$, $\cos(x + y) = \cos x \cos y - \sin x \sin y$
+Addition formulas: $\sin(x + y) = \sin x \cos y + \cos x \sin y$, $\cos(x + y) = \cos x \cos y - \sin x \sin y$.
 
 Find the subtraction formulas:
 
 > $$
-\sin(x - y) = \sin x \cos(-y) + \cos x \sin(-y) \\
-\sin(x - y) = \sin x \cos y - \cos x \sin y \\
-\cos(x - y) = \cos x \cos(-y) - \sin x \sin(-y) \\
-\cos(x - y) = \cos x \cos y + \sin x \sin y \\
+\begin{align}
+\sin(x - y) &= \sin x \cos(-y) + \cos x \sin(-y) \\
+&= \sin x \cos y - \cos x \sin y \\
+\cos(x - y) &= \cos x \cos(-y) - \sin x \sin(-y) \\
+&= \cos x \cos y + \sin x \sin y \\
+\end{align}
 $$
 
 Inverse Trigonometric Functions
@@ -405,23 +415,27 @@ The inverse of the tangent function is denoted $\arctan \theta$, or $\tan^{-1} \
 Evaluate $\cos(\arctan \sqrt{3})$:
 
 > $$
-\frac{\sqrt{3}}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
-\text{opposite} = \sqrt{3} \\
-\text{adjacent} = 1 \\
-\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
-\cos(\arctan \sqrt{3}) = \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
-\cos(\arctan \sqrt{3}) = \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
+\begin{align}
+\frac{\sqrt{3}}{1} &= \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} &= \sqrt{3} \\
+\text{adjacent} &= 1 \\
+\text{hypotenuse} &= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\cos(\arctan \sqrt{3}) &= \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\cos(\arctan \sqrt{3}) &= \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
+\end{align}
 $$
 
 Simplify $\sin(\arctan x)$
 
 > $$
-\frac{x}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
-\text{opposite} = x \\
-\text{adjacent} = 1 \\
-\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
-\sin(\arctan x) = \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
-\sin(\arctan x) = \frac{x}{\sqrt{x^2 + 1}} \\
+\begin{align}
+\frac{x}{1} &= \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} &= x \\
+\text{adjacent} &= 1 \\
+\text{hypotenuse} &= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\sin(\arctan x) &= \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\sin(\arctan x) &= \frac{x}{\sqrt{x^2 + 1}} \\
+\end{align}
 $$
 
 Evaluate $\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)$:
@@ -434,11 +448,13 @@ Evaluate $\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)$:
         pi/2  1  pi/3
 
 > $$
-\sin \left( \frac{-\pi}{3} \right) = \frac{\text{opposite}}{\text{hypotenuse}} = -\frac{\sqrt{3}}{2} \\
-\text{opposite} = \sqrt{3} \\
-\text{hypotenuse} = 2 \\
-\text{adjacent} = \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
-\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) = \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\ ;wip: why and how does this even work
+\begin{align}
+\sin \left( \frac{-\pi}{3} \right) &= \frac{\text{opposite}}{\text{hypotenuse}} = -\frac{\sqrt{3}}{2} \\
+\text{opposite} &= \sqrt{3} \\
+\text{hypotenuse} &= 2 \\
+\text{adjacent} &= \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
+\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) &= \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\
+\end{align}
 $$
 
 # 23/9/13
@@ -498,7 +514,7 @@ xe^y + xe^{-y} &= e^y - e^{-y} \\
 xe^{2y} + x &= e^{2y} - 1 \\
 (x - 1)e^{2y} &= x + 1 \\
 e^y &= \pm \sqrt{\frac{x + 1}{x - 1}} \\
-\text{Since } -\sqrt{\frac{x + 1}{x - 1}} < 0 \text{, the negative solution is extraneous.} \\
+\text{Since } -\sqrt{\frac{x + 1}{x - 1}} &< 0 \text{, the negative solution is extraneous.} \\
 e^y &= \sqrt{\frac{x + 1}{x - 1}} \\
 y &= \ln \left( \frac{x + 1}{x - 1} \right)^\frac{1}{2} \\
 y &= \frac{1}{2} \ln \frac{x + 1}{x - 1} \\
@@ -535,7 +551,7 @@ $\delta$ is Delta (Greek) and is associated with difference.
 
 The key point is that the limit exists if the distance between $f(x)$ and $L$ (the error, $\epsilon$) **can be made as small as needed** by making the distance between $x$ and $a$ (the difference, $\delta$) sufficiently small. However, $x \ne a$.
 
-$$a - \delta < x < a + \delta \implies L - \epsilon < f(x) < L + \epsilon$$
+We can also write the implication $0 < \abs{x - a} < \delta \implies \abs{f(x) - L} < \epsilon$ as $a - \delta < x < a + \delta \implies L - \epsilon < f(x) < L + \epsilon$.
 
 $\delta$ depends on $\epsilon$.
 
@@ -836,10 +852,8 @@ Prove $\lim_{x \to \infty} \frac{1}{x^k} = 0, k > 0$:
 
 > Let $\epsilon$ be an arbitrary positive real number.  
 > Construct $n = \frac{1}{\sqrt[k]{\epsilon}}$.  
-> Assume $x > n$.  
-> So $x > \frac{1}{\sqrt[k]{\epsilon}}$.  
-> So $\frac{1}{x} < \sqrt[k]{\epsilon}$.  
-> So $\frac{1}{x^k} - 0 < \epsilon$.  
+> Assume $x > n$. So $x > \frac{1}{\sqrt[k]{\epsilon}}$.  
+> So $\frac{1}{x} < \sqrt[k]{\epsilon}$ and $\frac{1}{x^k} - 0 < \epsilon$.  
 > Therefore, $\lim_{x \to \infty} \frac{1}{x^k} = 0, k > 0$.  
 
 Infinite limit theorem: for $r \in \mb{Q}, r > 0$, when $x^r$ is defined, $\lim_{x \to \infty} \frac{1}{x^r} = 0$. In other words, when $r$ is rational and defined, $\lim_{x \to \infty} \frac{1}{x^r} = 0$.
@@ -873,7 +887,7 @@ $$
 Evaluate $\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}$:
 
 > $$
-\text{Note that } x^2 > 2x \text{ for all } x > 2 \\
+\text{Note that } \forall x > 2, x^2 > 2x \\
 \lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}} = \frac{-2}{-\infty - \sqrt{\infty - \infty}} = \frac{-2}{-\infty} = 0 \\
 $$
 
@@ -885,8 +899,8 @@ Evaluate $\lim_{x \to \infty}  e^{-x} \sin x$:
 e^{-x} &= \frac{1}{e^x} \\
 \lim_{x \to \infty}  e^{-x} &= 0 \\
 \text{By the squeeze theorem: } \lim_{x \to \infty}  e^{-x} \cdot -1 &\le \lim_{x \to \infty}  e^{-x} \sin x \le \lim_{x \to \infty}  e^{-x} \cdot 1 \\
-0 \le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
-\lim_{x \to \infty}  e^{-x} \sin x = 0 \\
+0 &\le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
+\lim_{x \to \infty}  e^{-x} \sin x &= 0 \\
 \end{align}
 $$
 
@@ -947,7 +961,7 @@ Determine whether $f(x) = \begin{cases} x \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 
 \begin{align}
 f'(0) &= \lim_{x \to 0} \frac{x \sin \frac{1}{x} - 0}{x - 0} \\
 &= \lim_{x \to 0} \sin \frac{1}{x} \\
-\text{The limit does not exist}
+&\text{The limit does not exist}
 \end{align}
 $$
 
@@ -957,7 +971,7 @@ Determine whether $f(x) = \begin{cases} x^2 \sin \frac{1}{x}, x \ne 0 \\ 0, x = 
 \begin{align}
 f'(0) &= \lim_{x \to 0} \frac{x^2 \sin \frac{1}{x} - 0}{x - 0} \\
 &= \lim_{x \to 0} x \sin \frac{1}{x} \\
-&= 0 \text{ by the squeeze theorem}
+&= 0 \text{(squeeze theorem)}
 \end{align}
 $$
 
@@ -992,6 +1006,8 @@ $$
 &= \frac{1}{2 \sqrt{x}} \\
 \end{align}
 $$
+
+### Differentiability implies continuity
 
 If $f(x)$ is differentiable at $x = a$, then it is also continuous at that point. Likewise, if a function is not continuous at $x = a$, then it is also not differentiable - the contrapositive.
 
@@ -1246,7 +1262,7 @@ $$
 
 ### Hyperbolic tangent rule
 
-$\frac{\dee}{\dee x} \tanh(x) = \sech(x)$.
+$\frac{\dee}{\dee x} \tanh(x) = \frac{1}{\cosh(x)} = \sech(x)$.
 
 Proof:
 
@@ -1268,7 +1284,7 @@ The **triangle inequality** states that $\abs{x + y} \le \abs{x} + \abs{y}, x \i
 Chain Rule
 ----------
 
-$f'(x) = g'(h(x)) h'(x) = \frac{\dee g \circ h}{\dee x} = \frac{\dee g}{\dee h} \frac{\dee h}{\dee x}$.
+$f'(x) = g'(h(x)) h'(x) = \frac{\dee}{\dee x} g \circ h = \frac{\dee g}{\dee h} \frac{\dee h}{\dee x}$.
 
 Proof:
 
@@ -1326,8 +1342,8 @@ Find $\frac{\dee y}{\dee x}$ for $x^2 + y^2 = 1$:
 
 > $$
 \begin{align}
-\frac{\dee}{\dee x} (x^2 + y^2) = \frac{\dee}{\dee x} 1 \\
-&= \frac{\dee}{\dee x} x^2 + \frac{\dee}{\dee x} y^2 = \frac{\dee}{\dee x} 1
+\frac{\dee}{\dee x} (x^2 + y^2) &= \frac{\dee}{\dee x} 1 \\
+&= \frac{\dee}{\dee x} x^2 + \frac{\dee}{\dee x} y^2 = \frac{\dee}{\dee x} 1 \\
 &= 2x + \frac{\dee}{\dee x} y^2 = 0 \\
 &= 2x + \frac{\dee}{\dee x} y(x)^2 \\
 &= 2x + \frac{\dee}{\dee y} y^2 \cdot \frac{\dee}{\dee x} y \\
@@ -1346,11 +1362,11 @@ Where does $x^3 + y^3 = 3xy$ have a horizontal tangent?
 3x^2 - 3y &= (3x - 3y^2)y' \\
 3x^2 - 3y &= (3x - 3y^2)y' \\
 y' &= \frac{3x^2 - 3y}{3x - 3y^2} = \frac{x^2 - y}{x - y^2} = 0 \\
-x^2 - y = 0 \wedge x - y^2 \ne 0 \equiv y = x^2 \wedge y \ne \sqrt{x} \equiv y = x^2 \wedge x \ne 0 \wedge y \ne 0 \\
-x^3 + (x^2)^3 = 3xx^2 \equiv x^3 + x^6 = 3x^3 \equiv x^3(x^3 - 1) = 0 \\
-x = 0 \text{ extraneous}, x = 1 \\
+x^2 - y = 0 \wedge x - y^2 \ne 0 &\equiv y = x^2 \wedge y \ne \sqrt{x} \equiv y = x^2 \wedge x \ne 0 \wedge y \ne 0 \\
+x^3 + (x^2)^3 = 3xx^2 &\equiv x^3 + x^6 = 3x^3 \equiv x^3(x^3 - 1) = 0 \\
+x &= 0 \text{ (extraneous)}, x = 1 \\
 y = 1^2 = 1 \\
-\text{There is a horizontal tangent at } (1, 1)
+&\text{There is a horizontal tangent at } (1, 1)
 \end{align}
 $$
 
@@ -2015,9 +2031,9 @@ Find the points on $f(x) = 1 - x^2$ closest to the origin:
 > The goal is to minimize $g(x) = \sqrt{x^2 + f(x)^2} = \sqrt{x^2 + 1 - 2x^2 + x^4} = \sqrt{x^4 - x^2 + 1}$.  
 > Here, we will instead minimize $g(x)^2$ since the extrema occur at the same $x$ values.  
 > $\frac{\dee}{\dee x} g(x)^2 = 4x^3 - 2x = 2x(2x^2 - 1) = 0$ when $x = 0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}$.  
-> We test to find $g(0) = 1, g(-\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}, g(\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}$.  
+> We test to find $g(0) = 1, g(-\frac{1}{\sqrt{2}}) = \frac{\sqrt{3}}{2}, g(\frac{1}{\sqrt{2}}) = \frac{\sqrt{3}}{2}$.  
 > Since $g(x) \to \infty$ as $x \to \pm \infty$, this is both a local and global minimum.  
-> So the points are $(-\frac{1}{\sqrt}{2}, \frac{1}{2})$ and $(\frac{1}{\sqrt}{2}, \frac{1}{2})$.  
+> So the points are $(-\frac{1}{\sqrt{2}}, \frac{1}{2})$ and $(\frac{1}{\sqrt{2}}, \frac{1}{2})$.  
 
 # 13/11/13
 
@@ -2105,7 +2121,7 @@ Let $f(x) = e^x$.
 
 Since $\frac{\dee}{\dee x} (e^x + c) = e^x$, $F(x) = e^x + c$.
 
-Since $\frac{\dee}{\dee x} (a^x + c) = a^x \ln x$, $F(x) = \frac{a^x}{\n a} + c$.
+Since $\frac{\dee}{\dee x} (a^x + c) = a^x \ln x$, $F(x) = \frac{a^x}{\ln a} + c$.
 
 ### Trigonometric Functions
 
@@ -2145,7 +2161,7 @@ Antidifferentiate $\cos 2x$:
 Antidifferentiate $e^{-7x}$:
 
 > Clearly, $\frac{\dee}{\dee x} (e^{-7x} + c) = -7e^{-7x}$.  
-> Then $\frac{\dee}{\dee x} (\frac{e^{-7x}{-7} + c) = e^{-7x}$.  
+> Then $\frac{\dee}{\dee x} (\frac{e^{-7x}}{-7} + c) = e^{-7x}$.  
 
 Antidifferentiate $\sqrt{x}(1 + x)$:
 
@@ -2427,6 +2443,8 @@ Differentiate $f(x) = \int_x^{x^2} t^2 e^t \dee t$:
 > Let $u = x^2$. Then $\frac{\dee}{\dee x} \int_c^{x^2} t^2 e^t \dee t = \frac{\dee u}{\dee x} \frac{\dee}{\dee u} \int_c^u t^2 e^t \dee t = 2x(u^2 e^u) = 2x(x^4 e^{x^2}) = 2x^5 e^{x^2}$.  
 > So $f'(x) = -x^2 e^x + 2x^5 e^{x^2}$.  
 
+In general, to differentiate an integral with endpoints that are functions, we split it at a constant so that there is only one endpoint that is a function, then substitute temporary variables for the endpoints. We then use the chain rule to differentiate with respect to $x$ by going through the temporary variables.
+
 ### Part 2
 
 If $f$ is continuous over $[a, b]$ and $F$ is any antiderivative of $f$, then $\int_a^b f(x) \dee x = F(b) - F(a)$.
@@ -2475,7 +2493,7 @@ Evaluate $\int_0^\pi \sin^2 x \dee x$:
 > Now we can find the antiderivative: $\frac{1}{2}\left(x - \frac{1}{2}\sin 2x\right)$.  
 > So $\int_0^\pi \sin^2 x \dee x = \frac{1}{2}\left(\pi - \frac{1}{2}\sin 2\pi\right) - \frac{1}{2}\left(0 - \frac{1}{2}\sin 2 \cdot 0\right)$
 
-Evaluate $\int_1^4 \frac{x + 1}{\sqrt} \dee x$:
+Evaluate $\int_1^4 \frac{x + 1}{\sqrt{x}} \dee x$:
 
 > $$
 \begin{align}
@@ -2487,11 +2505,11 @@ Evaluate $\int_1^4 \frac{x + 1}{\sqrt} \dee x$:
 \end{align}
 $$
 
-Evaluate $\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2} + \frac{1}{1 - x}\right) \dee x$:
+Evaluate $\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{1 - x}\right) \dee x$:
 
 > $$
 \begin{align}
-\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2} + \frac{1}{1 - x}\right) \dee x &= \int_0^{\frac{1}{\sqrt{2}}} \frac{4}{\sqrt{1 - x^2} \dee x + \int_0^{\frac{1}{\sqrt{2}}} \frac{1}{1 - x} \dee x \\
+\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{1 - x}\right) \dee x &= \int_0^{\frac{1}{\sqrt{2}}} \frac{4}{\sqrt{1 - x^2}} \dee x + \int_0^{\frac{1}{\sqrt{2}}} \frac{1}{1 - x} \dee x \\
 &= \evalat{4 \arcsin x}_0^{\frac{1}{\sqrt{2}}} + \evalat{-\ln(1 - x)}_0^{\frac{1}{\sqrt{2}}} \\
 &= \pi - 0 + -\ln \frac{\sqrt{2} - 1}{\sqrt{2}} - 0 = \pi + \ln \frac{\sqrt{2}}{\sqrt{2} - 1} \\
 &= \pi + \ln \frac{2 + \sqrt{2}} \\
@@ -2569,7 +2587,7 @@ Evaluate $\int x^3 \sqrt{1 + x^2} \dee x$:
 > Then $\dee x = \dee u \frac{1}{2x}$.  
 > So $\int x^3 \sqrt{1 + x^2} \dee x = \int x^3 \sqrt{u} \dee u \frac{1}{2x} = \int x^2 \sqrt{u} \dee u \frac{1}{2}$.  
 > We still have an $x^2$ factor. But that's OK, because clearly, $x^2 = u - 1$.  
-> So $\int x^3 \sqrt{1 + x^2} \dee x = \frac{1}{2} \int (u - 1) \sqrt{u} \dee u = \frac{1}{2} \int u^\frac{3}{2} - \sqrt{u} \dee u = \frac{1}{2} \left(\frac{2}{5}u^\frac{5}{2} - \frac{2}{3}u^\frac{3}{2}\right + c) = \frac{1}{5}u^\frac{5}{2} - \frac{1}{3}u^\frac{3}{2} + c$.  
+> So $\int x^3 \sqrt{1 + x^2} \dee x = \frac{1}{2} \int (u - 1) \sqrt{u} \dee u = \frac{1}{2} \int u^\frac{3}{2} - \sqrt{u} \dee u = \frac{1}{2} \left(\frac{2}{5}u^\frac{5}{2} - \frac{2}{3}u^\frac{3}{2} + c\right) = \frac{1}{5}u^\frac{5}{2} - \frac{1}{3}u^\frac{3}{2} + c$.  
 
 We can check our answer by integrating it again. It should result in the integrand if it is correct.
 
@@ -2616,7 +2634,7 @@ Find the area between $y = \sin x$ and $y = \cos x$ over $[0, \frac{\pi}{2}]$:
 Find the area of the region in the first quadrant bounded by the $y = \frac{1}{4}x^2$ and $y = x - 1$:
 
 > We find points of intersection: $\frac{1}{4}x^2 = x - 1 \equiv x^2 - 4x + 4 = 0 \equiv (x - 2)^2$, so $x = 2$ is the point of intersection.  
-> Note that the area is not $\int_0^2 (\frac{1]{4}x^2 - (x - 1)) \dee x$, because that would include the area in quadrant 4.  
+> Note that the area is not $\int_0^2 \left(\frac{1}{4}x^2 - (x - 1)\right) \dee x$, because that would include the area in quadrant 4.  
 > So we split the interval into two intervals $[0, 1]$ and $[1, 2]$, since $x = 1$ is where $y = x - 1$ passes below the x-axis.  
 > In the left, we find the area between $y = \frac{1}{4}x^2$ and the x-axis (since $y = x - 1$ is outside of the first quadrant here).  
 > On the right, we find the area between $y = \frac{1}{4}x^2$ and $y = x - 1$.  

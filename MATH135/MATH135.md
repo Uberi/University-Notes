@@ -18,6 +18,7 @@ $$
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 $$
 
@@ -32,7 +33,7 @@ $$
 \end{align}
 $$
 
-This proof is invalid.
+This is not a proof.
 
 Proofs:
 
@@ -829,7 +830,7 @@ EEA Table: technique for finding $\gcd(a, b)$ and integers $x$ and $y$ such that
 
 EEA works with **positive inputs only**.
 
-However, since $\gcd(a, b) = \gcd(\abs{a}, \abs{b})$, we can simply work with $\abs{a}$ and $\abs{b}$ and proceed with the algorithm. Then, $x\sgn(a)$ and $y\sgn(b)$ are the solutions to the original equation.
+However, since $\gcd(a, b) = \gcd(\abs{a}, \abs{b})$, we can simply work with $\abs{a}$ and $\abs{b}$ and proceed with the algorithm. Then, $x\sign(a)$ and $y\sign(b)$ are the solutions to the original equation.
 
 We start by constructing a table, always with the same initial configuration:
 
@@ -2151,7 +2152,7 @@ Solve $z^6 = 1 + i$:
 
 ### Complex n-th Roots Theorem (CNRT)
 
-Proposition: given $z = r(\cos \theta + \imag\sin \theta)$ and $z^n = c$, $n \in \mb{N}$, $z$ has exactly $n$ distinct complex n-th roots, which are $z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k < n$.
+Proposition: given $z = r(\cos \theta + \imag\sin \theta)$ and $z^n = c$, $n \in \mb{N}$, $z$ has exactly $n$ distinct complex n-th roots, which are $z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\left(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k < n$.
 
 In other words, $\sqrt[n]{z} = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\left(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k < n$ for all $n \in \mb{N}$.
 

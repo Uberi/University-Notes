@@ -81,7 +81,8 @@ Office hours: starts week 3, details TBA ;wip</code></pre>
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\evalat}[1]{\left.#1\right|}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
 \]</span></p>
 <h1 id="section">9/9/13</h1>
 <h2 id="preliminaries">Preliminaries</h2>
@@ -101,22 +102,17 @@ Office hours: starts week 3, details TBA ;wip</code></pre>
 <p>Solve <span class="math">\(6 &lt; 1 - 3x \le 10\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
-6 &lt; 1 - 3x \le 10 \\
-\text{Isolate } x: 5 &lt; -3x \le 9 \\
--5 &gt; 3x \ge -9 \\
--5/3 &gt; x \ge -3
+\begin{align}
+6 &amp;&lt; 1 - 3x \le 10 \\
+\text{Isolate } x \text{: } 5 &amp;&lt; -3x \le 9 \\
+-5 &amp;&gt; 3x \ge -9 \\
+-5/3 &amp;&gt; x \ge -3
+\end{align}
 \]</span></p>
 </blockquote>
 <p>Solve <span class="math">\(\frac{1}{x} &lt; 2\)</span>:</p>
 <blockquote>
-<p><span class="math">\[
-\frac{1}{x} &lt; 2 \\
-\text{When } x &gt; 0, 1 &lt; 2x, x \ne 0, \text{ then } x &gt; \frac{1}{2} \\
-\text{When } x &lt; 0, 1 &gt; 2x, x \ne 0, \text{ then } x &lt; \frac{1}{2} \\
-\text{If } x &gt; 0 \text{ and } x &gt; \frac{1}{2}, \text{ then } x &gt; \frac{1}{2} \\
-\text{If } x &lt; 0 \text{ and } x &lt; \frac{1}{2}, \text{ then } x &lt; 0 \\
-\text{Therefore, } x \in (-\infty, 0) \cup (1/2, \infty)
-\]</span></p>
+<p>We know that <span class="math">\(\frac{1}{x} &lt; 2\)</span>.<br />If <span class="math">\(x &gt; 0\)</span>, <span class="math">\(1 &lt; 2x\)</span>, so <span class="math">\(x &gt; \frac{1}{2}\)</span>.<br />If <span class="math">\(x &lt; 0\)</span>, <span class="math">\(1 &gt; 2x\)</span>, so <span class="math">\(x &lt; \frac{1}{2}\)</span>.<br />If <span class="math">\(x &gt; 0\)</span> and <span class="math">\(x &gt; \frac{1}{2}\)</span>, then <span class="math">\(x &gt; \frac{1}{2}\)</span>.<br />If <span class="math">\(x &lt; 0\)</span> and <span class="math">\(x &lt; \frac{1}{2}\)</span>, then <span class="math">\(x &lt; 0\)</span>.<br />Therefore, <span class="math">\(x \in (-\infty, 0) \cup (1/2, \infty)\)</span>.</p>
 </blockquote>
 <h2 id="absolute-value">Absolute Value</h2>
 <p>Distance between number and 0 on the real number line.</p>
@@ -137,9 +133,11 @@ Office hours: starts week 3, details TBA ;wip</code></pre>
 <p>Solve <span class="math">\(\abs{2x-3} &lt; 4\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
-\text{Open the inequality: } -4 &lt; 2x-3 &lt; 4 \\
-\abs{f} &lt; g \implies -g &lt; f &lt; g \\
--1 &lt; 2x &lt; 7 \implies -\frac{1}{2} &lt; x &lt; \frac{7}{2}
+\begin{align}
+\text{Open the inequality: } -4 &amp;&lt; 2x-3 &lt; 4 \\
+\abs{f} &lt; g &amp;\implies -g &lt; f &lt; g \\
+-1 &lt; 2x &lt; 7 &amp;\implies -\frac{1}{2} &lt; x &lt; \frac{7}{2}
+\end{align}
 \]</span></p>
 </blockquote>
 <p>Simplify <span class="math">\(\abs{x} + y \le 1\)</span>:</p>
@@ -161,23 +159,27 @@ y \le \begin{cases}
 <p>Common exclusions from domains:</p>
 <ul>
 <li>Dividing by 0.</li>
-<li>Log of non-positive number.</li>
+<li>Logarithm of non-positive number.</li>
 <li>Even root of negative number.</li>
 </ul>
 <p>A function has an inverse if and only if every unique value of the independent variable in the domain has a unique value of the dependent variable - i.e., &quot;one-to-one&quot;.</p>
 <p>Range: set of possible values for the dependent variable.</p>
 <p>Finding the range can be significantly more difficult than finding the domain, which is simply a matter of looking at the function.</p>
 <p><span class="math">\[
-f(x) = \sqrt{x - 1} \\
-\text{Restriction: } x &gt; 1 \\
-\mb{D} = [1, \infty) \\
-\mb{R} = [0, \infty)
+\begin{align}
+f(x) &amp;= \sqrt{x - 1} \\
+\text{Restriction: } x &amp;&gt; 1 \\
+\mb{D} &amp;= [1, \infty) \\
+\mb{R} &amp;= [0, \infty)
+\end{align}
 \]</span></p>
 <p><span class="math">\[
-f(x) = \frac{1}{1 - x^2} \\
-\text{Restriction: } x \ne 0 \\
-\mb{D} = (\infty, -1) \cup (-1, 1) \cup (1, \infty) \\
-\mb{R} = (-\infty, 0) \cup [1, \infty)
+\begin{align}
+f(x) &amp;= \frac{1}{1 - x^2} \\
+\text{Restriction: } x &amp;\ne 0 \\
+\mb{D} &amp;= (\infty, -1) \cup (-1, 1) \cup (1, \infty) \\
+\mb{R} &amp;= (-\infty, 0) \cup [1, \infty)
+\end{align}
 \]</span></p>
 <p>A <strong>true function</strong> must have a unique output for each input. Graphically, the vertical line test passes for all points (vertical line drawn on graph will only intersect it at most once if it is a graph of a true function).</p>
 <p>Non-functions can be described using functions by combining multiple functions into one:</p>
@@ -244,16 +246,18 @@ f(x) = \frac{1}{1 - x^2} \\
 <p>The inverse is found by swapping the variables and isolating variables.</p>
 <p>If a function is not one-to-one over <span class="math">\(\mb{R}\)</span>, we may restrict the domain to a region where it is, and define the inverse there. This is useful with things like trigonometric functions, for example.</p>
 <p>Find the inverse of <span class="math">\(f(x) = \sqrt{10 - 3x}\)</span>:</p>
-<p><span class="math">\(\mb{D} = (-\infty, \frac{10}{3}]\)</span></p>
-<p><span class="math">\(\mb{R} = [0, \infty)\)</span></p>
 <blockquote>
 <p><span class="math">\[
-x = \sqrt{10 - 3 f^{-1}(x)} \\
-x^2 = 10 - 3 f^{-1}(x) \\
-x^2 - 10 = -3 f^{-1}(x) \\
-\frac{10 - x^2}{3} = f^{-1}(x) \\
-\mb{D} = [0, \infty) \\
-\mb{R} = (-\infty, \frac{10}{3}]
+\begin{align}
+\mb{D} &amp;= (-\infty, \frac{10}{3}] \\
+\mb{R} &amp;= [0, \infty) \\
+x &amp;= \sqrt{10 - 3 f^{-1}(x)} \\
+x^2 &amp;= 10 - 3 f^{-1}(x) \\
+x^2 - 10 &amp;= -3 f^{-1}(x) \\
+\frac{10 - x^2}{3} &amp;= f^{-1}(x) \\
+\mb{D} &amp;= [0, \infty) \\
+\mb{R} &amp;= (-\infty, \frac{10}{3}]
+\end{align}
 \]</span></p>
 </blockquote>
 <p>Graphically, if the point <span class="math">\((a, b)\)</span> is on the graph of <span class="math">\(f(x)\)</span>, then <span class="math">\((b, a)\)</span> is on the graph of <span class="math">\(f^{-1}(x)\)</span>. Using this information, we can sketch the inverse of a graph by reflecting it along the line <span class="math">\(y = x\)</span>.</p>
@@ -284,9 +288,11 @@ x^2 - 10 = -3 f^{-1}(x) \\
 <p>Find the inverse of <span class="math">\(f(x) = e^{2x + 1}\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
-x = e^{2 f^{-1}(x) + 1} \\
-\ln(x) = 2 f^{-1}(x) + 1 \\
-f^{-1}(x) = \frac{1}{2} \ln(x) - \frac{1}{2} \\
+\begin{align}
+x &amp;= e^{2 f^{-1}(x) + 1} \\
+\ln(x) &amp;= 2 f^{-1}(x) + 1 \\
+f^{-1}(x) &amp;= \frac{1}{2} \ln(x) - \frac{1}{2} \\
+\end{align}
 \]</span></p>
 </blockquote>
 <h1 id="section-5">20/9/13</h1>
@@ -328,14 +334,12 @@ f^{-1}(x) = \frac{1}{2} \ln(x) - \frac{1}{2} \\
 <li>Right triangle with side lengths <span class="math">\(1, 1, \sqrt{2}\)</span> and internal angles <span class="math">\(\frac{\pi}{4}, \frac{\pi}{4}. \frac{\pi}{2}\)</span>.</li>
 <li>Right triangle with side lengths <span class="math">\(1, \sqrt{3}, 2\)</span> and internal angles <span class="math">\(\frac{\pi}{6}, \frac{\pi}{3}. \frac{\pi}{2}\)</span>.</li>
 </ul>
-<p>Parametric equations of unit circle (<span class="math">\(x^2 + y^2 = 1\)</span>):</p>
-<ul>
-<li>Cosine: <span class="math">\(x = \cos \theta\)</span></li>
-<li>Sine: <span class="math">\(y = \sin \theta\)</span></li>
-</ul>
+<p>Parametric equations of unit circle (<span class="math">\(x^2 + y^2 = 1\)</span>): <span class="math">\(x = \cos \theta\)</span> and <span class="math">\(y = \sin \theta\)</span> together form a unit circle from polar coordinates.</p>
 <p><span class="math">\[
-x^2 + y^2 = 1 \\
-\sin^2 \theta + \cos^2 \theta = 1 \\
+\begin{align}
+x^2 + y^2 &amp;= 1 \\
+\sin^2 \theta + \cos^2 \theta &amp;= 1 \\
+\end{align}
 \]</span></p>
 <h3 id="properties">Properties</h3>
 <p>Bounds: <span class="math">\(-1 \le \sin \theta \le 1\)</span>, <span class="math">\(-1 \le \cos \theta \le 1\)</span></p>
@@ -350,15 +354,17 @@ x^2 + y^2 = 1 \\
 <li>Cotangent: <span class="math">\(\cot \theta = \frac{\cos \theta}{\sin \theta}\)</span></li>
 </ul>
 <h3 id="identities">Identities</h3>
-<p>Square Identity: <span class="math">\(\sin^2 \theta + \cos^2 \theta = 1\)</span></p>
-<p>Addition formulas: <span class="math">\(\sin(x + y) = \sin x \cos y + \cos x \sin y\)</span>, <span class="math">\(\cos(x + y) = \cos x \cos y - \sin x \sin y\)</span></p>
+<p>Square Identity: <span class="math">\(\sin^2 \theta + \cos^2 \theta = 1\)</span>.</p>
+<p>Addition formulas: <span class="math">\(\sin(x + y) = \sin x \cos y + \cos x \sin y\)</span>, <span class="math">\(\cos(x + y) = \cos x \cos y - \sin x \sin y\)</span>.</p>
 <p>Find the subtraction formulas:</p>
 <blockquote>
 <p><span class="math">\[
-\sin(x - y) = \sin x \cos(-y) + \cos x \sin(-y) \\
-\sin(x - y) = \sin x \cos y - \cos x \sin y \\
-\cos(x - y) = \cos x \cos(-y) - \sin x \sin(-y) \\
-\cos(x - y) = \cos x \cos y + \sin x \sin y \\
+\begin{align}
+\sin(x - y) &amp;= \sin x \cos(-y) + \cos x \sin(-y) \\
+&amp;= \sin x \cos y - \cos x \sin y \\
+\cos(x - y) &amp;= \cos x \cos(-y) - \sin x \sin(-y) \\
+&amp;= \cos x \cos y + \sin x \sin y \\
+\end{align}
 \]</span></p>
 </blockquote>
 <h2 id="inverse-trigonometric-functions">Inverse Trigonometric Functions</h2>
@@ -370,23 +376,27 @@ x^2 + y^2 = 1 \\
 <p>Evaluate <span class="math">\(\cos(\arctan \sqrt{3})\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
-\frac{\sqrt{3}}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
-\text{opposite} = \sqrt{3} \\
-\text{adjacent} = 1 \\
-\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
-\cos(\arctan \sqrt{3}) = \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
-\cos(\arctan \sqrt{3}) = \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
+\begin{align}
+\frac{\sqrt{3}}{1} &amp;= \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} &amp;= \sqrt{3} \\
+\text{adjacent} &amp;= 1 \\
+\text{hypotenuse} &amp;= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\cos(\arctan \sqrt{3}) &amp;= \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\cos(\arctan \sqrt{3}) &amp;= \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
+\end{align}
 \]</span></p>
 </blockquote>
 <p>Simplify <span class="math">\(\sin(\arctan x)\)</span></p>
 <blockquote>
 <p><span class="math">\[
-\frac{x}{1} = \frac{\text{opposite}}{\text{adjacent}} \\
-\text{opposite} = x \\
-\text{adjacent} = 1 \\
-\text{hypotenuse} = \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
-\sin(\arctan x) = \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
-\sin(\arctan x) = \frac{x}{\sqrt{x^2 + 1}} \\
+\begin{align}
+\frac{x}{1} &amp;= \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} &amp;= x \\
+\text{adjacent} &amp;= 1 \\
+\text{hypotenuse} &amp;= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\sin(\arctan x) &amp;= \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\sin(\arctan x) &amp;= \frac{x}{\sqrt{x^2 + 1}} \\
+\end{align}
 \]</span></p>
 </blockquote>
 <p>Evaluate <span class="math">\(\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)\)</span>:</p>
@@ -398,11 +408,13 @@ sqrt(3) |  \
     pi/2  1  pi/3</code></pre>
 <blockquote>
 <p><span class="math">\[
-\sin \left( \frac{-\pi}{3} \right) = \frac{\text{opposite}}{\text{hypotenuse}} = -\frac{\sqrt{3}}{2} \\
-\text{opposite} = \sqrt{3} \\
-\text{hypotenuse} = 2 \\
-\text{adjacent} = \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
-\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) = \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\ ;wip: why and how does this even work
+\begin{align}
+\sin \left( \frac{-\pi}{3} \right) &amp;= \frac{\text{opposite}}{\text{hypotenuse}} = -\frac{\sqrt{3}}{2} \\
+\text{opposite} &amp;= \sqrt{3} \\
+\text{hypotenuse} &amp;= 2 \\
+\text{adjacent} &amp;= \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
+\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) &amp;= \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\
+\end{align}
 \]</span></p>
 </blockquote>
 <h1 id="section-6">23/9/13</h1>
@@ -454,7 +466,7 @@ xe^y + xe^{-y} &amp;= e^y - e^{-y} \\
 xe^{2y} + x &amp;= e^{2y} - 1 \\
 (x - 1)e^{2y} &amp;= x + 1 \\
 e^y &amp;= \pm \sqrt{\frac{x + 1}{x - 1}} \\
-\text{Since } -\sqrt{\frac{x + 1}{x - 1}} &lt; 0 \text{, the negative solution is extraneous.} \\
+\text{Since } -\sqrt{\frac{x + 1}{x - 1}} &amp;&lt; 0 \text{, the negative solution is extraneous.} \\
 e^y &amp;= \sqrt{\frac{x + 1}{x - 1}} \\
 y &amp;= \ln \left( \frac{x + 1}{x - 1} \right)^\frac{1}{2} \\
 y &amp;= \frac{1}{2} \ln \frac{x + 1}{x - 1} \\
@@ -479,7 +491,7 @@ g(x) = \begin{cases}
 <p><span class="math">\(\epsilon\)</span> is Epsilon (Greek) and is associated with error.</p>
 <p><span class="math">\(\delta\)</span> is Delta (Greek) and is associated with difference.</p>
 <p>The key point is that the limit exists if the distance between <span class="math">\(f(x)\)</span> and <span class="math">\(L\)</span> (the error, <span class="math">\(\epsilon\)</span>) <strong>can be made as small as needed</strong> by making the distance between <span class="math">\(x\)</span> and <span class="math">\(a\)</span> (the difference, <span class="math">\(\delta\)</span>) sufficiently small. However, <span class="math">\(x \ne a\)</span>.</p>
-<p><span class="math">\[a - \delta &lt; x &lt; a + \delta \implies L - \epsilon &lt; f(x) &lt; L + \epsilon\]</span></p>
+<p>We can also write the implication <span class="math">\(0 &lt; \abs{x - a} &lt; \delta \implies \abs{f(x) - L} &lt; \epsilon\)</span> as <span class="math">\(a - \delta &lt; x &lt; a + \delta \implies L - \epsilon &lt; f(x) &lt; L + \epsilon\)</span>.</p>
 <p><span class="math">\(\delta\)</span> depends on <span class="math">\(\epsilon\)</span>.</p>
 <h1 id="section-8">27/9/13</h1>
 <p>Geometry and intuition are useful tools, but do not prove anything.</p>
@@ -643,7 +655,7 @@ x \sin \frac{1}{x} &amp;\text{if } x \ne 0 \\
 <p>Limit laws also apply as <span class="math">\(x \to \pm \infty\)</span>, including the squeeze theorem.</p>
 <p>Prove <span class="math">\(\lim_{x \to \infty} \frac{1}{x^k} = 0, k &gt; 0\)</span>:</p>
 <blockquote>
-<p>Let <span class="math">\(\epsilon\)</span> be an arbitrary positive real number.<br />Construct <span class="math">\(n = \frac{1}{\sqrt[k]{\epsilon}}\)</span>.<br />Assume <span class="math">\(x &gt; n\)</span>.<br />So <span class="math">\(x &gt; \frac{1}{\sqrt[k]{\epsilon}}\)</span>.<br />So <span class="math">\(\frac{1}{x} &lt; \sqrt[k]{\epsilon}\)</span>.<br />So <span class="math">\(\frac{1}{x^k} - 0 &lt; \epsilon\)</span>.<br />Therefore, <span class="math">\(\lim_{x \to \infty} \frac{1}{x^k} = 0, k &gt; 0\)</span>.</p>
+<p>Let <span class="math">\(\epsilon\)</span> be an arbitrary positive real number.<br />Construct <span class="math">\(n = \frac{1}{\sqrt[k]{\epsilon}}\)</span>.<br />Assume <span class="math">\(x &gt; n\)</span>. So <span class="math">\(x &gt; \frac{1}{\sqrt[k]{\epsilon}}\)</span>.<br />So <span class="math">\(\frac{1}{x} &lt; \sqrt[k]{\epsilon}\)</span> and <span class="math">\(\frac{1}{x^k} - 0 &lt; \epsilon\)</span>.<br />Therefore, <span class="math">\(\lim_{x \to \infty} \frac{1}{x^k} = 0, k &gt; 0\)</span>.</p>
 </blockquote>
 <p>Infinite limit theorem: for <span class="math">\(r \in \mb{Q}, r &gt; 0\)</span>, when <span class="math">\(x^r\)</span> is defined, <span class="math">\(\lim_{x \to \infty} \frac{1}{x^r} = 0\)</span>. In other words, when <span class="math">\(r\)</span> is rational and defined, <span class="math">\(\lim_{x \to \infty} \frac{1}{x^r} = 0\)</span>.</p>
 <p>Evaluate <span class="math">\(\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x}\)</span>:</p>
@@ -673,7 +685,7 @@ x \sin \frac{1}{x} &amp;\text{if } x \ne 0 \\
 <p>Evaluate <span class="math">\(\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
-\text{Note that } x^2 &gt; 2x \text{ for all } x &gt; 2 \\
+\text{Note that } \forall x &gt; 2, x^2 &gt; 2x \\
 \lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}} = \frac{-2}{-\infty - \sqrt{\infty - \infty}} = \frac{-2}{-\infty} = 0 \\
 \]</span></p>
 </blockquote>
@@ -685,8 +697,8 @@ x \sin \frac{1}{x} &amp;\text{if } x \ne 0 \\
 e^{-x} &amp;= \frac{1}{e^x} \\
 \lim_{x \to \infty}  e^{-x} &amp;= 0 \\
 \text{By the squeeze theorem: } \lim_{x \to \infty}  e^{-x} \cdot -1 &amp;\le \lim_{x \to \infty}  e^{-x} \sin x \le \lim_{x \to \infty}  e^{-x} \cdot 1 \\
-0 \le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
-\lim_{x \to \infty}  e^{-x} \sin x = 0 \\
+0 &amp;\le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
+\lim_{x \to \infty}  e^{-x} \sin x &amp;= 0 \\
 \end{align}
 \]</span></p>
 </blockquote>
@@ -735,7 +747,7 @@ e^{-x} &amp;= \frac{1}{e^x} \\
 \begin{align}
 f&#39;(0) &amp;= \lim_{x \to 0} \frac{x \sin \frac{1}{x} - 0}{x - 0} \\
 &amp;= \lim_{x \to 0} \sin \frac{1}{x} \\
-\text{The limit does not exist}
+&amp;\text{The limit does not exist}
 \end{align}
 \]</span></p>
 </blockquote>
@@ -745,7 +757,7 @@ f&#39;(0) &amp;= \lim_{x \to 0} \frac{x \sin \frac{1}{x} - 0}{x - 0} \\
 \begin{align}
 f&#39;(0) &amp;= \lim_{x \to 0} \frac{x^2 \sin \frac{1}{x} - 0}{x - 0} \\
 &amp;= \lim_{x \to 0} x \sin \frac{1}{x} \\
-&amp;= 0 \text{ by the squeeze theorem}
+&amp;= 0 \text{(squeeze theorem)}
 \end{align}
 \]</span></p>
 </blockquote>
@@ -769,6 +781,7 @@ f&#39;(0) &amp;= \lim_{x \to 0} \frac{x^2 \sin \frac{1}{x} - 0}{x - 0} \\
 &amp;= \frac{1}{2 \sqrt{x}} \\
 \end{align}
 \]</span></p>
+<h3 id="differentiability-implies-continuity">Differentiability implies continuity</h3>
 <p>If <span class="math">\(f(x)\)</span> is differentiable at <span class="math">\(x = a\)</span>, then it is also continuous at that point. Likewise, if a function is not continuous at <span class="math">\(x = a\)</span>, then it is also not differentiable - the contrapositive.</p>
 <p>Proof:</p>
 <blockquote>
@@ -972,7 +985,7 @@ t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sq
 \]</span></p>
 </blockquote>
 <h3 id="hyperbolic-tangent-rule">Hyperbolic tangent rule</h3>
-<p><span class="math">\(\frac{\dee}{\dee x} \tanh(x) = \sech(x)\)</span>.</p>
+<p><span class="math">\(\frac{\dee}{\dee x} \tanh(x) = \frac{1}{\cosh(x)} = \sech(x)\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
 <p><span class="math">\[
@@ -988,7 +1001,7 @@ t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sq
 <h1 id="section-15">18/10/13</h1>
 <p>The <strong>triangle inequality</strong> states that <span class="math">\(\abs{x + y} \le \abs{x} + \abs{y}, x \in \mb{R}^n, y \in \mb{R}^n\)</span></p>
 <h2 id="chain-rule">Chain Rule</h2>
-<p><span class="math">\(f&#39;(x) = g&#39;(h(x)) h&#39;(x) = \frac{\dee g \circ h}{\dee x} = \frac{\dee g}{\dee h} \frac{\dee h}{\dee x}\)</span>.</p>
+<p><span class="math">\(f&#39;(x) = g&#39;(h(x)) h&#39;(x) = \frac{\dee}{\dee x} g \circ h = \frac{\dee g}{\dee h} \frac{\dee h}{\dee x}\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
 <p>;wip</p>
@@ -1024,8 +1037,8 @@ t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sq
 <blockquote>
 <p><span class="math">\[
 \begin{align}
-\frac{\dee}{\dee x} (x^2 + y^2) = \frac{\dee}{\dee x} 1 \\
-&amp;= \frac{\dee}{\dee x} x^2 + \frac{\dee}{\dee x} y^2 = \frac{\dee}{\dee x} 1
+\frac{\dee}{\dee x} (x^2 + y^2) &amp;= \frac{\dee}{\dee x} 1 \\
+&amp;= \frac{\dee}{\dee x} x^2 + \frac{\dee}{\dee x} y^2 = \frac{\dee}{\dee x} 1 \\
 &amp;= 2x + \frac{\dee}{\dee x} y^2 = 0 \\
 &amp;= 2x + \frac{\dee}{\dee x} y(x)^2 \\
 &amp;= 2x + \frac{\dee}{\dee y} y^2 \cdot \frac{\dee}{\dee x} y \\
@@ -1044,11 +1057,11 @@ t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sq
 3x^2 - 3y &amp;= (3x - 3y^2)y&#39; \\
 3x^2 - 3y &amp;= (3x - 3y^2)y&#39; \\
 y&#39; &amp;= \frac{3x^2 - 3y}{3x - 3y^2} = \frac{x^2 - y}{x - y^2} = 0 \\
-x^2 - y = 0 \wedge x - y^2 \ne 0 \equiv y = x^2 \wedge y \ne \sqrt{x} \equiv y = x^2 \wedge x \ne 0 \wedge y \ne 0 \\
-x^3 + (x^2)^3 = 3xx^2 \equiv x^3 + x^6 = 3x^3 \equiv x^3(x^3 - 1) = 0 \\
-x = 0 \text{ extraneous}, x = 1 \\
+x^2 - y = 0 \wedge x - y^2 \ne 0 &amp;\equiv y = x^2 \wedge y \ne \sqrt{x} \equiv y = x^2 \wedge x \ne 0 \wedge y \ne 0 \\
+x^3 + (x^2)^3 = 3xx^2 &amp;\equiv x^3 + x^6 = 3x^3 \equiv x^3(x^3 - 1) = 0 \\
+x &amp;= 0 \text{ (extraneous)}, x = 1 \\
 y = 1^2 = 1 \\
-\text{There is a horizontal tangent at } (1, 1)
+&amp;\text{There is a horizontal tangent at } (1, 1)
 \end{align}
 \]</span></p>
 </blockquote>
@@ -1449,7 +1462,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 </ol>
 <p>Find the points on <span class="math">\(f(x) = 1 - x^2\)</span> closest to the origin:</p>
 <blockquote>
-<p>The constraint is that the point must be on the function's curve.<br />The goal is to minimize <span class="math">\(g(x) = \sqrt{x^2 + f(x)^2} = \sqrt{x^2 + 1 - 2x^2 + x^4} = \sqrt{x^4 - x^2 + 1}\)</span>.<br />Here, we will instead minimize <span class="math">\(g(x)^2\)</span> since the extrema occur at the same <span class="math">\(x\)</span> values.<br /><span class="math">\(\frac{\dee}{\dee x} g(x)^2 = 4x^3 - 2x = 2x(2x^2 - 1) = 0\)</span> when <span class="math">\(x = 0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\)</span>.<br />We test to find <span class="math">\(g(0) = 1, g(-\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}, g(\frac{1}{\sqrt}{2}) = \frac{\sqrt{3}}{2}\)</span>.<br />Since <span class="math">\(g(x) \to \infty\)</span> as <span class="math">\(x \to \pm \infty\)</span>, this is both a local and global minimum.<br />So the points are <span class="math">\((-\frac{1}{\sqrt}{2}, \frac{1}{2})\)</span> and <span class="math">\((\frac{1}{\sqrt}{2}, \frac{1}{2})\)</span>.</p>
+<p>The constraint is that the point must be on the function's curve.<br />The goal is to minimize <span class="math">\(g(x) = \sqrt{x^2 + f(x)^2} = \sqrt{x^2 + 1 - 2x^2 + x^4} = \sqrt{x^4 - x^2 + 1}\)</span>.<br />Here, we will instead minimize <span class="math">\(g(x)^2\)</span> since the extrema occur at the same <span class="math">\(x\)</span> values.<br /><span class="math">\(\frac{\dee}{\dee x} g(x)^2 = 4x^3 - 2x = 2x(2x^2 - 1) = 0\)</span> when <span class="math">\(x = 0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\)</span>.<br />We test to find <span class="math">\(g(0) = 1, g(-\frac{1}{\sqrt{2}}) = \frac{\sqrt{3}}{2}, g(\frac{1}{\sqrt{2}}) = \frac{\sqrt{3}}{2}\)</span>.<br />Since <span class="math">\(g(x) \to \infty\)</span> as <span class="math">\(x \to \pm \infty\)</span>, this is both a local and global minimum.<br />So the points are <span class="math">\((-\frac{1}{\sqrt{2}}, \frac{1}{2})\)</span> and <span class="math">\((\frac{1}{\sqrt{2}}, \frac{1}{2})\)</span>.</p>
 </blockquote>
 <h1 id="section-26">13/11/13</h1>
 <h2 id="newtons-method">Newton's Method</h2>
@@ -1500,7 +1513,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <h3 id="exponential-functions-1">Exponential Functions</h3>
 <p>Let <span class="math">\(f(x) = e^x\)</span>.</p>
 <p>Since <span class="math">\(\frac{\dee}{\dee x} (e^x + c) = e^x\)</span>, <span class="math">\(F(x) = e^x + c\)</span>.</p>
-<p>Since <span class="math">\(\frac{\dee}{\dee x} (a^x + c) = a^x \ln x\)</span>, <span class="math">\(F(x) = \frac{a^x}{\n a} + c\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee}{\dee x} (a^x + c) = a^x \ln x\)</span>, <span class="math">\(F(x) = \frac{a^x}{\ln a} + c\)</span>.</p>
 <h3 id="trigonometric-functions">Trigonometric Functions</h3>
 <p>Let <span class="math">\(f(x) = \sin x\)</span>.</p>
 <p>Since <span class="math">\(\frac{\dee}{\dee x} (\cos x + c) = -\sin x\)</span>, <span class="math">\(F(x) = -\cos x\)</span>.</p>
@@ -1522,7 +1535,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 </blockquote>
 <p>Antidifferentiate <span class="math">\(e^{-7x}\)</span>:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\frac{\dee}{\dee x} (e^{-7x} + c) = -7e^{-7x}\)</span>.<br />Then <span class="math">\(\frac{\dee}{\dee x} (\frac{e^{-7x}{-7} + c) = e^{-7x}\)</span>.</p>
+<p>Clearly, <span class="math">\(\frac{\dee}{\dee x} (e^{-7x} + c) = -7e^{-7x}\)</span>.<br />Then <span class="math">\(\frac{\dee}{\dee x} (\frac{e^{-7x}}{-7} + c) = e^{-7x}\)</span>.</p>
 </blockquote>
 <p>Antidifferentiate <span class="math">\(\sqrt{x}(1 + x)\)</span>:</p>
 <blockquote>
@@ -1689,6 +1702,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <blockquote>
 <p>Both integral endpoints are functions.<br />We can split it into two integrals <span class="math">\(f(x) = \int_x^c t^2 e^t \dee t + \int_c^{x^2} t^2 e^t \dee t\)</span> for some constant <span class="math">\(c\)</span>.<br />Clearly, <span class="math">\(\int_x^c t^2 e^t \dee t = -x^2 e^x\)</span>.<br />Let <span class="math">\(u = x^2\)</span>. Then <span class="math">\(\frac{\dee}{\dee x} \int_c^{x^2} t^2 e^t \dee t = \frac{\dee u}{\dee x} \frac{\dee}{\dee u} \int_c^u t^2 e^t \dee t = 2x(u^2 e^u) = 2x(x^4 e^{x^2}) = 2x^5 e^{x^2}\)</span>.<br />So <span class="math">\(f&#39;(x) = -x^2 e^x + 2x^5 e^{x^2}\)</span>.</p>
 </blockquote>
+<p>In general, to differentiate an integral with endpoints that are functions, we split it at a constant so that there is only one endpoint that is a function, then substitute temporary variables for the endpoints. We then use the chain rule to differentiate with respect to <span class="math">\(x\)</span> by going through the temporary variables.</p>
 <h3 id="part-2">Part 2</h3>
 <p>If <span class="math">\(f\)</span> is continuous over <span class="math">\([a, b]\)</span> and <span class="math">\(F\)</span> is any antiderivative of <span class="math">\(f\)</span>, then <span class="math">\(\int_a^b f(x) \dee x = F(b) - F(a)\)</span>.</p>
 <p>This allows us to easily evaluate integrals simply by finding antiderivatives. This is much simpler than using the Riemann sum or whatever.</p>
@@ -1718,7 +1732,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <blockquote>
 <p>It is difficult to find the antiderivative if the chain rule is used in differentiating it. Instead, we use the half-angle formula: <span class="math">\(\sin^2 x = \frac{1}{2} (1 - \cos 2x)\)</span>.<br />Now we can find the antiderivative: <span class="math">\(\frac{1}{2}\left(x - \frac{1}{2}\sin 2x\right)\)</span>.<br />So <span class="math">\(\int_0^\pi \sin^2 x \dee x = \frac{1}{2}\left(\pi - \frac{1}{2}\sin 2\pi\right) - \frac{1}{2}\left(0 - \frac{1}{2}\sin 2 \cdot 0\right)\)</span></p>
 </blockquote>
-<p>Evaluate <span class="math">\(\int_1^4 \frac{x + 1}{\sqrt} \dee x\)</span>:</p>
+<p>Evaluate <span class="math">\(\int_1^4 \frac{x + 1}{\sqrt{x}} \dee x\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
 \begin{align}
@@ -1730,11 +1744,11 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 \end{align}
 \]</span></p>
 </blockquote>
-<p>Evaluate <span class="math">\(\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2} + \frac{1}{1 - x}\right) \dee x\)</span>:</p>
+<p>Evaluate <span class="math">\(\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{1 - x}\right) \dee x\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
 \begin{align}
-\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2} + \frac{1}{1 - x}\right) \dee x &amp;= \int_0^{\frac{1}{\sqrt{2}}} \frac{4}{\sqrt{1 - x^2} \dee x + \int_0^{\frac{1}{\sqrt{2}}} \frac{1}{1 - x} \dee x \\
+\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{1 - x}\right) \dee x &amp;= \int_0^{\frac{1}{\sqrt{2}}} \frac{4}{\sqrt{1 - x^2}} \dee x + \int_0^{\frac{1}{\sqrt{2}}} \frac{1}{1 - x} \dee x \\
 &amp;= \evalat{4 \arcsin x}_0^{\frac{1}{\sqrt{2}}} + \evalat{-\ln(1 - x)}_0^{\frac{1}{\sqrt{2}}} \\
 &amp;= \pi - 0 + -\ln \frac{\sqrt{2} - 1}{\sqrt{2}} - 0 = \pi + \ln \frac{\sqrt{2}}{\sqrt{2} - 1} \\
 &amp;= \pi + \ln \frac{2 + \sqrt{2}} \\
@@ -1789,7 +1803,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 </blockquote>
 <p>Evaluate <span class="math">\(\int x^3 \sqrt{1 + x^2} \dee x\)</span>:</p>
 <blockquote>
-<p>Let <span class="math">\(u = 1 + x^2\)</span>.<br />Then <span class="math">\(\dee x = \dee u \frac{1}{2x}\)</span>.<br />So <span class="math">\(\int x^3 \sqrt{1 + x^2} \dee x = \int x^3 \sqrt{u} \dee u \frac{1}{2x} = \int x^2 \sqrt{u} \dee u \frac{1}{2}\)</span>.<br />We still have an <span class="math">\(x^2\)</span> factor. But that's OK, because clearly, <span class="math">\(x^2 = u - 1\)</span>.<br />So <span class="math">\(\int x^3 \sqrt{1 + x^2} \dee x = \frac{1}{2} \int (u - 1) \sqrt{u} \dee u = \frac{1}{2} \int u^\frac{3}{2} - \sqrt{u} \dee u = \frac{1}{2} \left(\frac{2}{5}u^\frac{5}{2} - \frac{2}{3}u^\frac{3}{2}\right + c) = \frac{1}{5}u^\frac{5}{2} - \frac{1}{3}u^\frac{3}{2} + c\)</span>.</p>
+<p>Let <span class="math">\(u = 1 + x^2\)</span>.<br />Then <span class="math">\(\dee x = \dee u \frac{1}{2x}\)</span>.<br />So <span class="math">\(\int x^3 \sqrt{1 + x^2} \dee x = \int x^3 \sqrt{u} \dee u \frac{1}{2x} = \int x^2 \sqrt{u} \dee u \frac{1}{2}\)</span>.<br />We still have an <span class="math">\(x^2\)</span> factor. But that's OK, because clearly, <span class="math">\(x^2 = u - 1\)</span>.<br />So <span class="math">\(\int x^3 \sqrt{1 + x^2} \dee x = \frac{1}{2} \int (u - 1) \sqrt{u} \dee u = \frac{1}{2} \int u^\frac{3}{2} - \sqrt{u} \dee u = \frac{1}{2} \left(\frac{2}{5}u^\frac{5}{2} - \frac{2}{3}u^\frac{3}{2} + c\right) = \frac{1}{5}u^\frac{5}{2} - \frac{1}{3}u^\frac{3}{2} + c\)</span>.</p>
 </blockquote>
 <p>We can check our answer by integrating it again. It should result in the integrand if it is correct.</p>
 <p>Exercises:</p>
@@ -1821,7 +1835,7 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 </blockquote>
 <p>Find the area of the region in the first quadrant bounded by the <span class="math">\(y = \frac{1}{4}x^2\)</span> and <span class="math">\(y = x - 1\)</span>:</p>
 <blockquote>
-<p>We find points of intersection: <span class="math">\(\frac{1}{4}x^2 = x - 1 \equiv x^2 - 4x + 4 = 0 \equiv (x - 2)^2\)</span>, so <span class="math">\(x = 2\)</span> is the point of intersection.<br />Note that the area is not <span class="math">\(\int_0^2 (\frac{1]{4}x^2 - (x - 1)) \dee x\)</span>, because that would include the area in quadrant 4.<br />So we split the interval into two intervals <span class="math">\([0, 1]\)</span> and <span class="math">\([1, 2]\)</span>, since <span class="math">\(x = 1\)</span> is where <span class="math">\(y = x - 1\)</span> passes below the x-axis.<br />In the left, we find the area between <span class="math">\(y = \frac{1}{4}x^2\)</span> and the x-axis (since <span class="math">\(y = x - 1\)</span> is outside of the first quadrant here).<br />On the right, we find the area between <span class="math">\(y = \frac{1}{4}x^2\)</span> and <span class="math">\(y = x - 1\)</span>.<br />So the area is <span class="math">\(\int_0^1 \frac{1}{4}x^2 \dee x + \int_1^2 (\frac{1}{4}x^2 - (x - 1)) \dee x = \evalat{\frac{1}{12}x^3}_0^1 + \evalat{\frac{1}{12}x^3 - \frac{1}{2}x^2 + x}_1^2 = \frac{1}{6}\)</span>.</p>
+<p>We find points of intersection: <span class="math">\(\frac{1}{4}x^2 = x - 1 \equiv x^2 - 4x + 4 = 0 \equiv (x - 2)^2\)</span>, so <span class="math">\(x = 2\)</span> is the point of intersection.<br />Note that the area is not <span class="math">\(\int_0^2 \left(\frac{1}{4}x^2 - (x - 1)\right) \dee x\)</span>, because that would include the area in quadrant 4.<br />So we split the interval into two intervals <span class="math">\([0, 1]\)</span> and <span class="math">\([1, 2]\)</span>, since <span class="math">\(x = 1\)</span> is where <span class="math">\(y = x - 1\)</span> passes below the x-axis.<br />In the left, we find the area between <span class="math">\(y = \frac{1}{4}x^2\)</span> and the x-axis (since <span class="math">\(y = x - 1\)</span> is outside of the first quadrant here).<br />On the right, we find the area between <span class="math">\(y = \frac{1}{4}x^2\)</span> and <span class="math">\(y = x - 1\)</span>.<br />So the area is <span class="math">\(\int_0^1 \frac{1}{4}x^2 \dee x + \int_1^2 (\frac{1}{4}x^2 - (x - 1)) \dee x = \evalat{\frac{1}{12}x^3}_0^1 + \evalat{\frac{1}{12}x^3 - \frac{1}{2}x^2 + x}_1^2 = \frac{1}{6}\)</span>.</p>
 </blockquote>
 <p>Exam stuff:</p>
 <ul>

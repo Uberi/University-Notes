@@ -82,6 +82,7 @@ Tutorials: Tuesdays 4:30PM-7:20PM (Drop-in to Biology 1 Room 271)</code></pre>
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \]</span></p>
 <h1 id="section">9/9/13</h1>
@@ -92,7 +93,7 @@ Tutorials: Tuesdays 4:30PM-7:20PM (Drop-in to Biology 1 Room 271)</code></pre>
 \sqrt{x}\sqrt{x}(\sqrt{x}-1) &amp;= \sqrt{x}\sqrt{x}(1-\sqrt{x})
 \end{align}
 \]</span></p>
-<p>This proof is invalid.</p>
+<p>This is not a proof.</p>
 <p>Proofs:</p>
 <ul>
 <li>Avoid starting with thing trying to be proved (assuming the thing is true)</li>
@@ -587,7 +588,7 @@ Which is in fact:
 <p>There are often multiple possible values of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> that can result in a linear combination.</p>
 <p>EEA Table: technique for finding <span class="math">\(\gcd(a, b)\)</span> and integers <span class="math">\(x\)</span> and <span class="math">\(y\)</span> such that <span class="math">\(ax + by = \gcd(a, b)\)</span> all at the same time.</p>
 <p>EEA works with <strong>positive inputs only</strong>.</p>
-<p>However, since <span class="math">\(\gcd(a, b) = \gcd(\abs{a}, \abs{b})\)</span>, we can simply work with <span class="math">\(\abs{a}\)</span> and <span class="math">\(\abs{b}\)</span> and proceed with the algorithm. Then, <span class="math">\(x\sgn(a)\)</span> and <span class="math">\(y\sgn(b)\)</span> are the solutions to the original equation.</p>
+<p>However, since <span class="math">\(\gcd(a, b) = \gcd(\abs{a}, \abs{b})\)</span>, we can simply work with <span class="math">\(\abs{a}\)</span> and <span class="math">\(\abs{b}\)</span> and proceed with the algorithm. Then, <span class="math">\(x\sign(a)\)</span> and <span class="math">\(y\sign(b)\)</span> are the solutions to the original equation.</p>
 <p>We start by constructing a table, always with the same initial configuration:</p>
 <table>
 <thead>
@@ -1317,7 +1318,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 </blockquote>
 <h1 id="section-29">20/11/13</h1>
 <h3 id="complex-n-th-roots-theorem-cnrt">Complex n-th Roots Theorem (CNRT)</h3>
-<p>Proposition: given <span class="math">\(z = r(\cos \theta + \imag\sin \theta)\)</span> and <span class="math">\(z^n = c\)</span>, <span class="math">\(n \in \mb{N}\)</span>, <span class="math">\(z\)</span> has exactly <span class="math">\(n\)</span> distinct complex n-th roots, which are <span class="math">\(z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\right(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k &lt; n\)</span>.</p>
+<p>Proposition: given <span class="math">\(z = r(\cos \theta + \imag\sin \theta)\)</span> and <span class="math">\(z^n = c\)</span>, <span class="math">\(n \in \mb{N}\)</span>, <span class="math">\(z\)</span> has exactly <span class="math">\(n\)</span> distinct complex n-th roots, which are <span class="math">\(z = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\left(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k &lt; n\)</span>.</p>
 <p>In other words, <span class="math">\(\sqrt[n]{z} = \sqrt[n]{s}\left(\cos\left(\frac{\theta + 2k\pi}{n}\right) + \imag\sin\left(\frac{\theta + 2k\pi}{n}\right)\right), k \in \mb{Z}, 0 \le k &lt; n\)</span> for all <span class="math">\(n \in \mb{N}\)</span>.</p>
 <h2 id="polynomials">Polynomials</h2>
 <p>Polynomials may have <strong>integer solutions</strong>, <strong>rational solutions</strong>, or <strong>complex solutions</strong>. We can also find the solutions in <span class="math">\(\mb{Z}_m\)</span>.</p>
