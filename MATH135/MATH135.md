@@ -1591,6 +1591,8 @@ n \equiv 2 \pmod{7} \\
 > So $n = 15x + 8 = 15(7y + 1) + 8 = 105y + 23 \iff n - 23 = 105y \iff 105 \mid n - 23$.  
 > So $n \equiv 23 \pmod{105}$.  
 
+We solved two congruences by writing $n$ in terms of $x$. Then, substituting $n$ in terms of $x$ for $n$ in the second congruence, we solve for $x$ and write it in terms of $y$. Then we write $n$ in terms of $y$ and determine that the equation is of the form $n - b = ay$, or $a \mid n - b$, or $n \equiv b \pmod{a}$.
+
 Proposition: Given integers $a_1$ and positive integers $m_1, m_2$, if $\gcd(m_1, m_2) = 1$, then the system $\begin{cases}
 n \equiv a_1 \pmod{m_1} \\
 n \equiv a_2 \pmod{m_2} \\
@@ -1959,7 +1961,7 @@ How do we find the inverse of a complex number?
 > The inverse is $\frac{1}{a + b\imag} = \frac{1}{a + b\imag} \cdot \frac{a - b\imag}{a - b\imag} = \frac{a - b\imag}{a^2 + b^2}$.  
 > We can write this in standard form: $z^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}\imag$.  
 
-So $z^{-1} = \frac{1}{z} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}\imag$
+So $z^{-1} = \frac{1}{z} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}\imag = \frac{\overline{z}}{\abs{z}^2}$
 
 In this way, we find that $\frac{1}{\imag} = -\imag$.
 
@@ -2294,7 +2296,7 @@ This is a restatement of FT 1.
 
 So if we can find roots, we can find factors of the form $x - c$.
 
-This is useful because we can apply things like the quadratic formula to factor quadratic equations.
+This is useful because we can apply things like the quadratic formula to factor quadratic equations. The quadratic formula works even with complex numbers.
 
 Factor $4x^2 - 8x + 5$:
 
@@ -2330,7 +2332,7 @@ Proof:
 
 Proposition: given $f(x) = a_nx^n + \ldots + a_0 x^0, a_i \in \mb{Z}, 0 \le i \le n$, if $f\left(\frac{p}{q}\right) = 0, \gcd(p, q) = 1$, then $p \mid a_0$ and $q \mid a_n$.
 
-In other words, given a polynomial with integer coefficients, a rational root written in the lowest terms has its denominator divide the coeffcient of the highest term and the numerator divides the coefficient of the constant term.
+In other words, given a polynomial with integer coefficients, a rational root written in the lowest terms has its denominator divide the coeffcient of the highest term and the numerator divide the coefficient of the constant term.
 
 Proof:
 
@@ -2351,10 +2353,10 @@ A useful thing the proposition says (contrapositive) is that if a value $x$ cann
 
 Find one root of $f(x) = 2x^3 - x^2 + 5x + 3$, then use it to factor the polynomial into linear factors:
 
-> By RRT, all rational roots are one of $\pm \frac{1}{1}, \pm \frac{2}{1}, \pm \frac{1}{3}, \pm \frac{2}{3}$.  
+> By RRT, each rational root is one of $\pm \frac{1}{1}, \pm \frac{2}{1}, \pm \frac{1}{3}, \pm \frac{2}{3}$.  
 > Applying $f(x)$ to each value, we find that $-\frac{1}{2}$ is a root.  
-> Through long division, we get $f(x) = (x + \frac{1}{2})(2x^2 - 2x + 6)$.  
-> Through the quadratic formula, $f(x) = 2(x + \frac{1}{2})(x - \frac{1}{2} - \frac{i\sqrt{11}}{2})(x - \frac{1}{2} + \frac{i\sqrt{11}}{2})$.  
+> Through long division, we get $f(x) = \left(x + \frac{1}{2}\right)(2x^2 - 2x + 6)$.  
+> Through the quadratic formula, $f(x) = 2\left(x + \frac{1}{2}\right)\left(x - \frac{1}{2} - \frac{i\sqrt{11}}{2}\right)\left(x - \frac{1}{2} + \frac{i\sqrt{11}}{2}\right)$.  
 > This is the fully factored polynomial.  
 
 This is also useful for finding **whether a root is rational**.
@@ -2445,8 +2447,8 @@ Question 12 from practice exam 1: Let $n \in \mb{N}, a, b \in \mb{Z}$. Prove $n 
 > So $n \mid de \frac{a}{d} \frac{b}{e}$ and $n \mid ab$.  
 > Now we will prove $n \mid ab \implies n \mid de$.  
 > Assume $n \mid ab$.  
-> Since $d, e$ are the greatest common factors, $\gcd(\frac{a}{d}, n) = 1 \wedge \gcd(\frac{b}{e}, n) = 1$.  ;wip: not sure if this is true
-> So by CAD, ;wip
+> Clearly, $\gcd\left(\frac{a}{d}, \frac{n}{d}\right) = 1 \wedge \gcd\left(\frac{b}{e}, \frac{n}{d}\right) = 1$, by DB GCD.  
+> So by CAD, ;wip: just give up and use prime factorization
 
 Question 6b from practice exam 2: Express $\gcd(8n + 3, 5n - 2)$ as a function of $n$:
 

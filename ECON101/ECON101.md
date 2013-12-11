@@ -62,7 +62,7 @@ Chinese production:
 
 **Land** is a general term that refers to factors of production taken from nature, such as real estate, water, or raw materials. It means "natural resources" in economic contexts.
 
-**Labour** is the work time and work effort that people devote to producing goods and services. The quality of labour depends on **human capital** - the knowledge and skill people have. Human capital is created through education, training, and experience.
+**Labour** is the work, time and, effort that people devote to producing goods and services. The quality of labour depends on **human capital** - the knowledge and skill people have. Human capital is created through education, training, and experience.
 
 **Capital** are the tools, instruments, machines, buildings, etc. used  to produce goods and services.
 
@@ -139,6 +139,8 @@ Example: speeding tickets give a negative incentive against speeding, which goes
 
 If an economy is operating on the PPF, one good cannot be produced without giving up another. So as the marginal benefit of a good or service decreases, its marginal cost increases. If they are equal, we say that the economy is working at **allocative efficiency**. This is where the graphs of marginal cost and benefit intersect. This is efficient because the most possible people get access to the good, while each one enjoys a benefit.
 
+At allocative efficiency, the cost of doing the next unit of something is the same as its benefit, so it is not beneficial to increase or decrease the amount.
+
 For example, at allocative efficiency, the pizzas would be worth a number of colas such that if more pizzas were produced, they would not be worth the cola foregone, and if more colas were produced, they would not be worth the pizza foregone. 
 
 Choices respond to incentives. If the marginal benefit exceeds the marginal cost for a certain activity, people have an incentive to perform it. Otherwise, people have an incentive not to perform it. **Incentives are hugely useful in aligning self-interest and the social interest**.
@@ -211,7 +213,7 @@ A point inside the shaded region is **inefficient**. At this point, resources ar
 
 Production efficiency is achieved when efficiency is at 100% - the economy is on the frontier.
 
-Changes to various actors of production affect the graph.
+Changes to various factors of production affect the graph.
 
 For example, if a new technology is created to produce cola more efficiently, the PPF graph will be stretched along the Y axis. Likewise, if the labour force increased, the graph stretches in both axes.
 
@@ -256,7 +258,7 @@ This is a result of the substitution effect and the income effect.
 
 The **substitution effect** is a phenomena that occurs when the relative price of a good or service increases, and as a result, people seek substitutes for it, reducing the quantity demanded.
 
-The **income effect** is a phenomenon that occurs when the relative price of a good or service increases compared to income, so people cannot afford it as much, reducing the quantity demanded.
+The **income effect** is a phenomenon that occurs when the money price of a good or service increases compared to income, so people cannot afford it as much, reducing the quantity demanded.
 
 The **demand curve** shows the relationship between the relationship between the quantity demanded of a good and the largest price people are willing to pay for it, all other influences on consumers' planned purchases remain the same. The **demand schedule** is the table of values for this curve.
 
@@ -314,7 +316,7 @@ The quantity supplied is the amount that the producers plan to sell during a giv
 
 > All other things being equal, price is correlated to quantity supplied.
 
-This is a result of the general tendency for the marginal cost of producing a good or service to increase with increases in quantity produced.
+This is a result of the general tendency for the marginal cost of producing a good or service to increase with increases in quantity produced - "I've already made this many, might as well make some more".
 
 Producers will only supply a good if they can at least cover the marginal cost of production - if they can profit from it.
 
@@ -404,8 +406,8 @@ Increases in both supply and demand: the quantity increases, but the price chang
 In Summary
 ----------
 
-* Increases in demand and decreases in supply increase equilibrium price and quantity.
-* Decreases in demand and increases in supply decrease equilibrium price and quantity.
+* Increases in demand and constant supply increase equilibrium price and quantity.
+* Decreases in demand and constant supply decrease equilibrium price and quantity.
 * Increases in both demand and supply increase quantity.
 * Decreases in both demand and supply decrease quantity.
 * Increases in demand and decreases in supply increase price.
@@ -505,7 +507,7 @@ When demand is inelastic, there is an incentive to raise prices. This is because
       |________________________________________
      0              Quantity                  ^ 25 million
 
-Real elasticities: furniture is 1.26, motor vehicles is 1.14, clothing is 0.64, and oil is 0.05.
+Real elasticities: furniture is -1.26, motor vehicles is -1.14, clothing is -0.64, and oil is -0.05.
 
 ### Cross price elasticity of demand
 
@@ -532,7 +534,7 @@ This measures the effect of changes in income on demand.
 Instead of using the percentage change in the price of a good itself, we use the percentage change in income.
 
 $$
-\text{income elasticity} = \frac{\text{% change in demand}}{\text{% change in price}} \\
+\text{income elasticity} = \frac{\text{% change in demand}}{\text{% change in income}} \\
 \text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
 \text{% change in income} = \frac{\text{new income} - \text{old income}}{\frac{\text{new income} + \text{old income}}{2}} \\
 $$
@@ -587,7 +589,7 @@ Authorities determine resource allocation. This works for organizations but not 
 
 For example, labour time is allocated by a boss at work.
 
-## Majority rule
+### Majority rule
 
 The majority vote determines resource allocation. This is used for society for some of its largest decisions.
 
@@ -650,14 +652,14 @@ Demand is determined by the willingness to pay. So a **demand curve is a margina
 
 **Individual demand** is demand in terms of one consumer. **Market demand** is demand in terms of all the buyers in the market. The quantity demanded for market demand is the sum of all the quantities demanded for each buyer.
 
-Supply and Marginal Benefit
----------------------------
+Supply and Marginal Cost
+------------------------
 
 **Cost** is what the producer gives up. **Price** is what the producer receives.
 
 The cost of obtaining one more unit of a good or service is the **marginal cost**.
 
-We measure cost as the **minimum cost** the producer is willing to accept.
+We measure cost as the **minimum price** the producer is willing to accept.
 
 Supply is determined by the minimum supply price. So a **supply curve is a marginal cost curve**.
 
@@ -674,19 +676,18 @@ Surplus/shortage
 
 ### Consumers
 
-The **consumer surplus** for a given person is the area between the amount 
-willing to be paid for a good/service and the actual price that must be paid for it. It is the amount someone is willing to pay above the actual price.
+The **consumer surplus** for a given person is the **area between the amount willing to be paid for a good/service and the actual price that must be paid for it**. It is the amount someone is willing to pay above the actual price.
 
                 Price vs. Quantity Demanded    
     v 3.00
       |                                        
       |....                                    
-    P |    .....                               
-    r |     ####....                           
-    i |     ########....                       
-    c |-----------------....---------          
-    e |     ^               .....              
-      |     Consumer surplus      ...          
+    P |$$$$.....                               
+    r |$$$$$$$$$....                           
+    i |$$$$$$$$$$$$$....                       
+    c |-----------------....---------  Equilibrium Price
+    e |^^^^^^^^^^^^^        .....              
+      |Consumer Surplus           ...          
       |________________________________________
      0              Quantity Demanded         ^ 10
 
@@ -696,17 +697,17 @@ When there is a consumer surplus, suppliers raise prices to reduce the surplus a
 
 ### Producers
 
-**Producer surplus** is the area between the price received for selling a good and the minimum supply-price, summed over the quantity sold. It is the price above what it actually costs to produce.
+**Producer surplus** is the **area between the price received for selling a good and the minimum supply-price**. It is the price above what it actually costs to produce.
 
                 Price vs. Quantity Supplied    
     v 3.00
-      |     Producer surplus                   
-      |     v                   ....           
-    P |--------------------.....--------       
-    r |     ###########....                    
-    i |     #######....                        
-    c |     ###....                            
-    e |   .....                                
+      |Producer surplus                        
+      |vvvvvvvvvvvvvvvv         ....           
+    P |--------------------.....-------- Equilibrium Price
+    r |$$$$$$$$$$$$$$$$....                    
+    i |$$$$$$$$$$$$....                        
+    c |$$$$$$$$....                            
+    e |$$$.....                                
       |...                                     
       |________________________________________
      0              Supply                    ^ 25 million
@@ -729,7 +730,7 @@ Underproduction and overproduction can occur for a few reasons:
 
 **Externalities** are costs/benefits affecting someone other than the producer or consumer, such as acid rain caused by pollution. The producer, acting out of self interest, does not consider this cost and overproduces or underproduces.
 
-**Public goods** benefit and are available to everyone. The **free-rider problem** states that everyone wants to use the good, but nobody wants to pay for it, leading to underproduction.
+**Public goods** benefit everyone and are available to everyone. The **free-rider problem** states that everyone wants to use the good, but nobody wants to pay for it, leading to underproduction.
 
 **Common goods** are owned by nobody and can be used by everyone. The **tragedy of the commons** states that each user ignores the costs that fall on everyone, leading to overproduction.
 
@@ -787,9 +788,9 @@ Taxes include income tax, HST, and social insurance tax (paid by employers).
 
 This depends on elasticity - the more inelastic the demand, the more the burden of the tax is put on the buyer. Perfectly inelastic demand means buyers pay the tax. Perfectly elastic demand means sellers pay the tax.
 
-Taxes on suppliers shift the supply curve upward.
+Taxes on suppliers shift the supply curve upward/leftward.
 
-Taxes on consumers shift the demand curve down.
+Taxes on consumers shift the demand curve downward/leftward.
 
 Taxes are usually put on goods and services with inelastic supply or demand. Gasoline has inelastic demand, so the buyer pays more of the tax, while labour has inelastic supply, so the employer pays more of the tax.
 
@@ -800,7 +801,7 @@ Taxes are usually put on goods and services with inelastic supply or demand. Gas
     P |####*****           .....               
     r |$$$$|$$$$****   ....                    
     i |$$$$|$$$$$$$...X**                      # represents surplus with tax
-    c |$$$$|$$$....   ^  ****                  $ represents difference in surplus from without tax
+    c |$$$$|$$$....   ^  ****                  $ represents difference in surplus from without tax and with tax
     e |###.....       |      *****             
       |... |    Equilibrium       ***
       |________________________________________
@@ -815,7 +816,7 @@ There are conflicting principles of fairness when considering a tax system:
 
 Subsidies act like taxes, but have the opposite effect.
 
-They shift the supply curve down and the demand curve up.
+They shift the supply curve down/right and the demand curve up/right.
 
 ## Quotas
 
@@ -842,7 +843,9 @@ For example, the first sip of a drink might give 50 utility units, the second 80
 
 **Marginal utility** is the change in total utility caused by consuming one more unit of a good or service. In other words, it is the benefit received from consuming one more unit of a good or service.
 
-The **principle of diminishing marginal utility** states that **as quantity consumed increases, the marginal utility decreases**.
+Marginal utility differs from marginal benefit in that marginal benefit is the price willing to be paid for one more unit, while marginal utility is the benefit itself.
+
+The **principle of diminishing marginal utility** states that **as quantity consumed increases, the marginal utility eventually decreases**.
 
 **Marginal utility per dollar of a good or service** is the marginal utility from **spending one more dollar** on the good or service. It is equivalent to the marginal utility of a good ($\mathrm{MU}$) divided by its price ($P$).
 
@@ -885,6 +888,8 @@ However, a more natural way to find consumer equilibrium is to **compare the mar
 
 This is because the more we spend on something, the less its marginal benefit, from the principle of diminishing marginal utility.
 
+When the marginal utility per dollar of products are equal, it is equally beneficial to spend a dollar on either good. Changing any of the quantities would only reduce the total utility at this point.
+
 So to maximise utility, we **spend all available income** and **equalize the marginal utility per dollar** of all goods.
 
 For example, if the price of pizza decreased, its marginal benefit per dollar increases and we would buy more of it to make it equal to the marginal benefits per dollar of other goods.
@@ -898,6 +903,8 @@ Marginal utility theory helps explain things like the **paradox of value**:
 We distinguish between total utility and marginal utility to resolve the paradox.
 
 The explanation is that we **consume a lot of water, so marginal utility is small while total utility is large**, while **we consume few diamonds, so marginal utility is large while total utility is small**. However, note that the marginal utility per dollar is the same for both water and diamonds.
+
+If I buy one more unit of water, I get a little benefit for a little cost. If I buy one more unit of diamond, I get a large benefit for a large cost.
 
 The consumer surplus of water is very high while the consumer surplus of diamonds is very low.
 
@@ -920,7 +927,7 @@ Most firms don't make anything themselves. For example, Apple's iPod has its par
 
 Accountants are responsible for measuring profit - revenue minus explicit costs - to pay taxes and show investors how their funds are being used.
 
-**Explicit costs** are those costs paid directly to run the firm. Accountants do not take implicit costs into account and so may overestimate profit.
+**Explicit costs** are those costs paid directly to run the firm. Accountants do not take implicit costs into account and so may overestimate economic profit.
 
 Economists are concerned with **implicit costs** - the opportunity cost resulting from using something instead of renting or selling it. The **total costs** are the sum of the implicit and explicit costs, and is always greater than or equal to the explicit costs.
 
@@ -973,7 +980,7 @@ Profit is limited by constraints in **technology**, **information**, and **marke
 * A firm never has complete **information** about the past, present, and future. The cost of coping with limited information limits profit, such as not knowing the plans of its competitors or future consumer choices.
 * The price and quantity a firm can sell a product at depends on the customers' willingness to pay, and the prices and marketing of the competition. The resources a firm can obtain is limited by the willingness of people to work or invest in it. The cost of overcoming this limits profits.
 
-**Technological efficiency** is the state in which it is impossible to decrease any inputs when holding other inputs constant.
+**Technological efficiency** is the state in which it is impossible to decrease any inputs when holding other inputs constant without changing the output.
 
 **Economic efficiency** is the state in which a firm produces a given amount of output with the least cost. This depends on the relative costs of capital and labour.
 
@@ -997,7 +1004,7 @@ There are three main ways to do this:
 
 * **Ownership** - if managers (agents) are made also to be stockholders (principals), then they are induced to act in the interest of the principals, themselves.
 * **Incentive pay** - if the pay of workers/managers (agents) are linked to performance, then they are induced to perform better, in the interest of the principals.
-* **long-term contracts** - if the long-term rewards of workers/managers (agents) is linked to the long-term success of the firm, then they are induced to make the firm more successful, which is in the principals' interests.
+* **Long-term contracts** - if the long-term rewards of workers/managers (agents) is linked to the long-term success of the firm, then they are induced to make the firm more successful, which is in the principals' interests.
 
 There are three main types of business organization:
 
@@ -1043,7 +1050,7 @@ However, firms do more production because they are more efficient than markets. 
 * **Economies of scale** - the cost of producing a good or service falls as a firm gets bigger. This does not violate the law of supply because we are shifting the supply curve rightwards, rather than moving along it.
 * **Economies of scope** - specializing in a particular area allows lower costs of production.
 
-Firms can engage in *team production**, where they each specialize in mutually supportive tasks.
+Firms can engage in **team production**, where they each specialize in mutually supportive tasks.
 
 # 7/11/13
 
@@ -1132,7 +1139,7 @@ As labour is increased, marginal product increases initially since the workers c
 
 As labour is increased even more, the marginal product starts to diminish since each worker has access to less capital and space with which to work.
 
-When the **marginal product equals the average cost**, the **average product is at its maximum**.
+When the **marginal product equals the average product**, the **average product is at its maximum**.
 
 Costs
 -----
@@ -1167,7 +1174,7 @@ $$\mathrm{ATC} = \mathrm{AFC} + \mathrm{AVC} = \frac{\mathrm{TC}}{Q} = \frac{\ma
 
 Where $Q$ is the output quantity.
 
-The average variable cost curve is U-shaped, and as a result, so is the average total cost curve. This is because the average product is initially increasing, but later decreases - so the average cost is initially decreasing, but later increases.
+The average variable cost curve is U-shaped and plotted with respect to output quantity, and as a result, so is the average total cost curve. This is because the average product is initially increasing, but later decreases - so the average cost is initially decreasing, but later increases.
 
 Average variable cost and average total cost are decreasing when the MC curve is below them, and increasing when the MC curve is above. When they intersect, the average variable cost and average total cost are at their minimum.
 
@@ -1205,7 +1212,7 @@ So for a given output quantity desired, we would consider each possible plant an
 
 The **long-run average cost curve** is the minimum of all the possible curves. It has parts of many different curves that correspond to different plant sizes.
 
-We can use this to find the plant size with the minimum average total cost for a given output quantity. This is the plant size with the lowest cost per output.
+We can use this to find the plant size with the minimum average total cost for a given output quantity. This is the plant size with the lowest average cost per output.
 
 ### Economies
 
@@ -1261,7 +1268,7 @@ A firm needs to decide whether to stay or exit the market if it takes an economi
 
 If a firm decides to shut down, it has **no variable costs or revenue**, but still has to **pay the fixed costs** (e.g., rent, insurance, security).
 
-Whether a firm should continue producing is determined by whether a firm has **enough revenue to cover the variable costs**. If it does, then it is better to keep producing. Otherwise, it should stop producing and take a loss of only the fixed costs. In other words, a firm shuts down if and only if `price*quantity < total variable costs`, or `price < average variable costs`
+Whether a firm should continue producing is determined by whether a firm has **enough revenue to cover the variable costs**. If it does, then it is better to keep producing and cover at least some of the fixed costs. Otherwise, it should stop producing and take a loss of only the fixed costs. In other words, a firm shuts down if and only if `price*quantity < total variable costs`, or `price < average variable costs`
 
 ### Short-run Supply
 
@@ -1328,7 +1335,7 @@ If there are external diseconomies, the price increases if demand increases, bec
 
 ### Efficiency
 
-Resources are used efficiency when no person can be made better off without making another person worse off. This occurs when marginal social benefit equals marginal social cost.
+Resources are used efficiently when no person can be made better off without making another person worse off. This occurs when marginal social benefit equals marginal social cost.
 
 A consumer's demand curve shows the best budget allocation over changes in the price of a good. Consumers are **efficient at all points on the demand curve**. Without external benefits, the **market demand curve is the marginal social benefit curve**.
 

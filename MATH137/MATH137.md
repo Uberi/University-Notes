@@ -1739,11 +1739,11 @@ If $f'(x) = 0$ for all $x$ in $(a, b)$, then $f$ is a constant function ($f(x) =
 > Note that $f'(x) = k$ if and only if for an arbitrary $x_1, x_2 \in (a, b), x_1 < x_2$, $f(x_1) = f(x_2)$.  
 > Since $f$ is differentiable on $(a, b)$, then $f$ is differentiable on $(x_1, x_2)$ and continuous on $[x_1, x_2]$.  
 > By the MVT, $\exists c \in [x_1, x_2], f'(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}$.  
-> Since $f(c) = 0$, $\frac{f(x_2) - f(x_1)}{x_2 - x_1} = 0$.  
+> Since $f'(c) = 0$, $\frac{f(x_2) - f(x_1)}{x_2 - x_1} = 0$.  
 > Since $x_1, x_2$ are arbitrary, $\forall x_1, x_2 \in (a, b), x_1 < x_2, f(x_1) = f(x_2)$.  
 > Therefore, the function is constant.  
 
-### Unnamed Theorem
+### Alice Theorem
 
 If $f'(x) = g'(x)$ over $(a, b)$, then $f(x) = g(x) + c$.
 
@@ -2604,11 +2604,17 @@ When using definite integrals, we need to be aware of the limits of integration.
 
 Consider $\int_1^2 xe^{-x^2} \dee x$:
 
-> Let $u = x^2$. Then $\dee u = 2x \dee x$.  
-> So $\int_{u(1)}^{u(2)} xe^{-u} \dee x$.  
-> ;wip: -\frac{1}{2}(e^{-4} - e^{-1})
+> Let $u = -x^2$. Then $\dee u \frac{-1}{2x} = \dee x$.  
+> So $\int_{u(1)}^{u(2)} xe^{-x^2} \dee x = \int_{-1}^{-4} \frac{-1}{2}e^u \dee u = -\frac{1}{2}\evalat{e^u}_{-1}^{-4} = -\frac{1}{2}(e^{-4} - e^{-1})$.  
 
-Note that `u` was applied to the limits of integration when we switched the variables.
+Note that `u` was applied to the limits of integration when we switched the variables, and that we left the equation with $u$ rather than replacing it with $-x^2$.
+
+Alternatively, we could avoid changing the limits of integration by substituting back again:
+
+> Let $u = -x^2$. Then $\dee u \frac{-1}{2x} = \dee x$.  
+> So $\int_{u(1)}^{u(2)} xe^{-x^2} \dee x = \int_{-1}^{-4} \frac{-1}{2}e^u \dee u = -\frac{1}{2}\evalat{e^u}_{-1}^{-4} = -\frac{1}{2}\evalat{e^{-x^2}}_1^2$.  
+
+Notice that this gives the same result.
 
 Areas Between Curves
 --------------------

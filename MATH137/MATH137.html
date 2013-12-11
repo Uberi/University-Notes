@@ -1280,9 +1280,9 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <h3 id="constant-function-theorem">Constant Function Theorem</h3>
 <p>If <span class="math">\(f&#39;(x) = 0\)</span> for all <span class="math">\(x\)</span> in <span class="math">\((a, b)\)</span>, then <span class="math">\(f\)</span> is a constant function (<span class="math">\(f(x) = k\)</span>).</p>
 <blockquote>
-<p>Note that <span class="math">\(f&#39;(x) = k\)</span> if and only if for an arbitrary <span class="math">\(x_1, x_2 \in (a, b), x_1 &lt; x_2\)</span>, <span class="math">\(f(x_1) = f(x_2)\)</span>.<br />Since <span class="math">\(f\)</span> is differentiable on <span class="math">\((a, b)\)</span>, then <span class="math">\(f\)</span> is differentiable on <span class="math">\((x_1, x_2)\)</span> and continuous on <span class="math">\([x_1, x_2]\)</span>.<br />By the MVT, <span class="math">\(\exists c \in [x_1, x_2], f&#39;(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}\)</span>.<br />Since <span class="math">\(f(c) = 0\)</span>, <span class="math">\(\frac{f(x_2) - f(x_1)}{x_2 - x_1} = 0\)</span>.<br />Since <span class="math">\(x_1, x_2\)</span> are arbitrary, <span class="math">\(\forall x_1, x_2 \in (a, b), x_1 &lt; x_2, f(x_1) = f(x_2)\)</span>.<br />Therefore, the function is constant.</p>
+<p>Note that <span class="math">\(f&#39;(x) = k\)</span> if and only if for an arbitrary <span class="math">\(x_1, x_2 \in (a, b), x_1 &lt; x_2\)</span>, <span class="math">\(f(x_1) = f(x_2)\)</span>.<br />Since <span class="math">\(f\)</span> is differentiable on <span class="math">\((a, b)\)</span>, then <span class="math">\(f\)</span> is differentiable on <span class="math">\((x_1, x_2)\)</span> and continuous on <span class="math">\([x_1, x_2]\)</span>.<br />By the MVT, <span class="math">\(\exists c \in [x_1, x_2], f&#39;(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}\)</span>.<br />Since <span class="math">\(f&#39;(c) = 0\)</span>, <span class="math">\(\frac{f(x_2) - f(x_1)}{x_2 - x_1} = 0\)</span>.<br />Since <span class="math">\(x_1, x_2\)</span> are arbitrary, <span class="math">\(\forall x_1, x_2 \in (a, b), x_1 &lt; x_2, f(x_1) = f(x_2)\)</span>.<br />Therefore, the function is constant.</p>
 </blockquote>
-<h3 id="unnamed-theorem">Unnamed Theorem</h3>
+<h3 id="alice-theorem">Alice Theorem</h3>
 <p>If <span class="math">\(f&#39;(x) = g&#39;(x)\)</span> over <span class="math">\((a, b)\)</span>, then <span class="math">\(f(x) = g(x) + c\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
@@ -1817,9 +1817,14 @@ x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
 <p>When using definite integrals, we need to be aware of the limits of integration.</p>
 <p>Consider <span class="math">\(\int_1^2 xe^{-x^2} \dee x\)</span>:</p>
 <blockquote>
-<p>Let <span class="math">\(u = x^2\)</span>. Then <span class="math">\(\dee u = 2x \dee x\)</span>.<br />So <span class="math">\(\int_{u(1)}^{u(2)} xe^{-u} \dee x\)</span>.<br />;wip: -(e^{-4} - e^{-1})</p>
+<p>Let <span class="math">\(u = -x^2\)</span>. Then <span class="math">\(\dee u \frac{-1}{2x} = \dee x\)</span>.<br />So <span class="math">\(\int_{u(1)}^{u(2)} xe^{-x^2} \dee x = \int_{-1}^{-4} \frac{-1}{2}e^u \dee u = -\frac{1}{2}\evalat{e^u}_{-1}^{-4} = -\frac{1}{2}(e^{-4} - e^{-1})\)</span>.</p>
 </blockquote>
-<p>Note that <code>u</code> was applied to the limits of integration when we switched the variables.</p>
+<p>Note that <code>u</code> was applied to the limits of integration when we switched the variables, and that we left the equation with <span class="math">\(u\)</span> rather than replacing it with <span class="math">\(-x^2\)</span>.</p>
+<p>Alternatively, we could avoid changing the limits of integration by substituting back again:</p>
+<blockquote>
+<p>Let <span class="math">\(u = -x^2\)</span>. Then <span class="math">\(\dee u \frac{-1}{2x} = \dee x\)</span>.<br />So <span class="math">\(\int_{u(1)}^{u(2)} xe^{-x^2} \dee x = \int_{-1}^{-4} \frac{-1}{2}e^u \dee u = -\frac{1}{2}\evalat{e^u}_{-1}^{-4} = -\frac{1}{2}\evalat{e^{-x^2}}_1^2\)</span>.</p>
+</blockquote>
+<p>Notice that this gives the same result.</p>
 <h2 id="areas-between-curves">Areas Between Curves</h2>
 <p>Given functions <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span>, with <span class="math">\(g(x) \ge f(x)\)</span> over <span class="math">\([a, b]\)</span>, the area between the curves is <span class="math">\(\int_a^b g(x) - f(x) \dee x\)</span>.</p>
 <p>Find the area of the region bounded by <span class="math">\(x^2\)</span> and <span class="math">\(\sqrt{x}\)</span>:</p>
