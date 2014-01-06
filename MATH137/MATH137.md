@@ -2407,7 +2407,7 @@ The Fundemental Theorem of Calculus
 
 If $f$ is continuous over $[a, b]$, then $g(x) = \int_a^x f(t) \dee t$ is continuous over $[a, b]$ and differentiable on $(a, b)$, and $\frac{\dee}{\dee x} g(x) = f(x)$.
 
-In other words, $\frac{\dee}{\dee x} \int_a^x f(x) \dee t = f(x)$.
+In other words, $\frac{\dee}{\dee x} \int_a^x f(t) \dee t = f(x)$.
 
 Differentiation and integration are inverse operations.
 

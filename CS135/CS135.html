@@ -426,10 +426,14 @@ Tests:
 <li><strong>User defined function applications</strong> become their bodies, with arguments inserted.
 <ul>
 <li>when <code>(define (f ...) e)</code> occurs to the left, <code>(f ...)</code> =&gt; <code>(e with substitution of parameters for arguments)</code></li>
+<li>note that this excludes functions that were defined using lambda, which should be treated like any other constant definition: <code>(define f (lambda (x) x)) (f 5)</code> =&gt; <code>((lambda (x) x) 5)</code></li>
+<li>otherwise, there is an error</li>
 </ul></li>
 <li><strong>Constants</strong> become their values.
 <ul>
 <li>when <code>(define x ...)</code> occurs to the left, <code>x</code> =&gt; <code>...</code></li>
+<li>this rule includes values that are lambda functions, even though they are equivalent to <code>(define (f ...) ...)</code></li>
+<li>otherwise, there is an error</li>
 </ul></li>
 <li><strong>Conditional expressions</strong> become an answer if a question is true, or lose a question/answer pair otherwise.
 <ul>
@@ -469,6 +473,7 @@ Tests:
 <ul>
 <li><code>(local [(define x ...) ...] ...)</code> =&gt; <code>(define (new name for x) ...) (body of local with x substituted with the new name for x)</code></li>
 <li><code>(local [(define (f ...) ...) ...] ...)</code> =&gt; <code>(define ((new name for f) ...) ...) (body of local with f substituted with the new name for f)</code></li>
+<li>if there are multiple defines and they have identifiers in their values, they are considered to be inside the local scope: <code>(local [(define x y) (define y 5)] x)</code> =&gt; <code>(define x_0 y_0) (define y_0 5) x</code>, which then results in an error.</li>
 </ul></li>
 <li><strong>Anonymous functions</strong> become their bodies, with arguments inserted.
 <ul>
@@ -1026,7 +1031,7 @@ A OtherThing is one of:
 (define (list-reverse list current)
     (cond [(empty? list) current]
           [else (list-reverse (rest list) (cons (first list) current))]))</code></pre>
-<p>Note that <code>reverse</code> is actually a built-in function that has teh same functionality, though it doesn't require the second parameter.</p>
+<p>Note that <code>reverse</code> is actually a built-in function that has the same functionality, though it doesn't require the second parameter.</p>
 <p>We use the function as follows:</p>
 <pre><code>(list-reverse &#39;(a b c) empty) -&gt; &#39;(c b a)</code></pre>
 <h3 id="generativegeneral-recursion">Generative/general recursion</h3>
@@ -1769,7 +1774,7 @@ A OtherThing is one of:
     temporary-function)</code></pre>
 <p>This is simply a function like any other, except there are no names that refer to them.</p>
 <p>A lambda is an anonymous function.</p>
-<p>This is very useful for the abstract list functions. Where we previously made small helper functions in local definitions, now we can simply use <code>laambda</code>.</p>
+<p>This is very useful for the abstract list functions. Where we previously made small helper functions in local definitions, now we can simply use <code>lambda</code>.</p>
 <p>Anonymous functions <strong>do not need any parts of the design recipe</strong>.</p>
 <p><code>(define (f ...) ...)</code> is actually a short form for <code>(define f (lambda (...) ...))</code>.</p>
 <h3 id="stepping-1">Stepping</h3>
@@ -1888,6 +1893,7 @@ A OtherThing is one of:
            (cons (first list1) (merge (rest list1) list2))]
           [else
            (cons (first list2) (merge list1 (rest list2)))]))</code></pre>
+<p>;wip: we are probably not supposed to use <code>merge</code> here in the second version</p>
 <p>We can also simplify <code>mergesort</code> by using a local definition:</p>
 <pre><code>(define (mergesort values)
     (local [(define (mergesort-ne values)
@@ -2058,7 +2064,7 @@ A OtherThing is one of:
 <h2 id="history">History</h2>
 <p>Computer Science is not a well defined field, having only existed for about 75 years.</p>
 <p>Early computations were done by humans, who were called &quot;computers&quot;.</p>
-<p>Charles Babbage (1791-1871) was a mathemetician who invented but never built the difference engine and analytical engine - mechanical computing machines where the specification of the operations to be executed were separated from actually execution. This is the first autonomous computing machine.</p>
+<p>Charles Babbage (1791-1871) was a mathematician who invented but never built the difference engine and analytical engine - mechanical computing machines where the specification of the operations to be executed were separated from actually execution. This is the first autonomous computing machine.</p>
 <p>Ada &quot;Lovelace&quot; Augusta Byron (1815-1852) assisted Babbage in the design of the machines and could be considered the first computer scientist or programmer. Wrote about the actual operation and use of the engines rather than just the design.</p>
 <p>David Hilbert (1862-1943) was a mathemtician who formalized the axiomatic treatment of Euclidean geometry. He is famous for posing 23 unsolved problems, some of which have since been solved.</p>
 <p>Most famously, Hilbert posed the question of whether mathematics is consistent (a statement cannot be proven true and false), or complete (all true statements are provable).</p>

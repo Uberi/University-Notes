@@ -3,47 +3,47 @@
 DATADIR=%CD%
 MATHJAX=http://benweet.github.io/stackedit/lib/MathJax/MathJax.js?config=TeX-AMS_HTML
 
-pushd MATH135
-pandoc --output=MATH135.html \
+pushd MATH136
+pandoc --output=MATH136.html \
 	--mathjax=$MATHJAX \
 	--data-dir=$DATADIR \
 	--template=template.html \
-	--variable=pagetitle:MATH135\ |\ Anthony Zhang \
-MATH135.md
+	--variable=pagetitle:MATH136\ |\ Anthony Zhang \
+MATH136.md
 popd
 
-pushd MATH137
-pandoc --output=MATH137.html \
+pushd MATH138
+pandoc --output=MATH138.html \
 	--mathjax=$MATHJAX \
 	--data-dir=$DATADIR \
 	--template=template.html \
-	--variable=pagetitle:MATH137\ |\ Anthony Zhang \
-MATH137.md
+	--variable=pagetitle:MATH138\ |\ Anthony Zhang \
+MATH138.md
 popd
 
-pushd ECON101
-pandoc --output=ECON101.html \
+pushd PHYS121
+pandoc --output=PHYS121.html \
 	--mathjax=$MATHJAX \
 	--data-dir=$DATADIR \
 	--template=template.html \
-	--variable=pagetitle:ECON101\ |\ Anthony Zhang \
-ECON101.md
+	--variable=pagetitle:PHYS121\ |\ Anthony Zhang \
+PHYS121.md
 popd
 
-pushd PHIL110A
-pandoc --output=PHIL110A.html \
+pushd PHIL145
+pandoc --output=PHIL145.html \
 	--mathjax=$MATHJAX \
 	--data-dir=$DATADIR \
 	--template=template.html \
-	--variable=pagetitle:PHIL110A\ |\ Anthony Zhang \
-PHIL110A.md
+	--variable=pagetitle:PHIL145\ |\ Anthony Zhang \
+PHIL145.md
 popd
 
-pushd CS135
-pandoc --output=CS135.html \
+pushd CS136
+pandoc --output=CS136.html \
 	--mathjax=$MATHJAX \
 	--data-dir=$DATADIR \
 	--template=template.html \
-	--variable=pagetitle:CS135\ |\ Anthony Zhang \
-CS135.md
+	--variable=pagetitle:CS136\ |\ Anthony Zhang \
+CS136.md
 popd

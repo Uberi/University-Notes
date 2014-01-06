@@ -93,9 +93,9 @@ This is the **form** of the argument, the basis or schema on which it is based.
 This is also a valid argument - no matter what we substitute for S, M, and O, the argument is always valid.
 
     All dogs are birds. ;premise
-    All dogs have wings. ;premise
+    All birds have wings. ;premise
     ----------------------------
-    Therefore, birds have wings. ;conclusion
+    Therefore, dogs have wings. ;conclusion
 
 The above is a valid argument, but is not sound since dogs are not in fact birds.
 
@@ -196,7 +196,7 @@ Writing inductive arguments:
     ===========  double line
     All X are Y  conclusion
 
-An inductive argument is evaluated based on **inductive strength**. Inductive strength is based on how much new information is introduced in the argument. A weak inductive argument has low quality or few examples, while a strong inductive argument has high quality or many examples.
+An inductive argument is evaluated based on **inductive strength**. Inductive strength is a measure of how little new information is introduced in the argument. A weak inductive argument has low quality or few examples, while a strong inductive argument has high quality or many examples.
 
 Fallacies
 ---------
@@ -910,10 +910,7 @@ Actually, I misunderstood. A lot of people only talked about the soundness of th
 We are writing why the premises are used, not that the premises are true.
 
 * Arguments should focus on the thesis and the thesis alone. Do not talk about anything else.
-
-;wip: read the feedback on the first paper and the marking rubric - the "mechanics" grade marks the wording, style, and general aesthetics of the paper
-
-* the assessment paragraphs were lacking. we should point out weaknesses and rebuttals to those weaknesses
+* The assessment paragraphs were lacking. we should point out weaknesses and rebuttals to those weaknesses
 
 Do/don't:
 
@@ -1050,7 +1047,7 @@ There is a continuum of science criticism, from **liberal** to **radical**:
     * Most radical views look into objectivity and rationality and our biases in these,
 * Radical science criticism tries to change the rules of science itself - science is inherently sexist, and needs to be reformed.
     * Science and its institutions are biased, and need to change.
-    * ;wip
+    * Is the scientific method biased toward a specific gender?
 
 # 26/11/13
 
@@ -1085,10 +1082,10 @@ An objective view is a **god's eye view/view from nowhere**. We want to see the 
 Feminist criticism of objectivity has several arguments regarding this:
 
 * Perfectly objective knowledge is impossible because there is no neutral person - we can only view the world from our own perspective and situated knowledge.
-* We cannot know that we have found all of our auxilary hypotheses. We would be misleading ourselves to give an "objective" fact our ful endorsement.
+* We cannot know that we have found all of our auxilary hypotheses. We would be misleading ourselves to give an "objective" fact our full endorsement.
 * We sometimes discard outliers. This negatively impacts our objectivity.
 * Even the average of all humans cannot perceive everything - human beings can only see what is available to our senses.
-* Intersubjectivity is vulnerable to everyone who is also observing the same thing having the same biases and situated knowledge. It is important who the subjects actually are.
+* Intersubjectivity is vulnerable to everyone who is also observing the same thing having the same biases and situated knowledge. It is important who the people observing actually are.
 
 ### Improving objectivity
 
