@@ -75,6 +75,14 @@ Email: mscott@uwaterloo.ca
 Office: MC 6114
 Office hours: Mondays 11:30am-12:15pm, 3:00pm-3:30pm
 Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\]</span></p>
 <h1 id="section">6/1/14</h1>
 <p>Assignments are due every friday at 3:30pm. They are posted on LEARN.</p>
 <p>My own drop box is box 5, slot 12</p>
@@ -106,6 +114,47 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>we want to prove that <span class="math">\(\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t\)</span>.<br />By linearity of integrals, we do <span class="math">\(\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_a^{ab} \frac{1}{t} \dee t\)</span>.<br />Let <span class="math">\(u = \frac{t}{a}\)</span>. Then <span class="math">\(\dee u = a \dee t\)</span>.<br />So when <span class="math">\(t = a\)</span>, <span class="math">\(u = 1\)</span>, and when <span class="math">\(t = ab\)</span>, <span class="math">\(u = b\)</span>.<br />So <span class="math">\(\int_a^{ab} \frac{1}{t} \dee t = \int_1^{b} \frac{a \dee u}{tu} \dee t = \int_1^b \frac{1}{u} \dee u = \int_1^b \frac{1}{t} \dee t\)</span> (dummy variable).<br />So <span class="math">\(\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t\)</span>.</p>
 </blockquote>
 <p>Property 2 is left as an exercise. ;wip</p>
+<h1 id="section-1">8/1/14</h1>
+<p>To prove property 2, we need to show that <span class="math">\(\int_1^{a^r} \frac{1}{u} \dee u = r \int_1^a \frac{1}{t} \dee t\)</span>. To do this, we find a substitution that results in the desired limits of integration.</p>
+<h3 id="integration-by-parts">Integration by Parts</h3>
+<p>We often have integrands that are products. For example, <span class="math">\(\int x \sin x \dee x\)</span></p>
+<p>It would be nice to be able to differentiate or integrate just one of the factors rather than having to do the whole thing.</p>
+<p>Recall the product rule: <span class="math">\(\frac{\dee}{\dee x} (a(x) b(x)) = (\frac{\dee}{\dee x} a(x)) b(x) + a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
+<p>Move the last term to the left: <span class="math">\((\frac{\dee}{\dee x} a(x)) b(x) = \frac{\dee}{\dee x} (a(x) b(x)) - a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
+<p>If we integrate both sides with respect to <span class="math">\(x\)</span>, we get: <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) = \int \frac{\dee}{\dee x} a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
+<p>By FTC2, <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) = a(x) b(x) + c - \int a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
+<p>Since there would also be a <span class="math">\(c\)</span> term from the second integral, we don't need to write it. So <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
+<p>This is the <strong>integration by parts rule</strong>.</p>
+<p>Using the same idea, we find that <span class="math">\(\int_a^b (\frac{\dee}{\dee x} a(x)) b(x) = \evalat{a(x) b(x)}_{x = a}^{x = b} - \int_a^b a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
+<p>When we use the rule, we want to identify two parts of the product such that one of the parts (b) is the factor that becomes <strong>simpler when differentiated</strong>, and the other part (a) is chosen as the <strong>integral of the factor</strong>.</p>
+<p>Simplify <span class="math">\(\int x \sin x \dee x\)</span>:</p>
+<blockquote>
+<p><span class="math">\(x\)</span> is much simpler when differentiated. Let <span class="math">\(b(x) = x\)</span>.<br /><span class="math">\(\sin x\)</span> is integrable. Let <span class="math">\(a(x) = \int \sin x = -\cos x\)</span>.<br />So <span class="math">\(\int x \sin x = \int x \frac{\dee}{\dee x} (-\cos x) = -x \cos x - \int (-\cos x) 1 \dee x\)</span>, by integration by parts.<br />So <span class="math">\(-x \cos x - \int (-\cos x) 1 \dee x = -x \cos x + \sin x + c\)</span>.</p>
+</blockquote>
+<p>We can check the answer by differentiating: <span class="math">\(\frac{\dee}{\dee x} (-x \cos x + \sin x + c) = x \sin x\)</span>.</p>
+<p>When we use integration by parts, we differentiate one factor, and integrate the other. Then, we can apply the integration by parts formula and obtain a possibly simpler version.</p>
+<p>Simplify <span class="math">\(\int_0^1 x e^{-x} \dee x\)</span>:</p>
+<blockquote>
+<p>;wip</p>
+</blockquote>
+<p>Simplify <span class="math">\(\int_0^1 x^n (\ln x)^n \dee x\)</span>:</p>
+<blockquote>
+<p>;wip</p>
+</blockquote>
+<p>We often write the integration by parts formula in different forms: <span class="math">\(\int a \dee b = uv - \int v \dee u\)</span>, or <span class="math">\(\int f&#39;(x) g(x) \dee x = f(x) g(x) - \int f(x) g&#39;(x) \dee x\)</span>.</p>
+<p>An interesting trick is that we can use integration by parts to integrate anything, since everything is a product of itself and 1.</p>
+<p>For example, consider <span class="math">\(\int \arcsin x \dee x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\int 1 \cdot \arcsin x \dee x = \int (\frac{\dee}{\dee x} x) \arcsin x \dee x\)</span>.<br />Using integration by parts, with <span class="math">\(a(x) = x, b(x) = \arcsin x\)</span>, <span class="math">\(\int (\frac{\dee}{\dee x} x) \arcsin x \dee x = x \arcsin x - \int \frac{x}{\sqrt{1 - x^2}} \dee x\)</span>.<br />We can now use integration by substitution with <span class="math">\(u = 1 - x^2\)</span> to simplify <span class="math">\(\int \frac{x}{\sqrt{1 - x^2}} \dee x\)</span>.<br />Clearly, <span class="math">\(\dee x = -\frac{1}{2x} \dee x\)</span> and <span class="math">\(\int \frac{1}{\sqrt{1 - x^2}} \dee x = -\frac{1}{2} \int \frac{1}{\sqrt{u}} \dee u = -\frac{1}{2} \int u^{-\frac{1}{2}} \dee u = -\frac{1}{2} 2 \sqrt{u} + c = -\sqrt{1 - x^2} + c\)</span>.<br />So <span class="math">\(\int \arcsin x \dee x = x \arcsin x - \int \frac{x}{\sqrt{1 - x^2}} \dee x = x \arcsin x + \sqrt{1 - x^2} + c\)</span>.</p>
+</blockquote>
+<p>Simplify <span class="math">\(\int \arccos x \dee x\)</span>:</p>
+<blockquote>
+<p>Using integration by parts, with <span class="math">\(a(x) = x, b(x) = \arccos x\)</span>, <span class="math">\(\int (\frac{\dee}{\dee x} x) \arccos x \dee x = x \arccos x - \int \frac{x}{\sqrt{1 - x^2}} \dee x\)</span>.<br />From the previous question, we know that <span class="math">\(\int \frac{x}{\sqrt{1 - x^2}} \dee x = -\sqrt{1 - x^2} + c\)</span>.<br />So <span class="math">\(\int (\frac{\dee}{\dee x} x) \arccos x \dee x = x \arccos x - \int \frac{x}{\sqrt{1 - x^2}} \dee x = x \arccos x + \sqrt{1 - x^2} + c\)</span>.</p>
+</blockquote>
+<p>Simplify <span class="math">\(\int \ln x \dee x\)</span>:</p>
+<blockquote>
+<p>Using integration by parts, with <span class="math">\(a(x) = x, b(x) = \arccos x\)</span>. <span class="math">\(\int (\frac{\dee}{\dee x} x) \ln x \dee x = x \ln x - \int \frac{x}{x} \dee x = x \ln x - x\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -10,6 +10,15 @@ Calculus II
     Office hours: Mondays 11:30am-12:15pm, 3:00pm-3:30pm
     Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15
 
+$$
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+$$
+
 # 6/1/14
 
 Assignments are due every friday at 3:30pm. They are posted on LEARN.
@@ -66,3 +75,70 @@ We want to prove property 1:
 > So $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t$.  
 
 Property 2 is left as an exercise. ;wip
+
+# 8/1/14
+
+To prove property 2, we need to show that $\int_1^{a^r} \frac{1}{u} \dee u = r \int_1^a \frac{1}{t} \dee t$. To do this, we find a substitution that results in the desired limits of integration.
+
+### Integration by Parts
+
+We often have integrands that are products. For example, $\int x \sin x \dee x$
+
+It would be nice to be able to differentiate or integrate just one of the factors rather than having to do the whole thing.
+
+Recall the product rule: $\frac{\dee}{\dee x} (a(x) b(x)) = (\frac{\dee}{\dee x} a(x)) b(x) + a(x) \frac{\dee}{\dee x} b(x)$.
+
+Move the last term to the left: $(\frac{\dee}{\dee x} a(x)) b(x) = \frac{\dee}{\dee x} (a(x) b(x)) - a(x) \frac{\dee}{\dee x} b(x)$.
+
+If we integrate both sides with respect to $x$, we get: $\int (\frac{\dee}{\dee x} a(x)) b(x) = \int \frac{\dee}{\dee x} a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x)$.
+
+By FTC2, $\int (\frac{\dee}{\dee x} a(x)) b(x) = a(x) b(x) + c - \int a(x) \frac{\dee}{\dee x} b(x)$.
+
+Since there would also be a $c$ term from the second integral, we don't need to write it. So $\int (\frac{\dee}{\dee x} a(x)) b(x) = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x)$.
+
+This is the **integration by parts rule**.
+
+Using the same idea, we find that $\int_a^b (\frac{\dee}{\dee x} a(x)) b(x) = \evalat{a(x) b(x)}_{x = a}^{x = b} - \int_a^b a(x) \frac{\dee}{\dee x} b(x)$.
+
+When we use the rule, we want to identify two parts of the product such that one of the parts (b) is the factor that becomes **simpler when differentiated**, and the other part (a) is chosen as the **integral of the factor**.
+
+Simplify $\int x \sin x \dee x$:
+
+> $x$ is much simpler when differentiated. Let $b(x) = x$.  
+> $\sin x$ is integrable. Let $a(x) = \int \sin x = -\cos x$.  
+> So $\int x \sin x = \int x \frac{\dee}{\dee x} (-\cos x) = -x \cos x - \int (-\cos x) 1 \dee x$, by integration by parts.  
+> So $-x \cos x - \int (-\cos x) 1 \dee x = -x \cos x + \sin x + c$.  
+
+We can check the answer by differentiating: $\frac{\dee}{\dee x} (-x \cos x + \sin x + c) = x \sin x$.
+
+When we use integration by parts, we differentiate one factor, and integrate the other. Then, we can apply the integration by parts formula and obtain a possibly simpler version.
+
+Simplify $\int_0^1 x e^{-x} \dee x$:
+
+> ;wip
+
+Simplify $\int_0^1 x^n (\ln x)^n \dee x$:
+
+> ;wip
+
+We often write the integration by parts formula in different forms: $\int a \dee b = uv - \int v \dee u$, or $\int f'(x) g(x) \dee x = f(x) g(x) - \int f(x) g'(x) \dee x$.
+
+An interesting trick is that we can use integration by parts to integrate anything, since everything is a product of itself and 1.
+
+For example, consider $\int \arcsin x \dee x$:
+
+> Clearly, $\int 1 \cdot \arcsin x \dee x = \int (\frac{\dee}{\dee x} x) \arcsin x \dee x$.  
+> Using integration by parts, with $a(x) = x, b(x) = \arcsin x$, $\int (\frac{\dee}{\dee x} x) \arcsin x \dee x = x \arcsin x - \int \frac{x}{\sqrt{1 - x^2}} \dee x$.  
+> We can now use integration by substitution with $u = 1 - x^2$ to simplify $\int \frac{x}{\sqrt{1 - x^2}} \dee x$.  
+> Clearly, $\dee x = -\frac{1}{2x} \dee x$ and $\int \frac{1}{\sqrt{1 - x^2}} \dee x = -\frac{1}{2} \int \frac{1}{\sqrt{u}} \dee u = -\frac{1}{2} \int u^{-\frac{1}{2}} \dee u = -\frac{1}{2} 2 \sqrt{u} + c = -\sqrt{1 - x^2} + c$.  
+> So $\int \arcsin x \dee x = x \arcsin x - \int \frac{x}{\sqrt{1 - x^2}} \dee x = x \arcsin x + \sqrt{1 - x^2} + c$.  
+
+Simplify $\int \arccos x \dee x$:
+
+> Using integration by parts, with $a(x) = x, b(x) = \arccos x$, $\int (\frac{\dee}{\dee x} x) \arccos x \dee x = x \arccos x - \int \frac{x}{\sqrt{1 - x^2}} \dee x$.  
+> From the previous question, we know that $\int \frac{x}{\sqrt{1 - x^2}} \dee x = -\sqrt{1 - x^2} + c$.  
+> So $\int (\frac{\dee}{\dee x} x) \arccos x \dee x = x \arccos x - \int \frac{x}{\sqrt{1 - x^2}} \dee x = x \arccos x + \sqrt{1 - x^2} + c$.  
+
+Simplify $\int \ln x \dee x$:
+
+> Using integration by parts, with $a(x) = x, b(x) = \arccos x$. $\int (\frac{\dee}{\dee x} x) \ln x \dee x = x \ln x - \int \frac{x}{x} \dee x = x \ln x - x$.  
