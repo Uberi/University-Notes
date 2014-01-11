@@ -76,7 +76,7 @@ Section 003</code></pre>
 <h1 id="section">7/1/14</h1>
 <p>The clicker ID for the room is CB, but the prof just said he'll use AA.</p>
 <p>Assignments usually due every week Wednesday at noon.</p>
-<p>;wip: look around the website, and get a copy of the textbook next week, the electronic one</p>
+<p>;wip: look around the website, and get a copy of the course notes next week, the electronic one</p>
 <p>If you don't want to use the clickers, enter your student number as the clicker ID and you can pass assignment 0.</p>
 <p>Every clicker question is out of 2, best 75% of responses counted, every tutorial attend increases final grade 0.1%, but is part of clamped 5% participation grade.</p>
 <p>Assignments are to be submitted to <a href="http://marmoset.student.cs.uwateroo.ca/">Marmoset</a>. MarkUs is used too for viewing comments, but students submit to Marmoset. There is less hand marking in this course and more automated testing.</p>
@@ -105,6 +105,132 @@ Section 003</code></pre>
 <p>The most common programming paradigms are functional, imperative, object oriented.</p>
 <p>Programming involves a lot of <strong>design choices</strong> and <strong>tradeoffs</strong>. Each decision has to be made based on the situation and the requirements.</p>
 <p>An abstract data type is a data type with certain properties, but we don't really care how it works. An example would be a dictionary/mapping - we only care about lookup, insert, and remove, not whether it uses association lists or binnary trees or anything.</p>
+<h1 id="section-1">9/1/14</h1>
+<p>Racket, by default outputs the resulting values of the top level expressions to the interactions window.</p>
+<p>But in the real world, we often want to do explicit input and output - keyboard, mouse, screen, speakers.</p>
+<pre><code>&gt; &quot;hello, world&quot;
+&quot;hello, world&quot;
+&gt; (printf &quot;hello, world&quot;)
+hello, world</code></pre>
+<p>In this course we are required to use <code>printf</code> rather than top-level expressions.</p>
+<p>In CS135 the programs written were not interactive - the sessions in the interactions window were not part of the programs.</p>
+<p><code>printf</code> does not insert the newline at the end of the line:</p>
+<pre><code>&gt; (printf &quot;a&quot;) (printf &quot;a&quot;)
+aa
+&gt; (printf &quot;a\n&quot;) (printf &quot;a&quot;)
+a
+a</code></pre>
+<p><code>\\n</code> here means a newline. To make a literal backslash, use two backslashes: <code>\\\\</code>.</p>
+<p>What if we need to print a number? The first parameter of <code>printf</code> must be a string. We can use a <strong>placeholder</strong>:</p>
+<pre><code>&gt; (printf &quot;the number is ~a, though the others are ~a and ~a, plus ~a.\n&quot; 4 &#39;test123 &quot;bla&quot; &#39;(1 2 3))
+the number is 4, though the others are test123 and bla, plus (1 2 3).</code></pre>
+<p><code>printf</code> is available only in full racket. To print out a literal tilde (<code>~</code>), use two tildes (<code>~~</code>).</p>
+<p>In racket, we can do input by using <code>(read)</code>. This allows the user to enter a single line. The resulting value is what <code>(read)</code> evaluates to:</p>
+<pre><code>&gt; (printf &quot;hello, ~a&quot; (read))
+% Anthony
+hello, Anthony</code></pre>
+<h2 id="functional-vs.-imperative-vs.-object-oriented">Functional vs. Imperative vs. Object Oriented</h2>
+<p>A programming paradigm is an approach or philosophy to programming.</p>
+<p>The <strong>functional programming paradigm</strong> (CS135) is to only use new values that stay constant. It is a mathematical way of computing. We produce new values rather than changing old ones. Racket is a multi-paradigm language, but is primarily used as a functional langauge.</p>
+<p>The <strong>imperative programming paradigm</strong> (CS136) is to be able to modify state. We compute things based on changing values that we already have. In imperative programs, we give a sequence of statements that tell the computer what to do. C is a multi-paradigm language, but is primarily used as an imperative langauge.</p>
+<p>The <strong>object oriented programming paradigm</strong> (CS246) is to have objects that we can send messages to and receive responses from.</p>
+<p>This course focuses on imperative programming.</p>
+<h2 id="statemodularization">State/Modularization</h2>
+<p>State is the value of some data/information at a moment in time. It is related to memory.</p>
+<p>In Racket, the state is the definitions made. But the states that were already defined at any moment in time were never changed. In contrast, C allows the already existing states to be changed.</p>
+<p>Actually, we can still change state in Racket, thanks to the special form <code>(set! CONSTANT VALUE)</code> (&quot;set-bang&quot;).</p>
+<pre><code>&gt; (define n 5)
+&gt; n
+5
+&gt; (set! n &quot;six&quot;)
+&gt; n
+&quot;six&quot;</code></pre>
+<p>The constant behaves as if it was defined as it was set that way in the first place:</p>
+<pre><code>&gt; (define n 5)
+&gt; (define (f) (add1 n))
+&gt; (f)
+6
+&gt; (set! n 1)
+&gt; (f)
+2</code></pre>
+<p>The <code>!</code> suffix in the function name means that it changes state, and we should be careful when using it.</p>
+<p>When we change state, we mutate it. Manipulation of state is mutation. In imperative programming languages, programmers may not use the term &quot;mutation&quot;, but use the term &quot;immutable&quot; rather than &quot;constants&quot;.</p>
+<p>Now we will call constants in Racket &quot;variables&quot;, since we can use <code>set!</code>. When the difference matters, we use &quot;constants&quot; for things that don't change, and &quot;mutable variables&quot; for things that can.</p>
+<p>Section 2 is covered in Monday's tutorial.</p>
+<h2 id="modularization">Modularization</h2>
+<p>In larger projects, we need to break our code into pieces to make it easier to work on. Modularization is the practice of doing so in such a way as to group related functionality together into <strong>modules</strong>.</p>
+<p>A good real-world example of modularization is a battery - a self-contained package that provides electrical power. It has all three qualities of a good module:</p>
+<ul>
+<li>Reusability: a good module can be reused in multiple places, so we can use it again and again without writing another one.</li>
+<li>Maintainability: a single module is easier to debug, write, and improve - we only need to change the specific module we are looking for, and can even replace the module entirely without affecting everything else.</li>
+<li>Abstraction: we don't need to care about how it is written, just how we can use it. We can hide all the complex stuff in a module and make the resulting interface simple to use.</li>
+</ul>
+<p>Modularization is also called <strong>separation of concerns</strong>.</p>
+<p>A program that allows students to order school supplies online might have the following modules:</p>
+<ul>
+<li>One for looking up course requirements.</li>
+<li>One for keeping track of inventory.</li>
+<li>One for creating a virtual shopping cart.</li>
+<li>etc.</li>
+</ul>
+<p>Consider a tax processing module. The tax code is rather complex, so:</p>
+<ul>
+<li>Reusability: We can reuse the tax module in lots of other projects.</li>
+<li>Maintainability: When tax codes change, we just change that one module.</li>
+<li>Abstraction: We don't need to care about the details of the tax code, and leave it up to the module.</li>
+</ul>
+<p>Modules are available in Racket too:</p>
+<pre><code>;; frobnicate.rkt
+
+(provide fun?) ; make `fun?` visible in the program scope
+
+;; frobnicates?: Int -&gt; Bool
+;; Determines whether `k` frobnicates the discombobulator
+(define (frobnicates? k) (= k 2))
+
+;; some_program.rkt
+
+(require &quot;fun.rkt&quot;)
+
+&gt; (fun? 2)
+#t</code></pre>
+<p><code>provide</code> and <code>require</code> are special forms that make variables visible externally from other programs and import them other programs, respectively.</p>
+<p>In other words, <code>provide</code> exports the specified variables from the module, and <code>require</code> imports the exports from a module.</p>
+<p>All Racket files are already modules, but by default they have nothing provided, so the requiring program can't access anything in them.</p>
+<p>Now we have three levels of scope (for this course):</p>
+<ul>
+<li>Local scope: only visible inside the block or <code>local</code> region.</li>
+<li>Module scope (formerly global scope): only visible inside the module/file.</li>
+<li>Program scope: only visible to the current program (provided value).</li>
+</ul>
+<h3 id="interfaces">Interfaces</h3>
+<p>Note that require will basically run the program too, so if there are any top-level values, they will get printed out.</p>
+<p>Modules <strong>should not make unnecessary output</strong>. This might confuse the automated marking systems and cause assignment tests to fail:</p>
+<pre><code>;; this is a module
+&quot;test&quot; ; unnecessary output</code></pre>
+<p>In modules, make sure to only put definitions, and not values.</p>
+<p>The <strong>module interface</strong> is the list of functions the module provides, including the contract and purpose (documentation). It is everything a client would need to use the module.</p>
+<p>The <strong>module implementation</strong> is the definitions of the functions in the module - the code itself.</p>
+<p>The interface of a battery is the cylindrical container with two terminals. The implementation is nickel metal-hydride or something else.</p>
+<p>A module interface should have some basic elements:</p>
+<ul>
+<li>Overall description of the module - what it is designed to do</li>
+<li>A list of the functions provided</li>
+<li>A contract and purpose for every function</li>
+<li>Usage examples.</li>
+</ul>
+<p>In this course function contracts have been extended from those in CS135 with preconditions and postconditions:</p>
+<pre><code>;; sum-first: Int -&gt; Int
+;;     PRE: k &gt;= 1
+;;     POST: produce an Int &gt;= 1
+;; (sum-first k) produces the sum of the integers 1..k
+(define (sum-first k)
+    ...)</code></pre>
+<p>Note that preconditions and postconditions are part of the contract, not their own element. The preconditions are the conditions that must be true before calling the function, and the postconditions are the conditions that will be true after the function is called - a specification of what the function produces.</p>
+<p>This allows the contract to convey more information about what is allowed: following the preconditions and obeying the contract while calling the function results in the postconditions being met. These conditions are both logical statements.</p>
+<p>A function that takes no parameters has a contract that starts off something like <code>FUNCTION_NAME: -&gt; RETURN_VALUE</code>.</p>
+<p>A precondition that is always met no matter what can be written as <code>PRE: #t</code>. Likewise with postconditions.</p>
+<p>In Racket, there are even built in facilities in the language that help enforce the preconditions and postconditions. However, we will not be using them - the conditions in our programs will be informal.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

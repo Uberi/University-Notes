@@ -40,7 +40,7 @@ Series: $1 + 2 + 3 + \ldots$
 
 Taylor polynomials are series of functions, which allow us to represent almost any function as a polynomial. This is the most powerful technique in applied mathematics - science and mathematics.
 
-By the way, $\dee x$ is called an **infinitesmall**.
+By the way, $\dee x$ is called an **infinitesmal**.
 
 Techniques of Integration
 -------------------------
@@ -49,7 +49,19 @@ Techniques of integration rewrite functions in forms that we can't integrate int
 
 ### Method of substitution
 
-We know that $\int x \dee x = \frac{x^2}{2} + c$.
+The method of substitution is based on choosing a subexpression $u$, and then integrating with respect to it. If $u$ is chosen carefully, it is occasionally possible to simplify the integral.
+
+Consider $\int f(x) \dee x$. Choose some $u$. Then $\dee u = \frac{\dee u}{\dee x} \dee x$ and $\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u$.
+
+So $\int f(x) \dee x = \int \frac{f(x)}{\frac{\dee u}{\dee x}} \dee u$. Ideally, $\frac{\dee u}{\dee x}$ will cancel out a factor of $f(x)$.
+
+More generally:
+
+We are given $\int_a^b f(x) \dee x$ and chose a $u(x)$.
+
+So $\dee u = \frac{\dee u}{\dee x} \dee x = u'(x) \dee x$.
+
+So $\int_a^b f(x) \dee x = \int_{u^{-1}(a)}^{u^{-1}(b)} f(u(x)) u'(x) \dee u$.
 
 Using substitution, we can evaluate something like $-\int \cos x \sin x \dee x$.
 
@@ -63,22 +75,47 @@ Substitution is useful when we can figure out what a useful substitution would b
 
 One clue that the substitution is a good choice is if the derivative of the substitution appears in the numerator of the function.
 
-How do we prove that $\int_1^x \frac{1}{t} = \ln x$? How do we know that both have the same properties ($\ln ab = ln a + \ln b$ and $\ln a^r = r \ln a$)?
+How do we prove that $\int_1^x \frac{1}{t} = \ln x$? How do we know that both have the same properties:
+
+* Property 1 - multiplication rule: $\ln ab = ln a + \ln b$
+* Property 2 - power rule: $\ln a^r = r \ln a$)
 
 We want to prove property 1:
 
-> we want to prove that $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t$.  
+> We want to prove that $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t$.  
 > By linearity of integrals, we do $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_a^{ab} \frac{1}{t} \dee t$.  
 > Let $u = \frac{t}{a}$. Then $\dee u = a \dee t$.  
 > So when $t = a$, $u = 1$, and when $t = ab$, $u = b$.  
 > So $\int_a^{ab} \frac{1}{t} \dee t = \int_1^{b} \frac{a \dee u}{tu} \dee t = \int_1^b \frac{1}{u} \dee u = \int_1^b \frac{1}{t} \dee t$ (dummy variable).  
 > So $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t$.  
 
-Property 2 is left as an exercise. ;wip
+Dummy variables can be swapped for any value, even functions like $f(t)$.
 
 # 8/1/14
 
 To prove property 2, we need to show that $\int_1^{a^r} \frac{1}{u} \dee u = r \int_1^a \frac{1}{t} \dee t$. To do this, we find a substitution that results in the desired limits of integration.
+
+We want to prove property 2:
+
+> We want to prove that $\int_1^{a^r} \frac{1}{t} \dee t = r \int_1^a \frac{1}{t} \dee t$.  
+> Let $u(t) = t^r$. Then $\dee u = \frac{\dee u}{\dee t} \dee t = rt^{r - 1} \dee t$ and $\dee t = \frac{1}{rt^{r - 1}} \dee u$.  
+> So $\int_1^{a^r} \frac{1}{t} \dee t = \int_1^a \frac{1}{rt^r} \dee u = \int_1^a \frac{1}{ru} \dee u = \frac{1}{r} \int_1^a \frac{1}{u} \dee u$.
+;wip: this is clearly impossible
+
+Attempt 2:
+
+> We want to prove that $\int_1^{a^r} \frac{1}{t} \dee t = r \int_1^a \frac{1}{t} \dee t$.  
+> Let $u(t) = t^r$. Then $\dee u = \frac{\dee u}{\dee t} \dee t = rt^{r - 1} \dee t$.  
+> So $\int_1^{a^r} \frac{1}{t} \dee t = \int_1^a \frac{1}{u} rt^{r - 1} \dee u = r \int_1^a \frac{1}{t} \dee u$.
+;wip: wtf? that last part doesn't even make any sense
+
+### Differentiating with respect to functions
+
+As an aside, we can actually differentiate things with respect to functions.
+
+Note that $\frac{\dee a(x)}{\dee b(x)} = \frac{\dee a(x)}{\dee x} \frac{\dee x}{\dee b(x)} = \frac{\dee a(x)}{\dee x} \frac{1}{\frac{\dee b(x)}{\dee x}}$.
+
+So $\frac{\dee a(x)}{\dee b(x)} = \frac{\frac{\dee a(x)}{\dee x}}{\frac{\dee b(x)}{\dee x}} = \frac{a'(x)}{b'(x)}$.
 
 ### Integration by Parts
 
@@ -94,7 +131,7 @@ If we integrate both sides with respect to $x$, we get: $\int (\frac{\dee}{\dee 
 
 By FTC2, $\int (\frac{\dee}{\dee x} a(x)) b(x) = a(x) b(x) + c - \int a(x) \frac{\dee}{\dee x} b(x)$.
 
-Since there would also be a $c$ term from the second integral, we don't need to write it. So $\int (\frac{\dee}{\dee x} a(x)) b(x) = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x)$.
+Since there would also be a $c$ term from the second integral, we don't need to write it. So $\int (\frac{\dee}{\dee x} a(x)) b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x) \dee x$.
 
 This is the **integration by parts rule**.
 
@@ -142,3 +179,39 @@ Simplify $\int \arccos x \dee x$:
 Simplify $\int \ln x \dee x$:
 
 > Using integration by parts, with $a(x) = x, b(x) = \arccos x$. $\int (\frac{\dee}{\dee x} x) \ln x \dee x = x \ln x - \int \frac{x}{x} \dee x = x \ln x - x$.  
+
+# 10/1/14
+
+The integration by parts rule is also written as $\int v \dee u = uv - \int u \dee v$:
+
+> Clearly, $\dee a = \frac{\dee a}{\dee x} \dee x$ and $\dee b = \frac{\dee b}{\dee x} \dee x$.  
+> We know that $\int (\frac{\dee}{\dee x} a(x)) b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x) \dee x$ and so $\int \frac{\dee a}{\dee x} b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee b}{\dee x} \dee x$.  
+> So $\int b(x) \dee a = a(x) b(x) - \int a(x) \dee b$.  
+
+;wip: work on assignment 1 in math138 and 136
+
+We can also write it as $\int f(x) g(x) \dee x = \int f(x) \dee x g(x) - \int \int f(x) \dee x \frac{\dee g}{\dee x} \dee x$.
+
+### Getting Back What We Started With
+
+Consider $I = \int e^{-x} \sin x$:
+
+> We choose $\frac{\dee}{\dee x} e^{-x} = -e^{-x}$ and $\int \sin x \dee x = -\cos x$.  
+> So $I = \int e^{-x} \frac{\dee}{\dee x} (-\cos x) \dee x = e^{-x} (-\cos x) - \int e^{-x} \cos x$.  
+> We choose $\frac{\dee}{\dee x} (-e^{-x}) = e^{-x}$ and $\int \cos x \dee x = \sin x$.  
+> Clearly, $\int e^{-x} \cos x = \int e^{-x} \frac{\dee}{\dee x} \sin x = e^{-x} \sin x - \int (-e^{-x}) \sin x = e^{-x} \sin x + I$.  
+> So $I = -e^{-x} \cos x - \int e^{-x} \cos x = -e^{-x} \cos x - e^{-x} \sin x - I$.  
+> So $2I = -e^{-x} (\cos x + \sin x)$ and $I = -\frac{1}{2}e^{-x} (\cos x + \sin x)$.  
+
+Basically, we used integration by parts to rewrite the expression, then used integration by parts again to simplify the remaining integral. In doing so we obtained a result that contained the original expression, which we substituted and solved algebraically.
+
+This technique is only really useful for problems of the form $\int e^{ax} \sin bx \dee x$ or $\int e^{ax} \cos bx \dee x$.
+
+Simplify $\int_0^1 (-\ln x)^n \dee x, n \in \mb{N}$:
+
+> We will try it for the first few values of $n$.  
+> For $n = 1$, $\int_0^1 (-\ln x)^n \dee x = -\int_0^1 1 \ln x \dee x = -\int_0^1 \ln x \frac{\dee}{\dee x} x = -\evalat{x \ln x}_0^1 + \int_0^1 x \frac{1}{x} = -1 \ln 1 + 0 \ln 0 + 1$ (indeterminate form $0 \cdot -\infty$).  
+> This is a thing known as an improper integral (covered later in the course).  
+> We can solve it because what we really want is $\lim_{x \to 0} x \ln x = \lim_{x \to 0} \frac{\ln x}{\frac{1}{x}} \lH \lim_{x \to 0} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \to 0} (-x) = 0$ rather than the value $0 \ln 0$.  
+> So $-\int_0^1 \ln x \dee x = -1 \ln 1 + 0 + 1 = 1$.  
+> If we repeat this for $n = 2, 3, \ldots$, we find that $\int_0^1 (-\ln x)^n \dee x = n!, n \in \mb{N}$, yet it also works for fractional values of $n$ - this is the generalized factorial over positive real numbers!  

@@ -96,11 +96,17 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 </ul>
 <p>Sequence: <span class="math">\(1, 2, 3, \ldots\)</span> Series: <span class="math">\(1 + 2 + 3 + \ldots\)</span></p>
 <p>Taylor polynomials are series of functions, which allow us to represent almost any function as a polynomial. This is the most powerful technique in applied mathematics - science and mathematics.</p>
-<p>By the way, <span class="math">\(\dee x\)</span> is called an <strong>infinitesmall</strong>.</p>
+<p>By the way, <span class="math">\(\dee x\)</span> is called an <strong>infinitesmal</strong>.</p>
 <h2 id="techniques-of-integration">Techniques of Integration</h2>
 <p>Techniques of integration rewrite functions in forms that we can't integrate into forms that we can integrate.</p>
 <h3 id="method-of-substitution">Method of substitution</h3>
-<p>We know that <span class="math">\(\int x \dee x = \frac{x^2}{2} + c\)</span>.</p>
+<p>The method of substitution is based on choosing a subexpression <span class="math">\(u\)</span>, and then integrating with respect to it. If <span class="math">\(u\)</span> is chosen carefully, it is occasionally possible to simplify the integral.</p>
+<p>Consider <span class="math">\(\int f(x) \dee x\)</span>. Choose some <span class="math">\(u\)</span>. Then <span class="math">\(\dee u = \frac{\dee u}{\dee x} \dee x\)</span> and <span class="math">\(\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u\)</span>.</p>
+<p>So <span class="math">\(\int f(x) \dee x = \int \frac{f(x)}{\frac{\dee u}{\dee x}} \dee u\)</span>. Ideally, <span class="math">\(\frac{\dee u}{\dee x}\)</span> will cancel out a factor of <span class="math">\(f(x)\)</span>.</p>
+<p>More generally:</p>
+<p>We are given <span class="math">\(\int_a^b f(x) \dee x\)</span> and chose a <span class="math">\(u(x)\)</span>.</p>
+<p>So <span class="math">\(\dee u = \frac{\dee u}{\dee x} \dee x = u&#39;(x) \dee x\)</span>.</p>
+<p>So <span class="math">\(\int_a^b f(x) \dee x = \int_{u^{-1}(a)}^{u^{-1}(b)} f(u(x)) u&#39;(x) \dee u\)</span>.</p>
 <p>Using substitution, we can evaluate something like <span class="math">\(-\int \cos x \sin x \dee x\)</span>.</p>
 <p>How do we figure that out?</p>
 <blockquote>
@@ -108,14 +114,30 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 </blockquote>
 <p>Substitution is useful when we can figure out what a useful substitution would be.</p>
 <p>One clue that the substitution is a good choice is if the derivative of the substitution appears in the numerator of the function.</p>
-<p>How do we prove that <span class="math">\(\int_1^x \frac{1}{t} = \ln x\)</span>? How do we know that both have the same properties (<span class="math">\(\ln ab = ln a + \ln b\)</span> and <span class="math">\(\ln a^r = r \ln a\)</span>)?</p>
+<p>How do we prove that <span class="math">\(\int_1^x \frac{1}{t} = \ln x\)</span>? How do we know that both have the same properties:</p>
+<ul>
+<li>Property 1 - multiplication rule: <span class="math">\(\ln ab = ln a + \ln b\)</span></li>
+<li>Property 2 - power rule: <span class="math">\(\ln a^r = r \ln a\)</span>)</li>
+</ul>
 <p>We want to prove property 1:</p>
 <blockquote>
-<p>we want to prove that <span class="math">\(\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t\)</span>.<br />By linearity of integrals, we do <span class="math">\(\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_a^{ab} \frac{1}{t} \dee t\)</span>.<br />Let <span class="math">\(u = \frac{t}{a}\)</span>. Then <span class="math">\(\dee u = a \dee t\)</span>.<br />So when <span class="math">\(t = a\)</span>, <span class="math">\(u = 1\)</span>, and when <span class="math">\(t = ab\)</span>, <span class="math">\(u = b\)</span>.<br />So <span class="math">\(\int_a^{ab} \frac{1}{t} \dee t = \int_1^{b} \frac{a \dee u}{tu} \dee t = \int_1^b \frac{1}{u} \dee u = \int_1^b \frac{1}{t} \dee t\)</span> (dummy variable).<br />So <span class="math">\(\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t\)</span>.</p>
+<p>We want to prove that <span class="math">\(\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t\)</span>.<br />By linearity of integrals, we do <span class="math">\(\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_a^{ab} \frac{1}{t} \dee t\)</span>.<br />Let <span class="math">\(u = \frac{t}{a}\)</span>. Then <span class="math">\(\dee u = a \dee t\)</span>.<br />So when <span class="math">\(t = a\)</span>, <span class="math">\(u = 1\)</span>, and when <span class="math">\(t = ab\)</span>, <span class="math">\(u = b\)</span>.<br />So <span class="math">\(\int_a^{ab} \frac{1}{t} \dee t = \int_1^{b} \frac{a \dee u}{tu} \dee t = \int_1^b \frac{1}{u} \dee u = \int_1^b \frac{1}{t} \dee t\)</span> (dummy variable).<br />So <span class="math">\(\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t\)</span>.</p>
 </blockquote>
-<p>Property 2 is left as an exercise. ;wip</p>
+<p>Dummy variables can be swapped for any value, even functions like <span class="math">\(f(t)\)</span>.</p>
 <h1 id="section-1">8/1/14</h1>
 <p>To prove property 2, we need to show that <span class="math">\(\int_1^{a^r} \frac{1}{u} \dee u = r \int_1^a \frac{1}{t} \dee t\)</span>. To do this, we find a substitution that results in the desired limits of integration.</p>
+<p>We want to prove property 2:</p>
+<blockquote>
+<p>We want to prove that <span class="math">\(\int_1^{a^r} \frac{1}{t} \dee t = r \int_1^a \frac{1}{t} \dee t\)</span>.<br />Let <span class="math">\(u(t) = t^r\)</span>. Then <span class="math">\(\dee u = \frac{\dee u}{\dee t} \dee t = rt^{r - 1} \dee t\)</span> and <span class="math">\(\dee t = \frac{1}{rt^{r - 1}} \dee u\)</span>.<br />So <span class="math">\(\int_1^{a^r} \frac{1}{t} \dee t = \int_1^a \frac{1}{rt^r} \dee u = \int_1^a \frac{1}{ru} \dee u = \frac{1}{r} \int_1^a \frac{1}{u} \dee u\)</span>. ;wip: this is clearly impossible</p>
+</blockquote>
+<p>Attempt 2:</p>
+<blockquote>
+<p>We want to prove that <span class="math">\(\int_1^{a^r} \frac{1}{t} \dee t = r \int_1^a \frac{1}{t} \dee t\)</span>.<br />Let <span class="math">\(u(t) = t^r\)</span>. Then <span class="math">\(\dee u = \frac{\dee u}{\dee t} \dee t = rt^{r - 1} \dee t\)</span>.<br />So <span class="math">\(\int_1^{a^r} \frac{1}{t} \dee t = \int_1^a \frac{1}{u} rt^{r - 1} \dee u = r \int_1^a \frac{1}{t} \dee u\)</span>. ;wip: wtf? that last part doesn't even make any sense</p>
+</blockquote>
+<h3 id="differentiating-with-respect-to-functions">Differentiating with respect to functions</h3>
+<p>As an aside, we can actually differentiate things with respect to functions.</p>
+<p>Note that <span class="math">\(\frac{\dee a(x)}{\dee b(x)} = \frac{\dee a(x)}{\dee x} \frac{\dee x}{\dee b(x)} = \frac{\dee a(x)}{\dee x} \frac{1}{\frac{\dee b(x)}{\dee x}}\)</span>.</p>
+<p>So <span class="math">\(\frac{\dee a(x)}{\dee b(x)} = \frac{\frac{\dee a(x)}{\dee x}}{\frac{\dee b(x)}{\dee x}} = \frac{a&#39;(x)}{b&#39;(x)}\)</span>.</p>
 <h3 id="integration-by-parts">Integration by Parts</h3>
 <p>We often have integrands that are products. For example, <span class="math">\(\int x \sin x \dee x\)</span></p>
 <p>It would be nice to be able to differentiate or integrate just one of the factors rather than having to do the whole thing.</p>
@@ -123,7 +145,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>Move the last term to the left: <span class="math">\((\frac{\dee}{\dee x} a(x)) b(x) = \frac{\dee}{\dee x} (a(x) b(x)) - a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
 <p>If we integrate both sides with respect to <span class="math">\(x\)</span>, we get: <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) = \int \frac{\dee}{\dee x} a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
 <p>By FTC2, <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) = a(x) b(x) + c - \int a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
-<p>Since there would also be a <span class="math">\(c\)</span> term from the second integral, we don't need to write it. So <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
+<p>Since there would also be a <span class="math">\(c\)</span> term from the second integral, we don't need to write it. So <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x) \dee x\)</span>.</p>
 <p>This is the <strong>integration by parts rule</strong>.</p>
 <p>Using the same idea, we find that <span class="math">\(\int_a^b (\frac{\dee}{\dee x} a(x)) b(x) = \evalat{a(x) b(x)}_{x = a}^{x = b} - \int_a^b a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
 <p>When we use the rule, we want to identify two parts of the product such that one of the parts (b) is the factor that becomes <strong>simpler when differentiated</strong>, and the other part (a) is chosen as the <strong>integral of the factor</strong>.</p>
@@ -154,6 +176,24 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>Simplify <span class="math">\(\int \ln x \dee x\)</span>:</p>
 <blockquote>
 <p>Using integration by parts, with <span class="math">\(a(x) = x, b(x) = \arccos x\)</span>. <span class="math">\(\int (\frac{\dee}{\dee x} x) \ln x \dee x = x \ln x - \int \frac{x}{x} \dee x = x \ln x - x\)</span>.</p>
+</blockquote>
+<h1 id="section-2">10/1/14</h1>
+<p>The integration by parts rule is also written as <span class="math">\(\int v \dee u = uv - \int u \dee v\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\dee a = \frac{\dee a}{\dee x} \dee x\)</span> and <span class="math">\(\dee b = \frac{\dee b}{\dee x} \dee x\)</span>.<br />We know that <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x) \dee x\)</span> and so <span class="math">\(\int \frac{\dee a}{\dee x} b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee b}{\dee x} \dee x\)</span>.<br />So <span class="math">\(\int b(x) \dee a = a(x) b(x) - \int a(x) \dee b\)</span>.</p>
+</blockquote>
+<p>;wip: work on assignment 1 in math138 and 136</p>
+<p>We can also write it as <span class="math">\(\int f(x) g(x) \dee x = \int f(x) \dee x g(x) - \int \int f(x) \dee x \frac{\dee g}{\dee x} \dee x\)</span>.</p>
+<h3 id="getting-back-what-we-started-with">Getting Back What We Started With</h3>
+<p>Consider <span class="math">\(I = \int e^{-x} \sin x\)</span>:</p>
+<blockquote>
+<p>We choose <span class="math">\(\frac{\dee}{\dee x} e^{-x} = -e^{-x}\)</span> and <span class="math">\(\int \sin x \dee x = -\cos x\)</span>.<br />So <span class="math">\(I = \int e^{-x} \frac{\dee}{\dee x} (-\cos x) \dee x = e^{-x} (-\cos x) - \int e^{-x} \cos x\)</span>.<br />We choose <span class="math">\(\frac{\dee}{\dee x} (-e^{-x}) = e^{-x}\)</span> and <span class="math">\(\int \cos x \dee x = \sin x\)</span>.<br />Clearly, <span class="math">\(\int e^{-x} \cos x = \int e^{-x} \frac{\dee}{\dee x} \sin x = e^{-x} \sin x - \int (-e^{-x}) \sin x = e^{-x} \sin x + I\)</span>.<br />So <span class="math">\(I = -e^{-x} \cos x - \int e^{-x} \cos x = -e^{-x} \cos x - e^{-x} \sin x - I\)</span>.<br />So <span class="math">\(2I = -e^{-x} (\cos x + \sin x)\)</span> and <span class="math">\(I = -\frac{1}{2}e^{-x} (\cos x + \sin x)\)</span>.</p>
+</blockquote>
+<p>Basically, we used integration by parts to rewrite the expression, then used integration by parts again to simplify the remaining integral. In doing so we obtained a result that contained the original expression, which we substituted and solved algebraically.</p>
+<p>This technique is only really useful for problems of the form <span class="math">\(\int e^{ax} \sin bx \dee x\)</span> or <span class="math">\(\int e^{ax} \cos bx \dee x\)</span>.</p>
+<p>Simplify <span class="math">\(\int_0^1 (-\ln x)^n \dee x, n \in \mb{N}\)</span>:</p>
+<blockquote>
+<p>We will try it for the first few values of <span class="math">\(n\)</span>.<br />For <span class="math">\(n = 1\)</span>, <span class="math">\(\int_0^1 (-\ln x)^n \dee x = -\int_0^1 1 \ln x \dee x = -\int_0^1 \ln x \frac{\dee}{\dee x} x = -\evalat{x \ln x}_0^1 + \int_0^1 x \frac{1}{x} = -1 \ln 1 + 0 \ln 0 + 1\)</span> (indeterminate form <span class="math">\(0 \cdot -\infty\)</span>).<br />This is a thing known as an improper integral (covered later in the course).<br />We can solve it because what we really want is <span class="math">\(\lim_{x \to 0} x \ln x = \lim_{x \to 0} \frac{\ln x}{\frac{1}{x}} \lH \lim_{x \to 0} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \to 0} (-x) = 0\)</span> rather than the value <span class="math">\(0 \ln 0\)</span>.<br />So <span class="math">\(-\int_0^1 \ln x \dee x = -1 \ln 1 + 0 + 1 = 1\)</span>.<br />If we repeat this for <span class="math">\(n = 2, 3, \ldots\)</span>, we find that <span class="math">\(\int_0^1 (-\ln x)^n \dee x = n!, n \in \mb{N}\)</span>, yet it also works for fractional values of <span class="math">\(n\)</span> - this is the generalized factorial over positive real numbers!</p>
 </blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
