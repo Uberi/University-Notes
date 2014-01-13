@@ -21,7 +21,7 @@ $$
 
 # 6/1/14
 
-Assignments are due every friday at 3:30pm. They are posted on LEARN.
+Assignments are due every Friday at 3:30pm. They are posted on LEARN.
 
 My own drop box is box 5, slot 12
 
