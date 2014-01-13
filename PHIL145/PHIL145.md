@@ -112,4 +112,45 @@ People can say the same words in the same sentence but communicate different thi
 
 What is the real difference between these different ways of communicate the same words? Everything is said in a certain context, which is an important part of understanding the intent of the words.
 
-Assertions are claims presented as true. By asserting a claim we invite people to agree, to invite others to form the belief that the claim is true. Assertions also carry the obligation to either defend or retract assertions when challenged or when new evidence appears - a commitment to put reasoning on display when required to.
+Assertions are claims presented as true. By asserting a claim:
+
+* We present the claim as true.
+* We invite people to agree, to invite others to form the belief that the claim is true.
+* We commit to either defend or retract assertions when challenged or when new evidence appears - a commitment to put reasoning on display when required to.
+
+# 13/1/14
+
+Committing to defending assertions has multiple benefits: filtering information, checking our beliefs against others', helping us change our minds, and explaining our reasoning being helpful for clarifying/organising our own beliefs.
+
+The fundemental unit of rational exchange is the argument. Arguments show the reasonableness of an assertion - if the argument succeeds in doing so, everyone is justified in believing the assertion is true.
+
+Two working definitions of arguments:
+
+* Broad definition: argumentation is the practice by which we aim to show the reasonableness of an assertion. An argument is the thing presented when trying to meet this aim - a verbal or written object.
+* Narrow definition: an argument is a set of claims in which one or more of the claims, the premises, are offered as support of another claim, the conclusion - an abstract object.
+
+The broad definition focuses on the practice of argumentation and connects it to asertion - the communicative act.
+
+The narrow definition focuses on the products of the communicative act.
+
+Most things where the broad definition applies also has the narrow definition apply - the narrow definition is virtually a subset of the broad one.
+
+Arguments are often presented as sets of sentences. We will be studying the narrow definition more in the coming weeks.
+
+When is a set of sentences an argument? There must be a conclusion - an assertion - and premises that defend this assertion. A good argument has premises that the audience already accepts.
+
+> Toronto is the largest city in Canada.
+
+This is not an argument, because there is only a conclusion, without any suporting premises.
+
+> Will you get lost if you walk around Toronto?
+
+There is neither a conclusion or any premises.
+
+> Don't get lost when you walk around Toronto. I will make fun of you forever if you do.
+
+There are two assertions, both conclusions. Neither of the assertions support each other.
+
+> You will get lost of you walk around Toronto. It is the largest city in Canada.
+
+This is an argument, though not a very strong one. The premise that the city is large implies that it is more likely that one will get lost.
