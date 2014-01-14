@@ -21,7 +21,7 @@ $$
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
-\newcommand{\cosh}{\operatorname{cosh}}
+\newcommand{\spn}{\operatorname{Span}}
 $$
 
 # 6/1/14

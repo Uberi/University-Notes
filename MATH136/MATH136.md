@@ -1,4 +1,4 @@
-MATH136
+
 =======
 
 Linear Algebra
@@ -18,8 +18,7 @@ $$
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
-\newcommand{\cosh}{\operatorname{cosh}}
-\newcommand{\span}{\operatorname{Span}}
+\newcommand{\spn}{\operatorname{Span}}
 $$
 
 # 13/1/14 (I'm going to stop procrastinating this week, honest!)
@@ -99,9 +98,9 @@ Span
 
 The **span** of a set of vectors $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_k}$ is the set of all linear combinations of the vectors in the set.
 
-In other words, $\span \mathcal{B} = \span \set{\vec{v}_1, \ldots, \vec{v}_k} = \set{c_1 v_1 + \ldots + c_n v_n \middle| c_1, \ldots, c_n \in \mathbb{R}}$.
+In other words, $\spn \mathcal{B} = \spn \set{\vec{v}_1, \ldots, \vec{v}_k} = \set{c_1 v_1 + \ldots + c_n v_n \middle| c_1, \ldots, c_n \in \mathbb{R}}$.
 
-A span is always a subset of the space it is in. In other words, $\span \mathcal{B} \subseteq \mb{R}^n$.
+A span is always a subset of the space it is in. In other words, $\spn \mathcal{B} \subseteq \mb{R}^n$.
 
 A span is just a set. Therefore, we can say that a set $\mathcal{B}$ **spans** another set $\mathcal{C}$ if and only if $\mathcal{C}$ is exactly the set of all linear combinations of the vectors in $\mathcal{B}$.
 
@@ -109,7 +108,7 @@ The **vector equation** of a set of vectors is the generalized equation for the 
 
 ### Theorem 1.1.2
 
-If $\vec{v}_{k + 1}$ can be written as a linear combination of $\vec{v}_1, \ldots, \vec{v}_k$, then $\span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} = \span \set{\vec{v}_1, \ldots, \vec{v}_k}$.
+If $\vec{v}_{k + 1}$ can be written as a linear combination of $\vec{v}_1, \ldots, \vec{v}_k$, then $\spn \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} = \spn \set{\vec{v}_1, \ldots, \vec{v}_k}$.
 
 In other words, if a vector in a set of vectors can already be represented by a linear combination of other vectors in the set, it doesn't affect the span at all.
 
@@ -117,24 +116,26 @@ Proof:
 
 > Assume $\vec{v}_{k + 1}$ can be written as a linear combination of $\vec{v}_1, \ldots, \vec{v}_k$.  
 > So $\exists c_1, \ldots, c_k \in \mathbb{R}, \vec{v}_{k + 1} = c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k$.  
-> We want to show that $\span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} \subseteq \span \set{\vec{v}_1, \ldots, \vec{v}_k}$.  
-> Let $\vec{x}$ be an arbitrary element of $\span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}$.  
+> We want to show that $\spn \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} \subseteq \spn \set{\vec{v}_1, \ldots, \vec{v}_k}$.  
+> Let $\vec{x}$ be an arbitrary element of $\spn \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}$.  
 > So $\exists d_1, \ldots, d_{k + 1} \in \mathbb{R}, \vec{x} = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} \vec{v}_{k + 1}$.  
 > So $\exists d_1, \ldots, d_{k + 1} \in \mathbb{R}, \vec{x} = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} (c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k)
 = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} c_1 \vec{v}_1 + \ldots + d_{k + 1} c_k \vec{v}_k
 = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} c_1 \vec{v}_1 + \ldots + d_{k + 1} c_k \vec{v}_k
 = (d_1 + d_{k + 1} c_1) \vec{v}_1 + \ldots + (d_k + d_{k + 1} c_k) \vec{v}_k$.  
-> Clearly, $x \in \span \set{\vec{v}_1, \ldots, \vec{v}_k}$.  
-> Clearly, $\span \set{\vec{v}_1, \ldots, \vec{v}_k} \subseteq \span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}$.  
-> Therefore, $\span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} = \span \set{\vec{v}_1, \ldots, \vec{v}_k}$.  
+> Clearly, $x \in \spn \set{\vec{v}_1, \ldots, \vec{v}_k}$.  
+> Clearly, $\spn \set{\vec{v}_1, \ldots, \vec{v}_k} \subseteq \spn \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}$.  
+> Therefore, $\spn \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} = \spn \set{\vec{v}_1, \ldots, \vec{v}_k}$.  
 
-Consider $\span \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}}$. Clearly, $\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}$. Clearly, $\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}$, so $\span \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}} = \span \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}$, a line in 3D.
+Consider $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}}$. Clearly, $\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}$.
+
+Clearly, $\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}$, so $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}} = \spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}$ represents a line in 3D.
 
 The span of the zero vector is itself. The span of a linearly independent vector is a line. The span of two linearly independent vectors is a plane. The span of 3 linearly independent vectors is a 3D space. The span of 4 linearly independent vectors is a 4D space, and so on.
 
 ### Linear Independence
 
-When we say $\vec{v}_{k + 1}$ can be written as a linear combination of $\vec{v}_1, \ldots, \vec{v}_k$, we can also write $\vec{v}_{k + 1} \in \span \set{\vec{v}_1, \ldots, \vec{v}_k}$.
+When we say $\vec{v}_{k + 1}$ can be written as a linear combination of $\vec{v}_1, \ldots, \vec{v}_k$, we can also write $\vec{v}_{k + 1} \in \spn \set{\vec{v}_1, \ldots, \vec{v}_k}$.
 
 Note that $\vec{0}$ can always be written as a linear combination of any vectors in the same space. The zero vector exists in all dimensions.
 
@@ -179,7 +180,7 @@ Bases
 
 A linearly independent set of vectors is always simpler than a linearly dependent one. A linearly dependent set of vectors can always be converted into a linearly dependent one with the same span. Therefore, the simplest set of vectors that spans a given set is always linearly independent.
 
-Given $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$, $\mathcal{B}$ is a **basis** for $\span \mathcal{B}$ if $\mathcal{B}$ is linearly independent.
+Given $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$, $\mathcal{B}$ is a **basis** for $\spn \mathcal{B}$ if $\mathcal{B}$ is linearly independent.
 
 In other words, a basis for a set is a linearly independent set of vectors such that its span is exactly the set.
 
@@ -221,4 +222,4 @@ A $k$-plane in $\mb{R}^n$ takes the form of $\vec{x} = c_1 \vec{v}_1 + \ldots + 
 
 A hyperplane is a $k$-plane, where $k = n - 1$. It is an $n - 1$-dimensional plane.
 
-For example, $\span \set{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \\ −2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 1 \\ −1 \end{bmatrix}}$ defines a hyperplane in $\mb{R}^n$, since the set is linearly independent.
+For example, $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \\ −2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 1 \\ −1 \end{bmatrix}}$ defines a hyperplane in $\mb{R}^n$, since the set is linearly independent.

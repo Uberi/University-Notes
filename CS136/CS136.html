@@ -247,6 +247,7 @@ hello, Anthony</code></pre>
 <li>Structures can now be defined with <code>struct</code> in addition to <code>define-struct</code>, and constructors are named the same as the struct without the <code>make-</code> prefix. FOr example, <code>make-posn</code> is now <code>posn</code>.
 <ul>
 <li>To make testing easier, we should use <code>#:transparent</code> in the structure definitions, which allows us to see what's inside the structure when printing them out: <code>(struct posn (x y) #:transparent)</code>.</li>
+<li>By default, structures are <strong>opaque</strong>, which means when when we display them using something like <code>printf</code>, we can see inside the fields.</li>
 </ul></li>
 <li>We should be familiar with <code>cons</code>, <code>list</code>, <code>empty</code>, <code>first</code>, <code>rest</code>, <code>list-ref</code>, <code>length</code>, <code>append</code>, and <code>reverse</code>. Later on, also <code>last</code> and <code>drop-right</code>.
 <ul>
@@ -275,6 +276,120 @@ hello, Anthony</code></pre>
     (local [(define c 10)] ; this is a local definition
         (add1 c)))</code></pre>
 <p>There is an <strong>implicit local</strong> in the body of every function, so all definitions inside a function body are assumed to be local to the function.</p>
+<h1 id="section-2">14/1/14</h1>
+<p>Racket modules should have their interfaces at the top of the file.</p>
+<p>In the implementation, we do not need to rewrite the documentation for the stuff that is provided.</p>
+<p>Functions that are not provided should have their contract and purposes included with them.</p>
+<p>The top of the file should be visible only to the client, while the rest is for the developer only.</p>
+<p>Example module (<code>sum.rkt</code>):</p>
+<pre><code>;; A module for summing numbers [description of module] ; description should appear on the first line
+
+(provide sum-first sum-squares) ;; [list of functions]
+
+;; sum-first: Int -&gt; Int
+;;     PRE: k &gt;= 1
+;;     POST: produce an Int &gt;= 1
+;; (sum-first k) produces the sum of the integers 1..k
+
+;; sum-squares: ...
+
+;;;;;;;;;; IMPLEMENTATION ;;;;;;;;;;
+
+;; see interface above [no further info required] ; functions that are provided should not have their documentation rewritten
+(define (sum-first n) ...)
+
+;; private-helper: Int -&gt; Int
+;; [contract &amp; purpose for private helper function]
+(define (private-helper p) ...)</code></pre>
+<p>Locally defined functions should also have their contracts and purposes.</p>
+<p>We cannot redefine stuff with the same identifier. To simulate this, we can use local scopes.</p>
+<h2 id="testing">Testing</h2>
+<p>Racket has no <code>check-expect</code>, and we are to avoid using top-level expressions. How do we do testing?</p>
+<p>A good solution is to use testing modules. For example, for the <code>sum.rkt</code> module, we might write <code>test-sum.rkt</code>:</p>
+<pre><code>;; this is a simple testing module for sum.rkt
+
+(require &quot;sum.rkt&quot;)
+
+; Each of the following should produce #t
+
+(equal? (sum-first 1) 1)
+(equal? (sum-first 2) 3)
+(equal? (sum-first 3) 6)
+(equal? (sum-first 10) 55)
+(equal? (sum-first 99) 4950)</code></pre>
+<p>To test private functions, it might be useful to provide testing functions, like <code>test-sum</code> for the <code>sum</code> module.</p>
+<h2 id="interface-design">Interface Design</h2>
+<p>The goals of interface module design are:</p>
+<ul>
+<li><strong>High Cohesion</strong>: everything in the module works towards a common goal - they are related to each other and generally work together.
+<ul>
+<li>For example, a university course should focus on a single subject, and not jump around from ancient history to mathematics. This is low cohesion - the</li>
+<li>Cohesion makes it easier to understand individual modules.</li>
+<li>The thermostat should not control the garage door.</li>
+</ul></li>
+<li><strong>Low Coupling</strong>: modules do not interact between each other - module A should not depend on module B if module B depends on module A.
+<ul>
+<li>Dependency loops mean that the module can't be separated from any of the others in the loop, which makes them highly coupled and poorly designed.</li>
+<li>An example of high coupling might be a university course with a lot of prerequisites, co-requisites, and etc. The courses in this example are highly coupled.</li>
+<li>Coupling makes testing and understanding the code more difficult.</li>
+<li>The car should start even if the radio doesn't work.</li>
+</ul></li>
+<li><strong>Information Hiding</strong>: the interface should be designed to hide the details of the implementation.
+<ul>
+<li>This is for purposes of <strong>flexibility</strong> allowing us to change the implementation without affecting the client</li>
+<li>We also do this for <strong>security</strong> - protecting secret information or preventing tampering or protecting the client from themselves.</li>
+<li>The only way a client should be able to interact with the module should be <strong>through the interface</strong>.</li>
+<li>A battery's interface should not rely on it using nickel metal-hydride - we should be able to change the chemistry of the battery without affecting it interface.</li>
+<li>A user account manager should not expose usernames and passwords to the client. We should also be able to swap out the data structure it uses (like from lists to structs) without the client noticing.</li>
+</ul></li>
+</ul>
+<p>;wip: it seems like the Boolean in CS135 is changed to Bool</p>
+<h3 id="abstract-data-types">Abstract Data Types</h3>
+<p>On a related topic, an <strong>abstract data type</strong> (ADT) is simply a module, that:</p>
+<ul>
+<li>Is meant for data storage.</li>
+<li>The client can only access through the interface functions (called &quot;ADT operations&quot;).</li>
+<li>The data structure and implementation of the ADT is hidden from the client.</li>
+</ul>
+<p>A <strong>collection ADT</strong> is one that can store an arbitrary number of items, and is generalized to be able to store many different types of items.</p>
+<p>An example of this is a dictionary, which maps keys to values.</p>
+<p>In some contexts, referring to an &quot;ADT&quot; is the same thing as referring to a &quot;collection ADT&quot; in this context - there are no such things as non-collection ADTs in these contexts.</p>
+<p>Not all modules store data, and not all data storage modules are ADTs.</p>
+<h3 id="balance">Balance</h3>
+<p>Security and flexibility is good. But so is transparency - exposing various details of the implementation to empower the client to do more with the module.</p>
+<p>Interface design involves a lot of tradeoffs between things like the amount of information hiding used in order to make the best possible interface for a given set of requirements.</p>
+<h2 id="functional-c">Functional C</h2>
+<p>We now move to C programming. We will only be using the features that also exist in Racket for now to make the transition easier.</p>
+<p>C was designed to be a portable systems programming language that is easy to translate into machine code.</p>
+<p>It is designed to give low-level access to computer memory, while still being easy to port to other machines.</p>
+<p>We use the C99 standard in this course, finalized in 1999.</p>
+<p>Just as Racket can be used in an imperative way, C can be programmed in a functional way, using the functional programmming paradigm.</p>
+<p>Comments in Racket:</p>
+<pre><code>; single line comment
+#|
+multi-line
+comment
+|#</code></pre>
+<p>Comments in C:</p>
+<pre><code>// single line comment
+
+/*
+multi-line
+comment
+*/</code></pre>
+<p>Racket constant: <code>(define n 42)</code> C constant: <code>const int n = 42;</code></p>
+<p><code>const</code> indicates the variable is <strong>immutable</strong>, and <code>int</code> indicates that the variable is an <strong>integer</strong>. The <code>= 42</code> is the <strong>initializer</strong>.</p>
+<p>All definitions in C end with a semicolon.</p>
+<p>Identifiers must sart with a letter or underscore, and can contain only letters, numbers, and underscores.</p>
+<p>We will use <code>underscore_case</code> for our variable names.</p>
+<p>Racket uses <strong>dynamic typing</strong> - the type of an identifier is determined while the program is running, which allows us to <strong>change its type at runtime</strong>. C uses <strong>static typing</strong> - the type of an identifier is determined before the program runs, which means that the type of an identifier <strong>cannot be changed while the program is running</strong>.</p>
+<p>For example, in C, we cannot define an integer constant, and later set it to a string. However, this is entirely possible in Racket.</p>
+<p>Because types cannot be changed and are always explicit in the code, we no longer need to check the input types like we did in Racket (<code>integer?</code>, <code>false?</code>, etc.).</p>
+<p>In C, all constants (immutable variables) <strong>must be initialized</strong>. All mutable variables <strong>should be initialized</strong>.</p>
+<p>C uses infix notation for expressions, similar to math, and expression operators all have their own precedences (conceptually similar to order of operations in math):</p>
+<pre><code>const int k = 3 + 4 * 2; // `k` is now 11
+const int l = (3 + 4) * 2; // `l` is now 14</code></pre>
+<p>Note that parentheses now serve only to group things together, and otherwise have no syntactic significance.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
