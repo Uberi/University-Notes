@@ -63,6 +63,7 @@
   }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
 </head>
 <body>
 <a class="button" href="..">&#8666; Return to University Notes index</a>
@@ -71,6 +72,119 @@
 <pre><code>Instructor: Dan Wolczuk
 Section 081 (online)
 Email: dstwolcz@uwaterloo.ca</code></pre>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\cosh}{\operatorname{cosh}}
+\newcommand{\span}{\operatorname{Span}}
+\]</span></p>
+<h1 id="im-going-to-stop-procrastinating-this-week-honest">13/1/14 (I'm going to stop procrastinating this week, honest!)</h1>
+<h2 id="notation">Notation</h2>
+<p>We represent vectors as column vectors (matrices of size <span class="math">\(n \times 1\)</span>) to distinguish them from points: <span class="math">\(\vec{v} = \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}, v_i \in \mathbb{R}, 1 \le i \le n\)</span>.</p>
+<p>However, sometimes we will also write them in <span class="math">\(n\)</span>-tuple form (for example, <span class="math">\((3, 7, 2)\)</span>)</p>
+<p><span class="math">\(\mb{R}^n, n \in \mathbb{Z}, n &gt; 0\)</span> is the set of all elements of the form <span class="math">\((x_1, \ldots, x_n), x_i \in \mathbb{R}, 1 \le i \le n\)</span>.</p>
+<p>We usually think of these elements as points, but now we will think of them as vectors, abstract objects that we can perform operations on, like adding and subtracting.</p>
+<p>This is called an <span class="math">\(n\)</span>-dimensional Euclidean space, and is the set of all vectors that are of length (dimension) <span class="math">\(n\)</span>. For example, <span class="math">\(\mb{R}^3\)</span> (arr-three) is the set of all 3D vectors, and <span class="math">\(\vec{0} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}\)</span>.</p>
+<p>So <span class="math">\(\mb{R}^3 = \set{\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} \middle| x_1, x_2, x_3 \in \mathbb{R}}\)</span>.</p>
+<p>Likewise, <span class="math">\(\mb{R}^n = \set{\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \middle| x_1, \ldots, x_n \in \mathbb{R}}\)</span>.</p>
+<p>It might also occasionally be useful to think of these vectors as points, where the vectors are offsets from the origin. For example, a function <span class="math">\(f\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = f(x_1, \ldots, x_n)\)</span>.</p>
+<h2 id="operations">Operations</h2>
+<p>Let <span class="math">\(\vec{x} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}, \vec{y} = \begin{bmatrix} y_1 \\ \vdots \\ y_n \end{bmatrix}, c \in \mb{R}\)</span>.</p>
+<h3 id="equality">Equality</h3>
+<p><span class="math">\(x = y\)</span> if and only if <span class="math">\(\forall 1 \le i \le n, x_i = y_i\)</span>.</p>
+<p>In other words, two vectors are equal if and only if all their components are equal. Note that this is defined only for vectors with the same size (number of components).</p>
+<h3 id="additionsubtraction">Addition/Subtraction</h3>
+<p><span class="math">\[x + y = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} + \begin{bmatrix} y_1 \\ \vdots \\ y_n \end{bmatrix} = \begin{bmatrix} x_1 + y_1 \\ \vdots \\ x_n + y_n \end{bmatrix}\]</span></p>
+<p>Also, <span class="math">\(\vec{x} - \vec{y} = \vec{x} + (-\vec{y})\)</span>. Therefore, <span class="math">\(x - y = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} - \begin{bmatrix} y_1 \\ \vdots \\ y_n \end{bmatrix} = \begin{bmatrix} x_1 - y_1 \\ \vdots \\ x_n - y_n \end{bmatrix}\)</span>.</p>
+<h3 id="scalar-multiplication">Scalar Multiplication</h3>
+<p><span class="math">\[cx = c\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} cx_1 \\ \vdots \\ cx_n \end{bmatrix}\]</span></p>
+<p>If <span class="math">\(c = -1\)</span>, <span class="math">\(c\vec{x} = -x\)</span>.</p>
+<h2 id="linear-combination">Linear Combination</h2>
+<p>A <strong>linear combination</strong> of vectors <span class="math">\(\vec{v}_1, \ldots, \vec{v}_n\)</span> is the value <span class="math">\(L = c_1 v_1 + \ldots + c_n v_n, c_i \in \mathbb{R}, 1 \le i \le n\)</span>.</p>
+<p>It is a linear expression with each term containing a coefficient and one vector value - a sum of scalar multiples.</p>
+<h3 id="theorem-1.1.1">Theorem 1.1.1</h3>
+<p>If <span class="math">\(\vec{x}, \vec{y}, \vec{w} \in \mathbb{R}^n, c, d \in \mathbb{R}\)</span>, then:</p>
+<ul>
+<li>Closure under addition: <span class="math">\(\vec{x} + \vec{y} \in \mathbb{R}^n\)</span>.</li>
+<li>Associativity: <span class="math">\((\vec{x} + \vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})\)</span></li>
+<li>Commutativity: <span class="math">\(\vec{x} + \vec{y} = \vec{y} + \vec{x}\)</span></li>
+<li>Additive identity: <span class="math">\(\exists \vec{0} \in \mathbb{R}, \vec{x} + \vec{0} = \vec{x}\)</span></li>
+<li>Additive inverse: <span class="math">\(\forall \vec{x} \in \mathbb{R}^n, \exists -\vec{x} \in \mathbb{R}^n, \vec{x} + (-\vec{x}) = \vec{0}\)</span>.</li>
+<li><span class="math">\(c\vec{x} \in \mathbb{R}^n\)</span></li>
+<li><span class="math">\(c(d\vec{x}) = (cd)\vec{x}\)</span></li>
+<li>Scalar distributivity: <span class="math">\((c + d)\vec{x} = c\vec{x} + d\vec{x}\)</span></li>
+<li>Vector distributivity: <span class="math">\(c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}\)</span></li>
+<li>Multiplicative identity: <span class="math">\(1\vec{x} = \vec{x}\)</span></li>
+</ul>
+<p>Closure under addition means that when we add two elements in the set, the resulting sum is also in the set.</p>
+<p>Closure under scalar multiplication means that when we multiply an element in the set by a scalar, the resulting product is also in the set.</p>
+<p>Because these Euclidean spaces are closed under addition and scalar multiplication, they are closed under linear combinations - all linear combinations of vectors in <span class="math">\(\mb{R}^n\)</span> are also in <span class="math">\(\mb{R}^n\)</span>.</p>
+<h2 id="span">Span</h2>
+<p>The <strong>span</strong> of a set of vectors <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> is the set of all linear combinations of the vectors in the set.</p>
+<p>In other words, <span class="math">\(\span \mathcal{B} = \span \set{\vec{v}_1, \ldots, \vec{v}_k} = \set{c_1 v_1 + \ldots + c_n v_n \middle| c_1, \ldots, c_n \in \mathbb{R}}\)</span>.</p>
+<p>A span is always a subset of the space it is in. In other words, <span class="math">\(\span \mathcal{B} \subseteq \mb{R}^n\)</span>.</p>
+<p>A span is just a set. Therefore, we can say that a set <span class="math">\(\mathcal{B}\)</span> <strong>spans</strong> another set <span class="math">\(\mathcal{C}\)</span> if and only if <span class="math">\(\mathcal{C}\)</span> is exactly the set of all linear combinations of the vectors in <span class="math">\(\mathcal{B}\)</span>.</p>
+<p>The <strong>vector equation</strong> of a set of vectors is the generalized equation for the linear combinations of each element in the set. For example, <span class="math">\(\vec{x} = c_1 v_1 + \ldots + c_n v_n\)</span> is the vector equation for <span class="math">\(\mathcal{B}\)</span>.</p>
+<h3 id="theorem-1.1.2">Theorem 1.1.2</h3>
+<p>If <span class="math">\(\vec{v}_{k + 1}\)</span> can be written as a linear combination of <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k\)</span>, then <span class="math">\(\span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} = \span \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span>.</p>
+<p>In other words, if a vector in a set of vectors can already be represented by a linear combination of other vectors in the set, it doesn't affect the span at all.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Assume <span class="math">\(\vec{v}_{k + 1}\)</span> can be written as a linear combination of <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k\)</span>.<br />So <span class="math">\(\exists c_1, \ldots, c_k \in \mathbb{R}, \vec{v}_{k + 1} = c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k\)</span>.<br />We want to show that <span class="math">\(\span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} \subseteq \span \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span>.<br />Let <span class="math">\(\vec{x}\)</span> be an arbitrary element of <span class="math">\(\span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}\)</span>.<br />So <span class="math">\(\exists d_1, \ldots, d_{k + 1} \in \mathbb{R}, \vec{x} = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} \vec{v}_{k + 1}\)</span>.<br />So <span class="math">\(\exists d_1, \ldots, d_{k + 1} \in \mathbb{R}, \vec{x} = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} (c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k) = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} c_1 \vec{v}_1 + \ldots + d_{k + 1} c_k \vec{v}_k = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} c_1 \vec{v}_1 + \ldots + d_{k + 1} c_k \vec{v}_k = (d_1 + d_{k + 1} c_1) \vec{v}_1 + \ldots + (d_k + d_{k + 1} c_k) \vec{v}_k\)</span>.<br />Clearly, <span class="math">\(x \in \span \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span>.<br />Clearly, <span class="math">\(\span \set{\vec{v}_1, \ldots, \vec{v}_k} \subseteq \span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}\)</span>.<br />Therefore, <span class="math">\(\span \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} = \span \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span>.</p>
+</blockquote>
+<p>Consider <span class="math">\(\span \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}}\)</span>. Clearly, <span class="math">\(\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}\)</span>. Clearly, <span class="math">\(\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}\)</span>, so <span class="math">\(\span \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}} = \span \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}\)</span>, a line in 3D.</p>
+<p>The span of the zero vector is itself. The span of a linearly independent vector is a line. The span of two linearly independent vectors is a plane. The span of 3 linearly independent vectors is a 3D space. The span of 4 linearly independent vectors is a 4D space, and so on.</p>
+<h3 id="linear-independence">Linear Independence</h3>
+<p>When we say <span class="math">\(\vec{v}_{k + 1}\)</span> can be written as a linear combination of <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k\)</span>, we can also write <span class="math">\(\vec{v}_{k + 1} \in \span \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span>.</p>
+<p>Note that <span class="math">\(\vec{0}\)</span> can always be written as a linear combination of any vectors in the same space. The zero vector exists in all dimensions.</p>
+<p>It is important to determine which vectors can be written as linear combinations of others.</p>
+<p>A set of vectors is <strong>linearly independent</strong> if and only if the vectors in the set cannot be written as linear combinations of each other. Otherwise, the set is <strong>linearly dependent</strong>.</p>
+<p>In other words, <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot c_n \ne 0 \implies c_1 \vec{v}_1 + \ldots + c_{k - 1} \vec{v}_{k - 1} + c_{k + 1} \vec{v}_{k + 1} + \ldots + c\_n vec{v}_n = c_k \vec{v}_k\)</span>. Rearranging, we get <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot c_n \ne 0 \implies c_1 \vec{v}_1 + \ldots + c_{k - 1} \vec{v}_{k - 1} - c_k \vec{v}_k + c_{k + 1} \vec{v}_{k + 1} + \ldots + c\_n vec{v}_n = \vec{0}\)</span>.</p>
+<h3 id="theorem-1.1.3">Theorem 1.1.3</h3>
+<p>Therefore, a set of vectors <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> is linearly independent if and only if <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot c_n \ne 0 \implies c_1 \vec{v}_1 + \ldots + c\_n vec{v}_n = \vec{0}\)</span>.</p>
+<p>The solution where <span class="math">\(c_i = 0, 1 \le i \le n\)</span> is called the trivial solution, because all the coefficients are 0. The trivial solution is always a solution to the above equation.</p>
+<p>In other words, the set is linearly independent if and only if the zero vector cannot be written as a linear combination of the vectors in the set, except when all the coefficients are 0.</p>
+<p>To prove that a set is linearly independent, we need to prove that the only solution to the above equation is the trivial solution.</p>
+<p>To prove that a set is linearly independent, we need to prove that there is a solution to the above equation where at least one of the coefficients is non-aero.</p>
+<p>When we find a solution to the equation, we can use this to find the vectors that are in the span of all the others - the vectors that can be written as a linear comnbination of the others. In the solution, <strong>all vectors with non-zero coefficients can be written as linear combinations of all the other vectors</strong>. If we rearrange the solved equation, we can find this linear combination.</p>
+<h3 id="theorem-1.1.4">Theorem 1.1.4</h3>
+<p>Note that any set of vectors that contains <span class="math">\(\vec{0}\)</span> is linearly dependent.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> and <span class="math">\(\vec{v}_i = \vec{0}, 1 \le i \le n\)</span>.<br /><span class="math">\(\mathcal{B}\)</span> is linearly dependent if and only if <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0}, c_1 \cdot \ldots \cdot c_n = 0\)</span>.<br />Construct <span class="math">\(c_1, \ldots, c_{i - 1}, c_{i + 1}, \ldots, c_n = 0, c_i = 1\)</span>.<br />Then <span class="math">\(c_1 \cdot \ldots \cdot c_n = 0\)</span> and <span class="math">\(c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0}\)</span>.<br />Therefore, <span class="math">\(\mathcal{B}\)</span> is linearly dependent.</p>
+</blockquote>
+<p>The vector equation of a linearly independent set is known as a simplified vector equation. A vector equation can be converted into a simplified one by removing terms where the vector can be written as a linear combination of the others.</p>
+<p>Geometrically, two vectors span a plane if they are not parallel, and three vectors span a 3D space if they do not all lie on the same plane.</p>
+<h2 id="bases">Bases</h2>
+<p>A linearly independent set of vectors is always simpler than a linearly dependent one. A linearly dependent set of vectors can always be converted into a linearly dependent one with the same span. Therefore, the simplest set of vectors that spans a given set is always linearly independent.</p>
+<p>Given <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span>, <span class="math">\(\mathcal{B}\)</span> is a <strong>basis</strong> for <span class="math">\(\span \mathcal{B}\)</span> if <span class="math">\(\mathcal{B}\)</span> is linearly independent.</p>
+<p>In other words, a basis for a set is a linearly independent set of vectors such that its span is exactly the set.</p>
+<p>The basis for <span class="math">\(\set{\vec{0}}\)</span> is the empty set (<span class="math">\(\emptyset\)</span>).</p>
+<p>The <strong>standard basis</strong> is a basis that is easy to write for any number of dimensions. The standard basis is of the form <span class="math">\(\set{\vec{e}_1, \ldots, \vec{e}_n}\)</span>, where <span class="math">\(\vec{e}_i\)</span> has all components set to 0, except for the <span class="math">\(i\)</span>-th component, for <span class="math">\(1 \le i \le n\)</span>.</p>
+<p>For example, the standard basis of <span class="math">\(\mb{R}^4\)</span> is <span class="math">\(\set{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 0 \\ 1 \end{bmatrix}}\)</span>.</p>
+<p>In order to prove that a set is the basis of another, we need to prove that it is linearly independent, and that it spans the set (by proving that an arbitrary vector in the second set can be written as a linear combination of the elements of the first).</p>
+<p>Prove that <span class="math">\(\mathcal{B} = \set{\begin{bmatrix} 1 \\ 3 \end{bmatrix}, \begin{bmatrix} -1 \\ -1 \end{bmatrix}}\)</span> is a basis for <span class="math">\(\mb{R}^2\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} \in \mathbb{R}^2\)</span>.<br />We will find the coefficients we want by solving <span class="math">\(\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = c_1 \begin{bmatrix} 1 \\ 3 \end{bmatrix} + c_2 \begin{bmatrix} -1 \\ -1 \end{bmatrix}\)</span> for <span class="math">\(c_1, c_2\)</span>.<br />Construct <span class="math">\(c_1 = \frac{x_2 - x_1}{2}, c_2 = \frac{x_2 - 3x_1}{2}\)</span>.<br />Clearly, <span class="math">\(\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \frac{x_2 - x_1}{2} \begin{bmatrix} 1 \\ 3 \end{bmatrix} + \frac{x_2 - 3x_1}{2} \begin{bmatrix} -1 \\ -1 \end{bmatrix}\)</span>.<br />So <span class="math">\(\exists c_1, c_2 \in \mathbb{R}, \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = c_1 \begin{bmatrix} 1 \\ 3 \end{bmatrix} + c_2 \begin{bmatrix} -1 \\ -1 \end{bmatrix}\)</span>.<br />So <span class="math">\(\mathcal{B}\)</span> spans <span class="math">\(\mb{R}^2\)</span>.<br />Note that there is only the trivial solution when <span class="math">\(\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}\)</span>, so <span class="math">\(\mathcal{B}\)</span> is also linearly independent.<br />Therefore, <span class="math">\(\mathcal{B}\)</span> is a basis for <span class="math">\(\mb{R}^2\)</span>.</p>
+</blockquote>
+<p>A basis for <span class="math">\(\mb{R}^n\)</span> has exactly <span class="math">\(n\)</span> elements.</p>
+<h2 id="shapes">Shapes</h2>
+<p>Points are conceptually applicable in any dimension above 0.</p>
+<p>Lines are conceptually applicable in any dimension above 1.</p>
+<p>Planes are conceptually applicable in any dimension above 2.</p>
+<p>A line in <span class="math">\(\mb{R}^n\)</span> takes the form of <span class="math">\(\vec{x} = c_1 \vec{v}_1 + \vec{b}, c_1 \in \mathbb{R}\)</span> given <span class="math">\(\vec{v}_1, \vec{b} \in \mathbb{R}^n\)</span>. This is a line in <span class="math">\(\mb{R}^n\)</span> that passes through <span class="math">\(\vec{b}\)</span>.</p>
+<p>A plane in <span class="math">\(\mb{R}^n\)</span> takes the form of <span class="math">\(\vec{x} = c_1 \vec{v}_1 + c_2 \vec{v}_2 + \vec{b}, c_1, c_2 \in \mathbb{R}\)</span> given <span class="math">\(\vec{v}_1, \vec{v}_2, \vec{b} \in \mathbb{R}^n\)</span> and <span class="math">\(\set{\vec{v}_1, \vec{v}_2}\)</span> being a linearly independent set. This is a plane in <span class="math">\(\mb{R}^n\)</span> that passes through <span class="math">\(\vec{b}\)</span>.</p>
+<p>A <span class="math">\(k\)</span>-plane in <span class="math">\(\mb{R}^n\)</span> takes the form of <span class="math">\(\vec{x} = c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k + \vec{b}, c_1, c_2 \in \mathbb{R}\)</span> given <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k, \vec{b} \in \mathbb{R}^n\)</span> and <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> being a linearly independent set. This is a <span class="math">\(k\)</span>-plane in <span class="math">\(\mb{R}^n\)</span> that passes through <span class="math">\(\vec{b}\)</span>. A <span class="math">\(k\)</span>-plane is a <span class="math">\(k\)</span>-dimensional plane.</p>
+<p>A hyperplane is a <span class="math">\(k\)</span>-plane, where <span class="math">\(k = n - 1\)</span>. It is an <span class="math">\(n - 1\)</span>-dimensional plane.</p>
+<p>For example, <span class="math">\(\span \set{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \\ −2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 1 \\ −1 \end{bmatrix}}\)</span> defines a hyperplane in <span class="math">\(\mb{R}^n\)</span>, since the set is linearly independent.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

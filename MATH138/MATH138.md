@@ -12,11 +12,16 @@ Calculus II
 
 $$
 \newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
+\newcommand{\cosh}{\operatorname{cosh}}
 $$
 
 # 6/1/14
@@ -215,3 +220,53 @@ Simplify $\int_0^1 (-\ln x)^n \dee x, n \in \mb{N}$:
 > We can solve it because what we really want is $\lim_{x \to 0} x \ln x = \lim_{x \to 0} \frac{\ln x}{\frac{1}{x}} \lH \lim_{x \to 0} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \to 0} (-x) = 0$ rather than the value $0 \ln 0$.  
 > So $-\int_0^1 \ln x \dee x = -1 \ln 1 + 0 + 1 = 1$.  
 > If we repeat this for $n = 2, 3, \ldots$, we find that $\int_0^1 (-\ln x)^n \dee x = n!, n \in \mb{N}$, yet it also works for fractional values of $n$ - this is the generalized factorial over positive real numbers!  
+;wip: use induction
+
+# 13/1/14
+
+Trigonometric Substitution
+--------------------------
+
+This is integration by substitution with the substitution using trignonometric functions.
+
+We use trigonometric functions in our substitutions and use trigonometric identities to simplify the integrand.
+
+We will need to know:
+
+* Pythagorean theorem: $\cos^2 \theta + \sin^2 \theta = 1$
+* Half angle cosine formula: $\cos^2 \theta = \frac{1}{2}(1 + \cos 2\theta)$
+* Half angle sine formula: $\sin^2 \theta = \frac{1}{2}(1 - \cos 2\theta)$
+* Pythagorean theorem divided by $\cos^2 \theta$: $1 + \tan^2 \theta = \sec^2 \theta$
+
+We usually need this method when we have a square root of a quadratic expression.
+
+Common substitutions:
+
+* Use $1 - \sin^2 = \cos^2 \theta$ to turn $\sqrt{1 - x^2}$ into $\cos \theta$ via $x = \sin \theta$.
+* Use $1 + \tan^2 \theta = \sec^2 \theta$ to turn $\sqrt{1 + x^2}$ into $\sec \theta$ via $x = \tan \theta$.
+* Use $\sec^2 \theta - 1 = \tan^2 \theta$ to turn $\sqrt{x^2 - 1}$ into $\tan \theta$ via $x = \sec \theta$.
+
+Derivatives:
+
+* $\cos' \theta = -\sin \theta$ ($-\frac{\pi}{2} \le \theta < \frac{\pi}{2}$)
+* $\sin' \theta = \cos \theta$ ($-\frac{\pi}{2} \le \theta < \frac{\pi}{2}$)
+* $\tan' \theta = \sec^2 x$ ($0 \le \theta < \frac{\pi}{2}$)
+
+Consider $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x$:
+
+> We can draw a triangle with hypotenuse $\sqrt{x^2 + 4}$ and side lengths $x$ and $2$ representing this value.  
+> Let $\theta$ represent the angle between the . By the Pythagorean theorem, ;wip: trangle solve for x
+> Let $x = 2 \tan \theta$. Then $\dee x = 2 \sec^2 \theta \dee \theta$.  ;wip: how on earth did we decide on this
+> Clearly, $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x
+= \int \frac{1}{4 \tan^2 \theta \sqrt{4 \tan^2 \theta + 4}} 2 \sec^2 \theta \dee \theta
+= \int \frac{1}{4 \tan^2 \theta \sqrt{4 (\tan^2 \theta + 1)}} 2 \sec^2 \theta \dee \theta
+= \int \frac{1}{4 \tan^2 \theta 2 \sec \theta}} 2 \sec^2 \theta \dee \theta
+= \frac{1}{4} \int \frac{\sec \theta}{\tan^2 \theta}} \dee \theta
+= \frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta$.  
+> Let $u = \sin \theta$. Then $\dee x = \frac{1}{\cos \theta} \dee \theta$.  
+> So $\frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c$.  
+> Since $x = 2 \tan \theta$, $\theta = \arctan \frac{x}{2}$.  
+;wip: rewrite in terms of x
+> So $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = -\frac{1}{4} \frac{\sqrt{4 + x^2}}{x} + c$.  
+
+This works because $\cos \theta$ is always positive or 0 in the domain we are considering.

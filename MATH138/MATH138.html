@@ -77,11 +77,16 @@ Office hours: Mondays 11:30am-12:15pm, 3:00pm-3:30pm
 Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
+\newcommand{\cosh}{\operatorname{cosh}}
 \]</span></p>
 <h1 id="section">6/1/14</h1>
 <p>Assignments are due every Friday at 3:30pm. They are posted on LEARN.</p>
@@ -193,8 +198,37 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>This technique is only really useful for problems of the form <span class="math">\(\int e^{ax} \sin bx \dee x\)</span> or <span class="math">\(\int e^{ax} \cos bx \dee x\)</span>.</p>
 <p>Simplify <span class="math">\(\int_0^1 (-\ln x)^n \dee x, n \in \mb{N}\)</span>:</p>
 <blockquote>
-<p>We will try it for the first few values of <span class="math">\(n\)</span>.<br />For <span class="math">\(n = 1\)</span>, <span class="math">\(\int_0^1 (-\ln x)^n \dee x = -\int_0^1 1 \ln x \dee x = -\int_0^1 \ln x \frac{\dee}{\dee x} x = -\evalat{x \ln x}_0^1 + \int_0^1 x \frac{1}{x} = -1 \ln 1 + 0 \ln 0 + 1\)</span> (indeterminate form <span class="math">\(0 \cdot -\infty\)</span>).<br />This is a thing known as an improper integral (covered later in the course).<br />We can solve it because what we really want is <span class="math">\(\lim_{x \to 0} x \ln x = \lim_{x \to 0} \frac{\ln x}{\frac{1}{x}} \lH \lim_{x \to 0} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \to 0} (-x) = 0\)</span> rather than the value <span class="math">\(0 \ln 0\)</span>.<br />So <span class="math">\(-\int_0^1 \ln x \dee x = -1 \ln 1 + 0 + 1 = 1\)</span>.<br />If we repeat this for <span class="math">\(n = 2, 3, \ldots\)</span>, we find that <span class="math">\(\int_0^1 (-\ln x)^n \dee x = n!, n \in \mb{N}\)</span>, yet it also works for fractional values of <span class="math">\(n\)</span> - this is the generalized factorial over positive real numbers!</p>
+<p>We will try it for the first few values of <span class="math">\(n\)</span>.<br />For <span class="math">\(n = 1\)</span>, <span class="math">\(\int_0^1 (-\ln x)^n \dee x = -\int_0^1 1 \ln x \dee x = -\int_0^1 \ln x \frac{\dee}{\dee x} x = -\evalat{x \ln x}_0^1 + \int_0^1 x \frac{1}{x} = -1 \ln 1 + 0 \ln 0 + 1\)</span> (indeterminate form <span class="math">\(0 \cdot -\infty\)</span>).<br />This is a thing known as an improper integral (covered later in the course).<br />We can solve it because what we really want is <span class="math">\(\lim_{x \to 0} x \ln x = \lim_{x \to 0} \frac{\ln x}{\frac{1}{x}} \lH \lim_{x \to 0} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \to 0} (-x) = 0\)</span> rather than the value <span class="math">\(0 \ln 0\)</span>.<br />So <span class="math">\(-\int_0^1 \ln x \dee x = -1 \ln 1 + 0 + 1 = 1\)</span>.<br />If we repeat this for <span class="math">\(n = 2, 3, \ldots\)</span>, we find that <span class="math">\(\int_0^1 (-\ln x)^n \dee x = n!, n \in \mb{N}\)</span>, yet it also works for fractional values of <span class="math">\(n\)</span> - this is the generalized factorial over positive real numbers!<br />;wip: use induction</p>
 </blockquote>
+<h1 id="section-3">13/1/14</h1>
+<h2 id="trigonometric-substitution">Trigonometric Substitution</h2>
+<p>This is integration by substitution with the substitution using trignonometric functions.</p>
+<p>We use trigonometric functions in our substitutions and use trigonometric identities to simplify the integrand.</p>
+<p>We will need to know:</p>
+<ul>
+<li>Pythagorean theorem: <span class="math">\(\cos^2 \theta + \sin^2 \theta = 1\)</span></li>
+<li>Half angle cosine formula: <span class="math">\(\cos^2 \theta = \frac{1}{2}(1 + \cos 2\theta)\)</span></li>
+<li>Half angle sine formula: <span class="math">\(\sin^2 \theta = \frac{1}{2}(1 - \cos 2\theta)\)</span></li>
+<li>Pythagorean theorem divided by <span class="math">\(\cos^2 \theta\)</span>: <span class="math">\(1 + \tan^2 \theta = \sec^2 \theta\)</span></li>
+</ul>
+<p>We usually need this method when we have a square root of a quadratic expression.</p>
+<p>Common substitutions:</p>
+<ul>
+<li>Use <span class="math">\(1 - \sin^2 = \cos^2 \theta\)</span> to turn <span class="math">\(\sqrt{1 - x^2}\)</span> into <span class="math">\(\cos \theta\)</span> via <span class="math">\(x = \sin \theta\)</span>.</li>
+<li>Use <span class="math">\(1 + \tan^2 \theta = \sec^2 \theta\)</span> to turn <span class="math">\(\sqrt{1 + x^2}\)</span> into <span class="math">\(\sec \theta\)</span> via <span class="math">\(x = \tan \theta\)</span>.</li>
+<li>Use <span class="math">\(\sec^2 \theta - 1 = \tan^2 \theta\)</span> to turn <span class="math">\(\sqrt{x^2 - 1}\)</span> into <span class="math">\(\tan \theta\)</span> via <span class="math">\(x = \sec \theta\)</span>.</li>
+</ul>
+<p>Derivatives:</p>
+<ul>
+<li><span class="math">\(\cos&#39; \theta = -\sin \theta\)</span> (<span class="math">\(-\frac{\pi}{2} \le \theta &lt; \frac{\pi}{2}\)</span>)</li>
+<li><span class="math">\(\sin&#39; \theta = \cos \theta\)</span> (<span class="math">\(-\frac{\pi}{2} \le \theta &lt; \frac{\pi}{2}\)</span>)</li>
+<li><span class="math">\(\tan&#39; \theta = \sec^2 x\)</span> (<span class="math">\(0 \le \theta &lt; \frac{\pi}{2}\)</span>)</li>
+</ul>
+<p>Consider <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x\)</span>:</p>
+<blockquote>
+<p>We can draw a triangle with hypotenuse <span class="math">\(\sqrt{x^2 + 4}\)</span> and side lengths <span class="math">\(x\)</span> and <span class="math">\(2\)</span> representing this value.<br />Let <span class="math">\(\theta\)</span> represent the angle between the . By the Pythagorean theorem, ;wip: trangle solve for x Let <span class="math">\(x = 2 \tan \theta\)</span>. Then <span class="math">\(\dee x = 2 \sec^2 \theta \dee \theta\)</span>. ;wip: how on earth did we decide on this Clearly, <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = \int \frac{1}{4 \tan^2 \theta \sqrt{4 \tan^2 \theta + 4}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta \sqrt{4 (\tan^2 \theta + 1)}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta 2 \sec \theta}} 2 \sec^2 \theta \dee \theta = \frac{1}{4} \int \frac{\sec \theta}{\tan^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta\)</span>.<br />Let <span class="math">\(u = \sin \theta\)</span>. Then <span class="math">\(\dee x = \frac{1}{\cos \theta} \dee \theta\)</span>.<br />So <span class="math">\(\frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c\)</span>.<br />Since <span class="math">\(x = 2 \tan \theta\)</span>, <span class="math">\(\theta = \arctan \frac{x}{2}\)</span>.<br />;wip: rewrite in terms of x So <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = -\frac{1}{4} \frac{\sqrt{4 + x^2}}{x} + c\)</span>.</p>
+</blockquote>
+<p>This works because <span class="math">\(\cos \theta\)</span> is always positive or 0 in the domain we are considering.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
