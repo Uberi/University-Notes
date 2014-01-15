@@ -122,6 +122,8 @@ Assertions are claims presented as true. By asserting a claim:
 
 Committing to defending assertions has multiple benefits: filtering information, checking our beliefs against others', helping us change our minds, and explaining our reasoning being helpful for clarifying/organising our own beliefs.
 
+### Identifying Arguments
+
 The fundemental unit of rational exchange is the argument. Arguments show the reasonableness of an assertion - if the argument succeeds in doing so, everyone is justified in believing the assertion is true.
 
 Two working definitions of arguments:
@@ -131,7 +133,7 @@ Two working definitions of arguments:
 
 The broad definition focuses on the practice of argumentation and connects it to asertion - the communicative act.
 
-The narrow definition focuses on the products of the communicative act.
+The narrow definition focuses on the products of the communicative act. This is what we will focus on in this course.
 
 Most things where the broad definition applies also has the narrow definition apply - the narrow definition is virtually a subset of the broad one.
 
@@ -154,3 +156,39 @@ There are two assertions, both conclusions. Neither of the assertions support ea
 > You will get lost of you walk around Toronto. It is the largest city in Canada.
 
 This is an argument, though not a very strong one. The premise that the city is large implies that it is more likely that one will get lost.
+
+To determine whether something is an argument, all three of the following must be true:
+
+* It must be a set of claims.
+* It must have premises.
+* It must have a conclusion.
+
+;wip: do the online quiz on LEARN, which should be up on LEARN, due Monday 9:25am
+
+# 15/1/14
+
+Assertions are the same thing as claims in this course - the terms are interchangeable.
+
+> Descartes argues that anyone who thinks, can know they exist. He reasons that a precondition f thinking is existance.
+
+This is just reporting what was said, not an argument.
+
+Note that the second sentence, describing Descartes' reasoning, does not support the claim that **Descartes said something what he did**. In other words, the second sentence does not support the first, because the seconbd sentence is a **report**.
+
+Rules of thumb for identifying arguments:
+
+* Arguments are usually represented by more than one sentence in English.
+* Both conclusions and premises of arguments are generally statements, not questions or commands.
+* Arguments are distinguished from reports in that reports make a series of assertions but do not attempt to support them.
+
+Note that there are exceptions to these rules. For example, for the second point, a rhetorical question can make a claim in English, and so the conclusion can be a question. The context of the statements matters.
+
+Sometimes arguments may be explicitly identified, with "I argue that <conclusion>", "This is because <premise>", "Therefore, <conclusion>", "It follows that <conclusion>".
+
+Look out for conclusions not at the end of passages, implicit premises, implicit conclusions, and rhetorical questions.
+
+### Explanations
+
+An **explanation** differs from an argument in that the author intends that the conclusion is already believed by others, rather than trying to convince others. Arguments aim to how something is worth believing, while explanations make better sense of what is already believed. It is the intent of the author that is important.
+
+Therefore, whether something is an argument or an explanation depends on whether the author thinks the audience already believes it: "Professional athletes are physically fit because they train every day" is an argument for people who don't believe that they are fit, and otherwise an explanation.

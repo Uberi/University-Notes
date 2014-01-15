@@ -246,6 +246,8 @@ Common substitutions:
 * Use $1 + \tan^2 \theta = \sec^2 \theta$ to turn $\sqrt{1 + x^2}$ into $\sec \theta$ via $x = \tan \theta$.
 * Use $\sec^2 \theta - 1 = \tan^2 \theta$ to turn $\sqrt{x^2 - 1}$ into $\tan \theta$ via $x = \sec \theta$.
 
+Using this technique, we can replace $\sqrt{\pm a^2 \pm x^2}$ with trigonometric functions, and then use trigonometric identities on them. Afterwards, we might simplify by changing the trigonometric functions back into square roots.
+
 Derivatives:
 
 * $\cos' \theta = -\sin \theta$ ($-\frac{\pi}{2} \le \theta < \frac{\pi}{2}$)
@@ -254,7 +256,7 @@ Derivatives:
 
 Consider $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x$:
 
-> We can draw a triangle with hypotenuse $\sqrt{x^2 + 4}$ and side lengths $x$ and $2$ representing this value.  
+> We can draw a triangle with hypotenuse $\sqrt{x^2 + 4}$, opposite side $x$, and adjacent side $2$ representing this value.  
 > Let $\theta$ represent the angle between the . By the Pythagorean theorem, ;wip: trangle solve for x
 > Let $x = 2 \tan \theta$. Then $\dee x = 2 \sec^2 \theta \dee \theta$.  ;wip: how on earth did we decide on this
 > Clearly, $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x
@@ -266,7 +268,64 @@ Consider $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x$:
 > Let $u = \sin \theta$. Then $\dee x = \frac{1}{\cos \theta} \dee \theta$.  
 > So $\frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c$.  
 > Since $x = 2 \tan \theta$, $\theta = \arctan \frac{x}{2}$.  
-;wip: rewrite in terms of x
+;wip: rewrite in terms of x using the triangle again
 > So $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = -\frac{1}{4} \frac{\sqrt{4 + x^2}}{x} + c$.  
 
 This works because $\cos \theta$ is always positive or 0 in the domain we are considering.
+
+;wip: improve this day's notes so they actually make sense
+
+# 15/1/14
+
+;wip: write about solving \dee u = \dee x by differentiating both sides of u = x
+
+Evaluate $\int \frac{x}{\sqrt{3 - 2x - x^2}}$:
+
+       /|
+      / |
+     /  | ;wip
+    /___|
+
+> We want to use trigonometric substitution to solve this, but it isn't in the right form.  
+> We want to write $3 - 2x - x^2$ in the form of $a^2 + (x + b)^2$ (completing the square).  
+> Clearly, $3 - 2x - x^2 = 3 - (2x + x^2) = 3 - (2x + x^2 + 1) + 1$ (make the term into a perfect square trinomial by adding $\frac{b}{2}$ in a way that cancels out).  
+> So $3 - 2x - x^2 = 4 - (x + 1)^2$ and $\int \frac{x}{\sqrt{3 - 2x - x^2}} = \int \frac{x}{\sqrt{4 - (x + 1)^2}}$.  
+> Let $u = x + 1$. Then $\dee u = \dee x$.  
+> We can draw a triangle with the hypotenuse being 2, the opposite side $u$, and adjacent side $\sqrt{4 - u^2}$.  
+> From the triangle, we know that $u = 2\sin \theta$ ($x = 2\sin \theta - 1$) and $\sqrt{4 - u^2} = 2 \cos \theta$, so $\dee u = 2 \cos \theta \dee \theta$.  
+> So $\int \frac{x}{\sqrt{4 - (x + 1)^2}} = \int \frac{2\sin \theta - 1}{2 \cos \theta} 2\cos \theta \dee \theta = \int 2\sin \theta - 1 \dee \theta = -2 \cos \theta - \theta + c$.  
+> ;wip: use the triangle to rewrite \cos x = \frac{\sqrt{4 - u^2}}{2}, or something like that
+> Clearly, $\theta = \arcsin \frac{u}{2}$
+> So $-2 \cos \theta - \theta + c$
+
+Partial Fraction Decomposition
+------------------------------
+
+Consider $\frac{1}{2} + \frac{1}{3} = \frac{3 + 2}{2 \cdot 3} = \frac{5}{6}$.
+
+What if we went the opposite way? We go from $\frac{5}{6}$ to $\frac{A}{2} + \frac{B}{3}$ by factoring $6$, and then solve for possible solutions for $3A + 2B = 5$ and pick $A = 1, B = 1$. Now we have $\frac{1}{2} + \frac{1}{3}$, as required.
+
+This can also be done with polynomials. Using this technique, we can integrate **rational functions of polynomials**.
+
+Consider $\int \frac{P(x)}{Q(x)} \dee x$. We can always factor polynomials into a set of linear factors $Q(x) = (x + c_1) \cdot \ldots \cdot (x + c_n)$.
+
+So $\int \frac{P(x)}{Q(x)} \dee x = \int \frac{P(x)}{(x + c_1) \cdot \ldots \cdot (x + c_n)} \dee x = \int \frac{A_1}{x + c_1} \dee x + \ldots + \int \frac{A_n}{x + c_n} \dee x$.
+
+Now we have a bunch of integrals of constants over $x$ with offsets. This is easily integrated into logarithms.
+
+We can solve for $A_1, \ldots, A_n$ by cross multiplying: $\frac{P(x)}{Q(x)} = \frac{A_1 ((x + c_2) \cdot \ldots \cdot (x + c_n)) + \ldots + A_n ((x + c_1) \cdot \ldots \cdot (x + c_{n - 1}))}{(x + c_1) \cdot \ldots \cdot (x + c_n)}$. So $P(x) = A_1 ((x + c_2) \cdot \ldots \cdot (x + c_n)) + \ldots + A_n ((x + c_1) \cdot \ldots \cdot (x + c_{n - 1}))$.
+
+For now, assume that the order of $P$ is less than that of $Q$.
+
+We can find $A$ and $B$ using the **cover up method**: if we choose values of $x = -c_i, 1 \le i \le n$, then there is a 0 factor in every term on the right side except the one containing $A_i$. It is then trivial to solve for $A_i$. Repeat this for each $i$ and we can find $A_1, \ldots, A_n$.
+
+We can also find $A$ and $B$ by setting up a system of equations. Clearly, $x + 1 = A(x + 3) + B(x + 2) = (A + B)x + (3A + 2B)$. Then $A + B = 1$ and $3A + 2B = 1$, so we solve for the two linear equations.
+
+Evaluate $\int \frac{x - 1}{x^2 + 5x + 6} \dee x$:
+
+> Clearly, $\int \frac{x - 1}{x^2 + 5x + 6} \dee x = \int \frac{x - 1}{(x + 2)(x + 3)} \dee x = \int \frac{A}{x + 2} \dee x + \int \frac{B}{x + 3} \dee x$ for some $A$ and $B$.  
+> Now we need to find $A$ and $B$. We do this by solving $x + 1 = A(x + 3) + B(x + 2)$.  
+> Note that $A$ and $B$ must work for any $x$. We now solve using the cover up method.  
+> Choose $x = -3$ (because $A(x + 3) = 0$). Then $-3 + 1 = A(-3 + 3) + B(-3 + 2) = -2 = -B$. Then $B = 2$.  
+> Choose $x = -2$ (because $B(x + 2) = 0$). Then $-2 + 1 = A(-2 + 3) + B(-2 + 2) = -1 = B$. Then $A = -1$.  
+> Then $\int \frac{x - 1}{x^2 + 5x + 6} \dee x = -\int \frac{1}{x + 2} \dee x + \int \frac{2}{x + 3} \dee x = -\ln(x + 2) + 2\ln(x + 3) + c$.  
