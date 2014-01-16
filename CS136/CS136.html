@@ -227,6 +227,7 @@ hello, Anthony</code></pre>
 (define (sum-first k)
     ...)</code></pre>
 <p>Note that preconditions and postconditions are part of the contract, not their own element. The preconditions are the conditions that must be true before calling the function, and the postconditions are the conditions that will be true after the function is called - a specification of what the function produces.</p>
+<p>More complex preconditions and postconditions should be written as English sentences describing what the data should look like.</p>
 <p>This allows the contract to convey more information about what is allowed: following the preconditions and obeying the contract while calling the function results in the postconditions being met. These conditions are both logical statements.</p>
 <p>A function that takes no parameters has a contract that starts off something like <code>FUNCTION_NAME: -&gt; RETURN_VALUE</code>.</p>
 <p>A precondition that is always met no matter what can be written as <code>PRE: #t</code>. Likewise with postconditions.</p>
@@ -378,7 +379,7 @@ multi-line
 comment
 */</code></pre>
 <p>Racket constant: <code>(define n 42)</code> C constant: <code>const int n = 42;</code></p>
-<p><code>const</code> indicates the variable is <strong>immutable</strong>, and <code>int</code> indicates that the variable is an <strong>integer</strong>. The <code>= 42</code> is the <strong>initializer</strong>.</p>
+<p><code>const</code> indicates the variable is <strong>immutable</strong>, and <code>int</code> indicates that the variable is an <strong>integer</strong>. The <code>= 42</code> is the <strong>initializer</strong>. The whole thing together is a <strong>definition</strong>.</p>
 <p>All definitions in C end with a semicolon.</p>
 <p>Identifiers must sart with a letter or underscore, and can contain only letters, numbers, and underscores.</p>
 <p>We will use <code>underscore_case</code> for our variable names.</p>
@@ -386,10 +387,92 @@ comment
 <p>For example, in C, we cannot define an integer constant, and later set it to a string. However, this is entirely possible in Racket.</p>
 <p>Because types cannot be changed and are always explicit in the code, we no longer need to check the input types like we did in Racket (<code>integer?</code>, <code>false?</code>, etc.).</p>
 <p>In C, all constants (immutable variables) <strong>must be initialized</strong>. All mutable variables <strong>should be initialized</strong>.</p>
+<h3 id="operators">Operators</h3>
 <p>C uses infix notation for expressions, similar to math, and expression operators all have their own precedences (conceptually similar to order of operations in math):</p>
 <pre><code>const int k = 3 + 4 * 2; // `k` is now 11
 const int l = (3 + 4) * 2; // `l` is now 14</code></pre>
 <p>Note that parentheses now serve only to group things together, and otherwise have no syntactic significance.</p>
+<p>If an expression is ambiguous or confusing, use parentheses to make it clearer.</p>
+<h1 id="section-3">16/1/14</h1>
+<p>In C, operators such as addition and division are distinct from functions in syntax and functionality. The order of operations is similar to those in math.</p>
+<p>Operators are distinct language constructs with their own rules for syntax. They are described in detail in the textbook. Operators may have different associtivities and precedences.</p>
+<p>C has almost 50 operators in total, many of which work on data.</p>
+<p>The <code>a / b</code> operator in C over integers divides two numbers, always rounding towards 0. It behaves similar to <code>quotient</code> in Racket.</p>
+<p>The <code>a % b</code> operator in C behaves the same as the <code>remainder</code> function in Racket. With negative numbers, C can give confusing results - <strong>avoid using negative numbers</strong> for this reason.</p>
+<p>In Racket, we <strong>apply</strong> a function, which <strong>consumes</strong> arguments and <strong>produces</strong> a value.</p>
+<p>In C, we <strong>call</strong> a function, which is <strong>passed</strong> arguments and <strong>returns</strong> a value.</p>
+<h3 id="functions">Functions</h3>
+<p>Racket:</p>
+<pre><code>; my-sqr: Int -&gt; Int
+(define (my-sqr x)
+    (* x x))</code></pre>
+<p>C:</p>
+<pre><code>// my_sqr(x) squares `x`
+//     PRE:  true
+//     POST: return value &gt;= 0
+int my_sqr(int x) {
+    return x * x;
+}</code></pre>
+<p>The curly braces indicate the function <strong>block</strong>, the body of the function.</p>
+<p>The type of every value must be specified explicitly. The <code>return</code> statement is mandatory for functions that have non-void return types.</p>
+<p>As a result, errors like <code>(my-sqr &quot;a&quot;)</code> in Racket give a runtime error, while in C, this is caught by the compiler - contract violations cannot exist.</p>
+<p>We call functions in a way similar to defining them:</p>
+<pre><code>// my_add(x, y) adds `x` and `y`
+//     PRE:  true
+//     POST: true
+int my_add(x, y) {
+    return x + y;
+}
+
+// my_num() returns 42
+//     PRE:  true
+//     POST: return value == 42
+int my_num(void) { // `void` here means there are no parameters
+    return my_add(40, 2);
+}</code></pre>
+<p>In C, our function documentation starts with the purpose and doesn't need the contract (due to static typing). The preconditions and postconditions are still necessary.</p>
+<h3 id="entry-point">Entry Point</h3>
+<p>The <strong>entry point</strong> is the place where we start running the program.</p>
+<p>In Racket, the entry point of the program is the top of the file being run.</p>
+<p>In C, the entry point of the program is the body of the <code>main</code> function. Every C program must have a <code>main</code> function.</p>
+<p><code>main</code> has no parameters (for now) and an <code>int</code> return type to indicate if the program was successful (zero) or not (non-zero).</p>
+<pre><code>// no documentation is required!
+int main(void) {
+    // program starts here
+    // this is the only typed function where we can omit the return value and it will assume 0 (success)
+}</code></pre>
+<h3 id="library">Library</h3>
+<p>C has no built-in functions. However, it has a lot of modules that are almost always available.</p>
+<p>First C program:</p>
+<pre><code>// first C program
+
+#include &lt;stdio.h&gt;
+
+int main(void) {
+    printf(&quot;Hello, World!\n&quot;);
+}</code></pre>
+<p>In C, <code>printf</code> uses different placeholders for each type, and the placeholder specifier (<code>~</code> in Racket) is <code>%</code>. A literal percent sign is <code>%%</code>. As with Racket, the number of extra arguments needs to match the number of placeholders:</p>
+<pre><code>printf(&quot;I am 100%% sure that %d + %d = %d&quot;, 2, 2, 5);</code></pre>
+<p><code>printf</code> is found in a lot of computer languages, and it has mmuch more functionaity than is covered here. For example:</p>
+<pre><code>printf(&quot;%04d&quot;, 42); // prints 0042, length 4 with &quot;0&quot; padding</code></pre>
+<h3 id="top-level">Top-level</h3>
+<p>In C, top-level expressions are invalid, except for ones resulting in constant values:</p>
+<pre><code>// top level
+
+const int a = 3 * 3 // valid
+const int b = my_sqr(4) // invalid
+3 * 3; //invalid
+my_sqr(4); //invalid</code></pre>
+<p>We can still use expressions inside definitions inside of functions: <code>int main(void) { const int a = my_sqr(4); }</code>.</p>
+<h3 id="booleans">Booleans</h3>
+<p>In C, False is represented by 0, and any non-zero value is considered True.</p>
+<p>Equality testing in C is done using <code>a == b</code>, resulting in 1 or 0. The <code>a = b</code> is for <strong>assignment only</strong> and is one of the most common C errors.</p>
+<p>Non-equality testing in C is done using <code>a != b</code>, resulting in 1 or 0. Negation is done using <code>!a</code>.</p>
+<p>Logical AND is done using <code>a &amp;&amp; b</code>, and logical OR is done using <code>a || b</code>, both returning 1 or 0. Like in Racket, they short-circuit with the same rules. Remember to use <code>&amp;&amp;</code> and <code>||</code> rather than <code>&amp;</code> and <code>|</code>, which are bitwise operators and do different things.</p>
+<p>The <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> operators are self-explanatory.</p>
+<p>Note that <code>&gt;</code> has a higher precedence than <code>==</code>, so <code>1 == 3 &gt; 0</code> is <code>1 == (3 &gt; 0)</code>, which could be confusing. Always use parentheses when there is the possibility of confusion.</p>
+<p>The <code>a ? b : c</code> is known as the <strong>ternary operator</strong>. It works like <code>(if a b c)</code> in Racket. If <code>a</code> is true, it evaluates and returns <code>b</code>, otherwise <code>c</code>. It short-circuits, so one of <code>b</code> or <code>c</code> is not evaluated: <code>x &gt;= 0 ? x : -x</code> results in the absolute value.</p>
+<p>Like in Racket, we must define a function before we can call it. However, C needs to know the type signature of the function</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

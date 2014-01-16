@@ -50,31 +50,37 @@ By the way, $\dee x$ is called an **infinitesmal**.
 Techniques of Integration
 -------------------------
 
-Techniques of integration rewrite functions in forms that we can't integrate into forms that we can integrate.
+Techniques of integration rewrite functions in forms that we can't integrate into forms that we can integrate, or simpler forms that we might be able to apply other techniques on.
 
 ### Method of substitution
 
 The method of substitution is based on choosing a subexpression $u$, and then integrating with respect to it. If $u$ is chosen carefully, it is occasionally possible to simplify the integral.
 
-Consider $\int f(x) \dee x$. Choose some $u$. Then $\dee u = \frac{\dee u}{\dee x} \dee x$ and $\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u$.
+This method works best when a **function and its derivative appear in the integrand**.
 
-So $\int f(x) \dee x = \int \frac{f(x)}{\frac{\dee u}{\dee x}} \dee u$. Ideally, $\frac{\dee u}{\dee x}$ will cancel out a factor of $f(x)$.
+This works with expressions of the form $\int f(x) \frac{\dee}{\dee x} f(x) \dee x$.
 
-More generally:
+Let $u = f(x)$. Since $\frac{\dee u}{\dee x} = \frac{\dee u}{\dee x}$, $\dee u = \frac{\dee u}{\dee x} \dee x$ (multiply both sides by $\dee x$). This is possible because of infinismals, which work in wierd and wonderful ways. So $\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u$.
 
-We are given $\int_a^b f(x) \dee x$ and chose a $u(x)$.
+So $\int f(x) \frac{\dee}{\dee x} f(x) \dee x = \int u \frac{\dee u}{\dee x} \dee x = \int u \frac{\dee u}{\dee x} \frac{1}{\frac{\dee u}{\dee x}} \dee u = \int u \dee u = \frac{u^2}{2} + c = \frac{f(x)^2}{2} + c$.
 
-So $\dee u = \frac{\dee u}{\dee x} \dee x = u'(x) \dee x$.
+Even if we can't simplify it far enough to get an antiderivative, integration by substitution can still considerably simplify an integrand into something more manageable.
 
-So $\int_a^b f(x) \dee x = \int_{u^{-1}(a)}^{u^{-1}(b)} f(u(x)) u'(x) \dee u$.
+What about definite integrals? We need to be aware of the limits of integration when doing the variable switch:
 
-Using substitution, we can evaluate something like $-\int \cos x \sin x \dee x$.
+We are given $\int_a^b f(x) \frac{\dee}{\dee x} f(x) \dee x$.
 
-How do we figure that out?
+Let $u = f(x)$. We know that $\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u$.
+
+So $\int_a^b f(x) \frac{\dee}{\dee x} f(x) \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \frac{1}{\frac{\dee u}{\dee x}} \dee u = \int_{u(a)}^{u(b)} u \dee u = \frac{u^2}{2} + c = \frac{f(x)^2}{2} + c$.
+
+Basically, if we can find a factor of the integrand $u$ such that its derivative also appears in the integrand, the method of substition can get rid of the derivative.
+
+Evaluate $\int \cos x \sin x \dee x$
 
 > Let $u = \sin x$. So $\dee u = \cos x \dee x$.  
-> So $-\int \cos x \sin x \dee x = -\int \sin x \dee u = -\int u \dee u$.  
-> Clearly, $-\int u \dee u = -\frac{u^2}{2} + c = -\frac{\sin^2 x}{2} + c$.  
+> So $\int \cos x \sin x \dee x = \int \sin x \dee u = -\int u \dee u$.  
+> Clearly, $\int u \dee u = \frac{u^2}{2} + c = \frac{\sin^2 x}{2} + c$.  
 
 Substitution is useful when we can figure out what a useful substitution would be.
 
@@ -87,12 +93,12 @@ How do we prove that $\int_1^x \frac{1}{t} = \ln x$? How do we know that both ha
 
 We want to prove property 1:
 
+> Select some $a$ and $b$.  
 > We want to prove that $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t$.  
-> By linearity of integrals, we do $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_a^{ab} \frac{1}{t} \dee t$.  
-> Let $u = \frac{t}{a}$. Then $\dee u = a \dee t$.  
-> So when $t = a$, $u = 1$, and when $t = ab$, $u = b$.  
-> So $\int_a^{ab} \frac{1}{t} \dee t = \int_1^{b} \frac{a \dee u}{tu} \dee t = \int_1^b \frac{1}{u} \dee u = \int_1^b \frac{1}{t} \dee t$ (dummy variable).  
-> So $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{t} \dee t$.  
+> By linearity of integrals, $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_a^{ab} \frac{1}{t} \dee t$.  
+> Let $u = \frac{t}{a}$, so $t = ua$. Then $\dee t = \frac{\dee t}{\dee u} \dee u = a \dee u$.  
+> So $\int_a^{ab} \frac{1}{t} \dee t = \int_\frac{a}{a}^\frac{ab}{a} \frac{1}{ua} a \dee u = \int_1^b \frac{1}{u} \dee u$.  
+> So $\int_1^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_a^{ab} \frac{1}{t} \dee t = \int_1^a \frac{1}{t} \dee t + \int_1^b \frac{1}{u} \dee u$.  
 
 Dummy variables can be swapped for any value, even functions like $f(t)$.
 
@@ -100,23 +106,18 @@ Dummy variables can be swapped for any value, even functions like $f(t)$.
 
 To prove property 2, we need to show that $\int_1^{a^r} \frac{1}{u} \dee u = r \int_1^a \frac{1}{t} \dee t$. To do this, we find a substitution that results in the desired limits of integration.
 
-We want to prove property 2:
+To prove property 2:
 
+> Select some $u$.  
 > We want to prove that $\int_1^{a^r} \frac{1}{t} \dee t = r \int_1^a \frac{1}{t} \dee t$.  
-> Let $u(t) = t^r$. Then $\dee u = \frac{\dee u}{\dee t} \dee t = rt^{r - 1} \dee t$ and $\dee t = \frac{1}{rt^{r - 1}} \dee u$.  
-> So $\int_1^{a^r} \frac{1}{t} \dee t = \int_1^a \frac{1}{rt^r} \dee u = \int_1^a \frac{1}{ru} \dee u = \frac{1}{r} \int_1^a \frac{1}{u} \dee u$.
-;wip: this is clearly impossible
-
-Attempt 2:
-
-> We want to prove that $\int_1^{a^r} \frac{1}{t} \dee t = r \int_1^a \frac{1}{t} \dee t$.  
-> Let $u(t) = t^r$. Then $\dee u = \frac{\dee u}{\dee t} \dee t = rt^{r - 1} \dee t$.  
-> So $\int_1^{a^r} \frac{1}{t} \dee t = \int_1^a \frac{1}{u} rt^{r - 1} \dee u = r \int_1^a \frac{1}{t} \dee u$.
-;wip: wtf? that last part doesn't even make any sense
+> Let $u = t^\frac{1}{r}$, so $t = u^r$. Then $\dee t = \frac{\dee t}{\dee u} \dee u = \frac{\dee}{\dee u} u^r \dee u = ru^{r - 1} \dee u$.  
+> So $\int_1^{a^r} \frac{1}{t} \dee t = \int_{1^\frac{1}{r}}^{{a^r}^\frac{1}{r}} \frac{1}{u^r} ru^{r - 1} \dee u = \int_1^a \frac{1}{u} r \dee u = r \int_1^a \frac{1}{u} \dee u$.  
 
 ### Differentiating with respect to functions
 
 As an aside, we can actually differentiate things with respect to functions.
+
+The important property is that $\frac{\dee x}{\dee b(x)} = \frac{1}{\frac{\dee b(x)}{\dee x}}$.
 
 Note that $\frac{\dee a(x)}{\dee b(x)} = \frac{\dee a(x)}{\dee x} \frac{\dee x}{\dee b(x)} = \frac{\dee a(x)}{\dee x} \frac{1}{\frac{\dee b(x)}{\dee x}}$.
 
