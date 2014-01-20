@@ -113,6 +113,7 @@ Section 003</code></pre>
 &gt; (printf &quot;hello, world&quot;)
 hello, world</code></pre>
 <p>In this course we are required to use <code>printf</code> rather than top-level expressions.</p>
+<p>There is also the related function <code>format</code> that accepts values in the same form as <code>printf</code>, but rather than printing out the formatted value to standard output, produces the value as a string.</p>
 <p>In CS135 the programs written were not interactive - the sessions in the interactions window were not part of the programs.</p>
 <p><code>printf</code> does not insert the newline at the end of the line:</p>
 <pre><code>&gt; (printf &quot;a&quot;) (printf &quot;a&quot;)
@@ -403,7 +404,10 @@ const int l = (3 + 4) * 2; // `l` is now 14</code></pre>
 <p>In C, we <strong>call</strong> a function, which is <strong>passed</strong> arguments and <strong>returns</strong> a value.</p>
 <h3 id="functions">Functions</h3>
 <p>Racket:</p>
-<pre><code>; my-sqr: Int -&gt; Int
+<pre><code>;; my-sqr: Int -&gt; Nat
+;;     PRE: #t
+;;     POST: produce square of `x`
+;; (my-sqr x) produces the square of `x`
 (define (my-sqr x)
     (* x x))</code></pre>
 <p>C:</p>
@@ -471,8 +475,53 @@ my_sqr(4); //invalid</code></pre>
 <p>Logical AND is done using <code>a &amp;&amp; b</code>, and logical OR is done using <code>a || b</code>, both returning 1 or 0. Like in Racket, they short-circuit with the same rules. Remember to use <code>&amp;&amp;</code> and <code>||</code> rather than <code>&amp;</code> and <code>|</code>, which are bitwise operators and do different things.</p>
 <p>The <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> operators are self-explanatory.</p>
 <p>Note that <code>&gt;</code> has a higher precedence than <code>==</code>, so <code>1 == 3 &gt; 0</code> is <code>1 == (3 &gt; 0)</code>, which could be confusing. Always use parentheses when there is the possibility of confusion.</p>
-<p>The <code>a ? b : c</code> is known as the <strong>ternary operator</strong>. It works like <code>(if a b c)</code> in Racket. If <code>a</code> is true, it evaluates and returns <code>b</code>, otherwise <code>c</code>. It short-circuits, so one of <code>b</code> or <code>c</code> is not evaluated: <code>x &gt;= 0 ? x : -x</code> results in the absolute value.</p>
-<p>Like in Racket, we must define a function before we can call it. However, C needs to know the type signature of the function</p>
+<p>The <code>a ? b : c</code> is known as the <strong>ternary operator</strong> (<strong>conditional operator</strong>). It works like <code>(if a b c)</code> in Racket. If <code>a</code> is true, it evaluates and returns <code>b</code>, otherwise <code>c</code>. It short-circuits, so one of <code>b</code> or <code>c</code> is not evaluated: <code>x &gt;= 0 ? x : -x</code> results in the absolute value.</p>
+<p>Like in Racket, we must define a function before we can call it. However, C needs to know the type signature of the function before being able to compile it.</p>
+<h1 id="tutorial-2">20/1/14 - Tutorial</h1>
+<p>Dictionary interface:</p>
+<pre><code>(struct dict (alist))
+
+;; dict-new: -&gt; Dict
+(define (dict-new)
+    (dict empty))
+
+;; dict-lookup: Dict Int -&gt; Any
+(define (dict-lookup d k)
+    (define (al-search al)
+        (cond [(empty? al) #f]
+              [(= k (first (first al))) (second (first al))]
+              [else (al-search (rest al))]))
+    (al-search (dict-alist d)))
+
+;; dict-add: Dict Int Any -&gt; Dict
+(define (dict-add d k v)
+    (dict (cons (list k v) (dict-alist d))))
+
+;; dict-remove: Dict Int -&gt; Dict
+(define (dict-remove d k)
+    (define (al-remove al)
+        (cond [(empty? al) empty]
+              [(= k (first (first al))) (al-remove (rest al))]
+              [else (cons (first al) (al-remove (rest al)))]))
+    (dict (al-remove (dict-alist d))))
+
+;; dict-size: Dict -&gt; Nat
+(define (dict-size d)
+    (length (dict-alist d)))</code></pre>
+<p>Consider the following Racket function:</p>
+<pre><code>;; gcd: Nat Nat -&gt; Nat
+;;     PRE: #t
+;;     POST: produce the GCD of `a` and `b`
+;; (gcd a b) calculates the GCD of `a` and `b` using the Euclidean algorithm
+(define (gcd a b)
+    (if (= b 0) a (gcd b (remainder a b))))</code></pre>
+<p>We can translate this into C:</p>
+<pre><code>// gcd(a, b) finds the GCD of `a` and `b`
+//     PRE: #t
+//     POST: produce the GCD of `a` and `b`
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b)
+}</code></pre>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -256,6 +256,77 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <blockquote>
 <p>Clearly, <span class="math">\(\int \frac{x - 1}{x^2 + 5x + 6} \dee x = \int \frac{x - 1}{(x + 2)(x + 3)} \dee x = \int \frac{A}{x + 2} \dee x + \int \frac{B}{x + 3} \dee x\)</span> for some <span class="math">\(A\)</span> and <span class="math">\(B\)</span>.<br />Now we need to find <span class="math">\(A\)</span> and <span class="math">\(B\)</span>. We do this by solving <span class="math">\(x + 1 = A(x + 3) + B(x + 2)\)</span>.<br />Note that <span class="math">\(A\)</span> and <span class="math">\(B\)</span> must work for any <span class="math">\(x\)</span>. We now solve using the cover up method.<br />Choose <span class="math">\(x = -3\)</span> (because <span class="math">\(A(x + 3) = 0\)</span>). Then <span class="math">\(-3 + 1 = A(-3 + 3) + B(-3 + 2) = -2 = -B\)</span>. Then <span class="math">\(B = 2\)</span>.<br />Choose <span class="math">\(x = -2\)</span> (because <span class="math">\(B(x + 2) = 0\)</span>). Then <span class="math">\(-2 + 1 = A(-2 + 3) + B(-2 + 2) = -1 = B\)</span>. Then <span class="math">\(A = -1\)</span>.<br />Then <span class="math">\(\int \frac{x - 1}{x^2 + 5x + 6} \dee x = -\int \frac{1}{x + 2} \dee x + \int \frac{2}{x + 3} \dee x = -\ln(x + 2) + 2\ln(x + 3) + c\)</span>.</p>
 </blockquote>
+<h1 id="section-5">17/1/14</h1>
+<p>This only works for factorable polynomials.</p>
+<p>What if the numerator has a higher or equal degree than the denominator? We can use long division to make it lower again to apply partial fraction decomposition. When we do long division, we get a normal polynomial as the quotient and a rational function with the degree of the numerator lower than that of the denominator.</p>
+<p>Evaluate <span class="math">\(\int \frac{x^3 + 4x^2 + 2x - 5}{x^2 + 5x + 6} \dee x\)</span>:</p>
+<pre><code>                             x - 1
+              ____________________
+x^2 + 5x + 6 | x^3 + 4x^2 + 2x - 5
+               x^3 + 5x^2 + 6x
+               -------------------
+                     -x^2 - 4x - 5
+                     -x^2 - 5x - 6
+                     -------------
+                             x + 1</code></pre>
+<blockquote>
+<p>Clearly, <span class="math">\(\int \frac{x^3 + 4x^2 + 2x - 5}{x^2 + 5x + 6} \dee x = \int (x - 1) \dee x + \int \frac{x + 1}{x^2 + 5x + 6} \dee x = \frac{x^2}{2} - x +  \int \frac{x + 1}{(x + 2)(x + 3)} \dee x\)</span>.<br />;wip</p>
+</blockquote>
+<p>What if there are repeated factors? We can keep the repeated factors as part of the group to use this technique.</p>
+<p>Consider <span class="math">\(\int \frac{x + 1}{(x + 2)^2 (x + 3)}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\frac{x + 1}{(x + 2)^2 (x + 3)} = \frac{A}{(x + 2)^2 (x + 3)}\)</span> ;wip</p>
+</blockquote>
+<p>For each factor <span class="math">\((ax + b)^n\)</span>, include <span class="math">\(n\)</span> terms in the form <span class="math">\(\frac{A_1}{(ax + b)} + \ldots + \frac{A_n}{(ax + b)^n}\)</span>.</p>
+<p>What if the denominator is not factorable into linear factors of real numbers (factors contain irreducable quadratics)? For example, <span class="math">\(\frac{x}{x^2 + x + 1}\)</span>.</p>
+<p>We want to avoid imaginary numbers when doing this. Therefore, each irreducable quadratic of the form <span class="math">\(x^2 + x + 1\)</span>, we get a term of the form <span class="math">\(\frac{A + Bx}{ax^2 + bx + c}\)</span>.</p>
+<p>Consider <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{A + Bx}{x^2 + x + 1} \dee x + \int \frac{C}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \frac{11}{7} \ln (x - 2)\)</span>.<br />How do we integrate the first term? We can use a trigonometric substitution to solve this.<br />Clearly, <span class="math">\(\frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} = \frac{\frac{2}{7} - \frac{11}{7}x}{(x^2 + x + \frac{1}{4}) + 1 - \frac{1}{4}} = \frac{\frac{2}{7} + \frac{11}{7}x}{(x + \frac{1}{2})^2 + \frac{3}{4}}\)</span>, by completing the square.<br />Let <span class="math">\(u = x + \frac{1}{2}\)</span>. Then <span class="math">\(\dee x = \dee u\)</span>.<br />Clearly, <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x = \frac{1}{7} \int \frac{2 - 11x}{(x + \frac{1}{2})^2 + \frac{3}{4}} \dee x\)</span> ;wip: use substitution with <span class="math">\(s = \frac{\sqrt{3}}{2} \tan \theta\)</span></p>
+</blockquote>
+<p>Completing the square: we want the resulting polynomial to have repeated roots. In the quadratic formula, this is when the discriminant <span class="math">\(b^2 - 4ac = 0\)</span>, so <span class="math">\(c = \frac{b^2}{4a}\)</span>.</p>
+<p>When we have an irreducible quadratic, we always get an <span class="math">\(\arctan\)</span> and a <span class="math">\(\ln \abs{ax^2 + bx + c}\)</span>.</p>
+<h1 id="section-6">20/1/14</h1>
+<p>The techniques of integration so far can be summarized as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Expression in the numerator of the integrand would be simplified by the derivative of a substitution: use integration by subsitution.</li>
+<li>Integrand is a product, integrand would be simplified by differentiating one and integrating another: use integration by parts.</li>
+<li>There is a sum of difference of squares (<span class="math">\(\pm a^2 \pm x^2\)</span>): use trigonometric substitution.</li>
+<li>Integrand contains a rational function (quotient of polynomials): use partial fraction decomposition.</li>
+</ol>
+<p>;wip: do some textbook questions for once</p>
+<p>The two other common methods of integration are infinite series expansion and another that uses complex numbers.</p>
+<h2 id="volumes-of-solids">Volumes of Solids</h2>
+<p>Recall that a single-variable integral can be geometrically interpreted as the area underneath the curve.</p>
+<p>In the Riemann integral, that would be represented as <span class="math">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n \delta x_i f(x_i)\)</span>. Here, <span class="math">\(\delta x_i\)</span> is the base, and <span class="math">\(f(x_i)\)</span> is the height, and they form a rectangle.</p>
+<p>The same idea can be applied to 3D, for the volume under a surface. We want to find the area under <span class="math">\(f(x, y)\)</span>.</p>
+<p>In the Riemann integral, that would be represented as <span class="math">\(\int \int f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \delta x_i \delta y_i f(x_i, y_i)\)</span>. Here, <span class="math">\(\delta x_i \delta y_i\)</span> is the base, and <span class="math">\(f(x_i, y_i)\)</span>, and they form a rectangle.</p>
+<p>;wip: use double integration symbol above</p>
+<p>In general, the volume of an arbitrary solid requires a multi-variable/multi-dimensional integral (a calculus III topic). However, there are cases where symmetry allows us to use a single variable integral.</p>
+<p>Main axes:</p>
+<pre><code>   y
+   |
+   |
+   |_____ x
+  /
+ /
+z</code></pre>
+<p>Find the volume of a square prism with dimensions <span class="math">\(b \times b \times h\)</span>:</p>
+<blockquote>
+<p>The area of the base slice stays the same as we go along the z-axis - as we vary <span class="math">\(h\)</span>, the slice is still <span class="math">\(b \times b\)</span>.<br />So the volume is <span class="math">\(\int_0^h b^2 \dee x = b^2 \int_0^h 1 \dee x = b^2 h\)</span>.</p>
+</blockquote>
+<p>The basic idea is that we take the solid, slice the shape along one axis, then integrate the area as a function of the extent along the axis that we sliced along. This works because of the symmetry of some shapes that allows us to avoid considering some dimensions.</p>
+<p><span class="math">\(V = \int_a^b A(x) \dee x\)</span>, where <span class="math">\(V\)</span> is the volume, <span class="math">\(A(x)\)</span> is the area of a slice at extent <span class="math">\(x\)</span> (though other axes can be used too depending on the problem), and <span class="math">\(\dee x\)</span> is the width of the slice.</p>
+<p>Find the area of the cone with base radius 1 unit and height 1 pointing along the x-axis:</p>
+<blockquote>
+<p>This is the same as the line <span class="math">\(y = 1 - x\)</span> rotated about the x-axis.<br />The area of any slice of the cone along the x-axis is <span class="math">\(A(x) = \pi (1 - x)^2\)</span>, because the slice is a circle.<br />The thickness of this slice is <span class="math">\(\dee x\)</span>, and the cone is defined from <span class="math">\(x = 0\)</span> to <span class="math">\(x = 1\)</span>.<br />So the volume of the cone is <span class="math">\(\int_0^1 \pi (1 - x)^2 \dee x = \pi \int_0^1 (1 - 2x + x^2) \dee x = \frac{\pi}{3}\)</span>.</p>
+</blockquote>
+<p>We can generalize this to any function rotated about a line. The resulting solids are called <strong>solids of rotation</strong>.</p>
+<p>The reason this works is because the z-axis is basically redundant information that is already expressed in the y-axis.</p>
+<p>Find the volume of the solid represented by rotating <span class="math">\(f(x)\)</span> about the x-axis:</p>
+<blockquote>
+<p>The area of each slice at each extent along the x-axis is the area of a circle with the radius <span class="math">\(f(x)\)</span>.<br />The area function is <span class="math">\(A(x) = \pi f(x)^2\)</span>.<br />So the volume is <span class="math">\(\int_a^b A(x) \dee x = \pi \int_a^b f(x)^2 \dee x\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

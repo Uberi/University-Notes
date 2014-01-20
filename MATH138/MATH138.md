@@ -330,3 +330,116 @@ Evaluate $\int \frac{x - 1}{x^2 + 5x + 6} \dee x$:
 > Choose $x = -3$ (because $A(x + 3) = 0$). Then $-3 + 1 = A(-3 + 3) + B(-3 + 2) = -2 = -B$. Then $B = 2$.  
 > Choose $x = -2$ (because $B(x + 2) = 0$). Then $-2 + 1 = A(-2 + 3) + B(-2 + 2) = -1 = B$. Then $A = -1$.  
 > Then $\int \frac{x - 1}{x^2 + 5x + 6} \dee x = -\int \frac{1}{x + 2} \dee x + \int \frac{2}{x + 3} \dee x = -\ln(x + 2) + 2\ln(x + 3) + c$.  
+
+# 17/1/14
+
+This only works for factorable polynomials.
+
+What if the numerator has a higher or equal degree than the denominator? We can use long division to make it lower again to apply partial fraction decomposition. When we do long division, we get a normal polynomial as the quotient and a rational function with the degree of the numerator lower than that of the denominator.
+
+Evaluate $\int \frac{x^3 + 4x^2 + 2x - 5}{x^2 + 5x + 6} \dee x$:
+
+                                 x - 1
+                  ____________________
+    x^2 + 5x + 6 | x^3 + 4x^2 + 2x - 5
+                   x^3 + 5x^2 + 6x
+                   -------------------
+                         -x^2 - 4x - 5
+                         -x^2 - 5x - 6
+                         -------------
+                                 x + 1
+
+> Clearly, $\int \frac{x^3 + 4x^2 + 2x - 5}{x^2 + 5x + 6} \dee x = \int (x - 1) \dee x + \int \frac{x + 1}{x^2 + 5x + 6} \dee x = \frac{x^2}{2} - x + 
+\int \frac{x + 1}{(x + 2)(x + 3)} \dee x$.  
+> ;wip
+
+What if there are repeated factors? We can keep the repeated factors as part of the group to use this technique.
+
+Consider $\int \frac{x + 1}{(x + 2)^2 (x + 3)}$:
+
+> Clearly, $\frac{x + 1}{(x + 2)^2 (x + 3)} = \frac{A}{(x + 2)^2 (x + 3)}$ ;wip
+
+For each factor $(ax + b)^n$, include $n$ terms in the form $\frac{A_1}{(ax + b)} + \ldots + \frac{A_n}{(ax + b)^n}$.
+
+What if the denominator is not factorable into linear factors of real numbers (factors contain irreducable quadratics)? For example, $\frac{x}{x^2 + x + 1}$.
+
+We want to avoid imaginary numbers when doing this. Therefore, each irreducable quadratic of the form $x^2 + x + 1$, we get a term of the form $\frac{A + Bx}{ax^2 + bx + c}$.
+
+Consider $\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x$:
+
+> Clearly, $\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{A + Bx}{x^2 + x + 1} \dee x + \int \frac{C}{x - 2} \dee x$.  
+> So $\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x$.  
+> So $\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \frac{11}{7} \ln (x - 2)$.  
+> How do we integrate the first term? We can use a trigonometric substitution to solve this.  
+> Clearly, $\frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} = \frac{\frac{2}{7} - \frac{11}{7}x}{(x^2 + x + \frac{1}{4}) + 1 - \frac{1}{4}} = \frac{\frac{2}{7} + \frac{11}{7}x}{(x + \frac{1}{2})^2 + \frac{3}{4}}$, by completing the square.  
+> Let $u = x + \frac{1}{2}$. Then $\dee x = \dee u$.  
+> Clearly, $\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x = \frac{1}{7} \int \frac{2 - 11x}{(x + \frac{1}{2})^2 + \frac{3}{4}} \dee x$
+;wip: use substitution with $s = \frac{\sqrt{3}}{2} \tan \theta$
+
+Completing the square: we want the resulting polynomial to have repeated roots. In the quadratic formula, this is when the discriminant $b^2 - 4ac = 0$, so $c = \frac{b^2}{4a}$.
+
+When we have an irreducible quadratic, we always get an $\arctan$ and a $\ln \abs{ax^2 + bx + c}$.
+
+# 20/1/14
+
+The techniques of integration so far can be summarized as follows:
+
+1. Expression in the numerator of the integrand would be simplified by the derivative of a substitution: use integration by subsitution.
+2. Integrand is a product, integrand would be simplified by differentiating one and integrating another: use integration by parts.
+3. There is a sum of difference of squares ($\pm a^2 \pm x^2$): use trigonometric substitution.
+4. Integrand contains a rational function (quotient of polynomials): use partial fraction decomposition.
+
+;wip: do some textbook questions for once
+
+The two other common methods of integration are infinite series expansion and another that uses complex numbers.
+
+Volumes of Solids
+-----------------
+
+Recall that a single-variable integral can be geometrically interpreted as the area underneath the curve.
+
+In the Riemann integral, that would be represented as $\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n \delta x_i f(x_i)$. Here, $\delta x_i$ is the base, and $f(x_i)$ is the height, and they form a rectangle.
+
+The same idea can be applied to 3D, for the volume under a surface. We want to find the area under $f(x, y)$.
+
+In the Riemann integral, that would be represented as $\int \int f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \delta x_i \delta y_i f(x_i, y_i)$. Here, $\delta x_i \delta y_i$ is the base, and $f(x_i, y_i)$, and they form a rectangle.
+
+;wip: use double integration symbol above
+
+In general, the volume of an arbitrary solid requires a multi-variable/multi-dimensional integral (a calculus III topic). However, there are cases where symmetry allows us to use a single variable integral.
+
+Main axes:
+
+       y
+       |
+       |
+       |_____ x
+      /
+     /
+    z
+
+Find the volume of a square prism with dimensions $b \times b \times h$:
+
+> The area of the base slice stays the same as we go along the z-axis - as we vary $h$, the slice is still $b \times b$.  
+> So the volume is $\int_0^h b^2 \dee x = b^2 \int_0^h 1 \dee x = b^2 h$.
+
+The basic idea is that we take the solid, slice the shape along one axis, then integrate the area as a function of the extent along the axis that we sliced along. This works because of the symmetry of some shapes that allows us to avoid considering some dimensions.
+
+$V = \int_a^b A(x) \dee x$, where $V$ is the volume, $A(x)$ is the area of a slice at extent $x$ (though other axes can be used too depending on the problem), and $\dee x$ is the width of the slice.
+
+Find the area of the cone with base radius 1 unit and height 1 pointing along the x-axis:
+
+> This is the same as the line $y = 1 - x$ rotated about the x-axis.  
+> The area of any slice of the cone along the x-axis is $A(x) = \pi (1 - x)^2$, because the slice is a circle.  
+> The thickness of this slice is $\dee x$, and the cone is defined from $x = 0$ to $x = 1$.  
+> So the volume of the cone is $\int_0^1 \pi (1 - x)^2 \dee x = \pi \int_0^1 (1 - 2x + x^2) \dee x = \frac{\pi}{3}$.  
+
+We can generalize this to any function rotated about a line. The resulting solids are called **solids of rotation**.
+
+The reason this works is because the z-axis is basically redundant information that is already expressed in the y-axis.
+
+Find the volume of the solid represented by rotating $f(x)$ about the x-axis:
+
+> The area of each slice at each extent along the x-axis is the area of a circle with the radius $f(x)$.  
+> The area function is $A(x) = \pi f(x)^2$.  
+> So the volume is $\int_a^b A(x) \dee x = \pi \int_a^b f(x)^2 \dee x$.  

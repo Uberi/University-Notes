@@ -177,7 +177,6 @@ Office Hours: Wednesdays 11:30am-1:00pm in HH 362</code></pre>
 <li>It must have premises.</li>
 <li>It must have a conclusion.</li>
 </ul>
-<p>;wip: do the online quiz on LEARN, which should be up on LEARN, due Monday 9:25am</p>
 <h1 id="section-4">15/1/14</h1>
 <p>Assertions are the same thing as claims in this course - the terms are interchangeable.</p>
 <blockquote>
@@ -197,6 +196,123 @@ Office Hours: Wednesdays 11:30am-1:00pm in HH 362</code></pre>
 <h3 id="explanations">Explanations</h3>
 <p>An <strong>explanation</strong> differs from an argument in that the author intends that the conclusion is already believed by others, rather than trying to convince others. Arguments aim to how something is worth believing, while explanations make better sense of what is already believed. It is the intent of the author that is important.</p>
 <p>Therefore, whether something is an argument or an explanation depends on whether the author thinks the audience already believes it: &quot;Professional athletes are physically fit because they train every day&quot; is an argument for people who don't believe that they are fit, and otherwise an explanation.</p>
+<h1 id="section-5">17/1/14</h1>
+<p>Arguments can be categorized by how the author intends for the premises to support the conclusion.</p>
+<p>Overview of argument types:</p>
+<p>Deductive arguments aim for <strong>soundness</strong>. They are <strong>non-ampliative</strong> and <strong>truth-preserving</strong> (we can never start with true premises and reach a false conclusion). Deductive arguments have their premises either support the conclusion perfectly, or not at all - they are all-or-nothing.</p>
+<p>Sound deductive arguments guarantee the truth of the conclusion. A sound deductive argument is said to <strong>entail</strong> its conclusion.</p>
+<p>An argument is <strong>sound</strong> if and only if it is <strong>valid</strong> and all the premises of the argument are <strong>true</strong>. To evaluate a deductive argument, we need to ensure that these two conditions are met.</p>
+<p>An argument is <strong>valid</strong> if and only if there is no way for the conclusion to be false if the premises are true. If an argument is valid, then the truth of the premises guarantees the truth of the conclusion. Valid arguments do not require us to look at the world - it only looks at the relationship between statements.</p>
+<p>A valid argument does not tell us whether the premises are true, and therefore does not tell us if the conclusion is true.</p>
+<p>We can prove that an argument is not valid by using the <strong>method of counter-example</strong>. A counter-example is a possible case where the premises are true, but the conclusion is false. We only need to find one counter-example to disprove validity. If there are no counter-examples, then the argument is proven valid.</p>
+<pre><code>Prime numbers are only divisible by 1 and themselves.
+All even numbers are divisible by 2.
+-----------------------------------------------------
+All prime numbers are odd.</code></pre>
+<p>Here, a counter-example would be 2, which is prime but even.</p>
+<p>We must be sure that the counter-example is possible:</p>
+<pre><code>Either you are taller than me or you are shorter than me.
+You are not taller than me.
+---------------------------------------------------------
+You are shorter than me.</code></pre>
+<p>Here, the counter-example &quot;You are the same height&quot; is not admissable because this does not satisfy the first premise.</p>
+<p>Usually, the content of the argument determines whether it is valid:</p>
+<pre><code>Bob is a bachelor
+-----------------------
+Bob is an unmarried man</code></pre>
+<p>In some special cases, the form of the argument itself is enough to determine whether it is valid:</p>
+<pre><code>Bob is a bachelor
+-----------------
+Bob is a bachelor</code></pre>
+<p>A common form is <strong>modus ponens</strong>:</p>
+<pre><code>If P, then Q
+P
+------------
+Q</code></pre>
+<p>Another is <strong>hypothetical syllogism</strong>:</p>
+<pre><code>If P, then Q
+If Q, then R
+------------
+If P, then R</code></pre>
+<p>Here, P and Q represent claims that can be asserted. They can be as complicated as we like.</p>
+<p>;wip: get that list of valid forms from the slides</p>
+<p>We can combine argument forms to get more complex arguments. For example, hypotheical syllogism and modus ponens together:</p>
+<pre><code>If P, then Q
+If Q, then R
+P
+------------
+If P, then R ; derived premises
+------------
+R</code></pre>
+<p>This is the basis of mathematical proof theory.</p>
+<h1 id="section-6">20/1/14</h1>
+<p>We can tentatively evaluate an argument's validity by matching it against the valid argument forms and trying to think of counter-examples.</p>
+<pre><code>If Pi is less than 4, then God exists.
+Pi is less than 4.
+--------------------------------------
+God exists.</code></pre>
+<p>This is valid but not rationally compelling. Validity is not enough to determine whether an argument is &quot;good&quot;.</p>
+<p>Our goal is to obtain true conclusions.</p>
+<p>However, arguments can be valid, yet have false conclusions. Additionally, they might not offer relevant support for the conclusion - the first premise in the above argument is unlikely to be accepted by the audience.</p>
+<p>Validity is a property of the structure of an argument.</p>
+<p>A premise can be supported by other premises. These other premises support a conclusion, which is then treated as a premise in our argument. These <strong>sub-arguments</strong> appear often in more complex arguments. All the subarguments must be valid for an argument to be valid. For example, the combined argument above can be written as:</p>
+<ul>
+<li>R, because:
+<ul>
+<li>If P, then R, because:
+<ul>
+<li>If P, then Q</li>
+<li>If Q, then R</li>
+</ul></li>
+<li>P</li>
+</ul></li>
+</ul>
+<p><strong>Linked support</strong> is when the premises only entail the conclusion together:</p>
+<pre><code>The snow is white
+The grass is green
+----------------------------------------
+The snow is white and the grass is green</code></pre>
+<p><strong>Convergent support</strong> is when the premises independently entail the conclusion. Any one of the premises can make the conclusion true:</p>
+<pre><code>The snow is white
+The grass is green
+---------------------------------------
+The snow is white or the grass is green</code></pre>
+<p>We can diagram arguments with their subarguments as trees in node-arrow diagrams. We often number the statements and then label the nodes with the statement numbers.</p>
+<p>Consider the following argument:</p>
+<blockquote>
+<p>It is either sunny or cloudy. If it is raining, then it is definitely not sunny. It is raining. Therefore, it is not sunny. Therefore, it is cloudy. Therefore, it is cloudy or Bob is your uncle.</p>
+</blockquote>
+<p>We can write it as:</p>
+<ul>
+<li>It is cloudy or Bob is your uncle, because:
+<ul>
+<li>It is cloudy, because:
+<ul>
+<li>It is either sunny or cloudy</li>
+<li>It is not sunny, because:
+<ul>
+<li>If it is raining, then it is definitely not sunny</li>
+<li>It is raining</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>This argument is valid because each sub-argument is valid and it itself is valid.</p>
+<h3 id="truth">Truth</h3>
+<p>Truth is a property of sentences, not arguments or sets of statements. When we say an argument is true, we might mean that it is sound or rationally compelling.</p>
+<p><strong>Truth conditions</strong> are the conditions under which a sentence is true.</p>
+<p>To assert a sentence means to claim it is true. We don't always know for sure if it is true or false.</p>
+<p>However, we can judge whether we have good reason to believe the sentence is true or false. We therefore judge the whether it is reasonable to believe whether a deductive argument is sound.</p>
+<p><strong>Contingent truths</strong> are truths that happen to be true but could have been false if history went a different way. For example, &quot;Waterloo has two universities&quot; could have been false if history unfolded such that one of the universities did not start. Another might be &quot;The Eiffel Tower is in France&quot;.</p>
+<p><strong>Necessary truths</strong> are truths that are true no matter which way history goes, or how the world developed. For example, &quot;A bachelor is an unmarried man&quot;</p>
+<p>Similarly, <strong>contingent falsehoods</strong> (Waterloo has three universities) and <strong>necessary falsehoods</strong> (a bachelor is a married man) exist.</p>
+<p>Necessary truths/falsehoods could be that way because of the <strong>form</strong>, or the <strong>content</strong>:</p>
+<p>&quot;A bachelor is an unmarried man&quot; is a necessary truth because of the meaning of the word &quot;bachelor&quot;, which is part of the content of the sentence.</p>
+<p>&quot;If it is raining, then it is raining&quot; is a necessary truth because of the form of the argument itself, and does not require us to know what rain is.</p>
+<blockquote>
+<p>This sentence is false.</p>
+</blockquote>
+<p>The above is neither necessarily true or necessarily false. It is known as the <strong>Liar's sentence</strong>. People have disagreed on the truth value of this sentence for a long time.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -163,8 +163,6 @@ To determine whether something is an argument, all three of the following must b
 * It must have premises.
 * It must have a conclusion.
 
-;wip: do the online quiz on LEARN, which should be up on LEARN, due Monday 9:25am
-
 # 15/1/14
 
 Assertions are the same thing as claims in this course - the terms are interchangeable.
@@ -192,3 +190,161 @@ Look out for conclusions not at the end of passages, implicit premises, implicit
 An **explanation** differs from an argument in that the author intends that the conclusion is already believed by others, rather than trying to convince others. Arguments aim to how something is worth believing, while explanations make better sense of what is already believed. It is the intent of the author that is important.
 
 Therefore, whether something is an argument or an explanation depends on whether the author thinks the audience already believes it: "Professional athletes are physically fit because they train every day" is an argument for people who don't believe that they are fit, and otherwise an explanation.
+
+# 17/1/14
+
+Arguments can be categorized by how the author intends for the premises to support the conclusion.
+
+Overview of argument types:
+
+Deductive arguments aim for **soundness**. They are **non-ampliative** and **truth-preserving** (we can never start with true premises and reach a false conclusion). Deductive arguments have their premises either support the conclusion perfectly, or not at all - they are all-or-nothing.
+
+Sound deductive arguments guarantee the truth of the conclusion. A sound deductive argument is said to **entail** its conclusion.
+
+An argument is **sound** if and only if it is **valid** and all the premises of the argument are **true**. To evaluate a deductive argument, we need to ensure that these two conditions are met.
+
+An argument is **valid** if and only if there is no way for the conclusion to be false if the premises are true. If an argument is valid, then the truth of the premises guarantees the truth of the conclusion. Valid arguments do not require us to look at the world - it only looks at the relationship between statements.
+
+A valid argument does not tell us whether the premises are true, and therefore does not tell us if the conclusion is true.
+
+We can prove that an argument is not valid by using the **method of counter-example**. A counter-example is a possible case where the premises are true, but the conclusion is false. We only need to find one counter-example to disprove validity. If there are no counter-examples, then the argument is proven valid.
+
+    Prime numbers are only divisible by 1 and themselves.
+    All even numbers are divisible by 2.
+    -----------------------------------------------------
+    All prime numbers are odd.
+
+Here, a counter-example would be 2, which is prime but even.
+
+We must be sure that the counter-example is possible:
+
+    Either you are taller than me or you are shorter than me.
+    You are not taller than me.
+    ---------------------------------------------------------
+    You are shorter than me.
+
+Here, the counter-example "You are the same height" is not admissable because this does not satisfy the first premise.
+
+Usually, the content of the argument determines whether it is valid:
+
+    Bob is a bachelor
+    -----------------------
+    Bob is an unmarried man
+
+In some special cases, the form of the argument itself is enough to determine whether it is valid:
+
+    Bob is a bachelor
+    -----------------
+    Bob is a bachelor
+
+A common form is **modus ponens**:
+
+    If P, then Q
+    P
+    ------------
+    Q
+
+Another is **hypothetical syllogism**:
+
+    If P, then Q
+    If Q, then R
+    ------------
+    If P, then R
+
+Here, P and Q represent claims that can be asserted. They can be as complicated as we like.
+
+;wip: get that list of valid forms from the slides
+
+We can combine argument forms to get more complex arguments. For example, hypotheical syllogism and modus ponens together:
+
+    If P, then Q
+    If Q, then R
+    P
+    ------------
+    If P, then R ; derived premises
+    ------------
+    R
+
+This is the basis of mathematical proof theory.
+
+# 20/1/14
+
+We can tentatively evaluate an argument's validity by matching it against the valid argument forms and trying to think of counter-examples.
+
+    If Pi is less than 4, then God exists.
+    Pi is less than 4.
+    --------------------------------------
+    God exists.
+
+This is valid but not rationally compelling. Validity is not enough to determine whether an argument is "good".
+
+Our goal is to obtain true conclusions.
+
+However, arguments can be valid, yet have false conclusions. Additionally, they might not offer relevant support for the conclusion - the first premise in the above argument is unlikely to be accepted by the audience.
+
+Validity is a property of the structure of an argument.
+
+A premise can be supported by other premises. These other premises support a conclusion, which is then treated as a premise in our argument. These **sub-arguments** appear often in more complex arguments. All the subarguments must be valid for an argument to be valid. For example, the combined argument above can be written as:
+
+* R, because:
+    * If P, then R, because:
+        * If P, then Q
+        * If Q, then R
+    * P
+
+**Linked support** is when the premises only entail the conclusion together:
+
+    The snow is white
+    The grass is green
+    ----------------------------------------
+    The snow is white and the grass is green
+
+**Convergent support** is when the premises independently entail the conclusion. Any one of the premises can make the conclusion true:
+
+    The snow is white
+    The grass is green
+    ---------------------------------------
+    The snow is white or the grass is green
+
+We can diagram arguments with their subarguments as trees in node-arrow diagrams. We often number the statements and then label the nodes with the statement numbers.
+
+Consider the following argument:
+
+> It is either sunny or cloudy. If it is raining, then it is definitely not sunny. It is raining. Therefore, it is not sunny. Therefore, it is cloudy. Therefore, it is cloudy or Bob is your uncle.
+
+We can write it as:
+
+* It is cloudy or Bob is your uncle, because:
+    * It is cloudy, because:
+        * It is either sunny or cloudy
+        * It is not sunny, because:
+            * If it is raining, then it is definitely not sunny
+            * It is raining
+
+This argument is valid because each sub-argument is valid and it itself is valid.
+
+### Truth
+
+Truth is a property of sentences, not arguments or sets of statements. When we say an argument is true, we might mean that it is sound or rationally compelling.
+
+**Truth conditions** are the conditions under which a sentence is true.
+
+To assert a sentence means to claim it is true. We don't always know for sure if it is true or false.
+
+However, we can judge whether we have good reason to believe the sentence is true or false. We therefore judge the whether it is reasonable to believe whether a deductive argument is sound.
+
+**Contingent truths** are truths that happen to be true but could have been false if history went a different way. For example, "Waterloo has two universities" could have been false if history unfolded such that one of the universities did not start. Another might be "The Eiffel Tower is in France".
+
+**Necessary truths** are truths that are true no matter which way history goes, or how the world developed. For example, "A bachelor is an unmarried man"
+
+Similarly, **contingent falsehoods** (Waterloo has three universities) and **necessary falsehoods** (a bachelor is a married man) exist.
+
+Necessary truths/falsehoods could be that way because of the **form**, or the **content**:
+
+"A bachelor is an unmarried man" is a necessary truth because of the meaning of the word "bachelor", which is part of the content of the sentence.
+
+"If it is raining, then it is raining" is a necessary truth because of the form of the argument itself, and does not require us to know what rain is.
+
+> This sentence is false.
+
+The above is neither necessarily true or necessarily false. It is known as the **Liar's sentence**. People have disagreed on the truth value of this sentence for a long time.
