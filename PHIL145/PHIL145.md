@@ -348,3 +348,35 @@ Necessary truths/falsehoods could be that way because of the **form**, or the **
 > This sentence is false.
 
 The above is neither necessarily true or necessarily false. It is known as the **Liar's sentence**. People have disagreed on the truth value of this sentence for a long time.
+
+# 22/1/14
+
+    The moon is made of cheese. Therefore, if God exists, then God exists.
+    
+    The moon is made of cheese
+    ------------------------------
+    If God exists, then God exists
+
+This is a valid but unsound argument. This is because the truth of the premises always implies the truth of the conclusion - the conclusion is always true, so if the premises are true, then the conclusion is also true.
+
+**Compound** or **complex** sentences can be constructed out of **atomic** sentences. The truth value of these sentences are often determined by the truth value of their component atomic sentences, as well as the **logcal connectives** between the atomic sentences.
+
+An atomic sentence may be something like "It is raining" or "The sky is blue".
+
+A complex sentence might be "It is raining, but it is warm". This is a **conjunctive** sentence - one made up of sub-sentences known as **conjuncts**, often joined by "and" or "but". The conjunctive statement works like a logical AND, with the form "P and Q".
+
+Another might be "It is raining, or it is warm" (inclusive or). This is a **disjunctive** sentence - one made up of  sub-sentences known as **disjuncts**, often joined by "or". The disjunctive statement works like a logical OR, with the form "P or Q".
+
+Sometimes, English implicitly specifies that disjunction is restricted: "You will pass the exam or fail it" implies that you cannot do both. Standard disjunction is an **inclusive or**, but the special restricted disjunction is an **exclusive or**. The restricted disjunctive statement is of the form "P or Q (but not both)", or "either P or Q".
+
+If the type of disjunction is not specified, it is open for interpretation, but should be clarified.
+
+A complex sentence like "if it is warm, then it is raining" is a **conditional sentence**. The condition is called the **antecedent**, and the result is called the **consequent**.
+
+There are also multiple types of conditionals. The **material conditional** is always true unless the antecedent is true yet the conclusion is false.
+
+It is still true when the antecedent is false because it cannot be invalidated that way.
+
+There is also the **subjunctive conditionals**: "If Germany had won World War II, then the world would be no different today". This expresses a hypothetical claim - something that would be true if something else is true. The difference is that we already know the antecedent is false, but states what might happen if it were true. These are often distinguished by their using past tense.
+
+A complex sentence like "it is not raining" is a **negated sentence** - one where a sentence is flipped around to give its opposite. The negated sentence works like a logical NOT, with the form "not P".

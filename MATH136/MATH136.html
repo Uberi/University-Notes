@@ -84,6 +84,9 @@ Email: dstwolcz@uwaterloo.ca</code></pre>
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\magn}{\left\lVert #1 \right\rVert}
 \]</span></p>
 <h1 id="im-going-to-stop-procrastinating-this-week-honest">13/1/14 (I'm going to stop procrastinating this week, honest!)</h1>
 <h2 id="notation">Notation</h2>
@@ -149,7 +152,7 @@ Email: dstwolcz@uwaterloo.ca</code></pre>
 <p>A set of vectors is <strong>linearly independent</strong> if and only if the vectors in the set cannot be written as linear combinations of each other. Otherwise, the set is <strong>linearly dependent</strong>.</p>
 <p>In other words, <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot c_n \ne 0 \implies c_1 \vec{v}_1 + \ldots + c_{k - 1} \vec{v}_{k - 1} + c_{k + 1} \vec{v}_{k + 1} + \ldots + c\_n vec{v}_n = c_k \vec{v}_k\)</span>. Rearranging, we get <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot c_n \ne 0 \implies c_1 \vec{v}_1 + \ldots + c_{k - 1} \vec{v}_{k - 1} - c_k \vec{v}_k + c_{k + 1} \vec{v}_{k + 1} + \ldots + c\_n vec{v}_n = \vec{0}\)</span>.</p>
 <h3 id="theorem-1.1.3">Theorem 1.1.3</h3>
-<p>Therefore, a set of vectors <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> is linearly independent if and only if <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot c_n \ne 0 \implies c_1 \vec{v}_1 + \ldots + c\_n vec{v}_n = \vec{0}\)</span>.</p>
+<p>Therefore, a set of vectors <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> is linearly dependent if and only if <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot c_n \ne 0 \implies c_1 \vec{v}_1 + \ldots + c_n vec{v}_n = \vec{0}\)</span>, and otherwise linearly independent.</p>
 <p>The solution where <span class="math">\(c_i = 0, 1 \le i \le n\)</span> is called the trivial solution, because all the coefficients are 0. The trivial solution is always a solution to the above equation.</p>
 <p>In other words, the set is linearly independent if and only if the zero vector cannot be written as a linear combination of the vectors in the set, except when all the coefficients are 0.</p>
 <p>To prove that a set is linearly independent, we need to prove that the only solution to the above equation is the trivial solution.</p>
@@ -185,6 +188,91 @@ Email: dstwolcz@uwaterloo.ca</code></pre>
 <p>A <span class="math">\(k\)</span>-plane in <span class="math">\(\mb{R}^n\)</span> takes the form of <span class="math">\(\vec{x} = c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k + \vec{b}, c_1, c_2 \in \mathbb{R}\)</span> given <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k, \vec{b} \in \mathbb{R}^n\)</span> and <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> being a linearly independent set. This is a <span class="math">\(k\)</span>-plane in <span class="math">\(\mb{R}^n\)</span> that passes through <span class="math">\(\vec{b}\)</span>. A <span class="math">\(k\)</span>-plane is a <span class="math">\(k\)</span>-dimensional plane.</p>
 <p>A hyperplane is a <span class="math">\(k\)</span>-plane, where <span class="math">\(k = n - 1\)</span>. It is an <span class="math">\(n - 1\)</span>-dimensional plane.</p>
 <p>For example, <span class="math">\(\spn \set{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \\ −2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 1 \\ −1 \end{bmatrix}}\)</span> defines a hyperplane in <span class="math">\(\mb{R}^n\)</span>, since the set is linearly independent.</p>
+<h1 id="ok-so-its-like-week-3-and-im-behind-i-get-it">20/1/14 (OK, so it's like week 3 and I'm behind, I get it)</h1>
+<h2 id="subspaces">Subspaces</h2>
+<p>A <strong>subspace</strong> of <span class="math">\(\mb{R}^n\)</span> is a non-empty subset <span class="math">\(\mb{S}\)</span> of <span class="math">\(\mb{R}^n\)</span> such that it satisfies all ten properties defined in Theorem 1.1.1.</p>
+<p>But since properties 2-5 and 7-10 follow from properties 1 and 6, all we need to do to prove all ten properties is to prove properties 1 and 6 hold.</p>
+<h3 id="theorem-1.2.1-subspace-test">Theorem 1.2.1 (Subspace Test)</h3>
+<p>Given a set <span class="math">\(\mb{S}\)</span>, <span class="math">\(\mb{S}\)</span> is a subspace of <span class="math">\(\mb{R}^n\)</span> if and only if:</p>
+<ul>
+<li><span class="math">\(\mb{S}\)</span> is a subset of <span class="math">\(\mb{R}^n\)</span>.</li>
+<li><span class="math">\(\mb{S}\)</span> is non-empty.</li>
+<li><span class="math">\(\forall \vec{x}, \vec{y} \in \mb{S}, \vec{x} + \vec{y} \in \mb{S}\)</span>.</li>
+<li><span class="math">\(\forall \vec{x} \in \mb{S}, c \in \mb{R}, c\vec{x} \in \mb{S}\)</span></li>
+</ul>
+<p>To prove a set is a subspace, we need to prove all four properties.</p>
+<p>Clearly, if conditions 2 and 4 hold, <span class="math">\(\vec{0} \in \mb{S}\)</span>. So if <span class="math">\(\vec{0} \notin \mb{S}\)</span>, then one or both of the conditions is not met and the set is not a subspace.</p>
+<p>We can use this to check if a set is a subspace by seeing if <span class="math">\(\vec{0}\)</span> is in it.</p>
+<p>Prove <span class="math">\(\mb{S} = \set{ \begin{bmatrix} x \\ y \\ z \end{bmatrix} \middle| x + y = 0, x - z = 0}\)</span> is a subspace of <span class="math">\(\mb{R}^3\)</span> and write a basis for the subspace:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\mb{S}\)</span> is a subset of <span class="math">\(\mb{R}^3\)</span>.<br />Clearly, <span class="math">\(\vec{0} \in \mb{S}\)</span>, so the set is non-empty.<br />Let <span class="math">\(\vec{a}, \vec{b} \in \mb{S}\)</span>.<br />So <span class="math">\(a_1 + a_2 = a_1 - a_3 = 0\)</span> and <span class="math">\(b_1 + b_2 = b_1 - b_3 = 0\)</span>.<br />Clearly, <span class="math">\((a_1 + b_1) + (a_2 + b_2) = (a_1 + b_1) - (a_3 + b_3) = 0\)</span>.<br />So <span class="math">\(\vec{a} + \vec{b} \in \mb{S}\)</span> and <span class="math">\(\mb{S}\)</span> is closed under addition.<br />Clearly, <span class="math">\(c(a_1 + a_2) = c(a_1 - a_3) = c0\)</span>.<br />So <span class="math">\(c\vec{a} \in \mb{S}\)</span> and <span class="math">\(\mb{S}\)</span> is closed under scalar multiplication.<br />So <span class="math">\(\mb{S}\)</span> is a subspace of <span class="math">\(\mb{R}^3\)</span>.<br />Since <span class="math">\(a_1 + a_2 = a_1 - a_3 = 0\)</span>, <span class="math">\(a_2 = -a_1\)</span> and <span class="math">\(a_3 = a_1\)</span>.<br />So the general vector is <span class="math">\(\vec{v}(a_1) = \begin{bmatrix} a_1 \\ -a_1 \\ a_1 \end{bmatrix} = a_1 \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix}\)</span>.<br />So a basis for <span class="math">\(\mb{S}\)</span> is <span class="math">\(\set{\begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix}}\)</span>.</p>
+</blockquote>
+<h3 id="theorem-1.2.2">Theorem 1.2.2</h3>
+<p>If <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k \in \mb{R}^n\)</span>, then <span class="math">\(\mb{S} = \span \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> is a subspace of <span class="math">\(\mb{R}^n\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Clearly, the set is a subset of <span class="math">\(\mb{R}^n\)</span>.<br />Clearly, <span class="math">\(\vec{0} \in \mb{S}\)</span>, since <span class="math">\(\vec{0} = 0\vec{v}_1 + \ldots + 0\vec{v}_k\)</span>.<br />Let <span class="math">\(\vec{a}, \vec{b} \in \mb{S}, w \in \mb{R}\)</span>.<br />Then <span class="math">\(\exists c_1, \ldots, c_k \in \mb{R}, \vec{a} = c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k\)</span> and <span class="math">\(\exists d_1, \ldots, d_k \in \mb{R}, \vec{b} = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k\)</span>.<br />So <span class="math">\(\vec{a} + \vec{b} = (c_1 + d_1) \vec{v}_1 + \ldots + (c_k + d_k) \vec{v}_k\)</span>, and <span class="math">\(\vec{a} + \vec{b} \in \mb{S}\)</span>.<br />So <span class="math">\(w\vec{a} = wc_1 \vec{v}_1 + \ldots + wc_k \vec{v}_k\)</span> and <span class="math">\(w\vec{a} \in \mb{S}\)</span>.<br />So <span class="math">\(\mb{S}\)</span> is a subspace of <span class="math">\(\mb{R}^n\)</span>.</p>
+</blockquote>
+<h2 id="dot-product">Dot Product</h2>
+The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</span> and <span class="math">\(\vec{b}\)</span> is defined as $  =
+
+<p>\begin{bmatrix} b_1</p>
+<p>The dot product also has the geometric interpretation <span class="math">\(\vec{a} \cdot \vec{b} = \abs{a} \abs{b} \cos \theta\)</span>, where <span class="math">\(\theta\)</span> is the angle between the two vectors.</p>
+<p>The dot product is also known as the <strong>scalar product</strong> or <strong>standard inner product</strong> of <span class="math">\(\mb{R}^n\)</span>.</p>
+<h3 id="theorem-1.3.2">Theorem 1.3.2</h3>
+<p>If <span class="math">\(\vec{x}, \vec{y}, \vec{z} \in \mb{R}^n, s, t, \in \mb{R}\)</span>, then:</p>
+<ul>
+<li><span class="math">\(\vec{x} \cdot \vec{x} \ge 0\)</span>, and <span class="math">\(\vec{x} \cdot \vec{x} = 0 \iff \vec{x} = \vec{0}\)</span>.</li>
+<li><span class="math">\(\vec{x} \cdot \vec{y} = \vec{y} \cdot \vec{x}\)</span>.</li>
+<li><span class="math">\(\vec{x} \cdot (s\vec{y} + t\vec{z}) = s (\vec{x} \cdot \vec{y}) + t (\vec{x} \cdot \vec{z})\)</span>.</li>
+</ul>
+<p>The <strong>length</strong> or <strong>norm</strong> of a vector <span class="math">\(\vec{v} = \begin{bmatrix} v_1 \\ \vdots \\ v_k \end{bmatrix}\)</span> is <span class="math">\(\magn{\vec{v}} = \sqrt{\sum_{i = 1}^k v_i^2}\)</span>. Note the similarity to scalars, where <span class="math">\(\abs{x} = \sqrt{x^2}\)</span>.</p>
+<p>A vector of length 1 is a unit vector. A unit vector is therefore one such that <span class="math">\(\sum_{i = 1}^k v_i^2 = 1\)</span>.</p>
+<p>Also, <span class="math">\(\vec{x} \cdot \vec{x} = \magn{x}^2\)</span>, which should be obvious since <span class="math">\(\theta = 0\)</span> and <span class="math">\(\cos \theta = 1\)</span>, so <span class="math">\(\vec{x} \cdot \vec{x} = \magn{x} \magn{x} = \magn{x}^2\)</span>.</p>
+<h3 id="theorem-1.3.3">Theorem 1.3.3</h3>
+<p>If <span class="math">\(\vec{x}, \vec{y} \in \mb{R}^n, c \in \vec{R}\)</span>, then:</p>
+<ul>
+<li><span class="math">\(\magn{\vec{x}} \ge 0\)</span>, and <span class="math">\(\magn{\vec{x}} = 0 \iff \vec{x} = \vec{0}\)</span></li>
+<li><span class="math">\(\magn{cx} = \abs{c}\magn{\vec{x}}\)</span></li>
+<li><span class="math">\(\abs{\vec{x} \cdot \vec{y}} \le \magn{\vec{x}}\magn{\vec{y}}\)</span> (Cauchy-Schwarz-Buniakowski Inequality)</li>
+<li><span class="math">\(\magn{\vec{x} + \vec{y}} \le \magn{\vec{x}} + \magn{\vec{y}}\)</span> (Triangle Inequality)</li>
+</ul>
+<p>Proof of third consequence:</p>
+<blockquote>
+<p>Clearly, if <span class="math">\(\vec{x} = \vec{0}\)</span> then the inequality holds. Assume <span class="math">\(\vec{x} \ne \vec{0}\)</span>.<br />Clearly, <span class="math">\(\forall t \in \mb{R}, (t\vec{x} + \vec{y}) \cdot (t\vec{x} + \vec{y}) \ge 0\)</span> (from properties of dot product), so <span class="math">\(t^2(\vec{x} \cdot \vec{x}) + 2t(\vec{x} \cdot \vec{y}) + \vec{y} \cdot \vec{y} \ge 0\)</span>. Clearly, this is a quadratic polynomial where <span class="math">\(t\)</span> is the variable. The polynomial is greater or equal to 0 if and only if it has at most 1 root.<br />So the discriminant in the quadratic formula, <span class="math">\(b^2 - 4ac\)</span>, must be less or equal to 0.<br />So <span class="math">\(4(\vec{x} \cdot \vec{y})^2 - 4(\vec{x} \cdot \vec{x})(\vec{y} \cdot \vec{y}) \le 0\)</span>.<br />So <span class="math">\((\vec{x} \cdot \vec{y})^2 \le (\vec{x} \cdot \vec{x})(\vec{y} \cdot \vec{y})\)</span> and <span class="math">\((\vec{x} \cdot \vec{y})^2 \le \magn{x}^2\magn{y}^2\)</span>.<br />So <span class="math">\(\vec{x} \cdot \vec{y} \le \magn{x}\magn{y}\)</span>.</p>
+</blockquote>
+<h3 id="angle">Angle</h3>
+<p>The <strong>angle</strong> between two vectors <span class="math">\(\vec{x}\)</span> and <span class="math">\(\vec{y}\)</span> is defined as the angle <span class="math">\(\theta\)</span> such that <span class="math">\(\vec{x} \cdot \vec{y} = \magn{x} \magn{y} \cos \theta\)</span>.</p>
+<p>In other words, <span class="math">\(\theta = \arccos\left(\frac{\vec{x} \cdot \vec{y}}{\magn{x} \magn{y}}\right)\)</span>.</p>
+<p>Two vectors are <strong>orthogonal</strong> if the angle between them is 90 degrees - if their dot product is 0.</p>
+<p>One of the reasons the standard bases are easy to work with is specifically because they are orthogonal to each other and because they are unit vectors.</p>
+<h3 id="planeshyperplanes">Planes/Hyperplanes</h3>
+<p>We can use the dot product to derive a <strong>scalar equation</strong> form for a plane, that makes use of the fact that the normal of a plane is just a vector.</p>
+<p>Let <span class="math">\(A(a_1, a_2, a_3)\)</span> be a fixed point on the plane. Let <span class="math">\(X(x_1, x_2, x_3)\)</span> be an arbitrary point on the plane.</p>
+<p>Then <span class="math">\(\vec{X} - \vec{A}\)</span> is a vector that lies on the plane.</p>
+<p>Let <span class="math">\(\vec{n}\)</span> be a vector normal to the plane. Clearly, <span class="math">\(\vec{n} \cdot (\vec{X} - \vec{A}) = 0\)</span>.</p>
+<p>So <span class="math">\(n_1 (x_1 - a_1) + n_2 (x_2 - a_2) + n_3 (x_3 - a_3) = 0 = n_1 x_1 + n_2 x_2 + n_3 x_3 - n_1 a_1 - n_2 a_2 - n_3 a_3\)</span>.</p>
+<p>So <span class="math">\(n_1 x_1 + n_2 x_2 + n_3 x_3 = n_1 a_1 + n_2 a_2 + n_3 a_3\)</span>. Since <span class="math">\(\vec{A}\)</span> is fixed, <span class="math">\(n_1 a_1 + n_2 a_2 + n_3 a_3\)</span> is constant and the equation is a function of <span class="math">\(x_1, x_2, x_3\)</span>.</p>
+<p>Since <span class="math">\(\vec{X}\)</span> is arbitrary, this holds for every point on the plane, and so is an equation of the plane.</p>
+<p>Using the above, we can find the scalar equation of any plane given the normal and a fixed point on the plane.</p>
+<p>If we extend this to hyperplanes, ;wip</p>
+<h3 id="cross-product">Cross Product</h3>
+<p>However, we will typically be given the vector equation of the plane, like <span class="math">\(\vec{x} = c_1 \vec{u} + c_2 \vec{v} + \vec{w}\)</span>.</p>
+<p>We can calculate the normal of the plane by finding two linearly independent vectors that lie on the plane, and finding a vector that is orthogonal to both of them.</p>
+<p>Clearly, <span class="math">\(\vec{u}\)</span> and <span class="math">\(\vec{v}\)</span> lie on the plane, being the solutions when <span class="math">\(c_2 = 0\)</span> or <span class="math">\(c_1 = 0\)</span>, respectively.</p>
+<p>Then for the normal <span class="math">\(\vec{n}\)</span> we know <span class="math">\(\vec{n} \cdot \vec{u} = \vec{n} \cdot \vec{v} = 0\)</span>. So <span class="math">\(n_1 u_1 + n_2 u_2 + n_3 u_3 = n_1 v_1 + n_2 v_2 + n_3 v_3 = 0\)</span>.</p>
+<p>Solving two equations for three unknowns, we find that one possible solution is <span class="math">\(\vec{n} = \begin{bmatrix} u_2 v_3 - u_3 v_2 \\ u_3 v_1 - u_1 v_3 \\ u_1 v_2 - u_2 v_1 \end{bmatrix}\)</span>.</p>
+<p>This problem is so common that we gave its solution a name, the <strong>cross product</strong>. The cross product of two vectors <span class="math">\(\vec{u}\)</span> and <span class="math">\(\vec{v}\)</span> is <span class="math">\(\vec{u} \times \vec{v} = \begin{bmatrix} u_2 v_3 - u_3 v_2 \\ u_3 v_1 - u_1 v_3 \\ u_1 v_2 - u_2 v_1 \end{bmatrix}\)</span>, and is always a vector that is orthogonal to both vectors.</p>
+<p>Note that this operation is only defined in <span class="math">\(\mb{R}^3\)</span> and <span class="math">\(\mb{R}^7\)</span>.</p>
+<h2 id="projections">Projections</h2>
+<p>Given the vectors <span class="math">\(\vec{u}, \vec{v}, \vec{w} \in \mb{R}^n, \vec{v} \ne \vec{0}, \vec{v} \cdot \vec{w} = 0\)</span>, we want to write <span class="math">\(\vec{u}\)</span> as the sum of a scalar multiple of <span class="math">\(\vec{v}\)</span> and <span class="math">\(\vec{w}\)</span>, as the vector <span class="math">\(\vec{u} = c\vec{v} + \vec{w}, c \in \mb{R}\)</span>.</p>
+<p>We first need to find out how much of <span class="math">\(\vec{u}\)</span> is in the direction of <span class="math">\(\vec{v}\)</span> - find <span class="math">\(c\)</span>. Clearly, <span class="math">\(\vec{u} \cdot \vec{v} = (c\vec{v} + \vec{w}) \cdot \vec{v} = c\magn{v}^2 + \vec{w} \cdot \vec{v} = c\magn{v}^2\)</span>.</p>
+<p>So <span class="math">\(c = \frac{\vec{u} \cdot \vec{v}}{\magn{v}^2}\)</span>.</p>
+<p>The <strong>projection</strong> of <span class="math">\(\vec{u}\)</span> onto <span class="math">\(\vec{v}\)</span> is defined as <span class="math">\(\proj_{\vec{v}} \vec{u} = c\vec{v} = \frac{\vec{u} \cdot \vec{v}}{\magn{v}^2}\vec{v}\)</span>, and is the vector along the same direction as <span class="math">\(\vec{v}\)</span> such that it has the same extent along <span class="math">\(\vec{v}\)</span> as <span class="math">\(\vec{u}\)</span>.</p>
+<p>The <strong>perpendicular</strong> of <span class="math">\(\vec{u}\)</span> onto <span class="math">\(\vec{v}\)</span> is the vector that when added to the projection, results in <span class="math">\(\vec{u}\)</span>. Therefore, the perpendicular is <span class="math">\(\prp_{\vec{v}} \vec{u} = \vec{u} - \proj_{\vec{v}} \vec{u}\)</span>.</p>
+<h3 id="planes">Planes</h3>
+<p>How do we project a vector onto a plane? We can notice that the projection of a vector onto a plane is the perpendicular of the vector projected onto the normal of the plane.</p>
+<p>Therefore, the projection of a vector <span class="math">\(\vec{v}\)</span> onto a plane with normal <span class="math">\(\vec{n}\)</span> is <span class="math">\(\prp_{\vec{n}} \vec{v}\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

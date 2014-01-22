@@ -19,6 +19,9 @@ $$
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\magn}{\left\lVert #1 \right\rVert}
 $$
 
 # 13/1/14 (I'm going to stop procrastinating this week, honest!)
@@ -147,7 +150,7 @@ In other words, $\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot
 
 ### Theorem 1.1.3
 
-Therefore, a set of vectors $\set{\vec{v}_1, \ldots, \vec{v}_n}$ is linearly independent if and only if $\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot c_n \ne 0 \implies c_1 \vec{v}_1 + \ldots + c\_n vec{v}_n = \vec{0}$.
+Therefore, a set of vectors $\set{\vec{v}_1, \ldots, \vec{v}_n}$ is linearly dependent if and only if $\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \cdot \ldots \cdot c_n \ne 0 \implies c_1 \vec{v}_1 + \ldots + c_n vec{v}_n = \vec{0}$, and otherwise linearly independent.
 
 The solution where $c_i = 0, 1 \le i \le n$ is called the trivial solution, because all the coefficients are 0. The trivial solution is always a solution to the above equation.
 
@@ -223,3 +226,163 @@ A $k$-plane in $\mb{R}^n$ takes the form of $\vec{x} = c_1 \vec{v}_1 + \ldots + 
 A hyperplane is a $k$-plane, where $k = n - 1$. It is an $n - 1$-dimensional plane.
 
 For example, $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \\ −2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 1 \\ −1 \end{bmatrix}}$ defines a hyperplane in $\mb{R}^n$, since the set is linearly independent.
+
+# 20/1/14 (OK, so it's like week 3 and I'm behind, I get it)
+
+Subspaces
+---------
+
+A **subspace** of $\mb{R}^n$ is a non-empty subset $\mb{S}$ of $\mb{R}^n$ such that it satisfies all ten properties defined in Theorem 1.1.1.
+
+But since properties 2-5 and 7-10 follow from properties 1 and 6, all we need to do to prove all ten properties is to prove properties 1 and 6 hold.
+
+### Theorem 1.2.1 (Subspace Test)
+
+Given a set $\mb{S}$, $\mb{S}$ is a subspace of $\mb{R}^n$ if and only if:
+
+* $\mb{S}$ is a subset of $\mb{R}^n$.
+* $\mb{S}$ is non-empty.
+* $\forall \vec{x}, \vec{y} \in \mb{S}, \vec{x} + \vec{y} \in \mb{S}$.
+* $\forall \vec{x} \in \mb{S}, c \in \mb{R}, c\vec{x} \in \mb{S}$
+
+To prove a set is a subspace, we need to prove all four properties.
+
+Clearly, if conditions 2 and 4 hold, $\vec{0} \in \mb{S}$. So if $\vec{0} \notin \mb{S}$, then one or both of the conditions is not met and the set is not a subspace.
+
+We can use this to check if a set is a subspace by seeing if $\vec{0}$ is in it.
+
+Prove $\mb{S} = \set{ \begin{bmatrix} x \\ y \\ z \end{bmatrix} \middle| x + y = 0, x - z = 0}$ is a subspace of $\mb{R}^3$ and write a basis for the subspace:
+
+> Clearly, $\mb{S}$ is a subset of $\mb{R}^3$.  
+> Clearly, $\vec{0} \in \mb{S}$, so the set is non-empty.  
+> Let $\vec{a}, \vec{b} \in \mb{S}$.  
+> So $a_1 + a_2 = a_1 - a_3 = 0$ and $b_1 + b_2 = b_1 - b_3 = 0$.  
+> Clearly, $(a_1 + b_1) + (a_2 + b_2) = (a_1 + b_1) - (a_3 + b_3) = 0$.  
+> So $\vec{a} + \vec{b} \in \mb{S}$ and $\mb{S}$ is closed under addition.  
+> Clearly, $c(a_1 + a_2) = c(a_1 - a_3) = c0$.  
+> So $c\vec{a} \in \mb{S}$ and $\mb{S}$ is closed under scalar multiplication.  
+> So $\mb{S}$ is a subspace of $\mb{R}^3$.  
+> Since $a_1 + a_2 = a_1 - a_3 = 0$, $a_2 = -a_1$ and $a_3 = a_1$.  
+> So the general vector is $\vec{v}(a_1) = \begin{bmatrix} a_1 \\ -a_1 \\ a_1 \end{bmatrix} = a_1 \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix}$.  
+> So a basis for $\mb{S}$ is $\set{\begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix}}$.  
+
+### Theorem 1.2.2
+
+If $\vec{v}_1, \ldots, \vec{v}_k \in \mb{R}^n$, then $\mb{S} = \span \set{\vec{v}_1, \ldots, \vec{v}_k}$ is a subspace of $\mb{R}^n$.
+
+Proof:
+
+> Clearly, the set is a subset of $\mb{R}^n$.  
+> Clearly, $\vec{0} \in \mb{S}$, since $\vec{0} = 0\vec{v}_1 + \ldots + 0\vec{v}_k$.  
+> Let $\vec{a}, \vec{b} \in \mb{S}, w \in \mb{R}$.  
+> Then $\exists c_1, \ldots, c_k \in \mb{R}, \vec{a} = c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k$ and $\exists d_1, \ldots, d_k \in \mb{R}, \vec{b} = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k$.  
+> So $\vec{a} + \vec{b} = (c_1 + d_1) \vec{v}_1 + \ldots + (c_k + d_k) \vec{v}_k$, and $\vec{a} + \vec{b} \in \mb{S}$.  
+> So $w\vec{a} = wc_1 \vec{v}_1 + \ldots + wc_k \vec{v}_k$ and $w\vec{a} \in \mb{S}$.  
+> So $\mb{S}$ is a subspace of $\mb{R}^n$.  
+
+Dot Product
+-----------
+
+The **dot product** of two vectors $\vec{a}$ and $\vec{b}$ is defined as $\vec{a} \cdot \vec{b} = \begin{bmatrix} a_1 \\ \vdots \\ a_k \end{bmatrix} \cdot \begin{bmatrix} b_1
+
+The dot product also has the geometric interpretation $\vec{a} \cdot \vec{b} = \abs{a} \abs{b} \cos \theta$, where $\theta$ is the angle between the two vectors.
+
+The dot product is also known as the **scalar product** or **standard inner product** of $\mb{R}^n$.
+
+### Theorem 1.3.2
+
+If $\vec{x}, \vec{y}, \vec{z} \in \mb{R}^n, s, t, \in \mb{R}$, then:
+
+* $\vec{x} \cdot \vec{x} \ge 0$, and $\vec{x} \cdot \vec{x} = 0 \iff \vec{x} = \vec{0}$.
+* $\vec{x} \cdot \vec{y} = \vec{y} \cdot \vec{x}$.
+* $\vec{x} \cdot (s\vec{y} + t\vec{z}) = s (\vec{x} \cdot \vec{y}) + t (\vec{x} \cdot \vec{z})$.
+
+The **length** or **norm** of a vector $\vec{v} = \begin{bmatrix} v_1 \\ \vdots \\ v_k \end{bmatrix}$ is $\magn{\vec{v}} = \sqrt{\sum_{i = 1}^k v_i^2}$. Note the similarity to scalars, where $\abs{x} = \sqrt{x^2}$.
+
+A vector of length 1 is a unit vector. A unit vector is therefore one such that $\sum_{i = 1}^k v_i^2 = 1$.
+
+Also, $\vec{x} \cdot \vec{x} = \magn{x}^2$, which should be obvious since $\theta = 0$ and $\cos \theta = 1$, so $\vec{x} \cdot \vec{x} = \magn{x} \magn{x} = \magn{x}^2$.
+
+### Theorem 1.3.3
+
+If $\vec{x}, \vec{y} \in \mb{R}^n, c \in \vec{R}$, then:
+
+* $\magn{\vec{x}} \ge 0$, and $\magn{\vec{x}} = 0 \iff \vec{x} = \vec{0}$
+* $\magn{cx} = \abs{c}\magn{\vec{x}}$
+* $\abs{\vec{x} \cdot \vec{y}} \le \magn{\vec{x}}\magn{\vec{y}}$ (Cauchy-Schwarz-Buniakowski Inequality)
+* $\magn{\vec{x} + \vec{y}} \le \magn{\vec{x}} + \magn{\vec{y}}$ (Triangle Inequality)
+
+Proof of third consequence:
+
+> Clearly, if $\vec{x} = \vec{0}$ then the inequality holds. Assume $\vec{x} \ne \vec{0}$.  
+> Clearly, $\forall t \in \mb{R}, (t\vec{x} + \vec{y}) \cdot (t\vec{x} + \vec{y}) \ge 0$ (from properties of dot product), so $t^2(\vec{x} \cdot \vec{x}) + 2t(\vec{x} \cdot \vec{y}) + \vec{y} \cdot \vec{y} \ge 0$.
+> Clearly, this is a quadratic polynomial where $t$ is the variable. The polynomial is greater or equal to 0 if and only if it has at most 1 root.  
+> So the discriminant in the quadratic formula, $b^2 - 4ac$, must be less or equal to 0.  
+> So $4(\vec{x} \cdot \vec{y})^2 - 4(\vec{x} \cdot \vec{x})(\vec{y} \cdot \vec{y}) \le 0$.  
+> So $(\vec{x} \cdot \vec{y})^2 \le (\vec{x} \cdot \vec{x})(\vec{y} \cdot \vec{y})$ and $(\vec{x} \cdot \vec{y})^2 \le \magn{x}^2\magn{y}^2$.  
+> So $\vec{x} \cdot \vec{y} \le \magn{x}\magn{y}$.  
+
+### Angle
+
+The **angle** between two vectors $\vec{x}$ and $\vec{y}$ is defined as the angle $\theta$ such that $\vec{x} \cdot \vec{y} = \magn{x} \magn{y} \cos \theta$.
+
+In other words, $\theta = \arccos\left(\frac{\vec{x} \cdot \vec{y}}{\magn{x} \magn{y}}\right)$.
+
+Two vectors are **orthogonal** if the angle between them is 90 degrees - if their dot product is 0.
+
+One of the reasons the standard bases are easy to work with is specifically because they are orthogonal to each other and because they are unit vectors.
+
+### Planes/Hyperplanes
+
+We can use the dot product to derive a **scalar equation** form for a plane, that makes use of the fact that the normal of a plane is just a vector.
+
+Let $A(a_1, a_2, a_3)$ be a fixed point on the plane. Let $X(x_1, x_2, x_3)$ be an arbitrary point on the plane.
+
+Then $\vec{X} - \vec{A}$ is a vector that lies on the plane.
+
+Let $\vec{n}$ be a vector normal to the plane. Clearly, $\vec{n} \cdot (\vec{X} - \vec{A}) = 0$.
+
+So $n_1 (x_1 - a_1) + n_2 (x_2 - a_2) + n_3 (x_3 - a_3) = 0 = n_1 x_1 + n_2 x_2 + n_3 x_3 - n_1 a_1 - n_2 a_2 - n_3 a_3$.
+
+So $n_1 x_1 + n_2 x_2 + n_3 x_3 = n_1 a_1 + n_2 a_2 + n_3 a_3$. Since $\vec{A}$ is fixed, $n_1 a_1 + n_2 a_2 + n_3 a_3$ is constant and the equation is a function of $x_1, x_2, x_3$.
+
+Since $\vec{X}$ is arbitrary, this holds for every point on the plane, and so is an equation of the plane.
+
+Using the above, we can find the scalar equation of any plane given the normal and a fixed point on the plane.
+
+If we extend this to hyperplanes, ;wip
+
+### Cross Product
+
+However, we will typically be given the vector equation of the plane, like $\vec{x} = c_1 \vec{u} + c_2 \vec{v} + \vec{w}$.
+
+We can calculate the normal of the plane by finding two linearly independent vectors that lie on the plane, and finding a vector that is orthogonal to both of them.
+
+Clearly, $\vec{u}$ and $\vec{v}$ lie on the plane, being the solutions when $c_2 = 0$ or $c_1 = 0$, respectively.
+
+Then for the normal $\vec{n}$ we know $\vec{n} \cdot \vec{u} = \vec{n} \cdot \vec{v} = 0$. So $n_1 u_1 + n_2 u_2 + n_3 u_3 = n_1 v_1 + n_2 v_2 + n_3 v_3 = 0$.
+
+Solving two equations for three unknowns, we find that one possible solution is $\vec{n} = \begin{bmatrix} u_2 v_3 - u_3 v_2 \\ u_3 v_1 - u_1 v_3 \\ u_1 v_2 - u_2 v_1 \end{bmatrix}$.
+
+This problem is so common that we gave its solution a name, the **cross product**. The cross product of two vectors $\vec{u}$ and $\vec{v}$ is $\vec{u} \times \vec{v} = \begin{bmatrix} u_2 v_3 - u_3 v_2 \\ u_3 v_1 - u_1 v_3 \\ u_1 v_2 - u_2 v_1 \end{bmatrix}$, and is always a vector that is orthogonal to both vectors.
+
+Note that this operation is only defined in $\mb{R}^3$ and $\mb{R}^7$.
+
+Projections
+-----------
+
+Given the vectors $\vec{u}, \vec{v}, \vec{w} \in \mb{R}^n, \vec{v} \ne \vec{0}, \vec{v} \cdot \vec{w} = 0$, we want to write $\vec{u}$ as the sum of a scalar multiple of $\vec{v}$ and $\vec{w}$, as the vector $\vec{u} = c\vec{v} + \vec{w}, c \in \mb{R}$.
+
+We first need to find out how much of $\vec{u}$ is in the direction of $\vec{v}$ - find $c$. Clearly, $\vec{u} \cdot \vec{v} = (c\vec{v} + \vec{w}) \cdot \vec{v} = c\magn{v}^2 + \vec{w} \cdot \vec{v} = c\magn{v}^2$.
+
+So $c = \frac{\vec{u} \cdot \vec{v}}{\magn{v}^2}$.
+
+The **projection** of $\vec{u}$ onto $\vec{v}$ is defined as $\proj_{\vec{v}} \vec{u} = c\vec{v} = \frac{\vec{u} \cdot \vec{v}}{\magn{v}^2}\vec{v}$, and is the vector along the same direction as $\vec{v}$ such that it has the same extent along $\vec{v}$ as $\vec{u}$.
+
+The **perpendicular** of $\vec{u}$ onto $\vec{v}$ is the vector that when added to the projection, results in $\vec{u}$. Therefore, the perpendicular is $\prp_{\vec{v}} \vec{u} = \vec{u} - \proj_{\vec{v}} \vec{u}$.
+
+### Planes
+
+How do we project a vector onto a plane? We can notice that the projection of a vector onto a plane is the perpendicular of the vector projected onto the normal of the plane.
+
+Therefore, the projection of a vector $\vec{v}$ onto a plane with normal $\vec{n}$ is $\prp_{\vec{n}} \vec{v}$.
