@@ -63,6 +63,7 @@
   }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
 </head>
 <body>
 <a class="button" href="..">&#8666; Return to University Notes index</a>
@@ -445,6 +446,7 @@ int main(void) {
     // program starts here
     // this is the only typed function where we can omit the return value and it will assume 0 (success)
 }</code></pre>
+<p>Modules don't need a <code>main</code> function, because they are not meant to have entry points.</p>
 <h3 id="library">Library</h3>
 <p>C has no built-in functions. However, it has a lot of modules that are almost always available.</p>
 <p>First C program:</p>
@@ -590,7 +592,84 @@ static int g(int e) { // MODULE SCOPE - `static` keyword makes declaration in th
 <p>Note that <code>static</code> can be used to make a variable or function visible only in</p>
 <p>By default, all functions and variables exist in the program scope, and other modules (C source files) can access them.</p>
 <p>The scope rules in C are roughly the same as those in Racket - the innermost binding occurence shadows all the outer ones.</p>
-<p>;wip: preprocessor directives must start at the beginning of the line, with no preceding whitespace ;wip: debug mode vs release mode and release mode will disable assertions for performance ;wip: if we need bools in the interface, then put the include in the interface file</p>
+<h3 id="interfaces-1">Interfaces</h3>
+<p>Modules, as stated earlier, have an interface and an implementation. In C, we can put the interface in one file, and the implementation in another.</p>
+<p>The interface goes in a <strong>header file</strong> (<code>x.h</code>) and the implementation in a <strong>source file</strong> (<code>x.c</code>). They should have the same name for RunC to know that they are related.</p>
+<p>The source file should always <code>#include</code> the header file, because the header file might define constants or structures or similar that we want to use in the implementation, and because it allows us to catch differences between the interface and implementation.</p>
+<p>The <code>#include</code> statement is a <strong>preprocessor directive</strong>. The preprocessor is the first stage of compilation, an informal part of the C standard, and works on the source code as text. Preprocessor directives must appear on the first column of a line, without any preceding whitespace.</p>
+<p>The preprocessor does not know anything about C and works purely on text. In fact, it can be used with other programming languages. Preprocessor directives are special instructions that modify the source code text in some way.</p>
+<p>For example, <code>#define X Y</code> performs a string replacement, replacing all instances of <code>X</code> with <code>Y</code>.</p>
+<p>When we <code>#include</code> a file, we basically paste its contents into the current file at that location.</p>
+<p>Now in client code, when we need a module, we just need to <code>#include</code> its header file to include its interface. Note that when we include the header file, we no longer need to have the forward declarations at the top of the client code. This is, in practice, similar to what Racket's <code>require</code> does, but they are conceptually very different - here, we are copy/pasting the interface rather than running a file.</p>
+<h3 id="library-1">Library</h3>
+<p>C has basically no useful built-in functionality - a lot of functionality is provided through the library. The standard modules can be included by using <code>#include &lt;NAME&gt;</code>, where <code>NAME</code> is the filename of the module header. Some examples would be <code>#include &lt;stdio.h&gt;</code> (standard I/O) and <code>#include &lt;math.h&gt;</code> (math functions).</p>
+<p>The <code>&lt;</code> and <code>&gt;</code> simply changes the place the preprocessor searches to find the specified file.</p>
+<p>The <code>stdbool.h</code> header provides the Boolean type <code>bool</code> and the constants <code>true</code> and <code>false</code> (for example, <code>const bool x = true;</code>). These are still just the integers 0 and 1, but look cleaner and are more clear.</p>
+<p>If we need to use Boolean types in the interface, then we can simply put the <code>#include &lt;stdbool.h&gt;</code> into the header file.</p>
+<p>C has no symbols, but we can simulate them by defining constants with unique integer values, and using those constants as we would use symbols.</p>
+<h3 id="testing-1">Testing</h3>
+<p>The <code>assert.h</code> module provides assertion functionality, similar to <code>check-expect</code> in Racket. For example:</p>
+<pre><code>#include &lt;assert.h&gt;
+
+int main() {
+    assert(1 == 1);
+    return 0;
+}</code></pre>
+<p>The module provides a function <code>assert(x)</code> which terminates the program if given a false value, and does nothing otherwise.</p>
+<p>The advantage of using this module is that we can compile our programs in debug and release modes. In debug mode, the program will catch any assertion errors and report them for easy fixing. In release mode, the function can be made to do nothing at all, which improves performance.</p>
+<p>We do testing with a separate testing module. This module does not really need a header, and only really needs a main function and to include the <code>assert</code> library and the module we need to test. In the <code>main</code> function, we have our assertions:</p>
+<pre><code>// test-thing.c: testing module for thing.h
+#include &lt;assert.h&gt;
+#include &quot;thing.h&quot;
+int main(void) {
+    assert(do_something(2) == 5);
+    assert(do_it(3) == 1);
+}</code></pre>
+<h3 id="structures">Structures</h3>
+<pre><code>struct posn {
+    int x;
+    int y;
+};</code></pre>
+<p>This is a structure declaration. Unlike Racket, it does not define any functions to help operate on these structures. The semicolon at the end is required.</p>
+<p>We can define a new instance of this structure by using it as a type: <code>const struct posn p = {2, 3};</code>. Note that the type is <code>struct posn</code>, as one atomic unit.</p>
+<p>The initializer can also be written as <code>{.y = 3, .x = 2}</code>. Using this syntax it is not necessary to remember the order of the fields.</p>
+<p>The initializer syntax is valid only in these forms. The curly braces cannot be used in expressions or other places.</p>
+<p>All fields that are not initialized are automatically set to 0.</p>
+<p>We can access elements of this structure using the <code>.</code> operator: <code>p.x</code> and <code>p.y</code> access one of each field in the structure.</p>
+<p>We cannot compare structures using <code>==</code>, or print them out with <code>printf</code>. Structures must be compared or printed field-by-field, and it may be useful to write helper functions to do this.</p>
+<p>Structure declarations are in the module scope by default, which makes them opaque to client code, but if we put it in the interface file, they are transparent.</p>
+<h1 id="section-5">23/1/14</h1>
+<h2 id="c-memory-model">C Memory Model</h2>
+<p>The most common number systems in use today are binary, decimal, and hexadecimal.</p>
+<p>Hexadecimal has the special property of each digit representing 4 digits of binary, simply by replacing the digit with the binary digits. This is because <span class="math">\(2^4 = 16\)</span> and there are 16 digits.</p>
+<p>In C, hex numbers are written as <code>0x1234</code>. Without the <code>0x</code> prefix, the number is assumed to be decimal.</p>
+<p>Computers use bits internally, which are grouped into groups of 8 called bytes. Because they have 8 digits, they have 256 possible states.</p>
+<p>The size of a kilobyte can be 1000 or 1024 bytes, depending on the context. In scientific literature, the kilobyte (KB) is 1000 bytes, and a kibibyte (KiB) is 1024. Likewise with megabytes, gigabytes, etc. These two can differ up to 7% for gibibytes vs. gigabytes.</p>
+<p>Most computer archtectures have primary memory (RAM) and secondary memory (HDD, SSD, flash drives, optical disks, etc.). When we say memory, we usually refer to primary memory.</p>
+<p>Primary memory is very fast, smaller, higher cost, and volatile. Contrast this with secondary storage is slower, larger, cheaper, and persistent.</p>
+<p>Programs can only really run in primary memory - programs need to be copied into primary memory before executing. In this course, we will only need to think in terms of primary memory.</p>
+<p>The smallist unit of memory we can access is a byte. The location of the byte in memory is the <strong>address</strong> of the byte. For example, with 1 MB of memory, the address of the first byte is 0 and the last is <span class="math">\(2^20 - 1\)</span>. We usually represent addresses in hex.</p>
+<p>In this course, we will now need to be aware of the memory our program is using. In CS135 we had stepping rules. Now we introduce the C memory model.</p>
+<p>When C gets to a variable definition, it reserves the storage for that variable, keeps track of the address of that storage location to refer to it later, and stores the initial value of the variable in that location. Then, when we reference a variable, we retrieve or set it from the address we determined earlier. Note that variable declarations <strong>do not do this</strong>.</p>
+<p>In the CS135 model, variables are basically aliases for values. Now, we consider them as names for locations where a value is stored. When a variable appears in an expression, C obtains the contents of that location.</p>
+<p>We can determine how much memory a variable uses by using the <code>sizeof(X)</code> operator. This looks like a function but is actually an operator. Usually <code>sizeof(int)</code> is 4. <code>sizeof</code> also works on variables and literals. We can assume integers are 4 bytes in this course.</p>
+<p>If we define an int, C finds 4 consecutive bytes of memory to store it, and then keeps track of the first address. Then, it updates those 4 bytes to the initial value.</p>
+<p>Note that because integers only has 4 bytes, we can only represent the integers from <span class="math">\(-2^{31}\)</span> to <span class="math">\(2^{31} - 1\)</span>.</p>
+<p>If we <code>#include &lt;limits.h&gt;</code>, <code>INT_MIN</code> and <code>INT_MAX</code> are defined to these limiting values.</p>
+<p>If we use <code>unsigned int</code>, we can represent integers from 0 to <span class="math">\(2^{32} - 1\)</span>.</p>
+<p>We should always try to work within these limits. If we work outside of these ranges, an <strong>overflow</strong> occurs. For example, if we add 1 to <span class="math">\(2^{31} - 1\)</span>, we wrap around to <span class="math">\(-2^{31}\)</span>, like in mmodular arithmetic.</p>
+<p>In C, we can also have variables that use only 1 byte. The <code>char</code> type can store any integer from -128 to 127. They are not very useful for calculations, but we often use them to store characters, like ASCII character codes.</p>
+<p>In ASCII, upper case chars start with &quot;A&quot; at 65, lower case starts with &quot;a&quot; at 97, and a space is 32. 0 to 31 are the control sequences. For example, 7 is a bell and 10 is a linefeed (newline or <code>\\n</code>).</p>
+<p>On Windows, the end of line character is a line feed and a carriage return. On Linux the end of line character is just a line feed. This can cause confusion when working on files made on different operating systems.</p>
+<p>Char types are internally just numbers:</p>
+<pre><code>const char a = &#39;a&#39;; // single quotes mean char types
+const char other_a = 97; // this is the same thing as the above
+
+printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints the ASCII character - this prints &quot;97 a&quot;</code></pre>
+<p>It is important to note that single quotes (<code>'x'</code>) denote characters and double quotes (<code>&quot;x&quot;</code>) denote strings.</p>
+<pre><code>char to_lowercase(char c) {
+    return (c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39;) ? c - &#39;A&#39; + &#39;a&#39; : c;
+}</code></pre>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

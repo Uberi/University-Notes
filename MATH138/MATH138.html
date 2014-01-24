@@ -89,7 +89,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 \newcommand{\spn}{\operatorname{Span}}
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
-\newcommand{\magn}{\left\lVert #1 \right\rVert}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \]</span></p>
 <h1 id="section">6/1/14</h1>
 <p>Assignments are due every Friday at 3:30pm. They are posted on LEARN.</p>
@@ -230,12 +230,12 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 </ul>
 <p>Consider <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x\)</span>:</p>
 <blockquote>
-<p>We can draw a triangle with hypotenuse <span class="math">\(\sqrt{x^2 + 4}\)</span>, opposite side <span class="math">\(x\)</span>, and adjacent side <span class="math">\(2\)</span> representing this value.<br />Let <span class="math">\(\theta\)</span> represent the angle between the . By the Pythagorean theorem, ;wip: trangle solve for x Let <span class="math">\(x = 2 \tan \theta\)</span>. Then <span class="math">\(\dee x = 2 \sec^2 \theta \dee \theta\)</span>. ;wip: how on earth did we decide on this Clearly, <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = \int \frac{1}{4 \tan^2 \theta \sqrt{4 \tan^2 \theta + 4}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta \sqrt{4 (\tan^2 \theta + 1)}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta 2 \sec \theta}} 2 \sec^2 \theta \dee \theta = \frac{1}{4} \int \frac{\sec \theta}{\tan^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta\)</span>.<br />Let <span class="math">\(u = \sin \theta\)</span>. Then <span class="math">\(\dee x = \frac{1}{\cos \theta} \dee \theta\)</span>.<br />So <span class="math">\(\frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c\)</span>.<br />Since <span class="math">\(x = 2 \tan \theta\)</span>, <span class="math">\(\theta = \arctan \frac{x}{2}\)</span>.<br />;wip: rewrite in terms of x using the triangle again So <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = -\frac{1}{4} \frac{\sqrt{4 + x^2}}{x} + c\)</span>.</p>
+<p>We can draw a triangle with hypotenuse <span class="math">\(\sqrt{x^2 + 4}\)</span>, opposite side <span class="math">\(x\)</span>, and adjacent side <span class="math">\(2\)</span> representing this value.<br />Let <span class="math">\(\theta\)</span> represent the angle between the adjacent side and the hypotenuse. By the Pythagorean theorem. Then <span class="math">\(x = 2 \tan \theta\)</span>. Then <span class="math">\(\dee x = 2 \sec^2 \theta \dee \theta\)</span>.<br />Clearly, <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = \int \frac{1}{4 \tan^2 \theta \sqrt{4 \tan^2 \theta + 4}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta \sqrt{4 (\tan^2 \theta + 1)}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta 2 \sec \theta}} 2 \sec^2 \theta \dee \theta = \frac{1}{4} \int \frac{\sec \theta}{\tan^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta\)</span>.<br />Let <span class="math">\(u = \sin \theta\)</span>. Then <span class="math">\(\dee x = \frac{1}{\cos \theta} \dee \theta\)</span>.<br />So <span class="math">\(\frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c\)</span>.<br />Since <span class="math">\(x = 2 \tan \theta\)</span>, <span class="math">\(\theta = \arctan \frac{x}{2}\)</span>.<br />;wip: rewrite in terms of x using the triangle again So <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = -\frac{1}{4} \frac{\sqrt{4 + x^2}}{x} + c\)</span>.</p>
 </blockquote>
 <p>This works because <span class="math">\(\cos \theta\)</span> is always positive or 0 in the domain we are considering.</p>
 <p>;wip: improve this day's notes so they actually make sense</p>
 <h1 id="section-4">15/1/14</h1>
-<p>;wip: write about solving u = x by differentiating both sides of u = x</p>
+<p>We do substitution by choosing a <span class="math">\(u = f(x)\)</span>, then doing <span class="math">\(\frac{\dee u}{\dee x} = f&#39;(x)\)</span>, so <span class="math">\(\dee u = f&#39;(x) \dee x\)</span>, so <span class="math">\(\dee x = \frac{1}{f&#39;(x)} \dee x\)</span>.</p>
 <p>Evaluate <span class="math">\(\int \frac{x}{\sqrt{3 - 2x - x^2}}\)</span>:</p>
 <pre><code>   /|
   / |
@@ -330,6 +330,26 @@ z</code></pre>
 <blockquote>
 <p>The area of each slice at each extent along the x-axis is the area of a circle with the radius <span class="math">\(f(x)\)</span>.<br />The area function is <span class="math">\(A(x) = \pi f(x)^2\)</span>.<br />So the volume is <span class="math">\(\int_a^b A(x) \dee x = \pi \int_a^b f(x)^2 \dee x\)</span>.</p>
 </blockquote>
+<h1 id="section-7">22/1/14</h1>
+<p>;wip: figure out how to find the length of a line</p>
+<p>The rotation method works whenever we can find the area function for a given slice along a certain axis.</p>
+<p>Here, <span class="math">\(\delta V = A(x) \delta x\)</span>, and then we add up all these tiny volumes to get the total volume.</p>
+<p>This method is called the <strong>method of disks</strong>, because we are integrating the volume of a lot of small disks along the axis of rotation.</p>
+<p>There is another way to approximate the area and have it converge into an exact value. We can estimate the volume of solids of rotation by integrating the volume of a lot of nested cylinders perpendicular to the axis of rotation - this is the <strong>method of shells</strong>.</p>
+<p>Consider a hollow cylinder of thickness <span class="math">\(\dee x\)</span> with inner radius <span class="math">\(x\)</span> and height <span class="math">\(h(x)\)</span>. If we cut it and unroll it, then it becomes very close to a cuboid of dimensions <span class="math">\(2\pi x\)</span> by <span class="math">\(h(x)\)</span> by <span class="math">\(\dee x\)</span>. In other words, we assume the inner circumference is almost the same as the outer circumference, since <span class="math">\(\dee x\)</span> is so small.</p>
+<p>So the enclosed volume of the cylinder is <span class="math">\(2\pi x h(x) \dee x\)</span>.</p>
+<p>How do we use these shells to find the volume of a solid? If we look at the cross section of our shape, we can approximate the area of this cross section using rectangles that have a fixed width <span class="math">\(\dee x\)</span> perpendicular to the axis of rotation, and length <span class="math">\(h(x)\)</span> along the axis of rotation.</p>
+<p>Then the volume of the solid is the sum of the volume of all the nested cylinders: <span class="math">\(\int_a^b 2 \pi x h(x) \dee x\)</span>.</p>
+<p>Consider a cone extending along the x-axis represented by the equation <span class="math">\(y = 1 - x\)</span> from 0 to 1 rotated about the x-axis:</p>
+<blockquote>
+<p>We want the height of the cylinder at each point along the y-axis, an axis perpendicular to the axis of rotation.<br />The height is <span class="math">\(x = 1 - y\)</span>. So the volume of the shell at any extent along the radius is <span class="math">\(2 \pi y(1 - y) \dee x\)</span>.<br />So the volume is <span class="math">\(\int_0^1 2 \pi y(1 - y) \dee y\)</span>. Note that we only integrate from the axis of rotation to the radius, not the diameter, because the cylinders go around over to the other side.<br />So the volume is <span class="math">\(\frac{\pi}{3}\)</span>.</p>
+</blockquote>
+<p>Finding the height of the shell is not always the same as finding the inverse. Consider the bowl-like shape formed by rotating <span class="math">\(y = \sqrt{x}\)</span> from 0 to 0 about the y-axis:</p>
+<blockquote>
+<p>We want the height of the bowl at each point along the x-axis, an axis perpendicular to the axis of rotation.<br />The height is <span class="math">\(y = 1 - x^2\)</span>, since the height of each cylinder is decreasing as we move outwards.<br />So the volume is <span class="math">\(\int_0^1 2 \pi x(1 - x^2) \dee x = \frac{\pi}{2}\)</span>.</p>
+</blockquote>
+<p>Note that this is the same as if we used <span class="math">\(x = y^2\)</span> (the inverse of the function). There are two possibilities for the cylinder height: either the inverse of the function, if the shape gets thinner as we move along the axis of rotation, or the maximum height minus the inverse, if the shape gets thicker as we move along the axis of rotation. Here, since the <span class="math">\(\sqrt{x}\)</span> shape gets thicker, we used <span class="math">\(1 - x^2\)</span>.</p>
+<p>The method of shells works best when we know the height from the axis perpendicular to the axis of rotation, and the method of disks works when we can find the area of each slice along the axis of rotation.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

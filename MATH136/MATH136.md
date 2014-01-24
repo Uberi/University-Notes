@@ -21,7 +21,7 @@ $$
 \newcommand{\spn}{\operatorname{Span}}
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
-\newcommand{\magn}{\left\lVert #1 \right\rVert}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 $$
 
 # 13/1/14 (I'm going to stop procrastinating this week, honest!)
@@ -386,3 +386,4 @@ The **perpendicular** of $\vec{u}$ onto $\vec{v}$ is the vector that when added 
 How do we project a vector onto a plane? We can notice that the projection of a vector onto a plane is the perpendicular of the vector projected onto the normal of the plane.
 
 Therefore, the projection of a vector $\vec{v}$ onto a plane with normal $\vec{n}$ is $\prp_{\vec{n}} \vec{v}$.
+

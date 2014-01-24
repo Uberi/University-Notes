@@ -24,7 +24,7 @@ $$
 \newcommand{\spn}{\operatorname{Span}}
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
-\newcommand{\magn}{\left\lVert #1 \right\rVert}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 $$
 
 # 6/1/14
@@ -261,8 +261,8 @@ Derivatives:
 Consider $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x$:
 
 > We can draw a triangle with hypotenuse $\sqrt{x^2 + 4}$, opposite side $x$, and adjacent side $2$ representing this value.  
-> Let $\theta$ represent the angle between the . By the Pythagorean theorem, ;wip: trangle solve for x
-> Let $x = 2 \tan \theta$. Then $\dee x = 2 \sec^2 \theta \dee \theta$.  ;wip: how on earth did we decide on this
+> Let $\theta$ represent the angle between the adjacent side and the hypotenuse. By the Pythagorean theorem.
+> Then $x = 2 \tan \theta$. Then $\dee x = 2 \sec^2 \theta \dee \theta$.  
 > Clearly, $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x
 = \int \frac{1}{4 \tan^2 \theta \sqrt{4 \tan^2 \theta + 4}} 2 \sec^2 \theta \dee \theta
 = \int \frac{1}{4 \tan^2 \theta \sqrt{4 (\tan^2 \theta + 1)}} 2 \sec^2 \theta \dee \theta
@@ -281,7 +281,7 @@ This works because $\cos \theta$ is always positive or 0 in the domain we are co
 
 # 15/1/14
 
-;wip: write about solving \dee u = \dee x by differentiating both sides of u = x
+We do substitution by choosing a $u = f(x)$, then doing $\frac{\dee u}{\dee x} = f'(x)$, so $\dee u = f'(x) \dee x$, so $\dee x = \frac{1}{f'(x)} \dee x$.
 
 Evaluate $\int \frac{x}{\sqrt{3 - 2x - x^2}}$:
 
@@ -446,3 +446,40 @@ Find the volume of the solid represented by rotating $f(x)$ about the x-axis:
 > The area of each slice at each extent along the x-axis is the area of a circle with the radius $f(x)$.  
 > The area function is $A(x) = \pi f(x)^2$.  
 > So the volume is $\int_a^b A(x) \dee x = \pi \int_a^b f(x)^2 \dee x$.  
+
+# 22/1/14
+
+;wip: figure out how to find the length of a line
+
+The rotation method works whenever we can find the area function for a given slice along a certain axis.
+
+Here, $\delta V = A(x) \delta x$, and then we add up all these tiny volumes to get the total volume.
+
+This method is called the **method of disks**, because we are integrating the volume of a lot of small disks along the axis of rotation.
+
+There is another way to approximate the area and have it converge into an exact value. We can estimate the volume of solids of rotation by integrating the volume of a lot of nested cylinders perpendicular to the axis of rotation - this is the **method of shells**.
+
+Consider a hollow cylinder of thickness $\dee x$ with inner radius $x$ and height $h(x)$. If we cut it and unroll it, then it becomes very close to a cuboid of dimensions $2\pi x$ by $h(x)$ by $\dee x$. In other words, we assume the inner circumference is almost the same as the outer circumference, since $\dee x$ is so small.
+
+So the enclosed volume of the cylinder is $2\pi x h(x) \dee x$.
+
+How do we use these shells to find the volume of a solid? If we look at the cross section of our shape, we can approximate the area of this cross section using rectangles that have a fixed width $\dee x$ perpendicular to the axis of rotation, and length $h(x)$ along the axis of rotation.
+
+Then the volume of the solid is the sum of the volume of all the nested cylinders: $\int_a^b 2 \pi x h(x) \dee x$.
+
+Consider a cone extending along the x-axis represented by the equation $y = 1 - x$ from 0 to 1 rotated about the x-axis:
+
+> We want the height of the cylinder at each point along the y-axis, an axis perpendicular to the axis of rotation.  
+> The height is $x = 1 - y$. So the volume of the shell at any extent along the radius is $2 \pi y(1 - y) \dee x$.  
+> So the volume is $\int_0^1 2 \pi y(1 - y) \dee y$. Note that we only integrate from the axis of rotation to the radius, not the diameter, because the cylinders go around over to the other side.  
+> So the volume is $\frac{\pi}{3}$.  
+
+Finding the height of the shell is not always the same as finding the inverse. Consider the bowl-like shape formed by rotating $y = \sqrt{x}$ from 0 to 0 about the y-axis:
+
+> We want the height of the bowl at each point along the x-axis, an axis perpendicular to the axis of rotation.  
+> The height is $y = 1 - x^2$, since the height of each cylinder is decreasing as we move outwards.  
+> So the volume is $\int_0^1 2 \pi x(1 - x^2) \dee x = \frac{\pi}{2}$.  
+
+Note that this is the same as if we used $x = y^2$ (the inverse of the function). There are two possibilities for the cylinder height: either the inverse of the function, if the shape gets thinner as we move along the axis of rotation, or the maximum height minus the inverse, if the shape gets thicker as we move along the axis of rotation. Here, since the $\sqrt{x}$ shape gets thicker, we used $1 - x^2$.
+
+The method of shells works best when we know the height from the axis perpendicular to the axis of rotation, and the method of disks works when we can find the area of each slice along the axis of rotation.
