@@ -29,7 +29,7 @@ People with laptops should **sit at the back**. I should probably bring my glass
 
 Lecture slides, announcements, and quizzes are available on LEARN.
 
-General goal of course is to improve reasoning skills - differentiating between good/bad reasoning (evaluative), and communicate reasoning/evalutations of reasoning to others (coomunicative).
+General goal of course is to improve reasoning skills - differentiating between good/bad reasoning (evaluative), and communicate reasoning/evalutations of reasoning to others (communicative).
 
 Topics:
 
@@ -363,13 +363,27 @@ This is a valid but unsound argument. This is because the truth of the premises 
 
 An atomic sentence may be something like "It is raining" or "The sky is blue".
 
-A complex sentence might be "It is raining, but it is warm". This is a **conjunctive** sentence - one made up of sub-sentences known as **conjuncts**, often joined by "and" or "but". The conjunctive statement works like a logical AND, with the form "P and Q".
+### Conjuctive
 
-Another might be "It is raining, or it is warm" (inclusive or). This is a **disjunctive** sentence - one made up of  sub-sentences known as **disjuncts**, often joined by "or". The disjunctive statement works like a logical OR, with the form "P or Q".
+A complex sentence might be "It is raining, but it is warm".
+
+This is a **conjunctive** sentence - one made up of sub-sentences known as **conjuncts**, often appearing in the form of "P and/but/however/although/moreover Q".
+
+The conjunctive statement works like a logical AND.
+
+### Disjunctive
+
+A complex sentence might be "It is raining, or it is warm" (inclusive or).
+
+This is a **disjunctive** sentence - one made up of  sub-sentences known as **disjuncts**, often appearing in the form of "P or/unless Q"
+
+The disjunctive statement works like a logical OR.
 
 Sometimes, English implicitly specifies that disjunction is restricted: "You will pass the exam or fail it" implies that you cannot do both. Standard disjunction is an **inclusive or**, but the special restricted disjunction is an **exclusive or**. The restricted disjunctive statement is of the form "P or Q (but not both)", or "either P or Q".
 
 If the type of disjunction is not specified, it is open for interpretation, but should be clarified.
+
+### Conditional
 
 A complex sentence like "if it is warm, then it is raining" is a **conditional sentence**. The condition is called the **antecedent**, and the result is called the **consequent**.
 
@@ -380,3 +394,19 @@ It is still true when the antecedent is false because it cannot be invalidated t
 There is also the **subjunctive conditionals**: "If Germany had won World War II, then the world would be no different today". This expresses a hypothetical claim - something that would be true if something else is true. The difference is that we already know the antecedent is false, but states what might happen if it were true. These are often distinguished by their using past tense.
 
 A complex sentence like "it is not raining" is a **negated sentence** - one where a sentence is flipped around to give its opposite. The negated sentence works like a logical NOT, with the form "not P".
+
+# 24/1/14
+
+Two statements are **logically equivalent** if they are both true under the same conditions, and false under the same conditions. We represent this relation with $P \equiv Q$ or $P \iff Q$ (P if and only if Q).
+
+We can draw a truth table to do this, and I'm not going to because we already covered this in MATH135.
+
+An argument is **ampliative** if the conclusion expresses more information than that expressed in the premises. All valid deductive arguments are by definition non-ampliative, since if they had more information, we could not know that it is valid. As a result, all ampliative arguments cannot be known to be valid.
+
+A non-ampliative argument might be "7 is a prime number, and therefore is only divisible by 1 and 7", while an anmpliative one might be "the sun set every day before yesterday, so it will set today".
+
+Ampliative arguments are evaluated based on how well it supports the conclusion. If the premises make the argument rationally believable, then the argument is good. Otherwise, it is not.
+
+We call these arguments **cogent**. In other words, a cogent argument is one that makes the conclusion **rationally believable** - it gives us good reaon to believe the conclusion. All sound arguments are by definition cogent, and so are many valid and invalid arguments.
+
+Cogency is concerned only with the likeliness of the counter-examples being true. Cogent arguments have highly unlikely counterexamples or none at all, while Non-cogent arguments have likely counterexamples. In contrast, validity is concerned with the possibility of there being counterexamples at all.

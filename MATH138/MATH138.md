@@ -483,3 +483,23 @@ Finding the height of the shell is not always the same as finding the inverse. C
 Note that this is the same as if we used $x = y^2$ (the inverse of the function). There are two possibilities for the cylinder height: either the inverse of the function, if the shape gets thinner as we move along the axis of rotation, or the maximum height minus the inverse, if the shape gets thicker as we move along the axis of rotation. Here, since the $\sqrt{x}$ shape gets thicker, we used $1 - x^2$.
 
 The method of shells works best when we know the height from the axis perpendicular to the axis of rotation, and the method of disks works when we can find the area of each slice along the axis of rotation.
+
+# 24/1/14
+
+The method of shells and the method of disks both have cases where they work better than the other. The method of disks works best for functions that extend parallel to the axis of rotation, while the method of shells, for functions that extend perpendicular to the axis of rotation.
+
+The method of disks uses the formula $\int_a^b A(x) \dee x$, where $a, b$ are the extents along the axis of rotation.
+
+The method of shells uses the formula $\int_0^b h(x) 2\pi x \dee x$, where $b$ is the extent perpendicular to the axis of rotation.
+
+Consider $y = 2x^2 - x^3 = x^2(2 - x)$ from 0 to 2 rotated about the y-axis:
+
+> This solid looks like the top half of a donut.  
+> The method of disks is difficult to use here, because we would need disks with holes in them. We will use the method of shells.  
+> The height of each of our cylinders is $h(x) = 2x^2 - x^3$.  
+> The volume of each shell is $\delta V = h(x) 2\pi x \dee x = 4\pi x^3 \dee x - 2\pi x^4 \dee x$.  
+> So the volume of the solid is $4\pi \int_0^2 x^3 \dee x - 2\pi \int_0^2 x^4 \dee x = 4\pi \evalat{\frac{x^4}{4}}_0^2 - 2\pi \evalat{\frac{x^5}{5}}_0^2 = 4\pi \frac{2^4}{4} - 2\pi \frac{2^5}{5} = \frac{16\pi}{5}$.  
+
+A variation on the method is disks is the **method of washers**. Here, we have disks with holes in them for whatever reason, and our area, rather than simply being the area of a circle, is the area of the circle minus the area of the hole in the middle.
+
+For example, what is the volume enclosed by rotating the area between $y = \sqrt{x}$ and $y = x$ about the x-axis? We could use the disk method, except instead of finding the area of a disk, we find the area of a disk with a hole in it, a washer. However, in this case it would be easier to do it with the method of shells.
