@@ -90,6 +90,8 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
 \]</span></p>
 <h1 id="section">6/1/14</h1>
 <p>Assignments are due every Friday at 3:30pm. They are posted on LEARN.</p>
@@ -360,6 +362,42 @@ z</code></pre>
 </blockquote>
 <p>A variation on the method is disks is the <strong>method of washers</strong>. Here, we have disks with holes in them for whatever reason, and our area, rather than simply being the area of a circle, is the area of the circle minus the area of the hole in the middle.</p>
 <p>For example, what is the volume enclosed by rotating the area between <span class="math">\(y = \sqrt{x}\)</span> and <span class="math">\(y = x\)</span> about the x-axis? We could use the disk method, except instead of finding the area of a disk, we find the area of a disk with a hole in it, a washer. However, in this case it would be easier to do it with the method of shells.</p>
+<h1 id="section-9">27/1/14</h1>
+<h2 id="improper-integrals">Improper Integrals</h2>
+<p>An integral is improper if some part of it goes to <span class="math">\(\pm \infty\)</span> - either the integrand or the domain of integration (limits of integration).</p>
+<p>The way we deal with this is to take limits instead of using these infinite values.</p>
+<p>For example, <span class="math">\(\int_a^\infty f(x) \dee x = \lim_{T \to \infty} \int_a^T f(x) \dee x\)</span>.</p>
+<p>For example, <span class="math">\(\int_0^\infty e^{-x} \dee x = \lim_{T \to \infty} \int_0^T e^{-x} \dee x = \lim_{T \to \infty} \evalat{-e^{-x}}_0^T = \lim_{T \to \infty} (-e^{-T}) - (-e^{-0}) = 0 + 1 = 1\)</span>.</p>
+<p>Prove that the volume obtained by rotating <span class="math">\(y = \frac{1}{x}\)</span> about the x-axis for <span class="math">\(x \in [1, \infty)\)</span> is finite:</p>
+<blockquote>
+<p>The volume is <span class="math">\(\int_1^\infty \pi \frac{1}{x^2} \dee x = \pi \lim_{T \to \infty} \evalat{-\frac{1}{x}}_1^T = \pi\)</span>, found via the method of disks. Clearly, the volume is finite.</p>
+</blockquote>
+<p>Sometimes, the integrand itself will diverge. Consider <span class="math">\(\int_0^1 \ln x \dee x\)</span>:</p>
+<blockquote>
+<p><span class="math">\(\ln 0 = -\infty\)</span>, and we cannot evaluate the antiderivative at this point.<br />Instead, we write it as <span class="math">\(\lim_{\epsilon \to 0} \int_\epsilon^1 \ln x \dee x = \lim_{\epsilon \to 0} \evalat{x \ln x - x}_\epsilon^1 = 0 - 1 - (\lim_{\epsilon \to 0} \epsilon \ln \epsilon - \lim_{\epsilon \to 0} \epsilon) = 0 - 1 - (0 - 0) = -1\)</span>.</p>
+</blockquote>
+<p>Also, the integrand might diverge somewhere within the domain of integration. This is not always immediately obvious and must always be considered when doing integrals.</p>
+<p>Consider <span class="math">\(\int_{-1}^1 \frac{1}{\sqrt{\abs{x}}} \dee x\)</span>:</p>
+<blockquote>
+<p>There is a vertical asymptote at <span class="math">\(x = 0\)</span>. This makes it so that we can't directly use the fundemental theorem of calculus to evaluate the integral.<br />We can instead split the integral at the middle, and since it is an even function, we can combine the two integrals: <span class="math">\(2\int_0^1 \frac{1}{\sqrt{x}} \dee x\)</span>.<br />There is an asymptote, so the integral is an improper one: <span class="math">\(2\int_0^1 \frac{1}{\sqrt{x}} \dee x = 2 \lim_{T \to 0} \int_T^1 \frac{1}{\sqrt{x}} \dee x = 2 (2 \cdot 1^\frac{1}{2} - 2\lim_{T \to 0} T^\frac{1}{2}) = 4\)</span>.</p>
+</blockquote>
+<p>Consider <span class="math">\(\int_{-1}^1 \dee x\)</span>:</p>
+<blockquote>
+<p>We might do <span class="math">\(\int_{-1}^1 \dee x = \evalat{-\sqrt{x}}_{-1}^1 = -2\)</span>.<br />However, the integral <strong>does not exist</strong>. We need to be careful because the result looks just fine, and does not indicate that an error occurred.<br />The integral does not make any sense because the integrand diverges towards <span class="math">\(\infty\)</span> at <span class="math">\(x = 0\)</span>.</p>
+</blockquote>
+<p>The idea behind this is that we need to figure out if an improper integral exists even without integrating it first.</p>
+<p>If a function <strong>converges</strong>, that means it goes to a finite value. THe opposite is if it <strong>diverges</strong>, when it goes to <span class="math">\(\pm \infty\)</span>.</p>
+<h3 id="comparison-theorem">Comparison Theorem</h3>
+<p>Given functions <span class="math">\(f(x), g(x)\)</span> such that <span class="math">\(f(x) \ge g(x) \ge 0\)</span> for <span class="math">\(x \ge a\)</span>, if <span class="math">\(\int_a^\infty f(x) \dee x\)</span> converges, then <span class="math">\(\int_a^\infty g(x) \dee x\)</span> also converges.</p>
+<p>The contrapositive is also useful in that if <span class="math">\(\int_a^\infty g(x) \dee x\)</span> diverges, then <span class="math">\(\int_a^\infty f(x) \dee x\)</span> also diverges.</p>
+<p>Prove that, given that <span class="math">\(\int_1^\infty e^{-x} \dee x\)</span> converges, <span class="math">\(\int_1^\infty \frac{1}{x^P} \dee x\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span></p>
+<blockquote>
+<p>Assume <span class="math">\(P &gt; 1\)</span>.<br />;wip</p>
+</blockquote>
+<p>Interestingly, <span class="math">\(e^{-x^2}\)</span> doesn't have an antiderivative. Figure out if <span class="math">\(\int_0^\infty\)</span> converges or diverges:</p>
+<blockquote>
+<p>;wip</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

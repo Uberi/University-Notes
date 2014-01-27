@@ -1,4 +1,4 @@
-
+MATH136
 =======
 
 Linear Algebra
@@ -22,6 +22,8 @@ $$
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
 $$
 
 # 13/1/14 (I'm going to stop procrastinating this week, honest!)
@@ -234,6 +236,8 @@ Subspaces
 
 A **subspace** of $\mb{R}^n$ is a non-empty subset $\mb{S}$ of $\mb{R}^n$ such that it satisfies all ten properties defined in Theorem 1.1.1.
 
+All subspaces are **spaces**, which are subsets of a vector space.
+
 But since properties 2-5 and 7-10 follow from properties 1 and 6, all we need to do to prove all ten properties is to prove properties 1 and 6 hold.
 
 ### Theorem 1.2.1 (Subspace Test)
@@ -265,6 +269,8 @@ Prove $\mb{S} = \set{ \begin{bmatrix} x \\ y \\ z \end{bmatrix} \middle| x + y =
 > Since $a_1 + a_2 = a_1 - a_3 = 0$, $a_2 = -a_1$ and $a_3 = a_1$.  
 > So the general vector is $\vec{v}(a_1) = \begin{bmatrix} a_1 \\ -a_1 \\ a_1 \end{bmatrix} = a_1 \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix}$.  
 > So a basis for $\mb{S}$ is $\set{\begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix}}$.  
+
+We find a basis of a subspace by finding the general form of a vector in the subspace, using this to find a spanning set for $S$, and then reducing it into a linearly independent set.
 
 ### Theorem 1.2.2
 
@@ -340,6 +346,8 @@ Let $A(a_1, a_2, a_3)$ be a fixed point on the plane. Let $X(x_1, x_2, x_3)$ be 
 
 Then $\vec{X} - \vec{A}$ is a vector that lies on the plane.
 
+In other words, if $\vec{x} = s\vec{u} + t\vec{v}, s, t \in \mb{R}$, then $\vec{x} - \vec{b}$ is clearly a vector that lies on the plane.
+
 Let $\vec{n}$ be a vector normal to the plane. Clearly, $\vec{n} \cdot (\vec{X} - \vec{A}) = 0$.
 
 So $n_1 (x_1 - a_1) + n_2 (x_2 - a_2) + n_3 (x_3 - a_3) = 0 = n_1 x_1 + n_2 x_2 + n_3 x_3 - n_1 a_1 - n_2 a_2 - n_3 a_3$.
@@ -387,3 +395,220 @@ How do we project a vector onto a plane? We can notice that the projection of a 
 
 Therefore, the projection of a vector $\vec{v}$ onto a plane with normal $\vec{n}$ is $\prp_{\vec{n}} \vec{v}$.
 
+Systems of Linear Equations
+---------------------------
+
+A **linear equation** is an equation of the form $a_1 x_1 + \ldots + a_n x_n = b, a_k, b \in \mb{C}, 1 \le k \le n, n \in \mb{N}$. This also includes equations that can be rewritten into this form.
+
+A set of linear equations with the same variables $x_1, \ldots, x_n$ (including those where there are zero coefficients) is called a **system of linear equations**.
+
+A system of linear equations can be written as $\begin{cases}
+a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
+\vdots
+a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\
+\end{cases}$. Here, $a_{i, j}$ represents the $j$th coefficient in the $i$th equation.
+
+A **solution** to a system of linear equation is a vector $\vec{s} = \begin{bmatrix} s_1 \\ \vdots \\ s_n \end{bmatrix}, \vec{s} \in \mb{R}^n$ such that if $(\forall 1 \le i \le n, x_i = s_i)$, all the equations in the system are satisfied.
+
+A system of linear equations is **consistent** if it has at least one solution, and **inconsistent** otherwise.
+
+Two systems of linear equations are **equivalent** if and only if they both have the same solution set.
+
+Interpreted geometrically, a system of $m$ linear equations with $n$ variables is a set of $m$ hyperplanes in $\mb{R}^n$. The solution to this system is represented by a vector that lies on all these hyperplanes.
+
+### Theorem 2.1.1
+
+If a set of linear equations is consistent with more than 1 solution, then it has infinite solutions.
+
+In other words, if $\begin{cases}
+a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
+\vdots
+a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\
+\end{cases}$ has solutions $\vec{s}$ and $\vec{t}$ such that $\vec{s} \ne \vec{t}$, then $\vec{s} + c(\vec{s} - \vec{t})$ is a solution for all $c \in \mb{R}$.
+
+Proof:
+
+> Assume $\begin{cases}
+a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
+\vdots
+a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\
+\end{cases}$ has solutions $\vec{s}$ and $\vec{t}$.  
+> Clearly, for all $1 \le i \le n$, $a_{i, 1} (s_1 + c(s_1 - t_1)) + \ldots + a_{i, n} (s_n + c(s_n - t_n))
+= (a_{i, 1} s_1 + \ldots + a_{i, n} s_n) + c(a_{i, 1} s_1 + \ldots + a_{i, n} s_n) - c(a_{i, 1} t_1 + \ldots + a_{i, n} t_n)
+= b_i + cb_i - cb_i = b_i$.  
+> So each equation is satisfied, and the system is consistent.  
+
+The set of all solutions to a system of linear equations is known as a **solution set**.
+
+### Solving
+
+When we use the substitution and elimination techniques for solving systems of linear equations, we are forming new systems of lienar equations that have the same solution set as the original. We aim to obtain one that is easier to find the solution set for, and therefore solve the original system.
+
+Note that when we solve a linear system, we don't really need the $x$ variables. Instead, we could write the system $\begin{cases}
+a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
+\vdots
+a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\
+\end{cases}$ more concisely as $\left[\begin{array}{ccc|c}
+a_{1, 1} & \ldots & a_{1, n} & b_1 \\
+\vdots & \vdots & \vdots & \vdots \\
+a_{n, 1} & \ldots & a_{n, n} & b_1 \\
+\end{array}\right]$.
+
+This is called the **augmented matrix** of the system of linear equations.
+
+The **coefficient matrix** of the system of linear equations is the same thing, but without the last column containing the constant value. In this case, it would be $\left[\begin{array}{ccc}
+a_{1, 1} & \ldots & a_{1, n} \\
+\vdots & \vdots & \vdots \\
+a_{n, 1} & \ldots & a_{n, n} \\
+\end{array}\right]$.
+
+We can combine a coefficient matrix $A$ and a constant vector $\vec{b}$ into an augmented matrix by using the $\left[A \middle| \vec{b}\right]$. This simply adds $\vec{b}$ as a column to the end of $A$.
+
+Solve $\begin{cases}
+2x_1 + 3x_2 &= 11 \\
+3x_1 + 6x_2 &= 7 \\
+\end{cases}$:
+
+> We multiply the first equation by $-3$ to obtain $-6x_1 - 9x_2 = -33$.  
+> We multiply the second equation by $2$ to obtain $6x_1 + 12x_2 = 14$.  
+> Now we add the first equation to the second equation to obtain $0x_1 + 3x_2 = -19$.  
+> Now we multiply the second equation by $\frac{1}{3}$ to obtain $0x_1 + x_2 = -\frac{19}{3}$.  
+> Now we add the second equation, multiplied by $9$, to the first equation to obtain $-6x_1 + 0x_2 = -90$.  
+> Now we multiply the first equation by $-6$ to obtain $x_1 + 0x_2 = 15$.  
+> So $x_1 = 15$ and $x_2 = -\frac{19}{3}$.  
+
+Now solve using operations on the matrix form of the equations, $\left[\begin{array}{cc|c}
+2 & 3 & 11 \\
+3 & 6 & 7 \\
+\end{array}\right]$:
+
+> We multiply the first row by $-3$ to obtain $\left[\begin{array}{cc|c}
+-6 & -9 & -33 \\
+3 & 6 & 7 \\
+\end{array}\right]$.  
+> We multiply the second row by $2$ to obtain $\left[\begin{array}{cc|c}
+-6 & -9 & -33 \\
+6 & 12 & 14 \\
+\end{array}\right]$.  
+> We add the first to the seocnd to obtain $\left[\begin{array}{cc|c}
+-6 & -9 & -33 \\
+0 & 3 & -19 \\
+\end{array}\right]$.  
+> We multiply the second equation by $\frac{1}{3}$ to obtain $\left[\begin{array}{cc|c}
+-6 & -9 & -33 \\
+0 & 1 & -\frac{19}{3} \\
+\end{array}\right]$.  
+> Now we add the second equation multiplied by 9 to the first equation to obtain $\left[\begin{array}{cc|c}
+-6 & 0 & -90 \\
+0 & 1 & -\frac{19}{3} \\
+\end{array}\right]$.  
+> Now we multiply the first equation by $-\frac{1}{6}$ to obtain $\left[\begin{array}{cc|c}
+1 & 0 & 15 \\
+0 & 1 & -\frac{19}{3} \\
+\end{array}\right]$.  
+> So $x_1 = 15$ and $x_2 = -\frac{19}{3}$.  
+
+Note that at every step, we had a system of linear equations that had the same solution set as the original system. Eventually, we reduced the matrix down into a form that we could easily read the values off of.
+
+Also note that there were only really two different operations that we used to solve the system. To make it easier for computers to work with, we define an additional swapping operation:
+
+* Multiplying a row by a non-zero scalar ($cR_i$ multiplies the $i$th row by $c \in \mb{R}, c \ne 0$).
+* Adding a multiple of one row to another ($R_i + cR_j$ adds the $j$th row multiplied by $c \in \mb{R}, c \ne 0$ to the $i$th row).
+* Swapping two rows ($R_i \leftrightarrow R_j$).
+
+These operations we call the **elementary row operations** (EROs). Note that they are also fully reversible - all EROs have an inverse that undoes the effect of the operation. This is trivial to prove.
+
+Two matrices are **row equivalent** if one can be transformed into another by application of EROs. Since EROs are reversible, if a matrix $A$ is row equivalent to $B$, then $B$ is also transformable into $A$ via the inverse of those EROs, and so $B$ is row equivalent to $A$. In other words, row equivalence is commutative.
+
+### Row Reduced Echelon Form
+
+A matrix is in **reduced row echelon form/row canonical form** (RREF) if and only if:
+
+1. All rows with only zeroes are at the bottom. For example, $\begin{bmatrix} 1 & 2 \\ 0 & 0 \end{bmatrix}$, but not $\begin{bmatrix} 0 & 0 \\ 1 & 2 \end{bmatrix}$.
+2. The first non-zero entry in each row is 1 (this is called the **leading one**). For example, $\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 3 \end{bmatrix}$, but not $\begin{bmatrix} 4 & 0 & 1 \\ 0 & 1 & 3 \end{bmatrix}$.
+3. The leading one in each row, if it exists, appears to the right of the leading one of the row above it. For example, $\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$, but not $\begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix}$.
+4. The leading one in each row must be the only non-zero entry in its column. For example, $\begin{bmatrix} 1 & 0 & 5 \\ 0 & 1 & 2 \end{bmatrix}$, but not $\begin{bmatrix} 1 & 3 & 5 \\ 0 & 1 & 2 \end{bmatrix}$.
+
+For augmented matrices, we check only the values in all but the last column when seeing if it is in RREF (the values on the left of the vertical line). In other words, we ignore the last column when checking for RREF form.
+
+All matrices are representable in RREF. All matrices have one and only one representation in RREF.
+
+### Theorem 2.2.2
+
+The RREF of a matrix is unique. In other words, each matrix has at most one possible matrix that it is both row equivalent to, and is in RREF.
+
+Proof:
+
+> ;wip: something about proving this in chapter 4
+
+Row reduce $\begin{array}{ccc|c} 1 & 1 & 0 & -7 \\ 2 & 4 & 1 & -16 \\ 1 & 2 & 1 & 9 \end{array}$:
+
+> $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+2 & 4 & 1 & -16 \\
+1 & 2 & 1 & 9 \\
+\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+0 & 0 & -1 & -34 \\
+1 & 2 & 1 & 9 \\
+\end{array}$ via $R_2 + (-2)R_3$.  
+> $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+0 & 0 & -1 & -34 \\
+1 & 2 & 1 & 9 \\
+\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+1 & 2 & 1 & 9 \\
+0 & 0 & -1 & -34 \\
+\end{array}$ via $R_2 \leftrightarrow R_3$.  
+> $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+1 & 2 & 1 & 9 \\
+0 & 0 & -1 & -34 \\
+\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+1 & 2 & 1 & 9 \\
+0 & 0 & 1 & 34 \\
+\end{array}$ via $(-1)R_3$.  
+> $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+1 & 2 & 1 & 9 \\
+0 & 0 & 1 & 34 \\
+\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+0 & 1 & 1 & 16 \\
+0 & 0 & 1 & 34 \\
+\end{array}$ via $R_2 - R_1$.  
+> $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+0 & 1 & 1 & 16 \\
+0 & 0 & 1 & 34 \\
+\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+0 & 1 & 0 & -18 \\
+0 & 0 & 1 & 34 \\
+\end{array}$ via $R_2 - R_3$.  
+> $\begin{array}{ccc|c}
+1 & 1 & 0 & -7 \\
+0 & 1 & 0 & -18 \\
+0 & 0 & 1 & 34 \\
+\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+1 & 0 & 0 & 11 \\
+0 & 1 & 0 & -18 \\
+0 & 0 & 1 & 34 \\
+\end{array}$ via $R_2 - R_3$.  
+
+Note the general technique used in reducing the matrix. First, we want to obtain a triangle of 0 elements with leading ones diagonally rightwards, by going from top to bottom. Then, we make sure each leading one is the only non-zero element in its column by subtracting from rows below from bottom to top.
+
+This technique is basically modifying the matrix until all the properties except for property 4. Then property 4 can be solved for relatively easily.
+
+### Solution Set
+
+Any row of the form $\begin{array}{ccc|c} 0 & \ldots & 0 & c \end{array}, c \ne 0$ is inconsistent - no possible values can satisfy this equation, so there are no solutions.
+
+Recall that if consistent, a system of linear equations has either one or infinitely many solutions.
+
+Solve $\begin{cases} x_1 + x_2 + x_3 &= 4 \\ x_2 + x_3 &= 3 \end{cases}$:
+
+> The augmented matrix is $\begin{array}{ccc|c} 1 & 1 & 1 & 4 \\ 0 & 1 & 1 & 3 \end{array}$.  
+> The matrix in RREF is ;wip

@@ -447,6 +447,7 @@ int main(void) {
     // this is the only typed function where we can omit the return value and it will assume 0 (success)
 }</code></pre>
 <p>Modules don't need a <code>main</code> function, because they are not meant to have entry points.</p>
+<p>The <code>void</code> means that the function does not accept any parameters, and is different from just not using anything (<code>int main()</code>).</p>
 <h3 id="library">Library</h3>
 <p>C has no built-in functions. However, it has a lot of modules that are almost always available.</p>
 <p>First C program:</p>
@@ -601,6 +602,7 @@ static int g(int e) { // MODULE SCOPE - `static` keyword makes declaration in th
 <p>For example, <code>#define X Y</code> performs a string replacement, replacing all instances of <code>X</code> with <code>Y</code>.</p>
 <p>When we <code>#include</code> a file, we basically paste its contents into the current file at that location.</p>
 <p>Now in client code, when we need a module, we just need to <code>#include</code> its header file to include its interface. Note that when we include the header file, we no longer need to have the forward declarations at the top of the client code. This is, in practice, similar to what Racket's <code>require</code> does, but they are conceptually very different - here, we are copy/pasting the interface rather than running a file.</p>
+<p>The interface documentation for a function that isn't provided to clients (helper functions) should not go in the header file. Instead, they go directly above the function definition.</p>
 <h3 id="library-1">Library</h3>
 <p>C has basically no useful built-in functionality - a lot of functionality is provided through the library. The standard modules can be included by using <code>#include &lt;NAME&gt;</code>, where <code>NAME</code> is the filename of the module header. Some examples would be <code>#include &lt;stdio.h&gt;</code> (standard I/O) and <code>#include &lt;math.h&gt;</code> (math functions).</p>
 <p>The <code>&lt;</code> and <code>&gt;</code> simply changes the place the preprocessor searches to find the specified file.</p>
@@ -611,7 +613,7 @@ static int g(int e) { // MODULE SCOPE - `static` keyword makes declaration in th
 <p>The <code>assert.h</code> module provides assertion functionality, similar to <code>check-expect</code> in Racket. For example:</p>
 <pre><code>#include &lt;assert.h&gt;
 
-int main() {
+int main(void) {
     assert(1 == 1);
     return 0;
 }</code></pre>
@@ -625,6 +627,7 @@ int main(void) {
     assert(do_something(2) == 5);
     assert(do_it(3) == 1);
 }</code></pre>
+<p>Whenever possible, we should assert the preconditions of functions.</p>
 <h3 id="structures">Structures</h3>
 <pre><code>struct posn {
     int x;
@@ -670,6 +673,8 @@ printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints
 <pre><code>char to_lowercase(char c) {
     return (c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39;) ? c - &#39;A&#39; + &#39;a&#39; : c;
 }</code></pre>
+<h1 id="tutorial-3">27/1/14 - Tutorial</h1>
+<p>Didn't attend this one, but it was about translating Racket into C - pretty trivial stuff.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

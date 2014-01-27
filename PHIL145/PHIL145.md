@@ -401,12 +401,89 @@ Two statements are **logically equivalent** if they are both true under the same
 
 We can draw a truth table to do this, and I'm not going to because we already covered this in MATH135.
 
+Ampliative Arguments
+--------------------
+
 An argument is **ampliative** if the conclusion expresses more information than that expressed in the premises. All valid deductive arguments are by definition non-ampliative, since if they had more information, we could not know that it is valid. As a result, all ampliative arguments cannot be known to be valid.
 
 A non-ampliative argument might be "7 is a prime number, and therefore is only divisible by 1 and 7", while an anmpliative one might be "the sun set every day before yesterday, so it will set today".
 
 Ampliative arguments are evaluated based on how well it supports the conclusion. If the premises make the argument rationally believable, then the argument is good. Otherwise, it is not.
 
-We call these arguments **cogent**. In other words, a cogent argument is one that makes the conclusion **rationally believable** - it gives us good reaon to believe the conclusion. All sound arguments are by definition cogent, and so are many valid and invalid arguments.
+We call these arguments **cogent**. In other words, a cogent argument is one that makes the conclusion **rationally believable** - it gives us good reaon to believe the conclusion. All sound arguments are by definition cogent.
 
-Cogency is concerned only with the likeliness of the counter-examples being true. Cogent arguments have highly unlikely counterexamples or none at all, while Non-cogent arguments have likely counterexamples. In contrast, validity is concerned with the possibility of there being counterexamples at all.
+However, many valid arguments are not cogent, and many invalid arguments are cogent. They are not the same thing.
+
+Cogency is concerned only with the likeliness/probability of counterexamples existing. Cogent arguments have highly unlikely counterexamples or none at all, while Non-cogent arguments have likely counterexamples. In contrast, validity is concerned with the possibility of there being counterexamples at all.
+
+# 27/1/14
+
+An argument is cogent if the conclusion is more likely than all of its other counterexamples.
+
+The thing about deductive arguments is that since they add no information, we need to start with some information in order to have a deductive argument. Most empircal reasoning (reasoning based on experience or obseration) is ampliative. This includes most scientific inferences.
+
+Ampliative arguments have two important properties:
+
+* Support provided by the premises comes in degrees - ampliative arguments might support the conclusion more or less, though never certainly.
+* All ampliative arguments are **defeasible** - no amount of support can fully guarantee the conclusion is true.
+
+Ampliative arguments can be strengthened or weakened by adding more premises. Cogency is a measure of how well the premises of an ampliative argument supports the conclusion. A strongly cogent argument offers a lot of support, while a weakly cogent argument offers little support.
+
+For example, consider the following ampliative argument:
+
+    The entity looks like a duck.
+    The entity quacks like a duck.
+    ------------------------------
+    The entity is a duck.
+
+We can weaken an argument by adding information:
+
+    The entity looks like a duck.
+    The entity quacks like a duck.
+    The entity is swearing loudly in German.
+    ----------------------------------------
+    The entity is a duck.
+
+Or we can strengthen it:
+
+    The entity looks like a duck.
+    The entity quacks like a duck.
+    The DNA test indicated duck DNA.
+    --------------------------------
+    The entity is a duck.
+
+### States of Information
+
+When evaluating a claim, one's **state of information** is the set of all relevant information/evidence available. Reasoning that is defeasible is always dependent on one's state of information.
+
+The premises in an ampliative argument represent the author's state of information. The audience might have a different state of information, so the cogency of an argument can differ from person to person.
+
+When one has no information or information that points to the conclusion being equally likely to be true or false, one is in a **neutral state of information**.
+
+In a neutral state of information, it is reasonable to withold judgement, where we do not accept the proposition, and do not reject it.
+
+### Inductive Arguments
+
+Inductive arguments have conclusions that are unknown cases derived from known cases. For example:
+
+    The sun rose yesterday.
+    The sun rose the day before yesterday.
+    ...
+    The sun rose 39485723 days ago.
+    --------------------------------------
+    The sun will rise again tomorrow.
+
+This is a pretty good inductive argument. Alternatively:
+
+    This rose is red.
+    ------------------
+    All roses are red.
+
+This is not so good an inductive argument.
+
+How do we evaluate inductive arguments? The strength of inductive arguments is based on how similar the observed and unobserved cases are - how similar the cases in the premises are to the conclusion, in addition to the actual number of observed cases.
+
+In other words, an inductive argument is cogent if it has a large sample size and the samples are representative of the case in the conclusion.
+
+Arguments can incorporate all different types of arguments as sub-arguments - for example, an argument might use induction and then modus ponens.
+

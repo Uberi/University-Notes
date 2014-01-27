@@ -25,6 +25,8 @@ $$
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
 $$
 
 # 6/1/14
@@ -503,3 +505,59 @@ Consider $y = 2x^2 - x^3 = x^2(2 - x)$ from 0 to 2 rotated about the y-axis:
 A variation on the method is disks is the **method of washers**. Here, we have disks with holes in them for whatever reason, and our area, rather than simply being the area of a circle, is the area of the circle minus the area of the hole in the middle.
 
 For example, what is the volume enclosed by rotating the area between $y = \sqrt{x}$ and $y = x$ about the x-axis? We could use the disk method, except instead of finding the area of a disk, we find the area of a disk with a hole in it, a washer. However, in this case it would be easier to do it with the method of shells.
+
+# 27/1/14
+
+Improper Integrals
+------------------
+
+An integral is improper if some part of it goes to $\pm \infty$ - either the integrand or the domain of integration (limits of integration).
+
+The way we deal with this is to take limits instead of using these infinite values.
+
+For example, $\int_a^\infty f(x) \dee x = \lim_{T \to \infty} \int_a^T f(x) \dee x$.
+
+For example, $\int_0^\infty e^{-x} \dee x = \lim_{T \to \infty} \int_0^T e^{-x} \dee x = \lim_{T \to \infty} \evalat{-e^{-x}}_0^T = \lim_{T \to \infty} (-e^{-T}) - (-e^{-0}) = 0 + 1 = 1$.
+
+Prove that the volume obtained by rotating $y = \frac{1}{x}$ about the x-axis for $x \in [1, \infty)$ is finite:
+
+> The volume is $\int_1^\infty \pi \frac{1}{x^2} \dee x = \pi \lim_{T \to \infty} \evalat{-\frac{1}{x}}_1^T = \pi$, found via the method of disks.
+> Clearly, the volume is finite.  
+
+Sometimes, the integrand itself will diverge. Consider $\int_0^1 \ln x \dee x$:
+
+> $\ln 0 = -\infty$, and we cannot evaluate the antiderivative at this point.  
+> Instead, we write it as $\lim_{\epsilon \to 0} \int_\epsilon^1 \ln x \dee x = \lim_{\epsilon \to 0} \evalat{x \ln x - x}_\epsilon^1 = 0 - 1 - (\lim_{\epsilon \to 0} \epsilon \ln \epsilon - \lim_{\epsilon \to 0} \epsilon) = 0 - 1 - (0 - 0) = -1$.  
+
+Also, the integrand might diverge somewhere within the domain of integration. This is not always immediately obvious and must always be considered when doing integrals.
+
+Consider $\int_{-1}^1 \frac{1}{\sqrt{\abs{x}}} \dee x$:
+
+> There is a vertical asymptote at $x = 0$. This makes it so that we can't directly use the fundemental theorem of calculus to evaluate the integral.  
+> We can instead split the integral at the middle, and since it is an even function, we can combine the two integrals: $2\int_0^1 \frac{1}{\sqrt{x}} \dee x$.  
+> There is an asymptote, so the integral is an improper one: $2\int_0^1 \frac{1}{\sqrt{x}} \dee x = 2 \lim_{T \to 0} \int_T^1 \frac{1}{\sqrt{x}} \dee x = 2 (2 \cdot 1^\frac{1}{2} - 2\lim_{T \to 0} T^\frac{1}{2}) = 4$.  
+
+Consider $\int_{-1}^1 \dee x$:
+
+> We might do $\int_{-1}^1 \dee x = \evalat{-\sqrt{x}}_{-1}^1 = -2$.  
+> However, the integral **does not exist**. We need to be careful because the result looks just fine, and does not indicate that an error occurred.  
+> The integral does not make any sense because the integrand diverges towards $\infty$ at $x = 0$.  
+
+The idea behind this is that we need to figure out if an improper integral exists even without integrating it first.
+
+If a function **converges**, that means it goes to a finite value. THe opposite is if it **diverges**, when it goes to $\pm \infty$.
+
+### Comparison Theorem
+
+Given functions $f(x), g(x)$ such that $f(x) \ge g(x) \ge 0$ for $x \ge a$, if $\int_a^\infty f(x) \dee x$ converges, then $\int_a^\infty g(x) \dee x$ also converges.
+
+The contrapositive is also useful in that if $\int_a^\infty g(x) \dee x$ diverges, then $\int_a^\infty f(x) \dee x$ also diverges.
+
+Prove that, given that $\int_1^\infty e^{-x} \dee x$ converges, $\int_1^\infty \frac{1}{x^P} \dee x$ converges if and only if $P > 1$
+
+> Assume $P > 1$.   
+> ;wip
+
+Interestingly, $e^{-x^2}$ doesn't have an antiderivative. Figure out if $\int_0^\infty$ converges or diverges:
+
+> ;wip

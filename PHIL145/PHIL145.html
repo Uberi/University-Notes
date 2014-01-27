@@ -342,11 +342,60 @@ If God exists, then God exists</code></pre>
 <h1 id="section-8">24/1/14</h1>
 <p>Two statements are <strong>logically equivalent</strong> if they are both true under the same conditions, and false under the same conditions. We represent this relation with <span class="math">\(P \equiv Q\)</span> or <span class="math">\(P \iff Q\)</span> (P if and only if Q).</p>
 <p>We can draw a truth table to do this, and I'm not going to because we already covered this in MATH135.</p>
+<h2 id="ampliative-arguments">Ampliative Arguments</h2>
 <p>An argument is <strong>ampliative</strong> if the conclusion expresses more information than that expressed in the premises. All valid deductive arguments are by definition non-ampliative, since if they had more information, we could not know that it is valid. As a result, all ampliative arguments cannot be known to be valid.</p>
 <p>A non-ampliative argument might be &quot;7 is a prime number, and therefore is only divisible by 1 and 7&quot;, while an anmpliative one might be &quot;the sun set every day before yesterday, so it will set today&quot;.</p>
 <p>Ampliative arguments are evaluated based on how well it supports the conclusion. If the premises make the argument rationally believable, then the argument is good. Otherwise, it is not.</p>
-<p>We call these arguments <strong>cogent</strong>. In other words, a cogent argument is one that makes the conclusion <strong>rationally believable</strong> - it gives us good reaon to believe the conclusion. All sound arguments are by definition cogent, and so are many valid and invalid arguments.</p>
-<p>Cogency is concerned only with the likeliness of the counter-examples being true. Cogent arguments have highly unlikely counterexamples or none at all, while Non-cogent arguments have likely counterexamples. In contrast, validity is concerned with the possibility of there being counterexamples at all.</p>
+<p>We call these arguments <strong>cogent</strong>. In other words, a cogent argument is one that makes the conclusion <strong>rationally believable</strong> - it gives us good reaon to believe the conclusion. All sound arguments are by definition cogent.</p>
+<p>However, many valid arguments are not cogent, and many invalid arguments are cogent. They are not the same thing.</p>
+<p>Cogency is concerned only with the likeliness/probability of counterexamples existing. Cogent arguments have highly unlikely counterexamples or none at all, while Non-cogent arguments have likely counterexamples. In contrast, validity is concerned with the possibility of there being counterexamples at all.</p>
+<h1 id="section-9">27/1/14</h1>
+<p>An argument is cogent if the conclusion is more likely than all of its other counterexamples.</p>
+<p>The thing about deductive arguments is that since they add no information, we need to start with some information in order to have a deductive argument. Most empircal reasoning (reasoning based on experience or obseration) is ampliative. This includes most scientific inferences.</p>
+<p>Ampliative arguments have two important properties:</p>
+<ul>
+<li>Support provided by the premises comes in degrees - ampliative arguments might support the conclusion more or less, though never certainly.</li>
+<li>All ampliative arguments are <strong>defeasible</strong> - no amount of support can fully guarantee the conclusion is true.</li>
+</ul>
+<p>Ampliative arguments can be strengthened or weakened by adding more premises. Cogency is a measure of how well the premises of an ampliative argument supports the conclusion. A strongly cogent argument offers a lot of support, while a weakly cogent argument offers little support.</p>
+<p>For example, consider the following ampliative argument:</p>
+<pre><code>The entity looks like a duck.
+The entity quacks like a duck.
+------------------------------
+The entity is a duck.</code></pre>
+<p>We can weaken an argument by adding information:</p>
+<pre><code>The entity looks like a duck.
+The entity quacks like a duck.
+The entity is swearing loudly in German.
+----------------------------------------
+The entity is a duck.</code></pre>
+<p>Or we can strengthen it:</p>
+<pre><code>The entity looks like a duck.
+The entity quacks like a duck.
+The DNA test indicated duck DNA.
+--------------------------------
+The entity is a duck.</code></pre>
+<h3 id="states-of-information">States of Information</h3>
+<p>When evaluating a claim, one's <strong>state of information</strong> is the set of all relevant information/evidence available. Reasoning that is defeasible is always dependent on one's state of information.</p>
+<p>The premises in an ampliative argument represent the author's state of information. The audience might have a different state of information, so the cogency of an argument can differ from person to person.</p>
+<p>When one has no information or information that points to the conclusion being equally likely to be true or false, one is in a <strong>neutral state of information</strong>.</p>
+<p>In a neutral state of information, it is reasonable to withold judgement, where we do not accept the proposition, and do not reject it.</p>
+<h3 id="inductive-arguments">Inductive Arguments</h3>
+<p>Inductive arguments have conclusions that are unknown cases derived from known cases. For example:</p>
+<pre><code>The sun rose yesterday.
+The sun rose the day before yesterday.
+...
+The sun rose 39485723 days ago.
+--------------------------------------
+The sun will rise again tomorrow.</code></pre>
+<p>This is a pretty good inductive argument. Alternatively:</p>
+<pre><code>This rose is red.
+------------------
+All roses are red.</code></pre>
+<p>This is not so good an inductive argument.</p>
+<p>How do we evaluate inductive arguments? The strength of inductive arguments is based on how similar the observed and unobserved cases are - how similar the cases in the premises are to the conclusion, in addition to the actual number of observed cases.</p>
+<p>In other words, an inductive argument is cogent if it has a large sample size and the samples are representative of the case in the conclusion.</p>
+<p>Arguments can incorporate all different types of arguments as sub-arguments - for example, an argument might use induction and then modus ponens.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
