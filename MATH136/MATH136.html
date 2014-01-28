@@ -317,6 +317,7 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 </ul>
 <p>These operations we call the <strong>elementary row operations</strong> (EROs). Note that they are also fully reversible - all EROs have an inverse that undoes the effect of the operation. This is trivial to prove.</p>
 <p>Two matrices are <strong>row equivalent</strong> if one can be transformed into another by application of EROs. Since EROs are reversible, if a matrix <span class="math">\(A\)</span> is row equivalent to <span class="math">\(B\)</span>, then <span class="math">\(B\)</span> is also transformable into <span class="math">\(A\)</span> via the inverse of those EROs, and so <span class="math">\(B\)</span> is row equivalent to <span class="math">\(A\)</span>. In other words, row equivalence is commutative.</p>
+<p>A matrix of size <span class="math">\(m \times n\)</span> (&quot;<span class="math">\(m\)</span> by <span class="math">\(n\)</span>&quot;) has <span class="math">\(m\)</span> rows and <span class="math">\(n\)</span> columns. With <span class="math">\(x_{i, j}\)</span>, rows are indexed by <span class="math">\(i\)</span>, and columns by <span class="math">\(j\)</span>. This is called row-major ordering.</p>
 <h3 id="row-reduced-echelon-form">Row Reduced Echelon Form</h3>
 <p>A matrix is in <strong>reduced row echelon form/row canonical form</strong> (RREF) if and only if:</p>
 <ol style="list-style-type: decimal">
@@ -340,12 +341,70 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <p>Note the general technique used in reducing the matrix. First, we want to obtain a triangle of 0 elements with leading ones diagonally rightwards, by going from top to bottom. Then, we make sure each leading one is the only non-zero element in its column by subtracting from rows below from bottom to top.</p>
 <p>This technique is basically modifying the matrix until all the properties except for property 4. Then property 4 can be solved for relatively easily.</p>
 <h3 id="solution-set">Solution Set</h3>
-<p>Any row of the form <span class="math">\(\begin{array}{ccc|c} 0 &amp; \ldots &amp; 0 &amp; c \end{array}, c \ne 0\)</span> is inconsistent - no possible values can satisfy this equation, so there are no solutions.</p>
+<p>A matrix is inconsistent if and only if its RREF contains a row of the form <span class="math">\(\begin{array}{ccc|c} 0 &amp; \ldots &amp; 0 &amp; 1 \end{array}\)</span> - no possible values can satisfy this equation (<span class="math">\(0 = 1\)</span>), so there are no solutions.</p>
 <p>Recall that if consistent, a system of linear equations has either one or infinitely many solutions.</p>
 <p>Solve <span class="math">\(\begin{cases} x_1 + x_2 + x_3 &amp;= 4 \\ x_2 + x_3 &amp;= 3 \end{cases}\)</span>:</p>
 <blockquote>
-<p>The augmented matrix is <span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 1 &amp; 4 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{array}\)</span>.<br />The matrix in RREF is ;wip</p>
+<p>The augmented matrix is <span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 1 &amp; 4 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{array}\)</span>.<br />The matrix in RREF is <span class="math">\(\begin{array}{ccc|c} 1 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{array}\)</span>.<br />Note that this corresponds to <span class="math">\(x_1 = 1\)</span> and <span class="math">\(x_2 + x_3 = 3\)</span>, and that the second equation has infinitely many solutions.<br />We can find the general solution by writing everything in terms of the fewest variables possible.<br />Clearly, <span class="math">\(x_3 = 3 - x_2\)</span>, so the solution is <span class="math">\(\vec{x} = \begin{bmatrix} 1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 1 \\ x_2 \\ 3 - x_2 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix} + x_2\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}\)</span>.<br />We can denote this as <span class="math">\(\vec{x} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix} + s\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}, s \in \mb{R}\)</span>, by assigning <span class="math">\(x_2\)</span> to the parameter <span class="math">\(s\)</span>.<br />This represents a line at the intersection of two planes in <span class="math">\(\mb{R}^3\)</span>.</p>
 </blockquote>
+<p>The solution set is, geometrically, either a point, a line, a plane, a hyperplane, or empty (no solutions). If there is only one solution, the solution set is a point.</p>
+<p>If a <strong>column</strong> in a coefficient matrix has <strong>no leading ones</strong>, the corresponding variable is called a <strong>free variable</strong>. A free variable is a variable that can be any value. Free variables exists if and only if there are an infinite number of solutions.</p>
+<h3 id="solving-linear-systems">Solving Linear Systems</h3>
+<p>We can take this technique and generalize it a bit to solve any linear system, or show it to not have any solutions:</p>
+<ol style="list-style-type: decimal">
+<li>Write the augmented matrix for the system.</li>
+<li>Row reduce the matrix.</li>
+<li>Write the linear system for the new, reduced matrix.</li>
+<li>Check for equations of the form <span class="math">\(0 = b, b \ne 0\)</span>, and stop and flag as inconsistent if found.</li>
+<li>Write all variables in terms of the free variables.</li>
+<li>Assign a parameter to each free variable.<br /></li>
+<li>Write the components that are not already fully solved in terms of the free variables.</li>
+<li>Write the solution as a linear combination of vectors using vector operations.</li>
+</ol>
+<p>The standard technique for row reducing matrices is Guass-Jordan elimination. However, this is not always the most efficient way to do it, and there are a lot of tricks that can be used to speed it up in some special cases.</p>
+<p>;wip: rewrite my linear solver lib to multiply only, and divide only at the end, this is precision-preserving through bignum and gmp</p>
+<p>However, we don't always need to solve a system. Sometimes, we just need to figure out if there are zero, one, or infinite solutions. We will now look at some tools that can be used to analyze this.</p>
+<p>The <strong>rank</strong> of a matrix is the number of leading ones in the RREF of the matrix. This is equivalent to the number of variables minus the number of free variables.</p>
+<p>The rank of a matrix <span class="math">\(A\)</span> is denoted <span class="math">\(\rank A\)</span>.</p>
+<h3 id="theorem-2.2.3">Theorem 2.2.3</h3>
+<p>Given an <span class="math">\(m \times n\)</span> coefficient matrix <span class="math">\(A\)</span> for a linear system:</p>
+<ul>
+<li>If <span class="math">\(\rank A &lt; \rank \left[A \mid \vec{b} \right]\)</span>, then the system is inconsistent, where <span class="math">\(\vec{b}\)</span> is the right hand side vector for the linear system. In other words, if the rank of the coefficent matrix is less than that of the augmented matrix, then the matrix is inconsistent.</li>
+<li>If <span class="math">\(\left[A \mid \vec{b} \right]\)</span> is consistent, then there are <span class="math">\(n - \rank A\)</span> free variables. If there are 0 free variables, then the system has only one solution.</li>
+<li><span class="math">\(\rank A = m\)</span> if and only if the system <span class="math">\(\left[A \mid \vec{b}\right]\)</span> is consistent for every <span class="math">\(\vec{b} \in \mb{R}^m\)</span>. In other words, there are no free variables if and only if the the system is consistent for every possible vector of right hand side values.</li>
+</ul>
+<p>Proof of first:</p>
+<p>(point 1)</p>
+<blockquote>
+<p>Assume <span class="math">\(\rank A &lt; \rank \left[A \mid \vec{b} \right]\)</span>.<br />Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.<br />This corresponds to <span class="math">\(0 = 1\)</span>, which makes the system inconsistent.</p>
+</blockquote>
+<p>Proof:</p>
+<p>(point 2)</p>
+<blockquote>
+<p>Assume <span class="math">\(\left[A \mid \vec{b} \right]\)</span> is consistent.<br />The number of free variables is the number of variables minus the number of those that are not free.<br />Those that are not free have leading ones, so <span class="math">\(\rank A\)</span> is the number of non-free variables.<br />So the number of free variables is <span class="math">\(n - \rank A\)</span>.</p>
+</blockquote>
+<p>Proof:</p>
+<p>(point 3)</p>
+<blockquote>
+<p>First, we will prove that if the system <span class="math">\(\left[A \mid \vec{b}\right]\)</span> is not consistent for every <span class="math">\(\vec{b} \in \mb{R}^m\)</span>, then <span class="math">\(\rank A \ne m\)</span>.<br />Suppose <span class="math">\(\left[A \mid \vec{b}\right]\)</span> is inconsistent for some <span class="math">\(\vec{b} \in \mb{R}^m\)</span>.<br />Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.<br />This row does not contain a leading one, so <span class="math">\(\rank A &lt; m\)</span>.<br />Now we will prove that if <span class="math">\(\rank A \ne m\)</span>, then the system <span class="math">\(\left[A \mid \vec{b}\right]\)</span> is not consistent for every <span class="math">\(\vec{b} \in \mb{R}^m\)</span>.<br />Suppose <span class="math">\(\rank A \ne m\)</span>. Then <span class="math">\(\rank A &lt; m\)</span>. Then there is a row of all zeroes in the RREF of A.<br />Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.<br />Then the system is inconsistent.</p>
+</blockquote>
+<h3 id="homogenous-systems">Homogenous Systems</h3>
+<p>A system is <strong>homogenous</strong> if and only if the right-hand side contains only zeros. In other words, it has the form <span class="math">\(\left[A \mid \vec{0}\right]\)</span>.</p>
+<p>A homogenous matrix is one where the last column is all 0 - a matrix corresponding to a homogenous system.</p>
+<p>Note that since the right side is always 0, the RREF of a homogenous matrix also has the right side always 0.</p>
+<p>Also note that it is impossible to get a row where every element is 0 except the right hand side. Therefore, <strong>homogenous systems are always consistent</strong>.</p>
+<p>For example, <span class="math">\(\vec{0}\)</span> is always a solution to a homogenous system. This is called the <strong>trivial solution</strong>.</p>
+<p>When we row reduce a homogenous matrix, we can save space by just row reducing the coefficient matrix instead. The last column will all be 0 anyways.</p>
+<h3 id="theorem-2.2.4">Theorem 2.2.4</h3>
+<p>Given an <span class="math">\(m \times n\)</span> matrix <span class="math">\(A\)</span>, <span class="math">\(\rank A \le \min{m, n}\)</span>.</p>
+<h3 id="theorem-2.2.5">Theorem 2.2.5</h3>
+<p>The solution set of a homogenous system with <span class="math">\(n\)</span> variables is a subspace of <span class="math">\(\mb{R}^n\)</span>.</p>
+<p>Note that the solution set of a homogenous system written as a vector equation always has <span class="math">\(\vec{0}\)</span> as the constant term. That means that all solutions are linear combinations of a few vectors.</p>
+<p>As a result, we can always write the solution set of a homogenous system as the span of a set of vectors.</p>
+<p>Because all spans are subspaces (by Theorem 1.2.2), the solution set is a subspace.</p>
+<p>Because the solution set is a subspace, we often call it the <strong>solution space</strong> of a aystem.</p>
+<h2 id="matrices">Matrices</h2>
+<p>Matrices are abstract objects like vectors.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

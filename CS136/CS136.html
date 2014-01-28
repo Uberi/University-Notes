@@ -603,6 +603,9 @@ static int g(int e) { // MODULE SCOPE - `static` keyword makes declaration in th
 <p>When we <code>#include</code> a file, we basically paste its contents into the current file at that location.</p>
 <p>Now in client code, when we need a module, we just need to <code>#include</code> its header file to include its interface. Note that when we include the header file, we no longer need to have the forward declarations at the top of the client code. This is, in practice, similar to what Racket's <code>require</code> does, but they are conceptually very different - here, we are copy/pasting the interface rather than running a file.</p>
 <p>The interface documentation for a function that isn't provided to clients (helper functions) should not go in the header file. Instead, they go directly above the function definition.</p>
+<p>If asked to write a module, but only allowed to submit a C source file (<code>*.c</code>), put the interface documentation right above its definition.</p>
+<p>Otherwise, for modules, above the definition of the function, put a comment to the effect of <code>;; see header file</code>.</p>
+<p>If asked to write a C program, put the interface documentation right above its definition. Note that the <code>main</code> function does not require any interface documentation.</p>
 <h3 id="library-1">Library</h3>
 <p>C has basically no useful built-in functionality - a lot of functionality is provided through the library. The standard modules can be included by using <code>#include &lt;NAME&gt;</code>, where <code>NAME</code> is the filename of the module header. Some examples would be <code>#include &lt;stdio.h&gt;</code> (standard I/O) and <code>#include &lt;math.h&gt;</code> (math functions).</p>
 <p>The <code>&lt;</code> and <code>&gt;</code> simply changes the place the preprocessor searches to find the specified file.</p>
@@ -675,6 +678,78 @@ printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints
 }</code></pre>
 <h1 id="tutorial-3">27/1/14 - Tutorial</h1>
 <p>Didn't attend this one, but it was about translating Racket into C - pretty trivial stuff.</p>
+<h1 id="section-6">28/1/14</h1>
+<p>Note that a structure declaration does not reserve any memory. Memory is reserved only when a structure type variable is defined.</p>
+<p>The <code>sizeof</code> a structure is at least the sum of the <code>sizeof</code> every field. However, it may be more due to padding or alignment - extra space used to improve efficiency. The exact size of a structure is not deterministic and can depend on a lot of things.</p>
+<p>Floating point numbers in C are <strong>inexact numbers</strong>. They have a certain amount of precision and all operations on these nunmbers do not necessarily preserve all of the precision. They work a lot like inexact numbers in Racket.</p>
+<p>Floating point values can lose precision in a lot of operations. Adding, subtracting, and a lot of others. It is similar to using significant digits, and then cutting off everything after a certain number of significant digits.</p>
+<p>Floating point numbers can result in bugs and precision errors, and are a common source of issues.</p>
+<p>For example, the square root of 2 actually results in a number that is close to, but not exactly, the square root of 2.</p>
+<p>Floating point numbers are called floating point because they have a number of bits (24 on our 32-bit architecture) called the mantissa, and an 8-bit exponent, which represents the position of the decimal place. This decimal place is <strong>floating</strong>, which gives us the name.</p>
+<p>We can also use a <code>double</code> type, which is usually larger than a float, and therefore has a larger mantissa. Therefore, it can represent numbers with more precision.</p>
+<p>The placeholder for a <code>float</code> in <code>printf</code> format strings is <code>%f</code>. For example, <code>printf(&quot;%f&quot;, 1.05)</code>.</p>
+<p>Integers are always exact, and we should always try to use integers when possible. For example, to represent money, instead of using a float for the number of dollars, we can use an integer for the number of cents.</p>
+<h3 id="sections">Sections</h3>
+<p>We model our memory with 5 regions known as <strong>sections</strong>, ordered from lower addresses to higher addresses:</p>
+<ul>
+<li>Code
+<ul>
+<li>The machine code goes here.</li>
+<li>When we write code, we write human-readable code. Then, the compiler converts it into machine code that the computer can read. This is addressed in CS 241.</li>
+</ul></li>
+<li>Read-only Data
+<ul>
+<li>Global constant variables go here.</li>
+</ul></li>
+<li>Global Data
+<ul>
+<li>Global mutable variables go here.</li>
+</ul></li>
+<li>Heap
+<ul>
+<li>This is addressed in a later section ;wip</li>
+</ul></li>
+<li>Stack
+<ul>
+<li>Local variables go here.</li>
+<li>This contains the call stack.</li>
+</ul></li>
+</ul>
+<p>Computer hardware groups these sections into <strong>segments</strong>. If we try to access memory outside of the segment we're currently in without explicitly allowing it, then we get a <strong>segmentation fault</strong> or <strong>segfault</strong>.</p>
+<p>There is also another section, <strong>temporary storage</strong>, that stores the intermediate results of expressions.</p>
+<p>All global variables are initialized before <code>main</code> is called. First the memory for global variables is reserved and initialized, then the <code>main</code> function is called. This is done at the compilation stage.</p>
+<p>As a result, once <code>main</code> is called, no more global variables can be defined.</p>
+<p>Running Programs:</p>
+<ol style="list-style-type: decimal">
+<li>For each module:
+<ul>
+<li>Scan for <code>#include</code>s, and add entries to the internal module list.</li>
+<li>Preprocessing.</li>
+<li>Scan for errors.</li>
+</ul></li>
+<li>Verify all the functions and variables are defined and only defined once.</li>
+<li>Create read-only and global data sections for global variables.</li>
+<li>Convert the program to machine code.</li>
+<li>Perform RunC testing (more in section 7).</li>
+<li>Run <code>main</code>.</li>
+</ol>
+<h2 id="control-flow">Control Flow</h2>
+<p>In Racket, our semantic model is based on substitution rules - we replaced something with other things based on patterns that we looked for. In C, we use <strong>control flow</strong> to model our programs.</p>
+<h3 id="call-stack">Call Stack</h3>
+<p>While running our program, we keep track of the program location, which is where we currently are in the code.</p>
+<p>However, when we call a function, we need to keep track of the new program location (the function we called) and the place we want to go back to when we use <code>return</code> (right after the place we called the function). The place we want to go back to is called the <strong>return address</strong>.</p>
+<p>If <span class="math">\(f\)</span> calls <span class="math">\(g\)</span>, and <span class="math">\(g\)</span> calls <span class="math">\(h\)</span>, we need to keep track of where we were in <span class="math">\(f\)</span> when we called <span class="math">\(g\)</span>, and where we were in <span class="math">\(g\)</span> when we called <span class="math">\(h\)</span>, and where we currently are in <span class="math">\(h\)</span>.</p>
+<p>In this course, we represent return addresses with <code>CALLING__FUNCTION:LINE_NUMBER</code>, except for <code>main</code>. The return address for the <code>main</code> function is <code>OS</code>, for the operating system.</p>
+<p>We can store these chunks of context information in a stack. This stack we call the <strong>call stack</strong>. Every time we call a function is called, we push an entry onto the stack. Every time a function returns, we pop an entry off the top of the stack and go back to the return address specified in the entry.</p>
+<p>The entries stored on the stack are known as <strong>stack frames</strong>, or <strong>frames of reference</strong>. Every stack frame contains the return address, all currently existing local variables, and all arguments to the function. Note that the return value goes into the temporary storage section.</p>
+<p>A function must be called with simple values, like with our Racket stepping rules. Calling a function makes a copy of all these simple values and puts it into the new stack frame. This is called a <strong>call-by-reference</strong> calling convention.</p>
+<p>Recall that global variables have their memory reserved before the program starts. In contrast, local variables have their memory reserved on the stack, inside a stack frame. They are created when the containing function is called.</p>
+<p>Because local variables are created automatically when a function is called, they are sometimes called <strong>automatic variables</strong>.</p>
+<p>In hardware, the program location is called the <strong>program counter</strong>. It is the address of the machine code instruction that is currently excuting.</p>
+<p>Programming has a duality between what we want to do, and what it is actually doing. Programming is the task of makking these two match up, either by changing what you want, or sitting down and writing code.</p>
+<p>Using this new control flow model, self-recursion is simply jumping over to the beginning of the function, but with a new stack frame. The only unusual part is that the return address is inside the same function.</p>
+<p>The call stack can be found in the stack section of the memory model seen earlier. Note that it starts at the highest available address with the stack frame for <code>main</code>, and new stack frames are created at lower addresses - the stack grows downwards.</p>
+<p>If the stack gets too big, it will grow all the way into the heap section. This might cause a segmentation fault, or worse, corrupt data and cause undefined behaviour. This is called a <strong>stack overflow</strong>, and is usually caused by infinite or very deep recursion.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
