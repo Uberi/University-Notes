@@ -451,7 +451,7 @@ Find the volume of the solid represented by rotating $f(x)$ about the x-axis:
 
 # 22/1/14
 
-;wip: figure out how to find the length of a line
+;wip: figure out how to find the length of a curve in 2D
 
 The rotation method works whenever we can find the area function for a given slice along a certain axis.
 
@@ -502,7 +502,7 @@ Consider $y = 2x^2 - x^3 = x^2(2 - x)$ from 0 to 2 rotated about the y-axis:
 > The volume of each shell is $\delta V = h(x) 2\pi x \dee x = 4\pi x^3 \dee x - 2\pi x^4 \dee x$.  
 > So the volume of the solid is $4\pi \int_0^2 x^3 \dee x - 2\pi \int_0^2 x^4 \dee x = 4\pi \evalat{\frac{x^4}{4}}_0^2 - 2\pi \evalat{\frac{x^5}{5}}_0^2 = 4\pi \frac{2^4}{4} - 2\pi \frac{2^5}{5} = \frac{16\pi}{5}$.  
 
-A variation on the method is disks is the **method of washers**. Here, we have disks with holes in them for whatever reason, and our area, rather than simply being the area of a circle, is the area of the circle minus the area of the hole in the middle.
+A variation on the method is disks is the **method of washers**. Here, we have disks with holes in them for whatever reason, and our area, rather than simply being the area of a circle, is the area of the circle minus the area of the hole in the middle. Make sure to use $\pi \int (r_o^2 - r_i^2) \dee x$ rather than $\pi \int (r_o - r_i)^2 \dee x$, where $r_o$ is the outer radius and $r_i$ is the inner radius.
 
 For example, what is the volume enclosed by rotating the area between $y = \sqrt{x}$ and $y = x$ about the x-axis? We could use the disk method, except instead of finding the area of a disk, we find the area of a disk with a hole in it, a washer. However, in this case it would be easier to do it with the method of shells.
 
@@ -513,7 +513,9 @@ Improper Integrals
 
 An integral is improper if some part of it goes to $\pm \infty$ - either the integrand or the domain of integration (limits of integration).
 
-The way we deal with this is to take limits instead of using these infinite values.
+The way we deal with this is to take limits of the infinite values instead of using these infinite values.
+
+Improper integrals work when the domain is infinite ($\int_0^\infty f(x) \dee x$), when the integrand is infinite at one of the endpoints ($\int_0^1 \frac{1}{x}$), or when the integrand is infinite within the domain ($\int_{-1}^1 \frac{1}{x} \dee x$)
 
 For example, $\int_a^\infty f(x) \dee x = \lim_{T \to \infty} \int_a^T f(x) \dee x$.
 
@@ -537,7 +539,7 @@ Consider $\int_{-1}^1 \frac{1}{\sqrt{\abs{x}}} \dee x$:
 > We can instead split the integral at the middle, and since it is an even function, we can combine the two integrals: $2\int_0^1 \frac{1}{\sqrt{x}} \dee x$.  
 > There is an asymptote, so the integral is an improper one: $2\int_0^1 \frac{1}{\sqrt{x}} \dee x = 2 \lim_{T \to 0} \int_T^1 \frac{1}{\sqrt{x}} \dee x = 2 (2 \cdot 1^\frac{1}{2} - 2\lim_{T \to 0} T^\frac{1}{2}) = 4$.  
 
-Consider $\int_{-1}^1 \dee x$:
+Consider $\int_{-1}^1 \dee x$: ;wip: what was the question?
 
 > We might do $\int_{-1}^1 \dee x = \evalat{-\sqrt{x}}_{-1}^1 = -2$.  
 > However, the integral **does not exist**. We need to be careful because the result looks just fine, and does not indicate that an error occurred.  
@@ -545,7 +547,9 @@ Consider $\int_{-1}^1 \dee x$:
 
 The idea behind this is that we need to figure out if an improper integral exists even without integrating it first.
 
-If a function **converges**, that means it goes to a finite value. THe opposite is if it **diverges**, when it goes to $\pm \infty$.
+If a function **converges**, that means it goes to a finite value. The opposite is if it **diverges**, when it goes to $\pm \infty$ or does not exist.
+
+In other words, convergence means the result is a number, and divergence means the result is not a number.
 
 ### Comparison Theorem
 
@@ -558,6 +562,58 @@ Prove that, given that $\int_1^\infty e^{-x} \dee x$ converges, $\int_1^\infty \
 > Assume $P > 1$.   
 > ;wip
 
-Interestingly, $e^{-x^2}$ doesn't have an antiderivative. Figure out if $\int_0^\infty$ converges or diverges:
+Interestingly, $e^{-x^2}$ doesn't have an antiderivative. Figure out if $\int_0^\infty e^{-x^2} \dee x$ converges or diverges:
 
-> ;wip
+> Clearly, $0 \le e^{-x^2} \le e^{-x}$ for $x \ge 1$.  
+> Since $\int_1^\infty e^{-x} \dee x$ converges, $\int_1^\infty e^{-x^2} \dee x$ converges, by the comparison theorem.  
+> So $\int_0^\infty e^{-x^2} \dee x = \int_0^1 e^{-x^2} \dee x + \int_1^\infty e^{-x^2} \dee x$.  
+> Clearly, $e^{-x^2}$ does not diverge for all $x \in [0, 1]$. So $\int_0^1 e^{-x^2} \dee x$.  
+> Since $\int_0^1 e^{-x^2} \dee x$ and $\int_1^\infty e^{-x^2} \dee x$ converge, $\int_0^\infty e^{-x^2} \dee x$ converges.  
+
+# 29/1/14
+
+Consider $\int_1^\infty \frac{1 + e^{-x}}{x} \dee x$:
+
+> Clearly, the function is well behaved for all $x \in [1, \infty]$.  
+> So we do not need to worry about the integrand diverging.  
+> Clearly, $\frac{1 + e^{-x}}{x} \le \frac{2}{x}$.  
+> Clearly, $\frac{2}{x}$ diverges.  
+> However, we can't say anything about the original function using the comparison theorem, since it could still either coonverge or diverge.  
+> Instead, we look for divergence. Clearly, $\frac{1}{x} \le \frac{1 + e^{-x}}{x}$.  
+> Since $\int_1^\infty \frac{1}{x} \dee x$ diverges, $\int_1^\infty \frac{1 + e^{-x}}{x} \dee x$ also diverges.  
+
+Applications of Integration
+---------------------------
+
+Many physical phenomena can be represented by **differential equations** - equations that include derivatives.
+
+This comes about usually through empirical evidence/oberservation, and some by conservation principles.
+
+### Cooling
+
+For example, Newton's Law of Cooling was discovered by Newton's measurements of hot materials in cooler surroundings.
+
+The law states that the change in temperature is linearly propertional to the temperature difference with the surroundings.
+
+In other words, $\frac{\dee}{\dee x} T_h = -k(T_h - T_r)$, where $T_h$ is the temperature of the hot thing, $T_r$ is the surrounding temperature, and $k$ is the cooling coefficient.
+
+Note that $k$ is non-negative and we use $-k$ because hot things cool. This cooling coefficient is influenced by the material and shape of the object.
+
+Values of $T$ for which $\frac{\dee T_h}{\dee x} = 0$ are called **equilibria**.
+
+Most differential equations in science and engineering come from **conservation principles** - principles that apply universally and constrain what can happen. FOr example, conservation of mass/energy/charge/momentum.
+
+### Conservation
+
+Conservation principles are easy to represent in mathematics. Basically, what they state is that the rate of the change of something is the rate of change of something increasing minus the rate of stuff decreasing.
+
+For example, the rate of change of people of the people in the room is the rate of change of people entering minus the rate of change of people leaving.
+
+The rate of something increasing is called a **source**. The rate of something decreasing is called a **sink**.
+
+For example, consider a skydiver immediately after their parachute opens:
+
+> Clearly, $m\frac{\dee \vec{v}}{\dee x} = \sum \vec{F} = m \vec{g} - \vec{F}_d$, where $\vec{F}_d$ is the drag force.  
+> We can calculate the drag force in a lab independent of everything else, and not have to worry about the other things like the height or gravity.  
+> Typically, $\vec{F}_d = k\vec{v}$ for some constant $k$.  
+> So $\frac{\dee \vec{v}}{\dee x} = \vec{g} - \frac{k}{m} \vec{v}$.  

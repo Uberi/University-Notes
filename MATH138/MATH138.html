@@ -333,7 +333,7 @@ z</code></pre>
 <p>The area of each slice at each extent along the x-axis is the area of a circle with the radius <span class="math">\(f(x)\)</span>.<br />The area function is <span class="math">\(A(x) = \pi f(x)^2\)</span>.<br />So the volume is <span class="math">\(\int_a^b A(x) \dee x = \pi \int_a^b f(x)^2 \dee x\)</span>.</p>
 </blockquote>
 <h1 id="section-7">22/1/14</h1>
-<p>;wip: figure out how to find the length of a line</p>
+<p>;wip: figure out how to find the length of a curve in 2D</p>
 <p>The rotation method works whenever we can find the area function for a given slice along a certain axis.</p>
 <p>Here, <span class="math">\(\delta V = A(x) \delta x\)</span>, and then we add up all these tiny volumes to get the total volume.</p>
 <p>This method is called the <strong>method of disks</strong>, because we are integrating the volume of a lot of small disks along the axis of rotation.</p>
@@ -360,12 +360,13 @@ z</code></pre>
 <blockquote>
 <p>This solid looks like the top half of a donut.<br />The method of disks is difficult to use here, because we would need disks with holes in them. We will use the method of shells.<br />The height of each of our cylinders is <span class="math">\(h(x) = 2x^2 - x^3\)</span>.<br />The volume of each shell is <span class="math">\(\delta V = h(x) 2\pi x \dee x = 4\pi x^3 \dee x - 2\pi x^4 \dee x\)</span>.<br />So the volume of the solid is <span class="math">\(4\pi \int_0^2 x^3 \dee x - 2\pi \int_0^2 x^4 \dee x = 4\pi \evalat{\frac{x^4}{4}}_0^2 - 2\pi \evalat{\frac{x^5}{5}}_0^2 = 4\pi \frac{2^4}{4} - 2\pi \frac{2^5}{5} = \frac{16\pi}{5}\)</span>.</p>
 </blockquote>
-<p>A variation on the method is disks is the <strong>method of washers</strong>. Here, we have disks with holes in them for whatever reason, and our area, rather than simply being the area of a circle, is the area of the circle minus the area of the hole in the middle.</p>
+<p>A variation on the method is disks is the <strong>method of washers</strong>. Here, we have disks with holes in them for whatever reason, and our area, rather than simply being the area of a circle, is the area of the circle minus the area of the hole in the middle. Make sure to use <span class="math">\(\pi \int (r_o^2 - r_i^2) \dee x\)</span> rather than <span class="math">\(\pi \int (r_o - r_i)^2 \dee x\)</span>, where <span class="math">\(r_o\)</span> is the outer radius and <span class="math">\(r_i\)</span> is the inner radius.</p>
 <p>For example, what is the volume enclosed by rotating the area between <span class="math">\(y = \sqrt{x}\)</span> and <span class="math">\(y = x\)</span> about the x-axis? We could use the disk method, except instead of finding the area of a disk, we find the area of a disk with a hole in it, a washer. However, in this case it would be easier to do it with the method of shells.</p>
 <h1 id="section-9">27/1/14</h1>
 <h2 id="improper-integrals">Improper Integrals</h2>
 <p>An integral is improper if some part of it goes to <span class="math">\(\pm \infty\)</span> - either the integrand or the domain of integration (limits of integration).</p>
-<p>The way we deal with this is to take limits instead of using these infinite values.</p>
+<p>The way we deal with this is to take limits of the infinite values instead of using these infinite values.</p>
+<p>Improper integrals work when the domain is infinite (<span class="math">\(\int_0^\infty f(x) \dee x\)</span>), when the integrand is infinite at one of the endpoints (<span class="math">\(\int_0^1 \frac{1}{x}\)</span>), or when the integrand is infinite within the domain (<span class="math">\(\int_{-1}^1 \frac{1}{x} \dee x\)</span>)</p>
 <p>For example, <span class="math">\(\int_a^\infty f(x) \dee x = \lim_{T \to \infty} \int_a^T f(x) \dee x\)</span>.</p>
 <p>For example, <span class="math">\(\int_0^\infty e^{-x} \dee x = \lim_{T \to \infty} \int_0^T e^{-x} \dee x = \lim_{T \to \infty} \evalat{-e^{-x}}_0^T = \lim_{T \to \infty} (-e^{-T}) - (-e^{-0}) = 0 + 1 = 1\)</span>.</p>
 <p>Prove that the volume obtained by rotating <span class="math">\(y = \frac{1}{x}\)</span> about the x-axis for <span class="math">\(x \in [1, \infty)\)</span> is finite:</p>
@@ -381,12 +382,13 @@ z</code></pre>
 <blockquote>
 <p>There is a vertical asymptote at <span class="math">\(x = 0\)</span>. This makes it so that we can't directly use the fundemental theorem of calculus to evaluate the integral.<br />We can instead split the integral at the middle, and since it is an even function, we can combine the two integrals: <span class="math">\(2\int_0^1 \frac{1}{\sqrt{x}} \dee x\)</span>.<br />There is an asymptote, so the integral is an improper one: <span class="math">\(2\int_0^1 \frac{1}{\sqrt{x}} \dee x = 2 \lim_{T \to 0} \int_T^1 \frac{1}{\sqrt{x}} \dee x = 2 (2 \cdot 1^\frac{1}{2} - 2\lim_{T \to 0} T^\frac{1}{2}) = 4\)</span>.</p>
 </blockquote>
-<p>Consider <span class="math">\(\int_{-1}^1 \dee x\)</span>:</p>
+<p>Consider <span class="math">\(\int_{-1}^1 \dee x\)</span>: ;wip: what was the question?</p>
 <blockquote>
 <p>We might do <span class="math">\(\int_{-1}^1 \dee x = \evalat{-\sqrt{x}}_{-1}^1 = -2\)</span>.<br />However, the integral <strong>does not exist</strong>. We need to be careful because the result looks just fine, and does not indicate that an error occurred.<br />The integral does not make any sense because the integrand diverges towards <span class="math">\(\infty\)</span> at <span class="math">\(x = 0\)</span>.</p>
 </blockquote>
 <p>The idea behind this is that we need to figure out if an improper integral exists even without integrating it first.</p>
-<p>If a function <strong>converges</strong>, that means it goes to a finite value. THe opposite is if it <strong>diverges</strong>, when it goes to <span class="math">\(\pm \infty\)</span>.</p>
+<p>If a function <strong>converges</strong>, that means it goes to a finite value. The opposite is if it <strong>diverges</strong>, when it goes to <span class="math">\(\pm \infty\)</span> or does not exist.</p>
+<p>In other words, convergence means the result is a number, and divergence means the result is not a number.</p>
 <h3 id="comparison-theorem">Comparison Theorem</h3>
 <p>Given functions <span class="math">\(f(x), g(x)\)</span> such that <span class="math">\(f(x) \ge g(x) \ge 0\)</span> for <span class="math">\(x \ge a\)</span>, if <span class="math">\(\int_a^\infty f(x) \dee x\)</span> converges, then <span class="math">\(\int_a^\infty g(x) \dee x\)</span> also converges.</p>
 <p>The contrapositive is also useful in that if <span class="math">\(\int_a^\infty g(x) \dee x\)</span> diverges, then <span class="math">\(\int_a^\infty f(x) \dee x\)</span> also diverges.</p>
@@ -394,9 +396,32 @@ z</code></pre>
 <blockquote>
 <p>Assume <span class="math">\(P &gt; 1\)</span>.<br />;wip</p>
 </blockquote>
-<p>Interestingly, <span class="math">\(e^{-x^2}\)</span> doesn't have an antiderivative. Figure out if <span class="math">\(\int_0^\infty\)</span> converges or diverges:</p>
+<p>Interestingly, <span class="math">\(e^{-x^2}\)</span> doesn't have an antiderivative. Figure out if <span class="math">\(\int_0^\infty e^{-x^2} \dee x\)</span> converges or diverges:</p>
 <blockquote>
-<p>;wip</p>
+<p>Clearly, <span class="math">\(0 \le e^{-x^2} \le e^{-x}\)</span> for <span class="math">\(x \ge 1\)</span>.<br />Since <span class="math">\(\int_1^\infty e^{-x} \dee x\)</span> converges, <span class="math">\(\int_1^\infty e^{-x^2} \dee x\)</span> converges, by the comparison theorem.<br />So <span class="math">\(\int_0^\infty e^{-x^2} \dee x = \int_0^1 e^{-x^2} \dee x + \int_1^\infty e^{-x^2} \dee x\)</span>.<br />Clearly, <span class="math">\(e^{-x^2}\)</span> does not diverge for all <span class="math">\(x \in [0, 1]\)</span>. So <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span>.<br />Since <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span> and <span class="math">\(\int_1^\infty e^{-x^2} \dee x\)</span> converge, <span class="math">\(\int_0^\infty e^{-x^2} \dee x\)</span> converges.</p>
+</blockquote>
+<h1 id="section-10">29/1/14</h1>
+<p>Consider <span class="math">\(\int_1^\infty \frac{1 + e^{-x}}{x} \dee x\)</span>:</p>
+<blockquote>
+<p>Clearly, the function is well behaved for all <span class="math">\(x \in [1, \infty]\)</span>.<br />So we do not need to worry about the integrand diverging.<br />Clearly, <span class="math">\(\frac{1 + e^{-x}}{x} \le \frac{2}{x}\)</span>.<br />Clearly, <span class="math">\(\frac{2}{x}\)</span> diverges.<br />However, we can't say anything about the original function using the comparison theorem, since it could still either coonverge or diverge.<br />Instead, we look for divergence. Clearly, <span class="math">\(\frac{1}{x} \le \frac{1 + e^{-x}}{x}\)</span>.<br />Since <span class="math">\(\int_1^\infty \frac{1}{x} \dee x\)</span> diverges, <span class="math">\(\int_1^\infty \frac{1 + e^{-x}}{x} \dee x\)</span> also diverges.</p>
+</blockquote>
+<h2 id="applications-of-integration">Applications of Integration</h2>
+<p>Many physical phenomena can be represented by <strong>differential equations</strong> - equations that include derivatives.</p>
+<p>This comes about usually through empirical evidence/oberservation, and some by conservation principles.</p>
+<h3 id="cooling">Cooling</h3>
+<p>For example, Newton's Law of Cooling was discovered by Newton's measurements of hot materials in cooler surroundings.</p>
+<p>The law states that the change in temperature is linearly propertional to the temperature difference with the surroundings.</p>
+<p>In other words, <span class="math">\(\frac{\dee}{\dee x} T_h = -k(T_h - T_r)\)</span>, where <span class="math">\(T_h\)</span> is the temperature of the hot thing, <span class="math">\(T_r\)</span> is the surrounding temperature, and <span class="math">\(k\)</span> is the cooling coefficient.</p>
+<p>Note that <span class="math">\(k\)</span> is non-negative and we use <span class="math">\(-k\)</span> because hot things cool. This cooling coefficient is influenced by the material and shape of the object.</p>
+<p>Values of <span class="math">\(T\)</span> for which <span class="math">\(\frac{\dee T_h}{\dee x} = 0\)</span> are called <strong>equilibria</strong>.</p>
+<p>Most differential equations in science and engineering come from <strong>conservation principles</strong> - principles that apply universally and constrain what can happen. FOr example, conservation of mass/energy/charge/momentum.</p>
+<h3 id="conservation">Conservation</h3>
+<p>Conservation principles are easy to represent in mathematics. Basically, what they state is that the rate of the change of something is the rate of change of something increasing minus the rate of stuff decreasing.</p>
+<p>For example, the rate of change of people of the people in the room is the rate of change of people entering minus the rate of change of people leaving.</p>
+<p>The rate of something increasing is called a <strong>source</strong>. The rate of something decreasing is called a <strong>sink</strong>.</p>
+<p>For example, consider a skydiver immediately after their parachute opens:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(m\frac{\dee \vec{v}}{\dee x} = \sum \vec{F} = m \vec{g} - \vec{F}_d\)</span>, where <span class="math">\(\vec{F}_d\)</span> is the drag force.<br />We can calculate the drag force in a lab independent of everything else, and not have to worry about the other things like the height or gravity.<br />Typically, <span class="math">\(\vec{F}_d = k\vec{v}\)</span> for some constant <span class="math">\(k\)</span>.<br />So <span class="math">\(\frac{\dee \vec{v}}{\dee x} = \vec{g} - \frac{k}{m} \vec{v}\)</span>.</p>
 </blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>

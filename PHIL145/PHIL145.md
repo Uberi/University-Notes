@@ -57,7 +57,7 @@ We want the resulting beliefs to be **true**, or at least **probably true**, and
 
 So we want to reason successfully, and only successful reasoning results in true beliefs. Therefore:
 
-> Critical thinking is reasining in a way that leads to the production of true (or approximately or probably true) beliefs.  
+> Critical thinking is reasoning in a way that leads to the production of true (or approximately or probably true) beliefs.  
 > Critical thinking is successful or reliable reasoning.  
 
 We care about true beliefs because people are more likely to be successful (achieve their goals) if they act on true beliefs.
@@ -67,15 +67,15 @@ How do we learn to reason reliably?
 There are two types of reasoning:
 
 * Domain-specific reasoning is reasoning in a specific topic, like how chemistry classes teach one to reason well about what compounds will be produced in a given reaction.
-* Domain-general reasoning is reasoning that is applicable to any field, giving muh broader principles that work everywhere. This is the focus of this course.
+* Domain-general reasoning is reasoning that is applicable to any field, giving much broader principles that work everywhere. This is the focus of this course.
 
-**Metacognitive approach** is learning how to think about thinking. Learning to think well about a subject means learning new concepts and how to apply them. Likewise with reasoning. We will use these concepts to analyze, explain, criticise, and correct reasoning.
+**Metacognitive approach** is learning how to think about thinking. Learning to think well about a subject means learning new concepts and how to apply them. Likewise with reasoning. We will use these concepts to analyze, explain, criticize, and correct reasoning.
 
-Critical thinking is a philosophy class for historical reasons, but there are also many connections between the fields. Math, science, psychology, and a lot of other fields are simply branches off of philosophy. Philisophical questions often require looking into domain-general reasoning, and has close connections to critical thinking.
+Critical thinking is a philosophy class for historical reasons, but there are also many connections between the fields. Math, science, psychology, and a lot of other fields are simply branches off of philosophy. Philosophical questions often require looking into domain-general reasoning, and has close connections to critical thinking.
 
 # 10/1/14
 
-COnsider Zeno's paradox:
+Consider Zeno's paradox:
 
 1. Achilles wants to run from point A to B.
 2. To do this, he must go from the first point to halfway to the second point.
@@ -90,7 +90,7 @@ This is because the distance becomes infinitely small, while the amount of time 
 Reasoning
 ---------
 
-Philisophical questions are often questions with no established methods for solving them. "Is the stove on?" has established methods for solving - check the stove.
+Philosophical questions are often questions with no established methods for solving them. "Is the stove on?" has established methods for solving - check the stove.
 
 Philosophers develop concepts and methods of looking at the reasoning about these questions. Domain-general reasoning is often the only way we can look a these problems when they are too new or difficult to solve otherwise. This is also useful in math, logic, science, etc.
 
@@ -102,13 +102,13 @@ When we examine reasons, we can evaluate the reliability of the reasoning and ho
 
 Presenting an argument is a way of giving expression in language to our reasons - a way of putting reasoning on display.
 
-The study of argumentation lets us hone our reasoning skllls.
+The study of argumentation lets us hone our reasoning skills.
 
 An argument can mean a fight or a disagreement, but also a reasoned defence of a claim. We are more interested in the second definition.
 
 An argument can also be abstracted into a set of premises implying a conclusion.
 
-People can say the same words in the same sentence but communicate different things: "one is a prime number.", "is one a prime number?". How do we differentiate assertions, promises, threats, questions, etc. In the previous example, the two imply different relationships between the person (knowing vs. not knowing) and the claim snd asks different things of the audience (agreement vs. answering).
+People can say the same words in the same sentence but communicate different things: "one is a prime number.", "is one a prime number?". How do we differentiate assertions, promises, threats, questions, etc. In the previous example, the two imply different relationships between the person (knowing vs. not knowing) and the claim and asks different things of the audience (agreement vs. answering).
 
 What is the real difference between these different ways of communicate the same words? Everything is said in a certain context, which is an important part of understanding the intent of the words.
 
@@ -120,18 +120,18 @@ Assertions are claims presented as true. By asserting a claim:
 
 # 13/1/14
 
-Committing to defending assertions has multiple benefits: filtering information, checking our beliefs against others', helping us change our minds, and explaining our reasoning being helpful for clarifying/organising our own beliefs.
+Committing to defending assertions has multiple benefits: filtering information, checking our beliefs against others', helping us change our minds, and explaining our reasoning being helpful for clarifying/organizing our own beliefs.
 
 ### Identifying Arguments
 
-The fundemental unit of rational exchange is the argument. Arguments show the reasonableness of an assertion - if the argument succeeds in doing so, everyone is justified in believing the assertion is true.
+The fundamental unit of rational exchange is the argument. Arguments show the reasonableness of an assertion - if the argument succeeds in doing so, everyone is justified in believing the assertion is true.
 
 Two working definitions of arguments:
 
-* Broad definition: argumentation is the practice by which we aim to show the reasonableness of an assertion. An argument is the thing presented when trying to meet this aim - a verbal or written object.
+* Broad definition: argumentation is the practise by which we aim to show the reasonableness of an assertion. An argument is the thing presented when trying to meet this aim - a verbal or written object.
 * Narrow definition: an argument is a set of claims in which one or more of the claims, the premises, are offered as support of another claim, the conclusion - an abstract object.
 
-The broad definition focuses on the practice of argumentation and connects it to asertion - the communicative act.
+The broad definition focuses on the practise of argumentation and connects it to assertion - the communicative act.
 
 The narrow definition focuses on the products of the communicative act. This is what we will focus on in this course.
 
@@ -143,7 +143,7 @@ When is a set of sentences an argument? There must be a conclusion - an assertio
 
 > Toronto is the largest city in Canada.
 
-This is not an argument, because there is only a conclusion, without any suporting premises.
+This is not an argument, because there is only a conclusion, without any supporting premises.
 
 > Will you get lost if you walk around Toronto?
 
@@ -167,11 +167,11 @@ To determine whether something is an argument, all three of the following must b
 
 Assertions are the same thing as claims in this course - the terms are interchangeable.
 
-> Descartes argues that anyone who thinks, can know they exist. He reasons that a precondition f thinking is existance.
+> Descartes argues that anyone who thinks, can know they exist. He reasons that a precondition f thinking is existence.
 
 This is just reporting what was said, not an argument.
 
-Note that the second sentence, describing Descartes' reasoning, does not support the claim that **Descartes said something what he did**. In other words, the second sentence does not support the first, because the seconbd sentence is a **report**.
+Note that the second sentence, describing Descartes' reasoning, does not support the claim that **Descartes said something what he did**. In other words, the second sentence does not support the first, because the second sentence is a **report**.
 
 Rules of thumb for identifying arguments:
 
@@ -223,7 +223,7 @@ We must be sure that the counter-example is possible:
     ---------------------------------------------------------
     You are shorter than me.
 
-Here, the counter-example "You are the same height" is not admissable because this does not satisfy the first premise.
+Here, the counter-example "You are the same height" is not admissible because this does not satisfy the first premise.
 
 Usually, the content of the argument determines whether it is valid:
 
@@ -255,7 +255,7 @@ Here, P and Q represent claims that can be asserted. They can be as complicated 
 
 ;wip: get that list of valid forms from the slides
 
-We can combine argument forms to get more complex arguments. For example, hypotheical syllogism and modus ponens together:
+We can combine argument forms to get more complex arguments. For example, hypothetical syllogism and modus ponens together:
 
     If P, then Q
     If Q, then R
@@ -284,7 +284,7 @@ However, arguments can be valid, yet have false conclusions. Additionally, they 
 
 Validity is a property of the structure of an argument.
 
-A premise can be supported by other premises. These other premises support a conclusion, which is then treated as a premise in our argument. These **sub-arguments** appear often in more complex arguments. All the subarguments must be valid for an argument to be valid. For example, the combined argument above can be written as:
+A premise can be supported by other premises. These other premises support a conclusion, which is then treated as a premise in our argument. These **sub-arguments** appear often in more complex arguments. All the sub-arguments must be valid for an argument to be valid. For example, the combined argument above can be written as:
 
 * R, because:
     * If P, then R, because:
@@ -306,7 +306,7 @@ A premise can be supported by other premises. These other premises support a con
     ---------------------------------------
     The snow is white or the grass is green
 
-We can diagram arguments with their subarguments as trees in node-arrow diagrams. We often number the statements and then label the nodes with the statement numbers.
+We can diagram arguments with their sub-arguments as trees in node-arrow diagrams. We often number the statements and then label the nodes with the statement numbers.
 
 Consider the following argument:
 
@@ -359,11 +359,11 @@ The above is neither necessarily true or necessarily false. It is known as the *
 
 This is a valid but unsound argument. This is because the truth of the premises always implies the truth of the conclusion - the conclusion is always true, so if the premises are true, then the conclusion is also true.
 
-**Compound** or **complex** sentences can be constructed out of **atomic** sentences. The truth value of these sentences are often determined by the truth value of their component atomic sentences, as well as the **logcal connectives** between the atomic sentences.
+**Compound** or **complex** sentences can be constructed out of **atomic** sentences. The truth value of these sentences are often determined by the truth value of their component atomic sentences, as well as the **logical connectives** between the atomic sentences.
 
 An atomic sentence may be something like "It is raining" or "The sky is blue".
 
-### Conjuctive
+### Conjunctive
 
 A complex sentence might be "It is raining, but it is warm".
 
@@ -420,7 +420,7 @@ Cogency is concerned only with the likeliness/probability of counterexamples exi
 
 An argument is cogent if the conclusion is more likely than all of its other counterexamples.
 
-The thing about deductive arguments is that since they add no information, we need to start with some information in order to have a deductive argument. Most empircal reasoning (reasoning based on experience or obseration) is ampliative. This includes most scientific inferences.
+The thing about deductive arguments is that since they add no information, we need to start with some information in order to have a deductive argument. Most empirical reasoning (reasoning based on experience or observation) is ampliative. This includes most scientific inferences.
 
 Ampliative arguments have two important properties:
 
@@ -460,17 +460,22 @@ The premises in an ampliative argument represent the author's state of informati
 
 When one has no information or information that points to the conclusion being equally likely to be true or false, one is in a **neutral state of information**.
 
-In a neutral state of information, it is reasonable to withold judgement, where we do not accept the proposition, and do not reject it.
+In a neutral state of information, it is reasonable to withhold judgement, where we do not accept the proposition, and do not reject it. We simply do not say anything about the truth of the information, since we won't have any information either way.
+
+For example, we are in a neutral state of information with regards to the proposition "the next coin flip will result in heads", because there is no evidence that it is any more likely than tails.
+
+# 29/1/14
+
 
 ### Inductive Arguments
 
-Inductive arguments have conclusions that are unknown cases derived from known cases. For example:
+Inductive arguments have conclusions that are unknown cases derived from known cases - "more of the same". For example:
 
     The sun rose yesterday.
-    The sun rose the day before yesterday.
+    The sun rose 2 days ago.
     ...
-    The sun rose 39485723 days ago.
-    --------------------------------------
+    The sun rose 394857 days ago.
+    ---------------------------------
     The sun will rise again tomorrow.
 
 This is a pretty good inductive argument. Alternatively:
@@ -481,9 +486,107 @@ This is a pretty good inductive argument. Alternatively:
 
 This is not so good an inductive argument.
 
-How do we evaluate inductive arguments? The strength of inductive arguments is based on how similar the observed and unobserved cases are - how similar the cases in the premises are to the conclusion, in addition to the actual number of observed cases.
+The premises of an inductive argument used to infer the conclusion are called the **inductive base**.
 
-In other words, an inductive argument is cogent if it has a large sample size and the samples are representative of the case in the conclusion.
+How do we evaluate inductive arguments? The strength of inductive arguments is based on how similar the observed and unobserved cases are - **how similar the cases in the premises are to the conclusion**, in addition to the actual **number of observed cases**.
+
+In other words, an inductive argument is strong/cogent if and only if it has a large sample size and the samples are representative of the case in the conclusion.
+
+Inductive strength is a matter of degree.
 
 Arguments can incorporate all different types of arguments as sub-arguments - for example, an argument might use induction and then modus ponens.
 
+    This duck quacked.
+    Another duck quacked.
+    All ducks quacked.
+    If it quacks, it is annoying.
+    -----------------------------
+    All ducks are annoying.
+
+This is a **valid argument** ;wip
+
+### Abductive Arguments
+
+Abductive arguments have conclusions that unify, explain, or rationalize a set of facts. It is an explanation for the truth of the premises.
+
+They are inferences to the best way to make sense of the observations in the premises.
+
+    Ted was standing over the body.
+    Ted was holding a weapon.
+    Ted confessed to the crime.
+    -------------------------------
+    Ted is the murderer.
+
+This is a strong/cogent abductive argument, because the conclusion explains the premises very well.
+
+    I rolled the die twice.
+    I got 6 both times.
+    -----------------------
+    The die is rigged.
+
+Even though the premises are true, the argument is rather weak, because the premises are not really worthy or needing of explanation.
+
+The strength of abductive arguments depends on the ability of the conclusion to explain why the premises are true.
+
+If a premise doesn't really need an explanation, it doesn't really add much support to the conclusion.
+
+As always, we can evaluate cogency/strength by considering how likely the counter-examples are true.
+
+### Analogical Arguments
+
+Analogical arguments draw conclusions based on a comparison. There are three important parts:
+
+* The **analogue** is the thing we draw conclusions from.
+* The **primary subject** is the thing we want to make a conclusion about.
+* The **claims of similarity** between the analogue and primary subject.
+
+    The A is similar to B.
+    The A has property Z.
+    ------------------------------
+    The B has property Z.
+
+The claims of similarity is often implicit and unstated in the text.
+
+Consider the following analogical argument: "when I visited this doctor he was attentive and sympathetic. I did what he suggested and it solved my problem. If you go see him, he will solve your problem too."
+
+    You have the same problem as I did.
+    The doctor solved my problem.
+    -----------------------------------
+    The doctor will solve your problem.
+
+Here, the primary subject is the problem of the person being addressed ("your problem"). The analogue is the author's problem ("my problem"). The claim of similarity is that both problems are the same.
+
+There are also a few types of analogical arguments:
+
+* **Inductive analogies** draw conclusions about unobserved cases from relevant similar cases.
+* **Consistency analogies** draw conclusions about what should be true from relevantly similar cases
+* **Refutations by analogy** try to show that a claim cannot be true because it has problematic consequences in relevant similar cases.
+
+Consider the analogy "the model lost stability in the wind tunnel. Since the model was built to scale, the plane will also lose stability":
+
+    The model lost stability.
+    The model has a similar structure to the plane.
+    -----------------------------------------------
+    The plane will lose stability.
+
+This is an inductive analogy, since it draws conclusions about an unobserved case.
+
+Consider the analogy "Society does not shun those suffering from polio or tuberculosis. Why does it shun those with mental health issues?":
+
+    Society does not shun those with physical diseases.
+    Mental and physical diseases are both diseases.
+    ---------------------------------------------------
+    Society should not shun those with mental diseases.
+
+Consider the analogy "saying you shouldn't take medicine because it's unnatural is like saying we shouldn't ride bicycles because they are unnatural creations":
+
+    It is ridiculous to say that we shouldn't ride bicycles because they are unnatural.
+    Both bicycles and medicine are unnatural.
+    -----------------------------------------------------------------------------------
+    It is ridiculous to say that we shouldn't take medicine because it is unnatural.
+
+This is a refutation by analogy, because the consequences in a similar case mean that we cannot accept a claim.
+
+The strength of an analogy is based on the similarities between the analogue and primary subject. More similarity means more cogency and a stronger argument.
+
+We can extend the method of counterexample to analogies. When evaluating analogical arguments, we look for disanalogies - dissimilarities between the primary subject and analogue that weaken the claim to similarity.

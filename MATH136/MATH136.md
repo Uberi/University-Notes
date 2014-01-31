@@ -715,6 +715,8 @@ Because all spans are subspaces (by Theorem 1.2.2), the solution set is a subspa
 
 Because the solution set is a subspace, we often call it the **solution space** of a aystem.
 
+# 29/1/14
+
 Matrices
 --------
 
