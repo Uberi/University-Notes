@@ -398,15 +398,15 @@ All roses are red.</code></pre>
 <p>The premises of an inductive argument used to infer the conclusion are called the <strong>inductive base</strong>.</p>
 <p>How do we evaluate inductive arguments? The strength of inductive arguments is based on how similar the observed and unobserved cases are - <strong>how similar the cases in the premises are to the conclusion</strong>, in addition to the actual <strong>number of observed cases</strong>.</p>
 <p>In other words, an inductive argument is strong/cogent if and only if it has a large sample size and the samples are representative of the case in the conclusion.</p>
-<p>Inductive strength is a matter of degree.</p>
+<p>Inductive strength is a matter of degree. Inductive strength is changed if and only if there is new evidence introduced.</p>
 <p>Arguments can incorporate all different types of arguments as sub-arguments - for example, an argument might use induction and then modus ponens.</p>
 <pre><code>This duck quacked.
 Another duck quacked.
-All ducks quacked.
+All ducks quack.
 If it quacks, it is annoying.
 -----------------------------
 All ducks are annoying.</code></pre>
-<p>This is a <strong>valid argument</strong> ;wip</p>
+<p>This is a <strong>valid argument</strong> - assuming the premises are true, the conclusion will always be true. The inductive part simply makes the argument more cogent, since it provides better reason to believe the premise &quot;All ducks quack&quot;.</p>
 <h3 id="abductive-arguments">Abductive Arguments</h3>
 <p>Abductive arguments have conclusions that unify, explain, or rationalize a set of facts. It is an explanation for the truth of the premises.</p>
 <p>They are inferences to the best way to make sense of the observations in the premises.</p>
@@ -463,7 +463,107 @@ Both bicycles and medicine are unnatural.
 It is ridiculous to say that we shouldn&#39;t take medicine because it is unnatural.</code></pre>
 <p>This is a refutation by analogy, because the consequences in a similar case mean that we cannot accept a claim.</p>
 <p>The strength of an analogy is based on the similarities between the analogue and primary subject. More similarity means more cogency and a stronger argument.</p>
-<p>We can extend the method of counterexample to analogies. When evaluating analogical arguments, we look for disanalogies - dissimilarities between the primary subject and analogue that weaken the claim to similarity.</p>
+<p>We can extend the method of counterexample to analogies. When evaluating analogical arguments, we look for <strong>disanalogies</strong> - relevant dissimilarities between the primary subject and analogue that weaken the claim to similarity.</p>
+<p>Disanalogies simply add premises to an analogical argument that reduce its cogency.</p>
+<h2 id="systematic-argument-evaluation">Systematic Argument Evaluation</h2>
+<p>We now develop a systematic approach to argument evaluation. When evaluating an argument, we can do so using the following process:</p>
+<ol style="list-style-type: decimal">
+<li>Rewrite the argument in standard form.</li>
+<li>Diagram the argument structure as a tree or diagram.</li>
+<li>Evaluate the argument based on:
+<ul>
+<li>How acceptable the premises are (acceptability).</li>
+<li>How relevant the premises are to the conclusion (relevancy).</li>
+<li>How well grounded the conclusion is in the premises - how much the conclusion is supported by the premises (groundedness).</li>
+</ul></li>
+</ol>
+<p>We use these criteria to evaluate the validity, soundness, or cogency of any given argument.</p>
+<h3 id="standard-form">Standard Form</h3>
+<p>Standard form is a way of representing an argument that makes the structure of an argument explicit, making it easy to see the actual argument being made.</p>
+<p>In standard form, we put our premises in a numbered list. Implicit premises have their number underlined.</p>
+<p>The conclusion goes after the list, separated by a horizontal line (Fitch bar).</p>
+<p>When we convert arguments into standard form, we need to first process the premises and conclusion:</p>
+<ul>
+<li>Remove all sentences that are not the conclusion or sentences offered in support of the conclusion.</li>
+<li>Omit redundant/duplicate sentences (sentences that are logically equivalent to another sentence).</li>
+<li>Convert the sentences into proper standalone statements, making sure to indicate changes to the original text.</li>
+</ul>
+<p>Consider the following argument:</p>
+<blockquote>
+<p>Is littering harmful? You bet it is. After all, animals choke on plastic wrappers and people cut themselves on broken glass. I can't stand people that litter! Our elected officials should pass laws against littering because it is their duty to reduce harm whenever possible.</p>
+</blockquote>
+<p>We now identify the conclusion and obvious premises (by looking for keywords like &quot;because&quot; and &quot;after all&quot;), and write each sentence alone, making sure each sentence is fully formed and stands alone:</p>
+<pre><code>1. Is littering harmful?
+2. You bet [littering] is [harmful].
+3. After all, animals choke on plastic wrappers and people cut themselves on broken glass.
+4. I can&#39;t stand people that litter!
+5. It is [our elected officials&#39;] duty to reduce harm whenever possible.
+------------------------------------------------------------------------------------------
+6. Our elected officials should pass laws against littering.</code></pre>
+<p>Now we remove all sentences that are not premises or the conclusion, and all extraneous words to make every sentence an assertion with its own truth value:</p>
+<pre><code>1. [Littering] is [harmful].
+2. Animals choke on plastic wrappers and people cut themselves on broken glass.
+3. It is [our elected officials&#39;] duty to reduce harm whenever possible.
+-------------------------------------------------------------------------------
+4. Our elected officials should pass laws against littering.</code></pre>
+<p>Now we insert implicit premises as needed:</p>
+<pre><code>1. [Littering] is [harmful].
+2. Animals choke on plastic wrappers and people cut themselves on broken glass.
+3. It is [our elected officials&#39;] duty to reduce harm whenever possible.
+&lt;u&gt;4&lt;/u&gt;. Passing laws against something helps reduce it.
+-------------------------------------------------------------------------------
+5. Our elected officials should pass laws against littering.</code></pre>
+<h3 id="diagramming">Diagramming</h3>
+<p>We can now diagram an argument in standard form by drawing a tree-like structure that represents how the premises support the conclusion, including sub-arguments.</p>
+<p>This requires distinguishing between the argument conclusion and the conclusions of the sub-arguments.</p>
+<p>Each assertion is a node in the tree, labelled with its number, and we draw an arrow from assertion <span class="math">\(A\)</span> to assertion <span class="math">\(B\)</span> to represent that <span class="math">\(A\)</span> supports <span class="math">\(B\)</span>.</p>
+<p>We represent convergent support with an arrow from each supporting premise:</p>
+<pre><code>A B
+| |
+---
+ |
+ v
+ C</code></pre>
+<p>We represent linked support with a <code>+</code> and use only a single arrow from it:</p>
+<pre><code>A + B
+  |
+  v
+  C</code></pre>
+<p>For example, the example argument above can be diagrammed as follows:</p>
+<pre><code>2
+|
+v
+1 + 3 + 4
+    |
+    v
+    5</code></pre>
+<h3 id="evaluation">Evaluation</h3>
+<p>We first evaluate the acceptability of the premises:</p>
+<ul>
+<li>Is it reasonable to proceed as if the premises are true? We do not necessarily need to know that they are true.</li>
+<li>It is often reasonable to accept premises for the sake of argument, even if we do not know they are true.</li>
+<li>We often accept a premise if it is supported by a cogent argument, or if it is a necessary truth, a piece of common knowledge, supported by testimony, or appropriate appeal to authority.</li>
+<li>We often reject a premise if it is refutable with other knowledge, or if it is a necessary falsehood, contradictory to other premises, or relies on the truth of the conclusion to be true.</li>
+</ul>
+<p>We then evaluate the relevancy of the premises:</p>
+<ul>
+<li>Only relevant premises can support the conclusion.</li>
+<li>Many premises are relevant only when linked together, so this is evaluating groups of premises.</li>
+<li>The diagram often helps here.</li>
+<li><strong>Positive relevance</strong> is when the truth of <span class="math">\(X\)</span> counts in favour of the truth of <span class="math">\(Y\)</span>. We say <span class="math">\(X\)</span> is positively relevant to <span class="math">\(Y\)</span>.</li>
+<li><strong>Negative relevance</strong> is when the truth of <span class="math">\(X\)</span> counts against the truth of <span class="math">\(Y\)</span>. We say <span class="math">\(X\)</span> is negatively relevant to <span class="math">\(Y\)</span>.</li>
+<li><strong>Irrelevance</strong> is when the truth of <span class="math">\(X\)</span> has no effect on the truth of <span class="math">\(Y\)</span>. We say that <span class="math">\(X\)</span> is irrelevant to <span class="math">\(Y\)</span>.</li>
+<li><span class="math">\(X\)</span> and <span class="math">\(Y\)</span> are groups of premises.</li>
+</ul>
+<p>Finally, the groundedness:</p>
+<ul>
+<li>Groundedness is how rationally believable the conclusion is if all the premises are true.</li>
+<li>All valid arguments are well grounded, and a lot of invalid arguments too.</li>
+<li>Conclusions can be grounded via the methods described before: deductive support, inductive support, abductive support, or analogical support.</li>
+<li>We mainly evaluate this using the method of counterexamples.</li>
+</ul>
+<p>In our example above, the premises are all relevant to the conclusion (2 is positively relevant to 1, and 1+3+4 is positively relevant to 5), and the argument and all sub-arguments are all well grounded (accepting 2 makes it reasonable to accept 1, and accepting 1, 3, and 4 makes it reasonable to accept 5).</p>
+<p>However, assertion 3, that elected officials are to reduce harm, is not very acceptable. Therefore, the argument is not very cogent.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

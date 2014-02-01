@@ -120,13 +120,13 @@ Email: dstwolcz@uwaterloo.ca</code></pre>
 <li>Closure under addition: <span class="math">\(\vec{x} + \vec{y} \in \mathbb{R}^n\)</span>.</li>
 <li>Associativity: <span class="math">\((\vec{x} + \vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})\)</span></li>
 <li>Commutativity: <span class="math">\(\vec{x} + \vec{y} = \vec{y} + \vec{x}\)</span></li>
-<li>Additive identity: <span class="math">\(\exists \vec{0} \in \mathbb{R}, \vec{x} + \vec{0} = \vec{x}\)</span></li>
+<li>Additive identity: <span class="math">\(\exists \vec{0} \in \mathbb{R}, \forall \vec{x} \in \mb{R}^n, \vec{x} + \vec{0} = \vec{x}\)</span> (<span class="math">\(\vec{0}\)</span> is called the zero vector).</li>
 <li>Additive inverse: <span class="math">\(\forall \vec{x} \in \mathbb{R}^n, \exists -\vec{x} \in \mathbb{R}^n, \vec{x} + (-\vec{x}) = \vec{0}\)</span>.</li>
-<li><span class="math">\(c\vec{x} \in \mathbb{R}^n\)</span></li>
-<li><span class="math">\(c(d\vec{x}) = (cd)\vec{x}\)</span></li>
-<li>Scalar distributivity: <span class="math">\((c + d)\vec{x} = c\vec{x} + d\vec{x}\)</span></li>
-<li>Vector distributivity: <span class="math">\(c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}\)</span></li>
-<li>Multiplicative identity: <span class="math">\(1\vec{x} = \vec{x}\)</span></li>
+<li>Closure under scalar multiplication: <span class="math">\(c\vec{x} \in \mathbb{R}^n\)</span>.</li>
+<li><span class="math">\(c(d\vec{x}) = (cd)\vec{x}\)</span>.</li>
+<li>Scalar distributivity: <span class="math">\((c + d)\vec{x} = c\vec{x} + d\vec{x}\)</span>.</li>
+<li>Vector distributivity: <span class="math">\(c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}\)</span>.</li>
+<li>Multiplicative identity: <span class="math">\(1\vec{x} = \vec{x}\)</span>.</li>
 </ul>
 <p>Closure under addition means that when we add two elements in the set, the resulting sum is also in the set.</p>
 <p>Closure under scalar multiplication means that when we multiply an element in the set by a scalar, the resulting product is also in the set.</p>
@@ -403,9 +403,68 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <p>As a result, we can always write the solution set of a homogenous system as the span of a set of vectors.</p>
 <p>Because all spans are subspaces (by Theorem 1.2.2), the solution set is a subspace.</p>
 <p>Because the solution set is a subspace, we often call it the <strong>solution space</strong> of a aystem.</p>
-<h1 id="section">29/1/14</h1>
+<h1 id="section">30/1/14</h1>
 <h2 id="matrices">Matrices</h2>
-<p>Matrices are abstract objects like vectors.</p>
+<p>Matrices are abstract objects like vectors. We usually denote matrix variables with capital letters.</p>
+<p>An <span class="math">\(m \times n\)</span> matrix <span class="math">\(A\)</span> is a rectangular array with <span class="math">\(m\)</span> rows and <span class="math">\(n\)</span> columns. We represent the <span class="math">\(i\)</span>th row and <span class="math">\(j\)</span>th column as <span class="math">\(a_{i, j}\)</span>, or <span class="math">\((A)_{i, j}\)</span>.</p>
+<p>In other words, <span class="math">\(A = \begin{bmatrix} a_{1, 1} &amp; \ldots &amp; a_{1, n} \\ \vdots &amp; \vdots &amp; \vdots \\ a_{m, 1} &amp; \ldots &amp; a_{m, n} \end{bmatrix}\)</span>.</p>
+<p>All <span class="math">\(m \times n\)</span> matrices belong to the set <span class="math">\(M_{m \times n}\)</span>, similar to how all <span class="math">\(n\)</span>-dimensional vectors belong to the set <span class="math">\(\mb{R}^n\)</span>.</p>
+<h3 id="operations-1">Operations</h3>
+<p>Let <span class="math">\(A, B, C\)</span> be matrices.</p>
+<p>Equality: <span class="math">\(A = B \iff \forall 1 \le i \le m, \forall 1 \le j \le n, (A)_{i, j} = (B)_{i, j}\)</span>.</p>
+<p>In other words, two matrices are equal if and only if they are both the same size and contain the same entries.</p>
+<p>Addition/subtraction: <span class="math">\(A \pm B = C \iff \forall 1 \le i \le m, \forall 1 \le j \le n, (C)_{i, j} = (A)_{i, j} \pm (B)_{i, j}\)</span>.</p>
+<p>In other words, when we add matrices (only defined for matrices of the same size), we simply add their corresponding entries.</p>
+<p>Scalar multiplication: <span class="math">\(t \in \mb{R}; tA = C \iff \forall 1 \le i \le m, \forall 1 \le j \le n, (C)_{i, j} = t(A)_{i, j}\)</span>.</p>
+<p>In other words, when we multiply a matrix by a scalar or a scalar by a matrix, we simply multiply each entry in the matrix by the scalar.</p>
+<p>With these operations, we can take linear combinations of matrices.</p>
+<h3 id="theorem-3.1.1">Theorem 3.1.1</h3>
+<p>For all <span class="math">\(A, B, C \in M_{m \times n}, s, t, \in \mb{R}\)</span>:</p>
+<ul>
+<li>Closure under addition: <span class="math">\(A + B \in M_{m \times n}\)</span>.</li>
+<li>Associativity: <span class="math">\((A + B) + C = A + (B + C)\)</span></li>
+<li>Commutativity: <span class="math">\(A + B = B + A\)</span></li>
+<li>Additive identity: <span class="math">\(\exists 0_{m, n} \in \mathbb{R}, \forall A \in M_{m, n}, A + 0_{m, n} = A\)</span> (<span class="math">\(0_{m, n}\)</span> is called the zero matrix).</li>
+<li>Additive inverse: <span class="math">\(\forall A \in M_{m, n}, \exists -A \in M_{m, n}, A + (-A) = 0_{m, n}\)</span>.</li>
+<li>Closure under scalar multiplication: <span class="math">\(cA \in M_{m, n}\)</span>.</li>
+<li><span class="math">\(c(dA) = (cd)A\)</span></li>
+<li>Scalar distributivity: <span class="math">\((c + d)A = cA + dA\)</span>.</li>
+<li>Vector distributivity: <span class="math">\(c(A + B) = cA + cB\)</span>.</li>
+<li>Multiplicative identity: <span class="math">\(1A = A\)</span>.</li>
+</ul>
+<h3 id="transpose">Transpose</h3>
+<p>Vectors and matrices are closely related. We have been writing vectors as columns for a while now. In fact, we can use vectors to represent the columns of a matrix.</p>
+<p>For example, if <span class="math">\(\vec{u} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}, \vec{v} = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}\)</span>, then <span class="math">\(\begin{bmatrix} \vec{u} &amp; \vec{v} \end{bmatrix} = \begin{bmatrix} 1 &amp; 4 \\ 2 &amp; 5 \\ 3 &amp; 6 \end{bmatrix}\)</span>.</p>
+<p>The <strong>transpose</strong> of a matrix <span class="math">\(A \in M_{m, n}\)</span> is <span class="math">\(A^T \in M_{n, m}\)</span> (&quot;A transposed&quot;), a matrix such that <span class="math">\((A)_{i, j} = (A^T)_{j, i}\)</span>.</p>
+<p>Note that the dimensions were swapped around. Basically, the rows became the columns, and the columns became the rows - we reflected the entries around a diagonal line starting from the top left.</p>
+<ul>
+<li><span class="math">\(A = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}; A^T = \begin{bmatrix} 1 &amp; 2 &amp; 3 \end{bmatrix}\)</span>.</li>
+<li><span class="math">\(B = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \\ 5 &amp; 6 \end{bmatrix}; B^T = \begin{bmatrix} 1 &amp; 3 &amp; 5 \\ 2 &amp; 4 &amp; 6 \end{bmatrix}\)</span>.</li>
+<li><span class="math">\(C = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 3 \end{bmatrix}; C^T = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 3 \end{bmatrix}\)</span>.</li>
+</ul>
+<p>Some matrices satisfy the property <span class="math">\(A = A^T\)</span>. These matrices are called <strong>symmetric</strong>, because they are symmetric about the diagonal line. Note that only square matrices can be symmetric.</p>
+<p>Transposes are useful for representing the rows of a matrix with vectors, rather than columns.</p>
+<p>For example, if <span class="math">\(\vec{u} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}, \vec{v} = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}\)</span>, then <span class="math">\(\begin{bmatrix} \vec{u}^T \\ \vec{v}^T \end{bmatrix} = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \end{bmatrix}\)</span>.</p>
+<h3 id="theorem-3.1.2">Theorem 3.1.2</h3>
+<p>For all <span class="math">\(A, B \in M_{m, n}, c \in \mb{R}\)</span>:</p>
+<ul>
+<li><span class="math">\((A^T)^T = A\)</span></li>
+<li><span class="math">\((A + B)^T = A^T + B^T\)</span></li>
+<li><span class="math">\((cA)^T = c(A^T)\)</span></li>
+</ul>
+<p>Proof:</p>
+<p>(proof of first)</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\forall 1 \le i \le m, \forall 1 \le j \le n, ((A^T)^T)_{i, j} = (A^T)_{j, i} = (A)_{i, j}\)</span>.<br />So <span class="math">\((A^T)^T = A\)</span>.</p>
+</blockquote>
+<p>(proof of second)</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\forall 1 \le i \le m, \forall 1 \le j \le n, ((A + B)^T)_{i, j} = (A + B)_{j, i} = (A)_{j, i} + (B)_{j, i} = (A^T)_{i, j} + (B^T)_{i, j}\)</span>.<br />So <span class="math">\((A + B)^T = A^T + B^T\)</span>.</p>
+</blockquote>
+<p>(proof of third)</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\forall 1 \le i \le m, \forall 1 \le j \le n, ((cA)^T)_{i, j} = (cA)_{j, i} = c((A)_{j, i}) = c((A^T)_{i, j})\)</span>.<br />So <span class="math">\((cA)^T = c(A^T)\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

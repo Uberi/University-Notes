@@ -492,18 +492,18 @@ How do we evaluate inductive arguments? The strength of inductive arguments is b
 
 In other words, an inductive argument is strong/cogent if and only if it has a large sample size and the samples are representative of the case in the conclusion.
 
-Inductive strength is a matter of degree.
+Inductive strength is a matter of degree. Inductive strength is changed if and only if there is new evidence introduced.
 
 Arguments can incorporate all different types of arguments as sub-arguments - for example, an argument might use induction and then modus ponens.
 
     This duck quacked.
     Another duck quacked.
-    All ducks quacked.
+    All ducks quack.
     If it quacks, it is annoying.
     -----------------------------
     All ducks are annoying.
 
-This is a **valid argument** ;wip
+This is a **valid argument** - assuming the premises are true, the conclusion will always be true. The inductive part simply makes the argument more cogent, since it provides better reason to believe the premise "All ducks quack".
 
 ### Abductive Arguments
 
@@ -589,4 +589,129 @@ This is a refutation by analogy, because the consequences in a similar case mean
 
 The strength of an analogy is based on the similarities between the analogue and primary subject. More similarity means more cogency and a stronger argument.
 
-We can extend the method of counterexample to analogies. When evaluating analogical arguments, we look for disanalogies - dissimilarities between the primary subject and analogue that weaken the claim to similarity.
+We can extend the method of counterexample to analogies. When evaluating analogical arguments, we look for **disanalogies** - relevant dissimilarities between the primary subject and analogue that weaken the claim to similarity.
+
+Disanalogies simply add premises to an analogical argument that reduce its cogency.
+
+Systematic Argument Evaluation
+------------------------------
+
+We now develop a systematic approach to argument evaluation. When evaluating an argument, we can do so using the following process:
+
+1. Rewrite the argument in standard form.
+2. Diagram the argument structure as a tree or diagram.
+3. Evaluate the argument based on:
+    * How acceptable the premises are (acceptability).
+    * How relevant the premises are to the conclusion (relevancy).
+    * How well grounded the conclusion is in the premises - how much the conclusion is supported by the premises (groundedness).
+
+We use these criteria to evaluate the validity, soundness, or cogency of any given argument.
+
+### Standard Form
+
+Standard form is a way of representing an argument that makes the structure of an argument explicit, making it easy to see the actual argument being made.
+
+In standard form, we put our premises in a numbered list. Implicit premises have their number underlined.
+
+The conclusion goes after the list, separated by a horizontal line (Fitch bar).
+
+When we convert arguments into standard form, we need to first process the premises and conclusion:
+
+* Remove all sentences that are not the conclusion or sentences offered in support of the conclusion.
+* Omit redundant/duplicate sentences (sentences that are logically equivalent to another sentence).
+* Convert the sentences into proper standalone statements, making sure to indicate changes to the original text.
+
+Consider the following argument:
+
+> Is littering harmful? You bet it is. After all, animals choke on plastic wrappers and people cut themselves on broken glass. I can't stand people that litter! Our elected officials should pass laws against littering because it is their duty to reduce harm whenever possible.
+
+We now identify the conclusion and obvious premises (by looking for keywords like "because" and "after all"), and write each sentence alone, making sure each sentence is fully formed and stands alone:
+
+    1. Is littering harmful?
+    2. You bet [littering] is [harmful].
+    3. After all, animals choke on plastic wrappers and people cut themselves on broken glass.
+    4. I can't stand people that litter!
+    5. It is [our elected officials'] duty to reduce harm whenever possible.
+    ------------------------------------------------------------------------------------------
+    6. Our elected officials should pass laws against littering.
+
+Now we remove all sentences that are not premises or the conclusion, and all extraneous words to make every sentence an assertion with its own truth value:
+
+    1. [Littering] is [harmful].
+    2. Animals choke on plastic wrappers and people cut themselves on broken glass.
+    3. It is [our elected officials'] duty to reduce harm whenever possible.
+    -------------------------------------------------------------------------------
+    4. Our elected officials should pass laws against littering.
+
+Now we insert implicit premises as needed:
+
+    1. [Littering] is [harmful].
+    2. Animals choke on plastic wrappers and people cut themselves on broken glass.
+    3. It is [our elected officials'] duty to reduce harm whenever possible.
+    <u>4</u>. Passing laws against something helps reduce it.
+    -------------------------------------------------------------------------------
+    5. Our elected officials should pass laws against littering.
+
+### Diagramming
+
+We can now diagram an argument in standard form by drawing a tree-like structure that represents how the premises support the conclusion, including sub-arguments.
+
+This requires distinguishing between the argument conclusion and the conclusions of the sub-arguments.
+
+Each assertion is a node in the tree, labelled with its number, and we draw an arrow from assertion $A$ to assertion $B$ to represent that $A$ supports $B$.
+
+We represent convergent support with an arrow from each supporting premise:
+
+    A B
+    | |
+    ---
+     |
+     v
+     C
+
+We represent linked support with a `+` and use only a single arrow from it:
+
+    A + B
+      |
+      v
+      C
+
+For example, the example argument above can be diagrammed as follows:
+
+    2
+    |
+    v
+    1 + 3 + 4
+        |
+        v
+        5
+
+### Evaluation
+
+We first evaluate the acceptability of the premises:
+
+* Is it reasonable to proceed as if the premises are true? We do not necessarily need to know that they are true.
+* It is often reasonable to accept premises for the sake of argument, even if we do not know they are true.
+* We often accept a premise if it is supported by a cogent argument, or if it is a necessary truth, a piece of common knowledge, supported by testimony, or appropriate appeal to authority.
+* We often reject a premise if it is refutable with other knowledge, or if it is a necessary falsehood, contradictory to other premises, or relies on the truth of the conclusion to be true.
+
+We then evaluate the relevancy of the premises:
+
+* Only relevant premises can support the conclusion.
+* Many premises are relevant only when linked together, so this is evaluating groups of premises.
+* The diagram often helps here.
+* **Positive relevance** is when the truth of $X$ counts in favour of the truth of $Y$. We say $X$ is positively relevant to $Y$.
+* **Negative relevance** is when the truth of $X$ counts against the truth of $Y$. We say $X$ is negatively relevant to $Y$.
+* **Irrelevance** is when the truth of $X$ has no effect on the truth of $Y$. We say that $X$ is irrelevant to $Y$.
+* $X$ and $Y$ are groups of premises.
+
+Finally, the groundedness:
+
+* Groundedness is how rationally believable the conclusion is if all the premises are true.
+* All valid arguments are well grounded, and a lot of invalid arguments too.
+* Conclusions can be grounded via the methods described before: deductive support, inductive support, abductive support, or analogical support.
+* We mainly evaluate this using the method of counterexamples.
+
+In our example above, the premises are all relevant to the conclusion (2 is positively relevant to 1, and 1+3+4 is positively relevant to 5), and the argument and all sub-arguments are all well grounded (accepting 2 makes it reasonable to accept 1, and accepting 1, 3, and 4 makes it reasonable to accept 5).
+
+However, assertion 3, that elected officials are to reduce harm, is not very acceptable. Therefore, the argument is not very cogent.

@@ -413,15 +413,29 @@ z</code></pre>
 <p>The law states that the change in temperature is linearly propertional to the temperature difference with the surroundings.</p>
 <p>In other words, <span class="math">\(\frac{\dee}{\dee x} T_h = -k(T_h - T_r)\)</span>, where <span class="math">\(T_h\)</span> is the temperature of the hot thing, <span class="math">\(T_r\)</span> is the surrounding temperature, and <span class="math">\(k\)</span> is the cooling coefficient.</p>
 <p>Note that <span class="math">\(k\)</span> is non-negative and we use <span class="math">\(-k\)</span> because hot things cool. This cooling coefficient is influenced by the material and shape of the object.</p>
+<p>From this we can tell that the object stops cooling when <span class="math">\(T_h = T_r\)</span>, so <span class="math">\(\frac{\dee}{\dee x} T_h = 0\)</span>.</p>
 <p>Values of <span class="math">\(T\)</span> for which <span class="math">\(\frac{\dee T_h}{\dee x} = 0\)</span> are called <strong>equilibria</strong>.</p>
-<p>Most differential equations in science and engineering come from <strong>conservation principles</strong> - principles that apply universally and constrain what can happen. FOr example, conservation of mass/energy/charge/momentum.</p>
 <h3 id="conservation">Conservation</h3>
-<p>Conservation principles are easy to represent in mathematics. Basically, what they state is that the rate of the change of something is the rate of change of something increasing minus the rate of stuff decreasing.</p>
+<p>Most differential equations in science and engineering come from <strong>conservation principles</strong> - principles that apply universally and constrain what can happen. For example, conservation of mass/energy/charge/momentum.</p>
+<p>Conservation principles are easy to represent in mathematics, though the models can be pretty elaborate. Basically, what they state is that the rate of the change of something is the rate of change of something increasing minus the rate of stuff decreasing.</p>
 <p>For example, the rate of change of people of the people in the room is the rate of change of people entering minus the rate of change of people leaving.</p>
 <p>The rate of something increasing is called a <strong>source</strong>. The rate of something decreasing is called a <strong>sink</strong>.</p>
 <p>For example, consider a skydiver immediately after their parachute opens:</p>
 <blockquote>
 <p>Clearly, <span class="math">\(m\frac{\dee \vec{v}}{\dee x} = \sum \vec{F} = m \vec{g} - \vec{F}_d\)</span>, where <span class="math">\(\vec{F}_d\)</span> is the drag force.<br />We can calculate the drag force in a lab independent of everything else, and not have to worry about the other things like the height or gravity.<br />Typically, <span class="math">\(\vec{F}_d = k\vec{v}\)</span> for some constant <span class="math">\(k\)</span>.<br />So <span class="math">\(\frac{\dee \vec{v}}{\dee x} = \vec{g} - \frac{k}{m} \vec{v}\)</span>.</p>
+</blockquote>
+<h1 id="section-11">31/1/14</h1>
+<p>An example of a mathematical representation of conservation principles is a mixing problem.</p>
+<p>A tank holds 80L of water at time <span class="math">\(t = 0\)</span>. A salt solution of 0.25 kg/L flows into the tank at 8L/min. Liquid drains at a rate of 12L/min from the tank. Find a differential equation for the mass of salt <span class="math">\(x(t)\)</span> in kg for <span class="math">\(t &gt; 0\)</span>, where <span class="math">\(t\)</span> is measures in seconds:</p>
+<blockquote>
+<p>We assume the salt solution instantly mixes with the water.<br />We want to find <span class="math">\(\frac{\dee}{\dee t} x(t)\)</span>, which is <span class="math">\(\text{source} - \text{sink}\)</span>.<br />The source is <span class="math">\(\text{salt concentration} \cdot {inflow rate} = 0.25 \text{kg/L} \cdot 8 \text{L/min} = 2 \text{kg/min}\)</span>.<br />Clearly, <span class="math">\(\frac{\dee}{\dee x} \text{liquid level} = \text{inflow rate} - \text{outflow rate} = 8 \text{L/min} - 12 \text{L/min} = -4 \text{L/min}\)</span>.<br />So the liquid level is <span class="math">\(80 + \int \frac{\dee}{\dee x} \text{liquid level} \dee t = 80 - 4t\)</span>.<br />Clearly, <span class="math">\(\text{salt concentration} = \frac{\text{mass of salt}}{\text{volume of tank}} = \frac{x(t)}{80 - 4t}\)</span>.<br />The sink is <span class="math">\(\text{salt concentration} \cdot \text{outflow rate} = \frac{x(t)}{80 - 4t} \cdot 12 \text{kg/L} = \frac{3x(t)}{20 - t}\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x(t) = 2 - \frac{3x(t)}{20 - t}\)</span>.<br />Note that the tank is empty when <span class="math">\(t = 20\)</span>, when the outflow rate is undefined.</p>
+</blockquote>
+<p>There are many things we can say about the function even without solving it. These are called <strong>qualitiative analyses</strong>.</p>
+<p>Suppose we have <span class="math">\(\frac{\dee y}{\dee x} = f(x, y)\)</span>. Note that the left side is equal to the slope of the tangent line, and the right side is an expression for the slope of the tangent line for any point <span class="math">\((x, y)\)</span>.</p>
+<p>Basically, every point on the Cartesian plane now has an associated slope, which we can represent as a</p>
+<p>Consider <span class="math">\(\frac{\dee y}{\dee x} = 1 - y^2\)</span>:</p>
+<blockquote>
+<p>The slope of the tangent line is <span class="math">\(\begin{cases} \text{negative} &amp;\text{if } y &lt; -1 \\ \text{positive} &amp;\text{if } -1 &lt; y &lt; 1 \\ \text{negative} &amp;\text{if } y &gt; 1 \end{cases}\)</span>.<br />We can visualize this as a flow field.</p>
 </blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>

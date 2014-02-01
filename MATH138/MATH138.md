@@ -599,13 +599,15 @@ In other words, $\frac{\dee}{\dee x} T_h = -k(T_h - T_r)$, where $T_h$ is the te
 
 Note that $k$ is non-negative and we use $-k$ because hot things cool. This cooling coefficient is influenced by the material and shape of the object.
 
-Values of $T$ for which $\frac{\dee T_h}{\dee x} = 0$ are called **equilibria**.
+From this we can tell that the object stops cooling when $T_h = T_r$, so $\frac{\dee}{\dee x} T_h = 0$.
 
-Most differential equations in science and engineering come from **conservation principles** - principles that apply universally and constrain what can happen. FOr example, conservation of mass/energy/charge/momentum.
+Values of $T$ for which $\frac{\dee T_h}{\dee x} = 0$ are called **equilibria**.
 
 ### Conservation
 
-Conservation principles are easy to represent in mathematics. Basically, what they state is that the rate of the change of something is the rate of change of something increasing minus the rate of stuff decreasing.
+Most differential equations in science and engineering come from **conservation principles** - principles that apply universally and constrain what can happen. For example, conservation of mass/energy/charge/momentum.
+
+Conservation principles are easy to represent in mathematics, though the models can be pretty elaborate. Basically, what they state is that the rate of the change of something is the rate of change of something increasing minus the rate of stuff decreasing.
 
 For example, the rate of change of people of the people in the room is the rate of change of people entering minus the rate of change of people leaving.
 
@@ -617,3 +619,30 @@ For example, consider a skydiver immediately after their parachute opens:
 > We can calculate the drag force in a lab independent of everything else, and not have to worry about the other things like the height or gravity.  
 > Typically, $\vec{F}_d = k\vec{v}$ for some constant $k$.  
 > So $\frac{\dee \vec{v}}{\dee x} = \vec{g} - \frac{k}{m} \vec{v}$.  
+
+# 31/1/14
+
+An example of a mathematical representation of conservation principles is a mixing problem.
+
+A tank holds 80L of water at time $t = 0$. A salt solution of 0.25 kg/L flows into the tank at 8L/min. Liquid drains at a rate of 12L/min from the tank. Find a differential equation for the mass of salt $x(t)$ in kg for $t > 0$, where $t$ is measures in seconds:
+
+> We assume the salt solution instantly mixes with the water.  
+> We want to find $\frac{\dee}{\dee t} x(t)$, which is $\text{source} - \text{sink}$.  
+> The source is $\text{salt concentration} \cdot {inflow rate} = 0.25 \text{kg/L} \cdot 8 \text{L/min} = 2 \text{kg/min}$.  
+> Clearly, $\frac{\dee}{\dee x} \text{liquid level} = \text{inflow rate} - \text{outflow rate} = 8 \text{L/min} - 12 \text{L/min} = -4 \text{L/min}$.  
+> So the liquid level is $80 + \int \frac{\dee}{\dee x} \text{liquid level} \dee t = 80 - 4t$.  
+> Clearly, $\text{salt concentration} = \frac{\text{mass of salt}}{\text{volume of tank}} = \frac{x(t)}{80 - 4t}$.  
+> The sink is $\text{salt concentration} \cdot \text{outflow rate} = \frac{x(t)}{80 - 4t} \cdot 12 \text{kg/L} = \frac{3x(t)}{20 - t}$.  
+> So $\frac{\dee}{\dee x} x(t) = 2 - \frac{3x(t)}{20 - t}$.  
+> Note that the tank is empty when $t = 20$, when the outflow rate is undefined.  
+
+There are many things we can say about the function even without solving it. These are called **qualitiative analyses**.
+
+Suppose we have $\frac{\dee y}{\dee x} = f(x, y)$. Note that the left side is equal to the slope of the tangent line, and the right side is an expression for the slope of the tangent line for any point $(x, y)$.
+
+Basically, every point on the Cartesian plane now has an associated slope, which we can represent as a 
+
+Consider $\frac{\dee y}{\dee x} = 1 - y^2$:
+
+> The slope of the tangent line is $\begin{cases} \text{negative} &\text{if } y < -1 \\ \text{positive} &\text{if } -1 < y < 1 \\ \text{negative} &\text{if } y > 1 \end{cases}$.  
+> We can visualize this as a flow field. 

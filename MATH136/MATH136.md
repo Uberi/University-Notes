@@ -84,13 +84,13 @@ If $\vec{x}, \vec{y}, \vec{w} \in \mathbb{R}^n, c, d \in \mathbb{R}$, then:
 * Closure under addition: $\vec{x} + \vec{y} \in \mathbb{R}^n$.
 * Associativity: $(\vec{x} + \vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})$
 * Commutativity: $\vec{x} + \vec{y} = \vec{y} + \vec{x}$
-* Additive identity: $\exists \vec{0} \in \mathbb{R}, \vec{x} + \vec{0} = \vec{x}$
+* Additive identity: $\exists \vec{0} \in \mathbb{R}, \forall \vec{x} \in \mb{R}^n, \vec{x} + \vec{0} = \vec{x}$ ($\vec{0}$ is called the zero vector).
 * Additive inverse: $\forall \vec{x} \in \mathbb{R}^n, \exists -\vec{x} \in \mathbb{R}^n, \vec{x} + (-\vec{x}) = \vec{0}$.
-* $c\vec{x} \in \mathbb{R}^n$
-* $c(d\vec{x}) = (cd)\vec{x}$
-* Scalar distributivity: $(c + d)\vec{x} = c\vec{x} + d\vec{x}$
-* Vector distributivity: $c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}$
-* Multiplicative identity: $1\vec{x} = \vec{x}$
+* Closure under scalar multiplication: $c\vec{x} \in \mathbb{R}^n$.
+* $c(d\vec{x}) = (cd)\vec{x}$.
+* Scalar distributivity: $(c + d)\vec{x} = c\vec{x} + d\vec{x}$.
+* Vector distributivity: $c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}$.
+* Multiplicative identity: $1\vec{x} = \vec{x}$.
 
 Closure under addition means that when we add two elements in the set, the resulting sum is also in the set.
 
@@ -715,9 +715,94 @@ Because all spans are subspaces (by Theorem 1.2.2), the solution set is a subspa
 
 Because the solution set is a subspace, we often call it the **solution space** of a aystem.
 
-# 29/1/14
+# 30/1/14
 
 Matrices
 --------
 
-Matrices are abstract objects like vectors.
+Matrices are abstract objects like vectors. We usually denote matrix variables with capital letters.
+
+An $m \times n$ matrix $A$ is a rectangular array with $m$ rows and $n$ columns. We represent the $i$th row and $j$th column as $a_{i, j}$, or $(A)_{i, j}$.
+
+In other words, $A = \begin{bmatrix} a_{1, 1} & \ldots & a_{1, n} \\ \vdots & \vdots & \vdots \\ a_{m, 1} & \ldots & a_{m, n} \end{bmatrix}$.
+
+All $m \times n$ matrices belong to the set $M_{m \times n}$, similar to how all $n$-dimensional vectors belong to the set $\mb{R}^n$.
+
+### Operations
+
+Let $A, B, C$ be matrices.
+
+Equality: $A = B \iff \forall 1 \le i \le m, \forall 1 \le j \le n, (A)_{i, j} = (B)_{i, j}$.
+
+In other words, two matrices are equal if and only if they are both the same size and contain the same entries.
+
+Addition/subtraction: $A \pm B = C \iff \forall 1 \le i \le m, \forall 1 \le j \le n, (C)_{i, j} = (A)_{i, j} \pm (B)_{i, j}$.
+
+In other words, when we add matrices (only defined for matrices of the same size), we simply add their corresponding entries.
+
+Scalar multiplication: $t \in \mb{R}; tA = C \iff \forall 1 \le i \le m, \forall 1 \le j \le n, (C)_{i, j} = t(A)_{i, j}$.
+
+In other words, when we multiply a matrix by a scalar or a scalar by a matrix, we simply multiply each entry in the matrix by the scalar.
+
+With these operations, we can take linear combinations of matrices.
+
+### Theorem 3.1.1
+
+For all $A, B, C \in M_{m \times n}, s, t, \in \mb{R}$:
+
+* Closure under addition: $A + B \in M_{m \times n}$.
+* Associativity: $(A + B) + C = A + (B + C)$
+* Commutativity: $A + B = B + A$
+* Additive identity: $\exists 0_{m, n} \in \mathbb{R}, \forall A \in M_{m, n}, A + 0_{m, n} = A$ ($0_{m, n}$ is called the zero matrix).
+* Additive inverse: $\forall A \in M_{m, n}, \exists -A \in M_{m, n}, A + (-A) = 0_{m, n}$.
+* Closure under scalar multiplication: $cA \in M_{m, n}$.
+* $c(dA) = (cd)A$
+* Scalar distributivity: $(c + d)A = cA + dA$.
+* Vector distributivity: $c(A + B) = cA + cB$.
+* Multiplicative identity: $1A = A$.
+
+### Transpose
+
+Vectors and matrices are closely related. We have been writing vectors as columns for a while now. In fact, we can use vectors to represent the columns of a matrix.
+
+For example, if $\vec{u} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}, \vec{v} = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}$, then $\begin{bmatrix} \vec{u} & \vec{v} \end{bmatrix} = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix}$.
+
+The **transpose** of a matrix $A \in M_{m, n}$ is $A^T \in M_{n, m}$ ("A transposed"), a matrix such that $(A)_{i, j} = (A^T)_{j, i}$.
+
+Note that the dimensions were swapped around. Basically, the rows became the columns, and the columns became the rows - we reflected the entries around a diagonal line starting from the top left.
+
+* $A = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}; A^T = \begin{bmatrix} 1 & 2 & 3 \end{bmatrix}$.
+* $B = \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}; B^T = \begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}$.
+* $C = \begin{bmatrix} 1 & 0 \\ 0 & 3 \end{bmatrix}; C^T = \begin{bmatrix} 1 & 0 \\ 0 & 3 \end{bmatrix}$.
+
+Some matrices satisfy the property $A = A^T$. These matrices are called **symmetric**, because they are symmetric about the diagonal line. Note that only square matrices can be symmetric.
+
+Transposes are useful for representing the rows of a matrix with vectors, rather than columns.
+
+For example, if $\vec{u} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}, \vec{v} = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}$, then $\begin{bmatrix} \vec{u}^T \\ \vec{v}^T \end{bmatrix} = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}$.
+
+### Theorem 3.1.2
+
+For all $A, B \in M_{m, n}, c \in \mb{R}$:
+
+* $(A^T)^T = A$
+* $(A + B)^T = A^T + B^T$
+* $(cA)^T = c(A^T)$
+
+Proof:
+
+(proof of first)
+
+> Clearly, $\forall 1 \le i \le m, \forall 1 \le j \le n, ((A^T)^T)_{i, j} = (A^T)_{j, i} = (A)_{i, j}$.  
+> So $(A^T)^T = A$.  
+
+(proof of second)
+
+> Clearly, $\forall 1 \le i \le m, \forall 1 \le j \le n, ((A + B)^T)_{i, j} = (A + B)_{j, i} = (A)_{j, i} + (B)_{j, i} = (A^T)_{i, j} + (B^T)_{i, j}$.  
+> So $(A + B)^T = A^T + B^T$.  
+
+(proof of third)
+
+> Clearly, $\forall 1 \le i \le m, \forall 1 \le j \le n, ((cA)^T)_{i, j} = (cA)_{j, i} = c((A)_{j, i}) = c((A^T)_{i, j})$.  
+> So $(cA)^T = c(A^T)$.  
+
