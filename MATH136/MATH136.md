@@ -405,7 +405,7 @@ A set of linear equations with the same variables $x_1, \ldots, x_n$ (including 
 A system of linear equations can be written as $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
 \vdots
-a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
 \end{cases}$. Here, $a_{i, j}$ represents the $j$th coefficient in the $i$th equation.
 
 A **solution** to a system of linear equation is a vector $\vec{s} = \begin{bmatrix} s_1 \\ \vdots \\ s_n \end{bmatrix}, \vec{s} \in \mb{R}^n$ such that if $(\forall 1 \le i \le n, x_i = s_i)$, all the equations in the system are satisfied.
@@ -423,7 +423,7 @@ If a set of linear equations is consistent with more than 1 solution, then it ha
 In other words, if $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
 \vdots
-a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
 \end{cases}$ has solutions $\vec{s}$ and $\vec{t}$ such that $\vec{s} \ne \vec{t}$, then $\vec{s} + c(\vec{s} - \vec{t})$ is a solution for all $c \in \mb{R}$.
 
 Proof:
@@ -431,7 +431,7 @@ Proof:
 > Assume $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
 \vdots
-a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
 \end{cases}$ has solutions $\vec{s}$ and $\vec{t}$.  
 > Clearly, for all $1 \le i \le n$, $a_{i, 1} (s_1 + c(s_1 - t_1)) + \ldots + a_{i, n} (s_n + c(s_n - t_n))
 = (a_{i, 1} s_1 + \ldots + a_{i, n} s_n) + c(a_{i, 1} s_1 + \ldots + a_{i, n} s_n) - c(a_{i, 1} t_1 + \ldots + a_{i, n} t_n)
@@ -447,11 +447,11 @@ When we use the substitution and elimination techniques for solving systems of l
 Note that when we solve a linear system, we don't really need the $x$ variables. Instead, we could write the system $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
 \vdots
-a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
 \end{cases}$ more concisely as $\left[\begin{array}{ccc|c}
 a_{1, 1} & \ldots & a_{1, n} & b_1 \\
 \vdots & \vdots & \vdots & \vdots \\
-a_{n, 1} & \ldots & a_{n, n} & b_1 \\
+a_{m, 1} & \ldots & a_{m, n} & b_1 \\
 \end{array}\right]$.
 
 This is called the **augmented matrix** of the system of linear equations.
@@ -459,7 +459,7 @@ This is called the **augmented matrix** of the system of linear equations.
 The **coefficient matrix** of the system of linear equations is the same thing, but without the last column containing the constant value. In this case, it would be $\left[\begin{array}{ccc}
 a_{1, 1} & \ldots & a_{1, n} \\
 \vdots & \vdots & \vdots \\
-a_{n, 1} & \ldots & a_{n, n} \\
+a_{m, 1} & \ldots & a_{m, n} \\
 \end{array}\right]$.
 
 We can combine a coefficient matrix $A$ and a constant vector $\vec{b}$ into an augmented matrix by using the $\left[A \middle| \vec{b}\right]$. This simply adds $\vec{b}$ as a column to the end of $A$.
@@ -651,15 +651,15 @@ The rank of a matrix $A$ is denoted $\rank A$.
 
 Given an $m \times n$ coefficient matrix $A$ for a linear system:
 
-* If $\rank A < \rank \left[A \mid \vec{b} \right]$, then the system is inconsistent, where $\vec{b}$ is the right hand side vector for the linear system. In other words, if the rank of the coefficent matrix is less than that of the augmented matrix, then the matrix is inconsistent.
-* If $\left[A \mid \vec{b} \right]$ is consistent, then there are $n - \rank A$ free variables. If there are 0 free variables, then the system has only one solution.
-* $\rank A = m$ if and only if the system $\left[A \mid \vec{b}\right]$ is consistent for every $\vec{b} \in \mb{R}^m$. In other words, there are no free variables if and only if the the system is consistent for every possible vector of right hand side values.
+* If $\rank A < \rank \sys{A}{\vec{b}}$, then the system is inconsistent, where $\vec{b}$ is the right hand side vector for the linear system. In other words, if the rank of the coefficent matrix is less than that of the augmented matrix, then the matrix is inconsistent.
+* If $\sys{A}{\vec{b}}$ is consistent, then there are $n - \rank A$ free variables. If there are 0 free variables, then the system has only one solution.
+* $\rank A = m$ if and only if the system $\sys{A}{\vec{b}}$ is consistent for every $\vec{b} \in \mb{R}^m$. In other words, there are no free variables if and only if the the system is consistent for every possible vector of right hand side values.
 
 Proof of first:
 
 (point 1)
 
-> Assume $\rank A < \rank \left[A \mid \vec{b} \right]$.  
+> Assume $\rank A < \rank \sys{A}{\vec{b}}$.  
 > Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.  
 > This corresponds to $0 = 1$, which makes the system inconsistent.  
 
@@ -667,7 +667,7 @@ Proof:
 
 (point 2)
 
-> Assume $\left[A \mid \vec{b} \right]$ is consistent.  
+> Assume $\sys{A}{\vec{b}}$ is consistent.  
 > The number of free variables is the number of variables minus the number of those that are not free.  
 > Those that are not free have leading ones, so $\rank A$ is the number of non-free variables.  
 > So the number of free variables is $n - \rank A$.  
@@ -676,18 +676,18 @@ Proof:
 
 (point 3)
 
-> First, we will prove that if the system $\left[A \mid \vec{b}\right]$ is not consistent for every $\vec{b} \in \mb{R}^m$, then $\rank A \ne m$.  
-> Suppose $\left[A \mid \vec{b}\right]$ is inconsistent for some $\vec{b} \in \mb{R}^m$.  
+> First, we will prove that if the system $\sys{A}{\vec{b}}$ is not consistent for every $\vec{b} \in \mb{R}^m$, then $\rank A \ne m$.  
+> Suppose $\sys{A}{\vec{b}}$ is inconsistent for some $\vec{b} \in \mb{R}^m$.  
 > Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.  
 > This row does not contain a leading one, so $\rank A < m$.  
-> Now we will prove that if $\rank A \ne m$, then the system $\left[A \mid \vec{b}\right]$ is not consistent for every $\vec{b} \in \mb{R}^m$.  
+> Now we will prove that if $\rank A \ne m$, then the system $\sys{A}{\vec{b}}$ is not consistent for every $\vec{b} \in \mb{R}^m$.  
 > Suppose $\rank A \ne m$. Then $\rank A < m$. Then there is a row of all zeroes in the RREF of A.  
 > Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.  
 > Then the system is inconsistent.  
 
 ### Homogenous Systems
 
-A system is **homogenous** if and only if the right-hand side contains only zeros. In other words, it has the form $\left[A \mid \vec{0}\right]$.
+A system is **homogenous** if and only if the right-hand side contains only zeros. In other words, it has the form $\sys{A}{\vec{0}}$.
 
 A homogenous matrix is one where the last column is all 0 - a matrix corresponding to a homogenous system.
 
@@ -805,4 +805,99 @@ Proof:
 
 > Clearly, $\forall 1 \le i \le m, \forall 1 \le j \le n, ((cA)^T)_{i, j} = (cA)_{j, i} = c((A)_{j, i}) = c((A^T)_{i, j})$.  
 > So $(cA)^T = c(A^T)$.  
+
+# 1/2/14
+
+Matrix Multiplication
+---------------------
+
+### Matrix-Vector Multiplication
+
+Consider the linear system $\sys{A}{\vec{B}}$ with the solution $\vec{x}$.
+
+When we multiply a matrix by a vector, we want to have it so that $A\vec{x} = \vec{b}$. This is because it would be very useful to help solve systems of linear equations.
+
+Matrix-vector multiplication can be defined in terms of matrices with represented with row vectors or column vectors.
+
+We will first define it in terms of row vectors.
+
+Let $A = \begin{bmatrix} \vec{a}_1^T \\ \vdots \\ \vec{a}_m^T \end{bmatrix}$ and $A \in M_{m, n}$.
+
+Note that $\vec{a}_i^T$ represents the coefficients of the $i$th equation of the system. So if and only if $\vec{x}$ is a solution, $\vec{x} \cdot \vec{a}_i^T = b_i$.
+
+Now we can define matrix multiplication: $A\vec{x} = \begin{bmatrix} \vec{a}_1^T \cdot \vec{x} \\ \vdots \\ \vec{a}_m^T \cdot \vec{x} \end{bmatrix} = \vec{b}$.
+
+Basically, we take the dot product of each row and assemble it together into a vector. The product of a matrix and a vector is therefore a vector.
+
+Note that in order for matrix-vector multiplication to be defined, the number of columns in $A$ must equal the number of rows/components in $\vec{x}$ in order for the dot product to work. An $m \times n$ matrix can only be multiplied by vectors in $\mb{R}^n$.
+
+Now we can also define it in terms of column vectors.
+
+Note that the system $\begin{cases}
+a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
+\vdots
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
+\end{cases}$ has the coefficient matrix $A = \begin{bmatrix} \begin{bmatrix} a_{1, 1} \\ \vdots \\ a_{m, 1} \end{bmatrix} \cdots \begin{bmatrix} a_{1, n} \\ \vdots \\ a_{m, n} \end{bmatrix} \end{bmatrix} = \begin{bmatrix} \vec{c}_1 \ldots \vec{c}_n \end{bmatrix}$, where $\vec{c}_i$ represents the $i$th column of the matrix.
+
+Note that the system can be written as $x_1\begin{bmatrix} a_{1, 1} \\ \vdots \\ a_{m, 1} \end{bmatrix} + \ldots + x_n\begin{bmatrix} a_{1, n} \\ \vdots \\ a_{m, n} \end{bmatrix} = \vec{b}$.
+
+So we can write the system as $x_1 \vec{c}_1 + \ldots + x_n \vec{c}_n = \vec{b}$.
+
+Now we define matrix-vector multiplication in terms of columns as $A\vec{x} = x_1 \vec{c}_1 + \ldots + x_n \vec{c}_n$, where $\vec{c}_i$ represents the $i$th column of $A$.
+
+We define it this way because now we can represent the system with $A\vec{x} = \vec{b}$.
+
+Note that we can use this to select one particular column of the matrix using a standard basis vector (a vector of all zeros except a lone one).
+
+For example, multiplying an $m \times n$ matrix by the $i$th standard basis vector in $\mb{R}^n$ (the vector with all components set to 0 except for the $ith$ component, which is set to 1) will result in the $i$th column of the matrix.
+
+### Matrix-Matrix Multiplication
+
+Now we can define the product of a matrix and a matrix.
+
+Given an $m \times n$ matrix $A = \begin{bmatrix} \vec{a}_1^T \\ \vdots \\ \vec{a}_n^T \end{bmatrix}$ and an $n \times p$ matrix $B = \begin{bmatrix} \vec{b}_1 & \ldots & \vec{b}_p \end{bmatrix}$, $AB = A\begin{bmatrix} \vec{b}_1 & \ldots & \vec{b}_p \end{bmatrix} = \begin{bmatrix} A\vec{b}_1 & \ldots & A\vec{b}_p \end{bmatrix}$ is an $m \times p$ matrix.
+
+Basically, when we multiply a matrix by a matrix, we multiply the first matrix by each of the column vectors in the second matrix.
+
+Note that this requires that the number of columns in $A$ must be the same as the number of rows in $B$, since the dot product must be defined.
+
+Note that $(AB)_{i, j} = \vec{a}_i^T \vec{b}_j = \vec{a}_i \cdot \vec{b}_j = \sum_{k = 1}^n (a_i^T)_k (\vec{a}_k)_j = \sum_{k = 1}^n (A)_{i, k} (B)_{k, j}$.
+
+### Theorem 3.1.3 (Properties of Matrix Multiplication)
+
+If $A, B, C$ are matrices of the required dimensions, $t \in \mb{R}$:
+
+* Distributivity: $A(B + C) = AB + AC$.
+* Scalar multiplication: $t(AB) = (tA)B = A(tB)$.
+* Associativity: $(AB)C = A(BC)$.
+* Transposition distributivity: $(AB)^T = A^T B^T$.
+
+Note that matrix multiplication is not commutative over matrices: $AB \ne BA$ for some matrices.
+
+### Theorem 3.1.4
+
+Note that $A = B \implies AC = BC \wedge CA = BA$. However, $AC = BC \vee CA = BA$ **does not imply** $A = B$ - there is no cancellation law for matrix multiplication.
+
+That said, given $A, B \in M_{m, n}$, $(\forall \vec{x} \in \mb{R}^n, A\vec{x} = B\vec{x}) \implies A = B$.
+
+In other words, if each product of a matrix with an arbitrary vector are equal to each other, then the matrices are themselves equal to each other.
+
+Proof:
+
+> Let $A = \begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix}, B = \begin{bmatrix} \vec{b}_1 & \ldots & \vec{b}_n \end{bmatrix}$.  
+> Let $i \in \mb{N}, i \le n$.  
+> Let $\vec{e}_i$ be the $i$th standard basis vector in $$\mb{R}^n (the vector with all zeroes except the $i$th element, which is 1).  
+> Let $\vec{x} \in \mb{R}^n$. Construct $\vec{x} = \vec{e}_i$.  
+> Assume $A\vec{x} = B\vec{x}$. Then $A\vec{e}_i = B\vec{e}_i = \vec{a}_i = \vec{b}_i$.  
+> Since $i$ is arbitrary, $forall 1 \le i \le n, \vec{a}_i = \vec{b}_i$.  
+> So $A = B$.  
+
+# 3/2/14
+
+Identity Matrix
+---------------
+
+The identity matrix is the matrix such that, when multiplied with any matrix, or when any matrix is multiplied by it, results in that same matrix.
+
+In other words, we want to find $I$ such that $\forall A \in M_{m, n}, AI = IA = A$.
 

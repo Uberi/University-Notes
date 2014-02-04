@@ -694,6 +694,7 @@ We first evaluate the acceptability of the premises:
 * It is often reasonable to accept premises for the sake of argument, even if we do not know they are true.
 * We often accept a premise if it is supported by a cogent argument, or if it is a necessary truth, a piece of common knowledge, supported by testimony, or appropriate appeal to authority.
 * We often reject a premise if it is refutable with other knowledge, or if it is a necessary falsehood, contradictory to other premises, or relies on the truth of the conclusion to be true.
+* The acceptability of premises is highly dependent on the person. We rely very heavily on the testimony of others to form our beliefs.
 
 We then evaluate the relevancy of the premises:
 
@@ -711,7 +712,43 @@ Finally, the groundedness:
 * All valid arguments are well grounded, and a lot of invalid arguments too.
 * Conclusions can be grounded via the methods described before: deductive support, inductive support, abductive support, or analogical support.
 * We mainly evaluate this using the method of counterexamples.
+* Groundedness is to cogency as validity is to soundness.
 
 In our example above, the premises are all relevant to the conclusion (2 is positively relevant to 1, and 1+3+4 is positively relevant to 5), and the argument and all sub-arguments are all well grounded (accepting 2 makes it reasonable to accept 1, and accepting 1, 3, and 4 makes it reasonable to accept 5).
 
 However, assertion 3, that elected officials are to reduce harm, is not very acceptable. Therefore, the argument is not very cogent.
+
+# 3/2/14
+
+Mostly review from last class.
+
+Acceptability
+-------------
+
+There is not always a single interpretation of an argument that is considered correct. This is especially obvious when dealing with the acceptability condition - everyone holds their own set of beliefs that influences what premises they will find acceptable.
+
+Many contingent truths are widely believed. If we do not have any reason not to believe it, then it is reasonable to accept them when they appear in premises. This is often called "common knowledge". For example, "all humans have hearts".
+
+However, not all humans have hearts. The claim can be made more acceptable by changing it to "virtually every living human has a heart".
+
+However, they are still defeasible and could possibly be false. For example, "whales are fish" - whales are actually mammals.
+
+### Testimony
+
+Many of our beliefs come from testimony - we believe a lot of things that we know only because other people say are true. For example, the information we learned from our parents and teachers.
+
+It is reasonable to accept all testimony as long as we don't have any good reasons to doubt the testifier.
+
+We often doubt the testifier when:
+
+* The testifier makes **implausible claims** - things that don't seem reasonable.
+* Unreliable source - people who have given unreliable testimony in the past, or flawed observers (e.g., people with hearing loss giving aural testimony).
+* Testimony that appears to exceed the testifier's experience, competence, or abilities.
+
+When giving testimony, the trade-off is that the testimony gains acceptance, in return for taking on the obligations of making an assertion.
+
+Appealing to authority is a special case of testimony. A legitimate authority is an entity with special knowledge in a certain domain - experts, research institutions, etc.
+
+The same rules for testimony apply for appeals to authority. However, faulty appeals to authority are most often due to the last point - claims should not exceed the expertise of the authority. For example, claims about the weather from a climate prediction institution. should be accepted, but macroeconomic analyses should not.
+
+However, this applies only to testimony given alone - without any additional justification. The acceptability of testimony is based on how much we should trust what someone says on their word alone. So even if a non-expert gives a claim, it can still be acceptable if compelling reasons are given.

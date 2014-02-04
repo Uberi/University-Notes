@@ -281,24 +281,24 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <h2 id="systems-of-linear-equations">Systems of Linear Equations</h2>
 <p>A <strong>linear equation</strong> is an equation of the form <span class="math">\(a_1 x_1 + \ldots + a_n x_n = b, a_k, b \in \mb{C}, 1 \le k \le n, n \in \mb{N}\)</span>. This also includes equations that can be rewritten into this form.</p>
 <p>A set of linear equations with the same variables <span class="math">\(x_1, \ldots, x_n\)</span> (including those where there are zero coefficients) is called a <strong>system of linear equations</strong>.</p>
-<p>A system of linear equations can be written as <span class="math">\(\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\ \end{cases}\)</span>. Here, <span class="math">\(a_{i, j}\)</span> represents the <span class="math">\(j\)</span>th coefficient in the <span class="math">\(i\)</span>th equation.</p>
+<p>A system of linear equations can be written as <span class="math">\(\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}\)</span>. Here, <span class="math">\(a_{i, j}\)</span> represents the <span class="math">\(j\)</span>th coefficient in the <span class="math">\(i\)</span>th equation.</p>
 <p>A <strong>solution</strong> to a system of linear equation is a vector <span class="math">\(\vec{s} = \begin{bmatrix} s_1 \\ \vdots \\ s_n \end{bmatrix}, \vec{s} \in \mb{R}^n\)</span> such that if <span class="math">\((\forall 1 \le i \le n, x_i = s_i)\)</span>, all the equations in the system are satisfied.</p>
 <p>A system of linear equations is <strong>consistent</strong> if it has at least one solution, and <strong>inconsistent</strong> otherwise.</p>
 <p>Two systems of linear equations are <strong>equivalent</strong> if and only if they both have the same solution set.</p>
 <p>Interpreted geometrically, a system of <span class="math">\(m\)</span> linear equations with <span class="math">\(n\)</span> variables is a set of <span class="math">\(m\)</span> hyperplanes in <span class="math">\(\mb{R}^n\)</span>. The solution to this system is represented by a vector that lies on all these hyperplanes.</p>
 <h3 id="theorem-2.1.1">Theorem 2.1.1</h3>
 <p>If a set of linear equations is consistent with more than 1 solution, then it has infinite solutions.</p>
-<p>In other words, if <span class="math">\(\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\ \end{cases}\)</span> has solutions <span class="math">\(\vec{s}\)</span> and <span class="math">\(\vec{t}\)</span> such that <span class="math">\(\vec{s} \ne \vec{t}\)</span>, then <span class="math">\(\vec{s} + c(\vec{s} - \vec{t})\)</span> is a solution for all <span class="math">\(c \in \mb{R}\)</span>.</p>
+<p>In other words, if <span class="math">\(\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}\)</span> has solutions <span class="math">\(\vec{s}\)</span> and <span class="math">\(\vec{t}\)</span> such that <span class="math">\(\vec{s} \ne \vec{t}\)</span>, then <span class="math">\(\vec{s} + c(\vec{s} - \vec{t})\)</span> is a solution for all <span class="math">\(c \in \mb{R}\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>Assume <span class="math">\(\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\ \end{cases}\)</span> has solutions <span class="math">\(\vec{s}\)</span> and <span class="math">\(\vec{t}\)</span>.<br />Clearly, for all <span class="math">\(1 \le i \le n\)</span>, <span class="math">\(a_{i, 1} (s_1 + c(s_1 - t_1)) + \ldots + a_{i, n} (s_n + c(s_n - t_n)) = (a_{i, 1} s_1 + \ldots + a_{i, n} s_n) + c(a_{i, 1} s_1 + \ldots + a_{i, n} s_n) - c(a_{i, 1} t_1 + \ldots + a_{i, n} t_n) = b_i + cb_i - cb_i = b_i\)</span>.<br />So each equation is satisfied, and the system is consistent.</p>
+<p>Assume <span class="math">\(\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}\)</span> has solutions <span class="math">\(\vec{s}\)</span> and <span class="math">\(\vec{t}\)</span>.<br />Clearly, for all <span class="math">\(1 \le i \le n\)</span>, <span class="math">\(a_{i, 1} (s_1 + c(s_1 - t_1)) + \ldots + a_{i, n} (s_n + c(s_n - t_n)) = (a_{i, 1} s_1 + \ldots + a_{i, n} s_n) + c(a_{i, 1} s_1 + \ldots + a_{i, n} s_n) - c(a_{i, 1} t_1 + \ldots + a_{i, n} t_n) = b_i + cb_i - cb_i = b_i\)</span>.<br />So each equation is satisfied, and the system is consistent.</p>
 </blockquote>
 <p>The set of all solutions to a system of linear equations is known as a <strong>solution set</strong>.</p>
 <h3 id="solving">Solving</h3>
 <p>When we use the substitution and elimination techniques for solving systems of linear equations, we are forming new systems of lienar equations that have the same solution set as the original. We aim to obtain one that is easier to find the solution set for, and therefore solve the original system.</p>
-<p>Note that when we solve a linear system, we don't really need the <span class="math">\(x\)</span> variables. Instead, we could write the system <span class="math">\(\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{n, 1} x_1 + \ldots + a_{n, n} x_n = b_1 \\ \end{cases}\)</span> more concisely as <span class="math">\(\left[\begin{array}{ccc|c} a_{1, 1} &amp; \ldots &amp; a_{1, n} &amp; b_1 \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ a_{n, 1} &amp; \ldots &amp; a_{n, n} &amp; b_1 \\ \end{array}\right]\)</span>.</p>
+<p>Note that when we solve a linear system, we don't really need the <span class="math">\(x\)</span> variables. Instead, we could write the system <span class="math">\(\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}\)</span> more concisely as <span class="math">\(\left[\begin{array}{ccc|c} a_{1, 1} &amp; \ldots &amp; a_{1, n} &amp; b_1 \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ a_{m, 1} &amp; \ldots &amp; a_{m, n} &amp; b_1 \\ \end{array}\right]\)</span>.</p>
 <p>This is called the <strong>augmented matrix</strong> of the system of linear equations.</p>
-<p>The <strong>coefficient matrix</strong> of the system of linear equations is the same thing, but without the last column containing the constant value. In this case, it would be <span class="math">\(\left[\begin{array}{ccc} a_{1, 1} &amp; \ldots &amp; a_{1, n} \\ \vdots &amp; \vdots &amp; \vdots \\ a_{n, 1} &amp; \ldots &amp; a_{n, n} \\ \end{array}\right]\)</span>.</p>
+<p>The <strong>coefficient matrix</strong> of the system of linear equations is the same thing, but without the last column containing the constant value. In this case, it would be <span class="math">\(\left[\begin{array}{ccc} a_{1, 1} &amp; \ldots &amp; a_{1, n} \\ \vdots &amp; \vdots &amp; \vdots \\ a_{m, 1} &amp; \ldots &amp; a_{m, n} \\ \end{array}\right]\)</span>.</p>
 <p>We can combine a coefficient matrix <span class="math">\(A\)</span> and a constant vector <span class="math">\(\vec{b}\)</span> into an augmented matrix by using the <span class="math">\(\left[A \middle| \vec{b}\right]\)</span>. This simply adds <span class="math">\(\vec{b}\)</span> as a column to the end of <span class="math">\(A\)</span>.</p>
 <p>Solve <span class="math">\(\begin{cases} 2x_1 + 3x_2 &amp;= 11 \\ 3x_1 + 6x_2 &amp;= 7 \\ \end{cases}\)</span>:</p>
 <blockquote>
@@ -369,27 +369,27 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <h3 id="theorem-2.2.3">Theorem 2.2.3</h3>
 <p>Given an <span class="math">\(m \times n\)</span> coefficient matrix <span class="math">\(A\)</span> for a linear system:</p>
 <ul>
-<li>If <span class="math">\(\rank A &lt; \rank \left[A \mid \vec{b} \right]\)</span>, then the system is inconsistent, where <span class="math">\(\vec{b}\)</span> is the right hand side vector for the linear system. In other words, if the rank of the coefficent matrix is less than that of the augmented matrix, then the matrix is inconsistent.</li>
-<li>If <span class="math">\(\left[A \mid \vec{b} \right]\)</span> is consistent, then there are <span class="math">\(n - \rank A\)</span> free variables. If there are 0 free variables, then the system has only one solution.</li>
-<li><span class="math">\(\rank A = m\)</span> if and only if the system <span class="math">\(\left[A \mid \vec{b}\right]\)</span> is consistent for every <span class="math">\(\vec{b} \in \mb{R}^m\)</span>. In other words, there are no free variables if and only if the the system is consistent for every possible vector of right hand side values.</li>
+<li>If <span class="math">\(\rank A &lt; \rank \sys{A}{\vec{b}}\)</span>, then the system is inconsistent, where <span class="math">\(\vec{b}\)</span> is the right hand side vector for the linear system. In other words, if the rank of the coefficent matrix is less than that of the augmented matrix, then the matrix is inconsistent.</li>
+<li>If <span class="math">\(\sys{A}{\vec{b}}\)</span> is consistent, then there are <span class="math">\(n - \rank A\)</span> free variables. If there are 0 free variables, then the system has only one solution.</li>
+<li><span class="math">\(\rank A = m\)</span> if and only if the system <span class="math">\(\sys{A}{\vec{b}}\)</span> is consistent for every <span class="math">\(\vec{b} \in \mb{R}^m\)</span>. In other words, there are no free variables if and only if the the system is consistent for every possible vector of right hand side values.</li>
 </ul>
 <p>Proof of first:</p>
 <p>(point 1)</p>
 <blockquote>
-<p>Assume <span class="math">\(\rank A &lt; \rank \left[A \mid \vec{b} \right]\)</span>.<br />Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.<br />This corresponds to <span class="math">\(0 = 1\)</span>, which makes the system inconsistent.</p>
+<p>Assume <span class="math">\(\rank A &lt; \rank \sys{A}{\vec{b}}\)</span>.<br />Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.<br />This corresponds to <span class="math">\(0 = 1\)</span>, which makes the system inconsistent.</p>
 </blockquote>
 <p>Proof:</p>
 <p>(point 2)</p>
 <blockquote>
-<p>Assume <span class="math">\(\left[A \mid \vec{b} \right]\)</span> is consistent.<br />The number of free variables is the number of variables minus the number of those that are not free.<br />Those that are not free have leading ones, so <span class="math">\(\rank A\)</span> is the number of non-free variables.<br />So the number of free variables is <span class="math">\(n - \rank A\)</span>.</p>
+<p>Assume <span class="math">\(\sys{A}{\vec{b}}\)</span> is consistent.<br />The number of free variables is the number of variables minus the number of those that are not free.<br />Those that are not free have leading ones, so <span class="math">\(\rank A\)</span> is the number of non-free variables.<br />So the number of free variables is <span class="math">\(n - \rank A\)</span>.</p>
 </blockquote>
 <p>Proof:</p>
 <p>(point 3)</p>
 <blockquote>
-<p>First, we will prove that if the system <span class="math">\(\left[A \mid \vec{b}\right]\)</span> is not consistent for every <span class="math">\(\vec{b} \in \mb{R}^m\)</span>, then <span class="math">\(\rank A \ne m\)</span>.<br />Suppose <span class="math">\(\left[A \mid \vec{b}\right]\)</span> is inconsistent for some <span class="math">\(\vec{b} \in \mb{R}^m\)</span>.<br />Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.<br />This row does not contain a leading one, so <span class="math">\(\rank A &lt; m\)</span>.<br />Now we will prove that if <span class="math">\(\rank A \ne m\)</span>, then the system <span class="math">\(\left[A \mid \vec{b}\right]\)</span> is not consistent for every <span class="math">\(\vec{b} \in \mb{R}^m\)</span>.<br />Suppose <span class="math">\(\rank A \ne m\)</span>. Then <span class="math">\(\rank A &lt; m\)</span>. Then there is a row of all zeroes in the RREF of A.<br />Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.<br />Then the system is inconsistent.</p>
+<p>First, we will prove that if the system <span class="math">\(\sys{A}{\vec{b}}\)</span> is not consistent for every <span class="math">\(\vec{b} \in \mb{R}^m\)</span>, then <span class="math">\(\rank A \ne m\)</span>.<br />Suppose <span class="math">\(\sys{A}{\vec{b}}\)</span> is inconsistent for some <span class="math">\(\vec{b} \in \mb{R}^m\)</span>.<br />Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.<br />This row does not contain a leading one, so <span class="math">\(\rank A &lt; m\)</span>.<br />Now we will prove that if <span class="math">\(\rank A \ne m\)</span>, then the system <span class="math">\(\sys{A}{\vec{b}}\)</span> is not consistent for every <span class="math">\(\vec{b} \in \mb{R}^m\)</span>.<br />Suppose <span class="math">\(\rank A \ne m\)</span>. Then <span class="math">\(\rank A &lt; m\)</span>. Then there is a row of all zeroes in the RREF of A.<br />Then there must be a row in the RREF of the augmented matrix with all zeros except the last element, which is 1.<br />Then the system is inconsistent.</p>
 </blockquote>
 <h3 id="homogenous-systems">Homogenous Systems</h3>
-<p>A system is <strong>homogenous</strong> if and only if the right-hand side contains only zeros. In other words, it has the form <span class="math">\(\left[A \mid \vec{0}\right]\)</span>.</p>
+<p>A system is <strong>homogenous</strong> if and only if the right-hand side contains only zeros. In other words, it has the form <span class="math">\(\sys{A}{\vec{0}}\)</span>.</p>
 <p>A homogenous matrix is one where the last column is all 0 - a matrix corresponding to a homogenous system.</p>
 <p>Note that since the right side is always 0, the RREF of a homogenous matrix also has the right side always 0.</p>
 <p>Also note that it is impossible to get a row where every element is 0 except the right hand side. Therefore, <strong>homogenous systems are always consistent</strong>.</p>
@@ -465,6 +465,53 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <blockquote>
 <p>Clearly, <span class="math">\(\forall 1 \le i \le m, \forall 1 \le j \le n, ((cA)^T)_{i, j} = (cA)_{j, i} = c((A)_{j, i}) = c((A^T)_{i, j})\)</span>.<br />So <span class="math">\((cA)^T = c(A^T)\)</span>.</p>
 </blockquote>
+<h1 id="section-1">1/2/14</h1>
+<h2 id="matrix-multiplication">Matrix Multiplication</h2>
+<h3 id="matrix-vector-multiplication">Matrix-Vector Multiplication</h3>
+<p>Consider the linear system <span class="math">\(\sys{A}{\vec{B}}\)</span> with the solution <span class="math">\(\vec{x}\)</span>.</p>
+<p>When we multiply a matrix by a vector, we want to have it so that <span class="math">\(A\vec{x} = \vec{b}\)</span>. This is because it would be very useful to help solve systems of linear equations.</p>
+<p>Matrix-vector multiplication can be defined in terms of matrices with represented with row vectors or column vectors.</p>
+<p>We will first define it in terms of row vectors.</p>
+<p>Let <span class="math">\(A = \begin{bmatrix} \vec{a}_1^T \\ \vdots \\ \vec{a}_m^T \end{bmatrix}\)</span> and <span class="math">\(A \in M_{m, n}\)</span>.</p>
+<p>Note that <span class="math">\(\vec{a}_i^T\)</span> represents the coefficients of the <span class="math">\(i\)</span>th equation of the system. So if and only if <span class="math">\(\vec{x}\)</span> is a solution, <span class="math">\(\vec{x} \cdot \vec{a}_i^T = b_i\)</span>.</p>
+<p>Now we can define matrix multiplication: <span class="math">\(A\vec{x} = \begin{bmatrix} \vec{a}_1^T \cdot \vec{x} \\ \vdots \\ \vec{a}_m^T \cdot \vec{x} \end{bmatrix} = \vec{b}\)</span>.</p>
+<p>Basically, we take the dot product of each row and assemble it together into a vector. The product of a matrix and a vector is therefore a vector.</p>
+<p>Note that in order for matrix-vector multiplication to be defined, the number of columns in <span class="math">\(A\)</span> must equal the number of rows/components in <span class="math">\(\vec{x}\)</span> in order for the dot product to work. An <span class="math">\(m \times n\)</span> matrix can only be multiplied by vectors in <span class="math">\(\mb{R}^n\)</span>.</p>
+<p>Now we can also define it in terms of column vectors.</p>
+<p>Note that the system <span class="math">\(\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}\)</span> has the coefficient matrix <span class="math">\(A = \begin{bmatrix} \begin{bmatrix} a_{1, 1} \\ \vdots \\ a_{m, 1} \end{bmatrix} \cdots \begin{bmatrix} a_{1, n} \\ \vdots \\ a_{m, n} \end{bmatrix} \end{bmatrix} = \begin{bmatrix} \vec{c}_1 \ldots \vec{c}_n \end{bmatrix}\)</span>, where <span class="math">\(\vec{c}_i\)</span> represents the <span class="math">\(i\)</span>th column of the matrix.</p>
+<p>Note that the system can be written as <span class="math">\(x_1\begin{bmatrix} a_{1, 1} \\ \vdots \\ a_{m, 1} \end{bmatrix} + \ldots + x_n\begin{bmatrix} a_{1, n} \\ \vdots \\ a_{m, n} \end{bmatrix} = \vec{b}\)</span>.</p>
+<p>So we can write the system as <span class="math">\(x_1 \vec{c}_1 + \ldots + x_n \vec{c}_n = \vec{b}\)</span>.</p>
+<p>Now we define matrix-vector multiplication in terms of columns as <span class="math">\(A\vec{x} = x_1 \vec{c}_1 + \ldots + x_n \vec{c}_n\)</span>, where <span class="math">\(\vec{c}_i\)</span> represents the <span class="math">\(i\)</span>th column of <span class="math">\(A\)</span>.</p>
+<p>We define it this way because now we can represent the system with <span class="math">\(A\vec{x} = \vec{b}\)</span>.</p>
+<p>Note that we can use this to select one particular column of the matrix using a standard basis vector (a vector of all zeros except a lone one).</p>
+<p>For example, multiplying an <span class="math">\(m \times n\)</span> matrix by the <span class="math">\(i\)</span>th standard basis vector in <span class="math">\(\mb{R}^n\)</span> (the vector with all components set to 0 except for the <span class="math">\(ith\)</span> component, which is set to 1) will result in the <span class="math">\(i\)</span>th column of the matrix.</p>
+<h3 id="matrix-matrix-multiplication">Matrix-Matrix Multiplication</h3>
+<p>Now we can define the product of a matrix and a matrix.</p>
+<p>Given an <span class="math">\(m \times n\)</span> matrix <span class="math">\(A = \begin{bmatrix} \vec{a}_1^T \\ \vdots \\ \vec{a}_n^T \end{bmatrix}\)</span> and an <span class="math">\(n \times p\)</span> matrix <span class="math">\(B = \begin{bmatrix} \vec{b}_1 &amp; \ldots &amp; \vec{b}_p \end{bmatrix}\)</span>, <span class="math">\(AB = A\begin{bmatrix} \vec{b}_1 &amp; \ldots &amp; \vec{b}_p \end{bmatrix} = \begin{bmatrix} A\vec{b}_1 &amp; \ldots &amp; A\vec{b}_p \end{bmatrix}\)</span> is an <span class="math">\(m \times p\)</span> matrix.</p>
+<p>Basically, when we multiply a matrix by a matrix, we multiply the first matrix by each of the column vectors in the second matrix.</p>
+<p>Note that this requires that the number of columns in <span class="math">\(A\)</span> must be the same as the number of rows in <span class="math">\(B\)</span>, since the dot product must be defined.</p>
+<p>Note that <span class="math">\((AB)_{i, j} = \vec{a}_i^T \vec{b}_j = \vec{a}_i \cdot \vec{b}_j = \sum_{k = 1}^n (a_i^T)_k (\vec{a}_k)_j = \sum_{k = 1}^n (A)_{i, k} (B)_{k, j}\)</span>.</p>
+<h3 id="theorem-3.1.3-properties-of-matrix-multiplication">Theorem 3.1.3 (Properties of Matrix Multiplication)</h3>
+<p>If <span class="math">\(A, B, C\)</span> are matrices of the required dimensions, <span class="math">\(t \in \mb{R}\)</span>:</p>
+<ul>
+<li>Distributivity: <span class="math">\(A(B + C) = AB + AC\)</span>.</li>
+<li>Scalar multiplication: <span class="math">\(t(AB) = (tA)B = A(tB)\)</span>.</li>
+<li>Associativity: <span class="math">\((AB)C = A(BC)\)</span>.</li>
+<li>Transposition distributivity: <span class="math">\((AB)^T = A^T B^T\)</span>.</li>
+</ul>
+<p>Note that matrix multiplication is not commutative over matrices: <span class="math">\(AB \ne BA\)</span> for some matrices.</p>
+<h3 id="theorem-3.1.4">Theorem 3.1.4</h3>
+<p>Note that <span class="math">\(A = B \implies AC = BC \wedge CA = BA\)</span>. However, <span class="math">\(AC = BC \vee CA = BA\)</span> <strong>does not imply</strong> <span class="math">\(A = B\)</span> - there is no cancellation law for matrix multiplication.</p>
+<p>That said, given <span class="math">\(A, B \in M_{m, n}\)</span>, <span class="math">\((\forall \vec{x} \in \mb{R}^n, A\vec{x} = B\vec{x}) \implies A = B\)</span>.</p>
+<p>In other words, if each product of a matrix with an arbitrary vector are equal to each other, then the matrices are themselves equal to each other.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(A = \begin{bmatrix} \vec{a}_1 &amp; \ldots &amp; \vec{a}_n \end{bmatrix}, B = \begin{bmatrix} \vec{b}_1 &amp; \ldots &amp; \vec{b}_n \end{bmatrix}\)</span>.<br />Let <span class="math">\(i \in \mb{N}, i \le n\)</span>.<br />Let <span class="math">\(\vec{e}_i\)</span> be the <span class="math">\(i\)</span>th standard basis vector in <span class="math">\($\mb{R}^n (the vector with all zeroes except the \)</span>i<span class="math">\(th element, which is 1).   Let \)</span> ^n<span class="math">\(. Construct \)</span> = <em>i<span class="math">\(.   Assume \)</span>A = B<span class="math">\(. Then \)</span>A</em>i = B<em>i = </em>i = _i<span class="math">\(.   Since \)</span>i$ is arbitrary, <span class="math">\(forall 1 \le i \le n, \vec{a}_i = \vec{b}_i\)</span>.<br />So <span class="math">\(A = B\)</span>.</p>
+</blockquote>
+<h1 id="section-2">3/2/14</h1>
+<h2 id="identity-matrix">Identity Matrix</h2>
+<p>The identity matrix is the matrix such that, when multiplied with any matrix, or when any matrix is multiplied by it, results in that same matrix.</p>
+<p>In other words, we want to find <span class="math">\(I\)</span> such that <span class="math">\(\forall A \in M_{m, n}, AI = IA = A\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

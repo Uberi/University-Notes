@@ -640,9 +640,104 @@ There are many things we can say about the function even without solving it. The
 
 Suppose we have $\frac{\dee y}{\dee x} = f(x, y)$. Note that the left side is equal to the slope of the tangent line, and the right side is an expression for the slope of the tangent line for any point $(x, y)$.
 
-Basically, every point on the Cartesian plane now has an associated slope, which we can represent as a 
+Basically, every point on the Cartesian plane now has an associated slope, and we can represent this roughly with arrows on the graph representing the trend in the slopes.
+
+These arrows/contours are called streamlines.
+
+Think of this as a stream with currents and eddies. Every possible solution is a possible path a floating object will take if dropped at a particular place in the stream and allowed to bob along with the stream. The solutions are we get if we start at a possible point and draw a curve that has the slope of the tangent always equal to the value at the flow field at the point under the curve.
+
+We can also think of them as a topographical map of some terrain. If we drop a ball along a point on the map, it will trace out a certain line. If we drop it slightly off to one side, it may take a different path, which could be similar, or completely different. The slope of the tangent represents the slope of the hill at a particular point.
+
+The set of all possible solutions is therefore a family of functions that look like a map of water currents.
+
+An **equilibrium** is a place where $\frac{\dee y}{\dee x} = f(x) = 0$. Because the slope of the tangent is 0, it must be 0 for all $x$ values. There are **stable** and **unstable** equilibria.
+
+Stable equilibria are those where values that are close to them get closer to them, like dropping a ball on the side of a valley and having it eventually roll to the bottom of the valley.
+
+Unstable equilibria are those where values that are close to them get farther away from them, like dropping a ball at the peak of a mountain and having it roll away from the peak. Only values that are exactly on the unstable equilibrium will stay there.
 
 Consider $\frac{\dee y}{\dee x} = 1 - y^2$:
 
 > The slope of the tangent line is $\begin{cases} \text{negative} &\text{if } y < -1 \\ \text{positive} &\text{if } -1 < y < 1 \\ \text{negative} &\text{if } y > 1 \end{cases}$.  
-> We can visualize this as a flow field. 
+> We can visualize this as a flow field with three distinct sections.  
+> Note that if we start at $y = -1, 1$, we stay at that same value regardless of the value of $x$. This is called an equilibrium, since the value isn't changing.  
+> Note that if we start at any $y > -1$, $y \to 1$ as $x \to \infty$ (convergent), and if we start at any $y < -1$, $y \to -\infty$ as $x \to \infty$ (divergent).  
+
+# 3/2/14
+
+Differential equations of the form $\frac{\dee y}{\dee x} = f(y)$ are called autonomous differential equations. Note that they do not depend on the value of $x$.
+
+The equilibria of an autonomous differential equation are those $y$ values for which $\frac{\dee y}{\dee x} = g(y) = 0$.
+
+An equilibrium $y = k$ is stable if and only if $f'(k) < 0$ - if the change in the slope at the location is negative. Otherwise, it is unstable.
+
+Solving Differential Equations
+------------------------------
+
+Consider $\frac{\dee y}{\dee x} = y - x$, with $y(0) = 2$.
+
+This is a differential equation of the form $\frac{\dee y}{\dee x} = f(x, y)$
+
+We can use the differential equation to estimate a certain solution, much like a Riemann sum.
+
+First, we pick a starting point so we have a single solution to the differential equation, a member of the family of solutions. This is a curve on the Cartesian plane.
+
+This starting point is called the **initial condition**. The initial condition often takes the form of $y(x) = y(0) = 2$ - the $y$-value at $x = 0$ is 2 for this solution.
+
+First, we break up the domain into pieces, by choosing value for $x_1, \ldots, x_n$.
+
+Then, we use $\frac{\dee y}{\dee x} = f(x, y)$ to estimate the slope of the tangent at any given $x$ value.
+
+Then, we observe that $\frac{\dee y}{\dee x} = f(x_{n - 1}, y_{n - 1}) \approx \frac{y_n - y_{n - 1}}{x_n - x_{n - 1}}$ - the slope of the tangent is close to the slope of the secant.
+
+So $y_n(x) \approx y_{n - 1} + (x_n - x_{n - 1})f(x_{n - 1}, y_{n - 1})$. This is written in update form, so we can now use a table of values to calculate it.
+
+Let $\delta x = x_n - x_{n - 1}$. Then $y_n(x) \approx y_{n - 1} + f(x_{n - 1}, y_{n - 1}) \delta x$.
+
+We can also write this as $y_{n + 1}(x) \approx y_n + f(x_n, y_n) \delta x$ where $\delta x = x_{n + 1} - x_n$.
+
+Now we can write $\frac{\dee y}{\dee x} = y - x$ as $y_n(x) \approx y_{n - 1} + (x_n - x_{n - 1})(x_{n - 1} - y_{n - 1})$.
+
+We can actually approximate this function by using a table of values. Since $y(0) = 2$, $y_0 = 2$:
+
+| $n$ | $x_n$ | $y_n$ | $f(x_n, y_n) \delta x$ | $y_{n + 1} \approx y_n + f(x_n, y_n) \delta x$ |
+|-----|-------|-------|------------------------|------------------------------------------|
+|   0 |   0.0 |     2 |  $(2 - 0.0)0.1 = 0.20$ |                    $2.2 \approx 2 + 0.2$ |
+|   1 |   0.1 |   2.2 |  $(2 - 0.1)0.2 = 0.38$ |                $2.58 \approx 2.2 + 0.38$ |
+|   2 |   0.2 |  2.58 |  $(2 - 0.2)0.3 = 0.54$ |               $3.12 \approx 2.58 + 0.54$ |
+|   3 |   0.3 |  3.12 |  $(2 - 0.3)0.4 = 0.68$ |                                 $\ldots$ |
+
+Now we can a table of values for the equation. We can plot this on a graph to approximate the curve.
+
+The actual solution can also be found, though not through these techniques. The general solution is $y = 1 + x + c^x, c \in \mb{R}$.
+
+This is called **Euler's method**. It is a method for numerically solving differential equations.
+
+### Integration
+
+If we want exact solutions, we have to integrate. This is not always possible, but is in certain cases.
+
+**Separable equations** are one variety of them. They are equations of the form $\frac{\dee y}{\dee x} = A(x) B(y)$.
+
+Note that $y$ is also a function of $x$, so $B(y)$ is another function of $x$. We write $y = y(x)$.
+
+Clearly, $\frac{\dee y}{\dee x} = A(x) B(y)$ is the same as $\frac{1}{B(y)} \frac{\dee y}{\dee x} = A(x)$.
+
+If we integrate both sides, we get $\int \frac{1}{B(y)} \frac{\dee y}{\dee x} \dee x = \int A(x) \dee x$.
+
+Now we can "cancel $\dee x$". Let $u = y(x)$. Then $\dee u = \frac{\dee u}{\dee x} \dee x$ and $\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u = \frac{1}{\frac{\dee y}{\dee x}} \dee u$. This is basically the definition of the substitution rule for integrals.
+
+So $\int \frac{1}{B(y)} \frac{\dee y}{\dee x} \dee x = \int \frac{1}{B(u)} \frac{\dee y}{\dee x} \frac{1}{\frac{\dee y}{\dee x}} \dee u = \int \frac{1}{B(u)} \dee u = \int \frac{1}{B(y)} \dee y$.
+
+So $\int \frac{1}{B(y)} \dee y = \int A(x) \dee x$.
+
+We can also think of this as multiplying both sides of $\frac{1}{B(y)} \frac{\dee y}{\dee x} = A(x)$ by $\dee x$ and integrating both sides.
+
+Solve $\frac{\dee y}{\dee x} = \frac{x}{y}$ for $y(0) = -3$:
+
+> Clearly, this is equivalent to $y \frac{\dee y}{\dee x} = x$, or $y \dee y = x \dee x$, or $\int y \dee y = \int x \dee x$.  
+> Integrating both sides, we get $\frac{y^2}{2} = \frac{x^2}{2} + c$.  
+> We want to find the value of $c$. Since $y(0) = -3$, $\frac{(-3)^2}{2} = \frac{0^2}{2} + c$ and $c = \frac{9}{2}$.  
+> So the solution is $y^2 = 2x^2 + 2 \cdot \frac{9}{2} = 2x^2 + 9$.  
+
+;wip: try $\frac{\dee}{\dee x} 2^y \sin^2 x$ and $\sqrt{x \frac{\dee x}{\dee t}} = \frac{1}{1 + t}$

@@ -432,11 +432,95 @@ z</code></pre>
 </blockquote>
 <p>There are many things we can say about the function even without solving it. These are called <strong>qualitiative analyses</strong>.</p>
 <p>Suppose we have <span class="math">\(\frac{\dee y}{\dee x} = f(x, y)\)</span>. Note that the left side is equal to the slope of the tangent line, and the right side is an expression for the slope of the tangent line for any point <span class="math">\((x, y)\)</span>.</p>
-<p>Basically, every point on the Cartesian plane now has an associated slope, which we can represent as a</p>
+<p>Basically, every point on the Cartesian plane now has an associated slope, and we can represent this roughly with arrows on the graph representing the trend in the slopes.</p>
+<p>These arrows/contours are called streamlines.</p>
+<p>Think of this as a stream with currents and eddies. Every possible solution is a possible path a floating object will take if dropped at a particular place in the stream and allowed to bob along with the stream. The solutions are we get if we start at a possible point and draw a curve that has the slope of the tangent always equal to the value at the flow field at the point under the curve.</p>
+<p>We can also think of them as a topographical map of some terrain. If we drop a ball along a point on the map, it will trace out a certain line. If we drop it slightly off to one side, it may take a different path, which could be similar, or completely different. The slope of the tangent represents the slope of the hill at a particular point.</p>
+<p>The set of all possible solutions is therefore a family of functions that look like a map of water currents.</p>
+<p>An <strong>equilibrium</strong> is a place where <span class="math">\(\frac{\dee y}{\dee x} = f(x) = 0\)</span>. Because the slope of the tangent is 0, it must be 0 for all <span class="math">\(x\)</span> values. There are <strong>stable</strong> and <strong>unstable</strong> equilibria.</p>
+<p>Stable equilibria are those where values that are close to them get closer to them, like dropping a ball on the side of a valley and having it eventually roll to the bottom of the valley.</p>
+<p>Unstable equilibria are those where values that are close to them get farther away from them, like dropping a ball at the peak of a mountain and having it roll away from the peak. Only values that are exactly on the unstable equilibrium will stay there.</p>
 <p>Consider <span class="math">\(\frac{\dee y}{\dee x} = 1 - y^2\)</span>:</p>
 <blockquote>
-<p>The slope of the tangent line is <span class="math">\(\begin{cases} \text{negative} &amp;\text{if } y &lt; -1 \\ \text{positive} &amp;\text{if } -1 &lt; y &lt; 1 \\ \text{negative} &amp;\text{if } y &gt; 1 \end{cases}\)</span>.<br />We can visualize this as a flow field.</p>
+<p>The slope of the tangent line is <span class="math">\(\begin{cases} \text{negative} &amp;\text{if } y &lt; -1 \\ \text{positive} &amp;\text{if } -1 &lt; y &lt; 1 \\ \text{negative} &amp;\text{if } y &gt; 1 \end{cases}\)</span>.<br />We can visualize this as a flow field with three distinct sections.<br />Note that if we start at <span class="math">\(y = -1, 1\)</span>, we stay at that same value regardless of the value of <span class="math">\(x\)</span>. This is called an equilibrium, since the value isn't changing.<br />Note that if we start at any <span class="math">\(y &gt; -1\)</span>, <span class="math">\(y \to 1\)</span> as <span class="math">\(x \to \infty\)</span> (convergent), and if we start at any <span class="math">\(y &lt; -1\)</span>, <span class="math">\(y \to -\infty\)</span> as <span class="math">\(x \to \infty\)</span> (divergent).</p>
 </blockquote>
+<h1 id="section-12">3/2/14</h1>
+<p>Differential equations of the form <span class="math">\(\frac{\dee y}{\dee x} = f(y)\)</span> are called autonomous differential equations. Note that they do not depend on the value of <span class="math">\(x\)</span>.</p>
+<p>The equilibria of an autonomous differential equation are those <span class="math">\(y\)</span> values for which <span class="math">\(\frac{\dee y}{\dee x} = g(y) = 0\)</span>.</p>
+<p>An equilibrium <span class="math">\(y = k\)</span> is stable if and only if <span class="math">\(f&#39;(k) &lt; 0\)</span> - if the change in the slope at the location is negative. Otherwise, it is unstable.</p>
+<h2 id="solving-differential-equations">Solving Differential Equations</h2>
+<p>Consider <span class="math">\(\frac{\dee y}{\dee x} = y - x\)</span>, with <span class="math">\(y(0) = 2\)</span>.</p>
+<p>This is a differential equation of the form <span class="math">\(\frac{\dee y}{\dee x} = f(x, y)\)</span></p>
+<p>We can use the differential equation to estimate a certain solution, much like a Riemann sum.</p>
+<p>First, we pick a starting point so we have a single solution to the differential equation, a member of the family of solutions. This is a curve on the Cartesian plane.</p>
+<p>This starting point is called the <strong>initial condition</strong>. The initial condition often takes the form of <span class="math">\(y(x) = y(0) = 2\)</span> - the <span class="math">\(y\)</span>-value at <span class="math">\(x = 0\)</span> is 2 for this solution.</p>
+<p>First, we break up the domain into pieces, by choosing value for <span class="math">\(x_1, \ldots, x_n\)</span>.</p>
+<p>Then, we use <span class="math">\(\frac{\dee y}{\dee x} = f(x, y)\)</span> to estimate the slope of the tangent at any given <span class="math">\(x\)</span> value.</p>
+<p>Then, we observe that <span class="math">\(\frac{\dee y}{\dee x} = f(x_{n - 1}, y_{n - 1}) \approx \frac{y_n - y_{n - 1}}{x_n - x_{n - 1}}\)</span> - the slope of the tangent is close to the slope of the secant.</p>
+<p>So <span class="math">\(y_n(x) \approx y_{n - 1} + (x_n - x_{n - 1})f(x_{n - 1}, y_{n - 1})\)</span>. This is written in update form, so we can now use a table of values to calculate it.</p>
+<p>Let <span class="math">\(\delta x = x_n - x_{n - 1}\)</span>. Then <span class="math">\(y_n(x) \approx y_{n - 1} + f(x_{n - 1}, y_{n - 1}) \delta x\)</span>.</p>
+<p>We can also write this as <span class="math">\(y_{n + 1}(x) \approx y_n + f(x_n, y_n) \delta x\)</span> where <span class="math">\(\delta x = x_{n + 1} - x_n\)</span>.</p>
+<p>Now we can write <span class="math">\(\frac{\dee y}{\dee x} = y - x\)</span> as <span class="math">\(y_n(x) \approx y_{n - 1} + (x_n - x_{n - 1})(x_{n - 1} - y_{n - 1})\)</span>.</p>
+<p>We can actually approximate this function by using a table of values. Since <span class="math">\(y(0) = 2\)</span>, <span class="math">\(y_0 = 2\)</span>:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><span class="math">\(n\)</span></th>
+<th align="left"><span class="math">\(x_n\)</span></th>
+<th align="left"><span class="math">\(y_n\)</span></th>
+<th align="left"><span class="math">\(f(x_n, y_n) \delta x\)</span></th>
+<th align="left"><span class="math">\(y_{n + 1} \approx y_n + f(x_n, y_n) \delta x\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">0.0</td>
+<td align="left">2</td>
+<td align="left"><span class="math">\((2 - 0.0)0.1 = 0.20\)</span></td>
+<td align="left"><span class="math">\(2.2 \approx 2 + 0.2\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">0.1</td>
+<td align="left">2.2</td>
+<td align="left"><span class="math">\((2 - 0.1)0.2 = 0.38\)</span></td>
+<td align="left"><span class="math">\(2.58 \approx 2.2 + 0.38\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">0.2</td>
+<td align="left">2.58</td>
+<td align="left"><span class="math">\((2 - 0.2)0.3 = 0.54\)</span></td>
+<td align="left"><span class="math">\(3.12 \approx 2.58 + 0.54\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">0.3</td>
+<td align="left">3.12</td>
+<td align="left"><span class="math">\((2 - 0.3)0.4 = 0.68\)</span></td>
+<td align="left"><span class="math">\(\ldots\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Now we can a table of values for the equation. We can plot this on a graph to approximate the curve.</p>
+<p>The actual solution can also be found, though not through these techniques. The general solution is <span class="math">\(y = 1 + x + c^x, c \in \mb{R}\)</span>.</p>
+<p>This is called <strong>Euler's method</strong>. It is a method for numerically solving differential equations.</p>
+<h3 id="integration">Integration</h3>
+<p>If we want exact solutions, we have to integrate. This is not always possible, but is in certain cases.</p>
+<p><strong>Separable equations</strong> are one variety of them. They are equations of the form <span class="math">\(\frac{\dee y}{\dee x} = A(x) B(y)\)</span>.</p>
+<p>Note that <span class="math">\(y\)</span> is also a function of <span class="math">\(x\)</span>, so <span class="math">\(B(y)\)</span> is another function of <span class="math">\(x\)</span>. We write <span class="math">\(y = y(x)\)</span>.</p>
+<p>Clearly, <span class="math">\(\frac{\dee y}{\dee x} = A(x) B(y)\)</span> is the same as <span class="math">\(\frac{1}{B(y)} \frac{\dee y}{\dee x} = A(x)\)</span>.</p>
+<p>If we integrate both sides, we get <span class="math">\(\int \frac{1}{B(y)} \frac{\dee y}{\dee x} \dee x = \int A(x) \dee x\)</span>.</p>
+<p>Now we can &quot;cancel <span class="math">\(\dee x\)</span>&quot;. Let <span class="math">\(u = y(x)\)</span>. Then <span class="math">\(\dee u = \frac{\dee u}{\dee x} \dee x\)</span> and <span class="math">\(\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u = \frac{1}{\frac{\dee y}{\dee x}} \dee u\)</span>. This is basically the definition of the substitution rule for integrals.</p>
+<p>So <span class="math">\(\int \frac{1}{B(y)} \frac{\dee y}{\dee x} \dee x = \int \frac{1}{B(u)} \frac{\dee y}{\dee x} \frac{1}{\frac{\dee y}{\dee x}} \dee u = \int \frac{1}{B(u)} \dee u = \int \frac{1}{B(y)} \dee y\)</span>.</p>
+<p>So <span class="math">\(\int \frac{1}{B(y)} \dee y = \int A(x) \dee x\)</span>.</p>
+<p>We can also think of this as multiplying both sides of <span class="math">\(\frac{1}{B(y)} \frac{\dee y}{\dee x} = A(x)\)</span> by <span class="math">\(\dee x\)</span> and integrating both sides.</p>
+<p>Solve <span class="math">\(\frac{\dee y}{\dee x} = \frac{x}{y}\)</span> for <span class="math">\(y(0) = -3\)</span>:</p>
+<blockquote>
+<p>Clearly, this is equivalent to <span class="math">\(y \frac{\dee y}{\dee x} = x\)</span>, or <span class="math">\(y \dee y = x \dee x\)</span>, or <span class="math">\(\int y \dee y = \int x \dee x\)</span>.<br />Integrating both sides, we get <span class="math">\(\frac{y^2}{2} = \frac{x^2}{2} + c\)</span>.<br />We want to find the value of <span class="math">\(c\)</span>. Since <span class="math">\(y(0) = -3\)</span>, <span class="math">\(\frac{(-3)^2}{2} = \frac{0^2}{2} + c\)</span> and <span class="math">\(c = \frac{9}{2}\)</span>.<br />So the solution is <span class="math">\(y^2 = 2x^2 + 2 \cdot \frac{9}{2} = 2x^2 + 9\)</span>.</p>
+</blockquote>
+<p>;wip: try <span class="math">\(\frac{\dee}{\dee x} 2^y \sin^2 x\)</span> and <span class="math">\(\sqrt{x \frac{\dee x}{\dee t}} = \frac{1}{1 + t}\)</span></p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
