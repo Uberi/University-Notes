@@ -809,14 +809,16 @@ const int ***pppi = &amp;ppi;</code></pre>
 </ul>
 <p>We list the side effects of a function in the postconditions. However, the implementation details should not be exposed in doing so.</p>
 <p>In Racket, a function that returns nothing (like <code>printf</code>) actually produces <code>#&lt;void&gt;</code>. In contracts, this is represented with <code>Void</code>.</p>
-<p>In C, <code>printf</code> actually produces the number of characters printed.</p>
+<p>In C, <code>printf</code> actually produces the number of characters printed. This is useful for checking for printing errors, or getting the string length.</p>
 <p>A function in C can simply not return a value, or not accept any parameters:</p>
 <pre><code>void f(void) { // this function neither accepts or returns any values
     printf(&quot;Look ma, no arguments!&quot;);
     return; // this is optional for void functions
 }</code></pre>
 <p>Before, we saw that <code>printf(&quot;Look ma, no arguments!&quot;)</code> is an <strong>expression</strong>. When an expression is the only thing inside a statement, the statement becomes an <strong>expression statement</strong>: <code>printf(&quot;Look ma, no arguments!&quot;);</code> (note the semicolon, which denotes that the code represents a complete statement).</p>
-<p>The values of expression statements are simply ignored, like those in Racket's <code>begin</code>.</p>
+<p>Other expression statements are <code>3 + 2;</code> or <code>a * 7</code>.</p>
+<p>The values of expression statements are simply ignored, like those in Racket's <code>begin</code>. Therefore, they are really only useful for their side effects.</p>
+<p>In C, a statement is a construct such that it gets executed, but the result is ignored. Statements cannot be used inside expressions, but expressions can be used inside statements.</p>
 <h1 id="tutorial-4">3/2/14 - Tutorial</h1>
 <p>Another example of floats being horrible:</p>
 <pre><code>const float big = 1000000000.0;
@@ -847,6 +849,78 @@ assert(-epsilon &lt; a - b &amp;&amp; a - b &lt; epsilon);</code></pre>
     return ((abs_a == a &amp;&amp; abs_b == b) || (abs_a != a &amp;&amp; abs_b != b)) ? // check if signs are the same (only case in which overflow can occur)
         abs_a &lt;= INT_MAX - abs_b : true;
 }</code></pre>
+<p>Lockstep is when multiple arguments in structural recursion approach the base case at the same rate.</p>
+<h1 id="section-8">4/2/14</h1>
+<p>Terminology summary:</p>
+<pre><code>#include &lt;stdio.h&gt; // preprocessor directive
+int add1(int x); // function declaration
+int add1(int x) { // function definition
+    // and block statement
+    const int y = x + 1; // local definition
+    printf(&quot;add1 called\n&quot;); // expression statement (side effect)
+    2 + 2 == 5; // expression statement (no side effect)
+    return y; // control flow statement
+}</code></pre>
+<p>The substitution rule for <code>begin</code> is that each argument is evaluated, and then the simplified value of the last argument is produced.</p>
+<p>The three different types of statements are:</p>
+<ul>
+<li>Expression Statements</li>
+<li>Block Statements</li>
+<li>Control Flow Statements</li>
+</ul>
+<h3 id="compound-statements">Compound Statements</h3>
+<p>In C, the block <code>{ CODE_GOES_HERE }</code> creates a compound statement - it groups a bunch of statements together and makes it appear like one statement. Bocks can also have local definitions, which are not statements.</p>
+<p>The block is similar to Racket's <code>begin</code>. However rather than producing the last value, it produces no value at all, because it is a statement.</p>
+<p>Some functions have only side effects, and don't produce a value. These have the <code>void</code> return type.</p>
+<p>Some functions have no side effects, and only produce a value.</p>
+<p>It is not useful to have a function that has neither side effects or a return value.</p>
+<p>In expressions, we can also use a comma (<code>,</code>) to evaluate multiple expressions but produce only the last one. For example, <span class="math">\(a == 1 ? (a = 2, 5 + 6) : 7 + 8\)</span>. This is very similar in functionality to <code>begin</code> in Racket.</p>
+<h3 id="control-flow-statements">Control Flow Statements</h3>
+<p>Control flow statements are those that change the control flow - they can change the program location and call stack.</p>
+<p>Function calls also modify control flow. They change the program location to the target and push a stack frame to the call stack.</p>
+<p>An example of this is <code>return</code>, which pops an entry off the top of the call stack and moves the program location to the return address in the popped off stack frame.</p>
+<p>Another control flow statement is <code>if</code>:</p>
+<pre><code>if (CONDITION) STATEMENT</code></pre>
+<p>This executes <code>STATEMENT</code> if and only if <code>CONDITION</code> is truthy. <code>STATEMENT</code> is known as the <strong>body</strong> of the <code>if</code> statement, while <code>CONDITION</code> is the <strong>condition</strong>.</p>
+<p>Note that <code>STATEMENT</code> can be a compound statement to execute multiple statements in the body of the <code>if</code>. Note that the parentheses around the condition are required.</p>
+<p>We should always put braces around the body of the <code>if</code>, even if there is only one statement. This is a matter of style and improves readability:</p>
+<pre><code>if (n &lt; 0) {
+    printf(&quot;Hello\n&quot;);
+}</code></pre>
+<p>Since <code>if</code> doesn't produce a value, it is only really useful to do control flow or side effects in the body of an <code>if</code> statement.</p>
+<p><code>if</code> also supports an optional <code>else</code> clause that specifies another statement that gets executed if <code>CONDITION</code> fails:</p>
+<pre><code>if (x &lt; 10) {
+    // ...
+} else {
+    // ...
+}</code></pre>
+<p>The <code>else</code> always belongs to the most recently entered <code>if</code>: <code>if (a) if (b) x; else y;</code> will only do <code>y</code> when <code>a</code> is true and <code>b</code> is false. This is called a <strong>dangling else</strong>.</p>
+<p>Note that we can also use another <code>if</code> statement as the body of the <code>else</code> clause:</p>
+<pre><code>if (x &lt; 10) {
+    // ...
+} else if (x &lt; 20) {
+    // ...
+} else if (x &lt; 30) {
+    // ...
+} else {
+    // ...
+}</code></pre>
+<p>We can now have a use for multiple return statements in one function:</p>
+<pre><code>if (k &lt; 0) {
+    return k
+} else {
+    return -k;
+}</code></pre>
+<p>Note that since the <code>return</code> statement will stop the rest of the function from executing, the above code is the same as the following:</p>
+<pre><code>if (k &lt; 0) {
+    return k
+}
+return -k;</code></pre>
+<h2 id="mutation">Mutation</h2>
+<p>When we declared variables earlier, we used <code>const TYPE IDENTIFIER ...</code>. Declared without the <code>const</code> keyword, variables are <strong>mutable</strong> - the value of these variables can be changed as often as needed.</p>
+<p>Even though we may now use mutation, it is still good practise to use <code>const</code> whenever possible. This is because <code>const</code> communicates to readers and the compiler that the variable is not to be modified, which helps prevent accidental mutation and improves performance.</p>
+<p>Mutable variables can be declared without initializing them: <code>int k;</code>. This is generally considered bad style, however.</p>
+<p>Global variables, if not initialized, are automatically initialized to 0. Local variables can be initialized to any value, though usually it will be some entries left over from old stack frames.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

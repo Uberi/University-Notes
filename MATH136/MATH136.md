@@ -6,6 +6,7 @@ Linear Algebra
     Instructor: Dan Wolczuk
     Section 081 (online)
     Email: dstwolcz@uwaterloo.ca
+    Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1:30pm-4:00pm
 
 $$
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -901,3 +902,6 @@ The identity matrix is the matrix such that, when multiplied with any matrix, or
 
 In other words, we want to find $I$ such that $\forall A \in M_{m, n}, AI = IA = A$.
 
+We will now find the identity matrix. We want $A = AI$. So $\begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix} = A\begin{bmatrix} \vec{i}_1 & \ldots & \vec{i}_n \end{bmatrix} = \begin{bmatrix} A\vec{i}_1 & \ldots & A\vec{i}_n \end{bmatrix}$.
+
+So $\vec{a}_c = A\vec{i}_c$ for all $1 \le c \le n$.
