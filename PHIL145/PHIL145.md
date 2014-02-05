@@ -306,6 +306,8 @@ A premise can be supported by other premises. These other premises support a con
     ---------------------------------------
     The snow is white or the grass is green
 
+So when there is only one premise, it always offers convergent support.
+
 We can diagram arguments with their sub-arguments as trees in node-arrow diagrams. We often number the statements and then label the nodes with the statement numbers.
 
 Consider the following argument:
@@ -752,3 +754,60 @@ Appealing to authority is a special case of testimony. A legitimate authority is
 The same rules for testimony apply for appeals to authority. However, faulty appeals to authority are most often due to the last point - claims should not exceed the expertise of the authority. For example, claims about the weather from a climate prediction institution. should be accepted, but macroeconomic analyses should not.
 
 However, this applies only to testimony given alone - without any additional justification. The acceptability of testimony is based on how much we should trust what someone says on their word alone. So even if a non-expert gives a claim, it can still be acceptable if compelling reasons are given.
+
+# 5/1/14
+
+If two authorities have conflicting views, it is generally reasonable to accept the claims of the more authoritative one. If they are very similar in authority, then it is reasonable to withhold judgement.
+
+Authority can be determined by the amount of experts who agree, and how credible these people are.
+
+### Vageness/Ambiguity
+
+We sometimes reject premises because they are vague or ambiguous. In common use this generally means imprecise, but we want a more precise definition.
+
+**Imprecise** means that the claim is **literally true in a very wide range of cases**. For example, "the object is bigger than a breadbox, but smaller than a mountain". A lot of objects satisfy this.
+
+Imprecision often results from imprecise quantifiers like "many", "few", "some", etc.
+
+Many claims are more imprecise than they could be. However, imprecision is a useful tool in everyday communication.
+
+Imprecision by definition makes a premise more acceptable, because it is true in a larger number of cases. It is not a reason to reject a premise.
+
+However, imprecision has a negative impact on groundedness, since an imprecise statement cannot make as many claims reasonably believable.
+
+A **vague/ambiguous claim** is one where it is difficult to determine if it is true or false. Since we only accept a premise if it is reasonable to believe it is true, there are certain situations where vague/ambiguous claims cannot be accepted. TH
+
+A **vague** claim is one that uses **vague terms** - terms that have **penumbral cases, where we don't know whether they apply or not. The vagueness of a term is determined from how many penumbral cases there are. The vagueness of a claim depends on the quantity and vagueness of the terms it contains.
+
+For example, "This man is balding" is vague, because there are many possible cases where we can't be sure whether the man is balding or not - does losing 1 hair count as balding? Does losing 1000?
+
+A famous example is the Sorites paradox:
+
+    1 grain of sand is not a heap.
+    Adding 1 grain of sand to a heap will not turn a non-heap into a heap.
+    ----------------------------------------------------------------------
+    1000000 grains of sand are not a heap.
+
+The argument is paradoxical because "heap" is a vague term. We do not know whether heap-ness applies in the penumbral cases, when the sand grains could either form a heap or not form a heap.
+
+An **ambiguous** claim is one where there are multiple possible meanings of the claim without context to find the correct one. Multiple meanings happen quite often in language, but these are often resolved through context. A claim is ambiguous when the context does not allow us to determine which meaning is correct.
+
+The two types are ambiguity are **syntactic** (sentence structure can be read in more than one way) and **lexical** (phrases in sentence have multiple meanings by definition).
+
+For example, "Peter saw a man taking his bike" is syntactically ambiguous because the man could either be taking the man's own bike, or Peter's bike.
+
+Fpr example, "She threw a rock at the bank" is lexically ambiguous because it could be a financial bank, or a river bank.
+
+For example, "There is something somewhere" is not ambiguous, just imprecise. There is only one meaning to this statement.
+
+### Consistency
+
+Consistency/inconsistency applies to **sets of sentences**.
+
+A set of sentences is **consistent** if it possible for all of them to be true at the same time. For example, "the sky is blue", "the grass is green"
+
+Otherwise, the set is **inconsistent**. For example, "the sky is blue", "the sky is not blue". This often occurs when two sentences are contradictory or there is a necessary falsehood.
+
+An inconsistent set of sentences is not acceptable as premises in an argument, because at least one sentence in the set is always false.
+
+Necessary falsehoods are a special case of inconsistent sets, where there is only one element in the set.

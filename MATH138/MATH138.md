@@ -741,3 +741,63 @@ Solve $\frac{\dee y}{\dee x} = \frac{x}{y}$ for $y(0) = -3$:
 > So the solution is $y^2 = 2x^2 + 2 \cdot \frac{9}{2} = 2x^2 + 9$.  
 
 ;wip: try $\frac{\dee}{\dee x} 2^y \sin^2 x$ and $\sqrt{x \frac{\dee x}{\dee t}} = \frac{1}{1 + t}$
+
+# 5/2/14
+
+**Constant solutions** are another name for equilibria. They are simply where $\frac{\dee y}{\dee x} = 0$ for $\frac{\dee y}{\dee x} = f(y)$.
+
+Solve $\sqrt{x \frac{\dee x}{\dee t}} = \frac{1}{1 + t}$ for $x(t) = x(0) = 0, t \ge 0$:
+
+> $$
+\begin{align}
+\sqrt{x \frac{\dee x}{\dee t}} &= \frac{1}{1 + t} \\
+x \frac{\dee x}{\dee t} &= \frac{1}{(1 + t)^2} \\
+x \dee x &= \frac{1}{(1 + t)^2} \dee t \\
+\int x \dee x &= \int \frac{1}{(1 + t)^2} \dee t \\
+\frac{x^2}{2} + c &= -\frac{1}{1 + t} + c \\
+\frac{x^2}{2} &= -\frac{1}{1 + t} + c \\
+x &= 0, t = 0 \\
+\frac{0^2}{2} &= -\frac{1}{1 + 0} + c \\
+c &= 1 \\
+\frac{x^2}{2} &= -\frac{1}{1 + t} + 1 \\
+x &= \sqrt{2 - \frac{2}{1 + t}} \\
+x &= \sqrt{\frac{2(1 + t) - 2}{1 + t}} \\
+x &= \sqrt{\frac{2t}{1 + t}} \\
+\end{align}
+$$
+
+First we rearrange until there is only one variable on each side, then we integrate, and finally, fix the constant of integration $c$ by solving for it with the given values for the axis variables.
+
+Solve $\frac{\dee T}{\dee t} = -k(T - T_{ambient})$ - Newton's law of cooling:
+
+> $$
+\begin{align}
+\frac{\dee T}{\dee t} &= -k(T - T_{ambient}) \\
+\frac{1}{T - T_{ambient}} \dee T &= -k \dee t \\
+\int \frac{1}{T - T_{ambient}} \dee T &= -k \int 1 \dee t \\
+\ln \abs{T - T_{ambient}} &= -kt + c \\
+e^{\ln \abs{T - T_{ambient}}} &= e^{-kt + c} \\
+\abs{T - T_{ambient}} &= e^{-kt}e^c \\
+\end{align}
+$$
+> Let $A = e^c$. Then $\abs{T - T_{ambient}} = Ae^{-kt}$.  
+> Note that at $t = 0$, $T = T_{hot}$ for some fixed $T_{hot}$.  
+> So $\abs{T_{hot} - T_{ambient}} = Ae^{-k0}$ and $\abs{T_{hot} - T_{ambient}} = A$.  
+> So $\abs{T - T_{ambient}} = \abs{T_{hot} - T_{ambient}}e^{-kt}$.  
+
+Suppose we have a population of $n$ individuals. The simplest population model is $\frac{\dee n}{\dee t} = kn$ for some $k \ge 0$. Solve for $n$:
+
+> $$
+\begin{align}
+\frac{\dee n}{n} &= k \dee t \\
+\int \frac{\dee n}{n} &= k \int \dee t \\
+\ln n &= kt + c \\
+n &= e^{kt}e^c \\
+A = e^c; n &= Ae^{kt} \\
+\end{align}
+$$
+> Note that at $t = 0$, $n = n_0$ for some constant $n_0$ - the starting population.  
+> So $n_0 = Ae^{k0}$ and $A = n_0$.  
+> So $n = n_0e^{kt}$.  
+
+A simple variation on this population growth model is **logistic growth**, which also models resource exhaustion: $\frac{\dee N}{\dee t} = rn\left(1 - \frac{n}{k}\right)$. Note that there are two equalibria - $n = 0$ and $n = k$ (carrying capacity).

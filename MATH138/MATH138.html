@@ -521,6 +521,55 @@ z</code></pre>
 <p>Clearly, this is equivalent to <span class="math">\(y \frac{\dee y}{\dee x} = x\)</span>, or <span class="math">\(y \dee y = x \dee x\)</span>, or <span class="math">\(\int y \dee y = \int x \dee x\)</span>.<br />Integrating both sides, we get <span class="math">\(\frac{y^2}{2} = \frac{x^2}{2} + c\)</span>.<br />We want to find the value of <span class="math">\(c\)</span>. Since <span class="math">\(y(0) = -3\)</span>, <span class="math">\(\frac{(-3)^2}{2} = \frac{0^2}{2} + c\)</span> and <span class="math">\(c = \frac{9}{2}\)</span>.<br />So the solution is <span class="math">\(y^2 = 2x^2 + 2 \cdot \frac{9}{2} = 2x^2 + 9\)</span>.</p>
 </blockquote>
 <p>;wip: try <span class="math">\(\frac{\dee}{\dee x} 2^y \sin^2 x\)</span> and <span class="math">\(\sqrt{x \frac{\dee x}{\dee t}} = \frac{1}{1 + t}\)</span></p>
+<h1 id="section-13">5/2/14</h1>
+<p><strong>Constant solutions</strong> are another name for equilibria. They are simply where <span class="math">\(\frac{\dee y}{\dee x} = 0\)</span> for <span class="math">\(\frac{\dee y}{\dee x} = f(y)\)</span>.</p>
+<p>Solve <span class="math">\(\sqrt{x \frac{\dee x}{\dee t}} = \frac{1}{1 + t}\)</span> for <span class="math">\(x(t) = x(0) = 0, t \ge 0\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\sqrt{x \frac{\dee x}{\dee t}} &amp;= \frac{1}{1 + t} \\
+x \frac{\dee x}{\dee t} &amp;= \frac{1}{(1 + t)^2} \\
+x \dee x &amp;= \frac{1}{(1 + t)^2} \dee t \\
+\int x \dee x &amp;= \int \frac{1}{(1 + t)^2} \dee t \\
+\frac{x^2}{2} + c &amp;= -\frac{1}{1 + t} + c \\
+\frac{x^2}{2} &amp;= -\frac{1}{1 + t} + c \\
+x &amp;= 0, t = 0 \\
+\frac{0^2}{2} &amp;= -\frac{1}{1 + 0} + c \\
+c &amp;= 1 \\
+\frac{x^2}{2} &amp;= -\frac{1}{1 + t} + 1 \\
+x &amp;= \sqrt{2 - \frac{2}{1 + t}} \\
+x &amp;= \sqrt{\frac{2(1 + t) - 2}{1 + t}} \\
+x &amp;= \sqrt{\frac{2t}{1 + t}} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>First we rearrange until there is only one variable on each side, then we integrate, and finally, fix the constant of integration <span class="math">\(c\)</span> by solving for it with the given values for the axis variables.</p>
+<p>Solve <span class="math">\(\frac{\dee T}{\dee t} = -k(T - T_{ambient})\)</span> - Newton's law of cooling:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee T}{\dee t} &amp;= -k(T - T_{ambient}) \\
+\frac{1}{T - T_{ambient}} \dee T &amp;= -k \dee t \\
+\int \frac{1}{T - T_{ambient}} \dee T &amp;= -k \int 1 \dee t \\
+\ln \abs{T - T_{ambient}} &amp;= -kt + c \\
+e^{\ln \abs{T - T_{ambient}}} &amp;= e^{-kt + c} \\
+\abs{T - T_{ambient}} &amp;= e^{-kt}e^c \\
+\end{align}
+\]</span> Let <span class="math">\(A = e^c\)</span>. Then <span class="math">\(\abs{T - T_{ambient}} = Ae^{-kt}\)</span>.<br />Note that at <span class="math">\(t = 0\)</span>, <span class="math">\(T = T_{hot}\)</span> for some fixed <span class="math">\(T_{hot}\)</span>.<br />So <span class="math">\(\abs{T_{hot} - T_{ambient}} = Ae^{-k0}\)</span> and <span class="math">\(\abs{T_{hot} - T_{ambient}} = A\)</span>.<br />So <span class="math">\(\abs{T - T_{ambient}} = \abs{T_{hot} - T_{ambient}}e^{-kt}\)</span>.</p>
+</blockquote>
+<p>Suppose we have a population of <span class="math">\(n\)</span> individuals. The simplest population model is <span class="math">\(\frac{\dee n}{\dee t} = kn\)</span> for some <span class="math">\(k \ge 0\)</span>. Solve for <span class="math">\(n\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee n}{n} &amp;= k \dee t \\
+\int \frac{\dee n}{n} &amp;= k \int \dee t \\
+\ln n &amp;= kt + c \\
+n &amp;= e^{kt}e^c \\
+A = e^c; n &amp;= Ae^{kt} \\
+\end{align}
+\]</span> Note that at <span class="math">\(t = 0\)</span>, <span class="math">\(n = n_0\)</span> for some constant <span class="math">\(n_0\)</span> - the starting population.<br />So <span class="math">\(n_0 = Ae^{k0}\)</span> and <span class="math">\(A = n_0\)</span>.<br />So <span class="math">\(n = n_0e^{kt}\)</span>.</p>
+</blockquote>
+<p>A simple variation on this population growth model is <strong>logistic growth</strong>, which also models resource exhaustion: <span class="math">\(\frac{\dee N}{\dee t} = rn\left(1 - \frac{n}{k}\right)\)</span>. Note that there are two equalibria - <span class="math">\(n = 0\)</span> and <span class="math">\(n = k\)</span> (carrying capacity).</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

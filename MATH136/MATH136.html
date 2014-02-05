@@ -512,9 +512,31 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <h1 id="section-2">3/2/14</h1>
 <h2 id="identity-matrix">Identity Matrix</h2>
 <p>The identity matrix is the matrix such that, when multiplied with any matrix, or when any matrix is multiplied by it, results in that same matrix.</p>
+<p>Formally, the <strong>identity matrix</strong> is the unique matrix <span class="math">\(I \in M_{n, n}\)</span> such that <span class="math">\(I_{i, j} = \begin{cases} 1 &amp;\text{if } i = j \\ 0 &amp;\text{if } i \ne j \end{cases}\)</span>.</p>
+<p>We denote this with <span class="math">\(I_n\)</span> to represent the square matrix of dimensions <span class="math">\(n \times n\)</span>. We can also write it as <span class="math">\(I_n = \begin{bmatrix} \vec{e}_1 &amp; \ldots &amp; \vec{e}_n \end{bmatrix}\)</span>.</p>
 <p>In other words, we want to find <span class="math">\(I\)</span> such that <span class="math">\(\forall A \in M_{m, n}, AI = IA = A\)</span>.</p>
+<p>Note that this is only possible when <span class="math">\(m = n\)</span>, since if it wasn't, the product of the matrices would result in a matrix of a different size.</p>
 <p>We will now find the identity matrix. We want <span class="math">\(A = AI\)</span>. So <span class="math">\(\begin{bmatrix} \vec{a}_1 &amp; \ldots &amp; \vec{a}_n \end{bmatrix} = A\begin{bmatrix} \vec{i}_1 &amp; \ldots &amp; \vec{i}_n \end{bmatrix} = \begin{bmatrix} A\vec{i}_1 &amp; \ldots &amp; A\vec{i}_n \end{bmatrix}\)</span>.</p>
-<p>So <span class="math">\(\vec{a}_c = A\vec{i}_c\)</span> for all <span class="math">\(1 \le c \le n\)</span>.</p>
+<p>So <span class="math">\(\vec{a}_c = A\vec{i}_c\)</span> for all <span class="math">\(1 \le c \le n\)</span>. Recall that <span class="math">\(\vec{i}_c = \vec{e}_c \implies \vec{a}_c = A\vec{i}_c\)</span>, where <span class="math">\(\vec{e}_c\)</span> is the <span class="math">\(c\)</span>th standard basis vector. So <span class="math">\(\vec{i}_c = \vec{e}_c\)</span>.</p>
+<p>Therefore, one possible value of <span class="math">\(I\)</span> is <span class="math">\(\begin{bmatrix} \vec{e}_1 &amp; \ldots &amp; \vec{e}_n \end{bmatrix}\)</span>.</p>
+<p>We can also construct a similar proof for <span class="math">\(A = IA\)</span>.</p>
+<h3 id="thoerem-3.1.5">Thoerem 3.1.5</h3>
+<p>If <span class="math">\(I = \begin{bmatrix} \vec{e}_1 &amp; \ldots &amp; \vec{e}_n \end{bmatrix}\)</span>, then <span class="math">\(A = AI = IA\)</span>.</p>
+<h3 id="theorem-3.1.6">Theorem 3.1.6</h3>
+<p>The multiplicative identity for <span class="math">\(M_{n, n}\)</span> is unique.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(I_1, I_2\)</span> be two possibly equal multiplicative identities in <span class="math">\(M_{n, n}\)</span>.<br />Since <span class="math">\(I_1\)</span> is a multiplicative identity, <span class="math">\(I_2 = I_1 I_2\)</span>.<br />Since <span class="math">\(I_2\)</span> is a multiplicative identity, <span class="math">\(I_1 = I_1 I_2\)</span>.<br />So <span class="math">\(I_1 = I_2\)</span> and all multiplicative identities are equal to each other.<br />Therefore, multiplicative identities are unique.</p>
+</blockquote>
+<p>For example, for <span class="math">\(I \in M_{4, 4}\)</span>, <span class="math">\(I = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span>.</p>
+<h2 id="block-matrices">Block Matrices</h2>
+<p>Previously, we defined multiplication by splitting up a matrix into its columns. As it turns out, it's also useful to split a matrix up in other ways.</p>
+<p>When we write <span class="math">\(A = \begin{bmatrix} \vec{a}_1 &amp; \ldots &amp; \vec{a}_n \end{bmatrix}\)</span>, we actually split up <span class="math">\(A\)</span> into <span class="math">\(n\)</span> different blocks, each one with only one column (so we can represent them using vectors).</p>
+<p>A <strong>block matrix</strong> is a matrix that contains <strong>blocks</strong>, which are simply smaller matrices that we build the larger matrix out of.</p>
+<p>Formally, if <span class="math">\(A\)</span> is an <span class="math">\(m \times n\)</span> matrix, then <span class="math">\(A\)</span> can be written as a <span class="math">\(u \times v\)</span> block matrix <span class="math">\(A = \begin{bmatrix} A_{1, 1} &amp; \ldots &amp; A_{1, v} \\ \vdots &amp; \vdots &amp; \vdots \\ A_{u, 1} &amp; \ldots &amp; A_{u, v} \end{bmatrix}\)</span>, where <span class="math">\(A_{x, y}\)</span> is a block and all blocks in any given row in <span class="math">\(A\)</span> have the same number of rows, and all blocks in any given column in <span class="math">\(A\)</span> have the same number of columns.</p>
+<p>For example, given <span class="math">\(A = \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 5 &amp; 6 &amp; 7 &amp; 8 \end{bmatrix}\)</span>, we can split it up to form a block matrix <span class="math">\(A = \begin{bmatrix} B &amp; C \end{bmatrix}\)</span>, where <span class="math">\(B = \begin{bmatrix} 1 &amp; 2 \\ 5 &amp; 6 \end{bmatrix}\)</span> and <span class="math">\(C = \begin{bmatrix} 3 &amp; 4 \\ 7 &amp; 8 \end{bmatrix}\)</span>.</p>
+<p>When we multiply block matrices, we can actually treat the blocks as simple values and multiply them using the same rules as we would use for numbers.</p>
+<p>For example, <span class="math">\(\begin{bmatrix} A_{1, 1} &amp; A_{1, 2} \end{bmatrix} \begin{bmatrix} B_{1, 1} \\ B_{2, 1} \end{bmatrix} = \begin{bmatrix} A_{1, 1} B_{1, 1} + A_{1, 2} B_{2, 1} \end{bmatrix}\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

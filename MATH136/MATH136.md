@@ -900,8 +900,53 @@ Identity Matrix
 
 The identity matrix is the matrix such that, when multiplied with any matrix, or when any matrix is multiplied by it, results in that same matrix.
 
+Formally, the **identity matrix** is the unique matrix $I \in M_{n, n}$ such that $I_{i, j} = \begin{cases} 1 &\text{if } i = j \\ 0 &\text{if } i \ne j \end{cases}$.
+
+We denote this with $I_n$ to represent the square matrix of dimensions $n \times n$. We can also write it as $I_n = \begin{bmatrix} \vec{e}_1 & \ldots & \vec{e}_n \end{bmatrix}$.
+
 In other words, we want to find $I$ such that $\forall A \in M_{m, n}, AI = IA = A$.
+
+Note that this is only possible when $m = n$, since if it wasn't, the product of the matrices would result in a matrix of a different size.
 
 We will now find the identity matrix. We want $A = AI$. So $\begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix} = A\begin{bmatrix} \vec{i}_1 & \ldots & \vec{i}_n \end{bmatrix} = \begin{bmatrix} A\vec{i}_1 & \ldots & A\vec{i}_n \end{bmatrix}$.
 
-So $\vec{a}_c = A\vec{i}_c$ for all $1 \le c \le n$.
+So $\vec{a}_c = A\vec{i}_c$ for all $1 \le c \le n$. Recall that $\vec{i}_c = \vec{e}_c \implies \vec{a}_c = A\vec{i}_c$, where $\vec{e}_c$ is the $c$th standard basis vector. So $\vec{i}_c = \vec{e}_c$.
+
+Therefore, one possible value of $I$ is $\begin{bmatrix} \vec{e}_1 & \ldots & \vec{e}_n \end{bmatrix}$.
+
+We can also construct a similar proof for $A = IA$.
+
+### Thoerem 3.1.5
+
+If $I = \begin{bmatrix} \vec{e}_1 & \ldots & \vec{e}_n \end{bmatrix}$, then $A = AI = IA$.
+
+### Theorem 3.1.6
+
+The multiplicative identity for $M_{n, n}$ is unique.
+
+Proof:
+
+> Let $I_1, I_2$ be two possibly equal multiplicative identities in $M_{n, n}$.  
+> Since $I_1$ is a multiplicative identity, $I_2 = I_1 I_2$.  
+> Since $I_2$ is a multiplicative identity, $I_1 = I_1 I_2$.  
+> So $I_1 = I_2$ and all multiplicative identities are equal to each other.  
+> Therefore, multiplicative identities are unique.  
+
+For example, for $I \in M_{4, 4}$, $I = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}$.
+
+Block Matrices
+--------------
+
+Previously, we defined multiplication by splitting up a matrix into its columns. As it turns out, it's also useful to split a matrix up in other ways.
+
+When we write $A = \begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix}$, we actually split up $A$ into $n$ different blocks, each one with only one column (so we can represent them using vectors).
+
+A **block matrix** is a matrix that contains **blocks**, which are simply smaller matrices that we build the larger matrix out of.
+
+Formally, if $A$ is an $m \times n$ matrix, then $A$ can be written as a $u \times v$ block matrix $A = \begin{bmatrix} A_{1, 1} & \ldots & A_{1, v} \\ \vdots & \vdots & \vdots \\ A_{u, 1} & \ldots & A_{u, v} \end{bmatrix}$, where $A_{x, y}$ is a block and all blocks in any given row in $A$ have the same number of rows, and all blocks in any given column in $A$ have the same number of columns.
+
+For example, given $A = \begin{bmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \end{bmatrix}$, we can split it up to form a block matrix $A = \begin{bmatrix} B & C \end{bmatrix}$, where $B = \begin{bmatrix} 1 & 2 \\ 5 & 6 \end{bmatrix}$ and $C = \begin{bmatrix} 3 & 4 \\ 7 & 8 \end{bmatrix}$.
+
+When we multiply block matrices, we can actually treat the blocks as simple values and multiply them using the same rules as we would use for numbers.
+
+For example, $\begin{bmatrix} A_{1, 1} & A_{1, 2} \end{bmatrix} \begin{bmatrix} B_{1, 1} \\ B_{2, 1} \end{bmatrix} = \begin{bmatrix} A_{1, 1} B_{1, 1} + A_{1, 2} B_{2, 1} \end{bmatrix}$.

@@ -101,7 +101,7 @@ Email: scholz@uwaterloo.ca</code></pre>
 <p>All of the laws we will be using have already been recognized by people such as Galileo and Newton. Although they are only empirically based, we will assume them to be true, and ignore effects such as relativity.</p>
 <p>These laws were recognized through doing experiments, and using the observations obtained to figure out mathematical relationships between quantities.</p>
 <p>Some examples of physical quantities are distance, time, velocity, density, temperature, and force.</p>
-<p>Some examples of laws are <span class="math">\(\vec{F} = m\vec{a}\)</span> and <span class="math">\(\vec{a}_{av} = \frac{\delta \vec{v}}{\delta t}\)</span>.</p>
+<p>Some examples of laws are <span class="math">\(\vec{F} = m\vec{a}\)</span> and <span class="math">\(\vec{a}_{av} = \frac{\Delta \vec{v}}{\Delta t}\)</span>.</p>
 <h3 id="units">Units</h3>
 <p>We measure physical quantities using units - reference values for these quantities that we can compare all other measurements of the same type of quantity to.</p>
 <p>In this course we will be using the SI (system international) system, with meters, kilograms, and seconds for length (L), mass (M), and time (T), respectively.</p>
@@ -187,6 +187,71 @@ Email: scholz@uwaterloo.ca</code></pre>
 <p>We can intuitively do this by representing the number in scientific notation, and looking at the non-exponent value. If this value is greater than or equal to <span class="math">\(\sqrt{10} \approx 3.1623\)</span>, then the logarithm has a decimal part greater than or equal to 0.5, and we round up - the order of magnitude is the exponent in the number plus 1. Otherwise, the order of magnitude is simply the exponent.</p>
 <p>For example, <span class="math">\(3.2 \times 10^3\)</span> has an order of magnitude of 4, while <span class="math">\(3.1 \times 10^3\)</span> has an order of magnitude of 3.</p>
 <p>This is because <span class="math">\(\log \sqrt{10} = 0.5\)</span>, and 0.5 is the threshold for rounding up.</p>
+<h1 id="section-1">5/1/14</h1>
+<h2 id="kinematics">Kinematics</h2>
+<p>Kinematics is the study of the motion of objects - positions, velocities, accelerations, etc. Dynamics is the study of a broader range of physical phenomena like motions, forces, and materials.</p>
+<p>Motion occurs in 1, 2, and 3 dimensions. Actually, it all occurs in 3 dimensions, but sometimes it is constrained in such a way as to be able to pretend it is occurring in 1 or 2 dimensions.</p>
+<p>One dimensional motion is motion along a straight line. In a lot of cases, we can generalize 1D kinematic concepts into 2 and 3 dimensions, by treating the components of vectors separately as 1D kinematic systems. When we do this, the individual systems are all tied together by a common variable, time.</p>
+<p>In order to describe motion, we need:</p>
+<ul>
+<li>Coordinate systems.
+<ul>
+<li>This is the convention by which we define the location of a point.</li>
+<li>All coordinate systems need to have an <strong>origin</strong>, a set of <strong>axes</strong> by which we measure the location of a point, and units for each axes.</li>
+<li>Examples include polar and Cartesian.</li>
+</ul></li>
+<li>Position/displacement/distance.
+<ul>
+<li>Position is simply an offset from the origin in a coordinate system.</li>
+<li>Positions (<span class="math">\(\vec{x}\)</span>) are therefore always relative to the origin.</li>
+<li>Displacements (<span class="math">\(\Delta \vec{x}\)</span>) are a change in position - from <span class="math">\(x_i\)</span> to <span class="math">\(x_f\)</span> (initial <span class="math">\(x\)</span> to final <span class="math">\(f\)</span>). <span class="math">\(\Delta \vec{x} - \vec{x}_f - \vec{x}_i\)</span>.</li>
+<li>Distance <span class="math">\(d\)</span> is <strong>not always the magnitude of displacement</strong>.</li>
+<li>Distance is the <strong>total distance travelled</strong>. If we travel to a point and then back to where we started, the displacement is 0, but the distance is twice the distance from the starting point to the destination.</li>
+</ul></li>
+<li>Velocity/speed - average and instantaneous.
+<ul>
+<li>Velocity is the rate of change in displacement with respect to time.</li>
+<li>The average velocity is <span class="math">\(\vec{v}_{av} = \frac{\Delta \vec{x}}{\Delta t} = \frac{\vec{v}_i + \vec{v}_f}{2}\)</span>. Often, the initial time will be 0, so <span class="math">\(\Delta t = t\)</span> and we just write <span class="math">\(t\)</span>.</li>
+<li>Speed is the rate of change in distance with respect to time. It is <strong>not always the magnitude of velocity</strong>.</li>
+<li>When we say velocity/speed, we usually mean instantaneous velocity/speed.</li>
+<li>Instantaneous velocity is the velocity at a moment in time: <span class="math">\(\vec{v} = \lim_{\Delta t \to 0} \frac{\Delta \vec{x}}{\Delta t} = \lim_{t_f \to t_i} \frac{\Delta \vec{x}(t_f) - \vec{x}(t_i)}{t_f - t_i} = \frac{\dee \vec{x}}{\dee t}\)</span>.</li>
+<li>Instantaneous speed is simply the magnitude of the instantaneous velocity. This is because the instantaneous rate of change in distance is always the same as the magnitude of the instantaneous rate of change in displacement.</li>
+</ul></li>
+<li>Acceleration - average and instantaneous.
+<ul>
+<li>Acceleration is the rate of change in velocity with respect to time.</li>
+<li>The average acceleration is <span class="math">\(\vec{a}_{av} = \frac{\Delta \vec{v}}{\Delta t}\)</span>.</li>
+<li>When we say acceleration, we usually mean instantaneous acceleration <span class="math">\(\vec{a} = \frac{\dee \vec{v}}{\dee t} = \frac{\dee^2 \vec{v}}{\dee t^2}\)</span>.</li>
+</ul></li>
+</ul>
+<p>The motion of an object is <strong>completely defined</strong> if and only if the position <span class="math">\(\vec{x}(t)\)</span> is known. We can use this to calculate the velocity and acceleration functions.</p>
+<p>In 1D kinematics, we can do a position-time graph. Here, one dimension is our displacement, and time is the other. The time is represented on the x-axis.</p>
+<p>Sometimes, we write <span class="math">\(\bar{a}\)</span> to represent average acceleration. The bar means &quot;average&quot;. This works for velocity too.</p>
+<p>In this course, we will only be using constant accelerations. That means that instantaneous acceleration is always the same as average acceleration.</p>
+<p>Therefore, <span class="math">\(\vec{a}(t) = \frac{\vec{v}_f - \vec{v}_i}{\Delta t}\)</span>. So <span class="math">\(\vec{v}_f = \vec{v}_i + \vec{a}\Delta t\)</span>.</p>
+<h3 id="kinematic-equations">Kinematic Equations</h3>
+<p>There are five easily derived <strong>kinematic equations</strong> in 1D kinematics that relate commonly used quantities to each other. These are equations where we assume <span class="math">\(a\)</span> is constant, and each have four of the five quantities <span class="math">\(a, v_i, v_f, \Delta t, \Delta x\)</span>.</p>
+<p>Using these equations, we can solve for any one of these quantities given the values of three of these quantities.</p>
+<p>All five are listed below:</p>
+<ul>
+<li><span class="math">\(v_f = v_i + a \Delta t\)</span> (contains <span class="math">\(a, v_f, v_i, \Delta t\)</span>).</li>
+<li><span class="math">\(\Delta x = v_{av} \Delta t = \frac{1}{2}(v_i + v_f) \Delta t\)</span> (contains <span class="math">\(x, v_f, v_i, \Delta t\)</span>).</li>
+<li><span class="math">\(\Delta x = \frac{1}{2}(v_i + v_f) \Delta t = \frac{1}{2} v_i \Delta t + \frac{1}{2} v_f \Delta t = \frac{1}{2} v_i \Delta t + \frac{1}{2} (v_i + a \Delta t) \Delta t = \frac{1}{2} v_i \Delta t + \frac{1}{2} v_i \Delta t + \frac{1}{2} a \Delta t \Delta t = v_i \Delta t + \frac{1}{2} a (\Delta t)^2\)</span> (contains <span class="math">\(a, v_i, \Delta t, \Delta x\)</span>).</li>
+<li>A variation on the above is <span class="math">\(\Delta x = (v_f - a \Delta t) \Delta t + \frac{1}{2} a (\Delta t)^2 = v_f \Delta t - \frac{1}{2} a (\Delta t)^2\)</span> (contains <span class="math">\(a, v_f, \Delta t, \Delta x\)</span>).</li>
+<li><span class="math">\(v_f^2 = v_i^2 + 2a \Delta x\)</span> (contains <span class="math">\(a, v_f, v_i, \Delta x\)</span>).</li>
+</ul>
+<p>The last one needs some more proof:</p>
+<p><span class="math">\[
+\begin{align}
+v_{av} \Delta t &amp;= \Delta x \\
+v_{av} \frac{\Delta v}{\Delta t} \Delta t &amp;= \frac{\Delta v}{\Delta t} \Delta x \\
+v_{av} \Delta v &amp;= a \Delta x \\
+\frac{v_f + v_i}{2}(v_f - v_i) &amp;= a \Delta x \\
+(v_f + v_i)(v_f - v_i) &amp;= 2a \Delta x \\
+v_f^2 - v_i^2 &amp;= 2a \Delta x \\
+v_f^2 &amp;= v_i^2 + 2a \Delta x \\
+\end{align}
+\]</span></p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
