@@ -569,7 +569,36 @@ A = e^c; n &amp;= Ae^{kt} \\
 \end{align}
 \]</span> Note that at <span class="math">\(t = 0\)</span>, <span class="math">\(n = n_0\)</span> for some constant <span class="math">\(n_0\)</span> - the starting population.<br />So <span class="math">\(n_0 = Ae^{k0}\)</span> and <span class="math">\(A = n_0\)</span>.<br />So <span class="math">\(n = n_0e^{kt}\)</span>.</p>
 </blockquote>
-<p>A simple variation on this population growth model is <strong>logistic growth</strong>, which also models resource exhaustion: <span class="math">\(\frac{\dee N}{\dee t} = rn\left(1 - \frac{n}{k}\right)\)</span>. Note that there are two equalibria - <span class="math">\(n = 0\)</span> and <span class="math">\(n = k\)</span> (carrying capacity).</p>
+<p>A simple variation on this population growth model is <strong>logistic growth</strong>, which also models resource exhaustion: <span class="math">\(\frac{\dee N}{\dee t} = rN\left(1 - \frac{N}{k}\right)\)</span>. Note that there are two equalibria - <span class="math">\(N = 0\)</span> and <span class="math">\(N = k\)</span>. <span class="math">\(k\)</span> is a constant called the <strong>carrying capacity</strong>.</p>
+<p>For <span class="math">\(\frac{n}{k} \ll 1\)</span> (much less than), logistic growth behaves like exponential growth.</p>
+<p>The flow field looks like arrows pointing right toward <span class="math">\(N(t) = k\)</span>. Therefore, the population always tends toward <span class="math">\(k\)</span> in this model.</p>
+<h1 id="section-14">7/2/14</h1>
+<p>The main idea is that there is a lot more to the equations than just the solutions. The flow field is useful for discovering how the equation behaves.</p>
+<p>Even when we solve the equation, it does not tell us much about how the function works intuitively.</p>
+<p>Solve <span class="math">\(\frac{\dee N}{\dee t} = rN\left(1 - \frac{N}{k}\right)\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\frac{\dee N}{\dee t} &amp;= rN\left(1 - \frac{N}{k}\right) \\
+\int \frac{1}{N\left(1 - \frac{N}{k}\right)} \frac{\dee N}{\dee t} \dee t &amp;= \int r \dee t \\
+\int \frac{1}{N\left(1 - \frac{N}{k}\right)} \dee N &amp;= rt + c \\
+\int \frac{A}{N} + \frac{B}{1 - \frac{N}{k}} \dee N &amp;= rt + c \\
+A\left(1 - \frac{N}{k}\right) + BN &amp;= 1; A = 1; B = \frac{1}{k} \\
+\int \frac{1}{N} + \frac{\frac{1}{k}}{1 - \frac{N}{k}} \dee N &amp;= rt + c \\
+\ln \abs{N} + \int \frac{1}{k - N} \dee N &amp;= rt + c \\
+\ln \abs{N} - \ln \abs{N - k} &amp;= rt + c \\
+\ln \abs{\frac{N}{N - k}} &amp;= rt + c \\
+-\ln \abs{\frac{N}{N - k}} &amp;= -rt - c \\
+\ln \abs{\frac{N - k}{N}} &amp;= -rt - c \\
+\abs{\frac{N - k}{N}} &amp;= e^{-rt - c} \\
+\frac{N - k}{N} &amp;= \pm e^{-rt} e^{-c} \\
+F &amp;= \pm e^{-c}
+1 - \frac{k}{N} &amp;= Fe^{-rt} \\
+\frac{k}{N} &amp;= Fe^{-rt} + 1 \\
+N &amp;= \frac{k}{1 + Fe^{-rt} \\
+\end{align}
+\]</span> Note that all solutions tend toward <span class="math">\(k\)</span>, which we can verify by taking the limit of <span class="math">\(N\)</span> at infinity.<br />Now we will solve for <span class="math">\(F\)</span> - at <span class="math">\(t = 0\)</span>, <span class="math">\(N = N_0\)</span>. Assume <span class="math">\(t = 0\)</span>.<br />So <span class="math">\(N_0 = \frac{k}{1 + Fe^{-r0}}\)</span> and <span class="math">\(N_0 + FN_0 = k\)</span>, so <span class="math">\(F = \frac{k}{N_0} - 1\)</span>.<br />So <span class="math">\(N = \frac{k}{1 + \left(\frac{k}{N_0} - 1\right)e^{-rt}\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -800,4 +800,42 @@ $$
 > So $n_0 = Ae^{k0}$ and $A = n_0$.  
 > So $n = n_0e^{kt}$.  
 
-A simple variation on this population growth model is **logistic growth**, which also models resource exhaustion: $\frac{\dee N}{\dee t} = rn\left(1 - \frac{n}{k}\right)$. Note that there are two equalibria - $n = 0$ and $n = k$ (carrying capacity).
+A simple variation on this population growth model is **logistic growth**, which also models resource exhaustion: $\frac{\dee N}{\dee t} = rN\left(1 - \frac{N}{k}\right)$. Note that there are two equalibria - $N = 0$ and $N = k$. $k$ is a constant called the **carrying capacity**.
+
+For $\frac{n}{k} \ll 1$ (much less than), logistic growth behaves like exponential growth.
+
+The flow field looks like arrows pointing right toward $N(t) = k$. Therefore, the population always tends toward $k$ in this model.
+
+# 7/2/14
+
+The main idea is that there is a lot more to the equations than just the solutions. The flow field is useful for discovering how the equation behaves.
+
+Even when we solve the equation, it does not tell us much about how the function works intuitively.
+
+Solve $\frac{\dee N}{\dee t} = rN\left(1 - \frac{N}{k}\right)$:
+
+> $$
+\begin{align}
+\frac{\dee N}{\dee t} &= rN\left(1 - \frac{N}{k}\right) \\
+\int \frac{1}{N\left(1 - \frac{N}{k}\right)} \frac{\dee N}{\dee t} \dee t &= \int r \dee t \\
+\int \frac{1}{N\left(1 - \frac{N}{k}\right)} \dee N &= rt + c \\
+\int \frac{A}{N} + \frac{B}{1 - \frac{N}{k}} \dee N &= rt + c \\
+A\left(1 - \frac{N}{k}\right) + BN &= 1; A = 1; B = \frac{1}{k} \\
+\int \frac{1}{N} + \frac{\frac{1}{k}}{1 - \frac{N}{k}} \dee N &= rt + c \\
+\ln \abs{N} + \int \frac{1}{k - N} \dee N &= rt + c \\
+\ln \abs{N} - \ln \abs{N - k} &= rt + c \\
+\ln \abs{\frac{N}{N - k}} &= rt + c \\
+-\ln \abs{\frac{N}{N - k}} &= -rt - c \\
+\ln \abs{\frac{N - k}{N}} &= -rt - c \\
+\abs{\frac{N - k}{N}} &= e^{-rt - c} \\
+\frac{N - k}{N} &= \pm e^{-rt} e^{-c} \\
+F &= \pm e^{-c}
+1 - \frac{k}{N} &= Fe^{-rt} \\
+\frac{k}{N} &= Fe^{-rt} + 1 \\
+N &= \frac{k}{1 + Fe^{-rt} \\
+\end{align}
+$$
+> Note that all solutions tend toward $k$, which we can verify by taking the limit of $N$ at infinity.  
+> Now we will solve for $F$ - at $t = 0$, $N = N_0$. Assume $t = 0$.  
+> So $N_0 = \frac{k}{1 + Fe^{-r0}}$ and $N_0 + FN_0 = k$, so $F = \frac{k}{N_0} - 1$.  
+> So $N = \frac{k}{1 + \left(\frac{k}{N_0} - 1\right)e^{-rt}$.  

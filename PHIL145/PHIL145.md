@@ -716,6 +716,14 @@ Finally, the groundedness:
 * We mainly evaluate this using the method of counterexamples.
 * Groundedness is to cogency as validity is to soundness.
 
+Note that not every premise of the argument needs to be acceptable, relevant, and grounded in order for the argument to be cogent. In some arguments, certain premises can be discarded without the argument losing its cogency.
+
+In contrast, certain premises are **critical premises**. These are the premises that are very important to the argument being cogent. If critical premises are removed, the argument is no longer cogent.
+
+This is often those premises comprising linked support, or convergent support that is the only support for something.
+
+A cogent argument only requires that there is **enough acceptable and relevant premises** to ground the conclusion.
+
 In our example above, the premises are all relevant to the conclusion (2 is positively relevant to 1, and 1+3+4 is positively relevant to 5), and the argument and all sub-arguments are all well grounded (accepting 2 makes it reasonable to accept 1, and accepting 1, 3, and 4 makes it reasonable to accept 5).
 
 However, assertion 3, that elected officials are to reduce harm, is not very acceptable. Therefore, the argument is not very cogent.
@@ -734,6 +742,8 @@ Many contingent truths are widely believed. If we do not have any reason not to 
 However, not all humans have hearts. The claim can be made more acceptable by changing it to "virtually every living human has a heart".
 
 However, they are still defeasible and could possibly be false. For example, "whales are fish" - whales are actually mammals.
+
+Note that even if premises are rejected, the argument can still be cogent. For example, two premises can offer convergent support for the conclusion, and if one premise is rejected, the other still offers support.
 
 ### Testimony
 
@@ -790,6 +800,8 @@ A famous example is the Sorites paradox:
 
 The argument is paradoxical because "heap" is a vague term. We do not know whether heap-ness applies in the penumbral cases, when the sand grains could either form a heap or not form a heap.
 
+There is still disagreement about how to evaluate this. Some people say that there is a certain number of grains that distinguish a heap from a non-heap, but we cannot know it exactly. The problem revolves around the concept of a heap being a vague concept.
+
 An **ambiguous** claim is one where there are multiple possible meanings of the claim without context to find the correct one. Multiple meanings happen quite often in language, but these are often resolved through context. A claim is ambiguous when the context does not allow us to determine which meaning is correct.
 
 The two types are ambiguity are **syntactic** (sentence structure can be read in more than one way) and **lexical** (phrases in sentence have multiple meanings by definition).
@@ -811,3 +823,87 @@ Otherwise, the set is **inconsistent**. For example, "the sky is blue", "the sky
 An inconsistent set of sentences is not acceptable as premises in an argument, because at least one sentence in the set is always false.
 
 Necessary falsehoods are a special case of inconsistent sets, where there is only one element in the set.
+
+# 7/2/14
+
+;wip: read up to chapter 4
+
+### Premises
+
+Premises can often have **faulty assumptions, presuppositions, or preconditions**. All of these must be acceptable in order to accept the premise:
+
+    The murder weapon was a knife but it hasn't been found yet.
+
+This assumes that there was a murder, and that the murder was done using a knife.
+
+**Controversial premises** are those that are no more acceptable than the conclusion is. If this is the case, the premises cannot help convince someone that the conclusion is true, since they do not support the conclusion.
+
+One special case of this is **begging the question** or **circular arguments**:
+
+    The Bible is the true word of God.
+    The Bible says that humans exist if and only if God exists.
+    Humans exist.
+    -----------------------------------------------------------
+    God exists.
+
+This is a circular argument because the first premise relies on the premise being true. Only someone who already believes the conclusion will accept the premise.
+
+A premise is often acceptable when:
+
+* supported by cogent argument.
+* it is a necessary truth.
+* it is common knowledge.
+* it is reliable testimony.
+* supported by legitimate appeals to authority.
+
+But not when it is **vague/ambiguous**, **inconsistent**, **uses unacceptable assumptions**, or **controversial**.
+
+These are only guidelines for accepting or rejecting premises, and there are exceptions to many of them. If we are in a neutral state of information about whether to accept or reject a premise, we simply don't consider it when evaluating the argument.
+
+Grounding
+---------
+
+Evaluations of grounding are applied to all the premises together as a group.
+
+There are a lot of common errors in reasoning. We call these errors **logical fallacies**. Some of these include affirming the consequent, denying the antecedent, and equivocation.
+
+Equivocation is when an **ambiguous phrase** is used in **more than one way** in the same argument. For example:
+
+    Bats are rodents.
+    Bats are used in baseball.
+    -----------------------------
+    Rodents are used in baseball.
+
+The ambiguity here is the dual meaning of the word "bat".
+
+Criticism
+---------
+
+Effective criticism of arguments focuses on the most important deficiencies of the argument.
+
+The basic process is analyzing the acceptability, relevancy, and groundedness conditions starting with the most critical premises. This way, we can identify the most important issues with the argument.
+
+Argument criticism has to balance charity and accuracy - we want to attack the strongest possible version of the argument to refute all forms of the argument, but we don't want to go too far to fix the argument and misrepresent it as arguing something it is not.
+
+Evaluate the argument "The US was successful at building democracies in Germany and Japan. Afghanistan has fewer people than Germany and Japan. So, US efforts toward democracy in Afghanistan will be successful.".
+
+First, we write it in standard form:
+
+    1. The US was successful at building democracies in Germany and Japan.
+    2. Afghanistan has fewer people than Germany and Japan.
+    ----------------------------------------------------------------------
+    3. So, US efforts toward democracy in Afghanistan will be successful.
+
+Now we can diagram it:
+
+    1   2
+     \ /
+      3
+
+The premises offer convergent support because each one individually supports the conclusion, and the support is not really improved by considering them together.
+
+And finally, evaluation:
+
+* Premise 1 and 2 are common knowledge, and so are acceptable.
+* Premise 1 is positively relevant, while premise 2 is basically irrelevant.
+* Premise 1 and premise 2 together ground the conclusion.

@@ -921,6 +921,104 @@ return -k;</code></pre>
 <p>Even though we may now use mutation, it is still good practise to use <code>const</code> whenever possible. This is because <code>const</code> communicates to readers and the compiler that the variable is not to be modified, which helps prevent accidental mutation and improves performance.</p>
 <p>Mutable variables can be declared without initializing them: <code>int k;</code>. This is generally considered bad style, however.</p>
 <p>Global variables, if not initialized, are automatically initialized to 0. Local variables can be initialized to any value, though usually it will be some entries left over from old stack frames.</p>
+<h1 id="section-9">6/2/14</h1>
+<p>The substitution stepping model stops working with imperative features like <code>set!</code>. ;wip</p>
+<h2 id="assignment">Assignment</h2>
+<p>In C, we mutate with the <strong>assignment operator</strong> (<code>=</code>). It takes the form of <code>IDENTIFIER = EXPRESSION</code>, where <code>IDENTIFIER</code> is a variable or stricture field:</p>
+<pre><code>int m = 5; // this is NOT an assignment, it is part of the initialization syntax
+// here, m is 5
+m = 28;
+// here, m is 28
+m = 3;
+// here, m is 3</code></pre>
+<p>Note that the <code>=</code> in the first line is part of the initialization syntax, not an assignment. They often behave the same, but the difference becomes clear with things like syntax for structures, strings, and arrays:</p>
+<pre><code>// we can also use structure fields
+struct posn n = {1, 2};
+n.x = 4; // this is how we set structure fields
+n = {1, 2}; // THIS IS NOT VALID (ONLY IN INITIALIZATION SYNTAX)</code></pre>
+<p>The assignment operator takes the <strong>value</strong> on the right side of the <code>=</code> and puts it in the <strong>address</strong> specified on the left side.</p>
+<p>So in <code>x = x + 1</code>, <code>x</code> is treated as a value on the right side, and as a address on the left side.</p>
+<p>As a result, the left hand side must be addressable - like variables, structure fields, and array elements. These values are called <strong>lvalues</strong>. So <code>x = x + 1</code> is valid, but <code>x + 1 = x</code> is not.</p>
+<p>The assignment operator <strong>changes state</strong> because it directly modifies memory (unless we use an identity like <code>x = x;</code>).</p>
+<p>The assignment operator is an operator like any other, so it actually produces the right hand side as a value. This is idiomatic for things like <code>a = b = c = 0</code>, which sets all 3 variables to 0. We can then do things like <code>z = 1 + (z = z + 1)</code>, but this is considered very bad style.</p>
+<p>This is the cause of a lot of bugs. If we accidentally use <code>=</code> instead of <code>==</code>, we can create some very subtle bugs:</p>
+<pre><code>if (x = 1)
+    printf(&quot;A&quot;);
+else
+    printf(&quot;B&quot;);</code></pre>
+<p>This code actually assigns 1 to <code>x</code>, and then produces 1, which causes the code to always print &quot;A&quot;.</p>
+<p>To mitigate this, we can write equalities like <code>1 == x</code>. This way, if we write <code>=</code> by accident, the resulting code will result in an error, <code>1 = x</code>, since there isn't a valid lvalue on the left.</p>
+<p>In C, operations like <code>x = x + y</code> or <code>x = x * y</code> are so common that there are special operators that do it in a shorter way:</p>
+<pre><code>x += y // equivalent to `x = x + y`
+x -= y // equivalent to `x = x - y`
+x *= y // equivalent to `x = x * y`
+x /= y // equivalent to `x = x / y`
+x %= y // equivalent to `x = x % y`
+++ x // equivalent to `x = x + 1`
+-- x // equivalent to `x = x - 1`
+x ++ // equivalent to `x_old = x, x = x + 1, x_old`
+x -- // ALMOST equivalent to `x_old = x, x = x - 1, x_old`</code></pre>
+<p>The postfix <code>x ++</code> form is different from <code>++ x</code> in that it produces the original value of <code>x</code>, <strong>before</strong> incrementing the value. In contrast, <code>++ x</code> increment it, and then produces the new incremented value. So the produced value differs by 1.</p>
+<h3 id="pointers">Pointers</h3>
+<pre><code>int i = 5;
+int j = 6;
+
+int *p = &amp;i;
+int *q = &amp;j;
+
+p = q; // pointer assignment</code></pre>
+<p>After the last line, <code>p</code> now points to the same place <code>q</code>. It changes the <strong>value</strong> of <code>p</code> to the <strong>value</strong> of <code>q</code>, so <code>p</code> then points at <code>j</code>.</p>
+<p>Now suppose we instead do the following:</p>
+<pre><code>int i = 5;
+int j = 6;
+
+int *p = &amp;i;
+int *q = &amp;j;
+
+*p = *q; // pointed value assignment</code></pre>
+<p>When <code>*p</code> appears on the left side of the assignment, it behaves like we actually wrote the thing it was pointing at, which is <code>i</code>. When <code>*q</code> appears on the right side of the assignment, it resolves to the value of <code>q</code>, which is <code>j</code>.</p>
+<p>So after the last line, the value of what <code>p</code> points to is changed to the value <code>q</code> points to. In other words, it changes <code>i</code> to 6, even though <code>i</code> doesn't appear in the assignment.</p>
+<p><strong>Aliasing</strong> is when the same memory location can be accessed from more than one variable. Pointers allow aliasing in C.</p>
+<p>Note that arguments to functions are <strong>copies</strong> of the original values we passed to the function. Therefore, when we change arguments in functions, the original value is unchanged:</p>
+<pre><code>void f(int i) {
+    ++ i; // this is a useless function since it has no persistent side effects and produces no values
+}
+
+int main(void) {
+    int j = 5;
+    f(j);
+    // `j` is still 5 even though it changed in `f`
+}</code></pre>
+<p>This is a consequence of using the <strong>pass-by-value</strong> convention, since a copy of the variable in made in the new stack frame.</p>
+<p>Another convention is <strong>pass-by-reference</strong>, where a variable passed to a function can be changed by that function. Some languages support both.</p>
+<p>In C, we can sort of simulate this using pointers. If we pass the address of the variable we want to allow the function to change to the function, we can have the argument be a pointer to the variable. This allows us to change the variable using pointer value assignment:</p>
+<pre><code>void f(int *p) {
+    // now `p` is a pointer pointing to `j`
+    ++ *p; // this increments the value of the thing being pointed to by `p`
+}
+
+int main(void) {
+    int j = 5;
+    f(&amp;j);
+    // now `j` is 6
+}</code></pre>
+<p>This is still pass-by-value because we passed the address as a value. By passing the addres of <code>j</code>, we can change the value of <code>j</code>. This is also referred to as &quot;passing a pointer to <code>j</code>&quot;.</p>
+<p>One thing to be aware of is that <code>*p ++</code> is the same as <code>*(p ++)</code>, due to the order of operations. To make it work properly, we can use parentheses, like <code>(*p) ++</code>. When in doubt, always use parentheses to make the code clearer.</p>
+<p>We can use this to produce multiple values from a function, or work with multiple values at once:</p>
+<pre><code>int swap(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}</code></pre>
+<p>Note that the following will not work:</p>
+<pre><code>int swap(int *x, int *y) {
+    int temp = x;
+    *x = *y;
+    y = temp;
+}</code></pre>
+<p>This is because afterwards, both <code>x</code> and <code>y</code> will both point to the value of <code>x</code>, so they will not swap the values.</p>
+<p>For example, a division function might produce the quotient and remainder with by-reference parameters.</p>
+<p>The return type of a function can also be a pointer. However, we <strong>must not return pointers to addresses in the current stack frame</strong>. Whenever we return from a function, the data in the stack frame should be considered invalid and off-limits. In other words, we should not return pointers to local variables or parameters. Global variables are safe to return addresses to.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
