@@ -950,3 +950,28 @@ For example, given $A = \begin{bmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \end{bmat
 When we multiply block matrices, we can actually treat the blocks as simple values and multiply them using the same rules as we would use for numbers.
 
 For example, $\begin{bmatrix} A_{1, 1} & A_{1, 2} \end{bmatrix} \begin{bmatrix} B_{1, 1} \\ B_{2, 1} \end{bmatrix} = \begin{bmatrix} A_{1, 1} B_{1, 1} + A_{1, 2} B_{2, 1} \end{bmatrix}$.
+
+# 8/2/14
+
+Matrix Mappings
+---------------
+
+A **function** is a rule that associates $x \in A$ to $f(x) \in B$. This is written as $f: A \to B$, where $A$ is the **domain** of $f$, and $B$ is the **codomain** of $f$.
+
+$f(a)$ is the "**image** of $a$ under $f$"
+
+A **matrix mapping** is a function $f: \mb{R}^n \to \mb{R}^m$ where $f(\vec{x}) = A\vec{x}$ for some matrix $A \in M_{m, n}$.
+
+In other words, it is a function over vectors that multiplies matrix by the given vector.
+
+We can write this as $f\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}$, or with the more aesthetic notation $f(x_1, \ldots, x_n) = (y_1, \ldots, y_m)$.
+
+What is the domain/codomain of $f(\vec{x}) = A\vec{x}, A = \begin{bmatrix} 2 & 3 \\ -4 & 0 \\ 5 & 1 \end{bmatrix}$.
+
+> Clearly, $f$ is defined iff and only if the matrix multiplication is defined, which is when $\vec{x}$ has 2 components.  
+> So $\vec{x} \in \mb{R}^2$.  
+> Since $A$ has 3 rows, $f(\vec{x})$ also has 3 rows.  
+> So $f(\vec{x}) \in \mb{R}^3$.  
+
+We can also write the function in a simpler form, $f(\vec{x}) = \begin{bmatrix} 2x_1 + 3x_2 \\ -4x_1 \\ 5x_1 + x_2 \end{bmatrix}$.
+

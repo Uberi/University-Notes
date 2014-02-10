@@ -71,6 +71,24 @@
 <p>Mechanics</p>
 <pre><code>Instructor: Guenter Scholz
 Email: scholz@uwaterloo.ca</code></pre>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\]</span></p>
 <h1 id="section">14/1/14</h1>
 <h2 id="course-outline">Course Outline</h2>
 <ul>
@@ -102,6 +120,9 @@ Email: scholz@uwaterloo.ca</code></pre>
 <p>These laws were recognized through doing experiments, and using the observations obtained to figure out mathematical relationships between quantities.</p>
 <p>Some examples of physical quantities are distance, time, velocity, density, temperature, and force.</p>
 <p>Some examples of laws are <span class="math">\(\vec{F} = m\vec{a}\)</span> and <span class="math">\(\vec{a}_{av} = \frac{\Delta \vec{v}}{\Delta t}\)</span>.</p>
+<p>Classical mechanics is predictive - knowing everything about a system is enough to predict its future states for all time. This contrasts with newer paradigms of mechanics like quantum mechanics.</p>
+<p>There are no such things as absolute laws. Our laws are based on observation, and the possibility of a counterexample always exists.</p>
+<p>For example, Newton's laws fell apart under relativistic conditions, where relativistic physics prevailed.</p>
 <h3 id="units">Units</h3>
 <p>We measure physical quantities using units - reference values for these quantities that we can compare all other measurements of the same type of quantity to.</p>
 <p>In this course we will be using the SI (system international) system, with meters, kilograms, and seconds for length (L), mass (M), and time (T), respectively.</p>
@@ -234,11 +255,11 @@ Email: scholz@uwaterloo.ca</code></pre>
 <p>Using these equations, we can solve for any one of these quantities given the values of three of these quantities.</p>
 <p>All five are listed below:</p>
 <ul>
-<li><span class="math">\(v_f = v_i + a \Delta t\)</span> (contains <span class="math">\(a, v_f, v_i, \Delta t\)</span>).</li>
-<li><span class="math">\(\Delta x = v_{av} \Delta t = \frac{1}{2}(v_i + v_f) \Delta t\)</span> (contains <span class="math">\(x, v_f, v_i, \Delta t\)</span>).</li>
-<li><span class="math">\(\Delta x = \frac{1}{2}(v_i + v_f) \Delta t = \frac{1}{2} v_i \Delta t + \frac{1}{2} v_f \Delta t = \frac{1}{2} v_i \Delta t + \frac{1}{2} (v_i + a \Delta t) \Delta t = \frac{1}{2} v_i \Delta t + \frac{1}{2} v_i \Delta t + \frac{1}{2} a \Delta t \Delta t = v_i \Delta t + \frac{1}{2} a (\Delta t)^2\)</span> (contains <span class="math">\(a, v_i, \Delta t, \Delta x\)</span>).</li>
-<li>A variation on the above is <span class="math">\(\Delta x = (v_f - a \Delta t) \Delta t + \frac{1}{2} a (\Delta t)^2 = v_f \Delta t - \frac{1}{2} a (\Delta t)^2\)</span> (contains <span class="math">\(a, v_f, \Delta t, \Delta x\)</span>).</li>
-<li><span class="math">\(v_f^2 = v_i^2 + 2a \Delta x\)</span> (contains <span class="math">\(a, v_f, v_i, \Delta x\)</span>).</li>
+<li><span class="math">\(\vec{v}_f = \vec{v}_i + \vec{a} \Delta t\)</span> (contains <span class="math">\(\vec{a}, \vec{v}_f, \vec{v}_i, \Delta t\)</span>).</li>
+<li><span class="math">\(\Delta \vec{x} = \vec{v}_{av} \Delta t = \frac{1}{2}(\vec{v}_i + \vec{v}_f) \Delta t\)</span> (contains <span class="math">\(\vec{x}, \vec{v}_f, \vec{v}_i, \Delta t\)</span>).</li>
+<li><span class="math">\(\Delta \vec{x} = \frac{1}{2}(\vec{v}_i + \vec{v}_f) \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{v}_f \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} (\vec{v}_i + \vec{a} \Delta t) \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{a} \Delta t \Delta t = \vec{v}_i \Delta t + \frac{1}{2} \vec{a} (\Delta t)^2\)</span> (contains <span class="math">\(\vec{a}, \vec{v}_i, \Delta t, \Delta \vec{x}\)</span>).</li>
+<li>A variation on the above is <span class="math">\(\Delta \vec{x} = (\vec{v}_f - \vec{a} \Delta t) \Delta t + \frac{1}{2} \vec{a} (\Delta t)^2 = \vec{v}_f \Delta t - \frac{1}{2} \vec{a} (\Delta t)^2\)</span> (contains <span class="math">\(\vec{a}, \vec{v}_f, \Delta t, \Delta \vec{x}\)</span>).</li>
+<li><span class="math">\(\vec{v_f}^2 = \vec{v_i}^2 + 2\vec{a} \Delta \vec{x}\)</span> (contains <span class="math">\(\vec{a}, \vec{v}_f, \vec{v}_i, \Delta \vec{x}\)</span>).</li>
 </ul>
 <p>The last one needs some more proof:</p>
 <p><span class="math">\[
@@ -252,6 +273,112 @@ v_f^2 - v_i^2 &amp;= 2a \Delta x \\
 v_f^2 &amp;= v_i^2 + 2a \Delta x \\
 \end{align}
 \]</span></p>
+<h1 id="section-2">8/2/14</h1>
+<h3 id="integral-definitions">Integral Definitions</h3>
+<p>We can also write our definitions using integrals.</p>
+<p>For example, <span class="math">\(\vec{a} = \frac{\dee \vec{v}}{\dee t}\)</span>, assuming <span class="math">\(\vec{a}\)</span> is constant:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\vec{a} \dee t &amp;= \dee \vec{v} \\
+\int_{t_i}^{t_f} \vec{a} \dee t &amp;= \int_{\vec{v}_i}^{\vec{v}_f} \dee \vec{v} \\
+\vec{a}\Delta t &amp;= \vec{v}_f - \vec{v}_i \\
+\vec{v}_i + \vec{a}\Delta t &amp;= \vec{v}_f \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>We can also do this for velocity, where <span class="math">\(\vec{v} = \frac{\dee \vec{x}}{\dee t}\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\vec{v} \dee t &amp;= \dee \vec{x} \\
+\int_{t_i}^{t_f} \vec{v} \dee t &amp;= \int_{\vec{x}_i}^{\vec{x}_f}\dee \vec{x} \\
+\int_{t_i}^{t_f} \vec{v}_i + \vec{a}\Delta t \dee t &amp;= \int_{\vec{x}_i}^{\vec{x}_f}\dee \vec{x} \\
+\vec{v}_i\Delta t + \frac{1}{2}\vec{a}(\Delta t)^2 &amp;= \Delta \vec{x} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="free-fall">Free Fall</h3>
+<p>Free fall is a type of motion when an object is affected only by the influence of gravity. Near the Earth's surface, <span class="math">\(\vec{F}_g = m\vec{g}\)</span>, where <span class="math">\(\vec{g}\)</span> is around <span class="math">\(9.8 m/s^2\)</span> with the direction pointing toward the center of the Earth.</p>
+<p>Using our standard frame of reference and <span class="math">\(t_i = 0\)</span>, <span class="math">\(a = -g, v = v_0 - gt, x = x_0 + v_0t - \frac{1}{2}gt^2\)</span>.</p>
+<p>Is the speed at which an object hits the ground the same as the speed we threw it up at, if they are both on the same level?</p>
+<blockquote>
+<p>The time when the object is thrown and when it hits the ground is <span class="math">\(t\)</span> when <span class="math">\(x = x_0\)</span>, or <span class="math">\(v_0t - \frac{1}{2}gt^2 = 0 = t(v_0 - \frac{1}{2}gt)\)</span>.<br />So <span class="math">\(t = 0\)</span> when thrown and <span class="math">\(t = \frac{2v_0}{g}\)</span> when it hits the ground.<br />The velocity when thrown is <span class="math">\(v = v_0 - gt\)</span>, so <span class="math">\(v = v_0\)</span>, and the velocity when hitting the ground is <span class="math">\(v = v_0 - 2v_0 = -v_0\)</span>.<br />So both speeds are the same, though in opposite directions.</p>
+</blockquote>
+<h2 id="d-kinematics">2D Kinematics</h2>
+<p>In 2D, we simply apply the concepts we used in 1D kinematics, and extend them to use vectors.</p>
+<p>In 2D, rather than using <span class="math">\(\vec{x}\)</span> for displacement, we now use <span class="math">\(\vec{r}\)</span>.</p>
+<p>When we have a 2 dimensional problem, we almost always simply break it down into two 1 dimensional problems - one for each dimension - solve the two problems, and then combine the solutions into the solution for the 2 dimensional problem.</p>
+<p>In 2D and 3D, we use vectors to represent quantities that have a magnitude and a direction. Vectors are written as <span class="math">\(\vec{x}\)</span> or <span class="math">\(\boldsymbol{x}\)</span>. When a vector is simply written as <span class="math">\(x\)</span>, we assume this means the magnitude of the vector.</p>
+<p>We will mostly be using vectors in Cartesian coordinates (<span class="math">\(\vec{a} = (a_x, a_y)\)</span>), but for rotating systems, we will sometimes use polar coordinates (<span class="math">\(\vec{a} = (r, \theta)\)</span>).</p>
+<p>We can convert from polar to Cartesian using <span class="math">\(a_x = r \cos \theta; a_y = r \sin \theta\)</span>, and from Cartesian to polar using <span class="math">\(r = \magn{a}; \theta = \arctan \frac{a_y}{a_x}\)</span>.</p>
+<p>In 3D, rather than polar coordinates, we have spherical or cylindrical coordinates.</p>
+<p>A unit vector is a vector of length 1.</p>
+<p>In a Cartesian coordinate system, we represent vectors in terms of coefficients of the basis vectors, <span class="math">\(\hat{i}, \hat{j}, \hat{k}\)</span>, extending along the x, y, and z axes, respectively. They are dimensionless and have a length of 1. For example, <span class="math">\(\vec{a} = a_x \hat{i} + a_y \hat{j}\)</span>.</p>
+<h3 id="dot-product">Dot Product</h3>
+<p>The basis vectors are all perpendicular. Thus, <span class="math">\(\hat{i} \cdot \hat{j} = \hat{j} \cdot \hat{k} = \hat{k} \cdot \hat{i} = 0\)</span>.</p>
+<p>So <span class="math">\(A \cdot B = (A_x \hat{i} + A_y \hat{j}) \cdot (B_x \hat{i} + B_y \hat{j}) = A_x B_x \hat{i} \cdot \hat{i} + A_x B_y \hat{i} \hat{j} + A_y B_x \hat{j} \hat{i} + A_y B_y \hat{j} \hat{j} = A_x B_x + A_y B_y\)</span>.</p>
+<p>When we square a vector, we are simply taking a dot product of it with itself: <span class="math">\(\vec{v}^2 = \vec{v} \cdot \vec{v}\)</span>.</p>
+<h3 id="projectile-motion">Projectile Motion</h3>
+<p>An object exhibiting projectile motion has <strong>constant horizontal velocity</strong> and <strong>constant vertical acceleration</strong>.</p>
+<p>The initial speed <span class="math">\(v_0\)</span> at angle <span class="math">\(\theta\)</span> from the vertical has be broken up into <span class="math">\(v_x = v_0 \cos \theta\)</span> and <span class="math">\(v_y = v_0 \sin \theta\)</span>.</p>
+<p>Note that we can find the maximum point of a projectile's motion by setting velocity in the y-axis to 0.</p>
+<p>The position of <span class="math">\(\vec{v}_a\)</span> relative to <span class="math">\(\vec{v}_b\)</span> is <span class="math">\(\vec{v}_b - \vec{v}_a\)</span>. We write this as <span class="math">\(\vec{v}_{a, b}\)</span></p>
+<p>Sine law: <span class="math">\(\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}\)</span>.</p>
+<p>Cosine law: <span class="math">\(a^2 - b^2 + c^2 - 2bc \cos A\)</span></p>
+<h3 id="uniform-circular-motion">Uniform Circular Motion</h3>
+<p>An object exhibiting uniform circular motion is moving in a <strong>circular path of constant radius</strong> at a <strong>constant speed</strong> The <strong>tangential velocity</strong> is the velocity at the tangent of the circle.</p>
+<p>Since the tangential velocity is always perpendicular to the radius, any rotation has two similar triangles formed from the rotated radius, and the rotated velocity.</p>
+<p>Therefore, <span class="math">\(\frac{\magn{\Delta \vec{r}}}{\magn{r}} = \frac{\magn{\Delta \vec{v}}}{\magn{\vec{v}}}\)</span>.</p>
+<p>Since the average acceleration magnitude is <span class="math">\(\frac{\Delta v}{\Delta t}\)</span>, and <span class="math">\(\frac{\magn{\Delta \vec{r}}}{\magn{r}} v = \magn{\Delta \vec{v}}\)</span>, <span class="math">\(\magn{\vec{a}} = \frac{v \magn{\Delta \vec{r}}}{r \Delta t}\)</span>.</p>
+<p>As <span class="math">\(\Delta t \to 0\)</span>, the magnitude of the displacement approaches the distance (distance is along the arc line, while the displacement is along a straight line). If <span class="math">\(\delta s\)</span> is the change in the distance (along the arc), then <span class="math">\(\frac{\magn{\Delta \vec{r}}}{\Delta t} \to \frac{\magn{\Delta \vec{s}}}{\Delta t}\)</span> as <span class="math">\(\Delta t \to 0\)</span>.</p>
+<p>Since <span class="math">\(\frac{\magn{\Delta \vec{s}}}{\Delta t} = v\)</span>, as <span class="math">\(\Delta t \to 0\)</span>, <span class="math">\(\magn{\vec{a}} = \frac{v \magn{\Delta \vec{r}}}{r \Delta t} = \frac{v^2}}{r}\)</span>.</p>
+<p>The direction of the acceleration is the same as the direction of the change in velocity: <span class="math">\(\hat{a} = \hat{\Delta \vec{v}}\)</span>.</p>
+<p>So as <span class="math">\(\Delta t \to 0\)</span>, <span class="math">\(\Delta \vec{v}\)</span> and <span class="math">\(\vec{a}\)</span> becomes perpendicular to the direction of motion, and lies along <span class="math">\(\vec{r}\)</span>. Because it is toward the center, we call it centripetal (&quot;center-seeking&quot;) acceleration.</p>
+<p>Basically, the centripetal acceleration is <span class="math">\(\magn{\vec{a}} = \frac{v^2}{r}\)</span>.</p>
+<p>The <strong>period</strong> is the amount of time taken for the object to complete one revolution around the circle. The period is <span class="math">\(\frac{d}{v} = \frac{2\pi r}{v}\)</span>.</p>
+<p>The <strong>frequency</strong> is the number of trips the object makes around the path in a given amount of time. The frequency is the reciprocal of the period.</p>
+<p>If the speed is not constant (non-uniform circular motion), the centripetal force is still <span class="math">\(\magn{\vec{a}} = \frac{v^2}{r}\)</span>, but there is also an element of acceleration along the direction of motion. This tangential acceleration is <span class="math">\(\magn{\vec{a}} = \frac{\dee v}{\dee t}\)</span>.</p>
+<h2 id="dynamics">Dynamics</h2>
+<p>In kinematics we learned how to describe the motion of an object. In dynamics we will now learn about what causes the motion.</p>
+<p>Isaac Newton (and independently Leibniz) discovered three laws governing the relationship between forces applied to an object and the resulting motion of the object. These laws form the basis of classical mechanics and allow us to explain the motion of objects.</p>
+<h3 id="frames-of-reference">Frames of Reference</h3>
+<p>A <strong>reference frame</strong> is a combination of a measure of space, and a measure of time - it is the combination of a coordinate system and a time measurement system.</p>
+<p>All motion (position, velocity, acceleration, etc.) is always described in terms of a reference frame.</p>
+<p>Reference frames can be <strong>attached</strong> to objects, which simply means that the coordinate system has its origin at the location of the object.</p>
+<p>An <strong>inertial reference frame</strong> is one where a point object at a fixed position in the reference frame would not have any net forces applied to it. In other words, if we were to hold an accelerometer in place, it would not detect any acceleration.</p>
+<p>As a result, the reference frame attached to an isolated (not interacting with other objects - no acting net force) point object (we use point objects to be able to ignore rotational effects) is always inertial.</p>
+<p>Any reference frame moving at a constant velocity with respect to an inertial reference frame is also an inertial reference frame.</p>
+<p>For example, Earth is a non-inertial reference frame because it is orbiting around the sun, and so there is centripetal acceleration - a very sensitive accelerometer would be able to detect it. However, these accelerations are so small, compared to acceleration from Earth's gravity, that they are considered negligible. We say a reference frame based on the Earth is approximately inertial.</p>
+<p>Generally, we simply treat the Earth as an inertial reference frame, ignoring the effects of gravity.</p>
+<p>For example, an accelerating car or elevator is a non-inertial reference frame - an accelerometer fixed to the car would read an acceleration.</p>
+<h3 id="net-force">Net Force</h3>
+<p>Net force is the vector sum of all the forces acting on an object.</p>
+<h2 id="first-law-of-motion">First Law of Motion</h2>
+<p>Force causes a <strong>change</strong> in motion. If there is no net force on an object, there is no change in the motion.</p>
+<p>Note that this applies to the change in the motion, not the motion itself - the object could have a constant velocity without having any net force acting on it.</p>
+<p>Imagine an isolated point object. In these conditions, the object can only be at rest (no velocity) or have a constant velocity.</p>
+<p><strong>Uniform motion</strong> is when the velocity is 0, or constant. Uniform motion is the natural state of an object - when no forces are being applied to it.</p>
+<p>The first law is then stated thusly:</p>
+<blockquote>
+<p>In an inertial reference frame, a body in uniform motion remains in uniform motion if and only if there are no net forces acting on it.</p>
+</blockquote>
+<p>In other words, if and only if the velocity is constant, the net force is 0.</p>
+<h3 id="inertia">Inertia</h3>
+<p>The first law is also called the <strong>law of inertia</strong>. In order to change the motion of an object, we need to apply a force.</p>
+<p>The resistance an object has to its motion changing is called <strong>inertia</strong>. The more inertia, the slower the motion of an object changes when we apply a force to it - <strong>inertia is quantified by mass</strong>.</p>
+<h3 id="mathematical-model">Mathematical Model</h3>
+<p>When we push two objects of different mass, we observe that the objects have different accelerations. We observe that acceleration is proportional to force, for a fixed mass. We also observe that mass, is inversely proportional to acceleration, for a fixed force.</p>
+<p>Therefore, we write <span class="math">\(\vec{a} = \frac{\vec{F}}{m}\)</span>, or <span class="math">\(\vec{F} = m\vec{a}\)</span>.</p>
+<p>If we choose one object as the &quot;mass standard&quot; and assign it a unit of exactly <span class="math">\(1 kg\)</span>, we can then quantify mass (resistance to acceleration). We can then measure the mass of all other objects against this standard. Mass is a scalar quantity - the resistance to acceleration is always the same regardless of direction.</p>
+<p>Likewise, the unit force can be chosen arbitrarily to be the amount such that this mass standard accelerates at <span class="math">\(1 m/s^2\)</span> when the force is applied to it.</p>
+<p>So if we have two objects of differing mass in space, pushed apart by a spring, they both have the same force applied to them, yet the acceleration of each is different. In fact, <span class="math">\(m_1 a_1 = m_2 a_2\)</span>, and so <span class="math">\(a_1 = \frac{m_2}{m_1} a_2\)</span>.</p>
+<p>In the imperial system, mass is measured using slugs, where 1 slug is <span class="math">\(\frac{1 lb}{1 ft/s^2}\)</span>. <span class="math">\(lb\)</span> (pounds) is a measure of weight. A <span class="math">\(1 kg\)</span> mass weighs about <span class="math">\(2.2 lb\)</span> near the Earth's surface.</p>
+<h3 id="weight">Weight</h3>
+<p>When we informally say something weighs <span class="math">\(x\)</span>, we actually mean that its mass is <span class="math">\(x\)</span>. Mass is a property of the object, and weight is simply the force exerted by gravity on the object. Weight is denoted <span class="math">\(F_g\)</span>.</p>
+<p>In general, the force exerted by gravity is given by the equation <span class="math">\(F_g = G\frac{m_1 m_2}{d^2}\)</span>, where <span class="math">\(G \approx 6.67 \times 10^{-11} m^3 / (kg s)\)</span> (universal gravitational constant), <span class="math">\(m_1, m_2\)</span> are the masses of the objects, and <span class="math">\(d\)</span> is the distance between the center of masses of the objects.</p>
+<p>Near the Earth's surface, <span class="math">\(G\frac{m_1}{d^2} \approx g\)</span> since <span class="math">\(d\)</span> is the radius of the Earth and <span class="math">\(m_1\)</span> is the mass of the Earth. So this simplifies to <span class="math">\(F_g = mg\)</span>.</p>
+<p>To convert between weight and mass, we simply use the formula <span class="math">\(F_g = mg\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -537,6 +537,18 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <p>For example, given <span class="math">\(A = \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 5 &amp; 6 &amp; 7 &amp; 8 \end{bmatrix}\)</span>, we can split it up to form a block matrix <span class="math">\(A = \begin{bmatrix} B &amp; C \end{bmatrix}\)</span>, where <span class="math">\(B = \begin{bmatrix} 1 &amp; 2 \\ 5 &amp; 6 \end{bmatrix}\)</span> and <span class="math">\(C = \begin{bmatrix} 3 &amp; 4 \\ 7 &amp; 8 \end{bmatrix}\)</span>.</p>
 <p>When we multiply block matrices, we can actually treat the blocks as simple values and multiply them using the same rules as we would use for numbers.</p>
 <p>For example, <span class="math">\(\begin{bmatrix} A_{1, 1} &amp; A_{1, 2} \end{bmatrix} \begin{bmatrix} B_{1, 1} \\ B_{2, 1} \end{bmatrix} = \begin{bmatrix} A_{1, 1} B_{1, 1} + A_{1, 2} B_{2, 1} \end{bmatrix}\)</span>.</p>
+<h1 id="section-3">8/2/14</h1>
+<h2 id="matrix-mappings">Matrix Mappings</h2>
+<p>A <strong>function</strong> is a rule that associates <span class="math">\(x \in A\)</span> to <span class="math">\(f(x) \in B\)</span>. This is written as <span class="math">\(f: A \to B\)</span>, where <span class="math">\(A\)</span> is the <strong>domain</strong> of <span class="math">\(f\)</span>, and <span class="math">\(B\)</span> is the <strong>codomain</strong> of <span class="math">\(f\)</span>.</p>
+<p><span class="math">\(f(a)\)</span> is the &quot;<strong>image</strong> of <span class="math">\(a\)</span> under <span class="math">\(f\)</span>&quot;</p>
+<p>A <strong>matrix mapping</strong> is a function <span class="math">\(f: \mb{R}^n \to \mb{R}^m\)</span> where <span class="math">\(f(\vec{x}) = A\vec{x}\)</span> for some matrix <span class="math">\(A \in M_{m, n}\)</span>.</p>
+<p>In other words, it is a function over vectors that multiplies matrix by the given vector.</p>
+<p>We can write this as <span class="math">\(f\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}\)</span>, or with the more aesthetic notation <span class="math">\(f(x_1, \ldots, x_n) = (y_1, \ldots, y_m)\)</span>.</p>
+<p>What is the domain/codomain of <span class="math">\(f(\vec{x}) = A\vec{x}, A = \begin{bmatrix} 2 &amp; 3 \\ -4 &amp; 0 \\ 5 &amp; 1 \end{bmatrix}\)</span>.</p>
+<blockquote>
+<p>Clearly, <span class="math">\(f\)</span> is defined iff and only if the matrix multiplication is defined, which is when <span class="math">\(\vec{x}\)</span> has 2 components.<br />So <span class="math">\(\vec{x} \in \mb{R}^2\)</span>.<br />Since <span class="math">\(A\)</span> has 3 rows, <span class="math">\(f(\vec{x})\)</span> also has 3 rows.<br />So <span class="math">\(f(\vec{x}) \in \mb{R}^3\)</span>.</p>
+</blockquote>
+<p>We can also write the function in a simpler form, <span class="math">\(f(\vec{x}) = \begin{bmatrix} 2x_1 + 3x_2 \\ -4x_1 \\ 5x_1 + x_2 \end{bmatrix}\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

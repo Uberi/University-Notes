@@ -231,7 +231,7 @@ hello, Anthony</code></pre>
 <p>Note that preconditions and postconditions are part of the contract, not their own element. The preconditions are the conditions that must be true before calling the function, and the postconditions are the conditions that will be true after the function is called - a specification of what the function produces.</p>
 <p>More complex preconditions and postconditions should be written as English sentences describing what the data should look like.</p>
 <p>This allows the contract to convey more information about what is allowed: following the preconditions and obeying the contract while calling the function results in the postconditions being met. These conditions are both logical statements.</p>
-<p>A function that takes no parameters has a contract that starts off something like <code>FUNCTION_NAME: -&gt; RETURN_VALUE</code>.</p>
+<p>A function that takes no parameters has a contract that starts off something like <code>FUNCTION_NAME: -&gt; RETURN_VALUE</code>, or alternatively, <code>FUNCTION_NAME: Void -&gt; RETURN_VALUE</code>.</p>
 <p>A precondition that is always met no matter what can be written as <code>PRE: #t</code>. Likewise with postconditions.</p>
 <p>In Racket, there are even built in facilities in the language that help enforce the preconditions and postconditions. However, we will not be using them - the conditions in our programs will be informal.</p>
 <h1 id="tutorial-1">13/1/14 - Tutorial</h1>
@@ -794,7 +794,7 @@ const int **ppi = &amp;pi;
 const int ***pppi = &amp;ppi;</code></pre>
 <p>The null pointer is essentially a pointer to the address 0, which is reserved and means &quot;nothing&quot; or &quot;invalid&quot;.</p>
 <p>We use the null pointer to represent &quot;nothing&quot;. This is generally used to indicate an error or a lack of a value.</p>
-<p>In code, we represent null with <code>NULL</code>, and is defined in the <code>stdlib</code> module (as well as several others).</p>
+<p>In code, we represent null with <code>NULL</code>, and is defined in the <code>stdlib</code> module (as well as several others). To use it, we must first make it available using something like <code>#include &lt;stdlib.h&gt;</code>.</p>
 <p>Usually, we will want to assert that a pointer is not null in functions that accept pointers, and state that null pointers are not accepted in preconditions. We can do this by using <code>assert(p)</code>, since null is essentially 0.</p>
 <h2 id="imperative-c">Imperative C</h2>
 <p>In our model of C, <strong>state</strong> is a combination of the <strong>location in the code</strong>, and the <strong>contents of the memory</strong> at the moment.</p>
@@ -804,9 +804,10 @@ const int ***pppi = &amp;ppi;</code></pre>
 <p>Racket supports some imperative features:</p>
 <ul>
 <li><code>(set! var value)</code> can mutate a variable.</li>
-<li><code>(begin a b ... y z)</code> evaluates each expression <code>a</code> to <code>z</code> and discards all resulting values except <code>z</code>, which it produces. This is only useful when the expressions have side effects. This is not used very often because each function definition in Racket implicitly uses <code>begin</code>, just like <code>local</code>.</li>
+<li><code>(begin a b ... y z)</code> evaluates each expression <code>a</code> to <code>z</code> and discards all resulting values except <code>z</code>, which it produces. This is only useful when the expressions have side effects.</li>
 <li><code>(printf str ...)</code> can print text to the screen.</li>
 </ul>
+<p><code>begin</code> is not used very often because each function definition in Racket implicitly uses <code>begin</code>, just like they implicitly use <code>local</code>.</p>
 <p>We list the side effects of a function in the postconditions. However, the implementation details should not be exposed in doing so.</p>
 <p>In Racket, a function that returns nothing (like <code>printf</code>) actually produces <code>#&lt;void&gt;</code>. In contracts, this is represented with <code>Void</code>.</p>
 <p>In C, <code>printf</code> actually produces the number of characters printed. This is useful for checking for printing errors, or getting the string length.</p>
@@ -1019,6 +1020,27 @@ int main(void) {
 <p>This is because afterwards, both <code>x</code> and <code>y</code> will both point to the value of <code>x</code>, so they will not swap the values.</p>
 <p>For example, a division function might produce the quotient and remainder with by-reference parameters.</p>
 <p>The return type of a function can also be a pointer. However, we <strong>must not return pointers to addresses in the current stack frame</strong>. Whenever we return from a function, the data in the stack frame should be considered invalid and off-limits. In other words, we should not return pointers to local variables or parameters. Global variables are safe to return addresses to.</p>
+<p>If a function has implementation-specific side effects, such as modifying internal variables, we do not want to show this information in the interface. Instead, we can put these specific details with the implementation of the function.</p>
+<h1 id="section-10">10/2/14</h1>
+<pre><code>// collatz(n) returns the length of the Collatz sequence of `n` that ends with 1
+//     PRE; n &gt;= 1
+//     POST: produce the legnth of the Collatz sequence starting at the number `n`
+int collatz(int n); {
+    assert(n &gt;= 1);
+    if (n == 1)
+        return 1;
+    else if (n % 2 == 0)
+        return 1 + collatz(n / 2);
+    return 1 + collatz(3 * n + 1);
+}</code></pre>
+<p><code>cond</code> also implicitly uses <code>begin</code> for the answers:</p>
+<pre><code>(cond [#t (display &quot;hello&quot;) &#39;return-value])</code></pre>
+<p>The above will display the string but produce <code>return-value</code>.</p>
+<p>Postconditions in the design recipe now need to focus on the side effects of mutation and are explained in natural language. They should not include too many implementation-specific details.</p>
+<p>Note that the following two lines are equivalent:</p>
+<pre><code>(*x).y
+x-&gt;y</code></pre>
+<p>The <code>-&gt;</code> operator is a special operator that accesses the structure field of a structure given by a pointer.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

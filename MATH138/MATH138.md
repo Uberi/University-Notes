@@ -839,3 +839,60 @@ $$
 > Now we will solve for $F$ - at $t = 0$, $N = N_0$. Assume $t = 0$.  
 > So $N_0 = \frac{k}{1 + Fe^{-r0}}$ and $N_0 + FN_0 = k$, so $F = \frac{k}{N_0} - 1$.  
 > So $N = \frac{k}{1 + \left(\frac{k}{N_0} - 1\right)e^{-rt}$.  
+
+# 10/2/14
+
+Differential equations appear quite often in equations for time based physical phenomena.
+
+Separable differential equations are one type of differential equation that can be directly solved. However, there are other types.
+
+Linear Differential Equations
+-----------------------------
+
+**Linear differential equations** are those of the form $\frac{\dee y}{\dee x} = A(x) y + B(x), A(x) \ne B(x)$. It is called linear because the degree of $y$ on the right side is 1.
+
+If $A(x) = B(x)$, then the equation is separable since $A(x)y + B(x) = (u + 1)A(x)$.
+
+We can solve these by splitting the equation into two separable equations and then solving each of those. This technique is developed by Euler.
+
+Note that if we multiply the equation by an arbitrary function $I(x)$, we get $I(x) \frac{\dee y}{\dee x} = I(x) A(x) y + I(x) B(x)$.
+
+So $I(x) \frac{\dee y}{\dee x} - I(x) A(x) y = I(x) B(x)$.
+
+We want to choose a $I(x)$ such that $\frac{\dee}{\dee x} (I(x) y) = I(x) B(x)$ or $I(x) y = \int I(x) B(x) \dee x$.
+
+So $y = \frac{1}{I(x)} \left(\int I(x) B(x) \dee x\right)$.
+
+In order for $\frac{\dee}{\dee x} (I(x) y) = I(x) B(x)$ to be equivalent to our original equation, $I(x) \frac{\dee y}{\dee x} - I(x) A(x) y = I(x) B(x)$, we need $\frac{\dee}{\dee x} I(x) y = I(x) \frac{\dee y}{\dee x} - I(x) A(x) y$ - the left hand sides must match.
+
+Clearly, $\frac{\dee}{\dee x} I(x) y = y \frac{\dee}{\dee x} I(x) + I(x) \frac{\dee y}{\dee x}$ (product rule).
+
+So we need $y \frac{\dee}{\dee x} I(x) = -I(x) A(x) y$, or $\frac{\dee}{\dee x} I(x) = -I(x) A(x)$.
+
+So $\frac{1}{I(x)} \frac{\dee}{\dee x} I(x) = -A(x)$ (separable equation) and $\int \frac{1}{I(x)} \dee I(x) = -\int A(x) \dee x$.
+
+Clearly, $\int \frac{1}{I(x)} \dee I(x) = \ln \abs{I(x)}$ so $\abs{I(x)} = e^{-\int A(x) \dee x}$ and $I(x) = \pm e^{-\int A(x) \dee x}$.
+
+Here, $I(x)$ is called the integrating factor.
+
+Now we substitute back into the original equation: $y = \frac{1}{I(x)} \int I(x) B(x) \dee x = \frac{1}{\pm e^{-\int A(x) \dee x}} \int (\pm e^{-\int A(x) \dee x} B(x)) \dee x = \frac{1}{e^{-\int A(x) \dee x}} \int e^{-\int A(x) \dee x} B(x) \dee x$.
+
+The **general rule** is that given $\frac{\dee y}{\dee x} = A(x) y + B(x)$, $y = \frac{1}{I(x)} \int I(x) B(x) \dee x$ where $I(x) = e^{-\int A(x) \dee x}$.
+
+Consider the velocity of a falling object, $\frac{\dee v}{\dee t} = g - \beta v$, where $g$ is gravitational acceleration and $\beta$ is the drag coefficient:
+
+> Clearly, this is an equation of the form $\frac{\dee v}{\dee t} = A(t) v + B(t)$ where $A(t) = -\beta$ and $B(x) = g$.  
+> So $I(x) = e^{-\int (-\beta) \dee t} = e^{\beta t}$.  
+> So $v = \frac{1}{e^{\beta t}} \int e^{\beta t} g \dee x = \frac{1}{e^{\beta t}} \left(\frac{g}{\beta} e^{\beta t} + c\right)$.  
+> So $v = \frac{1}{e^{\beta t}} \left(\frac{g}{\beta} e^{\beta t} + c\right) = \frac{g}{\beta} + ce^{-\beta t}$.  
+> Now we need to find $c$. Since $v(t) = v(0) = v_0 = \frac{g}{\beta} + ce^{-\beta 0}$, $c = v_0 - \frac{g}{\beta}$.  
+> So $v = \frac{g}{\beta} + \left(v_0 - \frac{g}{\beta}\right)e^{-\beta t}$.  
+> We can check our answer by substituting $v$ back into the original equation: $\frac{\dee}{\dee t} \left(\frac{g}{\beta} + \left(v_0 - \frac{g}{\beta}\right)e^{-\beta t}\right) = g - \beta \left(\frac{g}{\beta} + \left(v_0 - \frac{g}{\beta}\right)e^{-\beta t}\right) = g - \left(g + (\beta v_0 - g)e^{-\beta t}\right) = (g - \beta v_0)e^{-\beta t}$, which is correct.  
+
+Consider $x^2 \frac{\dee y}{\dee x} + xy = 1$ for $y(x) = y(1) = 2, x > 0$:
+
+> Clearly, $x^2 \frac{\dee y}{\dee x} + xy = 1$ is equivalent to $\frac{\dee y}{\dee x} + \frac{1}{x}y = \frac{1}{x^2}$ or $\frac{\dee y}{\dee x} = -\frac{1}{x}y + \frac{1}{x^2}$.  
+> So $I(x) = e^{-\int \left(-\frac{1}{x}\right) \dee x} = e^{\ln x} = x$.  
+> So $y = \frac{1}{x} \int x \frac{1}{x^2} \dee x = \frac{\ln x + c}{x}$.  
+> Since $y(x) = y(1) = 2$, $2 = \frac{\ln 1 + c}{1}$ and $c = 2$.  
+> So $y = \frac{\ln x + 2}{x}$.  

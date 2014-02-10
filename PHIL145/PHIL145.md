@@ -907,3 +907,78 @@ And finally, evaluation:
 * Premise 1 and 2 are common knowledge, and so are acceptable.
 * Premise 1 is positively relevant, while premise 2 is basically irrelevant.
 * Premise 1 and premise 2 together ground the conclusion.
+
+# 10/2/14
+
+Fallacies
+---------
+
+A **fallacy** is a common mistake in arguments. We learn them in order to be able to detect them more easily and identify/communicate them to other people.
+
+A **logical fallacy** is a fallacy having to do with the logical form itself.
+
+The study of persuasion is **rhetoric**. Since the study of arguments is the study of rational persuasion, it is a subfield of rhetoric.
+
+However, by "rhetoric" we often mean those fields of persuasion that are not rational. For example, persuasion by force, bribery, etc.
+
+Rhetorical effects can make poor arguments more persuasive than they should be. This can be the result of:
+
+* Structures that make them look valid (logical fallacies)
+* Premises (distractors) that distract the audience from the real issue
+* Framing arguments to favour one conclusion (false presuppositions)
+
+### Grounding
+
+Some fallacies associated with groundedness are:
+
+* Logical fallacies (denying the antecedent, affirming the consequent, etc)
+* Argument from ignorance.
+    * We have no evidence for P, so P is false.
+    * We have no evidence against P, so P is true.
+    * This is wrong because we should not pass judgement while in a neutral state of information.
+    * I didn't see a rhino today, so rhinos do not exist.
+    * This is wrong because the evidence is too weak to ground the conclusion.
+    * This is evaluated by checking the likeliness of counterexamples existing.
+* Hasty generalization
+    * This is simply inductive arguments that are not well grounded.
+    * This P has Q, so all P have Q.
+    * There are simply not enough inductive premises to support the conclusion.
+* Post hoc ergo proctor hoc (post hoc fallacies)
+    * X happened before Y, so X caused Y.
+    * The basic element of causation is that cause happens before effect, but this is not enough to prove causation.
+    * Correlation and causation are not necessarily the same.
+    * People with lung cancer often smoke, so lung cancer causes smoking.
+    * People who smoke often have lung cancer, so smoking causes lung cancer.
+    * Both of the above are post hoc fallacies, though the second is true for other reasons.
+* Composition
+    * All the components of P have Q, so P is Q.
+    * All the ingredients in these cookies are tasty, so these cookies are tasty (false, cookies could be not tasty).
+    * We cannot assume the whole has the properties of its parts.
+* Division
+    * The P has Q, so all the parts of P have Q.
+    * These cookies are tasty, so all the ingredients are tasty (false, could have not tasty ingredients).
+    * We cannot assume the parts have the properties of the whole.
+
+Conspiracy theories are not themselves fallacies, but the support given for their existing is fallacious.
+
+Conspiracy theories often use arguments from ignorance (lack of support for theory is actually used to support theory) and contrary evidence is used to support the theory (e.g., there is a deeper cover-up in place).
+
+### Relevance
+
+There are two types of fallacies associated with relevance: distractors and genetic fallacies.
+
+**Distractors** are irrelevant topics designed to distract the audience. They add rhetorical force because they draw attention away from deficiencies in the argument and makes the argument look more cogent by adding irrelevant but acceptable premises.
+
+* Red herring
+    * Offering irrelevant claims as support for the conclusion, in order to draw attention away from the real issue.
+    * This is a wide ranging fallacy and includes straw man and ad hominem fallacies.
+    * Carries the connotation that the author committed the fallacy intentionally to avoid the issue.
+    * For example, "We will strengthen educational systems, while our opponents will cut budgets until nothing is left".
+        * The actions of the opponents has no bearing on the party's education policies, simply diverting attention from themselves.
+        * No relevant support for the conclusion was given.
+    * Straw man fallacy
+        * When challenging another's views, the other's claims are misrepresented or interpreted in a way other than intended, and it is claimed that the original claim was refuted.
+        * This is wrong because only the misrepresented claim was refuted, and the reasons offered in refutation are irrelevant to the original view.
+        * For example, "Euthanasia is wrong, because everyone has a right to life, and violating rights is wrong".
+            * Euthanasia requires the patient to waive the right to life, and so the argument is irrelevant.
+            * The argument misrepresents euthanasia as murder.
