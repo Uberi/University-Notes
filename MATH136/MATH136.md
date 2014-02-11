@@ -958,7 +958,9 @@ Matrix Mappings
 
 A **function** is a rule that associates $x \in A$ to $f(x) \in B$. This is written as $f: A \to B$, where $A$ is the **domain** of $f$, and $B$ is the **codomain** of $f$.
 
-$f(a)$ is the "**image** of $a$ under $f$"
+$f(a)$ is the "**image** of $a$ under $f$". An **image** is a subset of the codomain corresponding to the function values for a subset of the domain.
+
+Formally, $I = \set{y \in C : \exists x \in D, f(x) = y}$ where $C$ is the codomain, $D$ is a subset of the domain, and $I$ is the image,
 
 A **matrix mapping** is a function $f: \mb{R}^n \to \mb{R}^m$ where $f(\vec{x}) = A\vec{x}$ for some matrix $A \in M_{m, n}$.
 
@@ -975,3 +977,52 @@ What is the domain/codomain of $f(\vec{x}) = A\vec{x}, A = \begin{bmatrix} 2 & 3
 
 We can also write the function in a simpler form, $f(\vec{x}) = \begin{bmatrix} 2x_1 + 3x_2 \\ -4x_1 \\ 5x_1 + x_2 \end{bmatrix}$.
 
+# 10/2/14
+
+Note that if $f(\vec{x}) = A\vec{x}$ is a matrix mapping, then $A = \begin{bmatrix} f(1, 0, \ldots, 0) & f(0, 1, \ldots, 0) & \ldots & f(0, \ldots, 1, 0) & f(0, \ldots, 0, 1) \end{bmatrix}$.
+
+### Theorem 3.3.1 (Linearity of Matrix Mappings)
+
+Given $A \in M_{m, n}, f(\vec{x}) = A\vec{x}$, $\forall \vec{x}, \vec{y} \in \mb{R}^n, \forall s, t \in \mb{R}, f(s\vec{x} + t\vec{y}) = sf(\vec{x}) + tf(\vec{y})$.
+
+In other words, when we multiply a matrix by a linear combination of vectors, it is equivalent to the linear combination of multiplying the matrix by the vectors directly.
+
+This is the **linearity property**. What this theorem states is that all matrix mappings have the linearity property.
+
+Proof:
+
+> Let $A \in M_{m, n}, f(\vec{x}) = A\vec{x}, \vec{x}, \vec{y} \in \mb{R}^n, s, t \in \mb{R}$.  
+> Then $f(s\vec{x} + t\vec{y}) = A(s\vec{x} + t\vec{y}) = As\vec{x} + At\vec{y} = sA\vec{x} + tA\vec{y} = sf(\vec{x}) + tf(\vec{y})$.  
+
+Linear Mappings
+---------------
+
+A **linear mapping/linear transformation/linear operator** is a function $L: \mb{R}^n \to \mb{R}^m$ that has the linearity property.
+
+In other words, given $L: \mb{R}^n \to \mb{R}^m$, $L$ is a linear mapping if and only if $L(s\vec{x} + t\vec{y}) = sL(\vec{x}) + tL(\vec{y}), \vec{x}, \vec{y} \in \mb{R}^n, s, t \in \mb{R}$.
+
+To prove that a funtion is a lienar mapping, we simply need to prove that it has the inearity property.
+
+Prove that $\proj_{\vec{a}}$ is a linear operator:
+
+> $$
+\begin{align}
+\proj_{\vec{a}} (s\vec{x} + t\vec{y}) &= \left((s\vec{x} + t\vec{y}) \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
+&= \left(s\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} + \left(t\vec{y} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
+&= s\proj_{\vec{a}} \vec{x} + t\proj_{\vec{a}} \vec{y} \\
+\end{align}
+$$
+> Therefore, $\proj_{\vec{a}}$ has the linearity property and is a linear mapping.  
+
+### Theorem 3.2.2
+
+If $L: \mb{R}^n \to \mb{R}^m$ is a linear mapping, then $L(\vec{x}) = A\vec{x}$, where $A = \begin{bmatrix} L(\vec{e}_1) & \ldots & L(\vec{e}_n) \end{bmatrix}$ and $\vec{e}_i$ is the $i$th standard basis vector in $\mb{R}^n$.
+
+Proof:
+
+> Let $\vec{x} \in \mb{R}^n$ and $\vec{e}_i$ be the $i$th standard basis vector. Then $\vec{x} = x_1 \vec{e}_1 + \ldots + x_n \vec{e}_n$.  
+> Then $L(\vec{x}) = L(x_1 \vec{e}_1 + \ldots + x_n \vec{e}_n) = x_1 L(\vec{e}_1) + \ldots + x_n L(\vec{e}_n) = \begin{bmatrix} L(\vec{e}_1) & \ldots & L(\vec{e}_n) \end{bmatrix} \vec{x}$.  
+> Let $A = \begin{bmatrix} L(\vec{e}_1) & \ldots & L(\vec{e}_n) \end{bmatrix}$.  
+> Then $L(\vec{x}) = A\vec{x}$.  
+
+The matrix $A$ in the theorem above is called the **standard matrix** of the linear mapping $L$. It is the matrix such that $L(\vec{x}) = A\vec{x}$

@@ -875,7 +875,7 @@ int add1(int x) { // function definition
 <p>Some functions have only side effects, and don't produce a value. These have the <code>void</code> return type.</p>
 <p>Some functions have no side effects, and only produce a value.</p>
 <p>It is not useful to have a function that has neither side effects or a return value.</p>
-<p>In expressions, we can also use a comma (<code>,</code>) to evaluate multiple expressions but produce only the last one. For example, <span class="math">\(a == 1 ? (a = 2, 5 + 6) : 7 + 8\)</span>. This is very similar in functionality to <code>begin</code> in Racket.</p>
+<p>In expressions, we can also use a comma operator (<code>,</code>) to evaluate multiple expressions but produce only the last one. For example, <span class="math">\(a == 1 ? (a = 2, 5 + 6) : 7 + 8\)</span>. This is very similar in functionality to <code>begin</code> in Racket.</p>
 <h3 id="control-flow-statements">Control Flow Statements</h3>
 <p>Control flow statements are those that change the control flow - they can change the program location and call stack.</p>
 <p>Function calls also modify control flow. They change the program location to the target and push a stack frame to the call stack.</p>
@@ -1018,10 +1018,17 @@ int main(void) {
     y = temp;
 }</code></pre>
 <p>This is because afterwards, both <code>x</code> and <code>y</code> will both point to the value of <code>x</code>, so they will not swap the values.</p>
-<p>For example, a division function might produce the quotient and remainder with by-reference parameters.</p>
-<p>The return type of a function can also be a pointer. However, we <strong>must not return pointers to addresses in the current stack frame</strong>. Whenever we return from a function, the data in the stack frame should be considered invalid and off-limits. In other words, we should not return pointers to local variables or parameters. Global variables are safe to return addresses to.</p>
+<p>For example, a division function might produce the quotient and remainder with by-reference parameters. This would free up the return value to allow us to give information such as error codes or statistics:</p>
+<pre><code>int divide(int n, int d, int *q, int *r) {
+    if (d == 0) return 1;
+    *q = n / d;
+    *r = n % d;
+    return 0;
+}</code></pre>
+<p>We can return 1 on invalid input to let the client know something went wrong.</p>
+<p>The return type of a function can also be a pointer. However, we <strong>must not return pointers to addresses in the current stack frame</strong>. Whenever we return from a function, the data in the stack frame should be considered invalid and off-limits. In other words, we should not return pointers to local variables or parameters.</p>
 <p>If a function has implementation-specific side effects, such as modifying internal variables, we do not want to show this information in the interface. Instead, we can put these specific details with the implementation of the function.</p>
-<h1 id="section-10">10/2/14</h1>
+<h1 id="tutorial-5">10/2/14 - Tutorial</h1>
 <pre><code>// collatz(n) returns the length of the Collatz sequence of `n` that ends with 1
 //     PRE; n &gt;= 1
 //     POST: produce the legnth of the Collatz sequence starting at the number `n`
@@ -1041,6 +1048,93 @@ int collatz(int n); {
 <pre><code>(*x).y
 x-&gt;y</code></pre>
 <p>The <code>-&gt;</code> operator is a special operator that accesses the structure field of a structure given by a pointer.</p>
+<h1 id="section-10">11/2/14</h1>
+<p>When we use the <code>static</code> keyword on local variables, we can make it behave like a global variable that is only accessible inside of the function - we make a <strong>persistent local variable</strong>:</p>
+<pre><code>int f(void) {
+    static int counter = 0; // this is initialized at the start of the program
+    return counter ++;
+}</code></pre>
+<p>Just like global variables, they are stored in the global data section in memory. As a result, the global data section is also known as the &quot;global/static data&quot; section.</p>
+<p><code>int *p = NULL</code> is equivalent to <code>int *p; p = NULL;</code>, not <code>int *p; *p = NULL;</code>.</p>
+<p>When we call a function, all of the arguments are copied into the local stack frame. When we pass larger structures to function by value, this can get very inefficient - we have to copy the entire structure into the new stack frame. In addition to reducing performance, this causes our stack frames to get much larger and may even contribute to a stack overflow.</p>
+<p>Therefore, we can oass pointers to structures instead to reduce overhead:</p>
+<pre><code>int sqr _ dist(struct posn *p1, struct posn *p2) {
+    const int xdist = p1-&gt;x - p2-&gt;x;
+    const int ydist = p1-&gt;y - p2-&gt;y;
+    return xdist * xdist + ydist * ydist;
+}</code></pre>
+<p>Note the use of the second structure selection operator, <code>-&gt;</code>, which works on pointers to structures rather than the structures itself.</p>
+<p>If a function accepts a pointer parameter, it should clearly state whether the parameter gets mutated in the documentation.</p>
+<p>We can also use the <code>const</code> keyword to denote that the parameter isn't to be changed:</p>
+<pre><code>void immutable_posn(const struct posn *p) {
+    p-&gt;x = 5; // this cannot be changed because the parameter is constant - the compiler will catch this
+}</code></pre>
+<p>It is good style to use <code>const</code> for pointer parameters whenever possible.</p>
+<pre><code>int *p; // pointer and pointed value mutable
+const int *p // pointer mutable, pointed value immutable
+int * const p = &amp;i; // pointer immutable, pointed value mutable
+const int * const p = &amp;i; // pointer and pointed value immutable</code></pre>
+<p>Note that <code>const int i</code> is the same as <code>int const</code>. <code>const</code> always applies to the type on the left, onlless there are no types on the left, in which case it applies to the type on the right.</p>
+<h2 id="iteration">Iteration</h2>
+<p>Looping combines mutation with control flow. Looping allows us to do things multiple times.</p>
+<p>Instead of recursion, we now have iteration. The interesting thing about iterating is that it will never result in a stack overflow.</p>
+<h3 id="while-loop">While loop</h3>
+<p>The while control flow statement takes the form of <code>while (CONDITION) BODY;</code>. It works as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Evaluate <code>CONDITION</code>. If false, we are done with the loop and move on.</li>
+<li>Evaluate <code>BODY</code>.</li>
+<li>Go back to step 1.</li>
+</ol>
+<p>For example, printing numbers from 1 to 100:</p>
+<pre><code>int i = 1;
+while (i &lt;= 100) {
+    printf(&quot;%d\n&quot;, i);
+    i --;
+}</code></pre>
+<p>It is easy to accidentally make an infinite loop. Common forms include:</p>
+<pre><code>while (i &lt; 100) f(); i --; // bad nesting
+while (i &lt; 100); f(x); // extra semicolon
+while (i = 100) f(x); // assignment rather than equality
+while (true) f(x); // best way to make an infinite loop intentionally</code></pre>
+<h3 id="do-while-loop">Do-While Loop</h3>
+<p>The do-while control flow statement takes the form of <code>do STATEMENT while (CONDITION);</code>. It works almost exactly like the while loop, except the condition is evaluated at the end:</p>
+<ol style="list-style-type: decimal">
+<li>Evaluate <code>BODY</code>.</li>
+<li>Evaluate <code>CONDITION</code>. If false, we are done with the loop and move on.</li>
+<li>Go back to step 1.</li>
+</ol>
+<p>For example, ensuring success:</p>
+<pre><code>int i = 1;
+int success; // uninitialized variable
+do {
+    success = g(); // this is guaranteed to run at least once
+    i --;
+} while (!success)</code></pre>
+<p>This loop is occasionally useful because it guarantees that its body will be run at least once.</p>
+<h3 id="for-loop">For Loop</h3>
+<p>The for control flow statement takes the form of <code>for (SETUP; CONDITION; UPDATE) BODY;</code>. It is simply a shortcut for writing a very common pattern used in while loops.</p>
+<p>This is almost exactly equivalent to <code>{ SETUP; while (CONDITION) { BODY; UPDATE; } }</code>.</p>
+<p>The only difference is that when we use <code>continue</code>, the for loop will also execute <code>UPDATE</code> before continuing with the next iteration.</p>
+<ol style="list-style-type: decimal">
+<li>Evaluate <code>SETUP</code>.</li>
+<li>Evaluate <code>CONDITION</code>. If false, we are done with the loop and move on.</li>
+<li>Evaluate <code>BODY</code>.</li>
+<li>Evaluate <code>UPDATE</code>.</li>
+<li>Go back to step 2.</li>
+</ol>
+<p>This allows us to write an extremely common looping pattern into one concise statement. For example, printing numbers from 1 to 100.</p>
+<pre><code>for (int i = 1; i &lt;= 100; i ++) printf(&quot;%d\n&quot;, i);</code></pre>
+<p>Note that in C99, we can use definitions too in our statements, like in <code>SETUP</code>. These definitions are in the scope of the for loop.</p>
+<p>We can also omit the statements. If we omit the condition, it is assumed to be true:</p>
+<pre><code>for (;;) f(x); // infinite loop
+for (; i &lt; 50); // skip setup
+for (i = 1, j = 2;;) // statements can use the comma operator to cram in multiple side effects</code></pre>
+<h3 id="extra-control-flow">Extra Control Flow</h3>
+<p>Inside of loops, additional control flow statements are available that allow us to do some extra things.</p>
+<p>The <code>break;</code> statement ends the current innermost loop immediately. and moves to directly after the loop.</p>
+<p>The <code>continue;</code> statement skips to the end of the body of the innermost loop and goes to the next iteration of the loop. It means that we want to continue looping, but want to skip the rest of this particular iteration.</p>
+<p>These statements are useful, but they can always be avoided by restructuring the code.</p>
+<p>Using loops to solve problems is called using an <strong>iterative</strong> approach. Before, we used the <strong>recursive</strong> approach. Both have their own advantages. Iteration is simply an alternative to recursion, used much more often in imperative programming.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

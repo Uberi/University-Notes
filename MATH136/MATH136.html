@@ -540,7 +540,8 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <h1 id="section-3">8/2/14</h1>
 <h2 id="matrix-mappings">Matrix Mappings</h2>
 <p>A <strong>function</strong> is a rule that associates <span class="math">\(x \in A\)</span> to <span class="math">\(f(x) \in B\)</span>. This is written as <span class="math">\(f: A \to B\)</span>, where <span class="math">\(A\)</span> is the <strong>domain</strong> of <span class="math">\(f\)</span>, and <span class="math">\(B\)</span> is the <strong>codomain</strong> of <span class="math">\(f\)</span>.</p>
-<p><span class="math">\(f(a)\)</span> is the &quot;<strong>image</strong> of <span class="math">\(a\)</span> under <span class="math">\(f\)</span>&quot;</p>
+<p><span class="math">\(f(a)\)</span> is the &quot;<strong>image</strong> of <span class="math">\(a\)</span> under <span class="math">\(f\)</span>&quot;. An <strong>image</strong> is a subset of the codomain corresponding to the function values for a subset of the domain.</p>
+<p>Formally, <span class="math">\(I = \set{y \in C : \exists x \in D, f(x) = y}\)</span> where <span class="math">\(C\)</span> is the codomain, <span class="math">\(D\)</span> is a subset of the domain, and <span class="math">\(I\)</span> is the image,</p>
 <p>A <strong>matrix mapping</strong> is a function <span class="math">\(f: \mb{R}^n \to \mb{R}^m\)</span> where <span class="math">\(f(\vec{x}) = A\vec{x}\)</span> for some matrix <span class="math">\(A \in M_{m, n}\)</span>.</p>
 <p>In other words, it is a function over vectors that multiplies matrix by the given vector.</p>
 <p>We can write this as <span class="math">\(f\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}\)</span>, or with the more aesthetic notation <span class="math">\(f(x_1, \ldots, x_n) = (y_1, \ldots, y_m)\)</span>.</p>
@@ -549,6 +550,37 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <p>Clearly, <span class="math">\(f\)</span> is defined iff and only if the matrix multiplication is defined, which is when <span class="math">\(\vec{x}\)</span> has 2 components.<br />So <span class="math">\(\vec{x} \in \mb{R}^2\)</span>.<br />Since <span class="math">\(A\)</span> has 3 rows, <span class="math">\(f(\vec{x})\)</span> also has 3 rows.<br />So <span class="math">\(f(\vec{x}) \in \mb{R}^3\)</span>.</p>
 </blockquote>
 <p>We can also write the function in a simpler form, <span class="math">\(f(\vec{x}) = \begin{bmatrix} 2x_1 + 3x_2 \\ -4x_1 \\ 5x_1 + x_2 \end{bmatrix}\)</span>.</p>
+<h1 id="section-4">10/2/14</h1>
+<p>Note that if <span class="math">\(f(\vec{x}) = A\vec{x}\)</span> is a matrix mapping, then <span class="math">\(A = \begin{bmatrix} f(1, 0, \ldots, 0) &amp; f(0, 1, \ldots, 0) &amp; \ldots &amp; f(0, \ldots, 1, 0) &amp; f(0, \ldots, 0, 1) \end{bmatrix}\)</span>.</p>
+<h3 id="theorem-3.3.1-linearity-of-matrix-mappings">Theorem 3.3.1 (Linearity of Matrix Mappings)</h3>
+<p>Given <span class="math">\(A \in M_{m, n}, f(\vec{x}) = A\vec{x}\)</span>, <span class="math">\(\forall \vec{x}, \vec{y} \in \mb{R}^n, \forall s, t \in \mb{R}, f(s\vec{x} + t\vec{y}) = sf(\vec{x}) + tf(\vec{y})\)</span>.</p>
+<p>In other words, when we multiply a matrix by a linear combination of vectors, it is equivalent to the linear combination of multiplying the matrix by the vectors directly.</p>
+<p>This is the <strong>linearity property</strong>. What this theorem states is that all matrix mappings have the linearity property.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(A \in M_{m, n}, f(\vec{x}) = A\vec{x}, \vec{x}, \vec{y} \in \mb{R}^n, s, t \in \mb{R}\)</span>.<br />Then <span class="math">\(f(s\vec{x} + t\vec{y}) = A(s\vec{x} + t\vec{y}) = As\vec{x} + At\vec{y} = sA\vec{x} + tA\vec{y} = sf(\vec{x}) + tf(\vec{y})\)</span>.</p>
+</blockquote>
+<h2 id="linear-mappings">Linear Mappings</h2>
+<p>A <strong>linear mapping/linear transformation/linear operator</strong> is a function <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> that has the linearity property.</p>
+<p>In other words, given <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span>, <span class="math">\(L\)</span> is a linear mapping if and only if <span class="math">\(L(s\vec{x} + t\vec{y}) = sL(\vec{x}) + tL(\vec{y}), \vec{x}, \vec{y} \in \mb{R}^n, s, t \in \mb{R}\)</span>.</p>
+<p>To prove that a funtion is a lienar mapping, we simply need to prove that it has the inearity property.</p>
+<p>Prove that <span class="math">\(\proj_{\vec{a}}\)</span> is a linear operator:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\proj_{\vec{a}} (s\vec{x} + t\vec{y}) &amp;= \left((s\vec{x} + t\vec{y}) \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
+&amp;= \left(s\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} + \left(t\vec{y} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
+&amp;= s\proj_{\vec{a}} \vec{x} + t\proj_{\vec{a}} \vec{y} \\
+\end{align}
+\]</span> Therefore, <span class="math">\(\proj_{\vec{a}}\)</span> has the linearity property and is a linear mapping.</p>
+</blockquote>
+<h3 id="theorem-3.2.2">Theorem 3.2.2</h3>
+<p>If <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> is a linear mapping, then <span class="math">\(L(\vec{x}) = A\vec{x}\)</span>, where <span class="math">\(A = \begin{bmatrix} L(\vec{e}_1) &amp; \ldots &amp; L(\vec{e}_n) \end{bmatrix}\)</span> and <span class="math">\(\vec{e}_i\)</span> is the <span class="math">\(i\)</span>th standard basis vector in <span class="math">\(\mb{R}^n\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(\vec{x} \in \mb{R}^n\)</span> and <span class="math">\(\vec{e}_i\)</span> be the <span class="math">\(i\)</span>th standard basis vector. Then <span class="math">\(\vec{x} = x_1 \vec{e}_1 + \ldots + x_n \vec{e}_n\)</span>.<br />Then <span class="math">\(L(\vec{x}) = L(x_1 \vec{e}_1 + \ldots + x_n \vec{e}_n) = x_1 L(\vec{e}_1) + \ldots + x_n L(\vec{e}_n) = \begin{bmatrix} L(\vec{e}_1) &amp; \ldots &amp; L(\vec{e}_n) \end{bmatrix} \vec{x}\)</span>.<br />Let <span class="math">\(A = \begin{bmatrix} L(\vec{e}_1) &amp; \ldots &amp; L(\vec{e}_n) \end{bmatrix}\)</span>.<br />Then <span class="math">\(L(\vec{x}) = A\vec{x}\)</span>.</p>
+</blockquote>
+<p>The matrix <span class="math">\(A\)</span> in the theorem above is called the <strong>standard matrix</strong> of the linear mapping <span class="math">\(L\)</span>. It is the matrix such that <span class="math">\(L(\vec{x}) = A\vec{x}\)</span></p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
