@@ -20,6 +20,7 @@ $$
 \newcommand{\spn}{\operatorname{Span}}
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}

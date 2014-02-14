@@ -22,6 +22,7 @@ $$
 \newcommand{\spn}{\operatorname{Span}}
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
@@ -172,9 +173,9 @@ Note that any set of vectors that contains $\vec{0}$ is linearly dependent.
 Proof:
 
 > Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ and $\vec{v}_i = \vec{0}, 1 \le i \le n$.  
-> $\mathcal{B}$ is linearly dependent if and only if $\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0}, c_1 \cdot \ldots \cdot c_n = 0$.  
+> $\mathcal{B}$ is linearly dependent if and only if $\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0} \wedge \exists 1 \le i \le n, c_i \ne 0$.  
 > Construct $c_1, \ldots, c_{i - 1}, c_{i + 1}, \ldots, c_n = 0, c_i = 1$.  
-> Then $c_1 \cdot \ldots \cdot c_n = 0$ and $c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0}$.  
+> Then $c_i \ne 0$ and $c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0}$.  
 > Therefore, $\mathcal{B}$ is linearly dependent.  
 
 The vector equation of a linearly independent set is known as a simplified vector equation. A vector equation can be converted into a simplified one by removing terms where the vector can be written as a linear combination of the others.
@@ -1026,3 +1027,40 @@ Proof:
 > Then $L(\vec{x}) = A\vec{x}$.  
 
 The matrix $A$ in the theorem above is called the **standard matrix** of the linear mapping $L$. It is the matrix such that $L(\vec{x}) = A\vec{x}$
+
+Find the standard matrix of $\proj_{\vec{a}}$:
+
+> $$
+\begin{align}
+\proj_{\vec{a}} \vec{x} &= \left(\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
+\proj_{\vec{a}} \vec{e}_i &= \frac{\vec{a}_i}{\magn{a}} \frac{\vec{a}}{\magn{a}} = \vec{a}_i \frac{\vec{a}}{\magn{a}^2} \\
+f(\vec{x}) &= A\vec{x} = \proj_{\vec{a}} \\
+A &= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} & \ldots & \vec{a}_n \frac{\vec{a}}{\magn{a}^2} \end{bmatrix} \\
+\end{align}
+$$
+
+# 11/2/14
+
+### Rotations
+
+$R_\theta: \mb{R}^2 \to \mb{R}^2$ is a linear mapping $R_\theta(x_1, x_2)$ that rotates a vector by an angle $\theta$ counterclockwise.
+
+We can geometrically determine that the location of $\vec{x}$ after rotation is $R_\theta(x_1, x_2) = \begin{bmatrix} x_1 \cos \theta - x_2 \sin \theta \\ x_1 \sin \theta + x_2 \cos \theta \end{bmatrix}$.
+
+Now we can convert it into a matrix mapping: $R_\theta(\vec{e}_1) = x_1 \begin{bmatrix} \cos \theta \\ \sin \theta \end{bmatrix}, R_\theta(\vec{e}_2) = x_2 \begin{bmatrix} -\sin \theta \\ \cos \theta \end{bmatrix}$.
+
+So $R_\theta(\vec{x}) = \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix}\vec{x}$.
+
+$\begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix}$ is called a **rotation matrix**.
+
+### Reflections
+
+$\refl_P: \mb{R}^n \to \mb{R}^n$ is a linear mapping $\refl_P(\vec{x})$ that reflects $\vec{x}$ about the hyperplane $P$.
+
+We geometrically determine that the relection of a vector about a hyperplane is the projection of the vector on the hyperplane minus the perpendicular.
+
+In other words, $\refl_P \vec{x} = \proj_P \vec{x} - \perp_P \vec{x} = (\vec{x} - \perp_P \vec{x}) - \perp_P \vec{x} = \vec{x} - 2\perp_P \vec{x} = \vec{x} - 2\proj_{\vec{n}} \vec{x}$, where $\vec{n}$ is the normal of the hyperplane.
+
+Now we find the standard matrix of this operation. Let $\vec{n}$ be the normal of the plane. Then $\refl_P \vec{e}_i = \vec{e}_i - 2\proj_{\vec{n}} \vec{e}_i$.
+
+So $\refl_P \vec{x} = \begin{bmatrix} \vec{e}_1 - 2\proj_{\vec{n}} \vec{e}_1 & \ldots & \vec{e}_n - 2\proj_{\vec{n}} \vec{e}_n \end{bmatrix} \vec{x}$.

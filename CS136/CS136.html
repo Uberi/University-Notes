@@ -1134,7 +1134,95 @@ for (i = 1, j = 2;;) // statements can use the comma operator to cram in multipl
 <p>The <code>break;</code> statement ends the current innermost loop immediately. and moves to directly after the loop.</p>
 <p>The <code>continue;</code> statement skips to the end of the body of the innermost loop and goes to the next iteration of the loop. It means that we want to continue looping, but want to skip the rest of this particular iteration.</p>
 <p>These statements are useful, but they can always be avoided by restructuring the code.</p>
-<p>Using loops to solve problems is called using an <strong>iterative</strong> approach. Before, we used the <strong>recursive</strong> approach. Both have their own advantages. Iteration is simply an alternative to recursion, used much more often in imperative programming.</p>
+<p>Using loops to solve problems is called using an <strong>iterative</strong> approach. Before, we used the <strong>recursive</strong> approach. Both have their own advantages. Iteration is simply an alternative to recursion, used much more often in imperative programming. Sometimes recursion is easier to understand than iteration, and sometimes the other way around. They are different tools that are useful in different places.</p>
+<h1 id="section-11">13/2/14</h1>
+<h2 id="inputoutput">Input/Output</h2>
+<p><strong>I/O</strong> stands for <strong>input/output</strong>. It refers to how programs interact with the real world.</p>
+<p>This includes receiving input via a keyboard or mouse, or sending things to a screen or printer, or even to and from a hard drive.</p>
+<p>With Racket we had <code>printf</code> with <code>~a</code> (basic placeholder) and <code>~v</code> (placeholder with extra type information). With C we have <code>printf</code> as well, with placeholders <code>%d</code> (decimal integer), <code>%c</code> (character), <code>%f</code> (float), <code>%p</code> (pointer/address).</p>
+<p>In C, writing to files is quite similar to writing to the standard output:</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main(void) {
+    FILE *file_ptr;
+    file_ptr = fopen(&quot;hello.txt&quot;, &quot;w&quot;); // w for write
+    fprintf(file_ptr, &quot;Hello World!\n&quot;);
+    fclose(file_ptr);
+}</code></pre>
+<p><strong>Tracing</strong> code is the process of adding logging output for the program to aid debugging and diagnostics.</p>
+<p>We can use things like trace variables to turn tracing on and off:</p>
+<pre><code>const bool DEBUG = true; // set to false to turn off tracing
+// ...
+if (DEBUG) printf(&quot;The value of i is: %d\n&quot;, i);</code></pre>
+<p>In Racket, <code>'&quot;string&quot;</code> is the same thing as <code>&quot;string&quot;</code>, and <code>'14</code> is the same as <code>14</code>. The quotes do not change numbers and strings.</p>
+<h3 id="read">Read</h3>
+<p>The <code>read</code> function in Racket attempts to read a value from the keyboard. If there are no values, it pauses the entire program until there is. Read can also produce <code>#&lt;eof&gt;</code>, which means that there is no more input (End Of File).</p>
+<p>In RunC, we can send EOF using Ctrl-D. EOF is a special character in the operating system that is treated specially by many programs.</p>
+<pre><code>&gt;&gt;&gt; (read)
+#&gt; abc
+&#39;abc
+&gt;&gt;&gt; (read)
+#&gt; 14
+14
+&gt;&gt;&gt; (read)
+#&gt; &quot;string&quot;
+&quot;string&quot;
+&gt;&gt;&gt; (read)
+#&gt; (a
+#&gt; b c
+#&gt; d)
+&#39;(a b c d)</code></pre>
+<p>Read has rather complicated behaviour, but for now it is sufficient to think of it as prepending a single quote <code>'</code> to our input and then interpreting it as a Racket literal value.</p>
+<p>We can test for <code>read</code> giving EOF by using the type predicate <code>eof-object?</code>, which returns a boolean indicating whether a value is an EOF.</p>
+<h3 id="scanfgetchar">Scanf/Getchar</h3>
+<p>In C, <code>scanf</code> is the input counterpart to <code>printf</code>. It &quot;scans&quot; the standard input for certain patterns like <code>%d</code> for a decimal integer, simimlar to <code>printf</code>'s placeholders.</p>
+<p>It usually takes the form of <code>scanf(&quot;%d&quot;, &amp;i)</code>, where <code>&quot;%d&quot;</code> specifies the things to scan for, and <code>&amp;i</code> specifies the pointer to which the scanned value is stored. <code>scanf</code> produces an <code>int</code>.</p>
+<p>In this course, we will only be using one placeholder at a time. <code>scanf</code> places the result at the specified address, and returns an integer representing the status. The return value is the number of items actually read in. So a value of 0 means no values were read in (error or invalid input) and a value of 1 means we successfully read one value.</p>
+<p><code>scanf</code> can also return <code>EOF</code> (usually defined as -1) when it encounters an EOF in the input. Basically, we have an error if we get 0, success if we get 1, and end of input if we get EOF.</p>
+<p>We could use <code>scanf(&quot;%c&quot;, &amp;x)</code>, but there is also a function <code>getchar()</code> designed specifically for this purpose. <code>getchar</code> accepts no parameters and produces the next character typed by the user on the keyboard as an integer representing the ASCII value of that character, or <code>EOF</code> if an EOF is given to the program.</p>
+<p><code>getchar</code> returns an integer because it could return any of the 256 possible characters, plus EOF.</p>
+<pre><code>int x = getchar();
+int y;
+if (scanf(&quot;%d&quot;, &amp;y) == 1)
+    printf(&quot;You entered: %d&quot;, y);</code></pre>
+<h3 id="testing-2">Testing</h3>
+<p>Using these I/O functions, we can now create <strong>interactive testing modules</strong> - modules that let us interactively test some functionality provided by our module:</p>
+<pre><code>#include &quot;addsqr.h&quot;
+int main(void) {
+    char func;
+    int x,y;
+    do {
+        func = getchar();
+        if (func == &#39;a&#39;) {
+            scanf(&quot;%d&quot;, &amp;x);
+            scanf(&quot;%d&quot;, &amp;y);
+            printf(&quot;add %d %d = %d\n&quot;, x, y, add(x,y));
+        } else if (func == &#39;s&#39;) {
+            scanf(&quot;%d&quot;, &amp;x);
+            printf(&quot;sqr %d = %d\n&quot;, x, sqr(x));
+        }
+    } while (func != &#39;x&#39;);
+}</code></pre>
+<p>This is a very barebones testing module that can get the job done. It doesn't handle invalid inputs or edge cases, since it is only meant to be used by testers.</p>
+<p>Now when we run it, we can use it to test various values of our functions:</p>
+<pre><code>&gt;&gt;&gt; s 10
+sqr 10 = 100
+&gt;&gt;&gt; a 1 1
+add 1 1 = 2</code></pre>
+<p>In fact, RunC has facilities to automate using this sort of interactive testing module.</p>
+<p>If the interactive testing module is located in <code>test.c</code>, then RunC will look for <code>test.in.1</code> in the same directory, and then run the program with the contents of that file as the input, as if the user was typing the contents into the terminal directly. The resulting output of the program is stored in <code>test.out.1</code>. This also works for <code>test.in.2</code>, <code>test.out.2</code>, etc.</p>
+<p>If there is a <code>test.expect.1</code> file, then RunC will compare the actual output with the output in this file, and if there are any differences, it generates <code>test.check.1</code>, which shows the differences side by side.</p>
+<p>This allows us to automate testing in a much more straightforward way, and also allows to test program outputs.</p>
+<p>If we are using non-interactive testing (using <code>assert</code>, for example), we can just use an empty <code>test.in.1</code> file and still use a <code>test.expect.1</code> file to test output.</p>
+<p>When we are testing code, we often want to check for:</p>
+<ul>
+<li>Off-by-one errors in loops.</li>
+<li>If the initial loop condition is never met.</li>
+<li>Every possible execution path in the code should be tested.</li>
+<li>Large argument values that could result in overflow, like <code>INT_MAX</code> or <code>INT_MIN</code>.</li>
+<li>Special argument values like <code>-1</code>, <code>1</code>, <code>0</code>, <code>NULL</code>, etc.</li>
+</ul>
+<p>When testing a module with side effects (like the shopping cart question in assignment 4), it is sometimes not sufficient to test each function by itself - we have to test sequences of function calls, testing the interaction between functions.</p>
+<p><strong>Integration testing</strong> is when we test interactions between modules and groups of modules all at once.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

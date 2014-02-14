@@ -24,6 +24,7 @@ $$
 \newcommand{\spn}{\operatorname{Span}}
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
@@ -832,7 +833,7 @@ A\left(1 - \frac{N}{k}\right) + BN &= 1; A = 1; B = \frac{1}{k} \\
 F &= \pm e^{-c}
 1 - \frac{k}{N} &= Fe^{-rt} \\
 \frac{k}{N} &= Fe^{-rt} + 1 \\
-N &= \frac{k}{1 + Fe^{-rt} \\
+N &= \frac{k}{1 + Fe^{-rt}} \\
 \end{align}
 $$
 > Note that all solutions tend toward $k$, which we can verify by taking the limit of $N$ at infinity.  
@@ -857,23 +858,29 @@ We can solve these by splitting the equation into two separable equations and th
 
 Note that if we multiply the equation by an arbitrary function $I(x)$, we get $I(x) \frac{\dee y}{\dee x} = I(x) A(x) y + I(x) B(x)$.
 
+### First equation
+
 So $I(x) \frac{\dee y}{\dee x} - I(x) A(x) y = I(x) B(x)$.
 
-We want to choose a $I(x)$ such that $\frac{\dee}{\dee x} (I(x) y) = I(x) B(x)$ or $I(x) y = \int I(x) B(x) \dee x$.
+Assume $I(x)$ is a function that satisfies $\frac{\dee}{\dee x} (I(x) y) = I(x) B(x)$ or $I(x) y = \int I(x) B(x) \dee x$.
 
 So $y = \frac{1}{I(x)} \left(\int I(x) B(x) \dee x\right)$.
 
-In order for $\frac{\dee}{\dee x} (I(x) y) = I(x) B(x)$ to be equivalent to our original equation, $I(x) \frac{\dee y}{\dee x} - I(x) A(x) y = I(x) B(x)$, we need $\frac{\dee}{\dee x} I(x) y = I(x) \frac{\dee y}{\dee x} - I(x) A(x) y$ - the left hand sides must match.
+Clearly, $\frac{\dee}{\dee x} I(x) y = y \frac{\dee}{\dee x} I(x) + I(x) \frac{\dee y}{\dee x} = I(x) B(x) = I(x) \frac{\dee y}{\dee x} - I(x) A(x) y$
 
-Clearly, $\frac{\dee}{\dee x} I(x) y = y \frac{\dee}{\dee x} I(x) + I(x) \frac{\dee y}{\dee x}$ (product rule).
+So $y \frac{\dee}{\dee x} I(x) + I(x) \frac{\dee y}{\dee x} = I(x) \frac{\dee y}{\dee x} - I(x) A(x) y$ and $y \frac{\dee}{\dee x} I(x) = -I(x) A(x) y$.
 
-So we need $y \frac{\dee}{\dee x} I(x) = -I(x) A(x) y$, or $\frac{\dee}{\dee x} I(x) = -I(x) A(x)$.
+### Second equation
 
-So $\frac{1}{I(x)} \frac{\dee}{\dee x} I(x) = -A(x)$ (separable equation) and $\int \frac{1}{I(x)} \dee I(x) = -\int A(x) \dee x$.
+So $\frac{\dee}{\dee x} I(x) = -I(x) A(x)$. This is a separable differential equation.
+
+Solving, we get $\int \frac{1}{I(x)} \dee I(x) = -\int A(x) \dee x$.
 
 Clearly, $\int \frac{1}{I(x)} \dee I(x) = \ln \abs{I(x)}$ so $\abs{I(x)} = e^{-\int A(x) \dee x}$ and $I(x) = \pm e^{-\int A(x) \dee x}$.
 
-Here, $I(x)$ is called the integrating factor.
+Here, $I(x)$ is called the **integrating factor**. In general, $I(x) = \pm e^{-\int A(x) \dee x}$.
+
+### Substitution
 
 Now we substitute back into the original equation: $y = \frac{1}{I(x)} \int I(x) B(x) \dee x = \frac{1}{\pm e^{-\int A(x) \dee x}} \int (\pm e^{-\int A(x) \dee x} B(x)) \dee x = \frac{1}{e^{-\int A(x) \dee x}} \int e^{-\int A(x) \dee x} B(x) \dee x$.
 
@@ -896,3 +903,69 @@ Consider $x^2 \frac{\dee y}{\dee x} + xy = 1$ for $y(x) = y(1) = 2, x > 0$:
 > So $y = \frac{1}{x} \int x \frac{1}{x^2} \dee x = \frac{\ln x + c}{x}$.  
 > Since $y(x) = y(1) = 2$, $2 = \frac{\ln 1 + c}{1}$ and $c = 2$.  
 > So $y = \frac{\ln x + 2}{x}$.  
+
+# 12/2/14
+
+Often when solving differential equations, it is not possible to get an explicit solution (where the variable is isolated on one side). Instead, it is often only possible to get an implicit solution, like $2\ln y + y^2 = x$.
+
+Midterm Review:
+
+* Techniques of Integration
+    * Review
+    * Integration by Substitution
+    * Integration by Parts
+    * Trigonometric Substitution
+    * Partial Fraction Decomposition
+* Applications
+    * Volumes of Solids
+        * Method of Shells
+        * Method of Disks
+    * Improper Integrals
+    * Differential Equations
+        * Qualitative Analysis
+        * Separable Differential Equations
+        * Linear Differential Equations
+            * Integrating Factors
+
+Sequences, Series, Taylor Polynomials
+-------------------------------------
+
+Given a function $f(x)$, we can often find a polynomial $P(x)$ that has the same first $N$ derivatives at a point $x = a$.
+
+For example, $f(x) = \sin x$ and $P(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!}$ have the same first 7 derivatives - $\frac{\dee^i f}{\dee x^i} = \frac{\dee^i P}{\dee x^i}$ for $1 \le i \le 7$ at $x = 0$.
+
+Another example is $f(x) = \frac{1}{1 - x}$ and $P(x) = 1 + x + x^2 + x^3 + \ldots + x^N$. The first $N$ derivates at $x = 0$ are always equal, and it works for any arbitrary $N$.
+
+In general, if $P(x) = \sum_{n = 0}^N \frac{f^{(n)}(a)}{n!}(x - a)^n$, then $f(x)$ and $P(x)$ share the first $N$ derivative values at $x = a$. The notation $f^{(n)}(a)$ represents $\evalat{\frac{\dee^n}{\dee x^n} f(x)}_{x = a}$.
+
+The most important use of this is approximation of very difficult functions. This allows us to use polynomials as tools to analyze many types of functions.
+
+What kinds of functions does this work for?
+
+In the limit $N \to \infty$, does $f(x) = P(x) = \lim_{N \to \infty} \sum_{n = 0}^N \frac{f^{(n)}(a)}{n!}(x - a)^n$ for all $x$? Does the limit even exist?
+
+Consider $\arctan x = \int_0^x \frac{1}{1 + t^2} \dee t$. If we assume that $\frac{1}{1 - x} = 1 + x + x^2 + x^3 + \ldots + x^N$ as shown earlier, we can substitute $t^2$ for $x$ to get.
+
+### Sequences
+
+A **sequence** is a list of numbers. We denote it with $a_0, a_1, \ldots, a_n$, or simply $a_n = f(n)$. For example, $a_n = 2n$ is equivalent to $0, 2, 4, 6, \ldots$
+
+A sequence **converges** if it has a limit as $n \to \infty$.
+
+Sequences are often easier to work with than functions. For example, the $\epsilon-\delta$ definition of limits is much simpler.
+
+The definition of the limit of a sequence is: a sequence $a_n$ has a limit $L$ if and only if for any $\epsilon > 0$, we can find $k \in \mb{Z}$ such that $\abs{a_n - L} < \epsilon$ whenever $n > k$.
+
+Formally, the limit $L$ exists if and only if $\forall \epsilon > 0, \exists k \in \mb{Z}, n > k \implies \abs{a_n - L} < \epsilon$.
+
+This is similar to the definition of limits at infinity. For example, the sequence $0.3, 0.33, 0.333, 0.3333, \ldots$ has the limit $L = \frac{1}{3}$, but $1, -1, 1, -1, \ldots$ has no limit.
+
+Use the definition of the limit to prove that the limit of $a_n = \frac{n}{1 + n}$ is 1:
+
+> ;wip
+
+If $a_n$ and $L$ lie in the domain of a continuous function $f$ and $a_n \to L$ as $n \to \infty$, then $\lim_{n \to \infty} f(a_n) = f(L)$. In other words, the limit of a sequence is the same as the limit of its corresponding function at infinity.
+
+Sequences are easy to deal with if they are explicit functions of the index $n$, but a lot of sequences are defined recursively, like $a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1$.
+
+;wip: try $\left\{a_n = 7^{\frac{1]{2} + \frac{1}{n}}\tan \frac{\pi n + 1}{4n}\right\}$ limit at infinity - \sqrt{7}

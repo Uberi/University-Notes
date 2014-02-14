@@ -982,3 +982,49 @@ There are two types of fallacies associated with relevance: distractors and gene
         * For example, "Euthanasia is wrong, because everyone has a right to life, and violating rights is wrong".
             * Euthanasia requires the patient to waive the right to life, and so the argument is irrelevant.
             * The argument misrepresents euthanasia as murder.
+    * Genetic fallacies
+        * Appealing to irrelevant aspects of the origins of a claim - conclusion suggested only from the origin of the claim rather than it's actual meaning.
+        * Faulty appeals to authority fall under this category.
+            * Appeal to popular opinion - popular opinion may disagree with what experts say, like washing burns with soap and water being beneficial (false, but backed by popular opinion).
+        * For example, "Those hamburgers are better because they are old fashioned"
+        * Ad Hominem attack
+            * When claims are dismissed based on irrelevant personal aspects of the opposing arguer.
+            * For example, "we should ignore Steve's argument because he was a part of a cult".
+            * However, some personal aspects are relevant, like a blind person not being able to give visual testimony.
+            * Tu Quoque fallacy
+                * When a claimed impropriety is dismissed due to the accusor being guilty of the same impropriety.
+                * For example, "You should not charge me to quit smoking, being a smoker yourself".
+                    * Whether the other person smokes or not has no bearing on whether people should smoke in general.
+    * Normative/moral fallacies
+        * Naturalistic fallacy
+            * When it is argued that something should be a certain way because it is a certain way.
+            * For example, "Students should not be allowed to use laptops, because they were never allowed to do so in the past".
+            * Whether something is common practice has no bearing on whether something should be common practice.
+
+# 12/2/14
+
+### Acceptability
+
+The fallacies associated with acceptability center on errors in the premises.
+
+* Begging the question/circular argument
+    * When the premises are only acceptable if the conclusion is already true.
+    * For example, "Global warming is a fad, because anyone who looks at the data rejects it".
+    * It is only acceptable that people reject it if global warming is indeed a fad.
+* False presupposition
+    * When the premise assumes something that is false.
+    * For example, "James no longer writes fiction because there he is not writing"
+    * It is not necessarily true that James had originally wrote fiction - he could have never wrote fiction.
+* Fallacies of definition
+    * When a debatable definition is used in a permise.
+    * For example, "Abortion is wrong, because all persons have a right to life" - the definition of person is a controversial one, and affects the premise's acceptability.
+    * **Persuasive definitions** disguise controversial claims in the definitions.
+    * For example, "A person is what is defined by the law as a person. Corporations are defined as persons, and all persons should have the right to vote, so corporations should be able to vote"
+    * This relies on the premise that all persons (humans) have the right to vote, while the other definition of persons, which includes corporations, may not allow the premise to apply.
+* False dichotomy/false enchotomy
+    * When a choice is presented without presenting all the possible options in a premise.
+    * For example, "You either support wiretapping or are a traitor to the nation. You do not support wiretapping, therefore you are a traitor".
+    * This ignores the possibility of someone being against wiretapping, yet not being a traitor to the nation - the first premise is false.
+    * This is an example of disjunctive syllogism (P or Q, not Q, therefore P) where the first premise is not acceptable.
+    * The dichotomy/enchotomy is more acceptable depending on the number of options presented and not presented, and the probability of those options being true.
+    * For example, "the coin will land on either heads or tails" is a relatively acceptable premise because it is highly unlikely that it will land on the edge.

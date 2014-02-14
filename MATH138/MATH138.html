@@ -89,6 +89,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 \newcommand{\spn}{\operatorname{Span}}
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
@@ -595,7 +596,7 @@ A\left(1 - \frac{N}{k}\right) + BN &amp;= 1; A = 1; B = \frac{1}{k} \\
 F &amp;= \pm e^{-c}
 1 - \frac{k}{N} &amp;= Fe^{-rt} \\
 \frac{k}{N} &amp;= Fe^{-rt} + 1 \\
-N &amp;= \frac{k}{1 + Fe^{-rt} \\
+N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 \end{align}
 \]</span> Note that all solutions tend toward <span class="math">\(k\)</span>, which we can verify by taking the limit of <span class="math">\(N\)</span> at infinity.<br />Now we will solve for <span class="math">\(F\)</span> - at <span class="math">\(t = 0\)</span>, <span class="math">\(N = N_0\)</span>. Assume <span class="math">\(t = 0\)</span>.<br />So <span class="math">\(N_0 = \frac{k}{1 + Fe^{-r0}}\)</span> and <span class="math">\(N_0 + FN_0 = k\)</span>, so <span class="math">\(F = \frac{k}{N_0} - 1\)</span>.<br />So <span class="math">\(N = \frac{k}{1 + \left(\frac{k}{N_0} - 1\right)e^{-rt}\)</span>.</p>
 </blockquote>
@@ -607,15 +608,18 @@ N &amp;= \frac{k}{1 + Fe^{-rt} \\
 <p>If <span class="math">\(A(x) = B(x)\)</span>, then the equation is separable since <span class="math">\(A(x)y + B(x) = (u + 1)A(x)\)</span>.</p>
 <p>We can solve these by splitting the equation into two separable equations and then solving each of those. This technique is developed by Euler.</p>
 <p>Note that if we multiply the equation by an arbitrary function <span class="math">\(I(x)\)</span>, we get <span class="math">\(I(x) \frac{\dee y}{\dee x} = I(x) A(x) y + I(x) B(x)\)</span>.</p>
+<h3 id="first-equation">First equation</h3>
 <p>So <span class="math">\(I(x) \frac{\dee y}{\dee x} - I(x) A(x) y = I(x) B(x)\)</span>.</p>
-<p>We want to choose a <span class="math">\(I(x)\)</span> such that <span class="math">\(\frac{\dee}{\dee x} (I(x) y) = I(x) B(x)\)</span> or <span class="math">\(I(x) y = \int I(x) B(x) \dee x\)</span>.</p>
+<p>Assume <span class="math">\(I(x)\)</span> is a function that satisfies <span class="math">\(\frac{\dee}{\dee x} (I(x) y) = I(x) B(x)\)</span> or <span class="math">\(I(x) y = \int I(x) B(x) \dee x\)</span>.</p>
 <p>So <span class="math">\(y = \frac{1}{I(x)} \left(\int I(x) B(x) \dee x\right)\)</span>.</p>
-<p>In order for <span class="math">\(\frac{\dee}{\dee x} (I(x) y) = I(x) B(x)\)</span> to be equivalent to our original equation, <span class="math">\(I(x) \frac{\dee y}{\dee x} - I(x) A(x) y = I(x) B(x)\)</span>, we need <span class="math">\(\frac{\dee}{\dee x} I(x) y = I(x) \frac{\dee y}{\dee x} - I(x) A(x) y\)</span> - the left hand sides must match.</p>
-<p>Clearly, <span class="math">\(\frac{\dee}{\dee x} I(x) y = y \frac{\dee}{\dee x} I(x) + I(x) \frac{\dee y}{\dee x}\)</span> (product rule).</p>
-<p>So we need <span class="math">\(y \frac{\dee}{\dee x} I(x) = -I(x) A(x) y\)</span>, or <span class="math">\(\frac{\dee}{\dee x} I(x) = -I(x) A(x)\)</span>.</p>
-<p>So <span class="math">\(\frac{1}{I(x)} \frac{\dee}{\dee x} I(x) = -A(x)\)</span> (separable equation) and <span class="math">\(\int \frac{1}{I(x)} \dee I(x) = -\int A(x) \dee x\)</span>.</p>
+<p>Clearly, <span class="math">\(\frac{\dee}{\dee x} I(x) y = y \frac{\dee}{\dee x} I(x) + I(x) \frac{\dee y}{\dee x} = I(x) B(x) = I(x) \frac{\dee y}{\dee x} - I(x) A(x) y\)</span></p>
+<p>So <span class="math">\(y \frac{\dee}{\dee x} I(x) + I(x) \frac{\dee y}{\dee x} = I(x) \frac{\dee y}{\dee x} - I(x) A(x) y\)</span> and <span class="math">\(y \frac{\dee}{\dee x} I(x) = -I(x) A(x) y\)</span>.</p>
+<h3 id="second-equation">Second equation</h3>
+<p>So <span class="math">\(\frac{\dee}{\dee x} I(x) = -I(x) A(x)\)</span>. This is a separable differential equation.</p>
+<p>Solving, we get <span class="math">\(\int \frac{1}{I(x)} \dee I(x) = -\int A(x) \dee x\)</span>.</p>
 <p>Clearly, <span class="math">\(\int \frac{1}{I(x)} \dee I(x) = \ln \abs{I(x)}\)</span> so <span class="math">\(\abs{I(x)} = e^{-\int A(x) \dee x}\)</span> and <span class="math">\(I(x) = \pm e^{-\int A(x) \dee x}\)</span>.</p>
-<p>Here, <span class="math">\(I(x)\)</span> is called the integrating factor.</p>
+<p>Here, <span class="math">\(I(x)\)</span> is called the <strong>integrating factor</strong>. In general, <span class="math">\(I(x) = \pm e^{-\int A(x) \dee x}\)</span>.</p>
+<h3 id="substitution">Substitution</h3>
 <p>Now we substitute back into the original equation: <span class="math">\(y = \frac{1}{I(x)} \int I(x) B(x) \dee x = \frac{1}{\pm e^{-\int A(x) \dee x}} \int (\pm e^{-\int A(x) \dee x} B(x)) \dee x = \frac{1}{e^{-\int A(x) \dee x}} \int e^{-\int A(x) \dee x} B(x) \dee x\)</span>.</p>
 <p>The <strong>general rule</strong> is that given <span class="math">\(\frac{\dee y}{\dee x} = A(x) y + B(x)\)</span>, <span class="math">\(y = \frac{1}{I(x)} \int I(x) B(x) \dee x\)</span> where <span class="math">\(I(x) = e^{-\int A(x) \dee x}\)</span>.</p>
 <p>Consider the velocity of a falling object, <span class="math">\(\frac{\dee v}{\dee t} = g - \beta v\)</span>, where <span class="math">\(g\)</span> is gravitational acceleration and <span class="math">\(\beta\)</span> is the drag coefficient:</p>
@@ -626,6 +630,60 @@ N &amp;= \frac{k}{1 + Fe^{-rt} \\
 <blockquote>
 <p>Clearly, <span class="math">\(x^2 \frac{\dee y}{\dee x} + xy = 1\)</span> is equivalent to <span class="math">\(\frac{\dee y}{\dee x} + \frac{1}{x}y = \frac{1}{x^2}\)</span> or <span class="math">\(\frac{\dee y}{\dee x} = -\frac{1}{x}y + \frac{1}{x^2}\)</span>.<br />So <span class="math">\(I(x) = e^{-\int \left(-\frac{1}{x}\right) \dee x} = e^{\ln x} = x\)</span>.<br />So <span class="math">\(y = \frac{1}{x} \int x \frac{1}{x^2} \dee x = \frac{\ln x + c}{x}\)</span>.<br />Since <span class="math">\(y(x) = y(1) = 2\)</span>, <span class="math">\(2 = \frac{\ln 1 + c}{1}\)</span> and <span class="math">\(c = 2\)</span>.<br />So <span class="math">\(y = \frac{\ln x + 2}{x}\)</span>.</p>
 </blockquote>
+<h1 id="section-16">12/2/14</h1>
+<p>Often when solving differential equations, it is not possible to get an explicit solution (where the variable is isolated on one side). Instead, it is often only possible to get an implicit solution, like <span class="math">\(2\ln y + y^2 = x\)</span>.</p>
+<p>Midterm Review:</p>
+<ul>
+<li>Techniques of Integration
+<ul>
+<li>Review</li>
+<li>Integration by Substitution</li>
+<li>Integration by Parts</li>
+<li>Trigonometric Substitution</li>
+<li>Partial Fraction Decomposition</li>
+</ul></li>
+<li>Applications
+<ul>
+<li>Volumes of Solids
+<ul>
+<li>Method of Shells</li>
+<li>Method of Disks</li>
+</ul></li>
+<li>Improper Integrals</li>
+<li>Differential Equations
+<ul>
+<li>Qualitative Analysis</li>
+<li>Separable Differential Equations</li>
+<li>Linear Differential Equations
+<ul>
+<li>Integrating Factors</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="sequences-series-taylor-polynomials">Sequences, Series, Taylor Polynomials</h2>
+<p>Given a function <span class="math">\(f(x)\)</span>, we can often find a polynomial <span class="math">\(P(x)\)</span> that has the same first <span class="math">\(N\)</span> derivatives at a point <span class="math">\(x = a\)</span>.</p>
+<p>For example, <span class="math">\(f(x) = \sin x\)</span> and <span class="math">\(P(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!}\)</span> have the same first 7 derivatives - <span class="math">\(\frac{\dee^i f}{\dee x^i} = \frac{\dee^i P}{\dee x^i}\)</span> for <span class="math">\(1 \le i \le 7\)</span> at <span class="math">\(x = 0\)</span>.</p>
+<p>Another example is <span class="math">\(f(x) = \frac{1}{1 - x}\)</span> and <span class="math">\(P(x) = 1 + x + x^2 + x^3 + \ldots + x^N\)</span>. The first <span class="math">\(N\)</span> derivates at <span class="math">\(x = 0\)</span> are always equal, and it works for any arbitrary <span class="math">\(N\)</span>.</p>
+<p>In general, if <span class="math">\(P(x) = \sum_{n = 0}^N \frac{f^{(n)}(a)}{n!}(x - a)^n\)</span>, then <span class="math">\(f(x)\)</span> and <span class="math">\(P(x)\)</span> share the first <span class="math">\(N\)</span> derivative values at <span class="math">\(x = a\)</span>. The notation <span class="math">\(f^{(n)}(a)\)</span> represents <span class="math">\(\evalat{\frac{\dee^n}{\dee x^n} f(x)}_{x = a}\)</span>.</p>
+<p>The most important use of this is approximation of very difficult functions. This allows us to use polynomials as tools to analyze many types of functions.</p>
+<p>What kinds of functions does this work for?</p>
+<p>In the limit <span class="math">\(N \to \infty\)</span>, does <span class="math">\(f(x) = P(x) = \lim_{N \to \infty} \sum_{n = 0}^N \frac{f^{(n)}(a)}{n!}(x - a)^n\)</span> for all <span class="math">\(x\)</span>? Does the limit even exist?</p>
+<p>Consider <span class="math">\(\arctan x = \int_0^x \frac{1}{1 + t^2} \dee t\)</span>. If we assume that <span class="math">\(\frac{1}{1 - x} = 1 + x + x^2 + x^3 + \ldots + x^N\)</span> as shown earlier, we can substitute <span class="math">\(t^2\)</span> for <span class="math">\(x\)</span> to get.</p>
+<h3 id="sequences">Sequences</h3>
+<p>A <strong>sequence</strong> is a list of numbers. We denote it with <span class="math">\(a_0, a_1, \ldots, a_n\)</span>, or simply <span class="math">\(a_n = f(n)\)</span>. For example, <span class="math">\(a_n = 2n\)</span> is equivalent to <span class="math">\(0, 2, 4, 6, \ldots\)</span></p>
+<p>A sequence <strong>converges</strong> if it has a limit as <span class="math">\(n \to \infty\)</span>.</p>
+<p>Sequences are often easier to work with than functions. For example, the <span class="math">\(\epsilon-\delta\)</span> definition of limits is much simpler.</p>
+<p>The definition of the limit of a sequence is: a sequence <span class="math">\(a_n\)</span> has a limit <span class="math">\(L\)</span> if and only if for any <span class="math">\(\epsilon &gt; 0\)</span>, we can find <span class="math">\(k \in \mb{Z}\)</span> such that <span class="math">\(\abs{a_n - L} &lt; \epsilon\)</span> whenever <span class="math">\(n &gt; k\)</span>.</p>
+<p>Formally, the limit <span class="math">\(L\)</span> exists if and only if <span class="math">\(\forall \epsilon &gt; 0, \exists k \in \mb{Z}, n &gt; k \implies \abs{a_n - L} &lt; \epsilon\)</span>.</p>
+<p>This is similar to the definition of limits at infinity. For example, the sequence <span class="math">\(0.3, 0.33, 0.333, 0.3333, \ldots\)</span> has the limit <span class="math">\(L = \frac{1}{3}\)</span>, but <span class="math">\(1, -1, 1, -1, \ldots\)</span> has no limit.</p>
+<p>Use the definition of the limit to prove that the limit of <span class="math">\(a_n = \frac{n}{1 + n}\)</span> is 1:</p>
+<blockquote>
+<p>;wip</p>
+</blockquote>
+<p>If <span class="math">\(a_n\)</span> and <span class="math">\(L\)</span> lie in the domain of a continuous function <span class="math">\(f\)</span> and <span class="math">\(a_n \to L\)</span> as <span class="math">\(n \to \infty\)</span>, then <span class="math">\(\lim_{n \to \infty} f(a_n) = f(L)\)</span>. In other words, the limit of a sequence is the same as the limit of its corresponding function at infinity.</p>
+<p>Sequences are easy to deal with if they are explicit functions of the index <span class="math">\(n\)</span>, but a lot of sequences are defined recursively, like <span class="math">\(a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1\)</span>.</p>
+<p>;wip: try <span class="math">\(\left\{a_n = 7^{\frac{1]{2} + \frac{1}{n}}\tan \frac{\pi n + 1}{4n}\right\}\)</span> limit at infinity - </p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

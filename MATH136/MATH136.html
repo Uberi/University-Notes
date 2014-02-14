@@ -87,6 +87,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 \newcommand{\spn}{\operatorname{Span}}
 \newcommand{\proj}{\operatorname{proj}}
 \newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
@@ -165,7 +166,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 <p>Note that any set of vectors that contains <span class="math">\(\vec{0}\)</span> is linearly dependent.</p>
 <p>Proof:</p>
 <blockquote>
-<p>Let <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> and <span class="math">\(\vec{v}_i = \vec{0}, 1 \le i \le n\)</span>.<br /><span class="math">\(\mathcal{B}\)</span> is linearly dependent if and only if <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0}, c_1 \cdot \ldots \cdot c_n = 0\)</span>.<br />Construct <span class="math">\(c_1, \ldots, c_{i - 1}, c_{i + 1}, \ldots, c_n = 0, c_i = 1\)</span>.<br />Then <span class="math">\(c_1 \cdot \ldots \cdot c_n = 0\)</span> and <span class="math">\(c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0}\)</span>.<br />Therefore, <span class="math">\(\mathcal{B}\)</span> is linearly dependent.</p>
+<p>Let <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> and <span class="math">\(\vec{v}_i = \vec{0}, 1 \le i \le n\)</span>.<br /><span class="math">\(\mathcal{B}\)</span> is linearly dependent if and only if <span class="math">\(\exists c_1, \ldots, c_n \in \mathbb{R}, c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0} \wedge \exists 1 \le i \le n, c_i \ne 0\)</span>.<br />Construct <span class="math">\(c_1, \ldots, c_{i - 1}, c_{i + 1}, \ldots, c_n = 0, c_i = 1\)</span>.<br />Then <span class="math">\(c_i \ne 0\)</span> and <span class="math">\(c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{0}\)</span>.<br />Therefore, <span class="math">\(\mathcal{B}\)</span> is linearly dependent.</p>
 </blockquote>
 <p>The vector equation of a linearly independent set is known as a simplified vector equation. A vector equation can be converted into a simplified one by removing terms where the vector can be written as a linear combination of the others.</p>
 <p>Geometrically, two vectors span a plane if they are not parallel, and three vectors span a 3D space if they do not all lie on the same plane.</p>
@@ -581,6 +582,30 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <p>Let <span class="math">\(\vec{x} \in \mb{R}^n\)</span> and <span class="math">\(\vec{e}_i\)</span> be the <span class="math">\(i\)</span>th standard basis vector. Then <span class="math">\(\vec{x} = x_1 \vec{e}_1 + \ldots + x_n \vec{e}_n\)</span>.<br />Then <span class="math">\(L(\vec{x}) = L(x_1 \vec{e}_1 + \ldots + x_n \vec{e}_n) = x_1 L(\vec{e}_1) + \ldots + x_n L(\vec{e}_n) = \begin{bmatrix} L(\vec{e}_1) &amp; \ldots &amp; L(\vec{e}_n) \end{bmatrix} \vec{x}\)</span>.<br />Let <span class="math">\(A = \begin{bmatrix} L(\vec{e}_1) &amp; \ldots &amp; L(\vec{e}_n) \end{bmatrix}\)</span>.<br />Then <span class="math">\(L(\vec{x}) = A\vec{x}\)</span>.</p>
 </blockquote>
 <p>The matrix <span class="math">\(A\)</span> in the theorem above is called the <strong>standard matrix</strong> of the linear mapping <span class="math">\(L\)</span>. It is the matrix such that <span class="math">\(L(\vec{x}) = A\vec{x}\)</span></p>
+<p>Find the standard matrix of <span class="math">\(\proj_{\vec{a}}\)</span>:</p>
+<blockquote>
+<p><span class="math">\[
+\begin{align}
+\proj_{\vec{a}} \vec{x} &amp;= \left(\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
+\proj_{\vec{a}} \vec{e}_i &amp;= \frac{\vec{a}_i}{\magn{a}} \frac{\vec{a}}{\magn{a}} = \vec{a}_i \frac{\vec{a}}{\magn{a}^2} \\
+f(\vec{x}) &amp;= A\vec{x} = \proj_{\vec{a}} \\
+A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp; \vec{a}_n \frac{\vec{a}}{\magn{a}^2} \end{bmatrix} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h1 id="section-5">11/2/14</h1>
+<h3 id="rotations">Rotations</h3>
+<p><span class="math">\(R_\theta: \mb{R}^2 \to \mb{R}^2\)</span> is a linear mapping <span class="math">\(R_\theta(x_1, x_2)\)</span> that rotates a vector by an angle <span class="math">\(\theta\)</span> counterclockwise.</p>
+<p>We can geometrically determine that the location of <span class="math">\(\vec{x}\)</span> after rotation is <span class="math">\(R_\theta(x_1, x_2) = \begin{bmatrix} x_1 \cos \theta - x_2 \sin \theta \\ x_1 \sin \theta + x_2 \cos \theta \end{bmatrix}\)</span>.</p>
+<p>Now we can convert it into a matrix mapping: <span class="math">\(R_\theta(\vec{e}_1) = x_1 \begin{bmatrix} \cos \theta \\ \sin \theta \end{bmatrix}, R_\theta(\vec{e}_2) = x_2 \begin{bmatrix} -\sin \theta \\ \cos \theta \end{bmatrix}\)</span>.</p>
+<p>So <span class="math">\(R_\theta(\vec{x}) = \begin{bmatrix} \cos \theta &amp; -\sin \theta \\ \sin \theta &amp; \cos \theta \end{bmatrix}\vec{x}\)</span>.</p>
+<p><span class="math">\(\begin{bmatrix} \cos \theta &amp; -\sin \theta \\ \sin \theta &amp; \cos \theta \end{bmatrix}\)</span> is called a <strong>rotation matrix</strong>.</p>
+<h3 id="reflections">Reflections</h3>
+<p><span class="math">\(\refl_P: \mb{R}^n \to \mb{R}^n\)</span> is a linear mapping <span class="math">\(\refl_P(\vec{x})\)</span> that reflects <span class="math">\(\vec{x}\)</span> about the hyperplane <span class="math">\(P\)</span>.</p>
+<p>We geometrically determine that the relection of a vector about a hyperplane is the projection of the vector on the hyperplane minus the perpendicular.</p>
+<p>In other words, <span class="math">\(\refl_P \vec{x} = \proj_P \vec{x} - \perp_P \vec{x} = (\vec{x} - \perp_P \vec{x}) - \perp_P \vec{x} = \vec{x} - 2\perp_P \vec{x} = \vec{x} - 2\proj_{\vec{n}} \vec{x}\)</span>, where <span class="math">\(\vec{n}\)</span> is the normal of the hyperplane.</p>
+<p>Now we find the standard matrix of this operation. Let <span class="math">\(\vec{n}\)</span> be the normal of the plane. Then <span class="math">\(\refl_P \vec{e}_i = \vec{e}_i - 2\proj_{\vec{n}} \vec{e}_i\)</span>.</p>
+<p>So <span class="math">\(\refl_P \vec{x} = \begin{bmatrix} \vec{e}_1 - 2\proj_{\vec{n}} \vec{e}_1 &amp; \ldots &amp; \vec{e}_n - 2\proj_{\vec{n}} \vec{e}_n \end{bmatrix} \vec{x}\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
