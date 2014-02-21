@@ -84,6 +84,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -93,6 +94,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
 \]</span></p>
 <h1 id="section">6/1/14</h1>
 <p>Assignments are due every Friday at 3:30pm. They are posted on LEARN.</p>
@@ -168,7 +170,14 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>When we use integration by parts, we differentiate one factor, and integrate the other. Then, we can apply the integration by parts formula and obtain a possibly simpler version.</p>
 <p>Simplify <span class="math">\(\int_0^1 x e^{-x} \dee x\)</span>:</p>
 <blockquote>
-<p>;wip</p>
+<p><span class="math">\[
+\begin{align}
+\int_0^1 x e^{-x} \dee x &amp;= \int_0^1 x \frac{\dee}{\dee x} (-e^{-x}) \dee x \\
+&amp;= \evalat{x (-e^{-x})}_0^1 - \int_0^1 \left(\frac{\dee}{\dee x} x\right) (-e^{-x}) \dee x \\
+&amp;= \evalat{x (-e^{-x})}_0^1 + \int_0^1 e^{-x} \dee x \\
+&amp;= -\frac{2}{e} \\
+\end{align}
+\]</span></p>
 </blockquote>
 <p>Simplify <span class="math">\(\int_0^1 x^n (\ln x)^n \dee x\)</span>:</p>
 <blockquote>
@@ -233,7 +242,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 </ul>
 <p>Consider <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x\)</span>:</p>
 <blockquote>
-<p>We can draw a triangle with hypotenuse <span class="math">\(\sqrt{x^2 + 4}\)</span>, opposite side <span class="math">\(x\)</span>, and adjacent side <span class="math">\(2\)</span> representing this value.<br />Let <span class="math">\(\theta\)</span> represent the angle between the adjacent side and the hypotenuse. By the Pythagorean theorem. Then <span class="math">\(x = 2 \tan \theta\)</span>. Then <span class="math">\(\dee x = 2 \sec^2 \theta \dee \theta\)</span>.<br />Clearly, <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = \int \frac{1}{4 \tan^2 \theta \sqrt{4 \tan^2 \theta + 4}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta \sqrt{4 (\tan^2 \theta + 1)}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta 2 \sec \theta}} 2 \sec^2 \theta \dee \theta = \frac{1}{4} \int \frac{\sec \theta}{\tan^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta\)</span>.<br />Let <span class="math">\(u = \sin \theta\)</span>. Then <span class="math">\(\dee x = \frac{1}{\cos \theta} \dee \theta\)</span>.<br />So <span class="math">\(\frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c\)</span>.<br />Since <span class="math">\(x = 2 \tan \theta\)</span>, <span class="math">\(\theta = \arctan \frac{x}{2}\)</span>.<br />;wip: rewrite in terms of x using the triangle again So <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = -\frac{1}{4} \frac{\sqrt{4 + x^2}}{x} + c\)</span>.</p>
+<p>We can draw a triangle with hypotenuse <span class="math">\(\sqrt{x^2 + 4}\)</span>, opposite side <span class="math">\(x\)</span>, and adjacent side <span class="math">\(2\)</span> representing this value.<br />Let <span class="math">\(\theta\)</span> represent the angle between the adjacent side and the hypotenuse. By the Pythagorean theorem. Then <span class="math">\(x = 2 \tan \theta\)</span>. Then <span class="math">\(\dee x = 2 \sec^2 \theta \dee \theta\)</span>.<br />Clearly, <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = \int \frac{1}{4 \tan^2 \theta \sqrt{4 \tan^2 \theta + 4}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta \sqrt{4 (\tan^2 \theta + 1)}} 2 \sec^2 \theta \dee \theta = \int \frac{1}{4 \tan^2 \theta 2 \sec \theta} 2 \sec^2 \theta \dee \theta = \frac{1}{4} \int \frac{\sec \theta}{\tan^2 \theta} \dee \theta = \frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta} \dee \theta\)</span>.<br />Let <span class="math">\(u = \sin \theta\)</span>. Then <span class="math">\(\dee x = \frac{1}{\cos \theta} \dee \theta\)</span>.<br />So <span class="math">\(\frac{1}{4} \int \frac{\cos \theta}{\sin^2 \theta} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c\)</span>.<br />Since <span class="math">\(x = 2 \tan \theta\)</span>, <span class="math">\(\theta = \arctan \frac{x}{2}\)</span>.<br />;wip: rewrite in terms of x using the triangle again So <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = -\frac{1}{4} \frac{\sqrt{4 + x^2}}{x} + c\)</span>.</p>
 </blockquote>
 <p>This works because <span class="math">\(\cos \theta\)</span> is always positive or 0 in the domain we are considering.</p>
 <p>;wip: improve this day's notes so they actually make sense</p>
@@ -306,8 +315,7 @@ x^2 + 5x + 6 | x^3 + 4x^2 + 2x - 5
 <p>Recall that a single-variable integral can be geometrically interpreted as the area underneath the curve.</p>
 <p>In the Riemann integral, that would be represented as <span class="math">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n \delta x_i f(x_i)\)</span>. Here, <span class="math">\(\delta x_i\)</span> is the base, and <span class="math">\(f(x_i)\)</span> is the height, and they form a rectangle.</p>
 <p>The same idea can be applied to 3D, for the volume under a surface. We want to find the area under <span class="math">\(f(x, y)\)</span>.</p>
-<p>In the Riemann integral, that would be represented as <span class="math">\(\int \int f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \delta x_i \delta y_i f(x_i, y_i)\)</span>. Here, <span class="math">\(\delta x_i \delta y_i\)</span> is the base, and <span class="math">\(f(x_i, y_i)\)</span>, and they form a rectangle.</p>
-<p>;wip: use double integration symbol above</p>
+<p>In the Riemann integral, that would be represented as <span class="math">\(\iint f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \delta x_i \delta y_i f(x_i, y_i)\)</span>. Here, <span class="math">\(\delta x_i \delta y_i\)</span> is the base, and <span class="math">\(f(x_i, y_i)\)</span>, and they form a rectangle.</p>
 <p>In general, the volume of an arbitrary solid requires a multi-variable/multi-dimensional integral (a calculus III topic). However, there are cases where symmetry allows us to use a single variable integral.</p>
 <p>Main axes:</p>
 <pre><code>   y
@@ -429,7 +437,7 @@ z</code></pre>
 <p>An example of a mathematical representation of conservation principles is a mixing problem.</p>
 <p>A tank holds 80L of water at time <span class="math">\(t = 0\)</span>. A salt solution of 0.25 kg/L flows into the tank at 8L/min. Liquid drains at a rate of 12L/min from the tank. Find a differential equation for the mass of salt <span class="math">\(x(t)\)</span> in kg for <span class="math">\(t &gt; 0\)</span>, where <span class="math">\(t\)</span> is measures in seconds:</p>
 <blockquote>
-<p>We assume the salt solution instantly mixes with the water.<br />We want to find <span class="math">\(\frac{\dee}{\dee t} x(t)\)</span>, which is <span class="math">\(\text{source} - \text{sink}\)</span>.<br />The source is <span class="math">\(\text{salt concentration} \cdot {inflow rate} = 0.25 \text{kg/L} \cdot 8 \text{L/min} = 2 \text{kg/min}\)</span>.<br />Clearly, <span class="math">\(\frac{\dee}{\dee x} \text{liquid level} = \text{inflow rate} - \text{outflow rate} = 8 \text{L/min} - 12 \text{L/min} = -4 \text{L/min}\)</span>.<br />So the liquid level is <span class="math">\(80 + \int \frac{\dee}{\dee x} \text{liquid level} \dee t = 80 - 4t\)</span>.<br />Clearly, <span class="math">\(\text{salt concentration} = \frac{\text{mass of salt}}{\text{volume of tank}} = \frac{x(t)}{80 - 4t}\)</span>.<br />The sink is <span class="math">\(\text{salt concentration} \cdot \text{outflow rate} = \frac{x(t)}{80 - 4t} \cdot 12 \text{kg/L} = \frac{3x(t)}{20 - t}\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x(t) = 2 - \frac{3x(t)}{20 - t}\)</span>.<br />Note that the tank is empty when <span class="math">\(t = 20\)</span>, when the outflow rate is undefined.</p>
+<p>We assume the salt solution instantly mixes with the water.<br />We want to find <span class="math">\(\frac{\dee}{\dee t} x(t)\)</span>, which is <span class="math">\(\text{source} - \text{sink}\)</span>.<br />The source is <span class="math">\(\text{salt concentration} \cdot \text{inflow rate} = 0.25 \text{kg/L} \cdot 8 \text{L/min} = 2 \text{kg/min}\)</span>.<br />Clearly, <span class="math">\(\frac{\dee}{\dee x} \text{liquid level} = \text{inflow rate} - \text{outflow rate} = 8 \text{L/min} - 12 \text{L/min} = -4 \text{L/min}\)</span>.<br />So the liquid level is <span class="math">\(80 + \int \frac{\dee}{\dee x} \text{liquid level} \dee t = 80 - 4t\)</span>.<br />Clearly, <span class="math">\(\text{salt concentration} = \frac{\text{mass of salt}}{\text{volume of tank}} = \frac{x(t)}{80 - 4t}\)</span>.<br />The sink is <span class="math">\(\text{salt concentration} \cdot \text{outflow rate} = \frac{x(t)}{80 - 4t} \cdot 12 \text{kg/L} = \frac{3x(t)}{20 - t}\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x(t) = 2 - \frac{3x(t)}{20 - t}\)</span>.<br />Note that the tank is empty when <span class="math">\(t = 20\)</span>, when the outflow rate is undefined.</p>
 </blockquote>
 <p>There are many things we can say about the function even without solving it. These are called <strong>qualitiative analyses</strong>.</p>
 <p>Suppose we have <span class="math">\(\frac{\dee y}{\dee x} = f(x, y)\)</span>. Note that the left side is equal to the slope of the tangent line, and the right side is an expression for the slope of the tangent line for any point <span class="math">\((x, y)\)</span>.</p>
@@ -593,12 +601,12 @@ A\left(1 - \frac{N}{k}\right) + BN &amp;= 1; A = 1; B = \frac{1}{k} \\
 \ln \abs{\frac{N - k}{N}} &amp;= -rt - c \\
 \abs{\frac{N - k}{N}} &amp;= e^{-rt - c} \\
 \frac{N - k}{N} &amp;= \pm e^{-rt} e^{-c} \\
-F &amp;= \pm e^{-c}
+F &amp;= \pm e^{-c} \\
 1 - \frac{k}{N} &amp;= Fe^{-rt} \\
 \frac{k}{N} &amp;= Fe^{-rt} + 1 \\
 N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 \end{align}
-\]</span> Note that all solutions tend toward <span class="math">\(k\)</span>, which we can verify by taking the limit of <span class="math">\(N\)</span> at infinity.<br />Now we will solve for <span class="math">\(F\)</span> - at <span class="math">\(t = 0\)</span>, <span class="math">\(N = N_0\)</span>. Assume <span class="math">\(t = 0\)</span>.<br />So <span class="math">\(N_0 = \frac{k}{1 + Fe^{-r0}}\)</span> and <span class="math">\(N_0 + FN_0 = k\)</span>, so <span class="math">\(F = \frac{k}{N_0} - 1\)</span>.<br />So <span class="math">\(N = \frac{k}{1 + \left(\frac{k}{N_0} - 1\right)e^{-rt}\)</span>.</p>
+\]</span> Note that all solutions tend toward <span class="math">\(k\)</span>, which we can verify by taking the limit of <span class="math">\(N\)</span> at infinity.<br />Now we will solve for <span class="math">\(F\)</span> - at <span class="math">\(t = 0\)</span>, <span class="math">\(N = N_0\)</span>. Assume <span class="math">\(t = 0\)</span>.<br />So <span class="math">\(N_0 = \frac{k}{1 + Fe^{-r0}}\)</span> and <span class="math">\(N_0 + FN_0 = k\)</span>, so <span class="math">\(F = \frac{k}{N_0} - 1\)</span>.<br />So <span class="math">\(N = \frac{k}{1 + \left(\frac{k}{N_0} - 1\right)e^{-rt}}\)</span>.</p>
 </blockquote>
 <h1 id="section-15">10/2/14</h1>
 <p>Differential equations appear quite often in equations for time based physical phenomena.</p>
@@ -670,8 +678,8 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>What kinds of functions does this work for?</p>
 <p>In the limit <span class="math">\(N \to \infty\)</span>, does <span class="math">\(f(x) = P(x) = \lim_{N \to \infty} \sum_{n = 0}^N \frac{f^{(n)}(a)}{n!}(x - a)^n\)</span> for all <span class="math">\(x\)</span>? Does the limit even exist?</p>
 <p>Consider <span class="math">\(\arctan x = \int_0^x \frac{1}{1 + t^2} \dee t\)</span>. If we assume that <span class="math">\(\frac{1}{1 - x} = 1 + x + x^2 + x^3 + \ldots + x^N\)</span> as shown earlier, we can substitute <span class="math">\(t^2\)</span> for <span class="math">\(x\)</span> to get.</p>
-<h3 id="sequences">Sequences</h3>
-<p>A <strong>sequence</strong> is a list of numbers. We denote it with <span class="math">\(a_0, a_1, \ldots, a_n\)</span>, or simply <span class="math">\(a_n = f(n)\)</span>. For example, <span class="math">\(a_n = 2n\)</span> is equivalent to <span class="math">\(0, 2, 4, 6, \ldots\)</span></p>
+<h2 id="sequences">Sequences</h2>
+<p>A <strong>sequence</strong> is an ordered list of numbers. We denote it with <span class="math">\(a_0, a_1, \ldots, a_n\)</span>, or simply <span class="math">\(a_n = f(n)\)</span>. For example, <span class="math">\(a_n = 2n\)</span> is equivalent to <span class="math">\(0, 2, 4, 6, \ldots\)</span></p>
 <p>A sequence <strong>converges</strong> if it has a limit as <span class="math">\(n \to \infty\)</span>.</p>
 <p>Sequences are often easier to work with than functions. For example, the <span class="math">\(\epsilon-\delta\)</span> definition of limits is much simpler.</p>
 <p>The definition of the limit of a sequence is: a sequence <span class="math">\(a_n\)</span> has a limit <span class="math">\(L\)</span> if and only if for any <span class="math">\(\epsilon &gt; 0\)</span>, we can find <span class="math">\(k \in \mb{Z}\)</span> such that <span class="math">\(\abs{a_n - L} &lt; \epsilon\)</span> whenever <span class="math">\(n &gt; k\)</span>.</p>
@@ -683,7 +691,34 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 </blockquote>
 <p>If <span class="math">\(a_n\)</span> and <span class="math">\(L\)</span> lie in the domain of a continuous function <span class="math">\(f\)</span> and <span class="math">\(a_n \to L\)</span> as <span class="math">\(n \to \infty\)</span>, then <span class="math">\(\lim_{n \to \infty} f(a_n) = f(L)\)</span>. In other words, the limit of a sequence is the same as the limit of its corresponding function at infinity.</p>
 <p>Sequences are easy to deal with if they are explicit functions of the index <span class="math">\(n\)</span>, but a lot of sequences are defined recursively, like <span class="math">\(a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1\)</span>.</p>
-<p>;wip: try <span class="math">\(\left\{a_n = 7^{\frac{1]{2} + \frac{1}{n}}\tan \frac{\pi n + 1}{4n}\right\}\)</span> limit at infinity - </p>
+<p>;wip: try <span class="math">\(a_n = 7^{\frac{1}{2} + \frac{1}{n}}\tan \frac{\pi n + 1}{4n}\)</span> limit at infinity - </p>
+<h1 id="section-17">14/2/14</h1>
+<p>It is in fact easy to determine if any sequence converges or diverges.</p>
+<p>Sequences that are defined only in terms of the current index are easy to find the limit of. For example, <span class="math">\(a_n = \frac{n}{n + 1}\)</span> converges to 1 at infinity.</p>
+<p>However, sequences defined recursively are not so straightforward. For example, <span class="math">\(a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1\)</span>. This is an <strong>implicitly defined sequence</strong>.</p>
+<h3 id="monotone-convergence-theorem">Monotone Convergence Theorem</h3>
+<p>If the terms of a sequence are <strong>bounded</strong>, and the sequence is <strong>monotone</strong>, then the sequence converges.</p>
+<p>There are two possible cases:</p>
+<ul>
+<li>If the sequence has an upper bound <span class="math">\(a_n \le b\)</span> and is monotonially increasing, then it converges.</li>
+<li>If the sequence has a lower bound <span class="math">\(a_n \ge b\)</span> and is monotonically decreasing, then it converges.</li>
+</ul>
+<p><strong>Boundedness</strong> means that every element in the sequence is between a lower and upper bound. Formally, a sequence <span class="math">\(a_n\)</span> is bounded if and only if <span class="math">\(\exists u, \exists v, \forall n, u \le a_n \le v\)</span>.</p>
+<p>We often prove boundedness by comparing to a known sequence (like <span class="math">\(\frac{1}{n!} \le \frac{1}{2^{n - 1}}\)</span>) or by using induction.</p>
+<p><strong>Monotonicity</strong> means that once we start going up, we never go down again, and once we start going down, we never go up again. Basically, <span class="math">\(a_0 \le a_1 \le a_2 \le \ldots\)</span>, or <span class="math">\(a_0 \ge a_1 \ge a_2 \ge \ldots\)</span>.</p>
+<p>Formally, a sequence <span class="math">\(a_n\)</span> is monotone if and only if <span class="math">\((\forall u, \forall v, u &lt; v \implies a_u &lt; a_v) \vee (\forall u, \forall v, u &lt; v \implies a_u &gt; a_v)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>It is intuitively obvious that if a value is always increasing, and cannot exceed a value, then it must converge to some value.<br />Without loss of generality, assume that <span class="math">\(a_n\)</span> is increasing and bounded by <span class="math">\(a_n \le b\)</span>.<br />Let <span class="math">\(p\)</span> be the smallest possible upper bound on <span class="math">\(a_n\)</span>.<br />As an aside, <span class="math">\(p\)</span> is the limit of the sequence - any number less than this is not an upper bound, and any number greater than this can be smaller while still being an upper bound.<br />Let <span class="math">\(\epsilon &gt; 0\)</span>.<br />Clearly, <span class="math">\(p - \epsilon &lt; p\)</span>, so <span class="math">\(\exists k, p - \epsilon &lt; a_k\)</span>, since any value less than the .<br />Assume <span class="math">\(n &gt; k\)</span>. Clearly, <span class="math">\(a_k \le a_n\)</span> (since the sequence is monotonically increasing).<br />Clearly, <span class="math">\(a_n \le p &lt; p + \epsilon\)</span>.<br />So <span class="math">\(p - \epsilon &lt; a_n &lt; p + \epsilon\)</span> and <span class="math">\(-\epsilon &lt; a_n - p &lt; \epsilon\)</span>.<br />So <span class="math">\(\abs{a_n - p} &lt; \epsilon\)</span>, and by the definition of the limit, <span class="math">\(p\)</span> is the limit and the sequence converges.</p>
+</blockquote>
+<p>Does <span class="math">\(a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1\)</span> converge?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\frac{1}{n!}\)</span> is always positive, so <span class="math">\(a_{n + 1} = a_n + \frac{1}{n!}\)</span> is monotonically increasing.<br />Clearly, <span class="math">\(n! \le 2^{n - 1}\)</span>, since <span class="math">\(1 \cdot \ldots \cdot k \le 2 \cdot \ldots \cdots 2 \text{ (} k - 1 \text{ times)}\)</span>.<br />So <span class="math">\(\frac{1}{n!} \le \frac{1}{2^{k - 1}}\)</span> and <span class="math">\(a_n \le 1 + 1 + \frac{1}{2} + \frac{1}{2^2} + \ldots + \frac{1}{2^{n - 1}}\)</span>.<br />Clearly, this is a monotonically increasing geometric progression, and so we can determine that <span class="math">\(1 + 1 + \frac{1}{2} + \frac{1}{2^2} + \ldots + \frac{1}{2^{n - 1}} = \frac{1 - \left(\frac{1}{2}\right)^n}{1 - \frac{1}{2}}\)</span>.<br />Clearly, <span class="math">\(\lim_{n \to \infty} \frac{1 - \left(\frac{1}{2}\right)^n}{1 - \frac{1}{2}} = \frac{1}{\frac{1}{2}} = 2\)</span>.<br />So <span class="math">\(a_n \le \frac{1}{2^{k - 1}} \le 2\)</span>, and by the convergence theorem, the sequence converges.<br />As an aside, it converges to <span class="math">\(e\)</span>.</p>
+</blockquote>
+<p>Does <span class="math">\(a_1 = 1, a_{n + 1} = \sqrt{3 + 2a_n}\)</span> converge?</p>
+<blockquote>
+<p>The first few elements of the sequence are <span class="math">\(1, 2.23606797749979, 2.73352079834772, 2.90981813807933, 2.96978724425819\)</span>.<br />Clearly, <span class="math">\(a_{n + 1}\)</span> is equivalent to <span class="math">\(\sqrt{3 + 2a_n} \ge a_n\)</span>, which is equivalent to <span class="math">\(a_n^2 - 2a_n - 3 \le 0\)</span>, or <span class="math">\(-1 \le a_n \le 3\)</span>.<br />So <span class="math">\(a_n\)</span> is monotonically increasing over <span class="math">\([-1, 3]\)</span>.<br />Assume <span class="math">\(a_n \le 3\)</span>. Then <span class="math">\(3 + 2a_n \le 9\)</span> and <span class="math">\(\sqrt{3 + 2a_n} \le 3\)</span>. So <span class="math">\(a_{n + 1} \le 3\)</span>.<br />So by induction, <span class="math">\(a_n\)</span> has an upper bound of 3.<br />So by the convergence theorem, the sequence converges.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -82,6 +82,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -91,6 +92,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
 \]</span></p>
 <h1 id="im-going-to-stop-procrastinating-this-week-honest">13/1/14 (I'm going to stop procrastinating this week, honest!)</h1>
 <h2 id="notation">Notation</h2>
@@ -135,6 +137,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 <p>Because these Euclidean spaces are closed under addition and scalar multiplication, they are closed under linear combinations - all linear combinations of vectors in <span class="math">\(\mb{R}^n\)</span> are also in <span class="math">\(\mb{R}^n\)</span>.</p>
 <h2 id="span">Span</h2>
 <p>The <strong>span</strong> of a set of vectors <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> is the set of all linear combinations of the vectors in the set.</p>
+<p>The span of an empty set is the set containing only the zero vector - <span class="math">\(\spn \emptyset = \set{\vec{0}}\)</span>.</p>
 <p>In other words, <span class="math">\(\spn \mathcal{B} = \spn \set{\vec{v}_1, \ldots, \vec{v}_k} = \set{c_1 v_1 + \ldots + c_n v_n \middle| c_1, \ldots, c_n \in \mathbb{R}}\)</span>.</p>
 <p>A span is always a subset of the space it is in. In other words, <span class="math">\(\spn \mathcal{B} \subseteq \mb{R}^n\)</span>.</p>
 <p>A span is just a set. Therefore, we can say that a set <span class="math">\(\mathcal{B}\)</span> <strong>spans</strong> another set <span class="math">\(\mathcal{C}\)</span> if and only if <span class="math">\(\mathcal{C}\)</span> is exactly the set of all linear combinations of the vectors in <span class="math">\(\mathcal{B}\)</span>.</p>
@@ -147,7 +150,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 <p>Assume <span class="math">\(\vec{v}_{k + 1}\)</span> can be written as a linear combination of <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k\)</span>.<br />So <span class="math">\(\exists c_1, \ldots, c_k \in \mathbb{R}, \vec{v}_{k + 1} = c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k\)</span>.<br />We want to show that <span class="math">\(\spn \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} \subseteq \spn \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span>.<br />Let <span class="math">\(\vec{x}\)</span> be an arbitrary element of <span class="math">\(\spn \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}\)</span>.<br />So <span class="math">\(\exists d_1, \ldots, d_{k + 1} \in \mathbb{R}, \vec{x} = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} \vec{v}_{k + 1}\)</span>.<br />So <span class="math">\(\exists d_1, \ldots, d_{k + 1} \in \mathbb{R}, \vec{x} = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} (c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k) = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} c_1 \vec{v}_1 + \ldots + d_{k + 1} c_k \vec{v}_k = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k + d_{k + 1} c_1 \vec{v}_1 + \ldots + d_{k + 1} c_k \vec{v}_k = (d_1 + d_{k + 1} c_1) \vec{v}_1 + \ldots + (d_k + d_{k + 1} c_k) \vec{v}_k\)</span>.<br />Clearly, <span class="math">\(x \in \spn \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span>.<br />Clearly, <span class="math">\(\spn \set{\vec{v}_1, \ldots, \vec{v}_k} \subseteq \spn \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}\)</span>.<br />Therefore, <span class="math">\(\spn \set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}} = \spn \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span>.</p>
 </blockquote>
 <p>Consider <span class="math">\(\spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}}\)</span>. Clearly, <span class="math">\(\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}\)</span>.</p>
-<p>Clearly, <span class="math">\(\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}\)</span>, so <span class="math">\(\spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}} = \spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}\)</span> represents a line in 3D.</p>
+<p>Clearly, <span class="math">\(\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}\)</span>, so <span class="math">\(\spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}} = \spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}\)</span> represents a line in 3D.</p>
 <p>The span of the zero vector is itself. The span of a linearly independent vector is a line. The span of two linearly independent vectors is a plane. The span of 3 linearly independent vectors is a 3D space. The span of 4 linearly independent vectors is a 4D space, and so on.</p>
 <h3 id="linear-independence">Linear Independence</h3>
 <p>When we say <span class="math">\(\vec{v}_{k + 1}\)</span> can be written as a linear combination of <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k\)</span>, we can also write <span class="math">\(\vec{v}_{k + 1} \in \spn \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span>.</p>
@@ -214,7 +217,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 </blockquote>
 <p>We find a basis of a subspace by finding the general form of a vector in the subspace, using this to find a spanning set for <span class="math">\(S\)</span>, and then reducing it into a linearly independent set.</p>
 <h3 id="theorem-1.2.2">Theorem 1.2.2</h3>
-<p>If <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k \in \mb{R}^n\)</span>, then <span class="math">\(\mb{S} = \span \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> is a subspace of <span class="math">\(\mb{R}^n\)</span>.</p>
+<p>If <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k \in \mb{R}^n\)</span>, then <span class="math">\(\mb{S} = \spn \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> is a subspace of <span class="math">\(\mb{R}^n\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
 <p>Clearly, the set is a subset of <span class="math">\(\mb{R}^n\)</span>.<br />Clearly, <span class="math">\(\vec{0} \in \mb{S}\)</span>, since <span class="math">\(\vec{0} = 0\vec{v}_1 + \ldots + 0\vec{v}_k\)</span>.<br />Let <span class="math">\(\vec{a}, \vec{b} \in \mb{S}, w \in \mb{R}\)</span>.<br />Then <span class="math">\(\exists c_1, \ldots, c_k \in \mb{R}, \vec{a} = c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k\)</span> and <span class="math">\(\exists d_1, \ldots, d_k \in \mb{R}, \vec{b} = d_1 \vec{v}_1 + \ldots + d_k \vec{v}_k\)</span>.<br />So <span class="math">\(\vec{a} + \vec{b} = (c_1 + d_1) \vec{v}_1 + \ldots + (c_k + d_k) \vec{v}_k\)</span>, and <span class="math">\(\vec{a} + \vec{b} \in \mb{S}\)</span>.<br />So <span class="math">\(w\vec{a} = wc_1 \vec{v}_1 + \ldots + wc_k \vec{v}_k\)</span> and <span class="math">\(w\vec{a} \in \mb{S}\)</span>.<br />So <span class="math">\(\mb{S}\)</span> is a subspace of <span class="math">\(\mb{R}^n\)</span>.</p>
@@ -336,18 +339,18 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <blockquote>
 <p>;wip: something about proving this in chapter 4</p>
 </blockquote>
-<p>Row reduce <span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 2 &amp; 4 &amp; 1 &amp; -16 \\ 1 &amp; 2 &amp; 1 &amp; 9 \end{array}\)</span>:</p>
+<p>Row reduce <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 2 &amp; 4 &amp; 1 &amp; -16 \\ 1 &amp; 2 &amp; 1 &amp; 9 \end{array}\right]\)</span>:</p>
 <blockquote>
-<p><span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 2 &amp; 4 &amp; 1 &amp; -16 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ \end{array}\)</span> is row equivalent to <span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ \end{array}\)</span> via <span class="math">\(R_2 + (-2)R_3\)</span>.<br /><span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ \end{array}\)</span> is row equivalent to <span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ \end{array}\)</span> via <span class="math">\(R_2 \leftrightarrow R_3\)</span>.<br /><span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ \end{array}\)</span> is row equivalent to <span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\)</span> via <span class="math">\((-1)R_3\)</span>.<br /><span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\)</span> is row equivalent to <span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 1 &amp; 16 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\)</span> via <span class="math">\(R_2 - R_1\)</span>.<br /><span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 1 &amp; 16 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\)</span> is row equivalent to <span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 0 &amp; -18 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\)</span> via <span class="math">\(R_2 - R_3\)</span>.<br /><span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 0 &amp; -18 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\)</span> is row equivalent to <span class="math">\(\begin{array}{ccc|c} 1 &amp; 0 &amp; 0 &amp; 11 \\ 0 &amp; 1 &amp; 0 &amp; -18 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\)</span> via <span class="math">\(R_2 - R_3\)</span>.</p>
+<p><span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 2 &amp; 4 &amp; 1 &amp; -16 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ \end{array}\right]\)</span> is row equivalent to <span class="math">\(\left[\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 + (-2)R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 \leftrightarrow R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\((-1)R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 1 &amp; 16 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 - R_1\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 0 &amp; -18 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 - R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 0 &amp; 0 &amp; 11 \\ 0 &amp; 1 &amp; 0 &amp; -18 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 - R_3\)</span>.<br />This is in RREF.</p>
 </blockquote>
 <p>Note the general technique used in reducing the matrix. First, we want to obtain a triangle of 0 elements with leading ones diagonally rightwards, by going from top to bottom. Then, we make sure each leading one is the only non-zero element in its column by subtracting from rows below from bottom to top.</p>
 <p>This technique is basically modifying the matrix until all the properties except for property 4. Then property 4 can be solved for relatively easily.</p>
 <h3 id="solution-set">Solution Set</h3>
-<p>A matrix is inconsistent if and only if its RREF contains a row of the form <span class="math">\(\begin{array}{ccc|c} 0 &amp; \ldots &amp; 0 &amp; 1 \end{array}\)</span> - no possible values can satisfy this equation (<span class="math">\(0 = 1\)</span>), so there are no solutions.</p>
+<p>A matrix is inconsistent if and only if its RREF contains a row of the form <span class="math">\(\left[\begin{array}{ccc|c} 0 &amp; \ldots &amp; 0 &amp; 1 \end{array}\right]\)</span> - no possible values can satisfy this equation (<span class="math">\(0 = 1\)</span>), so there are no solutions.</p>
 <p>Recall that if consistent, a system of linear equations has either one or infinitely many solutions.</p>
 <p>Solve <span class="math">\(\begin{cases} x_1 + x_2 + x_3 &amp;= 4 \\ x_2 + x_3 &amp;= 3 \end{cases}\)</span>:</p>
 <blockquote>
-<p>The augmented matrix is <span class="math">\(\begin{array}{ccc|c} 1 &amp; 1 &amp; 1 &amp; 4 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{array}\)</span>.<br />The matrix in RREF is <span class="math">\(\begin{array}{ccc|c} 1 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{array}\)</span>.<br />Note that this corresponds to <span class="math">\(x_1 = 1\)</span> and <span class="math">\(x_2 + x_3 = 3\)</span>, and that the second equation has infinitely many solutions.<br />We can find the general solution by writing everything in terms of the fewest variables possible.<br />Clearly, <span class="math">\(x_3 = 3 - x_2\)</span>, so the solution is <span class="math">\(\vec{x} = \begin{bmatrix} 1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 1 \\ x_2 \\ 3 - x_2 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix} + x_2\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}\)</span>.<br />We can denote this as <span class="math">\(\vec{x} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix} + s\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}, s \in \mb{R}\)</span>, by assigning <span class="math">\(x_2\)</span> to the parameter <span class="math">\(s\)</span>.<br />This represents a line at the intersection of two planes in <span class="math">\(\mb{R}^3\)</span>.</p>
+<p>The augmented matrix is <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 1 &amp; 4 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{array}\right]\)</span>.<br />The matrix in RREF is <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{array}\right]\)</span>.<br />Note that this corresponds to <span class="math">\(x_1 = 1\)</span> and <span class="math">\(x_2 + x_3 = 3\)</span>, and that the second equation has infinitely many solutions.<br />We can find the general solution by writing everything in terms of the fewest variables possible.<br />Clearly, <span class="math">\(x_3 = 3 - x_2\)</span>, so the solution is <span class="math">\(\vec{x} = \begin{bmatrix} 1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 1 \\ x_2 \\ 3 - x_2 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix} + x_2\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}\)</span>.<br />We can denote this as <span class="math">\(\vec{x} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix} + s\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}, s \in \mb{R}\)</span>, by assigning <span class="math">\(x_2\)</span> to the parameter <span class="math">\(s\)</span>.<br />This represents a line at the intersection of two planes in <span class="math">\(\mb{R}^3\)</span>.</p>
 </blockquote>
 <p>The solution set is, geometrically, either a point, a line, a plane, a hyperplane, or empty (no solutions). If there is only one solution, the solution set is a point.</p>
 <p>If a <strong>column</strong> in a coefficient matrix has <strong>no leading ones</strong>, the corresponding variable is called a <strong>free variable</strong>. A free variable is a variable that can be any value. Free variables exists if and only if there are an infinite number of solutions.</p>
@@ -426,8 +429,8 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <li>Closure under addition: <span class="math">\(A + B \in M_{m \times n}\)</span>.</li>
 <li>Associativity: <span class="math">\((A + B) + C = A + (B + C)\)</span></li>
 <li>Commutativity: <span class="math">\(A + B = B + A\)</span></li>
-<li>Additive identity: <span class="math">\(\exists 0_{m, n} \in \mathbb{R}, \forall A \in M_{m, n}, A + 0_{m, n} = A\)</span> (<span class="math">\(0_{m, n}\)</span> is called the zero matrix).</li>
-<li>Additive inverse: <span class="math">\(\forall A \in M_{m, n}, \exists -A \in M_{m, n}, A + (-A) = 0_{m, n}\)</span>.</li>
+<li>Additive identity: <span class="math">\(\exists O \in M_{m \times n}, \forall A \in M_{m, n}, A + O = A\)</span> (<span class="math">\(O\)</span> is called the zero matrix).</li>
+<li>Additive inverse: <span class="math">\(\forall A \in M_{m, n}, \exists -A \in M_{m, n}, A + (-A) = O\)</span>.</li>
 <li>Closure under scalar multiplication: <span class="math">\(cA \in M_{m, n}\)</span>.</li>
 <li><span class="math">\(c(dA) = (cd)A\)</span></li>
 <li>Scalar distributivity: <span class="math">\((c + d)A = cA + dA\)</span>.</li>
@@ -496,7 +499,7 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <h3 id="theorem-3.1.3-properties-of-matrix-multiplication">Theorem 3.1.3 (Properties of Matrix Multiplication)</h3>
 <p>If <span class="math">\(A, B, C\)</span> are matrices of the required dimensions, <span class="math">\(t \in \mb{R}\)</span>:</p>
 <ul>
-<li>Distributivity: <span class="math">\(A(B + C) = AB + AC\)</span>.</li>
+<li>Distributivity: <span class="math">\(A(B + C) = AB + AC\)</span> (left distributive) and <span class="math">\((A + B)C = AC + BC\)</span> (right distributive).</li>
 <li>Scalar multiplication: <span class="math">\(t(AB) = (tA)B = A(tB)\)</span>.</li>
 <li>Associativity: <span class="math">\((AB)C = A(BC)\)</span>.</li>
 <li>Transposition distributivity: <span class="math">\((AB)^T = A^T B^T\)</span>.</li>
@@ -508,7 +511,7 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <p>In other words, if each product of a matrix with an arbitrary vector are equal to each other, then the matrices are themselves equal to each other.</p>
 <p>Proof:</p>
 <blockquote>
-<p>Let <span class="math">\(A = \begin{bmatrix} \vec{a}_1 &amp; \ldots &amp; \vec{a}_n \end{bmatrix}, B = \begin{bmatrix} \vec{b}_1 &amp; \ldots &amp; \vec{b}_n \end{bmatrix}\)</span>.<br />Let <span class="math">\(i \in \mb{N}, i \le n\)</span>.<br />Let <span class="math">\(\vec{e}_i\)</span> be the <span class="math">\(i\)</span>th standard basis vector in <span class="math">\($\mb{R}^n (the vector with all zeroes except the \)</span>i<span class="math">\(th element, which is 1).   Let \)</span> ^n<span class="math">\(. Construct \)</span> = <em>i<span class="math">\(.   Assume \)</span>A = B<span class="math">\(. Then \)</span>A</em>i = B<em>i = </em>i = _i<span class="math">\(.   Since \)</span>i$ is arbitrary, <span class="math">\(forall 1 \le i \le n, \vec{a}_i = \vec{b}_i\)</span>.<br />So <span class="math">\(A = B\)</span>.</p>
+<p>Let <span class="math">\(A = \begin{bmatrix} \vec{a}_1 &amp; \ldots &amp; \vec{a}_n \end{bmatrix}, B = \begin{bmatrix} \vec{b}_1 &amp; \ldots &amp; \vec{b}_n \end{bmatrix}\)</span>.<br />Let <span class="math">\(i \in \mb{N}, i \le n\)</span>.<br />Let <span class="math">\(\vec{e}_i\)</span> be the <span class="math">\(i\)</span>th standard basis vector in <span class="math">\(\mb{R}^n\)</span> (the vector with all zeroes except the <span class="math">\(i\)</span>th element, which is 1).<br />Let <span class="math">\(\vec{x} \in \mb{R}^n\)</span>. Construct <span class="math">\(\vec{x} = \vec{e}_i\)</span>.<br />Assume <span class="math">\(A\vec{x} = B\vec{x}\)</span>. Then <span class="math">\(A\vec{e}_i = B\vec{e}_i = \vec{a}_i = \vec{b}_i\)</span>.<br />Since <span class="math">\(i\)</span> is arbitrary, <span class="math">\(forall 1 \le i \le n, \vec{a}_i = \vec{b}_i\)</span>.<br />So <span class="math">\(A = B\)</span>.</p>
 </blockquote>
 <h1 id="section-2">3/2/14</h1>
 <h2 id="identity-matrix">Identity Matrix</h2>
@@ -545,7 +548,7 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <p>Formally, <span class="math">\(I = \set{y \in C : \exists x \in D, f(x) = y}\)</span> where <span class="math">\(C\)</span> is the codomain, <span class="math">\(D\)</span> is a subset of the domain, and <span class="math">\(I\)</span> is the image,</p>
 <p>A <strong>matrix mapping</strong> is a function <span class="math">\(f: \mb{R}^n \to \mb{R}^m\)</span> where <span class="math">\(f(\vec{x}) = A\vec{x}\)</span> for some matrix <span class="math">\(A \in M_{m, n}\)</span>.</p>
 <p>In other words, it is a function over vectors that multiplies matrix by the given vector.</p>
-<p>We can write this as <span class="math">\(f\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}\)</span>, or with the more aesthetic notation <span class="math">\(f(x_1, \ldots, x_n) = (y_1, \ldots, y_m)\)</span>.</p>
+<p>We can write this as <span class="math">\(f\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}\)</span>, or with the more aesthetically pleasing notation <span class="math">\(f(x_1, \ldots, x_n) = (y_1, \ldots, y_m)\)</span>.</p>
 <p>What is the domain/codomain of <span class="math">\(f(\vec{x}) = A\vec{x}, A = \begin{bmatrix} 2 &amp; 3 \\ -4 &amp; 0 \\ 5 &amp; 1 \end{bmatrix}\)</span>.</p>
 <blockquote>
 <p>Clearly, <span class="math">\(f\)</span> is defined iff and only if the matrix multiplication is defined, which is when <span class="math">\(\vec{x}\)</span> has 2 components.<br />So <span class="math">\(\vec{x} \in \mb{R}^2\)</span>.<br />Since <span class="math">\(A\)</span> has 3 rows, <span class="math">\(f(\vec{x})\)</span> also has 3 rows.<br />So <span class="math">\(f(\vec{x}) \in \mb{R}^3\)</span>.</p>
@@ -564,7 +567,7 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <h2 id="linear-mappings">Linear Mappings</h2>
 <p>A <strong>linear mapping/linear transformation/linear operator</strong> is a function <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> that has the linearity property.</p>
 <p>In other words, given <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span>, <span class="math">\(L\)</span> is a linear mapping if and only if <span class="math">\(L(s\vec{x} + t\vec{y}) = sL(\vec{x}) + tL(\vec{y}), \vec{x}, \vec{y} \in \mb{R}^n, s, t \in \mb{R}\)</span>.</p>
-<p>To prove that a funtion is a lienar mapping, we simply need to prove that it has the inearity property.</p>
+<p>To prove that a function is a lienar mapping, we simply need to prove that it has the inearity property.</p>
 <p>Prove that <span class="math">\(\proj_{\vec{a}}\)</span> is a linear operator:</p>
 <blockquote>
 <p><span class="math">\[
@@ -582,6 +585,7 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <p>Let <span class="math">\(\vec{x} \in \mb{R}^n\)</span> and <span class="math">\(\vec{e}_i\)</span> be the <span class="math">\(i\)</span>th standard basis vector. Then <span class="math">\(\vec{x} = x_1 \vec{e}_1 + \ldots + x_n \vec{e}_n\)</span>.<br />Then <span class="math">\(L(\vec{x}) = L(x_1 \vec{e}_1 + \ldots + x_n \vec{e}_n) = x_1 L(\vec{e}_1) + \ldots + x_n L(\vec{e}_n) = \begin{bmatrix} L(\vec{e}_1) &amp; \ldots &amp; L(\vec{e}_n) \end{bmatrix} \vec{x}\)</span>.<br />Let <span class="math">\(A = \begin{bmatrix} L(\vec{e}_1) &amp; \ldots &amp; L(\vec{e}_n) \end{bmatrix}\)</span>.<br />Then <span class="math">\(L(\vec{x}) = A\vec{x}\)</span>.</p>
 </blockquote>
 <p>The matrix <span class="math">\(A\)</span> in the theorem above is called the <strong>standard matrix</strong> of the linear mapping <span class="math">\(L\)</span>. It is the matrix such that <span class="math">\(L(\vec{x}) = A\vec{x}\)</span></p>
+<p>We denote this as <span class="math">\(A = [L]\)</span>, where <span class="math">\(L\)</span> is a linear mapping. Additionally, <span class="math">\(L(\vec{x}) = [L]\vec{x}\)</span></p>
 <p>Find the standard matrix of <span class="math">\(\proj_{\vec{a}}\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
@@ -606,6 +610,96 @@ A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp;
 <p>In other words, <span class="math">\(\refl_P \vec{x} = \proj_P \vec{x} - \perp_P \vec{x} = (\vec{x} - \perp_P \vec{x}) - \perp_P \vec{x} = \vec{x} - 2\perp_P \vec{x} = \vec{x} - 2\proj_{\vec{n}} \vec{x}\)</span>, where <span class="math">\(\vec{n}\)</span> is the normal of the hyperplane.</p>
 <p>Now we find the standard matrix of this operation. Let <span class="math">\(\vec{n}\)</span> be the normal of the plane. Then <span class="math">\(\refl_P \vec{e}_i = \vec{e}_i - 2\proj_{\vec{n}} \vec{e}_i\)</span>.</p>
 <p>So <span class="math">\(\refl_P \vec{x} = \begin{bmatrix} \vec{e}_1 - 2\proj_{\vec{n}} \vec{e}_1 &amp; \ldots &amp; \vec{e}_n - 2\proj_{\vec{n}} \vec{e}_n \end{bmatrix} \vec{x}\)</span>.</p>
+<h1 id="section-6">14/2/14</h1>
+<h2 id="range">Range</h2>
+<p>The <strong>range</strong> of a function <span class="math">\(f: \mb{R}^n \to \mb{R}^m\)</span> is the set of all images (function values) that <span class="math">\(f\)</span> produces for any <span class="math">\(\vec{x} \in \mb{R}^n\)</span>.</p>
+<p>Range in mathematics can refer to this set of images, or to the codomain. The difference between the image and the codomain is that the image is always a subset of the codomain - the codomain also may include values that <span class="math">\(f(\vec{x})\)</span> cannot possibly produce. The codomain is something we define for the function, while the image is a property of the function itself.</p>
+<p>For example, the image of <span class="math">\(f(\vec{x}) = \vec{0}\)</span> (<span class="math">\(f: \mb{R}^2 \to \mb{R}^3\)</span>) is <span class="math">\(\set{\vec{0}}\)</span>, while the codomain is <span class="math">\(\mb{R}^3\)</span>. The domain is <span class="math">\(\mb{R}^2\)</span>.</p>
+<p>Formally, we denote range as <span class="math">\(\range f = \set{f(\vec{x}) \middle| \vec{x} \in \mb{R}^n}\)</span>. It is basically the set of all values the function can produce.</p>
+<p>A value <span class="math">\(\vec{y}\)</span> is in the range (image) if <span class="math">\(\exists \vec{x} \in \mb{R}^n, f(\vec{x}) = \vec{y}\)</span>. We simply prove that <span class="math">\(\vec{y} \in \range f\)</span></p>
+<h3 id="theorem-3.3.2">Theorem 3.3.2</h3>
+<p>If <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> is linear, then <span class="math">\(\range L\)</span> is a subspace of the codomain, <span class="math">\(\mb{R}^m\)</span>.</p>
+<p>Also, if <span class="math">\(L\)</span> is linear, then <span class="math">\(L(\vec{0}) = \vec{0}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Assume <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> is linear.<br />By definition, <span class="math">\(\range L \subseteq \mb{R}^m\)</span>.<br />Since <span class="math">\(L(\vec{0}) = \vec{0}\)</span>, <span class="math">\(\vec{0} \in \range L\)</span>.<br />Let <span class="math">\(\vec{y}, \vec{z} \in \range L\)</span>.<br />Then <span class="math">\(\exists \vec{w} \in \mb{R}^n, L(\vec{w}) = \vec{y}\)</span> and <span class="math">\(\exists \vec{x} \in \mb{R}^n, L(\vec{x}) = \vec{z}\)</span>.<br />Clearly, <span class="math">\(\vec{y} + \vec{z} = L(\vec{w}) + L(\vec{x}) = L(\vec{w} + \vec{x})\)</span> and <span class="math">\(L(\vec{w} + \vec{x}) \in \range L\)</span>, so <span class="math">\(\vec{y} + \vec{z} \in \range L\)</span>.<br />Clearly, <span class="math">\(c\vec{y} = cL(\vec{w}) = L(c\vec{w})\)</span> and <span class="math">\(L(c\vec{w}) \in \range L\)</span>, so <span class="math">\(c\vec{y} \in \range L\)</span>.<br />So <span class="math">\(\range L\)</span> satisfies the subspace test, and is a subspace of <span class="math">\(\mb{R}^m\)</span>.</p>
+</blockquote>
+<p>Find a basis of <span class="math">\(\range L\)</span> where <span class="math">\(L(x_1, x_2, x_3) = (x_1 + x_2, 0, x_3)\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(L\left(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}\right) = \begin{bmatrix} x_1 + x_2 \\ 0 \\ x_3 \end{bmatrix} = (x_1 + x_2)\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + x_3\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}\)</span>.<br />So <span class="math">\(\set{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}}\)</span> spans <span class="math">\(\range L\)</span>.<br />Clearly, this set is linearly independent. So it is a basis of <span class="math">\(\range L\)</span>.</p>
+</blockquote>
+<h2 id="kernel">Kernel</h2>
+<p>The <strong>kernel</strong> of a linear mapping <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> is the set of all vectors in the domain <span class="math">\(\mb{R}^n\)</span> that have an image of <span class="math">\(\vec{0}\)</span> under <span class="math">\(L\)</span> (<span class="math">\(L(\vec{x}) = 0\)</span>).</p>
+<p>Formally, <span class="math">\(\ker L = \set{\vec{x} \in \mb{R}^n \middle| L(\vec{x}) = \vec{0}}\)</span>. Basically, it is the set of vectors that make the function produce the zero vector.</p>
+<p>A vector <span class="math">\(\vec{x}\)</span> is in the kernel of the function if and only if <span class="math">\(L(\vec{x}) = \vec{0}\)</span>.</p>
+<h3 id="theorem-3.3.2-1">Theorem 3.3.2</h3>
+<p>If <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> is linear, then <span class="math">\(\ker L\)</span> is a subspace of the domain, <span class="math">\(\mb{R}^n\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Assume <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> is linear.<br />By definition, <span class="math">\(\ker L \subseteq \mb{R}^n\)</span>.<br />Since <span class="math">\(L(\vec{0}) = \vec{0}\)</span>, <span class="math">\(\vec{0} \in \range L\)</span>.<br />Let <span class="math">\(\vec{y}, \vec{z} \in \ker L\)</span>.<br />Clearly, <span class="math">\(L(\vec{y} + \vec{z}) = L(\vec{y}) + L(\vec{z}) = \vec{0} + \vec{0} = \vec{0}\)</span>, so <span class="math">\(\vec{y} + \vec{z} \in \ker L\)</span>.<br />Clearly, <span class="math">\(L(c\vec{y}) = cL(\vec{y}) = c\vec{0} = \vec{0}\)</span> and <span class="math">\(\vec{y} \in \ker L\)</span>, so <span class="math">\(c\vec{y} \in \range L\)</span>.<br />So <span class="math">\(\ker L\)</span> satisfies the subspace test, and is a subspace of <span class="math">\(\mb{R}^n\)</span>.</p>
+</blockquote>
+<p>Find a basis of the kernel of <span class="math">\(L(x_1, x_2, x_3) = (x_1 + x_2, 0, x_3)\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(\vec{x} \in \ker L\)</span>.<br />By definition, <span class="math">\(L(x_1, x_2, x_3) = (0, 0, 0)\)</span>.<br />So <span class="math">\(\begin{cases} x_1 + x_2 &amp;= 0 \\ x_3 &amp;= 0 \end{cases}\)</span>, and <span class="math">\(x_2 = -x_1\)</span>, so <span class="math">\(\vec{x} = \begin{bmatrix} x_1 \\ -x_1 \\ 0 \end{bmatrix} = x_1\begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}\)</span>.<br />Clearly, <span class="math">\(\set{\begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}}\)</span> spans <span class="math">\(\ker L\)</span> and is linearly independent, so it is a basis.</p>
+</blockquote>
+<h3 id="theorem-3.3.4">Theorem 3.3.4</h3>
+<p>Given a linear mapping <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> with a standard matrix <span class="math">\(A = [L]\)</span>, <span class="math">\(\vec{x} \in \ker L \iff A\vec{x} = \vec{0}\)</span>.</p>
+<p>The <strong>nullspace</strong> of a matrix <span class="math">\(A\)</span> is the set <span class="math">\(\operatorname{Null}(A) = \set{\vec{x} \in \mb{R}^n \middle| A\vec{x} = \vec{0}}\)</span>. In other words, the set of all vectors that make its corresponding linear mapping produce the zero vector.</p>
+<p>Also, if <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> is linear, then <span class="math">\(\ker L = \operatorname{Null}([L])\)</span>.</p>
+<h3 id="theorem-3.3.5">Theorem 3.3.5</h3>
+<p>Given a linear mapping <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> with a standard matrix <span class="math">\(A = [L] = \begin{bmatrix} \vec{a}_1 &amp; \ldots &amp; \vec{a}_n \end{bmatrix}\)</span>, then <span class="math">\(\range L = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(\vec{y} \in \range L\)</span>. Then <span class="math">\(\exists \vec{x} \in \mb{R}^n, L(\vec{x}) = \vec{y}\)</span>.<br />Clearly, <span class="math">\(\vec{y} = L(\vec{x}) = A\vec{x} = \begin{bmatrix} \vec{a}_1 &amp; \ldots &amp; \vec{a}_n \end{bmatrix}\vec{x} = x_1\vec{a}_1 + \ldots + x_n\vec{a}_n\)</span>.<br />Since <span class="math">\(\vec{x}\)</span> is arbitrary, <span class="math">\(x_1\vec{a}_1 + \ldots + x_n\vec{a}_n \in \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.<br />So <span class="math">\(\range L \subseteq \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.<br />Clearly, <span class="math">\(\spn \set{\vec{a}_1, \ldots, \vec{a}_n} \subseteq \range L\)</span>, so <span class="math">\(\range L = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.</p>
+</blockquote>
+<p>The <strong>column space</strong> of a matrix <span class="math">\(A\)</span> is <span class="math">\(\operatorname{Col}(A) = \set{A\vec{x} \middle| \vec{x} \in \mb{R}^n} = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.</p>
+<p>Also, if <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> is linear, then <span class="math">\(\range L = \operatorname{Col}([L])\)</span>.</p>
+<p>The <strong>row space</strong> of a matrix <span class="math">\(A\)</span> is <span class="math">\(\operatorname{Row}(A) = \operatorname{Col}(A^T)\)</span>. It is simply the span of the rows of the matrix instead of the columns.</p>
+<p>The <strong>left nullspace</strong> of a matrix <span class="math">\(A\)</span> is <span class="math">\(\operatorname{Null}(A^T)\)</span>. It is simply the nullspace of the matrix transposed.</p>
+<h2 id="operations-on-linear-mappings">Operations on Linear Mappings</h2>
+<p>Let <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> and <span class="math">\(M: \mb{R}^n \to \mb{R}^m\)</span> be linear mappings. Let <span class="math">\(t \in \mb{R}\)</span>.</p>
+<p>Equality: <span class="math">\(L = M \iff \forall \vec{x} \in \mb{R}^n, L(\vec{x}) = M(\vec{x})\)</span>.</p>
+<p>Addition/subtraction: we can define <span class="math">\(L \pm M: \mb{R}^n \to \mb{R}^m\)</span>, and <span class="math">\(\forall \vec{x} \in \mb{R}^n, (L \pm M)(\vec{x}) = L(\vec{x}) \pm M(\vec{x})\)</span>.</p>
+<p>Scalar multiplication: we can define <span class="math">\(tL: \mb{R}^n \to \mb{R}^m\)</span>, and <span class="math">\(\forall \vec{x} \in \mb{R}^n, (tL)(\vec{x}) = tL(\vec{x})\)</span>.</p>
+<p>The set <span class="math">\(\mb{L}\)</span> is the set of all possible linear mappings. The domain is <span class="math">\(\mb{R}^n\)</span> and the codomain is <span class="math">\(\mb{R}^m\)</span> for all linear mappings in this set.</p>
+<h3 id="theorem-3.4.1">Theorem 3.4.1</h3>
+<p><span class="math">\([L \pm M] = [L] \pm [M]\)</span> and <span class="math">\([tL] = t[L]\)</span>. In other words, addition and scalar multiplication over linear mappings are equivalent to the same operation applied to their standard matrices.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(\vec{x} \in \mb{R}^n\)</span>.<br />Clearly, <span class="math">\((L + M)(\vec{x}) = L(\vec{m}) + M(\vec{x}) = ([L] + [M])\vec{x}\)</span>.<br />So <span class="math">\([L + M] = [L] + [M]\)</span>.<br />Clearly, <span class="math">\((tL)(\vec{x}) = tL(\vec{x}) = (t[L])\vec{x}\)</span>.<br />So <span class="math">\([tL] = t[L]\)</span>.</p>
+</blockquote>
+<h3 id="theorem-3.4.2">Theorem 3.4.2</h3>
+<p>Let <span class="math">\(L, M, N \in \mb{L}\)</span> and <span class="math">\(c, d \in \mb{R}\)</span>:</p>
+<ul>
+<li>Closure under addition: <span class="math">\(L + M \in \mb{L}\)</span>.</li>
+<li>Associativity: <span class="math">\((L + M) + N = L + (M + N)\)</span>.</li>
+<li>Commutativity: <span class="math">\(L + M = M + L\)</span>.</li>
+<li>Additive identity: <span class="math">\(\exists O \in \mb{L}, L + O = L\)</span> (<span class="math">\(O(\vec{x}) = \vec{0} = O\vec{x}\)</span>).</li>
+<li>Additive inverse: <span class="math">\(\exists (-L) \in \mb{L}, L + (-L) = O\)</span>.</li>
+<li>Closure under scalar multiplication: <span class="math">\(cL \in \mb{L}\)</span>.</li>
+<li><span class="math">\(c(dL) = (cd)L\)</span>.</li>
+<li><span class="math">\((c + d)L = cL + dL\)</span>.</li>
+<li><span class="math">\(c(L + M) = cL + cM\)</span>.</li>
+<li>Multiplicative identity: <span class="math">\(1L = L\)</span>.</li>
+</ul>
+<h3 id="composition">Composition</h3>
+<p>Given <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> and <span class="math">\(M: \mb{R}^m \to \mb{R}^p\)</span>, <span class="math">\(M \circ L = M(L(\vec{x})) = [M][L]\vec{x}\)</span>.</p>
+<p>Also, <span class="math">\([M \circ L] = [M][L]\)</span>.</p>
+<p>Find the standard matrix of <span class="math">\(R_\frac{\pi}{2} \circ R_\frac{3\pi}{2}\)</span>:</p>
+<blockquote>
+<p>Recall that <span class="math">\(R_\theta = \begin{bmatrix} \cos \theta &amp; -\sin \theta \\ \sin \theta &amp; \cos \theta \end{bmatrix}\)</span>.<br />So <span class="math">\(R_\frac{\pi}{2} \circ R_\frac{3\pi}{2} = \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{bmatrix}\vec{x} = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} \vec{x}\)</span>.<br />So the standard matrix is <span class="math">\(\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}\)</span></p>
+</blockquote>
+<p>Note that this is the identity matrix. This is because we rotated the vector by 90 degrees, then 270 degrees - back to where we started.</p>
+<p>The <strong>identity mapping</strong> <span class="math">\(I \in \mb{L}\)</span> is the mapping such that <span class="math">\(I(\vec{x}) = I\vec{x}\)</span>. Note that the standard matrix of this linear mapping is the identity matrix.</p>
+<p>A linear mapping <span class="math">\(L\)</span> is <strong>invertible</strong> if and only if there exists another linear mapping <span class="math">\(M\)</span> such that <span class="math">\(L \circ M = I\)</span> (<span class="math">\(L(M(\vec{x})) = \vec{x}\)</span>). If <span class="math">\(M\)</span> exists, then <span class="math">\(M = L^{-1}\)</span>.</p>
+<p>The standard matrix of <span class="math">\(M\)</span> is such that <span class="math">\([L][M] = I\)</span>. Note that in order for the inverse to exist, <span class="math">\(L\)</span> must therefore have the same number of rows as <span class="math">\(M\)</span> has columns.</p>
+<p>In summary, the four <strong>fundemental subspaces</strong> of a matrix are:</p>
+<ul>
+<li>Row space</li>
+<li>Column space</li>
+<li>Nullspace</li>
+<li>Left Nullspace</li>
+</ul>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
