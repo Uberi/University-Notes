@@ -19,6 +19,7 @@ $$
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -28,6 +29,7 @@ $$
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
 $$
 
 # 6/1/14
@@ -164,7 +166,14 @@ When we use integration by parts, we differentiate one factor, and integrate the
 
 Simplify $\int_0^1 x e^{-x} \dee x$:
 
-> ;wip
+> $$
+\begin{align}
+\int_0^1 x e^{-x} \dee x &= \int_0^1 x \frac{\dee}{\dee x} (-e^{-x}) \dee x \\
+&= \evalat{x (-e^{-x})}_0^1 - \int_0^1 \left(\frac{\dee}{\dee x} x\right) (-e^{-x}) \dee x \\
+&= \evalat{x (-e^{-x})}_0^1 + \int_0^1 e^{-x} \dee x \\
+&= -\frac{2}{e} \\
+\end{align}
+$$
 
 Simplify $\int_0^1 x^n (\ln x)^n \dee x$:
 
@@ -269,11 +278,11 @@ Consider $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x$:
 > Clearly, $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x
 = \int \frac{1}{4 \tan^2 \theta \sqrt{4 \tan^2 \theta + 4}} 2 \sec^2 \theta \dee \theta
 = \int \frac{1}{4 \tan^2 \theta \sqrt{4 (\tan^2 \theta + 1)}} 2 \sec^2 \theta \dee \theta
-= \int \frac{1}{4 \tan^2 \theta 2 \sec \theta}} 2 \sec^2 \theta \dee \theta
-= \frac{1}{4} \int \frac{\sec \theta}{\tan^2 \theta}} \dee \theta
-= \frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta$.  
+= \int \frac{1}{4 \tan^2 \theta 2 \sec \theta} 2 \sec^2 \theta \dee \theta
+= \frac{1}{4} \int \frac{\sec \theta}{\tan^2 \theta} \dee \theta
+= \frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta} \dee \theta$.  
 > Let $u = \sin \theta$. Then $\dee x = \frac{1}{\cos \theta} \dee \theta$.  
-> So $\frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta}} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c$.  
+> So $\frac{1}{4} \int \frac{\cos \theta}{\sin^2 \theta} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c$.  
 > Since $x = 2 \tan \theta$, $\theta = \arctan \frac{x}{2}$.  
 ;wip: rewrite in terms of x using the triangle again
 > So $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x = -\frac{1}{4} \frac{\sqrt{4 + x^2}}{x} + c$.  
@@ -408,9 +417,7 @@ In the Riemann integral, that would be represented as $\int_a^b f(x) \dee x = \l
 
 The same idea can be applied to 3D, for the volume under a surface. We want to find the area under $f(x, y)$.
 
-In the Riemann integral, that would be represented as $\int \int f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \delta x_i \delta y_i f(x_i, y_i)$. Here, $\delta x_i \delta y_i$ is the base, and $f(x_i, y_i)$, and they form a rectangle.
-
-;wip: use double integration symbol above
+In the Riemann integral, that would be represented as $\iint f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \delta x_i \delta y_i f(x_i, y_i)$. Here, $\delta x_i \delta y_i$ is the base, and $f(x_i, y_i)$, and they form a rectangle.
 
 In general, the volume of an arbitrary solid requires a multi-variable/multi-dimensional integral (a calculus III topic). However, there are cases where symmetry allows us to use a single variable integral.
 
@@ -629,7 +636,7 @@ A tank holds 80L of water at time $t = 0$. A salt solution of 0.25 kg/L flows in
 
 > We assume the salt solution instantly mixes with the water.  
 > We want to find $\frac{\dee}{\dee t} x(t)$, which is $\text{source} - \text{sink}$.  
-> The source is $\text{salt concentration} \cdot {inflow rate} = 0.25 \text{kg/L} \cdot 8 \text{L/min} = 2 \text{kg/min}$.  
+> The source is $\text{salt concentration} \cdot \text{inflow rate} = 0.25 \text{kg/L} \cdot 8 \text{L/min} = 2 \text{kg/min}$.  
 > Clearly, $\frac{\dee}{\dee x} \text{liquid level} = \text{inflow rate} - \text{outflow rate} = 8 \text{L/min} - 12 \text{L/min} = -4 \text{L/min}$.  
 > So the liquid level is $80 + \int \frac{\dee}{\dee x} \text{liquid level} \dee t = 80 - 4t$.  
 > Clearly, $\text{salt concentration} = \frac{\text{mass of salt}}{\text{volume of tank}} = \frac{x(t)}{80 - 4t}$.  
@@ -830,7 +837,7 @@ A\left(1 - \frac{N}{k}\right) + BN &= 1; A = 1; B = \frac{1}{k} \\
 \ln \abs{\frac{N - k}{N}} &= -rt - c \\
 \abs{\frac{N - k}{N}} &= e^{-rt - c} \\
 \frac{N - k}{N} &= \pm e^{-rt} e^{-c} \\
-F &= \pm e^{-c}
+F &= \pm e^{-c} \\
 1 - \frac{k}{N} &= Fe^{-rt} \\
 \frac{k}{N} &= Fe^{-rt} + 1 \\
 N &= \frac{k}{1 + Fe^{-rt}} \\
@@ -839,7 +846,7 @@ $$
 > Note that all solutions tend toward $k$, which we can verify by taking the limit of $N$ at infinity.  
 > Now we will solve for $F$ - at $t = 0$, $N = N_0$. Assume $t = 0$.  
 > So $N_0 = \frac{k}{1 + Fe^{-r0}}$ and $N_0 + FN_0 = k$, so $F = \frac{k}{N_0} - 1$.  
-> So $N = \frac{k}{1 + \left(\frac{k}{N_0} - 1\right)e^{-rt}$.  
+> So $N = \frac{k}{1 + \left(\frac{k}{N_0} - 1\right)e^{-rt}}$.  
 
 # 10/2/14
 
@@ -946,9 +953,10 @@ In the limit $N \to \infty$, does $f(x) = P(x) = \lim_{N \to \infty} \sum_{n = 0
 
 Consider $\arctan x = \int_0^x \frac{1}{1 + t^2} \dee t$. If we assume that $\frac{1}{1 - x} = 1 + x + x^2 + x^3 + \ldots + x^N$ as shown earlier, we can substitute $t^2$ for $x$ to get.
 
-### Sequences
+Sequences
+----------
 
-A **sequence** is a list of numbers. We denote it with $a_0, a_1, \ldots, a_n$, or simply $a_n = f(n)$. For example, $a_n = 2n$ is equivalent to $0, 2, 4, 6, \ldots$
+A **sequence** is an ordered list of numbers. We denote it with $a_0, a_1, \ldots, a_n$, or simply $a_n = f(n)$. For example, $a_n = 2n$ is equivalent to $0, 2, 4, 6, \ldots$
 
 A sequence **converges** if it has a limit as $n \to \infty$.
 
@@ -968,4 +976,61 @@ If $a_n$ and $L$ lie in the domain of a continuous function $f$ and $a_n \to L$ 
 
 Sequences are easy to deal with if they are explicit functions of the index $n$, but a lot of sequences are defined recursively, like $a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1$.
 
-;wip: try $\left\{a_n = 7^{\frac{1]{2} + \frac{1}{n}}\tan \frac{\pi n + 1}{4n}\right\}$ limit at infinity - \sqrt{7}
+;wip: try $a_n = 7^{\frac{1}{2} + \frac{1}{n}}\tan \frac{\pi n + 1}{4n}$ limit at infinity - \sqrt{7}
+
+# 14/2/14
+
+It is in fact easy to determine if any sequence converges or diverges.
+
+Sequences that are defined only in terms of the current index are easy to find the limit of. For example, $a_n = \frac{n}{n + 1}$ converges to 1 at infinity.
+
+However, sequences defined recursively are not so straightforward. For example, $a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1$. This is an **implicitly defined sequence**.
+
+### Monotone Convergence Theorem
+
+If the terms of a sequence are **bounded**, and the sequence is **monotone**, then the sequence converges.
+
+There are two possible cases:
+
+* If the sequence has an upper bound $a_n \le b$ and is monotonially increasing, then it converges.
+* If the sequence has a lower bound $a_n \ge b$ and is monotonically decreasing, then it converges.
+
+**Boundedness** means that every element in the sequence is between a lower and upper bound. Formally, a sequence $a_n$ is bounded if and only if $\exists u, \exists v, \forall n, u \le a_n \le v$.
+
+We often prove boundedness by comparing to a known sequence (like $\frac{1}{n!} \le \frac{1}{2^{n - 1}}$) or by using induction.
+
+**Monotonicity** means that once we start going up, we never go down again, and once we start going down, we never go up again. Basically, $a_0 \le a_1 \le a_2 \le \ldots$, or $a_0 \ge a_1 \ge a_2 \ge \ldots$.
+
+Formally, a sequence $a_n$ is monotone if and only if $(\forall u, \forall v, u < v \implies a_u < a_v) \vee (\forall u, \forall v, u < v \implies a_u > a_v)$.
+
+Proof:
+
+> It is intuitively obvious that if a value is always increasing, and cannot exceed a value, then it must converge to some value.  
+> Without loss of generality, assume that $a_n$ is increasing and bounded by $a_n \le b$.  
+> Let $p$ be the smallest possible upper bound on $a_n$.  
+> As an aside, $p$ is the limit of the sequence - any number less than this is not an upper bound, and any number greater than this can be smaller while still being an upper bound.  
+> Let $\epsilon > 0$.  
+> Clearly, $p - \epsilon < p$, so $\exists k, p - \epsilon < a_k$, since any value less than the .  
+> Assume $n > k$. Clearly, $a_k \le a_n$ (since the sequence is monotonically increasing).  
+> Clearly, $a_n \le p < p + \epsilon$.  
+> So $p - \epsilon < a_n < p + \epsilon$ and $-\epsilon < a_n - p < \epsilon$.  
+> So $\abs{a_n - p} < \epsilon$, and by the definition of the limit, $p$ is the limit and the sequence converges.  
+
+Does $a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1$ converge?
+
+> Clearly, $\frac{1}{n!}$ is always positive, so $a_{n + 1} = a_n + \frac{1}{n!}$ is monotonically increasing.  
+> Clearly, $n! \le 2^{n - 1}$, since $1 \cdot \ldots \cdot k \le 2 \cdot \ldots \cdots 2 \text{ (} k - 1 \text{ times)}$.  
+> So $\frac{1}{n!} \le \frac{1}{2^{k - 1}}$ and $a_n \le 1 + 1 + \frac{1}{2} + \frac{1}{2^2} + \ldots + \frac{1}{2^{n - 1}}$.  
+> Clearly, this is a monotonically increasing geometric progression, and so we can determine that $1 + 1 + \frac{1}{2} + \frac{1}{2^2} + \ldots + \frac{1}{2^{n - 1}} = \frac{1 - \left(\frac{1}{2}\right)^n}{1 - \frac{1}{2}}$.  
+> Clearly, $\lim_{n \to \infty} \frac{1 - \left(\frac{1}{2}\right)^n}{1 - \frac{1}{2}} = \frac{1}{\frac{1}{2}} = 2$.  
+> So $a_n \le \frac{1}{2^{k - 1}} \le 2$, and by the convergence theorem, the sequence converges.  
+> As an aside, it converges to $e$.  
+
+Does $a_1 = 1, a_{n + 1} = \sqrt{3 + 2a_n}$ converge?
+
+> The first few elements of the sequence are $1, 2.23606797749979, 2.73352079834772, 2.90981813807933, 2.96978724425819$.  
+> Clearly, $a_{n + 1}$ is equivalent to $\sqrt{3 + 2a_n} \ge a_n$, which is equivalent to $a_n^2 - 2a_n - 3 \le 0$, or $-1 \le a_n \le 3$.  
+> So $a_n$ is monotonically increasing over $[-1, 3]$.  
+> Assume $a_n \le 3$. Then $3 + 2a_n \le 9$ and $\sqrt{3 + 2a_n} \le 3$. So $a_{n + 1} \le 3$.  
+> So by induction, $a_n$ has an upper bound of 3.  
+> So by the convergence theorem, the sequence converges.  

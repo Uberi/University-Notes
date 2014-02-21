@@ -17,6 +17,7 @@ $$
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -26,6 +27,7 @@ $$
 \newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
 $$
 
 # 13/1/14 (I'm going to stop procrastinating this week, honest!)
@@ -105,6 +107,8 @@ Span
 
 The **span** of a set of vectors $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_k}$ is the set of all linear combinations of the vectors in the set.
 
+The span of an empty set is the set containing only the zero vector - $\spn \emptyset = \set{\vec{0}}$.
+
 In other words, $\spn \mathcal{B} = \spn \set{\vec{v}_1, \ldots, \vec{v}_k} = \set{c_1 v_1 + \ldots + c_n v_n \middle| c_1, \ldots, c_n \in \mathbb{R}}$.
 
 A span is always a subset of the space it is in. In other words, $\spn \mathcal{B} \subseteq \mb{R}^n$.
@@ -136,7 +140,7 @@ Proof:
 
 Consider $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}}$. Clearly, $\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}$.
 
-Clearly, $\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}$, so $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}} = \spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}$ represents a line in 3D.
+Clearly, $\begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}$, so $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \\ 2 \end{bmatrix}} = \spn \set{\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}}$ represents a line in 3D.
 
 The span of the zero vector is itself. The span of a linearly independent vector is a line. The span of two linearly independent vectors is a plane. The span of 3 linearly independent vectors is a 3D space. The span of 4 linearly independent vectors is a 4D space, and so on.
 
@@ -276,7 +280,7 @@ We find a basis of a subspace by finding the general form of a vector in the sub
 
 ### Theorem 1.2.2
 
-If $\vec{v}_1, \ldots, \vec{v}_k \in \mb{R}^n$, then $\mb{S} = \span \set{\vec{v}_1, \ldots, \vec{v}_k}$ is a subspace of $\mb{R}^n$.
+If $\vec{v}_1, \ldots, \vec{v}_k \in \mb{R}^n$, then $\mb{S} = \spn \set{\vec{v}_1, \ldots, \vec{v}_k}$ is a subspace of $\mb{R}^n$.
 
 Proof:
 
@@ -545,62 +549,43 @@ Proof:
 
 > ;wip: something about proving this in chapter 4
 
-Row reduce $\begin{array}{ccc|c} 1 & 1 & 0 & -7 \\ 2 & 4 & 1 & -16 \\ 1 & 2 & 1 & 9 \end{array}$:
+Row reduce $\left[\begin{array}{ccc|c} 1 & 1 & 0 & -7 \\ 2 & 4 & 1 & -16 \\ 1 & 2 & 1 & 9 \end{array}\right]$:
 
-> $\begin{array}{ccc|c}
+> $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 2 & 4 & 1 & -16 \\
 1 & 2 & 1 & 9 \\
-\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+\end{array}\right]$ is row equivalent to $\left[\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 0 & 0 & -1 & -34 \\
 1 & 2 & 1 & 9 \\
-\end{array}$ via $R_2 + (-2)R_3$.  
-> $\begin{array}{ccc|c}
-1 & 1 & 0 & -7 \\
-0 & 0 & -1 & -34 \\
-1 & 2 & 1 & 9 \\
-\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+\end{array}\right]$ via $R_2 + (-2)R_3$.  
+> This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 1 & 2 & 1 & 9 \\
 0 & 0 & -1 & -34 \\
-\end{array}$ via $R_2 \leftrightarrow R_3$.  
-> $\begin{array}{ccc|c}
-1 & 1 & 0 & -7 \\
-1 & 2 & 1 & 9 \\
-0 & 0 & -1 & -34 \\
-\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+\end{array}\right]$ via $R_2 \leftrightarrow R_3$.  
+> This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 1 & 2 & 1 & 9 \\
 0 & 0 & 1 & 34 \\
-\end{array}$ via $(-1)R_3$.  
-> $\begin{array}{ccc|c}
-1 & 1 & 0 & -7 \\
-1 & 2 & 1 & 9 \\
-0 & 0 & 1 & 34 \\
-\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+\end{array}\right]$ via $(-1)R_3$.  
+> This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 0 & 1 & 1 & 16 \\
 0 & 0 & 1 & 34 \\
-\end{array}$ via $R_2 - R_1$.  
-> $\begin{array}{ccc|c}
-1 & 1 & 0 & -7 \\
-0 & 1 & 1 & 16 \\
-0 & 0 & 1 & 34 \\
-\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+\end{array}\right]$ via $R_2 - R_1$.  
+> This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 0 & 1 & 0 & -18 \\
 0 & 0 & 1 & 34 \\
-\end{array}$ via $R_2 - R_3$.  
-> $\begin{array}{ccc|c}
-1 & 1 & 0 & -7 \\
-0 & 1 & 0 & -18 \\
-0 & 0 & 1 & 34 \\
-\end{array}$ is row equivalent to $\begin{array}{ccc|c}
+\end{array}\right]$ via $R_2 - R_3$.  
+> This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 0 & 0 & 11 \\
 0 & 1 & 0 & -18 \\
 0 & 0 & 1 & 34 \\
-\end{array}$ via $R_2 - R_3$.  
+\end{array}\right]$ via $R_2 - R_3$.  
+> This is in RREF.  
 
 Note the general technique used in reducing the matrix. First, we want to obtain a triangle of 0 elements with leading ones diagonally rightwards, by going from top to bottom. Then, we make sure each leading one is the only non-zero element in its column by subtracting from rows below from bottom to top.
 
@@ -608,14 +593,14 @@ This technique is basically modifying the matrix until all the properties except
 
 ### Solution Set
 
-A matrix is inconsistent if and only if its RREF contains a row of the form $\begin{array}{ccc|c} 0 & \ldots & 0 & 1 \end{array}$ - no possible values can satisfy this equation ($0 = 1$), so there are no solutions.
+A matrix is inconsistent if and only if its RREF contains a row of the form $\left[\begin{array}{ccc|c} 0 & \ldots & 0 & 1 \end{array}\right]$ - no possible values can satisfy this equation ($0 = 1$), so there are no solutions.
 
 Recall that if consistent, a system of linear equations has either one or infinitely many solutions.
 
 Solve $\begin{cases} x_1 + x_2 + x_3 &= 4 \\ x_2 + x_3 &= 3 \end{cases}$:
 
-> The augmented matrix is $\begin{array}{ccc|c} 1 & 1 & 1 & 4 \\ 0 & 1 & 1 & 3 \end{array}$.  
-> The matrix in RREF is $\begin{array}{ccc|c} 1 & 0 & 0 & 1 \\ 0 & 1 & 1 & 3 \end{array}$.  
+> The augmented matrix is $\left[\begin{array}{ccc|c} 1 & 1 & 1 & 4 \\ 0 & 1 & 1 & 3 \end{array}\right]$.  
+> The matrix in RREF is $\left[\begin{array}{ccc|c} 1 & 0 & 0 & 1 \\ 0 & 1 & 1 & 3 \end{array}\right]$.  
 > Note that this corresponds to $x_1 = 1$ and $x_2 + x_3 = 3$, and that the second equation has infinitely many solutions.  
 > We can find the general solution by writing everything in terms of the fewest variables possible.  
 > Clearly, $x_3 = 3 - x_2$, so the solution is $\vec{x} = \begin{bmatrix} 1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 1 \\ x_2 \\ 3 - x_2 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix} + x_2\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}$.  
@@ -755,8 +740,8 @@ For all $A, B, C \in M_{m \times n}, s, t, \in \mb{R}$:
 * Closure under addition: $A + B \in M_{m \times n}$.
 * Associativity: $(A + B) + C = A + (B + C)$
 * Commutativity: $A + B = B + A$
-* Additive identity: $\exists 0_{m, n} \in \mathbb{R}, \forall A \in M_{m, n}, A + 0_{m, n} = A$ ($0_{m, n}$ is called the zero matrix).
-* Additive inverse: $\forall A \in M_{m, n}, \exists -A \in M_{m, n}, A + (-A) = 0_{m, n}$.
+* Additive identity: $\exists O \in M_{m \times n}, \forall A \in M_{m, n}, A + O = A$ ($O$ is called the zero matrix).
+* Additive inverse: $\forall A \in M_{m, n}, \exists -A \in M_{m, n}, A + (-A) = O$.
 * Closure under scalar multiplication: $cA \in M_{m, n}$.
 * $c(dA) = (cd)A$
 * Scalar distributivity: $(c + d)A = cA + dA$.
@@ -869,7 +854,7 @@ Note that $(AB)_{i, j} = \vec{a}_i^T \vec{b}_j = \vec{a}_i \cdot \vec{b}_j = \su
 
 If $A, B, C$ are matrices of the required dimensions, $t \in \mb{R}$:
 
-* Distributivity: $A(B + C) = AB + AC$.
+* Distributivity: $A(B + C) = AB + AC$ (left distributive) and $(A + B)C = AC + BC$ (right distributive).
 * Scalar multiplication: $t(AB) = (tA)B = A(tB)$.
 * Associativity: $(AB)C = A(BC)$.
 * Transposition distributivity: $(AB)^T = A^T B^T$.
@@ -888,7 +873,7 @@ Proof:
 
 > Let $A = \begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix}, B = \begin{bmatrix} \vec{b}_1 & \ldots & \vec{b}_n \end{bmatrix}$.  
 > Let $i \in \mb{N}, i \le n$.  
-> Let $\vec{e}_i$ be the $i$th standard basis vector in $$\mb{R}^n (the vector with all zeroes except the $i$th element, which is 1).  
+> Let $\vec{e}_i$ be the $i$th standard basis vector in $\mb{R}^n$ (the vector with all zeroes except the $i$th element, which is 1).  
 > Let $\vec{x} \in \mb{R}^n$. Construct $\vec{x} = \vec{e}_i$.  
 > Assume $A\vec{x} = B\vec{x}$. Then $A\vec{e}_i = B\vec{e}_i = \vec{a}_i = \vec{b}_i$.  
 > Since $i$ is arbitrary, $forall 1 \le i \le n, \vec{a}_i = \vec{b}_i$.  
@@ -967,7 +952,7 @@ A **matrix mapping** is a function $f: \mb{R}^n \to \mb{R}^m$ where $f(\vec{x}) 
 
 In other words, it is a function over vectors that multiplies matrix by the given vector.
 
-We can write this as $f\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}$, or with the more aesthetic notation $f(x_1, \ldots, x_n) = (y_1, \ldots, y_m)$.
+We can write this as $f\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\right) = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}$, or with the more aesthetically pleasing notation $f(x_1, \ldots, x_n) = (y_1, \ldots, y_m)$.
 
 What is the domain/codomain of $f(\vec{x}) = A\vec{x}, A = \begin{bmatrix} 2 & 3 \\ -4 & 0 \\ 5 & 1 \end{bmatrix}$.
 
@@ -1002,7 +987,7 @@ A **linear mapping/linear transformation/linear operator** is a function $L: \mb
 
 In other words, given $L: \mb{R}^n \to \mb{R}^m$, $L$ is a linear mapping if and only if $L(s\vec{x} + t\vec{y}) = sL(\vec{x}) + tL(\vec{y}), \vec{x}, \vec{y} \in \mb{R}^n, s, t \in \mb{R}$.
 
-To prove that a funtion is a lienar mapping, we simply need to prove that it has the inearity property.
+To prove that a function is a lienar mapping, we simply need to prove that it has the inearity property.
 
 Prove that $\proj_{\vec{a}}$ is a linear operator:
 
@@ -1027,6 +1012,8 @@ Proof:
 > Then $L(\vec{x}) = A\vec{x}$.  
 
 The matrix $A$ in the theorem above is called the **standard matrix** of the linear mapping $L$. It is the matrix such that $L(\vec{x}) = A\vec{x}$
+
+We denote this as $A = [L]$, where $L$ is a linear mapping. Additionally, $L(\vec{x}) = [L]\vec{x}$
 
 Find the standard matrix of $\proj_{\vec{a}}$:
 
@@ -1064,3 +1051,166 @@ In other words, $\refl_P \vec{x} = \proj_P \vec{x} - \perp_P \vec{x} = (\vec{x} 
 Now we find the standard matrix of this operation. Let $\vec{n}$ be the normal of the plane. Then $\refl_P \vec{e}_i = \vec{e}_i - 2\proj_{\vec{n}} \vec{e}_i$.
 
 So $\refl_P \vec{x} = \begin{bmatrix} \vec{e}_1 - 2\proj_{\vec{n}} \vec{e}_1 & \ldots & \vec{e}_n - 2\proj_{\vec{n}} \vec{e}_n \end{bmatrix} \vec{x}$.
+
+# 14/2/14
+
+Range
+-----
+
+The **range** of a function $f: \mb{R}^n \to \mb{R}^m$ is the set of all images (function values) that $f$ produces for any $\vec{x} \in \mb{R}^n$.
+
+Range in mathematics can refer to this set of images, or to the codomain. The difference between the image and the codomain is that the image is always a subset of the codomain - the codomain also may include values that $f(\vec{x})$ cannot possibly produce. The codomain is something we define for the function, while the image is a property of the function itself.
+
+For example, the image of $f(\vec{x}) = \vec{0}$ ($f: \mb{R}^2 \to \mb{R}^3$) is $\set{\vec{0}}$, while the codomain is $\mb{R}^3$. The domain is $\mb{R}^2$.
+
+Formally, we denote range as $\range f = \set{f(\vec{x}) \middle| \vec{x} \in \mb{R}^n}$. It is basically the set of all values the function can produce.
+
+A value $\vec{y}$ is in the range (image) if $\exists \vec{x} \in \mb{R}^n, f(\vec{x}) = \vec{y}$. We simply prove that $\vec{y} \in \range f$
+
+### Theorem 3.3.2
+
+If $L: \mb{R}^n \to \mb{R}^m$ is linear, then $\range L$ is a subspace of the codomain, $\mb{R}^m$.
+
+Also, if $L$ is linear, then $L(\vec{0}) = \vec{0}$.
+
+Proof:
+
+> Assume $L: \mb{R}^n \to \mb{R}^m$ is linear.  
+> By definition, $\range L \subseteq \mb{R}^m$.  
+> Since $L(\vec{0}) = \vec{0}$, $\vec{0} \in \range L$.  
+> Let $\vec{y}, \vec{z} \in \range L$.  
+> Then $\exists \vec{w} \in \mb{R}^n, L(\vec{w}) = \vec{y}$ and $\exists \vec{x} \in \mb{R}^n, L(\vec{x}) = \vec{z}$.  
+> Clearly, $\vec{y} + \vec{z} = L(\vec{w}) + L(\vec{x}) = L(\vec{w} + \vec{x})$ and $L(\vec{w} + \vec{x}) \in \range L$, so $\vec{y} + \vec{z} \in \range L$.  
+> Clearly, $c\vec{y} = cL(\vec{w}) = L(c\vec{w})$ and $L(c\vec{w}) \in \range L$, so $c\vec{y} \in \range L$.  
+> So $\range L$ satisfies the subspace test, and is a subspace of $\mb{R}^m$.  
+
+Find a basis of $\range L$ where $L(x_1, x_2, x_3) = (x_1 + x_2, 0, x_3)$:
+
+> Clearly, $L\left(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}\right) = \begin{bmatrix} x_1 + x_2 \\ 0 \\ x_3 \end{bmatrix} = (x_1 + x_2)\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + x_3\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$.  
+> So $\set{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}}$ spans $\range L$.  
+> Clearly, this set is linearly independent. So it is a basis of $\range L$.  
+
+Kernel
+------
+
+The **kernel** of a linear mapping $L: \mb{R}^n \to \mb{R}^m$ is the set of all vectors in the domain $\mb{R}^n$ that have an image of $\vec{0}$ under $L$ ($L(\vec{x}) = 0$).
+
+Formally, $\ker L = \set{\vec{x} \in \mb{R}^n \middle| L(\vec{x}) = \vec{0}}$. Basically, it is the set of vectors that make the function produce the zero vector.
+
+A vector $\vec{x}$ is in the kernel of the function if and only if $L(\vec{x}) = \vec{0}$.
+
+### Theorem 3.3.2
+
+If $L: \mb{R}^n \to \mb{R}^m$ is linear, then $\ker L$ is a subspace of the domain, $\mb{R}^n$.
+
+Proof:
+
+> Assume $L: \mb{R}^n \to \mb{R}^m$ is linear.  
+> By definition, $\ker L \subseteq \mb{R}^n$.  
+> Since $L(\vec{0}) = \vec{0}$, $\vec{0} \in \range L$.  
+> Let $\vec{y}, \vec{z} \in \ker L$.  
+> Clearly, $L(\vec{y} + \vec{z}) = L(\vec{y}) + L(\vec{z}) = \vec{0} + \vec{0} = \vec{0}$, so $\vec{y} + \vec{z} \in \ker L$.  
+> Clearly, $L(c\vec{y}) = cL(\vec{y}) = c\vec{0} = \vec{0}$ and $\vec{y} \in \ker L$, so $c\vec{y} \in \range L$.  
+> So $\ker L$ satisfies the subspace test, and is a subspace of $\mb{R}^n$.  
+
+Find a basis of the kernel of $L(x_1, x_2, x_3) = (x_1 + x_2, 0, x_3)$:
+
+> Let $\vec{x} \in \ker L$.  
+> By definition, $L(x_1, x_2, x_3) = (0, 0, 0)$.  
+> So $\begin{cases} x_1 + x_2 &= 0 \\ x_3 &= 0 \end{cases}$, and $x_2 = -x_1$, so $\vec{x} = \begin{bmatrix} x_1 \\ -x_1 \\ 0 \end{bmatrix} = x_1\begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}$.  
+> Clearly, $\set{\begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}}$ spans $\ker L$ and is linearly independent, so it is a basis.  
+
+### Theorem 3.3.4
+
+Given a linear mapping $L: \mb{R}^n \to \mb{R}^m$ with a standard matrix $A = [L]$, $\vec{x} \in \ker L \iff A\vec{x} = \vec{0}$.
+
+The **nullspace** of a matrix $A$ is the set $\operatorname{Null}(A) = \set{\vec{x} \in \mb{R}^n \middle| A\vec{x} = \vec{0}}$. In other words, the set of all vectors that make its corresponding linear mapping produce the zero vector.
+
+Also, if $L: \mb{R}^n \to \mb{R}^m$ is linear, then $\ker L = \operatorname{Null}([L])$.
+
+### Theorem 3.3.5
+
+Given a linear mapping $L: \mb{R}^n \to \mb{R}^m$ with a standard matrix $A = [L] = \begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix}$, then $\range L = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.
+
+Proof:
+
+> Let $\vec{y} \in \range L$. Then $\exists \vec{x} \in \mb{R}^n, L(\vec{x}) = \vec{y}$.  
+> Clearly, $\vec{y} = L(\vec{x}) = A\vec{x} = \begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix}\vec{x} = x_1\vec{a}_1 + \ldots + x_n\vec{a}_n$.  
+> Since $\vec{x}$ is arbitrary, $x_1\vec{a}_1 + \ldots + x_n\vec{a}_n \in \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.  
+> So $\range L \subseteq \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.  
+> Clearly, $\spn \set{\vec{a}_1, \ldots, \vec{a}_n} \subseteq \range L$, so $\range L = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.  
+
+The **column space** of a matrix $A$ is $\operatorname{Col}(A) = \set{A\vec{x} \middle| \vec{x} \in \mb{R}^n} = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.
+
+Also, if $L: \mb{R}^n \to \mb{R}^m$ is linear, then $\range L = \operatorname{Col}([L])$.
+
+The **row space** of a matrix $A$ is $\operatorname{Row}(A) = \operatorname{Col}(A^T)$. It is simply the span of the rows of the matrix instead of the columns.
+
+The **left nullspace** of a matrix $A$ is $\operatorname{Null}(A^T)$. It is simply the nullspace of the matrix transposed.
+
+Operations on Linear Mappings
+-----------------------------
+
+Let $L: \mb{R}^n \to \mb{R}^m$ and $M: \mb{R}^n \to \mb{R}^m$ be linear mappings. Let $t \in \mb{R}$.
+
+Equality: $L = M \iff \forall \vec{x} \in \mb{R}^n, L(\vec{x}) = M(\vec{x})$.
+
+Addition/subtraction: we can define $L \pm M: \mb{R}^n \to \mb{R}^m$, and $\forall \vec{x} \in \mb{R}^n, (L \pm M)(\vec{x}) = L(\vec{x}) \pm M(\vec{x})$.
+
+Scalar multiplication: we can define $tL: \mb{R}^n \to \mb{R}^m$, and $\forall \vec{x} \in \mb{R}^n, (tL)(\vec{x}) = tL(\vec{x})$.
+
+The set $\mb{L}$ is the set of all possible linear mappings. The domain is $\mb{R}^n$ and the codomain is $\mb{R}^m$ for all linear mappings in this set.
+
+### Theorem 3.4.1
+
+$[L \pm M] = [L] \pm [M]$ and $[tL] = t[L]$. In other words, addition and scalar multiplication over linear mappings are equivalent to the same operation applied to their standard matrices.
+
+Proof:
+
+> Let $\vec{x} \in \mb{R}^n$.  
+> Clearly, $(L + M)(\vec{x}) = L(\vec{m}) + M(\vec{x}) = ([L] + [M])\vec{x}$.  
+> So $[L + M] = [L] + [M]$.  
+> Clearly, $(tL)(\vec{x}) = tL(\vec{x}) = (t[L])\vec{x}$.  
+> So $[tL] = t[L]$.  
+
+### Theorem 3.4.2
+
+Let $L, M, N \in \mb{L}$ and $c, d \in \mb{R}$:
+
+* Closure under addition: $L + M \in \mb{L}$.
+* Associativity: $(L + M) + N = L + (M + N)$.
+* Commutativity: $L + M = M + L$.
+* Additive identity: $\exists O \in \mb{L}, L + O = L$ ($O(\vec{x}) = \vec{0} = O\vec{x}$).
+* Additive inverse: $\exists (-L) \in \mb{L}, L + (-L) = O$.
+* Closure under scalar multiplication: $cL \in \mb{L}$.
+* $c(dL) = (cd)L$.
+* $(c + d)L = cL + dL$.
+* $c(L + M) = cL + cM$.
+* Multiplicative identity: $1L = L$.
+
+### Composition
+
+Given $L: \mb{R}^n \to \mb{R}^m$ and $M: \mb{R}^m \to \mb{R}^p$, $M \circ L = M(L(\vec{x})) = [M][L]\vec{x}$.
+
+Also, $[M \circ L] = [M][L]$.
+
+Find the standard matrix of $R_\frac{\pi}{2} \circ R_\frac{3\pi}{2}$:
+
+> Recall that $R_\theta = \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix}$.  
+> So $R_\frac{\pi}{2} \circ R_\frac{3\pi}{2} = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}\vec{x} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \vec{x}$.  
+> So the standard matrix is $\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$
+
+Note that this is the identity matrix. This is because we rotated the vector by 90 degrees, then 270 degrees - back to where we started.
+
+The **identity mapping** $I \in \mb{L}$ is the mapping such that $I(\vec{x}) = I\vec{x}$. Note that the standard matrix of this linear mapping is the identity matrix.
+
+A linear mapping $L$ is **invertible** if and only if there exists another linear mapping $M$ such that $L \circ M = I$ ($L(M(\vec{x})) = \vec{x}$). If $M$ exists, then $M = L^{-1}$.
+
+The standard matrix of $M$ is such that $[L][M] = I$. Note that in order for the inverse to exist, $L$ must therefore have the same number of rows as $M$ has columns.
+
+In summary, the four **fundemental subspaces** of a matrix are:
+
+* Row space
+* Column space
+* Nullspace
+* Left Nullspace
