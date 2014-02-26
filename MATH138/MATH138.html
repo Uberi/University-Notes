@@ -122,8 +122,8 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>What about definite integrals? We need to be aware of the limits of integration when doing the variable switch:</p>
 <p>We are given <span class="math">\(\int_a^b f(x) \frac{\dee}{\dee x} f(x) \dee x\)</span>.</p>
 <p>Let <span class="math">\(u = f(x)\)</span>. We know that <span class="math">\(\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u\)</span>.</p>
-<p>So <span class="math">\(\int_a^b f(x) \frac{\dee}{\dee x} f(x) \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \frac{1}{\frac{\dee u}{\dee x}} \dee u = \int_{u(a)}^{u(b)} u \dee u = \frac{u^2}{2} + c = \frac{f(x)^2}{2} + c\)</span>.</p>
-<p>Basically, if we can find a factor of the integrand <span class="math">\(u\)</span> such that its derivative also appears in the integrand, the method of substition can get rid of the derivative.</p>
+<p>So <span class="math">\(\int_a^b f(x) \frac{\dee}{\dee x} f(x) \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \frac{1}{\frac{\dee u}{\dee x}} \dee u = \int_{u(a)}^{u(b)} u \dee u = \evalat{\frac{u^2}{2}}_{u(a)}^{u(b)} + c = \evalat{\frac{f(x)^2}{2}}_a^b + c\)</span>.</p>
+<p>Basically, if we can find a factor of the integrand <span class="math">\(u\)</span> such that its derivative also appears in the integrand, the method of substitution can get rid of the derivative.</p>
 <p>Evaluate <span class="math">\(\int \cos x \sin x \dee x\)</span></p>
 <blockquote>
 <p>Let <span class="math">\(u = \sin x\)</span>. So <span class="math">\(\dee u = \cos x \dee x\)</span>.<br />So <span class="math">\(\int \cos x \sin x \dee x = \int \sin x \dee u = -\int u \dee u\)</span>.<br />Clearly, <span class="math">\(\int u \dee u = \frac{u^2}{2} + c = \frac{\sin^2 x}{2} + c\)</span>.</p>
@@ -132,7 +132,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>One clue that the substitution is a good choice is if the derivative of the substitution appears in the numerator of the function.</p>
 <p>How do we prove that <span class="math">\(\int_1^x \frac{1}{t} = \ln x\)</span>? How do we know that both have the same properties:</p>
 <ul>
-<li>Property 1 - multiplication rule: <span class="math">\(\ln ab = ln a + \ln b\)</span></li>
+<li>Property 1 - multiplication rule: <span class="math">\(\ln ab = \ln a + \ln b\)</span></li>
 <li>Property 2 - power rule: <span class="math">\(\ln a^r = r \ln a\)</span>)</li>
 </ul>
 <p>We want to prove property 1:</p>
@@ -155,7 +155,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>We often have integrands that are products. For example, <span class="math">\(\int x \sin x \dee x\)</span></p>
 <p>It would be nice to be able to differentiate or integrate just one of the factors rather than having to do the whole thing.</p>
 <p>Recall the product rule: <span class="math">\(\frac{\dee}{\dee x} (a(x) b(x)) = (\frac{\dee}{\dee x} a(x)) b(x) + a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
-<p>Move the last term to the left: <span class="math">\((\frac{\dee}{\dee x} a(x)) b(x) = \frac{\dee}{\dee x} (a(x) b(x)) - a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
+<p>Move the terms around: <span class="math">\((\frac{\dee}{\dee x} a(x)) b(x) = \frac{\dee}{\dee x} (a(x) b(x)) - a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
 <p>If we integrate both sides with respect to <span class="math">\(x\)</span>, we get: <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) = \int \frac{\dee}{\dee x} a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
 <p>By FTC2, <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) = a(x) b(x) + c - \int a(x) \frac{\dee}{\dee x} b(x)\)</span>.</p>
 <p>Since there would also be a <span class="math">\(c\)</span> term from the second integral, we don't need to write it. So <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x) \dee x\)</span>.</p>
@@ -249,12 +249,13 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <h1 id="section-4">15/1/14</h1>
 <p>We do substitution by choosing a <span class="math">\(u = f(x)\)</span>, then doing <span class="math">\(\frac{\dee u}{\dee x} = f&#39;(x)\)</span>, so <span class="math">\(\dee u = f&#39;(x) \dee x\)</span>, so <span class="math">\(\dee x = \frac{1}{f&#39;(x)} \dee x\)</span>.</p>
 <p>Evaluate <span class="math">\(\int \frac{x}{\sqrt{3 - 2x - x^2}}\)</span>:</p>
-<pre><code>   /|
-  / |
- /  | ;wip
-/___|</code></pre>
+<pre><code>          /|
+       2 / |
+        /  | $u$
+       /___|</code></pre>
+<p><span class="math">\(\theta\)</span> <span class="math">\(\sqrt{4 - u^2}\)</span></p>
 <blockquote>
-<p>We want to use trigonometric substitution to solve this, but it isn't in the right form.<br />We want to write <span class="math">\(3 - 2x - x^2\)</span> in the form of <span class="math">\(a^2 + (x + b)^2\)</span> (completing the square).<br />Clearly, <span class="math">\(3 - 2x - x^2 = 3 - (2x + x^2) = 3 - (2x + x^2 + 1) + 1\)</span> (make the term into a perfect square trinomial by adding <span class="math">\(\frac{b}{2}\)</span> in a way that cancels out).<br />So <span class="math">\(3 - 2x - x^2 = 4 - (x + 1)^2\)</span> and <span class="math">\(\int \frac{x}{\sqrt{3 - 2x - x^2}} = \int \frac{x}{\sqrt{4 - (x + 1)^2}}\)</span>.<br />Let <span class="math">\(u = x + 1\)</span>. Then <span class="math">\(\dee u = \dee x\)</span>.<br />We can draw a triangle with the hypotenuse being 2, the opposite side <span class="math">\(u\)</span>, and adjacent side <span class="math">\(\sqrt{4 - u^2}\)</span>.<br />From the triangle, we know that <span class="math">\(u = 2\sin \theta\)</span> (<span class="math">\(x = 2\sin \theta - 1\)</span>) and <span class="math">\(\sqrt{4 - u^2} = 2 \cos \theta\)</span>, so <span class="math">\(\dee u = 2 \cos \theta \dee \theta\)</span>.<br />So <span class="math">\(\int \frac{x}{\sqrt{4 - (x + 1)^2}} = \int \frac{2\sin \theta - 1}{2 \cos \theta} 2\cos \theta \dee \theta = \int 2\sin \theta - 1 \dee \theta = -2 \cos \theta - \theta + c\)</span>.<br />;wip: use the triangle to rewrite x = , or something like that Clearly, <span class="math">\(\theta = \arcsin \frac{u}{2}\)</span> So <span class="math">\(-2 \cos \theta - \theta + c\)</span></p>
+<p>We want to use trigonometric substitution to solve this, but it isn't in the right form.<br />We want to write <span class="math">\(3 - 2x - x^2\)</span> in the form of <span class="math">\(a^2 + (x + b)^2\)</span> (completing the square).<br />Clearly, <span class="math">\(3 - 2x - x^2 = 3 - (2x + x^2) = 3 - (2x + x^2 + 1) + 1\)</span> (make the term into a perfect square trinomial by adding <span class="math">\(\frac{b}{2}\)</span> in a way that cancels out).<br />So <span class="math">\(3 - 2x - x^2 = 4 - (x + 1)^2\)</span> and <span class="math">\(\int \frac{x}{\sqrt{3 - 2x - x^2}} = \int \frac{x}{\sqrt{4 - (x + 1)^2}}\)</span>.<br />Let <span class="math">\(u = x + 1\)</span>. Then <span class="math">\(\dee u = \dee x\)</span>.<br />We can draw a triangle with the hypotenuse being 2, the opposite side <span class="math">\(u\)</span>, and adjacent side <span class="math">\(\sqrt{4 - u^2}\)</span>.<br />From the triangle, we know that <span class="math">\(u = 2\sin \theta\)</span> (<span class="math">\(x = 2\sin \theta - 1\)</span>) and <span class="math">\(\sqrt{4 - u^2} = 2 \cos \theta\)</span>, so <span class="math">\(\dee u = 2 \cos \theta \dee \theta\)</span>.<br />So <span class="math">\(\int \frac{x}{\sqrt{4 - (x + 1)^2}} = \int \frac{2\sin \theta - 1}{2 \cos \theta} 2\cos \theta \dee \theta = \int 2\sin \theta - 1 \dee \theta = -2 \cos \theta - \theta + c\)</span>.<br />From the triangle, we can tell that <span class="math">\(\cos \theta = \frac{\sqrt{4 - u^2}}{2}\)</span>, since the cosine is the adjacent over the hypotenuse.<br />Clearly, <span class="math">\(\theta = \arcsin \frac{u}{2}\)</span> So <span class="math">\(\int \frac{x}{\sqrt{3 - 2x - x^2}} = -2 \cos \theta - \theta + c = -2 \frac{\sqrt{4 - (x + 1)^2}}{2} - \arcsin \frac{x + 1}{2} + c\)</span>.</p>
 </blockquote>
 <h2 id="partial-fraction-decomposition">Partial Fraction Decomposition</h2>
 <p>Consider <span class="math">\(\frac{1}{2} + \frac{1}{3} = \frac{3 + 2}{2 \cdot 3} = \frac{5}{6}\)</span>.</p>
@@ -266,13 +267,13 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>We can solve for <span class="math">\(A_1, \ldots, A_n\)</span> by cross multiplying: <span class="math">\(\frac{P(x)}{Q(x)} = \frac{A_1 ((x + c_2) \cdot \ldots \cdot (x + c_n)) + \ldots + A_n ((x + c_1) \cdot \ldots \cdot (x + c_{n - 1}))}{(x + c_1) \cdot \ldots \cdot (x + c_n)}\)</span>. So <span class="math">\(P(x) = A_1 ((x + c_2) \cdot \ldots \cdot (x + c_n)) + \ldots + A_n ((x + c_1) \cdot \ldots \cdot (x + c_{n - 1}))\)</span>.</p>
 <p>For now, assume that the order of <span class="math">\(P\)</span> is less than that of <span class="math">\(Q\)</span>.</p>
 <p>We can find <span class="math">\(A\)</span> and <span class="math">\(B\)</span> using the <strong>cover up method</strong>: if we choose values of <span class="math">\(x = -c_i, 1 \le i \le n\)</span>, then there is a 0 factor in every term on the right side except the one containing <span class="math">\(A_i\)</span>. It is then trivial to solve for <span class="math">\(A_i\)</span>. Repeat this for each <span class="math">\(i\)</span> and we can find <span class="math">\(A_1, \ldots, A_n\)</span>.</p>
-<p>We can also find <span class="math">\(A\)</span> and <span class="math">\(B\)</span> by setting up a system of equations. Clearly, <span class="math">\(x + 1 = A(x + 3) + B(x + 2) = (A + B)x + (3A + 2B)\)</span>. Then <span class="math">\(A + B = 1\)</span> and <span class="math">\(3A + 2B = 1\)</span>, so we solve for the two linear equations.</p>
+<p>We can also find <span class="math">\(A\)</span> and <span class="math">\(B\)</span> by setting up a system of equations. Clearly, <span class="math">\(x + 1 = A(x + 3) + B(x + 2) = (A + B)x + (3A + 2B)\)</span>. Since <span class="math">\((A + B)x = x\)</span> and <span class="math">\((3A + 2B) = 1\)</span>, <span class="math">\(A + B = 1\)</span> and <span class="math">\(3A + 2B = 1\)</span>, so we solve for the two linear equations to find <span class="math">\(A\)</span> and <span class="math">\(B\)</span>.</p>
 <p>Evaluate <span class="math">\(\int \frac{x - 1}{x^2 + 5x + 6} \dee x\)</span>:</p>
 <blockquote>
 <p>Clearly, <span class="math">\(\int \frac{x - 1}{x^2 + 5x + 6} \dee x = \int \frac{x - 1}{(x + 2)(x + 3)} \dee x = \int \frac{A}{x + 2} \dee x + \int \frac{B}{x + 3} \dee x\)</span> for some <span class="math">\(A\)</span> and <span class="math">\(B\)</span>.<br />Now we need to find <span class="math">\(A\)</span> and <span class="math">\(B\)</span>. We do this by solving <span class="math">\(x + 1 = A(x + 3) + B(x + 2)\)</span>.<br />Note that <span class="math">\(A\)</span> and <span class="math">\(B\)</span> must work for any <span class="math">\(x\)</span>. We now solve using the cover up method.<br />Choose <span class="math">\(x = -3\)</span> (because <span class="math">\(A(x + 3) = 0\)</span>). Then <span class="math">\(-3 + 1 = A(-3 + 3) + B(-3 + 2) = -2 = -B\)</span>. Then <span class="math">\(B = 2\)</span>.<br />Choose <span class="math">\(x = -2\)</span> (because <span class="math">\(B(x + 2) = 0\)</span>). Then <span class="math">\(-2 + 1 = A(-2 + 3) + B(-2 + 2) = -1 = B\)</span>. Then <span class="math">\(A = -1\)</span>.<br />Then <span class="math">\(\int \frac{x - 1}{x^2 + 5x + 6} \dee x = -\int \frac{1}{x + 2} \dee x + \int \frac{2}{x + 3} \dee x = -\ln(x + 2) + 2\ln(x + 3) + c\)</span>.</p>
 </blockquote>
 <h1 id="section-5">17/1/14</h1>
-<p>This only works for factorable polynomials.</p>
+<p>Note that partial fraction decomposition only works for factorable polynomials.</p>
 <p>What if the numerator has a higher or equal degree than the denominator? We can use long division to make it lower again to apply partial fraction decomposition. When we do long division, we get a normal polynomial as the quotient and a rational function with the degree of the numerator lower than that of the denominator.</p>
 <p>Evaluate <span class="math">\(\int \frac{x^3 + 4x^2 + 2x - 5}{x^2 + 5x + 6} \dee x\)</span>:</p>
 <pre><code>                             x - 1
@@ -290,14 +291,14 @@ x^2 + 5x + 6 | x^3 + 4x^2 + 2x - 5
 <p>What if there are repeated factors? We can keep the repeated factors as part of the group to use this technique.</p>
 <p>Consider <span class="math">\(\int \frac{x + 1}{(x + 2)^2 (x + 3)}\)</span>:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\frac{x + 1}{(x + 2)^2 (x + 3)} = \frac{A}{(x + 2)^2 (x + 3)}\)</span> ;wip</p>
+<p>Clearly, <span class="math">\(\frac{x + 1}{(x + 2)^2 (x + 3)} = \frac{A}{(x + 2)^2 (x + 3)} + \frac{B}{(x + 2) (x + 3)} + \frac{C}{(x + 2)^2}\)</span> ;wip</p>
 </blockquote>
 <p>For each factor <span class="math">\((ax + b)^n\)</span>, include <span class="math">\(n\)</span> terms in the form <span class="math">\(\frac{A_1}{(ax + b)} + \ldots + \frac{A_n}{(ax + b)^n}\)</span>.</p>
 <p>What if the denominator is not factorable into linear factors of real numbers (factors contain irreducable quadratics)? For example, <span class="math">\(\frac{x}{x^2 + x + 1}\)</span>.</p>
 <p>We want to avoid imaginary numbers when doing this. Therefore, each irreducable quadratic of the form <span class="math">\(x^2 + x + 1\)</span>, we get a term of the form <span class="math">\(\frac{A + Bx}{ax^2 + bx + c}\)</span>.</p>
 <p>Consider <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x\)</span>:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{A + Bx}{x^2 + x + 1} \dee x + \int \frac{C}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \frac{11}{7} \ln (x - 2)\)</span>.<br />How do we integrate the first term? We can use a trigonometric substitution to solve this.<br />Clearly, <span class="math">\(\frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} = \frac{\frac{2}{7} - \frac{11}{7}x}{(x^2 + x + \frac{1}{4}) + 1 - \frac{1}{4}} = \frac{\frac{2}{7} + \frac{11}{7}x}{(x + \frac{1}{2})^2 + \frac{3}{4}}\)</span>, by completing the square.<br />Let <span class="math">\(u = x + \frac{1}{2}\)</span>. Then <span class="math">\(\dee x = \dee u\)</span>.<br />Clearly, <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x = \frac{1}{7} \int \frac{2 - 11x}{(x + \frac{1}{2})^2 + \frac{3}{4}} \dee x\)</span> ;wip: use substitution with <span class="math">\(s = \frac{\sqrt{3}}{2} \tan \theta\)</span></p>
+<p>Clearly, <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{A + Bx}{x^2 + x + 1} \dee x + \int \frac{C}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \frac{11}{7} \ln (x - 2)\)</span>.<br />How do we integrate the first term? We can use a trigonometric substitution to solve this.<br />Clearly, <span class="math">\(\frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} = \frac{\frac{2}{7} - \frac{11}{7}x}{(x^2 + x + \frac{1}{4}) + 1 - \frac{1}{4}} = \frac{\frac{2}{7} + \frac{11}{7}x}{(x + \frac{1}{2})^2 + \frac{3}{4}}\)</span>, by completing the square.<br />Let <span class="math">\(u = x + \frac{1}{2}\)</span>. Then <span class="math">\(\dee x = \dee u\)</span>.<br />Clearly, <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x = \frac{1}{7} \int \frac{2 - 11x}{(x + \frac{1}{2})^2 + \frac{3}{4}} \dee x = \frac{1}{7} \int \frac{-11u + \frac{15}{2}}{u^2 + \frac{3}{4}} \dee x\)</span>.<br />Let <span class="math">\(u = \frac{\sqrt{3}}{2} \tan \theta\)</span>. Then <span class="math">\(\frac{1}{7} \int \frac{-11u + \frac{15}{2}}{u^2 + \frac{3}{4}} \dee x = \frac{1}{7} \int \frac{-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}}{\frac{3}{4}(\tan^2 \theta + 1)} \dee x = \frac{1}{7} \int \frac{-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}}{\frac{3}{4\cos^2 \theta}} \dee x = \frac{1}{21} \int 4\cos^2 \theta (-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}) \dee x = \frac{1}{21} \int 4\cos^2 \theta (-11\frac{\sqrt{3}}{2}\tan \theta) \dee x + \frac{4}{21}\frac{15}{2} \int \cos^2 \theta \dee x ;wip: use substitution with \)</span>s =  $</p>
 </blockquote>
 <p>Completing the square: we want the resulting polynomial to have repeated roots. In the quadratic formula, this is when the discriminant <span class="math">\(b^2 - 4ac = 0\)</span>, so <span class="math">\(c = \frac{b^2}{4a}\)</span>.</p>
 <p>When we have an irreducible quadratic, we always get an <span class="math">\(\arctan\)</span> and a <span class="math">\(\ln \abs{ax^2 + bx + c}\)</span>.</p>
@@ -313,9 +314,9 @@ x^2 + 5x + 6 | x^3 + 4x^2 + 2x - 5
 <p>The two other common methods of integration are infinite series expansion and another that uses complex numbers.</p>
 <h2 id="volumes-of-solids">Volumes of Solids</h2>
 <p>Recall that a single-variable integral can be geometrically interpreted as the area underneath the curve.</p>
-<p>In the Riemann integral, that would be represented as <span class="math">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n \delta x_i f(x_i)\)</span>. Here, <span class="math">\(\delta x_i\)</span> is the base, and <span class="math">\(f(x_i)\)</span> is the height, and they form a rectangle.</p>
+<p>In the Riemann integral, that would be represented as <span class="math">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n \Delta x_i f(x_i)\)</span>. Here, <span class="math">\(\Delta x_i\)</span> is the base, and <span class="math">\(f(x_i)\)</span> is the height, and they form a rectangle.</p>
 <p>The same idea can be applied to 3D, for the volume under a surface. We want to find the area under <span class="math">\(f(x, y)\)</span>.</p>
-<p>In the Riemann integral, that would be represented as <span class="math">\(\iint f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \delta x_i \delta y_i f(x_i, y_i)\)</span>. Here, <span class="math">\(\delta x_i \delta y_i\)</span> is the base, and <span class="math">\(f(x_i, y_i)\)</span>, and they form a rectangle.</p>
+<p>In the Riemann integral, that would be represented as <span class="math">\(\iint f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \Delta x_i \Delta y_i f(x_i, y_i)\)</span>. Here, <span class="math">\(\Delta x_i \Delta y_i\)</span> is the base, and <span class="math">\(f(x_i, y_i)\)</span>, and they form a rectangle.</p>
 <p>In general, the volume of an arbitrary solid requires a multi-variable/multi-dimensional integral (a calculus III topic). However, there are cases where symmetry allows us to use a single variable integral.</p>
 <p>Main axes:</p>
 <pre><code>   y
@@ -344,7 +345,7 @@ z</code></pre>
 <h1 id="section-7">22/1/14</h1>
 <p>;wip: figure out how to find the length of a curve in 2D</p>
 <p>The rotation method works whenever we can find the area function for a given slice along a certain axis.</p>
-<p>Here, <span class="math">\(\delta V = A(x) \delta x\)</span>, and then we add up all these tiny volumes to get the total volume.</p>
+<p>Here, <span class="math">\(\Delta V = A(x) \Delta x\)</span>, and then we add up all these tiny volumes to get the total volume.</p>
 <p>This method is called the <strong>method of disks</strong>, because we are integrating the volume of a lot of small disks along the axis of rotation.</p>
 <p>There is another way to approximate the area and have it converge into an exact value. We can estimate the volume of solids of rotation by integrating the volume of a lot of nested cylinders perpendicular to the axis of rotation - this is the <strong>method of shells</strong>.</p>
 <p>Consider a hollow cylinder of thickness <span class="math">\(\dee x\)</span> with inner radius <span class="math">\(x\)</span> and height <span class="math">\(h(x)\)</span>. If we cut it and unroll it, then it becomes very close to a cuboid of dimensions <span class="math">\(2\pi x\)</span> by <span class="math">\(h(x)\)</span> by <span class="math">\(\dee x\)</span>. In other words, we assume the inner circumference is almost the same as the outer circumference, since <span class="math">\(\dee x\)</span> is so small.</p>
@@ -364,10 +365,10 @@ z</code></pre>
 <h1 id="section-8">24/1/14</h1>
 <p>The method of shells and the method of disks both have cases where they work better than the other. The method of disks works best for functions that extend parallel to the axis of rotation, while the method of shells, for functions that extend perpendicular to the axis of rotation.</p>
 <p>The method of disks uses the formula <span class="math">\(\int_a^b A(x) \dee x\)</span>, where <span class="math">\(a, b\)</span> are the extents along the axis of rotation.</p>
-<p>The method of shells uses the formula <span class="math">\(\int_0^b h(x) 2\pi x \dee x\)</span>, where <span class="math">\(b\)</span> is the extent perpendicular to the axis of rotation.</p>
+<p>The method of shells uses the formula <span class="math">\(\int_a^b h(x) 2\pi x \dee x\)</span>, where <span class="math">\(a, b\)</span> are the extents perpendicular to the axis of rotation.</p>
 <p>Consider <span class="math">\(y = 2x^2 - x^3 = x^2(2 - x)\)</span> from 0 to 2 rotated about the y-axis:</p>
 <blockquote>
-<p>This solid looks like the top half of a donut.<br />The method of disks is difficult to use here, because we would need disks with holes in them. We will use the method of shells.<br />The height of each of our cylinders is <span class="math">\(h(x) = 2x^2 - x^3\)</span>.<br />The volume of each shell is <span class="math">\(\delta V = h(x) 2\pi x \dee x = 4\pi x^3 \dee x - 2\pi x^4 \dee x\)</span>.<br />So the volume of the solid is <span class="math">\(4\pi \int_0^2 x^3 \dee x - 2\pi \int_0^2 x^4 \dee x = 4\pi \evalat{\frac{x^4}{4}}_0^2 - 2\pi \evalat{\frac{x^5}{5}}_0^2 = 4\pi \frac{2^4}{4} - 2\pi \frac{2^5}{5} = \frac{16\pi}{5}\)</span>.</p>
+<p>This solid looks like the top half of a donut.<br />The method of disks is difficult to use here, because we would need disks with holes in them. We will use the method of shells.<br />The height of each of our cylinders is <span class="math">\(h(x) = 2x^2 - x^3\)</span>.<br />The volume of each shell is <span class="math">\(\Delta V = h(x) 2\pi x \dee x = 4\pi x^3 \dee x - 2\pi x^4 \dee x\)</span>.<br />So the volume of the solid is <span class="math">\(4\pi \int_0^2 x^3 \dee x - 2\pi \int_0^2 x^4 \dee x = 4\pi \evalat{\frac{x^4}{4}}_0^2 - 2\pi \evalat{\frac{x^5}{5}}_0^2 = 4\pi \frac{2^4}{4} - 2\pi \frac{2^5}{5} = \frac{16\pi}{5}\)</span>.</p>
 </blockquote>
 <p>A variation on the method is disks is the <strong>method of washers</strong>. Here, we have disks with holes in them for whatever reason, and our area, rather than simply being the area of a circle, is the area of the circle minus the area of the hole in the middle. Make sure to use <span class="math">\(\pi \int (r_o^2 - r_i^2) \dee x\)</span> rather than <span class="math">\(\pi \int (r_o - r_i)^2 \dee x\)</span>, where <span class="math">\(r_o\)</span> is the outer radius and <span class="math">\(r_i\)</span> is the inner radius.</p>
 <p>For example, what is the volume enclosed by rotating the area between <span class="math">\(y = \sqrt{x}\)</span> and <span class="math">\(y = x\)</span> about the x-axis? We could use the disk method, except instead of finding the area of a disk, we find the area of a disk with a hole in it, a washer. However, in this case it would be easier to do it with the method of shells.</p>
@@ -391,16 +392,17 @@ z</code></pre>
 <blockquote>
 <p>There is a vertical asymptote at <span class="math">\(x = 0\)</span>. This makes it so that we can't directly use the fundemental theorem of calculus to evaluate the integral.<br />We can instead split the integral at the middle, and since it is an even function, we can combine the two integrals: <span class="math">\(2\int_0^1 \frac{1}{\sqrt{x}} \dee x\)</span>.<br />There is an asymptote, so the integral is an improper one: <span class="math">\(2\int_0^1 \frac{1}{\sqrt{x}} \dee x = 2 \lim_{T \to 0} \int_T^1 \frac{1}{\sqrt{x}} \dee x = 2 (2 \cdot 1^\frac{1}{2} - 2\lim_{T \to 0} T^\frac{1}{2}) = 4\)</span>.</p>
 </blockquote>
-<p>Consider <span class="math">\(\int_{-1}^1 \dee x\)</span>: ;wip: what was the question?</p>
+<p>Consider <span class="math">\(\int_{-1}^1 \frac{1}{2\sqrt{x}} \dee x\)</span>: ;wip: what was the actual example here?</p>
 <blockquote>
-<p>We might do <span class="math">\(\int_{-1}^1 \dee x = \evalat{-\sqrt{x}}_{-1}^1 = -2\)</span>.<br />However, the integral <strong>does not exist</strong>. We need to be careful because the result looks just fine, and does not indicate that an error occurred.<br />The integral does not make any sense because the integrand diverges towards <span class="math">\(\infty\)</span> at <span class="math">\(x = 0\)</span>.</p>
+<p>We might do <span class="math">\(\int_{-1}^1 \frac{1}{2\sqrt{x}} \dee x = \evalat{-\sqrt{\abs{x}}}_{-1}^1 = -2\)</span>.<br />However, the integral <strong>does not exist</strong>. We need to be careful because the result looks just fine, and does not indicate that an error occurred.<br />The integral does not make any sense because the integrand diverges towards <span class="math">\(\infty\)</span> at <span class="math">\(x = 0\)</span>.</p>
 </blockquote>
 <p>The idea behind this is that we need to figure out if an improper integral exists even without integrating it first.</p>
 <p>If a function <strong>converges</strong>, that means it goes to a finite value. The opposite is if it <strong>diverges</strong>, when it goes to <span class="math">\(\pm \infty\)</span> or does not exist.</p>
 <p>In other words, convergence means the result is a number, and divergence means the result is not a number.</p>
+<p>If an improper integral converges, then the value we get by evaluating its antiderivatives at the endpoints is the correct value of the integral. However, if it diverges, then the answer could be different. We always need to check for divergence in order to catch these cases.</p>
 <h3 id="comparison-theorem">Comparison Theorem</h3>
-<p>Given functions <span class="math">\(f(x), g(x)\)</span> such that <span class="math">\(f(x) \ge g(x) \ge 0\)</span> for <span class="math">\(x \ge a\)</span>, if <span class="math">\(\int_a^\infty f(x) \dee x\)</span> converges, then <span class="math">\(\int_a^\infty g(x) \dee x\)</span> also converges.</p>
-<p>The contrapositive is also useful in that if <span class="math">\(\int_a^\infty g(x) \dee x\)</span> diverges, then <span class="math">\(\int_a^\infty f(x) \dee x\)</span> also diverges.</p>
+<p>Given functions <span class="math">\(f(x), g(x)\)</span> such that <span class="math">\(f(x) \ge g(x) \ge 0\)</span> for <span class="math">\(x \ge a\)</span>, if <span class="math">\(\int_a^b f(x) \dee x\)</span> converges, then <span class="math">\(\int_a^b g(x) \dee x\)</span> also converges.</p>
+<p>The contrapositive is also useful in that if <span class="math">\(\int_a^b g(x) \dee x\)</span> diverges, then <span class="math">\(\int_a^b f(x) \dee x\)</span> also diverges.</p>
 <p>Prove that, given that <span class="math">\(\int_1^\infty e^{-x} \dee x\)</span> converges, <span class="math">\(\int_1^\infty \frac{1}{x^P} \dee x\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span></p>
 <blockquote>
 <p>Assume <span class="math">\(P &gt; 1\)</span>.<br />;wip</p>
@@ -467,8 +469,8 @@ z</code></pre>
 <p>Then, we use <span class="math">\(\frac{\dee y}{\dee x} = f(x, y)\)</span> to estimate the slope of the tangent at any given <span class="math">\(x\)</span> value.</p>
 <p>Then, we observe that <span class="math">\(\frac{\dee y}{\dee x} = f(x_{n - 1}, y_{n - 1}) \approx \frac{y_n - y_{n - 1}}{x_n - x_{n - 1}}\)</span> - the slope of the tangent is close to the slope of the secant.</p>
 <p>So <span class="math">\(y_n(x) \approx y_{n - 1} + (x_n - x_{n - 1})f(x_{n - 1}, y_{n - 1})\)</span>. This is written in update form, so we can now use a table of values to calculate it.</p>
-<p>Let <span class="math">\(\delta x = x_n - x_{n - 1}\)</span>. Then <span class="math">\(y_n(x) \approx y_{n - 1} + f(x_{n - 1}, y_{n - 1}) \delta x\)</span>.</p>
-<p>We can also write this as <span class="math">\(y_{n + 1}(x) \approx y_n + f(x_n, y_n) \delta x\)</span> where <span class="math">\(\delta x = x_{n + 1} - x_n\)</span>.</p>
+<p>Let <span class="math">\(\Delta x = x_n - x_{n - 1}\)</span>. Then <span class="math">\(y_n(x) \approx y_{n - 1} + f(x_{n - 1}, y_{n - 1}) \Delta x\)</span>.</p>
+<p>We can also write this as <span class="math">\(y_{n + 1}(x) \approx y_n + f(x_n, y_n) \Delta x\)</span> where <span class="math">\(\Delta x = x_{n + 1} - x_n\)</span>.</p>
 <p>Now we can write <span class="math">\(\frac{\dee y}{\dee x} = y - x\)</span> as <span class="math">\(y_n(x) \approx y_{n - 1} + (x_n - x_{n - 1})(x_{n - 1} - y_{n - 1})\)</span>.</p>
 <p>We can actually approximate this function by using a table of values. Since <span class="math">\(y(0) = 2\)</span>, <span class="math">\(y_0 = 2\)</span>:</p>
 <table>
@@ -477,7 +479,7 @@ z</code></pre>
 <th align="left"><span class="math">\(n\)</span></th>
 <th align="left"><span class="math">\(x_n\)</span></th>
 <th align="left"><span class="math">\(y_n\)</span></th>
-<th align="left"><span class="math">\(f(x_n, y_n) \delta x\)</span></th>
+<th align="left"><span class="math">\(f(x_n, y_n) \Delta x\)</span></th>
 <th align="left"><span class="math">\(y_{n + 1} \approx y_n + f(x_n, y_n) \delta x\)</span></th>
 </tr>
 </thead>
@@ -540,15 +542,12 @@ z</code></pre>
 x \frac{\dee x}{\dee t} &amp;= \frac{1}{(1 + t)^2} \\
 x \dee x &amp;= \frac{1}{(1 + t)^2} \dee t \\
 \int x \dee x &amp;= \int \frac{1}{(1 + t)^2} \dee t \\
-\frac{x^2}{2} + c &amp;= -\frac{1}{1 + t} + c \\
 \frac{x^2}{2} &amp;= -\frac{1}{1 + t} + c \\
 x &amp;= 0, t = 0 \\
 \frac{0^2}{2} &amp;= -\frac{1}{1 + 0} + c \\
 c &amp;= 1 \\
 \frac{x^2}{2} &amp;= -\frac{1}{1 + t} + 1 \\
-x &amp;= \sqrt{2 - \frac{2}{1 + t}} \\
-x &amp;= \sqrt{\frac{2(1 + t) - 2}{1 + t}} \\
-x &amp;= \sqrt{\frac{2t}{1 + t}} \\
+x &amp;= \sqrt{2 - \frac{2}{1 + t}} = \sqrt{\frac{2(1 + t) - 2}{1 + t}} = \sqrt{\frac{2t}{1 + t}} \\
 \end{align}
 \]</span></p>
 </blockquote>
@@ -563,8 +562,9 @@ x &amp;= \sqrt{\frac{2t}{1 + t}} \\
 \ln \abs{T - T_{ambient}} &amp;= -kt + c \\
 e^{\ln \abs{T - T_{ambient}}} &amp;= e^{-kt + c} \\
 \abs{T - T_{ambient}} &amp;= e^{-kt}e^c \\
+T - T_{ambient} &amp;= \pm e^ce^{-kt} \\
 \end{align}
-\]</span> Let <span class="math">\(A = e^c\)</span>. Then <span class="math">\(\abs{T - T_{ambient}} = Ae^{-kt}\)</span>.<br />Note that at <span class="math">\(t = 0\)</span>, <span class="math">\(T = T_{hot}\)</span> for some fixed <span class="math">\(T_{hot}\)</span>.<br />So <span class="math">\(\abs{T_{hot} - T_{ambient}} = Ae^{-k0}\)</span> and <span class="math">\(\abs{T_{hot} - T_{ambient}} = A\)</span>.<br />So <span class="math">\(\abs{T - T_{ambient}} = \abs{T_{hot} - T_{ambient}}e^{-kt}\)</span>.</p>
+\]</span> Let <span class="math">\(A = \pm e^c\)</span>. Then <span class="math">\(T - T_{ambient} = Ae^{-kt}\)</span>.<br />Note that at <span class="math">\(t = 0\)</span>, <span class="math">\(T = T_0\)</span> for some fixed <span class="math">\(T_0\)</span>.<br />So <span class="math">\(T_0 - T_{ambient} = Ae^{-k0}\)</span> and <span class="math">\(T_0 - T_{ambient} = A\)</span>.<br />So <span class="math">\(T = T_{ambient} + (T_0 - T_{ambient})e^{-kt}\)</span>.</p>
 </blockquote>
 <p>Suppose we have a population of <span class="math">\(n\)</span> individuals. The simplest population model is <span class="math">\(\frac{\dee n}{\dee t} = kn\)</span> for some <span class="math">\(k \ge 0\)</span>. Solve for <span class="math">\(n\)</span>:</p>
 <blockquote>
@@ -572,15 +572,15 @@ e^{\ln \abs{T - T_{ambient}}} &amp;= e^{-kt + c} \\
 \begin{align}
 \frac{\dee n}{n} &amp;= k \dee t \\
 \int \frac{\dee n}{n} &amp;= k \int \dee t \\
-\ln n &amp;= kt + c \\
-n &amp;= e^{kt}e^c \\
-A = e^c; n &amp;= Ae^{kt} \\
+\ln \abs{n} &amp;= kt + c \\
+n &amp;= \pm e^ce^{kt} \\
+A = \pm e^c; n &amp;= Ae^{kt} \\
 \end{align}
 \]</span> Note that at <span class="math">\(t = 0\)</span>, <span class="math">\(n = n_0\)</span> for some constant <span class="math">\(n_0\)</span> - the starting population.<br />So <span class="math">\(n_0 = Ae^{k0}\)</span> and <span class="math">\(A = n_0\)</span>.<br />So <span class="math">\(n = n_0e^{kt}\)</span>.</p>
 </blockquote>
 <p>A simple variation on this population growth model is <strong>logistic growth</strong>, which also models resource exhaustion: <span class="math">\(\frac{\dee N}{\dee t} = rN\left(1 - \frac{N}{k}\right)\)</span>. Note that there are two equalibria - <span class="math">\(N = 0\)</span> and <span class="math">\(N = k\)</span>. <span class="math">\(k\)</span> is a constant called the <strong>carrying capacity</strong>.</p>
 <p>For <span class="math">\(\frac{n}{k} \ll 1\)</span> (much less than), logistic growth behaves like exponential growth.</p>
-<p>The flow field looks like arrows pointing right toward <span class="math">\(N(t) = k\)</span>. Therefore, the population always tends toward <span class="math">\(k\)</span> in this model.</p>
+<p>The flow field looks like arrows pointing right toward <span class="math">\(N(t) = k\)</span> starting from <span class="math">\(N(t) = 0\)</span>. Therefore, the population always tends toward <span class="math">\(k\)</span> in this model.</p>
 <h1 id="section-14">7/2/14</h1>
 <p>The main idea is that there is a lot more to the equations than just the solutions. The flow field is useful for discovering how the equation behaves.</p>
 <p>Even when we solve the equation, it does not tell us much about how the function works intuitively.</p>
@@ -711,14 +711,52 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <blockquote>
 <p>It is intuitively obvious that if a value is always increasing, and cannot exceed a value, then it must converge to some value.<br />Without loss of generality, assume that <span class="math">\(a_n\)</span> is increasing and bounded by <span class="math">\(a_n \le b\)</span>.<br />Let <span class="math">\(p\)</span> be the smallest possible upper bound on <span class="math">\(a_n\)</span>.<br />As an aside, <span class="math">\(p\)</span> is the limit of the sequence - any number less than this is not an upper bound, and any number greater than this can be smaller while still being an upper bound.<br />Let <span class="math">\(\epsilon &gt; 0\)</span>.<br />Clearly, <span class="math">\(p - \epsilon &lt; p\)</span>, so <span class="math">\(\exists k, p - \epsilon &lt; a_k\)</span>, since any value less than the .<br />Assume <span class="math">\(n &gt; k\)</span>. Clearly, <span class="math">\(a_k \le a_n\)</span> (since the sequence is monotonically increasing).<br />Clearly, <span class="math">\(a_n \le p &lt; p + \epsilon\)</span>.<br />So <span class="math">\(p - \epsilon &lt; a_n &lt; p + \epsilon\)</span> and <span class="math">\(-\epsilon &lt; a_n - p &lt; \epsilon\)</span>.<br />So <span class="math">\(\abs{a_n - p} &lt; \epsilon\)</span>, and by the definition of the limit, <span class="math">\(p\)</span> is the limit and the sequence converges.</p>
 </blockquote>
-<p>Does <span class="math">\(a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1\)</span> converge?</p>
+<p>Does <span class="math">\(a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}\)</span> converge?</p>
 <blockquote>
 <p>Clearly, <span class="math">\(\frac{1}{n!}\)</span> is always positive, so <span class="math">\(a_{n + 1} = a_n + \frac{1}{n!}\)</span> is monotonically increasing.<br />Clearly, <span class="math">\(n! \le 2^{n - 1}\)</span>, since <span class="math">\(1 \cdot \ldots \cdot k \le 2 \cdot \ldots \cdots 2 \text{ (} k - 1 \text{ times)}\)</span>.<br />So <span class="math">\(\frac{1}{n!} \le \frac{1}{2^{k - 1}}\)</span> and <span class="math">\(a_n \le 1 + 1 + \frac{1}{2} + \frac{1}{2^2} + \ldots + \frac{1}{2^{n - 1}}\)</span>.<br />Clearly, this is a monotonically increasing geometric progression, and so we can determine that <span class="math">\(1 + 1 + \frac{1}{2} + \frac{1}{2^2} + \ldots + \frac{1}{2^{n - 1}} = \frac{1 - \left(\frac{1}{2}\right)^n}{1 - \frac{1}{2}}\)</span>.<br />Clearly, <span class="math">\(\lim_{n \to \infty} \frac{1 - \left(\frac{1}{2}\right)^n}{1 - \frac{1}{2}} = \frac{1}{\frac{1}{2}} = 2\)</span>.<br />So <span class="math">\(a_n \le \frac{1}{2^{k - 1}} \le 2\)</span>, and by the convergence theorem, the sequence converges.<br />As an aside, it converges to <span class="math">\(e\)</span>.</p>
 </blockquote>
 <p>Does <span class="math">\(a_1 = 1, a_{n + 1} = \sqrt{3 + 2a_n}\)</span> converge?</p>
 <blockquote>
-<p>The first few elements of the sequence are <span class="math">\(1, 2.23606797749979, 2.73352079834772, 2.90981813807933, 2.96978724425819\)</span>.<br />Clearly, <span class="math">\(a_{n + 1}\)</span> is equivalent to <span class="math">\(\sqrt{3 + 2a_n} \ge a_n\)</span>, which is equivalent to <span class="math">\(a_n^2 - 2a_n - 3 \le 0\)</span>, or <span class="math">\(-1 \le a_n \le 3\)</span>.<br />So <span class="math">\(a_n\)</span> is monotonically increasing over <span class="math">\([-1, 3]\)</span>.<br />Assume <span class="math">\(a_n \le 3\)</span>. Then <span class="math">\(3 + 2a_n \le 9\)</span> and <span class="math">\(\sqrt{3 + 2a_n} \le 3\)</span>. So <span class="math">\(a_{n + 1} \le 3\)</span>.<br />So by induction, <span class="math">\(a_n\)</span> has an upper bound of 3.<br />So by the convergence theorem, the sequence converges.</p>
+<p>The first few elements of the sequence are <span class="math">\(1, 2.23606797749979, 2.73352079834772, 2.90981813807933, 2.96978724425819\)</span>.<br />Clearly, <span class="math">\(a_{n + 1} \ge a_n\)</span> is equivalent to <span class="math">\(\sqrt{3 + 2a_n} \ge a_n\)</span>, which is equivalent to <span class="math">\(a_n^2 - 2a_n - 3 \le 0\)</span>, or <span class="math">\(-1 \le a_n \le 3\)</span>.<br />So <span class="math">\(a_n\)</span> is monotonically increasing if <span class="math">\([-1, 3]\)</span>.<br />Assume <span class="math">\(a_n \le 3\)</span>. Then <span class="math">\(3 + 2a_n \le 9\)</span> and <span class="math">\(\sqrt{3 + 2a_n} \le 3\)</span>. So <span class="math">\(a_{n + 1} \le 3\)</span>.<br />So by induction, <span class="math">\(a_n\)</span> has an upper bound of 3.<br />So by the monotone convergence theorem, the sequence converges.<br />Also, note that if the limit exists, we can set <span class="math">\(n \to \infty\)</span> and so <span class="math">\(a_{n + 1} = a_n\)</span>.<br />So <span class="math">\(a_n^2 - 2a_n - 3 = 0\)</span> and <span class="math">\(a_n  = -1, 3\)</span>. -1 is a extraneous answer since the function is always positive, so <span class="math">\(\lim_{n \to \infty} a_n = 3\)</span>.</p>
 </blockquote>
+<h1 id="section-18">24/2/14</h1>
+<p>The monotone convergence theorem only tells us whether the sequence converges, but not what the actual limit is.</p>
+<p>We usually prove the monotonicity and boundedness of sequences by comparing them to sequences with known properties (like geometric series), or by using induction.</p>
+<p>To use induction to prove monotonicity, we simply need to prove that <span class="math">\(a_{n + 1} \ge a_n\)</span> for any <span class="math">\(n\)</span>.</p>
+<p>To use induction to prove boundedness, we first need to guess a <span class="math">\(k\)</span> that might be an upper or lower bound. Then, we verify that it works for the first element of the sequence, and then that <span class="math">\(a_n \le k \implies a_{n + 1} \le k\)</span>.</p>
+<p>If we know that the limit exists, sometimes we can find the limit by setting <span class="math">\(n \to \infty\)</span>, which implies that <span class="math">\(a_{n + 1} = a_n\)</span> (since we are at the limit).</p>
+<p>Then we can write <span class="math">\(a_{n + 1}\)</span> in terms of <span class="math">\(a_n\)</span>, and we get a function over <span class="math">\(a_n\)</span>, which we can often isolate and solve for, which gives us the limit <span class="math">\(L = a_n\)</span>. The previous example uses this technique.</p>
+<p>This doesn't always work. For example, it work doesn't for <span class="math">\(a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}\)</span>. If we try to substitute it, we get <span class="math">\(a_n = a_n + \frac{1}{n!} = a_n + \frac{1}{\infty} = a_n\)</span>. This doesn't help us find the limit.</p>
+<h2 id="series">Series</h2>
+<p>A series is a sum of terms. We denote this as <span class="math">\(S_N = \sum_{n = 0}^N a_n, a_n \in \mb{R}\)</span>. Here, <span class="math">\(N \in \mb{Z}, N \ge 0\)</span>.</p>
+<p>For now, <span class="math">\(a_n\)</span> is a constant, which can depend on <span class="math">\(n\)</span>. Eventually, we want to be able to build and analyze sequences of functions, which can depend on other variables like <span class="math">\(x\)</span>.</p>
+<p>If <span class="math">\(N\)</span> is finite, then <span class="math">\(S_N\)</span> is known as a <strong>partial sum</strong>.</p>
+<p>We analyze series by analyzing the sequence of the sequence values: <span class="math">\(\sum_{n = 0}^0 a_n, \sum_{n = 0}^1 a_n, \sum_{n = 0}^2 a_n, \ldots\)</span>.</p>
+<p>So just as we take the limit of a sequence, we can take the limit of a series with <span class="math">\(\lim_{N \to \infty} \sum_{n = 0}^N a_n\)</span>. This is the relation between sequences and series.</p>
+<p>A sequence <strong>converges</strong> if this limit exists. Otherwise, it <strong>diverges</strong>.</p>
+<p>For example, we previously saw the sequence <span class="math">\(a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}\)</span>, which is actually equivalent to the series <span class="math">\(S_N = \sum_{n = 0}^1 \frac{1}{n!}\)</span>. They are equivalent because <span class="math">\(a_n = S_N\)</span> when <span class="math">\(n = N\)</span>.</p>
+<h1 id="section-19">26/2/14</h1>
+<h3 id="geometric-series">Geometric Series</h3>
+<p>The geometric series is <span class="math">\(S_N = \sum_{n = 0}^N x^n = 1 + x + x^2 + x^3 + \ldots + x^n\)</span>.</p>
+<p>The geometric series is a rare example of a series that can be written in <strong>closed form</strong> - non-recursively and in a finite number of symbols. In other words, we can write the value of the partial sum of the series as a function of <span class="math">\(n\)</span>.</p>
+<p>Which values of <span class="math">\(n\)</span> make the series converge?</p>
+<p>First, we start with the identity of <span class="math">\(1 - x^{N + 1} = (1 - x)(1 + x + x^2 + x^3 + \ldots + x^N)\)</span>. This is true because <span class="math">\((1 - x)(1 + x + x^2 + x^3 + \ldots + x^N) = (1 + x + x^2 + x^3 + \ldots + x^N) - (x + x^2 + x^3 + \ldots + x^{N + 1}) = 1 + x - x + x^2 - x^2 + x^3 - x^3 + \ldots + x^N - x^N - x^{N + 1} = 1 - x^{N + 1}\)</span>.</p>
+<p>So <span class="math">\(S_N = \sum_{n = 0}^N x^n = 1 + x + x^2 + x^3 + \ldots + x^N = \frac{1 - x^{N + 1}}{1 - x}\)</span>.</p>
+<p>So the limit is <span class="math">\(\lim_{N \to \infty} \frac{1 - x^{N + 1}}{1 - x} = \frac{1}{1 - x} - \frac{x}{1 - x} \lim_{N \to \infty} x^N\)</span>.</p>
+<p>If <span class="math">\(x = 1\)</span>, then <span class="math">\(\lim_{N \to \infty} \sum_{n = 0}^N 1^n = 1 + \ldots + 1 = \infty\)</span>, and the sequence diverges.</p>
+<p>If <span class="math">\(x = -1\)</span>, then <span class="math">\(\lim_{N \to \infty} \sum_{n = 0}^N (-1)^n = 1 - 1 + 1 - 1 + \ldots + 1 - 1 = ?\)</span>. This sum either has the value 0 or 1, and oscillates infinitely as we go to infinity. Therefore, the sequence diverges.</p>
+<p>Clearly, if <span class="math">\(x &gt; 1\)</span> or <span class="math">\(x &lt; -1\)</span>, the value goes to positive or negative infinity, and the sequence diverges.</p>
+<p>Therefore, the geometric series converges only for <span class="math">\(-1 &lt; x &lt; 1\)</span>, since if this is the case, <span class="math">\(\lim_{N \to \infty} x^N = 0\)</span> and <span class="math">\(\lim_{N \to \infty} S_N = \frac{1}{1 - x}\)</span>.</p>
+<p>Does <span class="math">\(\sum_{k = 1}^\infty 3^{2k}5^{1 - k}\)</span> converge?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\sum_{k = 1}^\infty 3^{2k}5^{1 - k} = \sum_{k = 1}^\infty 9^k5^{1 - k} = 5\sum_{k = 1}^\infty 9^k5^{-k} = 5\sum_{k = 1}^\infty \frac{9^k}{5^k} = 5\sum_{k = 1}^\infty \left(\frac{9}{5}\right)^k\)</span>.<br />Since <span class="math">\(\frac{9}{5} \ge 1\)</span>, the geometric sequence diverges as the limit of <span class="math">\(\left(\frac{9}{5}\right)^k\)</span> goes to infinity.</p>
+</blockquote>
+<p>Does <span class="math">\(3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2\)</span> converge?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2 = 3 \sum_{n = 0}^\infty \left(-\frac{x}{2}\right)^n\)</span>.<br />Clearly, in order to converge, <span class="math">\(-1 \le -\frac{x}{2} \le -1\)</span>, or <span class="math">\(-1 \le \frac{x}{2} \le 1\)</span>.<br />As an aside, it converges to <span class="math">\(\frac{3}{1 + \frac{x}{2}} = \frac{6}{2 + x}\)</span>.</p>
+</blockquote>
+<h3 id="convergence">Convergence</h3>
+<p>Notice that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, <span class="math">\(\lim_{n \to \infty} a_n = 0\)</span> is a requirement for convergence.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

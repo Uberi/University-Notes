@@ -652,7 +652,7 @@ A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp;
 <blockquote>
 <p>Let <span class="math">\(\vec{y} \in \range L\)</span>. Then <span class="math">\(\exists \vec{x} \in \mb{R}^n, L(\vec{x}) = \vec{y}\)</span>.<br />Clearly, <span class="math">\(\vec{y} = L(\vec{x}) = A\vec{x} = \begin{bmatrix} \vec{a}_1 &amp; \ldots &amp; \vec{a}_n \end{bmatrix}\vec{x} = x_1\vec{a}_1 + \ldots + x_n\vec{a}_n\)</span>.<br />Since <span class="math">\(\vec{x}\)</span> is arbitrary, <span class="math">\(x_1\vec{a}_1 + \ldots + x_n\vec{a}_n \in \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.<br />So <span class="math">\(\range L \subseteq \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.<br />Clearly, <span class="math">\(\spn \set{\vec{a}_1, \ldots, \vec{a}_n} \subseteq \range L\)</span>, so <span class="math">\(\range L = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.</p>
 </blockquote>
-<p>The <strong>column space</strong> of a matrix <span class="math">\(A\)</span> is <span class="math">\(\operatorname{Col}(A) = \set{A\vec{x} \middle| \vec{x} \in \mb{R}^n} = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.</p>
+<p>The <strong>column space</strong> of a matrix <span class="math">\(A = \begin{bmatrix} \vec{a}_1 &amp; \ldots &amp; \vec{a}_n \end{bmatrix}\)</span> is <span class="math">\(\operatorname{Col}(A) = \set{A\vec{x} \middle| \vec{x} \in \mb{R}^n} = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}\)</span>.</p>
 <p>Also, if <span class="math">\(L: \mb{R}^n \to \mb{R}^m\)</span> is linear, then <span class="math">\(\range L = \operatorname{Col}([L])\)</span>.</p>
 <p>The <strong>row space</strong> of a matrix <span class="math">\(A\)</span> is <span class="math">\(\operatorname{Row}(A) = \operatorname{Col}(A^T)\)</span>. It is simply the span of the rows of the matrix instead of the columns.</p>
 <p>The <strong>left nullspace</strong> of a matrix <span class="math">\(A\)</span> is <span class="math">\(\operatorname{Null}(A^T)\)</span>. It is simply the nullspace of the matrix transposed.</p>
@@ -693,7 +693,7 @@ A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp;
 <p>The <strong>identity mapping</strong> <span class="math">\(I \in \mb{L}\)</span> is the mapping such that <span class="math">\(I(\vec{x}) = I\vec{x}\)</span>. Note that the standard matrix of this linear mapping is the identity matrix.</p>
 <p>A linear mapping <span class="math">\(L\)</span> is <strong>invertible</strong> if and only if there exists another linear mapping <span class="math">\(M\)</span> such that <span class="math">\(L \circ M = I\)</span> (<span class="math">\(L(M(\vec{x})) = \vec{x}\)</span>). If <span class="math">\(M\)</span> exists, then <span class="math">\(M = L^{-1}\)</span>.</p>
 <p>The standard matrix of <span class="math">\(M\)</span> is such that <span class="math">\([L][M] = I\)</span>. Note that in order for the inverse to exist, <span class="math">\(L\)</span> must therefore have the same number of rows as <span class="math">\(M\)</span> has columns.</p>
-<p>In summary, the four <strong>fundemental subspaces</strong> of a matrix are:</p>
+<p>In summary, the four <strong>fundamental subspaces</strong> of a matrix are:</p>
 <ul>
 <li>Row space</li>
 <li>Column space</li>

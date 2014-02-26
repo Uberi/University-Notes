@@ -80,9 +80,9 @@ We are given $\int_a^b f(x) \frac{\dee}{\dee x} f(x) \dee x$.
 
 Let $u = f(x)$. We know that $\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u$.
 
-So $\int_a^b f(x) \frac{\dee}{\dee x} f(x) \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \frac{1}{\frac{\dee u}{\dee x}} \dee u = \int_{u(a)}^{u(b)} u \dee u = \frac{u^2}{2} + c = \frac{f(x)^2}{2} + c$.
+So $\int_a^b f(x) \frac{\dee}{\dee x} f(x) \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \dee x = \int_{u(a)}^{u(b)} u \frac{\dee u}{\dee x} \frac{1}{\frac{\dee u}{\dee x}} \dee u = \int_{u(a)}^{u(b)} u \dee u = \evalat{\frac{u^2}{2}}_{u(a)}^{u(b)} + c = \evalat{\frac{f(x)^2}{2}}_a^b + c$.
 
-Basically, if we can find a factor of the integrand $u$ such that its derivative also appears in the integrand, the method of substition can get rid of the derivative.
+Basically, if we can find a factor of the integrand $u$ such that its derivative also appears in the integrand, the method of substitution can get rid of the derivative.
 
 Evaluate $\int \cos x \sin x \dee x$
 
@@ -96,7 +96,7 @@ One clue that the substitution is a good choice is if the derivative of the subs
 
 How do we prove that $\int_1^x \frac{1}{t} = \ln x$? How do we know that both have the same properties:
 
-* Property 1 - multiplication rule: $\ln ab = ln a + \ln b$
+* Property 1 - multiplication rule: $\ln ab = \ln a + \ln b$
 * Property 2 - power rule: $\ln a^r = r \ln a$)
 
 We want to prove property 1:
@@ -139,7 +139,7 @@ It would be nice to be able to differentiate or integrate just one of the factor
 
 Recall the product rule: $\frac{\dee}{\dee x} (a(x) b(x)) = (\frac{\dee}{\dee x} a(x)) b(x) + a(x) \frac{\dee}{\dee x} b(x)$.
 
-Move the last term to the left: $(\frac{\dee}{\dee x} a(x)) b(x) = \frac{\dee}{\dee x} (a(x) b(x)) - a(x) \frac{\dee}{\dee x} b(x)$.
+Move the terms around: $(\frac{\dee}{\dee x} a(x)) b(x) = \frac{\dee}{\dee x} (a(x) b(x)) - a(x) \frac{\dee}{\dee x} b(x)$.
 
 If we integrate both sides with respect to $x$, we get: $\int (\frac{\dee}{\dee x} a(x)) b(x) = \int \frac{\dee}{\dee x} a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x)$.
 
@@ -297,10 +297,11 @@ We do substitution by choosing a $u = f(x)$, then doing $\frac{\dee u}{\dee x} =
 
 Evaluate $\int \frac{x}{\sqrt{3 - 2x - x^2}}$:
 
-       /|
-      / |
-     /  | ;wip
-    /___|
+              /|
+           2 / |
+            /  | $u$
+           /___|
+   $\theta$ $\sqrt{4 - u^2}$
 
 > We want to use trigonometric substitution to solve this, but it isn't in the right form.  
 > We want to write $3 - 2x - x^2$ in the form of $a^2 + (x + b)^2$ (completing the square).  
@@ -310,9 +311,9 @@ Evaluate $\int \frac{x}{\sqrt{3 - 2x - x^2}}$:
 > We can draw a triangle with the hypotenuse being 2, the opposite side $u$, and adjacent side $\sqrt{4 - u^2}$.  
 > From the triangle, we know that $u = 2\sin \theta$ ($x = 2\sin \theta - 1$) and $\sqrt{4 - u^2} = 2 \cos \theta$, so $\dee u = 2 \cos \theta \dee \theta$.  
 > So $\int \frac{x}{\sqrt{4 - (x + 1)^2}} = \int \frac{2\sin \theta - 1}{2 \cos \theta} 2\cos \theta \dee \theta = \int 2\sin \theta - 1 \dee \theta = -2 \cos \theta - \theta + c$.  
-> ;wip: use the triangle to rewrite \cos x = \frac{\sqrt{4 - u^2}}{2}, or something like that
+> From the triangle, we can tell that $\cos \theta = \frac{\sqrt{4 - u^2}}{2}$, since the cosine is the adjacent over the hypotenuse.  
 > Clearly, $\theta = \arcsin \frac{u}{2}$
-> So $-2 \cos \theta - \theta + c$
+> So $\int \frac{x}{\sqrt{3 - 2x - x^2}} = -2 \cos \theta - \theta + c = -2 \frac{\sqrt{4 - (x + 1)^2}}{2} - \arcsin \frac{x + 1}{2} + c$.  
 
 Partial Fraction Decomposition
 ------------------------------
@@ -335,7 +336,7 @@ For now, assume that the order of $P$ is less than that of $Q$.
 
 We can find $A$ and $B$ using the **cover up method**: if we choose values of $x = -c_i, 1 \le i \le n$, then there is a 0 factor in every term on the right side except the one containing $A_i$. It is then trivial to solve for $A_i$. Repeat this for each $i$ and we can find $A_1, \ldots, A_n$.
 
-We can also find $A$ and $B$ by setting up a system of equations. Clearly, $x + 1 = A(x + 3) + B(x + 2) = (A + B)x + (3A + 2B)$. Then $A + B = 1$ and $3A + 2B = 1$, so we solve for the two linear equations.
+We can also find $A$ and $B$ by setting up a system of equations. Clearly, $x + 1 = A(x + 3) + B(x + 2) = (A + B)x + (3A + 2B)$. Since $(A + B)x = x$ and $(3A + 2B) = 1$, $A + B = 1$ and $3A + 2B = 1$, so we solve for the two linear equations to find $A$ and $B$.
 
 Evaluate $\int \frac{x - 1}{x^2 + 5x + 6} \dee x$:
 
@@ -348,7 +349,7 @@ Evaluate $\int \frac{x - 1}{x^2 + 5x + 6} \dee x$:
 
 # 17/1/14
 
-This only works for factorable polynomials.
+Note that partial fraction decomposition only works for factorable polynomials.
 
 What if the numerator has a higher or equal degree than the denominator? We can use long division to make it lower again to apply partial fraction decomposition. When we do long division, we get a normal polynomial as the quotient and a rational function with the degree of the numerator lower than that of the denominator.
 
@@ -372,7 +373,7 @@ What if there are repeated factors? We can keep the repeated factors as part of 
 
 Consider $\int \frac{x + 1}{(x + 2)^2 (x + 3)}$:
 
-> Clearly, $\frac{x + 1}{(x + 2)^2 (x + 3)} = \frac{A}{(x + 2)^2 (x + 3)}$ ;wip
+> Clearly, $\frac{x + 1}{(x + 2)^2 (x + 3)} = \frac{A}{(x + 2)^2 (x + 3)} + \frac{B}{(x + 2) (x + 3)} + \frac{C}{(x + 2)^2}$ ;wip
 
 For each factor $(ax + b)^n$, include $n$ terms in the form $\frac{A_1}{(ax + b)} + \ldots + \frac{A_n}{(ax + b)^n}$.
 
@@ -388,7 +389,12 @@ Consider $\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x$:
 > How do we integrate the first term? We can use a trigonometric substitution to solve this.  
 > Clearly, $\frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} = \frac{\frac{2}{7} - \frac{11}{7}x}{(x^2 + x + \frac{1}{4}) + 1 - \frac{1}{4}} = \frac{\frac{2}{7} + \frac{11}{7}x}{(x + \frac{1}{2})^2 + \frac{3}{4}}$, by completing the square.  
 > Let $u = x + \frac{1}{2}$. Then $\dee x = \dee u$.  
-> Clearly, $\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x = \frac{1}{7} \int \frac{2 - 11x}{(x + \frac{1}{2})^2 + \frac{3}{4}} \dee x$
+> Clearly, $\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x = \frac{1}{7} \int \frac{2 - 11x}{(x + \frac{1}{2})^2 + \frac{3}{4}} \dee x = \frac{1}{7} \int \frac{-11u + \frac{15}{2}}{u^2 + \frac{3}{4}} \dee x$.  
+> Let $u = \frac{\sqrt{3}}{2} \tan \theta$. Then $\frac{1}{7} \int \frac{-11u + \frac{15}{2}}{u^2 + \frac{3}{4}} \dee x
+= \frac{1}{7} \int \frac{-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}}{\frac{3}{4}(\tan^2 \theta + 1)} \dee x
+= \frac{1}{7} \int \frac{-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}}{\frac{3}{4\cos^2 \theta}} \dee x
+= \frac{1}{21} \int 4\cos^2 \theta (-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}) \dee x
+= \frac{1}{21} \int 4\cos^2 \theta (-11\frac{\sqrt{3}}{2}\tan \theta) \dee x + \frac{4}{21}\frac{15}{2} \int \cos^2 \theta \dee x
 ;wip: use substitution with $s = \frac{\sqrt{3}}{2} \tan \theta$
 
 Completing the square: we want the resulting polynomial to have repeated roots. In the quadratic formula, this is when the discriminant $b^2 - 4ac = 0$, so $c = \frac{b^2}{4a}$.
@@ -413,11 +419,11 @@ Volumes of Solids
 
 Recall that a single-variable integral can be geometrically interpreted as the area underneath the curve.
 
-In the Riemann integral, that would be represented as $\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n \delta x_i f(x_i)$. Here, $\delta x_i$ is the base, and $f(x_i)$ is the height, and they form a rectangle.
+In the Riemann integral, that would be represented as $\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n \Delta x_i f(x_i)$. Here, $\Delta x_i$ is the base, and $f(x_i)$ is the height, and they form a rectangle.
 
 The same idea can be applied to 3D, for the volume under a surface. We want to find the area under $f(x, y)$.
 
-In the Riemann integral, that would be represented as $\iint f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \delta x_i \delta y_i f(x_i, y_i)$. Here, $\delta x_i \delta y_i$ is the base, and $f(x_i, y_i)$, and they form a rectangle.
+In the Riemann integral, that would be represented as $\iint f(x, y) \dee x \dee y = \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 1}^n \Delta x_i \Delta y_i f(x_i, y_i)$. Here, $\Delta x_i \Delta y_i$ is the base, and $f(x_i, y_i)$, and they form a rectangle.
 
 In general, the volume of an arbitrary solid requires a multi-variable/multi-dimensional integral (a calculus III topic). However, there are cases where symmetry allows us to use a single variable integral.
 
@@ -463,7 +469,7 @@ Find the volume of the solid represented by rotating $f(x)$ about the x-axis:
 
 The rotation method works whenever we can find the area function for a given slice along a certain axis.
 
-Here, $\delta V = A(x) \delta x$, and then we add up all these tiny volumes to get the total volume.
+Here, $\Delta V = A(x) \Delta x$, and then we add up all these tiny volumes to get the total volume.
 
 This method is called the **method of disks**, because we are integrating the volume of a lot of small disks along the axis of rotation.
 
@@ -500,14 +506,14 @@ The method of shells and the method of disks both have cases where they work bet
 
 The method of disks uses the formula $\int_a^b A(x) \dee x$, where $a, b$ are the extents along the axis of rotation.
 
-The method of shells uses the formula $\int_0^b h(x) 2\pi x \dee x$, where $b$ is the extent perpendicular to the axis of rotation.
+The method of shells uses the formula $\int_a^b h(x) 2\pi x \dee x$, where $a, b$ are the extents perpendicular to the axis of rotation.
 
 Consider $y = 2x^2 - x^3 = x^2(2 - x)$ from 0 to 2 rotated about the y-axis:
 
 > This solid looks like the top half of a donut.  
 > The method of disks is difficult to use here, because we would need disks with holes in them. We will use the method of shells.  
 > The height of each of our cylinders is $h(x) = 2x^2 - x^3$.  
-> The volume of each shell is $\delta V = h(x) 2\pi x \dee x = 4\pi x^3 \dee x - 2\pi x^4 \dee x$.  
+> The volume of each shell is $\Delta V = h(x) 2\pi x \dee x = 4\pi x^3 \dee x - 2\pi x^4 \dee x$.  
 > So the volume of the solid is $4\pi \int_0^2 x^3 \dee x - 2\pi \int_0^2 x^4 \dee x = 4\pi \evalat{\frac{x^4}{4}}_0^2 - 2\pi \evalat{\frac{x^5}{5}}_0^2 = 4\pi \frac{2^4}{4} - 2\pi \frac{2^5}{5} = \frac{16\pi}{5}$.  
 
 A variation on the method is disks is the **method of washers**. Here, we have disks with holes in them for whatever reason, and our area, rather than simply being the area of a circle, is the area of the circle minus the area of the hole in the middle. Make sure to use $\pi \int (r_o^2 - r_i^2) \dee x$ rather than $\pi \int (r_o - r_i)^2 \dee x$, where $r_o$ is the outer radius and $r_i$ is the inner radius.
@@ -547,9 +553,9 @@ Consider $\int_{-1}^1 \frac{1}{\sqrt{\abs{x}}} \dee x$:
 > We can instead split the integral at the middle, and since it is an even function, we can combine the two integrals: $2\int_0^1 \frac{1}{\sqrt{x}} \dee x$.  
 > There is an asymptote, so the integral is an improper one: $2\int_0^1 \frac{1}{\sqrt{x}} \dee x = 2 \lim_{T \to 0} \int_T^1 \frac{1}{\sqrt{x}} \dee x = 2 (2 \cdot 1^\frac{1}{2} - 2\lim_{T \to 0} T^\frac{1}{2}) = 4$.  
 
-Consider $\int_{-1}^1 \dee x$: ;wip: what was the question?
+Consider $\int_{-1}^1 \frac{1}{2\sqrt{x}} \dee x$: ;wip: what was the actual example here?
 
-> We might do $\int_{-1}^1 \dee x = \evalat{-\sqrt{x}}_{-1}^1 = -2$.  
+> We might do $\int_{-1}^1 \frac{1}{2\sqrt{x}} \dee x = \evalat{-\sqrt{\abs{x}}}_{-1}^1 = -2$.  
 > However, the integral **does not exist**. We need to be careful because the result looks just fine, and does not indicate that an error occurred.  
 > The integral does not make any sense because the integrand diverges towards $\infty$ at $x = 0$.  
 
@@ -559,11 +565,13 @@ If a function **converges**, that means it goes to a finite value. The opposite 
 
 In other words, convergence means the result is a number, and divergence means the result is not a number.
 
+If an improper integral converges, then the value we get by evaluating its antiderivatives at the endpoints is the correct value of the integral. However, if it diverges, then the answer could be different. We always need to check for divergence in order to catch these cases.
+
 ### Comparison Theorem
 
-Given functions $f(x), g(x)$ such that $f(x) \ge g(x) \ge 0$ for $x \ge a$, if $\int_a^\infty f(x) \dee x$ converges, then $\int_a^\infty g(x) \dee x$ also converges.
+Given functions $f(x), g(x)$ such that $f(x) \ge g(x) \ge 0$ for $x \ge a$, if $\int_a^b f(x) \dee x$ converges, then $\int_a^b g(x) \dee x$ also converges.
 
-The contrapositive is also useful in that if $\int_a^\infty g(x) \dee x$ diverges, then $\int_a^\infty f(x) \dee x$ also diverges.
+The contrapositive is also useful in that if $\int_a^b g(x) \dee x$ diverges, then $\int_a^b f(x) \dee x$ also diverges.
 
 Prove that, given that $\int_1^\infty e^{-x} \dee x$ converges, $\int_1^\infty \frac{1}{x^P} \dee x$ converges if and only if $P > 1$
 
@@ -700,20 +708,20 @@ Then, we observe that $\frac{\dee y}{\dee x} = f(x_{n - 1}, y_{n - 1}) \approx \
 
 So $y_n(x) \approx y_{n - 1} + (x_n - x_{n - 1})f(x_{n - 1}, y_{n - 1})$. This is written in update form, so we can now use a table of values to calculate it.
 
-Let $\delta x = x_n - x_{n - 1}$. Then $y_n(x) \approx y_{n - 1} + f(x_{n - 1}, y_{n - 1}) \delta x$.
+Let $\Delta x = x_n - x_{n - 1}$. Then $y_n(x) \approx y_{n - 1} + f(x_{n - 1}, y_{n - 1}) \Delta x$.
 
-We can also write this as $y_{n + 1}(x) \approx y_n + f(x_n, y_n) \delta x$ where $\delta x = x_{n + 1} - x_n$.
+We can also write this as $y_{n + 1}(x) \approx y_n + f(x_n, y_n) \Delta x$ where $\Delta x = x_{n + 1} - x_n$.
 
 Now we can write $\frac{\dee y}{\dee x} = y - x$ as $y_n(x) \approx y_{n - 1} + (x_n - x_{n - 1})(x_{n - 1} - y_{n - 1})$.
 
 We can actually approximate this function by using a table of values. Since $y(0) = 2$, $y_0 = 2$:
 
-| $n$ | $x_n$ | $y_n$ | $f(x_n, y_n) \delta x$ | $y_{n + 1} \approx y_n + f(x_n, y_n) \delta x$ |
-|-----|-------|-------|------------------------|------------------------------------------|
-|   0 |   0.0 |     2 |  $(2 - 0.0)0.1 = 0.20$ |                    $2.2 \approx 2 + 0.2$ |
-|   1 |   0.1 |   2.2 |  $(2 - 0.1)0.2 = 0.38$ |                $2.58 \approx 2.2 + 0.38$ |
-|   2 |   0.2 |  2.58 |  $(2 - 0.2)0.3 = 0.54$ |               $3.12 \approx 2.58 + 0.54$ |
-|   3 |   0.3 |  3.12 |  $(2 - 0.3)0.4 = 0.68$ |                                 $\ldots$ |
+| $n$ | $x_n$ | $y_n$ | $f(x_n, y_n) \Delta x$ | $y_{n + 1} \approx y_n + f(x_n, y_n) \delta x$ |
+|-----|-------|-------|------------------------|------------------------------------------------|
+|   0 |   0.0 |     2 |  $(2 - 0.0)0.1 = 0.20$ |                          $2.2 \approx 2 + 0.2$ |
+|   1 |   0.1 |   2.2 |  $(2 - 0.1)0.2 = 0.38$ |                      $2.58 \approx 2.2 + 0.38$ |
+|   2 |   0.2 |  2.58 |  $(2 - 0.2)0.3 = 0.54$ |                     $3.12 \approx 2.58 + 0.54$ |
+|   3 |   0.3 |  3.12 |  $(2 - 0.3)0.4 = 0.68$ |                                       $\ldots$ |
 
 Now we can a table of values for the equation. We can plot this on a graph to approximate the curve.
 
@@ -762,15 +770,12 @@ Solve $\sqrt{x \frac{\dee x}{\dee t}} = \frac{1}{1 + t}$ for $x(t) = x(0) = 0, t
 x \frac{\dee x}{\dee t} &= \frac{1}{(1 + t)^2} \\
 x \dee x &= \frac{1}{(1 + t)^2} \dee t \\
 \int x \dee x &= \int \frac{1}{(1 + t)^2} \dee t \\
-\frac{x^2}{2} + c &= -\frac{1}{1 + t} + c \\
 \frac{x^2}{2} &= -\frac{1}{1 + t} + c \\
 x &= 0, t = 0 \\
 \frac{0^2}{2} &= -\frac{1}{1 + 0} + c \\
 c &= 1 \\
 \frac{x^2}{2} &= -\frac{1}{1 + t} + 1 \\
-x &= \sqrt{2 - \frac{2}{1 + t}} \\
-x &= \sqrt{\frac{2(1 + t) - 2}{1 + t}} \\
-x &= \sqrt{\frac{2t}{1 + t}} \\
+x &= \sqrt{2 - \frac{2}{1 + t}} = \sqrt{\frac{2(1 + t) - 2}{1 + t}} = \sqrt{\frac{2t}{1 + t}} \\
 \end{align}
 $$
 
@@ -786,12 +791,13 @@ Solve $\frac{\dee T}{\dee t} = -k(T - T_{ambient})$ - Newton's law of cooling:
 \ln \abs{T - T_{ambient}} &= -kt + c \\
 e^{\ln \abs{T - T_{ambient}}} &= e^{-kt + c} \\
 \abs{T - T_{ambient}} &= e^{-kt}e^c \\
+T - T_{ambient} &= \pm e^ce^{-kt} \\
 \end{align}
 $$
-> Let $A = e^c$. Then $\abs{T - T_{ambient}} = Ae^{-kt}$.  
-> Note that at $t = 0$, $T = T_{hot}$ for some fixed $T_{hot}$.  
-> So $\abs{T_{hot} - T_{ambient}} = Ae^{-k0}$ and $\abs{T_{hot} - T_{ambient}} = A$.  
-> So $\abs{T - T_{ambient}} = \abs{T_{hot} - T_{ambient}}e^{-kt}$.  
+> Let $A = \pm e^c$. Then $T - T_{ambient} = Ae^{-kt}$.  
+> Note that at $t = 0$, $T = T_0$ for some fixed $T_0$.  
+> So $T_0 - T_{ambient} = Ae^{-k0}$ and $T_0 - T_{ambient} = A$.  
+> So $T = T_{ambient} + (T_0 - T_{ambient})e^{-kt}$.  
 
 Suppose we have a population of $n$ individuals. The simplest population model is $\frac{\dee n}{\dee t} = kn$ for some $k \ge 0$. Solve for $n$:
 
@@ -799,9 +805,9 @@ Suppose we have a population of $n$ individuals. The simplest population model i
 \begin{align}
 \frac{\dee n}{n} &= k \dee t \\
 \int \frac{\dee n}{n} &= k \int \dee t \\
-\ln n &= kt + c \\
-n &= e^{kt}e^c \\
-A = e^c; n &= Ae^{kt} \\
+\ln \abs{n} &= kt + c \\
+n &= \pm e^ce^{kt} \\
+A = \pm e^c; n &= Ae^{kt} \\
 \end{align}
 $$
 > Note that at $t = 0$, $n = n_0$ for some constant $n_0$ - the starting population.  
@@ -812,7 +818,7 @@ A simple variation on this population growth model is **logistic growth**, which
 
 For $\frac{n}{k} \ll 1$ (much less than), logistic growth behaves like exponential growth.
 
-The flow field looks like arrows pointing right toward $N(t) = k$. Therefore, the population always tends toward $k$ in this model.
+The flow field looks like arrows pointing right toward $N(t) = k$ starting from $N(t) = 0$. Therefore, the population always tends toward $k$ in this model.
 
 # 7/2/14
 
@@ -1016,7 +1022,7 @@ Proof:
 > So $p - \epsilon < a_n < p + \epsilon$ and $-\epsilon < a_n - p < \epsilon$.  
 > So $\abs{a_n - p} < \epsilon$, and by the definition of the limit, $p$ is the limit and the sequence converges.  
 
-Does $a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1$ converge?
+Does $a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}$ converge?
 
 > Clearly, $\frac{1}{n!}$ is always positive, so $a_{n + 1} = a_n + \frac{1}{n!}$ is monotonically increasing.  
 > Clearly, $n! \le 2^{n - 1}$, since $1 \cdot \ldots \cdot k \le 2 \cdot \ldots \cdots 2 \text{ (} k - 1 \text{ times)}$.  
@@ -1029,8 +1035,82 @@ Does $a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1$ converge?
 Does $a_1 = 1, a_{n + 1} = \sqrt{3 + 2a_n}$ converge?
 
 > The first few elements of the sequence are $1, 2.23606797749979, 2.73352079834772, 2.90981813807933, 2.96978724425819$.  
-> Clearly, $a_{n + 1}$ is equivalent to $\sqrt{3 + 2a_n} \ge a_n$, which is equivalent to $a_n^2 - 2a_n - 3 \le 0$, or $-1 \le a_n \le 3$.  
-> So $a_n$ is monotonically increasing over $[-1, 3]$.  
+> Clearly, $a_{n + 1} \ge a_n$ is equivalent to $\sqrt{3 + 2a_n} \ge a_n$, which is equivalent to $a_n^2 - 2a_n - 3 \le 0$, or $-1 \le a_n \le 3$.  
+> So $a_n$ is monotonically increasing if $[-1, 3]$.  
 > Assume $a_n \le 3$. Then $3 + 2a_n \le 9$ and $\sqrt{3 + 2a_n} \le 3$. So $a_{n + 1} \le 3$.  
 > So by induction, $a_n$ has an upper bound of 3.  
-> So by the convergence theorem, the sequence converges.  
+> So by the monotone convergence theorem, the sequence converges.  
+> Also, note that if the limit exists, we can set $n \to \infty$ and so $a_{n + 1} = a_n$.  
+> So $a_n^2 - 2a_n - 3 = 0$ and $a_n  = -1, 3$. -1 is a extraneous answer since the function is always positive, so $\lim_{n \to \infty} a_n = 3$.  
+
+# 24/2/14
+
+The monotone convergence theorem only tells us whether the sequence converges, but not what the actual limit is.
+
+We usually prove the monotonicity and boundedness of sequences by comparing them to sequences with known properties (like geometric series), or by using induction.
+
+To use induction to prove monotonicity, we simply need to prove that $a_{n + 1} \ge a_n$ for any $n$.
+
+To use induction to prove boundedness, we first need to guess a $k$ that might be an upper or lower bound. Then, we verify that it works for the first element of the sequence, and then that $a_n \le k \implies a_{n + 1} \le k$.
+
+If we know that the limit exists, sometimes we can find the limit by setting $n \to \infty$, which implies that $a_{n + 1} = a_n$ (since we are at the limit).
+
+Then we can write $a_{n + 1}$ in terms of $a_n$, and we get a function over $a_n$, which we can often isolate and solve for, which gives us the limit $L = a_n$. The previous example uses this technique.
+
+This doesn't always work. For example, it work doesn't for $a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}$. If we try to substitute it, we get $a_n = a_n + \frac{1}{n!} = a_n + \frac{1}{\infty} = a_n$. This doesn't help us find the limit.
+
+Series
+------
+
+A series is a sum of terms. We denote this as $S_N = \sum_{n = 0}^N a_n, a_n \in \mb{R}$. Here, $N \in \mb{Z}, N \ge 0$.
+
+For now, $a_n$ is a constant, which can depend on $n$. Eventually, we want to be able to build and analyze sequences of functions, which can depend on other variables like $x$.
+
+If $N$ is finite, then $S_N$ is known as a **partial sum**.
+
+We analyze series by analyzing the sequence of the sequence values: $\sum_{n = 0}^0 a_n, \sum_{n = 0}^1 a_n, \sum_{n = 0}^2 a_n, \ldots$.
+
+So just as we take the limit of a sequence, we can take the limit of a series with $\lim_{N \to \infty} \sum_{n = 0}^N a_n$. This is the relation between sequences and series.
+
+A sequence **converges** if this limit exists. Otherwise, it **diverges**.
+
+For example, we previously saw the sequence $a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}$, which is actually equivalent to the series $S_N = \sum_{n = 0}^1 \frac{1}{n!}$. They are equivalent because $a_n = S_N$ when $n = N$.
+
+# 26/2/14
+
+### Geometric Series
+
+The geometric series is $S_N = \sum_{n = 0}^N x^n = 1 + x + x^2 + x^3 + \ldots + x^n$.
+
+The geometric series is a rare example of a series that can be written in **closed form** - non-recursively and in a finite number of symbols. In other words, we can write the value of the partial sum of the series as a function of $n$.
+
+Which values of $n$ make the series converge?
+
+First, we start with the identity of $1 - x^{N + 1} = (1 - x)(1 + x + x^2 + x^3 + \ldots + x^N)$. This is true because $(1 - x)(1 + x + x^2 + x^3 + \ldots + x^N) = (1 + x + x^2 + x^3 + \ldots + x^N) - (x + x^2 + x^3 + \ldots + x^{N + 1}) = 1 + x - x + x^2 - x^2 + x^3 - x^3 + \ldots + x^N - x^N - x^{N + 1} = 1 - x^{N + 1}$.
+
+So $S_N = \sum_{n = 0}^N x^n = 1 + x + x^2 + x^3 + \ldots + x^N = \frac{1 - x^{N + 1}}{1 - x}$.
+
+So the limit is $\lim_{N \to \infty} \frac{1 - x^{N + 1}}{1 - x} = \frac{1}{1 - x} - \frac{x}{1 - x} \lim_{N \to \infty} x^N$.
+
+If $x = 1$, then $\lim_{N \to \infty} \sum_{n = 0}^N 1^n = 1 + \ldots + 1 = \infty$, and the sequence diverges.
+
+If $x = -1$, then $\lim_{N \to \infty} \sum_{n = 0}^N (-1)^n = 1 - 1 + 1 - 1 + \ldots + 1 - 1 = ?$. This sum either has the value 0 or 1, and oscillates infinitely as we go to infinity. Therefore, the sequence diverges.
+
+Clearly, if $x > 1$ or $x < -1$, the value goes to positive or negative infinity, and the sequence diverges.
+
+Therefore, the geometric series converges only for $-1 < x < 1$, since if this is the case, $\lim_{N \to \infty} x^N = 0$ and $\lim_{N \to \infty} S_N = \frac{1}{1 - x}$.
+
+Does $\sum_{k = 1}^\infty 3^{2k}5^{1 - k}$ converge?
+
+> Clearly, $\sum_{k = 1}^\infty 3^{2k}5^{1 - k} = \sum_{k = 1}^\infty 9^k5^{1 - k} = 5\sum_{k = 1}^\infty 9^k5^{-k} = 5\sum_{k = 1}^\infty \frac{9^k}{5^k} = 5\sum_{k = 1}^\infty \left(\frac{9}{5}\right)^k$.  
+> Since $\frac{9}{5} \ge 1$, the geometric sequence diverges as the limit of $\left(\frac{9}{5}\right)^k$ goes to infinity.   
+
+Does $3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2$ converge?
+
+> Clearly, $3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2 = 3 \sum_{n = 0}^\infty \left(-\frac{x}{2}\right)^n$.  
+> Clearly, in order to converge, $-1 \le -\frac{x}{2} \le -1$, or $-1 \le \frac{x}{2} \le 1$.  
+> As an aside, it converges to $\frac{3}{1 + \frac{x}{2}} = \frac{6}{2 + x}$.  
+
+### Convergence
+
+Notice that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, $\lim_{n \to \infty} a_n = 0$ is a requirement for convergence.

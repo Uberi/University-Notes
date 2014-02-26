@@ -1223,6 +1223,85 @@ add 1 1 = 2</code></pre>
 </ul>
 <p>When testing a module with side effects (like the shopping cart question in assignment 4), it is sometimes not sufficient to test each function by itself - we have to test sequences of function calls, testing the interaction between functions.</p>
 <p><strong>Integration testing</strong> is when we test interactions between modules and groups of modules all at once.</p>
+<h1 id="section-12">25/2/14</h1>
+<h2 id="arrays-and-strings">Arrays and Strings</h2>
+<p>Arrays are, in addition to structures, one of the only compound data structures in C.</p>
+<p>They take the form of:</p>
+<pre><code>int some_array[6] = {4, 8, 15, 16, 23, 42};</code></pre>
+<p>Once again, the curly brackets <code>{</code> and <code>}</code> are part of the initialization syntax, and cannot be used in all expressions.</p>
+<p>Array have <strong>fixed size</strong> and all elements must <strong>have a particular type</strong>. This is very different from lists in Racket.</p>
+<p>To define an array, we have to know the length of the array at compile time. Each value inside the array is known as an <strong>element</strong>, and elements are referenced through an <strong>index</strong>.</p>
+<p>The first element of an array <code>some_array</code> is <code>some_array[0]</code> (C is zero-indexed). The second is <code>some_array[1]</code>, and the last is <code>some_array[5]</code>. note that there is no <code>some_array[6]</code>.</p>
+<p>If we try to access memory outside of the array bounds, like <code>some_array[6]</code>, we will simply access the memory location outside of the array, which may cause a segmentation fault, corrupt data, or worse. It is important to ensure indices are in the array bounds.</p>
+<p>We can treat array accesses like variables. For example, we can do <code>some_array[*&amp;some_array[0]] ++</code>.</p>
+<p>Uninitialized global arrays are initialized to 0. Uninitialized local arrays are filled with arbitrary values from the stack. We should always initialize arrays.</p>
+<p>If there are fewer elements in the braces than there are elements in the array, then the rest get initialized to 0. For example, <code>int a[5] = {1, 2}</code> has the last 3 elements initialized to 0. We often see <code>int a[5] = {0}</code>.</p>
+<p>If we are initializing the array, we can also omit the array size: <code>int a[] = {4, 8, 15, 16, 23, 42}</code>.</p>
+<p>We can also use the partial initialization syntax, just like with structures: <code>int a[100] = {[50] = 45, [99] = 8}</code>.</p>
+<h3 id="memory-model">Memory Model</h3>
+<p>The <strong>length</strong> of an array is the number of elements in the array.</p>
+<p>The <strong>size</strong> of an array is the number of bytes it occupoes in memory.</p>
+<p>For example, an array of 100 integers has length 100, but size 400, because each integer occupies 4 bytes of memory.</p>
+<p>Arrays have their elements stored <strong>adjacently in memory</strong>. So the addresses of each element of the array are close together.</p>
+<p>If an array <code>a</code> has length <code>n</code> and size <code>s</code>, then <code>s == n * sizeof(a[0])</code>.</p>
+<p>C has no facility for obtaining the length of the array. We often need to keep track of it separately:</p>
+<pre><code>const int a_length = 6;
+int a[a_length];</code></pre>
+<p>Note that we cannot determine the length of an array by using <code>sizeof(a) / sizeof(a[0])</code>, because <code>sizeof(a)</code> does not necessarily obtain the exact size of the array.</p>
+<h3 id="pointers-1">Pointers</h3>
+<p>Arrays are a lot like pointers. For example, <code>a</code> is the same thing as <code>&amp;a[0]</code>, which is the same thing as <code>&amp;a</code>.</p>
+<p>Basically, <strong>the address of an array is the same as the address of the first element</strong>, which is the same as just writing the array's identifier.</p>
+<p>So dereferencing the array is the same as the first element of the array: <code>*a == a[0]</code>.</p>
+<p>However, the array itself cannot be changed; we cannot do <code>a = b</code>, even if <code>b</code> is another array. We can think of this as the array address itself being constant.</p>
+<p>Arrays are basically constant pointers to blocks of memory.</p>
+<h3 id="functions-1">Functions</h3>
+<p>When we pass an array to a function, only the address is copied into the new stack frame. This saves memory if we have a lot of elements, since we don't need to copy all those elements into the stack frame.</p>
+<p>Conventionally, we also pass the length of the array to the function if it is not always the same. This is because we cannot determine the length of the array inside the function otherwise.</p>
+<pre><code>void array_add1(int a[], int len) {
+    for (int i = 0; i &lt; len; i ++)
+        a[i] ++
+}
+
+int main(void) {
+    int a[] = {4, 2, 7};
+    array_add1(a, 3);
+}</code></pre>
+<p>If a function doesn't need to mutate the array, it is good practice to make the parameter constant using the <code>const</code> keyword to reflect this, just as with structures:</p>
+<pre><code>int array_sum(const int a[], int len) {
+    int sum = 0;
+    for (int i = 0; i &lt; length; i ++)
+        sum += a[i];
+    return sum;
+}</code></pre>
+<h2 id="pointer-arithmetic">Pointer Arithmetic</h2>
+<p>Let <code>p</code> be a pointer, pointing at memory location <code>1000</code>. Let <code>i</code> be an integer.</p>
+<p>Then <code>p + 1</code> is a pointer to the memory location <code>1000 + sizeof(*p)</code>. In other words, the amount we offset the pointer by depends on the type of data the pointer points to. If we add 1 to, say, an <code>int</code> pointer, it then points to the &quot;next slot for an <code>int</code>&quot;, rather than the next memory location.</p>
+<p>In general, <code>p + i</code> is a pointer to the memory location <code>1000 + i * sizeof(*p)</code>.</p>
+<p>In the same way, we can do <code>p - i</code>, <code>p += i</code>, <code>p ++</code>, and <code>p --</code>.</p>
+<p>Let <code>q</code> be a pointer, pointing at memory location <code>1100</code>.</p>
+<p>Then <code>p + q</code> is invalid, because we <strong>cannot add two pointers</strong>. This is because pointers are often rather large numbers, and could easily overflow if added, resulting in an invalid pointer.</p>
+<p>Then <code>p - q</code> is valid as long as <code>p</code> and <code>q</code> point to the same type of data, like <code>int</code> and <code>int</code>. <code>p - q</code> would result in <code>(1000 - 1100) / sizeof(*p)</code>, or <code>-25</code> if we assume <code>p</code> and <code>q</code> are <code>int</code> pointers.</p>
+<p>This allows pointer arithmetic to satisfy <code>p - q = -25</code> given that <code>q = p + 25</code>, since <code>(1000 - 1100) / sizeof((int)0) == -25</code>. Basically, subtracting two pointers results in the number of slots of the data type that would fit between the two.</p>
+<p>Then <code>p &lt; q</code>, <code>p &gt; q</code>, <code>p &lt;= q</code>, <code>p &gt;= q</code>, <code>p != q</code>, and <code>p == q</code> are valid, as long as <code>p</code> and <code>q</code> point to the same type of data. These compare the memory locations of the pointers as if they were abstract integers.</p>
+<p>Officially, pointer arithmetic is only valid when <code>p</code> and <code>q</code> and the result of the pointer arithmetic are <strong>all inside the same array or structure</strong>. Formally, there must be an array or structure that fully contains <code>p</code>, <code>q</code>, and the result of the pointer arithmetic.</p>
+<h3 id="arrays">Arrays</h3>
+<p>The array indexing operator <code>a[i]</code>, where <code>a</code> is an array and <code>i</code> is an integer, is exactly equivalent to <code>*(a + i)</code>.</p>
+<p>In fact, this operator works on pointers too - <code>p[0]</code> is the same thing as <code>*p</code>.</p>
+<p>Because of this equivalence, it is always possible to rewrite code using the <code>[]</code> operator to use pointer arithmetic, and vice versa:</p>
+<pre><code>int sum_array(const int *a, int len) {
+    int sum = 0;
+    for (int *p = a; p &lt; a + len; p ++)
+        sum += *p;
+    return sum;
+}</code></pre>
+<p>Is exactly equivalent to:</p>
+<pre><code>int sum_array(const int a[], int len) {
+    int sum = 0;
+    for (int i = 0; i &lt; len; i ++)
+        sum += a[i];
+    return sum;
+}</code></pre>
+<p>As a result, there is also no difference between using <code>const int a[]</code> and <code>const int *a</code> in function declarations. However, there are some small differences between pointers and arrays, which will be discussed later.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

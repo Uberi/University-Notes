@@ -1140,7 +1140,7 @@ Proof:
 > So $\range L \subseteq \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.  
 > Clearly, $\spn \set{\vec{a}_1, \ldots, \vec{a}_n} \subseteq \range L$, so $\range L = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.  
 
-The **column space** of a matrix $A$ is $\operatorname{Col}(A) = \set{A\vec{x} \middle| \vec{x} \in \mb{R}^n} = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.
+The **column space** of a matrix $A = \begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix}$ is $\operatorname{Col}(A) = \set{A\vec{x} \middle| \vec{x} \in \mb{R}^n} = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.
 
 Also, if $L: \mb{R}^n \to \mb{R}^m$ is linear, then $\range L = \operatorname{Col}([L])$.
 
@@ -1208,7 +1208,7 @@ A linear mapping $L$ is **invertible** if and only if there exists another linea
 
 The standard matrix of $M$ is such that $[L][M] = I$. Note that in order for the inverse to exist, $L$ must therefore have the same number of rows as $M$ has columns.
 
-In summary, the four **fundemental subspaces** of a matrix are:
+In summary, the four **fundamental subspaces** of a matrix are:
 
 * Row space
 * Column space

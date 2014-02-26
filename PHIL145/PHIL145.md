@@ -69,9 +69,9 @@ There are two types of reasoning:
 * Domain-specific reasoning is reasoning in a specific topic, like how chemistry classes teach one to reason well about what compounds will be produced in a given reaction.
 * Domain-general reasoning is reasoning that is applicable to any field, giving much broader principles that work everywhere. This is the focus of this course.
 
-**Metacognitive approach** is learning how to think about thinking. Learning to think well about a subject means learning new concepts and how to apply them. Likewise with reasoning. We will use these concepts to analyze, explain, criticize, and correct reasoning.
+The **metacognitive approach** is learning how to think about thinking. Learning to think well about a subject means learning new concepts and how to apply them. Likewise with reasoning. We will use these concepts to analyze, explain, criticize, and correct reasoning.
 
-Critical thinking is a philosophy class for historical reasons, but there are also many connections between the fields. Math, science, psychology, and a lot of other fields are simply branches off of philosophy. Philosophical questions often require looking into domain-general reasoning, and has close connections to critical thinking.
+Critical thinking is a philosophy class for historical reasons, but there are also many connections between the fields. Math, science, psychology, and a lot of other fields are simply branches of philosophy. Philosophical questions often require looking into domain-general reasoning, and has close connections to critical thinking.
 
 # 10/1/14
 
@@ -108,7 +108,7 @@ An argument can mean a fight or a disagreement, but also a reasoned defence of a
 
 An argument can also be abstracted into a set of premises implying a conclusion.
 
-People can say the same words in the same sentence but communicate different things: "one is a prime number.", "is one a prime number?". How do we differentiate assertions, promises, threats, questions, etc. In the previous example, the two imply different relationships between the person (knowing vs. not knowing) and the claim and asks different things of the audience (agreement vs. answering).
+People can say the same words in the same sentence but communicate different things: "one is a prime number.", "is one a prime number?". How do we differentiate assertions, promises, threats, questions, and other types of sentences? In the previous example, the two imply different relationships between the person (knowing vs. not knowing) and the claim and asks different things of the audience (agreeing vs. answering).
 
 What is the real difference between these different ways of communicate the same words? Everything is said in a certain context, which is an important part of understanding the intent of the words.
 
@@ -153,9 +153,9 @@ There is neither a conclusion or any premises.
 
 There are two assertions, both conclusions. Neither of the assertions support each other.
 
-> You will get lost of you walk around Toronto. It is the largest city in Canada.
+> You will get lost if you walk around Toronto. It is the largest city in Canada.
 
-This is an argument, though not a very strong one. The premise that the city is large implies that it is more likely that one will get lost.
+This is an argument, though not a very strong one. The premise that the city is large implies the conclusion that it is more likely that one will get lost.
 
 To determine whether something is an argument, all three of the following must be true:
 
@@ -167,11 +167,11 @@ To determine whether something is an argument, all three of the following must b
 
 Assertions are the same thing as claims in this course - the terms are interchangeable.
 
-> Descartes argues that anyone who thinks, can know they exist. He reasons that a precondition f thinking is existence.
+> Descartes argues that anyone who thinks, can know they exist. He reasons that a precondition of thinking is existence.
 
 This is just reporting what was said, not an argument.
 
-Note that the second sentence, describing Descartes' reasoning, does not support the claim that **Descartes said something what he did**. In other words, the second sentence does not support the first, because the second sentence is a **report**.
+Note that the second sentence, describing Descartes' reasoning, does not support the claim that anyone who thinks can know they exists. In other words, the second sentence does not support the first, because the second sentence is a **report** rather than a premise.
 
 Rules of thumb for identifying arguments:
 
@@ -183,7 +183,7 @@ Note that there are exceptions to these rules. For example, for the second point
 
 Sometimes arguments may be explicitly identified, with "I argue that <conclusion>", "This is because <premise>", "Therefore, <conclusion>", "It follows that <conclusion>".
 
-Look out for conclusions not at the end of passages, implicit premises, implicit conclusions, and rhetorical questions.
+Look out for conclusions not at the end of passages, implicit premises, implicit conclusions, and rhetorical questions. Rhetorical questions should be treated like claims.
 
 ### Explanations
 
@@ -276,7 +276,7 @@ We can tentatively evaluate an argument's validity by matching it against the va
     --------------------------------------
     God exists.
 
-This is valid but not rationally compelling. Validity is not enough to determine whether an argument is "good".
+This is valid but not **rationally compelling**. Validity is not enough to determine whether an argument is "good".
 
 Our goal is to obtain true conclusions.
 
@@ -292,14 +292,14 @@ A premise can be supported by other premises. These other premises support a con
         * If Q, then R
     * P
 
-**Linked support** is when the premises only entail the conclusion together:
+**Linked support** is when two or more premises only entail the conclusion together:
 
     The snow is white
     The grass is green
     ----------------------------------------
     The snow is white and the grass is green
 
-**Convergent support** is when the premises independently entail the conclusion. Any one of the premises can make the conclusion true:
+**Convergent support** is when one or more premises independently entail the conclusion. Any one of the premises can make the conclusion true:
 
     The snow is white
     The grass is green
@@ -327,7 +327,7 @@ This argument is valid because each sub-argument is valid and it itself is valid
 
 ### Truth
 
-Truth is a property of sentences, not arguments or sets of statements. When we say an argument is true, we might mean that it is sound or rationally compelling.
+Truth is a property of sentences, not arguments or sets of statements. When we say an argument is true, this is not a meaningful statement, but we might mean that it is sound or rationally compelling.
 
 **Truth conditions** are the conditions under which a sentence is true.
 
@@ -337,13 +337,13 @@ However, we can judge whether we have good reason to believe the sentence is tru
 
 **Contingent truths** are truths that happen to be true but could have been false if history went a different way. For example, "Waterloo has two universities" could have been false if history unfolded such that one of the universities did not start. Another might be "The Eiffel Tower is in France".
 
-**Necessary truths** are truths that are true no matter which way history goes, or how the world developed. For example, "A bachelor is an unmarried man"
+**Necessary truths** are truths that are true no matter which way history goes, or how the world developed. For example, "All bachelors are unmarried"
 
-Similarly, **contingent falsehoods** (Waterloo has three universities) and **necessary falsehoods** (a bachelor is a married man) exist.
+Similarly, **contingent falsehoods** (Waterloo has three universities) and **necessary falsehoods** (All bachelors are married) exist.
 
 Necessary truths/falsehoods could be that way because of the **form**, or the **content**:
 
-"A bachelor is an unmarried man" is a necessary truth because of the meaning of the word "bachelor", which is part of the content of the sentence.
+"All bachelors are unmarried" is a necessary truth because of the meaning of the word "bachelor", which is part of the content of the sentence.
 
 "If it is raining, then it is raining" is a necessary truth because of the form of the argument itself, and does not require us to know what rain is.
 
@@ -391,6 +391,8 @@ A complex sentence like "if it is warm, then it is raining" is a **conditional s
 
 There are also multiple types of conditionals. The **material conditional** is always true unless the antecedent is true yet the conclusion is false.
 
+They often take the form of "Q if P", "P only if Q", or "if P, then Q" - these are all equivalent.
+
 It is still true when the antecedent is false because it cannot be invalidated that way.
 
 There is also the **subjunctive conditionals**: "If Germany had won World War II, then the world would be no different today". This expresses a hypothetical claim - something that would be true if something else is true. The difference is that we already know the antecedent is false, but states what might happen if it were true. These are often distinguished by their using past tense.
@@ -408,7 +410,7 @@ Ampliative Arguments
 
 An argument is **ampliative** if the conclusion expresses more information than that expressed in the premises. All valid deductive arguments are by definition non-ampliative, since if they had more information, we could not know that it is valid. As a result, all ampliative arguments cannot be known to be valid.
 
-A non-ampliative argument might be "7 is a prime number, and therefore is only divisible by 1 and 7", while an anmpliative one might be "the sun set every day before yesterday, so it will set today".
+A non-ampliative argument might be "7 is a prime number, and therefore is only divisible by 1 and 7", while an ampliative one might be "the sun set every day before yesterday, so it will set today".
 
 Ampliative arguments are evaluated based on how well it supports the conclusion. If the premises make the argument rationally believable, then the argument is good. Otherwise, it is not.
 
@@ -542,6 +544,8 @@ Analogical arguments draw conclusions based on a comparison. There are three imp
 * The **primary subject** is the thing we want to make a conclusion about.
 * The **claims of similarity** between the analogue and primary subject.
 
+For example:
+
     The A is similar to B.
     The A has property Z.
     ------------------------------
@@ -551,12 +555,12 @@ The claims of similarity is often implicit and unstated in the text.
 
 Consider the following analogical argument: "when I visited this doctor he was attentive and sympathetic. I did what he suggested and it solved my problem. If you go see him, he will solve your problem too."
 
-    You have the same problem as I did.
     The doctor solved my problem.
+    You have the same problem as I did.
     -----------------------------------
     The doctor will solve your problem.
 
-Here, the primary subject is the problem of the person being addressed ("your problem"). The analogue is the author's problem ("my problem"). The claim of similarity is that both problems are the same.
+Here, the primary subject is the problem of the person being addressed ("your problem"). The analogue is the author's problem ("my problem"). The claim of similarity is that both problems are the same and that the doctor will treat it the same.
 
 There are also a few types of analogical arguments:
 
@@ -701,7 +705,7 @@ We first evaluate the acceptability of the premises:
 We then evaluate the relevancy of the premises:
 
 * Only relevant premises can support the conclusion.
-* Many premises are relevant only when linked together, so this is evaluating groups of premises.
+* Many premises are relevant only when linked together, so this step is evaluating groups of premises.
 * The diagram often helps here.
 * **Positive relevance** is when the truth of $X$ counts in favour of the truth of $Y$. We say $X$ is positively relevant to $Y$.
 * **Negative relevance** is when the truth of $X$ counts against the truth of $Y$. We say $X$ is negatively relevant to $Y$.
@@ -710,15 +714,20 @@ We then evaluate the relevancy of the premises:
 
 Finally, the groundedness:
 
+* We can think of the relevance condition as a requirement for meeting the groundedness condition - an argument that doesn't pass the relevance condition cannot pass the groundedness condition.
 * Groundedness is how rationally believable the conclusion is if all the premises are true.
 * All valid arguments are well grounded, and a lot of invalid arguments too.
 * Conclusions can be grounded via the methods described before: deductive support, inductive support, abductive support, or analogical support.
 * We mainly evaluate this using the method of counterexamples.
 * Groundedness is to cogency as validity is to soundness.
 
+After doing this, we can say whether the argument is good or bad based on the results of the evaluation.
+
 Note that not every premise of the argument needs to be acceptable, relevant, and grounded in order for the argument to be cogent. In some arguments, certain premises can be discarded without the argument losing its cogency.
 
 In contrast, certain premises are **critical premises**. These are the premises that are very important to the argument being cogent. If critical premises are removed, the argument is no longer cogent.
+
+When evaluating arguments, we often want to analyze the critical premises first, since if we find any issues here, we can say right away that the argument isn't good.
 
 This is often those premises comprising linked support, or convergent support that is the only support for something.
 
@@ -737,7 +746,7 @@ Acceptability
 
 There is not always a single interpretation of an argument that is considered correct. This is especially obvious when dealing with the acceptability condition - everyone holds their own set of beliefs that influences what premises they will find acceptable.
 
-Many contingent truths are widely believed. If we do not have any reason not to believe it, then it is reasonable to accept them when they appear in premises. This is often called "common knowledge". For example, "all humans have hearts".
+Many contingent truths are widely believed. If we do not have any reason not to believe it, then it is reasonable to accept them when they appear in premises. This is often called "common knowledge". For example, "all humans have hearts", though there may be counterexamples.
 
 However, not all humans have hearts. The claim can be made more acceptable by changing it to "virtually every living human has a heart".
 
@@ -761,21 +770,21 @@ When giving testimony, the trade-off is that the testimony gains acceptance, in 
 
 Appealing to authority is a special case of testimony. A legitimate authority is an entity with special knowledge in a certain domain - experts, research institutions, etc.
 
-The same rules for testimony apply for appeals to authority. However, faulty appeals to authority are most often due to the last point - claims should not exceed the expertise of the authority. For example, claims about the weather from a climate prediction institution. should be accepted, but macroeconomic analyses should not.
+The same rules for testimony apply for appeals to authority. However, faulty appeals to authority are most often due to the last point - claims should not exceed the expertise of the authority. For example, claims about the weather from a climate prediction institution should be accepted, but macroeconomic analyses from that institution should not.
 
-However, this applies only to testimony given alone - without any additional justification. The acceptability of testimony is based on how much we should trust what someone says on their word alone. So even if a non-expert gives a claim, it can still be acceptable if compelling reasons are given.
+However, this applies only to testimony given alone - without any additional justification. The acceptability of testimony without any other support is based on how much we should trust what someone says on their word alone. So even if a non-expert gives a claim, it can still be acceptable if compelling reasons are given.
 
 # 5/1/14
 
 If two authorities have conflicting views, it is generally reasonable to accept the claims of the more authoritative one. If they are very similar in authority, then it is reasonable to withhold judgement.
 
-Authority can be determined by the amount of experts who agree, and how credible these people are.
+Authority can be determined by the amount of experts who agree, and how credible these experts are.
 
 ### Vageness/Ambiguity
 
 We sometimes reject premises because they are vague or ambiguous. In common use this generally means imprecise, but we want a more precise definition.
 
-**Imprecise** means that the claim is **literally true in a very wide range of cases**. For example, "the object is bigger than a breadbox, but smaller than a mountain". A lot of objects satisfy this.
+**Imprecise** means that the claim is **literally true in a very wide range of cases**. For example, "the object is bigger than a breadbox, but smaller than a mountain" - a lot of objects satisfy this.
 
 Imprecision often results from imprecise quantifiers like "many", "few", "some", etc.
 
@@ -785,9 +794,9 @@ Imprecision by definition makes a premise more acceptable, because it is true in
 
 However, imprecision has a negative impact on groundedness, since an imprecise statement cannot make as many claims reasonably believable.
 
-A **vague/ambiguous claim** is one where it is difficult to determine if it is true or false. Since we only accept a premise if it is reasonable to believe it is true, there are certain situations where vague/ambiguous claims cannot be accepted. TH
+A **vague/ambiguous claim** is one where it is difficult to determine if it is true or false. Since we only accept a premise if it is reasonable to believe it is true, there are certain situations where vague/ambiguous claims cannot be accepted.
 
-A **vague** claim is one that uses **vague terms** - terms that have **penumbral cases, where we don't know whether they apply or not. The vagueness of a term is determined from how many penumbral cases there are. The vagueness of a claim depends on the quantity and vagueness of the terms it contains.
+A **vague** claim is one that uses **vague terms** - terms that have **penumbral cases**, where we don't know whether they apply or not. The vagueness of a term is determined from how many penumbral cases there are. The vagueness of a claim depends on the quantity and vagueness of the terms it contains.
 
 For example, "This man is balding" is vague, because there are many possible cases where we can't be sure whether the man is balding or not - does losing 1 hair count as balding? Does losing 1000?
 
@@ -800,7 +809,7 @@ A famous example is the Sorites paradox:
 
 The argument is paradoxical because "heap" is a vague term. We do not know whether heap-ness applies in the penumbral cases, when the sand grains could either form a heap or not form a heap.
 
-There is still disagreement about how to evaluate this. Some people say that there is a certain number of grains that distinguish a heap from a non-heap, but we cannot know it exactly. The problem revolves around the concept of a heap being a vague concept.
+There is still disagreement about how to evaluate this. Some people say that there is a certain number of grains that distinguish a heap from a non-heap, but we cannot know it exactly. The problem is caused by the concept of a heap being a vague concept.
 
 An **ambiguous** claim is one where there are multiple possible meanings of the claim without context to find the correct one. Multiple meanings happen quite often in language, but these are often resolved through context. A claim is ambiguous when the context does not allow us to determine which meaning is correct.
 
@@ -808,7 +817,7 @@ The two types are ambiguity are **syntactic** (sentence structure can be read in
 
 For example, "Peter saw a man taking his bike" is syntactically ambiguous because the man could either be taking the man's own bike, or Peter's bike.
 
-Fpr example, "She threw a rock at the bank" is lexically ambiguous because it could be a financial bank, or a river bank.
+For example, "She threw a rock at the bank" is lexically ambiguous because it could be a financial bank, or a river bank.
 
 For example, "There is something somewhere" is not ambiguous, just imprecise. There is only one meaning to this statement.
 
@@ -824,13 +833,15 @@ An inconsistent set of sentences is not acceptable as premises in an argument, b
 
 Necessary falsehoods are a special case of inconsistent sets, where there is only one element in the set.
 
+Basically, a set of sentences is inconsistent if all the sentences together are necessarily false, and consistent otherwise.
+
 # 7/2/14
 
 ;wip: read up to chapter 4
 
 ### Premises
 
-Premises can often have **faulty assumptions, presuppositions, or preconditions**. All of these must be acceptable in order to accept the premise:
+Premises can often have **faulty assumptions**. These assumptions are not acceptable, so we cannot accept the premise:
 
     The murder weapon was a knife but it hasn't been found yet.
 
@@ -892,7 +903,7 @@ First, we write it in standard form:
     1. The US was successful at building democracies in Germany and Japan.
     2. Afghanistan has fewer people than Germany and Japan.
     ----------------------------------------------------------------------
-    3. So, US efforts toward democracy in Afghanistan will be successful.
+    3. US efforts toward democracy in Afghanistan will be successful.
 
 Now we can diagram it:
 
@@ -906,7 +917,9 @@ And finally, evaluation:
 
 * Premise 1 and 2 are common knowledge, and so are acceptable.
 * Premise 1 is positively relevant, while premise 2 is basically irrelevant.
-* Premise 1 and premise 2 together ground the conclusion.
+* Premise 1 and premise 2 ground the conclusion independently, but weakly.
+
+Therefore, we conclude that the argument is weakly cogent, and is weakened due to the groundedness condition.
 
 # 10/2/14
 
@@ -961,7 +974,7 @@ Some fallacies associated with groundedness are:
 
 Conspiracy theories are not themselves fallacies, but the support given for their existing is fallacious.
 
-Conspiracy theories often use arguments from ignorance (lack of support for theory is actually used to support theory) and contrary evidence is used to support the theory (e.g., there is a deeper cover-up in place).
+Conspiracy theories often use arguments from ignorance (lack of support for theory is actually used to support theory) and contrary evidence is used to support the theory (e.g., the cover-up was disproved, so there must be a deeper cover-up in place).
 
 ### Relevance
 
@@ -1013,8 +1026,8 @@ The fallacies associated with acceptability center on errors in the premises.
     * It is only acceptable that people reject it if global warming is indeed a fad.
 * False presupposition
     * When the premise assumes something that is false.
-    * For example, "James no longer writes fiction because there he is not writing"
-    * It is not necessarily true that James had originally wrote fiction - he could have never wrote fiction.
+    * For example, "James no longer writes fiction because he is not writing fiction now"
+    * It is not necessarily true that James had originally wrote fiction - he could have never wrote fiction in the first place.
 * Fallacies of definition
     * When a debatable definition is used in a permise.
     * For example, "Abortion is wrong, because all persons have a right to life" - the definition of person is a controversial one, and affects the premise's acceptability.
@@ -1028,3 +1041,83 @@ The fallacies associated with acceptability center on errors in the premises.
     * This is an example of disjunctive syllogism (P or Q, not Q, therefore P) where the first premise is not acceptable.
     * The dichotomy/enchotomy is more acceptable depending on the number of options presented and not presented, and the probability of those options being true.
     * For example, "the coin will land on either heads or tails" is a relatively acceptable premise because it is highly unlikely that it will land on the edge.
+
+# 24/2/14
+
+Review of concepts for exam tomorrow, plus an in-class bonus quiz.
+
+# 26/2/14
+
+We now focus on reasoning in general, from arguments.
+
+The reason we focused on argumentation is to be able to express our reasoning and evaluate how good our reasoning is.
+
+Representation
+--------------
+
+**Representation** is used very often in reasoning, and is usually the first step.
+
+### Representation-based Reasoning
+
+We first need to **encode** a system in the world (the **target system**) as another form before we can manipulate it. This new form is called the representation. For example, we might represent the dimensions and mass of an object as numbers.
+
+Then we can **manipulate** the representation. For example, we can multiply numbers together, find the density of the object as a number, and discover that it is less than the density of water.
+
+Finally, we can **decode** the representation to draw conclusions about the target system - like drawing the conclusion that the object floats in water.
+
+So the process of reasoning by representation includes all three of these steps.
+
+This could have some problems in practice:
+
+* We might misrepresent the thing in the world incorrectly - like representing a pendulum as without air friction, when air friction is actually significant.
+* We might manipulate the representation incorrectly - like using the wrong equation or doing the math incorrectly.
+* We might interpret the results in ways that lead to incorrect results - like saying a period time of zero means infinitely fast oscilation, when it actually means no oscillation at all.
+
+Another example is for airplane design. The scale model planes are the representation of the full size plane, and we can test it in a wind tunnel to manipulate the representation. Then, we can use this to draw conclusions about what the scale plane represents - the real airplane.
+
+### Simplification
+
+Real world systems are often very complex. Representations tend to leave out everything except the most important details to make it simpler to manipulate.
+
+We need to be aware of what the representation encodes and what it doesn't encode about our target system.
+
+For example, the scale model airplane is meant to represent the shape and aerodynamic properties of the real plane, but not the mass or full sized material properties.
+
+As a result, based on the information encoded, we must constrain our manipulations of the representation to ensure that the result still represents the result in the real thing.
+
+### Numbers
+
+Numbers are the most common representations used for numbers.
+
+We use numbers to represent quantities, ratios, changes, magnitudes, orderings, etc.
+
+For example, distances are not numbers - they are just distances, their own thing. However, they are correlated to numbers. We can then convert between distances and numbers interchangably.
+
+Alternatively, we could represent distances with the amount of time it takes to travel that distance for something moving at some speed, or even represent distances using the alphabet.
+
+Numbers have many similarities have a lot of relevant similarities to distances: they can be added together, they can be ordered, and dividing one into parts has each part also be a number or distance.
+
+As a result, we can use things like distributivity ($A(B + C) = AB + AC$) over numbers and represent multiple sums of distances, and use $A > B$ over numbers to represent one distance being longer than another.
+
+Consider the example of using numbers to represent hockey tournament rankings. In this case, the numbers obey distributivity, but the rankings do not - a hockey team can lose games yet still be first place. Therefore, the lowest number is not necessarily the best team. In this case, we manipulated the 
+
+### Percentages
+
+Percentages are useful for representing and comparing ratios. This allows us to see which ratio is higher or lower.
+
+Using percentages results in a **loss of information**. When we use a percentange, we lose all information about what the original numbers were - 25% could represent 10/40 or 1/4.
+
+If the number of bear attacks increased 100% this decade, should we implement a bear patrol?
+
+> It could be that there was 1 attack last decade increasing to 2, or that there were 100 increasing to 200, or a lot of other answers.  
+> If there was only 1 more attack, we could not justify implementing a bear patrol due to resource constraints.  
+> If there were 100 more attacks, we should implement a bear patrol to stop them.  
+> We do not have enough information to answer the question using only percentages.  
+
+We must be sure to manipulate numbers only when those manipulations are valid. For example, adding percentages to get total percentages is an invalid manipulation.
+
+If we add 5 meters and 5 meters, we can straighforwardly say that it represents 10 meters. But if we add 5 meters and 5 kilograms, what does the 10 represent?
+
+A percentage can represent a multiple, or a change. A 50% increase is different from something being 50% of what it was before.
+
+A percentage increase is denoted by $\frac{(Later - Earlier)}{Earlier} \times 100%$.
