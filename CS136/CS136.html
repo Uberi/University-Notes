@@ -696,6 +696,7 @@ printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints
 <ul>
 <li>The machine code goes here.</li>
 <li>When we write code, we write human-readable code. Then, the compiler converts it into machine code that the computer can read. This is addressed in CS 241.</li>
+<li>This is a read-only section.</li>
 </ul></li>
 <li>Read-only Data
 <ul>
@@ -1242,7 +1243,8 @@ add 1 1 = 2</code></pre>
 <p>The <strong>length</strong> of an array is the number of elements in the array.</p>
 <p>The <strong>size</strong> of an array is the number of bytes it occupoes in memory.</p>
 <p>For example, an array of 100 integers has length 100, but size 400, because each integer occupies 4 bytes of memory.</p>
-<p>Arrays have their elements stored <strong>adjacently in memory</strong>. So the addresses of each element of the array are close together.</p>
+<p>Arrays have their elements stored <strong>adjacently in memory</strong>. So the addresses of each element of the array are all offset by the size of the type.</p>
+<p>For example, if an array</p>
 <p>If an array <code>a</code> has length <code>n</code> and size <code>s</code>, then <code>s == n * sizeof(a[0])</code>.</p>
 <p>C has no facility for obtaining the length of the array. We often need to keep track of it separately:</p>
 <pre><code>const int a_length = 6;
@@ -1302,6 +1304,94 @@ int main(void) {
     return sum;
 }</code></pre>
 <p>As a result, there is also no difference between using <code>const int a[]</code> and <code>const int *a</code> in function declarations. However, there are some small differences between pointers and arrays, which will be discussed later.</p>
+<h1 id="section-13">27/2/14</h1>
+<p>;wip: the midterm covers everything up to section 7, slide 26</p>
+<p>Array indices can be negative if the pointer is not at the beginning of the array. For example:</p>
+<pre><code>int a[] = {1, 2, 3, 4, 5};
+int *p = a + 4;
+int x = p[-2];</code></pre>
+<p>Our computer memory is one dimensional. Multidimensional data can be represented using 1D arrays by mapping the higher dimensions as offsets on the lower dimensions. For example:</p>
+<pre><code>int a[] = {1, 2, 3,
+           4, 5, 6}; // 2 by 3 array (2 rows, 3 columns)
+a[r*2 + c]; // element at row `r` and column `c`</code></pre>
+<p>In general, the element in array <code>a</code> at row <code>r</code> and column <code>c</code> is <code>a[r*NUMBER_OF_COLUMNS + c]</code>.</p>
+<h2 id="function-pointers">Function Pointers</h2>
+<p>In Racket, functions are <strong>first class values</strong>. We can store them in variables and structures, or pass them as arguments and return them from functions.</p>
+<p>In C, functions are not first class values, but we can do the same thing with <strong>function pointers</strong>. This is a pointer to the beginning of the function in the code section.</p>
+<p>We obtain a function pointer by just writing the name of the function:</p>
+<pre><code>int add1(int x, int y) {
+    return x + y;
+}
+
+void array_map(int (*f)(int), int a[], int len) {
+    for (int i = 0; i &lt; len; i ++)
+        a[i] = f(a[i]);
+}
+
+int main(void) {
+    int a[] = {1, 2, 3, 4};
+    array_map(add1, a);
+}</code></pre>
+<p>The syntax to declare a function pointer is <code>FUNCTION_RETURN_TYPE (*POINTER_IDENTIFIER)(PARAMETER_1_TYPE, PARAMETER_2_TYPE, ...);</code>. For example, <code>int (*fp)(int);</code> is a pointer to any function that accepts an <code>int</code> and returns an <code>int</code>. In this case, we can set it to <code>add1</code>, since it follows this type signature.</p>
+<h2 id="strings">Strings</h2>
+<h3 id="null-termination">Null Termination</h3>
+<p>In ASCII, the character at index 0 is known as the &quot;null character&quot;. It means &quot;nothing&quot;. ASCII precedes C, and in C, we call it the <strong>null terminator</strong>.</p>
+<p>In C, there are no built in string types. As a <strong>convention only</strong>, most people use an <strong>array of characters with a null character at the end</strong>:</p>
+<pre><code>char my_string[] = {&#39;c&#39;, &#39;a&#39;, &#39;t&#39;, &#39;\0&#39;}; // we use `&#39;\0&#39;` instead of just `0` because it makes it clear that it should be a null terminator</code></pre>
+<p>We define a string in this course to be an array of characters, ending at the <strong>first null character</strong>. If there are any other values after this null character, they are ignored.</p>
+<p>This is called the <strong>null-terminated</strong> string convention.</p>
+<p>The advantage of this approach is that it is no longer necessary to pass the length of a string to a function along with the string itself. A function can take a string and determine where it ends by itself, by looking for the first null character:</p>
+<pre><code>// counts the number of &quot;e&quot;&#39;s in a string
+int e_count(const char s[]) {
+    int count = 0;
+    while (*s) { // not the null terminator
+        if (*s == &#39;e&#39; || *s == &#39;E&#39;) count ++;
+        s ++;
+    }
+    return count;
+}</code></pre>
+<p>Since this pattern is so common, there are easier ways to write character arrays:</p>
+<pre><code>char a[]  = {&#39;c&#39;, &#39;a&#39;, &#39;t&#39;, &#39;\0&#39;};
+char b[]  = {&#39;c&#39;, &#39;a&#39;, &#39;t&#39;, 0};
+char c[4] = {&#39;c&#39;, &#39;a&#39;, &#39;t&#39;};
+char d[]  = {99, 97, 116, 0};
+char e[4] = &quot;cat&quot;;
+char f[]  = &quot;cat&quot;;</code></pre>
+<p>All of the above are equivalent.</p>
+<p>If we do something like <code>char a[3] = &quot;cat&quot;</code>, the null terminator gets cut off. This is because we explicitly specified the length, so the null terminator isn't added automatically.</p>
+<p>In the array initialization syntax, the double quote <code>&quot;str&quot;</code> notation adds the null terminator automatically <strong>if the length is not explicitly specified</strong>. It is exactly equivalent to writing out the characters individually using array initialization syntax. This is <strong>different from the string literal notation in expressions</strong>.</p>
+<p>We must be careful to include the null terminator. If a null terminator is forgotten, then functions like <code>strlen</code> might try to keep reading past the end of the string, which can cause segmentation faults and worse.</p>
+<h3 id="literals">Literals</h3>
+<p>In expressions, the double quote <code>&quot;str&quot;</code> notation actually allocates a constant <code>char</code> array in the read-only section, and substitutes the array for the literal. This means that <code>printf(&quot;abc&quot;);</code> is equivalent to:</p>
+<pre><code>const char string_literal_1[] = &quot;abc&quot;;
+printf(string_literal_1);</code></pre>
+<p>As a result, the read-only data section is also known as the <strong>literal pool</strong>.</p>
+<p>If we want to print out a string, we use <code>printf</code> witht he placeholder <code>%s</code>. This allows it to accept a null-terminated string and substitute it for the placeholder:</p>
+<pre><code>const char pattern[] = &quot;the %s in the hat&quot;;
+const char value[] = &quot;cat&quot;;
+printf(pattern, value);</code></pre>
+<p><code>printf</code> pritns out characters until a null terminator is encountered.</p>
+<h3 id="operations">Operations</h3>
+<p>The <code>string.h</code> library provides utility functions for working with strings.</p>
+<p>The <code>int strlen(const char s[])</code> function in <code>string.h</code> returns the length of the string <code>s</code>. Note that this is only the <strong>number of values before the first null terminator</strong> - not the length of the character array itself.</p>
+<p>We can implement our own <code>strlen</code> as follows:</p>
+<pre><code>int my_strlen(const char *s) {
+    int len = 0;
+    while (s[len]) len ++;
+    return len;
+}</code></pre>
+<p>Or alternatively:</p>
+<pre><code>int my_strlen(const char *s) {
+    const char *p = s;
+    while (*p) p ++;
+    return p - s;
+}</code></pre>
+<p>When we compare strings directly using <code>string1 == string2</code>, we are simply comparing the array pointers. However, we usually actually want to compare them in <strong>lexicographic order</strong>.</p>
+<p>Characters are compared based on their ASCII code. A smaller ASCII value means one smaller than another. So numbers are less than capital letters, which are are less than lowercase letters.</p>
+<p>In lexicographic order, we compare the characters one by one. If the character at the same index in both strings is the same, we move to the next character and try again. If one is less than the other, then that string is <strong>lexicographically less</strong> than the other. If we reach the end of both strings, then they are equal.</p>
+<p>If we reach the end of only one string, the shorter string is lexicographically less than the other. This rule isn't really needed because the null terminator is always less than all other characters.</p>
+<p>The <code>int strcomp(const char a[], const char b[])</code> function in <code>string.h</code> compares two strings in lexicographical order. It returns a negative value if <code>a &lt; b</code>, zero if <code>a == b</code>, and a positive value if <code>a &gt; b</code>. An easier way to think about it is that <code>strcmp(a, b) COMPARISON_OPERATOR 0</code> is equivalent to <code>a COMPARISON_OPERATOR b</code>.</p>
+<p>Lexicographic order can actually be used for any kind of sequence of elements, like arrays or lists.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
