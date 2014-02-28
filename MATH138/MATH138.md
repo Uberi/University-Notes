@@ -1111,6 +1111,55 @@ Does $3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2$ converge?
 > Clearly, in order to converge, $-1 \le -\frac{x}{2} \le -1$, or $-1 \le \frac{x}{2} \le 1$.  
 > As an aside, it converges to $\frac{3}{1 + \frac{x}{2}} = \frac{6}{2 + x}$.  
 
+# 28/2/14
+
+The value of the geometric series is $S_N = \sum_{n = 0}^N x^n = 1 + x + x^2 + \ldots + x^N = \begin{cases} \frac{1 - x^N}{1 - x} &\text{if } x \ne 1 \\ N + 1 &\text{if } x = 1 \end{cases}$
+
 ### Convergence
 
-Notice that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, $\lim_{n \to \infty} a_n = 0$ is a requirement for convergence.
+One of the simplest tests for convergence is that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, $\lim_{n \to \infty} a_n = 0$ is a requirement for convergence.
+
+Formally, if $\lim_{n \to \infty} a_n \ne 0$, then the sequence does not converge.
+
+Our convergence tests can decide whether a series covnerges or not, but do not provide information about what it converges to.
+
+Integral Test
+-------------
+
+This is based on the connection between an infinite series (like a Riemann sum) and integration.
+
+Let $\sum_{n = 0}^\infty a_n$ be an infinite series. Then we can write $a_n$ be a function of $n$, like $f(n)$.
+
+For example, for $\sum_{n = 0}^\infty \frac{1}{n^2}$, $f(n) = \frac{1}{n^2}$.
+
+Now we can develop the **integral test**.
+
+If $a_n = f(n)$, and $f(n)$ is **continuous**, **positive**, and **decreasing** for all $x \ge 1$, then $\int_1^\infty f(x) \dee x$ converges if and only if $\sum_{n = 1}^\infty f(n)$ converges.
+
+Given $\sum_{n = 1}^\infty \frac{1}{n^P}$, for what values of $P$ does the series converge?
+
+> Clearly, $\sum_{n = 1}^\infty \frac{1}{n^P} = \sum_{n = 1}^\infty n^{-P}$.  
+> Clearly, if $P \le 0$, then $\lim_{n \to \infty} n^{-P} \ne 0$ and the sequence does not converge.  
+> If $P > 0$, then $f(n) = \frac{1}{n^P}$ is continuous, positive, and decreasing.
+> Clearly, $\int_1^\infty \frac{1}{x^P} \dee x = \frac{1}{1 - P} \evalat{x^{1 - P}}_1^\infty$ converges if and only if $P > 1$.  
+> So $\sum_{n = 1}^\infty \frac{1}{n^P}$ converges if and only if $P > 1$.  
+
+This is the Riemann zeta function, and is often called the **P-series**.
+
+The series $\sum_1^\infty \frac{1}{n}$ is called the **harmonic series**. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where $P = 1$. This is a useful series because $\lim_{n \to \infty} \frac{1}{n} = 0$, yet the series diverges, so this is an example of the simple convergence test not being useful.
+
+For example, a P-series where $P = 2$ is $\frac{\pi^2}{6}$. ;wip: how?
+
+As an aside, we have closed forms for the infinite limit of P-series for all even $P$ - always in the form of $\frac{m}{n}\pi^P$. However, we do not know anything at this time about odd $P$.
+
+For example, a P-series where $P = 3$ results in a value that has no known exact form, and is still an unsolved problem in methematics.
+
+### Error Estimation
+
+For series that satisfy the hypetheses of the integral test, we can estimate the error/remainder $R_N = \sum_1^\infty a_n - \sum_1^N a_n$ for any $N$.
+
+This is useful because we can't explicitly calculate $\sum_1^\infty a_n$, but we can calculate $\sum_1^N a_n$.
+
+So given $f(n) = a_n$ being continuous, positive, and decreasing, the error is bounded by $\int_{N + 1}^\infty f(x) \dee x \le R_N \le \int_N^\infty f(x) \dee x$.
+
+For example, for the series $S_N = \sum_{n = 1}^N \frac{1}{n^2}$, $S_{10} \approxeq 1.54977$. We know that since $f(n) = \frac{1}{n^2}$ is continuous, positive, and decreasing, and $\int_1^\infty \frac{1}{n^2}$.

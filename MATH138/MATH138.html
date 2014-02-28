@@ -755,8 +755,32 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <blockquote>
 <p>Clearly, <span class="math">\(3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2 = 3 \sum_{n = 0}^\infty \left(-\frac{x}{2}\right)^n\)</span>.<br />Clearly, in order to converge, <span class="math">\(-1 \le -\frac{x}{2} \le -1\)</span>, or <span class="math">\(-1 \le \frac{x}{2} \le 1\)</span>.<br />As an aside, it converges to <span class="math">\(\frac{3}{1 + \frac{x}{2}} = \frac{6}{2 + x}\)</span>.</p>
 </blockquote>
+<h1 id="section-20">28/2/14</h1>
+<p>The value of the geometric series is <span class="math">\(S_N = \sum_{n = 0}^N x^n = 1 + x + x^2 + \ldots + x^N = \begin{cases} \frac{1 - x^N}{1 - x} &amp;\text{if } x \ne 1 \\ N + 1 &amp;\text{if } x = 1 \end{cases}\)</span></p>
 <h3 id="convergence">Convergence</h3>
-<p>Notice that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, <span class="math">\(\lim_{n \to \infty} a_n = 0\)</span> is a requirement for convergence.</p>
+<p>One of the simplest tests for convergence is that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, <span class="math">\(\lim_{n \to \infty} a_n = 0\)</span> is a requirement for convergence.</p>
+<p>Formally, if <span class="math">\(\lim_{n \to \infty} a_n \ne 0\)</span>, then the sequence does not converge.</p>
+<p>Our convergence tests can decide whether a series covnerges or not, but do not provide information about what it converges to.</p>
+<h2 id="integral-test">Integral Test</h2>
+<p>This is based on the connection between an infinite series (like a Riemann sum) and integration.</p>
+<p>Let <span class="math">\(\sum_{n = 0}^\infty a_n\)</span> be an infinite series. Then we can write <span class="math">\(a_n\)</span> be a function of <span class="math">\(n\)</span>, like <span class="math">\(f(n)\)</span>.</p>
+<p>For example, for <span class="math">\(\sum_{n = 0}^\infty \frac{1}{n^2}\)</span>, <span class="math">\(f(n) = \frac{1}{n^2}\)</span>.</p>
+<p>Now we can develop the <strong>integral test</strong>.</p>
+<p>If <span class="math">\(a_n = f(n)\)</span>, and <span class="math">\(f(n)\)</span> is <strong>continuous</strong>, <strong>positive</strong>, and <strong>decreasing</strong> for all <span class="math">\(x \ge 1\)</span>, then <span class="math">\(\int_1^\infty f(x) \dee x\)</span> converges if and only if <span class="math">\(\sum_{n = 1}^\infty f(n)\)</span> converges.</p>
+<p>Given <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span>, for what values of <span class="math">\(P\)</span> does the series converge?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P} = \sum_{n = 1}^\infty n^{-P}\)</span>.<br />Clearly, if <span class="math">\(P \le 0\)</span>, then <span class="math">\(\lim_{n \to \infty} n^{-P} \ne 0\)</span> and the sequence does not converge.<br />If <span class="math">\(P &gt; 0\)</span>, then <span class="math">\(f(n) = \frac{1}{n^P}\)</span> is continuous, positive, and decreasing. Clearly, <span class="math">\(\int_1^\infty \frac{1}{x^P} \dee x = \frac{1}{1 - P} \evalat{x^{1 - P}}_1^\infty\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span>.<br />So <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span>.</p>
+</blockquote>
+<p>This is the Riemann zeta function, and is often called the <strong>P-series</strong>.</p>
+<p>The series <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> is called the <strong>harmonic series</strong>. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where <span class="math">\(P = 1\)</span>. This is a useful series because <span class="math">\(\lim_{n \to \infty} \frac{1}{n} = 0\)</span>, yet the series diverges, so this is an example of the simple convergence test not being useful.</p>
+<p>For example, a P-series where <span class="math">\(P = 2\)</span> is <span class="math">\(\frac{\pi^2}{6}\)</span>. ;wip: how?</p>
+<p>As an aside, we have closed forms for the infinite limit of P-series for all even <span class="math">\(P\)</span> - always in the form of <span class="math">\(\frac{m}{n}\pi^P\)</span>. However, we do not know anything at this time about odd <span class="math">\(P\)</span>.</p>
+<p>For example, a P-series where <span class="math">\(P = 3\)</span> results in a value that has no known exact form, and is still an unsolved problem in methematics.</p>
+<h3 id="error-estimation">Error Estimation</h3>
+<p>For series that satisfy the hypetheses of the integral test, we can estimate the error/remainder <span class="math">\(R_N = \sum_1^\infty a_n - \sum_1^N a_n\)</span> for any <span class="math">\(N\)</span>.</p>
+<p>This is useful because we can't explicitly calculate <span class="math">\(\sum_1^\infty a_n\)</span>, but we can calculate <span class="math">\(\sum_1^N a_n\)</span>.</p>
+<p>So given <span class="math">\(f(n) = a_n\)</span> being continuous, positive, and decreasing, the error is bounded by <span class="math">\(\int_{N + 1}^\infty f(x) \dee x \le R_N \le \int_N^\infty f(x) \dee x\)</span>.</p>
+<p>For example, for the series <span class="math">\(S_N = \sum_{n = 1}^N \frac{1}{n^2}\)</span>, <span class="math">\(S_{10} \approxeq 1.54977\)</span>. We know that since <span class="math">\(f(n) = \frac{1}{n^2}\)</span> is continuous, positive, and decreasing, and <span class="math">\(\int_1^\infty \frac{1}{n^2}\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -125,6 +125,10 @@ Consider the example of drag force on an object moving through a fluid:
 
 Remember that litres is not an SI unit. There are 1000 litres to the cubic meter (which is an SI unit).
 
+Also, trigonometric functions accept only radians or ratios of lengths for the inverse functions (both unitless).
+
+Exponential functions accept only unitless values as well.
+
 ### Accuracy
 
 Whenever we do measurements, we can never measure quantities to their exact values. Therefore, there is always some error in our measurements.
@@ -725,7 +729,7 @@ In practice, we use $9.8 N/kg = 9.8 m/s^2$, which is more suited for North Ameri
 
 On Mars, the acceleration due to gravity would be $G\frac{M_M}{r_M^2} = 3.7 m/s^2$.
 
-The **apparent weight** of an object is the weight an object actually experiences. For example, the apparent weight of an object in free fall in a vacuum is $\vec{0} N$, since the reference frame is accelerating at $\vec{g}$, so the net force in this reference frame is $\vec{0} N$.
+The **apparent weight** of an object is the weight an object actually experiences. For example, the apparent weight of an object in free fall in a vacuum is $\vec{0} N$, since the reference frame is accelerating at $\vec{g}$, so the net force in this reference frame is $\vec{0} N$. This applies to forces only in the vertical axis - if the object is accelerating sideways, this does not affect the apparent weight.
 
 Acceleration of the reference frame is added to all $\vec{a}$ in $\vec{F} = m\vec{a}$. In other words, $\vec{F} = m(\vec{a}_{frame} + \vec{a}_{object})$.
 

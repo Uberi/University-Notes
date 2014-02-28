@@ -1101,7 +1101,7 @@ As a result, we can use things like distributivity ($A(B + C) = AB + AC$) over n
 
 Consider the example of using numbers to represent hockey tournament rankings. In this case, the numbers obey distributivity, but the rankings do not - a hockey team can lose games yet still be first place. Therefore, the lowest number is not necessarily the best team. In this case, we manipulated the 
 
-### Percentages
+### Percentages and Operations
 
 Percentages are useful for representing and comparing ratios. This allows us to see which ratio is higher or lower.
 
@@ -1114,10 +1114,100 @@ If the number of bear attacks increased 100% this decade, should we implement a 
 > If there were 100 more attacks, we should implement a bear patrol to stop them.  
 > We do not have enough information to answer the question using only percentages.  
 
-We must be sure to manipulate numbers only when those manipulations are valid. For example, adding percentages to get total percentages is an invalid manipulation.
+We must be sure to manipulate numbers only **when those manipulations are valid and make sense as well in the target system**. For example, adding percentages to get total percentages is an invalid manipulation, as well as taking the inverse sine of a distance, or adding mass to length.
+
+Unit systems help us avoid these situations by making it obvious when we try to add different types of physical quantities. This is useful but not completely effective - it is still possible to go wrong even when using units.
 
 If we add 5 meters and 5 meters, we can straighforwardly say that it represents 10 meters. But if we add 5 meters and 5 kilograms, what does the 10 represent?
 
 A percentage can represent a multiple, or a change. A 50% increase is different from something being 50% of what it was before.
 
 A percentage increase is denoted by $\frac{(Later - Earlier)}{Earlier} \times 100%$.
+
+### Rankings
+
+Numbers are also often used for ranking things due to their ability to be compared - numbers are ordered.
+
+Rankings encode only information about order. For example, the rankings for runners in a race does not encode what the actual times were, or how close the winners were to each other, only information about who was first, second, third, and more.
+
+Rankings are given based on some system of measurement, and the properties of this system determine what the ranking means.
+
+### Metrics
+
+In many cases, the measurement system only measures something indirectly, like how IQ tests measure the ability to asnwer certain questions as a metric for intelligence in general.
+
+**Pseudo-precision** is when the number is represented in a form that makes it seem like it has more precision than it does. For example, one might claim that pi is approximately equal to 4.03. This number only has 1 significant digit, but it is presented like it has 3.
+
+### Average
+
+An **average** is a number that is supposed to represent a whole set of data. As a result, a lot of information is inevitably lost when using only the average.
+
+The most common ways of finding averages are the mean (ratio of total value to number of values), median (central value when sorted), and mode (most common value).
+
+Statistics
+----------
+
+**Statistics** is the study of data collection and analysis. It is related to critical thinking because it helps determine what kind of techniques, inferences, and interpretations can be used on data sets, and because statistics is used very often in reasoning.
+
+A **data set** is a collection of information, often relating to a **population** of interest.
+
+The properties of the popoulation are represented using variables. For example a poll of a city might result in a variable being the approval of the current prime minister, and the value of this variable is the percentage of people who do approve.
+
+Often, it isn't possible to measure the whole population. As a result, we choose a smaller **sample set** that represents the **target data set**. We always want the sample set to represent the target set as accurately as possible.
+
+How well a sample represents the population depends in the **size of the sample relative to the population**, and the **randomness of the selection process**. Ideally, the selection process would give each individual an equal chance of being considered in the sample. For example, polling by phone selects only those people who own phones.
+
+From these data sets, we can figure out correlations between variables, which can help us figure out **casual relationships**.
+
+### Correlation/Causation
+
+A **correlation** is when variables are related in some way - they co-vary together. Correlations are useful because we can use them to make predictions about what will happen when a variable is a certain way.
+
+For example, if attending class is correlated with high grades, then given students that attend class, we can predict that they have higher grades than those who do not attend class.
+
+**Positive correlation** is when, given variables $x$ and $y$, an increase in $x$ results in an increase in $y$, and vice versa. For example, there is a positive correlation in street signs between signs saying "STOP" and signs that are red.
+
+**Negative correlation** is when, given variables $x$ and $y$, an increase in $x$ results in a decrease in $y$, and vice versa. For example, there is a negative correlation in street signs between signs saying "STOP" and signs that are yellow.
+
+**Causation** is when one thing causes another thing. Where correlation can be used to make predictions in some circumstances, causation allows predictions to be made in a much larger set of circumstances, and even predict what will happen when we modify other variables.
+
+### Null Hyposthesis
+
+When we find a correlation in a sample set, we cann't directly apply it to the target population. The idea that a correlation exists in the target population is a **hypothesis**.
+
+There could be multiple hypotheses, like that there is a causal relationship between the two variables, or similar.
+
+All hypotheses must compete with the null hypothesis. The **null hypothesis** is that what we observed was just a fluke or an accident. It is the "baseline" hypothesis, so to speak.
+
+| Correlation in sample             | Correlation in population | Result                         |
+|:----------------------------------|:--------------------------|:-------------------------------|
+| No, don't reject null hypothesis  | No, we were right         | Correct inference              |
+| No, don't reject null hypothesis  | Yes, we were wrong        | Type II error (false negative) |
+| Yes, reject null hypothesis       | No, we were wrong         | Type I error (false positive)  |
+| Yes, reject null hypothesis       | Yes, we were right        | Correct inference              |
+
+Note that not rejecting the null hypothesis isn't the same thing as accepting it.
+
+Suppose that several times while riding a bike up a hill, the bicycle chain derails. We can then produce some hypotheses:
+
+* There is a positive correlation between riding up a hill and the chain derailing.
+* My bicycle gears are misaligned when the bicycle is in a low gear, which is active while going uphill.
+
+**Confounds** are alternative explanations for observations. Confounds are counterexamples to abductive arguments, and can be thought of as alternative hypotheses:
+
+* When riding up a hill, the extra bouncing causes the chain to derail.
+* There are wires on the hill that snag the chain.
+
+We must also intriduce the null hypothesis:
+
+* The derailments were purely coincidental to riding up a hill.
+
+### Testing Hypotheses
+
+1. Collect data from a sample to draw hypotheses from.
+2. Reject unrepresentative samples and clean up data.
+3. Figure out correlations in the sample.
+4. Introduce null hypothesis.
+5. Introduce hypotheses about correlation in the population.
+6. Introduce confounds.
+7. Introduce hypotheses about causation in the population that explain the correlations.
