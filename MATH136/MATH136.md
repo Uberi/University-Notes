@@ -591,7 +591,7 @@ Note the general technique used in reducing the matrix. First, we want to obtain
 
 This technique is basically modifying the matrix until all the properties except for property 4. Then property 4 can be solved for relatively easily.
 
-### Solution Set
+It is the basic technique behind **Guass-Jordan elimination**.### Solution Set
 
 A matrix is inconsistent if and only if its RREF contains a row of the form $\left[\begin{array}{ccc|c} 0 & \ldots & 0 & 1 \end{array}\right]$ - no possible values can satisfy this equation ($0 = 1$), so there are no solutions.
 
@@ -1214,3 +1214,126 @@ In summary, the four **fundamental subspaces** of a matrix are:
 * Column space
 * Nullspace
 * Left Nullspace
+
+# 1/3/14
+
+Vector Spaces
+-------------
+
+A **real vector space** is a set $\mb{V}$ of vectors put together with an addition operation, denoted $\vec{x} \oplus \vec{y}$, and a scalar multiplication operation, denoted $t \odot \vec{x}$, such that for any $\vec{a}, \vec{b}, \vec{c} \in \mb{V}, u, v \in \mb{V}$:
+
+* Closure under addition: $\vec{a} \oplus \vec{b} \in \mb{V}$
+* Associativity: $(\vec{a} \oplus \vec{b}) \oplus \vec{c} = \vec{a} \oplus (\vec{b} \oplus \vec{c})$
+* Commutativity: $\vec{a} \oplus \vec{b} = \vec{b} \oplus \vec{a}$
+* Additive identity: $\exists \vec{0} \in \mb{V}, \vec{a} \oplus \vec{0} = \vec{a}$. This is known as the zero vector.
+* Additive inverse: $\exists (-\vec{a}) \in \mb{V}, \vec{a} \oplus (-\vec{a}) = \vec{0}$
+* Closure under scalar multiplication: $u \odot \vec{a} \in \mb{V}$
+* $u \odot (v \odot \vec{a}) = (uv) \odot \vec{a}$
+* Scalar distributivity: $(u \oplus u) \odot \vec{a} = (u \odot \vec{a}) \oplus (v \odot \vec{a})$
+* Vector distributivity: $u \odot (\vec{a} \oplus \vec{b}) = u \odot \vec{a} \oplus u \odot \vec{b}$
+* Scalar multiplicative identity: $1 \odot \vec{a} = \vec{a}$
+
+The "vectors" in a vector space don't necessarily have to be traditional vectors. They can also be things like polynomials or even sets.
+
+Unlike with subspaces, we cannot assume that a few properties will imply the rest. So in order to prove that something is a vector space, we have to prove all ten properties are satisfied.
+
+In this course, a **vector space** is the same thing as a real vector space. In practice, there are other types of vector spaces, like complex vector spaces.
+
+We are using $\oplus$ and $\odot$ rather than $+$ and $\cdot$ because it makes it easier to see that the operations are not necessarily the same thing as real addition or multiplication - that they are non-standard.
+
+$+$ and $\cdot$ are called the **standard addition** and **standard multiplication**, respectively.
+
+We can denote the zero vector of a vector space with $\vec{0}_{\mb{V}}$ to show which vector space it is in.
+
+An example of a vector space is $\mb{R}^n$ with standard addition and standard multiplication. It is obvious that this satisfies all ten properties of the definition of a vector space.
+
+Another example of a vector space is $P_n(\mb{R})$, which is the set of all polynomials with degree less than or equal to $n$ with real coefficients. Here, the addition operation is standard addition of polynomials, and the scalar multiplication operation is the standard scalar multiplication of polynomials.
+
+Another example of a vector space is $M_{m \times n}$. Together with standard matrix multiplication and scalar multiplication of the matrices, this forms a vetor space. Likewise with linear mappings, with the standard linear mapping operations.
+
+### Theorem 4.1.1
+
+If $\mb{V}$ is a vector space and $\vec{v} \in \mb{V}$, then $\vec{0} = 0 \odot \vec{v}$ and $-\vec{v} = (-1) \odot \vec{v}$.
+
+In other words, scalar multiplication by 0 results in the additive identity and scalar multiplication by -1 results in the additive inverse.
+
+Using this, we can always find the additive identity by picking any vector and multiplying by 0, and always find the additive inverse by multiplying by -1.
+
+Proof:
+
+> Clearly, $0 \odot \vec{v} = 0 \odot \vec{v} \oplus \vec{0} = 0 \odot \vec{v} \oplus 1\vec{v} \oplus (-\vec{v}) = (0 + 1) \odot \vec{v} \oplus (-\vec{v}) = \vec{v} \oplus (-\vec{v}) = \vec{0}$.  
+> Clearly, $(-1) \odot \vec{v} = \vec{0} \oplus (-1) \odot \vec{v} = 1\vec{v} + (-\vec{v}) \oplus (-1) \odot \vec{v} = 0\vec{v} + (-\vec{v}) = -\vec{1\vec{v} + (-\vec{v}) \oplus (-1) \odot \vec{v}}$.  
+
+Prove that $\vec{D} = \set{\vec{x} \in \mb{R} \middle| x > 0}$, $x, y \in \mb{D}$, where $x \oplus y = xy$ and $t \odot x = x^t$:
+
+> Let $x, y, z \in \mb{D}, c, d \in \mb{R}$.  
+> So $xy > 0$, and $x \oplus y \in \mb{D}$.  
+> So $(x \oplus y) \oplus z = (xy)z = x(yz) = x \oplus (y \oplus z)$.  
+> So $x \oplus y = xy = yx = y \oplus x$.  
+> So $\vec{0} = 0 \odot x = x^0 = 1$, by theorem 4.1.1.  
+> So $-x = -1 \odot x = x^{-1} = \frac{1}{x}$, by theorem 4.1.1.  
+> So $x^c > 0$, and $c \odot x \in \mb{D}$.  
+> So $c \odot (d \cdot x) = x^{cd} = x^{dc} = d \odot (c \odot x)$.  
+> So $(c + d) \odot x = x^{c + d} = x^c x^d = c \odot x \oplus d \odot x$.  
+> So $c \odot (x \oplus y) = (xy)^c = x^c y^c = c \odot x \oplus c \odot y$.  
+> So $1 \odot x = x^1 = x$.  
+> So all ten properties are satisfied and this is a vector space.  
+
+Note that all $\vec{x} \in \mb{R}$ can be related to $\vec{y} \in \mb{D}$ using $\vec{y} = a^\vec{x}$, where $a > 1$.
+
+For example, the empty set is not a vector space because all vector spaces must have at least one element, the zero vector.
+
+### Subspaces
+
+A set $\mb{S}$ is a **subspace** of $\mb{V}$ if and only if:
+
+* $\mb{S}$ is a subset of $\mb{V}$.
+* $\mb{S}$ is a vector space using the same operations as $\mb{V}$.
+
+Since we know more about $\mb{S}$ and $\mb{V}$ - that they are vector spaces - we can again use the **subspace test** to see if some $\mb{S}$ is a subspace of some $\mb{V}$.
+
+### Theorem 4.1.2 (Subspace Test for Vector Spaces)
+
+A set $\mb{S}$ is a subspace of a set $\mb{V}$ if and only if, for any $\vec{x}, \vec{y} \in \mb{S}, t \in \mb{R}$:
+
+* $\mb{S}$ is not empty (this allows us to instantiate $\vec{x}$ and $\vec{y}$).
+* Closure under addition: $\vec{x} \oplus \vec{y} \in \mb{S}$.
+* Closure under scalar multiplication: $t \odot \vec{x} \in \mb{S}$.
+
+The proof of this is roughly the same as the proof for the subspace test for $\mb{R}$.
+
+### Spanning
+
+Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_k}$ where $\vec{v}_1, \ldots, \vec{v}_k \in \mb{V}$ and $\mb{V}$ is a vector space.
+
+The **span** of $\mathcal{B}$ is $\spn \mathcal{B} = \set{c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k \middle| c_1, \ldots, c_k \in \mb{R}}$.
+
+This is just a generalization of the concept of a span in $\mb{R}^n$ into all vector spaces.
+
+As with subspaces in $\mb{R}^n$, we can prove a vector $\vec{x}$ is in a span if the linear system $\vec{x} = c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k$ has at least one solution. Here, we are solving for $c_1, \ldots, c_k$.
+
+### Linear Independence
+
+If $c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k = \vec{0}_{\mb{V}}$ has any solutions where $c_i \ne 0$ for $1 \le i \le k$, then $\mathcal{B}$ is **linearly dependent**. Otherwise, it is **linearly independent**.
+
+This is just a generalization of the concept of linear independence in $\mb{R}^n$ into all vector spaces.
+
+### Theorem 4.1.3
+
+Then $\spn \mathcal{B}$ is a subspace of $\mb{V}$.
+
+In other words, the span of a set of vectors that are in a vector space is always a subspace of that vector space.
+
+### Theorem 4.1.4
+
+Then if for some $1 \le i \le k$, $v_i \in \spn \set{\vec{v}_1, \ldots, \vec{v}_{i - 1}, \vec{v}_{i + 1}, \ldots, \vec{v}_k}$, $\spn \mathcal{B} = \spn \set{\vec{v}_1, \ldots, \vec{v}_{i - 1}, \vec{v}_{i + 1}, \ldots, \vec{v}_k}$.
+
+In other words, if a vector in a set can be written as a linear combination of the other vectors in the set (it is in the span), then the span of the set is the same as the span of the set without that vector.
+
+### Theorem 4.1.5
+
+Then $\mathcal{B}$ is linearly dependent if and only if for some $1 \le i \le k$, $v_i \in \spn \set{\vec{v}_1, \ldots, \vec{v}_{i - 1}, \vec{v}_{i + 1}, \ldots, \vec{v}_k}$.
+
+### Theorem 4.1.6
+
+If $\vec{0}_{\mb{V}} \in \mathcal{B}$, then $\mathcal{B}$ is linearly independent.
