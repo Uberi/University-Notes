@@ -1101,6 +1101,12 @@ As a result, we can use things like distributivity ($A(B + C) = AB + AC$) over n
 
 Consider the example of using numbers to represent hockey tournament rankings. In this case, the numbers obey distributivity, but the rankings do not - a hockey team can lose games yet still be first place. Therefore, the lowest number is not necessarily the best team. In this case, we manipulated the 
 
+**Ordinal numbers** are natural numbers, used to represent positions/rankings. They are used for ordering things.
+
+**Cardinal numbers** are natural numbers, used to represent size. They are used for counting things without fractional values.
+
+**Nominal numbers** are numbers that are only used as a name, like postal codes or phone numbers.
+
 ### Percentages and Operations
 
 Percentages are useful for representing and comparing ratios. This allows us to see which ratio is higher or lower.
@@ -1122,7 +1128,7 @@ If we add 5 meters and 5 meters, we can straighforwardly say that it represents 
 
 A percentage can represent a multiple, or a change. A 50% increase is different from something being 50% of what it was before.
 
-A percentage increase is denoted by $\frac{(Later - Earlier)}{Earlier} \times 100%$.
+A percentage increase is denoted by $\text{Percentage Increase} = \frac{(\text{Later} - \text{Earlier})}{\text{Earlier}} \times 100%$.
 
 ### Rankings
 
@@ -1144,10 +1150,14 @@ An **average** is a number that is supposed to represent a whole set of data. As
 
 The most common ways of finding averages are the mean (ratio of total value to number of values), median (central value when sorted), and mode (most common value).
 
+# 3/3/14
+
 Statistics
 ----------
 
 **Statistics** is the study of data collection and analysis. It is related to critical thinking because it helps determine what kind of techniques, inferences, and interpretations can be used on data sets, and because statistics is used very often in reasoning.
+
+**Variables** are a type of property. A **statistic** is a feature of a data set.
 
 A **data set** is a collection of information, often relating to a **population** of interest.
 
@@ -1155,9 +1165,15 @@ The properties of the popoulation are represented using variables. For example a
 
 Often, it isn't possible to measure the whole population. As a result, we choose a smaller **sample set** that represents the **target data set**. We always want the sample set to represent the target set as accurately as possible.
 
-How well a sample represents the population depends in the **size of the sample relative to the population**, and the **randomness of the selection process**. Ideally, the selection process would give each individual an equal chance of being considered in the sample. For example, polling by phone selects only those people who own phones.
+We often make inteferences from data sets using **inductive generalizations** - inferring features of the target data set from the sample data set. We use this to generate hypotheses about the data.
+
+How well a sample represents the population depends in the **size of the sample relative to the population**, and the **randomness of the selection process**. Ideally, the selection process would give each individual an equal chance of being considered in the sample. For example, polling by phone selects only those people who own phones, answer them, and have a listed number.
+
+A non-random sample set is **biased** and might not accurately represent the target population. However, even if we choose our sample randomly, we may still get unlucky and randomly choose a bad sample, which doesn't represent the target population.
 
 From these data sets, we can figure out correlations between variables, which can help us figure out **casual relationships**.
+
+For example, a political poll has a population of every eligible voter, a sample set of the people who actually voted, and the inference is that the people who voted are an accurate sample of the people who can vote.
 
 ### Correlation/Causation
 
@@ -1170,6 +1186,8 @@ For example, if attending class is correlated with high grades, then given stude
 **Negative correlation** is when, given variables $x$ and $y$, an increase in $x$ results in a decrease in $y$, and vice versa. For example, there is a negative correlation in street signs between signs saying "STOP" and signs that are yellow.
 
 **Causation** is when one thing causes another thing. Where correlation can be used to make predictions in some circumstances, causation allows predictions to be made in a much larger set of circumstances, and even predict what will happen when we modify other variables.
+
+For example, knowing there is a correlation between smoking and lung cancer is good for predicting whether someone will have lung cancer or a smoking habit, but not for preventing lung cancer. Knowing that smoking causes lung cancer allows us to prevent lung cancer by predicting that stopping smoking helps reduce the incidences of lung cancer.
 
 ### Null Hyposthesis
 

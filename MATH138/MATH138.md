@@ -1163,3 +1163,38 @@ This is useful because we can't explicitly calculate $\sum_1^\infty a_n$, but we
 So given $f(n) = a_n$ being continuous, positive, and decreasing, the error is bounded by $\int_{N + 1}^\infty f(x) \dee x \le R_N \le \int_N^\infty f(x) \dee x$.
 
 For example, for the series $S_N = \sum_{n = 1}^N \frac{1}{n^2}$, $S_{10} \approxeq 1.54977$. We know that since $f(n) = \frac{1}{n^2}$ is continuous, positive, and decreasing, and $\int_1^\infty \frac{1}{n^2}$.
+
+# 3/3/14
+
+Comparison Test (Series)
+------------------------
+
+There is a deep connection between infinite series and improper integrals.
+
+Like the improper integral, we can also have a form of the comparison test, but it is easier to use than with integrals.
+
+Given $\sum a_n$ and $\sum b_n$, two series, with $0 \le a_n \le b_n$:
+
+* If $\sum a_n$ diverges, then $\sum b_n$ also diverges.
+* If $\sum b_n$ converges, then $\sum a_n$ also converges.
+
+### Limit Comparison Test
+
+For series only - not integrals - we have an additional test we can use.
+
+Let $\sum a_n$ and $\sum b_n$ be two series, with $a_n \ge 0, b_n \ge 0$.
+
+Let $\rho = \lim_{n \to \infty} \frac{a_n}{b_n}$.
+
+If $0 < \rho < \infty$ ($\rho$ is positive and finite), then:
+
+* $\sum a_n$ and $\sum b_n$ both diverge.
+* $\sum a_n$ and $\sum b_n$ both converge.
+
+This is easily proved via contradiction or similar.
+
+Prove that $\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}$:
+
+> Clearly, $\frac{\abs{\sin n}}{\sqrt{n + n^3}} \le \frac{1}{\sqrt{n + n^3}} < \frac{1}{\sqrt{n^3}} = \frac{1}{n^\frac{3}{2}}$.  
+> Since this is a P-series where $P = \frac{3}{2}$, $\sum_{n = 1}^\infty \frac{1}{n^\frac{3}{2}}$ converges.  
+> So by the comparison test, $\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}$ converges.  

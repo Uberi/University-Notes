@@ -77,7 +77,6 @@ Section 003</code></pre>
 <h1 id="section">7/1/14</h1>
 <p>The clicker ID for the room is CB, but the prof just said he'll use AA.</p>
 <p>Assignments usually due every week Wednesday at noon.</p>
-<p>;wip: look around the website, and get a copy of the course notes next week, the electronic one</p>
 <p>If you don't want to use the clickers, enter your student number as the clicker ID and you can pass assignment 0.</p>
 <p>Every clicker question is out of 2, best 75% of responses counted, every tutorial attend increases final grade 0.1%, but is part of clamped 5% participation grade.</p>
 <p>Assignments are to be submitted to <a href="http://marmoset.student.cs.uwateroo.ca/">Marmoset</a>. MarkUs is used too for viewing comments, but students submit to Marmoset. There is less hand marking in this course and more automated testing.</p>
@@ -103,7 +102,7 @@ Section 003</code></pre>
 <li>Algorithm design/efficiency</li>
 <li>Designing medium size, real world programs with I/O</li>
 </ul>
-<p>The most common programming paradigms are functional, imperative, object oriented.</p>
+<p>The most common programming paradigms are functional, imperative, and object oriented.</p>
 <p>Programming involves a lot of <strong>design choices</strong> and <strong>tradeoffs</strong>. Each decision has to be made based on the situation and the requirements.</p>
 <p>An abstract data type is a data type with certain properties, but we don't really care how it works. An example would be a dictionary/mapping - we only care about lookup, insert, and remove, not whether it uses association lists or binnary trees or anything.</p>
 <h1 id="section-1">9/1/14</h1>
@@ -122,7 +121,7 @@ aa
 &gt; (printf &quot;a\n&quot;) (printf &quot;a&quot;)
 a
 a</code></pre>
-<p><code>\\n</code> here means a newline. To make a literal backslash, use two backslashes: <code>\\\\</code>.</p>
+<p><code>\n</code> here means a newline. To make a literal backslash, use two backslashes: <code>\\</code>.</p>
 <p>What if we need to print a number? The first parameter of <code>printf</code> must be a string. We can use a <strong>placeholder</strong>:</p>
 <pre><code>&gt; (printf &quot;the number is ~a, though the others are ~a and ~a, plus ~a.\n&quot; 4 &#39;test123 &quot;bla&quot; &#39;(1 2 3))
 the number is 4, though the others are test123 and bla, plus (1 2 3).</code></pre>
@@ -156,15 +155,15 @@ hello, Anthony</code></pre>
 &gt; (f)
 2</code></pre>
 <p>The <code>!</code> suffix in the function name means that it changes state, and we should be careful when using it.</p>
-<p>When we change state, we mutate it. Manipulation of state is mutation. In imperative programming languages, programmers may not use the term &quot;mutation&quot;, but use the term &quot;immutable&quot; rather than &quot;constants&quot;.</p>
+<p>When we change state, we mutate it. Manipulation of state is <strong>mutation</strong>. In imperative programming languages, programmers may not use the term &quot;mutation&quot;, but use the term &quot;immutable&quot; rather than &quot;constants&quot;.</p>
 <p>Now we will call constants in Racket &quot;variables&quot;, since we can use <code>set!</code>. When the difference matters, we use &quot;constants&quot; for things that don't change, and &quot;mutable variables&quot; for things that can.</p>
 <p>Section 2 is covered in Monday's tutorial.</p>
 <h2 id="modularization">Modularization</h2>
 <p>In larger projects, we need to break our code into pieces to make it easier to work on. Modularization is the practice of doing so in such a way as to group related functionality together into <strong>modules</strong>.</p>
 <p>A good real-world example of modularization is a battery - a self-contained package that provides electrical power. It has all three qualities of a good module:</p>
 <ul>
-<li>Reusability: a good module can be reused in multiple places, so we can use it again and again without writing another one.</li>
-<li>Maintainability: a single module is easier to debug, write, and improve - we only need to change the specific module we are looking for, and can even replace the module entirely without affecting everything else.</li>
+<li><strong>Reusability</strong>: a good module can be reused in multiple places, so we can use it again and again without writing another one.</li>
+<li><strong>Maintainability</strong>: a single module is easier to debug, write, and improve - we only need to change the specific module we are looking for, and can even replace the module entirely without affecting everything else.</li>
 <li>Abstraction: we don't need to care about how it is written, just how we can use it. We can hide all the complex stuff in a module and make the resulting interface simple to use.</li>
 </ul>
 <p>Modularization is also called <strong>separation of concerns</strong>.</p>
@@ -175,7 +174,7 @@ hello, Anthony</code></pre>
 <li>One for creating a virtual shopping cart.</li>
 <li>etc.</li>
 </ul>
-<p>Consider a tax processing module. The tax code is rather complex, so:</p>
+<p>Consider a tax processing module. The tax code is rather complex, so we want the module to have the three properties:</p>
 <ul>
 <li>Reusability: We can reuse the tax module in lots of other projects.</li>
 <li>Maintainability: When tax codes change, we just change that one module.</li>
@@ -192,10 +191,9 @@ hello, Anthony</code></pre>
 
 ;; some_program.rkt
 
-(require &quot;fun.rkt&quot;)
+(require &quot;frobnicate.rkt&quot;)
 
-&gt; (fun? 2)
-#t</code></pre>
+(frobnicates? 2)</code></pre>
 <p><code>provide</code> and <code>require</code> are special forms that make variables visible externally from other programs and import them other programs, respectively.</p>
 <p>In other words, <code>provide</code> exports the specified variables from the module, and <code>require</code> imports the exports from a module.</p>
 <p>All Racket files are already modules, but by default they have nothing provided, so the requiring program can't access anything in them.</p>
@@ -213,7 +211,7 @@ hello, Anthony</code></pre>
 <p>In modules, make sure to only put definitions, and not values.</p>
 <p>The <strong>module interface</strong> is the list of functions the module provides, including the contract and purpose (documentation). It is everything a client would need to use the module.</p>
 <p>The <strong>module implementation</strong> is the definitions of the functions in the module - the code itself.</p>
-<p>The interface of a battery is the cylindrical container with two terminals. The implementation is nickel metal-hydride or something else.</p>
+<p>The interface of an AA battery is a cylindrical container with two terminals at the ends. The implementation is nickel metal-hydride or something else.</p>
 <p>A module interface should have some basic elements:</p>
 <ul>
 <li>Overall description of the module - what it is designed to do</li>
@@ -232,7 +230,7 @@ hello, Anthony</code></pre>
 <p>More complex preconditions and postconditions should be written as English sentences describing what the data should look like.</p>
 <p>This allows the contract to convey more information about what is allowed: following the preconditions and obeying the contract while calling the function results in the postconditions being met. These conditions are both logical statements.</p>
 <p>A function that takes no parameters has a contract that starts off something like <code>FUNCTION_NAME: -&gt; RETURN_VALUE</code>, or alternatively, <code>FUNCTION_NAME: Void -&gt; RETURN_VALUE</code>.</p>
-<p>A precondition that is always met no matter what can be written as <code>PRE: #t</code>. Likewise with postconditions.</p>
+<p>A precondition that is always met can be written as <code>PRE: #t</code>. Likewise with postconditions.</p>
 <p>In Racket, there are even built in facilities in the language that help enforce the preconditions and postconditions. However, we will not be using them - the conditions in our programs will be informal.</p>
 <h1 id="tutorial-1">13/1/14 - Tutorial</h1>
 <p>Review of differences between teaching languages use in CS135 and the full version of Racket:</p>
@@ -242,15 +240,15 @@ hello, Anthony</code></pre>
 <li>Racket programs are sequences of definitions and top-level expressions (expressions that are not inside of a definition). When a program is run, it is evaluated top to bottom, binding each definition to its value and evaluating each top-level expression.</li>
 <li><code>#t</code> and <code>#f</code> are the boolean literals, and <code>true</code> and <code>false</code> are constants defined to <code>#t</code> and <code>#f</code>, respectively. All <strong>non-false values are treated as true</strong>.
 <ul>
-<li><code>(and a b ... y z)</code> returns <code>#f</code> if all arguments false, <code>#t</code> if no arguments, otherwise the last argument.</li>
+<li><code>(and a b ... y z)</code> returns <code>#f</code> if all arguments are false, <code>#t</code> if no arguments, and the last argument otherwise.</li>
 <li><code>(or a b ... y z)</code> returns the first non-false argument if there is one, and <code>#f</code> otherwise.</li>
 </ul></li>
 <li><code>cond</code> does not produce an error if all the questions in the question/answer pairs are false, instead producing <code>#&lt;void&gt;</code>.</li>
 <li>We are allowed to use <code>(if condition evaluate-if-true evaluate-if-false)</code>, which is equivalent to <code>(cond [condition evaluate-if-true] [else evaluate-if-false])</code>.</li>
-<li>Structures can now be defined with <code>struct</code> in addition to <code>define-struct</code>, and constructors are named the same as the struct without the <code>make-</code> prefix. FOr example, <code>make-posn</code> is now <code>posn</code>.
+<li>Structures can now be defined with <code>struct</code> in addition to <code>define-struct</code>, and constructors are named the same as the struct without the <code>make-</code> prefix. For example, <code>make-posn</code> is now <code>posn</code>.
 <ul>
 <li>To make testing easier, we should use <code>#:transparent</code> in the structure definitions, which allows us to see what's inside the structure when printing them out: <code>(struct posn (x y) #:transparent)</code>.</li>
-<li>By default, structures are <strong>opaque</strong>, which means when when we display them using something like <code>printf</code>, we can see inside the fields.</li>
+<li>By default, structures are <strong>opaque</strong>, which means when when we display them using something like <code>printf</code>, we cannot see the names or the values of the fields.</li>
 </ul></li>
 <li>We should be familiar with <code>cons</code>, <code>list</code>, <code>empty</code>, <code>first</code>, <code>rest</code>, <code>list-ref</code>, <code>length</code>, <code>append</code>, and <code>reverse</code>. Later on, also <code>last</code> and <code>drop-right</code>.
 <ul>
@@ -326,7 +324,7 @@ hello, Anthony</code></pre>
 <ul>
 <li><strong>High Cohesion</strong>: everything in the module works towards a common goal - they are related to each other and generally work together.
 <ul>
-<li>For example, a university course should focus on a single subject, and not jump around from ancient history to mathematics. This is low cohesion - the</li>
+<li>For example, a university course should focus on a single subject, and not jump around from ancient history to mathematics. This is low cohesion - the parts of the module are not working together towards the same purpose.</li>
 <li>Cohesion makes it easier to understand individual modules.</li>
 <li>The thermostat should not control the garage door.</li>
 </ul></li>
@@ -342,7 +340,7 @@ hello, Anthony</code></pre>
 <li>This is for purposes of <strong>flexibility</strong> allowing us to change the implementation without affecting the client</li>
 <li>We also do this for <strong>security</strong> - protecting secret information or preventing tampering or protecting the client from themselves.</li>
 <li>The only way a client should be able to interact with the module should be <strong>through the interface</strong>.</li>
-<li>A battery's interface should not rely on it using nickel metal-hydride - we should be able to change the chemistry of the battery without affecting it interface.</li>
+<li>A battery's interface should not rely on it using nickel metal-hydride - we should be able to change the chemistry of the battery without affecting its interface.</li>
 <li>A user account manager should not expose usernames and passwords to the client. We should also be able to swap out the data structure it uses (like from lists to structs) without the client noticing.</li>
 </ul></li>
 </ul>
@@ -400,7 +398,7 @@ const int l = (3 + 4) * 2; // `l` is now 14</code></pre>
 <p>Operators are distinct language constructs with their own rules for syntax. They are described in detail in the textbook. Operators may have different associtivities and precedences.</p>
 <p>C has almost 50 operators in total, many of which work on data.</p>
 <p>The <code>a / b</code> operator in C over integers divides two numbers, always rounding towards 0. It behaves similar to <code>quotient</code> in Racket.</p>
-<p>The <code>a % b</code> operator in C behaves the same as the <code>remainder</code> function in Racket. With negative numbers, C can give confusing results - <strong>avoid using negative numbers</strong> for this reason.</p>
+<p>The <code>a % b</code> operator in C behaves the same as the <code>remainder</code> function in Racket. With negative numbers, C can give confusing results - <strong>avoid using negative numbers with this operator</strong> for this reason.</p>
 <p>In Racket, we <strong>apply</strong> a function, which <strong>consumes</strong> arguments and <strong>produces</strong> a value.</p>
 <p>In C, we <strong>call</strong> a function, which is <strong>passed</strong> arguments and <strong>returns</strong> a value.</p>
 <h3 id="functions">Functions</h3>
@@ -418,9 +416,10 @@ const int l = (3 + 4) * 2; // `l` is now 14</code></pre>
 int my_sqr(int x) {
     return x * x;
 }</code></pre>
+<p>We no longer need an explicit contract because the types are already specified in the function declaration.</p>
 <p>The curly braces indicate the function <strong>block</strong>, the body of the function.</p>
 <p>The type of every value must be specified explicitly. The <code>return</code> statement is mandatory for functions that have non-void return types.</p>
-<p>As a result, errors like <code>(my-sqr &quot;a&quot;)</code> in Racket give a runtime error, while in C, this is caught by the compiler - contract violations cannot exist.</p>
+<p>As a result, errors like <code>(my-sqr &quot;a&quot;)</code> in Racket give a runtime error, while in C, this is caught by the compiler - contract violations cannot possibly happen at runtime.</p>
 <p>We call functions in a way similar to defining them:</p>
 <pre><code>// my_add(x, y) adds `x` and `y`
 //     PRE:  true
@@ -460,7 +459,7 @@ int main(void) {
 }</code></pre>
 <p>In C, <code>printf</code> uses different placeholders for each type, and the placeholder specifier (<code>~</code> in Racket) is <code>%</code>. A literal percent sign is <code>%%</code>. As with Racket, the number of extra arguments needs to match the number of placeholders:</p>
 <pre><code>printf(&quot;I am 100%% sure that %d + %d = %d&quot;, 2, 2, 5);</code></pre>
-<p><code>printf</code> is found in a lot of computer languages, and it has mmuch more functionaity than is covered here. For example:</p>
+<p><code>printf</code> is found in a lot of computer languages, and it has much more functionaity than is covered here. For example:</p>
 <pre><code>printf(&quot;%04d&quot;, 42); // prints 0042, length 4 with &quot;0&quot; padding</code></pre>
 <h3 id="top-level">Top-level</h3>
 <p>In C, top-level expressions are invalid, except for ones resulting in constant values:</p>
@@ -473,7 +472,7 @@ my_sqr(4); //invalid</code></pre>
 <p>We can still use expressions inside definitions inside of functions: <code>int main(void) { const int a = my_sqr(4); }</code>.</p>
 <h3 id="booleans">Booleans</h3>
 <p>In C, False is represented by 0, and any non-zero value is considered True.</p>
-<p>Equality testing in C is done using <code>a == b</code>, resulting in 1 or 0. The <code>a = b</code> is for <strong>assignment only</strong> and is one of the most common C errors.</p>
+<p>Equality testing in C is done using <code>a == b</code>, resulting in 1 or 0. The <code>a = b</code> is for <strong>assignment only</strong> and accidentally using it instead of <code>==</code> is one of the most common C errors.</p>
 <p>Non-equality testing in C is done using <code>a != b</code>, resulting in 1 or 0. Negation is done using <code>!a</code>.</p>
 <p>Logical AND is done using <code>a &amp;&amp; b</code>, and logical OR is done using <code>a || b</code>, both returning 1 or 0. Like in Racket, they short-circuit with the same rules. Remember to use <code>&amp;&amp;</code> and <code>||</code> rather than <code>&amp;</code> and <code>|</code>, which are bitwise operators and do different things.</p>
 <p>The <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> operators are self-explanatory.</p>
@@ -554,17 +553,17 @@ int b(int x) {
 <p>Identifiers can be declared as many times as needed, but can only be defined once. Declaring something is the same thing as saying that it will be defined at some point.</p>
 <p>We can use this to implement modules:</p>
 <pre><code>// sum.c
-// define p &amp; sum
+// define `p` and `sum`
 const int p = 2;
 int sum(int k) {
     return (k &lt;= 1) ? 1 : k + sum(k-1);
 }
 
 // client.c
-// declare p &amp; sum
+// declare `p` and `sum` - specify that they are defined elsewhere
 extern const int p;
 int sum(int k);
-int double _ sum(int n) {
+int double_sum(int n) {
     return p * sum(n);
 }</code></pre>
 <p>Note that we did not actually define the functions in the client code. They are simply declared to exist somewhere, and then we add them in at the linking stage.</p>
@@ -590,7 +589,7 @@ static int g(int e) { // MODULE SCOPE - `static` keyword makes declaration in th
 
 // `b` and `c` are no longer available here</code></pre>
 <p>Note that a block created using <code>{ ... }</code> creates a new local scope inside. This works similarly to Racket's <code>local</code>.</p>
-<p>Note that <code>static</code> can be used to make a variable or function visible only in</p>
+<p>Note that <code>static</code> can be used to make a variable or function visible only in the current module.</p>
 <p>By default, all functions and variables exist in the program scope, and other modules (C source files) can access them.</p>
 <p>The scope rules in C are roughly the same as those in Racket - the innermost binding occurence shadows all the outer ones.</p>
 <h3 id="interfaces-1">Interfaces</h3>
@@ -654,7 +653,7 @@ int main(void) {
 <p>Most computer archtectures have primary memory (RAM) and secondary memory (HDD, SSD, flash drives, optical disks, etc.). When we say memory, we usually refer to primary memory.</p>
 <p>Primary memory is very fast, smaller, higher cost, and volatile. Contrast this with secondary storage is slower, larger, cheaper, and persistent.</p>
 <p>Programs can only really run in primary memory - programs need to be copied into primary memory before executing. In this course, we will only need to think in terms of primary memory.</p>
-<p>The smallist unit of memory we can access is a byte. The location of the byte in memory is the <strong>address</strong> of the byte. For example, with 1 MB of memory, the address of the first byte is 0 and the last is <span class="math">\(2^20 - 1\)</span>. We usually represent addresses in hex.</p>
+<p>The smallest unit of memory we can access is a byte. The location of the byte in memory is the <strong>address</strong> of the byte. For example, with 1 MB of memory, the address of the first byte is 0 and the last is <span class="math">\(2^{20} - 1\)</span>. We usually represent addresses in hex.</p>
 <p>In this course, we will now need to be aware of the memory our program is using. In CS135 we had stepping rules. Now we introduce the C memory model.</p>
 <p>When C gets to a variable definition, it reserves the storage for that variable, keeps track of the address of that storage location to refer to it later, and stores the initial value of the variable in that location. Then, when we reference a variable, we retrieve or set it from the address we determined earlier. Note that variable declarations <strong>do not do this</strong>.</p>
 <p>In the CS135 model, variables are basically aliases for values. Now, we consider them as names for locations where a value is stored. When a variable appears in an expression, C obtains the contents of that location.</p>
@@ -663,9 +662,9 @@ int main(void) {
 <p>Note that because integers only has 4 bytes, we can only represent the integers from <span class="math">\(-2^{31}\)</span> to <span class="math">\(2^{31} - 1\)</span>.</p>
 <p>If we <code>#include &lt;limits.h&gt;</code>, <code>INT_MIN</code> and <code>INT_MAX</code> are defined to these limiting values.</p>
 <p>If we use <code>unsigned int</code>, we can represent integers from 0 to <span class="math">\(2^{32} - 1\)</span>.</p>
-<p>We should always try to work within these limits. If we work outside of these ranges, an <strong>overflow</strong> occurs. For example, if we add 1 to <span class="math">\(2^{31} - 1\)</span>, we wrap around to <span class="math">\(-2^{31}\)</span>, like in mmodular arithmetic.</p>
+<p>We should always try to work within these limits. If we work outside of these ranges, an <strong>overflow</strong> occurs. For example, if we add 1 to <span class="math">\(2^{31} - 1\)</span>, we wrap around to <span class="math">\(-2^{31}\)</span>, like in modular arithmetic.</p>
 <p>In C, we can also have variables that use only 1 byte. The <code>char</code> type can store any integer from -128 to 127. They are not very useful for calculations, but we often use them to store characters, like ASCII character codes.</p>
-<p>In ASCII, upper case chars start with &quot;A&quot; at 65, lower case starts with &quot;a&quot; at 97, and a space is 32. 0 to 31 are the control sequences. For example, 7 is a bell and 10 is a linefeed (newline or <code>\\n</code>).</p>
+<p>In ASCII, upper case chars start with &quot;A&quot; at 65, lower case starts with &quot;a&quot; at 97, and a space is 32. 0 to 31 are the control sequences. For example, 7 is a bell and 10 is a linefeed (newline or <code>\n</code>).</p>
 <p>On Windows, the end of line character is a line feed and a carriage return. On Linux the end of line character is just a line feed. This can cause confusion when working on files made on different operating systems.</p>
 <p>Char types are internally just numbers:</p>
 <pre><code>const char a = &#39;a&#39;; // single quotes mean char types
@@ -741,7 +740,7 @@ printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints
 <p>While running our program, we keep track of the program location, which is where we currently are in the code.</p>
 <p>However, when we call a function, we need to keep track of the new program location (the function we called) and the place we want to go back to when we use <code>return</code> (right after the place we called the function). The place we want to go back to is called the <strong>return address</strong>.</p>
 <p>If <span class="math">\(f\)</span> calls <span class="math">\(g\)</span>, and <span class="math">\(g\)</span> calls <span class="math">\(h\)</span>, we need to keep track of where we were in <span class="math">\(f\)</span> when we called <span class="math">\(g\)</span>, and where we were in <span class="math">\(g\)</span> when we called <span class="math">\(h\)</span>, and where we currently are in <span class="math">\(h\)</span>.</p>
-<p>In this course, we represent return addresses with <code>CALLING__FUNCTION:LINE_NUMBER</code>, except for <code>main</code>. The return address for the <code>main</code> function is <code>OS</code>, for the operating system.</p>
+<p>In this course, we represent return addresses with <code>CALLING_FUNCTION:LINE_NUMBER</code>, except for <code>main</code>. The return address for the <code>main</code> function is <code>OS</code>, for the operating system.</p>
 <p>We can store these chunks of context information in a stack. This stack we call the <strong>call stack</strong>. Every time we call a function is called, we push an entry onto the stack. Every time a function returns, we pop an entry off the top of the stack and go back to the return address specified in the entry.</p>
 <p>The entries stored on the stack are known as <strong>stack frames</strong>, or <strong>frames of reference</strong>. Every stack frame contains the return address, all currently existing local variables, and all arguments to the function. Note that the return value goes into the temporary storage section.</p>
 <p>Local variables includes variables in block scopes:</p>
@@ -755,7 +754,7 @@ printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints
 <p>Recall that global variables have their memory reserved before the program starts. In contrast, local variables have their memory reserved on the stack, inside a stack frame. They are created when the containing function is called.</p>
 <p>Because local variables are created automatically when a function is called, they are sometimes called <strong>automatic variables</strong>.</p>
 <p>In hardware, the program location is called the <strong>program counter</strong>. It is the address of the machine code instruction that is currently excuting.</p>
-<p>Programming has a duality between what we want to do, and what it is actually doing. Programming is the task of makking these two match up, either by changing what you want, or sitting down and writing code.</p>
+<p>Programming has a duality between what we want to do, and what it is actually doing. Programming is the task of making these two match up, either by changing what you want, or sitting down and writing code.</p>
 <p>Using this new control flow model, self-recursion is simply jumping over to the beginning of the function, but with a new stack frame. The only unusual part is that the return address is inside the same function.</p>
 <p>The call stack can be found in the stack section of the memory model seen earlier. Note that it starts at the highest available address with the stack frame for <code>main</code>, and new stack frames are created at lower addresses - the stack grows downwards.</p>
 <p>If the stack gets too big, it will grow all the way into the heap section. This might cause a segmentation fault, or worse, corrupt data and cause undefined behaviour. This is called a <strong>stack overflow</strong>, and is usually caused by infinite or very deep recursion.</p>
@@ -768,9 +767,9 @@ int main(void) {
     const int h = 6;
     printf(&quot;CODE: %p, READ-ONLY: %p, GLOBAL DATA: %p, STACK: %p&quot;, &amp;main, &amp;f, &amp;g, &amp;h);
 }</code></pre>
-<p>The pointer placeholder is &quot;%p&quot; in C.</p>
+<p>The pointer placeholder is &quot;%p&quot; in C. It prints out the pointer address in hex.</p>
 <p>This allows us to get low-level access to the memory and work with pointers - addresses in memory.</p>
-<p>A <strong>pointer</strong> is a type in C that represents an address in memory:</p>
+<p>A <strong>pointer</strong> is a type in C that stores an address in memory:</p>
 <pre><code>const int i = 42;
 const int *p = &amp;i; // `p` points to `i`
 const int *q = p; // `q` now points to the same thing that `p` does - to `i`
@@ -827,7 +826,7 @@ const int ***pppi = &amp;ppi;</code></pre>
 const float small = 100.0;
 const float diff = big - small;
 // diff is now 999999872.0</code></pre>
-<p>When we compare floats, we usually want ones that are avery close to each other to be considered equal. We can compare them using an epsilon (error):</p>
+<p>When we compare floats, we usually want ones that are very close to each other to be considered equal. We can compare them using an epsilon (error):</p>
 <pre><code>const float a = 10.0/3.0;
 const float b = 3.333333;
 
@@ -843,9 +842,10 @@ assert(a - b &lt; epsilon);
 // or combine them into one
 assert(-epsilon &lt; a - b &amp;&amp; a - b &lt; epsilon);</code></pre>
 <p>Consider a function to check if an overflow will occur when adding two integers:</p>
-<h1 id="include">include <limits.h></h1>
-<h1 id="include-safe_overflow.h">include &quot;safe_overflow.h&quot;</h1>
-<pre><code>bool safe_add(int a, int b) {
+<pre><code>#include &lt;limits.h&gt;
+#include &quot;safe_overflow.h&quot;
+
+bool safe_add(int a, int b) {
     int abs_a = a &lt; 0 ? -a : a;
     int abs_b = b &lt; 0 ? -b : a;
     return ((abs_a == a &amp;&amp; abs_b == b) || (abs_a != a &amp;&amp; abs_b != b)) ? // check if signs are the same (only case in which overflow can occur)
@@ -876,11 +876,11 @@ int add1(int x) { // function definition
 <p>Some functions have only side effects, and don't produce a value. These have the <code>void</code> return type.</p>
 <p>Some functions have no side effects, and only produce a value.</p>
 <p>It is not useful to have a function that has neither side effects or a return value.</p>
-<p>In expressions, we can also use a comma operator (<code>,</code>) to evaluate multiple expressions but produce only the last one. For example, <span class="math">\(a == 1 ? (a = 2, 5 + 6) : 7 + 8\)</span>. This is very similar in functionality to <code>begin</code> in Racket.</p>
+<p>In expressions, we can also use a comma operator (<code>,</code>) to evaluate multiple expressions but produce only the last one. For example, <code>a == 1 ? (a = 2, 5 + 6) : 7 + 8</code>. This is very similar in functionality to <code>begin</code> in Racket.</p>
 <h3 id="control-flow-statements">Control Flow Statements</h3>
 <p>Control flow statements are those that change the control flow - they can change the program location and call stack.</p>
 <p>Function calls also modify control flow. They change the program location to the target and push a stack frame to the call stack.</p>
-<p>An example of this is <code>return</code>, which pops an entry off the top of the call stack and moves the program location to the return address in the popped off stack frame.</p>
+<p>An example of a control flow statement is <code>return</code>, which pops an entry off the top of the call stack and moves the program location to the return address in the popped off stack frame.</p>
 <p>Another control flow statement is <code>if</code>:</p>
 <pre><code>if (CONDITION) STATEMENT</code></pre>
 <p>This executes <code>STATEMENT</code> if and only if <code>CONDITION</code> is truthy. <code>STATEMENT</code> is known as the <strong>body</strong> of the <code>if</code> statement, while <code>CONDITION</code> is the <strong>condition</strong>.</p>
@@ -908,15 +908,13 @@ int add1(int x) { // function definition
     // ...
 }</code></pre>
 <p>We can now have a use for multiple return statements in one function:</p>
-<pre><code>if (k &lt; 0) {
-    return k
-} else {
-    return -k;
-}</code></pre>
+<pre><code>if (k &lt; 0)
+    return k;
+else
+    return -k;</code></pre>
 <p>Note that since the <code>return</code> statement will stop the rest of the function from executing, the above code is the same as the following:</p>
-<pre><code>if (k &lt; 0) {
-    return k
-}
+<pre><code>if (k &lt; 0)
+    return k;
 return -k;</code></pre>
 <h2 id="mutation">Mutation</h2>
 <p>When we declared variables earlier, we used <code>const TYPE IDENTIFIER ...</code>. Declared without the <code>const</code> keyword, variables are <strong>mutable</strong> - the value of these variables can be changed as often as needed.</p>
@@ -1014,7 +1012,7 @@ int main(void) {
 }</code></pre>
 <p>Note that the following will not work:</p>
 <pre><code>int swap(int *x, int *y) {
-    int temp = x;
+    int *temp = x;
     *x = *y;
     y = temp;
 }</code></pre>
@@ -1058,7 +1056,7 @@ x-&gt;y</code></pre>
 <p>Just like global variables, they are stored in the global data section in memory. As a result, the global data section is also known as the &quot;global/static data&quot; section.</p>
 <p><code>int *p = NULL</code> is equivalent to <code>int *p; p = NULL;</code>, not <code>int *p; *p = NULL;</code>.</p>
 <p>When we call a function, all of the arguments are copied into the local stack frame. When we pass larger structures to function by value, this can get very inefficient - we have to copy the entire structure into the new stack frame. In addition to reducing performance, this causes our stack frames to get much larger and may even contribute to a stack overflow.</p>
-<p>Therefore, we can oass pointers to structures instead to reduce overhead:</p>
+<p>Therefore, we can pass pointers to structures instead to reduce overhead:</p>
 <pre><code>int sqr _ dist(struct posn *p1, struct posn *p2) {
     const int xdist = p1-&gt;x - p2-&gt;x;
     const int ydist = p1-&gt;y - p2-&gt;y;
@@ -1075,7 +1073,7 @@ x-&gt;y</code></pre>
 const int *p // pointer mutable, pointed value immutable
 int * const p = &amp;i; // pointer immutable, pointed value mutable
 const int * const p = &amp;i; // pointer and pointed value immutable</code></pre>
-<p>Note that <code>const int i</code> is the same as <code>int const</code>. <code>const</code> always applies to the type on the left, onlless there are no types on the left, in which case it applies to the type on the right.</p>
+<p>Note that <code>const int i</code> is the same as <code>int const</code>. <code>const</code> always applies to the type on the left, unless there are no types on the left, in which case it applies to the type on the right.</p>
 <h2 id="iteration">Iteration</h2>
 <p>Looping combines mutation with control flow. Looping allows us to do things multiple times.</p>
 <p>Instead of recursion, we now have iteration. The interesting thing about iterating is that it will never result in a stack overflow.</p>
@@ -1119,7 +1117,7 @@ do {
 <ol style="list-style-type: decimal">
 <li>Evaluate <code>SETUP</code>.</li>
 <li>Evaluate <code>CONDITION</code>. If false, we are done with the loop and move on.</li>
-<li>Evaluate <code>BODY</code>.</li>
+<li>Evaluate <code>BODY</code>. If <code>continue</code> is encountered, <code>UPDATE</code> and go back to step 2.</li>
 <li>Evaluate <code>UPDATE</code>.</li>
 <li>Go back to step 2.</li>
 </ol>
@@ -1178,6 +1176,7 @@ if (DEBUG) printf(&quot;The value of i is: %d\n&quot;, i);</code></pre>
 <p>In C, <code>scanf</code> is the input counterpart to <code>printf</code>. It &quot;scans&quot; the standard input for certain patterns like <code>%d</code> for a decimal integer, simimlar to <code>printf</code>'s placeholders.</p>
 <p>It usually takes the form of <code>scanf(&quot;%d&quot;, &amp;i)</code>, where <code>&quot;%d&quot;</code> specifies the things to scan for, and <code>&amp;i</code> specifies the pointer to which the scanned value is stored. <code>scanf</code> produces an <code>int</code>.</p>
 <p>In this course, we will only be using one placeholder at a time. <code>scanf</code> places the result at the specified address, and returns an integer representing the status. The return value is the number of items actually read in. So a value of 0 means no values were read in (error or invalid input) and a value of 1 means we successfully read one value.</p>
+<p>All whitespace is is ignored, including spaces, newlines, and tabs.</p>
 <p><code>scanf</code> can also return <code>EOF</code> (usually defined as -1) when it encounters an EOF in the input. Basically, we have an error if we get 0, success if we get 1, and end of input if we get EOF.</p>
 <p>We could use <code>scanf(&quot;%c&quot;, &amp;x)</code>, but there is also a function <code>getchar()</code> designed specifically for this purpose. <code>getchar</code> accepts no parameters and produces the next character typed by the user on the keyboard as an integer representing the ASCII value of that character, or <code>EOF</code> if an EOF is given to the program.</p>
 <p><code>getchar</code> returns an integer because it could return any of the 256 possible characters, plus EOF.</p>
@@ -1203,13 +1202,13 @@ int main(void) {
         }
     } while (func != &#39;x&#39;);
 }</code></pre>
-<p>This is a very barebones testing module that can get the job done. It doesn't handle invalid inputs or edge cases, since it is only meant to be used by testers.</p>
+<p>This is a very barebones testing module that can get the job done. It doesn't need to handle invalid inputs or edge cases, since it is only meant to be used by testers.</p>
 <p>Now when we run it, we can use it to test various values of our functions:</p>
 <pre><code>&gt;&gt;&gt; s 10
 sqr 10 = 100
 &gt;&gt;&gt; a 1 1
 add 1 1 = 2</code></pre>
-<p>In fact, RunC has facilities to automate using this sort of interactive testing module.</p>
+<p>In fact, RunC has facilities to automate this sort of interactive testing module.</p>
 <p>If the interactive testing module is located in <code>test.c</code>, then RunC will look for <code>test.in.1</code> in the same directory, and then run the program with the contents of that file as the input, as if the user was typing the contents into the terminal directly. The resulting output of the program is stored in <code>test.out.1</code>. This also works for <code>test.in.2</code>, <code>test.out.2</code>, etc.</p>
 <p>If there is a <code>test.expect.1</code> file, then RunC will compare the actual output with the output in this file, and if there are any differences, it generates <code>test.check.1</code>, which shows the differences side by side.</p>
 <p>This allows us to automate testing in a much more straightforward way, and also allows to test program outputs.</p>
@@ -1279,11 +1278,12 @@ int main(void) {
 <p>Let <code>p</code> be a pointer, pointing at memory location <code>1000</code>. Let <code>i</code> be an integer.</p>
 <p>Then <code>p + 1</code> is a pointer to the memory location <code>1000 + sizeof(*p)</code>. In other words, the amount we offset the pointer by depends on the type of data the pointer points to. If we add 1 to, say, an <code>int</code> pointer, it then points to the &quot;next slot for an <code>int</code>&quot;, rather than the next memory location.</p>
 <p>In general, <code>p + i</code> is a pointer to the memory location <code>1000 + i * sizeof(*p)</code>.</p>
+<p>Also, addition of a pointer and an integer is commutative - <code>p + i == i + p</code>.</p>
 <p>In the same way, we can do <code>p - i</code>, <code>p += i</code>, <code>p ++</code>, and <code>p --</code>.</p>
 <p>Let <code>q</code> be a pointer, pointing at memory location <code>1100</code>.</p>
-<p>Then <code>p + q</code> is invalid, because we <strong>cannot add two pointers</strong>. This is because pointers are often rather large numbers, and could easily overflow if added, resulting in an invalid pointer.</p>
+<p>Then <code>p + q</code> is invalid, because we <strong>cannot add two pointers</strong>. This is because pointers are often rather large numbers, and could easily overflow if added, resulting in an invalid pointer. It is simply not useful to add pointers.</p>
 <p>Then <code>p - q</code> is valid as long as <code>p</code> and <code>q</code> point to the same type of data, like <code>int</code> and <code>int</code>. <code>p - q</code> would result in <code>(1000 - 1100) / sizeof(*p)</code>, or <code>-25</code> if we assume <code>p</code> and <code>q</code> are <code>int</code> pointers.</p>
-<p>This allows pointer arithmetic to satisfy <code>p - q = -25</code> given that <code>q = p + 25</code>, since <code>(1000 - 1100) / sizeof((int)0) == -25</code>. Basically, subtracting two pointers results in the number of slots of the data type that would fit between the two.</p>
+<p>This allows pointer arithmetic to satisfy basic algebriac identities, like how <code>p - q = -25</code> given that <code>q = p + 25</code>, since <code>(1000 - 1100) / sizeof((int)0) == -25</code>. Basically, subtracting two pointers results in the number of slots of the data type that would fit between the two.</p>
 <p>Then <code>p &lt; q</code>, <code>p &gt; q</code>, <code>p &lt;= q</code>, <code>p &gt;= q</code>, <code>p != q</code>, and <code>p == q</code> are valid, as long as <code>p</code> and <code>q</code> point to the same type of data. These compare the memory locations of the pointers as if they were abstract integers.</p>
 <p>Officially, pointer arithmetic is only valid when <code>p</code> and <code>q</code> and the result of the pointer arithmetic are <strong>all inside the same array or structure</strong>. Formally, there must be an array or structure that fully contains <code>p</code>, <code>q</code>, and the result of the pointer arithmetic.</p>
 <h3 id="arrays">Arrays</h3>
@@ -1305,7 +1305,6 @@ int main(void) {
 }</code></pre>
 <p>As a result, there is also no difference between using <code>const int a[]</code> and <code>const int *a</code> in function declarations. However, there are some small differences between pointers and arrays, which will be discussed later.</p>
 <h1 id="section-13">27/2/14</h1>
-<p>;wip: the midterm covers everything up to section 7, slide 26</p>
 <p>Array indices can be negative if the pointer is not at the beginning of the array. For example:</p>
 <pre><code>int a[] = {1, 2, 3, 4, 5};
 int *p = a + 4;
@@ -1387,11 +1386,78 @@ printf(pattern, value);</code></pre>
     return p - s;
 }</code></pre>
 <p>When we compare strings directly using <code>string1 == string2</code>, we are simply comparing the array pointers. However, we usually actually want to compare them in <strong>lexicographic order</strong>.</p>
-<p>Characters are compared based on their ASCII code. A smaller ASCII value means one smaller than another. So numbers are less than capital letters, which are are less than lowercase letters.</p>
-<p>In lexicographic order, we compare the characters one by one. If the character at the same index in both strings is the same, we move to the next character and try again. If one is less than the other, then that string is <strong>lexicographically less</strong> than the other. If we reach the end of both strings, then they are equal.</p>
-<p>If we reach the end of only one string, the shorter string is lexicographically less than the other. This rule isn't really needed because the null terminator is always less than all other characters.</p>
+<p>Because &quot;less&quot; and &quot;greater&quot; is ambiguous - it could refer to the length of the string or other properties - we use <strong>precedes</strong> and <strong>follows</strong> to represent one thing coming before or after another in lexicographical order, respectively.</p>
+<p>Characters are compared based on their ASCII code. A smaller ASCII value means one precedes than another. So numbers precede than capital letters, which are are less than lowercase letters.</p>
+<p>In lexicographic order, we compare the characters one by one. If the character at the same index in both strings is the same, we move to the next character and try again. If one is less than the other, then that string <strong>lexicographically precedes</strong> than the other. If we reach the end of both strings, then they are equal.</p>
+<p>If we reach the end of only one string, the shorter string lexicographically precedes than the other. This rule isn't really needed because the null terminator always llexicographially precedes all other characters.</p>
 <p>The <code>int strcomp(const char a[], const char b[])</code> function in <code>string.h</code> compares two strings in lexicographical order. It returns a negative value if <code>a &lt; b</code>, zero if <code>a == b</code>, and a positive value if <code>a &gt; b</code>. An easier way to think about it is that <code>strcmp(a, b) COMPARISON_OPERATOR 0</code> is equivalent to <code>a COMPARISON_OPERATOR b</code>.</p>
 <p>Lexicographic order can actually be used for any kind of sequence of elements, like arrays or lists.</p>
+<p>We must be careful to <strong>not use comparison operators on strings</strong>. This generally does not give the intended behaviour. Instead, we use the following:</p>
+<pre><code>strcmp(a, b) == 0 // `a` and `b` are equal
+strcmp(a, b) &lt; 0 // `a` precedes `b`
+strcmp(a, b) &gt; 0 // `a` follows `b`</code></pre>
+<h1 id="section-14">4/3/14</h1>
+<h3 id="strings-and-io">Strings and I/O</h3>
+<p>We can use strings with <code>printf</code> and <code>scanf</code> using the <code>%s</code> placeholder. For example, <code>printf(&quot;%s, %s!&quot;, &quot;Hello&quot;, &quot;World!&quot;)</code>.</p>
+<p><code>printf</code> simply prints out characters in the specified string, stopping when a null character is encountered.</p>
+<p><code>scanf</code> first ignores preceding whitespace, then copies the characters from the input until a whitespace character is encountered:</p>
+<pre><code>char name[81]; // this is enough for 80 characters and the null terminator.
+scanf(&quot;%s&quot;, name);
+printf(&quot;You entered: %s&quot;, name);</code></pre>
+<p>It is extremely important to reserve enough space in the <code>char</code> array to hold the input. However, it is impossible to know in advance how many characters the user will input.</p>
+<p>For example, if we ran the above program and entered more than 80 characters, <code>scanf</code> would simply keep copying data into memory past the end of the array, which can result in overwriting the null terminator, memory errors, or worse. This can be a major security issue since we can overwrite memory arbitrarily.</p>
+<p>This is called a <strong>buffer overflow/buffer overrun</strong>. In practice, we would never use <code>scanf</code> in a real application for this reason. However, in this course this is good enough.</p>
+<p>We can also use the <code>gets(char result[])</code> (&quot;Get S&quot;) function, which works similar to <code>scanf(&quot;%s&quot;, char result[])</code>, except it only stops when it hits a newline, rather than any whitespace. This is useful for reading in an entire line of input:</p>
+<pre><code>char sentence[81]; // this is enough for 80 characters and the null terminator.
+gets(sentence);
+printf(&quot;You entered: %s&quot;, sentence);</code></pre>
+<p>There are library functions that can help mitigate this. We can also use a loop with <code>getchar</code> that checks for the input being longer than the buffer and stops if this happens.</p>
+<p>Buffer overruns can also happen for reading strings:</p>
+<pre><code>char a[3] = &quot;cat&quot;; // not null terminated
+printf(&quot;%s&quot;, a);</code></pre>
+<p>This would continue to print out characters until a segmentation fault or a null character is encountered in memory.</p>
+<p><code>string.h</code> also has the useful functions <code>strcpy(char dest[], const char src[])</code> (copy a string into another buffer overwriting the previous value) and <code>strcat(char dest[], const char src[])</code> (copy a string to the end of another buffer without the first null terminator - concatenate the string to the end), but these are both susceptible to buffer overruns. We simply need to make sure <code>dest</code> is large enough to hold the result.</p>
+<p>There are &quot;safe&quot; versions of many string library functions that avoid buffer overruns by allowing the user to specify the maximum number of characters to process. Some examples are <code>strnlen</code>, <code>strncmp</code>, <code>strncpy</code>, and <code>strncat</code>.</p>
+<h2 id="pointers-vs-arrays">Pointers vs Arrays</h2>
+<pre><code>void f(void) {
+    char a[] = &quot;pointers are not arrays&quot;; // this is array initialization syntax
+    char *p = &quot;pointers are not arrays&quot;; // this is a pointer initialized to point to a string literal
+}</code></pre>
+<p>The first one stores the character array in the stack frame.</p>
+<p>The second one stores the character array in the read-only data section like a string literal, and makes <code>p</code> point to it.</p>
+<p>So the first one is mutable, and the second is not - we can do <code>a[0] = 'H'</code>, but not <code>*p = 'H'</code>.</p>
+<p>So the first one stores 24 bytes in the stack frame, while the second stores only 4.</p>
+<p>Overall, the second one uses 4 more bytes of memory. Arrays are like aliases for a chunk of memory, while pointers can point to these chunks of memory. However, pointers and arrays have very similar operations and can be treated very similarly.</p>
+<p><code>a</code> itself has a constant value, we cannot assign another array to it, like <code>a = p</code>. We can change <code>p</code> to point at something else, like <code>p = a</code>.</p>
+<p>An array that is not using the string initialization syntax <code>char a[] = {'c', 'a', 't', '\0'}</code> is almost the same as <code>char *p = a</code>. However, <code>a == &amp;a</code> while <code>p != &amp;p</code> and <code>sizeof(a) == 24</code> while <code>sizeof(p) == 4</code>.</p>
+<h2 id="efficiency">Efficiency</h2>
+<p>An <strong>algorithm</strong> is a step-by-step description of how to solve a problem. For example, which clothes to wear in the morning.</p>
+<p>For this course, problems are often function interfaces, and the solutions are often function implementations.</p>
+<p>An example of an algorithm for checking if a list of numbers is greater than a given <code>k</code> is:</p>
+<blockquote>
+<p>If the first element of the list (call this <code>f</code>) is greater than <code>k</code>, produce <code>#t</code>, otherwise reduce <code>k</code> by <code>f</code> and then repeat for each remaining element. If no more elements remain, produce <code>#f</code>.</p>
+</blockquote>
+<p>We want to be able to evaluate and compare different algorithms. For example, we can compare it based on understandability, robustness, accuracy, adaptablility, and how efficient it is.</p>
+<p>The most common measure of efficiency is <strong>time efficiency</strong> - how long it takes an algorithm to solve a problem given a certain inputs. In this course, efficiency will mean time efficiency by default.</p>
+<p><strong>Space efficiency</strong> is also important. - how much memory the algorithm requires to solve a problem.</p>
+<p>Tiem and space efficiency can depend on how we actually implement the algorithm. As a result, efficiency is always measured in terms of a specific implementation.</p>
+<h3 id="measuring-time-efficiency">Measuring Time Efficiency</h3>
+<p>We are interested in the running time of an algorithm. However, it is not useful to simply use a stopwatch and measure how long it takes for the algorithm to run:</p>
+<ul>
+<li>The time depends on the computer it runs on. Faster computers take less time.</li>
+<li>The computer might be running other programs, and this could slow down the program.</li>
+<li>The computer might be running a different operating system or other software.</li>
+<li>The program might be written in a different computer language.</li>
+</ul>
+<p>In Racket, we might measure time efficiency by counting the number of substitution steps needed to evaluate the program. However, this is misleading because each step might take a varying amount of time. For example, <code>foldr</code> can take a very long time for a large list, yet is only one substitution step to evaluate.</p>
+<p>In C, we might measure the number of &quot;operations&quot; performed - the C equivalent of a step. For example:</p>
+<pre><code>sum = 0; // 1 operation
+i = 0; // 1 operation
+while (i &lt; 5) { // 1 * 6 operations
+    sum = sum + 1; // 2 * 5 operations
+    i = i + 1; // 2 * 5 operations
+}</code></pre>
+<p>Here, there are a total of 28 operations.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

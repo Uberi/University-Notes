@@ -866,6 +866,9 @@ Rodents are used in baseball.</code></pre>
 <p>Numbers have many similarities have a lot of relevant similarities to distances: they can be added together, they can be ordered, and dividing one into parts has each part also be a number or distance.</p>
 <p>As a result, we can use things like distributivity (<span class="math">\(A(B + C) = AB + AC\)</span>) over numbers and represent multiple sums of distances, and use <span class="math">\(A &gt; B\)</span> over numbers to represent one distance being longer than another.</p>
 <p>Consider the example of using numbers to represent hockey tournament rankings. In this case, the numbers obey distributivity, but the rankings do not - a hockey team can lose games yet still be first place. Therefore, the lowest number is not necessarily the best team. In this case, we manipulated the</p>
+<p><strong>Ordinal numbers</strong> are natural numbers, used to represent positions/rankings. They are used for ordering things.</p>
+<p><strong>Cardinal numbers</strong> are natural numbers, used to represent size. They are used for counting things without fractional values.</p>
+<p><strong>Nominal numbers</strong> are numbers that are only used as a name, like postal codes or phone numbers.</p>
 <h3 id="percentages-and-operations">Percentages and Operations</h3>
 <p>Percentages are useful for representing and comparing ratios. This allows us to see which ratio is higher or lower.</p>
 <p>Using percentages results in a <strong>loss of information</strong>. When we use a percentange, we lose all information about what the original numbers were - 25% could represent 10/40 or 1/4.</p>
@@ -877,7 +880,7 @@ Rodents are used in baseball.</code></pre>
 <p>Unit systems help us avoid these situations by making it obvious when we try to add different types of physical quantities. This is useful but not completely effective - it is still possible to go wrong even when using units.</p>
 <p>If we add 5 meters and 5 meters, we can straighforwardly say that it represents 10 meters. But if we add 5 meters and 5 kilograms, what does the 10 represent?</p>
 <p>A percentage can represent a multiple, or a change. A 50% increase is different from something being 50% of what it was before.</p>
-<p>A percentage increase is denoted by <span class="math">\(\frac{(Later - Earlier)}{Earlier} \times 100%\)</span>.</p>
+<p>A percentage increase is denoted by <span class="math">\(\text{Percentage Increase} = \frac{(\text{Later} - \text{Earlier})}{\text{Earlier}} \times 100%\)</span>.</p>
 <h3 id="rankings">Rankings</h3>
 <p>Numbers are also often used for ranking things due to their ability to be compared - numbers are ordered.</p>
 <p>Rankings encode only information about order. For example, the rankings for runners in a race does not encode what the actual times were, or how close the winners were to each other, only information about who was first, second, third, and more.</p>
@@ -888,19 +891,25 @@ Rodents are used in baseball.</code></pre>
 <h3 id="average">Average</h3>
 <p>An <strong>average</strong> is a number that is supposed to represent a whole set of data. As a result, a lot of information is inevitably lost when using only the average.</p>
 <p>The most common ways of finding averages are the mean (ratio of total value to number of values), median (central value when sorted), and mode (most common value).</p>
+<h1 id="section-18">3/3/14</h1>
 <h2 id="statistics">Statistics</h2>
 <p><strong>Statistics</strong> is the study of data collection and analysis. It is related to critical thinking because it helps determine what kind of techniques, inferences, and interpretations can be used on data sets, and because statistics is used very often in reasoning.</p>
+<p><strong>Variables</strong> are a type of property. A <strong>statistic</strong> is a feature of a data set.</p>
 <p>A <strong>data set</strong> is a collection of information, often relating to a <strong>population</strong> of interest.</p>
 <p>The properties of the popoulation are represented using variables. For example a poll of a city might result in a variable being the approval of the current prime minister, and the value of this variable is the percentage of people who do approve.</p>
 <p>Often, it isn't possible to measure the whole population. As a result, we choose a smaller <strong>sample set</strong> that represents the <strong>target data set</strong>. We always want the sample set to represent the target set as accurately as possible.</p>
-<p>How well a sample represents the population depends in the <strong>size of the sample relative to the population</strong>, and the <strong>randomness of the selection process</strong>. Ideally, the selection process would give each individual an equal chance of being considered in the sample. For example, polling by phone selects only those people who own phones.</p>
+<p>We often make inteferences from data sets using <strong>inductive generalizations</strong> - inferring features of the target data set from the sample data set. We use this to generate hypotheses about the data.</p>
+<p>How well a sample represents the population depends in the <strong>size of the sample relative to the population</strong>, and the <strong>randomness of the selection process</strong>. Ideally, the selection process would give each individual an equal chance of being considered in the sample. For example, polling by phone selects only those people who own phones, answer them, and have a listed number.</p>
+<p>A non-random sample set is <strong>biased</strong> and might not accurately represent the target population. However, even if we choose our sample randomly, we may still get unlucky and randomly choose a bad sample, which doesn't represent the target population.</p>
 <p>From these data sets, we can figure out correlations between variables, which can help us figure out <strong>casual relationships</strong>.</p>
+<p>For example, a political poll has a population of every eligible voter, a sample set of the people who actually voted, and the inference is that the people who voted are an accurate sample of the people who can vote.</p>
 <h3 id="correlationcausation">Correlation/Causation</h3>
 <p>A <strong>correlation</strong> is when variables are related in some way - they co-vary together. Correlations are useful because we can use them to make predictions about what will happen when a variable is a certain way.</p>
 <p>For example, if attending class is correlated with high grades, then given students that attend class, we can predict that they have higher grades than those who do not attend class.</p>
 <p><strong>Positive correlation</strong> is when, given variables <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, an increase in <span class="math">\(x\)</span> results in an increase in <span class="math">\(y\)</span>, and vice versa. For example, there is a positive correlation in street signs between signs saying &quot;STOP&quot; and signs that are red.</p>
 <p><strong>Negative correlation</strong> is when, given variables <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, an increase in <span class="math">\(x\)</span> results in a decrease in <span class="math">\(y\)</span>, and vice versa. For example, there is a negative correlation in street signs between signs saying &quot;STOP&quot; and signs that are yellow.</p>
 <p><strong>Causation</strong> is when one thing causes another thing. Where correlation can be used to make predictions in some circumstances, causation allows predictions to be made in a much larger set of circumstances, and even predict what will happen when we modify other variables.</p>
+<p>For example, knowing there is a correlation between smoking and lung cancer is good for predicting whether someone will have lung cancer or a smoking habit, but not for preventing lung cancer. Knowing that smoking causes lung cancer allows us to prevent lung cancer by predicting that stopping smoking helps reduce the incidences of lung cancer.</p>
 <h3 id="null-hyposthesis">Null Hyposthesis</h3>
 <p>When we find a correlation in a sample set, we cann't directly apply it to the target population. The idea that a correlation exists in the target population is a <strong>hypothesis</strong>.</p>
 <p>There could be multiple hypotheses, like that there is a causal relationship between the two variables, or similar.</p>

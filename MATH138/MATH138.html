@@ -781,6 +781,29 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>This is useful because we can't explicitly calculate <span class="math">\(\sum_1^\infty a_n\)</span>, but we can calculate <span class="math">\(\sum_1^N a_n\)</span>.</p>
 <p>So given <span class="math">\(f(n) = a_n\)</span> being continuous, positive, and decreasing, the error is bounded by <span class="math">\(\int_{N + 1}^\infty f(x) \dee x \le R_N \le \int_N^\infty f(x) \dee x\)</span>.</p>
 <p>For example, for the series <span class="math">\(S_N = \sum_{n = 1}^N \frac{1}{n^2}\)</span>, <span class="math">\(S_{10} \approxeq 1.54977\)</span>. We know that since <span class="math">\(f(n) = \frac{1}{n^2}\)</span> is continuous, positive, and decreasing, and <span class="math">\(\int_1^\infty \frac{1}{n^2}\)</span>.</p>
+<h1 id="section-21">3/3/14</h1>
+<h2 id="comparison-test-series">Comparison Test (Series)</h2>
+<p>There is a deep connection between infinite series and improper integrals.</p>
+<p>Like the improper integral, we can also have a form of the comparison test, but it is easier to use than with integrals.</p>
+<p>Given <span class="math">\(\sum a_n\)</span> and <span class="math">\(\sum b_n\)</span>, two series, with <span class="math">\(0 \le a_n \le b_n\)</span>:</p>
+<ul>
+<li>If <span class="math">\(\sum a_n\)</span> diverges, then <span class="math">\(\sum b_n\)</span> also diverges.</li>
+<li>If <span class="math">\(\sum b_n\)</span> converges, then <span class="math">\(\sum a_n\)</span> also converges.</li>
+</ul>
+<h3 id="limit-comparison-test">Limit Comparison Test</h3>
+<p>For series only - not integrals - we have an additional test we can use.</p>
+<p>Let <span class="math">\(\sum a_n\)</span> and <span class="math">\(\sum b_n\)</span> be two series, with <span class="math">\(a_n \ge 0, b_n \ge 0\)</span>.</p>
+<p>Let <span class="math">\(\rho = \lim_{n \to \infty} \frac{a_n}{b_n}\)</span>.</p>
+<p>If <span class="math">\(0 &lt; \rho &lt; \infty\)</span> (<span class="math">\(\rho\)</span> is positive and finite), then:</p>
+<ul>
+<li><span class="math">\(\sum a_n\)</span> and <span class="math">\(\sum b_n\)</span> both diverge.</li>
+<li><span class="math">\(\sum a_n\)</span> and <span class="math">\(\sum b_n\)</span> both converge.</li>
+</ul>
+<p>This is easily proved via contradiction or similar.</p>
+<p>Prove that <span class="math">\(\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\frac{\abs{\sin n}}{\sqrt{n + n^3}} \le \frac{1}{\sqrt{n + n^3}} &lt; \frac{1}{\sqrt{n^3}} = \frac{1}{n^\frac{3}{2}}\)</span>.<br />Since this is a P-series where <span class="math">\(P = \frac{3}{2}\)</span>, <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^\frac{3}{2}}\)</span> converges.<br />So by the comparison test, <span class="math">\(\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}\)</span> converges.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
