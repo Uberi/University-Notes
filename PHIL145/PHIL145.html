@@ -970,6 +970,48 @@ Rodents are used in baseball.</code></pre>
 <li>Introduce confounds.</li>
 <li>Introduce hypotheses about causation in the population that explain the correlations.</li>
 </ol>
+<h1 id="section-19">5/3/14</h1>
+<h2 id="probability">Probability</h2>
+<p>Probability is closely connected to statistics. A <strong>probability</strong> is a likeliness - the chance of something happening or something being true or similar.</p>
+<p>The most common meaning of probability is the <strong>relative frequency</strong> of something (how often something will happen in the long run, like flipping a coin lands on heads half the time) and <strong>degrees of belief</strong> (how rationally certain about an event occuring, where 1 is certain and 0 is impossible).</p>
+<p>Humans are good at finding patterns, but are prone to false positives - type I errors. Humans are prone to thinking certain things are improbable when they are simply the result of random chance - they are bad at evaluating the null hypothesis.</p>
+<h3 id="formal-treatment">Formal Treatment</h3>
+<p><span class="math">\(P(x)\)</span> represents the probability of event <span class="math">\(x\)</span> occurring. It is always the case that <span class="math">\(P(x) \in \mathbb{R}\)</span> and <span class="math">\(0 \le P(x) \le 1\)</span> - nothing is more impossible than impossiblity, or more certain than certainty.</p>
+<p><span class="math">\(\neg x\)</span> is the opposite of the event <span class="math">\(x\)</span> - the event of <span class="math">\(x\)</span> not occurring. <span class="math">\(P(\neg x)\)</span> is the probability of event <span class="math">\(x\)</span> not occuring.</p>
+<p>It is always the case that <span class="math">\(P(x) + P(\neg x) = 1\)</span>. An event must either occur or not occur.</p>
+<p><span class="math">\(P(S)\)</span>, where <span class="math">\(S\)</span> is a set of events, represents the probability of one of those events occurring. If <span class="math">\(S\)</span> includes all possible events, then <span class="math">\(P(S) = 1\)</span>.</p>
+<p>Usually, <span class="math">\(P(x) = \frac{\text{Number of cases where } x \text{ occurs}}{\text{Total number of cases}}\)</span>, assuming that all cases are equally likely.</p>
+<p><span class="math">\(P(x \cup y)\)</span> is a <strong>disjoint probability</strong> - the probabilty that at least one of <span class="math">\(x\)</span> <strong>or</strong> <span class="math">\(y\)</span> occur.</p>
+<p><span class="math">\(P(x \cap y)\)</span> is a <strong>conjoint probability</strong> - the probabilty that both <span class="math">\(x\)</span> <strong>and</strong> <span class="math">\(y\)</span> occur.</p>
+<p><span class="math">\(P(x \mid y)\)</span> is a <strong>conditional proability</strong> - the probability that <span class="math">\(x\)</span> occurs <strong>if</strong> <span class="math">\(y\)</span> occurs.</p>
+<p>Identities:</p>
+<ul>
+<li><span class="math">\(P(x \cup y) = P(x) + P(y) - P(x \cap y)\)</span> - the probability of either event occuring is the sum of the individual probabilities of each event occuring, minus the probability that they both occur.
+<ul>
+<li><span class="math">\(P(x \cup y) = P(x) + P(y)\)</span> when <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are mutually exclusive - they never both occur at the same time.</li>
+</ul></li>
+<li><span class="math">\(P(x \cap y) = P(x \mid y) \cdot P(y)\)</span> - the probability of both events occurring is the probability of one occurring given the other times the probability of the other.
+<ul>
+<li><span class="math">\(P(x \cap y) = P(x) \cdot P(y)\)</span> when <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are independent - when the probability of <span class="math">\(x\)</span> does not change depending on <span class="math">\(y\)</span>, so <span class="math">\(P(x \mid y) = P(x)\)</span>.</li>
+</ul></li>
+</ul>
+<p>Probability of drawing a red queen from a deck of cards given that the card drawn is red:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(P(\text{red} \cap {queen}) = P(\text{red} \mid \text{queen}) \cdot P(\text{queen})\)</span>.<br />Since the card is a queen, <span class="math">\(P(\text{queen}) = 1\)</span> and <span class="math">\(P(\text{red} \mid \text{queen}) \cdot P(\text{queen}) = P(\text{red}) = \frac{1}{2}\)</span>.</p>
+</blockquote>
+<h3 id="gamblers-fallacy">Gambler's Fallacy</h3>
+<p>When a set of events are independent, people are prone to thinking that the events are dependent of the conjoint probability of each of the other events in the set.</p>
+<p>In other words, given events <span class="math">\(x_1, \ldots, x_n\)</span> such that <span class="math">\(\forall 1 \le i \le n, 1 \le j \le n, P(x_i) = P(x_i \mid x_j)\)</span> (all events are independent), it is a mistake to assume <span class="math">\(P(x_i) \ne P(x_i \mid x_j)\)</span>.</p>
+<p>For example, if we flip a coin five times and it comes up heads every time, then we might think that we are more likely to get a tails on the next flip. However, this is false - there is still approximately a 50% chance of getting a tails, as usual.</p>
+<h3 id="simpsons-paradox">Simpson's Paradox</h3>
+<p>Suppose hospital A cures 70% of all cancer patients and 90% of all non-cancer patients. Suppose hospital B cures 50% of all cancer patients and 80% of all non-cancer patients.</p>
+<p>We might be inclined to believe that hospital A has a better overall cure rate, since the rates for both are higher, but <strong>this is not always true</strong>.</p>
+<p>It is easy to find a counterexample:</p>
+<p>Hospital A might have 700/1000 (70%) cancer patients cured, and 9/10 (90%) non-cancer patients cured, giving an overall rate of 709/1010, or 70.2%.</p>
+<p>Hospital B might have 5/10 (50%) cancer patients cured, and 800/1000 (80%) non-cancer patients cured, giving an overall rate of 805/1010, of 79.7%.</p>
+<p>The problem arose when we tried to add percentages together.</p>
+<p>The fallacy is that the total percentage of A cannot be compared to the total percentage of B by comparing the percentages of the individual parts of A and B.</p>
+<p>Comparisons that hold within all parts of a set <strong>do not necessarily hold for the set as a whole</strong>. This is a compositional fallacy.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

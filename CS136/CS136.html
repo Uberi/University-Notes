@@ -1458,6 +1458,99 @@ while (i &lt; 5) { // 1 * 6 operations
     i = i + 1; // 2 * 5 operations
 }</code></pre>
 <p>Here, there are a total of 28 operations.</p>
+<h1 id="section-15">6/3/14</h1>
+<p>;wip: the office hours have been shuffled around and the assignments have been moved to fridays</p>
+<p>We are always interested in the time taken <strong>with respect to the size of the input</strong>. We represent this using <span class="math">\(n\)</span>, <span class="math">\(m\)</span>, or <span class="math">\(k\)</span>, for different inputs.</p>
+<p>For example, consider the following:</p>
+<pre><code>(define (sum lon)
+    (cond [(empty? lon) 0]
+        [else (+ (first lon) (sum (rest lon)))]))</code></pre>
+<p>The number of steps needed to run this function is dependent on <code>(length lon)</code>. As an asid, it happens to be <span class="math">\(7n + 2\)</span> steps, where <span class="math">\(n\)</span> is the number of elements in <code>lon</code>.</p>
+<p>What <span class="math">\(n\)</span> or other variables represent can depend on the context. For example, a list of numbers might have <span class="math">\(n\)</span> represent the length of the list.</p>
+<p>Another example is a list of strings. Here, <span class="math">\(n\)</span> can represent the length of the list, the total length of the string, or even the longest string.</p>
+<p>A good example is for trees. We may have <span class="math">\(n\)</span> represent the number of nodes, or the depth of the tree, or a variety of other properties.</p>
+<p>The idea is that sometimes the time taken is dependent on more than just the size of something, and that there can be multiple variables. Also, there can be ambiguity as to what the variables represent, and it is important to clarify if it is unclear.</p>
+<p>This type of analysis is known as <strong>running time analysis</strong>, and we denote the running time of a function as <span class="math">\(T(n)\)</span>.</p>
+<p>Consider now another function, <code>rsum&gt;?</code>:</p>
+<pre><code>(define (rsum&gt;? lon k)
+    (cond [(empty? lon) #f]
+        [(&lt; k (first lon)) #t]
+        [else (rsum&gt;? (rest lon) (- k (first lon)))]))</code></pre>
+<p>Notice that the running time now depends on both the length of <code>lon</code> and the value of <code>k</code>. We write this as <span class="math">\(T(n, k) = \ldots\)</span>.</p>
+<h2 id="time-complexity">Time Complexity</h2>
+<p>We are interested in the <strong>worst case</strong> and <strong>best case</strong> - the smallest possible running time, and the largest possible running time, given all possible inputs.</p>
+<p>In other words, we want to minimize or maximise <span class="math">\(T(n)\)</span>.</p>
+<p>For example, for <code>rsum&gt;?</code>, the best case is <span class="math">\(T(n) = 5\)</span> (if <span class="math">\(k\)</span> is less than the first element), and the worst case is <span class="math">\(T(n) = 10n + 2\)</span> (if <span class="math">\(k\)</span> is greater than the sum of the entire list).</p>
+<p>When we say running time, by default we mean the <strong>worst case running time</strong>. The average case running time is also useful to know about, but this is much harder to determine.</p>
+<h3 id="big-o-notation">Big-O Notation</h3>
+<p>In practice, we do not really care about these small variations in running time - they are not significant and are highly dependent on hardware and implementation. Instead, we care about the <strong>behaviour of the running time as the input grows arbitrarily large</strong>.</p>
+<p>This is the <strong>order</strong> (growth rate) of the running time - the term that gets the largest as <span class="math">\(n \to \infty\)</span>, without any constant coefficients. For example, <span class="math">\(7n + 4\)</span> has order <span class="math">\(n\)</span>, and so does <span class="math">\(10n + 2\)</span>.</p>
+<p>We can represent an order <span class="math">\(f(n)\)</span> with <span class="math">\(O(f(n))\)</span>. This is <strong>big-O notation</strong>. So the order <span class="math">\(n^2\)</span> is represented as <span class="math">\(O(n^2)\)</span>.</p>
+<p>In this course, we will only encounter the following orders: <span class="math">\(O(1) &lt; O(\log n) &lt; O(n) &lt; O(n \log n) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n)\)</span>.</p>
+<p>For example:</p>
+<ul>
+<li><span class="math">\(23478905 = O(1)\)</span></li>
+<li><span class="math">\(\frac{n(n + 1)(2n + 1)}{6} = O(n^3)\)</span></li>
+<li><span class="math">\(n^3 + 3^n = O(2^n)\)</span></li>
+</ul>
+<p>Note that <span class="math">\(a^n = O(2^n), a &gt; 1\)</span> because we can rewrite it as <span class="math">\(O(a^n) = O(a^{n \log_a 2}) = O(2^n)\)</span>. Likewise, we can write the base of a logarithm as a constant factor and remove it.</p>
+<p>Big-O notation is much more abstract than running time analysis. Big-O notation can then be associated with an entire algorithm rather than just an implementation of an algorithm.</p>
+<p>Given orders <span class="math">\(O(f(n)), O(g(n))\)</span>, the following are identities:</p>
+<ul>
+<li><span class="math">\(O(f(n)) + O(g(n)) = \max(O(f(n)), O(g(n)))\)</span> (<span class="math">\(O(1) + O(1) = O(1)\)</span>)</li>
+<li><span class="math">\(O(f(n)) \times O(g(n)) = O(f(n) \times g(n))\)</span> (<span class="math">\(O(n) \times O(\log n) = O(n \log n)\)</span>)</li>
+</ul>
+<p>For example, <span class="math">\(T(n) = 1 + 2n + 3n^2 = O(1) + O(n) + O(n^2) = O(n^2)\)</span>.</p>
+<p>Note that at this point, this is all informal notation. Big-O notation can and will be defined more formally later on.</p>
+<p>Big-O notation isn't just for time complexity - we can fund the order of any function.</p>
+<h3 id="efficiency-analysis">Efficiency Analysis</h3>
+<p>The lower the order of an algorithm, the more efficient it is. So a <span class="math">\(O(n \log n)\)</span> algorithm is more efficient than a <span class="math">\(O(n^2)\)</span> algorithm. If two algorithms have the same order, they are equivalent for our purposes.</p>
+<p>We can intuitively analyze an algorithm to determine its time complexity. For example, <code>rsum&gt;?</code> is clearly <span class="math">\(O(n)\)</span>, simply by inspection. However, we can also find the order algorithmically:</p>
+<ol style="list-style-type: decimal">
+<li>If the function does not use recursion or iteration:
+<ol style="list-style-type: decimal">
+<li>Operators in C are all <span class="math">\(O(1)\)</span>.</li>
+<li>Functions can have their own orders, like the <span class="math">\(O(n)\)</span> <code>length</code> in Racket. Make sure to account for the input size being changed, like passing a constant list to <code>length</code>.</li>
+<li>The order of this function is the sum of all the orders in the function - the largest order. This ensures we always consider the worst case.</li>
+</ol></li>
+<li>If the function uses recursion:
+<ol style="list-style-type: decimal">
+<li>Determine the order of the function if it did not use any recursion.</li>
+<li>Determine the size of the input given to the next recursive call.</li>
+<li>Write the function in terms of a recurrence relation and look up the closed form in the table.</li>
+</ol></li>
+</ol>
+<h3 id="recurrence-relations">Recurrence relations</h3>
+<p>Recurrence relations are used to analyze the running time of recursive functions.</p>
+<p>It is possible to derive <strong>closed forms</strong> for many recurrence relations - forms that are non-recursive. In this course, we encounter the following:</p>
+<ul>
+<li><span class="math">\(T(n) = O(f(n)) + T(n - k_1) = O(n) \times O(f(n))\)</span></li>
+<li><span class="math">\(T(n) = O(f(n)) + T\left(\frac{n}{c}\right) = O(\log n) \times O(f(n))\)</span></li>
+<li><span class="math">\(T(n) = O(f(n)) + c \times T\left(\frac{n}{c}\right) = O(n) \times O(f(n))\)</span></li>
+<li><span class="math">\(T(n) = O(f(n)) + T(n - k_1) + T(n - k_2) = O(2^n) \times O(f(n))\)</span></li>
+</ul>
+<p>Where <span class="math">\(k_1, k_2 \ge 1, c &gt; 1\)</span>. It is not necessary to memorize this table, though it should be intuitively obvious how it is derived.</p>
+<h3 id="racket-built-in-efficiencies">Racket Built-in Efficiencies</h3>
+<p>Function time complexities in Racket:</p>
+<ul>
+<li><code>cons</code>, <code>cons?</code>, <code>empty?</code>, <code>rest</code>, <code>first</code>, <code>second</code>, <code>third</code>, etc. are <span class="math">\(O(1)\)</span>.</li>
+<li><code>length</code>, <code>last</code>, <code>reverse</code>, <code>member</code>, <code>remove</code>, <code>list-ref</code>, <code>drop-right</code>, <code>take-right</code>, <code>append</code>, etc. are <span class="math">\(O(n)\)</span>.</li>
+<li><code>foldr</code>, <code>foldl</code>, <code>map</code>, <code>filter</code>, etc. are <span class="math">\(O(n) \times O(f(n))\)</span> where <span class="math">\(O(f(n))\)</span> is the order of the processing function.</li>
+<li><code>sort</code> is <span class="math">\(O(n \log n)\)</span>.</li>
+</ul>
+<p>The differences between lists and arrays can now be made clear. Array lookup is <span class="math">\(O(1)\)</span>, while list lookup is <span class="math">\(O(n)\)</span> (lookup means retrieving a given element in the collection), which makes arrays much more efficient in this aspect. However, arrays cannot be expanded, while lists can.</p>
+<p>Racket has arrays as well, but they are known as <strong>vectors</strong>. We create them with the <code>(vector ...)</code> function (for example, <code>(vector 1 2 3)</code>) and lookup elements using the <code>(vector-ref some-vector position)</code>.</p>
+<p>Functions like <code>max</code> and <code>list</code> in Racket have their running time determined by the number of parameters they are given. Since at this point, we can only pass a constant number of parameters to a function, these are always <span class="math">\(O(1)\)</span>.</p>
+<p>We assume in this course that all operators in C are <span class="math">\(O(1)\)</span>, and all arithmetic functions in Racket (like <code>+</code>, <code>*</code>, <code>expt</code>) are also <span class="math">\(O(1)\)</span>. In practice, since Racket supports arbitrarily large numbers, things like <code>+</code> are actually <span class="math">\(O(\log n)\)</span>, where <span class="math">\(n\)</span> is the larger of the numbers.</p>
+<p>As a result of the above, <code>=</code> is <span class="math">\(O(1)\)</span>. Note that <code>string=?</code> is <span class="math">\(O(n)\)</span> where <span class="math">\(n\)</span> is the length of the shortest string, since it must compare lexicographically. Likewise, <code>equal?</code> is <span class="math">\(O(n)\)</span> where <span class="math">\(n\)</span> is the size of the smallest argument. However, symbols are special in that <code>symbol=?</code> is <span class="math">\(O(1)\)</span>.</p>
+<p><code>(member e lst)</code> is <span class="math">\(O(mn)\)</span> where <span class="math">\(n\)</span> is <code>(length lst)</code> and <span class="math">\(m\)</span> is the size of <code>e</code>. This is because it could potentially call <code>equal?</code> on every element of <code>lst</code>.</p>
+<h3 id="c-built-in-efficiencies">C Built-in Efficiencies</h3>
+<p>Function time complexities in C:</p>
+<ul>
+<li><code>strcmp</code>, <code>strlen</code>, <code>strcpy</code>, etc. are <span class="math">\(O(n)\)</span>.</li>
+<li><code>getchar</code> is <span class="math">\(O(1)\)</span>.</li>
+<li><code>printf</code>, <code>scanf</code> are <span class="math">\(O(n)\)</span> when working with strings, <span class="math">\(O(1)\)</span> otherwise.</li>
+</ul>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

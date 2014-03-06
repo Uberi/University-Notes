@@ -1229,3 +1229,70 @@ We must also intriduce the null hypothesis:
 5. Introduce hypotheses about correlation in the population.
 6. Introduce confounds.
 7. Introduce hypotheses about causation in the population that explain the correlations.
+
+# 5/3/14
+
+Probability
+-----------
+
+Probability is closely connected to statistics. A **probability** is a likeliness - the chance of something happening or something being true or similar.
+
+The most common meaning of probability is the **relative frequency** of something (how often something will happen in the long run, like flipping a coin lands on heads half the time) and **degrees of belief** (how rationally certain about an event occuring, where 1 is certain and 0 is impossible).
+
+Humans are good at finding patterns, but are prone to false positives - type I errors. Humans are prone to thinking certain things are improbable when they are simply the result of random chance - they are bad at evaluating the null hypothesis.
+
+### Formal Treatment
+
+$P(x)$ represents the probability of event $x$ occurring. It is always the case that $P(x) \in \mathbb{R}$ and $0 \le P(x) \le 1$ - nothing is more impossible than impossiblity, or more certain than certainty.
+
+$\neg x$ is the opposite of the event $x$ - the event of $x$ not occurring. $P(\neg x)$ is the probability of event $x$ not occuring.
+
+It is always the case that $P(x) + P(\neg x) = 1$. An event must either occur or not occur.
+
+$P(S)$, where $S$ is a set of events, represents the probability of one of those events occurring. If $S$ includes all possible events, then $P(S) = 1$.
+
+Usually, $P(x) = \frac{\text{Number of cases where } x \text{ occurs}}{\text{Total number of cases}}$, assuming that all cases are equally likely.
+
+$P(x \cup y)$ is a **disjoint probability** - the probabilty that at least one of $x$ **or** $y$ occur.
+
+$P(x \cap y)$ is a **conjoint probability** - the probabilty that both $x$ **and** $y$ occur.
+
+$P(x \mid y)$ is a **conditional proability** - the probability that $x$ occurs **if** $y$ occurs.
+
+Identities:
+
+* $P(x \cup y) = P(x) + P(y) - P(x \cap y)$ - the probability of either event occuring is the sum of the individual probabilities of each event occuring, minus the probability that they both occur.
+    * $P(x \cup y) = P(x) + P(y)$ when $x$ and $y$ are mutually exclusive - they never both occur at the same time.
+* $P(x \cap y) = P(x \mid y) \cdot P(y)$ - the probability of both events occurring is the probability of one occurring given the other times the probability of the other.
+    * $P(x \cap y) = P(x) \cdot P(y)$ when $x$ and $y$ are independent - when the probability of $x$ does not change depending on $y$, so $P(x \mid y) = P(x)$.
+
+Probability of drawing a red queen from a deck of cards given that the card drawn is red:
+
+> Clearly, $P(\text{red} \cap {queen}) = P(\text{red} \mid \text{queen}) \cdot P(\text{queen})$.  
+> Since the card is a queen, $P(\text{queen}) = 1$ and $P(\text{red} \mid \text{queen}) \cdot P(\text{queen}) = P(\text{red}) = \frac{1}{2}$.  
+
+### Gambler's Fallacy
+
+When a set of events are independent, people are prone to thinking that the events are dependent of the conjoint probability of each of the other events in the set.
+
+In other words, given events $x_1, \ldots, x_n$ such that $\forall 1 \le i \le n, 1 \le j \le n, P(x_i) = P(x_i \mid x_j)$ (all events are independent), it is a mistake to assume $P(x_i) \ne P(x_i \mid x_j)$.
+
+For example, if we flip a coin five times and it comes up heads every time, then we might think that we are more likely to get a tails on the next flip. However, this is false - there is still approximately a 50% chance of getting a tails, as usual.
+
+### Simpson's Paradox
+
+Suppose hospital A cures 70% of all cancer patients and 90% of all non-cancer patients. Suppose hospital B cures 50% of all cancer patients and 80% of all non-cancer patients.
+
+We might be inclined to believe that hospital A has a better overall cure rate, since the rates for both are higher, but **this is not always true**.
+
+It is easy to find a counterexample:
+
+Hospital A might have 700/1000 (70%) cancer patients cured, and 9/10 (90%) non-cancer patients cured, giving an overall rate of 709/1010, or 70.2%.
+
+Hospital B might have 5/10 (50%) cancer patients cured, and 800/1000 (80%) non-cancer patients cured, giving an overall rate of 805/1010, of 79.7%.
+
+The problem arose when we tried to add percentages together.
+
+The fallacy is that the total percentage of A cannot be compared to the total percentage of B by comparing the percentages of the individual parts of A and B.
+
+Comparisons that hold within all parts of a set **do not necessarily hold for the set as a whole**. This is a compositional fallacy.

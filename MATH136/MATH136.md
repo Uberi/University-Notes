@@ -1229,7 +1229,7 @@ A **real vector space** is a set $\mb{V}$ of vectors put together with an additi
 * Additive inverse: $\exists (-\vec{a}) \in \mb{V}, \vec{a} \oplus (-\vec{a}) = \vec{0}$
 * Closure under scalar multiplication: $u \odot \vec{a} \in \mb{V}$
 * $u \odot (v \odot \vec{a}) = (uv) \odot \vec{a}$
-* Scalar distributivity: $(u \oplus u) \odot \vec{a} = (u \odot \vec{a}) \oplus (v \odot \vec{a})$
+* Scalar distributivity: $(u + v) \odot \vec{a} = (u \odot \vec{a}) \oplus (v \odot \vec{a})$
 * Vector distributivity: $u \odot (\vec{a} \oplus \vec{b}) = u \odot \vec{a} \oplus u \odot \vec{b}$
 * Scalar multiplicative identity: $1 \odot \vec{a} = \vec{a}$
 
@@ -1296,7 +1296,8 @@ Since we know more about $\mb{S}$ and $\mb{V}$ - that they are vector spaces - w
 
 A set $\mb{S}$ is a subspace of a set $\mb{V}$ if and only if, for any $\vec{x}, \vec{y} \in \mb{S}, t \in \mb{R}$:
 
-* $\mb{S}$ is not empty (this allows us to instantiate $\vec{x}$ and $\vec{y}$).
+* $\mb{S}$ is not empty (this allows us to instantiate $\vec{x}$ and $\vec{y}$). We can test this by checking if the zero vector is in the set.
+* $\mb{S}$ is a subset of $\mb{V}$.
 * Closure under addition: $\vec{x} \oplus \vec{y} \in \mb{S}$.
 * Closure under scalar multiplication: $t \odot \vec{x} \in \mb{S}$.
 
@@ -1314,7 +1315,7 @@ As with subspaces in $\mb{R}^n$, we can prove a vector $\vec{x}$ is in a span if
 
 ### Linear Independence
 
-If $c_1 \vec{v}_1 + \ldots + c_k \vec{v}_k = \vec{0}_{\mb{V}}$ has any solutions where $c_i \ne 0$ for $1 \le i \le k$, then $\mathcal{B}$ is **linearly dependent**. Otherwise, it is **linearly independent**.
+If $c_1 \odot \vec{v}_1 \oplus \ldots \oplus c_k \odot \vec{v}_k = \vec{0}_{\mb{V}}$ has any solutions where $c_i \ne 0$ for $1 \le i \le k$, then $\mathcal{B}$ is **linearly dependent**. Otherwise, it is **linearly independent**.
 
 This is just a generalization of the concept of linear independence in $\mb{R}^n$ into all vector spaces.
 

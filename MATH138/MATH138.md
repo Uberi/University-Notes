@@ -1035,7 +1035,7 @@ Does $a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}$ converge?
 Does $a_1 = 1, a_{n + 1} = \sqrt{3 + 2a_n}$ converge?
 
 > The first few elements of the sequence are $1, 2.23606797749979, 2.73352079834772, 2.90981813807933, 2.96978724425819$.  
-> Clearly, $a_{n + 1} \ge a_n$ is equivalent to $\sqrt{3 + 2a_n} \ge a_n$, which is equivalent to $a_n^2 - 2a_n - 3 \le 0$, or $-1 \le a_n \le 3$.  
+> Clearly, $a_{n + 1} \ge a_n \iff \sqrt{3 + 2a_n} \ge a_n \iff a_n^2 - 2a_n - 3 \le 0$, or $-1 \le a_n \le 3$.  
 > So $a_n$ is monotonically increasing if $[-1, 3]$.  
 > Assume $a_n \le 3$. Then $3 + 2a_n \le 9$ and $\sqrt{3 + 2a_n} \le 3$. So $a_{n + 1} \le 3$.  
 > So by induction, $a_n$ has an upper bound of 3.  
@@ -1178,9 +1178,11 @@ Given $\sum a_n$ and $\sum b_n$, two series, with $0 \le a_n \le b_n$:
 * If $\sum a_n$ diverges, then $\sum b_n$ also diverges.
 * If $\sum b_n$ converges, then $\sum a_n$ also converges.
 
+Here, $\sum a_n$ is the series we are interested in and $\sum b_n$ is the series we chose to compare it with.
+
 ### Limit Comparison Test
 
-For series only - not integrals - we have an additional test we can use.
+For series only - not integrals - we can rewrite this in a more useful form.
 
 Let $\sum a_n$ and $\sum b_n$ be two series, with $a_n \ge 0, b_n \ge 0$.
 
@@ -1193,8 +1195,37 @@ If $0 < \rho < \infty$ ($\rho$ is positive and finite), then:
 
 This is easily proved via contradiction or similar.
 
+Note that if $\rho = 0$ or $\rho = \infty$, then we cannot say anything about whether they converge or not, and we need to pick a better comparison.
+
 Prove that $\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}$:
 
 > Clearly, $\frac{\abs{\sin n}}{\sqrt{n + n^3}} \le \frac{1}{\sqrt{n + n^3}} < \frac{1}{\sqrt{n^3}} = \frac{1}{n^\frac{3}{2}}$.  
 > Since this is a P-series where $P = \frac{3}{2}$, $\sum_{n = 1}^\infty \frac{1}{n^\frac{3}{2}}$ converges.  
 > So by the comparison test, $\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}$ converges.  
+
+# 5/3/14
+
+We can find useful comparisons to make by finding something bigger than the numerator, and smaller than the denominator, and trying that as a comparison.
+
+For example, $\sum_1^\infty \frac{\sqrt{n}}{n^2 + 2} < \sum_1^\infty \frac{\sqrt{n}}{n^2} = \sum_1^\infty \frac{1}{n^\frac{3}{2}}$, which converges as it is a P-series with $P = \frac{3}{2}$.
+
+For example, $\sum_1^\infty \frac{1}{2^nn} \le \sum_1^\infty \frac{1}{2^n} = \sum_1^\infty \left(\frac{1}{2}\right)^n$, which converges since it is a geometric series with $x = \frac{1}{2}$.
+
+Does $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}$ exist?
+
+> Clearly, $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} < \sum_1^\infty \frac{1}{n}$.  
+> Using the limit comparison test, $\rho = \li_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1$.  
+> Since $0 < \rho < \infty$, and $\sum_1^\infty \frac{1}{n}$ diverges, then $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}$ also diverges.  
+
+Proof of limit comparison test:
+
+> Let $\sum a_n$ and $\sum b_n$ be two series, with $a_n \ge 0, b_n \ge 0$.  
+> Let $\rho = \lim_{n \to \infty} \frac{a_n}{b_n}$. Assume $0 < \rho < \infty$.  
+> Clearly, $\exists m, M > 0, 0 < m < \rho < M < \infty$.  
+> Clearly, $\lim_{n \to \infty} \frac{a_n}{b_n} \iff (\exists K, n > K \implies m < \frac{a_n}{b_n} < M)$.  
+> So $mb_n < a_n < Mb_n$ and $\sum mb_n < \sum a_n < \sum Mb_n$, or $m\sum b_n < \sum a_n < M\sum b_n$.  
+> Suppose $\sum b_n$ converges. Then $\sum a_n < M\sum b_n$ and by the comparison test, $\sum a_n$ converges.  
+> Suppose $\sum b_n$ diverges. Then $m\sum b_n > \sum a_n$ and by the comparison test, $\sum a_n$ diverges.  
+> So $\sum a_n$ converges if and only if $\sum b_n$ converges.  
+
+Also, we can prove that sequences diverge by proving that they are increasing or decreasing without bound, or assuming that the sequence does converge, and deriving a contradiction.
