@@ -1162,7 +1162,7 @@ This is useful because we can't explicitly calculate $\sum_1^\infty a_n$, but we
 
 So given $f(n) = a_n$ being continuous, positive, and decreasing, the error is bounded by $\int_{N + 1}^\infty f(x) \dee x \le R_N \le \int_N^\infty f(x) \dee x$.
 
-For example, for the series $S_N = \sum_{n = 1}^N \frac{1}{n^2}$, $S_{10} \approxeq 1.54977$. We know that since $f(n) = \frac{1}{n^2}$ is continuous, positive, and decreasing, and $\int_1^\infty \frac{1}{n^2}$.
+For example, for the series $S_N = \sum_{n = 1}^N \frac{1}{n^2}$, $S_{10} \approxeq 1.54977$. We know that since $f(n) = \frac{1}{n^2}$ is continuous, positive, and decreasing, and $\int_1^\infty \frac{1}{n^2}$. ;wip
 
 # 3/3/14
 
@@ -1229,3 +1229,51 @@ Proof of limit comparison test:
 > So $\sum a_n$ converges if and only if $\sum b_n$ converges.  
 
 Also, we can prove that sequences diverge by proving that they are increasing or decreasing without bound, or assuming that the sequence does converge, and deriving a contradiction.
+
+# 7/3/14
+
+Alternating Series
+------------------
+
+These are series where the sign of the terms alternate.
+
+These usually take the form of $\sum a_n = \sum (-1)^n p_n, p_n > 0$.
+
+Alternating series are useful to study because they have several useful properties.
+
+For an alternating series, if $\lim_{n \to \infty} p_n = 0$, and $p_{n + 1} \le p_n$, then the series converges.
+
+In other words, if the terms of the sum tend to 0, and they are monotonically decreasing, then the series converges. This is one of the simplest convergence tests, but it only works on alternating series.
+
+Also, the remainder/error after $N$ terms is easy to estimate. $\abs{R_N} = \abs{\sum^\infty (-1)^n p_n - \sum^N (-1)^n p_n} \le p_{N + 1}$.
+
+This is true because the terms of the series keep bouncing back and forth across the limit, so the remainder is always less than or equal to the value of each term.
+
+For example, $\sum_1^\infty (-1)^{n + 1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \ldots = \ln 2$. We can estimate the error with $\abs{R_N} = \frac{1}{N + 1}$.
+
+### Convergence
+
+Alternating series also have special nomenclature that can be applied to them.
+
+Let $\sum a_n = \sum (-1)^n p_n$ be an alternating series.
+
+$\sum a_n$ is **absolutely convergent** if $\sum a_n$ and $\sum \abs{a_n}$ converge.
+
+Absolute convergence means that the series is **well behaved** - it behaves like an ordinary number. We can add, subtract, multiply, and divide absolutely convergent series and the result is still sensible.
+
+$\sum a_n$ is **conditionally convergent** if $\sum a_n$ converges, but $\sum \abs{a_n}$ diverges.
+
+Conditional convergence means the series might not be well behaved.
+
+For example, consider $1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \ldots$.
+
+For an absolutely convergent series, re-arrangement does nothing. This is not true for conditionally convergent series. In fact, the above can have its terms rearranged such that it sums up to any value we want, and this was proved by Riemann.
+
+For example, we will make it sum up to 1.5:
+
+> First, we add up positive terms until we pass 1.5: $1 + \frac{1}{3} + \frac{1}{5} \approxeq 1.53$.  
+> Then we add negative terms until we fall below 1.5 again: $1 + \frac{1}{3} + \frac{1}{5} - \frac{1}{2} \approxeq 1.03$.  
+> Then we repeat: $1 + \frac{1}{3} + \frac{1}{5} - \frac{1}{2} + \frac{1}{7} + \frac{1}{9} + \frac{1}{11} + \frac{1}{13} + \frac{1}{15} \approxeq 1.52$.  
+> We can do this as many times as needed to get the desired alue.  
+
+Even though there are far more positive terms than negative terms, we can do this because we have an infinite number of terms that we can add up. This only works because of the series is infinite.
