@@ -837,8 +837,6 @@ Basically, a set of sentences is inconsistent if all the sentences together are 
 
 # 7/2/14
 
-;wip: read up to chapter 4
-
 ### Premises
 
 Premises can often have **faulty assumptions**. These assumptions are not acceptable, so we cannot accept the premise:
@@ -1296,3 +1294,54 @@ The problem arose when we tried to add percentages together.
 The fallacy is that the total percentage of A cannot be compared to the total percentage of B by comparing the percentages of the individual parts of A and B.
 
 Comparisons that hold within all parts of a set **do not necessarily hold for the set as a whole**. This is a compositional fallacy.
+
+# 7/3/14
+
+Biases
+------
+
+A **bias** is a systematic preference or tendency to favor one outcome over another. Biases can lead to people reasoning in unreliable ways, but many biases exist for very good reasons - they are what allows us to think so effectively.
+
+**Heuristics** are simplified problem solving techniques used to solve complex problems quickly. They are closely associated with biases.
+
+Heuristics have allowed humans to become extremely effective in practical problem solving. They can sometimes be useful, but can sometimes lead to biases.
+
+Biases are often useful in a variety of situations, but they usually have a small class of problematic cases. The problem is distinguishing whether a bias is helpful, or leads to reliable reasoning.
+
+For example, a **regression fallacy** is when natural fluctuations in something are mistaken to be caused by something else. For example, "Jim did exceptionally well at work last year. He started losing his hair this year, and his performance is merely average this year, so hair loss must be reducing his performance".
+
+This is fallacious because it is likely that in fact this is just natural variation in performance, not caused by any external factors.
+
+Another example of baises is seeing shapes in the clouds, or seeing faces where there are none. This may be due to the need for earlier humans to detect predators more effectively and avoid them.
+
+# 10/3/14
+
+;wip: do quiz 4 posted on wednesday
+
+;wip: assignment 2 is due on monday
+
+As a general rule, when we add quantities that have ratios, the resulting ratio is between the largest of the ratios and the smallest of the ratios.
+
+For example, if one box is 20% full and another 80% full, then when we combine the boxes together, the result is always between 20% and 80% full.
+
+
+### Types of Biases
+
+**Cognitive biases** are those biases associated with cognition. They are caused by our psychological characteristics, and even things like our beliefs, expectations, and fears.
+
+Some examples of cognitive biases are:
+
+* **Confirmation bias** is the tendency to think our own beliefs or expectations are more confirmed than evidence actually warrants.
+    * This is a bias because we want to evaluate all beliefs equally in order to get the most truth out of our reasoning, and this tendency causes us to give some beliefs precedence over others.
+    * This bias is based on our beliefs and expectations.
+    * Situational/structural bias is the tendency to allow features of the situation to affect our evaluation of evidence. For example, sometimes an infection has symptoms, and sometimes it does not, so situational bias causes us to be biased toward identifying those with symptoms, because that is easier to detect - confirming evidence is easier to obtain.
+    * Attentional bias is the tendency to favor evidence that holds our attention, or how our attention affects how we examine evidence. For example, people might think there are a lot of bad drivers, but this may not be true, since most people do not pay attention to good drivers, only bad ones. We cannot, in practice, fous on all sources of information at once, and bias can be introduced when selecting which ones to focus on.
+    * Interpretive bias is the tendency to allow our beliefs to affect our evaluation of evidence. We tend to accept evidence in accordance to what we believe, and heavily criticise evidence against it. To believe is to think something is correct; we prefer evidence that supports what we believe is correct.
+
+**Perceptual biases** are those that affect what we perceive. They are a subset of all cognitive biases.
+
+Most optical illusions work based on **low-level** or **bottom-up** perceptual biases. These are biases that are introduced in the low-level processing that the brain does when precessing the raw sensory input.
+
+For example, if we are talking to someone, what we perceive from the lip movements can significantly affect what we hear. This is known as the McGurk effect. It probably exists to help detect errors in speech recognition and improve communication in noisy places. Interestingly, it works even if we are aware of the effect.
+
+Perceptual biases can also be introduced by explicit, conscious reasoning - **top-down** perceptual biases.

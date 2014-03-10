@@ -1274,6 +1274,52 @@ For example, we will make it sum up to 1.5:
 > First, we add up positive terms until we pass 1.5: $1 + \frac{1}{3} + \frac{1}{5} \approxeq 1.53$.  
 > Then we add negative terms until we fall below 1.5 again: $1 + \frac{1}{3} + \frac{1}{5} - \frac{1}{2} \approxeq 1.03$.  
 > Then we repeat: $1 + \frac{1}{3} + \frac{1}{5} - \frac{1}{2} + \frac{1}{7} + \frac{1}{9} + \frac{1}{11} + \frac{1}{13} + \frac{1}{15} \approxeq 1.52$.  
-> We can do this as many times as needed to get the desired alue.  
+> We can do this as many times as needed to get the desired value.  
 
-Even though there are far more positive terms than negative terms, we can do this because we have an infinite number of terms that we can add up. This only works because of the series is infinite.
+Even though there are far more positive terms than negative terms, we can do this because we have an infinite number of terms that we can add up. This only works because the series is infinite.
+
+# 10/3/14
+
+Ratio Test
+----------
+
+This is the most useful of the convergence tests.
+
+Let $\sum a_n$ be a series. Let $L = \lim_{n \to \infty} \abs{\frac{a_{n + 1}}{a_n}}$.
+
+If $L < 1$, then $\sum a_n$ converges absolutely.
+
+If $L > 1$, then $\sum a_n$ diverges.
+
+Otherwise, if $L = 1$, the test is inconclusive. This test is very effective for powers and factorials, and especially for power series and Taylor series.
+
+Determine if $\sum_{n = 0}^\infty \frac{(n + 4)!}{4!n!4^n}$ converges:
+
+> We will use the ratio test.  
+> Let $L = \lim_{n \to \infty} \abs{\frac{((n + 1) + 4)!}{4!(n + 1)!4^(n + 1)} \frac{4!n!4^n}{(n + 4)!}} = \lim_{n \to \infty} \frac{n + 5}{4!(n + 1)!4^(n + 1)} 4!n!4^n = \lim_{n \to \infty} \frac{n + 5}{4(n + 1)!} n! = \lim_{n \to \infty} \frac{n + 5}{4(n + 1)} \lH \lim_{n \to \infty} \frac{1}{4} = \frac{1}{4}$.  
+> Since $L < 1$, $\sum_{n = 0}^\infty \frac{(n + 4)!}{4!n!4^n}$ converges absolutely.  
+
+Proof:
+
+> The idea is that if $L < 1$, then we can compare $\sum a_n$ to a convergent geometric series.  
+> Assume $L < 1$. Then $\exists r \in \mb{R}, L < r < 1$.  
+> Note that $\lim_{n \to \infty} \abs{\frac{a_{n + 1}}{a_n}}$ means that $\exists K > 0, n \ge K \implies \abs{\frac{a_{n + 1}}{a_n}} < L$.  
+> So $\exists 0 \le N \le K, n \ge N \implies \abs{\frac{a_{n + 1}}{a_n}} < r$.  
+> Assume $n \ge N$. Then $\abs{\frac{a_{n + 1}}{a_n}} < r$ and $\abs{a_{n + 1}} < r\abs{a_n}$.  
+> So $\forall k, \abs{a_{N + k}} < \abs{a_N}r^k$. For example, $\abs{a_{N + 3}} < \abs{a_{N + 2}}r < \abs{a_{N + 1}}r^2 < \abs{a_N}r^3$.  
+> So $\sum_{k = 0}^\infty \abs{a_{N + k}} < \sum_{k = 0}^\infty \abs{a_{N}}r^k$.  
+> Clearly, $\sum_{k = 0}^\infty \abs{a_{N}}r^k = \abs{a_{N}}\sum_{k = 0}^\infty r^k$, which converges since it is a geometric series with $x < 1$.  
+> So by the comparison test, $\sum a_n < \abs{a_{N}}\sum_{k = 0}^\infty r^k$, so $\sum a_n$ converges.  
+> A similar proof can be made for the case when $L > 1$.  
+
+Another example is $e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}$. Note that if we take the limit of the series, we get the same series back.
+
+### Root Test
+
+Let $\sum a_n$ be a series. Let $L = \lim_{n \to \infty} \sqrt[n]{\abs{a_n}}$.
+
+If $L < 1$, then $\sum a_n$ converges absolutely.
+
+If $L > 1$, then $\sum a_n$ diverges.
+
+This can be proved in a manner similar to the ratio test.

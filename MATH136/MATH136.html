@@ -772,6 +772,109 @@ A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp;
 <p>Then <span class="math">\(\mathcal{B}\)</span> is linearly dependent if and only if for some <span class="math">\(1 \le i \le k\)</span>, <span class="math">\(v_i \in \spn \set{\vec{v}_1, \ldots, \vec{v}_{i - 1}, \vec{v}_{i + 1}, \ldots, \vec{v}_k}\)</span>.</p>
 <h3 id="theorem-4.1.6">Theorem 4.1.6</h3>
 <p>If <span class="math">\(\vec{0}_{\mb{V}} \in \mathcal{B}\)</span>, then <span class="math">\(\mathcal{B}\)</span> is linearly independent.</p>
+<h3 id="bases-1">Bases</h3>
+<p>A set <span class="math">\(\mathcal{B}\)</span> is a <strong>basis</strong> for the vector space <span class="math">\(\mb{V}\)</span> if and only if it spans <span class="math">\(\mb{V}\)</span> and is linearly independent.</p>
+<p>In other words, given <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> and a vector space <span class="math">\(\mb{V}\)</span>, <span class="math">\(\mathcal{B}\)</span> is a basis for <span class="math">\(\mb{V}\)</span> if and only if <span class="math">\(\spn \mathcal{B} = \mb{V}\)</span> and <span class="math">\(\mb{B}\)</span> is linearly independent.</p>
+<p>Also, the span of an empty set is <span class="math">\(\vec{0}_\mb{V}\)</span>.</p>
+<p>The vectors in a set that is a basis are known as <strong>basis vectors</strong> and are often given by <span class="math">\(\vec{e}_i\)</span> where <span class="math">\(` \le i \le n\)</span>. The basis can then be represented as <span class="math">\(\mathcal{B} = \set{\vec{e}_1, \ldots, \vec{e}_n}\)</span>.</p>
+<p>We can find bases given a vector space <span class="math">\(\mb{V}\)</span> by using the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>Write <span class="math">\(\vec{v} \in \mb{V}\)</span> in its most general form.</li>
+<li>Write <span class="math">\(\vec{v}\)</span> as a linear combination of vectors <span class="math">\(\vec{v}_1, \ldots, \vec{v}_n \in \mb{V}\)</span>.</li>
+<li>Let <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span>.</li>
+<li>Remove vectors from <span class="math">\(\mathcal{B}\)</span> until it is linearly independent.</li>
+<li><span class="math">\(\mathcal{B}\)</span> is now a basis for <span class="math">\(\mb{V}\)</span>.</li>
+</ol>
+<p>Find a basis for the subspace <span class="math">\(\mb{P} = \set{a + bx + cx^2 \in P_2(\mb{R}) \middle| a + c = b}\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(f(x) \in \mb{P}\)</span>. Clearly, <span class="math">\(f(x) = a + bx + cx^2\)</span> where <span class="math">\(a + c = b\)</span>.<br />Then <span class="math">\(f(x) = a + (a + c)x + cx^2 = a(1 + x) + c(x + x^2)\)</span>.<br />So <span class="math">\(f(x)\)</span> is a linear combination of <span class="math">\(1 + x \in \mb{P}\)</span> and <span class="math">\(x + x^2 \in \mb{P}\)</span>, so <span class="math">\(\spn \set{1 + x, x + x^2} = \mb{P}\)</span>.<br />Clearly, <span class="math">\(\set{1 + x, x + x^2}\)</span> is lienarly independent, so it is a basis for <span class="math">\(\mb{P}\)</span>.</p>
+</blockquote>
+<h3 id="unique-representation-theorem">Unique Representation Theorem</h3>
+<p>Let <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> be a basis for vector space <span class="math">\(\mb{V}\)</span>.</p>
+<p>Then for every <span class="math">\(\vec{v} \in \mb{V}\)</span> can be written as a unique linear combination of <span class="math">\(\vec{v}_1, \ldots, \vec{v}_k\)</span> (there is only one of these linear combinations).</p>
+<blockquote>
+<p>Since <span class="math">\(\mathcal{B}\)</span> spans <span class="math">\(\mb{V}\)</span>, by definition <span class="math">\(\exists c_1, \ldots, c_n \in \mb{R}, c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{v}\)</span>.<br />Let <span class="math">\(\vec{v} = d_1 \vec{v}_1 + \ldots + d_n \vec{v}_n\)</span> for some <span class="math">\(d_1, \ldots, d_n \in \mb{R}\)</span>.<br />Clearly, <span class="math">\(d_1 \vec{v}_1 + \ldots + d_n \vec{v}_n = c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n\)</span>, so <span class="math">\((c_1 - d_1) \vec{v}_1 + \ldots + (c_n - d_n) \vec{v}_n = \vec{0}_\mb{V}\)</span>.<br />Since <span class="math">\(\mathcal{B}\)</span> is linearly independent, the only solution is <span class="math">\(c_1 - d_1 = \ldots = c_n - d_n = 0\)</span>, the trivial solution.<br />So <span class="math">\(c_i = d_i\)</span> for all <span class="math">\(1 \le i \le n\)</span> and the linear combination is unique.</p>
+</blockquote>
+<p>For example, consider the polynomials vector space, <span class="math">\(P_n(\mb{R})\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(\mathcal{B} = \set{1, x, x^2, \ldots, x^n}\)</span>.<br />Clearly, <span class="math">\(\spn \mathcal{B} = P_n(\mb{R})\)</span>.<br />Clearly, <span class="math">\(\mathcal{B}\)</span> is linearly independent because <span class="math">\(c_1 1 + \ldots c_n x^n = 0 + \ldots + 0x^n \implies c_1 = \ldots = c_n = 0\)</span>.<br />In fact, we define the standard basis of <span class="math">\(P_n(\mb{R})\)</span> to be <span class="math">\(\set{1, x, x^2, \ldots, x^n}\)</span>.</p>
+</blockquote>
+<h2 id="dimension">Dimension</h2>
+<h3 id="theorem-4.2.1">Theorem 4.2.1</h3>
+<p>Let <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> be a basis for vector space <span class="math">\(\mb{V}\)</span>.</p>
+<p>If <span class="math">\(\set{\vec{w}_1, \ldots, \vec{w}_k}\)</span> is linearly independent, then <span class="math">\(k \le n\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Suppose <span class="math">\(k &gt; n\)</span>.<br />Clearly, <span class="math">\(\forall 1 \le i \le k, \vec{w}_i = a_{i, 1} \vec{v}_1 + \ldots + a_{i, n} \vec{v}_n\)</span>.<br />So <span class="math">\(c_1 \vec{w}_1 + \ldots + c_k \vec{w}_k = \vec{0}_\mb{V} = c_1 (a_{1, 1} \vec{v}_1 + \ldots + a_{1, n}) + \ldots + c_k (a_{k, 1} \vec{v}_1 + \ldots + a_{k, n}) = (c_1 a_{1, 1} + \ldots + c_k a_{k, 1}) \vec{v}_1 + \ldots + (c_1 a_{1, n} + \ldots + c_k a_{k, n}) \vec{v}_1\)</span>.<br />Since <span class="math">\(\mathcal{B}\)</span> is linearly independent, the only solution for the coefficients of <span class="math">\(\vec{v}_i\)</span> is the trivial solution, which is <span class="math">\(\begin{cases} c_1 a_{1, 1} + \ldots + c_k a_{k, 1} &amp;= 0 \\ \vdots \\ c_1 a_{1, n} + \ldots + c_k a_{k, n} &amp;= 0 \end{cases}\)</span>.<br />This solution is itself a system of linear equations that we can represent with the <span class="math">\(n \times k\)</span> coefficient matrix <span class="math">\(A\)</span>.<br />Clearly, <span class="math">\(\rank A \le n\)</span> since <span class="math">\(A\)</span> has <span class="math">\(k\)</span> columns, so there are infinite solutions.<br />So <span class="math">\(c_1 \vec{w}_1 + \ldots + c_k \vec{w}_k = \vec{0}_\mb{V}\)</span> has infinite solutions.<br />This is a contradiction because the set is linearly independent. Therefore, <span class="math">\(k &lt; n\)</span>.</p>
+</blockquote>
+<h3 id="theorem-4.2.2">Theorem 4.2.2</h3>
+<p>If <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> and <span class="math">\(\set{\vec{w}_1, \ldots, \vec{w}_k}\)</span> are both bases in <span class="math">\(\mb{V}\)</span>, then <span class="math">\(k = n\)</span>.</p>
+<p>This is easily proves using theorem 4.2.1.</p>
+<h3 id="definition">Definition</h3>
+<p>The <strong>dimension</strong> of a vector space <span class="math">\(\mb{V}\)</span> is the number of elements in a basis <span class="math">\(\mathcal{B}\)</span> of <span class="math">\(\mb{V}\)</span>.</p>
+<p>In other words, if <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> is a basis for <span class="math">\(\mb{V}\)</span>, then the dimension of <span class="math">\(\mb{V}\)</span> is <span class="math">\(\dim \mb{V} = n\)</span> and <span class="math">\(\mb{V}\)</span> is an <span class="math">\(n\)</span>-dimensional vector space.</p>
+<p>Since <span class="math">\(\set{\vec{0}_\mb{V}}\)</span> has only the basis <span class="math">\(\emptyset\)</span>, the dimension is <span class="math">\(\dim \set{\vec{0}_\mb{V}} = 0\)</span>.</p>
+<p>If the basis of a vector space has infinite elements, then the vector space is <strong>infinite-dimensional</strong>.</p>
+<p>For example:</p>
+<ul>
+<li><span class="math">\(\dim \mb{R}^n = n\)</span> since the standard basis is <span class="math">\(\set{\begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, \ldots, \begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix}}\)</span>.</li>
+<li><span class="math">\(\dim M_{m \times n}(\mb{R}) = mn\)</span> since the standard basis is a set of <span class="math">\(mn\)</span> matrices with a single 1 in unique locations.</li>
+<li><span class="math">\(\dim P_n(\mb{R}) = n + 1\)</span> since the standard basis is <span class="math">\(\set{1, x, x^2, \ldots, x^n}\)</span>.</li>
+</ul>
+<p>To find the dimension of a vector space, we simply need to find a basis.</p>
+<p>For example, find <span class="math">\(\dim \mb{W}\)</span> where <span class="math">\(\mb{W} = \set{p(x) \in P_3(\mb{R}) \middle| p(3) = 0}\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(p(x) \in \mb{W}\)</span>. Then <span class="math">\(p(3) = 0\)</span>.<br />So <span class="math">\(\exists a, b, c \in \mb{R}, p(x) = (x - 3)(a + bx + cx^2) = a(x - 3) + bx(x - 3) + cx^2(x - 3) = a(x - 3) + b(x^2 - 3x) + c(x^3 - 3x^2)\)</span>.<br />So <span class="math">\(\set{x - 3, x^2 - 3x, x^3 - 3x^2}\)</span> spans <span class="math">\(\mb{W}\)</span> and since it is linearly independent, it is a basis for <span class="math">\(\mb{W}\)</span>.<br />So <span class="math">\(\dim \mb{W} = 3\)</span>, since there are 3 elements in the basis.</p>
+</blockquote>
+<h3 id="theorem-4.2.3">Theorem 4.2.3</h3>
+<p>Given a vector space <span class="math">\(\mb{V}\)</span>:</p>
+<ul>
+<li>A set with more than <span class="math">\(\dim \mb{V}\)</span> elements is linearly dependent.</li>
+<li>A set with less than <span class="math">\(\dim \mb{V}\)</span> elements cannot span <span class="math">\(\mb{V}\)</span>.</li>
+<li>Given a set <span class="math">\(\mathcal{B}\)</span> with <span class="math">\(n\)</span> elements, <span class="math">\(\mathcal{B}\)</span> spans <span class="math">\(\mb{V}\)</span> if and only if <span class="math">\(\mathcal{B}\)</span> is linearly independent.</li>
+</ul>
+<p>;wip: prove this</p>
+<p>Let <span class="math">\(A_1 = \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}, A_2 = \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}\)</span>. Extend <span class="math">\(\set{A_1, A_2}\)</span> to be a basis for <span class="math">\(M_{2 \times 2}(\mb{R})\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\set{E_1, E_2, E_3, E_4}\)</span> spans <span class="math">\(M_{2 \times 2}(\mb{R})\)</span> where <span class="math">\(E_i\)</span> is the <span class="math">\(i\)</span>th standard basis matrix (the <span class="math">\(i\)</span>th entry in the matrix is 1 and all the others are 0).<br />So <span class="math">\(\set{A_1, A_2, E_1, \ldots, E_4}\)</span> spans <span class="math">\(M_{2 \times 2}(\mb{R})\)</span>. Let <span class="math">\(A \in M_{2 \times 2}(\mb{R})\)</span>.<br />Then <span class="math">\(\exists c_1, c_2, c_3, c_4, c_5, c_6 \in \mb{R}, A = c_1 \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 0 \end{bmatrix} + c_2 \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix} + c_3 \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix} + c_4 \begin{bmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{bmatrix} + c_5 \begin{bmatrix} 0 &amp; 0 \\ 1 &amp; 0 \end{bmatrix} + c_6 \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}\)</span>.<br />The augmented matrix for this system is <span class="math">\(\left[\begin{array}{cccccc|c} 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ \end{array}\right]\)</span>, and the RREF is <span class="math">\(\left[\begin{array}{cccccc|c} 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; -1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\ \end{array}\right]\)</span>.<br />So <span class="math">\(\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = s\begin{bmatrix} -1 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \end{bmatrix} + t\begin{bmatrix} -1 \\ 1 \\ 0 \\ 0 \\ -1 \\ 1 \end{bmatrix}, s, t \in \mb{R}\)</span>.<br />So <span class="math">\(\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = \begin{bmatrix} -1 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \end{bmatrix}\)</span> and <span class="math">\(\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = \begin{bmatrix} -1 \\ 1 \\ 0 \\ 0 \\ -1 \\ 1 \end{bmatrix}\)</span> are solutions.<br />From this we determine that <span class="math">\(E_2 = A_1 - E_1\)</span> and <span class="math">\(E_4 = A_1 - A_2 + E_3\)</span>.<br />So <span class="math">\(\spn \set{A_1, A_2, E_1, \ldots, E_4} = \spn \set{A_1, A_2, E_1, E_3}\)</span>.<br />Clearly, <span class="math">\(\set{A_1, A_2, E_1, E_3}\)</span> is linearly independent and spans <span class="math">\(M_{2 \times 2}(\mb{R})\)</span>, so it is a basis.</p>
+</blockquote>
+<h3 id="theorem-4.2.4">Theorem 4.2.4</h3>
+<p>Given <span class="math">\(n\)</span>-dimensional vector space <span class="math">\(\mb{V}\)</span> and linearly independent set <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> where <span class="math">\(k \le n\)</span>, then there exist <span class="math">\(n - k\)</span> vectors <span class="math">\(\vec{w}_{k + 1}, \ldots, \vec{w}_n\)</span> such that <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_k, \vec{w}_{k + 1}, \ldots, \vec{w}_n}\)</span> is a basis for <span class="math">\(\mb{V}\)</span>.</p>
+<p>Also, all linearly independent sets of vectors in <span class="math">\(\mb{V}\)</span> with <span class="math">\(n\)</span> elements are bases for <span class="math">\(\mb{V}\)</span>.</p>
+<p>Also, if <span class="math">\(\mb{S}\)</span> is a subspace of <span class="math">\(\mb{V}\)</span>, then <span class="math">\(\dim \mb{S} \le \dim \mb{V}\)</span>.</p>
+<h2 id="coordinates">Coordinates</h2>
+<p>Let <span class="math">\(\mb{V}\)</span> be an <span class="math">\(n\)</span>-dimensional vector space. Let <span class="math">\(\mathcal{B} = \set{\vec{e}_1, \ldots, \vec{e}_n}\)</span> be a basis for <span class="math">\(\mb{V}\)</span>. Let <span class="math">\(\vec{x} \in \mb{V}\)</span>.</p>
+<p>Then <span class="math">\(\exists c_1, \ldots, c_n \in \mb{R}, \vec{x} = c_1 \vec{e}_1 + \ldots + c_n \vec{e}_n\)</span>.</p>
+<p>The <strong>coordinate vector</strong> of <span class="math">\(\vec{x}\)</span> with respect to <span class="math">\(\mathcal{B}\)</span> is defined as <span class="math">\([\vec{x}]_\mathcal{B} = \begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}\)</span>. The <strong>coordinates</strong> are simply <span class="math">\(c_1, \ldots, c_n\)</span> - the values of the variables themselves.</p>
+<p>A <span class="math">\(\mathcal{B}\)</span>-coordinate is a coordinate with respect to <span class="math">\(\mathcal{B}\)</span>.</p>
+<p>Note that <span class="math">\(\vec{x}\)</span> is not the same thing as <span class="math">\([\vec{x}]_\mathcal{B}\)</span> - <span class="math">\(\vec{x}\)</span> can be whatever type of thing exists in the vector space, like polynomials or matrices, but <span class="math">\([\vec{x}]_\mathcal{B}\)</span> is always a vector in <span class="math">\(\mb{R}^n\)</span>.</p>
+<p>Note that all coordinates are relative to a vector, so it is important to know which basis a coordinate vector is written with respect to. The order of the basis vectors matter too, so we must give the vectors in the basis a particular fixed order.</p>
+<h3 id="theorem-4.3.2">Theorem 4.3.2</h3>
+<p>For all <span class="math">\(\vec{v}, \vec{w} \in \mb{V}, s, t \in \mb{R}\)</span>, <span class="math">\([s\vec{v} + t\vec{w}]_\mathcal{B} = s[\vec{v}]_\mathcal{B} + t[\vec{w}]_\mathcal{B}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\exists b_1, \ldots, b_n \in \mb{R}, \vec{v} = b_1 \vec{e}_1 + \ldots + b_n \vec{e}_n\)</span>.<br />Clearly, <span class="math">\(\exists c_1, \ldots, c_n \in \mb{R}, \vec{w} = c_1 \vec{e}_1 + \ldots + c_n \vec{e}_n\)</span>.<br />So <span class="math">\(s\vec{v} + t\vec{w} = (sb_1 + tc_1)\vec{v}_1 + \ldots + (sb_n + tc_n)\vec{v}_n\)</span>.<br />So <span class="math">\([s\vec{v} + t\vec{w}] = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = s\begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix} + t\begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix} = s[\vec{v}] + t[\vec{w}]\)</span>.</p>
+</blockquote>
+<h3 id="change-of-coordinates">Change of Coordinates</h3>
+<p>Sometimes, we want to change coordinates from one basis to another.</p>
+<p>Let <span class="math">\(\mb{V}\)</span> be an <span class="math">\(n\)</span>-dimensional vector space. Let <span class="math">\(\vec{x} \in \mb{V}\)</span>.</p>
+<p>Let <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> and <span class="math">\(\mathcal{C}\)</span> be bases for <span class="math">\(\mb{V}\)</span>.</p>
+<p>Given a coordinate with respect to <span class="math">\(\mathcal{B}\)</span>, we want to find a coordinate with respect to <span class="math">\(\mathcal{C}\)</span> that represents the same vector. In other words, given <span class="math">\([\vec{x}]_\mathcal{B}\)</span>, we want to quickly find <span class="math">\([\vec{x}]_\mathcal{C}\)</span>.</p>
+<p>Clearly, <span class="math">\(\exists b_1, \ldots, b_n \in \mb{R}, \vec{x} = b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n\)</span>. So <span class="math">\([\vec{x}]_\mathcal{B} = \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}\)</span>.</p>
+<p>Clearly, <span class="math">\([\vec{x}]_\mathcal{C} = [b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n]_\mathcal{C} = b_1 [\vec{v}_1]_\mathcal{C} + \ldots + b_n [\vec{v}_n]_\mathcal{C}\)</span>.</p>
+<p>We can write this using vectors or matrices: <span class="math">\([\vec{x}]_\mathcal{C} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} \\ \vdots \\ [\vec{v}_n]_\mathcal{C} \end{bmatrix} \cdot [\vec{x}]_\mathcal{B} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} &amp; \ldots &amp; [\vec{v}_n]_\mathcal{C} \end{bmatrix} [\vec{x}]_\mathcal{B}\)</span>.</p>
+<p>The matrix <span class="math">\(_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} &amp; \ldots &amp; [\vec{v}_n]_\mathcal{C} \end{bmatrix}\)</span> is called the <strong>change of coordinates matrix/change of basis matrix</strong> from <span class="math">\(\mathcal{B}\)</span> to <span class="math">\(\mathcal{C}\)</span>.</p>
+<p>This is the matrix that satisfies <span class="math">\([\vec{x}]_\mathcal{C} = _\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B}\)</span>.</p>
+<h3 id="theorem-4.3.3">Theorem 4.3.3</h3>
+<p><span class="math">\(_\mathcal{C}P_\mathcal{B} _\mathcal{B}P_\mathcal{C} = I = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(A = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B}\)</span>.<br />Then <span class="math">\(A[\vec{x}]_\mathcal{B} = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B} = _\mathcal{B}P_\mathcal{C} [\vec{x}]_\mathcal{C} = [\vec{x}]_\mathcal{B}\)</span>.<br />So <span class="math">\(A[\vec{x}]_\mathcal{B} = [\vec{x}]_\mathcal{B}\)</span>, so <span class="math">\(A = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B} = I\)</span>.<br />The same technique can be used for for <span class="math">\(_\mathcal{C}P_\mathcal{B} _\mathcal{B}P_\mathcal{C} = I\)</span>.</p>
+</blockquote>
+<p>Given <span class="math">\(\mathcal{B} = \set{1, x, x^2}, \mathcal{C} = \set{1, x + 1, (x + 1)^2}\)</span>, find <span class="math">\(_\mathcal{C}P_\mathcal{B}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [1]_\mathcal{C} &amp; [x]_\mathcal{C} &amp; [x^2]_\mathcal{C} \end{bmatrix}\)</span>.<br />Clearly, <span class="math">\([1]_\mathcal{C} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, [x]_\mathcal{C} = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}, [x^2]_\mathcal{C} = \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}\)</span>, by inspection.<br />So <span class="math">\(_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} 1 &amp; -1 &amp; 1 \\ 0 &amp; 1 &amp; -2 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

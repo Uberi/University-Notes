@@ -1338,3 +1338,202 @@ Then $\mathcal{B}$ is linearly dependent if and only if for some $1 \le i \le k$
 ### Theorem 4.1.6
 
 If $\vec{0}_{\mb{V}} \in \mathcal{B}$, then $\mathcal{B}$ is linearly independent.
+
+### Bases
+
+A set $\mathcal{B}$ is a **basis** for the vector space $\mb{V}$ if and only if it spans $\mb{V}$ and is linearly independent.
+
+In other words, given $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ and a vector space $\mb{V}$, $\mathcal{B}$ is a basis for $\mb{V}$ if and only if $\spn \mathcal{B} = \mb{V}$ and $\mb{B}$ is linearly independent.
+
+Also, the span of an empty set is $\vec{0}_\mb{V}$.
+
+The vectors in a set that is a basis are known as **basis vectors** and are often given by $\vec{e}_i$ where $` \le i \le n$. The basis can then be represented as $\mathcal{B} = \set{\vec{e}_1, \ldots, \vec{e}_n}$.
+
+We can find bases given a vector space $\mb{V}$ by using the following steps:
+
+1. Write $\vec{v} \in \mb{V}$ in its most general form.
+2. Write $\vec{v}$ as a linear combination of vectors $\vec{v}_1, \ldots, \vec{v}_n \in \mb{V}$.
+3. Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$.
+4. Remove vectors from $\mathcal{B}$ until it is linearly independent.
+5. $\mathcal{B}$ is now a basis for $\mb{V}$.
+
+Find a basis for the subspace $\mb{P} = \set{a + bx + cx^2 \in P_2(\mb{R}) \middle| a + c = b}$:
+
+> Let $f(x) \in \mb{P}$. Clearly, $f(x) = a + bx + cx^2$ where $a + c = b$.  
+> Then $f(x) = a + (a + c)x + cx^2 = a(1 + x) + c(x + x^2)$.  
+> So $f(x)$ is a linear combination of $1 + x \in \mb{P}$ and $x + x^2 \in \mb{P}$, so $\spn \set{1 + x, x + x^2} = \mb{P}$.  
+> Clearly, $\set{1 + x, x + x^2}$ is lienarly independent, so it is a basis for $\mb{P}$.  
+
+### Unique Representation Theorem
+
+Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_k}$ be a basis for vector space $\mb{V}$.
+
+Then for every $\vec{v} \in \mb{V}$ can be written as a unique linear combination of $\vec{v}_1, \ldots, \vec{v}_k$ (there is only one of these linear combinations).
+
+> Since $\mathcal{B}$ spans $\mb{V}$, by definition $\exists c_1, \ldots, c_n \in \mb{R}, c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n = \vec{v}$.  
+> Let $\vec{v} = d_1 \vec{v}_1 + \ldots + d_n \vec{v}_n$ for some $d_1, \ldots, d_n \in \mb{R}$.  
+> Clearly, $d_1 \vec{v}_1 + \ldots + d_n \vec{v}_n = c_1 \vec{v}_1 + \ldots + c_n \vec{v}_n$, so $(c_1 - d_1) \vec{v}_1 + \ldots + (c_n - d_n) \vec{v}_n = \vec{0}_\mb{V}$.  
+> Since $\mathcal{B}$ is linearly independent, the only solution is $c_1 - d_1 = \ldots = c_n - d_n = 0$, the trivial solution.  
+> So $c_i = d_i$ for all $1 \le i \le n$ and the linear combination is unique.  
+
+For example, consider the polynomials vector space, $P_n(\mb{R})$:
+
+> Let $\mathcal{B} = \set{1, x, x^2, \ldots, x^n}$.  
+> Clearly, $\spn \mathcal{B} = P_n(\mb{R})$.  
+> Clearly, $\mathcal{B}$ is linearly independent because $c_1 1 + \ldots c_n x^n = 0 + \ldots + 0x^n \implies c_1 = \ldots = c_n = 0$.  
+> In fact, we define the standard basis of $P_n(\mb{R})$ to be $\set{1, x, x^2, \ldots, x^n}$.  
+
+Dimension
+---------
+
+### Theorem 4.2.1
+
+Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ be a basis for vector space $\mb{V}$.
+
+If $\set{\vec{w}_1, \ldots, \vec{w}_k}$ is linearly independent, then $k \le n$.
+
+Proof:
+
+> Suppose $k > n$.  
+> Clearly, $\forall 1 \le i \le k, \vec{w}_i = a_{i, 1} \vec{v}_1 + \ldots + a_{i, n} \vec{v}_n$.  
+> So $c_1 \vec{w}_1 + \ldots + c_k \vec{w}_k = \vec{0}_\mb{V} = c_1 (a_{1, 1} \vec{v}_1 + \ldots + a_{1, n}) + \ldots + c_k (a_{k, 1} \vec{v}_1 + \ldots + a_{k, n}) = (c_1 a_{1, 1} + \ldots + c_k a_{k, 1}) \vec{v}_1 + \ldots + (c_1 a_{1, n} + \ldots + c_k a_{k, n}) \vec{v}_1$.  
+> Since $\mathcal{B}$ is linearly independent, the only solution for the coefficients of $\vec{v}_i$ is the trivial solution, which is $\begin{cases} c_1 a_{1, 1} + \ldots + c_k a_{k, 1} &= 0 \\ \vdots \\ c_1 a_{1, n} + \ldots + c_k a_{k, n} &= 0 \end{cases}$.  
+> This solution is itself a system of linear equations that we can represent with the $n \times k$ coefficient matrix $A$.  
+> Clearly, $\rank A \le n$ since $A$ has $k$ columns, so there are infinite solutions.  
+> So $c_1 \vec{w}_1 + \ldots + c_k \vec{w}_k = \vec{0}_\mb{V}$ has infinite solutions.  
+> This is a contradiction because the set is linearly independent. Therefore, $k < n$.  
+
+### Theorem 4.2.2
+
+If $\set{\vec{v}_1, \ldots, \vec{v}_n}$ and $\set{\vec{w}_1, \ldots, \vec{w}_k}$ are both bases in $\mb{V}$, then $k = n$.
+
+This is easily proves using theorem 4.2.1.
+
+### Definition
+
+The **dimension** of a vector space $\mb{V}$ is the number of elements in a basis $\mathcal{B}$ of $\mb{V}$.
+
+In other words, if $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ is a basis for $\mb{V}$, then the dimension of $\mb{V}$ is $\dim \mb{V} = n$ and $\mb{V}$ is an $n$-dimensional vector space.
+
+Since $\set{\vec{0}_\mb{V}}$ has only the basis $\emptyset$, the dimension is $\dim \set{\vec{0}_\mb{V}} = 0$.
+
+If the basis of a vector space has infinite elements, then the vector space is **infinite-dimensional**.
+
+For example:
+
+* $\dim \mb{R}^n = n$ since the standard basis is $\set{\begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, \ldots, \begin{bmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix}}$.
+* $\dim M_{m \times n}(\mb{R}) = mn$ since the standard basis is a set of $mn$ matrices with a single 1 in unique locations.
+* $\dim P_n(\mb{R}) = n + 1$ since the standard basis is $\set{1, x, x^2, \ldots, x^n}$.
+
+To find the dimension of a vector space, we simply need to find a basis.
+
+For example, find $\dim \mb{W}$ where $\mb{W} = \set{p(x) \in P_3(\mb{R}) \middle| p(3) = 0}$:
+
+> Let $p(x) \in \mb{W}$. Then $p(3) = 0$.  
+> So $\exists a, b, c \in \mb{R}, p(x) = (x - 3)(a + bx + cx^2) = a(x - 3) + bx(x - 3) + cx^2(x - 3) = a(x - 3) + b(x^2 - 3x) + c(x^3 - 3x^2)$.  
+> So $\set{x - 3, x^2 - 3x, x^3 - 3x^2}$ spans $\mb{W}$ and since it is linearly independent, it is a basis for $\mb{W}$.  
+> So $\dim \mb{W} = 3$, since there are 3 elements in the basis.  
+
+### Theorem 4.2.3
+
+Given a vector space $\mb{V}$:
+
+* A set with more than $\dim \mb{V}$ elements is linearly dependent.
+* A set with less than $\dim \mb{V}$ elements cannot span $\mb{V}$.
+* Given a set $\mathcal{B}$ with $n$ elements, $\mathcal{B}$ spans $\mb{V}$ if and only if $\mathcal{B}$ is linearly independent.
+
+;wip: prove this
+
+Let $A_1 = \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}, A_2 = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}$. Extend $\set{A_1, A_2}$ to be a basis for $M_{2 \times 2}(\mb{R})$:
+
+> Clearly, $\set{E_1, E_2, E_3, E_4}$ spans $M_{2 \times 2}(\mb{R})$ where $E_i$ is the $i$th standard basis matrix (the $i$th entry in the matrix is 1 and all the others are 0).  
+> So $\set{A_1, A_2, E_1, \ldots, E_4}$ spans $M_{2 \times 2}(\mb{R})$. Let $A \in M_{2 \times 2}(\mb{R})$.  
+> Then $\exists c_1, c_2, c_3, c_4, c_5, c_6 \in \mb{R}, A = c_1 \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix} + c_2 \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} + c_3 \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} + c_4 \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} + c_5 \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} + c_6 \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}$.  
+> The augmented matrix for this system is $\left[\begin{array}{cccccc|c}
+1 & 1 & 1 & 0 & 0 & 0 & 0 \\
+1 & 1 & 0 & 1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 1 & 0 & 0 \\
+0 & -1 & 0 & 0 & 0 & 1 & 0 \\
+\end{array}\right]$, and the RREF is $\left[\begin{array}{cccccc|c}
+1 & 0 & 0 & 1 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 & 0 & -1 & 0 \\
+0 & 0 & 1 & -1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 1 & 0 \\
+\end{array}\right]$.  
+> So $\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = s\begin{bmatrix} -1 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \end{bmatrix} + t\begin{bmatrix} -1 \\ 1 \\ 0 \\ 0 \\ -1 \\ 1 \end{bmatrix}, s, t \in \mb{R}$.  
+> So $\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = \begin{bmatrix} -1 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \end{bmatrix}$ and $\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = \begin{bmatrix} -1 \\ 1 \\ 0 \\ 0 \\ -1 \\ 1 \end{bmatrix}$ are solutions.  
+> From this we determine that $E_2 = A_1 - E_1$ and $E_4 = A_1 - A_2 + E_3$.  
+> So $\spn \set{A_1, A_2, E_1, \ldots, E_4} = \spn \set{A_1, A_2, E_1, E_3}$.  
+> Clearly, $\set{A_1, A_2, E_1, E_3}$ is linearly independent and spans $M_{2 \times 2}(\mb{R})$, so it is a basis.  
+
+
+### Theorem 4.2.4
+
+Given $n$-dimensional vector space $\mb{V}$ and linearly independent set $\set{\vec{v}_1, \ldots, \vec{v}_k}$ where $k \le n$, then there exist $n - k$ vectors $\vec{w}_{k + 1}, \ldots, \vec{w}_n$ such that $\set{\vec{v}_1, \ldots, \vec{v}_k, \vec{w}_{k + 1}, \ldots, \vec{w}_n}$ is a basis for $\mb{V}$.
+
+Also, all linearly independent sets of vectors in $\mb{V}$ with $n$ elements are bases for $\mb{V}$.
+
+Also, if $\mb{S}$ is a subspace of $\mb{V}$, then $\dim \mb{S} \le \dim \mb{V}$.
+
+Coordinates
+-----------
+
+Let $\mb{V}$ be an $n$-dimensional vector space. Let $\mathcal{B} = \set{\vec{e}_1, \ldots, \vec{e}_n}$ be a basis for $\mb{V}$. Let $\vec{x} \in \mb{V}$.
+
+Then $\exists c_1, \ldots, c_n \in \mb{R}, \vec{x} = c_1 \vec{e}_1 + \ldots + c_n \vec{e}_n$.
+
+The **coordinate vector** of $\vec{x}$ with respect to $\mathcal{B}$ is defined as $[\vec{x}]_\mathcal{B} = \begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}$. The **coordinates** are simply $c_1, \ldots, c_n$ - the values of the variables themselves.
+
+A $\mathcal{B}$-coordinate is a coordinate with respect to $\mathcal{B}$.
+
+Note that $\vec{x}$ is not the same thing as $[\vec{x}]_\mathcal{B}$ - $\vec{x}$ can be whatever type of thing exists in the vector space, like polynomials or matrices, but $[\vec{x}]_\mathcal{B}$ is always a vector in $\mb{R}^n$.
+
+Note that all coordinates are relative to a vector, so it is important to know which basis a coordinate vector is written with respect to. The order of the basis vectors matter too, so we must give the vectors in the basis a particular fixed order.
+
+### Theorem 4.3.2
+
+For all $\vec{v}, \vec{w} \in \mb{V}, s, t \in \mb{R}$, $[s\vec{v} + t\vec{w}]_\mathcal{B} = s[\vec{v}]_\mathcal{B} + t[\vec{w}]_\mathcal{B}$.
+
+Proof:
+
+> Clearly, $\exists b_1, \ldots, b_n \in \mb{R}, \vec{v} = b_1 \vec{e}_1 + \ldots + b_n \vec{e}_n$.  
+> Clearly, $\exists c_1, \ldots, c_n \in \mb{R}, \vec{w} = c_1 \vec{e}_1 + \ldots + c_n \vec{e}_n$.  
+> So $s\vec{v} + t\vec{w} = (sb_1 + tc_1)\vec{v}_1 + \ldots + (sb_n + tc_n)\vec{v}_n$.  
+> So $[s\vec{v} + t\vec{w}] = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = s\begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix} + t\begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix} = s[\vec{v}] + t[\vec{w}]$.  
+
+### Change of Coordinates
+
+Sometimes, we want to change coordinates from one basis to another.
+
+Let $\mb{V}$ be an $n$-dimensional vector space. Let $\vec{x} \in \mb{V}$.
+
+Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ and $\mathcal{C}$ be bases for $\mb{V}$.
+
+Given a coordinate with respect to $\mathcal{B}$, we want to find a coordinate with respect to $\mathcal{C}$ that represents the same vector. In other words, given $[\vec{x}]_\mathcal{B}$, we want to quickly find $[\vec{x}]_\mathcal{C}$.
+
+Clearly, $\exists b_1, \ldots, b_n \in \mb{R}, \vec{x} = b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n$. So $[\vec{x}]_\mathcal{B} = \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}$.
+
+Clearly, $[\vec{x}]_\mathcal{C} = [b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n]_\mathcal{C} = b_1 [\vec{v}_1]_\mathcal{C} + \ldots + b_n [\vec{v}_n]_\mathcal{C}$.
+
+We can write this using vectors or matrices: $[\vec{x}]_\mathcal{C} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} \\ \vdots \\ [\vec{v}_n]_\mathcal{C} \end{bmatrix} \cdot [\vec{x}]_\mathcal{B} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} & \ldots & [\vec{v}_n]_\mathcal{C} \end{bmatrix} [\vec{x}]_\mathcal{B}$.
+
+The matrix $_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} & \ldots & [\vec{v}_n]_\mathcal{C} \end{bmatrix}$ is called the **change of coordinates matrix/change of basis matrix** from $\mathcal{B}$ to $\mathcal{C}$.
+
+This is the matrix that satisfies $[\vec{x}]_\mathcal{C} = _\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B}$.
+
+### Theorem 4.3.3
+
+$_\mathcal{C}P_\mathcal{B} _\mathcal{B}P_\mathcal{C} = I = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B}$.
+
+Proof:
+
+> Let $A = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B}$.  
+> Then $A[\vec{x}]_\mathcal{B} = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B} = _\mathcal{B}P_\mathcal{C} [\vec{x}]_\mathcal{C} = [\vec{x}]_\mathcal{B}$.  
+> So $A[\vec{x}]_\mathcal{B} = [\vec{x}]_\mathcal{B}$, so $A = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B} = I$.  
+> The same technique can be used for for $_\mathcal{C}P_\mathcal{B} _\mathcal{B}P_\mathcal{C} = I$.  
+
+Given $\mathcal{B} = \set{1, x, x^2}, \mathcal{C} = \set{1, x + 1, (x + 1)^2}$, find $_\mathcal{C}P_\mathcal{B}$:
+
+> Clearly, $_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [1]_\mathcal{C} & [x]_\mathcal{C} & [x^2]_\mathcal{C} \end{bmatrix}$.  
+> Clearly, $[1]_\mathcal{C} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, [x]_\mathcal{C} = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}, [x^2]_\mathcal{C} = \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}$, by inspection.  
+> So $_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} 1 & -1 & 1 \\ 0 & 1 & -2 \\ 0 & 0 & 1 \end{bmatrix}$.  

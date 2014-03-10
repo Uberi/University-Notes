@@ -840,9 +840,30 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>For an absolutely convergent series, re-arrangement does nothing. This is not true for conditionally convergent series. In fact, the above can have its terms rearranged such that it sums up to any value we want, and this was proved by Riemann.</p>
 <p>For example, we will make it sum up to 1.5:</p>
 <blockquote>
-<p>First, we add up positive terms until we pass 1.5: <span class="math">\(1 + \frac{1}{3} + \frac{1}{5} \approxeq 1.53\)</span>.<br />Then we add negative terms until we fall below 1.5 again: <span class="math">\(1 + \frac{1}{3} + \frac{1}{5} - \frac{1}{2} \approxeq 1.03\)</span>.<br />Then we repeat: <span class="math">\(1 + \frac{1}{3} + \frac{1}{5} - \frac{1}{2} + \frac{1}{7} + \frac{1}{9} + \frac{1}{11} + \frac{1}{13} + \frac{1}{15} \approxeq 1.52\)</span>.<br />We can do this as many times as needed to get the desired alue.</p>
+<p>First, we add up positive terms until we pass 1.5: <span class="math">\(1 + \frac{1}{3} + \frac{1}{5} \approxeq 1.53\)</span>.<br />Then we add negative terms until we fall below 1.5 again: <span class="math">\(1 + \frac{1}{3} + \frac{1}{5} - \frac{1}{2} \approxeq 1.03\)</span>.<br />Then we repeat: <span class="math">\(1 + \frac{1}{3} + \frac{1}{5} - \frac{1}{2} + \frac{1}{7} + \frac{1}{9} + \frac{1}{11} + \frac{1}{13} + \frac{1}{15} \approxeq 1.52\)</span>.<br />We can do this as many times as needed to get the desired value.</p>
 </blockquote>
-<p>Even though there are far more positive terms than negative terms, we can do this because we have an infinite number of terms that we can add up. This only works because of the series is infinite.</p>
+<p>Even though there are far more positive terms than negative terms, we can do this because we have an infinite number of terms that we can add up. This only works because the series is infinite.</p>
+<h1 id="section-24">10/3/14</h1>
+<h2 id="ratio-test">Ratio Test</h2>
+<p>This is the most useful of the convergence tests.</p>
+<p>Let <span class="math">\(\sum a_n\)</span> be a series. Let <span class="math">\(L = \lim_{n \to \infty} \abs{\frac{a_{n + 1}}{a_n}}\)</span>.</p>
+<p>If <span class="math">\(L &lt; 1\)</span>, then <span class="math">\(\sum a_n\)</span> converges absolutely.</p>
+<p>If <span class="math">\(L &gt; 1\)</span>, then <span class="math">\(\sum a_n\)</span> diverges.</p>
+<p>Otherwise, if <span class="math">\(L = 1\)</span>, the test is inconclusive. This test is very effective for powers and factorials, and especially for power series and Taylor series.</p>
+<p>Determine if <span class="math">\(\sum_{n = 0}^\infty \frac{(n + 4)!}{4!n!4^n}\)</span> converges:</p>
+<blockquote>
+<p>We will use the ratio test.<br />Let <span class="math">\(L = \lim_{n \to \infty} \abs{\frac{((n + 1) + 4)!}{4!(n + 1)!4^(n + 1)} \frac{4!n!4^n}{(n + 4)!}} = \lim_{n \to \infty} \frac{n + 5}{4!(n + 1)!4^(n + 1)} 4!n!4^n = \lim_{n \to \infty} \frac{n + 5}{4(n + 1)!} n! = \lim_{n \to \infty} \frac{n + 5}{4(n + 1)} \lH \lim_{n \to \infty} \frac{1}{4} = \frac{1}{4}\)</span>.<br />Since <span class="math">\(L &lt; 1\)</span>, <span class="math">\(\sum_{n = 0}^\infty \frac{(n + 4)!}{4!n!4^n}\)</span> converges absolutely.</p>
+</blockquote>
+<p>Proof:</p>
+<blockquote>
+<p>The idea is that if <span class="math">\(L &lt; 1\)</span>, then we can compare <span class="math">\(\sum a_n\)</span> to a convergent geometric series.<br />Assume <span class="math">\(L &lt; 1\)</span>. Then <span class="math">\(\exists r \in \mb{R}, L &lt; r &lt; 1\)</span>.<br />Note that <span class="math">\(\lim_{n \to \infty} \abs{\frac{a_{n + 1}}{a_n}}\)</span> means that <span class="math">\(\exists K &gt; 0, n \ge K \implies \abs{\frac{a_{n + 1}}{a_n}} &lt; L\)</span>.<br />So <span class="math">\(\exists 0 \le N \le K, n \ge N \implies \abs{\frac{a_{n + 1}}{a_n}} &lt; r\)</span>.<br />Assume <span class="math">\(n \ge N\)</span>. Then <span class="math">\(\abs{\frac{a_{n + 1}}{a_n}} &lt; r\)</span> and <span class="math">\(\abs{a_{n + 1}} &lt; r\abs{a_n}\)</span>.<br />So <span class="math">\(\forall k, \abs{a_{N + k}} &lt; \abs{a_N}r^k\)</span>. For example, <span class="math">\(\abs{a_{N + 3}} &lt; \abs{a_{N + 2}}r &lt; \abs{a_{N + 1}}r^2 &lt; \abs{a_N}r^3\)</span>.<br />So <span class="math">\(\sum_{k = 0}^\infty \abs{a_{N + k}} &lt; \sum_{k = 0}^\infty \abs{a_{N}}r^k\)</span>.<br />Clearly, <span class="math">\(\sum_{k = 0}^\infty \abs{a_{N}}r^k = \abs{a_{N}}\sum_{k = 0}^\infty r^k\)</span>, which converges since it is a geometric series with <span class="math">\(x &lt; 1\)</span>.<br />So by the comparison test, <span class="math">\(\sum a_n &lt; \abs{a_{N}}\sum_{k = 0}^\infty r^k\)</span>, so <span class="math">\(\sum a_n\)</span> converges.<br />A similar proof can be made for the case when <span class="math">\(L &gt; 1\)</span>.</p>
+</blockquote>
+<p>Another example is <span class="math">\(e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}\)</span>. Note that if we take the limit of the series, we get the same series back.</p>
+<h3 id="root-test">Root Test</h3>
+<p>Let <span class="math">\(\sum a_n\)</span> be a series. Let <span class="math">\(L = \lim_{n \to \infty} \sqrt[n]{\abs{a_n}}\)</span>.</p>
+<p>If <span class="math">\(L &lt; 1\)</span>, then <span class="math">\(\sum a_n\)</span> converges absolutely.</p>
+<p>If <span class="math">\(L &gt; 1\)</span>, then <span class="math">\(\sum a_n\)</span> diverges.</p>
+<p>This can be proved in a manner similar to the ratio test.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

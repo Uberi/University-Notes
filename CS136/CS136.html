@@ -1551,6 +1551,10 @@ while (i &lt; 5) { // 1 * 6 operations
 <li><code>getchar</code> is <span class="math">\(O(1)\)</span>.</li>
 <li><code>printf</code>, <code>scanf</code> are <span class="math">\(O(n)\)</span> when working with strings, <span class="math">\(O(1)\)</span> otherwise.</li>
 </ul>
+<h3 id="fixed-inputs">Fixed Inputs</h3>
+<p>If the length of the input is fixed or has an upper bound, then it takes constant time by definition.</p>
+<p>However, practical limits such as the size of computer memory are not considered upper bounds, because technology allows us to basically arbitrarily increase this as time goes on.</p>
+<p>For example, <code>(length l)</code> is <span class="math">\(O(n)\)</span> where <span class="math">\(n\)</span> is the length of <code>l</code>, but if we know that <code>l</code> has no more than 25 elements, then <span class="math">\(n \le 25\)</span> and <span class="math">\(O(n) \le O(25)\)</span>, so this is <span class="math">\(O(1)\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
