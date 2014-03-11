@@ -1519,17 +1519,14 @@ while (i &lt; 5) { // 1 * 6 operations
 <li>Determine the size of the input given to the next recursive call.</li>
 <li>Write the function in terms of a recurrence relation and look up the closed form in the table.</li>
 </ol></li>
+<li>If the function uses iteration:
+<ol style="list-style-type: decimal">
+<li>Work from the innermost loop to the outermost, nesting their summations.</li>
+<li>Determine the number of iterations in each loop in the worst case as a function of the input size or outer loop counter.</li>
+<li>Determine the worst case running time of each iteration.</li>
+<li>Write the iteration using summation notation and simplify it.</li>
+</ol></li>
 </ol>
-<h3 id="recurrence-relations">Recurrence relations</h3>
-<p>Recurrence relations are used to analyze the running time of recursive functions.</p>
-<p>It is possible to derive <strong>closed forms</strong> for many recurrence relations - forms that are non-recursive. In this course, we encounter the following:</p>
-<ul>
-<li><span class="math">\(T(n) = O(f(n)) + T(n - k_1) = O(n) \times O(f(n))\)</span></li>
-<li><span class="math">\(T(n) = O(f(n)) + T\left(\frac{n}{c}\right) = O(\log n) \times O(f(n))\)</span></li>
-<li><span class="math">\(T(n) = O(f(n)) + c \times T\left(\frac{n}{c}\right) = O(n) \times O(f(n))\)</span></li>
-<li><span class="math">\(T(n) = O(f(n)) + T(n - k_1) + T(n - k_2) = O(2^n) \times O(f(n))\)</span></li>
-</ul>
-<p>Where <span class="math">\(k_1, k_2 \ge 1, c &gt; 1\)</span>. It is not necessary to memorize this table, though it should be intuitively obvious how it is derived.</p>
 <h3 id="racket-built-in-efficiencies">Racket Built-in Efficiencies</h3>
 <p>Function time complexities in Racket:</p>
 <ul>
@@ -1555,6 +1552,163 @@ while (i &lt; 5) { // 1 * 6 operations
 <p>If the length of the input is fixed or has an upper bound, then it takes constant time by definition.</p>
 <p>However, practical limits such as the size of computer memory are not considered upper bounds, because technology allows us to basically arbitrarily increase this as time goes on.</p>
 <p>For example, <code>(length l)</code> is <span class="math">\(O(n)\)</span> where <span class="math">\(n\)</span> is the length of <code>l</code>, but if we know that <code>l</code> has no more than 25 elements, then <span class="math">\(n \le 25\)</span> and <span class="math">\(O(n) \le O(25)\)</span>, so this is <span class="math">\(O(1)\)</span>.</p>
+<p>The time complexity is only a function of <span class="math">\(n\)</span> when it can become arbitrarily large.</p>
+<h3 id="recurrence-relations">Recurrence relations</h3>
+<p><strong>Recurrence relations</strong> are used to analyze the running time of recursive functions.</p>
+<p>It is possible to derive <strong>closed forms</strong> for many recurrence relations - forms that are non-recursive. In this course, we encounter the following:</p>
+<ul>
+<li><span class="math">\(T(n) = O(f(n)) + T(n - k_1) = O(n) \times O(f(n))\)</span></li>
+<li><span class="math">\(T(n) = O(f(n)) + T\left(\frac{n}{c}\right) = O(\log n) \times O(f(n))\)</span></li>
+<li><span class="math">\(T(n) = O(f(n)) + c \times T\left(\frac{n}{c}\right) = O(n) \times O(f(n))\)</span></li>
+<li><span class="math">\(T(n) = O(f(n)) + T(n - k_1) + T(n - k_2) = O(2^n) \times O(f(n))\)</span></li>
+</ul>
+<p>Where <span class="math">\(k_1, k_2 \ge 1, c &gt; 1\)</span>. It is not necessary to memorize this table, though it should be intuitively obvious how it is derived.</p>
+<p>Consider the following code:</p>
+<pre><code>(define (find-max lon)
+    (cond [(empty? (rest lon)) (first lon)]
+          [(&gt; (first lon) (find-max (rest lon))) (first lon)]
+          [else (find-max (rest lon))]))</code></pre>
+<p>In the worst case, when the list <code>lon</code> is sorted in ascending order, <code>find-max</code> gets recursed on twice, so <span class="math">\(T(n) = O(1) + 2T(n - 1) = O(2^n)\)</span>.</p>
+<p>However, if we avoid calling the function twice, the function can be made significantly more efficient:</p>
+<pre><code>(define (fast-max lon)
+    (cond [(empty? (rest lon)) (first lon)]
+          [else (max (first lon) (fast-max (rest lon)))]))</code></pre>
+<p>The worst case for this function is still when the list <code>lon</code> is sorted in ascending order, but since the function is only recursed on once, <span class="math">\(T(n) = O(1) + T(n - 1) = O(n)\)</span>.</p>
+<p>;wip: do an example</p>
+<h1 id="section-16">11/3/14</h1>
+<h3 id="iterative-summation">Iterative summation</h3>
+<p>Iterative functions are summed up over each iteration. ;wip</p>
+<p>For example:</p>
+<pre><code>sum = 0;
+for (i = 0; i &lt; n; i++) {
+    sum += i;
+}</code></pre>
+<p>We can write the time complexity of this code as <span class="math">\(\sum_{i = 0}^n O(1)\)</span>, since the body of the loop is <span class="math">\(O(1)\)</span>.</p>
+<p>Some commonly used summations are:</p>
+<ul>
+<li><span class="math">\(\sum_{i = 0}^{f(n)} O(g(n)) = O(f(n)) \times O(g(n))\)</span></li>
+<li><span class="math">\(\sum_{i = 0}^{f(n)} O(g(i)) = O(f(n)) \times O(g(n))\)</span></li>
+</ul>
+<p>The summation index does not have to perfectly represent the actual loop counter. For example:</p>
+<pre><code>k = n; // n is size of the input
+while (k &gt; 0) {
+    printf(&quot; * &quot;);
+    k /= 10;
+}</code></pre>
+<p>This code is <span class="math">\(\sum_{k = 0}^{\log n} O(1) = O(\log n)\)</span>.</p>
+<p>When we have nested loops, we can analyze them individually:</p>
+<pre><code>for (j = 0; j &lt; n; j++) {
+    for (i = 0; i &lt; j; i++)
+        printf(&quot; * &quot;);
+    printf(&quot;\n&quot;);
+}</code></pre>
+<p>The time complexity for this is <span class="math">\(\sum_{j = 0}^n \sum_{i = 0}^j O(1) = \sum_{j = 0}^n O(n) = O(n^2)\)</span>.</p>
+<h2 id="sorting">Sorting</h2>
+<p>Sorting is a common way to put efficiency analysis to practice.</p>
+<h3 id="insertion-sort">Insertion sort</h3>
+<p>In insertion sort, we start with the empty sorted result, and then for each element in the list, we insert it into the result, maintaining sorted order.</p>
+<p>Basically, we go one by one through the list, putting each element in its proper place.</p>
+<p>In Racket, this can be written as:</p>
+<pre><code>(define (insert n slon)
+    (cond [(empty? slon) (cons n empty)]
+          [(&lt;= n (first slon)) (cons n slon)]
+          [ else (cons (first slon) (insert n (rest slon)))]))
+
+(define (insertion-sort lon)
+    (cond [(empty? lon) empty]
+          [else (insert (first lon) (insertion-sort (rest lon)))]))</code></pre>
+<p>Clearly, <code>insert</code> is <span class="math">\(T(n) = O(1) + T(n - 1)\)</span>, or <span class="math">\(O(n)\)</span> worst case and <span class="math">\(O(1)\)</span> best case, so <code>insertion-sort</code> is <span class="math">\(T(n) = O(n) + T(n - 1)\)</span>, <span class="math">\(O(n^2)\)</span> worst case (when the numbers are sorted in reverse order) and <span class="math">\(O(n)\)</span> best case (when the numbers are already sorted).</p>
+<p>We may also want to have an in-place version - one that sorts the array without building another array in memory. For an in-place insertion sort, we start at index 1 and assume everything to the left is sorted, then for each element, we shift elements from the left rightwards until the new element can be put into the correct position:</p>
+<pre><code>void insertion_sort(int a[], int len) {
+    for (int i = 1; i &lt; len; i ++) { // go through each element
+        int value = a[i];
+        int pos = i;
+        while (pos &gt; 0 &amp;&amp; a[pos - 1] &gt; val) { // shift elements rightward until the element can be placed in sorted order
+            a[pos] = a[pos - 1];
+            pos --;
+        }
+        a[pos] = value;
+    }
+}</code></pre>
+<p>It is easy to see that the worst case time complexity is <span class="math">\(\sum_{i = 1}^n \sum_{j = 0}^i O(n) = O(n^2)\)</span> where <span class="math">\(n\)</span> is the numerical value of <code>len</code>, and the best case is <span class="math">\(O(n)\)</span>.</p>
+<h3 id="selection-sort">Selection Sort</h3>
+<p>In selection sort, we start with the empty result, pick the lowest element in the list, append it to the result, and repeat this picking and appending process until the list is empty and the result is sorted:</p>
+<pre><code>(define (find-min lon current-min)
+    (cond [(empty? lon) current-min]
+          [(&lt; (first lon) current-min) (find-min lon (first lon))]
+          [else (find-min lon current-min)]))
+
+(define (selection-sort lon)
+    (cond [(empty? (rest lon)) lon]
+          [else (define m (find-min lon)) ; O(n)
+                (cons m (selection-sort (remove m lon)))]))</code></pre>
+<p><code>selection-sort</code> is always <span class="math">\(O(n^2)\)</span>, even in the best case, since <code>find-min</code> is <span class="math">\(O(n)\)</span>.</p>
+<p>The in-place version of this can be implemented by going left to right through the an array, finding the smallest element of this one and those on the right of the current element, and swapping the current element with the smallest one:</p>
+<pre><code>void selection _ sort(int a[], int len) {
+    for (int i = 0; i &lt; len - 1; i ++) {
+        int pos = i;
+        for (int j = i + 1; j &lt; len; j ++)
+            if (a[j] &lt; a[pos]) pos = j;
+        swap(&amp;a[i], &amp;a[pos]); // see Section 06
+    }
+}</code></pre>
+<p>This implementation can be analyzed to have a worst and best case of <span class="math">\(O(n^2)\)</span></p>
+<h3 id="merge-sort">Merge Sort</h3>
+<p>In merge sort, the list is split into halves, and each of these two sublists are sorted using merge sort (merge sorting a list with one element is the same list), then merged back together:</p>
+<pre><code>(define (merge slon1 slon2)
+    (cond [(empty? slon1) slon2]
+          [(empty? slon2) slon1]
+          [(&lt; (first slon1) (first slon2))
+           (cons (first slon1) (merge (rest slon1) slon2))]
+          [else
+           (cons (first slon2) (merge slon1 (rest slon2)))]))
+
+(define (merge-sort lon)
+    (define len (length lon))
+    (define mid (quotient len 2))
+    (define left (drop-right lon mid))
+    (define right (take-right lon mid))
+    (cond [(&lt;= len 1) lon]
+          [else (merge (merge-sort left)
+                       (merge-sort right))]))</code></pre>
+<p>Note that when <code>merge</code> recurses, either the length of <code>slon1</code> or <code>slon2</code> decreases by 1. It is difficult to analyze these two values since they depend on the input, but if we define <span class="math">\(n\)</span> to be the total length of both lists, <code>(+ slon1 slon2)</code>, then we can simply say that <span class="math">\(n\)</span> decreases by 1 on each recursive call.</p>
+<p>So <code>merge</code> has a time complexity of <span class="math">\(T(n) = O(1) + T(n - 1) = O(n)\)</span>.</p>
+<p>So <code>merge-sort</code> has a time complexity of <span class="math">\(T(n) = O(n) + 2T(n / 2) = O(n \log n)\)</span>.</p>
+<p>Merge sort has a best and worst case time complexity of <span class="math">\(O(n \log n)\)</span>. In fact, this is the fastest possible time complexity for comparison sorting algorithms.</p>
+<p>Because merge sort has a reliable time complexity (as well as due to its stability and parallelizability), merge sort is very commonly used in practice. In fact, Racket's built in <code>sort</code> uses merge sort.</p>
+<p>An in-place version of merge sort is more difficult to implement than the other sorting algorithms, but it is still possible:</p>
+<p>;wip: implement it using the bottom-up approach</p>
+<h3 id="quick-sort">Quick Sort</h3>
+<p>In quick sort, on arbitrary element is selected as a pivot, and then all the other elements are either partitioned into those above this pivot, or those below this pivot. Those two subsets are then sorted using quick sort again, and then combined together afterwards:</p>
+<pre><code>(define (quick-sort lon)
+    (cond [(empty? lon) empty]
+          [else (define pivot (first lon))
+           (define less (filter (lambda (x) (&lt;= x pivot)) (rest lon)))
+           (define greater (filter (lambda (x) (&gt; x pivot)) (rest lon)))
+           (append (quick-sort less) (list pivot) (quick-sort greater))]))</code></pre>
+<p>The worst case, when the pivot is always the lowest element, makes this function have a time complexity of <span class="math">\(T(n) = O(n) + T(n - 1) = O(n^2)\)</span>.</p>
+<p>The best case, when the pivot is the median of the elements, makes this function have a time complexity of %T(n) = O(n) + T(n / 2) = O(n n)%.</p>
+<p>The in-place version works by selecting the pivot, partitioning the array, and then recursively sorting the partitions:</p>
+<pre><code>void quick_sort_range(int a[], int len, int first, int last) {
+    if (last &lt;= first) return; // size is &lt;= 1
+    int pivot = a[first]; // first element is the pivot
+    int pos = last; // where to put next larger
+    for (int i = last; i &gt; first; i --) { // move everything bigger than the pivot to the end
+        if (a[i] &gt;= pivot) {
+            swap(&amp;a[pos], &amp;a[i]);
+            pos--;
+        }
+    }
+    swap(&amp;a[first], &amp;a[pos]); // put pivot in correct place
+    quick_sort_range(a, len, first, pos - 1); // sort the left side
+    quick_sort_range(a, len, pos + 1, last); // sort the right side
+}
+
+void quick_sort(int a[], int len) {
+    quick_sort_range(a, len, 0, len - 1);
+}</code></pre>
+<p>This works the same way as the Racket version, so it also has <span class="math">\(O(n^2)\)</span> worst case time complexity and <span class="math">\(O(n \log n)\)</span> best case time complexity.</p>
+<p>Quick sort is used a lot in practice because it is very fast for a lot of real world data sets - its average case time complexity is good. There are ways to mitigate the worst case, such as by choosing a random pivot.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
