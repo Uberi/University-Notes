@@ -864,6 +864,48 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>If <span class="math">\(L &lt; 1\)</span>, then <span class="math">\(\sum a_n\)</span> converges absolutely.</p>
 <p>If <span class="math">\(L &gt; 1\)</span>, then <span class="math">\(\sum a_n\)</span> diverges.</p>
 <p>This can be proved in a manner similar to the ratio test.</p>
+<h1 id="section-25">12/3/14</h1>
+<h2 id="using-convergence-tests">Using Convergence Tests</h2>
+<p>The</p>
+<p>Let <span class="math">\(\sum a_n\)</span> be a series.</p>
+<ol style="list-style-type: decimal">
+<li>Simple Limit Test: If <span class="math">\(\lim_{n \to \infty} a_n \ne 0\)</span>, then <span class="math">\(\sum a_n\)</span> diverges.</li>
+<li>Alternating Series Test: If the series is alternating and decreasing (<span class="math">\(\abs{a_{n + 1}} &lt; \abs{a_n}\)</span>), then <span class="math">\(\sum a_n\)</span> converges.</li>
+<li>Ratio Test/Root Test: Let <span class="math">\(L = \lim_{n \to \infty} \abs{\frac{a_{n + 1}}{a_n}}\)</span> or <span class="math">\(L = \lim_{n \to \infty} \sqrt[n]{\abs{a_n}}\)</span>, whichever is easier to evaluate:
+<ol style="list-style-type: decimal">
+<li>If <span class="math">\(L &lt; 1\)</span>, then <span class="math">\(\sum a_n\)</span> converges.</li>
+<li>If <span class="math">\(L &gt; 1\)</span>, then <span class="math">\(\sum a_n\)</span> diverges.</li>
+</ol></li>
+<li>If <span class="math">\(a_n\)</span> is an algebraic (polynomials and roots) function of <span class="math">\(n\)</span>, then try using the Comparison Test with a P-series, <span class="math">\(\sum \frac{1}{n^P}\)</span>.</li>
+<li>If <span class="math">\(a_n\)</span> is closely related to a geometric series, then try using the Comparison Test with a geometric series, <span class="math">\(\sum x^n\)</span>.</li>
+<li>If <span class="math">\(f(n) = a_n\)</span> is positive, decreasing, and integrable, then try the Integral Test.</li>
+</ol>
+<p>Prove whether the following converge or diverge:</p>
+<ul>
+<li><span class="math">\(\sum_{n = 1}^\infty \frac{n^2 + 7n}{\sqrt{n^5 + 4n^3 - 2} \le \frac{1}{\sqrt{n}}\)</span>.</li>
+<li><span class="math">\(\sum_{n = 1}^\infty \frac{n + 5}{5^n}\)</span></li>
+<li><span class="math">\(\sum_{n = 1}^\infty n^2 e^{-n}\)</span></li>
+<li><span class="math">\(\sum_{n = 1}^\infty \frac{1}{(\ln n)^{\ln n}\)</span></li>
+<li><span class="math">\(\sum_{n = 1}^\infty \frac{e^\frac{1}{n}}{n^2}\)</span></li>
+</ul>
+<p>;wip</p>
+<h2 id="power-series">Power Series</h2>
+<p>A power series is a series of the form <span class="math">\(\sum_{n = 0}^\infty c_n (x - x_0)^n\)</span>, where <span class="math">\(c_n \in \mb{R}\)</span>.</p>
+<p>Here, <span class="math">\(x_0\)</span> is the <strong>center</strong> of the power series.</p>
+<p>We want to figure out for which values of <span class="math">\(x\)</span> our series converges for. For this, we will usually use the ratio test.</p>
+<p>For example, check if <span class="math">\(\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}}\)</span> converges:</p>
+<blockquote>
+<p>Let <span class="math">\(L = \lim_{n \to \infty} \abs{\frac{(-1)^{n + 1} x^{n + 1}}{3^{n + 1} \sqrt{n + 1}} \frac{3^n \sqrt{n}}{(-1)^n x^n}} = \lim_{n \to \infty} \abs{\frac{-x}{3 \sqrt{n + 1}} \sqrt{n}} = \frac{\abs{x}}{3} \lim_{n \to \infty} \frac{1}{\sqrt{n + 1}} \sqrt{n} = \frac{\abs{x}}{3} \lim_{n \to \infty} \sqrt{\frac{n}{n + 1}} = \frac{\abs{x}}{3}\)</span>. ;wip: use l'hospital's rule or something to evaluate the limit properly Clearly, <span class="math">\(L &lt; 1\)</span> whenever <span class="math">\(-3 &lt; x &lt; 3\)</span>, so the series converges for any <span class="math">\(-3 &lt; x &lt; 3\)</span>.<br />Clearly, <span class="math">\(L &gt; 1\)</span> whenever <span class="math">\(x &lt; -3 \vee x &gt; 3\)</span>, so the series diverges for any <span class="math">\(x &lt; -3 \vee x &gt; 3\)</span>.<br />Now we need to consider <span class="math">\(L = 1\)</span>, where <span class="math">\(x = \pm 3\)</span>. Assume <span class="math">\(x = 3\)</span>.<br />Then <span class="math">\(\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n 3^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n}{\sqrt{n}}\)</span>.<br />This is an alternating series, and since <span class="math">\(\lim_{n \to \infty} \frac{1}{\sqrt{n}} = 0\)</span> and <span class="math">\(\frac{1}{\sqrt{n + 1}} &lt; \frac{1}{\sqrt{n}}\)</span>, the series converges (conditionally) by the alternating series test.<br />Assume <span class="math">\(x = -3\)</span>.<br />Then <span class="math">\(\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n (-3)^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n (-1)^n 3^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{1}{\sqrt{n}}\)</span>.<br />This is a P-series where <span class="math">\(P = \frac{1}{2}\)</span>, so the series diverges.<br />So the series converges absolutely if and only if <span class="math">\(x \in (-3, 3)\)</span>, and converges conditionally for <span class="math">\(x = 3\)</span>.</p>
+</blockquote>
+<h3 id="radius-of-convergence">Radius of Convergence</h3>
+<p>The <strong>radius of convergence</strong> is the values of <span class="math">\(x\)</span> on the imaginary plane such that all numbers within this radius of <span class="math">\(x_0\)</span> allow the power series to converge.</p>
+<p>This is a number <span class="math">\(\rho \in \mb{R}\)</span> such that:</p>
+<ul>
+<li><span class="math">\(\sum_{n = 0}^\infty c_n (x - x_0)^n\)</span> converges absolutely for all <span class="math">\(\abs{x - x_0} &lt; \rho\)</span></li>
+<li><span class="math">\(\sum_{n = 0}^\infty c_n (x - x_0)^n\)</span> diverges for all <span class="math">\(\abs{x - x_0} &gt; \rho\)</span></li>
+<li><span class="math">\(\sum_{n = 0}^\infty c_n (x - x_0)^n\)</span> may converge or diverge for <span class="math">\(\abs{x - x_0} = \rho\)</span></li>
+</ul>
+<p>In the above example, the radius of convergence is 3.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

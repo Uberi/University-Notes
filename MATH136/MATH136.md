@@ -1319,6 +1319,14 @@ If $c_1 \odot \vec{v}_1 \oplus \ldots \oplus c_k \odot \vec{v}_k = \vec{0}_{\mb{
 
 This is just a generalization of the concept of linear independence in $\mb{R}^n$ into all vector spaces.
 
+Also, we can find which vectors are causing the set to be linearly dependent by following these steps:
+
+1. Write the solution to $c_1 \odot \vec{v}_1 \oplus \ldots \oplus c_k \odot \vec{v}_k = \vec{0}_{\mb{V}}$ as a vector equation in the form of $\begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix} = a_1 \vec{v}_1 + \ldots + a_n \vec{v}_n, a_1, \ldots, a_n \in \mb{R}$.
+2. For each $\vec{v}_i, 1 \le i \le n$, let $\vec{c} = \vec{v}_i$ by setting $a_i = 1$ and all other coefficients to 0.
+3. For each $\vec{c} = \vec{v}_i$, write each $c_i, 1 \le i \le n$ as a linear equation. For example, $c_4 = c_1 + c_2 + c_3$.
+4. Find the vectors that can be written in terms of the other vectors.
+5. These are the vectors that can be removed to make the set linearly independent.
+
 ### Theorem 4.1.3
 
 Then $\spn \mathcal{B}$ is a subspace of $\mb{V}$.
@@ -1517,23 +1525,23 @@ Clearly, $[\vec{x}]_\mathcal{C} = [b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n]_\math
 
 We can write this using vectors or matrices: $[\vec{x}]_\mathcal{C} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} \\ \vdots \\ [\vec{v}_n]_\mathcal{C} \end{bmatrix} \cdot [\vec{x}]_\mathcal{B} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} & \ldots & [\vec{v}_n]_\mathcal{C} \end{bmatrix} [\vec{x}]_\mathcal{B}$.
 
-The matrix $_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} & \ldots & [\vec{v}_n]_\mathcal{C} \end{bmatrix}$ is called the **change of coordinates matrix/change of basis matrix** from $\mathcal{B}$ to $\mathcal{C}$.
+The matrix ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} & \ldots & [\vec{v}_n]_\mathcal{C} \end{bmatrix}$ is called the **change of coordinates matrix/change of basis matrix** from $\mathcal{B}$ to $\mathcal{C}$.
 
-This is the matrix that satisfies $[\vec{x}]_\mathcal{C} = _\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B}$.
+This is the matrix that satisfies $[\vec{x}]_\mathcal{C} = {}_\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B}$.
 
 ### Theorem 4.3.3
 
-$_\mathcal{C}P_\mathcal{B} _\mathcal{B}P_\mathcal{C} = I = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B}$.
+${}_\mathcal{C}P_\mathcal{B} {}_\mathcal{B}P_\mathcal{C} = I = {}_\mathcal{B}P_\mathcal{C} {}_\mathcal{C}P_\mathcal{B}$.
 
 Proof:
 
-> Let $A = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B}$.  
-> Then $A[\vec{x}]_\mathcal{B} = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B} = _\mathcal{B}P_\mathcal{C} [\vec{x}]_\mathcal{C} = [\vec{x}]_\mathcal{B}$.  
-> So $A[\vec{x}]_\mathcal{B} = [\vec{x}]_\mathcal{B}$, so $A = _\mathcal{B}P_\mathcal{C} _\mathcal{C}P_\mathcal{B} = I$.  
-> The same technique can be used for for $_\mathcal{C}P_\mathcal{B} _\mathcal{B}P_\mathcal{C} = I$.  
+> Let $A = {}_\mathcal{B}P_\mathcal{C} {}_\mathcal{C}P_\mathcal{B}$.  
+> Then $A[\vec{x}]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{C} {}_\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{C} [\vec{x}]_\mathcal{C} = [\vec{x}]_\mathcal{B}$.  
+> So $A[\vec{x}]_\mathcal{B} = [\vec{x}]_\mathcal{B}$, so $A = {}_\mathcal{B}P_\mathcal{C} {}_\mathcal{C}P_\mathcal{B} = I$.  
+> The same technique can be used for for ${}_\mathcal{C}P_\mathcal{B} {}_\mathcal{B}P_\mathcal{C} = I$.  
 
-Given $\mathcal{B} = \set{1, x, x^2}, \mathcal{C} = \set{1, x + 1, (x + 1)^2}$, find $_\mathcal{C}P_\mathcal{B}$:
+Given $\mathcal{B} = \set{1, x, x^2}, \mathcal{C} = \set{1, x + 1, (x + 1)^2}$, find ${}_\mathcal{C}P_\mathcal{B}$:
 
-> Clearly, $_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [1]_\mathcal{C} & [x]_\mathcal{C} & [x^2]_\mathcal{C} \end{bmatrix}$.  
+> Clearly, ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [1]_\mathcal{C} & [x]_\mathcal{C} & [x^2]_\mathcal{C} \end{bmatrix}$.  
 > Clearly, $[1]_\mathcal{C} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, [x]_\mathcal{C} = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}, [x^2]_\mathcal{C} = \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}$, by inspection.  
-> So $_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} 1 & -1 & 1 \\ 0 & 1 & -2 \\ 0 & 0 & 1 \end{bmatrix}$.  
+> So ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} 1 & -1 & 1 \\ 0 & 1 & -2 \\ 0 & 0 & 1 \end{bmatrix}$.  

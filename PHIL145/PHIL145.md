@@ -253,7 +253,7 @@ Another is **hypothetical syllogism**:
 
 Here, P and Q represent claims that can be asserted. They can be as complicated as we like.
 
-;wip: get that list of valid forms from the slides
+There are a variety of valid forms. A sample of them is available in the Week 2 lecture slides, slide 50 in particular.
 
 We can combine argument forms to get more complex arguments. For example, hypothetical syllogism and modus ponens together:
 
@@ -1334,9 +1334,34 @@ Some examples of cognitive biases are:
 * **Confirmation bias** is the tendency to think our own beliefs or expectations are more confirmed than evidence actually warrants.
     * This is a bias because we want to evaluate all beliefs equally in order to get the most truth out of our reasoning, and this tendency causes us to give some beliefs precedence over others.
     * This bias is based on our beliefs and expectations.
-    * Situational/structural bias is the tendency to allow features of the situation to affect our evaluation of evidence. For example, sometimes an infection has symptoms, and sometimes it does not, so situational bias causes us to be biased toward identifying those with symptoms, because that is easier to detect - confirming evidence is easier to obtain.
-    * Attentional bias is the tendency to favor evidence that holds our attention, or how our attention affects how we examine evidence. For example, people might think there are a lot of bad drivers, but this may not be true, since most people do not pay attention to good drivers, only bad ones. We cannot, in practice, fous on all sources of information at once, and bias can be introduced when selecting which ones to focus on.
-    * Interpretive bias is the tendency to allow our beliefs to affect our evaluation of evidence. We tend to accept evidence in accordance to what we believe, and heavily criticise evidence against it. To believe is to think something is correct; we prefer evidence that supports what we believe is correct.
+    * **Situational/structural bias** is the tendency to allow features of the situation to affect our evaluation of evidence.
+        * For example, sometimes an infection has symptoms, and sometimes it does not, so situational bias causes us to be biased toward identifying those with symptoms, because that is easier to detect.
+        * Confirming evidence is easier to obtain, so we prefer it.
+    * **Attentional bias** is the tendency to favor evidence that holds our attention, or how our attention affects how we examine evidence.
+        * For example, people might think there are a lot of bad drivers, but this may not be true, since most people do not pay attention to good drivers, only bad ones.
+        * We cannot, in practice, focus on all sources of information at once, and bias can be introduced when selecting which ones to focus on.
+    * **Interpretive bias** is the tendency to allow our beliefs to affect our evaluation of evidence.
+        * We tend to accept evidence in accordance to what we believe, and heavily criticise evidence against it.
+        * To believe is to think something is correct; we prefer evidence that supports what we believe is correct.
+* **Egocentric bias** is the tendency to give more significance to events that involve oneself, and events that one plays a role in.
+    * There is possibly a slight evolutionary advantage to preferring beliefs about oneself.
+    * Self-serving attributions are the things we would like to believe about ourselves, such as our rationality and marality being strong.
+        * As a result, people may internalize confirming evidence, and externalize evidence otherwise - to marginalize our faults.
+        * If someone wins a board game, it is because they have good strategy. However, if they lose, it is because of bad luck. This is a bias because it favours the outcome that the person would like to believe.
+    * The **Lake Wobegon Effect** describes how the majority of people believe themselves to be above average in certain respects.
+        * For example, most people believe themselves to be more skilled at driving a car than the average driver.
+    * **Hindsight bias** is the tendency to believe that events in the past should have been predictable, while one is viewing it in hindsight.
+        * One might find that it was obvious that a problem should be solved in a certain way after finding the answer, but before finding it it would not at all be obvious.
+        * It is often the case that contributing factors and their significance are not obvious until afterwards.
+* **Communicative bias** are those biases brought about by the way we communicate.
+    * **Repetition bias** is the tendency to be more likely to believe something that is repeated more often.
+    * The **continued influence effect** is the phenomenon in which information continues to affect us even after we know it is not true.
+    * **Framing effects** are the phenomena in which the way something is described affects our judgements and memories associated with it, and can lead to different lines of reasoning about it.
+        * For example, given the same video of a car accident, describing it with verbs like "smashed" made viewers estimate the speed higher than when the video was described with verbs like "bumped". The verb "smashed" elicited perceptions of higher speed than "bumped".
+        * This is closely related to interpretive bias.
+* **Biases of memory** are those biases brought about by the way our memories work.
+    * We often judge the quality of our memories by how vivid they are, but this is not a reliable method.
+    * Memories are influenced by framing effects - it is possible to entirely fabricate memories without realizing it.
 
 **Perceptual biases** are those that affect what we perceive. They are a subset of all cognitive biases.
 
@@ -1345,3 +1370,17 @@ Most optical illusions work based on **low-level** or **bottom-up** perceptual b
 For example, if we are talking to someone, what we perceive from the lip movements can significantly affect what we hear. This is known as the McGurk effect. It probably exists to help detect errors in speech recognition and improve communication in noisy places. Interestingly, it works even if we are aware of the effect.
 
 Perceptual biases can also be introduced by explicit, conscious reasoning - **top-down** perceptual biases.
+
+# 12/3/14
+
+> Critical thinking is a matter of learning not to trust yourself too much.
+
+From this overview of biases, we can see that our reasoning is prone to being unreliable at times, however much we try to avoid it. When performing critical thinking, we must take these factors into account to reason more reliably.
+
+### Reasoning about others
+
+A **stereotype** is a set of properties associated with a certain class of objects. **Social stereotypes** are those sterotypes associated with a certain group of people.
+
+Stereotypes can lead to unreliable reasoning. It is connected to the **prototype theory** of concepts, where membership of an object in a class is defined by how close it is to the "prototypal" member of that class. For example, a stool would be considered a member of the class of furniture, because it is quite close to a prototypal piece of furniture, a chair.
+
+For example, two groups are given almost identical papers to evaluate, where one group has commonly male names on the papers and the other group has commonly female names on the papers, and the group with male names gives consistently higher scores, revealing that gender biases are much deeper than most people would think.

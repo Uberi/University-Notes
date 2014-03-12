@@ -1323,3 +1323,65 @@ If $L < 1$, then $\sum a_n$ converges absolutely.
 If $L > 1$, then $\sum a_n$ diverges.
 
 This can be proved in a manner similar to the ratio test.
+
+# 12/3/14
+
+Using Convergence Tests
+-----------------------
+
+The 
+
+Let $\sum a_n$ be a series.
+
+1. Simple Limit Test: If $\lim_{n \to \infty} a_n \ne 0$, then $\sum a_n$ diverges.
+2. Alternating Series Test: If the series is alternating and decreasing ($\abs{a_{n + 1}} < \abs{a_n}$), then $\sum a_n$ converges.
+3. Ratio Test/Root Test: Let $L = \lim_{n \to \infty} \abs{\frac{a_{n + 1}}{a_n}}$ or $L = \lim_{n \to \infty} \sqrt[n]{\abs{a_n}}$, whichever is easier to evaluate:
+    1. If $L < 1$, then $\sum a_n$ converges.
+    2. If $L > 1$, then $\sum a_n$ diverges.
+4. If $a_n$ is an algebraic (polynomials and roots) function of $n$, then try using the Comparison Test with a P-series, $\sum \frac{1}{n^P}$.
+5. If $a_n$ is closely related to a geometric series, then try using the Comparison Test with a geometric series, $\sum x^n$.
+6. If $f(n) = a_n$ is positive, decreasing, and integrable, then try the Integral Test.
+
+Prove whether the following converge or diverge:
+
+* $\sum_{n = 1}^\infty \frac{n^2 + 7n}{\sqrt{n^5 + 4n^3 - 2} \le \frac{1}{\sqrt{n}}$.
+* $\sum_{n = 1}^\infty \frac{n + 5}{5^n}$
+* $\sum_{n = 1}^\infty n^2 e^{-n}$
+* $\sum_{n = 1}^\infty \frac{1}{(\ln n)^{\ln n}$
+* $\sum_{n = 1}^\infty \frac{e^\frac{1}{n}}{n^2}$
+
+;wip
+
+Power Series
+------------
+
+A power series is a series of the form $\sum_{n = 0}^\infty c_n (x - x_0)^n$, where $c_n \in \mb{R}$.
+
+Here, $x_0$ is the **center** of the power series.
+
+We want to figure out for which values of $x$ our series converges for. For this, we will usually use the ratio test.
+
+For example, check if $\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}}$ converges:
+
+> Let $L = \lim_{n \to \infty} \abs{\frac{(-1)^{n + 1} x^{n + 1}}{3^{n + 1} \sqrt{n + 1}} \frac{3^n \sqrt{n}}{(-1)^n x^n}} = \lim_{n \to \infty} \abs{\frac{-x}{3 \sqrt{n + 1}} \sqrt{n}} = \frac{\abs{x}}{3} \lim_{n \to \infty} \frac{1}{\sqrt{n + 1}} \sqrt{n} = \frac{\abs{x}}{3} \lim_{n \to \infty} \sqrt{\frac{n}{n + 1}} = \frac{\abs{x}}{3}$.  ;wip: use l'hospital's rule or something to evaluate the limit properly
+> Clearly, $L < 1$ whenever $-3 < x < 3$, so the series converges for any $-3 < x < 3$.  
+> Clearly, $L > 1$ whenever $x < -3 \vee x > 3$, so the series diverges for any $x < -3 \vee x > 3$.  
+> Now we need to consider $L = 1$, where $x = \pm 3$. Assume $x = 3$.  
+> Then $\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n 3^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n}{\sqrt{n}}$.  
+> This is an alternating series, and since $\lim_{n \to \infty} \frac{1}{\sqrt{n}} = 0$ and $\frac{1}{\sqrt{n + 1}} < \frac{1}{\sqrt{n}}$, the series converges (conditionally) by the alternating series test.  
+> Assume $x = -3$.  
+> Then $\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n (-3)^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n (-1)^n 3^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{1}{\sqrt{n}}$.  
+> This is a P-series where $P = \frac{1}{2}$, so the series diverges.  
+> So the series converges absolutely if and only if $x \in (-3, 3)$, and converges conditionally for $x = 3$.  
+
+### Radius of Convergence
+
+The **radius of convergence** is the values of $x$ on the imaginary plane such that all numbers within this radius of $x_0$ allow the power series to converge.
+
+This is a number $\rho \in \mb{R}$ such that:
+
+* $\sum_{n = 0}^\infty c_n (x - x_0)^n$ converges absolutely for all $\abs{x - x_0} < \rho$
+* $\sum_{n = 0}^\infty c_n (x - x_0)^n$ diverges for all $\abs{x - x_0} > \rho$
+* $\sum_{n = 0}^\infty c_n (x - x_0)^n$ may converge or diverge for $\abs{x - x_0} = \rho$
+
+In the above example, the radius of convergence is 3.
