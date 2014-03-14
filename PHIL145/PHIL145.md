@@ -1275,7 +1275,21 @@ When a set of events are independent, people are prone to thinking that the even
 
 In other words, given events $x_1, \ldots, x_n$ such that $\forall 1 \le i \le n, 1 \le j \le n, P(x_i) = P(x_i \mid x_j)$ (all events are independent), it is a mistake to assume $P(x_i) \ne P(x_i \mid x_j)$.
 
-For example, if we flip a coin five times and it comes up heads every time, then we might think that we are more likely to get a tails on the next flip. However, this is false - there is still approximately a 50% chance of getting a tails, as usual.
+For example, if we flip a coin 9 times and it comes up heads every time, then it is a fallacy to think that the next flip will have anything but a 50% chance of coming up heads.
+
+### Regression Fallacy
+
+If we flip a coin 9 times and it comes up heads every time (this is a pattern that is far from the mean), then in reality, a phenomenon known as **regression to the mean** says that it is likely that the **next set of flips will average out to the mean** - that the next set of flips will be 50% heads.
+
+Regression to the mean says that if we flip enough times, eventually it will tend toward the average.
+
+Note that this does not contradict the gambler's fallacy - regression to the mean says that the next set of flips is likely to be average, while the gambler's fallacy says that the next flip is 50% likely to be heads.
+
+A **regression fallacy** is when we think the next set of flips is somehow influenced by our previous flips.
+
+For example, "Jim did exceptionally well at work last year. His performance is merely average this year, so something must have happened.".
+
+This is fallacious because it is likely that in fact this is just natural variation in performance, not caused by any external factors.
 
 ### Simpson's Paradox
 
@@ -1308,17 +1322,9 @@ Heuristics have allowed humans to become extremely effective in practical proble
 
 Biases are often useful in a variety of situations, but they usually have a small class of problematic cases. The problem is distinguishing whether a bias is helpful, or leads to reliable reasoning.
 
-For example, a **regression fallacy** is when natural fluctuations in something are mistaken to be caused by something else. For example, "Jim did exceptionally well at work last year. He started losing his hair this year, and his performance is merely average this year, so hair loss must be reducing his performance".
-
-This is fallacious because it is likely that in fact this is just natural variation in performance, not caused by any external factors.
-
 Another example of baises is seeing shapes in the clouds, or seeing faces where there are none. This may be due to the need for earlier humans to detect predators more effectively and avoid them.
 
 # 10/3/14
-
-;wip: do quiz 4 posted on wednesday
-
-;wip: assignment 2 is due on monday
 
 As a general rule, when we add quantities that have ratios, the resulting ratio is between the largest of the ratios and the smallest of the ratios.
 
@@ -1337,13 +1343,18 @@ Some examples of cognitive biases are:
     * **Situational/structural bias** is the tendency to allow features of the situation to affect our evaluation of evidence.
         * For example, sometimes an infection has symptoms, and sometimes it does not, so situational bias causes us to be biased toward identifying those with symptoms, because that is easier to detect.
         * Confirming evidence is easier to obtain, so we prefer it.
+        * We can mitagate structural bias by trying to get a balanced view with equal representation from all points of views.
     * **Attentional bias** is the tendency to favor evidence that holds our attention, or how our attention affects how we examine evidence.
         * For example, people might think there are a lot of bad drivers, but this may not be true, since most people do not pay attention to good drivers, only bad ones.
         * We cannot, in practice, focus on all sources of information at once, and bias can be introduced when selecting which ones to focus on.
+        * This can happen consciously, when we decide what evidence to examine or ignore, or unconsciously, when we automatically disregard or emphasize certain information.
+        * We are good at remembering confirming cases, but not disconfirming cases.
+        * We can mitigate this using the null hypothesis and confounds.
     * **Interpretive bias** is the tendency to allow our beliefs to affect our evaluation of evidence.
         * We tend to accept evidence in accordance to what we believe, and heavily criticise evidence against it.
         * To believe is to think something is correct; we prefer evidence that supports what we believe is correct.
 * **Egocentric bias** is the tendency to give more significance to events that involve oneself, and events that one plays a role in.
+    * This is closely related to interpretive bias.
     * There is possibly a slight evolutionary advantage to preferring beliefs about oneself.
     * Self-serving attributions are the things we would like to believe about ourselves, such as our rationality and marality being strong.
         * As a result, people may internalize confirming evidence, and externalize evidence otherwise - to marginalize our faults.
@@ -1353,6 +1364,7 @@ Some examples of cognitive biases are:
     * **Hindsight bias** is the tendency to believe that events in the past should have been predictable, while one is viewing it in hindsight.
         * One might find that it was obvious that a problem should be solved in a certain way after finding the answer, but before finding it it would not at all be obvious.
         * It is often the case that contributing factors and their significance are not obvious until afterwards.
+        * We are bad at thinking in terms of past states of information.
 * **Communicative bias** are those biases brought about by the way we communicate.
     * **Repetition bias** is the tendency to be more likely to believe something that is repeated more often.
     * The **continued influence effect** is the phenomenon in which information continues to affect us even after we know it is not true.
@@ -1384,3 +1396,11 @@ A **stereotype** is a set of properties associated with a certain class of objec
 Stereotypes can lead to unreliable reasoning. It is connected to the **prototype theory** of concepts, where membership of an object in a class is defined by how close it is to the "prototypal" member of that class. For example, a stool would be considered a member of the class of furniture, because it is quite close to a prototypal piece of furniture, a chair.
 
 For example, two groups are given almost identical papers to evaluate, where one group has commonly male names on the papers and the other group has commonly female names on the papers, and the group with male names gives consistently higher scores, revealing that gender biases are much deeper than most people would think.
+
+# 14/3/14
+
+;wip: read chapter 8
+;wip: quiz 2 is now due on march 21
+;wip: do assignment 2, due monday
+
+Apparently we didn't do much on Wednesday, probably because of the snow. This class was a review of last class' notes.

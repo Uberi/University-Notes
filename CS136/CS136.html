@@ -1477,7 +1477,8 @@ while (i &lt; 5) { // 1 * 6 operations
         [(&lt; k (first lon)) #t]
         [else (rsum&gt;? (rest lon) (- k (first lon)))]))</code></pre>
 <p>Notice that the running time now depends on both the length of <code>lon</code> and the value of <code>k</code>. We write this as <span class="math">\(T(n, k) = \ldots\)</span>.</p>
-<h2 id="time-complexity">Time Complexity</h2>
+<p>We sometimes also care about the amount of memory used for any given input.</p>
+<h2 id="asymptotic-complexity">Asymptotic Complexity</h2>
 <p>We are interested in the <strong>worst case</strong> and <strong>best case</strong> - the smallest possible running time, and the largest possible running time, given all possible inputs.</p>
 <p>In other words, we want to minimize or maximise <span class="math">\(T(n)\)</span>.</p>
 <p>For example, for <code>rsum&gt;?</code>, the best case is <span class="math">\(T(n) = 5\)</span> (if <span class="math">\(k\)</span> is less than the first element), and the worst case is <span class="math">\(T(n) = 10n + 2\)</span> (if <span class="math">\(k\)</span> is greater than the sum of the entire list).</p>
@@ -1503,7 +1504,19 @@ while (i &lt; 5) { // 1 * 6 operations
 <p>For example, <span class="math">\(T(n) = 1 + 2n + 3n^2 = O(1) + O(n) + O(n^2) = O(n^2)\)</span>.</p>
 <p>Note that at this point, this is all informal notation. Big-O notation can and will be defined more formally later on.</p>
 <p>Big-O notation isn't just for time complexity - we can fund the order of any function.</p>
-<h3 id="efficiency-analysis">Efficiency Analysis</h3>
+<h3 id="contracts">Contracts</h3>
+<p>For functions that are either:</p>
+<ul>
+<li>have <span class="math">\(O(1)\)</span> time complexity, but where this is not obvious,</li>
+<li>have a time complexity greater than <span class="math">\(O(1)\)</span>,</li>
+</ul>
+<p>We add an additional field to the contract to denote the time complexity:</p>
+<pre><code>;; merge-sort: (listof Int) -&gt; (listof Int)
+;;     PRE: true
+;;     POST: produces lon sorted in ascending order
+;;     TIME: O(n \log n), n is the length of `lon`
+(define (merge-sort lon) ...)</code></pre>
+<h2 id="efficiency-analysis">Efficiency Analysis</h2>
 <p>The lower the order of an algorithm, the more efficient it is. So a <span class="math">\(O(n \log n)\)</span> algorithm is more efficient than a <span class="math">\(O(n^2)\)</span> algorithm. If two algorithms have the same order, they are equivalent for our purposes.</p>
 <p>We can intuitively analyze an algorithm to determine its time complexity. For example, <code>rsum&gt;?</code> is clearly <span class="math">\(O(n)\)</span>, simply by inspection. However, we can also find the order algorithmically:</p>
 <ol style="list-style-type: decimal">
@@ -1517,7 +1530,8 @@ while (i &lt; 5) { // 1 * 6 operations
 <ol style="list-style-type: decimal">
 <li>Determine the order of the function if it did not use any recursion.</li>
 <li>Determine the size of the input given to the next recursive call.</li>
-<li>Write the function in terms of a recurrence relation and look up the closed form in the table.</li>
+<li>Write the running time function as a recurrence relation.</li>
+<li>Look up the closed form of the recurrence relation in the table.</li>
 </ol></li>
 <li>If the function uses iteration:
 <ol style="list-style-type: decimal">
@@ -1589,6 +1603,7 @@ for (i = 0; i &lt; n; i++) {
 <li><span class="math">\(\sum_{i = 0}^{f(n)} O(g(n)) = O(f(n)) \times O(g(n))\)</span></li>
 <li><span class="math">\(\sum_{i = 0}^{f(n)} O(g(i)) = O(f(n)) \times O(g(n))\)</span></li>
 </ul>
+<p>Note that <span class="math">\(\sum_{i = 1}^n (n - i) = \sum_{i = 0}^{n - 1} i\)</span></p>
 <p>The summation index does not have to perfectly represent the actual loop counter. For example:</p>
 <pre><code>k = n; // n is size of the input
 while (k &gt; 0) {
@@ -1602,7 +1617,7 @@ while (k &gt; 0) {
         printf(&quot; * &quot;);
     printf(&quot;\n&quot;);
 }</code></pre>
-<p>The time complexity for this is <span class="math">\(\sum_{j = 0}^n \sum_{i = 0}^j O(1) = \sum_{j = 0}^n O(n) = O(n^2)\)</span>.</p>
+<p>The time complexity for this is <span class="math">\(\sum_{j = 0}^n \left(O(1) + \sum_{i = 0}^j O(1)) = \sum_{j = 0}^n \left(O(1) + O(j)\right) = \sum_{j = 0}^n O(j) = O(n^2)\)</span>.</p>
 <h2 id="sorting">Sorting</h2>
 <p>Sorting is a common way to put efficiency analysis to practice.</p>
 <h3 id="insertion-sort">Insertion sort</h3>
@@ -1709,6 +1724,100 @@ void quick_sort(int a[], int len) {
 }</code></pre>
 <p>This works the same way as the Racket version, so it also has <span class="math">\(O(n^2)\)</span> worst case time complexity and <span class="math">\(O(n \log n)\)</span> best case time complexity.</p>
 <p>Quick sort is used a lot in practice because it is very fast for a lot of real world data sets - its average case time complexity is good. There are ways to mitigate the worst case, such as by choosing a random pivot.</p>
+<h1 id="section-17">13/3/14</h1>
+<p>Consider the <code>member</code> function for arrays inf integers in C:</p>
+<pre><code>bool member(int item, int a[], int len) {
+    for (int i=0; i &lt; len; i++)
+        if (a[i] == item)
+                return true;
+    return false;
+}</code></pre>
+<p>This runs in <span class="math">\(O(n)\)</span> time. However, if we know that the array is sorted before calling this function, we can use binary search:</p>
+<pre><code>bool sorted_member(int item, const int a[], int len) {
+    int low = 0;
+    int high = len-1;
+    while (low &lt;= high) {
+        int mid = low + (high - low) / 2;
+        if (a[mid] == item)
+            return true;
+        else if (a[mid] &lt; item)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return false;
+}</code></pre>
+<p>Since the length of <code>high - low</code> (the range of input we are looking at) is halved on each iteration, there are <span class="math">\(O(\log n)\)</span> iterations. Since each iteration is <span class="math">\(O(1)\)</span>, the function is <span class="math">\(O(\log n)\)</span>.</p>
+<h2 id="formal-big-o-notation">Formal Big-O Notation</h2>
+<p><span class="math">\(O(g(n))\)</span> is the <strong>set</strong> of all functions with &quot;order&quot; <strong>less than or equal to</strong> <span class="math">\(g(n)\)</span>.</p>
+<p>So <span class="math">\(O(1)\)</span> is actually the set of all constant functions.</p>
+<p>Since the order is less than or equal, we can say things like <span class="math">\(3 \in O(2^n)\)</span> and <span class="math">\(n^2 \in O(n^{100})\)</span>. Even though this is mathematically correct, this isn't very useful.</p>
+<p>In this course, we will always use the smallest possible order to represent a given function.</p>
+<p>Or alternatively, <span class="math">\(f(n) \in O(g(n)) \if and only if \exists c \in \mathbb{R}, n_0 &gt; 0, \forall n \in \mathbb{R}, n \ge n_0 \implies f(n) \le c \cdot g(n)\)</span>.</p>
+<p>This basically means that we can ignore constant coefficients. Also, that after a certain threshold value of <span class="math">\(n\)</span>, the order function multiplied by a constant is an upper bound for <span class="math">\(f(n)\)</span>.</p>
+<p>Prove that <span class="math">\(0.001n^3 + 1000n \in O(n^3)\)</span>:</p>
+<blockquote>
+<p>Assume <span class="math">\(n &gt; 11\)</span>. Let <span class="math">\(c = 1\)</span>. Clearly, <span class="math">\(0.001n^3 + 1000n \le 11n^3\)</span>.<br />So <span class="math">\(0.001n^3 + 1000n \in O(n^3)\)</span>.</p>
+</blockquote>
+<p>Big-O notation is the <strong>asymptotic behaviour</strong> of a function - the behaviour of a function as its input approaches infinity.</p>
+<p>In future courses, we will use the formal definition to prove algorithm complexities.</p>
+<p>There are also other notations for various asymptotic behaviours. For example, <span class="math">\(\Omega(n)\)</span> is the asymptotic lower bound, just as <span class="math">\(O(n)\)</span> is the asymptotic upper bound, and it means <span class="math">\(c \cdot g(n) \le f(n)\)</span>.</p>
+<p>As especially useful one is <span class="math">\(\Theta(n)\)</span>, which defines the exact asymptotic behaviour: <span class="math">\(c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n), c_1 \ne 0, c_2 \ne 0\)</span>. This means that <span class="math">\(\Omega(n) = O(n) \implies \Omega(n) = O(n) = \Theta(n)\)</span>.</p>
+<p>We often use <span class="math">\(O(n)\)</span> instead of <span class="math">\(\Theta(n)\)</span>, even though <span class="math">\(\Theta(n)\)</span> is more appropriate. Maybe because it's easier to type.</p>
+<p>;wip: slide 67 to 78</p>
+<h2 id="space-complexity">Space Complexity</h2>
+<p>We can also analyze the amount of memory a function uses as the input grows arbitrarily large. If two algorithms have the same time complexity, the one using less memory is often preferable, and it is in many cases faster as well.</p>
+<p>For example, consider a summing function using structural recursion:</p>
+<pre><code>(define (sum lst)
+    (cond [(empty? lst) 0]
+          [else (+ (first lst) (sum (rest lst)))]))</code></pre>
+<p>Conpare it with one that uses accumulative recursion:</p>
+<pre><code>(define (asum lst)
+    (define (asum/acc lst sofar)
+        (cond [(empty? lst) sofar]
+              [else (asum/acc (rest lst) (+ (first lst) sofar))]))
+    (asum/acc lst 0))</code></pre>
+<p>Both functions have <span class="math">\(O(n)\)</span> time complexity, but the first one uses <span class="math">\(O(n)\)</span> memory, while the second one uses <span class="math">\(O(1)\)</span> memory.</p>
+<h3 id="tail-recursion">Tail Recursion</h3>
+<p>This is because the second one uses <strong>tail recursion</strong>.</p>
+<p>Tail recursion is when the function directly returns the value of its recursive call. For example, the following are recursive:</p>
+<pre><code>(define (f n) (f n))
+(define (f n) (f (sub1 n)))
+(define (f n) (define v 5) (f (some-other-function n)))</code></pre>
+<p>But the following are not:</p>
+<pre><code>(define (f n) (add1 (f n)))
+(define (f n) (- 1 (f n)))</code></pre>
+<p>In the non-tail recursive examples, the return value is not directly the value of the recursive call - it performs some additional processing on the result before returning.</p>
+<p>Tail recursion is important because of <strong>tail recursion optimization/tail recursion elimination</strong>. Note that at the moment we call the recursive function, there is no longer any need for the current stack frame, since after the function returns, we aren't doing anything except returning that value. Therefore, we can simply destroy the current stack frame and make the recursed function return its value directly to the function that called us.</p>
+<p>Not all tail recursive functions can be optimized this way. For example, in C, a function can pass a pointer to a value in the current stack frame, which prevents us from destroying the current stack frame.</p>
+<p>Tail recursion elimination is supported in Racket and in many modern implementations of C.</p>
+<h2 id="dynamic-memory">Dynamic Memory</h2>
+<p>In C, the length of an array is always fixed. In Racket, lists can grow to an arbitrary size.</p>
+<p>This is possible because Racket lists are constructed with <strong>dynamic memory</strong>.</p>
+<p>Dynamic memory is memory allocated from the heap, while the program is running.</p>
+<p>Previously, we have used a maximum size for an array, like 80 characters for a last name. This was reasonable when we could define a clear upper bound for our input. In practice though, this is not always possible. Also, it can be very wasteful of memory.</p>
+<p>When working with these arrays, we have to keep track of both the actual length of the data stored in the array, and the maximum length of the array.</p>
+<p>This approach makes the length of the array &quot;dynamic&quot; (changeable at runtime), but the problem is that the amount of items cannot exceed the maximum.</p>
+<p>Also, the <code>exit(EXIT_CODE)</code> function, defined in <code>stdlib.h</code>, exits the program immediately. <code>stdlib.h</code> also defines <code>EXIT_SUCCESS</code> (0) and <code>EXIT_FAILURE</code> (1) for convenience.</p>
+<h3 id="heap-memory">Heap memory</h3>
+<p>The heap is used as a &quot;pool&quot; or &quot;pile&quot; of memory. Memory can be <strong>dynamically borrowed and returned</strong> from the heap.</p>
+<p>Borrowing memory from the heap is known as <strong>allocation</strong>. Returning memory to the heap is known as <strong>deallocation</strong>.</p>
+<p>Allocating too much memory - when the heap is exhausted - causes allocation to fail.</p>
+<p>The heap is located after the code, read-only data, and global data sections, and grows downwards. The stack is located at the end and grows upwards. This allows them to grow as much as possible before colliding.</p>
+<p>The heap is also known as the <strong>memory pool</strong> or <strong>free store</strong>, in order to avoid confusion with an abstract data structure also known as the heap.</p>
+<p>Likewise, there is an abstract data type known as the stack, but this is very conceptually similar to the stack in the memory model, so it is not that confusing.</p>
+<h3 id="malloc">malloc</h3>
+<p><code>void *malloc(size_t s)</code> is a function that requests <code>s</code> bytes of memory from the heap.</p>
+<p>It returns a pointer to a block of <code>s</code> bytes. If there isn't enough memory available, then the function returns <code>NULL</code>.</p>
+<p>Good implementations of <code>malloc</code> are <span class="math">\(O(1)\)</span>. In this course, we will assume that <code>malloc</code> is always <span class="math">\(O(1)\)</span>.</p>
+<p>As a result, it is highly recommended that we check for <code>NULL</code> after every <code>malloc</code>:</p>
+<pre><code>int *p = malloc(sizeof(int));
+if (p == NULL)
+    exit(EXIT_FAILURE);</code></pre>
+<p>The values at the allocated memory are uninitialized and can contain anything. <code>calloc</code> works identically to <code>malloc</code>, except it initializes the memory to 0 first. <code>calloc</code> is <span class="math">\(O(n)\)</span>, where <span class="math">\(n\)</span> is the amount of memory requested.</p>
+<p><code>void *</code> is known as a <strong>generic pointer</strong>. It is a pointer that can point to type in memory. It is basically a pointer that does not have an associated type.</p>
+<p>Since the result of <code>malloc</code> is a generic pointer, we can store any type of value in the heap.</p>
+<p><code>size_t</code> is an integer-like type that represents the size of something. The <code>sizeof</code> operator returns a <code>size_t</code> value. The placeholder for <code>size_t</code> in <code>printf</code> and similar is <code>%zd</code>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

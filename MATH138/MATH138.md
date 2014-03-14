@@ -1121,7 +1121,40 @@ One of the simplest tests for convergence is that if the terms of a series are n
 
 Formally, if $\lim_{n \to \infty} a_n \ne 0$, then the sequence does not converge.
 
+This is known as the **simple limit test** for series.
+
 Our convergence tests can decide whether a series covnerges or not, but do not provide information about what it converges to.
+
+P-series
+--------
+
+A **P-series** is a series of the form $\sum_{n = 1}^\infty \frac{1}{n^P}$m where $P \in \mb{R}$.
+
+### Convergence
+
+We want to figure out which values of $P$ allow the series to converge.
+
+Clearly, $\sum_{n = 1}^\infty \frac{1}{n^P} = \sum_{n = 1}^\infty n^{-P}$.
+
+Clearly, if $P \le 0$, then $\lim_{n \to \infty} n^{-P} \ne 0$. So by the simple limit test, the sequence does not converge.
+
+If $P > 0$, then $f(n) = \frac{1}{n^P}$ is continuous, positive, and decreasing.
+
+Clearly, $\int_1^\infty \frac{1}{x^P} \dee x = \frac{1}{1 - P} \evalat{x^{1 - P}}_1^\infty$ converges if and only if $P > 1$.
+
+So by the integral test, $\sum_{n = 1}^\infty \frac{1}{n^P}$ converges if and only if $P > 1$.
+
+So $\sum_{n = 1}^\infty \frac{1}{n^P}$ converges if and only if $P > 1$.
+
+### Considerations
+
+The series $\sum_1^\infty \frac{1}{n}$ is called the **harmonic series**. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where $P = 1$. This is a useful series because $\lim_{n \to \infty} \frac{1}{n} = 0$, yet the series diverges, so this is an example of the simple convergence test not being useful.
+
+For example, a P-series where $P = 2$ is $\frac{\pi^2}{6}$. ;wip: how?
+
+As an aside, we have closed forms for P-series for all even $P$ - always in the form of $\frac{m}{n}\pi^P$. However, we do not know anything at this time about odd $P$.
+
+For example, a P-series where $P = 3$ results in a value that has no known exact form, and is still an unsolved problem in methematics.
 
 Integral Test
 -------------
@@ -1134,25 +1167,7 @@ For example, for $\sum_{n = 0}^\infty \frac{1}{n^2}$, $f(n) = \frac{1}{n^2}$.
 
 Now we can develop the **integral test**.
 
-If $a_n = f(n)$, and $f(n)$ is **continuous**, **positive**, and **decreasing** for all $x \ge 1$, then $\int_1^\infty f(x) \dee x$ converges if and only if $\sum_{n = 1}^\infty f(n)$ converges.
-
-Given $\sum_{n = 1}^\infty \frac{1}{n^P}$, for what values of $P$ does the series converge?
-
-> Clearly, $\sum_{n = 1}^\infty \frac{1}{n^P} = \sum_{n = 1}^\infty n^{-P}$.  
-> Clearly, if $P \le 0$, then $\lim_{n \to \infty} n^{-P} \ne 0$ and the sequence does not converge.  
-> If $P > 0$, then $f(n) = \frac{1}{n^P}$ is continuous, positive, and decreasing.
-> Clearly, $\int_1^\infty \frac{1}{x^P} \dee x = \frac{1}{1 - P} \evalat{x^{1 - P}}_1^\infty$ converges if and only if $P > 1$.  
-> So $\sum_{n = 1}^\infty \frac{1}{n^P}$ converges if and only if $P > 1$.  
-
-This is the Riemann zeta function, and is often called the **P-series**.
-
-The series $\sum_1^\infty \frac{1}{n}$ is called the **harmonic series**. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where $P = 1$. This is a useful series because $\lim_{n \to \infty} \frac{1}{n} = 0$, yet the series diverges, so this is an example of the simple convergence test not being useful.
-
-For example, a P-series where $P = 2$ is $\frac{\pi^2}{6}$. ;wip: how?
-
-As an aside, we have closed forms for the infinite limit of P-series for all even $P$ - always in the form of $\frac{m}{n}\pi^P$. However, we do not know anything at this time about odd $P$.
-
-For example, a P-series where $P = 3$ results in a value that has no known exact form, and is still an unsolved problem in methematics.
+Given $f(n) = a_n$, if $f(n)$ is **continuous**, **positive**, and **decreasing** for all $n \ge 1$, then $\int_1^\infty f(n) \dee n$ converges if and only if $\sum_{n = 1}^\infty f(n)$ converges.
 
 ### Error Estimation
 
@@ -1161,6 +1176,8 @@ For series that satisfy the hypetheses of the integral test, we can estimate the
 This is useful because we can't explicitly calculate $\sum_1^\infty a_n$, but we can calculate $\sum_1^N a_n$.
 
 So given $f(n) = a_n$ being continuous, positive, and decreasing, the error is bounded by $\int_{N + 1}^\infty f(x) \dee x \le R_N \le \int_N^\infty f(x) \dee x$.
+
+In other words, the error is bounded between $\int_{N + 1}^\infty f(x)$ and $\int_N^\infty f(x) \dee x$.
 
 For example, for the series $S_N = \sum_{n = 1}^N \frac{1}{n^2}$, $S_{10} \approxeq 1.54977$. We know that since $f(n) = \frac{1}{n^2}$ is continuous, positive, and decreasing, and $\int_1^\infty \frac{1}{n^2}$. ;wip
 
@@ -1214,7 +1231,7 @@ For example, $\sum_1^\infty \frac{1}{2^nn} \le \sum_1^\infty \frac{1}{2^n} = \su
 Does $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}$ exist?
 
 > Clearly, $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} < \sum_1^\infty \frac{1}{n}$.  
-> Using the limit comparison test, $\rho = \li_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1$.  
+> Using the limit comparison test, $\rho = \lim_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1$.  
 > Since $0 < \rho < \infty$, and $\sum_1^\infty \frac{1}{n}$ diverges, then $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}$ also diverges.  
 
 Proof of limit comparison test:
@@ -1241,17 +1258,19 @@ These usually take the form of $\sum a_n = \sum (-1)^n p_n, p_n > 0$.
 
 Alternating series are useful to study because they have several useful properties.
 
-For an alternating series, if $\lim_{n \to \infty} p_n = 0$, and $p_{n + 1} \le p_n$, then the series converges.
+### Error
 
-In other words, if the terms of the sum tend to 0, and they are monotonically decreasing, then the series converges. This is one of the simplest convergence tests, but it only works on alternating series.
-
-Also, the remainder/error after $N$ terms is easy to estimate. $\abs{R_N} = \abs{\sum^\infty (-1)^n p_n - \sum^N (-1)^n p_n} \le p_{N + 1}$.
+The remainder/error after $N$ terms is easy to estimate. Clearly, $\abs{R_N} = \abs{\sum^\infty (-1)^n p_n - \sum^N (-1)^n p_n}$. So $\abs{R_N} \le p_{N + 1}$.
 
 This is true because the terms of the series keep bouncing back and forth across the limit, so the remainder is always less than or equal to the value of each term.
 
 For example, $\sum_1^\infty (-1)^{n + 1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \ldots = \ln 2$. We can estimate the error with $\abs{R_N} = \frac{1}{N + 1}$.
 
 ### Convergence
+
+For an alternating series, if $\lim_{n \to \infty} p_n = 0$, and $p_{n + 1} \le p_n$, then the series converges.
+
+In other words, if the terms of the sum tend to 0, and they are monotonically decreasing, then the series converges. This is one of the simplest convergence tests, but it only works on alternating series.
 
 Alternating series also have special nomenclature that can be applied to them.
 
@@ -1329,8 +1348,6 @@ This can be proved in a manner similar to the ratio test.
 Using Convergence Tests
 -----------------------
 
-The 
-
 Let $\sum a_n$ be a series.
 
 1. Simple Limit Test: If $\lim_{n \to \infty} a_n \ne 0$, then $\sum a_n$ diverges.
@@ -1355,7 +1372,7 @@ Prove whether the following converge or diverge:
 Power Series
 ------------
 
-A power series is a series of the form $\sum_{n = 0}^\infty c_n (x - x_0)^n$, where $c_n \in \mb{R}$.
+A power series is a series of the form $\sum_{n = 0}^\infty a_n (x - x_0)^n$, where $a_n \in \mb{R}$.
 
 Here, $x_0$ is the **center** of the power series.
 
@@ -1376,7 +1393,11 @@ For example, check if $\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}}$ conv
 
 ### Radius of Convergence
 
-The **radius of convergence** is the values of $x$ on the imaginary plane such that all numbers within this radius of $x_0$ allow the power series to converge.
+The **radius of convergence** for a power series is the maximum magnitude of the values of $x$ on the imaginary plane such that all numbers inside this radius of $x_0$ allow the power series to converge absolutely, and all numbers outside of this radius diverge.
+
+The behaviour at the radius is not important.
+
+The values of $x$ that allow the series to converge are known as the **interval of convergence**.
 
 This is a number $\rho \in \mb{R}$ such that:
 
@@ -1385,3 +1406,59 @@ This is a number $\rho \in \mb{R}$ such that:
 * $\sum_{n = 0}^\infty c_n (x - x_0)^n$ may converge or diverge for $\abs{x - x_0} = \rho$
 
 In the above example, the radius of convergence is 3.
+
+All geometric series are power series where $a_n = 1$ and $x_0 = 0$.
+
+The interval of convergence for a geometric series $\sum_{n = 0}^\infty x^n$ is $\abs{x} < 1$.
+
+# 14/3/14
+
+Within the radius of convergence, a power series behaves like an ordinary function. The idea is that if we are inside the radius of convergence, then we can treat the infinite series like a finite polynomial.
+
+Let $f(x) = \sum_{n = 0}^\infty a_n (x - x_0)^n, g(x) = \sum_{n = 0}^\infty b_n (x - x_0)^n$:
+
+* $f(x) \pm g(x) = \sum_{n = 0}^\infty (a_n \pm b_n) (x - x_0)^n$.
+* $f(x) g(x) = \sum_{n = 0}^\infty c_n (x - x_0)^n$ where $c_n = a_0 b_n + a_1 b_{n - 1} + \ldots + a_{n - 1} b_1 + a_n b_0$.
+* If $g(x) \ne 0$, then $\frac{f(x)}{g(x)} = \sum_{n = 0}^\infty d_n (x - x_0)^n$ ;wip: what is d_n?
+
+More importantly, we can differentiate and integrate the terms of the sum:
+
+So $\frac{\dee f}{\dee x} = \frac{\dee}{\dee x} (a_0 + a_1(x - x_0) + a_2 (x - x_0)^2 + \ldots) = 0 + a_1 + 2a_2 (x - x_0) + \ldots$. Note that the first term became 0, so we don't need to sum it.
+
+So $\frac{\dee f}{\dee x} = \sum_{n = 0}^\infty a_n n(x - x_0)^{n - 1}$.
+
+So $\int f(x) \dee x = \sum_{n = 0}^\infty \int a_n (x - x_0)^n \dee x = c + \sum_{n = 0}^\infty a_n \frac{(x - x_0)^{n + 1}}{n + 1}$.
+
+Find the power series of $\frac{1}{1 - x}$ and use it to approximate $\ln$:
+
+> Clearly, this is the value of the geometric series, as we saw earlier: $\frac{1}{1 - x} = \sum_{n = 0}^\infty x^n$ for $\abs{x} < 1$.  
+> Clearly, $\int_0^t \frac{1}{1 - x} \dee x = -\ln \abs{1 - t} = \sum_{n = 0}^\infty \int_0^t x^n \dee x = \sum_{n = 0}^\infty \frac{t^{n + 1}}{n + 1}$ for $\abs{t} < 1$.  
+> So $\ln \abs{1 - t} = -\sum_{n = 1}^\infty \frac{t^n}{n}$ for $\abs{t} < 1$.  
+> Note that this only works for $\abs{t} < 1$. However, there are tricks we can use to avoid this issue.  
+> For example, we can't use this approximation to find $\ln 3$, since for $\ln \abs{1 - t}$, $t = -2$, but note that $\ln \frac{1}{3} = -\ln 3$, so $\ln 3 = -\ln \frac{1}{3} = -\ln \abs{1 - \frac{2}{3}} = \sum_{n = 1}^\infty \frac{1}{n} \frac{2}{3}^n$.  
+> We want a general form for all values in the domain of $\ln x$, so $x > 0$.  
+> Clearly, $\ln \abs{1 - (-t)} - \ln \abs{1 - t} = \ln \abs{\frac{1 + t}{1 - t}} = -\sum_{n = 1}^\infty \frac{(-t)^n}{n} + \sum_{n = 1}^\infty \frac{t^n}{n} = \sum_{n = 1}^\infty (1 - (-1)^n)\frac{t^n}{n} = 2t + \frac{2}{3}t^3 + \frac{2}{5}t^5 + \ldots = \sum_{n = 1}^\infty \frac{2}{2n - 1}t^{2n - 1}$.  
+> Let $x = \abs{\frac{1 + t}{1 - t}}$. Then $t = \abs{\frac{x - 1}{x + 1}} = \frac{x - 1}{x + 1}$, since $x > 0$.  
+> So $\abs{t} < 1 \iff -x < x < x + 2 \iff x > 0$, so $\abs{t} < 1$ for all $x$ in the domain, as required.  
+> Then we can write $\ln x = \ln \frac{1 + t}{1 - t} = \sum_{n = 1}^\infty \frac{2}{2n - 1}\left(\frac{x - 1}{x + 1}\right)^{2n - 1}$, for $x > 0$.  
+
+This is actually how calculators evaluate these sorts of functions - by calculating the partial sums of a power series to a given error.
+
+Find the power series for $\frac{1}{1 + x^2}$ and use it to approximate $\arctan$:
+
+> Let $u = -x^2$. Then $\frac{1}{1 + x^2} = \frac{1}{1 - u} = \sum_{n = 0}^\infty u^n = \sum_{n = 0}^\infty (-1)^n x^{2n}$ for $\abs{u} < 1$.  
+> Clearly, $\int_0^t \frac{1}{1 + x^2} \dee x = \arctan t = \sum_{n = 0}^\infty \int_0^t (-1)^n x^{2n} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}$ for $\abs{t} < t$.  
+> So $\arctan t = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}$ for $-1 < t < 1$.  
+
+Taylor Series
+-------------
+
+What power series is identical to a function $f(x)$ and all its derivatives at a point $x = x_0$?
+
+For $\abs{x - x_0} < \rho$, where $\rho$ is the radius of convergence, $f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$ where $f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}$, and $f^{(0)}(x_0) = f(x_0)$.
+
+Find the Taylor polynomial for $e^x$ and use it to estimate $\int_0^1 e^{-x^2} \dee x$:
+
+> Let $f(x) = e^x, x_0 = 0$. Then $\evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0} = \evalat{e^x}_{x = x_0} = 1$.  
+> Then $f(x) = e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}$.  
+> So $\int_0^1 e^{-x^2} \dee x = \int_0^1 f(-x^2) \dee x = \sum_{n = 0}^\infty \int_0^1 \frac{(-x^2)^n}{n!} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{n!(2n + 1)}$.  

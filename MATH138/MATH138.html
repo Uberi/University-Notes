@@ -760,26 +760,34 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <h3 id="convergence">Convergence</h3>
 <p>One of the simplest tests for convergence is that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, <span class="math">\(\lim_{n \to \infty} a_n = 0\)</span> is a requirement for convergence.</p>
 <p>Formally, if <span class="math">\(\lim_{n \to \infty} a_n \ne 0\)</span>, then the sequence does not converge.</p>
+<p>This is known as the <strong>simple limit test</strong> for series.</p>
 <p>Our convergence tests can decide whether a series covnerges or not, but do not provide information about what it converges to.</p>
+<h2 id="p-series">P-series</h2>
+<p>A <strong>P-series</strong> is a series of the form <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span>m where <span class="math">\(P \in \mb{R}\)</span>.</p>
+<h3 id="convergence-1">Convergence</h3>
+<p>We want to figure out which values of <span class="math">\(P\)</span> allow the series to converge.</p>
+<p>Clearly, <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P} = \sum_{n = 1}^\infty n^{-P}\)</span>.</p>
+<p>Clearly, if <span class="math">\(P \le 0\)</span>, then <span class="math">\(\lim_{n \to \infty} n^{-P} \ne 0\)</span>. So by the simple limit test, the sequence does not converge.</p>
+<p>If <span class="math">\(P &gt; 0\)</span>, then <span class="math">\(f(n) = \frac{1}{n^P}\)</span> is continuous, positive, and decreasing.</p>
+<p>Clearly, <span class="math">\(\int_1^\infty \frac{1}{x^P} \dee x = \frac{1}{1 - P} \evalat{x^{1 - P}}_1^\infty\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span>.</p>
+<p>So by the integral test, <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span>.</p>
+<p>So <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span>.</p>
+<h3 id="considerations">Considerations</h3>
+<p>The series <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> is called the <strong>harmonic series</strong>. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where <span class="math">\(P = 1\)</span>. This is a useful series because <span class="math">\(\lim_{n \to \infty} \frac{1}{n} = 0\)</span>, yet the series diverges, so this is an example of the simple convergence test not being useful.</p>
+<p>For example, a P-series where <span class="math">\(P = 2\)</span> is <span class="math">\(\frac{\pi^2}{6}\)</span>. ;wip: how?</p>
+<p>As an aside, we have closed forms for P-series for all even <span class="math">\(P\)</span> - always in the form of <span class="math">\(\frac{m}{n}\pi^P\)</span>. However, we do not know anything at this time about odd <span class="math">\(P\)</span>.</p>
+<p>For example, a P-series where <span class="math">\(P = 3\)</span> results in a value that has no known exact form, and is still an unsolved problem in methematics.</p>
 <h2 id="integral-test">Integral Test</h2>
 <p>This is based on the connection between an infinite series (like a Riemann sum) and integration.</p>
 <p>Let <span class="math">\(\sum_{n = 0}^\infty a_n\)</span> be an infinite series. Then we can write <span class="math">\(a_n\)</span> be a function of <span class="math">\(n\)</span>, like <span class="math">\(f(n)\)</span>.</p>
 <p>For example, for <span class="math">\(\sum_{n = 0}^\infty \frac{1}{n^2}\)</span>, <span class="math">\(f(n) = \frac{1}{n^2}\)</span>.</p>
 <p>Now we can develop the <strong>integral test</strong>.</p>
-<p>If <span class="math">\(a_n = f(n)\)</span>, and <span class="math">\(f(n)\)</span> is <strong>continuous</strong>, <strong>positive</strong>, and <strong>decreasing</strong> for all <span class="math">\(x \ge 1\)</span>, then <span class="math">\(\int_1^\infty f(x) \dee x\)</span> converges if and only if <span class="math">\(\sum_{n = 1}^\infty f(n)\)</span> converges.</p>
-<p>Given <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span>, for what values of <span class="math">\(P\)</span> does the series converge?</p>
-<blockquote>
-<p>Clearly, <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P} = \sum_{n = 1}^\infty n^{-P}\)</span>.<br />Clearly, if <span class="math">\(P \le 0\)</span>, then <span class="math">\(\lim_{n \to \infty} n^{-P} \ne 0\)</span> and the sequence does not converge.<br />If <span class="math">\(P &gt; 0\)</span>, then <span class="math">\(f(n) = \frac{1}{n^P}\)</span> is continuous, positive, and decreasing. Clearly, <span class="math">\(\int_1^\infty \frac{1}{x^P} \dee x = \frac{1}{1 - P} \evalat{x^{1 - P}}_1^\infty\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span>.<br />So <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span>.</p>
-</blockquote>
-<p>This is the Riemann zeta function, and is often called the <strong>P-series</strong>.</p>
-<p>The series <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> is called the <strong>harmonic series</strong>. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where <span class="math">\(P = 1\)</span>. This is a useful series because <span class="math">\(\lim_{n \to \infty} \frac{1}{n} = 0\)</span>, yet the series diverges, so this is an example of the simple convergence test not being useful.</p>
-<p>For example, a P-series where <span class="math">\(P = 2\)</span> is <span class="math">\(\frac{\pi^2}{6}\)</span>. ;wip: how?</p>
-<p>As an aside, we have closed forms for the infinite limit of P-series for all even <span class="math">\(P\)</span> - always in the form of <span class="math">\(\frac{m}{n}\pi^P\)</span>. However, we do not know anything at this time about odd <span class="math">\(P\)</span>.</p>
-<p>For example, a P-series where <span class="math">\(P = 3\)</span> results in a value that has no known exact form, and is still an unsolved problem in methematics.</p>
+<p>Given <span class="math">\(f(n) = a_n\)</span>, if <span class="math">\(f(n)\)</span> is <strong>continuous</strong>, <strong>positive</strong>, and <strong>decreasing</strong> for all <span class="math">\(n \ge 1\)</span>, then <span class="math">\(\int_1^\infty f(n) \dee n\)</span> converges if and only if <span class="math">\(\sum_{n = 1}^\infty f(n)\)</span> converges.</p>
 <h3 id="error-estimation">Error Estimation</h3>
 <p>For series that satisfy the hypetheses of the integral test, we can estimate the error/remainder <span class="math">\(R_N = \sum_1^\infty a_n - \sum_1^N a_n\)</span> for any <span class="math">\(N\)</span>.</p>
 <p>This is useful because we can't explicitly calculate <span class="math">\(\sum_1^\infty a_n\)</span>, but we can calculate <span class="math">\(\sum_1^N a_n\)</span>.</p>
 <p>So given <span class="math">\(f(n) = a_n\)</span> being continuous, positive, and decreasing, the error is bounded by <span class="math">\(\int_{N + 1}^\infty f(x) \dee x \le R_N \le \int_N^\infty f(x) \dee x\)</span>.</p>
+<p>In other words, the error is bounded between <span class="math">\(\int_{N + 1}^\infty f(x)\)</span> and <span class="math">\(\int_N^\infty f(x) \dee x\)</span>.</p>
 <p>For example, for the series <span class="math">\(S_N = \sum_{n = 1}^N \frac{1}{n^2}\)</span>, <span class="math">\(S_{10} \approxeq 1.54977\)</span>. We know that since <span class="math">\(f(n) = \frac{1}{n^2}\)</span> is continuous, positive, and decreasing, and <span class="math">\(\int_1^\infty \frac{1}{n^2}\)</span>. ;wip</p>
 <h1 id="section-21">3/3/14</h1>
 <h2 id="comparison-test-series">Comparison Test (Series)</h2>
@@ -812,7 +820,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>For example, <span class="math">\(\sum_1^\infty \frac{1}{2^nn} \le \sum_1^\infty \frac{1}{2^n} = \sum_1^\infty \left(\frac{1}{2}\right)^n\)</span>, which converges since it is a geometric series with <span class="math">\(x = \frac{1}{2}\)</span>.</p>
 <p>Does <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}\)</span> exist?</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} &lt; \sum_1^\infty \frac{1}{n}\)</span>.<br />Using the limit comparison test, <span class="math">\(\rho = \li_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1\)</span>.<br />Since <span class="math">\(0 &lt; \rho &lt; \infty\)</span>, and <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> diverges, then <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}\)</span> also diverges.</p>
+<p>Clearly, <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} &lt; \sum_1^\infty \frac{1}{n}\)</span>.<br />Using the limit comparison test, <span class="math">\(\rho = \lim_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1\)</span>.<br />Since <span class="math">\(0 &lt; \rho &lt; \infty\)</span>, and <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> diverges, then <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}\)</span> also diverges.</p>
 </blockquote>
 <p>Proof of limit comparison test:</p>
 <blockquote>
@@ -824,12 +832,13 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>These are series where the sign of the terms alternate.</p>
 <p>These usually take the form of <span class="math">\(\sum a_n = \sum (-1)^n p_n, p_n &gt; 0\)</span>.</p>
 <p>Alternating series are useful to study because they have several useful properties.</p>
-<p>For an alternating series, if <span class="math">\(\lim_{n \to \infty} p_n = 0\)</span>, and <span class="math">\(p_{n + 1} \le p_n\)</span>, then the series converges.</p>
-<p>In other words, if the terms of the sum tend to 0, and they are monotonically decreasing, then the series converges. This is one of the simplest convergence tests, but it only works on alternating series.</p>
-<p>Also, the remainder/error after <span class="math">\(N\)</span> terms is easy to estimate. <span class="math">\(\abs{R_N} = \abs{\sum^\infty (-1)^n p_n - \sum^N (-1)^n p_n} \le p_{N + 1}\)</span>.</p>
+<h3 id="error">Error</h3>
+<p>The remainder/error after <span class="math">\(N\)</span> terms is easy to estimate. Clearly, <span class="math">\(\abs{R_N} = \abs{\sum^\infty (-1)^n p_n - \sum^N (-1)^n p_n}\)</span>. So <span class="math">\(\abs{R_N} \le p_{N + 1}\)</span>.</p>
 <p>This is true because the terms of the series keep bouncing back and forth across the limit, so the remainder is always less than or equal to the value of each term.</p>
 <p>For example, <span class="math">\(\sum_1^\infty (-1)^{n + 1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \ldots = \ln 2\)</span>. We can estimate the error with <span class="math">\(\abs{R_N} = \frac{1}{N + 1}\)</span>.</p>
-<h3 id="convergence-1">Convergence</h3>
+<h3 id="convergence-2">Convergence</h3>
+<p>For an alternating series, if <span class="math">\(\lim_{n \to \infty} p_n = 0\)</span>, and <span class="math">\(p_{n + 1} \le p_n\)</span>, then the series converges.</p>
+<p>In other words, if the terms of the sum tend to 0, and they are monotonically decreasing, then the series converges. This is one of the simplest convergence tests, but it only works on alternating series.</p>
 <p>Alternating series also have special nomenclature that can be applied to them.</p>
 <p>Let <span class="math">\(\sum a_n = \sum (-1)^n p_n\)</span> be an alternating series.</p>
 <p><span class="math">\(\sum a_n\)</span> is <strong>absolutely convergent</strong> if <span class="math">\(\sum a_n\)</span> and <span class="math">\(\sum \abs{a_n}\)</span> converge.</p>
@@ -866,7 +875,6 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>This can be proved in a manner similar to the ratio test.</p>
 <h1 id="section-25">12/3/14</h1>
 <h2 id="using-convergence-tests">Using Convergence Tests</h2>
-<p>The</p>
 <p>Let <span class="math">\(\sum a_n\)</span> be a series.</p>
 <ol style="list-style-type: decimal">
 <li>Simple Limit Test: If <span class="math">\(\lim_{n \to \infty} a_n \ne 0\)</span>, then <span class="math">\(\sum a_n\)</span> diverges.</li>
@@ -890,7 +898,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 </ul>
 <p>;wip</p>
 <h2 id="power-series">Power Series</h2>
-<p>A power series is a series of the form <span class="math">\(\sum_{n = 0}^\infty c_n (x - x_0)^n\)</span>, where <span class="math">\(c_n \in \mb{R}\)</span>.</p>
+<p>A power series is a series of the form <span class="math">\(\sum_{n = 0}^\infty a_n (x - x_0)^n\)</span>, where <span class="math">\(a_n \in \mb{R}\)</span>.</p>
 <p>Here, <span class="math">\(x_0\)</span> is the <strong>center</strong> of the power series.</p>
 <p>We want to figure out for which values of <span class="math">\(x\)</span> our series converges for. For this, we will usually use the ratio test.</p>
 <p>For example, check if <span class="math">\(\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}}\)</span> converges:</p>
@@ -898,7 +906,9 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>Let <span class="math">\(L = \lim_{n \to \infty} \abs{\frac{(-1)^{n + 1} x^{n + 1}}{3^{n + 1} \sqrt{n + 1}} \frac{3^n \sqrt{n}}{(-1)^n x^n}} = \lim_{n \to \infty} \abs{\frac{-x}{3 \sqrt{n + 1}} \sqrt{n}} = \frac{\abs{x}}{3} \lim_{n \to \infty} \frac{1}{\sqrt{n + 1}} \sqrt{n} = \frac{\abs{x}}{3} \lim_{n \to \infty} \sqrt{\frac{n}{n + 1}} = \frac{\abs{x}}{3}\)</span>. ;wip: use l'hospital's rule or something to evaluate the limit properly Clearly, <span class="math">\(L &lt; 1\)</span> whenever <span class="math">\(-3 &lt; x &lt; 3\)</span>, so the series converges for any <span class="math">\(-3 &lt; x &lt; 3\)</span>.<br />Clearly, <span class="math">\(L &gt; 1\)</span> whenever <span class="math">\(x &lt; -3 \vee x &gt; 3\)</span>, so the series diverges for any <span class="math">\(x &lt; -3 \vee x &gt; 3\)</span>.<br />Now we need to consider <span class="math">\(L = 1\)</span>, where <span class="math">\(x = \pm 3\)</span>. Assume <span class="math">\(x = 3\)</span>.<br />Then <span class="math">\(\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n 3^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n}{\sqrt{n}}\)</span>.<br />This is an alternating series, and since <span class="math">\(\lim_{n \to \infty} \frac{1}{\sqrt{n}} = 0\)</span> and <span class="math">\(\frac{1}{\sqrt{n + 1}} &lt; \frac{1}{\sqrt{n}}\)</span>, the series converges (conditionally) by the alternating series test.<br />Assume <span class="math">\(x = -3\)</span>.<br />Then <span class="math">\(\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n (-3)^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{(-1)^n (-1)^n 3^n}{3^n \sqrt{n}} = \sum_{n = 1}^\infty \frac{1}{\sqrt{n}}\)</span>.<br />This is a P-series where <span class="math">\(P = \frac{1}{2}\)</span>, so the series diverges.<br />So the series converges absolutely if and only if <span class="math">\(x \in (-3, 3)\)</span>, and converges conditionally for <span class="math">\(x = 3\)</span>.</p>
 </blockquote>
 <h3 id="radius-of-convergence">Radius of Convergence</h3>
-<p>The <strong>radius of convergence</strong> is the values of <span class="math">\(x\)</span> on the imaginary plane such that all numbers within this radius of <span class="math">\(x_0\)</span> allow the power series to converge.</p>
+<p>The <strong>radius of convergence</strong> for a power series is the maximum magnitude of the values of <span class="math">\(x\)</span> on the imaginary plane such that all numbers inside this radius of <span class="math">\(x_0\)</span> allow the power series to converge absolutely, and all numbers outside of this radius diverge.</p>
+<p>The behaviour at the radius is not important.</p>
+<p>The values of <span class="math">\(x\)</span> that allow the series to converge are known as the <strong>interval of convergence</strong>.</p>
 <p>This is a number <span class="math">\(\rho \in \mb{R}\)</span> such that:</p>
 <ul>
 <li><span class="math">\(\sum_{n = 0}^\infty c_n (x - x_0)^n\)</span> converges absolutely for all <span class="math">\(\abs{x - x_0} &lt; \rho\)</span></li>
@@ -906,6 +916,36 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <li><span class="math">\(\sum_{n = 0}^\infty c_n (x - x_0)^n\)</span> may converge or diverge for <span class="math">\(\abs{x - x_0} = \rho\)</span></li>
 </ul>
 <p>In the above example, the radius of convergence is 3.</p>
+<p>All geometric series are power series where <span class="math">\(a_n = 1\)</span> and <span class="math">\(x_0 = 0\)</span>.</p>
+<p>The interval of convergence for a geometric series <span class="math">\(\sum_{n = 0}^\infty x^n\)</span> is <span class="math">\(\abs{x} &lt; 1\)</span>.</p>
+<h1 id="section-26">14/3/14</h1>
+<p>Within the radius of convergence, a power series behaves like an ordinary function. The idea is that if we are inside the radius of convergence, then we can treat the infinite series like a finite polynomial.</p>
+<p>Let <span class="math">\(f(x) = \sum_{n = 0}^\infty a_n (x - x_0)^n, g(x) = \sum_{n = 0}^\infty b_n (x - x_0)^n\)</span>:</p>
+<ul>
+<li><span class="math">\(f(x) \pm g(x) = \sum_{n = 0}^\infty (a_n \pm b_n) (x - x_0)^n\)</span>.</li>
+<li><span class="math">\(f(x) g(x) = \sum_{n = 0}^\infty c_n (x - x_0)^n\)</span> where <span class="math">\(c_n = a_0 b_n + a_1 b_{n - 1} + \ldots + a_{n - 1} b_1 + a_n b_0\)</span>.</li>
+<li>If <span class="math">\(g(x) \ne 0\)</span>, then <span class="math">\(\frac{f(x)}{g(x)} = \sum_{n = 0}^\infty d_n (x - x_0)^n\)</span> ;wip: what is d_n?</li>
+</ul>
+<p>More importantly, we can differentiate and integrate the terms of the sum:</p>
+<p>So <span class="math">\(\frac{\dee f}{\dee x} = \frac{\dee}{\dee x} (a_0 + a_1(x - x_0) + a_2 (x - x_0)^2 + \ldots) = 0 + a_1 + 2a_2 (x - x_0) + \ldots\)</span>. Note that the first term became 0, so we don't need to sum it.</p>
+<p>So <span class="math">\(\frac{\dee f}{\dee x} = \sum_{n = 0}^\infty a_n n(x - x_0)^{n - 1}\)</span>.</p>
+<p>So <span class="math">\(\int f(x) \dee x = \sum_{n = 0}^\infty \int a_n (x - x_0)^n \dee x = c + \sum_{n = 0}^\infty a_n \frac{(x - x_0)^{n + 1}}{n + 1}\)</span>.</p>
+<p>Find the power series of <span class="math">\(\frac{1}{1 - x}\)</span> and use it to approximate <span class="math">\(\ln\)</span>:</p>
+<blockquote>
+<p>Clearly, this is the value of the geometric series, as we saw earlier: <span class="math">\(\frac{1}{1 - x} = \sum_{n = 0}^\infty x^n\)</span> for <span class="math">\(\abs{x} &lt; 1\)</span>.<br />Clearly, <span class="math">\(\int_0^t \frac{1}{1 - x} \dee x = -\ln \abs{1 - t} = \sum_{n = 0}^\infty \int_0^t x^n \dee x = \sum_{n = 0}^\infty \frac{t^{n + 1}}{n + 1}\)</span> for <span class="math">\(\abs{t} &lt; 1\)</span>.<br />So <span class="math">\(\ln \abs{1 - t} = -\sum_{n = 1}^\infty \frac{t^n}{n}\)</span> for <span class="math">\(\abs{t} &lt; 1\)</span>.<br />Note that this only works for <span class="math">\(\abs{t} &lt; 1\)</span>. However, there are tricks we can use to avoid this issue.<br />For example, we can't use this approximation to find <span class="math">\(\ln 3\)</span>, since for <span class="math">\(\ln \abs{1 - t}\)</span>, <span class="math">\(t = -2\)</span>, but note that <span class="math">\(\ln \frac{1}{3} = -\ln 3\)</span>, so <span class="math">\(\ln 3 = -\ln \frac{1}{3} = -\ln \abs{1 - \frac{2}{3}} = \sum_{n = 1}^\infty \frac{1}{n} \frac{2}{3}^n\)</span>.<br />We want a general form for all values in the domain of <span class="math">\(\ln x\)</span>, so <span class="math">\(x &gt; 0\)</span>.<br />Clearly, <span class="math">\(\ln \abs{1 - (-t)} - \ln \abs{1 - t} = \ln \abs{\frac{1 + t}{1 - t}} = -\sum_{n = 1}^\infty \frac{(-t)^n}{n} + \sum_{n = 1}^\infty \frac{t^n}{n} = \sum_{n = 1}^\infty (1 - (-1)^n)\frac{t^n}{n} = 2t + \frac{2}{3}t^3 + \frac{2}{5}t^5 + \ldots = \sum_{n = 1}^\infty \frac{2}{2n - 1}t^{2n - 1}\)</span>.<br />Let <span class="math">\(x = \abs{\frac{1 + t}{1 - t}}\)</span>. Then <span class="math">\(t = \abs{\frac{x - 1}{x + 1}} = \frac{x - 1}{x + 1}\)</span>, since <span class="math">\(x &gt; 0\)</span>.<br />So <span class="math">\(\abs{t} &lt; 1 \iff -x &lt; x &lt; x + 2 \iff x &gt; 0\)</span>, so <span class="math">\(\abs{t} &lt; 1\)</span> for all <span class="math">\(x\)</span> in the domain, as required.<br />Then we can write <span class="math">\(\ln x = \ln \frac{1 + t}{1 - t} = \sum_{n = 1}^\infty \frac{2}{2n - 1}\left(\frac{x - 1}{x + 1}\right)^{2n - 1}\)</span>, for <span class="math">\(x &gt; 0\)</span>.</p>
+</blockquote>
+<p>This is actually how calculators evaluate these sorts of functions - by calculating the partial sums of a power series to a given error.</p>
+<p>Find the power series for <span class="math">\(\frac{1}{1 + x^2}\)</span> and use it to approximate <span class="math">\(\arctan\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = -x^2\)</span>. Then <span class="math">\(\frac{1}{1 + x^2} = \frac{1}{1 - u} = \sum_{n = 0}^\infty u^n = \sum_{n = 0}^\infty (-1)^n x^{2n}\)</span> for <span class="math">\(\abs{u} &lt; 1\)</span>.<br />Clearly, <span class="math">\(\int_0^t \frac{1}{1 + x^2} \dee x = \arctan t = \sum_{n = 0}^\infty \int_0^t (-1)^n x^{2n} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}\)</span> for <span class="math">\(\abs{t} &lt; t\)</span>.<br />So <span class="math">\(\arctan t = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}\)</span> for <span class="math">\(-1 &lt; t &lt; 1\)</span>.</p>
+</blockquote>
+<h2 id="taylor-series">Taylor Series</h2>
+<p>What power series is identical to a function <span class="math">\(f(x)\)</span> and all its derivatives at a point <span class="math">\(x = x_0\)</span>?</p>
+<p>For <span class="math">\(\abs{x - x_0} &lt; \rho\)</span>, where <span class="math">\(\rho\)</span> is the radius of convergence, <span class="math">\(f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n\)</span> where <span class="math">\(f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}\)</span>, and <span class="math">\(f^{(0)}(x_0) = f(x_0)\)</span>.</p>
+<p>Find the Taylor polynomial for <span class="math">\(e^x\)</span> and use it to estimate <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(f(x) = e^x, x_0 = 0\)</span>. Then <span class="math">\(\evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0} = \evalat{e^x}_{x = x_0} = 1\)</span>.<br />Then <span class="math">\(f(x) = e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}\)</span>.<br />So <span class="math">\(\int_0^1 e^{-x^2} \dee x = \int_0^1 f(-x^2) \dee x = \sum_{n = 0}^\infty \int_0^1 \frac{(-x^2)^n}{n!} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{n!(2n + 1)}\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
