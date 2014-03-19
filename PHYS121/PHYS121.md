@@ -1025,3 +1025,76 @@ The x-axis doesn't necessarily have to be time. It could also be distance from a
 For example, a person on a swing set usually does not have enough mechanical energy to swing all the way around in a full circle. As a result, the person oscillates back and forth between maximum potential energy with zero kinetic energy at the top of each swing, and zero potential energy and maximum kinetic energy at the bottom of each swing.
 
 However, if we were to start with enough kinetic energy, we would be able to overcome this "hill" at the top and go all the way around the swing.
+
+# 15/3/15
+
+Objects
+-------
+
+So far we have been working with point masses - masses that occupy only a single point in space. In the real world though, objects are made of many particles.
+
+We model objects as a collection of particles with distinct locations and masses, and give them constraints such as having a fixed distance to other particles in order to make rigid objects.
+
+### Linear Momentum
+
+The linear momentum of an object is the product of its mass and its velocity. In other words, $\vec{p} = m\vec{v}$.
+
+We can therefore write the second law of motion as $\vec{F} = m\vec{a} = \frac{\dee m\vec{v}}{\dee t} = \frac{\dee \vec{p}}{\dee t}$.
+
+The **net momentum** is the total momentum in a system. It is denoted $\vec{P} = \sum_{i = 1}^N m_i \vec{v}_i$.
+
+This can also represent the net momentum of an object - an object can be considered its own system.
+
+So $\frac{\dee \vec{P}}{\dee t} = \vec{F}_{net}$ - the change in total momentum is the net force.
+
+If an isolated system has $\vec{F}_{net} = 0$, then $\Delta \vec{P} = \vec{P}_f - \vec{P}_i = 0$ and $\vec{P}_f = \vec{P}_i$. In other words, if there is no net force, then **total linear momentum is conserved**.
+
+Center of Mass
+--------------
+
+The center of mass (CM) of an object is the point on an object on which it balances. More importantly, if we consider the center of mass for an object, it behaves a lot like a point mass, which significantly simplifies many calculations.
+
+Clearly, $F_{net} = \frac{\dee \vec{P}}{\dee t} = \frac{\dee}{\dee t} \sum_{i = 0}^N m_i \vec{v}_i = \frac{\dee^2}{\dee t^2} \sum_{i = 0}^N m_i \vec{x}_i$.
+
+Let $M = \sum_{i = 0}^N m_i$. Then $F_{net} = M\vec{a}_{net} = M \frac{\dee^2}{\dee t^2} \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i$.
+
+Then $\vec{a}_{net} = \frac{\dee^2}{\dee t^2} \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i$ and $\vec{x}_{CM} = \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i$.
+
+The location $\vec{x}_{CM}$ is the point on an object where $F_{net} = M\vec{a}$. In other words, the point where the second law of motion holds.
+
+In the same way, we can define the velocity and acceleration of an object in terms of its center of mass. So $\vec{v}_{CM} = \frac{\dee \vec{x}_{CM}}{\dee t}$ and $\vec{a}_{CM} = \frac{\dee^2 \vec{x}_{CM}}{\dee t^2}$.
+
+However, finding $\vec{x}_{CM}$ can be difficult, since in reality objects will have a huge number of particles, and it would be highly impractical to calculate the center of mass using the obvious way.
+
+### Rigid Bodies
+
+We must use some tricks to make this process easier. For example, spheres and boxes of uniform density have their center of mass at their geometric center.
+
+In this course, we will focus on objects of uniform density that are perfectly rigid (no deformations).
+
+When we have the center of mass for an object, we can break down its motion into translational motion of the center of mass, and the rotational motion of particles about the center of mass.
+
+**Density** is the amount of mass given a volume. It is often represented using $\rho = \frac{m}{V}$, and has units of $kg/m^3$.
+
+Assume that the density is constant.
+
+Clearly, $\vec{x}_{CM} = \frac{\sum m_i \vec{x}_i}{\sum m_i} = \vec{x}_{CM} = \frac{\sum \rho_i V \vec{x}_i}{\sum \rho_i V}$ for an object made up of particles. It is useful to pretend that rigid bodies (objects that do not deform) are actually made of **infinitely many infinitely small particles**.
+
+When we do this, we can generalize this using integrals, so $\vec{x}_{CM} = \frac{\int \rho r \dee V}{\int \rho \dee V}$.
+
+When we integrate with respect to volume $V$, it is known as a **volume integral**. Basically, $\int f \dee V = \iiint f(x, y, z) \dee x \dee y \dee z$.
+
+Find the center of mass of a solid cone with height $h$ and base radius $r$:
+
+               $h$ $x_{CM}$
+        /|\     <   <
+       / | \    |   |
+      /  |  \   |   <
+     /   |   \  |
+    /____|____\ <
+         ^----^ $r$
+         ^--^   $R$
+
+> Since the cone is symmetric about its central axis, the center of mass must be located on this axis.  
+> Let $R(x_{CM}) = kx_{CM}$ represent the radius at any extent $x_{CM}$.  
+> Since $R(h) = r$, 

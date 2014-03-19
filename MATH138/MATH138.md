@@ -1076,6 +1076,8 @@ A sequence **converges** if this limit exists. Otherwise, it **diverges**.
 
 For example, we previously saw the sequence $a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}$, which is actually equivalent to the series $S_N = \sum_{n = 0}^1 \frac{1}{n!}$. They are equivalent because $a_n = S_N$ when $n = N$.
 
+We also define $\sum a_n = \sum_{n = k}^\infty a_n, k \in \mb{Z}$ for convenience.
+
 # 26/2/14
 
 ### Geometric Series
@@ -1124,6 +1126,8 @@ Formally, if $\lim_{n \to \infty} a_n \ne 0$, then the sequence does not converg
 This is known as the **simple limit test** for series.
 
 Our convergence tests can decide whether a series covnerges or not, but do not provide information about what it converges to.
+
+The sum of two convergent series is also convergent - $\sum a_n + \sum b_n = \sum (a_n + b_n)$ if $\sum a_n$ and $\sum b_n$ are both convergent. However, this is not always true for divergent series. For example, $\sum_{n = 1}^\infty (-1)^n$ and $\sum_{n = 1}^\infty (-1)^{n + 1}$ are both divergent, but $\sum_{n = 1}^\infty {(-1)^n + (-1)^{n + 1}} = 0$.
 
 P-series
 --------
@@ -1455,10 +1459,47 @@ Taylor Series
 
 What power series is identical to a function $f(x)$ and all its derivatives at a point $x = x_0$?
 
-For $\abs{x - x_0} < \rho$, where $\rho$ is the radius of convergence, $f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$ where $f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}$, and $f^{(0)}(x_0) = f(x_0)$.
+For $\abs{x - x_0} < \rho$, where $\rho$ is the radius of convergence, $f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$ where $f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}$, and $f^{(0)}(x_0) = f(x_0)$. This is known as a **Taylor series/Taylor polynomials**.
 
 Find the Taylor polynomial for $e^x$ and use it to estimate $\int_0^1 e^{-x^2} \dee x$:
 
-> Let $f(x) = e^x, x_0 = 0$. Then $\evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0} = \evalat{e^x}_{x = x_0} = 1$.  
-> Then $f(x) = e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}$.  
+> Let $f(x) = e^x, x_0 = 0$. Then $f^{(n)} = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0} = \evalat{e^x}_{x = x_0} = 1$.  
+> Then $f(x) = e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}, \abs{x - x_0} < \rho$.  
+> Let $L = \lim_{n \to \infty} \abs{\frac{x^{n + 1}}{(n + 1)!} \frac{n!}{n^n}} = \lim_{n \to \infty} \abs{\frac{x}{n + 1}} = 0$.  
+> Then by the ratio test, the series converges for all $0 < 1$, and the radius of covnergence is $\rho = \infty$.  
 > So $\int_0^1 e^{-x^2} \dee x = \int_0^1 f(-x^2) \dee x = \sum_{n = 0}^\infty \int_0^1 \frac{(-x^2)^n}{n!} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{n!(2n + 1)}$.  
+
+# 17/3/14
+
+;wip: check to make sure assignment marks are on LEARN
+
+The Taylor series has the same derivative and integral as the function for all possible values of $x$ within the radius of convergence.
+
+The $N$th partial sum of a Taylor series has the same zero to $N$th derivatives.
+
+Find the Taylor series for $\sin x$ and $\cos x$:
+
+> Let $f(x) = \sin x, x_0 = 0$. Then $f^{(n)} = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}$. Clearly, $f^{(0)}(0) = 0, f^{(1)}(0) = 1, f^{(1)}(0) = 0, f^{(1)}(0) = -1, \ldots$.  
+> Since all the even powers are 0, then we simply omit those terms.  
+> So $f(x) = \sin x = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}x^n = x - \frac{x^3}{3} + \frac{x^5}{5!} - \frac{x^7}[7!} + \ldots = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}, \abs{x - x_0} < \rho$.  
+> Let $L = \lim_{n \to \infty} \abs{\frac{(-1)^{n + 1} x^{2n + 3}}{(2n + 3)!} \frac{(2n + 1)!}{(-1)^n}} = \lim_{n \to \infty} \abs{\frac{x^2}{(2n + 3)(2n + 2)}} = 0$.  
+> Then by the ratio test, the series converges for all $0 < 1$, and the radius of covnergence is $\rho = \infty$.  
+> So the Taylor series is $\sin x = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}$.  
+> We can find the Taylor series for $\cos x$ by taking derivatives of both sides: $\frac{\dee}{\dee x} \sin x = \cos x = \frac{\dee}{\dee x} \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!} = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}$.  
+
+Taylor series allow us to do interesting analyses. For example, it is easy to see that $\sin(-x) = -\sin x$ from the fact that $\sum_{n = 0}^\infty \frac{(-1)^n (-x)^{2n + 1}}{(2n + 1)!} = -\sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}$.  
+
+;wip: use the taylor series to show that $e^{i \theta} = \cos \theta + \imag \sin \theta$ - prove euler's identity
+
+We want to find a simple formula to find $(1 + x)^P$ for any natural number $P$. This was found to be $1 + Px + \frac{P(P - 1)x^2}{2!} + \frac{P(P - 1)(P - 2)}{3!} + \ldots + \frac{P \cdot (P - 1) \cdot \ldots \cdot (P - (n - 1))}{n!}x^n + \ldots$.
+
+Clearly, for any whole number $P$ the series must terminate after $P + 1$ terms - when one of the factors $(P - k)$ becomes 0. However, if $P$ is a fraction, then the series actually becomes infinite. As it turns out, this works for negative numbers too.
+
+For example, $\sqrt{1 - x} = (1 + x)^\frac{1}{2} = 1 - \frac{1}{2}x - \frac{1}{8}x^2 - \frac{1}{16}x^3 - \ldots$.
+
+Some common Taylor series are:
+
+* Geometric series: $\sum_{n = 0}^\infty x^n = \frac{1}{1 - x}, \abs{x - x_0} < \rho$
+* Exponential series: $\sum_{n = 0} \frac{x^n}{n!} = e^x, \abs{x - x_0} < \rho$
+* Trigonometric series: $\sin x = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}$
+* Binomial series: $1 + Px + \frac{P(P - 1)x^2}{2!} + \frac{P(P - 1)(P - 2)}{3!} + \ldots + \frac{P \cdot (P - 1) \cdot \ldots \cdot (P - (n - 1))}{n!}x^n + \ldots = (1 + x)^P$

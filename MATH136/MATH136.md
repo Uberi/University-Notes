@@ -519,8 +519,8 @@ Note that at every step, we had a system of linear equations that had the same s
 Also note that there were only really two different operations that we used to solve the system. To make it easier for computers to work with, we define an additional swapping operation:
 
 * Multiplying a row by a non-zero scalar ($cR_i$ multiplies the $i$th row by $c \in \mb{R}, c \ne 0$).
-* Adding a multiple of one row to another ($R_i + cR_j$ adds the $j$th row multiplied by $c \in \mb{R}, c \ne 0$ to the $i$th row).
-* Swapping two rows ($R_i \leftrightarrow R_j$).
+* Adding a multiple of one row to another ($R_i + cR_j$ adds the $j$th row multiplied by $c \in \mb{R}, c \ne 0, i \ne j$ to the $i$th row).
+* Swapping two rows ($R_i \leftrightarrow R_j, i \ne j$).
 
 These operations we call the **elementary row operations** (EROs). Note that they are also fully reversible - all EROs have an inverse that undoes the effect of the operation. This is trivial to prove.
 
@@ -776,6 +776,8 @@ For all $A, B \in M_{m, n}, c \in \mb{R}$:
 * $(A + B)^T = A^T + B^T$
 * $(cA)^T = c(A^T)$
 
+Also, $(AB)^T = B^T A^T$. Note that the order reversed.
+
 Proof:
 
 (proof of first)
@@ -861,13 +863,13 @@ If $A, B, C$ are matrices of the required dimensions, $t \in \mb{R}$:
 
 Note that matrix multiplication is not commutative over matrices: $AB \ne BA$ for some matrices.
 
-### Theorem 3.1.4
+### Theorem 3.1.4 (Matrix Multiplication Cancellation)
 
 Note that $A = B \implies AC = BC \wedge CA = BA$. However, $AC = BC \vee CA = BA$ **does not imply** $A = B$ - there is no cancellation law for matrix multiplication.
 
 That said, given $A, B \in M_{m, n}$, $(\forall \vec{x} \in \mb{R}^n, A\vec{x} = B\vec{x}) \implies A = B$.
 
-In other words, if each product of a matrix with an arbitrary vector are equal to each other, then the matrices are themselves equal to each other.
+In other words, if the product of a matrix with an arbitrary vector are equal to each other, then the matrices are themselves equal to each other.
 
 Proof:
 
@@ -1545,3 +1547,228 @@ Given $\mathcal{B} = \set{1, x, x^2}, \mathcal{C} = \set{1, x + 1, (x + 1)^2}$, 
 > Clearly, ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [1]_\mathcal{C} & [x]_\mathcal{C} & [x^2]_\mathcal{C} \end{bmatrix}$.  
 > Clearly, $[1]_\mathcal{C} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, [x]_\mathcal{C} = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}, [x^2]_\mathcal{C} = \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}$, by inspection.  
 > So ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} 1 & -1 & 1 \\ 0 & 1 & -2 \\ 0 & 0 & 1 \end{bmatrix}$.  
+
+# 17/3/14
+
+Inverses of Matrices
+--------------------
+
+Let $A \in M_{m \times n}, B, C \in M_{n \times m}$.
+
+Then $B$ is the **right inverse** of $A$ if and only if $AB = I_m$.
+
+Then $C$ is the **left inverse** of $A$ if and only if $CA = I_n$
+
+A matrix $A$ is **square** if and only if $A \in M_{n \times n}$.
+
+### Finding Inverses
+
+Suppose we wanted to find the right inverse $B$ of $A$.
+
+Clearly, $B = \begin{bmatrix} \vec{b}_1 & \ldots & \vec{b}_n \end{bmatrix}$. So $AB = I = A\begin{bmatrix} \vec{b}_1 & \ldots & \vec{b}_n \end{bmatrix} = \begin{bmatrix} A\vec{b}_1 & \ldots & A\vec{b}_n \end{bmatrix}$.
+
+So $A\vec{b}_i = \vec{e}_i$. We can then find the inverse by solving each system.
+
+There is also a faster way. We can simply put the system $\sys{A}{I}$ into RREF and read off the inverse directly from the resulting matrix.
+
+In fact, this is a useful method for solving multiple systems of linear equations with the same coefficients but different right hand sides at the same time.
+
+For example, find the right inverse of $A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$:
+
+> Clearly, $\left[\begin{array}{cc|cc}
+1 & 2 & 1 & 0 \\
+3 & 4 & 0 & 1 \\
+\end{array}\right]$ in RREF is $\left[\begin{array}{cc|cc}
+1 & 0 & -2 & 1 \\
+0 & 1 & \frac{3}{2} & -\frac{1}{2} \\
+\end{array}\right]$.  
+> So the inverse is $\begin{bmatrix} -2  1 \\ \frac{3}{2} & -\frac{1}{2} \end{bmatrix}$. To verify, $\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \begin{bmatrix} -2  1 \\ \frac{3}{2} & -\frac{1}{2} \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$, as required.  
+
+### Theorem 5.1.1
+
+If $A \in M_{m \times n}$ where $m > n$, then $A$ cannot have a right inverse.
+
+If $A \in M_{m \times n}$ where $m < n$, then $A$ cannot have a left inverse.
+
+### Inverse Matrices
+
+Let $A$ be an $n \times n$ square matrix. If $BA = I = AB$, then $B$ is the **inverse** of $A$. If $B$ exists, then $A$ is **invertible**.
+
+The inverse of the matrix is denoted $B = A^{-1}$ - $B$ is the inverse of $A$.
+
+In other words, only square matrices can have inverses, but not all of them do. 
+
+### Theorem 5.1.3
+
+The inverse of a matrix is always unique.
+
+Proof:
+
+> Let $B, C$ be inverses of $A$. Then $B = BI = B(AC) = (BA)C = IC = C$.  
+
+### Theorem 5.1.4
+
+If $A, B \in M_{n \times n}$ such that $AB = I$, then $A = B^{-1}$ and $B = A^{-1}$, and $BA = I$.
+
+Also, the RREF of $A$, and the RREF of $B$, are both $I$.
+
+Basically, if a square matrix has a left or right inverse, then this is also the right or left inverse, and is simply the inverse of the matrix.
+
+So we can simply use the algorithm for finding left or right inverses to find the multiplciative inverse of the matrix.
+
+So if $A$ is invertible, then row reducing $\sys{A}{I}$ results in $\sys{I}{A^{-1}}$ - **row reducing the system results in the inverse**.
+
+Proof:
+
+> Let $B\vec{x} = \vec{0}$. Then $\vec{0} = A\vec{0} = A(B\vec{x}) = (AB)\vec{x} = I\vec{x} = \vec{x}$.  
+> So $\vec{x} = 0$ and $\vec{x}$ is the unique solution to the system. Since the solution is unique, $\rank B = n$ and there is a leading one in each column of the RREF, so the RREF of $B$ is $I$.  
+> Since the RREF of $B$ is $I$, $\forall \vec{b} \in \mb{R}^n, \exists \vec{x} \in \mb{R}^n, B\vec{x} = \vec{b}$.  
+> Clearly, $BA\vec{b} = (BA)(B\vec{x}) = B(AB)\vec{x} = BI\vec{x} = B\vec{x} = \vec{b}$.  
+> By theorem 3.1.4, $BA = I$.  
+> Now the same argument used to prove $\rank B = n$ can then be used to probe $\rank A = n$.  
+
+### Theorem 5.1.5
+
+If the RREF of a matrix $A \in M_{n \times n}$ is $I$, then the $A^{-1}$ exists.
+
+In other words, if $\rank A = n$, then $A$ is invertible.
+
+Find the general inverse of $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$:
+
+> Clearly, $\left[\begin{array}{cc|cc}
+a & b & 1 & 0 \\
+c & d & 0 & 1 \\
+\end{array}\right]$ in RREF is $\left[\begin{array}{cc|cc}
+1 & 0 & \frac{d}{ad - bc} & -\frac{b}{ad - bc} \\
+0 & 1 & -\frac{c}{ad - bc} & \frac{a}{ad - bc} \\
+\end{array}\right]$.  
+> So $A^{-1} = \begin{bmatrix} \frac{d}{ad - bc} & -\frac{b}{ad - bc} \\ -\frac{c}{ad - bc} & \frac{a}{ad - bc} \end{bmatrix}$, and is defined whenever $ad - bc \ne 0$.  
+
+### Theorem 5.1.6
+
+Given $A, B \in M_{n \times n}$ such that $A$ and $B$ are invertible and $k \in \mb{R}$:
+
+* $(kA)^{-1} = \frac{1}{k}A^{-1}$
+* $(AB)^{-1} = B^{-1}A^{-1}$
+* $(A^T)^{-1} = (A^{-1})^T$
+
+Proof:
+
+(proof of first)
+
+> Clearly, $kA(kA)^{-1} = I$. Clearly, $kA\frac{1}{k}A^{-1} = AA^{-1} = I$.  
+> Since the inverse is always unique, $(kA)^{-1} = \frac{1}{k}A^{-1}$.  
+
+(proof of second)
+
+> Clearly, $AB(AB)^{-1} = I$. Clearly, $ABB^{-1}A^{-1} = AIA^{-1} = I$.  
+> Since the inverse is always unique, $(AB)^{-1} = B^{-1}A^{-1}$.  
+
+(proof of third)
+
+> Clearly, $A^T(A^T)^{-1} = I$. Clearly, $A^T(A^{-1})^T = (A^{-1}A)^T = I^T = I$.  
+> Since the inverse is always unique, $(A^T)^{-1} = (A^{-1})^T$.  
+
+### Theorem 5.1.7 (Invertible Matrix Theorem)
+
+Given $A \in M_{n \times n}$, all of the following are equivalent:
+
+* $A$ is invertible.
+* The RREF of $A$ is $I$.
+* $\rank A = n$.
+* The system of equations $A\vec{x} = \vec{b}$ has unique solutions for all $\vec{b} \in \mb{R}^n$.
+* The nullspace of $A$ is $\set{\vec{0}}$.
+* The rows or columns of $A$ form a basis for $\mb{R}^n$.
+* $A^T$ is invertible.
+
+Proof of third:
+
+> Clearly, $\rank A = n$ if and only if the RREF of $A$ is $I$.  
+> Clearly, the RREF is $I$ if and only if there are a sequence of elementary matrices $E_k \cdots E_1$ such that $E_k \cdots E_1 = I$.  
+> Clearly, this the inverse, so $A$ is invertible if and only if $E_k \cdots E_1$ exist.  
+
+Proof of fourth:
+
+> Clearly, $A\vec{x} = \vec{b}$ has unique solutions for all $\vec{b} \in \mb{R}^n$ if and only if there are no free variables.  
+> Clearly, there are no free variables if and only if $\rank A = n$.  
+
+Proof of fifth:
+
+> Clearly, the nullspace of $A$ is $\set{\vec{0}}$ if and only if $\vec{x} = \vec{0}$ is the only solution to $A\vec{x} = \vec{0}$.  
+> Clearly, the solution is unique if and only if $\rank A = n$.  
+
+Proof of sixth:
+
+> Clearly, the rows or columns of $A form a basis for $\mb{R}^n$ if and only if they span $\mb{R}^n$ and are linearly independent.  
+> Since the rows or columns are linearly independent, the nullspace of $A$ is $\set{\vec{0}}$.  
+
+Proof of seventh:
+
+> Clearly, $A^T$ is invertible if and only if $(A^{-1})^T$ exists.  
+> CLearly, $(A^{-1})^T$ exists if and only if $A$ is invertible.  
+
+Also note that $A\vec{x} = \vec{b}$ if and only if $A^{-1}A\vec{x} = \vec{x} = A^{-1}\vec{b}$.
+
+In other words, we can solve linear systems this way. If $A\vec{x} = \vec{b}$, then $\vec{x} = A^{-1}\vec{b}$, and the converse is true as well.
+
+Elementary Matrices
+-------------------
+
+When we found the inverse of a matrix $A$ by row reducing $#\sys{A}{I}$ into $\sys{I}{A^{-1}}$, we applied a series of elementary row operations in a certain order, and this resulted in finding $A^{-1}$.
+
+Since we can, given any $A^{-1}$, find $A$ again, those elementary row operations must have been encoded in $A^{-1}$ somehow.
+
+An **elementary matrix** is the result of applying an elementary row operation on the $n \times n$ identity matrix. The elementary matrix **represents** the elementary row operation.
+
+### Theorem 5.2.1-5.2.3
+
+Let $A \in M_{m \times n}$. Let $E$ be the elementary matrix representing an elementary row operation ($R_i + cR_j, c \ne 0, i \ne j$, $cR_i, c \ne 0$, or $R_i \leftrightarrow R_j, i \ne j$).
+
+Then $EA$ is the matrix obtained by applying that elementary row operation directly onto $A$.
+
+In other words, applying elementary row operations to identity matrices allow the matrices to represent the operations in a more elegant way.
+
+Since the elementary row operations cannot change the rank of the matrix, $\rank EA = \rank A$
+
+Since all elementary row operations are reversible, likewise all elementary matrices are invertible. In fact, the inverse of an elementary matrix is the reverse of the elementar row operation applied to the identity matrix.
+
+For example, $E = \begin{bmatrix} 1 & 0 \\ 0 & -5 \end{bmatrix}$ represents the elementary row operation $-5R_2$, and the reverse operation is $-\frac{1}{5}R_2$. So $E^{-1} = \begin{bmatrix} 1 & 0 \\ 0 & -\frac{1}{5} \end{bmatrix}$.
+
+Matrix Decomposition
+--------------------
+
+### Theorem 5.2.5
+
+If $A$ is an $m \times n$ matrix, and $R$ is the RREF of $A$, then $\exists E_1, \ldots, E_k \in M_{m \times m}, E_k \cdots E_1 A = R$.
+
+Also, if $E_k \cdots E_1 A = R$, then $A = E_1^{-1} \cdots E_k^{-1} R$.
+
+This can be derived by multiplying both sides of $E_k \cdots E_1 A = R$ by $E_k^{-1}, \ldots, E_1^{-1}$ repeatedly.
+
+Convert $A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$ into RREF using elementary matrices:
+
+> Clearly, $A = \begin{bmatrix} 1 & 0 \\ -3 & 1 \end{bmatrix} \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 1 & 2 \\ 0 & -2 \end{bmatrix}$
+> Clearly, $\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 2 \\ 0 & -2 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & -2 \end{bmatrix}$
+> Clearly, $\begin{bmatrix} 1 & 1 \\ 0 & -\frac{1}{2} \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & -2 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$.  
+> So $\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 1 \\ 0 & -\frac{1}{2} \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ -3 & 1 \end{bmatrix} \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$.  
+
+### Inverses
+
+If $A is invertible, then the RREF $R$ is $I$, so $E_k \cdots E_1 A = I$ and $A = E_1^{-1} \cdots E_k^{-1} I$.
+
+So $E_k \cdots E_1$ is the left inverse of $A$, by definition. So $A^{-1} = E_k \cdots E_1$. Also, $A = E_1^{-1} \cdots E_k^{-1}$.
+
+In other words, if $A$ is invertible, then $A and $A^{-1}$ can both be written as products of elementary matrices.
+
+Also, since we are row reducing $\sys{A}{I}$ into $\sys{I}{A^{-1}}$, and $I = E_k \cdots E_1 A$, then $A^{-1} = E_k \cdots E_1 I = E_k \cdots E_1$. In other words, we are getting the inverse written in terms of elementary row operations.
+
+Matrix Determinant
+------------------
+
+The **determinant** of a matrix is an expression over the values within the matrix. The value of the determinant provides important information about it, such as whether it is invertible. The determinant **only applies to square matrices**.
+
+We denote the determinant of a matrix $A$ as $\det A = \abs{\begin{array}{ccc} a_{1, 1} & \ldots & a_{1, n} \\ \vdots & \vdots & \vdots \\ a_{m, 1} & \ldots & a_{m, n} \end{array}}$. Importantly, $A$ is invertible if and only if $\det A \ne 0$.
+
+The determinant of a $1 \times 1$ matrix is $\det \begin{bmatrix} a \end{bmatrix} = a$. This is because the matrix is invertible if and only if $a \ne 0$.
+
+The determinant of the $2 \times 2$ matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is $\det A = ad - bc$.

@@ -714,6 +714,46 @@ m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &amp;= m\int_\vec{a}^\vec{b} \f
 <p>The x-axis doesn't necessarily have to be time. It could also be distance from a reference point, angle, or something else.</p>
 <p>For example, a person on a swing set usually does not have enough mechanical energy to swing all the way around in a full circle. As a result, the person oscillates back and forth between maximum potential energy with zero kinetic energy at the top of each swing, and zero potential energy and maximum kinetic energy at the bottom of each swing.</p>
 <p>However, if we were to start with enough kinetic energy, we would be able to overcome this &quot;hill&quot; at the top and go all the way around the swing.</p>
+<h1 id="section-4">15/3/15</h1>
+<h2 id="objects">Objects</h2>
+<p>So far we have been working with point masses - masses that occupy only a single point in space. In the real world though, objects are made of many particles.</p>
+<p>We model objects as a collection of particles with distinct locations and masses, and give them constraints such as having a fixed distance to other particles in order to make rigid objects.</p>
+<h3 id="linear-momentum">Linear Momentum</h3>
+<p>The linear momentum of an object is the product of its mass and its velocity. In other words, <span class="math">\(\vec{p} = m\vec{v}\)</span>.</p>
+<p>We can therefore write the second law of motion as <span class="math">\(\vec{F} = m\vec{a} = \frac{\dee m\vec{v}}{\dee t} = \frac{\dee \vec{p}}{\dee t}\)</span>.</p>
+<p>The <strong>net momentum</strong> is the total momentum in a system. It is denoted <span class="math">\(\vec{P} = \sum_{i = 1}^N m_i \vec{v}_i\)</span>.</p>
+<p>This can also represent the net momentum of an object - an object can be considered its own system.</p>
+<p>So <span class="math">\(\frac{\dee \vec{P}}{\dee t} = \vec{F}_{net}\)</span> - the change in total momentum is the net force.</p>
+<p>If an isolated system has <span class="math">\(\vec{F}_{net} = 0\)</span>, then <span class="math">\(\Delta \vec{P} = \vec{P}_f - \vec{P}_i = 0\)</span> and <span class="math">\(\vec{P}_f = \vec{P}_i\)</span>. In other words, if there is no net force, then <strong>total linear momentum is conserved</strong>.</p>
+<h2 id="center-of-mass">Center of Mass</h2>
+<p>The center of mass (CM) of an object is the point on an object on which it balances. More importantly, if we consider the center of mass for an object, it behaves a lot like a point mass, which significantly simplifies many calculations.</p>
+<p>Clearly, <span class="math">\(F_{net} = \frac{\dee \vec{P}}{\dee t} = \frac{\dee}{\dee t} \sum_{i = 0}^N m_i \vec{v}_i = \frac{\dee^2}{\dee t^2} \sum_{i = 0}^N m_i \vec{x}_i\)</span>.</p>
+<p>Let <span class="math">\(M = \sum_{i = 0}^N m_i\)</span>. Then <span class="math">\(F_{net} = M\vec{a}_{net} = M \frac{\dee^2}{\dee t^2} \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i\)</span>.</p>
+<p>Then <span class="math">\(\vec{a}_{net} = \frac{\dee^2}{\dee t^2} \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i\)</span> and <span class="math">\(\vec{x}_{CM} = \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i\)</span>.</p>
+<p>The location <span class="math">\(\vec{x}_{CM}\)</span> is the point on an object where <span class="math">\(F_{net} = M\vec{a}\)</span>. In other words, the point where the second law of motion holds.</p>
+<p>In the same way, we can define the velocity and acceleration of an object in terms of its center of mass. So <span class="math">\(\vec{v}_{CM} = \frac{\dee \vec{x}_{CM}}{\dee t}\)</span> and <span class="math">\(\vec{a}_{CM} = \frac{\dee^2 \vec{x}_{CM}}{\dee t^2}\)</span>.</p>
+<p>However, finding <span class="math">\(\vec{x}_{CM}\)</span> can be difficult, since in reality objects will have a huge number of particles, and it would be highly impractical to calculate the center of mass using the obvious way.</p>
+<h3 id="rigid-bodies">Rigid Bodies</h3>
+<p>We must use some tricks to make this process easier. For example, spheres and boxes of uniform density have their center of mass at their geometric center.</p>
+<p>In this course, we will focus on objects of uniform density that are perfectly rigid (no deformations).</p>
+<p>When we have the center of mass for an object, we can break down its motion into translational motion of the center of mass, and the rotational motion of particles about the center of mass.</p>
+<p><strong>Density</strong> is the amount of mass given a volume. It is often represented using <span class="math">\(\rho = \frac{m}{V}\)</span>, and has units of <span class="math">\(kg/m^3\)</span>.</p>
+<p>Assume that the density is constant.</p>
+<p>Clearly, <span class="math">\(\vec{x}_{CM} = \frac{\sum m_i \vec{x}_i}{\sum m_i} = \vec{x}_{CM} = \frac{\sum \rho_i V \vec{x}_i}{\sum \rho_i V}\)</span> for an object made up of particles. It is useful to pretend that rigid bodies (objects that do not deform) are actually made of <strong>infinitely many infinitely small particles</strong>.</p>
+<p>When we do this, we can generalize this using integrals, so <span class="math">\(\vec{x}_{CM} = \frac{\int \rho r \dee V}{\int \rho \dee V}\)</span>.</p>
+<p>When we integrate with respect to volume <span class="math">\(V\)</span>, it is known as a <strong>volume integral</strong>. Basically, <span class="math">\(\int f \dee V = \iiint f(x, y, z) \dee x \dee y \dee z\)</span>.</p>
+<p>Find the center of mass of a solid cone with height <span class="math">\(h\)</span> and base radius <span class="math">\(r\)</span>:</p>
+<pre><code>           $h$ $x_{CM}$
+    /|\     &lt;   &lt;
+   / | \    |   |
+  /  |  \   |   &lt;
+ /   |   \  |
+/____|____\ &lt;
+     ^----^ $r$
+     ^--^   $R$</code></pre>
+<blockquote>
+<p>Since the cone is symmetric about its central axis, the center of mass must be located on this axis.<br />Let <span class="math">\(R(x_{CM}) = kx_{CM}\)</span> represent the radius at any extent <span class="math">\(x_{CM}\)</span>.<br />Since <span class="math">\(R(h) = r\)</span>,</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

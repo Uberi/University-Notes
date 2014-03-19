@@ -1109,7 +1109,7 @@ Consider the example of using numbers to represent hockey tournament rankings. I
 
 Percentages are useful for representing and comparing ratios. This allows us to see which ratio is higher or lower.
 
-Using percentages results in a **loss of information**. When we use a percentange, we lose all information about what the original numbers were - 25% could represent 10/40 or 1/4.
+Using percentages results in a **loss of information**. When we use a percentange, we lose all information about what the original numbers were - 25% could represent 10/40 or 1/4. We must make sure to be aware of the numerator and denominator.
 
 If the number of bear attacks increased 100% this decade, should we implement a bear patrol?
 
@@ -1245,8 +1245,6 @@ $P(x)$ represents the probability of event $x$ occurring. It is always the case 
 
 $\neg x$ is the opposite of the event $x$ - the event of $x$ not occurring. $P(\neg x)$ is the probability of event $x$ not occuring.
 
-It is always the case that $P(x) + P(\neg x) = 1$. An event must either occur or not occur.
-
 $P(S)$, where $S$ is a set of events, represents the probability of one of those events occurring. If $S$ includes all possible events, then $P(S) = 1$.
 
 Usually, $P(x) = \frac{\text{Number of cases where } x \text{ occurs}}{\text{Total number of cases}}$, assuming that all cases are equally likely.
@@ -1259,6 +1257,7 @@ $P(x \mid y)$ is a **conditional proability** - the probability that $x$ occurs 
 
 Identities:
 
+* $P(x) + P(\neg x) = 1$ - an event must either occur or not occur.
 * $P(x \cup y) = P(x) + P(y) - P(x \cap y)$ - the probability of either event occuring is the sum of the individual probabilities of each event occuring, minus the probability that they both occur.
     * $P(x \cup y) = P(x) + P(y)$ when $x$ and $y$ are mutually exclusive - they never both occur at the same time.
 * $P(x \cap y) = P(x \mid y) \cdot P(y)$ - the probability of both events occurring is the probability of one occurring given the other times the probability of the other.
@@ -1277,6 +1276,8 @@ In other words, given events $x_1, \ldots, x_n$ such that $\forall 1 \le i \le n
 
 For example, if we flip a coin 9 times and it comes up heads every time, then it is a fallacy to think that the next flip will have anything but a 50% chance of coming up heads.
 
+The **gambler's fallacy** is committed whenever, after observing something that happens more often than usual, we predict that it will happen less often in the future in order to "balance out".
+
 ### Regression Fallacy
 
 If we flip a coin 9 times and it comes up heads every time (this is a pattern that is far from the mean), then in reality, a phenomenon known as **regression to the mean** says that it is likely that the **next set of flips will average out to the mean** - that the next set of flips will be 50% heads.
@@ -1285,11 +1286,15 @@ Regression to the mean says that if we flip enough times, eventually it will ten
 
 Note that this does not contradict the gambler's fallacy - regression to the mean says that the next set of flips is likely to be average, while the gambler's fallacy says that the next flip is 50% likely to be heads.
 
-A **regression fallacy** is when we think the next set of flips is somehow influenced by our previous flips.
+A **regression fallacy** is when we think there is a cause when there is no cause, due to natural variations.
+
+The regression fallacy is committed whenever, given a random event, one assigns a cause where there is only natural variation.
 
 For example, "Jim did exceptionally well at work last year. His performance is merely average this year, so something must have happened.".
 
 This is fallacious because it is likely that in fact this is just natural variation in performance, not caused by any external factors.
+
+When we see a number of extraordinary events happening, we tend to think that they are ordinary. However, they are not; this is just natural variations in the events.
 
 ### Simpson's Paradox
 
@@ -1349,6 +1354,7 @@ Some examples of cognitive biases are:
         * We cannot, in practice, focus on all sources of information at once, and bias can be introduced when selecting which ones to focus on.
         * This can happen consciously, when we decide what evidence to examine or ignore, or unconsciously, when we automatically disregard or emphasize certain information.
         * We are good at remembering confirming cases, but not disconfirming cases.
+        * We are also bad at estimating the number of confirming or disconfirming cases.
         * We can mitigate this using the null hypothesis and confounds.
     * **Interpretive bias** is the tendency to allow our beliefs to affect our evaluation of evidence.
         * We tend to accept evidence in accordance to what we believe, and heavily criticise evidence against it.
@@ -1395,12 +1401,36 @@ A **stereotype** is a set of properties associated with a certain class of objec
 
 Stereotypes can lead to unreliable reasoning. It is connected to the **prototype theory** of concepts, where membership of an object in a class is defined by how close it is to the "prototypal" member of that class. For example, a stool would be considered a member of the class of furniture, because it is quite close to a prototypal piece of furniture, a chair.
 
-For example, two groups are given almost identical papers to evaluate, where one group has commonly male names on the papers and the other group has commonly female names on the papers, and the group with male names gives consistently higher scores, revealing that gender biases are much deeper than most people would think.
+Stereotyping allows us to look as a stool, compare it with the stereotype, the chair, and efficiently determine whether it is furniture or not.
+
+For example, two groups are given almost identical papers to evaluate, where one group has commonly male names on the papers and the other group has commonly female names on the papers, and the group with male names gives consistently higher scores, revealing that gender biases are much deeper than most people would think. Even though the test subjects believed they were being objective, biases can still be introduced.
 
 # 14/3/14
 
 ;wip: read chapter 8
-;wip: quiz 2 is now due on march 21
-;wip: do assignment 2, due monday
 
 Apparently we didn't do much on Wednesday, probably because of the snow. This class was a review of last class' notes.
+
+# 17/3/14
+
+;wip: the last lecture is on march 31
+
+Communication
+-------------
+
+Communication has multiple goals, such as to entertain, scare, or deceive, in addition to transmitting or receiving knowledge. Truth is not the only factor considered when deciding what to share or listen to.
+
+**Fundemental attribution error** is the tendency to explain someone's situation or behaviour based on their personality, character, or disposition while overlooking explanations based on context, accidents, or other effects.
+
+For example, poverty might be explained as failings of character such as laziness, when there are likely numerous other effects causing this situation.
+
+The **false polarization effect** is the tendency to overestimate the **extent to which someone's views resemble the strongest/sterotypical views of this sort**, and **the difference between one's own views and the views of people disagreeing**.
+
+**Bandwagon effects** are tendencies to prefer views that they think are held by other people - the idea that "if most other people believe it, then it is likely right". This may be caused by believing that everyone else has justification, and possibly because defending a minority view requires effort.
+
+The **false consensus effect** is the tendency to believe that the **absence of disagreement is agreement**. This is due to the convention that assertions are considered accepted until challenged. However, in practice there are social costs to dissenting, and there are therefore pressures not to express the dissenting view.
+
+Society allows us to access information otherwise unavailable, but information might not flow perfectly - it can become corrupted, and there are other aims to communication that can lead to unreliable reasoning. Which social group we associate with will bias the information we have access to.
+
+For example, we might think that Harper is an excellent prime minister, but this likely reflects our friend group more than the view of all Canadians.
+

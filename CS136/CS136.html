@@ -765,7 +765,9 @@ printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints
 int g = 1;
 int main(void) {
     const int h = 6;
-    printf(&quot;CODE: %p, READ-ONLY: %p, GLOBAL DATA: %p, STACK: %p&quot;, &amp;main, &amp;f, &amp;g, &amp;h);
+    int *i = malloc(sizeof(int));
+    printf(&quot;CODE: %p, READ-ONLY: %p, GLOBAL DATA: %p, STACK: %p, HEAP: %p&quot;, &amp;main, &amp;f, &amp;g, &amp;h, i);
+    free(i);
 }</code></pre>
 <p>The pointer placeholder is &quot;%p&quot; in C. It prints out the pointer address in hex.</p>
 <p>This allows us to get low-level access to the memory and work with pointers - addresses in memory.</p>
@@ -1797,7 +1799,7 @@ void quick_sort(int a[], int len) {
 <p>Dynamic memory is memory allocated from the heap, while the program is running.</p>
 <p>Previously, we have used a maximum size for an array, like 80 characters for a last name. This was reasonable when we could define a clear upper bound for our input. In practice though, this is not always possible. Also, it can be very wasteful of memory.</p>
 <p>When working with these arrays, we have to keep track of both the actual length of the data stored in the array, and the maximum length of the array.</p>
-<p>This approach makes the length of the array &quot;dynamic&quot; (changeable at runtime), but the problem is that the amount of items cannot exceed the maximum.</p>
+<p>This approach makes the length of the array &quot;dynamic&quot; (changeable at runtime), but the problem is that the amount of items cannot exceed the maximum. We call this the <strong>maximum length array</strong>.</p>
 <p>Also, the <code>exit(EXIT_CODE)</code> function, defined in <code>stdlib.h</code>, exits the program immediately. <code>stdlib.h</code> also defines <code>EXIT_SUCCESS</code> (0) and <code>EXIT_FAILURE</code> (1) for convenience.</p>
 <h3 id="heap-memory">Heap memory</h3>
 <p>The heap is used as a &quot;pool&quot; or &quot;pile&quot; of memory. Memory can be <strong>dynamically borrowed and returned</strong> from the heap.</p>
@@ -1818,6 +1820,137 @@ if (p == NULL)
 <p><code>void *</code> is known as a <strong>generic pointer</strong>. It is a pointer that can point to type in memory. It is basically a pointer that does not have an associated type.</p>
 <p>Since the result of <code>malloc</code> is a generic pointer, we can store any type of value in the heap.</p>
 <p><code>size_t</code> is an integer-like type that represents the size of something. The <code>sizeof</code> operator returns a <code>size_t</code> value. The placeholder for <code>size_t</code> in <code>printf</code> and similar is <code>%zd</code>.</p>
+<p>Although the return type is a generic pointer, we can assign it to a typed pointer:</p>
+<pre><code>int *pi = malloc(sizeof(int));
+struct posn *pp = malloc(sizeof(struct posn));</code></pre>
+<p>The typed pointer can then be used just like any other pointer. Note that the memory pointed to stays alive all the way until it is freed - it can be returned from functions or passed around as needed without worrying about going out of scope, unlike memory on the stack.</p>
+<h3 id="free">free</h3>
+<p>After we are done with the memory we allocated, we should always free it again so it is available for future allocations. This is done using the <code>void free(void *p)</code> function, which returns the allocated memory at <code>p</code> back to the heap.</p>
+<p><code>malloc</code> remembers how much memory we actually allocated at the address, so we do not need to give it the amount of memory we originally allocated - just the address of the memory we allocated.</p>
+<p>The pointer <code>p</code> must have been allocated by a previous <code>malloc</code>, and must be heap memory. After calling it, the memory pointed to by <code>p</code> is no longer safe to access or modify. This pointer is no longer safe to perform any operations on, but it may be returned by a future call to <code>malloc</code>.</p>
+<p>In RunC, it is required that every <code>malloc</code> is paired with a corresponding <code>free</code>.</p>
+<p><code>free(p)</code> is <span class="math">\(O(1)\)</span> in this course.</p>
+<h3 id="common-errors">Common Errors</h3>
+<p>Some common mistakes associated with dynamic memory are:</p>
+<ul>
+<li><strong>Double-free bugs</strong>: using <code>free</code> on memory that has already been freed, or memory that was not allocated by <code>malloc</code>.</li>
+<li><strong>Memory leaks</strong>: using <code>malloc</code> and not eventually freeing it before the program exits.
+<ul>
+<li>This eventually results in poor performance and eventually runs out of memory and crash.</li>
+<li>This often occurs when we lose all the pointers to an allocated block of memory, so we can't <code>free</code> it afterwards.</li>
+</ul></li>
+<li><strong>Use after free bugs</strong>: using memory after <code>free</code> has been used on it.
+<ul>
+<li>It is good style to set the pointer to <code>NULL</code> immediately after freeing it to prevent this sort of error.</li>
+</ul></li>
+</ul>
+<h1 id="section-18">18/3/14</h1>
+<h3 id="garbage-collection">Garbage Collection</h3>
+<p>In Racket, we did not have to worry about freeing unused memory because the language has a built in <strong>garbage collector</strong>, like many modern languages.</p>
+<p>This is the component that automatically detects memory that is unused and returns it to the heap.</p>
+<p>The disadvantage is that the garbage collector is relatively slow, and can affect performance negatively.</p>
+<p>As a result, things like games and scientific computing use manual memory management, like in C. This is changing now due to threaded garbage collectors, that can run on separate processors.</p>
+<p>Dynamic memory allocations and deallocations are considered side effects and must be documented in the postconditions of the function.</p>
+<h3 id="dynamic-arrays">Dynamic Arrays</h3>
+<p>Since the length parameter of <code>malloc</code> is a variable, we can actually allocate a dynamic amount of memory:</p>
+<pre><code>// POST: allocates an array on heap (caller must free)
+// produce a pointer to the array or NULL if not possible
+int *create_array(int len) {
+    assert(len &gt; 0);
+    int *a = malloc(sizeof(int) * len); // array size
+    return a; // array pointer can be returned from functions
+}</code></pre>
+<p>Then in the client code, we would be responsible for freeing the memory after using it:</p>
+<pre><code>int a[] = create_array(25);
+// do stuff with `a` here
+free(a); // we have to free it afterwards</code></pre>
+<p><code>strdup(char s[])</code> is an unofficial but common function found in <code>string.h</code>, that duplicates a string. It does the same thing as the following:</p>
+<pre><code>// POST: caller must free
+// returns NULL if there is not enough memory
+char *my_strdup(const char s[]) {
+    char *new = malloc(sizeof(char) * (strlen(s) + 1)); // we add 1 to account for the null terminator
+    strcpy(new,s); // copy the old string into the new memory
+    return new;
+}</code></pre>
+<p>This technique is useful if we don't know the length of the array we need before we start storing the elements.</p>
+<p>We can <strong>resize</strong> our array by making a new array, copying the items from the old array to the new one, and then freeing the old array. This lets us make arrays bigger or smaller:</p>
+<pre><code>// resize_array(old, oldlen, newlen) changes the length
+// of array old from oldlen to newlen
+// PRE: old must be a malloc&#39;d array of size oldlen
+// POST: returns new array or NULL if out of memory
+// frees the old array, caller must free new array
+// if larger, new elements are uninitialized
+// TIME: O(n), where n is min(oldlen,newlen)
+int *resize_array(int * old, int oldlen, int newlen) {
+    int *new = malloc(sizeof(int) * newlen);
+    int copylen = newlen &lt; oldlen ? newlen : oldlen;
+    for (int i=0; i &lt; copylen; i++)
+        new[i] = old[i];
+    free(old);
+    return new;
+}</code></pre>
+<p><code>void *realloc(void *ptr, size_t s)</code> is a function designed to make it easier to resize arrays. It allows a block of memory allocated previously by <code>malloc</code> to be made bigger or smaller, preserving the contents of the memory. New space is uninitialized.</p>
+<p>We assume that the running time of <code>realloc</code> is <span class="math">\(O(s)\)</span>, where <span class="math">\(s\)</span> is <code>s</code>. <code>realloc(NULL, s)</code> is the same as <code>malloc(s)</code>, and <code>realloc(ptr, 0)</code> is the same as <code>free(ptr)</code>.</p>
+<p>Although we can now use <code>realloc</code> to implement <code>resize_array</code>, in practice most people just directly use <code>realloc</code>.</p>
+<p>Note that the original pointer passed to <code>realloc</code> should no longer be used. It is common to overwrite the original pointer, like <code>my_array = realloc(my_array, sizeof(int) * length)</code>, but in practice this could cause a memory leak due to what happens when there is an error.</p>
+<p>If <code>realloc</code> fails to allocate enough memory, then it returns <code>NULL</code> and <strong>does not free the original memory block</strong>.</p>
+<h2 id="amortized-analysis">Amortized Analysis</h2>
+<p>Amortized time complexity analysis focuses on analyzing the worst case of the <strong>average time complexity of a function oiver multiple calls</strong>.</p>
+<p>Consider the following implementation of dynamically expanding arrays:</p>
+<pre><code>int *numbers = NULL;
+int numbers_len = 0;
+
+void append_number(int i) {
+    numbers = realloc(numbers, sizeof(int) * (numbers_len + 1)); // increase the length by 1
+    numbers[numbers_len] = i;
+    numbers_len ++;
+}</code></pre>
+<p>This works, but the function is <span class="math">\(O(m)\)</span> where <span class="math">\(m\)</span> is <code>numbers_len</code>, so using the function to add up <span class="math">\(n\)</span> numbers is <span class="math">\(\sum_{i = 1}^n O(i) = O(n^2)\)</span> - it performs rather poorly.</p>
+<p>An interesting strategy is to allocate more memory than necessary, and only call <code>realloc</code> when the array is full.</p>
+<p>Consider a <strong>doubling strategy</strong>. Every time we hit the limit of the array length, we simply double the length of the array.</p>
+<pre><code>struct dyn_array {
+    int *data;
+    int len;
+    int max;
+};
+
+struct dyn_array *make_dyn_array(void) { // we usually return pointers to structures rather than structures themselves in order to avoid copying them to stack frames
+    struct dyn_array *a = malloc(sizeof(struct dyn_array));
+    a-&gt;data = malloc(sizeof(int));
+    a-&gt;len = 0;
+    a-&gt;max = 1; // we would usually use a size like 64 in practice to avoid calling `realloc` so much for smaller arrays
+    return a;
+}
+
+void destroy_dyn_array(struct dyn_array *da) {
+    free(da-&gt;data);
+    free(da);
+}
+
+void append_number(struct dyn_array *da, int i) {
+    if (da-&gt;len == da-&gt;max) {
+        da-&gt;max *= 2; // double the maximum size of the array
+        da-&gt;data = realloc(da-&gt;data, sizeof(int) * da-&gt;max);
+    }
+    da-&gt;data[da-&gt;len] = i;
+    da-&gt;len++;
+}</code></pre>
+<p>Now the function is <span class="math">\(O(n)\)</span> only when we are resizing, and <span class="math">\(O(1)\)</span> otherwise. For example, for the first 33 calls to <code>append_number</code>, we copy the following number of elements: 0, 1, 2, 0, 4, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32.</p>
+<p>We can see that for <span class="math">\(n + 1\)</span> calls, we have <span class="math">\(n + \frac{1}{2}n + \frac{1}{4}n + \ldots + 1 = n\sum_{i = 0}^{\lceil\log_2 n\rceil} \frac{1}{2^i} = n\frac{1 - \left(\frac{1}{2}\right)^{\lceil\log_2 n\rceil + 1}}{1 - \frac{1}{2}} = 2n\left(1 - \frac{1}{2}\frac{1}{2^{\lceil\log_2 n\rceil}}\right) = O\left(n - n\frac{1}{n}\right)\right) = O(n)\)</span> copying operations.</p>
+<p>Since everything else in <code>append_number</code> takes <span class="math">\(O(1)\)</span> for one call and <span class="math">\(O(n)\)</span> for <span class="math">\(n\)</span> calls, <code>append_number</code> has a <span class="math">\(O(n)\)</span> worst case time complexity, averaged over <span class="math">\(n\)</span> calls.</p>
+<p>So the <strong>amortized runtime</strong> (averaged worst case) of <code>append_number</code> per call is <span class="math">\(O(n) / n = O(1)\)</span>.</p>
+<p>For shrinking arrays, we might shirnk when the length of the data is less than or equal to a quarter of the maximum capacity. This would also have <span class="math">\(O(1)\)</span> amortized time complexity.</p>
+<p>This is actually what the <code>vector</code> data type in Racket uses internally.</p>
+<h2 id="linked-data-structures">Linked Data Structures</h2>
+<p>In computer science terms, Racket's lists are known as <strong>linked lists</strong>. A linked list is a set of <strong>nodes</strong> that store data, that are connected by <strong>links</strong>.</p>
+<p>This is usually implemented by having the nodes be structures that store a <strong>value</strong>, and a <strong>pointer to the next element</strong>. This is a <strong>singly linked list</strong> - it only has a single link to the next one. There is also the <strong>doubly linked list</strong>, which has a forward link and backwards link, so we can travel forward and backward in the list very easily.</p>
+<p>We usually have something along the lines of the following:</p>
+<pre><code>struct llnode {
+    int value;
+    struct llnode *next;
+};</code></pre>
+<p>This is a <strong>recursive data structure</strong> - it contains a pointer to another instance of itself. We can represent the end of a list by using <code>NULL</code> as the pointer for <code>llnode.next</code>.</p>
+<p>We usually expose linked lists through a pointer to the first element. So if the list is empty, we would simply have a null pointer. Otherwise, it would be a pointer to an <code>llnode</code> instance.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
