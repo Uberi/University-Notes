@@ -2084,8 +2084,107 @@ free_list(b); // INVALID SINCE SEVERAL NODES SHARED WITH `a` WERE FREED</code></
 <li><p>We can store more information in the structure, such as length or the last element.</p>
 <p>struct llist { struct llnode <em>front; struct llnode </em>back; int length; }</p></li>
 </ul>
-<p>Using this strategy, a list is now a pointer to a <code>llist</code> structure.</p>
-<p>;wip: implement sqr_list using the iterative approach</p>
+<p>Using this strategy, a list is now a pointer to a <code>llist</code> structure. This works with the functional and imperative approaches.</p>
+<p>We would then implement our functions such that they accept wrappers. For example, constructors and destructors:</p>
+<pre><code>struct llist *create_list(void) {
+    struct llist *lst = malloc(sizeof(struct llist));
+    lst-&gt;front = NULL;
+    return lst;
+}
+void destroy_list(struct llist *lst) {
+    free_list(lst-&gt;front);
+    free(lst);
+}</code></pre>
+<p>This allows us to have a simpler interface, because we aren't passing pointers to pointers:</p>
+<pre><code>struct llist *lst = create_list();
+add_to_front(5, lst);
+destroy_list(lst);</code></pre>
+<h1 id="section-20">25/3/14</h1>
+<p>There are two ways to mutate a list structure: changing the structure of nodes (adding nodes, etc.), and changing the values (mutating the contents of nodes).</p>
+<p>Notice that the structure contains a <code>length</code> field. If we start this off at 0, increment it whenever we add an element, and decrement it whenever we remove an element, then it is always the exact length of the list.</p>
+<p>This allows us to obtain the length of the list in <span class="math">\(O(1)\)</span> time, rather than <span class="math">\(O(n)\)</span> time to calculate it usually. We <strong>cache</strong> the length of the list in the list structure.</p>
+<p>The <code>back</code> field allows us to directly reference the last node in the list in <span class="math">\(O(1)\)</span> time. This allows us to implement things like list appending in <span class="math">\(O(1)\)</span> time. In this case, the list removal function would need to update this <code>back</code> pointer when there are no items left, and the appending function would need to update this pointer to the new item as well:</p>
+<pre><code>void add_to_back(int n, struct llist *lst) {
+    struct llnode *new = malloc(sizeof(struct llnode));
+    new-&gt;item = n;
+    new-&gt;next = NULL;
+    if (lst-&gt;length == 0) { // empty list
+        lst-&gt;front = new;
+        lst-&gt;back = new;
+    } else {
+        lst-&gt;back-&gt;next = new; // make the last item point to the new last item
+        lst-&gt;back = new; // update the new last item
+    }
+    lst-&gt;length ++; // update the length
+}</code></pre>
+<p>Using the structure makes it harder to point to the middle of a list accidentally. However, we now risk <strong>integrity/consistency</strong> issues - when the same information stored in different places becomes inconsistent.</p>
+<p>Note that before, when we build a list in a loop, we ended up with a list with the contents in reverse order. Now that we have <code>add_to_back</code>, we can build linked lists in order.</p>
+<p>For example, an implementation of <code>sqr_list</code> that duplicates the list:</p>
+<pre><code>struct llist *sqr_list(struct llist *lst) {
+    struct llnode *node = lst-&gt;front;
+    struct llist new_list = create_list();
+    while (node != NULL) {
+        add_to_back(node-&gt;item, new_list)
+        node = node-&gt;next;
+    }
+}</code></pre>
+<h3 id="augmentation-strategy">Augmentation Strategy</h3>
+<p>The augmentation strategy stores additional information in each node. For example, a <strong>doubly linked list</strong> stores a pointer to the previous node in each node in addition to the next node. This allows insertion and <strong>removal</strong> in <span class="math">\(O(1)\)</span> time.</p>
+<p>Things like skip lists and trees are all simply linked lists that are augmented.</p>
+<h3 id="summary">Summary</h3>
+<p>The functional approach works best when no memory management or mutation is required. It has the advantage of being simple, clear, and concise.</p>
+<p>The imperative approach works best when there is memory management or mutation is required.</p>
+<p>The wrapper strategy provides a cleaner interface and can store additional information per list.</p>
+<p>The augmentation strategy can store additional information per node.</p>
+<h2 id="trees">Trees</h2>
+<p>A <strong>tree</strong> is a linked data structure, conceptually the same as trees in CS135.</p>
+<p>In this course, trees will only store keys. The values can be considered an augmentation. We define a node of a binary search tree as follows:</p>
+<pre><code>struct bstnode {
+    int item;
+    struct bstnode *left;
+    struct bstnode *right;
+};</code></pre>
+<p>A reference to a tree is a pointer to a node. An empty tree would be a null pointer.</p>
+<p>The size of a tree is the number of nodes in it.</p>
+<p>The ordering property of the binary search tree is part of its definition.</p>
+<p>The <strong>depth</strong> of a <strong>node</strong> is the number of nodes from the root to the node, including the root node. The depth of the root node is 1, and the depth of its children is 2.</p>
+<p>The <strong>height</strong> of a <strong>tree</strong> is the maximum depth of any node in the tree. The height of an empty tree is 0.</p>
+<p>Consider an implementation of BST insertion using the functional approach:</p>
+<pre><code>// DO NOT DO THIS - BAD MEMORY STRUCTURE
+struct bstnode *bst_insert(int i, struct bstnode *t) {
+    if (t == NULL)
+        return make_bstnode(i, NULL, NULL); // insert item
+    else if (i == t-&gt;item) // duplicate item
+        return t;
+    else if (i &lt; t-&gt;item) // insert into left child
+        return make_bstnode(t-&gt;item, bst_insert(i, t-&gt;left), t-&gt;right);
+    else // insert into right node
+        return make_bstnode(t-&gt;item, t-&gt;left, bst_insert(i, t-&gt;right);
+}</code></pre>
+<p>This has <strong>memory management issues</strong>, similar to linked list insertion using the functional approach. This is because sometimes nodes are duplicated and sometimes they are directly copied from the original tree. In other words, the produced tree will share some nodes with the original tree.</p>
+<p>This means that if we free the original tree, parts of the new tree will be made invalid, which makes it impossible for us to safely free it.</p>
+<p>As a result, we usually write it using the imperative approach:</p>
+<pre><code>void bst_insert(int i, struct bstnode **ptr_root) {
+    bstnode *t = *ptr_root;
+    if (t == NULL) // tree is empty
+        *ptr_root = make_bstnode(i, NULL, NULL);
+    else if (t-&gt;item == i)
+        return;
+    else if (i &lt; t-&gt;item)
+        bst_insert(i, &amp;(t-&gt;left));
+    else
+        bst_insert(i, &amp;(t-&gt;right));
+}</code></pre>
+<h3 id="efficiency-1">Efficiency</h3>
+<p>A <strong>balanced</strong> tree is one where the height is <span class="math">\(O(\log n)\)</span>, where <span class="math">\(n\)</span> is the number of nodes. This is the minimum possible height for the tree. Any tree with a greater height is <strong>unbalanced</strong> and has a height of <span class="math">\(O(n)\)</span>.</p>
+<p>For example, <code>(node 1 empty (node 2 empty (node 3 empty (node 4 empty (node 5 empty (node 6 empty (node 7 empty empty)))))))</code> is an unbalanced tree, while <code>(node 4 (node 2 (node 1 empty empty) (node 3 empty empty)) (node 6 (node 5 empty empty) (node 7 empty empty)))</code> is balanced.</p>
+<p>Note that if we insert elements into the tree in sorted order, we get the worst case balanced tree, which basically becomes a linked list.</p>
+<p>The worst case time complexity of BST insertion, removal, and search is <span class="math">\(O(h)\)</span>, where <span class="math">\(h\)</span> is the height of the tree. As a result, if the tree is balanced, then these operations are all <span class="math">\(O(\log n)\)</span>, and otherwise <span class="math">\(O(n)\)</span>.</p>
+<p>There are trees that are <strong>self balancing</strong>, like AVL trees or red-black trees. These balance themselves automatically and have <span class="math">\(O(\log n)\)</span> time complexity for all operations.</p>
+<p>Many trees are also augmented with the number of nodes they contain in total. This allows us to implement a <span class="math">\(O(h)\)</span> <code>select(k)</code> operation, which produces the <code>k</code>th smallest or largest element in the tree.</p>
+<h3 id="graphs">Graphs</h3>
+<p>Trees and linked lists are all simply special cases of graphs. Graphs are more flexible, and allow things like reference cycles, direction (and the possibility of non-directed graphs), and even have labelled edges.</p>
+<p>Graphs are, as in CS135, collections of nodes and the edges that link nodes together.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

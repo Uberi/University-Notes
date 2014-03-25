@@ -1399,11 +1399,11 @@ For example, check if $\sum_{n = 1}^\infty \frac{(-1)^n x^n}{3^n \sqrt{n}}$ conv
 
 ### Radius of Convergence
 
-The **radius of convergence** for a power series is the maximum magnitude of the values of $x$ on the imaginary plane such that all numbers inside this radius of $x_0$ allow the power series to converge absolutely, and all numbers outside of this radius diverge.
+The **radius of convergence** for a power series is the maximum magnitude of the values of $\abs{x - x_0}$ on the imaginary plane such that all numbers inside this radius of $x_0$ allow the power series to converge absolutely, and all numbers outside of this radius diverge.
 
-The behaviour at the radius is not important.
+The behaviour when $\abs{x - x_0} = \rho$ is not important, just that it is a bounding radius.
 
-The values of $x$ that allow the series to converge are known as the **interval of convergence**.
+The values of $x$ that allow the series to converge are known as the **interval of convergence**. Unlike the radius of convergence, we also need to consider the endpoints of the interval for convergence.
 
 This is a number $\rho \in \mb{R}$ such that:
 
