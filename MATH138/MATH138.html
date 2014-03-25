@@ -95,6 +95,8 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
 \newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
 \]</span></p>
 <h1 id="section">6/1/14</h1>
 <p>Assignments are due every Friday at 3:30pm. They are posted on LEARN.</p>
@@ -733,7 +735,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>If <span class="math">\(N\)</span> is finite, then <span class="math">\(S_N\)</span> is known as a <strong>partial sum</strong>.</p>
 <p>We analyze series by analyzing the sequence of the sequence values: <span class="math">\(\sum_{n = 0}^0 a_n, \sum_{n = 0}^1 a_n, \sum_{n = 0}^2 a_n, \ldots\)</span>.</p>
 <p>So just as we take the limit of a sequence, we can take the limit of a series with <span class="math">\(\lim_{N \to \infty} \sum_{n = 0}^N a_n\)</span>. This is the relation between sequences and series.</p>
-<p>A sequence <strong>converges</strong> if this limit exists. Otherwise, it <strong>diverges</strong>.</p>
+<p>A sequence <strong>converges</strong> if this limit exists. Otherwise, it <strong>diverges</strong>. A series converges if and only if the limit of its partial sum to infinity is a finite value.</p>
 <p>For example, we previously saw the sequence <span class="math">\(a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}\)</span>, which is actually equivalent to the series <span class="math">\(S_N = \sum_{n = 0}^1 \frac{1}{n!}\)</span>. They are equivalent because <span class="math">\(a_n = S_N\)</span> when <span class="math">\(n = N\)</span>.</p>
 <p>We also define <span class="math">\(\sum a_n = \sum_{n = k}^\infty a_n, k \in \mb{Z}\)</span> for convenience.</p>
 <h1 id="section-19">26/2/14</h1>
@@ -760,7 +762,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>The value of the geometric series is <span class="math">\(S_N = \sum_{n = 0}^N x^n = 1 + x + x^2 + \ldots + x^N = \begin{cases} \frac{1 - x^N}{1 - x} &amp;\text{if } x \ne 1 \\ N + 1 &amp;\text{if } x = 1 \end{cases}\)</span></p>
 <h3 id="convergence">Convergence</h3>
 <p>One of the simplest tests for convergence is that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, <span class="math">\(\lim_{n \to \infty} a_n = 0\)</span> is a requirement for convergence.</p>
-<p>Formally, if <span class="math">\(\lim_{n \to \infty} a_n \ne 0\)</span>, then the sequence does not converge.</p>
+<p>Formally, if <span class="math">\(\lim_{n \to \infty} \abs{a_n} \ne 0\)</span>, then the sequence does not converge.</p>
 <p>This is known as the <strong>simple limit test</strong> for series.</p>
 <p>Our convergence tests can decide whether a series covnerges or not, but do not provide information about what it converges to.</p>
 <p>The sum of two convergent series is also convergent - <span class="math">\(\sum a_n + \sum b_n = \sum (a_n + b_n)\)</span> if <span class="math">\(\sum a_n\)</span> and <span class="math">\(\sum b_n\)</span> are both convergent. However, this is not always true for divergent series. For example, <span class="math">\(\sum_{n = 1}^\infty (-1)^n\)</span> and <span class="math">\(\sum_{n = 1}^\infty (-1)^{n + 1}\)</span> are both divergent, but <span class="math">\(\sum_{n = 1}^\infty {(-1)^n + (-1)^{n + 1}} = 0\)</span>.</p>
@@ -943,7 +945,8 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 </blockquote>
 <h2 id="taylor-series">Taylor Series</h2>
 <p>What power series is identical to a function <span class="math">\(f(x)\)</span> and all its derivatives at a point <span class="math">\(x = x_0\)</span>?</p>
-<p>For <span class="math">\(\abs{x - x_0} &lt; \rho\)</span>, where <span class="math">\(\rho\)</span> is the radius of convergence, <span class="math">\(f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n\)</span> where <span class="math">\(f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}\)</span>, and <span class="math">\(f^{(0)}(x_0) = f(x_0)\)</span>. This is known as a <strong>Taylor series/Taylor polynomials</strong>.</p>
+<p>For <span class="math">\(\abs{x - x_0} &lt; \rho\)</span>, where <span class="math">\(\rho\)</span> is the radius of convergence, <span class="math">\(f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n\)</span> where <span class="math">\(f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}\)</span>, and <span class="math">\(f^{(0)}(x_0) = f(x_0)\)</span>. This is known as a <strong>Taylor series</strong>.</p>
+<p>A <strong>Taylor polynomial</strong> is a partial sum of a Taylor series - all partial sums of Taylor series are simply polynomials.</p>
 <p>Find the Taylor polynomial for <span class="math">\(e^x\)</span> and use it to estimate <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span>:</p>
 <blockquote>
 <p>Let <span class="math">\(f(x) = e^x, x_0 = 0\)</span>. Then <span class="math">\(f^{(n)} = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0} = \evalat{e^x}_{x = x_0} = 1\)</span>.<br />Then <span class="math">\(f(x) = e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}, \abs{x - x_0} &lt; \rho\)</span>.<br />Let <span class="math">\(L = \lim_{n \to \infty} \abs{\frac{x^{n + 1}}{(n + 1)!} \frac{n!}{n^n}} = \lim_{n \to \infty} \abs{\frac{x}{n + 1}} = 0\)</span>.<br />Then by the ratio test, the series converges for all <span class="math">\(0 &lt; 1\)</span>, and the radius of covnergence is <span class="math">\(\rho = \infty\)</span>.<br />So <span class="math">\(\int_0^1 e^{-x^2} \dee x = \int_0^1 f(-x^2) \dee x = \sum_{n = 0}^\infty \int_0^1 \frac{(-x^2)^n}{n!} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{n!(2n + 1)}\)</span>.</p>
@@ -966,8 +969,80 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <li>Geometric series: <span class="math">\(\sum_{n = 0}^\infty x^n = \frac{1}{1 - x}, \abs{x - x_0} &lt; \rho\)</span></li>
 <li>Exponential series: <span class="math">\(\sum_{n = 0} \frac{x^n}{n!} = e^x, \abs{x - x_0} &lt; \rho\)</span></li>
 <li>Trigonometric series: <span class="math">\(\sin x = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}\)</span></li>
-<li>Binomial series: <span class="math">\(1 + Px + \frac{P(P - 1)x^2}{2!} + \frac{P(P - 1)(P - 2)}{3!} + \ldots + \frac{P \cdot (P - 1) \cdot \ldots \cdot (P - (n - 1))}{n!}x^n + \ldots = (1 + x)^P\)</span></li>
+<li>Binomial series: <span class="math">\(1 + Px + \frac{P(P - 1)}{2!}x^2 + \frac{P(P - 1)(P - 2)}{3!}x^3 + \ldots + \frac{P \cdot (P - 1) \cdot \ldots \cdot (P - (n - 1))}{n!}x^n + \ldots = (1 + x)^P\)</span></li>
 </ul>
+<h1 id="section-28">19/3/14</h1>
+<h2 id="properties-of-taylor-series">Properties of Taylor Series</h2>
+<p>So far we have derived power series by integrating geometric series, or by using the Taylor formula.</p>
+<p>Is the Taylor series of a function unique? Are there multiple ways to write out the power series of a function?</p>
+<p>First, we define the partial sum of a Taylor series for a function <span class="math">\(f(x)\)</span>, <span class="math">\(P_{N, x_0}(x) = \sum_{n = 0}^N \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n\)</span>.</p>
+<p>Then the remainder - the difference between the function and the partial sum - is <span class="math">\(R_N(x) = f(x) - P_{N, x_0}(x) = \sum_{n = N + 1}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n\)</span>.</p>
+<p>For example, given <span class="math">\(f(x) = e^x\)</span>, <span class="math">\(P_{3, 0}(x) = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!}\)</span> and <span class="math">\(R_{3, 0} = e^x - 1 - x - \frac{x^2}{2!} - \frac{x^3}{3!}\)</span>.</p>
+<h3 id="uniqueness-of-taylor-series">Uniqueness of Taylor Series</h3>
+<p>If <span class="math">\(f^{(n)}(x)\)</span> exists for all <span class="math">\(n \in \mb{N}\)</span> for some interval <span class="math">\(\mb{I}\)</span> such that <span class="math">\(x_0 \in \mb{I}\)</span>, and <span class="math">\(\forall n \in \mb{N}, x \in \mb{I}, \abs{f^{(n)}(x)} &lt; \infty\)</span>, then <span class="math">\(\forall x \in \mb{I}, \lim_{N \to \infty} \abs{f(x) - P_{N, x_0}(x)} = 0\)</span>.</p>
+<p>In other words, if the function has all derivatives on an interval containing <span class="math">\(x = x_0\)</span>, and all these derivatives are finite, then as we add more terms to the partial sum, the partial sum eventually converges to exactly the function.</p>
+<p>As a result, <span class="math">\(P_{N, x_0}\)</span> is <strong>unique</strong>. Practically speaking, this means we can generate Taylor series using any method we want to, and the result will always be the one true Taylor series for a given <span class="math">\(f(x)\)</span> and <span class="math">\(x_0\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>;wip</p>
+</blockquote>
+<p>Derive the Taylor series for <span class="math">\(f(x) = e^{-x^2}\)</span> for <span class="math">\(x_0 = 0\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(f^{(0)}(0) = 1, f^{(1)}(0) = 0, \ldots\)</span>, and the derivatives keep getting more and more complicated as we keep differentiating. It is impractical to calculate <span class="math">\(f^{(n)}\)</span>.<br />Instead, we use a substitution: let <span class="math">\(u = -x^2\)</span>. Then <span class="math">\(e^u = 1 + u + \frac{u^2}{2!} + \frac{u^3}{3!} + \ldots\)</span>.<br />Then <span class="math">\(e^{-x^2} = 1 - x^2 + \frac{x^4}{2!} - \frac{x^6}{3!} + \ldots\)</span>.</p>
+</blockquote>
+<p>This is a faster way to derive series - by using <strong>substitutions</strong> to make the functions simpler, converting the simpler function into a series, and then substituting the variable back into the series.</p>
+<p>Derive a Taylor series for <span class="math">\(f(x) = \sin x^3\)</span> at <span class="math">\(x_0 = 0\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = x^3\)</span>. Then <span class="math">\(\sin x^3 = \sin u = \sum_{n = 0}^\infty \frac{(-1)^n u^{2n + 1}}{(2n + 1)!} = \sum_{n = 0}^\infty \frac{(-1)^n x^{6n + 3}}{(2n + 1)!} = \sin x^3\)</span>.</p>
+</blockquote>
+<p>Derive the Taylor series for <span class="math">\(f(x) = \frac{1 + x}{1 - x}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(f(x) = (1 + x)\frac{1}{1 - x} = (1 + x)\sum_{n = 0}^\infty x^n = \sum_{n = 0}^\infty x^n + \sum_{n = 1}^\infty x^n = 1 + \sum_{n = 1}^\infty x^n + \sum_{n = 1}^\infty x^n = 1 + 2\sum_{n = 1}^\infty x^n\)</span>.</p>
+</blockquote>
+<p>Derive the Taylor series for <span class="math">\(\arcsin x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\arcsin x = \int_0^x \frac{1}{\sqrt{1 - t^2}} \dee t\)</span>.<br />Let <span class="math">\(u = -t^2\)</span>. Clearly, <span class="math">\(\frac{1}{\sqrt{1 - t^2}} = (1 + u)^{-\frac{1}{2}} = 1 - \frac{1}{2}u + \frac{3}{4}\frac{u^2}{2!} - \frac{15}{8}\frac{u^3}{3!} + \frac{105}{16} \frac{u^4}{4!} + \ldots\)</span>.<br />So <span class="math">\((1 + u)^{-\frac{1}{2}} = \frac{1}{\sqrt{1 - t^2}} = 1 + \frac{1}{2}t^2 + \frac{3}{2^2}\frac{t^4}{2!} + \frac{15}{2^3}\frac{t^6}{3!} + \frac{105}{2^4} \frac{t^8}{4!} + \ldots\)</span>.<br />So <span class="math">\(\int_0^x \frac{1}{\sqrt{1 - t^2}} \dee t = \arcsin x = \int_0^x 1 \dee t + \int_0^x \frac{1}{2}t^2 \dee t + \int_0^x \frac{3}{2^2}\frac{t^4}{2!} \dee t + \int_0^x \frac{15}{2^3}\frac{t^6}{3!} \dee t + \int_0^x \frac{105}{2^4} \frac{t^8}{4!} \dee t + \ldots = x + \frac{1}{3}\frac{1}{2}t^3 + \frac{1}{5}\frac{3}{2^2}\frac{t^5}{2!} + \frac{1}{7}\frac{15}{2^3}\frac{t^7}{3!} + \frac{1}{9}\frac{105}{2^4} \frac{t^9}{4!} + \ldots\)</span>.</p>
+</blockquote>
+<h1 id="section-29">21/3/14</h1>
+<h2 id="truncation-error">Truncation Error</h2>
+<p>We can actually estimate the error in <span class="math">\(P_{N, x_0}(x)\)</span>, even without knowing much about <span class="math">\(f(x)\)</span>.</p>
+<h3 id="taylors-remainder-theorem">Taylor's Remainder Theorem</h3>
+<p>If <span class="math">\(f^{(n + 1)}(x)\)</span> is continuous on an interval <span class="math">\(\mb{I}\)</span> such that <span class="math">\(x_0 \in \mb{I}\)</span>, then <span class="math">\(\forall x \in \mb{I}, \exists \min(x_0, x) &lt; c &lt; \max(x_0, x), f(x) - P_{N, x_0}(x) = R_N(x) = \frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}\)</span>.</p>
+<p>In other words, there exists a value <span class="math">\(c\)</span> between <span class="math">\(x\)</span> and <span class="math">\(x_0\)</span> exclusive such that the error is <span class="math">\(\frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}\)</span> - the <span class="math">\(N + 1\)</span>th term evaluated at some point in the interval.</p>
+<p>This can be proved using the Intermediate Value Theorem, but it is a messy proof.</p>
+<p>Clearly, if <span class="math">\(f(x) - P_{N, x_0}(x) = \frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}\)</span>, then <span class="math">\(\abs{f(x) - P_{N, x_0}(x)} = \abs{R_N(x)} = \abs{\frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}} = \abs{f^{(N + 1)}(c)}\abs{\frac{(x - x_0)^{N + 1}}{(N + 1)!}} = \abs{f^{(N + 1)}(c)}\frac{\abs{x - x_0}^{N + 1}}{(N + 1)!}\)</span>.</p>
+<p>Clearly, if <span class="math">\(\exists M \in \mb{R}, \forall x \in \mb{I}, \abs{f^{(N + 1)}(x)} \le M\)</span>, then <span class="math">\(\abs{f^{(N + 1)}(c)} \le M\)</span> and <span class="math">\(\abs{R_N(x)} \le M\frac{\abs{x - x_0}^{N + 1}}{(N + 1)!}\)</span>.</p>
+<p>This is called the <strong>Taylor's inequality</strong>, and is a more practically useful form of the Taylor Remainder Theorem.</p>
+<p>Basically, if <span class="math">\(f^{(n + 1)}(x)\)</span> is continuous on an interval <span class="math">\(\mb{I}\)</span> such that <span class="math">\(x_0 \in \mb{I}\)</span>, and <span class="math">\(\exists M \in \mb{R}, \forall x \in \mb{I}, \abs{f^{(N + 1)}(x)} \le M\)</span>, then <span class="math">\(\abs{R_{N, x_0}} \le M\frac{\abs{x - x_0}^{N + 1}}{(N + 1)!}\)</span>.</p>
+<p>In other words, if we can bound <span class="math">\(f^{N + 1}(x)\)</span>, then we can bound the error.</p>
+<p>Estimate the error in the Taylor polynomial for <span class="math">\(\sin x\)</span> about <span class="math">\(x_0 = 0\)</span> after <span class="math">\(N\)</span> terms:</p>
+<blockquote>
+<p>Clearly, the error is <span class="math">\(\abs{R_N(x)} = \abs{\sin x - \sum_{n = 0}^N \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}}\)</span>.<br />We want to find an <span class="math">\(M\)</span> such that <span class="math">\(\abs{f^{(((2N + 1) + 1))}(x)} \le M\)</span>. Note that we simply added 1 to the derivative depth, not to <span class="math">\(N\)</span> itself (<span class="math">\(N\)</span> here actually means <span class="math">\(2N + 1\)</span>).<br />Clearly, <span class="math">\(f^{(((2N + 1) + 1))}(x)\)</span> is either <span class="math">\(\pm \sin x\)</span> or <span class="math">\(\pm \cos x\)</span>, and so <span class="math">\(\abs{f^{(2N + 2)}(x)} \le 1\)</span>.<br />Then by the Taylor Remainder Theorem, <span class="math">\(\abs{R_N(x)} \le \frac{\abs{x - x_0}^{N + 1}}{(N + 1)!} = \frac{\abs{x}^{N + 1}}{(N + 1)!}\)</span>.</p>
+</blockquote>
+<p>We almost always want to minimise the error. To do this, we should keep <span class="math">\(x\)</span> as close to <span class="math">\(x_0\)</span> as possible (<span class="math">\(x - x_0\)</span> can be made smaller), or use more terms in the partial sum (<span class="math">\((N + 1)\)</span> can be made larger). Also, we always want the smallest possible <span class="math">\(M\)</span>, so we want to pick the tightest possible bound for <span class="math">\(f^{(N + 1)}(x)\)</span>.</p>
+<p>Estimate the error in the Taylor polynomial for <span class="math">\(e^x\)</span> about <span class="math">\(x_0 = 0\)</span> after <span class="math">\(N\)</span> terms for <span class="math">\(x \in [-1, 1]\)</span>, and determine the number of terms before the error is less than 0.000005:</p>
+<blockquote>
+<p>Clearly, the error is <span class="math">\(\abs{R_N(x)} = \abs{e^x - \sum_{n = 0}^N \frac{x^n}{n!}\)</span>.<br />We want to find <span class="math">\(M\)</span> such that <span class="math">\(\abs{f^{(N + 1)}(x)} \le M\)</span>.<br />Clearly, <span class="math">\(f^{(N + 1)}(x) = e^x\)</span>, and the largest possible value occurs at <span class="math">\(x = 1\)</span>, so <span class="math">\(\abs{f^{(N + 1)}(x)} \le e^1\)</span>, so <span class="math">\(M \ge e\)</span>.<br />Then by the Taylor Remainder Theorem, <span class="math">\(\abs{R_N(x)} \le e\frac{\abs{x}^{N + 1}}{(N + 1)!}\)</span>. We can use any <span class="math">\(M \ge e\)</span> we want to simplify our calculations, but larger <span class="math">\(M\)</span> means less useful error bounds.<br />We want <span class="math">\(\abs{R_N(x)} \le e\frac{\abs{x}^{N + 1}}{(N + 1)!} \le t(N) \le 0.000005\)</span>, where <span class="math">\(t(N)\)</span> is a function of <span class="math">\(N\)</span> only, without <span class="math">\(x\)</span>.<br />Since <span class="math">\(\abs{x}^{N + 1} \le 1\)</span>, <span class="math">\(\frac{e}{(N + 1)!} \le \frac{e\abs{\pm 1}^{N + 1}}{(N + 1)!} \le 0.000005\)</span>, or <span class="math">\((N + 1)! \le 200000e\)</span>.<br />Clearly, <span class="math">\(400000 = 200000 \cdot 2 \le 200000e \le 200000 \cdot 3 = 600000\)</span>.<br />Since <span class="math">\(9! \le 200000\)</span> and <span class="math">\(10! &gt; 600000\)</span>, <span class="math">\(N + 1 \ge 10 \iff (N + 1)! &gt; 200000e\)</span> and <span class="math">\(N \ge 9\)</span>.<br />So the error is less than 0.000005 when <span class="math">\(N \ge 9\)</span>.</p>
+</blockquote>
+<h1 id="section-30">24/3/14</h1>
+<p>A <strong>Maclaurin series</strong> is a Taylor series where <span class="math">\(x_0 = 0\)</span> - a Taylor series centered around 0.</p>
+<p>Clearly, <span class="math">\(\sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n = \frac{f^{(0)}(x_0)}{0!}(x - x_0)^0 + \ldots + \frac{f^{(N)}(x_0)}{N!}(x - x_0)^N + R_N(x)\)</span> for some finite <span class="math">\(N\)</span>.</p>
+<p>Let <span class="math">\(\mb{I} = [a, b]\)</span> such that <span class="math">\(x_0 \in \mb{I}\)</span>, within the interval of convergence. CLearly, Taylor series are always continuous.</p>
+<p>By the Taylor remainder theorem, <span class="math">\(\abs{R_{N, x_0}} = \frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span>. Clearly, <span class="math">\(\frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span> is a scalar multiple of <span class="math">\(\frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span>.</p>
+<p>So <span class="math">\(R_N(x) = O(1) \frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span>. In other words, we can write the remainder as a scalar multiple of the next term.</p>
+<p>So we can actually write the series as <span class="math">\(\frac{f^{(0)}(x_0)}{0!}(x - x_0)^0 + \ldots + \frac{f^{(N)}(x_0)}{N!}(x - x_0)^N + O(1) \frac{f^{(N + 1)}(x_0)}{(N + 1)!}(x - x_0)^{N + 1}\)</span>.</p>
+<h2 id="operations-on-taylor-series">Operations on Taylor Series</h2>
+<p>The reason we use Taylor series to represent functions is in order to more easily evaluate limits, integrals, and infinite series. It is also useful for approximating the functions with actual numbers, all while being able to get the error bounds in our evaluation.</p>
+<h3 id="limits">Limits</h3>
+<p>If we take a limit as <span class="math">\(x \to x_0\)</span>, then the coefficients of a Taylor series already has l'Hospital's rule built in.</p>
+<p>Consider <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x}\)</span>:</p>
+<blockquote>
+<p>We could find this geometrically, using l'Hospital's rule, or using infinite series.<br />Clearly, <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{x - \frac{x^3}{3!} + \frac{x^5}{5!} + M\frac{x^7}{7!}}}{x} = \lim_{x \to 0} 1 - \frac{x^2}{3!} + \frac{x^4}{5!} + M\frac{x^6}{7!}} = 1 - 0 + 0 + M0 = 1\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math">\(\lim_{x \to 0} \frac{e^{\sin x} - 1}{x}\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = \sin x\)</span>. Clearly, <span class="math">\(\lim_{x \to 0} \frac{e^{\sin x} - 1}{x} = \lim_{x \to 0} \frac{e^u - 1}{x} = \lim_{x \to 0} \frac{(1 + u + \frac{u^2}{2!} + \ldots) - 1}{x} = \lim_{x \to 0} \frac{\sin x + \frac{\sin^2 x}{2!} + \ldots}{x} = \lim_{x \to 0} \frac{\sin x}{x}\left(1 + \frac{\sin x}{2!} + \ldots\right) = \lim_{x \to 0} \frac{\sin x}{x} \lim_{x \to 0} \left(1 + \frac{\sin x}{2!} + \ldots\right) = 1\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

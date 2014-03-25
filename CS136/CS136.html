@@ -1809,7 +1809,7 @@ void quick_sort(int a[], int len) {
 <p>The heap is also known as the <strong>memory pool</strong> or <strong>free store</strong>, in order to avoid confusion with an abstract data structure also known as the heap.</p>
 <p>Likewise, there is an abstract data type known as the stack, but this is very conceptually similar to the stack in the memory model, so it is not that confusing.</p>
 <h3 id="malloc">malloc</h3>
-<p><code>void *malloc(size_t s)</code> is a function that requests <code>s</code> bytes of memory from the heap.</p>
+<p><code>void *malloc(size_t s)</code> is a function that requests <code>s</code> bytes of memory from the heap. It can be found in <code>stdlib.h</code>.</p>
 <p>It returns a pointer to a block of <code>s</code> bytes. If there isn't enough memory available, then the function returns <code>NULL</code>.</p>
 <p>Good implementations of <code>malloc</code> are <span class="math">\(O(1)\)</span>. In this course, we will assume that <code>malloc</code> is always <span class="math">\(O(1)\)</span>.</p>
 <p>As a result, it is highly recommended that we check for <code>NULL</code> after every <code>malloc</code>:</p>
@@ -1825,10 +1825,10 @@ if (p == NULL)
 struct posn *pp = malloc(sizeof(struct posn));</code></pre>
 <p>The typed pointer can then be used just like any other pointer. Note that the memory pointed to stays alive all the way until it is freed - it can be returned from functions or passed around as needed without worrying about going out of scope, unlike memory on the stack.</p>
 <h3 id="free">free</h3>
-<p>After we are done with the memory we allocated, we should always free it again so it is available for future allocations. This is done using the <code>void free(void *p)</code> function, which returns the allocated memory at <code>p</code> back to the heap.</p>
+<p>After we are done with the memory we allocated, we should always free it again so it is available for future allocations. This is done using the <code>void free(void *p)</code> function, which returns the allocated memory at <code>p</code> back to the heap. It can be found in <code>stdlib.h</code>.</p>
 <p><code>malloc</code> remembers how much memory we actually allocated at the address, so we do not need to give it the amount of memory we originally allocated - just the address of the memory we allocated.</p>
 <p>The pointer <code>p</code> must have been allocated by a previous <code>malloc</code>, and must be heap memory. After calling it, the memory pointed to by <code>p</code> is no longer safe to access or modify. This pointer is no longer safe to perform any operations on, but it may be returned by a future call to <code>malloc</code>.</p>
-<p>In RunC, it is required that every <code>malloc</code> is paired with a corresponding <code>free</code>.</p>
+<p>In RunC, it is required that every <code>malloc</code> is paired with a corresponding <code>free</code>. Freeing a null pointer does nothing.</p>
 <p><code>free(p)</code> is <span class="math">\(O(1)\)</span> in this course.</p>
 <h3 id="common-errors">Common Errors</h3>
 <p>Some common mistakes associated with dynamic memory are:</p>
@@ -1890,7 +1890,7 @@ int *resize_array(int * old, int oldlen, int newlen) {
     return new;
 }</code></pre>
 <p><code>void *realloc(void *ptr, size_t s)</code> is a function designed to make it easier to resize arrays. It allows a block of memory allocated previously by <code>malloc</code> to be made bigger or smaller, preserving the contents of the memory. New space is uninitialized.</p>
-<p>We assume that the running time of <code>realloc</code> is <span class="math">\(O(s)\)</span>, where <span class="math">\(s\)</span> is <code>s</code>. <code>realloc(NULL, s)</code> is the same as <code>malloc(s)</code>, and <code>realloc(ptr, 0)</code> is the same as <code>free(ptr)</code>.</p>
+<p>We assume that the running time of <code>realloc</code> is <span class="math">\(O(s)\)</span>, where <span class="math">\(s\)</span> is <code>s</code>. <code>realloc(NULL, s)</code> is the same as <code>malloc(s)</code>, and <code>realloc(ptr, 0)</code> is the same as <code>free(ptr)</code> (though it returns <code>NULL</code> in this case).</p>
 <p>Although we can now use <code>realloc</code> to implement <code>resize_array</code>, in practice most people just directly use <code>realloc</code>.</p>
 <p>Note that the original pointer passed to <code>realloc</code> should no longer be used. It is common to overwrite the original pointer, like <code>my_array = realloc(my_array, sizeof(int) * length)</code>, but in practice this could cause a memory leak due to what happens when there is an error.</p>
 <p>If <code>realloc</code> fails to allocate enough memory, then it returns <code>NULL</code> and <strong>does not free the original memory block</strong>.</p>
@@ -1951,6 +1951,141 @@ void append_number(struct dyn_array *da, int i) {
 };</code></pre>
 <p>This is a <strong>recursive data structure</strong> - it contains a pointer to another instance of itself. We can represent the end of a list by using <code>NULL</code> as the pointer for <code>llnode.next</code>.</p>
 <p>We usually expose linked lists through a pointer to the first element. So if the list is empty, we would simply have a null pointer. Otherwise, it would be a pointer to an <code>llnode</code> instance.</p>
+<p>So a linked list is a pointer to a node.</p>
+<h1 id="section-19">20/3/14</h1>
+<p>We can implement linked data structures using a <strong>recursive</strong> or <strong>iterative</strong> approach, or a hybrid approach combining both.</p>
+<h3 id="functional-approach">Functional Approach</h3>
+<p>The functional approach avoids mutation and side effects, and can be implemented something like the following:</p>
+<pre><code>int first(struct llnode *lst) {
+    assert(lst != NULL);
+    return lst-&gt;item;
+}
+
+struct llnode *rest(struct llnode * lst) {
+    assert(lst != NULL);
+    return lst-&gt;next;
+}
+
+struct llnode *empty(void) {
+    return NULL;
+}
+
+bool is_empty(struct llnode *lst) {
+    return lst == empty();
+}
+
+struct llnode *cons(int f, struct llnode * r) {
+    struct llnode *new = malloc(sizeof(struct llnode));
+    new-&gt;item = f;
+    new-&gt;next = r;
+    return new;
+}
+
+struct llnode *clone_list(struct llnode *lst) {
+    if (is_empty(lst)) return empty();
+    return cons(first(lst), clone_list(rest(lst)))
+}
+
+void free_list(struct llnode *lst) {
+    while (lst != NULL) {
+        struct llnode *backup = rest(lst);
+        free(lst);
+        lst = backup;
+    }
+}</code></pre>
+<p>This is very similar to how lists work in Racket.</p>
+<p>However, it is important to avoid memory leaks by always keeping the result of <code>cons</code> so we can free the allocated memory later. All return values from <code>cons</code> must have a corresponding <code>free</code>. We can free an entire list at the same time by using <code>free_list</code>.</p>
+<p>We can now write very functional code using this:</p>
+<pre><code>struct llnode *my_list = cons(10, cons(3, cons(5, cons(7, empty()))));</code></pre>
+<p>And even write programs that are much more functional:</p>
+<pre><code>int length(struct llnode *lst) {
+    if (is_empty(lst))
+        return 0;
+    return 1 + length(rest(lst));
+}</code></pre>
+<p>Alternatively, we could write it in a more iterative style:</p>
+<pre><code>int length(struct llnode *lst) {
+    int length = 0;
+    while (!is_empty(lst)) {
+        length ++;
+        lst = rest(lst);
+    }
+}</code></pre>
+<p>We must be very careful to avoid memory leaks from list functions. The old list must always be freed when we produce a new array intended to replace it.</p>
+<p>Lists in Racket are immutable. There is a <code>mcons</code> type that constructs a mutable version o the list that behaves identically to regular lists. In Scheme, all lists are simpy mutable.</p>
+<p>Consider the following:</p>
+<pre><code>struct llnode *a = cons(7, empty());
+struct llnode *b = cons(5, a); // WARNING: `b` SHARES THE SAME NODES AS `a`
+a = cons(3, a);
+free_list(a);
+free_list(b); // INVALID DUE TO NODES OF `a` ALREADY BEING FREED - DOUBLE FREE</code></pre>
+<p>This is an interesting case because part of the list is new, and part of it is old. If we were to continue with the functional approach, we might replace the second line with <code>struct llnode *b = cons(5, clone_list(a));</code>. This makes a copy so both lists do not share any nodes.</p>
+<p>In Racket, this was not noticable because the lists are immutable and it makes no difference whether we use the same part of the same list for two different things. Also, the garbage collector makes sure we don't leak any memory.</p>
+<p>However, <code>free</code> is a function that causes <strong>mutation</strong> - it causes a piece of memory to be made invalid. The above code has problems because we made use of assumptions that hold for immutable values, but were forced to use mutation to free up the memory.</p>
+<h3 id="imperative-approach">Imperative Approach</h3>
+<p>In the imperative approach, we go through each element of the list and mutate it. We can implement things like list squaring as follows:</p>
+<pre><code>void sqr_list_inplace(struct llnode *lst) {
+    while (lst != NULL) {
+        lst-&gt;item *= lst-&gt;item;
+        lst = lst-&gt;next;
+    }
+}</code></pre>
+<p>If we need to work on a copy of the list, we can use <code>list_clone</code> before calling the function, and pass it the copy.</p>
+<p>We want to move away from the <code>cons</code> function, which is functional, to a more imperative approach. We then introduce <code>add_to_front</code>, which mutates a linked list to add a node to the front:</p>
+<pre><code>void add_to_front(int n, struct llnode **ptr_front) {
+    struct llnode *new = malloc(sizeof(struct llnode));
+    new-&gt;item = n;
+    new-&gt;next = *ptr_front;
+    *ptr_front = new;
+}</code></pre>
+<p>This approach also makes it easy to remove nodes:</p>
+<pre><code>int remove_from_front(struct llnode **ptr_front) {
+    struct llnode *front = * ptr_front;
+    int retval = front-&gt;item;
+    *ptr_front = front-&gt;next;
+    free(front);
+    return retval;
+}</code></pre>
+<p>We can even directly insert a value into a sorted list:</p>
+<pre><code>void insert(int n, struct llnode **ptr_front) 
+    // find location for insertion
+    struct llnode *cur = *ptr_front;
+    struct llnode *prev = NULL;
+    while ((cur != NULL) &amp;&amp; (n &gt; cur-&gt;item)) {
+        prev = cur;
+        cur = cur-&gt;next;
+    }
+    
+    // set up the new node
+    struct llnode *new = malloc(sizeof(struct llnode));
+    new-&gt;item = n;
+    new-&gt;next = cur;
+    
+    // update pointers
+    if (prev == NULL) // insertion at the beginning
+        *ptr_front = new;
+    else // insertion at middle or end
+        prev-&gt;next = new;
+}</code></pre>
+<p>Note that it is still easy to accidentally produce double-free bugs:</p>
+<pre><code>struct llnode *a = NULL;
+add_to_front(5, &amp;a);
+struct llnode *b = a;
+add_to_front(7, &amp;a);
+add_to_front(9, &amp;b);
+free_list(a);
+free_list(b); // INVALID SINCE SEVERAL NODES SHARED WITH `a` WERE FREED</code></pre>
+<p>The solution is simply to avoid having lists that share the same nodes.</p>
+<h3 id="wrapper-strategy">Wrapper Strategy</h3>
+<p>Sometimes, we might wrap the whole list in a structure. This has several key advantages:</p>
+<ul>
+<li>We can avoid ugly pointer notation, making the interface cleaner.</li>
+<li>We can make misuse harder - for example, it is more difficult to get a list reference that shares the same nodes as another list.</li>
+<li><p>We can store more information in the structure, such as length or the last element.</p>
+<p>struct llist { struct llnode <em>front; struct llnode </em>back; int length; }</p></li>
+</ul>
+<p>Using this strategy, a list is now a pointer to a <code>llist</code> structure.</p>
+<p>;wip: implement sqr_list using the iterative approach</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -1424,13 +1424,45 @@ Communication has multiple goals, such as to entertain, scare, or deceive, in ad
 
 For example, poverty might be explained as failings of character such as laziness, when there are likely numerous other effects causing this situation.
 
+# 21/3/14
+
+;wip: chapter 9
+
 The **false polarization effect** is the tendency to overestimate the **extent to which someone's views resemble the strongest/sterotypical views of this sort**, and **the difference between one's own views and the views of people disagreeing**.
 
 **Bandwagon effects** are tendencies to prefer views that they think are held by other people - the idea that "if most other people believe it, then it is likely right". This may be caused by believing that everyone else has justification, and possibly because defending a minority view requires effort.
 
-The **false consensus effect** is the tendency to believe that the **absence of disagreement is agreement**. This is due to the convention that assertions are considered accepted until challenged. However, in practice there are social costs to dissenting, and there are therefore pressures not to express the dissenting view.
+The **false consensus effect** is the tendency to believe that the **absence of disagreement is agreement**. This is due to the convention that assertions are considered accepted until challenged. However, in practice there are social costs to dissenting, and there are therefore pressures not to express the dissenting view. In other words, it is the tendency to believe that one's own opinion is the norm.
 
 Society allows us to access information otherwise unavailable, but information might not flow perfectly - it can become corrupted, and there are other aims to communication that can lead to unreliable reasoning. Which social group we associate with will bias the information we have access to.
 
 For example, we might think that Harper is an excellent prime minister, but this likely reflects our friend group more than the view of all Canadians.
 
+For efficiency reasons, humans interpret stories, arguments, and reports, and identify the "main points" rather than memorizing the whole thing. As a result, every reading of every article is relative to the reader's state of information, preferences, and world view.
+
+When we relay information, we tend to emphasize the information perceived to be important/relevant (sharpening), while deemphasizing the less important/relevant aspects (leveling). Repeated sharpening or levelling over multiple relayings can heavily distort the original information.
+
+People also tend to correct the aspects of reports that they find implausible relative to their own views.
+
+# 24/3/14
+
+Science
+-------
+
+Science is seen as an authority or privileged source of information. It has high standards for empirical evidence and follows very careful methods to most successfully obtain information.
+
+The philosophy of sciecne is a subcategory of philosophy, like metaphysics or epistemology. It focuses on questions such as what should be considered science, how it relates to our learning about world, and how science should be done.
+
+**Science** is a term applied to two distinct things: a set of **social activities** (experiment design, running experiments), and the **representations** (hypotheses, theories, laws, models, etc.) and **artifacts** (instruments, machines, etc.) that result from this.
+
+We can then define science in terms of these two things. There is the practice of science, which results in the products of science. 
+
+The **demarcation problem** is the problem of determining whether something is or isn't science. This is a useful problem to consider because it can help us understand how some sources of information aare better than others.
+
+For example: astronomy vs. astrology. It is generally agreed that the former is science, while the latter is pseudo-science.
+
+Some common criteria for demarcating science are:
+
+* Science is fact based (empirical observations)
+* Scientific claims/theories are verifiable or falsifiable
+* Science employs the scientific method

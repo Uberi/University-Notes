@@ -28,6 +28,8 @@ $$
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
 \newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
 $$
 
 # 13/1/14 (I'm going to stop procrastinating this week, honest!)
@@ -1048,7 +1050,7 @@ $\refl_P: \mb{R}^n \to \mb{R}^n$ is a linear mapping $\refl_P(\vec{x})$ that ref
 
 We geometrically determine that the relection of a vector about a hyperplane is the projection of the vector on the hyperplane minus the perpendicular.
 
-In other words, $\refl_P \vec{x} = \proj_P \vec{x} - \perp_P \vec{x} = (\vec{x} - \perp_P \vec{x}) - \perp_P \vec{x} = \vec{x} - 2\perp_P \vec{x} = \vec{x} - 2\proj_{\vec{n}} \vec{x}$, where $\vec{n}$ is the normal of the hyperplane.
+In other words, $\refl_P \vec{x} = \proj_P \vec{x} - \prp_P \vec{x} = (\vec{x} - \prp_P \vec{x}) - \prp_P \vec{x} = \vec{x} - 2\prp_P \vec{x} = \vec{x} - 2\proj_{\vec{n}} \vec{x}$, where $\vec{n}$ is the normal of the hyperplane.
 
 Now we find the standard matrix of this operation. Let $\vec{n}$ be the normal of the plane. Then $\refl_P \vec{e}_i = \vec{e}_i - 2\proj_{\vec{n}} \vec{e}_i$.
 
@@ -1590,6 +1592,16 @@ If $A \in M_{m \times n}$ where $m > n$, then $A$ cannot have a right inverse.
 
 If $A \in M_{m \times n}$ where $m < n$, then $A$ cannot have a left inverse.
 
+Proof:
+
+> Let $A \in M_{m \times n}$ where $m > n$.  
+> Suppose $B = \begin{bmatrix} \vec{b}_1 & \ldots & \vec{b}_m \end{bmatrix}$ is a right inverse for $A$.  
+> Then $I_m = \begin{bmatrix} \vec{e}_1 & \ldots & \vec{e}_m \end{bmatrix} = AB = \begin{bmatrix} A\vec{b}_1 & \ldots & A\vec{b}_m \end{bmatrix}$.  
+> Then $\forall 1 \le i \le m, A\vec{b}_i = \vec{e}_i$.  
+> Let $\vec{y} \in \mb{R}^m$. Then $\vec{y} = y_1\vec{e}_1 + \ldots y_m\vec{e}_m = y_1A\vec{b}_1 + \ldots y_mA\vec{b}_m = A(y_1\vec{b}_1 + \ldots y_m\vec{b}_m)$.  
+> So $A\vec{x} = \vec{y}$ has a solution $\vec{x} = y_1\vec{b}_1 + \ldots y_m\vec{b}_m$ for all $\vec{y} \in \mb{R}^m$, and $\rank A = m$ by theorem 2.2.4.  
+> So $n \ge m$, a contradiction. Therefore, $A$ has no right inverse.  
+
 ### Inverse Matrices
 
 Let $A$ be an $n \times n$ square matrix. If $BA = I = AB$, then $B$ is the **inverse** of $A$. If $B$ exists, then $A$ is **invertible**.
@@ -1642,7 +1654,7 @@ c & d & 0 & 1 \\
 1 & 0 & \frac{d}{ad - bc} & -\frac{b}{ad - bc} \\
 0 & 1 & -\frac{c}{ad - bc} & \frac{a}{ad - bc} \\
 \end{array}\right]$.  
-> So $A^{-1} = \begin{bmatrix} \frac{d}{ad - bc} & -\frac{b}{ad - bc} \\ -\frac{c}{ad - bc} & \frac{a}{ad - bc} \end{bmatrix}$, and is defined whenever $ad - bc \ne 0$.  
+> So $A^{-1} = \begin{bmatrix} \frac{d}{ad - bc} & -\frac{b}{ad - bc} \\ -\frac{c}{ad - bc} & \frac{a}{ad - bc} \end{bmatrix} = \frac{1}{ad - bc}\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$, and is defined whenever $ad - bc \ne 0$.  
 
 ### Theorem 5.1.6
 
@@ -1762,13 +1774,252 @@ In other words, if $A$ is invertible, then $A and $A^{-1}$ can both be written a
 
 Also, since we are row reducing $\sys{A}{I}$ into $\sys{I}{A^{-1}}$, and $I = E_k \cdots E_1 A$, then $A^{-1} = E_k \cdots E_1 I = E_k \cdots E_1$. In other words, we are getting the inverse written in terms of elementary row operations.
 
-Matrix Determinant
-------------------
+Matrix Determinants
+-------------------
 
 The **determinant** of a matrix is an expression over the values within the matrix. The value of the determinant provides important information about it, such as whether it is invertible. The determinant **only applies to square matrices**.
 
-We denote the determinant of a matrix $A$ as $\det A = \abs{\begin{array}{ccc} a_{1, 1} & \ldots & a_{1, n} \\ \vdots & \vdots & \vdots \\ a_{m, 1} & \ldots & a_{m, n} \end{array}}$. Importantly, $A$ is invertible if and only if $\det A \ne 0$.
+We denote the determinant of a matrix $A$ as $\det A = \begin{vmatrix} a_{1, 1} & \ldots & a_{1, n} \\ \vdots & \vdots & \vdots \\ a_{m, 1} & \ldots & a_{m, n} \end{vmatrix}$. Importantly, $A$ is invertible if and only if $\det A \ne 0$.
 
-The determinant of a $1 \times 1$ matrix is $\det \begin{bmatrix} a \end{bmatrix} = a$. This is because the matrix is invertible if and only if $a \ne 0$.
+The determinant of a $1 \times 1$ matrix $A = \begin{bmatrix} a \end{bmatrix}$ is $\det A = a$. This is because the matrix is invertible if and only if $a \ne 0$.
 
-The determinant of the $2 \times 2$ matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is $\det A = ad - bc$.
+The determinant of the $2 \times 2$ matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is $\det A = ad - bc$. Note that this is equal to $a\begin{vmatrix} d \end{vmatrix} - b\begin{vmatrix} c \end{vmatrix}$.
+
+The determinant of the $3 \times 3$ matrix $A = \begin{bmatrix} a & b & c \\ d & e & f \\ g & h & i \end{bmatrix}$ is $\det A = aei - afh + bfg - bdi + cdh - cei$. Note that this is equal to $a\begin{vmatrix} e & f \\ h & i \end{vmatrix} - b\begin{vmatrix} d & f \\ g & i \end{vmatrix} + c\begin{bmatrix} d & e \\ g & h \end{bmatrix}$.
+
+### Cofactors
+
+Let $A \in M_{m \times n}$, $n \ge 2$. Let $A(i, j) \in M_{m - 1, n - 1}$ be $A$, except without row $i$ and column $j$.
+
+The **cofactor** of $A_{i, j}$ is $C_{i, j} = (-1)^{i + j} \det A(i, j)$. $A$ therefore has $mn$ cofactors.
+
+Using this notation, we can write the determinant of a $3 \times 3$ matrix as $\det A = a_{1, 1}C_{1, 1} + a_{1, 2}C_{1, 2} + a_{1, 3}C_{1, 3}$ or $a_{2, 1}C_{2, 1} + a_{2, 2}C_{2, 2} + a_{2, 3}C_{2, 3}$ or even $a_{1, 1}C_{1, 1} + a_{2, 2}C_{2, 2} + a_{3, 3}C_{3, 3}$.
+
+The cofactors of $A$ are denoted $\cof A = \begin{bmatrix} C_{1, 1} & \ldots & C_{1, n} \\ \vdots & \vdots & \vdots \\ C_{n, 1} & \ldots & C_{n, n} \end{bmatrix}$.
+
+### Theorem 5.3.1
+
+Given $A \in M_{n \times n}, n \ge 2$, for all $1 \le i \le n$, $\det A = a_{i, 1}C_{i, 1} + \ldots + a_{i, n}C_{i, n} = \sum_{j = 1}^n a_{i, j}C_{i, j}$ and $\det A = a_{1, i}C_{1, i} + \ldots + a_{n, i}C_{n, i} = \sum_{j = 1}^n a_{j, i}C_{j, i}$.
+
+$\sum_{j = 1}^n a_{i, j}C_{i, j}$ is the **cofactor expansion** across the $i$th row.
+
+$\sum_{j = 1}^n a_{j, i}C_{j, i}$ is called the **cofactor expansion** across the $i$th column.
+
+In other words, we can calculate the determinant of any $n \times n$ matrix using a simple formula based on the determinant of $n$ $(n - 1) \times (n - 1)$ matrices.
+
+We can choose any $i$ we want. Often, the best choice has a lot of zeros in $a_{i, j}$, so that we can avoid as much computation as possible.
+
+For example, find $\det \begin{bmatrix} 3 & -2 & 8 & 2 \\ 0 & -2 & 5 & 5 \\ 0 & 0 & 4 & 8 \\ 0 & 0 & 0 & 7 \end{bmatrix}$:
+
+> We choose to cofactor expand across the fourth row, since there are a lot of zeros there.  
+> Clearly, $\det \begin{bmatrix} 3 & -2 & 8 & 2 \\ 0 & -2 & 5 & 5 \\ 0 & 0 & 4 & 8 \\ 0 & 0 & 0 & 7 \end{bmatrix} = a_{4, 1}C_{4, 1} + a_{4, 2}C_{4, 2} + a_{4, 3}C_{4, 3} + a_{4, 4}C_{4, 4} = 0C_{4, 1} + 0C_{4, 2} + 0C_{4, 3} + 7C_{4, 4} = 7C_{4, 4}$.  
+> So $7C_{4, 4} = 7(-1)^{4 + 4}\det \begin{bmatrix} 3 & -2 & 8 \\ 0 & -2 & 5 \\ 0 & 0 & 4 \end{bmatrix}$.  
+> We choose to cofactor expand across the third row, since there are a lot of zeroes there.  
+> So $7C_{4, 4} = 7(b_{3, 1}C_{3, 1} + b_{3, 2}C_{3, 2} + b_{3, 3}C_{3, 3}) = 7(0C_{3, 1} + 0C_{3, 2} + 4C_{3, 3}) = 28C_{3, 3}$.  
+> So $28C_{3, 3} = 28(-1)^{3 + 3}\det \begin{bmatrix} 3 & -2 \\ 0 & -2 \end{bmatrix} = 28(3 \cdot -2 - (-2) \cdot 0) = 28 \cdot -6$.  
+> So $\det \begin{bmatrix} 3 & -2 & 8 & 2 \\ 0 & -2 & 5 & 5 \\ 0 & 0 & 4 & 8 \\ 0 & 0 & 0 & 7 \end{bmatrix} = -168$.  
+
+### Triangular Matrices
+
+Let $1 \le i \le n$ and $1 \le j \le n$.
+
+A matrix $A$ is **upper triangular** if and only if $i > j \implies A_{i, j} = 0$. In other words, it is upper triangular if it has a triangle of zeroes on the bottom left up to but not including the biggest diagonal.
+
+A matrix $A$ is **lower triangular** if and only if $i < j \implies A_{i, j} = 0$. In other words, it is lower triangular if it has a triangle of zeroes on the top right down to but not including the biggest diagonal.
+
+$\begin{bmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}$ is upper triangular but not lower triangular. The identity matrix is both.
+
+### Theorem 5.3.2
+
+Given $A \in M_{n \times n}$, if $A is upper or lower triangular, then $\det A = a_{1, 1} \cdots a_{n, n} = \sum_{i = 1}^n a_{i, i}$.
+
+In other words, a triangular matrix allows us to calculate the determinant simply by multiplying the elements in the diagonal together.
+
+As a result, if $A$ is triangular, then $A$ is invertible if and only if there are no zero elements in the diagonal.
+
+# 22/3/14
+
+It is easy to get the determinant of a triangular matrix - all we have to do is multiply the elements along the diagonal.
+
+We can actually use elementary row operations to put a matrix into diagonal form, to make it easier to calculate the determinant.
+
+### Theorem 5.3.3-5.3.5
+
+Let $A \in M_{m, n}$. Let $c \in \mb{R}, c \ne 0$.
+
+If $B$ is $A$ with one row multiplied by $c$, then $\det B = c \det A$. This corresponds to the operation $cR_i$, and we just multiply the determinant by that value.
+
+If $B$ is $A$ with two different rows swapped, then $\det B = -\det A$. This corresponds to the operation $R_i \leftrightarrow R_j$, and we just invert the determinant.
+
+If $B$ is $A$ with $c$ times one row being added to another row, then $\det B = \det A$. This corresponds to the operation $R_i + cR_j$, and the determinant is unaffected.
+
+Find $\begin{vmatrix} 3 & 4 & 3 & -1 \\ 1 & 0 & -2 & 2 \\ -2 & 1 & 1 & 4 \\ 1 & 2 & 1 & 1 \end{vmatrix}$ using elementary matrices:
+
+> Clearly, $\det \begin{bmatrix}
+3 & 4 & 3 & -1 \\
+1 & 0 & -2 & 2 \\
+-2 & 1 & 1 & 4 \\
+1 & 2 & 1 & 1 \\
+\end{bmatrix} = \det \begin{bmatrix} 1 & 0 & 0 & -\frac{21}{9} \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 & -4 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & -2 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & -1 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 2 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & -3 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix}
+3 & 4 & 3 & -1 \\
+1 & 0 & -2 & 2 \\
+-2 & 1 & 1 & 4 \\
+1 & 2 & 1 & 1 \\
+\end{bmatrix} = \det \begin{bmatrix}
+0 & 0 & 0 & \frac{2}{3} \\
+1 & 0 & -2 & 2 \\
+0 & 1 & -3 & 8 \\
+0 & 0 & 9 & -17 \\
+\end{bmatrix}$.  
+> Clearly, $\det \begin{bmatrix}
+0 & 0 & 0 & \frac{2}{3} \\
+1 & 0 & -2 & 2 \\
+0 & 1 & -3 & 8 \\
+0 & 0 & 9 & -17 \\
+\end{bmatrix} = -\det \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{bmatrix}\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix}
+0 & 0 & 0 & \frac{2}{3} \\
+1 & 0 & -2 & 2 \\
+0 & 1 & -3 & 8 \\
+0 & 0 & 9 & -17 \\
+\end{bmatrix} = -\det \begin{bmatrix}
+1 & 0 & -2 & 2 \\
+0 & 1 & -3 & 8 \\
+0 & 0 & 9 & -17 \\
+0 & 0 & 0 & \frac{2}{3} \\
+\end{bmatrix}$.  
+> Clearly, the matrix is now in upper triangular form, so $-\det \begin{bmatrix}
+1 & 0 & -2 & 2 \\
+0 & 1 & -3 & 8 \\
+0 & 0 & 9 & -17 \\
+0 & 0 & 0 & \frac{2}{3} \\
+\end{bmatrix} = -(1 \cdot 1 \cdot 9 \cdot \frac{2}{3}) = -6$, by theorem 5.3.2.  
+
+The basic technique is using elementary row operations to reduce the matrix into upper triangular form, and then using theorem 5.3.2 to easily calculate the determinant just by multiplying the numbers in the diagonal together.
+
+### Theorem 5.3.6
+
+Given $A \in M_{n \times n}$, $\det A = \det A^T$. In other words, the determinant of a matrix is the same as the determinant of its inverse.
+
+This allows us to do "column operations" to simplify the determinant - row operations, but applied to the transpose of the matrix.
+
+When we perform a row operation on a matrix, the determinant is always multiplied by a scalar $c \ne 0$ (this is $c$, 1, or -1 for multiplying a row, adding a scalar multiple, and swapping, respectively).
+
+As a result, the determinant of an elementary matrix is never 0, since the row operation always multiplies the determinant by a nonzero value, and the determinant of the identity is 1.
+
+Let $E$ be an elementary matrix. Since $E$ is $I$ with a row operation applied to it, and $\det I = 1$, $\det E = c$.
+
+Since $EA$ is equivalent to applying that same row operation to $A$, $\det EA = c \det A$.
+
+So $\det EA = \det E \det A$.
+
+### Theorem 5.3.8
+
+This theorem extends theorem 5.1.7.
+
+Given $A \in M_{n \times n}$, $A^{-1}$ exists if and only if $\det A \ne 0$.
+
+Proof:
+
+> Let $R$ be the RREF of $A$. 
+> Clearly, there exists a sequence of elementary matrices $E_k, \ldots, E_1$, such that $E_k \cdots E_1 A = R$.  
+> So $\det R = \det E_k \cdots \det E_1 \det A$.  
+> Since the determinant of any elementary matrix is always nonzero, $\det R \ne 0 \iff \det A \ne 0$.  
+> Since $R$ is in RREF and is square, $\det R \ne 0 \iff R = I$.  
+> Clearly, $R = I$ if and only if $E_k \cdots \det E_1$ is the inverse of $A$.  
+> So $A$ is invertible if and only if $\det A \ne 0$.  
+
+### Theorem 5.3.9
+
+Let $A, B \in M_{n \times n}$. Then $\det AB = \det A \det B$.
+
+In other words, the determinant of two square matrices of the same dimensions is the same as the product of their individual determinants.
+
+Proof:
+
+> Let $R$ be the RREF of $A$.  
+> Clearly, there exists a sequence of elementary matrices $E_k, \ldots, E_1$, such that $E_k \cdots E_1 A = R$ and $A = E_1^{-1} \cdots E_k^{-1} R$.  
+> Clearly, $\det AB = \det E_1^{-1} \cdots E_k^{-1} RB = \det E_1^{-1} \cdots E_k^{-1} \det RB$, and $\det E_1^{-1} \cdots E_k^{-1} \ne 0$ since they are all elementary matrices.  
+> Assume $\det A = 0$. Then $R \ne I$, and since $R$ is in RREF, the last row is all zeros, and $\det R = 0$.  
+> Clearly, the last row of $RB$ is 0 since the last row of $R$ is all zeroes.  
+> So $\det AB = 0 = \det A \det B$.  
+> Assume $\det A \ne 0$. Then $A$ is invertible, and by theorem 5.1.7, $R = I$.  
+> So $\det AB = \det E_1^{-1} \cdots E_k^{-1} B = \det E_1^{-1} \cdots E_k^{-1} \det B = \det E_1^{-1} \cdots E_k^{-1} R \det B = \det A \det B$.  
+> So in all cases, $\det AB = \det A \det B$.  
+
+As a result, if we use $B = A^{-1}$, then $\det AA^{-1} = \det I = 1 = \det A \det A^{-1}$, and $\det A = \frac{1}{\det A^{-1}}$.
+
+# 22/3/14
+
+Adjugates
+---------
+
+Let $A \in M_{n \times n}$.
+
+The ***adjugate** of $A is $\begin{bmatrix} C_{1, 1} & \ldots & C_{n, 1} \\ \vdots & \vdots & \vdots \\ C_{1, n} & \ldots & C_{n, n} \end{bmatrix}$.
+
+In other words, the adjugate of a matrix is the transpose of cofactors matrix - $\adj A = (\cof A)^T$. So $(\adj A)_{i, j} = C_{j, i}$.
+
+For example, $\cof \begin{bmatrix} a & b \\ c & d \end{bmatrix} = \begin{bmatrix} a & -c \\ -b & a \end{bmatrix}$, so $\adj A = \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$.
+
+The adjugate is extremely useful because it allows us to find the inverse of any matrix.
+
+This is because $A^{-1} = \frac{1}{\det A} \adj A$.
+
+In addition, this means that $A_{i, j}^{-1} = \frac{1}{\det A} C_{j, i} = \frac{1}{\det A} (-1)^{i + j} \det A(i, j)$, where $A(i, j)$ is $A$ with row $i$ and column $j$ removed so it is $(n - 1) \times (n - 1)$.
+
+We have also seen the elementary matrix method of finding the inverse, where we row reduce the matrix while keeping track of all the elementary matrices along the way, then invert these elementary matrices and multiply them.
+
+### Cramer's Rule
+
+Consider the linear system $A\vec{x} = \vec{b}$. The solution is $\vec{x} = A^{-1}\vec{b}$, so we know that it has a solution if and only if $A$ is invertible.
+
+Since $A^{-1} = \frac{1}{\det A} \adj A$, then $\vec{x} = \frac{1}{\det A} \adj A \vec{b} = \frac{1}{\det A} \begin{bmatrix} b_1C_{1, 1} + \ldots + b_nC_{n, 1} \\ \vdots \\ b_1C_{1, n} + \ldots + b_nC_{n, n} \end{bmatrix}$.
+
+Let $A_i = \begin{bmatrix} a_{1, 1} & \ldots & a_{1, i - 1} & b_1 & a_{1, i + 1} & \ldots & a_{1, n} \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ a_{n, 1} & \ldots & a_{n, i - 1} & b_n & a_{n, i + 1} & \ldots & a_{n, n} \end{bmatrix}$. This is basically $A$ with the $i$th column replaced by $\vec{b}$.
+
+Note that $\det A_i = b_1C_{1, i} & \ldots & b_nC_{n, i}$. As a result, $\vec{x} = \frac{1}{\det A} \begin{bmatrix} \det A_1 \\ \vdots \\ \det A_n \end{bmatrix}$.
+
+**Cramer's rule** states that given $A \in M_{n \times n}$ such that $A$ is invertible, the solution to $A\vec{x} = \vec{b}$ is $\vec{x}_i = \frac{\det A_i}{\det A}$ for $1 \le i \le n$.
+
+This allows us to solve linear systems using determinants. However, it is not as practical as simply row reducing the matrices to obtain the values of $\vec{x}$.
+
+Cramer's rule explicitly gives the solution to a system of linear equations as a mathematical equation. This can be contrasted with row reducing, which does not have a formula.
+
+Area/Volumes
+------------
+
+Let $\vec{u}, \vec{v} \in \mb{R}^2$. Geometrically, $\vec{u} + \vec{v}$ forms a parallelogram with $\vec{u}$ and $\vec{v}$ as the sides. We then say that $\vec{u}$ and $\vec{v}$ **induce** a parallelogram.
+
+This parallelogram has points $\vec{0}, \vec{u}, \vec{v}, \vec{u} + \vec{v}$.
+
+Clearly, the area of the parallelogram is the length times the height. The length of the parallelogram can be set as $\magn{\vec{u}}$, in which case the height would be $\magn{\prp_{\vec{u}} \vec{v}}$, so the area would be $\magn{\vec{u}} \magn{\prp_{\vec{u}} \vec{v}}$.
+
+Using trigonometry, we find that $\magn{\prp_{\vec{u}} \vec{v}} = \magn{\vec{v}} \sin \theta$, where $\theta$ is the angle between $\vec{u}$ and $\vec{v}$.
+
+So $A = \magn{\vec{u}} \magn{\vec{v}} \sin \theta$.
+
+Recall that $\cos \theta = \frac{\vec{u} \cdot \vec{v}}{\magn{\vec{u}} \magn{\vec{v}}}$.
+
+Clearly, $A^2 = \magn{\vec{u}}^2 \magn{\vec{v}}^2 \sin^2 \theta = \magn{\vec{u}}^2 \magn{\vec{v}}^2 (1 - \cos^2 \theta)
+= (u_1^2 + u_2^2) (v_1^2 + v_2^2) - (\magn{\vec{u}} \magn{\vec{v}} \cos \theta)^2 = (u_1^2 + u_2^2) (v_1^2 + v_2^2) - (\magn{\vec{u}} \magn{\vec{v}} \cos \theta)^2
+= u_1^2 v_1^2 + u_1^2 v_2^2 + u_2^2 v_1^2 + u_2^2 v_2^2 - (u_1 v_1 + u_2 v_2)^2
+= u_1^2 v_1^2 + u_1^2 v_2^2 + u_2^2 v_1^2 + u_2^2 v_2^2 - (u_1^2 v_1^2 + 2 u_1 v_1 u_2 v_2 + u_2^2 v_2^2)
+= u_1^2 v_2^2 - 2 u_1 v_1 u_2 v_2 + u_2^2 v_1^2 = (u_1 v_2 - u_2 v_1)^2$.
+
+Clearly, $\det \begin{bmatrix} \vec{u} & \vec{v} \end{bmatrix} = \det \begin{bmatrix} u_1 & v_1 \\ u_2 v_2 \end{bmatrix} = u_1 v_2 - v_1 u_2$.
+
+So $A^2 = (\det \begin{bmatrix} \vec{u} & \vec{v} \end{bmatrix})^2$. Since $A$ is always non-negative, $A = \abs{\det \begin{bmatrix} \vec{u} & \vec{v} \end{bmatrix}}$.
+
+So in $\mb{R}^2$, the area of the parallelogram is $\abs{u_1 v_2 - v_1 u_2}$.
+
+In $\mb{R}^3$, three vectors $\vec{u}, \vec{v}, \vec{w}$ induce a **parallelepiped** - a sort of slanted cube.
+
+Without loss of generality, assume $\vec{u}, \vec{v}$ form the base of the parallelepiped.
+
+The volume of the parallelepiped is the area of the base times the height, or $\magn{\vec{u} \times \vec{v}} \magn{\proj_{\vec{u} \times \vec{v}} \vec{w}}$. Recall that $\vec{u} \times \vec{v}$ is the cross product, and results in a vector perpendicular to $\vec{u}$ and $\vec{v}$ with the magnitude of the parallelogram they form.
+
+Using a similar process as before, we find that $V = \abs{\det \begin{bmatrix} \vec{u} & \vec{v} & \vec{w} \end{bmatrix}}$.
+
+In fact, this works in any number of dimensions. A **parallelotope** is an $n$ dimensional solid induced by $n$ vectors $\vec{v}_1, \ldots, \vec{v}_n \in \mb{R}^n$.
+
+The **n-volume** of an $n$ dimensional solid is an extension to the concept of a volume to any number of dimensions. The n-volume of the parallelotope is $V = \abs{\det \begin{bmatrix} \vec{v}_1 & \ldots & \vec{v}_n \end{bmatrix}}$.

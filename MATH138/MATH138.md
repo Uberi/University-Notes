@@ -30,6 +30,8 @@ $$
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
 \newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
 $$
 
 # 6/1/14
@@ -1072,7 +1074,7 @@ We analyze series by analyzing the sequence of the sequence values: $\sum_{n = 0
 
 So just as we take the limit of a sequence, we can take the limit of a series with $\lim_{N \to \infty} \sum_{n = 0}^N a_n$. This is the relation between sequences and series.
 
-A sequence **converges** if this limit exists. Otherwise, it **diverges**.
+A sequence **converges** if this limit exists. Otherwise, it **diverges**. A series converges if and only if the limit of its partial sum to infinity is a finite value.
 
 For example, we previously saw the sequence $a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}$, which is actually equivalent to the series $S_N = \sum_{n = 0}^1 \frac{1}{n!}$. They are equivalent because $a_n = S_N$ when $n = N$.
 
@@ -1121,7 +1123,7 @@ The value of the geometric series is $S_N = \sum_{n = 0}^N x^n = 1 + x + x^2 + \
 
 One of the simplest tests for convergence is that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, $\lim_{n \to \infty} a_n = 0$ is a requirement for convergence.
 
-Formally, if $\lim_{n \to \infty} a_n \ne 0$, then the sequence does not converge.
+Formally, if $\lim_{n \to \infty} \abs{a_n} \ne 0$, then the sequence does not converge.
 
 This is known as the **simple limit test** for series.
 
@@ -1459,7 +1461,9 @@ Taylor Series
 
 What power series is identical to a function $f(x)$ and all its derivatives at a point $x = x_0$?
 
-For $\abs{x - x_0} < \rho$, where $\rho$ is the radius of convergence, $f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$ where $f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}$, and $f^{(0)}(x_0) = f(x_0)$. This is known as a **Taylor series/Taylor polynomials**.
+For $\abs{x - x_0} < \rho$, where $\rho$ is the radius of convergence, $f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$ where $f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}$, and $f^{(0)}(x_0) = f(x_0)$. This is known as a **Taylor series**.
+
+A **Taylor polynomial** is a partial sum of a Taylor series - all partial sums of Taylor series are simply polynomials.
 
 Find the Taylor polynomial for $e^x$ and use it to estimate $\int_0^1 e^{-x^2} \dee x$:
 
@@ -1502,4 +1506,132 @@ Some common Taylor series are:
 * Geometric series: $\sum_{n = 0}^\infty x^n = \frac{1}{1 - x}, \abs{x - x_0} < \rho$
 * Exponential series: $\sum_{n = 0} \frac{x^n}{n!} = e^x, \abs{x - x_0} < \rho$
 * Trigonometric series: $\sin x = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}$
-* Binomial series: $1 + Px + \frac{P(P - 1)x^2}{2!} + \frac{P(P - 1)(P - 2)}{3!} + \ldots + \frac{P \cdot (P - 1) \cdot \ldots \cdot (P - (n - 1))}{n!}x^n + \ldots = (1 + x)^P$
+* Binomial series: $1 + Px + \frac{P(P - 1)}{2!}x^2 + \frac{P(P - 1)(P - 2)}{3!}x^3 + \ldots + \frac{P \cdot (P - 1) \cdot \ldots \cdot (P - (n - 1))}{n!}x^n + \ldots = (1 + x)^P$
+
+# 19/3/14
+
+Properties of Taylor Series
+----------------------------
+
+So far we have derived power series by integrating geometric series, or by using the Taylor formula.
+
+Is the Taylor series of a function unique? Are there multiple ways to write out the power series of a function?
+
+First, we define the partial sum of a Taylor series for a function $f(x)$, $P_{N, x_0}(x) = \sum_{n = 0}^N \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$.
+
+Then the remainder - the difference between the function and the partial sum - is $R_N(x) = f(x) - P_{N, x_0}(x) = \sum_{n = N + 1}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$.
+
+For example, given $f(x) = e^x$, $P_{3, 0}(x) = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!}$ and $R_{3, 0} = e^x - 1 - x - \frac{x^2}{2!} - \frac{x^3}{3!}$.
+
+### Uniqueness of Taylor Series
+
+If $f^{(n)}(x)$ exists for all $n \in \mb{N}$ for some interval $\mb{I}$ such that $x_0 \in \mb{I}$, and $\forall n \in \mb{N}, x \in \mb{I}, \abs{f^{(n)}(x)} < \infty$, then $\forall x \in \mb{I}, \lim_{N \to \infty} \abs{f(x) - P_{N, x_0}(x)} = 0$.
+
+In other words, if the function has all derivatives on an interval containing $x = x_0$, and all these derivatives are finite, then as we add more terms to the partial sum, the partial sum eventually converges to exactly the function.
+
+As a result, $P_{N, x_0}$ is **unique**. Practically speaking, this means we can generate Taylor series using any method we want to, and the result will always be the one true Taylor series for a given $f(x)$ and $x_0$.
+
+Proof:
+
+> ;wip
+
+Derive the Taylor series for $f(x) = e^{-x^2}$ for $x_0 = 0$:
+
+> Clearly, $f^{(0)}(0) = 1, f^{(1)}(0) = 0, \ldots$, and the derivatives keep getting more and more complicated as we keep differentiating. It is impractical to calculate $f^{(n)}$.  
+> Instead, we use a substitution: let $u = -x^2$. Then $e^u = 1 + u + \frac{u^2}{2!} + \frac{u^3}{3!} + \ldots$.  
+> Then $e^{-x^2} = 1 - x^2 + \frac{x^4}{2!} - \frac{x^6}{3!} + \ldots$.  
+
+This is a faster way to derive series - by using **substitutions** to make the functions simpler, converting the simpler function into a series, and then substituting the variable back into the series.
+
+Derive a Taylor series for $f(x) = \sin x^3$ at $x_0 = 0$:
+
+> Let $u = x^3$. Then $\sin x^3 = \sin u = \sum_{n = 0}^\infty \frac{(-1)^n u^{2n + 1}}{(2n + 1)!} = \sum_{n = 0}^\infty \frac{(-1)^n x^{6n + 3}}{(2n + 1)!} = \sin x^3$.  
+
+Derive the Taylor series for $f(x) = \frac{1 + x}{1 - x}$:
+
+> Clearly, $f(x) = (1 + x)\frac{1}{1 - x} = (1 + x)\sum_{n = 0}^\infty x^n = \sum_{n = 0}^\infty x^n + \sum_{n = 1}^\infty x^n = 1 + \sum_{n = 1}^\infty x^n + \sum_{n = 1}^\infty x^n = 1 + 2\sum_{n = 1}^\infty x^n$.  
+
+Derive the Taylor series for $\arcsin x$:
+
+> Clearly, $\arcsin x = \int_0^x \frac{1}{\sqrt{1 - t^2}} \dee t$.  
+> Let $u = -t^2$. Clearly, $\frac{1}{\sqrt{1 - t^2}} = (1 + u)^{-\frac{1}{2}} = 1 - \frac{1}{2}u + \frac{3}{4}\frac{u^2}{2!} - \frac{15}{8}\frac{u^3}{3!} + \frac{105}{16} \frac{u^4}{4!} + \ldots$.  
+> So $(1 + u)^{-\frac{1}{2}} = \frac{1}{\sqrt{1 - t^2}} = 1 + \frac{1}{2}t^2 + \frac{3}{2^2}\frac{t^4}{2!} + \frac{15}{2^3}\frac{t^6}{3!} + \frac{105}{2^4} \frac{t^8}{4!} + \ldots$.  
+> So $\int_0^x \frac{1}{\sqrt{1 - t^2}} \dee t = \arcsin x = \int_0^x 1 \dee t + \int_0^x \frac{1}{2}t^2 \dee t + \int_0^x \frac{3}{2^2}\frac{t^4}{2!} \dee t + \int_0^x \frac{15}{2^3}\frac{t^6}{3!} \dee t + \int_0^x \frac{105}{2^4} \frac{t^8}{4!} \dee t + \ldots = x + \frac{1}{3}\frac{1}{2}t^3 + \frac{1}{5}\frac{3}{2^2}\frac{t^5}{2!} + \frac{1}{7}\frac{15}{2^3}\frac{t^7}{3!} + \frac{1}{9}\frac{105}{2^4} \frac{t^9}{4!} + \ldots$.  
+
+# 21/3/14
+
+Truncation Error
+----------------
+
+We can actually estimate the error in $P_{N, x_0}(x)$, even without knowing much about $f(x)$.
+
+### Taylor's Remainder Theorem
+
+If $f^{(n + 1)}(x)$ is continuous on an interval $\mb{I}$ such that $x_0 \in \mb{I}$, then $\forall x \in \mb{I}, \exists \min(x_0, x) < c < \max(x_0, x), f(x) - P_{N, x_0}(x) = R_N(x) = \frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}$.
+
+In other words, there exists a value $c$ between $x$ and $x_0$ exclusive such that the error is $\frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}$ - the $N + 1$th term evaluated at some point in the interval.
+
+This can be proved using the Intermediate Value Theorem, but it is a messy proof.
+
+Clearly, if $f(x) - P_{N, x_0}(x) = \frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}$, then $\abs{f(x) - P_{N, x_0}(x)} = \abs{R_N(x)} = \abs{\frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}} = \abs{f^{(N + 1)}(c)}\abs{\frac{(x - x_0)^{N + 1}}{(N + 1)!}} = \abs{f^{(N + 1)}(c)}\frac{\abs{x - x_0}^{N + 1}}{(N + 1)!}$.
+
+Clearly, if $\exists M \in \mb{R}, \forall x \in \mb{I}, \abs{f^{(N + 1)}(x)} \le M$, then $\abs{f^{(N + 1)}(c)} \le M$ and $\abs{R_N(x)} \le M\frac{\abs{x - x_0}^{N + 1}}{(N + 1)!}$.
+
+This is called the **Taylor's inequality**, and is a more practically useful form of the Taylor Remainder Theorem.
+
+Basically, if $f^{(n + 1)}(x)$ is continuous on an interval $\mb{I}$ such that $x_0 \in \mb{I}$, and $\exists M \in \mb{R}, \forall x \in \mb{I}, \abs{f^{(N + 1)}(x)} \le M$, then $\abs{R_{N, x_0}} \le M\frac{\abs{x - x_0}^{N + 1}}{(N + 1)!}$.
+
+In other words, if we can bound $f^{N + 1}(x)$, then we can bound the error.
+
+Estimate the error in the Taylor polynomial for $\sin x$ about $x_0 = 0$ after $N$ terms:
+
+> Clearly, the error is $\abs{R_N(x)} = \abs{\sin x - \sum_{n = 0}^N \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}}$.  
+> We want to find an $M$ such that $\abs{f^{(((2N + 1) + 1))}(x)} \le M$. Note that we simply added 1 to the derivative depth, not to $N$ itself ($N$ here actually means $2N + 1$).  
+> Clearly, $f^{(((2N + 1) + 1))}(x)$ is either $\pm \sin x$ or $\pm \cos x$, and so $\abs{f^{(2N + 2)}(x)} \le 1$.  
+> Then by the Taylor Remainder Theorem, $\abs{R_N(x)} \le \frac{\abs{x - x_0}^{N + 1}}{(N + 1)!} = \frac{\abs{x}^{N + 1}}{(N + 1)!}$.  
+
+We almost always want to minimise the error. To do this, we should keep $x$ as close to $x_0$ as possible ($x - x_0$ can be made smaller), or use more terms in the partial sum ($(N + 1)$ can be made larger). Also, we always want the smallest possible $M$, so we want to pick the tightest possible bound for $f^{(N + 1)}(x)$.
+
+Estimate the error in the Taylor polynomial for $e^x$ about $x_0 = 0$ after $N$ terms for $x \in [-1, 1]$, and determine the number of terms before the error is less than 0.000005:
+
+> Clearly, the error is $\abs{R_N(x)} = \abs{e^x - \sum_{n = 0}^N \frac{x^n}{n!}$.  
+> We want to find $M$ such that $\abs{f^{(N + 1)}(x)} \le M$.  
+> Clearly, $f^{(N + 1)}(x) = e^x$, and the largest possible value occurs at $x = 1$, so $\abs{f^{(N + 1)}(x)} \le e^1$, so $M \ge e$.  
+> Then by the Taylor Remainder Theorem, $\abs{R_N(x)} \le e\frac{\abs{x}^{N + 1}}{(N + 1)!}$. We can use any $M \ge e$ we want to simplify our calculations, but larger $M$ means less useful error bounds.  
+> We want $\abs{R_N(x)} \le e\frac{\abs{x}^{N + 1}}{(N + 1)!} \le t(N) \le 0.000005$, where $t(N)$ is a function of $N$ only, without $x$.  
+> Since $\abs{x}^{N + 1} \le 1$, $\frac{e}{(N + 1)!} \le \frac{e\abs{\pm 1}^{N + 1}}{(N + 1)!} \le 0.000005$, or $(N + 1)! \le 200000e$.  
+> Clearly, $400000 = 200000 \cdot 2 \le 200000e \le 200000 \cdot 3 = 600000$.  
+> Since $9! \le 200000$ and $10! > 600000$, $N + 1 \ge 10 \iff (N + 1)! > 200000e$ and $N \ge 9$.  
+> So the error is less than 0.000005 when $N \ge 9$.  
+
+# 24/3/14
+
+A **Maclaurin series** is a Taylor series where $x_0 = 0$ - a Taylor series centered around 0.
+
+Clearly, $\sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n = \frac{f^{(0)}(x_0)}{0!}(x - x_0)^0 + \ldots + \frac{f^{(N)}(x_0)}{N!}(x - x_0)^N + R_N(x)$ for some finite $N$.
+
+Let $\mb{I} = [a, b]$ such that $x_0 \in \mb{I}$, within the interval of convergence. CLearly, Taylor series are always continuous.
+
+By the Taylor remainder theorem, $\abs{R_{N, x_0}} = \frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}$. Clearly, $\frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}$ is a scalar multiple of $\frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}$.
+
+So $R_N(x) = O(1) \frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}$. In other words, we can write the remainder as a scalar multiple of the next term.
+
+So we can actually write the series as $\frac{f^{(0)}(x_0)}{0!}(x - x_0)^0 + \ldots + \frac{f^{(N)}(x_0)}{N!}(x - x_0)^N + O(1) \frac{f^{(N + 1)}(x_0)}{(N + 1)!}(x - x_0)^{N + 1}$.
+
+Operations on Taylor Series
+---------------------------
+
+The reason we use Taylor series to represent functions is in order to more easily evaluate limits, integrals, and infinite series. It is also useful for approximating the functions with actual numbers, all while being able to get the error bounds in our evaluation.
+
+### Limits
+
+If we take a limit as $x \to x_0$, then the coefficients of a Taylor series already has l'Hospital's rule built in.
+
+Consider $\lim_{x \to 0} \frac{\sin x}{x}$:
+
+> We could find this geometrically, using l'Hospital's rule, or using infinite series.  
+> Clearly, $\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{x - \frac{x^3}{3!} + \frac{x^5}{5!} + M\frac{x^7}{7!}}}{x} = \lim_{x \to 0} 1 - \frac{x^2}{3!} + \frac{x^4}{5!} + M\frac{x^6}{7!}} = 1 - 0 + 0 + M0 = 1$.  
+
+Evaluate $\lim_{x \to 0} \frac{e^{\sin x} - 1}{x}$:
+
+> Let $u = \sin x$. Clearly, $\lim_{x \to 0} \frac{e^{\sin x} - 1}{x} = \lim_{x \to 0} \frac{e^u - 1}{x} = \lim_{x \to 0} \frac{(1 + u + \frac{u^2}{2!} + \ldots) - 1}{x} = \lim_{x \to 0} \frac{\sin x + \frac{\sin^2 x}{2!} + \ldots}{x} = \lim_{x \to 0} \frac{\sin x}{x}\left(1 + \frac{\sin x}{2!} + \ldots\right) = \lim_{x \to 0} \frac{\sin x}{x} \lim_{x \to 0} \left(1 + \frac{\sin x}{2!} + \ldots\right) = 1$.  
