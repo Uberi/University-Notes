@@ -1453,8 +1453,8 @@ This is actually how calculators evaluate these sorts of functions - by calculat
 Find the power series for $\frac{1}{1 + x^2}$ and use it to approximate $\arctan$:
 
 > Let $u = -x^2$. Then $\frac{1}{1 + x^2} = \frac{1}{1 - u} = \sum_{n = 0}^\infty u^n = \sum_{n = 0}^\infty (-1)^n x^{2n}$ for $\abs{u} < 1$.  
-> Clearly, $\int_0^t \frac{1}{1 + x^2} \dee x = \arctan t = \sum_{n = 0}^\infty \int_0^t (-1)^n x^{2n} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}$ for $\abs{t} < t$.  
-> So $\arctan t = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}$ for $-1 < t < 1$.  
+> Clearly, $\int_0^t \frac{1}{1 + x^2} \dee x = \arctan t = \sum_{n = 0}^\infty \int_0^t (-1)^n x^{2n} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} t^{2n + 1}$ for $\abs{t} < t$.  
+> So $\arctan t = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} t^{2n + 1}$ for $-1 < t < 1$.  
 
 Taylor Series
 -------------
@@ -1463,7 +1463,7 @@ What power series is identical to a function $f(x)$ and all its derivatives at a
 
 For $\abs{x - x_0} < \rho$, where $\rho$ is the radius of convergence, $f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$ where $f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}$, and $f^{(0)}(x_0) = f(x_0)$. This is known as a **Taylor series**.
 
-A **Taylor polynomial** is a partial sum of a Taylor series - all partial sums of Taylor series are simply polynomials.
+A **Taylor polynomial** is a partial sum of a Taylor series - all partial sums of Taylor series are simply polynomials. $\sum_{n = 0}^k \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n$ is known as a $k$-degree Taylor polynomial.
 
 Find the Taylor polynomial for $e^x$ and use it to estimate $\int_0^1 e^{-x^2} \dee x$:
 
@@ -1635,3 +1635,35 @@ Consider $\lim_{x \to 0} \frac{\sin x}{x}$:
 Evaluate $\lim_{x \to 0} \frac{e^{\sin x} - 1}{x}$:
 
 > Let $u = \sin x$. Clearly, $\lim_{x \to 0} \frac{e^{\sin x} - 1}{x} = \lim_{x \to 0} \frac{e^u - 1}{x} = \lim_{x \to 0} \frac{(1 + u + \frac{u^2}{2!} + \ldots) - 1}{x} = \lim_{x \to 0} \frac{\sin x + \frac{\sin^2 x}{2!} + \ldots}{x} = \lim_{x \to 0} \frac{\sin x}{x}\left(1 + \frac{\sin x}{2!} + \ldots\right) = \lim_{x \to 0} \frac{\sin x}{x} \lim_{x \to 0} \left(1 + \frac{\sin x}{2!} + \ldots\right) = 1$.  
+
+# 26/3/14
+
+The Taylor inequality basicaly states that the remainder of a Taylor polynomial is a multiple of the next term if the derivative is bounded.
+
+### Estimating Definite Integrals
+
+$e^{-x^2}$ is a Guassian function, which have the general form of $e^{-\frac{(x - a)^2}{2\sigma^2}}$. This is also an error function. It is heavily used in statistics as a probability distribution, and looks like a bell curve. $\sigma$ represents the standard deviation of the distribution.
+
+This is also associated with scientific literature claims of "six-sigma" accuracy or similar.
+
+The interesting thing about this function is that it has no antiderivative.
+
+Evaluate $\int_0^1 e^{-x^2} \dee x$:
+
+> Let $u = -x^2$. Clearly, $e^{-x^2} = \sum_{n = 0}^\infty \frac{(-x^2)^n}{n!} = \sum_{n = 0}^\infty \frac{(-1)^nx^{2n}}{n!}$.  
+> So $\int_0^1 e^{-x^2} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{n!}\int_0^1 x^{2n} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{n!}\evalat{\frac{x^{2n + 1}}{2n + 1}}_0^1 = \sum_{n = 0}^\infty \frac{(-1)^n}{n!(2n + 1)}$.
+
+Estimate $\int_0^1 x^x \dee x$:
+
+> Clearly, $\int_0^1 x^x \dee x = \int_0^1 e^{x \ln x} \dee x = \sum_{n = 0}^\infty \frac{1}{n!} \int_0^1 x^n \ln^n x \dee x$.  
+> Clearly, $\int_0^1 x^n \ln^n x \dee x = \frac{(-1)^{n + 1}n!}{n^n}$.  ;wip: what? how? even WolframAlpha can't evaluate this one
+> So $\int_0^1 x^x \dee x = \sum_{n = 0}^\infty \frac{(-1)^{n + 1}}{n^n}$.  
+
+Estimate $\int_0^1 \frac{\sin \ln x}{\ln x} \dee x$:
+
+> Let $u = \ln x$. Then $\frac{\sin \ln x}{\ln x} = \frac{1}{u}\sin u = \sum_{n = 0}^\infty \frac{1}{u}\frac{(-1)^n}{(2n + 1)!} u^{2n + 1} = \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} \frac{u^{2n + 1}}{u} = \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} \ln^{2n} x$.  
+> So $\int_0^1 \frac{\sin \ln x}{\ln x} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} \int_0^1 \ln^{2n} x \dee x$.  
+> By taking a few values of $n$ and integrating by parts, we find that $\int_0^1 \ln^{2n} x \dee x = (2n)!$.  
+> So $\int_0^1 \frac{\sin \ln x}{\ln x} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} (2n)! = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1}$.  
+> Recall that $\arctan x = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}$. So $\arctan 1 = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1}$.  
+> So $\int_0^1 \frac{\sin \ln x}{\ln x} \dee x = \arctan 1 = \frac{\pi}{4}$.  

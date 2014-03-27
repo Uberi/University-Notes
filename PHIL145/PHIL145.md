@@ -1463,6 +1463,21 @@ For example: astronomy vs. astrology. It is generally agreed that the former is 
 
 Some common criteria for demarcating science are:
 
-* Science is fact based (empirical observations)
-* Scientific claims/theories are verifiable or falsifiable
-* Science employs the scientific method
+* Science is fact based.
+    * Facts are simply observations we make in the world - empirical observations.
+    * Assertions based on subjective observations are not science, but assertions based on fact can be.
+* Scientific claims/theories are verifiable or falsifiable.
+    * Horoscopes are not science, while astronomy is science.
+    * Popper stated that falsifiability is the criteria for something being science.
+* Science employs the scientific method.
+    * Science makes use of hypotheses and experiments to draw conclusions.
+
+# 26/3/14
+
+;wip: do quiz 5, posted later today, due on the 30th
+
+**Theory-ladeness** is a phenomenon where all observations are always made against some sort of existing theory and assumptions. In other words, all theories in a paradigm are tied to that paradigm.
+
+For example, in psychology the diagnoses of a condition is almost always dependent on the mental model being used.
+
+For example, in electricity, the idea of current is theory-laden because it is tied to our current model of electricity, where electrons flow around.

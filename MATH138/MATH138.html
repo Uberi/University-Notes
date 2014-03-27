@@ -941,12 +941,12 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>This is actually how calculators evaluate these sorts of functions - by calculating the partial sums of a power series to a given error.</p>
 <p>Find the power series for <span class="math">\(\frac{1}{1 + x^2}\)</span> and use it to approximate <span class="math">\(\arctan\)</span>:</p>
 <blockquote>
-<p>Let <span class="math">\(u = -x^2\)</span>. Then <span class="math">\(\frac{1}{1 + x^2} = \frac{1}{1 - u} = \sum_{n = 0}^\infty u^n = \sum_{n = 0}^\infty (-1)^n x^{2n}\)</span> for <span class="math">\(\abs{u} &lt; 1\)</span>.<br />Clearly, <span class="math">\(\int_0^t \frac{1}{1 + x^2} \dee x = \arctan t = \sum_{n = 0}^\infty \int_0^t (-1)^n x^{2n} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}\)</span> for <span class="math">\(\abs{t} &lt; t\)</span>.<br />So <span class="math">\(\arctan t = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}\)</span> for <span class="math">\(-1 &lt; t &lt; 1\)</span>.</p>
+<p>Let <span class="math">\(u = -x^2\)</span>. Then <span class="math">\(\frac{1}{1 + x^2} = \frac{1}{1 - u} = \sum_{n = 0}^\infty u^n = \sum_{n = 0}^\infty (-1)^n x^{2n}\)</span> for <span class="math">\(\abs{u} &lt; 1\)</span>.<br />Clearly, <span class="math">\(\int_0^t \frac{1}{1 + x^2} \dee x = \arctan t = \sum_{n = 0}^\infty \int_0^t (-1)^n x^{2n} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} t^{2n + 1}\)</span> for <span class="math">\(\abs{t} &lt; t\)</span>.<br />So <span class="math">\(\arctan t = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} t^{2n + 1}\)</span> for <span class="math">\(-1 &lt; t &lt; 1\)</span>.</p>
 </blockquote>
 <h2 id="taylor-series">Taylor Series</h2>
 <p>What power series is identical to a function <span class="math">\(f(x)\)</span> and all its derivatives at a point <span class="math">\(x = x_0\)</span>?</p>
 <p>For <span class="math">\(\abs{x - x_0} &lt; \rho\)</span>, where <span class="math">\(\rho\)</span> is the radius of convergence, <span class="math">\(f(x) = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n\)</span> where <span class="math">\(f^{(n)}(x_0) = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}\)</span>, and <span class="math">\(f^{(0)}(x_0) = f(x_0)\)</span>. This is known as a <strong>Taylor series</strong>.</p>
-<p>A <strong>Taylor polynomial</strong> is a partial sum of a Taylor series - all partial sums of Taylor series are simply polynomials.</p>
+<p>A <strong>Taylor polynomial</strong> is a partial sum of a Taylor series - all partial sums of Taylor series are simply polynomials. <span class="math">\(\sum_{n = 0}^k \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n\)</span> is known as a <span class="math">\(k\)</span>-degree Taylor polynomial.</p>
 <p>Find the Taylor polynomial for <span class="math">\(e^x\)</span> and use it to estimate <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span>:</p>
 <blockquote>
 <p>Let <span class="math">\(f(x) = e^x, x_0 = 0\)</span>. Then <span class="math">\(f^{(n)} = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0} = \evalat{e^x}_{x = x_0} = 1\)</span>.<br />Then <span class="math">\(f(x) = e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}, \abs{x - x_0} &lt; \rho\)</span>.<br />Let <span class="math">\(L = \lim_{n \to \infty} \abs{\frac{x^{n + 1}}{(n + 1)!} \frac{n!}{n^n}} = \lim_{n \to \infty} \abs{\frac{x}{n + 1}} = 0\)</span>.<br />Then by the ratio test, the series converges for all <span class="math">\(0 &lt; 1\)</span>, and the radius of covnergence is <span class="math">\(\rho = \infty\)</span>.<br />So <span class="math">\(\int_0^1 e^{-x^2} \dee x = \int_0^1 f(-x^2) \dee x = \sum_{n = 0}^\infty \int_0^1 \frac{(-x^2)^n}{n!} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{n!(2n + 1)}\)</span>.</p>
@@ -1042,6 +1042,24 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>Evaluate <span class="math">\(\lim_{x \to 0} \frac{e^{\sin x} - 1}{x}\)</span>:</p>
 <blockquote>
 <p>Let <span class="math">\(u = \sin x\)</span>. Clearly, <span class="math">\(\lim_{x \to 0} \frac{e^{\sin x} - 1}{x} = \lim_{x \to 0} \frac{e^u - 1}{x} = \lim_{x \to 0} \frac{(1 + u + \frac{u^2}{2!} + \ldots) - 1}{x} = \lim_{x \to 0} \frac{\sin x + \frac{\sin^2 x}{2!} + \ldots}{x} = \lim_{x \to 0} \frac{\sin x}{x}\left(1 + \frac{\sin x}{2!} + \ldots\right) = \lim_{x \to 0} \frac{\sin x}{x} \lim_{x \to 0} \left(1 + \frac{\sin x}{2!} + \ldots\right) = 1\)</span>.</p>
+</blockquote>
+<h1 id="section-31">26/3/14</h1>
+<p>The Taylor inequality basicaly states that the remainder of a Taylor polynomial is a multiple of the next term if the derivative is bounded.</p>
+<h3 id="estimating-definite-integrals">Estimating Definite Integrals</h3>
+<p><span class="math">\(e^{-x^2}\)</span> is a Guassian function, which have the general form of <span class="math">\(e^{-\frac{(x - a)^2}{2\sigma^2}}\)</span>. This is also an error function. It is heavily used in statistics as a probability distribution, and looks like a bell curve. <span class="math">\(\sigma\)</span> represents the standard deviation of the distribution.</p>
+<p>This is also associated with scientific literature claims of &quot;six-sigma&quot; accuracy or similar.</p>
+<p>The interesting thing about this function is that it has no antiderivative.</p>
+<p>Evaluate <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = -x^2\)</span>. Clearly, <span class="math">\(e^{-x^2} = \sum_{n = 0}^\infty \frac{(-x^2)^n}{n!} = \sum_{n = 0}^\infty \frac{(-1)^nx^{2n}}{n!}\)</span>.<br />So <span class="math">\(\int_0^1 e^{-x^2} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{n!}\int_0^1 x^{2n} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{n!}\evalat{\frac{x^{2n + 1}}{2n + 1}}_0^1 = \sum_{n = 0}^\infty \frac{(-1)^n}{n!(2n + 1)}\)</span>.</p>
+</blockquote>
+<p>Estimate <span class="math">\(\int_0^1 x^x \dee x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\int_0^1 x^x \dee x = \int_0^1 e^{x \ln x} \dee x = \sum_{n = 0}^\infty \frac{1}{n!} \int_0^1 x^n \ln^n x \dee x\)</span>.<br />Clearly, <span class="math">\(\int_0^1 x^n \ln^n x \dee x = \frac{(-1)^{n + 1}n!}{n^n}\)</span>. ;wip: what? how? even WolframAlpha can't evaluate this one So <span class="math">\(\int_0^1 x^x \dee x = \sum_{n = 0}^\infty \frac{(-1)^{n + 1}}{n^n}\)</span>.</p>
+</blockquote>
+<p>Estimate <span class="math">\(\int_0^1 \frac{\sin \ln x}{\ln x} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(u = \ln x\)</span>. Then <span class="math">\(\frac{\sin \ln x}{\ln x} = \frac{1}{u}\sin u = \sum_{n = 0}^\infty \frac{1}{u}\frac{(-1)^n}{(2n + 1)!} u^{2n + 1} = \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} \frac{u^{2n + 1}}{u} = \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} \ln^{2n} x\)</span>.<br />So <span class="math">\(\int_0^1 \frac{\sin \ln x}{\ln x} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} \int_0^1 \ln^{2n} x \dee x\)</span>.<br />By taking a few values of <span class="math">\(n\)</span> and integrating by parts, we find that <span class="math">\(\int_0^1 \ln^{2n} x \dee x = (2n)!\)</span>.<br />So <span class="math">\(\int_0^1 \frac{\sin \ln x}{\ln x} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} (2n)! = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1}\)</span>.<br />Recall that <span class="math">\(\arctan x = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}\)</span>. So <span class="math">\(\arctan 1 = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1}\)</span>.<br />So <span class="math">\(\int_0^1 \frac{\sin \ln x}{\ln x} \dee x = \arctan 1 = \frac{\pi}{4}\)</span>.</p>
 </blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>

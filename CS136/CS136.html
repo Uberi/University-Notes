@@ -2097,7 +2097,7 @@ void destroy_list(struct llist *lst) {
 }</code></pre>
 <p>This allows us to have a simpler interface, because we aren't passing pointers to pointers:</p>
 <pre><code>struct llist *lst = create_list();
-add_to_front(5, lst);
+add_to_front(5, lst); // this implementation of `add_to_front` is different from the one described int he imperative approach
 destroy_list(lst);</code></pre>
 <h1 id="section-20">25/3/14</h1>
 <p>There are two ways to mutate a list structure: changing the structure of nodes (adding nodes, etc.), and changing the values (mutating the contents of nodes).</p>
