@@ -1667,3 +1667,40 @@ Estimate $\int_0^1 \frac{\sin \ln x}{\ln x} \dee x$:
 > So $\int_0^1 \frac{\sin \ln x}{\ln x} \dee x = \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} (2n)! = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1}$.  
 > Recall that $\arctan x = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1} x^{2n + 1}$. So $\arctan 1 = \sum_{n = 0}^\infty \frac{(-1)^n}{2n + 1}$.  
 > So $\int_0^1 \frac{\sin \ln x}{\ln x} \dee x = \arctan 1 = \frac{\pi}{4}$.  
+
+# 27/3/14
+
+### Evaluating Infinite Series
+
+We often want a closed form of a series.
+
+Evaluate $\sum_{n = 1}^\infty \frac{1}{n^2}$:
+
+> All we know right now is that this converges and is between 1 and 2. Euler found several ways to find the exact value of this series.  
+> Clearly, $\frac{\sin x}{x} = \frac{1}{x} \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!} = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!}$.  
+> Clearly, $\frac{\sin x}{x} = 1$ if $x = 0$, and $\frac{\sin x}{x} = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!}$ if $x \ne 0$.  
+> Clearly, any finite polynomial $P(x)$ such that $P(0) = 1$ and roots $r_1, \ldots, r_n$ can be written as $(1 - \frac{x}{r_1}) \cdots (1 - \frac{x}{r_n})$.  
+> Assume this is also true for infinite polynomials as well.  ;wip: this assumption is not always true
+> Clearly, the roots of $\frac{\sin x}{x}$ are $x = \pm \pi, \pm 2\pi, \ldots$.  
+> So $\frac{\sin x}{x} = \left(\left(1 - \frac{x}{\pi}\right)\left(1 + \frac{x}{\pi}\right)\right)\left(\left(1 - \frac{x}{2\pi}\right)\left(1 + \frac{x}{2\pi}\right)\right) \cdots = \left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots$.  
+> So $\sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!} = \left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots$.  
+> Clearly, $\left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots = 1 - \frac{x^2}{\pi^2}\eft(\frac{1}{1^2} + \frac{1}{1^2} + \ldots\right) + x^4(\ldots) - x^6(\ldots) + \ldots$.  
+> Clearly, the coefficients of $x^2$ must match. So $-\frac{1}{3!} = -\frac{1}{\pi}^6 \sum_{n = 1}^\infty \frac{1}{n^2}$.  
+> So $\sum_{n = 1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}$.  
+> In fact, we can also equate the coefficients of $x^4$, $x^6$, and etc. to obtain things like $\sum_{n = 1}^\infty \frac{1}{26} = \frac{1315862 \pi^{26}}{11094481976030578125}$.  
+> ;wip: talk about odd powers and how to derive the even powers directly
+
+Parametric Curves
+-----------------
+
+We now consider functions with a single output and a vector output. For example, the position of a particle with respect to time, $\vec{r}(t) = \begin{bmatrix} x(t) \\ y(t) \\ z(t) \end{bmatrix}$. This has many applications in physics.
+
+The function $\vec{r}(t)$ defines a curve in the dimension of the vector. Here, $t$ is the **parameter** of the function.
+
+These functions are also called **parametric curves**.
+
+We do calculus on these functions by working with each component separately. As a result, calculus on parametric curves are no more difficult than calculus on normal functions.
+
+For example, $\vec{r}(t) = \begin{bmatrix} t \\ \abs{t} \end{bmatrix}$ simply looks like the absolute value function on $\begin{bmatrix} x \\ y \end{bmatrix} = \vec{r}(t)$.
+
+However, the additional information is the direction along the curve - the velocity, in our case.

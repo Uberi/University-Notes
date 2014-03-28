@@ -1481,3 +1481,47 @@ Some common criteria for demarcating science are:
 For example, in psychology the diagnoses of a condition is almost always dependent on the mental model being used.
 
 For example, in electricity, the idea of current is theory-laden because it is tied to our current model of electricity, where electrons flow around.
+
+# 28/3/14
+
+The Popperian falsifiability criteria states that something is scientific if it can be falsified - if there is a practical way of showing that it is false.
+
+In this model, a theory would be more scientifically believable if it survived strong attempts to falsify it - if it passes tests that appeared to be very likely to make it fail.
+
+However, Quine proposed that there are also intiial conditions and auxilary hypotheses to account for - hypotheses that must be true at the same time as our main hypothesis in order for the conclusion to be true.
+
+Because of this, falsifying evidence might not actually falsify a theory because it is also possible that one of our auxilary hypotheses are false. For example, "If Mary studies for the test, then Mary will do well" has many auxilary hypotheses, such as "Mary writes the test" and "The test was graded fairly".
+
+Even if the conclusion is falsified, "Mary did not do well on the test", we can only say that one of the hypotheses were false, and it still might be true that "Mark studied for the test".
+
+This is covered in more depth in the Philosophy of Science section in the PHIL110A notes.
+
+The difference between science and pseudoscience can also be said to be whether it uses the scientific method:
+
+1. Observe a phenomenon.
+2. Form hypothesis to explain phenomenon.
+3. Deduce implications of hypothesis.
+4. Observe some more phenomenon to test hypothesis.
+5. Evaluate hypothesis by checking it and its implications against the observations.
+
+Thagard proposed that a discipline is pseudoscience if it is less progressive than alternative theories, and the community does not attempt to develop theories to solve problems, or look at evidence in an unbiased way.
+
+Science can also be defined by its use of peer review and the way it takes advantage of social cognition. It may be that the structure of the communities themselves determine whether a practice is science or not.
+
+Science is simply application of critical thinking to empirical evidence. Instead of focusing on what is and isn't science, we should instead focus on what methods of generating information are reliable.
+
+### Consistency
+
+Consistency between theories also affects whether a theory is a good one. A theory that fits with existing theories is more likely to be scientific, and vice versa.
+
+**Consilience** is a related concept - where a theory developed for one domain also explains phenomena in another domain. For example, the Newtonian theory of gravitation explains the motion of planets, but also the tides on Earth.
+
+If we generalize this, we might find that we want science to give a single, unified world view, like how Maxwell unified electricity and magnitism into electromagnetism.
+
+### Reliability
+
+We can judge whether some scientific activity is likely reliable by looking at its features and products.
+
+First, it must be driven by evidence. It should use something like the scientific method, heavily scrutinize the resulting theories, and make use of all evidence available in an objective way.
+
+Second, it must produce hypotheses/theories that can actually be evaluated against real evidence. It should be verifiable or falsifiable, having clear implications and fitting well with existing theories.
