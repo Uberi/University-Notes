@@ -2185,6 +2185,51 @@ struct bstnode *bst_insert(int i, struct bstnode *t) {
 <h3 id="graphs">Graphs</h3>
 <p>Trees and linked lists are all simply special cases of graphs. Graphs are more flexible, and allow things like reference cycles, direction (and the possibility of non-directed graphs), and even have labelled edges.</p>
 <p>Graphs are, as in CS135, collections of nodes and the edges that link nodes together.</p>
+<h1 id="section-21">27/3/14</h1>
+<h2 id="abstract-data-types-1">Abstract Data Types</h2>
+<p>All data structures are a combination of the following core data structures:</p>
+<ul>
+<li>Primitives (<code>int</code>, <code>float</code>, etc.)</li>
+<li>Structures</li>
+<li>Arrays</li>
+<li>Graphs - linked lists, trees</li>
+</ul>
+<p>We choose between data structures based on their characteristics, such as time complexity for the most common operations that will be performed, or whether dupicate items are supported, or whether the data is ordered.</p>
+<p>For example, a BST might not be a good choice for ordered data, because it would sort the data and destroy the order. For ordered data, we might choose a dynamic array or a linked list, based on which operations we need to be faster. If we needed really fast insertion but don't really care about lookup, then a linked list is a good choice.</p>
+<p>For unordered data, good choices are a sorted dynamic array or a BST (often self balancing).</p>
+<p>Arrays are good choices for data where we frequently access elements at specific elements - random access is best.</p>
+<p>Linked lists are good choices for data where we frequently add/remove items to the front or back.</p>
+<p>Self-balancing BSTs are good choices for data where we frequently add, remove, or search for items. They are a very well rounded data structure.</p>
+<p>Sorted arrays are good choices for data where we frequently select or search for items.</p>
+<p>An <strong>abstract data type</strong> (ADT) is a mathematical model for storing and and accessing data through <strong>operations</strong>. They are not specific to any languages or implementations.</p>
+<p>Implementations of ADTs are simply modules where data can only be accessed through its interface.</p>
+<h3 id="opaque-structures">Opaque Structures</h3>
+<p>Opaque structures are those where the fields are not accessible to the client.</p>
+<p>In C, we can make these using <strong>incomplete declarations</strong>:</p>
+<pre><code>struct account; // INCOMPLETE DECLARATION
+struct account a; // INVALID - CANNOT DEFINE STRUCTURE WITHOUT KNOWING THE FIELDS
+struct account *a; // VALID - WE CAN STILL DEFINED A POINTER TO THI STRUCTURE</code></pre>
+<p>We would use the incomplete declaration in the header file, and then the complete declaration in the implementation file.</p>
+<p>This allows us to expose the structure to the user, but the user will not be able to access or set any of the fields. This improves our information hiding.</p>
+<h3 id="type-aliases">Type Aliases</h3>
+<p>In C, we can define new types from existing types, by aliasing a new name to an existing type. This is done using the <code>typedef</code> keyword:</p>
+<pre><code>typedef int Integer; // `Integer` is now the same thing as `int`
+typedef int *IntegerPtr; // `IntegerPtr` is now the same thing as `int *`</code></pre>
+<p>This is extremely useful for cleaning up code and simplifying complex declarations like function pointer types.</p>
+<p>Conventionally, we use CamelCase for these custom types.</p>
+<p>Following the previous example:</p>
+<pre><code>typedef struct account *Account;
+
+Account a = create_account();
+// ...</code></pre>
+<h3 id="collection-adts">Collection ADTs</h3>
+<p>Collection ADTs are often what people mean when they say &quot;ADT&quot;. They are simply ADTs that can store an arbitrary number of items. ;wip: section 12 slide 28</p>
+<p>A <strong>stack ADT</strong> implements LIFO (Last In First Out) storage. Common operations include pushing, popping, and peeking. Stacks are often implemented using linked lists.</p>
+<p>A <strong>queue ADT</strong> is similar to a stack, but implements FIFO (First In First Out) storage. Common operations include adding to the back, removing from the front, and peeking at the first item. Queues are often implemented using linked lists with the wrapper strategy to keep track of the <code>back</code> pointer.</p>
+<p>A <strong>sequence ADT</strong> implements an ordered collection that can be randomly accessed or modified. Common operations include inserting, removing, and retrieving the item at a given index. Sequences are often implemented using BSTs.</p>
+<p>A <strong>dictionary ADT</strong> (also known as a map, symbol table, or associative array) is similar to a sequence, but the index can be any kind of data, not just numbers. Dictionaries associate a unique key with a value. Common operations include lookup, insertion, and removal. Dictionaries are often implemented using hash tables or BSTs.</p>
+<p>A <strong>set ADT</strong> implements something very similar to a mathematical unordered set, where all values must be unique and are all unordered. Common operations include membership testing, adding items, set union, set difference, set intersection, and subset testing. Sets are often implemented using hash tables or BSTs.</p>
+<p>The advantage of using ADTs is that the implementations are widely reusable and can have their component algorithms swapped out to suit the use case. For example, a dictionary might be implemented using a BST, but if we wanted a faster lookup operation we might swap out the internals for a hash table without affecting the functionality of the program.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
