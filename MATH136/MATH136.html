@@ -95,6 +95,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 \newcommand{\range}{\operatorname{Range}}
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
 \]</span></p>
 <h1 id="im-going-to-stop-procrastinating-this-week-honest">13/1/14 (I'm going to stop procrastinating this week, honest!)</h1>
 <h2 id="notation">Notation</h2>
@@ -237,7 +238,7 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <li><span class="math">\(\vec{x} \cdot \vec{y} = \vec{y} \cdot \vec{x}\)</span>.</li>
 <li><span class="math">\(\vec{x} \cdot (s\vec{y} + t\vec{z}) = s (\vec{x} \cdot \vec{y}) + t (\vec{x} \cdot \vec{z})\)</span>.</li>
 </ul>
-<p>The <strong>length</strong> or <strong>norm</strong> of a vector <span class="math">\(\vec{v} = \begin{bmatrix} v_1 \\ \vdots \\ v_k \end{bmatrix}\)</span> is <span class="math">\(\magn{\vec{v}} = \sqrt{\sum_{i = 1}^k v_i^2}\)</span>. Note the similarity to scalars, where <span class="math">\(\abs{x} = \sqrt{x^2}\)</span>.</p>
+<p>The <strong>length</strong> or <strong>norm</strong> (Euclidean norm) of a vector <span class="math">\(\vec{v} = \begin{bmatrix} v_1 \\ \vdots \\ v_k \end{bmatrix}\)</span> is <span class="math">\(\magn{\vec{v}} = \sqrt{\sum_{i = 1}^k v_i^2}\)</span>. Note the similarity to scalars, where <span class="math">\(\abs{x} = \sqrt{x^2}\)</span>.</p>
 <p>A vector of length 1 is a unit vector. A unit vector is therefore one such that <span class="math">\(\sum_{i = 1}^k v_i^2 = 1\)</span>.</p>
 <p>Also, <span class="math">\(\vec{x} \cdot \vec{x} = \magn{x}^2\)</span>, which should be obvious since <span class="math">\(\theta = 0\)</span> and <span class="math">\(\cos \theta = 1\)</span>, so <span class="math">\(\vec{x} \cdot \vec{x} = \magn{x} \magn{x} = \magn{x}^2\)</span>.</p>
 <h3 id="theorem-1.3.3">Theorem 1.3.3</h3>
@@ -265,9 +266,9 @@ The <strong>dot product</strong> of two vectors <span class="math">\(\vec{a}\)</
 <p>Let <span class="math">\(\vec{n}\)</span> be a vector normal to the plane. Clearly, <span class="math">\(\vec{n} \cdot (\vec{X} - \vec{A}) = 0\)</span>.</p>
 <p>So <span class="math">\(n_1 (x_1 - a_1) + n_2 (x_2 - a_2) + n_3 (x_3 - a_3) = 0 = n_1 x_1 + n_2 x_2 + n_3 x_3 - n_1 a_1 - n_2 a_2 - n_3 a_3\)</span>.</p>
 <p>So <span class="math">\(n_1 x_1 + n_2 x_2 + n_3 x_3 = n_1 a_1 + n_2 a_2 + n_3 a_3\)</span>. Since <span class="math">\(\vec{A}\)</span> is fixed, <span class="math">\(n_1 a_1 + n_2 a_2 + n_3 a_3\)</span> is constant and the equation is a function of <span class="math">\(x_1, x_2, x_3\)</span>.</p>
-<p>Since <span class="math">\(\vec{X}\)</span> is arbitrary, this holds for every point on the plane, and so is an equation of the plane.</p>
+<p>Since <span class="math">\(\vec{x}\)</span> is arbitrary, this holds for every point on the plane, and so is an equation of the plane.</p>
 <p>Using the above, we can find the scalar equation of any plane given the normal and a fixed point on the plane.</p>
-<p>If we extend this to hyperplanes, ;wip</p>
+<p>Additionally, we can easily extend this to hyperplanes. The scalar equation of a hyperplane given the normal <span class="math">\(\vec{n}\)</span> and fixed point <span class="math">\(\vec{a}\)</span> pn the plane is <span class="math">\(\vec{n} \cdot \vec{x} = \vec{n} \cdot \vec{a}\)</span>.</p>
 <h3 id="cross-product">Cross Product</h3>
 <p>However, we will typically be given the vector equation of the plane, like <span class="math">\(\vec{x} = c_1 \vec{u} + c_2 \vec{v} + \vec{w}\)</span>.</p>
 <p>We can calculate the normal of the plane by finding two linearly independent vectors that lie on the plane, and finding a vector that is orthogonal to both of them.</p>
@@ -1020,6 +1021,7 @@ A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp;
 <p>The determinant of a <span class="math">\(1 \times 1\)</span> matrix <span class="math">\(A = \begin{bmatrix} a \end{bmatrix}\)</span> is <span class="math">\(\det A = a\)</span>. This is because the matrix is invertible if and only if <span class="math">\(a \ne 0\)</span>.</p>
 <p>The determinant of the <span class="math">\(2 \times 2\)</span> matrix <span class="math">\(A = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\)</span> is <span class="math">\(\det A = ad - bc\)</span>. Note that this is equal to <span class="math">\(a\begin{vmatrix} d \end{vmatrix} - b\begin{vmatrix} c \end{vmatrix}\)</span>.</p>
 <p>The determinant of the <span class="math">\(3 \times 3\)</span> matrix <span class="math">\(A = \begin{bmatrix} a &amp; b &amp; c \\ d &amp; e &amp; f \\ g &amp; h &amp; i \end{bmatrix}\)</span> is <span class="math">\(\det A = aei - afh + bfg - bdi + cdh - cei\)</span>. Note that this is equal to <span class="math">\(a\begin{vmatrix} e &amp; f \\ h &amp; i \end{vmatrix} - b\begin{vmatrix} d &amp; f \\ g &amp; i \end{vmatrix} + c\begin{bmatrix} d &amp; e \\ g &amp; h \end{bmatrix}\)</span>.</p>
+<p>For systems of linear equations, the determinant is 0 if and only if the system has one and only one solution.</p>
 <h3 id="cofactors">Cofactors</h3>
 <p>Let <span class="math">\(A \in M_{m \times n}\)</span>, <span class="math">\(n \ge 2\)</span>. Let <span class="math">\(A(i, j) \in M_{m - 1, n - 1}\)</span> be <span class="math">\(A\)</span>, except without row <span class="math">\(i\)</span> and column <span class="math">\(j\)</span>.</p>
 <p>The <strong>cofactor</strong> of <span class="math">\(A_{i, j}\)</span> is <span class="math">\(C_{i, j} = (-1)^{i + j} \det A(i, j)\)</span>. <span class="math">\(A\)</span> therefore has <span class="math">\(mn\)</span> cofactors.</p>
@@ -1066,7 +1068,7 @@ A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp;
 <p>Since <span class="math">\(EA\)</span> is equivalent to applying that same row operation to <span class="math">\(A\)</span>, <span class="math">\(\det EA = c \det A\)</span>.</p>
 <p>So <span class="math">\(\det EA = \det E \det A\)</span>.</p>
 <h3 id="theorem-5.3.8">Theorem 5.3.8</h3>
-<p>This theorem extends theorem 5.1.7.</p>
+<p>This theorem extends theorem 5.1.7 - the Invertible Matrix Theorem.</p>
 <p>Given <span class="math">\(A \in M_{n \times n}\)</span>, <span class="math">\(A^{-1}\)</span> exists if and only if <span class="math">\(\det A \ne 0\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
@@ -1117,6 +1119,84 @@ The *<strong>adjugate</strong> of <span class="math">\(A is \)</span>
 <p>Using a similar process as before, we find that <span class="math">\(V = \abs{\det \begin{bmatrix} \vec{u} &amp; \vec{v} &amp; \vec{w} \end{bmatrix}}\)</span>.</p>
 <p>In fact, this works in any number of dimensions. A <strong>parallelotope</strong> is an <span class="math">\(n\)</span> dimensional solid induced by <span class="math">\(n\)</span> vectors <span class="math">\(\vec{v}_1, \ldots, \vec{v}_n \in \mb{R}^n\)</span>.</p>
 <p>The <strong>n-volume</strong> of an <span class="math">\(n\)</span> dimensional solid is an extension to the concept of a volume to any number of dimensions. The n-volume of the parallelotope is <span class="math">\(V = \abs{\det \begin{bmatrix} \vec{v}_1 &amp; \ldots &amp; \vec{v}_n \end{bmatrix}}\)</span>.</p>
+<h1 id="section-11">31/3/14</h1>
+<h2 id="linear-mappings-and-bases">Linear Mappings and Bases</h2>
+<p>Let <span class="math">\(L: \mb{R}^n \to \mb{R}^n\)</span> be a linear operator. Let <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> be a basis for <span class="math">\(\mb{R}^n\)</span>. Let <span class="math">\(\vec{x} \in \mb{R}^n\)</span>.</p>
+<p>Then <span class="math">\(\exists b_1, \ldots, b_n \in \mb{R}, \vec{x} = b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n\)</span>. So <span class="math">\([\vec{x}]_\mathcal{B} = \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}\)</span>.</p>
+<p>We want to determine a matrix <span class="math">\(A\)</span> such that <span class="math">\([L(\vec{x})]_\mathcal{B} = [[L]\vec{x}]_\mathcal{B} = A\vec{x}_\mathcal{B}\)</span> - a linear operator that works the same as <span class="math">\(L\)</span>, but accepts and produces <span class="math">\(\mathcal{B}\)</span>-coordinates.</p>
+<p>Clearly, <span class="math">\([L(\vec{x})]_\mathcal{B} = [b_1 L(\vec{v}_1) + \ldots + b_n L(\vec{v}_n)]_\mathcal{B} = b_1 [L(\vec{v}_1)]_\mathcal{B} + \ldots + b_n [L(\vec{v}_n)]_\mathcal{B} = \begin{bmatrix} [L(\vec{v}_n)]_\mathcal{B} &amp; \ldots &amp; [L(\vec{v}_n)]_\mathcal{B} \end{bmatrix} \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}\)</span>.</p>
+<p>So <span class="math">\([L(\vec{x})]_\mathcal{B} = [L]_\mathcal{B} [\vec{x}]_\mathcal{B}\)</span>.</p>
+<p>In other words, the matrix of <span class="math">\(L\)</span> with respect to <span class="math">\(\mathcal{B}\)</span>, is <span class="math">\([L]_\mathcal{B} = \begin{bmatrix} [L(\vec{v}_n)]_\mathcal{B} &amp; \ldots &amp; [L(\vec{v}_n)]_\mathcal{B} \end{bmatrix} [\vec{x}]_\mathcal{B}\)</span>. We call <span class="math">\([L]_\mathcal{B}\)</span> the <span class="math">\(\mathcal{B}\)</span>-matrix of <span class="math">\(L\)</span>.</p>
+<p>Given <span class="math">\(L(\vec{x}) = A\vec{x} = \begin{bmatrix} 1 &amp; 2 &amp; 2 \\ 2 &amp; 1 &amp; 2 \\ 2 &amp; 2 &amp; 1 \end{bmatrix} \vec{x}\)</span> and <span class="math">\(\mathcal{B} = \set{\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}} = \set{\vec{v}_1, \vec{v}_2, \vec{v}_3}\)</span>, find <span class="math">\([L]_\mathcal{B}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\([L]_\mathcal{B} = \begin{bmatrix} [A\vec{v}_1]_\mathcal{B} &amp; [A\vec{v}_2]_\mathcal{B} &amp; [A\vec{v}_3]_\mathcal{B} \end{bmatrix}\)</span>.<br />So <span class="math">\([L]_\mathcal{B} = \begin{bmatrix} 5 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; -1 \end{bmatrix}\)</span>.</p>
+</blockquote>
+<h3 id="diagonal-matrices">Diagonal Matrices</h3>
+<p>A matrix <span class="math">\(D \in M_{n \times n}\)</span> is <strong>diagonal</strong> if and only if for all <span class="math">\(1 \le i \ke n\)</span> and <span class="math">\(1 \le j \le n\)</span>, <span class="math">\(i \ne j \implies D_{i, j} = 0\)</span>.</p>
+<p>In other words, a diagonal matrix is all zero, except possibly along the diagonal. For example, <span class="math">\(\begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{bmatrix}\)</span> is not diagonal, while <span class="math">\(\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span> is.</p>
+<p>A diagonal matrix is, by definition, both upper and lower triangular.</p>
+<p>We can construct diagonal matrices using <span class="math">\(D = \diag(D_{1, 1}, \ldots, D_{n, n}) = \begin{bmatrix} D_{1, 1} &amp; 0 &amp; \ldots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ 0 &amp; \ldots &amp; 0 &amp; D_{n, n} \end{bmatrix}\)</span>.</p>
+<p>We often want to determine if there is a basis in which a matrix converted into that basis would be diagonal.</p>
+<p>Let <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span>.</p>
+<p>Also, <span class="math">\(\mathcal{S} = \set{\vec{e}_1, \ldots, \vec{e}_n}\)</span> is the standard basis for <span class="math">\(\mb{R}^n\)</span>.</p>
+<p>Clearly, <span class="math">\([L]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B}\)</span>. Basically, we convert it into standard coordinates, apply the linear operator, and then convert it back into <span class="math">\(\mathcal{B}\)</span> coordinates.</p>
+<p>Also, <span class="math">\({}_\mathcal{S}P_\mathcal{B} = \begin{bmatrix} \vec{v}_1, \ldots, \vec{v}_n \end{bmatrix}\)</span> and <span class="math">\({}_\mathcal{B}P_\mathcal{S} = ({}_\mathcal{S}P_\mathcal{B})^{-1}\)</span>.</p>
+<p>Given <span class="math">\(A \in M_{n \times n}\)</span>, the <strong>trace</strong> of <span class="math">\(A\)</span> is <span class="math">\(\operatorname{tr}(A) = \sum_{i = 1}^n A_{i, i}\)</span>. In other words, it is the sum of all the diagonal values.</p>
+<p>The <span class="math">\([L]_\mathcal{B}\)</span> notation is similar to the <span class="math">\([\vec{v}]_\mathcal{B}\)</span>, except instead of a coordinate being put into another basis, it is a linear mapping converted to work in another basis.</p>
+<h3 id="theorem-6.1.1">Theorem 6.1.1</h3>
+<p>Given <span class="math">\(P, A, B \in M_{n \times n}\)</span> such that <span class="math">\(P^{-1}AP = B\)</span>, then <span class="math">\(\rank A = \rank B\)</span>, <span class="math">\(\det A = \det B\)</span>, and <span class="math">\(\operatorname{tr}(A) = \operatorname{tr}(B)\)</span>.</p>
+<p>Also, if <span class="math">\(P\)</span> and <span class="math">\(P^{-1}\)</span> exist satisfying the above conditions, then <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are <strong>similar</strong>. We can think of this as meaning that they represent the same linear operation, but in different bases.</p>
+<h2 id="eigenvalueseigenvectors">Eigenvalues/Eigenvectors</h2>
+<p>Pronounced &quot;Eye-gan values&quot; and &quot;Eye-gan vectors&quot;.</p>
+<p>Let <span class="math">\(L\)</span> be a linear operator and <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> be a basis.</p>
+<p>We want to determine if <span class="math">\(\mathcal{B}\)</span> exists such that the matrix of <span class="math">\(L\)</span> with respect to <span class="math">\(\mathcal{B}\)</span> is diagonal.</p>
+<p>Assume that <span class="math">\(\mathcal{B}\)</span> exists satisfying these conditions. Then <span class="math">\([L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)\)</span>.</p>
+<p>Clearly, <span class="math">\({}_\mathcal{S}P_\mathcal{B} = \begin{bmatrix} \vec{v}_1 &amp; \ldots &amp; \vec{v}_n \end{bmatrix}\)</span> and <span class="math">\([L]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B}\)</span>.</p>
+<p>So <span class="math">\({}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)\)</span> and <span class="math">\([L] {}_\mathcal{S}P_\mathcal{B} = {}_\mathcal{S}P_\mathcal{B} \diag(\lambda_1, \ldots, \lambda_n)\)</span>.</p>
+<p>So <span class="math">\(\begin{bmatrix} [L]\vec{v}_1 &amp; \ldots &amp; [L]\vec{v}_n \end{bmatrix} = \begin{bmatrix} \lambda_1\vec{v}_1 &amp; \ldots &amp; \lambda_n\vec{v}_n \end{bmatrix}\)</span>.</p>
+<p>So for all <span class="math">\(1 \le i \le n\)</span>, <span class="math">\(L(\vec{v}_i) = \lambda_i \vec{v}_i\)</span> and <span class="math">\(\vec{v}_i \no \vec{0}\)</span> since <span class="math">\({}_\mathcal{S}P_\mathcal{B}\)</span> is invertible.</p>
+<p>So <span class="math">\([L(\vec{v}_i)]_\mathcal{B} = [\lambda_i \vec{v}_i]_\mathcal{B}\)</span>. Since <span class="math">\([\vec{v}_i]_\mathcal{B} = \vec{e}_i\)</span>, <span class="math">\([L(\vec{v}_i)]_\mathcal{B} = \lambda_i \vec{e}_i\)</span>.</p>
+<p>So <span class="math">\([L]_\mathcal{B} = \begin{bmatrix} \lambda_1\vec{e}_1 &amp; \ldots &amp; \lambda_n\vec{e}_n \end{bmatrix} = \diag(\lambda_1, \ldots, \lambda_n)\)</span>.</p>
+<p>So if <span class="math">\([L]_\mathcal{B}\)</span> is diagonal for a given <span class="math">\(\mathcal{B}\)</span>, then <span class="math">\([L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)\)</span>. ;wip: what was the point of doing all this only to end up back at the beginning?</p>
+<h3 id="definition-1">Definition</h3>
+<p>Let <span class="math">\(A \in M_{n \times n}\)</span>. Let <span class="math">\(\vec{v} \ne \vec{0}\)</span>. Let <span class="math">\(\lambda \in \mb{R}\)</span>. Then <span class="math">\(\lambda\)</span> is an <strong>eigenvalue</strong> of <span class="math">\(A\)</span> and <span class="math">\(\vec{v}\)</span> is an <strong>eigenvector</strong> of <span class="math">\(A\)</span> if and only if <span class="math">\(A\vec{v} = \lambda \vec{v}\)</span>.</p>
+<p>In other words, the eigenvector can be multiplied by <span class="math">\(A\)</span> to give a scalar multiple of itself, and the eigenvalue is the scalar that it is multiplied by.</p>
+<p>Also, the eigenvector and eigenvalue of a linear operator is the eigenvector and eigenvalue of the standard matrix of the linear operator.</p>
+<p>Every eigenvalue is associated with eigenvectors. An eigenvalue can have a whole set of associated eigenvectors.</p>
+<p>Find the eigenvectors and eigenvalues of <span class="math">\(L(\vec{x}) = \proj_\vec{a} \vec{x}\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(\lambda \in \mb{R}\)</span>. Clearly, <span class="math">\(L(\vec{x}) = \lambda \vec{x}\)</span> if <span class="math">\(\vec{x}\)</span> lies along <span class="math">\(\vec{a}\)</span> - <span class="math">\(\vec{x}\)</span> is already a scalar multiple of <span class="math">\(\vec{a}\)</span>.<br />So the eigenvectors of <span class="math">\(L(\vec{x})\)</span> include <span class="math">\(k\vec{a}, k \ne 0\)</span> with tje eigenvalue <span class="math">\(\lambda = 1\)</span>.<br />Clearly, <span class="math">\(L(\vec{x}) = \lambda \vec{x}\)</span> if <span class="math">\(\vec{x}\)</span> is perpendicular to <span class="math">\(\vec{a}\)</span> - the projection is <span class="math">\(\vec{0}\)</span>.<br />So the eigenvectors of <span class="math">\(L(\vec{x})\)</span> include <span class="math">\(k\vec{a}, k \ne 0\)</span> with tje eigenvalue <span class="math">\(\lambda = 0\)</span>.<br />Note that there are infinite combinations of eigenvalues and eigenvectors.</p>
+</blockquote>
+<p>Determine if <span class="math">\(\vec{v} = \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}\)</span> is an eigenvector of <span class="math">\(A = \begin{bmatrix} 3 &amp; 6 &amp; 7 \\ 3 &amp; 3 &amp; 7 \\ 5 &amp; 6 &amp; 5 \end{bmatrix}\)</span> and if <span class="math">\(\lambda = 1\)</span> is an eigenvalue:</p>
+<blockquote>
+<p>CLearly, <span class="math">\(A\vec{v} = \begin{bmatrix} 16 \\ 13 \\ 16 \end{bmatrix}\)</span>.<br />Clearly, <span class="math">\(\begin{bmatrix} 16 \\ 13 \\ 16 \end{bmatrix}\)</span> is not a scalar multiple of <span class="math">\(\vec{v}\)</span>.<br />So <span class="math">\(\vec{v}\)</span> is not an eigenvector of <span class="math">\(A\)</span>.<br />We need to see if there is a non-zero vector such that <span class="math">\(A\vec{v} = \vec{v}\)</span>.<br />So <span class="math">\(\begin{bmatrix} 3v_1 + 6v_2 + 7v_3 \\ 3v_1 + 3v_2 + 7v_3 \\ 5v_1 + 6v_2 + 5v_3 \end{bmatrix} = \begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix}\)</span>.<br />Solving, we find that <span class="math">\(\vec{v} = \vec{0}\)</span> is the only solution.<br />Since eigenvectors must be non-zero, there are no eigenvectors such that <span class="math">\(\lambda = 1\)</span> is the corresponding eigenvalue.<br />So <span class="math">\(\lambda = 1\)</span> is not an eigenvalue.</p>
+</blockquote>
+<h3 id="calculation">Calculation</h3>
+<p>Whenever we are finding eigenvalues, we are solving <span class="math">\(A\vec{v} = \lambda \vec{v}\)</span> such that <span class="math">\(\vec{v} \ne 0\)</span>.</p>
+<p>So <span class="math">\(A\vec{v} - \lambda I \vec{v} = \vec{0}\)</span> and <span class="math">\((A - \lambda I)\vec{v} = \vec{0}\)</span>.</p>
+<p>Clearly, <span class="math">\(\vec{v} = \vec{0}\)</span> is always a solution for this linear system. However, we are only interested in the nontrivial solutions - we want more than one solution.</p>
+<p>So we want <span class="math">\(\rank A &lt; n\)</span>, and by theorem 5.3.8, <span class="math">\(\det (A - \lambda I) = 0\)</span>.</p>
+<p>So <span class="math">\(\lambda\)</span> is an eigenvalue if and only if <span class="math">\(\det (A - \lambda I) = 0\)</span>.</p>
+<p>Given <span class="math">\(A = \begin{bmatrix} 2 &amp; -12 \\ 1 &amp; -5 \end{bmatrix}\)</span>, find the eigenvalues and eigenvectors:</p>
+<blockquote>
+<p>Assume <span class="math">\((A - \lambda I)\vec{v} = \vec{0}\)</span> and <span class="math">\(\det (A - \lambda I) = 0\)</span>.<br />Clearly, <span class="math">\(\det (A - \lambda I) = (\lambda + 2)(\lambda + 1)\)</span>. So <span class="math">\(\lambda = -2, -1\)</span>. We can also write this as <span class="math">\(\lambda_1 = -2, \lambda_2 = -1\)</span>.<br />Assume <span class="math">\(\lambda = -2\)</span>. Then <span class="math">\((A - \lambda I)\vec{v} = \begin{bmatrix} 4 &amp; -12 \\ 1 &amp; -3 \end{bmatrix}\vec{v} = \vec{0}\)</span>.<br />Solving, we get <span class="math">\(\vec{v} = k\begin{bmatrix} 3 \\ 1 \end{bmatrix}, k \ne 0\)</span>.<br />So the eigenvalue <span class="math">\(\lambda = -2\)</span> is associated with the eigenvector <span class="math">\(\vec{v} = k\begin{bmatrix} 3 \\ 1 \end{bmatrix}, k \ne 0\)</span>.<br />Assume <span class="math">\(\lambda = -1\)</span>. Then <span class="math">\((A - \lambda I)\vec{v} = \begin{bmatrix} 3 &amp; -12 \\ 1 &amp; -4 \end{bmatrix}\vec{v} = \vec{0}\)</span>.<br />Solving, we get <span class="math">\(\vec{v} = k\begin{bmatrix} 4 \\ 1 \end{bmatrix}, k \ne 0\)</span>.<br />So the eigenvalue <span class="math">\(\lambda = -1\)</span> is associated with the eigenvector <span class="math">\(\vec{v} = k\begin{bmatrix} 4 \\ 1 \end{bmatrix}, k \ne 0\)</span>.</p>
+</blockquote>
+<h3 id="related-concepts">Related Concepts</h3>
+<p>Note that when we calculated <span class="math">\(\det (A - \lambda I)\)</span>, we always got an <span class="math">\(n\)</span>th degree polynomial in terms of <span class="math">\(\lambda\)</span> - a polynomial of degree equal to the number of rows and columns.</p>
+<p>We call this the <strong>characteristic polynomial</strong> of <span class="math">\(A\)</span>. It is defined as <span class="math">\(C(\lambda) = \det (A - \lambda I)\)</span>.</p>
+<p>Clearly, <span class="math">\(\lambda\)</span> is an eigenvalue if and only if <span class="math">\(C(\lambda) = 0\)</span>, since it is the solution to <span class="math">\(\det (A - \lambda I) = 0\)</span>.</p>
+<p>The <strong>algebraic multiplicity</strong> <span class="math">\(a_\lambda\)</span> of an eigenvalue <span class="math">\(\lambda\)</span> is the number of times <span class="math">\(\lambda\)</span> appears as a root of <span class="math">\(C(\lambda)\)</span> - it is the degree of the root <span class="math">\(\lambda\)</span>.</p>
+<p>Note that the eigenvectors <span class="math">\(\vec{v}\)</span> associated with a given eigenvalue are the solutions to <span class="math">\((A - \lambda I)\vec{v} = \vec{0}\)</span> (rearranged from <span class="math">\(A\vec{v} = \lambda \vec{v}\)</span>). Therefore, <span class="math">\(\vec{v} \in \operatorname{Null}(A - \lambda I)\)</span>.</p>
+<p>In other words, the eigenvector is one of the elements of the nullspace of <span class="math">\(A - \lambda I\)</span>, excluding <span class="math">\(\vec{0}\)</span>.</p>
+<p>The <strong>eigenspace</strong> of the eigenvalue <span class="math">\(\lambda\)</span> is <span class="math">\(E_\lambda = \operatorname{Null}(A - \lambda I)\)</span>.</p>
+<p>The <strong>geometric multiplicity</strong> of an eigenvalue <span class="math">\(\lambda\)</span> is the dimension of its eigenspace, and is defined as <span class="math">\(g_\lambda = \dim E_\lambda\)</span>.</p>
+<h3 id="theorem-6.2.3">Theorem 6.2.3</h3>
+<p>For any eigenvalue <span class="math">\(\lambda\)</span>, <span class="math">\(1 \le g_\lambda \le a_\lambda\)</span>.</p>
+<p>In other words, the geometric muliplicity is always less than or equal to the algebraic multpicity, and all multiplicities are positive integers.</p>
+<p>Any eigenvalue <span class="math">\(\lambda\)</span> where <span class="math">\(g_\lambda &lt; a_\lambda\)</span> <strong>deficient</strong>.</p>
+<h3 id="theorem-6.2.4">Theorem 6.2.4</h3>
+<p>Given eigenvalues <span class="math">\(\lambda_1, \ldots, \lambda_n\)</span> of <span class="math">\(A \in M_{n \times n}\)</span>, <span class="math">\(\det A = \lambda_1 \cdots \lambda_n\)</span> and <span class="math">\(\operatorname{tr}(A) = \lambda_1 + \ldots + \lambda_n = \sum_{i = 1}^n \lambda_i\)</span>.</p>
+<p>In other words, the determinant of a matrix is the product of all its eigenvalues and the trace is the sum of all the eigenvalues.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

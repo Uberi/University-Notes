@@ -30,6 +30,7 @@ $$
 \newcommand{\range}{\operatorname{Range}}
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
 $$
 
 # 13/1/14 (I'm going to stop procrastinating this week, honest!)
@@ -311,7 +312,7 @@ If $\vec{x}, \vec{y}, \vec{z} \in \mb{R}^n, s, t, \in \mb{R}$, then:
 * $\vec{x} \cdot \vec{y} = \vec{y} \cdot \vec{x}$.
 * $\vec{x} \cdot (s\vec{y} + t\vec{z}) = s (\vec{x} \cdot \vec{y}) + t (\vec{x} \cdot \vec{z})$.
 
-The **length** or **norm** of a vector $\vec{v} = \begin{bmatrix} v_1 \\ \vdots \\ v_k \end{bmatrix}$ is $\magn{\vec{v}} = \sqrt{\sum_{i = 1}^k v_i^2}$. Note the similarity to scalars, where $\abs{x} = \sqrt{x^2}$.
+The **length** or **norm** (Euclidean norm) of a vector $\vec{v} = \begin{bmatrix} v_1 \\ \vdots \\ v_k \end{bmatrix}$ is $\magn{\vec{v}} = \sqrt{\sum_{i = 1}^k v_i^2}$. Note the similarity to scalars, where $\abs{x} = \sqrt{x^2}$.
 
 A vector of length 1 is a unit vector. A unit vector is therefore one such that $\sum_{i = 1}^k v_i^2 = 1$.
 
@@ -362,11 +363,11 @@ So $n_1 (x_1 - a_1) + n_2 (x_2 - a_2) + n_3 (x_3 - a_3) = 0 = n_1 x_1 + n_2 x_2 
 
 So $n_1 x_1 + n_2 x_2 + n_3 x_3 = n_1 a_1 + n_2 a_2 + n_3 a_3$. Since $\vec{A}$ is fixed, $n_1 a_1 + n_2 a_2 + n_3 a_3$ is constant and the equation is a function of $x_1, x_2, x_3$.
 
-Since $\vec{X}$ is arbitrary, this holds for every point on the plane, and so is an equation of the plane.
+Since $\vec{x}$ is arbitrary, this holds for every point on the plane, and so is an equation of the plane.
 
 Using the above, we can find the scalar equation of any plane given the normal and a fixed point on the plane.
 
-If we extend this to hyperplanes, ;wip
+Additionally, we can easily extend this to hyperplanes. The scalar equation of a hyperplane given the normal $\vec{n}$ and fixed point $\vec{a}$ pn the plane is $\vec{n} \cdot \vec{x} = \vec{n} \cdot \vec{a}$.
 
 ### Cross Product
 
@@ -1787,6 +1788,8 @@ The determinant of the $2 \times 2$ matrix $A = \begin{bmatrix} a & b \\ c & d \
 
 The determinant of the $3 \times 3$ matrix $A = \begin{bmatrix} a & b & c \\ d & e & f \\ g & h & i \end{bmatrix}$ is $\det A = aei - afh + bfg - bdi + cdh - cei$. Note that this is equal to $a\begin{vmatrix} e & f \\ h & i \end{vmatrix} - b\begin{vmatrix} d & f \\ g & i \end{vmatrix} + c\begin{bmatrix} d & e \\ g & h \end{bmatrix}$.
 
+For systems of linear equations, the determinant is 0 if and only if the system has one and only one solution.
+
 ### Cofactors
 
 Let $A \in M_{m \times n}$, $n \ge 2$. Let $A(i, j) \in M_{m - 1, n - 1}$ be $A$, except without row $i$ and column $j$.
@@ -1914,7 +1917,7 @@ So $\det EA = \det E \det A$.
 
 ### Theorem 5.3.8
 
-This theorem extends theorem 5.1.7.
+This theorem extends theorem 5.1.7 - the Invertible Matrix Theorem.
 
 Given $A \in M_{n \times n}$, $A^{-1}$ exists if and only if $\det A \ne 0$.
 
@@ -2023,3 +2026,164 @@ Using a similar process as before, we find that $V = \abs{\det \begin{bmatrix} \
 In fact, this works in any number of dimensions. A **parallelotope** is an $n$ dimensional solid induced by $n$ vectors $\vec{v}_1, \ldots, \vec{v}_n \in \mb{R}^n$.
 
 The **n-volume** of an $n$ dimensional solid is an extension to the concept of a volume to any number of dimensions. The n-volume of the parallelotope is $V = \abs{\det \begin{bmatrix} \vec{v}_1 & \ldots & \vec{v}_n \end{bmatrix}}$.
+
+# 31/3/14
+
+Linear Mappings and Bases
+-------------------------
+
+Let $L: \mb{R}^n \to \mb{R}^n$ be a linear operator. Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ be a basis for $\mb{R}^n$. Let $\vec{x} \in \mb{R}^n$.
+
+Then $\exists b_1, \ldots, b_n \in \mb{R}, \vec{x} = b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n$. So $[\vec{x}]_\mathcal{B} = \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}$.
+
+We want to determine a matrix $A$ such that $[L(\vec{x})]_\mathcal{B} = [[L]\vec{x}]_\mathcal{B} = A\vec{x}_\mathcal{B}$ - a linear operator that works the same as $L$, but accepts and produces $\mathcal{B}$-coordinates.
+
+Clearly, $[L(\vec{x})]_\mathcal{B} = [b_1 L(\vec{v}_1) + \ldots + b_n L(\vec{v}_n)]_\mathcal{B} = b_1 [L(\vec{v}_1)]_\mathcal{B} + \ldots + b_n [L(\vec{v}_n)]_\mathcal{B} = \begin{bmatrix} [L(\vec{v}_n)]_\mathcal{B} & \ldots & [L(\vec{v}_n)]_\mathcal{B} \end{bmatrix} \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}$.
+
+So $[L(\vec{x})]_\mathcal{B} = [L]_\mathcal{B} [\vec{x}]_\mathcal{B}$.
+
+In other words, the matrix of $L$ with respect to $\mathcal{B}$, is $[L]_\mathcal{B} = \begin{bmatrix} [L(\vec{v}_n)]_\mathcal{B} & \ldots & [L(\vec{v}_n)]_\mathcal{B} \end{bmatrix} [\vec{x}]_\mathcal{B}$. We call $[L]_\mathcal{B}$ the $\mathcal{B}$-matrix of $L$.
+
+Given $L(\vec{x}) = A\vec{x} = \begin{bmatrix} 1 & 2 & 2 \\ 2 & 1 & 2 \\ 2 & 2 & 1 \end{bmatrix} \vec{x}$ and $\mathcal{B} = \set{\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}} = \set{\vec{v}_1, \vec{v}_2, \vec{v}_3}$, find $[L]_\mathcal{B}$:
+
+> Clearly, $[L]_\mathcal{B} = \begin{bmatrix} [A\vec{v}_1]_\mathcal{B} & [A\vec{v}_2]_\mathcal{B} & [A\vec{v}_3]_\mathcal{B} \end{bmatrix}$.  
+> So $[L]_\mathcal{B} = \begin{bmatrix} 5 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1 \end{bmatrix}$.  
+
+### Diagonal Matrices
+
+A matrix $D \in M_{n \times n}$ is **diagonal** if and only if for all $1 \le i \ke n$ and $1 \le j \le n$, $i \ne j \implies D_{i, j} = 0$.
+
+In other words, a diagonal matrix is all zero, except possibly along the diagonal. For example, $\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}$ is not diagonal, while $\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$ is.
+
+A diagonal matrix is, by definition, both upper and lower triangular.
+
+We can construct diagonal matrices using $D = \diag(D_{1, 1}, \ldots, D_{n, n}) = \begin{bmatrix} D_{1, 1} & 0 & \ldots & 0 \\ \vdots & \vdots & \vdots & \vdots \\ 0 & \ldots & 0 & D_{n, n} \end{bmatrix}$.
+
+We often want to determine if there is a basis in which a matrix converted into that basis would be diagonal.
+
+Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$.
+
+Also, $\mathcal{S} = \set{\vec{e}_1, \ldots, \vec{e}_n}$ is the standard basis for $\mb{R}^n$.
+
+Clearly, $[L]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B}$. Basically, we convert it into standard coordinates, apply the linear operator, and then convert it back into $\mathcal{B}$ coordinates.
+
+Also, ${}_\mathcal{S}P_\mathcal{B} = \begin{bmatrix} \vec{v}_1, \ldots, \vec{v}_n \end{bmatrix}$ and ${}_\mathcal{B}P_\mathcal{S} = ({}_\mathcal{S}P_\mathcal{B})^{-1}$.
+
+Given $A \in M_{n \times n}$, the **trace** of $A$ is $\operatorname{tr}(A) = \sum_{i = 1}^n A_{i, i}$. In other words, it is the sum of all the diagonal values.
+
+The $[L]_\mathcal{B}$ notation is similar to the $[\vec{v}]_\mathcal{B}$, except instead of a coordinate being put into another basis, it is a linear mapping converted to work in another basis.
+
+### Theorem 6.1.1
+
+Given $P, A, B \in M_{n \times n}$ such that $P^{-1}AP = B$, then $\rank A = \rank B$, $\det A = \det B$, and $\operatorname{tr}(A) = \operatorname{tr}(B)$.
+
+Also, if $P$ and $P^{-1}$ exist satisfying the above conditions, then $A$ and $B$ are **similar**. We can think of this as meaning that they represent the same linear operation, but in different bases.
+
+Eigenvalues/Eigenvectors
+------------------------
+
+Pronounced "Eye-gan values" and "Eye-gan vectors".
+
+Let $L$ be a linear operator and $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ be a basis.
+
+We want to determine if $\mathcal{B}$ exists such that the matrix of $L$ with respect to $\mathcal{B}$ is diagonal.
+
+Assume that $\mathcal{B}$ exists satisfying these conditions. Then $[L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)$.
+
+Clearly, ${}_\mathcal{S}P_\mathcal{B} = \begin{bmatrix} \vec{v}_1 & \ldots & \vec{v}_n \end{bmatrix}$ and $[L]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B}$.
+
+So ${}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)$ and $[L] {}_\mathcal{S}P_\mathcal{B} = {}_\mathcal{S}P_\mathcal{B} \diag(\lambda_1, \ldots, \lambda_n)$.
+
+So $\begin{bmatrix} [L]\vec{v}_1 & \ldots & [L]\vec{v}_n \end{bmatrix} = \begin{bmatrix} \lambda_1\vec{v}_1 & \ldots & \lambda_n\vec{v}_n \end{bmatrix}$.
+
+So for all $1 \le i \le n$, $L(\vec{v}_i) = \lambda_i \vec{v}_i$ and $\vec{v}_i \no \vec{0}$ since ${}_\mathcal{S}P_\mathcal{B}$ is invertible.
+
+So $[L(\vec{v}_i)]_\mathcal{B} = [\lambda_i \vec{v}_i]_\mathcal{B}$. Since $[\vec{v}_i]_\mathcal{B} = \vec{e}_i$, $[L(\vec{v}_i)]_\mathcal{B} = \lambda_i \vec{e}_i$.
+
+So $[L]_\mathcal{B} = \begin{bmatrix} \lambda_1\vec{e}_1 & \ldots & \lambda_n\vec{e}_n \end{bmatrix} = \diag(\lambda_1, \ldots, \lambda_n)$.
+
+So if $[L]_\mathcal{B}$ is diagonal for a given $\mathcal{B}$, then $[L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)$. ;wip: what was the point of doing all this only to end up back at the beginning?
+
+### Definition
+
+Let $A \in M_{n \times n}$. Let $\vec{v} \ne \vec{0}$. Let $\lambda \in \mb{R}$. Then $\lambda$ is an **eigenvalue** of $A$ and $\vec{v}$ is an **eigenvector** of $A$ if and only if $A\vec{v} = \lambda \vec{v}$.
+
+In other words, the eigenvector can be multiplied by $A$ to give a scalar multiple of itself, and the eigenvalue is the scalar that it is multiplied by.
+
+Also, the eigenvector and eigenvalue of a linear operator is the eigenvector and eigenvalue of the standard matrix of the linear operator.
+
+Every eigenvalue is associated with eigenvectors. An eigenvalue can have a whole set of associated eigenvectors.
+
+Find the eigenvectors and eigenvalues of $L(\vec{x}) = \proj_\vec{a} \vec{x}$:
+
+> Let $\lambda \in \mb{R}$. Clearly, $L(\vec{x}) = \lambda \vec{x}$ if $\vec{x}$ lies along $\vec{a}$ - $\vec{x}$ is already a scalar multiple of $\vec{a}$.  
+> So the eigenvectors of $L(\vec{x})$ include $k\vec{a}, k \ne 0$ with tje eigenvalue $\lambda = 1$.  
+> Clearly, $L(\vec{x}) = \lambda \vec{x}$ if $\vec{x}$ is perpendicular to $\vec{a}$ - the projection is $\vec{0}$.  
+> So the eigenvectors of $L(\vec{x})$ include $k\vec{a}, k \ne 0$ with tje eigenvalue $\lambda = 0$.  
+> Note that there are infinite combinations of eigenvalues and eigenvectors.  
+
+Determine if $\vec{v} = \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}$ is an eigenvector of $A = \begin{bmatrix} 3 & 6 & 7 \\ 3 & 3 & 7 \\ 5 & 6 & 5 \end{bmatrix}$ and if $\lambda = 1$ is an eigenvalue:
+
+> CLearly, $A\vec{v} = \begin{bmatrix} 16 \\ 13 \\ 16 \end{bmatrix}$.  
+> Clearly, $\begin{bmatrix} 16 \\ 13 \\ 16 \end{bmatrix}$ is not a scalar multiple of $\vec{v}$.  
+> So $\vec{v}$ is not an eigenvector of $A$.  
+> We need to see if there is a non-zero vector such that $A\vec{v} = \vec{v}$.  
+> So $\begin{bmatrix} 3v_1 + 6v_2 + 7v_3 \\ 3v_1 + 3v_2 + 7v_3 \\ 5v_1 + 6v_2 + 5v_3 \end{bmatrix} = \begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix}$.  
+> Solving, we find that $\vec{v} = \vec{0}$ is the only solution.  
+> Since eigenvectors must be non-zero, there are no eigenvectors such that $\lambda = 1$ is the corresponding eigenvalue.  
+> So $\lambda = 1$ is not an eigenvalue.  
+
+### Calculation
+
+Whenever we are finding eigenvalues, we are solving $A\vec{v} = \lambda \vec{v}$ such that $\vec{v} \ne 0$.
+
+So $A\vec{v} - \lambda I \vec{v} = \vec{0}$ and $(A - \lambda I)\vec{v} = \vec{0}$.
+
+Clearly, $\vec{v} = \vec{0}$ is always a solution for this linear system. However, we are only interested in the nontrivial solutions - we want more than one solution.
+
+So we want $\rank A < n$, and by theorem 5.3.8, $\det (A - \lambda I) = 0$.
+
+So $\lambda$ is an eigenvalue if and only if $\det (A - \lambda I) = 0$.
+
+Given $A = \begin{bmatrix} 2 & -12 \\ 1 & -5 \end{bmatrix}$, find the eigenvalues and eigenvectors:
+
+> Assume $(A - \lambda I)\vec{v} = \vec{0}$ and $\det (A - \lambda I) = 0$.  
+> Clearly, $\det (A - \lambda I) = (\lambda + 2)(\lambda + 1)$. So $\lambda = -2, -1$. We can also write this as $\lambda_1 = -2, \lambda_2 = -1$.  
+> Assume $\lambda = -2$. Then $(A - \lambda I)\vec{v} = \begin{bmatrix} 4 & -12 \\ 1 & -3 \end{bmatrix}\vec{v} = \vec{0}$.  
+> Solving, we get $\vec{v} = k\begin{bmatrix} 3 \\ 1 \end{bmatrix}, k \ne 0$.  
+> So the eigenvalue $\lambda = -2$ is associated with the eigenvector $\vec{v} = k\begin{bmatrix} 3 \\ 1 \end{bmatrix}, k \ne 0$.  
+> Assume $\lambda = -1$. Then $(A - \lambda I)\vec{v} = \begin{bmatrix} 3 & -12 \\ 1 & -4 \end{bmatrix}\vec{v} = \vec{0}$.  
+> Solving, we get $\vec{v} = k\begin{bmatrix} 4 \\ 1 \end{bmatrix}, k \ne 0$.  
+> So the eigenvalue $\lambda = -1$ is associated with the eigenvector $\vec{v} = k\begin{bmatrix} 4 \\ 1 \end{bmatrix}, k \ne 0$.  
+
+### Related Concepts
+
+Note that when we calculated $\det (A - \lambda I)$, we always got an $n$th degree polynomial in terms of $\lambda$ - a polynomial of degree equal to the number of rows and columns.
+
+We call this the **characteristic polynomial** of $A$. It is defined as $C(\lambda) = \det (A - \lambda I)$.
+
+Clearly, $\lambda$ is an eigenvalue if and only if $C(\lambda) = 0$, since it is the solution to $\det (A - \lambda I) = 0$.
+
+The **algebraic multiplicity** $a_\lambda$ of an eigenvalue $\lambda$ is the number of times $\lambda$ appears as a root of $C(\lambda)$ - it is the degree of the root $\lambda$.
+
+Note that the eigenvectors $\vec{v}$ associated with a given eigenvalue are the solutions to $(A - \lambda I)\vec{v} = \vec{0}$ (rearranged from $A\vec{v} = \lambda \vec{v}$). Therefore, $\vec{v} \in \operatorname{Null}(A - \lambda I)$.
+
+In other words, the eigenvector is one of the elements of the nullspace of $A - \lambda I$, excluding $\vec{0}$.
+
+The **eigenspace** of the eigenvalue $\lambda$ is $E_\lambda = \operatorname{Null}(A - \lambda I)$.
+
+The **geometric multiplicity** of an eigenvalue $\lambda$ is the dimension of its eigenspace, and is defined as $g_\lambda = \dim E_\lambda$.
+
+### Theorem 6.2.3
+
+For any eigenvalue $\lambda$, $1 \le g_\lambda \le a_\lambda$.
+
+In other words, the geometric muliplicity is always less than or equal to the algebraic multpicity, and all multiplicities are positive integers.
+
+Any eigenvalue $\lambda$ where $g_\lambda < a_\lambda$ **deficient**.
+
+### Theorem 6.2.4
+
+Given eigenvalues $\lambda_1, \ldots, \lambda_n$ of $A \in M_{n \times n}$, $\det A = \lambda_1 \cdots \lambda_n$ and $\operatorname{tr}(A) = \lambda_1 + \ldots + \lambda_n = \sum_{i = 1}^n \lambda_i$.
+
+In other words, the determinant of a matrix is the product of all its eigenvalues and the trace is the sum of all the eigenvalues.

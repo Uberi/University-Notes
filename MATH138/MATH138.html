@@ -97,6 +97,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 \newcommand{\range}{\operatorname{Range}}
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
 \]</span></p>
 <h1 id="section">6/1/14</h1>
 <p>Assignments are due every Friday at 3:30pm. They are posted on LEARN.</p>
@@ -1075,6 +1076,43 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>We do calculus on these functions by working with each component separately. As a result, calculus on parametric curves are no more difficult than calculus on normal functions.</p>
 <p>For example, <span class="math">\(\vec{r}(t) = \begin{bmatrix} t \\ \abs{t} \end{bmatrix}\)</span> simply looks like the absolute value function on <span class="math">\(\begin{bmatrix} x \\ y \end{bmatrix} = \vec{r}(t)\)</span>.</p>
 <p>However, the additional information is the direction along the curve - the velocity, in our case.</p>
+<h1 id="section-33">31/3/14</h1>
+<p>Parametric curves allow us to describe curves that would be very difficult or impossible to represent as s imple functions of <span class="math">\(x\)</span>. This is much more general than curves on a plane.</p>
+<p>Parametric curves also have a direction vector along the curve. The direction always goes from a low <span class="math">\(t\)</span> to a high <span class="math">\(t\)</span>. This contrasts with curves on a plane, which does not have a direction along the curve.</p>
+<p>For example, <span class="math">\(\vec{r}(t) = (t^2, t), t \in [0, 1]\)</span>. Since <span class="math">\(x = t^2\)</span> and <span class="math">\(y = t\)</span>, <span class="math">\(y = \sqrt{x} = t\)</span>, which is a form that allows us to plot the function easily.</p>
+<p>Parametric curves are hard to plot because we are not used to them. However, parametric curves of the form <span class="math">\(\vec{r}(t) = (t, f(t))\)</span> can simply be plotted using <span class="math">\(y = f(t)\)</span>. Likewise, parametric curves of the form <span class="math">\(\vec{r}(t) = (f(t), t)\)</span> can simply be plotted using <span class="math">\(x = f(t)\)</span>, or <span class="math">\(y = f^{-1}(t)\)</span>. Also, the direction vector is rightwards, because as <span class="math">\(t\)</span> increases, the corresponding coordinate <span class="math">\(\vec{r}(t)\)</span> moves rightward.</p>
+<p>Consider <span class="math">\(\vec{r}(t) = (a \cos t, a \sin t), t \in [0, 2\pi]\)</span>. Since <span class="math">\(x = a \cos t, y = a \sin t\)</span>, <span class="math">\(x^2 + y^2 = a^2(\sin^2 t + \cos^2 t) = a^2\)</span>. So this is a circle of radius <span class="math">\(a\)</span>. The circle starts at <span class="math">\((a, 0)\)</span>, and travels counterclockwise until it reaches the starting point again.</p>
+<p>Given a value of <span class="math">\(t\)</span> for <span class="math">\(\vec{r}(t) = (f(t), g(t))\)</span> and <span class="math">\(y = f(x)\)</span>, we can plot it in an inverval of <span class="math">\(t \in [a, b]\)</span> by plotting for <span class="math">\(x \in [f(a), f(b)]\)</span>.</p>
+<p>The parameterization of a curve is not unique, just like normal curves. Every parametric curve has infinite different ways of being represented mathematically, but when drawn on a plane each curve has only one shape.</p>
+<p>For example, consider <span class="math">\(\vec{r}(t) = (a \cos t, b \sin t)\)</span>. This is an ellipse where <span class="math">\(a &gt; b\)</span> stretches it horiontally and <span class="math">\(b &gt; a\)</span> stretches it vertically. We can rewrite it as <span class="math">\(\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\)</span> to plot it on a Cartesian plane.</p>
+<h3 id="hyperbolic-functions">Hyperbolic Functions</h3>
+<p>The functions <span class="math">\(\vec{r} = (a \cos t, b \sin t)\)</span> are called <strong>circular/elliptical trigonometric fucntions</strong>.</p>
+<p>The hyperbolic trigonometric funnctions are called hyperbolic for a reason. Consider <span class="math">\(\vec{r}(t) = (a \cosh t, b \sinh t)\)</span>.</p>
+<p>In fact, this creates a <strong>hyperbola</strong>, which looks like a parabola and another instance of that parabola flipped about the x-axis, or the same thing sideways. They are always symmetrical about the x-axis and y-axis.</p>
+<p>A hyperbola is a curve defined by <span class="math">\(\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1\)</span>. We can derive this form by using the identity <span class="math">\(\cosh^2 t - \sinh^2 t = 1\)</span>.</p>
+<h1 id="section-34">2/4/14</h1>
+<p>;wip: final exam MC 4061 thursday April 10 4pm</p>
+<p>We can sketch this by rearranging the formula to get <span class="math">\(y = \pm \sqrt{\frac{b^2}{a^2}x^2 - b^2}\)</span>.</p>
+<p>When <span class="math">\(x\)</span> or <span class="math">\(y\)</span> gets large, <span class="math">\(y \approxeq \pm \frac{b}{a}x\)</span> - the function has lines for asymptotes.</p>
+<p>At <span class="math">\(x = 0\)</span>, <span class="math">\(y = \pm \sqrt{-b^2}\)</span>, which is imaginary, so there is no y-intercept.</p>
+<p>At <span class="math">\(y = 0\)</span>, <span class="math">\(x = \pm a\)</span>, which are the x-intercepts.</p>
+<p>Imagine a wheel of radius <span class="math">\(a\)</span> rolling along a level surface. If we observe from the reference frame of the surface, then a point on the edge of the wheel would create a bumpy curve. This curve is called a <strong>cycloid curve</strong>.</p>
+<p>The cycloid curve can easily be parametrically defined by <span class="math">\(\vec{r}(t) = (at - a \sin t, a - a \cos t)\)</span>. The <span class="math">\(at\)</span> term moves the curve horizontally, and the <span class="math">\(a\)</span> term moves above the x-axis.</p>
+<p>This function is very difficult to write in terms of <span class="math">\(y(x)\)</span>.</p>
+<p>;wip: figure out how to convert parametrics to implicit functions</p>
+<p>Parametric curves are not limited to <span class="math">\(\mb{R}^2\)</span>. If we extend them into <span class="math">\(\mb{R}^n\)</span>, then we can have <span class="math">\(n\)</span> dimensional curves.</p>
+<h3 id="calculus-on-parametric-curves">Calculus on Parametric Curves</h3>
+<p>To perform calculus on vector valued functions, we simply note that the vector valued function is a vector of single variable functions: <span class="math">\(\vec{r}(t) = (x(t), y(t))\)</span>, and we can apply the operations to the single variable functions.</p>
+<p>For example, <span class="math">\(\lim_{t \to a} \vec{r}(t) = \vec{L} \iff \lim_{t \to a} x(t) = L_1 \wedge \lim_{t \to a} y(t) = L_2\)</span>.</p>
+<p>In the same way, <span class="math">\(\frac{\dee \vec{r}}{\dee t} = (\frac{\dee x}{\dee t}, \frac{\dee y][\dee t})\)</span>. This is also known as the <strong>tangent vector</strong>.</p>
+<p>This is the reason that the velocity of the object is tangent to its motion - it is the tangent vector of position.</p>
+<p>Consider <span class="math">\(\magn{\frac{\dee \vec{r}}{\dee t}}\)</span>. This is the speed if <span class="math">\(\vec{r}(t)\)</span> is the position. This allows us to find the length of a curve (also known as distance or arclength) given its parametric curve.</p>
+<p>The length of a curve from <span class="math">\(t = a\)</span> to <span class="math">\(t = b\)</span> is <span class="math">\(\int_a^b \magn{\frac{\dee \vec{r}}{\dee t}} \dee t\)</span>.</p>
+<p>For example, find the circumference of the circle <span class="math">\(\vec{r}(t) = (a \cos t, a \sin t)\)</span> for <span class="math">\(t \in [0, 4\pi]\)</span>:</p>
+<blockquote>
+<p>Clearly, the length is <span class="math">\(\int_a^b \magn{\frac{\dee \vec{r}}{\dee t}} \dee t = \int_0^{4 \pi} \sqrt{\left(\frac{\dee}{\dee t} a \cos t\right)^2 + \left(\frac{\dee}{\dee t} a \sin t\right)^2} \dee t\)</span> ;wip</p>
+</blockquote>
+<p>For example, <span class="math">\(\vec{r}(t) = (a \cos t, a \sin t, t)\)</span> is a spiral upwards.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

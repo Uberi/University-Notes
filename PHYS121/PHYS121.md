@@ -28,6 +28,7 @@ $$
 \newcommand{\range}{\operatorname{Range}}
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
 $$
 
 # 14/1/14

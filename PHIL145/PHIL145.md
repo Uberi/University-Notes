@@ -1296,6 +1296,8 @@ This is fallacious because it is likely that in fact this is just natural variat
 
 When we see a number of extraordinary events happening, we tend to think that they are ordinary. However, they are not; this is just natural variations in the events.
 
+A related concept is the **regression effect**. Basically, if we pick a number between 1 and 100, and draw a 1 the first time, the next draw will be still be independent, yet the probability of a bigger number is 99%, and the probability of a nuber closer to the mean is 98% (since 100 is equally far from the mean).
+
 ### Simpson's Paradox
 
 Suppose hospital A cures 70% of all cancer patients and 90% of all non-cancer patients. Suppose hospital B cures 50% of all cancer patients and 80% of all non-cancer patients.
@@ -1509,6 +1511,10 @@ Thagard proposed that a discipline is pseudoscience if it is less progressive th
 Science can also be defined by its use of peer review and the way it takes advantage of social cognition. It may be that the structure of the communities themselves determine whether a practice is science or not.
 
 Science is simply application of critical thinking to empirical evidence. Instead of focusing on what is and isn't science, we should instead focus on what methods of generating information are reliable.
+
+A **single blind** study is one where the participants are not given all the information, but the experimentors are, to avoid bias.
+
+A **double blind** study is one where both the participants and experiments are not given all the information, to avoid bias.
 
 ### Consistency
 

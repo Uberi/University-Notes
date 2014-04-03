@@ -32,6 +32,7 @@ $$
 \newcommand{\range}{\operatorname{Range}}
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
 $$
 
 # 6/1/14
@@ -1704,3 +1705,73 @@ We do calculus on these functions by working with each component separately. As 
 For example, $\vec{r}(t) = \begin{bmatrix} t \\ \abs{t} \end{bmatrix}$ simply looks like the absolute value function on $\begin{bmatrix} x \\ y \end{bmatrix} = \vec{r}(t)$.
 
 However, the additional information is the direction along the curve - the velocity, in our case.
+
+# 31/3/14
+
+Parametric curves allow us to describe curves that would be very difficult or impossible to represent as s imple functions of $x$. This is much more general than curves on a plane.
+
+Parametric curves also have a direction vector along the curve. The direction always goes from a low $t$ to a high $t$. This contrasts with curves on a plane, which does not have a direction along the curve.
+
+For example, $\vec{r}(t) = (t^2, t), t \in [0, 1]$. Since $x = t^2$ and $y = t$, $y = \sqrt{x} = t$, which is a form that allows us to plot the function easily.
+
+Parametric curves are hard to plot because we are not used to them. However, parametric curves of the form $\vec{r}(t) = (t, f(t))$ can simply be plotted using $y = f(t)$. Likewise, parametric curves of the form $\vec{r}(t) = (f(t), t)$ can simply be plotted using $x = f(t)$, or $y = f^{-1}(t)$. Also, the direction vector is rightwards, because as $t$ increases, the corresponding coordinate $\vec{r}(t)$ moves rightward.
+
+Consider $\vec{r}(t) = (a \cos t, a \sin t), t \in [0, 2\pi]$. Since $x = a \cos t, y = a \sin t$, $x^2 + y^2 = a^2(\sin^2 t + \cos^2 t) = a^2$. So this is a circle of radius $a$. The circle starts at $(a, 0)$, and travels counterclockwise until it reaches the starting point again.
+
+Given a value of $t$ for $\vec{r}(t) = (f(t), g(t))$ and $y = f(x)$, we can plot it in an inverval of $t \in [a, b]$ by plotting for $x \in [f(a), f(b)]$.
+
+The parameterization of a curve is not unique, just like normal curves. Every parametric curve has infinite different ways of being represented mathematically, but when drawn on a plane each curve has only one shape.
+
+For example, consider $\vec{r}(t) = (a \cos t, b \sin t)$. This is an ellipse where $a > b$ stretches it horiontally and $b > a$ stretches it vertically. We can rewrite it as $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ to plot it on a Cartesian plane.
+
+### Hyperbolic Functions
+
+The functions $\vec{r} = (a \cos t, b \sin t)$ are called **circular/elliptical trigonometric fucntions**.
+
+The hyperbolic trigonometric funnctions are called hyperbolic for a reason. Consider $\vec{r}(t) = (a \cosh t, b \sinh t)$.
+
+In fact, this creates a **hyperbola**, which looks like a parabola and another instance of that parabola flipped about the x-axis, or the same thing sideways. They are always symmetrical about the x-axis and y-axis.
+
+A hyperbola is a curve defined by $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$. We can derive this form by using the identity $\cosh^2 t - \sinh^2 t = 1$.
+
+# 2/4/14
+
+;wip: final exam MC 4061 thursday April 10 4pm
+
+We can sketch this by rearranging the formula to get $y = \pm \sqrt{\frac{b^2}{a^2}x^2 - b^2}$.
+
+When $x$ or $y$ gets large, $y \approxeq \pm \frac{b}{a}x$ - the function has lines for asymptotes.
+
+At $x = 0$, $y = \pm \sqrt{-b^2}$, which is imaginary, so there is no y-intercept.
+
+At $y = 0$, $x = \pm a$, which are the x-intercepts.
+
+Imagine a wheel of radius $a$ rolling along a level surface. If we observe from the reference frame of the surface, then a point on the edge of the wheel would create a bumpy curve. This curve is called a **cycloid curve**.
+
+The cycloid curve can easily be parametrically defined by $\vec{r}(t) = (at - a \sin t, a - a \cos t)$. The $at$ term moves the curve horizontally, and the $a$ term moves above the x-axis.
+
+This function is very difficult to write in terms of $y(x)$.
+
+;wip: figure out how to convert parametrics to implicit functions
+
+Parametric curves are not limited to $\mb{R}^2$. If we extend them into $\mb{R}^n$, then we can have $n$ dimensional curves.
+
+### Calculus on Parametric Curves
+
+To perform calculus on vector valued functions, we simply note that the vector valued function is a vector of single variable functions: $\vec{r}(t) = (x(t), y(t))$, and we can apply the operations to the single variable functions.
+
+For example, $\lim_{t \to a} \vec{r}(t) = \vec{L} \iff \lim_{t \to a} x(t) = L_1 \wedge \lim_{t \to a} y(t) = L_2$.
+
+In the same way, $\frac{\dee \vec{r}}{\dee t} = (\frac{\dee x}{\dee t}, \frac{\dee y][\dee t})$. This is also known as the **tangent vector**.
+
+This is the reason that the velocity of the object is tangent to its motion - it is the tangent vector of position.
+
+Consider $\magn{\frac{\dee \vec{r}}{\dee t}}$. This is the speed if $\vec{r}(t)$ is the position. This allows us to find the length of a curve (also known as distance or arclength) given its parametric curve.
+
+The length of a curve from $t = a$ to $t = b$ is $\int_a^b \magn{\frac{\dee \vec{r}}{\dee t}} \dee t$.
+
+For example, find the circumference of the circle $\vec{r}(t) = (a \cos t, a \sin t)$ for $t \in [0, 4\pi]$:
+
+> Clearly, the length is $\int_a^b \magn{\frac{\dee \vec{r}}{\dee t}} \dee t = \int_0^{4 \pi} \sqrt{\left(\frac{\dee}{\dee t} a \cos t\right)^2 + \left(\frac{\dee}{\dee t} a \sin t\right)^2} \dee t$ ;wip
+
+For example, $\vec{r}(t) = (a \cos t, a \sin t, t)$ is a spiral upwards.
