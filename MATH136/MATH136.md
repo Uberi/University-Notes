@@ -33,7 +33,7 @@ $$
 \newcommand{\diag}{\operatorname{diag}}
 $$
 
-# 13/1/14 (I'm going to stop procrastinating this week, honest!)
+# 13/1/14
 
 Notation
 --------
@@ -192,7 +192,7 @@ Geometrically, two vectors span a plane if they are not parallel, and three vect
 Bases
 -----
 
-A linearly independent set of vectors is always simpler than a linearly dependent one. A linearly dependent set of vectors can always be converted into a linearly dependent one with the same span. Therefore, the simplest set of vectors that spans a given set is always linearly independent.
+A linearly independent set of vectors is always simpler than a linearly dependent one. A linearly dependent set of vectors can always be converted into a linearly independent one with the same span. Therefore, the simplest set of vectors that spans a given set is always linearly independent.
 
 Given $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$, $\mathcal{B}$ is a **basis** for $\spn \mathcal{B}$ if $\mathcal{B}$ is linearly independent.
 
@@ -238,14 +238,14 @@ A hyperplane is a $k$-plane, where $k = n - 1$. It is an $n - 1$-dimensional pla
 
 For example, $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \\ −2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 1 \\ −1 \end{bmatrix}}$ defines a hyperplane in $\mb{R}^n$, since the set is linearly independent.
 
-# 20/1/14 (OK, so it's like week 3 and I'm behind, I get it)
+# 20/1/14
 
 Subspaces
 ---------
 
 A **subspace** of $\mb{R}^n$ is a non-empty subset $\mb{S}$ of $\mb{R}^n$ such that it satisfies all ten properties defined in Theorem 1.1.1.
 
-All subspaces are **spaces**, which are subsets of a vector space.
+All subspaces are **spaces**, which are subsets of a vector space. The simplest subspace is $\set{\vec{0}}$.
 
 But since properties 2-5 and 7-10 follow from properties 1 and 6, all we need to do to prove all ten properties is to prove properties 1 and 6 hold.
 
@@ -298,7 +298,7 @@ Proof:
 Dot Product
 -----------
 
-The **dot product** of two vectors $\vec{a}$ and $\vec{b}$ is defined as $\vec{a} \cdot \vec{b} = \begin{bmatrix} a_1 \\ \vdots \\ a_k \end{bmatrix} \cdot \begin{bmatrix} b_1
+The **dot product** of two vectors $\vec{a}$ and $\vec{b}$ is defined as $\vec{a} \cdot \vec{b} = \begin{bmatrix} a_1 b_1 \\ \vdots \\ a_k b_k \end{bmatrix}$.
 
 The dot product also has the geometric interpretation $\vec{a} \cdot \vec{b} = \abs{a} \abs{b} \cos \theta$, where $\theta$ is the angle between the two vectors.
 
@@ -431,7 +431,7 @@ If a set of linear equations is consistent with more than 1 solution, then it ha
 
 In other words, if $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
-\vdots
+\vdots \\
 a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
 \end{cases}$ has solutions $\vec{s}$ and $\vec{t}$ such that $\vec{s} \ne \vec{t}$, then $\vec{s} + c(\vec{s} - \vec{t})$ is a solution for all $c \in \mb{R}$.
 
@@ -540,9 +540,7 @@ A matrix is in **reduced row echelon form/row canonical form** (RREF) if and onl
 3. The leading one in each row, if it exists, appears to the right of the leading one of the row above it. For example, $\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$, but not $\begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix}$.
 4. The leading one in each row must be the only non-zero entry in its column. For example, $\begin{bmatrix} 1 & 0 & 5 \\ 0 & 1 & 2 \end{bmatrix}$, but not $\begin{bmatrix} 1 & 3 & 5 \\ 0 & 1 & 2 \end{bmatrix}$.
 
-For augmented matrices, we check only the values in all but the last column when seeing if it is in RREF (the values on the left of the vertical line). In other words, we ignore the last column when checking for RREF form.
-
-All matrices are representable in RREF. All matrices have one and only one representation in RREF.
+All matrices have one and only one representation in RREF.
 
 ### Theorem 2.2.2
 
@@ -594,7 +592,9 @@ Note the general technique used in reducing the matrix. First, we want to obtain
 
 This technique is basically modifying the matrix until all the properties except for property 4. Then property 4 can be solved for relatively easily.
 
-It is the basic technique behind **Guass-Jordan elimination**.### Solution Set
+It is the basic technique behind **Guass-Jordan elimination**.
+
+### Solution Set
 
 A matrix is inconsistent if and only if its RREF contains a row of the form $\left[\begin{array}{ccc|c} 0 & \ldots & 0 & 1 \end{array}\right]$ - no possible values can satisfy this equation ($0 = 1$), so there are no solutions.
 
@@ -612,7 +612,7 @@ Solve $\begin{cases} x_1 + x_2 + x_3 &= 4 \\ x_2 + x_3 &= 3 \end{cases}$:
 
 The solution set is, geometrically, either a point, a line, a plane, a hyperplane, or empty (no solutions). If there is only one solution, the solution set is a point.
 
-If a **column** in a coefficient matrix has **no leading ones**, the corresponding variable is called a **free variable**. A free variable is a variable that can be any value. Free variables exists if and only if there are an infinite number of solutions.
+If a **column** in a coefficient matrix has **no leading ones**, the corresponding variable is called a **free variable**. A free variable is a variable that can be any value. Free variables exists if and only if there are an infinite number of solutions. ;wip: is this right?
 
 ### Solving Linear Systems
 
@@ -635,7 +635,7 @@ However, we don't always need to solve a system. Sometimes, we just need to figu
 
 The **rank** of a matrix is the number of leading ones in the RREF of the matrix. This is equivalent to the number of variables minus the number of free variables.
 
-The rank of a matrix $A$ is denoted $\rank A$.
+The rank of a matrix $A$ is denoted $\rank A$. It is always true that $n \ge \rank A$ and $m \ge \rank A$.
 
 ### Theorem 2.2.3
 
@@ -862,9 +862,9 @@ If $A, B, C$ are matrices of the required dimensions, $t \in \mb{R}$:
 * Distributivity: $A(B + C) = AB + AC$ (left distributive) and $(A + B)C = AC + BC$ (right distributive).
 * Scalar multiplication: $t(AB) = (tA)B = A(tB)$.
 * Associativity: $(AB)C = A(BC)$.
-* Transposition distributivity: $(AB)^T = A^T B^T$.
+* Transposition distributivity: $(AB)^T = B^T A^T$.
 
-Note that matrix multiplication is not commutative over matrices: $AB \ne BA$ for some matrices.
+Note that matrix multiplication is not commutative over matrices: there are matrices $A$ and $B$ such that $AB \ne BA$.
 
 ### Theorem 3.1.4 (Matrix Multiplication Cancellation)
 
@@ -881,7 +881,7 @@ Proof:
 > Let $\vec{e}_i$ be the $i$th standard basis vector in $\mb{R}^n$ (the vector with all zeroes except the $i$th element, which is 1).  
 > Let $\vec{x} \in \mb{R}^n$. Construct $\vec{x} = \vec{e}_i$.  
 > Assume $A\vec{x} = B\vec{x}$. Then $A\vec{e}_i = B\vec{e}_i = \vec{a}_i = \vec{b}_i$.  
-> Since $i$ is arbitrary, $forall 1 \le i \le n, \vec{a}_i = \vec{b}_i$.  
+> Since $i$ is arbitrary, $\forall 1 \le i \le n, \vec{a}_i = \vec{b}_i$.  
 > So $A = B$.  
 
 # 3/2/14
@@ -961,7 +961,7 @@ We can write this as $f\left(\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\
 
 What is the domain/codomain of $f(\vec{x}) = A\vec{x}, A = \begin{bmatrix} 2 & 3 \\ -4 & 0 \\ 5 & 1 \end{bmatrix}$.
 
-> Clearly, $f$ is defined iff and only if the matrix multiplication is defined, which is when $\vec{x}$ has 2 components.  
+> Clearly, $f$ is defined if and only if the matrix multiplication is defined, which is when $\vec{x}$ has 2 components.  
 > So $\vec{x} \in \mb{R}^2$.  
 > Since $A$ has 3 rows, $f(\vec{x})$ also has 3 rows.  
 > So $f(\vec{x}) \in \mb{R}^3$.  
@@ -1049,7 +1049,7 @@ $\begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bm
 
 $\refl_P: \mb{R}^n \to \mb{R}^n$ is a linear mapping $\refl_P(\vec{x})$ that reflects $\vec{x}$ about the hyperplane $P$.
 
-We geometrically determine that the relection of a vector about a hyperplane is the projection of the vector on the hyperplane minus the perpendicular.
+We geometrically determine that the reflection of a vector about a hyperplane is the projection of the vector on the hyperplane minus the perpendicular.
 
 In other words, $\refl_P \vec{x} = \proj_P \vec{x} - \prp_P \vec{x} = (\vec{x} - \prp_P \vec{x}) - \prp_P \vec{x} = \vec{x} - 2\prp_P \vec{x} = \vec{x} - 2\proj_{\vec{n}} \vec{x}$, where $\vec{n}$ is the normal of the hyperplane.
 
@@ -1145,7 +1145,7 @@ Proof:
 > So $\range L \subseteq \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.  
 > Clearly, $\spn \set{\vec{a}_1, \ldots, \vec{a}_n} \subseteq \range L$, so $\range L = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.  
 
-The **column space** of a matrix $A = \begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix}$ is $\operatorname{Col}(A) = \set{A\vec{x} \middle| \vec{x} \in \mb{R}^n} = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$.
+The **column space** of a matrix $A = \begin{bmatrix} \vec{a}_1 & \ldots & \vec{a}_n \end{bmatrix}$ is $\operatorname{Col}(A) = \set{A\vec{x} \middle| \vec{x} \in \mb{R}^n} = \spn \set{\vec{a}_1, \ldots, \vec{a}_n}$. It is closely related to the range of the correponding linear mapping.
 
 Also, if $L: \mb{R}^n \to \mb{R}^m$ is linear, then $\range L = \operatorname{Col}([L])$.
 
@@ -1269,7 +1269,7 @@ Proof:
 > Clearly, $0 \odot \vec{v} = 0 \odot \vec{v} \oplus \vec{0} = 0 \odot \vec{v} \oplus 1\vec{v} \oplus (-\vec{v}) = (0 + 1) \odot \vec{v} \oplus (-\vec{v}) = \vec{v} \oplus (-\vec{v}) = \vec{0}$.  
 > Clearly, $(-1) \odot \vec{v} = \vec{0} \oplus (-1) \odot \vec{v} = 1\vec{v} + (-\vec{v}) \oplus (-1) \odot \vec{v} = 0\vec{v} + (-\vec{v}) = -\vec{1\vec{v} + (-\vec{v}) \oplus (-1) \odot \vec{v}}$.  
 
-Prove that $\vec{D} = \set{\vec{x} \in \mb{R} \middle| x > 0}$, $x, y \in \mb{D}$, where $x \oplus y = xy$ and $t \odot x = x^t$:
+Prove that $\vec{D} = \set{\vec{x} \in \mb{R} \middle| x > 0}$, $x, y \in \mb{D}$, where $x \oplus y = xy$ and $t \odot x = x^t$ is a vector space:
 
 > Let $x, y, z \in \mb{D}, c, d \in \mb{R}$.  
 > So $xy > 0$, and $x \oplus y \in \mb{D}$.  
@@ -1283,8 +1283,6 @@ Prove that $\vec{D} = \set{\vec{x} \in \mb{R} \middle| x > 0}$, $x, y \in \mb{D}
 > So $c \odot (x \oplus y) = (xy)^c = x^c y^c = c \odot x \oplus c \odot y$.  
 > So $1 \odot x = x^1 = x$.  
 > So all ten properties are satisfied and this is a vector space.  
-
-Note that all $\vec{x} \in \mb{R}$ can be related to $\vec{y} \in \mb{D}$ using $\vec{y} = a^\vec{x}$, where $a > 1$.
 
 For example, the empty set is not a vector space because all vector spaces must have at least one element, the zero vector.
 
@@ -1306,7 +1304,9 @@ A set $\mb{S}$ is a subspace of a set $\mb{V}$ if and only if, for any $\vec{x},
 * Closure under addition: $\vec{x} \oplus \vec{y} \in \mb{S}$.
 * Closure under scalar multiplication: $t \odot \vec{x} \in \mb{S}$.
 
-The proof of this is roughly the same as the proof for the subspace test for $\mb{R}$.
+The proof of this is roughly the same as the proof for the subspace test for $\mb{R}^n$.
+
+The rest of the properties follow from these, so if we show that these are true, the rest are automatically true.
 
 ### Spanning
 
@@ -1350,7 +1350,7 @@ Then $\mathcal{B}$ is linearly dependent if and only if for some $1 \le i \le k$
 
 ### Theorem 4.1.6
 
-If $\vec{0}_{\mb{V}} \in \mathcal{B}$, then $\mathcal{B}$ is linearly independent.
+If $\vec{0}_{\mb{V}} \in \mathcal{B}$, then $\mathcal{B}$ is linearly dependent.
 
 ### Bases
 
@@ -1358,7 +1358,7 @@ A set $\mathcal{B}$ is a **basis** for the vector space $\mb{V}$ if and only if 
 
 In other words, given $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ and a vector space $\mb{V}$, $\mathcal{B}$ is a basis for $\mb{V}$ if and only if $\spn \mathcal{B} = \mb{V}$ and $\mb{B}$ is linearly independent.
 
-Also, the span of an empty set is $\vec{0}_\mb{V}$.
+Also, the span of an empty set (an empty vector space) is $\set{\vec{0}_\mb{V}}$.
 
 The vectors in a set that is a basis are known as **basis vectors** and are often given by $\vec{e}_i$ where $` \le i \le n$. The basis can then be represented as $\mathcal{B} = \set{\vec{e}_1, \ldots, \vec{e}_n}$.
 
@@ -1396,6 +1396,8 @@ For example, consider the polynomials vector space, $P_n(\mb{R})$:
 > Clearly, $\mathcal{B}$ is linearly independent because $c_1 1 + \ldots c_n x^n = 0 + \ldots + 0x^n \implies c_1 = \ldots = c_n = 0$.  
 > In fact, we define the standard basis of $P_n(\mb{R})$ to be $\set{1, x, x^2, \ldots, x^n}$.  
 
+In other words, every vector in a vector space has a unique coordinate.
+
 Dimension
 ---------
 
@@ -1420,7 +1422,7 @@ Proof:
 
 If $\set{\vec{v}_1, \ldots, \vec{v}_n}$ and $\set{\vec{w}_1, \ldots, \vec{w}_k}$ are both bases in $\mb{V}$, then $k = n$.
 
-This is easily proves using theorem 4.2.1.
+This is easily proved using theorem 4.2.1.
 
 ### Definition
 
@@ -1453,7 +1455,7 @@ Given a vector space $\mb{V}$:
 
 * A set with more than $\dim \mb{V}$ elements is linearly dependent.
 * A set with less than $\dim \mb{V}$ elements cannot span $\mb{V}$.
-* Given a set $\mathcal{B}$ with $n$ elements, $\mathcal{B}$ spans $\mb{V}$ if and only if $\mathcal{B}$ is linearly independent.
+* Given a set $\mathcal{B}$ with $\dim \vec{V}$ elements, $\mathcal{B}$ spans $\mb{V}$ if and only if $\mathcal{B}$ is linearly independent.
 
 ;wip: prove this
 
@@ -1476,7 +1478,7 @@ Let $A_1 = \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}, A_2 = \begin{bmatrix} 1
 > So $\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = s\begin{bmatrix} -1 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \end{bmatrix} + t\begin{bmatrix} -1 \\ 1 \\ 0 \\ 0 \\ -1 \\ 1 \end{bmatrix}, s, t \in \mb{R}$.  
 > So $\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = \begin{bmatrix} -1 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \end{bmatrix}$ and $\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = \begin{bmatrix} -1 \\ 1 \\ 0 \\ 0 \\ -1 \\ 1 \end{bmatrix}$ are solutions.  
 > From this we determine that $E_2 = A_1 - E_1$ and $E_4 = A_1 - A_2 + E_3$.  
-> So $\spn \set{A_1, A_2, E_1, \ldots, E_4} = \spn \set{A_1, A_2, E_1, E_3}$.  
+> So $\spn \set{A_1, A_2, E_1, E_2, E_3, E_4} = \spn \set{A_1, A_2, E_1, E_3}$.  
 > Clearly, $\set{A_1, A_2, E_1, E_3}$ is linearly independent and spans $M_{2 \times 2}(\mb{R})$, so it is a basis.  
 
 
@@ -1511,8 +1513,8 @@ Proof:
 
 > Clearly, $\exists b_1, \ldots, b_n \in \mb{R}, \vec{v} = b_1 \vec{e}_1 + \ldots + b_n \vec{e}_n$.  
 > Clearly, $\exists c_1, \ldots, c_n \in \mb{R}, \vec{w} = c_1 \vec{e}_1 + \ldots + c_n \vec{e}_n$.  
-> So $s\vec{v} + t\vec{w} = (sb_1 + tc_1)\vec{v}_1 + \ldots + (sb_n + tc_n)\vec{v}_n$.  
-> So $[s\vec{v} + t\vec{w}] = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = s\begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix} + t\begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix} = s[\vec{v}] + t[\vec{w}]$.  
+> So $s\vec{v} + t\vec{w} = (sb_1 + tc_1)\vec{e}_1 + \ldots + (sb_n + tc_n)\vec{e}_n$.  
+> So $[s\vec{v} + t\vec{w}]_\mathcal{B} = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = s\begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}_\mathcal{B} + t\begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}_\mathcal{B} = s[\vec{v}]_\mathcal{B} + t[\vec{w}]_\mathcal{B}$.  
 
 ### Change of Coordinates
 
@@ -1572,7 +1574,7 @@ Clearly, $B = \begin{bmatrix} \vec{b}_1 & \ldots & \vec{b}_n \end{bmatrix}$. So 
 
 So $A\vec{b}_i = \vec{e}_i$. We can then find the inverse by solving each system.
 
-There is also a faster way. We can simply put the system $\sys{A}{I}$ into RREF and read off the inverse directly from the resulting matrix.
+There is also a faster way. We can simply put the system $\sys{A}{I}$ into RREF to get $\sys{I}{A^{-1}}$ and read off the inverse directly from the resulting matrix. If the left side is not $I$, then the inverse does not exist.
 
 In fact, this is a useful method for solving multiple systems of linear equations with the same coefficients but different right hand sides at the same time.
 
@@ -1585,7 +1587,7 @@ For example, find the right inverse of $A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{
 1 & 0 & -2 & 1 \\
 0 & 1 & \frac{3}{2} & -\frac{1}{2} \\
 \end{array}\right]$.  
-> So the inverse is $\begin{bmatrix} -2  1 \\ \frac{3}{2} & -\frac{1}{2} \end{bmatrix}$. To verify, $\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \begin{bmatrix} -2  1 \\ \frac{3}{2} & -\frac{1}{2} \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$, as required.  
+> So the inverse is $\begin{bmatrix} -2 & 1 \\ \frac{3}{2} & -\frac{1}{2} \end{bmatrix}$. To verify, $\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \begin{bmatrix} -2  1 \\ \frac{3}{2} & -\frac{1}{2} \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$, as required.  
 
 ### Theorem 5.1.1
 
@@ -1727,7 +1729,7 @@ In other words, we can solve linear systems this way. If $A\vec{x} = \vec{b}$, t
 Elementary Matrices
 -------------------
 
-When we found the inverse of a matrix $A$ by row reducing $#\sys{A}{I}$ into $\sys{I}{A^{-1}}$, we applied a series of elementary row operations in a certain order, and this resulted in finding $A^{-1}$.
+When we found the inverse of a matrix $A$ by row reducing $\sys{A}{I}$ into $\sys{I}{A^{-1}}$, we applied a series of elementary row operations in a certain order, and this resulted in finding $A^{-1}$.
 
 Since we can, given any $A^{-1}$, find $A$ again, those elementary row operations must have been encoded in $A^{-1}$ somehow.
 
@@ -1767,11 +1769,11 @@ Convert $A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$ into RREF using eleme
 
 ### Inverses
 
-If $A is invertible, then the RREF $R$ is $I$, so $E_k \cdots E_1 A = I$ and $A = E_1^{-1} \cdots E_k^{-1} I$.
+If $A$ is invertible, then the RREF $R$ is $I$, so $E_k \cdots E_1 A = I$ and $A = E_1^{-1} \cdots E_k^{-1} I$.
 
 So $E_k \cdots E_1$ is the left inverse of $A$, by definition. So $A^{-1} = E_k \cdots E_1$. Also, $A = E_1^{-1} \cdots E_k^{-1}$.
 
-In other words, if $A$ is invertible, then $A and $A^{-1}$ can both be written as products of elementary matrices.
+In other words, if $A$ is invertible, then $A$ and $A^{-1}$ can both be written as products of elementary matrices.
 
 Also, since we are row reducing $\sys{A}{I}$ into $\sys{I}{A^{-1}}$, and $I = E_k \cdots E_1 A$, then $A^{-1} = E_k \cdots E_1 I = E_k \cdots E_1$. In other words, we are getting the inverse written in terms of elementary row operations.
 
@@ -1780,7 +1782,7 @@ Matrix Determinants
 
 The **determinant** of a matrix is an expression over the values within the matrix. The value of the determinant provides important information about it, such as whether it is invertible. The determinant **only applies to square matrices**.
 
-We denote the determinant of a matrix $A$ as $\det A = \begin{vmatrix} a_{1, 1} & \ldots & a_{1, n} \\ \vdots & \vdots & \vdots \\ a_{m, 1} & \ldots & a_{m, n} \end{vmatrix}$. Importantly, $A$ is invertible if and only if $\det A \ne 0$.
+We denote the determinant of a matrix $A$ as $\det A = \begin{vmatrix} A \end{vmatrix} = \begin{vmatrix} a_{1, 1} & \ldots & a_{1, n} \\ \vdots & \vdots & \vdots \\ a_{m, 1} & \ldots & a_{m, n} \end{vmatrix}$. Importantly, $A$ is invertible if and only if $\det A \ne 0$.
 
 The determinant of a $1 \times 1$ matrix $A = \begin{bmatrix} a \end{bmatrix}$ is $\det A = a$. This is because the matrix is invertible if and only if $a \ne 0$.
 
@@ -1834,7 +1836,7 @@ $\begin{bmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}$ is upper tri
 
 ### Theorem 5.3.2
 
-Given $A \in M_{n \times n}$, if $A is upper or lower triangular, then $\det A = a_{1, 1} \cdots a_{n, n} = \sum_{i = 1}^n a_{i, i}$.
+Given $A \in M_{n \times n}$, if $A$ is upper or lower triangular, then $\det A = a_{1, 1} \cdots a_{n, n} = \sum_{i = 1}^n a_{i, i}$.
 
 In other words, a triangular matrix allows us to calculate the determinant simply by multiplying the elements in the diagonal together.
 
@@ -1958,7 +1960,7 @@ Adjugates
 
 Let $A \in M_{n \times n}$.
 
-The ***adjugate** of $A is $\begin{bmatrix} C_{1, 1} & \ldots & C_{n, 1} \\ \vdots & \vdots & \vdots \\ C_{1, n} & \ldots & C_{n, n} \end{bmatrix}$.
+The ***adjugate** of $A$ is $\begin{bmatrix} C_{1, 1} & \ldots & C_{n, 1} \\ \vdots & \vdots & \vdots \\ C_{1, n} & \ldots & C_{n, n} \end{bmatrix}$.
 
 In other words, the adjugate of a matrix is the transpose of cofactors matrix - $\adj A = (\cof A)^T$. So $(\adj A)_{i, j} = C_{j, i}$.
 
@@ -1980,7 +1982,7 @@ Since $A^{-1} = \frac{1}{\det A} \adj A$, then $\vec{x} = \frac{1}{\det A} \adj 
 
 Let $A_i = \begin{bmatrix} a_{1, 1} & \ldots & a_{1, i - 1} & b_1 & a_{1, i + 1} & \ldots & a_{1, n} \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ a_{n, 1} & \ldots & a_{n, i - 1} & b_n & a_{n, i + 1} & \ldots & a_{n, n} \end{bmatrix}$. This is basically $A$ with the $i$th column replaced by $\vec{b}$.
 
-Note that $\det A_i = b_1C_{1, i} & \ldots & b_nC_{n, i}$. As a result, $\vec{x} = \frac{1}{\det A} \begin{bmatrix} \det A_1 \\ \vdots \\ \det A_n \end{bmatrix}$.
+Note that $\det A_i = \det \begin{bmatrix} b_1C_{1, i} & \ldots & b_nC_{n, i} \end{bmatrix}$. As a result, $\vec{x} = \frac{1}{\det A} \begin{bmatrix} \det A_1 \\ \vdots \\ \det A_n \end{bmatrix}$.
 
 **Cramer's rule** states that given $A \in M_{n \times n}$ such that $A$ is invertible, the solution to $A\vec{x} = \vec{b}$ is $\vec{x}_i = \frac{\det A_i}{\det A}$ for $1 \le i \le n$.
 
@@ -2051,7 +2053,7 @@ Given $L(\vec{x}) = A\vec{x} = \begin{bmatrix} 1 & 2 & 2 \\ 2 & 1 & 2 \\ 2 & 2 &
 
 ### Diagonal Matrices
 
-A matrix $D \in M_{n \times n}$ is **diagonal** if and only if for all $1 \le i \ke n$ and $1 \le j \le n$, $i \ne j \implies D_{i, j} = 0$.
+A matrix $D \in M_{n \times n}$ is **diagonal** if and only if for all $1 \le i \le n$ and $1 \le j \le n$, $i \ne j \implies D_{i, j} = 0$.
 
 In other words, a diagonal matrix is all zero, except possibly along the diagonal. For example, $\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}$ is not diagonal, while $\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$ is.
 
@@ -2084,25 +2086,23 @@ Eigenvalues/Eigenvectors
 
 Pronounced "Eye-gan values" and "Eye-gan vectors".
 
-Let $L$ be a linear operator and $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ be a basis.
+Let $L$ be a linear operator and $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ be a basis for $\mb{R}^n$.
 
 We want to determine if $\mathcal{B}$ exists such that the matrix of $L$ with respect to $\mathcal{B}$ is diagonal.
 
-Assume that $\mathcal{B}$ exists satisfying these conditions. Then $[L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)$.
+Clearly, $\mathcal{B}$ exists if and only if $[L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)$ for some $\lambda_1, \ldots, \lambda_n \in \mb{R}$.
 
-Clearly, ${}_\mathcal{S}P_\mathcal{B} = \begin{bmatrix} \vec{v}_1 & \ldots & \vec{v}_n \end{bmatrix}$ and $[L]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B}$.
+Clearly, $[L]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B}$.
 
 So ${}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)$ and $[L] {}_\mathcal{S}P_\mathcal{B} = {}_\mathcal{S}P_\mathcal{B} \diag(\lambda_1, \ldots, \lambda_n)$.
 
-So $\begin{bmatrix} [L]\vec{v}_1 & \ldots & [L]\vec{v}_n \end{bmatrix} = \begin{bmatrix} \lambda_1\vec{v}_1 & \ldots & \lambda_n\vec{v}_n \end{bmatrix}$.
+Clearly, ${}_\mathcal{S}P_\mathcal{B} = \begin{bmatrix} \vec{v}_1 & \ldots & \vec{v}_n \end{bmatrix}$. So $\begin{bmatrix} [L]\vec{v}_1 & \ldots & [L]\vec{v}_n \end{bmatrix} = \begin{bmatrix} \lambda_1\vec{v}_1 & \ldots & \lambda_n\vec{v}_n \end{bmatrix}$.
 
-So for all $1 \le i \le n$, $L(\vec{v}_i) = \lambda_i \vec{v}_i$ and $\vec{v}_i \no \vec{0}$ since ${}_\mathcal{S}P_\mathcal{B}$ is invertible.
+So $[L]\vec{v}_i = \lambda_i \vec{v}_i$ for $1 \le i \le n$ if and only if $\mathcal{B}$ exists.
 
-So $[L(\vec{v}_i)]_\mathcal{B} = [\lambda_i \vec{v}_i]_\mathcal{B}$. Since $[\vec{v}_i]_\mathcal{B} = \vec{e}_i$, $[L(\vec{v}_i)]_\mathcal{B} = \lambda_i \vec{e}_i$.
+$\lambda_1, \ldots, \lambda_n$ are **eigenvalues** of $[L]$, and $\vec{v}_1, \ldots, \vec{v}_n$ are **eigenvectors** of $[L]$.
 
-So $[L]_\mathcal{B} = \begin{bmatrix} \lambda_1\vec{e}_1 & \ldots & \lambda_n\vec{e}_n \end{bmatrix} = \diag(\lambda_1, \ldots, \lambda_n)$.
-
-So if $[L]_\mathcal{B}$ is diagonal for a given $\mathcal{B}$, then $[L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)$. ;wip: what was the point of doing all this only to end up back at the beginning?
+This shows that the eigenvalues and eigenvectors are those values satisfying $[L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)$ and $[L]\vec{v}_i = \lambda_i \vec{v}_i$ where $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$.
 
 ### Definition
 
@@ -2117,7 +2117,7 @@ Every eigenvalue is associated with eigenvectors. An eigenvalue can have a whole
 Find the eigenvectors and eigenvalues of $L(\vec{x}) = \proj_\vec{a} \vec{x}$:
 
 > Let $\lambda \in \mb{R}$. Clearly, $L(\vec{x}) = \lambda \vec{x}$ if $\vec{x}$ lies along $\vec{a}$ - $\vec{x}$ is already a scalar multiple of $\vec{a}$.  
-> So the eigenvectors of $L(\vec{x})$ include $k\vec{a}, k \ne 0$ with tje eigenvalue $\lambda = 1$.  
+> So the eigenvectors of $L(\vec{x})$ include $k\vec{a}, k \ne 0$ with the eigenvalue $\lambda = 1$.  
 > Clearly, $L(\vec{x}) = \lambda \vec{x}$ if $\vec{x}$ is perpendicular to $\vec{a}$ - the projection is $\vec{0}$.  
 > So the eigenvectors of $L(\vec{x})$ include $k\vec{a}, k \ne 0$ with tje eigenvalue $\lambda = 0$.  
 > Note that there are infinite combinations of eigenvalues and eigenvectors.  
@@ -2170,7 +2170,7 @@ Note that the eigenvectors $\vec{v}$ associated with a given eigenvalue are the 
 
 In other words, the eigenvector is one of the elements of the nullspace of $A - \lambda I$, excluding $\vec{0}$.
 
-The **eigenspace** of the eigenvalue $\lambda$ is $E_\lambda = \operatorname{Null}(A - \lambda I)$.
+The **eigenspace** of the eigenvalue $\lambda$ is $E_\lambda = \operatorname{Null}(A - \lambda I)$, or the space containing the eigenvectors.
 
 The **geometric multiplicity** of an eigenvalue $\lambda$ is the dimension of its eigenspace, and is defined as $g_\lambda = \dim E_\lambda$.
 
@@ -2180,10 +2180,126 @@ For any eigenvalue $\lambda$, $1 \le g_\lambda \le a_\lambda$.
 
 In other words, the geometric muliplicity is always less than or equal to the algebraic multpicity, and all multiplicities are positive integers.
 
-Any eigenvalue $\lambda$ where $g_\lambda < a_\lambda$ **deficient**.
+Any eigenvalue $\lambda$ where $g_\lambda < a_\lambda$ is known as **deficient**.
 
 ### Theorem 6.2.4
 
 Given eigenvalues $\lambda_1, \ldots, \lambda_n$ of $A \in M_{n \times n}$, $\det A = \lambda_1 \cdots \lambda_n$ and $\operatorname{tr}(A) = \lambda_1 + \ldots + \lambda_n = \sum_{i = 1}^n \lambda_i$.
 
 In other words, the determinant of a matrix is the product of all its eigenvalues and the trace is the sum of all the eigenvalues.
+
+This is because the eigenvalues form the elements of a diagonal matrix, so the determinant is the product of the diagonal elements, and the trace is the sum of them.
+
+# 6/4/14
+
+Diagonalization
+---------------
+
+A matrix $A \in M_{n \times n}$ is **diagonalizable** if and only if there exists $P$ such that $P^{-1}AP = D$ is diagonal. If $P$ exists, then $P$ **diagonalizes** $A$.
+
+Basically, $A$ is diagonalizable if it is similar to a diagonal matrix.
+
+Let $\vec{v}_1, \ldots, \vec{v}_n$ be eigenvectors of $A$ and $\lambda_1, \ldots, \lambda_n$ be the corresponding eigenvalues of $A$.
+
+We showed earlier that if $P^{-1}AP = \diag(x_1, \ldots, x_n)$, then $x_1, \ldots, x_n = \lambda_1, \ldots, \lambda_n$ and a possible value of $P$ is $P = \begin{bmatrix} \vec{v}_1, \ldots, \vec{v}_n \end{bmatrix}$.
+
+### Theorem 6.3.1
+
+Given distinct eigenvalues of $A$, $\lambda_1, \ldots, \lambda_k$, $\set{\vec{v}_1, \ldots, \vec{v}_k}$ is linearly independent.
+
+This can be proven via induction. Clearly, $\set{\vec{v}_1}$ is linearly independent since $\vec{v}_1 \ne \vec{0}$, by definition.
+
+Assume that $\set{\vec{v}_1, \ldots, \vec{v}_k}$ is linearly independent for some $k \ge 1$. Then $c_1 \vec{v}_1 + \ldots + c_k\vec{v}_k = \vec{0}$ has only the trivial solution.
+
+Clearly, $\set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}$ is linearly independent if $c_1 \vec{v}_1 + \ldots + c_k\vec{v}_k + c_{k + 1}\vec{v}_{k + 1} = \vec{0}$ only has a trivial solution.
+
+Since for all $1 \le i \le k, 1 \le j \le k$, $A\vec{v}_i = \lambda_i\vec{v}_i$, $(A - \lambda_i)\vec{v}_j = A\vec{v}_j - \lambda_i\vec{v}_j = \lambda_j\vec{v}_j - \lambda_i\vec{v}_j = (\lambda_j - \lambda_i)\vec{v}_j$.
+
+Assume $c_1 \vec{v}_1 + \ldots + c_k\vec{v}_k + c_{k + 1}\vec{v}_{k + 1} = \vec{0}$.
+
+Clearly, $(A - \lambda_{k + 1})\vec{v}_j \ne 0$, so $c_1(A - \lambda_{k + 1})\vec{v}_1 + \ldots + c_k(A - \lambda_{k + 1})\vec{v}_k + c_{k + 1}(A - \lambda_{k + 1})\vec{v}_{k + 1} = \vec{0} = c_1(\lambda_1 - \lambda_{k + 1})\vec{v}_1 + \ldots + c_k(\lambda_k - \lambda_{k + 1})\vec{v}_k + c_{k + 1}(\lambda_{k + 1} - \lambda_{k + 1})\vec{v}_{k + 1} = c_1(\lambda_1 - \lambda_{k + 1})\vec{v}_1 + \ldots + c_k(\lambda_k - \lambda_{k + 1})\vec{v}_k$.
+
+Clearly, this only has the trivial solution. So by the principle of simple induction, $\set{\vec{v}_1, \ldots, \vec{v}_k}$ is linearly independent for all $k \ge 1$.
+
+### Theorem 6.3.2
+
+Given bases for the eigenspace of $\lambda_i$, $\mathcal{B}_i = \set{\vec{v}_{i, 1}, \ldots, \vec{v}_{i, g_{\lambda_i}}}$, $\mathcal{B}_1 \cup \ldots \cup \mathcal{B}_k$ is a linearly independent set.
+
+In other words, the set of all the basis vectors for the eigenspaces of each eigenvalue is linearly independent.
+
+The sum of all algebraic multiplicities of all the eigenvalues must be $n$, since that is the degree of the characteristic polynomial.
+
+### Theorem 6.3.3 (Diagonalization Theorem)
+
+$A$ is diagonalizable if and only if $g_{\lambda_i} = a_{\lambda_i}$ for all $1 \le i \le k$.
+
+In other words, a matrix is diagonalizable if and only if the geometric multiplicity is the same as the algebraic multiplicity - if none of its eigenvalues are deficient.
+
+In order to get $n$ linearly independent eigenvectors, the geometric multiplicity of each eigenvalue must be the same as the algebraic multiplicity.
+
+Also, if we have $n$ linearly independent eigenvectors, the set of them is a basis for $\mb{R}^n$.
+
+Since the multiplicities must be at least 1, and they must add up to $n$, if $A$ has $n$ eigenvalues, then each one has an algebraic and geometric multiplicity of 1 and is diagonalizable.
+
+An application of this theorem can be used when $A$ is a matrix of real values. In this case, $A$ is diagonalizable if and only if all the eigenvalues are real and $g_{\lambda_i} = a_{\lambda_i}$. This is useful because any matrix with complex eigenvalues can immediately be known not be diagonalizable.
+
+A matrix can be **factorized** via diagonalization. If $P^{-1}AP = D$ is diagonal, then $A = PDP^{-1}$.
+
+### Algorithm
+
+To **diagonalize** a matrix $A \in M_{n \times n}$ over a set $\mb{S}$ means to convert it into the form $P^{-1}AP = D$ for some $P \in M_{n \times n}(\mb{S})$ where $D$ is diagonal.
+
+For example, diagonalizing a matrix over $\mb{R}$ means to find $P \in M_{n \times n}$ such that $D$ is diagonal.
+
+To diagonalize a matrix $A$:
+
+1. Find the characteristic polynomial $C(\lambda) = \det (A - \lambda I)$ and factor it.
+2. Solve for $\lambda$ where $C(\lambda) = 0$ - find the distinct roots of the c haracteristic polynomial to find the eigenvalues $\lambda_1, \ldots, \lambda_n$, with duplicates allowed.
+3. If any of the eigenvalues are not real, then $A$ is not diagonalizable over $\mb{R}$.
+4. Find a basis for the eigenspace of each $\lambda_i$ by solving $(A - \lambda_i I)\vec{v} = \vec{0}$ for $\vec{v}$ and finding the general solution.
+5. These bases allow us to find the geometric multiplicities $g_{\lambda_i}$.
+6. If $g_{\lambda_i} < a_{\lambda_i}$ for any $1 \le i \le n$, then $A$ is not diagonalizable.
+7. Combine all the basis vectors together to get a set of $n$ linearly, independent vectors $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$, which is automatically a basis for $\mb{R}^n$.
+8. Let $P = \begin{bmatrix} \vec{v}_1 & \ldots & \vec{v}_n \end{bmatrix}$. Then $P^{-1}AP = A_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)$.
+
+Matrix Exponentiation
+---------------------
+
+We define matrix exponentiation with $A^k = AA^{k - 1} = A^{k - 1}A, k \in \mb{N}$ and $A^0 = I$. However, how do we calculate larger powers more easily?
+
+Obviously, the answer is diagonalization, somehow. Don't ask me how I know.
+
+### Theorem 6.4.1
+
+For $k \ge 0$, $\diag(d_1, \ldots, d_n)^k = \diag(d_1^k, \ldots, d_n^k)$. In other words, we simply exponentiate the individual elements in the matrix.
+
+Proof:
+
+> Clearly, $\diag(d_1, \ldots, d_n)^0 = I = \diag(d_1^0, \ldots, d_n^0)$.  
+> Assume $\diag(d_1, \ldots, d_n)^k = \diag(d_1^k, \ldots, d_n^k)$ for some $k \ge 0$.  
+> Then $\diag(d_1, \ldots, d_n)^{k + 1} = \diag(d_1, \ldots, d_n)^k \diag(d_1, \ldots, d_n)^k = \diag(d_1, \ldots, d_n) \diag(d_1^k, \ldots, d_n^k) = \diag(d_1^{k + 1}, \ldots, d_n^{k + 1})$.  
+> So by induction, $\diag(d_1, \ldots, d_n)^k = \diag(d_1^k, \ldots, d_n^k)$.  
+
+### Theorem 6.4.2
+
+If $P^{-1}AP = B$, then $A^k = PB^kP^{-1}$. In other words, we can change the basis to whatever we want and still exponentiate.
+
+Proof:
+
+> Clearly, $A^0 = I = PP^{-1} = PB^0P^{-1}$.  
+> Assume for some $k \ge 0$ that $A^k = PB^kP^{-1}$. Then $A^{k + 1} = AA^k = PBP^{-1}PB^kP^{-1} = PBB^kP^{-1} = PB^{k + 1}P^{-1}$.  
+> So by induction, $A^k = PB^kP^{-1}$.  
+
+This is useful if $B$ is diagonal, because combined with theorem 6.4.1, we can easily exponentiate matrices to large powers.
+
+However, if we're too lazy to diagonalize, then it might just be faster to use the old multiply and square algorithm.
+
+Given $A = \begin{bmatrix} 1 & 2 \\ -1 & 4 \end{bmatrix}$, find $A^{1000}$:
+
+> Clearly, $C(\lambda) = \det \begin{bmatrix} 1 - \lambda & 2 \\ -1 & 4 - \lambda \end{bmatrix} = (\lambda - 2)(\lambda - 3)$.  
+> So the eigenvalues are 2 and 3 with algebraic multiplicities 1.  
+> Assume $(A - 2I)\vec{v} = 0$. Then row reducing, we get $\begin{array}{cc|c} 1 & -2 & 0 \\ 0 & 0 & 0 \end{array}$ and $\set{\begin{bmatrix} 2 \\ 1 \end{bmatrix}}$ is a basis for the eigenspace of $\lambda = 2$.  
+> Assume $(A - 3I)\vec{v} = 0$. Then row reducing, we get $\begin{array}{cc|c} 1 & -1 & 0 \\ 0 & 0 & 0 \end{array}$ and $\set{\begin{bmatrix} 1 \\ 1 \end{bmatrix}}$ is a basis for the eigenspace of $\lambda = 3$.  
+> So $P = \begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix}$ and $P^{-1}AP = D$ where $D$ is diagonal, and $D = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}$.  
+> Clearly, $P^{-1} = \begin{bmatrix} 1 & -1 \\ -1 & 2 \end{bmatrix}$.  
+> Clearly, $A^{1000} = \begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix}\diag(2, 3)^{1000}\begin{bmatrix} 1 & -1 \\ -1 & 2 \end{bmatrix} = \begin{bmatrix} 2^{1001} - 3^{1000} & -2^{1001} + 2 \cdot 3^{1000} \\ 2^{1000} - 3^{1000} & -2^{1000} + 2 \cdot 3^{1000} \end{bmatrix}$.  

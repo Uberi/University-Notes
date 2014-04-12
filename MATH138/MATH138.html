@@ -1113,6 +1113,35 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>Clearly, the length is <span class="math">\(\int_a^b \magn{\frac{\dee \vec{r}}{\dee t}} \dee t = \int_0^{4 \pi} \sqrt{\left(\frac{\dee}{\dee t} a \cos t\right)^2 + \left(\frac{\dee}{\dee t} a \sin t\right)^2} \dee t\)</span> ;wip</p>
 </blockquote>
 <p>For example, <span class="math">\(\vec{r}(t) = (a \cos t, a \sin t, t)\)</span> is a spiral upwards.</p>
+<h1 id="section-35">4/4/14</h1>
+<p>Find the arc length of <span class="math">\(\vec{r}(t) = (a \cos t, a \sin t, t)\)</span> for <span class="math">\(t \in [0, 4 \pi]\)</span>:</p>
+<blockquote>
+<p>This is a spiral going upwards.<br />Clearly, <span class="math">\(\frac{\dee \vec{r}}{\dee t} = (-a \sin t, a \cos t, 1)\)</span>.<br />Clearly, the arc length is <span class="math">\(\int_0^{4 \pi} \magn{\frac{\dee \vec{r}}{\dee t}} \dee t = \int_0^{4 \pi} \sqrt{a^2 \sin^2 t + a^2 \cos^2 t + 1^2} \dee t = \int_0^{4 \pi} \sqrt{a^2 + 1} \dee t\)</span>.<br />So the arc length is <span class="math">\(4 \pi \sqrt{a^2 + 1}\)</span>.</p>
+</blockquote>
+<p>Find the arc length of the cycloid function <span class="math">\(\vec{r}(t) = (at - a \sin t, a - a \cos t)\)</span> for <span class="math">\(t \in [0, 2 \pi]\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\frac{\dee \vec{r}}{\dee t} = (a - a \cos t, a \sin t)\)</span> and <span class="math">\(\magn{\frac{\dee \vec{r}}{\dee t}}\)</span>.<br />Clearly, <span class="math">\(\magn{\frac{\dee \vec{r}}{\dee t}} = \sqrt{a^2 - 2a^2 \cos t + a^2 \cos^2 t + a^2 \sin t} = \sqrt{2a^2 - 2a^2 \cos t} = a\sqrt{2 - 2 \cos t} = a\sqrt{4\left(\frac{1}{2} - \frac{1}{2} \cos t\right)} = 2a\sqrt{\frac{1}{2} - \frac{1}{2} \cos t}\)</span>.<br />Recall the half angle formula <span class="math">\(\sin^2 t = \frac{1}{2} - \frac{1}{2} \cos 2t\)</span>.<br />Clearly, <span class="math">\(2a\sqrt{\frac{1}{2} - \frac{1}{2} \cos t} = 2a\sqrt{\sin^2 \frac{t}{2}} = 2a\abs{\sin \frac{t}{2}}\)</span>.<br />Since we are working in a range where <span class="math">\(\frac{t}{2} \in [0, \pi]\)</span>, <span class="math">\(\abs{\sin \frac{t}{2}} = \sin \frac{t}{2}\)</span>.<br />Clearly, <span class="math">\(\int_0^{2\pi} \magn{\frac{\dee \vec{r}}{\dee t}} \dee t = 2a\int_0^{2\pi} \sin \frac{t}{2} \dee t = 2a\evalat{2\cos \frac{t}{2}}_0^{2\pi} = 8a\)</span>.<br />So the arc length is <span class="math">\(8a\)</span>.</p>
+</blockquote>
+<h3 id="slope">Slope</h3>
+<p>The <strong>slope of a tangent vector</strong> is <span class="math">\(\frac{\dee y}{\dee x}\)</span>. We can find it using <span class="math">\(\frac{\dee y}{\dee x} = \frac{\frac{\dee y}{\dee t}}{\frac{\dee x}{\dee t}}\)</span>.</p>
+<p>Find the slope of <span class="math">\(\vec{r}(t) = (\cos t, \sin t)\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\frac{\dee y}{\dee x} = \frac{-\sin t}{\cos t} = -\tan t\)</span>.<br />This is where the <span class="math">\(\tan\)</span> function gets its name - it is the slope of the tangent of a circle at any given angle.</p>
+</blockquote>
+<p>Consider <span class="math">\(\frac{\dee^2 y}{\dee x^2}\)</span>. We might think that <span class="math">\(\frac{\dee^2 y}{\dee x^2} = \frac{\frac{\dee^2 y}{\dee t^2}}{\frac{\dee^2 x}{\dee t^2}}\)</span>, but this is incorrect.</p>
+<p>In fact, <span class="math">\(\frac{\dee^2 y}{\dee x^2} = \frac{\dee}{\dee x} \frac{\dee y}{\dee x} = \frac{\frac{\dee}{\dee t} \frac{\dee y}{\dee x}}{\frac{\dee x}{\dee t}} = \frac{\frac{\dee}{\dee t} \frac{\dee y}{\dee x}}{\frac{\dee x}{\dee t}}\)</span>.</p>
+<h3 id="area">Area</h3>
+<p>The area under a curve of a function is given by <span class="math">\(y = F(x)\)</span> is <span class="math">\(A = \int_{x_1}^{x_2} F(x) \dee x\)</span>.</p>
+<p>For parametric curves, we have <span class="math">\(x = x(t)\)</span> and <span class="math">\(y = y(t)\)</span>. Then there exists <span class="math">\(y = F(x)\)</span> - a function of <span class="math">\(x\)</span> equivalent to <span class="math">\(y\)</span>, and <span class="math">\(y(t) = F(x)\)</span>.</p>
+<p>Then <span class="math">\(x_1 = x(t_1)\)</span> and <span class="math">\(x_2 = x(t_2)\)</span>, and <span class="math">\(\dee x = \frac{\dee x}{\dee t} \dee t\)</span>.</p>
+<p>So <span class="math">\(A = \int_{t_1}^{t_2} F(x) \dee x = \int_{t_1}^{t_2} y(t) \dee x = \int_{t_1}^{t_2} y(t) \frac{\dee x}{\dee t} \dee t\)</span>.</p>
+<p>This allows us to find the area under a curve.</p>
+<p>;wip: I finally get <span class="math">\(u\)</span> substitution - it was inconsistent because sometimes u was a function of u, and sometimes x is a function of u.</p>
+<p>;wip: is the limit test adding 1 to the exponent, or is it the next term when we have things like <span class="math">\(x^{2n}\)</span>? wikipedia says the latter but in class it was the former</p>
+<p>Find the area under the cycloid curve <span class="math">\(\vec{r}(t) = (at - a \sin t, a - a \cos t)\)</span> for <span class="math">\(t \in [0, 2 \pi]\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(A = \int_0^{2 \pi} (a - a \cos t) \frac{\dee}{\dee t} (at - a \sin t) \dee t = \int_0^{2 \pi} (a - a \cos t)(a - a \cos t) \dee t = 2 \pi a^2 + \int_0^{2 \pi} -2a^2 \cos t \dee t + \int_0^{2 \pi} + a^2 \cos^2 t \dee t = 3 \pi a^2\)</span>.<br />So the cycloid curve has an area of <span class="math">\(3 \pi a^2\)</span> units.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

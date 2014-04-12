@@ -268,7 +268,7 @@ Email: scholz@uwaterloo.ca</code></pre>
 <li><span class="math">\(\Delta \vec{x} = \vec{v}_{av} \Delta t = \frac{1}{2}(\vec{v}_i + \vec{v}_f) \Delta t\)</span> (contains <span class="math">\(\vec{x}, \vec{v}_f, \vec{v}_i, \Delta t\)</span>).</li>
 <li><span class="math">\(\Delta \vec{x} = \frac{1}{2}(\vec{v}_i + \vec{v}_f) \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{v}_f \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} (\vec{v}_i + \vec{a} \Delta t) \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{a} \Delta t \Delta t = \vec{v}_i \Delta t + \frac{1}{2} \vec{a} (\Delta t)^2\)</span> (contains <span class="math">\(\vec{a}, \vec{v}_i, \Delta t, \Delta \vec{x}\)</span>).</li>
 <li>A variation on the above is <span class="math">\(\Delta \vec{x} = (\vec{v}_f - \vec{a} \Delta t) \Delta t + \frac{1}{2} \vec{a} (\Delta t)^2 = \vec{v}_f \Delta t - \frac{1}{2} \vec{a} (\Delta t)^2\)</span> (contains <span class="math">\(\vec{a}, \vec{v}_f, \Delta t, \Delta \vec{x}\)</span>).</li>
-<li><span class="math">\(v_f^2 &amp;= v_i^2 + 2\vec{a} \cdot \Delta \vec{x}\)</span> (contains <span class="math">\(\vec{a}, \vec{v}_f, \vec{v}_i, \Delta \vec{x}\)</span>).</li>
+<li><span class="math">\(v_f^2 = v_i^2 + 2\vec{a} \cdot \Delta \vec{x}\)</span> (contains <span class="math">\(\vec{a}, \vec{v}_f, \vec{v}_i, \Delta \vec{x}\)</span>).</li>
 </ul>
 <p>The last one needs some more proof:</p>
 <p><span class="math">\[
@@ -743,10 +743,12 @@ m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &amp;= m\int_\vec{a}^\vec{b} \f
 <p><strong>Density</strong> is the amount of mass given a volume. It is often represented using <span class="math">\(\rho = \frac{m}{V}\)</span>, and has units of <span class="math">\(kg/m^3\)</span>.</p>
 <p>Assume that the density is constant.</p>
 <p>Clearly, <span class="math">\(\vec{x}_{CM} = \frac{\sum m_i \vec{x}_i}{\sum m_i} = \vec{x}_{CM} = \frac{\sum \rho_i V \vec{x}_i}{\sum \rho_i V}\)</span> for an object made up of particles. It is useful to pretend that rigid bodies (objects that do not deform) are actually made of <strong>infinitely many infinitely small particles</strong>.</p>
-<p>When we do this, we can generalize this using integrals, so <span class="math">\(\vec{x}_{CM} = \frac{\int \rho r \dee V}{\int \rho \dee V}\)</span>.</p>
+<p>The center of mass in an object is the weighted average of all the positions, weighted by the mass of each position.</p>
+<p>When we do this, we can generalize this using integrals, so <span class="math">\(\vec{x}_{CM} = \frac{\int \vec{x}_i \dee m}{\int \dee m} = \frac{\int \rho(\vec{x}) \vec{x} \dee V}{\int \rho(\vec{x}) \dee V}\)</span>. The mass of each particle becomes <span class="math">\(\dee m = \rho \dee V\)</span>.</p>
+<p>Basically, we make it so that density and mass are functions of position, so <span class="math">\(\rho(\vec{x}) = \frac{m(\vec{x})}{V}\)</span></p>
 <p>When we integrate with respect to volume <span class="math">\(V\)</span>, it is known as a <strong>volume integral</strong>. Basically, <span class="math">\(\int f \dee V = \iiint f(x, y, z) \dee x \dee y \dee z\)</span>.</p>
 <p>Find the center of mass of a solid cone with height <span class="math">\(h\)</span> and base radius <span class="math">\(r\)</span>:</p>
-<pre><code>           $h$ $x_{CM}$
+<pre><code>           $h$ $x$
     /|\     &lt;   &lt;
    / | \    |   |
   /  |  \   |   &lt;
@@ -755,8 +757,169 @@ m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &amp;= m\int_\vec{a}^\vec{b} \f
      ^----^ $r$
      ^--^   $R$</code></pre>
 <blockquote>
-<p>Since the cone is symmetric about its central axis, the center of mass must be located on this axis.<br />Let <span class="math">\(R(x_{CM}) = kx_{CM}\)</span> represent the radius at any extent <span class="math">\(x_{CM}\)</span>.<br />Since <span class="math">\(R(h) = r\)</span>,</p>
+<p>Since the cone is symmetric about its central axis, the center of mass must be located on this axis.<br />Let <span class="math">\(R(x) = kx\)</span> represent the radius at any extent <span class="math">\(x\)</span>.<br />Since <span class="math">\(R(h) = r\)</span>, <span class="math">\(R(x) = \frac{r}{h}x\)</span>. Clearly, for each disk of the cone, <span class="math">\(\dee m = \rho(x) \dee x = \rho_0 \pi R(x)^2 \dee x\)</span>. So <span class="math">\(x_{CM} = \frac{\int_0^h x \dee m}{\int_0^h \dee m} = \frac{\int_0^h x \rho_0 \pi R(x)^2 \dee x}{\int_0^h \rho_0 \pi R(x)^2 \dee x} = \frac{\rho_0 \pi r^2}{h^2} \frac{h^2}{\rho_0 \pi r^2} \frac{\int_0^h x^3 \dee x}{\int_0^h x^2 \dee x} = \frac{\frac{h^4}{4}}{\frac{h^3}{3}} = \frac{3}{4}h\)</span>.</p>
 </blockquote>
+<h1 id="section-5">7/4/14</h1>
+<h2 id="collisions">Collisions</h2>
+<p>Collisions are generally isolated systems. As a result, linear momentum and is conserved.</p>
+<p><strong>Elastic collisions</strong> are those where where kinetic energy is conserved. In nature, only things like electrons can do this. Bouncy balls are a close approximation of elastic collision.</p>
+<p><strong>Inelastic collisions</strong> are those where kinetic energy is not conserved - energy is converted into other forms like thermal energy or sound energy. Examples of this are car collisions and dropped eggs.</p>
+<p><strong>Completely inelastic collisions</strong> are those where the largest possible amount of kinetic energy is lost. In this case, the two objects simply stay together, rather than bounce apart, because the energy is lost.</p>
+<p>Linear momentum being conserved means that <span class="math">\(\sum \vec{p}_f = \sum \vec{p}_i\)</span>. Kinetic energy being conserved means that <span class="math">\(\sum \frac{1}{2}mv_f^2 = \sum \frac{1}{2}mv_i^2\)</span>. However, the linear momentum and kinetic energy of individual objects in the system can still change.</p>
+<p>Assume kinetic energy is conserved. Then <span class="math">\(\frac{1}{2}m_1v_{1, f}^2 + \frac{1}{2}m_2v_{2, f}^2 = \frac{1}{2}m_1v_{1, i}^2 + \frac{1}{2}m_2v_{2, i}^2\)</span>.</p>
+<p>So <span class="math">\(m_1v_{1, f}^2 - m_1v_{1, i}^2 = m_2v_{2, i}^2 - m_2v_{2, f}^2\)</span> and <span class="math">\(m_1(v_{1, f} - v_{1, i})(v_{1, f} + v_{1, i}) = m_2(v_{2, f} - v_{2, i})(v_{2, f} + v_{2, i})\)</span>.</p>
+<p>Since momentum is conserved, <span class="math">\(m_1(v_{1, f} - v_{1, i}) = m_2(v_{2, f} - v_{2, i})\)</span>. So <span class="math">\(m_1(v_{1, f} - v_{1, i})(v_{1, f} + v_{1, i}) = m_1(v_{1, f} - v_{1, i})(v_{2, f} + v_{2, i})\)</span>.</p>
+<p>So <span class="math">\(v_{1, f} + v_{1, i} = v_{2, f} + v_{2, i}\)</span> if kinetic energy is conserved. Interestingly, if object 1 is moving and object 2 is stationary, then object 1 stops and object 2 starts moving with velocity proportional to the mass ratio.</p>
+<p>A 0.05kg bullet travelling 85m/s horizintally hits a 2kg pendulum. How much energy is lost and how high does the pendulum swing?</p>
+<blockquote>
+<p>Clearly, the collision is perfectly inelastic since the bullet embeds itself in the pendulum. So the final speed of the two is constant.<br />Clearly, <span class="math">\(0.05 kg \cdot 85 m/s \text{ [right]} + 2 kg \cdot 0 m/s = (0.05 kg + 2 kg) \cdot \vec{v}\)</span>, so <span class="math">\(\frac{0.05 kg \cdot 85 m/s \text{ [right]}}{2.05 kg} = \vec{v} = 2.073170731707317 m/s \text{ [right]}\)</span>.<br />So the bullet and pendulum are moving 2.07 m/s rightward after collision.<br />Clearly, <span class="math">\(E_g = E_k\)</span>, so <span class="math">\(mgh = \frac{1}{2}mv^2\)</span>. So <span class="math">\(h = \frac{\frac{1}{2}(2.073170731707317 m/s)^2}{9.8 m/s^2} = 0.219287596061625 m\)</span>.<br />So the max height of the pendulum is 0.22 m.</p>
+</blockquote>
+<h3 id="impulses">Impulses</h3>
+<p><strong>Impulses</strong> are changes in momentum - force applied over time, usually on small time scales. They are represented with <span class="math">\(\vec{J} = \Delta \vec{p} = \int \vec{F}(t) \dee t\)</span>.</p>
+<p>For example, a tennis ball bouncing off a wall has the wall exert an impulse on it - it applies a normal force to the ball over the duration that they are colliding. Since the wall is stationary and the ball ends up travelling in the opposite direction, the impulse applies twice the momentum the ball had before impact (one times the momentum to stop the ball, one more time to make it bounce back).</p>
+<p>Also, the third law of motion applies here, so any impulse an object applies has an equal and opposite impulse applied to it.</p>
+<p>Impulse is measured with Newton-seconds <span class="math">\(N s\)</span>, just like momentum. Force is the change in momentum, so <span class="math">\(\vec{p} = \int \vec{F}(t) \dee t\)</span> and <span class="math">\(\frac{\dee} \vec{p}{\dee t} = F(t)\)</span>.</p>
+<p>In collisions like bouncing a ball, the actual time the objects are colliding are very small, so the forces applied are very large. It is often simpler to treat the collisions as instantaneously transferring momentum of the object rather than as a force working over time.</p>
+<p>The amount of impulse applied can be determined by looking at the change in the speed of an object. For example, a ball that bounces right back after hitting a wall has had applied to it</p>
+<p>If 100 0.05kg marbles are being poured on a scale over 5 s from 5 m up, each one bouncing off the scale after impact, then what is the average reading shown on the scale?</p>
+<blockquote>
+<p>Clearly, the marbles hit the scale at <span class="math">\(100/5 s = 20/s\)</span>.<br />Clearly, <span class="math">\(v_f^2 = (0 m/s)^2 + 2\vec{g} \cdot 1.5 m [down]\)</span>, so <span class="math">\(v_f = \sqrt{2 \cdot 9.8 m/s^2 \cdot 1.5 m} = 5.422176684690384 m/s\)</span>, the final velocity of the marbles.<br />Since the marbles bounce off perfectly elastically, the velocity after impact is <span class="math">\(-\vec{v}_f\)</span> and the impulse delivered is twice the momentum of the marble.<br />So each marble delivers an impulse of <span class="math">\(2 \cdot 0.05 kg \cdot 5.422176684690384 m/s = 0.542217668469038 kg m/s\)</span> (the 2 is because it is twice the momentum), and the force is <span class="math">\(20/s \cdot 0.542217668469038 kg m/s = 10.844353369380767 N\)</span>.<br />So the scale reads <span class="math">\(\frac{10.844353369380767 N}{9.8 m/s^2} = 1.106566670344976 kg\)</span>.</p>
+</blockquote>
+<p>A 40 kg block and a 10 kg block at rest connected with a spring with constant <span class="math">\(k = 10 N/m\)</span>. The 40 kg block applies an impulse of 20 N s to the other one. What is the longest distance the spring compresses?</p>
+<pre><code>--------  ---&gt; 20 Ns  --------
+| 40kg |-/\/\/\/\/\/\-| 10kg |
+--------  k = 10 N/m  --------</code></pre>
+<blockquote>
+<p>Clearly, the collision is fully elastic, since it is connected by an ideal spring. So kinetic energy combined with elastic energy is conserved - <span class="math">\(E_k + E_e\)</span> is constant.<br />In an elastic collision, the first block must stop and the second will start moving.<br />Clearly, the spring is compressed when both blocks are moving at the same speed. Assume they are.<br />So <span class="math">\(E_{k, \text{after}} + E_{e, \text{after}} = E_{k, \text{same speed}} + E_{e, \text{same speed}}\)</span>.<br />Clearly, <span class="math">\(J = 20 N s = mv_{\text{same speed}}\)</span>, so <span class="math">\(v_{\text{same speed}} = \frac{20 N s}{10 kg} = 2 m/s\)</span>, the final velocity of the 10 kg block when the collision is completely over.<br />Clearly, the final kinetic energy is <span class="math">\(\frac{1}{2} 10 kg \cdot (2 m/s)^2 = 20 J\)</span>.<br />Clearly, if the two blocks have the same speed, then <span class="math">\(v = \frac{20 N s}{40 kg + 10 kg} = 0.4 m/s\)</span>, the velocity of both blocks at the moment when their speeds are the same.<br />Clearly, the kinetic energy when the objects have the same speed is <span class="math">\(\frac{1}{2} 50 kg \cdot (0.4 m/s)^2 = 4 J\)</span>.<br />So <span class="math">\(20 J + 0 J = 4 J + E_{e, \text{same speed}}\)</span>, and <span class="math">\(E_{e, \text{same speed}} = 16 J\)</span>.<br />Clearly, <span class="math">\(E_{e, \text{same speed}} = 16 J = \frac{1}{2}(10 N/m)x^2\)</span>, so <span class="math">\(x = 1.788854381999832 m\)</span>.<br />So the maximum compression of the spring is 1.79 m.</p>
+</blockquote>
+<h2 id="rotational-dynamics">Rotational Dynamics</h2>
+<p>A rigid body cannot be deformed. As a result, the locations of all the particles in the object stay the same relative to each other.</p>
+<p>Consider a point on a rotating object, <span class="math">\(P\)</span>, rotating around a point, <span class="math">\(\vec{C}\)</span>. In 3D, the object rotates around a line.</p>
+<p><span class="math">\(P\)</span> is in circular motion about the point/line of rotation, since the distance between the point of rotation and the point is constant. Every particle in the body is in circular motion with its own radius and velocity.</p>
+<p>Here, <span class="math">\(\vec{r}\)</span> represents the displacement of <span class="math">\(P\)</span> from the point/line of rotation - <span class="math">\(\vec{r} = \vec{P} - \vec{C}\)</span>. In 3D, this is the shortest distance between the line and the point.</p>
+<h3 id="kinematics-1">Kinematics</h3>
+<p>The motion along the arc of the circle can be treated using 1D kinematics. We simply choose a reference point <span class="math">\(s(0)\)</span>, and <span class="math">\(s(t)\)</span> represents how far we travel along the arc. We don't use vectors because the distance travelled is not the same as displacement.</p>
+<p>The velocity and the acceleration are always tangent to the circle, so <span class="math">\(\vec{v} = \frac{\dee s}{\dee t} \text{ [perpendicular to } \vec{r} \text{]}\)</span> and <span class="math">\(\vec{a} = \frac{\dee^2 s}{\dee t^2} \text{ [perpendicular to } \vec{r} \text{]}\)</span>.</p>
+<p>We define the positive direction to be counterclockwise in this course.</p>
+<p>The problem with this approach is that each particle has its own value of <span class="math">\(\vec{r}\)</span>, so every particle has a different formula for velocity and acceleration.</p>
+<p>However, angle of rotation is the same for all the particles. Clearly, <span class="math">\(s(t) = r \theta(t)\)</span>, where <span class="math">\(\theta(t)\)</span> is in radians. So <span class="math">\(v = r \frac{\dee \theta}{\dee t}\)</span> and <span class="math">\(a = r \frac{\dee^2 \theta}{\dee t^2}\)</span>.</p>
+<p>Now we define angular quantities for convenience. <span class="math">\(\theta\)</span> is angular position, <span class="math">\(\omega = \frac{\dee \theta}{\dee t}\)</span> is angular velocity, and <span class="math">\(\alpha = \frac{\dee^2 \theta}{\dee t^2}\)</span> is the angular acceleration. The units are all based on radians.</p>
+<p>For example, the angular velocity of the second hand on a clock is <span class="math">\(2 \pi rad / 1 min = \frac{1}{30}\pi rad\)</span>.</p>
+<p>The advantage of angular quantities is that they are the same for every possible particle in the rigid body. That means that we can describe the rotational kinematics of the whole object at once.</p>
+<p>To convert between angular and regular quantities, <span class="math">\(s = r \theta\)</span>, <span class="math">\(v = \omega r\)</span>, and <span class="math">\(a = r \alpha\)</span>.</p>
+<p>We can actually use the kinematic equations on this 1D motion, provided <span class="math">\(a\)</span> is constant:</p>
+<ul>
+<li><span class="math">\(s(t) = s(0) + v(0) t + \frac{1}{2}at^2\)</span>, so <span class="math">\(\theta(t) = \theta(0) + \omega(0) t + \frac{1}{2} \alpha t^2\)</span>.</li>
+<li><span class="math">\(v(t) = v(0) + at\)</span>, so <span class="math">\(\omega(t) = \omega(0) + \alpha t\)</span>.</li>
+<li><span class="math">\(v(t)^2 = v(0)^2 + 2a s(t)\)</span>, so <span class="math">\(\omega(t)^2 = \omega(0)^2 + 2 \alpha \theta(t)^2\)</span>.</li>
+</ul>
+<h3 id="representations">Representations</h3>
+<p>How do we represent angular quantities like position, velocity, and acceleration?</p>
+<p>We could represent them in world space, where <span class="math">\(\vec{\omega} = \omega_x\hat{i} + \omega_y\hat{j}\)</span>, but this is unwieldy. In particular, for constant speeds the components keep changing.</p>
+<p>Instead, we use Eulerian rotations. Each component of the quantity is the rotational quantity in that axis. So in 2D, all rotation is about the z-axis, and the x-axis and y-axis rotations are always 0.</p>
+<p>That means the direction of rotational quantities are always parallel to the actual axis the object is rotating about. This applies to torque as well.</p>
+<h3 id="kinetic-energy">Kinetic Energy</h3>
+<p>Clearly, the rotational kinetic energy is the sum of the rotational kinetic energies of each of the particles in the object, <span class="math">\(E_k = \sum \frac{1}{2} m_i v_i^2 = \frac{1}{2} \left(\sum m_i r_i^2\right) \omega^2\)</span>.</p>
+<p>Since ordinary kinetic energy is <span class="math">\(\frac{1}{2}mv^2\)</span>, the <span class="math">\(\sum m_i r_i^2\)</span> acts something like the mass factor, giving inertia to the rotation.</p>
+<p>We define the <strong>moment of inertia</strong> to be <span class="math">\(I = \sum m_i r_i^2 = \int r^2 \dee m = \int r^2 \rho \dee V\)</span>. Then <span class="math">\(E_k = \frac{1}{2}I\omega^2\)</span>, the rotational kinetic energy.</p>
+<p>Since <span class="math">\(r\)</span> is the distance from the axis of rotation to <span class="math">\(P\)</span>, the moment of inertia depends on the axis we are rotating in. It is easier to rotate a pole along its length than to twirl it. In 2D, this menas it matters which point we are rotating around.</p>
+<p>The moment of inertia is not always easy to calculate. Some useful ones are below:</p>
+<ul>
+<li>Rotating a point mass, a thin cylindrical shell, or a hoop about its axis of symmetry: <span class="math">\(I = mR^2\)</span>, where <span class="math">\(R\)</span> is the radius.</li>
+<li>Rotating a thin spherical shell about its center: <span class="math">\(I = \frac{2}{3}mR^2\)</span>, where <span class="math">\(R\)</span> is the radius.</li>
+<li>Rotating a solid cylinder or disk about its axis of symmetry: <span class="math">\(I = \frac{1}{2}mR^2\)</span>, where <span class="math">\(R\)</span> is the radius.</li>
+<li>Rotating a solid sphere about its center: <span class="math">\(I = \frac{2}{5}mR^2\)</span>, where <span class="math">\(R\)</span> i the radius.</li>
+<li>Rotating a long thin rod perpendicular to its length at the center: <span class="math">\(I = \frac{1}{12}mL^2\)</span>, where <span class="math">\(L\)</span> is the length of the rod.</li>
+<li>Rotating a long thin rod perpendicular to its length at one end: <span class="math">\(I = \frac{1}{3}mL^2\)</span>, where <span class="math">\(L\)</span> is the length of the rod.</li>
+</ul>
+<p>For example, finding the moment of inertia for a solid cylinder rotated about its axis of symmetry:</p>
+<blockquote>
+<p>Let <span class="math">\(R\)</span> be the radius of the cylinder and <span class="math">\(L\)</span> be the length. Then <span class="math">\(V = \pi R^2 L\)</span>.<br />Clearly, <span class="math">\(I = \int r^2 \rho \dee V = \rho \int r^2 \dee V\)</span><br />Clearly, <span class="math">\(V = \int_0^R 2 \pi r \dee r L\)</span>, so <span class="math">\(\dee V = 2 \pi r \dee r L\)</span>.<br />So <span class="math">\(I = \rho L \int_0^R r^2 2 \pi r \dee r = 2 \pi \rho L \int_0^R r^3 \dee R = 2 \pi \rho L \frac{R^4}{4} = 2 \pi \frac{m}{\pi R^2 L} L \frac{R^4}{4} = m \frac{R^2}{2} = \frac{1}{2}mR^2\)</span>.</p>
+</blockquote>
+<p>The <strong>parallel axis theorem</strong> states that <span class="math">\(I = I_{CM} + md^2\)</span>. In other words, the moment of inertia for rotating about any point on an object can be calculated from the moment of inertia about the center of mass and the distance from the center of mass.</p>
+<p>For example, the moment of inertia at the end of a long thin rod is <span class="math">\(I = I_{CM} + m\left(\frac{L}{2}\right)^2 = \frac{1}{12}mL^2 + \frac{1}{4}mL^2 = \frac{1}{3}mL^2\)</span>, as required.</p>
+<p>If we have multiple parts of an object, like a pendulum having a rod and a bob at the bottom, the total moment of inertia is simply the sum of all the inertias of each object. So <span class="math">\(I_{pendulum} = I_{rod} + I_{bob}\)</span>.</p>
+<h3 id="torque">Torque</h3>
+<p><strong>Torque</strong> is the tendency for an applied force to cause rotation in an object. We represent it with <span class="math">\(\tau\)</span> with the unit Newton-meters <span class="math">\(N m\)</span>.</p>
+<pre><code>  lever (r)
+v----------------v
+v pivot
+X================O &lt; force is applied here
+ \        \theta ^
+   \            / &lt; applied force
+    d\       F/
+       \    /
+         \/ &lt; perpendicular</code></pre>
+<p>Here, <span class="math">\(\vec{r}\)</span> is the displacement of the end of the lever, <span class="math">\(\vec{F}\)</span> is the applied force, <span class="math">\(\theta\)</span> is the angle between <span class="math">\(\vec{F}\)</span> and <span class="math">\(\vec{r}\)</span>, and <span class="math">\(\vec{d}\)</span> is a vector perpendicular to <span class="math">\(F\)</span> passing through the pivot.</p>
+<p>In this example, the component of the force along the x-axis, <span class="math">\(F \cos \theta\)</span> produces a translational force since it can't turn the object, while the component of the force along the y-axis, <span class="math">\(F_t = F \sin \theta\)</span>, goes toward turning the object.</p>
+<p>If we applied the force along the displacement of the end of the lever, the object would not be able to rotate, so all the force is applied toward translating the object. If we applied the force exactly perpendicular to the displacement of the end of the lever, all of the force would go toward rotating the object.</p>
+<p>Torque is basically the component of the force that goes into rotating the object - <span class="math">\(\magn{\tau} = F r \sin \theta = dF\)</span>. It is positive when the object is being pushed counterclockwise.</p>
+<p>The net torque is simply the sum of all torques acting on the object.</p>
+<p>In 3D, <span class="math">\(\vec{\tau} = \vec{r} \times \vec{F}\)</span>. In 2D, torque is simply a scalar. However, it still has direction, since it can be positive or negative.</p>
+<p>The cross product of two vectors is always a vector perpendicular to both. To find the direction of the torque, we use the right hand rule - if we make a thumbs-up with our right hand, with the fingers curling from <span class="math">\(\vec{r}\)</span> to <span class="math">\(\vec{F}\)</span>, the thumb points along the direction of the torque.</p>
+<p>Clearly, <span class="math">\(F \sin \theta = ma_{arc} = mr\alpha\)</span>. So <span class="math">\(rF \sin \theta = \tau = mr^2 \alpha = I\alpha\)</span>. This is the rotational version of the second law of motion: <span class="math">\(\vec{\tau} = I\vec{\alpha}\)</span>.</p>
+<p>Also, if <span class="math">\(\tau = rF \sin \theta\)</span>, then <span class="math">\(\tau = dF\)</span>. This is useful because sometimes <span class="math">\(\vec{d}\)</span> is easier to find than <span class="math">\(\vec{r}\)</span>.</p>
+<p>We can summarize with <span class="math">\(\vec{\tau}_{\net} = \vec{r} \times \vec{F} = I\vec{\alpha}\)</span>.</p>
+<p>A 6kg pulley is attached by a rope to a 2kg block. What is the tension on the rope?</p>
+<blockquote>
+<p>Let <span class="math">\(r\)</span> be the radius of the pulley, <span class="math">\(T\)</span> be the tension on the rope, and <span class="math">\(a\)</span> be the acceleration at the edge of the pulley.<br />Clearly, <span class="math">\(a\)</span> would be <span class="math">\(g\)</span> if not for the tension on the rope. So <span class="math">\(a = g - \frac{T}{2 kg}\)</span>.<br />Clearly, the torque on the pulley is <span class="math">\(r T \sin \frac{\pi}{2} = rT\)</span>, with the angle being 90 degrees since the rope is always perpendicular to the displacement.<br />Clearly, <span class="math">\(I_{pulley} = \frac{1}{2} 6 kg r^2 = r^2 3 kg\)</span>. So <span class="math">\(\tau = I\alpha = rT = r^2 3 kg \alpha\)</span>, and <span class="math">\(\alpha = \frac{T}{r 3 kg}\)</span>, so <span class="math">\(a = \frac{T}{3 kg}\)</span>.<br />So <span class="math">\(a = g - \frac{T}{2 kg} = \frac{T}{3 kg}\)</span>, and <span class="math">\(T = g \frac{6}{5} kg = 11.76 N\)</span>.</p>
+</blockquote>
+<p><strong>Statics</strong> problems are those where the net torque is 0.</p>
+<p>A force applied to a point on the object applies <span class="math">\(\vec{r} \times \vec{F}\)</span> as torque and <span class="math">\(\vec{r} \cdot \vec{F}\)</span> as translational movement to the object overall.</p>
+<p>A 2 kg, 3 m horizontal rod is secured to a pivot at one end. What is the acceleration of the board?</p>
+<pre><code>v---- 3m ----v
+X============= 2kg</code></pre>
+<blockquote>
+<p>The acceleration is the acceleration of the center of mass, which is 1.5 m along the rod.<br />Gravity applies a force of <span class="math">\(g2 kg\)</span> on the center of mass and a torque of <span class="math">\(\tau = mg\frac{L}{2} \sin \theta\)</span>. Since the force is perpendicular to the displacement, <span class="math">\(\theta = \frac{\pi}{2}\)</span>.<br />Clearly, <span class="math">\(I = \frac{1}{3}mL^2\)</span>.<br />Clearly, <span class="math">\(\tau = mg\frac{L}{2} = I\alpha = \frac{1}{3}mL^2\alpha\)</span>, and <span class="math">\(\alpha = \frac{3}{2}\frac{g}{L}\)</span>.<br />Clearly, <span class="math">\(a = r \alpha\)</span>, and <span class="math">\(r = \frac{L}{2}\)</span>, so <span class="math">\(a = \frac{3}{4}g\)</span>.</p>
+</blockquote>
+<p>A 10 kg box 1 m wide and 4 m high, is on a board. What is the minimum acceleration of the board before the box tips over?</p>
+<pre><code>       1m
+   -----------
+   |  10kg   |
+   |         |
+   |   F_g   |
+ N |    v    |
+ ^ |    X    | 4m
+   |   /     |
+   |  /      |
+   | /       |
+   |/        |
+   -----------
+        &gt; A
+=============== &lt; cart</code></pre>
+<blockquote>
+<p>Clearly, <span class="math">\(\vec{N} = \vec{F}_g = m\vec{g}\)</span>. We have <span class="math">\(\vec{N}\)</span> applied at the left because the block is going to tip to the left, and <span class="math">\(\vec{A}\)</span> is at the bottom because the force is being applied by the cart.<br />Clearly, <span class="math">\(\vec{N}\)</span> applies <span class="math">\(N \frac{1 m}{2}\)</span> of torque to the center of mass, and <span class="math">\(\vec{A}\)</span> applies <span class="math">\(A 2 m\)</span> of torque to the center of mass.<br />Clearly, the block can tip when the net torque is 0, so it can freely rotate. So <span class="math">\(N \frac{1 m}{2} + A 2 m = 0\)</span> and <span class="math">\(A = \frac{N}{4}\)</span>.<br />So the acceleration is <span class="math">\(a = \frac{A}{m} = \frac{mg}{4m} = \frac{g}{4}\)</span>.</p>
+</blockquote>
+<h3 id="rolling-motion">Rolling Motion</h3>
+<p>When there is no slipping, the bottommost point of a wheel is at rest, and the topmost point is moving aat twice the speed of the axle.</p>
+<p>Rolling motion is described using a combination of pure rotation and pure translation. Sometimes the rotation is about the point of contact with the ground, but mostly it is about the axle.</p>
+<p>What is the kinetic energy of a 3kg cylindrical wheel with radius 1 m rolling at 2 m/s?</p>
+<blockquote>
+<p>Clearly, the linear kinetic energy is <span class="math">\(E_k = \frac{1}{2}mv^2 = 6 J\)</span>.<br />Clearly, <span class="math">\(I = \frac{1}{2} 3 kg 1 m^2 = \frac{3}{2} kg m^2\)</span> and <span class="math">\(\omega = \frac{2 m/s}{1 m} = 2 rad/s\)</span>.<br />Clearly, the rotational kinetic energy is <span class="math">\(E_k = \frac{1}{2}I\omega^2 = \frac{3}{4} kg m^2 4 rad^2/s^2 = 3 kg m^2 rad^2/s^2 = 3 J\)</span>.<br />So the total kinetic energy is <span class="math">\(6 J + 3 J = 9 J\)</span>.</p>
+</blockquote>
+<p>A yo-yo of mass <span class="math">\(m\)</span> and radius <span class="math">\(r\)</span> has a string wrapped around it. When released, what is the tension in the string?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(I = \frac{1}{2}mr^2\)</span>. Clearly, the force applied by the string and the displacement are perpendicular, so <span class="math">\(\theta = \frac{\pi}{2}\)</span>.<br />Clearly, <span class="math">\(\tau = rT \sin \theta = rT = I\alpha = \frac{Ia}{r}\)</span>. So <span class="math">\(T = \frac{Ia}{r^2}\)</span>.<br />Clearly, <span class="math">\(\sum \vec{F} = m\vec{a} = \vec{T} + m\vec{g} = \frac{Ia}{r^2} + m\vec{g}\)</span>. So <span class="math">\(\vec{a}mr^2 - I\vec{a} = \vec{g}mr^2\)</span> and <span class="math">\(\vec{a} = \frac{\vec{g}mr^2}{mr^2 - I}\)</span>.<br />So <span class="math">\(T = \frac{I\vec{g}m}{mr^2 - I}\)</span>.<br />Basically, we wrote tension in terms of overall acceleration using torque (<span class="math">\(a \to T\)</span>), then used the effects of gravity to find overall acceleration (<span class="math">\(\to a\)</span>), then used overall acceleration to calculate torque.</p>
+</blockquote>
+<h3 id="angular-momentum">Angular Momentum</h3>
+<p>Angular momentum is defined as <span class="math">\(\vec{l} = \vec{r} \times \vec{p} = I\omega\)</span> (measured in <span class="math">\(m N s = kg m^2/s\)</span>) - it is the tendency of linear momentum to impart rotation onto an object.</p>
+<p>Here, <span class="math">\(\vec{r}\)</span> is the displacement from the center of mass, and <span class="math">\(\vec{p}\)</span> is the linear momentum.</p>
+<p>Clearly, <span class="math">\(\frac{\dee \vec{l}}{\dee t} = \frac{\dee}{\dee t} (\vec{r} \times \vec{p}) = \vec{r} \times \frac{\dee \vec{p}}{\dee x} + \frac{\dee \vec{r}}{\dee t} \times \vec{p}\)</span>.</p>
+<p>Since <span class="math">\(\frac{\dee \vec{r}}{\dee t} = \vec{v}\)</span> is parallel to <span class="math">\(\vec{p} = m\vec{v}\)</span>, <span class="math">\(\frac{\dee \vec{r}}{\dee t} \times \vec{p} = \vec{0}\)</span>.</p>
+<p>So <span class="math">\(\frac{\dee \vec{l}}{\dee t} = \vec{r} \times \frac{\dee \vec{p}}{\dee x} = \vec{r} \times \vec{F} = \vec{\tau}\)</span>.</p>
+<p>In other words, <strong>torque is the derivative of angular momentum</strong>. It is similar to the second law of motion, where <span class="math">\(\frac{\dee \vec{p}}{\dee t} = \vec{F}\)</span>. Just as force changes linear momentum, torque changes angular momentum.</p>
+<p>Also, angular momentum adds up, so <span class="math">\(\sum \vec{l} = \vec{L}\)</span> is the total angular momentum.</p>
+<p>There is also <strong>conservation of angular momentum</strong>, which states that in an isolated system, the net torque is 0 - <span class="math">\(\sum \vec{\tau} = \vec{0}\)</span> and <span class="math">\(\sum \vec{l}_f = \sum \vec{l}_i\)</span>. In practice, we usually write it as <span class="math">\(I_f\omega_f = I_i\omega_i\)</span>.</p>
+<p>This is similar to the conservation of linear momentum, which states that the net force in an isolated system is 0.</p>
+<p>If two particles of mass <span class="math">\(m\)</span> are travelling in opposite directions, what is the angular momentum?</p>
+<blockquote>
+<p>Clearly, the linear momentum is <span class="math">\(\vec{0}\)</span> since the objects are moving in opposite directions.<br />Without loss of generality, assume the particles are travelling along the x-axis, and the origin is at the first particle. The total angular momentum is independent of the origin we choose.<br />Clearly, <span class="math">\(\vec{l} = \vec{r}_1 \times \vec{p}_1 + \vec{r}_2 \times \vec{p}_2\)</span>, and <span class="math">\(\vec{r}_1 = \vec{0}\)</span>, so <span class="math">\(\vec{l} = \vec{r}_2 \times \vec{p}_2 = r_2 p_2 \sin \theta\)</span>.<br />Clearly, <span class="math">\(r_2 \sin \theta\)</span> is the displacement along the y-axis, so <span class="math">\(r_2 \sin \theta = r_{2, y}\)</span>.<br />So <span class="math">\(\vec{l} = p_2 r_{2, y}\)</span>.</p>
+</blockquote>
+<p>If a 50 kg student runs onto the edge of a 1.6 m radius stationary merry-go-round with <span class="math">\(I = 1200 kg m^2\)</span> at <span class="math">\(\frac{25}{9} m/s\)</span>, what is the student's angular momentum? What is the angular velocity of the merry-go-round afterward? How much kinetic energy was lost in the collision? How much work needs to be done to move to the center? What is the angular velocity after moving to the center?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\vec{l}_{student} = 1.6 m 50 kg \frac{25}{9} m/s \sin \theta\)</span>. Since the student is perpendicular to the displacement of the point on the edge, <span class="math">\(\sin \theta = 1\)</span>. So <span class="math">\(\vec{l}_{student} = 1.6 m 50 kg \frac{25}{9} m/s = \frac{2000}{9} kg m^2/s\)</span>.<br />So the angular momentum of the student is <span class="math">\(222.2 kg m^2/s\)</span>.<br />Clearly, <span class="math">\(\vec{l}_{student, f} + \vec{l}_{wheel, f} = \vec{l}_{student, i} + \vec{l}_{wheel, i}\)</span>. So <span class="math">\(\vec{l}_{student, f} + \vec{l}_{wheel, f} = \vec{l}_{student, i} = \frac{2000}{9} kg m^2/s\)</span> since the wheel was stationary.<br />Clearly, <span class="math">\(I_{student} = mr^2 = 50 kg (1.6 m)^2 = 128 kg m^2\)</span>.<br />Since <span class="math">\(\vec{\omega}_{student, f} = \vec{\omega}_{wheel, f}\)</span>, <span class="math">\(\vec{\omega}_{student, f}(I_{student} + I_{wheel}) = \frac{2000}{9} kg m^2/s = \vec{\omega}_{student, f} 1328 kg m^2\)</span>. So <span class="math">\(\vec{\omega}_{student, f} = \frac{\frac{2000}{9} kg m^2/s}{1328 kg m^2} = \frac{125}{747} rad/s\)</span>.<br />So the angular velocity of the merry-go-round after collision was <span class="math">\(0.167 rad/s\)</span>.<br />Clearly, <span class="math">\(E_{k, i} = \frac{1}{2} 50 kg \left(\frac{25}{9} m/s\right)^2 = 192.901234567901234 J\)</span>.<br />Clearly, <span class="math">\(E_{k, f} = \frac{1}{2} (I_{student} + I_{wheel}) \omega_{student, f}^2 = \frac{1}{2} 1328 kg m^2 (\frac{125}{747} rad/s)^2 = 18.592890078833854 J\)</span>.<br />So the collision was inelastic, losing <span class="math">\(192.901234567901234 J - 18.592890078833854 J = 174.308344489067380 J\)</span> of kinetic energy.<br />If the student moves the the center <span class="math">\(I_{wheel}\omega = (I_{wheel} + I_{student})\frac{125}{747} rad/s = 1328 kg m^2 \frac{125}{747} rad/s\)</span>, since the moment of inertia provided by the student is simply removed by being at the center.<br />So <span class="math">\(\omega = \frac{1328 kg m^2 \frac{125}{747} rad/s}{1200 kg m^2} = 0.185185185185185 rad/s\)</span>.<br />So the speed after the student moves to the center is <span class="math">\(0.185 rad/s\)</span>.<br />So <span class="math">\(E_k = \frac{1}{2} 1200 kg m^2 (0.185185185185185 rad/s)^2 = 20.576131687242757 J\)</span>, and <span class="math">\(W = \Delta E_k = 20.576131687242757 J - 18.592890078833854 J = 1.983241608408903 J\)</span>.<br />So the student needs to do 1.98 J of work to get to the center.</p>
+</blockquote>
+<p>A force applied along the center of mass applies zero torque to the object. This is called a <strong>central force</strong>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

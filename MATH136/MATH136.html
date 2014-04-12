@@ -1148,16 +1148,15 @@ The *<strong>adjugate</strong> of <span class="math">\(A is \)</span>
 <p>Also, if <span class="math">\(P\)</span> and <span class="math">\(P^{-1}\)</span> exist satisfying the above conditions, then <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are <strong>similar</strong>. We can think of this as meaning that they represent the same linear operation, but in different bases.</p>
 <h2 id="eigenvalueseigenvectors">Eigenvalues/Eigenvectors</h2>
 <p>Pronounced &quot;Eye-gan values&quot; and &quot;Eye-gan vectors&quot;.</p>
-<p>Let <span class="math">\(L\)</span> be a linear operator and <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> be a basis.</p>
+<p>Let <span class="math">\(L\)</span> be a linear operator and <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span> be a basis for <span class="math">\(\mb{R}^n\)</span>.</p>
 <p>We want to determine if <span class="math">\(\mathcal{B}\)</span> exists such that the matrix of <span class="math">\(L\)</span> with respect to <span class="math">\(\mathcal{B}\)</span> is diagonal.</p>
-<p>Assume that <span class="math">\(\mathcal{B}\)</span> exists satisfying these conditions. Then <span class="math">\([L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)\)</span>.</p>
-<p>Clearly, <span class="math">\({}_\mathcal{S}P_\mathcal{B} = \begin{bmatrix} \vec{v}_1 &amp; \ldots &amp; \vec{v}_n \end{bmatrix}\)</span> and <span class="math">\([L]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B}\)</span>.</p>
+<p>Clearly, <span class="math">\(\mathcal{B}\)</span> exists if and only if <span class="math">\([L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)\)</span> for some <span class="math">\(\lambda_1, \ldots, \lambda_n \in \mb{R}\)</span>.</p>
+<p>Clearly, <span class="math">\([L]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B}\)</span>.</p>
 <p>So <span class="math">\({}_\mathcal{B}P_\mathcal{S} [L] {}_\mathcal{S}P_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)\)</span> and <span class="math">\([L] {}_\mathcal{S}P_\mathcal{B} = {}_\mathcal{S}P_\mathcal{B} \diag(\lambda_1, \ldots, \lambda_n)\)</span>.</p>
-<p>So <span class="math">\(\begin{bmatrix} [L]\vec{v}_1 &amp; \ldots &amp; [L]\vec{v}_n \end{bmatrix} = \begin{bmatrix} \lambda_1\vec{v}_1 &amp; \ldots &amp; \lambda_n\vec{v}_n \end{bmatrix}\)</span>.</p>
-<p>So for all <span class="math">\(1 \le i \le n\)</span>, <span class="math">\(L(\vec{v}_i) = \lambda_i \vec{v}_i\)</span> and <span class="math">\(\vec{v}_i \no \vec{0}\)</span> since <span class="math">\({}_\mathcal{S}P_\mathcal{B}\)</span> is invertible.</p>
-<p>So <span class="math">\([L(\vec{v}_i)]_\mathcal{B} = [\lambda_i \vec{v}_i]_\mathcal{B}\)</span>. Since <span class="math">\([\vec{v}_i]_\mathcal{B} = \vec{e}_i\)</span>, <span class="math">\([L(\vec{v}_i)]_\mathcal{B} = \lambda_i \vec{e}_i\)</span>.</p>
-<p>So <span class="math">\([L]_\mathcal{B} = \begin{bmatrix} \lambda_1\vec{e}_1 &amp; \ldots &amp; \lambda_n\vec{e}_n \end{bmatrix} = \diag(\lambda_1, \ldots, \lambda_n)\)</span>.</p>
-<p>So if <span class="math">\([L]_\mathcal{B}\)</span> is diagonal for a given <span class="math">\(\mathcal{B}\)</span>, then <span class="math">\([L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)\)</span>. ;wip: what was the point of doing all this only to end up back at the beginning?</p>
+<p>Clearly, <span class="math">\({}_\mathcal{S}P_\mathcal{B} = \begin{bmatrix} \vec{v}_1 &amp; \ldots &amp; \vec{v}_n \end{bmatrix}\)</span>. So <span class="math">\(\begin{bmatrix} [L]\vec{v}_1 &amp; \ldots &amp; [L]\vec{v}_n \end{bmatrix} = \begin{bmatrix} \lambda_1\vec{v}_1 &amp; \ldots &amp; \lambda_n\vec{v}_n \end{bmatrix}\)</span>.</p>
+<p>So <span class="math">\([L]\vec{v}_i = \lambda_i \vec{v}_i\)</span> for <span class="math">\(1 \le i \le n\)</span> if and only if <span class="math">\(\mathcal{B}\)</span> exists.</p>
+<p><span class="math">\(\lambda_1, \ldots, \lambda_n\)</span> are <strong>eigenvalues</strong> of <span class="math">\([L]\)</span>, and <span class="math">\(\vec{v}_1, \ldots, \vec{v}_n\)</span> are <strong>eigenvectors</strong> of <span class="math">\([L]\)</span>.</p>
+<p>This shows that the eigenvalues and eigenvectors are those values satisfying <span class="math">\([L]_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)\)</span> where <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span>.</p>
 <h3 id="definition-1">Definition</h3>
 <p>Let <span class="math">\(A \in M_{n \times n}\)</span>. Let <span class="math">\(\vec{v} \ne \vec{0}\)</span>. Let <span class="math">\(\lambda \in \mb{R}\)</span>. Then <span class="math">\(\lambda\)</span> is an <strong>eigenvalue</strong> of <span class="math">\(A\)</span> and <span class="math">\(\vec{v}\)</span> is an <strong>eigenvector</strong> of <span class="math">\(A\)</span> if and only if <span class="math">\(A\vec{v} = \lambda \vec{v}\)</span>.</p>
 <p>In other words, the eigenvector can be multiplied by <span class="math">\(A\)</span> to give a scalar multiple of itself, and the eigenvalue is the scalar that it is multiplied by.</p>
@@ -1188,15 +1187,77 @@ The *<strong>adjugate</strong> of <span class="math">\(A is \)</span>
 <p>The <strong>algebraic multiplicity</strong> <span class="math">\(a_\lambda\)</span> of an eigenvalue <span class="math">\(\lambda\)</span> is the number of times <span class="math">\(\lambda\)</span> appears as a root of <span class="math">\(C(\lambda)\)</span> - it is the degree of the root <span class="math">\(\lambda\)</span>.</p>
 <p>Note that the eigenvectors <span class="math">\(\vec{v}\)</span> associated with a given eigenvalue are the solutions to <span class="math">\((A - \lambda I)\vec{v} = \vec{0}\)</span> (rearranged from <span class="math">\(A\vec{v} = \lambda \vec{v}\)</span>). Therefore, <span class="math">\(\vec{v} \in \operatorname{Null}(A - \lambda I)\)</span>.</p>
 <p>In other words, the eigenvector is one of the elements of the nullspace of <span class="math">\(A - \lambda I\)</span>, excluding <span class="math">\(\vec{0}\)</span>.</p>
-<p>The <strong>eigenspace</strong> of the eigenvalue <span class="math">\(\lambda\)</span> is <span class="math">\(E_\lambda = \operatorname{Null}(A - \lambda I)\)</span>.</p>
+<p>The <strong>eigenspace</strong> of the eigenvalue <span class="math">\(\lambda\)</span> is <span class="math">\(E_\lambda = \operatorname{Null}(A - \lambda I)\)</span>, or the space containing the eigenvectors.</p>
 <p>The <strong>geometric multiplicity</strong> of an eigenvalue <span class="math">\(\lambda\)</span> is the dimension of its eigenspace, and is defined as <span class="math">\(g_\lambda = \dim E_\lambda\)</span>.</p>
 <h3 id="theorem-6.2.3">Theorem 6.2.3</h3>
 <p>For any eigenvalue <span class="math">\(\lambda\)</span>, <span class="math">\(1 \le g_\lambda \le a_\lambda\)</span>.</p>
 <p>In other words, the geometric muliplicity is always less than or equal to the algebraic multpicity, and all multiplicities are positive integers.</p>
-<p>Any eigenvalue <span class="math">\(\lambda\)</span> where <span class="math">\(g_\lambda &lt; a_\lambda\)</span> <strong>deficient</strong>.</p>
+<p>Any eigenvalue <span class="math">\(\lambda\)</span> where <span class="math">\(g_\lambda &lt; a_\lambda\)</span> is known as <strong>deficient</strong>.</p>
 <h3 id="theorem-6.2.4">Theorem 6.2.4</h3>
 <p>Given eigenvalues <span class="math">\(\lambda_1, \ldots, \lambda_n\)</span> of <span class="math">\(A \in M_{n \times n}\)</span>, <span class="math">\(\det A = \lambda_1 \cdots \lambda_n\)</span> and <span class="math">\(\operatorname{tr}(A) = \lambda_1 + \ldots + \lambda_n = \sum_{i = 1}^n \lambda_i\)</span>.</p>
 <p>In other words, the determinant of a matrix is the product of all its eigenvalues and the trace is the sum of all the eigenvalues.</p>
+<h1 id="section-12">6/4/14</h1>
+<h2 id="diagonalization">Diagonalization</h2>
+<p>A matrix <span class="math">\(A \in M_{n \times n}\)</span> is <strong>diagonalizable</strong> if and only if there exists <span class="math">\(P\)</span> such that <span class="math">\(P^{-1}AP = D\)</span> is diagonal. If <span class="math">\(P\)</span> exists, then <span class="math">\(P\)</span> <strong>diagonalizes</strong> <span class="math">\(A\)</span>.</p>
+<p>Basically, <span class="math">\(A\)</span> is diagonalizable if it is similar to a diagonal matrix.</p>
+<p>Let <span class="math">\(\vec{v}_1, \ldots, \vec{v}_n\)</span> be eigenvectors of <span class="math">\(A\)</span> and <span class="math">\(\lambda_1, \ldots, \lambda_n\)</span> be the corresponding eigenvalues of <span class="math">\(A\)</span>.</p>
+<p>We showed earlier that if <span class="math">\(P^{-1}AP = \diag(x_1, \ldots, x_n)\)</span>, then <span class="math">\(x_1, \ldots, x_n = \lambda_1, \ldots, \lambda_n\)</span> and a possible value of <span class="math">\(P\)</span> is <span class="math">\(P = \begin{bmatrix} \vec{v}_1, \ldots, \vec{v}_n \end{bmatrix}\)</span>.</p>
+<h3 id="theorem-6.3.1">Theorem 6.3.1</h3>
+<p>Given distinct eigenvalues of <span class="math">\(A\)</span>, <span class="math">\(\lambda_1, \ldots, \lambda_k\)</span>, <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> is linearly independent.</p>
+<p>This can be proven via induction. Clearly, <span class="math">\(\set{\vec{v}_1}\)</span> is linearly independent since <span class="math">\(\vec{v}_1 \ne \vec{0}\)</span>, by definition.</p>
+<p>Assume that <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> is linearly independent for some <span class="math">\(k \ge 1\)</span>. Then <span class="math">\(c_1 \vec{v}_1 + \ldots + c_k\vec{v}_k = \vec{0}\)</span> has only the trivial solution.</p>
+<p>Clearly, <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_k, \vec{v}_{k + 1}}\)</span> is linearly independent if <span class="math">\(c_1 \vec{v}_1 + \ldots + c_k\vec{v}_k + c_{k + 1}\vec{v}_{k + 1} = \vec{0}\)</span> only has a trivial solution.</p>
+<p>Since for all <span class="math">\(1 \le i \le k, 1 \le j \le k\)</span>, <span class="math">\(A\vec{v}_i = \lambda_i\vec{v}_i\)</span>, <span class="math">\((A - \lambda_i)\vec{v}_j = A\vec{v}_j - \lambda_i\vec{v}_j = \lambda_j\vec{v}_j - \lambda_i\vec{v}_j = (\lambda_j - \lambda_i)\vec{v}_j\)</span>.</p>
+<p>Assume <span class="math">\(c_1 \vec{v}_1 + \ldots + c_k\vec{v}_k + c_{k + 1}\vec{v}_{k + 1} = \vec{0}\)</span>.</p>
+<p>Clearly, <span class="math">\((A - \lambda_{k + 1})\vec{v}_j \ne 0\)</span>, so <span class="math">\(c_1(A - \lambda_{k + 1})\vec{v}_1 + \ldots + c_k(A - \lambda_{k + 1})\vec{v}_k + c_{k + 1}(A - \lambda_{k + 1})\vec{v}_{k + 1} = \vec{0} = c_1(\lambda_1 - \lambda_{k + 1})\vec{v}_1 + \ldots + c_k(\lambda_k - \lambda_{k + 1})\vec{v}_k + c_{k + 1}(\lambda_{k + 1} - \lambda_{k + 1})\vec{v}_{k + 1} = c_1(\lambda_1 - \lambda_{k + 1})\vec{v}_1 + \ldots + c_k(\lambda_k - \lambda_{k + 1})\vec{v}_k\)</span>.</p>
+<p>Clearly, this only has the trivial solution. So by the principle of simple induction, <span class="math">\(\set{\vec{v}_1, \ldots, \vec{v}_k}\)</span> is linearly independent for all <span class="math">\(k \ge 1\)</span>.</p>
+<h3 id="theorem-6.3.2">Theorem 6.3.2</h3>
+<p>Given bases for the eigenspace of <span class="math">\(\lambda_i\)</span>, <span class="math">\(\mathcal{B}_i = \set{\vec{v}_{i, 1}, \ldots, \vec{v}_{i, g_{\lambda_i}}}\)</span>, <span class="math">\(\mathcal{B}_1 \cup \ldots \cup \mathcal{B}_k\)</span> is a linearly independent set.</p>
+<p>In other words, the set of all the basis vectors for the eigenspaces of each eigenvalue is linearly independent.</p>
+<p>The sum of all algebraic multiplicities of all the eigenvalues must be <span class="math">\(n\)</span>, since that is the degree of the characteristic polynomial.</p>
+<h3 id="theorem-6.3.3-diagonalization-theorem">Theorem 6.3.3 (Diagonalization Theorem)</h3>
+<p><span class="math">\(A\)</span> is diagonalizable if and only if <span class="math">\(g_{\lambda_i} = a_{\lambda_i}\)</span> for all <span class="math">\(1 \le i \le k\)</span>.</p>
+<p>In other words, a matrix is diagonalizable if and only if the geometric multiplicity is the same as the algebraic multiplicity - if none of its eigenvalues are deficient.</p>
+<p>In order to get <span class="math">\(n\)</span> linearly independent eigenvectors, the geometric multiplicity of each eigenvalue must be the same as the algebraic multiplicity.</p>
+<p>Also, if we have <span class="math">\(n\)</span> linearly independent eigenvectors, the set of them is a basis for <span class="math">\(\mb{R}^n\)</span>.</p>
+<p>Since the multiplicities must be at least 1, and they must add up to <span class="math">\(n\)</span>, if <span class="math">\(A\)</span> has <span class="math">\(n\)</span> eigenvalues, then each one has an algebraic and geometric multiplicity of 1 and is diagonalizable.</p>
+<p>An application of this theorem can be used when <span class="math">\(A\)</span> is a matrix of real values. In this case, <span class="math">\(A\)</span> is diagonalizable if and only if all the eigenvalues are real and <span class="math">\(g_{\lambda_i} = a_{\lambda_i}\)</span>. This is useful because any matrix with complex eigenvalues can immediately be known not be diagonalizable.</p>
+<p>A matrix can be <strong>factorized</strong> via diagonalization. If <span class="math">\(P^{-1}AP = D\)</span> is diagonal, then <span class="math">\(A = PDP^{-1}\)</span>.</p>
+<h3 id="algorithm">Algorithm</h3>
+<p>To <strong>diagonalize</strong> a matrix <span class="math">\(A \in M_{n \times n}\)</span> over a set <span class="math">\(\mb{S}\)</span> means to convert it into the form <span class="math">\(P^{-1}AP = D\)</span> for some <span class="math">\(P \in M_{n \times n}(\mb{S})\)</span> where <span class="math">\(D\)</span> is diagonal.</p>
+<p>For example, diagonalizing a matrix over <span class="math">\(\mb{R}\)</span> means to find <span class="math">\(P \in M_{n \times n}\)</span> such that <span class="math">\(D\)</span> is diagonal.</p>
+<p>To diagonalize a matrix <span class="math">\(A\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Find the characteristic polynomial <span class="math">\(C(\lambda) = \det (A - \lambda I)\)</span> and factor it.</li>
+<li>Solve for <span class="math">\(\lambda\)</span> where <span class="math">\(C(\lambda) = 0\)</span> - find the distinct roots of the c haracteristic polynomial to find the eigenvalues <span class="math">\(\lambda_1, \ldots, \lambda_n\)</span>, with duplicates allowed.</li>
+<li>If any of the eigenvalues are not real, then <span class="math">\(A\)</span> is not diagonalizable over <span class="math">\(\mb{R}\)</span>.</li>
+<li>Find a basis for the eigenspace of each <span class="math">\(\lambda_i\)</span> by solving <span class="math">\((A - \lambda_i I)\vec{v} = \vec{0}\)</span> for <span class="math">\(\vec{v}\)</span> and finding the general solution.</li>
+<li>These bases allow us to find the geometric multiplicities <span class="math">\(g_{\lambda_i}\)</span>.</li>
+<li>If <span class="math">\(g_{\lambda_i} &lt; a_{\lambda_i}\)</span> for any <span class="math">\(1 \le i \le n\)</span>, then <span class="math">\(A\)</span> is not diagonalizable.</li>
+<li>Combine all the basis vectors together to get a set of <span class="math">\(n\)</span> linearly, independent vectors <span class="math">\(\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}\)</span>, which is automatically a basis for <span class="math">\(\mb{R}^n\)</span>.</li>
+<li>Let <span class="math">\(P = \begin{bmatrix} \vec{v}_1 &amp; \ldots &amp; \vec{v}_n \end{bmatrix}\)</span>. Then <span class="math">\(P^{-1}AP = A_\mathcal{B} = \diag(\lambda_1, \ldots, \lambda_n)\)</span>.</li>
+</ol>
+<h2 id="matrix-exponentiation">Matrix Exponentiation</h2>
+<p>We define matrix exponentiation with <span class="math">\(A^k = AA^{k - 1} = A^{k - 1}A, k \in \mb{N}\)</span> and <span class="math">\(A^0 = I\)</span>. However, how do we calculate larger powers more easily?</p>
+<p>Obviously, the answer is diagonalization, somehow. Don't ask me how I know.</p>
+<h3 id="theorem-6.4.1">Theorem 6.4.1</h3>
+<p>For <span class="math">\(k \ge 0\)</span>, <span class="math">\(\diag(d_1, \ldots, d_n)^k = \diag(d_1^k, \ldots, d_n^k)\)</span>. In other words, we simply exponentiate the individual elements in the matrix.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\diag(d_1, \ldots, d_n)^0 = I = \diag(d_1^0, \ldots, d_n^0)\)</span>.<br />Assume <span class="math">\(\diag(d_1, \ldots, d_n)^k = \diag(d_1^k, \ldots, d_n^k)\)</span> for some <span class="math">\(k \ge 0\)</span>.<br />Then <span class="math">\(\diag(d_1, \ldots, d_n)^{k + 1} = \diag(d_1, \ldots, d_n)^k \diag(d_1, \ldots, d_n)^k = \diag(d_1, \ldots, d_n) \diag(d_1^k, \ldots, d_n^k) = \diag(d_1^{k + 1}, \ldots, d_n^{k + 1})\)</span>.<br />So by induction, <span class="math">\(\diag(d_1, \ldots, d_n)^k = \diag(d_1^k, \ldots, d_n^k)\)</span>.</p>
+</blockquote>
+<h3 id="theorem-6.4.2">Theorem 6.4.2</h3>
+<p>If <span class="math">\(P^{-1}AP = B\)</span>, then <span class="math">\(A^k = PB^kP^{-1}\)</span>. In other words, we can change the basis to whatever we want and still exponentiate.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(A^0 = I = PP^{-1} = PB^0P^{-1}\)</span>.<br />Assume for some <span class="math">\(k \ge 0\)</span> that <span class="math">\(A^k = PB^kP^{-1}\)</span>. Then <span class="math">\(A^{k + 1} = AA^k = PBP^{-1}PB^kP^{-1} = PBB^kP^{-1} = PB^{k + 1}P^{-1}\)</span>.<br />So by induction, <span class="math">\(A^k = PB^kP^{-1}\)</span>.</p>
+</blockquote>
+<p>This is useful if <span class="math">\(B\)</span> is diagonal, because combined with theorem 6.4.1, we can easily exponentiate matrices to large powers.</p>
+<p>However, if we're too lazy to diagonalize, then it might just be faster to use the old multiply and square algorithm.</p>
+<p>Given <span class="math">\(A = \begin{bmatrix} 1 &amp; 2 \\ -1 &amp; 4 \end{bmatrix}\)</span>, find <span class="math">\(A^{1000}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(C(\lambda) = \det \begin{bmatrix} 1 - \lambda &amp; 2 \\ -1 &amp; 4 - \lambda \end{bmatrix} = (\lambda - 2)(\lambda - 3)\)</span>.<br />So the eigenvalues are 2 and 3 with algebraic multiplicities 1.<br />Assume <span class="math">\((A - 2I)\vec{v} = 0\)</span>. Then row reducing, we get <span class="math">\(\begin{array}{cc|c} 1 &amp; -2 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{array}\)</span> and <span class="math">\(\set{\begin{bmatrix} 2 \\ 1 \end{bmatrix}}\)</span> is a basis for the eigenspace of <span class="math">\(\lambda = 2\)</span>.<br />Assume <span class="math">\((A - 3I)\vec{v} = 0\)</span>. Then row reducing, we get <span class="math">\(\begin{array}{cc|c} 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{array}\)</span> and <span class="math">\(\set{\begin{bmatrix} 1 \\ 1 \end{bmatrix}}\)</span> is a basis for the eigenspace of <span class="math">\(\lambda = 3\)</span>.<br />So <span class="math">\(P = \begin{bmatrix} 2 &amp; 1 \\ 1 &amp; 1 \end{bmatrix}\)</span> and <span class="math">\(P^{-1}AP = D\)</span> where <span class="math">\(D\)</span> is diagonal, and <span class="math">\(D = \begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 3 \end{bmatrix}\)</span>.<br />Clearly, <span class="math">\(P^{-1} = \begin{bmatrix} 1 &amp; -1 \\ -1 &amp; 2 \end{bmatrix}\)</span>.<br />Clearly, <span class="math">\(A^{1000} = \begin{bmatrix} 2 &amp; 1 \\ 1 &amp; 1 \end{bmatrix}\diag(2, 3)^{1000}\begin{bmatrix} 1 &amp; -1 \\ -1 &amp; 2 \end{bmatrix} = \begin{bmatrix} 2^{1001} - 3^{1000} &amp; -2^{1001} + 2 \cdot 3^{1000} \\ 2^{1000} - 3^{1000} &amp; -2^{1000} + 2 \cdot 3^{1000} \end{bmatrix}\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -69,7 +69,7 @@ The method of substitution is based on choosing a subexpression $u$, and then in
 
 This method works best when a **function and its derivative appear in the integrand**.
 
-This works with expressions of the form $\int f(x) \frac{\dee}{\dee x} f(x) \dee x$.
+This works with expressions of the form $\int f(x) \frac{\dee f}{\dee x} \dee x$.
 
 Let $u = f(x)$. Since $\frac{\dee u}{\dee x} = \frac{\dee u}{\dee x}$, $\dee u = \frac{\dee u}{\dee x} \dee x$ (multiply both sides by $\dee x$). This is possible because of infinismals, which work in wierd and wonderful ways. So $\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u$.
 
@@ -182,7 +182,7 @@ Simplify $\int_0^1 x^n (\ln x)^n \dee x$:
 
 > ;wip
 
-We often write the integration by parts formula in different forms: $\int a \dee b = uv - \int v \dee u$, or $\int f'(x) g(x) \dee x = f(x) g(x) - \int f(x) g'(x) \dee x$.
+We often write the integration by parts formula in different forms: $\int a \dee b = ab - \int b \dee a$, or $\int f'(x) g(x) \dee x = f(x) g(x) - \int f(x) g'(x) \dee x$.
 
 An interesting trick is that we can use integration by parts to integrate anything, since everything is a product of itself and 1.
 
@@ -211,8 +211,6 @@ The integration by parts rule is also written as $\int v \dee u = uv - \int u \d
 > Clearly, $\dee a = \frac{\dee a}{\dee x} \dee x$ and $\dee b = \frac{\dee b}{\dee x} \dee x$.  
 > We know that $\int (\frac{\dee}{\dee x} a(x)) b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x) \dee x$ and so $\int \frac{\dee a}{\dee x} b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee b}{\dee x} \dee x$.  
 > So $\int b(x) \dee a = a(x) b(x) - \int a(x) \dee b$.  
-
-;wip: work on assignment 1 in math138 and 136
 
 We can also write it as $\int f(x) g(x) \dee x = \int f(x) \dee x g(x) - \int \int f(x) \dee x \frac{\dee g}{\dee x} \dee x$.
 
@@ -261,17 +259,17 @@ We usually need this method when we have a square root of a quadratic expression
 
 Common substitutions:
 
-* Use $1 - \sin^2 = \cos^2 \theta$ to turn $\sqrt{1 - x^2}$ into $\cos \theta$ via $x = \sin \theta$.
-* Use $1 + \tan^2 \theta = \sec^2 \theta$ to turn $\sqrt{1 + x^2}$ into $\sec \theta$ via $x = \tan \theta$.
-* Use $\sec^2 \theta - 1 = \tan^2 \theta$ to turn $\sqrt{x^2 - 1}$ into $\tan \theta$ via $x = \sec \theta$.
+* Use $1 - \sin^2 \theta = \cos^2 \theta$ to use $\sqrt{1 - x^2} = \sqrt{\cos^2 \theta} = \cos \theta$ via $x = \sin \theta$.
+* Use $1 + \tan^2 \theta = \sec^2 \theta$ to use $\sqrt{1 + x^2} = \sqrt{\sec^2 \theta} = \sec \theta$ via $x = \tan \theta$.
+* Use $\sec^2 \theta - 1 = \tan^2 \theta$ to use $\sqrt{x^2 - 1} = \sqrt{\tan^2 \theta} = \tan \theta$ via $x = \sec \theta$.
 
 Using this technique, we can replace $\sqrt{\pm a^2 \pm x^2}$ with trigonometric functions, and then use trigonometric identities on them. Afterwards, we might simplify by changing the trigonometric functions back into square roots.
 
 Derivatives:
 
-* $\cos' \theta = -\sin \theta$ ($-\frac{\pi}{2} \le \theta < \frac{\pi}{2}$)
-* $\sin' \theta = \cos \theta$ ($-\frac{\pi}{2} \le \theta < \frac{\pi}{2}$)
-* $\tan' \theta = \sec^2 x$ ($0 \le \theta < \frac{\pi}{2}$)
+* $\cos' \theta = -\sin \theta$ where $-\frac{\pi}{2} \le \theta < \frac{\pi}{2}$
+* $\sin' \theta = \cos \theta$ where $-\frac{\pi}{2} \le \theta < \frac{\pi}{2}$
+* $\tan' \theta = \sec^2 \theta$ where $0 \le \theta < \frac{\pi}{2}$
 
 Consider $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x$:
 
@@ -304,7 +302,7 @@ Evaluate $\int \frac{x}{\sqrt{3 - 2x - x^2}}$:
            2 / |
             /  | $u$
            /___|
-   $\theta$ $\sqrt{4 - u^2}$
+    $\theta$ $\sqrt{4 - u^2}$
 
 > We want to use trigonometric substitution to solve this, but it isn't in the right form.  
 > We want to write $3 - 2x - x^2$ in the form of $a^2 + (x + b)^2$ (completing the square).  
@@ -402,7 +400,7 @@ Consider $\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x$:
 
 Completing the square: we want the resulting polynomial to have repeated roots. In the quadratic formula, this is when the discriminant $b^2 - 4ac = 0$, so $c = \frac{b^2}{4a}$.
 
-When we have an irreducible quadratic, we always get an $\arctan$ and a $\ln \abs{ax^2 + bx + c}$.
+When we have an irreducible quadratic, we always get an $\arctan$ and a $\ln \abs{ax^2 + bx + c}$. ;wip: do we always need the arctan? maybe we can subsitutute back to get a knarly expression with sqrt
 
 # 20/1/14
 
@@ -468,15 +466,13 @@ Find the volume of the solid represented by rotating $f(x)$ about the x-axis:
 
 # 22/1/14
 
-;wip: figure out how to find the length of a curve in 2D
-
 The rotation method works whenever we can find the area function for a given slice along a certain axis.
 
 Here, $\Delta V = A(x) \Delta x$, and then we add up all these tiny volumes to get the total volume.
 
 This method is called the **method of disks**, because we are integrating the volume of a lot of small disks along the axis of rotation.
 
-There is another way to approximate the area and have it converge into an exact value. We can estimate the volume of solids of rotation by integrating the volume of a lot of nested cylinders perpendicular to the axis of rotation - this is the **method of shells**.
+There is another way to approximate the area and have it converge into an exact value. We can estimate the volume of solids of rotation by integrating the volume of a lot of nested cylinders lying along the axis of rotation - this is the **method of shells**.
 
 Consider a hollow cylinder of thickness $\dee x$ with inner radius $x$ and height $h(x)$. If we cut it and unroll it, then it becomes very close to a cuboid of dimensions $2\pi x$ by $h(x)$ by $\dee x$. In other words, we assume the inner circumference is almost the same as the outer circumference, since $\dee x$ is so small.
 
@@ -576,17 +572,20 @@ Given functions $f(x), g(x)$ such that $f(x) \ge g(x) \ge 0$ for $x \ge a$, if $
 
 The contrapositive is also useful in that if $\int_a^b g(x) \dee x$ diverges, then $\int_a^b f(x) \dee x$ also diverges.
 
-Prove that, given that $\int_1^\infty e^{-x} \dee x$ converges, $\int_1^\infty \frac{1}{x^P} \dee x$ converges if and only if $P > 1$
+Prove that $\int_1^\infty \frac{1}{x^P} \dee x$ converges if and only if $P > 1$
 
-> Assume $P > 1$.   
-> ;wip
+> Clearly, if $P = 1$, $\int_1^\infty \frac{1}{x^P} \dee x = \evalat{\ln x}_1^\infty$, which is $\infty$, so the integral diverges.  
+> Clearly, $\int_1^\infty \frac{1}{x^P} \dee x = \evalat{\frac{x^{1 - P}}{1 - P}}_1^\infty = \frac{\infty^{1 - P}}{1 - P} - \frac{1}{1 - P}$ if $P \ne 1$.  
+> Clearly, if $P < 1$, $\infty^{1 - P} = \infty$, so the integral diverges.  
+> Clearly, if $P > 1$, $\infty^{1 - P} = 0$, so the integral converges.  
+> So the integral converges to $\frac{1}{P - 1}$ for $P > 1$.  
 
 Interestingly, $e^{-x^2}$ doesn't have an antiderivative. Figure out if $\int_0^\infty e^{-x^2} \dee x$ converges or diverges:
 
 > Clearly, $0 \le e^{-x^2} \le e^{-x}$ for $x \ge 1$.  
 > Since $\int_1^\infty e^{-x} \dee x$ converges, $\int_1^\infty e^{-x^2} \dee x$ converges, by the comparison theorem.  
-> So $\int_0^\infty e^{-x^2} \dee x = \int_0^1 e^{-x^2} \dee x + \int_1^\infty e^{-x^2} \dee x$.  
-> Clearly, $e^{-x^2}$ does not diverge for all $x \in [0, 1]$. So $\int_0^1 e^{-x^2} \dee x$.  
+> Clearly, $\int_0^\infty e^{-x^2} \dee x = \int_0^1 e^{-x^2} \dee x + \int_1^\infty e^{-x^2} \dee x$.  
+> Clearly, $e^{-x^2}$ does not diverge for all $x \in [0, 1]$. So $\int_0^1 e^{-x^2} \dee x$ converges.  
 > Since $\int_0^1 e^{-x^2} \dee x$ and $\int_1^\infty e^{-x^2} \dee x$ converge, $\int_0^\infty e^{-x^2} \dee x$ converges.  
 
 # 29/1/14
@@ -597,7 +596,7 @@ Consider $\int_1^\infty \frac{1 + e^{-x}}{x} \dee x$:
 > So we do not need to worry about the integrand diverging.  
 > Clearly, $\frac{1 + e^{-x}}{x} \le \frac{2}{x}$.  
 > Clearly, $\frac{2}{x}$ diverges.  
-> However, we can't say anything about the original function using the comparison theorem, since it could still either coonverge or diverge.  
+> However, we can't say anything about the original function using the comparison theorem, since it could still either converge or diverge.  
 > Instead, we look for divergence. Clearly, $\frac{1}{x} \le \frac{1 + e^{-x}}{x}$.  
 > Since $\int_1^\infty \frac{1}{x} \dee x$ diverges, $\int_1^\infty \frac{1 + e^{-x}}{x} \dee x$ also diverges.  
 
@@ -652,7 +651,7 @@ A tank holds 80L of water at time $t = 0$. A salt solution of 0.25 kg/L flows in
 > So the liquid level is $80 + \int \frac{\dee}{\dee x} \text{liquid level} \dee t = 80 - 4t$.  
 > Clearly, $\text{salt concentration} = \frac{\text{mass of salt}}{\text{volume of tank}} = \frac{x(t)}{80 - 4t}$.  
 > The sink is $\text{salt concentration} \cdot \text{outflow rate} = \frac{x(t)}{80 - 4t} \cdot 12 \text{kg/L} = \frac{3x(t)}{20 - t}$.  
-> So $\frac{\dee}{\dee x} x(t) = 2 - \frac{3x(t)}{20 - t}$.  
+> So $\frac{\dee}{\dee t} x(t) = 2 - \frac{3x(t)}{20 - t}$.  
 > Note that the tank is empty when $t = 20$, when the outflow rate is undefined.  
 
 There are many things we can say about the function even without solving it. These are called **qualitiative analyses**.
@@ -686,12 +685,14 @@ Consider $\frac{\dee y}{\dee x} = 1 - y^2$:
 
 Differential equations of the form $\frac{\dee y}{\dee x} = f(y)$ are called autonomous differential equations. Note that they do not depend on the value of $x$.
 
-The equilibria of an autonomous differential equation are those $y$ values for which $\frac{\dee y}{\dee x} = g(y) = 0$.
+The equilibria of an autonomous differential equation are those $y$ values for which $\frac{\dee y}{\dee x} = f(y) = 0$.
 
-An equilibrium $y = k$ is stable if and only if $f'(k) < 0$ - if the change in the slope at the location is negative. Otherwise, it is unstable.
+An equilibrium $y = k$ is stable if and only if $f'(k) < 0$ - if the change in the slope at the location is negative. Otherwise, it is unstable. This is because a negative value for the derivative means a negative feedback loop, which makes the function settle toward the equilibrium. ;wip: what? why? shouldn't the derivative be 0 at $y = k$?
 
 Solving Differential Equations
 ------------------------------
+
+### Estimation
 
 Consider $\frac{\dee y}{\dee x} = y - x$, with $y(0) = 2$.
 
@@ -774,7 +775,7 @@ x \frac{\dee x}{\dee t} &= \frac{1}{(1 + t)^2} \\
 x \dee x &= \frac{1}{(1 + t)^2} \dee t \\
 \int x \dee x &= \int \frac{1}{(1 + t)^2} \dee t \\
 \frac{x^2}{2} &= -\frac{1}{1 + t} + c \\
-x &= 0, t = 0 \\
+t &= 0; x(0) = 0 \\
 \frac{0^2}{2} &= -\frac{1}{1 + 0} + c \\
 c &= 1 \\
 \frac{x^2}{2} &= -\frac{1}{1 + t} + 1 \\
@@ -868,7 +869,7 @@ Linear Differential Equations
 
 **Linear differential equations** are those of the form $\frac{\dee y}{\dee x} = A(x) y + B(x), A(x) \ne B(x)$. It is called linear because the degree of $y$ on the right side is 1.
 
-If $A(x) = B(x)$, then the equation is separable since $A(x)y + B(x) = (u + 1)A(x)$.
+If $A(x) = B(x)$, then the equation is separable since $A(x)y + B(x) = (y + 1)A(x)$, so it would be simpler to solve it that way, but the following technique would also work.
 
 We can solve these by splitting the equation into two separable equations and then solving each of those. This technique is developed by Euler.
 
@@ -948,7 +949,7 @@ Sequences, Series, Taylor Polynomials
 
 Given a function $f(x)$, we can often find a polynomial $P(x)$ that has the same first $N$ derivatives at a point $x = a$.
 
-For example, $f(x) = \sin x$ and $P(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!}$ have the same first 7 derivatives - $\frac{\dee^i f}{\dee x^i} = \frac{\dee^i P}{\dee x^i}$ for $1 \le i \le 7$ at $x = 0$.
+For example, $f(x) = \sin x$ and $P(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!}$ have the same first 7 derivatives at $x = 0$. In other words, $\frac{\dee^i f}{\dee x^i} = \frac{\dee^i P}{\dee x^i}$ for $1 \le i \le 7$ at $x = 0$.
 
 Another example is $f(x) = \frac{1}{1 - x}$ and $P(x) = 1 + x + x^2 + x^3 + \ldots + x^N$. The first $N$ derivates at $x = 0$ are always equal, and it works for any arbitrary $N$.
 
@@ -959,8 +960,6 @@ The most important use of this is approximation of very difficult functions. Thi
 What kinds of functions does this work for?
 
 In the limit $N \to \infty$, does $f(x) = P(x) = \lim_{N \to \infty} \sum_{n = 0}^N \frac{f^{(n)}(a)}{n!}(x - a)^n$ for all $x$? Does the limit even exist?
-
-Consider $\arctan x = \int_0^x \frac{1}{1 + t^2} \dee t$. If we assume that $\frac{1}{1 - x} = 1 + x + x^2 + x^3 + \ldots + x^N$ as shown earlier, we can substitute $t^2$ for $x$ to get.
 
 Sequences
 ----------
@@ -979,7 +978,9 @@ This is similar to the definition of limits at infinity. For example, the sequen
 
 Use the definition of the limit to prove that the limit of $a_n = \frac{n}{1 + n}$ is 1:
 
-> ;wip
+> Let $\epsilon \in \mb{R}$. Construct $k = \frac{1}{\epsilon} - 1$.  
+> Assume $n > k$. Then $n > \frac{1}{\epsilon} - 1$ and $\frac{1}{1 + n} < \epsilon$, so $\abs{\frac{n}{1 + n} - 1} < \epsilon$.  
+> So by definition, $\lim_{n \to \infty} a_n = 1$.  
 
 If $a_n$ and $L$ lie in the domain of a continuous function $f$ and $a_n \to L$ as $n \to \infty$, then $\lim_{n \to \infty} f(a_n) = f(L)$. In other words, the limit of a sequence is the same as the limit of its corresponding function at infinity.
 
@@ -1019,7 +1020,7 @@ Proof:
 > Let $p$ be the smallest possible upper bound on $a_n$.  
 > As an aside, $p$ is the limit of the sequence - any number less than this is not an upper bound, and any number greater than this can be smaller while still being an upper bound.  
 > Let $\epsilon > 0$.  
-> Clearly, $p - \epsilon < p$, so $\exists k, p - \epsilon < a_k$, since any value less than the .  
+> Clearly, $p - \epsilon < p$, so $\exists k, p - \epsilon < a_k$, since any value less than the tight upper bound must be exceeded by some element in the sequence.  
 > Assume $n > k$. Clearly, $a_k \le a_n$ (since the sequence is monotonically increasing).  
 > Clearly, $a_n \le p < p + \epsilon$.  
 > So $p - \epsilon < a_n < p + \epsilon$ and $-\epsilon < a_n - p < \epsilon$.  
@@ -1071,7 +1072,7 @@ For now, $a_n$ is a constant, which can depend on $n$. Eventually, we want to be
 
 If $N$ is finite, then $S_N$ is known as a **partial sum**.
 
-We analyze series by analyzing the sequence of the sequence values: $\sum_{n = 0}^0 a_n, \sum_{n = 0}^1 a_n, \sum_{n = 0}^2 a_n, \ldots$.
+We analyze series by analyzing the sequence of the series values: $\sum_{n = 0}^0 a_n, \sum_{n = 0}^1 a_n, \sum_{n = 0}^2 a_n, \ldots$.
 
 So just as we take the limit of a sequence, we can take the limit of a series with $\lim_{N \to \infty} \sum_{n = 0}^N a_n$. This is the relation between sequences and series.
 
@@ -1103,14 +1104,14 @@ If $x = -1$, then $\lim_{N \to \infty} \sum_{n = 0}^N (-1)^n = 1 - 1 + 1 - 1 + \
 
 Clearly, if $x > 1$ or $x < -1$, the value goes to positive or negative infinity, and the sequence diverges.
 
-Therefore, the geometric series converges only for $-1 < x < 1$, since if this is the case, $\lim_{N \to \infty} x^N = 0$ and $\lim_{N \to \infty} S_N = \frac{1}{1 - x}$.
+Therefore, the geometric series converges only for $-1 < x < 1$ ($\abs{x} < 1$), since if this is the case, $\lim_{N \to \infty} x^N = 0$ and $\lim_{N \to \infty} S_N = \frac{1}{1 - x}$.
 
 Does $\sum_{k = 1}^\infty 3^{2k}5^{1 - k}$ converge?
 
 > Clearly, $\sum_{k = 1}^\infty 3^{2k}5^{1 - k} = \sum_{k = 1}^\infty 9^k5^{1 - k} = 5\sum_{k = 1}^\infty 9^k5^{-k} = 5\sum_{k = 1}^\infty \frac{9^k}{5^k} = 5\sum_{k = 1}^\infty \left(\frac{9}{5}\right)^k$.  
 > Since $\frac{9}{5} \ge 1$, the geometric sequence diverges as the limit of $\left(\frac{9}{5}\right)^k$ goes to infinity.   
 
-Does $3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2$ converge?
+Does $3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2$ converge? ;wip: what was the original question again? this doesn't seem right
 
 > Clearly, $3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2 = 3 \sum_{n = 0}^\infty \left(-\frac{x}{2}\right)^n$.  
 > Clearly, in order to converge, $-1 \le -\frac{x}{2} \le -1$, or $-1 \le \frac{x}{2} \le 1$.  
@@ -1128,14 +1129,14 @@ Formally, if $\lim_{n \to \infty} \abs{a_n} \ne 0$, then the sequence does not c
 
 This is known as the **simple limit test** for series.
 
-Our convergence tests can decide whether a series covnerges or not, but do not provide information about what it converges to.
+Our convergence tests can decide whether a series converges or not, but do not provide information about what it converges to.
 
-The sum of two convergent series is also convergent - $\sum a_n + \sum b_n = \sum (a_n + b_n)$ if $\sum a_n$ and $\sum b_n$ are both convergent. However, this is not always true for divergent series. For example, $\sum_{n = 1}^\infty (-1)^n$ and $\sum_{n = 1}^\infty (-1)^{n + 1}$ are both divergent, but $\sum_{n = 1}^\infty {(-1)^n + (-1)^{n + 1}} = 0$.
+The sum of two convergent series is also convergent - $\sum a_n + \sum b_n = \sum (a_n + b_n)$ if $\sum a_n$ and $\sum b_n$ are both convergent. However, the sum of two divergent series is not necessarily always divergent. For example, $\sum_{n = 1}^\infty (-1)^n$ and $\sum_{n = 1}^\infty (-1)^{n + 1}$ are both divergent, but $\sum_{n = 1}^\infty {(-1)^n + (-1)^{n + 1}} = 0$.
 
 P-series
 --------
 
-A **P-series** is a series of the form $\sum_{n = 1}^\infty \frac{1}{n^P}$m where $P \in \mb{R}$.
+A **P-series** is a series of the form $\sum_{n = 1}^\infty \frac{1}{n^P}$ where $P \in \mb{R}$.
 
 ### Convergence
 
@@ -1155,7 +1156,7 @@ So $\sum_{n = 1}^\infty \frac{1}{n^P}$ converges if and only if $P > 1$.
 
 ### Considerations
 
-The series $\sum_1^\infty \frac{1}{n}$ is called the **harmonic series**. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where $P = 1$. This is a useful series because $\lim_{n \to \infty} \frac{1}{n} = 0$, yet the series diverges, so this is an example of the simple convergence test not being useful.
+The series $\sum_1^\infty \frac{1}{n}$ is called the **harmonic series**. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where $P = 1$. This is a useful series because $\lim_{n \to \infty} \frac{1}{n} = 0$, yet the series diverges, so this is an example of the simple convergence test not giving a conclusive result.
 
 For example, a P-series where $P = 2$ is $\frac{\pi^2}{6}$. ;wip: how?
 
@@ -1174,7 +1175,7 @@ For example, for $\sum_{n = 0}^\infty \frac{1}{n^2}$, $f(n) = \frac{1}{n^2}$.
 
 Now we can develop the **integral test**.
 
-Given $f(n) = a_n$, if $f(n)$ is **continuous**, **positive**, and **decreasing** for all $n \ge 1$, then $\int_1^\infty f(n) \dee n$ converges if and only if $\sum_{n = 1}^\infty f(n)$ converges.
+Given $f(n) = a_n$, if $f(n)$ is **continuous**, **positive**, and **decreasing** for all $n \ge 1$, then $\int_1^\infty f(n) \dee n$ converges if and only if $\sum_{n = 1}^\infty a_n$ converges.
 
 ### Error Estimation
 
@@ -1221,7 +1222,7 @@ This is easily proved via contradiction or similar.
 
 Note that if $\rho = 0$ or $\rho = \infty$, then we cannot say anything about whether they converge or not, and we need to pick a better comparison.
 
-Prove that $\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}$:
+Prove that $\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}$ converges:
 
 > Clearly, $\frac{\abs{\sin n}}{\sqrt{n + n^3}} \le \frac{1}{\sqrt{n + n^3}} < \frac{1}{\sqrt{n^3}} = \frac{1}{n^\frac{3}{2}}$.  
 > Since this is a P-series where $P = \frac{3}{2}$, $\sum_{n = 1}^\infty \frac{1}{n^\frac{3}{2}}$ converges.  
@@ -1235,9 +1236,9 @@ For example, $\sum_1^\infty \frac{\sqrt{n}}{n^2 + 2} < \sum_1^\infty \frac{\sqrt
 
 For example, $\sum_1^\infty \frac{1}{2^nn} \le \sum_1^\infty \frac{1}{2^n} = \sum_1^\infty \left(\frac{1}{2}\right)^n$, which converges since it is a geometric series with $x = \frac{1}{2}$.
 
-Does $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}$ exist?
+Does $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}}$ exist?
 
-> Clearly, $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} < \sum_1^\infty \frac{1}{n}$.  
+> Clearly, $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} < \sum_1^\infty \frac{1}{n}$.  
 > Using the limit comparison test, $\rho = \lim_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1$.  
 > Since $0 < \rho < \infty$, and $\sum_1^\infty \frac{1}{n}$ diverges, then $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}$ also diverges.  
 
@@ -1269,7 +1270,7 @@ Alternating series are useful to study because they have several useful properti
 
 The remainder/error after $N$ terms is easy to estimate. Clearly, $\abs{R_N} = \abs{\sum^\infty (-1)^n p_n - \sum^N (-1)^n p_n}$. So $\abs{R_N} \le p_{N + 1}$.
 
-This is true because the terms of the series keep bouncing back and forth across the limit, so the remainder is always less than or equal to the value of each term.
+This is true because the terms of the series keep bouncing back and forth across the limit, so the remainder is always bounded by the value of the next term.
 
 For example, $\sum_1^\infty (-1)^{n + 1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \ldots = \ln 2$. We can estimate the error with $\abs{R_N} = \frac{1}{N + 1}$.
 
@@ -1368,10 +1369,10 @@ Let $\sum a_n$ be a series.
 
 Prove whether the following converge or diverge:
 
-* $\sum_{n = 1}^\infty \frac{n^2 + 7n}{\sqrt{n^5 + 4n^3 - 2} \le \frac{1}{\sqrt{n}}$.
+* $\sum_{n = 1}^\infty \frac{n^2 + 7n}{\sqrt{n^5 + 4n^3 - 2}} \le \frac{1}{\sqrt{n}}$.
 * $\sum_{n = 1}^\infty \frac{n + 5}{5^n}$
 * $\sum_{n = 1}^\infty n^2 e^{-n}$
-* $\sum_{n = 1}^\infty \frac{1}{(\ln n)^{\ln n}$
+* $\sum_{n = 1}^\infty \frac{1}{(\ln n)^{\ln n}}$
 * $\sum_{n = 1}^\infty \frac{e^\frac{1}{n}}{n^2}$
 
 ;wip
@@ -1570,7 +1571,7 @@ We can actually estimate the error in $P_{N, x_0}(x)$, even without knowing much
 
 If $f^{(n + 1)}(x)$ is continuous on an interval $\mb{I}$ such that $x_0 \in \mb{I}$, then $\forall x \in \mb{I}, \exists \min(x_0, x) < c < \max(x_0, x), f(x) - P_{N, x_0}(x) = R_N(x) = \frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}$.
 
-In other words, there exists a value $c$ between $x$ and $x_0$ exclusive such that the error is $\frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}$ - the $N + 1$th term evaluated at some point in the interval.
+In other words, there exists a value $c$ between $x$ and $x_0$ exclusive such that the error is $\frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}$ - the $N + 1$th term evaluated with a certain value of the $N + 1$th derivative.
 
 This can be proved using the Intermediate Value Theorem, but it is a messy proof.
 
@@ -1595,7 +1596,7 @@ We almost always want to minimise the error. To do this, we should keep $x$ as c
 
 Estimate the error in the Taylor polynomial for $e^x$ about $x_0 = 0$ after $N$ terms for $x \in [-1, 1]$, and determine the number of terms before the error is less than 0.000005:
 
-> Clearly, the error is $\abs{R_N(x)} = \abs{e^x - \sum_{n = 0}^N \frac{x^n}{n!}$.  
+> Clearly, the error is $\abs{R_N(x)} = \abs{e^x - \sum_{n = 0}^N \frac{x^n}{n!}}$.  
 > We want to find $M$ such that $\abs{f^{(N + 1)}(x)} \le M$.  
 > Clearly, $f^{(N + 1)}(x) = e^x$, and the largest possible value occurs at $x = 1$, so $\abs{f^{(N + 1)}(x)} \le e^1$, so $M \ge e$.  
 > Then by the Taylor Remainder Theorem, $\abs{R_N(x)} \le e\frac{\abs{x}^{N + 1}}{(N + 1)!}$. We can use any $M \ge e$ we want to simplify our calculations, but larger $M$ means less useful error bounds.  
@@ -1611,13 +1612,15 @@ A **Maclaurin series** is a Taylor series where $x_0 = 0$ - a Taylor series cent
 
 Clearly, $\sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n = \frac{f^{(0)}(x_0)}{0!}(x - x_0)^0 + \ldots + \frac{f^{(N)}(x_0)}{N!}(x - x_0)^N + R_N(x)$ for some finite $N$.
 
-Let $\mb{I} = [a, b]$ such that $x_0 \in \mb{I}$, within the interval of convergence. CLearly, Taylor series are always continuous.
+Let $\mb{I} = [a, b]$ such that $x_0 \in \mb{I}$, within the interval of convergence. Clearly, Taylor series are always continuous.
 
-By the Taylor remainder theorem, $\abs{R_{N, x_0}} = \frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}$. Clearly, $\frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}$ is a scalar multiple of $\frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}$.
+By the Taylor remainder theorem, $\abs{R_{N, x_0}} = \frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}$ for some $c$. Clearly, $\frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}$ is a scalar multiple of $\frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}$.
 
 So $R_N(x) = O(1) \frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}$. In other words, we can write the remainder as a scalar multiple of the next term.
 
 So we can actually write the series as $\frac{f^{(0)}(x_0)}{0!}(x - x_0)^0 + \ldots + \frac{f^{(N)}(x_0)}{N!}(x - x_0)^N + O(1) \frac{f^{(N + 1)}(x_0)}{(N + 1)!}(x - x_0)^{N + 1}$.
+
+For example, $\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + O(1)\frac{x^9}{9!}$.
 
 Operations on Taylor Series
 ---------------------------
@@ -1631,11 +1634,13 @@ If we take a limit as $x \to x_0$, then the coefficients of a Taylor series alre
 Consider $\lim_{x \to 0} \frac{\sin x}{x}$:
 
 > We could find this geometrically, using l'Hospital's rule, or using infinite series.  
-> Clearly, $\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{x - \frac{x^3}{3!} + \frac{x^5}{5!} + M\frac{x^7}{7!}}}{x} = \lim_{x \to 0} 1 - \frac{x^2}{3!} + \frac{x^4}{5!} + M\frac{x^6}{7!}} = 1 - 0 + 0 + M0 = 1$.  
+> Clearly, $\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{x - \frac{x^3}{3!} + \frac{x^5}{5!} + M\frac{x^7}{7!}}{x} = \lim_{x \to 0} 1 - \frac{x^2}{3!} + \frac{x^4}{5!} + M\frac{x^6}{7!} = 1 - 0 + 0 + M0 = 1$.  
 
 Evaluate $\lim_{x \to 0} \frac{e^{\sin x} - 1}{x}$:
 
 > Let $u = \sin x$. Clearly, $\lim_{x \to 0} \frac{e^{\sin x} - 1}{x} = \lim_{x \to 0} \frac{e^u - 1}{x} = \lim_{x \to 0} \frac{(1 + u + \frac{u^2}{2!} + \ldots) - 1}{x} = \lim_{x \to 0} \frac{\sin x + \frac{\sin^2 x}{2!} + \ldots}{x} = \lim_{x \to 0} \frac{\sin x}{x}\left(1 + \frac{\sin x}{2!} + \ldots\right) = \lim_{x \to 0} \frac{\sin x}{x} \lim_{x \to 0} \left(1 + \frac{\sin x}{2!} + \ldots\right) = 1$.  
+
+However, it is usually faster and easier to just use l'Hospital's rule.
 
 # 26/3/14
 
@@ -1724,6 +1729,10 @@ The parameterization of a curve is not unique, just like normal curves. Every pa
 
 For example, consider $\vec{r}(t) = (a \cos t, b \sin t)$. This is an ellipse where $a > b$ stretches it horiontally and $b > a$ stretches it vertically. We can rewrite it as $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ to plot it on a Cartesian plane.
 
+We plot parametric curves by solving for $t$ in $x = x(t)$, so $t = x^{-1}(x)$, then subsituting into $y(t)$ to get $y = y(x^{-1}(x))$, which is a non-parametric function we can plot more easily.
+
+Alternatively, we would have to plot both $y = y(t)$ and $x = x(t)$, and use these graphs to plot the points on $\vec{r}(t) = (x(t), y(t))$.
+
 ### Hyperbolic Functions
 
 The functions $\vec{r} = (a \cos t, b \sin t)$ are called **circular/elliptical trigonometric fucntions**.
@@ -1775,3 +1784,58 @@ For example, find the circumference of the circle $\vec{r}(t) = (a \cos t, a \si
 > Clearly, the length is $\int_a^b \magn{\frac{\dee \vec{r}}{\dee t}} \dee t = \int_0^{4 \pi} \sqrt{\left(\frac{\dee}{\dee t} a \cos t\right)^2 + \left(\frac{\dee}{\dee t} a \sin t\right)^2} \dee t$ ;wip
 
 For example, $\vec{r}(t) = (a \cos t, a \sin t, t)$ is a spiral upwards.
+
+# 4/4/14
+
+Find the arc length of $\vec{r}(t) = (a \cos t, a \sin t, t)$ for $t \in [0, 4 \pi]$:
+
+> This is a spiral going upwards.  
+> Clearly, $\frac{\dee \vec{r}}{\dee t} = (-a \sin t, a \cos t, 1)$.  
+> Clearly, the arc length is $\int_0^{4 \pi} \magn{\frac{\dee \vec{r}}{\dee t}} \dee t = \int_0^{4 \pi} \sqrt{a^2 \sin^2 t + a^2 \cos^2 t + 1^2} \dee t = \int_0^{4 \pi} \sqrt{a^2 + 1} \dee t$.  
+> So the arc length is $4 \pi \sqrt{a^2 + 1}$.  
+
+Find the arc length of the cycloid function $\vec{r}(t) = (at - a \sin t, a - a \cos t)$ for $t \in [0, 2 \pi]$:
+
+> Clearly, $\frac{\dee \vec{r}}{\dee t} = (a - a \cos t, a \sin t)$ and $\magn{\frac{\dee \vec{r}}{\dee t}}$.  
+> Clearly, $\magn{\frac{\dee \vec{r}}{\dee t}} = \sqrt{a^2 - 2a^2 \cos t + a^2 \cos^2 t + a^2 \sin t} = \sqrt{2a^2 - 2a^2 \cos t} = a\sqrt{2 - 2 \cos t} = a\sqrt{4\left(\frac{1}{2} - \frac{1}{2} \cos t\right)} = 2a\sqrt{\frac{1}{2} - \frac{1}{2} \cos t}$.  
+> Recall the half angle formula $\sin^2 t = \frac{1}{2} - \frac{1}{2} \cos 2t$.  
+> Clearly, $2a\sqrt{\frac{1}{2} - \frac{1}{2} \cos t} = 2a\sqrt{\sin^2 \frac{t}{2}} = 2a\abs{\sin \frac{t}{2}}$.  
+> Since we are working in a range where $\frac{t}{2} \in [0, \pi]$, $\abs{\sin \frac{t}{2}} = \sin \frac{t}{2}$.  
+> Clearly, $\int_0^{2\pi} \magn{\frac{\dee \vec{r}}{\dee t}} \dee t = 2a\int_0^{2\pi} \sin \frac{t}{2} \dee t = 2a\evalat{2\cos \frac{t}{2}}_0^{2\pi} = 8a$.  
+> So the arc length is $8a$.  
+
+### Slope
+
+The **slope of a tangent vector** is $\frac{\dee y}{\dee x}$. We can find it using $\frac{\dee y}{\dee x} = \frac{\frac{\dee y}{\dee t}}{\frac{\dee x}{\dee t}}$.
+
+Find the slope of $\vec{r}(t) = (\cos t, \sin t)$:
+
+> Clearly, $\frac{\dee y}{\dee x} = \frac{-\sin t}{\cos t} = -\tan t$.  
+> This is where the $\tan$ function gets its name - it is the slope of the tangent of a circle at any given angle.  
+
+Consider $\frac{\dee^2 y}{\dee x^2}$. We might think that $\frac{\dee^2 y}{\dee x^2} = \frac{\frac{\dee^2 y}{\dee t^2}}{\frac{\dee^2 x}{\dee t^2}}$, but this is incorrect.
+
+In fact, $\frac{\dee^2 y}{\dee x^2} = \frac{\dee}{\dee x} \frac{\dee y}{\dee x} = \frac{\frac{\dee}{\dee t} \frac{\dee y}{\dee x}}{\frac{\dee x}{\dee t}} = \frac{\frac{\dee}{\dee t} \frac{\dee y}{\dee x}}{\frac{\dee x}{\dee t}}$.
+
+### Area
+
+The area under a curve of a function is given by $y = F(x)$ is $A = \int_{x_1}^{x_2} F(x) \dee x$.
+
+For parametric curves, we have $x = x(t)$ and $y = y(t)$. Then there exists $y = F(x)$ - a function of $x$ equivalent to $y$, and $y(t) = F(x)$.
+
+Then $x_1 = x(t_1)$ and $x_2 = x(t_2)$, and $\dee x = \frac{\dee x}{\dee t} \dee t$.
+
+So $A = \int_{t_1}^{t_2} F(x) \dee x = \int_{t_1}^{t_2} y(t) \dee x = \int_{t_1}^{t_2} y(t) \frac{\dee x}{\dee t} \dee t$.
+
+This allows us to find the area under a curve.
+
+;wip: I finally get $u$ substitution - it was inconsistent because sometimes u was a function of u, and sometimes x is a function of u.
+
+;wip: is the limit test adding 1 to the exponent, or is it the next term when we have things like $x^{2n}$? wikipedia says the latter but in class it was the former
+
+Find the area under the cycloid curve $\vec{r}(t) = (at - a \sin t, a - a \cos t)$ for $t \in [0, 2 \pi]$:
+
+> Clearly, $A = \int_0^{2 \pi} (a - a \cos t) \frac{\dee}{\dee t} (at - a \sin t) \dee t = \int_0^{2 \pi} (a - a \cos t)(a - a \cos t) \dee t = 2 \pi a^2 + \int_0^{2 \pi} -2a^2 \cos t \dee t + \int_0^{2 \pi} + a^2 \cos^2 t \dee t = 3 \pi a^2$.  
+> So the cycloid curve has an area of $3 \pi a^2$ units.  
+
+To find the value of an infinite series, we take a known series, then apply transformations to it until it is the function we need.
