@@ -1085,7 +1085,7 @@ As a result, based on the information encoded, we must constrain our manipulatio
 
 ### Numbers
 
-Numbers are the most common representations used for numbers.
+Numbers are the most common representations used for values.
 
 We use numbers to represent quantities, ratios, changes, magnitudes, orderings, etc.
 
@@ -1138,7 +1138,7 @@ Rankings are given based on some system of measurement, and the properties of th
 
 ### Metrics
 
-In many cases, the measurement system only measures something indirectly, like how IQ tests measure the ability to asnwer certain questions as a metric for intelligence in general.
+In many cases, the measurement system only measures something indirectly, like how IQ tests measure the ability to answer certain questions as a metric for intelligence in general.
 
 **Pseudo-precision** is when the number is represented in a form that makes it seem like it has more precision than it does. For example, one might claim that pi is approximately equal to 4.03. This number only has 1 significant digit, but it is presented like it has 3.
 
@@ -1186,6 +1186,8 @@ For example, if attending class is correlated with high grades, then given stude
 **Causation** is when one thing causes another thing. Where correlation can be used to make predictions in some circumstances, causation allows predictions to be made in a much larger set of circumstances, and even predict what will happen when we modify other variables.
 
 For example, knowing there is a correlation between smoking and lung cancer is good for predicting whether someone will have lung cancer or a smoking habit, but not for preventing lung cancer. Knowing that smoking causes lung cancer allows us to prevent lung cancer by predicting that stopping smoking helps reduce the incidences of lung cancer.
+
+In other words, knowing smoking is correlated to lung cancer doesn't tell us that changing smoking will change lung cancer.
 
 ### Null Hyposthesis
 
@@ -1265,7 +1267,7 @@ Identities:
 
 Probability of drawing a red queen from a deck of cards given that the card drawn is red:
 
-> Clearly, $P(\text{red} \cap {queen}) = P(\text{red} \mid \text{queen}) \cdot P(\text{queen})$.  
+> Clearly, $P(\text{red} \cap \text{queen}) = P(\text{red} \mid \text{queen}) \cdot P(\text{queen})$.  
 > Since the card is a queen, $P(\text{queen}) = 1$ and $P(\text{red} \mid \text{queen}) \cdot P(\text{queen}) = P(\text{red}) = \frac{1}{2}$.  
 
 ### Gambler's Fallacy
@@ -1296,7 +1298,7 @@ This is fallacious because it is likely that in fact this is just natural variat
 
 When we see a number of extraordinary events happening, we tend to think that they are ordinary. However, they are not; this is just natural variations in the events.
 
-A related concept is the **regression effect**. Basically, if we pick a number between 1 and 100, and draw a 1 the first time, the next draw will be still be independent, yet the probability of a bigger number is 99%, and the probability of a nuber closer to the mean is 98% (since 100 is equally far from the mean).
+A related concept is the **regression effect**. Basically, if we pick a number between 1 and 100, and draw a 1 the first time, the next draw will be still be independent, yet the probability of a bigger number is 99%, and the probability of a number closer to the mean is 98% (since 100 is equally far from the mean).
 
 ### Simpson's Paradox
 
@@ -1438,7 +1440,7 @@ The **false consensus effect** is the tendency to believe that the **absence of 
 
 Society allows us to access information otherwise unavailable, but information might not flow perfectly - it can become corrupted, and there are other aims to communication that can lead to unreliable reasoning. Which social group we associate with will bias the information we have access to.
 
-For example, we might think that Harper is an excellent prime minister, but this likely reflects our friend group more than the view of all Canadians.
+For example, we might think that Harper is a highly respected prime minister, but this likely reflects our friend group more than the view of all Canadians.
 
 For efficiency reasons, humans interpret stories, arguments, and reports, and identify the "main points" rather than memorizing the whole thing. As a result, every reading of every article is relative to the reader's state of information, preferences, and world view.
 

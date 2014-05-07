@@ -64,7 +64,7 @@ Classical mechanics is physics before the 1900s. It describes the motion of macr
 
 We consider objects like point masses (particles), where the location of the particle is at the center of mass of the object.
 
-We derive the kinematic laws of conversation from this.
+We derive the kinematic laws of conservation from this.
 
 When we need to consider rotation, we assume the object is rigid - the particles that an object is made out of stay at a constant distance from each other and the object retains its shape.
 
@@ -472,7 +472,7 @@ In the imperial system, mass is measured using slugs, where 1 slug is $\frac{1 l
 Third Law of Motion
 -------------------
 
-All forces act on at least two forces. Therefore, if there is only one objectm there can be no forces.
+All forces act on at least two objects. Therefore, if there is only one object there can be no forces.
 
 When two objects interact, the force exerted by object 1 on object 2 is equal in magnitude but opposite in direction to the force exerted by object 2 on object 1.
 
@@ -655,6 +655,8 @@ The system below is known as **Atwood's machine**:
       |   |
       |   | <-- rope
      1kg 2kg
+
+The force on the axle of the pulley is the sum of the tensions on both sides of the rope. This is why pulleys provide a mechanical advantage.
 
 If the pulley has infinite mass, then it cannot rotate. As a result, the tension on both sides is as if the rope is anchored to the pulley. On the left, there is a tensional force of $1kg \vec{g}$, and on the right, $2kg \vec{g}$.
 
@@ -862,17 +864,17 @@ So $\Delta E_{universe} = \Delta E_{system} + \Delta E_{environment}$ and $\Delt
 Work
 ----
 
-A change in energy is known as **work**. We denote this as $W = \delta E$. So work has the same units as energy.
+A change in energy is known as **work**. We denote this as $W = \Delta E$. So work has the same units as energy.
 
 Work includes things like heat (thermal energy transfer across a boundary) and electromagnetic waves (transfer of electromagnetic energy). However, what we mean by work most of the time is **mechanical work**, which is a change in mechanical energy.
 
-The definition of mechanical work is $W = \vec{F} \cdot \delta \vec{x}$ - the dot product of the force applied to an object and the displacement of the object. This is also written as $F\delta x \cos \theta$, where $\theta$ is the angle between the directions of $\vec{F}$ and $\delta \vec{x}$. The **force must be constant** for this to make sense.
+The definition of mechanical work is $W = \vec{F} \cdot \Delta \vec{x}$ - the dot product of the force applied to an object and the displacement of the object. This is also written as $F\delta x \cos \theta$, where $\theta$ is the angle between the directions of $\vec{F}$ and $\delta \vec{x}$. The **force must be constant** for this to make sense.
 
 If $W$ is positive, it means emergu was put into the system. If it is negative, it means energy was taken out of the system.
 
 Assume the force applied is constant. Then $v_f^2 = v_i^2 + 2\vec{a} \cdot \Delta \vec{x}$ (kinematic equation 5). Solving, we get $\vec{a} \cdot \Delta \vec{x} = \frac{1}{2}(v_f^2 - v_i^2)$.
 
-So $W = \vec{F} \cdot \delta \vec{x} = m\vec{a} \cdot \Delta x = m\frac{1}{2}(v_f^2 - v_i^2) = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2$.
+So $W = \vec{F} \cdot \Delta \vec{x} = m\vec{a} \cdot \Delta x = m\frac{1}{2}(v_f^2 - v_i^2) = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2$.
 
 We therefore define kinetic energy as $E_k = \frac{1}{2}mv^2$.
 
@@ -912,7 +914,7 @@ Going back to the example of a box rolling down a frictionless bumpy ramp, we ca
 
 However, we can observe that the normal force is always perpendicular to the velocity of the box as slides down the ramp, so $\vec{N} \cdot \frac{\dee \vec{x}}{\dee t} = \vec{N} \cdot \dee \vec{x} = 0$. So $\int_{y_1}^{y_2} \vec{N} \cdot \dee \vec{x} = 0 = W_N$. In other words, the nromal force does no work on the object.
 
-So the only work done is by gravitational potential energy in the component of the direction of motion. The worl done by gravity is $W_g = \int_{y_1}^{y_2} m\vec{g} \cdot \dee \vec{y} = \int_{y_1}^{y_2} mg \cos \theta \dee y$.
+So the only work done is by gravitational potential energy in the component of the direction of motion. The work done by gravity is $W_g = \int_{y_1}^{y_2} m\vec{g} \cdot \dee \vec{y} = \int_{y_1}^{y_2} mg \cos \theta \dee y$.
 
 ### Frictional Forces
 
@@ -945,13 +947,13 @@ m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &= m\int_\vec{a}^\vec{b} \frac{
 \end{align}
 $$
 
-In short, the WKE theorem states that $W_{net} = \Delta W_K$ - that net work is equivalent to change in kinetic energy in a system.
+In short, the WKE theorem states that $W_{net} = W_K$ - that net work is equivalent to change in kinetic energy in a system.
 
 So if the work done is positive, final speed is greater than initial speed, and vice versa.
 
 A skier takes some path down a slope that is 500m high, starting at the top. What is the final speed of the skier?
 
-> Clearly, $W_g = -mg \Delta x_y = \Delta W_K = \Delta \frac{1}{2}mv^2$.  
+> Clearly, $W_g = -mg \Delta x_y = W_K = \Delta \frac{1}{2}mv^2$.  
 > So $-mg(-500 m) = \frac{1}{2}m(v_f^2 - v_i^2)$ and $-2g(-500 m) = v_f^2 - v_i^2$.  
 > So $g(1000 m) + v_i^2 = v_f^2$. Clearly, $v_i = 0$ since the skier starts from rest.  
 > So $v_f = \sqrt{g(1000 m)} \approxeq 98.9949493661167m/s$.  
@@ -978,7 +980,7 @@ For example, gravitational force is conservative because as an object moves up, 
 
 For example, force from an ideal spring is conservative because the work is negative when compressing/stretching and positive when returning to rest position, and these two balance out.
 
-We can mathematically determine if a force is conservative by setting $\Delta \vec{x} = \vec{0}$ and checking if the work done is always 0.
+We can mathematically determine if a force is conservative by setting $\Delta \vec{x} = \vec{0}$ and $x > 0$ and checking if the work done is always 0.
 
 To expand on a previous point, potential energy (specifically, elastic energy) is stored in a spring when we compress it. When the spring exapnds again, the potential energy is converted into kinetic energy and a negligible amount of other types of energy (like thermal energy).
 
@@ -1112,6 +1114,8 @@ Find the center of mass of a solid cone with height $h$ and base radius $r$:
 = \frac{\int_0^h x \rho_0 \pi R(x)^2 \dee x}{\int_0^h \rho_0 \pi R(x)^2 \dee x}
 = \frac{\rho_0 \pi r^2}{h^2} \frac{h^2}{\rho_0 \pi r^2} \frac{\int_0^h x^3 \dee x}{\int_0^h x^2 \dee x}
 = \frac{\frac{h^4}{4}}{\frac{h^3}{3}} = \frac{3}{4}h$.  
+
+The formula for finding the center of mass for a symmetric object is $x_{CM} = \frac{\int_{x_1}^{x_2} x A(x) \dee x}{\int_{x_1}^{x_2} A(x) \dee x}$ where $x$ is the extent along the axis of symmetry and $A(x)$ is the area of the cross section at extent $x$.
 
 # 7/4/14
 
@@ -1295,7 +1299,7 @@ Clearly, $F \sin \theta = ma_{arc} = mr\alpha$. So $rF \sin \theta = \tau = mr^2
 
 Also, if $\tau = rF \sin \theta$, then $\tau = dF$. This is useful because sometimes $\vec{d}$ is easier to find than $\vec{r}$.
 
-We can summarize with $\vec{\tau}_{\net} = \vec{r} \times \vec{F} = I\vec{\alpha}$.
+We can summarize with $\vec{\tau}_{net} = \vec{r} \times \vec{F} = I\vec{\alpha}$.
 
 A 6kg pulley is attached by a rope to a 2kg block. What is the tension on the rope?
 

@@ -63,7 +63,7 @@
   }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </head>
 <body>
 <a class="button" href="..">&#8666; Return to University Notes index</a>
@@ -858,7 +858,7 @@ Rodents are used in baseball.</code></pre>
 <p>For example, the scale model airplane is meant to represent the shape and aerodynamic properties of the real plane, but not the mass or full sized material properties.</p>
 <p>As a result, based on the information encoded, we must constrain our manipulations of the representation to ensure that the result still represents the result in the real thing.</p>
 <h3 id="numbers">Numbers</h3>
-<p>Numbers are the most common representations used for numbers.</p>
+<p>Numbers are the most common representations used for values.</p>
 <p>We use numbers to represent quantities, ratios, changes, magnitudes, orderings, etc.</p>
 <p>For example, distances are not numbers - they are just distances, their own thing. However, they are correlated to numbers. We can then convert between distances and numbers interchangably.</p>
 <p>Alternatively, we could represent distances with the amount of time it takes to travel that distance for something moving at some speed, or even represent distances using the alphabet.</p>
@@ -885,7 +885,7 @@ Rodents are used in baseball.</code></pre>
 <p>Rankings encode only information about order. For example, the rankings for runners in a race does not encode what the actual times were, or how close the winners were to each other, only information about who was first, second, third, and more.</p>
 <p>Rankings are given based on some system of measurement, and the properties of this system determine what the ranking means.</p>
 <h3 id="metrics">Metrics</h3>
-<p>In many cases, the measurement system only measures something indirectly, like how IQ tests measure the ability to asnwer certain questions as a metric for intelligence in general.</p>
+<p>In many cases, the measurement system only measures something indirectly, like how IQ tests measure the ability to answer certain questions as a metric for intelligence in general.</p>
 <p><strong>Pseudo-precision</strong> is when the number is represented in a form that makes it seem like it has more precision than it does. For example, one might claim that pi is approximately equal to 4.03. This number only has 1 significant digit, but it is presented like it has 3.</p>
 <h3 id="average">Average</h3>
 <p>An <strong>average</strong> is a number that is supposed to represent a whole set of data. As a result, a lot of information is inevitably lost when using only the average.</p>
@@ -909,6 +909,7 @@ Rodents are used in baseball.</code></pre>
 <p><strong>Negative correlation</strong> is when, given variables <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, an increase in <span class="math">\(x\)</span> results in a decrease in <span class="math">\(y\)</span>, and vice versa. For example, there is a negative correlation in street signs between signs saying &quot;STOP&quot; and signs that are yellow.</p>
 <p><strong>Causation</strong> is when one thing causes another thing. Where correlation can be used to make predictions in some circumstances, causation allows predictions to be made in a much larger set of circumstances, and even predict what will happen when we modify other variables.</p>
 <p>For example, knowing there is a correlation between smoking and lung cancer is good for predicting whether someone will have lung cancer or a smoking habit, but not for preventing lung cancer. Knowing that smoking causes lung cancer allows us to prevent lung cancer by predicting that stopping smoking helps reduce the incidences of lung cancer.</p>
+<p>In other words, knowing smoking is correlated to lung cancer doesn't tell us that changing smoking will change lung cancer.</p>
 <h3 id="null-hyposthesis">Null Hyposthesis</h3>
 <p>When we find a correlation in a sample set, we cann't directly apply it to the target population. The idea that a correlation exists in the target population is a <strong>hypothesis</strong>.</p>
 <p>There could be multiple hypotheses, like that there is a causal relationship between the two variables, or similar.</p>
@@ -996,7 +997,7 @@ Rodents are used in baseball.</code></pre>
 </ul>
 <p>Probability of drawing a red queen from a deck of cards given that the card drawn is red:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(P(\text{red} \cap {queen}) = P(\text{red} \mid \text{queen}) \cdot P(\text{queen})\)</span>.<br />Since the card is a queen, <span class="math">\(P(\text{queen}) = 1\)</span> and <span class="math">\(P(\text{red} \mid \text{queen}) \cdot P(\text{queen}) = P(\text{red}) = \frac{1}{2}\)</span>.</p>
+<p>Clearly, <span class="math">\(P(\text{red} \cap \text{queen}) = P(\text{red} \mid \text{queen}) \cdot P(\text{queen})\)</span>.<br />Since the card is a queen, <span class="math">\(P(\text{queen}) = 1\)</span> and <span class="math">\(P(\text{red} \mid \text{queen}) \cdot P(\text{queen}) = P(\text{red}) = \frac{1}{2}\)</span>.</p>
 </blockquote>
 <h3 id="gamblers-fallacy">Gambler's Fallacy</h3>
 <p>When a set of events are independent, people are prone to thinking that the events are dependent of the conjoint probability of each of the other events in the set.</p>
@@ -1012,7 +1013,7 @@ Rodents are used in baseball.</code></pre>
 <p>For example, &quot;Jim did exceptionally well at work last year. His performance is merely average this year, so something must have happened.&quot;.</p>
 <p>This is fallacious because it is likely that in fact this is just natural variation in performance, not caused by any external factors.</p>
 <p>When we see a number of extraordinary events happening, we tend to think that they are ordinary. However, they are not; this is just natural variations in the events.</p>
-<p>A related concept is the <strong>regression effect</strong>. Basically, if we pick a number between 1 and 100, and draw a 1 the first time, the next draw will be still be independent, yet the probability of a bigger number is 99%, and the probability of a nuber closer to the mean is 98% (since 100 is equally far from the mean).</p>
+<p>A related concept is the <strong>regression effect</strong>. Basically, if we pick a number between 1 and 100, and draw a 1 the first time, the next draw will be still be independent, yet the probability of a bigger number is 99%, and the probability of a number closer to the mean is 98% (since 100 is equally far from the mean).</p>
 <h3 id="simpsons-paradox">Simpson's Paradox</h3>
 <p>Suppose hospital A cures 70% of all cancer patients and 90% of all non-cancer patients. Suppose hospital B cures 50% of all cancer patients and 80% of all non-cancer patients.</p>
 <p>We might be inclined to believe that hospital A has a better overall cure rate, since the rates for both are higher, but <strong>this is not always true</strong>.</p>
@@ -1126,7 +1127,7 @@ Rodents are used in baseball.</code></pre>
 <p><strong>Bandwagon effects</strong> are tendencies to prefer views that they think are held by other people - the idea that &quot;if most other people believe it, then it is likely right&quot;. This may be caused by believing that everyone else has justification, and possibly because defending a minority view requires effort.</p>
 <p>The <strong>false consensus effect</strong> is the tendency to believe that the <strong>absence of disagreement is agreement</strong>. This is due to the convention that assertions are considered accepted until challenged. However, in practice there are social costs to dissenting, and there are therefore pressures not to express the dissenting view. In other words, it is the tendency to believe that one's own opinion is the norm.</p>
 <p>Society allows us to access information otherwise unavailable, but information might not flow perfectly - it can become corrupted, and there are other aims to communication that can lead to unreliable reasoning. Which social group we associate with will bias the information we have access to.</p>
-<p>For example, we might think that Harper is an excellent prime minister, but this likely reflects our friend group more than the view of all Canadians.</p>
+<p>For example, we might think that Harper is a highly respected prime minister, but this likely reflects our friend group more than the view of all Canadians.</p>
 <p>For efficiency reasons, humans interpret stories, arguments, and reports, and identify the &quot;main points&quot; rather than memorizing the whole thing. As a result, every reading of every article is relative to the reader's state of information, preferences, and world view.</p>
 <p>When we relay information, we tend to emphasize the information perceived to be important/relevant (sharpening), while deemphasizing the less important/relevant aspects (leveling). Repeated sharpening or levelling over multiple relayings can heavily distort the original information.</p>
 <p>People also tend to correct the aspects of reports that they find implausible relative to their own views.</p>

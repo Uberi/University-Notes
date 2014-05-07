@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>GENE123 | Anthony Zhang</title>
+  <style type="text/css">
+  body {
+    font-family: "Segoe UI", Verdana, Arial, Helvetica, sans-serif;
+    background: #fffefe;
+    padding: 5em;
+  }
+  
+  pre {
+    margin-left: 2em;
+  }
+  
+  code {
+    border: solid 1px black;
+    background: #665555;
+    color: white;
+    padding: 0.1em;
+    border-radius: 0.3em;
+    display: inline-block;
+  }
+  
+  pre code {
+    padding: 1em;
+    border-radius: 0.5em;
+  }
+  
+  h1 {
+    font-size: 4em;
+  }
+  
+  table {
+    margin: 0 auto;
+  }
+  
+  td, th {
+    padding: 0.5em;
+    border: 1px solid grey;
+  }
+  
+  tr {
+    padding:: 0;
+  }
+  
+  a.button {
+    display: inline-block;
+    padding: 1em;
+    font-family: monospace;
+    color: black;
+    text-decoration: none;
+    border: 0.2em solid black;
+    border-radius: 0.5em;
+    background: white;
+  }
+  
+  a.button:hover, a.button:focus, a.button:active {
+    background: black;
+    color: white;
+  }
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+</head>
+<body>
+<a class="button" href="..">&#8666; Return to University Notes index</a>
+<h1 id="gene123">GENE123</h1>
+<p>Electrical engineering.</p>
+<pre><code>Instructor: Samar Mohamed
+Office: EIT 3112
+Office Hours: drop-in</code></pre>
+<h1 id="section">6/5/13</h1>
+<h2 id="electricity">ELectricity</h2>
+<p>Matter is composed of protons, neutrons, and electrons. Protons are positively charged, and electrons are negatively charged.</p>
+<p>The electrons are free to move around. Each electron has a negative charge of <span class="math">\(-1.6 \times 10^{-19}\)</span> Coulombs (the unit of charge). Charge is represented with <span class="math">\(q\)</span>.</p>
+<p><strong>Conductors</strong> are materials that have lots of free electrons - electrons that are free to move. Insulators are the opposite, where few electrons can move freely.</p>
+<p>Conductors allow electrons to move around inside them.</p>
+<p>Since electrons are negatively charged, when then current flows in one direction, the actual electrons are moving in the opposite direction. The current is the flow of electrons.</p>
+<p>This is a historical quirk that is the result of the original assumption that it was the positively charged particle that flowed in a circuit. When it was discovered much later that the negative charges are moving, the current direction was kept the same, but the particles were changed to move in the opposite direciton.</p>
+<p>Electrical current flows from the positive to the negative, so the electrons flow from the negative to the positive.</p>
+<p>There are also materials known as semiconductors, which can act like a conductor or an insulator depending on the way they are used. These are outside of the scope of this course.</p>
+<p>In a superconductor, all the electrons are free. It is the ideal conductor.</p>
+<p>A <strong>circuit</strong> is a path for electricity to flow in. Electrons transfer energy from the sources of a circuit to the loads.</p>
+<p>It can be composed of things like sources (batteries, etc.), wires, resistors, switches, and more.</p>
+<p>;wip: the large side of the battery is positive</p>
+<p>;wip: normally open/normally closed switches with arrows drawn through them</p>
+<p><strong>Electric current</strong> (represeted by <span class="math">\(I\)</span>) is the flow of electrons. It is the rate of change of the charge - <span class="math">\(I = \frac{\dee q(t)}{\dee x}\)</span>. Therefore, <span class="math">\(q(t) = \int_0^t I(t) \dee t + q(0)\)</span>. Current is measured in Amperes (A), and 1 Ampere is 1 Coulomb per second.</p>
+<h3 id="switches">Switches</h3>
+<p>Switches have two conductive ends. When a switch is <strong>closed</strong>, the ends are connected and current may pass through. Otherwise, they are not and current cannot pass through.</p>
+<p>;wip: headlamps example with parallel circuit</p>
+<p>Given <span class="math">\(I(t) = \begin{cases} 0 &amp;\text{if } t &lt; 0 \\ e^{-2t} &amp;\text{if } t \ge 0 \end{cases}\)</span>, <span class="math">\(q(0) = 0\)</span>, find <span class="math">\(q(t)\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(q(t) = \int I(t) \dee t = \begin{cases} 0 &amp;\text{if } t &lt; 0 \\ \evalat{-\frac{1}{2}e^{-2t}}_0^t &amp;\text{if } t \ge 0 \end{cases} = \begin{cases} 0 &amp;\text{if } t &lt; 0 \\ -\frac 1 2 e^{-2t} - \frac 1 2 &amp;\text{if } t \ge 0 \end{cases}\)</span>.</p>
+</blockquote>
+<hr>
+<p>Copyright 2013 Anthony Zhang</p>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>

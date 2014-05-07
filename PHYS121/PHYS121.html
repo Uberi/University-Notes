@@ -63,7 +63,7 @@
   }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </head>
 <body>
 <a class="button" href="..">&#8666; Return to University Notes index</a>
@@ -120,7 +120,7 @@ Email: scholz@uwaterloo.ca</code></pre>
 <h3 id="classical-physics">Classical Physics</h3>
 <p>Classical mechanics is physics before the 1900s. It describes the motion of macroscopic objects - objects that work on the human scale.</p>
 <p>We consider objects like point masses (particles), where the location of the particle is at the center of mass of the object.</p>
-<p>We derive the kinematic laws of conversation from this.</p>
+<p>We derive the kinematic laws of conservation from this.</p>
 <p>When we need to consider rotation, we assume the object is rigid - the particles that an object is made out of stay at a constant distance from each other and the object retains its shape.</p>
 <p>When we do problems, we need to recognize the laws, write out our problem in terms of these laws, and then solve it using mathematical tools.</p>
 <p>All of the laws we will be using have already been recognized by people such as Galileo and Newton. Although they are only empirically based, we will assume them to be true, and ignore effects such as relativity.</p>
@@ -405,7 +405,7 @@ v_f^2 &amp;= v_i^2 + 2\vec{a} \cdot \Delta \vec{x} \\
 <p>So if we have two objects of differing mass in space, pushed apart by a spring, they both have the same force applied to them, yet the acceleration of each is different. In fact, <span class="math">\(m_1 a_1 = m_2 a_2\)</span>, and so <span class="math">\(a_1 = \frac{m_2}{m_1} a_2\)</span>.</p>
 <p>In the imperial system, mass is measured using slugs, where 1 slug is <span class="math">\(\frac{1 lb}{1 ft/s^2}\)</span>. <span class="math">\(lb\)</span> (pounds) is a measure of weight. A <span class="math">\(1 kg\)</span> mass weighs about <span class="math">\(2.2 lb\)</span> near the Earth's surface.</p>
 <h2 id="third-law-of-motion">Third Law of Motion</h2>
-<p>All forces act on at least two forces. Therefore, if there is only one objectm there can be no forces.</p>
+<p>All forces act on at least two objects. Therefore, if there is only one object there can be no forces.</p>
 <p>When two objects interact, the force exerted by object 1 on object 2 is equal in magnitude but opposite in direction to the force exerted by object 2 on object 1.</p>
 <p>These pairs of equal forces are called <strong>action/reaction</strong> forces. Each force acts on a different object, but they always balance out.</p>
 <p>In other words, the force exerted on an object A by an object B is equal but opposite to the force exerted by B on A.</p>
@@ -512,6 +512,7 @@ $\vec{F}_g$</code></pre>
   |   |
   |   | &lt;-- rope
  1kg 2kg</code></pre>
+<p>The force on the axle of the pulley is the sum of the tensions on both sides of the rope. This is why pulleys provide a mechanical advantage.</p>
 <p>If the pulley has infinite mass, then it cannot rotate. As a result, the tension on both sides is as if the rope is anchored to the pulley. On the left, there is a tensional force of <span class="math">\(1kg \vec{g}\)</span>, and on the right, <span class="math">\(2kg \vec{g}\)</span>.</p>
 <p>If the pulley is massless (has a mass of 0), then the tension on both sides is distributed equally between the two sides. The tension is not the average of the tensions, since the masses will also be accelerating.</p>
 <p>If the pulley has a mass in between these extremes, the tension will be distributed unequally between the two sides. This can be determined by applying rotational dynamics, covered later.</p>
@@ -624,12 +625,12 @@ $\vec{F}_g$</code></pre>
 <p>The total energy in the universe must remain constant. If we consider the universe as a single system, and everything else (the environment), then <span class="math">\(E_{universe} = E_{system} + E_{environment}\)</span>.</p>
 <p>So <span class="math">\(\Delta E_{universe} = \Delta E_{system} + \Delta E_{environment}\)</span> and <span class="math">\(\Delta E_{system} = -\Delta E_{environment}\)</span>. In other words, an increase in energy in a system must result in a decrease of energy in its surroundings, and vice versa.</p>
 <h2 id="work">Work</h2>
-<p>A change in energy is known as <strong>work</strong>. We denote this as <span class="math">\(W = \delta E\)</span>. So work has the same units as energy.</p>
+<p>A change in energy is known as <strong>work</strong>. We denote this as <span class="math">\(W = \Delta E\)</span>. So work has the same units as energy.</p>
 <p>Work includes things like heat (thermal energy transfer across a boundary) and electromagnetic waves (transfer of electromagnetic energy). However, what we mean by work most of the time is <strong>mechanical work</strong>, which is a change in mechanical energy.</p>
-<p>The definition of mechanical work is <span class="math">\(W = \vec{F} \cdot \delta \vec{x}\)</span> - the dot product of the force applied to an object and the displacement of the object. This is also written as <span class="math">\(F\delta x \cos \theta\)</span>, where <span class="math">\(\theta\)</span> is the angle between the directions of <span class="math">\(\vec{F}\)</span> and <span class="math">\(\delta \vec{x}\)</span>. The <strong>force must be constant</strong> for this to make sense.</p>
+<p>The definition of mechanical work is <span class="math">\(W = \vec{F} \cdot \Delta \vec{x}\)</span> - the dot product of the force applied to an object and the displacement of the object. This is also written as <span class="math">\(F\delta x \cos \theta\)</span>, where <span class="math">\(\theta\)</span> is the angle between the directions of <span class="math">\(\vec{F}\)</span> and <span class="math">\(\delta \vec{x}\)</span>. The <strong>force must be constant</strong> for this to make sense.</p>
 <p>If <span class="math">\(W\)</span> is positive, it means emergu was put into the system. If it is negative, it means energy was taken out of the system.</p>
 <p>Assume the force applied is constant. Then <span class="math">\(v_f^2 = v_i^2 + 2\vec{a} \cdot \Delta \vec{x}\)</span> (kinematic equation 5). Solving, we get <span class="math">\(\vec{a} \cdot \Delta \vec{x} = \frac{1}{2}(v_f^2 - v_i^2)\)</span>.</p>
-<p>So <span class="math">\(W = \vec{F} \cdot \delta \vec{x} = m\vec{a} \cdot \Delta x = m\frac{1}{2}(v_f^2 - v_i^2) = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2\)</span>.</p>
+<p>So <span class="math">\(W = \vec{F} \cdot \Delta \vec{x} = m\vec{a} \cdot \Delta x = m\frac{1}{2}(v_f^2 - v_i^2) = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2\)</span>.</p>
 <p>We therefore define kinetic energy as <span class="math">\(E_k = \frac{1}{2}mv^2\)</span>.</p>
 <p>The unit of work and energy is the <strong>Joule</strong>, which we define using <span class="math">\(mv^2\)</span> to be <span class="math">\(kg(m/s)^2 = Nm\)</span> (Newton meters).</p>
 <p>If the force is not constant (for example, a spring would have <span class="math">\(F(\vec{x}) = -k\vec{x}\)</span>), the more general definition is <span class="math">\(W = \int_{\vec{x}_i}^{\vec{x}_f} F(\vec{x}) \cdot \dee \vec{x}\)</span>. If it is only in one dimension, we can write it as <span class="math">\(W = \int_{x_i}^{x_f} F(x) \dee x\)</span>.</p>
@@ -651,7 +652,7 @@ $\vec{F}_g$</code></pre>
 ................ BUMP
 ...................</code></pre>
 <p>However, we can observe that the normal force is always perpendicular to the velocity of the box as slides down the ramp, so <span class="math">\(\vec{N} \cdot \frac{\dee \vec{x}}{\dee t} = \vec{N} \cdot \dee \vec{x} = 0\)</span>. So <span class="math">\(\int_{y_1}^{y_2} \vec{N} \cdot \dee \vec{x} = 0 = W_N\)</span>. In other words, the nromal force does no work on the object.</p>
-<p>So the only work done is by gravitational potential energy in the component of the direction of motion. The worl done by gravity is <span class="math">\(W_g = \int_{y_1}^{y_2} m\vec{g} \cdot \dee \vec{y} = \int_{y_1}^{y_2} mg \cos \theta \dee y\)</span>.</p>
+<p>So the only work done is by gravitational potential energy in the component of the direction of motion. The work done by gravity is <span class="math">\(W_g = \int_{y_1}^{y_2} m\vec{g} \cdot \dee \vec{y} = \int_{y_1}^{y_2} mg \cos \theta \dee y\)</span>.</p>
 <h3 id="frictional-forces-1">Frictional Forces</h3>
 <p>Friction is always opposite to the direction of displacement (the angle between the two is 180 degrees). Therefore, it always does negative work - it always reduces the energy.</p>
 <p>So <span class="math">\(W_f = \int_\vec{a}^\vec{b} \vec{F}_f \cdot \dee \vec{x} = \int_\vec{a}^\vec{b} F_f \cos 180^\circ \dee x = -\int_\vec{a}^\vec{b} F_f \dee x = -F_f x\)</span>.</p>
@@ -672,11 +673,11 @@ m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &amp;= m\int_\vec{a}^\vec{b} \f
 &amp;= \frac{1}{2}mb^2 - \frac{1}{2}ma^2 = \Delta W_K \\
 \end{align}
 \]</span></p>
-<p>In short, the WKE theorem states that <span class="math">\(W_{net} = \Delta W_K\)</span> - that net work is equivalent to change in kinetic energy in a system.</p>
+<p>In short, the WKE theorem states that <span class="math">\(W_{net} = W_K\)</span> - that net work is equivalent to change in kinetic energy in a system.</p>
 <p>So if the work done is positive, final speed is greater than initial speed, and vice versa.</p>
 <p>A skier takes some path down a slope that is 500m high, starting at the top. What is the final speed of the skier?</p>
 <blockquote>
-<p>Clearly, <span class="math">\(W_g = -mg \Delta x_y = \Delta W_K = \Delta \frac{1}{2}mv^2\)</span>.<br />So <span class="math">\(-mg(-500 m) = \frac{1}{2}m(v_f^2 - v_i^2)\)</span> and <span class="math">\(-2g(-500 m) = v_f^2 - v_i^2\)</span>.<br />So <span class="math">\(g(1000 m) + v_i^2 = v_f^2\)</span>. Clearly, <span class="math">\(v_i = 0\)</span> since the skier starts from rest.<br />So <span class="math">\(v_f = \sqrt{g(1000 m)} \approxeq 98.9949493661167m/s\)</span>.</p>
+<p>Clearly, <span class="math">\(W_g = -mg \Delta x_y = W_K = \Delta \frac{1}{2}mv^2\)</span>.<br />So <span class="math">\(-mg(-500 m) = \frac{1}{2}m(v_f^2 - v_i^2)\)</span> and <span class="math">\(-2g(-500 m) = v_f^2 - v_i^2\)</span>.<br />So <span class="math">\(g(1000 m) + v_i^2 = v_f^2\)</span>. Clearly, <span class="math">\(v_i = 0\)</span> since the skier starts from rest.<br />So <span class="math">\(v_f = \sqrt{g(1000 m)} \approxeq 98.9949493661167m/s\)</span>.</p>
 </blockquote>
 <h3 id="power">Power</h3>
 <p>Power is the <strong>rate at which work is done</strong>. It is defined as <span class="math">\(P = \frac{\dee W}{\dee t}\)</span>, or <span class="math">\(P = \frac{\dee (\vec{F} \cdot \vec{x})}{\dee t} = \vec{F} \cdot \frac{\dee \vec{x}}{\dee t} = \vec{F} \cdot \vec{v}\)</span>.</p>
@@ -689,7 +690,7 @@ m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &amp;= m\int_\vec{a}^\vec{b} \f
 <p>For example, friction is non-conservative, because if an object travels in a circle back to its original position, negative work is done. The amount of work done by friction depends on the distance travelled, not the displacement.</p>
 <p>For example, gravitational force is conservative because as an object moves up, work is negative and stored as potential energy, and as it moves down, the potential energy is converted into kinetic energy. These two balance out and the amount of work done depends only on the displacement.</p>
 <p>For example, force from an ideal spring is conservative because the work is negative when compressing/stretching and positive when returning to rest position, and these two balance out.</p>
-<p>We can mathematically determine if a force is conservative by setting <span class="math">\(\Delta \vec{x} = \vec{0}\)</span> and checking if the work done is always 0.</p>
+<p>We can mathematically determine if a force is conservative by setting <span class="math">\(\Delta \vec{x} = \vec{0}\)</span> and <span class="math">\(x &gt; 0\)</span> and checking if the work done is always 0.</p>
 <p>To expand on a previous point, potential energy (specifically, elastic energy) is stored in a spring when we compress it. When the spring exapnds again, the potential energy is converted into kinetic energy and a negligible amount of other types of energy (like thermal energy).</p>
 <p>The change in potential energy associated with a conservative force is the opposite of the work done by the force as it acts over any path from point A to point B. So <span class="math">\(\Delta U_{AB} = -W_{AB}\)</span>.</p>
 <p>So if work was done by a force and kinetic energy increases, then potential energy must decrease.</p>
@@ -759,6 +760,7 @@ m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &amp;= m\int_\vec{a}^\vec{b} \f
 <blockquote>
 <p>Since the cone is symmetric about its central axis, the center of mass must be located on this axis.<br />Let <span class="math">\(R(x) = kx\)</span> represent the radius at any extent <span class="math">\(x\)</span>.<br />Since <span class="math">\(R(h) = r\)</span>, <span class="math">\(R(x) = \frac{r}{h}x\)</span>. Clearly, for each disk of the cone, <span class="math">\(\dee m = \rho(x) \dee x = \rho_0 \pi R(x)^2 \dee x\)</span>. So <span class="math">\(x_{CM} = \frac{\int_0^h x \dee m}{\int_0^h \dee m} = \frac{\int_0^h x \rho_0 \pi R(x)^2 \dee x}{\int_0^h \rho_0 \pi R(x)^2 \dee x} = \frac{\rho_0 \pi r^2}{h^2} \frac{h^2}{\rho_0 \pi r^2} \frac{\int_0^h x^3 \dee x}{\int_0^h x^2 \dee x} = \frac{\frac{h^4}{4}}{\frac{h^3}{3}} = \frac{3}{4}h\)</span>.</p>
 </blockquote>
+<p>The formula for finding the center of mass for a symmetric object is <span class="math">\(x_{CM} = \frac{\int_{x_1}^{x_2} x A(x) \dee x}{\int_{x_1}^{x_2} A(x) \dee x}\)</span> where <span class="math">\(x\)</span> is the extent along the axis of symmetry and <span class="math">\(A(x)\)</span> is the area of the cross section at extent <span class="math">\(x\)</span>.</p>
 <h1 id="section-5">7/4/14</h1>
 <h2 id="collisions">Collisions</h2>
 <p>Collisions are generally isolated systems. As a result, linear momentum and is conserved.</p>
@@ -859,7 +861,7 @@ X================O &lt; force is applied here
 <p>The cross product of two vectors is always a vector perpendicular to both. To find the direction of the torque, we use the right hand rule - if we make a thumbs-up with our right hand, with the fingers curling from <span class="math">\(\vec{r}\)</span> to <span class="math">\(\vec{F}\)</span>, the thumb points along the direction of the torque.</p>
 <p>Clearly, <span class="math">\(F \sin \theta = ma_{arc} = mr\alpha\)</span>. So <span class="math">\(rF \sin \theta = \tau = mr^2 \alpha = I\alpha\)</span>. This is the rotational version of the second law of motion: <span class="math">\(\vec{\tau} = I\vec{\alpha}\)</span>.</p>
 <p>Also, if <span class="math">\(\tau = rF \sin \theta\)</span>, then <span class="math">\(\tau = dF\)</span>. This is useful because sometimes <span class="math">\(\vec{d}\)</span> is easier to find than <span class="math">\(\vec{r}\)</span>.</p>
-<p>We can summarize with <span class="math">\(\vec{\tau}_{\net} = \vec{r} \times \vec{F} = I\vec{\alpha}\)</span>.</p>
+<p>We can summarize with <span class="math">\(\vec{\tau}_{net} = \vec{r} \times \vec{F} = I\vec{\alpha}\)</span>.</p>
 <p>A 6kg pulley is attached by a rope to a 2kg block. What is the tension on the rope?</p>
 <blockquote>
 <p>Let <span class="math">\(r\)</span> be the radius of the pulley, <span class="math">\(T\)</span> be the tension on the rope, and <span class="math">\(a\)</span> be the acceleration at the edge of the pulley.<br />Clearly, <span class="math">\(a\)</span> would be <span class="math">\(g\)</span> if not for the tension on the rope. So <span class="math">\(a = g - \frac{T}{2 kg}\)</span>.<br />Clearly, the torque on the pulley is <span class="math">\(r T \sin \frac{\pi}{2} = rT\)</span>, with the angle being 90 degrees since the rope is always perpendicular to the displacement.<br />Clearly, <span class="math">\(I_{pulley} = \frac{1}{2} 6 kg r^2 = r^2 3 kg\)</span>. So <span class="math">\(\tau = I\alpha = rT = r^2 3 kg \alpha\)</span>, and <span class="math">\(\alpha = \frac{T}{r 3 kg}\)</span>, so <span class="math">\(a = \frac{T}{3 kg}\)</span>.<br />So <span class="math">\(a = g - \frac{T}{2 kg} = \frac{T}{3 kg}\)</span>, and <span class="math">\(T = g \frac{6}{5} kg = 11.76 N\)</span>.</p>

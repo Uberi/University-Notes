@@ -63,7 +63,7 @@
   }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </head>
 <body>
 <a class="button" href="..">&#8666; Return to University Notes index</a>
@@ -118,7 +118,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <h3 id="method-of-substitution">Method of substitution</h3>
 <p>The method of substitution is based on choosing a subexpression <span class="math">\(u\)</span>, and then integrating with respect to it. If <span class="math">\(u\)</span> is chosen carefully, it is occasionally possible to simplify the integral.</p>
 <p>This method works best when a <strong>function and its derivative appear in the integrand</strong>.</p>
-<p>This works with expressions of the form <span class="math">\(\int f(x) \frac{\dee}{\dee x} f(x) \dee x\)</span>.</p>
+<p>This works with expressions of the form <span class="math">\(\int f(x) \frac{\dee f}{\dee x} \dee x\)</span>.</p>
 <p>Let <span class="math">\(u = f(x)\)</span>. Since <span class="math">\(\frac{\dee u}{\dee x} = \frac{\dee u}{\dee x}\)</span>, <span class="math">\(\dee u = \frac{\dee u}{\dee x} \dee x\)</span> (multiply both sides by <span class="math">\(\dee x\)</span>). This is possible because of infinismals, which work in wierd and wonderful ways. So <span class="math">\(\dee x = \frac{1}{\frac{\dee u}{\dee x}} \dee u\)</span>.</p>
 <p>So <span class="math">\(\int f(x) \frac{\dee}{\dee x} f(x) \dee x = \int u \frac{\dee u}{\dee x} \dee x = \int u \frac{\dee u}{\dee x} \frac{1}{\frac{\dee u}{\dee x}} \dee u = \int u \dee u = \frac{u^2}{2} + c = \frac{f(x)^2}{2} + c\)</span>.</p>
 <p>Even if we can't simplify it far enough to get an antiderivative, integration by substitution can still considerably simplify an integrand into something more manageable.</p>
@@ -186,7 +186,7 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <blockquote>
 <p>;wip</p>
 </blockquote>
-<p>We often write the integration by parts formula in different forms: <span class="math">\(\int a \dee b = uv - \int v \dee u\)</span>, or <span class="math">\(\int f&#39;(x) g(x) \dee x = f(x) g(x) - \int f(x) g&#39;(x) \dee x\)</span>.</p>
+<p>We often write the integration by parts formula in different forms: <span class="math">\(\int a \dee b = ab - \int b \dee a\)</span>, or <span class="math">\(\int f&#39;(x) g(x) \dee x = f(x) g(x) - \int f(x) g&#39;(x) \dee x\)</span>.</p>
 <p>An interesting trick is that we can use integration by parts to integrate anything, since everything is a product of itself and 1.</p>
 <p>For example, consider <span class="math">\(\int \arcsin x \dee x\)</span>:</p>
 <blockquote>
@@ -205,7 +205,6 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <blockquote>
 <p>Clearly, <span class="math">\(\dee a = \frac{\dee a}{\dee x} \dee x\)</span> and <span class="math">\(\dee b = \frac{\dee b}{\dee x} \dee x\)</span>.<br />We know that <span class="math">\(\int (\frac{\dee}{\dee x} a(x)) b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee}{\dee x} b(x) \dee x\)</span> and so <span class="math">\(\int \frac{\dee a}{\dee x} b(x) \dee x = a(x) b(x) - \int a(x) \frac{\dee b}{\dee x} \dee x\)</span>.<br />So <span class="math">\(\int b(x) \dee a = a(x) b(x) - \int a(x) \dee b\)</span>.</p>
 </blockquote>
-<p>;wip: work on assignment 1 in math138 and 136</p>
 <p>We can also write it as <span class="math">\(\int f(x) g(x) \dee x = \int f(x) \dee x g(x) - \int \int f(x) \dee x \frac{\dee g}{\dee x} \dee x\)</span>.</p>
 <h3 id="getting-back-what-we-started-with">Getting Back What We Started With</h3>
 <p>Consider <span class="math">\(I = \int e^{-x} \sin x\)</span>:</p>
@@ -232,16 +231,16 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p>We usually need this method when we have a square root of a quadratic expression.</p>
 <p>Common substitutions:</p>
 <ul>
-<li>Use <span class="math">\(1 - \sin^2 = \cos^2 \theta\)</span> to turn <span class="math">\(\sqrt{1 - x^2}\)</span> into <span class="math">\(\cos \theta\)</span> via <span class="math">\(x = \sin \theta\)</span>.</li>
-<li>Use <span class="math">\(1 + \tan^2 \theta = \sec^2 \theta\)</span> to turn <span class="math">\(\sqrt{1 + x^2}\)</span> into <span class="math">\(\sec \theta\)</span> via <span class="math">\(x = \tan \theta\)</span>.</li>
-<li>Use <span class="math">\(\sec^2 \theta - 1 = \tan^2 \theta\)</span> to turn <span class="math">\(\sqrt{x^2 - 1}\)</span> into <span class="math">\(\tan \theta\)</span> via <span class="math">\(x = \sec \theta\)</span>.</li>
+<li>Use <span class="math">\(1 - \sin^2 \theta = \cos^2 \theta\)</span> to use <span class="math">\(\sqrt{1 - x^2} = \sqrt{\cos^2 \theta} = \cos \theta\)</span> via <span class="math">\(x = \sin \theta\)</span>.</li>
+<li>Use <span class="math">\(1 + \tan^2 \theta = \sec^2 \theta\)</span> to use <span class="math">\(\sqrt{1 + x^2} = \sqrt{\sec^2 \theta} = \sec \theta\)</span> via <span class="math">\(x = \tan \theta\)</span>.</li>
+<li>Use <span class="math">\(\sec^2 \theta - 1 = \tan^2 \theta\)</span> to use <span class="math">\(\sqrt{x^2 - 1} = \sqrt{\tan^2 \theta} = \tan \theta\)</span> via <span class="math">\(x = \sec \theta\)</span>.</li>
 </ul>
 <p>Using this technique, we can replace <span class="math">\(\sqrt{\pm a^2 \pm x^2}\)</span> with trigonometric functions, and then use trigonometric identities on them. Afterwards, we might simplify by changing the trigonometric functions back into square roots.</p>
 <p>Derivatives:</p>
 <ul>
-<li><span class="math">\(\cos&#39; \theta = -\sin \theta\)</span> (<span class="math">\(-\frac{\pi}{2} \le \theta &lt; \frac{\pi}{2}\)</span>)</li>
-<li><span class="math">\(\sin&#39; \theta = \cos \theta\)</span> (<span class="math">\(-\frac{\pi}{2} \le \theta &lt; \frac{\pi}{2}\)</span>)</li>
-<li><span class="math">\(\tan&#39; \theta = \sec^2 x\)</span> (<span class="math">\(0 \le \theta &lt; \frac{\pi}{2}\)</span>)</li>
+<li><span class="math">\(\cos&#39; \theta = -\sin \theta\)</span> where <span class="math">\(-\frac{\pi}{2} \le \theta &lt; \frac{\pi}{2}\)</span></li>
+<li><span class="math">\(\sin&#39; \theta = \cos \theta\)</span> where <span class="math">\(-\frac{\pi}{2} \le \theta &lt; \frac{\pi}{2}\)</span></li>
+<li><span class="math">\(\tan&#39; \theta = \sec^2 \theta\)</span> where <span class="math">\(0 \le \theta &lt; \frac{\pi}{2}\)</span></li>
 </ul>
 <p>Consider <span class="math">\(\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x\)</span>:</p>
 <blockquote>
@@ -255,8 +254,8 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <pre><code>          /|
        2 / |
         /  | $u$
-       /___|</code></pre>
-<p><span class="math">\(\theta\)</span> <span class="math">\(\sqrt{4 - u^2}\)</span></p>
+       /___|
+$\theta$ $\sqrt{4 - u^2}$</code></pre>
 <blockquote>
 <p>We want to use trigonometric substitution to solve this, but it isn't in the right form.<br />We want to write <span class="math">\(3 - 2x - x^2\)</span> in the form of <span class="math">\(a^2 + (x + b)^2\)</span> (completing the square).<br />Clearly, <span class="math">\(3 - 2x - x^2 = 3 - (2x + x^2) = 3 - (2x + x^2 + 1) + 1\)</span> (make the term into a perfect square trinomial by adding <span class="math">\(\frac{b}{2}\)</span> in a way that cancels out).<br />So <span class="math">\(3 - 2x - x^2 = 4 - (x + 1)^2\)</span> and <span class="math">\(\int \frac{x}{\sqrt{3 - 2x - x^2}} = \int \frac{x}{\sqrt{4 - (x + 1)^2}}\)</span>.<br />Let <span class="math">\(u = x + 1\)</span>. Then <span class="math">\(\dee u = \dee x\)</span>.<br />We can draw a triangle with the hypotenuse being 2, the opposite side <span class="math">\(u\)</span>, and adjacent side <span class="math">\(\sqrt{4 - u^2}\)</span>.<br />From the triangle, we know that <span class="math">\(u = 2\sin \theta\)</span> (<span class="math">\(x = 2\sin \theta - 1\)</span>) and <span class="math">\(\sqrt{4 - u^2} = 2 \cos \theta\)</span>, so <span class="math">\(\dee u = 2 \cos \theta \dee \theta\)</span>.<br />So <span class="math">\(\int \frac{x}{\sqrt{4 - (x + 1)^2}} = \int \frac{2\sin \theta - 1}{2 \cos \theta} 2\cos \theta \dee \theta = \int 2\sin \theta - 1 \dee \theta = -2 \cos \theta - \theta + c\)</span>.<br />From the triangle, we can tell that <span class="math">\(\cos \theta = \frac{\sqrt{4 - u^2}}{2}\)</span>, since the cosine is the adjacent over the hypotenuse.<br />Clearly, <span class="math">\(\theta = \arcsin \frac{u}{2}\)</span> So <span class="math">\(\int \frac{x}{\sqrt{3 - 2x - x^2}} = -2 \cos \theta - \theta + c = -2 \frac{\sqrt{4 - (x + 1)^2}}{2} - \arcsin \frac{x + 1}{2} + c\)</span>.</p>
 </blockquote>
@@ -304,7 +303,7 @@ x^2 + 5x + 6 | x^3 + 4x^2 + 2x - 5
 <p>Clearly, <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{A + Bx}{x^2 + x + 1} \dee x + \int \frac{C}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \frac{11}{7} \ln (x - 2)\)</span>.<br />How do we integrate the first term? We can use a trigonometric substitution to solve this.<br />Clearly, <span class="math">\(\frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} = \frac{\frac{2}{7} - \frac{11}{7}x}{(x^2 + x + \frac{1}{4}) + 1 - \frac{1}{4}} = \frac{\frac{2}{7} + \frac{11}{7}x}{(x + \frac{1}{2})^2 + \frac{3}{4}}\)</span>, by completing the square.<br />Let <span class="math">\(u = x + \frac{1}{2}\)</span>. Then <span class="math">\(\dee x = \dee u\)</span>.<br />Clearly, <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x = \frac{1}{7} \int \frac{2 - 11x}{(x + \frac{1}{2})^2 + \frac{3}{4}} \dee x = \frac{1}{7} \int \frac{-11u + \frac{15}{2}}{u^2 + \frac{3}{4}} \dee x\)</span>.<br />Let <span class="math">\(u = \frac{\sqrt{3}}{2} \tan \theta\)</span>. Then <span class="math">\(\frac{1}{7} \int \frac{-11u + \frac{15}{2}}{u^2 + \frac{3}{4}} \dee x = \frac{1}{7} \int \frac{-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}}{\frac{3}{4}(\tan^2 \theta + 1)} \dee x = \frac{1}{7} \int \frac{-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}}{\frac{3}{4\cos^2 \theta}} \dee x = \frac{1}{21} \int 4\cos^2 \theta (-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}) \dee x = \frac{1}{21} \int 4\cos^2 \theta (-11\frac{\sqrt{3}}{2}\tan \theta) \dee x + \frac{4}{21}\frac{15}{2} \int \cos^2 \theta \dee x ;wip: use substitution with \)</span>s =  $</p>
 </blockquote>
 <p>Completing the square: we want the resulting polynomial to have repeated roots. In the quadratic formula, this is when the discriminant <span class="math">\(b^2 - 4ac = 0\)</span>, so <span class="math">\(c = \frac{b^2}{4a}\)</span>.</p>
-<p>When we have an irreducible quadratic, we always get an <span class="math">\(\arctan\)</span> and a <span class="math">\(\ln \abs{ax^2 + bx + c}\)</span>.</p>
+<p>When we have an irreducible quadratic, we always get an <span class="math">\(\arctan\)</span> and a <span class="math">\(\ln \abs{ax^2 + bx + c}\)</span>. ;wip: do we always need the arctan? maybe we can subsitutute back to get a knarly expression with sqrt</p>
 <h1 id="section-6">20/1/14</h1>
 <p>The techniques of integration so far can be summarized as follows:</p>
 <ol style="list-style-type: decimal">
@@ -346,11 +345,10 @@ z</code></pre>
 <p>The area of each slice at each extent along the x-axis is the area of a circle with the radius <span class="math">\(f(x)\)</span>.<br />The area function is <span class="math">\(A(x) = \pi f(x)^2\)</span>.<br />So the volume is <span class="math">\(\int_a^b A(x) \dee x = \pi \int_a^b f(x)^2 \dee x\)</span>.</p>
 </blockquote>
 <h1 id="section-7">22/1/14</h1>
-<p>;wip: figure out how to find the length of a curve in 2D</p>
 <p>The rotation method works whenever we can find the area function for a given slice along a certain axis.</p>
 <p>Here, <span class="math">\(\Delta V = A(x) \Delta x\)</span>, and then we add up all these tiny volumes to get the total volume.</p>
 <p>This method is called the <strong>method of disks</strong>, because we are integrating the volume of a lot of small disks along the axis of rotation.</p>
-<p>There is another way to approximate the area and have it converge into an exact value. We can estimate the volume of solids of rotation by integrating the volume of a lot of nested cylinders perpendicular to the axis of rotation - this is the <strong>method of shells</strong>.</p>
+<p>There is another way to approximate the area and have it converge into an exact value. We can estimate the volume of solids of rotation by integrating the volume of a lot of nested cylinders lying along the axis of rotation - this is the <strong>method of shells</strong>.</p>
 <p>Consider a hollow cylinder of thickness <span class="math">\(\dee x\)</span> with inner radius <span class="math">\(x\)</span> and height <span class="math">\(h(x)\)</span>. If we cut it and unroll it, then it becomes very close to a cuboid of dimensions <span class="math">\(2\pi x\)</span> by <span class="math">\(h(x)\)</span> by <span class="math">\(\dee x\)</span>. In other words, we assume the inner circumference is almost the same as the outer circumference, since <span class="math">\(\dee x\)</span> is so small.</p>
 <p>So the enclosed volume of the cylinder is <span class="math">\(2\pi x h(x) \dee x\)</span>.</p>
 <p>How do we use these shells to find the volume of a solid? If we look at the cross section of our shape, we can approximate the area of this cross section using rectangles that have a fixed width <span class="math">\(\dee x\)</span> perpendicular to the axis of rotation, and length <span class="math">\(h(x)\)</span> along the axis of rotation.</p>
@@ -406,18 +404,18 @@ z</code></pre>
 <h3 id="comparison-theorem">Comparison Theorem</h3>
 <p>Given functions <span class="math">\(f(x), g(x)\)</span> such that <span class="math">\(f(x) \ge g(x) \ge 0\)</span> for <span class="math">\(x \ge a\)</span>, if <span class="math">\(\int_a^b f(x) \dee x\)</span> converges, then <span class="math">\(\int_a^b g(x) \dee x\)</span> also converges.</p>
 <p>The contrapositive is also useful in that if <span class="math">\(\int_a^b g(x) \dee x\)</span> diverges, then <span class="math">\(\int_a^b f(x) \dee x\)</span> also diverges.</p>
-<p>Prove that, given that <span class="math">\(\int_1^\infty e^{-x} \dee x\)</span> converges, <span class="math">\(\int_1^\infty \frac{1}{x^P} \dee x\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span></p>
+<p>Prove that <span class="math">\(\int_1^\infty \frac{1}{x^P} \dee x\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span></p>
 <blockquote>
-<p>Assume <span class="math">\(P &gt; 1\)</span>.<br />;wip</p>
+<p>Clearly, if <span class="math">\(P = 1\)</span>, <span class="math">\(\int_1^\infty \frac{1}{x^P} \dee x = \evalat{\ln x}_1^\infty\)</span>, which is <span class="math">\(\infty\)</span>, so the integral diverges.<br />Clearly, <span class="math">\(\int_1^\infty \frac{1}{x^P} \dee x = \evalat{\frac{x^{1 - P}}{1 - P}}_1^\infty = \frac{\infty^{1 - P}}{1 - P} - \frac{1}{1 - P}\)</span> if <span class="math">\(P \ne 1\)</span>.<br />Clearly, if <span class="math">\(P &lt; 1\)</span>, <span class="math">\(\infty^{1 - P} = \infty\)</span>, so the integral diverges.<br />Clearly, if <span class="math">\(P &gt; 1\)</span>, <span class="math">\(\infty^{1 - P} = 0\)</span>, so the integral converges.<br />So the integral converges to <span class="math">\(\frac{1}{P - 1}\)</span> for <span class="math">\(P &gt; 1\)</span>.</p>
 </blockquote>
 <p>Interestingly, <span class="math">\(e^{-x^2}\)</span> doesn't have an antiderivative. Figure out if <span class="math">\(\int_0^\infty e^{-x^2} \dee x\)</span> converges or diverges:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(0 \le e^{-x^2} \le e^{-x}\)</span> for <span class="math">\(x \ge 1\)</span>.<br />Since <span class="math">\(\int_1^\infty e^{-x} \dee x\)</span> converges, <span class="math">\(\int_1^\infty e^{-x^2} \dee x\)</span> converges, by the comparison theorem.<br />So <span class="math">\(\int_0^\infty e^{-x^2} \dee x = \int_0^1 e^{-x^2} \dee x + \int_1^\infty e^{-x^2} \dee x\)</span>.<br />Clearly, <span class="math">\(e^{-x^2}\)</span> does not diverge for all <span class="math">\(x \in [0, 1]\)</span>. So <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span>.<br />Since <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span> and <span class="math">\(\int_1^\infty e^{-x^2} \dee x\)</span> converge, <span class="math">\(\int_0^\infty e^{-x^2} \dee x\)</span> converges.</p>
+<p>Clearly, <span class="math">\(0 \le e^{-x^2} \le e^{-x}\)</span> for <span class="math">\(x \ge 1\)</span>.<br />Since <span class="math">\(\int_1^\infty e^{-x} \dee x\)</span> converges, <span class="math">\(\int_1^\infty e^{-x^2} \dee x\)</span> converges, by the comparison theorem.<br />Clearly, <span class="math">\(\int_0^\infty e^{-x^2} \dee x = \int_0^1 e^{-x^2} \dee x + \int_1^\infty e^{-x^2} \dee x\)</span>.<br />Clearly, <span class="math">\(e^{-x^2}\)</span> does not diverge for all <span class="math">\(x \in [0, 1]\)</span>. So <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span> converges.<br />Since <span class="math">\(\int_0^1 e^{-x^2} \dee x\)</span> and <span class="math">\(\int_1^\infty e^{-x^2} \dee x\)</span> converge, <span class="math">\(\int_0^\infty e^{-x^2} \dee x\)</span> converges.</p>
 </blockquote>
 <h1 id="section-10">29/1/14</h1>
 <p>Consider <span class="math">\(\int_1^\infty \frac{1 + e^{-x}}{x} \dee x\)</span>:</p>
 <blockquote>
-<p>Clearly, the function is well behaved for all <span class="math">\(x \in [1, \infty]\)</span>.<br />So we do not need to worry about the integrand diverging.<br />Clearly, <span class="math">\(\frac{1 + e^{-x}}{x} \le \frac{2}{x}\)</span>.<br />Clearly, <span class="math">\(\frac{2}{x}\)</span> diverges.<br />However, we can't say anything about the original function using the comparison theorem, since it could still either coonverge or diverge.<br />Instead, we look for divergence. Clearly, <span class="math">\(\frac{1}{x} \le \frac{1 + e^{-x}}{x}\)</span>.<br />Since <span class="math">\(\int_1^\infty \frac{1}{x} \dee x\)</span> diverges, <span class="math">\(\int_1^\infty \frac{1 + e^{-x}}{x} \dee x\)</span> also diverges.</p>
+<p>Clearly, the function is well behaved for all <span class="math">\(x \in [1, \infty]\)</span>.<br />So we do not need to worry about the integrand diverging.<br />Clearly, <span class="math">\(\frac{1 + e^{-x}}{x} \le \frac{2}{x}\)</span>.<br />Clearly, <span class="math">\(\frac{2}{x}\)</span> diverges.<br />However, we can't say anything about the original function using the comparison theorem, since it could still either converge or diverge.<br />Instead, we look for divergence. Clearly, <span class="math">\(\frac{1}{x} \le \frac{1 + e^{-x}}{x}\)</span>.<br />Since <span class="math">\(\int_1^\infty \frac{1}{x} \dee x\)</span> diverges, <span class="math">\(\int_1^\infty \frac{1 + e^{-x}}{x} \dee x\)</span> also diverges.</p>
 </blockquote>
 <h2 id="applications-of-integration">Applications of Integration</h2>
 <p>Many physical phenomena can be represented by <strong>differential equations</strong> - equations that include derivatives.</p>
@@ -442,7 +440,7 @@ z</code></pre>
 <p>An example of a mathematical representation of conservation principles is a mixing problem.</p>
 <p>A tank holds 80L of water at time <span class="math">\(t = 0\)</span>. A salt solution of 0.25 kg/L flows into the tank at 8L/min. Liquid drains at a rate of 12L/min from the tank. Find a differential equation for the mass of salt <span class="math">\(x(t)\)</span> in kg for <span class="math">\(t &gt; 0\)</span>, where <span class="math">\(t\)</span> is measures in seconds:</p>
 <blockquote>
-<p>We assume the salt solution instantly mixes with the water.<br />We want to find <span class="math">\(\frac{\dee}{\dee t} x(t)\)</span>, which is <span class="math">\(\text{source} - \text{sink}\)</span>.<br />The source is <span class="math">\(\text{salt concentration} \cdot \text{inflow rate} = 0.25 \text{kg/L} \cdot 8 \text{L/min} = 2 \text{kg/min}\)</span>.<br />Clearly, <span class="math">\(\frac{\dee}{\dee x} \text{liquid level} = \text{inflow rate} - \text{outflow rate} = 8 \text{L/min} - 12 \text{L/min} = -4 \text{L/min}\)</span>.<br />So the liquid level is <span class="math">\(80 + \int \frac{\dee}{\dee x} \text{liquid level} \dee t = 80 - 4t\)</span>.<br />Clearly, <span class="math">\(\text{salt concentration} = \frac{\text{mass of salt}}{\text{volume of tank}} = \frac{x(t)}{80 - 4t}\)</span>.<br />The sink is <span class="math">\(\text{salt concentration} \cdot \text{outflow rate} = \frac{x(t)}{80 - 4t} \cdot 12 \text{kg/L} = \frac{3x(t)}{20 - t}\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee x} x(t) = 2 - \frac{3x(t)}{20 - t}\)</span>.<br />Note that the tank is empty when <span class="math">\(t = 20\)</span>, when the outflow rate is undefined.</p>
+<p>We assume the salt solution instantly mixes with the water.<br />We want to find <span class="math">\(\frac{\dee}{\dee t} x(t)\)</span>, which is <span class="math">\(\text{source} - \text{sink}\)</span>.<br />The source is <span class="math">\(\text{salt concentration} \cdot \text{inflow rate} = 0.25 \text{kg/L} \cdot 8 \text{L/min} = 2 \text{kg/min}\)</span>.<br />Clearly, <span class="math">\(\frac{\dee}{\dee x} \text{liquid level} = \text{inflow rate} - \text{outflow rate} = 8 \text{L/min} - 12 \text{L/min} = -4 \text{L/min}\)</span>.<br />So the liquid level is <span class="math">\(80 + \int \frac{\dee}{\dee x} \text{liquid level} \dee t = 80 - 4t\)</span>.<br />Clearly, <span class="math">\(\text{salt concentration} = \frac{\text{mass of salt}}{\text{volume of tank}} = \frac{x(t)}{80 - 4t}\)</span>.<br />The sink is <span class="math">\(\text{salt concentration} \cdot \text{outflow rate} = \frac{x(t)}{80 - 4t} \cdot 12 \text{kg/L} = \frac{3x(t)}{20 - t}\)</span>.<br />So <span class="math">\(\frac{\dee}{\dee t} x(t) = 2 - \frac{3x(t)}{20 - t}\)</span>.<br />Note that the tank is empty when <span class="math">\(t = 20\)</span>, when the outflow rate is undefined.</p>
 </blockquote>
 <p>There are many things we can say about the function even without solving it. These are called <strong>qualitiative analyses</strong>.</p>
 <p>Suppose we have <span class="math">\(\frac{\dee y}{\dee x} = f(x, y)\)</span>. Note that the left side is equal to the slope of the tangent line, and the right side is an expression for the slope of the tangent line for any point <span class="math">\((x, y)\)</span>.</p>
@@ -460,9 +458,10 @@ z</code></pre>
 </blockquote>
 <h1 id="section-12">3/2/14</h1>
 <p>Differential equations of the form <span class="math">\(\frac{\dee y}{\dee x} = f(y)\)</span> are called autonomous differential equations. Note that they do not depend on the value of <span class="math">\(x\)</span>.</p>
-<p>The equilibria of an autonomous differential equation are those <span class="math">\(y\)</span> values for which <span class="math">\(\frac{\dee y}{\dee x} = g(y) = 0\)</span>.</p>
-<p>An equilibrium <span class="math">\(y = k\)</span> is stable if and only if <span class="math">\(f&#39;(k) &lt; 0\)</span> - if the change in the slope at the location is negative. Otherwise, it is unstable.</p>
+<p>The equilibria of an autonomous differential equation are those <span class="math">\(y\)</span> values for which <span class="math">\(\frac{\dee y}{\dee x} = f(y) = 0\)</span>.</p>
+<p>An equilibrium <span class="math">\(y = k\)</span> is stable if and only if <span class="math">\(f&#39;(k) &lt; 0\)</span> - if the change in the slope at the location is negative. Otherwise, it is unstable. This is because a negative value for the derivative means a negative feedback loop, which makes the function settle toward the equilibrium. ;wip: what? why? shouldn't the derivative be 0 at <span class="math">\(y = k\)</span>?</p>
 <h2 id="solving-differential-equations">Solving Differential Equations</h2>
+<h3 id="estimation">Estimation</h3>
 <p>Consider <span class="math">\(\frac{\dee y}{\dee x} = y - x\)</span>, with <span class="math">\(y(0) = 2\)</span>.</p>
 <p>This is a differential equation of the form <span class="math">\(\frac{\dee y}{\dee x} = f(x, y)\)</span></p>
 <p>We can use the differential equation to estimate a certain solution, much like a Riemann sum.</p>
@@ -546,7 +545,7 @@ x \frac{\dee x}{\dee t} &amp;= \frac{1}{(1 + t)^2} \\
 x \dee x &amp;= \frac{1}{(1 + t)^2} \dee t \\
 \int x \dee x &amp;= \int \frac{1}{(1 + t)^2} \dee t \\
 \frac{x^2}{2} &amp;= -\frac{1}{1 + t} + c \\
-x &amp;= 0, t = 0 \\
+t &amp;= 0; x(0) = 0 \\
 \frac{0^2}{2} &amp;= -\frac{1}{1 + 0} + c \\
 c &amp;= 1 \\
 \frac{x^2}{2} &amp;= -\frac{1}{1 + t} + 1 \\
@@ -616,7 +615,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>Separable differential equations are one type of differential equation that can be directly solved. However, there are other types.</p>
 <h2 id="linear-differential-equations">Linear Differential Equations</h2>
 <p><strong>Linear differential equations</strong> are those of the form <span class="math">\(\frac{\dee y}{\dee x} = A(x) y + B(x), A(x) \ne B(x)\)</span>. It is called linear because the degree of <span class="math">\(y\)</span> on the right side is 1.</p>
-<p>If <span class="math">\(A(x) = B(x)\)</span>, then the equation is separable since <span class="math">\(A(x)y + B(x) = (u + 1)A(x)\)</span>.</p>
+<p>If <span class="math">\(A(x) = B(x)\)</span>, then the equation is separable since <span class="math">\(A(x)y + B(x) = (y + 1)A(x)\)</span>, so it would be simpler to solve it that way, but the following technique would also work.</p>
 <p>We can solve these by splitting the equation into two separable equations and then solving each of those. This technique is developed by Euler.</p>
 <p>Note that if we multiply the equation by an arbitrary function <span class="math">\(I(x)\)</span>, we get <span class="math">\(I(x) \frac{\dee y}{\dee x} = I(x) A(x) y + I(x) B(x)\)</span>.</p>
 <h3 id="first-equation">First equation</h3>
@@ -674,13 +673,12 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 </ul>
 <h2 id="sequences-series-taylor-polynomials">Sequences, Series, Taylor Polynomials</h2>
 <p>Given a function <span class="math">\(f(x)\)</span>, we can often find a polynomial <span class="math">\(P(x)\)</span> that has the same first <span class="math">\(N\)</span> derivatives at a point <span class="math">\(x = a\)</span>.</p>
-<p>For example, <span class="math">\(f(x) = \sin x\)</span> and <span class="math">\(P(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!}\)</span> have the same first 7 derivatives - <span class="math">\(\frac{\dee^i f}{\dee x^i} = \frac{\dee^i P}{\dee x^i}\)</span> for <span class="math">\(1 \le i \le 7\)</span> at <span class="math">\(x = 0\)</span>.</p>
+<p>For example, <span class="math">\(f(x) = \sin x\)</span> and <span class="math">\(P(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!}\)</span> have the same first 7 derivatives at <span class="math">\(x = 0\)</span>. In other words, <span class="math">\(\frac{\dee^i f}{\dee x^i} = \frac{\dee^i P}{\dee x^i}\)</span> for <span class="math">\(1 \le i \le 7\)</span> at <span class="math">\(x = 0\)</span>.</p>
 <p>Another example is <span class="math">\(f(x) = \frac{1}{1 - x}\)</span> and <span class="math">\(P(x) = 1 + x + x^2 + x^3 + \ldots + x^N\)</span>. The first <span class="math">\(N\)</span> derivates at <span class="math">\(x = 0\)</span> are always equal, and it works for any arbitrary <span class="math">\(N\)</span>.</p>
 <p>In general, if <span class="math">\(P(x) = \sum_{n = 0}^N \frac{f^{(n)}(a)}{n!}(x - a)^n\)</span>, then <span class="math">\(f(x)\)</span> and <span class="math">\(P(x)\)</span> share the first <span class="math">\(N\)</span> derivative values at <span class="math">\(x = a\)</span>. The notation <span class="math">\(f^{(n)}(a)\)</span> represents <span class="math">\(\evalat{\frac{\dee^n}{\dee x^n} f(x)}_{x = a}\)</span>.</p>
 <p>The most important use of this is approximation of very difficult functions. This allows us to use polynomials as tools to analyze many types of functions.</p>
 <p>What kinds of functions does this work for?</p>
 <p>In the limit <span class="math">\(N \to \infty\)</span>, does <span class="math">\(f(x) = P(x) = \lim_{N \to \infty} \sum_{n = 0}^N \frac{f^{(n)}(a)}{n!}(x - a)^n\)</span> for all <span class="math">\(x\)</span>? Does the limit even exist?</p>
-<p>Consider <span class="math">\(\arctan x = \int_0^x \frac{1}{1 + t^2} \dee t\)</span>. If we assume that <span class="math">\(\frac{1}{1 - x} = 1 + x + x^2 + x^3 + \ldots + x^N\)</span> as shown earlier, we can substitute <span class="math">\(t^2\)</span> for <span class="math">\(x\)</span> to get.</p>
 <h2 id="sequences">Sequences</h2>
 <p>A <strong>sequence</strong> is an ordered list of numbers. We denote it with <span class="math">\(a_0, a_1, \ldots, a_n\)</span>, or simply <span class="math">\(a_n = f(n)\)</span>. For example, <span class="math">\(a_n = 2n\)</span> is equivalent to <span class="math">\(0, 2, 4, 6, \ldots\)</span></p>
 <p>A sequence <strong>converges</strong> if it has a limit as <span class="math">\(n \to \infty\)</span>.</p>
@@ -690,7 +688,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>This is similar to the definition of limits at infinity. For example, the sequence <span class="math">\(0.3, 0.33, 0.333, 0.3333, \ldots\)</span> has the limit <span class="math">\(L = \frac{1}{3}\)</span>, but <span class="math">\(1, -1, 1, -1, \ldots\)</span> has no limit.</p>
 <p>Use the definition of the limit to prove that the limit of <span class="math">\(a_n = \frac{n}{1 + n}\)</span> is 1:</p>
 <blockquote>
-<p>;wip</p>
+<p>Let <span class="math">\(\epsilon \in \mb{R}\)</span>. Construct <span class="math">\(k = \frac{1}{\epsilon} - 1\)</span>.<br />Assume <span class="math">\(n &gt; k\)</span>. Then <span class="math">\(n &gt; \frac{1}{\epsilon} - 1\)</span> and <span class="math">\(\frac{1}{1 + n} &lt; \epsilon\)</span>, so <span class="math">\(\abs{\frac{n}{1 + n} - 1} &lt; \epsilon\)</span>.<br />So by definition, <span class="math">\(\lim_{n \to \infty} a_n = 1\)</span>.</p>
 </blockquote>
 <p>If <span class="math">\(a_n\)</span> and <span class="math">\(L\)</span> lie in the domain of a continuous function <span class="math">\(f\)</span> and <span class="math">\(a_n \to L\)</span> as <span class="math">\(n \to \infty\)</span>, then <span class="math">\(\lim_{n \to \infty} f(a_n) = f(L)\)</span>. In other words, the limit of a sequence is the same as the limit of its corresponding function at infinity.</p>
 <p>Sequences are easy to deal with if they are explicit functions of the index <span class="math">\(n\)</span>, but a lot of sequences are defined recursively, like <span class="math">\(a_{n + 1} = a_n + \frac{1}{n!}, a_0 = 1\)</span>.</p>
@@ -712,7 +710,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>Formally, a sequence <span class="math">\(a_n\)</span> is monotone if and only if <span class="math">\((\forall u, \forall v, u &lt; v \implies a_u &lt; a_v) \vee (\forall u, \forall v, u &lt; v \implies a_u &gt; a_v)\)</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>It is intuitively obvious that if a value is always increasing, and cannot exceed a value, then it must converge to some value.<br />Without loss of generality, assume that <span class="math">\(a_n\)</span> is increasing and bounded by <span class="math">\(a_n \le b\)</span>.<br />Let <span class="math">\(p\)</span> be the smallest possible upper bound on <span class="math">\(a_n\)</span>.<br />As an aside, <span class="math">\(p\)</span> is the limit of the sequence - any number less than this is not an upper bound, and any number greater than this can be smaller while still being an upper bound.<br />Let <span class="math">\(\epsilon &gt; 0\)</span>.<br />Clearly, <span class="math">\(p - \epsilon &lt; p\)</span>, so <span class="math">\(\exists k, p - \epsilon &lt; a_k\)</span>, since any value less than the .<br />Assume <span class="math">\(n &gt; k\)</span>. Clearly, <span class="math">\(a_k \le a_n\)</span> (since the sequence is monotonically increasing).<br />Clearly, <span class="math">\(a_n \le p &lt; p + \epsilon\)</span>.<br />So <span class="math">\(p - \epsilon &lt; a_n &lt; p + \epsilon\)</span> and <span class="math">\(-\epsilon &lt; a_n - p &lt; \epsilon\)</span>.<br />So <span class="math">\(\abs{a_n - p} &lt; \epsilon\)</span>, and by the definition of the limit, <span class="math">\(p\)</span> is the limit and the sequence converges.</p>
+<p>It is intuitively obvious that if a value is always increasing, and cannot exceed a value, then it must converge to some value.<br />Without loss of generality, assume that <span class="math">\(a_n\)</span> is increasing and bounded by <span class="math">\(a_n \le b\)</span>.<br />Let <span class="math">\(p\)</span> be the smallest possible upper bound on <span class="math">\(a_n\)</span>.<br />As an aside, <span class="math">\(p\)</span> is the limit of the sequence - any number less than this is not an upper bound, and any number greater than this can be smaller while still being an upper bound.<br />Let <span class="math">\(\epsilon &gt; 0\)</span>.<br />Clearly, <span class="math">\(p - \epsilon &lt; p\)</span>, so <span class="math">\(\exists k, p - \epsilon &lt; a_k\)</span>, since any value less than the tight upper bound must be exceeded by some element in the sequence.<br />Assume <span class="math">\(n &gt; k\)</span>. Clearly, <span class="math">\(a_k \le a_n\)</span> (since the sequence is monotonically increasing).<br />Clearly, <span class="math">\(a_n \le p &lt; p + \epsilon\)</span>.<br />So <span class="math">\(p - \epsilon &lt; a_n &lt; p + \epsilon\)</span> and <span class="math">\(-\epsilon &lt; a_n - p &lt; \epsilon\)</span>.<br />So <span class="math">\(\abs{a_n - p} &lt; \epsilon\)</span>, and by the definition of the limit, <span class="math">\(p\)</span> is the limit and the sequence converges.</p>
 </blockquote>
 <p>Does <span class="math">\(a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}\)</span> converge?</p>
 <blockquote>
@@ -734,7 +732,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>A series is a sum of terms. We denote this as <span class="math">\(S_N = \sum_{n = 0}^N a_n, a_n \in \mb{R}\)</span>. Here, <span class="math">\(N \in \mb{Z}, N \ge 0\)</span>.</p>
 <p>For now, <span class="math">\(a_n\)</span> is a constant, which can depend on <span class="math">\(n\)</span>. Eventually, we want to be able to build and analyze sequences of functions, which can depend on other variables like <span class="math">\(x\)</span>.</p>
 <p>If <span class="math">\(N\)</span> is finite, then <span class="math">\(S_N\)</span> is known as a <strong>partial sum</strong>.</p>
-<p>We analyze series by analyzing the sequence of the sequence values: <span class="math">\(\sum_{n = 0}^0 a_n, \sum_{n = 0}^1 a_n, \sum_{n = 0}^2 a_n, \ldots\)</span>.</p>
+<p>We analyze series by analyzing the sequence of the series values: <span class="math">\(\sum_{n = 0}^0 a_n, \sum_{n = 0}^1 a_n, \sum_{n = 0}^2 a_n, \ldots\)</span>.</p>
 <p>So just as we take the limit of a sequence, we can take the limit of a series with <span class="math">\(\lim_{N \to \infty} \sum_{n = 0}^N a_n\)</span>. This is the relation between sequences and series.</p>
 <p>A sequence <strong>converges</strong> if this limit exists. Otherwise, it <strong>diverges</strong>. A series converges if and only if the limit of its partial sum to infinity is a finite value.</p>
 <p>For example, we previously saw the sequence <span class="math">\(a_0 = 1, a_{n + 1} = a_n + \frac{1}{n!}\)</span>, which is actually equivalent to the series <span class="math">\(S_N = \sum_{n = 0}^1 \frac{1}{n!}\)</span>. They are equivalent because <span class="math">\(a_n = S_N\)</span> when <span class="math">\(n = N\)</span>.</p>
@@ -750,12 +748,12 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>If <span class="math">\(x = 1\)</span>, then <span class="math">\(\lim_{N \to \infty} \sum_{n = 0}^N 1^n = 1 + \ldots + 1 = \infty\)</span>, and the sequence diverges.</p>
 <p>If <span class="math">\(x = -1\)</span>, then <span class="math">\(\lim_{N \to \infty} \sum_{n = 0}^N (-1)^n = 1 - 1 + 1 - 1 + \ldots + 1 - 1 = ?\)</span>. This sum either has the value 0 or 1, and oscillates infinitely as we go to infinity. Therefore, the sequence diverges.</p>
 <p>Clearly, if <span class="math">\(x &gt; 1\)</span> or <span class="math">\(x &lt; -1\)</span>, the value goes to positive or negative infinity, and the sequence diverges.</p>
-<p>Therefore, the geometric series converges only for <span class="math">\(-1 &lt; x &lt; 1\)</span>, since if this is the case, <span class="math">\(\lim_{N \to \infty} x^N = 0\)</span> and <span class="math">\(\lim_{N \to \infty} S_N = \frac{1}{1 - x}\)</span>.</p>
+<p>Therefore, the geometric series converges only for <span class="math">\(-1 &lt; x &lt; 1\)</span> (<span class="math">\(\abs{x} &lt; 1\)</span>), since if this is the case, <span class="math">\(\lim_{N \to \infty} x^N = 0\)</span> and <span class="math">\(\lim_{N \to \infty} S_N = \frac{1}{1 - x}\)</span>.</p>
 <p>Does <span class="math">\(\sum_{k = 1}^\infty 3^{2k}5^{1 - k}\)</span> converge?</p>
 <blockquote>
 <p>Clearly, <span class="math">\(\sum_{k = 1}^\infty 3^{2k}5^{1 - k} = \sum_{k = 1}^\infty 9^k5^{1 - k} = 5\sum_{k = 1}^\infty 9^k5^{-k} = 5\sum_{k = 1}^\infty \frac{9^k}{5^k} = 5\sum_{k = 1}^\infty \left(\frac{9}{5}\right)^k\)</span>.<br />Since <span class="math">\(\frac{9}{5} \ge 1\)</span>, the geometric sequence diverges as the limit of <span class="math">\(\left(\frac{9}{5}\right)^k\)</span> goes to infinity.</p>
 </blockquote>
-<p>Does <span class="math">\(3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2\)</span> converge?</p>
+<p>Does <span class="math">\(3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2\)</span> converge? ;wip: what was the original question again? this doesn't seem right</p>
 <blockquote>
 <p>Clearly, <span class="math">\(3 - \frac{3}{2}x^2 + \frac{3}{4}x - \frac{3}{8}x^2 = 3 \sum_{n = 0}^\infty \left(-\frac{x}{2}\right)^n\)</span>.<br />Clearly, in order to converge, <span class="math">\(-1 \le -\frac{x}{2} \le -1\)</span>, or <span class="math">\(-1 \le \frac{x}{2} \le 1\)</span>.<br />As an aside, it converges to <span class="math">\(\frac{3}{1 + \frac{x}{2}} = \frac{6}{2 + x}\)</span>.</p>
 </blockquote>
@@ -765,10 +763,10 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>One of the simplest tests for convergence is that if the terms of a series are not getting closer and closer to 0, the series can never converge. In other words, <span class="math">\(\lim_{n \to \infty} a_n = 0\)</span> is a requirement for convergence.</p>
 <p>Formally, if <span class="math">\(\lim_{n \to \infty} \abs{a_n} \ne 0\)</span>, then the sequence does not converge.</p>
 <p>This is known as the <strong>simple limit test</strong> for series.</p>
-<p>Our convergence tests can decide whether a series covnerges or not, but do not provide information about what it converges to.</p>
-<p>The sum of two convergent series is also convergent - <span class="math">\(\sum a_n + \sum b_n = \sum (a_n + b_n)\)</span> if <span class="math">\(\sum a_n\)</span> and <span class="math">\(\sum b_n\)</span> are both convergent. However, this is not always true for divergent series. For example, <span class="math">\(\sum_{n = 1}^\infty (-1)^n\)</span> and <span class="math">\(\sum_{n = 1}^\infty (-1)^{n + 1}\)</span> are both divergent, but <span class="math">\(\sum_{n = 1}^\infty {(-1)^n + (-1)^{n + 1}} = 0\)</span>.</p>
+<p>Our convergence tests can decide whether a series converges or not, but do not provide information about what it converges to.</p>
+<p>The sum of two convergent series is also convergent - <span class="math">\(\sum a_n + \sum b_n = \sum (a_n + b_n)\)</span> if <span class="math">\(\sum a_n\)</span> and <span class="math">\(\sum b_n\)</span> are both convergent. However, the sum of two divergent series is not necessarily always divergent. For example, <span class="math">\(\sum_{n = 1}^\infty (-1)^n\)</span> and <span class="math">\(\sum_{n = 1}^\infty (-1)^{n + 1}\)</span> are both divergent, but <span class="math">\(\sum_{n = 1}^\infty {(-1)^n + (-1)^{n + 1}} = 0\)</span>.</p>
 <h2 id="p-series">P-series</h2>
-<p>A <strong>P-series</strong> is a series of the form <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span>m where <span class="math">\(P \in \mb{R}\)</span>.</p>
+<p>A <strong>P-series</strong> is a series of the form <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span> where <span class="math">\(P \in \mb{R}\)</span>.</p>
 <h3 id="convergence-1">Convergence</h3>
 <p>We want to figure out which values of <span class="math">\(P\)</span> allow the series to converge.</p>
 <p>Clearly, <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P} = \sum_{n = 1}^\infty n^{-P}\)</span>.</p>
@@ -778,7 +776,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>So by the integral test, <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span>.</p>
 <p>So <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^P}\)</span> converges if and only if <span class="math">\(P &gt; 1\)</span>.</p>
 <h3 id="considerations">Considerations</h3>
-<p>The series <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> is called the <strong>harmonic series</strong>. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where <span class="math">\(P = 1\)</span>. This is a useful series because <span class="math">\(\lim_{n \to \infty} \frac{1}{n} = 0\)</span>, yet the series diverges, so this is an example of the simple convergence test not being useful.</p>
+<p>The series <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> is called the <strong>harmonic series</strong>. It diverges (very slowly, like the logarithmic functions), and this can be proven since it is a special case of the P-series where <span class="math">\(P = 1\)</span>. This is a useful series because <span class="math">\(\lim_{n \to \infty} \frac{1}{n} = 0\)</span>, yet the series diverges, so this is an example of the simple convergence test not giving a conclusive result.</p>
 <p>For example, a P-series where <span class="math">\(P = 2\)</span> is <span class="math">\(\frac{\pi^2}{6}\)</span>. ;wip: how?</p>
 <p>As an aside, we have closed forms for P-series for all even <span class="math">\(P\)</span> - always in the form of <span class="math">\(\frac{m}{n}\pi^P\)</span>. However, we do not know anything at this time about odd <span class="math">\(P\)</span>.</p>
 <p>For example, a P-series where <span class="math">\(P = 3\)</span> results in a value that has no known exact form, and is still an unsolved problem in methematics.</p>
@@ -787,7 +785,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>Let <span class="math">\(\sum_{n = 0}^\infty a_n\)</span> be an infinite series. Then we can write <span class="math">\(a_n\)</span> be a function of <span class="math">\(n\)</span>, like <span class="math">\(f(n)\)</span>.</p>
 <p>For example, for <span class="math">\(\sum_{n = 0}^\infty \frac{1}{n^2}\)</span>, <span class="math">\(f(n) = \frac{1}{n^2}\)</span>.</p>
 <p>Now we can develop the <strong>integral test</strong>.</p>
-<p>Given <span class="math">\(f(n) = a_n\)</span>, if <span class="math">\(f(n)\)</span> is <strong>continuous</strong>, <strong>positive</strong>, and <strong>decreasing</strong> for all <span class="math">\(n \ge 1\)</span>, then <span class="math">\(\int_1^\infty f(n) \dee n\)</span> converges if and only if <span class="math">\(\sum_{n = 1}^\infty f(n)\)</span> converges.</p>
+<p>Given <span class="math">\(f(n) = a_n\)</span>, if <span class="math">\(f(n)\)</span> is <strong>continuous</strong>, <strong>positive</strong>, and <strong>decreasing</strong> for all <span class="math">\(n \ge 1\)</span>, then <span class="math">\(\int_1^\infty f(n) \dee n\)</span> converges if and only if <span class="math">\(\sum_{n = 1}^\infty a_n\)</span> converges.</p>
 <h3 id="error-estimation">Error Estimation</h3>
 <p>For series that satisfy the hypetheses of the integral test, we can estimate the error/remainder <span class="math">\(R_N = \sum_1^\infty a_n - \sum_1^N a_n\)</span> for any <span class="math">\(N\)</span>.</p>
 <p>This is useful because we can't explicitly calculate <span class="math">\(\sum_1^\infty a_n\)</span>, but we can calculate <span class="math">\(\sum_1^N a_n\)</span>.</p>
@@ -815,7 +813,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 </ul>
 <p>This is easily proved via contradiction or similar.</p>
 <p>Note that if <span class="math">\(\rho = 0\)</span> or <span class="math">\(\rho = \infty\)</span>, then we cannot say anything about whether they converge or not, and we need to pick a better comparison.</p>
-<p>Prove that <span class="math">\(\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}\)</span>:</p>
+<p>Prove that <span class="math">\(\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}\)</span> converges:</p>
 <blockquote>
 <p>Clearly, <span class="math">\(\frac{\abs{\sin n}}{\sqrt{n + n^3}} \le \frac{1}{\sqrt{n + n^3}} &lt; \frac{1}{\sqrt{n^3}} = \frac{1}{n^\frac{3}{2}}\)</span>.<br />Since this is a P-series where <span class="math">\(P = \frac{3}{2}\)</span>, <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^\frac{3}{2}}\)</span> converges.<br />So by the comparison test, <span class="math">\(\sum_{n = 1}^\infty \frac{\abs{\sin n}}{\sqrt{n + n^3}}\)</span> converges.</p>
 </blockquote>
@@ -823,9 +821,9 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>We can find useful comparisons to make by finding something bigger than the numerator, and smaller than the denominator, and trying that as a comparison.</p>
 <p>For example, <span class="math">\(\sum_1^\infty \frac{\sqrt{n}}{n^2 + 2} &lt; \sum_1^\infty \frac{\sqrt{n}}{n^2} = \sum_1^\infty \frac{1}{n^\frac{3}{2}}\)</span>, which converges as it is a P-series with <span class="math">\(P = \frac{3}{2}\)</span>.</p>
 <p>For example, <span class="math">\(\sum_1^\infty \frac{1}{2^nn} \le \sum_1^\infty \frac{1}{2^n} = \sum_1^\infty \left(\frac{1}{2}\right)^n\)</span>, which converges since it is a geometric series with <span class="math">\(x = \frac{1}{2}\)</span>.</p>
-<p>Does <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}\)</span> exist?</p>
+<p>Does <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}}\)</span> exist?</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} &lt; \sum_1^\infty \frac{1}{n}\)</span>.<br />Using the limit comparison test, <span class="math">\(\rho = \lim_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1\)</span>.<br />Since <span class="math">\(0 &lt; \rho &lt; \infty\)</span>, and <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> diverges, then <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}\)</span> also diverges.</p>
+<p>Clearly, <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} &lt; \sum_1^\infty \frac{1}{n}\)</span>.<br />Using the limit comparison test, <span class="math">\(\rho = \lim_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1\)</span>.<br />Since <span class="math">\(0 &lt; \rho &lt; \infty\)</span>, and <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> diverges, then <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}\)</span> also diverges.</p>
 </blockquote>
 <p>Proof of limit comparison test:</p>
 <blockquote>
@@ -839,7 +837,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>Alternating series are useful to study because they have several useful properties.</p>
 <h3 id="error">Error</h3>
 <p>The remainder/error after <span class="math">\(N\)</span> terms is easy to estimate. Clearly, <span class="math">\(\abs{R_N} = \abs{\sum^\infty (-1)^n p_n - \sum^N (-1)^n p_n}\)</span>. So <span class="math">\(\abs{R_N} \le p_{N + 1}\)</span>.</p>
-<p>This is true because the terms of the series keep bouncing back and forth across the limit, so the remainder is always less than or equal to the value of each term.</p>
+<p>This is true because the terms of the series keep bouncing back and forth across the limit, so the remainder is always bounded by the value of the next term.</p>
 <p>For example, <span class="math">\(\sum_1^\infty (-1)^{n + 1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \ldots = \ln 2\)</span>. We can estimate the error with <span class="math">\(\abs{R_N} = \frac{1}{N + 1}\)</span>.</p>
 <h3 id="convergence-2">Convergence</h3>
 <p>For an alternating series, if <span class="math">\(\lim_{n \to \infty} p_n = 0\)</span>, and <span class="math">\(p_{n + 1} \le p_n\)</span>, then the series converges.</p>
@@ -895,10 +893,10 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 </ol>
 <p>Prove whether the following converge or diverge:</p>
 <ul>
-<li><span class="math">\(\sum_{n = 1}^\infty \frac{n^2 + 7n}{\sqrt{n^5 + 4n^3 - 2} \le \frac{1}{\sqrt{n}}\)</span>.</li>
+<li><span class="math">\(\sum_{n = 1}^\infty \frac{n^2 + 7n}{\sqrt{n^5 + 4n^3 - 2}} \le \frac{1}{\sqrt{n}}\)</span>.</li>
 <li><span class="math">\(\sum_{n = 1}^\infty \frac{n + 5}{5^n}\)</span></li>
 <li><span class="math">\(\sum_{n = 1}^\infty n^2 e^{-n}\)</span></li>
-<li><span class="math">\(\sum_{n = 1}^\infty \frac{1}{(\ln n)^{\ln n}\)</span></li>
+<li><span class="math">\(\sum_{n = 1}^\infty \frac{1}{(\ln n)^{\ln n}}\)</span></li>
 <li><span class="math">\(\sum_{n = 1}^\infty \frac{e^\frac{1}{n}}{n^2}\)</span></li>
 </ul>
 <p>;wip</p>
@@ -1009,7 +1007,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>We can actually estimate the error in <span class="math">\(P_{N, x_0}(x)\)</span>, even without knowing much about <span class="math">\(f(x)\)</span>.</p>
 <h3 id="taylors-remainder-theorem">Taylor's Remainder Theorem</h3>
 <p>If <span class="math">\(f^{(n + 1)}(x)\)</span> is continuous on an interval <span class="math">\(\mb{I}\)</span> such that <span class="math">\(x_0 \in \mb{I}\)</span>, then <span class="math">\(\forall x \in \mb{I}, \exists \min(x_0, x) &lt; c &lt; \max(x_0, x), f(x) - P_{N, x_0}(x) = R_N(x) = \frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}\)</span>.</p>
-<p>In other words, there exists a value <span class="math">\(c\)</span> between <span class="math">\(x\)</span> and <span class="math">\(x_0\)</span> exclusive such that the error is <span class="math">\(\frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}\)</span> - the <span class="math">\(N + 1\)</span>th term evaluated at some point in the interval.</p>
+<p>In other words, there exists a value <span class="math">\(c\)</span> between <span class="math">\(x\)</span> and <span class="math">\(x_0\)</span> exclusive such that the error is <span class="math">\(\frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}\)</span> - the <span class="math">\(N + 1\)</span>th term evaluated with a certain value of the <span class="math">\(N + 1\)</span>th derivative.</p>
 <p>This can be proved using the Intermediate Value Theorem, but it is a messy proof.</p>
 <p>Clearly, if <span class="math">\(f(x) - P_{N, x_0}(x) = \frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}\)</span>, then <span class="math">\(\abs{f(x) - P_{N, x_0}(x)} = \abs{R_N(x)} = \abs{\frac{f^{(N + 1)}(c)}{(N + 1)!}(x - x_0)^{N + 1}} = \abs{f^{(N + 1)}(c)}\abs{\frac{(x - x_0)^{N + 1}}{(N + 1)!}} = \abs{f^{(N + 1)}(c)}\frac{\abs{x - x_0}^{N + 1}}{(N + 1)!}\)</span>.</p>
 <p>Clearly, if <span class="math">\(\exists M \in \mb{R}, \forall x \in \mb{I}, \abs{f^{(N + 1)}(x)} \le M\)</span>, then <span class="math">\(\abs{f^{(N + 1)}(c)} \le M\)</span> and <span class="math">\(\abs{R_N(x)} \le M\frac{\abs{x - x_0}^{N + 1}}{(N + 1)!}\)</span>.</p>
@@ -1023,27 +1021,29 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>We almost always want to minimise the error. To do this, we should keep <span class="math">\(x\)</span> as close to <span class="math">\(x_0\)</span> as possible (<span class="math">\(x - x_0\)</span> can be made smaller), or use more terms in the partial sum (<span class="math">\((N + 1)\)</span> can be made larger). Also, we always want the smallest possible <span class="math">\(M\)</span>, so we want to pick the tightest possible bound for <span class="math">\(f^{(N + 1)}(x)\)</span>.</p>
 <p>Estimate the error in the Taylor polynomial for <span class="math">\(e^x\)</span> about <span class="math">\(x_0 = 0\)</span> after <span class="math">\(N\)</span> terms for <span class="math">\(x \in [-1, 1]\)</span>, and determine the number of terms before the error is less than 0.000005:</p>
 <blockquote>
-<p>Clearly, the error is <span class="math">\(\abs{R_N(x)} = \abs{e^x - \sum_{n = 0}^N \frac{x^n}{n!}\)</span>.<br />We want to find <span class="math">\(M\)</span> such that <span class="math">\(\abs{f^{(N + 1)}(x)} \le M\)</span>.<br />Clearly, <span class="math">\(f^{(N + 1)}(x) = e^x\)</span>, and the largest possible value occurs at <span class="math">\(x = 1\)</span>, so <span class="math">\(\abs{f^{(N + 1)}(x)} \le e^1\)</span>, so <span class="math">\(M \ge e\)</span>.<br />Then by the Taylor Remainder Theorem, <span class="math">\(\abs{R_N(x)} \le e\frac{\abs{x}^{N + 1}}{(N + 1)!}\)</span>. We can use any <span class="math">\(M \ge e\)</span> we want to simplify our calculations, but larger <span class="math">\(M\)</span> means less useful error bounds.<br />We want <span class="math">\(\abs{R_N(x)} \le e\frac{\abs{x}^{N + 1}}{(N + 1)!} \le t(N) \le 0.000005\)</span>, where <span class="math">\(t(N)\)</span> is a function of <span class="math">\(N\)</span> only, without <span class="math">\(x\)</span>.<br />Since <span class="math">\(\abs{x}^{N + 1} \le 1\)</span>, <span class="math">\(\frac{e}{(N + 1)!} \le \frac{e\abs{\pm 1}^{N + 1}}{(N + 1)!} \le 0.000005\)</span>, or <span class="math">\((N + 1)! \le 200000e\)</span>.<br />Clearly, <span class="math">\(400000 = 200000 \cdot 2 \le 200000e \le 200000 \cdot 3 = 600000\)</span>.<br />Since <span class="math">\(9! \le 200000\)</span> and <span class="math">\(10! &gt; 600000\)</span>, <span class="math">\(N + 1 \ge 10 \iff (N + 1)! &gt; 200000e\)</span> and <span class="math">\(N \ge 9\)</span>.<br />So the error is less than 0.000005 when <span class="math">\(N \ge 9\)</span>.</p>
+<p>Clearly, the error is <span class="math">\(\abs{R_N(x)} = \abs{e^x - \sum_{n = 0}^N \frac{x^n}{n!}}\)</span>.<br />We want to find <span class="math">\(M\)</span> such that <span class="math">\(\abs{f^{(N + 1)}(x)} \le M\)</span>.<br />Clearly, <span class="math">\(f^{(N + 1)}(x) = e^x\)</span>, and the largest possible value occurs at <span class="math">\(x = 1\)</span>, so <span class="math">\(\abs{f^{(N + 1)}(x)} \le e^1\)</span>, so <span class="math">\(M \ge e\)</span>.<br />Then by the Taylor Remainder Theorem, <span class="math">\(\abs{R_N(x)} \le e\frac{\abs{x}^{N + 1}}{(N + 1)!}\)</span>. We can use any <span class="math">\(M \ge e\)</span> we want to simplify our calculations, but larger <span class="math">\(M\)</span> means less useful error bounds.<br />We want <span class="math">\(\abs{R_N(x)} \le e\frac{\abs{x}^{N + 1}}{(N + 1)!} \le t(N) \le 0.000005\)</span>, where <span class="math">\(t(N)\)</span> is a function of <span class="math">\(N\)</span> only, without <span class="math">\(x\)</span>.<br />Since <span class="math">\(\abs{x}^{N + 1} \le 1\)</span>, <span class="math">\(\frac{e}{(N + 1)!} \le \frac{e\abs{\pm 1}^{N + 1}}{(N + 1)!} \le 0.000005\)</span>, or <span class="math">\((N + 1)! \le 200000e\)</span>.<br />Clearly, <span class="math">\(400000 = 200000 \cdot 2 \le 200000e \le 200000 \cdot 3 = 600000\)</span>.<br />Since <span class="math">\(9! \le 200000\)</span> and <span class="math">\(10! &gt; 600000\)</span>, <span class="math">\(N + 1 \ge 10 \iff (N + 1)! &gt; 200000e\)</span> and <span class="math">\(N \ge 9\)</span>.<br />So the error is less than 0.000005 when <span class="math">\(N \ge 9\)</span>.</p>
 </blockquote>
 <h1 id="section-30">24/3/14</h1>
 <p>A <strong>Maclaurin series</strong> is a Taylor series where <span class="math">\(x_0 = 0\)</span> - a Taylor series centered around 0.</p>
 <p>Clearly, <span class="math">\(\sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n = \frac{f^{(0)}(x_0)}{0!}(x - x_0)^0 + \ldots + \frac{f^{(N)}(x_0)}{N!}(x - x_0)^N + R_N(x)\)</span> for some finite <span class="math">\(N\)</span>.</p>
-<p>Let <span class="math">\(\mb{I} = [a, b]\)</span> such that <span class="math">\(x_0 \in \mb{I}\)</span>, within the interval of convergence. CLearly, Taylor series are always continuous.</p>
-<p>By the Taylor remainder theorem, <span class="math">\(\abs{R_{N, x_0}} = \frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span>. Clearly, <span class="math">\(\frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span> is a scalar multiple of <span class="math">\(\frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span>.</p>
+<p>Let <span class="math">\(\mb{I} = [a, b]\)</span> such that <span class="math">\(x_0 \in \mb{I}\)</span>, within the interval of convergence. Clearly, Taylor series are always continuous.</p>
+<p>By the Taylor remainder theorem, <span class="math">\(\abs{R_{N, x_0}} = \frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span> for some <span class="math">\(c\)</span>. Clearly, <span class="math">\(\frac{f^{(N + 1)}(c)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span> is a scalar multiple of <span class="math">\(\frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span>.</p>
 <p>So <span class="math">\(R_N(x) = O(1) \frac{f^{(N + 1)}(x)}{(N + 1)!}\abs{x - x_0}^{N + 1}\)</span>. In other words, we can write the remainder as a scalar multiple of the next term.</p>
 <p>So we can actually write the series as <span class="math">\(\frac{f^{(0)}(x_0)}{0!}(x - x_0)^0 + \ldots + \frac{f^{(N)}(x_0)}{N!}(x - x_0)^N + O(1) \frac{f^{(N + 1)}(x_0)}{(N + 1)!}(x - x_0)^{N + 1}\)</span>.</p>
+<p>For example, <span class="math">\(\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + O(1)\frac{x^9}{9!}\)</span>.</p>
 <h2 id="operations-on-taylor-series">Operations on Taylor Series</h2>
 <p>The reason we use Taylor series to represent functions is in order to more easily evaluate limits, integrals, and infinite series. It is also useful for approximating the functions with actual numbers, all while being able to get the error bounds in our evaluation.</p>
 <h3 id="limits">Limits</h3>
 <p>If we take a limit as <span class="math">\(x \to x_0\)</span>, then the coefficients of a Taylor series already has l'Hospital's rule built in.</p>
 <p>Consider <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x}\)</span>:</p>
 <blockquote>
-<p>We could find this geometrically, using l'Hospital's rule, or using infinite series.<br />Clearly, <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{x - \frac{x^3}{3!} + \frac{x^5}{5!} + M\frac{x^7}{7!}}}{x} = \lim_{x \to 0} 1 - \frac{x^2}{3!} + \frac{x^4}{5!} + M\frac{x^6}{7!}} = 1 - 0 + 0 + M0 = 1\)</span>.</p>
+<p>We could find this geometrically, using l'Hospital's rule, or using infinite series.<br />Clearly, <span class="math">\(\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{x - \frac{x^3}{3!} + \frac{x^5}{5!} + M\frac{x^7}{7!}}{x} = \lim_{x \to 0} 1 - \frac{x^2}{3!} + \frac{x^4}{5!} + M\frac{x^6}{7!} = 1 - 0 + 0 + M0 = 1\)</span>.</p>
 </blockquote>
 <p>Evaluate <span class="math">\(\lim_{x \to 0} \frac{e^{\sin x} - 1}{x}\)</span>:</p>
 <blockquote>
 <p>Let <span class="math">\(u = \sin x\)</span>. Clearly, <span class="math">\(\lim_{x \to 0} \frac{e^{\sin x} - 1}{x} = \lim_{x \to 0} \frac{e^u - 1}{x} = \lim_{x \to 0} \frac{(1 + u + \frac{u^2}{2!} + \ldots) - 1}{x} = \lim_{x \to 0} \frac{\sin x + \frac{\sin^2 x}{2!} + \ldots}{x} = \lim_{x \to 0} \frac{\sin x}{x}\left(1 + \frac{\sin x}{2!} + \ldots\right) = \lim_{x \to 0} \frac{\sin x}{x} \lim_{x \to 0} \left(1 + \frac{\sin x}{2!} + \ldots\right) = 1\)</span>.</p>
 </blockquote>
+<p>However, it is usually faster and easier to just use l'Hospital's rule.</p>
 <h1 id="section-31">26/3/14</h1>
 <p>The Taylor inequality basicaly states that the remainder of a Taylor polynomial is a multiple of the next term if the derivative is bounded.</p>
 <h3 id="estimating-definite-integrals">Estimating Definite Integrals</h3>
@@ -1085,6 +1085,8 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>Given a value of <span class="math">\(t\)</span> for <span class="math">\(\vec{r}(t) = (f(t), g(t))\)</span> and <span class="math">\(y = f(x)\)</span>, we can plot it in an inverval of <span class="math">\(t \in [a, b]\)</span> by plotting for <span class="math">\(x \in [f(a), f(b)]\)</span>.</p>
 <p>The parameterization of a curve is not unique, just like normal curves. Every parametric curve has infinite different ways of being represented mathematically, but when drawn on a plane each curve has only one shape.</p>
 <p>For example, consider <span class="math">\(\vec{r}(t) = (a \cos t, b \sin t)\)</span>. This is an ellipse where <span class="math">\(a &gt; b\)</span> stretches it horiontally and <span class="math">\(b &gt; a\)</span> stretches it vertically. We can rewrite it as <span class="math">\(\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\)</span> to plot it on a Cartesian plane.</p>
+<p>We plot parametric curves by solving for <span class="math">\(t\)</span> in <span class="math">\(x = x(t)\)</span>, so <span class="math">\(t = x^{-1}(x)\)</span>, then subsituting into <span class="math">\(y(t)\)</span> to get <span class="math">\(y = y(x^{-1}(x))\)</span>, which is a non-parametric function we can plot more easily.</p>
+<p>Alternatively, we would have to plot both <span class="math">\(y = y(t)\)</span> and <span class="math">\(x = x(t)\)</span>, and use these graphs to plot the points on <span class="math">\(\vec{r}(t) = (x(t), y(t))\)</span>.</p>
 <h3 id="hyperbolic-functions">Hyperbolic Functions</h3>
 <p>The functions <span class="math">\(\vec{r} = (a \cos t, b \sin t)\)</span> are called <strong>circular/elliptical trigonometric fucntions</strong>.</p>
 <p>The hyperbolic trigonometric funnctions are called hyperbolic for a reason. Consider <span class="math">\(\vec{r}(t) = (a \cosh t, b \sinh t)\)</span>.</p>
@@ -1142,6 +1144,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <blockquote>
 <p>Clearly, <span class="math">\(A = \int_0^{2 \pi} (a - a \cos t) \frac{\dee}{\dee t} (at - a \sin t) \dee t = \int_0^{2 \pi} (a - a \cos t)(a - a \cos t) \dee t = 2 \pi a^2 + \int_0^{2 \pi} -2a^2 \cos t \dee t + \int_0^{2 \pi} + a^2 \cos^2 t \dee t = 3 \pi a^2\)</span>.<br />So the cycloid curve has an area of <span class="math">\(3 \pi a^2\)</span> units.</p>
 </blockquote>
+<p>To find the value of an infinite series, we take a known series, then apply transformations to it until it is the function we need.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

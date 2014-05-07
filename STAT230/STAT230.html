@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>STAT230 | Anthony Zhang</title>
+  <style type="text/css">
+  body {
+    font-family: "Segoe UI", Verdana, Arial, Helvetica, sans-serif;
+    background: #fffefe;
+    padding: 5em;
+  }
+  
+  pre {
+    margin-left: 2em;
+  }
+  
+  code {
+    border: solid 1px black;
+    background: #665555;
+    color: white;
+    padding: 0.1em;
+    border-radius: 0.3em;
+    display: inline-block;
+  }
+  
+  pre code {
+    padding: 1em;
+    border-radius: 0.5em;
+  }
+  
+  h1 {
+    font-size: 4em;
+  }
+  
+  table {
+    margin: 0 auto;
+  }
+  
+  td, th {
+    padding: 0.5em;
+    border: 1px solid grey;
+  }
+  
+  tr {
+    padding:: 0;
+  }
+  
+  a.button {
+    display: inline-block;
+    padding: 1em;
+    font-family: monospace;
+    color: black;
+    text-decoration: none;
+    border: 0.2em solid black;
+    border-radius: 0.5em;
+    background: white;
+  }
+  
+  a.button:hover, a.button:focus, a.button:active {
+    background: black;
+    color: white;
+  }
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+</head>
+<body>
+<a class="button" href="..">&#8666; Return to University Notes index</a>
+<h1 id="stat230">STAT230</h1>
+<p>Probability.</p>
+<pre><code>Instructor: Dina Dawoud
+Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
+<h1 id="section">5/5/14</h1>
+<p>There are two tests and five online quizzes on MapleTA</p>
+<p>;wip: there is a test date conflict, email the riley guy mentioned on the course outline</p>
+<p>;wip: look at the schedule and put it on the calendar</p>
+<p>Probability is a tool used to model uncertainty and variability, like size, weight, and height. It allows us to work with uncertainty, though it cannot eliminate it.</p>
+<h2 id="definition">Definition</h2>
+<p>We first specify the <strong>outcome/event</strong> that we are interested in that might occur in a particular setting. This setting is the <strong>experiment/process</strong>.</p>
+<p>For example, rolling a 2 on a 6-sided die has an outcoem of 2 and rolling the die is the experiment.</p>
+<p>The <strong>sample space</strong> is the set of all possible outcomes. For example, the die has a sample set of <span class="math">\(S = \set{1, 2, 3, 4, 5, 6}\)</span>. We usually represent the sample space as <span class="math">\(S\)</span>.</p>
+<p>The <strong>classical definition</strong> of the probability of an event is the ratio of the number of ways the event can occur to the total number of outcomes in <span class="math">\(S\)</span>.</p>
+<p>However, this only works if all outcomes are equally likely to occur. In practice, this is not always the case.</p>
+<p>The <strong>relative frequency definition</strong> of the probability of an event is the fraction of times when the event occurs when we repeat the experiment a large number of times.</p>
+<p>For example, if we toss a coin a large number of times, the fraction approaches 50%. However, we cannot always repeat the experiment due to time and other constraints. Additionally, we have to keep the setting exactly the same.</p>
+<p>We generally mean that we repeat the experiment an infinite number of times. In practice, we often settle for a lot less.</p>
+<p>The <strong>subjective definition</strong> of the probability of an event is the confidence of the person making the statement that the event will occur. Often, this is based on the person's experiences.</p>
+<h3 id="probability-model">Probability model</h3>
+<ol style="list-style-type: decimal">
+<li>Identify the experiment and the events of interest.</li>
+<li>Define the sample space <span class="math">\(S\)</span> of the random experiment.</li>
+<li>Define the subset of the sample space to which we can assign probabilities.</li>
+<li>Assign the probabilities to events somehow.</li>
+</ol>
+<p>A <strong>discrete sample space</strong> is one where there is a finite number of simple events.</p>
+<p>A <strong>simple event</strong> is an event that is made up of only one outcome, synonymous with outcome, like rolling a die and getting 2.</p>
+<p>A <strong>compound event</strong> is an event made up of more than one outcome, like rolling a die and getting an even number (outcomes 2, 4, and 6 trigger the event).</p>
+<p>Let <span class="math">\(S = \set{a_1, \ldots, a_n}\)</span>. Let <span class="math">\(P(a_i)\)</span> be the probability of the outcome <span class="math">\(a_i\)</span> taking place. Then <span class="math">\(0 \le P(a_i) \le 1\)</span> and <span class="math">\(\sum_{i = 1}^n P(a_i) = 1\)</span>.</p>
+<p>The function <span class="math">\(P(x)\)</span> is the <strong>probability distribution</strong> on <span class="math">\(S\)</span>.</p>
+<p>For a die, <span class="math">\(P(a_i) = \frac 1 6\)</span>.</p>
+<p>When we write <span class="math">\(P(a, b, c)\)</span>, we mean the probability of either <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, or <span class="math">\(c\)</span> occurring.</p>
+<p>The <strong>odds</strong> of an event <span class="math">\(x\)</span> occurring is <span class="math">\(\frac{P(x)}{1 - P(x)}\)</span>. So odds of 3:1 is a 25% probability. To convert odds like <span class="math">\(a\)</span>:<span class="math">\(b\)</span> to a probability, we simply do <span class="math">\(P(x) = \frac b {a + b}\)</span>.</p>
+<hr>
+<p>Copyright 2013 Anthony Zhang</p>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>

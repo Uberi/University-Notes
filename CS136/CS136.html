@@ -63,7 +63,7 @@
   }
   </style>
   <style type="text/css">code{white-space: pre;}</style>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">MathJax.Hub.Queue(["Typeset",MathJax.Hub]);</script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </head>
 <body>
 <a class="button" href="..">&#8666; Return to University Notes index</a>
@@ -164,7 +164,7 @@ hello, Anthony</code></pre>
 <ul>
 <li><strong>Reusability</strong>: a good module can be reused in multiple places, so we can use it again and again without writing another one.</li>
 <li><strong>Maintainability</strong>: a single module is easier to debug, write, and improve - we only need to change the specific module we are looking for, and can even replace the module entirely without affecting everything else.</li>
-<li>Abstraction: we don't need to care about how it is written, just how we can use it. We can hide all the complex stuff in a module and make the resulting interface simple to use.</li>
+<li><strong>Abstraction</strong>: we don't need to care about how it is written, just how we can use it. We can hide all the complex stuff in a module and make the resulting interface simple to use.</li>
 </ul>
 <p>Modularization is also called <strong>separation of concerns</strong>.</p>
 <p>A program that allows students to order school supplies online might have the following modules:</p>
@@ -1635,7 +1635,7 @@ while (k &gt; 0) {
     (cond [(empty? lon) empty]
           [else (insert (first lon) (insertion-sort (rest lon)))]))</code></pre>
 <p>Clearly, <code>insert</code> is <span class="math">\(T(n) = O(1) + T(n - 1)\)</span>, or <span class="math">\(O(n)\)</span> worst case and <span class="math">\(O(1)\)</span> best case, so <code>insertion-sort</code> is <span class="math">\(T(n) = O(n) + T(n - 1)\)</span>, <span class="math">\(O(n^2)\)</span> worst case (when the numbers are sorted in reverse order) and <span class="math">\(O(n)\)</span> best case (when the numbers are already sorted).</p>
-<p>We may also want to have an in-place version - one that sorts the array without building another array in memory. For an in-place insertion sort, we start at index 1 and assume everything to the left is sorted, then for each element, we shift elements from the left rightwards until the new element can be put into the correct position:</p>
+<p>We may also want to have an in-place version - one that sorts the array without building another array in memory. For an in-place insertion sort, we start at index 1 and assume everything to the left is sorted, then for each element, we shift elements from the left rightward until the new element can be put into the correct position:</p>
 <pre><code>void insertion_sort(int a[], int len) {
     for (int i = 1; i &lt; len; i ++) { // go through each element
         int value = a[i];
@@ -1755,7 +1755,7 @@ void quick_sort(int a[], int len) {
 <p>So <span class="math">\(O(1)\)</span> is actually the set of all constant functions.</p>
 <p>Since the order is less than or equal, we can say things like <span class="math">\(3 \in O(2^n)\)</span> and <span class="math">\(n^2 \in O(n^{100})\)</span>. Even though this is mathematically correct, this isn't very useful.</p>
 <p>In this course, we will always use the smallest possible order to represent a given function.</p>
-<p>Or alternatively, <span class="math">\(f(n) \in O(g(n)) \if and only if \exists c \in \mathbb{R}, n_0 &gt; 0, \forall n \in \mathbb{R}, n \ge n_0 \implies f(n) \le c \cdot g(n)\)</span>.</p>
+<p>Or alternatively, <span class="math">\(f(n) \in O(g(n)) \iff \exists c \in \mathbb{R}, n_0 &gt; 0, \forall n \in \mathbb{R}, n \ge n_0 \implies f(n) \le c \cdot g(n)\)</span>.</p>
 <p>This basically means that we can ignore constant coefficients. Also, that after a certain threshold value of <span class="math">\(n\)</span>, the order function multiplied by a constant is an upper bound for <span class="math">\(f(n)\)</span>.</p>
 <p>Prove that <span class="math">\(0.001n^3 + 1000n \in O(n^3)\)</span>:</p>
 <blockquote>
@@ -1833,7 +1833,7 @@ struct posn *pp = malloc(sizeof(struct posn));</code></pre>
 <h3 id="common-errors">Common Errors</h3>
 <p>Some common mistakes associated with dynamic memory are:</p>
 <ul>
-<li><strong>Double-free bugs</strong>: using <code>free</code> on memory that has already been freed, or memory that was not allocated by <code>malloc</code>.</li>
+<li><strong>Double-free bugs</strong>: using <code>free</code> on memory that has already been freed, or memory that was not allocated by <code>malloc</code>. This is a special case of use ofter free bugs.</li>
 <li><strong>Memory leaks</strong>: using <code>malloc</code> and not eventually freeing it before the program exits.
 <ul>
 <li>This eventually results in poor performance and eventually runs out of memory and crash.</li>
@@ -2081,9 +2081,14 @@ free_list(b); // INVALID SINCE SEVERAL NODES SHARED WITH `a` WERE FREED</code></
 <ul>
 <li>We can avoid ugly pointer notation, making the interface cleaner.</li>
 <li>We can make misuse harder - for example, it is more difficult to get a list reference that shares the same nodes as another list.</li>
-<li><p>We can store more information in the structure, such as length or the last element.</p>
-<p>struct llist { struct llnode <em>front; struct llnode </em>back; int length; }</p></li>
+<li>We can store more information in the structure, such as length or the last element.</li>
 </ul>
+<p>For example:</p>
+<pre><code>struct llist {
+    struct llnode *front;
+    struct llnode *back;
+    int length;
+}</code></pre>
 <p>Using this strategy, a list is now a pointer to a <code>llist</code> structure. This works with the functional and imperative approaches.</p>
 <p>We would then implement our functions such that they accept wrappers. For example, constructors and destructors:</p>
 <pre><code>struct llist *create_list(void) {
@@ -2222,6 +2227,7 @@ typedef int *IntegerPtr; // `IntegerPtr` is now the same thing as `int *`</code>
 
 Account a = create_account();
 // ...</code></pre>
+<p>Some people advise against using <code>typedef</code> to define pointer types, because it's easy to forget to free them.</p>
 <h3 id="collection-adts">Collection ADTs</h3>
 <p>Collection ADTs are often what people mean when they say &quot;ADT&quot;. They are simply ADTs that can store an arbitrary number of items. ;wip: section 12 slide 28</p>
 <p>A <strong>stack ADT</strong> implements LIFO (Last In First Out) storage. Common operations include pushing, popping, and peeking. Stacks are often implemented using linked lists where the top is the front of the list.</p>
@@ -2263,7 +2269,7 @@ void push(Stack s, void *i);
 void *top(Stack s);
 
 // pop(s) removes the top item and returns it
-// NOTE: The caller is responsible for freeing the ite
+// NOTE: The caller is responsible for freeing the item
 void *pop(Stack s);
 
 // destroy_Stack(s) destroys the stack
