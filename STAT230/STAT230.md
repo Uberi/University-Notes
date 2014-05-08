@@ -84,3 +84,52 @@ For a die, $P(a_i) = \frac 1 6$.
 When we write $P(a, b, c)$, we mean the probability of either $a$, $b$, or $c$ occurring.
 
 The **odds** of an event $x$ occurring is $\frac{P(x)}{1 - P(x)}$. So odds of 3:1 is a 25% probability. To convert odds like $a$:$b$ to a probability, we simply do $P(x) = \frac b {a + b}$.
+
+# 7/5/14
+
+;wip: do the mapleta stuff on LEARN
+
+If we toss a coin twice, what is the probability of getting exactly one heads?
+
+> Clearly, $S = \set{(Tails, Tails), (Tails, Heads), (Heads, Tails}, (Heads, Heads)$. Let $A$ be the event of getting one heads.  
+> Clearly, each outcome is equally likely, so occurs 25% of the time.  
+> We care about two of the outcomes, $(Tails, Heads)$ and $(Heads, Tails)$.  
+> So the probability of exactly one heads is $P(A) = \frac{Event Outcomes}{Total Outcomes} = \frac{2}{4} = \frac{1}{2}$.  
+> Alternatively, if we were to use $S = \set{0 Heads, 1 Heads, 2 Heads}$, each outcome would no longer be equally likely - it would be a mistake to say the probability is $\frac{1}{3}$.  
+> Essentially, we found the probability $P(A) = P((Tails, Heads)) + P(Heads, Tails)$.  
+
+What is the probability that the sum of two dice rolls is 5?
+
+> Clearly, there are $6 \times 6 = 36$ possible outcomes, all equally likely. Basically, $S = \set{(1, 1), \ldots, (6, 6)}$. Let $A$ represent the event of the sum being 5.  
+> Clearly, the combinations resulting in a total of 5 are $(1, 4), (2, 3), (3, 2), (4, 1)$.  
+> Since there are 4 outcomes, $P(A) = \frac{4}{36} = \frac{1}{9}$.  
+> If two indistinguishable dice were used, then we could no longer tell which die was which. Since the pairs in $S$ are no longer ordered, we remove the duplicates to obtain 21 possibilities. However, they now do not all have the same probability of occurring - $(2, 2)$ is only half as likely as $(1, 2)$ since $(1, 2) = (2, 1)$ when the dice are indistinguishable.  
+
+Counting Techniques
+-------------------
+
+When there are $n$ outcomes that are all equally likely, then the probability of each outcome is $\frac{1}{n}$.
+
+If job A can be done in P ways and job B can be done in Q ways, then we can do either job A or job B in $P + Q$ ways. Here, "or" becomes addition. For example, the probabiity of getting heads or tails is $P(Heads) + P(Heads) = \frac 1 2 + \frac 1 2 = 1$
+
+If job A can be done in P ways, and for each of those P ways, job B can be done in Q distinct ways, then we can do both job A and B in $p \times q$ ways. For example, $P((Heads, Heads)) = P(Heads) AND P(Heads) = \frac 1 2 \times \frac 1 2 = \frac{1}{4}$.
+
+Sampling **with replacement** means that every time we select an object for sampling, we simply put it back into the population, so we could potentially sample it again.
+
+This means that what we get on each selection will not affect subsequent selections. For example, a coin flip has both sides of the coin replaced after each sample, so there is always the same probability of getting heads or tails.
+
+Sampling **without replacement** means that after selecting an object, we do not put it back. Therefore, an object can only be selected at most once.
+
+This means that what we get on each selection will influence sebsequent selections and is influenced by previous selections. For example, sampling genders of students from a classroom without replacement results in a different probabilities of choosing a certain gender.
+
+Sampling without replacement has a big effect on small samples, but for larger samples its effect becomes negligible.
+
+Many problems have sample spaces that are a set of arrangements - permutations. $n^{(r)} = \frac{n!}{(n - r)!}$ means "$n$ to $r$ factors". ;wip: nPr notation
+
+For example, consider a set of 20 people's birthdays:
+
+> Clearly, $S$ is a set containing 20 dates (each one of 365 days), so there are $365^{20}$ outcomes.  
+> What is the probability of everyone having a different birthdays?
+> Clearly, everyone has a different birthday if and only if the ordered birthdays are a 20-permutation of $[365]$. This is because the 20-permutations account for all possible sequence of $[365]$ where all the dates are unique.  
+> Therefore, there are $365^{(20)}$ possible outcomes, and since they are all equally likely, the probability is $\frac{365^{(20)}}{365^{20}} \approxeq 59%$.  
+

@@ -107,7 +107,88 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p>Graphical interfaces are easy to use, but makes it difficult to do complex tasks. They are available on almost every OS.</p>
 <p>The command line accepts commands that are typed at the prompt. Windows has a DOS shell, while UNIX has a command line shell. It is possible to do more complex tasks with a command prompt, but it also has poor discoverability and a steep learning curve.</p>
 <p>The first shell is Bourne shell, and then Cshell (and its descendent, Turbo shell) and Korn shell came along. Finally, there is Bourne Again Shell, or BASH. Bash is what we use in this course.</p>
-<p>We can tell if a shell is Bash by the presence of the <code>$</code> before the input prompt.</p>
+<p>We can tell if a shell is Bash by the presence of the <code>$</code> before the input prompt. <code>echo $0</code> should print out the type of prompt, like &quot;bash&quot; or &quot;sh&quot;.</p>
+<h1 id="section-1">8/5/14</h1>
+<h2 id="filesystem">Filesystem</h2>
+<p>The Linux filesystem consists of programs, code, and data.</p>
+<p>There are files and directories. Directories can contain other directories and files. The filesystem is similar to a tree. However, directories are simply another type of file.</p>
+<p>Within a directory, filenames must be unique. Filenames are case sensitive. For example, we can have <code>/bin</code> and <code>/usr/bin</code>.</p>
+<p>The filesystem is often thought of as a tree, where nodes represent files. A standard Linux installation will usually have the following structure:</p>
+<ul>
+<li><code>/</code>
+<ul>
+<li><code>bin</code>
+<ul>
+<li><code>bash</code></li>
+<li><code>ls</code></li>
+<li><code>...</code></li>
+</ul></li>
+<li><code>etc</code>
+<ul>
+<li><code>shells</code></li>
+<li><code>...</code></li>
+</ul></li>
+<li><code>home</code>
+<ul>
+<li><code>ahzhang</code>
+<ul>
+<li><code>USER_FILES_GO_HERE</code></li>
+</ul></li>
+<li><code>OTHER_USERS_GO_HERE</code></li>
+</ul></li>
+<li><code>usr</code>
+<ul>
+<li><code>bin</code></li>
+<li><code>include</code></li>
+<li><code>share</code></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="relativeabsolute-paths">Relative/Absolute Paths</h3>
+<p><code>/</code> is always the <strong>root directory</strong>. All paths must be relative to some reference path.</p>
+<p>When we have a path relative to a fixed directory such as <code>/</code> or <code>/home</code>, this is an <strong>absolute path</strong>. For example, <code>/home/ahzhang/DropBox/School/Schedule.png</code>, or <code>~/DropBox/School/Schedule.png</code>.</p>
+<p>Any other path is a <strong>relative path</strong>. What it actually is the path to depends on what it is relative to. For example, <code>bin/bash</code> could represent <code>/bin</code> or <code>/usr/bin</code>. How the path is resolved depends on the current/working directory.</p>
+<p>The <strong>current/working directory</strong> is always available, and is the directory that all relative paths are relative to. For example, if the current working directory is <code>/home/ahzhang/DropBox/School</code>, then the relative path <code>Schedule.png</code> will resolve to <code>/home/ahzhang/DropBox/School/Schedule.png</code>.</p>
+<p>The <code>pwd</code> (present working directory) command will display the current directory.</p>
+<p>The <code>cd DIRECTORY_GOES_HERE</code> (change directory) command will change the current directory to <code>DIRECTORY_GOES_HERE</code>.</p>
+<p><code>.</code> is a special directory that always represents the current directory.</p>
+<p>For example, <code>cd .</code> changes the current directory to the current directory, which does nothing.</p>
+<p><code>..</code> is a special directory that always represents the parent of the current directory.</p>
+<p>For example, to change the current directory to the grandparent of the current directoy, we can use <code>cd ../..</code>.</p>
+<p><code>~</code> is a special directory that always represents the current user's home directory, like <code>/home/ahzhang</code>. This is an absolute path because it does not depend on the current directory.</p>
+<p>For example, <code>cd ~</code> will change the current directory to the current directory. In fact, this is used so often that <code>cd</code> by itself will do the same as <code>cd ~</code>.</p>
+<p>Also, <code>cd -</code> will change the current directory back to the last current directory - to the directory before we changed it with <code>cd DIRECTORY_GOES_HERE</code>.</p>
+<p><code>~USER_ID_GOES_HERE</code> is a special directory that always represents the home directory of the user <code>USER_ID_GOES_HERE</code>. This works as long as the referenced user has given permission to access it. This is an absolute path because it does not depend on the current directory.</p>
+<p>Linux does not enforce the concept of file extensions. It is still followed by convention, however, since it is convenient.</p>
+<h3 id="globs">Globs</h3>
+<p>The <code>ls PATTERN_GOES_HERE</code> command will list the contents of <code>PATTERN_GOES_HERE</code>, or if not specified, then it lists the contents of the current directory.</p>
+<p>It simply shows a list of information about the files in the directory.</p>
+<p>This command does not show certain files - <strong>dotfiles</strong>. These are simply files/directories that have names that begin with a <code>.</code>. This is a convention that allows for somewhat hidden files, which are useful for things like configuration.</p>
+<p>To show these files anyways, we can use <code>ls -a PATTERN_GOES_HERE</code>, which works the same way but also shows dotfiles.</p>
+<p>The parameter given to <code>ls</code> does not have to simply be a path. It also supports <strong>wildcards</strong>. Wildcard patterns are known as <strong>globbing patterns</strong> or <strong>globs</strong>. In globs, <code>*</code> means match any one file or directory name, and <code>?</code> means match any one character of a file or directory name.</p>
+<p>For example, <code>ls *.txt</code> lists all the text files in the current directory, and <code>ls pictures-??-??-??-*</code> matches all files of the form <code>pictures-TWO_DIGIT_NUMBER-TWO_DIGIT_NUMBER-TWO_DIGIT_NUMBER-ANYTHING</code>.</p>
+<p>When we have a globbing pattern, the shell itself actually does the matching, not the command (like <code>ls</code>). The shell matches all the files, then passes all the matched files on the command line. The advantage of this approach is that each command does not have to implement globbing itself.</p>
+<p>Globs are matched relative to the current directory.</p>
+<p>Also, <code>rm PATTERN_GOES_HERE</code> removes all files matching <code>PATTERN_GOES_HERE</code>.</p>
+<p>We can even do things like <code>echo *.txt</code>, which will print out all the text files in the current directory. Hwoever, to literally print <code>*.txt</code>, we simply use quotes, like <code>echo '*.txt'</code> or <code>echo &quot;*.txt&quot;</code>.</p>
+<p>;wip: get the handout of some sort</p>
+<h3 id="file-operations">File Operations</h3>
+<p>Also, if a command is taking too long, then we can use <code>Ctrl + C</code> to kill it. This is often written as <code>^C</code>. There is also <code>Ctrl + D</code>, which sends the end-of-file symbol to the program, which allows it to gracefully terminate.</p>
+<p>The <code>cat PATTERN_GOES_HERE</code> (concatenate) command is an extremely commonly used command that simply prints out the contents of the first matched file.</p>
+<p>If the pattern is not specified, so we used <code>cat</code>, then the input is taken from the standard input. If we type some words, they will be pritned out again at the standard output. This continues until we stop the command using <code>^D</code> or similar. This mode is useful if we can capture the output somewhere.</p>
+<h3 id="inputoutput-redirection">Input/Output Redirection</h3>
+<p>The <code>COMMAND&gt;FILE</code> operator redirects the standard output of <code>COMMAND</code> into the file <code>FILE</code>, overwriting any existing contents of the file. For example, <code>cat &gt; entered_text.txt</code> allows the user to type in some text and have it saved to <code>entered_text.txt</code></p>
+<p>The <code>COMMAND&lt;FILE</code> operator redirects the standard input of <code>COMMAND</code> to the file <code>FILE</code>, so it is almost as if it was typed directly as input. For example, <code>cat &lt; input.txt</code> will display the contents of <code>input.txt</code> on the screen.</p>
+<p><code>cat FILE</code> is exactly equivalent to <code>cat &lt; FILE</code>.</p>
+<p>The <code>wc FILE</code> command counts the number of lines, words, or characters in a given file, or in the standard output if not specified. For example, <code>wc test.txt</code> gives <code>LINE_COUNT WORD_COUNT CHARACTER_COUNT FILE</code>.</p>
+<p>However, <code>wc &lt; FILE</code> gives <code>LINE_COUNT WORD_COUNT CHARACTER_COUNT</code> - there is no <code>FILE</code> in the output since it is simply given from the standard input.</p>
+<p>Every process has a standard input (stdin) and output (stdout) - the default place to get input and print output. The standard input is usually connected to the keyboard and the standard output is usually connected to the screen.</p>
+<p>Input redirection changes stdin, and output redirection changed stdout.</p>
+<p>Standard output is <strong>buffered</strong> - characters to be sent to the output are stored up until there is a large enough amount to send to the screen. This sending process is known as <strong>flushing</strong> the buffer.</p>
+<p>Every process also has a standard error (stderr) - the default place to print out errors. This is intended to avoid cluttering the output. Also, stderr is not buffered - all errors will show up right away, not whenever the buffers are flushed.</p>
+<p>We can redirect stderr using <code>2&gt;</code>, in a way similar to <code>&gt;</code>.</p>
+<p>We can also do all types of redirection at the same time: <code>cat &lt; input.txt &gt; output.txt 2&gt; error.txt</code> reads the contents of <code>input.txt</code> and then writes it to <code>output.txt</code>, and any errors are written to <code>error.txt</code>.</p>
+<p>Tere are also <strong>pipes</strong>, which allow the output of one program to become the input of another. <code>COMMAND_A|COMMAND_B</code> connects the stdout of <code>COMMAND_A</code> to the stdin of <code>COMMAND_B</code>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

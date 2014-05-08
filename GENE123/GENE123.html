@@ -109,16 +109,94 @@ Office Hours: drop-in</code></pre>
 <p>In a superconductor, all the electrons are free. It is the ideal conductor.</p>
 <p>A <strong>circuit</strong> is a path for electricity to flow in. Electrons transfer energy from the sources of a circuit to the loads.</p>
 <p>It can be composed of things like sources (batteries, etc.), wires, resistors, switches, and more.</p>
-<p>;wip: the large side of the battery is positive</p>
-<p>;wip: normally open/normally closed switches with arrows drawn through them</p>
 <p><strong>Electric current</strong> (represeted by <span class="math">\(I\)</span>) is the flow of electrons. It is the rate of change of the charge - <span class="math">\(I = \frac{\dee q(t)}{\dee x}\)</span>. Therefore, <span class="math">\(q(t) = \int_0^t I(t) \dee t + q(0)\)</span>. Current is measured in Amperes (A), and 1 Ampere is 1 Coulomb per second.</p>
 <h3 id="switches">Switches</h3>
 <p>Switches have two conductive ends. When a switch is <strong>closed</strong>, the ends are connected and current may pass through. Otherwise, they are not and current cannot pass through.</p>
-<p>;wip: headlamps example with parallel circuit</p>
 <p>Given <span class="math">\(I(t) = \begin{cases} 0 &amp;\text{if } t &lt; 0 \\ e^{-2t} &amp;\text{if } t \ge 0 \end{cases}\)</span>, <span class="math">\(q(0) = 0\)</span>, find <span class="math">\(q(t)\)</span>:</p>
 <blockquote>
 <p>Clearly, <span class="math">\(q(t) = \int I(t) \dee t = \begin{cases} 0 &amp;\text{if } t &lt; 0 \\ \evalat{-\frac{1}{2}e^{-2t}}_0^t &amp;\text{if } t \ge 0 \end{cases} = \begin{cases} 0 &amp;\text{if } t &lt; 0 \\ -\frac 1 2 e^{-2t} - \frac 1 2 &amp;\text{if } t \ge 0 \end{cases}\)</span>.</p>
 </blockquote>
+<p><strong>Normally open</strong> switches are open (not conductive) until actuated by the user. For example, a pushbutton or a keyboard key. <strong>Normally closed</strong> switched are the opposite, and are closed (conductive) until actuated by the user.</p>
+<pre><code>     o
+    /
+---o   o----------o---o---
+   Open           Closed</code></pre>
+<p>Normally open switches are drawn as open switches with a curved clockwise arrow through the middle of the switch indicating it can be closed, and normally closed switches are drawn as closed switches with a curved counterclockwise arrow.</p>
+<h1 id="section-1">7/5/14</h1>
+<p>When we solve circuits, we might not know the direction of the current of the first. We can assume that the current flows in a <strong>reference direction</strong>.</p>
+<p><span class="math">\(i_{AB}\)</span> is the current that flows from the point <span class="math">\(A\)</span> to the point <span class="math">\(B\)</span>.</p>
+<p>In our circuits, <span class="math">\(i_{AB} = -i_{BA}\)</span>. In other words, the magnitude of the current is always the same, regardless of the reference direction chosen. If the current is negative, the current is just flowing in the other direction.</p>
+<h3 id="types-of-current">Types of Current</h3>
+<p><strong>Direct current</strong> (DC) is current that stays constant over time. This is produced from batteries and many power supplies.</p>
+<p><strong>Alternating current</strong> (AC) is current that oscillates about 0 Amperes. It might look like a sine wave, or a square wave.</p>
+<p><strong>Time varying current</strong> is current that changes as an arbitrary function of time. AC and DC currents are all time varying currents.</p>
+<h3 id="voltage">Voltage</h3>
+<p>Electrical charge has potential energy, similar to gravitational potential energy. This is always relative to some sort of reference level of energy.</p>
+<p>A <strong>voltage</strong> is the difference of potential energy between two points in space.</p>
+<p>The electrons always try to go from higher potential to lower potential.</p>
+<p>In a battery, the positive terminal has a higher potential (which is why the postive terminal in a battery symbol has a longer line), and the negative terminal has a lower one (which is why its line is shorter). The positive terminal of the battery is drawn with the longer line.</p>
+<p>The current has nowhere to go except through the wires, so it passes through the circuit.</p>
+<p>Since energy must be conserved, and batteries are converting chemical energy into electrical potential energy, and electrical potential energy remains constant in the circuit, loads convert this electrical potential energy into other forms.</p>
+<p>All circuits have <strong>sources</strong> and <strong>loads</strong>. Sources are the circuit elements that produce energy, and loads consume energy.</p>
+<p>Sources have current enter the negative terminal, like how current goes from the negative terminal to the positive terminal in a battery.</p>
+<p>Loads have current enter the positive terminal, like how current goes from positive to negative in an LED.</p>
+<p>This is how we tell the difference between sources and loads. In circuits, we always connect the positive terminals of loads to the positive terminals of sources, and the negative terminals to the negative terminals.</p>
+<p>The formal definition of voltage is the energy needed or transferred by a unit charge, when it travels through a circuit element. it can be mathematically defined as <span class="math">\(V = \frac{\dee w}{\dee q}\)</span>, where <span class="math">\(w\)</span> is the energy (Joules) and <span class="math">\(q\)</span> is the charge (Coulombs). The unit of voltage is the Volt (V), which is 1 Joule per Coulomb. Voltage is also known as <strong>electromotive force</strong>.</p>
+<p>Since <span class="math">\(V = \frac{\dee w}{\dee q}\)</span>, <span class="math">\(w = \int V \dee q\)</span>.</p>
+<p>Energy is transferred by current, and the amount of energy transferred is determined by the voltage.</p>
+<p>A 1.5 V battery is one such that a charge of 1 C can transfer 1.5 J of energy to the circuit. The energy was applied to the charge when it passed through the battery.</p>
+<p><span class="math">\(-ve\)</span> represents the negative terminal. <span class="math">\(+ve\)</span> represents the positive terminal. ;wip: of what? a battery? any circuit element?</p>
+<p>Before we know whether a circuit element is a source or a load, we must assume the direction of the current first. According to this direction, we will be assuming whether it is a source or a load.</p>
+<p>We represent the reference direction for voltage on a circuit element by labelling the terminals <span class="math">\(+\)</span> and <span class="math">\(-\)</span>, or saying <span class="math">\(V_{ab}\)</span> (<span class="math">\(a\)</span> is the higher potential, <span class="math">\(b\)</span> is the lower potential), or by drawing an arrow from <span class="math">\(-\)</span> to <span class="math">\(+\)</span>.</p>
+<p>The reference direction is not important for the circuit elements in this course. In other words, <span class="math">\(V_{ab} = -V_{ba}\)</span>.</p>
+<p>So if we solve the voltage on the circuit element and the voltage is negative, that means the reference we assumed is backwards and that the positive terminal is actually the negative terminal, and vice versa.</p>
+<p>There is both a reference current direction and a reference voltage direction. We often assume the current goes into the positive terminal since most circuits elements are loads. The reference voltage direction is often arbitrary.</p>
+<h1 id="section-2">8/5/14</h1>
+<p>If the current goes from lower potential to higher potential, then the element supplied energy. If the current goes from higher to lower, then the element absorbs energy.</p>
+<p>We can measure the voltage across a device using a voltmenter. A voltmeter has two terminals, which can be placed on two different places on the circuit to measure their potential difference.</p>
+<p>We can measure current flowing through a device using an ammeter. An ammeter has two terminals, which are placed inline with the circuit element (in serial) to measure the current flowing through that part of the circuit.</p>
+<p>A 2 C charge at 20 V moves from negative to positive in a circuit element. What is the energy supplied/absorbed?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\dee q = 2 C\)</span> and <span class="math">\(w = \int 20 V 2 C = 40 J\)</span>.<br />The energy is being supplied because the charge is moving from negative to positive, which means that the charge is gaininng energy.</p>
+</blockquote>
+<h3 id="power">Power</h3>
+<p>Power is energy per unit time, measured in Watts (W) - the rate of transfer of energy.</p>
+<p>Power is defined as <span class="math">\(P = \frac{\dee w}{\dee t}\)</span>. Therefore, 1 Watt is defined as <span class="math">\(1 W = 1 J/s\)</span> - the power needed to transfer 1 Coulomb of charge per second.</p>
+<p>Clearly, <span class="math">\(P = \frac{\dee w}{\dee q} \frac{\dee q}{\dee t} = VI\)</span>. This is the most common formulation of power - voltage times current.</p>
+<p>Most elements in a circuit are <strong>passive</strong> - they simply use energy. Therefore, we use the <strong>passive sign convention</strong>:</p>
+<ul>
+<li>We start with the assumption that most of the circuits are passive and are adsorbing energy.</li>
+<li>Current enters the positive terminal of passive circuit elements, so <span class="math">\(P = VI\)</span>.</li>
+<li>If the current enters the negative terminal, then <span class="math">\(P = -VI\)</span> instead.</li>
+<li>The current can be positive or negative, we are simply considering which terminal it is entering at.</li>
+<li>If power is positive, the element absorbs energy.</li>
+<li>If the power is negative, the element supplies energy, and our original assumption was incorrect.</li>
+</ul>
+<p>Consider the following circuit:</p>
+<pre><code>___  + 12 V
+   |
+   E
+___| - &lt;= -2 A current enters element here</code></pre>
+<p>What is the power? Is it a source or a load?</p>
+<blockquote>
+<p>Since the current enters the negative terminal, <span class="math">\(P = -VI = -12 V \times -2 A = 24 Watts\)</span>.<br />Since the power is positive, the circuit element adsorbs energy and is a load.</p>
+</blockquote>
+<p>Since <span class="math">\(P = \frac{\dee w}{\dee t}\)</span>, <span class="math">\(\Delta w = \int_{t_1}^{t_2} P(t) \dee t\)</span>.</p>
+<p>If <span class="math">\(V(t) = 3e^{-t} V\)</span> and <span class="math">\(I = 3e^{-t} A\)</span>, then <span class="math">\(P = V(t) I(t) = 6e^{-2t} W\)</span>, and <span class="math">\(\Delta w = \int_0^\infty 6e^{-2t} \dee t = 3 J\)</span>.</p>
+<h2 id="kirchoffs-current-law-kcl">Kirchoff's Current Law (KCL)</h2>
+<p>A <strong>node</strong> is a junction where two or more circuit elements are connected. It is the entire connection between these elements. These are usually connected pieces of wire.</p>
+<p>Current cannot sit around in a node. That means that the current entering a node should be the same as the current leaving.</p>
+<p>Two elements are in <strong>series</strong> if they share a node and they have the same current.</p>
+<p>Kirchoff's Current Law says that the net current sum in any node in 0. When we do the net current sum, we represent the currents entering as positive, and the currents leaving as negative, so when we add them all together, they are 0.</p>
+<p>In other words, the magnitude of the sum of currents entering the node is equal to the magnitude of the sum of currents leaving the node.</p>
+<p>For example, consider the following circuit:</p>
+<pre><code>Node 1
+v
+ ___B_______  &lt; Node 2
+|      |    |
+A      C    D
+|______|____| &lt; Node 3</code></pre>
+<p>;wip: add some numbers and solve</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
