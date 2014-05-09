@@ -124,7 +124,7 @@ Energy is transferred by current, and the amount of energy transferred is determ
 
 A 1.5 V battery is one such that a charge of 1 C can transfer 1.5 J of energy to the circuit. The energy was applied to the charge when it passed through the battery.
 
-$-ve$ represents the negative terminal. $+ve$ represents the positive terminal. ;wip: of what? a battery? any circuit element?
+-ve is short for "negative". +ve is short for "positive".
 
 Before we know whether a circuit element is a source or a load, we must assume the direction of the current first. According to this direction, we will be assuming whether it is a source or a load.
 

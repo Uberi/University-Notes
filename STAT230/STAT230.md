@@ -124,7 +124,7 @@ This means that what we get on each selection will influence sebsequent selectio
 
 Sampling without replacement has a big effect on small samples, but for larger samples its effect becomes negligible.
 
-Many problems have sample spaces that are a set of arrangements - permutations. $n^{(r)} = \frac{n!}{(n - r)!}$ means "$n$ to $r$ factors". ;wip: nPr notation
+Many problems have sample spaces that are a set of arrangements - permutations. $n^{(r)} = \frac{n!}{(n - r)!}$ means "$n$ to $r$ factors" and is the number of $r$-permutations - arrangements of length $r$ of the $n$ elements without duplicates. ;wip: nPr notation
 
 For example, consider a set of 20 people's birthdays:
 
@@ -133,3 +133,29 @@ For example, consider a set of 20 people's birthdays:
 > Clearly, everyone has a different birthday if and only if the ordered birthdays are a 20-permutation of $[365]$. This is because the 20-permutations account for all possible sequence of $[365]$ where all the dates are unique.  
 > Therefore, there are $365^{(20)}$ possible outcomes, and since they are all equally likely, the probability is $\frac{365^{(20)}}{365^{20}} \approxeq 59%$.  
 
+# 9/5/14
+
+;wip: do the mapleta quiz available on Wednesday, due on Wednesday
+
+;wip: bring pink tie calc to class
+
+The factorial function grows extremely quickly and can be difficult to calculate for large numbers. Therefore, we have various approximations that help us do this more easily.
+
+**Stirling's approximation** is $n! \approxeq n^n e^{-n} \sqrt{2 \pi n}$. This approximation is asymptotically equivalent to the factorial function - as $n \to \infty$, the percentage error gradually decreases. ;wip: memorize this
+
+The **complement** of an event $A$ is the opposite event - the event of $A$ not **occurring**. It is represented using $\overline A$ or $A^C$. It is always true that an event occurs, or it does not occur, so $P(A) + P(\overline A) = 1$.  
+
+A 4-digit PIN code is selected with replacement. What is the probability that the number is even? What is the probability that it contains at least one "1"?
+
+> Clearly, the sample space is $S = \set{0000, \ldots, 9999}$, with 10000 possible outcomes.  
+> Clearly, all possible outcomes are equally likely because the PIN codes are selected randomly.  
+> Clearly, if the number is even, then the last digit must be in $\set{0, 2, 4, 6, 8}$.  
+> Clearly, there are 5 possible last digits, and the other three digits can be any of the ten digits.  
+> So there are $10 \times 10 \times 10 \times 5$ possible outcomes, or $5000$.  
+> So the probability of an even number is $\frac{5000}{10000}$, or 50%.  
+> To find the probability of containing at least one "1" digit, we consider the cases where there is one "1" digit, two, three, or four.  
+> Alternatively, we can consider all the numbers that contain no "1" digits - the complement of the number containing at least one "1". This is a more efficient way of finding the answer.  
+> Clearly, if there are no "1" digits, then every digit can be anything but "1", so there are 9 possibilities. There are therefore $9 \times 9 \times 9 \times 9 = 6561$ possible PIN codes without any "1" digits.  
+> Clearly, the event of having no "1" digits is the complement of the event of interest, so $P(1 occurs) = 1 - P(1 does not occur)$. Since $P(1 does not occur) = \frac{6561}{10000}$, the probability of a "1" occurring is 34.39%.  
+
+Now we derived the formula for $n \choose r$, read the MATH239 notes from yesterday to get the same material.
