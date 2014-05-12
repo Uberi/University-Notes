@@ -187,7 +187,7 @@ Using this, we can draw **Pascal's Triangle**, a triangle listing all the binomi
           1    3    3    1
        1    4    6    4    1
     1    5   10   10    5    1
-	...
+    ...
 
 The $n$th row of Pascal's Triangle is all the values of $n \choose k$, and each column of each row is for $k$ from 1 to $n$ inclusive.
 
@@ -234,3 +234,57 @@ Now we want to prove this combinatorially:
 This is known as the **hockey stick identity**. The reason for this is because it states that in Pascal's Triangle, the value of a number in the triangle is the sum of all the numbers in either diagonal passing through the number directly above it from the outside edge of the triangle until it is diagonal to the number we want.
 
 For example, the topmost and leftmost 10 in Pascal's Triangle is $10 = 1 + 3 + 6$, or $10 = 4 + 3 + 2 + 1$.
+
+# 12/5/14
+
+Proof techniques: bijections, partitioning sets into two sets, and counting two sets in different ways.
+
+Generating Series
+-----------------
+
+We can also prove by using power series.
+
+Given a set $S$, the universe of discourse, where each element $\sigma \in S$ is associated with a non-negative integer weight $w(\sigma)$, the **generating series/generating function** of $S$ with respect to $w(\sigma)$ is $\Phi_S(x) = \sum_{\sigma \in S} x^{w(\sigma)}$.
+
+For example, let $S$ be the set of all subsets of $[3]$, and let $w(A) = \abs{A}$. So $S = \set{\emptyset, \set{1}, \set{2}, \set{3}, \set{1, 2}, \set{1, 3}, \set{2, 3}, \set{1, 2, 3}}$. The corresponding weights are $0, 1, 1, 1, 2, 2, 2, 3$.
+
+Then the generating series is $1 + x + x + x + x^2 + x^2 + x^2 + x^3 = 1 + 3x + 3x^2 + x^3 = (1 + x)^3$, from the binomial theorem.
+
+What does each coefficient of $x^k$ mean? It is the number of elements that have exactly the weight $k$. In our particular example, it is the number of elements of size $k$.
+
+So if $a_k$ is the weight of the $k$th subset, then $\Phi_S(x) = \sum_{k \ge 0} a_k x^k$.
+
+Now we want to generalize this. Let $S$ be the set of all subsets of $[n]$ and $w(A) = \abs{A}$. Then the coefficient of $x^k$ in $\Phi_S(x)$ is $n \choose k$, because it is the number of $k$-subsets of $[n]$ (the number of ways we can choose $k$ elements from $n$ elements).
+
+So $\Phi_S(x) = \sum_{k = 0}^n {n \choose k} x^k = (1 + x)^n$, by the binomial theorem.
+
+How many ways can we throw two dice and get a sum of 10?
+
+> Clearly, $S = [6] \times [6]$, the Cartesian product.  
+> We define $(a, b)$ to be a pair of dice throws, and the weighting function to be their sum, $w((a, b)) = a + b$.  
+> So $\Phi_{[6] \times [6]}(x) = \sum_{(a, b) \in [6] \times [6]} x^{a + b}$.  
+> If we do this by hand, by considering every possible pair, we find that the generating series is $x^2 + 2x^3 + 3x^4 + 4x^5 + 5x^6 + 6x^7 + 5x^8 + 4x^9 + 3x^{10} + 2x^{11} + x^{12}$.  
+> So the answer is the coefficient of $x^{10}$, which is 3.  
+> If we factor this, we get $(x + x^2 + x^3 + x^4 + x^5 + x^6)^2$. Note that when we multiply this out, we add up the exponents, just like the weight function.  
+> However, we want to solve it more simply. Suppose we have two infinite sided dice.  
+> Then $S = \mb{N} \times \mb{N}$, the set of all pairs of natural numbers. We keep the same weight function, $w((a, b)) = a + b$.  
+> So $\Phi_S(x) = x^2 + 2x^3 + 3x^4 + \ldots = (x + x^2 + \ldots)^2$.  
+> Incidentally, $(x + x^2 + \ldots)^2 = \frac{x^2}{(1 - x)^2}$.  
+
+In general, for a counting problem:
+
+1. Define the set of objects.
+2. Define a weight function related to the problem such that we get the answer we need.
+3. Find the generating series.
+4. Possibly find the coefficient of $x^k$
+
+We rarely substitute a value for $x$. It acts as a way to keep the coefficients of $x$ as separate values. As a result we don't really need to worry about convergence or divergence.
+
+This technique is useful because the generating series is sometimes easier to find than the actual coefficients, yet it can be used to find the coefficients.
+
+For example, how many binary strings of length $n$ have no 3 consecutive 1's?
+
+> Let $S$ be the set of all binary strins with no 3 consecutive 1's.  
+> Let $w(\sigma)$ be the length of $\sigma$.  
+> ;wip: $\Phi_S(x) = \frac{1 + x + x^2}{1 - x - x^2 - x^3}$.
+> Therefore, there are $[x^n]\frac{1 + x + x^2}{1 - x - x^2 - x^3}$ of these binary strings (the $n$th term's coefficient is the number of binary strings in $S$ of length $n$).  

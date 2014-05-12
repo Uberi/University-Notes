@@ -147,7 +147,7 @@ Office Hours: drop-in</code></pre>
 <p>A 1.5 V battery is one such that a charge of 1 C can transfer 1.5 J of energy to the circuit. The energy was applied to the charge when it passed through the battery.</p>
 <p>-ve is short for &quot;negative&quot;. +ve is short for &quot;positive&quot;.</p>
 <p>Before we know whether a circuit element is a source or a load, we must assume the direction of the current first. According to this direction, we will be assuming whether it is a source or a load.</p>
-<p>We represent the reference direction for voltage on a circuit element by labelling the terminals <span class="math">\(+\)</span> and <span class="math">\(-\)</span>, or saying <span class="math">\(V_{ab}\)</span> (<span class="math">\(a\)</span> is the higher potential, <span class="math">\(b\)</span> is the lower potential), or by drawing an arrow from <span class="math">\(-\)</span> to <span class="math">\(+\)</span>.</p>
+<p>We represent the reference direction for voltage on a circuit element by labelling the terminals <span class="math">\(+\)</span> and <span class="math">\(-\)</span>, or saying <span class="math">\(V_{ab}\)</span> (<span class="math">\(a\)</span> is the higher potential, <span class="math">\(b\)</span> is the lower potential; <span class="math">\(a\)</span> is +, <span class="math">\(b\)</span> is -), or by drawing an arrow from <span class="math">\(-\)</span> to <span class="math">\(+\)</span>.</p>
 <p>The reference direction is not important for the circuit elements in this course. In other words, <span class="math">\(V_{ab} = -V_{ba}\)</span>.</p>
 <p>So if we solve the voltage on the circuit element and the voltage is negative, that means the reference we assumed is backwards and that the positive terminal is actually the negative terminal, and vice versa.</p>
 <p>There is both a reference current direction and a reference voltage direction. We often assume the current goes into the positive terminal since most circuits elements are loads. The reference voltage direction is often arbitrary.</p>
@@ -197,6 +197,64 @@ v
 A      C    D
 |______|____| &lt; Node 3</code></pre>
 <p>;wip: add some numbers and solve</p>
+<h2 id="kirchoffs-voltage-law">Kirchoff's Voltage Law</h2>
+<p>;wip: assume direction of travel to be clockwise</p>
+<p>;wip: hitting positive element means voltage added, hitting negative means subtracted</p>
+<p>;wip</p>
+<h1 id="section-3">12/5/14</h1>
+<p>The variables we have so far are <span class="math">\(P\)</span> (Voltage), <span class="math">\(I\)</span> (Amperage), <span class="math">\(P\)</span> (Wattage), <span class="math">\(W\)</span> (Joules), and <span class="math">\(q\)</span> (Coulombs).</p>
+<h2 id="circuit-elements">Circuit Elements</h2>
+<p>We can label points on a circuit by writing its label beside that point, and optionally drawing an arrow pointing it out if unclear. Labels are often letter like &quot;a&quot; or &quot;b&quot;.</p>
+<ul>
+<li>Circuit elements are either active or passive.
+<ul>
+<li>Active elements <strong>supply energy</strong>. They are either voltage or current sources.
+<ul>
+<li><strong>Voltage sources</strong> provide a constant voltage.
+<ul>
+<li>An <strong>independent</strong> voltage source provides the same voltage regardless of the current.
+<ul>
+<li>The circuit symbol for this is a circle with + and - inside it labelling the positive and negative terminals.</li>
+<li>The voltage is constant and does not depend on anything.</li>
+</ul></li>
+<li>A <strong>dependent/controlled</strong> voltage source provides voltage depending on something else in the circuit.
+<ul>
+<li>Can be <strong>voltage controlled</strong> or <strong>current controlled</strong>.</li>
+<li>A voltage controlled voltage source provides voltage as a function of the voltage between two specified nodes - <span class="math">\(V = kV_{ab}\)</span>.</li>
+<li>A current controlled voltage source provides voltage as a function of the current passing through a specified point - <span class="math">\(V = kI_a\)</span>.</li>
+<li>The circuit symbol for this is a diamond (rhombus) with + and - inside it labelling the positive and negative terminals. The wires come out of the points of the diamond.</li>
+</ul></li>
+</ul></li>
+<li><strong>Current sources</strong> provide a constant current.
+<ul>
+<li>An <strong>independent</strong> current source provides the same current regardless of the current.
+<ul>
+<li>The circuit symbol for this is a circle with an arrow inside it pointing along the direction of the current.</li>
+<li>The current is constant and does not depend on anything.</li>
+</ul></li>
+<li>A <strong>dependent/controlled</strong> current source provides current depending on something else in the circuit.
+<ul>
+<li>The circuit symbol for this is a diamond (rhombus) with an arrow inside it poiting along the direction of the current. The wires come out of the points of the diamond.</li>
+<li>Can be <strong>current controlled</strong> or <strong>voltage controlled</strong>.</li>
+<li>A current controlled voltage source provides current as a function of the current passing through a specified point - <span class="math">\(I = kI_a\)</span>.</li>
+<li>A voltage controlled current source provides current as a function of the voltage between two specified nodes - <span class="math">\(I = kV_{ab}\)</span>.</li>
+</ul></li>
+</ul></li>
+<li>It is not possible to have both.</li>
+<li>Independent sources are drawn as circles, dependent sources are drawn as diamonds (rhombuses).</li>
+<li>Voltage sources have + and - labels, current sources have an arrow.</li>
+</ul></li>
+<li>Passive elements <strong>use energy</strong> (including those that simpy store energy like capacitors).</li>
+</ul></li>
+</ul>
+<p>We can put two voltage sources in series, and the resulting voltage is the sum of their values - <span class="math">\(V = V_1 + \ldots + V_n\)</span>, even if some of the voltages are negative. This can be derived using KVL.</p>
+<p>We can put two current sources in series, but <strong>only if they have the same value</strong>. Why is this?</p>
+<p>Suppose we have a current source connected to another current source with a different value in series. Then the current on both must be the same (due to the series connection), but the current sources are trying to obtain different currents.</p>
+<p>Therefore, there are no solutions to the circuit and the behaviour is undefined. In practice, they will overheat and burn. However, if the currents are exactly the same then they will agree on a value and there is a solution.</p>
+<p>We can put voltage sources in parallel, but <strong>only if they have the same value</strong>. This is because of a similar reason, that parallel connections have the same voltage, so the sources must also have the same voltage.</p>
+<p>We can put current sources in parallel, and the resulting current is the sum of their values - <span class="math">\(I = I_1 + \ldots + I_n\)</span>, even if some of the currents are negative. This can be derived using KCL.</p>
+<p>It is important not to directly connect the two terminals of a voltage source. Since the votlage drop across a wire is negligible, the current and therefore the power goes to infinity and extreme heat is generated, which will quickly destroy any real-world circuits. This is known as a <strong>short circuit</strong>. It cannot occur with current sources because the current is held constant.</p>
+<p>If we have two separate circuits connected by a single wire, the actual potential energies are unlikely to be exactly the same. Therefore, we need at least two wires to connect two circuits together - the electrons need to have a way back to the lower potential.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

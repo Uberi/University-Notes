@@ -128,7 +128,7 @@ A 1.5 V battery is one such that a charge of 1 C can transfer 1.5 J of energy to
 
 Before we know whether a circuit element is a source or a load, we must assume the direction of the current first. According to this direction, we will be assuming whether it is a source or a load.
 
-We represent the reference direction for voltage on a circuit element by labelling the terminals $+$ and $-$, or saying $V_{ab}$ ($a$ is the higher potential, $b$ is the lower potential), or by drawing an arrow from $-$ to $+$.
+We represent the reference direction for voltage on a circuit element by labelling the terminals $+$ and $-$, or saying $V_{ab}$ ($a$ is the higher potential, $b$ is the lower potential; $a$ is +, $b$ is -), or by drawing an arrow from $-$ to $+$.
 
 The reference direction is not important for the circuit elements in this course. In other words, $V_{ab} = -V_{ba}$.
 
@@ -205,3 +205,62 @@ For example, consider the following circuit:
     |______|____| < Node 3
 
 ;wip: add some numbers and solve
+
+Kirchoff's Voltage Law
+----------------------
+
+;wip: assume direction of travel to be clockwise
+
+;wip: hitting positive element means voltage added, hitting negative means subtracted
+
+;wip
+
+# 12/5/14
+
+The variables we have so far are $P$ (Voltage), $I$ (Amperage), $P$ (Wattage), $W$ (Joules), and $q$ (Coulombs).
+
+Circuit Elements
+----------------
+
+We can label points on a circuit by writing its label beside that point, and optionally drawing an arrow pointing it out if unclear. Labels are often letter like "a" or "b".
+
+* Circuit elements are either active or passive.
+    * Active elements **supply energy**. They are either voltage or current sources.
+        * **Voltage sources** provide a constant voltage.
+            * An **independent** voltage source provides the same voltage regardless of the current.
+                * The circuit symbol for this is a circle with + and - inside it labelling the positive and negative terminals.
+                * The voltage is constant and does not depend on anything.
+            * A **dependent/controlled** voltage source provides voltage depending on something else in the circuit.
+                * Can be **voltage controlled** or **current controlled**.
+                * A voltage controlled voltage source provides voltage as a function of the voltage between two specified nodes - $V = kV_{ab}$.
+                * A current controlled voltage source provides voltage as a function of the current passing through a specified point - $V = kI_a$.
+                * The circuit symbol for this is a diamond (rhombus) with + and - inside it labelling the positive and negative terminals. The wires come out of the points of the diamond.
+        * **Current sources** provide a constant current.
+            * An **independent** current source provides the same current regardless of the current.
+                * The circuit symbol for this is a circle with an arrow inside it pointing along the direction of the current.
+                * The current is constant and does not depend on anything.
+            * A **dependent/controlled** current source provides current depending on something else in the circuit.
+                * The circuit symbol for this is a diamond (rhombus) with an arrow inside it poiting along the direction of the current. The wires come out of the points of the diamond.
+                * Can be **current controlled** or **voltage controlled**.
+                * A current controlled voltage source provides current as a function of the current passing through a specified point - $I = kI_a$.
+                * A voltage controlled current source provides current as a function of the voltage between two specified nodes - $I = kV_{ab}$.
+        * It is not possible to have both.
+        * Independent sources are drawn as circles, dependent sources are drawn as diamonds (rhombuses).
+        * Voltage sources have + and - labels, current sources have an arrow.
+    * Passive elements **use energy** (including those that simpy store energy like capacitors).
+
+We can put two voltage sources in series, and the resulting voltage is the sum of their values - $V = V_1 + \ldots + V_n$, even if some of the voltages are negative. This can be derived using KVL.
+
+We can put two current sources in series, but **only if they have the same value**. Why is this?
+
+Suppose we have a current source connected to another current source with a different value in series. Then the current on both must be the same (due to the series connection), but the current sources are trying to obtain different currents.
+
+Therefore, there are no solutions to the circuit and the behaviour is undefined. In practice, they will overheat and burn. However, if the currents are exactly the same then they will agree on a value and there is a solution.
+
+We can put voltage sources in parallel, but **only if they have the same value**. This is because of a similar reason, that parallel connections have the same voltage, so the sources must also have the same voltage.
+
+We can put current sources in parallel, and the resulting current is the sum of their values - $I = I_1 + \ldots + I_n$, even if some of the currents are negative. This can be derived using KCL.
+
+It is important not to directly connect the two terminals of a voltage source. Since the votlage drop across a wire is negligible, the current and therefore the power goes to infinity and extreme heat is generated, which will quickly destroy any real-world circuits. This is known as a **short circuit**. It cannot occur with current sources because the current is held constant.
+
+If we have two separate circuits connected by a single wire, the actual potential energies are unlikely to be exactly the same. Therefore, we need at least two wires to connect two circuits together - the electrons need to have a way back to the lower potential.

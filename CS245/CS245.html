@@ -140,12 +140,57 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>Theorem 2.2.3 states the obvious consequences of the definition: all formulas of <span class="math">\(\mathcal{L}_P\)</span> are atoms, or of the form <span class="math">\(\neg A, A \wedge B, A \vee B, A \rightarrow B, A \leftrightarrow B\)</span>.</p>
 <p>Let <span class="math">\(R(n)\)</span> be a property (true if the property holds for <span class="math">\(n\)</span>, false otherwise). Theorem 2.2.4 states that if <span class="math">\(\forall p \in \operatorname{Atom}(\mathcal{L}_P), R(p)\)</span> and <span class="math">\(\forall A \in \operatorname{Form}(\mathcal{L}_P), R(A) \implies R(\neg A)\)</span> and <span class="math">\(\forall A, B \in \operatorname{Form}(\mathcal{L}_P), R(A) \wedge R(B) \implies R(A \odot B)\)</span>, then <span class="math">\(\forall A \in \operatorname{Form}(\mathcal{L}_P), R(A)\)</span>.</p>
 <p>In other words, if a property holds for all the forms of formulas, then it holds for all formulas.</p>
-<p>The <strong>type</strong> of a formula is determined by its top-level operator. For example, <span class="math">\(\neg A\)</span> is a negation, <span class="math">\(A \wedge B\)</span> is conjunction, <span class="math">\(A \vee b\)</span> is a disjunction, <span class="math">\(A \rightarrow B\)</span> is an implication, <span class="math">\(A \leftrightarrow B\)</span> is an equivalence.</p>
+<p>The <strong>type</strong> of a formula is determined by its top-level operator. For example, <span class="math">\(\neg A\)</span> is a negation, <span class="math">\(A \wedge B\)</span> is conjunction, <span class="math">\(A \vee b\)</span> is a disjunction, <span class="math">\(A \rightarrow B\)</span> is an implication, <span class="math">\(A \leftrightarrow B\)</span> is an equivalence. According to theorem 2.3.3, all formulas must be one of these forms.</p>
 <p>We want to be able to look at any expression and determine whether it is well formed. For example, <span class="math">\(\neg()\)</span> is not a well formed formula (WFF) because it is not obtainable through the rules that define an element in the set of formulas.</p>
 <p>Is <span class="math">\((\neg a) \wedge (b \vee c)\)</span> well formed?</p>
 <blockquote>
 <p>We can first notice that this is of the form <span class="math">\(P \wedge Q\)</span>, where <span class="math">\(P = \neg a\)</span> and <span class="math">\(Q = b \vee c\)</span>. By the rules, we know that the whole thing is well formed if and only if <span class="math">\(P\)</span> and <span class="math">\(Q\)</span> are both well formed.<br />Now we check if <span class="math">\(P\)</span> is well formed. Clearly, it is of the form <span class="math">\(\neg R\)</span>, where <span class="math">\(R = a\)</span>, and <span class="math">\(a\)</span> is an atom (which is, by definition, well formed), so by the rules, <span class="math">\(\neg a\)</span> is well formed.<br />Now we check if <span class="math">\(Q\)</span> is well formed. Clearly, it is of the form <span class="math">\(S \vee T\)</span>, where <span class="math">\(S = b\)</span> and <span class="math">\(T = c\)</span>. By the rules, <span class="math">\(Q\)</span> is well formed if and only if <span class="math">\(S\)</span> and <span class="math">\(T\)</span> are. Since they are atoms, they are both well formed by definition.<br />Since <span class="math">\(P\)</span> and <span class="math">\(Q\)</span> are well formed, <span class="math">\(P \wedge Q\)</span> is well formed and so is <span class="math">\((\neg a) \wedge (b \vee c)\)</span>.</p>
 </blockquote>
+<h1 id="section-1">12/5/14</h1>
+<h2 id="parse-trees">Parse Trees</h2>
+<p>The other way of testing for well-formedness is by constructing a parse tree out of the symbols in the formula. The top-level operator or atom is the root node of the tree, and the operands are its children. This is repeated until all the symbols have been added to the tree. Parentheses simply change the arrangement of the nodes and are not included in the parse tree.</p>
+<p>For example, the expression <span class="math">\((((\neg p) \wedge q) \rightarrow (p \wedge (q \vee (\neg r))))\)</span> has the following parse tree:</p>
+<pre><code>      \implies
+       /   \
+      /     \
+  \wedge   \wedge
+   /  \     /  \
+\neg   q   p  \vee
+  |           /  \
+  p          q  \neg
+                  |
+                  r</code></pre>
+<p>Every parse tree is unique. The rules for a valid formula can be applied to a parse tree to test for well-formedness:</p>
+<ul>
+<li>Tree nodes must be either atoms or connectives.</li>
+<li>If a node is an atom, it cannot have any children - if a node has children, it must be a connective.</li>
+<li>If a node is the unary connective (<span class="math">\(\neg\)</span>), then it must have exactly one child.</li>
+<li>If the node is a binary connective, then it must have exactly two children.</li>
+<li>If a tree is empty, then it is not a well formed formula.</li>
+</ul>
+<p>An algorithm for testing if an expression <span class="math">\(U\)</span> is a well formed formula is given below</p>
+<ol style="list-style-type: decimal">
+<li>If <span class="math">\(U\)</span> is empty, produce False.</li>
+<li>If <span class="math">\(U \in \operatorname{Atom}(\mathcal{L}_P)\)</span>, then produce True.</li>
+<li>If the expression does not begin with a <span class="math">\((\)</span> symbol, produce False.</li>
+<li>If the second symbol is <span class="math">\(\neg\)</span>, then let <span class="math">\(V\)</span> be an expression such that <span class="math">\(U = (\neg V)\)</span>. Apply this algorithm again with <span class="math">\(V\)</span> as the expression, and if it is false, produce False.</li>
+<li>Otherwise (the second symbol is not <span class="math">\(\neg\)</span>), apply this algorithm again with all the symbols starting from and including the second symbol, except doing nothing in step 7. If it results in False, return False. Otherwise, let <span class="math">\(V\)</span> be the well formed formula from the second symbol to wherever the algorithm run ended. If the next symbol after this is not a binary connective, produce False. Do the formula thing again to get a well formed formula <span class="math">\(W\)</span>, or produce False.</li>
+<li>If the symbol after the place <span class="math">\(W\)</span> ended is not a <span class="math">\()\)</span> symbol, produce False.</li>
+<li>If the expression does not end after the <span class="math">\()\)</span> symbol, produce False.</li>
+<li>Produce True.</li>
+</ol>
+<p>This algorithm gets applied a finite number of times, proportional to the depth of the tree.</p>
+<p>The <strong>height</strong> of a parse tree is the length of the longest path from the root to a leaf.</p>
+<h3 id="precedence">Precedence</h3>
+<p>We now introduce a system of precedence. The logical connectives listed by priority, from highest to lowest, are <span class="math">\(\neg\)</span>, <span class="math">\(\wedge\)</span>, <span class="math">\(\vee\)</span>, <span class="math">\(\rightarrow\)</span>, and <span class="math">\(\leftrightarrow\)</span>.</p>
+<p>Precedence is the idea that some connectives get higher priority than others. For example, <span class="math">\(p \vee q \wedge r\)</span> could potentially mean either <span class="math">\(((p \vee q) \wedge r)\)</span>, or <span class="math">\((p \vee (q \wedge r))\)</span>. But since <span class="math">\(\wedge\)</span> has a higher precedence than <span class="math">\(\vee\)</span>, we define <span class="math">\(p \vee q \wedge r\)</span> to mean <span class="math">\((p \vee (q \wedge r))\)</span>.</p>
+<p>When there are multiple ambiguities, we start with the ones with highest precedence. For example, <span class="math">\(\neg p \wedge q \vee r\)</span> is resolved to <span class="math">\((neg p) \wedge q \vee r\)</span>, then <span class="math">\((((neg p) \wedge q) \vee r)\)</span>.</p>
+<p><strong>Course of values induction</strong> is a type of strong induction where the inductive hypothesis used to prove the inductive conclusion is the conjunction of all the previous cases.</p>
+<p>In other words, we do course of values induction by proving a property holds for <span class="math">\(M(1)\)</span>, and then by proving that <span class="math">\(M(1) \wedge \ldots \wedge M(k) \implies M(k + 1)\)</span> for any <span class="math">\(k \ge 1\)</span>. By the principal of strong induction, <span class="math">\(M(n)\)</span> therefore holds for all <span class="math">\(n \ge 1\)</span>.</p>
+<p>Sometimes we want to use induction on the height of the parse tree. This is often useful for proving things about propositional formulas, due to the recursive nature of formulas.</p>
+<p>If a formula <span class="math">\(C\)</span> contains the segment <span class="math">\((\neg A)\)</span>, where <span class="math">\(A\)</span> is another formula, then <span class="math">\(A\)</span> is the <strong>scope</strong> of the <span class="math">\(\neg\)</span> within <span class="math">\(C\)</span>. The scope is the area where the <span class="math">\(\neg\)</span> applies.</p>
+<p>For binary connectives, if <span class="math">\(C\)</span> contains <span class="math">\((A \odot B)\)</span> where <span class="math">\(\odot\)</span> is a binary connective, then <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are the left and right scopes, respectively, of the binary connective within <span class="math">\(C\)</span>.</p>
+<p>A scope is unique to the operator. Two operators cannot have the exact same scope, though the scopes themselves can be equal.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

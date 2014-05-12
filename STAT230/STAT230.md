@@ -159,3 +159,29 @@ A 4-digit PIN code is selected with replacement. What is the probability that th
 > Clearly, the event of having no "1" digits is the complement of the event of interest, so $P(1 occurs) = 1 - P(1 does not occur)$. Since $P(1 does not occur) = \frac{6561}{10000}$, the probability of a "1" occurring is 34.39%.  
 
 Now we derived the formula for $n \choose r$, read the MATH239 notes from yesterday to get the same material.
+
+# 12/5/14
+
+${n \choose r} = \frac{n!}{r!(n - r)!} = \frac{n^{(r)}}{r!}$.
+
+Given an event $B$, $P(B) = 1 - P(\overline B)$.
+
+Also, $n^{(k)} = n(n - 1)^{(k - 1)}$ for $k \ge 1$ and ${n \choose k} = {n \choose n - k}$.
+
+The Binomial theorem states that $(1 + x)^n = \sum_{k = 0}^n {n \choose k}x^k$
+
+What is the probability that a random arrangement of the letters in "STATISTICS" begins and ends with S?
+
+> Clearly, the total number of arrangements is $10!$, since there are 10 letters.  
+> Let $W$ be a permutation. Assume $W$ begins and ends with an S.  
+> Then the remaining letters are "TATISTIC", and there are $8!$ possible permutations of these letters.  
+> Therefore, there are $8!$ event outcomes and $10!$ total outcomes, so the probability is $\frac{8!}{10!} = \frac 1 {90}$.  
+
+What are the unique anagrams of the letters of "STATISTICS"?
+
+> Clearly, there are 3 S's, 3 T's, 1 A, 2 I's, and 1 C, with 10 letters total. Then there are $10!$ possible permutations.  
+> Clearly, for each permutation, the S, T, and I letters can be swapped around without changing the anagram - it doesn't matter which S is first or second.  
+> So there are $3!$ permutations representing the same anagram due to S, and for each of these a factor of $3!$ more due to T, and for each of these a factor of $2!$ more due to I.  
+> So there are $3! 3! 2!$ duplicate permutations for each anagram, and therefore $\frac{10!}{3! 3! 2!}$ unique anagrams.  
+
+If we have $n_i$ symbols of type $i$, with $n = n_1 + \ldots + n_k$, then the number of arrangements using $n$ symbols is ${n \choose n_1} \times {n - n_1 \choose n_2} \times {n - n_1 - n_2 \choose n_3} \times \ldots \times {n_k \choose n_k} = \frac{n!}{n_1! n_2! \cdots n_k!}$.
