@@ -172,6 +172,7 @@ Office Hours: drop-in</code></pre>
 <li>If power is positive, the element absorbs energy.</li>
 <li>If the power is negative, the element supplies energy, and our original assumption was incorrect.</li>
 </ul>
+<p>The passive sign convention is simply the idea that the current enters the positive terminal of a passive circuit element.</p>
 <p>Consider the following circuit:</p>
 <pre><code>___  + 12 V
    |
@@ -201,6 +202,8 @@ A      C    D
 <p>;wip: assume direction of travel to be clockwise</p>
 <p>;wip: hitting positive element means voltage added, hitting negative means subtracted</p>
 <p>;wip</p>
+<p>The closed loop does not have to be an actual subcircuit - the points making up the loop do not need to be connected in any way.</p>
+<p>The passive sign convention means that voltage drops are positive and voltage gains are negative.</p>
 <h1 id="section-3">12/5/14</h1>
 <p>The variables we have so far are <span class="math">\(P\)</span> (Voltage), <span class="math">\(I\)</span> (Amperage), <span class="math">\(P\)</span> (Wattage), <span class="math">\(W\)</span> (Joules), and <span class="math">\(q\)</span> (Coulombs).</p>
 <h2 id="circuit-elements">Circuit Elements</h2>
@@ -255,6 +258,31 @@ A      C    D
 <p>We can put current sources in parallel, and the resulting current is the sum of their values - <span class="math">\(I = I_1 + \ldots + I_n\)</span>, even if some of the currents are negative. This can be derived using KCL.</p>
 <p>It is important not to directly connect the two terminals of a voltage source. Since the votlage drop across a wire is negligible, the current and therefore the power goes to infinity and extreme heat is generated, which will quickly destroy any real-world circuits. This is known as a <strong>short circuit</strong>. It cannot occur with current sources because the current is held constant.</p>
 <p>If we have two separate circuits connected by a single wire, the actual potential energies are unlikely to be exactly the same. Therefore, we need at least two wires to connect two circuits together - the electrons need to have a way back to the lower potential.</p>
+<h1 id="section-4">13/5/14</h1>
+<p>;wip: add the circuit example we did in class from notebook</p>
+<p>;wip: copy stats example from notebook</p>
+<h2 id="resistance">Resistance</h2>
+<p>Resistance is the difficulty current has in passing through a circuit element. The electrons themselves encounter difficulty passing through the conductor and some of their energy is dissipated as heat or other forms of energy.</p>
+<p>Resistance is measured in Ohms (<span class="math">\(\Omega\)</span>). One Ohm is one volt per amp.</p>
+<p>A <strong>resistor</strong> is a circuit element with resistance. It is represented using a squiggly line ;wip</p>
+<p>Resistance is the last part of the three parts of <strong>Ohm's Law</strong>, which can be stated as <span class="math">\(V = IR\)</span> - voltage is the product of current and resistance. Other forms are <span class="math">\(I = \frac V R\)</span> and <span class="math">\(R = \frac V I\)</span>.</p>
+<p>Two special cases are a short circuit, when resistance is 0 and current becomes undefined, and an open circuit, when resistance is infinity and current becomes 0.</p>
+<p>Clearly, <span class="math">\(P = VI = (IR)I = I^2 R\)</span>. Likewise, <span class="math">\(P = VI = V \frac V R = \frac {V^2} R\)</span>.</p>
+<p>As an aside, the resistance of a wire is <span class="math">\(R = \frac{\rho l}{A}\)</span>, where <span class="math">\(\rho\)</span> is a constant of resistivity (depending on temperature and such), <span class="math">\(l\)</span> is the legth of the wire, and <span class="math">\(A\)</span> is the corss sectional area.</p>
+<p>When we find the power balance, we want to find the power adsorbed and the power supplied, and make sure they match.</p>
+<h1 id="section-5">14/5/14</h1>
+<p>When we are solving a circuit, we start with the elements that we have the most information about. Then we assume a direction of current (it is generally good to make an educated guess based on the power supplies), and solve the circuit using that assumption.</p>
+<p>We can name the voltage loops by drawing a circle inside the loop and labelling it with something like L1 or L2.</p>
+<p>Analyzing a circuit means calculating the current and voltage across all the circuit elements.</p>
+<h2 id="equivalent-resistances">Equivalent Resistances</h2>
+<p>An equivalent resistor is a resistor that behaves exactly the same as a given part of a circuit. If a part of a circuit has an equivalent resistor, we can simply replace it with the equivalent resistor to simplify it. It is represented by <span class="math">\(R_{eq}\)</span>.</p>
+<p>For series circuits, the current is constant for all the circuit elements, and the overall voltage is the sum of all the voltages, so <span class="math">\(V_{eq} = I_{eq}R_{eq} = V_1 + \ldots + V_n = I_1R_1 + \ldots + I_nR_n = I_{eq}(R_1 + \ldots + R_n)\)</span>, so <span class="math">\(R_{eq} = R_1 + \ldots + R_n\)</span>.</p>
+<p>When we have multiple resistors <span class="math">\(R_1, \ldots, R_n\)</span> in series, all of these resistors together are equivalent to one big resistor with value <span class="math">\(R_1 + \ldots + R_n\)</span>. In other words, when we put resistors in series, their resistances add up.</p>
+<p>We often do this substitution whenever the actual voltages between the resistors isn't important. For example, if there are dependent sources that depend on the voltage across one resistor, then we need to keep that resistor in the circuit.</p>
+<p>For example, if we have resistors <span class="math">\(R_1, R_2, R_3, R_4, R_5, R_6\)</span> in series, with the voltage across <span class="math">\(R_3\)</span> controlling a dependent source, then we simply exclude <span class="math">\(R_2\)</span> from the equivalent resistance substitution, so we substitute the equivalent resistor for <span class="math">\(R_3, R_4, R_5, R_6\)</span> to get <span class="math">\(R_1, R_2, R_{eq}\)</span>.</p>
+<p>For parallel circuits, the voltage is constant across all the branches and the overall current is the sum of all the currents, so <span class="math">\(I_{eq} = \frac V_{eq} {R_{eq}} = I_1 + \ldots + I_n = \frac{V_1}{R_1} + \ldots + \frac{V_n}{R_n}\)</span>, so <span class="math">\(\frac 1 {R_{eq}} = \frac 1 {R_1} + \ldots + \frac 1 {R_n}\)</span>.</p>
+<p>When we have multiple resistors <span class="math">\(R_1, \ldots, R_n\)</span> in parallel, the value of the equivalent resistor is <span class="math">\(\frac 1 {\frac 1 {R_1} + \ldots + \frac 1 {R_n}}\)</span>.</p>
+<p><strong>Conductance</strong> (<span class="math">\(G\)</span>) is the opposite of resistance, and is calculated as the reciprocal of the resistance - <span class="math">\(G = \frac 1 R\)</span>. The unit is Siemens (S).</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

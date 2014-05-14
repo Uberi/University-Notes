@@ -34,8 +34,6 @@ $$
 
 # 5/5/14
 
-;wip: do assignment 0 and get on LEARN
-
 ### Sets and Combinatorics
 
 Combinatorics is a discrete mathematics. Topics include enumeration (counting) and graph theory.
@@ -124,7 +122,7 @@ The **inverse** of $f: S \to T$ is a function $f^{-1}$ such that \forall x \in S
 For example, let $S$ be the set of all $k$-subsets of $[n]$ and $T$ be the set of all $(n - k)$-subsets of $[n]$:
 
 > If $n = 3, k = 1$, then $S = \set{\set{1}, \set{2}, \set{3}}, T = \set{\set{1, 2}, \set{1, 3}, \set{2, 3}}$.  
-> One bijection over these sets would be $f: S \to T$ where $f(A) = [n] \setdiff A$. This is a bijection because it maps every item in $S$ to a unique item in $T$,   with no items in $T$ left over. ;wip: is \setdiff right?
+> One bijection over these sets would be $f: S \to T$ where $f(A) = [n] \setminus A$. This is a bijection because it maps every item in $S$ to a unique item in $T$, with no items in $T$ left over.  
 > Also, since $\abs{A} = k$ and $A \subseteq [n]$, $\abs{f(A)} = \abs{[n]} - \abs{A} = n - k$, as required.  
 > Clearly, $f^{-1}(B) = [n] \setdiff B$. Since the function has an inverse, $f$ is a bijection and $\abs{S} = \abs{T} = n \choose k = n \choose n - k$.  
 > As an aside, we proved that $n \choose k = n \choose n - k$.  
@@ -288,3 +286,40 @@ For example, how many binary strings of length $n$ have no 3 consecutive 1's?
 > Let $w(\sigma)$ be the length of $\sigma$.  
 > ;wip: $\Phi_S(x) = \frac{1 + x + x^2}{1 - x - x^2 - x^3}$.
 > Therefore, there are $[x^n]\frac{1 + x + x^2}{1 - x - x^2 - x^3}$ of these binary strings (the $n$th term's coefficient is the number of binary strings in $S$ of length $n$).  
+
+# 14/5/14
+
+Formal Power Series
+-------------------
+
+Let $a_1, a_2, \ldots$ be a sequence of numbers. Then the **formal power series** associated with $\{a_n\}$ is $A(x) = \sum_{k \ge 0} a_k x^k$.
+
+This allows us to represent the entire sequence using one power series.
+
+The coefficient of $x^n$ in $A(x)$ is denoted $[x^n]A(x)$. For example, $[x^2](1 + 2x + 3x^2 + 4x^3 + \ldots) = 3$.
+
+Two power series are **equal** if they have the same coefficients for the same powers: $A(x) = B(x) \iff \forall n \ge 0, [x^n]A(x) = [x^n]B(x)$.
+
+Addition is defined as $A(x) + B(x) = \sum_{k \ge 0} \left([x^k]A(x) + [x^k]B(x)\right)x^k$.
+
+For example, if $A(x) = (1 + 2x)^{10}, B = 1 + x + x^2 + \ldots$, find $[x^n](A(x) + B(x))$:
+
+> Clearly, $A(x) = (1 + 2x)^{10} = \sum_{k = 0}^{10} {10 \choose k} (2x)^k = \sum_{k = 0}^{10} {10 \choose k} 2^k x^k$.  
+> Clearly, $B(x) = \sum_{k = 0}^n x^k$.  
+> So $[x^n](A(x) + B(x)) = \begin{cases} 2^n {10 \choose n} + 1 &\text{if } 0 \le n \le 10 \\ 1 &\text{if } n > 10 \end{cases}$.  
+
+Multiplication is defined as $A(x)B(x) = \sum_{n \ge 0} \left(\sum_{i = 0}^n a_i b_{n - i}\right)x^n$. Since $\sum_{i = 0}^n a_i b_{i - 1}$ is always finite, multiplication of power series is closed under multiplication.
+
+This can be derived by multiplying out $(a_0 + a_1x + a_2x^2 + \ldots)(b_0 + b_1x + b_2x^2 + \ldots) = (a_0 b_0 + a_0 b_1 a_0 b_2 + \ldots) + (a_1 b_0 + a_1 b_1 a_1 b_2 + \ldots) + (a_2 b_0 + a_2 b_1 a_2 b_2 + \ldots) + \ldots$. Clearly, the coefficient of $x^n$ is $a_0 b_n + a_1 b_{n - 1} + \ldots + a_n b_0$, because these are all the ways the values can add up to $n$ - $a_i$ is the coefficient of $x^i$ and $b_j$ is the coefficient of $x^j$, so it must be that $i + j = n$, and $j = n - i$.
+
+Inverses
+--------
+
+The **inverse** of a power series $A(x)$ is $B(x)$ if and only if $A(x)B(x) = 1$. It is defined as $A^{-1}(x)$
+
+What is the inverse of $1 - x$?
+
+> Let $B(x) = b_0 + b_1x + b_2x^2 + \ldots$. Assume $A(x)B(x) = 1$.  
+> Then $b_0 + b_1x + b_2x^2 + \ldots - b_0x - b_1x^2 - b_2x^3 - \ldots = 1 = b_0 + (b_1 - b_0)x + (b_2 - b_1)x^2 + (b_3 - b_2)x^3 + \ldots$.  
+> So $b_0 = 1, b_1 - b_0 = 0, b_2 - b_1 = 0, b_3 - b_2 = 0, \ldots$, and $\forall n \ge 0, b_n = 1$.  
+> So $(1 - x)^{-1} = 1 + x + x^2 + x^3 + \ldots = \frac 1 {1 - x}$, the geometric series.  

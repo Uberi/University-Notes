@@ -151,7 +151,6 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 </blockquote>
 <h1 id="section-2">9/5/14</h1>
 <p>;wip: do the mapleta quiz available on Wednesday, due on Wednesday</p>
-<p>;wip: bring pink tie calc to class</p>
 <p>The factorial function grows extremely quickly and can be difficult to calculate for large numbers. Therefore, we have various approximations that help us do this more easily.</p>
 <p><strong>Stirling's approximation</strong> is <span class="math">\(n! \approxeq n^n e^{-n} \sqrt{2 \pi n}\)</span>. This approximation is asymptotically equivalent to the factorial function - as <span class="math">\(n \to \infty\)</span>, the percentage error gradually decreases. ;wip: memorize this</p>
 <p>The <strong>complement</strong> of an event <span class="math">\(A\)</span> is the opposite event - the event of <span class="math">\(A\)</span> not <strong>occurring</strong>. It is represented using <span class="math">\(\overline A\)</span> or <span class="math">\(A^C\)</span>. It is always true that an event occurs, or it does not occur, so <span class="math">\(P(A) + P(\overline A) = 1\)</span>.</p>
@@ -173,7 +172,32 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <blockquote>
 <p>Clearly, there are 3 S's, 3 T's, 1 A, 2 I's, and 1 C, with 10 letters total. Then there are <span class="math">\(10!\)</span> possible permutations.<br />Clearly, for each permutation, the S, T, and I letters can be swapped around without changing the anagram - it doesn't matter which S is first or second.<br />So there are <span class="math">\(3!\)</span> permutations representing the same anagram due to S, and for each of these a factor of <span class="math">\(3!\)</span> more due to T, and for each of these a factor of <span class="math">\(2!\)</span> more due to I.<br />So there are <span class="math">\(3! 3! 2!\)</span> duplicate permutations for each anagram, and therefore <span class="math">\(\frac{10!}{3! 3! 2!}\)</span> unique anagrams.</p>
 </blockquote>
-<p>If we have <span class="math">\(n_i\)</span> symbols of type <span class="math">\(i\)</span>, with <span class="math">\(n = n_1 + \ldots + n_k\)</span>, then the number of arrangements using <span class="math">\(n\)</span> symbols is <span class="math">\({n \choose n_1} \times {n - n_1 \choose n_2} \times {n - n_1 - n_2 \choose n_3} \times \ldots \times {n_k \choose n_k} = \frac{n!}{n_1! n_2! \cdots n_k!}\)</span>.</p>
+<p>If we have <span class="math">\(n_i\)</span> symbols of type <span class="math">\(i\)</span>, with <span class="math">\(n = n_1 + \ldots + n_k\)</span>, then the number of arrangements using <span class="math">\(n\)</span> symbols is <span class="math">\({n \choose n_1} \times {n - n_1 \choose n_2} \times {n - n_1 - n_2 \choose n_3} \times \ldots \times {n_k \choose n_k} = \frac{n!}{n_1! n_2! \cdots n_k!} = \frac{(n_1 + \ldots + n_k)!}{n_1! n_2! \cdots n_k!}\)</span>.</p>
+<h1 id="section-4">14/5/14</h1>
+<p>How many ways can the 4 aces in a deck of 52 cards all be adjacent?</p>
+<blockquote>
+<p>Assume the aces are all adjacent. Then we can consider the four aces as a single large unit.<br />Clearly, there are <span class="math">\(4!\)</span> ways to arrange these 4 aces within the unit.<br />Clearly, for each of these ways there are <span class="math">\(48!\)</span> ways to arrange the other 48 cards.<br />Clearly, there are 49 different places to insert the other cards.<br />So there are <span class="math">\(49 \times 4! \times 48!\)</span> ways the 4 aces can be adjacent.</p>
+</blockquote>
+<p>How many ways can one choose 13 cards from a deck and have two of them be aces?</p>
+<blockquote>
+<p>Clearly, there are <span class="math">\(52 \choose 2\)</span> ways to choose the two aces.<br />For each of these ways, there are <span class="math">\(50 \choose 11\)</span> ways to choose the other cards.<br />So there are <span class="math">\({52 \choose 2} {50 \choose 11}\)</span> ways.</p>
+</blockquote>
+<p>What is the probability of choosing a 6-4-2-1 split between the suits from a deck of cards?</p>
+<blockquote>
+<p>Assume we have chosen 13 cards.<br />Clearly, there are <span class="math">\(4!\)</span> permutations of suits we can split between.<br />Clearly, there are <span class="math">\(13 \choose 6\)</span> ;wip: is this right? check the lecture slides Clearly, the probability is <span class="math">\(\frac{4! {13 \choose 6} {13 \choose 4} {13 \choose 2} {13 \choose 1}}{52 \choose 13}\)</span>.</p>
+</blockquote>
+<p>The Multinomial Theorem says that <span class="math">\((a_1 + \ldots + a_k)^n = \sum_{x_1, \ldots, x_k} \frac{n!}{x_1! \cdots x_k!} a^{x_1} \cdots a^{x_k}\)</span>.</p>
+<p>The Hypergeometric identity says that <span class="math">\(\sum_{x = 0}^\infty {a \choose x} {b \choose n - x} = {a + b \choose n}\)</span>.</p>
+<h2 id="probability-rules">Probability Rules</h2>
+<p>Events are simply sets of outcomes. We can use things like set notation and similar when working with events.</p>
+<p>If an event <span class="math">\(A\)</span> consists of the outcomes <span class="math">\(\set{a_1, \ldots, a_n}\)</span>, then <span class="math">\(P(A) = P(a_1) + \ldots + P(a_n)\)</span>.</p>
+<p>Also, <span class="math">\(0 \le P(A) \le 1\)</span>. This can be proven by proving <span class="math">\(P(S) = 1\)</span> (probability of one of any of the possible outcomes occurring is 1), and that <span class="math">\(P(A) \le P(S)\)</span>.</p>
+<p>If <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are events, and <span class="math">\(A \subseteq B\)</span>, then <span class="math">\(P(A) \le P(B)\)</span>. This can be proven by the</p>
+<h3 id="venn-diagrams">Venn Diagrams</h3>
+<p>Venn diagrams can be used to visually represent the events resulting from set operations on events.</p>
+<p>These diagrams have a rectangle representing <span class="math">\(S\)</span>, the sample space, and circles within the rectangle representing events. We can label the circles with names anywhere inside them. Sometimes, we also write some of the possible outcomes in the circles or rectangle.</p>
+<p>We can have circles that overlap each other to represent them sharing outcomes. To represent the resulting event, we can shade in the area representing the set of the event's outcomes.</p>
+<p>For example, a union of two events means we shade in both events (even if they intersect), and a conjunction would mean we only shade in the intersection of the two events. The complement of an event simply shades in everything in the rectangle that is not in the event.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

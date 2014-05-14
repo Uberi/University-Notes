@@ -185,12 +185,57 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>We now introduce a system of precedence. The logical connectives listed by priority, from highest to lowest, are <span class="math">\(\neg\)</span>, <span class="math">\(\wedge\)</span>, <span class="math">\(\vee\)</span>, <span class="math">\(\rightarrow\)</span>, and <span class="math">\(\leftrightarrow\)</span>.</p>
 <p>Precedence is the idea that some connectives get higher priority than others. For example, <span class="math">\(p \vee q \wedge r\)</span> could potentially mean either <span class="math">\(((p \vee q) \wedge r)\)</span>, or <span class="math">\((p \vee (q \wedge r))\)</span>. But since <span class="math">\(\wedge\)</span> has a higher precedence than <span class="math">\(\vee\)</span>, we define <span class="math">\(p \vee q \wedge r\)</span> to mean <span class="math">\((p \vee (q \wedge r))\)</span>.</p>
 <p>When there are multiple ambiguities, we start with the ones with highest precedence. For example, <span class="math">\(\neg p \wedge q \vee r\)</span> is resolved to <span class="math">\((neg p) \wedge q \vee r\)</span>, then <span class="math">\((((neg p) \wedge q) \vee r)\)</span>.</p>
+<p>With this in place, we can now eliminate many of the superfluous parentheses to clean up our formulas.</p>
 <p><strong>Course of values induction</strong> is a type of strong induction where the inductive hypothesis used to prove the inductive conclusion is the conjunction of all the previous cases.</p>
 <p>In other words, we do course of values induction by proving a property holds for <span class="math">\(M(1)\)</span>, and then by proving that <span class="math">\(M(1) \wedge \ldots \wedge M(k) \implies M(k + 1)\)</span> for any <span class="math">\(k \ge 1\)</span>. By the principal of strong induction, <span class="math">\(M(n)\)</span> therefore holds for all <span class="math">\(n \ge 1\)</span>.</p>
 <p>Sometimes we want to use induction on the height of the parse tree. This is often useful for proving things about propositional formulas, due to the recursive nature of formulas.</p>
 <p>If a formula <span class="math">\(C\)</span> contains the segment <span class="math">\((\neg A)\)</span>, where <span class="math">\(A\)</span> is another formula, then <span class="math">\(A\)</span> is the <strong>scope</strong> of the <span class="math">\(\neg\)</span> within <span class="math">\(C\)</span>. The scope is the area where the <span class="math">\(\neg\)</span> applies.</p>
 <p>For binary connectives, if <span class="math">\(C\)</span> contains <span class="math">\((A \odot B)\)</span> where <span class="math">\(\odot\)</span> is a binary connective, then <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are the left and right scopes, respectively, of the binary connective within <span class="math">\(C\)</span>.</p>
 <p>A scope is unique to the operator. Two operators cannot have the exact same scope, though the scopes themselves can be equal.</p>
+<h1 id="section-2">14/5/14</h1>
+<h2 id="semantics">Semantics</h2>
+<p>The semantics of a language describe how we interpret should valid formulas in that language. Semantics assigns meanings to formulas.</p>
+<p>Let <span class="math">\(A\)</span> and <span class="math">\(B\)</span> be formulas, representing the propositions <span class="math">\(\mathcal{A}\)</span> and <span class="math">\(\mathcal{B}\)</span>, respectively. Then <span class="math">\(\neg A\)</span> represents &quot;Not <span class="math">\(\mathcal{A}\)</span>&quot;, <span class="math">\(A \wedge B\)</span> represents &quot;<span class="math">\(\mathcal{A}\)</span> and <span class="math">\(\mathcal{B}\)</span>&quot;.</p>
+<p>Semantics is formally given as functions that map each formula to a value in <span class="math">\(\set{0, 1}\)</span> (false and true). This function can be represented using a <strong>truth table</strong>.</p>
+<p>The value of a formula <span class="math">\(A\)</span> given a truth valuation <span class="math">\(t\)</span> is represented <span class="math">\(A^t\)</span>, with <span class="math">\(A^t \in \set{0, 1}\)</span>. If we used conventional function notation, we might write <span class="math">\(t(A) \in \set{0, 1}\)</span>.</p>
+<p><strong>Truth valuations</strong> are functions that are used to assign truth values to propositional variables. The domain is the set of propositional variables in a formula, and the range is <span class="math">\(\set{0, 1}\)</span>. If <span class="math">\(t\)</span> is a truth valuation, then <span class="math">\(A^t \in \set{0, 1}\)</span>, where <span class="math">\(A\)</span> is a propositional variable.</p>
+<p>We can completely represent the truth valuation for a formula by listing out all possible values of the domain and the resulting value in the range. For <span class="math">\(n\)</span> variables, there are <span class="math">\(2^n\)</span> possible values.</p>
+<p>We can define the truth valuation function <span class="math">\(t\)</span> in terms of formulas <span class="math">\(A\)</span> and <span class="math">\(B\)</span> recursively:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(A \in \operatorname{Atom}(\mathcal{L}_P) \implies A^t \in \set{0, 1}\)</span>.</li>
+<li><span class="math">\((\neg A) = \begin{cases} 1 &amp;\text{if } A^t = 0 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
+<li><span class="math">\((A \wedge B) = \begin{cases} 1 &amp;\text{if } A^t = B^t = 0 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
+<li><span class="math">\((A \vee B) = \begin{cases} 1 &amp;\text{if } A^t = 0 \text{ or } B^t = 0 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
+<li><span class="math">\((A \rightarrow B) = \begin{cases} 1 &amp;\text{if } A^t = 0 \text{ or } B^t = 1 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
+<li><span class="math">\((A \leftrightarrow B) = \begin{cases} 1 &amp;\text{if } A^t = B^t \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
+</ol>
+<p>Given a set of formulas <span class="math">\(\Sigma\)</span>, <span class="math">\(\Sigma^t = \begin{cases} 1 &amp;\text{if } \forall A \in \Sigma, A^t = 1 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>. In other words, a set of formulas is true in a given truth valuation if and only if all of the formulas in the set are true.</p>
+<p><span class="math">\(\Sigma\)</span> is <strong>satisfiable</strong> if and only if there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(\Sigma^t = 1\)</span>. It this <span class="math">\(t\)</span> exists, then <span class="math">\(t\)</span> <strong>satisfies</strong> <span class="math">\(\Sigma\)</span>. Therefore, <span class="math">\(\emptyset\)</span> satisfiable by any truth valuation.</p>
+<p>A <strong>tautology</strong> is a formula which is always true, so for any truth valuation <span class="math">\(t\)</span>, <span class="math">\(A^t = 1\)</span>.</p>
+<p>A <strong>contradiction</strong> is a formula which is always false, so for any truth valuation <span class="math">\(t\)</span>, <span class="math">\(A^t = 0\)</span>.</p>
+<p>Rather than writing out the entire truth table, we can simplify formulas using the following identities:</p>
+<ul>
+<li><span class="math">\(\neg 0 = 1, \neg 1 = 0\)</span></li>
+<li><span class="math">\(A \wedge 1 = 1 \wedge A = A\)</span></li>
+<li><span class="math">\(A \wedge 0 = 0 \wedge A = 0\)</span></li>
+<li><span class="math">\(A \vee 1 = 1 \vee A = 1\)</span></li>
+<li><span class="math">\(A \vee 0 = 0 \vee A = A\)</span></li>
+<li><span class="math">\(A \rightarrow 1 = 1\)</span></li>
+<li><span class="math">\(0 \rightarrow A = 1\)</span></li>
+<li><span class="math">\(1 \rightarrow A = A\)</span></li>
+<li><span class="math">\(A \rightarrow 0 = \neg A\)</span></li>
+</ul>
+<p>Show that <span class="math">\(A = ((p \wedge q \rightarrow r) \wedge (p \rightarrow q)) \rightarrow (p \rightarrow r)\)</span> is a tautology:</p>
+<blockquote>
+<p>Assume <span class="math">\(p^t = 0\)</span>. Then <span class="math">\(A^t = (1 \rightarrow (p \rightarrow r))^t = 1\)</span>.<br />Assume <span class="math">\(p^t = 1\)</span>. Then <span class="math">\(A^t = (((q \rightarrow r) \wedge q) \rightarrow r)^t\)</span>.<br />Assume <span class="math">\(q^t = 0\)</span>. Then <span class="math">\(A^t = 1\)</span>. Assume <span class="math">\(q^t = 1\)</span>. Then <span class="math">\(A^t = (r \rightarrow r)^t = 1\)</span>.<br />So <span class="math">\(A\)</span> is a tautology.</p>
+</blockquote>
+<p>Let <span class="math">\(\mathcal{A}\)</span> and <span class="math">\(\mathcal{A}_1, \ldots, \mathcal{A}_n\)</span> be propositions.</p>
+<p>Deductive logic studies whether <span class="math">\(\mathcal{A}\)</span> can be deduced from <span class="math">\(\mathcal{A}_1, \ldots, \mathcal{A}_n\)</span>.</p>
+<p>Let <span class="math">\(\Sigma \subseteq \operatorname{Form}(\mathcal{L}_P), A \in \operatorname{Form}(\mathcal{L}_P)\)</span>.</p>
+<p><span class="math">\(A\)</span> is a <strong>tautological consequence/semantic entailment</strong> of <span class="math">\(\Sigma\)</span> (written <span class="math">\(\Sigma \models A\)</span>) if and only if for all truth valuation <span class="math">\(t\)</span>, <span class="math">\(\Sigma^t = 1 \implies A^t = 1\)</span>. Also, <span class="math">\(\neg (\Sigma \models A) = \Sigma \not\models A\)</span>. We can also write out the elements of <span class="math">\(\Sigma\)</span> diretly, like <span class="math">\(P_1, \ldots, P_n \models A\)</span>, which is the same as <span class="math">\(\set{P_1, \ldots, P_n} \models A\)</span>.</p>
+<p>As a result, if <span class="math">\(\emptyset \models A\)</span>, then <span class="math">\(A\)</span> is a tautology. This is because <span class="math">\(\emptyset^t = 1\)</span> for any truth valuation <span class="math">\(t\)</span>, so <span class="math">\(A^t = 1\)</span> as well.</p>
+<p>As a result of our semantic definitions of our operations, conjunction and disjunction is commutative and associative. So <span class="math">\(A \wedge B = B \wedge A, A \vee B = B \vee A, (A \wedge B) \wedge C = A \wedge (B \wedge C), (A \vee B) \vee C = A \vee (B \vee C)\)</span>.</p>
+<p>Also, <span class="math">\(A_1, \ldots, A_n \models A \iff \emptyset \models A_1 \wedge \ldots \wedge A_n \rightarrow A \iff \emptyset \models A_1 \implies (A_2 \implies (\ldots (A_n \implies A) \ldots))\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -137,8 +137,6 @@ For example, consider a set of 20 people's birthdays:
 
 ;wip: do the mapleta quiz available on Wednesday, due on Wednesday
 
-;wip: bring pink tie calc to class
-
 The factorial function grows extremely quickly and can be difficult to calculate for large numbers. Therefore, we have various approximations that help us do this more easily.
 
 **Stirling's approximation** is $n! \approxeq n^n e^{-n} \sqrt{2 \pi n}$. This approximation is asymptotically equivalent to the factorial function - as $n \to \infty$, the percentage error gradually decreases. ;wip: memorize this
@@ -184,4 +182,52 @@ What are the unique anagrams of the letters of "STATISTICS"?
 > So there are $3!$ permutations representing the same anagram due to S, and for each of these a factor of $3!$ more due to T, and for each of these a factor of $2!$ more due to I.  
 > So there are $3! 3! 2!$ duplicate permutations for each anagram, and therefore $\frac{10!}{3! 3! 2!}$ unique anagrams.  
 
-If we have $n_i$ symbols of type $i$, with $n = n_1 + \ldots + n_k$, then the number of arrangements using $n$ symbols is ${n \choose n_1} \times {n - n_1 \choose n_2} \times {n - n_1 - n_2 \choose n_3} \times \ldots \times {n_k \choose n_k} = \frac{n!}{n_1! n_2! \cdots n_k!}$.
+If we have $n_i$ symbols of type $i$, with $n = n_1 + \ldots + n_k$, then the number of arrangements using $n$ symbols is ${n \choose n_1} \times {n - n_1 \choose n_2} \times {n - n_1 - n_2 \choose n_3} \times \ldots \times {n_k \choose n_k} = \frac{n!}{n_1! n_2! \cdots n_k!} = \frac{(n_1 + \ldots + n_k)!}{n_1! n_2! \cdots n_k!}$.
+
+# 14/5/14
+
+How many ways can the 4 aces in a deck of 52 cards all be adjacent?
+
+> Assume the aces are all adjacent. Then we can consider the four aces as a single large unit.  
+> Clearly, there are $4!$ ways to arrange these 4 aces within the unit.  
+> Clearly, for each of these ways there are $48!$ ways to arrange the other 48 cards.  
+> Clearly, there are 49 different places to insert the other cards.  
+> So there are $49 \times 4! \times 48!$ ways the 4 aces can be adjacent.  
+
+How many ways can one choose 13 cards from a deck and have two of them be aces?
+
+> Clearly, there are $52 \choose 2$ ways to choose the two aces.  
+> For each of these ways, there are $50 \choose 11$ ways to choose the other cards.  
+> So there are ${52 \choose 2} {50 \choose 11}$ ways.  
+
+What is the probability of choosing a 6-4-2-1 split between the suits from a deck of cards?
+
+> Assume we have chosen 13 cards.  
+> Clearly, there are $4!$ permutations of suits we can split between.  
+> Clearly, there are $13 \choose 6$ ;wip: is this right? check the lecture slides
+> Clearly, the probability is $\frac{4! {13 \choose 6} {13 \choose 4} {13 \choose 2} {13 \choose 1}}{52 \choose 13}$.  
+
+The Multinomial Theorem says that $(a_1 + \ldots + a_k)^n = \sum_{x_1, \ldots, x_k} \frac{n!}{x_1! \cdots x_k!} a^{x_1} \cdots a^{x_k}$.
+
+The Hypergeometric identity says that $\sum_{x = 0}^\infty {a \choose x} {b \choose n - x} = {a + b \choose n}$.
+
+Probability Rules
+-----------------
+
+Events are simply sets of outcomes. We can use things like set notation and similar when working with events.
+
+If an event $A$ consists of the outcomes $\set{a_1, \ldots, a_n}$, then $P(A) = P(a_1) + \ldots + P(a_n)$.
+
+Also, $0 \le P(A) \le 1$. This can be proven by proving $P(S) = 1$ (probability of one of any of the possible outcomes occurring is 1), and that $P(A) \le P(S)$.
+
+If $A$ and $B$ are events, and $A \subseteq B$, then $P(A) \le P(B)$. This can be proven by the 
+
+### Venn Diagrams
+
+Venn diagrams can be used to visually represent the events resulting from set operations on events.
+
+These diagrams have a rectangle representing $S$, the sample space, and circles within the rectangle representing events. We can label the circles with names anywhere inside them. Sometimes, we also write some of the possible outcomes in the circles or rectangle.
+
+We can have circles that overlap each other to represent them sharing outcomes. To represent the resulting event, we can shade in the area representing the set of the event's outcomes.
+
+For example, a union of two events means we shade in both events (even if they intersect), and a conjunction would mean we only shade in the intersection of the two events. The complement of an event simply shades in everything in the rectangle that is not in the event.
