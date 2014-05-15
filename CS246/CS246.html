@@ -171,10 +171,7 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p>Globs are matched relative to the current directory.</p>
 <p>Also, <code>rm PATTERN_GOES_HERE</code> removes all files matching <code>PATTERN_GOES_HERE</code>.</p>
 <p>We can even do things like <code>echo *.txt</code>, which will print out all the text files in the current directory. Hwoever, to literally print <code>*.txt</code>, we simply use quotes, like <code>echo '*.txt'</code> or <code>echo &quot;*.txt&quot;</code>.</p>
-<p><code>ls -l</code> displays more information about files, such as the owner and permissions.</p>
-<p>For example, <code>ls -l</code> might give <code>-rwxr--r-- 1 nanaeem staff 11K 2014-05-12 20:27 index.shtml</code>.</p>
-<p><code>2014-05-12 20:27</code> is the last date/time the file was modified. <code>11K</code> is the file size, <code>staff</code> is the group, <code>nanaeem</code> is the owner, <code>1</code> (the first one) is the number of links, <code>rwxr--r--</code> is the permissions, and <code>-</code> (the first one) is the file type (<code>d</code> for directory, <code>-</code> for file).</p>
-<p>Groups facilitate sharing of files. Every file belongs to one group, and users can belong to multiple groups (this can be listed using the <code>groups</code> command). To share files, all involved users must be in the same group.</p>
+<p>Also, globbing patterns do not work inside quotes - they must appear directly.</p>
 <h3 id="file-operations">File Operations</h3>
 <p>Also, if a command is taking too long, then we can use <code>Ctrl + C</code> to kill it. This is often written as <code>^C</code>. There is also <code>Ctrl + D</code>, which sends the end-of-file symbol to the program, which allows it to gracefully terminate.</p>
 <p>The <code>cat PATTERN_GOES_HERE</code> (concatenate) command is an extremely commonly used command that simply prints out the contents of all given files.</p>
@@ -209,6 +206,91 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p><code>{A, B}</code> means &quot;between <code>A</code> and <code>B</code> inclusive of the preceding&quot;. If <code>B</code> is blank, then it is assumed to be infinity. Clearly, <code>?  is equivalent to</code>{0, 1}<code>and</code>+<code>is equivalent to</code>{1,}`.</p>
 <p><code>.</code> means &quot;any character&quot;. For example, <code>egrep ...</code> will match any three characters. <code>^</code> matches the beginning of a line, and <code>$</code> matches the end.</p>
 <p>For example, to list all files in the current directory with exactly one &quot;a&quot;, we might use <code>ls | egrep &quot;^[^a]*a[^a]*$&quot;</code>.</p>
+<h1 id="section-3">15/5/14</h1>
+<h2 id="permissions">Permissions</h2>
+<p><code>ls -l</code> displays more information about files, such as the owner and permissions.</p>
+<p>For example, <code>ls -l</code> might give <code>-rwxr--r-- 1 nanaeem staff 11K 2014-05-12 20:27 index.shtml</code>.</p>
+<p><code>2014-05-12 20:27</code> is the last date/time the file was modified. <code>11K</code> is the file size, <code>staff</code> is the group, <code>nanaeem</code> is the owner, <code>1</code> (the first one) is the number of links, <code>rwxr--r--</code> is the permissions, and <code>-</code> (the first one) is the file type (<code>d</code> for directory, <code>-</code> for file).</p>
+<p>Groups facilitate sharing of files. Every file belongs to one group, and users can belong to multiple groups (this can be listed using the <code>groups</code> command). To share files, all involved users must be in the same group.</p>
+<p>The permissions are simply 3 groups of 3 letters, with 9 letters in total. Each letter is either <code>-</code> or an alphabetical character, and represents a binary bit. The groups are:</p>
+<ol style="list-style-type: decimal">
+<li>User bits: three bits that determine what permissions the owner of the file has</li>
+<li>Group bits: three bits that determine what permissions the members of the file's group has.</li>
+<li>Other bits: three bits that determine what permissions everyone else has.</li>
+</ol>
+<p>The first letter (bit) of each group is the read bit, and is <code>r</code> if set, or <code>-</code> otherwise. If set, we would be able to read the file, or if it is a directory, we can list its contents.</p>
+<p>The second letter (bit) of each group is the write bit, and is <code>w</code> if set, or <code>-</code> otherwise. If set, we would be able to modify the file contents, or if it is a directory, we can add or remove files.</p>
+<p>The third letter (bit) of each group is the execute bit, and is <code>x</code> if set, or `<code>otherwise. If set, we would be able to execute the file like a program, or if it is a directory, we can navigate into it, like with</code>cd`.</p>
+<p>So if a file has execute but not read permissions, then we could go into it but not list its contents. But if we happen to know one of the file paths, we can still access that file by path.</p>
+<h3 id="changing">Changing</h3>
+<p>Only the owner of a file can change its permissions. It is not possible to give this ability to anyone else, and it is always possible for the owner to change permissions.</p>
+<p>We do this using the <code>chmod MODE FILE</code>. <code>MODE</code> is a string of the form <code>OWNERSHIP_CLASS OPERATOR PERMISSIONS</code>, with no spaces.</p>
+<p><code>OWNERSHIP_CLASS</code> is the set of bits to apply the operations to. This value can be <code>u</code> for the user/owner bits, <code>g</code> for the group bits, <code>o</code> for the other bits, and <code>a</code> for all bits.</p>
+<p><code>OPERATOR</code> is an operation to perform with the permissions. This value can be <code>+</code> for adding a permission, <code>-</code> for removing a permission, or <code>=</code> to clear all the permissions and add the new one (set the permissions exactly).</p>
+<p><code>PERMISSIONS</code> is simply the permissions to be modified. This value is a string consisting of the characters <code>r</code> for read, <code>w</code> for write, and <code>x</code> for execute.</p>
+<p><code>FILE</code> is the file that the permission changes should apply to.</p>
+<p>For example <code>chmod o+r sample.txt</code> gives the owner permission to read <code>sample.txt</code>.</p>
+<h2 id="shell-scripting">Shell Scripting</h2>
+<h3 id="variables">Variables</h3>
+<p>In Bash, we can set variables using things like <code>x=1</code> or <code>x=&quot; a b c &quot;</code>. It is important that <strong>there are no spaces around the equal sign</strong>. If there are, the shell would interpret the <code>x</code> or <code>1</code> as a command.</p>
+<p>We can display the value of the variable using something like <code>echo $x</code>.</p>
+<p>When we want to set a variable's value, we simply write the variable name.</p>
+<p>When we want to get the value of the variable, we prefix it with a <code>$</code>, like <code>$x</code>. It is good practice to enclose the name with curly brackets: <code>${x}</code>. This can</p>
+<p>Variables are expanded by the shell before the current command is executed. Variables are expanded when they appear directly, or inside double quotes. Inside single quotes, variables are not expanded. For example, <code>echo $VAR</code> and <code>echo &quot;$VAR&quot;</code> print out the value of <code>VAR</code>, but <code>echo '$VAR'</code> will literally print out, &quot;$VAR&quot;.</p>
+<p>One of the most commonly used shell variables is <code>PATH</code>. This variable is a colon-separated list of paths that are searched in order when trying to execute a file. For example, if we execute <code>ls</code>, the shell will go through the paths specified in <code>PATH</code> one by one, looking for the <code>ls</code> program. If found, it stops searching, and otherwise an error is raised. This is essentially the list of places we should search for when we try to run a program specified by a relative path.</p>
+<h3 id="scripts">Scripts</h3>
+<p>Bash scripts are files that contain a sequence of Bash commands that can be executed as a program.</p>
+<p>For example, if we want to print out the date, current user, and current directory, we might write in the <code>script</code> file:</p>
+<pre><code>#!/bin/bash
+date
+whoami
+pwd</code></pre>
+<p>The <code>#!/bin/bash</code> specifies that this file should be run with the <code>/bin/bash</code> program. <code>#</code> is often called &quot;hash&quot; and <code>!</code> is often called &quot;bang&quot;, so this type of line is often called the hashbang or shebang. This must be the first line and should not have any spaces before it.</p>
+<p>Single-line comments are begun with <code>#</code>, which causes the rest of the line to be ignored. Therefore, the shebang line is actually just a comment to Bash.</p>
+<p>Often the current directory is not in the <code>PATH</code> variable. That means that if we try to run <code>script</code> Bash will not find it in <code>PATH</code> and will not run the script. Instead, we often specify a full path using <code>./script</code>, which is a fully given path - there is no need to search through <code>PATH</code> to resolve it because it is explicitly stated to be in the current directory. It is also possible to add <code>.</code> to the <code>PATH</code> variable to be able to directly run programs from the current directory.</p>
+<p>A shell script must have execute permissions to be run. This can be done using something like <code>chmod a+x script</code></p>
+<p>Shell scripts can read command line arguments using the special shell variables <code>$1</code>, <code>$2</code>, and etc., where <code>$0</code> contains the command line itself, &quot;script&quot;.</p>
+<p>For example, a shell script that checks if a word is in a dictionary can be written with a hashbang and <code>egrep &quot;^$1$&quot; /usr/share/dict/words</code>.</p>
+<p><code>/dev/null</code> is a file that can be written to, but simply discards whatever is written. Redirecting output to <code>/dev/null</code> means we are discarding the output.</p>
+<p>If we want to check something like whether <code>egrep</code> matched something, we can use the exit code. The <strong>exit code</strong> is the value that we returned from the <code>main</code> function in C programs.</p>
+<p>By convention, 0 indicates success, and a non-zero value indicates some sort of failure. In Bash, the last exit code given by a program is stored in the special shell variable <code>$?</code>.</p>
+<p>In the above example, <code>egrep</code> gives exit code 1 if no matches were found and 0 otherwise:</p>
+<pre><code>egrep &quot;^$1$&quot; /usr/share/dict/words
+if [ $? -eq 0 ]; then
+    echo Not a good password
+else
+    echo Maybe a good password
+fi</code></pre>
+<p>The spaces between <code>[</code>, <code>$?</code>, <code>-eq</code>, <code>0</code>, and <code>]</code> are all required. The body must be on its own line.</p>
+<p><code>$#</code> is another special shell variable, which always contains the number of command line arguments passed in. It is 0 if none were given - the <code>$0</code> variable does not count.</p>
+<p><code>if</code> is a Bash construct that takes the form <code>if PROGRAM; then BODY else BODY fi</code>. The first body is executed if the status code is 0, and otherwise the second one is executed.</p>
+<p>In our example, the status code is compared against 0, and a different message is displayed depending on whether the comparison succeeded. We could also use <code>if egrep &quot;^$1$&quot; /usr/share/dict/words; then</code> instead since the exit code follows the right pattern.</p>
+<p>The general pattern is as follows, with zero or any number of <code>elif</code> statements:</p>
+<pre><code>if [ CONDITION ]; then
+    BODY
+elif [ CONDITION ]; then
+    BODY
+else
+    BODY
+fi</code></pre>
+<p>When we used it in the form above, we actually executed the <code>[</code> program with the value of <code>$?</code>, <code>-eq</code>, and <code>0</code>, which sets the exit code to 0 if the expression evaluates to true (<code>$?</code> is equal to <code>0</code>), or 1 otherwise. This happens to work very well with the <code>if</code> construct.</p>
+<p>We can have as many <code>elif</code> statements as we need.</p>
+<p>A loop statement has a similar form to an <code>if</code> statement. The following prints out all the numbers from 1 to its first command line argument, inclusive:</p>
+<pre><code>x=1
+while [ $x -le $1 ]; do
+    echo $x
+    x=$((x+1))
+done</code></pre>
+<p><code>$((...))</code> performs arithmetic by evaluating <code>...</code> as an expression.</p>
+<p>Functions in Bash have the following form:</p>
+<pre><code>usage() {
+    echo &quot;Usage: $0 [[password]]&quot;
+}</code></pre>
+<p>We often want to validate user input to ensure that we are working with valid data. We can do that by having something like the following near the beginning of the script:</p>
+<pre><code>if [ $# -ne 1 ]; then
+    usage
+    exit 1
+fi</code></pre>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

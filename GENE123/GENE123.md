@@ -255,6 +255,8 @@ We can label points on a circuit by writing its label beside that point, and opt
         * Voltage sources have + and - labels, current sources have an arrow.
     * Passive elements **use energy** (including those that simpy store energy like capacitors).
 
+Current sources do not add current - they make sure the actual current flowing through it is exactly its value. For example, a 12 A current source does not add 12 A to the current - it makes sure the current flowing through it is 12 A.
+
 We can put two voltage sources in series, and the resulting voltage is the sum of their values - $V = V_1 + \ldots + V_n$, even if some of the voltages are negative. This can be derived using KVL.
 
 We can put two current sources in series, but **only if they have the same value**. Why is this?
@@ -313,7 +315,7 @@ For series circuits, the current is constant for all the circuit elements, and t
 
 When we have multiple resistors $R_1, \ldots, R_n$ in series, all of these resistors together are equivalent to one big resistor with value $R_1 + \ldots + R_n$. In other words, when we put resistors in series, their resistances add up.
 
-We often do this substitution whenever the actual voltages between the resistors isn't important. For example, if there are dependent sources that depend on the voltage across one resistor, then we need to keep that resistor in the circuit.
+We often do this substitution whenever the actual voltages or currents between the resistors isn't important. For example, if there are dependent sources that depend on the voltage or current across one resistor, then we need to keep that resistor in the circuit.
 
 For example, if we have resistors $R_1, R_2, R_3, R_4, R_5, R_6$ in series, with the voltage across $R_3$ controlling a dependent source, then we simply exclude $R_2$ from the equivalent resistance substitution, so we substitute the equivalent resistor for $R_3, R_4, R_5, R_6$ to get $R_1, R_2, R_{eq}$.
 
@@ -321,4 +323,31 @@ For parallel circuits, the voltage is constant across all the branches and the o
 
 When we have multiple resistors $R_1, \ldots, R_n$ in parallel, the value of the equivalent resistor is $\frac 1 {\frac 1 {R_1} + \ldots + \frac 1 {R_n}}$.
 
-**Conductance** ($G$) is the opposite of resistance, and is calculated as the reciprocal of the resistance - $G = \frac 1 R$. The unit is Siemens (S).
+**Conductance** ($G$) is the opposite of resistance, and is calculated as the reciprocal of the resistance - $G = \frac 1 R$. The unit is Siemens (S), the reciprocal of an Ohm.
+
+# 15/5/14
+
+Resistors in series increase their equivalent resistance. Resistors in parallel decrease their equivalent resistance.
+
+When we have two resistors $R_1, R_2$ in parallel, the equivalent resistance is $R_{eq} = \frac{R_1 R_2}{R_1 + R_2}$ - "product over sum".
+
+If there is a short circuit in a resistor circuit, the equivalent resistance is always 0. This is because the current goes through the short circuit rather than the resistors.
+
+To simplify resistor networks, we repeatedly check if there are resistors in series, and replace them with an equivalent resistor if possible (no voltage-controlled dependent sources). Eventually, when we can no longer apply these rules, the network is in its simplest form.
+
+Any network of resistors not controlling any dependent sources can be simplified into a single equivalent resistance.
+
+Voltage/Current Division
+------------------------
+
+We can use Ohm's law to design circuits that can divide the voltage of the source by a given factor. Consider a voltage source at $V_x$ connected to two resistors in series, $R_1$ and $R_2$.
+
+Clearly, $I$ is the same across all elements, so $I = \frac{V_x}{R_{eq}} = \frac{V_x}{R_1 + R_2} = \frac{V_1}{R_1} = \frac{V_2}{R_2}$.
+
+Solving, we get that the voltage between the junction of $R_1$ and $R_2$ and the negative terminal is $V_1 = \frac{R_1}{R_1 + R_2} V_x$. This allows us to multiply the voltage by any factor $\frac{R_1}{R_1 + R_2}$ to get any lower voltage.
+
+In the same way we can divide current using a parallel circuit. Consider a current source at $I_x$ connected to two resistors in parallel, $R_1$ and $R_2$.
+
+Clearly, $V$ is constant across all elements, so $V = I_xR_{eq} = I_x\frac{R_1 R_2}{R_1 + R_2} = I_1R_1 = I_2 R_2$.
+
+Solving, we get that the current flowing through $R_1$ is $I_1 = \frac{R_2}{R_1 + R_2}I_x$.
