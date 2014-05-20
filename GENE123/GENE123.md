@@ -30,6 +30,7 @@ $$
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
 $$
 
 # 6/5/13
@@ -193,7 +194,7 @@ Current cannot sit around in a node. That means that the current entering a node
 
 Two elements are in **series** if they share a node and they have the same current.
 
-Kirchoff's Current Law says that the net current sum in any node in 0. When we do the net current sum, we represent the currents entering as positive, and the currents leaving as negative, so when we add them all together, they are 0.
+Kirchoff's Current Law says that the sum of all the currents entering any node is 0. When we do the net current sum, we represent the currents entering as positive, and the currents leaving as negative, so when we add them all together, they are 0.
 
 In other words, the magnitude of the sum of currents entering the node is equal to the magnitude of the sum of currents leaving the node.
 
@@ -207,6 +208,8 @@ For example, consider the following circuit:
     |______|____| < Node 3
 
 ;wip: add some numbers and solve
+
+This law also works for individual points, not just entire nodes. The sum of the currents entering a point in a circuit is always 0.
 
 Kirchoff's Voltage Law
 ----------------------
@@ -351,3 +354,7 @@ In the same way we can divide current using a parallel circuit. Consider a curre
 Clearly, $V$ is constant across all elements, so $V = I_xR_{eq} = I_x\frac{R_1 R_2}{R_1 + R_2} = I_1R_1 = I_2 R_2$.
 
 Solving, we get that the current flowing through $R_1$ is $I_1 = \frac{R_2}{R_1 + R_2}I_x$.
+
+To find the energy transferred over some time interval, we need to find the power and integrate it to find the energy.
+
+If the current comes out of the positive terminal of a circuit element, it is supplying power. If it goes into the positive terminal, the circuit element is adsorbing power.

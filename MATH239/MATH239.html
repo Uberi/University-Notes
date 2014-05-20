@@ -95,6 +95,7 @@ Email: mpei@uwaterloo.ca, martin31415926@gmail.com</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
 \]</span></p>
 <h1 id="section">5/5/14</h1>
 <h3 id="sets-and-combinatorics">Sets and Combinatorics</h3>
@@ -145,7 +146,7 @@ Email: mpei@uwaterloo.ca, martin31415926@gmail.com</code></pre>
 <p>The <strong>inverse</strong> of <span class="math">\(f: S \to T\)</span> is a function <span class="math">\(f^{-1}\)</span> such that x S, f^{-1}(f(x)) = x$ and <span class="math">\(\forall y \in T, f(f^{-1}(y)) = y\)</span>. It is basically a reverse mapping backwards from <span class="math">\(T\)</span> to <span class="math">\(S\)</span>.</p>
 <p>For example, let <span class="math">\(S\)</span> be the set of all <span class="math">\(k\)</span>-subsets of <span class="math">\([n]\)</span> and <span class="math">\(T\)</span> be the set of all <span class="math">\((n - k)\)</span>-subsets of <span class="math">\([n]\)</span>:</p>
 <blockquote>
-<p>If <span class="math">\(n = 3, k = 1\)</span>, then <span class="math">\(S = \set{\set{1}, \set{2}, \set{3}}, T = \set{\set{1, 2}, \set{1, 3}, \set{2, 3}}\)</span>.<br />One bijection over these sets would be <span class="math">\(f: S \to T\)</span> where <span class="math">\(f(A) = [n] \setminus A\)</span>. This is a bijection because it maps every item in <span class="math">\(S\)</span> to a unique item in <span class="math">\(T\)</span>, with no items in <span class="math">\(T\)</span> left over.<br />Also, since <span class="math">\(\abs{A} = k\)</span> and <span class="math">\(A \subseteq [n]\)</span>, <span class="math">\(\abs{f(A)} = \abs{[n]} - \abs{A} = n - k\)</span>, as required.<br />Clearly, <span class="math">\(f^{-1}(B) = [n] \setdiff B\)</span>. Since the function has an inverse, <span class="math">\(f\)</span> is a bijection and <span class="math">\(\abs{S} = \abs{T} = n \choose k = n \choose n - k\)</span>.<br />As an aside, we proved that <span class="math">\(n \choose k = n \choose n - k\)</span>.</p>
+<p>If <span class="math">\(n = 3, k = 1\)</span>, then <span class="math">\(S = \set{\set{1}, \set{2}, \set{3}}, T = \set{\set{1, 2}, \set{1, 3}, \set{2, 3}}\)</span>.<br />One bijection over these sets would be <span class="math">\(f: S \to T\)</span> where <span class="math">\(f(A) = [n] \setminus A\)</span>. This is a bijection because it maps every item in <span class="math">\(S\)</span> to a unique item in <span class="math">\(T\)</span>, with no items in <span class="math">\(T\)</span> left over.<br />Also, since <span class="math">\(\abs{A} = k\)</span> and <span class="math">\(A \subseteq [n]\)</span>, <span class="math">\(\abs{f(A)} = \abs{[n]} - \abs{A} = n - k\)</span>, as required.<br />Clearly, <span class="math">\(f^{-1}(B) = [n] \setminus B\)</span>. Since the function has an inverse, <span class="math">\(f\)</span> is a bijection and <span class="math">\(\abs{S} = \abs{T} = {n \choose k} = {n \choose n - k}\)</span>.<br />As an aside, we proved that <span class="math">\({n \choose k} = {n \choose n - k}\)</span>.</p>
 </blockquote>
 <p>Another example would be a mapping <span class="math">\(f: S \to T\)</span> where <span class="math">\(S\)</span> is all the subsets of <span class="math">\([n]\)</span> and <span class="math">\(T\)</span> is all binary strings of length <span class="math">\(n\)</span>:</p>
 <blockquote>
@@ -246,6 +247,38 @@ Email: mpei@uwaterloo.ca, martin31415926@gmail.com</code></pre>
 <blockquote>
 <p>Let <span class="math">\(B(x) = b_0 + b_1x + b_2x^2 + \ldots\)</span>. Assume <span class="math">\(A(x)B(x) = 1\)</span>.<br />Then <span class="math">\(b_0 + b_1x + b_2x^2 + \ldots - b_0x - b_1x^2 - b_2x^3 - \ldots = 1 = b_0 + (b_1 - b_0)x + (b_2 - b_1)x^2 + (b_3 - b_2)x^3 + \ldots\)</span>.<br />So <span class="math">\(b_0 = 1, b_1 - b_0 = 0, b_2 - b_1 = 0, b_3 - b_2 = 0, \ldots\)</span>, and <span class="math">\(\forall n \ge 0, b_n = 1\)</span>.<br />So <span class="math">\((1 - x)^{-1} = 1 + x + x^2 + x^3 + \ldots = \frac 1 {1 - x}\)</span>, the geometric series.</p>
 </blockquote>
+<h1 id="section-5">16/5/14</h1>
+<p>The three series to remember are:</p>
+<ul>
+<li><span class="math">\(\frac 1 {1 - x} = 1 + x + x^2 + \ldots\)</span></li>
+<li><span class="math">\(\frac{1 - x^{k + 1}}{1 - x} = 1 + x + x^2 + \ldots + x^k\)</span></li>
+<li><span class="math">\(\frac 1 {(1 - x)^k} = \sum_{n \ge 0} {n + k - 1 \choose k - 1}x^n\)</span></li>
+</ul>
+<p>What is the inverse of <span class="math">\(x\)</span>, if it exists?</p>
+<blockquote>
+<p>Let <span class="math">\(B(x) = b_0 + b_1x + \ldots\)</span> be a power series such that <span class="math">\(xB(x) = 1\)</span>.<br />Then <span class="math">\(x(b_0 + b_1x + \ldots) = b_0x + b_1x^2 + \ldots = 1\)</span>.<br />This is a contradiction because the left side has no constant term, while the right side does.</p>
+</blockquote>
+<p>If we generalize this, any power series that does not have a constant term (any power series that has <span class="math">\(x\)</span> as a factor) cannot be inverted.</p>
+<p>Any power series <span class="math">\(A(x)\)</span> has an inverse if and only if <span class="math">\([x^0]A(x) \ne 0\)</span></p>
+<h2 id="compositions">Compositions</h2>
+<p>Let <span class="math">\(G(x) = \frac 1 {1 - x} = 1 + x + x^2 + \ldots\)</span>. Then <span class="math">\(G(3x^2) = \frac 1 {1 - 3x^2} = 1 + 3x^2 + 9x^4 + 27x^6\)</span> and <span class="math">\([x^n]G(x) = \begin{cases} 3^{\frac n 2} &amp;\text{if } n \text{ is even} \\ 0 &amp;\text{if } n \text{ is odd}\)</span>.</p>
+<p>Now let <span class="math">\(A(x) = G(3x^2)^9 = \frac 1 {(1 - 3x^2)^9}\)</span>. Then <span class="math">\(A(x) = \sum_{n \ge 0} {n + 9 - 1 \choose 9 - 1} (3x^2)^n = \sum_{n \ge 0} {n + 8 \choose 8}3^nx^{2n}\)</span>.</p>
+<p>So <span class="math">\([x^{200}]A(x) = {108 \choose 8}3^{100}\)</span>.</p>
+<h3 id="expanding-rational-functions">Expanding Rational Functions</h3>
+<p>Let <span class="math">\(B(x) = \sum_{i \ge 0} (x + 2x^2)^i = \frac 1 {1 - (x + 2x^2)} = \frac 1 {1 - x - 2x^2}\)</span>.</p>
+<p>How do we find the coefficients of this series? Let <span class="math">\(B(x) = \sum_{i \ge 0} b_i x^i\)</span>.</p>
+<p>Then <span class="math">\(\frac 1 {1 - x - 2x^2} = \sum_{i \ge 0} (x + 2x^2)\)</span> and <span class="math">\(1 = (1 - x - 2x^2)\sum_{i \ge 0} (x + 2x^2) = \sum_{i \ge 0} (x + 2x^2) - x\sum_{i \ge 0} (x + 2x^2) - 2x^2\sum_{i \ge 0} (x + 2x^2) = b_0 + (b_1 - b_0)x + (b_2 - b_1 - 2b_0)x^2 + \ldots + (b_n - b_{n - 1} - 2b_{n - 2})\)</span>.</p>
+<p>Since <span class="math">\(1 = b_0 + (b_1 - b_0)x + (b_2 - b_1 - 2b_0)x^2 + \ldots + (b_n - b_{n - 1} - 2b_{n - 2})\)</span>, <span class="math">\(b_0 = 1\)</span> and <span class="math">\(b_1 - b_0 = 0\)</span>, and <span class="math">\(b_n - b_{n - 1} - 2b_{n - 2}\)</span>.</p>
+<p>So the coefficients of the power series can be defined in terms of a recurrence relation: <span class="math">\(b_0 = 1, b_1 = 1, b_n = b_{n - 1} + 2b_{n - 2}\)</span>.</p>
+<p>We can generalize this to any rational function. Find the coefficients of the power series expansion for <span class="math">\(F(x) = \frac{1 + 2x^4}{1 - 3x - x^3}\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(F(x) = \frac{1 + 2x^4}{1 - 3x - x^3} = \sum_{i \ge 0} f_i x^i\)</span>. Then <span class="math">\(1 + 2x^4 = \sum_{i \ge 0} f_i x^i - 3x\sum_{i \ge 0} f_i x^i - x^3\sum_{i \ge 0} f_i x^i\)</span>.<br />Then <span class="math">\(1 + 2x^4 = f_0 + (f_1 - 3f_0)x + (f_2 - 3f_1)x^2 + (f_3 - 3f_2 - f_0)x^3 + (f_4 - 3f_3 - f_1) + \ldots + (f_n - 3f_{n - 1} - f_{n - 3})x^n\)</span>. So the coefficients of the left and right sides match and <span class="math">\(f_0 = 1, f_1 - 3f_0 = 0, f_2 - 3f_1 = 0, f_3 - 3f_2 - f_0 = 0, f_4 - 3f_3 - f_1 = 2\)</span>, and <span class="math">\(f_n - 3f_{n - 1} - f_{n - 3} = 0, n &gt; 4\)</span>.<br />Solving, we get <span class="math">\(f_0 = 1, f_1 = 3, f_2 = 9, f_3 = 28, f_4 = 87, f_n = 3f_{n - 1} + f_{n - 3}\)</span>.</p>
+</blockquote>
+<p>Consider <span class="math">\(D(x) = \sum_{i \ge 0} (1 + x^2)^i = \frac 1 {1 - (1 + x^2)} = \frac 1 {-x^2}\)</span>. However, this is <strong>not a power series</strong> - it does not have a constant term!</p>
+<p>To see why, we can expand it out: <span class="math">\(D(x) = 1 + (1 + x^2) + (1 + x^2)^2 + \ldots\)</span>. Note that ever term has a 1 term in it when expanded. Therefore, the constant term goes toward infinity.</p>
+<p>All power series must be invertible. Therefore, all power series <strong>must have a constant term</strong>. If the constant term is 0 or infinite, then it cannot be inverted and therefore is not a power series.</p>
+<p>So when we are composing a series into the geometric series, like <span class="math">\(\sum_{n \ge 0} f(x)\)</span>, then <span class="math">\(f(x)\)</span> must not have a constant term, or the above will happen and we will get an infinite constant term.</p>
+<p>So the series we put into the geometric series cannot be invertible, and therefore cannot be a power series.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

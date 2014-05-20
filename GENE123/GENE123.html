@@ -95,6 +95,7 @@ Office Hours: drop-in</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
 \]</span></p>
 <h1 id="section">6/5/13</h1>
 <h2 id="electricity">ELectricity</h2>
@@ -188,7 +189,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>A <strong>node</strong> is a junction where two or more circuit elements are connected. It is the entire connection between these elements. These are usually connected pieces of wire.</p>
 <p>Current cannot sit around in a node. That means that the current entering a node should be the same as the current leaving.</p>
 <p>Two elements are in <strong>series</strong> if they share a node and they have the same current.</p>
-<p>Kirchoff's Current Law says that the net current sum in any node in 0. When we do the net current sum, we represent the currents entering as positive, and the currents leaving as negative, so when we add them all together, they are 0.</p>
+<p>Kirchoff's Current Law says that the sum of all the currents entering any node is 0. When we do the net current sum, we represent the currents entering as positive, and the currents leaving as negative, so when we add them all together, they are 0.</p>
 <p>In other words, the magnitude of the sum of currents entering the node is equal to the magnitude of the sum of currents leaving the node.</p>
 <p>For example, consider the following circuit:</p>
 <pre><code>Node 1
@@ -198,6 +199,7 @@ v
 A      C    D
 |______|____| &lt; Node 3</code></pre>
 <p>;wip: add some numbers and solve</p>
+<p>This law also works for individual points, not just entire nodes. The sum of the currents entering a point in a circuit is always 0.</p>
 <h2 id="kirchoffs-voltage-law">Kirchoff's Voltage Law</h2>
 <p>;wip: assume direction of travel to be clockwise</p>
 <p>;wip: hitting positive element means voltage added, hitting negative means subtracted</p>
@@ -297,6 +299,8 @@ A      C    D
 <p>In the same way we can divide current using a parallel circuit. Consider a current source at <span class="math">\(I_x\)</span> connected to two resistors in parallel, <span class="math">\(R_1\)</span> and <span class="math">\(R_2\)</span>.</p>
 <p>Clearly, <span class="math">\(V\)</span> is constant across all elements, so <span class="math">\(V = I_xR_{eq} = I_x\frac{R_1 R_2}{R_1 + R_2} = I_1R_1 = I_2 R_2\)</span>.</p>
 <p>Solving, we get that the current flowing through <span class="math">\(R_1\)</span> is <span class="math">\(I_1 = \frac{R_2}{R_1 + R_2}I_x\)</span>.</p>
+<p>To find the energy transferred over some time interval, we need to find the power and integrate it to find the energy.</p>
+<p>If the current comes out of the positive terminal of a circuit element, it is supplying power. If it goes into the positive terminal, the circuit element is adsorbing power.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

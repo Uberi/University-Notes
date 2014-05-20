@@ -30,6 +30,7 @@ $$
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
 $$
 
 # 5/5/14
@@ -124,8 +125,8 @@ For example, let $S$ be the set of all $k$-subsets of $[n]$ and $T$ be the set o
 > If $n = 3, k = 1$, then $S = \set{\set{1}, \set{2}, \set{3}}, T = \set{\set{1, 2}, \set{1, 3}, \set{2, 3}}$.  
 > One bijection over these sets would be $f: S \to T$ where $f(A) = [n] \setminus A$. This is a bijection because it maps every item in $S$ to a unique item in $T$, with no items in $T$ left over.  
 > Also, since $\abs{A} = k$ and $A \subseteq [n]$, $\abs{f(A)} = \abs{[n]} - \abs{A} = n - k$, as required.  
-> Clearly, $f^{-1}(B) = [n] \setdiff B$. Since the function has an inverse, $f$ is a bijection and $\abs{S} = \abs{T} = n \choose k = n \choose n - k$.  
-> As an aside, we proved that $n \choose k = n \choose n - k$.  
+> Clearly, $f^{-1}(B) = [n] \setminus B$. Since the function has an inverse, $f$ is a bijection and $\abs{S} = \abs{T} = {n \choose k} = {n \choose n - k}$.  
+> As an aside, we proved that ${n \choose k} = {n \choose n - k}$.  
 
 Another example would be a mapping $f: S \to T$ where $S$ is all the subsets of $[n]$ and $T$ is all binary strings of length $n$:
 
@@ -323,3 +324,59 @@ What is the inverse of $1 - x$?
 > Then $b_0 + b_1x + b_2x^2 + \ldots - b_0x - b_1x^2 - b_2x^3 - \ldots = 1 = b_0 + (b_1 - b_0)x + (b_2 - b_1)x^2 + (b_3 - b_2)x^3 + \ldots$.  
 > So $b_0 = 1, b_1 - b_0 = 0, b_2 - b_1 = 0, b_3 - b_2 = 0, \ldots$, and $\forall n \ge 0, b_n = 1$.  
 > So $(1 - x)^{-1} = 1 + x + x^2 + x^3 + \ldots = \frac 1 {1 - x}$, the geometric series.  
+
+# 16/5/14
+
+The three series to remember are:
+
+* $\frac 1 {1 - x} = 1 + x + x^2 + \ldots$
+* $\frac{1 - x^{k + 1}}{1 - x} = 1 + x + x^2 + \ldots + x^k$
+* $\frac 1 {(1 - x)^k} = \sum_{n \ge 0} {n + k - 1 \choose k - 1}x^n$
+
+What is the inverse of $x$, if it exists?
+
+> Let $B(x) = b_0 + b_1x + \ldots$ be a power series such that $xB(x) = 1$.  
+> Then $x(b_0 + b_1x + \ldots) = b_0x + b_1x^2 + \ldots = 1$.  
+> This is a contradiction because the left side has no constant term, while the right side does.  
+
+If we generalize this, any power series that does not have a constant term (any power series that has $x$ as a factor) cannot be inverted.
+
+Any power series $A(x)$ has an inverse if and only if $[x^0]A(x) \ne 0$
+
+Compositions
+------------
+
+Let $G(x) = \frac 1 {1 - x} = 1 + x + x^2 + \ldots$. Then $G(3x^2) = \frac 1 {1 - 3x^2} = 1 + 3x^2 + 9x^4 + 27x^6$ and $[x^n]G(x) = \begin{cases} 3^{\frac n 2} &\text{if } n \text{ is even} \\ 0 &\text{if } n \text{ is odd}$.
+
+Now let $A(x) = G(3x^2)^9 = \frac 1 {(1 - 3x^2)^9}$. Then $A(x) = \sum_{n \ge 0} {n + 9 - 1 \choose 9 - 1} (3x^2)^n = \sum_{n \ge 0} {n + 8 \choose 8}3^nx^{2n}$.
+
+So $[x^{200}]A(x) = {108 \choose 8}3^{100}$.
+
+### Expanding Rational Functions
+
+Let $B(x) = \sum_{i \ge 0} (x + 2x^2)^i = \frac 1 {1 - (x + 2x^2)} = \frac 1 {1 - x - 2x^2}$.
+
+How do we find the coefficients of this series? Let $B(x) = \sum_{i \ge 0} b_i x^i$.
+
+Then $\frac 1 {1 - x - 2x^2} = \sum_{i \ge 0} (x + 2x^2)$ and $1 = (1 - x - 2x^2)\sum_{i \ge 0} (x + 2x^2) = \sum_{i \ge 0} (x + 2x^2) - x\sum_{i \ge 0} (x + 2x^2) - 2x^2\sum_{i \ge 0} (x + 2x^2) = b_0 + (b_1 - b_0)x + (b_2 - b_1 - 2b_0)x^2 + \ldots + (b_n - b_{n - 1} - 2b_{n - 2})$.
+
+Since $1 = b_0 + (b_1 - b_0)x + (b_2 - b_1 - 2b_0)x^2 + \ldots + (b_n - b_{n - 1} - 2b_{n - 2})$, $b_0 = 1$ and $b_1 - b_0 = 0$, and $b_n - b_{n - 1} - 2b_{n - 2}$.
+
+So the coefficients of the power series can be defined in terms of a recurrence relation: $b_0 = 1, b_1 = 1, b_n = b_{n - 1} + 2b_{n - 2}$.
+
+We can generalize this to any rational function. Find the coefficients of the power series expansion for $F(x) = \frac{1 + 2x^4}{1 - 3x - x^3}$:
+
+> Let $F(x) = \frac{1 + 2x^4}{1 - 3x - x^3} = \sum_{i \ge 0} f_i x^i$. Then $1 + 2x^4 = \sum_{i \ge 0} f_i x^i - 3x\sum_{i \ge 0} f_i x^i - x^3\sum_{i \ge 0} f_i x^i$.  
+> Then $1 + 2x^4 = f_0 + (f_1 - 3f_0)x + (f_2 - 3f_1)x^2 + (f_3 - 3f_2 - f_0)x^3 + (f_4 - 3f_3 - f_1) + \ldots + (f_n - 3f_{n - 1} - f_{n - 3})x^n$.
+> So the coefficients of the left and right sides match and $f_0 = 1, f_1 - 3f_0 = 0, f_2 - 3f_1 = 0, f_3 - 3f_2 - f_0 = 0, f_4 - 3f_3 - f_1 = 2$, and $f_n - 3f_{n - 1} - f_{n - 3} = 0, n > 4$.  
+> Solving, we get $f_0 = 1, f_1 = 3, f_2 = 9, f_3 = 28, f_4 = 87, f_n = 3f_{n - 1} + f_{n - 3}$.  
+
+Consider $D(x) = \sum_{i \ge 0} (1 + x^2)^i = \frac 1 {1 - (1 + x^2)} = \frac 1 {-x^2}$. However, this is **not a power series** - it does not have a constant term!
+
+To see why, we can expand it out: $D(x) = 1 + (1 + x^2) + (1 + x^2)^2 + \ldots$. Note that ever term has a 1 term in it when expanded. Therefore, the constant term goes toward infinity.
+
+All power series must be invertible. Therefore, all power series **must have a constant term**. If the constant term is 0 or infinite, then it cannot be inverted and therefore is not a power series.
+
+So when we are composing a series into the geometric series, like $\sum_{n \ge 0} f(x)$, then $f(x)$ must not have a constant term, or the above will happen and we will get an infinite constant term.
+
+So the series we put into the geometric series cannot be invertible, and therefore cannot be a power series.

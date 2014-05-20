@@ -94,6 +94,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
 \]</span></p>
 <h1 id="section">5/5/14</h1>
 <p>There are two tests and five online quizzes on MapleTA</p>
@@ -192,12 +193,29 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>Events are simply sets of outcomes. We can use things like set notation and similar when working with events.</p>
 <p>If an event <span class="math">\(A\)</span> consists of the outcomes <span class="math">\(\set{a_1, \ldots, a_n}\)</span>, then <span class="math">\(P(A) = P(a_1) + \ldots + P(a_n)\)</span>.</p>
 <p>Also, <span class="math">\(0 \le P(A) \le 1\)</span>. This can be proven by proving <span class="math">\(P(S) = 1\)</span> (probability of one of any of the possible outcomes occurring is 1), and that <span class="math">\(P(A) \le P(S)\)</span>.</p>
-<p>If <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are events, and <span class="math">\(A \subseteq B\)</span>, then <span class="math">\(P(A) \le P(B)\)</span>. This can be proven by the</p>
+<p>If <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are events, and <span class="math">\(A \subseteq B\)</span>, then <span class="math">\(P(A) \le P(B)\)</span>. This can be proven by the comparing the sum of the probabilities of the outcomes.</p>
 <h3 id="venn-diagrams">Venn Diagrams</h3>
 <p>Venn diagrams can be used to visually represent the events resulting from set operations on events.</p>
 <p>These diagrams have a rectangle representing <span class="math">\(S\)</span>, the sample space, and circles within the rectangle representing events. We can label the circles with names anywhere inside them. Sometimes, we also write some of the possible outcomes in the circles or rectangle.</p>
 <p>We can have circles that overlap each other to represent them sharing outcomes. To represent the resulting event, we can shade in the area representing the set of the event's outcomes.</p>
-<p>For example, a union of two events means we shade in both events (even if they intersect), and a conjunction would mean we only shade in the intersection of the two events. The complement of an event simply shades in everything in the rectangle that is not in the event.</p>
+<p>For example, a union of two events <span class="math">\(A\)</span> and <span class="math">\(B\)</span> (represented as <span class="math">\(A \cup B\)</span>) means we shade in both events (even if they intersect), and a conjunction of two events <span class="math">\(A\)</span> and <span class="math">\(B\)</span> (represented <span class="math">\(A \cap B\)</span> or <span class="math">\(AB\)</span>) would mean we only shade in the intersection of the two events. The complement of an event <span class="math">\(A\)</span> (represented <span class="math">\(\overline A\)</span>) simply shades in everything in the rectangle that is not in the event.</p>
+<h1 id="section-5">16/5/14</h1>
+<p>;wip: buy the stats textbook</p>
+<p>De Morgan's Laws:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(\overline{A \cup B} = \overline A \cap \overline B\)</span></li>
+<li><span class="math">\(\overline{A \cap B} = \overline A \cup \overline B\)</span></li>
+</ol>
+<p>This can be proved by proving the left set is a subset of the right set, and the right set is a subset of the left set.</p>
+<p>Basically, we can &quot;break the bar&quot; and &quot;flip the operator&quot; when we have a negation of a disjunction or conjunction.</p>
+<p>The probability of a union is the sum of the probabilities of either event, minus the probability that they both occur: <span class="math">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span>. The last term is because when we add <span class="math">\(P(A)\)</span> and <span class="math">\(P(B)\)</span>, we added <span class="math">\(P(A \cap B)\)</span> twice, so we subtract it once to get the correct amount. This becomes clear if we draw a Venn diagram of the equation.</p>
+<p>The probability of a union of more events is <span class="math">\(P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C)\)</span>. The reason for the negative terms is because the conjunctions are being added twice, so we subtract them once to get the correct amount.</p>
+<p><span class="math">\(P(A_1 \cup \ldots \cup A_n) = \sum_{i = 1}^n P(A_i) - \sum_{i &lt; j} P(A_i A_j) + \sum_{i &lt; j &lt; k} P(A_i A_j A_k) -\)</span> ;wip: get it from the slides or online</p>
+<p>Events <span class="math">\(A_1, \ldots, A_n\)</span> are <strong>mutually exclusive</strong> if <span class="math">\(\forall 1 \le i \le n, 1 \le j \le n, i \ne j \implies A_i \cap A_j = \emptyset\)</span>, so <span class="math">\(P(A_i \cap A_j) = \emptyset\)</span>. They are basically events that can never happen together. Two events <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are mutually exclusive if <span class="math">\(P(A \cap B) = 0\)</span> or <span class="math">\(A \cap B = \emptyset\)</span>.</p>
+<p>The equation <span class="math">\(P(A) = 1 - P(\overline A)\)</span> comes from the idea of mutual exclusivity:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(S = A \cup \overline A\)</span>, and <span class="math">\(P(S) = 1\)</span>.<br />So <span class="math">\(1 = P(S) = P(A \cup \overline A) = P(A) + P(\overline A) - P(A \cap \overline A) = P(A) + P(\overline A)\)</span>.</p>
+</blockquote>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

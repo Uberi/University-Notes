@@ -97,6 +97,7 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
 \]</span></p>
 <h1 id="section">6/5/14</h1>
 <p>Five assignments, final assignment is worth more. Each assignment has two due dates - the first one we submit test cases, and the second is a week later and we submit code.</p>
@@ -196,10 +197,10 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p>The <code>uniq</code> command removes duplicate lines, but <strong>only if they occur next to each other</strong> - only adjacent duplicates are removed. It is therefore often used together with the <code>sort</code> command, which sorts its input by lines.</p>
 <p>It is also possible to send the output of a program as a parameter to another program, using the backquotes/backticks notation. For example, <code>echo &quot;Today is \</code>date` and I am `whoami`&quot;<code>might display something like</code>Today is Tue May 13 08:50:24 EDT 2014 and I am Anthony`.</p>
 <p>The shell will first evaluate the command in the backquotes, substitute its output for it, and then execute the original command. This works even if the parameter is inside quotes, as in the example above. An alternative syntax is <code>$(COMMAND)</code> instead of <code>\</code>COMMAND``, which is slightly easier to read. This is often used to format strings.</p>
-<p>We now want to search inside text files. For this we can use <code>grep PATTERN FILE</code> or <code>egrep PATTERN FILE</code> (recommended, equivalent to <code>grep -E</code>). This prints out every line in <code>FILE</code> that contains <code>PATTERN</code>. Here, <code>PATTERN</code> is a POSIX regular expression. If <code>FILE</code> is not specified, input is taken from the standard input.</p>
+<p>We now want to search inside text files. For this we can use <code>grep PATTERN FILE</code> or <code>egrep PATTERN FILE</code> (recommended, equivalent to <code>grep -E</code>). This prints out every line in <code>FILE</code> that contains <code>PATTERN</code>. Here, <code>PATTERN</code> is an extended regular expression. If <code>FILE</code> is not specified, input is taken from the standard input.</p>
 <h3 id="regular-expressions">Regular Expressions</h3>
-<p>POSIX regular expressions are concise ways to express a set of strings, which may possibly be arbitrarily large. For example, <code>a?b?c?</code> denotes the set containing the strings &quot;&quot;, &quot;c&quot;, &quot;b&quot;, &quot;bc&quot;, &quot;a&quot;, &quot;ac&quot;, &quot;ab&quot;, and &quot;abc&quot;.</p>
-<p>POSIX regular expressions consist of characters and operators. Characters like &quot;e&quot; and &quot;5&quot; simply denote themselves in the set. Operators like <code>*</code> modify strings with operations like &quot;zero or more of the preceding&quot;.</p>
+<p>Regular expressions are concise ways to express a set of strings, which may possibly be arbitrarily large. For example, <code>a?b?c?</code> denotes the set containing the strings &quot;&quot;, &quot;c&quot;, &quot;b&quot;, &quot;bc&quot;, &quot;a&quot;, &quot;ac&quot;, &quot;ab&quot;, and &quot;abc&quot;.</p>
+<p>Regular expressions consist of characters and operators. Characters like &quot;e&quot; and &quot;5&quot; simply denote themselves in the set. Operators like <code>*</code> modify strings with operations like &quot;zero or more of the preceding&quot;.</p>
 <p>For example, <code>a*</code> matches zero or more &quot;a&quot; instances, like &quot;&quot; and &quot;aaaaaaaaaaaaaaaaaaaaaaaaa&quot;. It denotes the set of all strings consisting entirely of &quot;a&quot; and the empty string.</p>
 <p>So to match either &quot;CS246&quot; or &quot;cs246&quot;, we might use <code>egrep &quot;CS246|cs246&quot;</code> (the quotes are necessary because otherwise it is a pipe), or simply <code>egrep &quot;(CS|cs)246&quot;</code>. Alternatively, to do it without case sensitivity we might use <code>egrep [cC][sS]246</code>. The <code>[...]</code> operation is called a character class, and matches one of the characters inside it. Also, the <code>[^...]</code> matches anything that is not one of the characters inside it.</p>
 <p><code>?</code> means &quot;zero or one of the preceding&quot;. So <code>egrep (abc)?d?</code> matches &quot;&quot;, &quot;abc&quot;, &quot;d&quot;, and &quot;abcd&quot;. <code>*</code> means &quot;zero or more of the preceding&quot;, while <code>+</code> means &quot;one or more of the preceding&quot;.</p>
@@ -222,7 +223,7 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p>The second letter (bit) of each group is the write bit, and is <code>w</code> if set, or <code>-</code> otherwise. If set, we would be able to modify the file contents, or if it is a directory, we can add or remove files.</p>
 <p>The third letter (bit) of each group is the execute bit, and is <code>x</code> if set, or `<code>otherwise. If set, we would be able to execute the file like a program, or if it is a directory, we can navigate into it, like with</code>cd`.</p>
 <p>So if a file has execute but not read permissions, then we could go into it but not list its contents. But if we happen to know one of the file paths, we can still access that file by path.</p>
-<h3 id="changing">Changing</h3>
+<h3 id="changing-permissions">Changing Permissions</h3>
 <p>Only the owner of a file can change its permissions. It is not possible to give this ability to anyone else, and it is always possible for the owner to change permissions.</p>
 <p>We do this using the <code>chmod MODE FILE</code>. <code>MODE</code> is a string of the form <code>OWNERSHIP_CLASS OPERATOR PERMISSIONS</code>, with no spaces.</p>
 <p><code>OWNERSHIP_CLASS</code> is the set of bits to apply the operations to. This value can be <code>u</code> for the user/owner bits, <code>g</code> for the group bits, <code>o</code> for the other bits, and <code>a</code> for all bits.</p>

@@ -29,6 +29,7 @@ $$
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
 $$
 
 # 5/5/14
@@ -220,7 +221,7 @@ If an event $A$ consists of the outcomes $\set{a_1, \ldots, a_n}$, then $P(A) = 
 
 Also, $0 \le P(A) \le 1$. This can be proven by proving $P(S) = 1$ (probability of one of any of the possible outcomes occurring is 1), and that $P(A) \le P(S)$.
 
-If $A$ and $B$ are events, and $A \subseteq B$, then $P(A) \le P(B)$. This can be proven by the 
+If $A$ and $B$ are events, and $A \subseteq B$, then $P(A) \le P(B)$. This can be proven by the comparing the sum of the probabilities of the outcomes.
 
 ### Venn Diagrams
 
@@ -230,4 +231,30 @@ These diagrams have a rectangle representing $S$, the sample space, and circles 
 
 We can have circles that overlap each other to represent them sharing outcomes. To represent the resulting event, we can shade in the area representing the set of the event's outcomes.
 
-For example, a union of two events means we shade in both events (even if they intersect), and a conjunction would mean we only shade in the intersection of the two events. The complement of an event simply shades in everything in the rectangle that is not in the event.
+For example, a union of two events $A$ and $B$ (represented as $A \cup B$) means we shade in both events (even if they intersect), and a conjunction of two events $A$ and $B$ (represented $A \cap B$ or $AB$) would mean we only shade in the intersection of the two events. The complement of an event $A$ (represented $\overline A$) simply shades in everything in the rectangle that is not in the event.
+
+# 16/5/14
+
+;wip: buy the stats textbook
+
+De Morgan's Laws:
+
+1. $\overline{A \cup B} = \overline A \cap \overline B$
+2. $\overline{A \cap B} = \overline A \cup \overline B$
+
+This can be proved by proving the left set is a subset of the right set, and the right set is a subset of the left set.
+
+Basically, we can "break the bar" and "flip the operator" when we have a negation of a disjunction or conjunction.
+
+The probability of a union is the sum of the probabilities of either event, minus the probability that they both occur: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$. The last term is because when we add $P(A)$ and $P(B)$, we added $P(A \cap B)$ twice, so we subtract it once to get the correct amount. This becomes clear if we draw a Venn diagram of the equation.
+
+The probability of a union of more events is $P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C)$. The reason for the negative terms is because the conjunctions are being added twice, so we subtract them once to get the correct amount.
+
+$P(A_1 \cup \ldots \cup A_n) = \sum_{i = 1}^n P(A_i) - \sum_{i < j} P(A_i A_j) + \sum_{i < j < k} P(A_i A_j A_k) -$ ;wip: get it from the slides or online
+
+Events $A_1, \ldots, A_n$ are **mutually exclusive** if $\forall 1 \le i \le n, 1 \le j \le n, i \ne j \implies A_i \cap A_j = \emptyset$, so $P(A_i \cap A_j) = \emptyset$. They are basically events that can never happen together. Two events $A$ and $B$ are mutually exclusive if $P(A \cap B) = 0$ or $A \cap B = \emptyset$.
+
+The equation $P(A) = 1 - P(\overline A)$ comes from the idea of mutual exclusivity:
+
+> Clearly, $S = A \cup \overline A$, and $P(S) = 1$.  
+> So $1 = P(S) = P(A \cup \overline A) = P(A) + P(\overline A) - P(A \cap \overline A) = P(A) + P(\overline A)$.  
