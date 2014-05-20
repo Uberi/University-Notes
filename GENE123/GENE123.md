@@ -355,6 +355,16 @@ Clearly, $V$ is constant across all elements, so $V = I_xR_{eq} = I_x\frac{R_1 R
 
 Solving, we get that the current flowing through $R_1$ is $I_1 = \frac{R_2}{R_1 + R_2}I_x$.
 
+Voltage/current division uses two resistors in series or parallel, respectively. The factor for the value for $R_1$ is always $\frac{R_2}{R_1 + R_2}$.
+
 To find the energy transferred over some time interval, we need to find the power and integrate it to find the energy.
 
 If the current comes out of the positive terminal of a circuit element, it is supplying power. If it goes into the positive terminal, the circuit element is adsorbing power.
+
+# 20/5/14
+
+;wip: there's some sort of make-up lecture soon
+
+When doing nodal analysis, it is often helpful to mentally collapse all the nodes into a point, so the circuit appears like a graph with nodes as vertices and circuit elements as edges. This helps us see relationships like parallel and series connections that might not otherwise be obvious.
+
+The order of circuit elements in series does not affect the current or voltage at the circuit ends. For example, a voltage source followed by a resistor is equivalent to a resistor followed by a voltage source at the two free ends.

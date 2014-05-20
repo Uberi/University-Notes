@@ -275,8 +275,9 @@ else
     BODY
 fi</code></pre>
 <p>When we used it in the form above, we actually executed the <code>[</code> program with the value of <code>$?</code>, <code>-eq</code>, and <code>0</code>, which sets the exit code to 0 if the expression evaluates to true (<code>$?</code> is equal to <code>0</code>), or 1 otherwise. This happens to work very well with the <code>if</code> construct.</p>
+<p><code>-eq</code> is an operator for comparing integers. To compare strings, we can use <code>==</code> or <code>=</code>.</p>
 <p>We can have as many <code>elif</code> statements as we need.</p>
-<p>A loop statement has a similar form to an <code>if</code> statement. The following prints out all the numbers from 1 to its first command line argument, inclusive:</p>
+<p>A <code>while</code> loop statement has a similar form to an <code>if</code> statement. The following prints out all the numbers from 1 to its first command line argument, inclusive:</p>
 <pre><code>x=1
 while [ $x -le $1 ]; do
     echo $x
@@ -292,6 +293,52 @@ done</code></pre>
     usage
     exit 1
 fi</code></pre>
+<h1 id="section-4">20/5/14</h1>
+<p>A <code>for</code> loop statement iterates over a given series. It has the following form:</p>
+<pre><code>for name in *.cpp; do
+    mv $name ${name%cpp}cc
+done</code></pre>
+<p>Here, <code>name</code> is the name of the variable to store the current item in the series. The <code>*.cpp</code> is a globbing pattern that gets expanded into a series. <code>${name%cpp}</code> means the ending <code>cpp</code> should be removed.</p>
+<p>The basic form is <code>for x in a b c ...; do statements; done</code>. This executes <code>statements</code> for each value of <code>a b c ...</code>, where <code>x</code> stores the current value.</p>
+<p>To iterate over words in a file, we can use <code>for word in $(cat $file)</code>.</p>
+<p>When we have a variable with a space in it, like <code>x=&quot;a b c&quot;</code>, when we do something like <code>cat $x</code> we are actually passing in 3 arguments, <code>a</code>, <code>b</code>, and <code>c</code>. When we want to handle user input, it is usually a good idea to put the input variables in double quotes. In the above example, we change it to <code>cat &quot;$x&quot;</code> and it will attempt to read the file &quot;a b c&quot;.</p>
+<h2 id="testing">Testing</h2>
+<p>The goal of testing is to improve code quality. Testing is the process of trying various inputs on a program to catch errors in the output and verify seemingly correct programs are actually correct.</p>
+<p>It is recommended that we write tests before beginning the coding process.</p>
+<p>Guidelines for functional testing (testing the functionality of a program):</p>
+<ul>
+<li>Aim to have tests that check every different control flow path.</li>
+<li>Check ranges of inputs, like typical negative/positive values.</li>
+<li>Check boundaries at the edge of ranges, such as 0 and big numbers for integers, and also check combinations of boundaries, like testing the boundaries of two inputs at once.</li>
+</ul>
+<p>Regression testing is testing used to detect regressions - old bugs reintroduced into the code. We basically rerun all the old test cases again on the new code to ensure the new code does not break the old code.</p>
+<h2 id="basic-c">Basic C++</h2>
+<p>Invented by Bjarne Stroustrup (Byarne Stroostrup) in the 1980s, intended to bring some object oriented features into C.</p>
+<p>C++ is based in C first and foremost. Many valid C programs are also valid C++ programs. This course will assume a level of proficiency developed with C over the course of CS136.</p>
+<p>The current standard is C++11, which was introduced in 2011 and added many sophisticated language constructs like anonymous functions. However, support is not perfect, and C++03 is still widely used.</p>
+<p>C++ source files often have the <code>*.cc</code> or <code>*.cpp</code> extension.</p>
+<p>A basic C++ program might look like the following:</p>
+<pre><code>#include &lt;iostream&gt; // we do not have to specify the .h extension for header files
+using namespace std; // this puts the std namespace into the global namespace, so std::cout is the same as cout; without this line we have to use std::cout
+int main() { // the main function must be declared to return an integer, and for this funciton only it is not required to actually use a `return` statement (defaults to `return 0`)
+    cout &lt;&lt; &quot;Hello, world!&quot; &lt;&lt; endl;
+}</code></pre>
+<p>The syntax is similar to C. <code>cout</code> is the standard output stream, and <code>endl</code> is a constant representing the end of line (a newline).</p>
+<p>The <code>iostream</code> library has 3 main input/output (I/O) objects: <code>cout</code> representing standard output, <code>cerr</code> representing standard error, and <code>cin</code> representing standard input.</p>
+<p>The <code>&lt;&lt;</code> is an output operator - the &quot;put to&quot; operator. It sends the right operand to the stream specified by the left operand, producing the stream again. For example, <code>cout &lt;&lt; x</code> puts <code>x</code> to stdout.</p>
+<p>The <code>&gt;&gt;</code> is an input operator - the &quot;get from&quot; operator. It reads data from the stream specified by the left operand into the right operand, producing the stream again. For example, <code>cin &gt;&gt; x</code> gets <code>x</code> from stdin.</p>
+<p><code>stdio.h</code> and such are still available, but should not be used because C++ has its own equivalent ways of accomplishing these tasks. Marmoset will be forbidding these libraries from being used.</p>
+<h3 id="compiling">Compiling</h3>
+<p>We will be using g++, the equivalent of GCC for C++. A typical invocation might look like <code>g++ myprogram.cpp -o output</code>, where <code>myprogram.cpp</code> is the name of the source file and <code>output</code> is the executable (if not specified, defaults to <code>a.out</code>).</p>
+<p>The following is a program that takes two numbers and adds them:</p>
+<pre><code>#include &lt;iostream&gt;
+int main() {
+    int x, y;
+    cin &gt;&gt; x &gt;&gt; y;
+    cout &lt;&lt; x + y &lt;&lt; endl;
+}</code></pre>
+<p>Note that <code>cin</code> waits for an integer because the right side is an integer. This is an example of overloading. <code>cin</code> will always ignore whitespace and newlines when doing this.</p>
+<p>If we type in some invalid input like <code>4 potato</code> to the above program or give an EOF, the variables are either uninitialized or set to 0 or other behaviour.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
