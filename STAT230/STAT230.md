@@ -258,3 +258,42 @@ The equation $P(A) = 1 - P(\overline A)$ comes from the idea of mutual exclusivi
 
 > Clearly, $S = A \cup \overline A$, and $P(S) = 1$.  
 > So $1 = P(S) = P(A \cup \overline A) = P(A) + P(\overline A) - P(A \cap \overline A) = P(A) + P(\overline A)$.  
+
+# 21/5/14
+
+When our event consists of the majority of the outcomes in the sample space, it is often easier to calculate using the complement - it is generally easier to consider fewer outcomes.
+
+For example, if we wanted to find the probability that at least one of two dice rolls is a 6, there are multiple outcomes - the first is 6, the second is 6, or both. If we use the complement, we can simply find the probability that none of the rolls are 1, which is a simpler calculation.
+
+Two events are **independent** if and only if $P(A \cap B) = P(A) P(B)$, and dependent otherwise. If two events are dependent, then they have some sort of relationship or association.
+
+$n$ events are **pairwise independent** if and only if for any $1 \le i \le n, 1 \le j \le n, i \ne j$, $P(A_i \cap A_j) = P(A_i) P(A_j)$. This means that the events in every possible pair of events is independent to each other.
+
+$n$ events are **mutually independent** if and only if $P(A_1 \cap \ldots \cap A_n) = P(A_1) \cdots P(A_n)$. This means that every event is independent of every possible intersection of all other events. Mutual independence implies pairwise independence, but not the other way around.
+
+For example, separate dice rolls are independent, because they are unrelated to one another. Independence means that whether $A$ happens or not has no effect on whether $B$ happens, and vice versa.
+
+If $A$ and $B$ are independent, then $A$ and $\overline B$, $\overline A$ and $B$, and $\overline A$ and $\overline B$ are all independent.
+
+Proof:
+
+> Clearly, $P(B) = P(AB) + P(\overline A B)$. Since $A$ and $B$ are independent, $P(AB) = P(A)P(B)$ and $P(B) = P(A)P(B) + P(\overline A B)$.  
+> So $P(B) - P(A)P(B) = P(\overline A B) = P(B)(1 - P(A)) = P(B)P(\overline A)$, and $P(\overline A B) = P(\overline A) P(B)$, so $\overline A$ and $B$ are independent.
+
+Given a large set of elements $S$ with properties $W$ and $F$ such that $P(F) = 0.15, P(W) = 0.45$, and that if $W$, then $P(F) = 0.2$, what is the probability of, in 10 randomly selected elements, at least 1 being $W$ and 1 being $F$?
+
+> Let $T$ be a set of 10 randomly selected elements.  
+> Since $S$ is large and $T$ is small, we can pretend we are selecting with replacement even though it is without replacement. This is because the probabilities would not hold if we did not do replacement.  
+> Let $W_i$ or $F_i represent the $i$th element of $T$ being $W$ or $F$, respectively.  
+> Let $W_a = W_1 \cup \ldots \cup W_{10}$, $F_a = F_1 \cup \ldots \cup F_{10}$.  
+> Clearly, the probability is $P(W_a \cap F_a) = 1 - P(\overline{W_a \cap F_a}) = 1 - P(\overline{W_a} \cup \overline{F_a}) = 1 - P(\overline{W_a}) - P(\overline{F_a}) + P(\overline{W_a} \cap \overline{F_a})$.  
+> Clearly, $P(\overline{W_a}) = P(\overline{W_1}) \cdots P(\overline{W_{10}}) = (1 - 0.45)^{10} = 0.55^{10}$.  
+> Clearly, $P(\overline{F_a}) = P(\overline{F_1}) \cdots P(\overline{F_{10}}) = (1 - 0.15)^{10} = 0.85^{10}$.  
+> We want to find $P(\overline{F_a})$ given that $\overline{W_a}$. This will allow us to find $P(\overline{W_a} \cap \overline{F_a})$.  
+> Clearly, $P(W_i) = 0.45 = P(W_i \cap \overline{F_i}}) + P(W_i \cap F_i) = P(W_i \cap \overline{F_i}) + 0.09$, since $P(F_i \cap W_i)$ means we assume that $W_i$ and $P(F_i)$ then becomes 0.2.  
+> So $P(W_i \cap \overline{F_i}) = 0.36$.  
+> Clearly, $P(\overline{F_i}) = 1 - 0.15 = P(\overline{F_i} \cap W_i) + P(\overline{F_i} \cap \overline{W_i}) = 0.36 + P(\overline{F_i} \cap \overline{W_i})$.  
+> So $P(\overline{F_i} \cap \overline{W_i}) = 0.49$ and $P(\overline{W_a} \cap \overline{F_a}) = 0.49^{10}$.  
+> So $P(W_a \cap F_a) = 1 - 0.55^{10} - 0.85^{10} + 0.49^{10} \approxeq 0.801390566701062$.  
+
+This demonstrated the very useful identity $P(A) = P(A \cap B) + P(A \cap \overline B)$, where $A$ and $B$ are events.

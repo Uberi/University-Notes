@@ -243,7 +243,7 @@ Generating Series
 
 We can also prove by using power series.
 
-Given a set $S$, the universe of discourse, where each element $\sigma \in S$ is associated with a non-negative integer weight $w(\sigma)$, the **generating series/generating function** of $S$ with respect to $w(\sigma)$ is $\Phi_S(x) = \sum_{\sigma \in S} x^{w(\sigma)}$.
+Given a set $S$, the universe of discourse, where each element $\sigma \in S$ is associated with a non-negative integer weight $w(\sigma)$, the **generating series/generating function** of $S$ with respect to $w(\sigma)$ is $\Phi_S(x) = \sum_{\sigma \in S} x^{w(\sigma)}$. If we expand and collect like terms, the coefficient of each $x^k$ is the number of elements in $S$ with exactly the weight $k$.
 
 For example, let $S$ be the set of all subsets of $[3]$, and let $w(A) = \abs{A}$. So $S = \set{\emptyset, \set{1}, \set{2}, \set{3}, \set{1, 2}, \set{1, 3}, \set{2, 3}, \set{1, 2, 3}}$. The corresponding weights are $0, 1, 1, 1, 2, 2, 2, 3$.
 
@@ -380,3 +380,52 @@ All power series must be invertible. Therefore, all power series **must have a c
 So when we are composing a series into the geometric series, like $\sum_{n \ge 0} f(x)$, then $f(x)$ must not have a constant term, or the above will happen and we will get an infinite constant term.
 
 So the series we put into the geometric series cannot be invertible, and therefore cannot be a power series.
+
+# 21/5/14
+
+### Sum Lemma
+
+Let $S = A \cup B$ such that $A \cap B = \emptyset$. Let $w$ be a weight function on $S$. Then $\Phi_S(x) = \Phi_A(x) + \Phi_B(x)$.
+
+In other words, the generating series for the disjunction of disjoint sets is the sum of the generating series for each set.
+
+This is because $\Phi_S = \sum_{\sigma \in S} x^{w(\sigma)} = \sum_{\sigma \in A} x^{w(\sigma)} + \sum_{\sigma \in B} x^{w(\sigma)} = \Phi_A(x) + \Phi_B(x)$.
+
+For example, let $\mb{N}_0$ be the set of all non-negative integers and $w(\sigma) = \sigma$. Then $\Phi_{\mb{N}_0} = 1 + x + x^2 + \ldots = \frac 1 {1 - x}$.
+
+Clearly, $\mb{N}_0 = E \cup O$, where $E$ is the set of non-negative even numbers and $O$ is the set of non-negative odd numbers. Clearly, $E \cap O = \emptyset$.
+
+Clearly, $\Phi_E(x) = 1 + x^2 + x^4 + \ldots = \frac 1 {1 - x^2}$ and $\Phi_O(x) = x + x^3 + x^5 + \ldots = \frac x {1 - x^2}$.
+
+Clearly, $\frac 1 {1 - x} = \frac 1 {1 - x^2} + \frac x {1 - x^2}$.
+
+For example, let $S_n$ be the set of all subsets of $[n]$ and $w(A) = \abs{A}$. Clearly, $S_n = A \cup B$, where $A$ is the set of all elements in $S_n$ that contain $n$, and $B$ is the set of all elements that do not.
+
+Clearly, $\Phi_{S_n}(x) = \Phi_A(x) + \Phi_B(x)$. Clearly, $B$ is the set of all subsets of $[n - 1]$, so $B = S_{n - 1}$. Clearly, $A$ is just the sets in $S_{n - 1}$ with $n$ added to each one, so $A = \set{x \cup \set{n} \middle| x \in S_{n - 1}}$.
+
+So $\Phi_B(x) = \Phi_{S_{n - 1}}(x)$, and there is a bijection $f: A \to S_{n - 1}$ defined by $f(T) = T \setminus \set{n}$. Clearly, $w(T) = w(f(T)) + 1$ because we just added an element to each set to make it 1 bigger.
+
+So $\Phi_A(x) = \sum_{T \in A} x^{w(T)} = \sum_{T \in A} x^{w(f(T)) + 1} = \sum_{T \in S_{n - 1}} x^{w(T) + 1} = x\sum_{T \in S_{n - 1}} x^{w(T)}$, since $f(T)$ maps every element of $A$ onto an element of $S_{n - 1}$.
+
+So $\Phi_A(x) = x \Phi_{S_{n - 1}}(x), \Phi_B(x) = \Phi_{S_{n - 1}}(x)$, so ;wip
+
+;wip: $(1 + x)\Phi_{S_{n - 1}}$ then simplify to $(1 + x)^n$
+
+### Product Lemma
+
+Let $A, B$ be sets and $\alpha, \beta$ be weight functions on $A, B$, respectively. Then if we define $w(a, b) = \alpha(a) + \beta(b)$, $\Phi_{A \times B}(x) = \Phi_A(x) \Phi_B(x)$.
+
+In other words, the generating series for the Cartesian product of two sets is the product of the generating series for each of the two sets, if the weight function is the sum of the weight functions for the two sets.
+
+This is because $\Phi_A(x) \Phi_B(x) = \sum_{a \in A} x^{\alpha(a)} \sum_{b \in B} x^{\beta(b)} = \sum_{a \in A} \sum_{b \in B} x^{\alpha(a)} x^{\beta(b)} = \sum_{a \in A} \sum_{b \in B} x^{\alpha(a) + \beta(b)}$. ;wip: how?
+
+Since this is just the sum of all the elements in the Cartesian product, $\sum_{a \in A} \sum_{b \in B} f(a) g(b) = \sum_{x \in A \times B} x^{\alpha(a) + \beta(b)} = \Phi_{A \times B}(x)$, as required.
+
+;wip: $\sum_{a \in A} f(a) \sum_{b \in B} g(b) = \sum_{a \in A} \sum_{b \in B} f(a) g(b)$.
+
+How many ways can we add $k$ non-negative integers to get $n$?
+
+> Each possible way can be represented as $(a_1, \ldots, a_k) \in \mb{N}_0^k$ (Cartesian product of non-negative integers $k$ times), where $a_1 + \ldots + a_k = n$ and $a_1, \ldots, a_k \in \mb{N}_0$.  
+> Let $w(a_1, \ldots, a_k) = a_1 + \ldots + a_k$. Then by the product lemma, $\Phi_{\mb{N}_0^k}(x) = \Phi_{\mb{N}_0}(x) \cdots \Phi_{\mb{N}_0}(x) = \Phi_{\mb{N}_0}(x)^k$.  
+> Clearly, $\Phi_{\mb{N}_0}(x) = 1 + x + x^2 + \ldots = \frac 1 {1 - x}$, so $\Phi_{\mb{N}_0^k}(x) = \frac 1 {(1 - x)^k} = \sum_{n \ge 0} {n + k - 1 \choose k - 1}x^n$.  
+> So  there are $[x^n]\Phi_{\mb{N}_0^k}(x) = {n + k - 1 \choose k - 1}$ possible values of $(a_1, \ldots, a_k)$.  
