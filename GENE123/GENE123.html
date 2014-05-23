@@ -200,12 +200,17 @@ A      C    D
 |______|____| &lt; Node 3</code></pre>
 <p>;wip: add some numbers and solve</p>
 <p>This law also works for individual points, not just entire nodes. The sum of the currents entering a point in a circuit is always 0.</p>
-<h2 id="kirchoffs-voltage-law">Kirchoff's Voltage Law</h2>
-<p>;wip: assume direction of travel to be clockwise</p>
-<p>;wip: hitting positive element means voltage added, hitting negative means subtracted</p>
+<p>KCL works best for nodes where there is only one unknown current entering or leaving. We should always check for these nodes first.</p>
+<h2 id="kirchoffs-voltage-law-kvl">Kirchoff's Voltage Law (KVL)</h2>
+<p>Kirchoff's Voltage Law states that the sum of the voltages (with signs) in any closed loop in a circuit is always zero - that the potential gains in a circuit must be the same in magnitude to the potential drops. This follows from the conservation of energy.</p>
+<p>The closed loop is any loop within a circuit, and the edges of the loop do not necessarily have to be circuit elements or wires. For example, a closed loop might be from the negative terminal of a battery to the positive terminal, and back, even though there are nothing connecting these terminals together. It is only important that the loop be closed - that it ends where it started.</p>
+<p>When we analyze circuits and we don't know which direction the current is flowing, we can assume that it is clockwise. If we later solve and get a negative value for the current, we can tell that it is actually going in the opposite direction.</p>
+<p>If a power source <span class="math">\(V_x\)</span> has current flowing into it from the negative terminal at voltage <span class="math">\(V_a\)</span>, then the voltage of the current flowing out of the positive terminal is <span class="math">\(V_b = V_a + V_x\)</span>.</p>
+<p>If the current is flowing into the power source from the positive terminal <span class="math">\(V_b\)</span>, then the voltage of the current flowing out of the negative terminal is <span class="math">\(V_a = V_b - V_x\)</span>.</p>
 <p>;wip</p>
 <p>The closed loop does not have to be an actual subcircuit - the points making up the loop do not need to be connected in any way.</p>
-<p>The passive sign convention means that voltage drops are positive and voltage gains are negative.</p>
+<p>KVL works best when we can find a loop with only one unknown voltage. We should always check for these loops first.</p>
+<p>The passive sign convention means that voltage drops are positive and voltage gains are negative. We assume that all circuit elements are loads initially because the majority of circuit elements are often loads, and therefore we would encounter fewer negative numbers.</p>
 <h1 id="section-3">12/5/14</h1>
 <p>The variables we have so far are <span class="math">\(P\)</span> (Voltage), <span class="math">\(I\)</span> (Amperage), <span class="math">\(P\)</span> (Wattage), <span class="math">\(W\)</span> (Joules), and <span class="math">\(q\)</span> (Coulombs).</p>
 <h2 id="circuit-elements">Circuit Elements</h2>
@@ -269,6 +274,8 @@ A      C    D
 <p>Resistance is measured in Ohms (<span class="math">\(\Omega\)</span>). One Ohm is one volt per amp.</p>
 <p>A <strong>resistor</strong> is a circuit element with resistance. It is represented using a squiggly line ;wip</p>
 <p>Resistance is the last part of the three parts of <strong>Ohm's Law</strong>, which can be stated as <span class="math">\(V = IR\)</span> - voltage is the product of current and resistance. Other forms are <span class="math">\(I = \frac V R\)</span> and <span class="math">\(R = \frac V I\)</span>.</p>
+<p>Ohm's law works for the passive sign convention - it assumes that positive current enters the positve terminal of the resistor.</p>
+<p>While resistors don't have a different positive and negative terminal, we can assign positive and negative terminals to them for the purpose of measuring the voltage.</p>
 <p>Two special cases are a short circuit, when resistance is 0 and current becomes undefined, and an open circuit, when resistance is infinity and current becomes 0.</p>
 <p>Clearly, <span class="math">\(P = VI = (IR)I = I^2 R\)</span>. Likewise, <span class="math">\(P = VI = V \frac V R = \frac {V^2} R\)</span>.</p>
 <p>As an aside, the resistance of a wire is <span class="math">\(R = \frac{\rho l}{A}\)</span>, where <span class="math">\(\rho\)</span> is a constant of resistivity (depending on temperature and such), <span class="math">\(l\)</span> is the legth of the wire, and <span class="math">\(A\)</span> is the corss sectional area.</p>
@@ -291,7 +298,7 @@ A      C    D
 <p>When we have two resistors <span class="math">\(R_1, R_2\)</span> in parallel, the equivalent resistance is <span class="math">\(R_{eq} = \frac{R_1 R_2}{R_1 + R_2}\)</span> - &quot;product over sum&quot;.</p>
 <p>If there is a short circuit in a resistor circuit, the equivalent resistance is always 0. This is because the current goes through the short circuit rather than the resistors.</p>
 <p>To simplify resistor networks, we repeatedly check if there are resistors in series, and replace them with an equivalent resistor if possible (no voltage-controlled dependent sources). Eventually, when we can no longer apply these rules, the network is in its simplest form.</p>
-<p>Any network of resistors not controlling any dependent sources can be simplified into a single equivalent resistance.</p>
+<p>Equivalent resistance is useful for simplifying resistor networks, but there are many situations where it cannot be used. For example, a 2 by 2 grid where all the edges are resistors cannot be simplified completely using only this technique.</p>
 <h2 id="voltagecurrent-division">Voltage/Current Division</h2>
 <p>We can use Ohm's law to design circuits that can divide the voltage of the source by a given factor. Consider a voltage source at <span class="math">\(V_x\)</span> connected to two resistors in series, <span class="math">\(R_1\)</span> and <span class="math">\(R_2\)</span>.</p>
 <p>Clearly, <span class="math">\(I\)</span> is the same across all elements, so <span class="math">\(I = \frac{V_x}{R_{eq}} = \frac{V_x}{R_1 + R_2} = \frac{V_1}{R_1} = \frac{V_2}{R_2}\)</span>.</p>
@@ -306,6 +313,25 @@ A      C    D
 <p>;wip: there's some sort of make-up lecture soon</p>
 <p>When doing nodal analysis, it is often helpful to mentally collapse all the nodes into a point, so the circuit appears like a graph with nodes as vertices and circuit elements as edges. This helps us see relationships like parallel and series connections that might not otherwise be obvious.</p>
 <p>The order of circuit elements in series does not affect the current or voltage at the circuit ends. For example, a voltage source followed by a resistor is equivalent to a resistor followed by a voltage source at the two free ends.</p>
+<h1 id="section-8">22/5/14</h1>
+<p>If we have <span class="math">\(n\)</span> resistors in series, the voltage across any resistor <span class="math">\(R_i\)</span> is <span class="math">\(\frac{R_i}{R_1 + \ldots + R_n} V\)</span>. Voltage division works for any number of resistors, but current division only works for two resistors.</p>
+<h2 id="nodal-analysis">Nodal Analysis</h2>
+<p>Also known as node voltage analysis. We use KCL and KVL and Ohm's law to write down every relation we can find between different voltages, and then solve for the voltages.</p>
+<p>Procedure:</p>
+<ol style="list-style-type: decimal">
+<li>Assign one node to be the ground/reference node - <span class="math">\(V_{ref} = 0\)</span>. This is the reference zero voltage, and can be any node, not necessarily the one with the lowest voltage. We draw a ground symbol (;wip: symbol) connected to that node in order to denote this.</li>
+<li>Write down equations implied by voltage sources to calculate voltage relations between nodes. For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: <span class="math">\(V_{positive} = 5V + V_{negative}\)</span>.</li>
+<li>For each node we assume all currents are <strong>leaving the node</strong>, and write down the equations implied by KCL - <span class="math">\(I_1 + \dots I_n = 0\)</span> at each node.</li>
+<li>Write each <span class="math">\(I_1, \ldots, I_n\)</span> in terms of voltage, generally using resistance and Ohm's law for resistors. Now we have a set of equations in terms of node voltages.</li>
+<li>Optionally, we can do the same thing with KVL relations, and add these equations to the set of voltage equations as well.</li>
+<li>Solving the system, we get the voltages at each node. Using this, it is possible to calculate the current at each node as well.</li>
+</ol>
+<p>The <strong>essential nodes</strong> of a circuit are those nodes that connect three or more circuit elements.</p>
+<p>There's a faster way using matrix inversion, but we will be using the plain algebraic method for simplicity.</p>
+<p>If we have a resistor <span class="math">\(r\)</span> and the voltages at the terminals are <span class="math">\(V_1\)</span> and <span class="math">\(V_2\)</span>, and the current is travelling from <span class="math">\(V_2\)</span> to <span class="math">\(V_1\)</span>, then the current is <span class="math">\(I = \frac{V_2 - V_1} r\)</span>. The voltage on the side the current is flowing out of for a resistor is always lower than the side it is flowing into - current always flows toward lower voltage.</p>
+<p>The unknowns in nodal analysis are the node voltages. Each branch current is represented in terms of node voltage.</p>
+<p>KCL can be used directly when there is only one unknown current in the path, and KVL can be used directly when there is only one unknownn voltage in the loop. Otherwise, we need to write out and solve the system of equations.</p>
+<p>;wip: schedule appointment with prof to go over the missed lecture</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

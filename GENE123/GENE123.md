@@ -211,18 +211,28 @@ For example, consider the following circuit:
 
 This law also works for individual points, not just entire nodes. The sum of the currents entering a point in a circuit is always 0.
 
-Kirchoff's Voltage Law
-----------------------
+KCL works best for nodes where there is only one unknown current entering or leaving. We should always check for these nodes first.
 
-;wip: assume direction of travel to be clockwise
+Kirchoff's Voltage Law (KVL)
+----------------------------
 
-;wip: hitting positive element means voltage added, hitting negative means subtracted
+Kirchoff's Voltage Law states that the sum of the voltages (with signs) in any closed loop in a circuit is always zero - that the potential gains in a circuit must be the same in magnitude to the potential drops. This follows from the conservation of energy.
+
+The closed loop is any loop within a circuit, and the edges of the loop do not necessarily have to be circuit elements or wires. For example, a closed loop might be from the negative terminal of a battery to the positive terminal, and back, even though there are nothing connecting these terminals together. It is only important that the loop be closed - that it ends where it started.
+
+When we analyze circuits and we don't know which direction the current is flowing, we can assume that it is clockwise. If we later solve and get a negative value for the current, we can tell that it is actually going in the opposite direction.
+
+If a power source $V_x$ has current flowing into it from the negative terminal at voltage $V_a$, then the voltage of the current flowing out of the positive terminal is $V_b = V_a + V_x$.
+
+If the current is flowing into the power source from the positive terminal $V_b$, then the voltage of the current flowing out of the negative terminal is $V_a = V_b - V_x$.
 
 ;wip
 
 The closed loop does not have to be an actual subcircuit - the points making up the loop do not need to be connected in any way.
 
-The passive sign convention means that voltage drops are positive and voltage gains are negative.
+KVL works best when we can find a loop with only one unknown voltage. We should always check for these loops first.
+
+The passive sign convention means that voltage drops are positive and voltage gains are negative. We assume that all circuit elements are loads initially because the majority of circuit elements are often loads, and therefore we would encounter fewer negative numbers.
 
 # 12/5/14
 
@@ -293,6 +303,10 @@ A **resistor** is a circuit element with resistance. It is represented using a s
 
 Resistance is the last part of the three parts of **Ohm's Law**, which can be stated as $V = IR$ - voltage is the product of current and resistance. Other forms are $I = \frac V R$ and $R = \frac V I$.
 
+Ohm's law works for the passive sign convention - it assumes that positive current enters the positve terminal of the resistor.
+
+While resistors don't have a different positive and negative terminal, we can assign positive and negative terminals to them for the purpose of measuring the voltage.
+
 Two special cases are a short circuit, when resistance is 0 and current becomes undefined, and an open circuit, when resistance is infinity and current becomes 0.
 
 Clearly, $P = VI = (IR)I = I^2 R$. Likewise, $P = VI = V \frac V R = \frac {V^2} R$.
@@ -338,7 +352,7 @@ If there is a short circuit in a resistor circuit, the equivalent resistance is 
 
 To simplify resistor networks, we repeatedly check if there are resistors in series, and replace them with an equivalent resistor if possible (no voltage-controlled dependent sources). Eventually, when we can no longer apply these rules, the network is in its simplest form.
 
-Any network of resistors not controlling any dependent sources can be simplified into a single equivalent resistance.
+Equivalent resistance is useful for simplifying resistor networks, but there are many situations where it cannot be used. For example, a 2 by 2 grid where all the edges are resistors cannot be simplified completely using only this technique.
 
 Voltage/Current Division
 ------------------------
@@ -368,3 +382,33 @@ If the current comes out of the positive terminal of a circuit element, it is su
 When doing nodal analysis, it is often helpful to mentally collapse all the nodes into a point, so the circuit appears like a graph with nodes as vertices and circuit elements as edges. This helps us see relationships like parallel and series connections that might not otherwise be obvious.
 
 The order of circuit elements in series does not affect the current or voltage at the circuit ends. For example, a voltage source followed by a resistor is equivalent to a resistor followed by a voltage source at the two free ends.
+
+# 22/5/14
+
+If we have $n$ resistors in series, the voltage across any resistor $R_i$ is $\frac{R_i}{R_1 + \ldots + R_n} V$. Voltage division works for any number of resistors, but current division only works for two resistors.
+
+Nodal Analysis
+--------------
+
+Also known as node voltage analysis. We use KCL and KVL and Ohm's law to write down every relation we can find between different voltages, and then solve for the voltages.
+
+Procedure:
+
+1. Assign one node to be the ground/reference node - $V_{ref} = 0$. This is the reference zero voltage, and can be any node, not necessarily the one with the lowest voltage. We draw a ground symbol (;wip: symbol) connected to that node in order to denote this.
+2. Write down equations implied by voltage sources to calculate voltage relations between nodes. For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: $V_{positive} = 5V + V_{negative}$.
+3. For each node we assume all currents are **leaving the node**, and write down the equations implied by KCL - $I_1 + \dots I_n = 0$ at each node.
+4. Write each $I_1, \ldots, I_n$ in terms of voltage, generally using resistance and Ohm's law for resistors. Now we have a set of equations in terms of node voltages.
+5. Optionally, we can do the same thing with KVL relations, and add these equations to the set of voltage equations as well.
+6. Solving the system, we get the voltages at each node. Using this, it is possible to calculate the current at each node as well.
+
+The **essential nodes** of a circuit are those nodes that connect three or more circuit elements.
+
+There's a faster way using matrix inversion, but we will be using the plain algebraic method for simplicity.
+
+If we have a resistor $r$ and the voltages at the terminals are $V_1$ and $V_2$, and the current is travelling from $V_2$ to $V_1$, then the current is $I = \frac{V_2 - V_1} r$. The voltage on the side the current is flowing out of for a resistor is always lower than the side it is flowing into - current always flows toward lower voltage.
+
+The unknowns in nodal analysis are the node voltages. Each branch current is represented in terms of node voltage.
+
+KCL can be used directly when there is only one unknown current in the path, and KVL can be used directly when there is only one unknownn voltage in the loop. Otherwise, we need to write out and solve the system of equations.
+
+;wip: schedule appointment with prof to go over the missed lecture

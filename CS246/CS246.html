@@ -319,7 +319,7 @@ done</code></pre>
 <p>C++ source files often have the <code>*.cc</code> or <code>*.cpp</code> extension.</p>
 <p>A basic C++ program might look like the following:</p>
 <pre><code>#include &lt;iostream&gt; // we do not have to specify the .h extension for header files
-using namespace std; // this puts the std namespace into the global namespace, so std::cout is the same as cout; without this line we have to use std::cout
+using namespace std; // this puts the std namespace into the global namespace, so std::cout is the same as cout; without this line we have to use std::cout and std::endl
 int main() { // the main function must be declared to return an integer, and for this funciton only it is not required to actually use a `return` statement (defaults to `return 0`)
     cout &lt;&lt; &quot;Hello, world!&quot; &lt;&lt; endl;
 }</code></pre>
@@ -327,7 +327,7 @@ int main() { // the main function must be declared to return an integer, and for
 <p>The <code>iostream</code> library has 3 main input/output (I/O) objects: <code>cout</code> representing standard output, <code>cerr</code> representing standard error, and <code>cin</code> representing standard input.</p>
 <p>The <code>&lt;&lt;</code> is an output operator - the &quot;put to&quot; operator. It sends the right operand to the stream specified by the left operand, producing the stream again. For example, <code>cout &lt;&lt; x</code> puts <code>x</code> to stdout.</p>
 <p>The <code>&gt;&gt;</code> is an input operator - the &quot;get from&quot; operator. It reads data from the stream specified by the left operand into the right operand, producing the stream again. For example, <code>cin &gt;&gt; x</code> gets <code>x</code> from stdin.</p>
-<p><code>stdio.h</code> and such are still available, but should not be used because C++ has its own equivalent ways of accomplishing these tasks. Marmoset will be forbidding these libraries from being used.</p>
+<p><code>stdio.h</code> and such are still available, but should not be used because C++ has its own equivalent functionality and libraries. Marmoset will be forbidding these libraries from being used.</p>
 <h3 id="compiling">Compiling</h3>
 <p>We will be using g++, the equivalent of GCC for C++. A typical invocation might look like <code>g++ myprogram.cpp -o output</code>, where <code>myprogram.cpp</code> is the name of the source file and <code>output</code> is the executable (if not specified, defaults to <code>a.out</code>).</p>
 <p>The following is a program that takes two numbers and adds them:</p>
@@ -338,7 +338,69 @@ int main() {
     cout &lt;&lt; x + y &lt;&lt; endl;
 }</code></pre>
 <p>Note that <code>cin</code> waits for an integer because the right side is an integer. This is an example of overloading. <code>cin</code> will always ignore whitespace and newlines when doing this.</p>
+<h3 id="inputoutput">Input/Output</h3>
 <p>If we type in some invalid input like <code>4 potato</code> to the above program or give an EOF, the variables are either uninitialized or set to 0 or other behaviour.</p>
+<h1 id="section-5">22/5/14</h1>
+<p>How do we check if the input given was invalid - if the read was successful? <code>cin.fail()</code> is true if and only if the most recent read failed (invalid or EOF). Likewise, <code>cin.eof()</code> is true if and only if the most recent read got to the end of the input.</p>
+<p>We must attempt to do the reading, and if it fails, then we handle the error condition. Also, if there is an error, the failure flag stays set until we acknowledge it, and until then all subsequent reads do nothing. Upon error, the stream is not advanced and a second read will try to read the same thing.</p>
+<p>Program that reads integers and prints them until a non-integer or EOF is encountered:</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int i;
+    while (true) {
+        cin &gt;&gt; i;
+        if (cin.fail()) break;
+        cout &lt;&lt; i &lt;&lt; endl;
+    }
+}</code></pre>
+<p>When we say <code>if (!cin)</code>, <code>cin</code> is implicitly converted into a <code>void*</code>, and is truthy if the last read was successful and falsy otherwise. <code>if (cin)</code> is equivalent to <code>if (!cin.fail())</code>.</p>
+<p>Also, <code>std::cin &gt;&gt; i</code> evaluates to <code>std::cin</code>, which allows us to do things like <code>cin &gt;&gt; x &gt;&gt; y</code>. This technique is known as <strong>cascading</strong>. The same thing works with the <code>&lt;&lt;</code> operator as well, which we saw in the <code>cout &lt;&lt; i &lt;&lt; endl</code> line.</p>
+<p>Note that <code>a &gt;&gt; b</code> is also the right bit-shift operator, equivalent to <code>\floor{\frac a {2^b}}</code>. This operator <strong>behaes differently depending on its operands</strong>. If the left side is an IStream such as <code>std::cin</code>, it acts as the input operator, and if the left side is an int, it acts as a right bit-shift.</p>
+<p>With this in mind, we can have the following shorter version:</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int i;
+    while (cin &gt;&gt; i) cout &lt;&lt; i &lt;&lt; endl;
+}</code></pre>
+<p>Another one that ignores non-integers and echos integers until encountering EOF:</p>
+<pre><code>// the `#include &lt;iostream&gt;` and `using namespace std;` are implicit for brevity
+int main() {
+    int i;
+    while (true) {
+        if (cin &gt;&gt; i) cout &lt;&lt; i &lt;&lt; endl;
+        else {
+            if (cin.eof()) break;
+            cin.clear(); // acknowedge that the previous read failed and reset cin so we can read again
+            cin.ignore(); // ignore the next input (character) so we don&#39;t read the same invalid value over and over again
+        }
+    }
+}</code></pre>
+<h3 id="strings">Strings</h3>
+<p>In C++, strings are significantly easier to use than in C. We use the type <code>std::string</code>, and literals are denoted with double quotes (<code>&quot;string&quot;</code>):</p>
+<pre><code>int main() {
+    std::string s;
+    std::cin &lt;&lt; s;
+    std::cout &lt;&lt; s &lt;&lt; endl;
+}</code></pre>
+<p>When we try to read a string from stdin, it first ignores all leading whitespace, stores non-whitespace characters in the variable, and stops at the first whitespace character encountered. As a result, it will only read one word at a time.</p>
+<p>To actually get the entire line, we can use <code>getline(cin, s)</code>. The type of data and the exact reading/writing behavior of <code>cin</code> or <code>cout</code> depends on the type of the right operand of <code>&gt;&gt;</code>.</p>
+<p>However, if we wanted to use format specifiers (like those accepted by <code>printf</code> in C), like printing out integers in hexadecimal or octal, we can I/O Manipulators.</p>
+<p>I/O Manipulators look like <code>std::cout &lt;&lt; std::hex</code>. This does not print anything, but it changes the behaviour of <code>cout</code> so that it prints integers out in hexadecimal. Likewise, <code>std::cout &lt;&lt; std::dec</code> changes <code>cout</code> to print integers out in decimal again. There are many other manipulators but these are one of the most common ones.</p>
+<p>The advantage of using streams for things like <code>cin</code> and <code>cout</code> is that it abstracts more than just stdin and stdout. All the behaviour associated with stdin and stdout can also be used to other stream-like data such as a file or even on a network connection.</p>
+<p>To use file streams, we must have <code>#include &lt;fstream&gt;</code> to have the file stream functionality. It provides <code>ifstream</code> for input file streams and <code>ofstream</code> for output file streams. The following prompts the user for a word and writes it to a file:</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+using namespace std;
+int main() {
+    ifstream f(&quot;test.txt&quot;); // declare an `ifstream` initialized with &quot;test.txt&quot;
+    string s;
+    f &lt;&lt; &quot;Word: &quot; &lt;&lt; endl;
+    cin &gt;&gt; s;
+    f &lt;&lt; s &lt;&lt; endl;
+}</code></pre>
+<p>Note that we didn't have to close the file - C++ automatically closes it after we are done using it.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

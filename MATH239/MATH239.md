@@ -288,6 +288,12 @@ For example, how many binary strings of length $n$ have no 3 consecutive 1's?
 > ;wip: $\Phi_S(x) = \frac{1 + x + x^2}{1 - x - x^2 - x^3}$.
 > Therefore, there are $[x^n]\frac{1 + x + x^2}{1 - x - x^2 - x^3}$ of these binary strings (the $n$th term's coefficient is the number of binary strings in $S$ of length $n$).  
 
+The reason generating series are useful is because $[x^n]\Phi_S(x)$ is the number of times $w(\sigma) = n$. This allows us to find the number of $\sigma$ in $S$ that have $w(\sigma) = n$.
+
+We can solve for $[x^k]$ explicitly by writing $\Phi_S(x)$ as a power series, solving for the index $i$ that would result in the term having $x^k$, and obtaining the coefficient of that index. However, leaving it in the form of $[x^n]f(x)$ is often sufficient for an answer.
+
+For example, given $[x^k]\sum_{i = 1}^n 2i^ix^{2i}$, we solve $x^k = x^{2i}$ and $i = \frac k 2$. Then $[x^k]\sum_{i = 1}^n 2i^ix^{2i} = 2i^i = 2\left(\frac k 2\right)^{\frac k 2}$.
+
 # 14/5/14
 
 Formal Power Series
@@ -331,7 +337,7 @@ The three series to remember are:
 
 * $\frac 1 {1 - x} = 1 + x + x^2 + \ldots$
 * $\frac{1 - x^{k + 1}}{1 - x} = 1 + x + x^2 + \ldots + x^k$
-* $\frac 1 {(1 - x)^k} = \sum_{n \ge 0} {n + k - 1 \choose k - 1}x^n$
+* $\frac 1 {(1 - x)^k} = \sum_{n = 0}^\infty {n + k - 1 \choose k - 1}x^n$
 
 What is the inverse of $x$, if it exists?
 
@@ -385,7 +391,7 @@ So the series we put into the geometric series cannot be invertible, and therefo
 
 ### Sum Lemma
 
-Let $S = A \cup B$ such that $A \cap B = \emptyset$. Let $w$ be a weight function on $S$. Then $\Phi_S(x) = \Phi_A(x) + \Phi_B(x)$.
+Let $A \cap B = \emptyset$. Let $w$ be a weight function on $A \cup B$. Then $\Phi_{A \cup B}(x) = \Phi_A(x) + \Phi_B(x)$.
 
 In other words, the generating series for the disjunction of disjoint sets is the sum of the generating series for each set.
 
@@ -429,3 +435,47 @@ How many ways can we add $k$ non-negative integers to get $n$?
 > Let $w(a_1, \ldots, a_k) = a_1 + \ldots + a_k$. Then by the product lemma, $\Phi_{\mb{N}_0^k}(x) = \Phi_{\mb{N}_0}(x) \cdots \Phi_{\mb{N}_0}(x) = \Phi_{\mb{N}_0}(x)^k$.  
 > Clearly, $\Phi_{\mb{N}_0}(x) = 1 + x + x^2 + \ldots = \frac 1 {1 - x}$, so $\Phi_{\mb{N}_0^k}(x) = \frac 1 {(1 - x)^k} = \sum_{n \ge 0} {n + k - 1 \choose k - 1}x^n$.  
 > So  there are $[x^n]\Phi_{\mb{N}_0^k}(x) = {n + k - 1 \choose k - 1}$ possible values of $(a_1, \ldots, a_k)$.  
+
+# 23/5/14
+
+Clearly, $\frac 1 {(1 - x)^k} = \frac 1 {1 - x} \cdots \frac 1 {1 - x}$. Since $\frac 1 {1 - x} = 1 + x + x^2 + \ldots$, it is the generating series for $\mb{N}_0$ with weight finction $w(\sigma) = \sigma$.
+
+Then $\frac 1 {(1 - x)^k}$ is the generating series for $\mb{N}_0^k$ with weight function $w(a_1, \ldots, a_k) = a_1 + \ldots + a_k$.
+
+There are $n + k - 1 \choose k - 1$ ways to add $k$ non-negative integers to add up to $n$.
+
+This is because there are $k$ buckets and $n$ things to fill them with. We want to figure out all the ways we can distribute the $n$ things into the $k$ buckets.
+
+Each bucket can hold from 0 to $n$ things. However, we notice that the order of the things does not matter, only the quantity.
+
+If we line up the things, the buckets actually divide the line into $k$ segments, so it basically inserts $k - 1$ dividers into the line of $n$ things.
+
+Now we consider the dividers as objects, so there are $n + k - 1$ of them in total. Therefore there are $n + k - 1 \choose k - 1$ ways of putting the things into buckets.
+
+If we wanted to make this a proper proof, we might define a bijection between the tuples and a binary string where there is a run of $a_1$ zeroes, a 1, followed by $a_2$ zeros, a 1, all the way to $a_{k - 1}$ zeros, a 1, and $a_k$ zeros.
+
+How many ways can we have 3 non-negative integers $a, b, c$ such that $a + b + c = n$ for some non-negative integer $n$, such that $a \ge 5, b \le 3, 2 \mid c$?
+
+> Assume $a \ge 5, b \le 3, 2 \mid c$. Then we can model it with a Cartesian product: $(a, b, c) \in A \times B \times C$, where $A = \set{5, 6, 7, \ldots}, B = \set{0, 1, 2, 3}, C = \set{0, 2, 4, 6, \ldots}$.  
+> Clearly, $\Phi_A(x) = x^5 + x^6 + \ldots = \frac{x^5}{1 - x}, \Phi_B(x) = 1 + x + x^2 + x^3, \Phi_C(x) = 1 + x^2 + x^4 + \ldots = \frac 1 {1 - x^2}$, where $w(\sigma) = \sigma$ for all three.  
+> Let $w(a, b, c) = a + b + c$, so $\Phi_{A \times B \times C}(x) = \frac{x^5}{1 - x} (1 + x + x^2 + x^3) \frac 1 {1 - x^2} = \frac{x^5(1 + x + x^2 + x^3)}{(1 - x)(1 - x^2)}$.  
+> We want the number of cases where $w(a, b, c) = n$, so the answer is $[x^n]\Phi_{A \times B \times C}(x) = [x^n]\frac{x^5(1 + x + x^2 + x^3)}{(1 - x)(1 - x^2)}$.
+
+An **integer composition** of $n$ is a $k$-tuple $(a_1, \ldots, a_k)$ of positive integers such that $a_1 + \ldots + a_k = n$. Each $a_1, \ldots, a_k$ is a part.
+
+For example, compositions of 5 include $(1, 3, 1)$ and $(2, 3)$. Each part must be greater than or equal to 1, and order is significant.
+
+Also, 0 has a single composition, the empty tuple: $()$. This has zero parts, and we define the sum to be 0.
+
+How many compositions of $n$ have exactly $k$ parts?
+
+> Let $(a_1, \ldots, a_k)$ be a composition of $n$.  
+> Then $a_1, \ldots, a_k \in \mb{N}$ and $(a_1, \ldots, a_k) \in \mb{N}^k$.  
+> Note that instead of $\mb{N}$ we could also use $\set{1, \ldots, n}$, but we still use $\mb{N}$ to somplify our calculations because the generating series can be written in closed form.  
+> Let $w(\sigma) = \sigma$ be a weighting function over $\mb{N}$.  
+> Then $\Phi_{\mb{N}}(x) = x + x^2 + x^3 + \ldots = \frac x {1 - x}$.  
+> Let $w(a_1, \ldots, a_k) = a_1 + \ldots + a_k$ be a weighting function over $\mb{N}^k$.  
+> Then $\Phi_{\mb{N}^k}(x) = \frac x {1 - x} \cdots \frac x {1 - x} = \frac {x^k} {(1 - x)^k}$.  
+> Then the number of values of $(a_1, \ldots, a_k)$ such that $w(a_1, \ldots, a_k) = n$ is $[x^n]\frac {x^k} {(1 - x)^k}$.  
+> This is an acceptable answer, but we can also get a simpler solution.  
+> Clearly, $[x^n]\frac {x^k} {(1 - x)^k} = [x^{n - k}]\frac 1 {(1 - x)^k} = [x^{n - k}]\sum_{i = 0}^\infty {i + k - 1 \choose k - 1}x^i = {n - k + k - 1 \choose k - 1} = {n - 1 \choose k - 1}$.  

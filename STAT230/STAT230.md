@@ -297,3 +297,39 @@ Given a large set of elements $S$ with properties $W$ and $F$ such that $P(F) = 
 > So $P(W_a \cap F_a) = 1 - 0.55^{10} - 0.85^{10} + 0.49^{10} \approxeq 0.801390566701062$.  
 
 This demonstrated the very useful identity $P(A) = P(A \cap B) + P(A \cap \overline B)$, where $A$ and $B$ are events.
+
+# 23/5/14
+
+The conditional probability of an event $A$ given event $B$ is denoted $P(A \mid B) = \frac{P(A \cap B)}{P(B)}$, assuming that $P(B) \ne 0$.
+
+This is the probability that $A$ will take place, given that $B$ is already known to take place.
+
+If $A$ and $B$ are independent, then $P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A) P(B)}{P(B)} = P(A)$. In other words, for independent events it does not matter whether we know $B$ occurred or not; the probability is still the same.
+
+If 5% of males are color blind and 0.25% of females are as well, what is the probability of a random color blind person selected from an equal number of males and females being male?
+
+> Let $M$ represent being male and $F$ represent being female in the population. Clearly, $P(M) = P(F) = 0.5$. Let $C$ represent being color blind in the population.  
+> Clearly, $P(C \mid M) = 0.05$, $P(C \mid F) = 0.0025$, and $F = \overline M$. We want to find $P(M \mid C)$, the probability that the person is male given color blindness.  
+> Clearly, $P(M \mid C) = \frac{P(M \cap C)}{P(C)}$.  
+> Clearly, $P(C \mid M) = \frac{P(M \cap C)}{P(M)}$, so $P(C \mid M) P(M) = P(M \cap C) = 0.05 \times 0.5 = 0.025$.  
+> Clearly, $P(C) = P(C \cap \overline M) + P(C \cap M) = P(C \mid \overline M) P(\overline M) + P(C \mid M) P(M) = P(C \mid \overline M) P(\overline M) + P(C \mid M) P(M) = P(C \mid F) P(F) + P(C \mid M) P(M) = 0.0025 \times 0.5 + 0.05 \times 0.5 = 0.02625$.  
+> So $P(M \mid C) = \frac{0.025}{0.02625} \approxeq 0.952380952380952$.  
+> Note that $P(C)$ is the weighted average of all the possible conditional probabilities.  
+
+### Multiplication Rule
+
+The **multiplication rule** states that $P(A \cap B) = P(A) P(B \mid A)$. Extending this, $P(ABC) = P(A)P(B \mid A)P(C \mid (A \cap B))$ and $P(ABCD) = P(A) P(B \mid A) P(C \mid (A \cap B)) P(D \mid (A \cap B \cap C))$, and so on.
+
+### Partition Rule
+
+The **partition rule** states that if $A_1 \cup \ldots \cup A_k = S$ where $A_1, \ldots, A_k$ are disjoint sets (mutually exclusive), and $B$ is an event in $S$, then $P(B) = P(B \cap A_1) + \ldots + P(B \cap A_k) = \sum_{i = 1}^k P(B \mid A_i)P(A_i)$.
+
+This is because $B = B \cap A_1 \cup \ldots \cup B \cap A_k$, and $B \cap A_i$ is mutually exclusive with any $B \cap A_j$ when $i \ne j$. So $P(B) = P(B \cap A_1 \cup \ldots \cup B \cap A_k) = P(B \cap A_1) + \ldots + P(B \cap A_k)$.
+
+A **tree diagram** is a diagram that helps represent conditional probabilities by showing the possibilities of several runs of an experiement as a tree. For example, we might draw a tree for flips of a coin, with each level being a subsequent fliip of the coin.
+
+We label the edges of the tree with the probability of the child occurring given that all the parent events have occurred. So in the above example, the root node has labels $P(H)$ and $P(T)$, while the second level nodes have $P(H \mid H), P(T \mid H), P(H \mid T), P(T \mid T)$.
+
+If we want the probability of a particular sequence of outcomes, then we would travel down the tree multplying by edges when we encounter them. So in the above example, the probability of getting a heads, and then another heads is $P(H \cap H) = P(H) P(H \mid H) = 0.25$.
+
+We are eventually going to develop **Bayes Theorem**, which is $P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B \mid \overline A) P(A) + B(B \mid A) P(A)}$.
