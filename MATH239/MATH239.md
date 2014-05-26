@@ -45,6 +45,8 @@ $[n]$ is the set of all positive integers from 1 to $n$, inclusive.
 
 The **Cartesian product** of two sets $A$ and $B$ is $A \times B = \set{(a, b) \middle| a \in A, b \in B}$. In other words, it is the set of all pairs of elements from both sets. This can easily be extended to more than two sets: $A \times B \times C$.
 
+Also, $A^k = A \times \ldots \times A$ ($k$ times). Also, $A^0 = \set{()}$ - the set containing the empty tuple.
+
 If $A$ and $B$ are finite, then $\abs{A \times B} = \abs{A}\abs{B}$.
 
 Consider all possible results of throwing two six-sided dice:
@@ -91,7 +93,7 @@ Therefore, there are $\frac{n!}{(n - k)!}$ $k$-permutations of $[n]$. Clearly, e
 
 So the number of $k$-combinations is a factor of $k!$ less than the number of $k$-permutations, and is given by $\frac{n!}{k!(n - k)!}$.
 
-In general, $[n]$ has $\frac{n!}{k!(n - k)!}$ combinations of size $k$. This can be represented by $n \choose k$. If $n < k$, we define $n \choose k = 0$.
+In general, $[n]$ has $\frac{n!}{k!(n - k)!}$ combinations of size $k$. This can be represented by $n \choose k$. If $n < k$, we define ${n \choose k} = 0$.
 
 # 7/5/14
 
@@ -113,10 +115,6 @@ It is often tedious to prove that it is one to one and onto. We can prove a func
 ### Bijection Inverse Theorem
 
 Proposition: a function is a bijection if and only if it has an inverse.
-
-Proof:
-
-> ;wip
 
 The **inverse** of $f: S \to T$ is a function $f^{-1}$ such that \forall x \in S, f^{-1}(f(x)) = x$ and $\forall y \in T, f(f^{-1}(y)) = y$. It is basically a reverse mapping backwards from $T$ to $S$.
 
@@ -222,13 +220,14 @@ So by induction, we get $\sum_{i = 0}^k {n + i - 1 \choose n - 1} = {n + k \choo
 
 Now we want to prove this combinatorially:
 
-> Let $S$ be the set of all $n$-subsets of $[n - k]$. Then $\abs{S} = {n + k \choose n}$.  
+> Let $S$ be the set of all $n$-subsets of $[n + k]$. Then $\abs{S} = {n + k \choose n}$.  
 > Let $S_i$ be the set of all $n$-subsets of $[n + k]$ whose largest element is $n + i$, where $0 \le i \le k$.  
 > Clearly, the largest element of each $n$-subset is between $n$ and $n + k$ inclusive.  
 > Clearly, $S = S_0 \cup \ldots \cup S_k$, and this is a disjoint set, so $\abs{S} = \abs{S_0} + \ldots + \abs{S_k}$.  
 > Clearly, each set in $S_i$ must contain $n + i$ as the largest element, and all the other elements must be in $[n + i - 1]$ (since they must be less than the largest element).  
 > So there are $n + i - 1$ elements to choose from, out of $n - 1$ spots (one spot of $n$ was taken by the largest element).
 > So there are $n + i - 1 \choose n - 1$ elements in $S_i$.  
+> So ${n + k \choose n} = \abs{S} = {n - 1 \choose n - 1} + \ldots + {n + k - 1 \choose n - 1} = \sum_{i = 0}^k {n + i - 1 \choose n - 1}$
 
 This is known as the **hockey stick identity**. The reason for this is because it states that in Pascal's Triangle, the value of a number in the triangle is the sum of all the numbers in either diagonal passing through the number directly above it from the outside edge of the triangle until it is diagonal to the number we want.
 
@@ -347,12 +346,14 @@ What is the inverse of $x$, if it exists?
 
 If we generalize this, any power series that does not have a constant term (any power series that has $x$ as a factor) cannot be inverted.
 
-Any power series $A(x)$ has an inverse if and only if $[x^0]A(x) \ne 0$
+Any power series $A(x)$ has an inverse if and only if $[x^0]A(x) \ne 0$.
+
+Incidentally, we can use the identity $\frac 1 {1 - f(x)} = 1 + f(x) + f(x)^2 + \ldots$ if $f(x)$ is a power series with no constant term. If there is a constant term, then the expansion of $f(x)^k$ has a constant term, so the constant term goes to infinity and the series no longer converges.
 
 Compositions
 ------------
 
-Let $G(x) = \frac 1 {1 - x} = 1 + x + x^2 + \ldots$. Then $G(3x^2) = \frac 1 {1 - 3x^2} = 1 + 3x^2 + 9x^4 + 27x^6$ and $[x^n]G(x) = \begin{cases} 3^{\frac n 2} &\text{if } n \text{ is even} \\ 0 &\text{if } n \text{ is odd}$.
+Let $G(x) = \frac 1 {1 - x} = 1 + x + x^2 + \ldots$. Then $G(3x^2) = \frac 1 {1 - 3x^2} = 1 + 3x^2 + 9x^4 + 27x^6$ and $[x^n]G(x) = \begin{cases} 3^{\frac n 2} &\text{if } n \text{ is even} \\ 0 &\text{if } n \text{ is odd} \end{cases}$.
 
 Now let $A(x) = G(3x^2)^9 = \frac 1 {(1 - 3x^2)^9}$. Then $A(x) = \sum_{n \ge 0} {n + 9 - 1 \choose 9 - 1} (3x^2)^n = \sum_{n \ge 0} {n + 8 \choose 8}3^nx^{2n}$.
 
@@ -427,6 +428,8 @@ This is because $\Phi_A(x) \Phi_B(x) = \sum_{a \in A} x^{\alpha(a)} \sum_{b \in 
 
 Since this is just the sum of all the elements in the Cartesian product, $\sum_{a \in A} \sum_{b \in B} f(a) g(b) = \sum_{x \in A \times B} x^{\alpha(a) + \beta(b)} = \Phi_{A \times B}(x)$, as required.
 
+So $\sum_{(a, b) \in A \times B} x^{a + b} = \left(\sum_{a \in A} x^a\right)\left(\sum_{b \in B} x^b\right)$.
+
 ;wip: $\sum_{a \in A} f(a) \sum_{b \in B} g(b) = \sum_{a \in A} \sum_{b \in B} f(a) g(b)$.
 
 How many ways can we add $k$ non-negative integers to get $n$?
@@ -479,3 +482,40 @@ How many compositions of $n$ have exactly $k$ parts?
 > Then the number of values of $(a_1, \ldots, a_k)$ such that $w(a_1, \ldots, a_k) = n$ is $[x^n]\frac {x^k} {(1 - x)^k}$.  
 > This is an acceptable answer, but we can also get a simpler solution.  
 > Clearly, $[x^n]\frac {x^k} {(1 - x)^k} = [x^{n - k}]\frac 1 {(1 - x)^k} = [x^{n - k}]\sum_{i = 0}^\infty {i + k - 1 \choose k - 1}x^i = {n - k + k - 1 \choose k - 1} = {n - 1 \choose k - 1}$.  
+
+Incidentally, the number of compositions in total is the sum of the compositions that have exactly $k$ parts from $k = 0$ to $k = n$.
+
+# 26/5/14
+
+How many compositions of $n$ exist?
+
+> Let $S = \mb{N}^0 \cup \mb{N}^1 + \mb{N}^2 + \ldots$. This is a set that is a superset of all the possible compositions.  
+> Let $w(a_1, \ldots, a_k) = a_1 + \ldots + a_k$. Then $\Phi_S(x) = \frac{1 - x}{1 - 2x}$.  ;wip: how did we get this generating series?
+> Then there are $[x^n]\frac{1 - x}{1 - 2x}$ compositions of $n$.  
+> Also, we can get the explicit value: $[x^n]\frac{1 - x}{1 - 2x} = [x^n]\frac{1}{1 - 2x} - [x^n]\frac{x}{1 - 2x} = [x^n]\frac{1}{1 - 2x} - [x^{n - 1}]\frac{1}{1 - 2x} = [x^n]\sum_{i = 0}^\infty (2x)^i - [x^{n - 1}]\sum_{i = 0}^\infty (2x)^i = \begin{cases} 2^n - 2^{n - 1} &\text{if } n > 0 \\ 1 &\text{if } n = 0 \end{cases}$.  
+
+In general, to solve this type of problem:
+
+1. Find a set $S$ that represents all the possible compositions of a certain type (without considering $n$).
+2. Find $\Phi_S(x)$ where $w(a_1, \ldots, a_k) = a_1 + \ldots + a_k$.  
+3. Then the number of compositions is usually $[x^n]\Phi_S(x)$.  
+4. Try to find an explicit formula for $[x^n]\Phi_S(x)$ or try to simplify if possible using series and etc.
+
+How many compositions of $n$ exist such that there are $2k$ parse, where the first $k$ parts are at least 5, and the last $k$ are multiples of 3.  
+
+> Let $A = \set{5, 6, 7, \ldots}, B = \set{3, 6, 9, \ldots}$ (we don't include 0 since the values must be at least 1).  
+> Let $S = A^k \times B^k$. Clearly, this set represents all of the compositions we care about.  
+> Then $\Phi_S(x) = \Phi_A(x)^k \Phi_B(x)^k$, by the product lemma.  
+> Clearly, $\Phi_A(x) = x^5 + x^6 + x^7 + \ldots = \frac{x^5}{1 - x}$ and $\Phi_B(x) = x^3 + x^6 + x^9 + \ldots = \frac{x^3}{1 - x^3}$.  
+> So $\Phi_S(x) = \left(\frac{x^5}{1 - x}\right)^k \left(\frac{x^3}{1 - x^3}\right) = \frac{x^{8k}}{(1 - x)^k(1 - x^3)^k}$.  
+> So there are $[x^n]\Phi_S(x) = \left(\frac{x^5}{1 - x}\right)^k \left(\frac{x^3}{1 - x^3}\right)$ of these compositions.  
+
+How many compositions of $n$ have odd parts?
+
+> Let $A = \set{1, 3, 5, \ldots}, S = A^0 \cup A^1 \cup \ldots$.  
+> Then $\Phi_S(x) = \Phi_A(x)^0 + \ldots + \Phi_A(x)^k = \sum_{i = 0}^k \left(\frac{x}{1 - x^2}\right)^k = \frac{1}{1 - \frac{x}{1 - x^2}}$.  
+> Solving as above, there are $[x^n]\frac{1 - x^2}{1 - x - x^2}$ compositions of $n$ with odd parts.  
+> Solving the recurrence relation, we get  ;wip
+> Clearly, $\abs{S_n} = \abs{S_{n - 1}} + \abs{S_{n - 2}}$.  
+
+The Fibonnaci recurrence is defined as $a_0 = 1, a_1 = 1, a_n = a_{n - 1} + a_{n - 2}$.

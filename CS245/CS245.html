@@ -258,6 +258,43 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>We usually prove sets are adequate by defining the connectives in a set that is already known to be adequate in terms of the connectives of this set. If a connective <span class="math">\(f\)</span> is definable in terms of a set of connectives <span class="math">\(A\)</span>, and every connective in that set is definable in terms of another set <span class="math">\(B\)</span>, then <span class="math">\(f\)</span> is definable in terms of <span class="math">\(B\)</span>.</p>
 <p>This is because we could define <span class="math">\(f\)</span> first in terms of <span class="math">\(A\)</span>, and then define that in terms of <span class="math">\(B\)</span>.</p>
 <p>For example, <span class="math">\(\set{\wedge, \neg}\)</span> is adequate because <span class="math">\(\wedge\)</span> and <span class="math">\(\neg\)</span> are already in the set, and <span class="math">\(A \vee B \equiv \neg((\neg A) \wedge (\neg B))\)</span>, so <span class="math">\(\vee\)</span> is definable in terms of <span class="math">\(\set{\wedge, \neg}\)</span>.</p>
+<h1 id="section-4">26/5/14</h1>
+<p>The Schroder connective is defined as <span class="math">\(A \downarrow B\)</span> where <span class="math">\(A \downarrow B \equiv \neg (A \wedge B)\)</span> - the NAND operation.</p>
+<p><span class="math">\(\set{\neg, \rightarrow}\)</span> is an adequate set.</p>
+<h2 id="proof-calculus">Proof Calculus</h2>
+<p>We want a calculus for reasoning about propositional logic. This will allow us to simplify proofs of validity.</p>
+<p>In this course we will be looking at the Hilbert and natural deduction systems for formal proof calculus.</p>
+<p>The <strong>Hilbert System</strong> is a deductive system over the set of propositioal logic formulas.</p>
+<p><span class="math">\(\Sigma \models d\)</span> is the same as <span class="math">\(\forall t, \Sigma^t = 1 \implies d^t = 1\)</span>.</p>
+<p><span class="math">\(\Sigma \vdash \alpha\)</span> means that <span class="math">\(\alpha\)</span> is provable or deducible from <span class="math">\(\Sigma\)</span>. <span class="math">\(\Sigma \vdash_H \alpha\)</span> means that <span class="math">\(\alpha\)</span> is provable or deducible in the Hilbert system. <span class="math">\(\vdash_H A\)</span> means <span class="math">\(\emptyset \vdash_H A\)</span>.</p>
+<p><span class="math">\(\Sigma\)</span> is a set of formulas known as premises, and from them we can deduce <span class="math">\(\delta\)</span> using axioms and inference rules.</p>
+<p>Axioms are basically just tautologies. In this course we will only be using axioms over <span class="math">\(\set{\neg, \rightarrow}\)</span> since this set is small and results in fewer axioms:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(\phi \rightarrow (\psi \rightarrow \phi)\)</span></li>
+<li><span class="math">\((\phi \rightarrow (\psi \rightarrow \xi)) \rightarrow ((\phi \rightarrow \psi) \rightarrow (\phi \rightarrow \xi))\)</span></li>
+<li><span class="math">\((\neg \phi \rightarrow \neg \psi) \rightarrow (\psi \rightarrow \phi)\)</span></li>
+</ol>
+<p>Here, <span class="math">\(\phi, psi, \xi\)</span> are any formulas.</p>
+<p><strong>Inference rules</strong> are manipulations we can perform on formulas to obtain new formulas. In this system we have only Modus Ponens (MP): <span class="math">\(\set{\phi, \phi \rightarrow \psi} \rightarrow_H \psi\)</span>.</p>
+<p>A <strong>proof</strong> is a set of formulas that includes axioms, premises, and conclusions. We start with the axioms that we know are true, so we use inference rules over the axioms and previously obtained formulas, listing out each new formula obtained, until we get the desired result.</p>
+<p>For example, prove that <span class="math">\(\vdash_H A \rightarrow A\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(A \rightarrow ((A \rightarrow A) \rightarrow A)\)</span> (Axiom 1)</li>
+<li><span class="math">\((A \rightarrow ((A \rightarrow A) \rightarrow A)) \rightarrow ((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))\)</span> (Axiom 2 where <span class="math">\(\psi = A \rightarrow A\)</span>)</li>
+<li><span class="math">\((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A)\)</span> (Modus Ponens on 1 and 2)</li>
+<li><span class="math">\(A \rightarrow A\)</span> (Modus Ponens on 1 and 3)</li>
+</ol>
+<p>Prove that <span class="math">\(\set{A \rightarrow B, B \rightarrow C} \vdash_H A \rightarrow C\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(A \rightarrow B\)</span> (Premise 1)</li>
+<li><span class="math">\(B \rightarrow C\)</span> (Premise 2)</li>
+<li><span class="math">\(((B \rightarrow C) \rightarrow (A \rightarrow (B \rightarrow C)))\)</span> (Axiom 1 where <span class="math">\(\phi = A \rightarrow B\)</span>)</li>
+<li><span class="math">\(A \rightarrow (B \rightarrow C)\)</span> (Modus Ponens on 1 and 3)</li>
+<li><span class="math">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))\)</span> (Axiom 2)</li>
+<li><span class="math">\((A \rightarrow B) \rightarrow (A \rightarrow C)\)</span> (Modus Ponens on 4 and 5)</li>
+<li><span class="math">\(A \rightarrow C\)</span> (Modus Ponens on 1 and 6)</li>
+</ol>
+<p>The <strong>deduction theorem</strong> says that <span class="math">\(\Sigma \vdash_H A \rightarrow B\)</span> if and only if <span class="math">\(\Sigma \cup A \vdash_H B\)</span>. So <span class="math">\(\set{\alpha_1, \ldots, \alpha_n} \vdash_H \alpha\)</span> is the same as <span class="math">\(\emptyset \vdash_H (\alpha_1 \rightarrow (\ldots (alpha_n \rightarrow \alpha) \ldots))\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

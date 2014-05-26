@@ -321,7 +321,7 @@ A      C    D
 <ol style="list-style-type: decimal">
 <li>Assign one node to be the ground/reference node - <span class="math">\(V_{ref} = 0\)</span>. This is the reference zero voltage, and can be any node, not necessarily the one with the lowest voltage. We draw a ground symbol (;wip: symbol) connected to that node in order to denote this.</li>
 <li>Write down equations implied by voltage sources to calculate voltage relations between nodes. For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: <span class="math">\(V_{positive} = 5V + V_{negative}\)</span>.</li>
-<li>For each node we assume all currents are <strong>leaving the node</strong>, and write down the equations implied by KCL - <span class="math">\(I_1 + \dots I_n = 0\)</span> at each node.</li>
+<li>For each node we assume all currents are <strong>leaving the node</strong>, and write down the equations implied by KCL - <span class="math">\(I_1 + \dots I_n = 0\)</span> at each node. Substitute the values implied by current sources.</li>
 <li>Write each <span class="math">\(I_1, \ldots, I_n\)</span> in terms of voltage, generally using resistance and Ohm's law for resistors. Now we have a set of equations in terms of node voltages.</li>
 <li>Optionally, we can do the same thing with KVL relations, and add these equations to the set of voltage equations as well.</li>
 <li>Solving the system, we get the voltages at each node. Using this, it is possible to calculate the current at each node as well.</li>
@@ -331,7 +331,11 @@ A      C    D
 <p>If we have a resistor <span class="math">\(r\)</span> and the voltages at the terminals are <span class="math">\(V_1\)</span> and <span class="math">\(V_2\)</span>, and the current is travelling from <span class="math">\(V_2\)</span> to <span class="math">\(V_1\)</span>, then the current is <span class="math">\(I = \frac{V_2 - V_1} r\)</span>. The voltage on the side the current is flowing out of for a resistor is always lower than the side it is flowing into - current always flows toward lower voltage.</p>
 <p>The unknowns in nodal analysis are the node voltages. Each branch current is represented in terms of node voltage.</p>
 <p>KCL can be used directly when there is only one unknown current in the path, and KVL can be used directly when there is only one unknownn voltage in the loop. Otherwise, we need to write out and solve the system of equations.</p>
-<p>;wip: schedule appointment with prof to go over the missed lecture</p>
+<h1 id="section-9">26/5/14</h1>
+<h2 id="supernodes">Supernodes</h2>
+<p>A <strong>supernode</strong> is an area of a circuit possibly consisting of nodes or circuit elements, where KCL holds. In other words, it is an area of the circuit where the current leaving is the same as the current entering.</p>
+<p>In fact, all areas of a circuit obey KCL. So we can actually apply KCL over bigger areas of the circuit.</p>
+<p>The most common use of supernodes is to collapse multiple nodes that are connected together into a single node. This simplifies calculations significantly.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -396,7 +396,7 @@ Procedure:
 
 1. Assign one node to be the ground/reference node - $V_{ref} = 0$. This is the reference zero voltage, and can be any node, not necessarily the one with the lowest voltage. We draw a ground symbol (;wip: symbol) connected to that node in order to denote this.
 2. Write down equations implied by voltage sources to calculate voltage relations between nodes. For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: $V_{positive} = 5V + V_{negative}$.
-3. For each node we assume all currents are **leaving the node**, and write down the equations implied by KCL - $I_1 + \dots I_n = 0$ at each node.
+3. For each node we assume all currents are **leaving the node**, and write down the equations implied by KCL - $I_1 + \dots I_n = 0$ at each node. Substitute the values implied by current sources.
 4. Write each $I_1, \ldots, I_n$ in terms of voltage, generally using resistance and Ohm's law for resistors. Now we have a set of equations in terms of node voltages.
 5. Optionally, we can do the same thing with KVL relations, and add these equations to the set of voltage equations as well.
 6. Solving the system, we get the voltages at each node. Using this, it is possible to calculate the current at each node as well.
@@ -411,4 +411,13 @@ The unknowns in nodal analysis are the node voltages. Each branch current is rep
 
 KCL can be used directly when there is only one unknown current in the path, and KVL can be used directly when there is only one unknownn voltage in the loop. Otherwise, we need to write out and solve the system of equations.
 
-;wip: schedule appointment with prof to go over the missed lecture
+# 26/5/14
+
+Supernodes
+----------
+
+A **supernode** is an area of a circuit possibly consisting of nodes or circuit elements, where KCL holds. In other words, it is an area of the circuit where the current leaving is the same as the current entering.
+
+In fact, all areas of a circuit obey KCL. So we can actually apply KCL over bigger areas of the circuit.
+
+The most common use of supernodes is to collapse multiple nodes that are connected together into a single node. This simplifies calculations significantly.

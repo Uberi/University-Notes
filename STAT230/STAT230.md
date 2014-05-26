@@ -326,10 +326,48 @@ The **partition rule** states that if $A_1 \cup \ldots \cup A_k = S$ where $A_1,
 
 This is because $B = B \cap A_1 \cup \ldots \cup B \cap A_k$, and $B \cap A_i$ is mutually exclusive with any $B \cap A_j$ when $i \ne j$. So $P(B) = P(B \cap A_1 \cup \ldots \cup B \cap A_k) = P(B \cap A_1) + \ldots + P(B \cap A_k)$.
 
-A **tree diagram** is a diagram that helps represent conditional probabilities by showing the possibilities of several runs of an experiement as a tree. For example, we might draw a tree for flips of a coin, with each level being a subsequent fliip of the coin.
+A **tree diagram** is a diagram that helps represent conditional probabilities by showing the possibilities of several runs of an experiement as a tree. For example, we might draw a tree for flips of a coin, with each level being a subsequent flip of the coin.
+
+When we move downwards in a tree, we multiply the probabilities together. When we include other nodes, we do a union and add the probabilities.
 
 We label the edges of the tree with the probability of the child occurring given that all the parent events have occurred. So in the above example, the root node has labels $P(H)$ and $P(T)$, while the second level nodes have $P(H \mid H), P(T \mid H), P(H \mid T), P(T \mid T)$.
 
 If we want the probability of a particular sequence of outcomes, then we would travel down the tree multplying by edges when we encounter them. So in the above example, the probability of getting a heads, and then another heads is $P(H \cap H) = P(H) P(H \mid H) = 0.25$.
 
 We are eventually going to develop **Bayes Theorem**, which is $P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B \mid \overline A) P(A) + B(B \mid A) P(A)}$.
+
+# 26/5/14
+
+$P(A \mid B) = 1 - P(\overline A \mid B) \ne 1 - P(A \mid \overline B)$.
+
+If $P(H \cap M) = 0.1$ and $P(H \cap \overline M) = 0.15$, find $P(M \mid H)$:
+
+> Clearly, $P(H) = P(H \cap M) + P(H \cap \overline M) = 0.25$.  
+> Clearly, $P(M \mid H) = \frac{P(M \cap H)}{P(H)} = \frac{0.1}{0.25} = 0.4$.  
+
+Discrete Random Variables/Probability Models
+--------------------------------------------
+
+Probability models are used to describe outcomes associated with random processes.
+
+Until this point we have been using sets in sample spaces to describe these outcomes.
+
+Now we introduce **random variables**. A random variable is a function that assigns a real number in a set $A$ to each outcome in a sample space $S$. They are denoted with capital letters $X, Y, \ldots$ and their values are denoted with lowercase letters $x, y, \ldots$.
+
+Random variables are defined for every outcome of an experiment - $X: S \to A$.
+
+For example, if $S$ is the set of possible results of 3 coin tosses, $\set{TTT, TTH, THT, THH, HTT, HTH, HHT, HHH}$, we might have a random variable $X$ map each outcome in $S$ to the number of heads in that outcome.
+
+We can also invert $X$ to get a set of all outcomes in $S$ for a given value $x$.
+
+We are interested in finding $P(X = x)$. This is the probability that $x$ occurs, and random variables give us new tools to work with them. In the above example, $P(X = 3) = \frac 1 8$ because there is 1 outcome with 3 heads and 8 outcomes total.
+
+There are two types of random variables - **discrete** and **continuous**. Discrete variables can only take on finite or countably infinite (like natural numbers) values. Continuous variables can take on values in some interval of real numbers.
+
+The **probability function/probability mass function** (PMF/PF) of a random variable $X$ is $f(x) = P(X = x)$, defined for all $x \in A$. $f(x)$ is a probability function if and only if $f(x) \ge 0$ and $\sum_{x \in A} f(x) = 1$. So $0 \le f(x) \le 1$.
+
+In the above example, $f(x) = \begin{cases} P(\set{TTT}) &\text{if } x = 0 \\ P(\set{HTT, THT, TTH}) &\text{if } x = 1 \\ P(\set{HHT, HTH, THH}) &\text{if } x = 2 \\ P(\set{HHH}) &\text{if } x = 3 \end{cases} = \begin{cases} \fraac 1 8 &\text{if } x = 0 \\ \frac 3 8 &\text{if } x = 1 \\ \frac 3 8 &\text{if } x = 2 \\ \frac 1 8 &\text{if } x = 3 \end{cases}$.
+
+Let $f(x) = \frac{kx}{2 + x}$ be a probability function that gives $x \in \set{1, 2, 3, 4, 5}$. Clearly, $k$ must satisfy $f(1) + f(2) + f(3) + f(4) + f(5) = 1 = \frac k 3 + \frac {2k} 4 + \frac {3k} 5 + \frac {4k} 6 + \frac {5k} 7 = \frac {140k + 105k + 84k + 70k + 60k} {420} = \frac{459}{420}k$, so $k = \frac{420}{459}$.
+
+The Cumulative Distribution Function is $F(x) = P(X \le x) = \sum_{u \le x} f(u)$. It is always true that $\lim_{x \to -\infty} F(x) = 0$ and $\lim_{x \to \infty} F(x) = 1$. Therefore, $f(x) = F(x) - F(x - 1)$ and $P(X = x) = P(X \le x) - P(X \le x - 1)$.
