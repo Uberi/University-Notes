@@ -510,12 +510,52 @@ How many compositions of $n$ exist such that there are $2k$ parse, where the fir
 > So $\Phi_S(x) = \left(\frac{x^5}{1 - x}\right)^k \left(\frac{x^3}{1 - x^3}\right) = \frac{x^{8k}}{(1 - x)^k(1 - x^3)^k}$.  
 > So there are $[x^n]\Phi_S(x) = \left(\frac{x^5}{1 - x}\right)^k \left(\frac{x^3}{1 - x^3}\right)$ of these compositions.  
 
+The Fibonnaci recurrence is defined as $a_0 = 1, a_1 = 1, a_n = a_{n - 1} + a_{n - 2}$.
+
 How many compositions of $n$ have odd parts?
 
 > Let $A = \set{1, 3, 5, \ldots}, S = A^0 \cup A^1 \cup \ldots$.  
 > Then $\Phi_S(x) = \Phi_A(x)^0 + \ldots + \Phi_A(x)^k = \sum_{i = 0}^k \left(\frac{x}{1 - x^2}\right)^k = \frac{1}{1 - \frac{x}{1 - x^2}}$.  
 > Solving as above, there are $[x^n]\frac{1 - x^2}{1 - x - x^2}$ compositions of $n$ with odd parts.  
-> Solving the recurrence relation, we get  ;wip
+> Let $S_n$ be the set of the compositions of $n$. Then $\abs{S_n} = [x^n]\frac{1 - x^2}{1 - x - x^2}$.  
+> Solving the recurrence relation, we get $\Phi_S(x) = 1 - x^2 = (1 - x - x^2)$ ;wip
 > Clearly, $\abs{S_n} = \abs{S_{n - 1}} + \abs{S_{n - 2}}$.  
+> We can therefore define a bijection $f: S_n \to S_{n - 1} \cup S_{n - 2}$. One possible bijection is to remove the last element if it is 1, and if it is greater than 1 subtract 2. So $(1, 3, 1) \to (1, 3)$ and $(1, 3, 5) \to (1, 3, 3)$.  
+> We can write this as $f(a_1, \ldots, a_k) = \begin{cases} (a_1, \ldots, a_{k - 1}) &a_k = 1 \\ (a_1, \ldots, a_{k - 1}, a_k - 2) &a_k > 1 \end{cases}$.  
+> We can also define the inverse $f^{-1}: S_{n - 1} \cup S_{n - 2} \to S_n$. In the above case, this would be $f^{-1}(b_1, \ldots, b_k) = \begin{cases} (b_1, \ldots, b_k + 2) &b_1 + \ldots + b_k = n - 2 \\ (b_1, \ldots, b_k, 1) &b_1 + \ldots + b_k = n - 1 \end{cases}$.  
+> So $S_n = \set{f^{-1}(a_1, \ldots, a_k) \middle| x \in S_{n - 1}} \cup \set{f^{-1}(a_1, \ldots, a_k) \middle| x \in S_{n - 2}}$.  
+> So using this, $S_6$ can be found by finding $S_5$ and $S_4$ and applying $f$ to every element in their union. Likewise, $S_5$ and $S_4$ can be found by finding $S_3$ and $S_2$, and so on. This allows us to easily compute these compositions recursively.  
 
-The Fibonnaci recurrence is defined as $a_0 = 1, a_1 = 1, a_n = a_{n - 1} + a_{n - 2}$.
+# 28/5/14
+
+Binary Strings
+--------------
+
+A **binary string** is a sequence of 0 and 1. The length is the total number of these digits.
+
+There is one string with length 0 denoted $\epsilon$. It is called the **empty string**.
+
+The **concatenation** of binary strings $a$ and $b$ is $ab$ - we put all the digits of $b$ after $a$ to form a new binary string.
+
+A **substring** of $a$ is a string $c$ such that there exist strings $b, d$ such that $a = bcd$.
+
+A **block** is a substring of all 1 that has no 1 on either sides, or all 0 with no 0 on either side. It is the largest possible run of a digit.
+
+We often want to know how many binary strings of length $n$ have certain properties.
+
+We first construct a set $S$ of all strings with the given properties. Then, we define $w(s)$ as the length of the string $s$. Then we find $\Phi(S)(x)$ and the answer is $[x^n]\Phi(S)(x)$.
+
+### Regular Expressions
+
+Let $A, B$ be sets of strings.
+
+Then $AB = \set{ab \middle| a \in A, b \in B}$. This is somewhat similar to the Cartesian product, but is not always the same. Basically, we 
+
+Then $A^n = AAA\ldotsAAA$, $n$ times. So $A^0 = \set{\epsilon}, A^1 = A, A^2 = AA, \ldots$. So $00101 \in \set{0, 1}^5$.
+
+Then $A* = A^0 \cup A^1 \cup A^2 \cup \ldots$. This is the binary strings that can be made by concatinating combinations of $A$. For example, $\set{0, 1}*$ is the set of all possible binary strings.
+
+For example, $\set{0}\set{00}*$ is the set of all binary strings of all 0 of odd length. This is because it can be expanded to $\set{0, 000, 00000, \ldots}$.
+
+Another example is $\set{0}*(\set{1}\set{0}*)*$. This is the set of all possible binary strings, because given an arbitrary binary string, it can start with any number of 0 to be in $\set{0}*$, and if we break the remaining string into pieces just before every 1, each piece is in $\set{1}\set{0}*$.
+

@@ -188,7 +188,7 @@ If $V(t) = 3e^{-t} V$ and $I = 3e^{-t} A$, then $P = V(t) I(t) = 6e^{-2t} W$, an
 Kirchoff's Current Law (KCL)
 ----------------------------
 
-A **node** is a junction where two or more circuit elements are connected. It is the entire connection between these elements. These are usually connected pieces of wire.
+A **node** is a junction where two or more circuit elements are connected. It is the entire connection between these elements, not any particular point in the circuit. These are usually pieces of wire connecting circuit elements.
 
 Current cannot sit around in a node. That means that the current entering a node should be the same as the current leaving.
 
@@ -225,8 +225,6 @@ When we analyze circuits and we don't know which direction the current is flowin
 If a power source $V_x$ has current flowing into it from the negative terminal at voltage $V_a$, then the voltage of the current flowing out of the positive terminal is $V_b = V_a + V_x$.
 
 If the current is flowing into the power source from the positive terminal $V_b$, then the voltage of the current flowing out of the negative terminal is $V_a = V_b - V_x$.
-
-;wip
 
 The closed loop does not have to be an actual subcircuit - the points making up the loop do not need to be connected in any way.
 
@@ -395,11 +393,10 @@ Also known as node voltage analysis. We use KCL and KVL and Ohm's law to write d
 Procedure:
 
 1. Assign one node to be the ground/reference node - $V_{ref} = 0$. This is the reference zero voltage, and can be any node, not necessarily the one with the lowest voltage. We draw a ground symbol (;wip: symbol) connected to that node in order to denote this.
-2. Write down equations implied by voltage sources to calculate voltage relations between nodes. For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: $V_{positive} = 5V + V_{negative}$.
+2. Write out the equations implied by voltage sources to calculate voltage relations between nodes. For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: $V_{positive} = 5V + V_{negative}$.
 3. For each node we assume all currents are **leaving the node**, and write down the equations implied by KCL - $I_1 + \dots I_n = 0$ at each node. Substitute the values implied by current sources.
 4. Write each $I_1, \ldots, I_n$ in terms of voltage, generally using resistance and Ohm's law for resistors. Now we have a set of equations in terms of node voltages.
-5. Optionally, we can do the same thing with KVL relations, and add these equations to the set of voltage equations as well.
-6. Solving the system, we get the voltages at each node. Using this, it is possible to calculate the current at each node as well.
+5. Solving the system, we get the voltages at each node. Using this, it is possible to calculate the current at each node as well.
 
 The **essential nodes** of a circuit are those nodes that connect three or more circuit elements.
 
@@ -421,3 +418,32 @@ A **supernode** is an area of a circuit possibly consisting of nodes or circuit 
 In fact, all areas of a circuit obey KCL. So we can actually apply KCL over bigger areas of the circuit.
 
 The most common use of supernodes is to collapse multiple nodes that are connected together into a single node. This simplifies calculations significantly.
+
+# 27/5/14
+
+This is the reason we consider essential nodes only when doing nodal analysis - nodes that only connect two circuit elements can have both circuit elements be collapsed into one supernode.
+
+When we have a voltage source, we often consider it and both its terminals as a supernode, and then write an extra voltage equation.
+
+Mesh Analysis
+-------------
+
+Nodal analysis focuses on the voltage at each node. Mesh analysis focuses on the current in each loop.
+
+A **loop** in this context is a closed path that starts at a node and passes through adjoining elements until it reaches the starting node again. Unlike with KVL, they must all be connected by wire.
+
+A **branch** is zero or more elements connected in series. A branch is basically an area where the current is the same - the current equivalent of a node, where the voltage is the same.
+
+A **mesh** is a loop that does not contain any other loops within it. It is basically the smallest possible unit of loop possible in a circuit.
+
+Every mesh has a mesh current - virtual current that flows along the mesh. We pretend that the current flows only along the mesh, so we only have to consider the mesh and not connecting elements. We usually assume the mesh current is going clockwise for consistency purposes.
+
+We can write branch current in terms of mesh currents. All we have to do for each branch is to add up all the mesh currents that the branch is part of. For example, if a branch forms an edge in one mesh has a mesh current of 1A and another mesh with -2A, then the branch current is -1A. Basically, we superimpose the mesh currents over each other to get the branch currents.
+
+The basic procedure is as follows:
+
+1. Identify and label the meshes and branches.
+2. Write out the branch currents in terms of the mesh currents.
+3. Write out KVL equations for each mesh in terms of the branch currents, and substitute the mesh currents in.
+4. Solve system of equations to obtain the mesh currents.
+5. Use mesh currents to determine branch currents.

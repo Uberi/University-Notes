@@ -264,22 +264,23 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <h2 id="proof-calculus">Proof Calculus</h2>
 <p>We want a calculus for reasoning about propositional logic. This will allow us to simplify proofs of validity.</p>
 <p>In this course we will be looking at the Hilbert and natural deduction systems for formal proof calculus.</p>
-<p>The <strong>Hilbert System</strong> is a deductive system over the set of propositioal logic formulas.</p>
+<h3 id="hilbert-system">Hilbert System</h3>
+<p>The <strong>Hilbert System</strong> is a deductive system over the set of propositional logic formulas.</p>
 <p><span class="math">\(\Sigma \models d\)</span> is the same as <span class="math">\(\forall t, \Sigma^t = 1 \implies d^t = 1\)</span>.</p>
 <p><span class="math">\(\Sigma \vdash \alpha\)</span> means that <span class="math">\(\alpha\)</span> is provable or deducible from <span class="math">\(\Sigma\)</span>. <span class="math">\(\Sigma \vdash_H \alpha\)</span> means that <span class="math">\(\alpha\)</span> is provable or deducible in the Hilbert system. <span class="math">\(\vdash_H A\)</span> means <span class="math">\(\emptyset \vdash_H A\)</span>.</p>
 <p><span class="math">\(\Sigma\)</span> is a set of formulas known as premises, and from them we can deduce <span class="math">\(\delta\)</span> using axioms and inference rules.</p>
 <p>Axioms are basically just tautologies. In this course we will only be using axioms over <span class="math">\(\set{\neg, \rightarrow}\)</span> since this set is small and results in fewer axioms:</p>
 <ol style="list-style-type: decimal">
-<li><span class="math">\(\phi \rightarrow (\psi \rightarrow \phi)\)</span></li>
-<li><span class="math">\((\phi \rightarrow (\psi \rightarrow \xi)) \rightarrow ((\phi \rightarrow \psi) \rightarrow (\phi \rightarrow \xi))\)</span></li>
-<li><span class="math">\((\neg \phi \rightarrow \neg \psi) \rightarrow (\psi \rightarrow \phi)\)</span></li>
+<li><span class="math">\(\phi \rightarrow (\psi \rightarrow \phi)\)</span> - basically, this is just a special case of</li>
+<li><span class="math">\((\phi \rightarrow (\psi \rightarrow \xi)) \rightarrow ((\phi \rightarrow \psi) \rightarrow (\phi \rightarrow \xi))\)</span> - basically, <span class="math">\(\rightarrow\)</span> is distributive</li>
+<li><span class="math">\((\neg \phi \rightarrow \neg \psi) \rightarrow (\psi \rightarrow \phi)\)</span> - basically, the contrapositive of a formula implies the formula</li>
 </ol>
 <p>Here, <span class="math">\(\phi, psi, \xi\)</span> are any formulas.</p>
 <p><strong>Inference rules</strong> are manipulations we can perform on formulas to obtain new formulas. In this system we have only Modus Ponens (MP): <span class="math">\(\set{\phi, \phi \rightarrow \psi} \rightarrow_H \psi\)</span>.</p>
 <p>A <strong>proof</strong> is a set of formulas that includes axioms, premises, and conclusions. We start with the axioms that we know are true, so we use inference rules over the axioms and previously obtained formulas, listing out each new formula obtained, until we get the desired result.</p>
 <p>For example, prove that <span class="math">\(\vdash_H A \rightarrow A\)</span>:</p>
 <ol style="list-style-type: decimal">
-<li><span class="math">\(A \rightarrow ((A \rightarrow A) \rightarrow A)\)</span> (Axiom 1)</li>
+<li><span class="math">\(A \rightarrow ((A \rightarrow A) \rightarrow A)\)</span> (Axiom 1 where <span class="math">\(\psi = A \rightarrow A\)</span>)</li>
 <li><span class="math">\((A \rightarrow ((A \rightarrow A) \rightarrow A)) \rightarrow ((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))\)</span> (Axiom 2 where <span class="math">\(\psi = A \rightarrow A\)</span>)</li>
 <li><span class="math">\((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A)\)</span> (Modus Ponens on 1 and 2)</li>
 <li><span class="math">\(A \rightarrow A\)</span> (Modus Ponens on 1 and 3)</li>
@@ -295,6 +296,28 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <li><span class="math">\(A \rightarrow C\)</span> (Modus Ponens on 1 and 6)</li>
 </ol>
 <p>The <strong>deduction theorem</strong> says that <span class="math">\(\Sigma \vdash_H A \rightarrow B\)</span> if and only if <span class="math">\(\Sigma \cup A \vdash_H B\)</span>. So <span class="math">\(\set{\alpha_1, \ldots, \alpha_n} \vdash_H \alpha\)</span> is the same as <span class="math">\(\emptyset \vdash_H (\alpha_1 \rightarrow (\ldots (alpha_n \rightarrow \alpha) \ldots))\)</span>.</p>
+<h1 id="section-5">28/5/14</h1>
+<p>Prove that <span class="math">\(\neg \neg A \vdash_H A\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(\neg \neg A\)</span> (Premise 1)</li>
+<li><span class="math">\(\neg \neg A \rightarrow (\neg \neg \neg \neg A \rightarrow \neg \neg A)\)</span> (Axiom 1 where <span class="math">\(\psi = \neg \neg \neg \neg A\)</span>)</li>
+<li><span class="math">\(\neg \neg \neg \neg A \rightarrow \neg \neg A\)</span> (Modus Ponens on 1 and 2)</li>
+<li><span class="math">\((\neg (\neg \neg \neg A) \rightarrow \neg A) \rightarrow (\neg A \rightarrow \phi)\)</span> (Axiom 3 where <span class="math">\(\phi = \neg \neg \neg A\)</span>)</li>
+<li><span class="math">\(\neg A \rightarrow \neg \neg \neg A\)</span> (Modus Ponens on 3 and 4)</li>
+<li><span class="math">\((\neg A \rightarrow \neg \neg \neg A) \rightarrow (\neg \neg A \rightarrow A)\)</span> (Axiom 3 where <span class="math">\(\psi = \neg \neg A\)</span>)</li>
+<li><span class="math">\(\neg \neg A \rightarrow A\)</span> (Modus Ponens on 5 and 6)</li>
+<li><span class="math">\(A\)</span> (Modus Ponens on 1 and 7)</li>
+</ol>
+<p><span class="math">\(\Sigma \models \alpha\)</span> is a semantic construct. We use this to prove soundness.</p>
+<p><span class="math">\(\Sigma \vdash \alpha\)</span> is a syntactical construct. We use this to prove completeness.</p>
+<p>Formulas must be semantically entailed before it can be syntactically entailed. We need it to be semantically sound before proving it is complete.</p>
+<p>Here are some rules of thumb to more easily construct proofs.</p>
+<ul>
+<li>;wip</li>
+</ul>
+<h3 id="natural-deduction">Natural Deduction</h3>
+<p>Using proof rules, we infer a conclusion from the premises.</p>
+<p>;wip: finish this ;wip: box notation for proofs by contradiction - draw a box around statements starting from the assumption up to and including the contradiction.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

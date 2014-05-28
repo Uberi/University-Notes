@@ -401,6 +401,42 @@ int main() {
     f &lt;&lt; s &lt;&lt; endl;
 }</code></pre>
 <p>Note that we didn't have to close the file - C++ automatically closes it after we are done using it.</p>
+<h1 id="section-6">27/5/14</h1>
+<p>In C++, when we have a function that accepts arguments, we can also make an argument optional, and give it a default value when none is specified:</p>
+<pre><code>// default values can be given in the declaration or definition
+void printSuiteFile(int max, string filename = &quot;suite.txt&quot;) { // arbitrary numbers of optional parameters can appear after the required parameters
+    ifstream suite(filename.c_str()); // we have to convert it to a C style string because that&#39;s the only thing `ifstream` accepts
+}
+int main() {
+    printSuiteFile(5); // no argument specified, default value used
+    printSuiteFile(3, &quot;something.txt&quot;); // &quot;something.txt&quot; specified, default value ignored
+}</code></pre>
+<p><strong>Function overloading</strong> allows us to have functions with multiple definitions, each with unique signatures. C++ will look at the different signatures, and match each function call with the right definition:</p>
+<pre><code>int negate(int a) { return -a; }
+bool negate(bool a) { return !a; }
+negate(5); // calls the first one
+negate(true); // calls the second one</code></pre>
+<p>The signatures are matched based on the function name, the number of arguments, and the type of the arguments. There can only be one definition for a given combination of function name and argument types. Notice that the signature does not include the return type - a signature is something like <code>f(int x)</code>, not <code>int f(int x)</code>.</p>
+<p>It is also possible to do <strong>operator overloading</strong>. For example, <code>cin &gt;&gt; INTEGER_VAR</code> reads an integer while <code>cin &gt;&gt; STRING_VAR</code> reads a string - the <code>&gt;&gt;</code> operator is overloaded to read input from streams, as well as the right bit shift operator on integers.</p>
+<p>A declaration asserts the existance of an entity. A definition is the actual implementation of an entity. A definition must necessarily require a declaration. Declarations can be repeated as many times as we want, but there can only be one definition per entity.</p>
+<h2 id="strings-1">Strings</h2>
+<p>We can also do I/O on strings using streams, using the <code>sstream</code> library:</p>
+<pre><code>#include &lt;sstream&gt;
+int main() {
+    std::string value = &quot;2 5&quot;;
+    istringstream input(value); // string reader
+    ostringstream output; // string writer
+    output &lt;&lt; &quot;Enter a number between &quot; &lt;&lt; low &lt;&lt; &quot; and &quot; &lt;&lt; high;
+    int low, high; input &gt;&gt; low, input &gt;&gt; high;
+    std::string result = output.str();
+}</code></pre>
+<p>Note that we didn't have to use <code>clear</code> on the output stream, because although the failure flag was raised, we are simply making new streams every iteration of the loop.</p>
+<p>The string writer is useful for formatting text and converting numbers to strings. The string reader is useful for converting strings to numbers. When using string readers, it is important that we handle EOF.</p>
+<p>In C, strings were null-terminated char arrays that we had to do memory management on manually and were prone to buffer overruns. In C++, strings are part of the standard library, manage their own memory, and are much less prone to buffer overruns.</p>
+<p>Consider <code>string s = &quot;hello&quot;;</code>. <code>&quot;hello&quot;</code> is simply a char array with a null terminator, while <code>string</code> is a C++ string. C++ implicitly converts C-style strings into C++ strings (instances of <code>std::string</code>).</p>
+<p>However, C++ strings are not implicitly converted into C style strings. This becomes necessary for things like <code>ifstream</code>, which only accepts a C string for the file name. We can explicitly convert the C++ string into C style using <code>s.c_str()</code>.</p>
+<p>In C, we used <code>strcmp(a, b)</code> to compare strings, while <code>a == b</code> only compared pointers. In C++, we can simply use <code>a == b</code> or <code>a != b</code> to compare strings.</p>
+<p>We can also still use the <code>s[i]</code> notation that we can use in C. To concatenate two strings, we can use <code>a + b</code> instead of <code>strcat(a, b)</code>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

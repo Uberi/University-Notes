@@ -186,7 +186,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>Since <span class="math">\(P = \frac{\dee w}{\dee t}\)</span>, <span class="math">\(\Delta w = \int_{t_1}^{t_2} P(t) \dee t\)</span>.</p>
 <p>If <span class="math">\(V(t) = 3e^{-t} V\)</span> and <span class="math">\(I = 3e^{-t} A\)</span>, then <span class="math">\(P = V(t) I(t) = 6e^{-2t} W\)</span>, and <span class="math">\(\Delta w = \int_0^\infty 6e^{-2t} \dee t = 3 J\)</span>.</p>
 <h2 id="kirchoffs-current-law-kcl">Kirchoff's Current Law (KCL)</h2>
-<p>A <strong>node</strong> is a junction where two or more circuit elements are connected. It is the entire connection between these elements. These are usually connected pieces of wire.</p>
+<p>A <strong>node</strong> is a junction where two or more circuit elements are connected. It is the entire connection between these elements, not any particular point in the circuit. These are usually pieces of wire connecting circuit elements.</p>
 <p>Current cannot sit around in a node. That means that the current entering a node should be the same as the current leaving.</p>
 <p>Two elements are in <strong>series</strong> if they share a node and they have the same current.</p>
 <p>Kirchoff's Current Law says that the sum of all the currents entering any node is 0. When we do the net current sum, we represent the currents entering as positive, and the currents leaving as negative, so when we add them all together, they are 0.</p>
@@ -207,7 +207,6 @@ A      C    D
 <p>When we analyze circuits and we don't know which direction the current is flowing, we can assume that it is clockwise. If we later solve and get a negative value for the current, we can tell that it is actually going in the opposite direction.</p>
 <p>If a power source <span class="math">\(V_x\)</span> has current flowing into it from the negative terminal at voltage <span class="math">\(V_a\)</span>, then the voltage of the current flowing out of the positive terminal is <span class="math">\(V_b = V_a + V_x\)</span>.</p>
 <p>If the current is flowing into the power source from the positive terminal <span class="math">\(V_b\)</span>, then the voltage of the current flowing out of the negative terminal is <span class="math">\(V_a = V_b - V_x\)</span>.</p>
-<p>;wip</p>
 <p>The closed loop does not have to be an actual subcircuit - the points making up the loop do not need to be connected in any way.</p>
 <p>KVL works best when we can find a loop with only one unknown voltage. We should always check for these loops first.</p>
 <p>The passive sign convention means that voltage drops are positive and voltage gains are negative. We assume that all circuit elements are loads initially because the majority of circuit elements are often loads, and therefore we would encounter fewer negative numbers.</p>
@@ -320,10 +319,9 @@ A      C    D
 <p>Procedure:</p>
 <ol style="list-style-type: decimal">
 <li>Assign one node to be the ground/reference node - <span class="math">\(V_{ref} = 0\)</span>. This is the reference zero voltage, and can be any node, not necessarily the one with the lowest voltage. We draw a ground symbol (;wip: symbol) connected to that node in order to denote this.</li>
-<li>Write down equations implied by voltage sources to calculate voltage relations between nodes. For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: <span class="math">\(V_{positive} = 5V + V_{negative}\)</span>.</li>
+<li>Write out the equations implied by voltage sources to calculate voltage relations between nodes. For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: <span class="math">\(V_{positive} = 5V + V_{negative}\)</span>.</li>
 <li>For each node we assume all currents are <strong>leaving the node</strong>, and write down the equations implied by KCL - <span class="math">\(I_1 + \dots I_n = 0\)</span> at each node. Substitute the values implied by current sources.</li>
 <li>Write each <span class="math">\(I_1, \ldots, I_n\)</span> in terms of voltage, generally using resistance and Ohm's law for resistors. Now we have a set of equations in terms of node voltages.</li>
-<li>Optionally, we can do the same thing with KVL relations, and add these equations to the set of voltage equations as well.</li>
 <li>Solving the system, we get the voltages at each node. Using this, it is possible to calculate the current at each node as well.</li>
 </ol>
 <p>The <strong>essential nodes</strong> of a circuit are those nodes that connect three or more circuit elements.</p>
@@ -336,6 +334,24 @@ A      C    D
 <p>A <strong>supernode</strong> is an area of a circuit possibly consisting of nodes or circuit elements, where KCL holds. In other words, it is an area of the circuit where the current leaving is the same as the current entering.</p>
 <p>In fact, all areas of a circuit obey KCL. So we can actually apply KCL over bigger areas of the circuit.</p>
 <p>The most common use of supernodes is to collapse multiple nodes that are connected together into a single node. This simplifies calculations significantly.</p>
+<h1 id="section-10">27/5/14</h1>
+<p>This is the reason we consider essential nodes only when doing nodal analysis - nodes that only connect two circuit elements can have both circuit elements be collapsed into one supernode.</p>
+<p>When we have a voltage source, we often consider it and both its terminals as a supernode, and then write an extra voltage equation.</p>
+<h2 id="mesh-analysis">Mesh Analysis</h2>
+<p>Nodal analysis focuses on the voltage at each node. Mesh analysis focuses on the current in each loop.</p>
+<p>A <strong>loop</strong> in this context is a closed path that starts at a node and passes through adjoining elements until it reaches the starting node again. Unlike with KVL, they must all be connected by wire.</p>
+<p>A <strong>branch</strong> is zero or more elements connected in series. A branch is basically an area where the current is the same - the current equivalent of a node, where the voltage is the same.</p>
+<p>A <strong>mesh</strong> is a loop that does not contain any other loops within it. It is basically the smallest possible unit of loop possible in a circuit.</p>
+<p>Every mesh has a mesh current - virtual current that flows along the mesh. We pretend that the current flows only along the mesh, so we only have to consider the mesh and not connecting elements. We usually assume the mesh current is going clockwise for consistency purposes.</p>
+<p>We can write branch current in terms of mesh currents. All we have to do for each branch is to add up all the mesh currents that the branch is part of. For example, if a branch forms an edge in one mesh has a mesh current of 1A and another mesh with -2A, then the branch current is -1A. Basically, we superimpose the mesh currents over each other to get the branch currents.</p>
+<p>The basic procedure is as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Identify and label the meshes and branches.</li>
+<li>Write out the branch currents in terms of the mesh currents.</li>
+<li>Write out KVL equations for each mesh in terms of the branch currents, and substitute the mesh currents in.</li>
+<li>Solve system of equations to obtain the mesh currents.</li>
+<li>Use mesh currents to determine branch currents.</li>
+</ol>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

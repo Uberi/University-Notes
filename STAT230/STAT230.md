@@ -322,6 +322,8 @@ The **multiplication rule** states that $P(A \cap B) = P(A) P(B \mid A)$. Extend
 
 ### Partition Rule
 
+Disjoint events are those where $P(A \cap B) = 0$ and $A \cap B = \emptyset$.
+
 The **partition rule** states that if $A_1 \cup \ldots \cup A_k = S$ where $A_1, \ldots, A_k$ are disjoint sets (mutually exclusive), and $B$ is an event in $S$, then $P(B) = P(B \cap A_1) + \ldots + P(B \cap A_k) = \sum_{i = 1}^k P(B \mid A_i)P(A_i)$.
 
 This is because $B = B \cap A_1 \cup \ldots \cup B \cap A_k$, and $B \cap A_i$ is mutually exclusive with any $B \cap A_j$ when $i \ne j$. So $P(B) = P(B \cap A_1 \cup \ldots \cup B \cap A_k) = P(B \cap A_1) + \ldots + P(B \cap A_k)$.
@@ -368,6 +370,33 @@ The **probability function/probability mass function** (PMF/PF) of a random vari
 
 In the above example, $f(x) = \begin{cases} P(\set{TTT}) &\text{if } x = 0 \\ P(\set{HTT, THT, TTH}) &\text{if } x = 1 \\ P(\set{HHT, HTH, THH}) &\text{if } x = 2 \\ P(\set{HHH}) &\text{if } x = 3 \end{cases} = \begin{cases} \fraac 1 8 &\text{if } x = 0 \\ \frac 3 8 &\text{if } x = 1 \\ \frac 3 8 &\text{if } x = 2 \\ \frac 1 8 &\text{if } x = 3 \end{cases}$.
 
-Let $f(x) = \frac{kx}{2 + x}$ be a probability function that gives $x \in \set{1, 2, 3, 4, 5}$. Clearly, $k$ must satisfy $f(1) + f(2) + f(3) + f(4) + f(5) = 1 = \frac k 3 + \frac {2k} 4 + \frac {3k} 5 + \frac {4k} 6 + \frac {5k} 7 = \frac {140k + 105k + 84k + 70k + 60k} {420} = \frac{459}{420}k$, so $k = \frac{420}{459}$.
+For example, $f(x) = \frac{kx}{2 + x}$ is a probability function that gives $x \in \set{1, 2, 3, 4, 5}$. Clearly, $k$ must satisfy $f(1) + f(2) + f(3) + f(4) + f(5) = 1 = \frac k 3 + \frac {2k} 4 + \frac {3k} 5 + \frac {4k} 6 + \frac {5k} 7 = \frac {140k + 105k + 84k + 70k + 60k} {420} = \frac{459}{420}k$, so $k = \frac{420}{459}$.
 
-The Cumulative Distribution Function is $F(x) = P(X \le x) = \sum_{u \le x} f(u)$. It is always true that $\lim_{x \to -\infty} F(x) = 0$ and $\lim_{x \to \infty} F(x) = 1$. Therefore, $f(x) = F(x) - F(x - 1)$ and $P(X = x) = P(X \le x) - P(X \le x - 1)$.
+The Cumulative Distribution Function is $F(x) = P(X \le x) = \sum_{u \le x} f(u)$. It is always true that $\lim_{x \to -\infty} F(x) = 0$ and $\lim_{x \to \infty} F(x) = 1$. Therefore, $f(x) = F(x) - F(x - 1)$ and $P(X = x) = P(X \le x) - P(X \le x - 1)$. It is the probability of anything less than or equal to $x$ taking place.
+
+# 28/5/14
+
+For discrete probability functions, we can plot $f$ as a bar graph to get a probability distribution.
+
+For cumulative distribution functions, the plot of $F$ must always have a line segment $y = 0$ from $-\infty$ to the first value of $x$ at $y = 0$. The function itself appears as a step function, like the plot of $\floor{x}$. At the far right side the last value should always be a line segment with $y = 1$ from the last value of $x$ to $\infty$.
+
+So if $x \in \set{1, 2, 3, 4}$, and $F(2) = P(x \le 2) = 0.5$, then $F(2.5) = P(x \le 2.5) = P(x \le 2) = 0.5$.
+
+Now we aim to identify common processes and problems that have certain probability distributions.
+
+For example, tossing a coin 10 times where $x$ represents the number of heads obtained, or examining 12 items from a factory lines and $x$ represents the number of items with no defects. These problems are similar in that each trial is independent, and there are two possible outcomes for each trial - the coin is either heads or tails, and the item is either defective or not. Additionally, the minimum value for $x$ is 0 and the maximum value is the number of trials. In fact, all of these can be represented using the **binomial distribution**, which will be looked at in depth later.
+
+$R$ is a free software package for statistical and probabilistic computation. It is commonly used in modern statisticss due to its ability to handle huge datasets.
+
+### Discrete Uniform Distribution
+
+If the random variable $x$ takes on values $a_1, \ldots, a_n$ where each value is equally likely, then $x$ has a discrete uniform distribution on the set $\set{a_1, \ldots, a_n}$, by definition.
+
+The probability of observing any of these is simply $\frac 1 {b - a + 1}$. The most common example of this is the rolling of a 6 sided dice several times.
+
+The cumulative distribution function would be $F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &x < 1 \\ \frac \floor{x} {b - a + 1} &1 \le x \le 6 \\ 1 & x > 6 \end{cases}$.
+
+If a 6-sided die is rolled 3 times, what is $F(x)$ and $f(x)$ where $x$ is the largest value rolled?
+
+> Clearly, $F(X) = P(x \le X) = \frac{x^3}{6^3}$, because there are $x^3$ possible outcomes where all the values are less than or equal to 3 and $6^3$ possible outcomes.  
+> So $f(x) = \frac{x^3 - (x - 1)^3}{6^3} = \frac{3x^2 - 3x + 1}{216}$.  
