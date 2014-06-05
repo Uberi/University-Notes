@@ -308,8 +308,9 @@ A      C    D
 <p>Voltage/current division uses two resistors in series or parallel, respectively. The factor for the value for <span class="math">\(R_1\)</span> is always <span class="math">\(\frac{R_2}{R_1 + R_2}\)</span>.</p>
 <p>To find the energy transferred over some time interval, we need to find the power and integrate it to find the energy.</p>
 <p>If the current comes out of the positive terminal of a circuit element, it is supplying power. If it goes into the positive terminal, the circuit element is adsorbing power.</p>
+<p>In summary, when two resistors <span class="math">\(R_1, R_2\)</span> are in parallel, the voltage over <span class="math">\(R_1\)</span> is <span class="math">\(V_1 = \frac{R_1}{R_1 + R_2} V_x\)</span> and the current is <span class="math">\(I_1 = \frac{R_2}{R_1 + R_2}I_x\)</span>.</p>
+<p>Voltage division uses the resistor we are measuring the voltage on in the numerator, while current division uses the other resistor.</p>
 <h1 id="section-7">20/5/14</h1>
-<p>;wip: there's some sort of make-up lecture soon</p>
 <p>When doing nodal analysis, it is often helpful to mentally collapse all the nodes into a point, so the circuit appears like a graph with nodes as vertices and circuit elements as edges. This helps us see relationships like parallel and series connections that might not otherwise be obvious.</p>
 <p>The order of circuit elements in series does not affect the current or voltage at the circuit ends. For example, a voltage source followed by a resistor is equivalent to a resistor followed by a voltage source at the two free ends.</p>
 <h1 id="section-8">22/5/14</h1>
@@ -318,8 +319,15 @@ A      C    D
 <p>Also known as node voltage analysis. We use KCL and KVL and Ohm's law to write down every relation we can find between different voltages, and then solve for the voltages.</p>
 <p>Procedure:</p>
 <ol style="list-style-type: decimal">
-<li>Assign one node to be the ground/reference node - <span class="math">\(V_{ref} = 0\)</span>. This is the reference zero voltage, and can be any node, not necessarily the one with the lowest voltage. We draw a ground symbol (;wip: symbol) connected to that node in order to denote this.</li>
-<li>Write out the equations implied by voltage sources to calculate voltage relations between nodes. For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: <span class="math">\(V_{positive} = 5V + V_{negative}\)</span>.</li>
+<li>Assign one node to be the ground/reference node - <span class="math">\(V_{ref} = 0\)</span>.
+<ul>
+<li>This is the reference zero voltage, and can be any node, not necessarily the one with the lowest voltage.</li>
+<li>We draw a ground symbol (;wip: symbol) connected to that node in order to denote this.</li>
+</ul></li>
+<li>Write out the equations implied by voltage sources to calculate voltage relations between nodes.
+<ul>
+<li>For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: <span class="math">\(V_{positive} = 5V + V_{negative}\)</span>.</li>
+</ul></li>
 <li>For each node we assume all currents are <strong>leaving the node</strong>, and write down the equations implied by KCL - <span class="math">\(I_1 + \dots I_n = 0\)</span> at each node. Substitute the values implied by current sources.</li>
 <li>Write each <span class="math">\(I_1, \ldots, I_n\)</span> in terms of voltage, generally using resistance and Ohm's law for resistors. Now we have a set of equations in terms of node voltages.</li>
 <li>Solving the system, we get the voltages at each node. Using this, it is possible to calculate the current at each node as well.</li>
@@ -337,6 +345,7 @@ A      C    D
 <h1 id="section-10">27/5/14</h1>
 <p>This is the reason we consider essential nodes only when doing nodal analysis - nodes that only connect two circuit elements can have both circuit elements be collapsed into one supernode.</p>
 <p>When we have a voltage source, we often consider it and both its terminals as a supernode, and then write an extra voltage equation.</p>
+<p>Voltage sources are the most common use of supernodes.</p>
 <h2 id="mesh-analysis">Mesh Analysis</h2>
 <p>Nodal analysis focuses on the voltage at each node. Mesh analysis focuses on the current in each loop.</p>
 <p>A <strong>loop</strong> in this context is a closed path that starts at a node and passes through adjoining elements until it reaches the starting node again. Unlike with KVL, they must all be connected by wire.</p>
@@ -352,6 +361,27 @@ A      C    D
 <li>Solve system of equations to obtain the mesh currents.</li>
 <li>Use mesh currents to determine branch currents.</li>
 </ol>
+<h1 id="section-11">28/5/14</h1>
+<p>;wip: mesh analysis continued, supermeshes</p>
+<p>Supermeshes are commonly used to deal with current sources.</p>
+<h1 id="section-12">29/5/14</h1>
+<p>So far we learned equivalent resistance, voltage/current division, nodal analysis, and mesh analysis. Using these techniques, we can solve any circuit.</p>
+<h2 id="superposition">Superposition</h2>
+<p>If we have multiple independent sources, we can actually consider the sources one at a time and then include their effects on voltage and current independently.</p>
+<p>We can do this with voltage and current because they are linear. Since power is not linear, we cannot use superposition with it directly.</p>
+<p>For each source, we consider the circuit when we remove the effects of all the other independent sources.</p>
+<p>For voltage sources, we remove their effect by replacing it with a wire - a short circuit.</p>
+<p>For current sources, we remove their effect by removing it entirely, leaving a blank space - an open circuit.</p>
+<p>Afterwards, we simply add up the currents or voltages to get the currents or voltages in the original circuit.</p>
+<p>This only works with independent sources. If there are dependent sources, we simply keep them instead of removing their effects. If there are dependent sources that are nonlinear, then we cannot use superposition at all - only dependent sources that multiply a current/voltage with a constant will work.</p>
+<h1 id="section-13">3/6/14</h1>
+<p>;wip: catch up</p>
+<p>;wip: thevenin equivalent circuits: any section of a circuit (using only linear elements) can be represented using a voltage source in series with a resistor</p>
+<p>;wip: the voltage source is set to the open circuit voltage of the element, represented by <span class="math">\(V_{th}\)</span>, then we calculate the thevenin resistance <span class="math">\(R_{th}\)</span></p>
+<h1 id="section-14">4/6/14</h1>
+<p>;wip: one method works if there are only independent sources. first, remove the effects of the sources from the circuit (short circuit voltage sources, open circuit current sources)</p>
+<p>;wip: if the circuit contains only independent sources, we get <span class="math">\(R_{th} = R_{eq}\)</span></p>
+<p>;wip: we can get the open circuit voltage by using nodal analysis on the original circuit (with sources and everything) - note that the circuit is open, so many wires are carrying 0 current and often resistors will have no voltage drop</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

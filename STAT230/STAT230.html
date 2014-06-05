@@ -279,13 +279,86 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>For example, tossing a coin 10 times where <span class="math">\(x\)</span> represents the number of heads obtained, or examining 12 items from a factory lines and <span class="math">\(x\)</span> represents the number of items with no defects. These problems are similar in that each trial is independent, and there are two possible outcomes for each trial - the coin is either heads or tails, and the item is either defective or not. Additionally, the minimum value for <span class="math">\(x\)</span> is 0 and the maximum value is the number of trials. In fact, all of these can be represented using the <strong>binomial distribution</strong>, which will be looked at in depth later.</p>
 <p><span class="math">\(R\)</span> is a free software package for statistical and probabilistic computation. It is commonly used in modern statisticss due to its ability to handle huge datasets.</p>
 <h3 id="discrete-uniform-distribution">Discrete Uniform Distribution</h3>
-<p>If the random variable <span class="math">\(x\)</span> takes on values <span class="math">\(a_1, \ldots, a_n\)</span> where each value is equally likely, then <span class="math">\(x\)</span> has a discrete uniform distribution on the set <span class="math">\(\set{a_1, \ldots, a_n}\)</span>, by definition.</p>
+<p>Preconditions:</p>
+<ul>
+<li>Multiple outcomes <span class="math">\(x_1, \ldots, x_n\)</span>.</li>
+<li>Every outcome is equally likely.</li>
+</ul>
+<p>If the above are satisfied, then if <span class="math">\(X\)</span> represents the index of the outcome in <span class="math">\(x_1, \ldots, x_n\)</span> that occurred, <span class="math">\(X\)</span> has a discrete uniform distribution.</p>
+<p>If the random variable <span class="math">\(X\)</span> takes on values <span class="math">\(a_1, \ldots, a_n\)</span> where each value is equally likely, then <span class="math">\(X\)</span> has a discrete uniform distribution on the set <span class="math">\(\set{a_1, \ldots, a_n}\)</span>, by definition.</p>
 <p>The probability of observing any of these is simply <span class="math">\(\frac 1 {b - a + 1}\)</span>. The most common example of this is the rolling of a 6 sided dice several times.</p>
 <p>The cumulative distribution function would be <span class="math">\(F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &amp;x &lt; 1 \\ \frac \floor{x} {b - a + 1} &amp;1 \le x \le 6 \\ 1 &amp; x &gt; 6 \end{cases}\)</span>.</p>
 <p>If a 6-sided die is rolled 3 times, what is <span class="math">\(F(x)\)</span> and <span class="math">\(f(x)\)</span> where <span class="math">\(x\)</span> is the largest value rolled?</p>
 <blockquote>
-<p>Clearly, <span class="math">\(F(X) = P(x \le X) = \frac{x^3}{6^3}\)</span>, because there are <span class="math">\(x^3\)</span> possible outcomes where all the values are less than or equal to 3 and <span class="math">\(6^3\)</span> possible outcomes.<br />So <span class="math">\(f(x) = \frac{x^3 - (x - 1)^3}{6^3} = \frac{3x^2 - 3x + 1}{216}\)</span>.</p>
+<p>Clearly, <span class="math">\(F(X) = P(x \le X) = \frac{x^3}{6^3}\)</span>, because there are <span class="math">\(x^3\)</span> possible outcomes where all the values are less than or equal to 3 and <span class="math">\(6^3\)</span> possible outcomes.<br />So <span class="math">\(f(X) = P(X = x) = \frac{x^3 - (x - 1)^3}{6^3} = \frac{3x^2 - 3x + 1}{216}\)</span>.</p>
 </blockquote>
+<h1 id="section-10">30/5/14</h1>
+<h3 id="hypergeometric-distribution">Hypergeometric Distribution</h3>
+<p>Preconditions:</p>
+<ul>
+<li>Objects are in sample space <span class="math">\(S\)</span>.</li>
+<li>Two outcomes - success and failure.</li>
+<li><span class="math">\(n\)</span> objects chosen from <span class="math">\(S\)</span> <strong>without replacement</strong>.</li>
+</ul>
+<p>If the above are satisfied, then if <span class="math">\(r\)</span> represents the total number of successes, and <span class="math">\(X\)</span> represents the number of observed successes, <span class="math">\(X\)</span> has a hyergeometric distribution and <span class="math">\(f(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}\)</span>, where <span class="math">\(r\)</span> is the total number of successes, <span class="math">\(x\)</span> is the number of successes observed, <span class="math">\(N = \abs{S}\)</span>, and <span class="math">\(n\)</span> is the number of objects selected.</p>
+<p>Given <span class="math">\(N\)</span> objects that have a boolean property <span class="math">\(P\)</span> (success), let <span class="math">\(r\)</span> represent the total number of successful objects, and let <span class="math">\(X\)</span> represent the number of successes observed.</p>
+<p>Then if we pick <span class="math">\(n\)</span> objects <strong>without replacement</strong>, <span class="math">\(X\)</span> has a hypergeometric distribution.</p>
+<p>The total number of arrangements is <span class="math">\(n \choose n\)</span>, and the number of ways to select successes is <span class="math">\(r \choose x\)</span>, and the number of ways to choose the failures is <span class="math">\(N - r \choose n - x\)</span>.</p>
+<p>So <span class="math">\(f(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}\)</span>, where <span class="math">\(\max(0, n - (N - r)) \le x \le \min(r, n)\)</span>. <span class="math">\(\max(0, n - (N - r))\)</span> is the minimum possible number of successes that must be chosen, . <span class="math">\(N\)</span> is the number of objects in <span class="math">\(S\)</span>, and <span class="math">\(r\)</span> is the ;wip</p>
+<p>Using the hypergeometric identity, we can prove that summing up all the the values of a hypergeometric distribution is 1.</p>
+<p>A box of 12 tins of tuna contains <span class="math">\(d\)</span> tainted cans. 7 inspected cans are inspected and found to not be tainted. What is the probability that none are tainted for <span class="math">\(d = 1, 2, 3\)</span>:</p>
+<blockquote>
+<p>Clearly, this is a selection done without replacement since once we inspect cans, we cannot inspect them again.<br />;wip</p>
+</blockquote>
+<h3 id="binomial-distribution">Binomial Distribution</h3>
+<p>Preconditions:</p>
+<ul>
+<li>Objects are in sample space <span class="math">\(S\)</span>.</li>
+<li>Two outcomes, success and failure.</li>
+<li>Multiple independent trials - objects chosen from <span class="math">\(S\)</span> <strong>with replacement</strong>.</li>
+<li>Same probability of success in each trial.</li>
+</ul>
+<p>If the above are satisfied, then if <span class="math">\(X\)</span> represents the number of observed successes, <span class="math">\(X\)</span> has a binomial distribution and <span class="math">\(f(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span> where <span class="math">\(n\)</span> is the number of objects selected, <span class="math">\(p = P(success)\)</span>.</p>
+<p>This is the same as the hypergeometric distribution, except our selection is done with replacement - every trial is independent. ;wip</p>
+<p><span class="math">\(X ~ \operatorname(Bin)(n, p)\)</span>. The <span class="math">\(n\)</span> is the number of the number of objects in <span class="math">\(S\)</span>, and <span class="math">\(p\)</span> is the probability of success for each object.</p>
+<p>These independent trials resulting in success/failure are known as <strong>Bernoulli trials</strong>. The process is known as the <strong>Bernoulli process</strong>.</p>
+<p>With <span class="math">\(x\)</span> successes and <span class="math">\(n - x\)</span> failures, there are <span class="math">\(n \choose x\)</span> ways of choosing them.</p>
+<p>So <span class="math">\(f(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span> where <span class="math">\(0 \le x \le n\)</span>.</p>
+<p>Given that we flip a coin 12 times, let <span class="math">\(X\)</span> be the number of heads obtained. What is the distribution of <span class="math">\(X\)</span>?</p>
+<blockquote>
+<p>Clearly, this is a binomial distribution since there are multiple independent trials, two outcomes, and equal probabilities of success.<br />Therefore, <span class="math">\(X\)</span> has a binomial distribution.</p>
+</blockquote>
+<p>The binomial distribution is not always symmetric and looks like a curve. The higher <span class="math">\(p\)</span> is, the heavier the graph is on the right.</p>
+<p>The binomial distribution is oftne used as a approximation for the hypergeometric distribution because it is easier to calculate and when the sample space is large, the probabilities of each event becomes nearly the same.</p>
+<p>;wip: midterm on thursday from 4:30-6pm, rooms will be posted on LEARN, 5-6 short answer with parts, bring pink tie calculators, covers lecture 1-10, just before discrete uniform distribution, check formula sheet on the practice midterm, try the practice midterms and mapleta revision quiz (not for marks)</p>
+<h1 id="section-11">2/6/14</h1>
+<p>55% of all high school seniors go to college. Given 18 high school students, what is the probability that exactly 10 will go to college?</p>
+<blockquote>
+<p>Let <span class="math">\(X\)</span> be the number of high school students that go to college.<br />Clearly, there are to outcomes (going or not going to college), and each student is an independent trial, and the selection is done with replacement (or without relacement in a large population), and each student has the same probability of going to college.<br />Therefore, <span class="math">\(X\)</span> has a binomial distribution.<br />So <span class="math">\(P(X = 10) = f(10) = {18 \choose 10} 0.55^{10} (1 - 0.55)^{18 - 10} \approxeq 0.186373632163697\)</span>.</p>
+</blockquote>
+<h3 id="negative-binomial-distribution">Negative Binomial Distribution</h3>
+<p>The negative binomial distribution has the same preconditions as the binomial distribution, but now <span class="math">\(X\)</span> records the number of failures before the <span class="math">\(k\)</span>th success and <span class="math">\(x\)</span> is the number of failures.</p>
+<p>This can be represented using <span class="math">\(X ~ \operatorname{NB}(n, p)\)</span>.</p>
+<p>Clearly, there are <span class="math">\(x + k\)</span> trials - successes plus failures, and the last trial is always a success.</p>
+<p>So there are <span class="math">\(x + k - 1\)</span> trials in which there are <span class="math">\(x\)</span> failures, and <span class="math">\(x + k - 1 \choose x\)</span> arrangements.</p>
+<p>Also, <span class="math">\({a + b \choose a} = {a + b \choose b}\)</span>.</p>
+<p>With binomial distributions we know the number of trials but not the number of successes. With negative binomial distributions we know the number of successes but not the number of trials.</p>
+<h1 id="section-12">4/6/14</h1>
+<p>Midterm Review.</p>
+<ul>
+<li><span class="math">\(S\)</span> is the sample space, <span class="math">\(A\)</span> is an event, events are sets.</li>
+<li><span class="math">\(P(A) = \frac{\abs{A}}{\abs{B}}\)</span>.</li>
+<li>&quot;OR&quot; means union/addition, &quot;and&quot; means conjunction/multiplication.</li>
+<li>Consider which elements we are selecting.</li>
+<li>Consider whether the order is important.</li>
+<li>Consider how many sets we are selecting from - if two or more sets, use the multiplication rule and multiply the individual ways together to get the total ways.</li>
+<li><span class="math">\(P(S) = 1, 0 \le P(A) \le 1\)</span>.</li>
+<li>De Morgan's law, expanding conjunctions and disjunctions and conditionals, mutual exclusivity and independece (<span class="math">\(P(A \cap B) = P(A) P(B)\)</span>).</li>
+<li>Product rule (<span class="math">\(P(A \cap B) = P(A \mid B) P(B)\)</span>) and partition rule (<span class="math">\(P(A) = P(A \cap B_1) + \ldots P(A \cap B_n)\)</span> given <span class="math">\(P(B_1) + \ldots + P(B_n) = 1\)</span>).</li>
+<li>Probability function: <span class="math">\(P(X = x)\)</span> over all <span class="math">\(X\)</span>, represented using a histogram.</li>
+<li>Cumulative distribution function: <span class="math">\(F(X) = P(X \le x)\)</span>, a non-decreasing function.</li>
+<li><span class="math">\(f(x) = F(x) - F(x - 1)\)</span>.</li>
+</ul>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

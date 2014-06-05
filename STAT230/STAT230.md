@@ -390,7 +390,14 @@ $R$ is a free software package for statistical and probabilistic computation. It
 
 ### Discrete Uniform Distribution
 
-If the random variable $x$ takes on values $a_1, \ldots, a_n$ where each value is equally likely, then $x$ has a discrete uniform distribution on the set $\set{a_1, \ldots, a_n}$, by definition.
+Preconditions:
+
+* Multiple outcomes $x_1, \ldots, x_n$.
+* Every outcome is equally likely.
+
+If the above are satisfied, then if $X$ represents the index of the outcome in $x_1, \ldots, x_n$ that occurred, $X$ has a discrete uniform distribution.
+
+If the random variable $X$ takes on values $a_1, \ldots, a_n$ where each value is equally likely, then $X$ has a discrete uniform distribution on the set $\set{a_1, \ldots, a_n}$, by definition.
 
 The probability of observing any of these is simply $\frac 1 {b - a + 1}$. The most common example of this is the rolling of a 6 sided dice several times.
 
@@ -399,4 +406,103 @@ The cumulative distribution function would be $F(x) = \sum_{u \le x} \frac 1 {b 
 If a 6-sided die is rolled 3 times, what is $F(x)$ and $f(x)$ where $x$ is the largest value rolled?
 
 > Clearly, $F(X) = P(x \le X) = \frac{x^3}{6^3}$, because there are $x^3$ possible outcomes where all the values are less than or equal to 3 and $6^3$ possible outcomes.  
-> So $f(x) = \frac{x^3 - (x - 1)^3}{6^3} = \frac{3x^2 - 3x + 1}{216}$.  
+> So $f(X) = P(X = x) = \frac{x^3 - (x - 1)^3}{6^3} = \frac{3x^2 - 3x + 1}{216}$.  
+
+# 30/5/14
+
+### Hypergeometric Distribution
+
+Preconditions:
+
+* Objects are in sample space $S$.
+* Two outcomes - success and failure.
+* $n$ objects chosen from $S$ **without replacement**.
+
+If the above are satisfied, then if $r$ represents the total number of successes, and $X$ represents the number of observed successes, $X$ has a hyergeometric distribution and $f(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}$, where $r$ is the total number of successes, $x$ is the number of successes observed, $N = \abs{S}$, and $n$ is the number of objects selected.
+
+Given $N$ objects that have a boolean property $P$ (success), let $r$ represent the total number of successful objects, and let $X$ represent the number of successes observed.
+
+Then if we pick $n$ objects **without replacement**, $X$ has a hypergeometric distribution.
+
+The total number of arrangements is $n \choose n$, and the number of ways to select successes is $r \choose x$, and the number of ways to choose the failures is $N - r \choose n - x$.
+
+So $f(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}$, where $\max(0, n - (N - r)) \le x \le \min(r, n)$. $\max(0, n - (N - r))$ is the minimum possible number of successes that must be chosen, . $N$ is the number of objects in $S$, and $r$ is the  ;wip
+
+Using the hypergeometric identity, we can prove that summing up all the the values of a hypergeometric distribution is 1.
+
+A box of 12 tins of tuna contains $d$ tainted cans. 7 inspected cans are inspected and found to not be tainted. What is the probability that none are tainted for $d = 1, 2, 3$:
+
+> Clearly, this is a selection done without replacement since once we inspect cans, we cannot inspect them again.  
+> ;wip
+
+### Binomial Distribution
+
+Preconditions:
+
+* Objects are in sample space $S$.
+* Two outcomes, success and failure.
+* Multiple independent trials - objects chosen from $S$ **with replacement**.
+* Same probability of success in each trial.
+
+If the above are satisfied, then if $X$ represents the number of observed successes, $X$ has a binomial distribution and $f(x) = {n \choose x}p^x(1 - p)^{n - x}$ where $n$ is the number of objects selected, $p = P(success)$.
+
+This is the same as the hypergeometric distribution, except our selection is done with replacement - every trial is independent. ;wip
+
+$X ~ \operatorname(Bin)(n, p)$. The $n$ is the number of the number of objects in $S$, and $p$ is the probability of success for each object.
+
+These independent trials resulting in success/failure are known as **Bernoulli trials**. The process is known as the **Bernoulli process**.
+
+With $x$ successes and $n - x$ failures, there are $n \choose x$ ways of choosing them.
+
+So $f(x) = {n \choose x}p^x(1 - p)^{n - x}$ where $0 \le x \le n$.
+
+Given that we flip a coin 12 times, let $X$ be the number of heads obtained. What is the distribution of $X$?
+
+> Clearly, this is a binomial distribution since there are multiple independent trials, two outcomes, and equal probabilities of success.  
+> Therefore, $X$ has a binomial distribution.  
+
+The binomial distribution is not always symmetric and looks like a curve. The higher $p$ is, the heavier the graph is on the right.
+
+The binomial distribution is oftne used as a approximation for the hypergeometric distribution because it is easier to calculate and when the sample space is large, the probabilities of each event becomes nearly the same.
+
+;wip: midterm on thursday from 4:30-6pm, rooms will be posted on LEARN, 5-6 short answer with parts, bring pink tie calculators, covers lecture 1-10, just before discrete uniform distribution, check formula sheet on the practice midterm, try the practice midterms and mapleta revision quiz (not for marks)
+
+# 2/6/14
+
+55% of all high school seniors go to college. Given 18 high school students, what is the probability that exactly 10 will go to college?
+
+> Let $X$ be the number of high school students that go to college.  
+> Clearly, there are to outcomes (going or not going to college), and each student is an independent trial, and the selection is done with replacement (or without relacement in a large population), and each student has the same probability of going to college.  
+> Therefore, $X$ has a binomial distribution.  
+> So $P(X = 10) = f(10) = {18 \choose 10} 0.55^{10} (1 - 0.55)^{18 - 10} \approxeq 0.186373632163697$.  
+
+### Negative Binomial Distribution
+
+The negative binomial distribution has the same preconditions as the binomial distribution, but now $X$ records the number of failures before the $k$th success and $x$ is the number of failures.
+
+This can be represented using $X ~ \operatorname{NB}(n, p)$.
+
+Clearly, there are $x + k$ trials - successes plus failures, and the last trial is always a success.
+
+So there are $x + k - 1$ trials in which there are $x$ failures, and $x + k - 1 \choose x$ arrangements.
+
+Also, ${a + b \choose a} = {a + b \choose b}$.
+
+With binomial distributions we know the number of trials but not the number of successes. With negative binomial distributions we know the number of successes but not the number of trials.
+
+# 4/6/14
+
+Midterm Review.
+
+* $S$ is the sample space, $A$ is an event, events are sets.
+* $P(A) = \frac{\abs{A}}{\abs{B}}$.
+* "OR" means union/addition, "and" means conjunction/multiplication.
+* Consider which elements we are selecting.
+* Consider whether the order is important.
+* Consider how many sets we are selecting from - if two or more sets, use the multiplication rule and multiply the individual ways together to get the total ways.
+* $P(S) = 1, 0 \le P(A) \le 1$.
+* De Morgan's law, expanding conjunctions and disjunctions and conditionals, mutual exclusivity and independece ($P(A \cap B) = P(A) P(B)$).
+* Product rule ($P(A \cap B) = P(A \mid B) P(B)$) and partition rule ($P(A) = P(A \cap B_1) + \ldots P(A \cap B_n)$ given $P(B_1) + \ldots + P(B_n) = 1$).
+* Probability function: $P(X = x)$ over all $X$, represented using a histogram.
+* Cumulative distribution function: $F(X) = P(X \le x)$, a non-decreasing function.
+* $f(x) = F(x) - F(x - 1)$.

@@ -96,7 +96,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
 <p>Assignments are due at 1pm at the dropboxes on MC 4th floor, due on thursdays, posted on tuesdays, returned in tutorials. Remark requests must be done within a week after the marks are posted.</p>
 <h2 id="logic">Logic</h2>
@@ -264,10 +264,12 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <h2 id="proof-calculus">Proof Calculus</h2>
 <p>We want a calculus for reasoning about propositional logic. This will allow us to simplify proofs of validity.</p>
 <p>In this course we will be looking at the Hilbert and natural deduction systems for formal proof calculus.</p>
-<h3 id="hilbert-system">Hilbert System</h3>
-<p>The <strong>Hilbert System</strong> is a deductive system over the set of propositional logic formulas.</p>
+<p>Let <span class="math">\(\Sigma = \set{\alpha_1, \ldots, \alpha_n}\)</span>. This is a set of premises.</p>
 <p><span class="math">\(\Sigma \models d\)</span> is the same as <span class="math">\(\forall t, \Sigma^t = 1 \implies d^t = 1\)</span>.</p>
-<p><span class="math">\(\Sigma \vdash \alpha\)</span> means that <span class="math">\(\alpha\)</span> is provable or deducible from <span class="math">\(\Sigma\)</span>. <span class="math">\(\Sigma \vdash_H \alpha\)</span> means that <span class="math">\(\alpha\)</span> is provable or deducible in the Hilbert system. <span class="math">\(\vdash_H A\)</span> means <span class="math">\(\emptyset \vdash_H A\)</span>.</p>
+<p><span class="math">\(\Sigma \vdash \alpha\)</span> means that <span class="math">\(\alpha\)</span> is provable or deducible from <span class="math">\(\Sigma\)</span>.</p>
+<h2 id="hilbert-system">Hilbert System</h2>
+<p>The <strong>Hilbert System</strong> is a deductive system over the set of propositional logic formulas.</p>
+<p><span class="math">\(\Sigma \vdash_H \alpha\)</span> means that <span class="math">\(\alpha\)</span> is provable or deducible in the Hilbert system. <span class="math">\(\vdash_H A\)</span> means <span class="math">\(\emptyset \vdash_H A\)</span>.</p>
 <p><span class="math">\(\Sigma\)</span> is a set of formulas known as premises, and from them we can deduce <span class="math">\(\delta\)</span> using axioms and inference rules.</p>
 <p>Axioms are basically just tautologies. In this course we will only be using axioms over <span class="math">\(\set{\neg, \rightarrow}\)</span> since this set is small and results in fewer axioms:</p>
 <ol style="list-style-type: decimal">
@@ -296,6 +298,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <li><span class="math">\(A \rightarrow C\)</span> (Modus Ponens on 1 and 6)</li>
 </ol>
 <p>The <strong>deduction theorem</strong> says that <span class="math">\(\Sigma \vdash_H A \rightarrow B\)</span> if and only if <span class="math">\(\Sigma \cup A \vdash_H B\)</span>. So <span class="math">\(\set{\alpha_1, \ldots, \alpha_n} \vdash_H \alpha\)</span> is the same as <span class="math">\(\emptyset \vdash_H (\alpha_1 \rightarrow (\ldots (alpha_n \rightarrow \alpha) \ldots))\)</span>.</p>
+<p>In other words, to prove an implication, we just have to assume the antecedent and use it to prove the consequent.</p>
 <h1 id="section-5">28/5/14</h1>
 <p>Prove that <span class="math">\(\neg \neg A \vdash_H A\)</span>:</p>
 <ol style="list-style-type: decimal">
@@ -313,11 +316,65 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>Formulas must be semantically entailed before it can be syntactically entailed. We need it to be semantically sound before proving it is complete.</p>
 <p>Here are some rules of thumb to more easily construct proofs.</p>
 <ul>
-<li>;wip</li>
+<li>Axiom 3 is often helpful in adding or remove negations, by putting the formula with the negation on one of the sides and the formula without on the other.</li>
+<li>Axiom 1 is useful for getting the converse and setting up modus ponens to simplify.</li>
+<li>Axiom 2 is just... just use it as a last resort.</li>
+<li>General pattern is premise/axiom, modus ponens, premise/axiom, etc.</li>
+<li>Remember the proofs for some more sane manipulation rules like <span class="math">\(\neg \neg A = A\)</span> and use those instead of these crazy axioms.</li>
 </ul>
-<h3 id="natural-deduction">Natural Deduction</h3>
-<p>Using proof rules, we infer a conclusion from the premises.</p>
+<h2 id="natural-deduction">Natural Deduction</h2>
+<p>In natural deduction, we infer a <strong>conclusion</strong> from the <strong>premises</strong> using various <strong>proof rules</strong>.</p>
+<p>Natural deduction was born out of people noticing that the Hilbert system is terribly complicated even for the simplest of proofs.</p>
+<p>Let <span class="math">\(\Sigma = \set{\alpha_1, \ldots, \alpha_n}\)</span> be the set of all the premises.</p>
+<p>For convenience, we define that <span class="math">\(\alpha_1, \ldots, \alpha_n\)</span> is equivalent to <span class="math">\(\set{\alpha_1, \ldots, \alpha_n}\)</span>.</p>
+<p>We also define that <span class="math">\(\Sigma, \alpha\)</span> is equivalent to <span class="math">\(\Sigma \cup \set{\alpha}\)</span>, and given a set <span class="math">\(S\)</span>, then <span class="math">\(\Sigma, S\)</span> is equivalent to <span class="math">\(\Sigma, S\)</span>.</p>
+<p><span class="math">\(\Sigma \vdash \alpha\)</span> is not a formula, but is a proposition.</p>
+<blockquote>
+<p>If the train arrives late and there are no taxis at the station, then John is late for his meeting.<br />John is not late for his meeting.<br />The train did arrive late.<br />Therefore, there were taxis at the station.</p>
+</blockquote>
+<p>The above can be written as follows:</p>
+<blockquote>
+<p>Let <span class="math">\(l\)</span> represent the train being late. Let <span class="math">\(m\)</span> represent being late to the meeting. Let <span class="math">\(t\)</span> represent there being taxis.<br />Then <span class="math">\(l \wedge \neg t \rightarrow m\)</span>, <span class="math">\(\neg m\)</span>, <span class="math">\(l\)</span>, so <span class="math">\(t\)</span>.</p>
+</blockquote>
 <p>;wip: finish this ;wip: box notation for proofs by contradiction - draw a box around statements starting from the assumption up to and including the contradiction.</p>
+<h1 id="section-6">2/6/14</h1>
+<p><strong>Soundness</strong> is a property of a deductive system where it is impossible to prove any invalid arguments.</p>
+<p><strong>Completeness</strong> is a property of a deductive system where it is always possible to prove valid arguments.</p>
+<p>If a system is sound and complete, then arguments can be proved if and only if they are valid.</p>
+<p>We can write <span class="math">\(A, B \vdash C\)</span> as <span class="math">\(\frac{A \qquad B}{C}\)</span>. This is the inference notation.</p>
+<h3 id="rules">Rules</h3>
+<p>Every rule has a name that we use when we reference it by when applying it.</p>
+<p>Reflexivity (Ref): <span class="math">\(A \vdash A\)</span> - <span class="math">\(\frac{A}{A}\)</span>.</p>
+<p>Addition of premises (+): given <span class="math">\(A \vdash C\)</span>, <span class="math">\(A \cup B \vdash C\)</span>.</p>
+<p>;wip: all the way until ND - Rule of Negation</p>
+<p>Using the sequent (<span class="math">\(\vdash\)</span>) notation, we must always write all the premises we use to deduce anything on the same line it is being deduced. For example:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(p \vdash \neg \neg p\)</span></li>
+<li><span class="math">\(q \vdash p \rightarrow q\)</span></li>
+<li><span class="math">\(\neg \neg p, p \rightarrow q \vdash q\)</span>.</li>
+</ol>
+<p>In Box Notation, we write assumptions, and then we draw a box that contains it, the box acts like a &quot;scope&quot; in which the assumptions hold and we can directly write the deduced thing. Inside the box we can directly write the resulting formulas without writing the <span class="math">\(\alpha_1, \ldots, \alpha_n \vdash\)</span> before it. Scopes can nest, and this saves a lot of rewriting of premises. For example:</p>
+<p>;wip</p>
+<h1 id="section-7">4/6/14</h1>
+<h2 id="soundnesscompleteness">Soundness/Completeness</h2>
+<p>The <strong>soundness theorem</strong> states that if something is provable, then it is valid - <span class="math">\(\Sigma \vdash \alpha\)</span> implies that <span class="math">\(\Sigma \models \alpha\)</span>.</p>
+<p>In practice, we prove soundness by using the contrapositive: by proving that <span class="math">\(\Sigma \not\models \alpha\)</span> implies <span class="math">\(\Sigma \not\vdash \alpha\)</span>.</p>
+<p>If <span class="math">\(A \vdash B\)</span> and <span class="math">\(B \vdash C\)</span>, then <span class="math">\(A \vdash C\)</span>.</p>
+<p>In other words, if <span class="math">\(\Sigma&#39; = \set{A_1, \ldots, A_n}\)</span> and <span class="math">\(\Sigma \vdash A_1, \ldots, \Sigma \vdash A_n\)</span> and <span class="math">\(\Sigma&#39; \vdash \alpha\)</span>, then <span class="math">\(\Sigma \vdash \alpha\)</span></p>
+<p>Proof:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(A_1, \ldots, A_n \vdash \alpha\)</span> (Premise)</li>
+<li><span class="math">\(A_1, \ldots, A_{n - 1} \vdash A_n \rightarrow \alpha\)</span> (<span class="math">\(\rightarrow\)</span>+)</li>
+<li><span class="math">\(\vdash A_1 \rightarrow (\ldots (A_n \rightarrow \alpha) \ldots)\)</span></li>
+<li><span class="math">\(\Sigma \vdash A_1 \rightarrow (\ldots (A_n \rightarrow \alpha) \ldots)\)</span></li>
+<li><span class="math">\(\Sigma \vdash A_1\)</span> (premise)</li>
+<li><span class="math">\(\Sigma \vdash A_2 \rightarrow (\ldots (A_n \rightarrow \alpha) \ldots)\)</span></li>
+<li><span class="math">\(\Sigma \vdash \alpha\)</span></li>
+</ol>
+<p>The proof rules of Natural Deduction are purely syntactic - they only shuffle symbols around without considering what they mean. Now we connect it with the actual semantics.</p>
+<p>Soundness of natural deduction means that formal proofs demonstrate tautological consequences - <span class="math">\(\Sigma \vdash \alpha\)</span> implies that <span class="math">\(\Sigma \models \alpha\)</span>. In other words, every proof should be a valid argument.</p>
+<p>Completeness of natural deduction means that tautological consequences are provable using natural deduction - <span class="math">\(\Sigma \models \alpha\)</span> implies that <span class="math">\(\Sigma \vdash \alpha\)</span>. In other words, every valid argument should have a proof.</p>
+<p>Since ND is sound and complete, <span class="math">\(\Sigma \models \alpha\)</span> if and only if <span class="math">\(\Sigma \vdash \alpha\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

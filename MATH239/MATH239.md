@@ -176,6 +176,8 @@ Then $\abs{S} = \abs{S_1} + \ldots + \abs{S_n}$, and $\abs{S_k} = {n \choose k}$
 
 So $\abs{S} = 2^n = \sum_{k = 0}^n {n \choose k}$.
 
+### Pascal's Triangle
+
 Using this, we can draw **Pascal's Triangle**, a triangle listing all the binomial coefficients:
 
                    1
@@ -199,6 +201,8 @@ From the triangle we notice that ${n \choose k} = {n - 1 \choose k} + {n - 1 \ch
 > So $\abs{S_2} = {n - 1 \choose k}$, since it is the set of all $k$-subsets of $[n - 1]$.  
 > So ${n \choose k} = {n - 1 \choose k} + {n - 1 \choose k - 1}$.  
 
+### Hockey Stick Identity
+
 We can also prove it algebraically:
 
 > If $f(x)$ is a power series, then let $[x^n]f(x)$ represent the coefficient of $x^n$ in $f(x)$.  
@@ -209,8 +213,6 @@ We can also prove it algebraically:
 > So $[x^k](1 + x)^n = [x^k](1 + x)^{n - 1} + [x^k]x(1 + x)^{n - 1} = {n \choose k} = {n - 1 \choose k} + {n - 1 \choose k - 1}$
 
 From the above identity we know that ${n + k \choose n} = {n + k - 1 \choose n} + {n + k - 1 \choose n - 1}$, since we substituted $n + k$ for $n$ and $n$ for $k$.
-
-;wip: organize into headings
 
 If we expand the first term of the right side using the same identity, we get ${n + k \choose n} = {n + k - 2 \choose n} + {n + k - 2 \choose n - 1} + {n + k - 1 \choose n - 1}$.
 
@@ -279,13 +281,6 @@ In general, for a counting problem:
 We rarely substitute a value for $x$. It acts as a way to keep the coefficients of $x$ as separate values. As a result we don't really need to worry about convergence or divergence.
 
 This technique is useful because the generating series is sometimes easier to find than the actual coefficients, yet it can be used to find the coefficients.
-
-For example, how many binary strings of length $n$ have no 3 consecutive 1's?
-
-> Let $S$ be the set of all binary strins with no 3 consecutive 1's.  
-> Let $w(\sigma)$ be the length of $\sigma$.  
-> ;wip: $\Phi_S(x) = \frac{1 + x + x^2}{1 - x - x^2 - x^3}$.
-> Therefore, there are $[x^n]\frac{1 + x + x^2}{1 - x - x^2 - x^3}$ of these binary strings (the $n$th term's coefficient is the number of binary strings in $S$ of length $n$).  
 
 The reason generating series are useful is because $[x^n]\Phi_S(x)$ is the number of times $w(\sigma) = n$. This allows us to find the number of $\sigma$ in $S$ that have $w(\sigma) = n$.
 
@@ -474,7 +469,7 @@ How many compositions of $n$ have exactly $k$ parts?
 
 > Let $(a_1, \ldots, a_k)$ be a composition of $n$.  
 > Then $a_1, \ldots, a_k \in \mb{N}$ and $(a_1, \ldots, a_k) \in \mb{N}^k$.  
-> Note that instead of $\mb{N}$ we could also use $\set{1, \ldots, n}$, but we still use $\mb{N}$ to somplify our calculations because the generating series can be written in closed form.  
+> Note that instead of $\mb{N}$ we could also use $\set{1, \ldots, n}$, but we still use $\mb{N}$ to simplify our calculations because the generating series can be written in closed form.  
 > Let $w(\sigma) = \sigma$ be a weighting function over $\mb{N}$.  
 > Then $\Phi_{\mb{N}}(x) = x + x^2 + x^3 + \ldots = \frac x {1 - x}$.  
 > Let $w(a_1, \ldots, a_k) = a_1 + \ldots + a_k$ be a weighting function over $\mb{N}^k$.  
@@ -501,7 +496,7 @@ In general, to solve this type of problem:
 3. Then the number of compositions is usually $[x^n]\Phi_S(x)$.  
 4. Try to find an explicit formula for $[x^n]\Phi_S(x)$ or try to simplify if possible using series and etc.
 
-How many compositions of $n$ exist such that there are $2k$ parse, where the first $k$ parts are at least 5, and the last $k$ are multiples of 3.  
+How many compositions of $n$ exist such that there are $2k$ parts, where the first $k$ parts are at least 5, and the last $k$ are multiples of 3.  
 
 > Let $A = \set{5, 6, 7, \ldots}, B = \set{3, 6, 9, \ldots}$ (we don't include 0 since the values must be at least 1).  
 > Let $S = A^k \times B^k$. Clearly, this set represents all of the compositions we care about.  
@@ -558,4 +553,152 @@ Then $A* = A^0 \cup A^1 \cup A^2 \cup \ldots$. This is the binary strings that c
 For example, $\set{0}\set{00}*$ is the set of all binary strings of all 0 of odd length. This is because it can be expanded to $\set{0, 000, 00000, \ldots}$.
 
 Another example is $\set{0}*(\set{1}\set{0}*)*$. This is the set of all possible binary strings, because given an arbitrary binary string, it can start with any number of 0 to be in $\set{0}*$, and if we break the remaining string into pieces just before every 1, each piece is in $\set{1}\set{0}*$.
+
+# 30/5/14
+
+### Generating Series
+
+We want to find the number of binary strings of a given length $n$ that satisfy a given property. To do this we can use a generating series over the set of strings where the weight is the length of the string.
+
+For example, $\Phi_{\set{0, 1}}(x) = x + x = 2x$.
+
+;wip: rules for constructing generating series
+;wip: generating series for S* is $\frac 1 {1 - \Phi_S(x)}$ because $S* = S^0 \cup S^1 \cup S^2 \cup \ldots$.
+
+For example, in this case $\set{0, 1}^n$ is similar to a Cartensian product $n$ times. So in this case, we can use the product lemma: $\Phi_{\set{0, 1}^n}(x) = 2^nx^n$
+
+For example, $\Phi_{\set{0, 1}*}(x) = \sum_{n \ge 0} \Phi_{\set{0, 1}^n}(x) = \sum_{n \ge 0} 2^nx^n = \frac 1 {1 - 2x}$.
+
+What is the generating series for $\set{0}\set{00}*\set{1, 11, 111}$?
+
+> Clearly, $\Phi_{\set{0}}(x) = x, \Phi_{\set{00}*}(x) = \frac 1 {1 - x^2}, \Phi_{\set{1, 11, 111}}(x) = x + x^2 + x^3$.  
+> So $\Phi_{\set{0}\set{00}*\set{1, 11, 111}}(x) = x \frac 1 {1 - x^2} (x + x^2 + x^3) = \frac{x^2 + x^3 + x^4}{1 - x^2}$ where the weight is the length of each string.  
+> So there are $[x^n]\frac{x^2 + x^3 + x^4}{1 - x^2}$ binary strings of length $n$ in $\set{0}\set{00}*\set{1, 11, 111}$.  
+
+### Ambiguity
+
+We previously assumed that $AB$ is functionally the same as $A \times B$ - that concatenation of sets of binary strings is similar to the Cartesian producct. However, this is **not always true**.
+
+Clearly, $\Phi_{AB}(x) = \Phi_A(x) \Phi_B(x)$ if for all $ab \in AB$, $w(ab)$ is the length of $a$ plus the length of $b$.
+
+For example, consider $A = \set{010, 01}, B = \set{01, 001}$. So $\Phi_A(x) = x^2 + x^3, \Phi_B(x)x^2 + x^3$.
+
+Clearly, $A \times B = \set{(010, 01), (010, 001), (01, 01), (01, 001)}$. So the generating series is $\Phi_{A \times B}(x) = x^5 + x^6 + x^4 + x^5$.
+
+However, $AB = \set{01001, 010001, 0101, 01001}$. Note that $01001$ can be **created in two different ways**. So $\set{01001, 010001, 0101, 01001} = \set{01001, 010001, 0101}$ and $\Phi_{AB}(x) = x^5 + x^6 + x^4$. Note that in this case, the **product lemma does not hold**.
+
+Given sets of binary strings $A$ and $B$, $AB$ is **ambiguous** if and only if there exist $(a_1, b_1), (a_2, b_2) \in A \times B, a_1 \ne a_2 \vee b_1 \ne b_2 \implies a_1b_1 = a_2b_2$. Otherwise, $AB$ is **unambiguous**.
+
+Basically, if there is more than one way for any binary string to be created by concatenating binary strings in sets, then the set is ambiguous.
+
+Also, $A \cap B$ is ambiguous if and only if $A \cap B \ne \emptyset$. This concept can be extended to any number of sets as well.
+
+### Sum/product Rule for Strings
+
+If $A \cap B$ is unambiguous, then $\Phi_{A \cup B}(x) = \Phi_A(x) + \Phi_B(x)$ where $w(\sigma) = \sigma$.
+
+This can be proved from the sum lemma.
+
+If $AB$ is unambiguous, then $\Phi_{AB}(x) = \Phi_A(x) \Phi_B(x)$ where $w(a, b) = w_a(a) + w_b(b)$ where $w_a$ is the weight function for $\Phi_A(x)$ and $w_b$ is the weight function for $\Phi_B(x)$.
+
+Since $AB$ is unambiguous, there is a bijection between $AB$ and $A \times B$, so it follows by the product lemma.
+
+If $A*$ is unambiguous, then $\Phi_{A*}(x) = \frac 1 {1 - \Phi_A(x)}$.
+
+Proof:
+
+> Since $A*$ is unambiguous, $A^n$ is unambiguous.  
+> Clearly, $\epsilon \notin A$, because if it was then $AA$ would be ambiguous.  
+> So $\Phi_A(x)$ has no constant term and $\Phi_{A*}(x)$ is a geometric series.  
+> So $\Phi_{A*}(x) = \frac 1 {1 - \Phi_A(x)}$.  
+
+There are three basic unambiguous decompositions of the set of all binary strings. A decomposition is a way of writing a set using other sets. Often, the set being decomposed is infinite or otherwise hard to represent.
+
+One is $\set{0, 1}*$. Every binary string has a unique sequence of the elements in the set that, when concatenated, results in that string (we break the string between each character).
+
+Another is $\set{0}*(\set{1}\set{0}*)*$. Again, there is only one way for each string to be represented using the elements in the set (we break the string just before each 1).
+
+The last is the **block decomposition**: $\set{0}*(\set{1}\set{1}*\set{0}\set{0}*)*\set{1}*$. The reason for the name is because it matches blocks of 1 followed by blocks of 0 an arbitrary number of times.
+
+We can also swap the 1 and 0 to the same effect: $\set{0}*(\set{1}\set{0}*)*$ matches the same strings as $\set{1}*(\set{0}\set{1}*)*$.
+
+# 2/6/14
+
+Let $S$ be the set of all binary strings with no 3 consecutive 0 - strings that do not contain 000. What is the generating series of this set?
+
+> We can use the $\set{0}*(\set{1}\set{0}*)*$ decomposition to match these strings.   
+> Clearly, we can have three consecutive 0 when and only when we have a $\set{0*}$. Instead, we can replace this with $\set{\epsilon, 0, 00}$, the subset of $\set{0}*$ that do not contain 3 consecutive 0.  
+> So $S = \set{\epsilon, 0, 00}(\set{1}\set{\epsilon, 0, 00})*$. This is still unambiguous because we are simply removing strings we do not want to match.  
+> Since it is unambiguous, $\Phi_S(x) = (1 + x + x^2) \frac 1 {1 - (x + x^2 + x^3)}$ ;wip = (1 + x + x^2)$ ;wip: $$
+
+Let $T$ be the set of all binary strings where each block has length at least 2. What is the generating series of this set?
+
+> We can use the $\set{0}*(\set{1}\set{1}*\set{0}\set{0}*)*\set{1}*$ block decomposition to match these strings.  
+> Clearly, $T = (\set{00}\set{0}* \cup \set{\epsilon}))(\set{11}\set{1}*\set{00}\set{0}*)*(\set{11}\set{1}* \cup \set{\epsilon})$.  
+> ;wip: $\Phi_T(x) = \frac{1 - x + x^2}{1 - x - x^2}$
+
+Let $U$ be the set of all binary strings where an even block of 0 cannot be followed by an odd block of 1. What is the generating sereis for this set?
+
+> Clearly, we can use the $\set{1}*(\set{0}\set{0}*\set{1}\set{1}*)*\set{0}*$ block decomposition to match these strings (we swapped 0 and 1).  
+> Clearly, $U = \set{1}*(\set{00}\set{00}*\set{11}\set{11}* \cup \set{0}\set{00}*\set{1}\set{1}*)*\set{0}*$. We are using two cases - when the block is of even length, and when it is of odd length, and considering each case separately.  
+> Alternatively, we can write this is as $\set{1}*(\set{0}\set{0}*\set{1}\set{1}* \setminus \set{00}\set{00}*\set{1}\set{11}*)*\set{0}*$, as the set of all blocks minus the set of the blocks we do not want to match.  
+> In that case the sum lemma can be used like a difference lemma: $A \setminus B$ implies that $\Phi_{A \setminus B}(x) = \Phi_A(x) - \Phi_B(x)$.  
+> ;wip: \frac{1 + 2x + x^2}{1 - 3x^2 - x^3}
+> We can also represent this using recursion: 
+
+The Fibonnacci sequence is associated with a denominator of $1 - x - x^2$
+
+If a regular expression matches a string, that means the string is contained in the set. A regular expression is just a set.
+
+We can find these sets by starting with one of the unambiguous decompositions of all binary strings, and modifying the regular expression until it no longer matches the strings we do not want in the set.
+
+### String Recursion
+
+Clearly, any binary string consists of either an empty string, or a 0 or a 1 followed by another smaller binary string.
+
+Therefore, we can define the set of all binary strings as $S = \set{\epsilon} \cup \set{0, 1}S$. There is only one way to break a string in this way, so this representation is unambiguous.
+
+So $\Phi_S(x) = 1 + 2x\Phi_S(x) = \frac 1 {1 - 2x}$. Incidentally, $[x^n]\frac{1 - 2x} = 2^n$.
+
+# 4/6/14
+
+Let $S$ be the set of all binary strings with no three consecutive 0. What is the generating series?
+
+> First, we cut the string starting right after the first 1. Then the part we cut off is also in $S$.  
+> Then the first part can only be 1 or 01 or 001, because there cannot be 3 consecutive 0 and this is the first 1.  
+> So we can represent the string as $S = \set{1, 01, 001}S \cup \set{\epsilon, 0, 00}$, since $\epsilon, 0, 00$ are the only possible strings that cannot be represented using the recursion.  
+> So the generating series is $\Phi_S(x) = (x + x^2 + x^3)\Phi_S(x) + (1 + x + x^2)$ and $\Phi_S(x) - (x + x^2 + x^3)\Phi_S(x) = 1 + x + x^2$.  
+> So $(1 - x - x^2 - x^3)\Phi_S(x) = 1 + x + x^2$ and $\Phi_S(x) = \frac{1 + x + x^2}{1 - x - x^2 - x^3}$.  
+
+Let $S$ be the set of all binary strings without 1010 as a substring. What is the generating series?
+
+> Let $T$ be the set of all string with exactly one copy of 1010 at the end.  
+> We want to prove that $\set{\epsilon} \cup S\set{0, 1} = S \cup T$.  
+> Cleary, $\set{\epsilon} \cup S\set{0, 1} \subseteq S \cup T$ is true because $\set{\epsilon} \in S \cup T$ and either $S\set{0, 1}$ has no 1010 (so it is in $S$), or it does and the 1010 is at the end (so it is in $T$).  
+> Clearly, $S \cup T \subseteq \set{\epsilon} \cup S\set{0, 1}$ because any string $a$ in $S$ is either $\epsilon$ or not, in which case removing the last bit get another string $a$ implies $a \in S\set{0, 1}$, and because any string $a$ in $T$ is either epsilon or not, in which case removing the last bit means it has no 1010 and $a \in S\set{0, 1}$.  
+> So $\set{\epsilon} \cup S\set{0, 1} \subseteq S \cup T$.  
+> We want to prove that $S\set{1010} = T \cup $T\set{10}$.  
+> Clearly, $S\set{1010} \subseteq T \cup T\set{10}$ any $a \in S$ either ends with 10 or not. If not, then $S\set{1010}$ has only one instance of 1010, so $S\set{1010} \in T$. If it does, $S\set{1010}$ has two copies of 1010 and ends in 101010, so $S\set{1010} \in T\set{10}$.  
+> Clearly, $T \cup T\set{10} \subseteq S\set{1010}$ because taking the last four bits off any $a \in T$ to get $a'$ means that $a' \in S$.  
+> Since $\set{\epsilon} \cup S\set{0, 1} = S \cup T$, $1 + 2x\Phi_S(x) = \Phi_S(x) + \Phi_T(x)$.  
+> So $S\set{1010} = T \cup $T\set{10}$.  
+> Since $S\set{1010} = T \cup $T\set{10}$, $x^4\Phi_S(x) = \Phi_T(x) + x^2\Phi_T(x)$, so $\Phi_T(x) = \frac{x^4}{1 + x^2}\Phi_S(x)$.  
+> Solving, we get $\Phi_S(x) = \frac 1 {1 - 2x + \frac{x^4}{1 + x^2}} = \frac{1 + x^2}{1 - 2x + x^2 - 2x^3 + x^4}$.  
+
+Coefficients of Rational Expressions
+------------------------------------
+
+Let $A(x) = \sum_{n = 0}^\infty a_nx^n = \frac{6 - x + 5x^2}{1 - 3x^2 - 2x^3}$.
+
+Then $A(x) = \frac{6 - x + 5x^2}{(1 - 2x)(1 + x)^2}$ by factoring.
+
+Then we find the partial fraction decomposition: $A(x) = \frac A {1 - 2x} + \frac B {1 + x} + \frac C {(1 - x)^2}$, where $\frac{A(1 + x)(1 + x)^2 + B(1 - 2x)(1 + x)^2 + C(1 - 2x)(1 + x)}$.
+
+Solving, we get $A(x) = \frac 3 {1 - 2x} - \frac 1 {1 + x} + \frac 4 {(1 + x^2)}$.
+
+Then $[x^n]A(x) = [x^n]\frac 3 {1 - 2x} - [x^n]\frac 1 {1 + x} + [x^n]\frac 4 {(1 + x^2)^2} = [x^n]3\sum_{i = 0}^\infty 2^nx^n - [x^n]\sum_{i = 0}^\infty (-1)^nx^n + [x^n]4\sum_{i = 0}^\infty {n + 2 - 1 \choose 2 - 1}x^n$.  
+
+So $[x^n]A(x) = 3 \cdot 2^n + (-1)^n(4n + 3)$.
+
+In general, if $A(x) = \frac{f(x)}{g(x)}$ where the degree of the numerator is lower than that of the denominator, and $g(x)$ can be factored into $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}$, then using partial fractions, there exist constants $C_{i, j}$ such that $A(x) = \left(\frac{C_{1, 1}}{1 - r_1x} + \ldots + \frac{C_{1, e_1}}{1 - r_1x}^{e_1}\right) + \ldots + \left(\frac{C_{n, 1}}{1 - r_nx} + \ldots + \frac{C_{n, e_1}}{1 - r_nx}^{e_1}\right)$.
 
