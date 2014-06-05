@@ -36,8 +36,6 @@ $$
 
 There are two tests and five online quizzes on MapleTA
 
-;wip: there is a test date conflict, email the riley guy mentioned on the course outline
-
 ;wip: look at the schedule and put it on the calendar
 
 Probability is a tool used to model uncertainty and variability, like size, weight, and height. It allows us to work with uncertainty, though it cannot eliminate it.
@@ -47,7 +45,7 @@ Definition
 
 We first specify the **outcome/event** that we are interested in that might occur in a particular setting. This setting is the **experiment/process**.
 
-For example, rolling a 2 on a 6-sided die has an outcoem of 2 and rolling the die is the experiment.
+For example, rolling a 2 on a 6-sided die has an outcome of 2 and rolling the die is the experiment.
 
 The **sample space** is the set of all possible outcomes. For example, the die has a sample set of $S = \set{1, 2, 3, 4, 5, 6}$. We usually represent the sample space as $S$.
 
@@ -88,8 +86,6 @@ The **odds** of an event $x$ occurring is $\frac{P(x)}{1 - P(x)}$. So odds of 3:
 
 # 7/5/14
 
-;wip: do the mapleta stuff on LEARN
-
 If we toss a coin twice, what is the probability of getting exactly one heads?
 
 > Clearly, $S = \set{(Tails, Tails), (Tails, Heads), (Heads, Tails}, (Heads, Heads)$. Let $A$ be the event of getting one heads.  
@@ -125,22 +121,20 @@ This means that what we get on each selection will influence sebsequent selectio
 
 Sampling without replacement has a big effect on small samples, but for larger samples its effect becomes negligible.
 
-Many problems have sample spaces that are a set of arrangements - permutations. $n^{(r)} = \frac{n!}{(n - r)!}$ means "$n$ to $r$ factors" and is the number of $r$-permutations - arrangements of length $r$ of the $n$ elements without duplicates. ;wip: nPr notation
+Many problems have sample spaces that are a set of arrangements - permutations. $n^{(r)} = \frac{n!}{(n - r)!}$ means "$n$ to $r$ factors" and is the number of $r$-permutations - arrangements of length $r$ of the $n$ elements without duplicates. This is often also represented as $n^{(r)} = {}_n\operatorname{P}_r$.
 
 For example, consider a set of 20 people's birthdays:
 
 > Clearly, $S$ is a set containing 20 dates (each one of 365 days), so there are $365^{20}$ outcomes.  
 > What is the probability of everyone having a different birthdays?
 > Clearly, everyone has a different birthday if and only if the ordered birthdays are a 20-permutation of $[365]$. This is because the 20-permutations account for all possible sequence of $[365]$ where all the dates are unique.  
-> Therefore, there are $365^{(20)}$ possible outcomes, and since they are all equally likely, the probability is $\frac{365^{(20)}}{365^{20}} \approxeq 59%$.  
+> Therefore, there are $365^{(20)}$ possible outcomes, and since they are all equally likely, the probability is $\frac{365^{(20)}}{365^{20}} \approxeq 0.59$.  
 
 # 9/5/14
 
-;wip: do the mapleta quiz available on Wednesday, due on Wednesday
-
 The factorial function grows extremely quickly and can be difficult to calculate for large numbers. Therefore, we have various approximations that help us do this more easily.
 
-**Stirling's approximation** is $n! \approxeq n^n e^{-n} \sqrt{2 \pi n}$. This approximation is asymptotically equivalent to the factorial function - as $n \to \infty$, the percentage error gradually decreases. ;wip: memorize this
+**Stirling's approximation** is $n! \approxeq n^n e^{-n} \sqrt{2 \pi n}$. This approximation is asymptotically equivalent to the factorial function - as $n \to \infty$, the percentage error gradually decreases.
 
 The **complement** of an event $A$ is the opposite event - the event of $A$ not **occurring**. It is represented using $\overline A$ or $A^C$. It is always true that an event occurs, or it does not occur, so $P(A) + P(\overline A) = 1$.  
 
@@ -192,7 +186,7 @@ How many ways can the 4 aces in a deck of 52 cards all be adjacent?
 > Assume the aces are all adjacent. Then we can consider the four aces as a single large unit.  
 > Clearly, there are $4!$ ways to arrange these 4 aces within the unit.  
 > Clearly, for each of these ways there are $48!$ ways to arrange the other 48 cards.  
-> Clearly, there are 49 different places to insert the other cards.  
+> Clearly, there are 49 different places to insert the aces into the other cards.  
 > So there are $49 \times 4! \times 48!$ ways the 4 aces can be adjacent.  
 
 How many ways can one choose 13 cards from a deck and have two of them be aces?
@@ -284,7 +278,7 @@ Given a large set of elements $S$ with properties $W$ and $F$ such that $P(F) = 
 
 > Let $T$ be a set of 10 randomly selected elements.  
 > Since $S$ is large and $T$ is small, we can pretend we are selecting with replacement even though it is without replacement. This is because the probabilities would not hold if we did not do replacement.  
-> Let $W_i$ or $F_i represent the $i$th element of $T$ being $W$ or $F$, respectively.  
+> Let $W_i$ or $F_i$ represent the $i$th element of $T$ being $W$ or $F$, respectively.  
 > Let $W_a = W_1 \cup \ldots \cup W_{10}$, $F_a = F_1 \cup \ldots \cup F_{10}$.  
 > Clearly, the probability is $P(W_a \cap F_a) = 1 - P(\overline{W_a \cap F_a}) = 1 - P(\overline{W_a} \cup \overline{F_a}) = 1 - P(\overline{W_a}) - P(\overline{F_a}) + P(\overline{W_a} \cap \overline{F_a})$.  
 > Clearly, $P(\overline{W_a}) = P(\overline{W_1}) \cdots P(\overline{W_{10}}) = (1 - 0.45)^{10} = 0.55^{10}$.  
@@ -322,7 +316,7 @@ The **multiplication rule** states that $P(A \cap B) = P(A) P(B \mid A)$. Extend
 
 ### Partition Rule
 
-Disjoint events are those where $P(A \cap B) = 0$ and $A \cap B = \emptyset$.
+Disjoint events are those where $P(A \cap B) = 0$ and $A \cap B = \emptyset$. They are just mutually exclusive events.
 
 The **partition rule** states that if $A_1 \cup \ldots \cup A_k = S$ where $A_1, \ldots, A_k$ are disjoint sets (mutually exclusive), and $B$ is an event in $S$, then $P(B) = P(B \cap A_1) + \ldots + P(B \cap A_k) = \sum_{i = 1}^k P(B \mid A_i)P(A_i)$.
 
@@ -336,7 +330,7 @@ We label the edges of the tree with the probability of the child occurring given
 
 If we want the probability of a particular sequence of outcomes, then we would travel down the tree multplying by edges when we encounter them. So in the above example, the probability of getting a heads, and then another heads is $P(H \cap H) = P(H) P(H \mid H) = 0.25$.
 
-We are eventually going to develop **Bayes Theorem**, which is $P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B \mid \overline A) P(A) + B(B \mid A) P(A)}$.
+We are eventually going to develop **Bayes Theorem**, which is $P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)} = \frac{P(B \mid A) P(A)}{P(B \mid A)P(A) + P(B \mid \overline A)P(\overline A)}$.
 
 # 26/5/14
 
@@ -366,13 +360,13 @@ We are interested in finding $P(X = x)$. This is the probability that $x$ occurs
 
 There are two types of random variables - **discrete** and **continuous**. Discrete variables can only take on finite or countably infinite (like natural numbers) values. Continuous variables can take on values in some interval of real numbers.
 
-The **probability function/probability mass function** (PMF/PF) of a random variable $X$ is $f(x) = P(X = x)$, defined for all $x \in A$. $f(x)$ is a probability function if and only if $f(x) \ge 0$ and $\sum_{x \in A} f(x) = 1$. So $0 \le f(x) \le 1$.
+The **probability function/probability mass function** (PMF/PF) of a random variable $X$ is $f_X(x) = P(X = x)$, defined for all $x \in A$. $f_X(x)$ is a probability function if and only if $f_X(x) \ge 0$ and $\sum_{x \in A} f_X(x) = 1$. So $0 \le f_X(x) \le 1$.
 
-In the above example, $f(x) = \begin{cases} P(\set{TTT}) &\text{if } x = 0 \\ P(\set{HTT, THT, TTH}) &\text{if } x = 1 \\ P(\set{HHT, HTH, THH}) &\text{if } x = 2 \\ P(\set{HHH}) &\text{if } x = 3 \end{cases} = \begin{cases} \fraac 1 8 &\text{if } x = 0 \\ \frac 3 8 &\text{if } x = 1 \\ \frac 3 8 &\text{if } x = 2 \\ \frac 1 8 &\text{if } x = 3 \end{cases}$.
+In the above example, $f_X(x) = \begin{cases} P(\set{TTT}) &\text{if } x = 0 \\ P(\set{HTT, THT, TTH}) &\text{if } x = 1 \\ P(\set{HHT, HTH, THH}) &\text{if } x = 2 \\ P(\set{HHH}) &\text{if } x = 3 \end{cases} = \begin{cases} \frac 1 8 &\text{if } x = 0 \\ \frac 3 8 &\text{if } x = 1 \\ \frac 3 8 &\text{if } x = 2 \\ \frac 1 8 &\text{if } x = 3 \end{cases}$.
 
-For example, $f(x) = \frac{kx}{2 + x}$ is a probability function that gives $x \in \set{1, 2, 3, 4, 5}$. Clearly, $k$ must satisfy $f(1) + f(2) + f(3) + f(4) + f(5) = 1 = \frac k 3 + \frac {2k} 4 + \frac {3k} 5 + \frac {4k} 6 + \frac {5k} 7 = \frac {140k + 105k + 84k + 70k + 60k} {420} = \frac{459}{420}k$, so $k = \frac{420}{459}$.
+For example, $f_X(x) = \frac{kx}{2 + x}$ is a probability function that gives $x \in \set{1, 2, 3, 4, 5}$. Clearly, $k$ must satisfy $f_X(1) + f_C(2) + f_C(3) + f_C(4) + f_C(5) = 1 = \frac k 3 + \frac {2k} 4 + \frac {3k} 5 + \frac {4k} 6 + \frac {5k} 7 = \frac {140k + 105k + 84k + 70k + 60k} {420} = \frac{459}{420}k$, so $k = \frac{420}{459}$.
 
-The Cumulative Distribution Function is $F(x) = P(X \le x) = \sum_{u \le x} f(u)$. It is always true that $\lim_{x \to -\infty} F(x) = 0$ and $\lim_{x \to \infty} F(x) = 1$. Therefore, $f(x) = F(x) - F(x - 1)$ and $P(X = x) = P(X \le x) - P(X \le x - 1)$. It is the probability of anything less than or equal to $x$ taking place.
+The Cumulative Distribution Function is $F_X(x) = P(X \le x) = \sum_{u \le x} f_X(u)$. It is always true that $\lim_{x \to -\infty} F_X(x) = 0$ and $\lim_{x \to \infty} F_X(x) = 1$. Therefore, $f_X(x) = F_X(x) - F_X(x - 1)$ and $P(X = x) = P(X \le x) - P(X \le x - 1)$. It is the probability of anything less than or equal to $x$ taking place.
 
 # 28/5/14
 
@@ -403,10 +397,10 @@ The probability of observing any of these is simply $\frac 1 {b - a + 1}$. The m
 
 The cumulative distribution function would be $F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &x < 1 \\ \frac \floor{x} {b - a + 1} &1 \le x \le 6 \\ 1 & x > 6 \end{cases}$.
 
-If a 6-sided die is rolled 3 times, what is $F(x)$ and $f(x)$ where $x$ is the largest value rolled?
+If a 6-sided die is rolled 3 times, what is $F_X(x)$ and $f_X(x)$ where $x$ is the largest value rolled?
 
-> Clearly, $F(X) = P(x \le X) = \frac{x^3}{6^3}$, because there are $x^3$ possible outcomes where all the values are less than or equal to 3 and $6^3$ possible outcomes.  
-> So $f(X) = P(X = x) = \frac{x^3 - (x - 1)^3}{6^3} = \frac{3x^2 - 3x + 1}{216}$.  
+> Clearly, $F_X(x) = P(X \le x) = \frac{x^3}{6^3}$, because there are $x^3$ possible outcomes where all the values are less than or equal to $x$ and $6^3$ possible outcomes.  
+> So $f_X(x) = P(X = x) = \frac{x^3 - (x - 1)^3}{6^3} = \frac{3x^2 - 3x + 1}{216}$.  
 
 # 30/5/14
 
@@ -418,15 +412,17 @@ Preconditions:
 * Two outcomes - success and failure.
 * $n$ objects chosen from $S$ **without replacement**.
 
-If the above are satisfied, then if $r$ represents the total number of successes, and $X$ represents the number of observed successes, $X$ has a hyergeometric distribution and $f(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}$, where $r$ is the total number of successes, $x$ is the number of successes observed, $N = \abs{S}$, and $n$ is the number of objects selected.
+If the above are satisfied, then if $r$ represents the total number of successes, and $X$ represents the number of observed successes, $X$ has a hyergeometric distribution and $f_X(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}$, where $r$ is the total number of successes, $x$ is the number of successes observed, $N = \abs{S}$, and $n$ is the number of objects selected.
 
-Given $N$ objects that have a boolean property $P$ (success), let $r$ represent the total number of successful objects, and let $X$ represent the number of successes observed.
+Basically, ${r \choose x}{N - r \choose n - x}$ is the number of ways we can choose $x$ successes out of $r$ total successes, multiplied by the number of ways we can choose the $n - x$ failures out of $N - r$ total failures. $N \choose n$ is the number of ways we cuold pick any $n$ objects from the total objects.
+
+Given $N$ objects that have a boolean property $V$ (success), let $r$ represent the total number of successful objects, and let $X$ represent the number of successes observed.
 
 Then if we pick $n$ objects **without replacement**, $X$ has a hypergeometric distribution.
 
-The total number of arrangements is $n \choose n$, and the number of ways to select successes is $r \choose x$, and the number of ways to choose the failures is $N - r \choose n - x$.
+The total number of arrangements is $N \choose n$, and the number of ways to select successes is $r \choose x$, and the number of ways to choose the failures is $N - r \choose n - x$.
 
-So $f(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}$, where $\max(0, n - (N - r)) \le x \le \min(r, n)$. $\max(0, n - (N - r))$ is the minimum possible number of successes that must be chosen, . $N$ is the number of objects in $S$, and $r$ is the  ;wip
+So $f_X(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}$, where $\max(0, n - (N - r)) \le x \le \min(r, n)$. $\max(0, n - (N - r))$ is the minimum possible number of successes that must be chosen, . $N$ is the number of objects in $S$, and $r$ is the  ;wip
 
 Using the hypergeometric identity, we can prove that summing up all the the values of a hypergeometric distribution is 1.
 
@@ -444,17 +440,19 @@ Preconditions:
 * Multiple independent trials - objects chosen from $S$ **with replacement**.
 * Same probability of success in each trial.
 
-If the above are satisfied, then if $X$ represents the number of observed successes, $X$ has a binomial distribution and $f(x) = {n \choose x}p^x(1 - p)^{n - x}$ where $n$ is the number of objects selected, $p = P(success)$.
+If the above are satisfied, then if $X$ represents the number of observed successes, $X$ has a binomial distribution and $f_X(x) = {n \choose x}p^x(1 - p)^{n - x}$ where $n$ is the number of objects selected, $p = P(success)$.
 
 This is the same as the hypergeometric distribution, except our selection is done with replacement - every trial is independent. ;wip
 
-$X ~ \operatorname(Bin)(n, p)$. The $n$ is the number of the number of objects in $S$, and $p$ is the probability of success for each object.
+;wip: justify this and organize all of this properly
+
+$X ~ \operatorname(Bin)(n, p)$. The $n$ is the number of the number of objects in $S$, and $p$ is the probability of success for each object. ;wip: tilde is not showing up
 
 These independent trials resulting in success/failure are known as **Bernoulli trials**. The process is known as the **Bernoulli process**.
 
 With $x$ successes and $n - x$ failures, there are $n \choose x$ ways of choosing them.
 
-So $f(x) = {n \choose x}p^x(1 - p)^{n - x}$ where $0 \le x \le n$.
+So $f_X(x) = {n \choose x}p^x(1 - p)^{n - x}$ where $0 \le x \le n$.
 
 Given that we flip a coin 12 times, let $X$ be the number of heads obtained. What is the distribution of $X$?
 
@@ -463,7 +461,7 @@ Given that we flip a coin 12 times, let $X$ be the number of heads obtained. Wha
 
 The binomial distribution is not always symmetric and looks like a curve. The higher $p$ is, the heavier the graph is on the right.
 
-The binomial distribution is oftne used as a approximation for the hypergeometric distribution because it is easier to calculate and when the sample space is large, the probabilities of each event becomes nearly the same.
+The binomial distribution is often used as a approximation for the hypergeometric distribution because it is easier to calculate and when the sample space is large, the difference between sampling with and without replacement becomes negligible.
 
 ;wip: midterm on thursday from 4:30-6pm, rooms will be posted on LEARN, 5-6 short answer with parts, bring pink tie calculators, covers lecture 1-10, just before discrete uniform distribution, check formula sheet on the practice midterm, try the practice midterms and mapleta revision quiz (not for marks)
 
@@ -480,7 +478,7 @@ The binomial distribution is oftne used as a approximation for the hypergeometri
 
 The negative binomial distribution has the same preconditions as the binomial distribution, but now $X$ records the number of failures before the $k$th success and $x$ is the number of failures.
 
-This can be represented using $X ~ \operatorname{NB}(n, p)$.
+This can be represented using $X ~ \operatorname{NB}(n, p)$. ;wip: tilde not showing up
 
 Clearly, there are $x + k$ trials - successes plus failures, and the last trial is always a success.
 
@@ -504,5 +502,5 @@ Midterm Review.
 * De Morgan's law, expanding conjunctions and disjunctions and conditionals, mutual exclusivity and independece ($P(A \cap B) = P(A) P(B)$).
 * Product rule ($P(A \cap B) = P(A \mid B) P(B)$) and partition rule ($P(A) = P(A \cap B_1) + \ldots P(A \cap B_n)$ given $P(B_1) + \ldots + P(B_n) = 1$).
 * Probability function: $P(X = x)$ over all $X$, represented using a histogram.
-* Cumulative distribution function: $F(X) = P(X \le x)$, a non-decreasing function.
-* $f(x) = F(x) - F(x - 1)$.
+* Cumulative distribution function: $F_X(x) = P(X \le x)$, a non-decreasing function.
+* $f_X(x) = F_X(x) - F_X(x - 1)$.

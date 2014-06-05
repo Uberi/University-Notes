@@ -376,12 +376,31 @@ A      C    D
 <p>This only works with independent sources. If there are dependent sources, we simply keep them instead of removing their effects. If there are dependent sources that are nonlinear, then we cannot use superposition at all - only dependent sources that multiply a current/voltage with a constant will work.</p>
 <h1 id="section-13">3/6/14</h1>
 <p>;wip: catch up</p>
-<p>;wip: thevenin equivalent circuits: any section of a circuit (using only linear elements) can be represented using a voltage source in series with a resistor</p>
+<h2 id="thevenin-equivalent-circuits">Thevenin Equivalent Circuits</h2>
+<p>Any section of a circuit that consists entirely of linear elements (such as resistors and voltage/current sources) can be represented by a voltage source in series with a resistor.</p>
+<p>This voltage source in series with a resistor is called a <strong>Thevenin equivalent circuit</strong>.</p>
+<p>The resulting circuit is identical to the original circuit in every way.</p>
 <p>;wip: the voltage source is set to the open circuit voltage of the element, represented by <span class="math">\(V_{th}\)</span>, then we calculate the thevenin resistance <span class="math">\(R_{th}\)</span></p>
 <h1 id="section-14">4/6/14</h1>
 <p>;wip: one method works if there are only independent sources. first, remove the effects of the sources from the circuit (short circuit voltage sources, open circuit current sources)</p>
 <p>;wip: if the circuit contains only independent sources, we get <span class="math">\(R_{th} = R_{eq}\)</span></p>
-<p>;wip: we can get the open circuit voltage by using nodal analysis on the original circuit (with sources and everything) - note that the circuit is open, so many wires are carrying 0 current and often resistors will have no voltage drop</p>
+<p>;wip: we can get the open circuit voltage by using nodal analysis on the original circuit (with sources and everything) - note that the circuit is open, so some wires are carrying 0 current and resistors with no current across them will have no voltage drop.</p>
+<h1 id="section-15">5/6/14</h1>
+<p>When we have a mix of independent and dependent sources, we can no longer use the above method. When we have a dependent source, we can no longer simply remove the effects of all the sources.</p>
+<p><span class="math">\(V_{OC}\)</span> is the voltage at the open circuit.</p>
+<p>We also have another method for finding the Thevenin equivalent.</p>
+<p>Since there is no current when the circuit is open, <span class="math">\(V_{OC} = V_{th}\)</span> - the voltage at the open circuit is the same as the voltage of the voltage source.</p>
+<p>Note that the Thevenin circuit is equivalent to the original circuit in every way. So if we short circuit the open circuit, the current flowing through the short circuit <span class="math">\(i_{SC}\)</span> must also be the same as the original circuit.</p>
+<pre><code>   -----/\/\/\------o A &lt;= V_{AB} = V_{th} - without the short circuit
+   |                ?
+  ---               ? &lt;= I_{SC} - short circuit current
+-------             ?
+   |                ?
+   -----------------o B</code></pre>
+<p>From the diagram it is clear that <span class="math">\(I_{SC} = \frac{V_{OC}}{i_{SC}}\)</span>. So <span class="math">\(R_{th} = \frac{V_{OC}}{I_{SC}}\)</span>. This is the general formula for any linear circuit and works even if there are dependent sources.</p>
+<p>We should start by assuming one of the open terminals as positive and the other negative and assuming a direction for the current. Then we solve for short circuit current and open circuit voltage to calculate the Thevenin equivalent resistance.</p>
+<p>Also, if we have only dependent sources, or no sources at all, then there will be no current at all in the open circuit by itself. So the resulting Thevenin equivalent circuit will have no voltage source, only a resistor.</p>
+<p>Since we still need to find the Thevenin resistance, we introduce a test source, often of 1 V or left as an unknown, in order to find <span class="math">\(I_{SC}\)</span>, the current going through the voltage source. We could also introduce a current source, often of 1 A or left as an unknown, in order to find <span class="math">\(V_{OC}\)</span>, the voltage across the current source.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

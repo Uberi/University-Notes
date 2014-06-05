@@ -486,7 +486,14 @@ This only works with independent sources. If there are dependent sources, we sim
 
 ;wip: catch up
 
-;wip: thevenin equivalent circuits: any section of a circuit (using only linear elements) can be represented using a voltage source in series with a resistor
+Thevenin Equivalent Circuits
+----------------------------
+
+Any section of a circuit that consists entirely of linear elements (such as resistors and voltage/current sources) can be represented by a voltage source in series with a resistor.
+
+This voltage source in series with a resistor is called a **Thevenin equivalent circuit**.
+
+The resulting circuit is identical to the original circuit in every way.
 
 ;wip: the voltage source is set to the open circuit voltage of the element, represented by $V_{th}$, then we calculate the thevenin resistance $R_{th}$
 
@@ -496,4 +503,32 @@ This only works with independent sources. If there are dependent sources, we sim
 
 ;wip: if the circuit contains only independent sources, we get $R_{th} = R_{eq}$
 
-;wip: we can get the open circuit voltage by using nodal analysis on the original circuit (with sources and everything) - note that the circuit is open, so many wires are carrying 0 current and often resistors will have no voltage drop
+;wip: we can get the open circuit voltage by using nodal analysis on the original circuit (with sources and everything) - note that the circuit is open, so some wires are carrying 0 current and resistors with no current across them will have no voltage drop.
+
+# 5/6/14
+
+When we have a mix of independent and dependent sources, we can no longer use the above method. When we have a dependent source, we can no longer simply remove the effects of all the sources.
+
+$V_{OC}$ is the voltage at the open circuit.
+
+We also have another method for finding the Thevenin equivalent.
+
+Since there is no current when the circuit is open, $V_{OC} = V_{th}$ - the voltage at the open circuit is the same as the voltage of the voltage source.
+
+Note that the Thevenin circuit is equivalent to the original circuit in every way. So if we short circuit the open circuit, the current flowing through the short circuit $i_{SC}$ must also be the same as the original circuit.
+
+    
+       -----/\/\/\------o A <= V_{AB} = V_{th} - without the short circuit
+       |                ?
+      ---               ? <= I_{SC} - short circuit current
+    -------             ?
+       |                ?
+       -----------------o B
+
+From the diagram it is clear that $I_{SC} = \frac{V_{OC}}{i_{SC}}$. So $R_{th} = \frac{V_{OC}}{I_{SC}}$. This is the general formula for any linear circuit and works even if there are dependent sources.
+
+We should start by assuming one of the open terminals as positive and the other negative and assuming a direction for the current. Then we solve for short circuit current and open circuit voltage to calculate the Thevenin equivalent resistance.
+
+Also, if we have only dependent sources, or no sources at all, then there will be no current at all in the open circuit by itself. So the resulting Thevenin equivalent circuit will have no voltage source, only a resistor.
+
+Since we still need to find the Thevenin resistance, we introduce a test source, often of 1 V or left as an unknown, in order to find $I_{SC}$, the current going through the voltage source. We could also introduce a current source, often of 1 A or left as an unknown, in order to find $V_{OC}$, the voltage across the current source.

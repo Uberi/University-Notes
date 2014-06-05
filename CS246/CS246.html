@@ -338,6 +338,7 @@ int main() {
     cout &lt;&lt; x + y &lt;&lt; endl;
 }</code></pre>
 <p>Note that <code>cin</code> waits for an integer because the right side is an integer. This is an example of overloading. <code>cin</code> will always ignore whitespace and newlines when doing this.</p>
+<p>The syntax is <code>g++ OPTIONS FILE</code>.</p>
 <h3 id="inputoutput">Input/Output</h3>
 <p>If we type in some invalid input like <code>4 potato</code> to the above program or give an EOF, the variables are either uninitialized or set to 0 or other behaviour.</p>
 <h1 id="section-5">22/5/14</h1>
@@ -468,7 +469,7 @@ int &amp;z = y;</code></pre>
 <p>So <code>int *p = &amp;z</code> makes <code>p</code> point to <code>y</code> and <code>z = 5</code> sets <code>y</code> to 5. Also, <code>sizeof(z)</code> is simply the size of <code>y</code>. References are more or less exactly the same as writing the variable itself - they are aliases.</p>
 <p>References cannot be left uninitialized because they are actually constant pointers. Also, they must be initialized to something that has an address (an lvalue), so we can't do <code>int &amp;z = 5</code>.</p>
 <p>We cannot create a pointer to a reference itself (<code>int &amp;*p = ...;</code>), only the lvalue it refers to (<code>int *p = &amp;z</code>), but we can create a reference to a pointer (<code>int *&amp;p = q;</code> after <code>int *q;</code>). However, we cannot create a reference to an array (<code>int &amp;x[] = {1, 2, 3}</code>).</p>
-<p><code>cin</code> actually uses references to support things like <code>cin &gt;&gt; x</code>: <code>istream &amp;operator&gt;&gt;(istream &amp;in, int &amp;data)</code>. Here, <code>istream in</code> is <code>cin</code> and <code>data</code> is a reference to <code>x</code>. Both are being taken by reference because both are modified by reading. We return a reference because we don't want to copy the <code>istream</code> instances.</p>
+<p><code>cin</code> actually uses references to support things like <code>cin &gt;&gt; x</code>: <code>istream &amp;operator&gt;&gt;(istream &amp;in, int &amp;data)</code>. Here, <code>istream in</code> is <code>cin</code> and <code>data</code> is a reference to <code>x</code>. Both are being taken by reference because both are modified by reading. We return a reference because we don't want to copy the <code>istream</code> instances we returned.</p>
 <p>References are often used for arguments and return values in order to avoid copies (when copying is an expensive operation, like copying a big struct, or simply not possible, like an <code>istream</code>) and allow modification of the lvalue they refer to.</p>
 <p>When we have <code>int f(int x) { ... }</code> and we run <code>f(n)</code>, a copy of <code>n</code> is created and in <code>f</code>, <code>x</code> refers to that copy (this is why <code>n</code> is not modified).</p>
 <h1 id="section-8">3/6/14</h1>
@@ -477,18 +478,60 @@ int &amp;z = y;</code></pre>
 <p>Functions in C++ accept arrays in much the same way as in C: <code>int f(int a[])</code>.</p>
 <p>THe <code>main</code> function has two possible prototypes:</p>
 <pre><code>int main(); // note that we didn&#39;t need to use void
-int main( int argc, char *argv[] );</code></pre>
+int main(int argc, char *argv[] );</code></pre>
 <p>If we use the second form, <code>argc</code> is the length of <code>argv</code>, and <code>argv</code> is an array of strings representing each command line argument. <code>argc</code> is always non-zero, since there is always at least one argument.</p>
 <p>The first element of <code>argv</code> is the name of the current program that is running. For example, <code>./a.out</code>.</p>
+<p>;wip: heap stuff, maybe check the course outline</p>
+<h1 id="section-9">5/6/14</h1>
 <h2 id="preprocessor">Preprocessor</h2>
 <p>The <strong>preprocessor</strong> changes the code before it actually gets to the compiler. It can do several types of manipulations to source code files.</p>
 <p>The preprocessor can be used for many possible things, but is mainly used for substitution, file inclusion, and conditional inclusion.</p>
 <p>The preprocessor is controlled via preprocessor directives. These are just lines that start with <code>#NAME_OF_DIRECTIVE</code> with no preceding whitespace, and are followed by the arguments to the directive.</p>
-<p>The <code>#define VARIABLE ...</code> directive replaces all instances of <code>VARIABLE</code> with <code>...</code>, where <code>...</code> can be anything. To represent multiple lines, use a backslash at the end of the line. The <code>-DVARIABLE=&quot;...&quot;</code> command line flag to <code>g++</code> accomplishes the same purpose.</p>
-<p>That said, don't use <code>#define</code> whenever possible. For enumerations, use <code>enum</code>, and for functions that need to be fast, use the <code>inline</code> keyword to automatically inline the function: <code>RETURN_TYPE inline NAME(...)</code>.</p>
+<p>The <code>#define VARIABLE ...</code> directive replaces all instances of <code>VARIABLE</code> with <code>...</code>, where <code>...</code> can be anything. To represent multiple lines, use a backslash at the end of the line.</p>
+<p>The <code>-DVARIABLE=&quot;...&quot;</code> command line flag to <code>g++</code> accomplishes the same purpose without having to modify the source - these are defines that are processed before the preprocessor looks at the file. We use it as <code>g++ -DA=1 -DB=2 -DC=3 file.cc</code>.</p>
+<p>That said, don't use <code>#define</code> whenever possible. For enumerations, use <code>enum</code>, and for functions that need to be fast, use the <code>inline</code> keyword to automatically inline the function: <code>RETURN_TYPE inline NAME(...)</code>. This directive is useful for debugging flags to turn on debugging features in the program.</p>
+<p><code>#define VARIABLE</code> defines <code>VARIABLE</code> to be the empty string. This simply defines the variable but gives it a blank value.</p>
+<p>This is often used with the <code>#ifdef VARIABLE</code> and <code>#ifndef VARIABLE</code> directives, which check if <code>VARIABLE</code> is defined and include code accordingly.</p>
 <p>The <code>#include</code> directive works much line in C, but for standard library paths we can drop the <code>.h</code> suffix - it is <code>#include &lt;iostream&gt;</code> rather than <code>#include &lt;iostream.h&gt;</code>.</p>
 <p>The <code>#if EXPRESSION</code> directive and its corresponding <code>#else</code> and <code>#elseif EXPRESSION</code> and <code>#endif</code> operator allow us to include code depending on the value of <code>EXPRESSION</code>. <code>EXPRESSION</code> supports all of the operators as C++ source code, but the operands must be integers or characters.</p>
+<p>This is often used to make code cross platform:</p>
+<pre><code>#define UNIX 0
+#define WINDOWS 1
+#define OS UNIX
+
+int main() {
+    #if OS == UNIX
+    // compatibility stuff here
+    #elseif OS == WINDOWS
+    //compatiility stuff here
+    #else
+    // default case
+    #endif
+}</code></pre>
+<p>Also, we can use <code>#if 0</code> to make a block that will never be included. This is useful for commenting out the body of the directive, especially where block comments don't work when there are nested block comments.</p>
 <p>The <code>cassert</code> library adds assertions, much like those in C. After using <code>#include &lt;cassert&gt;</code>, the <code>assert(EXPRESSION)</code> or <code>assert(DESCRIPTION_STRING, EXPRESSION)</code> function can be used.</p>
+<p>A program split over multiple files can be written in such a way that each file can be compiled separately. Each module should have an interface (header file) and implementation (source file).</p>
+<p>A function prototype is a signature associated with a return type. For example, <code>int v(int x, string y)</code>. A signature is the types of the arguments of a function, such as <code>v(int, string)</code> (the parameter names are optional).</p>
+<p>We can overload <code>operator+</code> and other functions to implement functionality:</p>
+<pre><code>struct Vector {
+    int x;
+    int y;
+}
+
+Vector operator+(const Vector &amp;a, const Vector &amp;b) {
+    Vector v;
+    v.x = a.x + b.x;
+    v.y = a.y + b.y;
+    return v;
+}</code></pre>
+<h2 id="linking">Linking</h2>
+<p>For many projects, we can just compile them with <code>g++ *.cc</code>. However, this only works well if all the source files are part of the project. We can also simply specify every file to compile: <code>g++ main.cc vector.cc</code>.</p>
+<p>For large projects, it can take hours just to compile all the files. Separate compilation means that we can recompile only the parts that we changed, and in this way save a lot of time.</p>
+<p>The linker is the program that runs after the compiler in the compilation chain. It combines all the compiled files together into a single executable. The linker in Linux is called <code>ld</code>.</p>
+<p>Compilation results in an object file, which has the code, a list of what symbols it expects, and which it provides. They are conventionally stored in &quot;*.o&quot; files. The linker resolves these names together in a way that allows all the requirements to be satisfied.</p>
+<p>The <code>-c</code> command line option (used like <code>g++ -c FILE</code>) allows us to compile without linking. This results in the object file, and the linker is not invoked at all.</p>
+<p>An object file can be directly linked, so we don't need to compile the source again for that file. For examplle, if we compiled &quot;vector.cc&quot; into <code>vector.o</code>, then our compilation command would change from <code>g++ main.cc vector.cc</code> to <code>g++ main.cc vector.o</code>, and G++ would use the object file instead of compiling <code>vector.cc</code> again.</p>
+<p>We should never have global variables in headers (<code>global int n</code>). This is because global variables are declarations and definitions (since they reserve space for the variable), so there would be multiple definitions if we included the header more than once. Instead, we use <code>extern int n</code> to only declare and not define the variable. ;wip: C++ globals</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
