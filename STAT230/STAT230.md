@@ -478,15 +478,24 @@ The binomial distribution is often used as a approximation for the hypergeometri
 
 The negative binomial distribution has the same preconditions as the binomial distribution, but now $X$ records the number of failures before the $k$th success and $x$ is the number of failures.
 
-This can be represented using $X ~ \operatorname{NB}(n, p)$. ;wip: tilde not showing up
+This can be represented using $X ~ \operatorname{NB}(k, p)$, where $k$ is the number of successes and $p$ is the probability of success. ;wip: tilde not showing up
 
 Clearly, there are $x + k$ trials - successes plus failures, and the last trial is always a success.
 
 So there are $x + k - 1$ trials in which there are $x$ failures, and $x + k - 1 \choose x$ arrangements.
 
+So $f_X(x) = {x + k - 1 \choose x}p^k(1 - p)^x$ where $0 \le x$.
+
 Also, ${a + b \choose a} = {a + b \choose b}$.
 
 With binomial distributions we know the number of trials but not the number of successes. With negative binomial distributions we know the number of successes but not the number of trials.
+
+If 20% of people agree to buy tickets, and we want 25 people to buy tickets, what is the probability function of $X$ where $X$ is the number of people asked before 25 tickets are bought?
+
+> Clearly, $X$ is the number of failures plus 25 successes, and $k = 25, p = 0.2$.  
+> Let $X = Y + 25$ where $Y ~ \operatorname{NB}(25, 0.2)$, so $x = y + 25$ and $y = x - 25$.  
+> So $f_Y(y) = {y + 25 - 1 \choose y}p^{25}(1 - 0.2)^y = {y + 24 \choose y}0.2^{25}0.8^y$ where $0 \le y$.  
+> So $f_X(x) = {x - 1 \choose x - 25}0.2^{25}0.8^{x - 25}$ where $25 \le x$.  
 
 # 4/6/14
 
@@ -504,3 +513,41 @@ Midterm Review.
 * Probability function: $P(X = x)$ over all $X$, represented using a histogram.
 * Cumulative distribution function: $F_X(x) = P(X \le x)$, a non-decreasing function.
 * $f_X(x) = F_X(x) - F_X(x - 1)$.
+
+# 6/6/14
+
+### Geometric Distribution
+
+This basically the same as the negative binomial distribution with $k = 1$. It has the same preconditions as the binomial distribution, but $X$ is the number of failures before the first success.
+
+If $X$ has a geometric distribution, then $f_X(x) = (1 - p)^xp$ where $0 \le x$. This can easily be derived from  the negative binomial distribution.
+
+Also, we can write $X ~ \operatorname{NB}(1, p)$ or $X ~ \operatorname{Geo}(p)$.
+
+Note that the binomial, negative binomial, and geometric distributions all have the same preconditions - two outcomes, independent trials, and equal probability of success in each trial.
+
+The only thing different between them is what $X$ means - successes given $n$ trials, failures given $n$ successes, and failures given 1 success.
+
+Given that there is a 30% chance of a car having leaks, and that the probability that we must check at least $n$ cars to find the first one with leaks is 0.05, what is the value of $n$?
+
+> Let $X$ represent the number of cars without leaks before finding one with leaks. Then $f_X(x) = 0.3(1 - 0.3)^x = 0.3 \cdot 0.7^x$.  
+> We want to find $n$ such that $P(X \ge n - 1) = 0.05$, since we want $n - 1$ or more cars to not have leaks before the first one with leaks.  
+> So $P(X \ge n - 1) = \sum_{i = n - 1}^\infty f_X(i) = 0.05$.  
+> So $0.3 \cdot 0.7^{n - 1} + 0.3 \cdot 0.7^n + 0.3 \cdot 0.7^{n + 1} + \ldots = 0.3 \cdot 0.7^{n - 1}(1 + 0.7^1 + 0.7^2 + \ldots) = 0.3 \cdot 0.7^{n - 1}\frac 1 {1 - 0.7} = 0.7^{n - 1} = 0.05$.  
+> So $\ln 0.7^{n - 1} = \ln 0.05$ and $n = \frac{\ln 0.05}{\ln 0.7} + 1 \approxeq 9.4$.  
+> Since $n$ must be an integer, we have to round it. Clearly, $P(X \ge 9.4 - 1) = P(X \ge 10 - 1) \ne P(X \ge 9 - 1)$, so we must round up.  
+> So the probability that we must check at least 10 cars to find the first one with leaks is 0.05.  
+
+### Poisson Distribution
+
+Preconditions:
+
+* Events occur at a rate/concentration/density $\mu$.
+
+If the above are satisfied, then if $X$ represents the number of events of some type within some interval, $X$ has a Poisson distribution and $f_X(x) = \frac{e^{-\mu} \mu^x}{x!}$ where $x \ge 0$.
+
+This can be represented using $X ~ \operatorname{Poisson}(\mu)$.
+
+This distribution is defined over a countably infinite set of outcomes.
+
+Examples of this distribution occurring naturally might include the number of white cars we observe in 30 minutes, or the number of bacteria in particular radius.
