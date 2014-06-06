@@ -696,9 +696,43 @@ Then we find the partial fraction decomposition: $A(x) = \frac A {1 - 2x} + \fra
 
 Solving, we get $A(x) = \frac 3 {1 - 2x} - \frac 1 {1 + x} + \frac 4 {(1 + x^2)}$.
 
-Then $[x^n]A(x) = [x^n]\frac 3 {1 - 2x} - [x^n]\frac 1 {1 + x} + [x^n]\frac 4 {(1 + x^2)^2} = [x^n]3\sum_{i = 0}^\infty 2^nx^n - [x^n]\sum_{i = 0}^\infty (-1)^nx^n + [x^n]4\sum_{i = 0}^\infty {n + 2 - 1 \choose 2 - 1}x^n$.  
+Then $[x^n]A(x) = [x^n]\frac 3 {1 - 2x} - [x^n]\frac 1 {1 + x} + [x^n]\frac 4 {(1 + x^2)^2} = [x^n]3\sum_{i = 0}^\infty 2^ix^i - [x^n]\sum_{i = 0}^\infty (-1)^ix^i + [x^n]4\sum_{i = 0}^\infty {i + 2 - 1 \choose 2 - 1}x^i = 3 \times 2^n - (-1)^n + {n + 1 \choose 1} = 3 \times 2^n - (-1)^n + n + 1$.  
 
 So $[x^n]A(x) = 3 \cdot 2^n + (-1)^n(4n + 3)$.
 
-In general, if $A(x) = \frac{f(x)}{g(x)}$ where the degree of the numerator is lower than that of the denominator, and $g(x)$ can be factored into $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}$, then using partial fractions, there exist constants $C_{i, j}$ such that $A(x) = \left(\frac{C_{1, 1}}{1 - r_1x} + \ldots + \frac{C_{1, e_1}}{1 - r_1x}^{e_1}\right) + \ldots + \left(\frac{C_{n, 1}}{1 - r_nx} + \ldots + \frac{C_{n, e_1}}{1 - r_nx}^{e_1}\right)$.
+In general, if $A(x) = \frac{f(x)}{g(x)}$ where the degree of the numerator is lower than that of the denominator, and $g(x)$ can be factored into $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}$, then using partial fractions, there exist constants $C_{i, j}$ such that $A(x) = \left(\frac{C_{1, 1}}{1 - r_1x} + \ldots + \frac{C_{1, e_1}}{1 - r_1x}^{e_1}\right) + \ldots + \left(\frac{C_{n, 1}}{1 - r_nx} + \ldots + \frac{C_{n, e_1}}{1 - r_nx}^{e_1}\right)$. Given this, we can expand the series of each fraction into power series, and after that it is easy to find the coefficients.
 
+The basic technique is to get the partial fraction decomposition, expand the power series, and then get the coefficient values from the power series.
+
+# 6/6/14
+
+Let $A(x) = \frac{f(x)}{g(x)}$. Let $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_k)^{e_k}$. If the constant term of $g(x)$ is not 1, then divide both $f(x)$ and $g(x)$ by that term to make it 1. ;wip: what if there is no constant term?
+
+In general, $[x^n]A(x) = a_n = (C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n) + (C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n)$.
+
+Clearly, ${n + e_i - 1 \choose e_i - 1} = \frac{(n + e_i - 1)!}{(e_i - 1)!n!} = \frac{(n + e_i - 1) \cdots (n + 1)}{(e_i - 1)!}$, so it is a polynomial of degree $e_i - 1$. So $A(x) = p_1(n)r_1^n + \ldots + A(x) = p_k(n)r_k^n$, where $p_i(n)$ has a degree less than or equal to $e_i - 1$.
+
+Recall that $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}$. Then we construct $g^*(x) = (x - r_1)^{e_1} \cdots (x - r_k^{e_k})$. This is the **characteristic polynomial** of $g(x)$. It has roots $r_1, \ldots, r_k$ and $r_i$ has multiplicity $e_i$. The characteristic polynomial is just the one where there is a root for each $r_i$.
+
+In the above example, the characteristic polynomial of $g(x)$ is $g^*(x) = (x - 2)(x + 1)^2 = x^3 - 3x - 2$. Note that the polynomial is exactly the same, except the power of $x$ in each term is swapped - $x^i$ in each term is replaced with $x^{n - i}$. This is a faster way to find the characteristic polynomial.
+
+Then $[x^n]A(x) = \alpha 2^n + (\beta n + \gamma)(-1)^n$ for constants $\alpha, \beta, \gamma$. Using the $A(x) = \sum_{i = 0}^\infty a_ix^i = \frac{6 - x + 5x^2}{(1 - 2x)(1 + x)^2}$ and multiplying both sides by $g(x)$ and solving, we get $a_0 = 6, a_1 = -1, a_2 = 23$.
+
+Clearly, $a_n = [x^n]A(x)$, so given these three values, we get $a_0 = \alpha 2^0 + (\beta 0 + \gamma)(-1)^0, a_1 = \alpha 2^1 + (\beta 1 + \gamma)(-1)^1, a_2 = \alpha 2^2 + (\beta 2 + \gamma)(-1)^2$. Solving, we get $\alpha = 3, \beta = 4, \gamma = 3$, so $a_n = 3 \times 2^n + (2n + 3)(-1)^n$.
+
+Solving Homogeneous Recurrences
+-------------------------------
+
+Given $A(x) = \sum_{n = 0}^\infty a_nx^n$ where $a_0 = 1, a_1 = 4, a_n - 3a_{n - 1} + 2a_{n - 2} = 0$, find the explicit formula for $a_n$:
+
+> First, we multiply $x^n$ with the recurrence, so $a_nx^n - 3a_{n - 1}x^n + 2a_{n - 2}x^n = 0$.  
+> If we sum all of them to infinity, $\sum_{n = 2}^\infty (a_nx^n - 3a_{n - 1}x^n + 2a_{n - 2}x^n) = 0 = \sum_{n = 2}^\infty a_nx^n - 3\sum_{n = 1}^\infty a_nx^{n + 1} + 2\sum_{n = 0}^\infty a_nx^{n + 2}$.  
+> So $\sum_{n = 2}^\infty a_nx^n - 3x\sum_{n = 1}^\infty a_nx^n + 2x^2\sum_{n = 0}^\infty a_nx^n = 0$.  
+> Clearly, $\sum_{n = 2}^\infty a_nx^n = A(x) - a_1x^1 - a_0x^0$ (removing the first two terms) and $\sum_{n = 1}^\infty a_nx^{n + 1} = A(x) - a_0x^0$.  
+> So $A(x) - a_1x^1 - a_0x^0 - 3x(A(x) - a_0x^0) + 2x^2A(x) = 0$ and solving, we get $A(x) = \frac{1 + x}{1 - 3x + 2x^2}$.  
+> Clearly, the characteristic polynomial of the denominator of $A(x)$ is $x^2 - 3x + 2 = (x - 2)(x - 1)$.  
+> So there are roots 1 and 2, both with multiplicity 1, and so $a_n = \alpha 2^n + \beta 1^n$ for some constants $\alpha, \beta$.  
+> So $a_0 = \alpha 2^0 + \beta 1^0$ and $a_1 = \alpha 2^1 + \beta 1^1$, and solving, we get $\alpha = 3, \beta = -2$.  
+> So $a_n = 3 \times 2^n - 2$.  
+
+In fact, we can just do it directly from the recurrence relation: $a_n - 3a_{n - 1} + 2a_{n - 2}$ can directly be cconverted into the characteristic polynomial $x^2 - 3x + 2$, and we can solve for $a_n$ directly using the $a_n = (C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n) + (C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n)$ formula.
