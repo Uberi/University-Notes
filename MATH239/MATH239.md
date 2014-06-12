@@ -35,6 +35,9 @@ $$
 
 # 5/5/14
 
+Enumeration
+-----------
+
 ### Sets and Combinatorics
 
 Combinatorics is a discrete mathematics. Topics include enumeration (counting) and graph theory.
@@ -603,32 +606,32 @@ If $AB$ is unambiguous, then $\Phi_{AB}(x) = \Phi_A(x) \Phi_B(x)$ where $w(a, b)
 
 Since $AB$ is unambiguous, there is a bijection between $AB$ and $A \times B$, so it follows by the product lemma.
 
-If $A*$ is unambiguous, then $\Phi_{A*}(x) = \frac 1 {1 - \Phi_A(x)}$.
+If $A^*$ is unambiguous, then $\Phi_{A^*}(x) = \frac 1 {1 - \Phi_A(x)}$.
 
 Proof:
 
 > Since $A*$ is unambiguous, $A^n$ is unambiguous.  
 > Clearly, $\epsilon \notin A$, because if it was then $AA$ would be ambiguous.  
-> So $\Phi_A(x)$ has no constant term and $\Phi_{A*}(x)$ is a geometric series.  
-> So $\Phi_{A*}(x) = \frac 1 {1 - \Phi_A(x)}$.  
+> So $\Phi_A(x)$ has no constant term and $\Phi_{A^*}(x)$ is a geometric series.  
+> So $\Phi_{A^*}(x) = \frac 1 {1 - \Phi_A(x)}$.  
 
 There are three basic unambiguous decompositions of the set of all binary strings. A decomposition is a way of writing a set using other sets. Often, the set being decomposed is infinite or otherwise hard to represent.
 
-One is $\set{0, 1}*$. Every binary string has a unique sequence of the elements in the set that, when concatenated, results in that string (we break the string between each character).
+One is $\set{0, 1}^*$. Every binary string has a unique sequence of the elements in the set that, when concatenated, results in that string (we break the string between each character).
 
-Another is $\set{0}*(\set{1}\set{0}*)*$. Again, there is only one way for each string to be represented using the elements in the set (we break the string just before each 1).
+Another is $\set{0}^*(\set{1}\set{0}^*)^*$. Again, there is only one way for each string to be represented using the elements in the set (we break the string just before each 1).
 
-The last is the **block decomposition**: $\set{0}*(\set{1}\set{1}*\set{0}\set{0}*)*\set{1}*$. The reason for the name is because it matches blocks of 1 followed by blocks of 0 an arbitrary number of times.
+The last is the **block decomposition**: $\set{0}^*\left(\set{1}\set{1}^*\set{0}\set{0}^*\right)^*\set{1}^*$. The reason for the name is because it matches blocks of 1 followed by blocks of 0 an arbitrary number of times.
 
-We can also swap the 1 and 0 to the same effect: $\set{0}*(\set{1}\set{0}*)*$ matches the same strings as $\set{1}*(\set{0}\set{1}*)*$.
+We can also swap the 1 and 0 to the same effect: $\set{0}^*(\set{1}\set{0}^*)^*$ matches the same strings as $\set{1}^*(\set{0}\set{1}^*)^*$.
 
 # 2/6/14
 
 Let $S$ be the set of all binary strings with no 3 consecutive 0 - strings that do not contain 000. What is the generating series of this set?
 
-> We can use the $\set{0}*(\set{1}\set{0}*)*$ decomposition to match these strings.   
-> Clearly, we can have three consecutive 0 when and only when we have a $\set{0*}$. Instead, we can replace this with $\set{\epsilon, 0, 00}$, the subset of $\set{0}*$ that do not contain 3 consecutive 0.  
-> So $S = \set{\epsilon, 0, 00}(\set{1}\set{\epsilon, 0, 00})*$. This is still unambiguous because we are simply removing strings we do not want to match.  
+> We can use the $\set{0}^*(\set{1}\set{0}^*)^*$ decomposition to match these strings.   
+> Clearly, we can have three consecutive 0 when and only when we have a $\set{0^*}$. Instead, we can replace this with $\set{\epsilon, 0, 00}$, the subset of $\set{0}^*$ that do not contain 3 consecutive 0.  
+> So $S = \set{\epsilon, 0, 00}(\set{1}\set{\epsilon, 0, 00})^*$. This is still unambiguous because we are simply removing strings we do not want to match.  
 > Since it is unambiguous, $\Phi_S(x) = (1 + x + x^2) \frac 1 {1 - (x + x^2 + x^3)}$ ;wip = (1 + x + x^2)$ ;wip: $$
 
 Let $T$ be the set of all binary strings where each block has length at least 2. What is the generating series of this set?
@@ -637,7 +640,7 @@ Let $T$ be the set of all binary strings where each block has length at least 2.
 > Clearly, $T = (\set{00}\set{0}* \cup \set{\epsilon}))(\set{11}\set{1}*\set{00}\set{0}*)*(\set{11}\set{1}* \cup \set{\epsilon})$.  
 > ;wip: $\Phi_T(x) = \frac{1 - x + x^2}{1 - x - x^2}$
 
-Let $U$ be the set of all binary strings where an even block of 0 cannot be followed by an odd block of 1. What is the generating sereis for this set?
+Let $U$ be the set of all binary strings where an even block of 0 cannot be followed by an odd block of 1. What is the generating series for this set?
 
 > Clearly, we can use the $\set{1}*(\set{0}\set{0}*\set{1}\set{1}*)*\set{0}*$ block decomposition to match these strings (we swapped 0 and 1).  
 > Clearly, $U = \set{1}*(\set{00}\set{00}*\set{11}\set{11}* \cup \set{0}\set{00}*\set{1}\set{1}*)*\set{0}*$. We are using two cases - when the block is of even length, and when it is of odd length, and considering each case separately.  
@@ -665,7 +668,7 @@ So $\Phi_S(x) = 1 + 2x\Phi_S(x) = \frac 1 {1 - 2x}$. Incidentally, $[x^n]\frac{1
 Let $S$ be the set of all binary strings with no three consecutive 0. What is the generating series?
 
 > First, we cut the string starting right after the first 1. Then the part we cut off is also in $S$.  
-> Then the first part can only be 1 or 01 or 001, because there cannot be 3 consecutive 0 and this is the first 1.  
+> Clearly, the first part can only be 1 or 01 or 001, because there cannot be 3 consecutive 0 and this is the first 1.  
 > So we can represent the string as $S = \set{1, 01, 001}S \cup \set{\epsilon, 0, 00}$, since $\epsilon, 0, 00$ are the only possible strings that cannot be represented using the recursion.  
 > So the generating series is $\Phi_S(x) = (x + x^2 + x^3)\Phi_S(x) + (1 + x + x^2)$ and $\Phi_S(x) - (x + x^2 + x^3)\Phi_S(x) = 1 + x + x^2$.  
 > So $(1 - x - x^2 - x^3)\Phi_S(x) = 1 + x + x^2$ and $\Phi_S(x) = \frac{1 + x + x^2}{1 - x - x^2 - x^3}$.  
@@ -736,3 +739,113 @@ Given $A(x) = \sum_{n = 0}^\infty a_nx^n$ where $a_0 = 1, a_1 = 4, a_n - 3a_{n -
 > So $a_n = 3 \times 2^n - 2$.  
 
 In fact, we can just do it directly from the recurrence relation: $a_n - 3a_{n - 1} + 2a_{n - 2}$ can directly be cconverted into the characteristic polynomial $x^2 - 3x + 2$, and we can solve for $a_n$ directly using the $a_n = (C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n) + (C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n)$ formula.
+
+# 9/4/14
+
+Basic steps for solving homogeneous recurrences:
+
+1. Find the characteristic polynomial by reversing the powers of the denominator.
+2. Find the roots of the characteristic polynomial.
+3. Starting with an empty general solution, for each root $r$ with multiplicity $k$, we add $p(n)r^n$ to the general solution, where $p(n)$ is a polynomial of degree $k - 1$.
+4. Use initial conditions to solve for unknown constants.
+
+Find a closed form for $a_n$ where $a_0 = 1, a_1 = 2, a_2 = 1, a_n - 3a_{n - 1} + 3a_{n - 2} - a_{n - 3} = 0$:
+
+> Clearly, the characteristic polynomial is $x^3 - 3x^2 + 3x - 1$, which we get by writing out the coefficients of $a_n, a_{n - 1}, \ldots$ and writing powers of $x$ beside them.  
+> Factoring, we get $x^3 - 3x^2 + 3x - 1 = (x - 1)^3$. So there is one root, 1, with multiplcity 3.  
+> So $a_n = p(n)r^k = (An^2 + Bn + C)1^n = An^2 + Bn + C$. We know that $p(n) = An^2 + Bn + C$ because it is an arbitrary polynomial of degree at most 2.  
+> So $a_0 = 1 = A0^2 + B0 + C, a_1 = 2 = A1^2 + B1 + C, a_2 = A2^2 + B2 + C$. Solving, we get $A = -1, B = 2, C = 1$.  
+> So $a_n = -n^2 + 2n + 1$.  
+> Note that $a_n = O(n^2)$.  
+
+Also, $1 + \sqrt{5} = \phi$, the golden ratio.
+
+Find the closed form for the Fibonacci sequence, $a_0 = 0, a_1 = 1, a_n - a_{n - 1} - a_{n - 2} = 0$:
+
+> Clearly, the characteristic formula is $x^2 - x - 1 = (x - \frac{1 + \sqrt{5}}{2})(x - \frac{1 - \sqrt{5}}{2})$.  
+> So $a_n = A\left(\frac{1 + \sqrt{5}}{2}\right)^n + B\left(\frac{1 - \sqrt{5}}{2}\right)^n$.  
+> Solving, we get $A = \frac 1 {\sqrt{5}}, B = -\frac 1 {\sqrt{5}}$.  
+> So $a_n = \frac{\left(\frac{1 + \sqrt{5}}{2}\right)^n - \left(\frac{1 - \sqrt{5}}{2}\right)^n}{\sqrt{5}}$.  
+
+### Non-homogeneous Recurrences
+
+Homogeneous recurrences are those where the constant term is 0. For example, $a_n + a_{n - 1} = 0$ - the right side is 0.
+
+A non-homogeneous recurrence is therefore one that has a non-zero constant term.
+
+For example, $a_0 = 11, a_1 = 42, a_n - 3a_{n - 1} + 2a_{n - 2} = 10 \times 3^{n - 1}$.
+
+Suppose $b_n$ satisfies $b_n - 3b_{n - 1} + 2b_{n - 2} = 10 \times 3^{n - 1}$ (it has the same recursive part as $a_n$), but does not necessarily satisfy the initial conditions.
+
+Then $(a_n - b_n) - 3(a_{n - 1} - b_{n - 1}) + 2(a_{n - 2} - b_{n - 2}) = 0$. So $a_n - b_n$ is a homogeneous version of the recurrence.
+
+So the characteristic polynomial is $x^2 - 3x + 2 = (x - 2)(x - 1)$ with roots 1 and 2, so $a_n - b_n = A1^n + B2^n$, so $a_n = b_n + A + B2^n$.
+
+$b_n$ is called the **specific solution**, and $A + B2^n$ is the solution to the homogeneous version. This is reminiscent of LDEs in MATH135, where the general solution to an LDE is a specific solution plus an offset.
+
+We can find $b_n$ by using guess and check.
+
+We guess $b_n = C3^n$. Then $b_n - 3b_{n - 1} + 2b_{n - 2} = C3^n - 3C2^{n - 1} + 2C3^{n - 2} = C3^{n - 2}(3^2 - 3 \cdot 3 + 2) = 2C3^{n - 2}$, and $b_n = 10 \cdot 3^{n - 1} = 2C3^{n - 2}$.
+
+Solving, $C = 15$ and $b_n = C3^n = 15 \cdot 3^n$.
+
+So $a_n = 15 \cdot 3^n + A + B2^n$.
+
+Why did we guess $b_n = C3^n$? We determined this from the generating series.
+
+If we multiply the recurrence by $x^n$ and sum over $n \ge 2$, then we get $\sum_{n = 2}^\infty (b_nx^n - 3b_{n - 1}x^n + 2b_{n - 2}x^n) = \sum_{n = 2}^\infty 10 \cdot 3^{n - 1}x^n$. So $(1 - 3x + 2x^2)\sum_{n = 0}^\infty b_n x^n = \frac{10}{3} (3^2 x^2) \frac 1 {1 - 3x} = \frac{30x^2}{1 - 3x}$.
+
+Using partial fraction decomposition, $\sum_{n = 0}^\infty b_n x^n = \frac{30x^2}{(1 - 3x)(1 - 3x + 2x^2)} = \frac \ldots {1 - 3x} + \frac \ldots {1 - 2x} + \frac \ldots {1 - x}$. Note that $\frac \ldots {1 - 3x}$ is the result of the homogeneous part, so ;wip: what does that even mean
+
+Find a closed form for $a_0 = 2, a_1 = 3, a_n - a_{n - 1} - 2a_{n - 2} = -4n + 16$:
+
+> Let $b_n = An + B$ for some $A, B$ ;wip
+
+# 11/6/14
+
+So to solve non-homogeneous recurrences:
+
+1. Guess a specific solution.
+2. Substitute $a_n = b_n + \ldots$ to get a a homogeneous recurrence.
+3. Use the initial conditions to find the unknowns. ;wip: rewrite these steps so they make sense
+
+Solve $a_0 = 1, a_1 = 1, a_n - a_{n - 1} - 2a_{n - 2} = 3 \times 2^n, n \ge 2$:
+
+> Guess $b_n = \alpha 2^n$. Then $b_n - b_{n - 1} - 2b_{n - 2} = \alpha 2^{2 - n}(2^2 - 2^1 - 2 \times 2^0) = 0$. Clearly, this guess is wrong because $0 \ne \alpha 2^n$ for all $n$.  
+> Guess $b_n = \alpha n 2^n$. Then $b_n - b_{n - 1} - 2b_{n - 2} = \alpha 2^{2 - n}(n2^2 - (n - 1)2^1 - (n - 2)2 \times 2^0) = \alpha n2^{n - 2}(2^2 - 2^1 - 2 \times 2^0 ) + \alpha 2^{n - 2}(2^1 + 4 \times 2^0) = 3 \alpha 2^{n - 1}$.  
+> Then $3 \alpha 2^{n - 1} = 3 \times 2^n$, so $\alpha = 2$ and $b_n = 2n 2^2 = n2^{n + 1}$.  
+> With a characteristic polynomial of $x^2 - x - 2 = (x - 2)(x + 1)$, $a_n = n2^{n + 1} + A2^n + B(-1)^n$.  
+> With $a_0 = 1, a_1 = 1$, $A = -1, B = 1$. So $a_n = n2^{n + 1} - 2^n + (-1)^n$.  
+> We guessed $b_n = \alpha n 2^n$ for a reason.  
+> If we multiply $a_n - a_{n - 1} - 2a_{n - 2} = 3 \times 2^n$ by $x^n$ and sum it over all $n \ge 2$, we get $(1 - x - x^2) A(x) = 3 \sum_{n = 2}^\infty 2^nx^n = \frac{3 \times 2^2x^n}{1 - 2x}$ for some $A(x)$ that we want to find.  
+> Using partial fraction decomposition, $A(x) = \frac{\ldots}{(1 - x - 2x^2)(1 - 2x)} = \frac{\ldots}{(1 - x - 2x^2)(1 - 2x)} = \frac{\ldots}{1 + x} + \frac{\ldots}{1 - 2x} + \frac{\ldots}{(1 - 2x)^2}$.  
+> The $\frac{\ldots}{(1 - 2x)^2}$ is the non-homogenous part, so the we have $n2^n$ ;wip: what? how? why?
+
+In general, if a recurrence equals $kp^n$ where $p$ is a root of the characteristic polynomial with multiplicity $k$, then we should use $b_n = \alpha n^{k - 1} p^n$ as a guess.
+
+Graph Theory
+------------
+
+### Definitions
+
+A **graph** is a pair $G = (V(G), E(G))$ where $V(G)$ is a set of objects called **vertices**, and $E(G)$ is a set of unordered pairs of $V(G)$ called **edges** (these pairs are basically just 2-subsets of $V(G)$).
+
+For example, $G = \left(\set{a, b, c, d}, \set{\set{a, b}, \set{b, c}, \set{c, d}, \set{a, d}}\right)$ is a graph.
+
+We often represent graphs graphically, by drawing the vertices on a 2D surface as labelled circles or dots, and edges as lines or curves connecting the vertices they contain. Graphical representations are not unique - the vertices in the drawing can be arranged arbitrarily on the surface and the edges can be drawn as any kind of curvy line.
+
+Let $G$ be a graph. Let $u, v \in V(G)$.
+
+Then $u$ and $v$ are **adjacent** if there is an edge connecting the two. Formally, $u, v$ are adjacent if $\set{u, v} \in E(G)$.
+
+If $u$ is adjacent to $v$, then $u$ is a **neighbour** of $v$.
+
+The set of all the neighbors of $u$ is called the **neighbourhood**. Formally, the neighourhood of $u$ is $\set{v \middle| \set{v} \in \set{e \setminus \set{u} \middle| \set{e \in E(G) \middle| u \in e}}}$
+
+An edge $e = \set{u, v}$ is **incident** with $u$ and $v$.
+
+Graphs have lots of applications. For example, modelling computer networks to determine robustness and other properties. Other applications include electronic circuits, electricity and water distribution networks, road maps and navigation, social graphs, and more.
+
+The map colouring problem asks how many colors are needed to shade in a geographical map such that no two adjacent (sharing a border of non-zero length) geopolitical regions have the same colour.
+
+The stable marriage problem asks ;wip

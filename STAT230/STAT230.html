@@ -69,7 +69,8 @@
 <a class="button" href="..">&#8666; Return to University Notes index</a>
 <h1 id="stat230">STAT230</h1>
 <p>Probability.</p>
-<pre><code>Instructor: Dina Dawoud
+<pre><code>Section 001
+Instructor: Dina Dawoud
 Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -150,7 +151,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 </blockquote>
 <h1 id="section-2">9/5/14</h1>
 <p>The factorial function grows extremely quickly and can be difficult to calculate for large numbers. Therefore, we have various approximations that help us do this more easily.</p>
-<p><strong>Stirling's approximation</strong> is <span class="math">\(n! \approxeq n^n e^{-n} \sqrt{2 \pi n}\)</span>. This approximation is asymptotically equivalent to the factorial function - as <span class="math">\(n \to \infty\)</span>, the percentage error gradually decreases.</p>
+<p><strong>Stirling's approximation</strong> is <span class="math">\(n! \approxeq n^n e^{-n} \sqrt{2 \pi n}\)</span> or <span class="math">\(n! \approxeq \left(\frac n e\right)^n\sqrt{2 \pi n}\)</span>. This approximation is asymptotically equivalent to the factorial function - as <span class="math">\(n \to \infty\)</span>, the percentage error gradually decreases.</p>
 <p>The <strong>complement</strong> of an event <span class="math">\(A\)</span> is the opposite event - the event of <span class="math">\(A\)</span> not <strong>occurring</strong>. It is represented using <span class="math">\(\overline A\)</span> or <span class="math">\(A^C\)</span>. It is always true that an event occurs, or it does not occur, so <span class="math">\(P(A) + P(\overline A) = 1\)</span>.</p>
 <p>A 4-digit PIN code is selected with replacement. What is the probability that the number is even? What is the probability that it contains at least one &quot;1&quot;?</p>
 <blockquote>
@@ -244,6 +245,11 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>Disjoint events are those where <span class="math">\(P(A \cap B) = 0\)</span> and <span class="math">\(A \cap B = \emptyset\)</span>. They are just mutually exclusive events.</p>
 <p>The <strong>partition rule</strong> states that if <span class="math">\(A_1 \cup \ldots \cup A_k = S\)</span> where <span class="math">\(A_1, \ldots, A_k\)</span> are disjoint sets (mutually exclusive), and <span class="math">\(B\)</span> is an event in <span class="math">\(S\)</span>, then <span class="math">\(P(B) = P(B \cap A_1) + \ldots + P(B \cap A_k) = \sum_{i = 1}^k P(B \mid A_i)P(A_i)\)</span>.</p>
 <p>This is because <span class="math">\(B = B \cap A_1 \cup \ldots \cup B \cap A_k\)</span>, and <span class="math">\(B \cap A_i\)</span> is mutually exclusive with any <span class="math">\(B \cap A_j\)</span> when <span class="math">\(i \ne j\)</span>. So <span class="math">\(P(B) = P(B \cap A_1 \cup \ldots \cup B \cap A_k) = P(B \cap A_1) + \ldots + P(B \cap A_k)\)</span>.</p>
+<p>So if <span class="math">\(A\)</span> is an event and <span class="math">\(B\)</span> and <span class="math">\(C\)</span> are mutually exclusive events, then <span class="math">\(P(A) = P(A \cap B) + P(A \cap C) = P(A \mid B)P(B) + P(A \mid C)P(C)\)</span>.</p>
+<p>A group of students that is 18.75% male is planning to go out for pizza. If <span class="math">\(\frac{100}{3}\)</span>% of the male students go and <span class="math">\(\frac{300}{13}\)</span>% of the female students go, what is the probability that a random student who goes out for pizza is female?</p>
+<blockquote>
+<p>Let <span class="math">\(M\)</span> represent male and <span class="math">\(O\)</span> represent going out for pizza.<br />Clearly, <span class="math">\(P(M) = 0.1875, P(\overline M) = 0.8125\)</span> and <span class="math">\(P(O \mid M) = \frac 1 3, P(O \mid \overline M) = \frac 3 {13}\)</span>.<br />We want to find <span class="math">\(P(\overline M \mid O)\)</span>. So <span class="math">\(P(\overline M \mid O) = \frac{P(\overline M \cap O)}{P(O)} = \frac{P(O \mid \overline M)P(\overline M)}{P(O \mid M)P(M) + P(O \mid \overline M)P(\overline M)}\)</span>.<br />So <span class="math">\(P(\overline M \mid O) = \frac{\frac 3 {13} \cdot 0.8125}{\frac 1 3 0.1875  + \frac 3 {13} \cdot 0.8125} = 0.75\)</span>.<br />So the probability that a random selected student from this group is female is 75%.</p>
+</blockquote>
 <p>A <strong>tree diagram</strong> is a diagram that helps represent conditional probabilities by showing the possibilities of several runs of an experiement as a tree. For example, we might draw a tree for flips of a coin, with each level being a subsequent flip of the coin.</p>
 <p>When we move downwards in a tree, we multiply the probabilities together. When we include other nodes, we do a union and add the probabilities.</p>
 <p>We label the edges of the tree with the probability of the child occurring given that all the parent events have occurred. So in the above example, the root node has labels <span class="math">\(P(H)\)</span> and <span class="math">\(P(T)\)</span>, while the second level nodes have <span class="math">\(P(H \mid H), P(T \mid H), P(H \mid T), P(T \mid T)\)</span>.</p>
@@ -337,11 +343,16 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 </blockquote>
 <h3 id="negative-binomial-distribution">Negative Binomial Distribution</h3>
 <p>The negative binomial distribution has the same preconditions as the binomial distribution, but now <span class="math">\(X\)</span> records the number of failures before the <span class="math">\(k\)</span>th success and <span class="math">\(x\)</span> is the number of failures.</p>
-<p>This can be represented using <span class="math">\(X ~ \operatorname{NB}(n, p)\)</span>. ;wip: tilde not showing up</p>
+<p>This can be represented using <span class="math">\(X ~ \operatorname{NB}(k, p)\)</span>, where <span class="math">\(k\)</span> is the number of successes and <span class="math">\(p\)</span> is the probability of success. ;wip: tilde not showing up</p>
 <p>Clearly, there are <span class="math">\(x + k\)</span> trials - successes plus failures, and the last trial is always a success.</p>
 <p>So there are <span class="math">\(x + k - 1\)</span> trials in which there are <span class="math">\(x\)</span> failures, and <span class="math">\(x + k - 1 \choose x\)</span> arrangements.</p>
+<p>So <span class="math">\(f_X(x) = {x + k - 1 \choose x}p^k(1 - p)^x\)</span> where <span class="math">\(0 \le x\)</span>.</p>
 <p>Also, <span class="math">\({a + b \choose a} = {a + b \choose b}\)</span>.</p>
 <p>With binomial distributions we know the number of trials but not the number of successes. With negative binomial distributions we know the number of successes but not the number of trials.</p>
+<p>If 20% of people agree to buy tickets, and we want 25 people to buy tickets, what is the probability function of <span class="math">\(X\)</span> where <span class="math">\(X\)</span> is the number of people asked before 25 tickets are bought?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(X\)</span> is the number of failures plus 25 successes, and <span class="math">\(k = 25, p = 0.2\)</span>.<br />Let <span class="math">\(X = Y + 25\)</span> where <span class="math">\(Y ~ \operatorname{NB}(25, 0.2)\)</span>, so <span class="math">\(x = y + 25\)</span> and <span class="math">\(y = x - 25\)</span>.<br />So <span class="math">\(f_Y(y) = {y + 25 - 1 \choose y}p^{25}(1 - 0.2)^y = {y + 24 \choose y}0.2^{25}0.8^y\)</span> where <span class="math">\(0 \le y\)</span>.<br />So <span class="math">\(f_X(x) = {x - 1 \choose x - 25}0.2^{25}0.8^{x - 25}\)</span> where <span class="math">\(25 \le x\)</span>.</p>
+</blockquote>
 <h1 id="section-12">4/6/14</h1>
 <p>Midterm Review.</p>
 <ul>
@@ -358,6 +369,62 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <li>Cumulative distribution function: <span class="math">\(F_X(x) = P(X \le x)\)</span>, a non-decreasing function.</li>
 <li><span class="math">\(f_X(x) = F_X(x) - F_X(x - 1)\)</span>.</li>
 </ul>
+<h1 id="section-13">6/6/14</h1>
+<h3 id="geometric-distribution">Geometric Distribution</h3>
+<p>This basically the same as the negative binomial distribution with <span class="math">\(k = 1\)</span>. It has the same preconditions as the binomial distribution, but <span class="math">\(X\)</span> is the number of failures before the first success.</p>
+<p>If <span class="math">\(X\)</span> has a geometric distribution, then <span class="math">\(f_X(x) = (1 - p)^xp\)</span> where <span class="math">\(0 \le x\)</span>. This can easily be derived from the negative binomial distribution.</p>
+<p>Also, we can write <span class="math">\(X ~ \operatorname{NB}(1, p)\)</span> or <span class="math">\(X ~ \operatorname{Geo}(p)\)</span>.</p>
+<p>Note that the binomial, negative binomial, and geometric distributions all have the same preconditions - two outcomes, independent trials, and equal probability of success in each trial.</p>
+<p>The only thing different between them is what <span class="math">\(X\)</span> means - successes given <span class="math">\(n\)</span> trials, failures given <span class="math">\(n\)</span> successes, and failures given 1 success.</p>
+<p>Given that there is a 30% chance of a car having leaks, and that the probability that we must check at least <span class="math">\(n\)</span> cars to find the first one with leaks is 0.05, what is the value of <span class="math">\(n\)</span>?</p>
+<blockquote>
+<p>Let <span class="math">\(X\)</span> represent the number of cars without leaks before finding one with leaks. Then <span class="math">\(f_X(x) = 0.3(1 - 0.3)^x = 0.3 \cdot 0.7^x\)</span>.<br />We want to find <span class="math">\(n\)</span> such that <span class="math">\(P(X \ge n - 1) = 0.05\)</span>, since we want <span class="math">\(n - 1\)</span> or more cars to not have leaks before the first one with leaks.<br />So <span class="math">\(P(X \ge n - 1) = \sum_{i = n - 1}^\infty f_X(i) = 0.05\)</span>.<br />So <span class="math">\(0.3 \cdot 0.7^{n - 1} + 0.3 \cdot 0.7^n + 0.3 \cdot 0.7^{n + 1} + \ldots = 0.3 \cdot 0.7^{n - 1}(1 + 0.7^1 + 0.7^2 + \ldots) = 0.3 \cdot 0.7^{n - 1}\frac 1 {1 - 0.7} = 0.7^{n - 1} = 0.05\)</span>.<br />So <span class="math">\(\ln 0.7^{n - 1} = \ln 0.05\)</span> and <span class="math">\(n = \frac{\ln 0.05}{\ln 0.7} + 1 \approxeq 9.4\)</span>.<br />Since <span class="math">\(n\)</span> must be an integer, we have to round it. Clearly, <span class="math">\(P(X \ge 9.4 - 1) = P(X \ge 10 - 1) \ne P(X \ge 9 - 1)\)</span>, so we must round up.<br />So the probability that we must check at least 10 cars to find the first one with leaks is 0.05.</p>
+</blockquote>
+<h3 id="poisson-distribution">Poisson Distribution</h3>
+<p>Preconditions:</p>
+<ul>
+<li>Events occur at random points in time.</li>
+<li>Events occur independently of each other - observing events occur already does not change the probability of the events ooccurring later.</li>
+<li>Events occur <span class="math">\(\mu\)</span> times over the interval, on average.</li>
+</ul>
+<p>If the above are satisfied, then if <span class="math">\(X\)</span> represents the number of events of some type within some interval, <span class="math">\(X\)</span> has a Poisson distribution and <span class="math">\(f_X(x) = \frac{e^{-\mu} \mu^x}{x!}\)</span> where <span class="math">\(x \ge 0\)</span>.</p>
+<p>This can be represented using <span class="math">\(X ~ \operatorname{Poisson}(\mu)\)</span>.</p>
+<p>This distribution is defined over a countably infinite set of outcomes.</p>
+<p>This an approximation for the binomial distribution where <span class="math">\(\operatorname{Poisson}(\mu)\)</span> approximates <span class="math">\(\operatorname{Bin}(n, \frac \mu n)\)</span>. The approximation gets better for large <span class="math">\(n\)</span> and small <span class="math">\(p\)</span>.</p>
+<p>This is because for large <span class="math">\(n\)</span> and small <span class="math">\(p\)</span>, <span class="math">\(n\)</span>, the trials in a binomial distribution, becomes the arbitrarily small sections of time, and <span class="math">\(p\)</span> becomes the probability of the event occurring (which is a success) in one of those small sections of time. Since each section of time is <span class="math">\(\frac 1 n\)</span> long, the probability of observing an event in this section is <span class="math">\(p = \frac \mu n\)</span>, and we assume the sections are so small that the probability of two events occurring in one section is negligible.</p>
+<p>Examples of this distribution occurring naturally might include the number of white cars we observe in 30 minutes, or the number of bacteria in particular radius.</p>
+<h1 id="section-14">9/6/14</h1>
+<p>The rate is not necessarily over time. It could be anything that events can occur relative to. For example, we can define <span class="math">\(\mu\)</span> as average pollutant molecules (success event) per liter of water.</p>
+<p>When <span class="math">\(n \to \infty\)</span>, the binomial distribution becomes the Poisson distribution:</p>
+<blockquote>
+<p>Let <span class="math">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span>. We want to prove that <span class="math">\(\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \frac{e^{-\mu} \mu^x}{x!}\)</span>.<br />Clearly, <span class="math">\(\mu = np\)</span> - the number of samples times the probability of each sample occurring is the rate of events occurring over all <span class="math">\(n\)</span>.<br />So <span class="math">\(\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \lim_{n \to \infty} {n \choose x}\left(\frac \mu n\right)^x\left(1 - \frac \mu n\right)^{n - x} = \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n!}{(n - x)!}\frac 1 {n^x}\left(1 - \frac \mu n\right)^n \lim_{n \to \infty} \left(1 - \frac \mu n\right)^{-x} = \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n \cdot (n - 1) \cdots (n - x)}{n^x}\left(1 - \frac \mu n\right)^n = \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n \cdot (n - 1) \cdots (n - x)}{n^x} \lim_{n \to \infty} \left(1 - \frac \mu n\right)^n = \frac{\mu^x}{x!}\lim_{n \to \infty} \left(1 - \frac \mu n\right)^n\)</span>.<br />Since <span class="math">\(e^x = \lim_{n \to \infty} \left(1 + \frac x n\right)^n\)</span> and <span class="math">\(e^{-\mu} = \lim_{n \to \infty} \left(1 - \frac x n\right)^n\)</span>.<br />So <span class="math">\(\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \frac{e^{-\mu}\mu^x}{x!}\lim_{n \to \infty}\)</span>.</p>
+</blockquote>
+<p>The idea is to keep <span class="math">\(\mu = np\)</span> fixed, so as <span class="math">\(n \to \infty\)</span>, <span class="math">\(p \to 0\)</span>.</p>
+<p>Birthday problem - given 200 people at a party, what is the probability that exactly two of them are born on January 1?</p>
+<blockquote>
+<p>We assume that all days of the year are equally likely, and there are no leap years, and that birthdays are independent of each other.<br />Let <span class="math">\(X\)</span> be the number of people at the party born on January 1.<br />So <span class="math">\(X ~ \operatorname{Bin}(200, \frac 1 {365})\)</span>. Then the exact probability is <span class="math">\(P(X = 2) = {200 \choose 2} \frac 1 {365^2} \left(\frac{364}{365}\right)^{200 - 2} \approxeq 0.086766913252562\)</span>. Using the Poisson approximation, <span class="math">\(\mu = np = 200 \times \frac 1 {365} = \frac{200}{365}\)</span>, so <span class="math">\(P(X = 2) = \frac{e^{-\frac{200}{365}}\mu^{\frac{200}{365}}}{x!} \approxeq 0.086790999064332\)</span>.</p>
+</blockquote>
+<h2 id="order-notation">Order Notation</h2>
+<p><span class="math">\(g(\Delta t) = o(\Delta t)\)</span> as <span class="math">\(t \to 0\)</span> means that <span class="math">\(g(\Delta t)\)</span> approaches 0 faster than <span class="math">\(\delta t\)</span> does. So <span class="math">\(\frac{g(\Delta t)}{\Delta t} = 0\)</span> as <span class="math">\(t \to 0\)</span>.</p>
+<p>For example, <span class="math">\(x^2\)</span> (<span class="math">\(g(\Delta t)\)</span>) approaches 0 faster than <span class="math">\(x\)</span> (<span class="math">\(\Delta t\)</span>), so <span class="math">\(x^2\)</span> is <span class="math">\(o(x)\)</span>. However, <span class="math">\(\sqrt{x}\)</span> approaches 0 slower than <span class="math">\(x\)</span>, so <span class="math">\(\sqrt{x}\)</span> is not <span class="math">\(o(x)\)</span>.</p>
+<p>So if something is <span class="math">\(o(x)\)</span>, then it approaches 0 faster than <span class="math">\(x\)</span> does.</p>
+<p><span class="math">\(f(x) \in o(g(x))\)</span> means that <span class="math">\(f(x)\)</span> grows much slower than <span class="math">\(g(x)\)</span>.</p>
+<h1 id="section-15">11/6/14</h1>
+<p>Independent events means that events occur independent of each other - observing events occurring a lot of times already in the past should not affect the probability of observing events in the future.</p>
+<p>Individual events means that <span class="math">\(P(\text{2 or more events in same interval } (t, t + \Delta t)) = o(\Delta t)\)</span> - that the probability of two events occurring in the same interval becomes negligible when <span class="math">\(\Delta t \to 0\)</span>. In other words, in any interval <span class="math">\((t, t + \Delta t)\)</span> there is either 1 or 0 events occurring, and the probability that two or more events occur is negligible.</p>
+<p>Hommogeneity/uniformity means that the events occur at a uniform rate <span class="math">\(\lambda\)</span> over time so that <span class="math">\(P(\text{one event in interval } (t, t + \
+Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
+<p>If a process/experiment satisfies these three properties, then it is a <strong>Poission process</strong> and <span class="math">\(\mu = \lambda t\)</span>.</p>
+<p><span class="math">\(\lambda\)</span> is the rate of events per unit of time. <span class="math">\(\mu\)</span> is the average number of occurrences over an interval <span class="math">\(t\)</span>. Clearly, <span class="math">\(\mu = \lambda t\)</span>.</p>
+<p>If there are an average of 6 earthquakes per year and earthquakes are a Poisson process, what is the probability that 7 are recorded in the next 2 years?</p>
+<blockquote>
+<p>Let <span class="math">\(X\)</span> be the number of earthquakes in the next 2 years.<br />Clearly, <span class="math">\(\lambda = 6 \text{earthquakes}/\text{year}\)</span>, so <span class="math">\(\mu = 12 \text{earthquakes}\)</span>.<br />So <span class="math">\(P(X = 7) = \frac{e^{-12} 12^7}{7!}\)</span>.</p>
+</blockquote>
+<p>The number of cars exceeding the speed limit in half an hour is a random variable <span class="math">\(X\)</span> with a Poisson distribution where <span class="math">\(\lambda = 8.4\)</span>. What is the probability that 10 cars exceed the speed limit in 1 hour?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\mu = 8.4 \text{speeders}{0.5 hours}t = k \text{speeders}{hour}t\)</span>. So <span class="math">\(t = 2 \text{hours}\)</span> and <span class="math">\(\mu = 16.8 \text{speeders}\)</span>.<br />So <span class="math">\(P(X = 10) = \frac{e^{-16.8} 16.8^10}{10!}\)</span>.</p>
+</blockquote>
+<p>;wip: check the slide notes for section 1 today</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

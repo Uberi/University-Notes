@@ -109,7 +109,6 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 </blockquote>
 <p>The idea is that with strong induction, we can use any of the previous cases to prove the inductive hypothesis.</p>
 <h1 id="section">7/5/14</h1>
-<p>;wip: do assignment 1</p>
 <h2 id="propositional-logic">Propositional Logic</h2>
 <p>The language of propositions is propositional logic.</p>
 <p>A proposition is a declarative statement that is either true or false. It may depend on the context, like how the proposition <span class="math">\(x \ge 5\)</span> depends on the contextual variable <span class="math">\(x\)</span>.</p>
@@ -118,7 +117,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p><strong>Simple/atomic propositions</strong> are the building blocks of <strong>compound propositions</strong>. For example, &quot;It is currently raining in Waterloo&quot; and &quot;It is currently 12 degrees Celsius in Waterloo&quot; are simple propositions, and &quot;It is either raining or 12 degrees in Waterloo&quot; is a compound proposition.</p>
 <p>Atomic ropositions are the smallest possible statements that are still propositions. They cannot be divided into smaller propositions.</p>
 <h3 id="expression-syntax">Expression Syntax</h3>
-<p>The propositional language is known as <span class="math">\(\mathcal{L}_P\)</span>. This language contains <strong>atoms</strong>, which are lowercase Latin characters such as <span class="math">\(p\)</span>, <span class="math">\(q\)</span>, and <span class="math">\(r\)</span>, optionally with subscripts. These all belong to the set <span class="math">\(\operatorname{Atom}(\mathcal{L}_P)\)</span>, so <span class="math">\(p \in \operatorname{Atom}(\mathcal{L}_P)\)</span>.</p>
+<p>The propositional language is known as <span class="math">\(\mathcal{L}_P\)</span> (Language of Propositions). This language contains <strong>atoms</strong>, which are lowercase Latin characters such as <span class="math">\(p\)</span>, <span class="math">\(q\)</span>, and <span class="math">\(r\)</span>, optionally with subscripts. These all belong to the set <span class="math">\(\operatorname{Atom}(\mathcal{L}_P)\)</span>, so <span class="math">\(p \in \operatorname{Atom}(\mathcal{L}_P)\)</span>.</p>
 <p>There are also <strong>punctuation</strong> symbols, the round parentheses &quot;(&quot; and &quot;)&quot;, which change the precendence of subexpressions.</p>
 <p>There are also <strong>connectives</strong>, which are <span class="math">\(\neg, \wedge, \vee, \rightarrow, \leftrightarrow\)</span>.</p>
 <p>An <strong>expression</strong> is a finite sequence of symbols. The length of an expression is the number of symbols it contains. Expressions may not necessarily be valid, like <span class="math">\(( \vee \neg \vee (\)</span>.</p>
@@ -212,9 +211,12 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 </ol>
 <p>Given a set of formulas <span class="math">\(\Sigma\)</span>, <span class="math">\(\Sigma^t = \begin{cases} 1 &amp;\text{if } \forall A \in \Sigma, A^t = 1 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>. In other words, a set of formulas is true in a given truth valuation if and only if all of the formulas in the set are true.</p>
 <p><span class="math">\(\Sigma\)</span> is <strong>satisfiable</strong> if and only if there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(\Sigma^t = 1\)</span>. It this <span class="math">\(t\)</span> exists, then <span class="math">\(t\)</span> <strong>satisfies</strong> <span class="math">\(\Sigma\)</span>. Therefore, <span class="math">\(\emptyset\)</span> satisfiable by any truth valuation.</p>
+<p>If <span class="math">\(\Sigma\)</span> is satisfiable, then <span class="math">\(\Sigma\)</span> has a <strong>model</strong>.</p>
 <p>A <strong>tautology</strong> is a formula which is always true, so for any truth valuation <span class="math">\(t\)</span>, <span class="math">\(A^t = 1\)</span>.</p>
 <p>A <strong>contradiction</strong> is a formula which is always false, so for any truth valuation <span class="math">\(t\)</span>, <span class="math">\(A^t = 0\)</span>.</p>
-<p>A <strong>consistent</strong> formula is one that is not a contradiction, so there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(A^t = 1\)</span>.</p>
+<p>A <strong>semantically consistent</strong> formula is one that is not a contradiction, so there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(A^t = 1\)</span>.</p>
+<p>Satisfiability is a property of a set of formulas where there exists a truth valuation that makes every formula in the set true.</p>
+<p>The negation of a tautology is always a contradiction, and only the negation of a tautology is a contradiction. Likewise, the negation of a contradiction is a tautology, and only the negation of a contradiction is a tautology.</p>
 <p>Rather than writing out the entire truth table, we can simplify formulas using the following identities:</p>
 <ul>
 <li><span class="math">\(\neg 0 = 1, \neg 1 = 0\)</span></li>
@@ -311,8 +313,8 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <li><span class="math">\(\neg \neg A \rightarrow A\)</span> (Modus Ponens on 5 and 6)</li>
 <li><span class="math">\(A\)</span> (Modus Ponens on 1 and 7)</li>
 </ol>
-<p><span class="math">\(\Sigma \models \alpha\)</span> is a semantic construct. We use this to prove soundness.</p>
-<p><span class="math">\(\Sigma \vdash \alpha\)</span> is a syntactical construct. We use this to prove completeness.</p>
+<p><span class="math">\(\Sigma \models \alpha\)</span> is a semantic construct. This is associated with soundness.</p>
+<p><span class="math">\(\Sigma \vdash \alpha\)</span> is a syntactical construct. This is associated with completeness.</p>
 <p>Formulas must be semantically entailed before it can be syntactically entailed. We need it to be semantically sound before proving it is complete.</p>
 <p>Here are some rules of thumb to more easily construct proofs.</p>
 <ul>
@@ -336,27 +338,168 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <blockquote>
 <p>Let <span class="math">\(l\)</span> represent the train being late. Let <span class="math">\(m\)</span> represent being late to the meeting. Let <span class="math">\(t\)</span> represent there being taxis.<br />Then <span class="math">\(l \wedge \neg t \rightarrow m\)</span>, <span class="math">\(\neg m\)</span>, <span class="math">\(l\)</span>, so <span class="math">\(t\)</span>.</p>
 </blockquote>
-<p>;wip: finish this ;wip: box notation for proofs by contradiction - draw a box around statements starting from the assumption up to and including the contradiction.</p>
-<h1 id="section-6">2/6/14</h1>
-<p><strong>Soundness</strong> is a property of a deductive system where it is impossible to prove any invalid arguments.</p>
-<p><strong>Completeness</strong> is a property of a deductive system where it is always possible to prove valid arguments.</p>
-<p>If a system is sound and complete, then arguments can be proved if and only if they are valid.</p>
-<p>We can write <span class="math">\(A, B \vdash C\)</span> as <span class="math">\(\frac{A \qquad B}{C}\)</span>. This is the inference notation.</p>
-<h3 id="rules">Rules</h3>
-<p>Every rule has a name that we use when we reference it by when applying it.</p>
-<p>Reflexivity (Ref): <span class="math">\(A \vdash A\)</span> - <span class="math">\(\frac{A}{A}\)</span>.</p>
-<p>Addition of premises (+): given <span class="math">\(A \vdash C\)</span>, <span class="math">\(A \cup B \vdash C\)</span>.</p>
-<p>;wip: all the way until ND - Rule of Negation</p>
-<p>Using the sequent (<span class="math">\(\vdash\)</span>) notation, we must always write all the premises we use to deduce anything on the same line it is being deduced. For example:</p>
+<p>The rules of deduction in ND are:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Symbol</th>
+<th align="left">Rule</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Reflexivity</td>
+<td align="left"><span class="math">\(\operatorname{Ref}\)</span></td>
+<td align="left"><span class="math">\(A \vdash A\)</span></td>
+<td align="left">Anything can be deduced from itself.</td>
+</tr>
+<tr class="even">
+<td align="left">Addition of Premises</td>
+<td align="left"><span class="math">\(+\)</span> with <span class="math">\(\Sigma_1 \vdash \alpha\)</span></td>
+<td align="left"><span class="math">\(\Sigma_1 \vdash \alpha\)</span> implies <span class="math">\(\Sigma_1 \cup \Sigma_2 \vdash \alpha\)</span></td>
+<td align="left">Premises can be freely added to valid arguments.</td>
+</tr>
+<tr class="odd">
+<td align="left">Reflexive premises</td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math">\(\alpha \in \Sigma\)</span> implies <span class="math">\(\Sigma \vdash \alpha\)</span></td>
+<td align="left">Anything can be deduced if it is itself deducible.</td>
+</tr>
+<tr class="even">
+<td align="left">Negation-introduction</td>
+<td align="left"><span class="math">\(\neg+\)</span> with <span class="math">\(\Sigma, \alpha \vdash \psi\)</span> and <span class="math">\(\Sigma, \alpha \vdash \neg \psi\)</span></td>
+<td align="left"><span class="math">\(\Sigma, \alpha \vdash \psi\)</span> and <span class="math">\(\Sigma, \alpha \vdash \neg \psi\)</span> implies <span class="math">\(\Sigma \vdash \neg \alpha\)</span></td>
+<td align="left">If <span class="math">\(\alpha\)</span> results in a contradiction, then <span class="math">\(\neg \alpha\)</span> must be true.</td>
+</tr>
+<tr class="odd">
+<td align="left">Negation-elimination</td>
+<td align="left"><span class="math">\(\neg-\)</span> with <span class="math">\(\Sigma, \neg \alpha \vdash \psi\)</span> and <span class="math">\(\Sigma, \neg \alpha \vdash \neg \psi\)</span></td>
+<td align="left"><span class="math">\(\Sigma, \neg \alpha \vdash \psi\)</span> and <span class="math">\(\Sigma, \neg \alpha \vdash \neg \psi\)</span> implies <span class="math">\(\Sigma \vdash \alpha\)</span></td>
+<td align="left">If <span class="math">\(\neg \alpha\)</span> results in a contradiction, then <span class="math">\(\alpha\)</span> must be true.</td>
+</tr>
+<tr class="even">
+<td align="left">Conjunction-introduction</td>
+<td align="left"><span class="math">\(\wedge+\)</span> with <span class="math">\(\Sigma \vdash \alpha\)</span> and <span class="math">\(\Sigma \vdash \psi\)</span></td>
+<td align="left"><span class="math">\(\Sigma \vdash \alpha\)</span> and <span class="math">\(\Sigma \vdash \psi\)</span> implies <span class="math">\(\Sigma \vdash \alpha \wedge \psi\)</span></td>
+<td align="left">If something implies two things individually, then it implies both together.</td>
+</tr>
+<tr class="odd">
+<td align="left">Conjunction-elimination</td>
+<td align="left"><span class="math">\(\wedge-\)</span> with <span class="math">\(\Sigma \vdash \alpha \wedge \psi\)</span></td>
+<td align="left"><span class="math">\(\Sigma \vdash \alpha \wedge \psi\)</span> implies <span class="math">\(\Sigma \vdash \alpha\)</span> and <span class="math">\(\Sigma \vdash \psi\)</span></td>
+<td align="left">If two things both follow from the premises, each one follows individually.</td>
+</tr>
+<tr class="even">
+<td align="left">Implication-introduction</td>
+<td align="left"><span class="math">\(\rightarrow+\)</span> with <span class="math">\(\Sigma, \alpha \vdash \psi\)</span></td>
+<td align="left"><span class="math">\(\Sigma, \alpha \vdash \psi\)</span> implies <span class="math">\(\Sigma \vdash \alpha \rightarrow \psi\)</span></td>
+<td align="left">If <span class="math">\(\psi\)</span> can be deduced from <span class="math">\(\alpha\)</span>, then <span class="math">\(\alpha \rightarrow \psi\)</span>.</td>
+</tr>
+<tr class="odd">
+<td align="left">Implication-elimination</td>
+<td align="left"><span class="math">\(\rightarrow-\)</span> with <span class="math">\(\Sigma \vdash \alpha \rightarrow \psi\)</span> and <span class="math">\(\Sigma \vdash \alpha\)</span></td>
+<td align="left"><span class="math">\(\Sigma \vdash \alpha \rightarrow \psi\)</span> and <span class="math">\(\Sigma \vdash \alpha\)</span> implies <span class="math">\(\Sigma \vdash \psi\)</span></td>
+<td align="left">If something implies something else and that thing is true, then so is the other.</td>
+</tr>
+<tr class="even">
+<td align="left">Disjunction-introduction</td>
+<td align="left"><span class="math">\(\vee+\)</span> with <span class="math">\(\Sigma \vdash \alpha\)</span></td>
+<td align="left"><span class="math">\(\Sigma \vdash \alpha\)</span> implies <span class="math">\(\Sigma \vdash \alpha \vee \psi\)</span> and <span class="math">\(\Sigma \vdash \psi \vee \alpha\)</span></td>
+<td align="left">Something deducible implies that it or something else is deducible.</td>
+</tr>
+<tr class="odd">
+<td align="left">Disjunction-elimination</td>
+<td align="left"><span class="math">\(\vee-\)</span> with <span class="math">\(\Sigma, \alpha_1 \vdash \psi\)</span> and <span class="math">\(\Sigma, \alpha_2 \vdash \psi\)</span></td>
+<td align="left"><span class="math">\(\Sigma, \alpha_1 \vdash \psi\)</span> and <span class="math">\(\Sigma, \alpha_2 \vdash \psi\)</span> implies <span class="math">\(\Sigma, \alpha_1 \vee \alpha_2 \vdash \psi\)</span></td>
+<td align="left">If two things individually imply another, then either implies it.</td>
+</tr>
+<tr class="even">
+<td align="left">Double-implication-introduction</td>
+<td align="left"><span class="math">\(\leftrightarrow+\)</span> with <span class="math">\(\Sigma, \alpha \vdash \psi\)</span> and <span class="math">\(\Sigma, \psi \vdash \alpha\)</span></td>
+<td align="left"><span class="math">\(\Sigma, \alpha \vdash \psi\)</span> and <span class="math">\(\Sigma, \psi \vdash \alpha\)</span> implies <span class="math">\(\Sigma \vdash \alpha \leftrightarrow \psi\)</span></td>
+<td align="left">If one thing implies another and the other implies it, they are equivalent.</td>
+</tr>
+<tr class="odd">
+<td align="left">Double-implication-elimination 1</td>
+<td align="left"><span class="math">\(\leftrightarrow-\)</span> with <span class="math">\(\Sigma \vdash \alpha \leftrightarrow \alpha\)</span> and <span class="math">\(\Sigma \vdash \psi\)</span></td>
+<td align="left"><span class="math">\(\Sigma \vdash \alpha \leftrightarrow \psi\)</span> and <span class="math">\(\Sigma \vdash \alpha\)</span> implies <span class="math">\(\Sigma \vdash \psi\)</span></td>
+<td align="left">If two things are equivalent and the first is deducible, so is the second.</td>
+</tr>
+<tr class="even">
+<td align="left">Double-implication-elimination 2</td>
+<td align="left"><span class="math">\(\leftrightarrow-\)</span> with <span class="math">\(\Sigma \vdash \alpha \leftrightarrow \psi\)</span> and <span class="math">\(\Sigma \vdash \alpha\)</span></td>
+<td align="left"><span class="math">\(\Sigma \vdash \alpha \leftrightarrow \psi\)</span> and <span class="math">\(\Sigma \vdash \psi\)</span> implies <span class="math">\(\Sigma \vdash \alpha\)</span></td>
+<td align="left">If two things are equivalent and the second is deducible, so is the first.</td>
+</tr>
+<tr class="odd">
+<td align="left">Transitivity of deducibility</td>
+<td align="left"><span class="math">\(\operatorname{Tr}\)</span> with <span class="math">\(\Sigma_1 \vdash \Sigma_2\)</span> and <span class="math">\(\Sigma_2 \vdash \Sigma_3\)</span></td>
+<td align="left"><span class="math">\(\Sigma_1 \vdash \Sigma_2\)</span> and <span class="math">\(\Sigma_2 \vdash \Sigma_3\)</span> implies <span class="math">\(\Sigma_1 \vdash \Sigma_3\)</span></td>
+<td align="left">If one thing implies a second, which implies a third, then the first implies the last.</td>
+</tr>
+</tbody>
+</table>
+<p>Prove the <span class="math">\(\epsilon\)</span> rule from the basic rules <span class="math">\(\operatorname{Ref}, +\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(A = \Sigma \setminus \set{\alpha}\)</span>.<br />Clearly, <span class="math">\(\alpha \implies \alpha\)</span> by <span class="math">\(\operatorname{Ref}\)</span> (step 1).<br />So <span class="math">\(\set{\alpha} \cup A \vdash \alpha\)</span> by <span class="math">\(+\)</span> with step 1 (step 2).<br />Since <span class="math">\(\set{\alpha} \cup A = \Sigma\)</span>, <span class="math">\(\Sigma \vdash \alpha\)</span> (step 3, conclusion).</p>
+</blockquote>
+<p>Prove that <span class="math">\(\neg \neg p \vdash p\)</span>:</p>
 <ol style="list-style-type: decimal">
-<li><span class="math">\(p \vdash \neg \neg p\)</span></li>
-<li><span class="math">\(q \vdash p \rightarrow q\)</span></li>
-<li><span class="math">\(\neg \neg p, p \rightarrow q \vdash q\)</span>.</li>
+<li><span class="math">\(\neg \neg p, \neg p \vdash \neg \neg p\)</span> (<span class="math">\(\epsilon\)</span>).</li>
+<li><span class="math">\(\neg \neg p, \neg p \vdash \neg p\)</span> (<span class="math">\(\epsilon\)</span>).</li>
+<li><span class="math">\(\neg \neg p \vdash p\)</span> (<span class="math">\(\neg-\)</span>).</li>
 </ol>
-<p>In Box Notation, we write assumptions, and then we draw a box that contains it, the box acts like a &quot;scope&quot; in which the assumptions hold and we can directly write the deduced thing. Inside the box we can directly write the resulting formulas without writing the <span class="math">\(\alpha_1, \ldots, \alpha_n \vdash\)</span> before it. Scopes can nest, and this saves a lot of rewriting of premises. For example:</p>
-<p>;wip</p>
+<p>Note that implication-introduction and implication-elimination is very similar to the deduction theorem.</p>
+<p>Prove that <span class="math">\(A \rightarrow B, B \rightarrow C \vdash A \rightarrow C\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(A \rightarrow B, B \rightarrow C, A \vdash A \rightarrow B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(A \rightarrow B, B \rightarrow C, A \vdash A\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(A \rightarrow B, B \rightarrow C, A \vdash B\)</span> (<span class="math">\(\rightarrow-\)</span> with step 1 and 2)</li>
+<li><span class="math">\(A \rightarrow B, B \rightarrow C, A \vdash B \rightarrow C\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(A \rightarrow B, B \rightarrow C, A \vdash C\)</span> (<span class="math">\(\rightarrow-\)</span> with step 3 and 4)</li>
+<li><span class="math">\(A \rightarrow B, B \rightarrow C \vdash A \rightarrow C\)</span> (<span class="math">\(\rightarrow+\)</span> with step 5)</li>
+</ol>
+<h1 id="section-6">2/6/14</h1>
+<p>If a system is sound and complete, then arguments can be proved if and only if they are valid.</p>
+<p>We can write <span class="math">\(A, B \vdash C\)</span> as <span class="math">\(\frac{A \qquad B}{C}\)</span>. This is known as <strong>inference notation</strong>.</p>
+<h3 id="formal-proofs">Formal Proofs</h3>
+<p>A <strong>formal proof</strong> for <span class="math">\(\Sigma_k \vdash \alpha_k\)</span> is simply a sequence of the natural deduction rules - <span class="math">\(\Sigma_1 \vdash \alpha_1, \ldots, \Sigma_k \vdash \alpha_k\)</span>. If this is the case, then <span class="math">\(\alpha_n\)</span> is <strong>formally deducible</strong> from <span class="math">\(\Sigma_n\)</span> - it can be proven from those premises.</p>
+<p>Note that <span class="math">\(\Sigma \vdash \alpha\)</span> is very different from <span class="math">\(\Sigma \models \alpha\)</span> - the former deals purely with syntax, while the latter deals with semantics - what the symbols actually mean.</p>
+<p>Negation-introduction (<span class="math">\(\neg+\)</span>) is also called <strong>contradiction</strong> or <strong>reductio ad absurdum</strong>. It is usually the rule we use when we want to prove by contradiction, and is very similar to negation-elimination (<span class="math">\(\neg-\)</span>).</p>
+<p>Prove that <span class="math">\(p \vdash \neg \neg p\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(p, \neg p \vdash p\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(p, \neg p \vdash \neg p\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(p \vdash \neg \neg p\)</span> (reductio ad absurdum with step 1 and 2)</li>
+</ol>
+<p>In formal proofs, we usually start off by stating premises (also called assumptions), and then adding rules and modifying results until we arrive at the conclusion of the proof. The conclusion of the proof is the thing we are trying to prove.</p>
+<p>The proof format we have been using so far is in something known as <strong>sequent notation</strong>. The <span class="math">\(\vdash\)</span> symbol is a sequent, with all premises before it and all conclusions after.</p>
+<p>In <strong>box notation</strong>, we write assumptions, and then we draw a box that contains it, the box acts like a &quot;scope&quot; in which the assumptions hold and we can directly write the deduced thing. Inside the box we can directly write the resulting formulas without writing the <span class="math">\(\alpha_1, \ldots, \alpha_n \vdash\)</span> before it. Scopes can nest, and this saves a lot of rewriting of premises.</p>
+<p>Alternatively, we might indent the values instead of drawing a box around them. For example, the previous proof that <span class="math">\(A \rightarrow B, B \rightarrow C \vdash A \rightarrow C\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(A \rightarrow B, B \rightarrow C\)</span> (assumption)</li>
+<li>The following is indented or drawn in a box:
+<ol style="list-style-type: decimal">
+<li><span class="math">\(A \rightarrow B, B \rightarrow C, A\)</span> (assumption)</li>
+<li><span class="math">\(A \rightarrow B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(A\)</span> (<span class="math">\(epsilon\)</span>)</li>
+<li><span class="math">\(B\)</span> (<span class="math">\(\rightarrow-\)</span> with step 2.2 and 2.3)</li>
+<li><span class="math">\(B \rightarrow C\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(C\)</span> (<span class="math">\(\rightarrow-\)</span> with step 2.4 and 2.5)</li>
+</ol></li>
+<li><span class="math">\(A \rightarrow C\)</span> (<span class="math">\(\rightarrow+\)</span> with step 2.6):</li>
+</ol>
+<p>When we begin a box or indentation, we insert an assumption. When we close a box, we remove the assumption. This ability to insert and remove asumptions keeps our proofs clean and organized.</p>
+<p>Boxes or indentations can nest, and have lexical scope - when we have a box inside a box, we can use any statements above it, even if it is in a parent box. Outside of a box, we cannot use any of the resulting formulas directly - they are always attached to their assumptions. For example, in the above example we could not state <span class="math">\(C\)</span> in step 3, but we could use <span class="math">\(A \rightarrow B, B \rightarrow C, A \vdash C\)</span> in the <span class="math">\(\rightarrow+\)</span> rule.</p>
+<p>A box is often closed when we arrive at a conclusion using a rule such as <span class="math">\(\neg-\)</span>, <span class="math">\(\rightarrow+\)</span>, or <span class="math">\(\vee-\)</span>. Usages of <span class="math">\(\neg-\)</span> and <span class="math">\(\rightarrow+\)</span> are usually found right after a box closes. <span class="math">\(\vee-\)</span> is usually found after two boxes.</p>
+<p>All boxes must be closed by the end of the argument. Otherwise, there are extra premises and the proof is not yet complete.</p>
+<p>Elimination rules turn two statements into one. Introduction rules introduce new statements, or turn one statement into two.</p>
 <h1 id="section-7">4/6/14</h1>
 <h2 id="soundnesscompleteness">Soundness/Completeness</h2>
+<p><strong>Soundness</strong> is a property of a deductive system where it is impossible to prove any invalid arguments.</p>
+<p><strong>Completeness</strong> is a property of a deductive system where it is always possible to prove valid arguments.</p>
 <p>The <strong>soundness theorem</strong> states that if something is provable, then it is valid - <span class="math">\(\Sigma \vdash \alpha\)</span> implies that <span class="math">\(\Sigma \models \alpha\)</span>.</p>
 <p>In practice, we prove soundness by using the contrapositive: by proving that <span class="math">\(\Sigma \not\models \alpha\)</span> implies <span class="math">\(\Sigma \not\vdash \alpha\)</span>.</p>
 <p>If <span class="math">\(A \vdash B\)</span> and <span class="math">\(B \vdash C\)</span>, then <span class="math">\(A \vdash C\)</span>.</p>
@@ -374,8 +517,48 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>The proof rules of Natural Deduction are purely syntactic - they only shuffle symbols around without considering what they mean. Now we connect it with the actual semantics.</p>
 <p>Soundness of natural deduction means that formal proofs demonstrate tautological consequences - <span class="math">\(\Sigma \vdash \alpha\)</span> implies that <span class="math">\(\Sigma \models \alpha\)</span>. In other words, every proof should be a valid argument.</p>
 <p>Completeness of natural deduction means that tautological consequences are provable using natural deduction - <span class="math">\(\Sigma \models \alpha\)</span> implies that <span class="math">\(\Sigma \vdash \alpha\)</span>. In other words, every valid argument should have a proof.</p>
+<p>Basically, anything provable by truth tables can also be proven using the ND rules.</p>
 <p>Since ND is sound and complete, <span class="math">\(\Sigma \models \alpha\)</span> if and only if <span class="math">\(\Sigma \vdash \alpha\)</span>.</p>
 <p>Also, <span class="math">\(\rightarrow\)</span> does not have an associative property, so <span class="math">\((A \rightarrow B) \rightarrow C\)</span> is not the same as <span class="math">\(A \rightarrow (B \rightarrow C)\)</span>.</p>
+<h1 id="section-8">9/6/14</h1>
+<h3 id="natural-deduction-1">Natural Deduction</h3>
+<p>Soundness and completeness is rather intuitive. For example, it is obvious that if <span class="math">\(p\)</span> and <span class="math">\(q\)</span> are true, then <span class="math">\(p\)</span> is also true, so <span class="math">\(p \wedge q \models p\)</span>. In ND, this is represented using the <span class="math">\(\wedge-\)</span> rule, which states <span class="math">\(p \wedge q \vdash p\)</span>.</p>
+<p>When we want to prove that two formulas are tautologically equivalent, we can either use a truth table, or write a formal proof.</p>
+<p>A <strong>sound</strong> formula is one where its proof, <span class="math">\(\Sigma \vdash \alpha\)</span>, implies <span class="math">\(\Sigma \models \alpha\)</span>.</p>
+<p>We can prove the soundness theorem for ND using strong induction over the length of the proof:</p>
+<blockquote>
+<p>Let <span class="math">\(n\)</span> be the length of the proof in steps.<br />Clearly, if <span class="math">\(n = 1\)</span>, then the proof must have the form <span class="math">\(\Sigma, \alpha \vdash \alpha\)</span> (<span class="math">\(\epsilon\)</span>), since this is the only rule that can prove something in one step.<br />Clearly, <span class="math">\(\Sigma, \phi \models \phi\)</span> because anything is a tautological consequence of itself.<br />Assume for some <span class="math">\(k \ge 1\)</span> that all proofs of length <span class="math">\(k\)</span> or less are sound - the inductive hypothesis.<br />Then a proof of length <span class="math">\(k + 1\)</span> has the steps <span class="math">\(\alpha_1, \ldots, \alpha_k, \phi\)</span>, with rules associated with each step.<br />Clearly, <span class="math">\(\alpha_1, \ldots, \alpha_k\)</span> is sound, by the inductive hypothesis.<br />We want to prove that <span class="math">\(\alpha_1, \ldots, \alpha_k, \phi\)</span> is also sound.<br />Clearly, <span class="math">\(\phi\)</span> is the result of applying the ND rules. So each rule is a possible case and we need to check each rule to verify that the proof of length <span class="math">\(k + 1\)</span> is sound.<br />Assume the last rule is <span class="math">\(\wedge+\)</span>. Then <span class="math">\(\phi\)</span> is of the form <span class="math">\(\alpha_i \wedge \alpha_j\)</span> where <span class="math">\(i &lt; k, j &lt; k\)</span>.<br />Then there must be sound proofs of <span class="math">\(\alpha_i\)</span> and <span class="math">\(\alpha_j\)</span>, by the inductive hypothesis.<br />So <span class="math">\(\Sigma_i \models \alpha_i\)</span> and <span class="math">\(\Sigma_j \models \alpha_j\)</span>.<br />By a truth table, <span class="math">\(\Sigma \models \alpha_i \wedge \alpha_j\)</span>, so <span class="math">\(\phi\)</span> is sound.<br />We can use this technique to verify this for every ND rule.<br />Therefore, <span class="math">\(\Sigma \vdash \phi\)</span> is always sound - it always implies <span class="math">\(\Sigma \models \phi\)</span>.</p>
+</blockquote>
+<p><strong>Syntactical consistency</strong> is a property of sets of formulas <span class="math">\(\Sigma \subseteq \formlp\)</span> where there does not exist <span class="math">\(\alpha \in \formlp\)</span> such that <span class="math">\(\Sigma \vdash \alpha\)</span> and <span class="math">\(\Sigma \vdash \neg \alpha\)</span> at the same time - that it not possible to derive a contradiction from the premises.</p>
+<p>This is not to be confused with semantic consistency, which applies only to formulas.</p>
+<p>A set of formulas <span class="math">\(\Sigma \subseteq \formlp\)</span> is <strong>maximally consistent</strong> if and only if <span class="math">\(\Sigma\)</span> is consistent and any <span class="math">\(\alpha \in \formlp \setminus \Sigma\)</span>, <span class="math">\(\Sigma \cup \set{\alpha}\)</span> is inconsistent. In other words, it is the largest possible set of consistent formulas.</p>
+<p>There are multiple possible maximally consistent sets.</p>
+<p>If <span class="math">\(\Sigma\)</span> is maximally consistent:</p>
+<ul>
+<li><span class="math">\(p \in \Sigma\)</span> if and only if <span class="math">\(\Sigma \vdash \alpha\)</span>.</li>
+<li><span class="math">\(\alpha \wedge \phi \in \Sigma\)</span> if and only if <span class="math">\(\Sigma \vdash \alpha\)</span> and <span class="math">\(\Sigma \vdash \phi\)</span>.</li>
+<li><span class="math">\(\alpha \vee \phi \in \Sigma\)</span> if and only if <span class="math">\(\Sigma \vdash \alpha\)</span> or <span class="math">\(\Sigma \vdash \phi\)</span>.</li>
+<li><span class="math">\(\alpha \rightarrow \phi \in \Sigma\)</span> if and only if <span class="math">\(\Sigma \vdash \alpha \implies \Sigma \vdash \phi\)</span>.</li>
+<li><span class="math">\(\alpha \leftrightarrow \phi \in \Sigma\)</span> if and only if <span class="math">\(\Sigma \vdash \alpha \iff \Sigma \vdash \phi\)</span>.</li>
+</ul>
+<p>We can prove the completeness theorem for ND by proving the contrapositive:</p>
+<blockquote>
+<p>We want to prove <span class="math">\(\Sigma \not\vdash \phi \implies \Sigma \not\models \phi\)</span>.<br />Assume <span class="math">\(\Sigma \not\vdash \phi\)</span>.<br />Then <span class="math">\(\Sigma \cup \set{\neg \alpha}\)</span> is syntactically consistent, because there is no way that <span class="math">\(\Sigma \vdash \alpha\)</span> or <span class="math">\(\Sigma \vdash \neg \phi\)</span> for any <span class="math">\(\phi \in \Sigma\)</span>.<br />So there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(\Sigma^t = 1 \wedge (\neg \phi)^t = 1\)</span>.<br />So <span class="math">\(\Sigma \not\models \phi\)</span>.</p>
+</blockquote>
+<p>The <strong>Lindenbaum Lemma</strong> says that any consistent set of formulas can be extended into a maximally consistent set.</p>
+<h1 id="section-9">11/6/14</h1>
+<p>Soundness theorem: <span class="math">\(\Sigma \vdash \alpha \implies \Sigma \models \alpha\)</span>.</p>
+<p>Completeness theorem: <span class="math">\(\Sigma \models \alpha \implies \Sigma \vdash \alpha\)</span>, and its contrapositive <span class="math">\(\Sigma \not\vdash \alpha \implies \Sigma \not\models \alpha\)</span>.</p>
+<p>Soundness: <span class="math">\(\Sigma\)</span> is satisfiable implies <span class="math">\(\Sigma\)</span> is sound.</p>
+<p>Completeness: <span class="math">\(\Sigma\)</span> is sound implies <span class="math">\(\Sigma\)</span> is satisfiable.</p>
+<p>Logical connectives:</p>
+<ul>
+<li><span class="math">\(\neg p\)</span> - not p, p does not hold, it is not the case that p, p is false</li>
+<li><span class="math">\(p \wedge q\)</span> - <span class="math">\(p\)</span> and <span class="math">\(q\)</span>, <span class="math">\(p\)</span> but <span class="math">\(q\)</span>, not only <span class="math">\(p\)</span> but <span class="math">\(q\)</span>, <span class="math">\(p\)</span> while <span class="math">\(q\)</span>, <span class="math">\(p\)</span> despite <span class="math">\(q\)</span>, <span class="math">\(p\)</span> yet <span class="math">\(q\)</span>, <span class="math">\(p\)</span> although <span class="math">\(q\)</span></li>
+<li><span class="math">\(p \vee q\)</span> - <span class="math">\(p\)</span> or <span class="math">\(q\)</span>, <span class="math">\(p\)</span> or <span class="math">\(q\)</span> or both, <span class="math">\(p\)</span> and/or q, <span class="math">\(p\)</span> unless <span class="math">\(q\)</span></li>
+<li><span class="math">\(p \rightarrow q\)</span> - if <span class="math">\(p\)</span> then <span class="math">\(q\)</span>, <span class="math">\(q\)</span> if <span class="math">\(p\)</span>, <span class="math">\(p\)</span> only if <span class="math">\(q\)</span>, <span class="math">\(q\)</span> when <span class="math">\(p\)</span>, <span class="math">\(p\)</span> is sufficient for <span class="math">\(q\)</span>, <span class="math">\(q\)</span> is necessary for <span class="math">\(p\)</span>, <span class="math">\(p\)</span> implies <span class="math">\(q\)</span></li>
+<li><span class="math">\(p \leftrightarrow q\)</span> - <span class="math">\(p\)</span> if and only if <span class="math">\(q\)</span> (<span class="math">\(p\)</span> iff <span class="math">\(q\)</span>), <span class="math">\(p\)</span> is necessary and sufficient for <span class="math">\(q\)</span>, <span class="math">\(p\)</span> exactly if <span class="math">\(q\)</span>, <span class="math">\(p\)</span> is equivalent to <span class="math">\(q\)</span></li>
+</ul>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

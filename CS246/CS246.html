@@ -492,7 +492,13 @@ int main(int argc, char *argv[] );</code></pre>
 <p>That said, don't use <code>#define</code> whenever possible. For enumerations, use <code>enum</code>, and for functions that need to be fast, use the <code>inline</code> keyword to automatically inline the function: <code>RETURN_TYPE inline NAME(...)</code>. This directive is useful for debugging flags to turn on debugging features in the program.</p>
 <p><code>#define VARIABLE</code> defines <code>VARIABLE</code> to be the empty string. This simply defines the variable but gives it a blank value.</p>
 <p>This is often used with the <code>#ifdef VARIABLE</code> and <code>#ifndef VARIABLE</code> directives, which check if <code>VARIABLE</code> is defined and include code accordingly.</p>
-<p>The <code>#include</code> directive works much line in C, but for standard library paths we can drop the <code>.h</code> suffix - it is <code>#include &lt;iostream&gt;</code> rather than <code>#include &lt;iostream.h&gt;</code>.</p>
+<p>The <code>#include</code> directive works much line in C, but for standard library paths we can drop the <code>.h</code> suffix - it is <code>#include &lt;iostream&gt;</code> rather than <code>#include &lt;iostream.h&gt;</code>. As usual, we include relative to the current directory with <code>#include &quot;some_file.h&quot;</code>.</p>
+<p>If we use <code>#include</code> on the same file twice, it will include that file twice. So if we have a file with some definitions, including it twice will result in a double definition and an error. We can avoid this by using the following pattern wherever we have a file that needs a library:</p>
+<pre><code>#ifndef __LIBX__ // double underscores is standard naming convention
+#include &lt;libx&gt;
+#define __LIBX__
+#endif</code></pre>
+<p>Now whenever we include a file, it will set a preprocessor variable, so when we encounter another inclusion of the same file that uses this pattern, it is not incuded again. This is a part of good coding style and is required for all inclusions from now on.</p>
 <p>The <code>#if EXPRESSION</code> directive and its corresponding <code>#else</code> and <code>#elseif EXPRESSION</code> and <code>#endif</code> operator allow us to include code depending on the value of <code>EXPRESSION</code>. <code>EXPRESSION</code> supports all of the operators as C++ source code, but the operands must be integers or characters.</p>
 <p>This is often used to make code cross platform:</p>
 <pre><code>#define UNIX 0
@@ -532,6 +538,73 @@ Vector operator+(const Vector &amp;a, const Vector &amp;b) {
 <p>The <code>-c</code> command line option (used like <code>g++ -c FILE</code>) allows us to compile without linking. This results in the object file, and the linker is not invoked at all.</p>
 <p>An object file can be directly linked, so we don't need to compile the source again for that file. For examplle, if we compiled &quot;vector.cc&quot; into <code>vector.o</code>, then our compilation command would change from <code>g++ main.cc vector.cc</code> to <code>g++ main.cc vector.o</code>, and G++ would use the object file instead of compiling <code>vector.cc</code> again.</p>
 <p>We should never have global variables in headers (<code>global int n</code>). This is because global variables are declarations and definitions (since they reserve space for the variable), so there would be multiple definitions if we included the header more than once. Instead, we use <code>extern int n</code> to only declare and not define the variable. ;wip: C++ globals</p>
+<h1 id="section-10">10/6/14</h1>
+<p>Another advantage of separable compilation is the ability to compile the source file and leave the header file uncompiled</p>
+<p>We should never put <code>using namespace std;</code> in a header file. This is because it brings in a lot of names into the current namespace, like <code>cin</code> and <code>endl</code>, which the client that is including the file may not want. As a result, we should only use this in programs that will not be included by clients, and use <code>std::string</code> and similar in header files.</p>
+<h2 id="classes">Classes</h2>
+<p>Using classes, we can put functions directly inside a struct.</p>
+<p>A class is basically just a struct that can contain functions. Every struct is therefore a class.</p>
+<p>The <code>class</code> keyword is also available, and it behaves a lot like <code>struct</code>, but has some slightly different behaviour that will be discussed in detail later.</p>
+<p>An <strong>object</strong> is an instance of a class. A <strong>member function</strong> or <strong>method</strong> is a function inside a class. <code>grade</code> is therefore a method of <code>Student</code>.</p>
+<pre><code>struct Student { // class declaration
+    int assignment_grade;
+    int midterm_grade;
+    int final_grade;
+    float grade() { // grade is a function that is associated with Student, so we want to put it inside the struct
+        return assignment_grade * 0.4 + midterm_grade * 0.2 + final_grade * 0.4; // we can use the fields of the class instance just like normal variables
+        // when we call this below, `assignment_grade` refers to `s.assignment_grade`, and so on
+        // the fields are taken from the instance the method was called on, so if we called `some_other_student.grade()`, `assignment_grade` would refer to `some_other_student.assignment_grade` instead, and so on
+    }
+}
+
+int main() {
+    Student s = {80, 50, 70}; // `s` is now an instance of `Student`
+    std::cout &lt;&lt; s.grade() &lt;&lt; std::endl; // call the `grade` method
+}</code></pre>
+<p>We saw the same dot syntax before when we used <code>some_string.length()</code> or <code>cin.ignore()</code>.</p>
+<p>The difference between functions and methods is that methods have a hidden parameter called <code>this</code>. <code>this</code> is implicitly inserted before the first actual parameter, and contains a pointer to the object on which the method was called. Functions do not have this hidden parameter.</p>
+<p>So in <code>grade</code>, the value of <code>this</code> is the same as <code>&amp;s</code> in <code>main</code>. As a result, we can also write the grade mthod as follows:</p>
+<pre><code>struct Student {
+    int assignment_grade;
+    int midterm_grade;
+    int final_grade;
+    float grade() {
+        return this-&gt;assignment_grade * 0.4 + this-&gt;midterm_grade * 0.2 + this-&gt;final_grade * 0.4;
+        // when we write `assignment_grade` directly, it is exactly the same as `this-&gt;assignment_grade`
+        // we might use `this-&gt;` when we have a local variable or parameter with the same name as a class variable, because the local variable or parameter would shadow the class variable and there would be no other way to refer to it
+        // it is good coding style to always use `this-&gt;` to make it explicit that it is a class variable
+    }
+}</code></pre>
+<h3 id="initializing-objects">Initializing Objects</h3>
+<p>In C-style initialization, we initialize objects in a certain way: <code>Student someone = {A, B, C};</code>. The disadvantage is that this is very inflexible, and we can't really add any custom behaviour associated with object initialization. For example, if we created a database object, we probably also want it to open a database connection.</p>
+<p>In C++, we have a <strong>contsructor</strong> (&quot;ctor&quot; for short) method that is used to initialize an object. For example:</p>
+<pre><code>struct Student { // class declaration
+    int assignment_grade;
+    int midterm_grade;
+    int final_grade;
+    Student(int a_g = 0, int m_g = 0, int f_g = 0) { // the constructor is the function that has the same name as the class
+        // the constructor has no return type because it should always return a new instance of `Student`
+        this-&gt;assignment_grade = a_g;
+        this-&gt;midterm_grade = m_g;
+        // we can now do anything here to initialize things
+    }
+    float grade() {
+        return assignment_grade * 0.4 + midterm_grade * 0.2 + final_grade * 0.4;
+    }
+}
+
+int main() {
+    Student s(90, 80, 70); // this calls the constructor instead of initializing the struct directly
+    Student other = Student(90, 80, 70); // this is exactly equivalent to the definition above
+    Student *heapy = new Student(90, 80, 70); // this allocates the `Student` object on the heap and gives a pointer to it, so we can do `heapy-&gt;grade()` and such
+    
+    // this is the same syntax we saw before with `ifstream` objects.
+    // we also cannot call the constructor of an object that is already created, so `other.Student(1, 2, 3)` is invalid
+    
+    Student someone(); // THIS IS A FUNCTION DEFINITION, NOT A STRUCTURE DEFINITION - WE CANNOT USE PARENTHESES WHEN THERE ARE NO ARGUMENTS TO THE CONSTRUCTOR
+    Student someone; // this is how we use default values for all the arguments instead
+}</code></pre>
+<p>The advantage of contructors is that we can associate arbitrary behaviour with the creation of an object. Also, we can use default values for parameters of constructors, or even function overloading on constructors, to allow different ways to initialize the object.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

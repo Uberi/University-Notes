@@ -3,6 +3,7 @@ STAT230
 
 Probability.
 
+    Section 001
     Instructor: Dina Dawoud
     Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126
 
@@ -134,7 +135,7 @@ For example, consider a set of 20 people's birthdays:
 
 The factorial function grows extremely quickly and can be difficult to calculate for large numbers. Therefore, we have various approximations that help us do this more easily.
 
-**Stirling's approximation** is $n! \approxeq n^n e^{-n} \sqrt{2 \pi n}$. This approximation is asymptotically equivalent to the factorial function - as $n \to \infty$, the percentage error gradually decreases.
+**Stirling's approximation** is $n! \approxeq n^n e^{-n} \sqrt{2 \pi n}$ or $n! \approxeq \left(\frac n e\right)^n\sqrt{2 \pi n}$. This approximation is asymptotically equivalent to the factorial function - as $n \to \infty$, the percentage error gradually decreases.
 
 The **complement** of an event $A$ is the opposite event - the event of $A$ not **occurring**. It is represented using $\overline A$ or $A^C$. It is always true that an event occurs, or it does not occur, so $P(A) + P(\overline A) = 1$.  
 
@@ -321,6 +322,16 @@ Disjoint events are those where $P(A \cap B) = 0$ and $A \cap B = \emptyset$. Th
 The **partition rule** states that if $A_1 \cup \ldots \cup A_k = S$ where $A_1, \ldots, A_k$ are disjoint sets (mutually exclusive), and $B$ is an event in $S$, then $P(B) = P(B \cap A_1) + \ldots + P(B \cap A_k) = \sum_{i = 1}^k P(B \mid A_i)P(A_i)$.
 
 This is because $B = B \cap A_1 \cup \ldots \cup B \cap A_k$, and $B \cap A_i$ is mutually exclusive with any $B \cap A_j$ when $i \ne j$. So $P(B) = P(B \cap A_1 \cup \ldots \cup B \cap A_k) = P(B \cap A_1) + \ldots + P(B \cap A_k)$.
+
+So if $A$ is an event and $B$ and $C$ are mutually exclusive events, then $P(A) = P(A \cap B) + P(A \cap C) = P(A \mid B)P(B) + P(A \mid C)P(C)$.
+
+A group of students that is 18.75% male is planning to go out for pizza. If $\frac{100}{3}$% of the male students go and $\frac{300}{13}$% of the female students go, what is the probability that a random student who goes out for pizza is female?
+
+> Let $M$ represent male and $O$ represent going out for pizza.  
+> Clearly, $P(M) = 0.1875, P(\overline M) = 0.8125$ and $P(O \mid M) = \frac 1 3, P(O \mid \overline M) = \frac 3 {13}$.  
+> We want to find $P(\overline M \mid O)$. So $P(\overline M \mid O) = \frac{P(\overline M \cap O)}{P(O)} = \frac{P(O \mid \overline M)P(\overline M)}{P(O \mid M)P(M) + P(O \mid \overline M)P(\overline M)}$.  
+> So $P(\overline M \mid O) = \frac{\frac 3 {13} \cdot 0.8125}{\frac 1 3 0.1875  + \frac 3 {13} \cdot 0.8125} = 0.75$.  
+> So the probability that a random selected student from this group is female is 75%.  
 
 A **tree diagram** is a diagram that helps represent conditional probabilities by showing the possibilities of several runs of an experiement as a tree. For example, we might draw a tree for flips of a coin, with each level being a subsequent flip of the coin.
 
@@ -542,7 +553,9 @@ Given that there is a 30% chance of a car having leaks, and that the probability
 
 Preconditions:
 
-* Events occur at a rate/concentration/density $\mu$.
+* Events occur at random points in time.
+* Events occur independently of each other - observing events occur already does not change the probability of the events ooccurring later.
+* Events occur $\mu$ times over the interval, on average.
 
 If the above are satisfied, then if $X$ represents the number of events of some type within some interval, $X$ has a Poisson distribution and $f_X(x) = \frac{e^{-\mu} \mu^x}{x!}$ where $x \ge 0$.
 
@@ -550,4 +563,70 @@ This can be represented using $X ~ \operatorname{Poisson}(\mu)$.
 
 This distribution is defined over a countably infinite set of outcomes.
 
+This an approximation for the binomial distribution where $\operatorname{Poisson}(\mu)$ approximates $\operatorname{Bin}(n, \frac \mu n)$. The approximation gets better for large $n$ and small $p$.
+
+This is because for large $n$ and small $p$, $n$, the trials in a binomial distribution, becomes the arbitrarily small sections of time, and $p$ becomes the probability of the event occurring (which is a success) in one of those small sections of time. Since each section of time is $\frac 1 n$ long, the probability of observing an event in this section is $p = \frac \mu n$, and we assume the sections are so small that the probability of two events occurring in one section is negligible.
+
 Examples of this distribution occurring naturally might include the number of white cars we observe in 30 minutes, or the number of bacteria in particular radius.
+
+# 9/6/14
+
+The rate is not necessarily over time. It could be anything that events can occur relative to. For example, we can define $\mu$ as average pollutant molecules (success event) per liter of water.
+
+When $n \to \infty$, the binomial distribution becomes the Poisson distribution:
+
+> Let $f_X(x) = {n \choose x}p^x(1 - p)^{n - x}$. We want to prove that $\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \frac{e^{-\mu} \mu^x}{x!}$.  
+> Clearly, $\mu = np$ - the number of samples times the probability of each sample occurring is the rate of events occurring over all $n$.  
+> So $\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \lim_{n \to \infty} {n \choose x}\left(\frac \mu n\right)^x\left(1 - \frac \mu n\right)^{n - x}
+= \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n!}{(n - x)!}\frac 1 {n^x}\left(1 - \frac \mu n\right)^n \lim_{n \to \infty} \left(1 - \frac \mu n\right)^{-x}
+= \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n \cdot (n - 1) \cdots (n - x)}{n^x}\left(1 - \frac \mu n\right)^n
+= \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n \cdot (n - 1) \cdots (n - x)}{n^x} \lim_{n \to \infty} \left(1 - \frac \mu n\right)^n
+= \frac{\mu^x}{x!}\lim_{n \to \infty} \left(1 - \frac \mu n\right)^n$.  
+> Since $e^x = \lim_{n \to \infty} \left(1 + \frac x n\right)^n$ and $e^{-\mu} = \lim_{n \to \infty} \left(1 - \frac x n\right)^n$.  
+> So $\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \frac{e^{-\mu}\mu^x}{x!}\lim_{n \to \infty}$.  
+
+The idea is to keep $\mu = np$ fixed, so as $n \to \infty$, $p \to 0$.
+
+Birthday problem - given 200 people at a party, what is the probability that exactly two of them are born on January 1?
+
+> We assume that all days of the year are equally likely, and there are no leap years, and that birthdays are independent of each other.  
+> Let $X$ be the number of people at the party born on January 1.  
+> So $X ~ \operatorname{Bin}(200, \frac 1 {365})$. Then the exact probability is $P(X = 2) = {200 \choose 2} \frac 1 {365^2} \left(\frac{364}{365}\right)^{200 - 2} \approxeq 0.086766913252562$.
+> Using the Poisson approximation, $\mu = np = 200 \times \frac 1 {365} = \frac{200}{365}$, so $P(X = 2) = \frac{e^{-\frac{200}{365}}\mu^{\frac{200}{365}}}{x!} \approxeq 0.086790999064332$.  
+
+Order Notation
+----------------
+
+$g(\Delta t) = o(\Delta t)$ as $t \to 0$ means that $g(\Delta t)$ approaches 0 faster than $\delta t$ does. So $\frac{g(\Delta t)}{\Delta t} = 0$ as $t \to 0$.
+
+For example, $x^2$ ($g(\Delta t)$) approaches 0 faster than $x$ ($\Delta t$), so $x^2$ is $o(x)$. However, $\sqrt{x}$ approaches 0 slower than $x$, so $\sqrt{x}$ is not $o(x)$.
+
+So if something is $o(x)$, then it approaches 0 faster than $x$ does.
+
+$f(x) \in o(g(x))$ means that $f(x)$ grows much slower than $g(x)$.
+
+# 11/6/14
+
+Independent events means that events occur independent of each other - observing events occurring a lot of times already in the past should not affect the probability of observing events in the future.
+
+Individual events means that $P(\text{2 or more events in same interval } (t, t + \Delta t)) = o(\Delta t)$ - that the probability of two events occurring in the same interval becomes negligible when $\Delta t \to 0$. In other words, in any interval $(t, t + \Delta t)$ there is either 1 or 0 events occurring, and the probability that two or more events occur is negligible.
+
+Hommogeneity/uniformity means that the events occur at a uniform rate $\lambda$ over time so that $P(\text{one event in interval } (t, t + \
+Delta t)) = \lambda \Delta t o(\Delta t)$.
+
+If a process/experiment satisfies these three properties, then it is a **Poission process** and $\mu = \lambda t$.
+
+$\lambda$ is the rate of events per unit of time. $\mu$ is the average number of occurrences over an interval $t$. Clearly, $\mu = \lambda t$.
+
+If there are an average of 6 earthquakes per year and earthquakes are a Poisson process, what is the probability that 7 are recorded in the next 2 years?
+
+> Let $X$ be the number of earthquakes in the next 2 years.  
+> Clearly, $\lambda = 6 \text{earthquakes}/\text{year}$, so $\mu = 12 \text{earthquakes}$.  
+> So $P(X = 7) = \frac{e^{-12} 12^7}{7!}$.  
+
+The number of cars exceeding the speed limit in half an hour is a random variable $X$ with a Poisson distribution where $\lambda = 8.4$. What is the probability that 10 cars exceed the speed limit in 1 hour?
+
+> Clearly, $\mu = 8.4 \text{speeders}{0.5 hours}t = k \text{speeders}{hour}t$. So $t = 2 \text{hours}$ and $\mu = 16.8 \text{speeders}$.  
+> So $P(X = 10) = \frac{e^{-16.8} 16.8^10}{10!}$.  
+
+;wip: check the slide notes for section 1 today
