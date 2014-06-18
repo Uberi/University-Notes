@@ -46,6 +46,24 @@
     padding:: 0;
   }
   
+  blockquote {
+    margin-left: 0;
+    padding-left: 0.5em;
+    border-left: solid 0.3em grey;
+  }
+  
+  .figure {
+    border: solid 0.1em grey;
+    display: inline-block;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  .figure .caption {
+    margin: 0;
+    font-size: 80%;
+  }
+  
   a.button {
     display: inline-block;
     padding: 1em;
@@ -74,6 +92,7 @@ Instructor: Dina Dawoud
 Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
@@ -325,7 +344,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>If the above are satisfied, then if <span class="math">\(X\)</span> represents the number of observed successes, <span class="math">\(X\)</span> has a binomial distribution and <span class="math">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span> where <span class="math">\(n\)</span> is the number of objects selected, <span class="math">\(p = P(success)\)</span>.</p>
 <p>This is the same as the hypergeometric distribution, except our selection is done with replacement - every trial is independent. ;wip</p>
 <p>;wip: justify this and organize all of this properly</p>
-<p><span class="math">\(X ~ \operatorname(Bin)(n, p)\)</span>. The <span class="math">\(n\)</span> is the number of the number of objects in <span class="math">\(S\)</span>, and <span class="math">\(p\)</span> is the probability of success for each object. ;wip: tilde is not showing up</p>
+<p><span class="math">\(X \sim \operatorname(Bin)(n, p)\)</span>. The <span class="math">\(n\)</span> is the number of the number of objects in <span class="math">\(S\)</span>, and <span class="math">\(p\)</span> is the probability of success for each object.</p>
 <p>These independent trials resulting in success/failure are known as <strong>Bernoulli trials</strong>. The process is known as the <strong>Bernoulli process</strong>.</p>
 <p>With <span class="math">\(x\)</span> successes and <span class="math">\(n - x\)</span> failures, there are <span class="math">\(n \choose x\)</span> ways of choosing them.</p>
 <p>So <span class="math">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span> where <span class="math">\(0 \le x \le n\)</span>.</p>
@@ -343,7 +362,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 </blockquote>
 <h3 id="negative-binomial-distribution">Negative Binomial Distribution</h3>
 <p>The negative binomial distribution has the same preconditions as the binomial distribution, but now <span class="math">\(X\)</span> records the number of failures before the <span class="math">\(k\)</span>th success and <span class="math">\(x\)</span> is the number of failures.</p>
-<p>This can be represented using <span class="math">\(X ~ \operatorname{NB}(k, p)\)</span>, where <span class="math">\(k\)</span> is the number of successes and <span class="math">\(p\)</span> is the probability of success. ;wip: tilde not showing up</p>
+<p>This can be represented using <span class="math">\(X \sim \operatorname{NB}(k, p)\)</span>, where <span class="math">\(k\)</span> is the number of successes and <span class="math">\(p\)</span> is the probability of success.</p>
 <p>Clearly, there are <span class="math">\(x + k\)</span> trials - successes plus failures, and the last trial is always a success.</p>
 <p>So there are <span class="math">\(x + k - 1\)</span> trials in which there are <span class="math">\(x\)</span> failures, and <span class="math">\(x + k - 1 \choose x\)</span> arrangements.</p>
 <p>So <span class="math">\(f_X(x) = {x + k - 1 \choose x}p^k(1 - p)^x\)</span> where <span class="math">\(0 \le x\)</span>.</p>
@@ -351,7 +370,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>With binomial distributions we know the number of trials but not the number of successes. With negative binomial distributions we know the number of successes but not the number of trials.</p>
 <p>If 20% of people agree to buy tickets, and we want 25 people to buy tickets, what is the probability function of <span class="math">\(X\)</span> where <span class="math">\(X\)</span> is the number of people asked before 25 tickets are bought?</p>
 <blockquote>
-<p>Clearly, <span class="math">\(X\)</span> is the number of failures plus 25 successes, and <span class="math">\(k = 25, p = 0.2\)</span>.<br />Let <span class="math">\(X = Y + 25\)</span> where <span class="math">\(Y ~ \operatorname{NB}(25, 0.2)\)</span>, so <span class="math">\(x = y + 25\)</span> and <span class="math">\(y = x - 25\)</span>.<br />So <span class="math">\(f_Y(y) = {y + 25 - 1 \choose y}p^{25}(1 - 0.2)^y = {y + 24 \choose y}0.2^{25}0.8^y\)</span> where <span class="math">\(0 \le y\)</span>.<br />So <span class="math">\(f_X(x) = {x - 1 \choose x - 25}0.2^{25}0.8^{x - 25}\)</span> where <span class="math">\(25 \le x\)</span>.</p>
+<p>Clearly, <span class="math">\(X\)</span> is the number of failures plus 25 successes, and <span class="math">\(k = 25, p = 0.2\)</span>.<br />Let <span class="math">\(X = Y + 25\)</span> where <span class="math">\(Y \sim \operatorname{NB}(25, 0.2)\)</span>, so <span class="math">\(x = y + 25\)</span> and <span class="math">\(y = x - 25\)</span>.<br />So <span class="math">\(f_Y(y) = {y + 25 - 1 \choose y}p^{25}(1 - 0.2)^y = {y + 24 \choose y}0.2^{25}0.8^y\)</span> where <span class="math">\(0 \le y\)</span>.<br />So <span class="math">\(f_X(x) = {x - 1 \choose x - 25}0.2^{25}0.8^{x - 25}\)</span> where <span class="math">\(25 \le x\)</span>.</p>
 </blockquote>
 <h1 id="section-12">4/6/14</h1>
 <p>Midterm Review.</p>
@@ -373,7 +392,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <h3 id="geometric-distribution">Geometric Distribution</h3>
 <p>This basically the same as the negative binomial distribution with <span class="math">\(k = 1\)</span>. It has the same preconditions as the binomial distribution, but <span class="math">\(X\)</span> is the number of failures before the first success.</p>
 <p>If <span class="math">\(X\)</span> has a geometric distribution, then <span class="math">\(f_X(x) = (1 - p)^xp\)</span> where <span class="math">\(0 \le x\)</span>. This can easily be derived from the negative binomial distribution.</p>
-<p>Also, we can write <span class="math">\(X ~ \operatorname{NB}(1, p)\)</span> or <span class="math">\(X ~ \operatorname{Geo}(p)\)</span>.</p>
+<p>Also, we can write <span class="math">\(X \sim \operatorname{NB}(1, p)\)</span> or <span class="math">\(X \sim \operatorname{Geo}(p)\)</span>.</p>
 <p>Note that the binomial, negative binomial, and geometric distributions all have the same preconditions - two outcomes, independent trials, and equal probability of success in each trial.</p>
 <p>The only thing different between them is what <span class="math">\(X\)</span> means - successes given <span class="math">\(n\)</span> trials, failures given <span class="math">\(n\)</span> successes, and failures given 1 success.</p>
 <p>Given that there is a 30% chance of a car having leaks, and that the probability that we must check at least <span class="math">\(n\)</span> cars to find the first one with leaks is 0.05, what is the value of <span class="math">\(n\)</span>?</p>
@@ -388,7 +407,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <li>Events occur <span class="math">\(\mu\)</span> times over the interval, on average.</li>
 </ul>
 <p>If the above are satisfied, then if <span class="math">\(X\)</span> represents the number of events of some type within some interval, <span class="math">\(X\)</span> has a Poisson distribution and <span class="math">\(f_X(x) = \frac{e^{-\mu} \mu^x}{x!}\)</span> where <span class="math">\(x \ge 0\)</span>.</p>
-<p>This can be represented using <span class="math">\(X ~ \operatorname{Poisson}(\mu)\)</span>.</p>
+<p>This can be represented using <span class="math">\(X \sim \operatorname{Poisson}(\mu)\)</span>.</p>
 <p>This distribution is defined over a countably infinite set of outcomes.</p>
 <p>This an approximation for the binomial distribution where <span class="math">\(\operatorname{Poisson}(\mu)\)</span> approximates <span class="math">\(\operatorname{Bin}(n, \frac \mu n)\)</span>. The approximation gets better for large <span class="math">\(n\)</span> and small <span class="math">\(p\)</span>.</p>
 <p>This is because for large <span class="math">\(n\)</span> and small <span class="math">\(p\)</span>, <span class="math">\(n\)</span>, the trials in a binomial distribution, becomes the arbitrarily small sections of time, and <span class="math">\(p\)</span> becomes the probability of the event occurring (which is a success) in one of those small sections of time. Since each section of time is <span class="math">\(\frac 1 n\)</span> long, the probability of observing an event in this section is <span class="math">\(p = \frac \mu n\)</span>, and we assume the sections are so small that the probability of two events occurring in one section is negligible.</p>
@@ -402,7 +421,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>The idea is to keep <span class="math">\(\mu = np\)</span> fixed, so as <span class="math">\(n \to \infty\)</span>, <span class="math">\(p \to 0\)</span>.</p>
 <p>Birthday problem - given 200 people at a party, what is the probability that exactly two of them are born on January 1?</p>
 <blockquote>
-<p>We assume that all days of the year are equally likely, and there are no leap years, and that birthdays are independent of each other.<br />Let <span class="math">\(X\)</span> be the number of people at the party born on January 1.<br />So <span class="math">\(X ~ \operatorname{Bin}(200, \frac 1 {365})\)</span>. Then the exact probability is <span class="math">\(P(X = 2) = {200 \choose 2} \frac 1 {365^2} \left(\frac{364}{365}\right)^{200 - 2} \approxeq 0.086766913252562\)</span>. Using the Poisson approximation, <span class="math">\(\mu = np = 200 \times \frac 1 {365} = \frac{200}{365}\)</span>, so <span class="math">\(P(X = 2) = \frac{e^{-\frac{200}{365}}\mu^{\frac{200}{365}}}{x!} \approxeq 0.086790999064332\)</span>.</p>
+<p>We assume that all days of the year are equally likely, and there are no leap years, and that birthdays are independent of each other.<br />Let <span class="math">\(X\)</span> be the number of people at the party born on January 1.<br />So <span class="math">\(X \sim \operatorname{Bin}(200, \frac 1 {365})\)</span>. Then the exact probability is <span class="math">\(P(X = 2) = {200 \choose 2} \frac 1 {365^2} \left(\frac{364}{365}\right)^{200 - 2} \approxeq 0.086766913252562\)</span>.<br />Using the Poisson approximation, <span class="math">\(\mu = np = 200 \times \frac 1 {365} = \frac{200}{365}\)</span>, so <span class="math">\(P(X = 2) = \frac{e^{-\frac{200}{365}}\mu^{\frac{200}{365}}}{x!} \approxeq 0.086790999064332\)</span>.</p>
 </blockquote>
 <h2 id="order-notation">Order Notation</h2>
 <p><span class="math">\(g(\Delta t) = o(\Delta t)\)</span> as <span class="math">\(t \to 0\)</span> means that <span class="math">\(g(\Delta t)\)</span> approaches 0 faster than <span class="math">\(\delta t\)</span> does. So <span class="math">\(\frac{g(\Delta t)}{\Delta t} = 0\)</span> as <span class="math">\(t \to 0\)</span>.</p>
@@ -412,19 +431,73 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <h1 id="section-15">11/6/14</h1>
 <p>Independent events means that events occur independent of each other - observing events occurring a lot of times already in the past should not affect the probability of observing events in the future.</p>
 <p>Individual events means that <span class="math">\(P(\text{2 or more events in same interval } (t, t + \Delta t)) = o(\Delta t)\)</span> - that the probability of two events occurring in the same interval becomes negligible when <span class="math">\(\Delta t \to 0\)</span>. In other words, in any interval <span class="math">\((t, t + \Delta t)\)</span> there is either 1 or 0 events occurring, and the probability that two or more events occur is negligible.</p>
-<p>Hommogeneity/uniformity means that the events occur at a uniform rate <span class="math">\(\lambda\)</span> over time so that <span class="math">\(P(\text{one event in interval } (t, t + \
+<p>Hommogeneity/uniformity means that the events occur at a uniform rate <span class="math">\(\lambda\)</span> over some dimension (usually time or space) so that <span class="math">\(P(\text{one event in interval } (t, t + \
 Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <p>If a process/experiment satisfies these three properties, then it is a <strong>Poission process</strong> and <span class="math">\(\mu = \lambda t\)</span>.</p>
-<p><span class="math">\(\lambda\)</span> is the rate of events per unit of time. <span class="math">\(\mu\)</span> is the average number of occurrences over an interval <span class="math">\(t\)</span>. Clearly, <span class="math">\(\mu = \lambda t\)</span>.</p>
+<p><span class="math">\(\lambda\)</span> is the average rate of events per unit dimension (usually time or space). <span class="math">\(\mu\)</span> is the average number of occurrences over an interval <span class="math">\(t\)</span>. Clearly, <span class="math">\(\mu = \lambda t\)</span>.</p>
 <p>If there are an average of 6 earthquakes per year and earthquakes are a Poisson process, what is the probability that 7 are recorded in the next 2 years?</p>
 <blockquote>
 <p>Let <span class="math">\(X\)</span> be the number of earthquakes in the next 2 years.<br />Clearly, <span class="math">\(\lambda = 6 \text{earthquakes}/\text{year}\)</span>, so <span class="math">\(\mu = 12 \text{earthquakes}\)</span>.<br />So <span class="math">\(P(X = 7) = \frac{e^{-12} 12^7}{7!}\)</span>.</p>
 </blockquote>
 <p>The number of cars exceeding the speed limit in half an hour is a random variable <span class="math">\(X\)</span> with a Poisson distribution where <span class="math">\(\lambda = 8.4\)</span>. What is the probability that 10 cars exceed the speed limit in 1 hour?</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\mu = 8.4 \text{speeders}{0.5 hours}t = k \text{speeders}{hour}t\)</span>. So <span class="math">\(t = 2 \text{hours}\)</span> and <span class="math">\(\mu = 16.8 \text{speeders}\)</span>.<br />So <span class="math">\(P(X = 10) = \frac{e^{-16.8} 16.8^10}{10!}\)</span>.</p>
+<p>Clearly, <span class="math">\(\mu = 8.4 \text{speeders}/\text{0.5 hours}t = k \text{speeders}/\text{hour}t\)</span>. So <span class="math">\(t = 2 \text{hours}\)</span> and <span class="math">\(\mu = 16.8 \text{speeders}\)</span>.<br />So <span class="math">\(P(X = 10) = \frac{e^{-16.8} 16.8^10}{10!}\)</span>.</p>
 </blockquote>
-<p>;wip: check the slide notes for section 1 today</p>
+<h1 id="section-16">13/6/14</h1>
+<p>Bacteria occur in water at 1 bacterium per 10 cubic centimeters of water. What is the probability that there are 5 or more bacteria in a 50 cubic centimeter sample?</p>
+<blockquote>
+<p>Clearly, &quot;1 bacterium per 10 cubic centimeters of water&quot; is the average rate per unit volume, so <span class="math">\(\lambda = 1 \text{bacterium}/\text{10 cubic centimeters}\)</span>.<br />So <span class="math">\(\mu = 1 \text{bacterium}/\text{10 cubic centimeters} \times \text{50 cubic centimeters} = 5 \text{bacteria}\)</span>.<br />Let <span class="math">\(X\)</span> represent the number of bacteria. Then <span class="math">\(X \sim \operatorname{Poisson}(5)\)</span>.<br />So the probability that there are 5 or more bacteria is <span class="math">\(P(X \ge 5) = 1 - P(X \le 4) = 1 - e^{-5}\left(\frac{5^0}{0!} + \frac{5^1}{1!} + \frac{5^2}{2!} + \frac{5^3}{3!} + \frac{5^4}{4!}\right) \approxeq 0.559506714934788\)</span>.</p>
+</blockquote>
+<p>When do we use Poisson distribution rather than the binomial distribution? We must consider the following:</p>
+<ul>
+<li>Does <span class="math">\(X\)</span> have a maximum value? This is <span class="math">\(n\)</span> in the binomial distribution, and we can use Poisson if this is countably infinite or very large.
+<ul>
+<li>For example, if <span class="math">\(X\)</span> is the number of seeds that germinate out of 25 planted, then <span class="math">\(X\)</span> has a maximum value of 25 and we should not use the Poisson distribution.</li>
+<li>For example, if <span class="math">\(X\)</span> is the number of airplanes taking off, then <span class="math">\(X\)</span> has no maximum value - there could theoretically be infinite takeoffs and we should use the Poisson distribution.</li>
+</ul></li>
+<li>Does it make sense to ask how often the event does not occur? This asks if there are finite, distinct trials.
+<ul>
+<li>For example, if a coin is tossed many times, it also makes sense to count how often heads did not occur, so we should not use the Poisson distribution.</li>
+<li>For example, it does not make sense to ask how often a plane is not taking off, so we should use the Poisson distribution.</li>
+</ul></li>
+</ul>
+<p>Calls to a phone occur at an average rate of 3 per minute. What is the probability that 2 calls occur in the next minute given that 6 calls occur in the next 2.5 minutes?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(\lambda = 3\)</span> and <span class="math">\(\mu = 3 \times 2.5 = 7.5\)</span>. Let <span class="math">\(X_t\)</span> be the number of calls received over a time <span class="math">\(t\)</span>.<br />Then <span class="math">\(P(X_t = x) = \frac{e^{-3t}(3t)^x}{x!}\)</span> because it is a Poisson random variable.<br />Clearly, <span class="math">\(P(\text{2 in 1 minute} \mid \text{6 in 2.5 minutes}) = \frac{P(\text{2 in 1 minute} \wedge \text{6 in 2.5 minutes})}{P(\text{6 in 2.5 minutes})}\)</span>.<br />Clearly, <span class="math">\(\frac{P(\text{2 in 1 minute} \wedge \text{6 in 2.5 minutes})}{P(\text{6 in 2.5 minutes})} = \frac{P(\text{2 in 1 minute} \wedge \text{4 in last 1.5 minutes})}{P(\text{6 in 2.5 minutes})}\)</span>, because if only two occur in the first minute and 6 occur in total, then 4 occur in the last 1.5 minutes.<br />Clearly, <span class="math">\(\text{2 in 1 minute}\)</span> and <span class="math">\(\text{4 in last 1.5 minutes}\)</span> are independent.<br />So <span class="math">\(P(\text{2 in 1 minute} \mid \text{6 in 2.5 minutes}) = \frac{P(\text{2 in 1 minute}) P(\text{4 in last 1.5 minutes})}{P(\text{6 in 2.5 minutes})} = \frac{P(X_1 = 2) P(X_{1.5} = 4)}{P(X_{2.5} = 6)} = \frac{\frac{e^{-3}3^2}{2!} \frac{e^{-4.5}4.5^4}{4!}}{\frac{e^{-7.5}7.5^6}{6!}}\)</span>.<br />Incidentally, this is equal to <span class="math">\({6 \choose 2}\left(\frac{3}{7.5}\right)^2\left(1 - \frac{3}{7.5}\right)^{6 - 2}\)</span>, which is <span class="math">\(P(Y = 2)\)</span> where <span class="math">\(Y \sim \operatorname{Bin}\left(6, \frac{3}{7.5}\right)\)</span>.</p>
+</blockquote>
+<p>In general, if we have a Poisson variable and we restrict its maximum value like in the above example, when we then calculate the probability it is equivalent to a binomial distribution.</p>
+<h1 id="section-17">16/6/14</h1>
+<p>We can also combine distributions together to solve problems.</p>
+<p>A large number of ladybugs are released into an orchard. They scatter randomly so that every tree has an average of 6 bugs. Find the probability that any 10 trees have 8 with more than 3 ladybugs:</p>
+<blockquote>
+<p>Let <span class="math">\(X\)</span> be the number of ladybugs in any given tree. Clearly, <span class="math">\(X \sim \operatorname{Poisson}(6)\)</span> and <span class="math">\(P(X &gt; 3) = 1 - P(X = 0) - P(X = 1) - P(X = 2) - P(X = 3)\)</span>.<br />So <span class="math">\(P(X &gt; 3) = 1 - \frac{e^{-6}6^0}{0!} - \frac{e^{-6}6^1}{1!} - \frac{e^{-6}6^2}{2!} - \frac{e^{-6}6^3}{3!} = 1 - 61e^{-6}\)</span>.<br />Let <span class="math">\(Y\)</span> be the number of trees out of 10 that have more than 3 ladybugs. Then <span class="math">\(Y \sim \operatorname{Bin}(10, P(X &gt; 3))\)</span> and <span class="math">\(P(Y = 8) = {10 \choose 8}(1 - 61e^{-6})^8(1 - (1 - 61e^{-6}))^{10 - 8} = 45(1 - 61e^{-6})^8(61e^{-6})^2 \approxeq 0.277182287706655\)</span>.</p>
+</blockquote>
+<p>What is the probability that, given two trees with a total of <span class="math">\(t\)</span> ladybugs, there are <span class="math">\(x\)</span> on the first tree?</p>
+<blockquote>
+<p>;wip: use the definition of conditional probability and </p>
+</blockquote>
+<h2 id="expected-value-and-variance">Expected Value and Variance</h2>
+<p>We often want summary statistics rather than the full details of the data. For example, the mean, median, and standard deviation.</p>
+<p>A useful way to present data is the frequency distribution, which plots the number of <span class="math">\(X = x\)</span> with respect to <span class="math">\(x\)</span>. For example, if <span class="math">\(X\)</span> represents the number of peope in cars passing over a bridge, then the frequency histogram or table is the number of trials where <span class="math">\(X = x\)</span> for each <span class="math">\(x\)</span>.</p>
+<p>The <strong>arithmetic mean</strong> or <strong>sample average</strong> of a sample of observations <span class="math">\(x = \set{x_1, \ldots, x_n}\)</span> is <span class="math">\(\overline x = \frac 1 n \sum_{i = 1}^n x_1\)</span> where <span class="math">\(x_1, \ldots, x_n\)</span> are the individual outcomes of each sample. It is the sum of the values divided by the number of values and is not necessarily an exact value of <span class="math">\(x\)</span> - it might not be an integer even if <span class="math">\(X\)</span> is.</p>
+<h1 id="section-18">18/6/14</h1>
+<p>The set of observed outcomes <span class="math">\(x_1, \ldots, x_n\)</span> for a random variable <span class="math">\(X\)</span> is a <strong>sample</strong>.</p>
+<p>The <strong>median</strong> (represented <span class="math">\(Q_2\)</span>) of a sample of observations <span class="math">\(x = \set{x_1, \ldots, x_n}\)</span> is the value <span class="math">\(x\)</span> such that when the observations are numerically sorted, half the numbers are below it and half are above. If there are an even number of observations and it is impossible to divide it exactly in half, the mean of the middle two values is used. ;wip: the <span class="math">\(x\)</span> should have a tilde over it</p>
+<p>If a set of values is sorted, the median is the value in the middle or the mean of the two values in the middle.</p>
+<p>The <strong>mode</strong> is the value that occurs most often. This is not used very often, and there can be more than one mode if there are values that occur equally often.</p>
+<p>The mean, median, and mode are not necessarily the same, though they all measure centrality/location. Sometimes one will represent the data better than another.</p>
+<p>We previously defined the mean, median, and mode to summarize statistics for a sample of observations for a random variable 4X<span class="math">\(. We can also extend these concepts to describe the probability distribution of \)</span>X$.</p>
+<p>The mean of a sample set is <span class="math">\(\sum_{i = 1}^k x_i \times \frac{\text{the number of occurrences of } x_i}{\text{total number of occurrences of any outcome}}\)</span>, where <span class="math">\(x_1, \ldots, x_k\)</span> is now the set of all possible outcomes.</p>
+<p>Clearly, as the number of samples approaches infinity, <span class="math">\(\frac{\text{the number of occurrences of } x_i}{\text{total number of occurrences of any outcome}}\)</span> approaches <span class="math">\(P(X = x_i) = f(x_i)\)</span>.</p>
+<p>So in the long run, the mean will approach <span class="math">\(\mu = E(X) = \sum_{i = 1}^k x_i f_X(x_i)\)</span>. This is known as the <strong>theoretical mean/expected value/expectation</strong>, because it is the average value we would expect if we repeated the experiment an infinite number of times. Clearly, this depends on the probability distribution of <span class="math">\(X\)</span>.</p>
+<p>Also, if <span class="math">\(g(x)\)</span> is a function of <span class="math">\(x\)</span>, then <span class="math">\(E(g(X)) = \sum_{i = 1}^k g(x_i) f_X(x_i)\)</span>. <span class="math">\(f_X(X)\)</span> is simply a function of <span class="math">\(X\)</span>, while <span class="math">\(f_X(x)\)</span> is a specific value. <span class="math">\(x\)</span> is like a specific value that <span class="math">\(X\)</span> can assume.</p>
+<p><span class="math">\(E(g(X))\)</span> represents the average value of <span class="math">\(g(X)\)</span> when the experiment is repeated an infinite number of times, and can be a decimal number even if <span class="math">\(g(x)\)</span> only results in integers.</p>
+<p>Clearly, <span class="math">\(E(g(X))\)</span> must be between the smallest and largest value in <span class="math">\(g(x_1), \ldots, g(x_k)\)</span>. It is never possible to get a value outside of this range.</p>
+<p>Given a random variable <span class="math">\(X\)</span> such that <span class="math">\(f_X(x) = \frac 1 3\)</span> and <span class="math">\(x = -1, 0, 1\)</span>, and <span class="math">\(Y = X^2\)</span>, what is <span class="math">\(E(Y)\)</span>?</p>
+<blockquote>
+<p>Clearly, <span class="math">\(E(Y) = E(X^2) = (-1)^2 \frac 1 3 + 0^2 \frac 1 3 + 1^2 \frac 1 3 = \frac 2 3\)</span>.<br />So the expected value of <span class="math">\(X^2\)</span> is <span class="math">\(\frac 2 3\)</span>.</p>
+</blockquote>
+<p>Also, <span class="math">\(E[a_1 \cdot g_1(X) + \ldots + a_n \cdot g_n(X)] = a_1 \cdot E(g_1(x)) + \ldots + a_n \cdot E(g_n(x))\)</span>, so the expected value operator is a linear. If <span class="math">\(g(x)\)</span> is a linear function (of the form <span class="math">\(aX + b\)</span>), then <span class="math">\(E(g(x)) = g(E(X))\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

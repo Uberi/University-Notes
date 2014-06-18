@@ -9,6 +9,7 @@ Combinatorics.
 
 $$
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
@@ -715,7 +716,7 @@ In general, $[x^n]A(x) = a_n = (C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots 
 
 Clearly, ${n + e_i - 1 \choose e_i - 1} = \frac{(n + e_i - 1)!}{(e_i - 1)!n!} = \frac{(n + e_i - 1) \cdots (n + 1)}{(e_i - 1)!}$, so it is a polynomial of degree $e_i - 1$. So $A(x) = p_1(n)r_1^n + \ldots + A(x) = p_k(n)r_k^n$, where $p_i(n)$ has a degree less than or equal to $e_i - 1$.
 
-Recall that $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}$. Then we construct $g^*(x) = (x - r_1)^{e_1} \cdots (x - r_k^{e_k})$. This is the **characteristic polynomial** of $g(x)$. It has roots $r_1, \ldots, r_k$ and $r_i$ has multiplicity $e_i$. The characteristic polynomial is just the one where there is a root for each $r_i$.
+Recall that $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}$. Then we construct $g^*(x) = (x - r_1)^{e_1} \cdots (x - r_k)^{e_k}$. This is the **characteristic polynomial** of $g(x)$. It has roots $r_1, \ldots, r_k$ and $r_i$ has multiplicity $e_i$. The characteristic polynomial is just the one where there is a root for each $r_i$.
 
 In the above example, the characteristic polynomial of $g(x)$ is $g^*(x) = (x - 2)(x + 1)^2 = x^3 - 3x - 2$. Note that the polynomial is exactly the same, except the power of $x$ in each term is swapped - $x^i$ in each term is replaced with $x^{n - i}$. This is a faster way to find the characteristic polynomial.
 
@@ -738,7 +739,9 @@ Given $A(x) = \sum_{n = 0}^\infty a_nx^n$ where $a_0 = 1, a_1 = 4, a_n - 3a_{n -
 > So $a_0 = \alpha 2^0 + \beta 1^0$ and $a_1 = \alpha 2^1 + \beta 1^1$, and solving, we get $\alpha = 3, \beta = -2$.  
 > So $a_n = 3 \times 2^n - 2$.  
 
-In fact, we can just do it directly from the recurrence relation: $a_n - 3a_{n - 1} + 2a_{n - 2}$ can directly be cconverted into the characteristic polynomial $x^2 - 3x + 2$, and we can solve for $a_n$ directly using the $a_n = (C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n) + (C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n)$ formula.
+In fact, we can just do it directly from the recurrence relation: $a_n - 3a_{n - 1} + 2a_{n - 2}$ can directly be cconverted into the characteristic polynomial $x^2 - 3x + 2$, and we can solve for $a_n$ directly using $a_n = C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n + C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n$, where $r_1, \ldots, r_k$ are the roots of the characteristic polynomial and $e_1, \ldots, e_k$ are the multiplicities of the roots. We can then solve for $C_{1, 1}, \ldots, C_{k, e_k}$ using the initial conditions.
+
+This can also be written as $a_n = \left(C_{1, 1}{n + 1 - 1 \choose 1 - 1} + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}\right)r_1^n + \left(C_{k, 1}{n + 1 - 1 \choose 1 - 1} + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}\right)r_k^n$.
 
 # 9/4/14
 
@@ -793,7 +796,11 @@ So $a_n = 15 \cdot 3^n + A + B2^n$.
 
 Why did we guess $b_n = C3^n$? We determined this from the generating series.
 
-If we multiply the recurrence by $x^n$ and sum over $n \ge 2$, then we get $\sum_{n = 2}^\infty (b_nx^n - 3b_{n - 1}x^n + 2b_{n - 2}x^n) = \sum_{n = 2}^\infty 10 \cdot 3^{n - 1}x^n$. So $(1 - 3x + 2x^2)\sum_{n = 0}^\infty b_n x^n = \frac{10}{3} (3^2 x^2) \frac 1 {1 - 3x} = \frac{30x^2}{1 - 3x}$.
+If we multiply $b_n - 3b_{n - 1} + 2b_{n - 2} = 10 \times 3^{n - 1}$ by $x^n$ and sum over $n \ge 2$, then we get $\sum_{n = 2}^\infty (b_nx^n - 3b_{n - 1}x^n + 2b_{n - 2}x^n) = \sum_{n = 2}^\infty 10 \cdot 3^{n - 1}x^n$.
+
+So $\sum_{n = 2}^\infty (b_nx^n - 3b_{n - 1}x^n + 2b_{n - 2}x^n) = \sum_{n = 2}^\infty b_nx^n - 3x\sum_{n = 2}^\infty b_{n - 1}x^{n - 1} + 2x^2\sum_{n = 2}^\infty b_{n - 2}x^{n - 2} = \sum_{n = 2}^\infty b_nx^n - 3x\sum_{n = 1}^\infty b_nx^n + 2x^2\sum_{n = 0}^\infty b_nx^n$
+
+So $(1 - 3x + 2x^2)\sum_{n = 0}^\infty b_n x^n = \frac{10}{3} (3^2 x^2) \frac 1 {1 - 3x} = \frac{30x^2}{1 - 3x}$. ;wip: no it doesn't...
 
 Using partial fraction decomposition, $\sum_{n = 0}^\infty b_n x^n = \frac{30x^2}{(1 - 3x)(1 - 3x + 2x^2)} = \frac \ldots {1 - 3x} + \frac \ldots {1 - 2x} + \frac \ldots {1 - x}$. Note that $\frac \ldots {1 - 3x}$ is the result of the homogeneous part, so ;wip: what does that even mean
 
@@ -848,4 +855,101 @@ Graphs have lots of applications. For example, modelling computer networks to de
 
 The map colouring problem asks how many colors are needed to shade in a geographical map such that no two adjacent (sharing a border of non-zero length) geopolitical regions have the same colour.
 
-The stable marriage problem asks ;wip
+# 13/6/14
+
+The vertices in a graph can be any type of object. We can abbeviate the edge $\set{u, v}$ as $uv$.
+
+In this course we only deal with simple graphs - graphs with at most one edge between two vertices (no loops or double edges joining two vertices). Graphs in this course are also finite.
+
+Isomorphism
+-----------
+
+Two graphs $G_1, G_2$ are **isomorphic** if and only if there is a bijection $f: V(G_1) \to V(G_2)$ such that $uv \in E(G_1) \iff f(u)f(v) \in E(G_2)$. If this is the case, then $f$ is called an **isomorphism**.
+
+In other words, two graphs are isomorphic if they have the **same structure** - if they have every vertex correspend to each other, and the edges in one graph connect the corresponding vertices in the other graph.
+
+Basically, a graph $G_2$ that is isomorphic to a graph $G_1$ can be created from $G_1$ by replacing its vertices with vertices in $G_2$.
+
+The isomorphism preserves the edge structure, so edges are mapped to edges, and non-edges are mapped to non-edges.
+
+We can detect isomorphism informally by moving the vertices around until the two graphs resemble each other.
+
+Checking if two graphs are isomorphic can be done in polynomial time, using recently developed algorithms.
+
+To prove two graphs are isomorphic, we find the isomorphism. To prove two graphs are not isoomorphic, we find a structure in one graph that is not in the other.
+
+The degree of a vertex $u$ in $G$ is the number of edges incident with it. The degree of a vertex is $\deg_G(v) = \abs{\set{e \in E(G) \middle| v \in e}}$.
+
+The sum of the degrees of every vertex in a graph $G$ has a special meaning and is $\sum_{u \in V(G)} \deg_G(u)$. The sum is always even because every edge $\set{u, v}$ increases both $\deg_G(u)$ and $\deg_G(v)$ by 1. This is called the **handshaking lemma**, and $\sum_{u \in V(G)} \deg_G(u) = 2 \abs{E(G)}$.
+
+As a result, the number of odd-degree vertices must always be even.
+
+Proof:
+
+> Let $O$ be the subset of vertices in $G$ with odd degree and $E$ the subset with even degree.  
+> Then $\sum_{u \in V(G)} \deg_G(u) = \sum_{v \in O} \deg_G(v) + \sum_{v \in E} \deg_G(v) = 2\abs{E(G)}$.  
+> Since $2\abs{E(G)}$ and $\sum_{v \in E} \deg_G(v)$ are even (sum of even numbers is even), $\sum_{v \in O} \deg_G(v)$ must also be even.  
+> Since every $\deg_G(v)$ in $\sum_{v \in O} \deg_G(v)$ is odd, $\sum_{v \in O} \deg_G(v)$ can only be even if $\abs{O}$ is even.  
+> So there are an even number of odd vertices.  
+
+#16/6/14
+
+A **cycle** is a closed path through three or more vertices (for the simple graphs we are using in this course).
+
+A graph $G$ is $k$-regular if every vertex has a degree of $k$ - $\forall v \in V(G), \deg(v) = k$. So a 0-regular graph has no edges, and a 1-regular graph has pairs of vertices joined by edges (these are also called matchings). 2-regular graphs have their vertices all connected by a closed path of edges, called a collection of cycles. A 3-regular graph does not lend itself to a simple description, and so on.
+
+Clearly, the sum of vertices in a $k$-regular graph is $\sum_{v \in V(G)} \deg(v) = \abs{V(G)}k$, so by the handshaking lemma $\abs{E(G)} = \frac{\abs{V(G)}k}{k}$.
+
+A graph $G$ is **complete** if every pair of vertices in $G$ is joined by an edge. A complete graph with $n$ vertices is represented by $k_n$. Therefore the number of edges is the same as the number of pairs of vertices. There are $n \choose 2$ pairs, so there are $n \choose 2$ edges in $k_n$.
+
+Also, $k_n$ is $(n - 1)$-regular, because each vertex must connect with $n - 1$ other vertices.
+
+A partition of a set $S$ is a pair $(A, B)$ such that $A \cup B = S, A \cap B = \emptyset$. In other words, a way of dividing the set into two groups.
+
+A graph $G$ is **bipartite** if there is a partition of $V(G)$ into $(A, B)$ such that $G$ has every edge in $\set{\set{u, v} \middle| u \in A, v \in B}$. In other words, if there is a partition such that the edges go between the two partitioned areas, but not within the partitioned areas. The two partitions do not necessarily have the same size.
+
+We prove a graph is bipartite by giving the partition, and we prove that a graph is not bipartite by contradiction - assuming that one vertex is in partition $A$, any vertex connected by an edge must be in $B$, and we try to derive a contradiction where a vertex is in $A$ yet also in $B$, since $A \cap B = \emptyset$.
+
+Any graph containing a cycle containing an odd number of vertices cannot be bipartite. Every graph is either bipartite, or has a cycle with an odd number of vertices.
+
+A graph $G$ is a **complete bipartite graph** if $G$ is bipartite with partitions $(A, B)$ and has every edge in $\set{\set{u, v} \middle| u \in A, v \in B}$. In other words, a biparitite graph with every possible pair of vertices with one from $A$ and one from $B$ are connected by edges. A complete bipartite graph with $\abs{A} = m, \abs{B} = n$ is represented by $k_{m, n}$.
+
+Every vertex of $A$ must be connected with every element of $B$, and every element of $B$ must be connected with every element of $A$, so the total number of edges in $k_{m, n}$ is $mn$. The degree of every vertex in $A$ is $n$ and the degree of every vertex in $B$ is $m$.
+
+N-cubes
+-------
+
+An $n$-cube is a graph where the vertices are all binary strings of length $n$ and two vertices are connected by an edge if and only if they differ by one bit. The 1-cube looks like a line, the 2-cube looks like a square, and the 3-cube looks like a 2D projection of a 3D cube.
+
+# 18/6/14
+
+The $n$-cube has $2^n$ vertices, and is always an $n$-regular graph. It is regular because there are always $n$ ways to have a binary string differ by 1 bit, so every binary string is connected to $n$ other binary strings.
+
+By the handshaking lemma, there are $\frac 1 2 n2^n = n2^{n - 1}$ edges in an $n$-cube. The $n$-cube is also bipartite, because it is impossible for any cycles with odd numbers of vertices to exist in the graph.
+
+For example, a 3-cube can be partitioned into $\left(\set{000, 101, 110, 011}, \set{001, 100, 111, 010}\right)$. In general, one parition has all binary strings with an even number of 1, and the other has those with an odd number of 1. This is because any binary string differs with another by one bit if and only if it has one less 1 or one more 1 than the other. Therefore, no two binary strings with an even number of 1 can differ by 1 bit, and no two binary strings with an odd number of 1 can differ by 1 bit. Therefore, this partition shows that the $n$-cube is bipartite.
+
+It is possible to recursively construct the $n$-cube. First, the 0-cube is a single vertex, $\epsilon$. Given an $n$-cube, we can find the graph for the $(n + 1)$-cube by making two copies of the $n$-cube (with a 0 prepended to every string in the first copy and 1 prepended to every string in the second copy), and then joining the corresponding vertices of the two copies (which now differ by 1 bit since we prepended different values in each copy).
+
+The $n$-cube is an $n$-dimensional analogue of a cube. A 2D drawing of a 4-cube is a 2D projection of a tesseract.
+
+Also, any finite graph can be represented in 3D space such that there are no crossing edges. This is difficult to prove, however.
+
+;wip: the midterm will cover everything up to this point, and the midterm is in like two weeks
+
+Walks/Paths
+-----------
+
+Let $u, w$ be vertices of a graph $G$.
+
+Given vertices $u, w$, a $u, w$ **walk** is a sequence of alternating vertices and edges $u, e_1, v_1, e_2, v_2, \ldots, e_{k - 1}, v_{k - 1}, e_k, w$, where $v_1, \ldots, v_k$ are vertices and $e_i, 1 \le i \le k$ is the edge $\set{v_{i - 1}, v_i}$. The length of this walk is $k$ - the number of edges in the walk.
+
+The walk is **closed** if $u = v$ - if it begins the same place it ends. There can also be duplicated vertices or edges.
+
+Since we only deal with simple graphs in this course, it is possible to represent a walk just by its vertices. So a walk of a 3-cube might be written as $000, 001, 000, 100, 101$.
+
+A walk of length 0 just contains one vertex. For example, $000$ is a zero-length walk of the 3-cube.
+
+A $u, w$ **path** is a walk with no repeated vertices or edges. As a result, a path cannot be closed. All $u, w$ paths are $u, w$ walks.
+
+All walks can be converted into paths. If we can get somewhere by repeating vertices, then we can also just not repeat those vertices and get to the same place.

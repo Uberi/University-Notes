@@ -46,6 +46,24 @@
     padding:: 0;
   }
   
+  blockquote {
+    margin-left: 0;
+    padding-left: 0.5em;
+    border-left: solid 0.3em grey;
+  }
+  
+  .figure {
+    border: solid 0.1em grey;
+    display: inline-block;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  .figure .caption {
+    margin: 0;
+    font-size: 80%;
+  }
+  
   a.button {
     display: inline-block;
     padding: 1em;
@@ -76,6 +94,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs246/
 TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
@@ -577,7 +596,7 @@ int main() {
 }</code></pre>
 <h3 id="initializing-objects">Initializing Objects</h3>
 <p>In C-style initialization, we initialize objects in a certain way: <code>Student someone = {A, B, C};</code>. The disadvantage is that this is very inflexible, and we can't really add any custom behaviour associated with object initialization. For example, if we created a database object, we probably also want it to open a database connection.</p>
-<p>In C++, we have a <strong>contsructor</strong> (&quot;ctor&quot; for short) method that is used to initialize an object. For example:</p>
+<p>In C++, we have a <strong>constructor</strong> (&quot;ctor&quot; for short) method that is used to initialize an object. For example:</p>
 <pre><code>struct Student { // class declaration
     int assignment_grade;
     int midterm_grade;
@@ -605,6 +624,103 @@ int main() {
     Student someone; // this is how we use default values for all the arguments instead
 }</code></pre>
 <p>The advantage of contructors is that we can associate arbitrary behaviour with the creation of an object. Also, we can use default values for parameters of constructors, or even function overloading on constructors, to allow different ways to initialize the object.</p>
+<h1 id="section-11">12/6/14</h1>
+<p>If no constructor is specified in a class, then there is a default constructor that calls the default constructor for each of the fields, if they exist. Most of the time, this doesn't do anything.</p>
+<p>So if we define any of our own constructors, the default constructor will no longer exist. To get the same behaviour, we can define a zero-argument constructor.</p>
+<p>If we specify our own constructor for a class, we can no longer use C-style initialization on it - <code>Vec v = {1, 2}</code> will give an error.</p>
+<p>Initializers are not allowed for structure fields - we can't initialize a field directly inside a struct.</p>
+<p>Objects are created on the stack if they are defined with <code>Vector v(5, 6);</code> or <code>Vector v = Vector(5, 6)</code>, and on the heap if we use <code>Vector v = new v(5, 6)</code>.</p>
+<p>Whenever we create an object, first the memory is allocated for it in the heap or stack depending on how it is created. Then, the fields are initialized using the default constructors for the fields (for things like <code>int</code>, often by setting them to 0), and finally the constructor body runs.</p>
+<p>We can initialize constant and reference values using a <strong>member initialization list</strong>. This is a list that comes after a constructor declaration and a colon that allows us to bypass initializing the specified fields using the default constructors, and call the default constructors with the arguments we want:</p>
+<pre><code>struct Something {
+    int normal; // this is just a normal struct field
+    const int some_constant; // this must be initialized, because we can&#39;t change it later
+    int &amp;some_reference; // this also must be initialized, because it must always refer to something
+    Something(int c, int &amp;r): normal(5), some_constant(c), some_reference(r) { // member initialization list calls the default constructors, but with values that we specify
+        // it is too late to initialize them in the constructor body, because they should be initialized (and for constants, made fixed) as soon as they are defined
+    }
+}</code></pre>
+<p>This is also useful for shortening constructors, because we can just initialize the fields of a structure using a member initialization list and leave the body blank.</p>
+<p>In a member initialization list, the name outside the parentheses must be a field, and the value inside the parentheses can be any valid expression, like globals and scope variables, or fields that have already been initialized.</p>
+<pre><code>struct S {
+    int n;
+    Something(int n): n(n) {} // in the member initialization list, it is valid to use the same name because the name outside the parentheses is searched for in the fields, not as an expression
+} // it is also more efficient to use these member initialization lists than to assign them values inside the constructor body, because we don&#39;t need to call the default constructors any more</code></pre>
+<p>We use member initialization lists because they are the only way to initialize constants/references, because they are shorter and cleaner than assigning in the constructor body, and because it can be more efficient.</p>
+<p>Fields are initialized in the order that they are declared in the struct, regardless of their order in the member initialization list. However, we should generally keep them in the same order to avoid a compiler warning.</p>
+<p>There is also a <strong>copy constructor</strong> that is called when we make a copy of a struct:</p>
+<pre><code>Student a(60, 70, 80);
+Student b = a; // this calls the default copy constructor</code></pre>
+<p>There is a default copy constructor, which just makes a shallow copy of <code>a</code> (a field-for-field copy).</p>
+<p>We can define a custom copy constructor as follows:</p>
+<pre><code>struct Student {
+    int assignment_grade;
+    int midterm_grade;
+    int final_grade;
+    float grade() {
+        return this-&gt;assignment_grade * 0.4 + this-&gt;midterm_grade * 0.2 + this-&gt;final_grade * 0.4;
+    }
+    Student(const Student &amp;other): assignment_grade(other.assignment_grade), midterm_grade(other.midterm_grade), final_grade(other.final_grade) {} // the reference should be constant since it usually doesn&#39;t need to be modified
+}</code></pre>
+<p>The custom copy constructor is often useful when we have dynamic memory or want a deep copy. For example, we want a deep copy for a linked list to avoid sharing the same linked list nodes for multiple starting lists, which would make freeing the memory very difficult:</p>
+<pre><code>struct Node {
+    int data;
+    Node *next;
+    Node(const Node &amp;other): data(other.data), next(other.next ? new Node(other.next) : NULL) {};
+}</code></pre>
+<p>So every class has a default constructor, a default copy constructor, a copy assignment operator, and a destructor.</p>
+<h1 id="section-12">18/6/14</h1>
+<p>The <code>delete</code> keyword can be used to destroy an object on the heap given its pointer. If we defined something like <code>int *x = new int(5)</code> (a pointer to an integer on the heap), then afterwards we can destroy it using <code>delete x;</code>.</p>
+<p>If we have an array on the heap like <code>int *a = new int[20]</code>, then we must use <code>delete [] a</code> to properly destroy the array. Using <code>delete</code> without the <code>[]</code> might result in the wrong thing being destroyed.</p>
+<p><code>delete</code> cannot be used with stack memory. It wworks in a way conceptually similar to the <code>free</code> function in C.</p>
+<p>An object on the stack is destroyed when it goes out of scope (for example, an object created inside a function would be destroyed when the function returns, unless it is returned).</p>
+<p>An object on the heap is destroyed when we explicitly destroy it using <code>delete</code>. Otherwise the object remains in memory.</p>
+<p>Objects have methods called <strong>destructors</strong> that get called when an instance of the object gets destroyed. We can specify a custom destructor as follows:</p>
+<pre><code>struct Node {
+    int data;
+    Node *next;
+    Node(const Node &amp;other): data(other.data), next(other.next ? new Node(other.next) : NULL) {};
+    ~Node() {
+        delete next; // since `next` is on the heap, the default destructor wouldn&#39;t destroy it and there would have been a memory leak
+        // a destructor should never throw any exceptions
+        // we can do other cleanup stuff here, like closing database connections, destroying heap objects, or other things
+    }
+}</code></pre>
+<p>There is also a default destructor, which just calls the destructors on the individual fields of the object.</p>
+<p>Header files should contain function declarations, structure declarations, and things like constants. Source files should actually implement the functions.</p>
+<p>Up to this point we have been defining the whole class in one big struct declaration and putting implementation together with declarations. This is not the ideal way to go about it - it is possible to separate the two. The following would go into the header file:</p>
+<pre><code>#ifndef __NODE_H__
+#define __NODE_H__
+struct Node {
+    int data;
+    Node *next;
+    Node(int data, Node *next); // constructor
+    Node(const Node &amp;other); // copy constructor
+};
+#endif</code></pre>
+<p>And the following would go in the source file:</p>
+<pre><code>#include &quot;Node.h&quot;
+
+Node::Node (int data, Node *next) : data(data), next(next) {}
+
+Node::Node (const &amp;other) : data(other.data), next(other.next ? new Node(*other.next) : 0);
+In the scope of the class that comes before this scope resolution operator, somebody has implemented a function/method with the name Node</code></pre>
+<p>The <code>a::b</code> is the <strong>scope resolution operator</strong>. It resolves the identifier <code>b</code> in the context of <code>a</code>. For example, if <code>a</code> is a struct, then <code>b</code> would be resolved as a field of <code>a</code>. So <code>Node::Node</code> would let us define functions inside the <code>Node</code> struct, even though we are lexically outside of the struct declaration.</p>
+<p>When we do an assignment <code>a = b</code>, we are actually using the <code>=</code> operator on <code>a</code> and <code>b</code>. This works a lot like the copy constructor, but the <code>operator=</code> is now a method of <code>a</code> rather than an overloaded function. We can use this to provide custom behaviour when someone assigns to an instance of a particular class:</p>
+<pre><code>struct Node {
+    int data;
+    Node *next;
+    Node(int data, Node *next); // constructor
+    Node(const Node &amp;other); // copy constructor
+};
+
+Node &amp;Node::operator=(const Node &amp;other) {
+    delete this.next; // delete the rest of the list to prevent memory leaks
+    this.data = other.data; // set this node to be the new node
+    this.next = other.next ? new Node(*other.next) : 0;
+    return *this; // the return value is a pointer to what the new value of the variable is
+    // we might also assign `this.next` to a pointer variable and delete it last in case the copying of `other.next` failed for whatever reason
+}</code></pre>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

@@ -46,6 +46,24 @@
     padding:: 0;
   }
   
+  blockquote {
+    margin-left: 0;
+    padding-left: 0.5em;
+    border-left: solid 0.3em grey;
+  }
+  
+  .figure {
+    border: solid 0.1em grey;
+    display: inline-block;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  .figure .caption {
+    margin: 0;
+    font-size: 80%;
+  }
+  
   a.button {
     display: inline-block;
     padding: 1em;
@@ -74,6 +92,7 @@ Office: MC 6492
 Email: mpei@uwaterloo.ca, martin31415926@gmail.com</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
@@ -439,7 +458,7 @@ Email: mpei@uwaterloo.ca, martin31415926@gmail.com</code></pre>
 <p>Let <span class="math">\(A(x) = \frac{f(x)}{g(x)}\)</span>. Let <span class="math">\(g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_k)^{e_k}\)</span>. If the constant term of <span class="math">\(g(x)\)</span> is not 1, then divide both <span class="math">\(f(x)\)</span> and <span class="math">\(g(x)\)</span> by that term to make it 1. ;wip: what if there is no constant term?</p>
 <p>In general, <span class="math">\([x^n]A(x) = a_n = (C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n) + (C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n)\)</span>.</p>
 <p>Clearly, <span class="math">\({n + e_i - 1 \choose e_i - 1} = \frac{(n + e_i - 1)!}{(e_i - 1)!n!} = \frac{(n + e_i - 1) \cdots (n + 1)}{(e_i - 1)!}\)</span>, so it is a polynomial of degree <span class="math">\(e_i - 1\)</span>. So <span class="math">\(A(x) = p_1(n)r_1^n + \ldots + A(x) = p_k(n)r_k^n\)</span>, where <span class="math">\(p_i(n)\)</span> has a degree less than or equal to <span class="math">\(e_i - 1\)</span>.</p>
-<p>Recall that <span class="math">\(g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}\)</span>. Then we construct <span class="math">\(g^*(x) = (x - r_1)^{e_1} \cdots (x - r_k^{e_k})\)</span>. This is the <strong>characteristic polynomial</strong> of <span class="math">\(g(x)\)</span>. It has roots <span class="math">\(r_1, \ldots, r_k\)</span> and <span class="math">\(r_i\)</span> has multiplicity <span class="math">\(e_i\)</span>. The characteristic polynomial is just the one where there is a root for each <span class="math">\(r_i\)</span>.</p>
+<p>Recall that <span class="math">\(g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}\)</span>. Then we construct <span class="math">\(g^*(x) = (x - r_1)^{e_1} \cdots (x - r_k)^{e_k}\)</span>. This is the <strong>characteristic polynomial</strong> of <span class="math">\(g(x)\)</span>. It has roots <span class="math">\(r_1, \ldots, r_k\)</span> and <span class="math">\(r_i\)</span> has multiplicity <span class="math">\(e_i\)</span>. The characteristic polynomial is just the one where there is a root for each <span class="math">\(r_i\)</span>.</p>
 <p>In the above example, the characteristic polynomial of <span class="math">\(g(x)\)</span> is <span class="math">\(g^*(x) = (x - 2)(x + 1)^2 = x^3 - 3x - 2\)</span>. Note that the polynomial is exactly the same, except the power of <span class="math">\(x\)</span> in each term is swapped - <span class="math">\(x^i\)</span> in each term is replaced with <span class="math">\(x^{n - i}\)</span>. This is a faster way to find the characteristic polynomial.</p>
 <p>Then <span class="math">\([x^n]A(x) = \alpha 2^n + (\beta n + \gamma)(-1)^n\)</span> for constants <span class="math">\(\alpha, \beta, \gamma\)</span>. Using the <span class="math">\(A(x) = \sum_{i = 0}^\infty a_ix^i = \frac{6 - x + 5x^2}{(1 - 2x)(1 + x)^2}\)</span> and multiplying both sides by <span class="math">\(g(x)\)</span> and solving, we get <span class="math">\(a_0 = 6, a_1 = -1, a_2 = 23\)</span>.</p>
 <p>Clearly, <span class="math">\(a_n = [x^n]A(x)\)</span>, so given these three values, we get <span class="math">\(a_0 = \alpha 2^0 + (\beta 0 + \gamma)(-1)^0, a_1 = \alpha 2^1 + (\beta 1 + \gamma)(-1)^1, a_2 = \alpha 2^2 + (\beta 2 + \gamma)(-1)^2\)</span>. Solving, we get <span class="math">\(\alpha = 3, \beta = 4, \gamma = 3\)</span>, so <span class="math">\(a_n = 3 \times 2^n + (2n + 3)(-1)^n\)</span>.</p>
@@ -448,7 +467,8 @@ Email: mpei@uwaterloo.ca, martin31415926@gmail.com</code></pre>
 <blockquote>
 <p>First, we multiply <span class="math">\(x^n\)</span> with the recurrence, so <span class="math">\(a_nx^n - 3a_{n - 1}x^n + 2a_{n - 2}x^n = 0\)</span>.<br />If we sum all of them to infinity, <span class="math">\(\sum_{n = 2}^\infty (a_nx^n - 3a_{n - 1}x^n + 2a_{n - 2}x^n) = 0 = \sum_{n = 2}^\infty a_nx^n - 3\sum_{n = 1}^\infty a_nx^{n + 1} + 2\sum_{n = 0}^\infty a_nx^{n + 2}\)</span>.<br />So <span class="math">\(\sum_{n = 2}^\infty a_nx^n - 3x\sum_{n = 1}^\infty a_nx^n + 2x^2\sum_{n = 0}^\infty a_nx^n = 0\)</span>.<br />Clearly, <span class="math">\(\sum_{n = 2}^\infty a_nx^n = A(x) - a_1x^1 - a_0x^0\)</span> (removing the first two terms) and <span class="math">\(\sum_{n = 1}^\infty a_nx^{n + 1} = A(x) - a_0x^0\)</span>.<br />So <span class="math">\(A(x) - a_1x^1 - a_0x^0 - 3x(A(x) - a_0x^0) + 2x^2A(x) = 0\)</span> and solving, we get <span class="math">\(A(x) = \frac{1 + x}{1 - 3x + 2x^2}\)</span>.<br />Clearly, the characteristic polynomial of the denominator of <span class="math">\(A(x)\)</span> is <span class="math">\(x^2 - 3x + 2 = (x - 2)(x - 1)\)</span>.<br />So there are roots 1 and 2, both with multiplicity 1, and so <span class="math">\(a_n = \alpha 2^n + \beta 1^n\)</span> for some constants <span class="math">\(\alpha, \beta\)</span>.<br />So <span class="math">\(a_0 = \alpha 2^0 + \beta 1^0\)</span> and <span class="math">\(a_1 = \alpha 2^1 + \beta 1^1\)</span>, and solving, we get <span class="math">\(\alpha = 3, \beta = -2\)</span>.<br />So <span class="math">\(a_n = 3 \times 2^n - 2\)</span>.</p>
 </blockquote>
-<p>In fact, we can just do it directly from the recurrence relation: <span class="math">\(a_n - 3a_{n - 1} + 2a_{n - 2}\)</span> can directly be cconverted into the characteristic polynomial <span class="math">\(x^2 - 3x + 2\)</span>, and we can solve for <span class="math">\(a_n\)</span> directly using the <span class="math">\(a_n = (C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n) + (C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n)\)</span> formula.</p>
+<p>In fact, we can just do it directly from the recurrence relation: <span class="math">\(a_n - 3a_{n - 1} + 2a_{n - 2}\)</span> can directly be cconverted into the characteristic polynomial <span class="math">\(x^2 - 3x + 2\)</span>, and we can solve for <span class="math">\(a_n\)</span> directly using <span class="math">\(a_n = C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n + C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n\)</span>, where <span class="math">\(r_1, \ldots, r_k\)</span> are the roots of the characteristic polynomial and <span class="math">\(e_1, \ldots, e_k\)</span> are the multiplicities of the roots. We can then solve for <span class="math">\(C_{1, 1}, \ldots, C_{k, e_k}\)</span> using the initial conditions.</p>
+<p>This can also be written as <span class="math">\(a_n = \left(C_{1, 1}{n + 1 - 1 \choose 1 - 1} + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}\right)r_1^n + \left(C_{k, 1}{n + 1 - 1 \choose 1 - 1} + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}\right)r_k^n\)</span>.</p>
 <h1 id="section-14">9/4/14</h1>
 <p>Basic steps for solving homogeneous recurrences:</p>
 <ol style="list-style-type: decimal">
@@ -479,7 +499,9 @@ Email: mpei@uwaterloo.ca, martin31415926@gmail.com</code></pre>
 <p>Solving, <span class="math">\(C = 15\)</span> and <span class="math">\(b_n = C3^n = 15 \cdot 3^n\)</span>.</p>
 <p>So <span class="math">\(a_n = 15 \cdot 3^n + A + B2^n\)</span>.</p>
 <p>Why did we guess <span class="math">\(b_n = C3^n\)</span>? We determined this from the generating series.</p>
-<p>If we multiply the recurrence by <span class="math">\(x^n\)</span> and sum over <span class="math">\(n \ge 2\)</span>, then we get <span class="math">\(\sum_{n = 2}^\infty (b_nx^n - 3b_{n - 1}x^n + 2b_{n - 2}x^n) = \sum_{n = 2}^\infty 10 \cdot 3^{n - 1}x^n\)</span>. So <span class="math">\((1 - 3x + 2x^2)\sum_{n = 0}^\infty b_n x^n = \frac{10}{3} (3^2 x^2) \frac 1 {1 - 3x} = \frac{30x^2}{1 - 3x}\)</span>.</p>
+<p>If we multiply <span class="math">\(b_n - 3b_{n - 1} + 2b_{n - 2} = 10 \times 3^{n - 1}\)</span> by <span class="math">\(x^n\)</span> and sum over <span class="math">\(n \ge 2\)</span>, then we get <span class="math">\(\sum_{n = 2}^\infty (b_nx^n - 3b_{n - 1}x^n + 2b_{n - 2}x^n) = \sum_{n = 2}^\infty 10 \cdot 3^{n - 1}x^n\)</span>.</p>
+<p>So <span class="math">\(\sum_{n = 2}^\infty (b_nx^n - 3b_{n - 1}x^n + 2b_{n - 2}x^n) = \sum_{n = 2}^\infty b_nx^n - 3x\sum_{n = 2}^\infty b_{n - 1}x^{n - 1} + 2x^2\sum_{n = 2}^\infty b_{n - 2}x^{n - 2} = \sum_{n = 2}^\infty b_nx^n - 3x\sum_{n = 1}^\infty b_nx^n + 2x^2\sum_{n = 0}^\infty b_nx^n\)</span></p>
+<p>So <span class="math">\((1 - 3x + 2x^2)\sum_{n = 0}^\infty b_n x^n = \frac{10}{3} (3^2 x^2) \frac 1 {1 - 3x} = \frac{30x^2}{1 - 3x}\)</span>. ;wip: no it doesn't...</p>
 <p>Using partial fraction decomposition, <span class="math">\(\sum_{n = 0}^\infty b_n x^n = \frac{30x^2}{(1 - 3x)(1 - 3x + 2x^2)} = \frac \ldots {1 - 3x} + \frac \ldots {1 - 2x} + \frac \ldots {1 - x}\)</span>. Note that <span class="math">\(\frac \ldots {1 - 3x}\)</span> is the result of the homogeneous part, so ;wip: what does that even mean</p>
 <p>Find a closed form for <span class="math">\(a_0 = 2, a_1 = 3, a_n - a_{n - 1} - 2a_{n - 2} = -4n + 16\)</span>:</p>
 <blockquote>
@@ -509,7 +531,54 @@ Email: mpei@uwaterloo.ca, martin31415926@gmail.com</code></pre>
 <p>An edge <span class="math">\(e = \set{u, v}\)</span> is <strong>incident</strong> with <span class="math">\(u\)</span> and <span class="math">\(v\)</span>.</p>
 <p>Graphs have lots of applications. For example, modelling computer networks to determine robustness and other properties. Other applications include electronic circuits, electricity and water distribution networks, road maps and navigation, social graphs, and more.</p>
 <p>The map colouring problem asks how many colors are needed to shade in a geographical map such that no two adjacent (sharing a border of non-zero length) geopolitical regions have the same colour.</p>
-<p>The stable marriage problem asks ;wip</p>
+<h1 id="section-16">13/6/14</h1>
+<p>The vertices in a graph can be any type of object. We can abbeviate the edge <span class="math">\(\set{u, v}\)</span> as <span class="math">\(uv\)</span>.</p>
+<p>In this course we only deal with simple graphs - graphs with at most one edge between two vertices (no loops or double edges joining two vertices). Graphs in this course are also finite.</p>
+<h2 id="isomorphism">Isomorphism</h2>
+<p>Two graphs <span class="math">\(G_1, G_2\)</span> are <strong>isomorphic</strong> if and only if there is a bijection <span class="math">\(f: V(G_1) \to V(G_2)\)</span> such that <span class="math">\(uv \in E(G_1) \iff f(u)f(v) \in E(G_2)\)</span>. If this is the case, then <span class="math">\(f\)</span> is called an <strong>isomorphism</strong>.</p>
+<p>In other words, two graphs are isomorphic if they have the <strong>same structure</strong> - if they have every vertex correspend to each other, and the edges in one graph connect the corresponding vertices in the other graph.</p>
+<p>Basically, a graph <span class="math">\(G_2\)</span> that is isomorphic to a graph <span class="math">\(G_1\)</span> can be created from <span class="math">\(G_1\)</span> by replacing its vertices with vertices in <span class="math">\(G_2\)</span>.</p>
+<p>The isomorphism preserves the edge structure, so edges are mapped to edges, and non-edges are mapped to non-edges.</p>
+<p>We can detect isomorphism informally by moving the vertices around until the two graphs resemble each other.</p>
+<p>Checking if two graphs are isomorphic can be done in polynomial time, using recently developed algorithms.</p>
+<p>To prove two graphs are isomorphic, we find the isomorphism. To prove two graphs are not isoomorphic, we find a structure in one graph that is not in the other.</p>
+<p>The degree of a vertex <span class="math">\(u\)</span> in <span class="math">\(G\)</span> is the number of edges incident with it. The degree of a vertex is <span class="math">\(\deg_G(v) = \abs{\set{e \in E(G) \middle| v \in e}}\)</span>.</p>
+<p>The sum of the degrees of every vertex in a graph <span class="math">\(G\)</span> has a special meaning and is <span class="math">\(\sum_{u \in V(G)} \deg_G(u)\)</span>. The sum is always even because every edge <span class="math">\(\set{u, v}\)</span> increases both <span class="math">\(\deg_G(u)\)</span> and <span class="math">\(\deg_G(v)\)</span> by 1. This is called the <strong>handshaking lemma</strong>, and <span class="math">\(\sum_{u \in V(G)} \deg_G(u) = 2 \abs{E(G)}\)</span>.</p>
+<p>As a result, the number of odd-degree vertices must always be even.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math">\(O\)</span> be the subset of vertices in <span class="math">\(G\)</span> with odd degree and <span class="math">\(E\)</span> the subset with even degree.<br />Then <span class="math">\(\sum_{u \in V(G)} \deg_G(u) = \sum_{v \in O} \deg_G(v) + \sum_{v \in E} \deg_G(v) = 2\abs{E(G)}\)</span>.<br />Since <span class="math">\(2\abs{E(G)}\)</span> and <span class="math">\(\sum_{v \in E} \deg_G(v)\)</span> are even (sum of even numbers is even), <span class="math">\(\sum_{v \in O} \deg_G(v)\)</span> must also be even.<br />Since every <span class="math">\(\deg_G(v)\)</span> in <span class="math">\(\sum_{v \in O} \deg_G(v)\)</span> is odd, <span class="math">\(\sum_{v \in O} \deg_G(v)\)</span> can only be even if <span class="math">\(\abs{O}\)</span> is even.<br />So there are an even number of odd vertices.</p>
+</blockquote>
+<h1 id="section-17">16/6/14</h1>
+<p>A <strong>cycle</strong> is a closed path through three or more vertices (for the simple graphs we are using in this course).</p>
+<p>A graph <span class="math">\(G\)</span> is <span class="math">\(k\)</span>-regular if every vertex has a degree of <span class="math">\(k\)</span> - <span class="math">\(\forall v \in V(G), \deg(v) = k\)</span>. So a 0-regular graph has no edges, and a 1-regular graph has pairs of vertices joined by edges (these are also called matchings). 2-regular graphs have their vertices all connected by a closed path of edges, called a collection of cycles. A 3-regular graph does not lend itself to a simple description, and so on.</p>
+<p>Clearly, the sum of vertices in a <span class="math">\(k\)</span>-regular graph is <span class="math">\(\sum_{v \in V(G)} \deg(v) = \abs{V(G)}k\)</span>, so by the handshaking lemma <span class="math">\(\abs{E(G)} = \frac{\abs{V(G)}k}{k}\)</span>.</p>
+<p>A graph <span class="math">\(G\)</span> is <strong>complete</strong> if every pair of vertices in <span class="math">\(G\)</span> is joined by an edge. A complete graph with <span class="math">\(n\)</span> vertices is represented by <span class="math">\(k_n\)</span>. Therefore the number of edges is the same as the number of pairs of vertices. There are <span class="math">\(n \choose 2\)</span> pairs, so there are <span class="math">\(n \choose 2\)</span> edges in <span class="math">\(k_n\)</span>.</p>
+<p>Also, <span class="math">\(k_n\)</span> is <span class="math">\((n - 1)\)</span>-regular, because each vertex must connect with <span class="math">\(n - 1\)</span> other vertices.</p>
+<p>A partition of a set <span class="math">\(S\)</span> is a pair <span class="math">\((A, B)\)</span> such that <span class="math">\(A \cup B = S, A \cap B = \emptyset\)</span>. In other words, a way of dividing the set into two groups.</p>
+<p>A graph <span class="math">\(G\)</span> is <strong>bipartite</strong> if there is a partition of <span class="math">\(V(G)\)</span> into <span class="math">\((A, B)\)</span> such that <span class="math">\(G\)</span> has every edge in <span class="math">\(\set{\set{u, v} \middle| u \in A, v \in B}\)</span>. In other words, if there is a partition such that the edges go between the two partitioned areas, but not within the partitioned areas. The two partitions do not necessarily have the same size.</p>
+<p>We prove a graph is bipartite by giving the partition, and we prove that a graph is not bipartite by contradiction - assuming that one vertex is in partition <span class="math">\(A\)</span>, any vertex connected by an edge must be in <span class="math">\(B\)</span>, and we try to derive a contradiction where a vertex is in <span class="math">\(A\)</span> yet also in <span class="math">\(B\)</span>, since <span class="math">\(A \cap B = \emptyset\)</span>.</p>
+<p>Any graph containing a cycle containing an odd number of vertices cannot be bipartite. Every graph is either bipartite, or has a cycle with an odd number of vertices.</p>
+<p>A graph <span class="math">\(G\)</span> is a <strong>complete bipartite graph</strong> if <span class="math">\(G\)</span> is bipartite with partitions <span class="math">\((A, B)\)</span> and has every edge in <span class="math">\(\set{\set{u, v} \middle| u \in A, v \in B}\)</span>. In other words, a biparitite graph with every possible pair of vertices with one from <span class="math">\(A\)</span> and one from <span class="math">\(B\)</span> are connected by edges. A complete bipartite graph with <span class="math">\(\abs{A} = m, \abs{B} = n\)</span> is represented by <span class="math">\(k_{m, n}\)</span>.</p>
+<p>Every vertex of <span class="math">\(A\)</span> must be connected with every element of <span class="math">\(B\)</span>, and every element of <span class="math">\(B\)</span> must be connected with every element of <span class="math">\(A\)</span>, so the total number of edges in <span class="math">\(k_{m, n}\)</span> is <span class="math">\(mn\)</span>. The degree of every vertex in <span class="math">\(A\)</span> is <span class="math">\(n\)</span> and the degree of every vertex in <span class="math">\(B\)</span> is <span class="math">\(m\)</span>.</p>
+<h2 id="n-cubes">N-cubes</h2>
+<p>An <span class="math">\(n\)</span>-cube is a graph where the vertices are all binary strings of length <span class="math">\(n\)</span> and two vertices are connected by an edge if and only if they differ by one bit. The 1-cube looks like a line, the 2-cube looks like a square, and the 3-cube looks like a 2D projection of a 3D cube.</p>
+<h1 id="section-18">18/6/14</h1>
+<p>The <span class="math">\(n\)</span>-cube has <span class="math">\(2^n\)</span> vertices, and is always an <span class="math">\(n\)</span>-regular graph. It is regular because there are always <span class="math">\(n\)</span> ways to have a binary string differ by 1 bit, so every binary string is connected to <span class="math">\(n\)</span> other binary strings.</p>
+<p>By the handshaking lemma, there are <span class="math">\(\frac 1 2 n2^n = n2^{n - 1}\)</span> edges in an <span class="math">\(n\)</span>-cube. The <span class="math">\(n\)</span>-cube is also bipartite, because it is impossible for any cycles with odd numbers of vertices to exist in the graph.</p>
+<p>For example, a 3-cube can be partitioned into <span class="math">\(\left(\set{000, 101, 110, 011}, \set{001, 100, 111, 010}\right)\)</span>. In general, one parition has all binary strings with an even number of 1, and the other has those with an odd number of 1. This is because any binary string differs with another by one bit if and only if it has one less 1 or one more 1 than the other. Therefore, no two binary strings with an even number of 1 can differ by 1 bit, and no two binary strings with an odd number of 1 can differ by 1 bit. Therefore, this partition shows that the <span class="math">\(n\)</span>-cube is bipartite.</p>
+<p>It is possible to recursively construct the <span class="math">\(n\)</span>-cube. First, the 0-cube is a single vertex, <span class="math">\(\epsilon\)</span>. Given an <span class="math">\(n\)</span>-cube, we can find the graph for the <span class="math">\((n + 1)\)</span>-cube by making two copies of the <span class="math">\(n\)</span>-cube (with a 0 prepended to every string in the first copy and 1 prepended to every string in the second copy), and then joining the corresponding vertices of the two copies (which now differ by 1 bit since we prepended different values in each copy).</p>
+<p>The <span class="math">\(n\)</span>-cube is an <span class="math">\(n\)</span>-dimensional analogue of a cube. A 2D drawing of a 4-cube is a 2D projection of a tesseract.</p>
+<p>Also, any finite graph can be represented in 3D space such that there are no crossing edges. This is difficult to prove, however.</p>
+<p>;wip: the midterm will cover everything up to this point, and the midterm is in like two weeks</p>
+<h2 id="walkspaths">Walks/Paths</h2>
+<p>Let <span class="math">\(u, w\)</span> be vertices of a graph <span class="math">\(G\)</span>.</p>
+<p>Given vertices <span class="math">\(u, w\)</span>, a <span class="math">\(u, w\)</span> <strong>walk</strong> is a sequence of alternating vertices and edges <span class="math">\(u, e_1, v_1, e_2, v_2, \ldots, e_{k - 1}, v_{k - 1}, e_k, w\)</span>, where <span class="math">\(v_1, \ldots, v_k\)</span> are vertices and <span class="math">\(e_i, 1 \le i \le k\)</span> is the edge <span class="math">\(\set{v_{i - 1}, v_i}\)</span>. The length of this walk is <span class="math">\(k\)</span> - the number of edges in the walk.</p>
+<p>The walk is <strong>closed</strong> if <span class="math">\(u = v\)</span> - if it begins the same place it ends. There can also be duplicated vertices or edges.</p>
+<p>Since we only deal with simple graphs in this course, it is possible to represent a walk just by its vertices. So a walk of a 3-cube might be written as <span class="math">\(000, 001, 000, 100, 101\)</span>.</p>
+<p>A walk of length 0 just contains one vertex. For example, <span class="math">\(000\)</span> is a zero-length walk of the 3-cube.</p>
+<p>A <span class="math">\(u, w\)</span> <strong>path</strong> is a walk with no repeated vertices or edges. As a result, a path cannot be closed. All <span class="math">\(u, w\)</span> paths are <span class="math">\(u, w\)</span> walks.</p>
+<p>All walks can be converted into paths. If we can get somewhere by repeating vertices, then we can also just not repeat those vertices and get to the same place.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

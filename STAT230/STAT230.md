@@ -9,6 +9,7 @@ Probability.
 
 $$
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
@@ -457,7 +458,7 @@ This is the same as the hypergeometric distribution, except our selection is don
 
 ;wip: justify this and organize all of this properly
 
-$X ~ \operatorname(Bin)(n, p)$. The $n$ is the number of the number of objects in $S$, and $p$ is the probability of success for each object. ;wip: tilde is not showing up
+$X \sim \operatorname(Bin)(n, p)$. The $n$ is the number of the number of objects in $S$, and $p$ is the probability of success for each object.
 
 These independent trials resulting in success/failure are known as **Bernoulli trials**. The process is known as the **Bernoulli process**.
 
@@ -489,7 +490,7 @@ The binomial distribution is often used as a approximation for the hypergeometri
 
 The negative binomial distribution has the same preconditions as the binomial distribution, but now $X$ records the number of failures before the $k$th success and $x$ is the number of failures.
 
-This can be represented using $X ~ \operatorname{NB}(k, p)$, where $k$ is the number of successes and $p$ is the probability of success. ;wip: tilde not showing up
+This can be represented using $X \sim \operatorname{NB}(k, p)$, where $k$ is the number of successes and $p$ is the probability of success.
 
 Clearly, there are $x + k$ trials - successes plus failures, and the last trial is always a success.
 
@@ -504,7 +505,7 @@ With binomial distributions we know the number of trials but not the number of s
 If 20% of people agree to buy tickets, and we want 25 people to buy tickets, what is the probability function of $X$ where $X$ is the number of people asked before 25 tickets are bought?
 
 > Clearly, $X$ is the number of failures plus 25 successes, and $k = 25, p = 0.2$.  
-> Let $X = Y + 25$ where $Y ~ \operatorname{NB}(25, 0.2)$, so $x = y + 25$ and $y = x - 25$.  
+> Let $X = Y + 25$ where $Y \sim \operatorname{NB}(25, 0.2)$, so $x = y + 25$ and $y = x - 25$.  
 > So $f_Y(y) = {y + 25 - 1 \choose y}p^{25}(1 - 0.2)^y = {y + 24 \choose y}0.2^{25}0.8^y$ where $0 \le y$.  
 > So $f_X(x) = {x - 1 \choose x - 25}0.2^{25}0.8^{x - 25}$ where $25 \le x$.  
 
@@ -533,7 +534,7 @@ This basically the same as the negative binomial distribution with $k = 1$. It h
 
 If $X$ has a geometric distribution, then $f_X(x) = (1 - p)^xp$ where $0 \le x$. This can easily be derived from  the negative binomial distribution.
 
-Also, we can write $X ~ \operatorname{NB}(1, p)$ or $X ~ \operatorname{Geo}(p)$.
+Also, we can write $X \sim \operatorname{NB}(1, p)$ or $X \sim \operatorname{Geo}(p)$.
 
 Note that the binomial, negative binomial, and geometric distributions all have the same preconditions - two outcomes, independent trials, and equal probability of success in each trial.
 
@@ -559,7 +560,7 @@ Preconditions:
 
 If the above are satisfied, then if $X$ represents the number of events of some type within some interval, $X$ has a Poisson distribution and $f_X(x) = \frac{e^{-\mu} \mu^x}{x!}$ where $x \ge 0$.
 
-This can be represented using $X ~ \operatorname{Poisson}(\mu)$.
+This can be represented using $X \sim \operatorname{Poisson}(\mu)$.
 
 This distribution is defined over a countably infinite set of outcomes.
 
@@ -591,7 +592,7 @@ Birthday problem - given 200 people at a party, what is the probability that exa
 
 > We assume that all days of the year are equally likely, and there are no leap years, and that birthdays are independent of each other.  
 > Let $X$ be the number of people at the party born on January 1.  
-> So $X ~ \operatorname{Bin}(200, \frac 1 {365})$. Then the exact probability is $P(X = 2) = {200 \choose 2} \frac 1 {365^2} \left(\frac{364}{365}\right)^{200 - 2} \approxeq 0.086766913252562$.
+> So $X \sim \operatorname{Bin}(200, \frac 1 {365})$. Then the exact probability is $P(X = 2) = {200 \choose 2} \frac 1 {365^2} \left(\frac{364}{365}\right)^{200 - 2} \approxeq 0.086766913252562$.  
 > Using the Poisson approximation, $\mu = np = 200 \times \frac 1 {365} = \frac{200}{365}$, so $P(X = 2) = \frac{e^{-\frac{200}{365}}\mu^{\frac{200}{365}}}{x!} \approxeq 0.086790999064332$.  
 
 Order Notation
@@ -611,12 +612,12 @@ Independent events means that events occur independent of each other - observing
 
 Individual events means that $P(\text{2 or more events in same interval } (t, t + \Delta t)) = o(\Delta t)$ - that the probability of two events occurring in the same interval becomes negligible when $\Delta t \to 0$. In other words, in any interval $(t, t + \Delta t)$ there is either 1 or 0 events occurring, and the probability that two or more events occur is negligible.
 
-Hommogeneity/uniformity means that the events occur at a uniform rate $\lambda$ over time so that $P(\text{one event in interval } (t, t + \
+Hommogeneity/uniformity means that the events occur at a uniform rate $\lambda$ over some dimension (usually time or space) so that $P(\text{one event in interval } (t, t + \
 Delta t)) = \lambda \Delta t o(\Delta t)$.
 
 If a process/experiment satisfies these three properties, then it is a **Poission process** and $\mu = \lambda t$.
 
-$\lambda$ is the rate of events per unit of time. $\mu$ is the average number of occurrences over an interval $t$. Clearly, $\mu = \lambda t$.
+$\lambda$ is the average rate of events per unit dimension (usually time or space). $\mu$ is the average number of occurrences over an interval $t$. Clearly, $\mu = \lambda t$.
 
 If there are an average of 6 earthquakes per year and earthquakes are a Poisson process, what is the probability that 7 are recorded in the next 2 years?
 
@@ -626,7 +627,92 @@ If there are an average of 6 earthquakes per year and earthquakes are a Poisson 
 
 The number of cars exceeding the speed limit in half an hour is a random variable $X$ with a Poisson distribution where $\lambda = 8.4$. What is the probability that 10 cars exceed the speed limit in 1 hour?
 
-> Clearly, $\mu = 8.4 \text{speeders}{0.5 hours}t = k \text{speeders}{hour}t$. So $t = 2 \text{hours}$ and $\mu = 16.8 \text{speeders}$.  
+> Clearly, $\mu = 8.4 \text{speeders}/\text{0.5 hours}t = k \text{speeders}/\text{hour}t$. So $t = 2 \text{hours}$ and $\mu = 16.8 \text{speeders}$.  
 > So $P(X = 10) = \frac{e^{-16.8} 16.8^10}{10!}$.  
 
-;wip: check the slide notes for section 1 today
+# 13/6/14
+
+Bacteria occur in water at 1 bacterium per 10 cubic centimeters of water. What is the probability that there are 5 or more bacteria in a 50 cubic centimeter sample?
+
+> Clearly, "1 bacterium per 10 cubic centimeters of water" is the average rate per unit volume, so $\lambda = 1 \text{bacterium}/\text{10 cubic centimeters}$.  
+> So $\mu = 1 \text{bacterium}/\text{10 cubic centimeters} \times \text{50 cubic centimeters} = 5 \text{bacteria}$.  
+> Let $X$ represent the number of bacteria. Then $X \sim \operatorname{Poisson}(5)$.  
+> So the probability that there are 5 or more bacteria is $P(X \ge 5) = 1 - P(X \le 4) = 1 - e^{-5}\left(\frac{5^0}{0!} + \frac{5^1}{1!} + \frac{5^2}{2!} + \frac{5^3}{3!} + \frac{5^4}{4!}\right) \approxeq 0.559506714934788$.  
+
+When do we use Poisson distribution rather than the binomial distribution? We must consider the following:
+
+* Does $X$ have a maximum value? This is $n$ in the binomial distribution, and we can use Poisson if this is countably infinite or very large.
+    * For example, if $X$ is the number of seeds that germinate out of 25 planted, then $X$ has a maximum value of 25 and we should not use the Poisson
+ distribution.
+    * For example, if $X$ is the number of airplanes taking off, then $X$ has no maximum value - there could theoretically be infinite takeoffs and we should use the Poisson distribution.
+* Does it make sense to ask how often the event does not occur? This asks if there are finite, distinct trials.
+    * For example, if a coin is tossed many times, it also makes sense to count how often heads did not occur, so we should not use the Poisson distribution.
+    * For example, it does not make sense to ask how often a plane is not taking off, so we should use the Poisson distribution.
+
+Calls to a phone occur at an average rate of 3 per minute. What is the probability that 2 calls occur in the next minute given that 6 calls occur in the next 2.5 minutes?
+
+> Clearly, $\lambda = 3$ and $\mu = 3 \times 2.5 = 7.5$. Let $X_t$ be the number of calls received over a time $t$.  
+> Then $P(X_t = x) = \frac{e^{-3t}(3t)^x}{x!}$ because it is a Poisson random variable.  
+> Clearly, $P(\text{2 in 1 minute} \mid \text{6 in 2.5 minutes}) = \frac{P(\text{2 in 1 minute} \wedge \text{6 in 2.5 minutes})}{P(\text{6 in 2.5 minutes})}$.  
+> Clearly, $\frac{P(\text{2 in 1 minute} \wedge \text{6 in 2.5 minutes})}{P(\text{6 in 2.5 minutes})} = \frac{P(\text{2 in 1 minute} \wedge \text{4 in last 1.5 minutes})}{P(\text{6 in 2.5 minutes})}$, because if only two occur in the first minute and 6 occur in total, then 4 occur in the last 1.5 minutes.  
+> Clearly, $\text{2 in 1 minute}$ and $\text{4 in last 1.5 minutes}$ are independent.  
+> So $P(\text{2 in 1 minute} \mid \text{6 in 2.5 minutes}) = \frac{P(\text{2 in 1 minute}) P(\text{4 in last 1.5 minutes})}{P(\text{6 in 2.5 minutes})} = \frac{P(X_1 = 2) P(X_{1.5} = 4)}{P(X_{2.5} = 6)} = \frac{\frac{e^{-3}3^2}{2!} \frac{e^{-4.5}4.5^4}{4!}}{\frac{e^{-7.5}7.5^6}{6!}}$.  
+> Incidentally, this is equal to ${6 \choose 2}\left(\frac{3}{7.5}\right)^2\left(1 - \frac{3}{7.5}\right)^{6 - 2}$, which is $P(Y = 2)$ where $Y \sim \operatorname{Bin}\left(6, \frac{3}{7.5}\right)$.  
+
+In general, if we have a Poisson variable and we restrict its maximum value like in the above example, when we then calculate the probability it is equivalent to a binomial distribution.
+
+# 16/6/14
+
+We can also combine distributions together to solve problems.
+
+A large number of ladybugs are released into an orchard. They scatter randomly so that every tree has an average of 6 bugs. Find the probability that any 10 trees have 8 with more than 3 ladybugs:
+
+> Let $X$ be the number of ladybugs in any given tree.  Clearly, $X \sim \operatorname{Poisson}(6)$ and $P(X > 3) = 1 - P(X = 0) - P(X = 1) - P(X = 2) - P(X = 3)$.  
+> So $P(X > 3) = 1 - \frac{e^{-6}6^0}{0!} - \frac{e^{-6}6^1}{1!} - \frac{e^{-6}6^2}{2!} - \frac{e^{-6}6^3}{3!} = 1 - 61e^{-6}$.  
+> Let $Y$ be the number of trees out of 10 that have more than 3 ladybugs. Then $Y \sim \operatorname{Bin}(10, P(X > 3))$ and $P(Y = 8) = {10 \choose 8}(1 - 61e^{-6})^8(1 - (1 - 61e^{-6}))^{10 - 8} = 45(1 - 61e^{-6})^8(61e^{-6})^2 \approxeq 0.277182287706655$.  
+
+What is the probability that, given two trees with a total of $t$ ladybugs, there are $x$ on the first tree?
+
+> ;wip: use the definition of conditional probability and \frac{P(x in first tree) P(t - x in second tree)}{P(t in two trees)}
+
+Expected Value and Variance
+---------------------------
+
+We often want summary statistics rather than the full details of the data. For example, the mean, median, and standard deviation.
+
+A useful way to present data is the frequency distribution, which plots the number of $X = x$ with respect to $x$. For example, if $X$ represents the number of peope in cars passing over a bridge, then the frequency histogram or table is the number of trials where $X = x$ for each $x$.
+
+The **arithmetic mean** or **sample average** of a sample of observations $x = \set{x_1, \ldots, x_n}$ is $\overline x = \frac 1 n \sum_{i = 1}^n x_1$ where $x_1, \ldots, x_n$ are the individual outcomes of each sample. It is the sum of the values divided by the number of values and is not necessarily an exact value of $x$ - it might not be an integer even if $X$ is.
+
+# 18/6/14
+
+The set of observed outcomes $x_1, \ldots, x_n$ for a random variable $X$ is a **sample**.
+
+The **median** (represented $Q_2$) of a sample of observations $x = \set{x_1, \ldots, x_n}$ is the value $x$ such that when the observations are numerically sorted, half the numbers are below it and half are above. If there are an even number of observations and it is impossible to divide it exactly in half, the mean of the middle two values is used. ;wip: the $x$ should have a tilde over it
+
+If a set of values is sorted, the median is the value in the middle or the mean of the two values in the middle.
+
+The **mode** is the value that occurs most often. This is not used very often, and there can be more than one mode if there are values that occur equally often.
+
+The mean, median, and mode are not necessarily the same, though they all measure centrality/location. Sometimes one will represent the data better than another.
+
+We previously defined the mean, median, and mode to summarize statistics for a sample of observations for a random variable 4X$. We can also extend these concepts to describe the probability distribution of $X$.
+
+The mean of a sample set is $\sum_{i = 1}^k x_i \times \frac{\text{the number of occurrences of } x_i}{\text{total number of occurrences of any outcome}}$, where $x_1, \ldots, x_k$ is now the set of all possible outcomes.
+
+Clearly, as the number of samples approaches infinity, $\frac{\text{the number of occurrences of } x_i}{\text{total number of occurrences of any outcome}}$ approaches $P(X = x_i) = f(x_i)$.
+
+So in the long run, the mean will approach $\mu = E(X) = \sum_{i = 1}^k x_i f_X(x_i)$. This is known as the **theoretical mean/expected value/expectation**, because it is the average value we would expect if we repeated the experiment an infinite number of times. Clearly, this depends on the probability distribution of $X$.
+
+Also, if $g(x)$ is a function of $x$, then $E(g(X)) = \sum_{i = 1}^k g(x_i) f_X(x_i)$. $f_X(X)$ is simply a function of $X$, while $f_X(x)$ is a specific value. $x$ is like a specific value that $X$ can assume.
+
+$E(g(X))$ represents the average value of $g(X)$ when the experiment is repeated an infinite number of times, and can be a decimal number even if $g(x)$ only results in integers.
+
+Clearly, $E(g(X))$ must be between the smallest and largest value in $g(x_1), \ldots, g(x_k)$. It is never possible to get a value outside of this range.
+
+Given a random variable $X$ such that $f_X(x) = \frac 1 3$ and $x = -1, 0, 1$, and $Y = X^2$, what is $E(Y)$?
+
+> Clearly, $E(Y) = E(X^2) = (-1)^2 \frac 1 3 + 0^2 \frac 1 3 + 1^2 \frac 1 3 = \frac 2 3$.  
+> So the expected value of $X^2$ is $\frac 2 3$.  
+
+Also, $E[a_1 \cdot g_1(X) + \ldots + a_n \cdot g_n(X)] = a_1 \cdot E(g_1(x)) + \ldots + a_n \cdot E(g_n(x))$, so the expected value operator is a linear. If $g(x)$ is a linear function (of the form $aX + b$), then $E(g(x)) = g(E(X))$.

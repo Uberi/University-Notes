@@ -9,6 +9,7 @@ Electrical engineering.
 
 $$
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
@@ -35,7 +36,7 @@ $$
 
 # 6/5/13
 
-ELectricity
+Electricity
 -----------
 
 Matter is composed of protons, neutrons, and electrons. Protons are positively charged, and electrons are negatively charged.
@@ -91,7 +92,7 @@ In our circuits, $i_{AB} = -i_{BA}$. In other words, the magnitude of the curren
 
 **Direct current** (DC) is current that stays constant over time. This is produced from batteries and many power supplies.
 
-**Alternating current** (AC) is current that oscillates about 0 Amperes. It might look like a sine wave, or a square wave.
+**Alternating current** (AC) is current that oscillates about 0 Amperes. It might look like a sine wave, a square wave, or any kind of oscillating function.
 
 **Time varying current** is current that changes as an arbitrary function of time. AC and DC currents are all time varying currents.
 
@@ -362,7 +363,7 @@ To find the energy transferred over some time interval, we need to find the powe
 
 If the current comes out of the positive terminal of a circuit element, it is supplying power. If it goes into the positive terminal, the circuit element is adsorbing power.
 
-In summary, when two resistors $R_1, R_2$ are in parallel, the voltage over $R_1$ is $V_1 = \frac{R_1}{R_1 + R_2} V_x$ and the current is $I_1 = \frac{R_2}{R_1 + R_2}I_x$.
+In summary, when two resistors $R_1, R_2$ are in series, the voltage over $R_1$ is $V_1 = \frac{R_1}{R_1 + R_2} V_x$ and when they are in parallel, the current is $I_1 = \frac{R_2}{R_1 + R_2}I_x$.
 
 Voltage division uses the resistor we are measuring the voltage on in the numerator, while current division uses the other resistor.
 
@@ -530,9 +531,11 @@ We should start by assuming one of the open terminals as positive and the other 
 
 Also, if we have only dependent sources, or no sources at all, then there will be no current at all in the open circuit by itself. So the resulting Thevenin equivalent circuit will have no voltage source, only a resistor.
 
-Since we still need to find the Thevenin resistance, we introduce a test source across the terminals we are considering, often of 1 V or left as an unknown, in order to find $I_{SC}$, the current going through the voltage source. We could also introduce a current source, often of 1 A or left as an unknown, in order to find $V_{OC}$, the voltage across the current source.
+Since we still need to find the Thevenin resistance, we introduce a test source across the specified terminals, often of 1 V or left as an unknown, in order to find $I_{SC}$, the current going through the voltage source. We could also introduce a current source, often of 1 A or left as an unknown, in order to find $V_{OC}$, the voltage across the current source.
 
 ;wip: diagram
+
+When we use the test source, $R_{th}$ is the voltage of the test source over the current through the test source.
 
 # 9/6/14
 
@@ -546,7 +549,7 @@ The Thevenin equivalent is relative to two terminals (often called A and B) in s
 
 The open circuit voltage is just the voltage across A and B if we removed everything that is not in that section of the circuit and measured the voltage across the terminal. We basically ripped the section out of the circuit so we don't consider any other wires or components, and then put a voltmeter on the terminals.
 
-THe short circuit current is the current that we get if we then connect a wire across A and B in that circuit and measure the current across that wire. We basically put an ammeter on the terminals in the section of the circuit.
+The short circuit current is the current that we get if we then connect a wire across A and B in that circuit and measure the current across that wire. We basically put an ammeter on the terminals in the section of the circuit.
 
 Note that we have two different circuits when we are calculating the equivalent circuits - one wherre the terminals are short circuited, and one where they are not. We must perform nodal analysis on the one without the short circuit if we are finding the open circuit voltage, and the one with the short circuit if we are finding the short circuit current.
 
@@ -622,7 +625,7 @@ A linear op-amp has the equation $V_O = A(V_p - V_n)$, and usually has a very la
 
 Also, $V_O$ is clamped such that $V_{cc}- \le V_O \le V_{cc}+$. The value of $A$ is called the **gain** or **amplification factor** of the op-amp.
 
-In an amplifier circuit (inverting or non-inverting), the gain is instead the ratio of the output voltage to the input voltage.
+In an amplifier circuit (inverting or non-inverting), the gain is instead the ratio of the output voltage to the input voltage - $A = \frac{V_O}{V_S}$.
 
 An ideal op-amp has a $V_O$ to $V_p - V_n$ graph as a perfect line, suddenly reaching a plateau on the left and right at $V_{cc}-$ and $V_{cc}+$, respectively.
 
@@ -657,6 +660,10 @@ Find the gain of the amplifier:
 > That means that the only factors affecting the output voltage multiplication factor is the values of the resistors - not the gain of the amplifier itself.
 > If there is no feedback resistor, then the output voltage is $V_O = A(V_p - V_n)$. The feedback resistor creates a negative feedback loop and stabilizes the output to a value determined by the resistor values.  
 
+For an inverting amplifier, $V_O = -\frac{R_2}{R_1}V_S$.
+
+For a non-inverting amplifier, $V_O = \left(1 + \frac{R_2}{R_1}\right)V_S$.
+
 # 11/6/14
 
 An op-amp is sometimes drawn without the $V_{cc}+$ and $V_{cc}-$ terminals. In this case, we might pretend it has an unlimited voltage supply connected to the supply terminals.
@@ -665,6 +672,10 @@ Op-amps are often used in power supplies, because they can output an exact volta
 
 ;wip: diagram
 
-This is basically just a non-inverting amplifier
+This is basically just a non-inverting amplifier that has a value of 0 for the feedback resistor.
 
 A **buffer** is a circuit that isolates its input from its output. All op-amp circuits are buffers, since they isolate current drawn by the output from the inputs $V_p$ and $V_n$.
+
+# 12/6/14
+
+Note that for op-amp circuits, the power adsorbed is not the same as the power supplied, because the op-amps have hidden power supplies that supply additional power. When analyzing power, we must always consider the op-amp itself as well.

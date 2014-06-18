@@ -46,6 +46,24 @@
     padding:: 0;
   }
   
+  blockquote {
+    margin-left: 0;
+    padding-left: 0.5em;
+    border-left: solid 0.3em grey;
+  }
+  
+  .figure {
+    border: solid 0.1em grey;
+    display: inline-block;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  .figure .caption {
+    margin: 0;
+    font-size: 80%;
+  }
+  
   a.button {
     display: inline-block;
     padding: 1em;
@@ -75,6 +93,7 @@ Office Hours: Tuesday 2-3pm, Wednesday 12-1pm Math Tutorial Center
 Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
@@ -98,7 +117,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
-<p>Assignments are due at 1pm at the dropboxes on MC 4th floor, due on thursdays, posted on tuesdays, returned in tutorials. Remark requests must be done within a week after the marks are posted.</p>
+<p>Assignments are due at 1pm at the dropboxes on MC 4th floor, due on Thursdays, posted on Tuesdays, returned in tutorials. Remark requests must be done within a week after the marks are posted.</p>
 <h2 id="logic">Logic</h2>
 <p>Logic is the science of correct reasoning. It is concerned with determining whether things are true or false.</p>
 <p>In <strong>symbolic logic</strong>, we use symbols to represent truth values and manipulate logical statements using certain logical rules.</p>
@@ -204,14 +223,14 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <ol style="list-style-type: decimal">
 <li><span class="math">\(A \in \operatorname{Atom}(\mathcal{L}_P) \implies A^t \in \set{0, 1}\)</span>.</li>
 <li><span class="math">\((\neg A) = \begin{cases} 1 &amp;\text{if } A^t = 0 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
-<li><span class="math">\((A \wedge B) = \begin{cases} 1 &amp;\text{if } A^t = B^t = 0 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
-<li><span class="math">\((A \vee B) = \begin{cases} 1 &amp;\text{if } A^t = 0 \text{ or } B^t = 0 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
+<li><span class="math">\((A \wedge B) = \begin{cases} 1 &amp;\text{if } A^t = B^t = 1 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
+<li><span class="math">\((A \vee B) = \begin{cases} 1 &amp;\text{if } A^t = 1 \text{ or } B^t = 1 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
 <li><span class="math">\((A \rightarrow B) = \begin{cases} 1 &amp;\text{if } A^t = 0 \text{ or } B^t = 1 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
 <li><span class="math">\((A \leftrightarrow B) = \begin{cases} 1 &amp;\text{if } A^t = B^t \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
 </ol>
 <p>Given a set of formulas <span class="math">\(\Sigma\)</span>, <span class="math">\(\Sigma^t = \begin{cases} 1 &amp;\text{if } \forall A \in \Sigma, A^t = 1 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>. In other words, a set of formulas is true in a given truth valuation if and only if all of the formulas in the set are true.</p>
 <p><span class="math">\(\Sigma\)</span> is <strong>satisfiable</strong> if and only if there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(\Sigma^t = 1\)</span>. It this <span class="math">\(t\)</span> exists, then <span class="math">\(t\)</span> <strong>satisfies</strong> <span class="math">\(\Sigma\)</span>. Therefore, <span class="math">\(\emptyset\)</span> satisfiable by any truth valuation.</p>
-<p>If <span class="math">\(\Sigma\)</span> is satisfiable, then <span class="math">\(\Sigma\)</span> has a <strong>model</strong>.</p>
+<p>A truth valuation can also be called a <strong>model</strong>.</p>
 <p>A <strong>tautology</strong> is a formula which is always true, so for any truth valuation <span class="math">\(t\)</span>, <span class="math">\(A^t = 1\)</span>.</p>
 <p>A <strong>contradiction</strong> is a formula which is always false, so for any truth valuation <span class="math">\(t\)</span>, <span class="math">\(A^t = 0\)</span>.</p>
 <p>A <strong>semantically consistent</strong> formula is one that is not a contradiction, so there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(A^t = 1\)</span>.</p>
@@ -246,7 +265,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>It is true that <span class="math">\(\Sigma \not\models A\)</span> if there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(\Sigma^t = 1\)</span> and <span class="math">\(A^t = 0\)</span>.</p>
 <p>If <span class="math">\(A \models B\)</span> and <span class="math">\(B \models A\)</span>, then <span class="math">\(A \equiv B\)</span>. Also, if <span class="math">\(A \equiv B\)</span> and <span class="math">\(C \equiv D\)</span>, then <span class="math">\(\neg A \equiv \neg B\)</span> and <span class="math">\(A \odot C \equiv B \odot D\)</span> where <span class="math">\(\odot\)</span> is a binary connective.</p>
 <p>Also, we define <span class="math">\(\emptyset^t = 1\)</span> for any truth valuation <span class="math">\(t\)</span>.</p>
-<p>If <span class="math">\(B \equiv C\)</span>, then <span class="math">\(A \equiv A&#39;\)</span> where <span class="math">\(A&#39;\)</span> is <span class="math">\(A\)</span> with any number of occurrences of <span class="math">\(B\)</span> replaced by <span class="math">\(C\)</span>. This is known as <strong>replacability</strong>.</p>
+<p>If <span class="math">\(B \equiv C\)</span>, then <span class="math">\(A \equiv A&#39;\)</span> where <span class="math">\(A&#39;\)</span> is <span class="math">\(A\)</span> with any number of occurrences of <span class="math">\(B\)</span> replaced by <span class="math">\(C\)</span>. This is known as <strong>replaceability</strong>.</p>
 <p>The <strong>dual</strong> of <span class="math">\(A\)</span>, which is a formula that uses only the connectives <span class="math">\(\neg, \wedge, \vee\)</span> is <span class="math">\(A&#39;\)</span>, which is <span class="math">\(A\)</span> with every <span class="math">\(\wedge\)</span> replaced by <span class="math">\(\vee\)</span>, every <span class="math">\(\vee\)</span> with <span class="math">\(\wedge\)</span>, and every atom <span class="math">\(A\)</span> with <span class="math">\(\neg A\)</span>. It is always true that <span class="math">\(A = \neg A&#39;\)</span>. This is basically application of De Morgan's laws to formulas.</p>
 <p>We know that <span class="math">\(A \rightarrow B \equiv \neg A \vee B\)</span>. Because of this, <span class="math">\(\rightarrow\)</span> is <strong>definable</strong> in terms of <span class="math">\(\neg, \vee\)</span>, or <strong>reducible to</strong> <span class="math">\(\neg, \vee\)</span>.</p>
 <p><span class="math">\(\neg\)</span> is a unary connective - it accepts one operand. <span class="math">\(\vee\)</span> is a binary connective - it accepts two operands. It is also possible to have ternary connectives and even connectives of arity 4 and above (arity is the number of operands).</p>
@@ -261,7 +280,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>This is because we could define <span class="math">\(f\)</span> first in terms of <span class="math">\(A\)</span>, and then define that in terms of <span class="math">\(B\)</span>.</p>
 <p>For example, <span class="math">\(\set{\wedge, \neg}\)</span> is adequate because <span class="math">\(\wedge\)</span> and <span class="math">\(\neg\)</span> are already in the set, and <span class="math">\(A \vee B \equiv \neg((\neg A) \wedge (\neg B))\)</span>, so <span class="math">\(\vee\)</span> is definable in terms of <span class="math">\(\set{\wedge, \neg}\)</span>.</p>
 <h1 id="section-4">26/5/14</h1>
-<p>The Schroder connective is defined as <span class="math">\(A \downarrow B\)</span> where <span class="math">\(A \downarrow B \equiv \neg (A \wedge B)\)</span> - the NAND operation.</p>
+<p>The Schroder connective is defined as <span class="math">\(A \downarrow B\)</span> where <span class="math">\(A \downarrow B \equiv \neg (A \wedge B)\)</span> - the NOR operation.</p>
 <p><span class="math">\(\set{\neg, \rightarrow}\)</span> is an adequate set.</p>
 <h2 id="proof-calculus">Proof Calculus</h2>
 <p>We want a calculus for reasoning about propositional logic. This will allow us to simplify proofs of validity.</p>
@@ -279,7 +298,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <li><span class="math">\((\phi \rightarrow (\psi \rightarrow \xi)) \rightarrow ((\phi \rightarrow \psi) \rightarrow (\phi \rightarrow \xi))\)</span> - basically, <span class="math">\(\rightarrow\)</span> is distributive</li>
 <li><span class="math">\((\neg \phi \rightarrow \neg \psi) \rightarrow (\psi \rightarrow \phi)\)</span> - basically, the contrapositive of a formula implies the formula</li>
 </ol>
-<p>Here, <span class="math">\(\phi, psi, \xi\)</span> are any formulas.</p>
+<p>Here, <span class="math">\(\phi, \psi, \xi\)</span> are any formulas.</p>
 <p><strong>Inference rules</strong> are manipulations we can perform on formulas to obtain new formulas. In this system we have only Modus Ponens (MP): <span class="math">\(\set{\phi, \phi \rightarrow \psi} \rightarrow_H \psi\)</span>.</p>
 <p>A <strong>proof</strong> is a set of formulas that includes axioms, premises, and conclusions. We start with the axioms that we know are true, so we use inference rules over the axioms and previously obtained formulas, listing out each new formula obtained, until we get the desired result.</p>
 <p>For example, prove that <span class="math">\(\vdash_H A \rightarrow A\)</span>:</p>
@@ -293,7 +312,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <ol style="list-style-type: decimal">
 <li><span class="math">\(A \rightarrow B\)</span> (Premise 1)</li>
 <li><span class="math">\(B \rightarrow C\)</span> (Premise 2)</li>
-<li><span class="math">\(((B \rightarrow C) \rightarrow (A \rightarrow (B \rightarrow C)))\)</span> (Axiom 1 where <span class="math">\(\phi = A \rightarrow B\)</span>)</li>
+<li><span class="math">\(((B \rightarrow C) \rightarrow (A \rightarrow (B \rightarrow C)))\)</span> (Axiom 1 where <span class="math">\(\phi = B \rightarrow C\)</span>)</li>
 <li><span class="math">\(A \rightarrow (B \rightarrow C)\)</span> (Modus Ponens on 1 and 3)</li>
 <li><span class="math">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))\)</span> (Axiom 2)</li>
 <li><span class="math">\((A \rightarrow B) \rightarrow (A \rightarrow C)\)</span> (Modus Ponens on 4 and 5)</li>
@@ -475,7 +494,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <li><span class="math">\(p \vdash \neg \neg p\)</span> (reductio ad absurdum with step 1 and 2)</li>
 </ol>
 <p>In formal proofs, we usually start off by stating premises (also called assumptions), and then adding rules and modifying results until we arrive at the conclusion of the proof. The conclusion of the proof is the thing we are trying to prove.</p>
-<p>The proof format we have been using so far is in something known as <strong>sequent notation</strong>. The <span class="math">\(\vdash\)</span> symbol is a sequent, with all premises before it and all conclusions after.</p>
+<p>The proof format we have been using so far is in something known as <strong>line/sequent/turnstile notation</strong>. The <span class="math">\(\vdash\)</span> symbol is a sequent or turnstile, with all premises before it and all conclusions after.</p>
 <p>In <strong>box notation</strong>, we write assumptions, and then we draw a box that contains it, the box acts like a &quot;scope&quot; in which the assumptions hold and we can directly write the deduced thing. Inside the box we can directly write the resulting formulas without writing the <span class="math">\(\alpha_1, \ldots, \alpha_n \vdash\)</span> before it. Scopes can nest, and this saves a lot of rewriting of premises.</p>
 <p>Alternatively, we might indent the values instead of drawing a box around them. For example, the previous proof that <span class="math">\(A \rightarrow B, B \rightarrow C \vdash A \rightarrow C\)</span>:</p>
 <ol style="list-style-type: decimal">
@@ -484,7 +503,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <ol style="list-style-type: decimal">
 <li><span class="math">\(A \rightarrow B, B \rightarrow C, A\)</span> (assumption)</li>
 <li><span class="math">\(A \rightarrow B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
-<li><span class="math">\(A\)</span> (<span class="math">\(epsilon\)</span>)</li>
+<li><span class="math">\(A\)</span> (<span class="math">\(\epsilon\)</span>)</li>
 <li><span class="math">\(B\)</span> (<span class="math">\(\rightarrow-\)</span> with step 2.2 and 2.3)</li>
 <li><span class="math">\(B \rightarrow C\)</span> (<span class="math">\(\epsilon\)</span>)</li>
 <li><span class="math">\(C\)</span> (<span class="math">\(\rightarrow-\)</span> with step 2.4 and 2.5)</li>
@@ -529,7 +548,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <blockquote>
 <p>Let <span class="math">\(n\)</span> be the length of the proof in steps.<br />Clearly, if <span class="math">\(n = 1\)</span>, then the proof must have the form <span class="math">\(\Sigma, \alpha \vdash \alpha\)</span> (<span class="math">\(\epsilon\)</span>), since this is the only rule that can prove something in one step.<br />Clearly, <span class="math">\(\Sigma, \phi \models \phi\)</span> because anything is a tautological consequence of itself.<br />Assume for some <span class="math">\(k \ge 1\)</span> that all proofs of length <span class="math">\(k\)</span> or less are sound - the inductive hypothesis.<br />Then a proof of length <span class="math">\(k + 1\)</span> has the steps <span class="math">\(\alpha_1, \ldots, \alpha_k, \phi\)</span>, with rules associated with each step.<br />Clearly, <span class="math">\(\alpha_1, \ldots, \alpha_k\)</span> is sound, by the inductive hypothesis.<br />We want to prove that <span class="math">\(\alpha_1, \ldots, \alpha_k, \phi\)</span> is also sound.<br />Clearly, <span class="math">\(\phi\)</span> is the result of applying the ND rules. So each rule is a possible case and we need to check each rule to verify that the proof of length <span class="math">\(k + 1\)</span> is sound.<br />Assume the last rule is <span class="math">\(\wedge+\)</span>. Then <span class="math">\(\phi\)</span> is of the form <span class="math">\(\alpha_i \wedge \alpha_j\)</span> where <span class="math">\(i &lt; k, j &lt; k\)</span>.<br />Then there must be sound proofs of <span class="math">\(\alpha_i\)</span> and <span class="math">\(\alpha_j\)</span>, by the inductive hypothesis.<br />So <span class="math">\(\Sigma_i \models \alpha_i\)</span> and <span class="math">\(\Sigma_j \models \alpha_j\)</span>.<br />By a truth table, <span class="math">\(\Sigma \models \alpha_i \wedge \alpha_j\)</span>, so <span class="math">\(\phi\)</span> is sound.<br />We can use this technique to verify this for every ND rule.<br />Therefore, <span class="math">\(\Sigma \vdash \phi\)</span> is always sound - it always implies <span class="math">\(\Sigma \models \phi\)</span>.</p>
 </blockquote>
-<p><strong>Syntactical consistency</strong> is a property of sets of formulas <span class="math">\(\Sigma \subseteq \formlp\)</span> where there does not exist <span class="math">\(\alpha \in \formlp\)</span> such that <span class="math">\(\Sigma \vdash \alpha\)</span> and <span class="math">\(\Sigma \vdash \neg \alpha\)</span> at the same time - that it not possible to derive a contradiction from the premises.</p>
+<p><strong>Syntactical consistency</strong> is a property of sets of formulas <span class="math">\(\Sigma \subseteq \formlp\)</span> where there does not exist <span class="math">\(\alpha \in \Sigma\)</span> such that <span class="math">\(\Sigma \vdash \alpha\)</span> and <span class="math">\(\Sigma \vdash \neg \alpha\)</span> at the same time - that it not possible to derive a contradiction from the premises.</p>
 <p>This is not to be confused with semantic consistency, which applies only to formulas.</p>
 <p>A set of formulas <span class="math">\(\Sigma \subseteq \formlp\)</span> is <strong>maximally consistent</strong> if and only if <span class="math">\(\Sigma\)</span> is consistent and any <span class="math">\(\alpha \in \formlp \setminus \Sigma\)</span>, <span class="math">\(\Sigma \cup \set{\alpha}\)</span> is inconsistent. In other words, it is the largest possible set of consistent formulas.</p>
 <p>There are multiple possible maximally consistent sets.</p>
@@ -553,12 +572,98 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>Completeness: <span class="math">\(\Sigma\)</span> is sound implies <span class="math">\(\Sigma\)</span> is satisfiable.</p>
 <p>Logical connectives:</p>
 <ul>
-<li><span class="math">\(\neg p\)</span> - not p, p does not hold, it is not the case that p, p is false</li>
+<li><span class="math">\(\neg p\)</span> - not <span class="math">\(p\)</span>, <span class="math">\(p\)</span> does not hold, it is not the case that <span class="math">\(p\)</span>, <span class="math">\(p\)</span> is false</li>
 <li><span class="math">\(p \wedge q\)</span> - <span class="math">\(p\)</span> and <span class="math">\(q\)</span>, <span class="math">\(p\)</span> but <span class="math">\(q\)</span>, not only <span class="math">\(p\)</span> but <span class="math">\(q\)</span>, <span class="math">\(p\)</span> while <span class="math">\(q\)</span>, <span class="math">\(p\)</span> despite <span class="math">\(q\)</span>, <span class="math">\(p\)</span> yet <span class="math">\(q\)</span>, <span class="math">\(p\)</span> although <span class="math">\(q\)</span></li>
 <li><span class="math">\(p \vee q\)</span> - <span class="math">\(p\)</span> or <span class="math">\(q\)</span>, <span class="math">\(p\)</span> or <span class="math">\(q\)</span> or both, <span class="math">\(p\)</span> and/or q, <span class="math">\(p\)</span> unless <span class="math">\(q\)</span></li>
 <li><span class="math">\(p \rightarrow q\)</span> - if <span class="math">\(p\)</span> then <span class="math">\(q\)</span>, <span class="math">\(q\)</span> if <span class="math">\(p\)</span>, <span class="math">\(p\)</span> only if <span class="math">\(q\)</span>, <span class="math">\(q\)</span> when <span class="math">\(p\)</span>, <span class="math">\(p\)</span> is sufficient for <span class="math">\(q\)</span>, <span class="math">\(q\)</span> is necessary for <span class="math">\(p\)</span>, <span class="math">\(p\)</span> implies <span class="math">\(q\)</span></li>
 <li><span class="math">\(p \leftrightarrow q\)</span> - <span class="math">\(p\)</span> if and only if <span class="math">\(q\)</span> (<span class="math">\(p\)</span> iff <span class="math">\(q\)</span>), <span class="math">\(p\)</span> is necessary and sufficient for <span class="math">\(q\)</span>, <span class="math">\(p\)</span> exactly if <span class="math">\(q\)</span>, <span class="math">\(p\)</span> is equivalent to <span class="math">\(q\)</span></li>
 </ul>
+<p>Tips and tricks for proofs:</p>
+<ul>
+<li>Natural deduction:
+<ul>
+<li>If you want to prove an implication <span class="math">\(A \rightarrow B\)</span>, then assume <span class="math">\(A\)</span> and show B, and use <span class="math">\(\rightarrow+\)</span>.</li>
+<li>If you have something to prove with a different connective, then look at the corresponding introduction rule for that connective and try to show those premises.</li>
+<li>As a rule of thumb, when you have something you want to show and can't see how to get it, use proof by contradiction: assume the negation of what you want to show, derive a contradiction, and then use <span class="math">\(\neg-\)</span> to remove the negation on what you wanted to show.</li>
+<li>The turnstile and box notations both have their own advantages.</li>
+</ul></li>
+<li>Hilbert deduction:
+<ul>
+<li>Think about the problem in high-level steps. For example, if you have proven <span class="math">\(\neg \neg p\)</span> then a high-level step would be to conclude that <span class="math">\(p\)</span>, and figure out how to express this high level step in lower level terms later.</li>
+<li>The deduction theorem is one of the most powerful high-level steps for rewriting something you want to show in an easier form.</li>
+</ul></li>
+</ul>
+<p>Prove <span class="math">\(\neg A \vee \neg B \vdash \neg (A \wedge B)\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(\neg A, \neg \neg (A \wedge B), \neg (A \wedge B) \vdash \neg \neg (A \wedge B)\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg A, \neg \neg (A \wedge B), \neg (A \wedge B) \vdash \neg (A \wedge B)\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg A, \neg \neg (A \wedge B) \vdash A \wedge B\)</span> (<span class="math">\(\neg-\)</span> with 1, 2)</li>
+<li><span class="math">\(\neg A, \neg \neg (A \wedge B) \vdash A\)</span> (<span class="math">\(\wedge-\)</span> with 3)</li>
+<li><span class="math">\(\neg A, \neg \neg (A \wedge B) \vdash \neg A\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg A \vdash \neg (A \wedge B)\)</span> (<span class="math">\(\neg-\)</span> 4, 5)</li>
+<li><span class="math">\(\neg B, \neg \neg (A \wedge B), \neg (A \wedge B) \vdash \neg \neg (A \wedge B)\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg B, \neg \neg (A \wedge B), \neg (A \wedge B) \vdash \neg (A \wedge B)\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg B, \neg \neg (A \wedge B) \vdash A \wedge B\)</span> (<span class="math">\(\neg-\)</span> with 7, 8)</li>
+<li><span class="math">\(\neg B, \neg \neg (A \wedge B) \vdash B\)</span> (<span class="math">\(\wedge-\)</span> with 9)</li>
+<li><span class="math">\(\neg B, \neg \neg (A \wedge B) \vdash \neg B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg B \vdash \neg (A \wedge B)\)</span> (<span class="math">\(\neg-\)</span> with 10, 11)</li>
+<li><span class="math">\(\neg A \vee \neg B \vdash \neg (A \wedge B)\)</span> (<span class="math">\(\vee+\)</span> with 6, 12)</li>
+</ol>
+<p>Prove <span class="math">\(\neg (A \wedge B) \vdash \neg A \vee \neg B\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(\neg (A \wedge B), \neg \neg A, \neg A \vdash \neg \neg A\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg (A \wedge B), \neg \neg A, \neg A \vdash \neg A\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg (A \wedge B), \neg \neg A \vdash A\)</span> (<span class="math">\(\neg-\)</span> with 1, 2)</li>
+<li><span class="math">\(\neg (A \wedge B), \neg \neg B, \neg B \vdash \neg \neg B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg (A \wedge B), \neg \neg B, \neg B \vdash \neg B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(\neg (A \wedge B), \neg \neg B \vdash B\)</span> (<span class="math">\(\neg-\)</span> with 4, 5) ;wip</li>
+</ol>
+<p>Prove <span class="math">\(A \rightarrow B \vdash \neg B \rightarrow \neg A\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(A \rightarrow B, \neg B, \neg \neg A, \neg A \vdash \neg \neg A\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(A \rightarrow B, \neg B, \neg \neg A, \neg A \vdash \neg A\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(A \rightarrow B, \neg B, \neg \neg A \vdash A\)</span> (<span class="math">\(\neg-\)</span> with 1, 2)</li>
+<li><span class="math">\(A \rightarrow B, \neg B, \neg \neg A \vdash A \rightarrow B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(A \rightarrow B, \neg B, \neg \neg A \vdash B\)</span> (<span class="math">\(\rightarrow-\)</span> with 3, 4)</li>
+<li><span class="math">\(A \rightarrow B, \neg B, \neg \neg A \vdash \neg B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
+<li><span class="math">\(A \rightarrow B, \neg B \vdash \neg A\)</span> (<span class="math">\(\neg-\)</span>)</li>
+<li><span class="math">\(A \rightarrow B \vdash \neg B \rightarrow \neg A\)</span> (<span class="math">\(\rightarrow+\)</span> with 7)</li>
+</ol>
+<h1 id="section-10">16/6/14</h1>
+<h2 id="predicate-logic">Predicate Logic</h2>
+<p>Predicate logic is also known as <strong>first order logic</strong>.</p>
+<p>Predicate logic is like propositional logic, but extended with quantifiers, variables, predicates, functions, constants, and more.</p>
+<p>An ordered pair is an object that contains two objects <span class="math">\(a\)</span> and <span class="math">\(b\)</span>, represented by <span class="math">\(\tup{a, b}\)</span>, which, unlike sets, preserves the order of <span class="math">\(a\)</span> and <span class="math">\(b\)</span> (which one goes first). Two ordered pairs <span class="math">\(\tup{a, b}\)</span> and <span class="math">\(\tup{c, d}\)</span> are equal if and only if <span class="math">\(a = c\)</span> and <span class="math">\(b = d\)</span>.</p>
+<p>This can be extended into the <strong>tuple</strong> object - an <span class="math">\(n\)</span>-tuple is an object that stores objects <span class="math">\(a_1, \ldots, a_n\)</span>, preserving order, and is represented <span class="math">\(\tup{a_1, \ldots, a_n}\)</span>. Again, <span class="math">\(\tup{a_1, \ldots, a_n} = \tup{b_1, \ldots, b_n}\)</span> if and only if <span class="math">\(a_i = b_i, 1 \le i \le n\)</span>.</p>
+<h3 id="relations">Relations</h3>
+<p>An <span class="math">\(n\)</span>-ary relation of <span class="math">\(S\)</span> is <span class="math">\(R = \set{\tup{x_1, \ldots, x_n} \middle| x_1, \ldots, x_n \in S, f(x_1, \ldots, x_n)}\)</span> for some boolean function <span class="math">\(f(x_1, \ldots, x_n)\)</span>.</p>
+<p>For example, <span class="math">\(\le\)</span> is a binary relation over <span class="math">\(\mb{N}\)</span> where <span class="math">\(R = \set{\tup{a, b} \middle| a, b \in \mb{N}, a \le n}\)</span>. It is the set of all pairs of values where the first value is less than or equal to the second.</p>
+<p>A ternary relation over <span class="math">\(\mb{N}\)</span> might be <span class="math">\(R = \set{\tup{x, y, z} \middle| x + y &lt; z, x, y, z \in \mb{N}}\)</span>.</p>
+<p>It is always true that any <span class="math">\(n\)</span>-ary relation <span class="math">\(R\)</span> over <span class="math">\(S\)</span> is a subset of <span class="math">\(S^n\)</span>.</p>
+<p>Equality is a special binary relation <span class="math">\(R = \set{\tup{x, y} \middle| x, y \in S, x = y} = \set{\tup{x, x} \middel| x \in S}\)</span>.</p>
+<p>The Boolean value <span class="math">\(\tup{x, y} \in R\)</span> for a binary relation can also be written <span class="math">\(x R y\)</span>.</p>
+<p><span class="math">\(R\)</span> is <strong>reflexive</strong> over <span class="math">\(S\)</span> if and only if <span class="math">\(\forall x \in S, x R x\)</span>.</p>
+<p><span class="math">\(R\)</span> is <strong>symmetric</strong> over <span class="math">\(S\)</span> if and only if <span class="math">\(\forall x, y \in S, x R y \implies y R x\)</span>.</p>
+<p><span class="math">\(R\)</span> is <strong>transitive</strong> over <span class="math">\(S\)</span> if and only if <span class="math">\(\forall x, y, z \in S, x R y \wedge y R z \implies x R z\)</span>.</p>
+<p>If <span class="math">\(R\)</span> is all three, then <span class="math">\(R\)</span> is an equivalence relation. Examples of equivalence relations include <span class="math">\(=\)</span> and <span class="math">\(\equiv \pmod{36}\)</span>.</p>
+<p>The <span class="math">\(R\)</span>-equivalence class of <span class="math">\(x\)</span> is <span class="math">\(\overline x = \set{y \in S \middle| x R y}\)</span>. It is the set of all elements of <span class="math">\(S\)</span> that satisfy <span class="math">\(x R y\)</span> and is therefore a subset of <span class="math">\(S\)</span>.</p>
+<h3 id="functions">Functions</h3>
+<p>A <strong>function/mapping</strong> <span class="math">\(f\)</span> is a set of ordered pairs where <span class="math">\(\tup{x, y} \in f \wedge \tup{x, z} \implies y = z\)</span>. In other words, it is a set of tuples with no duplicates.</p>
+<p>The <strong>domain</strong> of <span class="math">\(f\)</span> is <span class="math">\(\operatorname{dom}(f) = \set{x \middle| \tup{x, y} \in f}\)</span>.</p>
+<p>The <strong>range</strong> of <span class="math">\(f\)</span> is <span class="math">\(\operatorname{ran}(f) = \set{y \middle| \tup{x, y} \in f}\)</span>.</p>
+<p>If <span class="math">\(\exists y, \tup{x, y} \in f\)</span>, then <span class="math">\(f(x) = y\)</span>. If <span class="math">\(\operatorname{dom}(f) = S\)</span> and <span class="math">\(\operatorname{ran}(f) \subseteq T\)</span> for some sets <span class="math">\(S\)</span> and <span class="math">\(T\)</span>, then <span class="math">\(f: S \to T\)</span> (<span class="math">\(f\)</span> is a function from <span class="math">\(S\)</span> to <span class="math">\(T\)</span>). Similarly, we can define <span class="math">\(n\)</span>-ary functions like <span class="math">\(g: S_1, S_2, S_3 \to T\)</span>.</p>
+<p>If <span class="math">\(R\)</span> is an <span class="math">\(n\)</span>-ary relation and <span class="math">\(S&#39; \subseteq S\)</span>, then the <strong>restriction</strong> of <span class="math">\(R\)</span> to <span class="math">\(S&#39;\)</span> is <span class="math">\(R \cap S&#39;^n\)</span>. Basically, it is a restriction of the possible input and output values that are allowed. If <span class="math">\(R\)</span> is a function, this is written <span class="math">\(R \mid S&#39;: S&#39; \to T\)</span> - the restriction restricts the allowed x-values.</p>
+<p><span class="math">\(f\)</span> is <strong>onto/surjective</strong> if <span class="math">\(\operatorname{ran}(f) = T\)</span> - if the image is the same as the codomain. In other words, the output of the function is all the possible output values in <span class="math">\(T\)</span>, or every possible output value has a corresponding input value.</p>
+<p>Basically, every unique <span class="math">\(y \in T\)</span> has a (not necessarily unique) <span class="math">\(x \in S\)</span> such that <span class="math">\(f(x) = y\)</span>.</p>
+<p><span class="math">\(f\)</span> is <strong>one-to-one/injective</strong> if <span class="math">\(f(x) = f(y) \implies x = y\)</span> - if every output value has a unique input value. In other words, every possible input value has a unique output value.</p>
+<p>Basically, if <span class="math">\(x_1, x_2 \in S\)</span> and <span class="math">\(x_1 \ne x_2\)</span>, then <span class="math">\(f(x_1) \ne f(x_2)\)</span>.</p>
+<p>If <span class="math">\(f\)</span> is both, then <span class="math">\(f\)</span> is a bijection and is <strong>bijective</strong> - every output value has one and only one input value, and every input value has one and only one output value. A bijection maps every element of <span class="math">\(S\)</span> to a unique element of <span class="math">\(T\)</span> and vice versa.</p>
+<h1 id="section-11">18/6/14</h1>
+<p>Two sets <span class="math">\(S, T\)</span> are <strong>equipotent</strong> if and only if there exists a bijection from <span class="math">\(S\)</span> to <span class="math">\(T\)</span>. This is denoted <span class="math">\(S \sim T\)</span>.</p>
+<p>If and only if <span class="math">\(S \sim T\)</span>, then <span class="math">\(\abs{S} = \abs{T}\)</span>. A set <span class="math">\(S\)</span> is <strong>countably infinite</strong> if <span class="math">\(\abs{S} = \abs{\mb{N}}\)</span> - if we can construct a bijection between it and the set of all natural numbers. <span class="math">\(S\)</span> is <strong>countable</strong> if it is finite, or countably infinite - if <span class="math">\(\abs{S} \le \abs{\mb{N}}\)</span>.</p>
+<p>We can prove a set is countably infinite by showing that there is a bijection between it and <span class="math">\(\mb{N}\)</span>, and we prove a set is countable by either proving it is finite or showing the bijection exists.</p>
+<p>We can prove a set <span class="math">\(S\)</span> is not countable by proving that the bijection cannot exist, usually by showing there is a bijection <span class="math">\(f: U \to \mb{N}\)</span> where <span class="math">\(U \subset S\)</span>, so there cannot be a bijection between natural numbers and the entire set because the elements <span class="math">\(S \setminus U\)</span> cannot be mapped into <span class="math">\(\mb{N}\)</span> while making sure <span class="math">\(f\)</span> is one-to-one.</p>
+<p>A countable set is one where we can enumerate or count the elements - we can assign a natural number to each element in the set.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.

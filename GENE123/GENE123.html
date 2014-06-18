@@ -46,6 +46,24 @@
     padding:: 0;
   }
   
+  blockquote {
+    margin-left: 0;
+    padding-left: 0.5em;
+    border-left: solid 0.3em grey;
+  }
+  
+  .figure {
+    border: solid 0.1em grey;
+    display: inline-block;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  .figure .caption {
+    margin: 0;
+    font-size: 80%;
+  }
+  
   a.button {
     display: inline-block;
     padding: 1em;
@@ -74,6 +92,7 @@ Office: EIT 3112
 Office Hours: drop-in</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\mb}[1]{\mathbb{#1}}
@@ -98,7 +117,7 @@ Office Hours: drop-in</code></pre>
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
 \]</span></p>
 <h1 id="section">6/5/13</h1>
-<h2 id="electricity">ELectricity</h2>
+<h2 id="electricity">Electricity</h2>
 <p>Matter is composed of protons, neutrons, and electrons. Protons are positively charged, and electrons are negatively charged.</p>
 <p>The electrons are free to move around. Each electron has a negative charge of <span class="math">\(-1.6 \times 10^{-19}\)</span> Coulombs (the unit of charge). Charge is represented with <span class="math">\(q\)</span>.</p>
 <p><strong>Conductors</strong> are materials that have lots of free electrons - electrons that are free to move. Insulators are the opposite, where few electrons can move freely.</p>
@@ -129,7 +148,7 @@ Office Hours: drop-in</code></pre>
 <p>In our circuits, <span class="math">\(i_{AB} = -i_{BA}\)</span>. In other words, the magnitude of the current is always the same, regardless of the reference direction chosen. If the current is negative, the current is just flowing in the other direction.</p>
 <h3 id="types-of-current">Types of Current</h3>
 <p><strong>Direct current</strong> (DC) is current that stays constant over time. This is produced from batteries and many power supplies.</p>
-<p><strong>Alternating current</strong> (AC) is current that oscillates about 0 Amperes. It might look like a sine wave, or a square wave.</p>
+<p><strong>Alternating current</strong> (AC) is current that oscillates about 0 Amperes. It might look like a sine wave, a square wave, or any kind of oscillating function.</p>
 <p><strong>Time varying current</strong> is current that changes as an arbitrary function of time. AC and DC currents are all time varying currents.</p>
 <h3 id="voltage">Voltage</h3>
 <p>Electrical charge has potential energy, similar to gravitational potential energy. This is always relative to some sort of reference level of energy.</p>
@@ -300,7 +319,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>Voltage/current division uses two resistors in series or parallel, respectively. The factor for the value for <span class="math">\(R_1\)</span> is always <span class="math">\(\frac{R_2}{R_1 + R_2}\)</span>.</p>
 <p>To find the energy transferred over some time interval, we need to find the power and integrate it to find the energy.</p>
 <p>If the current comes out of the positive terminal of a circuit element, it is supplying power. If it goes into the positive terminal, the circuit element is adsorbing power.</p>
-<p>In summary, when two resistors <span class="math">\(R_1, R_2\)</span> are in parallel, the voltage over <span class="math">\(R_1\)</span> is <span class="math">\(V_1 = \frac{R_1}{R_1 + R_2} V_x\)</span> and the current is <span class="math">\(I_1 = \frac{R_2}{R_1 + R_2}I_x\)</span>.</p>
+<p>In summary, when two resistors <span class="math">\(R_1, R_2\)</span> are in series, the voltage over <span class="math">\(R_1\)</span> is <span class="math">\(V_1 = \frac{R_1}{R_1 + R_2} V_x\)</span> and when they are in parallel, the current is <span class="math">\(I_1 = \frac{R_2}{R_1 + R_2}I_x\)</span>.</p>
 <p>Voltage division uses the resistor we are measuring the voltage on in the numerator, while current division uses the other resistor.</p>
 <h1 id="section-7">20/5/14</h1>
 <p>When doing nodal analysis, it is often helpful to mentally collapse all the nodes into a point, so the circuit appears like a graph with nodes as vertices and circuit elements as edges. This helps us see relationships like parallel and series connections that might not otherwise be obvious.</p>
@@ -397,8 +416,9 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p><span class="math">\(R_{th} = \frac{V_{OC}}{I_{SC}}\)</span> because <span class="math">\(I_{SC}\)</span> is the current flowing through the rest of the circuit and the</p>
 <p>We should start by assuming one of the open terminals as positive and the other negative and assuming a direction for the current. Then we solve for short circuit current and open circuit voltage to calculate the Thevenin equivalent resistance.</p>
 <p>Also, if we have only dependent sources, or no sources at all, then there will be no current at all in the open circuit by itself. So the resulting Thevenin equivalent circuit will have no voltage source, only a resistor.</p>
-<p>Since we still need to find the Thevenin resistance, we introduce a test source across the terminals we are considering, often of 1 V or left as an unknown, in order to find <span class="math">\(I_{SC}\)</span>, the current going through the voltage source. We could also introduce a current source, often of 1 A or left as an unknown, in order to find <span class="math">\(V_{OC}\)</span>, the voltage across the current source.</p>
+<p>Since we still need to find the Thevenin resistance, we introduce a test source across the specified terminals, often of 1 V or left as an unknown, in order to find <span class="math">\(I_{SC}\)</span>, the current going through the voltage source. We could also introduce a current source, often of 1 A or left as an unknown, in order to find <span class="math">\(V_{OC}\)</span>, the voltage across the current source.</p>
 <p>;wip: diagram</p>
+<p>When we use the test source, <span class="math">\(R_{th}\)</span> is the voltage of the test source over the current through the test source.</p>
 <h1 id="section-16">9/6/14</h1>
 <p>So the three methods are:</p>
 <ol style="list-style-type: decimal">
@@ -408,7 +428,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 </ol>
 <p>The Thevenin equivalent is relative to two terminals (often called A and B) in section of a circuit. We are trying to find a circuit we can replace that entire section of circuit between A and B with that acts exactly the same.</p>
 <p>The open circuit voltage is just the voltage across A and B if we removed everything that is not in that section of the circuit and measured the voltage across the terminal. We basically ripped the section out of the circuit so we don't consider any other wires or components, and then put a voltmeter on the terminals.</p>
-<p>THe short circuit current is the current that we get if we then connect a wire across A and B in that circuit and measure the current across that wire. We basically put an ammeter on the terminals in the section of the circuit.</p>
+<p>The short circuit current is the current that we get if we then connect a wire across A and B in that circuit and measure the current across that wire. We basically put an ammeter on the terminals in the section of the circuit.</p>
 <p>Note that we have two different circuits when we are calculating the equivalent circuits - one wherre the terminals are short circuited, and one where they are not. We must perform nodal analysis on the one without the short circuit if we are finding the open circuit voltage, and the one with the short circuit if we are finding the short circuit current.</p>
 <p>Note that if there is a short circuit, the voltage across the terminals is always 0.</p>
 <p>The direction of the voltage source is the same as the direction we used to measure the open circuit voltage.</p>
@@ -466,7 +486,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>This is called an operational amplifier because it performs a mathematical operation on the voltages. In this course we will only deal with linear op-amps.</p>
 <p>A linear op-amp has the equation <span class="math">\(V_O = A(V_p - V_n)\)</span>, and usually has a very large <span class="math">\(A\)</span> (in the order of <span class="math">\(10^5\)</span>) and very small <span class="math">\(V_p - V_n\)</span> (in the order of microvolts).</p>
 <p>Also, <span class="math">\(V_O\)</span> is clamped such that <span class="math">\(V_{cc}- \le V_O \le V_{cc}+\)</span>. The value of <span class="math">\(A\)</span> is called the <strong>gain</strong> or <strong>amplification factor</strong> of the op-amp.</p>
-<p>In an amplifier circuit (inverting or non-inverting), the gain is instead the ratio of the output voltage to the input voltage.</p>
+<p>In an amplifier circuit (inverting or non-inverting), the gain is instead the ratio of the output voltage to the input voltage - <span class="math">\(A = \frac{V_O}{V_S}\)</span>.</p>
 <p>An ideal op-amp has a <span class="math">\(V_O\)</span> to <span class="math">\(V_p - V_n\)</span> graph as a perfect line, suddenly reaching a plateau on the left and right at <span class="math">\(V_{cc}-\)</span> and <span class="math">\(V_{cc}+\)</span>, respectively.</p>
 <p>The ideal op-amp also draws no current, because it should take all of its current from the power supply - there is no current going into <span class="math">\(V_p\)</span> or <span class="math">\(V_n\)</span>.</p>
 <h3 id="solving">Solving</h3>
@@ -488,12 +508,16 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <blockquote>
 <p>Clearly, <span class="math">\(V_p = V_n\)</span> due to negative feedback, and <span class="math">\(i_p = i_n = 0\)</span>.<br />So <span class="math">\(\frac{V_A - V_S}{R_1} + \frac{V_A - V_O}{R_2} = 0\)</span>. Clearly, <span class="math">\(V_A = V_n = V_p = 0\)</span>.<br />So <span class="math">\(\frac{0 - V_S}{R_1} + \frac{0 - V_O}{R_2} = 0\)</span> and <span class="math">\(\frac{V_S}{R_1} = -\frac{V_O}{R_2}\)</span>.<br />So <span class="math">\(V_O = -\frac{R_2}{R_1}V_S\)</span>.<br />So the gain is <span class="math">\(A = -\frac{R_2}{R_1}\)</span>.<br />That means that the only factors affecting the output voltage multiplication factor is the values of the resistors - not the gain of the amplifier itself. If there is no feedback resistor, then the output voltage is <span class="math">\(V_O = A(V_p - V_n)\)</span>. The feedback resistor creates a negative feedback loop and stabilizes the output to a value determined by the resistor values.</p>
 </blockquote>
+<p>For an inverting amplifier, <span class="math">\(V_O = -\frac{R_2}{R_1}V_S\)</span>.</p>
+<p>For a non-inverting amplifier, <span class="math">\(V_O = \left(1 + \frac{R_2}{R_1}\right)V_S\)</span>.</p>
 <h1 id="section-18">11/6/14</h1>
 <p>An op-amp is sometimes drawn without the <span class="math">\(V_{cc}+\)</span> and <span class="math">\(V_{cc}-\)</span> terminals. In this case, we might pretend it has an unlimited voltage supply connected to the supply terminals.</p>
 <p>Op-amps are often used in power supplies, because they can output an exact voltage regardless of the current. For this we can use a <strong>voltage follower</strong> circuit, which outputs a constant voltage without drawing any current from the input:</p>
 <p>;wip: diagram</p>
-<p>This is basically just a non-inverting amplifier</p>
+<p>This is basically just a non-inverting amplifier that has a value of 0 for the feedback resistor.</p>
 <p>A <strong>buffer</strong> is a circuit that isolates its input from its output. All op-amp circuits are buffers, since they isolate current drawn by the output from the inputs <span class="math">\(V_p\)</span> and <span class="math">\(V_n\)</span>.</p>
+<h1 id="section-19">12/6/14</h1>
+<p>Note that for op-amp circuits, the power adsorbed is not the same as the power supplied, because the op-amps have hidden power supplies that supply additional power. When analyzing power, we must always consider the op-amp itself as well.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
