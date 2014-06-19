@@ -625,7 +625,7 @@ int main() {
 }</code></pre>
 <p>The advantage of contructors is that we can associate arbitrary behaviour with the creation of an object. Also, we can use default values for parameters of constructors, or even function overloading on constructors, to allow different ways to initialize the object.</p>
 <h1 id="section-11">12/6/14</h1>
-<p>If no constructor is specified in a class, then there is a default constructor that calls the default constructor for each of the fields, if they exist. Most of the time, this doesn't do anything.</p>
+<p>If no constructor is specified in a class, then there is a default constructor that calls the default constructor for each of the fields, if they exist. Most of the time, this doesn't do anything. This is just a constructor that accepts no arguments.</p>
 <p>So if we define any of our own constructors, the default constructor will no longer exist. To get the same behaviour, we can define a zero-argument constructor.</p>
 <p>If we specify our own constructor for a class, we can no longer use C-style initialization on it - <code>Vec v = {1, 2}</code> will give an error.</p>
 <p>Initializers are not allowed for structure fields - we can't initialize a field directly inside a struct.</p>
@@ -703,8 +703,7 @@ struct Node {
 
 Node::Node (int data, Node *next) : data(data), next(next) {}
 
-Node::Node (const &amp;other) : data(other.data), next(other.next ? new Node(*other.next) : 0);
-In the scope of the class that comes before this scope resolution operator, somebody has implemented a function/method with the name Node</code></pre>
+Node::Node (const &amp;other) : data(other.data), next(other.next ? new Node(*other.next) : 0);</code></pre>
 <p>The <code>a::b</code> is the <strong>scope resolution operator</strong>. It resolves the identifier <code>b</code> in the context of <code>a</code>. For example, if <code>a</code> is a struct, then <code>b</code> would be resolved as a field of <code>a</code>. So <code>Node::Node</code> would let us define functions inside the <code>Node</code> struct, even though we are lexically outside of the struct declaration.</p>
 <p>When we do an assignment <code>a = b</code>, we are actually using the <code>=</code> operator on <code>a</code> and <code>b</code>. This works a lot like the copy constructor, but the <code>operator=</code> is now a method of <code>a</code> rather than an overloaded function. We can use this to provide custom behaviour when someone assigns to an instance of a particular class:</p>
 <pre><code>struct Node {
@@ -715,12 +714,86 @@ In the scope of the class that comes before this scope resolution operator, some
 };
 
 Node &amp;Node::operator=(const Node &amp;other) {
-    delete this.next; // delete the rest of the list to prevent memory leaks
-    this.data = other.data; // set this node to be the new node
-    this.next = other.next ? new Node(*other.next) : 0;
+    delete this-&gt;next; // delete the rest of the list to prevent memory leaks
+    this-&gt;data = other.data; // set this node to be the new node
+    this-&gt;next = other.next ? new Node(*other.next) : 0;
     return *this; // the return value is a pointer to what the new value of the variable is
     // we might also assign `this.next` to a pointer variable and delete it last in case the copying of `other.next` failed for whatever reason
 }</code></pre>
+<h1 id="section-13">19/6/14</h1>
+<p>The copy and swap technique is a way of implementing assignment that uses the copy constructor to simplify assignment</p>
+<pre><code>struct Node {
+    void swap(Node &amp;other) { // this swaps the values of this instance and a specified other instance
+        int *data = this-&gt;data;
+        this-&gt;data = other.data;
+        other.data = data;
+        Node *next = this-&gt;next;
+        this-&gt;next = other.next;
+        other.next = next;
+    }
+    
+    Node &amp;operator=(Node other) {
+        Node t = other; // using the default copy constructor to make a copy of `other`
+        this-&gt;swap(t); // set the fields to the temporary value
+        return *this;
+        // this does not leak memory because `t` is on the stack and the destructor is called when it goes out of scope
+    }
+}</code></pre>
+<p>The rule of 3 states that if we need any one of the copy constructor, desctructor, or <code>operator=</code>, we probably need to write all three.</p>
+<p>Whenever we declare one of the <code>operator+</code> or similar member functions, we get the <code>this</code> parameter inserted implicitly and <code>this</code> acts as the left hand side of the operation. This allows us to implement a lot of different functionality:</p>
+<pre><code>struct Vec {
+    int x, y;
+    Vec operator+(const Vec &amp;o) { return Vec(this-&gt;x + other.x, this-&gt;y + other.y); }
+    Vec operator*(const int k) { return Vec(this-&gt;x * k, this-&gt;y * k); } // this works for expressions of the form `SOME_VEC * SOME_INT`
+}
+
+Vec operator*(const int k, const Vec &amp;v) { // to allow things like `SOME_INT * SOME_VEC`, we must use another function
+    return v * k; // this calls the member function
+}</code></pre>
+<p>Most operators can be implemented as either standalone functions (like the second <code>operator*</code> in the above example), or as member functions (like <code>operator+</code> in the above example).</p>
+<p>Some operators can only be implemented as methods: <code>operator=</code> (assignment), <code>operator[]</code> (subscripting), <code>operator-&gt;</code> (dereferencing field reference), <code>operator()</code> (function call), <code>operator T()</code> (<code>T</code> is a type, and defines implicit conversion, like <code>operator void*</code> allows us to implicitly convert the object to a void pointer). <code>operator=</code> must be a member function because there is already a default <code>operator=</code> member function, so we must override the member function itself.</p>
+<p>The following code results in a compilation error:</p>
+<pre><code>struct Vec {
+    int x, y;
+    Vec(const int x, const int y): x(x), y(y) {}
+}
+
+int main() {
+    Vec v[3]; // this is an error because we didn&#39;t initialize the vectors in `v`
+    Vec v[3] = {Vec(0, 1), Vec(1, 2), Vec(2, 3)}; // this is correct
+    Vec *w = new Vec[5]; // we cannot use the above technique because it is on the stack
+    // we could implement a default constructor in `Vec`, or we could just deal with pointers to objects instead
+    Vec **w = new Vec *[10];
+}</code></pre>
+<p>Suppose we have a constant argument: <code>void f(const Student &amp;s) { BODY }</code>. Inside of <code>BODY</code>, we cannot modify the fields of <code>s</code> or assign a new value to it. Additionally, we cannot call any methods on <code>s</code> unless those methods specify that they do not modify fields too.</p>
+<p>We can specify that a method will not change its instance by using <code>const</code>: <code>float Student::grade const () { BODY }</code>. If specified, the compiler checks that the method does no modify fields, and if it doesn't, we can call the methods when their instances are constant, in addition to when their instances are not.</p>
+<p>We can also define that a field is exempt from the compiler checking for fields being modified in a <code>const</code> object. If we define a field like <code>mutable int x;</code>, then we can actually change it even when its instance is constant.</p>
+<p>A <strong>static field</strong> is a field of a class rather than a method of an instance of a class. So all instances of the class would share the same static field, so modifying it would change its value for all instances. For example:</p>
+<pre><code>struct Vec {
+    static std::string __doc__; // static field
+    int assignment_grade, midterm_grade, final_grade;
+    
+    static something() { // static method
+        // we can access static fields or call other static methods here, but not instance fields or methods
+    }
+}
+
+std::string Vec::__doc__ = &quot;Information about this class&quot;; // we still cannot define values in the declaration of a structure</code></pre>
+<p>A static method does not depend on instances, so it has no <code>this</code> parameter. The difference between a function and a method is that a method has a <code>this</code> parameter. Since a static method is not, it is technically a static member function rather than a method.</p>
+<p>Inside a function, <code>static</code> in a variable declaration means that the variable keeps its value in between function calls, like a global variable that can only be accessed within the function.</p>
+<h2 id="design-patterns">Design Patterns</h2>
+<p>Design patterns are commonly occurring patterns of problems and good solutions to these problems in object oriented programming.</p>
+<h3 id="singleton-pattern">Singleton pattern</h3>
+<p>Problem: we have a class <code>c</code>, and we want only one instance of <code>c</code> to ever be created no matter how many times we attempt to create an instance.</p>
+<p>We can do this by declaring a static field of <code>c</code> as a flag, and in the constructor, setting the flag to prevent future instances from being created:</p>
+<pre><code>struct Student {
+    static Student *instance = NULL;
+    Student() {
+        //wip
+    }
+}
+
+bool Student::created = false;</code></pre>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
