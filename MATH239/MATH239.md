@@ -868,6 +868,8 @@ Two graphs $G_1, G_2$ are **isomorphic** if and only if there is a bijection $f:
 
 In other words, two graphs are isomorphic if they have the **same structure** - if they have every vertex correspend to each other, and the edges in one graph connect the corresponding vertices in the other graph.
 
+Two graphs can have multiple possible isomorphisms, or none at all, in which case they are not isomorphic.
+
 Basically, a graph $G_2$ that is isomorphic to a graph $G_1$ can be created from $G_1$ by replacing its vertices with vertices in $G_2$.
 
 The isomorphism preserves the edge structure, so edges are mapped to edges, and non-edges are mapped to non-edges.
@@ -876,7 +878,7 @@ We can detect isomorphism informally by moving the vertices around until the two
 
 Checking if two graphs are isomorphic can be done in polynomial time, using recently developed algorithms.
 
-To prove two graphs are isomorphic, we find the isomorphism. To prove two graphs are not isoomorphic, we find a structure in one graph that is not in the other.
+To prove two graphs are isomorphic, we find an isomorphism. To prove two graphs are not isomorphic, we find a structure in one graph that is not in the other.
 
 The degree of a vertex $u$ in $G$ is the number of edges incident with it. The degree of a vertex is $\deg_G(v) = \abs{\set{e \in E(G) \middle| v \in e}}$.
 
@@ -944,6 +946,8 @@ Let $u, w$ be vertices of a graph $G$.
 
 Given vertices $u, w$, a $u, w$ **walk** is a sequence of alternating vertices and edges $u, e_1, v_1, e_2, v_2, \ldots, e_{k - 1}, v_{k - 1}, e_k, w$, where $v_1, \ldots, v_k$ are vertices and $e_i, 1 \le i \le k$ is the edge $\set{v_{i - 1}, v_i}$. The length of this walk is $k$ - the number of edges in the walk.
 
+This is also written $u = v_0, e_1, v_1, e_2, v_2, \ldots, e_{k - 1}, v_{k - 1}, e_k, v_k = w$ or just $v_0, v_1, \ldots, v_{k - 1}, v_k$.
+
 The walk is **closed** if $u = v$ - if it begins the same place it ends. There can also be duplicated vertices or edges.
 
 Since we only deal with simple graphs in this course, it is possible to represent a walk just by its vertices. So a walk of a 3-cube might be written as $000, 001, 000, 100, 101$.
@@ -953,3 +957,110 @@ A walk of length 0 just contains one vertex. For example, $000$ is a zero-length
 A $u, w$ **path** is a walk with no repeated vertices or edges. As a result, a path cannot be closed. All $u, w$ paths are $u, w$ walks.
 
 All walks can be converted into paths. If we can get somewhere by repeating vertices, then we can also just not repeat those vertices and get to the same place.
+
+# 20/6/14
+
+Prove that if there exists a $u, v$ walk, then there must also exist a $u, v$ path:
+
+> Let $u, w_1, \ldots, w_{k - 1}, v$ be a $u, v$ walk of shortest length.  
+> If there are no repeated vertices, then it is a $u, v$ path.  
+> Otherwise, let $v_i$ be the first instance of the first repeated vertex, so $\exists j > i, v_j = v_i$.  
+> Then $u, v_1, \ldots, w_i, w_{j + 1}, \ldots, v$ is a walk as well.  
+> However, this is shorter than the original walk, which is the shortest possible walk, which is a contradiction.  
+> Therefore, the shortest $u, w$ walk cannot have any repeated vertices, and it is a path.  
+> Therefore, one of the $$
+
+$u \sim v$ is an equivalence relation. In graph theory, $u \sim v$ if and only if there exists a $u, v$ path.
+
+If $u \sim v$ and $v \sim w$, then $u \sim w$ - $\sim$ is transitive. This is because a $u, v$ path followed by a $v, w$ path is a $u, w$ walk, so by the previous theorem there must be a $u, w$ path.
+
+$\sim$ is reflexive - $u \sim u$ is true for any vertex $u$. $\sim$ is also symmetric $u \sim v$ implies that $v \sim u$.
+
+We can then partition $V(G)$ into equivalence classes (groups of vertices such that for every vertex $u$ and every vertex $v$, $u \sim v$). These partitions are called **components** and are basically islands of vertices where every vertex is connected to the group by at least one edge.
+
+A **cycle** is a non-trivial closed walk with no repeated vertices and edges. Nontrivial means it has two or more vertices in the walk.
+
+A cycle must have a length of 3 or more, because it is impossible to construct a cycle with 1 vertex (which is trivial) or 2 (which would repeat vertices). The degree of the vertices in a cycle must be at least 2.
+
+Prove that if every vertex in $G$ has a degree of 2 or more, then $G$ must have a cycle:
+
+> This is because if we go into a vertex, there must be a way out of the vertex, so eventually we must hit a repeated vertex.  
+> Let $v_0, \ldots, v_k$ be the longest path in $G$. Assume every vertex in $G$ has a degree of 2 or more.  
+> Clearly, $v_k$ has neighbor $v_{k - 1}$, and it has a degree of 2 or more, so it must have at least one other neighbor $u$.  
+> Clearly, if $u$ is not one of $v_0, \ldots, v_k$, then $v_0, \ldots, v_k, u$ is a longer path, a contradiction.  
+> So $u$ must be one of $v_0, \ldots, v_k$. Since $u$ cannot be $v_k$ or $v_{k - 1}$ (because $v_{k - 1}$ is already another neighbor), $u$ is in $\set{v_0, \ldots, v_{k - 2}}$.  
+> So there exists some $i$ such that $v_i = u$, and $v_i, \ldots, v_k$ is a cycle.  
+
+A **Hamilton cycle** is a cycle that contains every vertex in the graph. Finding a Hamilton cycle for an arbitrary graph, or even if it exists, is an NP-complete problem. This is because it can be reduced to the travelling salesman problem.
+
+All complete graphs have Hamiltonian cycles. ;wip: prove it
+
+If $G$ is a graph with $\abs{V(G)} \ge 3$, and every vertex in $G$ has a degree of $\frac{n}{2}$ or more, then $G$ has a Hamilton cycle. The converse is not necessarily true.
+
+# 23/6/14
+
+;wip: pidgeonhole principle
+
+Proof:
+
+> Let $G$ be a graph with $\abs{V(G)} \ge 3$ where every vertex in $G$ has a degree of $\frac{n}{2}$ or more.  
+> Suppose $G$ has no Hamilton cycle. Then there must be a set of counterexamples $S_n$ with $n$ vertices for some $n$.  
+> Let $G \in S_n$ be the graph with the largest number of edges - the largest possible counterexample with $n$ vertices.  
+> Clearly, $G$ cannot be complete because $G$ would have a Hamilton cycle if it was.  
+> Since it is not complete, there exist $u, v \in V(G)$ such that $\set{u, v} \notin E(G)$ - there exists a pair of vertices that are not adjacent.  
+> So if we added the edge $\set{u, v}$ to $G$ to get $G'$, $G'$ has more edges than the largest counterexample, so it is not a counterexample and must have a Hamilton cycle.  
+> This Hamilton cycle in $G'$ must use $\set{u, v}$, so there must be a $\set{u, v}$ path $P = v_1, \ldots, v_n, v_1 = u, v_n = v$ in $G$ that contains all the vertices in $G$, made by removing $\set{u, v}$ from the Hamilton cycle in $G'$.  
+> Let $S = \set{i - 1 \middle| \set{v_1, v_i} \in E(G)}, S = \set{i \middle| \set{v_i, v_n} \in E(G)}$ - the indices of the neighbors of $v_1$ and $v_n$, respectively.  
+> Since all vertices have degree of at least $\frac n 2$, $\abs{S} \ge \frac n 2, \abs{T} \ge \frac n 2$.  
+> Since $S, T \subseteq [n - 1]$ (since $v_1$ cannot be connected to $v_n$), by the Pidgeonhole principle, there is some $i$ for which $i \in S \cap T$.  
+> So $\set{v_1, v_{i + 1}}, \set{v_i, v_n} \in E(G)$. So $v_1, v_{i + 1}, \ldots, v_n, v_i, \ldots, v_1$ is a Hamiltonian cycle.  
+> This is a contradiction because $G$ has no Hamilton cycle. So $G$ has a Hamilton cycle.  
+
+A graph $G$ is **connected** if there is a $u, v$ path for every pair of vertices $u, v \in V(G)$. This means that given any two vertices in the graph, it is possible to construct a path between them.
+
+A disconnected graph is the opposite. A disconnected graph has groups of vertices that have no edges between them.
+
+If there are $n$ vertices, there are $\frac{n(n - 1)}{2}$ possible pairs of vertices. However, we can save a lot of time by checking fewer pairs.
+
+If there exists a vertex $u \in V(G)$ such that a $u, v$ path exists for all $v \in V(G)$, then $G$ is connected. The converse is also true but is trivially proven.
+
+Proof:
+
+> Assume $u \in V(G)$ exists such that a $u, v$ path exists for all $v \in V(G)$. Let $y, z \in V(G)$.  
+> So a $u, y$ path and a $u, z$ path exists, so if we join them together, we have a $y, z$ walk.  
+> Since there is a $y, z$ walk, there is a $y, z$ path.  
+> Since $y, z$ are arbitrary and a $y, z$ path exists, $G$ is connected.  
+
+We prove a graph is connected by showing that there is a path between one particular vertex and every other vertex, possibly by constructing the path. We prove a graph by constructing a set $X \subset V(G), X \ne \emptyset$ that induces an empty cut.
+
+For example, the $n$-cube is connected because for any $u, v$, a $u, v$ path exists where we flip the bits of $u$ that differ from $v$ one by one to match $v$. For example, a path between $0000000$ and $1001100$ would be $0000000, 1000000, 1001000, 1001100$.
+
+# 25/6/14
+
+A subgraph of a graph $G$ is a graph $H$ such that $V(H) \subseteq V(G)$ and $E(H) = \set{\set{u, v} \in E(G) \middle| u, v \in V(G)}$. In other words, a graph with a subset of the vertices and the same edges between these vertices as $G$.
+
+A **component** of a graph $G$ is a maximally connected non-empty subgraph of $G$. In other words, each island of connected vertices in a graph is a component. A component must be the largest possible network of vertices that are all connected.
+
+Clearly, a connected graph must have exactly 1 component (unless it is empty, which has 0 components). Therefore, a disconnected graph has 2 or more components.
+
+If $G$ is a graph and $X \subseteq V(G)$, then the **cut induced by $X$** is the set of all edges in $G$ with exactly one end in $X$ - $\set{\set{u, v} \in E(G) \middle| u \in X \wedge v \notin X}$. It is basically the set of all edges that bridge the vertices in $X$ with everything else it is connected to.
+
+For a connected graph, if $X \subset V(G), X \ne \emptyset$, then the cut induced by $X$ is non-empty. This is because $X$ doesn't contain all the vertices, and it must be connected to the other vertices in some way.
+
+If a graph is not connected, then there exists a set $X \subseteq V(G), X \ne \emptyset$ that induces an empty cut. For example, the components of a disconnected graph always induce empty cuts.
+
+Therefore, a graph is not connected if and only if there exists $X \subset V(G), X \ne \emptyset$ such that $X$ induces an empty cut.
+
+Proof:
+
+> Assume $G$ is a disconnected graph. Then $G$ contains two or more components. Let $H$ be one of these components.  
+> Since $H$ is a component, $V(H) \ne \emptyset$ and $V(H) \subset V(G)$ (since there is another component in $G$).  
+> Suppose the cut induced by $V(H)$ is non-empty. Then there is an edge $\set{u, v}$ such that $u \in V(H)$ but $v \notin V(H)$.  
+> So $\set{v} \cup V(H)$ is still connected, which is a contradiction since $H$ is maximally connected. So $V(H)$ induces an empty cut.  
+> Assume there exists $X \subset V(G), X \ne \emptyset$ such that $X$ induces an empty cut.  
+> Suppose $G$ is connected. Then there exists $u, v \in V(G)$ such that $u \in X \wedge v \notin X$. Since $G$ is connected, there exists a $u, v$ path.  
+> Let $u, v_1, \ldots, v_k, v$ be the shortest path from $u$ to $v$. Let $i$ be the smallest value such that $v_i \notin X$.  
+> Then $v_{i - 1} \in X$ and $\set{v_{i - 1}, v_i}$ is in the cut, which is a contradiction since the cut is empty. So $G$ is not connected.  
+> So $G$ is not connected if and only if there exists $X \subset V(G), X \ne \emptyset$ such that $X$ induces an empty cut.  
+
+A cut is drawn as a line through the edges in the cut. If it is empty, the line is drawn separating the inducing set and the rest of the graph.

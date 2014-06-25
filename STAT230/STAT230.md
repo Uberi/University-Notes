@@ -716,3 +716,84 @@ Given a random variable $X$ such that $f_X(x) = \frac 1 3$ and $x = -1, 0, 1$, a
 > So the expected value of $X^2$ is $\frac 2 3$.  
 
 Also, $E[a_1 \cdot g_1(X) + \ldots + a_n \cdot g_n(X)] = a_1 \cdot E(g_1(x)) + \ldots + a_n \cdot E(g_n(x))$, so the expected value operator is a linear. If $g(x)$ is a linear function (of the form $aX + b$), then $E(g(x)) = g(E(X))$.
+
+$E(k) = k$ for any constant $k$.
+
+# 20/6/14
+
+Let $D$ be the event of a random person having a disease. Let $A, B, C$ represent three disease tests giving a positive result. Test $A$ costs \$5, $B$ costs \$8, and $C$ costs \$40. We know that $P(D) = 0.001, P(A \mid \overline D) = 0.05, P(B \mid \overline D) = 0.03, P(C \mid \overline D) = 0$ - tests $A$ and $B$ can result in false positives, but never false negatives. We want to test a large number of people for $D$ with 100% accuracy:
+
+> Assume the tests are independent.  
+> Clearly, we will choose between three strategies: $A$ and then $C$ if $A$ is positive, $B$ and then $C$ if $B$ is positive, and just $C$. Every strategy must end with $C$ because it is necessary to make sure a person has $D$.  
+> We will first consider the first strategy. Clearly, $P(A) = P(A \cap D) + P(A \cap \overline D) = P(D) P(A \mid D) $
+;wip: strategy 1: \$7.04, 2: \$9.24, \$40
+
+### Means/Variances of Distributions
+
+Recall that given $g(x)$, $E(g(X)) = \sum_{i = 1}^k g(x_i) f_X(x_i)$.
+
+We want to find $E(X)$ where $X$ follows various probability distributions.
+
+Find the mean of $X$ given $X \sim \operatorname{Bin}(n, p)$:
+
+> Clearly, the mean is $E(X) = \sum_{x = 0}^n x \cdot \left({n \choose x}p^x(1 - p)^{n - x}\right)
+= \sum_{x = 1}^n x \frac{n!}{x!(n - x)!} p^x(1 - p)^{n - x}
+= n\sum_{x = 1}^n \frac{(n - 1)!}{(x - 1)!((n - 1) - (x - 1))!} p^x(1 - p)^{n - x}
+= np\sum_{x = 1}^n {n - 1 \choose x - 1}p^{x - 1}(1 - p)^{(n - 1) - (x - 1)}$.  
+> Let $y = x - 1$ and $m = n - 1$. Then $E(X) = np\sum_{y = 0}^{n - 1} {n - 1 \choose y}p^y(1 - p)^{(n - 1) - y} = np(1 - p)^m\sum_{y = 0}^m {m \choose y}\left(\frac{p}{1 - p}\right)^y = np(1 - p)^m\left(1 + \frac{p}{1 - p}\right)^m = np(1 - p)^m\left(\frac{1}{1 - p}\right)^m = np$.  
+
+So the mean of a binomial distribution is $np$.
+
+Find the mean of $X$ given $X \sim \operatorname{Poisson}(\mu)$:
+
+> Clearly, the mean is $E(x) = \sum_{x = 0}^\infty x \left(\frac{e^{-\mu}\mu^x}{x!}\right) = \mu e^{-\mu}\sum_{x = 1}^\infty \frac{\mu^{x - 1}}{(x - 1)!} = \mu e^{-\mu}\sum_{x = 0}^\infty \frac{\mu^x}{x!} = \mu e^{-\mu}e^x = \mu$.  
+
+So the mean of a Poisson distribution is $\mu$.
+
+The expected value is useful for summarizing the values we can expect, but it is often also important to know how much these values will deviate from this average value. Variability is a measurement of this difference.
+
+The **variance** of a random variable $X$ is defined as $\sigma^2 = \operatorname{Var}(X) = E((X - \mu)^2)$. In other words, it is the average square of the distance from the mean.
+
+$\sigma$ is the **standard deviation**, and is always the positive square root of the variance. This is useful because the variance has its units squared, so this takes the square root to get the original units of the random variable.
+
+# 23/6/14
+
+Also, $\operatorname{Var}(X) = E(X^2 - 2\mu + \mu^2) = E(X^2) - 2\mu \mu + \mu^2 = E(X^2) - \mu^2 = E(X^2) - E(X)^2$.
+
+When we have factorials, the form $\operatorname{Var}(X) = E(X(X - 1) + X) - \mu^2 = E(X(X - 1)) + E(X) - \mu^2 = E(X(X - 1)) + \mu - \mu^2$ form is often useful.
+
+Find the variance of the binomial distribution:
+
+> Assume $X \sim \operatorname{Bin}(n, p)$. Then $f_X(x) = {n \choose x}p^x(1 - p)^{n - x} = \frac{n!}{x!(n - x)!}p^x(1 - p)^{n - x}$.  
+> So $\operatorname{Var}(X) = E(X(X - 1)) + np - (np)^2 = \sum_{x = 2}^n x(x - 1) \frac{n!}{x!(n - x)!}p^x(1 - p)^{n - x} + np - n^p^2
+= p^n\sum_{x = 2}^n \frac{n!}{(x - 2)!(n - x)!}\left(\frac p {1 - p}\right)^x + np - n^p^2$.  
+> ;wip: np(1 - p)
+
+In the same way, the variance of the Poisson distribution is $\mu$.
+
+In summary, the binomial distribution has mean $np$ and variance $np(1 - p)$, and the Poisson distribution has mean $\mu$ and variance $\mu$.
+
+If $a, b \in \mb{R}$ and $Y = aX + B$, then $E(Y) = aE(X) + b$ and $\operatorname{Var}(Y) = a^2\operatorname{Var}(X)$. The variance of a constant is always 0, since a constant never changes, by definition.
+
+# 25/6/14
+
+Multivariate Distributions
+--------------------------
+
+Some experiments have multiple random variables associated with them. For example, the body mass index is dependent on the height and weight of an individual.
+
+The **joint probability function** of $X_1, \ldots, X_n$ is $f_{X_1, \ldots, X_n}(x_1, \ldots, x_n) = P(X_1 = x_1, \ldots, X_n = x_n)$.
+
+It is always true that $0 \le f_{X_1, \ldots, X_n}(x_1, \ldots, x_n) \le 1$ and $\sum_{\text{all } x_1} \ldots \sum_{\text{all } x_n} f_{X_1, \ldots, X_n}(x_1, \ldots, x_n) = 1$.
+
+If we have $f_{X, Y, Z}(x, y, z) = P(X = x, Y = y, Z = z)$, we can isolate $P(X = x)$ or $P(Y = y)$ or even $P(X = x, Z = z)$. Clearly, $f_Y(y) = \sum_{\text{all } x} f_{X, Y}(x, y)$. This can be generalized to any number of variables.
+
+A **marginal distribution** of $X_1, \ldots, X_n$ is $f_{A_1, \ldots, A_k}(a_1, \ldots, a_k) = \sum_{\text{all } b_1} \ldots \sum_{\text{all } b_{n - k}} f_{X_1, \ldots, X_n}(x_1, \ldots, x_n)$ where $\set{A_1, \ldots, A_k} \subseteq \set{X_1, \ldots, X_n}$ and $\set{B_1, \ldots, B_{n - k}} = \set{X_1, \ldots, X_n} \setminus \set{A_1, \ldots, A_k}$.
+
+Basically, a marginal distribution of a set of random variables is the probability function if some variables of the probability function are added up to remove their effect from the resulting function. We can prove this using the partition rule.
+
+Recall that two events $A, B$ are independent if and only if $P(A \cap B) = P(A)P(B)$. Two random variables $X, Y$ are **independent** if and only if $f_{X, Y}(x, y) = f_X(x)f_Y(y)$ for all $x$ and $y$. For more random variables, there are also similar definitions for pairwise and mutual independence.
+
+Recall that given two events $A, B$, $P(A \mid B) = \frac{P(A \cap B)}{P(B)}$. For two random variables $X, Y$, $f_X(x \mid y) = \frac{f_{X, Y}(x, y)}{f_Y(y)}$. This is defined over all $x$ with a fixed $y$.
+
+;wip

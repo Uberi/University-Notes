@@ -679,3 +679,40 @@ A **buffer** is a circuit that isolates its input from its output. All op-amp ci
 # 12/6/14
 
 Note that for op-amp circuits, the power adsorbed is not the same as the power supplied, because the op-amps have hidden power supplies that supply additional power. When analyzing power, we must always consider the op-amp itself as well.
+
+# 24/6/14
+
+Capacitance/Inductance
+----------------------
+
+So far, the only passive elements in our circuits is the resistor.
+
+A capacitor is another passive circuit element that stores energy. A capacitor is a two-terminal device that is made of two conductive plates stacked close together, separated by a layer of insulating material, called the dialectric.
+
+When charge enters one end of a capacitor, it stops at the dialectric. However, the charges have an electric field, which extends over to the other plate. This repels charges in the other plate, pushing charge out of the other end of the capacitor.
+
+Putting charge into a capacitor is called **charging** a capacitor. After one end of a capacitor is fully charged, the capacitor is **charged**, and nothing happens if we try to put in more charge.
+
+Capacitors have capacitance ($C$), which is the ability to store electric charge. Capacitance is measured in Farads (F), which is a huge unit, so we often use micro or nano or picoFarads.
+
+A 1 F capacitor is one with capacitance such that when charged with 1 Coulomb, has 1 V across the terminals. Capacitance is determined by $C = \frac{\epsilon d}{A}$, where $\epsilon$ is the permeability of the dialectric (a physical constant), $d$ is the distance between the plates (meters) and $A$ is the surface area of both plates.
+
+Capacitance is governed by $q(t) = C V(t)$. Taking the derivative, we get $I(t) = C \frac{\dee V(t)}{\dee t}$, where $I(t) is the current flowing through the capacitor and $V(t)$ is the voltage across the capacitor terminals. So if the voltage stops changing, there is no current and the capacitor acts like an open circuit.
+
+Since $C = \frac{I(t)}{\frac{\dee V(t)}{\dee t}}$, the voltage can never change instantaneously. The capacitor will take a certain amount of time to charge up, even if the voltage source tries to change instantaneously.
+
+This can also be written as $V(t) = \frac 1 C \int I_C(t) \dee t + V_C(0)$. The $V_C(0)$ term is the **initial condition** for the voltage - the voltage we started off with.
+
+So if a voltage source is connected to a $20 \mu F$ capacitor and increasing at $3 V/ms$, there is $I = 20 \mu F \times 3 V/ms = 60 mA$.
+
+The power in a capacitor is $p(t) = v(t) I(t) = C v(t)\frac{\dee v(t)}{\dee t}$. So the energy in a capacitor is $w(t) = \int_0^t C V(t)\frac{\dee V(t)}{\dee t} \dee t = C \int V(t) \dee V(t) = \frac 1 2 C V(t)^2$, until the capacitor is fully charged (when the voltage becomes constant at some $t$).
+
+# 25/6/14
+
+Given capacitors connected in series with capacitances $C_1, \ldots, C_n$, it is possible to replace all of them with an **equivalent series capacitance** $\frac 1 {C_{eq}} = \frac 1 {C_1} + \ldots + \frac 1 {C_n}$. This is similar to the formula for equivalent resistance for resistors in parallel.
+
+Given capacitors connected in parallel with capacitances $C_1, \ldots, C_n$, it is possible to replace all of them with an **equivalent parallel capacitance** $C_{eq} = C_1 + \ldots + C_n$. This is similar to the formula for equivalent resistance for resistors in series.
+
+The DC steady state of the capacitor is very important for analyzing circuits. The DC steady state is when $I(t) = 0 = \frac{\dee V(t)}{\dee t}$.
+
+When analyzing circuits at DC steady state, we know that the capacitors are not affecting the voltage, and the currents flowing through them are 0 A, so we can actually treat them as an open circuit - they can simply be removed from the circuit.

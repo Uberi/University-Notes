@@ -673,9 +673,55 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>Let <span class="math">\(S_1 \cup \ldots \cup S_n \cup \ldots\)</span> be a union of countably many countable sets.<br />Let <span class="math">\(S_i = \set{a_{i, 1}, \ldots, a_{i, m}, \ldots}\)</span>.<br />Then <span class="math">\(S_1 \cup \ldots \cup S_n \cup \ldots = \set{a_{1, 1}, a_{1, 2}, a_{2, 1}, a_{1, 3}, a_{2, 2}, a_{3, 1}, a_{1, 4}, a_{2, 3}, a_{3, 2}, a_{4, 1}, \ldots}\)</span> - ordered increasing by <span class="math">\(n + m\)</span> and then by <span class="math">\(n\)</span>.<br />Let <span class="math">\(f: S_1 \cup \ldots \cup S_n \cup \ldots \to \mb{N}\)</span> be defined as <span class="math">\(f(a_{n, m}) = \frac 1 2 (n + m - 1)(n + m - 2) + n = \frac 1 2 (n + m - 1)(n + m - 2) + n = n^2 + m^2 + 2nm - 3n - 3m + 2\)</span>.<br />This is called the diagonalization argument. It can also be used to prove that rational numbers are countable (by making <span class="math">\(n, m\)</span> the numerator and denominator) and similar things.</p>
 </blockquote>
 <p>The Cartesian product of a finite amount of countable sets is also a countable set. Also, the set of finite sets all containing only elements in a particular countable set is countable.</p>
+<p>Predicate/first order logic is an extension of propositional logic that adds constructs to help deal with individuals/objects in a set. While propositional logic makes us list out all the objects we are using, predicate logic gives additional tools to deal things like some objects, all objects, or more.</p>
+<p>For example, &quot;Every student is younger than some instructor&quot; could be represented in propositional logic by writing <span class="math">\((s_1 &lt; i_1 \vee \ldots \vee s_1 &lt; i_n) \wedge \ldots \wedge (s_m &lt; i_1 \vee \ldots \vee s_m &lt; i_n)\)</span> where <span class="math">\(s_1, \ldots, s_m\)</span> are the student ages and <span class="math">\(i_1, \ldots, i_n\)</span> are the instructor ages.</p>
+<p>Predicate logic makes it much easier to express this: <span class="math">\(\forall s \in S, \exists i \in I, s &lt; i\)</span>, where <span class="math">\(S\)</span> is the set of all students and <span class="math">\(I\)</span> is the set of all instructors.</p>
+<h3 id="syntax">Syntax</h3>
+<p>The language of predicate logic is called <span class="math">\(\mathfrak{L}\)</span>.</p>
+<p>Formulas in predicate logic is made up of several components:</p>
+<ul>
+<li>Domain of objects - sets containing any number of objects.</li>
+<li>Variables (VS) - particular objects, but not necessarily a specific one.
+<ul>
+<li>Lowercase to distinguish them from predicates.</li>
+</ul></li>
+<li>Designated objects/constants (CS) - specific objects such as a particular number or a matrix.</li>
+<li>Functions such as <span class="math">\(+\)</span>, <span class="math">\(-\)</span>, <span class="math">\(f\)</span>, and <span class="math">\(g\)</span>.</li>
+<li>Relations such as <span class="math">\(=\)</span> and <span class="math">\(&gt;\)</span>.</li>
+<li>Quantifiers such as <span class="math">\(\forall\)</span> and <span class="math">\(\exists\)</span>.
+<ul>
+<li>They have the form <span class="math">\(\forall x. P(\ldots)\)</span> or <span class="math">\(\exists x. P(\ldots)\)</span>.</li>
+</ul></li>
+<li>Propositional connectives.</li>
+</ul>
+<h1 id="section-12">23/6/14</h1>
+<p>Write &quot;Every child is younger than its mother&quot; using predicate logic:</p>
+<blockquote>
+<p>Let <span class="math">\(C(x)\)</span> represent <span class="math">\(x\)</span> being a child. Let <span class="math">\(M(x)\)</span> represent the mother of <span class="math">\(x\)</span>. Let <span class="math">\(Y(x, y)\)</span> represent <span class="math">\(x\)</span> being younger than <span class="math">\(y\)</span>.<br />Then <span class="math">\(\forall x. C(x) \rightarrow Y(x, M(x))\)</span>.</p>
+</blockquote>
+<p><span class="math">\(\forall x. \forall y. \operatorname{plus}(x, y) = \operatorname{plus}(y, x)\)</span> - addition is commutative.</p>
+<p><span class="math">\(\forall x. \neg \operatorname{equal}(0, \operatorname{succ}(x))\)</span> - 0 is not the successor of any non-negative integer.</p>
+<p>Well formed formulas in <span class="math">\(\mathfrak{L}\)</span> can be defined as follows:</p>
+<ul>
+<li><span class="math">\(\operatorname{Term}(\mathfrak{L})\)</span> is the set of all constants and variables (terms), and functions over terms.
+<ul>
+<li>For example, <span class="math">\(f(g(a, b), c) \in \operatorname{Term}(\mathfrak{L})\)</span>.</li>
+<li>We basically need to pass the right number of parameters to every function.</li>
+</ul></li>
+<li><span class="math">\(\operatorname{Atom}(\mathfrak{L})\)</span> is the set of all predicates over terms - the set of all <span class="math">\(P(t_1, \ldots, t_n), t_1, \ldots, t_n \in \operatorname{Term}(\mathfrak{L})\)</span> where <span class="math">\(P\)</span> is an <span class="math">\(n\)</span>-ary predicate.
+<ul>
+<li>For example, <span class="math">\(\operatorname{equal}(\operatorname{plus}(x, 2), \operatorname(\operatorname{plus}(x, 1), 1))\)</span>.</li>
+</ul></li>
+<li><span class="math">\(\operatorname{Form}(\mathfrak{L}) = \operatorname{Atom}(\mathfrak{L}) \cup \set{(\neg \phi), (\phi \wedge \psi), (\phi \vee \psi), (\phi \rightarrow \psi), (\phi \leftrightarrow \psi)} \cup \set{\forall x. \phi, \exists x, \phi}\)</span> where <span class="math">\(\phi, \psi \in \operatorname{Form}(\mathfrak{L})\)</span> - the set of all atoms combined with the set of operations over other formulas.
+<ul>
+<li>For example, <span class="math">\(\neg \operatorname{equal}(1, 2) \in \operatorname{Form}(\mathfrak{L})\)</span>.</li>
+<li>For example, <span class="math">\(\forall x, \operatorname{equal}(x, x) \in \operatorname{Form}(\mathfrak{L})\)</span>.</li>
+</ul></li>
+</ul>
+<p>We can also draw parse trees for formulas. Here, the leaves are terms and the other nodes are either connectives or predicates or quantifiers.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">University-Notes</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Uberi/University-Notes" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 <script type="text/javascript">
 MathJax.Hub.Config({
   jax: ["input/TeX","output/HTML-CSS"],

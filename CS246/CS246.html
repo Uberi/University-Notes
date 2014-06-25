@@ -217,6 +217,7 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p>It is also possible to send the output of a program as a parameter to another program, using the backquotes/backticks notation. For example, <code>echo &quot;Today is \</code>date` and I am `whoami`&quot;<code>might display something like</code>Today is Tue May 13 08:50:24 EDT 2014 and I am Anthony`.</p>
 <p>The shell will first evaluate the command in the backquotes, substitute its output for it, and then execute the original command. This works even if the parameter is inside quotes, as in the example above. An alternative syntax is <code>$(COMMAND)</code> instead of <code>\</code>COMMAND``, which is slightly easier to read. This is often used to format strings.</p>
 <p>We now want to search inside text files. For this we can use <code>grep PATTERN FILE</code> or <code>egrep PATTERN FILE</code> (recommended, equivalent to <code>grep -E</code>). This prints out every line in <code>FILE</code> that contains <code>PATTERN</code>. Here, <code>PATTERN</code> is an extended regular expression. If <code>FILE</code> is not specified, input is taken from the standard input.</p>
+<p>Also, <code>alias something=something_else</code> aliases <code>something</code> to <code>something_else</code>. So for the rest of the session, when we type <code>something</code> as a command, it runs <code>something_else</code> instead.</p>
 <h3 id="regular-expressions">Regular Expressions</h3>
 <p>Regular expressions are concise ways to express a set of strings, which may possibly be arbitrarily large. For example, <code>a?b?c?</code> denotes the set containing the strings &quot;&quot;, &quot;c&quot;, &quot;b&quot;, &quot;bc&quot;, &quot;a&quot;, &quot;ac&quot;, &quot;ab&quot;, and &quot;abc&quot;.</p>
 <p>Regular expressions consist of characters and operators. Characters like &quot;e&quot; and &quot;5&quot; simply denote themselves in the set. Operators like <code>*</code> modify strings with operations like &quot;zero or more of the preceding&quot;.</p>
@@ -271,7 +272,7 @@ pwd</code></pre>
 <p>A shell script must have execute permissions to be run. This can be done using something like <code>chmod a+x script</code></p>
 <p>Shell scripts can read command line arguments using the special shell variables <code>$1</code>, <code>$2</code>, and etc., where <code>$0</code> contains the command line itself, &quot;script&quot;.</p>
 <p>For example, a shell script that checks if a word is in a dictionary can be written with a hashbang and <code>egrep &quot;^$1$&quot; /usr/share/dict/words</code>.</p>
-<p><code>/dev/null</code> is a file that can be written to, but simply discards whatever is written. Redirecting output to <code>/dev/null</code> means we are discarding the output.</p>
+<p><code>/dev/0</code> is a file that can be written to, but simply discards whatever is written. Redirecting output to <code>/dev/0</code> means we are discarding the output.</p>
 <p>If we want to check something like whether <code>egrep</code> matched something, we can use the exit code. The <strong>exit code</strong> is the value that we returned from the <code>main</code> function in C programs.</p>
 <p>By convention, 0 indicates success, and a non-zero value indicates some sort of failure. In Bash, the last exit code given by a program is stored in the special shell variable <code>$?</code>.</p>
 <p>In the above example, <code>egrep</code> gives exit code 1 if no matches were found and 0 otherwise:</p>
@@ -453,8 +454,8 @@ int main() {
 }</code></pre>
 <p>Note that we didn't have to use <code>clear</code> on the output stream, because although the failure flag was raised, we are simply making new streams every iteration of the loop.</p>
 <p>The string writer is useful for formatting text and converting numbers to strings. The string reader is useful for converting strings to numbers. When using string readers, it is important that we handle EOF.</p>
-<p>In C, strings were null-terminated char arrays that we had to do memory management on manually and were prone to buffer overruns. In C++, strings are part of the standard library, manage their own memory, and are much less prone to buffer overruns.</p>
-<p>Consider <code>string s = &quot;hello&quot;;</code>. <code>&quot;hello&quot;</code> is simply a char array with a null terminator, while <code>string</code> is a C++ string. C++ implicitly converts C-style strings into C++ strings (instances of <code>std::string</code>).</p>
+<p>In C, strings were 0-terminated char arrays that we had to do memory management on manually and were prone to buffer overruns. In C++, strings are part of the standard library, manage their own memory, and are much less prone to buffer overruns.</p>
+<p>Consider <code>string s = &quot;hello&quot;;</code>. <code>&quot;hello&quot;</code> is simply a char array with a 0 terminator, while <code>string</code> is a C++ string. C++ implicitly converts C-style strings into C++ strings (instances of <code>std::string</code>).</p>
 <p>However, C++ strings are not implicitly converted into C style strings. This becomes necessary for things like <code>ifstream</code>, which only accepts a C string for the file name. We can explicitly convert the C++ string into C style using <code>s.c_str()</code>.</p>
 <p>In C, we used <code>strcmp(a, b)</code> to compare strings, while <code>a == b</code> only compared pointers. In C++, we can simply use <code>a == b</code> or <code>a != b</code> to compare strings.</p>
 <p>We can also still use the <code>s[i]</code> notation that we can use in C. To concatenate two strings, we can use <code>a + b</code> instead of <code>strcat(a, b)</code>.</p>
@@ -666,7 +667,7 @@ Student b = a; // this calls the default copy constructor</code></pre>
 <pre><code>struct Node {
     int data;
     Node *next;
-    Node(const Node &amp;other): data(other.data), next(other.next ? new Node(other.next) : NULL) {};
+    Node(const Node &amp;other): data(other.data), next(other.next ? new Node(other.next) : 0) {};
 }</code></pre>
 <p>So every class has a default constructor, a default copy constructor, a copy assignment operator, and a destructor.</p>
 <h1 id="section-12">18/6/14</h1>
@@ -679,7 +680,7 @@ Student b = a; // this calls the default copy constructor</code></pre>
 <pre><code>struct Node {
     int data;
     Node *next;
-    Node(const Node &amp;other): data(other.data), next(other.next ? new Node(other.next) : NULL) {};
+    Node(const Node &amp;other): data(other.data), next(other.next ? new Node(other.next) : 0) {};
     ~Node() {
         delete next; // since `next` is on the heap, the default destructor wouldn&#39;t destroy it and there would have been a memory leak
         // a destructor should never throw any exceptions
@@ -752,6 +753,7 @@ Vec operator*(const int k, const Vec &amp;v) { // to allow things like `SOME_INT
 }</code></pre>
 <p>Most operators can be implemented as either standalone functions (like the second <code>operator*</code> in the above example), or as member functions (like <code>operator+</code> in the above example).</p>
 <p>Some operators can only be implemented as methods: <code>operator=</code> (assignment), <code>operator[]</code> (subscripting), <code>operator-&gt;</code> (dereferencing field reference), <code>operator()</code> (function call), <code>operator T()</code> (<code>T</code> is a type, and defines implicit conversion, like <code>operator void*</code> allows us to implicitly convert the object to a void pointer). <code>operator=</code> must be a member function because there is already a default <code>operator=</code> member function, so we must override the member function itself.</p>
+<p>A single argument constructor can be used to do implicit conversions. For example, a <code>Node(int data): data(data), next(0) {}</code> constructor method would allow us to do something like <code>Node n = 4</code>. To avoid implicit conversion, we can use the <code>explicit</code> keyword, which goes right before the <code>Node</code> in the declaration. This makes the compiler give an error if we attempt to perform implicit conversion.</p>
 <p>The following code results in a compilation error:</p>
 <pre><code>struct Vec {
     int x, y;
@@ -780,23 +782,78 @@ int main() {
 
 std::string Vec::__doc__ = &quot;Information about this class&quot;; // we still cannot define values in the declaration of a structure</code></pre>
 <p>A static method does not depend on instances, so it has no <code>this</code> parameter. The difference between a function and a method is that a method has a <code>this</code> parameter. Since a static method is not, it is technically a static member function rather than a method.</p>
+<p>We call member functions using <code>CLASS_NAME::MEMBER()</code> and methods using <code>INSTANCE.METHOD()</code>.</p>
 <p>Inside a function, <code>static</code> in a variable declaration means that the variable keeps its value in between function calls, like a global variable that can only be accessed within the function.</p>
 <h2 id="design-patterns">Design Patterns</h2>
 <p>Design patterns are commonly occurring patterns of problems and good solutions to these problems in object oriented programming.</p>
+<h1 id="section-14">24/6/14</h1>
 <h3 id="singleton-pattern">Singleton pattern</h3>
 <p>Problem: we have a class <code>c</code>, and we want only one instance of <code>c</code> to ever be created no matter how many times we attempt to create an instance.</p>
 <p>We can do this by declaring a static field of <code>c</code> as a flag, and in the constructor, setting the flag to prevent future instances from being created:</p>
 <pre><code>struct Student {
-    static Student *instance = NULL;
-    Student() {
-        //wip
-    }
+    static Student *instance;
+    static Student getInstance();
+    int grade;
+    Student();
 }
 
-bool Student::created = false;</code></pre>
+Student Student::instance = 0;
+Student Student::getInstance() {
+    if (!this-&gt;instance)
+        this-&gt;instance = new Student;
+    return this-&gt;instance;
+}
+Student::Student(): grade(0) {}</code></pre>
+<p>Every <code>new</code> should be matched with a <code>delete</code>. In the above example, the <code>this-&gt;instance</code> is a memory leak - it leaks the single instance of the wallet.</p>
+<p>We want the data to be deleted at the end of the program. This is not always the end of the <code>main</code> function, because when we have global objects, their constructors run before <code>main</code>, and their destructors run after <code>main</code>.</p>
+<p>The <code>cstdlib</code> library contains a function called <code>atexit(void (*function)())</code>, which accepts a function pointer to run when the program terminates. The function specified should have a void return type and no arguments. If called multiple times, these functions queue up.</p>
+<p>We can use this to implement cleaning up the instances on termination:</p>
+<pre><code>#include &lt;cstdlib&gt;
+
+struct Student {
+    static Student *instance;
+    static Student getInstance();
+    int grade;
+    Student();
+    static void cleanup()
+}
+
+Student Student::instance = 0;
+Student Student::getInstance() {
+    if (!instance) {
+        instance = new Student;
+        atexit(cleanup);
+    }
+    return this-&gt;instance;
+}
+Student::Student(): grade(0) {}
+Student::cleanup() { delete Student::instance; }</code></pre>
+<p>There is a tool known as Valgrind that can perform various correctness checks on programs. By running a program in a certain way using Valgrind, it is possible to detect memory leaks for that particular execution path. A typical usage might look like <code>valgrind a.out</code>. It simply slows down the program slightly while it is running.</p>
+<p>Note that the constructor is still accessible to all users. This means that it is still possible to create a new wallet directly from the client code, which we want to avoid.</p>
+<p>We can use encapsulation to hide the implementation details to make the program more robust. This forces clients to treat the object as a black blox, and only use the provided interface:</p>
+<pre><code>struct Student {
+    static Student getInstance(); // fields in a struct default to public
+    private: // this label makes fields after it private
+        static Student *instance;
+        int grade;
+        Student();
+        static void cleanup()
+    public: // this label makes fields after it public again - there can be multiple public and private labels in a class
+        int getGrade();
+        Student operator+(const Student &amp;other);
+}</code></pre>
+<p>Private fields are hidden to outsiders - code that is not inside the methods or member functions. In general, it is good practice to make as many fields private as possible. This is because if we make fields public, we can't guarantee class invariance - statements about the program/class that are always true. For example, a 2D coordinate class might have the invariant &quot;both components are always positive&quot;, which might be broken if we allow the user to modify the components using a public field. We should instead use methods that get (&quot;getters&quot;/&quot;accessors&quot;) or set (&quot;setters&quot;/&quot;mutators&quot;) the private field, because these methods can enforce the invariants.</p>
+<p>It is also important to use private fields because if we have public fields, it is no longer possible to change the implementation later without breaking client code. For example, if we changed a 2D coordinate class from Cartesian to polar coordinates, field names would be changed, which would break client code if they were public.</p>
+<p>Getters should be <code>const</code>, like <code>int getX() const { return this-&gt;x }</code>. This allows us to use them when the <code>this</code> instance is constant.</p>
+<p>The <code>class</code> keyword works the same way as <code>struct</code>, except all fields we define in a <code>class</code> block defaults to private rather than public. We will now transition to using <code>class</code> over <code>struct</code> in order to make encapsulation easier.</p>
+<p>We want to implement <code>operator&lt;&lt;</code> without using getters, because we don't want the client to have access to them. We want to give access to the stream class only, but nothing else. We can do this using <strong>friend declarations</strong>. In a class, this allows us to specify that some function should have full access to all the fields of this class:</p>
+<pre><code>class Vec {
+    int x, y;
+    friend ostream &amp;operator&lt;&lt;(const ostream &amp;out, const Vec &amp;v);
+}</code></pre>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">University-Notes</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Uberi/University-Notes" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 <script type="text/javascript">
 MathJax.Hub.Config({
   jax: ["input/TeX","output/HTML-CSS"],
