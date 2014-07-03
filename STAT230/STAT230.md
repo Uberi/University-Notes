@@ -684,6 +684,8 @@ A useful way to present data is the frequency distribution, which plots the numb
 
 The **arithmetic mean** or **sample average** of a sample of observations $x = \set{x_1, \ldots, x_n}$ is $\overline x = \frac 1 n \sum_{i = 1}^n x_1$ where $x_1, \ldots, x_n$ are the individual outcomes of each sample. It is the sum of the values divided by the number of values and is not necessarily an exact value of $x$ - it might not be an integer even if $X$ is.
 
+This is different from the mean/expected value of a sample of observations.
+
 # 18/6/14
 
 The set of observed outcomes $x_1, \ldots, x_n$ for a random variable $X$ is a **sample**.
@@ -696,9 +698,9 @@ The **mode** is the value that occurs most often. This is not used very often, a
 
 The mean, median, and mode are not necessarily the same, though they all measure centrality/location. Sometimes one will represent the data better than another.
 
-We previously defined the mean, median, and mode to summarize statistics for a sample of observations for a random variable 4X$. We can also extend these concepts to describe the probability distribution of $X$.
+We previously defined the mean, median, and mode to summarize statistics for a sample of observations for a random variable $X$. We can also extend these concepts to describe the probability distribution of $X$.
 
-The mean of a sample set is $\sum_{i = 1}^k x_i \times \frac{\text{the number of occurrences of } x_i}{\text{total number of occurrences of any outcome}}$, where $x_1, \ldots, x_k$ is now the set of all possible outcomes.
+The **mean** of a sample set is $\sum_{i = 1}^k x_i \times \frac{\text{the number of occurrences of } x_i}{\text{total number of occurrences of any outcome}}$, where $x_1, \ldots, x_k$ is now the set of all possible outcomes.
 
 Clearly, as the number of samples approaches infinity, $\frac{\text{the number of occurrences of } x_i}{\text{total number of occurrences of any outcome}}$ approaches $P(X = x_i) = f(x_i)$.
 
@@ -796,4 +798,54 @@ Recall that two events $A, B$ are independent if and only if $P(A \cap B) = P(A)
 
 Recall that given two events $A, B$, $P(A \mid B) = \frac{P(A \cap B)}{P(B)}$. For two random variables $X, Y$, $f_X(x \mid y) = \frac{f_{X, Y}(x, y)}{f_Y(y)}$. This is defined over all $x$ with a fixed $y$.
 
-;wip
+So $f_{X, Y}(x \mid 1) = P(X = x \mid Y = 1)$. Note that $\sum_{\text{all } x} f_{X, Y}(x, y) = 1$.
+
+Let $f_X(x) = \frac 1 4, 1 \le x \le 4, f_Y(y) = \frac 1 3, 1 \le y \le 3$. Find $f_U(U)$:
+
+> Since $f_U(u) = P(2(Y - X) = u)$, so we found all the possible $\set{(x_1, y_1), \ldots}$ such that $2(y - x) = u$.  
+> So $f_U(u) = \sum_{(x, y) \in \set{(x_1, y_1), \ldots}} f_{X, Y}(x, y)$.  
+> Assume $2(y - x) = u$. Then $y = \frac 1 2 u + x$ and $f_U(u) = \sum_{x \in \set{x_1, \ldots}} f_{X, Y}(x, \frac 1 2 u + x)$.  
+> Clearly, $f_{X, Y}(x, y) = \frac 1 4 \times \frac 1 3 = \frac 1 {12}$, since $X$ and $Y$ are independent.  
+> So $f_U(u) = \begin{cases} \frac{1}{12} &\text{if } u = 0 \\ \frac{2}{12} &\text{if } u = 2 \\ \frac{3}{12} &\text{if } u = 4 \\ \frac{3}{12} &\text{if } u = 6 \\ \frac{2}{12} &\text{if } u = 8 \\ \frac{1}{12} &\text{if } u = 10 \\ 0 &\text{otherwise} \end{cases}$.  
+
+In general, if $Y = g(X_1, \ldots, X_n)$, then $f_Y(y) = \sum_{\text{all } x_1, \ldots, x_n \text{ where } g(x_1, \ldots, x_n) = y} f_{X_1, \ldots, X_n}(x_1, \ldots, x_n)$.
+
+# 27/6/14
+
+Let $T = X + Y$ where $X \sim \operatorname{Pois}(\mu_1), Y \sim \operatorname{Pois}(\mu_2)$. What is $f_T(t)$?
+
+> Clearly, $f_T(t) = P(X + Y = t)$ where $t = x + y$.  
+> So $y = t - x$ and $f_T(t) = \sum_{\text{all } x} f_{X, Y}(x, t - x) = \sum_{x = 0}^\infty f_X(x) f_Y(t - x)$, since $X$ and $Y$ are independent.  
+> Clearly, $0 \le x \le t$ since $y = t - x$ must be non-negative.  
+> So $f_T(t) = \sum_{x = 0}^t \frac{e^{-\mu_1}\mu_1^x}{x!} \frac{e^{-\mu_2}\mu_2^{t - x}}{(t - x)!} = e^{-\mu_1 - \mu_2}\mu_2^t \sum_{x = 0}^t \frac{\mu_1^x}{x!} \frac{\mu_2^{-x}}{(t - x)!} = e^{-\mu_1 - \mu_2}\mu_2^t \sum_{x = 0}^t \frac{1}{x!(t - x)!}\left(\frac{\mu_1}{\mu_2}\right)^x$.  
+> So $f_T(t) = e^{-\mu_1 - \mu_2}\mu_2^t \frac{1}{t!} \sum_{x = 0}^t \frac{t!}{x!(t - x)!}\left(\frac{\mu_1}{\mu_2}\right)^x = \frac{e^{-(\mu_1 + \mu_2)}\mu_2^t}{t!} \sum_{x = 0}^t {t \choose x}\left(\frac{\mu_1}{\mu_2}\right)^x = \frac{e^{-(\mu_1 + \mu_2)}\mu_2^t}{t!} \left(1 + \frac{\mu_1}{\mu_2}\right)^t = \frac{e^{-(\mu_1 + \mu_2)}\mu_2^t}{t!} \left(\frac{\mu_1 + \mu_2}{\mu_2}\right)^t = \frac{e^{-(\mu_1 + \mu_2)}(\mu_1 + \mu_2)^t}{t!}$.  
+> So if $X$ and $Y$ are independent, $X + Y \sim \operatorname{Pois}(\mu_1 + \mu_2)$.  
+
+# 2/7/14
+
+;wip: get the revision material from LEARN
+
+Multinomial Distribution
+------------------------
+
+A **multinomial distribution** is like a binomial distribution, except there are $k$ possible outcomes rather than just success or failure.
+
+So we have independent trials repeated $n$ times, each independent with the same outcome probabilities $p_1, \ldots, p_k$ for each trial.
+
+For example, asking random people what their favourite color is, where our random variables are the number of people who like particular colors.
+
+Let $p_1, \ldots, p_k$ be the probability that the outcomes $x_1, \ldots, x_k$ occurs for a single trial. Let $X_1, \ldots, X_k$ be the number of times $x_1, \ldots, x_k$ occur.
+
+Note that $X_1 + \ldots + X_k = n$ and $p_1 + \ldots + p_k = 1$.
+
+If $X_1, \ldots, X_k$ follow a multinomial distribution, then $X_1, \ldots, X_k \sim \operatorname{Mult}(n; p_1, \ldots, p_k)$. Note that $X_1, \ldots, X_k$ are all related to each other.
+
+Clearly, there are ${n \choose x_1}{n - x_1 \choose x_2} \cdots {n - x_1 \ldots - x_{n - 1} \choose x_k} = \frac{n!}{x_1! \cdots x_k!}$ ways we can arrange $x_1, \ldots, x_k$ items of type $1, \ldots, k$ repsectively.
+
+Clearly, each arrangement has probability $p_1^{x_1} \cdots p_n^{x_k}$ of occurring in a given trial.
+
+So if $X_1, \ldots, X_k \sim \operatorname{Mult}(n; p_1, \ldots, p_k)$ $f_{X_1, \ldots, X_k}(x_1, \ldots, x_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_n^{x_k}$.
+
+If we want the marginal probability distribution, this distribution makes it relatively simple. If we are only interested in $X_i$, we can set $x_i$ as success and all other outcomes as failure. So $X_i \sim \operatorname{Bin}(n, p_i)$. This is because the physical setup of the experiments is exactly that of the binomial distribution when we do this.
+
+Basically, when we have multiple random variables with binomial distributions, all mutually exclusive, then they all form a multinomial distribution where the number of trials is the same and the probabilities are those of each binomial distribution.

@@ -535,14 +535,14 @@ Since we still need to find the Thevenin resistance, we introduce a test source 
 
 ;wip: diagram
 
-When we use the test source, $R_{th}$ is the voltage of the test source over the current through the test source.
+When we use the test source, $R_{th}$ is the voltage of the test source over the current through the test source. The open circuit voltage can still be found using nodal analysis, but is simply 0V.
 
 # 9/6/14
 
 So the three methods are:
 
 1. If all sources are independent, remove the effects of the sources and calculate the Thevenin resistance. Then use nodal analysis to get the open circuit voltage.
-2. If there are dependent sources but no independent sources, add a test source to help with finding the Thevenin resistance. Then use nodal analysis to get the open circuit voltage.
+2. If there are dependent sources but no independent sources, add a test source to help with finding the Thevenin resistance. Then the Thevenin voltage is 0V.
 3. Otherwise, use nodal analysis to get the open circuit voltage and short circuit voltage, and use this to calculate the Thevenin resistance.
 
 The Thevenin equivalent is relative to two terminals (often called A and B) in section of a circuit. We are trying to find a circuit we can replace that entire section of circuit between A and B with that acts exactly the same.
@@ -687,7 +687,7 @@ Capacitance/Inductance
 
 So far, the only passive elements in our circuits is the resistor.
 
-A capacitor is another passive circuit element that stores energy. A capacitor is a two-terminal device that is made of two conductive plates stacked close together, separated by a layer of insulating material, called the dialectric.
+A capacitor is another passive circuit element that stores energy in charged plates. A capacitor is a two-terminal device that is made of two conductive plates stacked close together, separated by a layer of insulating material, called the dialectric.
 
 When charge enters one end of a capacitor, it stops at the dialectric. However, the charges have an electric field, which extends over to the other plate. This repels charges in the other plate, pushing charge out of the other end of the capacitor.
 
@@ -715,4 +715,49 @@ Given capacitors connected in parallel with capacitances $C_1, \ldots, C_n$, it 
 
 The DC steady state of the capacitor is very important for analyzing circuits. The DC steady state is when $I(t) = 0 = \frac{\dee V(t)}{\dee t}$.
 
-When analyzing circuits at DC steady state, we know that the capacitors are not affecting the voltage, and the currents flowing through them are 0 A, so we can actually treat them as an open circuit - they can simply be removed from the circuit.
+When analyzing circuits at DC steady state, we know that the capacitors are not affecting the voltage, and the currents flowing through them are 0 A, so we can actually treat them as an open circuit - they can simply be removed from the circuit. The steady state of a capacitor is an open circuit.
+
+# 26/6/14
+
+;wip: inductors: current in inductor can't change instantaneously, $V_L = L\frac{\dee i_L}{\dee t}$ where $L$ is the inductance
+
+Inductors store energy in magnetic fields. An inductor is a two terminal device that is made up of a conductive coil, optionally with a core of ferromagnetic material.
+
+When current flows into one end of an inductor, it flows out the other end, in the process creating a magnetic field in the coil.
+
+The steady state of an inductor is a short circuit.
+
+# 2/7/14
+
+;wip: make up lecture this monday and next monday
+
+;wip: see midterm at office hours
+
+Transient Analysis
+------------------
+
+This is analysis of circuits with respect to time. A **transient** state is one that is dependent on time. Before this, we were analyzing circuits in **steady state** - a state that does not change over time.
+
+;wip: transcribe from notebook
+
+;wip: constant charging voltage is never quite reached because $e^{-\frac t \tau} > 0$.
+
+An RC circuit is a capacitor in series with a resistor.
+
+# 3/7/14
+
+In this course we will only be working with circuits that can be reduced such that they only have one capacitor, which allows us to apply the charging/discharging formula $V_c(t) = V_f + (V_i - V_f)e^{-t/\tau}$ where $\tau = RC$, the time constant.
+
+To solve DC steady state problems, we find the initial conditions at $t = 0$ and the final conditions at $t = \infty$. For capacitors, we then find the time constant and use the charging/discharging equation to determine the voltage.
+
+We can find the time constant of a capacitor by using $\tau = RC$ where $R$ is the Thevenin resistance across the rest of the circuit and $C$ is the capacitance. Note that the steady state voltage is also the Thevenin voltage.
+
+To solve capacitor problems, we replace everything except for the capacitor with its Thevenin equivalent. Then $\tau = V_{th}C$ and $V_f = V_{th}$.
+
+Whenever a capacitor of a switch toggles, then we have to restart transient analysis with the state of the capacitor at the moment the switch toggles as the initial state for the restarted analysis. This is because the switch toggling means that we are now dealing with a different circuit.
+
+An RL circuit is an inductor in series with a resistor.
+
+For inductors, we use the same steps, but $\tau = \frac L R$.
+
+For inductors, $I_L = I_f + (I_i - I_f)e^{-\frac t \tau}$.

@@ -218,6 +218,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>Semantics is formally given as functions that map each formula to a value in <span class="math">\(\set{0, 1}\)</span> (false and true). This function can be represented using a <strong>truth table</strong>.</p>
 <p>The value of a formula <span class="math">\(A\)</span> given a truth valuation <span class="math">\(t\)</span> is represented <span class="math">\(A^t\)</span>, with <span class="math">\(A^t \in \set{0, 1}\)</span>. If we used conventional function notation, we might write <span class="math">\(t(A) \in \set{0, 1}\)</span>.</p>
 <p><strong>Truth valuations</strong> are functions that are used to assign truth values to propositional variables. The domain is the set of propositional variables in a formula, and the range is <span class="math">\(\set{0, 1}\)</span>. If <span class="math">\(t\)</span> is a truth valuation, then <span class="math">\(A^t \in \set{0, 1}\)</span>, where <span class="math">\(A\)</span> is a propositional variable.</p>
+<p><span class="math">\(t \models A\)</span> is the same as <span class="math">\(A^t = 1\)</span>, while <span class="math">\(t \not\models A\)</span> is the same as <span class="math">\(A^t = 0\)</span>.</p>
 <p>We can completely represent the truth valuation for a formula by listing out all possible values of the domain and the resulting value in the range. For <span class="math">\(n\)</span> variables, there are <span class="math">\(2^n\)</span> possible values.</p>
 <p>We can define the truth valuation function <span class="math">\(t\)</span> in terms of formulas <span class="math">\(A\)</span> and <span class="math">\(B\)</span> recursively:</p>
 <ol style="list-style-type: decimal">
@@ -677,17 +678,29 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>For example, &quot;Every student is younger than some instructor&quot; could be represented in propositional logic by writing <span class="math">\((s_1 &lt; i_1 \vee \ldots \vee s_1 &lt; i_n) \wedge \ldots \wedge (s_m &lt; i_1 \vee \ldots \vee s_m &lt; i_n)\)</span> where <span class="math">\(s_1, \ldots, s_m\)</span> are the student ages and <span class="math">\(i_1, \ldots, i_n\)</span> are the instructor ages.</p>
 <p>Predicate logic makes it much easier to express this: <span class="math">\(\forall s \in S, \exists i \in I, s &lt; i\)</span>, where <span class="math">\(S\)</span> is the set of all students and <span class="math">\(I\)</span> is the set of all instructors.</p>
 <h3 id="syntax">Syntax</h3>
-<p>The language of predicate logic is called <span class="math">\(\mathfrak{L}\)</span>.</p>
+<p>The language of predicate logic is called <span class="math">\(\mathcal{L}\)</span>.</p>
 <p>Formulas in predicate logic is made up of several components:</p>
 <ul>
 <li>Domain of objects - sets containing any number of objects.</li>
-<li>Variables (VS) - particular objects, but not necessarily a specific one.
+<li>Variables - particular objects, but not necessarily a specific one.
 <ul>
 <li>Lowercase to distinguish them from predicates.</li>
+<li>This is different from constants because they don't represent a specific object, just a placeholder for an object.</li>
+<li>These are often found following a quantifier - in <span class="math">\(\exists x, x = x\)</span>, <span class="math">\(x\)</span> is a variable, not a constant.</li>
+<li><span class="math">\(VS\)</span> is the set of variables and <span class="math">\(VS(A)\)</span> is the set of variables in a formula <span class="math">\(A\)</span>.</li>
 </ul></li>
-<li>Designated objects/constants (CS) - specific objects such as a particular number or a matrix.</li>
-<li>Functions such as <span class="math">\(+\)</span>, <span class="math">\(-\)</span>, <span class="math">\(f\)</span>, and <span class="math">\(g\)</span>.</li>
-<li>Relations such as <span class="math">\(=\)</span> and <span class="math">\(&gt;\)</span>.</li>
+<li>Designated objects/constants - specific objects such as a particular number or a matrix.
+<ul>
+<li><span class="math">\(CS\)</span> is the set of constants and <span class="math">\(CS(A)\)</span> is the set of constants in a formula <span class="math">\(A\)</span>.</li>
+</ul></li>
+<li>Functions such as <span class="math">\(+\)</span>, <span class="math">\(-\)</span>, <span class="math">\(f\)</span>, and <span class="math">\(g\)</span> - taking terms and outputting terms.
+<ul>
+<li><span class="math">\(FS\)</span> is the set of functions and <span class="math">\(FS(A)\)</span> is the set of functions in a formula <span class="math">\(A\)</span>.</li>
+</ul></li>
+<li>Predicates/relations such as <span class="math">\(=\)</span> and <span class="math">\(&gt;\)</span> - taking terms and outputting Boolean values.
+<ul>
+<li><span class="math">\(PS\)</span> is the set of predicates and <span class="math">\(PS(A)\)</span> is the set of predicates in a formula <span class="math">\(A\)</span>.</li>
+</ul></li>
 <li>Quantifiers such as <span class="math">\(\forall\)</span> and <span class="math">\(\exists\)</span>.
 <ul>
 <li>They have the form <span class="math">\(\forall x. P(\ldots)\)</span> or <span class="math">\(\exists x. P(\ldots)\)</span>.</li>
@@ -701,24 +714,84 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 </blockquote>
 <p><span class="math">\(\forall x. \forall y. \operatorname{plus}(x, y) = \operatorname{plus}(y, x)\)</span> - addition is commutative.</p>
 <p><span class="math">\(\forall x. \neg \operatorname{equal}(0, \operatorname{succ}(x))\)</span> - 0 is not the successor of any non-negative integer.</p>
-<p>Well formed formulas in <span class="math">\(\mathfrak{L}\)</span> can be defined as follows:</p>
+<p>Well formed formulas in <span class="math">\(\mathcal{L}\)</span> can be defined as follows:</p>
 <ul>
-<li><span class="math">\(\operatorname{Term}(\mathfrak{L})\)</span> is the set of all constants and variables (terms), and functions over terms.
+<li><span class="math">\(\operatorname{Term}(\mathcal{L})\)</span> is the set of all constants and variables (terms), and functions over terms.
 <ul>
-<li>For example, <span class="math">\(f(g(a, b), c) \in \operatorname{Term}(\mathfrak{L})\)</span>.</li>
+<li>For example, <span class="math">\(f(g(a, b), c) \in \operatorname{Term}(\mathcal{L})\)</span>.</li>
 <li>We basically need to pass the right number of parameters to every function.</li>
 </ul></li>
-<li><span class="math">\(\operatorname{Atom}(\mathfrak{L})\)</span> is the set of all predicates over terms - the set of all <span class="math">\(P(t_1, \ldots, t_n), t_1, \ldots, t_n \in \operatorname{Term}(\mathfrak{L})\)</span> where <span class="math">\(P\)</span> is an <span class="math">\(n\)</span>-ary predicate.
+<li><span class="math">\(\operatorname{Atom}(\mathcal{L})\)</span> is the set of all predicates over terms - the set of all <span class="math">\(P(t_1, \ldots, t_n), t_1, \ldots, t_n \in \operatorname{Term}(\mathcal{L})\)</span> where <span class="math">\(P\)</span> is an <span class="math">\(n\)</span>-ary predicate.
 <ul>
 <li>For example, <span class="math">\(\operatorname{equal}(\operatorname{plus}(x, 2), \operatorname(\operatorname{plus}(x, 1), 1))\)</span>.</li>
 </ul></li>
-<li><span class="math">\(\operatorname{Form}(\mathfrak{L}) = \operatorname{Atom}(\mathfrak{L}) \cup \set{(\neg \phi), (\phi \wedge \psi), (\phi \vee \psi), (\phi \rightarrow \psi), (\phi \leftrightarrow \psi)} \cup \set{\forall x. \phi, \exists x, \phi}\)</span> where <span class="math">\(\phi, \psi \in \operatorname{Form}(\mathfrak{L})\)</span> - the set of all atoms combined with the set of operations over other formulas.
+<li><span class="math">\(\operatorname{Form}(\mathcal{L}) = \operatorname{Atom}(\mathcal{L}) \cup \set{(\neg \phi), (\phi \wedge \psi), (\phi \vee \psi), (\phi \rightarrow \psi), (\phi \leftrightarrow \psi)} \cup \set{\forall x. \phi, \exists x, \phi}\)</span> where <span class="math">\(\phi, \psi \in \operatorname{Form}(\mathcal{L})\)</span> - the set of all atoms combined with the set of operations over other formulas.
 <ul>
-<li>For example, <span class="math">\(\neg \operatorname{equal}(1, 2) \in \operatorname{Form}(\mathfrak{L})\)</span>.</li>
-<li>For example, <span class="math">\(\forall x, \operatorname{equal}(x, x) \in \operatorname{Form}(\mathfrak{L})\)</span>.</li>
+<li>For example, <span class="math">\(\neg \operatorname{equal}(1, 2) \in \operatorname{Form}(\mathcal{L})\)</span>.</li>
+<li>For example, <span class="math">\(\forall x, \operatorname{equal}(x, x) \in \operatorname{Form}(\mathcal{L})\)</span>.</li>
 </ul></li>
 </ul>
 <p>We can also draw parse trees for formulas. Here, the leaves are terms and the other nodes are either connectives or predicates or quantifiers.</p>
+<h1 id="section-13">25/6/14</h1>
+<p>A <strong>free</strong> variable is a variable that has a value we can assign to it. A variable that is not free is <strong>bound/quantified</strong>, and occurs when we use quantifiers.</p>
+<p>For example, <span class="math">\(\forall y, y = x\)</span> has the free variable <span class="math">\(x\)</span> and the bound variable <span class="math">\(y\)</span>. <span class="math">\(x\)</span> is free because we can give it whatever value we want, which we cannot do for <span class="math">\(y\)</span> since it does not have one particular value.</p>
+<p>In a parse tree, if a variable node <span class="math">\(x\)</span> has a quantifier like <span class="math">\(\exists x\)</span> above it in the parse tree, it is bound. Otherwise, it is free.</p>
+<p>If <span class="math">\(A \in \operatorname{Form}(\mathcal{L})\)</span>, <span class="math">\(FV(A)\)</span> is the set of free variables in <span class="math">\(A\)</span>. It is defined using the following rules:</p>
+<ul>
+<li>If <span class="math">\(A = P(t_1, \ldots, t_n)\)</span>, then <span class="math">\(FV(A)\)</span> is the set of all variables occurring in <span class="math">\(t_1, \ldots, t_n\)</span>.</li>
+<li>If <span class="math">\(A = (\neg B)\)</span>, then <span class="math">\(FV(A) = FV(B)\)</span>.</li>
+<li>If <span class="math">\(A = (B \odot C)\)</span> where <span class="math">\(\odot\)</span> is a binary connective, then <span class="math">\(FV(A) = FV(B) \cup FV(C)\)</span>.</li>
+<li>If <span class="math">\(A = (\forall x. B)\)</span> or <span class="math">\(A = (\exists x. B)\)</span>, then <span class="math">\(FV(A) = FV(B) \setminus \set{x}\)</span>.</li>
+</ul>
+<p>For quantifier formulas like <span class="math">\(\forall x. A(x)\)</span> and <span class="math">\((\exists x. A(x)) \wedge P(x)\)</span>, <span class="math">\(A(x)\)</span> is the <strong>scope</strong> of <span class="math">\(x\)</span> in the formula.</p>
+<p>A variable can occur in multiple places and represent different things. For example, <span class="math">\((\exists x. A(x)) \wedge P(x)\)</span> has a bound <span class="math">\(x\)</span> on the left side of <span class="math">\(\wedge\)</span>, and a free variable <span class="math">\(x\)</span> on the right side. These two refer to different objects.</p>
+<p>A predicate logic formula <span class="math">\(A\)</span> is <strong>closed</strong> and is a <strong>sentence</strong> if and only if there are no free variables - <span class="math">\(FV(A) = \emptyset\)</span>.</p>
+<p>Given a formula <span class="math">\(A\)</span>, <span class="math">\(A[x/t]\)</span> is the same formula, but with all free occurrences of <span class="math">\(x\)</span> <strong>substituted</strong> with the term <span class="math">\(t\)</span>. Note that bound occurrences of <span class="math">\(x\)</span> are not replaced.</p>
+<p>If <span class="math">\(y\)</span> is a variable in <span class="math">\(t\)</span>, then if there are no occurrences of <span class="math">\(x\)</span> in the scope of <span class="math">\(\exists y\)</span> or <span class="math">\(\forall y\)</span> in a formula <span class="math">\(A\)</span>, then <span class="math">\(t\)</span> is <strong>free for</strong> <span class="math">\(x\)</span> in <span class="math">\(A\)</span>. Basically, <span class="math">\(t\)</span> is free for <span class="math">\(x\)</span> in <span class="math">\(A\)</span> if substituting <span class="math">\(t\)</span> for any occurrence of <span class="math">\(x\)</span> does not cause any free variables to become bound.</p>
+<p>For example, if <span class="math">\(t = y + 1\)</span> and <span class="math">\(A = \forall y, P(x)\)</span>, then <span class="math">\(A[x/t]\)</span> would cause the <span class="math">\(y\)</span> in <span class="math">\(y + 1\)</span> we substituted in to become bound, so <span class="math">\(t\)</span> is not free for <span class="math">\(x\)</span> in <span class="math">\(A\)</span>. If <span class="math">\(t\)</span> is not free for <span class="math">\(x\)</span>, then we can make it free for <span class="math">\(x\)</span> by renaming the variable - <span class="math">\(t = y + 1\)</span> becomes <span class="math">\(t = z + 1\)</span>.</p>
+<p>Formally, a substitution <span class="math">\(A[x/t]\)</span> can be defined recursively:</p>
+<ul>
+<li>If <span class="math">\(A\)</span> is a term, then <span class="math">\(A[x/t]\)</span> is <span class="math">\(A\)</span> with each occurrence of <span class="math">\(x\)</span> replaced with <span class="math">\(t\)</span>.</li>
+<li>If <span class="math">\(A = P(t_1, \ldots, t_n)\)</span>, then <span class="math">\(A[x/t] = P(t_1[x/t], \ldots, t_n[x/t])\)</span>.</li>
+<li>If <span class="math">\(A = \neg B\)</span>, then <span class="math">\(A[x/t] = \neg B[x/t]\)</span>.</li>
+<li>If <span class="math">\(A = B \odot C\)</span> where <span class="math">\(\odot\)</span> is a binary connective, then <span class="math">\(A[x/t] = B[x/t] \odot C[x/t]\)</span>.</li>
+<li>If <span class="math">\(A = \forall y. B\)</span>, then <span class="math">\(A[x/t] = A\)</span> if <span class="math">\(x = y\)</span>, and <span class="math">\(A[x/t] = \forall y. B[x/t]\)</span> otherwise (<span class="math">\(t\)</span> must be free for <span class="math">\(x\)</span> or renamed otherwise).</li>
+<li>If <span class="math">\(A = \exists y. B\)</span>, then <span class="math">\(A[x/t] = A\)</span> if <span class="math">\(x = y\)</span>, and <span class="math">\(A[x/t] = \exists y. B[x/t]\)</span> otherwise (<span class="math">\(t\)</span> must be free for <span class="math">\(x\)</span> or renamed otherwise).</li>
+</ul>
+<h3 id="interpretations-and-assignments">Interpretations and Assignments</h3>
+<p>In propositional logic, there were truth valuations that fixed atom values. In predicate logic, there are more elements to consider, such as quantifiers and functions.</p>
+<p>Predicate logic formulas are used to express Boolean values. We can obtain these Boolean values using interpretations. All formulas are either true or false for all posible conditions.</p>
+<p>An <strong>interpretation/model</strong> of a formula <span class="math">\(A\)</span> is a tuple of the form <span class="math">\(I = \tup(U, (\ldots)^I)\)</span>, where <span class="math">\(U\)</span> is the domain/universe of discourse and <span class="math">\((\ldots)^I\)</span> is a function that maps constants to the domain, functions to functions over the domain, and predicates to relations in the domain.</p>
+<p>Basically, an interpretation is a universe of discourse combined with a mapping from elements of the formula to elements in the universe of discourse.</p>
+<p>If <span class="math">\(c \in CS(A)\)</span>, then <span class="math">\(c^I \in U\)</span>. If <span class="math">\(f \in FS(A)\)</span>, then <span class="math">\(f^I: D^n \to D\)</span> where <span class="math">\(n\)</span> is the arity of <span class="math">\(f\)</span>. If <span class="math">\(P \in PS(A)\)</span>, then <span class="math">\(P^I \subseteq D^n\)</span> where <span class="math">\(n\)</span> is the arity of <span class="math">\(P\)</span>.</p>
+<p>Find an interpretation of <span class="math">\(\exists c. P(f(g(a), g(b)), g(c))\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(I = \tup{\mb{N}, \begin{cases} 3 &amp;\text{if } a \\ 4 &amp;text{if } b \\ x + y &amp;\text{if } f(x, y) \\ x^2 &amp;\text{if } g(x) \\ = &amp;\text{if } P \end{cases}}\)</span>.<br />So <span class="math">\((\forall c. P(f(g(a), g(b)), g(c)))^I\)</span> becomes <span class="math">\(\exists c. 3^2 + 4^2 = c^2\)</span>.<br />The word form of the interpretation is: &quot;Let <span class="math">\(\mb{N}\)</span> be the universe of discourse. Let <span class="math">\(a\)</span> be 3 and <span class="math">\(b\)</span> be 4. Let <span class="math">\(f\)</span> be addition and <span class="math">\(g\)</span> be squaring, and <span class="math">\(P\)</span> be equality.&quot;.</p>
+</blockquote>
+<p>Interpretations are definitely more concrete than the original formulas, but if there are quantifiers, we still cannot directly state whether the formula is true or false under a given interpretation.</p>
+<p>A <strong>valuation/assignment</strong> of an interpretation of a formula <span class="math">\(A^I\)</span> is a function <span class="math">\(\theta: VS(A) \to U\)</span> where <span class="math">\(U\)</span> is the universe of discourse for the interpretation. Basically, it is a bunch of substitutions for each variable. Valuations work only on terms.</p>
+<p>If <span class="math">\(t \in CS\)</span>, then <span class="math">\(t^{I, \theta} = t^I\)</span>. If <span class="math">\(x \in VS\)</span>, then <span class="math">\(x^{I, \theta} = \theta(x)\)</span>. If <span class="math">\(f \in FS\)</span>, then <span class="math">\(f(t_1, \ldots, t_n)^{I, \theta} = f^I(t_1^{I, \theta}, \ldots, t_n^{I, \theta})\)</span>.</p>
+<p>For example, using the previous interpretation <span class="math">\(I\)</span>, <span class="math">\((\exists c. P(f(g(a), g(b)), g(c)))^I\)</span> is <span class="math">\(\exists c. 3^2 + 4^2 = c^2\)</span>. So under the assignment <span class="math">\(\theta(c) = 5\)</span>, <span class="math">\((\exists c. P(f(g(a), g(b)), g(c)))^{I, \theta}\)</span> is <span class="math">\(3^2 + 4^2 = 5^2\)</span>, which is true.</p>
+<p>Interpretations and valuations also work on terms. In this case, an interpretation and assignment result in an element of the universe of discourse for the interpretation.</p>
+<p>If <span class="math">\(A(x)\)</span> has no free occurrences of <span class="math">\(y\)</span>, and <span class="math">\(A(y)\)</span> has no free occurrences of <span class="math">\(x\)</span>, then <span class="math">\(A(x)\)</span> and <span class="math">\(A(y)\)</span> basically mean the same thing. We can make them the same using a simple substitution <span class="math">\(A(x)[x/y] = A(y)\)</span>.</p>
+<p>So for a closed formula, we can change the variables around as we wish: <span class="math">\(\exists x. P(x)\)</span> is the same as <span class="math">\(\exists y. P(y)\)</span>.</p>
+<h1 id="section-14">2/7/14</h1>
+<p>In predicate logic, a <strong>model</strong> is an interpretation together with an assignment. A model is a tuple <span class="math">\(\tup{I, \theta}\)</span>.</p>
+<p>If <span class="math">\(M = (I, \theta)\)</span>, then <span class="math">\(I, \theta \models A\)</span> is the same as <span class="math">\(M \models A\)</span>. In the same way, <span class="math">\(A^{I, \theta}\)</span> is the same as <span class="math">\(A^M\)</span>.</p>
+<p>The <strong>satisfaction relation</strong> <span class="math">\(\models\)</span> is a relation between an interpretation, an assignment, and a predicate logic formula. If true, it means that the formula under the interpretation and assignment is true. This is similar to the <span class="math">\(\models\)</span> operator over truth valuations and formulas in propositional logic.</p>
+<p>Given an interpretation <span class="math">\(I\)</span>, an assignment <span class="math">\(\theta\)</span>, a model <span class="math">\(M = (I, \theta)\)</span>, and a first order logic formula <span class="math">\(A\)</span>:</p>
+<ul>
+<li>If <span class="math">\(A = P(t_1, \ldots, t_n)\)</span>, then <span class="math">\(M \models A\)</span> if and only if <span class="math">\(\tup{t_1^M, \ldots, t_n^M} \in P^I\)</span> (the terms satisfy the relation),</li>
+<li>If <span class="math">\(A = \neg B\)</span>, then <span class="math">\(M \models A\)</span> if and only if <span class="math">\(M \models B\)</span> is false.</li>
+<li>If <span class="math">\(A = B \wedge C\)</span>, then <span class="math">\(M \models A\)</span> if and only if <span class="math">\(M \models B\)</span> and <span class="math">\(M \models C\)</span>.</li>
+<li>If <span class="math">\(A = B \vee C\)</span>, then <span class="math">\(M \models A\)</span> if and only if <span class="math">\(M \models B\)</span> or <span class="math">\(M \models C\)</span>.</li>
+<li>If <span class="math">\(A = B \rightarrow C\)</span>, then <span class="math">\(M \models A\)</span> if and only if <span class="math">\(M \models B\)</span> implies <span class="math">\(M \models C\)</span>.</li>
+<li>If <span class="math">\(A = B \leftrightarrow C\)</span>, then <span class="math">\(M \models A\)</span> if and only if <span class="math">\(M \models B\)</span> is equivalent to <span class="math">\(M \models C\)</span>.</li>
+<li>If <span class="math">\(A = \forall x. B\)</span>, then <span class="math">\(M \models A\)</span> if and only if for every <span class="math">\(v \in U\)</span>, <span class="math">\(M&#39; \models B\)</span> where <span class="math">\(M&#39; = (I, \theta&#39;)\)</span> where <span class="math">\(\theta&#39;\)</span> is <span class="math">\(\theta\)</span> except it maps <span class="math">\(x\)</span> to <span class="math">\(v\)</span>.</li>
+<li>If <span class="math">\(A = \exists x. B\)</span>, then <span class="math">\(M \models A\)</span> if and only if there exists a <span class="math">\(v \in U\)</span> such that <span class="math">\(M&#39; \models B\)</span> where <span class="math">\(M&#39; = (I, \theta&#39;)\)</span> where <span class="math">\(\theta&#39;\)</span> is <span class="math">\(\theta\)</span> except it maps <span class="math">\(x\)</span> to <span class="math">\(v\)</span>.</li>
+</ul>
+<p>We can also define a sub-language of <span class="math">\(\mathcal{L}\)</span> that has a subset of the elements of the full language. For example, <span class="math">\(\mathcal{A} = \tup{0, \operatorname{add1}, =}\)</span> is a sub-language that only has three elements in it. We can use it to represent any equality of natural numbers using an interpretation like <span class="math">\(\tup{\mb{N}, \begin{cases} x + 1 &amp;\text{if } \operatorname{add1}(x) \end{cases}}\)</span>.</p>
+<p>We could say that the universal quantifier is conceptually similar to conjunction in propositional logic, because <span class="math">\(\forall x. P(x)\)</span> means <span class="math">\(P(x_1) \wedge P(x_2) \wedge \ldots\)</span>. We could also say that the existential quantifier is conceptally similar to disjunction in propositional logic, because <span class="math">\(\exists x. P(x)\)</span> means <span class="math">\(P(x_1) \vee P(x_2) \vee \ldots\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">University-Notes</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Uberi/University-Notes" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

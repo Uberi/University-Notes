@@ -176,7 +176,7 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p><code>..</code> is a special directory that always represents the parent of the current directory.</p>
 <p>For example, to change the current directory to the grandparent of the current directoy, we can use <code>cd ../..</code>.</p>
 <p><code>~</code> is a special directory that always represents the current user's home directory, like <code>/home/ahzhang</code>. This is an absolute path because it does not depend on the current directory.</p>
-<p>For example, <code>cd ~</code> will change the current directory to the current directory. In fact, this is used so often that <code>cd</code> by itself will do the same as <code>cd ~</code>.</p>
+<p>For example, <code>cd ~</code> will change the current directory to the home directory. In fact, this is used so often that <code>cd</code> by itself will do the same as <code>cd ~</code>.</p>
 <p>Also, <code>cd -</code> will change the current directory back to the last current directory - to the directory before we changed it with <code>cd DIRECTORY_GOES_HERE</code>.</p>
 <p><code>~USER_ID_GOES_HERE</code> is a special directory that always represents the home directory of the user <code>USER_ID_GOES_HERE</code>. This works as long as the referenced user has given permission to access it. This is an absolute path because it does not depend on the current directory.</p>
 <p>Linux does not enforce the concept of file extensions. It is still followed by convention, however, since it is convenient.</p>
@@ -195,7 +195,7 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <h3 id="file-operations">File Operations</h3>
 <p>Also, if a command is taking too long, then we can use <code>Ctrl + C</code> to kill it. This is often written as <code>^C</code>. There is also <code>Ctrl + D</code>, which sends the end-of-file symbol to the program, which allows it to gracefully terminate.</p>
 <p>The <code>cat PATTERN_GOES_HERE</code> (concatenate) command is an extremely commonly used command that simply prints out the contents of all given files.</p>
-<p>If the pattern is not specified, so we used <code>cat</code>, then the input is taken from the standard input. If we type some words, they will be pritned out again at the standard output. This continues until we stop the command using <code>^D</code> or similar. This mode is useful if we can capture the output somewhere.</p>
+<p>If the pattern is not specified when we use <code>cat</code>, then the input is taken from the standard input. If we type some words, they will be printed out again at the standard output. This continues until we stop the command using <code>^D</code> or similar. This mode is useful if we can capture the output somewhere.</p>
 <p>All files given to <code>cat</code> are concatenated together. Running <code>cat A.txt B.txt</code> outputs the value of both files right after one another.</p>
 <h3 id="inputoutput-redirection">Input/Output Redirection</h3>
 <p>The <code>COMMAND&gt;FILE</code> operator redirects the standard output of <code>COMMAND</code> into the file <code>FILE</code>, overwriting any existing contents of the file. For example, <code>cat &gt; entered_text.txt</code> allows the user to type in some text and have it saved to <code>entered_text.txt</code></p>
@@ -241,22 +241,23 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 </ol>
 <p>The first letter (bit) of each group is the read bit, and is <code>r</code> if set, or <code>-</code> otherwise. If set, we would be able to read the file, or if it is a directory, we can list its contents.</p>
 <p>The second letter (bit) of each group is the write bit, and is <code>w</code> if set, or <code>-</code> otherwise. If set, we would be able to modify the file contents, or if it is a directory, we can add or remove files.</p>
-<p>The third letter (bit) of each group is the execute bit, and is <code>x</code> if set, or `<code>otherwise. If set, we would be able to execute the file like a program, or if it is a directory, we can navigate into it, like with</code>cd`.</p>
+<p>The third letter (bit) of each group is the execute bit, and is <code>x</code> if set, or <code>-</code> otherwise. If set, we would be able to execute the file like a program, or if it is a directory, we can navigate into it, like with <code>cd</code>.</p>
+<p>We can also specify permissions as a 3 digit octal number. Each digit represents a permission group, and we add up all the permissions that we want for that permission group, where <code>r</code> is 1, <code>w</code> is 2, and <code>x</code> is 4. So <code>700</code> represents all permissions for the owner, but none for anyone else.</p>
 <p>So if a file has execute but not read permissions, then we could go into it but not list its contents. But if we happen to know one of the file paths, we can still access that file by path.</p>
 <h3 id="changing-permissions">Changing Permissions</h3>
 <p>Only the owner of a file can change its permissions. It is not possible to give this ability to anyone else, and it is always possible for the owner to change permissions.</p>
 <p>We do this using the <code>chmod MODE FILE</code>. <code>MODE</code> is a string of the form <code>OWNERSHIP_CLASS OPERATOR PERMISSIONS</code>, with no spaces.</p>
 <p><code>OWNERSHIP_CLASS</code> is the set of bits to apply the operations to. This value can be <code>u</code> for the user/owner bits, <code>g</code> for the group bits, <code>o</code> for the other bits, and <code>a</code> for all bits.</p>
 <p><code>OPERATOR</code> is an operation to perform with the permissions. This value can be <code>+</code> for adding a permission, <code>-</code> for removing a permission, or <code>=</code> to clear all the permissions and add the new one (set the permissions exactly).</p>
-<p><code>PERMISSIONS</code> is simply the permissions to be modified. This value is a string consisting of the characters <code>r</code> for read, <code>w</code> for write, and <code>x</code> for execute.</p>
+<p><code>PERMISSIONS</code> is simply the permissions to be modified. This value is a string consisting of the characters <code>r</code> for read, <code>w</code> for write, and <code>x</code> for execute, or the octal equivalent.</p>
 <p><code>FILE</code> is the file that the permission changes should apply to.</p>
-<p>For example <code>chmod o+r sample.txt</code> gives the owner permission to read <code>sample.txt</code>.</p>
+<p>For example <code>chmod o+rw sample.txt</code> gives the owner permission to read and write <code>sample.txt</code>.</p>
 <h2 id="shell-scripting">Shell Scripting</h2>
 <h3 id="variables">Variables</h3>
-<p>In Bash, we can set variables using things like <code>x=1</code> or <code>x=&quot; a b c &quot;</code>. It is important that <strong>there are no spaces around the equal sign</strong>. If there are, the shell would interpret the <code>x</code> or <code>1</code> as a command.</p>
+<p>In Bash, we can set variables using things like <code>x=1</code> or <code>x=&quot; a b c &quot;</code>. It is important that <strong>there are no spaces around the equal sign</strong>. If there are, the shell would interpret the <code>x</code> as a command.</p>
 <p>We can display the value of the variable using something like <code>echo $x</code>.</p>
 <p>When we want to set a variable's value, we simply write the variable name.</p>
-<p>When we want to get the value of the variable, we prefix it with a <code>$</code>, like <code>$x</code>. It is good practice to enclose the name with curly brackets: <code>${x}</code>. This can</p>
+<p>When we want to get the value of the variable, we prefix it with a <code>$</code>, like <code>$x</code>. It is good practice to enclose the name with curly brackets: <code>${x}</code>. This can be useful when inserting variable values into strings.</p>
 <p>Variables are expanded by the shell before the current command is executed. Variables are expanded when they appear directly, or inside double quotes. Inside single quotes, variables are not expanded. For example, <code>echo $VAR</code> and <code>echo &quot;$VAR&quot;</code> print out the value of <code>VAR</code>, but <code>echo '$VAR'</code> will literally print out, &quot;$VAR&quot;.</p>
 <p>One of the most commonly used shell variables is <code>PATH</code>. This variable is a colon-separated list of paths that are searched in order when trying to execute a file. For example, if we execute <code>ls</code>, the shell will go through the paths specified in <code>PATH</code> one by one, looking for the <code>ls</code> program. If found, it stops searching, and otherwise an error is raised. This is essentially the list of places we should search for when we try to run a program specified by a relative path.</p>
 <h3 id="scripts">Scripts</h3>
@@ -272,7 +273,7 @@ pwd</code></pre>
 <p>A shell script must have execute permissions to be run. This can be done using something like <code>chmod a+x script</code></p>
 <p>Shell scripts can read command line arguments using the special shell variables <code>$1</code>, <code>$2</code>, and etc., where <code>$0</code> contains the command line itself, &quot;script&quot;.</p>
 <p>For example, a shell script that checks if a word is in a dictionary can be written with a hashbang and <code>egrep &quot;^$1$&quot; /usr/share/dict/words</code>.</p>
-<p><code>/dev/0</code> is a file that can be written to, but simply discards whatever is written. Redirecting output to <code>/dev/0</code> means we are discarding the output.</p>
+<p><code>/dev/null</code> is a file that can be written to, but simply discards whatever is written. Redirecting output to <code>/dev/null</code> means we are discarding the output.</p>
 <p>If we want to check something like whether <code>egrep</code> matched something, we can use the exit code. The <strong>exit code</strong> is the value that we returned from the <code>main</code> function in C programs.</p>
 <p>By convention, 0 indicates success, and a non-zero value indicates some sort of failure. In Bash, the last exit code given by a program is stored in the special shell variable <code>$?</code>.</p>
 <p>In the above example, <code>egrep</code> gives exit code 1 if no matches were found and 0 otherwise:</p>
@@ -295,6 +296,7 @@ else
     BODY
 fi</code></pre>
 <p>When we used it in the form above, we actually executed the <code>[</code> program with the value of <code>$?</code>, <code>-eq</code>, and <code>0</code>, which sets the exit code to 0 if the expression evaluates to true (<code>$?</code> is equal to <code>0</code>), or 1 otherwise. This happens to work very well with the <code>if</code> construct.</p>
+<p><code>[</code> support various other options, like <code>-w FILE</code> for checking if a file is writeable, <code>-x FILE</code> to check if a file is executable, and <code>-r FILE</code> to check if a file is readable.</p>
 <p><code>-eq</code> is an operator for comparing integers. To compare strings, we can use <code>==</code> or <code>=</code>.</p>
 <p>We can have as many <code>elif</code> statements as we need.</p>
 <p>A <code>while</code> loop statement has a similar form to an <code>if</code> statement. The following prints out all the numbers from 1 to its first command line argument, inclusive:</p>
@@ -340,7 +342,7 @@ done</code></pre>
 <p>A basic C++ program might look like the following:</p>
 <pre><code>#include &lt;iostream&gt; // we do not have to specify the .h extension for header files
 using namespace std; // this puts the std namespace into the global namespace, so std::cout is the same as cout; without this line we have to use std::cout and std::endl
-int main() { // the main function must be declared to return an integer, and for this funciton only it is not required to actually use a `return` statement (defaults to `return 0`)
+int main() { // the main function must be declared to return an integer, and for this function only it is not required to actually use a `return` statement (defaults to `return 0`)
     cout &lt;&lt; &quot;Hello, world!&quot; &lt;&lt; endl;
 }</code></pre>
 <p>The syntax is similar to C. <code>cout</code> is the standard output stream, and <code>endl</code> is a constant representing the end of line (a newline on Linux, and a carriage return with a newline on Windows).</p>
@@ -360,7 +362,7 @@ int main() {
 <p>Note that <code>cin</code> waits for an integer because the right side is an integer. This is an example of overloading. <code>cin</code> will always ignore whitespace and newlines when doing this.</p>
 <p>The syntax is <code>g++ OPTIONS FILE</code>.</p>
 <h3 id="inputoutput">Input/Output</h3>
-<p>If we type in some invalid input like <code>4 potato</code> to the above program or give an EOF, the variables are either uninitialized or set to 0 or other behaviour.</p>
+<p>If we type in some invalid input like <code>4 potato</code> to the above program or give an EOF, the variables are either uninitialized or set to 0 or other undefined behaviour.</p>
 <h1 id="section-5">22/5/14</h1>
 <p>How do we check if the input given was invalid - if the read was successful? <code>cin.fail()</code> is true if and only if the most recent read failed (invalid or EOF). Likewise, <code>cin.eof()</code> is true if and only if the most recent read got to the end of the input.</p>
 <p>We must attempt to do the reading, and if it fails, then we handle the error condition. Also, if there is an error, the failure flag stays set until we acknowledge it, and until then all subsequent reads do nothing. Upon error, the stream is not advanced and a second read will try to read the same thing.</p>
@@ -377,7 +379,7 @@ int main() {
 }</code></pre>
 <p>When we say <code>if (!cin)</code>, <code>cin</code> is implicitly converted into a <code>void*</code>, and is truthy if the last read was successful and falsy otherwise. <code>if (cin)</code> is equivalent to <code>if (!cin.fail())</code>.</p>
 <p>Also, <code>std::cin &gt;&gt; i</code> evaluates to <code>std::cin</code>, which allows us to do things like <code>cin &gt;&gt; x &gt;&gt; y</code>. This technique is known as <strong>cascading</strong>. The same thing works with the <code>&lt;&lt;</code> operator as well, which we saw in the <code>cout &lt;&lt; i &lt;&lt; endl</code> line.</p>
-<p>Note that <code>a &gt;&gt; b</code> is also the right bit-shift operator, equivalent to <code>\floor{\frac a {2^b}}</code>. This operator <strong>behaes differently depending on its operands</strong>. If the left side is an IStream such as <code>std::cin</code>, it acts as the input operator, and if the left side is an int, it acts as a right bit-shift.</p>
+<p>Note that <code>a &gt;&gt; b</code> is also the right bit-shift operator, equivalent to <span class="math">\(\floor{\frac a {2^b}}\)</span>. This operator <strong>behaes differently depending on its operands</strong>. If the left side is an IStream such as <code>std::cin</code>, it acts as the input operator, and if the left side is an int, it acts as a right bit-shift.</p>
 <p>With this in mind, we can have the following shorter version:</p>
 <pre><code>#include &lt;iostream&gt;
 using namespace std;
@@ -402,7 +404,7 @@ int main() {
 <p>In C++, strings are significantly easier to use than in C. We use the type <code>std::string</code>, and literals are denoted with double quotes (<code>&quot;string&quot;</code>):</p>
 <pre><code>int main() {
     std::string s;
-    std::cin &lt;&lt; s;
+    std::cin &gt;&gt; s;
     std::cout &lt;&lt; s &lt;&lt; endl;
 }</code></pre>
 <p>When we try to read a string from stdin, it first ignores all leading whitespace, stores non-whitespace characters in the variable, and stops at the first whitespace character encountered. As a result, it will only read one word at a time.</p>
@@ -446,8 +448,8 @@ negate(true); // calls the second one</code></pre>
 <pre><code>#include &lt;sstream&gt;
 int main() {
     std::string value = &quot;2 5&quot;;
-    istringstream input(value); // string reader
-    ostringstream output; // string writer
+    stringstream input(value); // string reader
+    stringstream output; // string writer
     output &lt;&lt; &quot;Enter a number between &quot; &lt;&lt; low &lt;&lt; &quot; and &quot; &lt;&lt; high;
     int low, high; input &gt;&gt; low, input &gt;&gt; high;
     std::string result = output.str();
@@ -640,13 +642,13 @@ int main() {
     Something(int c, int &amp;r): normal(5), some_constant(c), some_reference(r) { // member initialization list calls the default constructors, but with values that we specify
         // it is too late to initialize them in the constructor body, because they should be initialized (and for constants, made fixed) as soon as they are defined
     }
-}</code></pre>
+};</code></pre>
 <p>This is also useful for shortening constructors, because we can just initialize the fields of a structure using a member initialization list and leave the body blank.</p>
 <p>In a member initialization list, the name outside the parentheses must be a field, and the value inside the parentheses can be any valid expression, like globals and scope variables, or fields that have already been initialized.</p>
 <pre><code>struct S {
     int n;
     Something(int n): n(n) {} // in the member initialization list, it is valid to use the same name because the name outside the parentheses is searched for in the fields, not as an expression
-} // it is also more efficient to use these member initialization lists than to assign them values inside the constructor body, because we don&#39;t need to call the default constructors any more</code></pre>
+}; // it is also more efficient to use these member initialization lists than to assign them values inside the constructor body, because we don&#39;t need to call the default constructors any more</code></pre>
 <p>We use member initialization lists because they are the only way to initialize constants/references, because they are shorter and cleaner than assigning in the constructor body, and because it can be more efficient.</p>
 <p>Fields are initialized in the order that they are declared in the struct, regardless of their order in the member initialization list. However, we should generally keep them in the same order to avoid a compiler warning.</p>
 <p>There is also a <strong>copy constructor</strong> that is called when we make a copy of a struct:</p>
@@ -662,18 +664,18 @@ Student b = a; // this calls the default copy constructor</code></pre>
         return this-&gt;assignment_grade * 0.4 + this-&gt;midterm_grade * 0.2 + this-&gt;final_grade * 0.4;
     }
     Student(const Student &amp;other): assignment_grade(other.assignment_grade), midterm_grade(other.midterm_grade), final_grade(other.final_grade) {} // the reference should be constant since it usually doesn&#39;t need to be modified
-}</code></pre>
+};</code></pre>
 <p>The custom copy constructor is often useful when we have dynamic memory or want a deep copy. For example, we want a deep copy for a linked list to avoid sharing the same linked list nodes for multiple starting lists, which would make freeing the memory very difficult:</p>
 <pre><code>struct Node {
     int data;
     Node *next;
     Node(const Node &amp;other): data(other.data), next(other.next ? new Node(other.next) : 0) {};
-}</code></pre>
+};</code></pre>
 <p>So every class has a default constructor, a default copy constructor, a copy assignment operator, and a destructor.</p>
 <h1 id="section-12">18/6/14</h1>
 <p>The <code>delete</code> keyword can be used to destroy an object on the heap given its pointer. If we defined something like <code>int *x = new int(5)</code> (a pointer to an integer on the heap), then afterwards we can destroy it using <code>delete x;</code>.</p>
 <p>If we have an array on the heap like <code>int *a = new int[20]</code>, then we must use <code>delete [] a</code> to properly destroy the array. Using <code>delete</code> without the <code>[]</code> might result in the wrong thing being destroyed.</p>
-<p><code>delete</code> cannot be used with stack memory. It wworks in a way conceptually similar to the <code>free</code> function in C.</p>
+<p><code>delete</code> cannot be used with stack memory. It works in a way conceptually similar to the <code>free</code> function in C.</p>
 <p>An object on the stack is destroyed when it goes out of scope (for example, an object created inside a function would be destroyed when the function returns, unless it is returned).</p>
 <p>An object on the heap is destroyed when we explicitly destroy it using <code>delete</code>. Otherwise the object remains in memory.</p>
 <p>Objects have methods called <strong>destructors</strong> that get called when an instance of the object gets destroyed. We can specify a custom destructor as follows:</p>
@@ -686,7 +688,7 @@ Student b = a; // this calls the default copy constructor</code></pre>
         // a destructor should never throw any exceptions
         // we can do other cleanup stuff here, like closing database connections, destroying heap objects, or other things
     }
-}</code></pre>
+};</code></pre>
 <p>There is also a default destructor, which just calls the destructors on the individual fields of the object.</p>
 <p>Header files should contain function declarations, structure declarations, and things like constants. Source files should actually implement the functions.</p>
 <p>Up to this point we have been defining the whole class in one big struct declaration and putting implementation together with declarations. This is not the ideal way to go about it - it is possible to separate the two. The following would go into the header file:</p>
@@ -715,6 +717,7 @@ Node::Node (const &amp;other) : data(other.data), next(other.next ? new Node(*ot
 };
 
 Node &amp;Node::operator=(const Node &amp;other) {
+    if (this == other) return *this; // assigning an object to itself could be problematic if we aren&#39;t careful
     delete this-&gt;next; // delete the rest of the list to prevent memory leaks
     this-&gt;data = other.data; // set this node to be the new node
     this-&gt;next = other.next ? new Node(*other.next) : 0;
@@ -722,7 +725,7 @@ Node &amp;Node::operator=(const Node &amp;other) {
     // we might also assign `this.next` to a pointer variable and delete it last in case the copying of `other.next` failed for whatever reason
 }</code></pre>
 <h1 id="section-13">19/6/14</h1>
-<p>The copy and swap technique is a way of implementing assignment that uses the copy constructor to simplify assignment</p>
+<p>The copy and swap technique is a way of implementing assignment that uses the copy constructor to simplify assignment and freeing the memory of the old object in a simple way:</p>
 <pre><code>struct Node {
     void swap(Node &amp;other) { // this swaps the values of this instance and a specified other instance
         int *data = this-&gt;data;
@@ -824,7 +827,7 @@ Student Student::getInstance() {
         instance = new Student;
         atexit(cleanup);
     }
-    return this-&gt;instance;
+    return *instance;
 }
 Student::Student(): grade(0) {}
 Student::cleanup() { delete Student::instance; }</code></pre>
@@ -851,6 +854,55 @@ Student::cleanup() { delete Student::instance; }</code></pre>
     int x, y;
     friend ostream &amp;operator&lt;&lt;(const ostream &amp;out, const Vec &amp;v);
 }</code></pre>
+<h1 id="section-15">26/6/14</h1>
+<p>Class destructors should be public in order for them to be usable. We define destructors with <code>ClassName::~ClassName() { ... }</code>.</p>
+<p>;wip: relations between classes. Composition, friends, aggregation, and he started inheritance near the end</p>
+<h1 id="section-16">3/7/14</h1>
+<p>;wip: relationships owns-a, is-a, has-a, UML</p>
+<p>Private fields are inherited by subclasses, but they can't access them. In addition to <code>private</code> and <code>public</code>, we also have access level called <code>protected</code> that acts like <code>private</code>, but all subclasses can access it as well.</p>
+<p>When an object is created, space is allocated for it, the superclass is constructed, the fields are initialized, and then the constructor body runs. However, if the superclass doesn't have a default constructor, superclass construction cannot occur:</p>
+<pre><code>class Book {
+    protected:
+        string title, author;
+    private:
+        int ISBN;
+    public:
+        Book(string title, string author, int ISBN): title(title), author(author) {}
+}
+
+class CSBook: public Book { // `CSBook` inherits from `Book`
+    // here, we can set/get `title` and `author`, but not `ISBN`
+    public:
+        CSBook(string title, string author, int ISBN): Book(title, author, ISBN) {} // we override calling the default superclass constructor with our custom call to the constructor in the initialization list
+}</code></pre>
+<p>Protected fields are a bad idea because they break encapsulation. We use encapsulation because then we can enforce class invariants, like the components of a vector being positive.</p>
+<p>If we have protected fields, the client could potentially write their own subclass that gives them access to the protected fields of a class. Instead, we should use <strong>protected accessors/mutators</strong>, while the fields stay private. This allows us to enforce invariants inside the protected methods, while the private fields remain inaccessible outside the class, even to subclasses.</p>
+<p>The relationship between <code>Book</code> and <code>CSBook</code> is an &quot;is-a&quot; relationship. We say that <code>CSBook</code> &quot;is-a&quot; <code>Book</code>, and draw a line with a filled arrow pointing from <code>CSBook</code> to <code>Book</code>:</p>
+<pre class="flow"><code>a=&gt;operation: Book
+b=&gt;operation: CSBook
+
+b-&gt;a</code></pre>
+<p>Consider the following:</p>
+<pre><code>class A {
+    public:
+        int x() { return 5 }
+}
+
+class B: public A {
+    public:
+        int x() { return 20 }
+        int y;
+}
+
+int main() {
+    A v = B(); // `v` is a variable declared to be of type `Book` but is an instance of `B`
+    cout &lt;&lt; v.x(); // this prints out 5 rather than 20
+}</code></pre>
+<p>The above outputs 5 because <code>v</code> is declared to be of type <code>A</code>, not <code>B</code>, so <code>A::x</code> runs rather than <code>B::x</code>, even though <code>v</code> is specifically an instance of <code>B</code>.</p>
+<p>If we access a subclass through a superclass variable, the compiler will look only at the superclass - we cannot use subclass fields from <code>v</code>. When we did <code>A v = B</code> (coercing a <code>B</code> object into an <code>A</code> object), there was only enough memory allocated for a single <code>A</code> object, so extra fields like <code>y</code> would get truncated from the end. The compiler determined it is an <code>A</code> object, so <code>v.y</code> is an error. If subclass fields are out of order or get truncated, there is a compiler warning.</p>
+<p>We can avoid this by using a pointer. <code>A *w = new B()</code> would no longer cut out the extra fields at the ends since there is still memory for all of them, but <code>w-&gt;x()</code> still prints out 5 because the compiler determines that it is an <code>A</code> object at compile time. Therefore, <code>w-&gt;y</code> results in an error. If subclass fields are out of order, then we get invalid memory accesses and undefined behaviour.</p>
+<p>We can avoid this by using the <code>virtual</code> specifier for methods, which makes it so that the type of the object is considered at runtime, rather than from the type of the variable. So if <code>A.x</code> was declared as <code>virtual int x()</code> and <code>A *w = new B()</code>, the method to call when we do <code>w-&gt;x()</code> is decided at runtime from the value of <code>w</code> itself.</p>
+<p>;wip: tutorial tomorrow about makefiles</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">University-Notes</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Uberi/University-Notes" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

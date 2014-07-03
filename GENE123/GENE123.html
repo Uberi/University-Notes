@@ -418,12 +418,12 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>Also, if we have only dependent sources, or no sources at all, then there will be no current at all in the open circuit by itself. So the resulting Thevenin equivalent circuit will have no voltage source, only a resistor.</p>
 <p>Since we still need to find the Thevenin resistance, we introduce a test source across the specified terminals, often of 1 V or left as an unknown, in order to find <span class="math">\(I_{SC}\)</span>, the current going through the voltage source. We could also introduce a current source, often of 1 A or left as an unknown, in order to find <span class="math">\(V_{OC}\)</span>, the voltage across the current source.</p>
 <p>;wip: diagram</p>
-<p>When we use the test source, <span class="math">\(R_{th}\)</span> is the voltage of the test source over the current through the test source.</p>
+<p>When we use the test source, <span class="math">\(R_{th}\)</span> is the voltage of the test source over the current through the test source. The open circuit voltage can still be found using nodal analysis, but is simply 0V.</p>
 <h1 id="section-16">9/6/14</h1>
 <p>So the three methods are:</p>
 <ol style="list-style-type: decimal">
 <li>If all sources are independent, remove the effects of the sources and calculate the Thevenin resistance. Then use nodal analysis to get the open circuit voltage.</li>
-<li>If there are dependent sources but no independent sources, add a test source to help with finding the Thevenin resistance. Then use nodal analysis to get the open circuit voltage.</li>
+<li>If there are dependent sources but no independent sources, add a test source to help with finding the Thevenin resistance. Then the Thevenin voltage is 0V.</li>
 <li>Otherwise, use nodal analysis to get the open circuit voltage and short circuit voltage, and use this to calculate the Thevenin resistance.</li>
 </ol>
 <p>The Thevenin equivalent is relative to two terminals (often called A and B) in section of a circuit. We are trying to find a circuit we can replace that entire section of circuit between A and B with that acts exactly the same.</p>
@@ -521,7 +521,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <h1 id="section-20">24/6/14</h1>
 <h2 id="capacitanceinductance">Capacitance/Inductance</h2>
 <p>So far, the only passive elements in our circuits is the resistor.</p>
-<p>A capacitor is another passive circuit element that stores energy. A capacitor is a two-terminal device that is made of two conductive plates stacked close together, separated by a layer of insulating material, called the dialectric.</p>
+<p>A capacitor is another passive circuit element that stores energy in charged plates. A capacitor is a two-terminal device that is made of two conductive plates stacked close together, separated by a layer of insulating material, called the dialectric.</p>
 <p>When charge enters one end of a capacitor, it stops at the dialectric. However, the charges have an electric field, which extends over to the other plate. This repels charges in the other plate, pushing charge out of the other end of the capacitor.</p>
 <p>Putting charge into a capacitor is called <strong>charging</strong> a capacitor. After one end of a capacitor is fully charged, the capacitor is <strong>charged</strong>, and nothing happens if we try to put in more charge.</p>
 <p>Capacitors have capacitance (<span class="math">\(C\)</span>), which is the ability to store electric charge. Capacitance is measured in Farads (F), which is a huge unit, so we often use micro or nano or picoFarads.</p>
@@ -535,7 +535,29 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>Given capacitors connected in series with capacitances <span class="math">\(C_1, \ldots, C_n\)</span>, it is possible to replace all of them with an <strong>equivalent series capacitance</strong> <span class="math">\(\frac 1 {C_{eq}} = \frac 1 {C_1} + \ldots + \frac 1 {C_n}\)</span>. This is similar to the formula for equivalent resistance for resistors in parallel.</p>
 <p>Given capacitors connected in parallel with capacitances <span class="math">\(C_1, \ldots, C_n\)</span>, it is possible to replace all of them with an <strong>equivalent parallel capacitance</strong> <span class="math">\(C_{eq} = C_1 + \ldots + C_n\)</span>. This is similar to the formula for equivalent resistance for resistors in series.</p>
 <p>The DC steady state of the capacitor is very important for analyzing circuits. The DC steady state is when <span class="math">\(I(t) = 0 = \frac{\dee V(t)}{\dee t}\)</span>.</p>
-<p>When analyzing circuits at DC steady state, we know that the capacitors are not affecting the voltage, and the currents flowing through them are 0 A, so we can actually treat them as an open circuit - they can simply be removed from the circuit.</p>
+<p>When analyzing circuits at DC steady state, we know that the capacitors are not affecting the voltage, and the currents flowing through them are 0 A, so we can actually treat them as an open circuit - they can simply be removed from the circuit. The steady state of a capacitor is an open circuit.</p>
+<h1 id="section-22">26/6/14</h1>
+<p>;wip: inductors: current in inductor can't change instantaneously, <span class="math">\(V_L = L\frac{\dee i_L}{\dee t}\)</span> where <span class="math">\(L\)</span> is the inductance</p>
+<p>Inductors store energy in magnetic fields. An inductor is a two terminal device that is made up of a conductive coil, optionally with a core of ferromagnetic material.</p>
+<p>When current flows into one end of an inductor, it flows out the other end, in the process creating a magnetic field in the coil.</p>
+<p>The steady state of an inductor is a short circuit.</p>
+<h1 id="section-23">2/7/14</h1>
+<p>;wip: make up lecture this monday and next monday</p>
+<p>;wip: see midterm at office hours</p>
+<h2 id="transient-analysis">Transient Analysis</h2>
+<p>This is analysis of circuits with respect to time. A <strong>transient</strong> state is one that is dependent on time. Before this, we were analyzing circuits in <strong>steady state</strong> - a state that does not change over time.</p>
+<p>;wip: transcribe from notebook</p>
+<p>;wip: constant charging voltage is never quite reached because <span class="math">\(e^{-\frac t \tau} &gt; 0\)</span>.</p>
+<p>An RC circuit is a capacitor in series with a resistor.</p>
+<h1 id="section-24">3/7/14</h1>
+<p>In this course we will only be working with circuits that can be reduced such that they only have one capacitor, which allows us to apply the charging/discharging formula <span class="math">\(V_c(t) = V_f + (V_i - V_f)e^{-t/\tau}\)</span> where <span class="math">\(\tau = RC\)</span>, the time constant.</p>
+<p>To solve DC steady state problems, we find the initial conditions at <span class="math">\(t = 0\)</span> and the final conditions at <span class="math">\(t = \infty\)</span>. For capacitors, we then find the time constant and use the charging/discharging equation to determine the voltage.</p>
+<p>We can find the time constant of a capacitor by using <span class="math">\(\tau = RC\)</span> where <span class="math">\(R\)</span> is the Thevenin resistance across the rest of the circuit and <span class="math">\(C\)</span> is the capacitance. Note that the steady state voltage is also the Thevenin voltage.</p>
+<p>To solve capacitor problems, we replace everything except for the capacitor with its Thevenin equivalent. Then <span class="math">\(\tau = V_{th}C\)</span> and <span class="math">\(V_f = V_{th}\)</span>.</p>
+<p>Whenever a capacitor of a switch toggles, then we have to restart transient analysis with the state of the capacitor at the moment the switch toggles as the initial state for the restarted analysis. This is because the switch toggling means that we are now dealing with a different circuit.</p>
+<p>An RL circuit is an inductor in series with a resistor.</p>
+<p>For inductors, we use the same steps, but <span class="math">\(\tau = \frac L R\)</span>.</p>
+<p>For inductors, <span class="math">\(I_L = I_f + (I_i - I_f)e^{-\frac t \tau}\)</span>.</p>
 <hr>
 <p>Copyright 2013 Anthony Zhang</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">University-Notes</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Uberi/University-Notes" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

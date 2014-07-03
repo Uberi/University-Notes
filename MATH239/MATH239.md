@@ -101,8 +101,6 @@ In general, $[n]$ has $\frac{n!}{k!(n - k)!}$ combinations of size $k$. This can
 
 # 7/5/14
 
-;wip: midterm on July 3
-
 Bijections
 ----------
 
@@ -120,7 +118,7 @@ It is often tedious to prove that it is one to one and onto. We can prove a func
 
 Proposition: a function is a bijection if and only if it has an inverse.
 
-The **inverse** of $f: S \to T$ is a function $f^{-1}$ such that \forall x \in S, f^{-1}(f(x)) = x$ and $\forall y \in T, f(f^{-1}(y)) = y$. It is basically a reverse mapping backwards from $T$ to $S$.
+The **inverse** of $f: S \to T$ is a function $f^{-1}$ such that $\forall x \in S, f^{-1}(f(x)) = x$ and $\forall y \in T, f(f^{-1}(y)) = y$. It is basically a reverse mapping backwards from $T$ to $S$.
 
 For example, let $S$ be the set of all $k$-subsets of $[n]$ and $T$ be the set of all $(n - k)$-subsets of $[n]$:
 
@@ -339,7 +337,7 @@ The three series to remember are:
 
 What is the inverse of $x$, if it exists?
 
-> Let $B(x) = b_0 + b_1x + \ldots$ be a power series such that $xB(x) = 1$.  
+> Suppose $B(x) = b_0 + b_1x + \ldots$ exists such that $xB(x) = 1$.  
 > Then $x(b_0 + b_1x + \ldots) = b_0x + b_1x^2 + \ldots = 1$.  
 > This is a contradiction because the left side has no constant term, while the right side does.  
 
@@ -379,7 +377,7 @@ We can generalize this to any rational function. Find the coefficients of the po
 
 Consider $D(x) = \sum_{i \ge 0} (1 + x^2)^i = \frac 1 {1 - (1 + x^2)} = \frac 1 {-x^2}$. However, this is **not a power series** - it does not have a constant term!
 
-To see why, we can expand it out: $D(x) = 1 + (1 + x^2) + (1 + x^2)^2 + \ldots$. Note that ever term has a 1 term in it when expanded. Therefore, the constant term goes toward infinity.
+To see why, we can expand it out: $D(x) = 1 + (1 + x^2) + (1 + x^2)^2 + \ldots$. Note that every term has a 1 term in it when expanded. Therefore, the constant term goes toward infinity.
 
 All power series must be invertible. Therefore, all power series **must have a constant term**. If the constant term is 0 or infinite, then it cannot be inverted and therefore is not a power series.
 
@@ -488,8 +486,8 @@ Incidentally, the number of compositions in total is the sum of the compositions
 
 How many compositions of $n$ exist?
 
-> Let $S = \mb{N}^0 \cup \mb{N}^1 + \mb{N}^2 + \ldots$. This is a set that is a superset of all the possible compositions.  
-> Let $w(a_1, \ldots, a_k) = a_1 + \ldots + a_k$. Then $\Phi_S(x) = \frac{1 - x}{1 - 2x}$.  ;wip: how did we get this generating series?
+> Let $S = \mb{N}^0 \cup \mb{N}^1 \cup \mb{N}^2 \cup \ldots$. This is the set of all possible compositions.  
+> Let $w(a_1, \ldots, a_k) = a_1 + \ldots + a_k$. Then $\Phi_S(x) = \frac{1 - x}{1 - 2x}$, since $\Phi_S(x) = \sum_{i = 0}^\infty \left(\frac{x}{1 - x}\right)^i = \frac{1}{1 - \frac{x}{1 - x}} = \frac{1}{\frac{1 - 2x}{1 - x}}$.  
 > Then there are $[x^n]\frac{1 - x}{1 - 2x}$ compositions of $n$.  
 > Also, we can get the explicit value: $[x^n]\frac{1 - x}{1 - 2x} = [x^n]\frac{1}{1 - 2x} - [x^n]\frac{x}{1 - 2x} = [x^n]\frac{1}{1 - 2x} - [x^{n - 1}]\frac{1}{1 - 2x} = [x^n]\sum_{i = 0}^\infty (2x)^i - [x^{n - 1}]\sum_{i = 0}^\infty (2x)^i = \begin{cases} 2^n - 2^{n - 1} &\text{if } n > 0 \\ 1 &\text{if } n = 0 \end{cases}$.  
 
@@ -506,8 +504,8 @@ How many compositions of $n$ exist such that there are $2k$ parts, where the fir
 > Let $S = A^k \times B^k$. Clearly, this set represents all of the compositions we care about.  
 > Then $\Phi_S(x) = \Phi_A(x)^k \Phi_B(x)^k$, by the product lemma.  
 > Clearly, $\Phi_A(x) = x^5 + x^6 + x^7 + \ldots = \frac{x^5}{1 - x}$ and $\Phi_B(x) = x^3 + x^6 + x^9 + \ldots = \frac{x^3}{1 - x^3}$.  
-> So $\Phi_S(x) = \left(\frac{x^5}{1 - x}\right)^k \left(\frac{x^3}{1 - x^3}\right) = \frac{x^{8k}}{(1 - x)^k(1 - x^3)^k}$.  
-> So there are $[x^n]\Phi_S(x) = \left(\frac{x^5}{1 - x}\right)^k \left(\frac{x^3}{1 - x^3}\right)$ of these compositions.  
+> So $\Phi_S(x) = \left(\frac{x^5}{1 - x}\right)^k \left(\frac{x^3}{1 - x^3}\right)^k = \frac{x^{8k}}{(1 - x)^k(1 - x^3)^k}$.  
+> So there are $[x^n]\Phi_S(x) = [x^n]\left(\frac{x^5}{1 - x}\right)^k \left(\frac{x^3}{1 - x^3}\right)^k$ of these compositions.  
 
 The Fibonnaci recurrence is defined as $a_0 = 1, a_1 = 1, a_n = a_{n - 1} + a_{n - 2}$.
 
@@ -548,32 +546,29 @@ We first construct a set $S$ of all strings with the given properties. Then, we 
 
 Let $A, B$ be sets of strings.
 
-Then $AB = \set{ab \middle| a \in A, b \in B}$. This is somewhat similar to the Cartesian product, but is not always the same. Basically, we 
+Then $AB = \set{ab \middle| a \in A, b \in B}$. This is somewhat similar to the Cartesian product, but is not always the same. Basically, we have the set of all possible combinations of the two sets.
 
-Then $A^n = AAA\ldotsAAA$, $n$ times. So $A^0 = \set{\epsilon}, A^1 = A, A^2 = AA, \ldots$. So $00101 \in \set{0, 1}^5$.
+Then $A^n = AAA \ldots AAA$, $n$ times. So $A^0 = \set{\epsilon}, A^1 = A, A^2 = AA, \ldots$. So $00101 \in \set{0, 1}^5$.
 
-Then $A* = A^0 \cup A^1 \cup A^2 \cup \ldots$. This is the binary strings that can be made by concatinating combinations of $A$. For example, $\set{0, 1}*$ is the set of all possible binary strings.
+Then $A^* = A^0 \cup A^1 \cup A^2 \cup \ldots$. This is the binary strings that can be made by concatinating combinations of $A$. For example, $\set{0, 1}*$ is the set of all possible binary strings.
 
-For example, $\set{0}\set{00}*$ is the set of all binary strings of all 0 of odd length. This is because it can be expanded to $\set{0, 000, 00000, \ldots}$.
+For example, $\set{0}\set{00}^*$ is the set of all binary strings of all 0 of odd length. This is because it can be expanded to $\set{0, 000, 00000, \ldots}$.
 
-Another example is $\set{0}*(\set{1}\set{0}*)*$. This is the set of all possible binary strings, because given an arbitrary binary string, it can start with any number of 0 to be in $\set{0}*$, and if we break the remaining string into pieces just before every 1, each piece is in $\set{1}\set{0}*$.
+Another example is $\set{0}^*(\set{1}\set{0}^*)^*$. This is the set of all possible binary strings, because given an arbitrary binary string, it can start with any number of 0 to be in $\set{0}^*$, and if we break the remaining string into pieces just before every 1, each piece is in $\set{1}\set{0}^*$.
 
 # 30/5/14
 
 ### Generating Series
 
-We want to find the number of binary strings of a given length $n$ that satisfy a given property. To do this we can use a generating series over the set of strings where the weight is the length of the string.
+We want to find the number of binary strings of a given length $n$ that satisfy a given property. To do this we can use a generating series over the set of strings that satisfy this property where the weight is the length of the string.
 
 For example, $\Phi_{\set{0, 1}}(x) = x + x = 2x$.
-
-;wip: rules for constructing generating series
-;wip: generating series for S* is $\frac 1 {1 - \Phi_S(x)}$ because $S* = S^0 \cup S^1 \cup S^2 \cup \ldots$.
 
 For example, in this case $\set{0, 1}^n$ is similar to a Cartensian product $n$ times. So in this case, we can use the product lemma: $\Phi_{\set{0, 1}^n}(x) = 2^nx^n$
 
 For example, $\Phi_{\set{0, 1}*}(x) = \sum_{n \ge 0} \Phi_{\set{0, 1}^n}(x) = \sum_{n \ge 0} 2^nx^n = \frac 1 {1 - 2x}$.
 
-What is the generating series for $\set{0}\set{00}*\set{1, 11, 111}$?
+What is the generating series for $\set{0}\set{00}^*\set{1, 11, 111}$?
 
 > Clearly, $\Phi_{\set{0}}(x) = x, \Phi_{\set{00}*}(x) = \frac 1 {1 - x^2}, \Phi_{\set{1, 11, 111}}(x) = x + x^2 + x^3$.  
 > So $\Phi_{\set{0}\set{00}*\set{1, 11, 111}}(x) = x \frac 1 {1 - x^2} (x + x^2 + x^3) = \frac{x^2 + x^3 + x^4}{1 - x^2}$ where the weight is the length of each string.  
@@ -583,9 +578,9 @@ What is the generating series for $\set{0}\set{00}*\set{1, 11, 111}$?
 
 We previously assumed that $AB$ is functionally the same as $A \times B$ - that concatenation of sets of binary strings is similar to the Cartesian producct. However, this is **not always true**.
 
-Clearly, $\Phi_{AB}(x) = \Phi_A(x) \Phi_B(x)$ if for all $ab \in AB$, $w(ab)$ is the length of $a$ plus the length of $b$.
+In other words, it is not always true that $\Phi_{AB}(x) = \Phi_A(x) \Phi_B(x)$ if for all $ab \in AB$, $w(ab)$ is the length of $a$ plus the length of $b$.
 
-For example, consider $A = \set{010, 01}, B = \set{01, 001}$. So $\Phi_A(x) = x^2 + x^3, \Phi_B(x)x^2 + x^3$.
+For example, consider $A = \set{010, 01}, B = \set{01, 001}$. So $\Phi_A(x) = x^2 + x^3, \Phi_B(x) = x^2 + x^3$.
 
 Clearly, $A \times B = \set{(010, 01), (010, 001), (01, 01), (01, 001)}$. So the generating series is $\Phi_{A \times B}(x) = x^5 + x^6 + x^4 + x^5$.
 
@@ -597,7 +592,7 @@ Basically, if there is more than one way for any binary string to be created by 
 
 Also, $A \cap B$ is ambiguous if and only if $A \cap B \ne \emptyset$. This concept can be extended to any number of sets as well.
 
-### Sum/product Rule for Strings
+### Sum/Product Rule for Strings
 
 If $A \cap B$ is unambiguous, then $\Phi_{A \cup B}(x) = \Phi_A(x) + \Phi_B(x)$ where $w(\sigma) = \sigma$.
 
@@ -607,11 +602,11 @@ If $AB$ is unambiguous, then $\Phi_{AB}(x) = \Phi_A(x) \Phi_B(x)$ where $w(a, b)
 
 Since $AB$ is unambiguous, there is a bijection between $AB$ and $A \times B$, so it follows by the product lemma.
 
-If $A^*$ is unambiguous, then $\Phi_{A^*}(x) = \frac 1 {1 - \Phi_A(x)}$.
+If $A^*$ is unambiguous, then $\Phi_{A^*}(x) = \frac 1 {1 - \Phi_A(x)}$ because $S^* = S^0 \cup S^1 \cup S^2 \cup \ldots$.
 
 Proof:
 
-> Since $A*$ is unambiguous, $A^n$ is unambiguous.  
+> Since $A^*$ is unambiguous, $A^n$ is unambiguous.  
 > Clearly, $\epsilon \notin A$, because if it was then $AA$ would be ambiguous.  
 > So $\Phi_A(x)$ has no constant term and $\Phi_{A^*}(x)$ is a geometric series.  
 > So $\Phi_{A^*}(x) = \frac 1 {1 - \Phi_A(x)}$.  
@@ -626,6 +621,8 @@ The last is the **block decomposition**: $\set{0}^*\left(\set{1}\set{1}^*\set{0}
 
 We can also swap the 1 and 0 to the same effect: $\set{0}^*(\set{1}\set{0}^*)^*$ matches the same strings as $\set{1}^*(\set{0}\set{1}^*)^*$.
 
+Also, $\Phi_A(x) = \abs{A}x$ if $A = \set{\ldots}$.
+
 # 2/6/14
 
 Let $S$ be the set of all binary strings with no 3 consecutive 0 - strings that do not contain 000. What is the generating series of this set?
@@ -633,12 +630,13 @@ Let $S$ be the set of all binary strings with no 3 consecutive 0 - strings that 
 > We can use the $\set{0}^*(\set{1}\set{0}^*)^*$ decomposition to match these strings.   
 > Clearly, we can have three consecutive 0 when and only when we have a $\set{0^*}$. Instead, we can replace this with $\set{\epsilon, 0, 00}$, the subset of $\set{0}^*$ that do not contain 3 consecutive 0.  
 > So $S = \set{\epsilon, 0, 00}(\set{1}\set{\epsilon, 0, 00})^*$. This is still unambiguous because we are simply removing strings we do not want to match.  
-> Since it is unambiguous, $\Phi_S(x) = (1 + x + x^2) \frac 1 {1 - (x + x^2 + x^3)}$ ;wip = (1 + x + x^2)$ ;wip: $$
+> Since it is unambiguous, $\Phi_S(x) = (1 + x + x^2) \frac 1 {1 - (x + x^2 + x^3)} = \frac{1 + x + x^2}{1 - x - x^2 - x^3}$.  
 
 Let $T$ be the set of all binary strings where each block has length at least 2. What is the generating series of this set?
 
-> We can use the $\set{0}*(\set{1}\set{1}*\set{0}\set{0}*)*\set{1}*$ block decomposition to match these strings.  
-> Clearly, $T = (\set{00}\set{0}* \cup \set{\epsilon}))(\set{11}\set{1}*\set{00}\set{0}*)*(\set{11}\set{1}* \cup \set{\epsilon})$.  
+> We can use the $\set{0}^*(\set{1}\set{1}^*\set{0}\set{0}^*)^*\set{1}^*$ block decomposition to match these strings.  
+> Clearly, $T = (\set{00}\set{0}^* \cup \set{\epsilon}))(\set{11}\set{1}^*\set{00}\set{0}^*)^*(\set{11}\set{1}^* \cup \set{\epsilon})$.  
+> So $\Phi_T(x) = \frac{x^2}{}$
 > ;wip: $\Phi_T(x) = \frac{1 - x + x^2}{1 - x - x^2}$
 
 Let $U$ be the set of all binary strings where an even block of 0 cannot be followed by an odd block of 1. What is the generating series for this set?
@@ -662,7 +660,7 @@ Clearly, any binary string consists of either an empty string, or a 0 or a 1 fol
 
 Therefore, we can define the set of all binary strings as $S = \set{\epsilon} \cup \set{0, 1}S$. There is only one way to break a string in this way, so this representation is unambiguous.
 
-So $\Phi_S(x) = 1 + 2x\Phi_S(x) = \frac 1 {1 - 2x}$. Incidentally, $[x^n]\frac{1 - 2x} = 2^n$.
+So $\Phi_S(x) = 1 + 2x\Phi_S(x)$, so $\Phi_S(x) = \frac 1 {1 - 2x}$ and $[x^n]\frac 1 {1 - 2x} = 2^n$.
 
 # 4/6/14
 
@@ -685,8 +683,8 @@ Let $S$ be the set of all binary strings without 1010 as a substring. What is th
 > Clearly, $S\set{1010} \subseteq T \cup T\set{10}$ any $a \in S$ either ends with 10 or not. If not, then $S\set{1010}$ has only one instance of 1010, so $S\set{1010} \in T$. If it does, $S\set{1010}$ has two copies of 1010 and ends in 101010, so $S\set{1010} \in T\set{10}$.  
 > Clearly, $T \cup T\set{10} \subseteq S\set{1010}$ because taking the last four bits off any $a \in T$ to get $a'$ means that $a' \in S$.  
 > Since $\set{\epsilon} \cup S\set{0, 1} = S \cup T$, $1 + 2x\Phi_S(x) = \Phi_S(x) + \Phi_T(x)$.  
-> So $S\set{1010} = T \cup $T\set{10}$.  
-> Since $S\set{1010} = T \cup $T\set{10}$, $x^4\Phi_S(x) = \Phi_T(x) + x^2\Phi_T(x)$, so $\Phi_T(x) = \frac{x^4}{1 + x^2}\Phi_S(x)$.  
+> So $S\set{1010} = T \cup T\set{10}$.  
+> Since $S\set{1010} = T \cup T\set{10}$, $x^4\Phi_S(x) = \Phi_T(x) + x^2\Phi_T(x)$, so $\Phi_T(x) = \frac{x^4}{1 + x^2}\Phi_S(x)$.  
 > Solving, we get $\Phi_S(x) = \frac 1 {1 - 2x + \frac{x^4}{1 + x^2}} = \frac{1 + x^2}{1 - 2x + x^2 - 2x^3 + x^4}$.  
 
 Coefficients of Rational Expressions
@@ -696,7 +694,7 @@ Let $A(x) = \sum_{n = 0}^\infty a_nx^n = \frac{6 - x + 5x^2}{1 - 3x^2 - 2x^3}$.
 
 Then $A(x) = \frac{6 - x + 5x^2}{(1 - 2x)(1 + x)^2}$ by factoring.
 
-Then we find the partial fraction decomposition: $A(x) = \frac A {1 - 2x} + \frac B {1 + x} + \frac C {(1 - x)^2}$, where $\frac{A(1 + x)(1 + x)^2 + B(1 - 2x)(1 + x)^2 + C(1 - 2x)(1 + x)}$.
+Then we find the partial fraction decomposition: $A(x) = \frac A {1 - 2x} + \frac B {1 + x} + \frac C {(1 - x)^2}$, where $\frac{A(1 + x)(1 + x)^2 + B(1 - 2x)(1 + x)^2 + C(1 - 2x)(1 + x)}{1 - 3x^2 - 2x^3}$.
 
 Solving, we get $A(x) = \frac 3 {1 - 2x} - \frac 1 {1 + x} + \frac 4 {(1 + x^2)}$.
 
@@ -704,7 +702,7 @@ Then $[x^n]A(x) = [x^n]\frac 3 {1 - 2x} - [x^n]\frac 1 {1 + x} + [x^n]\frac 4 {(
 
 So $[x^n]A(x) = 3 \cdot 2^n + (-1)^n(4n + 3)$.
 
-In general, if $A(x) = \frac{f(x)}{g(x)}$ where the degree of the numerator is lower than that of the denominator, and $g(x)$ can be factored into $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}$, then using partial fractions, there exist constants $C_{i, j}$ such that $A(x) = \left(\frac{C_{1, 1}}{1 - r_1x} + \ldots + \frac{C_{1, e_1}}{1 - r_1x}^{e_1}\right) + \ldots + \left(\frac{C_{n, 1}}{1 - r_nx} + \ldots + \frac{C_{n, e_1}}{1 - r_nx}^{e_1}\right)$. Given this, we can expand the series of each fraction into power series, and after that it is easy to find the coefficients.
+In general, if $A(x) = \frac{f(x)}{g(x)}$ where the degree of the numerator is lower than that of the denominator, and $g(x)$ can be factored into $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}$, then using partial fractions, there exist constants $C_{i, j}$ such that $A(x) = \left(\frac{C_{1, 1}}{1 - r_1x} + \ldots + \frac{C_{1, e_1}}{1 - r_1x}\right)^{e_1} + \ldots + \left(\frac{C_{n, 1}}{1 - r_nx} + \ldots + \frac{C_{n, e_1}}{1 - r_nx}\right)^{e_1}$. Given this, we can expand the series of each fraction into power series, and after that it is easy to find the coefficients.
 
 The basic technique is to get the partial fraction decomposition, expand the power series, and then get the coefficient values from the power series.
 
@@ -717,6 +715,8 @@ In general, $[x^n]A(x) = a_n = (C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots 
 Clearly, ${n + e_i - 1 \choose e_i - 1} = \frac{(n + e_i - 1)!}{(e_i - 1)!n!} = \frac{(n + e_i - 1) \cdots (n + 1)}{(e_i - 1)!}$, so it is a polynomial of degree $e_i - 1$. So $A(x) = p_1(n)r_1^n + \ldots + A(x) = p_k(n)r_k^n$, where $p_i(n)$ has a degree less than or equal to $e_i - 1$.
 
 Recall that $g(x) = (1 - r_1x)^{e_1} \cdots (1 - r_nx)^{e_n}$. Then we construct $g^*(x) = (x - r_1)^{e_1} \cdots (x - r_k)^{e_k}$. This is the **characteristic polynomial** of $g(x)$. It has roots $r_1, \ldots, r_k$ and $r_i$ has multiplicity $e_i$. The characteristic polynomial is just the one where there is a root for each $r_i$.
+
+Let $A(x) = \sum_{n = 0}^\infty a_nx^n = \frac{6 - x + 5x^2}{1 - 3x^2 - 2x^3}$.
 
 In the above example, the characteristic polynomial of $g(x)$ is $g^*(x) = (x - 2)(x + 1)^2 = x^3 - 3x - 2$. Note that the polynomial is exactly the same, except the power of $x$ in each term is swapped - $x^i$ in each term is replaced with $x^{n - i}$. This is a faster way to find the characteristic polynomial.
 
@@ -739,9 +739,11 @@ Given $A(x) = \sum_{n = 0}^\infty a_nx^n$ where $a_0 = 1, a_1 = 4, a_n - 3a_{n -
 > So $a_0 = \alpha 2^0 + \beta 1^0$ and $a_1 = \alpha 2^1 + \beta 1^1$, and solving, we get $\alpha = 3, \beta = -2$.  
 > So $a_n = 3 \times 2^n - 2$.  
 
-In fact, we can just do it directly from the recurrence relation: $a_n - 3a_{n - 1} + 2a_{n - 2}$ can directly be cconverted into the characteristic polynomial $x^2 - 3x + 2$, and we can solve for $a_n$ directly using $a_n = C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n + C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n$, where $r_1, \ldots, r_k$ are the roots of the characteristic polynomial and $e_1, \ldots, e_k$ are the multiplicities of the roots. We can then solve for $C_{1, 1}, \ldots, C_{k, e_k}$ using the initial conditions.
+In fact, we can just do it directly from the recurrence relation: $a_n - 3a_{n - 1} + 2a_{n - 2}$ can directly be cconverted into the characteristic polynomial $x^2 - 3x + 2$, and we can solve for $a_n$ directly using $a_n = C_{1, 1}{n + 1 - 1 \choose 1 - 1}r_1^n + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}r_1^n + \ldots + C_{k, 1}{n + 1 - 1 \choose 1 - 1}r_k^n + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}r_k^n$, where $r_1, \ldots, r_k$ are the roots of the characteristic polynomial and $e_1, \ldots, e_k$ are the multiplicities of the roots. We can then solve for $C_{1, 1}, \ldots, C_{k, e_k}$ using the initial conditions.
 
-This can also be written as $a_n = \left(C_{1, 1}{n + 1 - 1 \choose 1 - 1} + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}\right)r_1^n + \left(C_{k, 1}{n + 1 - 1 \choose 1 - 1} + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}\right)r_k^n$.
+This can also be written as $a_n = \left(C_{1, 1}{n + 1 - 1 \choose 1 - 1} + \ldots + C_{1, e_1}{n + e_1 - 1 \choose e_1 - 1}\right)r_1^n + \ldots + \left(C_{k, 1}{n + 1 - 1 \choose 1 - 1} + \ldots + C_{k, e_k}{n + e_k - 1 \choose e_k - 1}\right)r_k^n$.
+
+More simply, $a_n = p_{e_1}(n)r_1^n + \ldots + p_{e_k}(n)r_k^n$, where $p_x(n)$ is a polynomial of degree at most $x$.
 
 # 9/4/14
 
@@ -749,17 +751,16 @@ Basic steps for solving homogeneous recurrences:
 
 1. Find the characteristic polynomial by reversing the powers of the denominator.
 2. Find the roots of the characteristic polynomial.
-3. Starting with an empty general solution, for each root $r$ with multiplicity $k$, we add $p(n)r^n$ to the general solution, where $p(n)$ is a polynomial of degree $k - 1$.
+3. Starting with an empty general solution: for each root $r$ with multiplicity $k$, we add $p(n)r^n$ to the general solution, where $p(n)$ is a polynomial of degree $k - 1$.
 4. Use initial conditions to solve for unknown constants.
 
 Find a closed form for $a_n$ where $a_0 = 1, a_1 = 2, a_2 = 1, a_n - 3a_{n - 1} + 3a_{n - 2} - a_{n - 3} = 0$:
 
 > Clearly, the characteristic polynomial is $x^3 - 3x^2 + 3x - 1$, which we get by writing out the coefficients of $a_n, a_{n - 1}, \ldots$ and writing powers of $x$ beside them.  
-> Factoring, we get $x^3 - 3x^2 + 3x - 1 = (x - 1)^3$. So there is one root, 1, with multiplcity 3.  
+> Factoring, we get $x^3 - 3x^2 + 3x - 1 = (x - 1)^3$. So there is one root, 1, with multiplicity 3.  
 > So $a_n = p(n)r^k = (An^2 + Bn + C)1^n = An^2 + Bn + C$. We know that $p(n) = An^2 + Bn + C$ because it is an arbitrary polynomial of degree at most 2.  
 > So $a_0 = 1 = A0^2 + B0 + C, a_1 = 2 = A1^2 + B1 + C, a_2 = A2^2 + B2 + C$. Solving, we get $A = -1, B = 2, C = 1$.  
 > So $a_n = -n^2 + 2n + 1$.  
-> Note that $a_n = O(n^2)$.  
 
 Also, $1 + \sqrt{5} = \phi$, the golden ratio.
 
@@ -788,11 +789,15 @@ $b_n$ is called the **specific solution**, and $A + B2^n$ is the solution to the
 
 We can find $b_n$ by using guess and check.
 
-We guess $b_n = C3^n$. Then $b_n - 3b_{n - 1} + 2b_{n - 2} = C3^n - 3C2^{n - 1} + 2C3^{n - 2} = C3^{n - 2}(3^2 - 3 \cdot 3 + 2) = 2C3^{n - 2}$, and $b_n = 10 \cdot 3^{n - 1} = 2C3^{n - 2}$.
+We guess $b_n = C3^n$. Then $b_n - 3b_{n - 1} + 2b_{n - 2} = C3^n - 3C2^{n - 1} + 2C3^{n - 2} = C3^{n - 2}(3^2 - 3 \cdot 3 + 2) = 2C3^{n - 2}$, and $b_n - 3b_{n - 1} + 2b_{n - 2} = 10 \cdot 3^{n - 1} = 2C3^{n - 2}$.
 
 Solving, $C = 15$ and $b_n = C3^n = 15 \cdot 3^n$.
 
-So $a_n = 15 \cdot 3^n + A + B2^n$.
+So $a_n = 15 \cdot 3^n + A + B2^n$. Now we can solve for $A$ and $B$.
+
+Clearly, $a_0 = 11 = 15 \cdot 3^0 + A + B2^0 = 15 + A + B$, so $A + B = -4$. Clearly, $a_1 = 42 = 15 \cdot 3^1 + A + B2^1 = 45 + A + 2B$, so $A + 2B = -3$. So $A = -5, B = 1$.
+
+So $a_n = 15 \cdot 3^n - 5 + 2^n$.
 
 Why did we guess $b_n = C3^n$? We determined this from the generating series.
 
@@ -1047,7 +1052,7 @@ If $G$ is a graph and $X \subseteq V(G)$, then the **cut induced by $X$** is the
 
 For a connected graph, if $X \subset V(G), X \ne \emptyset$, then the cut induced by $X$ is non-empty. This is because $X$ doesn't contain all the vertices, and it must be connected to the other vertices in some way.
 
-If a graph is not connected, then there exists a set $X \subseteq V(G), X \ne \emptyset$ that induces an empty cut. For example, the components of a disconnected graph always induce empty cuts.
+There always exists a set $X \subseteq V(G), X \ne \emptyset$ that induces an empty cut. For example, the components of a graph always induce empty cuts, and so does the entire graph itself.
 
 Therefore, a graph is not connected if and only if there exists $X \subset V(G), X \ne \emptyset$ such that $X$ induces an empty cut.
 
@@ -1064,3 +1069,84 @@ Proof:
 > So $G$ is not connected if and only if there exists $X \subset V(G), X \ne \emptyset$ such that $X$ induces an empty cut.  
 
 A cut is drawn as a line through the edges in the cut. If it is empty, the line is drawn separating the inducing set and the rest of the graph.
+
+# 27/6/14
+
+Eulerian Circuits
+-----------------
+
+The problem of Eulerian circuits was the first one ever published, by Euler. In fact, it was the first graph theory problem as well.
+
+The problem is determining whether given a graph, there exists a closed walk that uses every edge exactly once. This was originally posed in the form of whether it is possible to cross bridges across cities and end up in the same place again, crossing each bridge exactly once.
+
+An **Eulerian circuit** is a closed walk thaat uses every edge exactly once.
+
+Let $G$ be a graph having an Eulerian circuit. Then either $G$ is connected, or there are vertices with degree 0.
+
+Let $G$ be a connected graph. Then $G$ has an Eulerian circuit if and only if every vertex has even degree.
+
+Proof:
+
+> Assume $G$ has an Eulerian circuit. Then a closed walk adds 2 to the degree of a vertex each time it visits.  
+> Since it uses all edges exactly once and $G$ is connected, each vertex is visited, so each vertex has even degree.  
+> This is because every time we enter a vertex, we must be able to leave it. This means that each time we visit a vertex, we increase its degree by 2, so the degree must be even.  
+> Assume every vertex in $G$ has even degree.  
+> Suppose $\abs{E(G)} = n = 0$. Clearly, $G$ is still connected, so it has only one vertex, so it has an Eulerian circuit containing only the one vertex.  
+> Assume for some $k \ge n$ that for all $\abs{E(G)} < k$, $G$ has an Eulerian circuit. Suppose $\abs{E(G)} = k$.  
+> Construct a walk $W = v_1, v_2, \ldots$, where we keep randomly walking without repeating edges until we can no longer continue.  
+> When we cannot continue, we must have returned to $v_1$, because anytime we enter a vertex, we are able to leave it due to the degree being even. So $W = v_1, \ldots, v_{k - 1}, v_1$.  ;wip
+> If $W$ includes all edges, then it is an Eulerian circuit. If it does not, then remove the edges in $W$ from $G$ to get $G'$.  
+> Clearly, every vertex in $G'$ also has even degree, since every vertex in the walk has an even degree.  
+> Let $C_1, \ldots, C_j$ be the components of $G'$. Let $1 \le i \le j$. Clearly, every $C_i$ is connected and by the inductive hypothesis, has an Eulerian circuit.  
+> Clearly, $W$ must have a vertex $v_{a_i}$ that is also in $C_i$, because otherwise $G$ would have been disconnected.  
+> Let $E_i$ be the Eulerian circuit in $C_i$ that starts at $v_{a_i}$.  
+> Then $W' = v_1, \ldots, v_{a_1 - 1}, E_1, v_{a_1 + 1}, \ldots, v_{a_2 - 1}, E_2, v_{a_2 + 1}, \ldots, v_{k - 1}, v_1$ is an Eulerian circuit.  
+
+To find an Eulerian circuit, we use a greedy algorithm where we keep walking the graph randomly, until we can no longer walk. Because all the degrees of the vertices are even, we can only get stuck at the original node we started at. Now we have a walk that does not necessarily cover all the edges, so we modify our walk to have detours until it covers all the edges.
+
+# 2/6/14
+
+Bridges
+-------
+
+An edge $e$ in a graph $G$ is a **bridge/cut-edge/isthmus** in $G$ if and only if removing $e$ from $G$ would increase the number of components in $G$. In other words, bridges are the only edge connecting two islands together.
+
+A bridge is basically a weak point in a graph - if we cut it, two parts of the graph become separated.
+
+Removing an edge increases the number of components by at most 1.
+
+If $e = \set{u, v}$ is a bridge in connected graph $G$, then $G$ with $e$ removed has 2 components, and $u$ and $v$ are in different components.
+
+Proof:
+
+> Let $e$ be a bridge. Let $G'$ be $G$ with $e$ removed. Clearly, $G'$ has at least 2 components since $G$ contains 1.  
+> Let $H$ be the component of $G'$ containing $u$. Since $H$ is a component, the cut induced by $V(H)$ is empty.  
+> Suppose $v \in V(H)$. Then the cut induced by $V(H)$ is also empty in $G$, since $e$ does not cross the cut.  
+> This is a contradiction, since then $G$ has more than one component, so $v$ is in a different component from $u$.  
+> Suppose there is a third component $J$ in $G'$. Then the cut induced by $V(J)$ is empty in $G$ and $G'$, since removing/adding $e$ does not affect the cut.  
+> This is a contradiction since then $G$ would not be connected, so there are only two components.  
+
+An edge $e = \set{u, v}$ is a bridge in $G$ if and only if $e$ is not in any cycle of $G$:
+
+> Assume $e = \set{u, v}$ is a bridge in $G$. Suppose $e$ is in a cycle in $G$.  
+> Then if we remove $e$ from the cycle, $u$ and $v$ are still in the same component, because we can go the long way around the cycle.  
+> So by the above theorem, since they are in the same component, $e$ is not a bridge, a contradiction. So $e$ is not in any cycle of $G$.  
+> Assume $e$ is not in any cycle of $G$. Suppose $e$ is not a bridge.  
+> Let $H$ be the component of $G$ containing $e$. Then $H$ with $e$ removed is still a single component, so it is connected.  
+> So there is a $u, v$ path $v_1, \ldots, v_n$ in $H$ with $e$ removed that is also in $H$, so $v_1, \ldots, v_n, v_1$ is a cycle, since $u$ and $v$ are connected by an edge in $H$.  
+> So $e$ is in a cycle in $G$, a contradiction, so $e$ is a bridge.  
+
+### Trees
+
+A **tree** is a connected graph with no cycles. A **forest** is a graph with no cycles, and can possibly be disconnected. Each component of a forest is a tree.
+
+Every edge in a tree is a bridge, because there are no cycles in a tree. So a tree is **minimally connected**, since if we removed any edge, it would no longer be connected.
+
+A **leaf** in a tree is a vertex with degree 1. All trees with 2 or more vertices has 2 or more leaves.
+
+Proof:
+
+> Let $v_1, \ldots, v_n$ be the longest path in tree $T$.  
+> Clearly, $v_1$ has no neighbors other than $v_2$ since if it had any neighbor outside the path, the path would not be the longest, and if it had a neighbor inside the path, there would be a cycle.  
+> Clearly, $v_n$ has no neighbors other than $v_{n - 1}$ since if it had any neighbor outside the path, the path would not be the longest, and if it had a neighbor inside the path, there would be a cycle.  
+> So $v_1$ and $v_n$ are leaves, and there are at least 2 leaves in $T$.  
