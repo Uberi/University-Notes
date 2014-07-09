@@ -913,7 +913,7 @@ Also, $k_n$ is $(n - 1)$-regular, because each vertex must connect with $n - 1$ 
 
 A partition of a set $S$ is a pair $(A, B)$ such that $A \cup B = S, A \cap B = \emptyset$. In other words, a way of dividing the set into two groups.
 
-A graph $G$ is **bipartite** if there is a partition of $V(G)$ into $(A, B)$ such that $G$ has every edge in $\set{\set{u, v} \middle| u \in A, v \in B}$. In other words, if there is a partition such that the edges go between the two partitioned areas, but not within the partitioned areas. The two partitions do not necessarily have the same size.
+A graph $G$ is **bipartite** if there is a partition of $V(G)$ into $(A, B)$ such that $G$ has every edge in $\set{\set{u, v} \middle| u \in A, v \in B}$. In other words, if there is a partition such that the edges go between the two partitioned areas, but not within the partitioned areas. The two partitions do not necessarily have the same size and can even be empty.
 
 We prove a graph is bipartite by giving the partition, and we prove that a graph is not bipartite by contradiction - assuming that one vertex is in partition $A$, any vertex connected by an edge must be in $B$, and we try to derive a contradiction where a vertex is in $A$ yet also in $B$, since $A \cap B = \emptyset$.
 
@@ -1042,7 +1042,7 @@ For example, the $n$-cube is connected because for any $u, v$, a $u, v$ path exi
 
 # 25/6/14
 
-A subgraph of a graph $G$ is a graph $H$ such that $V(H) \subseteq V(G)$ and $E(H) = \set{\set{u, v} \in E(G) \middle| u, v \in V(G)}$. In other words, a graph with a subset of the vertices and the same edges between these vertices as $G$.
+A subgraph of a graph $G$ is a graph $H$ such that $V(H) \subseteq V(G)$ and $E(H) \subseteq \set{\set{u, v} \in E(G) \middle| u, v \in V(G)}$. In other words, a graph with a subset of the vertices and the same edges between these vertices as $G$.
 
 A **component** of a graph $G$ is a maximally connected non-empty subgraph of $G$. In other words, each island of connected vertices in a graph is a component. A component must be the largest possible network of vertices that are all connected.
 
@@ -1079,7 +1079,7 @@ The problem of Eulerian circuits was the first one ever published, by Euler. In 
 
 The problem is determining whether given a graph, there exists a closed walk that uses every edge exactly once. This was originally posed in the form of whether it is possible to cross bridges across cities and end up in the same place again, crossing each bridge exactly once.
 
-An **Eulerian circuit** is a closed walk thaat uses every edge exactly once.
+An **Eulerian circuit** is a closed walk that uses every edge exactly once.
 
 Let $G$ be a graph having an Eulerian circuit. Then either $G$ is connected, or there are vertices with degree 0.
 
@@ -1094,7 +1094,7 @@ Proof:
 > Suppose $\abs{E(G)} = n = 0$. Clearly, $G$ is still connected, so it has only one vertex, so it has an Eulerian circuit containing only the one vertex.  
 > Assume for some $k \ge n$ that for all $\abs{E(G)} < k$, $G$ has an Eulerian circuit. Suppose $\abs{E(G)} = k$.  
 > Construct a walk $W = v_1, v_2, \ldots$, where we keep randomly walking without repeating edges until we can no longer continue.  
-> When we cannot continue, we must have returned to $v_1$, because anytime we enter a vertex, we are able to leave it due to the degree being even. So $W = v_1, \ldots, v_{k - 1}, v_1$.  ;wip
+> When we cannot continue, we must have returned to $v_1$, because anytime we enter a vertex, we are able to leave it due to the degree being even. So $W = v_1, \ldots, v_{k - 1}, v_1$.  
 > If $W$ includes all edges, then it is an Eulerian circuit. If it does not, then remove the edges in $W$ from $G$ to get $G'$.  
 > Clearly, every vertex in $G'$ also has even degree, since every vertex in the walk has an even degree.  
 > Let $C_1, \ldots, C_j$ be the components of $G'$. Let $1 \le i \le j$. Clearly, every $C_i$ is connected and by the inductive hypothesis, has an Eulerian circuit.  
@@ -1136,7 +1136,8 @@ An edge $e = \set{u, v}$ is a bridge in $G$ if and only if $e$ is not in any cyc
 > So there is a $u, v$ path $v_1, \ldots, v_n$ in $H$ with $e$ removed that is also in $H$, so $v_1, \ldots, v_n, v_1$ is a cycle, since $u$ and $v$ are connected by an edge in $H$.  
 > So $e$ is in a cycle in $G$, a contradiction, so $e$ is a bridge.  
 
-### Trees
+Trees
+-----
 
 A **tree** is a connected graph with no cycles. A **forest** is a graph with no cycles, and can possibly be disconnected. Each component of a forest is a tree.
 
@@ -1148,5 +1149,121 @@ Proof:
 
 > Let $v_1, \ldots, v_n$ be the longest path in tree $T$.  
 > Clearly, $v_1$ has no neighbors other than $v_2$ since if it had any neighbor outside the path, the path would not be the longest, and if it had a neighbor inside the path, there would be a cycle.  
-> Clearly, $v_n$ has no neighbors other than $v_{n - 1}$ since if it had any neighbor outside the path, the path would not be the longest, and if it had a neighbor inside the path, there would be a cycle.  
+> Suppose $v_1$ has a neighbor $v$ other than $v_2$.  
+> If $v \in \set{v_1, \ldots, v_n}$, then there is a cycle, a contradiction.  
+> If $v \notin \set{v_1, \ldots, v_n}$, then the path $v, v_1, \ldots, v_n$ is longer than the longest path, a contradiction.  
+> So $v$ cannot exist, and $v_1$ has only one neighbor $v_2$. A similar argument can be made for $v_n$ having only $v_{n - 1}$ as a neighbor.  
 > So $v_1$ and $v_n$ are leaves, and there are at least 2 leaves in $T$.  
+
+# 4/7/14
+
+A tree $T$ with $n \ge 1$ vertices has $n - 1$ edges:
+
+> Let $n$ be the number of vertices in a tree $T$.  
+> Clearly, for $n = 1$ there is 1 vertex and 0 edges, so there are $n - 1$ edges.  
+> Assume for some $k \ge 1$ that for $n = k$, there are $n - 1$ edges.  
+> Assume $n = k + 1$. Let $v$ be a leaf in $T$ and $e$ be an edge incident with $v$.  
+> By the previous theorem, $v$ and $e$ exist for all $n \ge 2$.  
+> Let $T'$ be $T$ with $v$ and $e$ removed. Clearly, $T'$ cannot have cycles since $T$ has no cycles and we only removed things.  
+> Clearly, removing $e$ from $T$ results in a graph with two components since $e$ is a bridge, and one of the components is just $v$ by itself.  
+> So $T'$ has only one component, and so it is connected. So $T'$ is a tree as well.  
+> Since $T'$ has $k$ vertices, by assumption it has $k - 1$ edges.  
+> Since $k = n - 1$, $T'$ has $n - 1$ vertices and $n - 2$ edges. Since $T$  has one more edge and vertex than $T'$, it has $n$ vertices and $n - 1$ edges.  
+
+In the same way, a forest with $n$ vertices and $k$ components has $n - k$ components, because each component is a tree with one less edge than the number of vertices, so overall there are $k$ less edges than vertices.
+
+For a tree $T$ and two vertices $u, v \in V(T)$, there is a unique $u, v$ path. The path exists because $T$ is connected by definition, and the path is unique because if it wasn't, there would exist cycles in $T$, which is not possible.
+
+A tree is always bipartite. This can be proven using induction over the number of vertices - removing a leaf and prove smaller tree satisfies inductive hypothesis and so is bipartite, then prove that the original tree is bipartite using the smaller tree.
+
+A **spanning tree** $T$ of a graph $G$ is a subgraph of $G$ that is a tree and $V(T) = V(G)$. In other words, a tree that uses all the vertices of $G$. A spanning tree connects all the vertices together with the smallest possible number of edges.
+
+A graph $G$ has a spanning tree if and only if it is connected.
+
+Proof:
+
+> Assume $G$ has a spanning tree $T$. Let $u, v \in V(G)$. Since the spanning tree is connected, there is a $u, v$ path in $T$. Since $T$ is a subgraph of $G$, this path is also a $u, v$ path in $G$.  
+> Assume $G$ is connected. We will then use induction on the number of cycles $n$ to show that when we remove edges of cycles, we get fewer cycles but the graph is still connected.  
+> Clearly, if $n = 0$ there are no cycles, so $G$ is a tree and $G$ is a spanning tree of $G$.  
+> Assume for some $k \ge 0$ that for $n \le k$, $G$ has a spanning tree.  
+> Assume $n = k + 1$. Let $v_1, \ldots, v_i, v_n$ be a cycle in $G$. Let $e$ be an edge in $v_1, \ldots, v_i, v_n$.  
+> Clearly, $e$ is not a bridge because it is in a cycle. Let $G'$ be $G$ with $e$ removed. Clearly, $G'$ is still connected, but has fewer cycles since we removed an edge in a cycle.  
+> Then $G'$ contains a spanning tree $T$. Since $G$ has the same vertices as $G'$, $G$ has the spanning tree $T$, by induction.  
+
+# 7/7/14
+
+Basically, we can find the spanning tree of a graph by identifying cycles and removing edges from those cycles until there are no more cycles.
+
+$G$ is connected with $n$ vertices and $n - 1$ edges if and only if $G$ is a tree. This is useful for determining whether a graph is a tree.
+
+Proof:
+
+> Assume $G$ is connected with $n$ vertices and $n - 1$ edges. Then $G$ has a spanning tree $T$. Clearly, $T$ has $n - 1$ edges.  
+> Clearly, $G$ has $n - 1$ edges too, so $G = T$ and $G$ is a tree.  
+> The other direction was proved earlier via induction on the number of vertices.  
+
+So if we add an edge to a tree with $n$ vertices and remove another, the resulting graph is still a tree because it has $n - 1$ vertices.
+
+If we add an edge to a tree, we always create exactly one cycle (with other graphs it could make more than 1 edges). This is because when we add an edge to a tree, the new cycles must pass through both vertices in the edge. Since there is exactly one path between any two vertices in a tree, there is only one cycle.  
+
+If $G$ is a graph with $n$ vertices, $T$ is a spanning tree of $G$, and $e \in E(G) \setminus E(T)$,  then $T$ with $e$ added has exactly one cycle.
+
+Proof:
+
+> Let $e = \set{u, v}$. Clearly, $G$ must have at least one cycle since there are $n$ edges.  
+> Clearly, there is only one path in $T$ from $u$ to $v$. So this path with $e$ added forms a cycle.  
+> There cannot be another cycle because all cycles must include $u, v$.  
+
+### Bipartite Graphs
+
+A graph $G$ is bipartite if and only if every component of $G$ is bipartite.
+
+A graph $G$ is bipartite if and only if every subgraph of $G$ is bipartite. So if $G$ contains something that is not bipartite, $G$ itself is not bipartite.
+
+Also, all trees are bipartite.
+
+A graph $G$ is bipartite if and only if $G$ does not contain any odd cycles. An odd cycle is a cycle with an odd number of edges.
+
+Proof:
+
+> Assume $G$ is bipartite with partitions $(a, b)$. Suppose $G$ contains a cycle of odd length $v_1, \ldots, v_k, v_1$.  
+> Without loss of generality, assume $v_1 \in A$. Then by induction, $v_k \in A$, a contradiction since $v_1$ is adjacent to $v_k$.  
+> So $G$ does not contain any odd cycles.  
+> Assume $G$ does not contain any odd cycles. Suppose $G$ is not bipartite.  
+> Then there exists a component $H$ of $G$ that is not bipartite, since if there wasn't, all components would be bipartite and so would $G$.  
+> Clearly, $H$ has a spanning tree $T$ and $T$ is bipartite with partitions $(A, B)$. Since $H$ is not bipartite, there is an edge $\set{u, v}$ such that $u, v \in A$ or $u, v \in B$.  
+> Without loss of generality, assume $u, v \in A$. Clearly, there is a $u, v$ path $u, \ldots, v$ in $T$ and this is also in $H$. Clearly, the length of the path is even since it alternates between $A$ and $B$ and has both ends in $A$.  
+> So $u, \ldots, v, u$ is a cycle of odd length, a contradiction since $G$ has no odd cycles.  
+> So $G$ is bipartite.  
+
+# 9/7/14
+
+Let $G$ be a connected graph where each edge $e$ has an associated weight $w: E(G) \to \mb{R}$. Then the **minimimum spanning tree** is the spanning tree $T$ such that the sum of all the edge weights $w(T) = \sum_{e \in E(T)} w(e)$ is minimized. This gives a lower bound on the cost of connecting all the vertices.
+
+We originally found spanning trees by removing edges in cycles until no cycles are left. For minimum spanning trees, we can either continually remove an edge in a cycle with the largest cost, or we can use **Prim's algorithm**, which grows the tree from a single vertex.
+
+Basically, Prim's algorithm starts at an arbitrary vertex and repeatedly adds edges to the tree such that it grows the smallest possible amount in that step.
+
+We can write it formally as follows:
+
+1. Let $w \in V(G)$. Let $T$ be a tree containing only $w$.
+2. While $V(T) \ne V(G)$:
+    1. Let $C$ be the cut induced by $V(T)$. Let $\set{u, v} \in C$ where $w(u, v)$ is minimised - the edge with the lowest weight in the cut.
+    2. Add $v$ to $V(T)$ and $\set{u, v}$ to $E(T)$.
+
+Prove that Prim's algorithm always give the minimum spanning tree:
+
+> Let $T_1, \ldots, T_n$ be the trees produced while executing Prim's algorithm. Let $e_1, \ldots, e_n$ be the edges we added in each step, so $T_i$ with $e_i$ added is $T_{i + 1}$.
+> We want to prove that for each $T_i$, there exists a minimum spanning tree that contains $T_i$.  
+> Suppose that this minimum spanning tree does not exist. Let $k$ be the largest integer for which $T_1, \ldots, T_k$ are all within minimum spanning trees.  
+> So $T_k$ is in a minimum spanning tree $T'$, while $T_{k + 1}$ is not.  
+> Let $C$ be the cut induced by $V(T_k)$.  
+> Since $T_{k + 1}$ is $T_k$ with $e_k$ added and $T_{k + 1}$ is not in $T'$, $e_k \notin T'$.  
+> So $T'$ with $e_k$ added must contain a cycle $v_1, \ldots, v_j$ containing $e_k$.  
+> Clearly, this cycle contains an edge $e' \in C$ since the edge must loop back into $T_k$.  
+> Clearly, $e_k$ is the edge in $C$ with the lowest possible $w(e)$, so $w(e_k) \le w(e')$.  
+> Let $V$ be $T'$ with $e_k$ removed and $e'$ added. Clearly, $V$ is also a spanning tree, where $w(T') = w(V) + w(e_k) - w(e')$.  
+> Clearly, $V$ contains $T_{k + 1}$ and is a minimum spanning tree. ;wip: why?
+> This is a contradiction since $T_{k + 1}$ is not in any minimum spanning trees.
+> So for each $T_i$, there exists a minimum spanning tree that contains $T_i$.  
+> Since $V(T_n) = V(G)$, and a minimum spanning tree contains $T_n$, $T_n$ is a minimum spanning tree.  

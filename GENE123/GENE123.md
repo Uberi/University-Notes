@@ -761,3 +761,35 @@ An RL circuit is an inductor in series with a resistor.
 For inductors, we use the same steps, but $\tau = \frac L R$.
 
 For inductors, $I_L = I_f + (I_i - I_f)e^{-\frac t \tau}$.
+
+# 7/7/14
+
+;wip: transient analysis of inductors
+
+# 8/7/14
+
+Alternating current (AC) is much easier to generate and transmit compared to DC. In order to get DC we usually have to use either batteries or rectify AC. In this course we will only be studying AC circuits in steady state.
+
+DC has a voltage that does not change sign over time. AC has voltage that changes from positive to negative and back repeatedly.
+
+AC voltage often appears as a sine/cosine wave. For a sine/cosine wave, the period ($T$) of the wave is the minimal amount of time after which the voltage function starts repeating. The frequency is $f = \frac 1 T$, the number of cycles per second, and the angular frequency $\omega = 2 \pi f = \frac{2 \pi}{T}$ (rad/s) is the number of radians passed per second.
+
+The amplitude ($A$) is the largest value of $V(t)$. The time is measured in radians for a sine wave, so now we will mostly be using $\omega t$ for time, so each unit of $t$ moves $\omega t$ by $\frac t T$ of a full period as required.
+
+A sine wave has a phase shift where they start at different times. If wave X **lags behind** wave Y (Y is **leading** X) by angle $\theta$, then $V_X(t) = A_X \sin(\omega t)$ and $V_Y(t) = A_Y \sin(\omega t - \theta)$. For example, the cosine wave leads the sine wave by 90 degrees - $\sin \theta = \cos \left(\theta - \frac \pi 2\right)$.
+
+We usually represent AC using $\cos$ rather than $\sin$ since it is easier to work with - in particular, it is symmetrical about the y-axis.
+
+We could have either a voltage source or a current source based on these waveforms. For example, an AC voltage source can have $V(t) = 4 \sin(2t + 1.5)$ and an AC current source can have $I(t) = 2.5 \sin(2t + 1.5)$.
+
+# 9/7/14
+
+If we have multiple AC sources at a node, we add or subtract their values when applying KCL. 
+
+The **phasor representation** of an AC waveform $10\cos(2t + 5)$ is $10 \angle (2t + 5) = 10(\cos(2t + 5) + \imag \sin(2t + 5))$. A phasor is basically the polar form of $(t, V(t))$ or the imaginary number representation of that vector.
+
+The Cartesian form of a vector is also known as rectangular form. It is more useful for adding or subtracting waveforms. The phasor representation is more useful for multiplication or division since $a_1 \angle \theta_1 \times a_2 \angle \theta_2 = a_1 a_2 \angle (\theta_1 + \theta_2)$ and $\frac{a_1 \angle \theta_1}{a_2 \angle \theta_2} = \frac{a_1}{a_2} \angle (\theta_1 - \theta_2)$.
+
+If we have multiple phasors and $\omega$ is the same for all of them (so we can substitute $\omega t$), they can only differ in amplitude and phase.
+
+When solving AC circuits, we first want to put all the sources into $\cos$ form. ;wip
