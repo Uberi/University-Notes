@@ -693,7 +693,7 @@ When charge enters one end of a capacitor, it stops at the dialectric. However, 
 
 Putting charge into a capacitor is called **charging** a capacitor. After one end of a capacitor is fully charged, the capacitor is **charged**, and nothing happens if we try to put in more charge.
 
-Capacitors have capacitance ($C$), which is the ability to store electric charge. Capacitance is measured in Farads (F), which is a huge unit, so we often use micro or nano or picoFarads.
+Capacitors have capacitance ($C$), which measures the ability to store electric charge and the ability to resist changes in voltage. Capacitance is measured in Farads (F), which is a huge unit, so we often use micro or nano or picoFarads.
 
 A 1 F capacitor is one with capacitance such that when charged with 1 Coulomb, has 1 V across the terminals. Capacitance is determined by $C = \frac{\epsilon d}{A}$, where $\epsilon$ is the permeability of the dialectric (a physical constant), $d$ is the distance between the plates (meters) and $A$ is the surface area of both plates.
 
@@ -723,13 +723,19 @@ When analyzing circuits at DC steady state, we know that the capacitors are not 
 
 Inductors store energy in magnetic fields. An inductor is a two terminal device that is made up of a conductive coil, optionally with a core of ferromagnetic material.
 
-When current flows into one end of an inductor, it flows out the other end, in the process creating a magnetic field in the coil.
+When current flows into one end of an inductor, it flows out the other end, in the process creating a magnetic field in the coil. When the current flowing through it changes, then the 
+
+Inductors have inductance ($L$), which is measured in Henry ($H$), which is the ability to resist changes in current.
+
+A 1 H inductor is one such that when the current changes by 1 A, the voltage across the inductor is 1 V.
+
+Inductance is governed by $V(t) = L\frac{\dee I}{\dee t}$, where $V(t)$ is the voltage across the inductor, $I$ is the current flowing through the inductor, and $L$ is the inductance.
+
+If the current is increasing, the voltage is positive between the end the current is going into and the end it is coming out of. If the current is decreasing, the voltage is negative. This is because the inductor always outputs voltage trying to prevent the current from changing.
 
 The steady state of an inductor is a short circuit.
 
 # 2/7/14
-
-;wip: make up lecture this monday and next monday
 
 ;wip: see midterm at office hours
 
@@ -786,10 +792,36 @@ We could have either a voltage source or a current source based on these wavefor
 
 If we have multiple AC sources at a node, we add or subtract their values when applying KCL. 
 
-The **phasor representation** of an AC waveform $10\cos(2t + 5)$ is $10 \angle (2t + 5) = 10(\cos(2t + 5) + \imag \sin(2t + 5))$. A phasor is basically the polar form of $(t, V(t))$ or the imaginary number representation of that vector.
+The **phasor representation** of an AC waveform $10\cos(2t + 5)$ is $10 \angle (2t + 5) = 10(\cos(2t + 5) + \imag \sin(2t + 5))$, or in shorthand, $10 \angle 5$ with $\omega = 2$. A phasor is basically the polar form of $(t, V(t))$ or the imaginary number representation of that vector, and represents a cosine function of time.
 
 The Cartesian form of a vector is also known as rectangular form. It is more useful for adding or subtracting waveforms. The phasor representation is more useful for multiplication or division since $a_1 \angle \theta_1 \times a_2 \angle \theta_2 = a_1 a_2 \angle (\theta_1 + \theta_2)$ and $\frac{a_1 \angle \theta_1}{a_2 \angle \theta_2} = \frac{a_1}{a_2} \angle (\theta_1 - \theta_2)$.
 
 If we have multiple phasors and $\omega$ is the same for all of them (so we can substitute $\omega t$), they can only differ in amplitude and phase.
 
-When solving AC circuits, we first want to put all the sources into $\cos$ form. ;wip
+# 10/7/14
+
+A capacitor stores energy in an electric field, while an inductor stores energy in a magnetic field.
+
+Simplify $V(t) = 2 \cos\left(100t - \frac \pi 4\right) - 3 \cos\left(100t + \frac \pi 3\right)$:
+
+> Clearly, $V = 2 \angle (-\frac \pi 4) - 3 \angle \frac \pi 3$.  
+> So $V = \left(2\cos\left(-\frac \pi 4\right) + 2\imag \sin\left(-\frac \pi 4\right)\right) - \left(3\cos \frac \pi 3 + 3\imag \sin \frac \pi 3\right) = \left(2\cos\left(-\frac \pi 4\right) - 3\cos \frac \pi 3\right) + \imag\left(2\sin\left(-\frac \pi 4\right)\right) - 3\sin \frac \pi 3\right)$.  
+;wip
+
+The **root mean squared** (RMS) is represented $V_{RMS}$ and is the DC voltage that gives the same average power as the AC. This is a value between 0 and the amplitude of the circuit.
+
+The average power of an AC waveform $V_{AC}(t)$ is $P = \frac{V_{RMS}^2}{R}$. It can also be derived to be $\frac 1 T \int_0^T \frac{V_{AC}^2}{R} \dee t$. So $V_{RMS} = \sqrt{\frac 1 T \int_0^T V^2 \dee t}$.
+
+For a sine wave, $V_{RMS} = \frac{\max(V_{AC})}{\sqrt{2}}$ - it is $\frac 1 {\sqrt{2}}$ times the amplitude of a sine wave. In the same way, $I_{RMS} = \frac{\max{I_{AC}}}{\sqrt{2}}$ for current sources.
+
+In AC circuits, **impedance** ($Z$) is the voltage divided by the current - $Z = \frac{V}{I} = \frac{\magn{V}}{\magn{I}}\angle(\theta_V - \theta_I)$. However, both the voltage and current are angles. An element with impedance is represented with the a rectangle in circuits.
+
+Impedance is still measured in Ohms, but describes capacitors and inductors in addition to resistors. When we have impedance in rectangular form, $Z = R + \imag X$, $R$ is the resistance and $X$ is the **reactance**. The reactance of a circuit element is the opposition of change in voltage or current in a circuit. It basically determines how far the current will lag or lead the voltage.
+
+For resistors, $V \angle \theta = I \angle \theta R$, so $Z = \frac{V \angle \theta}{I \angle \theta} = \frac V I = R$. So for resistors, the impedance is just the resistance. This is because the voltage and current are both in phase for resistors due to Ohm's law, so they cancel out the angles.
+
+For inductors, $V(t) = L \frac{\dee I}{\dee t} = L \max{I}\frac{\dee}{\dee t} \cos(\omega t + \theta) = \omega L \max{I} \cos\left(\omega t + \theta + \frac \pi 2\right)$ and $I(t) = \max(I) \cos(\omega t + \theta)$. So $V = \omega L\max(I) \angle\left(\theta + \frac \pi 2\right)$ and $\max(I) \angle \theta$ and $Z = \omega L \angle \frac \pi 2$, so for an inductor it affects only the imaginary component.
+
+For capacitors, $I(t) = \max(I) \cos(\omega t + \theta)$ and $V(t) = \frac 1 C \int_0^T \max(I) \cos(\omega t + \theta) = \frac{\max(I)}{\omega C} \cos\left(\omega t + \theta - \frac \pi 2\right)$. So $Z = \frac{1}{\omega C} \angle\left(-\frac \pi 2\right)$, so for an inductor it affects only the imaginary component
+
+So when we have an inductor, the current will be lagging the voltage by 90 degrees, and when we have a capacitor, the voltage will be lagging the current by 90 degrees. Capac itors and inductors are purely reactive, while resistors are purely resistive.

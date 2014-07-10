@@ -426,7 +426,7 @@ Preconditions:
 
 If the above are satisfied, then if $r$ represents the total number of successes, and $X$ represents the number of observed successes, $X$ has a hyergeometric distribution and $f_X(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}$, where $r$ is the total number of successes, $x$ is the number of successes observed, $N = \abs{S}$, and $n$ is the number of objects selected.
 
-Basically, ${r \choose x}{N - r \choose n - x}$ is the number of ways we can choose $x$ successes out of $r$ total successes, multiplied by the number of ways we can choose the $n - x$ failures out of $N - r$ total failures. $N \choose n$ is the number of ways we cuold pick any $n$ objects from the total objects.
+Basically, ${r \choose x}{N - r \choose n - x}$ is the number of ways we can choose $x$ successes out of $r$ total successes, multiplied by the number of ways we can choose the $n - x$ failures out of $N - r$ total failures. $N \choose n$ is the number of ways we cuold pick any $n$ objects from the total objects. So it is the number of ways we can pick the successes, times the number of ways we can pick the failures, divided by the total number of ways we can pick them all.
 
 Given $N$ objects that have a boolean property $V$ (success), let $r$ represent the total number of successful objects, and let $X$ represent the number of successes observed.
 
@@ -452,17 +452,15 @@ Preconditions:
 * Multiple independent trials - objects chosen from $S$ **with replacement**.
 * Same probability of success in each trial.
 
-If the above are satisfied, then if $X$ represents the number of observed successes, $X$ has a binomial distribution and $f_X(x) = {n \choose x}p^x(1 - p)^{n - x}$ where $n$ is the number of objects selected, $p = P(success)$.
+If the above are satisfied, then if $X$ represents the number of observed successes, $X$ has a binomial distribution and $f_X(x) = {n \choose x}p^x(1 - p)^{n - x}$ where $n$ is the number of objects selected, and $p$ is the probability of success for any trial.
 
-This is the same as the hypergeometric distribution, except our selection is done with replacement - every trial is independent. ;wip
+The setup is very similar to the hypergeometric distribution, except our selection is done with replacement - every trial is independent.
 
-;wip: justify this and organize all of this properly
-
-$X \sim \operatorname(Bin)(n, p)$. The $n$ is the number of the number of objects in $S$, and $p$ is the probability of success for each object.
+$X \sim \operatorname(Bin)(n, p)$. The $n$ is the number of the number of objects in $S$, and $p$ is the probability of success for each trial.
 
 These independent trials resulting in success/failure are known as **Bernoulli trials**. The process is known as the **Bernoulli process**.
 
-With $x$ successes and $n - x$ failures, there are $n \choose x$ ways of choosing them.
+With $x$ successes and $n - x$ failures, there are $n \choose x$ ways of choosing them. ;wip: justify the formula
 
 So $f_X(x) = {n \choose x}p^x(1 - p)^{n - x}$ where $0 \le x \le n$.
 
@@ -495,6 +493,8 @@ This can be represented using $X \sim \operatorname{NB}(k, p)$, where $k$ is the
 Clearly, there are $x + k$ trials - successes plus failures, and the last trial is always a success.
 
 So there are $x + k - 1$ trials in which there are $x$ failures, and $x + k - 1 \choose x$ arrangements.
+
+The probability of success is $p$ and the probability of failure is $1 - p$.
 
 So $f_X(x) = {x + k - 1 \choose x}p^k(1 - p)^x$ where $0 \le x$.
 
@@ -532,7 +532,7 @@ Midterm Review.
 
 This basically the same as the negative binomial distribution with $k = 1$. It has the same preconditions as the binomial distribution, but $X$ is the number of failures before the first success.
 
-If $X$ has a geometric distribution, then $f_X(x) = (1 - p)^xp$ where $0 \le x$. This can easily be derived from  the negative binomial distribution.
+If $X$ has a geometric distribution, then $f_X(x) = p(1 - p)^x$ where $0 \le x$. This can easily be derived from  the negative binomial distribution.
 
 Also, we can write $X \sim \operatorname{NB}(1, p)$ or $X \sim \operatorname{Geo}(p)$.
 
@@ -828,9 +828,9 @@ Let $T = X + Y$ where $X \sim \operatorname{Pois}(\mu_1), Y \sim \operatorname{P
 Multinomial Distribution
 ------------------------
 
-A **multinomial distribution** is like a binomial distribution, except there are $k$ possible outcomes rather than just success or failure.
+A **multinomial distribution** is an extension of the binomial distribution, except there are $k$ possible outcomes rather than just success or failure.
 
-So we have independent trials repeated $n$ times, each independent with the same outcome probabilities $p_1, \ldots, p_k$ for each trial.
+So we have independent trials repeated $n$ times, each independent with the same outcome probabilities $p_1, \ldots, p_k$ for each trial, and our random variables are $X_1, \ldots, X_k$, the number of times outcomes $x_1, \ldots, x_k$ occurred, respectively.
 
 For example, asking random people what their favourite color is, where our random variables are the number of people who like particular colors.
 
@@ -844,8 +844,75 @@ Clearly, there are ${n \choose x_1}{n - x_1 \choose x_2} \cdots {n - x_1 \ldots 
 
 Clearly, each arrangement has probability $p_1^{x_1} \cdots p_n^{x_k}$ of occurring in a given trial.
 
-So if $X_1, \ldots, X_k \sim \operatorname{Mult}(n; p_1, \ldots, p_k)$ $f_{X_1, \ldots, X_k}(x_1, \ldots, x_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_n^{x_k}$.
+So if $X_1, \ldots, X_k \sim \operatorname{Mult}(n; p_1, \ldots, p_k)$, then $f_{X_1, \ldots, X_k}(x_1, \ldots, x_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_n^{x_k}$.
 
 If we want the marginal probability distribution, this distribution makes it relatively simple. If we are only interested in $X_i$, we can set $x_i$ as success and all other outcomes as failure. So $X_i \sim \operatorname{Bin}(n, p_i)$. This is because the physical setup of the experiments is exactly that of the binomial distribution when we do this.
 
 Basically, when we have multiple random variables with binomial distributions, all mutually exclusive, then they all form a multinomial distribution where the number of trials is the same and the probabilities are those of each binomial distribution.
+
+# 4/7/14
+
+Teapots are produced with a success probability of $p$, and continue to be produced until there are 12 successes. Let $X$ be the number of rejects before a success. What is the probability that 6 pots are produced after 0 rejects, 3 after 1 reject, 2 after 2 rejects, and 1 after 3 or more? 
+
+> Clearly, $X \sim \operatorname{Geo}(p)$, because $X$ is the number of failures before the first success. So $f_X(x) = p(1 - p)^x$.  
+> Let $Y_0, Y_1, Y_2$ be the number of teapots made after $0, 1, 2$ rejects, respectively. Let $Y_3$ be the number of teapots made after 3 or more rejects.  
+> Then $Y_0, Y_1, Y_2, Y_3 \sim \operatorname{Mult}(12; f_X(0), f_X(1), f_X(2), 1 - (f_X(0) + f_X(1) + f_X(2)))$.  
+> So $Y_0, Y_1, Y_2, Y_3 \sim \operatorname{Mult}(12; p, p(1 - p), p(1 - p)^2, (1 - p)^3)$.  
+> So $f_{Y_0, Y_1, Y_2, Y_3}(y_0, y_1, y_2, y_3) = \frac{12!}{y_0!y_1!y_2!y_3!} p^{y_0} p^{y_1}(1 - p)^{y_1} p^{y_2}(1 - p)^{2y_2} (1 - p)^{3y_3} = \frac{12!}{y_0!y_1!y_2!y_3!} p^{y_0 + y_1 + y_2}(1 - p)^{y_1 + 2y_2 + 3y_2}$.  
+> So the probability is $f_{Y_0, Y_1, Y_2, Y_3}(6, 3, 2, 1) = \frac{12!}{6!3!2!1!} p^{11}(1 - p)^{10} = 55440 p^{11}(1 - p)^{10}$.  
+
+Covariance and Correlation
+--------------------------
+
+$E(g(X_1, \ldots, X_n)) = \sum_{\text{all } x_1} \cdots \sum_{\text{all } x_n} g(x_1, \ldots, x_n)f(x_1, \ldots, x_n)$.
+
+# 7/7/14
+
+If $X_1, \ldots, X_k \sim \operatorname{Mult}(n, p_1, \ldots, p_k)$, then $E(X_1, \ldots, X_k) = \sum_{x_1 = 0}^n$ and $E(X_i) = np_i$ since $X_i \sim \operatorname{}$.
+
+THe covariance and correlation measures the strength of the relationship between two or more random variables.
+
+The **covariance** between random variables $X$ and $Y$ is defined as $\operatorname{Cov}(X, Y) = \sigma_{XY} = E((X - E(X))(Y - E(Y)))$. We can then expand this to get $\sigma_{XY} = E(XY) - E(X)E(Y) - E(X)E(Y) + E(X)E(Y) = E(XY) - E(X)E(Y)$. This is the expected value of the product of how much two variables differ from their expected value - the analogue of variance for two variables.
+
+For covariance, the only thing we care about is the sign - the actual magnitude of the covariance is not a useful value.
+
+If the covariance is negative, this means that two variables have a negative relationship. A negative covariance means that $Y > E(Y)$ generally when $X > E(Y)$ - as $X$ increases, $Y$ tends to decrease, and vice versa.
+
+If the covariance is positive, this means that two variables have a positive relationship. A positive covariance means that $Y < E(Y)$ generally when $X > E(Y)$ - as $X$ increases, $Y$ tends to increase, and vice versa.
+
+If $X$ and $Y$ are independent, then $E(g(X)h(Y)) = E(g(X))E(h(Y))$. So in this case, the covariance is $\sigma_{XY} = E(XY) - E(X)E(Y) = E(X)E(Y) - E(X)E(Y) = 0$.
+
+In fact, the covariance is 0 if and only if the two variables are independent. Previously, we could only test if variables were independent by calculating the marginal probability functions for each variable and checking if the product of all of them is equal to the joint probability function - checking if $f(X, Y) = f(X) f(Y)$. Now we can test for independence just by calculating the covariance.
+
+The **correlation coefficient** between random variables $X$ and $Y$ is $\rho_{XY} = \frac{\sigma_{XY}}{\sigma_X \sigma_Y}$ - the covariance over the product of the standard deviations of each variable.
+
+The correlation coefficient measures the strength of **linear** relationships between $X$ and $Y$ - how closely the relationship resembles a line. There can still be other strong relationships between the variables even if the correlation is low.
+
+The correlation coefficient is bounded: $-1 \le \rho_{XY} \le 1$. As a result, the sign and the magnitude of $\rho_{XY}$ is significant.
+
+A negative sign again means that there is a negative relationship and a positive sign again means a positive relationship. As $\rho_{XY} \to \pm 1$, $X$ and $Y$ approach perfect linear relationships. If $\rho_{XY} = 0$, $X$ and $Y$ are independent and are **uncorrelated**.
+
+Correlation allows us to capture information about relationships between variables even when they are not independent.
+
+# 9/7/14
+
+It is always true that $\operatorname{Cov}(X, X) = \operatorname{Var}(X)$ and $\operatorname{Cov}(aX + bY, cU + dV) = ac \operatorname{Cov}$. ;wip
+
+$\operatorname{Var}(aX + bY) = a^2 \operatorname{Var}(X) + b^2 \operatorname{Var}(Y) + 2ab \operatorname{Cov}(X, Y)$.
+
+$\operatorname{Var}(\sum a_i X_i) = \sum a_i \operatorname{Var}(X_i) + 2 \sum_{i < j} a_i a_j \operatorname{Cov}(X_i, X_j)$.
+
+$\sigma_{\overline X}^2 = \frac{\sigma_X^2}{n}$.
+
+So when we increase $n$, $\sigma_{\overline X}^2$ gets smaller and smaller. This is because when we add more data to our sample set, our sample average becomes closer to the true expected value.
+
+An **indicator variable** is a binary variable, that indicates whether an event occurred or not. For example, $X \sin \operatorname{Bin}(n, p)$ where $X_i$ is 1 if the $i$th trial was successful or 0 otherwise, so $X = \sum_{i = 1}^n X_i$.
+
+So $E(X) = E(\sum_{i = 1}^n X_i) = \sum_{i = 1}^n  E(X_i) = \sum_{i = 1}^n p = np$, as required. This is an easier way to find variance and mean when there are independent indicator variables.
+
+We have $n$ letters are addressed to $n$ people, $n$ envolopes are addressed to those $n$ people, and randomly put letters into envelopes. What is the mean and variance of the number of letters placed in the right encolope?
+
+> Let $X_i$ be 1 if letter $i$ is in the right envolope and 0 otherwise. Then $X = \sum X_i$ is the number of letters placed in the right envelope.  
+> Since the selection is done without replacement, we have a hypergeometric distribution. Note that $X_i$ is not independent since it depends in $i$.  
+> Clearly, $E(X) = \sum_{i = 1}^n E(X_i)$ and ;wip
+> Clearly, $\operatorname{Var}(\sum_{i = 1}^n x_i) = \operatorname{Var}(X_i)$ ;wip
