@@ -5,6 +5,7 @@ MATHJAX=http://benweet.github.io/stackedit/lib/MathJax/MathJax.js?config=TeX-AMS
 
 files="$(find -L "$DATADIR" -type f)"
 echo "$files" | while read file; do
+	echo "Building $file"
 	pandoc --output=${file%%.*}.html \
 		--mathjax=$MATHJAX \
 		--data-dir=$DATADIR \
