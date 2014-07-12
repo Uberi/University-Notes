@@ -1,0 +1,29 @@
+h2 {
+	line-height: 90%;
+	margin-bottom: 0;
+	margin-top: 0;
+	font-weight: 100;
+	font-size: 4em;
+}
+
+p {
+	text-align: left;
+}
+
+.term {
+	display: inline-block;
+	width: 30em;
+	border: 1px solid #EEEEEE;
+	padding: 1em;
+	margin: 0.5em auto;
+	transition: all 0.3s ease-in;
+	-webkit-transition: all 0.3s ease-in;
+	border-radius: 0.3em;
+}
+
+.term:hover { border-color: #A0A0A0; }
+
+.term .site_links {
+	padding-left: 0;
+	padding-right: 0;
+}

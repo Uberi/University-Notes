@@ -1267,3 +1267,39 @@ Prove that Prim's algorithm always give the minimum spanning tree:
 > This is a contradiction since $T_{k + 1}$ is not in any minimum spanning trees.
 > So for each $T_i$, there exists a minimum spanning tree that contains $T_i$.  
 > Since $V(T_n) = V(G)$, and a minimum spanning tree contains $T_n$, $T_n$ is a minimum spanning tree.  
+
+# 11/7/14
+
+A **planar embedding** of a graph $G$ is a drawing of $G$ on a plane such that every vertex has a unique position and the edges do not intersect except at vertices.
+
+Any graph that has at least one planar embedding is a **planar graph**. A **face** in a planar graph is a connected region on the plane - a region which, considered by itself, is connected. Two faces are **adjacent** if they share at least one edge.
+
+;wip: what kind of object is a face?
+
+The **boundary walk** for a face in a **connected** planar embedding is a closed walk around the boundary of the face. This is basically a walk that encloses the face but nothing else. For example, if there is a face within a face, we have to exclude the inner face from being included in the outer face's boundary walk.
+
+Note that the boundary walk is undefined for disconnected graphs.
+
+The **degree** of a face is the length of the boundary walk - the number of edges that it has surrounding it. The sum of the degrees of every face is even and twice the number of edges - because every edge is in two faces, every edge increases the degree of two faces it is beside by 1.
+
+The **handshaking lemma for faces** states that given a graph $G$ with a planar embedding with set of faces $F$, $\sum_{f \in F} \deg(f) = 2\abs{E(G)}$.
+
+An edge has two different faces on both sides if and only if it is part of a cycle. So an edge has the same face on both sides if it is a bridge. This is because if we have a cycle in a planar representation, it must partition the plane into an inside and outside. The edge must therefore have one side on the inside and the other on the outside.
+
+This was formalized in the Jordan Curve Theorem: every simple closed curve on the plane separates it into two parts, the inside and the outside. This might not be true on surfaces other than a plane, like on the surface of a torus.
+
+A connected graph with a planar embedding and only one face must be a tree, since if it had any cycles it would have 2 or more faces.
+
+In a connected graph with a planar embedding and at least 2 faces, every face boundary walk contains a cycle.
+
+**Euler's formula** relates the number of vertices, edges, and faces to each other. Let $G$ be a connected graph with a planar embedding and $F$ be the set of faces in $G$. Then $\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = 2$. In other words, the number of vertices plus the number of faces minus the number of edges always results in 2.
+
+Proof:
+
+> Induction over fixed $\abs{V(G)}$ and induction on $\abs{E(G)}$. Let $F(H)$ be the set of faces in a graph $H$.  
+> Clearly, the smallest possible connected graph with a planar embedding is a tree, so it is one such that $\abs{E(G)} = \abs{V(G)} - 1$. Since there is only one face, $\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = \abs{V(G)} - (\abs{V(G)} - 1) + 1 = 2$.  
+> Suppose for some $k$ that for all $\abs{E(G)} < k$, $\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = 2$.  
+> Assume $\abs{E(G)} = k$. Let $e$ be an edge in a cycle, which must exist because graph has more than $\abs{V(G)} - 1$ edges and is not a tree.  
+> Then if we remove $e$ from $G$ to get $G'$, $G'$ is also connected and planar, since $e$ is in a cycle and is therefore not a bridge.  
+> Clearly, $G'$ has $\abs{F(G)} - 1$ faces, since $e$ was in a cycle and had two different faces on both sides, and removing $e$ merges them into one face.  
+> So $\abs{V(G')} - \abs{E(G')} + \abs{F(G')} = 2$. Since $G$ has one more edge and one more face than $G'$, $\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = \abs{V(G')} - (\abs{E(G')} + 1) + (\abs{F(G')} + 1) = 2$.  

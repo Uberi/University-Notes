@@ -36,10 +36,6 @@ $$
 
 # 5/5/14
 
-There are two tests and five online quizzes on MapleTA
-
-;wip: look at the schedule and put it on the calendar
-
 Probability is a tool used to model uncertainty and variability, like size, weight, and height. It allows us to work with uncertainty, though it cannot eliminate it.
 
 Definition
@@ -111,7 +107,7 @@ When there are $n$ outcomes that are all equally likely, then the probability of
 
 If job A can be done in P ways and job B can be done in Q ways, then we can do either job A or job B in $P + Q$ ways. Here, "or" becomes addition. For example, the probabiity of getting heads or tails is $P(Heads) + P(Heads) = \frac 1 2 + \frac 1 2 = 1$
 
-If job A can be done in P ways, and for each of those P ways, job B can be done in Q distinct ways, then we can do both job A and B in $p \times q$ ways. For example, $P((Heads, Heads)) = P(Heads) AND P(Heads) = \frac 1 2 \times \frac 1 2 = \frac{1}{4}$.
+If job A can be done in P ways, and for each of those P ways, job B can be done in Q distinct ways, then we can do both job A and B in $p \times q$ ways. For example, $P((Heads, Heads)) = P(Heads)  \times P(Heads) = \frac 1 2 \times \frac 1 2 = \frac{1}{4}$.
 
 Sampling **with replacement** means that every time we select an object for sampling, we simply put it back into the population, so we could potentially sample it again.
 
@@ -286,7 +282,7 @@ Given a large set of elements $S$ with properties $W$ and $F$ such that $P(F) = 
 > Clearly, $P(\overline{W_a}) = P(\overline{W_1}) \cdots P(\overline{W_{10}}) = (1 - 0.45)^{10} = 0.55^{10}$.  
 > Clearly, $P(\overline{F_a}) = P(\overline{F_1}) \cdots P(\overline{F_{10}}) = (1 - 0.15)^{10} = 0.85^{10}$.  
 > We want to find $P(\overline{F_a})$ given that $\overline{W_a}$. This will allow us to find $P(\overline{W_a} \cap \overline{F_a})$.  
-> Clearly, $P(W_i) = 0.45 = P(W_i \cap \overline{F_i}}) + P(W_i \cap F_i) = P(W_i \cap \overline{F_i}) + 0.09$, since $P(F_i \cap W_i)$ means we assume that $W_i$ and $P(F_i)$ then becomes 0.2.  
+> Clearly, $P(W_i) = 0.45 = P(W_i \cap \overline{F_i}) + P(W_i \cap F_i) = P(W_i \cap \overline{F_i}) + 0.09$, since $P(F_i \cap W_i)$ means we assume that $W_i$ and $P(F_i)$ then becomes 0.2.  
 > So $P(W_i \cap \overline{F_i}) = 0.36$.  
 > Clearly, $P(\overline{F_i}) = 1 - 0.15 = P(\overline{F_i} \cap W_i) + P(\overline{F_i} \cap \overline{W_i}) = 0.36 + P(\overline{F_i} \cap \overline{W_i})$.  
 > So $P(\overline{F_i} \cap \overline{W_i}) = 0.49$ and $P(\overline{W_a} \cap \overline{F_a}) = 0.49^{10}$.  
@@ -407,7 +403,7 @@ If the random variable $X$ takes on values $a_1, \ldots, a_n$ where each value i
 
 The probability of observing any of these is simply $\frac 1 {b - a + 1}$. The most common example of this is the rolling of a 6 sided dice several times.
 
-The cumulative distribution function would be $F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &x < 1 \\ \frac \floor{x} {b - a + 1} &1 \le x \le 6 \\ 1 & x > 6 \end{cases}$.
+The cumulative distribution function would be $F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &\text{if } x < 1 \\ \frac \floor{x} {b - a + 1} &\text{if } 1 \le x \le 6 \\ 1 &\text{if } x > 6 \end{cases}$.
 
 If a 6-sided die is rolled 3 times, what is $F_X(x)$ and $f_X(x)$ where $x$ is the largest value rolled?
 
@@ -456,7 +452,7 @@ If the above are satisfied, then if $X$ represents the number of observed succes
 
 The setup is very similar to the hypergeometric distribution, except our selection is done with replacement - every trial is independent.
 
-$X \sim \operatorname(Bin)(n, p)$. The $n$ is the number of the number of objects in $S$, and $p$ is the probability of success for each trial.
+$X \sim \operatorname{Bin}(n, p)$. The $n$ is the number of the number of objects in $S$, and $p$ is the probability of success for each trial.
 
 These independent trials resulting in success/failure are known as **Bernoulli trials**. The process is known as the **Bernoulli process**.
 
@@ -586,7 +582,7 @@ When $n \to \infty$, the binomial distribution becomes the Poisson distribution:
 > Since $e^x = \lim_{n \to \infty} \left(1 + \frac x n\right)^n$ and $e^{-\mu} = \lim_{n \to \infty} \left(1 - \frac x n\right)^n$.  
 > So $\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \frac{e^{-\mu}\mu^x}{x!}\lim_{n \to \infty}$.  
 
-The idea is to keep $\mu = np$ fixed, so as $n \to \infty$, $p \to 0$.
+The idea is that as $n \to \infty$, $p \to 0$ and $\mu = np$ approaches the rate at which successes occur.
 
 Birthday problem - given 200 people at a party, what is the probability that exactly two of them are born on January 1?
 
@@ -916,3 +912,35 @@ We have $n$ letters are addressed to $n$ people, $n$ envolopes are addressed to 
 > Since the selection is done without replacement, we have a hypergeometric distribution. Note that $X_i$ is not independent since it depends in $i$.  
 > Clearly, $E(X) = \sum_{i = 1}^n E(X_i)$ and ;wip
 > Clearly, $\operatorname{Var}(\sum_{i = 1}^n x_i) = \operatorname{Var}(X_i)$ ;wip
+
+# 11/7/14
+
+Continuous Probability Distributions
+------------------------------------
+
+Random variables can alsso be continuous. These are variables that can have any real number as a value. This are treated differently from discrete variables because $P(X = x) = 0$ - there are so many possible outcomes that the probability that any outcome actually occurs is negligible.
+
+For ocntinuous random variables, we actually care about the outcome falling between certain values. For this we consider the area under the curve of the probability function - the integral between two endpoints.
+
+The probability that $a \le X \le b$ is therefore $\int_a^b f(x) \dee x$. This is called a **probability density function** (PDF), analogous to the probability distribution function for discrete variables.
+
+The **cumulative distribution function** (CDF) is similar to those in discrete variables. It is $P(X \le x)$ and here, $F(-\infty) = 0, F(\infty) = 1$, $F$ is non-decreasing, and $P(a \le X \le b) = F(b) - F(a)$.
+
+So $F_X(x) = \int_0^k f_X(x) \dee x$ and $f_X(x) = \frac{\dee F_X(x)}{\dee x}$. As a result, $f_X(x)$ can actually be more than 1 - it does not have an upper bound (it does have a lower bound since $F_X$ is non-decreasing).
+
+$f_X(x)$ is not the same as $P(X = x)$, but rather $f(x) \Delta x$ is the probability that $X$ is in the very small interval $\Delta x$.
+
+Also, since $P(X = a) = P(X = b) = 0$, $P(a \le X \le b) = P(a < X < b)$.
+
+Let $Y$ be a function of $X$, both random variables.
+
+First, we write the CDF of $Y$ as a function of $X$. Then, we use $F_X(x)$ to find $F_Y(y)$, and then write the domain of the functions.
+
+Let $F_X(x) = \frac x 4, 0 \le x \le 4$ and $Y = \frac 1 X$. Find the PDF of $Y$:
+
+> Clearly, $F_Y(y) = P(Y \le y) = P(\frac 1 X \le y) = P(X \ge \frac 1 y) = 1 - P(X < \frac 1 y)$.  
+> So $F_Y(y) = 1 - F_X(\frac 1 y) = 1 - 1 - \frac{\frac 1 y}{4} = 1 - \frac 1 {4y}$.  
+> So $f_Y(y) = \frac{\dee}{\dee x} \left(1 - \frac 1 {4y}\right) = \frac 1 {4y^2}$.  
+> Since $0 \le x \le 4$, $\frac 1 4 \le y \le \infty$.  
+
+The expected value for continuous random variables is $\int_{\text{all } x} x \cdot f_X(x) \dee x$.

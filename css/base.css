@@ -1,0 +1,99 @@
+@font-face {
+	font-family: "Roboto";
+	font-style: normal;
+	font-weight: 400;
+	src: local("OFL Sorts Mill Goudy TT"), url("fonts/sorts-mill-goudy.ttf")  format("ttf");
+}
+
+body {
+	font-size: 100%;
+	margin: 0;
+	padding: 1em 10%;
+	background-color: white;
+	font-family: "OFL Sorts Mill Goudy TT", Georgia, Times New Roman, Times, serif;
+	text-align:center;
+}
+
+h1 {
+	margin: 0;
+	text-shadow: #AAAAAA 0 0 0.02em;
+	font-weight: 100;
+	font-size: 3em;
+	color: #444444;
+	font-variant: small-caps;
+	margin-bottom: -0.3em;
+}
+
+h1 a { color: inherit; }
+
+.site_links {
+	padding: 0;
+	margin: 0;
+}
+
+.site_links li {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	margin-top: 0.8em;
+}
+
+.site_links .divider:after {
+	content: "//";
+	margin: 0 0.5em;
+	color:#888888;
+}
+
+.site_links a {
+	font-size:0.9em;
+	text-transform: uppercase;
+	padding-top: 0.3em;
+	color: #555555;
+	text-decoration: none;
+	border-top: 0.15em solid rgba(153, 0, 0, 0);
+	border-bottom: 0.15em solid #990000;
+	transition: all 0.3s ease-in;
+	-webkit-transition: all 0.3s ease-in;
+}
+
+.site_links a:hover, .site_links a:focus { border-top-color: #990000; }
+
+.site_links .page { border-color: #009900; border-top-color: rgba(0, 153, 0, 0); }
+
+.site_links .page:hover, .site_links .page:focus { border-top-color: #009900; }
+
+.site_links .contact { border-color: #000099; border-top-color: rgba(0, 0, 153, 0); }
+
+.site_links .contact:hover, .site_links .contact:focus { border-top-color: #000099; }
+
+a { color: #775555; }
+
+code {
+	border: 1px solid grey;
+	border-radius: 0.3em;
+	white-space: pre;
+	display: inline-block;
+	padding: 0.1em 0.3em;
+	color: #555555;
+}
+
+:not(pre) > code {
+	display: inline-block !important;
+	padding: 0.1em 0.3em !important;
+	margin-bottom: -0.3em;
+}
+
+pre { margin: 1em 3em; }
+
+pre > code { padding: 1em; overflow: auto; }
+
+.license {
+	font-size: 0.6em;
+	display: inline-block;
+	padding: 1em;
+	margin: 1em;
+	border-top: 1px solid #EEEEEE;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.license img { float: left; margin-right: 0.6em; }

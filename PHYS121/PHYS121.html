@@ -4,87 +4,37 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <title>PHYS121 | Anthony Zhang</title>
-  <style type="text/css">
-  body {
-    font-family: "Segoe UI", Verdana, Arial, Helvetica, sans-serif;
-    background: #fffefe;
-    padding: 5em;
-  }
-  
-  pre {
-    margin-left: 2em;
-  }
-  
-  code {
-    border: solid 1px black;
-    background: #665555;
-    color: white;
-    padding: 0.1em;
-    border-radius: 0.3em;
-    display: inline-block;
-  }
-  
-  pre code {
-    padding: 1em;
-    border-radius: 0.5em;
-  }
-  
-  h1 {
-    font-size: 4em;
-  }
-  
-  table {
-    margin: 0 auto;
-  }
-  
-  td, th {
-    padding: 0.5em;
-    border: 1px solid grey;
-  }
-  
-  tr {
-    padding:: 0;
-  }
-  
-  blockquote {
-    margin-left: 0;
-    padding-left: 0.5em;
-    border-left: solid 0.3em grey;
-  }
-  
-  .figure {
-    border: solid 0.1em grey;
-    display: inline-block;
-    padding: 1em;
-    text-align: center;
-  }
-  
-  .figure .caption {
-    margin: 0;
-    font-size: 80%;
-  }
-  
-  a.button {
-    display: inline-block;
-    padding: 1em;
-    font-family: monospace;
-    color: black;
-    text-decoration: none;
-    border: 0.2em solid black;
-    border-radius: 0.5em;
-    background: white;
-  }
-  
-  a.button:hover, a.button:focus, a.button:active {
-    background: black;
-    color: white;
-  }
-  </style>
-  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>
+function highlight() { // highlight all code blocks using HighlightJS
+  var code_blocks = document.getElementsByTagName("code");
+  for (var i=0; i < code_blocks.length; i++)
+    hljs.highlightBlock(code_blocks[i]);
+}
+</script>
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </head>
-<body>
-<a class="button" href="..">&#8666; Return to University Notes index</a>
+<body onload="highlight()">
+  <h1>Lecture Notes by <a href="index.html">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/profile/view?id=322205746" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.mesecons.net/">mesecons</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.autohotkey.net/~Uberi/">autohotkey.net</a></li>
+  </ul>
 <h1 id="phys121">PHYS121</h1>
 <p>Mechanics</p>
 <pre><code>Instructor: Guenter Scholz
@@ -940,9 +890,10 @@ X============= 2kg</code></pre>
 <p>Clearly, <span class="math">\(\vec{l}_{student} = 1.6 m 50 kg \frac{25}{9} m/s \sin \theta\)</span>. Since the student is perpendicular to the displacement of the point on the edge, <span class="math">\(\sin \theta = 1\)</span>. So <span class="math">\(\vec{l}_{student} = 1.6 m 50 kg \frac{25}{9} m/s = \frac{2000}{9} kg m^2/s\)</span>.<br />So the angular momentum of the student is <span class="math">\(222.2 kg m^2/s\)</span>.<br />Clearly, <span class="math">\(\vec{l}_{student, f} + \vec{l}_{wheel, f} = \vec{l}_{student, i} + \vec{l}_{wheel, i}\)</span>. So <span class="math">\(\vec{l}_{student, f} + \vec{l}_{wheel, f} = \vec{l}_{student, i} = \frac{2000}{9} kg m^2/s\)</span> since the wheel was stationary.<br />Clearly, <span class="math">\(I_{student} = mr^2 = 50 kg (1.6 m)^2 = 128 kg m^2\)</span>.<br />Since <span class="math">\(\vec{\omega}_{student, f} = \vec{\omega}_{wheel, f}\)</span>, <span class="math">\(\vec{\omega}_{student, f}(I_{student} + I_{wheel}) = \frac{2000}{9} kg m^2/s = \vec{\omega}_{student, f} 1328 kg m^2\)</span>. So <span class="math">\(\vec{\omega}_{student, f} = \frac{\frac{2000}{9} kg m^2/s}{1328 kg m^2} = \frac{125}{747} rad/s\)</span>.<br />So the angular velocity of the merry-go-round after collision was <span class="math">\(0.167 rad/s\)</span>.<br />Clearly, <span class="math">\(E_{k, i} = \frac{1}{2} 50 kg \left(\frac{25}{9} m/s\right)^2 = 192.901234567901234 J\)</span>.<br />Clearly, <span class="math">\(E_{k, f} = \frac{1}{2} (I_{student} + I_{wheel}) \omega_{student, f}^2 = \frac{1}{2} 1328 kg m^2 (\frac{125}{747} rad/s)^2 = 18.592890078833854 J\)</span>.<br />So the collision was inelastic, losing <span class="math">\(192.901234567901234 J - 18.592890078833854 J = 174.308344489067380 J\)</span> of kinetic energy.<br />If the student moves the the center <span class="math">\(I_{wheel}\omega = (I_{wheel} + I_{student})\frac{125}{747} rad/s = 1328 kg m^2 \frac{125}{747} rad/s\)</span>, since the moment of inertia provided by the student is simply removed by being at the center.<br />So <span class="math">\(\omega = \frac{1328 kg m^2 \frac{125}{747} rad/s}{1200 kg m^2} = 0.185185185185185 rad/s\)</span>.<br />So the speed after the student moves to the center is <span class="math">\(0.185 rad/s\)</span>.<br />So <span class="math">\(E_k = \frac{1}{2} 1200 kg m^2 (0.185185185185185 rad/s)^2 = 20.576131687242757 J\)</span>, and <span class="math">\(W = \Delta E_k = 20.576131687242757 J - 18.592890078833854 J = 1.983241608408903 J\)</span>.<br />So the student needs to do 1.98 J of work to get to the center.</p>
 </blockquote>
 <p>A force applied along the center of mass applies zero torque to the object. This is called a <strong>central force</strong>.</p>
-<hr>
-<p>Copyright 2013 Anthony Zhang</p>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">University-Notes</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Uberi/University-Notes" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
 <script type="text/javascript">
 MathJax.Hub.Config({
   jax: ["input/TeX","output/HTML-CSS"],

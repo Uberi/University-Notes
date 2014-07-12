@@ -622,7 +622,7 @@ Review
 |:------------|:----------------|:-----------------------|:-----------------------------------|:-----------------------|:-------------------------------|
 | ALL         | Various         | Various                | Representational theory of mind    | Various                | Various                        |
 | Aristotle   | Observation     | Form/matter            | Observation                        | Four causes            | Don't care                     |
-| Descartes   | Rationalist     | Dualist - mind/body    | ??? Mind/body problem ???          | Efficient cause        | Methodic doubt test            |
+| Descartes   | Rationalist     | Dualist - mind/body    | Mind/body problem                  | Efficient cause        | Methodic doubt test            | ;wip: what's the mind/body problem?
 | Locke       | Empiricist      | Materialist            | Physical interactions with brains  | Efficient cause        | Doubt only secondary qualities |
 | Berkeley    | Empiricist      | Idealist - minds/ideas | Mental causation                   | Efficient cause        | Not at all                     |
 
@@ -994,7 +994,7 @@ No, because there are a variety of other possibilities, like `Mary is sick` or `
 
 Quine says there are two categories we can use to see if a hypothesis is connected with a given observation:
 
-* Initial conditions - things that already have to be in place in order to make the observation at all. For example, `mary took the test`.
+* Initial conditions - things that already have to be in place in order to make the observation at all. For example, `Mary took the test`.
 * Auxilary hypotheses - things we must assume in order to connect the observation to the hypothesis. For example, `the test was graded fairly`.
 
 The difference is not always perfectly clear and can overlap.

@@ -4,87 +4,37 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <title>STAT230 | Anthony Zhang</title>
-  <style type="text/css">
-  body {
-    font-family: "Segoe UI", Verdana, Arial, Helvetica, sans-serif;
-    background: #fffefe;
-    padding: 5em;
-  }
-  
-  pre {
-    margin-left: 2em;
-  }
-  
-  code {
-    border: solid 1px black;
-    background: #665555;
-    color: white;
-    padding: 0.1em;
-    border-radius: 0.3em;
-    display: inline-block;
-  }
-  
-  pre code {
-    padding: 1em;
-    border-radius: 0.5em;
-  }
-  
-  h1 {
-    font-size: 4em;
-  }
-  
-  table {
-    margin: 0 auto;
-  }
-  
-  td, th {
-    padding: 0.5em;
-    border: 1px solid grey;
-  }
-  
-  tr {
-    padding:: 0;
-  }
-  
-  blockquote {
-    margin-left: 0;
-    padding-left: 0.5em;
-    border-left: solid 0.3em grey;
-  }
-  
-  .figure {
-    border: solid 0.1em grey;
-    display: inline-block;
-    padding: 1em;
-    text-align: center;
-  }
-  
-  .figure .caption {
-    margin: 0;
-    font-size: 80%;
-  }
-  
-  a.button {
-    display: inline-block;
-    padding: 1em;
-    font-family: monospace;
-    color: black;
-    text-decoration: none;
-    border: 0.2em solid black;
-    border-radius: 0.5em;
-    background: white;
-  }
-  
-  a.button:hover, a.button:focus, a.button:active {
-    background: black;
-    color: white;
-  }
-  </style>
-  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>
+function highlight() { // highlight all code blocks using HighlightJS
+  var code_blocks = document.getElementsByTagName("code");
+  for (var i=0; i < code_blocks.length; i++)
+    hljs.highlightBlock(code_blocks[i]);
+}
+</script>
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </head>
-<body>
-<a class="button" href="..">&#8666; Return to University Notes index</a>
+<body onload="highlight()">
+  <h1>Lecture Notes by <a href="index.html">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/profile/view?id=322205746" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.mesecons.net/">mesecons</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.autohotkey.net/~Uberi/">autohotkey.net</a></li>
+  </ul>
 <h1 id="stat230">STAT230</h1>
 <p>Probability.</p>
 <pre><code>Section 001
@@ -117,8 +67,6 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
 \]</span></p>
 <h1 id="section">5/5/14</h1>
-<p>There are two tests and five online quizzes on MapleTA</p>
-<p>;wip: look at the schedule and put it on the calendar</p>
 <p>Probability is a tool used to model uncertainty and variability, like size, weight, and height. It allows us to work with uncertainty, though it cannot eliminate it.</p>
 <h2 id="definition">Definition</h2>
 <p>We first specify the <strong>outcome/event</strong> that we are interested in that might occur in a particular setting. This setting is the <strong>experiment/process</strong>.</p>
@@ -157,7 +105,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <h2 id="counting-techniques">Counting Techniques</h2>
 <p>When there are <span class="math">\(n\)</span> outcomes that are all equally likely, then the probability of each outcome is <span class="math">\(\frac{1}{n}\)</span>.</p>
 <p>If job A can be done in P ways and job B can be done in Q ways, then we can do either job A or job B in <span class="math">\(P + Q\)</span> ways. Here, &quot;or&quot; becomes addition. For example, the probabiity of getting heads or tails is <span class="math">\(P(Heads) + P(Heads) = \frac 1 2 + \frac 1 2 = 1\)</span></p>
-<p>If job A can be done in P ways, and for each of those P ways, job B can be done in Q distinct ways, then we can do both job A and B in <span class="math">\(p \times q\)</span> ways. For example, <span class="math">\(P((Heads, Heads)) = P(Heads) AND P(Heads) = \frac 1 2 \times \frac 1 2 = \frac{1}{4}\)</span>.</p>
+<p>If job A can be done in P ways, and for each of those P ways, job B can be done in Q distinct ways, then we can do both job A and B in <span class="math">\(p \times q\)</span> ways. For example, <span class="math">\(P((Heads, Heads)) = P(Heads)  \times P(Heads) = \frac 1 2 \times \frac 1 2 = \frac{1}{4}\)</span>.</p>
 <p>Sampling <strong>with replacement</strong> means that every time we select an object for sampling, we simply put it back into the population, so we could potentially sample it again.</p>
 <p>This means that what we get on each selection will not affect subsequent selections. For example, a coin flip has both sides of the coin replaced after each sample, so there is always the same probability of getting heads or tails.</p>
 <p>Sampling <strong>without replacement</strong> means that after selecting an object, we do not put it back. Therefore, an object can only be selected at most once.</p>
@@ -247,7 +195,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 </blockquote>
 <p>Given a large set of elements <span class="math">\(S\)</span> with properties <span class="math">\(W\)</span> and <span class="math">\(F\)</span> such that <span class="math">\(P(F) = 0.15, P(W) = 0.45\)</span>, and that if <span class="math">\(W\)</span>, then <span class="math">\(P(F) = 0.2\)</span>, what is the probability of, in 10 randomly selected elements, at least 1 being <span class="math">\(W\)</span> and 1 being <span class="math">\(F\)</span>?</p>
 <blockquote>
-<p>Let <span class="math">\(T\)</span> be a set of 10 randomly selected elements.<br />Since <span class="math">\(S\)</span> is large and <span class="math">\(T\)</span> is small, we can pretend we are selecting with replacement even though it is without replacement. This is because the probabilities would not hold if we did not do replacement.<br />Let <span class="math">\(W_i\)</span> or <span class="math">\(F_i\)</span> represent the <span class="math">\(i\)</span>th element of <span class="math">\(T\)</span> being <span class="math">\(W\)</span> or <span class="math">\(F\)</span>, respectively.<br />Let <span class="math">\(W_a = W_1 \cup \ldots \cup W_{10}\)</span>, <span class="math">\(F_a = F_1 \cup \ldots \cup F_{10}\)</span>.<br />Clearly, the probability is <span class="math">\(P(W_a \cap F_a) = 1 - P(\overline{W_a \cap F_a}) = 1 - P(\overline{W_a} \cup \overline{F_a}) = 1 - P(\overline{W_a}) - P(\overline{F_a}) + P(\overline{W_a} \cap \overline{F_a})\)</span>.<br />Clearly, <span class="math">\(P(\overline{W_a}) = P(\overline{W_1}) \cdots P(\overline{W_{10}}) = (1 - 0.45)^{10} = 0.55^{10}\)</span>.<br />Clearly, <span class="math">\(P(\overline{F_a}) = P(\overline{F_1}) \cdots P(\overline{F_{10}}) = (1 - 0.15)^{10} = 0.85^{10}\)</span>.<br />We want to find <span class="math">\(P(\overline{F_a})\)</span> given that <span class="math">\(\overline{W_a}\)</span>. This will allow us to find <span class="math">\(P(\overline{W_a} \cap \overline{F_a})\)</span>.<br />Clearly, <span class="math">\(P(W_i) = 0.45 = P(W_i \cap \overline{F_i}}) + P(W_i \cap F_i) = P(W_i \cap \overline{F_i}) + 0.09\)</span>, since <span class="math">\(P(F_i \cap W_i)\)</span> means we assume that <span class="math">\(W_i\)</span> and <span class="math">\(P(F_i)\)</span> then becomes 0.2.<br />So <span class="math">\(P(W_i \cap \overline{F_i}) = 0.36\)</span>.<br />Clearly, <span class="math">\(P(\overline{F_i}) = 1 - 0.15 = P(\overline{F_i} \cap W_i) + P(\overline{F_i} \cap \overline{W_i}) = 0.36 + P(\overline{F_i} \cap \overline{W_i})\)</span>.<br />So <span class="math">\(P(\overline{F_i} \cap \overline{W_i}) = 0.49\)</span> and <span class="math">\(P(\overline{W_a} \cap \overline{F_a}) = 0.49^{10}\)</span>.<br />So <span class="math">\(P(W_a \cap F_a) = 1 - 0.55^{10} - 0.85^{10} + 0.49^{10} \approxeq 0.801390566701062\)</span>.</p>
+<p>Let <span class="math">\(T\)</span> be a set of 10 randomly selected elements.<br />Since <span class="math">\(S\)</span> is large and <span class="math">\(T\)</span> is small, we can pretend we are selecting with replacement even though it is without replacement. This is because the probabilities would not hold if we did not do replacement.<br />Let <span class="math">\(W_i\)</span> or <span class="math">\(F_i\)</span> represent the <span class="math">\(i\)</span>th element of <span class="math">\(T\)</span> being <span class="math">\(W\)</span> or <span class="math">\(F\)</span>, respectively.<br />Let <span class="math">\(W_a = W_1 \cup \ldots \cup W_{10}\)</span>, <span class="math">\(F_a = F_1 \cup \ldots \cup F_{10}\)</span>.<br />Clearly, the probability is <span class="math">\(P(W_a \cap F_a) = 1 - P(\overline{W_a \cap F_a}) = 1 - P(\overline{W_a} \cup \overline{F_a}) = 1 - P(\overline{W_a}) - P(\overline{F_a}) + P(\overline{W_a} \cap \overline{F_a})\)</span>.<br />Clearly, <span class="math">\(P(\overline{W_a}) = P(\overline{W_1}) \cdots P(\overline{W_{10}}) = (1 - 0.45)^{10} = 0.55^{10}\)</span>.<br />Clearly, <span class="math">\(P(\overline{F_a}) = P(\overline{F_1}) \cdots P(\overline{F_{10}}) = (1 - 0.15)^{10} = 0.85^{10}\)</span>.<br />We want to find <span class="math">\(P(\overline{F_a})\)</span> given that <span class="math">\(\overline{W_a}\)</span>. This will allow us to find <span class="math">\(P(\overline{W_a} \cap \overline{F_a})\)</span>.<br />Clearly, <span class="math">\(P(W_i) = 0.45 = P(W_i \cap \overline{F_i}) + P(W_i \cap F_i) = P(W_i \cap \overline{F_i}) + 0.09\)</span>, since <span class="math">\(P(F_i \cap W_i)\)</span> means we assume that <span class="math">\(W_i\)</span> and <span class="math">\(P(F_i)\)</span> then becomes 0.2.<br />So <span class="math">\(P(W_i \cap \overline{F_i}) = 0.36\)</span>.<br />Clearly, <span class="math">\(P(\overline{F_i}) = 1 - 0.15 = P(\overline{F_i} \cap W_i) + P(\overline{F_i} \cap \overline{W_i}) = 0.36 + P(\overline{F_i} \cap \overline{W_i})\)</span>.<br />So <span class="math">\(P(\overline{F_i} \cap \overline{W_i}) = 0.49\)</span> and <span class="math">\(P(\overline{W_a} \cap \overline{F_a}) = 0.49^{10}\)</span>.<br />So <span class="math">\(P(W_a \cap F_a) = 1 - 0.55^{10} - 0.85^{10} + 0.49^{10} \approxeq 0.801390566701062\)</span>.</p>
 </blockquote>
 <p>This demonstrated the very useful identity <span class="math">\(P(A) = P(A \cap B) + P(A \cap \overline B)\)</span>, where <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are events.</p>
 <h1 id="section-7">23/5/14</h1>
@@ -309,7 +257,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>If the above are satisfied, then if <span class="math">\(X\)</span> represents the index of the outcome in <span class="math">\(x_1, \ldots, x_n\)</span> that occurred, <span class="math">\(X\)</span> has a discrete uniform distribution.</p>
 <p>If the random variable <span class="math">\(X\)</span> takes on values <span class="math">\(a_1, \ldots, a_n\)</span> where each value is equally likely, then <span class="math">\(X\)</span> has a discrete uniform distribution on the set <span class="math">\(\set{a_1, \ldots, a_n}\)</span>, by definition.</p>
 <p>The probability of observing any of these is simply <span class="math">\(\frac 1 {b - a + 1}\)</span>. The most common example of this is the rolling of a 6 sided dice several times.</p>
-<p>The cumulative distribution function would be <span class="math">\(F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &amp;x &lt; 1 \\ \frac \floor{x} {b - a + 1} &amp;1 \le x \le 6 \\ 1 &amp; x &gt; 6 \end{cases}\)</span>.</p>
+<p>The cumulative distribution function would be <span class="math">\(F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &amp;\text{if } x &lt; 1 \\ \frac \floor{x} {b - a + 1} &amp;\text{if } 1 \le x \le 6 \\ 1 &amp;\text{if } x &gt; 6 \end{cases}\)</span>.</p>
 <p>If a 6-sided die is rolled 3 times, what is <span class="math">\(F_X(x)\)</span> and <span class="math">\(f_X(x)\)</span> where <span class="math">\(x\)</span> is the largest value rolled?</p>
 <blockquote>
 <p>Clearly, <span class="math">\(F_X(x) = P(X \le x) = \frac{x^3}{6^3}\)</span>, because there are <span class="math">\(x^3\)</span> possible outcomes where all the values are less than or equal to <span class="math">\(x\)</span> and <span class="math">\(6^3\)</span> possible outcomes.<br />So <span class="math">\(f_X(x) = P(X = x) = \frac{x^3 - (x - 1)^3}{6^3} = \frac{3x^2 - 3x + 1}{216}\)</span>.</p>
@@ -343,7 +291,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 </ul>
 <p>If the above are satisfied, then if <span class="math">\(X\)</span> represents the number of observed successes, <span class="math">\(X\)</span> has a binomial distribution and <span class="math">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span> where <span class="math">\(n\)</span> is the number of objects selected, and <span class="math">\(p\)</span> is the probability of success for any trial.</p>
 <p>The setup is very similar to the hypergeometric distribution, except our selection is done with replacement - every trial is independent.</p>
-<p><span class="math">\(X \sim \operatorname(Bin)(n, p)\)</span>. The <span class="math">\(n\)</span> is the number of the number of objects in <span class="math">\(S\)</span>, and <span class="math">\(p\)</span> is the probability of success for each trial.</p>
+<p><span class="math">\(X \sim \operatorname{Bin}(n, p)\)</span>. The <span class="math">\(n\)</span> is the number of the number of objects in <span class="math">\(S\)</span>, and <span class="math">\(p\)</span> is the probability of success for each trial.</p>
 <p>These independent trials resulting in success/failure are known as <strong>Bernoulli trials</strong>. The process is known as the <strong>Bernoulli process</strong>.</p>
 <p>With <span class="math">\(x\)</span> successes and <span class="math">\(n - x\)</span> failures, there are <span class="math">\(n \choose x\)</span> ways of choosing them. ;wip: justify the formula</p>
 <p>So <span class="math">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span> where <span class="math">\(0 \le x \le n\)</span>.</p>
@@ -418,7 +366,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <blockquote>
 <p>Let <span class="math">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span>. We want to prove that <span class="math">\(\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \frac{e^{-\mu} \mu^x}{x!}\)</span>.<br />Clearly, <span class="math">\(\mu = np\)</span> - the number of samples times the probability of each sample occurring is the rate of events occurring over all <span class="math">\(n\)</span>.<br />So <span class="math">\(\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \lim_{n \to \infty} {n \choose x}\left(\frac \mu n\right)^x\left(1 - \frac \mu n\right)^{n - x} = \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n!}{(n - x)!}\frac 1 {n^x}\left(1 - \frac \mu n\right)^n \lim_{n \to \infty} \left(1 - \frac \mu n\right)^{-x} = \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n \cdot (n - 1) \cdots (n - x)}{n^x}\left(1 - \frac \mu n\right)^n = \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n \cdot (n - 1) \cdots (n - x)}{n^x} \lim_{n \to \infty} \left(1 - \frac \mu n\right)^n = \frac{\mu^x}{x!}\lim_{n \to \infty} \left(1 - \frac \mu n\right)^n\)</span>.<br />Since <span class="math">\(e^x = \lim_{n \to \infty} \left(1 + \frac x n\right)^n\)</span> and <span class="math">\(e^{-\mu} = \lim_{n \to \infty} \left(1 - \frac x n\right)^n\)</span>.<br />So <span class="math">\(\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \frac{e^{-\mu}\mu^x}{x!}\lim_{n \to \infty}\)</span>.</p>
 </blockquote>
-<p>The idea is to keep <span class="math">\(\mu = np\)</span> fixed, so as <span class="math">\(n \to \infty\)</span>, <span class="math">\(p \to 0\)</span>.</p>
+<p>The idea is that as <span class="math">\(n \to \infty\)</span>, <span class="math">\(p \to 0\)</span> and <span class="math">\(\mu = np\)</span> approaches the rate at which successes occur.</p>
 <p>Birthday problem - given 200 people at a party, what is the probability that exactly two of them are born on January 1?</p>
 <blockquote>
 <p>We assume that all days of the year are equally likely, and there are no leap years, and that birthdays are independent of each other.<br />Let <span class="math">\(X\)</span> be the number of people at the party born on January 1.<br />So <span class="math">\(X \sim \operatorname{Bin}(200, \frac 1 {365})\)</span>. Then the exact probability is <span class="math">\(P(X = 2) = {200 \choose 2} \frac 1 {365^2} \left(\frac{364}{365}\right)^{200 - 2} \approxeq 0.086766913252562\)</span>.<br />Using the Poisson approximation, <span class="math">\(\mu = np = 200 \times \frac 1 {365} = \frac{200}{365}\)</span>, so <span class="math">\(P(X = 2) = \frac{e^{-\frac{200}{365}}\mu^{\frac{200}{365}}}{x!} \approxeq 0.086790999064332\)</span>.</p>
@@ -599,9 +547,26 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <blockquote>
 <p>Let <span class="math">\(X_i\)</span> be 1 if letter <span class="math">\(i\)</span> is in the right envolope and 0 otherwise. Then <span class="math">\(X = \sum X_i\)</span> is the number of letters placed in the right envelope.<br />Since the selection is done without replacement, we have a hypergeometric distribution. Note that <span class="math">\(X_i\)</span> is not independent since it depends in <span class="math">\(i\)</span>.<br />Clearly, <span class="math">\(E(X) = \sum_{i = 1}^n E(X_i)\)</span> and ;wip Clearly, <span class="math">\(\operatorname{Var}(\sum_{i = 1}^n x_i) = \operatorname{Var}(X_i)\)</span> ;wip</p>
 </blockquote>
-<hr>
-<p>Copyright 2013 Anthony Zhang</p>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">University-Notes</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Uberi/University-Notes" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<h1 id="section-27">11/7/14</h1>
+<h2 id="continuous-probability-distributions">Continuous Probability Distributions</h2>
+<p>Random variables can alsso be continuous. These are variables that can have any real number as a value. This are treated differently from discrete variables because <span class="math">\(P(X = x) = 0\)</span> - there are so many possible outcomes that the probability that any outcome actually occurs is negligible.</p>
+<p>For ocntinuous random variables, we actually care about the outcome falling between certain values. For this we consider the area under the curve of the probability function - the integral between two endpoints.</p>
+<p>The probability that <span class="math">\(a \le X \le b\)</span> is therefore <span class="math">\(\int_a^b f(x) \dee x\)</span>. This is called a <strong>probability density function</strong> (PDF), analogous to the probability distribution function for discrete variables.</p>
+<p>The <strong>cumulative distribution function</strong> (CDF) is similar to those in discrete variables. It is <span class="math">\(P(X \le x)\)</span> and here, <span class="math">\(F(-\infty) = 0, F(\infty) = 1\)</span>, <span class="math">\(F\)</span> is non-decreasing, and <span class="math">\(P(a \le X \le b) = F(b) - F(a)\)</span>.</p>
+<p>So <span class="math">\(F_X(x) = \int_0^k f_X(x) \dee x\)</span> and <span class="math">\(f_X(x) = \frac{\dee F_X(x)}{\dee x}\)</span>. As a result, <span class="math">\(f_X(x)\)</span> can actually be more than 1 - it does not have an upper bound (it does have a lower bound since <span class="math">\(F_X\)</span> is non-decreasing).</p>
+<p><span class="math">\(f_X(x)\)</span> is not the same as <span class="math">\(P(X = x)\)</span>, but rather <span class="math">\(f(x) \Delta x\)</span> is the probability that <span class="math">\(X\)</span> is in the very small interval <span class="math">\(\Delta x\)</span>.</p>
+<p>Also, since <span class="math">\(P(X = a) = P(X = b) = 0\)</span>, <span class="math">\(P(a \le X \le b) = P(a &lt; X &lt; b)\)</span>.</p>
+<p>Let <span class="math">\(Y\)</span> be a function of <span class="math">\(X\)</span>, both random variables.</p>
+<p>First, we write the CDF of <span class="math">\(Y\)</span> as a function of <span class="math">\(X\)</span>. Then, we use <span class="math">\(F_X(x)\)</span> to find <span class="math">\(F_Y(y)\)</span>, and then write the domain of the functions.</p>
+<p>Let <span class="math">\(F_X(x) = \frac x 4, 0 \le x \le 4\)</span> and <span class="math">\(Y = \frac 1 X\)</span>. Find the PDF of <span class="math">\(Y\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(F_Y(y) = P(Y \le y) = P(\frac 1 X \le y) = P(X \ge \frac 1 y) = 1 - P(X &lt; \frac 1 y)\)</span>.<br />So <span class="math">\(F_Y(y) = 1 - F_X(\frac 1 y) = 1 - 1 - \frac{\frac 1 y}{4} = 1 - \frac 1 {4y}\)</span>.<br />So <span class="math">\(f_Y(y) = \frac{\dee}{\dee x} \left(1 - \frac 1 {4y}\right) = \frac 1 {4y^2}\)</span>.<br />Since <span class="math">\(0 \le x \le 4\)</span>, <span class="math">\(\frac 1 4 \le y \le \infty\)</span>.</p>
+</blockquote>
+<p>The expected value for continuous random variables is <span class="math">\(\int_{\text{all } x} x \cdot f_X(x) \dee x\)</span>.</p>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
 <script type="text/javascript">
 MathJax.Hub.Config({
   jax: ["input/TeX","output/HTML-CSS"],

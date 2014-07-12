@@ -4,87 +4,37 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <title>MATH239 | Anthony Zhang</title>
-  <style type="text/css">
-  body {
-    font-family: "Segoe UI", Verdana, Arial, Helvetica, sans-serif;
-    background: #fffefe;
-    padding: 5em;
-  }
-  
-  pre {
-    margin-left: 2em;
-  }
-  
-  code {
-    border: solid 1px black;
-    background: #665555;
-    color: white;
-    padding: 0.1em;
-    border-radius: 0.3em;
-    display: inline-block;
-  }
-  
-  pre code {
-    padding: 1em;
-    border-radius: 0.5em;
-  }
-  
-  h1 {
-    font-size: 4em;
-  }
-  
-  table {
-    margin: 0 auto;
-  }
-  
-  td, th {
-    padding: 0.5em;
-    border: 1px solid grey;
-  }
-  
-  tr {
-    padding:: 0;
-  }
-  
-  blockquote {
-    margin-left: 0;
-    padding-left: 0.5em;
-    border-left: solid 0.3em grey;
-  }
-  
-  .figure {
-    border: solid 0.1em grey;
-    display: inline-block;
-    padding: 1em;
-    text-align: center;
-  }
-  
-  .figure .caption {
-    margin: 0;
-    font-size: 80%;
-  }
-  
-  a.button {
-    display: inline-block;
-    padding: 1em;
-    font-family: monospace;
-    color: black;
-    text-decoration: none;
-    border: 0.2em solid black;
-    border-radius: 0.5em;
-    background: white;
-  }
-  
-  a.button:hover, a.button:focus, a.button:active {
-    background: black;
-    color: white;
-  }
-  </style>
-  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>
+function highlight() { // highlight all code blocks using HighlightJS
+  var code_blocks = document.getElementsByTagName("code");
+  for (var i=0; i < code_blocks.length; i++)
+    hljs.highlightBlock(code_blocks[i]);
+}
+</script>
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </head>
-<body>
-<a class="button" href="..">&#8666; Return to University Notes index</a>
+<body onload="highlight()">
+  <h1>Lecture Notes by <a href="index.html">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/profile/view?id=322205746" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.mesecons.net/">mesecons</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.autohotkey.net/~Uberi/">autohotkey.net</a></li>
+  </ul>
 <h1 id="math239">MATH239</h1>
 <p>Combinatorics.</p>
 <pre><code>Instructor: Martin Pei
@@ -719,9 +669,27 @@ Email: mpei@uwaterloo.ca, martin31415926@gmail.com</code></pre>
 <blockquote>
 <p>Let <span class="math">\(T_1, \ldots, T_n\)</span> be the trees produced while executing Prim's algorithm. Let <span class="math">\(e_1, \ldots, e_n\)</span> be the edges we added in each step, so <span class="math">\(T_i\)</span> with <span class="math">\(e_i\)</span> added is <span class="math">\(T_{i + 1}\)</span>. We want to prove that for each <span class="math">\(T_i\)</span>, there exists a minimum spanning tree that contains <span class="math">\(T_i\)</span>.<br />Suppose that this minimum spanning tree does not exist. Let <span class="math">\(k\)</span> be the largest integer for which <span class="math">\(T_1, \ldots, T_k\)</span> are all within minimum spanning trees.<br />So <span class="math">\(T_k\)</span> is in a minimum spanning tree <span class="math">\(T&#39;\)</span>, while <span class="math">\(T_{k + 1}\)</span> is not.<br />Let <span class="math">\(C\)</span> be the cut induced by <span class="math">\(V(T_k)\)</span>.<br />Since <span class="math">\(T_{k + 1}\)</span> is <span class="math">\(T_k\)</span> with <span class="math">\(e_k\)</span> added and <span class="math">\(T_{k + 1}\)</span> is not in <span class="math">\(T&#39;\)</span>, <span class="math">\(e_k \notin T&#39;\)</span>.<br />So <span class="math">\(T&#39;\)</span> with <span class="math">\(e_k\)</span> added must contain a cycle <span class="math">\(v_1, \ldots, v_j\)</span> containing <span class="math">\(e_k\)</span>.<br />Clearly, this cycle contains an edge <span class="math">\(e&#39; \in C\)</span> since the edge must loop back into <span class="math">\(T_k\)</span>.<br />Clearly, <span class="math">\(e_k\)</span> is the edge in <span class="math">\(C\)</span> with the lowest possible <span class="math">\(w(e)\)</span>, so <span class="math">\(w(e_k) \le w(e&#39;)\)</span>.<br />Let <span class="math">\(V\)</span> be <span class="math">\(T&#39;\)</span> with <span class="math">\(e_k\)</span> removed and <span class="math">\(e&#39;\)</span> added. Clearly, <span class="math">\(V\)</span> is also a spanning tree, where <span class="math">\(w(T&#39;) = w(V) + w(e_k) - w(e&#39;)\)</span>.<br />Clearly, <span class="math">\(V\)</span> contains <span class="math">\(T_{k + 1}\)</span> and is a minimum spanning tree. ;wip: why? This is a contradiction since <span class="math">\(T_{k + 1}\)</span> is not in any minimum spanning trees. So for each <span class="math">\(T_i\)</span>, there exists a minimum spanning tree that contains <span class="math">\(T_i\)</span>.<br />Since <span class="math">\(V(T_n) = V(G)\)</span>, and a minimum spanning tree contains <span class="math">\(T_n\)</span>, <span class="math">\(T_n\)</span> is a minimum spanning tree.</p>
 </blockquote>
-<hr>
-<p>Copyright 2013 Anthony Zhang</p>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">University-Notes</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Uberi/University-Notes" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<h1 id="section-27">11/7/14</h1>
+<p>A <strong>planar embedding</strong> of a graph <span class="math">\(G\)</span> is a drawing of <span class="math">\(G\)</span> on a plane such that every vertex has a unique position and the edges do not intersect except at vertices.</p>
+<p>Any graph that has at least one planar embedding is a <strong>planar graph</strong>. A <strong>face</strong> in a planar graph is a connected region on the plane - a region which, considered by itself, is connected. Two faces are <strong>adjacent</strong> if they share at least one edge.</p>
+<p>;wip: what kind of object is a face?</p>
+<p>The <strong>boundary walk</strong> for a face in a <strong>connected</strong> planar embedding is a closed walk around the boundary of the face. This is basically a walk that encloses the face but nothing else. For example, if there is a face within a face, we have to exclude the inner face from being included in the outer face's boundary walk.</p>
+<p>Note that the boundary walk is undefined for disconnected graphs.</p>
+<p>The <strong>degree</strong> of a face is the length of the boundary walk - the number of edges that it has surrounding it. The sum of the degrees of every face is even and twice the number of edges - because every edge is in two faces, every edge increases the degree of two faces it is beside by 1.</p>
+<p>The <strong>handshaking lemma for faces</strong> states that given a graph <span class="math">\(G\)</span> with a planar embedding with set of faces <span class="math">\(F\)</span>, <span class="math">\(\sum_{f \in F} \deg(f) = 2\abs{E(G)}\)</span>.</p>
+<p>An edge has two different faces on both sides if and only if it is part of a cycle. So an edge has the same face on both sides if it is a bridge. This is because if we have a cycle in a planar representation, it must partition the plane into an inside and outside. The edge must therefore have one side on the inside and the other on the outside.</p>
+<p>This was formalized in the Jordan Curve Theorem: every simple closed curve on the plane separates it into two parts, the inside and the outside. This might not be true on surfaces other than a plane, like on the surface of a torus.</p>
+<p>A connected graph with a planar embedding and only one face must be a tree, since if it had any cycles it would have 2 or more faces.</p>
+<p>In a connected graph with a planar embedding and at least 2 faces, every face boundary walk contains a cycle.</p>
+<p><strong>Euler's formula</strong> relates the number of vertices, edges, and faces to each other. Let <span class="math">\(G\)</span> be a connected graph with a planar embedding and <span class="math">\(F\)</span> be the set of faces in <span class="math">\(G\)</span>. Then <span class="math">\(\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = 2\)</span>. In other words, the number of vertices plus the number of faces minus the number of edges always results in 2.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Induction over fixed <span class="math">\(\abs{V(G)}\)</span> and induction on <span class="math">\(\abs{E(G)}\)</span>. Let <span class="math">\(F(H)\)</span> be the set of faces in a graph <span class="math">\(H\)</span>.<br />Clearly, the smallest possible connected graph with a planar embedding is a tree, so it is one such that <span class="math">\(\abs{E(G)} = \abs{V(G)} - 1\)</span>. Since there is only one face, <span class="math">\(\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = \abs{V(G)} - (\abs{V(G)} - 1) + 1 = 2\)</span>.<br />Suppose for some <span class="math">\(k\)</span> that for all <span class="math">\(\abs{E(G)} &lt; k\)</span>, <span class="math">\(\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = 2\)</span>.<br />Assume <span class="math">\(\abs{E(G)} = k\)</span>. Let <span class="math">\(e\)</span> be an edge in a cycle, which must exist because graph has more than <span class="math">\(\abs{V(G)} - 1\)</span> edges and is not a tree.<br />Then if we remove <span class="math">\(e\)</span> from <span class="math">\(G\)</span> to get <span class="math">\(G&#39;\)</span>, <span class="math">\(G&#39;\)</span> is also connected and planar, since <span class="math">\(e\)</span> is in a cycle and is therefore not a bridge.<br />Clearly, <span class="math">\(G&#39;\)</span> has <span class="math">\(\abs{F(G)} - 1\)</span> faces, since <span class="math">\(e\)</span> was in a cycle and had two different faces on both sides, and removing <span class="math">\(e\)</span> merges them into one face.<br />So <span class="math">\(\abs{V(G&#39;)} - \abs{E(G&#39;)} + \abs{F(G&#39;)} = 2\)</span>. Since <span class="math">\(G\)</span> has one more edge and one more face than <span class="math">\(G&#39;\)</span>, <span class="math">\(\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = \abs{V(G&#39;)} - (\abs{E(G&#39;)} + 1) + (\abs{F(G&#39;)} + 1) = 2\)</span>.</p>
+</blockquote>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
 <script type="text/javascript">
 MathJax.Hub.Config({
   jax: ["input/TeX","output/HTML-CSS"],
