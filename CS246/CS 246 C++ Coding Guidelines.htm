@@ -1,0 +1,846 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <style type="text/css">
+    td { vertical-align: top; }
+  </style>
+  <title>CS 246 C++ Coding Guidelines</title>
+</head>
+<body>
+
+<div>
+  <img src="//www.student.cs.uwaterloo.ca/~cs246/uwlogo2.gif" width="200" alt="UW Logo" style="float: right"/>
+  <h2><a style="color: black; text-decoration: none" href="https://www.student.cs.uwaterloo.ca/~cs246/">CS246: Object-Oriented Software Development</a></h2>
+
+  <p style="font-weight: bold">
+    Supported by the <a href="https://www.cs.uwaterloo.ca/isg/">Instructional Support Group</a>
+  </p>
+
+  <p>
+    <a href="https://www.uwaterloo.ca/">University of Waterloo</a> :
+    <a href="https://www.math.uwaterloo.ca/">Faculty of Mathematics</a> :
+    <a href="https://www.cs.uwaterloo.ca/">School of Computer Science</a>
+  </p>
+</div>
+
+
+<h2><a name="PROGDOC">General Programming Style</a></h2>
+
+<hr/>
+
+<p>
+The following programming style is <b>REQUIRED</b> for all programming questions that you write.
+Rather than being too strict, two or more ways of doing something are often shown.
+Requiring a particular style is common practice in business and it is necessary in this course to simplify the marking of assignments.
+It is very difficult for the markers to adjust to multiple coding styles when marking programs.
+If you are unable to reconcile yourself to these standards, you must discuss any deviation with your instructor to obtain permission for an alternative style.
+</p>
+<dl>
+<dt><b>General:</b></dt>
+<dd>
+<p>
+Remember that people have to <em>read</em> the code, which is an unpleasant chore at best so making things easy on the eye means more time can be spent seeing what a terrific job has been done.
+Vertical and horizontal whitespace is necessary (especially if you want the marker to annotate what/where things are wrong).
+</p>
+</dd>
+
+<dt><b>Meaningful Variable Names:</b></dt>
+<dd>
+<p>
+The name of a variable should describe the purpose of the value it contains.
+Do not use names like <tt>found</tt>, <tt>flag</tt>, <tt>done</tt>;
+<em>found what? done what?</em>
+Some names like <tt>i</tt> and <tt>j</tt>, for array indexes, and <tt>n</tt>, for the number of things in a group, are nearly meaningless, but are allowed because their use is so stereotypical.
+Names like <tt>row</tt>, <tt>col</tt> and <tt>numOfChars</tt> are better.
+In general, the greater the scope of a variable name, the more meaningful its name needs to be, and indirectly, the longer its name should be.
+</p>
+</dd>
+
+<dt><b>Indentation:</b></dt>
+<dd>
+<p>
+<em>Proper, consistent indentation is required to emphasize program structure.</em>
+It is also important to maintain a consistent format to aid in searching for the beginning and end of a control structure.
+Suggested indentation levels are fixed multiples of 2, 3 or 4.
+Remember your program is printed with a tab setting of 8.
+In <tt>vi</tt>, set <tt>shiftwidth=4</tt> and learn about the &gt;&gt; and &lt;&lt; commands.
+In Emacs, programs are automatically indented.
+</p>
+</dd>
+
+<dt><b>Routine Documentation:</b></dt>
+<dd>
+<p>
+The best routine documentation is clear, understandable code.
+Comments should give an overview of the code or explain tricky portions of the code.
+</p>
+<p>
+Routine documentation should describe what a routine does, not how it does it.
+Start with a one-sentence summary.
+For each parameter, describe what it is used for.
+Do the same for all global variables a routine uses: they are invisible parameters.
+State what assumptions a routine makes, and what it does if it detects an error.
+</p>
+<p>
+Variables should be accompanied by a comment describing their purpose, if that is not obvious from the variable's name.
+A single-line comment is usually sufficient.
+</p>
+<p>
+A group of statements that perform a non-trivial task should be preceded by a comment summarizing that task.
+Do not reiterate in English what is obvious from the code (e.g., "variable x is incremented").
+</p>
+</dd>
+
+<dt><b>Modularity:</b></dt>
+<dd>
+<p>
+When designing a program, break it down into its functional components.
+Try to isolate those things that may change independently into separate routines, each with a standard interface.
+The purpose of any routine should be describable in a single sentence (e.g., a standard deviation calculation or add the node pointed to by <tt>p</tt> to the list <tt>L</tt>).
+A routine should perform exactly one operation.
+This structure is necessary if you expect markers to understand the program (and if they cannot understand your program, they can only assume that you did not understand the material).
+</p>
+<p>
+Have a clean interface to the module.
+Do not pass unnecessary information.
+</p>
+</dd>
+
+<dt><b>Command Line Options:</b></dt>
+<dd>
+<p>
+If your program requires options on the command line and they are improperly specified, or an error results (e.g., trying to open a non-existent file for reading), the program must print an error message and terminate.
+Do not try to read in the missing information from standard input as this causes problems for the markers.
+</p>
+</dd>
+
+<dt><b>Efficiency:</b></dt>
+<dd>
+<p>
+<em>premature optimization is the root of all evil.</em> [<a href="#Knu74">Knu74</a>, p. 268]
+</p>
+<p>
+Typically a program spends 90% of its execution executing 10% of its code.
+Further, it is not always obvious what code constitutes that 10%.
+If efficiency is of paramount importance, find the 10% and do what it takes to make it efficient.
+Writing obscure "efficient" code involving side-effects is a waste of time and makes maintenance difficult if it is not in the 10% region.
+<em>Remember, the point of an assignment is not ultra-efficiency, it is conveying an understanding of the material through a clear, concise, and well-developed program.</em>
+</p>
+</dd>
+</dl>
+
+
+<h2>C/C++ Programming Style</h2>
+
+<dl>
+<dt><b>Case of Variables, Routines, Macros and Typedefs:</b></dt>
+<dd>
+<p>
+Unlike some systems, UNIX and C/C++ support upper and lower case letters.
+This facility should be used to advantage to make names more meaningful and easier to read.
+The <em>de facto</em> standard for C/C++ is:
+</p>
+<table border="1" cellpadding="4" width="100%">
+<tr>
+<th><b>Convention</b></th>
+<th><b>Used For</b></th>
+<th><b>Example</b></th>
+</tr>
+
+<tr>
+<td>completely in upper-case</td>
+<td>macro names (<tt>#define</tt>), constants</td>
+<td>
+<pre>
+const int GROUP_SIZE = 10;
+#define GROUP_SIZE 10
+</pre>
+</td>
+</tr>
+
+<tr>
+<td>first letter capitalized</td>
+<td>structures, classes, and <tt>typedef</tt></td>
+<td valign="top">
+<pre>
+typedef list&lt;int&gt; Integer_List;
+struct StudentRecord { ... };
+</pre>
+</td>
+</tr>
+
+<tr>
+<td>first letter not capitalized</td>
+<td>variables, routines, method names</td>
+<td valign="top">
+<pre>
+int intsortedArray[]
+void sort(...) { ... }
+</pre>
+</td>
+</tr>
+
+</table>
+<p></p>
+</dd>
+
+<dt><b>Comments:</b></dt>
+<dd>
+<p>
+A comment should be at the same indentation level as the code it describes.
+Note the comment styles for multi-line comments:
+</p>
+<pre>
+	/*			/*
+	 * comment ...	or	  comment ...
+	 */			*/
+</pre>
+<p>
+These forms allow new lines to be added without changing existing lines in a program.
+</p>
+<p>
+Single-line comments may also be written as follows:
+</p>
+<pre>
+	statement;		// simple descriptive comment
+</pre>
+<p>
+Try to align all the comments at a particular column, for example:
+</p>
+<pre>
+	statement;		// simple descriptive comment
+	statement;		// simple descriptive comment
+	statement;		// simple descriptive comment
+</pre>
+<p>
+which is easily done using tabs to move to a particular fixed column.
+You are strongly encouraged to use end-of-line comments in your code.
+</p>
+</dd>
+
+<dt><b>Statements:</b></dt>
+<dd>
+<p>
+Place each statement (declarations, expressions, control-structures) on its own line to enhance the readability of your code.
+</p>
+</dd>
+
+<dt><b>Declarations:</b></dt>
+<dd>
+<p>
+C/C++ does not allow routines to be nested, but does support block structure (each block is introduced with a "{").
+Because routines cannot be nested inside the single routine <tt>main</tt>, C/C++ invents an extra scope in which the routines of a source file are collected.
+This external scope level also allows declaration of macros, types and variables.
+External scope declarations are visible within all routines that textually appear after them in a file, and can be globally referenced in these routines.
+In general, a global reference is not a good programming practice because it extends the area where a programmer must look to find all readers and writers of a variable.
+<em>In this course, global macros and types are allowed, while global variables are strongly discouraged.</em>
+</p>
+<p>
+<em>However, there is one situation where global variables can be used, that is, in simulating a module or package</em>.
+Variables declared in the external scope are implicitly local to that text file.
+These variables correspond to the private variables of a module or package.
+Routines that are exported (non-<tt>static</tt>) can use these variables without requiring users to explicitly create them and pass them as parameters.
+Declarations in the external scope must always state their purpose, the rules for using them, and which routines use them.
+In C++, classes can generally be used to solve such problems without the use of global variables.
+</p>
+<p>
+If a variable is only used within the scope of a control structure, make it local to the control structure.
+</p>
+<table border="1" cellpadding="4" width="100%">
+<tr>
+<th><b>Non-Local</b></th>
+<th><b>Local</b></th>
+</tr>
+
+<tr>
+<td>
+<pre>
+int rows, cols;  
+int **matrix; 
+int i, j;
+
+for ( ;; ) {
+
+    // read matrix dimensions
+    cin >> rows >> cols;
+
+  if ( cin.fail() ) break; // no matrix ?
+
+    // allocate, read, and print matrix
+    matrix = new int *[rows]; 
+    for ( i = 0; i &lt; rows; i += 1 ) {
+        matrix[i] = new int[cols];
+        for ( j = 0; j &lt; cols; j += 1 ) {
+            cin  >> matrix[i][j];
+            cout &lt;&lt; matrix[i][j];
+        } // for
+	cout &lt;&lt; endl;
+    } // for
+
+    // do something to the matrix
+
+    // deallocate matrix
+    for ( i = 0; i &lt; rows; i += 1 ) {
+        delete [] matrix[i];
+    } // for
+    delete [] matrix;
+} // for
+</pre>
+</td>
+<td>
+<pre>
+
+
+
+
+for ( ;; ) {
+    int rows, cols;  
+    // read matrix dimensions
+    cin >> rows >> cols;
+
+  if ( cin.fail() ) break; // no matrix ?
+
+    // allocate, read, and print matrix
+    int matrix[rows][cols]; 
+    for ( int i = 0; i &lt; rows; i += 1 ) {
+ 
+       for ( int j = 0; j &lt; cols; j += 1 ) {
+            cin  >> matrix[i][j];
+            cout &lt;&lt; matrix[i][j];
+        } // for
+	cout &lt;&lt; endl;
+    } // for
+
+    // do something to the matrix
+
+
+
+
+
+
+} // for
+</pre>
+</td>
+</tr>
+</table>
+<p></p>
+</dd>
+
+<dt><b>Dynamic Allocation:</b></dt>
+<dd>
+<p>
+Dynamic allocation must only be used when a variable's storage must outlive the block in which it is allocated:
+</p>
+<pre>
+	Type *rtn(...) {
+	    Type *tp = new Type; // MUST USE HEAP
+	    ...                  // initialize/compute using tp
+	    return tp;           // storage outlives block
+	} // tp deleted later
+</pre>
+<p>
+or if initialization forces dynamic allocation for an array of objects when each element has different values:
+</p>
+<pre>
+	struct Complex {
+	    double re, im;
+	    Complex( double re = 0.0, double im = 0.0 ) : re(re), im(im) {}
+	};
+	int main() {
+	    Complex c1[3];  			// stack, elements set to {0.0, 0.0}
+	    Complex c2[3] = { {1.0,0.0}, {2.0,0.0}, {3.0,0.0} }; // stack, c++0x only
+	    Complex *c3[3];
+	    for ( int i = 0; i &lt; 3; i += 1 ) {	// heap
+		c3[i] = new Complex( i );
+	    }
+	    ...
+	    for ( int i = 0; i &lt; 3; i += 1 ) {
+		delete c3[i];
+	    }
+	}
+</pre>
+<p></p>
+</dd>
+
+<dt><b>Constants:</b></dt>
+<dd>
+<p>
+Use symbolic rather than literal constants in a program.
+(There are a trivial number of exceptions, e.g., 0, 1).
+While C/C++ provide preprocessor variables to define constants, e.g.:
+</p>
+<pre>
+	#define PI 3.14159
+	#define PI_4 (3.14159 / 4.0)
+</pre>
+<p>
+a global declaration with a <tt>const</tt> specifier should be used instead, for example:
+</p>
+<pre>
+	const float PI = 3.14159;
+	const float PI_4 = 3.14159 / 4.0;
+</pre>
+<p>
+Note a macro definition that is more complex than a constant should always be surrounded by parentheses to avoid side effects when expanded.
+</p>
+</dd>
+
+<dt><b>Macros:</b></dt>
+<dd>
+<p>
+Both C/C++ have an alternative means of defining macros by declaring functions <tt>inline</tt>.
+</p>
+<pre>
+        #define MAX( a, b ) ((a > b) ? a : b)
+        inline int MAX( int a, int b ) { return a > b ? a : b; }
+</pre>
+<p>
+A parameter should not appear multiple times in the macro definition as this can result in multiple side-effects as the argument is evaluated multiple times.
+Macros are not routines!
+</p>
+</dd>
+
+<dt><b>White Space in a Line:</b></dt>
+<dd>
+<p>
+Put extra blanks in expressions to make them easier to read, for example:
+</p>
+<pre>
+	a = b * (c + d % 3 );	versus	a=b*(c+d%3);
+</pre>
+</dd>
+
+<dt><b>Braces:</b></dt>
+<dd>
+<p>
+<em>Braces must always be present</em>.
+They are necessary so that new statements can be added without needing to modify existing statements.
+The exact position of braces is largely a religious issue.
+However, one point should be noted about putting each brace on a separate line.
+This style introduces extra whitespace, which does not necessarily make the program easier to read, either when printed or on a terminal screen, because information may be forced out of view.
+The extra vertical whitespace means that less information is shown, making the possibility of viewing connected pieces of code less likely, for example:
+</p>
+<table border="1" cellpadding="4" width="50%">
+<tr>
+<td valign="top">
+<pre>
+if ( a == b )
+{
+    a = 3;
+    b = 5;
+}
+else
+{
+</pre>
+</td>
+
+<td valign="top">
+<pre>
+if ( a == b ) {
+    a = 3;
+    b = 5;
+} else {
+    a = 2;
+    b = 7;
+} // if
+</pre>
+</td>
+</tr>
+</table>
+<p>
+This extra visibility is critical during all aspects of program development.
+Therefore, it is recommended (but not required) that you forego extra vertical whitespace in favour of increased information display.
+</p>
+<p>
+<em>All closing braces must start on a separate line</em> and, in general, it is a good habit to label them as to the type of control structure or routine they terminate.
+Labelling exceptions are "<tt>} else {</tt>" and "<tt>} while ( expr )</tt>", which are self documenting.
+Documenting closing braces allows identification of a terminating block when the start of the block is not visible.
+This can occur because of page boundaries in a listing or screen boundaries on a terminal.
+For example, if you need to insert a line after the end of the second <tt>if</tt> statement in the following nested control structures and this is all that is visible on your screen:
+</p>
+<table border="1" cellpadding="4" width="50%">
+<tr>
+<td>
+<pre>
+             }
+        }
+    }
+}
+</pre>
+</td>
+
+<td>
+<pre>
+             } // if
+        } // while
+    } // if
+} // for
+</pre>
+</td>
+</tr>
+</table>
+<p>
+it is much easier (and takes less time) to find the desired location if the closing braces are labeled appropriately.
+</p>
+</dd>
+
+<dt><b>Side-Effects:</b></dt>
+<dd>
+<p>
+A side-effect occurs when the value represented by a name in a particular scope is changed;
+hence, an effect at some later time (on the side) changes the binding of a name to a value.
+Assignment is the most obvious way to cause a side-effect, as in:
+</p>
+<pre>
+	{
+	    int x = 3;	// first binding is not a side-effect
+	    ...		// during this part of the block, x is bound to 3
+	    x = 4;	// an operation that causes a side-effect
+	    ...		// during this part of the block, x is bound to 4
+	}
+</pre>
+<p>
+Functional programming [<a href="#Rea89">Rea89</a>], represented by languages like FP and pure LISP, has no side effects, which means there is only initialization at declaration;
+imperative programming, represented by languages like Ada and C/C++, has side effects after a declaration.
+While imperative programming uses side effects, reducing the number of side effects and/or the locations where they occur can decrease the complexity and increase the maintainability of a program.
+(In a similar compromise, functional programming occasionally uses assignment to increase performance.)
+Therefore, it is good programming practice to reduce the number of side effects and define precisely the locations where side effects occur.
+</p>
+<p>
+<em>In this course, these locations are limited to the last operation of an expression through the assignment operator.</em>
+In general terms, there can be a maximum of one side effect on the left margin of a line of C/C++ code.
+<em>This rule results in the following restrictions in C/C++</em>:
+</p>
+<ul>
+<li>
+Assignment, <tt>++</tt>, and <tt>--</tt> can only be used as statements.
+They cannot be used as parts of expressions.
+</li>
+<li>
+Routines that return values by output parameters cannot be used in expressions--only as statements or the sole expression on the right-hand side of an assignment statement.
+</li>
+</ul>
+<p>
+Unfortunately, C/C++ programmers have a tradition of using multiple side effects, particularly in expressions, usually to gain efficient execution because of poor compilers or deficiencies in C.
+Fortunately, compiler technology has improved to the point where it is no longer necessary to write such code.
+The following is a typical C/C++ expression with multiple side effects in an expression and its corresponding multi-line version:
+</p>
+<pre>
+	int getc1(FILE *p) {
+	    return (--(p)->_cnt>=0 ? ((int)*(p)->_ptr++) : _filbuf(p));
+	} // getc1
+
+	int getc2(FILE *p) {
+	    int r;
+
+	    p->_cnt -= 1;
+	    if (p->_cnt >= 0) {
+	        r = (int)*(p)->_ptr;
+	        p->_ptr += 1;
+	    } else 
+	        r = _filbuf(p);
+	    return r;
+	} // getc2
+</pre>
+<p>
+While both routines may be considered to be complex, the latter is clearly easy for most C/C++ programmers to understand and modify.
+Further, the compiler used in this course generates almost identical code in both cases (1 instruction difference).
+Certain deficiencies of C/C++ may require multiple side effects in expressions, but they will not appear in this course.
+</p>
+</dd>
+</dl>
+
+<p>
+The following discussion is further motivation for these restrictions.
+</p>
+
+<dl>
+<dt><b><tt>=</tt>, <tt>++</tt> and <tt>--</tt> Operators:</b></dt>
+<dd>
+<p>
+These operators cause a side effect by modifying or incrementing or decrementing the value of a variable, while also returning the value of the variable.
+<em>Restricting the location of side effects means that they cannot be used in expressions.</em>
+At best they can only appear in single statement form, as in:
+</p>
+<pre>
+	i++
+	...
+	for ( i = 0; i &lt; 10; i++ ) ...
+</pre>
+<p>
+The preferred style is to use operators like <tt>+=</tt> and <tt>-=</tt>, since they provide the same capability and are more general, as in:
+</p>
+<pre>
+	i += 1;
+	...
+	for ( i = 0; i &lt; 10; i += 1 ) ...
+</pre>
+</dd>
+
+<dt><b><tt>operator=</tt> Operators:</b></dt>
+<dd>
+<p>
+The family of operators, <tt>operator=</tt>, should be used whenever possible as they are general and efficient.
+The generality comes from the ability to use any binary operator and have an arbitrarily complex right-hand side, as in:
+</p>
+<pre>
+	a[i * j / 2]  *=  k[l * m + 3];   vs    a[i * j / 2]  =  a[i * j / 2] * k[l * m + 3];
+</pre>
+<p>
+Not duplicating the left-hand side of the expression on the right-hand side reduces error.
+Further, <tt>operator=</tt> is easier to extend, while specialty operators are not, as in changing from incrementing by 1 to incrementing by 3:
+</p>
+<pre>
+	i += 1	changed to	i += 3;
+	i++	changed to	i++ ++ ++;  // this is illegal for other reasons
+</pre>
+<p>
+Contrary to what some C books suggest, there is no performance advantage in either the <tt>++</tt> or <tt>--</tt> operator with modern C/C++ compilers and machines.
+For example, most of todays C/C++ compilers generate exactly the same code for:
+</p>
+<pre>
+	i++;
+	i += 1;
+	i = i + 1;
+</pre>
+<p>
+Finally, both beginners and experienced C/C++ programmers often make mistakes with operators <tt>++</tt> and <tt>--</tt>.
+An experienced programmer on the net wrote:
+</p>
+<blockquote>
+<p>
+A function had an output parameter which was a numeric counter, i.e., a pointer to an integer.
+I wrote the code to increment the counter as <tt>*count++</tt>, which does the wrong thing (it should be <tt>(*count)++</tt>), or, as I rewrote it, <tt>*count += 1</tt>.
+</p>
+</blockquote>
+</dd>
+
+<dt><b>Returning Multiple Values:</b></dt>
+<dd>
+<p>
+C/C++ does not allow a routine to return multiple values through the assignment operator, as in
+</p>
+<pre>
+	[ x, y ] = f( a, b );   // not allowed in C/C++
+</pre>
+<p>
+Instead, this can be done by returning values through the argument-parameter mechanism.
+Therefore, the call must be rewritten as:
+</p>
+<pre>
+	x = f( &amp;y, a, b );    or    f( &amp;x, &amp;y, a, b );
+</pre>
+<p>
+where routine <tt>f</tt> has one or two output parameters, respectively.
+</p>
+<p>
+Alternatively, a routine can return a structure, rather than a simple variable, thus allowing each component of the structure to be a return value.
+However, it is probably not a good idea to define a structure only to serve as the return value of a particular function.
+</p>
+</dd>
+
+<dt><b>Duplication of Code:</b></dt>
+<dd>
+<p>
+Eliminating side effects from expressions can force unnecessary duplication of code, as in:
+</p>
+<pre>
+	while ( cin.get(c) != '\n' ) . . .
+</pre>
+<p>
+which could become:
+</p>
+<pre>
+	cin.get(c);		// duplicate code
+	while ( c != '\n' ) {
+	    ...
+	    cin.get(c);		// duplicate code
+	} // while
+</pre>
+<p>
+Fortunately, the duplicated code in this case can be eliminated by using a multi-exit loop, as in:
+</p>
+<pre>                                                                           
+	for ( ;; ) {           
+	    cin.get(c);       
+	  if ( c == '\n' ) break;
+	    ...             
+	} // for            
+</pre>                                     
+<p>
+<em>You are strongly encouraged to use multi-exit loops to eliminate duplicate code</em> [<a href="#Buh85">Buh85</a>].
+Further, the compiler for this course generates code of identical efficiency for the multi-exit loop and the first <tt>while</tt> loop with the side effect in its expression.
+However, all exit points should be highlighted by outdenting or with comments to make them easy to locate.
+(This document uses outdenting.)
+</p>
+</dd>
+
+<dt><b>Return Statement:</b></dt>
+<dd>
+<p>
+Multiple exits from a routine, like multiple exits from a loop, are useful, but care must be taken not to overuse either style.
+In many cases, a few nested <tt>if</tt> statements can eliminate multiple returns;
+alternatively, a test with a return at the beginning of a routine can eliminate unnecessary nesting in the body of the routine.
+Reducing the number of <tt>return</tt> statements is usually more important for a routine that returns a value, i.e., a function rather than a procedure, as it reduces the number of locations to change when the variable or expression that calculates the returned value is modified.
+More important than the number of returns or exits is well-designed logic.
+</p>
+<table border="1" cellpadding="4" width="70%">
+<tr>
+<th>Poor Logic</th>
+<th>Better Logic</th>
+</tr>
+<tr>
+<td>
+<pre>
+int rtn( int x, int y ) {
+    if ( x > 3 ) {
+        x += 1;
+        if ( x > y )
+            x = y;
+        else
+            return x + 3;
+        return x + y;
+    } else if ( x &lt; 3 )
+        return 3;
+    else
+        return y;
+}
+</pre>
+</td>
+<td>
+<pre>
+int rtn( int x, int y ) {
+  if ( x &lt; 3 ) return 3;
+  if ( x == 3 ) return y;
+
+    x += 1;
+    if ( x > y )
+        x = y + y;
+    else
+        x += 3;
+    return x;
+}
+</pre>
+</td>
+</tr>
+</table>
+<p>
+As with multi-exit loops, return points should be highlighted by outdenting or comments to make them easy to locate.
+</p>
+</dd>
+
+<dt><b>Example:</b></dt>
+<dd>
+<p>
+<a href="#Figure1">Figure 1</a> shows one possible way of incorporating the required programming style into a C++ program.
+You are not required to follow this example, but you must supply the same information and follow the other rules stated above.
+</p>
+<p>
+Additional examples for I/O, strings, linked-lists, and other concepts in C/C++ are <a href="codeExamples.shtml">available</a>.
+</p>
+</dd>
+</dl>
+
+<hr/>
+
+<p>
+<a name="Figure1"></a>
+</p>
+<pre>
+/*********** SearchInsert ***********
+     Purpose: An element is looked up in an unsorted list of items,
+          if it does not appear in the list, it is added to the end of the list,
+          if it exists in the list, its associated list counter is incremented.
+
+
+     Returns: Position in list of key.
+
+
+     Errors: List is full and cannot insert item. Program is terminated.
+
+
+     Globals:
+          MaxListSize - used for error checking
+          Elem - type of a list element
+************************************/
+
+int SearchInsert(
+     Elem list[ ],	// array of items to be searched and possibly modified
+     int  &amp;listSize,	// reference to number of items in list, MAY BE MODIFIED!
+     int key		// item that is searched for in the list
+) {
+     int pos;
+
+     // loop has two exits: search does not find key and key is found
+
+     for ( pos = 0; ; pos += 1 ) {
+
+       if ( pos >= listSize ) {			// if key not found, insert
+               listSize += 1;
+               if ( listSize > MaxListSize ) {          // list full ?
+                     cerr &lt;&lt; "ERROR: List is full." &lt;&lt; endl;
+                     exit(EXIT_FAILURE);	// TERMINATE PROGRAM
+               } // if
+               list[pos].count = 1;
+               list[pos].data = key;
+               break;
+          } // exit
+
+       if ( key == list[pos].data ) {		// if key found, increment counter
+               list[pos].count += 1;
+               break;
+          } // exit
+     } // for
+
+     return pos;				// return position of key in list
+} // SearchInsert
+</pre>                                       
+
+
+<hr/>
+
+<h2>References</h2>
+
+<dl>
+<dt>[Buh85]</dt>
+<dd>
+<a name="Buh85"></a>P. A. Buhr. A Case for Teaching Multi-exit Loops to Beginning Programmers.
+SIGPLAN Notices, 20(11):14-22, November 1985.
+</dd>
+<dt>[Knu74]</dt>
+<dd>
+<a name="Knu74"></a>Donald E. Knuth. Structured Programming with go to Statements. ACM Computing Surveys,
+6(4):261-301, December 1974.
+</dd>
+<dt>[Rea89]</dt>
+<dd>
+<a name="Rea89"></a>Chris Reade. Elements of Functional Programming. Addison Wesley, 1989.
+</dd>
+</dl>
+
+
+<hr/>
+
+<!--
+<p>
+    <a href="http://validator.w3.org/check?uri=referer"><img style="border: 0"
+        src="http://www.w3.org/Icons/valid-xhtml10-blue"
+        alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+</p>
+-->
+
+
+
+
+
+<p>
+    <a href="http://validator.w3.org/check?uri=https://www.student.cs.uwaterloo.ca/~cs246/current/C++CodingGuidelines.shtml">
+        <img style="border: 0" src="http://www.w3.org/Icons/valid-xhtml10-blue"
+	     alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+</p>
+
+
+</body>
+</html>

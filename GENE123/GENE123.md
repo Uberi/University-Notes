@@ -697,29 +697,29 @@ Capacitors have capacitance ($C$), which measures the ability to store electric 
 
 A 1 F capacitor is one with capacitance such that when charged with 1 Coulomb, has 1 V across the terminals. Capacitance is determined by $C = \frac{\epsilon d}{A}$, where $\epsilon$ is the permeability of the dialectric (a physical constant), $d$ is the distance between the plates (meters) and $A$ is the surface area of both plates.
 
-Capacitance is governed by $q(t) = C V(t)$. Taking the derivative, we get $I(t) = C \frac{\dee V(t)}{\dee t}$, where $I(t) is the current flowing through the capacitor and $V(t)$ is the voltage across the capacitor terminals. So if the voltage stops changing, there is no current and the capacitor acts like an open circuit.
+Capacitance is governed by $q(t) = C V(t)$. Taking the derivative, we get $I(t) = C \frac{\dee V(t)}{\dee t}$, where $I(t)$ is the current flowing through the capacitor and $V(t)$ is the voltage across the capacitor terminals. So if the voltage stops changing, there is no current and the capacitor acts like an open circuit.
+
+So if $I(t)$ is constant, $\frac{\dee V(t)}{\dee t}$ is constant and $I = C \frac{V_f - V_i}{t_f - t_i}$.
 
 Since $C = \frac{I(t)}{\frac{\dee V(t)}{\dee t}}$, the voltage can never change instantaneously. The capacitor will take a certain amount of time to charge up, even if the voltage source tries to change instantaneously.
+
+If the voltage over a capacitor changes, the capacitor will supply current in order to oppose the change in voltage.
 
 This can also be written as $V(t) = \frac 1 C \int I_C(t) \dee t + V_C(0)$. The $V_C(0)$ term is the **initial condition** for the voltage - the voltage we started off with.
 
 So if a voltage source is connected to a $20 \mu F$ capacitor and increasing at $3 V/ms$, there is $I = 20 \mu F \times 3 V/ms = 60 mA$.
 
-The power in a capacitor is $p(t) = v(t) I(t) = C v(t)\frac{\dee v(t)}{\dee t}$. So the energy in a capacitor is $w(t) = \int_0^t C V(t)\frac{\dee V(t)}{\dee t} \dee t = C \int V(t) \dee V(t) = \frac 1 2 C V(t)^2$, until the capacitor is fully charged (when the voltage becomes constant at some $t$).
+The power in a capacitor is $P(t) = V(t) I(t) = C v(t)\frac{\dee v(t)}{\dee t}$. So the energy in a capacitor is $W(t) = \int_0^t C V(t)\frac{\dee V(t)}{\dee t} \dee t = C \int V(t) \dee V(t) = \frac 1 2 C V(t)^2$.
 
 # 25/6/14
 
-Given capacitors connected in series with capacitances $C_1, \ldots, C_n$, it is possible to replace all of them with an **equivalent series capacitance** $\frac 1 {C_{eq}} = \frac 1 {C_1} + \ldots + \frac 1 {C_n}$. This is similar to the formula for equivalent resistance for resistors in parallel.
+The DC steady state of a capacitor is an open circuit. When we are analyzing a circuit at DC steady state, the capacitor can simply be removed. This is because when the voltage is not changing, the current across the capacitor is 0.
+
+Given capacitors connected in series with capacitances $C_1, \ldots, C_n$, it is possible to replace all of them with an **equivalent series capacitance** $\frac 1 {C_{eq}} = \frac 1 {C_1} + \ldots + \frac 1 {C_n}$. This is similar to the formula for equivalent resistance for resistors in parallel. As a result, we can use the product-over-sum rule for two series capacitors $C_1$ and $C_2$, $\frac{C_1 C_2}{C_1 + C_2}$.
 
 Given capacitors connected in parallel with capacitances $C_1, \ldots, C_n$, it is possible to replace all of them with an **equivalent parallel capacitance** $C_{eq} = C_1 + \ldots + C_n$. This is similar to the formula for equivalent resistance for resistors in series.
 
-The DC steady state of the capacitor is very important for analyzing circuits. The DC steady state is when $I(t) = 0 = \frac{\dee V(t)}{\dee t}$.
-
-When analyzing circuits at DC steady state, we know that the capacitors are not affecting the voltage, and the currents flowing through them are 0 A, so we can actually treat them as an open circuit - they can simply be removed from the circuit. The steady state of a capacitor is an open circuit.
-
 # 26/6/14
-
-;wip: inductors: current in inductor can't change instantaneously, $V_L = L\frac{\dee i_L}{\dee t}$ where $L$ is the inductance
 
 Inductors store energy in magnetic fields. An inductor is a two terminal device that is made up of a conductive coil, optionally with a core of ferromagnetic material.
 
@@ -729,15 +729,23 @@ Inductors have inductance ($L$), which is measured in Henry ($H$), which is the 
 
 A 1 H inductor is one such that when the current changes by 1 A, the voltage across the inductor is 1 V.
 
-Inductance is governed by $V(t) = L\frac{\dee I}{\dee t}$, where $V(t)$ is the voltage across the inductor, $I$ is the current flowing through the inductor, and $L$ is the inductance.
+Inductance is governed by $V(t) = L\frac{\dee I(t)}{\dee t}$, where $V(t)$ is the voltage across the inductor, $I$ is the current flowing through the inductor, and $L$ is the inductance.
+
+So if $V(t)$ is constant, $\frac{\dee I(t)}{\dee t}$ is constant and $V = L\frac{I_f - I_i}{t_f - t_i}$.
+
+Since $L = \frac{V(t)}{\frac{\dee I(t)}{\dee t}}$, the current can never change instantaneously. The inductor will slowly let the current change over time, even if there is a current source trying to change it instantaneously.
 
 If the current is increasing, the voltage is positive between the end the current is going into and the end it is coming out of. If the current is decreasing, the voltage is negative. This is because the inductor always outputs voltage trying to prevent the current from changing.
 
-The steady state of an inductor is a short circuit.
+The power in an inductor is $P(t) = V(t) I(t) = L\frac{\dee I(t)}{\dee t} I(t)$. So the energy in a capacitor is $W(t) = \int_0^t L I(t)\frac{\dee I(t)}{\dee t} \dee t = L \int I(t) \dee I(t) = \frac 1 2 L I(t)^2$.
+
+The DC steady state of an inductor is a short circuit. When we are analyzing a circuit at DC steady state, the inductor can simply be replaced by a wire. This is because when the current is not changing, the voltage across the inductor is 0.
+
+Given inductors connected in series with inductances $L_1, \ldots, L_n$, it is possible to replace all of them with an **equivalent series inductance** $L_{eq} = L_1 + \ldots + L_n$. This is similar to the formula for equivalent resistance for resistors in series.
+
+Given inductors connected in parallel with inductances $L_1, \ldots, L_n$, it is possible to replace all of them with an **equivalent parallel inductance** $\frac 1 {L_{eq}} = \frac 1 {L_1} + \ldots + \frac 1 {L_n}$. This is similar to the formula for equivalent resistance for resistors in parallel. As a result, we can use the product-over-sum rule for two parallel inductors $L_1$ and $L_2$, $\frac{L_1 L_2}{L_1 + L_2}$.
 
 # 2/7/14
-
-;wip: see midterm at office hours
 
 Transient Analysis
 ------------------
@@ -746,9 +754,9 @@ This is analysis of circuits with respect to time. A **transient** state is one 
 
 ;wip: transcribe from notebook
 
-;wip: constant charging voltage is never quite reached because $e^{-\frac t \tau} > 0$.
-
 An RC circuit is a capacitor in series with a resistor.
+
+Also, when $R = 0$ (there is no resistor in the circuit) and there is only a capacitor and independent voltage source in series, we can simply analyze the circuit using $V = C\frac{I_f - I_i}{t_f - t_i}$.
 
 # 3/7/14
 
@@ -767,6 +775,8 @@ An RL circuit is an inductor in series with a resistor.
 For inductors, we use the same steps, but $\tau = \frac L R$.
 
 For inductors, $I_L = I_f + (I_i - I_f)e^{-\frac t \tau}$.
+
+Also, when $R = 0$ (there is no resistor in the circuit) and there is only an inductor and independent voltage source in series, we can simply analyze the circuit using $I = L\frac{V_f - V_i}{t_f - t_i}$.
 
 # 7/7/14
 

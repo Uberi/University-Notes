@@ -12,16 +12,16 @@
   <script>
 function highlight() { // highlight all code blocks using HighlightJS
   var code_blocks = document.getElementsByTagName("code");
-  for (var i=0; i < code_blocks.length; i++)
+  for (var i = 0; i < code_blocks.length; i++)
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
-  <h1>Lecture Notes by <a href="index.html">Anthony Zhang</a>.</h1>
+  <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
   <ul class="site_links">
-    <li><a href="blog.html" class="page">blog</a></li>
+    <li><a href="/blog/" class="page">blog</a></li>
     <span class="divider"></span>
     <li><a href="/Résumé.pdf" class="page">résumé</a></li>
     <span class="divider"></span>
@@ -481,32 +481,36 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>Putting charge into a capacitor is called <strong>charging</strong> a capacitor. After one end of a capacitor is fully charged, the capacitor is <strong>charged</strong>, and nothing happens if we try to put in more charge.</p>
 <p>Capacitors have capacitance (<span class="math">\(C\)</span>), which measures the ability to store electric charge and the ability to resist changes in voltage. Capacitance is measured in Farads (F), which is a huge unit, so we often use micro or nano or picoFarads.</p>
 <p>A 1 F capacitor is one with capacitance such that when charged with 1 Coulomb, has 1 V across the terminals. Capacitance is determined by <span class="math">\(C = \frac{\epsilon d}{A}\)</span>, where <span class="math">\(\epsilon\)</span> is the permeability of the dialectric (a physical constant), <span class="math">\(d\)</span> is the distance between the plates (meters) and <span class="math">\(A\)</span> is the surface area of both plates.</p>
-<p>Capacitance is governed by <span class="math">\(q(t) = C V(t)\)</span>. Taking the derivative, we get <span class="math">\(I(t) = C \frac{\dee V(t)}{\dee t}\)</span>, where <span class="math">\(I(t) is the current flowing through the capacitor and \)</span>V(t)$ is the voltage across the capacitor terminals. So if the voltage stops changing, there is no current and the capacitor acts like an open circuit.</p>
+<p>Capacitance is governed by <span class="math">\(q(t) = C V(t)\)</span>. Taking the derivative, we get <span class="math">\(I(t) = C \frac{\dee V(t)}{\dee t}\)</span>, where <span class="math">\(I(t)\)</span> is the current flowing through the capacitor and <span class="math">\(V(t)\)</span> is the voltage across the capacitor terminals. So if the voltage stops changing, there is no current and the capacitor acts like an open circuit.</p>
+<p>So if <span class="math">\(I(t)\)</span> is constant, <span class="math">\(\frac{\dee V(t)}{\dee t}\)</span> is constant and <span class="math">\(I = C \frac{V_f - V_i}{t_f - t_i}\)</span>.</p>
 <p>Since <span class="math">\(C = \frac{I(t)}{\frac{\dee V(t)}{\dee t}}\)</span>, the voltage can never change instantaneously. The capacitor will take a certain amount of time to charge up, even if the voltage source tries to change instantaneously.</p>
+<p>If the voltage over a capacitor changes, the capacitor will supply current in order to oppose the change in voltage.</p>
 <p>This can also be written as <span class="math">\(V(t) = \frac 1 C \int I_C(t) \dee t + V_C(0)\)</span>. The <span class="math">\(V_C(0)\)</span> term is the <strong>initial condition</strong> for the voltage - the voltage we started off with.</p>
 <p>So if a voltage source is connected to a <span class="math">\(20 \mu F\)</span> capacitor and increasing at <span class="math">\(3 V/ms\)</span>, there is <span class="math">\(I = 20 \mu F \times 3 V/ms = 60 mA\)</span>.</p>
-<p>The power in a capacitor is <span class="math">\(p(t) = v(t) I(t) = C v(t)\frac{\dee v(t)}{\dee t}\)</span>. So the energy in a capacitor is <span class="math">\(w(t) = \int_0^t C V(t)\frac{\dee V(t)}{\dee t} \dee t = C \int V(t) \dee V(t) = \frac 1 2 C V(t)^2\)</span>, until the capacitor is fully charged (when the voltage becomes constant at some <span class="math">\(t\)</span>).</p>
+<p>The power in a capacitor is <span class="math">\(P(t) = V(t) I(t) = C v(t)\frac{\dee v(t)}{\dee t}\)</span>. So the energy in a capacitor is <span class="math">\(W(t) = \int_0^t C V(t)\frac{\dee V(t)}{\dee t} \dee t = C \int V(t) \dee V(t) = \frac 1 2 C V(t)^2\)</span>.</p>
 <h1 id="section-21">25/6/14</h1>
-<p>Given capacitors connected in series with capacitances <span class="math">\(C_1, \ldots, C_n\)</span>, it is possible to replace all of them with an <strong>equivalent series capacitance</strong> <span class="math">\(\frac 1 {C_{eq}} = \frac 1 {C_1} + \ldots + \frac 1 {C_n}\)</span>. This is similar to the formula for equivalent resistance for resistors in parallel.</p>
+<p>The DC steady state of a capacitor is an open circuit. When we are analyzing a circuit at DC steady state, the capacitor can simply be removed. This is because when the voltage is not changing, the current across the capacitor is 0.</p>
+<p>Given capacitors connected in series with capacitances <span class="math">\(C_1, \ldots, C_n\)</span>, it is possible to replace all of them with an <strong>equivalent series capacitance</strong> <span class="math">\(\frac 1 {C_{eq}} = \frac 1 {C_1} + \ldots + \frac 1 {C_n}\)</span>. This is similar to the formula for equivalent resistance for resistors in parallel. As a result, we can use the product-over-sum rule for two series capacitors <span class="math">\(C_1\)</span> and <span class="math">\(C_2\)</span>, <span class="math">\(\frac{C_1 C_2}{C_1 + C_2}\)</span>.</p>
 <p>Given capacitors connected in parallel with capacitances <span class="math">\(C_1, \ldots, C_n\)</span>, it is possible to replace all of them with an <strong>equivalent parallel capacitance</strong> <span class="math">\(C_{eq} = C_1 + \ldots + C_n\)</span>. This is similar to the formula for equivalent resistance for resistors in series.</p>
-<p>The DC steady state of the capacitor is very important for analyzing circuits. The DC steady state is when <span class="math">\(I(t) = 0 = \frac{\dee V(t)}{\dee t}\)</span>.</p>
-<p>When analyzing circuits at DC steady state, we know that the capacitors are not affecting the voltage, and the currents flowing through them are 0 A, so we can actually treat them as an open circuit - they can simply be removed from the circuit. The steady state of a capacitor is an open circuit.</p>
 <h1 id="section-22">26/6/14</h1>
-<p>;wip: inductors: current in inductor can't change instantaneously, <span class="math">\(V_L = L\frac{\dee i_L}{\dee t}\)</span> where <span class="math">\(L\)</span> is the inductance</p>
 <p>Inductors store energy in magnetic fields. An inductor is a two terminal device that is made up of a conductive coil, optionally with a core of ferromagnetic material.</p>
 <p>When current flows into one end of an inductor, it flows out the other end, in the process creating a magnetic field in the coil. When the current flowing through it changes, then the</p>
 <p>Inductors have inductance (<span class="math">\(L\)</span>), which is measured in Henry (<span class="math">\(H\)</span>), which is the ability to resist changes in current.</p>
 <p>A 1 H inductor is one such that when the current changes by 1 A, the voltage across the inductor is 1 V.</p>
-<p>Inductance is governed by <span class="math">\(V(t) = L\frac{\dee I}{\dee t}\)</span>, where <span class="math">\(V(t)\)</span> is the voltage across the inductor, <span class="math">\(I\)</span> is the current flowing through the inductor, and <span class="math">\(L\)</span> is the inductance.</p>
+<p>Inductance is governed by <span class="math">\(V(t) = L\frac{\dee I(t)}{\dee t}\)</span>, where <span class="math">\(V(t)\)</span> is the voltage across the inductor, <span class="math">\(I\)</span> is the current flowing through the inductor, and <span class="math">\(L\)</span> is the inductance.</p>
+<p>So if <span class="math">\(V(t)\)</span> is constant, <span class="math">\(\frac{\dee I(t)}{\dee t}\)</span> is constant and <span class="math">\(V = L\frac{I_f - I_i}{t_f - t_i}\)</span>.</p>
+<p>Since <span class="math">\(L = \frac{V(t)}{\frac{\dee I(t)}{\dee t}}\)</span>, the current can never change instantaneously. The inductor will slowly let the current change over time, even if there is a current source trying to change it instantaneously.</p>
 <p>If the current is increasing, the voltage is positive between the end the current is going into and the end it is coming out of. If the current is decreasing, the voltage is negative. This is because the inductor always outputs voltage trying to prevent the current from changing.</p>
-<p>The steady state of an inductor is a short circuit.</p>
+<p>The power in an inductor is <span class="math">\(P(t) = V(t) I(t) = L\frac{\dee I(t)}{\dee t} I(t)\)</span>. So the energy in a capacitor is <span class="math">\(W(t) = \int_0^t L I(t)\frac{\dee I(t)}{\dee t} \dee t = L \int I(t) \dee I(t) = \frac 1 2 L I(t)^2\)</span>.</p>
+<p>The DC steady state of an inductor is a short circuit. When we are analyzing a circuit at DC steady state, the inductor can simply be replaced by a wire. This is because when the current is not changing, the voltage across the inductor is 0.</p>
+<p>Given inductors connected in series with inductances <span class="math">\(L_1, \ldots, L_n\)</span>, it is possible to replace all of them with an <strong>equivalent series inductance</strong> <span class="math">\(L_{eq} = L_1 + \ldots + L_n\)</span>. This is similar to the formula for equivalent resistance for resistors in series.</p>
+<p>Given inductors connected in parallel with inductances <span class="math">\(L_1, \ldots, L_n\)</span>, it is possible to replace all of them with an <strong>equivalent parallel inductance</strong> <span class="math">\(\frac 1 {L_{eq}} = \frac 1 {L_1} + \ldots + \frac 1 {L_n}\)</span>. This is similar to the formula for equivalent resistance for resistors in parallel. As a result, we can use the product-over-sum rule for two parallel inductors <span class="math">\(L_1\)</span> and <span class="math">\(L_2\)</span>, <span class="math">\(\frac{L_1 L_2}{L_1 + L_2}\)</span>.</p>
 <h1 id="section-23">2/7/14</h1>
-<p>;wip: see midterm at office hours</p>
 <h2 id="transient-analysis">Transient Analysis</h2>
 <p>This is analysis of circuits with respect to time. A <strong>transient</strong> state is one that is dependent on time. Before this, we were analyzing circuits in <strong>steady state</strong> - a state that does not change over time.</p>
 <p>;wip: transcribe from notebook</p>
-<p>;wip: constant charging voltage is never quite reached because <span class="math">\(e^{-\frac t \tau} &gt; 0\)</span>.</p>
 <p>An RC circuit is a capacitor in series with a resistor.</p>
+<p>Also, when <span class="math">\(R = 0\)</span> (there is no resistor in the circuit) and there is only a capacitor and independent voltage source in series, we can simply analyze the circuit using <span class="math">\(V = C\frac{I_f - I_i}{t_f - t_i}\)</span>.</p>
 <h1 id="section-24">3/7/14</h1>
 <p>In this course we will only be working with circuits that can be reduced such that they only have one capacitor, which allows us to apply the charging/discharging formula <span class="math">\(V_c(t) = V_f + (V_i - V_f)e^{-t/\tau}\)</span> where <span class="math">\(\tau = RC\)</span>, the time constant.</p>
 <p>To solve DC steady state problems, we find the initial conditions at <span class="math">\(t = 0\)</span> and the final conditions at <span class="math">\(t = \infty\)</span>. For capacitors, we then find the time constant and use the charging/discharging equation to determine the voltage.</p>
@@ -516,6 +520,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>An RL circuit is an inductor in series with a resistor.</p>
 <p>For inductors, we use the same steps, but <span class="math">\(\tau = \frac L R\)</span>.</p>
 <p>For inductors, <span class="math">\(I_L = I_f + (I_i - I_f)e^{-\frac t \tau}\)</span>.</p>
+<p>Also, when <span class="math">\(R = 0\)</span> (there is no resistor in the circuit) and there is only an inductor and independent voltage source in series, we can simply analyze the circuit using <span class="math">\(I = L\frac{V_f - V_i}{t_f - t_i}\)</span>.</p>
 <h1 id="section-25">7/7/14</h1>
 <p>;wip: transient analysis of inductors</p>
 <h1 id="section-26">8/7/14</h1>
