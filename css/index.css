@@ -27,3 +27,9 @@ p {
 	padding-left: 0;
 	padding-right: 0;
 }
+
+@media screen and (max-width: 650px) {
+	h2 { font-size: 2em; }
+
+	.term { width: 100%; }
+}

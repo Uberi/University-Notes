@@ -66,6 +66,23 @@ h1 a { color: inherit; }
 
 .site_links .contact:hover, .site_links .contact:focus { border-top-color: #000099; }
 
+@media screen and (max-width: 500px) {
+	.site_links li {
+		font-size: 1em;
+		display: block;
+	}
+
+	.site_links a {
+		display: block;
+		text-align: left;
+		padding-left: 1em;
+		border-top: none;
+		letter-spacing: 0.1em;
+	}
+
+	.site_links .divider { display: none; }
+}
+
 a { color: #775555; }
 
 code {
