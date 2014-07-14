@@ -66,7 +66,7 @@ h1 a { color: inherit; }
 
 .site_links .contact:hover, .site_links .contact:focus { border-top-color: #000099; }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
 	.site_links li {
 		font-size: 1em;
 		display: block;
