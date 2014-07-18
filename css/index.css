@@ -16,8 +16,7 @@ p {
 	border: 1px solid #EEEEEE;
 	padding: 1em;
 	margin: 0.5em auto;
-	transition: all 0.3s ease-in;
-	-webkit-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in; -webkit-transition: all 0.3s ease-in;
 	border-radius: 0.3em;
 }
 

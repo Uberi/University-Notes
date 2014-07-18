@@ -53,8 +53,7 @@ h1 a { color: inherit; }
 	text-decoration: none;
 	border-top: 0.15em solid rgba(153, 0, 0, 0);
 	border-bottom: 0.15em solid #990000;
-	transition: all 0.3s ease-in;
-	-webkit-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in; -webkit-transition: all 0.3s ease-in;
 }
 
 @keyframes wobble {
@@ -72,8 +71,7 @@ h1 a { color: inherit; }
 
 .site_links a:hover, .site_links a:focus {
 	border-top-color: #990000;
-	animation: wobble 0.5s linear 0.3s infinite;
-	-webkit-animation: wobble 0.5s linear 0.3s infinite;
+	animation: wobble 0.5s linear 0.3s infinite; -webkit-animation: wobble 0.5s linear 0.3s infinite;
 }
 
 .site_links .page { border-color: #009900; border-top-color: rgba(0, 153, 0, 0); }
@@ -81,7 +79,7 @@ h1 a { color: inherit; }
 .site_links .contact { border-color: #000099; border-top-color: rgba(0, 0, 153, 0); }
 .site_links .contact:hover, .site_links .contact:focus { border-top-color: #000099; }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 650px) {
 	.site_links li {
 		font-size: 1em;
 		display: block;
@@ -93,6 +91,10 @@ h1 a { color: inherit; }
 		padding-left: 1em;
 		border-top: none;
 		letter-spacing: 0.1em;
+	}
+
+	.site_links a:hover, .site_links a:focus {
+		animation: none; -webkit-animation: none;
 	}
 
 	.site_links .divider { display: none; }
