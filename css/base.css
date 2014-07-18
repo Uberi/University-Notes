@@ -56,17 +56,31 @@ h1 a { color: inherit; }
 	-webkit-transition: all 0.3s ease-in;
 }
 
-.site_links a:hover, .site_links a:focus { border-top-color: #990000; }
+@keyframes wobble {
+	0% { transform: rotate(0deg); -ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); }
+	25% { transform: rotate(-8deg); -ms-transform: rotate(-8deg); -webkit-transform: rotate(-8deg); }
+	75% { transform: rotate(8deg); -ms-transform: rotate(8deg); -webkit-transform: rotate(8deg); }
+	100% { transform: rotate(0deg); -ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); }
+}
+@-webkit-keyframes wobble {
+	0% { transform: rotate(0deg); -ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); }
+	25% { transform: rotate(-8deg); -ms-transform: rotate(-8deg); -webkit-transform: rotate(-8deg); }
+	75% { transform: rotate(8deg); -ms-transform: rotate(8deg); -webkit-transform: rotate(8deg); }
+	100% { transform: rotate(0deg); -ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); }
+}
+
+.site_links a:hover, .site_links a:focus {
+	border-top-color: #990000;
+	animation: wobble 0.5s linear 0 infinite;
+	-webkit-animation: wobble 0.5s linear 0.3s infinite;
+}
 
 .site_links .page { border-color: #009900; border-top-color: rgba(0, 153, 0, 0); }
-
 .site_links .page:hover, .site_links .page:focus { border-top-color: #009900; }
-
 .site_links .contact { border-color: #000099; border-top-color: rgba(0, 0, 153, 0); }
-
 .site_links .contact:hover, .site_links .contact:focus { border-top-color: #000099; }
 
-@media screen and (max-width: 650px) {
+@media only screen and (max-width: 320px) {
 	.site_links li {
 		font-size: 1em;
 		display: block;
