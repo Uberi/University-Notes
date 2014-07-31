@@ -385,7 +385,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>Individual events means that <span class="math">\(P(\text{2 or more events in same interval } (t, t + \Delta t)) = o(\Delta t)\)</span> - that the probability of two events occurring in the same interval becomes negligible when <span class="math">\(\Delta t \to 0\)</span>. In other words, in any interval <span class="math">\((t, t + \Delta t)\)</span> there is either 1 or 0 events occurring, and the probability that two or more events occur is negligible.</p>
 <p>Hommogeneity/uniformity means that the events occur at a uniform rate <span class="math">\(\lambda\)</span> over some dimension (usually time or space) so that <span class="math">\(P(\text{one event in interval } (t, t + \
 Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
-<p>If a process/experiment satisfies these three properties, then it is a <strong>Poission process</strong> and <span class="math">\(\mu = \lambda t\)</span>.</p>
+<p>If a process/experiment satisfies these three properties, then it is a <strong>Poisson process</strong> and <span class="math">\(\mu = \lambda t\)</span>.</p>
 <p><span class="math">\(\lambda\)</span> is the average rate of events per unit dimension (usually time or space). <span class="math">\(\mu\)</span> is the average number of occurrences over an interval <span class="math">\(t\)</span>. Clearly, <span class="math">\(\mu = \lambda t\)</span>.</p>
 <p>If there are an average of 6 earthquakes per year and earthquakes are a Poisson process, what is the probability that 7 are recorded in the next 2 years?</p>
 <blockquote>
@@ -543,7 +543,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <p>It is always true that <span class="math">\(\operatorname{Cov}(X, X) = \operatorname{Var}(X)\)</span> and <span class="math">\(\operatorname{Cov}(aX + bY, cU + dV) = ac \operatorname{Cov}\)</span>. ;wip</p>
 <p><span class="math">\(\operatorname{Var}(aX + bY) = a^2 \operatorname{Var}(X) + b^2 \operatorname{Var}(Y) + 2ab \operatorname{Cov}(X, Y)\)</span>.</p>
 <p><span class="math">\(\operatorname{Var}(\sum a_i X_i) = \sum a_i \operatorname{Var}(X_i) + 2 \sum_{i &lt; j} a_i a_j \operatorname{Cov}(X_i, X_j)\)</span>.</p>
-<p><span class="math">\(\sigma_{\overline X}^2 = \frac{\sigma_X^2}{n}\)</span>.</p>
+<p><span class="math">\(\sigma_{\overline X}^2 = \frac{\sigma_X^2}{n}\)</span> where <span class="math">\(n\)</span> is the number of samples - the variance of the complement is inversely correlated to the number of samples in <span class="math">\(X\)</span>.</p>
 <p>So when we increase <span class="math">\(n\)</span>, <span class="math">\(\sigma_{\overline X}^2\)</span> gets smaller and smaller. This is because when we add more data to our sample set, our sample average becomes closer to the true expected value.</p>
 <p>An <strong>indicator variable</strong> is a binary variable, that indicates whether an event occurred or not. For example, <span class="math">\(X \sin \operatorname{Bin}(n, p)\)</span> where <span class="math">\(X_i\)</span> is 1 if the <span class="math">\(i\)</span>th trial was successful or 0 otherwise, so <span class="math">\(X = \sum_{i = 1}^n X_i\)</span>.</p>
 <p>So <span class="math">\(E(X) = E(\sum_{i = 1}^n X_i) = \sum_{i = 1}^n  E(X_i) = \sum_{i = 1}^n p = np\)</span>, as required. This is an easier way to find variance and mean when there are independent indicator variables.</p>
@@ -557,7 +557,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <p>For ocntinuous random variables, we actually care about the outcome falling between certain values. For this we consider the area under the curve of the probability function - the integral between two endpoints.</p>
 <p>The probability that <span class="math">\(a \le X \le b\)</span> is therefore <span class="math">\(\int_a^b f(x) \dee x\)</span>. This is called a <strong>probability density function</strong> (PDF), analogous to the probability distribution function for discrete variables.</p>
 <p>The <strong>cumulative distribution function</strong> (CDF) is similar to those in discrete variables. It is <span class="math">\(P(X \le x)\)</span> and here, <span class="math">\(F(-\infty) = 0, F(\infty) = 1\)</span>, <span class="math">\(F\)</span> is non-decreasing, and <span class="math">\(P(a \le X \le b) = F(b) - F(a)\)</span>.</p>
-<p>So <span class="math">\(F_X(x) = \int_0^k f_X(x) \dee x\)</span> and <span class="math">\(f_X(x) = \frac{\dee F_X(x)}{\dee x}\)</span>. As a result, <span class="math">\(f_X(x)\)</span> can actually be more than 1 - it does not have an upper bound (it does have a lower bound since <span class="math">\(F_X\)</span> is non-decreasing).</p>
+<p>So <span class="math">\(F_X(x) = \int_{-\infty}^x f_X(t) \dee t\)</span> and <span class="math">\(f_X(x) = \frac{\dee F_X(x)}{\dee x}\)</span>. As a result, <span class="math">\(f_X(x)\)</span> can actually be more than 1 - it does not have an upper bound (it does have a lower bound since <span class="math">\(F_X\)</span> is non-decreasing).</p>
 <p><span class="math">\(f_X(x)\)</span> is not the same as <span class="math">\(P(X = x)\)</span>, but rather <span class="math">\(f(x) \Delta x\)</span> is the probability that <span class="math">\(X\)</span> is in the very small interval <span class="math">\(\Delta x\)</span>.</p>
 <p>Also, since <span class="math">\(P(X = a) = P(X = b) = 0\)</span>, <span class="math">\(P(a \le X \le b) = P(a &lt; X &lt; b)\)</span>.</p>
 <p>Let <span class="math">\(Y\)</span> be a function of <span class="math">\(X\)</span>, both random variables.</p>
@@ -567,6 +567,98 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <p>Clearly, <span class="math">\(F_Y(y) = P(Y \le y) = P(\frac 1 X \le y) = P(X \ge \frac 1 y) = 1 - P(X &lt; \frac 1 y)\)</span>.<br />So <span class="math">\(F_Y(y) = 1 - F_X(\frac 1 y) = 1 - 1 - \frac{\frac 1 y}{4} = 1 - \frac 1 {4y}\)</span>.<br />So <span class="math">\(f_Y(y) = \frac{\dee}{\dee x} \left(1 - \frac 1 {4y}\right) = \frac 1 {4y^2}\)</span>.<br />Since <span class="math">\(0 \le x \le 4\)</span>, <span class="math">\(\frac 1 4 \le y \le \infty\)</span>.</p>
 </blockquote>
 <p>The expected value for continuous random variables is <span class="math">\(\int_{\text{all } x} x \cdot f_X(x) \dee x\)</span>.</p>
+<h1 id="section-28">14/7/14</h1>
+<h2 id="continuous-uniform-distribution">Continuous Uniform Distribution</h2>
+<ul>
+<li><span class="math">\(X \in [a, b]\)</span> - a closed interval.</li>
+<li>All subintervals of a given length are equally likely.</li>
+</ul>
+<p>If this is the case, then <span class="math">\(X\)</span> has a continuous uniform distribution and <span class="math">\(f_X(x) = k\)</span>. However, <span class="math">\(\int_a^b f_X(x) \dee x = 1\)</span>, so <span class="math">\(\evalat{kx}_a^b = 1\)</span> and <span class="math">\(k = \frac{1}{b - a}\)</span>. So <span class="math">\(f_X(x) = \frac{1}{b - a}\)</span> and <span class="math">\(F_X(x) = \int_a^x f_X(t) \dee t = \begin{cases} 0 &amp;\text{if } x &lt; a \\ \frac{x}{b - a}  &amp;\text{if } a \le x \le b \\ 1 &amp;\text{if } b &lt; x \end{cases}\)</span>.</p>
+<p>The mean is <span class="math">\(\mu_X = \frac{b + a}{2}\)</span> and the variance is <span class="math">\(\sigma_X^2 = \frac{(b - a)^2}{12}\)</span>.</p>
+<p>If <span class="math">\(f_U(u) = 0.1e^{-0.1u}, u &gt; 0\)</span>, then <span class="math">\(Y = e^{-0.1U}\)</span> has a continuous uniform distribution.</p>
+<p>This is because <span class="math">\(F_Y(y) = P(e^{-0.1u} \le y) = P(-0.1u \le \ln y) = P(u \le -10 \ln y) = F_U(-10\ln y)\)</span>. Since <span class="math">\(F_U(u) = \int_0^u 0.1e^{-0.1t} \dee t = 1 - e^{-0.1u}\)</span>, <span class="math">\(F_Y(y) = e^{-0.1(-10\ln y)} = y\)</span>, so <span class="math">\(f_Y(y) = 1\)</span>. ;wip: wait what this can't be right</p>
+<p>In this way we can use this distribution to transform anything into a continuous uniform distribution.</p>
+<h2 id="exponential-distribution">Exponential Distribution</h2>
+<p>Physical Setup:</p>
+<ul>
+<li>Event is a Possion process - independent, uniform, and homogeneous.</li>
+<li>Events occur at rate <span class="math">\(\lambda\)</span> per unit time.</li>
+<li><span class="math">\(X\)</span> is the length of time we wait until the first occurrence of the event.</li>
+</ul>
+<p>If this is the case, then <span class="math">\(X\)</span> has an exponential distribution, and <span class="math">\(f_X(x) = \)</span>.</p>
+<p>Clearly, <span class="math">\(F_X(x) = P(X \le x)\)</span>. If <span class="math">\(Y\)</span> is the number of events occurring in an interval of length <span class="math">\(x\)</span>, then <span class="math">\(Y \sim \operatorname{Pois}(\lambda x)\)</span>.</p>
+<p>So <span class="math">\(F_X(x) = 1 - P(\text{time to first occurrence} &gt; x) = 1 - P(Y = 0) = 1 - \frac{e^{-\lambda x}(\lambda x)^0}{0!} = 1 - e^{-\lambda x}\)</span>.</p>
+<p>So <span class="math">\(f_X(x) = \lambda e^{-\lambda x}\)</span>. Sometimes, we also write it in terms of <span class="math">\(\theta = \frac 1 \lambda\)</span>. Here, <span class="math">\(\theta\)</span> represents the average amount of time before an event occurring, as opposed to <span class="math">\(\lambda\)</span>, which is the average rate of occurrence per unit time.</p>
+<p><span class="math">\(\lambda\)</span> is the frequency, <span class="math">\(\theta\)</span> is the period.</p>
+<p>It is important to distinguish between counting the number of occurrences of an event in an interval, and counting the time until an occurrence.</p>
+<p>The mean and variance would need to be found using integration by parts. Instead, we will use the <strong>Gamma function</strong> - <span class="math">\(\Gamma(a) = \int_0^\infty x^{a - 1}e^{-x} \dee x\)</span>. For positive integer values of <span class="math">\(a\)</span>, this is equivalent to <span class="math">\((a - 1)!\)</span> - the gamma function is a generalization of the factorial.</p>
+<p>Clearly, <span class="math">\(\Gamma(a) = (a - 1)\Gamma(a - 1)\)</span>. So <span class="math">\(\Gamma(5) = 4! = 24\)</span>. Also, <span class="math">\(\Gamma\left(\frac 1 2\right) = \sqrt{\pi}\)</span>.</p>
+<p>So <span class="math">\(E(X) = \int_0^\infty x \lambda e^{-\lambda x} \dee x\)</span>. Let <span class="math">\(u = \lambda x\)</span>. Then <span class="math">\(E(X) = \frac 1 \lambda \int_0^\infty ue^{-u} \dee u = \frac 1 \lambda \Gamma(2) = \frac 1 \lambda\)</span>. In the same way, <span class="math">\(\operatorname{Var}(X) = \frac 1 {\lambda^2}\)</span>.</p>
+<h1 id="section-29">16/7/14</h1>
+<p>The <strong>memoryless property</strong> states that <span class="math">\(P(X &gt; a + b \mid X &gt; b) = P(X &gt; a)\)</span>. This means that if we have been waiting for 10 minutes already and someone comes and starts waiting, we both have the same probability of observing the event. In other words, given that we have already waited so long, it is exactly the same as if we just started observing.</p>
+<h2 id="normal-distribution">Normal Distribution</h2>
+<p>Physical setup:</p>
+<ul>
+<li><span class="math">\(X \in (-\infty, \infty)\)</span>.</li>
+<li><span class="math">\(X\)</span> has a normal distribution.</li>
+</ul>
+<p>If all of the above are satisfied, then <span class="math">\(X \sim \operatorname{N}(\mu, \sigma^2)\)</span> and <span class="math">\(f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac 1 2 \left(\frac{x - \mu}{\sigma}\right)^2}, -\infty &lt; x &lt; \infty\)</span>. Also, <span class="math">\(\mu = E(X)\)</span> and <span class="math">\(\sigma^2 = \operatorname{Var}(x)\)</span>.</p>
+<p>The normal distribution is symmetric, so <span class="math">\(f_X(-x) = f_X(x)\)</span>, and looks like a bell curve centered around <span class="math">\(x = \mu\)</span>.</p>
+<p>Note that the physical setup did not give any constraints that directly imply a variable has a normal distribution. This is because the normal distribution appears in so many different setups that it is difficult to list all of them. For example, a random variable representing height in a population follows a normal distribution, or adding up a large number of uniform random variables. In fact, most of the random variables we deal with in statistics follows a normal distribution.</p>
+<p><span class="math">\(F_X(x) = \int_{-\infty}^x \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac 1 2 \left(\frac{t - \mu}{\sigma}\right)^2} \dee t\)</span> doesn't simplify very well, so we often use numerical methods such as probability tables to approximate <span class="math">\(F_X(x)\)</span>.</p>
+<p>The <strong>standard normal distribution</strong> is <span class="math">\(Z \sim \operatorname{N}(0, 1)\)</span>. This is the one we make the probability tables for.</p>
+<p>If <span class="math">\(X \sim \operatorname{N}(\mu, \sigma^2)\)</span>, then <span class="math">\(\frac{X - \mu}{\sigma} = Z\)</span> - we can transform any normally distributed variable into the standard normal distribution.</p>
+<h1 id="section-30">18/7/14</h1>
+<p>The normal distribution is also known as the <strong>Gaussian distribution</strong>, <span class="math">\(\operatorname{G}(\mu, \sigma)\)</span>. This differs slightly from the normal distribution since we pass <span class="math">\(\sigma\)</span> instead of <span class="math">\(\sigma^2\)</span>. So <span class="math">\(X \sim N(1, 4)\)</span> is the same as <span class="math">\(X \sim G(1, 2)\)</span>.</p>
+<p>For example, let <span class="math">\(X \sim \operatorname{N}(3, 25)\)</span>. Then <span class="math">\(P(x &lt; 2) = P(\frac{x - \mu}{\sigma} &lt; \frac{2 - 3}{25}) = P(z &gt; 0.4) = 1 - P(z \le 0.4) = 0.34458\)</span>.</p>
+<p>;wip: finish copying this</p>
+<p>Let <span class="math">\(X \sim \operatorname{N}(\mu, \sigma^2)\)</span>. Then <span class="math">\(aX + b \sim \operatorname{N}(a\mu + b, a^2\sigma^2)\)</span>, since <span class="math">\(E(aX + b) = E(aX + b) = aE(x) + b\)</span>.</p>
+<p>Let <span class="math">\(X \sim \operatorname{N}(\mu_1, \sigma_1^2)\)</span> and <span class="math">\(Y \sim \operatorname{N}(\mu_2, \sigma_2^2)\)</span>. Then <span class="math">\(aX + bY \sim \operatorname{N}(a\mu_1 + b\mu_2, a^2\sigma_1^2 + b^2\sigma_2^2)\)</span>, since <span class="math">\(E(aX + bY) = aE(X) + bE(Y)\)</span> and <span class="math">\(\operatorname{Var}(aX + bY) = \operatorname{Var}(aX) + \operatorname{Var}(bY) = a^2\operatorname{Var}(X) + b^2\operatorname{Var}(Y)\)</span>. ;wip: check this in the slides</p>
+<p>&quot;iid&quot; stands for independently and identically distributed. If <span class="math">\(X_1, \ldots, X_n \sim \operatorname{N}(\mu, \sigma^2)\)</span>, then <span class="math">\(X_1 + \ldots + X_n \sim \operatorname{N}\left(\mu, \frac 1 n \sigma^2\right)\)</span>.</p>
+<p>Let <span class="math">\(X \sim \operatorname{N}(3, 5), Y \sim \operatorname{N}(6, 14)\)</span>. Find <span class="math">\(P(X &gt; Y)\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(W = X - Y\)</span>. Then <span class="math">\(W \sim \operatorname{N}(-3, 19)\)</span>.<br />Clearly, <span class="math">\(P(X &gt; Y) = P(W &gt; 0) = P\left(\frac{w - \mu_W}{\sigma_W} &gt; \frac{0 - (-3)}{\sqrt{19}}\right) = 1 - P(z &lt; 0.69) = 1 - 0.7549 = 0.2451\)</span>.</p>
+</blockquote>
+<h1 id="section-31">21/7/14</h1>
+<p>Let <span class="math">\(X \sim \operatorname{N}(5, 4), Y \sim \operatorname{N}(7, 9)\)</span>. What is the probability that <span class="math">\(2X\)</span> differs from <span class="math">\(Y\)</span> by more than 4?</p>
+<blockquote>
+<p>Clearly, the probabilility is <span class="math">\(P(\abs{2X - Y} &gt; 4) = P(2X - Y &gt; 4) + P(2X - Y &lt; -4)\)</span>. Clearly, <span class="math">\(E(2X - Y) = 2E(X) - E(Y) = 2 \cdot 5 - 7 = 3\)</span>.<br />So <span class="math">\(\operatorname{Var}(2X - Y) = 25\)</span> ;wip: how? So <span class="math">\(P(\abs{2X - Y} &gt; 4) = P\left(Z &gt; \frac{4 - 3}{\sqrt{25}}\right) + P\left(Z &lt; \frac{-4 - 3}{\sqrt{25}}\right) = P\left(Z &gt; \frac 1 5\right) + P\left(Z &lt; \frac{-7} 5\right) = \left(1 - P\left(Z &lt; \frac 1 5\right)\right) + \left(1 - P\left(Z &lt; \frac 7 5\right)\right) \approxeq \)</span>. ;wip</p>
+</blockquote>
+<p>The normal distribution can be used to approximate linear combinations of variables with non-normal distributions. This is due to the <strong>central limit theorem</strong> - sums of random variables tend to approach a normal distribution.</p>
+<p>As we add up more and more random variables, the central limit theorem tells us that the sum of all the variables approximates a normal distribution.</p>
+<p>If <span class="math">\(X_1, \ldots, X_n\)</span> are independent random variables with the same distribution with mean <span class="math">\(\mu\)</span> and variance <span class="math">\(\sigma^2\)</span>, then as <span class="math">\(n \to \infty\)</span>, the cumulative distribution function <span class="math">\(\frac{\sum X_i - n\mu}{\sigma \sqrt{n}}\)</span> (discrete) and the cumulative density function <span class="math">\(\frac{\overline X - \mu}{\frac{\sigma}{\sqrt{n}}}\)</span> (continuous) approaches <span class="math">\(\operatorname{N}(0, 1)\)</span>.</p>
+<p>We often use this to approximate multiple distributions when <span class="math">\(n\)</span> is large. Note that this works even if <span class="math">\(X_1, \ldots, X_n\)</span> has a non-normal distribution, like exponential or binomial. In fact, it works for any distribution that has a mean and variance. The accuracy of the approximation depends on how large <span class="math">\(n\)</span> is and how symmetric the distributions are.</p>
+<p>So for large <span class="math">\(n\)</span>, <span class="math">\(\sum_{i = 0}^n X_i \sim \operatorname{N}(n \mu, n \sigma^2)\)</span>. Also , <span class="math">\(\overline X \sim \operatorname{N}\left(\mu, \frac{\sigma^2}{n}\right)\)</span></p>
+<h1 id="section-32">23/7/14</h1>
+<p>When we use a continuous random distribution to approximate a discrete distribution, we need to make slight adjustments to make the approximation more accurate. This is because on a histogram, the continuous distribution is based on the left edge of the rectangle, when the center of the rectangle is a better approximation.</p>
+<p>This is called the <strong>continuity correction</strong> - the correction that improves continuous approximations of discrete distributions.</p>
+<p>This correction can be seen from a graph sketch. When we have something like <span class="math">\(P(X \le x)\)</span> where <span class="math">\(X\)</span> is a discrete distribution like Poisson or Binomial, then <span class="math">\(P(X \le x) = P(X &lt; x + 1)\)</span>. So if <span class="math">\(Y\)</span> is a normal distribution, then <span class="math">\(P(X \le x + 0.5)\)</span> is a better approximation than <span class="math">\(P(X \le x)\)</span>, since it accounts for the value at the center of the rectangle rather than at the left. This is a similar idea to the Riemann sum approximation.</p>
+<p>We apply the continuity correction as soon as we make the approximation, before we do any standardization into <span class="math">\(Z\)</span>.</p>
+<p>Also, if <span class="math">\(X \sim \operatorname{Pois}(\mu)\)</span> and <span class="math">\(Y = \frac{X - \mu}{\sqrt{\mu}}\)</span>, then <span class="math">\(Y\)</span> approximates <span class="math">\(\operatorname{N}(0, 1)\)</span>.</p>
+<p>We don't always add 0.5, but we do if the unit is assumed to be 1. If we have a different unit, the continuity correction should add half of that unit.</p>
+<h1 id="section-33">25/7/14</h1>
+<p>Also, if <span class="math">\(X \sim \operatorname{Bin}(n, p)\)</span> and <span class="math">\(Y = \frac{X - np}{\sqrt{np(1 - p)}}\)</span>, then <span class="math">\(Y\)</span> approximates <span class="math">\(\operatorname{N}(0, 1)\)</span>. So <span class="math">\(X \sim \operatorname{N}(np, np(1 - p))\)</span>.</p>
+<p>As a rule of thumb, this approximation works best when <span class="math">\(np \ge 5\)</span> and <span class="math">\(np(1 - p) \ge 5\)</span>. The approximation gets better for larger <span class="math">\(n\)</span>.</p>
+<h1 id="section-34">28/7/14</h1>
+<h2 id="moment-generating-functions">Moment Generating Functions</h2>
+<p>The moment generating function uniquely determines a distribution, just like the density function and the cumulative function. This is the value <span class="math">\(M_X(t) = E(e^{tX}) = \sum_{\text{all } x} e^{tx} f(x)\)</span>, where <span class="math">\(t\)</span> is a constant such that <span class="math">\(M_X(t)\)</span> is defined for some interval of <span class="math">\(t\)</span>, <span class="math">\([-a, a]\)</span>.</p>
+<p>For continuous random variables, <span class="math">\(M_X(t) = \int_{-\infty}^\infty e^{tx} f(x)\)</span>.</p>
+<p>Moment generating functions allow us to find the expected value of various exponents of the random variable.</p>
+<p>The <strong>moments</strong> of <span class="math">\(X\)</span> are the expected values of <span class="math">\(X^r\)</span> for <span class="math">\(r \in [-a, a]\)</span>. <span class="math">\(E(X^r)\)</span> is the <span class="math">\(r\)</span>th moment of <span class="math">\(X\)</span>. It is always true that <span class="math">\(E(X^r) = M^{(r)}(0) = \evalat{\frac{\dee^r M(t)}{\dee t^r}}_{t = 0}\)</span>.</p>
+<p>Find the moment generating function of the binomial distribution:</p>
+<blockquote>
+<p>Let <span class="math">\(X \sim \operatorname{Bin}(n, p)\)</span>. Then <span class="math">\(f(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span>.<br />Then <span class="math">\(M_X(t) = E(e^{tX}) = \sum_{x = 0}^n e^{tx} {n \choose x}p^x(1 - p)^{n - x} = (pe^t + 1 - p)^n\)</span>, by the binomial theorem.</p>
+</blockquote>
+<p>So if <span class="math">\(X \sim \operatorname{Bin}(n, p)\)</span>, then <span class="math">\(M_X(t) = (pe^t + 1 - p)^n\)</span>. Also, <span class="math">\(E(X(X - 1)) + E(X) - E(X)^2\)</span>.</p>
+<p>In the same way, we can find the moment generating function for the Poisson distribution. If <span class="math">\(X \sim \operatorname{Pois}(\mu)\)</span>, then <span class="math">\(M_X(t) = e^{\mu(e^t - 1)}\)</span>. From this we can prove that <span class="math">\(E(X) = \operatorname{Var}(X) = \mu\)</span>.</p>
+<p>The moment generating function is unique, so if two random variables have the same one, they have the same distribution. We can use this to prove that the limit of some sequence of distributions approaches some limiting distribution.</p>
+<p>For example, use moment generating functions to show that the binomimal distribution can be approximated by the Poisson distribution.</p>
+<blockquote>
+<p>Let <span class="math">\(X \sim \operatorname{Bin}(n, p)\)</span>. Clearly, <span class="math">\(M_X(t) = (pe^{t} + 1 - p)^n = (1 + p(e^t - 1))^n\)</span>. Let <span class="math">\(\mu = np\)</span>.<br />Then <span class="math">\(M_X(t) = \left(1 + \frac \mu n (e^t - 1)\right)^n\)</span> and <span class="math">\(\lim_{n \to \infty} M_X(t) = e^{\mu(e^t - 1)}\)</span>, the moment generating function for <span class="math">\(\operatorname{Pois}(\mu)\)</span>.<br />So as <span class="math">\(n \to \infty\)</span>, <span class="math">\(X \sim \operatorname{Pois}(\mu)\)</span> where <span class="math">\(\mu = np\)</span>.</p>
+</blockquote>
+<p>Also, if <span class="math">\(X \sim \operatorname{N}(\mu, \sigma^2)\)</span>, then <span class="math">\(M_X(t) = e^{\mu t + \frac{\sigma^2 t^2}{2}}\)</span>.</p>
+<h1 id="section-35">30/7/14</h1>
+<p>;wip: exam on August 6, 4pm-6:30pm, PAC1-6, sections 4, 5, 7, 8, 9, 10.1, 10.2, assigned seats, 8 short answer, pink tie calculators, formula sheet + normal distrubution table ;wip: 8.3 and 9.4 not covered ;wip: get sample final exams</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

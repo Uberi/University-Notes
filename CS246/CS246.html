@@ -702,7 +702,7 @@ Node &amp;Node::operator=(const Node &amp;other) {
 <p>Whenever we declare one of the <code>operator+</code> or similar member functions, we get the <code>this</code> parameter inserted implicitly and <code>this</code> acts as the left hand side of the operation. This allows us to implement a lot of different functionality:</p>
 <pre><code>struct Vec {
     int x, y;
-    Vec operator+(const Vec &amp;o) { return Vec(this-&gt;x + other.x, this-&gt;y + other.y); }
+    Vec operator+(const Vec &amp;o) { return Vec(this-&gt;x + o.x, this-&gt;y + o.y); }
     Vec operator*(const int k) { return Vec(this-&gt;x * k, this-&gt;y * k); } // this works for expressions of the form `SOME_VEC * SOME_INT`
 }
 
@@ -750,16 +750,16 @@ std::string Vec::__doc__ = &quot;Information about this class&quot;; // we still
 <p>We can do this by declaring a static field of <code>c</code> as a flag, and in the constructor, setting the flag to prevent future instances from being created:</p>
 <pre><code>struct Student {
     static Student *instance;
-    static Student getInstance();
+    static Student *getInstance();
     int grade;
     Student();
 }
 
 Student Student::instance = 0;
-Student Student::getInstance() {
-    if (!this-&gt;instance)
-        this-&gt;instance = new Student;
-    return this-&gt;instance;
+Student *Student::getInstance() {
+    if (!instance)
+        instance = new Student;
+    return instance;
 }
 Student::Student(): grade(0) {}</code></pre>
 <p>Every <code>new</code> should be matched with a <code>delete</code>. In the above example, the <code>this-&gt;instance</code> is a memory leak - it leaks the single instance of the wallet.</p>
@@ -822,7 +822,8 @@ Student::cleanup() { delete Student::instance; }</code></pre>
 <p>Each attribute list entry is of the form <code>VISIBILITY NAME [&quot;:&quot; [TYPE] [&quot;[&quot; MULTIPLICITY &quot;]&quot;] [&quot;=&quot; DEFAULT]]</code>, where <code>VISIBILITY</code> is &quot;+&quot; for public, &quot;-&quot; for private, &quot;#&quot; for protected, and &quot;~&quot; for package; <code>NAME</code> is the field identifier, <code>TYPE</code> is the field type (&quot;Boolean&quot;, &quot;Integer&quot;, &quot;Float&quot;, &quot;String&quot;, or a class name), <code>MULTIPLICITY</code> is the cardinality (array size) of the field of the form &quot;LOW..HIGH&quot; or &quot;n&quot; (specific amount) or &quot;*&quot; (any amount), defaulting to 1; and <code>DEFAULT</code> is the default value of the property.</p>
 <p>Each routine list entry is of the form <code>[VISIBILITY] NAME [&quot;(&quot; ([DIRECTION PARAMETER_NAME &quot;:&quot; TYPE [&quot;[&quot; MULTIPLICITY &quot;]&quot;] [&quot;=&quot; DEFAULT]])* &quot;)&quot;] [&quot;:&quot; RETURN_TYPE]</code> where <code>DIRECTION</code> is the direction of data flow (&quot;in&quot;, &quot;out&quot;, or &quot;inout&quot;), <code>PARAMETER_NAME</code> is the name of a parameter, and <code>RETURN_TYPE</code> is the return type of the method.</p>
 <p>A class with a field that contains a class instance (rather than a basic type like a string or bool) has an <strong>owns-a</strong> relationship with that class.</p>
-<p>;wip: relationships owns-a, is-a, has-a</p>
+<p>A class with a field that contains a pointer to a class instance has a <strong>has-a</strong> relationship with that class.</p>
+<p>;wip: relationships is-a</p>
 <p>In UML, has-a is represented by an open diamond, and owns-a is represented by a filled diamond.</p>
 <h1 id="section-16">3/7/14</h1>
 <p>Private fields are inherited by subclasses, but they can't access them. In addition to <code>private</code> and <code>public</code>, we also have access level called <code>protected</code> that acts like <code>private</code>, but all subclasses can access it as well.</p>
@@ -871,7 +872,7 @@ int main() {
 <p>We can avoid this by using the <code>virtual</code> specifier for methods, which makes it so that the type of the object is considered at runtime, rather than from the type of the variable. So if <code>A.x</code> was declared as <code>virtual int x()</code> and <code>A *w = new B()</code>, the method to call when we do <code>w-&gt;x()</code> is decided at runtime from the value of <code>w</code> itself.</p>
 <p>;wip: tutorial tomorrow about makefiles</p>
 <h1 id="section-17">8/7/14</h1>
-<p>The process of virtual methods being resolved to the correct one at runtime is known as <strong>dynamic dispatch</strong>. We use this by putting <code>virtual</code> in the superclass.</p>
+<p>The process of virtual methods being resolved to the correct one at runtime is known as <strong>dynamic dispatch</strong>. We use this by putting <code>virtual</code> in the superclass. Dynamic dispatch is the process of choosing which method to call at runtime based on the type of a value.</p>
 <p>Dynamic dispatch is used when we can't decide which exact method to call at compile time. It is slightly slower than static dispatch (the default), which is why we should use it sparingly. Java has every call use dynamic dispatch, one of the reasons it is slow.</p>
 <p>Dynamic dispatch lets us use <strong>polymorphism</strong> - the ability to use multiple types under one abstraction.</p>
 <p>For example, we might have an array of <code>A</code> objects, and in this array we could keep <code>A</code> and <code>B</code> instances. So when we call the <code>x</code> method on each element in the array, it actually executes the correct method of each object. In this case the types are <code>A</code> and <code>B</code> and the abstraction is an array.</p>
@@ -894,12 +895,12 @@ int main() {
     x *a = new y(10, 20);
     delete a; // this calls the correct destructor because the destructor of the base class is virtual
 }</code></pre>
-<p>We should always make the destructor of a base class virtual.</p>
+<p>We should always implement the destructor of a virtual class, and make it virtual, because otherwise when we have a polymorphic variable with the type of the base class, it will not call the destructors of the subclasses.</p>
 <p>A <strong>pure virtual method</strong> is one where the virtual method of the base class is not implemented, perhaps because the class is so abstract that it is only meant to be subclassed, never itself instantiated. So we cannot declare a variable of this type or call its constructor.</p>
 <p>We write one of these method using something like <code>virtual int k() = 0;</code>. This specifies that we intentionally did not implement <code>k</code> in this class - that we want subclasses to implement it.</p>
 <p>Classes with any pure virtual methods cannot be instantiated because they are <strong>abstract classes</strong> - at least one of the methods is still missing an implementation. A class that is not abstract is a <strong>concrete class</strong> - a class without pure virtual methods.</p>
 <p>Subclasses of an abstract class are also abtract unless they implement all of the pure virtual methods it inherits.</p>
-<p>In UML, virtual and pure virtual method names, as well as abstract class names, are written in italics. Also, static method/field names are underlined and protected method/field names are prefixed with &quot;#&quot;.</p>
+<p>In UML, pure virtual method names, as well as abstract class names, are written in italics. Also, static method/field names are underlined and protected method/field names are prefixed with &quot;#&quot;.</p>
 <p>When we call the copy constructor of a subclass <code>B</code> where only the base class <code>A</code> has a copy constructor, the default copy constructor for <code>B</code> is called. The default copy constructor calls the copy constructor for the base class, <code>A</code>, and then does a shallow copy on <code>B</code> - it copies the instance field by field.</p>
 <p>The default copy constructor is therefore roughly equivalent to <code>B &amp;B::B(const B &amp;other): A(other), y(other.y)</code>. We can do the same thing for <code>operator=</code>, since the default <code>operator=</code> works in almost the same way: <code>B: &amp;B::operator=(const B &amp;other) { A::operator=(other); y = other.y }</code>. As before, we still need to consider heap memory and such.</p>
 <h1 id="section-18">10/7/14</h1>
@@ -992,6 +993,291 @@ delete c;</code></pre>
 <p>We must be careful to make sure the destructors are correctly implemented to avoid leaking memory.</p>
 <h1 id="section-19">11/7/14</h1>
 <p>;wip: GDB stuff</p>
+<h1 id="section-20">15/7/14</h1>
+<h2 id="factory-method-pattern">Factory Method Pattern</h2>
+<p>A <strong>factory method</strong> is a method that creates objects for us, without having to specify which exact type of object to create. The factory method pattern is a design pattern in which these factory methods are used.</p>
+<svg fill-opacity="1" xmlns:xlink="http://www.w3.org/1999/xlink" color-rendering="auto" color-interpolation="auto" stroke="black" text-rendering="auto" stroke-linecap="square" width="400" stroke-miterlimit="10" stroke-opacity="1" shape-rendering="auto" fill="black" stroke-dasharray="none" font-weight="normal" stroke-width="1" viewBox="180 190 400 200" height="200" xmlns="http://www.w3.org/2000/svg" font-family="&apos;Dialog&apos;" font-style="normal" stroke-linejoin="miter" font-size="12" stroke-dashoffset="0" image-rendering="auto" >
+<defs id="genericDefs" /><g ><defs id="defs1" ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath1" ><path d="M0 0 L2147483647 0 L2147483647 2147483647 L0 2147483647 L0 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath2" ><path d="M0 0 L0 50 L130 50 L130 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath3" ><path d="M-0.5 -0.5 L-0.5 49.5 L129.5 49.5 L129.5 -0.5 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath4" ><path d="M0 0 L0 40 L90 40 L90 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath5" ><path d="M-0.5 -0.5 L-0.5 39.5 L89.5 39.5 L89.5 -0.5 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath6" ><path d="M0 0 L0 110 L50 110 L50 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath7" ><path d="M-0.5 -0.5 L-0.5 109.5 L49.5 109.5 L49.5 -0.5 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath8" ><path d="M0 0 L0 50 L190 50 L190 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath9" ><path d="M-0.5 -0.5 L-0.5 49.5 L189.5 49.5 L189.5 -0.5 Z" /></clipPath ></defs ><g font-family="sans-serif" font-size="14" transform="translate(260.5,310.5)" ><line y2="30" fill="none" x1="30" clip-path="url(#clipPath3)" x2="70" y1="30" /><line y2="30" fill="none" x1="70" clip-path="url(#clipPath3)" x2="110" y1="30" /><line y2="24" fill="none" x1="30" clip-path="url(#clipPath3)" x2="42" y1="30" /><line y2="36" fill="none" x1="30" clip-path="url(#clipPath3)" x2="42" y1="30" /><polygon fill="white" clip-path="url(#clipPath3)" points=" 30 30 42 24 42 36" stroke="none" /><polygon fill="none" points=" 30 30 42 24 42 36" clip-path="url(#clipPath3)" /></g ><g font-size="14" transform="translate(200.5,320.5)" fill-opacity="0" fill="rgb(255,255,255)" font-family="sans-serif" stroke="rgb(255,255,255)" stroke-opacity="0" ><rect x="0" y="0" clip-path="url(#clipPath5)" width="89" opacity="0" height="39" stroke="none" /></g ><g font-family="sans-serif" font-size="14" transform="translate(200.5,320.5)" ><rect fill="none" x="0" width="89" height="39" y="0" clip-path="url(#clipPath5)" /><text x="21" xml:space="preserve" y="17" clip-path="url(#clipPath5)" stroke="none" >Product</text ></g ><g font-family="sans-serif" font-size="14" transform="translate(430.5,230.5)" ><line y2="60" fill="none" x1="30" clip-path="url(#clipPath7)" x2="30" y1="30" /><line y2="90" fill="none" x1="30" clip-path="url(#clipPath7)" x2="30" y1="60" /><line y2="42" fill="none" x1="30" clip-path="url(#clipPath7)" x2="36" y1="30" /><line y2="42" fill="none" x1="30" clip-path="url(#clipPath7)" x2="24" y1="30" /><polygon fill="white" clip-path="url(#clipPath7)" points=" 30 30 36 42 24 42" stroke="none" /><polygon fill="none" points=" 30 30 36 42 24 42" clip-path="url(#clipPath7)" /></g ><g font-size="14" transform="translate(370.5,320.5)" fill-opacity="0" fill="rgb(255,255,255)" font-family="sans-serif" stroke="rgb(255,255,255)" stroke-opacity="0" ><rect x="0" y="0" clip-path="url(#clipPath9)" width="189" opacity="0" height="49" stroke="none" /></g ><g font-family="sans-serif" font-size="14" transform="translate(370.5,320.5)" ><rect fill="none" x="0" width="189" height="49" y="0" clip-path="url(#clipPath9)" /><text x="43" xml:space="preserve" y="17" clip-path="url(#clipPath9)" stroke="none" >ConcreteCreator</text ><line y2="20" fill="none" x1="0" clip-path="url(#clipPath9)" x2="189" y1="20" /><text x="7" xml:space="preserve" y="37" clip-path="url(#clipPath9)" stroke="none" >+ factoryMethod(): Product</text ></g ><g font-size="14" transform="translate(370.5,210.5)" fill-opacity="0" fill="rgb(255,255,255)" font-family="sans-serif" stroke="rgb(255,255,255)" stroke-opacity="0" ><rect x="0" y="0" clip-path="url(#clipPath9)" width="189" opacity="0" height="49" stroke="none" /></g ><g font-family="sans-serif" font-size="14" transform="translate(370.5,210.5)" ><rect fill="none" x="0" width="189" height="49" y="0" clip-path="url(#clipPath9)" /><text font-style="italic" x="45" xml:space="preserve" y="17" clip-path="url(#clipPath9)" stroke="none" >AbstractCreator</text ><line y2="20" fill="none" x1="0" clip-path="url(#clipPath9)" x2="189" y1="20" /><text font-style="italic" x="7" xml:space="preserve" y="37" clip-path="url(#clipPath9)" stroke="none" >+ factoryMethod(): Product</text ></g ></g >
+</svg>
+
+<p>The factory methods are often implemented as an abstract creator class that specify the interface, plus multiple possible concrete creator classes that result in an instance of the product class (which is often abstract and we give instances of subclasses).</p>
+<pre><code>class Level {
+    public:
+        virtual Enemy *createEnemy() = 0; // this is a factory method
+}
+
+class NormalLevel: public Level {
+    public:
+        Enemy *createEnemy() {
+            // normal levels would have higher probability of creating turtles randomly rather than bullets
+        }
+}
+
+class CastleLevel: public Level {
+    public:
+        Enemy *createEnemy() {
+            // the castle level would have a higher probability of producing a bullet rather than turtles
+            // we might also check game progress and generate a boss when we get to a certain point
+        }
+}
+
+int main() {
+    Level *l = new NormalLevel;
+    Enemy *e = l-&gt;createEnemy(); // the factory method calls the level function to give the correct probability of getting a turtle or a bullet
+    // we did not call the constructor for an enemy, but the factory method calls it for us
+    // we also did not have to decide whether to create a turtle or a bullet, since `createEnemy` decides for us
+}</code></pre>
+<p>We can also implement factory methods in a base class as a template method that is filled in in subclasses. This is also an example of this pattern.</p>
+<p>The singleton pattern works quite well with factory methods. For example, in this game a boss might be implemented as a singleton class, so that there can only be one of them. In this case, the factory method would simply call <code>getInstance</code> and obtain a boss instance.</p>
+<h2 id="template-method-pattern">Template Method Pattern</h2>
+<p>The template method pattern is a design pattern where we override some behaviour from a superclass, but not all of it - the superclass is used as a template for the subclass.</p>
+<p>A <strong>template method</strong> is one that outlines an algorithm, but might have some steps of the algorithm call virtual methods (often private), which are actually implemented in subclasses. A template method can do most of the work, but the subclasses are reponsible for implementing those last missing pieces:</p>
+<pre><code>class Turtle: public Enemy {
+    void drawHead() {
+        // draw the turtle head
+    }
+    virtual void drawShell() = 0; // we used pure virtual but could also provide a default implementation
+    void drawTail() {
+        // draw the turtle tail
+    }
+    public:
+        draw() {
+            drawHead();
+            drawShell(); // this is not yet implemented
+            drawTail();
+        }
+}
+
+class BigTurtle: public Turtle {
+    void drawShell() {
+        // actually draw then shell here
+    }
+}</code></pre>
+<h2 id="templates">Templates</h2>
+<p>Templates in C++ have nothing to do with the template method pattern. They are a very complex topic, but are very useful.</p>
+<p>Consider the linked list implementation:</p>
+<pre><code>class Node {
+    int data;
+    Node *next;
+    public:
+        Node(int data, Node *next): data(data), next(next) {}
+        ~Node() { delete next; }
+        int getData() { return data; }
+        Node *getNode() { return next; }
+};
+
+int main() {
+    Node *ll = new Node(1, new Node(2, 0));
+    // ...
+    delete ll;
+}</code></pre>
+<p>This can only hold a list of int. However, if we want to store other types of objects, we have to either use <code>void *</code> pointers or templates.</p>
+<p>A <strong>template</strong> is a class parameterized over one or more types:</p>
+<pre><code>template&lt;typename T&gt; class Node {
+    T data; // this data is of type `T`
+    Node&lt;T&gt; *next; // `Node&lt;T&gt;` refers to this class parameterized over the same type
+    public:
+        Node(T data, Node&lt;T&gt; *next): data(data), next(next) {}
+        ~Node() { delete next; }
+        T getData() { return data; }
+        Node&lt;T&gt; *getNode() { return next; }
+}
+
+int main() {
+    Node&lt;char&gt; *ll = new Node&lt;char&gt;(&#39;a&#39;, new Node&lt;char&gt;(&#39;b&#39;, 0))
+    // `ll` is a linked list of characters
+    // ...
+    delete ll;
+}</code></pre>
+<p>The <code>template</code> keyword allows us to declare that the following is parameterized over the type <code>T</code>. So inside the part that follows, <code>T</code> refers to a typename that we can specify in our client code.</p>
+<p>The <code>Node&lt;SOME_TYPE_GOES_HERE&gt;</code> is a <strong>template specialization</strong>. The name of the class is still <code>Node</code>, but we still need to write <code>&lt;T&gt;</code> when it is ambiguous what type <code>T</code> might be. This allows us to have a linked list of whatever type we want.</p>
+<p>The compiler, when encountering a template specialization like <code>Node&lt;int&gt;</code>, creates in memory a new class identical to <code>Node</code> with <code>T</code> replaced with the actual type. This is similar to the preprocessor, but more powerful, and also typesafe. In Java, templates are similar to generics.</p>
+<p>We can even do things like <code>Node&lt; Node&lt;int&gt; &gt;</code> or even more nested structures. However, note that <code>Node&lt;Node&lt;int&gt;&gt;</code> doesn't compile because <code>&gt;&gt;</code> is a right shift operator, so we need to add a space.</p>
+<h1 id="section-21">17/7/14</h1>
+<h3 id="standard-template-library-stl">Standard Template Library (STL)</h3>
+<p>This is a huge library of many templates implementing everything from algorithms to data structures. One of the most useful are dynamic length arrays:</p>
+<pre><code>#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; v;
+    v.push_back(1); v.push_back(2); v.push_back(3);
+    // now `v` has 1, 2, 3
+    // `v` will resize itself as needed to store all the items
+    for (int i = 0; i &lt; v.size(); i ++)
+        std::cout &lt;&lt; v[i] &lt;&lt; std::endl; // array access with no range check
+    for (int i = 0; i &lt; v.size(); i ++)
+        std::cout &lt;&lt; v.at(i) &lt;&lt; std::endl; // array access with range checking (impossible to get out of bounds error)
+    for (std::vector&lt;int&gt;::iterator i = v.begin(); i != v.end(); i ++)
+        std::cout &lt;&lt; *i &lt;&lt; std::endl; // RECOMMENDED WAY OF ITERATING THROUGH A DATA STRUCTURE
+}</code></pre>
+<p>The iterators of data structures expose the same interface, which allows us to abstract enumeration of the objects in the structure. For example, we can use the same syntax to iterate through a linked list or a tree, where a normal for loop would need to be customized for each one. The iterator is an abstraction of a pointer.</p>
+<p><code>v.begin()</code> is the first element of the vector, while <code>v.end()</code> is one past the last element.</p>
+<p>Many ordered data structures also have something like <code>vector&lt;int&gt;::reverse_iterator</code>, which works the same as <code>vector&lt;int&gt;::iterator</code>, but starts at the end and goes toward the beginning. For this we use <code>v.rbegin()</code> to start and <code>v.rend()</code> in the for loop condition.</p>
+<p>Since iterators are simply abstractions over pointers, we can use them like pointers. <code>v.erase(v.begin())</code> removes the first element, <code>v.erase(v.begin() + 3)</code> removes the fourth, and <code>v.erase(v.end() - 1)</code> removes the last.</p>
+<p>Another useful data structure is the unordered dictionary:</p>
+<pre><code>#include &lt;map&gt;
+
+int main() {
+    std::map&lt;string, int&gt; m;
+    m[&quot;some string&quot;] = 1;
+    m[&quot;some other string&quot;] = 45;
+    m[&quot;something else&quot;] = 56;
+    m.erase(&quot;some other string&quot;); // overloaded version of `m.erase` that accepts a key
+    m.erase(m.begin()); // delete an arbitrary element
+    std::cout &lt;&lt; m.count(&quot;nonexistant&quot;) &lt;&lt; std::endl; // this is the number of keys that match a given key; in a map, this can only be 0 or 1, but other data structures might support duplicate keys
+    std::cout &lt;&lt; m[&quot;some string&quot;] &lt;&lt; std::endl;
+    for (map&lt;string, int&gt;::iterator i = m.begin(); i != m.end(); i ++)
+        std::cout &lt;&lt; *i &lt;&lt; std::endl; // element is not 
+}</code></pre>
+<h2 id="visitor-pattern">Visitor Pattern</h2>
+<p>The <strong>visitor pattern</strong> is used in order to do double dispatch - dispatching methods based on the type of multiple objects. It is also used for adding functionality to to a class heirarchy without changing any of the classes in the heirarchy.</p>
+<p>Consider the following:</p>
+<pre><code>class Enemy { ... };
+class Weak: public Enemy { ... };
+class Strong: public Enemy { ... };
+
+class Weapon { ... };
+class Rock: public Weapon { ... };
+class Stick: public Weapon { ... };</code></pre>
+<p>Suppose we want to add a <code>strike()</code> method that strikes an <code>Enemy</code>. What it does should depend on both the type of the enemy and the type of the weapon.</p>
+<p>We could put the method as <code>virtual void Enemy::strike(Weapon &amp;w)</code>, but it would only be dynamic dispatch based on the type of <code>Enemy</code>.</p>
+<p>We could put the method as <code>virtual void Weapon::useOn(Enemy &amp;w)</code>, but it would only be dynamic dispatch based on the type of <code>Weapon</code>.</p>
+<p>The solution is to combine overriding with overloading - the visitor pattern:</p>
+<pre><code>class Enemy {
+    ...
+    public:
+        virtual void strike(Weapon &amp;w) = 0;
+};
+class Weak: public Enemy {
+    ...
+    public:
+        // this method is dynamically dispatched based on the enemy type
+        void strike(Weapon &amp;w) { w.useOn(*this); } // the body is then dynamically dispatched based on the weapon type
+};
+class Strong: public Enemy {
+    ...
+    public:
+        void strike(Weapon &amp;w) { w.useOn(*this); }
+};
+
+class Weapon {
+    ...
+    public:
+        virtual void useOn(Weak &amp;e) = 0;
+        virtual void useOn(Strong &amp;e) = 0;
+};
+class Rock: public Weapon {
+    ...
+    public:
+        void useOn(Weak &amp;e) { ... };
+        void useOn(Strong &amp;e) { ... };
+};
+class Stick: public Weapon {
+    ...
+    public:
+        void useOn(Weak &amp;e) { ... };
+        void useOn(Strong &amp;e) { ... };
+};
+
+int main() {
+    Enemy *e = new Bullet;
+    Weapon *w = new Stick;
+    c-&gt;strike(*w); // this calls the correct method now
+}</code></pre>
+<p>Note that the correct <code>useOn</code> method is called automatically based on which type of <code>Enemy</code> and which type of <code>Weapon</code>. This is the purpose of the visitor pattern.</p>
+<h1 id="section-22">22/7/14</h1>
+<p>The visitor pattern also allows us to add functionality to a class heirarchy without changing the heirarchy itself. This is done by having the methods accept visitors. For example:</p>
+<pre><code>class BookVisitor { // abstract class
+    public:
+        visit(Book &amp;b) = 0;
+        visit(CSBook &amp;b) = 0;
+        visit(OtherBook &amp;b) = 0;
+};
+
+class Book {
+    ...
+    public:
+        virtual void accept(BookVisitor &amp;v) { v.visit(*this); }
+};
+
+class CSBook {
+    ...
+    public:
+        virtual void accept(BookVisitor &amp;v) { v.visit(*this); } // overloading based on the type of `*this`
+};
+
+class OtherBook {
+    ...
+    public:
+        virtual void accept(BookVisitor &amp;v) { v.visit(*this); }
+};</code></pre>
+<p><code>BookVisitor</code> and the rest of the class heirarchy is often implemented by the author. For example, the following counts the number of each type of object:</p>
+<pre><code>#include &lt;map&gt;
+using namespace std;
+
+class Catalogue: public BookVisitor {
+    int books = 0, csbooks = 0, otherbooks = 0;
+    public:
+        visit(Book &amp;b) { books ++; };
+        visit(CSBook &amp;b) { csbooks ++; };
+        visit(OtherBook &amp;b) { otherbooks ++; };
+        friend operator&lt;&lt;(ostream &amp;out, Catalogue &amp;c);
+};
+
+ostream &amp;operator&lt;&lt;(ostream &amp;out, Catalogue &amp;c) { out &lt;&lt; &quot;Books: &quot; &lt;&lt; books &lt;&lt; &quot;\tCSBooks: &quot; &lt;&lt; csbooks &lt;&lt; &quot;\tOtherBooks: &quot; &lt;&lt; otherbooks; }
+
+int main() {
+    vector&lt;book&gt; collection;
+    collection.push_back(new CSBook(&quot;A&quot;, &quot;B&quot;, 200, &quot;C++&quot;));
+    collection.push_back(new Book(&quot;C&quot;, &quot;D&quot;, 400));
+    // here we add the books to the collection
+    
+    Catalogue c;
+    for (vector&lt;book&gt;::iterator i = collection.begin(); i != collection.end(); i ++) (*i)-&gt;accept(v); // visit every book
+    cout &lt;&lt; c;
+}</code></pre>
+<p>Also, for <code>std::map</code> if the key doesn't exist when we try to access it with <code>SOME_MAP[SOME_KEY]</code>, the key is automatically created and the value is initialized to the default value and returned. So a previously unused element of <code>std::map&lt;std::string, int&gt;</code> will be 0 when first accessed.</p>
+<p>When we have a cyclic dependency, like <code>A.h</code> including <code>B.h</code> and <code>B.h</code> including <code>A.h</code>, we can restructure the code such that <code>A.h</code> includes <code>B.h</code>, and <code>B.h</code> simply uses forward declarations of all the things it needs. For example, the resolve cyclic dependencies we frequently need to use forward declarations of classes: <code>class A;</code> would be in <code>B.h</code> to avoid the need to include <code>A.h</code>. If we do this, we often need to actually include <code>A.h</code> in <code>B.cc</code>.</p>
+<h1 id="section-23">24/7/14</h1>
+<h2 id="bridge-pattern">Bridge Pattern</h2>
+<p>This is an extension of the &quot;pImplementation&quot; idiom with subclasses to abstract alternate implementations. It is often found in graphical applications, like when we switch the window style or a backend engine.</p>
+<svg fill-opacity="1" xmlns:xlink="http://www.w3.org/1999/xlink" color-rendering="auto" color-interpolation="auto" stroke="black" text-rendering="auto" stroke-linecap="square" width="400" stroke-miterlimit="10" stroke-opacity="1" shape-rendering="auto" fill="black" stroke-dasharray="none" font-weight="normal" stroke-width="1" viewBox="200 240 400 180" height="180" xmlns="http://www.w3.org/2000/svg" font-family="&apos;Dialog&apos;" font-style="normal" stroke-linejoin="miter" font-size="12" stroke-dashoffset="0" image-rendering="auto" >
+<defs id="genericDefs" /><g ><defs id="defs1" ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath1" ><path d="M0 0 L2147483647 0 L2147483647 2147483647 L0 2147483647 L0 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath2" ><path d="M0 0 L0 50 L110 50 L110 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath3" ><path d="M-0.5 -0.5 L-0.5 49.5 L109.5 49.5 L109.5 -0.5 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath4" ><path d="M0 0 L0 110 L120 110 L120 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath5" ><path d="M-0.5 -0.5 L-0.5 109.5 L119.5 109.5 L119.5 -0.5 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath6" ><path d="M0 0 L0 110 L130 110 L130 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath7" ><path d="M-0.5 -0.5 L-0.5 109.5 L129.5 109.5 L129.5 -0.5 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath8" ><path d="M0 0 L0 30 L130 30 L130 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath9" ><path d="M-0.5 -0.5 L-0.5 29.5 L129.5 29.5 L129.5 -0.5 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath10" ><path d="M0 0 L0 30 L120 30 L120 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath11" ><path d="M-0.5 -0.5 L-0.5 29.5 L119.5 29.5 L119.5 -0.5 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath12" ><path d="M0 0 L0 30 L100 30 L100 0 Z" /></clipPath ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath13" ><path d="M-0.5 -0.5 L-0.5 29.5 L99.5 29.5 L99.5 -0.5 Z" /></clipPath ></defs ><g font-family="sans-serif" font-size="14" transform="translate(290.5,260.5)" ><line y2="30" fill="none" x1="30" clip-path="url(#clipPath3)" x2="60" y1="30" /><line y2="30" fill="none" x1="60" clip-path="url(#clipPath3)" x2="90" y1="30" /><line y2="24" fill="none" x1="30" clip-path="url(#clipPath3)" x2="42" y1="30" /><line y2="36" fill="none" x1="30" clip-path="url(#clipPath3)" x2="42" y1="30" /><polygon fill="white" clip-path="url(#clipPath3)" points=" 30 30 42 24 54 30 42 36" stroke="none" /><polygon fill="none" points=" 30 30 42 24 54 30 42 36" clip-path="url(#clipPath3)" /></g ><g font-family="sans-serif" font-size="14" transform="translate(340.5,280.5)" ><line y2="60" fill="none" x1="100" clip-path="url(#clipPath5)" x2="100" y1="30" /><line y2="60" fill="none" x1="100" clip-path="url(#clipPath5)" x2="65" y1="60" /><line y2="60" fill="none" x1="65" clip-path="url(#clipPath5)" x2="30" y1="60" /><line y2="90" fill="none" x1="30" clip-path="url(#clipPath5)" x2="30" y1="60" /><line y2="42" fill="none" x1="100" clip-path="url(#clipPath5)" x2="106" y1="30" /><line y2="42" fill="none" x1="100" clip-path="url(#clipPath5)" x2="94" y1="30" /><polygon fill="white" clip-path="url(#clipPath5)" points=" 100 30 106 42 94 42" stroke="none" /><polygon fill="none" points=" 100 30 106 42 94 42" clip-path="url(#clipPath5)" /></g ><g font-family="sans-serif" font-size="14" transform="translate(410.5,280.5)" ><line y2="60" fill="none" x1="30" clip-path="url(#clipPath7)" x2="30" y1="30" /><line y2="60" fill="none" x1="30" clip-path="url(#clipPath7)" x2="70" y1="60" /><line y2="60" fill="none" x1="70" clip-path="url(#clipPath7)" x2="110" y1="60" /><line y2="90" fill="none" x1="110" clip-path="url(#clipPath7)" x2="110" y1="60" /><line y2="42" fill="none" x1="30" clip-path="url(#clipPath7)" x2="36" y1="30" /><line y2="42" fill="none" x1="30" clip-path="url(#clipPath7)" x2="24" y1="30" /><polygon fill="white" clip-path="url(#clipPath7)" points=" 30 30 36 42 24 42" stroke="none" /><polygon fill="none" points=" 30 30 36 42 24 42" clip-path="url(#clipPath7)" /></g ><g font-size="14" transform="translate(450.5,370.5)" fill-opacity="0" fill="rgb(255,255,255)" font-family="sans-serif" stroke="rgb(255,255,255)" stroke-opacity="0" ><rect x="0" y="0" clip-path="url(#clipPath9)" width="129" opacity="0" height="29" stroke="none" /></g ><g font-family="sans-serif" font-size="14" transform="translate(450.5,370.5)" ><rect fill="none" x="0" width="129" height="29" y="0" clip-path="url(#clipPath9)" /><text x="13" xml:space="preserve" y="17" clip-path="url(#clipPath9)" stroke="none" >ImplementationB</text ></g ><g font-size="14" transform="translate(300.5,370.5)" fill-opacity="0" fill="rgb(255,255,255)" font-family="sans-serif" stroke="rgb(255,255,255)" stroke-opacity="0" ><rect x="0" y="0" clip-path="url(#clipPath9)" width="129" opacity="0" height="29" stroke="none" /></g ><g font-family="sans-serif" font-size="14" transform="translate(300.5,370.5)" ><rect fill="none" x="0" width="129" height="29" y="0" clip-path="url(#clipPath9)" /><text x="13" xml:space="preserve" y="17" clip-path="url(#clipPath9)" stroke="none" >ImplementationA</text ></g ><g font-size="14" transform="translate(380.5,280.5)" fill-opacity="0" fill="rgb(255,255,255)" font-family="sans-serif" stroke="rgb(255,255,255)" stroke-opacity="0" ><rect x="0" y="0" clip-path="url(#clipPath11)" width="119" opacity="0" height="29" stroke="none" /></g ><g font-family="sans-serif" font-size="14" transform="translate(380.5,280.5)" ><rect fill="none" x="0" width="119" height="29" y="0" clip-path="url(#clipPath11)" /><text font-style="italic" x="12" xml:space="preserve" y="17" clip-path="url(#clipPath11)" stroke="none" >Implementation</text ></g ><g font-size="14" transform="translate(220.5,280.5)" fill-opacity="0" fill="rgb(255,255,255)" font-family="sans-serif" stroke="rgb(255,255,255)" stroke-opacity="0" ><rect x="0" y="0" clip-path="url(#clipPath13)" width="99" opacity="0" height="29" stroke="none" /></g ><g font-family="sans-serif" font-size="14" transform="translate(220.5,280.5)" ><rect fill="none" x="0" width="99" height="29" y="0" clip-path="url(#clipPath13)" /><text font-style="italic" x="15" xml:space="preserve" y="17" clip-path="url(#clipPath13)" stroke="none" >Abstraction</text ></g ></g >
+</svg >
+
+<p>The bridge pattern makes it easy to swap out implementations. It separates an abstraction from its implementation so we can change either separately.</p>
+<h2 id="casting">Casting</h2>
+<p>Casting allows us to bypass the type system - a manual override for type checking. In C, its syntax appeared as <code>Node n; int *p = (int *)&amp;n;</code>.</p>
+<p>Casting is difficult to get right and is a common source of bugs. It is</p>
+<p>C++ has 4 types of casts. These casts stands out more in the code and have some small restrictions.</p>
+<ol style="list-style-type: decimal">
+<li><code>static_cast</code> simply converts one type to another: <code>int i = static_cast&lt;int&gt; some_double</code>.
+<ul>
+<li>Reasonably robust way of converting between types.</li>
+<li>This is often used to convert a superclass pointer into a subclass pointer.</li>
+<li>This is relatively safe because the compiler gives an error if the cast doesn't make any sense, though it won't catch everything.</li>
+<li>If a casted value isn't actually of the desired type, the behaviour is undefined.</li>
+</ul></li>
+<li><code>reinterpret_cast</code> converts one type to another without checking if it is reasonable: <code>Vec v; Book *b = reinterpret_cast&lt;Book *&gt;&amp;v</code>.
+<ul>
+<li>This is an unsafe, compiler dependent way of casting.</li>
+<li>It is similar to <code>static_cast</code>, but it will also try to cast even if it doesn't make sense.</li>
+<li>The bits of one type are simply reinterpreted as another type, which can have entirely inconsistent behaviour.</li>
+</ul></li>
+<li><code>const_cast</code> converts a constant type into a non-constant type, or a non-constant type to a constant type: <code>const int i = 5; *(const_cast&lt;int *&gt;&amp;i) = 6;</code>
+<ul>
+<li>Often used on pointers to constant objects to remove the const flag and modify them.</li>
+<li>This often violates assumptions and allows code to modify things it shouldn't have access to.</li>
+</ul></li>
+<li><code>dynamic_cast</code> safely converts one type to another: <code>Book *b = &amp;some_book; CSBook *c = dynamic_cast&lt;CSBook *&gt;b</code>.
+<ul>
+<li>This tentatively converts a type to another, and checks if it works.</li>
+<li>If it works, it results in a pointer to the desired type, and results in null otherwise.</li>
+<li>This has no undefined behaviour, and is the safest out the the possible types of casts.</li>
+</ul></li>
+</ol>
+<p>Casting allows us to do things like converting a <code>Book</code> pointer to a <code>CSBook</code> object back into a <code>CSBook</code> pointer.</p>
+<p><code>dynamic_cast</code> gives us runtime type information, and allows code to make decisions based on the runtime type of an object, since if the cast doesn't work the value is null. For example, <code>if (dynamic_cast&lt;CSBook *&gt;b) { ... }</code> does something if <code>b</code> is a <code>CSBook</code>. However, this should be avoided because it is highly coupled - it is inflexible to changes in the class heirarchy.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

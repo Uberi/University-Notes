@@ -445,6 +445,8 @@ The basic procedure is as follows:
 4. Solve system of equations to obtain the mesh currents.
 5. Use mesh currents to determine branch currents.
 
+For the KVL equations, sources should have their voltage added and loads should have their voltage subtracted.
+
 # 28/5/14
 
 ;wip: mesh analysis continued, supermeshes
@@ -822,16 +824,132 @@ The **root mean squared** (RMS) is represented $V_{RMS}$ and is the DC voltage t
 
 The average power of an AC waveform $V_{AC}(t)$ is $P = \frac{V_{RMS}^2}{R}$. It can also be derived to be $\frac 1 T \int_0^T \frac{V_{AC}^2}{R} \dee t$. So $V_{RMS} = \sqrt{\frac 1 T \int_0^T V^2 \dee t}$.
 
-For a sine wave, $V_{RMS} = \frac{\max(V_{AC})}{\sqrt{2}}$ - it is $\frac 1 {\sqrt{2}}$ times the amplitude of a sine wave. In the same way, $I_{RMS} = \frac{\max{I_{AC}}}{\sqrt{2}}$ for current sources.
+For a sine wave, $V_{RMS} = \frac{\max(V_{AC})}{\sqrt{2}}$ - it is $\frac 1 {\sqrt{2}}$ times the amplitude of a sine wave. In the same way, $I_{RMS} = \frac{\max(I_{AC})}{\sqrt{2}}$ for current sources.
 
-In AC circuits, **impedance** ($Z$) is the voltage divided by the current - $Z = \frac{V}{I} = \frac{\magn{V}}{\magn{I}}\angle(\theta_V - \theta_I)$. However, both the voltage and current are angles. An element with impedance is represented with the a rectangle in circuits.
+In AC circuits, **impedance** ($Z$) is the voltage divided by the current - $Z = \frac{V}{I} = \frac{\magn{V}}{\magn{I}}\angle(\theta_V - \theta_I)$. However, both the voltage and current are angles. In circuit diagrams, an element with impedance is represented with the a rectangle with a $Z$ inside.
+
+Impedance is a generalization of resistance in DC circuits. It is, in general, the amount of opposition a circuit gives to the current given an applied voltage.
 
 Impedance is still measured in Ohms, but describes capacitors and inductors in addition to resistors. When we have impedance in rectangular form, $Z = R + \imag X$, $R$ is the resistance and $X$ is the **reactance**. The reactance of a circuit element is the opposition of change in voltage or current in a circuit. It basically determines how far the current will lag or lead the voltage.
 
-For resistors, $V \angle \theta = I \angle \theta R$, so $Z = \frac{V \angle \theta}{I \angle \theta} = \frac V I = R$. So for resistors, the impedance is just the resistance. This is because the voltage and current are both in phase for resistors due to Ohm's law, so they cancel out the angles.
+For resistors, $V \angle \theta = I \angle \theta R$, so $Z = \frac{V \angle \theta}{I \angle \theta} = \frac V I = R$. So for resistors, the impedance is just the resistance. This is because the voltage and current are both in phase for resistors due to Ohm's law for resistances, so they cancel out the angles.
 
-For inductors, $V(t) = L \frac{\dee I}{\dee t} = L \max{I}\frac{\dee}{\dee t} \cos(\omega t + \theta) = \omega L \max{I} \cos\left(\omega t + \theta + \frac \pi 2\right)$ and $I(t) = \max(I) \cos(\omega t + \theta)$. So $V = \omega L\max(I) \angle\left(\theta + \frac \pi 2\right)$ and $\max(I) \angle \theta$ and $Z = \omega L \angle \frac \pi 2$, so for an inductor it affects only the imaginary component.
+For inductors, $V(t) = L \frac{\dee I}{\dee t} = L \max(I)\frac{\dee}{\dee t} \cos(\omega t + \theta) = \omega L \max(I) \cos\left(\omega t + \theta + \frac \pi 2\right)$ and $I(t) = \max(I) \cos(\omega t + \theta)$. So $V = \omega L\max(I) \angle\left(\theta + \frac \pi 2\right)$ and $\max(I) \angle \theta$ and $Z = \omega L \angle \frac \pi 2$, so for an inductor it affects only the imaginary component.
 
 For capacitors, $I(t) = \max(I) \cos(\omega t + \theta)$ and $V(t) = \frac 1 C \int_0^T \max(I) \cos(\omega t + \theta) = \frac{\max(I)}{\omega C} \cos\left(\omega t + \theta - \frac \pi 2\right)$. So $Z = \frac{1}{\omega C} \angle\left(-\frac \pi 2\right)$, so for an inductor it affects only the imaginary component
 
 So when we have an inductor, the current will be lagging the voltage by 90 degrees, and when we have a capacitor, the voltage will be lagging the current by 90 degrees. Capac itors and inductors are purely reactive, while resistors are purely resistive.
+
+# 14/7/14
+
+Impedance is a complex value measured in Ohms, where the real part is the resistance and the imaginary part is the reactance.
+
+For inductors, $V = L\frac{\dee I}{\dee t}$ and $I(t) = \max(I) \sin(\omega t)$, so $V(t) = L\frac{\dee}{\dee t}\max(I) \sin(\omega t) = L\omega \max(I) \cos(\omega t)$.
+
+So $Z = \frac{V(t)}{I(t)} = \frac{L\omega \max(I) \cos(\omega t)}{\max(I) \sin(\omega t)} = \frac{L\omega \sin\left(\omega t + \frac \pi 2\right)}{\sin(\omega t)} = L\omega \angle \frac \pi 2 = \imag \omega L$. The impedance of an inductor is always a non-negative imaginary number.
+
+Basically, the voltage-time graph leads the current-time graph by 90 degrees.
+
+For capacitors, $I = C\frac{\dee V}{\dee t}$ and $V(t) = \max(V) \sin(\omega t)$, so $I(t) = C\frac{\dee}{\dee t}\max(V) \sin(\omega t) = C\omega \max(V) \cos(\omega t)$.
+
+So $Z = \frac{V(t)}{I(t)} = \frac{\max(V) \sin(\omega t)}{C\omega \max(V) \cos(\omega t)} = \frac{\sin(\omega t)}{C\omega \sin\left(\omega t + \frac \pi 2\right)} = \frac 1 {C\omega} \angle \left(-\frac \pi 2\right) = -\imag \frac 1 {\omega C} \cdot \frac{\imag}{\imag} = \frac{1}{\imag \omega C}$. We usually use the $\frac{-\imag}{\omega C}$ representation. The impedance of a capacitor is always a non-positive imaginary number.
+
+Basically, the voltage-time graph lags the current-time graph by 90 degrees.
+
+If the reactance is positive, the component is an inductive load. If the reactance is negative, the component is a capacitive load. If it is 0, the component is neither.
+
+Ohm's law also works for impedance, so $V = IZ$ where $V$ is the voltage across an element, $I$ is the current flowing through the element, and $Z$ is the impedance. However, since all three variables are now complex values, they are a bit more difficult to calculate.
+
+Note that $\max(V) = \max(I)\abs{Z}$ - the magnitude of the impedance is the factor of proportionality between the voltage and current.
+
+Note that $\abs{V} = \abs{I}\abs{Z}, \theta_V = \theta_I + \theta_Z$ - the magnitude of the impedance scales the voltage to the current and the angle offsets the angle of the voltage from the current.
+
+# 15/7/14
+
+If we have a resistor, a capacitor, and an inductor all in series, then the impedenace is $Z = R + \imag \omega L - \imag \frac{1}{\omega C}$.
+
+In series circuits, $Z_{eq} = Z_1 + \ldots Z_n$. In parallel circuits, $\frac 1 {Z_{eq}} = \frac 1 {Z_1} + \ldots + \frac 1 {Z_n}$. This is similar to how resistances work. As a result, we can use the product over sum rule $Z_{eq} = \frac{Z_1 Z_2}{Z_1 + Z_2}$.
+
+We can therefore replace a network of impedances with a single equivalent impedance. This allows us to significantly simplify certain impedance networks.
+
+To solve circuits using equivalent impedances:
+
+1. Represent $V(t)$ in phasor form.
+2. Find the impedance $Z$ for every component in rectangular form.
+3. If two components are in series, replace them with another impedance equal to their sum.
+4. If two components are in parallel, replace them with another impedance equal to $\frac{Z_1 Z_2}{Z_1 + Z_2}$.
+5. When there is only one impedance left, this value is the equivalent impedance.
+6. Find $I = \frac{V(t)}{Z}$.
+7. Find the voltage across each element using $V = IZ$ - Ohm's law.
+
+When converting rectangular into polar form, it is important to consider the angle on the Cartesian plane and have it in the correct quadrant, since $\arctan$ can be ambiguous in certain quadrants.
+
+AC steady state does not have constant current or voltage, but the current and voltage on everything is periodic. In DC steady state, the voltage and current on everything is constant.
+
+# 16/7/14
+
+In engineering we often use $j$ instead of $\imag$, since the variable $i$ is already used to represent current.
+
+Voltage and current division formulas also work with impedance. Given two impedances $Z_1, Z_2$ in parallel, the current through $Z_1$ is $Z_{eq} = I_{total}\frac{Z_2}{Z_1 + Z_2}$. Given two impedances $Z_1, Z_2$ in series, the voltage across $Z_1$ is $V_{total}\frac{Z_1}{Z_1 + Z_2}$.
+
+;wip: transcribe the big equivalent impedance example in notebook
+
+# 17/7/14
+
+We can also perform nodal and mesh analysis on circuits in AC steady state. When we do this, we simply treat the phasors as values, and treat them as the voltages and current values.
+
+;wip: transcribe from notebook
+
+# 22/7/14
+
+The impedance of a resistor is $R = R \angle 0$. The impedance of an inductor is $\imag \omega L = \omega L \angle \frac \pi 2$. THe impedance of a capacitor is $\imag \frac{-1}{\omega C} = \frac{1}{\omega C} \angle \left(-\frac \pi 2\right)$.
+
+Also, $\cos a \cos b = \frac 1 2 \cos(a - b) + \frac 1 2 \cos(a + b)$ and $\cos a \cos b - \sin a \sin b$.
+
+Clearly, $V(t) = \max(V) \cos(\omega t + \theta_V)$ and $I(t) = \max(I) \cos(\omega t + \theta_I)$.
+
+If we transform both graphs such that the angle offset of $I(t)$ is 0, we get $V(t) = \max(V) \cos(\omega t + \theta_V - \theta_I)$ and $I(t) = \max(I) \cos(\omega t)$. Clearly, the power from these waveforms is the same as the power from the original waveforms.
+
+Then the instantaneous power is $P(t) = \max(I) \cos(\omega t) \max(V) \cos(\omega t + \theta_V - \theta_I) = \max(I)\max(V) \frac 1 2 \left(\cos(\theta_V - \theta_I) + \cos(2\omega t + \theta_V - \theta_I)\right) = \frac{\max(I)\max(V)}{2} \left(\cos(\theta_V - \theta_I) + \cos(2\omega t) \cos(\theta_V - \theta_I) - \sin(2\omega t) \sin(\theta_V - \theta_I)\right) = \frac{\max(I)\max(V)}{2} \cos(\theta_V - \theta_I) \left(1 + \cos(2\omega t)\right) - \frac{\max(I)\max(V)}{2} \sin(\theta_V - \theta_I) \sin(2\omega t)$.
+
+Clearly, the average value of $\left(1 + \cos(2\omega t)\right)$ is 1 and the average value of $\frac{\max(I)\max(V)}{2} \sin(\theta_V - \theta_I)$ is 0.
+
+So the **real power** average for AC is $P = \frac{\max(I)\max(V)}{2} \cos(\theta_V - \theta_I)$.
+
+There is also the **reactive power** for AC, which is $Q = \frac{\max(I)\max(V)}{2} \sin(\theta_V - \theta_I)$ on average. Reactive power is measured in $\mathrm{Vars}$, the imaginary part of power. Power itself is still measured in Watts.
+
+This is the power taken and given back repeatedly in the circuit, but do not actually do anything in terms of energy. Capacitors and inductors can store and release energy over the course of a waveform, but on average they have 0 power. However, we must still take this into account when designing circuits - if the reactive power is 20 W and the real power is 100 W, the power supply must be able to give out 120 W to deliver 100 W to the circuit at all times.
+
+Note that since $V_{RMS} = \frac{\max(V)}{\sqrt{2}}, I_{RMS} = \frac{\max(I)}{\sqrt{2}}$, $\frac{\max(I)\max(V)}{2} = V_{RMS}I_{RMS}$. Also, $V_{RMS} = I_{RMS}Z$ by Ohm's law. So $P = I_{RMS} V_{RMS} \cos(\theta_V - \theta_I)$ and $Q = I_{RMS} V_{RMS} \sin(\theta_V - \theta_I)$.
+
+For a resistor, $\theta_V - \theta_I = 0$, so the active power is $\frac{\max{V}\max{I}}{2} = V_{RMS}I_{RMS} = I_{RMS}^2 R$ and reactive power is 0.
+
+For an inductor, current lags voltage and $\theta_V - \theta_I = \frac \pi 2$, so active power is 0 and reactive power is $\frac{\max(I)\max(V)}{2} = V_{RMS}I_{RMS} = I_{RMS} \omega L$.
+
+For a capacitor, voltage lags current and $\theta_V - \theta_I = -\frac \pi 2$, so the active power is 0 and reactive power is $-\frac{\max(I)\max(V)}{2} = -V_{RMS}I_{RMS} = -I_{RMS}^2 \frac 1 {\omega C}$.
+
+# 23/7/14
+
+The $\cos(\theta_V - \theta_I)$ term is known as a **power factor**, and is the ratio of the actual power to the maximum possible power for the given voltage and current RMS values. Ideally, we would like this value to be as close to 1 as possible, so the power is used most efficiently. The power factor is directly correlated to efficiency.
+
+A positive reactive power value in the load means the load is inductive. A negative reactive power value in the load means the load is capacitive.
+
+**Apparent power** is the power that a circuit actually will require, though it might not use up the energy. This is measured in Volt-Amperes, which is distinct from Watts for AC, and $S = V_{RMS} I_{RMS}^* = \abs{V_{RMS}} \abs{I_{RMS}^*} \angle(\theta_V - \theta_I) = \abs{V_{RMS}} \abs{I_{RMS}} \cos(\theta_V - \theta_I) + \imag \abs{V_{RMS}} \abs{I_{RMS}} \sin(\theta_V - \theta_I) = P + \imag Q$, where $I_{RMS}^*$ is the complex conjugate of $I_{RMS}$. In other words, it is an imaginary number that has both the real power and reactive power as components.
+
+The **power triangle** is a drawing of the apparent power vector $P + \imag Q$ on a Cartesian plane with real and imaginary axes.
+
+So $S = P + \imag Q = I_{RMS} V_{RMS} \angle(\theta_V - \theta_I)$. Also, $\theta_V - \theta_I = \arctan \frac Q P$.
+
+# 24/7/14
+
+$S = VI = P + \imag Q = I^2 R + \imag I^2 X$ is the **complex power**, while $\abs{S}$ is the **apparent power**. When we have multiple elements in a circuit, the total power is the sum of the power on all the components.
+
+**Power factor correction** is a technique where we add circuit elements that increase the power factor and therefore the efficiency. For example, if we have a highly inductive load, we might add a capacitor to decrease the reactive power and increase the real load so that the efficiency is increased. This is because the apparent power is decreased, so we can use a smaller power supply.
+
+For example, with an inductive load we would add a capacitor in parallel since in the original circuit, $S = P + \imag Q_L$ for a positive $Q_L$. The parallel capacitor would then make the power $S = P + \imag Q_L + \imag Q_C$ for a negative $Q_C$, which helps us lower the imaginary component of and improve efficiency.
+
+Leading means that the current leads the voltage, $Q$ is negative, and the load is capacitive. Lagging means the current lags the voltage, $Q$ is positive, and the load is inductive.
+
+Also, $S = I_{RMS} V_{RMS}$, so $S = \frac{P}{\cos(\theta_V - \theta_I)} = \frac{Q}{\sin(\theta_V - \theta_I)}$.
+
+Power loss is the real power that is consumed by a component. We usually find this using $I^2 R$ or $\frac{V^2}{R}$.

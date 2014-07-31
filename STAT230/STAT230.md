@@ -611,7 +611,7 @@ Individual events means that $P(\text{2 or more events in same interval } (t, t 
 Hommogeneity/uniformity means that the events occur at a uniform rate $\lambda$ over some dimension (usually time or space) so that $P(\text{one event in interval } (t, t + \
 Delta t)) = \lambda \Delta t o(\Delta t)$.
 
-If a process/experiment satisfies these three properties, then it is a **Poission process** and $\mu = \lambda t$.
+If a process/experiment satisfies these three properties, then it is a **Poisson process** and $\mu = \lambda t$.
 
 $\lambda$ is the average rate of events per unit dimension (usually time or space). $\mu$ is the average number of occurrences over an interval $t$. Clearly, $\mu = \lambda t$.
 
@@ -898,7 +898,7 @@ $\operatorname{Var}(aX + bY) = a^2 \operatorname{Var}(X) + b^2 \operatorname{Var
 
 $\operatorname{Var}(\sum a_i X_i) = \sum a_i \operatorname{Var}(X_i) + 2 \sum_{i < j} a_i a_j \operatorname{Cov}(X_i, X_j)$.
 
-$\sigma_{\overline X}^2 = \frac{\sigma_X^2}{n}$.
+$\sigma_{\overline X}^2 = \frac{\sigma_X^2}{n}$ where $n$ is the number of samples - the variance of the complement is inversely correlated to the number of samples in $X$.
 
 So when we increase $n$, $\sigma_{\overline X}^2$ gets smaller and smaller. This is because when we add more data to our sample set, our sample average becomes closer to the true expected value.
 
@@ -926,7 +926,7 @@ The probability that $a \le X \le b$ is therefore $\int_a^b f(x) \dee x$. This i
 
 The **cumulative distribution function** (CDF) is similar to those in discrete variables. It is $P(X \le x)$ and here, $F(-\infty) = 0, F(\infty) = 1$, $F$ is non-decreasing, and $P(a \le X \le b) = F(b) - F(a)$.
 
-So $F_X(x) = \int_0^k f_X(x) \dee x$ and $f_X(x) = \frac{\dee F_X(x)}{\dee x}$. As a result, $f_X(x)$ can actually be more than 1 - it does not have an upper bound (it does have a lower bound since $F_X$ is non-decreasing).
+So $F_X(x) = \int_{-\infty}^x f_X(t) \dee t$ and $f_X(x) = \frac{\dee F_X(x)}{\dee x}$. As a result, $f_X(x)$ can actually be more than 1 - it does not have an upper bound (it does have a lower bound since $F_X$ is non-decreasing).
 
 $f_X(x)$ is not the same as $P(X = x)$, but rather $f(x) \Delta x$ is the probability that $X$ is in the very small interval $\Delta x$.
 
@@ -944,3 +944,167 @@ Let $F_X(x) = \frac x 4, 0 \le x \le 4$ and $Y = \frac 1 X$. Find the PDF of $Y$
 > Since $0 \le x \le 4$, $\frac 1 4 \le y \le \infty$.  
 
 The expected value for continuous random variables is $\int_{\text{all } x} x \cdot f_X(x) \dee x$.
+
+# 14/7/14
+
+Continuous Uniform Distribution
+-------------------------------
+
+* $X \in [a, b]$ - a closed interval.
+* All subintervals of a given length are equally likely.
+
+If this is the case, then $X$ has a continuous uniform distribution and $f_X(x) = k$. However, $\int_a^b f_X(x) \dee x = 1$, so $\evalat{kx}_a^b = 1$ and $k = \frac{1}{b - a}$. So $f_X(x) = \frac{1}{b - a}$ and $F_X(x) = \int_a^x f_X(t) \dee t = \begin{cases} 0 &\text{if } x < a \\ \frac{x}{b - a}  &\text{if } a \le x \le b \\ 1 &\text{if } b < x \end{cases}$.
+
+The mean is $\mu_X = \frac{b + a}{2}$ and the variance is $\sigma_X^2 = \frac{(b - a)^2}{12}$.
+
+If $f_U(u) = 0.1e^{-0.1u}, u > 0$, then $Y = e^{-0.1U}$ has a continuous uniform distribution.
+
+This is because $F_Y(y) = P(e^{-0.1u} \le y) = P(-0.1u \le \ln y) = P(u \le -10 \ln y) = F_U(-10\ln y)$. Since $F_U(u) = \int_0^u 0.1e^{-0.1t} \dee t = 1 - e^{-0.1u}$, $F_Y(y) = e^{-0.1(-10\ln y)} = y$, so $f_Y(y) = 1$. ;wip: wait what this can't be right
+
+In this way we can use this distribution to transform anything into a continuous uniform distribution.
+
+Exponential Distribution
+------------------------
+
+Physical Setup:
+
+* Event is a Possion process - independent, uniform, and homogeneous.
+* Events occur at rate $\lambda$ per unit time.
+* $X$ is the length of time we wait until the first occurrence of the event.
+
+If this is the case, then $X$ has an exponential distribution, and $f_X(x) = $.
+
+Clearly, $F_X(x) = P(X \le x)$. If $Y$ is the number of events occurring in an interval of length $x$, then $Y \sim \operatorname{Pois}(\lambda x)$.
+
+So $F_X(x) = 1 - P(\text{time to first occurrence} > x) = 1 - P(Y = 0) = 1 - \frac{e^{-\lambda x}(\lambda x)^0}{0!} = 1 - e^{-\lambda x}$.
+
+So $f_X(x) = \lambda e^{-\lambda x}$. Sometimes, we also write it in terms of $\theta = \frac 1 \lambda$. Here, $\theta$ represents the average amount of time before an event occurring, as opposed to $\lambda$, which is the average rate of occurrence per unit time.
+
+$\lambda$ is the frequency, $\theta$ is the period.
+
+It is important to distinguish between counting the number of occurrences of an event in an interval, and counting the time until an occurrence.
+
+The mean and variance would need to be found using integration by parts. Instead, we will use the **Gamma function** - $\Gamma(a) = \int_0^\infty x^{a - 1}e^{-x} \dee x$. For positive integer values of $a$, this is equivalent to $(a - 1)!$ - the gamma function is a generalization of the factorial.
+
+Clearly, $\Gamma(a) = (a - 1)\Gamma(a - 1)$. So $\Gamma(5) = 4! = 24$. Also, $\Gamma\left(\frac 1 2\right) = \sqrt{\pi}$.
+
+So $E(X) = \int_0^\infty x \lambda e^{-\lambda x} \dee x$. Let $u = \lambda x$. Then $E(X) = \frac 1 \lambda \int_0^\infty ue^{-u} \dee u = \frac 1 \lambda \Gamma(2) = \frac 1 \lambda$. In the same way, $\operatorname{Var}(X) = \frac 1 {\lambda^2}$.
+
+# 16/7/14
+
+The **memoryless property** states that $P(X > a + b \mid X > b) = P(X > a)$. This means that if we have been waiting for 10 minutes already and someone comes and starts waiting, we both have the same probability of observing the event. In other words, given that we have already waited so long, it is exactly the same as if we just started observing.
+
+Normal Distribution
+-------------------
+
+Physical setup:
+
+* $X \in (-\infty, \infty)$.
+* $X$ has a normal distribution.
+
+If all of the above are satisfied, then $X \sim \operatorname{N}(\mu, \sigma^2)$ and $f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac 1 2 \left(\frac{x - \mu}{\sigma}\right)^2}, -\infty < x < \infty$. Also, $\mu = E(X)$ and $\sigma^2 = \operatorname{Var}(x)$.
+
+The normal distribution is symmetric, so $f_X(-x) = f_X(x)$, and looks like a bell curve centered around $x = \mu$.
+
+Note that the physical setup did not give any constraints that directly imply a variable has a normal distribution. This is because the normal distribution appears in so many different setups that it is difficult to list all of them. For example, a random variable representing height in a population follows a normal distribution, or adding up a large number of uniform random variables. In fact, most of the random variables we deal with in statistics follows a normal distribution.
+
+$F_X(x) = \int_{-\infty}^x \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac 1 2 \left(\frac{t - \mu}{\sigma}\right)^2} \dee t$ doesn't simplify very well, so we often use numerical methods such as probability tables to approximate $F_X(x)$.
+
+The **standard normal distribution** is $Z \sim \operatorname{N}(0, 1)$. This is the one we make the probability tables for.
+
+If $X \sim \operatorname{N}(\mu, \sigma^2)$, then $\frac{X - \mu}{\sigma} = Z$ - we can transform any normally distributed variable into the standard normal distribution.
+
+# 18/7/14
+
+The normal distribution is also known as the **Gaussian distribution**, $\operatorname{G}(\mu, \sigma)$. This differs slightly from the normal distribution since we pass $\sigma$ instead of $\sigma^2$. So $X \sim N(1, 4)$ is the same as $X \sim G(1, 2)$.
+
+For example, let $X \sim \operatorname{N}(3, 25)$. Then $P(x < 2) = P(\frac{x - \mu}{\sigma} < \frac{2 - 3}{25}) = P(z > 0.4) = 1 - P(z \le 0.4) = 0.34458$.
+
+;wip: finish copying this
+
+Let $X \sim \operatorname{N}(\mu, \sigma^2)$. Then $aX + b \sim \operatorname{N}(a\mu + b, a^2\sigma^2)$, since $E(aX + b) = E(aX + b) = aE(x) + b$.
+
+Let $X \sim \operatorname{N}(\mu_1, \sigma_1^2)$ and $Y \sim \operatorname{N}(\mu_2, \sigma_2^2)$. Then $aX + bY \sim \operatorname{N}(a\mu_1 + b\mu_2, a^2\sigma_1^2 + b^2\sigma_2^2)$, since $E(aX + bY) = aE(X) + bE(Y)$ and $\operatorname{Var}(aX + bY) = \operatorname{Var}(aX) + \operatorname{Var}(bY) = a^2\operatorname{Var}(X) + b^2\operatorname{Var}(Y)$. ;wip: check this in the slides
+
+"iid" stands for independently and identically distributed. If $X_1, \ldots, X_n \sim \operatorname{N}(\mu, \sigma^2)$, then $X_1 + \ldots + X_n \sim \operatorname{N}\left(\mu, \frac 1 n \sigma^2\right)$.
+
+Let $X \sim \operatorname{N}(3, 5), Y \sim \operatorname{N}(6, 14)$. Find $P(X > Y)$:
+
+> Let $W = X - Y$. Then $W \sim \operatorname{N}(-3, 19)$.  
+> Clearly, $P(X > Y) = P(W > 0) = P\left(\frac{w - \mu_W}{\sigma_W} > \frac{0 - (-3)}{\sqrt{19}}\right) = 1 - P(z < 0.69) = 1 - 0.7549 = 0.2451$.  
+
+# 21/7/14
+
+Let $X \sim \operatorname{N}(5, 4), Y \sim \operatorname{N}(7, 9)$. What is the probability that $2X$ differs from $Y$ by more than 4?
+
+> Clearly, the probabilility is $P(\abs{2X - Y} > 4) = P(2X - Y > 4) + P(2X - Y < -4)$. Clearly, $E(2X - Y) = 2E(X) - E(Y) = 2 \cdot 5 - 7 = 3$.  
+> So $\operatorname{Var}(2X - Y) = 25$ ;wip: how?
+> So $P(\abs{2X - Y} > 4) = P\left(Z > \frac{4 - 3}{\sqrt{25}}\right) + P\left(Z < \frac{-4 - 3}{\sqrt{25}}\right) = P\left(Z > \frac 1 5\right) + P\left(Z < \frac{-7} 5\right) = \left(1 - P\left(Z < \frac 1 5\right)\right) + \left(1 - P\left(Z < \frac 7 5\right)\right) \approxeq $.  ;wip
+
+The normal distribution can be used to approximate linear combinations of variables with non-normal distributions. This is due to the **central limit theorem** - sums of random variables tend to approach a normal distribution.
+
+As we add up more and more random variables, the central limit theorem tells us that the sum of all the variables approximates a normal distribution.
+
+If $X_1, \ldots, X_n$ are independent random variables with the same distribution with mean $\mu$ and variance $\sigma^2$, then as $n \to \infty$, the cumulative distribution function $\frac{\sum X_i - n\mu}{\sigma \sqrt{n}}$ (discrete) and the cumulative density function $\frac{\overline X - \mu}{\frac{\sigma}{\sqrt{n}}}$ (continuous) approaches $\operatorname{N}(0, 1)$.
+
+We often use this to approximate multiple distributions when $n$ is large. Note that this works even if $X_1, \ldots, X_n$ has a non-normal distribution, like exponential or binomial. In fact, it works for any distribution that has a mean and variance. The accuracy of the approximation depends on how large $n$ is and how symmetric the distributions are.
+
+So for large $n$, $\sum_{i = 0}^n X_i \sim \operatorname{N}(n \mu, n \sigma^2)$. Also , $\overline X \sim \operatorname{N}\left(\mu, \frac{\sigma^2}{n}\right)$
+
+# 23/7/14
+
+When we use a continuous random distribution to approximate a discrete distribution, we need to make slight adjustments to make the approximation more accurate. This is because on a histogram, the continuous distribution is based on the left edge of the rectangle, when the center of the rectangle is a better approximation.
+
+This is called the **continuity correction** - the correction that improves continuous approximations of discrete distributions.
+
+This correction can be seen from a graph sketch. When we have something like $P(X \le x)$ where $X$ is a discrete distribution like Poisson or Binomial, then $P(X \le x) = P(X < x + 1)$. So if $Y$ is a normal distribution, then $P(X \le x + 0.5)$ is a better approximation than $P(X \le x)$, since it accounts for the value at the center of the rectangle rather than at the left. This is a similar idea to the Riemann sum approximation.
+
+We apply the continuity correction as soon as we make the approximation, before we do any standardization into $Z$.
+
+Also, if $X \sim \operatorname{Pois}(\mu)$ and $Y = \frac{X - \mu}{\sqrt{\mu}}$, then $Y$ approximates $\operatorname{N}(0, 1)$.
+
+We don't always add 0.5, but we do if the unit is assumed to be 1. If we have a different unit, the continuity correction should add half of that unit.
+
+# 25/7/14
+
+Also, if $X \sim \operatorname{Bin}(n, p)$ and $Y = \frac{X - np}{\sqrt{np(1 - p)}}$, then $Y$ approximates $\operatorname{N}(0, 1)$. So $X \sim \operatorname{N}(np, np(1 - p))$.
+
+As a rule of thumb, this approximation works best when $np \ge 5$ and $np(1 - p) \ge 5$. The approximation gets better for larger $n$.
+
+# 28/7/14
+
+Moment Generating Functions
+---------------------------
+
+The moment generating function uniquely determines a distribution, just like the density function and the cumulative function. This is the value $M_X(t) = E(e^{tX}) = \sum_{\text{all } x} e^{tx} f(x)$, where $t$ is a constant such that $M_X(t)$ is defined for some interval of $t$, $[-a, a]$.
+
+For continuous random variables, $M_X(t) = \int_{-\infty}^\infty e^{tx} f(x)$.
+
+Moment generating functions allow us to find the expected value of various exponents of the random variable.
+
+The **moments** of $X$ are the expected values of $X^r$ for $r \in [-a, a]$. $E(X^r)$ is the $r$th moment of $X$. It is always true that $E(X^r) = M^{(r)}(0) = \evalat{\frac{\dee^r M(t)}{\dee t^r}}_{t = 0}$.
+
+Find the moment generating function of the binomial distribution:
+
+> Let $X \sim \operatorname{Bin}(n, p)$. Then $f(x) = {n \choose x}p^x(1 - p)^{n - x}$.  
+> Then $M_X(t) = E(e^{tX}) = \sum_{x = 0}^n e^{tx} {n \choose x}p^x(1 - p)^{n - x} = (pe^t + 1 - p)^n$, by the binomial theorem.  
+
+So if $X \sim \operatorname{Bin}(n, p)$, then $M_X(t) = (pe^t + 1 - p)^n$. Also, $E(X(X - 1)) + E(X) - E(X)^2$.
+
+In the same way, we can find the moment generating function for the Poisson distribution. If $X \sim \operatorname{Pois}(\mu)$, then $M_X(t) = e^{\mu(e^t - 1)}$. From this we can prove that $E(X) = \operatorname{Var}(X) = \mu$.
+
+The moment generating function is unique, so if two random variables have the same one, they have the same distribution. We can use this to prove that the limit of some sequence of distributions approaches some limiting distribution.
+
+For example, use moment generating functions to show that the binomimal distribution can be approximated by the Poisson distribution.
+
+> Let $X \sim \operatorname{Bin}(n, p)$. Clearly, $M_X(t) = (pe^{t} + 1 - p)^n = (1 + p(e^t - 1))^n$. Let $\mu = np$.  
+> Then $M_X(t) = \left(1 + \frac \mu n (e^t - 1)\right)^n$ and $\lim_{n \to \infty} M_X(t) = e^{\mu(e^t - 1)}$, the moment generating function for $\operatorname{Pois}(\mu)$.  
+> So as $n \to \infty$, $X \sim \operatorname{Pois}(\mu)$ where $\mu = np$.  
+
+Also, if $X \sim \operatorname{N}(\mu, \sigma^2)$, then $M_X(t) = e^{\mu t + \frac{\sigma^2 t^2}{2}}$.
+
+# 30/7/14
+
+;wip: exam on August 6, 4pm-6:30pm, PAC1-6, sections 4, 5, 7, 8, 9, 10.1, 10.2, assigned seats, 8 short answer, pink tie calculators, formula sheet + normal distrubution table
+;wip: 8.3 and 9.4 not covered
+;wip: get sample final exams
