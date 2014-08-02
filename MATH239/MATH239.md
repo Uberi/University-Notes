@@ -942,8 +942,6 @@ The $n$-cube is an $n$-dimensional analogue of a cube. A 2D drawing of a 4-cube 
 
 Also, any finite graph can be represented in 3D space such that there are no crossing edges. This is difficult to prove, however.
 
-;wip: the midterm will cover everything up to this point, and the midterm is in like two weeks
-
 Walks/Paths
 -----------
 
@@ -1006,6 +1004,10 @@ If $G$ is a graph with $\abs{V(G)} \ge 3$, and every vertex in $G$ has a degree 
 
 ;wip: pidgeonhole principle
 
+Given a graph $G$, $G - e$ is $G$ with the edge $e$ removed. Formally, $G - e$ is a graph such that $V(G - e) = V(G)$ and $E(G - e) = E(G) \setminus e$.
+
+In the same way, $G + e$ is $G$ with the edge $e$ added. Formally, $G + e$ is a graph such that $V(G + e) = V(G)$ and $E(G + e) = E(G) \cup e$.
+
 Proof:
 
 > Let $G$ be a graph with $\abs{V(G)} \ge 3$ where every vertex in $G$ has a degree of $\frac{n}{2}$ or more.  
@@ -1013,8 +1015,8 @@ Proof:
 > Let $G \in S_n$ be the graph with the largest number of edges - the largest possible counterexample with $n$ vertices.  
 > Clearly, $G$ cannot be complete because $G$ would have a Hamilton cycle if it was.  
 > Since it is not complete, there exist $u, v \in V(G)$ such that $\set{u, v} \notin E(G)$ - there exists a pair of vertices that are not adjacent.  
-> So if we added the edge $\set{u, v}$ to $G$ to get $G'$, $G'$ has more edges than the largest counterexample, so it is not a counterexample and must have a Hamilton cycle.  
-> This Hamilton cycle in $G'$ must use $\set{u, v}$, so there must be a $\set{u, v}$ path $P = v_1, \ldots, v_n, v_1 = u, v_n = v$ in $G$ that contains all the vertices in $G$, made by removing $\set{u, v}$ from the Hamilton cycle in $G'$.  
+> So $G + \set{u, v}$ has more edges than the largest counterexample, so it is not a counterexample and must have a Hamilton cycle.  
+> This Hamilton cycle in $G + \set{u, v}$ must use $\set{u, v}$, so there must be a $\set{u, v}$ path $P = v_1, \ldots, v_n, v_1 = u, v_n = v$ in $G$ that contains all the vertices in $G$, made by removing $\set{u, v}$ from the Hamilton cycle in $G + \set{u, v}$.  
 > Let $S = \set{i - 1 \middle| \set{v_1, v_i} \in E(G)}, S = \set{i \middle| \set{v_i, v_n} \in E(G)}$ - the indices of the neighbors of $v_1$ and $v_n$, respectively.  
 > Since all vertices have degree of at least $\frac n 2$, $\abs{S} \ge \frac n 2, \abs{T} \ge \frac n 2$.  
 > Since $S, T \subseteq [n - 1]$ (since $v_1$ cannot be connected to $v_n$), by the Pidgeonhole principle, there is some $i$ for which $i \in S \cap T$.  
@@ -1119,11 +1121,11 @@ If $e = \set{u, v}$ is a bridge in connected graph $G$, then $G$ with $e$ remove
 
 Proof:
 
-> Let $e$ be a bridge. Let $G'$ be $G$ with $e$ removed. Clearly, $G'$ has at least 2 components since $G$ contains 1.  
-> Let $H$ be the component of $G'$ containing $u$. Since $H$ is a component, the cut induced by $V(H)$ is empty.  
+> Let $e$ be a bridge. Clearly, $G - e$ has at least 2 components since $G$ contains 1.  
+> Let $H$ be the component of $G - e$ containing $u$. Since $H$ is a component, the cut induced by $V(H)$ is empty.  
 > Suppose $v \in V(H)$. Then the cut induced by $V(H)$ is also empty in $G$, since $e$ does not cross the cut.  
 > This is a contradiction, since then $G$ has more than one component, so $v$ is in a different component from $u$.  
-> Suppose there is a third component $J$ in $G'$. Then the cut induced by $V(J)$ is empty in $G$ and $G'$, since removing/adding $e$ does not affect the cut.  
+> Suppose there is a third component $J$ in $G - e$. Then the cut induced by $V(J)$ is empty in $G$ and $G - e$, since removing/adding $e$ does not affect the cut.  
 > This is a contradiction since then $G$ would not be connected, so there are only two components.  
 
 An edge $e = \set{u, v}$ is a bridge in $G$ if and only if $e$ is not in any cycle of $G$:
@@ -1187,8 +1189,8 @@ Proof:
 > Clearly, if $n = 0$ there are no cycles, so $G$ is a tree and $G$ is a spanning tree of $G$.  
 > Assume for some $k \ge 0$ that for $n \le k$, $G$ has a spanning tree.  
 > Assume $n = k + 1$. Let $v_1, \ldots, v_i, v_n$ be a cycle in $G$. Let $e$ be an edge in $v_1, \ldots, v_i, v_n$.  
-> Clearly, $e$ is not a bridge because it is in a cycle. Let $G'$ be $G$ with $e$ removed. Clearly, $G'$ is still connected, but has fewer cycles since we removed an edge in a cycle.  
-> Then $G'$ contains a spanning tree $T$. Since $G$ has the same vertices as $G'$, $G$ has the spanning tree $T$, by induction.  
+> Clearly, $e$ is not a bridge because it is in a cycle. Clearly, $G - e$ is still connected, but has fewer cycles since we removed an edge in a cycle.  
+> Then $G - e$ contains a spanning tree $T$. Since $G$ has the same vertices as $G - e$, $G$ has the spanning tree $T$, by induction.  
 
 # 7/7/14
 
@@ -1272,9 +1274,7 @@ Prove that Prim's algorithm always give the minimum spanning tree:
 
 A **planar embedding** of a graph $G$ is a drawing of $G$ on a plane such that every vertex has a unique position and the edges do not intersect except at vertices.
 
-Any graph that has at least one planar embedding is a **planar graph**. A **face** in a planar graph is a connected region on the plane - a region which, considered by itself, is connected. Two faces are **adjacent** if they share at least one edge.
-
-;wip: what kind of object is a face?
+Any graph that has at least one planar embedding is a **planar graph**. A **face** in a planar graph is a connected region (empty area) on the plane - a region which, considered by itself, is connected.
 
 The **boundary walk** for a face in a **connected** planar embedding is a closed walk around the boundary of the face. This is basically a walk that encloses the face but nothing else. For example, if there is a face within a face, we have to exclude the inner face from being included in the outer face's boundary walk.
 
@@ -1282,7 +1282,9 @@ Note that the boundary walk is undefined for disconnected graphs.
 
 The **degree** of a face is the length of the boundary walk - the number of edges that it has surrounding it. The sum of the degrees of every face is even and twice the number of edges - because every edge is in two faces, every edge increases the degree of two faces it is beside by 1.
 
-The **handshaking lemma for faces** states that given a graph $G$ with a planar embedding with set of faces $F$, $\sum_{f \in F} \deg(f) = 2\abs{E(G)}$.
+A face is **incident** to an edge if the edge is in the boundary walk. A face is incident to a vertex if the vertex is in the boundary walk. Two faces are **adjacent** if they share at least one edge in their boundary walk.
+
+The **handshaking lemma for faces** (HLFF) states that given a graph $G$ with a planar embedding with set of faces $F$, $\sum_{f \in F} \deg(f) = 2\abs{E(G)}$.
 
 An edge has two different faces on both sides if and only if it is part of a cycle. So an edge has the same face on both sides if it is a bridge. This is because if we have a cycle in a planar representation, it must partition the plane into an inside and outside. The edge must therefore have one side on the inside and the other on the outside.
 
@@ -1300,6 +1302,290 @@ Proof:
 > Clearly, the smallest possible connected graph with a planar embedding is a tree, so it is one such that $\abs{E(G)} = \abs{V(G)} - 1$. Since there is only one face, $\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = \abs{V(G)} - (\abs{V(G)} - 1) + 1 = 2$.  
 > Suppose for some $k$ that for all $\abs{E(G)} < k$, $\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = 2$.  
 > Assume $\abs{E(G)} = k$. Let $e$ be an edge in a cycle, which must exist because graph has more than $\abs{V(G)} - 1$ edges and is not a tree.  
-> Then if we remove $e$ from $G$ to get $G'$, $G'$ is also connected and planar, since $e$ is in a cycle and is therefore not a bridge.  
-> Clearly, $G'$ has $\abs{F(G)} - 1$ faces, since $e$ was in a cycle and had two different faces on both sides, and removing $e$ merges them into one face.  
-> So $\abs{V(G')} - \abs{E(G')} + \abs{F(G')} = 2$. Since $G$ has one more edge and one more face than $G'$, $\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = \abs{V(G')} - (\abs{E(G')} + 1) + (\abs{F(G')} + 1) = 2$.  
+> Then $G - e$ is also connected and planar, since $e$ is in a cycle and is therefore not a bridge.  
+> Clearly, $G - e$ has $\abs{F(G)} - 1$ faces, since $e$ was in a cycle and had two different faces on both sides, and removing $e$ merges them into one face.  
+> So $\abs{V(G - e)} - \abs{E(G - e)} + \abs{F(G - e)} = 2$. Since $G$ has one more edge and one more face than $G - e$, $\abs{V(G)} - \abs{E(G)} + \abs{F(G)} = \abs{V(G - e)} - (\abs{E(G - e)} + 1) + (\abs{F(G - e)} + 1) = 2$.  
+
+# 14/7/14
+
+Platonic Solids
+---------------
+
+A graph has an embedding in a plane if and only if it has an embedding on a sphere. Any embedding on the sphere can be turned into a polyhedron by cutting faces out of the sphere.
+
+A graph is **platonic** if and only if it is planar and every vertex has the same degree, and every face has the same degree.
+
+Assume $G$ is platonic with $n$ vertices, $m$ edges, and $s$ faces. Then every vertex has degree $d_V \ge 3$ and every face has degree $d_F \ge 3$.
+
+Clearly, $2m = nd_V$ by handshaking lemma, $sd_F = 2m$ by HLFF, and $\frac{2m}{d_V} - m + \frac{2m}{d_F}$. So $m(2d_F - d_Vd_F + 2d_V) = 2d_Vd_F$, and $2d_Vd_F > 0$.
+
+So $0 < 2d_F - d_Vd_F + 2d_V + 4 - 4$, so $0 < 4 - (d_V - 2)(d_F - 2)$. So $(d_V - 2)(d_F - 2) < 4$. 
+
+Clearly, the only possible solutions are $(d_V, d_F) = (3, 3), (3, 4), (3, 5), (4, 3), (5, 3)$, since $d_V \ge 3, d_F \ge 3$.
+
+These are the five possible platonic graphs - planar graphs with every vertex of degree $d_V$ and every face of degree $d_F$. These are polyhedrons when embedded onto a sphere and form very regular solids.
+
+When $d_V = 3, d_F = 3$, $G$ is a **tetrahedron** and each face is a triangle.
+
+When $d_V = 3, d_F = 4$, $G$ is a **cube/hexahedron** and each face is a square.
+
+When $d_V = 3, d_F = 5$, $G$ is a **dodecahedron** and each face is a pentagon.
+
+When $d_V = 4, d_F = 3$, $G$ is an **octahedron** and each face is a triangle.
+
+When $d_V = 5, d_F = 3$, $G$ is an **icosahedron** and each face is a triangle.
+
+We can quickly draw the planar embedding of a platonic solid by drawing the shape of the face and making sure there is a face shape adjacent to every other face shape until the conditions are satisfied.
+
+These are the only platonic graphs. Things like 100-sided die are possible only because the faces can possibly be different shapes. For example, bevelling every vertex of an icosahedron results in a Buckyball (truncated icosahedron), a shape with hexagons and pentagons.
+
+Planarity
+---------
+
+A non-planar graph cannot be embedded onto a plane without any edges crossing - it has at least one edge crossing no matter how we draw it. We can prove a graph is non-planar by constructing this crossing for an arbitrary graph drawing, or by using the theorems below.
+
+We can prove a graph is not planar by proving that it contains a nonplanar graph, or by showing it has too many edges. For example, $K_5$ (complete graph with 5 vertices) is nonplanar.
+
+If $n \ge 3$, then all planar graphs with $n$ vertices have at most $3n - 6$ edges. So if it has more than $3n - 6$ edges, it is not planar. Also, if $n \le 3$ then $G$ is always planar.
+
+Proof:
+
+> Let $G$ be a planar graph with $n$ vertices, $m$ edges, and $s$ faces, where $n \ge 3$.  
+> Clearly, if $G$ has no cycles, then $G$ is a tree and $m = n - 1$, so $m \le 3n - 6$.  
+> Otherwise, assume $G$ has a cycle. Clearly, every face contains a cycle in its boundary, so it has degree at least 3.  
+> So by HLFF, $2m \ge 3s$ and $2m \ge 3(2 - n + m)$ by Euler's formula, so $m \le 3n - 6$, as required.  
+
+So if a graph is planar, it has less than or equal to $3n - 6$ edges. The converse is not necessarily true - it is possible to have a non-planar graph with less than or equal to $3n - 6$ edges.
+
+# 16/7/14
+
+If $G$ is a connected bipartite planar graph with $n \ge 3$ vertices, then $G$ has at most $2n - 4$ edges.
+
+Proof:
+
+> Suppose $G$ has $n$ vertices, $m$ edges, and $s$ faces.  
+> Clearly, if $G$ has no cycles, then $G$ is a tree and $m = n - 1$, so $m \le 2n - 4$. Assume $G$ has a cycle.  
+> Clearly, every face boundary in $G$ contains a cycle, and every face must have at least 3 vertices, and bipartite graphs cannot have cycles of odd length, so the degree of each face is 4 or more.  
+> By HLFF, $2m \ge \sum_{f \in F(G)} 4$, so $2m \ge 4s$. By Euler's formula, $2m \ge 4(2 - n + m)$ and $m \le 2n - 4$.  
+
+So a bipartite graph has a tighter upper bound on the number of edges before it becomes non-planar.
+
+### Kuratowski's Theorem
+
+An **edge subdivision** of a graph $G$ is obtained by replacing each edge $\set{u, v} \in E(G)$ with a $u, v$ path of length at least 1. In other words, we add vertices $v_1, \ldots, v_k$ into the graph and replace each $\set{u, v} \in E(G)$ with $\set{u, w}$ and $w, v$ for a unique $w \in \set{v_1, \ldots, v_k}$.
+
+Basically, we are subdividing edges in a graph to get a new subdivided graph. Clearly, an edge subdivision is planar if and only if the original graph is planar.
+
+**Kuratowski's theorem** states that a graph $G$ is planar if and only if it does not have any edge subdivision of $K_5$ or $K_{3, 3}$ as a subgraph.
+
+We can use this to prove a graph is not planar, by finding a subgraph that is an edge subdivision of $K_5$ or $K_{3, 3}$. To prove a graph is planar, we just draw its planar embedding.
+
+# 18/7/14
+
+A $k$-colouring of a graph is an assignment of a colour to each vertex using at most $k$ colours, such that any two adjacent vertices have different colours.
+
+If a graph has a $k$-colouring, then it is $k$-colourable.
+
+In general, what is the minimum $k$ for which a graph is $k$-colourable - what is the minimum number of colours we need to colour the graph such that any two adjacent vertices have different colours?
+
+Clearly, $K_n$ is $n$-colourable but not $(n - 1)$-colourable, since every vertex is connected to $n - 1$ others, so we need one color for each vertex. Clearly, bipartite graphs are 2-colourable.
+
+A graph with vertices of degree at most $d$ is $(d + 1)$-colourable. This can be proven using induction where the inductive step is removing a vertex of degree $d$ and showing that this new graph uses $d$ or fewer colours, so the original graph has at most 1 more colour than that.
+
+We are usually more interested in planar graph, however. This is more useful for things like map colouring and other real-world problems.
+
+Ever planar graph has a vertex of degree at most 5. In other words, there exists a vertex in any planar graph that has a degree less than or equal to 5.
+
+Proof:
+
+> Let $G$ be a planar graph with $n$ vertices. Suppose every vertex in $G$ has degree at least 6. Then $\sum_{v \in V(G)} \deg v \ge 6n$ and $\abs{E(G)} \ge 3n$ by the handshaking lemma.  
+> Clearly, $3n > 3n - 1$ so $G$ is not planar, a contradiction. So there exists a vertex in $G$ with degree at most 5.  
+
+Every planar graph is 6-colourable.
+
+Proof:
+
+> Let $G$ be a graph with $n$ vertices. Clearly, if $n = 0$, $G$ has no vertices and is 6-colourable.  
+> Assume for some $k \ge 0$ that if $n = k$, $G$ is 6-colourable.  
+> Assume $n = k + 1$. Let $v$ be a vertex of degree at most 5 in $G$, which must exist by the previous theorem.  
+> Clearly, if we remove $v$ from $G$ to get $G'$, $G'$ has $k$ vertices and is therefore 6-colourable.  
+> Construct a colouring for $G$ where we use the same colours as $G'$ for every vertex except $v$, where $v$ is coloured using a different colour.  
+> Clearly, this different colour exists because $v$ has at most 5 neighbours and therefore is only unable to use at most 5 of the 6 colours.  
+
+A **contraction** on an edge $e = \set{u, v}$ in $G$ is a graph $G'$ where $V(G') = ((V(G) \setminus u) \setminus v) \cup w$ where $w$ is a new vertex, and $E(G') = \set{e \in E(G) \middle| u \notin e \wedge v \notin e} \cup \set{\set{w} \cup ((e \setminus u) \setminus v) \middle| e \in \set{e \in E(G) \middle| u \in e \vee v \in e}}$. Basically, a contraction on an edge is a graph with the vertices of that edge merged into one vertex, and the edge removed.
+
+If $G$ is planar, then $G/e$ is also planar, because we could feed the edges its vertices connect to through the same space the edge used to occupy.
+
+Every planar graph is 5-colourable.
+
+Proof:
+
+> Let $G$ be a planar graph with $n$ vertices. Clearly, if $n = 0$ then $G$ has no vertices and is therefore 5-colourable.  
+> Assume for some $k \ge 0$ that for any $n \le k$, $G$ is 5-colourable.  
+> Assume $n = k + 1$. Let $v$ be a vertex of degree at most 5 in $G$, which was proved to exist.  
+> Clearly, if $\deg v \le 4$, then there are 4 or fewer neighbours of $v$, so $v$ cannot use at most 4 colours and there is a colour $v$ can use, by the same argument as the proof of 6-colouring.  
+> Assume $\deg v = 5$. Clearly, $v$ has two neighbours $x, y$ that are not adjacent, since otherwise $G$ would contain $K_5$ as a subgraph and would not be planar.  
+> Let $H = (G / \set{v, x}) / \set{v, y}$ - $G$ with $\set{v, x}$ and $\set{v, y}$ contracted.  
+> Clearly, $H$ is planar and has $n - 2$ vertices, so $H$ is 5-colourable.  
+> Construct a colouring for $G$ with the same colours as $H$ for every vertex except $v, x, y$, where $x, y$ are coloured using the colour of the contracted vertex (vertex created from the contraction) and $v$ uses a different colour.  
+> Clearly, the 5 neighbours of $v$ use at most 4 colours, so $v$ cannot use at most 4 colours, so there is an available colour for $v$.  
+
+Every planar graph is 4-colourable. The proof of this was found by computer assisted proof tools and is extremely difficult for humans to understand.
+
+Planar graphs are not all 3-colourable. For example, the planar projection of a triangular prism where there are concentric triangles is not 3-colourable. So 4 is the lowest number of colours that can be used to colour any planar graph.
+
+# 21/7/14
+
+Graph Duals
+-----------
+
+The **dual** of a planar graph $G$ is a graph $G*$ where $G*$ has one vertex $v_f$ for each $f \in F(G)$, and for all $e \in E(G)$ incident to faces $f_1, f_2$, $G*$ has an edge $\set{v_{f_1}, v_{f_2}}$.
+
+To draw the dual of a graph, we draw a vertex in the center of each face, and then connect the vertices of those faces that are adjacent. It is important to remember to consider the outer face - the area outside of the whole graph - since it is also a face.
+
+For example, the dual of the top-down projection of the pentagonal-based pyramid is the same graph, though this is not true in general.
+
+The dual of a planar graph can contain multiple edges connecting the same vertices, and even loops. We get a loop when we have $f_1 = f_2$ or duplicate pairs of $f_1$ and $f_2$. For example, a triangle graph has a center vertex with three edges connecting it to a vertex outside of the triangle. This is because there are three edges incident to both the inside and outside faces, so there are three corresponding edges in the dual.
+
+The dual of a planar graph is also planar. This is because dual can be drawn by putting lines from each face's vertex to the midpoints, and then joining the faces at the edges. Since all these operations do not intersect each other, the dual must be planar.
+
+The dual of the dual of a planar graph, $G^{**}$, is simply $G$.
+
+It is always true that $\abs{V(G^*)} = \abs{F(G)}$, $\abs{E(G^*)} = \abs{E(G)}$, and $\abs{F(G^*)} = \abs{V(G)}$. In other words, the dual of the graph has a vertex for each face, an edge for an edge, and a face for each vertex.
+
+The dual of a platonic solid is also a platonic solid, not necessarily the same one. For example, the dual of a tetrahedron is a tetrahedron, the dual of a cube in the octahedron, and the dual of a dodecahedron is an icosahedron.
+
+Every planar graph is 4-face colourable - we can colour the faces such that no two adjacent faces have the same colour. This is provable by using the 4-color theorem to show that the dual is 4-colourable in vertices, so the original graph is 4-colourable in faces.
+
+Matchings
+---------
+
+A **matching** of a graph $G$ is a set of edges $M \subseteq E(G)$ such that no two edges share a common vertex. In other words, the edges form a subgraph where the maximum degree of each vertex is 1.
+
+It is easy to find matchings in a graph - the empty set is a matching of any graph. We are more interested in the largest possible matching of a given graph - one that includes the largest possible number of edges. This is a maximum matching.
+
+A **perfect matching** is a matching where the vertices in the matching include every vertex in the graph - a matching that separates every vertex. This is always the largest possible matching in a given graph, but the largest possible matching is not always a perfect matching. For example, a graph with an odd number of vertices.
+
+In a matching, a **saturated vertex** is one that is incident to an edge in the matching. A vertex is saturated if and only if it is incident to an edge in the matching.
+
+An **alternating path** $v_1, e_1, \ldots, e_{k - 1}, v_k$ with respect to $M$ is a path in which each edge $e_1, \ldots, e_{k - 1}$ alternates between being in M and not being in $M$.
+
+An **augmenting path** is an alternating path that starts and ends with unsaturated vertices. For an augmenting path, we can switch the alternation of the path, so those edges that were in the matching are not, and those that weren't in the matching are. When we do this, all the vertices in the augmented path are saturated, and the number of edges in the matching increases by 1.
+
+If there exists an augmenting path with respect to a matching $M$, then $M$ is not a maximum matching. This is because the matching with the augmenting path where the alternation is flipped is a larger matching.\
+
+# 23/7/14
+
+If there are no augmenting paths with regard to a matching $M$, then $M$ is a maximum matching.
+
+Proof:
+
+> Assume there are no augmented paths with respect to $M$.  
+> Suppose $M$ is not a maximum matching. Then there exists a matching $M'$ such that $\abs{M'} > \abs{M}$. Let $N$ be the set of edges that are in $M$ or $M'$ but not both.  
+> Clearly, each vertex in $N$ has degree at most 2, since it is joined to at most 1 vertex in $M$ and 1 in $M'$.  
+> Clearly, every component in $N$ is either a path or a cycle, and all cycles must be of even length since they must alternate between being in $M$ and being in $M'$.  
+> Since $\abs{M'} > \abs{M}$, there must be a path with more edges in $M'$ than $M$.  
+> Clearly, the two ends of this path are not saturated by $M$ since it must start and end with edges in $M'$.  
+> So there exists an augmented path with respect to $M$, a contradiction.  
+> Therefore, $M$ is a maximum matching.  
+
+It is often difficult to prove that a matching has no augmented paths. Instead, we use the concept of vertex covers.
+
+A **vertex cover** $C \subseteq V(G)$ of a graph $G$ is a set of vertices such that every edge in $G$ has at least one endpoint in $C$ - $\forall \set{u, v} \in E(G), u \in C \vee v \in C$.
+
+We are again interested in minimizing - specifically, minimizing the size of $C$. This is related to the problem of finding the maximum matching in that every vertex in the minimum matching can have at most one edge in the maximum matching.
+
+In fact, given a matching $M$ in $G$, any vertex over $C$ satisfies $\abs{M} \le \abs{C}$.
+
+Proof:
+
+> Clearly, $\forall \set{u, v} M, u \in C \vee v \in C$. Clearly, distinct edges in $M$ have distinct endpoints, so the vertices that cover $M$ are all distinct. So $\abs{M} \le \abs{C}$.  
+
+As a result, if we find a vertex cover and a matching that have the same size, we have found a maximum matching and a minimum vertex cover. So to prove that a matching is maximal, we can find a vertex cover of the same size, and to prove a vertex cover is minimal, we can find a matching of the same size.
+
+It is not always possible to prove using this method, because the maximum matching can also be smaller than the minimum cover. For example, the endwise projection of a triangular prism has a maximum matching of size 3 and a minimum vertex cover of size 4. However, bipartite graphs always have a matching $M$ and a vertex cover $C$ such that $\abs{M} = \abs{C}$.
+
+
+# 25/7/14
+
+**König's theorem** states that in a bipartite graph, the size of the maximum matching is equal to the size of the minimum cover. ;wip: umlaut o
+
+Proof:
+
+> We will find an algorithm that finds the maximum cover and minimum cover. We start from a set of unsaturated vertices and find all possible alternating paths.  
+> Let $G$ be a bipartite graph with bipartitions $(A, B)$. Let $M$ be a matching.  
+> Clearly, if there is an augmenting path that starts in $A$, the path must end in $B$, since all augmented paths must be of odd length.  
+> The basic idea is that we start with the set of unsaturated vertices in one parition, and then follow all their matching neighbors as $X$, then follow all their unmatched neighbors as $Y$, and so on, until we either find an augmenting path or run out of vertices.  
+> Start with all vertices in $G$ being unsaturated. Let $X_0$ be the set of all unsaturated vertices in $A$.  
+> Let $X, Y$ be sets of vertices. Let $X$ start off as $X_0$.  
+> Find all neighbors of $X$ that are not in $Y$. If these neighbors are all saturated, put them in $Y$ and add their matching neighbors in $X$. Repeat for every vertex in $X$.  
+> If there is a neighbor that is not saturated, then we have an augmenting path in $G$, so we update $M$ (make the matched edges unmatched and unmatched edges matched in the augmented path) and start the algorithm again from the beginning.  
+> If there are no new neighbors, then $M$ is the maximum matching and $Y \cup (A \setminus X)$ is a minimum cover.  
+> ;wip: rewrite this so it makes sense
+> Clearly, $Y$ is saturated since if it had any unsaturated, there would be an augmenting path.  
+> Clearly, all vertices in $A \setminus X$ are saturated, since all unsaturated vertices are in $X$.  
+> Clearly, no edges join $Y$ to $A \setminus X$ since both are saturated, and none of the vertices in $Y$ or $A \setminus X$ are adjacent to each other.  
+> So $Y \cup (A \setminus X)$ is a vertex cover, and is a minimum vertex cover since $M$ is a maximum matching.  
+
+# 28/7/14
+
+As a result, a bipartite graph $G$ with $m$ edges and maximum degree $d$ has a matching of size at least $\frac m d$.
+
+Proof:
+
+> Let $C$ be a vertex cover in $G$. Clearly, each vertex in $C$ covers at most $d$ edges. Since there are $m$ edges, we need at least $\frac m d$ vertices to cover every edge.  
+> So the size of the minimum cover is at least $\frac m d$. By Konig's theorem, the size of some matching is also at least $\frac m d$.  
+
+Hall's theorem  is often thought of in terms of the marriage metaphor, where one partition is the set of males, another female, and the edges determine eligibility between two people for marriage. The problem is determining whether it is possible to marry off everyone in one of the sets.
+
+As it turns out, this is not possible if and only if there is a set of people in $A$ who can only marry a smaller set of people in $B$, or vice versa. This is called **Hall's condition**.
+
+If $D$ is a set of vertices, then $N(D)$ is the set of vertices adjacent to at least one vertex in $D$. We use this to write Hall's condition as $\forall D \subseteq A, \abs{N(D)} \ge \abs{B}$.
+
+**Hall's theorem** states that given a bipartite graph with bipartition $(A, B)$, we can guarantee that there is a matching that saturates all the vertices in $A$ if and only if $\forall D \subseteq A, \abs{N(D)} \ge \abs{B}$.
+
+Proof:
+
+> Assume $G$ has a matching $M$ that saturates $A$ and $D \subseteq A$, then the matching edges of $M$ that have one end in $A$ must have the other end in $\abs{N(D)}$.  
+> So for every $D \subseteq A$, $\abs{N(D)} \ge \abs{D}$.  
+> Suppose $G$ does not have a matching that saturates $A$. Let $M$ be a maximum matching of $G$. Since $M$ does not saturate $A$, $\abs{M} < \abs{A}$.  
+> By Konig's theorem, there is a maximum vertex cover $C$ such that $\abs{C} = \abs{M}$. Since $C$ is a maximum vertex cover, there is no edge between $A \setminus C$ and $B \setminus C$.  
+> So $N(A \setminus C) \subseteq B \cap C$. So $\abs{N(A \setminus C)} \le \abs{B \cap C}$ and $\abs{N(A \setminus C)} \le \abs{C} - \abs{A \cap C}$ and $\abs{N(A \setminus C)} \le \abs{M} - \abs{A \cap C}$ and $\abs{N(A \setminus C)} < \abs{A} - \abs{A \cap C}$ and $\abs{N(A \setminus C)} < \abs{A \setminus C}$.  
+> Clearly, this violates Hall's condition, so it is not the case that $\forall D \subseteq A, \abs{N(D)} \ge \abs{B}$.  
+
+# 20/7/14
+
+As a result, all $k$-regular bipartite graphs $G$ with $k \ge 1$ have a perfect matching.
+
+Proof:
+
+> Let $(A, B)$ be the bipartitions of $G$. Let $D \subseteq A$. Clearly, there are $k\abs{D}$ edges with exactly one end in $D$, and each of these edges have their other end in $N(D)$.  
+> Clearly, each vertex in $N(D)$ can accept only up to $k$ edges from $D$, since the vertices have degree $k$ and the other end of each incident edge is in either $D$ or $A \setminus D$.  
+> So $\abs{N(D)} \ge \abs{D}$ and Hall's condition holds. So there is a perfect matching of $G$.  
+> Clearly, $\abs{A} = \abs{B}$ since the graph is $k$-regular, so the set of all edges in $G$ is a perfect matching.  
+
+Also, the edges of a $k$-regular bipartite graph can be partitioned into $k$ perfect matchings.
+
+In other words, if we find a perfect matching in $G$ and remove all edges in $M$ from $G$ to get a $k - 1$-regular graph, this graph has another perfect matching. We can repeat this until there is a 1-regular graph with a perfect matching. This can be proven using induction.
+
+These theorems allow us to solve the stable marriage problem. The stable marriage problem can be stated as follows:
+
+> There are $n$ men and $n$ women. Each person ranks each of the $n$ people of the other gender with a number between 1 to $n$ such that each person of the other gender has a distinct number.  
+> The higher the ranking, the more this person would prefer to have the ranked person.  
+> Find a set of marriages such that everyone is married and no two people of different genders would both rather have each other than their current partners - a set of stable marriages.  
+
+There is always a set of stable marriages such that everyone is married. This can be proven using matchings on bipartite graphs.
+
+The following is an algorithm for finding a set of stable marriage:
+
+> ;wip
+
+The people proposing heavily affect the resulting set of stable marriages. If the men propose, then the marriages are made starting from the top ranked for the men and slowly move downward. If the women propose, then the marriages are made starting from the top ranked for women and move downward.
+
+The stable roommate problem is similar, except anyone can be matched to anyone. The most significant difference is that there isn't always a stable solution for these problems.
+
+;wip: do assignment 11 and get solutions, do sample finals
+;wip: see the final info for topics to study, 30% enumeration and 70% graph theory
+;wip: final at Aug 5 9AM in PAC
+;wip: do not need to study proof of hamilton cycle, stable marriages
+
