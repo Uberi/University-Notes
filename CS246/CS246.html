@@ -1278,6 +1278,7 @@ int main() {
 </ol>
 <p>Casting allows us to do things like converting a <code>Book</code> pointer to a <code>CSBook</code> object back into a <code>CSBook</code> pointer.</p>
 <p><code>dynamic_cast</code> gives us runtime type information, and allows code to make decisions based on the runtime type of an object, since if the cast doesn't work the value is null. For example, <code>if (dynamic_cast&lt;CSBook *&gt;b) { ... }</code> does something if <code>b</code> is a <code>CSBook</code>. However, this should be avoided because it is highly coupled - it is inflexible to changes in the class heirarchy.</p>
+<p>;wip: exceptions</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

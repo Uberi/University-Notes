@@ -878,7 +878,9 @@ If the covariance is positive, this means that two variables have a positive rel
 
 If $X$ and $Y$ are independent, then $E(g(X)h(Y)) = E(g(X))E(h(Y))$. So in this case, the covariance is $\sigma_{XY} = E(XY) - E(X)E(Y) = E(X)E(Y) - E(X)E(Y) = 0$.
 
-In fact, the covariance is 0 if and only if the two variables are independent. Previously, we could only test if variables were independent by calculating the marginal probability functions for each variable and checking if the product of all of them is equal to the joint probability function - checking if $f(X, Y) = f(X) f(Y)$. Now we can test for independence just by calculating the covariance.
+In fact, if two variables are independent, the covariance of the two variables will be 0. Previously, we could only test if variables were independent by calculating the marginal probability functions for each variable and checking if the product of all of them is equal to the joint probability function - checking if $f(X, Y) = f(X) f(Y)$.
+
+However, the converse isn't true - it is possible to have dependent variables that have a covariance of 0. This is still useful because if we calculate the covariance and it is not 0, we know the two variables are not independent.
 
 The **correlation coefficient** between random variables $X$ and $Y$ is $\rho_{XY} = \frac{\sigma_{XY}}{\sigma_X \sigma_Y}$ - the covariance over the product of the standard deviations of each variable.
 

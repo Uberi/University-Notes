@@ -362,7 +362,7 @@ Let $B(x) = \sum_{i \ge 0} (x + 2x^2)^i = \frac 1 {1 - (x + 2x^2)} = \frac 1 {1 
 
 How do we find the coefficients of this series? Let $B(x) = \sum_{i \ge 0} b_i x^i$.
 
-Then $\frac 1 {1 - x - 2x^2} = \sum_{i \ge 0} (x + 2x^2)$ and $1 = (1 - x - 2x^2)\sum_{i \ge 0} (x + 2x^2) = \sum_{i \ge 0} (x + 2x^2) - x\sum_{i \ge 0} (x + 2x^2) - 2x^2\sum_{i \ge 0} (x + 2x^2) = b_0 + (b_1 - b_0)x + (b_2 - b_1 - 2b_0)x^2 + \ldots + (b_n - b_{n - 1} - 2b_{n - 2})$.
+Then $\frac 1 {1 - x - 2x^2} = \sum_{i \ge 0} (x + 2x^2)^i$ and $1 = (1 - x - 2x^2)\sum_{i \ge 0} (x + 2x^2)^i = \sum_{i \ge 0} (x + 2x^2)^i - x\sum_{i \ge 0} (x + 2x^2)^i - 2x^2\sum_{i \ge 0} (x + 2x^2)^i = b_0 + (b_1 - b_0)x + (b_2 - b_1 - 2b_0)x^2 + \ldots + (b_n - b_{n - 1} - 2b_{n - 2})$.
 
 Since $1 = b_0 + (b_1 - b_0)x + (b_2 - b_1 - 2b_0)x^2 + \ldots + (b_n - b_{n - 1} - 2b_{n - 2})$, $b_0 = 1$ and $b_1 - b_0 = 0$, and $b_n - b_{n - 1} - 2b_{n - 2}$.
 
@@ -540,7 +540,7 @@ A **block** is a substring of all 1 that has no 1 on either sides, or all 0 with
 
 We often want to know how many binary strings of length $n$ have certain properties.
 
-We first construct a set $S$ of all strings with the given properties. Then, we define $w(s)$ as the length of the string $s$. Then we find $\Phi(S)(x)$ and the answer is $[x^n]\Phi(S)(x)$.
+We first construct a set $S$ of all strings with the given properties. Then, we define $w(s)$ as the length of the string $s$. Then we find $\Phi_S(x)$ and the answer is $[x^n]\Phi(S)(x)$.
 
 ### Regular Expressions
 
@@ -550,7 +550,7 @@ Then $AB = \set{ab \middle| a \in A, b \in B}$. This is somewhat similar to the 
 
 Then $A^n = AAA \ldots AAA$, $n$ times. So $A^0 = \set{\epsilon}, A^1 = A, A^2 = AA, \ldots$. So $00101 \in \set{0, 1}^5$.
 
-Then $A^* = A^0 \cup A^1 \cup A^2 \cup \ldots$. This is the binary strings that can be made by concatinating combinations of $A$. For example, $\set{0, 1}*$ is the set of all possible binary strings.
+Then $A^* = A^0 \cup A^1 \cup A^2 \cup \ldots$. This is the binary strings that can be made by concatinating combinations of $A$. For example, $\set{0, 1}^*$ is the set of all possible binary strings.
 
 For example, $\set{0}\set{00}^*$ is the set of all binary strings of all 0 of odd length. This is because it can be expanded to $\set{0, 000, 00000, \ldots}$.
 
@@ -566,13 +566,13 @@ For example, $\Phi_{\set{0, 1}}(x) = x + x = 2x$.
 
 For example, in this case $\set{0, 1}^n$ is similar to a Cartensian product $n$ times. So in this case, we can use the product lemma: $\Phi_{\set{0, 1}^n}(x) = 2^nx^n$
 
-For example, $\Phi_{\set{0, 1}*}(x) = \sum_{n \ge 0} \Phi_{\set{0, 1}^n}(x) = \sum_{n \ge 0} 2^nx^n = \frac 1 {1 - 2x}$.
+For example, $\Phi_{\set{0, 1}^*}(x) = \sum_{n \ge 0} \Phi_{\set{0, 1}^n}(x) = \sum_{n \ge 0} 2^nx^n = \frac 1 {1 - 2x}$.
 
 What is the generating series for $\set{0}\set{00}^*\set{1, 11, 111}$?
 
-> Clearly, $\Phi_{\set{0}}(x) = x, \Phi_{\set{00}*}(x) = \frac 1 {1 - x^2}, \Phi_{\set{1, 11, 111}}(x) = x + x^2 + x^3$.  
-> So $\Phi_{\set{0}\set{00}*\set{1, 11, 111}}(x) = x \frac 1 {1 - x^2} (x + x^2 + x^3) = \frac{x^2 + x^3 + x^4}{1 - x^2}$ where the weight is the length of each string.  
-> So there are $[x^n]\frac{x^2 + x^3 + x^4}{1 - x^2}$ binary strings of length $n$ in $\set{0}\set{00}*\set{1, 11, 111}$.  
+> Clearly, $\Phi_{\set{0}}(x) = x, \Phi_{\set{00}^*}(x) = \frac 1 {1 - x^2}, \Phi_{\set{1, 11, 111}}(x) = x + x^2 + x^3$.  
+> So $\Phi_{\set{0}\set{00}^*\set{1, 11, 111}}(x) = x \frac 1 {1 - x^2} (x + x^2 + x^3) = \frac{x^2 + x^3 + x^4}{1 - x^2}$ where the weight is the length of each string.  
+> So there are $[x^n]\frac{x^2 + x^3 + x^4}{1 - x^2}$ binary strings of length $n$ in $\set{0}\set{00}^*\set{1, 11, 111}$.  
 
 ### Ambiguity
 
@@ -641,9 +641,9 @@ Let $T$ be the set of all binary strings where each block has length at least 2.
 
 Let $U$ be the set of all binary strings where an even block of 0 cannot be followed by an odd block of 1. What is the generating series for this set?
 
-> Clearly, we can use the $\set{1}*(\set{0}\set{0}*\set{1}\set{1}*)*\set{0}*$ block decomposition to match these strings (we swapped 0 and 1).  
-> Clearly, $U = \set{1}*(\set{00}\set{00}*\set{11}\set{11}* \cup \set{0}\set{00}*\set{1}\set{1}*)*\set{0}*$. We are using two cases - when the block is of even length, and when it is of odd length, and considering each case separately.  
-> Alternatively, we can write this is as $\set{1}*(\set{0}\set{0}*\set{1}\set{1}* \setminus \set{00}\set{00}*\set{1}\set{11}*)*\set{0}*$, as the set of all blocks minus the set of the blocks we do not want to match.  
+> Clearly, we can use the $\set{1}^*(\set{0}\set{0}^*\set{1}\set{1}^*)^*\set{0}^*$ block decomposition to match these strings (we swapped 0 and 1).  
+> Clearly, $U = \set{1}^*(\set{00}\set{00}^*\set{11}\set{11}^* \cup \set{0}\set{00}^*\set{1}\set{1}^*)^*\set{0}^*$. We are using two cases - when the block is of even length, and when it is of odd length, and considering each case separately.  
+> Alternatively, we can write this is as $\set{1}^*(\set{0}\set{0}^*\set{1}\set{1}^* \setminus \set{00}\set{00}^*\set{1}\set{11}^*)^*\set{0}^*$, as the set of all blocks minus the set of the blocks we do not want to match.  
 > In that case the sum lemma can be used like a difference lemma: $A \setminus B$ implies that $\Phi_{A \setminus B}(x) = \Phi_A(x) - \Phi_B(x)$.  
 > ;wip: \frac{1 + 2x + x^2}{1 - 3x^2 - x^3}
 > We can also represent this using recursion: 
@@ -1412,7 +1412,7 @@ Proof:
 > Construct a colouring for $G$ where we use the same colours as $G'$ for every vertex except $v$, where $v$ is coloured using a different colour.  
 > Clearly, this different colour exists because $v$ has at most 5 neighbours and therefore is only unable to use at most 5 of the 6 colours.  
 
-A **contraction** on an edge $e = \set{u, v}$ in $G$ is a graph $G'$ where $V(G') = ((V(G) \setminus u) \setminus v) \cup w$ where $w$ is a new vertex, and $E(G') = \set{e \in E(G) \middle| u \notin e \wedge v \notin e} \cup \set{\set{w} \cup ((e \setminus u) \setminus v) \middle| e \in \set{e \in E(G) \middle| u \in e \vee v \in e}}$. Basically, a contraction on an edge is a graph with the vertices of that edge merged into one vertex, and the edge removed.
+A **contraction** on an edge $e = \set{u, v}$ in $G$ is a graph $G/e$ where $V(G') = ((V(G) \setminus u) \setminus v) \cup w$ where $w$ is a new vertex, and $E(G') = \set{e \in E(G) \middle| u \notin e \wedge v \notin e} \cup \set{\set{w} \cup ((e \setminus u) \setminus v) \middle| e \in \set{e \in E(G) \middle| u \in e \vee v \in e}}$. Basically, a contraction on an edge is a graph with the vertices of that edge merged into one vertex, and the edge removed.
 
 If $G$ is planar, then $G/e$ is also planar, because we could feed the edges its vertices connect to through the same space the edge used to occupy.
 
