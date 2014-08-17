@@ -253,7 +253,7 @@ We can label points on a circuit by writing its label beside that point, and opt
                 * Can be **current controlled** or **voltage controlled**.
                 * A current controlled voltage source provides current as a function of the current passing through a specified point - $I = kI_a$.
                 * A voltage controlled current source provides current as a function of the voltage between two specified nodes - $I = kV_{ab}$.
-        * It is not possible to have both.
+        * It is not possible to have a power source that is both constant current and constant voltage.
         * Independent sources are drawn as circles, dependent sources are drawn as diamonds (rhombuses).
         * Voltage sources have + and - labels, current sources have an arrow.
     * Passive elements **use energy** (including those that simpy store energy like capacitors).
@@ -401,7 +401,7 @@ If we have a resistor $r$ and the voltages at the terminals are $V_1$ and $V_2$,
 
 The unknowns in nodal analysis are the node voltages. Each branch current is represented in terms of node voltage.
 
-KCL can be used directly when there is only one unknown current in the path, and KVL can be used directly when there is only one unknownn voltage in the loop. Otherwise, we need to write out and solve the system of equations.
+KCL can be used directly when there is only one unknown current in the path, and KVL can be used directly when there is only one unknown voltage in the loop. Otherwise, we need to write out and solve the system of equations.
 
 # 26/5/14
 
@@ -545,7 +545,7 @@ So the three methods are:
 
 1. If all sources are independent, remove the effects of the sources and calculate the Thevenin resistance. Then use nodal analysis to get the open circuit voltage.
 2. If there are dependent sources but no independent sources, add a test source to help with finding the Thevenin resistance. Then the Thevenin voltage is 0V.
-3. Otherwise, use nodal analysis to get the open circuit voltage and short circuit voltage, and use this to calculate the Thevenin resistance.
+3. Otherwise, use nodal analysis to get the open circuit voltage and short circuit current, and use this to calculate the Thevenin resistance.
 
 The Thevenin equivalent is relative to two terminals (often called A and B) in section of a circuit. We are trying to find a circuit we can replace that entire section of circuit between A and B with that acts exactly the same.
 
@@ -725,11 +725,11 @@ Given capacitors connected in parallel with capacitances $C_1, \ldots, C_n$, it 
 
 Inductors store energy in magnetic fields. An inductor is a two terminal device that is made up of a conductive coil, optionally with a core of ferromagnetic material.
 
-When current flows into one end of an inductor, it flows out the other end, in the process creating a magnetic field in the coil. When the current flowing through it changes, then the 
+When current flows into one end of an inductor, it flows out the other end, in the process creating a magnetic field in the coil. When the current flowing through it changes, then the ;wip
 
 Inductors have inductance ($L$), which is measured in Henry ($H$), which is the ability to resist changes in current.
 
-A 1 H inductor is one such that when the current changes by 1 A, the voltage across the inductor is 1 V.
+A 1 H inductor is one such that when the current changes by 1 A per second, the voltage across the inductor is 1 V.
 
 Inductance is governed by $V(t) = L\frac{\dee I(t)}{\dee t}$, where $V(t)$ is the voltage across the inductor, $I$ is the current flowing through the inductor, and $L$ is the inductance.
 
@@ -838,7 +838,7 @@ For inductors, $V(t) = L \frac{\dee I}{\dee t} = L \max(I)\frac{\dee}{\dee t} \c
 
 For capacitors, $I(t) = \max(I) \cos(\omega t + \theta)$ and $V(t) = \frac 1 C \int_0^T \max(I) \cos(\omega t + \theta) = \frac{\max(I)}{\omega C} \cos\left(\omega t + \theta - \frac \pi 2\right)$. So $Z = \frac{1}{\omega C} \angle\left(-\frac \pi 2\right)$, so for an inductor it affects only the imaginary component
 
-So when we have an inductor, the current will be lagging the voltage by 90 degrees, and when we have a capacitor, the voltage will be lagging the current by 90 degrees. Capac itors and inductors are purely reactive, while resistors are purely resistive.
+So when we have an inductor, the current will be lagging the voltage by 90 degrees, and when we have a capacitor, the voltage will be lagging the current by 90 degrees. Capacitors and inductors are purely reactive, while resistors are purely resistive.
 
 # 14/7/14
 

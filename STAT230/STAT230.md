@@ -864,7 +864,7 @@ $E(g(X_1, \ldots, X_n)) = \sum_{\text{all } x_1} \cdots \sum_{\text{all } x_n} g
 
 # 7/7/14
 
-If $X_1, \ldots, X_k \sim \operatorname{Mult}(n, p_1, \ldots, p_k)$, then $E(X_1, \ldots, X_k) = \sum_{x_1 = 0}^n$ and $E(X_i) = np_i$ since $X_i \sim \operatorname{}$.
+If $X_1, \ldots, X_k \sim \operatorname{Mult}(n, p_1, \ldots, p_k)$, then $E(X_1, \ldots, X_k) = \sum_{x_1 = 0}^n$ and $E(X_i) = np_i$ since $X_i \sim \operatorname{Bin}(n, p_i)$. ;wip
 
 THe covariance and correlation measures the strength of the relationship between two or more random variables.
 
@@ -904,7 +904,7 @@ $\sigma_{\overline X}^2 = \frac{\sigma_X^2}{n}$ where $n$ is the number of sampl
 
 So when we increase $n$, $\sigma_{\overline X}^2$ gets smaller and smaller. This is because when we add more data to our sample set, our sample average becomes closer to the true expected value.
 
-An **indicator variable** is a binary variable, that indicates whether an event occurred or not. For example, $X \sin \operatorname{Bin}(n, p)$ where $X_i$ is 1 if the $i$th trial was successful or 0 otherwise, so $X = \sum_{i = 1}^n X_i$.
+An **indicator variable** is a binary variable, that indicates whether an event occurred or not. For example, $X \sim \operatorname{Bin}(n, p)$ where $X_i$ is 1 if the $i$th trial was successful or 0 otherwise, so $X = \sum_{i = 1}^n X_i$.
 
 So $E(X) = E(\sum_{i = 1}^n X_i) = \sum_{i = 1}^n  E(X_i) = \sum_{i = 1}^n p = np$, as required. This is an easier way to find variance and mean when there are independent indicator variables.
 
@@ -974,7 +974,7 @@ Physical Setup:
 * Events occur at rate $\lambda$ per unit time.
 * $X$ is the length of time we wait until the first occurrence of the event.
 
-If this is the case, then $X$ has an exponential distribution, and $f_X(x) = $.
+If this is the case, then $X$ has an exponential distribution, and $f_X(x) = \lambda e^{-\lambda x}$ where $\lambda$ is the average rate of the event occurring per unit time.
 
 Clearly, $F_X(x) = P(X \le x)$. If $Y$ is the number of events occurring in an interval of length $x$, then $Y \sim \operatorname{Pois}(\lambda x)$.
 
@@ -1080,7 +1080,7 @@ Moment Generating Functions
 
 The moment generating function uniquely determines a distribution, just like the density function and the cumulative function. This is the value $M_X(t) = E(e^{tX}) = \sum_{\text{all } x} e^{tx} f(x)$, where $t$ is a constant such that $M_X(t)$ is defined for some interval of $t$, $[-a, a]$.
 
-For continuous random variables, $M_X(t) = \int_{-\infty}^\infty e^{tx} f(x)$.
+For continuous random variables, $M_X(t) = \int_{-\infty}^\infty e^{tx} f(x) \dee x$.
 
 Moment generating functions allow us to find the expected value of various exponents of the random variable.
 
@@ -1106,6 +1106,16 @@ For example, use moment generating functions to show that the binomimal distribu
 Also, if $X \sim \operatorname{N}(\mu, \sigma^2)$, then $M_X(t) = e^{\mu t + \frac{\sigma^2 t^2}{2}}$.
 
 # 30/7/14
+
+Find the expected value of $X^2$ if $X \in [-2, 2]$ with a uniform distribution:
+
+> Clearly, $E(X) = \int_{-2}^2 x^2 f_X(x) \dee x = \frac 1 4 \int_{-2}^2 x^2 \dee x = \frac{16}{12} = \frac 4 3$.  
+
+Find the probability that the mean of a sample of 108 observations is more than 46 given that the population mean is 45 with a standard deviation of 26:
+
+> Let $S$ be the sample set containing 108 observations.  
+> Clearly, each observation in $S$ has its own probability distribution, and if we add them up we get a normal distribution.  
+> Clearly, $E(S) \sim \operatorname{N}\left(45, \frac{26}{\sqrt{108}}\right)$. So the probability is $P(E(S) > 46) \approxeq 0.3447$.  
 
 ;wip: exam on August 6, 4pm-6:30pm, PAC1-6, sections 4, 5, 7, 8, 9, 10.1, 10.2, assigned seats, 8 short answer, pink tie calculators, formula sheet + normal distrubution table
 ;wip: 8.3 and 9.4 not covered
