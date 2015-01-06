@@ -1,15 +1,23 @@
 #!/bin/sh
 
 DATADIR=.
-MATHJAX=http://benweet.github.io/stackedit/lib/MathJax/MathJax.js?config=TeX-AMS_HTML
 
-files="$(find -L "$DATADIR" -type f)"
+files=$(find -L "$DATADIR" -type f -name "*.md")
 echo "$files" | while read file; do
-	echo "Building $file"
-	pandoc --output=${file%%.*}.html \
-		--mathjax=$MATHJAX \
-		--data-dir=$DATADIR \
-		--template=template.html \
-		--variable=pagetitle:${file%%.*}\ |\ Anthony Zhang \
-	$file
+  result=${file%.*}.html
+  
+  if [ ! -f "$result" ]; then
+    difference=1000
+  else
+    difference=$(($(date -r "$file" +%s)-$(date -r "$result" +%s)))
+  fi
+  difference=1
+  
+  if [ $difference -gt 0 ]; then # source file was modified after the output file or output doesn't exist
+    echo "Rebuilding $file"
+    name=$(basename "$file")
+    pandoc "--output=$result" \
+      --data-dir=$DATADIR --template=template.html \
+      --mathjax --variable=pagetitle:${name%.*}\ \|\ Anthony\ Zhang $file
+  fi
 done

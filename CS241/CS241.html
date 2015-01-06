@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>CS241 | Anthony Zhang</title>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>
+function highlight() { // highlight all code blocks using HighlightJS
+  var code_blocks = document.getElementsByTagName("code");
+  for (var i = 0; i < code_blocks.length; i++)
+    hljs.highlightBlock(code_blocks[i]);
+}
+</script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body onload="highlight()">
+  <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="/blog/" class="page">blog</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="/Résumé.pdf" class="page">résumé</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.mesecons.net/">mesecons</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.autohotkey.net/~Uberi/">autohotkey.net</a></li>
+  </ul>
+<h1 id="cs241">CS241</h1>
+<p>Foundations of Sequential programs.</p>
+<pre><code>Instructor: Bradley Lushman
+ISA: Sean Harrap
+Email: CS241@uwaterloo.ca
+Web: http://www.student.cs.uwaterloo.ca/~cs241</code></pre>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
+\]</span></p>
+<h1 id="section">6/1/15</h1>
+<p>Weekly assignments, 11 total.</p>
+<p>A sequential program is an &quot;ordinary&quot; program - one that is not concurrent, parallel, or so on. Sequential programs only do one thing at a time - they are signle threaded.</p>
+<p>As this course focuses on the foundation, we will be starting from the hardware, and figure out how sequential program works from there.</p>
+<p>This course uses a simulated MIPS machine for the assignment. At the end we will be able to run a relatively complex C-like language that can run on the MIPS machine.</p>
+<h2 id="binary-and-hexadecimal-numbers">Binary and Hexadecimal Numbers</h2>
+<p>Refer to earlier notes for background.</p>
+<p>A bit is a binary digit - a 0 or a 1. A nibble is a collection of 4 bits. A byte is a collection of 8 bits, although historically it could be any number needed to hold a signle character - sometimes 7. A word is the a machine-specific grouping of bits - the number of bits in an address on the computer.</p>
+<p>In this course we will be using a 32-bit architecture.</p>
+<p>Data in a computer's memory could mean anything - it is simply data.</p>
+<p>There are a number of conventions for representing negative numbers in binary. The <strong>sign magnitude</strong> convention has the leftmost bit of a binary number represent whether it is negative. Although this system is simple, it's difficult to do math with since we have to treat the first bit separately for a lot of operations. Plus, there's two representations for the number 0 - <code>00...00</code> and <code>10...00</code>.</p>
+<p>The <strong>one's complement</strong> convention has positive numbers written normally, and negative numbers are their magnitude with their bits flipped. This works better for certain operations, but there is still two 0 representations, which complicates things unnecessarily.</p>
+<p>The <strong>two's complement</strong> convention has positive numbers written normally, and the negative numbers are simply their magnitude with their bits flipped and 1 added. The advantage of this system is that the first bit still denotes the sign. Plus, there is only one representation for 0, and operations like addition work as usual, modulo <span class="math">\(2^n\)</span>.</p>
+<p>To find the numerical value of a number represented using <span class="math">\(n\)</span>-bit two's complement, we first check the sign bit. If 0, then we simply convert binary to a non-negative number as usual. Otherwise, we convert the binary to a non-negative number as usual, and subtract <span class="math">\(2^n\)</span> from that result to get a negative number as a result.</p>
+<p>To quickly negate a binary number in two's complement quickly, flip all the bits and add 1. This allows us to</p>
+<p>For 3-bit numbers, each binary string, in ascneding order, represents 0, 1, 2, 3, -4, -3, -2, -1.</p>
+<p>A byte could also potentially be a character. Characters have multiple possibble encodings, such as unicode and ASCII. ASCII is a 7-bit code (for historical reasons, in order to avoid sending expensive bits) that has representations for most America-centric characters, although there are 8-bit extensions like those by IBM that add multilingual characters. In an 8-bit byte world, the eighth bit is 0 in standard ASCII. We will be using ASCII in this course to represent characters.</p>
+<p>A byte could also be part of a data structure, or even part of an instruction. In this course, we have 32-bit instructions. A byte could also just be garbage - memory that isn't currently being used for anything and has no meaning.</p>
+<p>The idea is that the meaning of a byte is whatever meaning we assign to it, and we have to remember what each little chunk of memory we're using actually means.</p>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>

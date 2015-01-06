@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
@@ -215,7 +215,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <li>A voltage controlled current source provides current as a function of the voltage between two specified nodes - <span class="math">\(I = kV_{ab}\)</span>.</li>
 </ul></li>
 </ul></li>
-<li>It is not possible to have both.</li>
+<li>It is not possible to have a power source that is both constant current and constant voltage.</li>
 <li>Independent sources are drawn as circles, dependent sources are drawn as diamonds (rhombuses).</li>
 <li>Voltage sources have + and - labels, current sources have an arrow.</li>
 </ul></li>
@@ -301,7 +301,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>There's a faster way using matrix inversion, but we will be using the plain algebraic method for simplicity.</p>
 <p>If we have a resistor <span class="math">\(r\)</span> and the voltages at the terminals are <span class="math">\(V_1\)</span> and <span class="math">\(V_2\)</span>, and the current is travelling from <span class="math">\(V_2\)</span> to <span class="math">\(V_1\)</span>, then the current is <span class="math">\(I = \frac{V_2 - V_1} r\)</span>. The voltage on the side the current is flowing out of for a resistor is always lower than the side it is flowing into - current always flows toward lower voltage.</p>
 <p>The unknowns in nodal analysis are the node voltages. Each branch current is represented in terms of node voltage.</p>
-<p>KCL can be used directly when there is only one unknown current in the path, and KVL can be used directly when there is only one unknownn voltage in the loop. Otherwise, we need to write out and solve the system of equations.</p>
+<p>KCL can be used directly when there is only one unknown current in the path, and KVL can be used directly when there is only one unknown voltage in the loop. Otherwise, we need to write out and solve the system of equations.</p>
 <h1 id="section-9">26/5/14</h1>
 <h2 id="supernodes">Supernodes</h2>
 <p>A <strong>supernode</strong> is an area of a circuit possibly consisting of nodes or circuit elements, where KCL holds. In other words, it is an area of the circuit where the current leaving is the same as the current entering.</p>
@@ -379,7 +379,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <ol style="list-style-type: decimal">
 <li>If all sources are independent, remove the effects of the sources and calculate the Thevenin resistance. Then use nodal analysis to get the open circuit voltage.</li>
 <li>If there are dependent sources but no independent sources, add a test source to help with finding the Thevenin resistance. Then the Thevenin voltage is 0V.</li>
-<li>Otherwise, use nodal analysis to get the open circuit voltage and short circuit voltage, and use this to calculate the Thevenin resistance.</li>
+<li>Otherwise, use nodal analysis to get the open circuit voltage and short circuit current, and use this to calculate the Thevenin resistance.</li>
 </ol>
 <p>The Thevenin equivalent is relative to two terminals (often called A and B) in section of a circuit. We are trying to find a circuit we can replace that entire section of circuit between A and B with that acts exactly the same.</p>
 <p>The open circuit voltage is just the voltage across A and B if we removed everything that is not in that section of the circuit and measured the voltage across the terminal. We basically ripped the section out of the circuit so we don't consider any other wires or components, and then put a voltmeter on the terminals.</p>
@@ -497,9 +497,9 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>Given capacitors connected in parallel with capacitances <span class="math">\(C_1, \ldots, C_n\)</span>, it is possible to replace all of them with an <strong>equivalent parallel capacitance</strong> <span class="math">\(C_{eq} = C_1 + \ldots + C_n\)</span>. This is similar to the formula for equivalent resistance for resistors in series.</p>
 <h1 id="section-22">26/6/14</h1>
 <p>Inductors store energy in magnetic fields. An inductor is a two terminal device that is made up of a conductive coil, optionally with a core of ferromagnetic material.</p>
-<p>When current flows into one end of an inductor, it flows out the other end, in the process creating a magnetic field in the coil. When the current flowing through it changes, then the</p>
+<p>When current flows into one end of an inductor, it flows out the other end, in the process creating a magnetic field in the coil. When the current flowing through it changes, then the ;wip</p>
 <p>Inductors have inductance (<span class="math">\(L\)</span>), which is measured in Henry (<span class="math">\(H\)</span>), which is the ability to resist changes in current.</p>
-<p>A 1 H inductor is one such that when the current changes by 1 A, the voltage across the inductor is 1 V.</p>
+<p>A 1 H inductor is one such that when the current changes by 1 A per second, the voltage across the inductor is 1 V.</p>
 <p>Inductance is governed by <span class="math">\(V(t) = L\frac{\dee I(t)}{\dee t}\)</span>, where <span class="math">\(V(t)\)</span> is the voltage across the inductor, <span class="math">\(I\)</span> is the current flowing through the inductor, and <span class="math">\(L\)</span> is the inductance.</p>
 <p>So if <span class="math">\(V(t)\)</span> is constant, <span class="math">\(\frac{\dee I(t)}{\dee t}\)</span> is constant and <span class="math">\(V = L\frac{I_f - I_i}{t_f - t_i}\)</span>.</p>
 <p>Since <span class="math">\(L = \frac{V(t)}{\frac{\dee I(t)}{\dee t}}\)</span>, the current can never change instantaneously. The inductor will slowly let the current change over time, even if there is a current source trying to change it instantaneously.</p>
@@ -554,7 +554,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>For resistors, <span class="math">\(V \angle \theta = I \angle \theta R\)</span>, so <span class="math">\(Z = \frac{V \angle \theta}{I \angle \theta} = \frac V I = R\)</span>. So for resistors, the impedance is just the resistance. This is because the voltage and current are both in phase for resistors due to Ohm's law for resistances, so they cancel out the angles.</p>
 <p>For inductors, <span class="math">\(V(t) = L \frac{\dee I}{\dee t} = L \max(I)\frac{\dee}{\dee t} \cos(\omega t + \theta) = \omega L \max(I) \cos\left(\omega t + \theta + \frac \pi 2\right)\)</span> and <span class="math">\(I(t) = \max(I) \cos(\omega t + \theta)\)</span>. So <span class="math">\(V = \omega L\max(I) \angle\left(\theta + \frac \pi 2\right)\)</span> and <span class="math">\(\max(I) \angle \theta\)</span> and <span class="math">\(Z = \omega L \angle \frac \pi 2\)</span>, so for an inductor it affects only the imaginary component.</p>
 <p>For capacitors, <span class="math">\(I(t) = \max(I) \cos(\omega t + \theta)\)</span> and <span class="math">\(V(t) = \frac 1 C \int_0^T \max(I) \cos(\omega t + \theta) = \frac{\max(I)}{\omega C} \cos\left(\omega t + \theta - \frac \pi 2\right)\)</span>. So <span class="math">\(Z = \frac{1}{\omega C} \angle\left(-\frac \pi 2\right)\)</span>, so for an inductor it affects only the imaginary component</p>
-<p>So when we have an inductor, the current will be lagging the voltage by 90 degrees, and when we have a capacitor, the voltage will be lagging the current by 90 degrees. Capac itors and inductors are purely reactive, while resistors are purely resistive.</p>
+<p>So when we have an inductor, the current will be lagging the voltage by 90 degrees, and when we have a capacitor, the voltage will be lagging the current by 90 degrees. Capacitors and inductors are purely reactive, while resistors are purely resistive.</p>
 <h1 id="section-29">14/7/14</h1>
 <p>Impedance is a complex value measured in Ohms, where the real part is the resistance and the imaginary part is the reactance.</p>
 <p>For inductors, <span class="math">\(V = L\frac{\dee I}{\dee t}\)</span> and <span class="math">\(I(t) = \max(I) \sin(\omega t)\)</span>, so <span class="math">\(V(t) = L\frac{\dee}{\dee t}\max(I) \sin(\omega t) = L\omega \max(I) \cos(\omega t)\)</span>.</p>

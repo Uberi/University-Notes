@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
@@ -178,7 +178,7 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p>For example, <code>a*</code> matches zero or more &quot;a&quot; instances, like &quot;&quot; and &quot;aaaaaaaaaaaaaaaaaaaaaaaaa&quot;. It denotes the set of all strings consisting entirely of &quot;a&quot; and the empty string.</p>
 <p>So to match either &quot;CS246&quot; or &quot;cs246&quot;, we might use <code>egrep &quot;CS246|cs246&quot;</code> (the quotes are necessary because otherwise it is a pipe), or simply <code>egrep &quot;(CS|cs)246&quot;</code>. Alternatively, to do it without case sensitivity we might use <code>egrep [cC][sS]246</code>. The <code>[...]</code> operation is called a character class, and matches one of the characters inside it. Also, the <code>[^...]</code> matches anything that is not one of the characters inside it.</p>
 <p><code>?</code> means &quot;zero or one of the preceding&quot;. So <code>egrep (abc)?d?</code> matches &quot;&quot;, &quot;abc&quot;, &quot;d&quot;, and &quot;abcd&quot;. <code>*</code> means &quot;zero or more of the preceding&quot;, while <code>+</code> means &quot;one or more of the preceding&quot;.</p>
-<p><code>{A, B}</code> means &quot;between <code>A</code> and <code>B</code> inclusive of the preceding&quot;. If <code>B</code> is blank, then it is assumed to be infinity. Clearly, <code>?  is equivalent to</code>{0, 1}<code>and</code>+<code>is equivalent to</code>{1,}`.</p>
+<p><code>{A, B}</code> means &quot;between <code>A</code> and <code>B</code> inclusive of the preceding&quot;. If <code>B</code> is blank, then it is assumed to be infinity. Clearly, <code>?</code> is equivalent to <code>{0, 1}</code> and <code>+</code> is equivalent to <code>{1,}</code>.</p>
 <p><code>.</code> means &quot;any character&quot;. For example, <code>egrep ...</code> will match any three characters. <code>^</code> matches the beginning of a line, and <code>$</code> matches the end.</p>
 <p>For example, to list all files in the current directory with exactly one &quot;a&quot;, we might use <code>ls | egrep &quot;^[^a]*a[^a]*$&quot;</code>.</p>
 <h1 id="section-3">15/5/14</h1>
@@ -205,7 +205,7 @@ TA: Richard Wallace, cs246@student.cs.uwaterloo.ca</code></pre>
 <p><code>OPERATOR</code> is an operation to perform with the permissions. This value can be <code>+</code> for adding a permission, <code>-</code> for removing a permission, or <code>=</code> to clear all the permissions and add the new one (set the permissions exactly).</p>
 <p><code>PERMISSIONS</code> is simply the permissions to be modified. This value is a string consisting of the characters <code>r</code> for read, <code>w</code> for write, and <code>x</code> for execute, or the octal equivalent.</p>
 <p><code>FILE</code> is the file that the permission changes should apply to.</p>
-<p>For example <code>chmod o+rw sample.txt</code> gives the owner permission to read and write <code>sample.txt</code>.</p>
+<p>For example <code>chmod u+rw sample.txt</code> gives the owner permission to read and write <code>sample.txt</code>.</p>
 <h2 id="shell-scripting">Shell Scripting</h2>
 <h3 id="variables">Variables</h3>
 <p>In Bash, we can set variables using things like <code>x=1</code> or <code>x=&quot; a b c &quot;</code>. It is important that <strong>there are no spaces around the equal sign</strong>. If there are, the shell would interpret the <code>x</code> as a command.</p>
@@ -250,7 +250,7 @@ else
     BODY
 fi</code></pre>
 <p>When we used it in the form above, we actually executed the <code>[</code> program with the value of <code>$?</code>, <code>-eq</code>, and <code>0</code>, which sets the exit code to 0 if the expression evaluates to true (<code>$?</code> is equal to <code>0</code>), or 1 otherwise. This happens to work very well with the <code>if</code> construct.</p>
-<p><code>[</code> support various other options, like <code>-w FILE</code> for checking if a file is writeable, <code>-x FILE</code> to check if a file is executable, and <code>-r FILE</code> to check if a file is readable.</p>
+<p><code>[</code> supports various other options, like <code>-w FILE</code> for checking if a file is writeable, <code>-x FILE</code> to check if a file is executable, and <code>-r FILE</code> to check if a file is readable.</p>
 <p><code>-eq</code> is an operator for comparing integers. To compare strings, we can use <code>==</code> or <code>=</code>.</p>
 <p>We can have as many <code>elif</code> statements as we need.</p>
 <p>A <code>while</code> loop statement has a similar form to an <code>if</code> statement. The following prints out all the numbers from 1 to its first command line argument, inclusive:</p>
@@ -452,7 +452,7 @@ int &amp;z = y;</code></pre>
 <p>An array is a set of homogenous values.</p>
 <p>Arguments in C++ are passed by value, but we can fake passing by reference by using reference types.</p>
 <p>Functions in C++ accept arrays in much the same way as in C: <code>int f(int a[])</code>.</p>
-<p>THe <code>main</code> function has two possible prototypes:</p>
+<p>The <code>main</code> function has two possible prototypes:</p>
 <pre><code>int main(); // note that we didn&#39;t need to use void
 int main(int argc, char *argv[] );</code></pre>
 <p>If we use the second form, <code>argc</code> is the length of <code>argv</code>, and <code>argv</code> is an array of strings representing each command line argument. <code>argc</code> is always non-zero, since there is always at least one argument.</p>
@@ -691,7 +691,7 @@ Node &amp;Node::operator=(const Node &amp;other) {
         other.next = next;
     }
     
-    Node &amp;operator=(Node other) {
+    Node &amp;operator=(Node &amp;other) {
         Node t = other; // using the default copy constructor to make a copy of `other`
         this-&gt;swap(t); // set the fields to the temporary value
         return *this;
@@ -726,7 +726,7 @@ int main() {
     Vec **w = new Vec *[10];
 }</code></pre>
 <p>Suppose we have a constant argument: <code>void f(const Student &amp;s) { BODY }</code>. Inside of <code>BODY</code>, we cannot modify the fields of <code>s</code> or assign a new value to it. Additionally, we cannot call any methods on <code>s</code> unless those methods specify that they do not modify fields too.</p>
-<p>We can specify that a method will not change its instance by using <code>const</code>: <code>float Student::grade const () { BODY }</code>. If specified, the compiler checks that the method does no modify fields, and if it doesn't, we can call the methods when their instances are constant, in addition to when their instances are not.</p>
+<p>We can specify that a method will not change its instance by using <code>const</code>: <code>float Student::grade const () { BODY }</code>. If specified, the compiler checks that the method does not modify fields, and if it doesn't, we can call the methods when their instances are constant, in addition to when their instances are not.</p>
 <p>We can also define that a field is exempt from the compiler checking for fields being modified in a <code>const</code> object. If we define a field like <code>mutable int x;</code>, then we can actually change it even when its instance is constant.</p>
 <p>A <strong>static field</strong> is a field of a class rather than a method of an instance of a class. So all instances of the class would share the same static field, so modifying it would change its value for all instances. For example:</p>
 <pre><code>struct Vec {
@@ -904,7 +904,6 @@ int main() {
 <p>When we call the copy constructor of a subclass <code>B</code> where only the base class <code>A</code> has a copy constructor, the default copy constructor for <code>B</code> is called. The default copy constructor calls the copy constructor for the base class, <code>A</code>, and then does a shallow copy on <code>B</code> - it copies the instance field by field.</p>
 <p>The default copy constructor is therefore roughly equivalent to <code>B &amp;B::B(const B &amp;other): A(other), y(other.y)</code>. We can do the same thing for <code>operator=</code>, since the default <code>operator=</code> works in almost the same way: <code>B: &amp;B::operator=(const B &amp;other) { A::operator=(other); y = other.y }</code>. As before, we still need to consider heap memory and such.</p>
 <h1 id="section-18">10/7/14</h1>
-<p>The <code>virtual</code> keyword is an easier way of specifying a method is virtual: <code>virtual void f();</code> is the same as <code>void f() = 0</code>.</p>
 <p>Consider the following:</p>
 <pre><code>class A {
     int x, y;
@@ -946,7 +945,7 @@ int main() {
 }</code></pre>
 <p>Mixed assignment is when we try to assign other classes into an instance of the current class. For example, if <code>B</code> implemented <code>B::operator=</code> to override <code>A::operator=</code>, it would have to accept an <code>A</code> object for its parameter. As a result, it would be possible to pass an <code>A</code> object to a <code>B</code> object, which causes mixed assignment.</p>
 <p>A pure virtual method can actually have an implementation, which is occasionally useful. A pure virtual method is simply a method that subclasses must override, or otherwise the subclass becomes an abstract class.</p>
-<p>We can do this by declaring a method like <code>void f() = 0;</code> in the header file, and in the source file implementing it normally, like <code>void BASE_CLASS::f() { }</code>. We do this because then we can call <code>BASE_CLASS::f()</code> inside of our</p>
+<p>We can do this by declaring a method like <code>void f() = 0;</code> in the header file, and in the source file implementing it normally, like <code>void BASE_CLASS::f() { }</code>. We do this because then we can call <code>BASE_CLASS::f()</code> inside of our subclass methods.</p>
 <p>Now we can do the above using something like the following:</p>
 <pre><code>class A {
     int x, y;

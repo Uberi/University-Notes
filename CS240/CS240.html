@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>CS240 | Anthony Zhang</title>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>
+function highlight() { // highlight all code blocks using HighlightJS
+  var code_blocks = document.getElementsByTagName("code");
+  for (var i = 0; i < code_blocks.length; i++)
+    hljs.highlightBlock(code_blocks[i]);
+}
+</script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body onload="highlight()">
+  <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="/blog/" class="page">blog</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="/Résumé.pdf" class="page">résumé</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.mesecons.net/">mesecons</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.autohotkey.net/~Uberi/">autohotkey.net</a></li>
+  </ul>
+<h1 id="cs240">CS240</h1>
+<p>Data Structures and Data Management.</p>
+<pre><code>Therese Beidl
+Section 002
+Email: beidl@uwaterloo.ca
+Web: http://www.student.cs.uwaterloo.ca/~cs240
+ISA: Joseph (Danny) Sitter
+ISA Email: cs240@studennt.cs.uwaterloo.ca</code></pre>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
+\]</span></p>
+<p>Seciton 1 and 2 are the regular classes, and section 3 is the enhanced section and has very different content.</p>
+<p>Midterm at Thurs. Feb. 26 at 4:30 PM, worth 25%. Final exam worth 50%. Must pass weighted average of exam to pass the course. 5 assignments, each worth 5%.</p>
+<h1 id="section">6/1/15</h1>
+<p>Assignment 0 is due on Tuesdays. Assignment 0 is due on Jan. 13. ;wip: do it</p>
+<p>Suppose we have a lot of data to keep track of. We could store it in an array/list, but depending on the type of the data, this might not be the best choice. Data structures should make it easy and efficient to perform the operations we need. For example, an English dictionary probably needs to be efficiently searched, but we don't really need to care about insertion and deletion since they're so rare.</p>
+<p>The best data structure for something depends on the type of data we want to store. Our goal is to have a short running time and little memory.</p>
+<p>In this course we will be performing theoretical analysis, developing ideas and pseudocode (and sometimes, implementations), and analyzing them using tools like big-O notation.</p>
+<p>An Abstract Data Type is the idea of describing something by what it can do, not how it does it.</p>
+<p>Required background includes arrays, linked lists, strings, stacks, queues, ADTs, recursive algorithms, trees, sorting algorithms (insertion, selection, quick, merge), binary search/BSTs, arithmetic series, geometric series, harmonic series (<span class="math">\(\frac 1 1 + \ldots + \frac 1 n = \ln n\)</span>).</p>
+<p>In this course, <span class="math">\(\log n\)</span> is implicitly <span class="math">\(\log_2 n\)</span> - all logarithms are base 2 unless otherwise stated.</p>
+<p>A <strong>problem</strong> is a description of a general situation and the desired outcome. For example, the sorting problem is &quot;given comparable values, put them in sorted order&quot;.</p>
+<p>A <strong>problem instance</strong> is a particular input to a problem, like a particular array of numbers to sort for the sorting problem.</p>
+<p>A <strong>problem solution</strong> is a change/process that, given the situation of a problem instance, results in the desired outcome. For example, the sorted array of numbers for the sorting problem.</p>
+<p>We <strong>solve</strong> a problem by giving the correct algorithm for it. A solution is <strong>correct</strong> if it finds a solution for every possible input that can be given.</p>
+<p>An <strong>algorithm</strong> is a finite description of a process that gives an answer (a solution that is not necessarily correct) for all possible instances of a problem.</p>
+<p><strong>Efficiency</strong> usually refers to an algorithm's runtime, and sometimes its memory usage. It may also refer to things specific to the problem domain, like the number of comparisons done.</p>
+<p>To solve a problem:</p>
+<ol style="list-style-type: decimal">
+<li>Design an algorithm.</li>
+<li>Write down the main idea of the algorithm in plain prose. For example, &quot;for increasing <span class="math">\(i\)</span>, make <span class="math">\(A[0 \ldots i]\)</span> sorted by inserting <span class="math">\(A[i]\)</span> into a sorted <span class="math">\(A[0 \ldots i - 1]\)</span>&quot; for the sorting problem.</li>
+<li><p>Optionally, write pseudocode - code that might not be a real language, and is something like a mix between prose and code. This is a more precise way of specifying an algorithm. Any consistent, precise, and clearly understandable language will be accepted as pseudocode.</p>
+<pre><code>Preconditions: an array `A[0 ... n - 1]`$.
+Postconditions: `A` is sorted
+for i in 1 ... n - 1:
+  value = A[i]
+  j = i - 1
+  while j &gt;= 0 and A[j] &gt; key:
+    A[j + 1] = A[j]
+    j = j - 1
+  A[j + 1] = value</code></pre></li>
+<li>Argue/prove that it is correct.</li>
+<li>We can use formal correctness proofs, but this is often excessive to convince someone an algorithm is correct. Instead, we can simply give lots of invariants and prove that the algorithm terminates.</li>
+<li>For example, for the above, we would say that for the inner loop, &quot;<code>A[j + 1 ... i]</code> contains items that are bigger than <code>value</code>, and is in sorted order&quot; is an invariant.</li>
+<li>It is very important to prove that it terminates, especially recursive algorithms. We simply use the standard methods specified in CS245, but we can usually just write that each call or iteration gets some smaller input, and there is some small input for which the algorithm terminates.</li>
+<li>Analyze how good the algorithm is, in terms of efficiency and sometimes lower bounds.</li>
+<li>For this we use time complexity/running-time analysis, memory usage analysis, and so on.</li>
+<li>For example, the above code is known as Insertion Sort, which we already know to have a worst case time complexity of <span class="math">\(O(n^2)\)</span> and a best case time complexity of <span class="math">\(O(n)\)</span>.</li>
+<li>Recall that formally, an algorithm being in <span class="math">\(O(f(n))\)</span> means that there exists a <span class="math">\(k &gt; 0\)</span> and <span class="math">\(m \ge 0\)</span> such that for all <span class="math">\(n &gt; m\)</span>, <span class="math">\(k \cdot f(n) &gt; T(n)\)</span> where <span class="math">\(T(n)\)</span> represents the number of constant time steps or amount of time that the algorithm needs to give an answer for an input of size <span class="math">\(n\)</span> - the running time function. This is written as <span class="math">\(T(n) \in O(f(n))\)</span>.</li>
+<li><p>Repeat above steps until satisfactory algorithm is found.</p></li>
+</ol>
+<p>Only after this point would we implement/experiment the algorithm.</p>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>

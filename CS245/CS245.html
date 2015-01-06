@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
@@ -156,7 +156,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <h3 id="precedence">Precedence</h3>
 <p>We now introduce a system of precedence. The logical connectives listed by priority, from highest to lowest, are <span class="math">\(\neg\)</span>, <span class="math">\(\wedge\)</span>, <span class="math">\(\vee\)</span>, <span class="math">\(\rightarrow\)</span>, and <span class="math">\(\leftrightarrow\)</span>.</p>
 <p>Precedence is the idea that some connectives get higher priority than others. For example, <span class="math">\(p \vee q \wedge r\)</span> could potentially mean either <span class="math">\(((p \vee q) \wedge r)\)</span>, or <span class="math">\((p \vee (q \wedge r))\)</span>. But since <span class="math">\(\wedge\)</span> has a higher precedence than <span class="math">\(\vee\)</span>, we define <span class="math">\(p \vee q \wedge r\)</span> to mean <span class="math">\((p \vee (q \wedge r))\)</span>.</p>
-<p>When there are multiple ambiguities, we start with the ones with highest precedence. For example, <span class="math">\(\neg p \wedge q \vee r\)</span> is resolved to <span class="math">\((neg p) \wedge q \vee r\)</span>, then <span class="math">\((((neg p) \wedge q) \vee r)\)</span>.</p>
+<p>When there are multiple ambiguities, we start with the ones with highest precedence. For example, <span class="math">\(\neg p \wedge q \vee r\)</span> is resolved to <span class="math">\((\neg p) \wedge q \vee r\)</span>, then <span class="math">\((((\neg p) \wedge q) \vee r)\)</span>.</p>
 <p>With this in place, we can now eliminate many of the superfluous parentheses to clean up our formulas.</p>
 <p><strong>Course of values induction</strong> is a type of strong induction where the inductive hypothesis used to prove the inductive conclusion is the conjunction of all the previous cases.</p>
 <p>In other words, we do course of values induction by proving a property holds for <span class="math">\(M(1)\)</span>, and then by proving that <span class="math">\(M(1) \wedge \ldots \wedge M(k) \implies M(k + 1)\)</span> for any <span class="math">\(k \ge 1\)</span>. By the principal of strong induction, <span class="math">\(M(n)\)</span> therefore holds for all <span class="math">\(n \ge 1\)</span>.</p>
@@ -183,7 +183,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <li><span class="math">\((A \leftrightarrow B) = \begin{cases} 1 &amp;\text{if } A^t = B^t \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</li>
 </ol>
 <p>Given a set of formulas <span class="math">\(\Sigma\)</span>, <span class="math">\(\Sigma^t = \begin{cases} 1 &amp;\text{if } \forall A \in \Sigma, A^t = 1 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>. In other words, a set of formulas is true in a given truth valuation if and only if all of the formulas in the set are true.</p>
-<p><span class="math">\(\Sigma\)</span> is <strong>satisfiable</strong> if and only if there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(\Sigma^t = 1\)</span>. It this <span class="math">\(t\)</span> exists, then <span class="math">\(t\)</span> <strong>satisfies</strong> <span class="math">\(\Sigma\)</span>. Therefore, <span class="math">\(\emptyset\)</span> satisfiable by any truth valuation.</p>
+<p><span class="math">\(\Sigma\)</span> is <strong>satisfiable</strong> if and only if there exists a truth valuation <span class="math">\(t\)</span> such that <span class="math">\(\Sigma^t = 1\)</span>. It this <span class="math">\(t\)</span> exists, then <span class="math">\(t\)</span> <strong>satisfies</strong> <span class="math">\(\Sigma\)</span>. Therefore, <span class="math">\(\emptyset\)</span> is satisfiable by any truth valuation.</p>
 <p>A truth valuation can also be called a <strong>model</strong>.</p>
 <p>A <strong>tautology</strong> is a formula which is always true, so for any truth valuation <span class="math">\(t\)</span>, <span class="math">\(A^t = 1\)</span>.</p>
 <p>A <strong>contradiction</strong> is a formula which is always false, so for any truth valuation <span class="math">\(t\)</span>, <span class="math">\(A^t = 0\)</span>.</p>
@@ -234,7 +234,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>This is because we could define <span class="math">\(f\)</span> first in terms of <span class="math">\(A\)</span>, and then define that in terms of <span class="math">\(B\)</span>.</p>
 <p>For example, <span class="math">\(\set{\wedge, \neg}\)</span> is adequate because <span class="math">\(\wedge\)</span> and <span class="math">\(\neg\)</span> are already in the set, and <span class="math">\(A \vee B \equiv \neg((\neg A) \wedge (\neg B))\)</span>, so <span class="math">\(\vee\)</span> is definable in terms of <span class="math">\(\set{\wedge, \neg}\)</span>.</p>
 <h1 id="section-4">26/5/14</h1>
-<p>The Schroder connective is defined as <span class="math">\(A \downarrow B\)</span> where <span class="math">\(A \downarrow B \equiv \neg (A \wedge B)\)</span> - the NOR operation.</p>
+<p>The Schroder connective is defined as <span class="math">\(A \downarrow B\)</span> where <span class="math">\(A \downarrow B \equiv \neg (A \wedge B)\)</span> - the NOR operation. This connective is interesting because it can make an adequate set by itself - <span class="math">\(\set{\downarrow}\)</span> is an adequate set.</p>
 <p><span class="math">\(\set{\neg, \rightarrow}\)</span> is an adequate set.</p>
 <h2 id="proof-calculus">Proof Calculus</h2>
 <p>We want a calculus for reasoning about propositional logic. This will allow us to simplify proofs of validity.</p>
@@ -302,7 +302,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>Natural deduction was born out of people noticing that the Hilbert system is terribly complicated even for the simplest of proofs.</p>
 <p>Let <span class="math">\(\Sigma = \set{\alpha_1, \ldots, \alpha_n}\)</span> be the set of all the premises.</p>
 <p>For convenience, we define that <span class="math">\(\alpha_1, \ldots, \alpha_n\)</span> is equivalent to <span class="math">\(\set{\alpha_1, \ldots, \alpha_n}\)</span>.</p>
-<p>We also define that <span class="math">\(\Sigma, \alpha\)</span> is equivalent to <span class="math">\(\Sigma \cup \set{\alpha}\)</span>, and given a set <span class="math">\(S\)</span>, then <span class="math">\(\Sigma, S\)</span> is equivalent to <span class="math">\(\Sigma, S\)</span>.</p>
+<p>We also define that <span class="math">\(\Sigma, \alpha\)</span> is equivalent to <span class="math">\(\Sigma \cup \set{\alpha}\)</span>, and given a set <span class="math">\(S\)</span>, then <span class="math">\(\Sigma, S\)</span> is equivalent to <span class="math">\(\Sigma \cup S\)</span>.</p>
 <p><span class="math">\(\Sigma \vdash \alpha\)</span> is not a formula, but is a proposition.</p>
 <blockquote>
 <p>If the train arrives late and there are no taxis at the station, then John is late for his meeting.<br />John is not late for his meeting.<br />The train did arrive late.<br />Therefore, there were taxis at the station.</p>
@@ -497,7 +497,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>Proof:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math">\(A_1, \ldots, A_n \vdash \alpha\)</span> (Premise)</li>
-<li><span class="math">\(A_1, \ldots, A_{n - 1} \vdash A_n \rightarrow \alpha\)</span> (<span class="math">\(\rightarrow\)</span>+)</li>
+<li><span class="math">\(A_1, \ldots, A_{n - 1} \vdash A_n \rightarrow \alpha\)</span> (<span class="math">\(\rightarrow+\)</span>)</li>
 <li><span class="math">\(\vdash A_1 \rightarrow (\ldots (A_n \rightarrow \alpha) \ldots)\)</span></li>
 <li><span class="math">\(\Sigma \vdash A_1 \rightarrow (\ldots (A_n \rightarrow \alpha) \ldots)\)</span></li>
 <li><span class="math">\(\Sigma \vdash A_1\)</span> (premise)</li>
@@ -597,7 +597,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <li><span class="math">\(A \rightarrow B, \neg B, \neg \neg A \vdash A \rightarrow B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
 <li><span class="math">\(A \rightarrow B, \neg B, \neg \neg A \vdash B\)</span> (<span class="math">\(\rightarrow-\)</span> with 3, 4)</li>
 <li><span class="math">\(A \rightarrow B, \neg B, \neg \neg A \vdash \neg B\)</span> (<span class="math">\(\epsilon\)</span>)</li>
-<li><span class="math">\(A \rightarrow B, \neg B \vdash \neg A\)</span> (<span class="math">\(\neg-\)</span>)</li>
+<li><span class="math">\(A \rightarrow B, \neg B \vdash \neg A\)</span> (<span class="math">\(\neg-\)</span> with 5, 6)</li>
 <li><span class="math">\(A \rightarrow B \vdash \neg B \rightarrow \neg A\)</span> (<span class="math">\(\rightarrow+\)</span> with 7)</li>
 </ol>
 <h1 id="section-10">16/6/14</h1>
@@ -701,6 +701,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <li>For example, <span class="math">\(\forall x, \operatorname{equal}(x, x) \in \operatorname{Form}(\mathcal{L})\)</span>.</li>
 </ul></li>
 </ul>
+<p>This means that terms are not formulas, though atoms are.</p>
 <p>We can also draw parse trees for formulas. Here, the leaves are terms and the other nodes are either connectives or predicates or quantifiers.</p>
 <h1 id="section-13">25/6/14</h1>
 <p>A <strong>free</strong> variable is a variable that has a value we can assign to it. A variable that is not free is <strong>bound/quantified</strong>, and occurs when we use quantifiers.</p>
@@ -717,7 +718,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>A variable can occur in multiple places and represent different things. For example, <span class="math">\((\exists x. A(x)) \wedge P(x)\)</span> has a bound <span class="math">\(x\)</span> on the left side of <span class="math">\(\wedge\)</span>, and a free variable <span class="math">\(x\)</span> on the right side. These two refer to different objects.</p>
 <p>A predicate logic formula <span class="math">\(A\)</span> is <strong>closed</strong> and is a <strong>sentence</strong> if and only if there are no free variables - <span class="math">\(FV(A) = \emptyset\)</span>.</p>
 <p>Given a formula <span class="math">\(A\)</span>, <span class="math">\(A[x/t]\)</span> is the same formula, but with all free occurrences of <span class="math">\(x\)</span> <strong>substituted</strong> with the term <span class="math">\(t\)</span>. Note that bound occurrences of <span class="math">\(x\)</span> are not replaced.</p>
-<p>If <span class="math">\(y\)</span> is a variable in <span class="math">\(t\)</span>, then if there are no occurrences of <span class="math">\(x\)</span> in the scope of <span class="math">\(\exists y\)</span> or <span class="math">\(\forall y\)</span> in a formula <span class="math">\(A\)</span>, then <span class="math">\(t\)</span> is <strong>free for</strong> <span class="math">\(x\)</span> in <span class="math">\(A\)</span>. Basically, <span class="math">\(t\)</span> is free for <span class="math">\(x\)</span> in <span class="math">\(A\)</span> if substituting <span class="math">\(t\)</span> for any occurrence of <span class="math">\(x\)</span> does not cause any free variables to become bound.</p>
+<p>If <span class="math">\(y\)</span> is a variable in <span class="math">\(t\)</span> and there are no occurrences of <span class="math">\(x\)</span> in the scope of <span class="math">\(\exists y\)</span> or <span class="math">\(\forall y\)</span> in a formula <span class="math">\(A\)</span>, then <span class="math">\(t\)</span> is <strong>free for</strong> <span class="math">\(x\)</span> in <span class="math">\(A\)</span>. Basically, <span class="math">\(t\)</span> is free for <span class="math">\(x\)</span> in <span class="math">\(A\)</span> if substituting <span class="math">\(t\)</span> for any occurrence of <span class="math">\(x\)</span> does not cause any free variables to become bound.</p>
 <p>For example, if <span class="math">\(t = y + 1\)</span> and <span class="math">\(A = \forall y, P(x)\)</span>, then <span class="math">\(A[x/t]\)</span> would cause the <span class="math">\(y\)</span> in <span class="math">\(y + 1\)</span> we substituted in to become bound, so <span class="math">\(t\)</span> is not free for <span class="math">\(x\)</span> in <span class="math">\(A\)</span>. If <span class="math">\(t\)</span> is not free for <span class="math">\(x\)</span>, then we can make it free for <span class="math">\(x\)</span> by renaming the variable - <span class="math">\(t = y + 1\)</span> becomes <span class="math">\(t = z + 1\)</span>.</p>
 <p>Formally, a substitution <span class="math">\(A[x/t]\)</span> can be defined recursively:</p>
 <ul>
@@ -731,7 +732,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <h3 id="interpretations-and-assignments">Interpretations and Assignments</h3>
 <p>In propositional logic, there were truth valuations that fixed atom values. In predicate logic, there are more elements to consider, such as quantifiers and functions.</p>
 <p>Predicate logic formulas are used to express Boolean values. We can obtain these Boolean values using interpretations. All formulas are either true or false for all posible conditions.</p>
-<p>An <strong>interpretation/model</strong> of a formula <span class="math">\(A\)</span> is a tuple of the form <span class="math">\(I = \tup(U, (\ldots)^I)\)</span>, where <span class="math">\(U\)</span> is the domain/universe of discourse and <span class="math">\((\ldots)^I\)</span> is a function that maps constants to the domain, functions to functions over the domain, and predicates to relations in the domain.</p>
+<p>An <strong>interpretation/model</strong> of a formula <span class="math">\(A\)</span> is a tuple of the form <span class="math">\(I = \tup{U, (\ldots)^I}\)</span>, where <span class="math">\(U\)</span> is the domain/universe of discourse and <span class="math">\((\ldots)^I\)</span> is a function that maps constants to the domain, functions to functions over the domain, and predicates to relations in the domain.</p>
 <p>Basically, an interpretation is a universe of discourse combined with a mapping from elements of the formula to elements in the universe of discourse.</p>
 <p>If <span class="math">\(c \in CS(A)\)</span>, then <span class="math">\(c^I \in U\)</span>. If <span class="math">\(f \in FS(A)\)</span>, then <span class="math">\(f^I: D^n \to D\)</span> where <span class="math">\(n\)</span> is the arity of <span class="math">\(f\)</span>. If <span class="math">\(P \in PS(A)\)</span>, then <span class="math">\(P^I \subseteq D^n\)</span> where <span class="math">\(n\)</span> is the arity of <span class="math">\(P\)</span>.</p>
 <p>Find an interpretation of <span class="math">\(\exists c. P(f(g(a), g(b)), g(c))\)</span>:</p>

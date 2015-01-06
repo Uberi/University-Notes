@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
@@ -526,7 +526,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <h2 id="covariance-and-correlation">Covariance and Correlation</h2>
 <p><span class="math">\(E(g(X_1, \ldots, X_n)) = \sum_{\text{all } x_1} \cdots \sum_{\text{all } x_n} g(x_1, \ldots, x_n)f(x_1, \ldots, x_n)\)</span>.</p>
 <h1 id="section-25">7/7/14</h1>
-<p>If <span class="math">\(X_1, \ldots, X_k \sim \operatorname{Mult}(n, p_1, \ldots, p_k)\)</span>, then <span class="math">\(E(X_1, \ldots, X_k) = \sum_{x_1 = 0}^n\)</span> and <span class="math">\(E(X_i) = np_i\)</span> since <span class="math">\(X_i \sim \operatorname{}\)</span>.</p>
+<p>If <span class="math">\(X_1, \ldots, X_k \sim \operatorname{Mult}(n, p_1, \ldots, p_k)\)</span>, then <span class="math">\(E(X_1, \ldots, X_k) = \sum_{x_1 = 0}^n\)</span> and <span class="math">\(E(X_i) = np_i\)</span> since <span class="math">\(X_i \sim \operatorname{Bin}(n, p_i)\)</span>. ;wip</p>
 <p>THe covariance and correlation measures the strength of the relationship between two or more random variables.</p>
 <p>The <strong>covariance</strong> between random variables <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> is defined as <span class="math">\(\operatorname{Cov}(X, Y) = \sigma_{XY} = E((X - E(X))(Y - E(Y)))\)</span>. We can then expand this to get <span class="math">\(\sigma_{XY} = E(XY) - E(X)E(Y) - E(X)E(Y) + E(X)E(Y) = E(XY) - E(X)E(Y)\)</span>. This is the expected value of the product of how much two variables differ from their expected value - the analogue of variance for two variables.</p>
 <p>For covariance, the only thing we care about is the sign - the actual magnitude of the covariance is not a useful value.</p>
@@ -546,7 +546,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <p><span class="math">\(\operatorname{Var}(\sum a_i X_i) = \sum a_i \operatorname{Var}(X_i) + 2 \sum_{i &lt; j} a_i a_j \operatorname{Cov}(X_i, X_j)\)</span>.</p>
 <p><span class="math">\(\sigma_{\overline X}^2 = \frac{\sigma_X^2}{n}\)</span> where <span class="math">\(n\)</span> is the number of samples - the variance of the complement is inversely correlated to the number of samples in <span class="math">\(X\)</span>.</p>
 <p>So when we increase <span class="math">\(n\)</span>, <span class="math">\(\sigma_{\overline X}^2\)</span> gets smaller and smaller. This is because when we add more data to our sample set, our sample average becomes closer to the true expected value.</p>
-<p>An <strong>indicator variable</strong> is a binary variable, that indicates whether an event occurred or not. For example, <span class="math">\(X \sin \operatorname{Bin}(n, p)\)</span> where <span class="math">\(X_i\)</span> is 1 if the <span class="math">\(i\)</span>th trial was successful or 0 otherwise, so <span class="math">\(X = \sum_{i = 1}^n X_i\)</span>.</p>
+<p>An <strong>indicator variable</strong> is a binary variable, that indicates whether an event occurred or not. For example, <span class="math">\(X \sim \operatorname{Bin}(n, p)\)</span> where <span class="math">\(X_i\)</span> is 1 if the <span class="math">\(i\)</span>th trial was successful or 0 otherwise, so <span class="math">\(X = \sum_{i = 1}^n X_i\)</span>.</p>
 <p>So <span class="math">\(E(X) = E(\sum_{i = 1}^n X_i) = \sum_{i = 1}^n  E(X_i) = \sum_{i = 1}^n p = np\)</span>, as required. This is an easier way to find variance and mean when there are independent indicator variables.</p>
 <p>We have <span class="math">\(n\)</span> letters are addressed to <span class="math">\(n\)</span> people, <span class="math">\(n\)</span> envolopes are addressed to those <span class="math">\(n\)</span> people, and randomly put letters into envelopes. What is the mean and variance of the number of letters placed in the right encolope?</p>
 <blockquote>
@@ -586,7 +586,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <li>Events occur at rate <span class="math">\(\lambda\)</span> per unit time.</li>
 <li><span class="math">\(X\)</span> is the length of time we wait until the first occurrence of the event.</li>
 </ul>
-<p>If this is the case, then <span class="math">\(X\)</span> has an exponential distribution, and <span class="math">\(f_X(x) = \)</span>.</p>
+<p>If this is the case, then <span class="math">\(X\)</span> has an exponential distribution, and <span class="math">\(f_X(x) = \lambda e^{-\lambda x}\)</span> where <span class="math">\(\lambda\)</span> is the average rate of the event occurring per unit time.</p>
 <p>Clearly, <span class="math">\(F_X(x) = P(X \le x)\)</span>. If <span class="math">\(Y\)</span> is the number of events occurring in an interval of length <span class="math">\(x\)</span>, then <span class="math">\(Y \sim \operatorname{Pois}(\lambda x)\)</span>.</p>
 <p>So <span class="math">\(F_X(x) = 1 - P(\text{time to first occurrence} &gt; x) = 1 - P(Y = 0) = 1 - \frac{e^{-\lambda x}(\lambda x)^0}{0!} = 1 - e^{-\lambda x}\)</span>.</p>
 <p>So <span class="math">\(f_X(x) = \lambda e^{-\lambda x}\)</span>. Sometimes, we also write it in terms of <span class="math">\(\theta = \frac 1 \lambda\)</span>. Here, <span class="math">\(\theta\)</span> represents the average amount of time before an event occurring, as opposed to <span class="math">\(\lambda\)</span>, which is the average rate of occurrence per unit time.</p>
@@ -643,7 +643,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <h1 id="section-34">28/7/14</h1>
 <h2 id="moment-generating-functions">Moment Generating Functions</h2>
 <p>The moment generating function uniquely determines a distribution, just like the density function and the cumulative function. This is the value <span class="math">\(M_X(t) = E(e^{tX}) = \sum_{\text{all } x} e^{tx} f(x)\)</span>, where <span class="math">\(t\)</span> is a constant such that <span class="math">\(M_X(t)\)</span> is defined for some interval of <span class="math">\(t\)</span>, <span class="math">\([-a, a]\)</span>.</p>
-<p>For continuous random variables, <span class="math">\(M_X(t) = \int_{-\infty}^\infty e^{tx} f(x)\)</span>.</p>
+<p>For continuous random variables, <span class="math">\(M_X(t) = \int_{-\infty}^\infty e^{tx} f(x) \dee x\)</span>.</p>
 <p>Moment generating functions allow us to find the expected value of various exponents of the random variable.</p>
 <p>The <strong>moments</strong> of <span class="math">\(X\)</span> are the expected values of <span class="math">\(X^r\)</span> for <span class="math">\(r \in [-a, a]\)</span>. <span class="math">\(E(X^r)\)</span> is the <span class="math">\(r\)</span>th moment of <span class="math">\(X\)</span>. It is always true that <span class="math">\(E(X^r) = M^{(r)}(0) = \evalat{\frac{\dee^r M(t)}{\dee t^r}}_{t = 0}\)</span>.</p>
 <p>Find the moment generating function of the binomial distribution:</p>
@@ -659,6 +659,14 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 </blockquote>
 <p>Also, if <span class="math">\(X \sim \operatorname{N}(\mu, \sigma^2)\)</span>, then <span class="math">\(M_X(t) = e^{\mu t + \frac{\sigma^2 t^2}{2}}\)</span>.</p>
 <h1 id="section-35">30/7/14</h1>
+<p>Find the expected value of <span class="math">\(X^2\)</span> if <span class="math">\(X \in [-2, 2]\)</span> with a uniform distribution:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(E(X) = \int_{-2}^2 x^2 f_X(x) \dee x = \frac 1 4 \int_{-2}^2 x^2 \dee x = \frac{16}{12} = \frac 4 3\)</span>.</p>
+</blockquote>
+<p>Find the probability that the mean of a sample of 108 observations is more than 46 given that the population mean is 45 with a standard deviation of 26:</p>
+<blockquote>
+<p>Let <span class="math">\(S\)</span> be the sample set containing 108 observations.<br />Clearly, each observation in <span class="math">\(S\)</span> has its own probability distribution, and if we add them up we get a normal distribution.<br />Clearly, <span class="math">\(E(S) \sim \operatorname{N}\left(45, \frac{26}{\sqrt{108}}\right)\)</span>. So the probability is <span class="math">\(P(E(S) &gt; 46) \approxeq 0.3447\)</span>.</p>
+</blockquote>
 <p>;wip: exam on August 6, 4pm-6:30pm, PAC1-6, sections 4, 5, 7, 8, 9, 10.1, 10.2, assigned seats, 8 short answer, pink tie calculators, formula sheet + normal distrubution table ;wip: 8.3 and 9.4 not covered ;wip: get sample final exams</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
