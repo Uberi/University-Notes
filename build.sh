@@ -11,7 +11,6 @@ echo "$files" | while read file; do
   else
     difference=$(($(date -r "$file" +%s)-$(date -r "$result" +%s)))
   fi
-  difference=1
   
   if [ $difference -gt 0 ]; then # source file was modified after the output file or output doesn't exist
     echo "Rebuilding $file"
