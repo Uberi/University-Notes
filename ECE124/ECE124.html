@@ -75,6 +75,87 @@ function highlight() { // highlight all code blocks using HighlightJS
 <p>Boolean AND is represented with <span class="math">\(x \cdot y\)</span>, <span class="math">\(xy\)</span>, or <span class="math">\(x \wedge y\)</span>. The schematic symbol for this operation is a rectangle with one side completely rounded into a semicircle with the output wire, and the other flat and with input wires.</p>
 <p>Boolean OR is represented with <span class="math">\(x + y\)</span>. The schematic symbol for this operation is a rectangle with one side completely rounded into a semicircle with the output wire, with the other side curved inward and has input wires leading into it.</p>
 <p>Boolean NOT is represented with <span class="math">\(\overline x\)</span>, <span class="math">\(!x\)</span>, <span class="math">\(x&#39;\)</span>, or <span class="math">\(\neg x\)</span>. The schematic symbol for this operation is a triangle with a circle on the pointed end, which has the output wire, and the input wire is on the other end.</p>
+<p>There is also an order of operations for these operations. From highest precedence to lowest, the operators are NOT, AND, and OR.</p>
+<h1 id="section-1">7/1/15</h1>
+<h2 id="mintermsmaxterms">Minterms/Maxterms</h2>
+<p>A <strong>minterm</strong> is a particular Boolean expression for a particular input to an <span class="math">\(n\)</span>-input function. The minterm is special because it is easy to construct algorithmically from a truth table.</p>
+<p>The minterm of a truth table row is the an OR expression with an operand for each function input where each operand is <span class="math">\(x_i\)</span> if <span class="math">\(x_i = 1\)</span> for that row and <span class="math">\(\neg x_i\)</span> if <span class="math">\(x_i = 0\)</span>.</p>
+<p>Given a truth table, we can construct an expression that is equivalent to the function it represents as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Create an empty expression <span class="math">\(m\)</span>.</li>
+<li>For each row <span class="math">\(x_0, \ldots, x_n, f\)</span> in the truth table:</li>
+<li>Create an empty expression <span class="math">\(m_i\)</span>.</li>
+<li>For all <span class="math">\(1 \le i \le n\)</span>:
+<ol style="list-style-type: decimal">
+<li>If <span class="math">\(x_i = 0\)</span>, let <span class="math">\(m_i\)</span> become <span class="math">\(m_i \cdot \neg x_i\)</span>.</li>
+<li>If <span class="math">\(x_i = 1\)</span>, let <span class="math">\(m_i\)</span> become <span class="math">\(m_i \cdot x_i\)</span>.</li>
+</ol></li>
+<li>If and only if <span class="math">\(f = 1\)</span>, let <span class="math">\(m\)</span> become <span class="math">\(m \vee m_i\)</span>. Note that <span class="math">\(m_i\)</span> is true if and only if the inputs match those in the current row of the truth table.</li>
+<li>Note that <span class="math">\(m\)</span> is true if and only if <span class="math">\(f = 1\)</span>, since there is an <span class="math">\(m_i\)</span> term for all the rows in the truth table that are true, and none of them match any rows in the truth table that are not true.</li>
+</ol>
+<p>Here, each <span class="math">\(m_i\)</span> is a minterm. <span class="math">\(m\)</span> is the sum of minterms/canonical sum of products, defined below.</p>
+<p>The <strong>canonical sum of products/sum of minterms</strong> is when we OR all the minterms (<span class="math">\(m_i\)</span>) that have <span class="math">\(f = 1\)</span> for their corresponding truth table rows, in order.</p>
+<p>The <strong>maxterms</strong> of a function are the duals of the minterms - similar to the minterms, but with AND instead of OR, and <span class="math">\(\neg x\)</span> and <span class="math">\(x\)</span> where we used to have <span class="math">\(x\)</span> and <span class="math">\(\neg x\)</span>.</p>
+<p>The maxterm of a truth table row is the an OR expression with an operand for each function input where each operand is <span class="math">\(x_i\)</span> if <span class="math">\(x_i = 1\)</span> for that row and <span class="math">\(\neg x_i\)</span> if <span class="math">\(x_i = 0\)</span>.</p>
+<p>The maxterm is true if and only if the inputs <em>do not match the inputs in the corresponding row in the truth table</em>. This is the opposite of a minterm being true if and only if the inputs do match the inputs.</p>
+<p>The <strong>canonical product of sums/product of maxterms</strong> is when we AND all the maxterms that have <span class="math">\(f = 0\)</span> for their corresponding truth table rows, in order. In other words, it is an expression that ensures that the inputs do not match the first row resulting in 0, and do not match the second row resulting in 0, and so on.</p>
+<p>The sum of minterms and product of maxterms are special because it is exactly equivalent to the original function. The term <strong>canonical</strong> means that they are unique - there is only one way to write it correctly.</p>
+<p>Minterms determine when we need to turn the function on. Maxterms determine when we need to turn the function off.</p>
+<p>A <span class="math">\(n\)</span>-level expression is an expression that has a tree depth of <span class="math">\(n\)</span>. <span class="math">\(xy + z\)</span> is a 2-level expression, and when we draw the circuit, it has 2 levels of gates - the depth of the circuit tree.</p>
+<p>For example, if a 2-input function has the following truth table:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">x</th>
+<th align="left">y</th>
+<th align="left">f</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table>
+<p>The minterms are <span class="math">\(\neg x \neg y\)</span> and <span class="math">\(x y\)</span>, and the maxterms are <span class="math">\(x \neg y\)</span> and <span class="math">\(\neg x y\)</span>. As a result, we can write <span class="math">\(f\)</span> as <span class="math">\(\neg x \neg y + x y\)</span> (sum of minterms) or <span class="math">\((x + \neg y)(\neg x + y)\)</span> (product of maxterms).</p>
+<p>Our goal is to use the simplest possible circuits. We can choose whether to use the sum of minterms or product of maxterms, but we can also use Boolean algebra to further simplify any expression.</p>
+<h2 id="boolean-algebra-1">Boolean Algebra</h2>
+<p>Axioms of Boolean algebra:</p>
+<ol style="list-style-type: decimal">
+<li>Closure over operations: given <span class="math">\(x, y \in \set{0, 1}\)</span>, <span class="math">\(x \cdot y, x + y, \neg x \in \set{0, 1}\)</span>.</li>
+<li>Operation identities: given <span class="math">\(x \in \set{0, 1}\)</span>, <span class="math">\(x + 0 = x\)</span> and <span class="math">\(x \cdot 1 = x\)</span>. <span class="math">\(0\)</span> is the OR identity and <span class="math">\(1\)</span> is the AND identity.</li>
+<li>Commutativity: given <span class="math">\(x, y \in \set{0, 1}\)</span>, <span class="math">\(x + y = y + x\)</span> and <span class="math">\(x \cdot y = y \cdot x\)</span>.</li>
+<li>Distributivity: <span class="math">\(x + y \cdot z = (x + y) \cdot (x + z)\)</span> (distributivity over OR) and <span class="math">\(x \cdot (y + z) = x \cdot y + x \cdot z\)</span>.</li>
+<li>Negation existance: given <span class="math">\(x \in \set{0, 1}\)</span>, there must exist an element <span class="math">\(\neg x\)</span> such that <span class="math">\(x + \neg x = 1\)</span> and <span class="math">\(x \cdot \neg x = 0\)</span>.</li>
+<li>Unique elements: there must exist <span class="math">\(x, y \in \set{0, 1}\)</span> such that <span class="math">\(x \ne y\)</span>.</li>
+</ol>
+<p>We can now prove theorems using truth tables, or using axioms:</p>
+<p>Additional theorems:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(x + x = x\)</span> and <span class="math">\(x \cdot x = x\)</span></li>
+<li><span class="math">\(x + 1 = 1\)</span> and <span class="math">\(x \cdot 0 = 0\)</span></li>
+<li><span class="math">\(\neg \neg x = x\)</span> (double negation)</li>
+<li><span class="math">\(x + (y + z) = (x + y) + z\)</span> and <span class="math">\(x \cdot (y \cdot z) = (x \cdot y) \cdot z\)</span> (associativity)</li>
+<li><span class="math">\(\neg (x + y) = \neg x \cdot \neg y\)</span> and <span class="math">\(\neg (x \cdot y) = \neg x + \neg y\)</span> (De Morgan's Law)</li>
+<li><span class="math">\(x + x \cdot y = x\)</span> and <span class="math">\(x \cdot (x + y) = x\)</span> (adsorption)</li>
+</ol>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
