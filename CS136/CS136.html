@@ -1729,13 +1729,14 @@ void quick_sort(int a[], int len) {
 <p>In this course, we will always use the smallest possible order to represent a given function.</p>
 <p>Or alternatively, <span class="math">\(f(n) \in O(g(n)) \iff \exists c \in \mathbb{R}, n_0 &gt; 0, \forall n \in \mathbb{R}, n \ge n_0 \implies f(n) \le c \cdot g(n)\)</span>.</p>
 <p>This basically means that we can ignore constant coefficients. Also, that after a certain threshold value of <span class="math">\(n\)</span>, the order function multiplied by a constant is an upper bound for <span class="math">\(f(n)\)</span>.</p>
+<p>The <span class="math">\(c\)</span> is necessary (rather than just using 1) in order to account for functions with the same order. For example, if we have two constant functions with different constants, then one would always be above the other, yet it is still in the same order.</p>
 <p>Prove that <span class="math">\(0.001n^3 + 1000n \in O(n^3)\)</span>:</p>
 <blockquote>
 <p>Assume <span class="math">\(n &gt; 11\)</span>. Let <span class="math">\(c = 1\)</span>. Clearly, <span class="math">\(0.001n^3 + 1000n \le 11n^3\)</span>.<br />So <span class="math">\(0.001n^3 + 1000n \in O(n^3)\)</span>.</p>
 </blockquote>
 <p>Big-O notation is the <strong>asymptotic behaviour</strong> of a function - the behaviour of a function as its input approaches infinity.</p>
 <p>In future courses, we will use the formal definition to prove algorithm complexities.</p>
-<p>There are also other notations for various asymptotic behaviours. For example, <span class="math">\(\Omega(n)\)</span> is the asymptotic lower bound, just as <span class="math">\(O(n)\)</span> is the asymptotic upper bound, and it means <span class="math">\(c \cdot g(n) \le f(n)\)</span>.</p>
+<p>There are also other notations for various asymptotic behaviours. For example, <span class="math">\(\Omega(n)\)</span> is the asymptotic lower bound, just as <span class="math">\(O(n)\)</span> is the asymptotic upper bound, and it means <span class="math">\(c \cdot g(n) \le f(n)\)</span> for some <span class="math">\(c\)</span> after <span class="math">\(n\)</span> is greater than some <span class="math">\(n_0\)</span>.</p>
 <p>As especially useful one is <span class="math">\(\Theta(n)\)</span>, which defines the exact asymptotic behaviour: <span class="math">\(c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n), c_1 \ne 0, c_2 \ne 0\)</span>. This means that <span class="math">\(\Omega(n) = O(n) \implies \Omega(n) = O(n) = \Theta(n)\)</span>.</p>
 <p>We often use <span class="math">\(O(n)\)</span> instead of <span class="math">\(\Theta(n)\)</span>, even though <span class="math">\(\Theta(n)\)</span> is more appropriate. Maybe because it's easier to type.</p>
 <p>;wip: slide 67 to 78</p>
