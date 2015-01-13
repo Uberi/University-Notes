@@ -64,7 +64,9 @@ A model is a description of the relationship between two or more economic variab
 
 Normative economics is about how things should be, and positive economics is about how things are. Normative approaches are based on the results of positive economic observations.
 
-The **demand curve** shows the quantity a population demans at given prices. The **law of demand** states that all other factors being the same, the demand curve slopes down - quantity demanded is inversely correlated to the price. There are also external factors that affect and shift the entire demand curve, like taxes.
+The **demand curve** shows the quantity a population demands at given prices. The **law of demand** states that all other factors being the same, the demand curve slopes down - quantity demanded is inversely correlated to the price. There are also external factors that affect and shift the entire demand curve, like taxes.
+
+The X-axis measures the quantity demanded, and the Y-axis measures the price.
 
 This assumes that consumers have full information about all the aspects of the market.
 
@@ -91,3 +93,30 @@ An **equilibrium** is a situation in which no one wants to change their behaviou
 The market automatically stabilizes toward equilibrium. When the price is below equilibrium price, there is excess demand - there are people who want to buy but can't. When above, there is excess supply - there are people who want to sell but can't.
 
 We can calculate this by setting quantity supplied to quantity demanded, so the supply function equals the demand function, and then solving for the prices.
+
+# 13/1/15
+
+Applying Supply/Demand
+----------------------
+
+**Elasticity** is the percent change in a variable in response to a percent change in another variable.
+
+**Price elasticity of demand** ($\epsilon$) is the percent change in quantity demanded in response to a percent change in price - the slope of a secant in the the demand curve times the ratio of price to quantity. Formally, $\epsilon = \frac{\frac{\Delta Q}{Q}}{\frac{\Delta P}{P}} = \frac{\Delta Q}{\Delta P} \frac{P}{Q}$. This is generally negative due to the law of demand.
+
+For example, a 1% increase in price resulting in a 3% decrease in demand means that the elasticity is -3. When $\epsilon > 1$ the demand is **elastic**. When $\epsilon < 1$ the demand is **inelastic**. When $\epsilon = 1$ the demand is **unit elastic**.
+
+A demand curve with constant elasticity is given as $Ap^\epsilon$, where $A, p > 0$. Perfect inelasticity occurs when $\epsilon = 0$, like for essential goods. Perfect elasticity occurs when $\epsilon = \infty$, like for perfect substitutes.
+
+**Income elasticity of demand** is similar to price elasticity, but is percent change in quantity demanded in reponse to percent change in a consumer's income rather than the price.
+
+**Cross-price elasticity of demand** is similar to price elasticity, but in response to the percent change in another good's price. If negative, the quantity demanded decreases as the other good's price increases, so by the law of demand they are demanded together - **complement goods** (milk and coffee beans). If positive, quantity demanded increases as the other good's price increases, so they are demanded as substitutes of each other - **substitute goods** (beef and pork). The price of one good changing will shift the demand curve of the other.
+
+**Price elasticity of supply** is the same as price elasticity of demand, but with quantity supplied rather than quantity demanded. This is generally positive since if sellable at a higher price, suppliers are usually willing to make more.
+
+Elasticities tend to be larger in the long run, since people have more of an incentive to make a good choice in selecting goods, and there tend to be more alternatives available.
+
+The two types of taxes ($\Tau$) are ad valorem tax (percentage of each dollar spent) and unit tax (fixed price per good/service sold).
+
+The change in price caused by an added tax of $\Tau$ is $\Delta p = \frac{\eta}{\eta - \epsilon}\Delta \Tau$. Changes in equilibrium price caused by taxes **depend on the elasticity of supply and demand**.
+
+The **incidence of tax** is the fraction of a tax that is passed onto consumers via raised prices - the change in price with per tax increase, $\frac{\Delta P}{\Delta \Tau} = \frac \eta {\eta - \epsilon}$. Again, this is entirely dependent on the elasticity of supply and demand.

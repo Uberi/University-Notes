@@ -176,6 +176,61 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <blockquote>
 <p>Clearly, <span class="math">\(f = m_1 + m_4 + m_7 = \overline{\overline{f}}\)</span>.<br />Clearly, <span class="math">\(\overline{f} = m_0 + m_2 + m_3 + m_5 + m_6\)</span>, the minterms that are not part of the function.<br />So <span class="math">\(f = \overline{m_0 + m_2 + m_3 + m_5 + m_6} = \overline{m_0}\overline{m_2}\overline{m_3}\overline{m_5}\overline{m_6}\)</span>, by De Morgan's laws.<br />Note that <span class="math">\(\overline{m_i} = M_i\)</span> - a maxterm is the negation of its corresponding minterm.<br />So <span class="math">\(f = \overline{m_0}\overline{m_2}\overline{m_3}\overline{m_5}\overline{m_6} = M_0 M_2 M_3 M_5 M_6\)</span>, a product of sums, as required.</p>
 </blockquote>
+<h1 id="section-3">12/1/15</h1>
+<h2 id="other-logic-gates">Other Logic Gates</h2>
+<p>The NAND gate is an AND gate with an inverted output, written <span class="math">\(x \uparrow y\)</span>. The NOR gate is an OR gate with an inverted output, written <span class="math">\(x \downarrow y\)</span>.</p>
+<p>When we invert an input or an output, we can just put a hollow small bubble/circle inline with the wire, conventionally touching the gate.</p>
+<p>Note that NAND and NOR are not associative, so two NAND/NOR gates chained together is different from a three-input NAND/NOR gate.</p>
+<p>These gates are extremely useful for circuits built using technology such as CMOS. In CMOS, the cheapest construct is the NAND gate, so we tend to make other constructs in terms of NAND gates.</p>
+<p>However, we generally want to work with normal gates like AND and OR, and convert it into NAND at the end. Since NAND and NOR are universal, any combinatorial circuit can be represented using just one of these gates.</p>
+<p>To convert sums of products into NAND logic, simply negate the whole thing twice and apply De Morgan's law. For example, <span class="math">\(f = a \overline b + \overline b + c = \overline{\overline f} = \overline{\overline{a \overline b} \overline{\overline a b} \overline c}\)</span>, and the final result is all NAND gates. This can also be done recursively on subexpressions. This also works for converting products of sums into NOR logic.</p>
+<p>Alternatively, we can also just replace each individual gate with its NAND equivalent. For reference, <span class="math">\(x + y = (x \uparrow x) \uparrow (y \uparrow y)\)</span>, <span class="math">\(xy = (x \uparrow y) \uparrow (x \uparrow y)\)</span>, and <span class="math">\(\overline x = x \uparrow x\)</span>.</p>
+<p>This also works graphically. In a circuit schematic, simply insert two back-to-back inverters inline to wires, until it is possible to see NAND forms. By moving one of a pair of inserted inverters into the output for an AND gate, for example, we can replace the AND and NOT with a NAND gate.</p>
+<p>Essentially, we first insert pairs of inverters until all gates have been converted into NAND, then remove any remaining back-to-back inverters (since they cancel each other out) and replace any remaining single inverters with their NAND forms.</p>
+<h1 id="section-4">13/1/15</h1>
+<p>Boolean XOR is represented with <span class="math">\(x \oplus y\)</span>. The schematic symbol for this operation is an OR gate, but with the concave side having two lines.</p>
+<p>Boolean XOR essentially is true if and only if there are an odd number of operands that are true. For two inputs this is useful as an inequality operator <span class="math">\(\ne\)</span>.</p>
+<p><span class="math">\(x \oplus y = \overline x y + x \overline y\)</span>. This pattern appears quite often in practical Boolean algebra, and so using XOR can often simplify formulas quite a bit. Plus, in technologies like CMOS, XOR can be implemented significantly cheaper than its long, SOP form, so we can save on cost too by using this.</p>
+<p>Boolean NXOR (also known as XNOR) is simply XOR inverted. For two inputs this is useful as an equality operator <span class="math">\(=\)</span>.</p>
+<p>A <strong>buffer</strong> is a special identity gate, <span class="math">\(f = x\)</span>, which has the same output as it does input. It has the same symbol as the inverter, but without the circle at the output.</p>
+<p>This is useful for amplifying signals and supplying current when there are a lot of branches. Additionally, it can act as a diode (in 3-level logic) when placed in a real circuit. Plus, sometimes we use it for slowing down a signal slightly to improve timing synchronocity. Mathematically, it does not serve any purpose.</p>
+<p>A tri-state buffer is similar, but has another input called Enable coming out of one side. When the Enable wire is high, the output is the same as the input. When enable is low, the output is disconnected from the input - the value of the output is not specified.</p>
+<p>Tri-state buffers are useful if we want to connect multiple sources to the same destination. For example, in RAM we might have one per RAM cell, and selectively connect and disconnect the RAM cell such that only one cell is actually connected to the destination at a given time. This is important, since if we have two RAM cells connected at the same time, one with 0's and one with 1's, there would be a short circuit.</p>
+<h2 id="karnaugh-maps">Karnaugh Maps</h2>
+<p>Karnaugh maps (K-maps) are a way of describing Boolean functions with around 5 or less inputs (for larger inputs, it becomes impractical, as the number of table cells grows with <span class="math">\(2^n\)</span>).</p>
+<p>K-maps are also useful because they can be used to minimise functions by graphically performing Boolean algebra.</p>
+<p>Consider K-map for the function <span class="math">\(f = \overline x \overline y + \overine x y + x y\)</span>:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><span class="math">\(y\)</span>$x$</th>
+<th align="left">0</th>
+<th align="left">1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>0</strong></td>
+<td align="left">1</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>1</strong></td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table>
+<p>Note that each normal box (rectangle) corresponds to a row in the truth table for the function, and each 1 in a normal box corresponds to a minterm.</p>
+<p>Note that the bottom two are both 1. That means that the value of <span class="math">\(x\)</span> does not influence the bottom row, so we can draw a rectangle around the bottom two, which represents <span class="math">\(y\)</span>.</p>
+<p>Note that we can do the same for the leftmost row of two 1's, a rectangle around the two representing <span class="math">\(\overline x\)</span>.</p>
+<p>If we want to minimise a function, the goal of K-mapping is to find the smallest possible number of the largest possible rectangles that cover all the 1 boxes and do not cover any 0 boxes (floating boxes don't matter). In each step, we try to draw a rectangle that encloses as many 1's as possible without enclosing any 0's.</p>
+<p>This implies that there may be multiple optimal minimal versions of the function, with the same cost.</p>
+<p>All rectangles must have side lengths that are powers of 2.</p>
+<p>Mathematically, when we draw a rectangle we are duplicating a term and then factoring an input out. The boxes we drew above corresponded to the operations <span class="math">\(f = \overline x \overline y + \overline x y + xy = \overline x \overline y + \overline x y + xy + \overline x y = \overline x(\overline y + y) + y(x + \overline x) = \overline x + y\)</span>.</p>
+<p>Basically, every rectangle duplicates and factors two terms, repeatedly for larger rectangles. This is the reason rectangles need to have dimensions that are powers of 2.</p>
+<p>The above technique resulted in a sum of products. To get a product of sums, draw maximum rectangles that cover all 0's but no 1's. Rather than a product, each rectangle has a corresponding sum, made up of the inputs that actually matter in making the function 0. The minimized product of sums is simply the product of the sum associated with each rectangle.</p>
+<p>Also, the sides are labelled using grey code, and the rectangles can wrap around the sides of the table.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

@@ -129,7 +129,26 @@ loop:
 ------------  ---------------------------------------  ----------  --------------
 00000000      0000 0000 1010 0111 0001 1000 0010 0000  0x00A71820  add $3, $5, $7
 00000004      0000 0011 1110 0000 0000 0000 0000 1000  0x03e00008  jr $31</code></pre>
+<p>The resulting code is therefore the binary representation of the hex value <code>00A7182003e00008</code>.</p>
 <p>To store a literal value into a register, we can use the <strong>load immediate and skip</strong> (<code>lis</code>) instruction. Essentially, ;wip</p>
+<p>Note that ASCII is a mapping between characters and binary, and ASCII values are not binary. For example, <code>0010000100110101</code> is simply an ASCII string of 1 and 0, while <code>!5</code> would be the ASCII encoding the previous string would result in if encoded in binary.</p>
+<p>To read the ASCII representation of a given binary file, use <code>xxd &lt;filename&gt;</code> or <code>hexdump -Cv &lt;filename&gt;</code>, where <code>&lt;filename&gt;</code> is the path to the file to represent. <code>xxd -bits</code> shows binary, and <code>xxd -cols n</code> shows <code>n</code> bytes per line.</p>
+<h1 id="section-2">13/1/15</h1>
+<h2 id="assembly-language">Assembly Language</h2>
+<p>Instead of writing in hex or binary, which is very tedious to convert, we can simply use the mnemonics like <code>add</code> and <code>lis</code>, and have a program (the <strong>assembler</strong>) translate it to binary for us. This reduces our chances of error and makes programming much simpler.</p>
+<p>Essentially, one line of assembly is one word, generally one machine instruction like <code>jr</code>. There are also lines that are <strong>directives</strong>, which are instructions to the assembler to do something, rather than the machine. For example, the <code>.word X</code> directive tells the assembler that at the current point, we want the resulting binary output to have the specified literal value <code>X</code>.</p>
+<p>The above code example could therefore be written as:</p>
+<pre><code>add $3, $5, $7
+jr $31</code></pre>
+<p>Some instructions unconditionally modify PC, like <code>jr</code> - these are known as jumps. Some instructions conditionally modify PC, like <code>bne</code> - these are known as branches. Generally, the modification is given in terms of the number of words to move by. Note that it is possible to give negative values.</p>
+<p>A quick way to zero a register is <code>add X, $0, $0</code>, where <code>X</code> is a register. <code>lw A, i(B)</code> loads the value in memory at address specified by register <code>B</code> with offset specified by literal number <code>i</code>, storing the result in register <code>A</code>. <code>sw A, i(B)</code> does the opposite - writing the value of <code>A</code> in memory instead of reading from it.</p>
+<p>The <code>mult A, B</code> instruction has a somewhat unusual form - it only has the multiplicands, and no output parameter. Instead, since multiplication can result in a 64-bit number, the answer is is stored in the HI and LO registers, the LO bits having the lower 32 bits and the rest in HI. To get values out of HI and LO, we have <code>mflo A</code>, which gets the value of LO and stores it in the register <code>A</code>, and <code>mfhi A</code>, which does the same thing, but for HI.</p>
+<p>Division is similar. After dividing, the quotient is in LO, and the remainder is in HI.</p>
+<p>Counting the number of instructions to jump by is tedious and error-prone. We can mitigate this using <strong>labels</strong>. For example:</p>
+<pre><code>some_label: add $1, $2, $3
+add $4, $5, $6
+some_other_label: .word 0x12345678</code></pre>
+<p>Labels are assembler features that allow us to specify a specific location and use it later on. In any jump or branch instruction, we can simply write the label name rather than the offset, like <code>bne, $2, $0, some_label</code>, which will jump to the location specified by <code>some_label</code> if and only if <code>$2</code> is non-zero.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
