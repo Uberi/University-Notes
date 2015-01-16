@@ -10,14 +10,12 @@ About
 
 I write these during lectures, and then add to them occasionally when mistakes or omissions are discovered.
 
-They're written in [StackEdit](http://benweet.github.io/stackedit/), an excellent Markdown editor. The source files are written in Markdown with LaTeX for math.
-
-There's a build script that uses [Pandoc](http://johnmacfarlane.net/pandoc/). This is more convenient for building everything at once.
+They're written in Markdown with LaTeX for math. There's a build script that uses [Pandoc](http://johnmacfarlane.net/pandoc/) to generate HTML with MathJax for LaTeX rendering.
 
 License
 -------
 
-Copyright 2013 Anthony Zhang
+Copyright 2013-2015 Anthony Zhang
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />The works in this project are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
 
