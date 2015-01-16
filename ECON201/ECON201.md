@@ -120,3 +120,48 @@ The two types of taxes ($\Tau$) are ad valorem tax (percentage of each dollar sp
 The change in price caused by an added tax of $\Tau$ is $\Delta p = \frac{\eta}{\eta - \epsilon}\Delta \Tau$. Changes in equilibrium price caused by taxes **depend on the elasticity of supply and demand**.
 
 The **incidence of tax** is the fraction of a tax that is passed onto consumers via raised prices - the change in price with per tax increase, $\frac{\Delta P}{\Delta \Tau} = \frac \eta {\eta - \epsilon}$. Again, this is entirely dependent on the elasticity of supply and demand.
+
+When the incidence of tax is 0, the supplier pays all of the tax. This occurs when the supply is perfectly inelastic (the supply is the same regardless of the price, so suppliers just scale back) or the demand is perfectly elastic (consumers will only demand the product at a specific price or lower, so suppliers must pay it if they want to sell products).
+
+When the incidence of tax is 1, the consumer pays all of the tax. This occurs when the supply is perfectly elastic (suppliers will only supply at a specific price or higher, so they won't supply unless consumers pay the tax) or the demand is perfectly inelastic (demand is the same regardless of the price, so they'll buy it even if they have to pay the tax).
+
+# 15/1/15
+
+Theory of Consumer Choice
+-------------------------
+
+The demand curve for a specific consumer is the amount of money the consumer is willing to pay for the first of a good/service, the second, and so on. Each point on the demand curve represents a particular price the consumer is willing to pay for the $n$th instance of a good/service.
+
+Goods/services are commodities - things that are associated with markets. Commodities also include negative things like pollution and carbon emissions.
+
+The **theory of consumer choice** represents the desires and tastes of the individual consumers as an economic construct. The theory is based on the following assumptions:
+
+* Consumers have choices in what they consume, and also constraints and limits on those choices.
+* Each choice results in a certain amount of utility.
+* The goal of the rational, perfectly informed consumer is to maximise the amount of utility from their choices.
+
+Our model of consumer preferences is based on completeness, transitivity, and the idea that more is better.
+
+**Completeness** is the idea that between any two commodities, a consumer is able to compare the two and say which one they prefer, or that they are indifferent - that commodities are comparable.
+
+**Transitivity** is the idea that if a consumer prefers $a$ to $b$ and $b$ to $c$, then that consumer prefers $a$ to $c$.
+
+**More is better/nonsatiation** is the idea that all other factors constant, having more of a commodity is preferable to having less of it. For good things like goods/services we always want more, and bad things like pollution we always want less.
+
+Essentially, we must be able to quantify the amount of happiness (utility) that we get from consuming a commodity.
+
+An **indifference curve** is the set of all bundles of goods that a consumer views as having equal utility, like a set with a bundle of two coffees and a bundle with a donut - the consumer has the same utility for each bundle. An **indifference map** is te set of all indifference curves, and summaries the consumer's tates and preferences.
+
+A bundle of goods can belong to an indifference curve. A bundle with more of every good in the bundle, by the nonsatiation assumption, would always have a higher utility, and therefore always be preferred to the original bundle.
+
+The indifference curve is a curve because if we plot the possible bundles as points with respect to the quantity consumed of each commodity on each axis, an indifference curve forms a curve passing through all the bundles that have equal utility. Every possible bundle belongs to exactly one indifference curve.
+
+Preferences in indifference curves are always based on their distance from the origin, due to the nonsatiiation assumption. Indifference curves cannot cross, and always slope downward.
+
+Concave graphs are those that have a negative second derivative (cups downward). Convex graphs have a positive second derivative (cups upward).
+
+The **marginal rate of substitution** (MRS) is the largest amount of one good a consumer is willing to sacrifice in order to obtain one more unit of another good. As it turns out, this is $MRS = \frac{\Delta G_1}{\Delta G_2}$, where $G_1$ is the good being sacrificed for $G_2$. Also, this is the slope of the indifference curve, where $G_2$ is the x-axis and $G_1$ is the y-axis.
+
+An indifference curve must be straight or convex to the origin - bulging toward the origin. Perfect substitutes have straight lines since the consumer is totally indifferent between the goods. Perfect complements have perfectly right angled curves since the consumer needs both products in order to obtain a unit of utility. Imperfect substitute/complements are somewhere between these extremes.
+
+They are very unlikely to be concave to the origin due to the theory of diminishing marginal returns - "the marginal rate of substitution approaches 0 as we move down and right along an indifference curve".

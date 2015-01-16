@@ -1024,7 +1024,7 @@ A OtherThing is one of:
 <h2 id="trees">Trees</h2>
 <p>A tree is an abtract data type, like a dictionary. It is a recursive data structure made up of nodes:</p>
 <ul>
-<li><strong>internal nodes</strong> refer to one or more other nodes.</li>
+<li><strong>internal/interior nodes</strong> refer to one or more other nodes.</li>
 <li><strong>leaf nodes</strong> do not refer to any other nodes.</li>
 </ul>
 <p>Nodes can also store their own value. This value is known as a <strong>label</strong>.</p>
@@ -1114,6 +1114,7 @@ A OtherThing is one of:
 <li>process the <code>+</code>, then <code>1</code> and <code>2</code> - this is called <strong>pre-order traversal</strong>. The result would be <code>'+ 1 2</code>.</li>
 <li>process <code>1</code>, then <code>+</code>, and then <code>2</code> - this is called <strong>in-order traversal</strong>. The result would be <code>1 '+ 2</code>.</li>
 <li>process <code>1</code>, <code>2</code>, and then <code>+</code> - this is called <strong>post-order traversal</strong>. The result would be <code>1 2 '+</code>.</li>
+<li>process all the nodes on the same level as <code>+</code>, and then all the nodes on the same level as <code>1</code> and <code>2</code> - this is called <strong>level-order traversal</strong>. In this case, it gives the same result as pre-order traversal.</li>
 </ol>
 <p>We can implement pre-order traversal pretty simply:</p>
 <pre><code>traverse-binexp: BinExp -&gt; (listof (union Symbol Num))
@@ -1879,7 +1880,7 @@ A OtherThing is one of:
 <p>A graph is simply a collection of nodes where each node can refer to zero or more nodes, including themselves.</p>
 <p>A <strong>directed graph</strong> is a collection of <strong>nodes</strong> together with a collection of <strong>edges</strong>.</p>
 <p>In a directed graph, <strong>edges have direction</strong> - the edges <span class="math">\((A, B)\)</span> is different from <span class="math">\((B, A)\)</span>. The first points from <span class="math">\(A\)</span> to <span class="math">\(B\)</span>, while the second points from <span class="math">\(B\)</span> to <span class="math">\(A\)</span>.</p>
-<p>There are also <strong>undirected graphs</strong> where edges have no direction**.</p>
+<p>There are also <strong>undirected graphs</strong> where edges have no direction.</p>
 <p>Trees are always graphs, but graphs are not always trees. Trees are graphs that obey some additional constraints.</p>
 <p>We can draw graphs graphically. Nodes can be represented as dots with or without labels, and edges can be represented as arrows leading from one node to another.</p>
 <p>A graph is useful for solving a lot of different types of problems. For example, internet routing, solving sliding puzzles, and finding road directions.</p>

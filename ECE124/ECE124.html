@@ -229,16 +229,115 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p>All rectangles must have side lengths that are powers of 2.</p>
 <p>Mathematically, when we draw a rectangle we are duplicating a term and then factoring an input out. The boxes we drew above corresponded to the operations <span class="math">\(f = \overline x \overline y + \overline x y + xy = \overline x \overline y + \overline x y + xy + \overline x y = \overline x(\overline y + y) + y(x + \overline x) = \overline x + y\)</span>.</p>
 <p>Basically, every rectangle duplicates and factors two terms, repeatedly for larger rectangles. This is the reason rectangles need to have dimensions that are powers of 2. Larger rectangles result in products with fewer factors. Fewer rectangles result in fewer products.</p>
-<p>The above technique resulted in a sum of products. To get a product of sums, draw maximum rectangles that cover all 0's but no 1's. Rather than a product, each rectangle has a corresponding sum, made up of the inputs that actually matter in making the function 0. The minimized product of sums is simply the product of the sum associated with each rectangle.</p>
+<p>The above technique resulted in a sum of products. To get a product of sums, draw maximum rectangles that cover all 0's but no 1's. Rather than a product, each rectangle has a corresponding sum, made up of the inverted inputs that actually matter in making the function 0.</p>
+<p>For example, if there is a 0 at <span class="math">\(x_1 = 0, x_2 = 0, x_3 = 1, x_4 = 1\)</span>, the rectangle surrounding just that 0 is associated with <span class="math">\(x_1 + x_2 + \overline{x_3} + \overline{x_4}\)</span>. The minimized product of sums is simply the product of the sum associated with each rectangle.</p>
 <p>Also, the sides are labelled using grey code, and the rectangles can wrap around the sides of the table.</p>
 <h1 id="section-5">14/1/15</h1>
 <p>When doing K-maps, we can read off the answer from the rectangles by looking at which variables did not change within the minterms in a given rectangle. If all the minterms in a rectangle have <span class="math">\(x_1\)</span> equal to 0, but all other variables may change, then the rectangle represents the term <span class="math">\(\overline x_1\)</span>.</p>
 <p>If we look at the table and see that no rectangles can be expanded, that means that in the Boolean expression, there is no more factoring or collapsing left to be done.</p>
 <p>For K-maps of larger dimensions, we label the rows and columns using grey code - a binary counting system in which only one bit changes when incrementing or decrementing a value. The grey code is recursively defined. The 1-bit grey code is <code>grey_code(1) = [0, 1]</code>. The <span class="math">\(n\)</span>-bit grey code is <code>grey_code[n] = map(grey_code[n - 1], lambda code: 0 .. code) + map(reversed(grey_code[n - 1]), lambda code: 1 .. code)</code>.</p>
 <p>In other words, to get the next grey code, we prepend a 0 to every binary string in the current grey code, and prepend a 1 to the reversed version of the current grey code, then put these two together.</p>
-<p>Every variable splits the output space of a function in half. Let <span class="math">\(f(x_1, \ldots, x_n)\)</span> be a Boolean function. Let <span class="math">\(f_0\)</span> represent <span class="math">\(f(0, x_2, \ldots, x_n)\)</span> and</p>
-<p>The 5-input K-map is 3-dimensional. ;wip: why?</p>
-<p>As a result, it is difficult to visualize. Instead, what we can do is <span class="math">\(f = \overline x f_0 + x f_1\)</span>, and then do a K-map for <span class="math">\(f_0\)</span> and <span class="math">\(f_1\)</span>.</p>
+<p>Every variable splits the output space of a function in half. Let <span class="math">\(f(x_1, \ldots, x_n)\)</span> be a Boolean function. Let <span class="math">\(f_0\)</span> represent <span class="math">\(f(0, x_2, \ldots, x_n)\)</span> and <span class="math">\(f_1\)</span> represent <span class="math">\(f(1, x_2, \ldots, x_n)\)</span>.</p>
+<h1 id="section-6">16/1/15</h1>
+<h3 id="more-dimensions">More Dimensions</h3>
+<p>The 5-input K-map is 3-dimensional. This is because the rectangles in 2D can only factor up to 2 variables per dimension.</p>
+<p>As a result, it is difficult to visualize. Instead, what we can do is <span class="math">\(f = \overline x f_0 + x f_1\)</span>, and then do one K-map for <span class="math">\(f_0\)</span> and one for <span class="math">\(f_1\)</span> side by side. This represents a 4 by 4 by 2 cuboid. Now, instead of finding rectangles, we find cuboids - we can join rectangles that are adjacent across their K-map, but also between the two K-maps:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><span class="math">\(x_3 x_4\)</span>$x_1 x_2, x_5 = 0$</th>
+<th align="left">00</th>
+<th align="left">01</th>
+<th align="left">11</th>
+<th align="left">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>00</strong></td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>01</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>11</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>10</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><span class="math">\(x_3 x_4\)</span>$x_1 x_2$ <span class="math">\(x_5 = 1\)</span></th>
+<th align="left">00</th>
+<th align="left">01</th>
+<th align="left">11</th>
+<th align="left">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>00</strong></td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>01</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>11</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>10</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table>
+<p>There is a 2x2x2 cuboid at the middle, a 2x1x2 cuboid at the top corners, a 1x2x1 cuboid at the right side of the right K-map, and a 1x2x2 cuboid at the second-to-leftmost row at the bottom of the tables. This corresponds to the terms <span class="math">\(x_2 x_4\)</span>, <span class="math">\(\overline{x_2} \overline{x_3} \overline{x_4}\)</span>, <span class="math">\(x_1 \overline{x_2} x_3 x_5\)</span>, <span class="math">\(\overline{x_1} x_2 x_3\)</span>.</p>
+<p>Potentially, we could also do 6 variable maps by making 4 4-input K-maps, but this is much more difficult to visualize.</p>
+<h3 id="extensions">Extensions</h3>
+<p>Sometimes, the output of a function doesn't matter, like when we have inputs that will never occur. When this is the case, we can say that the value of the function is a <strong>don't care</strong>. In truth tables and other situations, this is represented as &quot;x&quot;. The don't cares are part of the specifications of a circuit.</p>
+<p>For example, suppose we have a binary to decimal converter, a circuit that accepts 4 inputs and 10 outputs that interprets the 4 inputs as a 4-bit binary number and turns on 1 of the 10 inputs depending on the binary value of the input being between 0 and 9 inclusive. In this case, we can assume that the input binary value will never be above 9, since the circuit wouldn't work then anyways, and all the outputs for those inputs would be don't cares.</p>
+<p>In a K-map, we can include don't cares in rectangles if we want to, but it's not required - we can include them in rectangles if it helps us make rectangles larger, but we can leave don't cares outside of rectangles if they don't help.</p>
+<p>The minimized function resulting from the K-map is functionally equivalent - both implementations do what we want them to - but they might not be logically equivalent, when we use don't cares.</p>
+<p>When we want to minimise a function with multiple outputs, we could try to minimise each output individually as functions with only one output, but this is not necessarily the lowest cost circuit, since there are a lot of logical signals that get duplicated.</p>
+<p>In the K-map, this translates to sometimes not expanding rectangles when it is possible to. Sometimes, with multiple sums of products, the best overall solution is one where the individual sums of products are not necessarily best. Essentially, we can sometimes do <strong>product term sharing</strong> to lower overall cost when multiple SOPs use the same ones.</p>
+<p>Finding the best overall solution is a problem known as multiple output minimization, and is an NP-hard problem.</p>
+<h3 id="math-background">Math Background</h3>
+<p>A product term <span class="math">\(a\)</span> <strong>covers</strong> a product term <span class="math">\(b\)</span> if and only if <span class="math">\(b = 1 \implies a = 1\)</span>.</p>
+<p>A product term is an <strong>implicant</strong> of a function <span class="math">\(f\)</span> if and only if <span class="math">\(f = 1\)</span> for all minterms covered by the product term - all the minterms that the product term covers are those that correspond to truth table rows that are 1. In a K-map, an implicant is a rectangle of 1's. ;wip: define this a little better</p>
+<p>A <strong>prime implicant</strong> is an implicant in which no variable can be removed without making it a non-implicant - it is an implicant that cannot be simplified by removing variables. In a K-map, these are the largest possible rectangles of 1's.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
