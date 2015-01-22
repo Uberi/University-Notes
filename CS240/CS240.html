@@ -161,6 +161,72 @@ for i in 1 ... n - 1:
 <blockquote>
 <p>Let <span class="math">\(x\)</span> be a heap with <span class="math">\(n\)</span> nodes and height <span class="math">\(h\)</span>.<br />Clearly, any binary tree of height <span class="math">\(h\)</span> must have <span class="math">\(n \le 2^{h + 1} - 1\)</span>, since each level <span class="math">\(i\)</span> has less than or equal to <span class="math">\(2^{i - 1}\)</span> nodes, and the total is <span class="math">\(n \le \sum_{i = 1}^{h + 1} 2^{i - 1} \le \frac{2^{h + 1} - 1}{2 - 1}\)</span>.<br />Since <span class="math">\(n + 1 \le 2^{h + 1}\)</span>, <span class="math">\(h \ge \log(n + 1) - 1\)</span>.<br />Clearly, <span class="math">\(n \ge 2^h\)</span>, by the structural property, since the lowest level is always <span class="math">\(h + 1\)</span> so each level <span class="math">\(i\)</span> before it has exactly <span class="math">\(2^{i - 1}\)</span> nodes, and the total for all levels except the lowest is <span class="math">\(2^h - 1\)</span>. Since the lowest level has 1 or more nodes, the total is <span class="math">\(n \ge (2^h - 1) + 1\)</span>, or <span class="math">\(2^h\)</span>.</p>
 </blockquote>
+<h1 id="section-4">20/1/15</h1>
+<p>Binary heaps are trees, so we can store them as a tree structure with references and nodes. However, a more efficient way to store binary trees is as an array:</p>
+<ul>
+<li><span class="math">\(A\)</span> is an array representing the heap.</li>
+<li><span class="math">\(A[0]\)</span> contains the root node.</li>
+<li><span class="math">\(A[1], \ldots, A[2]\)</span> store the children of the root node.</li>
+<li><span class="math">\(A[3], \ldots, A[6]\)</span> store the children of the children of the root nodes, and so on.</li>
+</ul>
+<p>Essentially, we first have the first level, then the second level, and so on. Formally, the left and right children of a node stored in the array at index <span class="math">\(i\)</span> are <span class="math">\(lc(i) = 2i + 1\)</span> and <span class="math">\(rc(i) = 2i + 2\)</span> (in a 0-indexed array). Likewise, the parent of any node is <span class="math">\(p(i) = \floor{\frac{i - 1} 2}\)</span>. This works because the leftmost node in level <span class="math">\(l\)</span> has index <span class="math">\(\sum_{k = 1}^{l - 1} 2^{k - 1}\)</span>.</p>
+<p>In fact, this left and right parent system works for any binary tree, and even for <span class="math">\(n\)</span>-ary trees with a simple extension. However, it is not space efficient unless the tree obeys something like the structural property. The structural property ensures that the array is mostly filled, possibly except for part that stores the last level.</p>
+<h3 id="heaps-as-priority-queues">Heaps as Priority Queues</h3>
+<p>We will represent our heap as an array <span class="math">\(A\)</span> containing <span class="math">\(n\)</span> values, automatically expanded or shrunk as needed.</p>
+<p>To <strong>insert</strong> into a heap, we first find the only location that the structural property allows us to insert a new node <span class="math">\(i\)</span> into. This could possibly violate the heap property since it is possible that <span class="math">\(i &gt; p(i)\)</span>, so if <span class="math">\(i &gt; p(i)\)</span>, we swap <span class="math">\(i\)</span> and <span class="math">\(p(i)\)</span> to get <span class="math">\(p(i)&#39;\)</span> and <span class="math">\(i&#39;\)</span>, where <span class="math">\(p(p(i)&#39;) = i&#39;\)</span>.</p>
+<p>Now the heap property is satisfied for <span class="math">\(i&#39;\)</span> and <span class="math">\(p(i)&#39;\)</span>, and it isn't possible for <span class="math">\(p(i)&#39;\)</span>'s sibling to be greater than <span class="math">\(i&#39;\)</span> since it was less than the original parent <span class="math">\(p(i)\)</span>. However, it is possible that <span class="math">\(i&#39;\)</span> is now greater than it's new parent <span class="math">\(p(i&#39;)\)</span>, so we swap again if <span class="math">\(i&#39; &gt; p(i)&#39;\)</span>.</p>
+<p>We repeat swapping the originally inserted node with its parents until either it is less than its parent, or it is the new root node. This is called &quot;bubbling up until it holds&quot;.</p>
+<p>In pseudocode:</p>
+<pre><code>def insert(key):
+    # wip: we resize the array here if necessary
+    
+    A[n] = key # $n$ is the index of the next free space in the heap - we keep track of this in the heap structure
+    n ++
+    j = N - 1
+    while j &gt; 0 and A[p(j)] &lt; A[j]:
+        swap A[j] and A[p(j)]
+        j = p(j)</code></pre>
+<p>Clearly, this takes <span class="math">\(O(\log n)\)</span> time worst case since every run of the loop runs on a lower height on the tree. The bubbling up process would potentially need to visit every level in the tree if inserting an element greater than the root element of the heap.</p>
+<p>To <strong>delete the maximum</strong> of a heap, our goal is to remove the root element of the heap. When we do this, we now have a blank space at the root node of the heap. We fix this by moving the last node in the heap (the rightmost node on the lowest level) into the position the root originally occupied. This allows us to satisfy the structural property again.</p>
+<p>However, now the heap property is not satisfied. We fix this now by swapping the root node (originally the last node) <span class="math">\(i\)</span> with the bigger of its children <span class="math">\(lc(i)\)</span> and <span class="math">\(rc(i)\)</span>, which we will represent as <span class="math">\(c(i)\)</span>, to get <span class="math">\(c(i)&#39;\)</span> and <span class="math">\(i&#39;\)</span> such that <span class="math">\(p(i&#39;) = c(i)&#39;\)</span>. Now we have satisfied the heap property between <span class="math">\(i&#39;\)</span> and <span class="math">\(c(i)&#39;\)</span> and between <span class="math">\(i&#39;\)</span>'s sibling and <span class="math">\(c(i)&#39;\)</span>, but it is possible that <span class="math">\(i&#39;\)</span>'s children could be greater than it.</p>
+<p>Therefore, we repeatedly swap the originally last node with its larger child until it is greater (or equal to) than both of its children, or it is a leaf node.</p>
+<p>In pseudocode:</p>
+<pre><code>def delete_max():
+    max = A[0]
+    n -- # 1 less than the next free space is the last node in the heap, which we will consider as a free space after we move it to the root
+    # if memory management is needed, free `A[0]` here
+    A[0] = A[n]
+    
+    # the following is the bubble_down operation, which bubbles values down until they satisfy the heap property
+    j = 0
+    while j &lt;= n - 1:
+        max_index = j
+        if lc(j) exists and A[lc(j)] &gt; A[j]: # existance means that lc(j) &lt;= n - 1
+            max_index = lc(j)
+        if rc(j) exists and A[rc(j)] &gt; A[max_index]: # existance means that rc(j) &lt;= n - 1
+            max_index = rc(j)
+        if max_index == k: break
+        swap A[j] and A[max_index]
+        j = max_index
+    
+    # wip: we shrink the array here if necessary
+    return max</code></pre>
+<p>Clearly, this takes <span class="math">\(O(h)\)</span> time worst case where <span class="math">\(h\)</span> is the height of the heap underneath the starting element, the root, which is <span class="math">\(O(\log n)\)</span> since <span class="math">\(h\)</span> is roughly <span class="math">\(\log n\)</span>. The worst case is when the last node of the heap is also the smallest one.</p>
+<p><strong>Priority queue sort</strong> (PQSort) is a sorting algorithm where we insert all our elements into a priority queue and then take them out again in order. PQSort needs <span class="math">\(n\)</span> insertions and <span class="math">\(n\)</span> deletions of maximums. Since each operation is <span class="math">\(O(\log n)\)</span>, PQSort is <span class="math">\(O(n \log n)\)</span>, like mergesort. When the priority queue is implemented with a heap, we also call it <strong>heapsort</strong>.</p>
+<p>Heapsort is pretty nice because we can sort in-place (by building a heap directly) and without a lot of recursion, but it can have poor real-world behaviour because the worst case heap insertion occurs when we are inserting nodes one by one that are already in ascending order, and already-sorted data occurs very often in real-world applications.</p>
+<p>Also, heapsort is not stable. If a sorting algorithm is <strong>stable</strong>, then if different nodes have equal keys, they appear in the same order in the output as they did in the input.</p>
+<p>Also, we often measure the runtime of sorting algorithms in terms of the number of key comparisons made (<span class="math">\(A[i] &lt; A[j]\)</span>). This is because we often allow users to specify their own key computing functions, which could potentially be aribtrarily exxpensive. Everything else is simply proportional or a constant on top of the number of key comparisons, in terms of runtime.</p>
+<p>We may also want to <strong>build heaps</strong> - given an array <span class="math">\(D\)</span> with <span class="math">\(c\)</span> values, we want to build a head from that. This is relatively trivial in theory - simply go through the array and insert it into a heap. Clearly, this is <span class="math">\(O(n \log n)\)</span> since insetion is <span class="math">\(O(\log n)\)</span> and we need <span class="math">\(n\)</span> of them.</p>
+<p>Clearly, this takes roughly <span class="math">\(\sum_{k = 0}^{c - 1} \log(k + 1)\)</span> time since <span class="math">\(n\)</span> starts off at 0 and grows by 1 upon every insertion. Clearly, there are at least <span class="math">\(\frac n 2\)</span> terms in that sum where <span class="math">\(k + 1 \ge \frac n 2\)</span>, so <span class="math">\(\sum_{k = 0}^{c - 1} \log(k + 1) \ge \frac n 2 \log \frac n 2\)</span>, so the operation is <span class="math">\(\Omega(n \log n)\)</span>, and by the above, <span class="math">\(\Theta(n \log n)\)</span>.</p>
+<p>A better option is to build the heap in place, to save memory. Clearly, an array always satisfies the structural property since there's no way not to, so all we have to do is enforce the heap property in the array.</p>
+<p>We will enforce the heap property by bubbling downward on every level of the node starting from the second-to-bottom one. Our invariant will be that for all <span class="math">\(k &gt; i\)</span>, the subheap rooted at <span class="math">\(k\)</span> satisfies the heap property. We will show that this takes less than or equal to <span class="math">\(2c\)</span> key comparisons:</p>
+<pre><code>for i in floor(n / 2) - 1 ... 0:
+    bubble_down(i)</code></pre>
+<p>Proof:</p>
+<blockquote>
+<p>Without loss of generality, assume <span class="math">\(n = 2^t - 1\)</span> where <span class="math">\(t\)</span> is the number of levels - all levels are full.<br />Clearly, any node on a level <span class="math">\(l\)</span> needs at most <span class="math">\(2(t - l)\)</span> comparisons for its bubble down, since each level until the bottom needs 2 comparisons each and there <span class="math">\(t - l\)</span> levels between the current level and the bottom.<br />Clearly, there are <span class="math">\(2^{l - 1}\)</span> nodes on each level, which means that there are <span class="math">\(\sum_{l = 1}^{t + 1} 2^{l - 1} 2(t - l)\)</span> comparisons in total.<br />Clearly, <span class="math">\(\sum_{l = 1}^p 2^{l - 1} 2(p - l) = t\sum_{l = 1}^p 2^l - \sum_{l = 1}^p l2^l) \le 2^t - 2t - 2 \le 2^t - 1 = 2n\)</span> (note that <span class="math">\(\sum_{x = 1}^n x2^x = 2^{n + 1} n - 2^{n + 1} + 2\)</span>).<br />So there are <span class="math">\(2n\)</span> or fewer comparisons in total.</p>
+</blockquote>
+<p>In other words, we can build a heap in-place from an array in <span class="math">\(O(n)\)</span> time.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

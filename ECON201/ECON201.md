@@ -165,3 +165,31 @@ The **marginal rate of substitution** (MRS) is the largest amount of one good a 
 An indifference curve must be straight or convex to the origin - bulging toward the origin. Perfect substitutes have straight lines since the consumer is totally indifferent between the goods. Perfect complements have perfectly right angled curves since the consumer needs both products in order to obtain a unit of utility. Imperfect substitute/complements are somewhere between these extremes.
 
 They are very unlikely to be concave to the origin due to the theory of diminishing marginal returns - "the marginal rate of substitution approaches 0 as we move down and right along an indifference curve".
+
+# 20/1/15
+
+Utility
+-------
+
+Utility is a quantitive measure of the relative rankings of various bundles of goods/services - how much value a consumer obtains by consuming these values. If one prefers a bundle A over a bundle $B$, then the utility of A is greater than that of B. This is a very powerful way to help us define and work with indifference curves.
+
+As economists, we seek not to judge the preferences of the consumer, but merely to quantify and classify it. As a relative value, utility is an **ordinal measure** (values represent order) rather than a **cardinal measure** (values represent magnitude). As a result, how much a utility value is more than another is not important, only that it is greater.
+
+$U = U(B, Z)$ is a mapping between utility values and a bundle of goods, where $B$ is the quantity of one product and $Z$ is the quantity of another. For example, $U = \sqrt{BZ}$ is known as the Cobb-Douglas utility function.
+
+The **marginal utility** (MU) is the utility that a consumer would obtain from one more unit of a good/service. Mathematically, this is the derivative of the utility function with respect to the good/service being considered - $MU = \frac{\dee U}{\dee B}$ for some quantity of goods/services $B$.
+
+The marginal rate of substitution is the negation of the ratio of marginal utility of one good/service to that of another - $MRS = \frac{\Delta B}{\Delta Z} = -\frac{MU_1}{MU_2}$.
+
+The **budget line/constraint** is the set of the possible bundles of goods that can be bought by a consumer if the consumer's entire budget is spent on these goods at market prices. Graphically, this is represented using the budget line, and is often a simple linear equation. The slope of this line is known as the **marginal rate of transformation** and represents the rate at which the consumer is willing to trade one good for another.
+
+The **opportunity set** is the set of all possible bundles of goods that can be bought by the consumer, including those that do not use the entirety of the budget. Graphically, this is the area inside of the budget line that includes the origin.
+
+A linear budget line generally takes the form $P_B B + P_Z Z = Y$, where $P_B$ and $P_Z$ are the prices of $B$ and $Z$ respectively, and $Y$ is the income of the consumer. This can also be written as $B = \frac{Y - P_Z Z}{P_B}$.
+
+If income changes, the line is shifted along its normal. If any of the prices changes, the line scales ijnversely proportionally in that axis. For example, if the price of one good increases, the budget line is compressed along that axis.
+
+While marginal rate of substitution is based on prices, the marginal rate of transformation is based on utility.
+
+The **optimal bundles** for a consumer are the points on the quantities graph where the budget line meets the highest possible indifference curves - where the utility is maximised within the budget constraint.
+
