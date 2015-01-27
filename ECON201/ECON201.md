@@ -191,5 +191,40 @@ If income changes, the line is shifted along its normal. If any of the prices ch
 
 While marginal rate of substitution is based on prices, the marginal rate of transformation is based on utility.
 
-The **optimal bundles** for a consumer are the points on the quantities graph where the budget line meets the highest possible indifference curves - where the utility is maximised within the budget constraint.
+The **optimal bundles** for a consumer are the points on the quantities graph where the budget line meets the highest possible indifference curves - where the utility is maximised within the budget constraint. This happens then the curves are tangent - intersecting and also parallel.
 
+# 22/1/15
+
+Indifference curves, together with budget constraints, can be **used to derive demand curves**. By varying the price of one good while holding the price of all other goods and income of the consumer constant, assuming that we are spending all income on goods/services, we get the standard demand curve. Basically, when we change the price of a good, the budget constraint changes and the optimum bundle point changes (point at which budget constraint is tangent to an indifference curve). When we plot the quantity demanded at this point as price changes, we get a demand curve.
+
+The **income-consumption curve** is a curve plotted on axes where each axis is the quantity consumed of a good/service. The curve is plotted in terms of the amount of each good/service consumed as the income changes.
+
+The **price-consumption** curve is similar, but 
+
+Increases in income cause a shift in the demand curve and movement along the income-consumption curve and the Engel curve (quantity demanded as income changes).
+
+A **normal good** is a commodity whose income elasticity is nonnegative - as income increases, the quantity demanded increases or stays the same. An **inferior good** is the opposite, with less demanded as income increases. It is not possible for all goods to be inferior, since this phenomena occurs due to some being substitutes for others.
+
+The slope of the budget line is the **ratio of prices between the two goods on a plot**. This is how we choose which budget line to draw.
+
+# 27/1/15
+
+The **substitution effect** is a change in the quantity demanded caused by a change in prices (a raise in price causes a decrease in quantity demanded, since consumers just buy cheaper alternatives).
+
+The **income effect** is a change in the quantity demanded caused by a change in consumer income (dependent on income elasticity - for an income increase, quantity demanded decreases for inferior goods and increases for normal goods).
+
+The total effect is the sum of these two effects.
+
+There are also **Giffen goods** where an increase in price actually causes an increase in quantity demanded, like potatoes in Ireland. This is caused by the good being so inferior that buying more uses so much of a consumer's income that their income is lowered to the point where they need to always buy it - the income effect is stronger than the substitution effect. In other words, buying potatoes made people poor enough that they had to keep buying potatoes instead of more expensive foods.
+
+We can derive the supply curve for labor by deriving the demand curve for leisure - all the time not laboring. The time constraint is $W = 24 - L$, where $W$ is hours of work and $L$ is hours of leisure. The price of leisure is the opportunity cost of lost labor - the wage $S$.
+
+We then derive the demand curve for leisure (wage vs. hours of leisure) by obtaining a utility function $U(L, G)$ where $G$ is the amount spent on goods, then drawing the two indifference curves tangent to two budget constraints at different wages. The resulting demand curve is the line passing through the two tangent points.
+
+The supply curve for labor is exactly the demand curve for leisure mirrored horizontally. Therefore, if we mirror this demand curve, we get the supply curve for labor - the wage at which people are willing to work for a certain number of hours.
+
+Leisure is a normal good since an increase in income leads to more leisure - caused by the income effect.
+
+For goods that are perfect complements, the substitution effect is 0 since the indifference curves are perfectly right angled.
+
+The income elasticity of supply is important because if positive, an income tax reduces hours worked and reduces production, and if it is negative, an income tax increases hours and increases production.

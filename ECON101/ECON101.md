@@ -1424,7 +1424,3 @@ Some firms practice **price discrimination** - goods or services are sold at dif
 A firm does not need to be a monopoly to price discriminate, but it happens most often in monopolies.
 
 For example, an energy company might sell electricity at higher prices during certain hours of the day and lower prices at other times.
-
-# 22/1/15
-
-;wip: get notes on this lecture

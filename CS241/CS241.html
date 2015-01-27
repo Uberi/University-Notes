@@ -251,7 +251,77 @@ sw $2, 0($1)</code></pre>
 <p>Also note that it is also possible to label the address just past the end of the program, and a line may have more than one label associated with it.</p>
 <p>Instructions in MIPS start with a 6 bit opcode, followed by their parameters that specify things like registers and offsets.</p>
 <h1 id="section-5">22/1/15</h1>
-<p>;wip: get notes for today, slept in</p>
+<p>An OS can be as simple as the following:</p>
+<pre><code>repeat:
+    p &lt;= the next program to run
+    $2 &lt;= loader(p)
+    jalr $2
+beq $0, $0, repeat</code></pre>
+<p>Note that the OS itself is just a program, which means it needs to be in memory as well. Since execution starts at 0x00000000, we need to put the OS at the very beginning of the memory. That means our program cannot occupy the first location in memory.</p>
+<p>That also means that the addresses of the labels will not be correct if we load them directly, since the assembler created the machine code assuming addresses start from the beginning of the program (a label at the very beginning of the assembly should result in a value of 0x00000000). If we load our program at offset <span class="math">\(d\)</span>, then we must add <span class="math">\(d\)</span> to the value of each label or reference to a label, like <code>.word some_label</code>. This process is called <strong>relocation</strong> and allows us to load the code anywhere in memory and have it run properly.</p>
+<p>Since the machine code is just a stream of bytes, we don't know which words are labels and which are not - the assembler has to give us additional information about what type of thing each word is.</p>
+<p>As a result, what most assemblers output is not actually just machine code, but actually <strong>object code</strong> - machine code with additional metadata that lets us load and run the program in a clean way. These assemblers are called <strong>relocatable assemblers</strong>.</p>
+<p>Basically, the metadata needed in object files includes the addresses of words that represent label addresses in the code so we can relocate it, plus ;wip</p>
+<p>The object file format we will be using is called <strong>MIPS executable relocatable linkable</strong> (MERL), and often has a filename of the form <code>*.merl</code>. It looks like this:</p>
+<ol style="list-style-type: decimal">
+<li>The literal word 0x10000002, which is the MIPS instruction for <code>beq $0, $0, $2</code>, and skips two words ahead, past the rest of the header.</li>
+<li>this means that the object file can also be run as a normal MIPS program, since this value causes it to jump past the header and straight to the code if loaded at address 0x00000000.</li>
+<li>It also acts as a sanity check to make sure the file is really a MERL file.</li>
+<li>The length of the entire module in bytes as a word - this is the length of the header (12), the machine code, and the relocation table.</li>
+<li>The address of the end of the code section in bytes as a word, which is the length of the header (12) and the machine code.</li>
+<li>The actual MIPS machine code.</li>
+<li>The <strong>relocation table</strong>, which appears after the code returns and has a sequence of entries for different types of relocatables. An entry in the relocation table consists of two words:</li>
+<li>The format code - a word representing the type of entry this is. For example, a value of 1 represents that this entry is a relocation entry.</li>
+<li>The actual address, which, if this entry is a relocation entry, is the address of a word holding the address of a label. This is relative to the beginning of the header.</li>
+</ol>
+<h1 id="section-6">27/1/15</h1>
+<p>The MERL format could also be written as follows:</p>
+<pre><code>; MERL header
+beq $0, $0, 2
+.word end_of_module
+.word end_of_code
+
+;code goes here
+add $1, $2, $0
+
+; MERL footer - relocation table
+end_of_code:
+.word 0x1 ; relocatable address
+.word SOME_ADDRESS
+; ...
+.word 0x1
+.word SOME_OTHER_ADDRESS
+end_of_module:</code></pre>
+<p>The <code>cs241.merl</code> tool accepts a MERL file and a relocation address and outputs MIPS machine code relocated at the desired address, ready to be loaded starting at that offset. The <code>mips.twoints</code> and <code>mips.array</code> tools also support an optional second argument that specifies the address to load the code at.</p>
+<p>Relocation is typically done by the loader, automatically. The loader usually has the following structure:</p>
+<pre><code>verify(read_word()) # check cookie
+end_of_module = read_word()
+code_length = read_word() - 12
+
+# load code
+p = allocate_RAM(code_length + stack_space)
+for i in range(0, code_length, 4):
+    RAM[p + i] = read_word()
+
+relocation_table = code_length + 12 # start of relocation table
+for i in range(relocation_table, end_of_module, 8):
+    format = read_word()
+    if format == 1: # we only support format 0x1 for now
+        offset = read_word() - 12
+        RAM[p + offset] += p - 12 # we subtract 12 since in MERL addresses are relative to the start of the header, and the header wasn&#39;t loaded</code></pre>
+<p>When we have multiple files, we might have a function that calls a function in another file. However, the assembler can't assemble this directly since the label of the function isn't defined in the file it's being called from.</p>
+<p>We could just append all the code together and then assemble them, which works but is not very good, since that requires the assembly code to be available (in practice, people just want to distribute MERL), and we would need to assemble it possibly multiple times in larger projects.</p>
+<p>A better solution is a program that accepts multiple MERL files and properly puts them together into one - the <strong>linker</strong>. We want to put MERL files together without ever forcing it to know about ASM.</p>
+<p>First, what we could do is have the assembler ignore unknown labels, leaving them to be resolved to actual values later. This is done by simply using a placeholder value like 0, and then storing a list of these addresses in the relocation table along with the labels we want to assign to them.</p>
+<p>To make this easier for the assembler, we add the <code>.import IDENTIFIER</code> directive, which does not result in any output, but tells the assembler that <code>IDENTIFIER</code> is an identifier that is external to the current file and will be linked in later. This allows us to catch typos in our label names more easily - we can give an error if a label isn't defined and isn't imported.</p>
+<p>In the MERL files, we define a new format code for the relocation table - 0x11, the external symbol reference (ESR) format. The table entry then contains the address of the label reference, and the name of the label:</p>
+<pre><code>; ESR relocation table entry
+.word 0x11
+.word ADDRESS # location where the label was used
+.word LENGTH # number of words/chars that make up the label name
+.word C[0] # first character of the label as ASCII value
+; ...
+.word C[LENGTH - 1] # last character of the label as ASCII value</code></pre>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
