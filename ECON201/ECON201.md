@@ -228,3 +228,7 @@ Leisure is a normal good since an increase in income leads to more leisure - cau
 For goods that are perfect complements, the substitution effect is 0 since the indifference curves are perfectly right angled.
 
 The income elasticity of supply is important because if positive, an income tax reduces hours worked and reduces production, and if it is negative, an income tax increases hours and increases production.
+
+# 29/1/15
+
+;wip: I missed this class due to an interview

@@ -314,7 +314,7 @@ for i in range(relocation_table, end_of_module, 8):
 <p>A better solution is a program that accepts multiple MERL files and properly puts them together into one - the <strong>linker</strong>. We want to put MERL files together without ever forcing it to know about ASM.</p>
 <p>First, what we could do is have the assembler ignore unknown labels, leaving them to be resolved to actual values later. This is done by simply using a placeholder value like 0, and then storing a list of these addresses in the relocation table along with the labels we want to assign to them.</p>
 <p>To make this easier for the assembler, we add the <code>.import IDENTIFIER</code> directive, which does not result in any output, but tells the assembler that <code>IDENTIFIER</code> is an identifier that is external to the current file and will be linked in later. This allows us to catch typos in our label names more easily - we can give an error if a label isn't defined and isn't imported.</p>
-<p>In the MERL files, we define a new format code for the relocation table - 0x11, the external symbol reference (ESR) format. The table entry then contains the address of the label reference, and the name of the label:</p>
+<p>In the MERL files, we define a new format code for the relocation table - 0x11, the <strong>external symbol reference</strong> (ESR) format. The table entry then contains the address of the label reference, and the name of the label:</p>
 <pre><code>; ESR relocation table entry
 .word 0x11
 .word ADDRESS # location where the label was used
@@ -322,6 +322,70 @@ for i in range(relocation_table, end_of_module, 8):
 .word C[0] # first character of the label as ASCII value
 ; ...
 .word C[LENGTH - 1] # last character of the label as ASCII value</code></pre>
+<h1 id="section-7">29/1/15</h1>
+<p>However, we also need a way for a module to say what labels it has, so other modules can actually import it. We don't want to just export all the labels in a MERL module - labels are often duplicated, expecially when we start having compilers generating them automatically.</p>
+<p>Instead, we have a <code>.export LABEL</code> directive, which makes a new entry in the relocation table, in the <strong>external symbol definition</strong> (ESD) format. This contains the address where the label is defined, and the name of the label:</p>
+<pre><code>; ESD relocation table entry
+.word 0x05
+.word ADDRESS # location where the label was defined
+.word LENGTH # number of words/chars that make up the label name
+.word C[0] # first character of the label as ASCII value
+; ...
+.word C[LENGTH - 1] # last character of the label as ASCII value</code></pre>
+<p>In programming languages like C, each function gets its own <code>.export</code> entry, which is how the linker can link C object files together. A <code>static</code> function doesn't get an ESD entry, which is why it can't be imported from other files.</p>
+<p>Now we can write a linker:</p>
+<pre><code># Given MERl files m1 and m2 as binary blobs, and we want to make a single MERL file with m2 linked in after m1
+# `get_imports` and `get_exports` get the ESRs and ESDs, respectively, as a dictionary mapping label names to addresses
+
+a &lt;- len(m1) - 12
+relocate m2 higher by `a`
+add `a` to every address in m2&#39;s symbol table
+assert(set_conjunction(get_exports(m1).keys(), get_exports(m2).keys()) == empty_set)
+
+# link imports and exports together
+for address1, label in get_imports(m1):
+    if label in get_exports(m2):
+        m1[address1] = get_exports(m2)[label]
+        delete the ESR entry `label` from m1&#39;s relocation table
+        add relocation entry `address1` to m1&#39;s relocation table
+for address2, label in get_imports(m2):
+    if label in get_exports(m1):
+        m1[address1] = get_exports(m1)[label]
+        delete the ESR entry `label` from m2&#39;s relocation table
+        add relocation entry `address1` to m2&#39;s relocation table
+    # we don&#39;t have an else because this linker only links two MERL files at a time, so it&#39;s possible that we run this multiple times for three or more files
+
+# make the final relocation table
+relocations = set_disjunction(get_relocations(m1), get_relocations(m2))
+imports = set_disjunction(get_imports(m1), get_imports(m2))
+exports = set_disjunction(get_exports(m1), get_exports(m2))
+
+# output MERL file
+output MERL cookie
+output total code length plus relocation table size plus 12 (header size)
+output total code length plus 12 (header size)
+output m1
+output m2
+output relocations, exports, and imports</code></pre>
+<h2 id="high-level-languages">High Level Languages</h2>
+<p>The compiler is responsible for converting a high level language to assembly. Unlike an assembler, the compiled result is not unique - there are multiple possible ways to convert high level languages to assembly.</p>
+<p>We want a formal theory of string recognition - general principles that work in the context of any programming language.</p>
+<p>An <strong>alphabet</strong> is a finite set of symbols, generally denoted <span class="math">\(\Sigma\)</span> (<span class="math">\(\Sigma = \set{a, b, c}\)</span>, for example). Symbols can be anything we want, and might not even be strings.</p>
+<p>A <strong>string/word</strong> is a finite sequence of symbols, each symbol belonging to <span class="math">\(\Sigma\)</span> (<span class="math">\(abaabbcca\)</span>, for example).</p>
+<p>The length of a string <span class="math">\(s\)</span> is <span class="math">\(\abs{s}\)</span>. The empty string is usually denoted <span class="math">\(\epsilon\)</span>. This should not be confused with any symbols in the alphabet - <span class="math">\(\abs{\epsilon} = 0\)</span>.</p>
+<p>Given a string <span class="math">\(s\)</span>, <span class="math">\(s^n\)</span> is equivalent to <span class="math">\(s\)</span> repeated <span class="math">\(n\)</span> times - <span class="math">\(s^n = s \ldots s\)</span>.</p>
+<p>A <strong>language</strong> is a set of strings (<span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span>, for example, which is an even number of <span class="math">\(a\)</span> followed by a <span class="math">\(b\)</span>). The empty language is just an empty set <span class="math">\(\emptyset\)</span> - a language with no words. This is different from <span class="math">\(\set{\epsilon}\)</span>, which is a language with one word, the empty word.</p>
+<p>We want to determine if a given string belongs to a given language. How difficult this is depends on the language. For infinite sets of strings, like the set of all valid MIPS or C programs, things get a little trickier. In fact, there exist languages where this is impossible.</p>
+<p>Therefore, we want to characterize languages by how hard they are to recognize. Noam Chomsky came up the Chomsky heirarchy to deal with this. The following is based on that, and lists language classes in ascending order of difficulty recognizing:</p>
+<ul>
+<li>The <strong>finite languages</strong> are the easiest to recognize - there are a finite number of strings, so we can just check each one.</li>
+<li>The <strong>regular languages</strong>.</li>
+<li>The <strong>context-free languages</strong>.</li>
+<li>The <strong>context-sensitive languages</strong>.</li>
+<li>The <strong>recursive languages</strong>.</li>
+<li>There are other types that are more difficult to recognize, and they are all impossible to recognize.</li>
+</ul>
+<p>Our goal is to use as easy a level as possible on the heirarchy, since then the compiler will be simpler.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

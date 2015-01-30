@@ -291,6 +291,56 @@ for i in 1 ... n - 1:
 <p>Quicksort and quickselect are bad in the worst case but good in the average case. In real life, how good it is will depend on what kind of input we run it on. The average case assumes that the every input is equally likely to occur, but it is not necessarily true. For example, sorting almost sorted arrays is a very common use case in real life, which, given our pivot selection technique, would often give the worst case behaviour.</p>
 <p>Instead, we can force the instances to become equally likely, to get something like average case behaviour. We do this by using randomization - eliminating the bias caused by real world input by adding a random factor to the algorithm.</p>
 <p>For quicksort, we can do this by selecting a random pivot instead of just always taking the first element in the array as the pivot. This makes all elements equally likely, so the probability of choosing a bad pivot is always <span class="math">\(\frac 1 n\)</span>, regardless of what the input is. The average case is now <span class="math">\(O(n \log n)\)</span> regardless of what kind of input we have.</p>
+<h1 id="section-7">29/1/15</h1>
+<p>We will prove that all comparison sorting algorithms are <span class="math">\(\Omega(n \log n)\)</span>. However, there are other sorting algorithms that can also run in <span class="math">\(O(n)\)</span> time, which we will also look at.</p>
+<p>A comparison sorting algorithm is one that is based purely on key comparisons - we can only compare two keys to see if one is greater, less, or equal to another, and no other operations are available.</p>
+<p>We don't really have tools for analyzing arbitrary algorithms. However, for comparison-based algorithms we have <strong>decision trees</strong>:</p>
+<p>Consider an example, sorting three elements <span class="math">\(A[0..2]\)</span>:</p>
+<pre><code>                                         A[0] \le A[1]
+                         / false                         \ true
+                   A[1] \le A[2]                same as left side, but with A[0] and A[1] exchanged
+          / false                     \ true
+A[0] \le A[1] \le A[2]           A[0] \le A[2]
+                           / false                 \ true
+              A[0] \le A[2] \le A[1]          A[0] \le A[2] \le A[1]</code></pre>
+<p>Decision trees are binary trees that represent every possible decision path in the input, where each leaf is an output and each nde represents a decision. This decision tree represents the absolute minimum number of comparisons that we have to use in order to correctly sort three values</p>
+<p>The worst case number of comparisons is the length of the longest path from the root to the leaf - the height of the tree. The length of a path is the number of edges in it.</p>
+<p>Using these, we can now construct a proof:</p>
+<blockquote>
+<p>No matter what comparison sorting algorithm we use to sort, it is based on comparisons and is therefore representable using decision trees.<br />When we sort <span class="math">\(n\)</span> items, there are <span class="math">\(n!\)</span> possible outputs - every permutation of the input is a possible output.<br />Clearly, any binary tree of height <span class="math">\(h\)</span> must have at most <span class="math">\(2^h\)</span> leaves, so any binary tree with <span class="math">\(l\)</span> leaves must have height at least <span class="math">\(\log_2 l\)</span>.<br />So the height <span class="math">\(h\)</span> of the decision tree is at least <span class="math">\(\log_2 n!\)</span>.<br />Clearly, <span class="math">\(h \ge \log_2 n! = \log_2 (n(n - 1) \cdots 1) \ge \log_2 n + \log_2 (n - 1) + \ldots + \log \frac n 2 \ge \frac n 2 \log_2 \frac n 2 = \frac n 2 \log n + \frac n 2 \log_2 \frac 1 n = \frac n 2 \log n - \frac n 2\)</span>.<br />So <span class="math">\(h \in \Omega(n \log n)\)</span>.</p>
+</blockquote>
+<p>However, non-comparison sorting algorithms can be faster. <strong>Bucket sort</strong> is how most people will sort things by keys like names or grades. Basically, we have one pile for each possible value, make a pile for each value, and put them together:</p>
+<pre><code>let $0 \le A[i] \le R - 1$ be an integer ($R$ is the radix)
+create an array $R$ of empty lists $L[0], \ldots, L[R - 1]$
+for element in A:
+    append `element` t `L[element]`
+concatenate all the lists $L[0], \ldots, L[R - 1]$ together into another list `L`
+the sorted result is now `L`</code></pre>
+<p>This is a stable sort. Since we iterate through the array, and the lists take a constant time to create, bucket sort is <span class="math">\(O(n + R)\)</span> in the worst case.</p>
+<p>This is not a comparison sorting algorithm because it uses more information than just comparisons - it also relies on assumptions about the keys all being in the finite set of possible values.</p>
+<p><strong>Key-index/count sort</strong> is similar to bucket sort (and is also stable), but doesn't need to use lists, which are something we try to avoid. The idea is that we know where the elements of <span class="math">\(L[1]\)</span> will be in the final result based on the number of elements in <span class="math">\(L[0]\)</span>, where the elements of <span class="math">\(L[2]\)</span> based on where <span class="math">\(L[1]\)</span> is and the number of elements in it, and so on:</p>
+<pre><code># compute length of each list
+list_lengths = [0] * R
+for element in A:
+    list_lengths[element] += 1
+
+# compute position of each array in the result
+list_positions = [0] * R
+for i in range(1, R):
+    list_positions[i] = list_positions[i - 1] + list_lengths[i - 1]
+
+# put each value into the correct position
+initialize `result` as a list with the same length as `A`
+for element in A:
+    result[list_positions[element]] = element
+    list_positions[element] += 1</code></pre>
+<p>This can also be done in place, and we can combine <code>list_length</code> into <code>list_positions</code>. This is still <span class="math">\(O(n + R)\)</span> since we have to initalize the array of size <code>R</code> to 0.</p>
+<p>In practice, we wouldn't want to use these sorts for any real-world inputs. This is because although it is <span class="math">\(O(n)\)</span>, it is often still slower than a good comparison sort for real-world number values.</p>
+<p>These sorts also work for occasions when we have too many buckets to be practical, like names. We could first sort by the first letter/digit of the name/grade, then recursively sort each of the buckets based on the second letter/digit, and so on. This technique is also called <strong>MSD-radix-sort</strong>. When <span class="math">\(R = 2\)</span>, this is very similar to quicksort.</p>
+<p><strong>LSD-radix-sort</strong> is a bit better, since we don't have to keep track of all the indices by which we're sorting recursively:</p>
+<pre><code>for d from the length of the largest value down to 1:
+    sort `A` by the `d`th significant digit with a stable sorting algorithm</code></pre>
+<p>The time complexity for this is simply <span class="math">\(O(m(n + R))\)</span> where <span class="math">\(m\)</span> is the largest possible number of digits. Typically, the number of digits or letters is bounded, so the depth of recursion is bounded by a constant and the worst case time complexity is <span class="math">\(O(n + R)\)</span>.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
