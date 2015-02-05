@@ -232,3 +232,9 @@ The income elasticity of supply is important because if positive, an income tax 
 # 29/1/15
 
 ;wip: I missed this class due to an interview
+
+# 3/2/15
+
+;wip: I missed this class due to dental appointment
+
+;wip: midterm on thursday at QNC 1507 Thursday Feb. 5, during class time, covers chapters 1-5 in perloff, bring pencil, pen, protractor, calculator

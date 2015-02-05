@@ -385,7 +385,46 @@ output relocations, exports, and imports</code></pre>
 <li>The <strong>recursive languages</strong>.</li>
 <li>There are other types that are more difficult to recognize, and they are all impossible to recognize.</li>
 </ul>
-<p>Our goal is to use as easy a level as possible on the heirarchy, since then the compiler will be simpler.</p>
+<p>Our goal is to use as easy a level as possible on the heirarchy, since then the compiler will be simpler. Higher levels are supersets of lower levels.</p>
+<h1 id="section-8">3/2/15</h1>
+<h3 id="finite-languages">Finite Languages</h3>
+<p>We can see if a word is in a finite language by comparing it is in each element of the finite set. However, we can do this more efficiently by going char by char and filtering out the ones that are not matches.</p>
+<p>For example, if we have a language with words &quot;cat&quot;, &quot;car&quot;, &quot;cow&quot;, we can follow the following procedure:</p>
+<ol style="list-style-type: decimal">
+<li>Scan the input left to right.</li>
+<li>If the first character is &quot;c&quot;, then move on, and otherwise produce false.</li>
+<li>If the next character is &quot;a&quot;, and the next character is &quot;t&quot; or &quot;r&quot;, and there is no next character, then produce true, and otherwise produce false if &quot;t&quot;, &quot;r&quot;, or end failed to match.</li>
+<li>If the next character is &quot;o&quot;, and the next character is &quot;w&quot;, and there is no next character, then produce true, and otherwise produce false if &quot;w&quot; or end didn't match.</li>
+<li>Otherwise, produce false.</li>
+</ol>
+<p>This only scans the word once - we read only in one pass. Although the above procedure uses no memory, there is still state - the value of PC is different whenever we read a character.</p>
+<p>We can abstract this sort of decision-making program into something like a graph. Every state in the program is represented as a circle, and transitions between states can be represented by drawing unidirectional arrows between them, labelled with what the transition is. In the above example, states might be values of the PC register, and state transitions might be labelled by the character that is read next.</p>
+<p>A circle within a circle (or a circle with a double border) accepts - it represents a state that, if the input ends there, we can simply accept it as valid, and we can use it as an end state. A circle with an arrow pointing into it from the left represents the start state.</p>
+<p>This sort of program is known as a <strong>state machine</strong>. The circles we draw are <strong>states</strong> - configurations of the program based on the inputs seen. The diagrams we draw are called <strong>deterministic finite automata</strong> (DFAs).</p>
+<p>All state machines that check the validity of an arbitrary string in a finite language can be written as a tree. In other words, for any finite language there exists a DFA without an cycles.</p>
+<p>We match DFAs as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Start at the start state.</li>
+<li>For each char in the input, follow the correponding arrow to the next state, and produce false if there are no possible transitions from any of the states.</li>
+<li>We are now at the end of the input. Produce true if the current state is an ending state, and false otherwise.</li>
+</ol>
+<p>To make the math more elegant, we define an implicit <strong>error state</strong>, and every single state goes to this state for unlabeled transitions. So if we get an unexpected input for a node (so we don't have a defined transition for the input), we implicitly define a transition to the error state. The error state is not special, but it is always a state that cannot transition to any other states, and it never matches.</p>
+<h3 id="regular-languages">Regular Languages</h3>
+<p>The regular languages are built from finite languages, plus set operations like union (set union of the words of two languages - <span class="math">\(L_1 \cup L_2 = \set{x \mid x \in L_1 \vee x \in L_2}\)</span>), concatenation (every possible combination of elements from one set concatenated to another - <span class="math">\(L_1 L_2 = \set{xy \mid x \in L_1 \wedge y \in L_2}\)</span>), and repetition (a language repeated an arbitrary number of times - <span class="math">\(L^* = \set{\epsilon} \cup \set{xy \mid x \in L^* \wedge y \in L} = \set{\epsilon} \cup L \cup LL \cup LLL \cup \ldots\)</span>).</p>
+<p>Note that repetition generally results in infinite sets - this means that the regular languages contain infinite languages.</p>
+<p>We show that a language is regular by building it up from finite languages and the set uperations (union, concatenation, and repetition). For example, <span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span> is regular because <span class="math">\(\set{a^{2n}b \mid n \ge 0} = \set{aa}*\set{b}\)</span>.</p>
+<p>A <strong>regular expression</strong> is a shorthand for all the cumbersome set notation we are using for describing regular languages, and is itself a language we will denote <span class="math">\(E\)</span>. It works as follows:</p>
+<ul>
+<li><span class="math">\(E = \emptyset\)</span> represents <span class="math">\(L = \emptyset\)</span>.</li>
+<li><span class="math">\(E = \epsilon\)</span> represents <span class="math">\(L = \set{\epsilon}\)</span>.</li>
+<li><span class="math">\(E = aaa\)</span> and other sequences of non-special characters represent <span class="math">\(L = \set{aaa}\)</span> and themselves in a set.</li>
+<li><span class="math">\(E_1|E_2\)</span> represents <span class="math">\(L_1 \cup L_2\)</span>.</li>
+<li><span class="math">\(E_1 E_2\)</span> represents <span class="math">\(L_1 L_2\)</span>.</li>
+<li><span class="math">\(E_1 = E_2^*\)</span> represents <span class="math">\(L_1 = L_2^*\)</span>.</li>
+</ul>
+<p>For example, <span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span> can be represented with <span class="math">\((aa)*b\)</span>. Regular languages are, in practice, relatively simple. For example, C is not a regular language. A C program is made up of tokens, each of which is part of a regular language - tokens, string literals, number literals, types, and so on.</p>
+<p>For regular languages, DFAs can have cycles - this occurs as a result of repetition.</p>
+<p>Consider the language defined as the set containing all strings that are composed of an even number of &quot;a&quot; and an odd number of &quot;b&quot;. Clearly, we can write a DFA for this using four states (even &quot;a&quot; and even &quot;b&quot; - start, odd &quot;a&quot; and even &quot;b&quot;, odd &quot;a&quot; and odd &quot;b&quot;, and even &quot;a&quot; and odd &quot;b&quot; - end/accept). However, it is not possible to write a regular expression that describes this - the DFA describes a non-regular language.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

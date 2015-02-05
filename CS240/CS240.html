@@ -143,7 +143,7 @@ for i in 1 ... n - 1:
 <p>We can aso use this to prove that <span class="math">\((\log n)^a \in o(n^b)\)</span> for any <span class="math">\(a, b &gt; 0\)</span>.</p>
 <p>Also, <span class="math">\(f(n) \in \Omega(g(n)) \iff g(n) \in \Omega(f(n))\)</span>, <span class="math">\(f(n) \in O(g(n)) \iff g(n) \in \Omega(f(n))\)</span>, <span class="math">\(f(n) \in o(g(n)) \iff g(n) \in \omega(f(n))\)</span>, <span class="math">\(f(n) \in \Theta(g(n)) \iff g(n) \in O(f(n)) \wedge g(n) \in \Omega(f(n))\)</span>, <span class="math">\(f(n) \in o(g(n)) \implies f(n) \in O(g(n))\)</span>, <span class="math">\(f(n) \in o(g(n)) \implies f(n) \notin \Omega(g(n))\)</span>, <span class="math">\(f(n) \in \omega(g(n)) \implies f(n) \in \Omega(g(n))\)</span>, and <span class="math">\(f(n) \in \omega(g(n)) \implies f(n) \notin O(g(n))\)</span>. We can use these to simplify order notation expressions.</p>
 <p>Also, <span class="math">\(O(f(n) + g(n)) = O(\max(f(n), g(n))) = \max(O(f(n)), O(g(n)))\)</span>. Also, orders are transitive - <span class="math">\(f(n \in O(g(n))) \wedge g(n) \in O(h(n)) \implies f(n) \in O(h(n))\)</span>.</p>
-<p>In our pseudocoe, we often use <span class="math">\(x \left 5\)</span> or <code>x := 5</code> to denote assignment, since <code>=</code> is ambiguous - it could potentially mean equality or assignment.</p>
+<p>In our pseudocode, we often use <span class="math">\(x \left 5\)</span> or <code>x := 5</code> to denote assignment, since <code>=</code> is ambiguous - it could potentially mean equality or assignment.</p>
 <p>Math with orders works a lot like normal math: <span class="math">\(\Theta(1) \cdot (1 + \ldots + n) = \Theta(1) \cdot \frac{n^2 + n}{2} = \Theta(n^2 + n) = \Theta(n^2)\)</span>.</p>
 <p><span class="math">\(\sum_{i = 1}^n i^k = \Theta(n^{k + 1})\)</span></p>
 <h1 id="section-3">15/1/15</h1>
@@ -205,18 +205,18 @@ for i in 1 ... n - 1:
             max_index = lc(j)
         if rc(j) exists and A[rc(j)] &gt; A[max_index]: # existance means that rc(j) &lt;= n - 1
             max_index = rc(j)
-        if max_index == k: break
-        swap A[j] and A[max_index]
+        if max_index == k: break # the heap property is already satisfied, so stop bubbling
+        swap A[j] and A[max_index] # swap the current node with its child, which is larger than it
         j = max_index
     
-    # wip: we shrink the array here if necessary
+    # if necessary, shrink the array here
     return max</code></pre>
 <p>Clearly, this takes <span class="math">\(O(h)\)</span> time worst case where <span class="math">\(h\)</span> is the height of the heap underneath the starting element, the root, which is <span class="math">\(O(\log n)\)</span> since <span class="math">\(h\)</span> is roughly <span class="math">\(\log n\)</span>. The worst case is when the last node of the heap is also the smallest one.</p>
 <p><strong>Priority queue sort</strong> (PQSort) is a sorting algorithm where we insert all our elements into a priority queue and then take them out again in order. PQSort needs <span class="math">\(n\)</span> insertions and <span class="math">\(n\)</span> deletions of maximums. Since each operation is <span class="math">\(O(\log n)\)</span>, PQSort is <span class="math">\(O(n \log n)\)</span>, like mergesort. When the priority queue is implemented with a heap, we also call it <strong>heapsort</strong>.</p>
 <p>Heapsort is pretty nice because we can sort in-place (by building a heap directly) and without a lot of recursion, but it can have poor real-world behaviour because the worst case heap insertion occurs when we are inserting nodes one by one that are already in ascending order, and already-sorted data occurs very often in real-world applications.</p>
 <p>Also, heapsort is not stable. If a sorting algorithm is <strong>stable</strong>, then if different nodes have equal keys, they appear in the same order in the output as they did in the input.</p>
 <p>Also, we often measure the runtime of sorting algorithms in terms of the number of key comparisons made (<span class="math">\(A[i] &lt; A[j]\)</span>). This is because we often allow users to specify their own key computing functions, which could potentially be aribtrarily exxpensive. Everything else is simply proportional or a constant on top of the number of key comparisons, in terms of runtime.</p>
-<p>We may also want to <strong>build heaps</strong> - given an array <span class="math">\(D\)</span> with <span class="math">\(c\)</span> values, we want to build a head from that. This is relatively trivial in theory - simply go through the array and insert it into a heap. Clearly, this is <span class="math">\(O(n \log n)\)</span> since insetion is <span class="math">\(O(\log n)\)</span> and we need <span class="math">\(n\)</span> of them.</p>
+<p>We may also want to <strong>build heaps</strong> - given an array <span class="math">\(D\)</span> with <span class="math">\(c\)</span> values, we want to build a head from that. This is relatively trivial in theory - simply go through the array and insert it into a heap. Clearly, this is <span class="math">\(O(n \log n)\)</span> since insertion is <span class="math">\(O(\log n)\)</span> and we need <span class="math">\(n\)</span> of them.</p>
 <p>Clearly, this takes roughly <span class="math">\(\sum_{k = 0}^{c - 1} \log(k + 1)\)</span> time since <span class="math">\(n\)</span> starts off at 0 and grows by 1 upon every insertion. Clearly, there are at least <span class="math">\(\frac n 2\)</span> terms in that sum where <span class="math">\(k + 1 \ge \frac n 2\)</span>, so <span class="math">\(\sum_{k = 0}^{c - 1} \log(k + 1) \ge \frac n 2 \log \frac n 2\)</span>, so the operation is <span class="math">\(\Omega(n \log n)\)</span>, and by the above, <span class="math">\(\Theta(n \log n)\)</span>.</p>
 <p>A better option is to build the heap in place, to save memory. Clearly, an array always satisfies the structural property since there's no way not to, so all we have to do is enforce the heap property in the array.</p>
 <p>We will enforce the heap property by bubbling downward on every level of the node starting from the last node that has children (the last node on the second-to-last level). Our invariant will be that for all <span class="math">\(k &gt; i\)</span>, the subheap rooted at <span class="math">\(k\)</span> satisfies the heap property. We will show that this takes less than or equal to <span class="math">\(2c\)</span> key comparisons:</p>
@@ -296,13 +296,13 @@ for i in 1 ... n - 1:
 <p>A comparison sorting algorithm is one that is based purely on key comparisons - we can only compare two keys to see if one is greater, less, or equal to another, and no other operations are available.</p>
 <p>We don't really have tools for analyzing arbitrary algorithms. However, for comparison-based algorithms we have <strong>decision trees</strong>:</p>
 <p>Consider an example, sorting three elements <span class="math">\(A[0..2]\)</span>:</p>
-<pre><code>                                         A[0] \le A[1]
-                         / false                         \ true
-                   A[1] \le A[2]                same as left side, but with A[0] and A[1] exchanged
-          / false                     \ true
-A[0] \le A[1] \le A[2]           A[0] \le A[2]
-                           / false                 \ true
-              A[0] \le A[2] \le A[1]          A[0] \le A[2] \le A[1]</code></pre>
+<pre><code>                                     A[0] \le A[1]
+                                    / false       \ true
+                       A[1] \le A[2]               same as left side, but with A[0] and A[1] exchanged
+                      / false       \ true
+A[0] \le A[1] \le A[2]               A[0] \le A[2]
+                                    / false       \ true
+              A[0] \le A[2] \le A[1]               A[0] \le A[2] \le A[1]</code></pre>
 <p>Decision trees are binary trees that represent every possible decision path in the input, where each leaf is an output and each nde represents a decision. This decision tree represents the absolute minimum number of comparisons that we have to use in order to correctly sort three values</p>
 <p>The worst case number of comparisons is the length of the longest path from the root to the leaf - the height of the tree. The length of a path is the number of edges in it.</p>
 <p>Using these, we can now construct a proof:</p>
@@ -341,6 +341,26 @@ for element in A:
 <pre><code>for d from the length of the largest value down to 1:
     sort `A` by the `d`th significant digit with a stable sorting algorithm</code></pre>
 <p>The time complexity for this is simply <span class="math">\(O(m(n + R))\)</span> where <span class="math">\(m\)</span> is the largest possible number of digits. Typically, the number of digits or letters is bounded, so the depth of recursion is bounded by a constant and the worst case time complexity is <span class="math">\(O(n + R)\)</span>.</p>
+<h1 id="section-8">3/2/15</h1>
+<p>An empty tree has height -1. A tree with one node has height 0. The height of a tree is 1 more than the larger of the heights of the two subtrees.</p>
+<p>A <strong>dictionary</strong> is an abtract datatype that associates keys to values. Essentially, it stores key-value pairs, and supports insertion of a key value pair, searching for a key-value pair by key, and deleting a key-value pair by key.</p>
+<p>We assume that all the keys are unique and can be compared in constant time, and each pair takes up constant space.</p>
+<p>A naive way to implement dictionaries is to use unsorted arrays/lists (<span class="math">\(O(1)\)</span> insert, <span class="math">\(O(n)\)</span> search, <span class="math">\(O(n)\)</span> delete) or sorted arrays/lists (<span class="math">\(O(n)\)</span> insert, <span class="math">\(O(\log n)\)</span> search, <span class="math">\(O(n)\)</span> delete).</p>
+<p>A <strong>binary search tree</strong> is a binary tree where for every node, every key in the left subtree is smaller than it and the every key in the right subtree are larger. We don't have to care about the duplicate keys since we assume keys are unique.</p>
+<p>Implementing dictionaries using binary search trees is possible by constructing the BST where the value of each pair is its key (<span class="math">\(O(h)\)</span> insertion, <span class="math">\(O(h)\)</span> search, <span class="math">\(O(h)\)</span> deletion). It is always true that <span class="math">\(h \in \Omega(\log n)\)</span> and <span class="math">\(h \in O(n)\)</span>.</p>
+<p>We want to make sure <span class="math">\(h\)</span> is <span class="math">\(O(\log n)\)</span>, by <strong>rebalancing</strong> the binary search tree as we perform operations on it. We do this by imposing additional conditions on the tree, and then showing that we can do all operations while maintaining these conditions and taking <span class="math">\(O(h)\)</span> time or less, and that these conditions cause the height of the tree to be <span class="math">\(O(\log n)\)</span>.</p>
+<p>There are many possible sets of conditions that we can use to make sure the binary tree is always balanced. One of these are those used in <strong>AVL-trees</strong>, which imposes just one condition: for any node, the height of the left and right subtree differ by at most 1 - the structural condition.</p>
+<p>AVL trees were one of the first ever self-balancing binary trees, and although they work, they are rather slow in practice.</p>
+<p>When we store a node in an AVL tree, we will also <strong>store the height of the tree formed by that node and its children in that node</strong>. This allows us to efficiently do the calculations we need later for insertions and deletions.</p>
+<p>Searching in an AVL tree is exactly the same as in a normal BST. Since we don't modify the tree, we also can't violate the strutural condition.</p>
+<p>For insertion, we need to insert the key-value pair at its proper spot, then check if the tree is still balanced and rebalance if not. Inserting into the correct subtree is the same as in a normal BST, but we also need to update the tree heights we are storing with the nodes - the newly inseted node gets height 0, and we recalculate the height of its parent. If the height changed, we recurse and recalculate the height of its parent, and so on.</p>
+<p>While we are recalculating heights, we also check if the heights of the children of the ancestor differ by at most 1. If they differ by more, then <strong>we need to rebalance on that node</strong> - to make sure it is both a BST and tree heights don't differ by more than 1. We basically have 4 possible rebalancing operations, and it was proven that at least one of them will correctly rebalance the tree.</p>
+<p>The first is <strong>right rotation on node Z</strong>. Given a BST with nodes in the form <span class="math">\(Z(Y(X(A, B), C), D)\)</span>, we can rearrange it as <span class="math">\(Y(X(A, B), Z(C, D))\)</span> while still maintaining the BST properties, since <span class="math">\(A &lt; X &lt; B &lt; Y &lt; C &lt; Z &lt; D\)</span>. Basically, we rotate <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span> clockwise/right, changing only those elements so the entire operation is constant time.</p>
+<p>The second is <strong>left rotation on node Z</strong>, which is similar but we are rotating in the opposite direction. Given a BST with nodes in the form <span class="math">\(Z(A, Y(B, X(C, D)))\)</span>, we an rearrange it as <span class="math">\(Y(Z(A, B), X(C, D))\)</span> while still maintaining the BST properties.</p>
+<p>The third is <strong>double right rotation on node Z</strong>. Given a BST with nodes in the form <span class="math">\(Z(Y(A, X(B, C)), D)\)</span>, we can rearrange it as <span class="math">\(X(Y(A, B), Z(C, D))\)</span>. Basically, we are bringing <span class="math">\(X\)</span> up to replace <span class="math">\(Z\)</span>. This is called a double right rotation because it can be implemented as left rotate on <span class="math">\(Y\)</span> and right rotate on <span class="math">\(Z\)</span>.</p>
+<p>The fourth is the <strong>double left rotation on node Z</strong>. Given a BST with nodes in the form <span class="math">\(Z(A, Y(X(B, C), D))\)</span>, we can rearrange it as <span class="math">\(X(Z(A, B), Y(C, D))\)</span>.</p>
+<p>Basically, we try each operation in turn, and check if each one is balanced. If so, then we can stop trying the others.</p>
+<p>;wip: download the modules from the website</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
