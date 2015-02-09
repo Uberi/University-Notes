@@ -383,7 +383,7 @@ output relocations, exports, and imports</code></pre>
 <li>The <strong>context-free languages</strong>.</li>
 <li>The <strong>context-sensitive languages</strong>.</li>
 <li>The <strong>recursive languages</strong>.</li>
-<li>There are other types that are more difficult to recognize, and they are all impossible to recognize.</li>
+<li>There are other types that are more difficult to recognize, and some that are even impossible. For example, a language that contains one word, the solution for an unsolvable problem in mathematics.</li>
 </ul>
 <p>Our goal is to use as easy a level as possible on the heirarchy, since then the compiler will be simpler. Higher levels are supersets of lower levels.</p>
 <h1 id="section-8">3/2/15</h1>
@@ -424,7 +424,79 @@ output relocations, exports, and imports</code></pre>
 </ul>
 <p>For example, <span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span> can be represented with <span class="math">\((aa)*b\)</span>. Regular languages are, in practice, relatively simple. For example, C is not a regular language. A C program is made up of tokens, each of which is part of a regular language - tokens, string literals, number literals, types, and so on.</p>
 <p>For regular languages, DFAs can have cycles - this occurs as a result of repetition.</p>
-<p>Consider the language defined as the set containing all strings that are composed of an even number of &quot;a&quot; and an odd number of &quot;b&quot;. Clearly, we can write a DFA for this using four states (even &quot;a&quot; and even &quot;b&quot; - start, odd &quot;a&quot; and even &quot;b&quot;, odd &quot;a&quot; and odd &quot;b&quot;, and even &quot;a&quot; and odd &quot;b&quot; - end/accept). However, it is not possible to write a regular expression that describes this - the DFA describes a non-regular language.</p>
+<p>Consider the language defined as the set containing all strings that are composed of an even number of &quot;a&quot; and an odd number of &quot;b&quot;. Clearly, we can write a DFA for this using four states (even &quot;a&quot; and even &quot;b&quot; - start, odd &quot;a&quot; and even &quot;b&quot;, odd &quot;a&quot; and odd &quot;b&quot;, and even &quot;a&quot; and odd &quot;b&quot; - end/accept). The regular expression for this is rather difficult to write. ;wip: how?</p>
+<h1 id="section-9">5/2/15</h1>
+<p>Formally, a DFA is a 5-tuple <span class="math">\((Q, \Sigma, q_0, A, \delta)\)</span>, where the variables represent the following:</p>
+<ul>
+<li><span class="math">\(Q\)</span> is the set of states of the DFA - all possible states. This is a finite, non-empty set.</li>
+<li><span class="math">\(\Sigma\)</span> is the alphabet of the DFA - all possible input values. This is a finite, non-empty set.</li>
+<li><span class="math">\(q_0\)</span> is the start state - the state at which the DFA is initialized. This is an element of <span class="math">\(Q\)</span>.</li>
+<li><span class="math">\(A\)</span> is the set of accepting states of the DFA - the states that the input can terminate at. This is a subset of <span class="math">\(Q\)</span></li>
+<li><span class="math">\(\delta\)</span> is the transition function - a mapping from a state and input character to a new state. This is a function <span class="math">\(q, x \to r, q \in Q, x \in x \in \Sigma, r \in Q\)</span>.</li>
+</ul>
+<p>DFAs don't always have to just accept characters. It is also possible to consume entire words, using an extension of the original <span class="math">\(\delta\)</span> function, which only consumes one character at a time.</p>
+<p>This <strong>word consuming function</strong> can be defined as <span class="math">\(\delta^*(q, \epsilon) = q, \delta^*(q, cw) = \delta^*(\delta(q, c), w), q \in Q, c \in Sigma, w \in \Sigma^*\)</span>. A DFA accepts a word <span class="math">\(w\)</span> if <span class="math">\(\delta^*(q_0, w) \in A\)</span> - the DFA accepts the input if read from its start state. <span class="math">\(\delta^*\)</span> represents a function that gives the end state of the DFA given a start state and input.</p>
+<p>Given a DFA <span class="math">\(M\)</span>, <span class="math">\(L(M)\)</span> represents the set of all strings accepted by <span class="math">\(M\)</span>. This is the set of all elements in of <span class="math">\(\Sigma^*\)</span> such that <span class="math">\(M\)</span> accepts them.</p>
+<p><strong>Kleene's theorem</strong> states that <span class="math">\(L\)</span> is regular if and only if <span class="math">\(L = L(M) for some DFA \)</span>M$. In other words, the regular languages are exactly the languages for which there exists a DFA that accepts them.</p>
+<p>A DFA is still just a representation of a computer program. In practive, these are often implemented using switch statements:</p>
+<pre><code>int state = $q_0$
+char current;
+while (read_char(current)) {
+    switch (state) {
+        case $q_0$:
+            switch (current) {
+                case &#39;a&#39;: state = // the state to transition to
+                // cases should exist for all possible transitions from this state
+                case &#39;z&#39;: state = // the state to transition to
+                default: error(&quot;No transitions available&quot;);
+            }
+        case $q_1$:
+            // another switch statement like the one for $q_0$, for $q_1$&#39;s transitions
+    }
+}</code></pre>
+<p>This works but is also long and error-prone. Instead, we can use a state table, where rows are chars and columns are states, and each cell points to the next state. See the assignment 3 starter code for an example.</p>
+<p>It is also possible to attach actions to the transitions in the DFA. Potentially, we could use this to do things like get the numerical value of a number literal while we are parsing it.</p>
+<p>Every regular expression can be converted into a DFA, and every DFA can be converted into a regular expression. However, the translation is not always straightforward. For example, consider <code>(a|b)*abb</code>, the set of all words in <span class="math">\(\set{a, b}^*\)</span> that end with &quot;abb&quot;. When we generate the DFA, we need to add extra transitions for the states that make up &quot;abb&quot; in order to backtrack, in order to handle inputs like &quot;aba&quot;:</p>
+<pre><code>1: START
+    &quot;a&quot;: 2
+    &quot;b&quot;: 1
+2:
+    &quot;a&quot;: 2
+    &quot;b&quot;: 3
+3:
+    &quot;a&quot;: 2
+    &quot;b&quot;: 4
+4: ACCEPT
+    &quot;a&quot;: 2
+    &quot;b&quot;: 1</code></pre>
+<h3 id="nfas">NFAs</h3>
+<p>What if we had a DFA that allowed more than one transition from the same state that have the same label? For example, a state with transitions to two other states, each with the same label.</p>
+<p>This would mean that when we have an input with multiple possible transitions, the machine would get to choose one of the transitions - the state machine is non-deterministic. This is a <strong>non-deterministic finite automata</strong> (NFA). The difference from a DFA is that the machine gets choices in which transition to use.</p>
+<p>We also assume that the machine always makes the correct choice - the state machine accepts if there exists a sequence of choices such that the input is accepted. In practice, we do this with something like backtracking - when we get to the end and we haven't accepted the input, we undo and choose a different set of choices. By using a stack storing when we made choices, we can easily use backtracking search over all possible choices.</p>
+<p>With NFAs, the above example becomes a lot simpler, which is the main benefit of this type of machine:</p>
+<pre><code>1: START
+    &quot;a&quot;: 1, 2
+    &quot;b&quot;: 1
+2:
+    &quot;b&quot;: 3
+3:
+    &quot;b&quot;: 4
+4: ACCEPT</code></pre>
+<p>Formally, an NFA is a 5-tuple like a DFA - <span class="math">\((Q, \Sigma, q_0, A, \delta)\)</span>, where the variables represent the same things as with a DFA, except the transition function. With an NFA, <span class="math">\(\delta\)</span> is a mapping from a state and input character to a set of new states. This is a function <span class="math">\(q, x \to R, q \in Q, x \in x \in \Sigma, R \subseteq Q\)</span>.</p>
+<p>An NFA accepts the input if a path exists such that the NFA results in acceptance, and rejects if none do.</p>
+<p>We now want to define a transition function for NFAs that accepts words. What we will do is define a function that accepts a set of possible current states and a word, resulting in a new set of possible states. When we are moving through the NFA, we are basically stepping through all the possible transitions at once when we have a choice. In other words, we step through all the possible choice paths in parallel.</p>
+<p>We define this as <span class="math">\(\delta^*(S, \epsilon) = S, \delta^*(S, cw) = \delta^*(\set{\delta(q, c) \mid q \in S}, w), S \subseteq Q, c \in \Sigma, w \in \Sigma^*\)</span>. This is a function that results in the set of all possible end states of the machine. The NFA accepts a word <span class="math">\(w\)</span> if and only if <span class="math">\(\delta^*(\set{q_0}, w) \cap A \ne \emptyset\)</span> - if any of the possible end states are accepting.</p>
+<p>To simulate a DFA:</p>
+<pre><code>state = $q_0$
+while read_char(current):
+    state = $\delta$(state, current)
+return state in $A$</code></pre>
+<p>To simulate an NFA:</p>
+<pre><code>states = set($q_0$)
+while read_char(current):
+    states = set($\delta$(q, current) for q in states)
+return states &amp; $A$ != set()</code></pre>
+<p>If we have an NFA and give each possible set of possible states (which we get from stepping through every possible option) a name, and use these sets as the states instead, we get a DFA. In this way it is possible to convert any NFA into a DFA.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

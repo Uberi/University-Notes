@@ -361,6 +361,49 @@ for element in A:
 <p>The fourth is the <strong>double left rotation on node Z</strong>. Given a BST with nodes in the form <span class="math">\(Z(A, Y(X(B, C), D))\)</span>, we can rearrange it as <span class="math">\(X(Z(A, B), Y(C, D))\)</span>.</p>
 <p>Basically, we try each operation in turn, and check if each one is balanced. If so, then we can stop trying the others.</p>
 <p>;wip: download the modules from the website</p>
+<h1 id="section-9">5/2/15</h1>
+<p>Operations on AVL trees can now be defined:</p>
+<pre><code>def insert(k, v):
+    insert `k` and `v` into the tree as a new leaf, without rebalancing
+    let `node` be the new node that was inserted
+    while `node` is not the root node:
+        p, s = parent(node), sibling(node)
+        if abs(s.height - node.height) &gt;= 2: # node unbalanced, rebalance it
+            rebalance(node)
+            node = p
+        else: # node balanced, update the height
+            new_height = max(node.height, s.height) + 1
+            if (new_height == p.height): break # the height has stopped changing and we can stop rebalancing
+            p.height = new_height
+
+def delete(k):
+    delete the node `k`, without rebalancing
+    let `node` be the node that was deleted
+    while `node` is not the root node:
+        p, s = parent(node), sibling(node)
+        if abs(s.height - node.height) &gt;= 2: # node unbalanced, rebalance it
+            rebalance(node)
+            node = p
+        else: # node balanced, update the height
+            new_height = max(node.height, s.height) + 1
+            if (new_height == p.height): break # the height has stopped changing and we can stop rebalancing
+            p.height = new_height
+
+def rebalance(node):
+    let `y` be the larger child of `node`
+    let `x` be the larger child of `y` # this child must exist since the height differs by more than 1, so `node` must have grandchildren
+    perform the rebalancing operation according to the four rebalancing cases, based on whether `y` and `x` are left and right children
+    update the heights of `node`, `y`, and `x`</code></pre>
+<p>The height <span class="math">\(h\)</span> of an AVL-tree is always at most <span class="math">\(O(\log n)\)</span>. Proof:</p>
+<blockquote>
+<p>We want to prove that that <span class="math">\(h \le \log_c n = O(\log n)\)</span> for a constant <span class="math">\(c\)</span>.<br />We want to find <span class="math">\(c\)</span> and <span class="math">\(n\)</span> for <span class="math">\(n \ge c^h\)</span> - given a fixed height, we want to find the smalles number of nodes we can have.<br />Clearly, for height 0, there must be at least 1 node. Clearly, for height 1 there must be at least 2 nodes. Clearly, for height 2 there must be at least 4 nodes. Clearly, for height 3 there must be at least 7 nodes.<br />By induction, we can show that the minimum number of <span class="math">\(n\)</span>, represented <span class="math">\(n(h)\)</span> must be <span class="math">\(n(0) = 1, n(1) = 2, n(h) = 1 + n(h - 1) + n(h - 2)\)</span>, since each minimal tree must have the smaller minimal trees as its children, and we want to use one as large as possible while the other is as small as possible.<br />Interesingly, the values of <span class="math">\(n(h)\)</span> is simply 1 less than each Fibonacci number. The Fibonacci numbers grow exponentially, so <span class="math">\(n(h)\)</span> does too.<br />Clearly, <span class="math">\(n(h) \ge \sqrt{2}^h\)</span>, since <span class="math">\(n(h) = n(h - 1) n(h - 2) + 1 \ge n(h - 2) + n(h - 2) = 2n(h - 2) \ge 2^2 n - 4 \ge \ldots \ge 2^i n(h - 2i), i &gt; 1\)</span>, so <span class="math">\(n(h) \ge 2^{\ceil{\frac h 2}}\)</span>.<br />So any AVL-tree of height <span class="math">\(h\)</span> has <span class="math">\(\sqrt{s}^h\)</span> or more nodes, so <span class="math">\(h \le \log_{\sqrt 2} n = O(\log n)\)</span>.</p>
+</blockquote>
+<p>Clearly, the worst case time for insertion/deletion/search is <span class="math">\(O(h)\)</span>, and since <span class="math">\(h \in O(\log n)\)</span> and each rebalancing operation takes constant time, insertion/deletion/search is always <span class="math">\(O(\log n)\)</span>.</p>
+<h3 id="trees">2-3-trees</h3>
+<p>A 2-3-tree is similar to AVL-trees in concept, but we no longer have to be a binary tree - a node may have 2 or 3 children. The 2-3-tree could be said to be a generalization of the AVL-tree.</p>
+<p>Each node in a 2-3 tree is either a node with one key-value pair and two children, or a node with two key-value pairs and three children (the left child is less than key 1, the middle child is between key 1 and 2, and the right child is greater than key 2, and key 2 must be greater than key 1). Additionally, all empty subtrees must be on the same level.</p>
+<p>Searching is done by a generalized version of the standard BST search - when we are comparing, we simply need to check how many key-value pairs the node has and check the cases accordingly.</p>
+<p>Insertion into a 2-3 key is done by searching for the node on the lowest level that would have had the key as a child if it was inserted directly. If it has only one key-value pair, then add our key-value pair to it to make it a node with two key-value pairs. Otherwise, we add the key-value pair to it to make a node with three key-value pairs, then split it into three nodes with one key-value pair each and move the middle one (the one that is neither largest or smallest) up to the parent, so the node becomes two nodes and the parent gets an extra key-value pair. If the parent now has three nodes when we do this, we recursively perform this splitting and moving up operation on the parent, all the way up until no nodes have three key-value pairs.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

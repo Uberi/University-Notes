@@ -80,9 +80,9 @@ For example, we fix everything except for $p_1$ to get $Q = 171 - 20 \cdot 21.72
 
 So we now have a linear function, and can find the inverse demand function: $Q = 76.08 + 20p_1$, so $p_1 = \frac{Q - 76.08}{20}$.
 
-The **total demand** for a product is the sum of the demand curves for all the consumers in the market. Basically, we are adding together all the quantities demanded. Mathematically, we add up all the demand functions to get the total demand.
+The **total demand** for a product is the sum of the demand curves for all the consumers in the market. Basically, we are adding together all the quantities demanded. Mathematically, we add up all the demand functions to get the total demand - quantity demanded at a certain price.
 
-The **supply curve** is the quantity that can be supplied tat given prices. There is **no law of supply**, although many supply curves slope upward. There are also external factors that affect and shift the entire supply curve, like taxes.
+The **supply curve** is the quantity that can be supplied at given prices. There is **no law of supply**, although many supply curves slope upward. There are also external factors that affect and shift the entire supply curve, like taxes.
 
 The supply function is similar to the demand function, as $Q = S(p_0, \ldots, p_n)$, where $p_0, \ldots, p_n$ are the prices of products, often those needed in order to produce the good/service. This applies to one particular supplier.
 
