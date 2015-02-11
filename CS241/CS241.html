@@ -496,7 +496,60 @@ return state in $A$</code></pre>
 while read_char(current):
     states = set($\delta$(q, current) for q in states)
 return states &amp; $A$ != set()</code></pre>
-<p>If we have an NFA and give each possible set of possible states (which we get from stepping through every possible option) a name, and use these sets as the states instead, we get a DFA. In this way it is possible to convert any NFA into a DFA.</p>
+<p>If we have an NFA and give each possible set of possible states (which we get from stepping through every possible option) a name, and use these sets as the states instead, we get a DFA. In this way it is possible to convert any NFA into a DFA. This is called <strong>subset construction</strong>.</p>
+<p>Note that this means that an NFA with <span class="math">\(n\)</span> states can be converted into a DFA with at most <span class="math">\(2^n\)</span> states - one for every subset of states. We can convert an NFA to a DFA by stepping through all the possibilities for input. The accepting states of our DFA are the <strong>sets containing accepting states in the original NFA</strong>.</p>
+<p>Whenever we step an NFA, we are actually simulating a DFA in a simpler way - we are constructing a DFA on the fly, with only the states that we actually need for a certain input.</p>
+<h1 id="section-10">10/2/15</h1>
+<p>Every NFA must have a corresponding DFA, and every DFA is also an NFA - the set of NFAs is a superset of the set of DFAs, and every NFA has a corresponding DFA. Therefore, NFAs can accept the same class of languages that DFAs do, the regular languages.</p>
+<p>Consider the language <span class="math">\(L = \set{cab} \cup \set{w \in \set{a, b, c}^* \mid w \text{ has an even number of } a}\)</span>. ;wip; draw an NFA and then the corresponding DFA, make sure to handle blank string and <span class="math">\(aacab, bcab\)</span> not acceptable</p>
+<pre><code>1, 2, 3, 4, 5, 6
+1 &gt; c &gt; 2
+2 &gt; a &gt; 3
+3 &gt; b &gt; 4
+1 &gt; a &gt; 5
+1 &gt; b,c &gt; 6
+5 &gt; b,c &gt; 5
+5 &gt; a &gt; 6
+6 &gt; a &gt; 5
+6 &gt; b,c &gt; 6
+1 &gt; accept
+6 &gt; accept</code></pre>
+<p>To convert this to an NFA, we start by stepping the NFA with <span class="math">\(\set{1}\)</span> (a set containing only the start state), while considering every possible next input for the currently stepped states. Repeating until no new subset states are found, we get the equivalent DFA:</p>
+<pre><code>{1} &gt; a &gt; {5}
+{1} &gt; b &gt; {6}
+{1} &gt; c &gt; {2, 6}
+{5} &gt; b,c &gt; {5}
+{5} &gt; a &gt; {6}
+{6} &gt; a &gt; {5}
+{6} &gt; b,c &gt; {6}
+{2, 6} &gt; b,c &gt; {6}
+{2, 6} &gt; a &gt; {3, 5}
+{3, 5} &gt; a &gt; {6}
+{3, 5} &gt; b &gt; {4, 5}
+{3, 5} &gt; c &gt; {5}
+{4, 5} &gt; a &gt; {6}
+{4, 5} &gt; b, c &gt; {5}
+{1} &gt; accept
+{6} &gt; accept
+{2, 6} &gt; accept
+{3, 5} &gt; accept
+{4, 5} &gt; accept</code></pre>
+<p>We will now consider an <span class="math">\(\epsilon\)</span>-NFA. This is like a normal NFA, but we can change states without reading any input at all. This is represented with arrows labelled with <span class="math">\(\epsilon\)</span>. This makes many alternation cases easier, because it gives a much easier way of gluing multiple small NFAs together into a bigger NFA. Basically, the <span class="math">\(\epsilon\)</span> transition is an optional transition we can take from one state to another.</p>
+<p>Using the same argument as before with states being sets of states, the <span class="math">\(\epsilon\)</span>-NFAs also accept regular languages.</p>
+<p>Also, <span class="math">\(\epsilon\)</span>-NFAs can be easily converted into a DFA using a simple algorithm. Additionally, if we can prove that all regular expressions have an <span class="math">\(\epsilon\)</span>-NFA, then we have one direction in the proof for Kleene's theorem - that every regular expression has a DFA.</p>
+<p>The <span class="math">\(\epsilon\)</span>-NFA for any regular expression can be found recursively:</p>
+<ul>
+<li>Empty language is a non-accepting start state.</li>
+<li>The regular expression <span class="math">\(\epsilon\)</span> is an accepting start state.</li>
+<li>A regular expression with only one letter is a start state that transitions to an accepting state via that letter.</li>
+<li>A regular expression of the form <span class="math">\(E_1|E_2\)</span> is a start state, with two <span class="math">\(\epsilon\)</span> transitions, one to the <span class="math">\(\epsilon\)</span>-NFAs for <span class="math">\(E_1\)</span> and one to the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_2\)</span>.</li>
+<li>A regular expression of the form <span class="math">\(E_1 E_2\)</span> is the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, where the accepting states are not accepting and instead transition to the start state for the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_2\)</span>.</li>
+<li>A regular expression of the form <span class="math">\(E_1^*\)</span> is the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, where the start state is a new accepting state with an <span class="math">\(\epsilon\)</span>-transition to the original start state of the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, and all accepting states of also have an <span class="math">\(\epsilon\)</span> transition back to the start state of the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>.</li>
+</ul>
+<p>As a result, all regular expressions can be converted into an <span class="math">\(\epsilon\)</span>-NFA, which can be converted into a DFA.</p>
+<p>Regular expressions and DFAs are useful in writing compilers because we need to do tokenization/scanning/lexing. For example, the lexer needs to be able to scan for keywords, identifiers, literals, operators, comments, and other C tokens, and these are all regular languages. As a result, sequences of C tokens are also regular languages, and we can use finite automata to do tokenization/scanning/lexing.</p>
+<p>To do tokenization, we are given a string <span class="math">\(w\)</span>, break it into words <span class="math">\(w_1, \ldots, w_n\)</span> such that each <span class="math">\(w_i\)</span> is in the language of the tokens (or give an error otherwise), and then output each <span class="math">\(w_i\)</span> as the tokens. If <span class="math">\(E_1, \ldots, E_k\)</span> are the regular expressions that match each type of token, then <span class="math">\((E_1 | \ldots | E_k)^*\)</span> is a regular expression that recognizes sequences of valid tokens. If we add an action to output the token after a match of <span class="math">\(E_1 | \ldots | E_k\)</span>, we now have a tokenizer.</p>
+<p>Consider a regular expression for parsing a C-style identifier: <span class="math">\([a-zA-Z][a-zA-Z0-9]^*\)</span>. Clearly, if we parse <span class="math">\(abcd\)</span>, this could be interpreted as either 1, 2, 3, or 4 tokens. This ambiguity is problematic because a program written in a programming language should only have one interpretation.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
