@@ -199,7 +199,7 @@ Indifference curves, together with budget constraints, can be **used to derive d
 
 The **income-consumption curve** is a curve plotted on axes where each axis is the quantity consumed of a good/service. The curve is plotted in terms of the amount of each good/service consumed as the income changes.
 
-The **price-consumption** curve is similar, but 
+The **price-consumption** curve is similar, but is the amount of each good/service consumed as the price changes.
 
 Increases in income cause a shift in the demand curve and movement along the income-consumption curve and the Engel curve (quantity demanded as income changes).
 
@@ -237,4 +237,56 @@ The income elasticity of supply is important because if positive, an income tax 
 
 ;wip: I missed this class due to dental appointment
 
-;wip: midterm on thursday at QNC 1507 Thursday Feb. 5, during class time, covers chapters 1-5 in perloff, bring pencil, pen, protractor, calculator
+# 5/2/15
+
+Midterm.
+
+# 10/2/15
+
+;wip: production, one variable/fixed input for short run, two variables for long run, returns to scale, and productivity/technical change
+
+;wip: I missed this class due to an interview
+
+# 12/2/15
+
+Production Costs
+----------------
+
+The **economic/opportunity cost** of producing something is the value of the best alternative use of a resource. The **explicit costs** are the firm's direct payments, like wages, material costs, and so on. There are also **implicit costs**, like the value of the time used by a firm's owner.
+
+It is a good idea to produce something if the explicit costs plus the implicit costs are less than than the opportunity costs. That means that this is the least costly of all possible options.
+
+**Capital costs** are the costs associated with acquiring capital. A durable good is a good that is reusable, and we often don't consider these because we will be using it for a very long time. A sunk cost is a cost that cannot be recovered.
+
+The quantity produced is represented with $q$.
+
+In the short run, **fixed costs** ($F$) are the production costs that do not change with respect to the output, and **variable costs** ($VC(q)$) are the production costs that do. The **total costs** is $C = F + VC(q)$. The **marginal cost** (MC) is $\frac{\dee C}{\dee q} = \frac{\dee VC}{\dee q}$. The **average fixed cost** is $AFC = \frac F q$, the **average variable cost** is $AVC = \frac {VC} q$, and the **average cost** is $AC = \frac C q = AFC + AVC$.
+
+The marginal cost tends to increase as $q$ increases, due to the law of diminishing marginal returns. When $MC < AC$, $AC$ is decreasing. When $MC > AC$, $AC$ is increasing. When $MC = AC$, $AC$ is at its lowest value. This also applies to $AVC$.
+
+;wip: missed rest of lecture due to interview
+
+# 24/2/15
+
+Long Run Costs
+--------------
+
+Fixed costs are negligible (and often avoidable) in the long run. As a result, in the long run $C = VC(q)$ and we only need to care about the variable costs.
+
+The main idea is that in the long run, we can change both capital and labour, where in the short run we could only change one of them at a time.
+
+The **isocost** is all the combinations of the inputs of production that require the same total cost. The total cost for a firm's production is $C = wL + rK$, where $w, r$ are the prices of labour and capital, and $L, K$ are the quantities of labour and capital, respectively. The isocost formulas can also be written as $K = \frac C r - \frac w r L$.
+
+We can plot isocost lines on $K$ vs. $L$ axes, by fixing the cost at $\overline C$. Isocost lines have the same slope regardless of the value of $\overline C$.
+
+The **isoquant** is all the combinations of the inputs of production that result in the same quantity produced. This is represented as $q(L, K)$.
+
+Firms have three equivalent strategies for minimizing cost. One is the lowest isocost rule - to pick the bundle of inputs where the lowest isocost line touches the isoquant, analogous to choosing the highest indifference curve that touches the budget line. Another is the ;wip
+
+The **long run cost curve** is a plot of the $K$ and $L$ combination resulting in the lowest possible cost for each quantity produced. This is the points where the lowest isocost lines intersect isoquants.
+
+;wip: finish this chapter
+
+# 26/2/15
+
+;wip: missed due to midterm studying

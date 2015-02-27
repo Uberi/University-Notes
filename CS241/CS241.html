@@ -549,7 +549,101 @@ return states &amp; $A$ != set()</code></pre>
 <p>As a result, all regular expressions can be converted into an <span class="math">\(\epsilon\)</span>-NFA, which can be converted into a DFA.</p>
 <p>Regular expressions and DFAs are useful in writing compilers because we need to do tokenization/scanning/lexing. For example, the lexer needs to be able to scan for keywords, identifiers, literals, operators, comments, and other C tokens, and these are all regular languages. As a result, sequences of C tokens are also regular languages, and we can use finite automata to do tokenization/scanning/lexing.</p>
 <p>To do tokenization, we are given a string <span class="math">\(w\)</span>, break it into words <span class="math">\(w_1, \ldots, w_n\)</span> such that each <span class="math">\(w_i\)</span> is in the language of the tokens (or give an error otherwise), and then output each <span class="math">\(w_i\)</span> as the tokens. If <span class="math">\(E_1, \ldots, E_k\)</span> are the regular expressions that match each type of token, then <span class="math">\((E_1 | \ldots | E_k)^*\)</span> is a regular expression that recognizes sequences of valid tokens. If we add an action to output the token after a match of <span class="math">\(E_1 | \ldots | E_k\)</span>, we now have a tokenizer.</p>
-<p>Consider a regular expression for parsing a C-style identifier: <span class="math">\([a-zA-Z][a-zA-Z0-9]^*\)</span>. Clearly, if we parse <span class="math">\(abcd\)</span>, this could be interpreted as either 1, 2, 3, or 4 tokens. This ambiguity is problematic because a program written in a programming language should only have one interpretation.</p>
+<p>Consider an <span class="math">\(\epsilon\)</span>-NFA for parsing a C-style identifier: <span class="math">\([a-zA-Z][a-zA-Z0-9]^*\)</span>. Clearly, if we parse <span class="math">\(abcd\)</span>, this could be interpreted as either 1, 2, 3, or 4 tokens, since the <span class="math">\(\epsilon\)</span> move outputs a token. This ambiguity is problematic because a program written in a programming language should only have one interpretation.</p>
+<h1 id="section-11">12/2/15</h1>
+<p>We can resolve this by adding add a rule to the NFA that says that we should only take an <span class="math">\(\epsilon\)</span> move if we have no other choice - to always look for the longest possible next token, rather than trying all the options. In effect, we are removing the nondeterminism from the <span class="math">\(\epsilon\)</span>-NFA.</p>
+<p>Clearly, this doesn't always work. Consider <span class="math">\(L = \set{aa, aaa}\)</span>, and the word <span class="math">\(w = aaaa\)</span>. Clearly, <span class="math">\(w \in L\)</span>, but an <span class="math">\(\epsilon\)</span>-NFA that always took the longest possible move would not accept it. However, in practice this sort of redundancy doesn't show up, and we can implement this technique.</p>
+<p>This can be formalized as the <strong>maximal munch algorithm</strong> for greedy matching using DFAs:</p>
+<ol style="list-style-type: decimal">
+<li>Run the <span class="math">\(\epsilon\)</span>-NFA without any <span class="math">\(\epsilon\)</span>-moves, until no more non-error moves are possible. This is the greedy part of the algorithm, where we try to consume as much as possible.</li>
+<li>If currently in an accepting state, we have found a token.</li>
+<li>Otherwise, back up to the most recent accepting state (or error if none), and the input to that point is a token. Scanning resumes from there.</li>
+<li>Output the token.</li>
+<li>Resume scanning, for the next token, by using an <span class="math">\(\epsilon\)</span>-move back to the starting state.</li>
+</ol>
+<p>We often just use a simpler version of maximal munch, which works on a more limited set of languages:</p>
+<ol style="list-style-type: decimal">
+<li>Run the <span class="math">\(\epsilon\)</span>-NFA without any <span class="math">\(\epsilon\)</span>-moves, until no more non-error moves are possible. This is the greedy part of the algorithm, where we try to consume as much as possible.</li>
+<li>If currently in an accepting state, we have found a token.</li>
+<li>Output the token.</li>
+<li>Resume scanning, for the next token, by using an <span class="math">\(\epsilon\)</span>-move back to the starting state.</li>
+</ol>
+<p>Basically, the same thing, but without the backtracking step. This means we can't parse rules like &quot;identifiers must start and end with a letter, but may contain the <code>--</code> operator&quot;. However, this is usually good enough because languages are often designed intentionally in such a way that this works.</p>
+<p>This sort of parser sometimes causes issues in C++, such as <code>vector&lt;vector&lt;int&gt;&gt; v;</code> not being valid because the <code>&gt;&gt;</code> is interpreted as a single token instead of two <code>&gt;</code> tokens.</p>
+<h2 id="parsing">Parsing</h2>
+<p>Tokenization is good, but it can't parse everything. For example, consider a language containing all strings consisting entirely of balanced parentheses. Clearly, we need at least one state for each level of nesting in order to keep track of how many parentheses are currently open in the input, but no finite number of states can be used to recognize all levels of nesting, and DFAs must have a finite number of states. They also can't parse palindromes for the same reason.</p>
+<p>That means that DFAs can't parse balanced parenthesis, like those in Scheme, and that this is not a regular language. Therefore, we need a higher class of languages - the <strong>context-free languages</strong>.</p>
+<p>The context-free languages are those that can be described by a <strong>context-free grammar</strong> (a set of rewrite rules, which can be recursive). For example, a context-free language for strings of balanced parentheses can be written as <span class="math">\(S \to \epsilon; S \to (S); S \to SS\)</span>. As a shorthand, we can write this as <span class="math">\(S \to \epsilon \mid (S) \mid SS\)</span>.</p>
+<p>A word is in a context-free language if and only if there exists a way to construct it from the rewrite rules in the grammar. For example, <span class="math">\((())()\)</span> can be generated by applying rule 3 to rule 2 applied to rule 2 applied to rule 1.</p>
+<p>A context-free grammar consists of:</p>
+<ul>
+<li>An alphabet <span class="math">\(\Sigma\)</span>, called <strong>terminal symbols</strong>. This never includes <span class="math">\(\epsilon\)</span>.</li>
+<li>A finite, non-empty set <span class="math">\(N\)</span> of <strong>nonterminal symbols</strong>, such that <span class="math">\(N \cap \Sigma = \emptyset\)</span>. The <strong>vocabulary</strong> is defined as <span class="math">\(V = N \cup \Sigma\)</span>.</li>
+<li>A finite set <span class="math">\(P\)</span> of <strong>productions</strong>, which are rules of the form <span class="math">\(A \to B\)</span> where <span class="math">\(A \in N, B \in V^*\)</span>.</li>
+<li>A starting element <span class="math">\(S\)</span> of <span class="math">\(N\)</span>.</li>
+</ul>
+<p>To make notation easier, we use these conventions:</p>
+<ul>
+<li><span class="math">\(a, b, c, \ldots \in \Sigma\)</span> - letters from the beginning of the alphabet represent characters.</li>
+<li><span class="math">\(z, y, x, \ldots \in \Sigma^*\)</span> - letters from the end of the alphabet represent strings.</li>
+<li><span class="math">\(A, B, C, \ldots, Z \in N\)</span> - capital letters represent nonterminals.</li>
+<li><span class="math">\(S\)</span> is the starting symbol/nonterminal.</li>
+<li><span class="math">\(\alpha, \beta, \ldots \in V^*\)</span> - Greek letters represent sequences of symbols.</li>
+</ul>
+<p><span class="math">\(\alpha A \beta \implies \alpha \gamma \beta\)</span> means that there is a production <span class="math">\(A \to \beta\)</span> in <span class="math">\(P\)</span> - the right side is derivable from the left side in one step.</p>
+<p><span class="math">\(\alpha A \beta \implies^* \alpha \gamma \beta\)</span> means that there exists a sequence of 0 or more derivation steps that convert the left side to the right side - the right side is somehow derivable from the left.</p>
+<p>A context-free language is therefore defined as <span class="math">\(L(G) = \set{w \in \Sigma^* \mid S \implies^* w}\)</span> - the set of all strings derivable from <span class="math">\(S\)</span>, the starting state. Here, <span class="math">\(G\)</span> is a context-free grammar and gives the values for <span class="math">\(\Sigma, N, V, P, S\)</span>.</p>
+<p>A language <span class="math">\(L\)</span> is context-free if and only if there exists a grammar <span class="math">\(G\)</span> such that <span class="math">\(L = L(G)\)</span>.</p>
+<p>For example, a language that consists of palindromes over <span class="math">\(\set{a, b, c}\)</span> can be represented using the grammar <span class="math">\(S \to aSa \mid bSb \mid cSc \mid M; M \to a \mid b \mid c \mid \epsilon\)</span>.</p>
+<p>A language that consists of arithmetic expressions over <span class="math">\(\set{a, b, c, +, -, *, /}\)</span> can be written as <span class="math">\(S \to a \mid b \mid c \mid S O S \mid (S); O \to + \mid - \mid * \mid /\)</span>. We can show that <span class="math">\(S \implies^* a + b\)</span> by using <span class="math">\(S \implies S O S \implies a O S \implies a + S \implies a + b\)</span>. This is a <strong>derivation</strong> - we apply rules one by one until we have constructed the expression.</p>
+<p>A derivation is a <strong>proof that a word is in the language</strong>.</p>
+<p>At our <span class="math">\(S O S\)</span> step, we had a choice as to which rule to expand next - any of the <span class="math">\(S\)</span>, <span class="math">\(O\)</span>, or <span class="math">\(S\)</span> could have been expanded next. We can do a <strong>leftmost derivation</strong>, where we always expand the leftmost symbol (in this case, the first <span class="math">\(S\)</span>), and <strong>rightmost derivation</strong>, where we always expand the rightmost symbol (in this case, the second <span class="math">\(S\)</span>).</p>
+<p>We can express the derivation more naturally as a <strong>parse tree</strong>:</p>
+<pre><code>  S
+ /|\
+S O S
+| | |
+a + b</code></pre>
+<h1 id="section-12">24/2/15</h1>
+<p>For every leftmost and rightmost derivation, there exists a corresponding <strong>unique parse tree</strong>. A grammar for which some word has more than one distinct leftmost derivation is <strong>ambiguous</strong> - there are multiple possible parse trees for some strings.</p>
+<p>A string might have two leftmost derivations, and so would have two unique parse trees. For example, we can derive <span class="math">\(a + b * c\)</span> by starting with <span class="math">\(S \implies S O S \implies S O S O S\)</span>, or with <span class="math">\(S \implies S O S \implies a\)</span>. This is equivalent to parsing it as <span class="math">\((a + b) * c\)</span> or <span class="math">\(a + (b * c)\)</span>.</p>
+<p>If we just care about whether a word is in a language, then it doesn't matter if we use an ambiguous grammar. However, for compilers, the shape of the parse tree determines the meaning of the program, so words that have two different parse trees would have two different meanings.</p>
+<p>To resolve ambiguity, we could use heuristics (often called <strong>precedence</strong>) to guide which rule we expand next. However, most of the time we just want to use an unambiguous grammar instead.</p>
+<p>The unambiguous version of the language can be written as <span class="math">\(E \to E O T; T \to a \mid b \mid c \mid (E); O \to + \mid - \mid * \mid /\)</span></p>
+<p>To get the multiplicative operators to have precedence over the additive operators, we can use the following grammar: <span class="math">\(E \to E Plus T \mid T; T \to T Mult F \mid F; F \to a \mid b \mid c \mid (E); Plus \to + \mid -; Mult \to * \mid /\)</span>. Note that we used a rule for each level of precedence - <span class="math">\(E\)</span> is the precedence level for additive operators, and <span class="math">\(T\)</span> is for multiplicative operators.</p>
+<p>;wip: midterm covers everything up to this point</p>
+<p>If <span class="math">\(L\)</span> is a context-free language, there may not necessarily be an unambiguous context-free grammar for it. The languages that only have ambiguous grammars are <strong>inherently ambiguous grammars</strong>. ;wip: give example</p>
+<p>It is not possible to tell if an arbitrary context-free grammar is ambiguous - this problem is undecidable. However, we can write tools that can ensure that a grammar, constrained in certain ways (like no left recursion), is always unambiguous. Tools like ANTLR can do this.</p>
+<p>Testing whether two grammars describe the same language is also an undecidable problem.</p>
+<p>A finite language can be recognized with a loop-less program. A regular language can be recognized with a program that uses finite memory (this is because regular languages are recognized with DFAs, and the states of a DFA represent the program's memory). A context-free language can be recognized with an NFA and a stack (this is a program that can use infinite memory, since the stack can grow arbitrarily).</p>
+<p>A real compiler needs a bit more than just recognition. If the program is valid, we need a proof in the form of a parse tree. If the program is invalid, we also need a proof in the form of an error message. The process of finding the derivation, and the parse tree, is known as <strong>parsing</strong>.</p>
+<p>Parsing is the following problem: given a grammar <span class="math">\(G\)</span>, start symbol <span class="math">\(S\)</span>, and a word <span class="math">\(w\)</span>, determine the derivation <span class="math">\(S \implies \ldots \implies w\)</span>, or prove that there is no possible derivation.</p>
+<p>We can do parsing in two ways - finding the derivation forwards (starting from the left, expand until we have <span class="math">\(w\)</span>, this is <strong>top-down parsing</strong>), or finding it backwards (starting from the right, unexpand until we have <span class="math">\(S\)</span>, this is <strong>bottom-up parsing</strong>). Both are used in practice, and they each have advantages for different types of grammars.</p>
+<h2 id="top-down-parsing">Top-down Parsing</h2>
+<p>The basic idea is to start with <span class="math">\(S\)</span>, apply grammar rules, and eventually reach <span class="math">\(w\)</span>.</p>
+<p>We will use a stack to store all the <span class="math">\(\alpha_i\)</span>, in reverse, in the derivation <span class="math">\(S \implies \alpha_1 \implies \ldots \implies \alpha_n \implies w\)</span>. We will then match against characters in <span class="math">\(w\)</span> from left to right. We will also enforce the property that the consumed input concatenated with the reversed stack contents are equal to some <span class="math">\(\alpha_i\)</span>.</p>
+<p>We will use <strong>augmented grammars</strong> to make parsing simpler. Basically, we take a normal grammar and add the symbols <span class="math">\(\vdash\)</span> and <span class="math">\(\dashv\)</span> (the beginning and ending symbols), and a new start symbol <span class="math">\(S&#39;\)</span>, defined as <span class="math">\(S&#39; \to \vdash S \dashv\)</span>. Our word is now <span class="math">\(\vdash w \dashv\)</span>.</p>
+<h1 id="section-13">26/2/15</h1>
+<p>Consider the following grammar: <span class="math">\(S \to A y B; A \to ab; A \to cd; B \to z; B \to wx\)</span>. Consider the word <span class="math">\(w = abywx\)</span>. Then to parse it, we do the following:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Stack</th>
+<th align="left">Read input</th>
+<th align="left">Unread input</th>
+<th align="left">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>;wip: missed the rest due to sleep</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
