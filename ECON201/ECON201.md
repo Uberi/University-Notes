@@ -290,3 +290,7 @@ The **long run cost curve** is a plot of the $K$ and $L$ combination resulting i
 # 26/2/15
 
 ;wip: missed due to midterm studying
+
+# 3/3/15
+
+;wip: missed due to midterm studying

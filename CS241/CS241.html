@@ -73,7 +73,7 @@ Web: http://www.student.cs.uwaterloo.ca/~cs241</code></pre>
 \]</span></p>
 <h1 id="section">6/1/15</h1>
 <p>Weekly assignments, 11 total.</p>
-<p>A sequential program is an &quot;ordinary&quot; program - one that is not concurrent, parallel, or so on. Sequential programs only do one thing at a time - they are signle threaded.</p>
+<p>A sequential program is an &quot;ordinary&quot; program - one that is not concurrent, parallel, or so on. Sequential programs only do one thing at a time - they are single threaded.</p>
 <p>As this course focuses on the foundation, we will be starting from the hardware, and figure out how sequential program works from there.</p>
 <p>This course uses a simulated MIPS machine for the assignment. At the end we will be able to run a relatively complex C-like language that can run on the MIPS machine.</p>
 <h2 id="binary-and-hexadecimal-numbers">Binary and Hexadecimal Numbers</h2>
@@ -85,7 +85,7 @@ Web: http://www.student.cs.uwaterloo.ca/~cs241</code></pre>
 <p>The <strong>one's complement</strong> convention has positive numbers written normally, and negative numbers are their magnitude with their bits flipped. This works better for certain operations, but there is still two 0 representations, which complicates things unnecessarily.</p>
 <p>The <strong>two's complement</strong> convention has positive numbers written normally, and the negative numbers are simply their magnitude with their bits flipped and 1 added. The advantage of this system is that the first bit still denotes the sign. Plus, there is only one representation for 0, and operations like addition work as usual, modulo <span class="math">\(2^n\)</span>.</p>
 <p>To find the numerical value of a number represented using <span class="math">\(n\)</span>-bit two's complement, we first check the sign bit. If 0, then we simply convert binary to a non-negative number as usual. Otherwise, we convert the binary to a non-negative number as usual, and subtract <span class="math">\(2^n\)</span> from that result to get a negative number as a result.</p>
-<p>To quickly negate a binary number in two's complement quickly, flip all the bits and add 1. This allows us to quickly convert negative numbers to binary and hex.</p>
+<p>To quickly negate a binary number in two's complement quickly, flip all the bits and add 1, convert that to a positive number, then negate that number. This allows us to quickly convert negative numbers to binary and hex.</p>
 <p>For 3-bit numbers, each binary string, in ascneding order, represents 0, 1, 2, 3, -4, -3, -2, -1.</p>
 <p>A byte could also potentially be a character. Characters have multiple possibble encodings, such as unicode and ASCII. ASCII is a 7-bit code (for historical reasons, in order to avoid sending expensive bits) that has representations for most America-centric characters, although there are 8-bit extensions like those by IBM that add multilingual characters. In an 8-bit byte world, the eighth bit is 0 in standard ASCII. We will be using ASCII in this course to represent characters.</p>
 <p>A byte could also be part of a data structure, or even part of an instruction. In this course, we have 32-bit instructions. A byte could also just be garbage - memory that isn't currently being used for anything and has no meaning.</p>
@@ -98,8 +98,8 @@ Web: http://www.student.cs.uwaterloo.ca/~cs241</code></pre>
 <h3 id="architecture">Architecture</h3>
 <p>The MIPS machine consists of a CPU and main memory (RAM), connected via a bus. The CPU contains the ALU, the registers, and the control unit.</p>
 <p>The ALU (arithmetic logic unit) is responsible for doing arithmetic and logic, for doing things like addition and subtraction.</p>
-<p>Registers are simply small pieces of memory that are really fast to work with since they are so close to the CPU - they are the fastest pieces of memory we have, ad we have relatively little of it. Most instructions can actually only work directly on registers, so we usually need to bring data from the main memory into registers before we work on them.</p>
-<p>There are the 32-bit <strong>general purpose registers</strong> R00 to R31, which can be used for general purpose data storage. In our assembly code, we refer to them with $0, $1, $2, and so on, until $31. However, R00 is always 0, and R30 (stack pointer/frame pointer) and R31 (return pointer) have other purposes in control flow by convention.</p>
+<p>Registers are simply small pieces of memory that are really fast to work with since they are so close to the CPU - they are the fastest pieces of memory we have, and we have relatively little of it. Most instructions can actually only work directly on registers, so we usually need to bring data from the main memory into registers before we work on them.</p>
+<p>There are the 32-bit <strong>general purpose registers</strong> R0 to R31, which can be used for general purpose data storage. In our assembly code, we refer to them with $0, $1, $2, and so on, until $31. However, R0 is always 0, and R30 (stack pointer/frame pointer) and R31 (return pointer) have other purposes in control flow by convention.</p>
 <p>The <strong>program counter register</strong> is responsible for keeping track of where we are in the main memory for executing code. It holds an address to the next instruction to run while the current instruction is running. Some commands manipulate this register, so we can actually do control flow by modifying this in a certain way.</p>
 <p>By convention, we guarantee that a certain address in memory like 0 always starts off with valid code, and then we initialize PC to that location. So when we start the machine, it will start executing instructions from that location and go onwards.</p>
 <p>The <strong>instruction register</strong> IR is closely related to PC. Instead of holding the address of the next instruction, it holds the current instruction itself (not its address).</p>
@@ -124,14 +124,14 @@ loop:
 <p>A program gets executed by getting called by a <strong>loader</strong>, which puts the program into memory (from somewhere like the hard drive) and sets PC to the first instruction in the program. This is the role of the operating system when opening a program.</p>
 <p>When our program wants to end, we want to return control flow back to the loader. This is done by setting PC to the next instruction of the loader after the one that started our program.</p>
 <p>Conventionally, R31 is set to the address of the next instruction in the loader, by the loader - the address we need to jump to in order to return to the loader. Therefore, in our program code, we simply set PC to R31 in order to jump back to the loader. This looks something like <code>jr $31</code> in MIPS assembly.</p>
-<p>Example code to add value in register 5 to register 7, then return:</p>
+<p>Example code to add value in register 3 to register 5, store the result in register 7, then return:</p>
 <pre><code>RAM LOCATION  BINARY                                   HEX         MEANING
 ------------  ---------------------------------------  ----------  --------------
 00000000      0000 0000 1010 0111 0001 1000 0010 0000  0x00A71820  add $3, $5, $7
 00000004      0000 0011 1110 0000 0000 0000 0000 1000  0x03e00008  jr $31</code></pre>
 <p>The resulting code is therefore the binary representation of the hex value <code>00A7182003e00008</code>.</p>
 <p>To store a literal value into a register, we can use the <strong>load immediate and skip</strong> (<code>lis</code>) instruction. Essentially, ;wip</p>
-<p>Note that ASCII is a mapping between characters and binary, and ASCII values are not binary. For example, <code>0010000100110101</code> is simply an ASCII string of 1 and 0, while <code>!5</code> would be the ASCII encoding the previous string would result in if encoded in binary.</p>
+<p>Note that ASCII is a mapping between characters and binary, and ASCII values are not binary. For example, <code>0010000100110101</code> is simply an ASCII string of 1 and 0, while <code>!5</code> would be the ASCII encoding the previous string would result in if interpreted as binary.</p>
 <p>To read the ASCII representation of a given binary file, use <code>xxd &lt;filename&gt;</code> or <code>hexdump -Cv &lt;filename&gt;</code>, where <code>&lt;filename&gt;</code> is the path to the file to represent. <code>xxd -bits</code> shows binary, and <code>xxd -cols n</code> shows <code>n</code> bytes per line.</p>
 <h1 id="section-2">13/1/15</h1>
 <h2 id="assembly-language">Assembly Language</h2>
@@ -152,7 +152,7 @@ some_other_label: .word 0x12345678</code></pre>
 <h1 id="section-3">15/1/15</h1>
 <p>We want to be able to write functions in MIPS assembly - blocks of reusable code that we can call with parameters and have control returned to us afterward.</p>
 <p>Our procedures need to guarantee that the registers will remain unchanged - after calling the function, the values of registers will be guaranteed to be as they were before calling. Otherwise, subfunctions will clobber their caller's register values.</p>
-<p>The MIPS loader initializes R30 to the address of the word just past the last word in memory - this is the stack pointer, and we are using the end of the memory as a stack that grows downward. This convention allows us to use RAM as a stack for storing our calling contexts - by decreasing the stack pointer, we reveal more memory we can use, and by increasing the stack pointer, we can deallocate that memory.</p>
+<p>The MIPS loader initializes R30 to the address of the word just past the last word in memory - this is the <strong>stack pointer</strong>, and we are using the end of the memory as a stack that grows downward. This convention allows us to use RAM as a stack for storing our calling contexts - by decreasing the stack pointer, we reveal more memory we can use, and by increasing the stack pointer, we can deallocate that memory.</p>
 <p>We will allocate blocks of memory on the stack that we use as stack frames. Stack frames store register values and the return address.</p>
 <p>When we call a function, we allocate a frame and store all our register values in it for safekeeping, after which we can use the registers as we want in the function. When the function returns, we restore the values of the registers, and then jump back to the return address.</p>
 <p>When we want to return from a function, we need to set the value of PC to after the jump that called the function - the very next instruction after the function call. Since functions can be called from multiple places, the caller must give the return address.</p>
@@ -264,15 +264,19 @@ beq $0, $0, repeat</code></pre>
 <p>Basically, the metadata needed in object files includes the addresses of words that represent label addresses in the code so we can relocate it, plus ;wip</p>
 <p>The object file format we will be using is called <strong>MIPS executable relocatable linkable</strong> (MERL), and often has a filename of the form <code>*.merl</code>. It looks like this:</p>
 <ol style="list-style-type: decimal">
-<li>The literal word 0x10000002, which is the MIPS instruction for <code>beq $0, $0, $2</code>, and skips two words ahead, past the rest of the header.</li>
+<li>The literal word 0x10000002, which is the MIPS instruction for <code>beq $0, $0, 2</code>, and skips two words ahead, past the rest of the header.
+<ol style="list-style-type: decimal">
 <li>this means that the object file can also be run as a normal MIPS program, since this value causes it to jump past the header and straight to the code if loaded at address 0x00000000.</li>
 <li>It also acts as a sanity check to make sure the file is really a MERL file.</li>
+</ol></li>
 <li>The length of the entire module in bytes as a word - this is the length of the header (12), the machine code, and the relocation table.</li>
 <li>The address of the end of the code section in bytes as a word, which is the length of the header (12) and the machine code.</li>
-<li>The actual MIPS machine code.</li>
-<li>The <strong>relocation table</strong>, which appears after the code returns and has a sequence of entries for different types of relocatables. An entry in the relocation table consists of two words:</li>
+<li>The actual MIPS machine code, which includes the 12 byte header offset - a label at the beginning of the machine code is at address 12.</li>
+<li>The <strong>relocation table</strong>, which appears after the code returns and has a sequence of entries for different types of relocatables. An entry in the relocation table consists of two words:
+<ol style="list-style-type: decimal">
 <li>The format code - a word representing the type of entry this is. For example, a value of 1 represents that this entry is a relocation entry.</li>
 <li>The actual address, which, if this entry is a relocation entry, is the address of a word holding the address of a label. This is relative to the beginning of the header.</li>
+</ol></li>
 </ol>
 <h1 id="section-6">27/1/15</h1>
 <p>The MERL format could also be written as follows:</p>
@@ -326,7 +330,7 @@ for i in range(relocation_table, end_of_module, 8):
 <p>However, we also need a way for a module to say what labels it has, so other modules can actually import it. We don't want to just export all the labels in a MERL module - labels are often duplicated, expecially when we start having compilers generating them automatically.</p>
 <p>Instead, we have a <code>.export LABEL</code> directive, which makes a new entry in the relocation table, in the <strong>external symbol definition</strong> (ESD) format. This contains the address where the label is defined, and the name of the label:</p>
 <pre><code>; ESD relocation table entry
-.word 0x05
+.word 0x5
 .word ADDRESS # location where the label was defined
 .word LENGTH # number of words/chars that make up the label name
 .word C[0] # first character of the label as ASCII value
@@ -340,7 +344,7 @@ for i in range(relocation_table, end_of_module, 8):
 a &lt;- len(m1) - 12
 relocate m2 higher by `a`
 add `a` to every address in m2&#39;s symbol table
-assert(set_conjunction(get_exports(m1).keys(), get_exports(m2).keys()) == empty_set)
+assert set_conjunction(get_exports(m1).keys(), get_exports(m2).keys()) == empty_set
 
 # link imports and exports together
 for address1, label in get_imports(m1):
@@ -353,7 +357,7 @@ for address2, label in get_imports(m2):
         m1[address1] = get_exports(m1)[label]
         delete the ESR entry `label` from m2&#39;s relocation table
         add relocation entry `address1` to m2&#39;s relocation table
-    # we don&#39;t have an else because this linker only links two MERL files at a time, so it&#39;s possible that we run this multiple times for three or more files
+    # we don&#39;t have an else to check for any references still unresolved because this linker only links two MERL files at a time, so it&#39;s possible that we run this multiple times for three or more files
 
 # make the final relocation table
 relocations = set_disjunction(get_relocations(m1), get_relocations(m2))
@@ -372,7 +376,7 @@ output relocations, exports, and imports</code></pre>
 <p>We want a formal theory of string recognition - general principles that work in the context of any programming language.</p>
 <p>An <strong>alphabet</strong> is a finite set of symbols, generally denoted <span class="math">\(\Sigma\)</span> (<span class="math">\(\Sigma = \set{a, b, c}\)</span>, for example). Symbols can be anything we want, and might not even be strings.</p>
 <p>A <strong>string/word</strong> is a finite sequence of symbols, each symbol belonging to <span class="math">\(\Sigma\)</span> (<span class="math">\(abaabbcca\)</span>, for example).</p>
-<p>The length of a string <span class="math">\(s\)</span> is <span class="math">\(\abs{s}\)</span>. The empty string is usually denoted <span class="math">\(\epsilon\)</span>. This should not be confused with any symbols in the alphabet - <span class="math">\(\abs{\epsilon} = 0\)</span>.</p>
+<p>The length of a string <span class="math">\(s\)</span> is <span class="math">\(\abs{s}\)</span>. The empty string is usually denoted <span class="math">\(\epsilon\)</span>. This should not be confused with any symbols in the alphabet - <span class="math">\(\abs{\epsilon} = 0\)</span> and <span class="math">\(\epsilon\)</span> is not in any alphabets.</p>
 <p>Given a string <span class="math">\(s\)</span>, <span class="math">\(s^n\)</span> is equivalent to <span class="math">\(s\)</span> repeated <span class="math">\(n\)</span> times - <span class="math">\(s^n = s \ldots s\)</span>.</p>
 <p>A <strong>language</strong> is a set of strings (<span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span>, for example, which is an even number of <span class="math">\(a\)</span> followed by a <span class="math">\(b\)</span>). The empty language is just an empty set <span class="math">\(\emptyset\)</span> - a language with no words. This is different from <span class="math">\(\set{\epsilon}\)</span>, which is a language with one word, the empty word.</p>
 <p>We want to determine if a given string belongs to a given language. How difficult this is depends on the language. For infinite sets of strings, like the set of all valid MIPS or C programs, things get a little trickier. In fact, there exist languages where this is impossible.</p>
@@ -409,6 +413,7 @@ output relocations, exports, and imports</code></pre>
 <li>We are now at the end of the input. Produce true if the current state is an ending state, and false otherwise.</li>
 </ol>
 <p>To make the math more elegant, we define an implicit <strong>error state</strong>, and every single state goes to this state for unlabeled transitions. So if we get an unexpected input for a node (so we don't have a defined transition for the input), we implicitly define a transition to the error state. The error state is not special, but it is always a state that cannot transition to any other states, and it never matches.</p>
+<p>A DFA represents a finite language if and only if it does not contain any cycles.</p>
 <h3 id="regular-languages">Regular Languages</h3>
 <p>The regular languages are built from finite languages, plus set operations like union (set union of the words of two languages - <span class="math">\(L_1 \cup L_2 = \set{x \mid x \in L_1 \vee x \in L_2}\)</span>), concatenation (every possible combination of elements from one set concatenated to another - <span class="math">\(L_1 L_2 = \set{xy \mid x \in L_1 \wedge y \in L_2}\)</span>), and repetition (a language repeated an arbitrary number of times - <span class="math">\(L^* = \set{\epsilon} \cup \set{xy \mid x \in L^* \wedge y \in L} = \set{\epsilon} \cup L \cup LL \cup LLL \cup \ldots\)</span>).</p>
 <p>Note that repetition generally results in infinite sets - this means that the regular languages contain infinite languages.</p>
@@ -422,7 +427,7 @@ output relocations, exports, and imports</code></pre>
 <li><span class="math">\(E_1 E_2\)</span> represents <span class="math">\(L_1 L_2\)</span>.</li>
 <li><span class="math">\(E_1 = E_2^*\)</span> represents <span class="math">\(L_1 = L_2^*\)</span>.</li>
 </ul>
-<p>For example, <span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span> can be represented with <span class="math">\((aa)*b\)</span>. Regular languages are, in practice, relatively simple. For example, C is not a regular language. A C program is made up of tokens, each of which is part of a regular language - tokens, string literals, number literals, types, and so on.</p>
+<p>For example, <span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span> can be represented with <span class="math">\((aa)*b\)</span>. Regular languages are, in practice, relatively simple. For example, C is not a regular language, but C programs are made up of tokens, each of which is part of a regular language - tokens, string literals, number literals, types, and so on.</p>
 <p>For regular languages, DFAs can have cycles - this occurs as a result of repetition.</p>
 <p>Consider the language defined as the set containing all strings that are composed of an even number of &quot;a&quot; and an odd number of &quot;b&quot;. Clearly, we can write a DFA for this using four states (even &quot;a&quot; and even &quot;b&quot; - start, odd &quot;a&quot; and even &quot;b&quot;, odd &quot;a&quot; and odd &quot;b&quot;, and even &quot;a&quot; and odd &quot;b&quot; - end/accept). The regular expression for this is rather difficult to write. ;wip: how?</p>
 <h1 id="section-9">5/2/15</h1>
@@ -435,9 +440,9 @@ output relocations, exports, and imports</code></pre>
 <li><span class="math">\(\delta\)</span> is the transition function - a mapping from a state and input character to a new state. This is a function <span class="math">\(q, x \to r, q \in Q, x \in x \in \Sigma, r \in Q\)</span>.</li>
 </ul>
 <p>DFAs don't always have to just accept characters. It is also possible to consume entire words, using an extension of the original <span class="math">\(\delta\)</span> function, which only consumes one character at a time.</p>
-<p>This <strong>word consuming function</strong> can be defined as <span class="math">\(\delta^*(q, \epsilon) = q, \delta^*(q, cw) = \delta^*(\delta(q, c), w), q \in Q, c \in Sigma, w \in \Sigma^*\)</span>. A DFA accepts a word <span class="math">\(w\)</span> if <span class="math">\(\delta^*(q_0, w) \in A\)</span> - the DFA accepts the input if read from its start state. <span class="math">\(\delta^*\)</span> represents a function that gives the end state of the DFA given a start state and input.</p>
+<p>This <strong>word consuming function</strong> can be defined as <span class="math">\(\delta^*(q, \epsilon) = q, \delta^*(q, cw) = \delta^*(\delta(q, c), w), q \in Q, c \in \Sigma, w \in \Sigma^*\)</span>. A DFA accepts a word <span class="math">\(w\)</span> if <span class="math">\(\delta^*(q_0, w) \in A\)</span> - the DFA accepts the input if read from its start state. <span class="math">\(\delta^*\)</span> represents a function that gives the end state of the DFA given a start state and input.</p>
 <p>Given a DFA <span class="math">\(M\)</span>, <span class="math">\(L(M)\)</span> represents the set of all strings accepted by <span class="math">\(M\)</span>. This is the set of all elements in of <span class="math">\(\Sigma^*\)</span> such that <span class="math">\(M\)</span> accepts them.</p>
-<p><strong>Kleene's theorem</strong> states that <span class="math">\(L\)</span> is regular if and only if <span class="math">\(L = L(M) for some DFA \)</span>M$. In other words, the regular languages are exactly the languages for which there exists a DFA that accepts them.</p>
+<p><strong>Kleene's theorem</strong> states that <span class="math">\(L\)</span> is regular if and only if <span class="math">\(L = L(M)\)</span> for some DFA <span class="math">\(M\)</span>. In other words, the regular languages are exactly the languages for which there exists a DFA that accepts them.</p>
 <p>A DFA is still just a representation of a computer program. In practive, these are often implemented using switch statements:</p>
 <pre><code>int state = $q_0$
 char current;
@@ -500,8 +505,8 @@ return states &amp; $A$ != set()</code></pre>
 <p>Note that this means that an NFA with <span class="math">\(n\)</span> states can be converted into a DFA with at most <span class="math">\(2^n\)</span> states - one for every subset of states. We can convert an NFA to a DFA by stepping through all the possibilities for input. The accepting states of our DFA are the <strong>sets containing accepting states in the original NFA</strong>.</p>
 <p>Whenever we step an NFA, we are actually simulating a DFA in a simpler way - we are constructing a DFA on the fly, with only the states that we actually need for a certain input.</p>
 <h1 id="section-10">10/2/15</h1>
-<p>Every NFA must have a corresponding DFA, and every DFA is also an NFA - the set of NFAs is a superset of the set of DFAs, and every NFA has a corresponding DFA. Therefore, NFAs can accept the same class of languages that DFAs do, the regular languages.</p>
-<p>Consider the language <span class="math">\(L = \set{cab} \cup \set{w \in \set{a, b, c}^* \mid w \text{ has an even number of } a}\)</span>. ;wip; draw an NFA and then the corresponding DFA, make sure to handle blank string and <span class="math">\(aacab, bcab\)</span> not acceptable</p>
+<p>Every NFA must have a corresponding DFA, and every DFA is also an NFA - the set of NFAs is a superset of the set of DFAs, and every NFA has a corresponding DFA. Therefore, NFAs accept the same class of languages that DFAs do, the regular languages.</p>
+<p>Consider the language <span class="math">\(L = \set{cab} \cup \set{w \in \set{a, b, c}^* \mid w \text{ has an even number of } a}\)</span>.</p>
 <pre><code>1, 2, 3, 4, 5, 6
 1 &gt; c &gt; 2
 2 &gt; a &gt; 3
@@ -514,7 +519,7 @@ return states &amp; $A$ != set()</code></pre>
 6 &gt; b,c &gt; 6
 1 &gt; accept
 6 &gt; accept</code></pre>
-<p>To convert this to an NFA, we start by stepping the NFA with <span class="math">\(\set{1}\)</span> (a set containing only the start state), while considering every possible next input for the currently stepped states. Repeating until no new subset states are found, we get the equivalent DFA:</p>
+<p>To convert this to a DFA, we start by stepping the NFA with <span class="math">\(\set{1}\)</span> (a set containing only the start state), while considering every possible next input for the currently stepped states to get the next candidate states. Repeating until no new subset states are found, we get the equivalent DFA:</p>
 <pre><code>{1} &gt; a &gt; {5}
 {1} &gt; b &gt; {6}
 {1} &gt; c &gt; {2, 6}
@@ -531,19 +536,17 @@ return states &amp; $A$ != set()</code></pre>
 {4, 5} &gt; b, c &gt; {5}
 {1} &gt; accept
 {6} &gt; accept
-{2, 6} &gt; accept
-{3, 5} &gt; accept
-{4, 5} &gt; accept</code></pre>
+{2, 6} &gt; accept</code></pre>
 <p>We will now consider an <span class="math">\(\epsilon\)</span>-NFA. This is like a normal NFA, but we can change states without reading any input at all. This is represented with arrows labelled with <span class="math">\(\epsilon\)</span>. This makes many alternation cases easier, because it gives a much easier way of gluing multiple small NFAs together into a bigger NFA. Basically, the <span class="math">\(\epsilon\)</span> transition is an optional transition we can take from one state to another.</p>
 <p>Using the same argument as before with states being sets of states, the <span class="math">\(\epsilon\)</span>-NFAs also accept regular languages.</p>
-<p>Also, <span class="math">\(\epsilon\)</span>-NFAs can be easily converted into a DFA using a simple algorithm. Additionally, if we can prove that all regular expressions have an <span class="math">\(\epsilon\)</span>-NFA, then we have one direction in the proof for Kleene's theorem - that every regular expression has a DFA.</p>
+<p>Also, <span class="math">\(\epsilon\)</span>-NFAs can be easily converted into a regular expression using a simple algorithm. Additionally, if we can prove that all regular expressions have an <span class="math">\(\epsilon\)</span>-NFA, then we have one direction in the proof for Kleene's theorem - that every regular expression has a DFA.</p>
 <p>The <span class="math">\(\epsilon\)</span>-NFA for any regular expression can be found recursively:</p>
 <ul>
 <li>Empty language is a non-accepting start state.</li>
 <li>The regular expression <span class="math">\(\epsilon\)</span> is an accepting start state.</li>
 <li>A regular expression with only one letter is a start state that transitions to an accepting state via that letter.</li>
 <li>A regular expression of the form <span class="math">\(E_1|E_2\)</span> is a start state, with two <span class="math">\(\epsilon\)</span> transitions, one to the <span class="math">\(\epsilon\)</span>-NFAs for <span class="math">\(E_1\)</span> and one to the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_2\)</span>.</li>
-<li>A regular expression of the form <span class="math">\(E_1 E_2\)</span> is the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, where the accepting states are not accepting and instead transition to the start state for the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_2\)</span>.</li>
+<li>A regular expression of the form <span class="math">\(E_1 E_2\)</span> is the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, where the accepting states are not accepting and instead have an <span class="math">\(\epsilon\)</span> transition to the start state for the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_2\)</span>.</li>
 <li>A regular expression of the form <span class="math">\(E_1^*\)</span> is the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, where the start state is a new accepting state with an <span class="math">\(\epsilon\)</span>-transition to the original start state of the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, and all accepting states of also have an <span class="math">\(\epsilon\)</span> transition back to the start state of the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>.</li>
 </ul>
 <p>As a result, all regular expressions can be converted into an <span class="math">\(\epsilon\)</span>-NFA, which can be converted into a DFA.</p>
@@ -574,7 +577,7 @@ return states &amp; $A$ != set()</code></pre>
 <p>Tokenization is good, but it can't parse everything. For example, consider a language containing all strings consisting entirely of balanced parentheses. Clearly, we need at least one state for each level of nesting in order to keep track of how many parentheses are currently open in the input, but no finite number of states can be used to recognize all levels of nesting, and DFAs must have a finite number of states. They also can't parse palindromes for the same reason.</p>
 <p>That means that DFAs can't parse balanced parenthesis, like those in Scheme, and that this is not a regular language. Therefore, we need a higher class of languages - the <strong>context-free languages</strong>.</p>
 <p>The context-free languages are those that can be described by a <strong>context-free grammar</strong> (a set of rewrite rules, which can be recursive). For example, a context-free language for strings of balanced parentheses can be written as <span class="math">\(S \to \epsilon; S \to (S); S \to SS\)</span>. As a shorthand, we can write this as <span class="math">\(S \to \epsilon \mid (S) \mid SS\)</span>.</p>
-<p>A word is in a context-free language if and only if there exists a way to construct it from the rewrite rules in the grammar. For example, <span class="math">\((())()\)</span> can be generated by applying rule 3 to rule 2 applied to rule 2 applied to rule 1.</p>
+<p>A word is in a context-free language if and only if there exists a way to construct it from the rewrite rules in the grammar. For example, <span class="math">\((())()\)</span> can be generated by applying rule 3 to rule 2 applied to rule 2 applied to rule 1 and rule 2 applied to rule 1.</p>
 <p>A context-free grammar consists of:</p>
 <ul>
 <li>An alphabet <span class="math">\(\Sigma\)</span>, called <strong>terminal symbols</strong>. This never includes <span class="math">\(\epsilon\)</span>.</li>
@@ -593,7 +596,7 @@ return states &amp; $A$ != set()</code></pre>
 <p><span class="math">\(\alpha A \beta \implies \alpha \gamma \beta\)</span> means that there is a production <span class="math">\(A \to \beta\)</span> in <span class="math">\(P\)</span> - the right side is derivable from the left side in one step.</p>
 <p><span class="math">\(\alpha A \beta \implies^* \alpha \gamma \beta\)</span> means that there exists a sequence of 0 or more derivation steps that convert the left side to the right side - the right side is somehow derivable from the left.</p>
 <p>A context-free language is therefore defined as <span class="math">\(L(G) = \set{w \in \Sigma^* \mid S \implies^* w}\)</span> - the set of all strings derivable from <span class="math">\(S\)</span>, the starting state. Here, <span class="math">\(G\)</span> is a context-free grammar and gives the values for <span class="math">\(\Sigma, N, V, P, S\)</span>.</p>
-<p>A language <span class="math">\(L\)</span> is context-free if and only if there exists a grammar <span class="math">\(G\)</span> such that <span class="math">\(L = L(G)\)</span>.</p>
+<p>A language <span class="math">\(L\)</span> is context-free if and only if there exists a context-free grammar <span class="math">\(G\)</span> such that <span class="math">\(L = L(G)\)</span>.</p>
 <p>For example, a language that consists of palindromes over <span class="math">\(\set{a, b, c}\)</span> can be represented using the grammar <span class="math">\(S \to aSa \mid bSb \mid cSc \mid M; M \to a \mid b \mid c \mid \epsilon\)</span>.</p>
 <p>A language that consists of arithmetic expressions over <span class="math">\(\set{a, b, c, +, -, *, /}\)</span> can be written as <span class="math">\(S \to a \mid b \mid c \mid S O S \mid (S); O \to + \mid - \mid * \mid /\)</span>. We can show that <span class="math">\(S \implies^* a + b\)</span> by using <span class="math">\(S \implies S O S \implies a O S \implies a + S \implies a + b\)</span>. This is a <strong>derivation</strong> - we apply rules one by one until we have constructed the expression.</p>
 <p>A derivation is a <strong>proof that a word is in the language</strong>.</p>
@@ -606,7 +609,7 @@ S O S
 a + b</code></pre>
 <h1 id="section-12">24/2/15</h1>
 <p>For every leftmost and rightmost derivation, there exists a corresponding <strong>unique parse tree</strong>. A grammar for which some word has more than one distinct leftmost derivation is <strong>ambiguous</strong> - there are multiple possible parse trees for some strings.</p>
-<p>A string might have two leftmost derivations, and so would have two unique parse trees. For example, we can derive <span class="math">\(a + b * c\)</span> by starting with <span class="math">\(S \implies S O S \implies S O S O S\)</span>, or with <span class="math">\(S \implies S O S \implies a\)</span>. This is equivalent to parsing it as <span class="math">\((a + b) * c\)</span> or <span class="math">\(a + (b * c)\)</span>.</p>
+<p>A string might have two leftmost derivations, and so would have two unique parse trees. For example, we can derive <span class="math">\(a + b * c\)</span> by starting with <span class="math">\(S \implies S O S \implies S O S O S \implies \impies a O S O S \implies \ldots\)</span>, or with <span class="math">\(S \implies S O S \implies a O S \implies a O S O S \implies \ldots\)</span>. This is equivalent to parsing it as <span class="math">\((a + b) * c\)</span> or <span class="math">\(a + (b * c)\)</span>.</p>
 <p>If we just care about whether a word is in a language, then it doesn't matter if we use an ambiguous grammar. However, for compilers, the shape of the parse tree determines the meaning of the program, so words that have two different parse trees would have two different meanings.</p>
 <p>To resolve ambiguity, we could use heuristics (often called <strong>precedence</strong>) to guide which rule we expand next. However, most of the time we just want to use an unambiguous grammar instead.</p>
 <p>The unambiguous version of the language can be written as <span class="math">\(E \to E O T; T \to a \mid b \mid c \mid (E); O \to + \mid - \mid * \mid /\)</span></p>
@@ -621,9 +624,58 @@ a + b</code></pre>
 <p>We can do parsing in two ways - finding the derivation forwards (starting from the left, expand until we have <span class="math">\(w\)</span>, this is <strong>top-down parsing</strong>), or finding it backwards (starting from the right, unexpand until we have <span class="math">\(S\)</span>, this is <strong>bottom-up parsing</strong>). Both are used in practice, and they each have advantages for different types of grammars.</p>
 <h2 id="top-down-parsing">Top-down Parsing</h2>
 <p>The basic idea is to start with <span class="math">\(S\)</span>, apply grammar rules, and eventually reach <span class="math">\(w\)</span>.</p>
+<p>We start with <span class="math">\(S\)</span>, and then repeatedly attempt to resolve the leftmost non-terminal until we have obtained the input desired, or an error otherwise. In this way we obtain the leftmost derivation. Potentially, we could also obtain the rightmost derivation by always attempting to resolve the rightmost nonterminal.</p>
 <p>We will use a stack to store all the <span class="math">\(\alpha_i\)</span>, in reverse, in the derivation <span class="math">\(S \implies \alpha_1 \implies \ldots \implies \alpha_n \implies w\)</span>. We will then match against characters in <span class="math">\(w\)</span> from left to right. We will also enforce the property that the consumed input concatenated with the reversed stack contents are equal to some <span class="math">\(\alpha_i\)</span>.</p>
 <p>We will use <strong>augmented grammars</strong> to make parsing simpler. Basically, we take a normal grammar and add the symbols <span class="math">\(\vdash\)</span> and <span class="math">\(\dashv\)</span> (the beginning and ending symbols), and a new start symbol <span class="math">\(S&#39;\)</span>, defined as <span class="math">\(S&#39; \to \vdash S \dashv\)</span>. Our word is now <span class="math">\(\vdash w \dashv\)</span>.</p>
 <h1 id="section-13">26/2/15</h1>
+<p>The language of WLP4 is defined using regular expressions to determine the tokenizations, a context-free grammar to define the parsing, context-sensitive code to do things like check types and declarations, and a mapping from parse tree structures to executable output to determine the semantics of the language.</p>
+<p>The basic structure of a top-down parser is as follows:</p>
+<pre><code># input is given as an array of tokens, which are also terminals
+current_input = [START_STATE]
+while current_input != full_input:
+    let `A` be a nonterminal in `current_input` # usually this would always be the leftmost nonterminal in order to get the leftmost derivation
+    find production rules such that $A \to \ldots$, and select one such rule `A \to value`, or give error if none # it is very important to choose the right rule
+    replace the instance of `A` chosen earlier with `value` in `current_input`</code></pre>
+<p>Basically, we are repeatedly reducing the nonterminals in the input until we have all terminals, or have determined that the word is not in the language.</p>
+<p>The step where we find which production rule to use is an important part of top-down parsing. Generally, this is based on</p>
+<p>We can implement top-down parsing using a stack <span class="math">\(S = X_n \ldots X_1, X_1, \ldots, X_n \in V\)</span> (stack contains symbols in the vocabulary). The parsing is made possible by reading the input left-to-right into <code>read_input</code> and enforcing the invariant <code>current_input = read_input + S</code> as we read through.</p>
+<p>Consider the following grammar: <span class="math">\(S \to A y B; A \to ab; A \to cd; B \to z; B \to wx\)</span>. Consider the word <span class="math">\(w = \vdash abywx \dashv\)</span>. Then to parse it, we do the following:</p>
+<p>| Stack | Read input | Unread input | Action | Current Input | ;wip: handle and |:-----------|:-----------|:-------------|:-----------------------------------------------------------|:--------------| | <span class="math">\(S\)</span> | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | (initial state) | <span class="math">\(S\)</span> | | <span class="math">\(AyB\)</span> | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | top of stack is nonterminal, pop and pick rule <span class="math">\(S \to AyB\)</span> | <span class="math">\(AyB\)</span> | | <span class="math">\(abyB\)</span> | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | top of stack is nonterminal, pop and pick rule <span class="math">\(A \to ab\)</span> | <span class="math">\(aayB\)</span> | | <span class="math">\(byB\)</span> | <code>a</code> | <code>bywx</code> | read <code>a</code>, compare to top of stack, pop | <span class="math">\(abyB\)</span> | <span class="math">\(aayB\)</span> | | <span class="math">\(yB\)</span> | <code>ab</code> | <code>ywx</code> | read <code>b</code>, compare to top of stack, pop | <span class="math">\(abyB\)</span> | <span class="math">\(aayB\)</span> | | <span class="math">\(B\)</span> | <code>aby</code> | <code>wx</code> | read <code>y</code>, compare to top of stack, pop | <span class="math">\(abyB\)</span> | <span class="math">\(aayB\)</span> | | <span class="math">\(wx\)</span> | <code>aby</code> | <code>wx</code> | top of stack is nonterminal, pop and pick rule <span class="math">\(B \to wx\)</span> | <span class="math">\(abywx\)</span> | | <span class="math">\(x\)</span> | <code>abyw</code> | <code>x</code> | read <code>w</code>, compare to top of stack, pop | <span class="math">\(abywx\)</span> | | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | <span class="math">\(\epsilon\)</span> | read <code>x</code>, compare to top of stack, pop | <span class="math">\(abywx\)</span> | <span class="math">\(abywx\)</span> | | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | <span class="math">\(\epsilon\)</span> | end of input, stack empty, so input valid | <span class="math">\(abywx\)</span> | <span class="math">\(abywx\)</span> |</p>
+<p>Note that we only really need to care about the stack and the read input. That means that we can implement a top-down parser using just a stack as storage.</p>
+<p>;wip: missed the rest due to sleep</p>
+<h1 id="section-14">3/3/15</h1>
+<p>;wip: make sure to define nullable</p>
+<p>Calculating first sets:</p>
+<pre><code># grammar is a list of pairs of nonterminals and their expansions (lists of vocabulary elements)
+First = {A: set() for A, expansion in grammar}
+do:
+    for A, expansion in grammar:
+        for element in expansion:
+            if element is a terminal:
+                First[A].add(element)
+                break
+            else:
+                First[A].extend(First[element])
+                if not Nullable[element]: break
+until First stops changing</code></pre>
+<p>A grammar that has matched <span class="math">\(b\)</span>-<span class="math">\(d\)</span> and <span class="math">\(p\)</span>-<span class="math">\(q\)</span> pairs with <span class="math">\(l\)</span> in between can be written as <span class="math">\(S&#39; \to \vdash S \dashv; S \to b S d; S \to p S q; S \to C; C \to lC; C \to \epsilon\)</span>.</p>
+<p>Running this algorithm on the grammar results in the first set <span class="math">\(\set{\vdash}\)</span> for <span class="math">\(S&#39;\)</span>, <span class="math">\(\set{b, p, l}\)</span> for <span class="math">\(S\)</span>, and <span class="math">\(\set{l}\)</span> for <span class="math">\(C\)</span>.</p>
+<p>The follow sets for this algorithm are <span class="math">\(\set{\dashv, d, q}\)</span> for <span class="math">\(S\)</span> and <span class="math">\(\set{\dashv, d, q}\)</span> for <span class="math">\(C\)</span>.</p>
+<p>With the first and follow sets, we can create a prediction function <span class="math">\(\text{Predict}(A, a) = \set{A \to B \middle| a \in First^*(B)} \cup \set{A \to B \middle| Nullable(B) \wedge a \in \text{Follow}(A)}\)</span>, where <span class="math">\(A\)</span> is a nonterminal and <span class="math">\(a\)</span> is a terminal. Basically, this describes the union of the set of rules for which the right hand side begins with the terminal <span class="math">\(a\)</span>, and the set of rules that can expand to 0 tokens and are followed by <span class="math">\(a\)</span>.</p>
+<p>We can also represent the prediction table as a table where the rows are different nonterminals <span class="math">\(A\)</span> and the columns are different terminals <span class="math">\(a\)</span>, with the cells filled with the resulting rules.</p>
+<p>This works for <span class="math">\(LL(1)\)</span> grammars. A grammar is <span class="math">\(LL(1)\)</span> if and only if:</p>
+<ul>
+<li>No two production rules with the same left-hand side can generate the same first symbol - the set <span class="math">\(\set{A \to B \middle| a \in First^*(B)}\)</span> cannot have more than 1 element.</li>
+<li>As a result, the grammar <span class="math">\(E \to E + T \mid T; T \to T * F \mid F&#39; F \to a \mid b \mid c\)</span> is not <span class="math">\(LL(1)\)</span> because it is <strong>left recursive</strong> - given an input <span class="math">\(a\)</span>, it is possible for either <span class="math">\(E\)</span> or <span class="math">\(T\)</span> to generate it.</li>
+<li>Left recursion will immediately make a grammar not <span class="math">\(LL(1)\)</span>. Right recursion could also do so, but not always.</li>
+<li>To make it <span class="math">\(LL(1)\)</span>, we could do something like <span class="math">\(E \to T E&#39;; E&#39; \to \epsilon \mid + E; T \to F T&#39;; T&#39; \to \epsilon \mid * T; F \to a \mid b \mid c\)</span>. This is called <strong>left factoring</strong>.</li>
+<li>There is only one way to nullify a nullable symbol - the set <span class="math">\(\set{A \to B \middle| Nullable(B) \wedge a \in \text{Follow}(A)}\)</span> cannot have more than 1 element.</li>
+<li>In fact, if there is more than 1 way to nullify a symbol, then the grammar is ambiguous.</li>
+</ul>
+<h2 id="bottom-up-parsing">Bottom-up Parsing</h2>
+<p>The basic idea is to start with <span class="math">\(w\)</span>, and then go back using rules to get <span class="math">\(S&#39;\)</span> from <span class="math">\(S&#39; \implies \alpha_1 \implies \ldots \implies \alpha_k \implies w\)</span>.</p>
+<p>Parsing will always require a stack. In our bottom-up parsing, we are going to store partially reduced input read so far.</p>
+<p>In our case, we will enforce the invariant <code>stack + unread_input \in \set{S', \alpha_1, \ldots, \alpha_k, w}</code> after reading each terminal from the input.</p>
 <p>Consider the following grammar: <span class="math">\(S \to A y B; A \to ab; A \to cd; B \to z; B \to wx\)</span>. Consider the word <span class="math">\(w = abywx\)</span>. Then to parse it, we do the following:</p>
 <table>
 <thead>
@@ -636,14 +688,94 @@ a + b</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left">(initial state)</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left"><code>abywx</code></td>
+<td align="left">shift <span class="math">\(\vdash\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(\vdash a\)</span></td>
+<td align="left"><span class="math">\(\vdash a\)</span></td>
+<td align="left"><code>bywx</code></td>
+<td align="left">shift <span class="math">\(a\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(\vdash ab\)</span></td>
+<td align="left"><span class="math">\(\vdash ab\)</span></td>
+<td align="left"><code>ywx</code></td>
+<td align="left">shift <span class="math">\(b\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(\vdash A\)</span></td>
+<td align="left"><span class="math">\(\vdash ab\)</span></td>
+<td align="left"><code>ywx</code></td>
+<td align="left">reduce <span class="math">\(A \to ab\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(\vdash Ay\)</span></td>
+<td align="left"><span class="math">\(\vdash aby\)</span></td>
+<td align="left"><code>wx</code></td>
+<td align="left">shift <span class="math">\(y\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(\vdash Ayw\)</span></td>
+<td align="left"><span class="math">\(\vdash abyw\)</span></td>
+<td align="left"><span class="math">\(x \dashv\)</span></td>
+<td align="left">shift <span class="math">\(w\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(\vdash Ayw\)</span></td>
+<td align="left"><span class="math">\(\vdash abyw\)</span></td>
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left">shift <span class="math">\(x\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(\vdash Aywx\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx\)</span></td>
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left">reduce <span class="math">\(B \to wx\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(\vdash AyB\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx\)</span></td>
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left">reduce <span class="math">\(AyB \to S\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(\vdash S\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left">shift <span class="math">\(\dashv\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(\vdash S \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left">reduce <span class="math">\(S&#39; \to \vdash S \dashv\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(S&#39;\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left">accept</td>
 </tr>
 </tbody>
 </table>
-<p>;wip: missed the rest due to sleep</p>
+<p>Notice that at each step we have two possible actions:</p>
+<ul>
+<li>Shift - moving one character from the input to the stack.</li>
+<li>Reduce - the top of the stack is the right-hand side of some grammar rule, so replace it with the left hand side.</li>
+</ul>
+<p>We accept if the stack is <span class="math">\(S&#39;\)</span> and the unread input is <span class="math">\(\epsilon\)</span> (or we have <span class="math">\(\vdash S \dashv\)</span> on an empty input, or when we shift <span class="math">\(\dashv\)</span>).</p>
+<p>How do we know whether to shift or reduce? We can decide based on the next token, but in practice this is very difficult.</p>
+<p>Donald Knuth is known for proposing big-O notation as an algorithm analysis tool, writing the series of books &quot;The Art Of Computer Programming&quot;, and the TeX typesetting system, among others.</p>
+<p>He also invented a theorem: the set <span class="math">\(\set{wa \middle| \exists x, S&#39; \implies^* wax}\)</span> is a regular language. In other words, if <span class="math">\(w\)</span> is our stack and <span class="math">\(a\)</span> is our next input char, then we can use a DFA to describe and decide when to shift or reduce. This technique is called <strong>LR parsing</strong> (L for left-right scanning, R for rightmost derivations).</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
