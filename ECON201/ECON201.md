@@ -231,19 +231,32 @@ The income elasticity of supply is important because if positive, an income tax 
 
 # 29/1/15
 
+Production with Firms
+---------------------
+
+A **production process** transforms inputs (factors of production) into goods/services. Common inputs are capital $K$ (buildings, equipment), labour $L$, and materials $M$ (source products).
+
+A **production function** is a function that results in the maximum quantity produced for a given set of input quantities. For example, $q = f(L, K)$ is a production function over labor and capital.
+
+In the short run, it is difficult to adjust inputs, since labor needs to be hired or fired, and buildings take time to buy or sell. The **short run** is a period of time that is so short that a firm cannot adjust all of its inputs - one or more inputs are held constant.
+
+In the long run, this becomes much more feasible. The **long run** is a period of time so long that it is possible to adjust any of the inputs to a production process.
+
+The **total product of labour** is the total quantity produced using a given quantity of labor. The **marignal product of labor** is the derivative of this - the change in output given the addition of 1 labor unit. The **average product of labor** is the average of the total product of labor.
+
+The **law of diminishing returns** says that as a firm increases a factor of production, the corresponding increases in the output must become smaller eventually.
+
 ;wip: I missed this class due to an interview
 
 # 3/2/15
 
-;wip: I missed this class due to dental appointment
+;wip: production, one variable/fixed input for short run, two variables for long run, returns to scale, and productivity/technical change
 
 # 5/2/15
 
 Midterm.
 
 # 10/2/15
-
-;wip: production, one variable/fixed input for short run, two variables for long run, returns to scale, and productivity/technical change
 
 ;wip: I missed this class due to an interview
 
@@ -281,7 +294,7 @@ We can plot isocost lines on $K$ vs. $L$ axes, by fixing the cost at $\overline 
 
 The **isoquant** is all the combinations of the inputs of production that result in the same quantity produced. This is represented as $q(L, K)$.
 
-Firms have three equivalent strategies for minimizing cost. One is the lowest isocost rule - to pick the bundle of inputs where the lowest isocost line touches the isoquant, analogous to choosing the highest indifference curve that touches the budget line. Another is the ;wip
+Firms have three equivalent strategies for minimizing cost. One is the **lowest isocost rule** - to pick the bundle of inputs where the lowest isocost line touches the isoquant, analogous to choosing the highest indifference curve that touches the budget line. Another is the **tangency rule** - to pick the bundle of inputs where the isoquant is tangent to the isocost line. The last is the **last dollar rule** - to pick the bundle of inputs such that the marginal product of all inputs in the bundle are equal.
 
 The **long run cost curve** is a plot of the $K$ and $L$ combination resulting in the lowest possible cost for each quantity produced. This is the points where the lowest isocost lines intersect isoquants.
 
@@ -294,3 +307,27 @@ The **long run cost curve** is a plot of the $K$ and $L$ combination resulting i
 # 3/3/15
 
 ;wip: missed due to midterm studying
+
+# 5/3/15
+
+If we have free entry and exit, identical firms, and constant input prices, the long run market supply curve is horizontal at the LRAC.
+
+If we have limited entry, identical firms, and constant input prices, the long run market supply curve is upward sloping.
+
+If we have free entry and exit, different firms, and constant input prices, the long run market supply curve is upward sloping. ;wip reasons for each
+
+If we have free entry and exit, identical firms, and increasing input prices, the long run market supply curve is upward sloping.
+
+If we have free entry and exit, identical firms, and decreasing input prices, the long run market supply curve is downward sloping.
+
+Limited entry is not necessarily the same as a barrier to entry. For example, the government might limit the number of firms in the market, or the resources that need to produce the good/service are scarce, which both limit entry, but are not barriers to entry - if there was space or extra resources available, the 
+
+In the long run, competitive firms in a perfectly competitive market make zero profit - the opportunity cost is the same as the value of the next best investment.
+
+**Consumer welfare** from a good/service is the benefit a customer gets from consuming that good minus what the consumer paid for the good - the enjoyment we get above what we paid for it. The demand curve is the consumer's marginal willingness to pay for another unit of a good/service. The **consumer surplus** is the price difference between the maximum value the customer would pay, and the market equilibrium price. This is the area under the demand curve above the equilibrium price line.
+
+**Producer surplus** from a good/service is the price difference between the market equilibrium price and the minimum price at which the producer would be willing to sell the good/service at - the difference between price and total cost. This is the area above the supply curve below the equilibrium price line.
+
+If the marginal cost is constant for all firms in a competitive industry is 0, then the producer surplus is 0 ;wip: why? supply curve is horizontal at min AVC, p = MR = MC = min AVC, producer surplus is area under price line.
+
+;wip: read over the rest of the slides

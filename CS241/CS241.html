@@ -130,7 +130,7 @@ loop:
 00000000      0000 0000 1010 0111 0001 1000 0010 0000  0x00A71820  add $3, $5, $7
 00000004      0000 0011 1110 0000 0000 0000 0000 1000  0x03e00008  jr $31</code></pre>
 <p>The resulting code is therefore the binary representation of the hex value <code>00A7182003e00008</code>.</p>
-<p>To store a literal value into a register, we can use the <strong>load immediate and skip</strong> (<code>lis</code>) instruction. Essentially, ;wip</p>
+<p>To store a literal value into a register, we can use the <strong>load immediate and skip</strong> (<code>lis</code>) instruction. Essentially, it reads the next word in memory, adjacent to the <code>lis</code> instruction, and stores it in the specified register.</p>
 <p>Note that ASCII is a mapping between characters and binary, and ASCII values are not binary. For example, <code>0010000100110101</code> is simply an ASCII string of 1 and 0, while <code>!5</code> would be the ASCII encoding the previous string would result in if interpreted as binary.</p>
 <p>To read the ASCII representation of a given binary file, use <code>xxd &lt;filename&gt;</code> or <code>hexdump -Cv &lt;filename&gt;</code>, where <code>&lt;filename&gt;</code> is the path to the file to represent. <code>xxd -bits</code> shows binary, and <code>xxd -cols n</code> shows <code>n</code> bytes per line.</p>
 <h1 id="section-2">13/1/15</h1>
@@ -261,7 +261,7 @@ beq $0, $0, repeat</code></pre>
 <p>That also means that the addresses of the labels will not be correct if we load them directly, since the assembler created the machine code assuming addresses start from the beginning of the program (a label at the very beginning of the assembly should result in a value of 0x00000000). If we load our program at offset <span class="math">\(d\)</span>, then we must add <span class="math">\(d\)</span> to the value of each label or reference to a label, like <code>.word some_label</code>. This process is called <strong>relocation</strong> and allows us to load the code anywhere in memory and have it run properly.</p>
 <p>Since the machine code is just a stream of bytes, we don't know which words are labels and which are not - the assembler has to give us additional information about what type of thing each word is.</p>
 <p>As a result, what most assemblers output is not actually just machine code, but actually <strong>object code</strong> - machine code with additional metadata that lets us load and run the program in a clean way. These assemblers are called <strong>relocatable assemblers</strong>.</p>
-<p>Basically, the metadata needed in object files includes the addresses of words that represent label addresses in the code so we can relocate it, plus ;wip</p>
+<p>Basically, the metadata needed in object files includes the addresses of words that represent label addresses in the code so we can relocate it, plus things like exports and imports.</p>
 <p>The object file format we will be using is called <strong>MIPS executable relocatable linkable</strong> (MERL), and often has a filename of the form <code>*.merl</code>. It looks like this:</p>
 <ol style="list-style-type: decimal">
 <li>The literal word 0x10000002, which is the MIPS instruction for <code>beq $0, $0, 2</code>, and skips two words ahead, past the rest of the header.
@@ -564,14 +564,14 @@ return states &amp; $A$ != set()</code></pre>
 <li>Output the token.</li>
 <li>Resume scanning, for the next token, by using an <span class="math">\(\epsilon\)</span>-move back to the starting state.</li>
 </ol>
-<p>We often just use a simpler version of maximal munch, which works on a more limited set of languages:</p>
+<p>We often just use a simplified maximal munch, which works on a more limited set of languages:</p>
 <ol style="list-style-type: decimal">
 <li>Run the <span class="math">\(\epsilon\)</span>-NFA without any <span class="math">\(\epsilon\)</span>-moves, until no more non-error moves are possible. This is the greedy part of the algorithm, where we try to consume as much as possible.</li>
 <li>If currently in an accepting state, we have found a token.</li>
 <li>Output the token.</li>
 <li>Resume scanning, for the next token, by using an <span class="math">\(\epsilon\)</span>-move back to the starting state.</li>
 </ol>
-<p>Basically, the same thing, but without the backtracking step. This means we can't parse rules like &quot;identifiers must start and end with a letter, but may contain the <code>--</code> operator&quot;. However, this is usually good enough because languages are often designed intentionally in such a way that this works.</p>
+<p>Basically, the same thing, but without the backtracking step. This means we can't tokenize things like <code>#ifdefg</code> into <code>#ifdef</code> and <code>g</code> - whitespace or another separator is required. However, this is usually good enough because languages are often designed intentionally in such a way that this works.</p>
 <p>This sort of parser sometimes causes issues in C++, such as <code>vector&lt;vector&lt;int&gt;&gt; v;</code> not being valid because the <code>&gt;&gt;</code> is interpreted as a single token instead of two <code>&gt;</code> tokens.</p>
 <h2 id="parsing">Parsing</h2>
 <p>Tokenization is good, but it can't parse everything. For example, consider a language containing all strings consisting entirely of balanced parentheses. Clearly, we need at least one state for each level of nesting in order to keep track of how many parentheses are currently open in the input, but no finite number of states can be used to recognize all levels of nesting, and DFAs must have a finite number of states. They also can't parse palindromes for the same reason.</p>
@@ -614,7 +614,6 @@ a + b</code></pre>
 <p>To resolve ambiguity, we could use heuristics (often called <strong>precedence</strong>) to guide which rule we expand next. However, most of the time we just want to use an unambiguous grammar instead.</p>
 <p>The unambiguous version of the language can be written as <span class="math">\(E \to E O T; T \to a \mid b \mid c \mid (E); O \to + \mid - \mid * \mid /\)</span></p>
 <p>To get the multiplicative operators to have precedence over the additive operators, we can use the following grammar: <span class="math">\(E \to E Plus T \mid T; T \to T Mult F \mid F; F \to a \mid b \mid c \mid (E); Plus \to + \mid -; Mult \to * \mid /\)</span>. Note that we used a rule for each level of precedence - <span class="math">\(E\)</span> is the precedence level for additive operators, and <span class="math">\(T\)</span> is for multiplicative operators.</p>
-<p>;wip: midterm covers everything up to this point</p>
 <p>If <span class="math">\(L\)</span> is a context-free language, there may not necessarily be an unambiguous context-free grammar for it. The languages that only have ambiguous grammars are <strong>inherently ambiguous grammars</strong>. ;wip: give example</p>
 <p>It is not possible to tell if an arbitrary context-free grammar is ambiguous - this problem is undecidable. However, we can write tools that can ensure that a grammar, constrained in certain ways (like no left recursion), is always unambiguous. Tools like ANTLR can do this.</p>
 <p>Testing whether two grammars describe the same language is also an undecidable problem.</p>
@@ -640,7 +639,103 @@ while current_input != full_input:
 <p>The step where we find which production rule to use is an important part of top-down parsing. Generally, this is based on</p>
 <p>We can implement top-down parsing using a stack <span class="math">\(S = X_n \ldots X_1, X_1, \ldots, X_n \in V\)</span> (stack contains symbols in the vocabulary). The parsing is made possible by reading the input left-to-right into <code>read_input</code> and enforcing the invariant <code>current_input = read_input + S</code> as we read through.</p>
 <p>Consider the following grammar: <span class="math">\(S \to A y B; A \to ab; A \to cd; B \to z; B \to wx\)</span>. Consider the word <span class="math">\(w = \vdash abywx \dashv\)</span>. Then to parse it, we do the following:</p>
-<p>| Stack | Read input | Unread input | Action | Current Input | ;wip: handle and |:-----------|:-----------|:-------------|:-----------------------------------------------------------|:--------------| | <span class="math">\(S\)</span> | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | (initial state) | <span class="math">\(S\)</span> | | <span class="math">\(AyB\)</span> | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | top of stack is nonterminal, pop and pick rule <span class="math">\(S \to AyB\)</span> | <span class="math">\(AyB\)</span> | | <span class="math">\(abyB\)</span> | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | top of stack is nonterminal, pop and pick rule <span class="math">\(A \to ab\)</span> | <span class="math">\(aayB\)</span> | | <span class="math">\(byB\)</span> | <code>a</code> | <code>bywx</code> | read <code>a</code>, compare to top of stack, pop | <span class="math">\(abyB\)</span> | <span class="math">\(aayB\)</span> | | <span class="math">\(yB\)</span> | <code>ab</code> | <code>ywx</code> | read <code>b</code>, compare to top of stack, pop | <span class="math">\(abyB\)</span> | <span class="math">\(aayB\)</span> | | <span class="math">\(B\)</span> | <code>aby</code> | <code>wx</code> | read <code>y</code>, compare to top of stack, pop | <span class="math">\(abyB\)</span> | <span class="math">\(aayB\)</span> | | <span class="math">\(wx\)</span> | <code>aby</code> | <code>wx</code> | top of stack is nonterminal, pop and pick rule <span class="math">\(B \to wx\)</span> | <span class="math">\(abywx\)</span> | | <span class="math">\(x\)</span> | <code>abyw</code> | <code>x</code> | read <code>w</code>, compare to top of stack, pop | <span class="math">\(abywx\)</span> | | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | <span class="math">\(\epsilon\)</span> | read <code>x</code>, compare to top of stack, pop | <span class="math">\(abywx\)</span> | <span class="math">\(abywx\)</span> | | <span class="math">\(\epsilon\)</span> | <code>abywx</code> | <span class="math">\(\epsilon\)</span> | end of input, stack empty, so input valid | <span class="math">\(abywx\)</span> | <span class="math">\(abywx\)</span> |</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Stack</th>
+<th align="left">Read input</th>
+<th align="left">Unread input</th>
+<th align="left">Next Action</th>
+<th align="left">Current Input</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math">\(S&#39;\)</span></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left">top of stack is nonterminal, pop and pick rule <span class="math">\(S&#39; \to \vdash S \dashv\)</span></td>
+<td align="left"><span class="math">\(S&#39;\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(\vdash S \dashv\)</span></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left">read <span class="math">\(\vdash\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math">\(\vdash S \dashv\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(S \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left"><span class="math">\(abywx \dashv\)</span></td>
+<td align="left">top of stack is nonterminal, pop and pick rule <span class="math">\(S \to AyB\)</span></td>
+<td align="left"><span class="math">\(\vdash S \dashv\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(AyB \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left"><span class="math">\(abywx \dashv\)</span></td>
+<td align="left">top of stack is nonterminal, pop and pick rule <span class="math">\(A \to ab\)</span></td>
+<td align="left"><span class="math">\(\vdash AyB \dashv\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(abyB \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left"><span class="math">\(abywx \dashv\)</span></td>
+<td align="left">read <span class="math">\(a\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math">\(\vdash aayB \dashv\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(byB \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash a\)</span></td>
+<td align="left"><span class="math">\(bywx \dashv\)</span></td>
+<td align="left">read <span class="math">\(b\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math">\(\vdash aayB \dashv\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(yB \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash ab\)</span></td>
+<td align="left"><span class="math">\(ywx \dashv\)</span></td>
+<td align="left">read <span class="math">\(y\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math">\(\vdash aayB \dashv\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(B \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash aby\)</span></td>
+<td align="left"><span class="math">\(wx \dashv\)</span></td>
+<td align="left">top of stack is nonterminal, pop and pick rule <span class="math">\(B \to wx\)</span></td>
+<td align="left"><span class="math">\(\vdash aayB \dashv\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(wx \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash aby\)</span></td>
+<td align="left"><span class="math">\(wx \dashv\)</span></td>
+<td align="left">read <span class="math">\(w\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(x \dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash abyw\)</span></td>
+<td align="left"><span class="math">\(x \dashv\)</span></td>
+<td align="left">read <span class="math">\(x\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(\dashv\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx\)</span></td>
+<td align="left"><span class="math">\(\dashv\)</span></td>
+<td align="left">read <span class="math">\(\dashv\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left">end of input, accept since stack empty</td>
+<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+</tr>
+</tbody>
+</table>
 <p>Note that we only really need to care about the stack and the read input. That means that we can implement a top-down parser using just a stack as storage.</p>
 <p>;wip: missed the rest due to sleep</p>
 <h1 id="section-14">3/3/15</h1>
@@ -776,6 +871,139 @@ until First stops changing</code></pre>
 <p>How do we know whether to shift or reduce? We can decide based on the next token, but in practice this is very difficult.</p>
 <p>Donald Knuth is known for proposing big-O notation as an algorithm analysis tool, writing the series of books &quot;The Art Of Computer Programming&quot;, and the TeX typesetting system, among others.</p>
 <p>He also invented a theorem: the set <span class="math">\(\set{wa \middle| \exists x, S&#39; \implies^* wax}\)</span> is a regular language. In other words, if <span class="math">\(w\)</span> is our stack and <span class="math">\(a\)</span> is our next input char, then we can use a DFA to describe and decide when to shift or reduce. This technique is called <strong>LR parsing</strong> (L for left-right scanning, R for rightmost derivations).</p>
+<h1 id="section-15">5/3/15</h1>
+<p>An <strong>item</strong> is a production with a dot (<span class="math">\(\cdot\)</span>) somewhere on the right-hand side, and represents the partially completed rule.</p>
+<p>Consider the grammar <span class="math">\(S&#39; \to \vdash E \dashv, E \to E + T, E \to T, T \to id\)</span>.</p>
+<p>;wip: define LR(0) and LR parsing</p>
+<p>When we are LR parsing, we have a DFA. The states of this DFA are sets of rules, each with a dot inserted in them to represent where we are in parsing the rule.</p>
+<p>When we create a state from another state using a transition symbol <span class="math">\(A\)</span>, we take the rules of that state that have their dot followed by <span class="math">\(A\)</span> and move the dot to the right by 1 symbol for every rule. Then, for each rule, if the dot precedes a nonterminal <span class="math">\(A\)</span>, then we include all rules <span class="math">\(A \to \ldots\)</span> as <span class="math">\(A \to \cdot \ldots\)</span>. We do this repeatedly until there are no more dots preceding nonterminals. For example, if we create a state from <span class="math">\(S&#39;\)</span>, we move the dot to the right, include <span class="math">\(E\)</span> rules, and then include <span class="math">\(T\)</span> rules, to get <span class="math">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span>.</p>
+<p>The start state has only one rule, for the starting rule for the grammar <span class="math">\(S&#39; \to \cdot \vdash S \dashv\)</span>. For the above grammar, we have <span class="math">\(S&#39; \to \cdot \vdash S \dashv\)</span>. We want to buil the entire DFA starting from this start state.</p>
+<p>For every state, we now create new states corresponding each symbol following the dots in the rules, with those following symbols as the transitions to those states. For example, a state <span class="math">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span> creates 3 states, with transitions <span class="math">\(E, T, id\)</span>. For example, the state <span class="math">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span> creates the state <span class="math">\(E \to T \cdot\)</span> using transition <span class="math">\(T\)</span>. If there are no symbols following dots, then we do not create any new states. Duplicate states are combined into one state.</p>
+<p>We repeat this for the new states, and their new states, until we no longer have new states. For the above grammar, we get the following DFA:</p>
+<pre><code>$S&#39; \to \vdash E \dashv$ &gt; $\vdash$ (1) &gt; $S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id$ (1)
+$S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id$ &gt; $id$ &gt; $T \to id \cdot$
+                                                                                 &gt; $T$ &gt; $E \to T \cdot$
+                                                                                 &gt; $E$ &gt; $S&#39; \to \vdash E \cdot \dashv, E \to E \cdot + T$
+$S&#39; \to \vdash E \cdot \dashv, E \to E \cdot + T$ &gt; $\dashv$ &gt; $S&#39; \to \vdash E \dashv \cdot$
+                                                  &gt; $+$ &gt; $E \to E + \cdot T, T \to \cdot id$
+$E \to E + \cdot T, T \to \cdot id$ &gt; $id$ &gt; $E \to T \cdot$
+                                    &gt; $T$ &gt; $E \to E + T \cdot$</code></pre>
+<p>To use the machine, we start in the start state with a stack that contains only the start state, and step through the DFA either shifting or reducing at each state.</p>
+<p>To <strong>shift</strong>, we read a char from the input to stack, and then follow the transition for that char if there is one, and otherwise reduce if the state is a reduce state, and give an error otherwise. A reduce state is a state that contain a single production rule, with the dot at the very right.</p>
+<p>To <strong>reduce</strong>, we pop the right-hand side off the stack, backtrack by the size of the right-hand side, then follow the transition for the left-hand side and push the left-hand side onto the stack.</p>
+<p>We also first push the DFA state we are transitioning to into the stack before transitioning, in order to be able to backtrack later. We could also use a separate stack for this, but it is more elegant to use just one in theory.</p>
+<p>We accept when <span class="math">\(S&#39;\)</span> is on the stack by the end of the DFA.</p>
+<p>Parsing <span class="math">\(\vdash id + id + id \dashv\)</span>:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Stack</th>
+<th align="left">Read</th>
+<th align="left">Unread</th>
+<th align="left">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math">\(1\)</span></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id + id \dashv\)</span></td>
+<td align="left">Shift, go to state 2</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(1 \vdash 2\)</span></td>
+<td align="left"><span class="math">\(\vdash\)</span></td>
+<td align="left"><span class="math">\(id + id + id \dashv\)</span></td>
+<td align="left">Shift, go to state 6</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(1 \vdash 2 id 6\)</span></td>
+<td align="left"><span class="math">\(\vdash id\)</span></td>
+<td align="left"><span class="math">\(+ id + id \dashv\)</span></td>
+<td align="left">Reduce <span class="math">\(T \to id\)</span>: pop 1 symbol and 1 state, so now in state 2, then push <span class="math">\(T\)</span> and go to state 5.</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(1 \vdash 2 T 5\)</span></td>
+<td align="left"><span class="math">\(\vdash id\)</span></td>
+<td align="left"><span class="math">\(+ id + id \dashv\)</span></td>
+<td align="left">Reduce <span class="math">\(E \to T\)</span>: pop 1 symbol and 1 state, so now in state 2, then push <span class="math">\(E\)</span> and go to state 3.</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(1 \vdash 2 E 3\)</span></td>
+<td align="left"><span class="math">\(\vdash id\)</span></td>
+<td align="left"><span class="math">\(+ id + id \dashv\)</span></td>
+<td align="left">Shift, go to state 7</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7\)</span></td>
+<td align="left"><span class="math">\(\vdash id +\)</span></td>
+<td align="left"><span class="math">\(id + id \dashv\)</span></td>
+<td align="left">Shift, go to state 6</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7 id 6\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id\)</span></td>
+<td align="left"><span class="math">\(+ id \dashv\)</span></td>
+<td align="left">Reduce <span class="math">\(T \to id\)</span>: pop 1 symbol and 1 state, so now in state 2, then push <span class="math">\(T\)</span> and go to state 5.</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7 T 8\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id\)</span></td>
+<td align="left"><span class="math">\(+ id \dashv\)</span></td>
+<td align="left">Reduce <span class="math">\(E \to E + T\)</span>: pop 3 symbols and 3 states, so now in state 2, then push <span class="math">\(T\)</span> and go to state 3.</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(1 \vdash 2 E 3\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id\)</span></td>
+<td align="left"><span class="math">\(+ id \dashv\)</span></td>
+<td align="left">Shift, go to state 7.</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id +\)</span></td>
+<td align="left"><span class="math">\(id \dashv\)</span></td>
+<td align="left">Shift, go to state 6.</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7 id 6\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id + id\)</span></td>
+<td align="left"><span class="math">\(\dashv\)</span></td>
+<td align="left">Reduce <span class="math">\(T \to id\)</span>: pop 1 symbol and 1 state, so now in state 7, then push <span class="math">\(T\)</span> and go to state 8.</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7 T 8\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id + id\)</span></td>
+<td align="left"><span class="math">\(\dashv\)</span></td>
+<td align="left">Reduce <span class="math">\(E \to E + T\)</span>: pop 3 symbols and 3 states, so now in state 2, then push <span class="math">\(E\)</span> and go to state 3.</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(1 \vdash 2 E 3\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id + id\)</span></td>
+<td align="left"><span class="math">\(\dashv\)</span></td>
+<td align="left">Shift, go to state 4.</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math">\(1 \vdash 2 E 3 \dashv 4\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id + id \dashv\)</span></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left">Reduce <span class="math">\(S&#39; \to \vdash E \dashv\)</span>.</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math">\(1 S&#39;\)</span></td>
+<td align="left"><span class="math">\(\vdash id + id + id \dashv\)</span></td>
+<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left">Accept.</td>
+</tr>
+</tbody>
+</table>
+<p>If a state looks like <span class="math">\(A \to \cdot x, B \to y \cdot\)</span>, we have a <strong>shift-reduce</strong> conflict and don't know whether to shift or reduce at this state.</p>
+<p>If a state looks like <span class="math">\(A \to x \cdot, B \to y \cdot\)</span>, we have a <strong>reduce-reduce</strong> conflict, and don't know which rule to reduce by.</p>
+<p>If any complete item <span class="math">\(A \to x \cdot\)</span> that isn't the only rule in the state, we will have a shift-reduce conflict or a reduce-reduce conflict. This makes the grammar not <span class="math">\(LR(0)\)</span>.</p>
+<p>If we have a right-associative grammar like <span class="math">\(S&#39; \to \vdash E \dashv, E \to T + E, E \to T, T \to id\)</span>, when we build the DFA we notice that there is a shift-reduce conflict when we try to make the state <span class="math">\(E \to T \cdot + E, E \to T \cdot\)</span>.</p>
+<p>Basically, if the next input is <span class="math">\(id \dashv\)</span> then we need to reduce, and if the input is <span class="math">\(id + \ldots\)</span> then we should not reduce. Since we can't know this, we can't parse this grammar using LR parsing.</p>
+<p>However, we can get around this by using lookahead. For each rule in the DFA <span class="math">\(A \to x \cdot\)</span>, we attach <span class="math">\(\text{Follow}(A)\)</span> - the follow set (<span class="math">\(\set{\dashv}\)</span> for <span class="math">\(A\)</span>, <span class="math">\(\set{+, \dashv}\)</span> for <span class="math">\(T\)</span>). Basically, when we are at that state, we look ahead at the next character <span class="math">\(c\)</span>, and only consider a rule in that state <span class="math">\(A\)</span> if <span class="math">\(c \in \text{Follow}(A)\)</span> - each rule can only be used if its follow set contains the next character.</p>
+<p>With lookahead, we can figure out which rule we want to use in the conflicting cases, solving the shift-reduce conflict. This is called <span class="math">\(SLR(1)\)</span> parsing - simple LR parsing with 1 character lookahead. This is pretty good, since it resolves many but not all conflicts.</p>
+<p>To build parse trees using bottom-up parsing, we just attach the old nodes as children of the new node when we are reducing, and at the end we have a tree.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

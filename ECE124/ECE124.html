@@ -648,9 +648,132 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p>We can implement a shift register as follows:</p>
 <p>;wip: 4-bit shift register schematic, using 4 multiplexers with common select each connected to a D of the 4 D-FFs and the multiplexer inputs connected as appropriate, should have 4-bit data input, and lines for shift up data in and shoft down data in, and support load, hold, shift up, shift down</p>
 <p>This multiplexer-as-data-input-to-register technique is very useful for making registers perform a variety of operations. Each input to the multiplexers can perform a different function.</p>
-<p>An <span class="math">\(n\)</span>-bit <strong>binary ripple counter</strong> counts from <span class="math">\(0\)</span> to <span class="math">\(2^n - 1\)</span>, then wraps around and repeats. We can actually implement this using T-flip-flops that are chained together - the inverted output of one goes to the input of another, and the next bit flips whenever the current bit transitions from 1 to 0, and all the <span class="math">\(T\)</span> inputs are set to 1. This works because of the period of a bit <span class="math">\(i\)</span> is <span class="math">\(2^i\)</span>, and each time we use a T-flip-flop, we increase the period by a factor of 2.</p>
+<p>An <span class="math">\(n\)</span>-bit <strong>binary ripple up-counter</strong> counts from <span class="math">\(0\)</span> to <span class="math">\(2^n - 1\)</span>, then wraps around and repeats. We can actually implement this using T-flip-flops that are chained together - the inverted output of one goes to the clock line of another, and the next bit flips whenever the current bit transitions from 1 to 0, and all the <span class="math">\(T\)</span> inputs are set to 1. This works because of the period of a bit <span class="math">\(i\)</span> is <span class="math">\(2^i\)</span>, and each time we use a T-flip-flop, we increase the period by a factor of 2.</p>
 <p>;wip: T-FF binary ripple counter</p>
 <p>This is good because it's very compact and scales up to higher bit inputs very well. This is bad because each flip-flop has a different clock, which means that as the number of bits increases, the propagation delay increases as well.</p>
+<h1 id="section-21">2/3/15</h1>
+<p>The ripple counter has the same issue as the ripple adder - the propagation delay gets really long as the number of bits gets higher. For example, if we are at the maximum value of the counter and try to count again, every bit has to flip, ad the signal propagates through all the flip-flops one by one.</p>
+<p>The ripple counter is an asynchronous circuitm because all the flip-flops have different clock lines. The value of the current bits depends on the changes in the previous bits</p>
+<p>We can also design a synchronous counter, by connecting all the clock lines on the T-FFs together, and using combinatorial logic to determine when we need to flip based on the previous value of the bits rather than the change in them.</p>
+<p>Using a transition table for all the output bits, we find that a bit <span class="math">\(a_i\)</span> toggles when all bits <span class="math">\(a_0, \ldots, a_{i - 1}\)</span> are 1 - when <span class="math">\(a_0 \wedge \ldots \wedge a_{i - 1}\)</span>.</p>
+<p>;wip: synchronous counter by using T-FFs, first T is 1, second T is a_0, third is a_0 a_1, fourth is a_0 a_1 a_2, etc.</p>
+<p>Now, the clock edge is causing the change for all the T-FFs simultaneously, which means the output takes only the delay of one T-FF. Although the AND gates take time to propagate, it does not affect the output, only the maximum frequency at which we can run the circuit - the critical path goes through all the AND gates and includes the setup time of the last T-FF (we draw this as a line from <span class="math">\(a_0\)</span> through all the AND gates, into the T of the last T-FF and down to the CLK of the last T-FF).</p>
+<p>The symbol for an adder is generally some variation of:</p>
+<p>;wip: box with inputs I, LD, CLR, CNT, CLK</p>
+<p>Here, we have some additional functionality in addition to just counting - loading a value from <span class="math">\(I\)</span> (<span class="math">\(n\)</span>-bit input) on clock rather than counting if <span class="math">\(LD\)</span> (load value) is true, clearing the value to 0 asynchronously if <span class="math">\(CLR\)</span> (clear value), and counting only when <span class="math">\(CNT\)</span> (count enable) is on otherwise.</p>
+<p>We can now make a counter that starts at 3, counts to 10 inclusive, then goes back to 3 and repeats. This can be done by using an AND gate with selectively inverted inputs such that it is 1 whenever the output is 10 or more. This AND gate would be OR'd with a &quot;RESET&quot; line, and the OR result is then connected to LD. The input would then be set to 3 whenever we get to 10, or when we turn on the RESET line.</p>
+<h1 id="section-22">4/3/15</h1>
+<p>It is possible o make counters that count in any sequence, using any type of flip-flop. For example, we will design a counter that counts the sequence <span class="math">\(3, 4, 7, 1, 0\)</span> and then repeats.</p>
+<p>First, we write them as binary values: <span class="math">\(011, 100, 111, 001, 000\)</span>. Clearly, there are 3 bits and we need 3 flip-flops.</p>
+<p>Now we can write a state table, and fill in the flip-flop inputs with functions of the current output such that the next output is the desired value:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Current output (<span class="math">\(q_2 q_1 q_0\)</span>)</th>
+<th align="left">Next output</th>
+<th align="left"><span class="math">\(d_2 d_1 d_0\)</span></th>
+<th align="left"><span class="math">\(t_2 t_1 t_0\)</span></th>
+<th align="left"><span class="math">\(j_2 k_2 j_1 k_1 j_0 k_0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">011</td>
+<td align="left">100</td>
+<td align="left">100</td>
+<td align="left">111</td>
+<td align="left">1x x1 x1</td>
+</tr>
+<tr class="even">
+<td align="left">100</td>
+<td align="left">111</td>
+<td align="left">111</td>
+<td align="left">011</td>
+<td align="left">x0 1x 1x</td>
+</tr>
+<tr class="odd">
+<td align="left">111</td>
+<td align="left">001</td>
+<td align="left">001</td>
+<td align="left">110</td>
+<td align="left">x1 x1 x0</td>
+</tr>
+<tr class="even">
+<td align="left">001</td>
+<td align="left">000</td>
+<td align="left">000</td>
+<td align="left">001</td>
+<td align="left">0x 0x x1</td>
+</tr>
+</tbody>
+</table>
+<p>As it turns out, the rightmost three columns are three truth tables, each for a different type of flip-flop. We can make a K-map for each variable of each column with respect to the current output to obtain a simplified expression for each one type of flip-flop, with don't cares for the missing truth table rows. For example, for D-flip-flops we have <span class="math">\(d_0 = q_2 + \overline{q_0}, d_1 = \overline{q_0}, d_2 = q_2 \oplus q_1\)</span>.</p>
+<p>Now we can draw the circuit diagram for D-flip-flops: 3 D-flip-flops with a common clock line, the outputs leading into gates that calculate <span class="math">\(d_0, d_1, d_2\)</span>, and <span class="math">\(d_0, d_1, d_2\)</span> connected to the corresponding inputs of the flip-flops.</p>
+<p>We also likely want an &quot;init&quot; line that asynchronously sets the counter to a known state, like 3, the beginning of the sequence. This can be done by connecting a line to the asynchronous set pin of <span class="math">\(d_0, d_1\)</span>, and the asynchronous reset pin of <span class="math">\(d_2\)</span>, and turning this line on for a little while will reset the entire counter to 3.</p>
+<p>;wip: circuit diagram</p>
+<p>For T-flip-flops, we have <span class="math">\(t_0 = \overline{q_2} + \overline{q_0}, t_1 = q_1 + \overline{q_0}, t_2 = q_1\)</span>. For JK-flip-flops, we have <span class="math">\(j_0 = 1, k_0 = \overline{q_2}, j_1 = q_2, k_1 = 1, j_2 = q_1, k_2 = q_0\)</span>.</p>
+<p>In real-world circuits, JK-flip-flops tend to result in the simplest logic for the inputs. Generally, most of the flip-flop inputs will simply be outputs, inverted outputs, or constants, which makes building these circuits very simple.</p>
+<h1 id="section-23">6/3/15</h1>
+<p>Synchronous circuits have their output dependent on the circuit inputs and the current flip-flop outputs - the <strong>current state</strong>. The inputs to the flip-flops are based on the <strong>next state equations</strong>, which depend on the primary inputs (circuit inputs) and the current state. The primary outputs of the circuit depends on the current state and optionally also the primary inputs (combinatorial part of the circuit).</p>
+<p>Synchronous circuits basically go through a sequence of states depending on the input. If the primary outputs of the circuit depend only on the current state (and not the primary inputs), the circuit is a <strong>Moore machine</strong>, otherwise a <strong>Mealy machine</strong>.</p>
+<p>We can describe synchronous circuits using a <strong>state diagram</strong>. This is a diagram that shows all the possible states of a system, the possible transitions between states based on current inputs and state, and outputs. We can draw this as a directed graph with nodes labelled with the state name, like &quot;standing&quot; or &quot;sitting&quot;, and edges labelled with the inputs that would result in the transition that edge describes, like <span class="math">\(x = 0, y = 1\)</span>. The outputs of the circuit can be written inside the nodes (for a Moore machine, since we can't reference inputs here), or on the transitions, like <span class="math">\(x = 0, y = 1 / q_0 = 1, q_1 = 0\)</span> (for Mealy machines).</p>
+<p>Each state is represented in a circuit by a pattern of bits in the flip-flops. We would have a state in the diagram for every possible output of the flip-flops. Implicitly, if we are at a state that doesn't have a transition for the current inputs, we just stay on that state.</p>
+<p>A Mealy machine has its outputs depend on the inputs, so if the inputs are changing, the output is also changing. A Moore machine does not - the outputs change only on the clock edge. Mealy machines are nice because they generally need fewer states, but Moore machines are nice because our timing diagram is simpler and only changes on clock edges.</p>
+<p>A counter can also be drawn as a Moore machine with zero inputs - its outputs don't depend on any inputs and changes on each clock edge.</p>
+<h1 id="section-24">9/3/15</h1>
+<p>A state table represents the same information as a state diagram, but in the form of a table. Rows are states labelled with letters, columns are labelled with possible input values, and cells are the state names to transition to when in that row's state with that column's inputs. There are also additional columns on the right to possible input values, where the cells are the output values for that row's state with that column's inputs.</p>
+<p>Suppose we want a circuit with input <span class="math">\(x\)</span> and output <span class="math">\(z\)</span>. <span class="math">\(z\)</span> should be true whenever the last 4 values of <span class="math">\(x\)</span> are <span class="math">\(1011\)</span> - a <strong>sequence detector</strong>. We will first create a state diagram:</p>
+<pre><code>S0 &gt; 0 &gt; S0
+S0 &gt; 1 &gt; S1
+S1 &gt; 0 &gt; S10
+S1 &gt; 1 &gt; S1
+S10 &gt; 0 &gt; S0
+S10 &gt; 1 &gt; S101
+S101 &gt; 0 &gt; S10
+S101 &gt; 1 &gt; S1011
+S1011 &gt; 0 &gt; S10
+S1011 &gt; 1 &gt; S1
+S1011: output 1
+output 0 otherwise</code></pre>
+<p>This is basically the same thing as a DFA that matches <span class="math">\(1011\)</span>, except the accepting state changes the output.</p>
+<p>Now we could potentially draw a state table:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Current State</th>
+<th align="left"><span class="math">\(x = 0\)</span></th>
+<th align="left"><span class="math">\(x = 1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">S0</td>
+<td align="left">S0, <span class="math">\(z = 0\)</span></td>
+<td align="left">S1, <span class="math">\(z = 0\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">S1</td>
+<td align="left">S10, <span class="math">\(z = 0\)</span></td>
+<td align="left">S1, <span class="math">\(z = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">S10</td>
+<td align="left">S0, <span class="math">\(z = 0\)</span></td>
+<td align="left">S101, <span class="math">\(z = 0\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">S101</td>
+<td align="left">S10, <span class="math">\(z = 0\)</span></td>
+<td align="left">S1011, <span class="math">\(z = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">S1011</td>
+<td align="left">S10, <span class="math">\(z = 1\)</span></td>
+<td align="left">S1, <span class="math">\(z = 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Since we have 5 states, we will need at least 3 flip-flops, since they can represent up to 8 states. For each state, we need to assign a set of flip-flop values. For now, we will assign them directly as <span class="math">\(0, 0, 0, 0\)</span> up to <span class="math">\(0, 1, 0, 1\)</span>. However, different assignments could potentially make the circuit simpler.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
