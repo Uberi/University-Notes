@@ -224,16 +224,16 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p>Note that each normal box (rectangle) corresponds to a row in the truth table for the function, and each 1 in a normal box corresponds to a minterm.</p>
 <p>Note that the bottom two are both 1. That means that the value of <span class="math">\(x\)</span> does not influence the bottom row, so we can draw a rectangle around the bottom two, which represents <span class="math">\(y\)</span>.</p>
 <p>Note that we can do the same for the leftmost row of two 1's, a rectangle around the two representing <span class="math">\(\overline x\)</span>.</p>
-<p>If we want to minimise a function, the goal of K-mapping is to find the smallest possible number of the largest possible rectangles that cover all the 1 boxes and do not cover any 0 boxes (floating boxes don't matter). In each step, we try to draw a rectangle that encloses as many 1's as possible without enclosing any 0's.</p>
+<p>If we want to minimise a function, the goal of K-mapping is to find the smallest possible number of the largest possible rectangles that cover all the 1 boxes and do not cover any 0 boxes (boxes containing don't cares don't matter). In each step, we try to draw a rectangle that encloses as many 1's as possible without enclosing any 0's.</p>
 <p>This implies that there may be multiple optimal minimal versions of the function, with the same cost. This is represented by multiple minimal rectangle possibilities in the table, or multiple factoring possibilities in the Boolean expression</p>
-<p>All rectangles must have side lengths that are powers of 2.</p>
+<p>All rectangles must have <strong>side lengths that are powers of 2</strong>.</p>
 <p>Mathematically, when we draw a rectangle we are duplicating a term and then factoring an input out. The boxes we drew above corresponded to the operations <span class="math">\(f = \overline x \overline y + \overline x y + xy = \overline x \overline y + \overline x y + xy + \overline x y = \overline x(\overline y + y) + y(x + \overline x) = \overline x + y\)</span>.</p>
 <p>Basically, every rectangle duplicates and factors two terms, repeatedly for larger rectangles. This is the reason rectangles need to have dimensions that are powers of 2. Larger rectangles result in products with fewer factors. Fewer rectangles result in fewer products.</p>
 <p>The above technique resulted in a sum of products. To get a product of sums, draw maximum rectangles that cover all 0's but no 1's. Rather than a product, each rectangle has a corresponding sum, made up of the inverted inputs that actually matter in making the function 0.</p>
 <p>For example, if there is a 0 at <span class="math">\(x_1 = 0, x_2 = 0, x_3 = 1, x_4 = 1\)</span>, the rectangle surrounding just that 0 is associated with <span class="math">\(x_1 + x_2 + \overline{x_3} + \overline{x_4}\)</span>. The minimized product of sums is simply the product of the sum associated with each rectangle.</p>
 <p>Also, the sides are labelled using grey code, and the rectangles can wrap around the sides of the table.</p>
 <h1 id="section-5">14/1/15</h1>
-<p>When doing K-maps, we can read off the answer from the rectangles by looking at which variables did not change within the minterms in a given rectangle. If all the minterms in a rectangle have <span class="math">\(x_1\)</span> equal to 0, but all other variables may change, then the rectangle represents the term <span class="math">\(\overline x_1\)</span>.</p>
+<p>When doing K-maps, we can read off the answer from the rectangles by looking at which variables did not change within the minterms in a given rectangle. If all the minterms in a rectangle have <span class="math">\(x_1\)</span> equal to 0, but all other variables are not constant within the rectangle, then the rectangle represents the term <span class="math">\(\overline x_1\)</span>.</p>
 <p>If we look at the table and see that no rectangles can be expanded, that means that in the Boolean expression, there is no more factoring or collapsing left to be done.</p>
 <p>For K-maps of larger dimensions, we label the rows and columns using grey code - a binary counting system in which only one bit changes when incrementing or decrementing a value. The grey code is recursively defined. The 1-bit grey code is <code>grey_code(1) = [0, 1]</code>. The <span class="math">\(n\)</span>-bit grey code is <code>grey_code[n] = map(grey_code[n - 1], lambda code: 0 .. code) + map(reversed(grey_code[n - 1]), lambda code: 1 .. code)</code>.</p>
 <p>In other words, to get the next grey code, we prepend a 0 to every binary string in the current grey code, and prepend a 1 to the reversed version of the current grey code, then put these two together.</p>
@@ -327,11 +327,11 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p>There is a 2x2x2 cuboid at the middle, a 2x1x2 cuboid at the top corners, a 1x2x1 cuboid at the right side of the right K-map, and a 1x2x2 cuboid at the second-to-leftmost row at the bottom of the tables. This corresponds to the terms <span class="math">\(x_2 x_4\)</span>, <span class="math">\(\overline{x_2} \overline{x_3} \overline{x_4}\)</span>, <span class="math">\(x_1 \overline{x_2} x_3 x_5\)</span>, <span class="math">\(\overline{x_1} x_2 x_3\)</span>.</p>
 <p>Potentially, we could also do 6 variable maps by making 4 4-input K-maps, but this is much more difficult to visualize.</p>
 <h3 id="extensions">Extensions</h3>
-<p>Sometimes, the output of a function doesn't matter, like when we have inputs that will never occur. When this is the case, we can say that the value of the function is a <strong>don't care</strong>. In truth tables and other situations, this is represented as &quot;x&quot;. The don't cares are part of the specifications of a circuit.</p>
+<p>Sometimes, the output of a function doesn't matter, like the output values when we have inputs that will never occur. When this is the case, we can say that the value of the function is a <strong>don't care</strong>. In truth tables and other situations, this is represented as &quot;x&quot;. The don't cares are part of the specifications of a circuit, not the mathematical functions.</p>
 <p>For example, suppose we have a binary to decimal converter, a circuit that accepts 4 inputs and 10 outputs that interprets the 4 inputs as a 4-bit binary number and turns on 1 of the 10 inputs depending on the binary value of the input being between 0 and 9 inclusive. In this case, we can assume that the input binary value will never be above 9, since the circuit wouldn't work then anyways, and all the outputs for those inputs would be don't cares.</p>
 <p>In a K-map, we can include don't cares in rectangles if we want to, but it's not required - we can include them in rectangles if it helps us make rectangles larger, but we can leave don't cares outside of rectangles if they don't help.</p>
 <p>The minimized function resulting from the K-map is functionally equivalent - both implementations do what we want them to - but they might not be logically equivalent, when we use don't cares.</p>
-<p>When we want to minimise a function with multiple outputs, we could try to minimise each output individually as functions with only one output, but this is not necessarily the lowest cost circuit, since there are a lot of logical signals that get duplicated.</p>
+<p>When we want to minimise a function with multiple outputs, we could try to minimise each output individually as functions with only one output, but this is not necessarily the lowest cost circuit, since there are a lot of logical signals that can get duplicated.</p>
 <p>In the K-map, this translates to sometimes not expanding rectangles when it is possible to. Sometimes, with multiple sums of products, the best overall solution is one where the individual sums of products are not necessarily best.</p>
 <p>Essentially, we can sometimes do <strong>product term sharing</strong> to lower overall cost when multiple SOPs use the same ones. We can sometimes do this in Boolean algebra by factoring to find common products.</p>
 <p>Finding the best overall solution is a problem known as multiple output minimization, and is an NP-hard problem.</p>
@@ -512,7 +512,7 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Note that there are only 2 unique rows in the table. Wherever there are duplicated rows, we could possibly have a function <span class="math">\(g\)</span> that selects which unique row is being used to possibly simplify the logic. In our case, we will let <span class="math">\(g\)</span> be a function that returns 1 when the row is 0110 and 0 when the row is 1101. Clearly, this is <span class="math">\(g = e + b + q\)</span>.</p>
+<p>Note that there are only 2 unique rows in the table. Wherever there are duplicated rows, we could possibly have a function <span class="math">\(g\)</span> that selects which unique row is being used to possibly simplify the logic. In our case, we will let <span class="math">\(g\)</span> be a function that returns 1 when the row is 0110 and 0 when the row is 1101. Clearly, this is <span class="math">\(g = e + b + a\)</span>.</p>
 <p>Now, the function depends only on <span class="math">\(g\)</span> and <span class="math">\(d, c\)</span>. We can now draw a K-map:</p>
 <table>
 <thead>
@@ -542,7 +542,7 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 </tbody>
 </table>
 <p>The new minimized function is now <span class="math">\(f = \overline g \overline d + \overline g c + \overline d c + g d \overline c\)</span>. We could also try to further minimise it using an XOR or similar. Clearly, <span class="math">\(g\)</span> and <span class="math">\(f\)</span> both have 3 inputs each, so we can implement it with just 2 3-LUTs, which is the minimum possible amount since a 5-input function cannot be implemented with just 1 3-LUT.</p>
-<p>How did we choose the split that resulted in this structure? Mostly by brute force with some heuristics. There are <span class="math">\(\sum_{i = 1}^{m - 1} {n \choose i}\)</span> where <span class="math">\(n\)</span> is the number of inputs and <span class="math">\(m\)</span> is the number of inputs on our K-LUTs. Basically, there is no simple way to determine what split of variables to use, so we just need to try promising candidates.</p>
+<p>How did we choose the split that resulted in this structure? Mostly by brute force with some heuristics. There are <span class="math">\(\sum_{i = 1}^{m - 1} {n \choose i}\)</span> possibilities where <span class="math">\(n\)</span> is the number of inputs and <span class="math">\(m\)</span> is the number of inputs on our K-LUTs. Basically, there is no simple way to determine what split of variables to use, so we just need to try promising candidates.</p>
 <p>This technique is a way to find a common subfunction of a function in order to reduce the number of inputs.</p>
 <p>The idea is that the cheapest function possible will depend on the cost function, which depends on the technology that we are using. Different functions will be cheaper for CMOS vs. K-LUTs vs. logic gates, and so on.</p>
 <h1 id="section-10">26/1/15</h1>
@@ -559,7 +559,7 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p>Adding two <span class="math">\(n\)</span>-bit numbers requires <span class="math">\(n\)</span> adders (technically, <span class="math">\(n - 1\)</span> full adders and 1 half-adder for the least significant bit, or <span class="math">\(n\)</span> full adders with the least significant bit's carry in connected to 0). Using a full adder for the least significant bit allows us to easily add 1 at any time, which is useful for certain things like subtraction.</p>
 <p>When we add two <span class="math">\(n\)</span>-bit numbers, we know that the output is potentially <span class="math">\(n + 1\)</span>-bits. In our circuits, this manifests as the carry out of the last full adder. The sum actually overflows after <span class="math">\(2^n - 1\)</span> back to 0 for unsigned numbers, and after <span class="math">\(2^{n - 1} - 1\)</span> back to <span class="math">\(-2^{n - 1}\)</span> for signed numbers.</p>
 <p>Every time we change the input to a gate, we need to wait 1 time unit before we read the result in order to make sure that it is stable. This is the gate's <strong>propagation delay</strong>.</p>
-<p>The <strong>longest combinational path/critical path</strong> is the longest path of logic gates and other combinational components through the circuit from one input to one output, and determines how long we need to wait before the output is stable and we can read it expecting valid results. We can represent this by drawing the full adder circuit as a box with arrows inside from each input to every output, each labelled with the longest combinational path from that input to that output. For example, the critical path from carry in to carry out is 2 for a full adder.</p>
+<p>The <strong>longest combinational path/critical path</strong> is the longest path of logic gates and other combinational components through the circuit from one input to one output, and determines how long we need to wait before the output is stable and we can read it expecting valid results. We can represent this by drawing the full adder circuit as a box with arrows inside from each input to every output, each labelled with the longest combinational path from that input to that output. For example, the critical path from carry in to carry out is 2 gate delays for a full adder.</p>
 <p>The ripple gate is relativey slow. Note that the last sum's output depends on every input before it - as the number of bits increases, the longest combinational path of gates through the circuit gets proportionally longer. As a result, as <span class="math">\(n\)</span> increases, the amount of time we need to wait before the output of the ripple adder finally stabilizes also increases as <span class="math">\(2n - 1\)</span> gate delays.</p>
 <h1 id="section-12">28/1/15</h1>
 <p>;wip: quiz this coming wednesday Feb 4 9:30am-10:20am at MC1085 (last name A-Mar) EV3-1408 (last name Mc-Z), if there is interview conflict alternate timeslot is 5:30pm-6:20pm at EIT3145, provide proof, 3 questions with equal weight</p>
@@ -603,7 +603,7 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p>An <strong>active low</strong> decoder is enabled when and only when the enable pin is low. An <strong>active high</strong> decoder is enabled when and only when the enable pin is high.</p>
 <h1 id="section-17">9/2/15</h1>
 <p>An <span class="math">\(m\)</span> to <span class="math">\(n\)</span> <strong>encoder</strong> is the counterpart to an <span class="math">\(n\)</span> to <span class="math">\(m\)</span> decoder. An encoder has <span class="math">\(2^n\)</span> or fewer inputs and <span class="math">\(n\)</span> outputs. The output is always a binary code corresponding to which input line is on (1 and only 1 input may be on at a time). This circuit can be made with just OR gates.</p>
-<p>A <strong>priority encoder</strong> is an encoder that does allow multiple input lines to be on at the same time, and even none at all. The output is always the binary code corresponding the highest-indexed input that is on. There is also an output that is on if and only if at least one of the inputs are on. THis circuit can be implemented using only OR gates.</p>
+<p>A <strong>priority encoder</strong> is an encoder that does allow multiple input lines to be on at the same time, and even none at all. The output is always the binary code corresponding the highest-indexed input that is on. There is also an output that is on if and only if at least one of the inputs are on, usually known as &quot;valid&quot;.</p>
 <p>An <span class="math">\(n\)</span>-bit <strong>multiplexer</strong> (MUX) is a device that has <span class="math">\(2^n\)</span> or fewer inputs (of equal size) based on an <span class="math">\(n\)</span>-bit selection input, and outputs one of the inputs based on the value of the selection input. For example, a 1-bit multiplexer outputs the first input if the selection input is 0, and the second input if the selection input is 1. Multiplexers can easily be implemented using tri-state buffers.</p>
 <p>A 2-input multiplexer can therefore simply be written as <span class="math">\(\overline s x_1 + s x_2\)</span>. A 4-input multiplexer can be written as <span class="math">\(\overline{s_1} \overline{s_2} x_1 + \overline s_1 s_2 x_2 + s_1 \overline s_2 x_3 + s_1 s_2 x_4\)</span>. Larger multiplexers can also be built up from smaller multiplexers, in a tree structure.</p>
 <p>Any <span class="math">\(n\)</span>-input function can be implemented using an <span class="math">\(n-1\)</span>-bit multiplexer by looking at the truth table. This is done by using the first <span class="math">\(n - 1\)</span> bits of the input into the multiplexer as the select lines, and the last bit as an input as one of <span class="math">\(x, \overline x, 0, 1\)</span>.</p>
@@ -653,7 +653,7 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p>This is good because it's very compact and scales up to higher bit inputs very well. This is bad because each flip-flop has a different clock, which means that as the number of bits increases, the propagation delay increases as well.</p>
 <h1 id="section-21">2/3/15</h1>
 <p>The ripple counter has the same issue as the ripple adder - the propagation delay gets really long as the number of bits gets higher. For example, if we are at the maximum value of the counter and try to count again, every bit has to flip, ad the signal propagates through all the flip-flops one by one.</p>
-<p>The ripple counter is an asynchronous circuitm because all the flip-flops have different clock lines. The value of the current bits depends on the changes in the previous bits</p>
+<p>The ripple counter is an asynchronous circuit because all the flip-flops have different clock lines. The value of the current bits depends on the changes in the previous bits</p>
 <p>We can also design a synchronous counter, by connecting all the clock lines on the T-FFs together, and using combinatorial logic to determine when we need to flip based on the previous value of the bits rather than the change in them.</p>
 <p>Using a transition table for all the output bits, we find that a bit <span class="math">\(a_i\)</span> toggles when all bits <span class="math">\(a_0, \ldots, a_{i - 1}\)</span> are 1 - when <span class="math">\(a_0 \wedge \ldots \wedge a_{i - 1}\)</span>.</p>
 <p>;wip: synchronous counter by using T-FFs, first T is 1, second T is a_0, third is a_0 a_1, fourth is a_0 a_1 a_2, etc.</p>
@@ -773,7 +773,177 @@ output 0 otherwise</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Since we have 5 states, we will need at least 3 flip-flops, since they can represent up to 8 states. For each state, we need to assign a set of flip-flop values. For now, we will assign them directly as <span class="math">\(0, 0, 0, 0\)</span> up to <span class="math">\(0, 1, 0, 1\)</span>. However, different assignments could potentially make the circuit simpler.</p>
+<p>Since we have 5 states, we will need at least 3 flip-flops, since they can represent up to 8 states. For each state, we need to assign a set of flip-flop values. For now, we will assign them directly as <span class="math">\(0, 0, 0\)</span> up to <span class="math">\(1, 0, 1\)</span>. However, different assignments could potentially make the circuit simpler.</p>
+<h1 id="section-25">10/3/15</h1>
+<p>To make a pattern recognizer state diagram, we basically first add the nodes for the pattern, add nodes for recognizing the pattern in particular, then connect all the missing edges.</p>
+<p>Sometimes we also do state reduction, which is the process of trying to cut out unnecessary states in order to make the circuit simpler. In this example, state reduction is not possible, since 5 is minimal.</p>
+<p>The above state table represents a Moore machine, since the value of <span class="math">\(z\)</span> is the same in each column for any given row. If the state is different, then we have a Mealy machine.</p>
+<p>This time, we will make the circuit using T flip-flops. Clearly, the next state is a function of the current state, 3 variables, and the input <span class="math">\(x\)</span>, so 4 variables in total. We need to draw the state table with the binary values of the states:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><span class="math">\(q_2 q_1 q_0\)</span></th>
+<th align="left"><span class="math">\(x = 0\)</span></th>
+<th align="left"><span class="math">\(x = 1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">000</td>
+<td align="left">000, <span class="math">\(z = 0, t_2 t_1 t_0 = 000\)</span></td>
+<td align="left">001, <span class="math">\(z = 0, t_2 t_1 t_0 = 001\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">001</td>
+<td align="left">010, <span class="math">\(z = 0, t_2 t_1 t_0 = 011\)</span></td>
+<td align="left">001, <span class="math">\(z = 0, t_2 t_1 t_0 = 000\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">010</td>
+<td align="left">000, <span class="math">\(z = 0, t_2 t_1 t_0 = 010\)</span></td>
+<td align="left">011, <span class="math">\(z = 0, t_2 t_1 t_0 = 001\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">011</td>
+<td align="left">010, <span class="math">\(z = 0, t_2 t_1 t_0 = 001\)</span></td>
+<td align="left">100, <span class="math">\(z = 0, t_2 t_1 t_0 = 111\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">100</td>
+<td align="left">010, <span class="math">\(z = 1, t_2 t_1 t_0 = 110\)</span></td>
+<td align="left">001, <span class="math">\(z = 0, t_2 t_1 t_0 = 101\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Now we make 3 K-maps, one for each <span class="math">\(t_0\)</span>, <span class="math">\(t_1\)</span>, <span class="math">\(t_2\)</span>:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><span class="math">\(q_2 q_1\)</span>$q_0 x$</th>
+<th align="left">00</th>
+<th align="left">01</th>
+<th align="left">11</th>
+<th align="left">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>00</strong></td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>01</strong></td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>11</strong></td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left">x</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>10</strong></td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">x</td>
+<td align="left">x</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><span class="math">\(q_2 q_1\)</span>$q_0 x$</th>
+<th align="left">00</th>
+<th align="left">01</th>
+<th align="left">11</th>
+<th align="left">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>00</strong></td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>01</strong></td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>11</strong></td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left">x</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>10</strong></td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">x</td>
+<td align="left">x</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><span class="math">\(q_2 q_1\)</span>$q_0 x$</th>
+<th align="left">00</th>
+<th align="left">01</th>
+<th align="left">11</th>
+<th align="left">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>00</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>01</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>11</strong></td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left">x</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>10</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">x</td>
+<td align="left">x</td>
+</tr>
+</tbody>
+</table>
+<p>So <span class="math">\(t_2 = q_2 + q_2 + q_1 q_0 x, t_1 = q_1 \overline{q_0} \overline{x} + q_2 \overline{x} + q_1 q_0 x + \overline{q_2} \overline{q_1} q_0 \overline x, t_0 = \overline{q_1} x + q_0 \overline x + q_1 x\)</span>.</p>
+<p>We also need the output equations - a function that maps <span class="math">\(q_2 q_1 q_0\)</span> and <span class="math">\(x\)</span> to <span class="math">\(z\)</span>. Using a K-map, we get <span class="math">\(z = q_2\)</span>.</p>
+<p>Now we can construct the circuit. Basically, this is the same design as a counter, but now we have an input, and the output is a function of the flip-flop states:</p>
+<p>;wip: circuit diagram, counter with one additional input <span class="math">\(x\)</span> to the circuit, make sure to remember to add the reset pins.</p>
+<p>So the steps for synchronous design is drawing a state diagram, a state table, optionally reduce the state table, pick flip-flop type and number, assign flip-flop states to circuit states, find equations for the flip-flop inputs and the circuit outputs, then implement the circuit.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
