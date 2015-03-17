@@ -715,7 +715,7 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p>In real-world circuits, JK-flip-flops tend to result in the simplest logic for the inputs. Generally, most of the flip-flop inputs will simply be outputs, inverted outputs, or constants, which makes building these circuits very simple.</p>
 <h1 id="section-23">6/3/15</h1>
 <p>Synchronous circuits have their output dependent on the circuit inputs and the current flip-flop outputs - the <strong>current state</strong>. The inputs to the flip-flops are based on the <strong>next state equations</strong>, which depend on the primary inputs (circuit inputs) and the current state. The primary outputs of the circuit depends on the current state and optionally also the primary inputs (combinatorial part of the circuit).</p>
-<p>Synchronous circuits basically go through a sequence of states depending on the input. If the primary outputs of the circuit depend only on the current state (and not the primary inputs), the circuit is a <strong>Moore machine</strong>, otherwise a <strong>Mealy machine</strong>.</p>
+<p>Synchronous circuits basically go through a sequence of states depending on the input. If the primary outputs of the circuit depend only on the current state (and not the primary inputs), the circuit is a <strong>Moore machine</strong>, otherwise a <strong>Mealy machine</strong>. Moore machines are generally nicer because their outputs don't change when the clock is low and the inputs are changing, while Mealy machines have their output always dependent on the inputs, even when the clock is low.</p>
 <p>We can describe synchronous circuits using a <strong>state diagram</strong>. This is a diagram that shows all the possible states of a system, the possible transitions between states based on current inputs and state, and outputs. We can draw this as a directed graph with nodes labelled with the state name, like &quot;standing&quot; or &quot;sitting&quot;, and edges labelled with the inputs that would result in the transition that edge describes, like <span class="math">\(x = 0, y = 1\)</span>. The outputs of the circuit can be written inside the nodes (for a Moore machine, since we can't reference inputs here), or on the transitions, like <span class="math">\(x = 0, y = 1 / q_0 = 1, q_1 = 0\)</span> (for Mealy machines).</p>
 <p>Each state is represented in a circuit by a pattern of bits in the flip-flops. We would have a state in the diagram for every possible output of the flip-flops. Implicitly, if we are at a state that doesn't have a transition for the current inputs, we just stay on that state.</p>
 <p>A Mealy machine has its outputs depend on the inputs, so if the inputs are changing, the output is also changing. A Moore machine does not - the outputs change only on the clock edge. Mealy machines are nice because they generally need fewer states, but Moore machines are nice because our timing diagram is simpler and only changes on clock edges.</p>
@@ -736,6 +736,7 @@ S1011 &gt; 1 &gt; S1
 S1011: output 1
 output 0 otherwise</code></pre>
 <p>This is basically the same thing as a DFA that matches <span class="math">\(1011\)</span>, except the accepting state changes the output.</p>
+<p>Generally, we can also leave out transitions that just loop back into its state, so we only draw those that cause a state change. This makes the diagrams a little cleaner.</p>
 <p>Now we could potentially draw a state table:</p>
 <table>
 <thead>
@@ -773,7 +774,7 @@ output 0 otherwise</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Since we have 5 states, we will need at least 3 flip-flops, since they can represent up to 8 states. For each state, we need to assign a set of flip-flop values. For now, we will assign them directly as <span class="math">\(0, 0, 0\)</span> up to <span class="math">\(1, 0, 1\)</span>. However, different assignments could potentially make the circuit simpler.</p>
+<p>Since we have 5 states, we will need at least 3 flip-flops, since they can represent up to 8 states. For each state, we need to assign a set of flip-flop values - <strong>state assignment</strong>. For now, we will assign them directly as <span class="math">\(0, 0, 0\)</span> up to <span class="math">\(1, 0, 1\)</span>. However, different assignments could potentially make the circuit simpler.</p>
 <h1 id="section-25">10/3/15</h1>
 <p>To make a pattern recognizer state diagram, we basically first add the nodes for the pattern, add nodes for recognizing the pattern in particular, then connect all the missing edges.</p>
 <p>Sometimes we also do state reduction, which is the process of trying to cut out unnecessary states in order to make the circuit simpler. In this example, state reduction is not possible, since 5 is minimal.</p>
@@ -944,6 +945,51 @@ output 0 otherwise</code></pre>
 <p>Now we can construct the circuit. Basically, this is the same design as a counter, but now we have an input, and the output is a function of the flip-flop states:</p>
 <p>;wip: circuit diagram, counter with one additional input <span class="math">\(x\)</span> to the circuit, make sure to remember to add the reset pins.</p>
 <p>So the steps for synchronous design is drawing a state diagram, a state table, optionally reduce the state table, pick flip-flop type and number, assign flip-flop states to circuit states, find equations for the flip-flop inputs and the circuit outputs, then implement the circuit.</p>
+<h1 id="section-26">13/3/15</h1>
+<h2 id="sequential-circuit-analysis">Sequential Circuit Analysis</h2>
+<p>This is the opposite of design - given a circuit, derive a state diagram.</p>
+<p>First, we need to identify the flip-flops. The number of flip-flops determines the largest number of possible states, since they are the only memory elements in the circuit. Not all of the flip-flop states are necessarily used, but we do need to know the upper bound on the number of states. We also label the flip-flops at this point.</p>
+<p>Then, we derive the logic equations for the flip-flop inputs (to get the state transitions) and the circuit outputs (to get the circuit output values), both in terms of the circuit inputs and circuit outputs.</p>
+<p>Now we will create something like a state table, with the columns being current state, flip-flop inputs (one for each flip-flop), next state, and flip-flop outputs. First, we fill in the current state column with every possible combination of values for the flip-flops. For a 2 flip-flop circuit, we use <span class="math">\(00, 01, 10, 11\)</span>.</p>
+<p>Each column is filled out with their values given the current state in that row and every combination of inputs - so if there are 3 inputs, we would have 8 values per cell.</p>
+<p>Now we basically have a state table, by taking only the current state, next state, and output columns. We can directly draw a state diagram from this, since it is basically a DFA description. Each row corresponds to a state, and each value of the next state corresponds to a transition given that combination of inputs.</p>
+<p>When we have <span class="math">\(n\)</span> states, we must have at least <span class="math">\(\ceil{\log_2 n}\)</span> flip-flops to represent those states.</p>
+<p><strong>State assignment</strong> is the process of assigning binary patterns to symbolic states, like in a state diagram. The binary values we give to each state, and therefore which values in the flip-flops represent which states, could potentially make the logic for the flip-flop inputs simpler or more complex, depending on how the Boolean algebra works out. This also affects the number of flip-flops we need, when we do state reduction.</p>
+<p>There is no known efficient way of finding an optimal assignment of binary values for the states, or any technique better than just trying every possible state assignment (they are the <span class="math">\(n!\)</span> permutations of binary values from 0 to <span class="math">\(n\)</span> where <span class="math">\(n\)</span> is the number of states).</p>
+<p>The way we have been using so far, where we number the states and map states to their binary numeric values, is known as <strong>binary encoding</strong>.</p>
+<p>If we have a Moore machine, it might be beneficial to just use the desired circuit output values as state values - the circuit outputs themselved are the states. This is called <strong>output encoding</strong>. If the outputs aren't unique, we can just add another flip-flop and use it just to differentiate the non-unique values (for example, if we have two states that both output 0000, then we might add another flip-flop that is 0 for one and 1 for another, so their assignment is unique again). This makes the output logic very simple, because we can just output the flip-flop values.</p>
+<h1 id="section-27">16/3/15</h1>
+<p><strong>One hot encoding</strong> has us use one flip-flop per state, where only one flip-flop is on at a time, and the one that is oncorresonds to the state we are in. For example, for 6 states we need 6 flip-flops, with state assignments like <span class="math">\(000001, 000010, 000100, 001000, 010000, 100000\)</span></p>
+<p>This, obviously, uses a lot of flip-flops, but makes the flip-flop input and circuit output logic very simple. As a result, these circuits tend to be faster since the inputs and outputs are smaller.</p>
+<p>This actually makes it possible to do input and output logic directly from a state diagram - a state becomes 1 if any of the flip-flops that represent stares that transition to it are 1. For example, if there is a transition from 010 to 100 when <span class="math">\(x = 0\)</span>, then the value of <span class="math">\(q_2\)</span> has the term <span class="math">\(q_2 = q_1 \overline{x}\)</span>. By constructing these terms for every transition to that state and adding them together, we can directly get the input equations.</p>
+<p>To get the output equations, we just do an OR for each bit, where the inputs are the states for which that bit o the output is on. For example, if an output is on whenever we are in state 1, 4, and 6, we simply use an OR connected to those states.</p>
+<p>So the common techniques for state assignment are binary encoding (which tends to reduce the number of flip-flops), output encoding (which tends to simplify output logic), and one hot encoding (which tends to reduce input and output logic at the expense of flip-flop count).</p>
+<p><strong>State reduction</strong> is the process of reducing the number of states, in order to simplify logic and flip-flop count. Basically, we have a state table with redundancy, and we want to remove the redundancy.</p>
+<p>Two states are <strong>equivalent</strong> if all of the following are true:</p>
+<ul>
+<li>For all possible inputs, both states have the same circuit outputs - the output equations at that state are equal.</li>
+<li>For all possible inputs, both states transition to the same next state, or to equivalent states. It is possible that there are two independent state diagrams that are equivalent, but don't share any states. If there is a loop, then both loops are equivalent to each other.</li>
+</ul>
+<p>If these conditions are met, we can combine the states together - all transitions that go to one of the states can simply go to the other.</p>
+<p>Given a state table, we can draw an <strong>implication chart</strong>. Given the following table:</p>
+<pre><code>S0 | S3 S2 | 1 1
+S1 | S0 S4 | 0 0
+S2 | S3 S0 | 1 1
+S3 | S1 S3 | 0 0
+S4 | S2 S1 | 0 0</code></pre>
+<p>We can draw the following implication chart:</p>
+<pre><code>S4  X
+S3  ?  X
+S2  X  ?  X
+S1  X  ?  X  ?
+   S0 S1 S2 S3</code></pre>
+<p>This is a matrix where we fill in <code>X</code> if the state in the X axis is definitely not equivalent to the state in the Y axis, generally by property 1 - the outputs differ. Now we check property 2, by writing in the pairs of states that, all together, are necessary and sufficient to say the state on the X axis is equivalent to the one on the Y axis. By repeating this process, we eventually manage to get exactly those states that are equivalent:</p>
+<pre><code>S4  X
+S3  *  X
+S2  X  X  X
+S1  X  *  X  X
+   S0 S1 S2 S3</code></pre>
+<p>State pairs that are definitely equivalent are marked with a <code>*</code>, so S0 and S3 are equivalent, and S1 and S4 are equivalent. A <strong>merger diagram</strong> is a graph where states are vertices and edges show equivalence between states. THe number of components in the graph are the number of states we need.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
