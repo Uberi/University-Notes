@@ -1046,6 +1046,101 @@ void print(Tree &amp;t) {
 <p>Note that the <code>+</code> operator is operloaded: we can add two integers, or an integer pointer and an integer: <span class="math">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 + Expr2}: \text{int}}\)</span>, <span class="math">\(\frac{\text{Expr1}: \text{int*}, \text{Expr2}: \text{int}}{\text{Expr1 + Expr2}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 * Expr2}: \text{int*}}\)</span>. Similarly, we can subtract two integers, an integer pointer and an integer (which is an integer pointer), or two integer pointers (which is the number of integer slots between them as an integer).</p>
 <p>For if statements and while loops we would need a Boolean-like type, although the grammar ensures already that the conditions are comparison expressions, so if the operands of the comparison operator are well-typed, then so is the if statement or while loop. These statements do not have a type, but still need to be considered in type checking. <strong>Well-typed</strong> means that an expression has a type: <span class="math">\(\frac{E: \Tau}{E \text{ is well-typed}}\)</span>. For example, <span class="math">\(\frac{\text{Expr}: \text{int*}}{\text{delete []Expr} \text{ is well-typed}}\)</span> and <span class="math">\(\frac{\text{Expr1}: \Tau, \text{Expr2}: \Tau}{\text{Expr1 == Expr2} \text{ is well-typed}}\)</span>.</p>
 <p>Also, for statements we have <span class="math">\(\frac{\text{Statement1} \text{is well-typed}, \text{Statement2} \text{ is well-typed}}{\text{Statement1; Statement2} \text{ is well-typed}}\)</span>, <span class="math">\(\frac{\text{ID} \in \text{\text{Expr}: \Tau}{\Tau \text{ ID = Expr} \text{ is well-typed}}\)</span>. A function is well-typed if its declarations and statements are well-typed and its return value is an integer. A function call is of type integer as long as all its parameters have a type, and match the signature of the function: <span class="math">\(\frac{E_1: \Tau_1, \ldots, E_n: \Tau_n, \tup{f, \tup{T_1, \ldots, T_n} \in \text{declarations}}}{f(E_1, \ldots, E_n): \text{int}}\)</span>.</p>
+<h1 id="section-18">17/3/15</h1>
+<p>So far we've done lexical analyis on code to get tokens, parsing on tokens to get a parse tree, and semantic analysis to get another parse tree and symbol table. The only remaining step is to generate the assembly code from the parse tree and symbol table.</p>
+<h2 id="code-generation">Code Generation</h2>
+<p>There are infinitely many possible MIPS programs we can generate from the a given WLP4 program. We want to choose the ones that are correct, relatively simple to generate, efficient to compile, efficient to run, and possibly also the shortest possible code.</p>
+<p>Consider the code <code>int wain(int a, int b) { return a; }</code>. We will introduce the convention that the parameters of <code>wain</code> are stored in registers 1 and 2, and the return value is stored in register 3. With that, this code becomes <code>add $3, $1, $0</code> and then <code>jr $31</code> in MIPS.</p>
+<p>Whenever we use a variable in the program, we need to actually use a register in the MIPS machine. In other words, we need to assign variables to registers for each procedure, and if there aren't enough registers available, we need to assign them to memory locations and load or store them as needed. We might add a field to the symbol table that stores the location of each variable, as a register or memory addresses, so the table would store names, types, and locations.</p>
+<p>In this course, it is simplest to just store all variables (local declarations and parameters) on the stack, though rather inefficient. The above program would translate to:</p>
+<pre><code>sw $1, -4($30) ; parameter a
+sw $2, -8($30) ; parameter b
+lis $4
+.word 8
+sub $30, $30, $4 ; push
+lw $3, 4($30)
+add $30, $30, $4 ; pop
+jr $31</code></pre>
+<p>Note that we will eventually store the temporary results of evaluating expressions onto the stack, and possibly other values. If we do that, the correct offset for each variable access (like the <code>lw $3, 4($30)</code> above) would change whenever we pushed or popped, which means we would need to do a lot of calculations to get the offsets right at every line. What we could do instead is just use a register to store the original stack pointer value, so we can use negative offsets.</p>
+<p>We now introduce the convention that register 4 will always contain 4, and register 29 will always contain the a pointer to the bottom of the stack frame - the <strong>frame pointer</strong>.</p>
+<pre><code>lis $4
+.word 4
+add $29, $30, $0 ; store the stack pointer value
+sw $1, -4($30) ; parameter `a`
+sub $30, $30, $4 ; push
+sw $2, -4($30) ; parameter `b`
+sub $30, $30, $4 ; push
+lw $3, -4($29) ; within the body here, `a` is always at offset 0, `b` is always at offset 4, relative to $29
+add $30, $30, $4 ; pop
+add $30, $30, $4 ; pop
+; if this was a procedure, we would restore the register values here, including $29
+jr $31</code></pre>
+<p>We can evaluate expressions like <code>1 + (2 * 3)</code> in the same way we evaluate RPN expressions - for each token, if it is an operand then we push it onto the stack, and if it is an operator we take a number of operands off the stack, evaluate, then push the result back onto the stack. By convention, we will use register 5 and 6 for the operands, and 3 for the results (at the end, the return statement translates into code that writes the return value to register 3, so we can use it until then).</p>
+<p>The previous expression therefore results in the following code on the top of the stack:</p>
+<pre><code>lis $5
+.word 1
+sw $5, -4($30)
+sub $30, $30, $4 ; push 1
+
+lis $5
+.word 2
+sw $5, -4($30)
+sub $30, $30, $4 ; push 2
+
+lis $5
+.word 3
+sw $5, -4($30)
+sub $30, $30, $4 ; push 3
+
+lw $5, -4($30)
+add $30, $30, $4 ; pop left multiplicand
+lw $6, -4($30)
+add $30, $30, $4 ; pop right multiplicand
+mult $5, $6
+mflo $3
+sw $3, -4($30)
+sub $30, $30, $4 ; push multiplication result
+
+lw $5, -4($30)
+add $30, $30, $4 ; pop left addend
+lw $6, -4($30)
+add $30, $30, $4 ; pop right addend
+add $3, $5, $6
+sw $3, -4($30)
+sub $30, $30, $4 ; push addition result
+
+; the expression result is now at the top of the stack</code></pre>
+<p>Note that register 3 always contains the latest result. Therefore, we can avoid some unnecessary pushes and pops, and use only one working register:</p>
+<pre><code>lis $5
+.word 1
+sw $5, -4($30)
+sub $30, $30, $4 ; push 1
+; still need push here, since next stack entry has arity 0
+
+lis $5
+.word 2
+sw $5, -4($30)
+sub $30, $30, $4 ; push 2
+; still need push here, since next stack entry has arity 0
+
+lis $5
+.word 3
+; no push
+
+; no pop
+lw $5, -4($30)
+add $30, $30, $4 ; pop left multiplicand
+mult $5, $3
+mflo $3
+; no push
+
+; no pop
+lw $5, -4($30)
+add $30, $30, $5 ; pop left addend
+add $3, $5, $3
+
+; the expression result is now in $3</code></pre>
+<p>The <code>println</code> statement can be implemented using the <code>print</code> procedure done in assignment 2 - by generating code that calls this procedure, and making sure the procedure is included in the output somewhere or is linked into the final result.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
