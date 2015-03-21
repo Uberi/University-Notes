@@ -971,8 +971,9 @@ output 0 otherwise</code></pre>
 <li>For all possible inputs, both states transition to the same next state, or to equivalent states. It is possible that there are two independent state diagrams that are equivalent, but don't share any states. If there is a loop, then both loops are equivalent to each other.</li>
 </ul>
 <p>If these conditions are met, we can combine the states together - all transitions that go to one of the states can simply go to the other.</p>
-<p>Given a state table, we can draw an <strong>implication chart</strong>. Given the following table:</p>
-<pre><code>S0 | S3 S2 | 1 1
+<p>Given a state table, we can draw an <strong>implication chart</strong>. If we have the following table:</p>
+<pre><code>state | next when x = 0, next when x = 1 | output when x = 0, output when x = 0
+S0 | S3 S2 | 1 1
 S1 | S0 S4 | 0 0
 S2 | S3 S0 | 1 1
 S3 | S1 S3 | 0 0
@@ -983,13 +984,91 @@ S3  ?  X
 S2  X  ?  X
 S1  X  ?  X  ?
    S0 S1 S2 S3</code></pre>
-<p>This is a matrix where we fill in <code>X</code> if the state in the X axis is definitely not equivalent to the state in the Y axis, generally by property 1 - the outputs differ. Now we check property 2, by writing in the pairs of states that, all together, are necessary and sufficient to say the state on the X axis is equivalent to the one on the Y axis. By repeating this process, we eventually manage to get exactly those states that are equivalent:</p>
+<p>This is a matrix where we fill in <code>X</code> if the state in the X axis is definitely not equivalent to the state in the Y axis, generally by property 1 - the outputs differ. Now we check property 2, by writing in the pairs of states that, all together, are necessary and sufficient to say the state on the X axis is equivalent to the one on the Y axis.</p>
+<p>If we have don't cares as next transitions, that means that there is some transition for that state and input value, but we don't care what it is. Suppose state A's next input results in state W, state B results in don't care, and state C results in state X. We can group B with A if we pretend that the don't care value is a W, or we can group B with C if we pretend that the don't care value is an X, but we can't group all of them together since the don't care cannot be both W and X. In other words, for don't care values we pretend that it is an actual state in the state table, but we can choose which state that is as needed.</p>
+<p>By repeating this process, we eventually manage to get exactly those states that are equivalent:</p>
 <pre><code>S4  X
 S3  *  X
 S2  X  X  X
 S1  X  *  X  X
    S0 S1 S2 S3</code></pre>
-<p>State pairs that are definitely equivalent are marked with a <code>*</code>, so S0 and S3 are equivalent, and S1 and S4 are equivalent. A <strong>merger diagram</strong> is a graph where states are vertices and edges show equivalence between states. THe number of components in the graph are the number of states we need.</p>
+<p>State pairs that are definitely equivalent are marked with a <code>*</code>, so S0 and S3 are equivalent, and S1 and S4 are equivalent. A <strong>merger diagram</strong> is a graph where states are vertices and edges show equivalence between states. The number of components in the graph are the number of final states we need, and each component is a state and is a fully connected set of states.</p>
+<h1 id="section-28">18/3/15</h1>
+<p>The merger diagram gives us sets of states that are equivalent to each other. For example, the merger diagram from the implication chart above gives the sets <span class="math">\(\set{S0, S3}, \set{S1, S4}\)</span>.</p>
+<p>The equivalent states can now be merged. For example, if S1, S3, and S5 are equivalent, then we can replace them both with a new state A that has the same output and transitions as all of these states, and all transitions that went to them before now transition to A instead.</p>
+<p>;wip: do this example and get <span class="math">\(\set{a, c, d}, \set{b, e, f}\)</span> as the equivalent sets:</p>
+<pre><code>state | next when xy = 00, 01, 11, 10 | output
+a | c a b - | 0
+b | - a b e | 1
+c | c a - d | 0
+d | c - b d | 0
+e | f - b e | 1
+f | f - - e | 1</code></pre>
+<p><strong>ASM charts</strong> show the same thing as state diagrams, but in a flow chart form. They are simply flow charts with the following elements:</p>
+<ul>
+<li><strong>State boxes</strong> represents a state with only 1 possible transition, like state bubbles in a state diagram. These are stateful.</li>
+<li>This is drawn as a rectangle labelled with the state name (and for Moore machines, the possible outputs), and has an entry and exit arc.</li>
+<li><strong>Conditional output boxes</strong> represents an output on Mealy machine, the output to give upon a transition - this oval is drawn between two states. These are stateless.</li>
+<li>This is drawn as an oval labelled with the output value, and has an entry and exit arc.</li>
+<li><strong>Decision boxes</strong> represents multiple possible transitions, based on inputs. These are stateless.</li>
+<li>This is drawn as a diamond labelled with the state name (and for Moore machines, the possible outputs), and has an entry arc and multiple exit arcs, each labelled with the input values that results in that arc being taken.</li>
+<li>For example, a circuit with 3 inputs <span class="math">\(x, y, z\)</span> might have a decision box with an exit arc labelled <span class="math">\(x = 1\)</span>, which would represent 4 edges in the state diagram - <span class="math">\(xyz = 100, 101, 110, 111\)</span>.</li>
+</ul>
+<p>In ASM charts, we only write outputs if they are 1, and just avoid writing them otherwise. ASM charts are simply another way to draw a state diagram, but in a way that looks more like an algorithm.</p>
+<p>If we have a state diagram, and we are at a state that doesn't have a transition arrow for the current inputs, then we assume that we stay at that state. In other words, missing transitions are assumed to loop back into the current state.</p>
+<h1 id="section-29">20/3/15</h1>
+<p>An interesting thing about one-hot encoding is that, given an ASM chart, we can <strong>translate it directly into a circuit</strong>, without all the state tables and K-maps.</p>
+<p>State boxes are just a D-flip-flops, with the entry arc being D and the exit arc being Q.</p>
+<p>Decision boxes are just demultiplexers, with the select line being the index of exit arc that was matched, the entry arc as data input, and the exit arcs as outputs. If we are deciding based on only one bit, this is equivalent to the circuit <span class="math">\(\text{exit 0} = \overline{D} \wedge \text{variable is true}, \text{exit 1} = D \wedge \text{variable is true}\)</span>, where the entry arc is <span class="math">\(D\)</span>, the arc labelled 0 is exit 0, and the arc labelled 1 is exit 1.</p>
+<p>If more than one arc goes into a box, they are all OR'd together and then this is passed in as a single input.</p>
+<p>Conditional output boxes are not directly translatable, but can still easily be drawn into the circuit. Basically, we figure out an expression for when that output is true with respect to the states and the inputs, and then add combinationial logic to the circuit that implements the output.</p>
+<h2 id="asynchronous-sequential-circuits">Asynchronous Sequential Circuits</h2>
+<p><strong>Asynchronous sequential circuits</strong> are those with memory, but no clock. These are characterized by having combinational feedback paths and tend to use latches - the feedback paths don't have to wait for the next clock edge to change the inputs. Since they are not clocked, asynchronous sequential circuits can be made to work as fast as their logic allows.</p>
+<p>In general, an asynchronous sequential circuit is a circuit with an <span class="math">\(n\)</span>-bit input, an <span class="math">\(m\)</span>-bit output, and also a <span class="math">\(k\)</span>-bit output that feeds back into another <span class="math">\(k\)</span>-bit input. This feedback loop also has a <strong>hypothetical delay</strong> <span class="math">\(\Delta\)</span> on it. Within the circuit, there is only combinatorial logic.</p>
+<p>;wip: diagram</p>
+<p>This cannot be analyzed using the techniques we used for purely combinatorial or clocked circuits. However, we observe that these circuits have memory, and these are states that we can analyze, even if not clocked.</p>
+<p>In fact, the <span class="math">\(k\)</span>-bit output can be used as the next state (the <strong>excitation variables</strong> <span class="math">\(Y\)</span>). The <span class="math">\(k\)</span>-bit input can be used as the current state (the <strong>secondary variables</strong> <span class="math">\(y\)</span>). Since <span class="math">\(Y\)</span> is connected to <span class="math">\(y\)</span> by a wire with a hypothetical delay, <span class="math">\(y\)</span> is just a time delayed version of <span class="math">\(Y\)</span>.</p>
+<p>For a given set of circuit inputs, a circuit is <strong>stable</strong> if and only if <span class="math">\(Y = y\)</span>. Otherwise, it is <strong>unstable</strong> and has changing <span class="math">\(Y\)</span> values.</p>
+<p>For example, <span class="math">\(x = \overline{xy}\)</span> is an asynchronous sequential circuit that is stable when <span class="math">\(y = 0\)</span> and unstable when <span class="math">\(y = 1\)</span>.</p>
+<p>Generally, we want circuits to go from stable state to stable state in response to inputs. It is often easier to design circuits if we can assume only one input will change at a time (the <strong>fundamental mode assumption</strong>, where the circuit operates in fundamental mode).</p>
+<p>Consider the asynchronous sequential circuit <span class="math">\(Z = \overline{Y_1} Y_2, Y_1 = x y_1 + \overline{X} Y_2, Y_2 = \overline{X} y_2 + X \overline{y_1}\)</span>.</p>
+<p>Note that in the circuit, only <span class="math">\(Y_1, Y_2\)</span> feed back on themselves - these are the feedback lines (the variables that appear on the right side of the formulas that also appear on the left).</p>
+<p>To analyze this, we hypothetically cut these lines, so <span class="math">\(Y_1, Y_2\)</span> are now outputs, and <span class="math">\(y_1, y_2\)</span> are now inputs. This is basically the process in which we insert the hypothetical delay on the feedback loop, in order to separate the input from the output. Even though they are connected by wire, <span class="math">\(y_1\)</span> is distinct from <span class="math">\(Y_1\)</span> in that there is a time delay in the signal at <span class="math">\(Y_1\)</span> propagating to <span class="math">\(y_1\)</span>.</p>
+<p>Now we have <span class="math">\(Z = Y_2 \overline{Y_1}, Y_1 = x y_1 + \overline{X} Y_2, Y_2 = \overline{X} y_2 + X \overline{y_1}\)</span>, where <span class="math">\(y_1, y_2\)</span> become <span class="math">\(Y_1, Y_2\)</span> after a short time.</p>
+<p>Clearly, we can now use <span class="math">\((y_1, y_2)\)</span> as the current state, and <span class="math">\((Y_1, Y_2)\)</span> as the next state. This allows us to analyze the circuit using standard sequential circuit analysis.</p>
+<p>First, we can draw a <strong>transition table</strong>. This is the same thing as a state table, but for asynchronous circuits:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">current state <span class="math">\(y_2 y_1\)</span></th>
+<th align="left">next state when <span class="math">\(X = 0, X = 1\)</span></th>
+<th align="left"><span class="math">\(Z\)</span> when <span class="math">\(X = 0, X = 1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">00</td>
+<td align="left">00, 10</td>
+<td align="left">0, 1</td>
+</tr>
+<tr class="even">
+<td align="left">01</td>
+<td align="left">00, 01</td>
+<td align="left">0, 0</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="left">11, 10</td>
+<td align="left">0, 1</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="left">11, 01</td>
+<td align="left">0, 0</td>
+</tr>
+</tbody>
+</table>
+<p>Note that whenever the next state is equal to the input state, the circuit is stable, and whenever it is not, there is a change of state. As a result, the circuit is stable when <span class="math">\(x = 0\)</span> and the current state is 00, 01, or 11, and when <span class="math">\(x = 1\)</span> and the current state is 10.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

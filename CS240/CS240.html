@@ -610,12 +610,16 @@ abac &gt; accept
 # epsilon transitions to the failure states
 a &gt; &gt; start
 ab &gt; &gt; start
-aba &gt; &gt; a</code></pre>
+aba &gt; &gt; a
+
+# transitions from start to start for all non-matching first characters
+start &gt; b &gt; start
+start &gt; c &gt; start</code></pre>
 <p>This is the <strong>Knuth-Morris-Pratt algorithm</strong> (KMP) - using <span class="math">\(\epsilon\)</span>-NFAs to match strings.</p>
-<p>The idea is to describe the <span class="math">\(\epsilon\)</span>-NFA using a <strong>failure function</strong> <span class="math">\(\mathbb{T}(k)\)</span> - the state to go to given that we have seen <span class="math">\(P[0 \ldots k - 1]\)</span> in the text and the next character of <span class="math">\(T\)</span> is not <span class="math">\(P[k]\)</span>. We can represent the failure function using a table where the columns are <span class="math">\(k\)</span> values and the rows are the prefixes with lengths equal to those <span class="math">\(k\)</span> values and the corresponding values of <span class="math">\(\mathbb{T}(k)\)</span>.</p>
+<p>The idea is to describe the <span class="math">\(\epsilon\)</span>-NFA using a <strong>failure function</strong> <span class="math">\(\pi(k)\)</span> - the state to go to given that we have seen <span class="math">\(P[0 \ldots k - 1]\)</span> in the text and the next character of <span class="math">\(T\)</span> is not <span class="math">\(P[k]\)</span>. We can represent the failure function using a table where the columns are <span class="math">\(k\)</span> values and the rows are the prefixes with lengths equal to those <span class="math">\(k\)</span> values and the corresponding values of <span class="math">\(\pi(k)\)</span>.</p>
 <p>In code, we can represent each state by the length of the prefix it represents, where the start state is 0 and the state representing the prefix &quot;aba&quot; represents 3. This looks like the following:</p>
 <pre><code>def kmp(T, P):
-    compute the failure function $T(k): 1 \ldots m - 1 \to 0 \ldots m - 1$
+    compute the failure function $\pi(k): 1 \ldots m - 1 \to 0 \ldots m - 1$ as `failure_transition`
     state = 0
     i = 0
     while i &lt; len(T):
@@ -624,10 +628,53 @@ aba &gt; &gt; a</code></pre>
             i += 1 # move forward in text
             if state == len(P): return True
         else: # mismatch/backward transition
-            if state &gt; 0: state = T(state) # follow epsilon transition
+            if state &gt; 0: state = failure_transition[state] # follow epsilon transition
             else: i += 1 # stay at start state and move forward in text</code></pre>
 <p>Clearly, each run of the loop either does a forward transition, which consumes a character and therefore can happen at most <span class="math">\(n\)</span> times, or we do a backward transition, which is always followed by a forward transition (since the state we transition to must be able to consume the next character), and therefore can happen at most <span class="math">\(n\)</span> times. As a result, the loop can run at most <span class="math">\(O(n + n) = O(n)\)</span> times, and is therefore the algorithm's worst case time complexity.</p>
-<p>How do we compute the failure function?</p>
+<h1 id="section-19">19/3/15</h1>
+<p>The <span class="math">\(\epsilon\)</span>-NFA for the failure function has states for each character of the pattern, from 1 to the length of the pattern, and the start state is 0. Each state is therefore associated with an index, and the character at that index in the pattern. Each state is also associated with a prefix, which is all the characters of the pattern from the start of the pattern to the state's index. Each state has a transition to its next state by its character.</p>
+<p>If we are in state <span class="math">\(j\)</span>, then we have already matched <span class="math">\(P[0 \ldots j - 1]\)</span>. Formally, we are always in the state <span class="math">\(\max\left(\set{j \middle| P[0 \ldots j - 1] \text{ is a suffix of the text input read so far}}\right)\)</span>.</p>
+<p>The failure function, <span class="math">\(\pi(k) = j\)</span>, describes the epsilon transition at a state - the state we should hop back to if matching the next character failed to match. Since we hop backward, we have <span class="math">\(j &lt; k\)</span>.</p>
+<p>Clearly, this is the same as <span class="math">\(\max\left(\set{j \middle| j &lt; k, P[0 \ldots j - 1] \text{ is a suffix of } P[0 \ldots k - 1]}\right)\)</span> - the epsilon transition doesn't consume any characters. Since <span class="math">\(j &lt; k\)</span>, we can just say the failure function's value is <span class="math">\(\max\left(\set{j \middle| P[0 \ldots j - 1] \text{ is a suffix of } P[1 \ldots k - 1]}\right)\)</span>.</p>
+<p>In other words, the failure function goes to the <strong>rightmost state whose prefix is a proper suffix of the current state's prefix</strong> (a proper suffix is a suffix that is not equal to the string).</p>
+<p>When we step the <span class="math">\(\epsilon\)</span>-NFA on <span class="math">\(P[1 \ldots k - 1]\)</span>, the state it is in at the end is the rightmost state whose prefix is a proper suffix of the current state's prefix. This is a suffix because the <span class="math">\(\epsilon\)</span>-NFA would go back to a previous state if it wasn't, is a proper suffix because <span class="math">\(P[1 \ldots k - 1]\)</span> is shorter than <span class="math">\(P[0 \ldots k - 1]\)</span> (the current node's prefix), and is the longest prefix because the <span class="math">\(\epsilon\)</span>-NFA always matches characters whenever possible, avoiding <span class="math">\(\epsilon\)</span>-transitions unless there is no other option. Therefore, it satisfies all the conditions to be the value of the failure function at <span class="math">\(k\)</span>.</p>
+<p>Note that we don't yet know what the <span class="math">\(\epsilon\)</span>-transitions for the <span class="math">\(\epsilon\)</span>-NFA are yet. However, we do know that <span class="math">\(\pi(0)\)</span> is undefined, and <span class="math">\(\pi(1) = 0\)</span>. Given this, we can use strong induction to find the rest.</p>
+<p>That means that if we run the <span class="math">\(\epsilon\)</span>-NFA on <span class="math">\(P[1 \ldots m - 1]\)</span>, then right before we read the <span class="math">\(n\)</span>th character to step the NFA, the state of <span class="math">\(\epsilon\)</span>-NFA is the value of <span class="math">\(\pi(n + 1)\)</span>. Now we have everything we need to calculate a lookup table for <span class="math">\(\pi(k)\)</span>:</p>
+<pre><code>def calc_kmp_table(P):
+    table = []
+    table[0] = -1 # state 0 has no epsilon transition, so this is undefined
+    table[1] = 0 # state 1 always fails to the start state
+    input_position = 1 # start at the second character
+    current_state = 0
+    while input_position + 1 &lt; len(P): # `input_position + 1` is the state for which we are calculating the failure function at
+        if P[input_position] == P[current_state]: # continue prefix matching
+            table[input_position + 1] = current_state # store the rightmost state whose prefix is a proper suffix of the target state&#39;s prefix
+            input_position += 1 # move ahead in the input
+            current_state += 1 # move to the next state
+        elif current_state != 0: # only non-start states have epsilon transitions
+            current_state = table[current_state] # go back to current state&#39;s epsilon transition, which exists by inductive hypothesis
+        else: # at start state and prefix doesn&#39;t match
+            table[input_position + 1] = 0 # no prefixes, go back to start state
+            input_position += 1 # move ahead in the input, since input is an unnacceptable first character
+    return table</code></pre>
+<p>Clearly, this takes <span class="math">\(O(m)\)</span> time, by the same argument as the one for the matching routine. So KMP uses <span class="math">\(O(m)\)</span> time to compute the failure function, and <span class="math">\(O(n)\)</span> time to match the string, so takes <span class="math">\(O(m + n)\)</span> time overall. Note that it does not depend on the size of the alphabet. Theoretically speaking, KMP has the best time complexity, but in practice it is often slower than certain other algorithms with worse time complexities.</p>
+<p>The <strong>Boyer-Moore</strong> algorithm is basically the brute force algorithm plus a few tricks. The first is the <strong>looking glass heuristic</strong>: when we are comparing the pattern to the current part of the string by testing whether <span class="math">\(P[0 \ldots m - 1] = T[s \ldots s + m - 1]\)</span>, we compare from <span class="math">\(m - 1\)</span> to 0 (the characters are compared backward).</p>
+<p>Another trick is the <strong>character-jump heuristic</strong>: if we are checking a pattern and <span class="math">\(T[s + i] != P[i]\)</span>, then we find the character <span class="math">\(T[s + i]\)</span> in <span class="math">\(P\)</span> and shift the pattern over to that character. For example, if we want to match &quot;bacaca&quot; in &quot;bacabaaacaacaba&quot;, we try to compare using the looking-glass heuristic and notice that the second to last character &quot;b&quot; doesn't match the &quot;c&quot; in the pattern. Clearly, the next match cannot occur before we find another &quot;b&quot; for &quot;bacaca&quot; to match, so we shift over by 4 to start matching the pattern on &quot;baaacaacaba&quot;.</p>
+<p>Finally, there is the <strong>good-suffix heuristic</strong>: if we are checking a pattern and <span class="math">\(T[s + i] != P[i]\)</span>, then we shift by a value that matches <span class="math">\(P[i + 1 \ldots m - 1]\)</span>. The shift is the largest <span class="math">\(k\)</span> such that <span class="math">\(P[k + 1 \ldots m - 1 + (k - j)] = P[j + 1 \ldots m - 1]\)</span> and <span class="math">\(P[k] \ne P[j]\)</span>.</p>
+<p>The shifts in the above two heuristics only depend on the pattern itself. As a result, we can precompute these before we match any text input at all. The code looks something like the following:</p>
+<pre><code>def boyer_moore(T, P):
+    last = [-1] * len(P);  for i, c in enumerate(P): last[c] = i # calculate shifts for character-jump heuristic
+    suffix = compute_suffix_function(P) # good suffix heuristic (`suffix[j]` is the amount to shift by if we see $P[j + 1 \ldots m - 1]$, can be computed in $O(n^3)$)
+    i = m - 1;
+    while i &lt; n: # compare $T[i - (m - 1) \ldots i]$ with $P$
+        j = m - 1
+        while j &gt;= 0 and T[i] == P[j]: i, j = i - 1, j - 1
+        if j == -1: return True
+        i = i + m - 1 - min(suffix(j), last[T[i]])</code></pre>
+<p>Without the good suffix heuristic, the function is very simple to implement. However, it makes the runtime <span class="math">\(O(m + n + \abs{\Sigma})\)</span>. The basic idea behind Boyer-Moore is that it skips as much text as possible - some characters of the string aren't even processed at all. In practice, the algorithm skips around a quarter of characters in English text.</p>
+<p>The <strong>Rabin-Karp algorithm</strong> preprocesses the text rather than the pattern, though the preprocessing depends on the pattern. Basically, we need a hash function that takes <span class="math">\(O(1)\)</span> time given <span class="math">\(T[i \ldots i + (m - 1)]\)</span>, <span class="math">\(P\)</span>, and <span class="math">\(h(T[i - 1 \ldots i - 1 + (m - 1)])\)</span> - a hash function that can be computed in constant time using the previous result.</p>
+<p>The idea is to eliminate many substring comparisons using the hash function. The hash function can be computed at the same time as we are matching in the string.</p>
+<p>For example, assume we are using binary as the alphabet. For each substring of <span class="math">\(T\)</span> with length <span class="math">\(m\)</span>, we count the number of 1's, which can be done in <span class="math">\(O(n)\)</span> time overall and constant memory. Then, we only need to compare <span class="math">\(P\)</span> to those substrings that contain the same number of 1's as <span class="math">\(P\)</span> does.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
