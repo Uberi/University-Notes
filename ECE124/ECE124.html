@@ -1069,6 +1069,47 @@ f | f - - e | 1</code></pre>
 </tbody>
 </table>
 <p>Note that whenever the next state is equal to the input state, the circuit is stable, and whenever it is not, there is a change of state. As a result, the circuit is stable when <span class="math">\(x = 0\)</span> and the current state is 00, 01, or 11, and when <span class="math">\(x = 1\)</span> and the current state is 10.</p>
+<h1 id="section-30">24/3/15</h1>
+<p>;wip: missed this class due to sleep</p>
+<p>;wip: asynchronous circuit problems: hazards, races</p>
+<h1 id="section-31">25/3/15</h1>
+<p>A <strong>race</strong> is a potential problem in asynchronous circuit design. When an input changes, and in response requires two or more state variables to change, a race is possible. When two state variables change at once, they don't actually change exactly at once due to circuit timing, and one might change before the other.</p>
+<p>A <strong>non-critical race</strong> is when the state machine ends up in the same state after both variables changed, regardless of which state variable changes first. If this is the case, we don't really need to care about the race, since the result will still be correct.</p>
+<p>A <strong>critical race</strong> is when the state machine could end up in different states depending on which input changes first. There is a &quot;competition&quot; between the state variables to change the next state outputs first. This is a bad thing to have and should be avoided if possible. It might not happen in the real circuit if the delays are right, but in theory is still incorrect.</p>
+<p>So in the flow table or state diagram, we have to trace the logic to make sure that the state machine will go to the same stable state for every possible combination of state variable changes.</p>
+<p>If we have the following state machine:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">current state <span class="math">\(y_2 y_1\)</span></th>
+<th align="left">next state when <span class="math">\(x = 0, x = 1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">00</td>
+<td align="left">00, 11</td>
+</tr>
+<tr class="even">
+<td align="left">01</td>
+<td align="left">00, 01</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="left">00, 11</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="left">00, 01</td>
+</tr>
+</tbody>
+</table>
+<p>Assuming we start at state 00 and <span class="math">\(x = 0\)</span>, if we transition to <span class="math">\(x = 1\)</span>, we change both <span class="math">\(y_2, y_1\)</span>. Therefore, it is possible that first we will go to <span class="math">\(01, 10\)</span> in addition to the one we'd expect, 11, because each variable could change after different delays.</p>
+<p>If we go to 11 first, then the circuit will settle down into 01 as a stable state. If we go to 01 first, then the circuit will also go to 01. If we go to 10, we will still go to 01. Since we go to 01 regardless of which possible state we might go to first, we have a non-critical race.</p>
+<p>Races are introduced during state assignment - if we manage to assign states such that every input transition causes only one state variable to change, then we will never have races (clearly, one-hot encoding will always do this). We can do this by taking all the state values, like <span class="math">\(00, 01, 10, 11\)</span>, and drawing a graph <span class="math">\(G\)</span> where they are the nodes, and there are bidirectional edges between those nodes that differ by only 1 bit. Then, we try to find the state diagram graph as a subgraph of <span class="math">\(G\)</span>. This is often done by trial and error.</p>
+<p>Basically, in state assignment we can avoid races entirely by having the next states of each state differ from that state by only one bit. If we do this, <strong>we guarantee that there is only 1 state variable changing at a time, so races are impossible</strong>.</p>
+<p>A <strong>cycle</strong> is when there is a set of unstable states that cycle between each other. For example, a JK-latch set to toggle is in a cycle, and will keep oscillating between the states as long as the inputs allow for the cycle to exist.</p>
+<p>For example, if we have the following transitions: <span class="math">\(a \to b, a \to c, b \to a, b \to d, c \to b, c \to d, d \to a, d \to c\)</span>, we can use a cube-like graph for the state values <span class="math">\(000, \ldots, 111\)</span>. Although we would get a race by having some states transition to others, <strong>we can add extra unstable states that transition to another state, and then transition to those unstable states instead</strong>. For example, if we wanted to get from 00 to 11, and the state value 01 is unused, we can make 01 an unstable state that transitions to 11, and then just transition to 01 instead of 11 - now, we have two transitions, but each one only changes one bit. Using trial and error, we might get a state assignment <span class="math">\(a = 000, b = 001, c = 010, d = 110, t_1 = 100, t_2 = 011, t_3 = 101, t_4 = 111\)</span> using the additional transitions <span class="math">\(t_1 \to a, t_2 \to b, t_3 \to t_4, t_4 \to d\)</span>.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
