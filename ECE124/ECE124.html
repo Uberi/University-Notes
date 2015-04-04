@@ -1070,8 +1070,49 @@ f | f - - e | 1</code></pre>
 </table>
 <p>Note that whenever the next state is equal to the input state, the circuit is stable, and whenever it is not, there is a change of state. As a result, the circuit is stable when <span class="math">\(x = 0\)</span> and the current state is 00, 01, or 11, and when <span class="math">\(x = 1\)</span> and the current state is 10.</p>
 <h1 id="section-30">24/3/15</h1>
-<p>;wip: missed this class due to sleep</p>
-<p>;wip: asynchronous circuit problems: hazards, races</p>
+<p>A <strong>hazard/glitch</strong> is a momentary unwanted transient output in the circuit, caused by different paths in a combinatorial circuit having different propagationm delays.</p>
+<p>For example, suppose we have a signal directly connected to an XOR gate's input, and also connected to the other gate's other input via two NOT gates in series. When we turn on the signal, even though the gate theoretically gets 1 on both inputs at the same time, the propagation delay of the NOT gates means that one of them will turn on before the other. Therefore, the XOR gate will momentarily turn on even though the same signal was given as input.</p>
+<p>Hazards are very important in asynchronous circuit design, because they can potentially cause unwanted transitions to stable states when the transient values represent stable states.</p>
+<p>A <strong>static-0</strong> hazard is a situation in which the output should stay at 0, but temporarily switches to 1 in the circuit. A <strong>static-1</strong> hazard is a situation in which the output should stay at 1, but temporarily switches to 0 in the circuit.</p>
+<p>A <strong>dynamic hazard</strong> is when the output should switch values, like from 0 to 1 or 1 to 0, but flips between the values, possibly multiple times.</p>
+<p>To analyze hazards for a particular circuit for a particular variable, we need to draw a timing diagram with graphs for the logic level at each node in the circuit, and basically do a timing simulation of the circuit for when that variable changes. Hazards show up in the output as blips where there should be smooth, clean transitions.</p>
+<p>When we have a 2-level sum-of-products circuit, notice that <strong>all the hazards are static-1 hazards</strong>, and happen when we &quot;switch between terms&quot; - static-0 hazards can't happen because no AND gates will temporarily turn on, and dynamic hazards cannot happen because only 1 AND gate is on at a time.</p>
+<p>Basically, when moving from one AND gate to the next, it is possible for the one we are leaving to become 0 before the new one becomes 1. On the K-map, this is when we have two rectangles that don't overlap:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><span class="math">\(q_2\)</span>$q_1 q_0$</th>
+<th align="left">00</th>
+<th align="left">01</th>
+<th align="left">11</th>
+<th align="left">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>0</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>1</strong></td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table>
+<p>If we have only the two 2-box rectangles, then there is a hazard when <span class="math">\(q_1\)</span> switches, since we are switching between terms. To fix this, we can add a third rectangle that includes 101 and 111, so the transitions between 101 and 111 are fully covered by another AND gate while we switch between them - this prevents the OR gate from going low.</p>
+<p>If we remove all these static-1 hazards using this redundant term technique, we can guarantee that the circuit is entirely hazard-free. For products of sums, it is possible to get static-0 hazards, when &quot;switching between factors&quot;, and likewise we can fix these using redundant factors.</p>
+<p>For asynchronous circuits, we just treat the next state as one of the inputs, and make sure that there are redundant terms that cover transitions between 1 values.</p>
+<p>This allows us to make hazard-free 2-level combinatorial and asynchronous circuits, but multi-level circuits are more difficult. One solution is to convert the multi-level circuit into a 2-level circuit, but this could potentially make the circuit much larger.</p>
+<p>Another solution is to use SR latches - since we have the hold state, we can have transient 0 values (or 1 values for SR NAND latches) appearing without any issues, since that just causes the output to hold.</p>
+<p>To use SR latches, we just determine equations for when the output should be on (the set line) and when it should be off (the reset line), using techniques like drawing a K-map. When we do this, any static-1 hazards are eliminated, since the latch will just hold its last value if this occurs. However, this adds additional complexity and results in 2-level circuits anyways.</p>
+<p>In flow/transition tables, the output value for some states may be unspecified - generally, for unstable states. Earlier we treated these as don't cares for calculating the output combinatorial equations, but in our state machines we will be passing through these states, and we need to make sure we don't have any hazards when we do so. For example, an unstable state that outputs 1 in between stable states that output 0 is a static-0 hazard.</p>
+<p>Therefore, to avoid hazards, whenever we have a transition between stable states that goes through an unstable state, we need to make sure we aren't introducing a hazard. If we transition from a state outputting 0 to a state outputting 0, then any unstable states in between must also output 0. If transitioning between one that outputs 1 to a one that outputs 1, then any unstable states in between must also output 1. Otherwise, the source and target state output different values, so the unstable states in between simply need to have the same value (or values that don't cause hazards when transitioning through them).</p>
 <h1 id="section-31">25/3/15</h1>
 <p>A <strong>race</strong> is a potential problem in asynchronous circuit design. When an input changes, and in response requires two or more state variables to change, a race is possible. When two state variables change at once, they don't actually change exactly at once due to circuit timing, and one might change before the other.</p>
 <p>A <strong>non-critical race</strong> is when the state machine ends up in the same state after both variables changed, regardless of which state variable changes first. If this is the case, we don't really need to care about the race, since the result will still be correct.</p>
