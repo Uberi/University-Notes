@@ -1,4 +1,14 @@
 *.pdf
 *.ppt
 *.pptx
+*.odt
+*.docx
 Assignment */
+Lab */
+CS240/a*/
+CS241/a*/
+PD1/
+PD2/
+WKRPT*/
+Assignment Template.tex
+README.html

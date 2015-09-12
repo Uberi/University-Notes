@@ -25,7 +25,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
     <span class="divider"></span>
-    <li><a href="/Résumé.pdf" class="page">résumé</a></li>
+    <li><a href="/resume.pdf" class="page">résumé</a></li>
     <span class="divider"></span>
     <li><a href="https://github.com/Uberi" class="contact">github</a></li>
     <span class="divider"></span>
@@ -35,9 +35,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
     <span class="divider"></span>
-    <li><a href="http://uberi.mesecons.net/">mesecons</a></li>
-    <span class="divider"></span>
-    <li><a href="http://www.autohotkey.net/~Uberi/">autohotkey.net</a></li>
+    <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
 <h1 id="cs241">CS241</h1>
 <p>Foundations of Sequential programs.</p>
@@ -78,12 +76,12 @@ Web: http://www.student.cs.uwaterloo.ca/~cs241</code></pre>
 <p>This course uses a simulated MIPS machine for the assignment. At the end we will be able to run a relatively complex C-like language that can run on the MIPS machine.</p>
 <h2 id="binary-and-hexadecimal-numbers">Binary and Hexadecimal Numbers</h2>
 <p>Refer to earlier notes for background.</p>
-<p>A bit is a binary digit - a 0 or a 1. A nibble is a collection of 4 bits. A byte is a collection of 8 bits, although historically it could be any number needed to hold a signle character - sometimes 7. A word is the a machine-specific grouping of bits - the number of bits in an address on the computer.</p>
+<p>A bit is a binary digit - a 0 or a 1. A nibble is a collection of 4 bits. A byte is a collection of 8 bits, although historically it could be any number needed to hold a single character - sometimes 7. A word is the a machine-specific grouping of bits - the number of bits in an address on the computer.</p>
 <p>In this course we will be using a 32-bit architecture.</p>
 <p>Data in a computer's memory could mean anything - it is simply data.</p>
 <p>There are a number of conventions for representing negative numbers in binary. The <strong>sign magnitude</strong> convention has the leftmost bit of a binary number represent whether it is negative. Although this system is simple, it's difficult to do math with since we have to treat the first bit separately for a lot of operations. Plus, there's two representations for the number 0 - <code>00...00</code> and <code>10...00</code>.</p>
 <p>The <strong>one's complement</strong> convention has positive numbers written normally, and negative numbers are their magnitude with their bits flipped. This works better for certain operations, but there is still two 0 representations, which complicates things unnecessarily.</p>
-<p>The <strong>two's complement</strong> convention has positive numbers written normally, and the negative numbers are simply their magnitude with their bits flipped and 1 added. The advantage of this system is that the first bit still denotes the sign. Plus, there is only one representation for 0, and operations like addition work as usual, modulo <span class="math">\(2^n\)</span>.</p>
+<p>The <strong>two's complement</strong> convention has positive numbers written normally, and the negative numbers are simply their magnitude with their bits flipped and 1 added. The advantage of this system is that the first bit still denotes the sign. Plus, there is only one representation for 0, and operations like addition work the same way as for unsigned numbers, modulo <span class="math">\(2^n\)</span>.</p>
 <p>To find the numerical value of a number represented using <span class="math">\(n\)</span>-bit two's complement, we first check the sign bit. If 0, then we simply convert binary to a non-negative number as usual. Otherwise, we convert the binary to a non-negative number as usual, and subtract <span class="math">\(2^n\)</span> from that result to get a negative number as a result.</p>
 <p>To quickly negate a binary number in two's complement quickly, flip all the bits and add 1, convert that to a positive number, then negate that number. This allows us to quickly convert negative numbers to binary and hex.</p>
 <p>For 3-bit numbers, each binary string, in ascneding order, represents 0, 1, 2, 3, -4, -3, -2, -1.</p>
@@ -176,7 +174,7 @@ sub $30, $30, $2
 ; increment the stack pointer again to restore it to its previous value, assuming we didn&#39;t change $3
 add $30, $30, $3
 
-; make sure to pop the registers off in reverse order
+; make sure to pop the registers off the stack
 lw $3, -8($30)
 lw $2, -4($30)
 
@@ -312,7 +310,7 @@ for i in range(relocation_table, end_of_module, 8):
     format = read_word()
     if format == 1: # we only support format 0x1 for now
         offset = read_word() - 12
-        RAM[p + offset] += p - 12 # we subtract 12 since in MERL addresses are relative to the start of the header, and the header wasn&#39;t loaded</code></pre>
+        RAM[p + offset] += p - 12 # we subtract 12 since in MERL addresses are relative to the start of the header, and the header wasn&#39;t loaded into RAM</code></pre>
 <p>When we have multiple files, we might have a function that calls a function in another file. However, the assembler can't assemble this directly since the label of the function isn't defined in the file it's being called from.</p>
 <p>We could just append all the code together and then assemble them, which works but is not very good, since that requires the assembly code to be available (in practice, people just want to distribute MERL), and we would need to assemble it possibly multiple times in larger projects.</p>
 <p>A better solution is a program that accepts multiple MERL files and properly puts them together into one - the <strong>linker</strong>. We want to put MERL files together without ever forcing it to know about ASM.</p>
@@ -474,6 +472,7 @@ while (read_char(current)) {
 4: ACCEPT
     &quot;a&quot;: 2
     &quot;b&quot;: 1</code></pre>
+<p>The easiest way to convert between regular expressions and DFAs is to convert to an <span class="math">\(\epsilon\)</span>-NFA first, then converting to the desired form.</p>
 <h3 id="nfas">NFAs</h3>
 <p>What if we had a DFA that allowed more than one transition from the same state that have the same label? For example, a state with transitions to two other states, each with the same label.</p>
 <p>This would mean that when we have an input with multiple possible transitions, the machine would get to choose one of the transitions - the state machine is non-deterministic. This is a <strong>non-deterministic finite automata</strong> (NFA). The difference from a DFA is that the machine gets choices in which transition to use.</p>
@@ -609,12 +608,12 @@ S O S
 a + b</code></pre>
 <h1 id="section-12">24/2/15</h1>
 <p>For every leftmost and rightmost derivation, there exists a corresponding <strong>unique parse tree</strong>. A grammar for which some word has more than one distinct leftmost derivation is <strong>ambiguous</strong> - there are multiple possible parse trees for some strings.</p>
-<p>A string might have two leftmost derivations, and so would have two unique parse trees. For example, we can derive <span class="math">\(a + b * c\)</span> by starting with <span class="math">\(S \implies S O S \implies S O S O S \implies \impies a O S O S \implies \ldots\)</span>, or with <span class="math">\(S \implies S O S \implies a O S \implies a O S O S \implies \ldots\)</span>. This is equivalent to parsing it as <span class="math">\((a + b) * c\)</span> or <span class="math">\(a + (b * c)\)</span>.</p>
+<p>A string might have two leftmost derivations, and so would have two unique parse trees. For example, we can derive <span class="math">\(a + b * c\)</span> by starting with <span class="math">\(S \implies S O S \implies S O S O S \implies \implies a O S O S \implies \ldots\)</span>, or with <span class="math">\(S \implies S O S \implies a O S \implies a O S O S \implies \ldots\)</span>. This is equivalent to parsing it as <span class="math">\((a + b) * c\)</span> or <span class="math">\(a + (b * c)\)</span>.</p>
 <p>If we just care about whether a word is in a language, then it doesn't matter if we use an ambiguous grammar. However, for compilers, the shape of the parse tree determines the meaning of the program, so words that have two different parse trees would have two different meanings.</p>
 <p>To resolve ambiguity, we could use heuristics (often called <strong>precedence</strong>) to guide which rule we expand next. However, most of the time we just want to use an unambiguous grammar instead.</p>
 <p>The unambiguous version of the language can be written as <span class="math">\(E \to E O T; T \to a \mid b \mid c \mid (E); O \to + \mid - \mid * \mid /\)</span></p>
-<p>To get the multiplicative operators to have precedence over the additive operators, we can use the following grammar: <span class="math">\(E \to E Plus T \mid T; T \to T Mult F \mid F; F \to a \mid b \mid c \mid (E); Plus \to + \mid -; Mult \to * \mid /\)</span>. Note that we used a rule for each level of precedence - <span class="math">\(E\)</span> is the precedence level for additive operators, and <span class="math">\(T\)</span> is for multiplicative operators.</p>
-<p>If <span class="math">\(L\)</span> is a context-free language, there may not necessarily be an unambiguous context-free grammar for it. The languages that only have ambiguous grammars are <strong>inherently ambiguous grammars</strong>. ;wip: give example</p>
+<p>To get the multiplicative operators to have precedence over the additive operators, we can use the following grammar: <span class="math">\(E \to E \text{Plus} T \mid T; T \to T \text{Mult} F \mid F; F \to a \mid b \mid c \mid (E); \text{Plus} \to + \mid -; \text{Mult} \to * \mid /\)</span>. Note that we used a rule for each level of precedence - <span class="math">\(E\)</span> is the precedence level for additive operators, and <span class="math">\(T\)</span> is for multiplicative operators.</p>
+<p>If <span class="math">\(L\)</span> is a context-free language, there may not necessarily be an unambiguous context-free grammar for it. The languages that only have ambiguous grammars are <strong>inherently ambiguous grammars</strong>. For example, <span class="math">\(A \to \epsilon, B \to \epsilon, S \to A \mid B\)</span>.</p>
 <p>It is not possible to tell if an arbitrary context-free grammar is ambiguous - this problem is undecidable. However, we can write tools that can ensure that a grammar, constrained in certain ways (like no left recursion), is always unambiguous. Tools like ANTLR can do this.</p>
 <p>Testing whether two grammars describe the same language is also an undecidable problem.</p>
 <p>A finite language can be recognized with a loop-less program. A regular language can be recognized with a program that uses finite memory (this is because regular languages are recognized with DFAs, and the states of a DFA represent the program's memory). A context-free language can be recognized with an NFA and a stack (this is a program that can use infinite memory, since the stack can grow arbitrarily).</p>
@@ -739,7 +738,8 @@ while current_input != full_input:
 <p>Note that we only really need to care about the stack and the read input. That means that we can implement a top-down parser using just a stack as storage.</p>
 <p>;wip: missed the rest due to sleep</p>
 <h1 id="section-14">3/3/15</h1>
-<p>;wip: make sure to define nullable</p>
+<p>The <strong>first set</strong> of a nonterminal is the set of all terminals that might start that rule in the parser's input. For example, if we have <span class="math">\(A \to B, B \to x\)</span>, then the first set of <span class="math">\(A\)</span> includes <span class="math">\(x\)</span>. The <strong>follow set</strong> of a nonterminal is the set of all terminals that might follow the rule in the parser's input For example, if we have <span class="math">\(A \to B C, B \to x, C \to y\)</span>, the follow set of <span class="math">\(B\)</span> includes <span class="math">\(y\)</span>.</p>
+<p>A nonterminal is <strong>nullable</strong> if and only if it can derive <span class="math">\(\epsilon\)</span>.</p>
 <p>Calculating first sets:</p>
 <pre><code># grammar is a list of pairs of nonterminals and their expansions (lists of vocabulary elements)
 First = {A: set() for A, expansion in grammar}
@@ -756,11 +756,11 @@ until First stops changing</code></pre>
 <p>A grammar that has matched <span class="math">\(b\)</span>-<span class="math">\(d\)</span> and <span class="math">\(p\)</span>-<span class="math">\(q\)</span> pairs with <span class="math">\(l\)</span> in between can be written as <span class="math">\(S&#39; \to \vdash S \dashv; S \to b S d; S \to p S q; S \to C; C \to lC; C \to \epsilon\)</span>.</p>
 <p>Running this algorithm on the grammar results in the first set <span class="math">\(\set{\vdash}\)</span> for <span class="math">\(S&#39;\)</span>, <span class="math">\(\set{b, p, l}\)</span> for <span class="math">\(S\)</span>, and <span class="math">\(\set{l}\)</span> for <span class="math">\(C\)</span>.</p>
 <p>The follow sets for this algorithm are <span class="math">\(\set{\dashv, d, q}\)</span> for <span class="math">\(S\)</span> and <span class="math">\(\set{\dashv, d, q}\)</span> for <span class="math">\(C\)</span>.</p>
-<p>With the first and follow sets, we can create a prediction function <span class="math">\(\text{Predict}(A, a) = \set{A \to B \middle| a \in First^*(B)} \cup \set{A \to B \middle| Nullable(B) \wedge a \in \text{Follow}(A)}\)</span>, where <span class="math">\(A\)</span> is a nonterminal and <span class="math">\(a\)</span> is a terminal. Basically, this describes the union of the set of rules for which the right hand side begins with the terminal <span class="math">\(a\)</span>, and the set of rules that can expand to 0 tokens and are followed by <span class="math">\(a\)</span>.</p>
+<p>With the first and follow sets, we can create a prediction function <span class="math">\(\text{Predict}(A, a) = \set{A \to B \middle| a \in \text{First}(B)} \cup \set{A \to B \middle| \text{Nullable}(B) \wedge a \in \text{Follow}(A)}\)</span>, where <span class="math">\(A\)</span> is a nonterminal and <span class="math">\(a\)</span> is a terminal. Basically, this describes the union of the set of rules for which the right hand side begins with the terminal <span class="math">\(a\)</span>, and the set of rules that can expand to 0 tokens and are followed by <span class="math">\(a\)</span>.</p>
 <p>We can also represent the prediction table as a table where the rows are different nonterminals <span class="math">\(A\)</span> and the columns are different terminals <span class="math">\(a\)</span>, with the cells filled with the resulting rules.</p>
 <p>This works for <span class="math">\(LL(1)\)</span> grammars. A grammar is <span class="math">\(LL(1)\)</span> if and only if:</p>
 <ul>
-<li>No two production rules with the same left-hand side can generate the same first symbol - the set <span class="math">\(\set{A \to B \middle| a \in First^*(B)}\)</span> cannot have more than 1 element.</li>
+<li>No two production rules with the same left-hand side can generate the same first symbol - the set <span class="math">\(\set{A \to B \middle| a \in First^*(B)}\)</span> cannot have more than 1 element for any symbol <span class="math">\(a\)</span>.</li>
 <li>As a result, the grammar <span class="math">\(E \to E + T \mid T; T \to T * F \mid F&#39; F \to a \mid b \mid c\)</span> is not <span class="math">\(LL(1)\)</span> because it is <strong>left recursive</strong> - given an input <span class="math">\(a\)</span>, it is possible for either <span class="math">\(E\)</span> or <span class="math">\(T\)</span> to generate it.</li>
 <li>Left recursion will immediately make a grammar not <span class="math">\(LL(1)\)</span>. Right recursion could also do so, but not always.</li>
 <li>To make it <span class="math">\(LL(1)\)</span>, we could do something like <span class="math">\(E \to T E&#39;; E&#39; \to \epsilon \mid + E; T \to F T&#39;; T&#39; \to \epsilon \mid * T; F \to a \mid b \mid c\)</span>. This is called <strong>left factoring</strong>.</li>
@@ -772,7 +772,7 @@ until First stops changing</code></pre>
 <h2 id="bottom-up-parsing">Bottom-up Parsing</h2>
 <p>The basic idea is to start with <span class="math">\(w\)</span>, and then go back using rules to get <span class="math">\(S&#39;\)</span> from <span class="math">\(S&#39; \implies \alpha_1 \implies \ldots \implies \alpha_k \implies w\)</span>.</p>
 <p>Parsing will always require a stack. In our bottom-up parsing, we are going to store partially reduced input read so far.</p>
-<p>In our case, we will enforce the invariant <code>stack + unread_input \in \set{S', \alpha_1, \ldots, \alpha_k, w}</code> after reading each terminal from the input.</p>
+<p>In our case, we will enforce the invariant <span class="math">\(stack + unread_input \in \set{S&#39;, \alpha_1, \ldots, \alpha_k, w}\)</span> after reading each terminal from the input.</p>
 <p>Consider the following grammar: <span class="math">\(S \to A y B; A \to ab; A \to cd; B \to z; B \to wx\)</span>. Consider the word <span class="math">\(w = abywx\)</span>. Then to parse it, we do the following:</p>
 <table>
 <thead>
@@ -793,31 +793,31 @@ until First stops changing</code></pre>
 <tr class="even">
 <td align="left"><span class="math">\(\vdash\)</span></td>
 <td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left"><code>abywx</code></td>
+<td align="left"><span class="math">\(abywx \dashv\)</span></td>
 <td align="left">shift <span class="math">\(\vdash\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left"><span class="math">\(\vdash a\)</span></td>
 <td align="left"><span class="math">\(\vdash a\)</span></td>
-<td align="left"><code>bywx</code></td>
+<td align="left"><span class="math">\(bywx \dashv\)</span></td>
 <td align="left">shift <span class="math">\(a\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math">\(\vdash ab\)</span></td>
 <td align="left"><span class="math">\(\vdash ab\)</span></td>
-<td align="left"><code>ywx</code></td>
+<td align="left"><span class="math">\(ywx \dashv\)</span></td>
 <td align="left">shift <span class="math">\(b\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left"><span class="math">\(\vdash A\)</span></td>
 <td align="left"><span class="math">\(\vdash ab\)</span></td>
-<td align="left"><code>ywx</code></td>
+<td align="left"><span class="math">\(ywx \dashv\)</span></td>
 <td align="left">reduce <span class="math">\(A \to ab\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math">\(\vdash Ay\)</span></td>
 <td align="left"><span class="math">\(\vdash aby\)</span></td>
-<td align="left"><code>wx</code></td>
+<td align="left"><span class="math">\(wx \dashv\)</span></td>
 <td align="left">shift <span class="math">\(y\)</span></td>
 </tr>
 <tr class="odd">
@@ -881,6 +881,7 @@ until First stops changing</code></pre>
 <p>When we create a state from another state using a transition symbol <span class="math">\(A\)</span>, we take the rules of that state that have their dot followed by <span class="math">\(A\)</span> and move the dot to the right by 1 symbol for every rule. Then, for each rule, if the dot precedes a nonterminal <span class="math">\(A\)</span>, then we include all rules <span class="math">\(A \to \ldots\)</span> as <span class="math">\(A \to \cdot \ldots\)</span>. We do this repeatedly until there are no more dots preceding nonterminals. For example, if we create a state from <span class="math">\(S&#39;\)</span>, we move the dot to the right, include <span class="math">\(E\)</span> rules, and then include <span class="math">\(T\)</span> rules, to get <span class="math">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span>.</p>
 <p>The start state has only one rule, for the starting rule for the grammar <span class="math">\(S&#39; \to \cdot \vdash S \dashv\)</span>. For the above grammar, we have <span class="math">\(S&#39; \to \cdot \vdash S \dashv\)</span>. We want to buil the entire DFA starting from this start state.</p>
 <p>For every state, we now create new states corresponding each symbol following the dots in the rules, with those following symbols as the transitions to those states. For example, a state <span class="math">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span> creates 3 states, with transitions <span class="math">\(E, T, id\)</span>. For example, the state <span class="math">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span> creates the state <span class="math">\(E \to T \cdot\)</span> using transition <span class="math">\(T\)</span>. If there are no symbols following dots, then we do not create any new states. Duplicate states are combined into one state.</p>
+<p>A state where the dot is at the end of a rule is a reduce state. All other states are shift states.</p>
 <p>We repeat this for the new states, and their new states, until we no longer have new states. For the above grammar, we get the following DFA:</p>
 <pre><code>$S&#39; \to \vdash E \dashv$ &gt; $\vdash$ (1) &gt; $S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id$ (1)
 $S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id$ &gt; $id$ &gt; $T \to id \cdot$
@@ -1007,7 +1008,7 @@ $E \to E + \cdot T, T \to \cdot id$ &gt; $id$ &gt; $E \to T \cdot$
 <p>With lookahead, we can figure out which rule we want to use in the conflicting cases, solving the shift-reduce conflict. This is called <span class="math">\(SLR(1)\)</span> parsing - <strong>simple LR parsing with 1 character lookahead</strong>. This is pretty good, since it resolves many but not all conflicts.</p>
 <p>To build parse trees using bottom-up parsing, we just attach the old nodes as children of the new node when we are reducing, and at the end we have a tree.</p>
 <h1 id="section-16">10/3/15</h1>
-<p>We want to do full <span class="math">\(LR(1)\)</span> parsing, which is more sophisticated than <span class="math">\(SLR(1)\)</span> and parses a superset of grammars. <span class="math">\(LR(1)\)</span> is pretty powerful, but we don't use it much in practice, because it tends to produce very large parser machines, with a lot of states. There's also <span class="math">\(LALR(1)\)</span> parsing, which is something of a comprimise between <span class="math">\(SLR(1)\)</span> and <span class="math">\(LR(1)\)</span>, parsing more than the former but less than the latter. <span class="math">\(LALR(1)\)</span> parsing is used quite often in the real world.</p>
+<p>We want to do full <span class="math">\(LR(1)\)</span> parsing, which is more sophisticated than <span class="math">\(SLR(1)\)</span> and parses a superset of grammars. <span class="math">\(LR(1)\)</span> is pretty powerful, but we don't use it much in practice, because it tends to produce very large parser DFAs, with a lot of states. There's also <span class="math">\(LALR(1)\)</span> parsing, which is something of a comprimise between <span class="math">\(SLR(1)\)</span> and <span class="math">\(LR(1)\)</span>, parsing more than the former but less than the latter. <span class="math">\(LALR(1)\)</span> parsing is used quite often in the real world.</p>
 <p><span class="math">\(LR(1), SLR(1), LALR(1)\)</span> are all identical parsing algorithms, with the only difference being the state machine that each one constructs. Given a state machine, the steps afterwards are identical.</p>
 <p>Some properties of valid programs in languages like C cannot be enforced by CFGs. For example, type checking, scoping, and error checking like using a variable before declaring it.</p>
 <p>Therefore, languages like C are actually context-sensitive languages (a superset of the context-free languages), and can be fully represented using <strong>context-sensitive grammars</strong>. However, in practice these grammars tend to be very difficult to work with. Instead, we usually parse the syntax using a context-free grammar, and then do context-sensitive analysis (semantic analysis) as necessary in order to enforce context-sensitive invariants.</p>
@@ -1035,24 +1036,24 @@ void print(Tree &amp;t) {
 <h1 id="section-17">12/3/15</h1>
 <p>Types are how we assign interpretations to the values at some memory address. A good type system will prevent us from reinterpreting the memory values as -something else, like using a string as an int. For example, <code>int *a; a = 7;</code> should be made invalid.</p>
 <p>To check types, we determine the type for every expression, and ensure that the operators and functions are applied to arguments of the correct type - including variable initialization. We can determine the type of expressions recursively using the type rules for the language, where the variable's type is stored in the symbol table, and expressions are constructed from operators, variables, and literals. We give an error whenever there is no applicable type rule or a mismatched type.</p>
-<p>Type rules are simply formal deductions, using the Fitch bar notation. For example, the type rule for variables <span class="math">\(\frac{\tup{\text{ID.name}, \Tau} \in \text{declarations}}{\text{ID}: \Tau}\)</span> means that if the name of an ID and a type is in the declarations, then that ID is of that type.</p>
+<p>Type rules are simply formal deductions, using the Fitch bar notation. For example, the type rule for variables <span class="math">\(\frac{\tup{\text{ID.name}, \tau} \in \text{declarations}}{\text{ID}: \tau}\)</span> means that if the name of an ID and a type is in the declarations, then that ID is of that type.</p>
 <pre><code>def type_of(tree):
     for c in tree.children:
         compute `type_of(c)`
     use `tree.rule` to decide which type rules are relevant
     # the above type rule example could be written as: `if tree.rule == &quot;ID name&quot;: return symbol.lookup(name)`
     combine the types of children using a type rule to get the type of `tree`, or error if not possible</code></pre>
-<p>For WLP4, we might also have rules like <span class="math">\(\frac{}{\text{NUM}: \text{int}}\)</span>, <span class="math">\(\frac{}{\text{NULL}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr}: \Tau}{(Expr): \Tau}\)</span>, <span class="math">\(\frac{\text{Expr}: \text{int}}{\text{&amp;Expr}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr}: \text{int*}}{\text{*Expr}: \text{int}}\)</span>, <span class="math">\(\frac{\text{Expr}: \text{int}}{\text{new int[Expr]}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 * Expr2}: \text{int}}\)</span>.</p>
+<p>For WLP4, we might also have rules like <span class="math">\(\frac{}{\text{NUM}: \text{int}}\)</span>, <span class="math">\(\frac{}{\text{NULL}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr}: \tau}{(Expr): \tau}\)</span>, <span class="math">\(\frac{\text{Expr}: \text{int}}{\text{&amp;Expr}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr}: \text{int*}}{\text{*Expr}: \text{int}}\)</span>, <span class="math">\(\frac{\text{Expr}: \text{int}}{\text{new int[Expr]}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 * Expr2}: \text{int}}\)</span>.</p>
 <p>Note that the <code>+</code> operator is operloaded: we can add two integers, or an integer pointer and an integer: <span class="math">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 + Expr2}: \text{int}}\)</span>, <span class="math">\(\frac{\text{Expr1}: \text{int*}, \text{Expr2}: \text{int}}{\text{Expr1 + Expr2}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 * Expr2}: \text{int*}}\)</span>. Similarly, we can subtract two integers, an integer pointer and an integer (which is an integer pointer), or two integer pointers (which is the number of integer slots between them as an integer).</p>
-<p>For if statements and while loops we would need a Boolean-like type, although the grammar ensures already that the conditions are comparison expressions, so if the operands of the comparison operator are well-typed, then so is the if statement or while loop. These statements do not have a type, but still need to be considered in type checking. <strong>Well-typed</strong> means that an expression has a type: <span class="math">\(\frac{E: \Tau}{E \text{ is well-typed}}\)</span>. For example, <span class="math">\(\frac{\text{Expr}: \text{int*}}{\text{delete []Expr} \text{ is well-typed}}\)</span> and <span class="math">\(\frac{\text{Expr1}: \Tau, \text{Expr2}: \Tau}{\text{Expr1 == Expr2} \text{ is well-typed}}\)</span>.</p>
-<p>Also, for statements we have <span class="math">\(\frac{\text{Statement1} \text{is well-typed}, \text{Statement2} \text{ is well-typed}}{\text{Statement1; Statement2} \text{ is well-typed}}\)</span>, <span class="math">\(\frac{\text{ID} \in \text{\text{Expr}: \Tau}{\Tau \text{ ID = Expr} \text{ is well-typed}}\)</span>. A function is well-typed if its declarations and statements are well-typed and its return value is an integer. A function call is of type integer as long as all its parameters have a type, and match the signature of the function: <span class="math">\(\frac{E_1: \Tau_1, \ldots, E_n: \Tau_n, \tup{f, \tup{T_1, \ldots, T_n} \in \text{declarations}}}{f(E_1, \ldots, E_n): \text{int}}\)</span>.</p>
+<p>For if statements and while loops we would need a Boolean-like type, although the grammar ensures already that the conditions are comparison expressions, so if the operands of the comparison operator are well-typed, then so is the if statement or while loop. These statements do not have a type, but still need to be considered in type checking. <strong>Well-typed</strong> means that an expression has a type: <span class="math">\(\frac{E: \tau}{E \text{ is well-typed}}\)</span>. For example, <span class="math">\(\frac{\text{Expr}: \text{int*}}{\text{delete []Expr} \text{ is well-typed}}\)</span> and <span class="math">\(\frac{\text{Expr1}: \tau, \text{Expr2}: \tau}{\text{Expr1 == Expr2} \text{ is well-typed}}\)</span>.</p>
+<p>Also, for statements we have <span class="math">\(\frac{\text{Statement1} \text{is well-typed}, \text{Statement2} \text{ is well-typed}}{\text{Statement1; Statement2} \text{ is well-typed}}\)</span>, <span class="math">\(\frac{\text{ID} \in \text{\text{Expr}: \tau}{\tau \text{ ID = Expr} \text{ is well-typed}}\)</span>. A function is well-typed if its declarations and statements are well-typed and its return value is an integer. A function call is of type integer as long as all its parameters have a type, and match the signature of the function: <span class="math">\(\frac{E_1: \tau_1, \ldots, E_n: \tau_n, \tup{f, \tup{T_1, \ldots, T_n} \in \text{declarations}}}{f(E_1, \ldots, E_n): \text{int}}\)</span>.</p>
 <h1 id="section-18">17/3/15</h1>
 <p>So far we've done lexical analyis on code to get tokens, parsing on tokens to get a parse tree, and semantic analysis to get another parse tree and symbol table. The only remaining step is to generate the assembly code from the parse tree and symbol table.</p>
 <h2 id="code-generation">Code Generation</h2>
 <p>There are infinitely many possible MIPS programs we can generate from the a given WLP4 program. We want to choose the ones that are correct, relatively simple to generate, efficient to compile, efficient to run, and possibly also the shortest possible code.</p>
 <p>Consider the code <code>int wain(int a, int b) { return a; }</code>. We will introduce the convention that the parameters of <code>wain</code> are stored in registers 1 and 2, and the return value is stored in register 3. With that, this code becomes <code>add $3, $1, $0</code> and then <code>jr $31</code> in MIPS.</p>
 <p>Whenever we use a variable in the program, we need to actually use a register in the MIPS machine. In other words, we need to assign variables to registers for each procedure, and if there aren't enough registers available, we need to assign them to memory locations and load or store them as needed. We might add a field to the symbol table that stores the location of each variable, as a register or memory addresses, so the table would store names, types, and locations.</p>
-<p>In this course, it is simplest to just store all variables (local declarations and parameters) on the stack, though rather inefficient. The above program would translate to:</p>
+<p>In this course, it is simplest to just store all variables (local declarations and parameters) on the stack, even though this is rather inefficient. The above program would translate to:</p>
 <pre><code>sw $1, -4($30) ; parameter a
 sw $2, -8($30) ; parameter b
 lis $4
@@ -1234,7 +1235,7 @@ generated_label_for_end: ; this is generated by the compiler to be unique</code>
 <p>In procedures we need to save the used registers (except R3 for the result) on the stack, set R29, execute the procedure body, then pop everything we pushed off the stack at the end and return.</p>
 <p>Note that the main function needs to come first in the assembly code, before all the other procedures. This is because the main function needs to execute first.</p>
 <h1 id="section-21">26/3/15</h1>
-<p>Every procedure should save and restore all the registers it will modify. However, it is difficult to know which registers we will be modifying. We could just save and restore them all (except for R3, the result), but this is efficient. In our code we are only using registers R1 to R8 and R29 to R31, so R1 to R8 and R29 are the only ones we need to save and restore.</p>
+<p>Every procedure should save and restore all the registers it will modify. However, it is difficult to know which registers we will be modifying. We could just save and restore them all (except for R3, the result), but this is inefficient. In our code we are only using registers R1 to R8 and R29 to R31, so R1 to R8 and R29 are the only ones we need to save and restore.</p>
 <p>There are two approaches to saving registers - caller-save and calee-save. Callee-save tends to generate smaller code, but caller-save allows us to do things like calling the same procedure with a different amount of parameters. So far, our approach has been caller-save for R31, and callee-save for everything else.</p>
 <p>If we are doing callee=save, we always need to set R29 before we start saving variables, because the value of R29 depends on the stack pointer, which is changed by saving variables. However, that means we can't directly save R29 like a normal variable - we need to store R29 into the stack, set the new value of R29, and then finally decrement the stack pointer, in that order. Alternatively, we could push normally, then afterwards set R29 to 4 plus R30.</p>
 <p>We also have to make sure to use prefixes on labels for procedure names, since they might conflict with the names of the labels we use internally in the compiler, like <code>init</code> and <code>print</code>. Simply prepend <code>F</code> to the procedure name to get the label name.</p>
