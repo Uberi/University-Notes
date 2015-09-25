@@ -120,7 +120,25 @@ arrmorto@uwaterloo.ca</code></pre>
 <p>Since registers don't have addresses, they will never appear on the right side of the <span class="math">\(\leftarrow\)</span> in square brackets.</p>
 <p>Some instructions can have literal values as well, called <strong>immediate values</strong>. For example, <code>SUBTRACT R2, R2, 5</code>, which can be written as <span class="math">\(R2 \leftarrow [R2] - 5\)</span>, has the immediate value 5.</p>
 <p>Branching in RTL notation simply sets the control register <code>PC</code>. For example, <code>BRANCH_IF_ZERO R0, LOOP</code> can be written as <span class="math">\(\text{if } [R0] == 1 \text{ then } PC \leftarrow LOOP\)</span>.</p>
-<p><strong>Addressing modes</strong> are different ways to specify where the operands of an instruction are. The location/type of operands is specified using an <strong>effective address</strong>.</p>
+<p><strong>Addressing modes</strong> are different ways to specify where to find the operand of an instruction. The location/type of operand results in an <strong>effective address</strong>, when applicable. The effective address is where we would write to if that operand is an output, and is similar to the address of an lvalue in C.</p>
+<h1 id="section-5">25/9/15</h1>
+<p>A good resource for learning ARM is the <a href="http://www.davespace.co.uk/arm/">Davespace ARM reference</a>.</p>
+<p>The <strong>immediate</strong> addressing mode means that the operand is a constant - we simply put the constant directly in the instruction. For example, the <code>#2</code> (<span class="math">\(2\)</span>) in <code>MOVE R0, #2</code> <span class="math">\(R0 \leftarrow 2\)</span>. Since the constant is inside the instruction, and the instruction itself needs to take up some bits, the constants must be smaller than the word size.</p>
+<p>The <strong>register</strong> addressing mode means that the operand is a register. For example, the <code>R0</code> (<span class="math">\([R1]\)</span>) in <code>MOVE R0, R1</code> (<span class="math">\(R0 \leftarrow [R1]\)</span>). The effective address here is <span class="math">\(R1\)</span>.</p>
+<p>The <strong>absolute/direct</strong> addressing mode means that the operand is a known, fixed address in memory. For example, the <code>LABEL</code> (<span class="math">\(LABEL\)</span>) in <code>JUMP LABEL</code> (<span class="math">\(PC \leftarrow LABEL\)</span>). The effective address here is <span class="math">\(LABEL\)</span>. Note that this addressing mode is generally only supported for control flow instructions like JUMP - for MOVE, we would use something like <code>MOVE R0, #LABEL</code> to store the address of the label itself.</p>
+<p>The <strong>indirect</strong> addressing mode means that the operand is the contents of the memory address specified by a register, like dereferencing a pointer. For example, the <code>[R1]</code> (<span class="math">\([[R1]]\)</span>) in <code>LOAD R0, [R1]</code> (<span class="math">\(R0 \leftarrow [[R1]]\)</span>). The effective address here is <span class="math">\(R0\)</span>. This is also sometimes denoted<code>(R1)</code> (parentheses rather than square brackets).</p>
+<p>Here is an assembly program to sum an array of numbers and store it in ARRAY_SUM, in a pseudo-assembly language:</p>
+<pre><code>LOAD R2, ARRAY_LENGTH
+CLEAR R3
+MOVE R4, #ARRAY_START
+LOOP: LOAD R5, [R4]
+ADD R3, R3, R5
+ADD R4, R4, #4
+SUBTRACT R2, R2, #1
+BRANCH_IF_NONZERO R2, LOOP
+STORE R3, ARRAY_SUM</code></pre>
+<p>The <strong>Index</strong> addressing mode is a useful extension of indirect addressing, where the operand is the contents of the memory address specified by a register plus a constant address. For example, the <code>5(R1)</code> (<span class="math">\([[R0] + 5]\)</span>) in <code>MOVE R0, 5(R1)</code> (<span class="math">\(R0 \leftarrow [[R1] + 5]\)</span>). The effective address here is <span class="math">\([R1] + 5\)</span>. Note that in the code, all constants are generally decimal. This addressing mode is very useful for working with structs.</p>
+<p>The <strong>base with index</strong> addressing mode is an even more flexible extension of indirect addressing, where the operand is the contents of the memory address epcified by a register (specifying the base address) plus another (specifying an offset). For example, the <code>[R1, R2]</code> (<span class="math">\([[R1] + [R2]]\)</span>) in <code>MOVE R0, [R1, R2]</code> (<span class="math">\(R0 \leftarrow [[R1] + [R2]]\)</span>). The effective address here is <span class="math">\([R1] + [R2]\)</span>. This addressing mode is very useful for working with arrays.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
