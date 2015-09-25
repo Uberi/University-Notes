@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>CS341 | Anthony Zhang</title>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>
+function highlight() { // highlight all code blocks using HighlightJS
+  var code_blocks = document.getElementsByTagName("code");
+  for (var i = 0; i < code_blocks.length; i++)
+    hljs.highlightBlock(code_blocks[i]);
+}
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body onload="highlight()">
+  <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="/blog/" class="page">blog</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="/resume.pdf" class="page">résumé</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+  </ul>
+<h1 id="cs341">1CS341</h1>
+<p>Algorithms.</p>
+<pre><code>Doug Stinson
+Section 001
+https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
+<h1 id="section">14/9/15</h1>
+<p>Most materials will be on LEARN. Questions and answers can be posted on Piazza.</p>
+<p>Study of the design and the analsis of algorithms - in particular, the correctness (proved via formal proofs) and efficiency (proved using time complexity analysis).</p>
+<p>Useful metrics for algorithms are asymptotic complexity (best case/average case/worst case time/space complexity), number of specific computations used (like comparisons in sorting algorithms), whether an algorithm is the most efficient for a particular problem, etc.</p>
+<p>Interesting things to know are lower bounds on possible algorithms to solve a particular problems, problems that cannot be solved by any algorithm (undecidability), and problems that cannot be solved efficiently by any algorithm, but can be solved (NP-hardness).</p>
+<p>Useful design strategies we will go over are divide and conquer, greedy algorithms, dynamic programming, breadth-first and depth-first search, local search, and linear programming.</p>
+<p>An example of an algorithm design is the maximum problem: given an array of integers <span class="math">\(A\)</span>, find the maximum integer in <span class="math">\(A\)</span>. A simple solution to this is as follows:</p>
+<pre><code>def find_max(array):
+    current = array[0]
+    for elem in array[1:]:
+        if elem &gt; current: current = elem
+    return elem</code></pre>
+<p>This seems to be obviously correct, but we can also use program verification to prove it correct. In this case, we will use induction to prove the loop invariant - at the end of each iteration of the loop, <code>current</code> is equal to the largest element encountered so far in the array. We'd check the base case for arrays of length 1, then prove the inductive hypothesis to formally verify the program.</p>
+<p>Clearly, this algorithm is <span class="math">\(\Theta(n)\)</span>, since it loops over the entire array once. Formal time complexity analysis can also be done by noting that the loop body takes <span class="math">\(\Theta(1)\)</span> time, and the loop runs <span class="math">\(\Theta(n)\)</span> times.</p>
+<p>We also know that this algorithm is asymptotically optimal, at least in terms of the number of comparisons done. Since a correct solution to the Maximum problem must look at every element in the array, it must therefore do at least <span class="math">\(n - 1\)</span> comparisons. Since each comparison takes <span class="math">\(\Theta(1)\)</span> time, the best possible algorithm must take <span class="math">\(\Omega(n)\)</span> time. Let's formally prove this:</p>
+<blockquote>
+<p>Suppose there was an algorithm that could determine the maximum element of an array using fewer than <span class="math">\(n - 1\)</span> comparisons.<br />Let <span class="math">\(G\)</span> be a graph such that each vertex in <span class="math">\(G\)</span> corresponds to an element in <span class="math">\(A\)</span>, and each comparison done by a run of the algorithm between any two elements results in an edge between those two elements.<br />Clearly, there are <span class="math">\(n - 2\)</span> edges or less, and <span class="math">\(n\)</span> vertices.<br />Therefore, there are at least 2 components in <span class="math">\(G\)</span>, since the graph cannot be connected.<br />Clearly, the solution could be in any of the components, and can only be found by comparing them.<br />Therefore, the algorithm cannot exist.</p>
+</blockquote>
+<p>An algorithm to find the minimum and the maximum element of an array can also trivially be designed, using <span class="math">\(2n - 2\)</span> comparisons and <span class="math">\(\Theta(n)\)</span> time. However, it is possible to design another algorithm that does fewer than <span class="math">\(2n - 2\)</span> comparisons (though the time complexity might be worse).</p>
+<p>One way to do this is to consider elements two at a time - we compare elements one pair at a time, the larger of the pair with the maximum, and the smaller of which with the minimum. That means we need 3 comparisons per pair, or <span class="math">\(\ceil{\frac 3 2 n} - 2\)</span> in total, a ~25% improvement:</p>
+<pre><code>def find_min_max(array):
+    if array[0] &lt; array[1]: min, max = array[0], array[1]
+    else: max, min = array[0], array[1
+    for i in range(2, len(array), 2):
+        if array[i] &lt; array[i + 1]: small, big = array[i], array[i + 1]
+        else: big, small = array[i], array[i + 1]
+        if big &gt; max: max = big
+        if small &lt; min: min = small
+    if len(array) % 2:
+        if array[-1] &gt; max: max = array[-1]
+        if array[-1] &lt; min: min = array[-1]</code></pre>
+<p>It can actually be proven, using graph theory, that the number of comparisons for this algorithm is optimal. However, it's too lengthy and complicated to cover here.</p>
+<p>Suppose we want to determine whether and which three elements of an array of integers sum to 0. This is pretty easy to do in <span class="math">\(O(n^3)\)</span> (specifically, <span class="math">\(n \choose 3\)</span> runs of the inner loop) simply by checking all possible triples in the array. Basically, we pick two elements <span class="math">\(A[i]\)</span> and <span class="math">\(A[j]\)</span>, then try to search for a <span class="math">\(A[k] = -(A[i] + A[j])\)</span> using linear search. However, it is actually possible to do so in <span class="math">\(O(n^2 \log n)\)</span> by sorting the array first, and searching for <span class="math">\(k\)</span> using binary search instead.</p>
+<p>In fact, it's possible to do even better by sorting the array, taking each <span class="math">\(A[i]\)</span>, and searching from both ends of the array inward for <span class="math">\(j\)</span> and <span class="math">\(k\)</span> such that <span class="math">\(A[j] + A[k] = -A[i]\)</span>. After each step in the search, we either move inward from the left if <span class="math">\(A[j] + A[k] &lt; -A[i]\)</span>, or inward from the right if <span class="math">\(A[j] + A[k] &gt; -A[i]\)</span></p>
+<h1 id="section-1">16/9/15</h1>
+<p>The pseudocode for the above algorithm looks like the following:</p>
+<pre><code>def better_3sum(array):
+    array = sorted(array)
+    result = []
+    for i in range(n - 2):
+        j, k = i + 1, n
+        while j &lt; k:
+            triple_sum = array[i] + array[j] + array[k]
+            if triple_sum &lt; 0: j += 1
+            elif triple_sum &gt; 0: k -= 1
+            else:
+                result.append((i, j, k))
+                j += 1
+                k -= 1</code></pre>
+<p>Basically, this goes through each value of <span class="math">\(i\)</span>, and does an <span class="math">\(O(n)\)</span> search for two values that would make it possible to have all three sum to 0. Proving this correct is left as an exercise to the reader - prove that <span class="math">\(k - j\)</span> is monotonically decreasing, and the pairs cover all possible pairs that can possibly sum up to <span class="math">\(A[i]\)</span>. It's somewhat reminiscent of the array merge in merge sort.</p>
+<p>This algorithm is <span class="math">\(O(n^2)\)</span>, since the search is <span class="math">\(O(n^2)\)</span> and the sort is <span class="math">\(O(n \log n)\)</span>. There are actually even better algorithms, and the best currently known ones are <span class="math">\(O\left(n^2 \left(\frac{\log \log n}{\log n}\right)^2\right)\)</span>.</p>
+<p>A <strong>problem</strong> is a computational task. A <strong>problem instance</strong> is the input for the computational task. The <strong>problem solution</strong> is the output. The <strong>size of a problem instance</strong> is a positive integer that is a measure of the size of the instance, and depends on the problem itself. The size is usually fairly intuitive, such as the size of an array for array sum, but sometimes it gets a bit more tricky.</p>
+<p>An <strong>algorithm</strong> is a high level description of a computation. An algorithm <strong>solves</strong> a problem if it finds a valid solution for any instance in finite time. A <strong>program</strong> is an implementation of an algorithm using a computer language.</p>
+<h2 id="time-complexity-analysis">Time Complexity Analysis</h2>
+<p>The running time of a program <span class="math">\(M\)</span> for a problem instance <span class="math">\(I\)</span> is <span class="math">\(T_M(I)\)</span>. The worst case running time for problem instances of size <span class="math">\(n\)</span> for the program is <span class="math">\(T_M(n)\)</span>. The average case running time is <span class="math">\(T_M^{avg}(n)\)</span>.</p>
+<p>The <strong>worst case time complexity</strong> of an algorithm <span class="math">\(A\)</span> is <span class="math">\(f(n)\)</span> such that a program <span class="math">\(M\)</span> exists implementing <span class="math">\(A\)</span> such that <span class="math">\(T_M(n) \in \Theta(f(n))\)</span>.</p>
+<p>Running time can only be found by running the program on a computer. Complexity is independent, but we lose information such as the constant factors.</p>
+<p>To get the time complexity of an algorithm, we can either use <span class="math">\(\Theta(f(n))\)</span> throughout our analysis, or prove <span class="math">\(O(f(n))\)</span> and then <span class="math">\(\Omega(f(n))\)</span>, which is often easier due to being able to make more assumptions for each separate proof.</p>
+<p>The complexity of a loop in code is sum of the complexity of its body over each iteration of the loop. The complexity of consecutive operations is the sum of the complexities of the operations they are composed of.</p>
+<p>Prove that <span class="math">\((\ln n)^a \in o(n^b)\)</span> for any <span class="math">\(a\)</span> and <span class="math">\(b\)</span>:</p>
+<blockquote>
+<p>Let <span class="math">\(L = \lim_{n \to \infty} \frac{(\ln n)^a}{n^b} \lH \lim_{n \to \infty} \frac{a (\ln n)^{a - 1}}{b n^b} \lH \ldots \lH \lim_{n \to \infty} \frac{a!}{b^a n^b} = 0\)</span>.<br />By the limit order rule, <span class="math">\((\ln n)^a \in o(n^b)\)</span>.</p>
+</blockquote>
+<h1 id="section-2">21/9/15</h1>
+<p>Useful to know:</p>
+<ul>
+<li><span class="math">\(\sum_{i = 0}^{n - 1} (a + di) = na + \frac{dn(n - 1)} 2\)</span> - arithmetic sequence</li>
+<li><span class="math">\(\sum_{i = 0}^{n - 1} ar^i = \begin{cases} a\frac{r^n - 1}{r - 1} &amp;\text{if } r &gt; 1 \\ na &amp;\text{if } r = 1 \\ a\frac{1 - r^n}{1 - r} &amp;\text{if } r &lt; 1 \\ \end{cases}\)</span> - geometric sequence</li>
+<li><span class="math">\(\sum_{i = 0}^{n - 1} (a + di)r^i = \frac a {1 - r} - \frac{(a + (n - 1)d)r^n}{1 - r} + \frac{dr(1 - r^{n - 1})}{(1 - r)^2}\)</span> -arithmetic-geometric sequence</li>
+<li><span class="math">\(\sum_{i = 1}^n \frac 1 {i^2} = \frac{\pi^2} 6 = \Theta(1)\)</span></li>
+<li><span class="math">\(_n = \sum_{i = 1}^n \frac 1 i \in \Theta(\log n)\)</span> - harmonic sequence</li>
+</ul>
+<p>The order of <span class="math">\(n!\)</span> is <span class="math">\(\Theta(n^2 \sqrt n e^{-n})\)</span>. This is similar to Striling's approximation, <span class="math">\(\sqrt{2 \pi n} n^n e^{-n}\)</span> (this gets more and more accurate for larger values).</p>
+<p>For order notation, the base of logarithmic terms don't matter because <span class="math">\(\log n = \frac 1 {\log_b 10} \log_b n\)</span>, and <span class="math">\(\frac 1 {\log_b 10}\)</span> is a constant factor.</p>
+<p><strong>Polynomial growth rates</strong> are those in <span class="math">\(O(n^k), k \in \mb{R}\)</span>. For example, the best known algorithm for graph isomorphism is <span class="math">\(n^{\sqrt n \log_2 n}\)</span>, so it is not polynomial.</p>
+<h1 id="section-3">23/9/15</h1>
+<p>Consider the following program:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> useless(n):
+    <span class="kw">for</span> i in <span class="dt">range</span>(n):
+        <span class="kw">while</span> j &gt;= <span class="dv">1</span>:
+            j /= <span class="dv">2</span></code></pre>
+<p>Clearly, each iteration of the inner loop will run <span class="math">\(\Theta(\log n)\)</span> times, so the overall time complexity is <span class="math">\(\sum_{i = 1}^n \Theta(\log i) = \Theta(\sum_{i = 1}^n \log i) = \Theta(\log(\prod_{i = 1}^n i)) = \Theta(\log(n!)) = \Theta(n \log n)\)</span>.</p>
+<p>A <strong>recurrence relation</strong> specifies <span class="math">\(a_n\)</span> in the infinite sequence of real numbers <span class="math">\(a_1, a_2, a_3, \ldots\)</span> in terms of the previous terms <span class="math">\(a_1, \ldots, a_{n - 1}\)</span> (<span class="math">\(a_1\)</span> must therefore be a constant - the <strong>initial value</strong>). A <strong>solution</strong> to a recurrence relation is a closed form formula for <span class="math">\(a_n\)</span> - one that does not depend on the previous values of <span class="math">\(a_1, \ldots, a_{n - 1}\)</span>. These are generally solved using techniques like guess and check or recursion trees, but there aren't any methods that are guaranteed to solve all recurrences, and in fact, reurrences may not necessarily even have solutions.</p>
+<p>Recurrence relations can also be written using function notation, like <span class="math">\(T(1) = 2, T(n) = T(n - 1) + 1\)</span>.</p>
+<p>The <strong>guess and check</strong> method involves computing enough <span class="math">\(a_n\)</span> instances to guess the form of the solution (without any constants). Then, we solve for the constants using the computed values, and check if our solution is correct - if it is, we must prove it is correct using induction, and if not, we start over with a different guess.</p>
+<p>Solve <span class="math">\(a_0 = 4, a_n = a_{n - 1} + 6n - 5\)</span>:</p>
+<blockquote>
+<p>Guess and check: the first few elements of the sequence are <span class="math">\(a_0 = 4, a_1 = 5, a_2 = 12, a_3 = 25, a_4 = 44\)</span>.<br />This seems to be quadratic growth, so we guess <span class="math">\(an^2 + bn + c, a, b, c \in \mb{R}\)</span> as the solution.<br />Solving for <span class="math">\(a, b, c\)</span>, <span class="math">\(c = 4, a + b + c = 5, 4a + 2b + c = 12\)</span>, we get <span class="math">\(a = 3, b = -2, c = 4\)</span>.<br />So we guess that <span class="math">\(a_n = 3n^2 - 2n + 4\)</span>. We can verify this for <span class="math">\(0 \le n \le 4\)</span> as our inductive base case.<br />Assume for some <span class="math">\(k \in \mb{N}\)</span> that <span class="math">\(a_k = 3k^2 - 2k + 4\)</span>.<br />Clearly, <span class="math">\(a_{k + 1} = 3k^2 - 2k + 4 + 6(k + 1) - 5 = 3(k + 1)^2 - 2(k + 1) + 4\)</span>.<br />So by induction, <span class="math">\(a_n = 3n^2 - 2n + 4\)</span>.</p>
+</blockquote>
+<p>The <strong>recurrence tree</strong> method is often used for divide-and-conquer algorithms. This technique involves building a call tree for the recurrence. then summing up the results of the function on each level of the tree.</p>
+<p>To construct a recurrence tree, we start with the timing function <span class="math">\(T(n)\)</span>, then add children for each recursive call. The recursive calls are then removed from the parent. This is repeated for the children, all the way until we reah the base case. Note that after each step of growing the tree, the sum of all the nodes are always equivalent to <span class="math">\(T(n)\)</span>.</p>
+<p>Then, we sum the nodes at each level in the tree. The sum of all these sums is equal to <span class="math">\(T(n)\)</span>.</p>
+<p>Use the recurrence tree method to find the running time of merge sort:</p>
+<blockquote>
+<p>Clearly, <span class="math">\(T(n) = \begin{cases} 2T\left(\frac n 2\left) + cn &amp;\text{if } n &gt; 1 \wedge n \text{ is a power of 2} \\ d &amp;\text{if } n = 1 \\ \end{cases}\)</span> where <span class="math">\(c, d\)</span> are constants.<br />Construct a recursion tree: start with the root node <span class="math">\(N\)</span> with value <span class="math">\(T(n)\)</span>, then add 2 children, <span class="math">\(N_1, N_2\)</span>, both <span class="math">\(T\left(\frac n 2\left)\)</span>, and replace <span class="math">\(N\)</span>'s value with <span class="math">\(cn\)</span>.<br />What we get is a binary tree with every internal node having 2 children, and value <span class="math">\(c2^i\)</span> (where <span class="math">\(i\)</span> is the level in the tree, where 0 is the bottommost level, the leaf nodes), and each leaf node is <span class="math">\(d\)</span>.<br />Let <span class="math">\(n = 2^j\)</span>. Then at the top level each node has value <span class="math">\(c2^j\)</span>, at the second level <span class="math">\(c2^{j - 1}\)</span>, at the third level <span class="math">\(c2^{j - 2}\)</span>, and so on. All leaf nodes must have value <span class="math">\(d\)</span>, since it is the only base case.<br />Clearly, the height of the tree must then be <span class="math">\(j + 1\)</span>, with <span class="math">\(j\)</span> interior levels. Clearly, at the bottom level there are <span class="math">\(2^j\)</span> leaf nodes, since each level <span class="math">\(i\)</span> has <span class="math">\(2^{j - i}\)</span> nodes. The sum of the bottom level is therefore <span class="math">\(2^j d = dn\)</span>.<br />Clearly, at each internal level <span class="math">\(i\)</span> each node has value <span class="math">\(c 2^i\)</span>. Since there are <span class="math">\(2^{j - i}\)</span> nodes, the sum of each interior level is <span class="math">\(c2^{j - i}2^i = c2^j = cn\)</span>.<br />So <span class="math">\(T(n) = dn + jcn = dn + cn \log_2 n = \Theta(n \log n)\)</span>.</p>
+</blockquote>
+<p>The <strong>master thoerem</strong> is a generalized formula for solving certain forms of recurrences. One thing it says is that given <span class="math">\(T(n) = aT( \frac n b) + \Theta(n^y)\)</span> where <span class="math">\(a \ge 1, b &gt; 1\)</span>, and <span class="math">\(n\)</span> is a power of <span class="math">\(b\)</span>, then <span class="math">\(T(n) \in \begin{cases} \Theta(n^x) &amp;\text{if } y &lt; x \\ \Theta(n^x \log n) &amp;\text{if } y = x \\ \Theta(n^y) &amp;\text{if } y &gt; x \\ \end{cases}\)</span> where <span class="math">\(x = \log_b a\)</span>.</p>
+<p>Also, the exact value is <span class="math">\(T(n) = da^j + cn^y \sum_{i = 0}^{j - 1} \left(\frac a {b^y}\right)^i\)</span>, or more simply <span class="math">\(T(n) = dn^x + cn^y \sum_{i = 0}^{j - 1} r^i\)</span> where <span class="math">\(x = \log_b a\)</span> and <span class="math">\(r = \frac a {b^y} = b^{x - y}\)</span>.</p>
+<p>This can be proved by constructing tree, figuring out the geometric sequence for the tree sums, and then solving for its value for each of the three cases.</p>
+<p>A more general version, which will not be proved here, is that given <span class="math">\(T(n) = aT( \frac n b) + f(n)\)</span> where <span class="math">\(a \ge 1, b &gt; 1\)</span>, and <span class="math">\(n\)</span> is a power of <span class="math">\(b\)</span>, then <span class="math">\(T(n) \in \begin{cases} \Theta(n^x) &amp;\text{if } f(n) \in O(n^{x - \epsilon}) \text{ for some } \epsilon &gt; 0 \\ \Theta(n^x \log n) &amp;\text{if } f(n) \in O(n^x) \\ \Theta(f(n)) &amp;\text{if } \frac{f(n)}{n^{x + \epsilon}} \text{ is an incresing function of } n \text{ for some } \epsilon &gt; 0 \\ \end{cases}\)</span> where <span class="math">\(x = \log_b a\)</span>.</p>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>

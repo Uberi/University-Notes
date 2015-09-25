@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>ECE222 | Anthony Zhang</title>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>
+function highlight() { // highlight all code blocks using HighlightJS
+  var code_blocks = document.getElementsByTagName("code");
+  for (var i = 0; i < code_blocks.length; i++)
+    hljs.highlightBlock(code_blocks[i]);
+}
+</script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body onload="highlight()">
+  <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="/blog/" class="page">blog</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="/resume.pdf" class="page">résumé</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+  </ul>
+<h1 id="ece222">ECE222</h1>
+<p>Section 001 (mixed engineering)</p>
+<pre><code>Andrew Morton
+arrmorto@uwaterloo.ca</code></pre>
+<h1 id="section">14/9/15</h1>
+<p>Computer architecture and assembly language programming.</p>
+<p>There's a single Saturday lecture to make up for Thanksgiving Monday, sometime on the 1:30-2:20 slots. There are 6 make-up lecture slots on Fridays at 1:30 PM-2:20 PM.</p>
+<p>Midterm on October 28 at 8:30 AM, 75 minutes. Textbook is optional but recommended.</p>
+<p>No tutorials for the first week. Tentative office hours for this section are Wednesdays at 12:30 PM.</p>
+<p>;wip: do assignment 1</p>
+<p>Finding the magnitude of a negative two's complement number is done by flipping all of the bits and adding one, but a better way is to flip all the bits left of the rightmost 1, and interpreting the resulting number as the unsigned binary magnitude.</p>
+<h1 id="section-1">16/9/15</h1>
+<p>Continuation of number sysytems and binary - see CS241 and ECE214e notes for reference.</p>
+<p>Overflow occurs when the resul cannot be represented using the given number of bits, such as when two excessively large unsigned values are added together to get a value larger than <span class="math">\(2^n - 1\)</span>. It is always important to check for overflow when doing arithmetic. In computers, there is usually an overflow flag in a status register.</p>
+<p>For subtraction, the overflow/borrow bit represents whether the sign of the result differs from the sign of either operand - if there are both positive and negative values as the operands and result.</p>
+<p><strong>Sign extension</strong> is the replication of the leftmost bit to make a binary number of a particular width larger. For example, sign extending 1010 to 8 bits results in 11111010.</p>
+<p>Computers can be general purpose or application-specific. Types of computers include personal computers, workstations, mainframes, supercomputers, embedded computers.</p>
+<h1 id="section-2">18/9/15</h1>
+<p>Hack the North starts today at 6PM! Lab 0 is done individually but you should still have a partner.</p>
+<p>A <strong>programmable computer</strong> is a device that can store a sequence of instruction, execute a stored sequence of instructions, and conditionally select a path of execution (control transfer). One of the first computers programmable computers designed was mechanical - the analtyical engine by Charles Babbage.</p>
+<p>Some of the tehnologies used for programmable omputers are mechanical, vacuum tube, transistors, integrated circuits, VLSI, and nanotechnological integration.</p>
+<p>The Harvard Mark I (1944) was the first computer to implement the Harvard architecture (separate code and data). The Manchester Baby (1948) was the first to implement the von Neumann architecture (code in same memory as data).</p>
+<p>A <strong>digital computer</strong> uses digital electronic circuits to implement a programmable computer. Generally, these consist of input/output (keyboards, monitors, and network cards), memory, and the CPU (the ALU and control unit), as well as the interconnection network that connects these all together.</p>
+<p>For this course, memory will be represented as an array of bytes. The <strong>word length</strong> of the computer depends on the processor, and these days is generally 16, 32, or 64 bits. A computer with word length <span class="math">\(n\)</span> has words of <span class="math">\(n\)</span> bits - a word would be an <span class="math">\(n\)</span> bit binary number. A <strong>long word</strong> is a <span class="math">\(2n\)</span> bit binary number.</p>
+<p>A memory unit has a clock, read enable, write enable, and address inputs, and has data output. Most computers have multiple levels of memory, from closer to the processor (fastest) to farthest from the processor (slower):</p>
+<ul>
+<li>Registers are the fastest memory, being built into the processor, but are very small, storing only a few bytes.
+<ul>
+<li>These generally are just implemented with flip-flops.</li>
+</ul></li>
+<li>Caches are also generally built into the processor further away, and can store several kilobytes or megabytes.
+<ul>
+<li>There are often separate instruction and data caches.</li>
+<li>Caches implement temporal locality (recently accessed data can be retrieved again faster) and spatial locality (fetch nearby memory faster, such as fetching the next few instructions to execute).</li>
+<li>There can also be multiple levels of caches, from L1 (fastest/smallest) to L3 (slowest/largest).</li>
+<li>Caches use SRAM for memory, which is basically just a series of flip-flops.</li>
+</ul></li>
+<li>Primary memory (RAM) is a lot slower, but can store gigabytes.
+<ul>
+<li>This is generally implemented with DRAM, which is basically just a transistor switching the high voltage to a capacitor that is also connected to ground.</li>
+<li>DRAM is much smaller, but needs to be refreshed and works slower.</li>
+</ul></li>
+<li>Secondary memory (hard drives/SSDs) are extremely slow, and can store gigabytes and terabytes of data.</li>
+</ul>
+<p>In each level, we can store exponentially more data, but it takes an exponentially longer time to read or write.</p>
+<h1 id="additional-lecture">16/9/15 - Additional Lecture</h1>
+<p>Modern CISC CPUs translate complex machine code into microcode/microops first, then execute those simpler instructions. CPUs have to fetch the operation, fetch the operands, perform the operaion, then store the result.</p>
+<p>The current instruction is stored in the <strong>instruction register</strong> (IR), and the address of the next instruction is always the value in the <strong>program counter</strong> (PC). The <strong>memory address register</strong> (MAR) contains the current memory address to read or write to if applicable. The <strong>memory data register</strong> (MDR) contains the current data to read or write to memory if applicable. The general purpose registers hold data and addresses.</p>
+<p>The control unit drives the ALU to execute instructions.</p>
+<p>A <strong>bus</strong> is a set of wires that can have different writers and readers at different times. One unit may write to the bus at a time, but many can read from it at any time. Writing to a bus is called <strong>bus driving</strong>. Since short circuits can occur if two units drive the bus at the same time, the control unit in CPUs manages which unit is allowed to drive at any time. Buses are often implemented using tri-state buffers.</p>
+<p>A CPU is connected to memory and I/O via a bus. Nowadays, however, the limitation that only one unit can write at a time is too restrictive, so we use multiple buses. Modern bus standards include PCI, PCIe, and USB.</p>
+<p>Since the CPU's connection to memory and I/O is both over a bus, I/O is generally treated a lot like memory. This allows techniques such as <strong>memory-mapped I/O</strong>, where I/O listens on the bus for reads and writes to certain addresses, and dispatches actions based on that. This allows simpler I/O access from the CPU by simply using the standard memory manipulation instructions.</p>
+<p>An <strong>instruction</strong> is a command tha tells the CPU to do something like move data, transfer control flow, or do math. A <strong>program</strong> is a sequence of instructions.</p>
+<p>For every instruction, the CPU must fetch the instruction, decode which one it is, fetch the operands if applicable, perform the operation, then store the results if applicable.</p>
+<p>We access memory by address - each address represents a unit of memory. For most computers, each byte is assigned an address - this is <strong>byte addressable memory</strong>. Some systems assign one address per word instead - this is <strong>word addressable memory</strong>. For example, MIPS has an address for each byte, but memory can only be accessed if it's aligned to a word boundary.</p>
+<p>In SI, a kilobyte is <span class="math">\(10^3\)</span> bytes, or 1 kB, and a kibibyte is <span class="math">\(2^{10}\)</span>, or 1 KiB. The same goes for megabyte (<span class="math">\(10^6\)</span> bytes, or 1 MiB) vs. mebibyte (<span class="math">\(2^{20} bytes\)</span>), gigabyte vs. gibibyte, terabytes vs. tibibytes, petabytes vs. pebibytes, and exabytes vs. exbibytes. This is because the standard SI prefixes should always refer to powers of 10, while the powers of 2 get different prefixes. KB is an incorrect unit, since uppercase K represents Kelvin.</p>
+<h1 id="section-3">21/9/15</h1>
+<p>For most computers, and especially for the computers in our course, word sizes are 32 bits, and characters are 1 byte. The default text encoding we will use is ASCII. We will also assume our systems are byte addressable.</p>
+<p>The <strong>byte ordering/endianness</strong> of the computer determines how the bytes of numbers are ordered physically in memory. The <strong>little endian</strong> byte ordering is the most common, and assigns the less significant digits in the number to the bytes at smaller addresses, and the more significant digits to the bytes at larger addresses. For example, 0x1234 is represented as consecutive bytes 0x04, 0x03, 0x02, and 0x01. The <strong>big endian</strong> byte ordering is the opposite order, and 0x1234 is represented wth the consecutive bytes 0x01, 0x02, 0x03, and 0x04. While big endian looks more like the human representation of the number, little endian is more logical for things like arrays of numbers. Some architectures like PowerPC support switching between either convention.</p>
+<p>The endianness of numbers is very important if transferring data between computers. The same bytes read on a big endian machine will result in a different number than one read on a little endian machine. Most networking stacks will handle this automatically, but sometimes it is necessary to read/write the bytes in an explicit, fixed byte order to ensure all computers can read it the same.</p>
+<p>Lowercase and uppercase letters in ASCII differ only by one bit. In order to make this work, though, the lowercase and uppercase characters are not adjacent in the ASCII table.</p>
+<p>What the Control key does is it hides the top nibble of the character - for example, Ctrl + C hides the top bits of C (0x43), to get 0x03, the end of text character.</p>
+<p>An address on a byte-addressible computer is <strong>aligned</strong> if it is a multiple of the word size. For example, on a 32-bit computer an address is aligned if it is a multiple of 4. Unaligned addresses may take longer to access, or even be forbidden by the architecture - ARM, for example, will raise an exception/interrupt upon unaligned accesses.</p>
+<p>Every processor will have instructions for data transfer between memory and registers, arithmetic/logic, braching/jumping/control flow, and I/O (generally memory mapped, so these can just be the same as for data transfer between memory and registers).</p>
+<p>The <strong>instruction set architecture</strong> (ISA) specifies how a processor works - the instructions of a processor (the operations and their format), the registers, control registers, memory layout (like memory banks), exceptions, and so on. Examples of ISAs are ARM, x86, MIPS, and SPARC. There are often variations and flavors of each ISA, like the 64-bit variant of x86, x86-64.</p>
+<p>A <strong>reduced instruction set computer</strong> (RISC) ISA has a fixed size for each instruction (each instruction takes the same number of bits), and have a load/store architecture (memory is accessed only via load/store instructions, and all other operations work on registers). RISC ISAs are simpler to construct and understand - for example, the fixed sized instructions mean decoding is a lot easier.</p>
+<p>In contrast, a <strong>complex instruction set computer</strong> (CISC) ISA can have variable length instructions, and many instructions can also do things like accessing memory. These are harder to construct, but we can do more with each instruction - each instruction is harder to decode, because we have to read some of it first to know how much to keep reading.</p>
+<h1 id="section-4">23/9/15</h1>
+<p>Assemly language is a symbolic representation of machine code. It uses mnemonics to represent operations/instructions. See CS241 notes for basic overview of language format.</p>
+<p>Assembly language uses <strong>register transfer level</strong> notation:</p>
+<ul>
+<li><code>R0</code> through to <code>R15</code> are names for general purpose registers.</li>
+<li>Control registers/signals are reserved bare words, like <code>T1</code> and <code>T2</code>.</li>
+<li>Other bare identifiers are memory locations (like labels) - <code>some_label</code>.</li>
+<li>Square brackets around a memory location or register represent the value at that memory location or memory address - <code>[R0]</code> means &quot;value of <code>R0</code>&quot; while <code>[LOCATION]</code> means <code>*R0</code> in C.</li>
+<li>Square brackets can be nested - <code>[[LOCATION]]</code> means <code>**LOCATION</code>.</li>
+</ul>
+<p>RTL notation is not standardized and may differ between texts.</p>
+<p>RTL notation can represent instructions in terms of how they manipulate data, like <span class="math">\(R1 \leftarrow [LOCATION]\)</span>, or <span class="math">\(\text{if } [R0] == 1 \text{ then } R0 = 50\)</span>. Notation like <span class="math">\(R1 \leftarrow [R1] + [LOCATION]\)</span> makes it immediately obvious what the instruction does.</p>
+<p>RTL notation can also be used to describe instructions in assembly language in a more comprehensible way. For example, <code>ADD R0, R1, R2</code> can be written as <span class="math">\(R0 \leftarrow [R1] + [R2]\)</span>, <code>LOAD R0, LOCATION</code> can be written as <code>R0 \leftarrow [LOCATION]</code>, and <code>STORE R0, LOCATION</code> can be written as <code>LOCATION \leftarrow [R0]</code>.</p>
+<p>Since registers don't have addresses, they will never appear on the right side of the <span class="math">\(\leftarrow\)</span> in square brackets.</p>
+<p>Some instructions can have literal values as well, called <strong>immediate values</strong>. For example, <code>SUBTRACT R2, R2, 5</code>, which can be written as <span class="math">\(R2 \leftarrow [R2] - 5\)</span>, has the immediate value 5.</p>
+<p>Branching in RTL notation simply sets the control register <code>PC</code>. For example, <code>BRANCH_IF_ZERO R0, LOOP</code> can be written as <span class="math">\(\text{if } [R0] == 1 \text{ then } PC \leftarrow LOOP\)</span>.</p>
+<p><strong>Addressing modes</strong> are different ways to specify where the operands of an instruction are. The location/type of operands is specified using an <strong>effective address</strong>.</p>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>

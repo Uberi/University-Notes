@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>CS348 | Anthony Zhang</title>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>
+function highlight() { // highlight all code blocks using HighlightJS
+  var code_blocks = document.getElementsByTagName("code");
+  for (var i = 0; i < code_blocks.length; i++)
+    hljs.highlightBlock(code_blocks[i]);
+}
+</script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body onload="highlight()">
+  <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="/blog/" class="page">blog</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="/resume.pdf" class="page">résumé</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+  </ul>
+<h1 id="cs348">CS348</h1>
+<p>Introduction to Database Management.</p>
+<pre><code>Edward Chan
+epfchan@uwaterloo.ca
+Office Hours: Monday, Wednesday 12:30 PM-1:15 PM, DC2338</code></pre>
+<h1 id="section">14/9/15</h1>
+<p>Databases, data modelling, and relational algebra, in theory and in practice.</p>
+<p>Assignments are due before 1 PM on their respective due dates. No late assignments. Midterm on November 6, 4:30 PM-6 PM.</p>
+<h1 id="section-1">16/9/15</h1>
+<h2 id="elements-of-databases">Elements of Databases</h2>
+<p>Databases are needed to manage data because we want to store and retrieve it in increasingly elaborate ways. Data is stored information.</p>
+<p>The goal of data management is to model part of the real world in a way that is practically useful. We want to do this efficiently and accurately, and hiding irrelevant details so we can concentrate on the common properties of the set (abstraction).</p>
+<p><strong>Intension</strong> of data is the definition of data, like the definition of employee records. <strong>Extension</strong> of data is the actual instances of the data, such as the set of employee records - it changes with the state of the world. In databases, the intension of data is the <strong>database schema</strong>. and the extension of data are the actual records in the database.</p>
+<p>A database management system (DBMS) dictates how data is organized and accessed - the structure of the data. A DBMS also exposes interfaces to store, retrieve, and update data efficiently. A modern DBMS must handle concurrent operations, ensure integrity (database constraints, such as a column being unique or a superset of another), enforce security (access control), and support versioning and recovery (ensuring data can be restored after failures such as hard drive crashes and data corruption).</p>
+<h1 id="section-2">18/9/15</h1>
+<p>Consider a banking app. The following code might be used for a transfer:</p>
+<pre><code>read source account
+subtract amount to transfer
+write source account
+read target account
+add amount to transfer
+write target account</code></pre>
+<p>This is a very poor way of going about data management. For example, if a system failure occurs right after <code>write source account</code>, the amount to transfer is simply lost, and the system is left in an inconsistent state. Additionally, if the source account has an amount transferred into it between <code>read source amount</code> and <code>write source amount</code>, that transfer is lost. In this case, we want the entire thing to happen as a unit, so it either goes through successfully, or if there is a system failure, it doesn't happen at all - it should be <strong>atomic</strong>.</p>
+<p>Logical files are those seen by application programmers, such as database tables. Physical files are those seen by system programmers, such as the actual files organized by the database.</p>
+<p>The goal of the modern DBMS is to make the data and the applications that use it more independent. This allows us to do things like swapping out the physical storage without changing any applications, or adding and removing indicese.</p>
+<p>DBMSs can require people like operators (data entry, machine operators), system developers, and database administrators. DBMSs also have associated procedures such as what to do in case of failures and how to use the interfaces</p>
+<p>DBMSs have a 3-level architecture - the external level (the application programs and views), the conceptual level (the conceptual schema/data model), and the internal level (data storage, OS, hardware).</p>
+<p>DBMSs also have various language interfaces, such as <strong>data definition language</strong> (DDL), which is used for defining schemas. The DDL is compiled into a system catalog, which is essentially just schema metadata. There is also the <strong>data manipulation language</strong>, which is the instructions from the application that allows data to be manipulated, and the <strong>query language</strong>, which allows data to be manipulated.</p>
+<p>A <strong>data model</strong> is the logical organization of data. On top of the data model, we define <strong>operations</strong> to manipulate it, and constraints to ensure data integrity and enforce logical restrictions.</p>
+<p>Objects in DBMSs can be stored by value or by reference. Storing by reference supports everything storing by value does, but can also have multiple entries reference the same object.</p>
+<h1 id="section-3">21/9/15</h1>
+<p>An <strong>entity</strong> is an object that has properties and can be uniquely identified. An <strong>entity set</strong> is a set of entities with similar properties - an extension. An <strong>entity type</strong> is an abstraction over an entity set - an intension. An attribute is a property of an entity, and an attribute value is an instance of an attribute. Attributes can be single-valued or multi-valued (such as arrays of other values), and simple (primitive) or composite (contains other simple/composite values). The <strong>domain</strong> is the set of all possible attribute values.</p>
+<p>A <strong>relationship</strong> is an association between multiple entities. An <span class="math">\(n\)</span>-ary relationship associates <span class="math">\(n\)</span> entities with each other. A <strong>relationship set</strong> is a set of similar relationships, such as those containing common entities - an extension. A <strong>relationship type</strong> is an abstraction over a relationship set - the intension, like WORKS_IN_DEPARTMENT in an employee databse.</p>
+<p>Relationship and entity types can have attributes too.</p>
+<p>When designing databases, we need to determine the functional requirements and the database requirements. Using these, we figure out the database interface (the transaction specification) and schema, and then implement the application program and set up the DBMS.</p>
+<h2 id="contraints-and-relationships">Contraints and Relationships</h2>
+<p>A <strong>candidate key</strong> is a minimal set of attributes (least possible number of attributes) of an entity type that uniquely identifies each entity in its entity set. For example, a collection of students might have student number or social insurance number as candidate key.</p>
+<p>A <strong>primary key</strong> is a candidate key that is chosen (as part of the design) as the main way to identify entities in an entity set. Primary keys can be added to any entity type, but are always optional. These <strong>key constraints</strong> apply to entity types.</p>
+<p>An <strong>entity-relation diagram</strong> represents entity types and relationship types using a flowchart-like diagram:</p>
+<ul>
+<li>Entity types are represented with labelled rectangles.</li>
+<li>Entity attributes are represented with ellipses, connected to entity types with lines.
+<ul>
+<li>Attributes that are part of the primary key, if there is one, have underlined labels.</li>
+</ul></li>
+<li>Relationships are labelled diamonds, connected to the entity types they act over with lines.
+<ul>
+<li>The cardinality is specified by labelling each of the two lines from the diamond with <code>(MIN_ENTITIES, MAX_ENTITIES)</code>. For example, a relationship between department and employee might have labels <code>(0, *)</code> for the department side, and <code>(1, 1)</code> for the employee side - departments can have any number of employees, while an employe always has just one department.</li>
+</ul></li>
+<li>Relationships and attributes should not be redundant - a relationship or attribute is reduntant if its removal doesn't change the meaning of the information.
+<ul>
+<li>For example, an attribute of an employee type that represents the department is redundant if there is also a relationship that associates employee entities with departments.</li>
+<li>For example, a relationship between department and classes is redundant if there is already a department-student relationship and a student-classes relationship - we could get the same information as a department-class relationship by going through the department-student and student-classes relationship.</li>
+</ul></li>
+</ul>
+<p>Entity-relationship diagrams often get cluttered by attribute ellipses. We can avoid this by not drawing attribute ellipses, and then also including a list with entries of the form <code>ENTITY_TYPE (ATTRIBUTE1, ATTRIBUTE2, ...)</code> to list out the entities. As before, primary key attributes are underlined in this list.</p>
+<h1 id="section-4">23/9/15</h1>
+<p>For example, for a school application we might have entity types STUDENT, PROGRAM, and CLASS. Relationships might include a STUDENT instance being ENROLLED_IN multiple CLASS entities, or a STUDENT instance MAJORED_IN a PROGRAM entity.</p>
+<p>The <strong>cardinality</strong> of a relationship type restricts the number of each entity type that can be in that relationhip type. For example, for binary relationships (relationships between two entity types), common cardinalities are 1:1 (one to one, 1 of each entity type per relationship), 1:N (one to many, one or more of one entity type per each of the other), and N:M (many to many, any number of either entity type). These <strong>cardinality constraints</strong> apply to relationship types. The cardinality, essentially, retricts the number of relationships an entity can can participate in.</p>
+<p>The <strong>existance constraint</strong> constrains whether an entity can exist independently of something else. For example, a department should not exist if there are no employees in it. Since a department is always associated with an employee. An entity type is <strong>totally dependent</strong> on another if every entity of the first is always associated with at least one of the second - the first cannot exist without the second.</p>
+<p>A common pattern for relationships is a one-to-many relationship that represents an entity, the subclass being one of many in a category, the superclass. This is called the <strong>is-a relationship</strong>, or <strong>generalisation</strong>. A generalization is drawn in entity-relationship diagrams as a down-pointing triangle labelled &quot;ISA&quot;. The superclass entity type is connected by a line, above the triangle, and the subclass entity types are connected by lines below it. Also, attributes of the superclass are inherited by subclasses.</p>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>
