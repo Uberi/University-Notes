@@ -133,3 +133,21 @@ As it turns out, people think false but justified assertions should not be made,
 In response, Turri conducted further experiments with different situations in order to eliminate variables. The reasoning was **excuse validation** - the maker of the false assertion has a reasonable excuse for being wrong. Turri concludes that factive accounts of assertion better explain people's reactions to assertions.
 
 Interestingly, blame depends on character judgements of the person - when people perceived as good broke a rule, they were blamed less or not considered to have broken rules more often than people perceived as bad. In other words, people will simply say someone did not break the rule if they are not to blame, because blame is associated with punishment, and a blameless person doesn't deserve punishment.
+
+# 28/9/15
+
+Readings: Fantl, McGrath
+
+We now look at the act of asserting itself. Do the practical consequences of acting affect justification?
+
+For now, we will say that one is justified in believing something if one has good enough evidence to know it. We will assume that justification is required for knowledge.
+
+**Evidentialism** is a theory of what justification is like, which states that whether one is justified in believing something depends only on **how much evidence is available** - the person believing doesn't matter, so two people with the same evidence should always have the save belief. Evidentialism ignores motives, pre-existing beliefs, and preconceptions in favor of following the evidence, and only the evidence.
+
+However, Fantl and McGrath deny evidentialism - there are things other than evidence that can affect whether beliefs are justified and whether one has knowledge. For example, if you know X, it is no problem to act as if X. However, if it is a problem to act as if X, then you could explain it away as though you didn't know X, even though you did. The main idea is that if you know that something is true, then it is fine to act on it - it is rational to act on your knowledge. Also, if you're justified in beliecing something is true, then it is also fine to act on it.
+
+However, how much is at stake affects how rational it is o perform certain actions - what is the cost of getting something wrong? For example, suppose we were vacationing, and we ask someone whether a train stops in Foxboro, and we don't really care if it's right or not. Since this is pretty good evidence that it does stop there, we would believe the person and get on the train. However, if we were on the way to a critical job interview, we would probably double check just in case. In this case, the evidence is not good enough to believe the person, and would get more evidence instead.
+
+In other words, in one case it is rational to believe the justification, and in another case it is not - so in one case, your belief is justified, and in another, it is not, even though there is exactly the same evidence in both cases. This implies that there is more than just evidence at play in belief and actions. This is at odds with evidentialism - perhaps each person actually has their own personal threshold of justification.
+
+The rationality of acting, according to Fantl and McGrath, sets the standard for how much evidence is needed in order to know or be justified in believing something.
