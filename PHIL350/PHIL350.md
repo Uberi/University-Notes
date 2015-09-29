@@ -3,10 +3,35 @@ PHIL350
 
 Theories of Knowledge.
 
-    Wesley Buckw 
-lter
+    Wesley Buckwalter
     Section 001
     Office hours: Monday, Wednesday 2:30 PM-3:30 PM, Hagey Hall 325
+
+$$
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
+$$
 
 # 14/9/15
 

@@ -13,10 +13,7 @@ h1[id ^= "section"] {
 	margin: 0.3em 0;
 }
 
-h2 {
-	font-size: 2.5em;
-	line-height: 90%;
-}
+h2 { font-size: 2.5em; }
 
 h3 {
 	font-size: 1.5em;

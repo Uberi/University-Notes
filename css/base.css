@@ -5,6 +5,51 @@
 	src: local("OFL Sorts Mill Goudy TT"), url("fonts/sorts-mill-goudy.ttf")  format("ttf");
 }
 
+/* modified reset stylesheet v2.0 from http://meyerweb.com/eric/tools/css/reset/ (public domain) */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 body {
 	font-size: 100%;
 	margin: 0;
@@ -12,6 +57,7 @@ body {
 	background-color: white;
 	font-family: "OFL Sorts Mill Goudy TT", Georgia, Times New Roman, Times, serif;
 	text-align:center;
+	line-height: 1.5;
 }
 
 h1 {
@@ -21,14 +67,25 @@ h1 {
 	font-size: 3em;
 	color: #444444;
 	font-variant: small-caps;
-	margin-bottom: -0.3em;
 }
 
 h1 a { color: inherit; }
 
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+ol, ul {
+	list-style-type: disc;
+	margin-left: 1.5em;
+}
+
 .site_links {
 	padding: 0;
 	margin: 0;
+	margin-top: -0.8em;
+	margin-bottom: 2em;
 }
 
 .site_links li {
@@ -58,7 +115,7 @@ h1 a { color: inherit; }
 
 .site_links a:hover, .site_links a:focus {
 	border-top-color: #990000;
-	transform: rotate(-8deg); -ms-transform: rotate(-8deg); -webkit-transform: rotate(-8deg);
+	transform: rotate(-8deg); -webkit-transform: rotate(-8deg);
 }
 
 .site_links .page { border-color: #009900; border-top-color: rgba(0, 153, 0, 0); }
@@ -68,7 +125,7 @@ h1 a { color: inherit; }
 
 @media only screen and (max-width: 650px) {
 	.site_links li {
-		font-size: 1em;
+		font-size: 1.3em;
 		display: block;
 	}
 
@@ -78,10 +135,12 @@ h1 a { color: inherit; }
 		padding-left: 1em;
 		border-top: none;
 		letter-spacing: 0.1em;
+		transition: all 0.2s ease-in; -webkit-transition: all 0.2s ease-in;
 	}
 
 	.site_links a:hover, .site_links a:focus {
-		animation: none; -webkit-animation: none;
+		transform: none; -webkit-transform: none;
+		padding-left: 1.5em;
 	}
 
 	.site_links .divider { display: none; }
@@ -90,25 +149,24 @@ h1 a { color: inherit; }
 a { color: #775555; }
 
 code {
+	font-family: monospace;
 	border: 1px solid grey;
 	border-radius: 0.3em;
 	white-space: pre;
 	display: inline-block;
 	padding: 0.1em 0.3em;
-	color: #555555;
 	overflow: auto;
 	line-height: 150%;
 }
-
 :not(pre) > code {
 	display: inline-block !important;
-	padding: 0.1em 0.3em !important;
-	margin-bottom: -0.6em;
+	padding: 0 0.3em !important;
+	margin-bottom: -0.45em;
+	margin-top: 0.2em;
 }
-
-pre { margin: 1em 3em; }
-
-pre > code { padding: 1em; overflow: auto; }
+.highlight { margin: 1em 3em; }
+pre code { padding: 1em; overflow: auto; display: block; }
+:not(.highlight) > pre { margin: 1em 3em; }
 
 .license {
 	font-size: 0.6em;
