@@ -19,6 +19,16 @@ function highlight() { // highlight all code blocks using HighlightJS
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68271407-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
   <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
   <ul class="site_links">
     <li><a href="/blog/" class="page">blog</a></li>
@@ -129,6 +139,19 @@ write target account</code></pre>
 <p>A <strong>specialization</strong> is when a single general entity type is broken down into multiple, more specific entity types. In ERDs, we make the new specialized entity types, and then add an is-a relationship between these new entity types and the general entity type.</p>
 <p>An <strong>aggregation</strong> is when a relationship between multiple entities is itself treated like an entity type, like having relationships between that relationship and other entity types. In ERDs, we draw these as a box around the entire relationship diamond and any entity types it relates together.</p>
 <p>For example, suppose a school offers courses, and students can enquire into offered courses, we can model this using a school entity type, related with a course entity type with a &quot;OFFERS&quot; relationship, and a student entity type. Here, we could have a &quot;ENQUIRES_ABOUT&quot; relationship between students, schools, and courses, but this rather cumberome. Instead, we can use aggregation - we treat the OFFERS relationship like an entity, and relate students to &quot;OFFERS&quot; using an &quot;ENQUIRES_ABOUT&quot; relationship.</p>
+<h1 id="section-6">28/9/15</h1>
+<p>Databases are often too large to fit in main memory. Therefore, they are generally stored on disk drives or SSDs.</p>
+<p>Disk drives have disk packs (disks on a spindle), which have multiple platters (disks), each with many concentric tracks (circles). Tracks are divided into equally sized pages/blocks/sectors (chunks), each of which stores around 512 bytes to 4 kilobytes. The tracks with corresponding radii on each platter form a cylinder.</p>
+<p>The disk pack is rotated at a constant speed (typically thousands of RPM), and read/write heads move back and forth over the disks to read/write the data. The blocks on each track have the track number (the cylinder in which the block resides), surface number (which platter the block is on), and block number within the track. Blocks are the unit of transfer and are uniquely identified by these 3 values.</p>
+<p>To perform a read/write a block on a disk drive, the read/write head has to seek to the right track, wait for the disk to spin around to the right track, and then perform the read/write until done. As this is a mechanical process, this can take multiple milliseconds - two orders of magnitude greater than CPU operations.</p>
+<p>As a result of the mechanical aspects of disk drives, it's a good idea to put related data close together on the same track, in order to avoid seek times and rotational delay when reading related information - this is known as <strong>clustering</strong>. We also try to cache recently used values (and marking modified cache entires as dirty to write them back later), in order to avoid disk operations entirely when possible.</p>
+<p>Solid state drives are a lot better, with access times around 150 nanoseconds, but are still very slow relative to the CPU.</p>
+<p>A <strong>file</strong> is a sequence of records (fixed or variable length). Each record is stored on at most one block. The blocks storing records can be contiguous (side by side in memory), linked (blocks point to their neighbors), or indexed (a separate mapping is maintained for where certain data is located).</p>
+<p>An <strong>ordered/sequential</strong> file has its records sorted by a particular attribute, the <strong>ordering field</strong>. This allows us to find records very fast using binary search, but it also slows down insertions - one common pattern is to accumulate records to insert in an overflow file, and merge it in periodically.</p>
+<p>An <strong>index</strong> is extra information added to a file to provide faster accesses at the cost of slower writes. The index is generally a separate file, so there is a data file and an index file.</p>
+<p>Indices are built on a particular set of attributes, called the <strong>search key</strong>. A <strong>primary index</strong> is one built on the primary key alone, and any other is a <strong>secondary index</strong>. An <strong>ordered</strong> index keeps the search key in sorted order, while an <strong>unordered</strong> index does not.</p>
+<p>Indices are generally implemented using B+ trees. These are very good for range queries, and can easily be inserted into or removed from.</p>
+<p>;wip: lru_cache for rust</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
