@@ -210,11 +210,65 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <ul>
 <li>Divide the problem instance <span class="math">\(I\)</span> into smaller subproblems <span class="math">\(I_1, \ldots, I_n\)</span>.</li>
 <li>Solve <span class="math">\(I_1, \ldots, I_n\)</span> recursively to get sollutions <span class="math">\(S_1, \ldots, S_n\)</span>.</li>
-<li>Use <span class="math">\(S_1, \ldots, S_n\)</span> to compute <span class="math">\(S\)</span>. This is usually the hardest step.</li>
+<li>Use <span class="math">\(S_1, \ldots, S_n\)</span> to compute <span class="math">\(S\)</span> - combine the results. This is usually the hardest step.</li>
 </ul>
 <p>For example, mergesort splits an array into two subarrays, and then recursively sorts those. Then, the merge is performed to combine the two sorted subarrays.</p>
 <p>The time complexity of this is <span class="math">\(T(n) = \begin(cases) T(\ceil{\frac n 2}) + T(\floor{\frac n 2}) + cn &amp;\text(if } n &gt; 1 \\ d &amp;\text(if } n = 1 \\ \end{cases}\)</span> for some constants <span class="math">\(c, d\)</span>. This is called the <strong>exact recurrence</strong>. If we remove the ceilings and floors, we get a <strong>sloppy recurrence</strong> <span class="math">\(T(n) = \begin(cases) 2T(\frac n 2) + cn &amp;\text(if } n &gt; 1 \\ d &amp;\text(if } n = 1 \\ \end{cases}\)</span>, which only works the same when <span class="math">\(n\)</span> is a power of 2, but is a lot simpler to work with.</p>
 <p>The master theorem can prove that mergesort is <span class="math">\(\Theta(n \log n)\)</span> for the sloppy recurrence, and therefore only for when <span class="math">\(n\)</span> is a pwoer of 2. However, if we want to get the time complexity for all <span class="math">\(n\)</span>, we need to use induction on the exact recurrence.</p>
+<h1 id="section-5">30/9/15</h1>
+<h3 id="non-dominated-points">Non-dominated points</h3>
+<p>Suppose we have a set of 2D coordinates/points. One point <strong>dominates</strong> another if it has a greater or equal X and Y coordinate than the other. We want to find those points that are non-dominated - the points that are not dominated by any other point. The non-dominated points form a sort of boundary below which all the dominated points lie.</p>
+<p>Clearly, this can easily be solved simply by checking every pair of points to see which dominate which, but this would take <span class="math">\(\Theta(n^2)\)</span> time.</p>
+<p>A better solution is to sort the points by their X coordinate, and then apply divide and conquer.</p>
+<p>Dividing larger sets of points <span class="math">\(S\)</span> is also easy - we can just split the sorted points into two sets <span class="math">\(S_1, S_2\)</span>, and then recursively solve the problem. It is the combining step that is the difficult step.</p>
+<p>Given a point and the highest point on its right, it is easy to determine whether it is dominated. This is our base case</p>
+<p>Clearly, no point in <span class="math">\(S_1\)</span> can dominate a point in <span class="math">\(S_2\)</span>, since the X coordinates of points in <span class="math">\(S_1\)</span> is strictly less than points in <span class="math">\(S_2\)</span>. So we find the point in <span class="math">\(S_2\)</span> with the highest Y coordinate, and all points in <span class="math">\(S_1\)</span> with Y coordinate at or below this value are guaranteed to be dominated by at least one point in <span class="math">\(S_2\)</span>. In this way, we can eliminate all the points in <span class="math">\(S_1\)</span> that are dominated by points in <span class="math">\(S_2\)</span> in <span class="math">\(O(n)\)</span> time - this is the combining step.</p>
+<p>In code, this looks like:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> non_dominated(points):
+    points = <span class="dt">sorted</span>(points, key=<span class="kw">lambda</span> p: p.x)
+    <span class="kw">if</span> <span class="dt">len</span>(points) == <span class="dv">1</span>: <span class="kw">return</span> {points[<span class="dv">0</span>]}
+    pivot = floor(<span class="dt">len</span>(points) / <span class="dv">2</span>)
+    left = non_dominated(points[:pivot])
+    right = non_dominated(points[pivot + <span class="dv">1</span>:])
+    <span class="kw">while</span> i &lt; <span class="dt">len</span>(left) and left[i].y &gt; right[<span class="dv">1</span>].y:
+        i += <span class="dv">1</span></code></pre>
+<p>Clearly, the time complexity of this algorithm is <span class="math">\(T(n) = T\left(\floor{\frac n 2}\right) + T\left(\ceil{\frac n 2}\right) = O(n \log n)\)</span> (the sloppy version of this can be proven using the master theorem).</p>
+<p>Without divide and conquer, we could also just sort the list, and then iterate though it from right to left, keeping track of the largest Y axis coordinate seen so far and eliminating points at or below this Y coordinate:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> non_dominated(points):
+    largest = <span class="dt">float</span>(<span class="st">&quot;-inf&quot;</span>)
+    <span class="kw">for</span> point in <span class="dt">reversed</span>(<span class="dt">sorted</span>(points, key=<span class="kw">lambda</span> p: p.x)):
+        <span class="kw">if</span> point.y &lt;= largest:
+            <span class="kw">yield</span> point
+        <span class="kw">else</span>:
+            largest = point.y</code></pre>
+<h3 id="closest-pair">Closest pair</h3>
+<p>Suppose we have a set <span class="math">\(Q\)</span> of <span class="math">\(n\)</span> distinct 2D points in Euclidean space. We want to find the two points that are closest together - the points <span class="math">\(u, v\)</span> for which <span class="math">\(\sqrt{(u_x - v_x)^2 + (u_y - v_y)^2}\)</span> is minimised.</p>
+<p>Clearly, minimising <span class="math">\(\sqrt{(u_x - v_x)^2 + (u_y - v_y)^2}\)</span> is the same as minimising <span class="math">\((u_x - v_x)^2 + (u_y - v_y)^2\)</span>. We will again sort the points in <span class="math">\(Q\)</span> by X coordinate, taking <span class="math">\(\Theta(n \log n)\)</span> time.</p>
+<p>The dividing step is again trivial to get two partitions <span class="math">\(Q_1, Q_2\)</span>, but the combining step takes some work.</p>
+<p>If we are given the distance <span class="math">\(\delta\)</span> between the closest pair of points seen so far in the left and right partitions, and a point <span class="math">\(p\)</span>, we know that if this point is in the closest pair of points, the other point must have X coordinate within <span class="math">\(\delta\)</span> of this point's X coordinate. Therefore, the other point must be in the <strong>critical strip</strong> - a section of the plane from <span class="math">\(p_x - \delta\)</span> to <span class="math">\(p_x + \delta\)</span> and extending infinitely both up and down.</p>
+<p>We now want to find the closest pair between the left and right partitions, if it is less than the .</p>
+<p>There is also a lemma that says that if a critical strip <span class="math">\(R\)</span> of <span class="math">\(Q\)</span> is sorted by Y coordinate, and <span class="math">\(R[j]\)</span> and <span class="math">\(R[k]\)</span> have distance less than <span class="math">\(\delta\)</span> where <span class="math">\(j &lt; k\)</span>, then <span class="math">\(k \le j + 7\)</span>. Here, <span class="math">\(\delta\)</span> is the smaller of the minimum distance between points in <span class="math">\(Q_1\)</span>, and the minimum distance between points in <span class="math">\(Q_2\)</span>. This can be proven by dividing the strip around the point as squares of side length <span class="math">\(\frac \delta 2\)</span>, and then showing that no two points can be in the same square. In other words, within a critical strip and given <span class="math">\(\delta\)</span>, the point closest to a given point can be determined in 7 comparisons or less.</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> closest_pair(points, start, end):
+    <span class="kw">if</span> start == end: <span class="kw">return</span> <span class="dt">float</span>(<span class="st">&quot;inf&quot;</span>)
+    pivot = floor((left + right) / <span class="dv">2</span>)
+    closest_left = closest_pair(points, left, pivot)
+    closest_right = closest_pair(points, pivot + <span class="dv">1</span>, right)
+    closest = <span class="dt">min</span>(closest_left, closest_right)
+    candidates = select_candidates(left, right, closest, points[pivot].x) <span class="co"># find points in the critical strip</span>
+    candidates = <span class="dt">sorted</span>(candidates, key=<span class="kw">lambda</span> p: p.y)
+    closest = check_candidates(candidates, closest)
+    <span class="kw">return</span> closest</code></pre>
+<p>The time complexity of this is <span class="math">\(O(n \log n \log n)\)</span>. We can improve this by eliminating the Y coordinate sort of the candidates. One of them is to sort all the points <span class="math">\(Q\)</span> by Y coordinate to begin with, and then use that list when checking candidates, and then adding the necessary checks that make it work. Alternatively, we could replace the Y coordinate sort with a merge, and maintaining the candidates in sorted order.</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> closest_pair(points, start, end):
+    <span class="kw">if</span> start == end: <span class="kw">return</span> <span class="dt">float</span>(<span class="st">&quot;inf&quot;</span>)
+    pivot = floor((left + right) / <span class="dv">2</span>)
+    closest_left = closest_pair(points, left, pivot)
+    closest_right = closest_pair(points, pivot + <span class="dv">1</span>, right)
+    closest = <span class="dt">min</span>(closest_left, closest_right)
+    merge_in_place(points, start, pivot, end)
+    candidates = select_candidates(left, right, closest, points[pivot].x) <span class="co"># find points in the critical strip</span>
+    closest = check_candidates(candidates, closest)
+    <span class="kw">return</span> closest</code></pre>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

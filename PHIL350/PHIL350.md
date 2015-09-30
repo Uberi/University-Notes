@@ -175,4 +175,32 @@ However, how much is at stake affects how rational it is o perform certain actio
 
 In other words, in one case it is rational to believe the justification, and in another case it is not - so in one case, your belief is justified, and in another, it is not, even though there is exactly the same evidence in both cases. This implies that there is more than just evidence at play in belief and actions. This is at odds with evidentialism - perhaps each person actually has their own personal threshold of justification.
 
-The rationality of acting, according to Fantl and McGrath, sets the standard for how much evidence is needed in order to know or be justified in believing something.
+The rationality of acting, according to Fantl and McGrath, sets the standard for how much evidence is needed in order to know or be justified in believing something. In their example, the stakes of the situation influence whether a belief is justified.
+
+# 30/9/15
+
+Readings: Buckwalter, Turri
+
+The accepted norm of assertion is knowledge - you should assert something only if you know it. This is supported by empirical studies of assertion in the real world, as discussed earlier. In the real world, showing is more costly than telling - so if knowledge is important for showing (asserting), it should also be important for showing.
+
+In other words, if knowledge is the norm of assertion, is knowledge also the norm of showing? The readings seem to suggest that yes, this is the case - **we should only show something if we know it**:
+
+* "How is this done?" (asking for instruction/demonstration/showing) is similar to "do you know how this is done?" (asking for the presence of knowledge), just like "what is this?" works like "do you know what this is?". If one knows, then one can show.
+* Saying "I don't know how to do this" is a legitimate reason to not demonstrate it. If you don't know how to do something, it tells everyone that you should not need to demonstrate it. Without knowledge, one should not show.
+* "How do you know that?" challenges one's authority, and implicitly requests a demonstration. Challenges to knowledge are challenges to demonstrate.
+* Being able to show something, but not knowing how to do something seems inconsistent - saying "I don't know how to drive" while driving perfectly seems weird. Showing something seems to imply knowing something.
+
+If knowledge is the norm of both showing and telling, knowledge is also the norm of instruction - the criteria by which we should decide whether to transmit information.
+
+An interesting thing to consider is muscle memory - if muscle memory is knowledge, then it is possible to have knowledge without belief, justification, or truth. For example, muscle memory might store the relationship between the gas pedal and the current acceleration, but one need not even believe that the gas pedal affects acceleration to act on it.
+
+"Descartes' Schism, Locke's Reunion" looks at whether things like the train thought experiments held up empirically. Descartes' view is that knowledge is completely separate from action, while Locke states that they are intricately linked.
+
+Locke basically says that knowledge is truth, evidence, belief, and practical factors - practical factors directly influene knowledge. Descartes basically says that knowledge is truth, evidence, and belief, all of which are affected by practical factors - practical factors are removed from knowledge. We want to test these empirically, using psychological and sociological experiments.
+
+These experiments tested things like how knowledge was affected by two identical sitations with different stakes, as well as many other variables. Each of the 600+ particupants were given situations with different stakes, and then questioned regarding the state of belief, truth, evidence, action, knowledge, and importance.
+
+As it turns out, stakes had a negative correlation with action, truth, and evidence, and these in turn had a positive correlation with knowledge. So if the stakes are high, actionability, confidence in truth, and amount of evidence are decreased, and if they are low they are all increased. Acting had the most significant impact on having knowledge, truth a little less, but evidence a lot less.
+
+So essentially, action does have a direct impact on knowledge, like Locke's model, but the stakes are also somewhat removed from knowledge, like Descartes' model. So the ability to act on something had the largest impact on whether one thinks one has knowledge. Note that since this experiment only measures correlation, it doesn't tell us anything about which way the knowledge/action link goes - does knowledge result in actionability, or does actionability imply knowledge?
+
