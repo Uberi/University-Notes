@@ -127,8 +127,6 @@ Another example is a Catholic teacher who believes in creationism, but still tea
 
 Readings: Turri
 
-;wip: do critical response 1 and submit via learn
-
 There are different types of speech acts, and each one have their own norms and rules. For example, guessing has different norms from speculating, conjecturing, asserting, promising, or guaranteeing. The norms and rules are what we are trying to define for each relevant speech act.
 
 There are different types of normativity. **Constitutive normalivity** are the internal rules that consitute a practice - the rules that basically define the practice. **Moral normativity** are rules that say when a practice is morally permissible - the rules than define when we should do the practice. **Prudential normativity** are rules that say when a practice is prudent/wise - when it would be a good idea to do a practice.
@@ -204,3 +202,73 @@ As it turns out, stakes had a negative correlation with action, truth, and evide
 
 So essentially, action does have a direct impact on knowledge, like Locke's model, but the stakes are also somewhat removed from knowledge, like Descartes' model. So the ability to act on something had the largest impact on whether one thinks one has knowledge. Note that since this experiment only measures correlation, it doesn't tell us anything about which way the knowledge/action link goes - does knowledge result in actionability, or does actionability imply knowledge?
 
+# 5/10/15
+
+Readings: Fricker, Lackey
+
+Testimony
+=========
+
+We want to investigate the relationship between knowledge, and the person hearing it - in particular, what is testimony, when should be believe it, and when does it count as knowledge?
+
+Justification is necessary for knowledge. Justification, in turn, is done through good evidence - from memory, observation, reasoning, and testimony.
+
+In legal systems, testimony is rigidly defined and is given on the witness stand. For us, giving testimony is making an assertion, claim, or presents something as true. Where we previously looked at the speaker's side (when we should say something), we will now look at the listener's side (when we should believe something).
+
+A **testimonial belief** is a belief formed by testimony. Most of our beliefs actually seem to be testimonial beliefs. When we believe things people say, we seem to often gain real knowledge, often without us thinking about it much at all. We also seem to sometimes gain false beliefs, and our goal is to find a criteria for belief that helps us gain only real knowledge.
+
+One informal one people often use is the speaker's track record - how good their testimony has been in the past. Others include the stakes, relationship with the speaker, and the motives of the speaker.
+
+According to **reductionism**, testimonial beliefs are justified in the same way as any other source of evidence, like induction, past observations, and reasoning - **testimony is not special**. **Anti-reductionism** is the opposite view - that testimonial beliefs are justified by a special principle.
+
+Fricker investigates the reductionist/anti-reductionist distinction, and argues for reductionism.
+
+The **PR thesis** is presented as a principle for justifying testimonial beliefs, in favour of anti-reductionism: that hearers of testimony can assume, without other evidence, that the speaker is trustworthy, unless there are special circumstances that prevent this (like the speaker not being in the right state of mind, or known to say false things often). In other words, listeners can just assume the speakers are trustworthy, unless given a good reason not to.
+
+Fricker criticizes this by saying that hearers are never justified in simply trusting speakers - according to Fricker, hearers of testimony should always assess the speakers for trustworthiness. In other words, gullible/blind beliefs are not justified. Instead, hearers should **critically assess** the testimony, be able to **explain the testimony in their own words**, and be able to **defend the beliefs formed from the testimony**. This is called the **NC thesis** (negative claim).
+
+This is a very internal view - all the criteria are judged in the mind of the hearer.
+
+One objection to this is that it is often not possible for hearers of testimony to independently confirm that speakers are trustworthy - it is unrealistic to expect hearers to evaluate all these criteria. Fricker responds that it is realistic - people actually are always evaluating trustworthiness subconsciously, and this affects our evaluations of speakers' trustworthiness. **Counterfactuals** are essentially thoughts about hypothetical situations - thoughts about "what would happen if X happened instead of Y?". According to Fricker, testimonial justification requires **counterfactual sensitivity** - thinking about "what if the speaker is untrustworthy?" and "if they were untrustworthy, would I have spotted that?". Basically, testimonial belief is justified when the hearer would be able to tell if the speaker is being untrustworthy.
+
+Fricker's evidence for the NC thesis is mostly common sense and ordinary/everyday experiences, and normative linguistic theories - is this good enough evidence to support the thesis? Also, this doesn't tell us how much evidence we need, or how trustworthy speakers must be before forming beliefs.
+
+One interesting case is self-knowledge (assertions about the speaker's own experiences). In these cases, hearers generally simply trust what the speakers say, and it isn't really possible to critically assess the trustworthiness in this case. Also, should be assess strangers more heavily than trusted friends? Are there some roles when the critical assessment is already done for you (for example, when a doctor tells a patient to do something)?
+
+Lackey investigates the properties of testimony transfer - is testimony like passing a baton? In other words, can hearers get knowledge from the speaker even if the speaker doesn't have that knowledge?
+
+Basically, Lackey talks about whether testimony simply transmits knowledge, or whether it can actually generate new knowledge, and argues for the latter. For example, a creationist teacher that teaches evolution (despite not believing it) doesn't have knowledge of the material (she is simply following orders), yet it seems like the students can obtain knowledge, even though the speaker doesn't have knowledge.
+
+;wip: critical response topic: knowledge cannot be generated by testimony, because if the speaker doesn't have knowledge then the hearer doesn't have justification in JTB.
+
+# 7/10/15
+
+A **defeater** is something that defeats evidence - it takes away confidence in evidence that one has. When people make testimony, sometimes the defeaters don't get transferred - people may not transmit counterarguments, conflicting facts, and other things that might throw the evidence into question
+
+An interesting case of testimony: person A has good vision, but the person's doctor tells them that their vision is unreliable. Person A sees X, and tells person B as such, but does not tell person B that the doctor said person A's vision is unreliable. Person A's evidence of seeing X is defeated by the doctor's statement. However, from person B's perspective, there is nothing wrong with the evidence.
+
+Lackey concludes, from these and other situations, that testimony can actually generate knowledge, in contrast to memory, which can only preserves knowledge.
+
+Does the way testimony work depend on what you're talking about? Hazlett investigates this by looking at several case studies.
+
+If someone knows a lot about football, and you ask them who won a particular game, you would probably accept the answer on the basis of testimony alone. If someone knows a lot about ethics, and you ask them whether military intervention in some country is right, you would probably not accept the answer on the basis of testimony alone.
+
+These two situations have the same form, with only the content changed. Perhaps it's because there's just so many possible options that need to be weighed to make a decision in the latter case, or there is a difference when there are multiple plausible answers?
+
+If someone knows a lot about art, and you ask them whether a piece of art is beautiful, it doesn't really make sense. If someone knows a lot about metaphysics, and you ask them whether god exists, you would probably not accept the answer on the basis of testimony alone.
+
+Hazlett says there are different types of testimony, including factual testimony ("what is this thing?"), ethical testimony ("is this thing right?"), aesthetic testimony ("is this thing beautiful?"), religious testimony ("does god exist?"), and so on. In each type of testimony, there seems to be different norms. When the content of testimony is about ethics, religion, or aesthetics, there seems to be something wrong about forming beliefs based on just that testimony - there is **testimonial asymmetry**.
+
+Hazlett assumes testimonial asymmetry exists, and attempts to diagnose the cause. For children, moral/religious/aesthetic testimony seems to be fine - parents telling children what's right or wrong seems to be good testimony.
+
+This view is non-reductionist in that the good/bad judgement is for the testimony itself, not about the beliefs that cause the testimony. Hazlett proposes a few theories of the causes of some testimony being different.
+
+By understanding theory, moral/religious/aesthetic knowledge requires understanding in addition to just facts, and understanding cannot be transferred via testimony.
+
+By acquaintance theory, moral/religious/aesthetic knowledge requires acquaintance with the subjects - perception and experience with the things being talked about, that also can't be transferred via testimony.
+
+By virtue theory, moral/religious/aesthetic knowledge requires virtues, such as the virtue of figuring this out for oneself, a virtue that cannot be transferred via testimony.
+
+Basically, these theories push the testimonial asymmetry into knowledge asymmetry. Hazlett rejects all of these, and proposes a social theory instead: moral/religious.aesthetic knowledge is socially valuable, and testimony cannot transfer the social value via testimony - beliefs are not worth as much when they were just formed by testimony, since they reduce diversity of knowledge. In other words, testomonial beliefs are bad when they are bad for society.
+
+;wip: critical response idea: testimonial asymmetry: testimony seems to be good if and only if we expect the speaker to have knowledge about the topic they are talking about

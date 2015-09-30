@@ -50,6 +50,7 @@ function highlight() { // highlight all code blocks using HighlightJS
 <h1 id="cs348">CS348</h1>
 <p>Introduction to Database Management.</p>
 <pre><code>Edward Chan
+Section 002
 epfchan@uwaterloo.ca
 Office Hours: Monday, Wednesday 12:30 PM-1:15 PM, DC2338</code></pre>
 <p><span class="math">\[
@@ -169,8 +170,36 @@ write target account</code></pre>
 <p>If a leaf node overflows (has more than <span class="math">\(d\)</span> keys), we split the records into two new, roughly equally sized data nodes (the left size is 0 or 1 more than the right size), then add a key to the parent index node for the largest value of the left side. This can cause the parent node to overflow as well.</p>
 <p>If an index node overflows (has more than <span class="math">\(m - 1\)</span> keys), we split the keys into two new, roughly equally sized index nodes (the left side is 0 or 1 more than the right size), where the middle key of the original index node (or the key right after the middle of the key list) is moved into the parent index node. This can cause the parent node to overflow as well.</p>
 <p>Suppose we want to delete a record from a B+ tree. First, we search for the leaf node we want to delete from, ad then delete it.</p>
-<p>If a leaf node underflows (has less than <span class="math">\(\floor{\frac d 2}\)</span> keys), we check its neighbor - if the neighbor has <span class="math">\(\floor{\frac d 2}\)</span> keys, we merge the leaf node with its neighbor. Otherwise, we redistribute records from the neighbor into this leaf node so they have roughly the same amount (at this point, neither is underflowing). This can cause the parent node to underflow as well if we end up merging.</p>
-<p>If an index node underflows (has less than <span class="math">\(\floor{m 2}\)</span> keys), we also check its neighbor - if the neighbor has <span class="math">\(\floor{\frac m 2}\)</span> keys, we merge the index node with its neighbor. Otherwise, we redistribute keys from the neighbor into this index node, like with leaf nodes. This can cause the parent node to underflow as well if we end up merging.</p>
+<p>If a leaf node underflows (has less than <span class="math">\(\floor{\frac d 2}\)</span> keys), we check its neighbor - if the neighbor has <span class="math">\(\floor{\frac d 2}\)</span> keys, we merge the leaf node with its neighbor. Otherwise, we redistribute records from the neighbor into this leaf node so they have roughly the same amount (at this point, neither is underflowing). This can cause the parent node to underflow as well if we end up merging (merging is only done if redistribution isn't possible).</p>
+<p>If an index node underflows (has less than <span class="math">\(\floor{m 2}\)</span> keys), we also check its neighbor - if the neighbor has <span class="math">\(\floor{\frac m 2}\)</span> keys, we merge the index node with its neighbor. Otherwise, we redistribute keys from the neighbor into this index node, like with leaf nodes. This can cause the parent node to underflow as well if we end up merging (merging is only done if redistribution isn't possible).</p>
+<h1 id="section-9">5/10/15</h1>
+<p>The B+ trees we have seen so far are only for the primary key indices. For multiple indices, things get a lot more complicated.</p>
+<h2 id="the-relational-model">The Relational Model</h2>
+<p>Modern DBMS use the <strong>relational model</strong>, based on relational algebra and first order logic. Models have the structural components, contraint components, and the operational components. These DBMSs became possible to implement a few decades ago, replacing earlier heirarchical models.</p>
+<p>In relational models, the main idea is that all the information is represented using <strong>flat relations</strong>, which allows us to specify the structure of the data declaratively.</p>
+<p>The <strong>relational schema</strong> represents relations that we want to model.</p>
+<p>We can represent a <strong>relation</strong> <span class="math">\(R\)</span> over <span class="math">\(n\)</span> attributes as a set of <span class="math">\(n\)</span>-tuples <span class="math">\(\tup{a_1, \ldots, a_n} \in D_1 \times \ldots \times D_n\)</span>. <span class="math">\(\tup{a_1, \ldots, a_n}\)</span>, where <span class="math">\(D_1, \ldots, D_n\)</span> are the <strong>domains</strong>, sets of simple, single-valued attributes - <span class="math">\(D_i\)</span> is the set of all values of attribute <span class="math">\(i\)</span>. In other words, relations are defined over attributes.</p>
+<p>If the relation is in <span class="math">\(D_1 \times \ldots \times D_n\)</span>, then it is on <span class="math">\(n\)</span> sets and <span class="math">\(n\)</span> is the degree of the relation.</p>
+<p>In DBMSs, all relations are represented as flat tables, where the columns are the attributes <span class="math">\(D_1, \ldots, D_n\)</span>, and the rows are the instances of the relation. Note that there is no concept of entities here - relations represent both entity-relational entities and entity-relational relations.</p>
+<p>The intension of a relation is the relational schema, and the intension of the database isthe database schema <span class="math">\(R = \set{R_1, \ldots, R_k}\)</span>. The extension of a relation is the set of possible tuples <span class="math">\(\tup{a_1, \ldots, a_n}\)</span>.</p>
+<h1 id="section-10">7/10/15</h1>
+<p>By the <strong>closed world assumption</strong> (if something is true, then we know it's true), relations are complete - if things are related to each other, then we also know that they are related to each other.</p>
+<h3 id="converting-erds-to-relational-schemas">Converting ERDs to relational schemas</h3>
+<p>We have several heuristics for converting ERDs to relational schemas, but there isn't always a good way to.</p>
+<p>When there is a one to many relation between doctors (<code>Doctor(DOCTOR_ID, ...)</code> in the ERD) and hospitals (<code>Hospital(HOSPITAL_ID, ...)</code> in the ERD), we might represent doctors in the relational schema as <code>Doctor(DOCTOR_ID, HOSPITAL_ID, ...)</code> - we added an attribute to doctors that specifies which hospital they work in, to represent this one-to-many relation. In general, when we have a one-to-many or one-to-one relation, we can add an attribute to one of the objects identifying the instance of the other object it's associated with.</p>
+<p>When there is a many to many relation between students (<code>Student(STUDENT_ID, ...)</code>) and courses (<code>Course(COURSE_ID)</code>), we might add a new table for the relation <code>Taking(STUDENT_ID, COURSE_ID)</code>. In general, when we have a many-to-many relation, we can add a new table that associates them with each other.</p>
+<h3 id="constraints">Constraints</h3>
+<p>Constraints limit the form of the data that can exist within the DBMS. Some constraints are inherent, such as the fact that there cannot be any duplicate rows, and how the prmary key, if it exists, cannot contain null values.</p>
+<p>There are also other types of constraints:</p>
+<ul>
+<li>Domain constraints limit the values attributes can have to an explicit set of values.</li>
+<li>Primary key constraints limit the attributes used to identify rows.</li>
+<li>Foreign key constraints limit attribute values to valid references to other attributes.
+<ul>
+<li>In the above example, there would be a foreign key constraint on <code>Doctor</code> ensuring that its <code>HOSPITAL_ID</code> attribute is always a valid hospital ID, that there is a corresponding <code>Hospital</code> with that <code>HOSPITAL_ID</code> value.</li>
+<li>;wip: other points</li>
+</ul></li>
+</ul>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

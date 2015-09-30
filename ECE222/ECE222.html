@@ -81,11 +81,10 @@ arrmorto@uwaterloo.ca</code></pre>
 <p>There's a single Saturday lecture to make up for Thanksgiving Monday, sometime on the 1:30-2:20 slots. There are 6 make-up lecture slots on Fridays at 1:30 PM-2:20 PM.</p>
 <p>Midterm on October 28 at 8:30 AM, 75 minutes. Textbook is optional but recommended.</p>
 <p>No tutorials for the first week. Tentative office hours for this section are Wednesdays at 12:30 PM.</p>
-<p>;wip: do assignment 1</p>
 <p>Finding the magnitude of a negative two's complement number is done by flipping all of the bits and adding one, but a better way is to flip all the bits left of the rightmost 1, and interpreting the resulting number as the unsigned binary magnitude.</p>
 <h1 id="section-1">16/9/15</h1>
 <p>Continuation of number sysytems and binary - see CS241 and ECE214e notes for reference.</p>
-<p>Overflow occurs when the resul cannot be represented using the given number of bits, such as when two excessively large unsigned values are added together to get a value larger than <span class="math">\(2^n - 1\)</span>. It is always important to check for overflow when doing arithmetic. In computers, there is usually an overflow flag in a status register.</p>
+<p>Overflow occurs when the result cannot be represented using the given number of bits, such as when two excessively large unsigned values are added together to get a value larger than <span class="math">\(2^n - 1\)</span>. It is always important to check for overflow when doing arithmetic. In computers, there is usually an overflow flag in a status register.</p>
 <p>For subtraction, the overflow/borrow bit represents whether the sign of the result differs from the sign of either operand - if there are both positive and negative values as the operands and result.</p>
 <p><strong>Sign extension</strong> is the replication of the leftmost bit to make a binary number of a particular width larger. For example, sign extending 1010 to 8 bits results in 11111010.</p>
 <p>Computers can be general purpose or application-specific. Types of computers include personal computers, workstations, mainframes, supercomputers, embedded computers.</p>
@@ -178,7 +177,7 @@ STORE R3, ARRAY_SUM</code></pre>
 <p>The <strong>base with index and offset</strong> addressing mode combines the above two, where there is a base address and an offset. For example, the <code>5(R1, R2)</code> (<span class="math">\([R1] + [R2] + 5\)</span>) in <code>MOVE R0, 5(R1, R2)</code> (<span class="math">\(R0 \leftarrow [R1] + [R2] + 5\)</span>). The effective address here is <span class="math">\([R1] + [R2] + 5\)</span>.</p>
 <p>The <strong>PC-relative</strong> addressing mode is similar to the index addressing mode, but the offset is always added to the program counter. For example, the <code>5(PC)</code> (<span class="math">\([PC] + 5\)</span>) in <code>MOVE R0, 5(PC)</code> (<span class="math">\(R0 \leftarrow [PC] + 5\)</span>). The effective address here is <span class="math">\([PC] + 5\)</span>. When a PC-relative operand is a label, the assembler will generally convert that into the <code>OFFSET(PC)</code> form automatically - <code>SOME_LABEL BRANCH_IF_ZERP R0, SOME_LABEL</code> gets translated to <code>SOME_LABEL BRANCH_IF_ZERP R0, -4(PC)</code>. This is very useful for branch instructions.</p>
 <p>The <strong>auto-increment</strong> addressing mode is similar to register indirect addressing, but the register is incremented by the number of bytes to read after the read occurs. For example, the <code>[R1]+</code> (<span class="math">\([[R1]]\)</span> then <span class="math">\(R1 \leftarrow [R1] + 4\)</span>) in <code>LOAD R0, [R1]+</code> (<span class="math">\(R0 \leftarrow [R1] + 4\)</span> then <span class="math">\(R1 \leftarrow [R1] + 4\)</span>). This is very useful for working with stacks and queues, especially in combination with auto-decrement addressing.</p>
-<p>There is also the <strong>auto-decrement</strong> adressingmode, which is simply <code>-[R1]</code> rather than <code>[R1]+</code>. The register is decremented by the amount to be read before the read occurs.</p>
+<p>There is also the <strong>auto-decrement</strong> addressing mode, which is simply <code>-[R1]</code> rather than <code>[R1]+</code>. The register is decremented by the amount to be read before the read occurs. There are also the <code>[R1]-</code> and <code>+[R1]</code> modes, which do the writing in the opposite order as <code>-[R1]</code> and <code>[R1]+</code>.</p>
 <p>The <strong>call stack</strong> is used for many things, such as subroutine parameters, return addresses, and local variables. The stack starts at the highest memory address, and grows downward. The top element of the stack is always pointed to by the <code>SP</code> register. To push onto the stack, we decrement SP and write in the data we want to push onto the stack. To pop off the stack, we read out the top element, and then increment SP.</p>
 <p>A subroutine is a block of instructions that can be executed repeatedly - this is good for deduplication and modularity. Subroutines can be called using the <code>CALL</code> instruction, and return using the <code>RETURN</code> instruction.</p>
 <p>When we do a call, we need to save the return address somewhere. We may store it on the stack, but starting with MIPS, RISC processors started putting the return address in the link register (<code>LR</code>). x86, on the other hand, stores the return address on the call stack.</p>
@@ -312,7 +311,7 @@ LOAD R2, (SP)+
 LOAD FP, (SP)+
 RETURN</code></pre>
 <h1 id="additional-lecture-1">2/10/15 - Additional Lecture</h1>
-<p>In addition to arithmetic instructions like <code>ADD</code> and <code>SUBTRACT</code>, we also have logical operations like <code>AND DEST, A, B</code>, <code>OR DEST, A, B</code>, <code>SHIFTL DEST, VALUE, AMOUNT</code>, <code>SHIFTR DEST, VALUE, AMOUNT</code>, <code>ROTATEL DEST, VALUE, AMOUNT</code>, <code>ROTATER DEST, VALUE, AMOUNT</code>. Rotating without carry rotates ignoring the carry bit, but the bit that corresponds to it is still stored in the carry bit.</p>
+<p>In addition to arithmetic instructions like <code>ADD</code> and <code>SUB</code>, we also have logical operations like <code>AND DEST, A, B</code>, <code>OR DEST, A, B</code>, <code>SHIFTL DEST, VALUE, AMOUNT</code>, <code>SHIFTR DEST, VALUE, AMOUNT</code>, <code>ROTATEL DEST, VALUE, AMOUNT</code>, <code>ROTATER DEST, VALUE, AMOUNT</code>. Rotating without carry rotates ignoring the carry bit, but the bit that corresponds to it is still stored in the carry bit.</p>
 <h2 id="arm-isa">ARM ISA</h2>
 <p>The <strong>assembler</strong> is responsible for generating the machine language program from the assembly code. The three operand instructions need to fit into a single word, while also supporting immediate values. Instructions in ARM take the following form:</p>
 <p>ARM instructions have a fixed length (32 bits) and only access memory using dedicated load/store instructions, which puts them in the RISC category. However, there are also a variety of CISC-like features, such as the many addressing modes, conditionally executing instructions, and store/load of multiple registers.</p>
@@ -320,6 +319,65 @@ RETURN</code></pre>
 <p>ARM has 16 data registers, R0 to R15. R15 is the program counter, R13 is conventionally used as the stack pointer, and R14 is conventionally used as the link register. The CPSR/PSR register contains various status bits, such as negative (<code>N</code>), zero (<code>Z</code>), overflow (<code>V</code>), carry (<code>C</code>), and interrupt masks. These status codes are used by instructions that explicitly specify that they access the status bits, and are also used by the condition bits on conditional instructions.</p>
 <p>In ARM, all the addressing modes except for immediate/register direct are derived from indexed addressing. The offset can be specified as an immediate value, or another register.</p>
 <p>The instructions we have been using so far are similar to ARM, but not the same. For example, <code>MOVE R0, R1</code> is actually <code>LDR R0, R1</code> (load register) - <code>LDR</code> supports a register or an immediate value for the value to load. This can be used to do register direct (<code>LDR R0, R1</code>), immediate value (<code>LDR R0, #123</code>), and PC-relative addressing (<code>LDR R0, SOME_LABEL</code>).</p>
+<p>Arithmetic/logic instructions are largely the same, such as <code>ADD DEST, ADDEND, ADDEND</code> (addition), <code>SUB DEST, MINUEND, SUBTRAHEND</code> (subtraction), and <code>MUL DEST, MULTIPLICAND, MULTIPLICAND</code>. For these, the second source operand (a source operand is an operand that is not a destination - one that is not written to) can either be a register or an immediate value (the immediate values have some restrictions, which are managed by the assembler).</p>
+<h1 id="section-9">5/10/15</h1>
+<p>Addressing modes in ARM:</p>
+<ul>
+<li>PC-relative addressing: <code>LDR R0, LABEL</code> translates to <span class="math">\(R0 \leftarrow [PC] + offset(LABEL)\)</span>, where <span class="math">\(offset(label)\)</span> is the relative offset of the label.</li>
+<li>Pre-index addressing (analogous to index addressing): <code>LDR R0, [R1, #25]</code> translates to <span class="math">\(R0 \leftarrow [[R1] + 25]\)</span>.</li>
+<li>Pre-index addressing with writeback (analogous to auto-increment/auto-decrement addressing): <code>LDR R0, [R1, #4]!</code> translates to <span class="math">\(R0 \leftarrow [[R1] + 4]; R1 \leftarrow [R1] + 4\)</span>.</li>
+<li>Pre-index addressing with offset: <code>LDR R0, [R1, R2]</code> translates to <span class="math">\(R0 \leftarrow [[R1] + [R2]]\)</span>, and <code>LDR R0, [R1, -R2]</code> translates to <span class="math">\(R0 \leftarrow [[R1] - [R2]]\)</span>. Also works with writeback mode.</li>
+<li>Pre-index addressing with offset and index: <code>LDR R0, [R1, R2, #-5]</code> translates to <span class="math">\(R0 \leftarrow [[R1] + [R2] - 5]\)</span>, and <code>LDR R0, [R1, -R2, 5]</code> translates to <span class="math">\(R0 \leftarrow [[R1] - [R2] + 5]\)</span>. Also works with writeback mode.</li>
+<li>Post-index addressing with write-back (analogous to auto-increment/auto-decrement): <code>LDR R0, [R1], #4</code> translates to <span class="math">\(R0 \leftarrow [[R1]]; R1 \leftarrow [R1] + 4\)</span>.</li>
+<li>Post-index addressing with write-back and offset: <code>LDR R0, [R1], R2</code> translates to <span class="math">\(R0 \leftarrow [[R1] + [R2]]; R1 \leftarrow [R1] + [R2]\)</span>, and <code>LDR R0, [R1, -R2]</code> translates to <span class="math">\(R0 \leftarrow [[R1] - [R2]]; R1 \leftarrow [R1] - [R2]\)</span>.</li>
+<li>Post-index addressing with write-back and offset and index: <code>LDR R0, [R1], R2, #-5</code> translates to <span class="math">\(R0 \leftarrow [[R1]]; R2 \leftarrow [R1] + [R2] - 5\)</span>, and <code>LDR R0, [R1, -R2, 5]</code> translates to <span class="math">\(R0 \leftarrow [[R1]]; R1 \leftarrow [R1] - [R2] + 5\)</span>.</li>
+</ul>
+<p>All of these addressing modes can be used each of the memory instructions.</p>
+<p>Additional memory operations include <code>LDR</code>/<code>STR</code> (load/store register), <code>LDRH</code>/<code>STRH</code> (zero-extended load/store half-word), <code>LDRB</code>/<code>STRB</code> (zero-extended load/store byte), and <code>LDRSH</code>/<code>LDRSB</code> (sign-extended load half-word/byte).</p>
+<p>There are also instructions to access multiple consecutive memory locations, <code>LDM R0!, {R1, R3, R5}</code>/<code>STM R0!, {R1, R3, R5}</code> (load/store multiple) means <span class="math">\(R1 \leftarrow [R0] + 0; R3 \leftarrow [R0] + 4; R5 \leftarrow [R0] + 8\)</span>. The <code>!</code> is optional in each case, and means that the address of the last value loaded should be written back into <code>R0</code>.</p>
+<p>For certain arithmetic/logic/move instructions like <code>ADD</code> and <code>MOV</code>, we can also apply some operations to the second source operand before performing the operation. For example, <code>ADD, R0, R1, R2, OPERATION</code> where <code>OPERATION</code> is a value like <code>LSL #5</code>/<code>LSR #5</code> (left-shift/right-shift R2 by 5), <code>ASR #5</code> (arithmetic shift R2 right by 5 bits; basically right-shift with sign extension), <code>ROR #5</code> (rotate R2 right by 5 bits). Internally, the <code>LSL DEST, SRC, AMOUNT</code>, <code>LSR DEST, SRC, AMOUNT</code>, and other shifting instructions are translated into moves using these operations.</p>
+<p>The <code>MOV R0, REGISTER_OR_VALUE</code> instruction is like a more limited but smaller version of <code>LDR R0, REGISTER_OR_VALUE</code> - it can only set a register to another register's value, or an immediate value (which has some restrictions, managed by the assembler). <code>MVN R0, REGISTER_OR_VALUE</code> is the same as <code>MVN R0, REGISTER_OR_VALUE</code>, but R0 is set to the bitwise NOT of <code>REGISTER_OR_VALUE</code> rather than the plain value. Also, MOV supports the additional operations on the second source operand (like shifting and rotating), while <code>LDR</code> does not.</p>
+<p>Logical operations in ARM include <code>AND</code> (bitwise AND), <code>ORR</code> (bitwise OR), and <code>EOR</code> (bitwise XOR). These also support the operations on the second operand.</p>
+<p>The test instructions are used to do comparisons, and are often used with the conditional branching instructions. <code>TST R0, #1</code> does a logical AND between R0 and 1, then sets the Z status bit according to whether the result is 0. <code>TEQ R0, 5</code> does a logical XOR between R0 and 1, then also sets Z according to the result. <code>CMP R0, R1</code> subtracts R1 from R0, then updates the Z, N, and possibly other status bits according to the result. Note that these write only to the status bits, not to the registers themselves.</p>
+<p>The test instructions always write to the status registers. Arithmetic/logic/move instructions can do this too, if we use the S variant of them. For example <code>ADDS</code> does the same thing as <code>ADD</code>, but also sets status bits like carry, zero, and negative.</p>
+<p>The branch instructions are used to modify control flow, often conditionally based on the status bits. There are several of these instructions, all beginning with B and having the form <code>BCONDITION LABEL</code> (the operand uses PC-relative addressing):</p>
+<ul>
+<li>Unconditional/always: <code>B LABEL</code>/<code>BAL LABEL</code> branches unconditionally to <code>LABEL</code>.</li>
+<li>Equality: <code>BEQc LABEL</code> and <code>BNE LABEL</code> branches to <code>LABEL</code> if <code>Z</code> (zero) is 1 or 0, respectively.</li>
+<li>Carry set/unset: <code>BCS LABEL</code>/<code>BHS LABEL</code> and <code>BCC LABEL</code>/<code>BLO LABEL</code> branches to <code>LABEL</code> if <code>C</code> (carry) is 1 or 0, respectively.</li>
+<li>Minus/positive: <code>BMI LABEL</code> and <code>BPL LABEL</code> branches to <code>LABEL</code> if <code>N</code> (negative) is 1 or 0, respectively.</li>
+<li>Overflow set/unset: <code>BVS LABEL</code> and <code>BVC LABEL</code> branches to <code>LABEL</code> if <code>V</code> (overflow) is 1 or 0, respectively.</li>
+<li>Unsigned higher/lower-or-same (greater/less-or-equal-to): <code>BHI LABEL</code> and <code>BLS LABEL</code> branches to <code>LABEL</code> if <code>Z</code> and not <code>C</code> (<span class="math">\(Z \wedge \overline C\)</span>) is 1 or 0, respectively.</li>
+<li>Signed greater-or-equal/less: <code>BGE LABEL</code> and <code>BLT LABEL</code> branches to <code>LABEL</code> if <code>N</code> xor <code>V</code> (<span class="math">\(N \oplus V\)</span>) is 1 or 0, respectively.</li>
+<li>Signed greater/less-or-equal: <code>BGT LABEL</code> and <code>BLE LABEL</code> branches to <code>LABEL</code> if Z, or <code>N</code> xor <code>V</code> (<span class="math">\(Z \vee (N \oplus V)\)</span>), is 1 or 0, respectively.</li>
+</ul>
+<h1 id="section-10">7/10/15</h1>
+<p>Branch statements can be used to implement any kind of control flow .</p>
+<p>An <strong>assembler</strong> is a program that accept assembly language and outputs an object program in machine code - one instruction in assembly language is one machine instruction. Each line of assembly language contains labels, the operation, operands, and comments, all of which are optional.</p>
+<p><strong>Assembler directives</strong> are commands to the assembler itself, rather than being translated to machine code. This allows us to do things like speifying the entry point of the program (<code>ENTRY</code>), define constants/data, and set code/data section locations (<code>AREA CODE</code>/<code>AREA DATA</code>). Directives like <code>DCW</code> (declare word) can be used to declare literal values, and often takes the form <code>SOME_LABEL DCW 0x12345678, 0x87654321</code> (two constant words that can be referenced by <code>SOME_LABEL</code>):</p>
+<pre><code>AREA CODE ; code section
+ENTRY ; entry point of the program
+
+LDR R0, X ; load thevalue of X into R0
+
+AREA DATA ; data section
+X DCW 0x25 ; declare a word</code></pre>
+<p>Other directives include <code>NAME EQU VALUE</code>, which can be used to define symbolic names fo numerical values (like <code>X EQU 5</code>) and <code>RN</code>, which can be used to give names to registers (<code>COUNTER RN 3</code>).</p>
+<p>There are also <strong>pseud-instructions</strong>, which aren't real instructions, but get translated into real, possibly multiple instructions. For example, <code>LDR R0, =LABEL</code> loads the address of <code>LABEL</code> into R0 (as opposed to <code>LDR R0, LABEL</code>, which loads the value at <code>LABEL</code> instead). Also, <code>LDR R0, CONSTANT_VALUE</code> is translated to <code>MOV R0, CONSTANT_VALUE</code> if <code>CONSTANT_VALUE</code> is of the right form, and otherwise is translated into <code>LDR R0, CONSTANT_DEFINITION</code> and <code>CONSTANT_DEFINITION DCW CONSTANT_VALUE</code> - the constant is stored at a memory location, and is loaded from that memory location when required.</p>
+<p>Summing an array:</p>
+<pre><code>LDR R1, N
+LDR R2, =ARRAY
+MOV R0, #0
+LOOP:
+LDR R3, [R2], #4
+ADD R0, R0, R3
+SUBS R1, R1, #1
+BGT LOOP
+STR R0, SUM
+
+N DCW 5 ; number of array elements
+ARRAY DCW 2, 4, 6, 8, 10 ; elements of array
+SUM DCW 0 ; sum of the array is output in here</code></pre>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
