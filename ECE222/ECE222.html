@@ -184,7 +184,7 @@ STORE R3, ARRAY_SUM</code></pre>
 <p>When we do a call, we need to save the return address somewhere. We may store it on the stack, but starting with MIPS, RISC processors started putting the return address in the link register (<code>LR</code>). x86, on the other hand, stores the return address on the call stack.</p>
 <h1 id="section-7">30/9/15</h1>
 <p>On our ARM machines, R13 is the stack pointer, R14 is the link register, and R15 is the program counter.</p>
-<p>To make a call, we store the value of PC to the link register, and branch to the target of the call. To return, we simply jump back to the saved address. These operations are done using the <code>CALL SUBROUTINE</code> and <code>ROUTINE</code> opcodes.</p>
+<p>To make a call, we use the <code>CALL SOME_SUBROUTINE</code> instruction, which stores the value of PC in the link register, and branch to the target of the call. To return, we use the <code>RETURN</code> instruction to jump back to the address saved in that link register.</p>
 <p>If we call a subroutine and within that subroutine, call another subroutine, the link register's value (the return address) gets overwritten by the inner call. To retain the return addresses, we push the link register contents to the stack before calling the inner subroutine, and pop it off ino the link register again after calling it. This can fail if there is a stack overflow or the stack is managed incorrectly.</p>
 <p><strong>Parameters</strong> can be passed using registers, memory locations, and on the stack.</p>
 <p>Parameters are passed using registers if and only if there are few parameters, the subroutine is non-recursive, and the subroutine does not call other subroutines that use those same registers. Passing by registers is the fastest option, since it avoids main memory accesses.</p>
@@ -245,6 +245,81 @@ LOAD R3, (SP)+
 LOAD R4, (SP)+
 LOAD R5, (SP)+
 RETURN</code></pre>
+<h1 id="section-8">2/10/15</h1>
+<p>When we enter a subroutine, we push the <strong>frame pointer</strong> (<code>FP</code>), followed by spaces for the local variables, followed by saved registers - together, these form a <strong>stack frame</strong>.</p>
+<p>The frame pointer is used as a convenient way to refer to local variables and saved registers - even as the stack pointer changes as we're using it, the frame pointer doesn't change. The parameters are at a positive offset from the frame pointer, while local variables and saved registers are at a negative offset.</p>
+<pre><code>LOAD R2, PARAM2
+STORE R2, -(SP)
+LOAD R2, PARAM1
+STORE R2, -(SP)
+CALL SUB1
+LOAD R2, (SP) # obtain return value
+ADD SP, SP, #8 # pop all parameters off the stack
+
+SUB1:
+# save registers
+STORE LINK_REG, -(SP)
+STORE FP, -(SP)
+MOVE FP, SP # initialize frame pointer to between parameters and local variables
+STORE R2, -(SP) # local variable for parameter
+STORE R3, -(SP) # local variable for parameter
+STORE R4, -(SP) # local variable
+STORE R5, -(SP) # local variable
+LOAD R2, 8(FP) # get first parameter
+LOAD R3, 12(FP) # get second parameter
+
+; do stuff
+; we can use -4(FP) to -16(FP) to refer to the local variables
+
+; call another subroutine
+LOAD R4, PARAM3
+STORE R4, -(SP)
+CALL SUB2
+LOAD R4, (SP)+ # obtain return value
+
+; do other stuff
+
+# save the result onto the stack
+STORE R5, 8(FP) # the space used by the first parameter
+
+# restore registers
+LOAD R5, (SP)+
+LOAD R4, (SP)+
+LOAD R3, (SP)+
+LOAD R2, (SP)+
+LOAD FP, (SP)+
+LOAD LINK_REG, (SP)+
+RETURN
+
+SUB2:
+# save registers
+# we don&#39;t have to store LINK_REG because we aren&#39;t making any other subroutine calls
+STORE FP, -(SP)
+MOVE FP, SP # initialize the frame pointer to between parameters and local variables
+STORE R2, -(SP) # local variable for parameter
+STORE R3, -(SP) # local variable
+LOAD R2, 4(FP) # get the parameter
+
+; do stuff
+; we can use -4(FP) and -8(FP) to refer to the local variables
+
+# save the result onto the stack
+STORE R3, 4(FP) # the space used by the first parameter
+
+# restore registers
+LOAD R3, (SP)+
+LOAD R2, (SP)+
+LOAD FP, (SP)+
+RETURN</code></pre>
+<h1 id="additional-lecture-1">2/10/15 - Additional Lecture</h1>
+<p>In addition to arithmetic instructions like <code>ADD</code> and <code>SUBTRACT</code>, we also have logical operations like <code>AND DEST, A, B</code>, <code>OR DEST, A, B</code>, <code>SHIFTL DEST, VALUE, AMOUNT</code>, <code>SHIFTR DEST, VALUE, AMOUNT</code>, <code>ROTATEL DEST, VALUE, AMOUNT</code>, <code>ROTATER DEST, VALUE, AMOUNT</code>. Rotating without carry rotates ignoring the carry bit, but the bit that corresponds to it is still stored in the carry bit.</p>
+<h2 id="arm-isa">ARM ISA</h2>
+<p>The <strong>assembler</strong> is responsible for generating the machine language program from the assembly code. The three operand instructions need to fit into a single word, while also supporting immediate values. Instructions in ARM take the following form:</p>
+<p>ARM instructions have a fixed length (32 bits) and only access memory using dedicated load/store instructions, which puts them in the RISC category. However, there are also a variety of CISC-like features, such as the many addressing modes, conditionally executing instructions, and store/load of multiple registers.</p>
+<p>ARM memory is byte addressable with 32-bit addresses, and supports little and big endian representations, configurable to either. It supports aligned 32-bit words, 16-bit half words, and bytes.</p>
+<p>ARM has 16 data registers, R0 to R15. R15 is the program counter, R13 is conventionally used as the stack pointer, and R14 is conventionally used as the link register. The CPSR/PSR register contains various status bits, such as negative (<code>N</code>), zero (<code>Z</code>), overflow (<code>V</code>), carry (<code>C</code>), and interrupt masks. These status codes are used by instructions that explicitly specify that they access the status bits, and are also used by the condition bits on conditional instructions.</p>
+<p>In ARM, all the addressing modes except for immediate/register direct are derived from indexed addressing. The offset can be specified as an immediate value, or another register.</p>
+<p>The instructions we have been using so far are similar to ARM, but not the same. For example, <code>MOVE R0, R1</code> is actually <code>LDR R0, R1</code> (load register) - <code>LDR</code> supports a register or an immediate value for the value to load. This can be used to do register direct (<code>LDR R0, R1</code>), immediate value (<code>LDR R0, #123</code>), and PC-relative addressing (<code>LDR R0, SOME_LABEL</code>).</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
