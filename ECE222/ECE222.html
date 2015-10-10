@@ -378,6 +378,28 @@ STR R0, SUM
 N DCW 5 ; number of array elements
 ARRAY DCW 2, 4, 6, 8, 10 ; elements of array
 SUM DCW 0 ; sum of the array is output in here</code></pre>
+<h1 id="section-11">9/10/15</h1>
+<p><code>STM</code>/<code>LDM</code>, as mentioned earlier, can do multiple register stores/loads all in a single instruction:</p>
+<ul>
+<li>The FD/IA (increment after) suffix adds the final offset to the register after performing the store/load: <code>STMFD R0!, {R1, R2, R3}</code> (store R1-R3 into memory address at R0, write final address into R0)</li>
+<li>The EA/DB (decrement before) suffix subtracts the final offset from the register before performing the store/load: <code>STMEA R0!, {R1, R2, R3}</code> (store R1-R3 into memory address at R0, write final address into R0)</li>
+<li>This also supports conditional prefixes to run the instruction conditionally based on status bits: <code>STMFDGT R0, {R1}</code> (store R1 into memory address at R0)</li>
+</ul>
+<p>This is very useful for pushing multiple things onto (<code>STMFD R13!, {R1, R2, R3}</code>) or off of (<code>LDMFD R13!, {R1, R2, R3}</code>) the stack. The <code>!</code> ensures that the final address of R13 (stack pointer) is updated to represent the top element of the stack.</p>
+<p>Also, <code>BL LABEL</code> is the branch and link instruction, which branches to <code>LABEL</code> and sets the address of the next line as the value of the link register - the return address. This is useful for calling subroutines.</p>
+<p>This allows for a very elegant calling convention:</p>
+<pre><code>LDR R0, #123 # set parameter 1
+BL SUBROUTINE # call the subroutine
+
+# accepts 1 parameter in R0, and puts the return value in R0
+SUBROUTINE:
+STMFD R13!, {R14, R1, R2} # push the link register and any other desired register values onto the stack
+; we conventionally don&#39;t need to save the registers for the parameters (R0) since they are only used for this subroutine anyways - plus, we&#39;re reusing it for the return value
+
+; do things with R1 and R2, since they&#39;re saved now
+
+LDMFD, R13, {R15, R1, R2} # pop the link register&#39;s value into the program counter (to do the return) and restore the other register values</code></pre>
+<p>The above saves/restores registers using only two instructions, and also does the return at the end. The return value is conventionally put in R0, though we could also push it onto the stack (if the result can't fit into just a register).</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

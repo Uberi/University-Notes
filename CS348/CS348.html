@@ -178,7 +178,8 @@ write target account</code></pre>
 <p>Modern DBMS use the <strong>relational model</strong>, based on relational algebra and first order logic. Models have the structural components, contraint components, and the operational components. These DBMSs became possible to implement a few decades ago, replacing earlier heirarchical models.</p>
 <p>In relational models, the main idea is that all the information is represented using <strong>flat relations</strong>, which allows us to specify the structure of the data declaratively.</p>
 <p>The <strong>relational schema</strong> represents relations that we want to model.</p>
-<p>We can represent a <strong>relation</strong> <span class="math">\(R\)</span> over <span class="math">\(n\)</span> attributes as a set of <span class="math">\(n\)</span>-tuples <span class="math">\(\tup{a_1, \ldots, a_n} \in D_1 \times \ldots \times D_n\)</span>. <span class="math">\(\tup{a_1, \ldots, a_n}\)</span>, where <span class="math">\(D_1, \ldots, D_n\)</span> are the <strong>domains</strong>, sets of simple, single-valued attributes - <span class="math">\(D_i\)</span> is the set of all values of attribute <span class="math">\(i\)</span>. In other words, relations are defined over attributes.</p>
+<p>We can represent a <strong>relation</strong> <span class="math">\(R\)</span> over <span class="math">\(n\)</span> attributes as a set of <span class="math">\(n\)</span>-tuples <span class="math">\(\tup{a_1, \ldots, a_n} \in D_1 \times \ldots \times D_n\)</span>. <span class="math">\(\tup{a_1, \ldots, a_n}\)</span>, where <span class="math">\(D_1, \ldots, D_n\)</span> are the <strong>domains</strong>, sets of simple, single-valued attributes - <span class="math">\(D_i\)</span> is the set of all values of attribute <span class="math">\(i\)</span>. In other words, relations are sets of tuples of attributes.</p>
+<p>Attributes may also have a <code>null</code> value, which means that the value of the attribute is actually unknown.</p>
 <p>If the relation is in <span class="math">\(D_1 \times \ldots \times D_n\)</span>, then it is on <span class="math">\(n\)</span> sets and <span class="math">\(n\)</span> is the degree of the relation.</p>
 <p>In DBMSs, all relations are represented as flat tables, where the columns are the attributes <span class="math">\(D_1, \ldots, D_n\)</span>, and the rows are the instances of the relation. Note that there is no concept of entities here - relations represent both entity-relational entities and entity-relational relations.</p>
 <p>The intension of a relation is the relational schema, and the intension of the database isthe database schema <span class="math">\(R = \set{R_1, \ldots, R_k}\)</span>. The extension of a relation is the set of possible tuples <span class="math">\(\tup{a_1, \ldots, a_n}\)</span>.</p>
@@ -186,8 +187,11 @@ write target account</code></pre>
 <p>By the <strong>closed world assumption</strong> (if something is true, then we know it's true), relations are complete - if things are related to each other, then we also know that they are related to each other.</p>
 <h3 id="converting-erds-to-relational-schemas">Converting ERDs to relational schemas</h3>
 <p>We have several heuristics for converting ERDs to relational schemas, but there isn't always a good way to.</p>
-<p>When there is a one to many relation between doctors (<code>Doctor(DOCTOR_ID, ...)</code> in the ERD) and hospitals (<code>Hospital(HOSPITAL_ID, ...)</code> in the ERD), we might represent doctors in the relational schema as <code>Doctor(DOCTOR_ID, HOSPITAL_ID, ...)</code> - we added an attribute to doctors that specifies which hospital they work in, to represent this one-to-many relation. In general, when we have a one-to-many or one-to-one relation, we can add an attribute to one of the objects identifying the instance of the other object it's associated with.</p>
-<p>When there is a many to many relation between students (<code>Student(STUDENT_ID, ...)</code>) and courses (<code>Course(COURSE_ID)</code>), we might add a new table for the relation <code>Taking(STUDENT_ID, COURSE_ID)</code>. In general, when we have a many-to-many relation, we can add a new table that associates them with each other.</p>
+<p>When there is a one to many relation between doctors (<code>Doctor(DOCTOR_ID, ...)</code> in the ERD) and hospitals (<code>Hospital(HOSPITAL_ID, ...)</code> in the ERD), we might represent doctors in the relational schema as <code>Doctor(DOCTOR_ID, HOSPITAL_ID, ...)</code> - we added an attribute to doctors that specifies which hospital they work in, to represent this one-to-many relation. In general, when we have a many-to-one or one-to-one relation, we can add an attribute to one of the objects identifying the instance of the other object it's associated with.</p>
+<p>When there is a many to many relation between students (<code>Student(STUDENT_ID, ...)</code>) and courses (<code>Course(COURSE_ID)</code>), we might add a new table for the relation <code>Taking(STUDENT_ID, COURSE_ID)</code>. In general, when we have a many-to-many relation, we can add a new table that associates them with each other, where the primary key is chosen from the attributes of the entity types it relates.</p>
+<p>A <strong>strong entity type</strong> is one that has a primary key, while a <strong>weak entity type</strong> does not. Strong entity types dominate weak entity types when connected by a relationship. Strong entity types are directly translated to tables where the columns are their attributes. Weak entity types result in tables with their attributes as well, but also include the primary key of entity types that dominate it and the attributes of its relationships.</p>
+<p>For specialization (is-a relationships), we have separate tables for the subclasses, and the superclass doesn't need a table. Also, the inherited attributes are written explicitly.</p>
+<p>For aggregation, we create a separate table for the relationship if it doesn't exist, where the primary key is the primary key for the relationship.</p>
 <h3 id="constraints">Constraints</h3>
 <p>Constraints limit the form of the data that can exist within the DBMS. Some constraints are inherent, such as the fact that there cannot be any duplicate rows, and how the prmary key, if it exists, cannot contain null values.</p>
 <p>There are also other types of constraints:</p>
@@ -197,9 +201,31 @@ write target account</code></pre>
 <li>Foreign key constraints limit attribute values to valid references to other attributes.
 <ul>
 <li>In the above example, there would be a foreign key constraint on <code>Doctor</code> ensuring that its <code>HOSPITAL_ID</code> attribute is always a valid hospital ID, that there is a corresponding <code>Hospital</code> with that <code>HOSPITAL_ID</code> value.</li>
-<li>;wip: other points</li>
+<li>Tuples in the relation containing the foreign key (the <strong>referencing/child relation</strong>) must have their foreign key attributes be the primary key of another relation (the <strong>referenced/parent relation</strong>), or null.</li>
+<li>The DBMS only has to check whether the referenced record exists when inserting a new tuple into the child, or deleting a tuple from the parent.</li>
 </ul></li>
 </ul>
+<h1 id="section-11">9/10/15</h1>
+<p>Table definitions have the following form:</p>
+<pre><code>&quot;CREATE TABLE &quot; &lt;TABLE NAME&gt; &quot;(&quot;
+    &lt;COLUMN DEFINITION 1&gt; &quot;,&quot;
+    &lt;COLUMN DEFINITION 2&gt; &quot;,&quot;
+    &lt;...&gt;
+    &lt;TABLE CONSTRAINT 1&gt; &quot;,&quot;
+    &lt;TABLE CONSTRAINT 2&gt; &quot;,&quot;
+    &lt;...&gt;
+&quot;);&quot;</code></pre>
+<p>Table contraints take the following form:</p>
+<pre><code>[&quot;CONSTRAINT &quot; &lt;CONSTRAINT NAME&gt;] (
+    &quot;UNIQUE&quot; &quot;(&quot; &lt;COLUMN 1&gt; &quot;,&quot; &lt;COLUMN 2&gt; &quot;,&quot; &lt;...&gt; &quot;)&quot; |
+    &quot;PRIMARY KEY&quot; &quot;(&quot; &lt;COLUMN 1&gt; &quot;,&quot; &lt;COLUMN 2&gt; &quot;,&quot; &lt;...&gt; &quot;)&quot; |
+    &quot;FOREIGN KEY&quot; &quot;(&quot; &lt;COLUMN 1&gt; &quot;,&quot; &lt;COLUMN 2&gt; &quot;,&quot; &lt;...&gt; &quot;)&quot; &quot;REFERENCES&quot; &lt;TABLE NAME&gt; &quot;(&quot; &lt;COLUMN&gt; &quot;)&quot; [&quot;ON&quot; (&quot;UPDATE&quot; | &quot;DELETE&quot;) (&quot;SET NULL&quot; | &quot;NO ACTION&quot; | &quot;CASCADE&quot; | SET DEFAULT)] |
+)</code></pre>
+<p>The <code>SET NULL</code> foreign key option sets broken references to null - when we delete the parent instance, the child reference becomes null. The <code>NO ACTION</code> option prevents the addition or deletion in the first place. The <code>CASCASE</code> option also deletes the child record when the referenced parent record is deleted. The <code>SET DEFAULT</code> option causes child reference's foreign key attribute to fall back to the default value set for the column.</p>
+<h2 id="relational-algebra">Relational Algebra</h2>
+<p>Operations are functions of relations - they accept and return relations/tables. The basic operations are union (<span class="math">\(A \cup B\)</span>), difference (<span class="math">\(\setminus\)</span>), Cartesian product (<span class="math">\(\times\)</span>), projection (<span class="math">\(\pi\)</span>), selection (<span class="math">\(\pi\)</span>), and renaming (<span class="math">\(\rho\)</span>).</p>
+<p>Relational algebra is the formal basis for modern relational models. It is the basis of SQL, the language used to query DBMSs. Relational algebra is important because it has the closure quality - operands and the results of operations are both in the set of relations.</p>
+<p>Union of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is simply the set of those tuples that are in <span class="math">\(A\)</span> or <span class="math">\(B\)</span>. Difference of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is simply the set of those tuples that are in <span class="math">\(A\)</span> but not <span class="math">\(B\)</span>.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
