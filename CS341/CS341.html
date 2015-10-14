@@ -360,7 +360,69 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p><strong>Feasible solutions</strong> are those that satisfy the problem constraints, and given a problem instance <span class="math">\(I\)</span>, are represented as <span class="math">\(\mathrm{feasible}(I)\)</span>. The objective function is in <span class="math">\(\mathrm{feasible}(I) \to \mb{R}\)</span>.</p>
 <p>For greedy algorithms, it is generally the proof of correctness that is the hard part. Greedy algorithms build up partial solutions, making locally optimal decisions at each step, with the goal of getting a globally optimal result.</p>
 <p>A feasible solution should be writeable as an <span class="math">\(n\)</span>-tuple <span class="math">\(\tup{x_1, \ldots, x_n}\)</span>. A <strong>partial solution</strong> is an <span class="math">\(i\)</span>-tuple <span class="math">\(\tup{x_1, \ldots, x_i}\)</span> where <span class="math">\(i &lt; n\)</span> and none of the problem constraints are violated (note that this is not necessarily a feasible solution). A partial solution isn't always extendible to a feasible solution - some partial solutions are dead ends, and greedy algorithms can't get an optimal solution here.</p>
-<p>A <strong>choice set</strong> for a partial solution <span class="math">\(\tup{x_1, \ldots, x_i}\)</span> is the set of all elements we can append to <span class="math">\(\tup{x_1, \ldots, x_i}\)</span> to make another, longer partial or feasible solution <span class="math">\(\tup{x_1, \ldots, x_i, y}\)</span> - the set of all possible <span class="math">\(y\)</span>.</p>
+<p>A <strong>choice set</strong> for a partial solution <span class="math">\(\tup{x_1, \ldots, x_i}\)</span> is the set <span class="math">\(\mathcal{X}\)</span> of all elements we can append to <span class="math">\(\tup{x_1, \ldots, x_i}\)</span> to make another, longer partial or feasible solution <span class="math">\(\tup{x_1, \ldots, x_i, y}\)</span> - the set of all possible <span class="math">\(y\)</span>.</p>
+<h1 id="section-8">14/10/15</h1>
+<p>For any <span class="math">\(y\)</span> in the choice set <span class="math">\(\mathcal{X}\)</span>, we have a <strong>local evaluation criterion</strong> <span class="math">\(g(y)\)</span>, that measures the profit/cost of including <span class="math">\(y\)</span> in the current partial solution. <strong>Extension</strong> of a partial solution is the process of adding the <span class="math">\(y\)</span> with the highest <span class="math">\(g(y)\)</span> value to the partial solution. A greeedy algorithm, in general, is repeated extension until we have a feasible solution <span class="math">\(X\)</span>.</p>
+<p>Greedy algorithms do no backtracking or lookahead - they only consider the elements of the choice set at each step. That means they are often faster than algorithms that do backtracking, but the solution is possibly not as good. When implementing greedy algorithms, it is often efficient to do a preprocessing step to compute the local evaluation criterion, like sorting the elements of an array.</p>
+<p>For some greedy algorithms, it is possible to always obtain an optimal solution. However, these proofs are often rather difficult.</p>
+<p>Suppose we have a set <span class="math">\(A\)</span> of pairs representing intervals. What is the largest subset <span class="math">\(B\)</span> of these pairs such that none of the intervals intersect?</p>
+<p>One greedy strategy might be to repeatedly choose the interval with the earliest start time that doesn't intersect with any intervals in the current partial solution. Another might be to choose the interval with the smallest duration that doesn't intersect. A third is to choose the interval with the earliest end time that doesn't intersect.</p>
+<p>Clearly, the first one is not valid because we can make a counterexample: an interval that starts early but is really long is chosen over multiple non-intersecting short intervals that start a bit later, which means this strategy doesn't always give the optimal solution.</p>
+<p>It is also possible to find a counterexample for the second strategy - a short interval that intersects with two non-intersecting longer intervals is chosen over those two, which means this strategy also doesn't always give the optimal solution.</p>
+<p>The last strategy is correct. We can implement it as follows:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> select_interval(intervals):
+    intervals = <span class="dt">sorted</span>(intervals, key=<span class="kw">lambda</span> interval: interval[<span class="dv">1</span>])
+    solution = [intervals[<span class="dv">0</span>]]
+    latest_finish = intervals[<span class="dv">0</span>][<span class="dv">1</span>]
+    <span class="kw">for</span> interval in intervals[<span class="dv">1</span>:]:
+        <span class="kw">if</span> interval[<span class="dv">0</span>] &gt;= latest_finish:
+            solution.append(interval)
+            latest_finish = interval[<span class="dv">1</span>]
+    <span class="kw">return</span> solution</code></pre>
+<p>Most correctness proofs for greedy algorithms use strong induction. The proof for the greedy interval selection algorithm is relatively straightforward:</p>
+<blockquote>
+<p>Let <span class="math">\(A\)</span> be an array of intervals, sorted by their end values.<br />Let <span class="math">\(\mathcal{B} = \tup{A_{i_1}, \ldots, A_{i_k}}\)</span> where <span class="math">\(i_1 \&lt; \ldots &lt; i_k\)</span> be the greedy solution.<br />Let <span class="math">\(\mathcal{O} = \tup{A_{j_1}, \ldots, A_{j_k}}\)</span> where <span class="math">\(j_1 \&lt; \ldots &lt; j_l\)</span> be the optimal solution.<br />Clearly, <span class="math">\(k \le l\)</span> since <span class="math">\(O\)</span> is the optimal solution, and it is impossible for the greedy solution to be better than optimal.<br />We want to first prove that <span class="math">\(i_m \le j_m\)</span> for all <span class="math">\(1 \le m \le k\)</span>, which means that the ends of the intervals in the greedy solution are always before the ends of the corresponding intervals in the optimal solution.<br />For <span class="math">\(m = 1\)</span>, <span class="math">\(i_1 \le j_1\)</span> since <span class="math">\(i_1 = 1\)</span> - the greedy algorithm always chooses the first interval.<br />Assume <span class="math">\(i_{m - 1} \le j_{m - 1}\)</span>. So in the greedy solution, the <span class="math">\(m - 1\)</span>th interval ends no later than the <span class="math">\(m - 1\)</span>th interval in the optimal solution.<br />Suppose <span class="math">\(i_m &gt; j_m\)</span>. Clearly, the optimal solution's <span class="math">\(m\)</span>th interval ends earlier than the greedy algorithm's <span class="math">\(m\)</span>th interval, since <span class="math">\(A\)</span> is sorted by end values.<br />However, this is not possible, since that means the greedy algorithm didn't choose the earliest end time. So <span class="math">\(i_m \le j_m\)</span>.<br />Suppose <span class="math">\(k &lt; l\)</span>. Clearly, the optimal solution must have at least <span class="math">\(k + 1\)</span> intervals.<br />Clearly, <span class="math">\(i_k \le j_k\)</span>. So the optimal solution's <span class="math">\(k + 1\)</span>th interval must be in the choice set for the greedy algorithm at the <span class="math">\(k\)</span>th step.<br />However, this isn't possible since the greedy algorithm didn't choose that interval, so <span class="math">\(k \ge l\)</span>.<br />Since <span class="math">\(k \le l\)</span> and <span class="math">\(k \ge l\)</span>, <span class="math">\(k = l\)</span> and the greedy solution is the same length as the optimal solution, and so the greedy algorithm must be optimal.</p>
+</blockquote>
+<p>The time complexity of this algorithm is easy to prove - it's <span class="math">\(\Theta(n \log n)\)</span> for the sort and <span class="math">\(\Theta(n)\)</span> for the traversal, so <span class="math">\(\Theta(n \log n)\)</span> overall.</p>
+<p>Suppose we want to partition <span class="math">\(A\)</span> into disjoint sets of non-intersecting intervals, minimizing the number of these sets. This is called the interval coloring problem - we want to assign a color to each interval such that all intervals with a given color do not intersect each other.</p>
+<p>An optimal greedy strategy for this is to sort the intervals by start values ascending, and for each interval in order, attempt to insert each interval into existing sets (assign it an existing color), and create a new set if not possible (assign it a new color):</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> partition_intervals(intervals):
+    intervals = <span class="dt">sorted</span>(intervals, key=<span class="kw">lambda</span> interval: interval[<span class="dv">0</span>])
+    partitions = [{intervals[<span class="dv">0</span>]}]
+    partition_latest_finishes = [intervals[<span class="dv">0</span>][<span class="dv">1</span>]]
+    <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dv">1</span>, <span class="dt">len</span>(intervals)):
+        interval = intervals[i]
+        <span class="kw">for</span> partition_index, latest_finish in <span class="dt">enumerate</span>(partition_latest_finishes): <span class="co"># try to assign interval to existing partitions</span>
+            <span class="kw">if</span> latest_finish &lt;= interval[<span class="dv">0</span>]:
+                partitions[partition_index].add(interval)
+                partition_latest_finishes[partition_index] = interval[<span class="dv">1</span>]
+                <span class="kw">break</span>
+        <span class="kw">else</span>: <span class="co"># no existing colors can accept the interval</span>
+            partition_index = <span class="dt">len</span>(partition_latest_finishes)
+            partitions[partition_index] = {interval}
+            partition_latest_finishes.append(interval[<span class="dv">1</span>])
+    <span class="kw">return</span> partitions</code></pre>
+<p>The correctness proof for this algorithm is a bit unusual:</p>
+<blockquote>
+<p>Suppose the greedy algorithm uses <span class="math">\(D\)</span> colors. Since we only create new colors if existing colors can't accept the interval, for every color <span class="math">\(c &lt; D\)</span>, there exists an interval <span class="math">\(A_c\)</span> that overlaps <span class="math">\(A_i\)</span>.<br />That means that there are at least <span class="math">\(D\)</span> intervals that all overlap each other, since they all overlap <span class="math">\(A_i\)</span>.<br />Therefore there must be at least <span class="math">\(D\)</span> colors, which means that having <span class="math">\(D\)</span> colors is optimal.</p>
+</blockquote>
+<p>Clearly, this algorithm is <span class="math">\(O(n^2)\)</span>, or more specifically <span class="math">\(O(nD)\)</span> since <span class="math">\(D\)</span> is <span class="math">\(O(n)\)</span>. We can actually do better by using a different data structure for the inner loop - the inner loop simply is trying to find the lowest end value in a partition, so if we use a heap for the partitions instead, we can have the algorithm run in <span class="math">\(O(n \log D)\)</span>, or more simply, <span class="math">\(O(n \log n)\)</span>:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="ch">import</span> heapq
+<span class="kw">def</span> partition_intervals(intervals):
+    intervals = <span class="dt">sorted</span>(intervals, key=<span class="kw">lambda</span> interval: interval[<span class="dv">0</span>])
+    partitions = [{intervals[<span class="dv">0</span>]}]
+    partition_latest_finishes_heap = [(intervals[<span class="dv">0</span>][<span class="dv">1</span>], <span class="dv">0</span>)]
+    <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dv">1</span>, <span class="dt">len</span>(intervals)):
+        interval = intervals[i]
+        latest_finish, partition_index = heapq.heappop(partition_latest_finishes_heap)
+        <span class="kw">if</span> latest_finish &lt;= interval[<span class="dv">0</span>]: <span class="co"># try to assign interval to the existing partition that ends earliest</span>
+            partitions[partition_index].add(interval)
+            heapq.heappush(partition_latest_finishes_heap, (interval[<span class="dv">1</span>], partition_index))
+        <span class="kw">else</span>: <span class="co"># no existing colors can accept the interval</span>
+            partition_index = <span class="dt">len</span>(partition_latest_finishes_heap)
+            partitions[partition_index] = {interval}
+            heapq.heappush(partition_latest_finishes_heap, (interval[<span class="dv">1</span>], partition_index))
+    <span class="kw">return</span> partitions</code></pre>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

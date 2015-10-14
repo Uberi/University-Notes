@@ -272,3 +272,34 @@ By virtue theory, moral/religious/aesthetic knowledge requires virtues, such as 
 Basically, these theories push the testimonial asymmetry into knowledge asymmetry. Hazlett rejects all of these, and proposes a social theory instead: moral/religious.aesthetic knowledge is socially valuable, and testimony cannot transfer the social value via testimony - beliefs are not worth as much when they were just formed by testimony, since they reduce diversity of knowledge. In other words, testomonial beliefs are bad when they are bad for society.
 
 ;wip: critical response idea: testimonial asymmetry: testimony seems to be good if and only if we expect the speaker to have knowledge about the topic they are talking about
+
+# 14/10/15
+
+The second critical response is due next wednesday.
+
+Readings: Huemer
+
+Memories
+--------
+
+When are memory beliefs justified? When should we believe in our memories?
+
+Just like through testimony and observation, memory is a way to get justification, which is important for obtaining knowledge.
+
+The majority of what we believe comes from our memories. Often, our knowledge comes from information stored in our brains. However, we can sometimes remember something very accurately as true, when it's actually false.
+
+We believe that the sun is around 93 million miles from the Earth. However, most of us don't remember what our original reason for memorising this is.
+
+Huemer has three possible answers to when we should believe our memories - inferential, foundational, and preservative. Huemer then rejects them in favor of a dualistic view.
+
+In the inferential theory, memory beliefs are justified by that memory being reliable in the past - if it worked out in the past, then we are justified in believing it. However, this theory is rather circular - the only things that tell us that a memory was reliable are our other memories. If we use only our present experiences and insights, it's unlikely we could judge whether memories are reliable under this theory.
+
+In the foundational theory, memories are the foundation of justification, and just as we usually trust perception, we should also usually trust remembering something - remembering something automatically gives a good reason to believe it. However, the passage of time alone shouldn't make false beliefs justified - it's easy to create a memory of an unjustified belief, and then say it's justified because it's a memory.
+
+In the preservation theory, memory preserves the original justification of the belief - whatever the justification for the original belief was is also the justification for memory beliefs. Even if one does not remember what the original justification was for believing something, the belief is still justified. However, if someone gets cloned, the clone remembers doing all the things the original did, without actually having done those things - the clone should have justification to believe it did those things, since it has all the memories of the original, but under this theory it does not.
+
+The dualistic theory takes parts of all of these theories. It focuses on a few issues with the other ones: beliefs can't increase in justification just by becoming memories, and justification should depend only on the current state of people - if clones have the same memory, they should also have the same justification.
+
+According to Huemer, the justification for believing a memory belief is the justification for forming the belief in the first place, combined with the justification in being confident that the memory was retained correctly over time. The justifications of the two, both numbers between 0 and 1 (where 0 is infallible justification that something is false and 1 is that something is true), are multiplied together to get the overall justification.
+
+This is somewhat similar to what foundational theory and preservation theory says, but also taking memory retention into account.
