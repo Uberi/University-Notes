@@ -47,22 +47,18 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
-<h1 id="gene123">GENE123</h1>
-<p>Electrical engineering.</p>
-<pre><code>Instructor: Samar Mohamed
-Office: EIT 3112
-Office Hours: drop-in</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -76,8 +72,13 @@ Office Hours: drop-in</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
+<h1 id="gene123">GENE123</h1>
+<p>Electrical engineering.</p>
+<pre><code>Instructor: Samar Mohamed
+Office: EIT 3112
+Office Hours: drop-in</code></pre>
 <h1 id="section">6/5/13</h1>
 <h2 id="electricity">Electricity</h2>
 <p>Matter is composed of protons, neutrons, and electrons. Protons are positively charged, and electrons are negatively charged.</p>
@@ -551,7 +552,7 @@ ___| - &lt;= -2 A current enters element here</code></pre>
 <p>A capacitor stores energy in an electric field, while an inductor stores energy in a magnetic field.</p>
 <p>Simplify <span class="math">\(V(t) = 2 \cos\left(100t - \frac \pi 4\right) - 3 \cos\left(100t + \frac \pi 3\right)\)</span>:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(V = 2 \angle (-\frac \pi 4) - 3 \angle \frac \pi 3\)</span>.<br />So <span class="math">\(V = \left(2\cos\left(-\frac \pi 4\right) + 2\imag \sin\left(-\frac \pi 4\right)\right) - \left(3\cos \frac \pi 3 + 3\imag \sin \frac \pi 3\right) = \left(2\cos\left(-\frac \pi 4\right) - 3\cos \frac \pi 3\right) + \imag\left(2\sin\left(-\frac \pi 4\right)\right) - 3\sin \frac \pi 3\right)\)</span>.<br />;wip</p>
+<p>Clearly, <span class="math">\(V = 2 \angle (-\frac \pi 4) - 3 \angle \frac \pi 3\)</span>.<br />So <span class="math">\(V = \left(2\cos\left(-\frac \pi 4\right) + 2\imag \sin\left(-\frac \pi 4\right)\right) - \left(3\cos \frac \pi 3 + 3\imag \sin \frac \pi 3\right) = \left(2\cos\left(-\frac \pi 4\right) - 3\cos \frac \pi 3\right) + \imag\left(2\sin\left(-\frac \pi 4\right)\right) - 3\sin\left(\frac \pi 3\right)\)</span>.<br />;wip</p>
 </blockquote>
 <p>The <strong>root mean squared</strong> (RMS) is represented <span class="math">\(V_{RMS}\)</span> and is the DC voltage that gives the same average power as the AC. This is a value between 0 and the amplitude of the circuit.</p>
 <p>The average power of an AC waveform <span class="math">\(V_{AC}(t)\)</span> is <span class="math">\(P = \frac{V_{RMS}^2}{R}\)</span>. It can also be derived to be <span class="math">\(\frac 1 T \int_0^T \frac{V_{AC}^2}{R} \dee t\)</span>. So <span class="math">\(V_{RMS} = \sqrt{\frac 1 T \int_0^T V^2 \dee t}\)</span>.</p>

@@ -47,6 +47,33 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
+\]</span></p>
 <h1 id="cs135">CS135</h1>
 <pre><code>Designing Functional Programs</code></pre>
 <p>Instructor:</p>
@@ -1642,7 +1669,7 @@ A OtherThing is one of:
 ;; Purpose: produces the elements of `lon` strictly greater than `n`
 (define (elements-more-than lon n)
     (local [;; keep?: Num -&gt; Boolean
-            ;; Purpose: produces `true` if `number` is greater than `n` ;wip: figure out how to refer to `n`
+            ;; Purpose: produces `true` if `number` is greater than `n`
             (define (keep? number)
                 (&gt; number n))]
            (filter keep? lon)))</code></pre>
@@ -1874,7 +1901,7 @@ A OtherThing is one of:
            (cons (first list1) (merge (rest list1) list2))]
           [else
            (cons (first list2) (merge list1 (rest list2)))]))</code></pre>
-<p>;wip: we are probably not supposed to use <code>merge</code> here in the second version</p>
+<p>;wip: we are probably not supposed to use the same <code>merge</code> here in the second version</p>
 <p>We can also simplify <code>mergesort</code> by using a local definition:</p>
 <pre><code>(define (mergesort values)
     (local [(define (mergesort-ne values)
@@ -2053,7 +2080,7 @@ A OtherThing is one of:
 <p>The proof is based on &quot;this statement cannot be proved&quot; written in mathematical notation. It would be inconsistent if the statement was false, since it would be a proof of a false statement, so it must be true but not provable.</p>
 <p>Another one of Hilbert's questions asked if there was a procedure that, given a formula, proves it true, shows it false, or shows that it is unprovable. This requires a precise definition of a procedure - a formal model of computation.</p>
 <p>Alonzo Church (1903-1995) showed that such a procedure is not possible. He invented lambda calculus with his student Kleene.</p>
-<p>The notation is as simple as possible: <span class="math">\(\lambda x . \)</span> ;wip</p>
+<p>The notation is as simple as possible: <span class="math">\(\lambda x . E\)</span> is a single-argument function with body <span class="math">\(E\)</span>, while ;wip</p>
 <p>Alan Turing (1912 1954) defined a different model of computation and resulted in a simpler and more influential proof.</p>
 <p>His Turing machine was a theoretical device with unlimited memory and a finite number of states. It could be thought of as a machine with an infinite tape and a finite state machine.</p>
 <p>One could represent a Turing machine using characters stored in the memory of another machine. Suppose there was a machine that could process one of these descriptions and result in whether it would eventually halt or not. Then there exists another machine that would halt if and only if the first machine said it wouldn't. This is a contradiction, so it is impossible for such a machine to exist.</p>
@@ -2069,7 +2096,6 @@ A OtherThing is one of:
 <p>LISP (LISt Processing) eventually evolved into a general purpose programming language with many other useful functions. It became the dominant language in artificial intelligence due to its encouragement of modifying the language itself. It became two main standards after the 1980s - Common Lisp and Scheme.</p>
 <p>Gerald Sussman invented Scheme after an idea for a Lisp-like programming language had actors and lexical scoping added (as opposed to Common Lisp's dynamic scoping). It became popular in the study of programming languages. He also wrote the textbook &quot;Structure and Interpretation of Computer Programs&quot;, based on Scheme.</p>
 <p>The textbook &quot;How to Design Programs&quot; was written to remedy some issues with that book, such as a steep learning curve and a lack of methodology.</p>
-<p>;wip: page 696</p>
 <p><strong>APPLAUSE</strong></p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

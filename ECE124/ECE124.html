@@ -47,21 +47,18 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
-<h1 id="ece124">ECE124</h1>
-<p>Digital circuits and systems.</p>
-<pre><code>Instructor: Andrew Kennings
-Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -75,8 +72,12 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
+<h1 id="ece124">ECE124</h1>
+<p>Digital circuits and systems.</p>
+<pre><code>Instructor: Andrew Kennings
+Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <h1 id="section">5/1/15</h1>
 <p>The assignments and other course resources can be found on the course website. They will not be posted to LEARN.</p>
 <h2 id="boolean-algebra">Boolean Algebra</h2>
@@ -572,7 +573,6 @@ Website: http://sifaka.uwaterloo.ca/~akenning/courses/ece124/</code></pre>
 <p>The <strong>longest combinational path/critical path</strong> is the longest path of logic gates and other combinational components through the circuit from one input to one output, and determines how long we need to wait before the output is stable and we can read it expecting valid results. We can represent this by drawing the full adder circuit as a box with arrows inside from each input to every output, each labelled with the longest combinational path from that input to that output. For example, the critical path from carry in to carry out is 2 gate delays for a full adder.</p>
 <p>The ripple gate is relatively slow. Note that the last sum's output depends on every input before it - as the number of bits increases, the longest combinational path of gates through the circuit gets proportionally longer. As a result, as <span class="math">\(n\)</span> increases, the amount of time we need to wait before the output of the ripple adder finally stabilizes also increases as <span class="math">\(2n - 1\)</span> gate delays.</p>
 <h1 id="section-12">28/1/15</h1>
-<p>;wip: quiz this coming wednesday Feb 4 9:30am-10:20am at MC1085 (last name A-Mar) EV3-1408 (last name Mc-Z), if there is interview conflict alternate timeslot is 5:30pm-6:20pm at EIT3145, provide proof, 3 questions with equal weight</p>
 <p>There is no such thing as a subtractor - while adding was easy because carrying always went leftward, borrowing might need us to move an arbitrary amount of spaces left. Instead, we simply add the negation of the number using the <span class="math">\(r\)</span>'s complement: <span class="math">\(M + (r^n - N) = r^n + (M - N)\)</span>. Note the presence of the <span class="math">\(r^n\)</span> term, which simply represents the carry/borrow bit past the most significant bit of the number.</p>
 <p>If we represent signed integers using two's complement, we don't need to do anything at all to the answer - just add <span class="math">\(M\)</span> to the two's complement of <span class="math">\(N\)</span>. When we do this, the carry/borrow bit is 1 if <span class="math">\(M \ge N\)</span> and 0 otherwise.</p>
 <p>Since the two's complement is equivalent to a bitwise NOT followed by addition of 1, we can very quickly find the two's complement of any number. In a ripple adder, if we use a full adder in the least significant bit of the adder, we can very easily add the two's complement for an operand by inverting its bit inputs, and setting the carry in of the full adder to 1 in the least significant bit.</p>

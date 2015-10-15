@@ -47,11 +47,38 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
+\]</span></p>
 <h1 id="cs136">CS136</h1>
 <p>Algorithm Design and Data Abstraction.</p>
 <pre><code>Instructor: Dave Tompkins
 Section 003</code></pre>
-<p>The <a href="https://www.student.cs.uwaterloo.ca/~cs136/">Course Website</a> is expected to be checked by each student at least once a day. ;wip: set up the reminder later</p>
+<p>The <a href="https://www.student.cs.uwaterloo.ca/~cs136/">Course Website</a> is expected to be checked by each student at least once a day.</p>
 <h1 id="tutorial">6/1/14 - Tutorial</h1>
 <p>This course covers Racket for the first part, and then C and abstract concepts for the rest.</p>
 <h1 id="section">7/1/14</h1>
@@ -687,7 +714,7 @@ printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints
 </ul></li>
 <li>Heap
 <ul>
-<li>This is addressed in a later section ;wip</li>
+<li>Dynamically allocated memory goes here.</li>
 </ul></li>
 <li>Stack
 <ul>
@@ -904,7 +931,7 @@ return -k;</code></pre>
 <p>Mutable variables can be declared without initializing them: <code>int k;</code>. This is generally considered bad style, however.</p>
 <p>Global variables, if not initialized, are automatically initialized to 0. Local variables can be initialized to any value, though usually it will be some entries left over from old stack frames.</p>
 <h1 id="section-9">6/2/14</h1>
-<p>The substitution stepping model stops working with imperative features like <code>set!</code>. ;wip</p>
+<p>The substitution stepping model stops working with imperative features like <code>set!</code> - these forms have a different meaning when substituted.</p>
 <h2 id="assignment">Assignment</h2>
 <p>In C, we mutate with the <strong>assignment operator</strong> (<code>=</code>). It takes the form of <code>IDENTIFIER = EXPRESSION</code>, where <code>IDENTIFIER</code> is a variable or stricture field:</p>
 <pre><code>int m = 5; // this is NOT an assignment, it is part of the initialization syntax
@@ -1441,7 +1468,6 @@ while (i &lt; 5) { // 1 * 6 operations
 }</code></pre>
 <p>Here, there are a total of 28 operations.</p>
 <h1 id="section-15">6/3/14</h1>
-<p>;wip: the office hours have been shuffled around and the assignments have been moved to fridays</p>
 <p>We are always interested in the time taken <strong>with respect to the size of the input</strong>. We represent this using <span class="math">\(n\)</span>, <span class="math">\(m\)</span>, or <span class="math">\(k\)</span>, for different inputs.</p>
 <p>For example, consider the following:</p>
 <pre><code>(define (sum lon)
@@ -1917,7 +1943,7 @@ void append_number(struct dyn_array *da, int i) {
     da-&gt;len++;
 }</code></pre>
 <p>Now the function is <span class="math">\(O(n)\)</span> only when we are resizing, and <span class="math">\(O(1)\)</span> otherwise. For example, for the first 33 calls to <code>append_number</code>, we copy the following number of elements: 0, 1, 2, 0, 4, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32.</p>
-<p>We can see that for <span class="math">\(n + 1\)</span> calls, we have <span class="math">\(n + \frac{1}{2}n + \frac{1}{4}n + \ldots + 1 = n\sum_{i = 0}^{\lceil\log_2 n\rceil} \frac{1}{2^i} = n\frac{1 - \left(\frac{1}{2}\right)^{\lceil\log_2 n\rceil + 1}}{1 - \frac{1}{2}} = 2n\left(1 - \frac{1}{2}\frac{1}{2^{\lceil\log_2 n\rceil}}\right) = O\left(n - n\frac{1}{n}\right)\right) = O(n)\)</span> copying operations.</p>
+<p>We can see that for <span class="math">\(n + 1\)</span> calls, we have <span class="math">\(n + \frac{1}{2}n + \frac{1}{4}n + \ldots + 1 = n\sum_{i = 0}^{\lceil\log_2 n\rceil} \frac{1}{2^i} = n\frac{1 - \left(\frac{1}{2}\right)^{\lceil\log_2 n\rceil + 1}}{1 - \frac{1}{2}} = 2n\left(1 - \frac{1}{2}\frac{1}{2^{\lceil\log_2 n\rceil}}\right) = O\left(n - n\frac{1}{n}\right) = O(n)\)</span> copying operations.</p>
 <p>Since everything else in <code>append_number</code> takes <span class="math">\(O(1)\)</span> for one call and <span class="math">\(O(n)\)</span> for <span class="math">\(n\)</span> calls, <code>append_number</code> has a <span class="math">\(O(n)\)</span> worst case time complexity, averaged over <span class="math">\(n\)</span> calls.</p>
 <p>So the <strong>amortized runtime</strong> (averaged worst case) of <code>append_number</code> per call is <span class="math">\(O(n) / n = O(1)\)</span>.</p>
 <p>For shrinking arrays, we might shirnk when the length of the data is less than or equal to a quarter of the maximum capacity. This would also have <span class="math">\(O(1)\)</span> amortized time complexity.</p>

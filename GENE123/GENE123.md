@@ -7,33 +7,6 @@ Electrical engineering.
     Office: EIT 3112
     Office Hours: drop-in
 
-$$
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
-$$
-
 # 6/5/13
 
 Electricity
@@ -817,7 +790,7 @@ A capacitor stores energy in an electric field, while an inductor stores energy 
 Simplify $V(t) = 2 \cos\left(100t - \frac \pi 4\right) - 3 \cos\left(100t + \frac \pi 3\right)$:
 
 > Clearly, $V = 2 \angle (-\frac \pi 4) - 3 \angle \frac \pi 3$.  
-> So $V = \left(2\cos\left(-\frac \pi 4\right) + 2\imag \sin\left(-\frac \pi 4\right)\right) - \left(3\cos \frac \pi 3 + 3\imag \sin \frac \pi 3\right) = \left(2\cos\left(-\frac \pi 4\right) - 3\cos \frac \pi 3\right) + \imag\left(2\sin\left(-\frac \pi 4\right)\right) - 3\sin \frac \pi 3\right)$.  
+> So $V = \left(2\cos\left(-\frac \pi 4\right) + 2\imag \sin\left(-\frac \pi 4\right)\right) - \left(3\cos \frac \pi 3 + 3\imag \sin \frac \pi 3\right) = \left(2\cos\left(-\frac \pi 4\right) - 3\cos \frac \pi 3\right) + \imag\left(2\sin\left(-\frac \pi 4\right)\right) - 3\sin\left(\frac \pi 3\right)$.  
 ;wip
 
 The **root mean squared** (RMS) is represented $V_{RMS}$ and is the DC voltage that gives the same average power as the AC. This is a value between 0 and the amplitude of the circuit.

@@ -12,16 +12,6 @@ Instructor:
     Office Hours: Tuesdays 9:00AM-10:00AM , Fridays 1:00PM-2:00PM, in MC 5058
     Tutorials: Tuesdays 4:30PM-7:20PM (Drop-in to Biology 1 Room 271)
 
-$$
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-$$
-
 # 9/9/13
 
 Show $\sqrt{x}(x-\sqrt{x}) = x(1-\sqrt{x})$:
