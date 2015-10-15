@@ -8,31 +8,6 @@ Linear Algebra
     Email: dstwolcz@uwaterloo.ca
     Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1:30pm-4:00pm
 
-$$
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-$$
-
 # 13/1/14
 
 Notation
@@ -556,7 +531,7 @@ Row reduce $\left[\begin{array}{ccc|c} 1 & 1 & 0 & -7 \\ 2 & 4 & 1 & -16 \\ 1 & 
 1 & 1 & 0 & -7 \\
 2 & 4 & 1 & -16 \\
 1 & 2 & 1 & 9 \\
-\end{array}\right]$ is row equivalent to $\left[\left[\begin{array}{ccc|c}
+\end{array}\right]$ is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 0 & 0 & -1 & -34 \\
 1 & 2 & 1 & 9 \\
@@ -612,7 +587,7 @@ Solve $\begin{cases} x_1 + x_2 + x_3 &= 4 \\ x_2 + x_3 &= 3 \end{cases}$:
 
 The solution set is, geometrically, either a point, a line, a plane, a hyperplane, or empty (no solutions). If there is only one solution, the solution set is a point.
 
-If a **column** in a coefficient matrix has **no leading ones**, the corresponding variable is called a **free variable**. A free variable is a variable that can be any value. Free variables exists if and only if there are an infinite number of solutions. ;wip: is this right?
+If a **column** in a coefficient matrix has **no leading ones**, the corresponding variable is called a **free variable**. A free variable is a variable that can be any value. Free variables exist if and only if there are an infinite number of solutions.
 
 ### Solving Linear Systems
 

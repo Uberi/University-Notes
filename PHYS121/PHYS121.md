@@ -6,31 +6,6 @@ Mechanics
     Instructor: Guenter Scholz
     Email: scholz@uwaterloo.ca
 
-$$
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-$$
-
 # 14/1/14
 
 Course Outline
@@ -1156,7 +1131,7 @@ For example, a tennis ball bouncing off a wall has the wall exert an impulse on 
 
 Also, the third law of motion applies here, so any impulse an object applies has an equal and opposite impulse applied to it.
 
-Impulse is measured with Newton-seconds $N s$, just like momentum. Force is the change in momentum, so $\vec{p} = \int \vec{F}(t) \dee t$ and $\frac{\dee} \vec{p}{\dee t} = F(t)$.
+Impulse is measured with Newton-seconds $N s$, just like momentum. Force is the change in momentum, so $\vec{p} = \int \vec{F}(t) \dee t$ and $\frac{\dee \vec{p}}{\dee t} = F(t)$.
 
 In collisions like bouncing a ball, the actual time the objects are colliding are very small, so the forces applied are very large. It is often simpler to treat the collisions as instantaneously transferring momentum of the object rather than as a force working over time.
 

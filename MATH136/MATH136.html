@@ -47,22 +47,18 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
-<h1 id="math136">MATH136</h1>
-<p>Linear Algebra</p>
-<pre><code>Instructor: Dan Wolczuk
-Section 081 (online)
-Email: dstwolcz@uwaterloo.ca
-Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1:30pm-4:00pm</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -76,7 +72,14 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
+<h1 id="math136">MATH136</h1>
+<p>Linear Algebra</p>
+<pre><code>Instructor: Dan Wolczuk
+Section 081 (online)
+Email: dstwolcz@uwaterloo.ca
+Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1:30pm-4:00pm</code></pre>
 <h1 id="section">13/1/14</h1>
 <h2 id="notation">Notation</h2>
 <p>We represent vectors as column vectors (matrices of size <span class="math">\(n \times 1\)</span>) to distinguish them from points: <span class="math">\(\vec{v} = \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}, v_i \in \mathbb{R}, 1 \le i \le n\)</span>.</p>
@@ -321,7 +324,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 </blockquote>
 <p>Row reduce <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 2 &amp; 4 &amp; 1 &amp; -16 \\ 1 &amp; 2 &amp; 1 &amp; 9 \end{array}\right]\)</span>:</p>
 <blockquote>
-<p><span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 2 &amp; 4 &amp; 1 &amp; -16 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ \end{array}\right]\)</span> is row equivalent to <span class="math">\(\left[\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 + (-2)R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 \leftrightarrow R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\((-1)R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 1 &amp; 16 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 - R_1\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 0 &amp; -18 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 - R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 0 &amp; 0 &amp; 11 \\ 0 &amp; 1 &amp; 0 &amp; -18 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 - R_3\)</span>.<br />This is in RREF.</p>
+<p><span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 2 &amp; 4 &amp; 1 &amp; -16 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ \end{array}\right]\)</span> is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 + (-2)R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; -1 &amp; -34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 \leftrightarrow R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 1 &amp; 2 &amp; 1 &amp; 9 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\((-1)R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 1 &amp; 16 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 - R_1\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; -7 \\ 0 &amp; 1 &amp; 0 &amp; -18 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 - R_3\)</span>.<br />This is row equivalent to <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 0 &amp; 0 &amp; 11 \\ 0 &amp; 1 &amp; 0 &amp; -18 \\ 0 &amp; 0 &amp; 1 &amp; 34 \\ \end{array}\right]\)</span> via <span class="math">\(R_2 - R_3\)</span>.<br />This is in RREF.</p>
 </blockquote>
 <p>Note the general technique used in reducing the matrix. First, we want to obtain a triangle of 0 elements with leading ones diagonally rightwards, by going from top to bottom. Then, we make sure each leading one is the only non-zero element in its column by subtracting from rows below from bottom to top.</p>
 <p>This technique is basically modifying the matrix until all the properties except for property 4. Then property 4 can be solved for relatively easily.</p>
@@ -334,7 +337,7 @@ Office Hours: MC 4013 on Mondays, Wednesdays, Fridays 1:00pm-2:00pm, Thursdays 1
 <p>The augmented matrix is <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 1 &amp; 1 &amp; 4 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{array}\right]\)</span>.<br />The matrix in RREF is <span class="math">\(\left[\begin{array}{ccc|c} 1 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{array}\right]\)</span>.<br />Note that this corresponds to <span class="math">\(x_1 = 1\)</span> and <span class="math">\(x_2 + x_3 = 3\)</span>, and that the second equation has infinitely many solutions.<br />We can find the general solution by writing everything in terms of the fewest variables possible.<br />Clearly, <span class="math">\(x_3 = 3 - x_2\)</span>, so the solution is <span class="math">\(\vec{x} = \begin{bmatrix} 1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 1 \\ x_2 \\ 3 - x_2 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix} + x_2\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}\)</span>.<br />We can denote this as <span class="math">\(\vec{x} = \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix} + s\begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}, s \in \mb{R}\)</span>, by assigning <span class="math">\(x_2\)</span> to the parameter <span class="math">\(s\)</span>.<br />This represents a line at the intersection of two planes in <span class="math">\(\mb{R}^3\)</span>.</p>
 </blockquote>
 <p>The solution set is, geometrically, either a point, a line, a plane, a hyperplane, or empty (no solutions). If there is only one solution, the solution set is a point.</p>
-<p>If a <strong>column</strong> in a coefficient matrix has <strong>no leading ones</strong>, the corresponding variable is called a <strong>free variable</strong>. A free variable is a variable that can be any value. Free variables exists if and only if there are an infinite number of solutions. ;wip: is this right?</p>
+<p>If a <strong>column</strong> in a coefficient matrix has <strong>no leading ones</strong>, the corresponding variable is called a <strong>free variable</strong>. A free variable is a variable that can be any value. Free variables exist if and only if there are an infinite number of solutions.</p>
 <h3 id="solving-linear-systems">Solving Linear Systems</h3>
 <p>We can take this technique and generalize it a bit to solve any linear system, or show it to not have any solutions:</p>
 <ol style="list-style-type: decimal">

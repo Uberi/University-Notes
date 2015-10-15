@@ -7,33 +7,6 @@ Probability.
     Instructor: Dina Dawoud
     Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126
 
-$$
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
-$$
-
 # 5/5/14
 
 Probability is a tool used to model uncertainty and variability, like size, weight, and height. It allows us to work with uncertainty, though it cannot eliminate it.
@@ -374,7 +347,7 @@ In the above example, $f_X(x) = \begin{cases} P(\set{TTT}) &\text{if } x = 0 \\ 
 
 For example, $f_X(x) = \frac{kx}{2 + x}$ is a probability function that gives $x \in \set{1, 2, 3, 4, 5}$. Clearly, $k$ must satisfy $f_X(1) + f_C(2) + f_C(3) + f_C(4) + f_C(5) = 1 = \frac k 3 + \frac {2k} 4 + \frac {3k} 5 + \frac {4k} 6 + \frac {5k} 7 = \frac {140k + 105k + 84k + 70k + 60k} {420} = \frac{459}{420}k$, so $k = \frac{420}{459}$.
 
-The Cumulative Distribution Function is $F_X(x) = P(X \le x) = \sum_{u \le x} f_X(u)$. It is always true that $\lim_{x \to -\infty} F_X(x) = 0$ and $\lim_{x \to \infty} F_X(x) = 1$. Therefore, $f_X(x) = F_X(x) - F_X(x - 1)$ and $P(X = x) = P(X \le x) - P(X \le x - 1)$. It is the probability of anything less than or equal to $x$ taking place.
+The cumulative Distribution Function is $F_X(x) = P(X \le x) = \sum_{u \le x} f_X(u)$. It is always true that $\lim_{x \to -\infty} F_X(x) = 0$ and $\lim_{x \to \infty} F_X(x) = 1$. Therefore, $f_X(x) = F_X(x) - F_X(x - 1)$ and $P(X = x) = P(X \le x) - P(X \le x - 1)$. It is the probability of anything less than or equal to $x$ taking place.
 
 # 28/5/14
 
@@ -763,9 +736,9 @@ When we have factorials, the form $\operatorname{Var}(X) = E(X(X - 1) + X) - \mu
 Find the variance of the binomial distribution:
 
 > Assume $X \sim \operatorname{Bin}(n, p)$. Then $f_X(x) = {n \choose x}p^x(1 - p)^{n - x} = \frac{n!}{x!(n - x)!}p^x(1 - p)^{n - x}$.  
-> So $\operatorname{Var}(X) = E(X(X - 1)) + np - (np)^2 = \sum_{x = 2}^n x(x - 1) \frac{n!}{x!(n - x)!}p^x(1 - p)^{n - x} + np - n^p^2
-= p^n\sum_{x = 2}^n \frac{n!}{(x - 2)!(n - x)!}\left(\frac p {1 - p}\right)^x + np - n^p^2$.  
-> ;wip: np(1 - p)
+> So $\operatorname{Var}(X) = E(X(X - 1)) + np - (np)^2 = n(n - 1)p^2\left(\sum_{x = 2}^n x(x - 1) \frac{(n - 2)!}{(x - 2)!(n - x)!}p^{x - 2}(1 - p)^{n - x}\right) + np - n^2p^2
+= n(n - 1)p^2 (p + (1 - p))^{n - 2} + np - n^2p^2$.  
+> So $\operatorname{Var}(X) = n(n - 1)p^2 + np - n^2p^2 = np(1 - p)$.  
 
 In the same way, the variance of the Poisson distribution is $\mu$.
 
@@ -818,8 +791,6 @@ Let $T = X + Y$ where $X \sim \operatorname{Pois}(\mu_1), Y \sim \operatorname{P
 > So if $X$ and $Y$ are independent, $X + Y \sim \operatorname{Pois}(\mu_1 + \mu_2)$.  
 
 # 2/7/14
-
-;wip: get the revision material from LEARN
 
 Multinomial Distribution
 ------------------------
@@ -1117,6 +1088,4 @@ Find the probability that the mean of a sample of 108 observations is more than 
 > Clearly, each observation in $S$ has its own probability distribution, and if we add them up we get a normal distribution.  
 > Clearly, $E(S) \sim \operatorname{N}\left(45, \frac{26}{\sqrt{108}}\right)$. So the probability is $P(E(S) > 46) \approxeq 0.3447$.  
 
-;wip: exam on August 6, 4pm-6:30pm, PAC1-6, sections 4, 5, 7, 8, 9, 10.1, 10.2, assigned seats, 8 short answer, pink tie calculators, formula sheet + normal distrubution table
-;wip: 8.3 and 9.4 not covered
-;wip: get sample final exams
+Exam on August 6, 4pm-6:30pm, PAC1-6, sections 4, 5, 7, 8, 9, 10.1, 10.2, assigned seats, 8 short answer, pink tie calculators, formula sheet + normal distrubution table, sections 8.3 and 9.4 not covered.

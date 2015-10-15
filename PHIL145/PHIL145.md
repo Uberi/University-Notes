@@ -1411,13 +1411,9 @@ For example, two groups are given almost identical papers to evaluate, where one
 
 # 14/3/14
 
-;wip: read chapter 8
-
 Apparently we didn't do much on Wednesday, probably because of the snow. This class was a review of last class' notes.
 
 # 17/3/14
-
-;wip: the last lecture is on march 31
 
 Communication
 -------------
@@ -1429,8 +1425,6 @@ Communication has multiple goals, such as to entertain, scare, or deceive, in ad
 For example, poverty might be explained as failings of character such as laziness, when there are likely numerous other effects causing this situation.
 
 # 21/3/14
-
-;wip: chapter 9
 
 The **false polarization effect** is the tendency to overestimate the **extent to which someone's views resemble the strongest/sterotypical views of this sort**, and **the difference between one's own views and the views of people disagreeing**.
 
@@ -1477,8 +1471,6 @@ Some common criteria for demarcating science are:
     * Science makes use of hypotheses and experiments to draw conclusions.
 
 # 26/3/14
-
-;wip: do quiz 5, posted later today, due on the 30th
 
 **Theory-ladeness** is a phenomenon where all observations are always made against some sort of existing theory and assumptions. In other words, all theories in a paradigm are tied to that paradigm.
 

@@ -47,22 +47,18 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
-<h1 id="stat230">STAT230</h1>
-<p>Probability.</p>
-<pre><code>Section 001
-Instructor: Dina Dawoud
-Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -76,8 +72,13 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}_P)}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
+<h1 id="stat230">STAT230</h1>
+<p>Probability.</p>
+<pre><code>Section 001
+Instructor: Dina Dawoud
+Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <h1 id="section">5/5/14</h1>
 <p>Probability is a tool used to model uncertainty and variability, like size, weight, and height. It allows us to work with uncertainty, though it cannot eliminate it.</p>
 <h2 id="definition">Definition</h2>
@@ -252,7 +253,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>The <strong>probability function/probability mass function</strong> (PMF/PF) of a random variable <span class="math">\(X\)</span> is <span class="math">\(f_X(x) = P(X = x)\)</span>, defined for all <span class="math">\(x \in A\)</span>. <span class="math">\(f_X(x)\)</span> is a probability function if and only if <span class="math">\(f_X(x) \ge 0\)</span> and <span class="math">\(\sum_{x \in A} f_X(x) = 1\)</span>. So <span class="math">\(0 \le f_X(x) \le 1\)</span>.</p>
 <p>In the above example, <span class="math">\(f_X(x) = \begin{cases} P(\set{TTT}) &amp;\text{if } x = 0 \\ P(\set{HTT, THT, TTH}) &amp;\text{if } x = 1 \\ P(\set{HHT, HTH, THH}) &amp;\text{if } x = 2 \\ P(\set{HHH}) &amp;\text{if } x = 3 \end{cases} = \begin{cases} \frac 1 8 &amp;\text{if } x = 0 \\ \frac 3 8 &amp;\text{if } x = 1 \\ \frac 3 8 &amp;\text{if } x = 2 \\ \frac 1 8 &amp;\text{if } x = 3 \end{cases}\)</span>.</p>
 <p>For example, <span class="math">\(f_X(x) = \frac{kx}{2 + x}\)</span> is a probability function that gives <span class="math">\(x \in \set{1, 2, 3, 4, 5}\)</span>. Clearly, <span class="math">\(k\)</span> must satisfy <span class="math">\(f_X(1) + f_C(2) + f_C(3) + f_C(4) + f_C(5) = 1 = \frac k 3 + \frac {2k} 4 + \frac {3k} 5 + \frac {4k} 6 + \frac {5k} 7 = \frac {140k + 105k + 84k + 70k + 60k} {420} = \frac{459}{420}k\)</span>, so <span class="math">\(k = \frac{420}{459}\)</span>.</p>
-<p>The Cumulative Distribution Function is <span class="math">\(F_X(x) = P(X \le x) = \sum_{u \le x} f_X(u)\)</span>. It is always true that <span class="math">\(\lim_{x \to -\infty} F_X(x) = 0\)</span> and <span class="math">\(\lim_{x \to \infty} F_X(x) = 1\)</span>. Therefore, <span class="math">\(f_X(x) = F_X(x) - F_X(x - 1)\)</span> and <span class="math">\(P(X = x) = P(X \le x) - P(X \le x - 1)\)</span>. It is the probability of anything less than or equal to <span class="math">\(x\)</span> taking place.</p>
+<p>The cumulative Distribution Function is <span class="math">\(F_X(x) = P(X \le x) = \sum_{u \le x} f_X(u)\)</span>. It is always true that <span class="math">\(\lim_{x \to -\infty} F_X(x) = 0\)</span> and <span class="math">\(\lim_{x \to \infty} F_X(x) = 1\)</span>. Therefore, <span class="math">\(f_X(x) = F_X(x) - F_X(x - 1)\)</span> and <span class="math">\(P(X = x) = P(X \le x) - P(X \le x - 1)\)</span>. It is the probability of anything less than or equal to <span class="math">\(x\)</span> taking place.</p>
 <h1 id="section-9">28/5/14</h1>
 <p>For discrete probability functions, we can plot <span class="math">\(f\)</span> as a bar graph to get a probability distribution.</p>
 <p>For cumulative distribution functions, the plot of <span class="math">\(F\)</span> must always have a line segment <span class="math">\(y = 0\)</span> from <span class="math">\(-\infty\)</span> to the first value of <span class="math">\(x\)</span> at <span class="math">\(y = 0\)</span>. The function itself appears as a step function, like the plot of <span class="math">\(\floor{x}\)</span>. At the far right side the last value should always be a line segment with <span class="math">\(y = 1\)</span> from the last value of <span class="math">\(x\)</span> to <span class="math">\(\infty\)</span>.</p>
@@ -486,7 +487,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <p>When we have factorials, the form <span class="math">\(\operatorname{Var}(X) = E(X(X - 1) + X) - \mu^2 = E(X(X - 1)) + E(X) - \mu^2 = E(X(X - 1)) + \mu - \mu^2\)</span> form is often useful.</p>
 <p>Find the variance of the binomial distribution:</p>
 <blockquote>
-<p>Assume <span class="math">\(X \sim \operatorname{Bin}(n, p)\)</span>. Then <span class="math">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x} = \frac{n!}{x!(n - x)!}p^x(1 - p)^{n - x}\)</span>.<br />So <span class="math">\(\operatorname{Var}(X) = E(X(X - 1)) + np - (np)^2 = \sum_{x = 2}^n x(x - 1) \frac{n!}{x!(n - x)!}p^x(1 - p)^{n - x} + np - n^p^2 = p^n\sum_{x = 2}^n \frac{n!}{(x - 2)!(n - x)!}\left(\frac p {1 - p}\right)^x + np - n^p^2\)</span>.<br />;wip: np(1 - p)</p>
+<p>Assume <span class="math">\(X \sim \operatorname{Bin}(n, p)\)</span>. Then <span class="math">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x} = \frac{n!}{x!(n - x)!}p^x(1 - p)^{n - x}\)</span>.<br />So <span class="math">\(\operatorname{Var}(X) = E(X(X - 1)) + np - (np)^2 = n(n - 1)p^2\left(\sum_{x = 2}^n x(x - 1) \frac{(n - 2)!}{(x - 2)!(n - x)!}p^{x - 2}(1 - p)^{n - x}\right) + np - n^2p^2 = n(n - 1)p^2 (p + (1 - p))^{n - 2} + np - n^2p^2\)</span>.<br />So <span class="math">\(\operatorname{Var}(X) = n(n - 1)p^2 + np - n^2p^2 = np(1 - p)\)</span>.</p>
 </blockquote>
 <p>In the same way, the variance of the Poisson distribution is <span class="math">\(\mu\)</span>.</p>
 <p>In summary, the binomial distribution has mean <span class="math">\(np\)</span> and variance <span class="math">\(np(1 - p)\)</span>, and the Poisson distribution has mean <span class="math">\(\mu\)</span> and variance <span class="math">\(\mu\)</span>.</p>
@@ -513,7 +514,6 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <p>Clearly, <span class="math">\(f_T(t) = P(X + Y = t)\)</span> where <span class="math">\(t = x + y\)</span>.<br />So <span class="math">\(y = t - x\)</span> and <span class="math">\(f_T(t) = \sum_{\text{all } x} f_{X, Y}(x, t - x) = \sum_{x = 0}^\infty f_X(x) f_Y(t - x)\)</span>, since <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> are independent.<br />Clearly, <span class="math">\(0 \le x \le t\)</span> since <span class="math">\(y = t - x\)</span> must be non-negative.<br />So <span class="math">\(f_T(t) = \sum_{x = 0}^t \frac{e^{-\mu_1}\mu_1^x}{x!} \frac{e^{-\mu_2}\mu_2^{t - x}}{(t - x)!} = e^{-\mu_1 - \mu_2}\mu_2^t \sum_{x = 0}^t \frac{\mu_1^x}{x!} \frac{\mu_2^{-x}}{(t - x)!} = e^{-\mu_1 - \mu_2}\mu_2^t \sum_{x = 0}^t \frac{1}{x!(t - x)!}\left(\frac{\mu_1}{\mu_2}\right)^x\)</span>.<br />So <span class="math">\(f_T(t) = e^{-\mu_1 - \mu_2}\mu_2^t \frac{1}{t!} \sum_{x = 0}^t \frac{t!}{x!(t - x)!}\left(\frac{\mu_1}{\mu_2}\right)^x = \frac{e^{-(\mu_1 + \mu_2)}\mu_2^t}{t!} \sum_{x = 0}^t {t \choose x}\left(\frac{\mu_1}{\mu_2}\right)^x = \frac{e^{-(\mu_1 + \mu_2)}\mu_2^t}{t!} \left(1 + \frac{\mu_1}{\mu_2}\right)^t = \frac{e^{-(\mu_1 + \mu_2)}\mu_2^t}{t!} \left(\frac{\mu_1 + \mu_2}{\mu_2}\right)^t = \frac{e^{-(\mu_1 + \mu_2)}(\mu_1 + \mu_2)^t}{t!}\)</span>.<br />So if <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> are independent, <span class="math">\(X + Y \sim \operatorname{Pois}(\mu_1 + \mu_2)\)</span>.</p>
 </blockquote>
 <h1 id="section-23">2/7/14</h1>
-<p>;wip: get the revision material from LEARN</p>
 <h2 id="multinomial-distribution">Multinomial Distribution</h2>
 <p>A <strong>multinomial distribution</strong> is an extension of the binomial distribution, except there are <span class="math">\(k\)</span> possible outcomes rather than just success or failure.</p>
 <p>So we have independent trials repeated <span class="math">\(n\)</span> times, each independent with the same outcome probabilities <span class="math">\(p_1, \ldots, p_k\)</span> for each trial, and our random variables are <span class="math">\(X_1, \ldots, X_k\)</span>, the number of times outcomes <span class="math">\(x_1, \ldots, x_k\)</span> occurred, respectively.</p>
@@ -675,7 +675,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <blockquote>
 <p>Let <span class="math">\(S\)</span> be the sample set containing 108 observations.<br />Clearly, each observation in <span class="math">\(S\)</span> has its own probability distribution, and if we add them up we get a normal distribution.<br />Clearly, <span class="math">\(E(S) \sim \operatorname{N}\left(45, \frac{26}{\sqrt{108}}\right)\)</span>. So the probability is <span class="math">\(P(E(S) &gt; 46) \approxeq 0.3447\)</span>.</p>
 </blockquote>
-<p>;wip: exam on August 6, 4pm-6:30pm, PAC1-6, sections 4, 5, 7, 8, 9, 10.1, 10.2, assigned seats, 8 short answer, pink tie calculators, formula sheet + normal distrubution table ;wip: 8.3 and 9.4 not covered ;wip: get sample final exams</p>
+<p>Exam on August 6, 4pm-6:30pm, PAC1-6, sections 4, 5, 7, 8, 9, 10.1, 10.2, assigned seats, 8 short answer, pink tie calculators, formula sheet + normal distrubution table, sections 8.3 and 9.4 not covered.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

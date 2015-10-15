@@ -3,7 +3,8 @@ PHIL110A
 
 Analytical philosophy.
 
-Instructor: Carla Fehr
+    Instructor: Carla Fehr
+    Section 001
 
 Epistemology
 ------------
@@ -618,13 +619,13 @@ So the simplest answer is idealism, and so it's the one we should use.
 Review
 ------
 
-| Philosopher | Source of ideas | Metaphysics            | Relation of knowledge to the world | Causation              | Skepticism                     |
-|:------------|:----------------|:-----------------------|:-----------------------------------|:-----------------------|:-------------------------------|
-| ALL         | Various         | Various                | Representational theory of mind    | Various                | Various                        |
-| Aristotle   | Observation     | Form/matter            | Observation                        | Four causes            | Don't care                     |
-| Descartes   | Rationalist     | Dualist - mind/body    | Mind/body problem                  | Efficient cause        | Methodic doubt test            | ;wip: what's the mind/body problem?
-| Locke       | Empiricist      | Materialist            | Physical interactions with brains  | Efficient cause        | Doubt only secondary qualities |
-| Berkeley    | Empiricist      | Idealist - minds/ideas | Mental causation                   | Efficient cause        | Not at all                     |
+| Philosopher | Source of ideas | Metaphysics            | Relation of knowledge to the world         | Causation              | Skepticism                     |
+|:------------|:----------------|:-----------------------|:-------------------------------------------|:-----------------------|:-------------------------------|
+| ALL         | Various         | Various                | Representational theory of mind            | Various                | Various                        |
+| Aristotle   | Observation     | Form/matter            | Observation                                | Four causes            | Don't care                     |
+| Descartes   | Rationalist     | Dualist - mind/body    | Mind/body problem (mind/body move in sync) | Efficient cause        | Methodic doubt test            |
+| Locke       | Empiricist      | Materialist            | Physical interactions with brains          | Efficient cause        | Doubt only secondary qualities |
+| Berkeley    | Empiricist      | Idealist - minds/ideas | Mental causation                           | Efficient cause        | Not at all                     |
 
 # 31/10/13
 
@@ -741,8 +742,6 @@ Before this, we focused on the "knows that" part of "$S$ knows that $P$". Femini
 Why does what one person says sound correct to that person?
 
 **Intersectionality** is the study of the intersections between different groups of minorities - the study of interactions between multiple systems of discrimination or oppression.
-
-;wip: philosophy of the mind
 
 ## The Knower
 

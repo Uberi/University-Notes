@@ -207,7 +207,7 @@ So essentially, action does have a direct impact on knowledge, like Locke's mode
 Readings: Fricker, Lackey
 
 Testimony
-=========
+---------
 
 We want to investigate the relationship between knowledge, and the person hearing it - in particular, what is testimony, when should be believe it, and when does it count as knowledge?
 

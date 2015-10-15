@@ -47,24 +47,18 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
-<h1 id="math138">MATH138</h1>
-<p>Calculus II</p>
-<pre><code>Instructor: Matthew Scott
-Section 002
-Email: mscott@uwaterloo.ca
-Office: MC 6114
-Office hours: Mondays 11:30am-12:15pm, 3:00pm-3:30pm
-Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -78,7 +72,16 @@ Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
+<h1 id="math138">MATH138</h1>
+<p>Calculus II</p>
+<pre><code>Instructor: Matthew Scott
+Section 002
+Email: mscott@uwaterloo.ca
+Office: MC 6114
+Office hours: Mondays 11:30am-12:15pm, 3:00pm-3:30pm
+Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15</code></pre>
 <h1 id="section">6/1/14</h1>
 <p>Assignments are due every Friday at 3:30pm. They are posted on LEARN.</p>
 <p>My own drop box is box 5, slot 12</p>
@@ -803,7 +806,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>For example, <span class="math">\(\sum_1^\infty \frac{1}{2^nn} \le \sum_1^\infty \frac{1}{2^n} = \sum_1^\infty \left(\frac{1}{2}\right)^n\)</span>, which converges since it is a geometric series with <span class="math">\(x = \frac{1}{2}\)</span>.</p>
 <p>Does <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}}\)</span> exist?</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} &lt; \sum_1^\infty \frac{1}{n}\)</span>.<br />Using the limit comparison test, <span class="math">\(\rho = \lim_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1\)</span>.<br />Since <span class="math">\(0 &lt; \rho &lt; \infty\)</span>, and <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> diverges, then <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}\)</span> also diverges.</p>
+<p>Clearly, <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} &lt; \sum_1^\infty \frac{1}{n}\)</span>.<br />Using the limit comparison test, <span class="math">\(\rho = \lim_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1\)</span>.<br />Since <span class="math">\(0 &lt; \rho &lt; \infty\)</span>, and <span class="math">\(\sum_1^\infty \frac{1}{n}\)</span> diverges, then <span class="math">\(\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}}\)</span> also diverges.</p>
 </blockquote>
 <p>Proof of limit comparison test:</p>
 <blockquote>
@@ -936,7 +939,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>The <span class="math">\(N\)</span>th partial sum of a Taylor series has the same zero to <span class="math">\(N\)</span>th derivatives.</p>
 <p>Find the Taylor series for <span class="math">\(\sin x\)</span> and <span class="math">\(\cos x\)</span>:</p>
 <blockquote>
-<p>Let <span class="math">\(f(x) = \sin x, x_0 = 0\)</span>. Then <span class="math">\(f^{(n)} = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}\)</span>. Clearly, <span class="math">\(f^{(0)}(0) = 0, f^{(1)}(0) = 1, f^{(1)}(0) = 0, f^{(1)}(0) = -1, \ldots\)</span>.<br />Since all the even powers are 0, then we simply omit those terms.<br />So <span class="math">\(f(x) = \sin x = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}x^n = x - \frac{x^3}{3} + \frac{x^5}{5!} - \frac{x^7}[7!} + \ldots = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}, \abs{x - x_0} &lt; \rho\)</span>.<br />Let <span class="math">\(L = \lim_{n \to \infty} \abs{\frac{(-1)^{n + 1} x^{2n + 3}}{(2n + 3)!} \frac{(2n + 1)!}{(-1)^n}} = \lim_{n \to \infty} \abs{\frac{x^2}{(2n + 3)(2n + 2)}} = 0\)</span>.<br />Then by the ratio test, the series converges for all <span class="math">\(0 &lt; 1\)</span>, and the radius of covnergence is <span class="math">\(\rho = \infty\)</span>.<br />So the Taylor series is <span class="math">\(\sin x = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}\)</span>.<br />We can find the Taylor series for <span class="math">\(\cos x\)</span> by taking derivatives of both sides: <span class="math">\(\frac{\dee}{\dee x} \sin x = \cos x = \frac{\dee}{\dee x} \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!} = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}\)</span>.</p>
+<p>Let <span class="math">\(f(x) = \sin x, x_0 = 0\)</span>. Then <span class="math">\(f^{(n)} = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}\)</span>. Clearly, <span class="math">\(f^{(0)}(0) = 0, f^{(1)}(0) = 1, f^{(1)}(0) = 0, f^{(1)}(0) = -1, \ldots\)</span>.<br />Since all the even powers are 0, then we simply omit those terms.<br />So <span class="math">\(f(x) = \sin x = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}x^n = x - \frac{x^3}{3} + \frac{x^5}{5!} - \frac{x^7}{7!} + \ldots = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}, \abs{x - x_0} &lt; \rho\)</span>.<br />Let <span class="math">\(L = \lim_{n \to \infty} \abs{\frac{(-1)^{n + 1} x^{2n + 3}}{(2n + 3)!} \frac{(2n + 1)!}{(-1)^n}} = \lim_{n \to \infty} \abs{\frac{x^2}{(2n + 3)(2n + 2)}} = 0\)</span>.<br />Then by the ratio test, the series converges for all <span class="math">\(0 &lt; 1\)</span>, and the radius of covnergence is <span class="math">\(\rho = \infty\)</span>.<br />So the Taylor series is <span class="math">\(\sin x = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}\)</span>.<br />We can find the Taylor series for <span class="math">\(\cos x\)</span> by taking derivatives of both sides: <span class="math">\(\frac{\dee}{\dee x} \sin x = \cos x = \frac{\dee}{\dee x} \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!} = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}\)</span>.</p>
 </blockquote>
 <p>Taylor series allow us to do interesting analyses. For example, it is easy to see that <span class="math">\(\sin(-x) = -\sin x\)</span> from the fact that <span class="math">\(\sum_{n = 0}^\infty \frac{(-1)^n (-x)^{2n + 1}}{(2n + 1)!} = -\sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}\)</span>.</p>
 <p>;wip: use the taylor series to show that <span class="math">\(e^{i \theta} = \cos \theta + \imag \sin \theta\)</span> - prove euler's identity</p>
@@ -1047,7 +1050,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 <p>We often want a closed form of a series.</p>
 <p>Evaluate <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^2}\)</span>:</p>
 <blockquote>
-<p>All we know right now is that this converges and is between 1 and 2. Euler found several ways to find the exact value of this series.<br />Clearly, <span class="math">\(\frac{\sin x}{x} = \frac{1}{x} \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!} = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!}\)</span>.<br />Clearly, <span class="math">\(\frac{\sin x}{x} = 1\)</span> if <span class="math">\(x = 0\)</span>, and <span class="math">\(\frac{\sin x}{x} = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!}\)</span> if <span class="math">\(x \ne 0\)</span>.<br />Clearly, any finite polynomial <span class="math">\(P(x)\)</span> such that <span class="math">\(P(0) = 1\)</span> and roots <span class="math">\(r_1, \ldots, r_n\)</span> can be written as <span class="math">\((1 - \frac{x}{r_1}) \cdots (1 - \frac{x}{r_n})\)</span>.<br />Assume this is also true for infinite polynomials as well. ;wip: this assumption is not always true Clearly, the roots of <span class="math">\(\frac{\sin x}{x}\)</span> are <span class="math">\(x = \pm \pi, \pm 2\pi, \ldots\)</span>.<br />So <span class="math">\(\frac{\sin x}{x} = \left(\left(1 - \frac{x}{\pi}\right)\left(1 + \frac{x}{\pi}\right)\right)\left(\left(1 - \frac{x}{2\pi}\right)\left(1 + \frac{x}{2\pi}\right)\right) \cdots = \left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots\)</span>.<br />So <span class="math">\(\sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!} = \left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots\)</span>.<br />Clearly, <span class="math">\(\left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots = 1 - \frac{x^2}{\pi^2}\eft(\frac{1}{1^2} + \frac{1}{1^2} + \ldots\right) + x^4(\ldots) - x^6(\ldots) + \ldots\)</span>.<br />Clearly, the coefficients of <span class="math">\(x^2\)</span> must match. So <span class="math">\(-\frac{1}{3!} = -\frac{1}{\pi}^6 \sum_{n = 1}^\infty \frac{1}{n^2}\)</span>.<br />So <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}\)</span>.<br />In fact, we can also equate the coefficients of <span class="math">\(x^4\)</span>, <span class="math">\(x^6\)</span>, and etc. to obtain things like <span class="math">\(\sum_{n = 1}^\infty \frac{1}{26} = \frac{1315862 \pi^{26}}{11094481976030578125}\)</span>.<br />;wip: talk about odd powers and how to derive the even powers directly</p>
+<p>All we know right now is that this converges and is between 1 and 2. Euler found several ways to find the exact value of this series.<br />Clearly, <span class="math">\(\frac{\sin x}{x} = \frac{1}{x} \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!} = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!}\)</span>.<br />Clearly, <span class="math">\(\frac{\sin x}{x} = 1\)</span> if <span class="math">\(x = 0\)</span>, and <span class="math">\(\frac{\sin x}{x} = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!}\)</span> if <span class="math">\(x \ne 0\)</span>.<br />Clearly, any finite polynomial <span class="math">\(P(x)\)</span> such that <span class="math">\(P(0) = 1\)</span> and roots <span class="math">\(r_1, \ldots, r_n\)</span> can be written as <span class="math">\((1 - \frac{x}{r_1}) \cdots (1 - \frac{x}{r_n})\)</span>.<br />Assume this is also true for infinite polynomials as well. ;wip: this assumption is not always true Clearly, the roots of <span class="math">\(\frac{\sin x}{x}\)</span> are <span class="math">\(x = \pm \pi, \pm 2\pi, \ldots\)</span>.<br />So <span class="math">\(\frac{\sin x}{x} = \left(\left(1 - \frac{x}{\pi}\right)\left(1 + \frac{x}{\pi}\right)\right)\left(\left(1 - \frac{x}{2\pi}\right)\left(1 + \frac{x}{2\pi}\right)\right) \cdots = \left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots\)</span>.<br />So <span class="math">\(\sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!} = \left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots\)</span>.<br />Clearly, <span class="math">\(\left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots = 1 - \frac{x^2}{\pi^2}\left(\frac{1}{1^2} + \frac{1}{1^2} + \ldots\right) + x^4(\ldots) - x^6(\ldots) + \ldots\)</span>.<br />Clearly, the coefficients of <span class="math">\(x^2\)</span> must match. So <span class="math">\(-\frac{1}{3!} = -\frac{1}{\pi}^6 \sum_{n = 1}^\infty \frac{1}{n^2}\)</span>.<br />So <span class="math">\(\sum_{n = 1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}\)</span>.<br />In fact, we can also equate the coefficients of <span class="math">\(x^4\)</span>, <span class="math">\(x^6\)</span>, and etc. to obtain things like <span class="math">\(\sum_{n = 1}^\infty \frac{1}{26} = \frac{1315862 \pi^{26}}{11094481976030578125}\)</span>.<br />;wip: talk about odd powers and how to derive the even powers directly</p>
 </blockquote>
 <h2 id="parametric-curves">Parametric Curves</h2>
 <p>We now consider functions with a single output and a vector output. For example, the position of a particle with respect to time, <span class="math">\(\vec{r}(t) = \begin{bmatrix} x(t) \\ y(t) \\ z(t) \end{bmatrix}\)</span>. This has many applications in physics.</p>

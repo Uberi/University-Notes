@@ -10,31 +10,6 @@ Calculus II
     Office hours: Mondays 11:30am-12:15pm, 3:00pm-3:30pm
     Tutorial: Wednesdays 3:30pm in MC 2035, starting Jan. 15
 
-$$
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-$$
-
 # 6/1/14
 
 Assignments are due every Friday at 3:30pm. They are posted on LEARN.
@@ -1240,7 +1215,7 @@ Does $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}}$ exist?
 
 > Clearly, $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}} = \sum_1^\infty \frac{1}{n}\frac{1}{n^\frac{1}{n}} < \sum_1^\infty \frac{1}{n}$.  
 > Using the limit comparison test, $\rho = \lim_{n \to \infty} \frac{\frac{1}{n}\frac{1}{n^\frac{1}{n}}}{\frac{1}{n}} = \lim_{n \to \infty} n^{-\frac{1}{n}} = e^{-\lim_{n \to \infty} \frac{1}{n}\ln n} \lH e^{-\lim_{n \to \infty} \frac{\frac{1}{n}}{1}} = e^{-0} = 1$.  
-> Since $0 < \rho < \infty$, and $\sum_1^\infty \frac{1}{n}$ diverges, then $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}$ also diverges.  
+> Since $0 < \rho < \infty$, and $\sum_1^\infty \frac{1}{n}$ diverges, then $\sum_1^\infty \frac{1}{n^{1 + \frac{1}{n}}}$ also diverges.  
 
 Proof of limit comparison test:
 
@@ -1487,7 +1462,7 @@ Find the Taylor series for $\sin x$ and $\cos x$:
 
 > Let $f(x) = \sin x, x_0 = 0$. Then $f^{(n)} = \evalat{\frac{\dee^n f}{\dee x^n}}_{x = x_0}$. Clearly, $f^{(0)}(0) = 0, f^{(1)}(0) = 1, f^{(1)}(0) = 0, f^{(1)}(0) = -1, \ldots$.  
 > Since all the even powers are 0, then we simply omit those terms.  
-> So $f(x) = \sin x = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}x^n = x - \frac{x^3}{3} + \frac{x^5}{5!} - \frac{x^7}[7!} + \ldots = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}, \abs{x - x_0} < \rho$.  
+> So $f(x) = \sin x = \sum_{n = 0}^\infty \frac{f^{(n)}(x_0)}{n!}x^n = x - \frac{x^3}{3} + \frac{x^5}{5!} - \frac{x^7}{7!} + \ldots = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}, \abs{x - x_0} < \rho$.  
 > Let $L = \lim_{n \to \infty} \abs{\frac{(-1)^{n + 1} x^{2n + 3}}{(2n + 3)!} \frac{(2n + 1)!}{(-1)^n}} = \lim_{n \to \infty} \abs{\frac{x^2}{(2n + 3)(2n + 2)}} = 0$.  
 > Then by the ratio test, the series converges for all $0 < 1$, and the radius of covnergence is $\rho = \infty$.  
 > So the Taylor series is $\sin x = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}$.  
@@ -1690,7 +1665,7 @@ Evaluate $\sum_{n = 1}^\infty \frac{1}{n^2}$:
 > Clearly, the roots of $\frac{\sin x}{x}$ are $x = \pm \pi, \pm 2\pi, \ldots$.  
 > So $\frac{\sin x}{x} = \left(\left(1 - \frac{x}{\pi}\right)\left(1 + \frac{x}{\pi}\right)\right)\left(\left(1 - \frac{x}{2\pi}\right)\left(1 + \frac{x}{2\pi}\right)\right) \cdots = \left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots$.  
 > So $\sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{(2n + 1)!} = \left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots$.  
-> Clearly, $\left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots = 1 - \frac{x^2}{\pi^2}\eft(\frac{1}{1^2} + \frac{1}{1^2} + \ldots\right) + x^4(\ldots) - x^6(\ldots) + \ldots$.  
+> Clearly, $\left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right) \cdots = 1 - \frac{x^2}{\pi^2}\left(\frac{1}{1^2} + \frac{1}{1^2} + \ldots\right) + x^4(\ldots) - x^6(\ldots) + \ldots$.  
 > Clearly, the coefficients of $x^2$ must match. So $-\frac{1}{3!} = -\frac{1}{\pi}^6 \sum_{n = 1}^\infty \frac{1}{n^2}$.  
 > So $\sum_{n = 1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}$.  
 > In fact, we can also equate the coefficients of $x^4$, $x^6$, and etc. to obtain things like $\sum_{n = 1}^\infty \frac{1}{26} = \frac{1315862 \pi^{26}}{11094481976030578125}$.  

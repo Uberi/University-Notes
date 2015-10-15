@@ -47,20 +47,18 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
-<h1 id="phys121">PHYS121</h1>
-<p>Mechanics</p>
-<pre><code>Instructor: Guenter Scholz
-Email: scholz@uwaterloo.ca</code></pre>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
 \newcommand{\mb}[1]{\mathbb{#1}}
 \newcommand{\rem}{\operatorname{rem}}
 \newcommand{\sign}{\operatorname{sign}}
 \newcommand{\imag}{\boldsymbol{i}}
 \newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
 \newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
 \newcommand{\sech}{\operatorname{sech}}
 \newcommand{\spn}{\operatorname{Span}}
@@ -74,7 +72,12 @@ Email: scholz@uwaterloo.ca</code></pre>
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\cof}{\operatorname{cof}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
+<h1 id="phys121">PHYS121</h1>
+<p>Mechanics</p>
+<pre><code>Instructor: Guenter Scholz
+Email: scholz@uwaterloo.ca</code></pre>
 <h1 id="section">14/1/14</h1>
 <h2 id="course-outline">Course Outline</h2>
 <ul>
@@ -760,7 +763,7 @@ m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &amp;= m\int_\vec{a}^\vec{b} \f
 <p><strong>Impulses</strong> are changes in momentum - force applied over time, usually on small time scales. They are represented with <span class="math">\(\vec{J} = \Delta \vec{p} = \int \vec{F}(t) \dee t\)</span>.</p>
 <p>For example, a tennis ball bouncing off a wall has the wall exert an impulse on it - it applies a normal force to the ball over the duration that they are colliding. Since the wall is stationary and the ball ends up travelling in the opposite direction, the impulse applies twice the momentum the ball had before impact (one times the momentum to stop the ball, one more time to make it bounce back).</p>
 <p>Also, the third law of motion applies here, so any impulse an object applies has an equal and opposite impulse applied to it.</p>
-<p>Impulse is measured with Newton-seconds <span class="math">\(N s\)</span>, just like momentum. Force is the change in momentum, so <span class="math">\(\vec{p} = \int \vec{F}(t) \dee t\)</span> and <span class="math">\(\frac{\dee} \vec{p}{\dee t} = F(t)\)</span>.</p>
+<p>Impulse is measured with Newton-seconds <span class="math">\(N s\)</span>, just like momentum. Force is the change in momentum, so <span class="math">\(\vec{p} = \int \vec{F}(t) \dee t\)</span> and <span class="math">\(\frac{\dee \vec{p}}{\dee t} = F(t)\)</span>.</p>
 <p>In collisions like bouncing a ball, the actual time the objects are colliding are very small, so the forces applied are very large. It is often simpler to treat the collisions as instantaneously transferring momentum of the object rather than as a force working over time.</p>
 <p>The amount of impulse applied can be determined by looking at the change in the speed of an object. For example, a ball that bounces right back after hitting a wall has had applied to it</p>
 <p>If 100 0.05kg marbles are being poured on a scale over 5 s from 5 m up, each one bouncing off the scale after impact, then what is the average reading shown on the scale?</p>

@@ -12,15 +12,6 @@ Instructor:
     Advising Hours: Monday, Wednesday at 12:00-13:30, MC 4023
     Office hours: starts week 3, details TBA ;wip
 
-$$
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-$$
-
 # 9/9/13
 
 Preliminaries
