@@ -47,6 +47,33 @@ function highlight() { // highlight all code blocks using HighlightJS
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
   </ul>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
+\]</span></p>
 <h1 id="ece222">ECE222</h1>
 <p>Section 001 (mixed engineering)</p>
 <pre><code>Andrew Morton
@@ -408,6 +435,30 @@ LDMFD, R13, {R15, R1, R2} # pop the link register&#39;s value into the program c
 <p>I/O devices typically have three registers exposed as memory locations - data, status, and control. Often, the control and status registers have the same address, where loading from it reads the status register and writing to it sets the control register.</p>
 <p>Programs will generally interact with I/O by <strong>polling</strong> (program-controlled I/O) or with <strong>interrupts</strong> (device-controlled I/O).</p>
 <p>For polling, there will generally be a bit in the status register that tells us whether the I/O device has data ready to read, and then the program repeatedly checks this and reads if necessary. This is really inefficient if the reads occur infrequently, such as reading keypresses from a keyboard - most of the time, the CPU will simply be checking status registers. We want to allow other things to run while we're waiting for I/O to get reading - to let I/O devices alert the processor when it's ready. This is the role of interrupts.</p>
+<h1 id="section-13">16/10/15</h1>
+<p>I/O devices will often have a dedicated signal on a special processor line, called IRQ (interrupt request), on which the device can send signals. When the processor receives one of these <strong>interrupts</strong> signals, it switches to an <strong>interrupt service routine/interrupt handler</strong> (ISR). Interrupts are used to allow the processor to respond to high priority events.</p>
+<p>An interrupt service routine is a small program stored in memory. ISRs should be as short and fast as possible, and do the minimum needed to satisfy the I/O device, since it is blocking the main program from running - they usually copy data into a buffer for the main program to process later. ISRs generally have to acknowledge the interrupt in their body to clear the interrupt from processing.</p>
+<p>The steps before the ISR is called can take a significant amount of time - this delay is called <strong>interrupt latency</strong>.</p>
+<p>Some pieces of code are critical and should never be interrupted. For this purpose, there is a CSPIE (interrupt enable) bit in the processor status (PS) register that controls whether interrupts are handled, or just ignored. This is useful for things like disabling interrupts in realtime code sections, or disabling interrupts within an ISR to avoid recursive interrupts.</p>
+<p>The interrupt process occurs as follows:</p>
+<ul>
+<li>The I/O device asserts an interrupt.</li>
+<li>The processor finishes executing the current instruction and everything in its pipeline (or just stops executing it if there's an exception like invalid memory access).</li>
+<li>The processor state is saved (program counter PC, status register PS).</li>
+<li>Interrupts disabled by setting interrupt enable to 0 in PS.</li>
+<li>The correct ISR corresponding to the device is looked up.</li>
+<li>The ISR is called, servicing the device (the ISR should de-assert the interrupt to clear the interrupt request).</li>
+<li>The processor state is restored.</li>
+<li>Interrupts enabled by setting interrupt enable to 1 in PS.</li>
+<li>The next instruction is executed (or not, if there was an exception).</li>
+</ul>
+<p>The IRQ could just be a single signal, where upon receiving a signal, we just poll every device to see if it requested an interrupt, but this adds a lot of interrupt latency. What we can do instead is have the IRQ line accept a vector, and then map that to ISR addresses using an <strong>interrupt vector table</strong> (an array, generally at a fixed address, of ISR addresses where indices are the vector values) - these are <strong>vectored interrupts</strong>. However, vectored interrupts require IRQ to have a lot more lines to represent a vector.</p>
+<p>One way to implement the IRQ line is by having a weakly pulled-up line pulled down by any of the I/O devices (each one either pulls down the line or is disconnected). When the line is pulled down, the processor detects this as an interrupt, and the I/O device stops pulling the line down (clearing the interrupt request) when the ISR services the I/O device.</p>
+<p>Servicing the I/O device is done by asserting the interrupt acknowledge signal INTA, which is sent from the processor to the first I/O device and passed down the line until a device needing service receives it.</p>
+<p>The processor can determine which I/O device asserted the interrupt by either polling each of them in turn, or having another set of lines to transfer the vector if using vectored interrupts. Alternatively, IRQ can be weakly pulled-down and I/O devices can pull it up.</p>
+<p>Another way to implement IRQ is to simply have one IRQ line per I/O device. This is much simpler, but requires a lot more lines - one IRQ and one INTA line per I/Oo device. Plus, the number of I/O devices is fixed by what is built into the processor.</p>
+<p>If multiple interrupts occur at the same time, <strong>arbitration</strong> is needed. Most systems will have an interrupt priority mechanism, where higher priority interrupts get to execute first. In single-signal IRQ implementations, the priority is defined by the order that INTA signals are passed from one device to the next - the earlier the device in the chain, the higher its priority. For multiple dedicated IRQ lines, the processor must choose just one of them to process at a time.</p>
+<p><strong>Interrupt nesting</strong> allows higher priority ISRs to interrupt lower priority ones - this helps avoid higher priority ISRs being ignored while low-priority ISRs are running (and interrupts are disabled). This is done by having separate interrupt enable flags for high and low priority interrupts - low priority ISRs only disable low priority interrupts while running, while high priority ones disable both low and high priority interrupts while running.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
