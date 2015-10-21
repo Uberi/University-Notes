@@ -80,31 +80,6 @@ function highlight() { // highlight all code blocks using HighlightJS
 Section 002
 epfchan@uwaterloo.ca
 Office Hours: Monday, Wednesday 12:30 PM-1:15 PM, DC2338</code></pre>
-<p><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
 <h1 id="section">14/9/15</h1>
 <p>Databases, data modelling, and relational algebra, in theory and in practice.</p>
 <p>Assignments are due before 1 PM on their respective due dates. No late assignments. Midterm on November 6, 4:30 PM-6 PM.</p>
@@ -211,7 +186,7 @@ write target account</code></pre>
 <p>In DBMSs, all relations are represented as flat tables, where the columns are the attributes <span class="math">\(D_1, \ldots, D_n\)</span>, and the rows are the instances of the relation. Note that there is no concept of entities here - relations represent both entity-relational entities and entity-relational relations.</p>
 <p>The intension of a relation is the relational schema, and the intension of the database isthe database schema <span class="math">\(R = \set{R_1, \ldots, R_k}\)</span>. The extension of a relation is the set of possible tuples <span class="math">\(\tup{a_1, \ldots, a_n}\)</span>.</p>
 <h1 id="section-10">7/10/15</h1>
-<p>By the <strong>closed world assumption</strong> (if something is true, then we know it's true), relations are complete - if things are related to each other, then we also know that they are related to each other.</p>
+<p>By the <strong>closed world assumption</strong> (if something is true, then we know it's true), relations are complete - if things are related to each other, then we also know that they are related to each other. In other words, all the things we want to represent are known to us/representable in the table - everything is true or false, and all true things are in our database.</p>
 <h3 id="converting-erds-to-relational-schemas">Converting ERDs to relational schemas</h3>
 <p>We have several heuristics for converting ERDs to relational schemas, but there isn't always a good way to.</p>
 <p>When there is a one to many relation between doctors (<code>Doctor(DOCTOR_ID, ...)</code> in the ERD) and hospitals (<code>Hospital(HOSPITAL_ID, ...)</code> in the ERD), we might represent doctors in the relational schema as <code>Doctor(DOCTOR_ID, HOSPITAL_ID, ...)</code> - we added an attribute to doctors that specifies which hospital they work in, to represent this one-to-many relation. In general, when we have a many-to-one or one-to-one relation, we can add an attribute to one of the objects identifying the instance of the other object it's associated with.</p>
@@ -284,6 +259,25 @@ write target account</code></pre>
 </ul>
 <h2 id="structured-query-language-sql">Structured Query Language (SQL)</h2>
 <p>The query language we will use in this course will be SQL. This language is a way to represent relational algebra in a machine-readable way, and also allow definitions of relational schemes. Since SQL is built on sound mathematical foundations, we have certain guarantees about the data stored in the database, such as safety and consistency.</p>
+<h1 id="section-14">19/10/15</h1>
+<p>SQL is a way to write relational algebra in a machine-readable format. SQL can be either interactive or embedded in an application, and embedded SQL is either static or dynamic. Interactive SQL is a subset of embedded, which is in turn a subset of relational algebra.</p>
+<p>In SQL, columns have data types like INTEGER, VARCHAR, VARBINARY, or others like dates and times.</p>
+<p>Columns in a table can also be null unless otherwise constrained (like primary key or not null constraints). Null values don't violate the closed world assuption because it doesn't mean that the value isn't in the database, just that it isn't known/applicable. Conditions with null values are neither true nor false (checking whether something is equal to null, for example), so we actually have <strong>three-valued logic</strong> (true, false, and unknown). SQL queries only select tuples that evaluate to true, so tuples that evaluate to neither true nor false aren't selected.</p>
+<p>A <strong>table</strong> is like a relaion, but duplicates are allowed unless otherwise constrained. Indices are generated for columns of tables to speed up selection and joins.</p>
+<p>SQL is both a data declaration language and a retrieval language. There are commands such as table create/alter/drop, index create/drop, and view create/drop, as well as access control commands such as grant/revoke. See slide 122 and after for the exact syntax used in this course.</p>
+<p>Creating tables/indices/views builds a new table/index/view, altering tables add/remove columns (expanding with nulls as necessary), and dropping tables/indices/views deletes them, removing associated indices/views as necessary.</p>
+<p>Consider <code>SELECT 'the supplier ID is ', supplier_id, ' with status ', status FROM SUPPLIER WHERE city = 'Paris'</code>, which selects tuples of the form <span class="math">\(\tup{\text{the supplier ID is }, x \in \mb{Z}, \text{ with status }, y \in \mb{Z}}\)</span>.</p>
+<p>SQL has <strong>tuple iteration semantics</strong> - we can iterate over the result to get a sequence of tuples.</p>
+<p>For example, <code>SELECG DISTINCT a, b FROM X, Y WHERE X.c = Y.c</code> is an equijoin/inner join on <span class="math">\(c\)</span> over <span class="math">\(X\)</span> and <span class="math">\(Y\)</span>, projecting the attributes <span class="math">\(a, b\)</span>.</p>
+<h1 id="section-15">21/10/15</h1>
+<p>Suppose we have two relation schemes <span class="math">\(A, B\)</span> both with attribute <span class="math">\(x\)</span>.</p>
+<p>An <strong>inner join</strong> on <span class="math">\(A\)</span> and <span class="math">\(B\)</span> over <span class="math">\(x\)</span> is the set of all records in <span class="math">\(A\)</span> extended with attributes of <span class="math">\(B\)</span> where <span class="math">\(x\)</span> in <span class="math">\(A\)</span> is equal to <span class="math">\(x\)</span> in <span class="math">\(B\)</span> - records of <span class="math">\(A\)</span> and <span class="math">\(B\)</span>, only if they have matches in each other.</p>
+<p>A <strong>left join</strong> on <span class="math">\(A\)</span> and <span class="math">\(B\)</span> over <span class="math">\(x\)</span> is the set of all records in <span class="math">\(A\)</span>, extended with attributes of <span class="math">\(B\)</span> where applicable (for records that don't match a record in <span class="math">\(B\)</span>, the record is extended with attributes of <span class="math">\(B\)</span> all with value null) - records of <span class="math">\(A\)</span>, regardless of whether they have matches in <span class="math">\(B\)</span> or not. A <strong>right join</strong> is the same but with <span class="math">\(A\)</span> and <span class="math">\(B\)</span> flipped around.</p>
+<p>An <strong>outer join</strong> on <span class="math">\(A\)</span> and <span class="math">\(B\)</span> over <span class="math">\(x\)</span> is the set of all records in <span class="math">\(A\)</span> and <span class="math">\(B\)</span>, extended with attributes of each other where <span class="math">\(x\)</span> matches up - records of <span class="math">\(A\)</span> and <span class="math">\(B\)</span>, regardless of whether they have matches or not.</p>
+<p>A <strong>cross join</strong> on <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is simply <span class="math">\(A \times B\)</span>, the Cartesian product.</p>
+<p>In SQL, we can have subqueries that allow us to query other things in our queries. For example, <code>SELECT DISTINCT employee_id, name FROM EMPLOYEES WHERE employee_id IN (SELECT employee_id FROM BENEFIT_PLANS WHERE type = &quot;fixed&quot;)</code> - employees with at least one fixed benefit plan (here, we could also just use a join).</p>
+<p>SQL can easily compute the answer for existential quantifiers, by querying to find something. To compute the answer for universal quantifier, we simply use <span class="math">\(\forall x. y \equiv \neg \exists x. \neg y\)</span>.</p>
+<p><code>UNIQUE(...)</code> returns true if there are no duplicate items in <code>...</code>. <code>EXISTS(...)</code> returns true if there are any items in <code>...</code>.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

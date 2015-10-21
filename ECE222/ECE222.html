@@ -78,31 +78,6 @@ function highlight() { // highlight all code blocks using HighlightJS
 <p>Section 001 (mixed engineering)</p>
 <pre><code>Andrew Morton
 arrmorto@uwaterloo.ca</code></pre>
-<p><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l&#39;H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
 <h1 id="section">14/9/15</h1>
 <p>Computer architecture and assembly language programming.</p>
 <p>There's a single Saturday lecture to make up for Thanksgiving Monday, sometime on the 1:30-2:20 slots. There are 6 make-up lecture slots on Fridays at 1:30 PM-2:20 PM.</p>
@@ -447,18 +422,123 @@ LDMFD, R13, {R15, R1, R2} # pop the link register&#39;s value into the program c
 <li>The processor state is saved (program counter PC, status register PS).</li>
 <li>Interrupts disabled by setting interrupt enable to 0 in PS.</li>
 <li>The correct ISR corresponding to the device is looked up.</li>
-<li>The ISR is called, servicing the device (the ISR should de-assert the interrupt to clear the interrupt request).</li>
+<li>The ISR is called, servicing the device (the ISR should deactivate the interrupt to clear the interrupt request, by setting the INTA line).</li>
 <li>The processor state is restored.</li>
 <li>Interrupts enabled by setting interrupt enable to 1 in PS.</li>
 <li>The next instruction is executed (or not, if there was an exception).</li>
 </ul>
 <p>The IRQ could just be a single signal, where upon receiving a signal, we just poll every device to see if it requested an interrupt, but this adds a lot of interrupt latency. What we can do instead is have the IRQ line accept a vector, and then map that to ISR addresses using an <strong>interrupt vector table</strong> (an array, generally at a fixed address, of ISR addresses where indices are the vector values) - these are <strong>vectored interrupts</strong>. However, vectored interrupts require IRQ to have a lot more lines to represent a vector.</p>
 <p>One way to implement the IRQ line is by having a weakly pulled-up line pulled down by any of the I/O devices (each one either pulls down the line or is disconnected). When the line is pulled down, the processor detects this as an interrupt, and the I/O device stops pulling the line down (clearing the interrupt request) when the ISR services the I/O device.</p>
-<p>Servicing the I/O device is done by asserting the interrupt acknowledge signal INTA, which is sent from the processor to the first I/O device and passed down the line until a device needing service receives it.</p>
+<p>Servicing the I/O device is done by asserting the interrupt acknowledge signal INTA, which is sent from the processor to the first I/O device and passed down the line until a device needing service receives it. This is a single line, and when set to 1 means that the processor acknowledges that the interrupt was raised. The I/O device needing service always passes on 0, while other devices pass on the original value, since we want to only acknowledge one interrupt at a time (if there are multiple active, setting INTA only acknowledges the first one).</p>
 <p>The processor can determine which I/O device asserted the interrupt by either polling each of them in turn, or having another set of lines to transfer the vector if using vectored interrupts. Alternatively, IRQ can be weakly pulled-down and I/O devices can pull it up.</p>
 <p>Another way to implement IRQ is to simply have one IRQ line per I/O device. This is much simpler, but requires a lot more lines - one IRQ and one INTA line per I/Oo device. Plus, the number of I/O devices is fixed by what is built into the processor.</p>
 <p>If multiple interrupts occur at the same time, <strong>arbitration</strong> is needed. Most systems will have an interrupt priority mechanism, where higher priority interrupts get to execute first. In single-signal IRQ implementations, the priority is defined by the order that INTA signals are passed from one device to the next - the earlier the device in the chain, the higher its priority. For multiple dedicated IRQ lines, the processor must choose just one of them to process at a time.</p>
 <p><strong>Interrupt nesting</strong> allows higher priority ISRs to interrupt lower priority ones - this helps avoid higher priority ISRs being ignored while low-priority ISRs are running (and interrupts are disabled). This is done by having separate interrupt enable flags for high and low priority interrupts - low priority ISRs only disable low priority interrupts while running, while high priority ones disable both low and high priority interrupts while running.</p>
+<h1 id="section-14">19/10/15</h1>
+<p>An example of where interrupt nesting is important is for keyboard and display interrupts - while we are in the display interrupt handlers, we still want to keep receiving keyboard input.</p>
+<p>The upon interrupt requests, the status register PS is saved to the interrupt status register IPS. The IENABLE register has one bit per device representing whether interrupts are enabled for it, while the IPENDING register has one bit per device representing whether the current interrupt request exists and has not been serviced. Registers such as these are accessed using special control register instructions, which we will call <code>move_control SOURCE, DESTINATION</code> for simplicity.</p>
+<p>Simple interrupts example:</p>
+<pre><code>; THIS SHOULD BE IN THE MAIN PROGRAM
+; clear the line buffer
+move R2, #LINE_BUFFER
+store R2, BUFFER_PTR
+
+; enable keyboard interface interrupts
+move R2, #2
+store R2, KEYBOARD_STATUS ; keyboard status register is a special location in memory
+
+; enable CPU keyboard interrupts
+move_control IENABLE, R2
+or R2, R2, #2
+move_control R2, IENABLE
+
+; enable CPU interrupts in general
+move_control PS, R2
+or R2, R2, #1
+move_control R2, PS
+
+; THIS SHOULD BE IN THE ISR
+; save used registers
+push R2
+push R3
+
+; save keyboard character to the line buffer
+load_byte R3, KEYBOARD_DATA ; keyboard data register is special location in memory
+load R2, BUFFER_PTR
+store R3, (R2)
+add R2, R2, #4
+store R2, BUFFER_PTR
+
+; restore resgisters
+pop R3
+pop R2</code></pre>
+<p>Non-maskable interrupts (NMI) are those that trigger regardless of the interrupt enable bits.</p>
+<h1 id="section-15">21/10/15</h1>
+<p>Multiple interrupts example:</p>
+<pre><code>; THIS SHOULD BE IN THE MAIN PROGRAM
+; clear the line buffer
+move R2, #LINE_BUFFER
+store R2, BUFFER_PTR
+
+; enable keyboard interface interrupts
+move R2, #2
+store R2, KEYBOARD_STATUS ; keyboard status register is a special location in memory
+
+; enable display interrupts
+move R2, #4
+store R2, DISPLAY_STATUS ; display status register is a special location in memory
+
+; enable CPU keyboard/display interrupts
+move_control IENABLE, R2
+or R2, R2, #2
+or R2, R2, #4
+move_control R2, IENABLE
+
+; enable CPU interrupts in general
+move_control PS, R2
+or R2, R2, #1
+move_control R2, PS
+
+; THIS SHOULD BE IN THE ISR
+; save used registers
+push LINK
+push FP
+push R2
+push R3
+
+; test interrupt pending to see if display generated an interrupt
+move_control R2, IPENDING
+and R3, R2, #4
+branch_if_zero R3, NOT_DISPLAY
+call DISPLAY_ISR
+jump DONE
+
+; test interrupt pending to see if keyboard generated an interrupt
+NOT_DISPLAY:
+and R3, R2, #2
+branch_if_zero R3, DONE
+call KEYBOARD_ISR
+
+; restore resgisters
+DONE:
+pop R3
+pop R2
+pop FP
+pop LINK
+
+KEYBOARD_ISR:
+; DO KEYBOARD HANDLER STUFF HERE
+
+DISPLAY_ISR
+; DO DISPLAY HANDLER STUFF HERE</code></pre>
+<p>Note that the priority of the interrupts were defined in software here - we're checking the display first, so the display always has higher priority.</p>
+<p><strong>Exceptions</strong> are simply any type of execution interruption, and include interrupts as well as interruptions from inside the processor.</p>
+<p>While interrupts are for I/O devices, we also have internal faults like error recovery (zero division, bad instruction), debugging, and various utility faults for operating system multitasking primitives. For example, breakpoints on the CPU are generated by inserting a <code>trap</code> instruction that allows a special routine to handle it. On most OSs, system calls are made using exceptions.</p>
+<p>A <strong>watchdog timer</strong> is a mechanism used for embedded systems that need to be very reliable. A timer in the background, when it runs out, triggers a non-maskable interrupt that resets the processor (say, every second or so) - the software has to reset the timer (kicking the watchdog) every so often, or else the timer will run out and reset the program. This ensures that if the program ever freezes or locks up, the wachdog timer will reset the program to try again.</p>
+<h2 id="hardware">Hardware</h2>
+<p>When state changes occur on device inputs, it takes time before the output state updates to match. While the output is updating, it is possible that the state will be transient and invalid. This is the purpose of the clock - to ensure we can wait until the signals are fully propagated before continuing.</p>
+<p>A negative edge-triggered D flip-flop is simply an MS flip-flop, two D-latches one after the other with the same clock, the second one's clock signal being inverted - all the abstract hardware must, in the end, boil down to real hardware. A multiplexer can be made from AND gates for each input and NOT gates for select lines.</p>
+<p>Buses have address signals, data signals, and control signals. On the processor bus, there is an address decoder that reads the address lines and sets the enable line on the corresponding device, such as RAM or each memory mapped I/O device. Enabling a device connects it to the bus, and only one device may be connected at a time.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
