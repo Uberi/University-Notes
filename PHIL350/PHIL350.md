@@ -328,3 +328,62 @@ Consider that "you don't believe that" and "you don't know that" are essentially
 Buckwalter/Rose/Turri replicate the Murray experiments where they presented participants with various situations and asked them questions about it, but in addition they also implied the people had thick belief, and asked "at some level, does the person think that X is true?" to test thin belief.
 
 The results imply that while people think thick belief is not always present when knowledge is, people think thin belief is. In other words, knowledge seems to require thin belief, though not thick belief - to know something, we need to think it is true.
+
+# 26/10/15
+
+Readings: Connee/Feldman, Goldman
+
+Justification
+-------------
+
+What are the things that justify belief? **Internalism** is the view that the factors that determine whether a belief is justified are all internal to the believer's experience (contained in one's mind - thoughts, memories, dispositional beliefs, inference, etc.), while **externalism** is the view that there are also external factors (evidence/facts that one has forgotten or never learned).
+
+Internal experiences also include things like reflexes, muscle memory, instincts, and other non-conscious skills. External experiences also include things that cause beliefs, like reading something in a newspaper or a book (externalism says there is a distinction between beliefs formed from good newspapers vs. bad newspapers).
+
+**Accessibilism justification** is justification determined by factors that a person can consciously access. **Mentalism justification** is justification that is simply in one's mind - it is still justification even if one cannot consciously access it (for example, the student who forgot something while under the stress of an exam still has justification, even though they can't access it).
+
+Conee and Feldman support mentalism and defend it from accessibilism internalism and externalism. Mentalism says that if two people are the same mentally, they must have the same justification for their beliefs - when people have different levels of justification, they must have different mental states.
+
+For example, two people read the newspaper indoors, which says it is sunny outside, but one goes outside and sees that it is sunny. While both people believe it is sunny outside, the one who went outside seems to have more justification. The mentalism view says that the internal experiences and memories of seeing that it is sunny accounts for the difference in justification.
+
+For example, an expert birdwatcher and a novice birdwatcher both see a woodpecker, but it seems like the expert has more justification in believing that the bird is a woodpecker than the novice. Though the situation is the same, the justification depends on the mental state of the believer. In other words, the justification changed due to internalizing an external fact, or a purely internal difference in the person holding the belief.
+
+Conee and Feldman say that these cases, as well as four more given in their paper, are representative of how justification works in all situations.
+
+One objection to this is that some beliefs can be justified even without internal mental state, like forgotten justification, logic/probabilistic relations, stored bliefs, and impulsive beliefs. For example, if one forgets where they learned that broccoli is healthy, yet continues to believe that broccolli is healthy, they are arguably still justified in believing that broccolli is healthy. A response to this might be that the person still has memory of there being evidence in the world that broccoli is healthy, and is justified in believing that their memory is generally accurate.
+
+Goldman responds by saying that in the externalist view, justification depends on a belief's **etiology** - where the belief comes from, as well as the belief's history. For example, a person who reads a fact in an unreliable newspaper and forgets where they read it from seems to have less justification than a person who reads a fact in a reliable newspaper and forgets where they read it - this seems to imply that there are external factors in justification, since both people have the same mental state yet seem to have different levels of justification.
+
+Also, consider the broccolli example again, but the person believes that it is onion rings that are healthy, misremembering that they read onion rings rather than broccoli. Although the person's mental state is the same as in the original example, it seems like in this case the person is not as justified.
+
+Some beliefs are justified by logic or probability - logic/probabilistic relations. Although they are not mental states, it still seems like they are still valid justifications.
+
+# 28/10/15
+
+Readings: Goldman, Cohen
+
+Final exam is on December 15 at 9AM in HH 2107. The third critical response is due on November 4.
+
+Are there justifiers (things that make beliefs proper) that are not internally available to the believer? Internalism says no, while externalism says yes.
+
+Justifiers must make your belief likely enough to be true ("likely enough" being an arbitrary threshold). The role of justifiers is to define our intellectual duties - reaching truth, avoiding falsehoods, etc.
+
+Accessibilism internalism says that justifiers are those things that we have access to and are aware of, while mentalist internalists says that justifiers are always mental states. The evidentialism theory of justification says that your justification depends on your own evidence.
+
+Justification is normative - it defines what people should believe and when beliefs are okay to hold. Interalism says that as a result, fulfilling the duty of justifying beliefs is an internal matter, and they can't fulfill this duty of the matters are outside of their head. In other words, evidentialism is an internalist view.
+
+Accordng to externalism, mental states are important, but don't cover all cases. For example, one can obtain information from a source, but the trustworthiness of the source is a justifier that is external - even if one isn't aware of the trustworthiness, it still affects the justification. Therefore, trustworthiness is an external justifier.
+
+Interesting side effect: small children and animals can have justified beliefs if externalism is true, but not if internalism is true.
+
+One externalism theory is **reliablism**, proposed by Goldman. In this theory, one should believe things that are likely to be true, so justification is simply those things that are likely to lead to true beliefs - you don't have to have mental states or anything to hold a justified belief. Justification is based on **process reliablism** - beliefs are justified when they are formed by reliable cognitive processes, like sensory perception, good reasoning, and clear memories.
+
+A reliable cognitive process must tend to produce more true beliefs than false beliefs. Some unreliable cognitive processes include hunches, guesses and biased reasoning. Process reliablism is external because whether a process is reliable can often depend on the environment or other external factors, and one doesn't have to realize a belief is justified to have justification.
+
+For example, if one's memory is often correct, then memory is a reliable cognitive process. If one's memory is often incorrect, then memory is not a reliable cognitive process.
+
+Consider a person who is running and a brain in a vat who is deceived into thinking it is running. Both of their internal states are the same, and they both believe they are running, but the brain in the vat is not actually running. According to internalism, the justiifcation is the same for both the runner and the brain in a vat - they both believe they are running and are justified in believing so. However, by process reliablism, the brain's belief that it is running is not justified, because it is not actually running.
+
+According to Cohen, a proponent of internalism, the brain in a vat is justified in believing it is running. If we were all brains in vats, then no beliefs would ever be justified, which definitely seems to be false. If we have every reason to believe something, then the fact that the cognitive process is unreliable and we don't know shouldn't matter - **justified beliefs are produced by good reasoning, regardless of whether it results in reliable outcomes or not**. Cohen suggests that **there is no connection between justification and truth**.
+
+One objection to this is the following example: if we see a red object, we should be justified in believing that there is a red object in front of us. However, we notice that the room is lit with red light. If justification is disconnected from truth, then even though we realize the room is lit with red light, we are still justified in believing the object is red. However, it seems like we should actually not be justified in believing the object is red in this case, since it could just be white and look red due to lighting.

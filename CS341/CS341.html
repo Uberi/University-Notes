@@ -452,7 +452,7 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>We can do this simply by considering the coins from largest denomination to smallest, filling up the sum as close to the target sum as possible. Although this works for a coin system like <span class="math">\(1, 5, 10, 25, 100, 200\)</span>, this isn't always optimal: the coin system <span class="math">\(12, 5, 1\)</span> doesn't give the optimal solution for something like a target sum of 15. The study of where these algorithms are optimal is an area of active research.</p>
 <p>Consider the <strong>stable marriage problem</strong>: suppose we have sets of <span class="math">\(n\)</span> men and <span class="math">\(n\)</span> women, <span class="math">\(M = [M_1, \ldots, M_n], W = [W_1, \ldots, W_n]\)</span>. Define <span class="math">\(\mathrm{pref}(M_i, k)\)</span> is the <span class="math">\(k\)</span>th favourite <span class="math">\(w \in W\)</span> for <span class="math">\(M_i\)</span>, and <span class="math">\(\mathrm{pref}(W_i, k)\)</span> is the <span class="math">\(k\)</span>th favourite <span class="math">\(m \in M\)</span> for <span class="math">\(W_i\)</span>. Find the matching <span class="math">\(\set{(M_{i_1}, W_{j_1}), \ldots, (M_{i_n}, W_{j_n})}\)</span> such that there does not exist any <span class="math">\((M_u, W_v)\)</span> that are not in the set, but prefer each other to their matches in the set - a <strong>stable matching</strong>.</p>
 <p>Formally, we want to find a matching such that</p>
-<p>The Gale-Shaley algorithm is an algorithm for this problem, for which Gale and Shapely won a Nobel prize for economics. In this algorithm, men propose to women from their most preferable to least preferable, and women accept proposals if not engaged or if a proposal is better than their currently accepted proposal (the new proposal replaces the old one), and women reject proposals otherwise.</p>
+<p>The Gale-Shapley algorithm is an algorithm for this problem, for which Gale and Shapely won a Nobel prize for economics. In this algorithm, men propose to women from their most preferable to least preferable, and women accept proposals if not engaged or if a proposal is better than their currently accepted proposal (the new proposal replaces the old one), and women reject proposals otherwise.</p>
 <p>Basically, the men propose starting from their most preferable to least preferable, and the women are proposed to starting from the least preferable to most preferable - the men always move down in their preferences, and the women always move up in their preferences:</p>
 <pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> woman_prefers(woman, preference_function, man1, man2):
     i = <span class="dv">1</span>
@@ -464,12 +464,15 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 
 <span class="kw">def</span> gale_shapley(men, women, preference_function):
     engagements = {}
-    unengaged_men = {man: <span class="dv">0</span> <span class="kw">for</span> man in men}
+    men_ranks = {man: <span class="dv">0</span> <span class="kw">for</span> man in men}
+    unengaged_men = <span class="dt">set</span>(men)
     <span class="kw">while</span> unengaged_men:
         man = <span class="dt">next</span>(unengaged_men.keys())
-        unengaged_men[man] += <span class="dv">1</span> <span class="co"># next rank in preferences</span>
-        woman = preference_function(man, unengaged_men[man])
+        men_ranks[man] += <span class="dv">1</span> <span class="co"># next rank in preferences</span>
+        woman = preference_function(man, men_ranks[man])
         <span class="kw">if</span> woman not in engagements or woman_prefers(woman, preference_function, man, engagements[woman]):
+            <span class="kw">if</span> woman in engagements: unengaged_men.add(engagements[man])
+            unengaged_men.remove(man)
             engagements[woman] = man
     <span class="kw">return</span> <span class="dt">set</span>(engagements.items())</code></pre>
 <p>This algorithm is good for the men, but not the women - suiters can ask any of the reviewers, but reviewers can only pick from the suiters that proposed to them. For example, given 3 men and 3 women with preferences <span class="math">\(M_1: W_2, W_1, W_3; M_2: W_3, W_2, W_1; M_3: W_1, W_3, W_2; W_1: M_2, M_1, M_3; W_2: M_3, M_2, M_1; W_3: M_1, M_3, M_2\)</span>, all men get their first choices, while all women get their last choice. The men get the best possible match that will accept them, while the women get the worst possible match they will accept.</p>
@@ -521,10 +524,131 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 </ul></li>
 </ol>
 <p>This is somewhat similar to divide and conquer, where we have subproblems and solve them recursively, up until we actually need to combine the solutions - instead of combining recursively, we solve them from the bottom up.</p>
-<p>While the 0-1 knapsack problem we saw previously is NP-complete, we can solve it relatively well using dynamic programming:</p>
+<p>While the 0-1 knapsack problem we saw previously is NP-complete, we can solve it relatively well using dynamic programming.</p>
+<p>Suppose <span class="math">\([x_1, \ldots, x_n]\)</span> is an optimal solution for a given problem instance where <span class="math">\(P = [P_1, \ldots, P_n]\)</span> and weights <span class="math">\(W = [W_1, \ldots, W_n]\)</span>, and capacity <span class="math">\(M\)</span>. Clearly, either <span class="math">\(x_n = 0\)</span> or <span class="math">\(x_n = 1\)</span>.</p>
+<p>If <span class="math">\(x_n = 0\)</span>, then <span class="math">\([x_1, \ldots, x_{n - 1}]\)</span> is an optimal solution to a smaller problem instance where <span class="math">\(P = [P_1, \ldots, P_{n - 1}]\)</span> and weights <span class="math">\(W = [W_1, \ldots, W_{n - 1}]\)</span>, and capacity <span class="math">\(M\)</span>, and the profit of <span class="math">\([x_1, \ldots, x_n]\)</span> is the same as the profit of <span class="math">\([x_1, \ldots, x_{n - 1}]\)</span>.</p>
+<p>If <span class="math">\(x_n = 1\)</span>, then <span class="math">\([x_1, \ldots, x_{n - 1}]\)</span> is an optimal solution to a smaller problem instance where <span class="math">\(P = [P_1, \ldots, P_{n - 1}]\)</span> and weights <span class="math">\(W = [W_1, \ldots, W_{n - 1}]\)</span>, and capacity <span class="math">\(M - W_n\)</span>, and the profit of <span class="math">\([x_1, \ldots, x_n]\)</span> is the same as the profit of <span class="math">\([x_1, \ldots, x_{n - 1}]\)</span> plus <span class="math">\(P_n\)</span>.</p>
+<p>Clearly, the profit of <span class="math">\([x_1, \ldots, x_n]\)</span> is the larger of the two cases, where either <span class="math">\(x_n = 0\)</span> or <span class="math">\(x_n = 1\)</span>.</p>
+<p>These are our relevant subproblems - the knapsack problem instances with the same weights and profits, but only including the first <span class="math">\(0 \le i \le n\)</span> items and for different capacities <span class="math">\(0 \le m \le M\)</span>, so <span class="math">\(P = [P_1, \ldots, P_i]\)</span> and weights <span class="math">\(W = [W_1, \ldots, W_i]\)</span>.</p>
+<p>Now we can define a 2D array (a table) <span class="math">\(P[i, m]\)</span> that defines the optimal profit of such a subproblem, considering the first <span class="math">\(i\)</span> items and for a knapsack with capacity <span class="math">\(m\)</span>.</p>
+<p>The basic idea will be to compute <span class="math">\(P[i, m]\)</span> for all <span class="math">\(i\)</span> and <span class="math">\(m\)</span>, until we get to <span class="math">\(P(n, M)\)</span>.</p>
+<h1 id="section-11">26/10/15</h1>
+<p>Now we'll write the recurrence relation: <span class="math">\(P[i, m] = \max\left(P[i - i, m], P[i - 1, m - W_i]\right)\)</span>. Here, <span class="math">\(P[i - i, m]\)</span> represents the case where <span class="math">\(x_i = 0\)</span>, and <span class="math">\(P[i - 1, m - W_i]\)</span> represents the case where <span class="math">\(x_i = 1\)</span>.</p>
+<p>We also need some base cases: <span class="math">\(P[i, m] = \begin{cases} 0 &amp;\text{if } i = 1 \wedge m &lt; W_i \\ P_1 &amp;\text{if } i = 1 \wedge m \ge W_i \\ P[i - 1, m] &amp;\text{if } i &gt; 1 \wedge m &lt; W_i \\ \max\left(P[i - i, m - W_i] + P_i, P[i - 1, m]\right) &amp;\text{otherwise} \\ \end{cases}\)</span>.</p>
+<p>Now we fill in an <span class="math">\(n\)</span> by <span class="math">\(M + 1\)</span> table of all <span class="math">\(P[i, m]\)</span> values, For each row <span class="math">\(i\)</span>, we fill in all the <span class="math">\(m\)</span> values from smallest to largest. The final answer is therefore at the last cell of the bottommost row.</p>
+<p>In code, it looks like this:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="ch">from</span> collections <span class="ch">import</span> defaultdict
+<span class="kw">def</span> knapsack(profits, weights, max_weight):
+    max_profits = defaultdict(<span class="dt">dict</span>)
+    <span class="kw">for</span> weight in <span class="dt">range</span>(max_weight):
+        <span class="kw">if</span> weight &gt;= weights[<span class="dv">0</span>]:
+            max_profits[<span class="dv">0</span>][m] = profits[<span class="dv">0</span>]
+        <span class="kw">else</span>:
+            max_profits[<span class="dv">0</span>][m] = <span class="dv">0</span>
+    <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dv">1</span>, <span class="dt">len</span>(profits)):
+        <span class="kw">for</span> weight in <span class="dt">range</span>(max_weight):
+            <span class="kw">if</span> weight &lt; weights[i]:
+                max_profits[i][weight] = P[i - <span class="dv">1</span>][weight]
+            <span class="kw">else</span>:
+                max_profits[i][weight] = <span class="dt">max</span>(max_profits[i - <span class="dv">1</span>][weight - weights[i]] + profits[i], max_profits[i - <span class="dv">1</span>][weight])
+    <span class="kw">return</span> max_profits[<span class="dt">len</span>(profits) - <span class="dv">1</span>][max_weight - <span class="dv">1</span>]</code></pre>
+<p>One improvement we could make is that in the last row we only need to compute the single entry <span class="math">\(P[n, M]\)</span>, since it only relies on <span class="math">\(P[n - 1, M - w_i]\)</span> and <span class="math">\(P[n - 1, M]\)</span>.</p>
+<p>The above algorithm finds the maximum profit, but not the actual items chosen to get that profit. We can get the items by repeatedly finding which <span class="math">\(\max\left(P[i - i, m - W_i] + P_i, P[i - 1, m]\right)\)</span> we chose at each step, and if <span class="math">\(P[i, m] = P[i - i, m - W_i] + P_i\)</span>, then we include the item in the solution. then, we repeatedly do the same check for <span class="math">\(P[i - i, m - W_i]\)</span> if <span class="math">\(P[i, m] = P[i - i, m - W_i] + P_i\)</span> or do the same check for <span class="math">\(P[i - 1, m]\)</span> if <span class="math">\(P[i, m] = P[i - 1, m]\)</span>, and so on:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="ch">from</span> collections <span class="ch">import</span> defaultdict
+<span class="kw">def</span> knapsack(profits, weights, max_weight):
+    max_profits = defaultdict(<span class="dt">dict</span>)
+    <span class="kw">for</span> weight in <span class="dt">range</span>(max_weight):
+        <span class="kw">if</span> weight &gt;= weights[<span class="dv">0</span>]:
+            max_profits[<span class="dv">0</span>][m] = profits[<span class="dv">0</span>]
+        <span class="kw">else</span>:
+            max_profits[<span class="dv">0</span>][m] = <span class="dv">0</span>
+    <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dv">1</span>, <span class="dt">len</span>(profits)):
+        <span class="kw">for</span> weight in <span class="dt">range</span>(max_weight):
+            <span class="kw">if</span> weight &lt; weights[i]:
+                max_profits[i][weight] = P[i - <span class="dv">1</span>][weight]
+            <span class="kw">else</span>:
+                max_profits[i][weight] = <span class="dt">max</span>(max_profits[i - <span class="dv">1</span>][weight - weights[i]] + profits[i], max_profits[i - <span class="dv">1</span>][weight])
+    
+    <span class="co"># figure out which items are in this max profit selection</span>
+    weight = max_weight
+    items = [<span class="ot">None</span>] * <span class="dt">len</span>(profits)
+    profit = max_profits[<span class="dt">len</span>(profits) - <span class="dv">1</span>, capacity - <span class="dv">1</span>]
+    <span class="kw">for</span> i in <span class="dt">range</span>[<span class="dt">len</span>(profits) - <span class="dv">1</span>, <span class="dv">0</span>, -<span class="dv">1</span>]: <span class="co"># go through indices from the last row&#39;s index to the second row&#39;s index</span>
+        <span class="kw">if</span> profit == max_profits[i - <span class="dv">1</span>, weight]:
+            items[i] = <span class="ot">False</span>
+        <span class="kw">else</span>:
+            items[i] = <span class="ot">True</span>
+        profit -= profits[i]
+        weight -= weights[i]
+    items[<span class="dv">0</span>] = profit == <span class="dv">0</span>
+
+    <span class="kw">return</span> items</code></pre>
+<p>Clearly, this is an <span class="math">\(\Theta(nM)\)</span> algorithm, since the table has <span class="math">\(nM\)</span> cells and each cell value takes constant time to compute, and finding the actual items can be done in <span class="math">\(\Theta(n)\)</span> since we trace one row per iteration.</p>
+<p>Although this seems to be a polynomial time algorithm, this is actually not the case. The size of a given problem instance is the <strong>sum of the sizes of its inputs</strong>.</p>
+<p>At first, we might assume that this is <span class="math">\(n + M\)</span>. However, the size of the <span class="math">\(M\)</span> input is <strong>actually the number of bits it has</strong>, which is <span class="math">\(k = \ceil{\log_2 M}\)</span> - the size of the input is <span class="math">\(n + k\)</span>. Therefore, the algorithm is <span class="math">\(O(n2^k)\)</span>. This is consistent with the fact that the knapsack problem is NP-complete.</p>
+<p>There is also a recursive backtracking algorithm that tries all the combinations of items and finds the largest profit, which runs in <span class="math">\(\Theta(2^n)\)</span>. This is useful in different in different situations - even though both are exponential, the dynamic programming one is better for small <span class="math">\(M\)</span> and large <span class="math">\(n\)</span>, and the backtracking one is better for small <span class="math">\(n\)</span> and large <span class="math">\(M\)</span>.</p>
+<p>We can solve the coin changing problem optimally as well, in almost the same way:</p>
 <blockquote>
-<p>Suppose <span class="math">\([x_1, \ldots, x_n]\)</span> is an optimal solution for a given problem instance where <span class="math">\(P = [P_1, \ldots, P_n]\)</span> and weights <span class="math">\(W = [W_1, \ldots, W_n]\)</span>, and capacity <span class="math">\(M\)</span>.<br />Clearly, either <span class="math">\(x_n = 0\)</span> or <span class="math">\(x_n = 1\)</span>.<br />If <span class="math">\(x_n = 0\)</span>, then <span class="math">\([x_1, \ldots, x_{n - 1}]\)</span> is an optimal solution to a smaller problem instance where <span class="math">\(P = [P_1, \ldots, P_{n - 1}]\)</span> and weights <span class="math">\(W = [W_1, \ldots, W_{n - 1}]\)</span>, and capacity <span class="math">\(M\)</span>.<br />If <span class="math">\(x_n = 1\)</span>, then <span class="math">\([x_1, \ldots, x_{n - 1}]\)</span> is an optimal solution to a smaller problem instance where <span class="math">\(P = [P_1, \ldots, P_{n - 1}]\)</span> and weights <span class="math">\(W = [W_1, \ldots, W_{n - 1}]\)</span>, and capacity <span class="math">\(M - W_n\)</span>.<br />So <span class="math">\([x_1, \ldots, x_{n - 1}]\)</span> can be computed by considering <span class="math">\(x_n = 0\)</span> and <span class="math">\(x_n = 1\)</span>.</p>
+<p>Note that for <span class="math">\(d_n\)</span>, <span class="math">\(0 \le a_n \le \frac T {d_n}\)</span>.<br />Our dynamic programming table will be <span class="math">\(n\)</span> by <span class="math">\(\ceil{\frac{T}{d_1}}\)</span> - each row is the number of coins, and each column is a different target sum.<br />Let <span class="math">\(N[i, t]\)</span> be a list of coins used in the optimal solution to the coin changing problem instance with only the coin denominations <span class="math">\(d_1, \ldots, d_i\)</span> and target sum <span class="math">\(t\)</span>.<br />Then we have the recurrence relation <span class="math">\(N[i, t] = \begin{cases} j \text{ where } 0 \le j \le \floor{\frac t d_i} \text{ is the index for which } N[i - 1, t - jd_i] + j \text{ is minimized} &amp;\text{if } i &gt; 1 \\ t &amp;\text{if } i = 1 \\ \end{cases}\)</span>.<br />The final answer is in <span class="math">\(N[n, T]\)</span>. We could also save memory by, instead of having <span class="math">\(N[i, t]\)</span> for solutions, having a table <span class="math">\(A[i, t]\)</span> store the number of coins used in the optimal solutions, and then at the end tracing backwards like we did for the knapsack problem.</p>
 </blockquote>
+<h1 id="section-12">28/10/15</h1>
+<h3 id="longest-common-subsequence">Longest Common Subsequence</h3>
+<p>Suppose we have two sequences <span class="math">\(X = [X_1 \ldots X_m]\)</span> and <span class="math">\(Y = [Y_1 \ldots Y_n]\)</span> where all elements are in some finite alphabet <span class="math">\(A\)</span>. What is the longest subsequence that is in both <span class="math">\(X\)</span> and <span class="math">\(Y\)</span>?</p>
+<p>A subsequence of a sequence <span class="math">\(Z\)</span> is a sequence that contains any number of the elements of <span class="math">\(Z\)</span> in order, but not necessarily consecutively. For example, <span class="math">\(1, 4, 8, 9\)</span> is a subsequence of <span class="math">\(1, 2, 3, 4, 5, 6, 7, 8, 9\)</span>.</p>
+<p>We will solve this using dynamic programming. Let <span class="math">\(\mathrm{LCS}(X, Y)\)</span> represent the length of the longest common subsequence.</p>
+<p>If <span class="math">\(X_m = Y_n\)</span>, then <span class="math">\(\mathrm{LCS}(X_1 \ldots X_m, Y_1 \ldots Y_n) = \mathrm{LCS}(X_1 \ldots X_{m - 1}, Y_1 \ldots Y_{n - 1}) + 1\)</span>.</p>
+<p>If <span class="math">\(X_m \ne Y_n\)</span>, then <span class="math">\(\mathrm{LCS}(X_1 \ldots X_m, Y_1 \ldots Y_n) = \max\left(\mathrm{LCS}(X_1 \ldots X_{m - 1}, Y_1 \ldots Y_n), \mathrm{LCS}(X_1 \ldots X_m, Y_1 \ldots Y_{n - 1})\right)\)</span>. This is because there are three cases: if the LCS ends on <span class="math">\(Y_n\)</span>, then it doesn't end on <span class="math">\(X_m\)</span> and we have <span class="math">\(\mathrm{LCS}(X_1 \ldots X_m, Y_1 \ldots Y_n) = \mathrm{LCS}(X_1 \ldots X_{m - 1}, Y_1 \ldots Y_n)\)</span>; if the LCS ends on <span class="math">\(X_m\)</span>, then it doesn't end on <span class="math">\(Y_n\)</span> and we have <span class="math">\(\mathrm{LCS}(X_1 \ldots X_m, Y_1 \ldots Y_n) = \mathrm{LCS}(X_1 \ldots X_m, Y_1 \ldots Y_{n - 1})\)</span>. The third case is if the LCS doesn't end on <span class="math">\(X_m\)</span> or <span class="math">\(Y_n\)</span>, but we don't need to consider it in the formula because <span class="math">\(\mathrm{LCS}(X_1 \ldots X_{m - 1}, Y_1 \ldots Y_{n - 1}) \le \mathrm{LCS}(X_1 \ldots X_{m - 1}, Y_1 \ldots Y_n)\)</span> - it is already covered by the other cases.</p>
+<p>The basic idea behind the recurrence is that we keep chopping off elements from the ends of <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> - we are computing the LCS for all prefixes of the string. We now define our dynamic programming table, <span class="math">\(c[i, j] = \mathrm{LCS}(X_1 \ldots X_i, Y_1 \ldots Y_j)\)</span> (the rows are values of <span class="math">\(i\)</span> and the columns are values of <span class="math">\(j\)</span>).</p>
+<p>Clearly, we now have the recurrence <span class="math">\(c[i, j] = \begin{cases} 0 &amp;\text{if } i = 0 \vee j = 0 \\ c[i - 1, j - 1] &amp;\text{if } X_i = Y_j \wedge i &gt; 0 \wedge j &gt; 0 \\ \max(c[i - 1, j], c[i, j - 1]) &amp;\text{if } X_i \ne Y_j \wedge i &gt; 0 \wedge j &gt; 0 \\ \end{cases}\)</span>. We want to compute <span class="math">\(c[m, n]\)</span>.</p>
+<p>Clearly, to compute any <span class="math">\(c[i, j]\)</span>, we need to ensure that <span class="math">\(c[i - 1, j - 1], c[i - 1, j], c[i, j - 1]\)</span> are already computed. We can do this by filling in the table from left to right, top to bottom. In code, it looks like the following:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="ch">from</span> collections <span class="ch">import</span> defaultdict
+<span class="kw">def</span> LCS(X, Y):
+    c = defaultdict(<span class="dt">dict</span>)
+    <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dt">len</span>(X) + <span class="dv">1</span>): c[i][<span class="dv">0</span>] = <span class="dv">0</span>
+    <span class="kw">for</span> j in <span class="dt">range</span>(<span class="dt">len</span>(Y) + <span class="dv">1</span>): c[<span class="dv">0</span>][j] = <span class="dv">0</span>
+    <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dv">1</span>, <span class="dt">len</span>(X) + <span class="dv">1</span>):
+        <span class="kw">for</span> j in rnage(<span class="dv">1</span>, <span class="dt">len</span>(Y) + <span class="dv">1</span>):
+            <span class="kw">if</span> X[i] = Y[j]:
+                c[i, j] = c[i - <span class="dv">1</span>][j - <span class="dv">1</span>]
+            <span class="kw">else</span>:
+                c[i, j] = <span class="dt">max</span>(c[i][j - <span class="dv">1</span>], c[i - <span class="dv">1</span>][j - <span class="dv">1</span>])
+    <span class="kw">return</span> c[<span class="dt">len</span>(X), <span class="dt">len</span>(Y)]</code></pre>
+<p>We can also get the actual sequence by doing a traceback like for the knapsack problem. There are three cases: if we moved up and to the left in the table, then we include <span class="math">\(X_i\)</span> or <span class="math">\(Y_j\)</span> in the LCS and set <span class="math">\(i = i - 1, j = j - 1\)</span>; if we moved left in th etable, we set <span class="math">\(j = j - 1\)</span>; if we moved right in the table, we set <span class="math">\(i = i - 1\)</span>. By repeatedly following this until we get a base case, we get the LCS:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="ch">from</span> collections <span class="ch">import</span> defaultdict
+<span class="kw">def</span> LCS(X, Y):
+    c = defaultdict(<span class="dt">dict</span>)
+    direction = defaultdict(<span class="dt">dict</span>)
+    <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dt">len</span>(X) + <span class="dv">1</span>): c[i][<span class="dv">0</span>] = <span class="dv">0</span>
+    <span class="kw">for</span> j in <span class="dt">range</span>(<span class="dt">len</span>(Y) + <span class="dv">1</span>): c[<span class="dv">0</span>][j] = <span class="dv">0</span>
+    <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dv">1</span>, <span class="dt">len</span>(X) + <span class="dv">1</span>):
+        <span class="kw">for</span> j in rnage(<span class="dv">1</span>, <span class="dt">len</span>(Y) + <span class="dv">1</span>):
+            <span class="kw">if</span> X[i] = Y[j]:
+                c[i, j] = c[i - <span class="dv">1</span>][j - <span class="dv">1</span>]
+                direction[i][j] = <span class="st">&quot;up_left&quot;</span>
+            <span class="kw">else</span>:
+                c[i, j] = <span class="dt">max</span>(c[i][j - <span class="dv">1</span>], c[i - <span class="dv">1</span>][j - <span class="dv">1</span>])
+                direction[i][j] = <span class="st">&quot;left&quot;</span> <span class="kw">if</span> c[i, j] == c[i][j - <span class="dv">1</span>] <span class="kw">else</span> <span class="st">&quot;up&quot;</span>
+    
+    <span class="co"># retrieve the LCS</span>
+    i, j = <span class="dt">len</span>(X), <span class="dt">len</span>(Y)
+    sequence = []
+    <span class="kw">while</span> i &gt; <span class="dv">0</span> and j &gt; <span class="dv">0</span>:
+        <span class="kw">if</span> direction[i][j] == <span class="st">&quot;up_left&quot;</span>:
+            sequence = X[i] + sequence <span class="co"># we could also use `Y[j]` rather than `X[i]` since they are identical here</span>
+            i -= <span class="dv">1</span>; j -= <span class="dv">1</span>
+        <span class="kw">elif</span> direction[i, j] == <span class="st">&quot;up&quot;</span>:
+            i -= <span class="dv">1</span>
+        <span class="kw">else</span>:
+            j -= <span class="dv">1</span>
+    <span class="kw">return</span> sequence</code></pre>
+<p>Clearly, this algorithm takes <span class="math">\(\Theta(mn)\)</span> time and memory, since computing each table entry takes constant time and there are <span class="math">\((m + 1)(n + 1)\)</span> table entries.</p>
+<h3 id="minimum-length-triangulation">Minimum Length Triangulation</h3>
+<p>Suppose we have a convex polygon denoted by point <span class="math">\(q_1, \ldots, q_n\)</span>. How can we triangulate it such that the sum of the perimeters of the <span class="math">\(n - 2\)</span> triangles are minimized?</p>
+<p>In other words, what is the trangulation such that the sum of the lengths of all the chords (lines within the polygon that divide it into triangles) is minimised? These two formulations are the same because the sum of lengths of all the chords times 2 plus the perimeter of the polygon is the sum of the perimeters of all the triangles.</p>
+<p>As it turns out, a polygon with <span class="math">\(n\)</span> vertices has <span class="math">\(C_n\)</span> possible triangulations, where <span class="math">\(C_n\)</span> is the <span class="math">\(n\)</span>th Catalan number (<span class="math">\(C_n = \frac 1 {n + 1} {2n} \choose n = \Theta\left(\frac{4^n}{n^{\frac 3 2}}\right)\)</span>). This is exponential, so we want to avoid computing all possible triangulations.</p>
+<p>Clearly, <span class="math">\(q_n q_1\)</span> is in a triangle <span class="math">\(q_n q_k q_1\)</span>, where <span class="math">\(2 \le k \le n - 1\)</span>. Clearly, for each <span class="math">\(k\)</span>, we have the triangle <span class="math">\(q_n q_k q_1\)</span>, which divides the polygon into a polygon with vertices <span class="math">\(q_1, \ldots, q_k\)</span>, and a polygon with vertices <span class="math">\(q_k, \ldots, q_n\)</span>.</p>
+<p>Clearly, the smallest triangulation of the polygon that includes the triangle <span class="math">\(q_n q_k q_n\)</span> is this triangle along with the triangles in the smallest triangulation of <span class="math">\(q_1, \ldots, q_k\)</span> and the smallest triangulation of <span class="math">\(q_k, \ldots, q_n\)</span>. If we check all possible <span class="math">\(k\)</span>, then the smallest of all of these is the smallest triangulation of the polygon <span class="math">\(q_1, \ldots, q_n\)</span>. These smaller polygons are our subproblems. Since all of them are polygons of the form <span class="math">\(q_1, \ldots, q_i, \ldots, q_j, \ldots, q_n, 1 \le i &lt; j \le n\)</span>, we have <span class="math">\(\Theta(n^2)\)</span> subproblems in total.</p>
+<p>Let <span class="math">\(S[i, j]\)</span> denote the smallest triangulation of the polygon <span class="math">\(q_i, \ldots, q_j\)</span>. Let <span class="math">\(P(q_i, q_k, q_j)\)</span> be the perimeter of the triangle formed by <span class="math">\(q_i, q_k, q_j\)</span>. Then <span class="math">\(S[i, j] = \min\set{P(q_i, q_k, q_j) + S[i, k] + S[k, j] \middle| k \in \mb{Z}, i &lt; k &lt; j}\)</span>.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
