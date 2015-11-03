@@ -555,15 +555,24 @@ DISPLAY_ISR
 <p>For longer buses, an asynchronous bus with a <strong>handshake protocol</strong> is better than a synchronous one, since it automatically accounts for delay. A handshake protocol would work something like the following:</p>
 <ol style="list-style-type: decimal">
 <li>Master sets the address/control lines, as well as the master-ready signal.</li>
-<li>Slave performs its operation and sets the slave-ready signal.</li>
+<li>All slaves receive these signals. However, only the slave corresponding to the selected address will do anything with it. That slave performs its operation and sets the slave-ready signal.</li>
 <li>Master receives the slave-ready signal, waits a little bit for the data to settle and saves it, and resets the address/control lines as well as the master-ready signal.</li>
-<li>Slave resets the slave-ready signal since the address/control lines changed.</li>
+<li>Slave resets the slave-ready signal since the master-ready signal was reset.</li>
 </ol>
+<p>An example of a control line is read/write - 0 means the operation is a write, and 1 means the operation is a read.</p>
 <h1 id="section-17">26/10/15</h1>
 <p>MIDTERM WEEK - NO CLASSES</p>
 <p>I'll be writing the midterm on 8:30 AM on Wednesday in EIT 1015. Midterm covers everything up to and including chapter 5.</p>
 <h1 id="section-18">28/10/15</h1>
 <p>It actually wasn't too bad, I'd say - the midterm is definitely doable in under an hour.</p>
+<h1 id="section-19">2/11/15</h1>
+<p>By this point, we have seen that buses can transfer data over one clock cycle, multiple clock cycles, or asynchronously. Generally, asynchronous buses are preferred since they don't care about timing very much.</p>
+<p>Buses can only have one active master at a time. When two masters on a bus both want to write to the bus at the same time, <strong>bus arbitration</strong> is necessary - the bus arbiter circuit pre. Basically, each device must send a request to use the bus, and the arbiter circuit grants access to one request at a time based on their priority, by controlling write-enable lines. Bus arbiters can be centralized or distributed.</p>
+<p>An <strong>I/O interface circuit</strong> connects an I/O device to a bus. For an asynchronous bus, this interface needs a register for temporary data storage, a status register, a control register, an address decoder, any necessary clocks/timing signals, and converters like parallel to serial shift registers.</p>
+<p>In a <strong>parallel interface</strong>, there are multiple bits transferred at once, while a <strong>serial interface</strong> will only move one bit at a time. Serial interfaces are theoretically slower, but are cheaper and work better for long distance transfers (no crosstalk between parallel wires). Most computers will use a combination of these.</p>
+<p>For example, USB is a serial protocol with two data lines, both used in differential signalling. Normal signalling has a data line's voltage go up and down relative to a reference voltage to represent 0 and 1. Differential signalling has two data lines, and their relative voltages go up and down to represent 0 and 1 - this allows us to achieve significantly better practical speeds.</p>
+<p>When we're doing serial transmission, we need to know when there are valid bits on the data line. For this, we have to have either a clock, use asynchronous master-ready/slave-ready signals like an asynchronous bus, or encode the clock in the data itself. A clock is better for high speed transfers, while USART (universal synchronous/asynchronous receiver/transmitter) uses either a clock or encodes the clock in the data.</p>
+<p>In <strong>start-stop transmission</strong>, the transmitter and receiver agree on a baud rate. In the idle state, the data line is left high. We transfer a group of 8 bits by pulling down the line (the start bit), transmitting the data (the data bits), and then pulling up the line for 1 or 2 bits (the stop bits). Afterward, the data line is left high.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

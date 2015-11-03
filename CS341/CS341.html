@@ -649,6 +649,66 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>Clearly, <span class="math">\(q_n q_1\)</span> is in a triangle <span class="math">\(q_n q_k q_1\)</span>, where <span class="math">\(2 \le k \le n - 1\)</span>. Clearly, for each <span class="math">\(k\)</span>, we have the triangle <span class="math">\(q_n q_k q_1\)</span>, which divides the polygon into a polygon with vertices <span class="math">\(q_1, \ldots, q_k\)</span>, and a polygon with vertices <span class="math">\(q_k, \ldots, q_n\)</span>.</p>
 <p>Clearly, the smallest triangulation of the polygon that includes the triangle <span class="math">\(q_n q_k q_n\)</span> is this triangle along with the triangles in the smallest triangulation of <span class="math">\(q_1, \ldots, q_k\)</span> and the smallest triangulation of <span class="math">\(q_k, \ldots, q_n\)</span>. If we check all possible <span class="math">\(k\)</span>, then the smallest of all of these is the smallest triangulation of the polygon <span class="math">\(q_1, \ldots, q_n\)</span>. These smaller polygons are our subproblems. Since all of them are polygons of the form <span class="math">\(q_1, \ldots, q_i, \ldots, q_j, \ldots, q_n, 1 \le i &lt; j \le n\)</span>, we have <span class="math">\(\Theta(n^2)\)</span> subproblems in total.</p>
 <p>Let <span class="math">\(S[i, j]\)</span> denote the smallest triangulation of the polygon <span class="math">\(q_i, \ldots, q_j\)</span>. Let <span class="math">\(P(q_i, q_k, q_j)\)</span> be the perimeter of the triangle formed by <span class="math">\(q_i, q_k, q_j\)</span>. Then <span class="math">\(S[i, j] = \min\set{P(q_i, q_k, q_j) + S[i, k] + S[k, j] \middle| k \in \mb{Z}, i &lt; k &lt; j}\)</span>.</p>
+<h1 id="section-13">2/11/15</h1>
+<h2 id="graph-algorithms">Graph Algorithms</h2>
+<p>A graph is a pair <span class="math">\(\tup&lt;V, E&gt;\)</span>, where <span class="math">\(V\)</span> is the set of vertices <span class="math">\(\set{v_1, \ldots, v_n}\)</span> and <span class="math">\(E\)</span> is the set of edges <span class="math">\(\set{\set{u_1, v_1}, \ldots, \set{u_m, v_m}}\)</span>, where <span class="math">\(u, v\)</span> are edges. A digraph (directed graph) is also a pair <span class="math">\(\tup{V, E}\)</span>, but <span class="math">\(E\)</span> is a set of edges <span class="math">\(\set{\tup{u_1, v_1}, \ldots, \tup{u_m, v_m}}\)</span> - they have arcs (directed edges) that represent direction. In directed edges, <span class="math">\(u\)</span> is the <strong>tail</strong> and <span class="math">\(v\)</span> is the <strong>head</strong>. We can also write <span class="math">\(\tup{u, v}\)</span> and <span class="math">\(\set{u, v}\)</span> as <span class="math">\(uv\)</span>, which is easier to write and covers both directed and undirected edges.</p>
+<p>In this course, we will not allow duplicate edges, so <span class="math">\(m \le n^2\)</span>. We will also not allow loops, so vertices will never have edges connecting them to themselves.</p>
+<p>On the computer, we often represent graphs with adjecency matrices and adjacency lists.</p>
+<p>An <strong>adjacency matrix</strong> is an <span class="math">\(n\)</span> by <span class="math">\(n\)</span> matrix where each row represents a vertex and each column represents a vertex. The elements of this matrix are 1 if there is an edge from the vertex for its row to the vertex for its column (<span class="math">\(A_{u, v} = \begin{}\)</span>). Formally, the adjacency matrix is <span class="math">\(A = \begin{bmatrix} a_{1, 1} &amp; \ldots &amp; a_{1, n} \\ \vdots &amp; \vdots &amp; a_\vdots \\ a_{n, 1} &amp; \ldots &amp; a_{n, n} \\ \end{bmatrix}\)</span>.</p>
+<p>Since loops aren't allowed, the diagonals <span class="math">\(a_{1, 1}, \ldots, a_{n, n}\)</span> are all 0. Note that for an undirected graph, the adjacency matrix has <span class="math">\(2m\)</span> 1 entries, while for a directed graph, the adjacency matrix has <span class="math">\(m\)</span> 1 entries.</p>
+<p>An <strong>adjacency list</strong> is an array of <span class="math">\(n\)</span> linked lists, represented as <span class="math">\(\adj(_1), \ldots, \adj(v_n)\)</span>. <span class="math">\(\adj(v_i)\)</span> is the linked list of the vertices that <span class="math">\(v_i\)</span> is directly connected to. This is basically the same as the adjacency mtrix, but as an array of linked lists rather than a matrix. This is more memory efficient for sparse graphs, but make some operations more difficult.</p>
+<p>We usually use breath-first search for undirected graphs, and depth-first search for directed graphs.</p>
+<p>To do a breadth-first search, we pick a vertex <span class="math">\(s\)</span>, then spread out from <span class="math">\(s\)</span> by keeping track of the vertices we've explored so far, and exploring the unexplored neighbors of the explored vertices. Basically, the search spreads out from <span class="math">\(s\)</span> in layers. Starting from <span class="math">\(s\)</span>, we explore its neighbors, then the neighbors of those, then the neighbors of those, and so on. The full form of breadth-first search appears as follows:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> breadth_first_search(vertices, adjacency_list):
+    start_vertex = vertices[<span class="dv">0</span>]
+    colors, predecessors = {}, {}
+    <span class="kw">for</span> vertex in vertices:
+        colors[vertex] = <span class="st">&quot;white&quot;</span>
+        predecessors[v] = <span class="dt">set</span>()
+    colors[start_vertex] = <span class="st">&quot;gray&quot;</span>
+    q = queue()
+    q.enqueue(start_vertex)
+    <span class="kw">while</span> q:
+        vertex = q.dequeue()
+        <span class="kw">for</span> neighbor in adjacency_list[vertex]:
+            <span class="kw">if</span> colors[neighbor] == <span class="st">&quot;white&quot;</span>:
+                colors[neighbors] = <span class="st">&quot;gray&quot;</span>
+                predecessors[neighbor] = vertex
+                q.enqueue(neighbor)
+            colors[vertex] = <span class="st">&quot;black&quot;</span></code></pre>
+<p>The colors represent the visit state of vertices - white means a vertex is undiscovered, gray means it's discovered but its neighbors are still being processed, and black means it's discovered and fully processed. The <code>predecessors</code> dict maps all vertices (except the start vertex) to the the vertices they were visited from (their <strong>predecessors</strong>), and is formally represented <span class="math">\(\pi(v_i)\)</span>. The colors represent the visit state of vertices - white means a vertex is undiscovered, gray means it's discovered but its neighbors are still being processed, and black means it's discovered and fully processed. The <code>predecessors</code> dict maps all vertices (except the start vertex) to the the vertices they were visited from (their <strong>predecessors</strong>), and is formally represented <span class="math">\(\pi(v_i)\)</span>.</p>
+<p>The edge <span class="math">\(\tup{v_i, \pi(v_i)}\)</span> is a <strong>tree edge</strong> (these are always directed, even when the graph we're running on is undirected). All other edges are <strong>cross edges</strong>. The set of all tree edges forms a <strong>BFS tree</strong>, and if the graph is connected, the BFS tree is a spanning tree.</p>
+<p>A simpler form of the algorithm might appear as follows:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> breadth_first_search(vertices, adjacency_list):
+    start_vertex = vertices[<span class="dv">0</span>]
+    visited = <span class="dt">set</span>()
+    q = queue()
+    q.enqueue(start_vertex)
+    <span class="kw">while</span> q:
+        vertex = q.dequeue()
+        visited.add(vertex)
+        <span class="kw">for</span> neighbor in adjacency_list[vertex]:
+            <span class="kw">if</span> neighbor not in visited:
+                q.enqueue(neighbor)</code></pre>
+<p>Shortest path from a starting vertex:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> shortest_path(vertices, adjacency_list, start_vertex):
+    start_vertex = vertices[<span class="dv">0</span>]
+    visited = <span class="dt">set</span>()
+    q = queue()
+    q.enqueue(start_vertex)
+    distance_to_start = {start_vertex: <span class="dv">0</span>}
+    <span class="kw">while</span> q:
+        vertex = q.dequeue()
+        visited.add(vertex)
+        <span class="kw">for</span> neighbor in adjacency_list[vertex]:
+            <span class="kw">if</span> neighbor not in visited:
+                q.enqueue(neighbor)
+                distance_to_start[neighbor] = distance_to_start[vertex] + <span class="dv">1</span></code></pre>
+<p>Proof of correctness:</p>
+<blockquote>
+<p>Let <span class="math">\(\mathrm{dist}(v)\)</span> represent <code>distance_to_start[v]</code> where <span class="math">\(v\)</span> is a vertex, and <span class="math">\(s\)</span> represent <code>start_vertex</code>.<br />We want to prove that for any vertex <span class="math">\(v\)</span>, <span class="math">\(\mathrm{dist}(v)\)</span> is the length of the shortest path from <span class="math">\(s\)</span> to <span class="math">\(v\)</span>.<br />Define layers as <span class="math">\(L_i = \set{v \middle| \mathrm{dist}(v) = 1}\)</span>.<br />Clearly, <span class="math">\(v \in L_i\)</span> if and only if <span class="math">\(uv\)</span> is an edge such that <span class="math">\(u \in L_{i - 1}\)</span> and there is no <span class="math">\(u&#39; \in L_j, j &lt; i - 1\)</span> - it is adjacent to a vertex in a previous layer and is not adjacent to any vertices in lower layers.<br />Clearly, if <span class="math">\(u\)</span> is discovered before <span class="math">\(v\)</span>, then <span class="math">\(\mathrm{dist}(u) \le \mathrm{dist}(v)\)</span>.<br />Clearly, if <span class="math">\(uv\)</span> is an edge, then <span class="math">\(\abs{\mathrm{dist}(u) - \mathrm{dist}(v)} \le 1\)</span>.<br />Clearly, if <span class="math">\(uv\)</span> is a tree edge, then <span class="math">\(\mathrm{dist}(v) = \mathrm{dist}(u) + 1\)</span>.<br />Let <span class="math">\(\delta(v)\)</span> be the length of the shortest path from <span class="math">\(s\)</span> to <span class="math">\(v\)</span>.<br />Clearly, <span class="math">\(\delta(v) \le \mathrm{dist}(v)\)</span> because <span class="math">\(\mathrm{dist}(v)\)</span> is the length of the sequence <span class="math">\(v, \pi(v), \pi(\pi(v)), \ldots, s\)</span>.<br />We can easily use induction over the shortest path <span class="math">\(s, v_{i_1}, \ldots, v_{i_k}, v\)</span> to prove that <span class="math">\(\delta(v) \le \mathrm{dist}(v)\)</span>.<br />Therefore, <span class="math">\(\delta(v) = \mathrm{dist}(v)\)</span>, and <span class="math">\(\mathrm{dist}(v)\)</span> is the length of the shortest path.</p>
+</blockquote>
+<p>For most graph algorithms, the steps will be quite intuitive, but the proofs of correctness will be rather difficult.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
