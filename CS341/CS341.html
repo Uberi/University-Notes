@@ -658,9 +658,8 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>Since loops aren't allowed, the diagonals <span class="math">\(a_{1, 1}, \ldots, a_{n, n}\)</span> are all 0. Note that for an undirected graph, the adjacency matrix has <span class="math">\(2m\)</span> 1 entries, while for a directed graph, the adjacency matrix has <span class="math">\(m\)</span> 1 entries.</p>
 <p>An <strong>adjacency list</strong> is an array of <span class="math">\(n\)</span> linked lists, represented as <span class="math">\(\adj(_1), \ldots, \adj(v_n)\)</span>. <span class="math">\(\adj(v_i)\)</span> is the linked list of the vertices that <span class="math">\(v_i\)</span> is directly connected to. This is basically the same as the adjacency mtrix, but as an array of linked lists rather than a matrix. This is more memory efficient for sparse graphs, but make some operations more difficult.</p>
 <p>We usually use breath-first search for undirected graphs, and depth-first search for directed graphs.</p>
-<p>To do a breadth-first search, we pick a vertex <span class="math">\(s\)</span>, then spread out from <span class="math">\(s\)</span> by keeping track of the vertices we've explored so far, and exploring the unexplored neighbors of the explored vertices. Basically, the search spreads out from <span class="math">\(s\)</span> in layers. Starting from <span class="math">\(s\)</span>, we explore its neighbors, then the neighbors of those, then the neighbors of those, and so on. The full form of breadth-first search appears as follows:</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> breadth_first_search(vertices, adjacency_list):
-    start_vertex = vertices[<span class="dv">0</span>]
+<p>To do a <strong>breadth-first search</strong> (BFS), we pick a vertex <span class="math">\(s\)</span>, then spread out from <span class="math">\(s\)</span> by keeping track of the vertices we've explored so far, and exploring the unexplored neighbors of the explored vertices. Basically, the search spreads out from <span class="math">\(s\)</span> in layers. Starting from <span class="math">\(s\)</span>, we explore its neighbors, then the neighbors of those, then the neighbors of those, and so on. The full form of breadth-first search appears as follows:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> breadth_first_search(vertices, adjacency_list, start_vertex):
     colors, predecessors = {}, {}
     <span class="kw">for</span> vertex in vertices:
         colors[vertex] = <span class="st">&quot;white&quot;</span>
@@ -676,8 +675,8 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
                 predecessors[neighbor] = vertex
                 q.enqueue(neighbor)
             colors[vertex] = <span class="st">&quot;black&quot;</span></code></pre>
-<p>The colors represent the visit state of vertices - white means a vertex is undiscovered, gray means it's discovered but its neighbors are still being processed, and black means it's discovered and fully processed. The <code>predecessors</code> dict maps all vertices (except the start vertex) to the the vertices they were visited from (their <strong>predecessors</strong>), and is formally represented <span class="math">\(\pi(v_i)\)</span>. The colors represent the visit state of vertices - white means a vertex is undiscovered, gray means it's discovered but its neighbors are still being processed, and black means it's discovered and fully processed. The <code>predecessors</code> dict maps all vertices (except the start vertex) to the the vertices they were visited from (their <strong>predecessors</strong>), and is formally represented <span class="math">\(\pi(v_i)\)</span>.</p>
-<p>The edge <span class="math">\(\tup{v_i, \pi(v_i)}\)</span> is a <strong>tree edge</strong> (these are always directed, even when the graph we're running on is undirected). All other edges are <strong>cross edges</strong>. The set of all tree edges forms a <strong>BFS tree</strong>, and if the graph is connected, the BFS tree is a spanning tree.</p>
+<p>The colors represent the visit state of vertices - white means a vertex is undiscovered, gray means it's discovered but its neighbors are still being processed, and black means it's discovered and fully processed. The <code>predecessors</code> dict maps all vertices (except the start vertex) to the the vertices they were visited from (their <strong>predecessors</strong>), and is formally represented <span class="math">\(\pi(v_i)\)</span>.</p>
+<p>In breadth-first search, an edge <span class="math">\(\set{\pi(v), v}\)</span> is a <strong>tree edge</strong>. All other edges are <strong>cross edges</strong>. The set of all tree edges forms a <strong>BFS forest</strong> (there is a BFS tree for each graph component), and if the graph is connected, the BFS tree is a spanning tree.</p>
 <p>A simpler form of the algorithm might appear as follows:</p>
 <pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> breadth_first_search(vertices, adjacency_list):
     start_vertex = vertices[<span class="dv">0</span>]
@@ -690,6 +689,7 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
         <span class="kw">for</span> neighbor in adjacency_list[vertex]:
             <span class="kw">if</span> neighbor not in visited:
                 q.enqueue(neighbor)</code></pre>
+<p>Note that breadth first search, since it visits every vertex and could potentially visit every edge, takes <span class="math">\(\Theta(\magn{V} + \magn{E})\)</span> worst case time.</p>
 <p>Shortest path from a starting vertex:</p>
 <pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> shortest_path(vertices, adjacency_list, start_vertex):
     start_vertex = vertices[<span class="dv">0</span>]
@@ -709,6 +709,52 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>Let <span class="math">\(\mathrm{dist}(v)\)</span> represent <code>distance_to_start[v]</code> where <span class="math">\(v\)</span> is a vertex, and <span class="math">\(s\)</span> represent <code>start_vertex</code>.<br />We want to prove that for any vertex <span class="math">\(v\)</span>, <span class="math">\(\mathrm{dist}(v)\)</span> is the length of the shortest path from <span class="math">\(s\)</span> to <span class="math">\(v\)</span>.<br />Define layers as <span class="math">\(L_i = \set{v \middle| \mathrm{dist}(v) = 1}\)</span>.<br />Clearly, <span class="math">\(v \in L_i\)</span> if and only if <span class="math">\(uv\)</span> is an edge such that <span class="math">\(u \in L_{i - 1}\)</span> and there is no <span class="math">\(u&#39; \in L_j, j &lt; i - 1\)</span> - it is adjacent to a vertex in a previous layer and is not adjacent to any vertices in lower layers.<br />Clearly, if <span class="math">\(u\)</span> is discovered before <span class="math">\(v\)</span>, then <span class="math">\(\mathrm{dist}(u) \le \mathrm{dist}(v)\)</span>.<br />Clearly, if <span class="math">\(uv\)</span> is an edge, then <span class="math">\(\abs{\mathrm{dist}(u) - \mathrm{dist}(v)} \le 1\)</span>.<br />Clearly, if <span class="math">\(uv\)</span> is a tree edge, then <span class="math">\(\mathrm{dist}(v) = \mathrm{dist}(u) + 1\)</span>.<br />Let <span class="math">\(\delta(v)\)</span> be the length of the shortest path from <span class="math">\(s\)</span> to <span class="math">\(v\)</span>.<br />Clearly, <span class="math">\(\delta(v) \le \mathrm{dist}(v)\)</span> because <span class="math">\(\mathrm{dist}(v)\)</span> is the length of the sequence <span class="math">\(v, \pi(v), \pi(\pi(v)), \ldots, s\)</span>.<br />We can easily use induction over the shortest path <span class="math">\(s, v_{i_1}, \ldots, v_{i_k}, v\)</span> to prove that <span class="math">\(\delta(v) \le \mathrm{dist}(v)\)</span>.<br />Therefore, <span class="math">\(\delta(v) = \mathrm{dist}(v)\)</span>, and <span class="math">\(\mathrm{dist}(v)\)</span> is the length of the shortest path.</p>
 </blockquote>
 <p>For most graph algorithms, the steps will be quite intuitive, but the proofs of correctness will be rather difficult.</p>
+<h1 id="section-14">4/11/15</h1>
+<p>Determine whether a graph is bipartite:</p>
+<blockquote>
+<p>Clearly, a graph is bipartite if and only if it contains an odd cycle (see MATH239 notes for proof of this.<br />We can check for odd cycles using breadth first search.<br />At each step, if we encounter an edge <span class="math">\(\set{u, v}\)</span> where <span class="math">\(\mathrm{dist}(u) = \mathrm{dist}(v)\)</span>, then we have found an odd cycle containing <span class="math">\(u\)</span> and <span class="math">\(v\)</span> and the first common ancestor of <span class="math">\(u\)</span> and <span class="math">\(v\)</span> in the BFS tree.<br />This is because the distance from <span class="math">\(u\)</span> and <span class="math">\(v\)</span> to the common ancester must be equal, so if the distance is <span class="math">\(k\)</span> then the cycle must have <span class="math">\(2k + 1\)</span> edges (<span class="math">\(k\)</span> for <span class="math">\(u\)</span> to the ancestor, <span class="math">\(k\)</span> for <span class="math">\(v\)</span> to the ancestor, and 1 for <span class="math">\(u\)</span> to <span class="math">\(v\)</span>), which forms an odd cycle.<br />Otherwise, if we go through the entire graph without finding an odd cycle, there are no odd cycles. If this is the case, then we can partition the vertices graph into two partitions <span class="math">\(\set{u \in V(G) \middle| \mathrm{dist}(u) \text{ is even}}\)</span> and <span class="math">\(\set{u \in V(G) \middle| \mathrm{dist}(u) \text{ is odd}}\)</span>.</p>
+</blockquote>
+<p><strong>Depth-first search</strong> (DFS) is done in a way very similar to breadth-first search, but with a different visiting mechanism and using a stack rather than a queue.</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> depth_first_search(vertices, adjacency_list):
+    colors, predecessors = {}, {}
+    discovery_time, finish_time = {}, {}
+    <span class="kw">for</span> vertex in vertices:
+        colors[vertex] = <span class="st">&quot;white&quot;</span>
+        predecessors[vertex] = <span class="ot">None</span>
+    current_time = [<span class="dv">0</span>]
+    <span class="kw">for</span> vertex in vertices:
+        <span class="kw">if</span> colors[vertex] == <span class="st">&quot;white&quot;</span>:
+            visit(vertices, adjacency_list, vertex, colors, predecessors, current_time, discovery_time, finish_time)
+
+<span class="kw">def</span> visit(vertices, adjacency_list, vertex, colors, predecessors, current_time, discovery_time, finish_time):
+    colors[vertex] = <span class="st">&quot;gray&quot;</span>
+    current_time[<span class="dv">0</span>] += <span class="dv">1</span>
+    discovery_time[vertex] = time
+    <span class="kw">for</span> neighbor in adjacency_list[vertex]:
+        <span class="kw">if</span> colors[neighbor] = <span class="st">&quot;white&quot;</span>:
+            predecessors[neighbor] = vertex
+            visit(vertices, adjacency_list, neighbor, colors, predecessors, current_time, discovery_time, finish_time)
+    colors[vertex] = <span class="st">&quot;black&quot;</span>
+    current_time[<span class="dv">0</span>] += <span class="dv">1</span>
+    finish_time[vertex] = time</code></pre>
+<p>Note that we keep track of the discovery and finish times for each vertex. This information can be useful in some situations. A simplified version of DFS can be written as follows:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> depth_first_search(vertices, adjacency_list):
+    visited = <span class="dt">set</span>()
+    <span class="kw">for</span> vertex in vertices:
+        <span class="kw">if</span> vertex not in visited:
+            visit(vertices, adjacency_list, vertex, visited)
+
+<span class="kw">def</span> visit(vertices, adjacency_list, vertex, visited):
+    visited.add(vertex)
+    <span class="kw">for</span> neighbor in adjacency_list[vertex]:
+        <span class="kw">if</span> neighbor not in visited:
+            visit(vertices, adjacency_list, neighbor, visited)</code></pre>
+<p>In depth-first search, an edge <span class="math">\(\tup{\pi(v), v}\)</span> is a <strong>tree edge</strong>. The set of all tree edges forms a <strong>DFS forest</strong> (there is a DFS tree for each graph component). If the graph is connected, the DFS forest is a spanning tree. For a tree edge, we discover and finish with <span class="math">\(v\)</span> during <span class="math">\(u\)</span>'s processing - <span class="math">\(v\)</span>'s discovery and finish time interval is nested within <span class="math">\(u\)</span>'s discovery and finish time interval. Additionally, <span class="math">\(v\)</span> will be white when the edge is dicovered.</p>
+<p>An edge <span class="math">\(\tup{u, v}\)</span> is a <strong>forward edge</strong> if and only if it is not a tree edge, and <span class="math">\(v\)</span> is a descendant of <span class="math">\(u\)</span> in the depth-first forest - an edge that connects a vertex with a descendant that is not a direct child. Like for tree edges, <span class="math">\(v\)</span>'s time interval is nested in <span class="math">\(v\)</span>'s, but <span class="math">\(v\)</span> will be black when we the edge is discovered.</p>
+<p>A <strong>back edge</strong> is the same thing as a forward edge but in the other direction. However, <span class="math">\(\tup{u, v}\)</span> can't possibly be a tree edge since <span class="math">\(u\)</span> is a descendant of <span class="math">\(v\)</span> in the DFS tree, so we can simply say a back edge is one that connects a vertex to an ancestor. For a back edge, we discover and finish with <span class="math">\(u\)</span> during <span class="math">\(v\)</span>'s processing - <span class="math">\(u\)</span>'s discovery and finish time interval is nested within <span class="math">\(v\)</span>'s.</p>
+<p>All other edges are <strong>cross edges</strong> - generally this happens when edges connect siblings in the tree. For example, in the graph <span class="math">\(\adj(u) = \set{v, w}, \adj(v) = \set{w}, \adj(w) = \set{v}\)</span>, either <span class="math">\(vw\)</span> is a cross edge, or <span class="math">\(wv\)</span> is, depending on the order we visit the vertices in. For a cross edge, the discovery and finish time intervals for <span class="math">\(u\)</span> and <span class="math">\(v\)</span> will be disjoint - they will never overlap.</p>
+<p>The <strong>parenthesis theorem</strong> says that the discovery and finish time intervals are either disjoint or nested.</p>
+<p>BFS and DFS might not visit all the vertices of a graph if it is not connected - if it has multiple components. To have it visit all nodes, we can keep track of unvisited vertices, and while there are still unvisited nodes, we can repeatedly run the search algorithm, stopping when all vertices have been visited.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

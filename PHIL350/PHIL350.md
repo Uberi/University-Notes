@@ -133,7 +133,7 @@ Interestingly, blame depends on character judgements of the person - when people
 
 # 28/9/15
 
-Readings: Fantl, McGrath
+Readings: Hawthorne/Stanley, Fantl/McGrath
 
 We now look at the act of asserting itself. Do the practical consequences of acting affect justification?
 
@@ -151,7 +151,7 @@ The rationality of acting, according to Fantl and McGrath, sets the standard for
 
 # 30/9/15
 
-Readings: Buckwalter, Turri
+Readings: Buckwalter/Turri
 
 The accepted norm of assertion is knowledge - you should assert something only if you know it. This is supported by empirical studies of assertion in the real world, as discussed earlier. In the real world, showing is more costly than telling - so if knowledge is important for showing (asserting), it should also be important for showing.
 
@@ -214,6 +214,8 @@ Lackey investigates the properties of testimony transfer - is testimony like pas
 Basically, Lackey talks about whether testimony simply transmits knowledge, or whether it can actually generate new knowledge, and argues for the latter. For example, a creationist teacher that teaches evolution (despite not believing it) doesn't have knowledge of the material (she is simply following orders), yet it seems like the students can obtain knowledge, even though the speaker doesn't have knowledge.
 
 # 7/10/15
+
+Readings: Hazlett
 
 A **defeater** is something that defeats evidence - it takes away confidence in evidence that one has. When people make testimony, sometimes the defeaters don't get transferred - people may not transmit counterarguments, conflicting facts, and other things that might throw the evidence into question
 
@@ -303,6 +305,8 @@ Myers-Schulz and Schwitzgebel propose the **capacity-tendency account** - knowle
 
 # 21/10/15
 
+Readings: Buckwalter/Rose/Turri
+
 Murray, Sytsma, and Livengood provide additional examples of belief not being required for knowledge, and try to address some of the criticisms of Myers-Schwitzgebel's ideas of knowledge not requiring belief.
 
 One objection is that there are two different types of beliefs: **dispositional belief** (what one is prone to accepting, one's natural inclination), and **occurrent belief** (consciously entertained beliefs, happening at a particular time rather than being natural inclined). Although knowledge may not require occurrent belief, according to this objection, knowledge does require dispositional belief, and there is empirical evidence to back this up (would these people accept it even if they were asleep ans dreaming about it?).
@@ -360,7 +364,7 @@ Some beliefs are justified by logic or probability - logic/probabilistic relatio
 
 # 28/10/15
 
-Readings: Goldman, Cohen
+Readings: Cohen
 
 Final exam is on December 15 at 9AM in HH 2107. The third critical response is due on November 4.
 
@@ -428,3 +432,30 @@ For example, someone who often guesses numbers correctly might have intellectual
 Consider a baseball pitcher and an automatic pitching machine - they can both throw the ball at a high speed very reliably. However, the pitcher also countenances the norms for throwing balls fast - the pitcher follows their own rules for what they consider a good way to throw a baseball, while the pitching machine does not.
 
 In Greco's view, the intellectual virtue requirement ensures that the belief is objectively reliable, while the countenance of one's own rules for belief formation ensures that the belief is subjectively responsible. For knowledge, one has the virtue in the first place because one follows their own rules for belief formation. Interestingly, Greco's virtue theory also allows the brain in a vat to have justified beliefs, even though all their beliefs are all false - they can have intellectual virtues and follow all the rules of belief formation.
+
+# 4/11/15
+
+Readings: Elgin
+
+Truth and Epistemology
+----------------------
+
+Is truth really that important in epistemology? Elgin argues that it is not as important as we make it out to be.
+
+In truth-centred epistemology, truth is the central goal/objective, and obtaining truth is valued above all else. However, there's no real epistemic reason for it to be.
+
+Elgin proposes that instead, we should simply strive for obtaining something that is "true enough" for all the purposes we are interested in - **epistemic statements are acceptable if they are true enough**.
+
+Elgin proposes that understanding is more important than truth, and sometimes false beliefs can lead to good understanding. For example, thought experiments might be impossible/absurd, but they can help shed light on an idea and help people understand certain situations.
+
+**Felicitous falsehoods** are these "true enough" statements that aid understanding - helpful fictions. For example, epistemology says that in science, only true beliefs are acceptable. However, real science relies on false beliefs all the time and seems to do just fine. Newtonian mechanics isn't how physics actually works, but engineers use it all the time because it's true enough for most purposes.
+
+There are also simpler felicitous falsehoods common in science. For example, simplifying models in order to look at the relevant variables, or doing curve regressions to make sense of trends in data, or even just using approximations. Even though the results are technically not correct, they are true enough and help a lot with understanding, which is why we should use them.
+
+An interesting case is when geocentric models were the dominant view of the world. These models actually gave results good enough for sailors to navigate by, and in fact were even better than early heliocentric models. The geocentric models were practically useful, even if the understanding it gave was for a false view of the world.
+
+The tortoise and the hare fable probably never actually happened, but is still useful as a moral lesson on the value of being reliable. As a moral lesson, it is true enough to bring about understanding.
+
+One objection to this view is that the understanding given by felicitous falsehoods may be harmful to understanding true views, such as creationism or ancient aliens. In response to this, Elgin suuggests that felicitous falsehoods must also take facts into account to some extent - that they must be based on reality.
+
+Basically, felicitous falsehoods should result in a theory that is true as a whole, even if individual parts of it are false.
