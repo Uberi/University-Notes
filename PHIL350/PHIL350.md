@@ -444,7 +444,7 @@ Is truth really that important in epistemology? Elgin argues that it is not as i
 
 In truth-centred epistemology, truth is the central goal/objective, and obtaining truth is valued above all else. However, there's no real epistemic reason for it to be.
 
-Elgin proposes that instead, we should simply strive for obtaining something that is "true enough" for all the purposes we are interested in - **epistemic statements are acceptable if they are true enough**.
+Elgin proposes that instead, we should simply strive for obtaining something that is "true enough" for all the purposes we are interested in - **epistemic statements are proper/acceptable if they are true enough**.
 
 Elgin proposes that understanding is more important than truth, and sometimes false beliefs can lead to good understanding. For example, thought experiments might be impossible/absurd, but they can help shed light on an idea and help people understand certain situations.
 
@@ -459,3 +459,47 @@ The tortoise and the hare fable probably never actually happened, but is still u
 One objection to this view is that the understanding given by felicitous falsehoods may be harmful to understanding true views, such as creationism or ancient aliens. In response to this, Elgin suuggests that felicitous falsehoods must also take facts into account to some extent - that they must be based on reality.
 
 Basically, felicitous falsehoods should result in a theory that is true as a whole, even if individual parts of it are false.
+
+# 9/11/15
+
+So far we've been talking about how to tell when beliefs are proper/responsible/acceptable. However, does it even make sense to say a belief is proper? Can one be responsible or criticized for improper beliefs? According to Alson, we cannot control our own beliefs.
+
+**Deontological justification** is justification in terms of obligations - it is proper to hold a belief when it is fomed without breaking any of the rules of belief formation. In other words, deontological justification is a freedom from blame for believing.
+
+The deontological justification rules should forbid beliefs likely to be false, and permit beliefs likely to be true. It is based on deontological actions - actions are acceptable if they follow the rules of acting.
+
+However, Alson says that while we can choose our actions, we cannot choose our beliefs. Therefore, we can't be blamed or judged for our beliefs, and can't say they are proper or improper if we can't even control them. If we ought to do something, then we should at least be able to do it - **obligation requires ability**.
+
+Ginet's deontological justification model says that believing something if and only if they follow the rules of belief formation, and could not be blamed for believing it. **Doxastic voluntarism** is the view that people control their own beliefs. **Doxastic involuntarism** is the view that people cannot.
+
+Descartes says that being able to control one's beliefs is one of the most fundamental abilities that one has. Most philosophers in the past shared a similar view, but modern philosophers generally have the opposite view. Beliefs can be controlled no more than one's automatic bodily functions.
+
+According to Alson, in addition to perceptual beliefs being involutary (we can't control what we believe we perceive), inferential beliefs are as well - we can't make ourselves arbitrarily believe that 1 + 1 = 2.
+
+Alson admits that we do seem to have some sort of control over the long term of our beliefs - pretending to believe something over a long time could eventually result in actually believing it, though the success rate probably isn't very good.
+
+# 11/11/15
+
+It is commonly accepted that what we ought to do is limited by what we can do - "ought implies can" (OIC). If we have a moral obligation to do something, then we must have the ability to do it - promises are not binding if fulfilling them is impossible. This is widely accepted in modern philosophy and appears in everything from arguments about free will to moral dilemmas.
+
+However, most arguments defending OIC appeal to intuition or common sense, or just say that it seems obvious. However, do perceptions of someone's ability affect whether they are morally obligated? How do moral obligations 
+
+Consider someone says they would do something, but is unable to because of a traffic accident, and is therefore physically unable to do it. Consider a similar situation, where someone says that they would do something, but is unable to due to clinical depression, and is therefore psychologically unable to do it.
+
+Study participants were asked whether the person was able to do the task, obligated to do the task, and to blame for not doing the task in either situation. Most people said the person was obligated but unable in both situations. However, people tended to say the person was unable to in the car accident situation but was able to in the depresion situation. Additionally, people tended to ascribe blame to the person with depression significantly more than to the person in a car accident.
+
+This seems to imply that people think the person is obligated perform the task, yet unable to do so - evidence against OIC. However, blame was assigned only in the psychological case.
+
+In other words, people are still obligated to do something, even when they don't have ability to. Also, blame is independent of obligations. This held in a variety of situations and durations/scopes of inability, implying that "ought implies can" is not supported experimentally.
+
+Informal psychology is very good at belief attribution (telling when people have a belief), because humans tend to have a lot of success in their predictions. Therefore, an experiment is conducted in which we ask people whether they thing someone has a belief, in order to test whether beliefs changed. When designed in a certain way, the experiment can test whether people can choose their beliefs, and in so doing test whether belief voluntarism is the case.
+
+Someone hears that believing something will result in them having a more satisfying life, so chooses to believe that thing. When study participants were asked whether the person now actually believes that thing, they said that the person does in fact believe.
+
+Someone sees that there is a particular chance of rain at an outdoor event the next day, and as an optimist chooses to believe it will not rain. When study participants were asked whether the person actually believes that it will not rain, people said that regardless of whether the chance of rain was 5% or 95%, the person actually does believe that it will not rain. In other words, people attributed belief even when the person has good evidence that the belief is false.
+
+Another experiment tested perceptual evidence vs. inferential evidence, and seemed to imply that perceptual evidence results in less voluntary beliefs - when the person actually saw it was raining, people were less likely to think that the person believes it will not rain.
+
+Overall, the experiments implied that beliefs can be voluntary, and that the strength of evidence doesn't significantly affect whether voluntary beliefs are formed.
+
+;wip: critical response topic: blame is from how hard they try to do something, obligation is based on ability
