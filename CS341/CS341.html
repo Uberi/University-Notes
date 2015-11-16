@@ -812,14 +812,67 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <li>Do a depth-first search on <span class="math">\(H\)</span>, each time calling <code>visit</code> starting with the unvisited vertex with the latest finishing time in the DFS from step 1.</li>
 <li>The strongly connected components of <span class="math">\(G\)</span> are the trees in the DFS forest from the DFS in step 3.</li>
 </ol>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> strongly_connected_components(vertices, edges):
-    do a DFS on the graph and order `vertices` by finishing time in linear time
-    </code></pre>
 <p>Proof of correctness:</p>
 <blockquote>
 <p>Note that <span class="math">\(G\)</span> and <span class="math">\(H\)</span> have the same strongly connected components.<br />Let <span class="math">\(u\)</span> be the first vertex visited in step 3 - the one with the highest finishing time from the DFS in step 1.<br />Let <span class="math">\(C\)</span> be the strongly connected component that contains <span class="math">\(u\)</span>. Let <span class="math">\(C&#39;\)</span> be any other strongly connected component.<br />Clearly, the finishing time of <span class="math">\(C\)</span> is later than that of <span class="math">\(C&#39;\)</span>.<br />So there cannot be an arc from <span class="math">\(C&#39;\)</span> to C$ in <span class="math">\(G\)</span> (it is <span class="math">\(G\)</span> rather than <span class="math">\(h\)</span> because the finishing times were for a DFS on <span class="math">\(G\)</span>).<br />So we can only reach the vertices in <span class="math">\(C\)</span> from <span class="math">\(u\)</span>, not from <span class="math">\(C&#39;\)</span>.</p>
 </blockquote>
 <p>Clearly, this has time complexity <span class="math">\(\Theta(\abs{V} + \abs{E})\)</span>, since both tests from step 1 and 2 take <span class="math">\(\Theta(\abs{V} + \abs{E})\)</span>.</p>
+<h1 id="section-17">16/11/15</h1>
+<p>The spanning tree of a connected undirected graph <span class="math">\(G\)</span> is a subgraph <span class="math">\(T\)</span> that is a tree containing every vertex in <span class="math">\(G\)</span>. <span class="math">\(T\)</span> is a spanning tree if and only if <span class="math">\(T\)</span> is an acyclic subgraph that has <span class="math">\(\abs{V(G)} - 1\)</span> edges.</p>
+<p>Given a weight function <span class="math">\(w: V(G) \to \mb{R}\)</span> on a graph <span class="math">\(G\)</span>, we want to find a spanning tree of <span class="math">\(G\)</span> such that <span class="math">\(\sum_{e \in E(T)} w(e)\)</span> is minimized - the <strong>minimum spanning tree problem</strong>. In other words, we want a connected subgraph of <span class="math">\(G\)</span> such that the sum of the weights is minimised.</p>
+<h3 id="kruskals-algorithm">Kruskal's Algorithm</h3>
+<p>Kruskal's algorithm is one way to solve this. Basically, we sort the edges by weight ascending and considering each edge in order, we add the edge to the result if it doesn't form a cycle in the result.</p>
+<p>At any point, we have a forest of disjoint trees (no trees share any vertices). We start off with <span class="math">\(n\)</span> trees, and whenever we add an edge to the forest, we merge two trees, reducing the number of trees in the forest by 1.</p>
+<p>We can efficiently test if adding an edge would result in a cycle by keeping track of the parents of each vertex in its tree as <span class="math">\(L[v]\)</span>. The root of the tree is therefore the vertex <span class="math">\(v\)</span> such that <span class="math">\(L[v] = v\)</span>. By repeatedly getting the parent/leader of the vertex, checking <span class="math">\(v, L[v], L[L[v]], \ldots\)</span>, we eventually get the root of the tree. When we add an edge to the resulting tree, we simply add an entry <span class="math">\(L[v] = u\)</span> or <span class="math">\(L[u] = v\)</span>.</p>
+<p>We now define <span class="math">\(\operatorname{find}(v)\)</span> to be the root of the tree containing the vertex <span class="math">\(v\)</span>, and implement it by repeatedly checking <span class="math">\(L\)</span>. Testing if an edge causes a cycle is the same as checking if the edge <span class="math">\(\set{u, v}\)</span> has <span class="math">\(u, v\)</span> in two different trees - if <span class="math">\(\operatorname{find}(u) = \operatorname{find}(v)\)</span>. So we add an edge <span class="math">\(\set{u, v}\)</span> if and only if <span class="math">\(\operatorname{find}(u) \ne \operatorname{find}(v)\)</span>.</p>
+<p>As it turns out, if we ensure that the depth of the tree containing <span class="math">\(u\)</span> is less than the depth of the tree containing <span class="math">\(v\)</span> when adding the entry <span class="math">\(L[v] = u\)</span>, we can ensure that <span class="math">\(\operatorname{find}\)</span> is always <span class="math">\(\Theta(\log(\abs{E}))\)</span>.</p>
+<p><span class="math">\(L\)</span> is a type of data structure called a <strong>union-find/merge-find</strong> data structure, because it has a find operation and a union/merge (setting the leader/parent of a vertex) operation.</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> spanning_tree(vertices, edges, weight_function):
+    leaders = <span class="dt">list</span>(<span class="dt">range</span>(<span class="dt">len</span>(vertices)))
+    tree_edges = <span class="dt">set</span>()
+    <span class="kw">for</span> edge in <span class="dt">sorted</span>(edges, key=weight_function):
+        vertex1_root, vertex1_depth = find(edge[<span class="dv">0</span>], leaders)
+        vertex2_root, vertex2_depth = find(edge[<span class="dv">1</span>], leaders)
+        <span class="kw">if</span> vertex1_root != vertex2_root:
+            tree_edges.add(edge)
+            <span class="kw">if</span> vertex1_depth &lt; vertex2_depth:
+                leaders[vertex2_root] = vertex1_root
+            <span class="kw">else</span>:
+                leaders[vertex1_root] = vertex2_root
+    <span class="kw">return</span> (vertices, tree_edges)
+
+<span class="kw">def</span> find(vertex, leaders):
+    depth = <span class="dv">0</span>
+    <span class="kw">while</span> leaders[vertex] != vertex:
+        vertex = leaders[vertex]
+        depth += <span class="dv">1</span>
+    <span class="kw">return</span> vertex, depth</code></pre>
+<p>Since sorting the edges by weight takes <span class="math">\(\Theta(\abs{E} \log \abs{E})\)</span> and we run the <span class="math">\(\Theta(\log \abs{E})\)</span> union and find operations.</p>
+<h3 id="prims-algorithm">Prim's Algorithm</h3>
+<p>Prim's algorithm is another way to find the minimum spanning tree of a graph.</p>
+<p>Basically, we define a tree <span class="math">\(A\)</span>, and starting from an arbitrary vertex <span class="math">\(u_0\)</span>, we repeatedly add the lowest-weight edge that connects a vertex in <span class="math">\(A\)</span> to a vertex not in <span class="math">\(A\)</span> to <span class="math">\(A\)</span>.</p>
+<p>Let <span class="math">\(V_A\)</span> be the set of vertices that are incident to edges in <span class="math">\(A\)</span>. Let <span class="math">\(N[v]\)</span> be a vertex <span class="math">\(u \in V_A\)</span> where <span class="math">\(\set{u, v}\)</span> is a minimum weight edge. Let <span class="math">\(W[v] = w(N[v], v)\)</span> - the best possible choice we can make at any vertex.</p>
+<p>This is a pretty standard greedy algorithm.</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> spanning_tree(vertices, edges, weight_function):
+    tree_edges = <span class="dt">set</span>()
+    start_vertex = vertices[<span class="dv">0</span>]
+    tree_vertices = {start_vertex}
+    <span class="kw">for</span> vertex in vertices - {start_vertex}:
+        W[vertex] = weight_function({start_vertex, vertex})
+        N[vertex] = start_vertex
+
+    <span class="kw">while</span> <span class="dt">len</span>(tree_edges) &lt; <span class="dt">len</span>(vertices) - <span class="dv">1</span>:
+        min_weight_vertex = <span class="dt">min</span>(vertices - tree_vertices, key=<span class="kw">lambda</span> vertex: W[vertex])
+        tree_vertices.add(min_weight_vertex)
+        edge_vertex = N[min_weight_vertex]
+        tree_edges.add({min_weight_vertex, edge_vertex})
+
+        <span class="kw">for</span> vertex in vertices - tree_vertices: <span class="co">#</span>
+            <span class="kw">if</span> weight_function(min_weight_vertex, vertex) &lt; W[vertex]: <span class="co"># new edge has a lower weight than the current one</span>
+                W[vertex] = weight_function(min_weight_vertex, vertex)
+                N[vertex] = min_weight_vertex
+    <span class="kw">return</span> (vertices, tree_edges)</code></pre>
+<p>Since we need to check edges <span class="math">\(\Theta(\abs{V})\)</span> times, and each time takes <span class="math">\(O(\abs{V})\)</span> time, this implementation of Prim's algorithm takes <span class="math">\(O(\abs{V}^2)\)</span> time. Alternatively, we could build a heap of all the vertices in <span class="math">\(W\)</span> to compute <code>min_weight_vertex</code> in <span class="math">\(O(\log(\abs{V}))\)</span> time, giving us <span class="math">\(O(\abs{E} \log \abs{V})\)</span>, which is better for sparse graphs (graphs with relatively few edges compared to vertices).</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

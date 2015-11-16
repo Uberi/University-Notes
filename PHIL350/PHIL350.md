@@ -503,3 +503,34 @@ Another experiment tested perceptual evidence vs. inferential evidence, and seem
 Overall, the experiments implied that beliefs can be voluntary, and that the strength of evidence doesn't significantly affect whether voluntary beliefs are formed.
 
 ;wip: critical response topic: blame is from how hard they try to do something, obligation is based on ability
+
+# 16/11/15
+
+Readings: Snowdon, Cath
+
+Types of Knowledge
+------------------
+
+Are there fundamentally different types of knowledge? What is the difference between "know how" vs. "knowing that".
+
+"Knowing that" is often called **propositional knowledge** - knowledge that something is true, like a fact, sentence, or a proposition. "Knowing how" is often called **procedural knowledge** - knowledge of how something is done, as well as the skills necessary to do it.
+
+**Intellectualism** is the view that **knowing-how is a specific type of knowing-that** - that knowing how to drive a bus is the same as knowing that "turning the wheel left causes the bus to veer leftward", and so on. In other words, one knows how to X if and only if they possess a certain sort of propositional knowledge about X - knowing how to do something is always reducible to knowing that a related set of propositions are true.
+
+**Anti-intellectualism** is the opposite view - that **knowing-how and knowing-that are distinct types of knowledge**. One knows how to X if and only if they possess a certain ability to X.
+
+The argument for this, presented by Ryle, is that knowing how requires us to contemplate a proposition, which requires us to know how to contemplate propositions, which requires knowing how to contemplate that proposition, and so on, ad infinitum.
+
+This view basically says that knowledge must be grounded in knowing how, in the form of our reflexes, instincts, and innate knowledge. Knowing how to do something requires additional things over knowing-that, such as abilities, capacities, and dispositions. You can know everything about skiing, but if you're on a mountain and can't ski down, then the anti-intellectualist view is that you do not know how to ski.
+
+Consider someone who doesn't know anything about skiing, yet up on the mountain easily skis down - it seems that even without any propositional knowledge, the person knows how to ski.
+
+Consider someone who knows all about skiiing, but has no legs - it seems that even in the presence of propositional knowledge, the person doesn't know how to ski.
+
+Snowdon criticises anti-intellectualism, by arguing that ability is not necessary for knowing-how, and that ability is not sufficient for knowing-how.
+
+Suppose someone knows how to bake a cake, but then the world's egg supply disappears overnight. It seems that the person still knows how to bake a cake, but the person doesn't have the ability to bake the cake since there are no eggs. Suppose someone who knows how to fix bikes but loses their arms - the person could still teach others how to fix bikes, but can't do it themselves.
+
+Suppose someone is in a room with an unlocked door, but the person thinks that it is locked. It seems that the person doesn't know how to leave the room since they think the door is locked, but the person does have the ability to simply open the door and leave. Suppose someone can do 50 push-ups, but while another person can only do 20. It seems that both people know how to do push-ups equally well, but one person is simply stronger - they both know how, but have different levels of ability.
+
+;wip: critical response topic: support intellectualism, but argue that some forms of knowledge can't be transferred, and knowledge includes motor skills and reflexes

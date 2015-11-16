@@ -157,6 +157,7 @@ Office Hours: Monday, Wednesday 12:30 PM-1:15 PM, DC2338</code></pre>
 <h1 id="section-6">28/9/15</h1>
 <p>Databases are often too large to fit in main memory. Therefore, they are generally stored on disk drives or SSDs.</p>
 <p>Disk drives have disk packs (disks on a spindle), which have multiple platters (disks), each with many concentric tracks (circles). Tracks are divided into equally sized pages/blocks/sectors (chunks), each of which stores around 512 bytes to 4 kilobytes. The tracks with corresponding radii on each platter form a cylinder.</p>
+<p>On disks themselves, 1's and 0's are stored as transitions between north and south magnetized poles. That means that within the space for 1 bit, the track needs to change in the middle, from north to south or south to north. This allows a small current to be induced in the read/write head.</p>
 <p>The disk pack is rotated at a constant speed (typically thousands of RPM), and read/write heads move back and forth over the disks to read/write the data. The blocks on each track have the track number (the cylinder in which the block resides), surface number (which platter the block is on), and block number within the track. Blocks are the unit of transfer and are uniquely identified by these 3 values.</p>
 <p>To perform a read/write a block on a disk drive, the read/write head has to seek to the right track, wait for the disk to spin around to the right track, and then perform the read/write until done. As this is a mechanical process, this can take multiple milliseconds - two orders of magnitude greater than CPU operations.</p>
 <p>As a result of the mechanical aspects of disk drives, it's a good idea to put related data close together on the same track, in order to avoid seek times and rotational delay when reading related information - this is known as <strong>clustering</strong>. We also try to cache recently used values (and marking modified cache entires as dirty to write them back later), in order to avoid disk operations entirely when possible.</p>
@@ -445,7 +446,7 @@ write target account</code></pre>
 <p>In the <strong>read before write model</strong> of transactions, the operations in transactions are read (obtaining an item's value), read/write (modifying an item based on its value), insert (add a new item), and delete (remove an existing item). From now on, we will use this model.</p>
 <p>A schedule <span class="math">\(S\)</span> is <strong>serial</strong> if and only if for each transaction in <span class="math">\(S\)</span>, all the steps execute consecutively - one transaction runs without interruption, then another, and so on, and no steps are interleaved.</p>
 <h1 id="section-25">13/11/15</h1>
-<p>Two schedules <span class="math">\(S_1, S_2\)</span> are <strong>view equivalent</strong> when the following are satisfied:</p>
+<p>In the read before write model, two schedules <span class="math">\(S_1, S_2\)</span> are <strong>view equivalent</strong> when the following are satisfied:</p>
 <ul>
 <li><span class="math">\(S_1, S_2\)</span> have the same transactions.
 <ul>
@@ -474,13 +475,44 @@ write target account</code></pre>
 <li>If a topological ordering cannot be found (this would be because <span class="math">\(G\)</span> contains a cycle), <span class="math">\(S\)</span> is not serializable.</li>
 <li>Otherwise, the topological ordering is an order of transactions that form an equivalent serial schedule.</li>
 </ol>
-<p>In real-world use, serializing schedules is NP-complete and isn't practical for scheduling transactions. Instead, we use locks to ensure that we don't change or read data when we shouldn't.</p>
+<p>In real-world use, serializing schedules is NP-complete and isn't practical for scheduling transactions. Instead, we use locks in the <strong>read/write lock model</strong> to ensure that we don't change or read data when we shouldn't.</p>
 <p>Locking operations are managed by the lock manager, which implements:</p>
 <ul>
 <li>RLOCK (acquire read/shared lock): block writes to the locked item, until released. All writes to the item have to wait.</li>
 <li>WLOCK (acquire write/exclusive lock): block reads/writes from other transactions to an item, until released. The current transaction gets exclusive ability to read/write that item, while all other transactions have to wait.</li>
 <li>UNLOCK (release a shared or exclusive lock).</li>
 </ul>
+<h1 id="section-26">16/11/15</h1>
+<p>Read locks and write locks are mutually exclusive - they cannot both be acquired at the same time.</p>
+<p><strong>Livelock/starvation</strong> is when a transaction wants a lock, but can never get it because it keeps getting locked by other transactions first. This can be solved by using a lock request queue - when a transaction tries to acquire a lock on a locked item, it gets put in the lock request queue and eventually gets its turn.</p>
+<p>A <strong>deadlock</strong> is when transactions in a set of two or more transactions are each waiting to acquire a lock on an item that is locked by a different transaction in that set - A is waiting for Y while locking X, while B is waiting for X while locking Y. We can solve this by requesting all the locks at once, always locking items in a fixed order, or detecting deadlocks and aborting one of the deadlocked transactions.</p>
+<p>In the read/write lock model, two schedules <span class="math">\(S_1, S_2\)</span> are <strong>view equivalent</strong> when the following are satisfied:</p>
+<ul>
+<li><span class="math">\(S_1, S_2\)</span> have the same transactions.
+<ul>
+<li>Let <span class="math">\(Q\)</span> be a data item read by a transaction <span class="math">\(T\)</span> in <span class="math">\(S_1\)</span> and <span class="math">\(S_2\)</span> (they must both have the same transactions, so <span class="math">\(T\)</span> must be in both of them).</li>
+</ul></li>
+<li>If <span class="math">\(T\)</span> reads the initial value of <span class="math">\(Q\)</span> in <span class="math">\(S_1\)</span>, <span class="math">\(T\)</span> also reads the initial value of <span class="math">\(Q\)</span> in <span class="math">\(S_2\)</span>.
+<ul>
+<li>In other words, we can't have another transaction modify <span class="math">\(Q\)</span> beforehand in one schedule but not another.</li>
+</ul></li>
+<li>If <span class="math">\(T\)</span> in <span class="math">\(S_1\)</span> read-locks <span class="math">\(Q\)</span>, or <span class="math">\(T\)</span> write-locks <span class="math">\(Q\)</span> and the value of <span class="math">\(Q\)</span> read is last written by another transaction <span class="math">\(T&#39;\)</span> in <span class="math">\(S_1\)</span> at step <span class="math">\(k\)</span>, then this is also the case in <span class="math">\(S_2\)</span>, and vice versa.</li>
+<li>The final value of <span class="math">\(Q\)</span> is the same for all <span class="math">\(Q\)</span>.</li>
+</ul>
+<p>We can generate a serial schedule in the read/write lock model quite simply as well, also using a topological sort:</p>
+<ol style="list-style-type: decimal">
+<li>Generate a <strong>precedence graph</strong> <span class="math">\(G\)</span> for the schedule.
+<ul>
+<li>A precedence graph is a directed graph where each vertex corresponds to a transaction in <span class="math">\(S\)</span>.</li>
+<li>If a transaction <span class="math">\(T\)</span> read locks <span class="math">\(Q\)</span> and later <span class="math">\(T&#39;\)</span> write-locks <span class="math">\(Q\)</span>, then there is an edge <span class="math">\(\tup{T, T&#39;}\)</span>.</li>
+<li>If a transaction <span class="math">\(T\)</span> write locks <span class="math">\(Q\)</span> and later <span class="math">\(T&#39;\)</span> read-locks <span class="math">\(Q\)</span> before <span class="math">\(Q\)</span> is write-locked by a transaction other than <span class="math">\(T\)</span>, then there is an edge <span class="math">\(\tup{T, T&#39;}\)</span>.</li>
+<li>If a transaction <span class="math">\(T\)</span> write locks <span class="math">\(Q\)</span> and later <span class="math">\(T&#39;\)</span> write-locks <span class="math">\(Q\)</span>, then there is an edge <span class="math">\(\tup{T, T&#39;}\)</span>.</li>
+<li>In other words, an edge <span class="math">\(\tu{T, T&#39;}\)</span> means that <span class="math">\(T&#39;\)</span> has to wait because of <span class="math">\(T\)</span> locking a data item.</li>
+</ul></li>
+<li>If there is a topological ordering, then the transactions in that ordering form a serial schedule, otherwise there is no possible serial schedule.</li>
+</ol>
+<p>In <strong>two-phase locking</strong>, locks must always appear before unlocks in transactions. This divides the transaction into a <strong>growing phase</strong>, when we acquire all the locks, and a <strong>shrinking phase</strong>, when we release them. There is a theorem that says that <strong>schedules with transactions using two-phase locking are always serializable</strong>.</p>
+<p>What is a data item? In our models they are the smallest unit that we can lock. In real DBMSs, there are different levels of locking - we can lock tables, columns, and even individual rows.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

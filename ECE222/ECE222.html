@@ -415,6 +415,7 @@ LDMFD, R13, {R15, R1, R2} # pop the link register&#39;s value into the program c
 <p>An interrupt service routine is a small program stored in memory. ISRs should be as short and fast as possible, and do the minimum needed to satisfy the I/O device, since it is blocking the main program from running - they usually copy data into a buffer for the main program to process later. ISRs generally have to acknowledge the interrupt in their body to clear the interrupt from processing.</p>
 <p>The steps before the ISR is called can take a significant amount of time - this delay is called <strong>interrupt latency</strong>.</p>
 <p>Some pieces of code are critical and should never be interrupted. For this purpose, there is a CSPIE (interrupt enable) bit in the processor status (PS) register that controls whether interrupts are handled, or just ignored. This is useful for things like disabling interrupts in realtime code sections, or disabling interrupts within an ISR to avoid recursive interrupts.</p>
+<p>Interrupts that are generated internally are called <strong>exceptions</strong>. Otherwise, they come from external sources like I/O.</p>
 <p>The interrupt process occurs as follows:</p>
 <ul>
 <li>The I/O device asserts an interrupt.</li>
@@ -627,7 +628,7 @@ DISPLAY_ISR
 <p>One way to do this is to just kick out a random block (random eviction), or the block that was added to the cache/set first (first-in-first-out/FIFO eviction). However, a better strategy is to use the LRU (least recently used) strategy - the block in the cache/set that was least recently accessed (rather than least recently added like in FIFO eviction). This ensures that commonly accessed data doesn't get kicked out, even if we access a lot of other stuff as well.</p>
 <p>In direct mapping, every cache line's corresponding memory block can be uniquely identified by <span class="math">\(n - l\)</span> bits, where <span class="math">\(n\)</span> is <span class="math">\(\log_2(\text{number of blocks})\)</span> (the number of blocks is the number of addresses divided by size of blocks in bytes), and <span class="math">\(l\)</span> is <span class="math">\(\log_2(\text{number of cache lines})\)</span>.</p>
 <p>In fully associative, every cache line's corresponding memory block needs ;wip</p>
-<h2 id="virtual-memory">Virtual Memory</h2>
+<h3 id="virtual-memory">Virtual Memory</h3>
 <p>In modern operating systems, we want each of our processes to think it has full and exclusive access to the address space, from 0 to <span class="math">\(2^n - 1\)</span>. There are many benefits to this:</p>
 <ul>
 <li>Even if we don't have <span class="math">\(2^n\)</span> bytes of physical memory, the process can still use high addresses.</li>
@@ -635,9 +636,62 @@ DISPLAY_ISR
 <li>We don't need to relocate code since any code can just start wherever we need it to.</li>
 <li>Processes can't arbitrarily access other processes' memory - virtual memory isolates process address spaces from each other.</li>
 </ul>
-<p>To implement this, we split up the virtual memory space into <strong>pages</strong>, each of a fixed size (like 4 kB). Each page can be stored in either the main memory, or swapped to the hard disk. This is sort of like caching, in that we have to choose between two different storage locations, but there's only one copy of every page stored at any time.</p>
+<p>To implement this, we split up the virtual memory space into <strong>pages</strong>, each of a fixed size (like 4 kB - it's large because we want to avoid having to keep track of too many pages). Each page can be stored in either the main memory, or swapped to the hard disk. This is sort of like caching, in that we have to choose between two different storage locations, but there's only one copy of every page stored at any time.</p>
 <p>Basically, We need to map pages to physical memory and the hard disk. Each page has a virtual page number (VPN), and is mapped to a physical frame, which has a physical frame number (PFN). Translating a VPN to a PFNs is done by looking up the PFN in a <strong>page table</strong>, which is just an array of PFNs (plus their control bits) indexed by VPN. This translation is generally handled by the memory management unit (MMU).</p>
 <p>There is actually one page-table per process. When using the MMU to translate virtual addresses to physical addresses, we send in a virtual address and the base address for the process' page table in RAM, and get back a physical address.</p>
+<h1 id="section-25">16/11/15</h1>
+<p>For performance reasons, the page table also needs to have a cache of recently used virtual address and their associated physical address translations to avoid unnecessary table lookups, which are expensive memory operations. This is generally located in the MMU and is called the <strong>translation lookaside buffer</strong> (TLB).</p>
+<p>TLBs are generally fully associative and relatively small. They must be cleared whenever we switch processes.</p>
+<p>A <strong>page fault</strong> is an exception raised when the MMU can't find the page for a virtual address in main memory (the page is on the disk rather than RAM). In the page fault handler, we swap the desired page back from the disk into main memory (the page is swapped with the least recently used page - an LRU scheme), update the page tables, and return to the calling instruction.</p>
+<h2 id="processor-design">Processor Design</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Stage of Execution</th>
+<th align="left">Data Processing Instructions</th>
+<th align="left">Load Instructions</th>
+<th align="left">Store Instructions</th>
+<th align="left">Branch Instructions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fetch</td>
+<td align="left"><code>ADD R0, R1, R2</code></td>
+<td align="left"><code>LDR R0, [R1, #4]</code></td>
+<td align="left"><code>STR R0, [R1, #4]</code></td>
+<td align="left"><code>BEQ [PC, #16]</code></td>
+</tr>
+<tr class="even">
+<td align="left">Read Registers</td>
+<td align="left"><span class="math">\([R1], [R2]\)</span></td>
+<td align="left"><span class="math">\([R1]\)</span></td>
+<td align="left"><span class="math">\([R0], [R1]\)</span></td>
+<td align="left"><span class="math">\([PC]\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Use ALU</td>
+<td align="left"><span class="math">\([R1] + [R2]\)</span></td>
+<td align="left"><span class="math">\([R1] + 4\)</span></td>
+<td align="left"><span class="math">\([R1] + 4\)</span></td>
+<td align="left"><span class="math">\([PC] + 16\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Use Memory</td>
+<td align="left">(not applicable)</td>
+<td align="left">Read from <span class="math">\([R1] + 4\)</span></td>
+<td align="left">Write to <span class="math">\([R1] + 4\)</span></td>
+<td align="left">(not applicable)</td>
+</tr>
+<tr class="odd">
+<td align="left">Write Registers</td>
+<td align="left"><span class="math">\(R0 \leftarrow [R1] + [R2]\)</span></td>
+<td align="left"><span class="math">\(R0 \leftarrow \text{result}\)</span></td>
+<td align="left">(not applicable)</td>
+<td align="left"><span class="math">\(PC \leftarrow [PC] + 16\)</span> if test succeeds</td>
+</tr>
+</tbody>
+</table>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
