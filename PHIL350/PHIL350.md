@@ -519,6 +519,8 @@ Are there fundamentally different types of knowledge? What is the difference bet
 
 **Anti-intellectualism** is the opposite view - that **knowing-how and knowing-that are distinct types of knowledge**. One knows how to X if and only if they possess a certain ability to X.
 
+Additionally, anti-intellectualism says that ability is necessary for know-how, while praxism says that ability is sufficient for know-how.
+
 The argument for this, presented by Ryle, is that knowing how requires us to contemplate a proposition, which requires us to know how to contemplate propositions, which requires knowing how to contemplate that proposition, and so on, ad infinitum.
 
 This view basically says that knowledge must be grounded in knowing how, in the form of our reflexes, instincts, and innate knowledge. Knowing how to do something requires additional things over knowing-that, such as abilities, capacities, and dispositions. You can know everything about skiing, but if you're on a mountain and can't ski down, then the anti-intellectualist view is that you do not know how to ski.
@@ -534,3 +536,19 @@ Suppose someone knows how to bake a cake, but then the world's egg supply disapp
 Suppose someone is in a room with an unlocked door, but the person thinks that it is locked. It seems that the person doesn't know how to leave the room since they think the door is locked, but the person does have the ability to simply open the door and leave. Suppose someone can do 50 push-ups, but while another person can only do 20. It seems that both people know how to do push-ups equally well, but one person is simply stronger - they both know how, but have different levels of ability.
 
 ;wip: critical response topic: support intellectualism, but argue that some forms of knowledge can't be transferred, and knowledge includes motor skills and reflexes
+
+# 18/11/15
+
+Readings: Stanley, Bengson/Moffett/Wright
+
+Cath, in response to Snowdon's criticisms, defends anti-intellectualism by criticizing intellectualism. In addition to know-how stored in reflexes, instincts, and muscle memory, Cath says that it is possible for people to know how to do something, but not know any propositions about it, and provides several examples.
+
+Suppose there is someone who reads a book that had incorrect instructions to change a light bulb, but just happened to have a printing error that made the instructions correct (like in the Gettier cases, the person has true belief but no knowledge, because the book was only right by coincidence). Arguably, the person knows how to change the lightbulb, but doesn't have any propositional knowledge of it, since the evidence was only correct by coincidence. It seems that the know-how is more in tune with the ability to change the light bulb than having knowledge about changing light bulbs.
+
+Intuitively, lucky incidents of correctness, or accidentally doing something right, seems to indicate knowing-how but not knowing-that - knowing-how is less sensitive to luck than knowing-that.
+
+What do psychological experiments say about knowing-that vs. knowing-how? We want to have an experiment where people are presented with a situation in which someone coincidentally learns the right thing (so they have false beliefs) but they still have know-how.
+
+Know-how seems to have a non-cognitive nature. Experimentally, Bengson/Moffett/Wright try to test whether people think knowing-that is different from knowing-how.
+
+People were presented with a case where someone is able to teach someone else how to do stunts without ever being able to do them themselves. When asked, most of them judged that the person had know-how but didn't have ability.

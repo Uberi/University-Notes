@@ -512,7 +512,37 @@ write target account</code></pre>
 <li>If there is a topological ordering, then the transactions in that ordering form a serial schedule, otherwise there is no possible serial schedule.</li>
 </ol>
 <p>In <strong>two-phase locking</strong>, locks must always appear before unlocks in transactions. This divides the transaction into a <strong>growing phase</strong>, when we acquire all the locks, and a <strong>shrinking phase</strong>, when we release them. There is a theorem that says that <strong>schedules with transactions using two-phase locking are always serializable</strong>.</p>
-<p>What is a data item? In our models they are the smallest unit that we can lock. In real DBMSs, there are different levels of locking - we can lock tables, columns, and even individual rows.</p>
+<p>What is a data item? In our models they are the smallest unit that we can lock - a single row.</p>
+<h1 id="section-27">18/11/15</h1>
+<p>A <strong>predicate lock</strong> is another type of lock that defines a set of satisfying rows (via a <strong>predicate</strong>), like those that have a matching attribute value. Predicate locks have read and write variants just like locks on data items.</p>
+<p>A <strong>phantom read</strong> is when two identical queries in the same transaction are executed, and they give different rows. This can still happen under our locking model because we can only lock rows that already exist - if new rows get added in between, they aren't included in the locks. These rows are called <strong>phantom rows</strong>:</p>
+<pre><code>transaction A: SELECT * FROM A ; select some rows, locking the selected rows
+transaction B: INSERT INTO A VALUES(...) ; add a row, this row is not locked by the select statement above, so we can freely insert
+transaction C: SELECT * FROM A ; the newly inserted row is selected here, in addition to the previously selected rows - there are more results than before, even though both queries are in transaction A</code></pre>
+<p>Predicate locks mitigate this because when a new row that matches the predicate gets inserted, it gets automatically locked and added to the predicate lock.</p>
+<p>A <strong>non-repeatable read</strong> is when reading a row twice result in two different read values - sort of like phantom reads, but the row's value is changed rather than new rows being added:</p>
+<pre><code>transaction A: SELECT sum(x) FROM A ; select some rows, locking the selected rows
+transaction B: UPDATE A SET x = 1 WHERE x != 1 ; the sum of all the values changes
+transaction C: SELECT sum(x) FROM A ; sum is changed when reading here</code></pre>
+<p>Non-repeatable reads can't occur even without predicate locks, but it can occur if we don't use locks.</p>
+<p>Most SQL statements operate over a set of rows - this set of rows can be expressed as a predicate. When we run a statement, we can simply acquire a predicate lock for the SQL statement's predicate to ensure isolation.</p>
+<p>Two predicate locks <strong>conflict</strong> if they have a common row matching both predicates, and one of the predicate locks is a write. If two statements have predicate locks that don't conflict, they can be run concurrently.</p>
+<p>DBMSs can have their own nuances to locks, such as how they do locking based on rows/predicates. A short duration lock is held for the duration of one statement, a long duration lock is held for the rest of a transaction, and a medium duration lock is held for a duration in between these two.</p>
+<p>Ensuring that schedules are perfectly serializable when using predicate locks can get expensive, since the locks can cover a lot of rows, and reduce concurrency. To mitigate this, DBMSs allow us to trade isolation for performance - allowing/disallowing phantom reads and non-repeatable reads to allow more transactions to execute in parallel. This can be done with <code>SET TRANSACTION READ ONLY ISOLATION_LEVEL</code> or <code>SET TRANSACTION READ WRITE ISOLATION_LEVEL</code> where <code>ISOLATION_LEVEL</code> is one of:</p>
+<ul>
+<li><code>READ UNCOMMITTED</code>: transactions can read data at any point - non-repeatable reads, dirty reads, and phantom reads all possible. Reads ignore locks entirely, including write-locked rows.</li>
+<li><code>READ COMMITTED</code>: transactions can read data that has been committed by other transactions - non-repeatable reads and phantom reads all possible. Reads use short duration read locks.</li>
+<li><code>REPEATABLE READ</code>: transactions can read data that has been committed by other transactions and is not read/write locked - phantom reads possible. Reads use long duration read locks.</li>
+<li><code>SERIALIZABLE</code>: transactions can read data that has been committed by other transactions and is not predicate locked - all transactions are isolated. Reads use long duration predicate locks.</li>
+</ul>
+<p>Wrttes (update/insert/delete) always need to hold long duration predicate write locks (regardless of isolation level).</p>
+<h1 id="section-28">20/11/15</h1>
+<p>The <code>CURSOR STABILITY</code> isolation level is a non-standard isolation level that is somewhere between <code>READ COMMITTED</code> and <code>REPEATABLE READ</code>. This is the same as <code>READ COMMITTED</code>, but with additional locks for cursors.</p>
+<p>With <code>CURSOR STABILITY</code>, transactions can read data that has been committed by other transactions - repeatable reads while cursor isn't moved and phantom reads possible, Reads use short duration read locks, but accessing rows through cursor uses medium duration lock (locks rows until the cursor is moved).</p>
+<p>The purpose of isolation levels is to allow us to selectively give up certain guarantees in exchange for better concurrency. Therefore, we want to use the lowest (most concurrent) isolation level we can get away with - for each transaction, we should look at what other transactions might be running concurrently, and check whether we care about repeatable reads or phantom reads.</p>
+<p>Computers can crash at any time, for a number of reasons - hardware failure, software crashes, etc. Databases should be able to fail gracefully without any loss of data, in as many situations as possible.</p>
+<p>To model this, we will assume that we have access to <strong>stable storage</strong>, a block-based storage device that can be written to atomically, and all data on this device we will consider safe. Stable storage doesn't exist in real life - RAM is volatile, while hard drves can't be written atomically, and are prone to failure.</p>
+<p><strong>Transaction-local failure</strong> is a failure of a single transaction, like a write failure. <strong>System-wide failure</strong> is a failure of the entire system, like an operating system crash, <strong>Media failure</strong> is a failure of the non-volatile storage.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

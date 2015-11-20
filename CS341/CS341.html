@@ -715,25 +715,25 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>Clearly, a graph is bipartite if and only if it contains an odd cycle (see MATH239 notes for proof of this.<br />We can check for odd cycles using breadth first search.<br />At each step, if we encounter an edge <span class="math">\(\set{u, v}\)</span> where <span class="math">\(\mathrm{dist}(u) = \mathrm{dist}(v)\)</span>, then we have found an odd cycle containing <span class="math">\(u\)</span> and <span class="math">\(v\)</span> and the first common ancestor of <span class="math">\(u\)</span> and <span class="math">\(v\)</span> in the BFS tree.<br />This is because the distance from <span class="math">\(u\)</span> and <span class="math">\(v\)</span> to the common ancester must be equal, so if the distance is <span class="math">\(k\)</span> then the cycle must have <span class="math">\(2k + 1\)</span> edges (<span class="math">\(k\)</span> for <span class="math">\(u\)</span> to the ancestor, <span class="math">\(k\)</span> for <span class="math">\(v\)</span> to the ancestor, and 1 for <span class="math">\(u\)</span> to <span class="math">\(v\)</span>), which forms an odd cycle.<br />Otherwise, if we go through the entire graph without finding an odd cycle, there are no odd cycles. If this is the case, then we can partition the vertices graph into two partitions <span class="math">\(\set{u \in V(G) \middle| \mathrm{dist}(u) \text{ is even}}\)</span> and <span class="math">\(\set{u \in V(G) \middle| \mathrm{dist}(u) \text{ is odd}}\)</span>.</p>
 </blockquote>
 <p><strong>Depth-first search</strong> (DFS) is done in a way very similar to breadth-first search, but with a different visiting mechanism and using a stack rather than a queue.</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> depth_first_search(vertices, adjacency_list):
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> depth_first_search(adjacency_list):
     colors, predecessors = {}, {}
     discovery_time, finish_time = {}, {}
-    <span class="kw">for</span> vertex in vertices:
+    <span class="kw">for</span> vertex in adjacency_list:
         colors[vertex] = <span class="st">&quot;white&quot;</span>
         predecessors[vertex] = <span class="ot">None</span>
     current_time = [<span class="dv">0</span>]
-    <span class="kw">for</span> vertex in vertices:
+    <span class="kw">for</span> vertex in adjacency_list:
         <span class="kw">if</span> colors[vertex] == <span class="st">&quot;white&quot;</span>:
-            visit(vertices, adjacency_list, vertex, colors, predecessors, current_time, discovery_time, finish_time)
+            visit(adjacency_list, vertex, colors, predecessors, current_time, discovery_time, finish_time)
 
-<span class="kw">def</span> visit(vertices, adjacency_list, vertex, colors, predecessors, current_time, discovery_time, finish_time):
+<span class="kw">def</span> visit(adjacency_list, vertex, colors, predecessors, current_time, discovery_time, finish_time):
     colors[vertex] = <span class="st">&quot;gray&quot;</span>
     current_time[<span class="dv">0</span>] += <span class="dv">1</span>
     discovery_time[vertex] = time
     <span class="kw">for</span> neighbor in adjacency_list[vertex]:
         <span class="kw">if</span> colors[neighbor] = <span class="st">&quot;white&quot;</span>:
             predecessors[neighbor] = vertex
-            visit(vertices, adjacency_list, neighbor, colors, predecessors, current_time, discovery_time, finish_time)
+            visit(adjacency_list, neighbor, colors, predecessors, current_time, discovery_time, finish_time)
     colors[vertex] = <span class="st">&quot;black&quot;</span>
     current_time[<span class="dv">0</span>] += <span class="dv">1</span>
     finish_time[vertex] = time</code></pre>
@@ -867,12 +867,72 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
         edge_vertex = N[min_weight_vertex]
         tree_edges.add({min_weight_vertex, edge_vertex})
 
-        <span class="kw">for</span> vertex in vertices - tree_vertices: <span class="co">#</span>
+        <span class="kw">for</span> vertex in vertices - tree_vertices: <span class="co"># look at the vertices in the rest of the graph</span>
             <span class="kw">if</span> weight_function(min_weight_vertex, vertex) &lt; W[vertex]: <span class="co"># new edge has a lower weight than the current one</span>
                 W[vertex] = weight_function(min_weight_vertex, vertex)
                 N[vertex] = min_weight_vertex
     <span class="kw">return</span> (vertices, tree_edges)</code></pre>
 <p>Since we need to check edges <span class="math">\(\Theta(\abs{V})\)</span> times, and each time takes <span class="math">\(O(\abs{V})\)</span> time, this implementation of Prim's algorithm takes <span class="math">\(O(\abs{V}^2)\)</span> time. Alternatively, we could build a heap of all the vertices in <span class="math">\(W\)</span> to compute <code>min_weight_vertex</code> in <span class="math">\(O(\log(\abs{V}))\)</span> time, giving us <span class="math">\(O(\abs{E} \log \abs{V})\)</span>, which is better for sparse graphs (graphs with relatively few edges compared to vertices).</p>
+<h1 id="section-18">18/11/15</h1>
+<p>To prove the correctness of Kruskal's and Prim's algorithm, we will construct a general algorithm of which Kriskal's and Prim's algorithm are special cases of. Proving this algorithm correct will prove both Kruskal's and Prim's algorthms correct.</p>
+<p>A <strong>cut</strong> is a paritition of <span class="math">\(V(G)\)</span> into sets <span class="math">\(S, V \setminus S\)</span> such that both are non-empty. A <strong>crossing edge</strong> with respect to a cut <span class="math">\(S, V \setminus S\)</span> is an edge that has one end in <span class="math">\(S\)</span> and another in <span class="math">\(V \setminus S\)</span>. A cut <span class="math">\(S, V \setminus S\)</span> <strong>respects</strong> a set of edges <span class="math">\(A \subseteq E(G)\)</span> if and only if none of the edges in <span class="math">\(A\)</span> are crossing edges - all edges in <span class="math">\(A\)</span> have vertices that are either both in <span class="math">\(S\)</span> or both in <span class="math">\(V \setminus S\)</span>.</p>
+<p>The general algorithm is as follows:</p>
+<pre><code>def greedy_minimum_spanning_tree(vertices, edges, weight_function):
+    spanning_tree = set()
+    while len(A) &lt; len(vertices) - 1:
+        let `S` and `vertices - S` be a cut that respects `spanning_tree`
+        let `e` be the minimum weight crossing edge
+        spanning_tree.add(edge)
+    return spanning_tree</code></pre>
+<p>Kruskal's algorithm simply has the cut be between two trees being grown in the graph. Prim's algoorithm has the cut be between the tree being grown and the rest of the graph.</p>
+<p>Proof of correctness:</p>
+<blockquote>
+<p>Let <span class="math">\(j = \abs{V} - 1\)</span>. Let <span class="math">\(A = \set{e_1, \ldts, e_j}\)</span> be the set of edges in the spanning tree where the edges are chosen in that order.<br />We will prove that <span class="math">\(A\)</span> is a minimum spanning tree, via induction. For simplicity, we will assume that all of the edge weights are distinct.<br />Clearly, if <span class="math">\(j = 0\)</span> then there is only 1 vertex and the spanning tree has no edges, so <span class="math">\(A\)</span> is a minimum spanning tree.<br />Assume for some <span class="math">\(j\)</span> that <span class="math">\(\set{e_1, \ldots, e_{j - 1}}\)</span> is contained in a minimum spanning tree.<br />So there is a cut <span class="math">\(S, V(G) \setminus S\)</span> such that <span class="math">\(\set{e_1, \ldots, e_{j - 1}}\)</span> respects the cut - <span class="math">\(S\)</span> and <span class="math">\(V \setminus S\)</span> form two trees that span all vertices.<br />In the algorithm, <span class="math">\(e_j\)</span> is chosen to be the minimum weight crossing edge with respect to this cut.<br />If <span class="math">\(e_j\)</span> is in a minimum spanning tree, then <span class="math">\(A\)</span> is a minimum spanning tree. Assume <span class="math">\(e_j\)</span> is not in the minimal spanning tree.<br />Clearly, There is some other crossing edge joining the two trees <span class="math">\(e_j&#39;\)</span> that has lower weight than <span class="math">\(e_j\)</span>. Then the minimum spanning tree has a lower weight than <span class="math">\(A\)</span>, so <span class="math">\(w(e_j&#39;) &lt; w(e_j)\)</span>, a contradiction since <span class="math">\(e_j\)</span> is chosen to be the one with the lowest weight. So <span class="math">\(A\)</span> is a minimum spanning tree.<br />So by induction, the spanning tree is minimal.</p>
+</blockquote>
+<h2 id="shortest-paths">Shortest Paths</h2>
+<p>Given a directed graph <span class="math">\(G\)</span>, a weight function <span class="math">\(w: E(G) \to \mb{R}^+\)</span> (non-negative), and a source/start vertex <span class="math">\(u_0\)</span>, find the shortest directed path <span class="math">\(P\)</span> from <span class="math">\(u_0\)</span> to any vertex <span class="math">\(v\)</span> such that the total weights are minimised - the smallest possible value of <span class="math">\(\sum_{e \in P} w(e)\)</span>. This is called the <strong>single source shortest path problem</strong>.</p>
+<p><strong>Dijkstra's algorithm</strong> (pronounced &quot;diig-stra&quot;) is one algorithm for this problem, structurally very similar to Prim's algorithm.</p>
+<p>Let <span class="math">\(S\)</span> be the subset of vertices for which the shortest path from <span class="math">\(u_0\)</span> to all vertices in <span class="math">\(S\)</span> are known. Let <span class="math">\(D[v]\)</span> where <span class="math">\(v \in S\)</span> be the weight of the shortest path from <span class="math">\(u_0\)</span> to <span class="math">\(v\)</span> such that all vertices on the path are in <span class="math">\(S\)</span>, Let <span class="math">\(D[v]\)</span> where <span class="math">\(v \notin S\)</span>be the weight of the shortest path from <span class="math">\(u_0\)</span> to <span class="math">\(v\)</span> where all the interior vertices of the path (vertices excluding <span class="math">\(u_0\)</span> and <span class="math">\(v\)</span>) are in <span class="math">\(S\)</span>.</p>
+<p>Let <span class="math">\(\pi[v]\)</span> be the predecessor of <span class="math">\(v\)</span> on a path (vertices in this algorithm will only be part of one path at a time).</p>
+<p>Initially <span class="math">\(S = \set{u_0}\)</span> and <span class="math">\(D[v] = w(u_0, v)\)</span> for all <span class="math">\(v\)</span> (edges that don't exist have weight <span class="math">\(\infty\)</span>). At each step, we choose a <span class="math">\(v \in V(G) \setminus S\)</span> such that <span class="math">\(D[v]\)</span> is minimised, add <span class="math">\(v\)</span> to <span class="math">\(S\)</span>, then update <span class="math">\(D\)</span> and <span class="math">\(\pi\)</span> to match:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> compute_paths(vertices, edges, weight_function, start_vertex):
+    visited = {start_vertex}
+    min_path_weights = {start_vertex: <span class="dv">0</span>}
+    predecessors = {}
+    <span class="kw">for</span> vertex in vertices - {start_vertex}:
+        min_path_weights[vertex] = weight_function({start_vertex, vertex})
+        predecessors[vertex] = start_vertex
+
+    <span class="kw">while</span> <span class="dt">len</span>(visited) &lt; <span class="dt">len</span>(vertices):
+        min_weight_vertex = <span class="dt">min</span>(vertices - tree_vertices, key=<span class="kw">lambda</span> vertex: min_path_weights[vertex]) <span class="co"># vertex in the rest of the graph with lowest current path weight</span>
+        visited.add(min_weight_vertex)
+        <span class="kw">for</span> vertex in vertices - tree_vertices: <span class="co"># look at the vertices in the rest of the graph</span>
+            <span class="kw">if</span> min_path_weights[min_weight_vertex] + weight_function(min_weight_vertex, vertex) &lt; min_weight_vertex[vertex]: <span class="co"># new vertex has lower path weight than the current one</span>
+                min_path_weights[vertex] = min_path_weights[min_weight_vertex] + weight_function(min_weight_vertex, vertex)
+                predecessors[vertex] = min_weight_vertex
+    
+    <span class="kw">return</span> predecessors
+
+<span class="kw">def</span> shortest_path(start_vertex, end_vertex, predecessors):
+    path = [start_vertex]
+    vertex = start_vertex
+    <span class="kw">while</span> vertex != start_vertex:
+        vertex = predecessors[vertex]
+        path.append(vertex)
+    <span class="kw">return</span> path</code></pre>
+<p>Since this is structurally so similar to Prim's algorithm, it has the same time complexity, <span class="math">\(O(\abs{V(G)}^2)\)</span> for the above implementation or <span class="math">\(O(\abs{E(G)} \log \abs{V(G)})\)</span> for a heap-based version.</p>
+<p>This works because <span class="math">\(D\)</span> has the weight of the shortest path from <span class="math">\(u_0\)</span> to any vertex <span class="math">\(v_k in \)</span>S<span class="math">\(, and then we compute, step by step, the best paths from \)</span>v_k$ to <span class="math">\(v\)</span>. Basically, <span class="math">\(D\)</span> keeps track of all the possible candidate paths until we get to <span class="math">\(v\)</span>.</p>
+<p>The Bellman-Ford algorithm can also solve the single-source path problem, but <strong>also supports negative weights</strong>, as long as there are no negative weight cycles (cycles whose edge weight sum is negative). This runs in <span class="math">\(\O(\abs{E(G)} \abs{V(G)})\)</span>.</p>
+<p>We might think that adding a constant offset to all the negative weights (to make them positive) would allow us to find the shortest paths using the algorithms we've seen so far. However, there exist graphs with negative weights such that if we add a constant offset, the shortest path changes.</p>
+<p>If there are <strong>no cycles in the graph</strong> (a DAG), there is an algorithm that can find the shortest path even if there are negative weight edges, and running more efficiently than the Bellman-Ford algorithm (see slide 160 for code).</p>
+<p>The <strong>all-pairs shortest path problem</strong> is to find the shortest path between all pairs of vertices in the graph, allowing negative weight edges but not negative weight cycles. We can solve this by running the Bellman-Ford algorithm on each vertex, but the Floyd-Warshall algorithm can do it in <span class="math">\(O(n^3)\)</span>, using a dynamic-programming-like technique (see slide 164 for code):</p>
+<p><span class="math">\(D_m[i, j]\)</span> denotes the weight of the shortest path from <span class="math">\(i\)</span> to <span class="math">\(j\)</span> such that the interior vertices of the path (vertices excluding <span class="math">\(i\)</span> and <span class="math">\(j\)</span>) are in <span class="math">\(\set{1, \ldots, m}\)</span>. At each step, we check our candidate path <span class="math">\(D_m[i, m] + D[m, j]\)</span> against the old best path <span class="math">\(D_m[i, j]\)</span>:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> shortest_path(vertices, edges, weight_function):
+    min_weight_path = [[[[<span class="dt">float</span>(<span class="st">&quot;inf&quot;</span>)] * <span class="dt">len</span>(vertices)] <span class="kw">for</span> _ in vertices] <span class="kw">for</span> _ in vertices] <span class="co"># 3D array of size $n$ by $n$ by $n$:</span>
+    <span class="kw">for</span> m in <span class="dt">range</span>(<span class="dt">len</span>(vertices)):
+        <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dt">len</span>(vertices)):
+            <span class="kw">for</span> j in <span class="dt">range</span>(<span class="dt">len</span>(vertices)):
+                D[m][i][j] = <span class="dt">min</span>(D[m - <span class="dv">1</span>][i][j], D[m - <span class="dv">1</span>][i][m] + D[m - <span class="dv">1</span>][m][j])</code></pre>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
