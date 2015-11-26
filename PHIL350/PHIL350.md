@@ -552,3 +552,62 @@ What do psychological experiments say about knowing-that vs. knowing-how? We wan
 Know-how seems to have a non-cognitive nature. Experimentally, Bengson/Moffett/Wright try to test whether people think knowing-that is different from knowing-how.
 
 People were presented with a case where someone is able to teach someone else how to do stunts without ever being able to do them themselves. When asked, most of them judged that the person had know-how but didn't have ability.
+
+# 23/11/15
+
+Readings: Longino, Okruhlik
+
+Bias
+----
+
+Previously, Quine and Kim said that epistemology is a branch of science similar to cognitive science and psychology - objective science is the best way to obtain objective knowledge about the world. Science reliad on observations that everyone can evaluate, and hypotheses that the public can scrutinize.
+
+Longino and Okruhlik disagree that science is an objective activity. Longino says that objectivity depends on how scientific communities are organized, while Okruhlik says that in some areas we aren't objective.
+
+**Outcome objectivity** is the extent that science accurately and truly describe the world, while **methods objectivity** is the extent that the methods and processes of science are not arbitrary,
+
+According to Longino, people often think science is outcome objective because it is methods objective. But is science actually methods objective? Are the processes used in science free of bias and prejudice? Since methods objectivity seems to imply outcome objectivity, we will look at methods objectivity.
+
+The positivist scientific method involves **discovery** (coming up with ideas), followed by **justification** (evaluate how well evidence supports those ideas). Discovery is notably not objective, since the ideas we pursue are heavily influenced by what we're interested by, and what funding is available for - **contextual values**. In contrast, justification is supposed to be entirely objective, free of psychology or personal preference.
+
+Longino says that scientists have different ideas as to what counts as evidence, depending on their background beliefs and assumptions. In other words, evidence itself is subjective and contextual, and this subjectivity influences which hypotheses get onfirmed. 
+
+Okruhlik talks specifically about contextual gender values - how gender influences background asumptions and values, and how it affects science. One example she gives is the "sleeping beauty/prince charming" model of human reproduction, where the egg cell waits around for sperm cells to reach it and activate it - textbooks subtly describe the way reproduction works in a way consistent with gender norms.
+
+In other words, the stereotype that women are somehow more "passive" and men more "active" influences what we see under the microscope. The language in textbooks seems to reflect this; consider "the sperm cell penetrates the egg cell", versus "the egg cell draws the sperm cell in".
+
+If we want to fix this, we need to recognize that scientific methods are subject to contextual values, and that sexist beliefs play a role in research. Does this make all of science subjective? Do these cases indicate that science itself is sexist, or are they just isolated incidents?
+
+According to **feminist empiricism**, science is objective by virtue of its methods - following the rules of science leads to good science, and although the discovery phase is subjective, the justification phase is not.
+
+According to **standpoint epistemology**, contextual values are an essential part of science, and having the right ones lead to good science - scientists that have certain beliefs and values, like valuing explanatory power, do more objective science.
+
+According to **feminist post-modernism**, science is not objective, and no view is more valid than another - science is just one possible story, and one cannot judge either way.
+
+Longino and Okruhlik promote a standpoint between feminist empiricism and standpoint epistemology: science is not objective due to contextual values, which are always present, but we can improve objectivity by changing the social organisation of science. Social organisation can change contextual values when they are bad - we can organize science to encourage **transformative criticism** of bad contextual values (such as values that have too many background assumptions).
+
+In other words, science can be more objective by organizing it to best promote criticism of beliefs, theories, and contextual values. Objectivity is a property of a community of scientists that have different viewpoints - a greater number of more varied viewpoints mean more objectivity. Okruhlik says that the deficiencies of different contextual values cancel each other out when put together.
+
+# 25/11/15
+
+The final exam is basically a subset of the questions from the study guide (posted on LEARN) and from the questions at the beginning of each set of slides. On the final we choose a subset of those questions, which we choose several to answer.
+
+The **empiricists** argue that science is in fact objective and value-free, as long as the methods are followed correctly. In other words, the quality of science done doesn't depend on the beliefs/experiences/values/etc. that one has.
+
+If this is the case, why does diversity improve the objectivity of science? There is some evidence that suggests this is the case.
+
+According to Sandra Harding, women have an advantage over men, because there are fewer distorting contextual beliefs, and those beliefs are more in tune with reality - so if we did science from the standpoint of women, we would have more objective science.
+
+According to Logino, this is because the woman's standpoint values more complex relationships, applicability to human needs, novelty, and more.
+
+Longino and Okruhlik reject feminist empiricism, but still think science can be objective. They say that viewpoints do matter, but it is impossible to eliminate contextual values from science. Instead, we add more values by increasing diversity and allow existing values to be criticized.
+
+Longino and Okruhlik say that contextual values often affect us involuntarily, and without us being consciously aware of them - these are our **implicit biases**.Popular questions in psychology are how to detect these impliit biases and how they cause people to behave differently.
+
+The **implicit association test** is a well-known psychological bias test that is very successful in determining their attitudes. It tests people's reaction times in linking together different concepts. For example, one version showed pictures of objects and several categories that participants could sort them into. Initially the categories would be harmless vs. dangerous, then African-American vs. European-American, and then "African-American or harmles vs. European-American or dangerous" and "African-American or dangerous vs. European-American or harmless". The last two categories either conform or don't to certain social stereotypes, and measuring the reaction times in answering these tells us about one's impliit biases (empirically, people have low reaction times when the associations are consistent with stereotypes, like "European-American vs. harmless").
+
+Implicit association tests for race showed that 88% of white Americans and 48% of black Americansshow implicit bias in favor of white people. This manifests in the real world in often unpredictable ways, such as resumes with "stereotypically white" getting 50% more employer responses compared to resumes with "stereotypically black" people, even when all of the resumes are otherwise identical. When bus riders asked to ride for free due to lack of funds, bus drivers allowed white/asian people to 72% of the time, indian people 50% of the time, and black people only 36% of the time.
+
+That means that there are significant differences in opportunity based on race, even after we control for factors like explicit beliefs/biases.
+
+Also, biases influence scientists studying biases. Scientists sent fake studies, some finding bias, some not, were asked to evaluate those studies. Women scientists tended to find research that suggests there are biases toward men of slightly higher quality than research showing no bias, while men scientists tended to find the opposite.

@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -697,6 +697,10 @@ DISPLAY_ISR
 <p>Registers are always clocked and always have their output enabled. We control data flow by asserting control signals based on the value of registers and memory.</p>
 <h1 id="section-27">20/11/15</h1>
 <p>Continuing the previous processor datapath descriptions, for each type of instruction.</p>
+<h1 id="section-28">23/11/15</h1>
+<p>There are several processor control signals in the block diagram. We use combinatorial logic to control these - logic that should accept the current stage of execution, and output all the relevant control signals as necessary, based on the instruction and condition flags.</p>
+<p>A pipelines procesor has a very similar design to a non-pipelined one, but data moves along like an assembly line. At each step in the execution of instructions, each instruction moves ahead by one stage. Basically, each step buffers all of its signals to the next stage, including control signals needed to finish executing the instruction.</p>
+<p>A pipelined processor stlll has each execution step take one clock cycle, but loads the next instruction into stage 1 while the current one is in stage 2, loads the next instruction into stage 2 while the current one is in stage 3, and so on - the instructions move past the stages in a pipeline, and different stages of different instructions can be executed in parallel, greatly improving maximum speed.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
