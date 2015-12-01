@@ -828,10 +828,10 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>We now define <span class="math">\(\operatorname{find}(v)\)</span> to be the root of the tree containing the vertex <span class="math">\(v\)</span>, and implement it by repeatedly checking <span class="math">\(L\)</span>. Testing if an edge causes a cycle is the same as checking if the edge <span class="math">\(\set{u, v}\)</span> has <span class="math">\(u, v\)</span> in two different trees - if <span class="math">\(\operatorname{find}(u) = \operatorname{find}(v)\)</span>. So we add an edge <span class="math">\(\set{u, v}\)</span> if and only if <span class="math">\(\operatorname{find}(u) \ne \operatorname{find}(v)\)</span>.</p>
 <p>As it turns out, if we ensure that the depth of the tree containing <span class="math">\(u\)</span> is less than the depth of the tree containing <span class="math">\(v\)</span> when adding the entry <span class="math">\(L[v] = u\)</span>, we can ensure that <span class="math">\(\operatorname{find}\)</span> is always <span class="math">\(\Theta(\log(\abs{E}))\)</span>.</p>
 <p><span class="math">\(L\)</span> is a type of data structure called a <strong>union-find/merge-find</strong> data structure, because it has a find operation and a union/merge (setting the leader/parent of a vertex) operation.</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> spanning_tree(vertices, edges, weight_function):
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> spanning_tree(vertices, edges, weights):
     leaders = <span class="dt">list</span>(<span class="dt">range</span>(<span class="dt">len</span>(vertices)))
     tree_edges = <span class="dt">set</span>()
-    <span class="kw">for</span> edge in <span class="dt">sorted</span>(edges, key=weight_function):
+    <span class="kw">for</span> edge in <span class="dt">sorted</span>(edges, key=<span class="kw">lambda</span> edge: weights[edge]):
         vertex1_root, vertex1_depth = find(edge[<span class="dv">0</span>], leaders)
         vertex2_root, vertex2_depth = find(edge[<span class="dv">1</span>], leaders)
         <span class="kw">if</span> vertex1_root != vertex2_root:
@@ -854,12 +854,12 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>Basically, we define a tree <span class="math">\(A\)</span>, and starting from an arbitrary vertex <span class="math">\(u_0\)</span>, we repeatedly add the lowest-weight edge that connects a vertex in <span class="math">\(A\)</span> to a vertex not in <span class="math">\(A\)</span> to <span class="math">\(A\)</span>.</p>
 <p>Let <span class="math">\(V_A\)</span> be the set of vertices that are incident to edges in <span class="math">\(A\)</span>. Let <span class="math">\(N[v]\)</span> be a vertex <span class="math">\(u \in V_A\)</span> where <span class="math">\(\set{u, v}\)</span> is a minimum weight edge. Let <span class="math">\(W[v] = w(N[v], v)\)</span> - the best possible choice we can make at any vertex.</p>
 <p>This is a pretty standard greedy algorithm.</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> spanning_tree(vertices, edges, weight_function):
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> spanning_tree(vertices, edges, weights):
     tree_edges = <span class="dt">set</span>()
     start_vertex = vertices[<span class="dv">0</span>]
     tree_vertices = {start_vertex}
     <span class="kw">for</span> vertex in vertices - {start_vertex}:
-        W[vertex] = weight_function({start_vertex, vertex})
+        W[vertex] = weights[{start_vertex, vertex}]
         N[vertex] = start_vertex
 
     <span class="kw">while</span> <span class="dt">len</span>(tree_edges) &lt; <span class="dt">len</span>(vertices) - <span class="dv">1</span>:
@@ -869,8 +869,8 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
         tree_edges.add({min_weight_vertex, edge_vertex})
 
         <span class="kw">for</span> vertex in vertices - tree_vertices: <span class="co"># look at the vertices in the rest of the graph</span>
-            <span class="kw">if</span> weight_function(min_weight_vertex, vertex) &lt; W[vertex]: <span class="co"># new edge has a lower weight than the current one</span>
-                W[vertex] = weight_function(min_weight_vertex, vertex)
+            <span class="kw">if</span> weights[min_weight_vertex, vertex] &lt; W[vertex]: <span class="co"># new edge has a lower weight than the current one</span>
+                W[vertex] = weights[min_weight_vertex, vertex]
                 N[vertex] = min_weight_vertex
     <span class="kw">return</span> (vertices, tree_edges)</code></pre>
 <p>Since we need to check edges <span class="math">\(\Theta(\abs{V})\)</span> times, and each time takes <span class="math">\(O(\abs{V})\)</span> time, this implementation of Prim's algorithm takes <span class="math">\(O(\abs{V}^2)\)</span> time. Alternatively, we could build a heap of all the vertices in <span class="math">\(W\)</span> to compute <code>min_weight_vertex</code> in <span class="math">\(O(\log(\abs{V}))\)</span> time, giving us <span class="math">\(O(\abs{E} \log \abs{V})\)</span>, which is better for sparse graphs (graphs with relatively few edges compared to vertices).</p>
@@ -878,7 +878,7 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>To prove the correctness of Kruskal's and Prim's algorithm, we will construct a general algorithm of which Kriskal's and Prim's algorithm are special cases of. Proving this algorithm correct will prove both Kruskal's and Prim's algorthms correct.</p>
 <p>A <strong>cut</strong> is a paritition of <span class="math">\(V(G)\)</span> into sets <span class="math">\(S, V \setminus S\)</span> such that both are non-empty. A <strong>crossing edge</strong> with respect to a cut <span class="math">\(S, V \setminus S\)</span> is an edge that has one end in <span class="math">\(S\)</span> and another in <span class="math">\(V \setminus S\)</span>. A cut <span class="math">\(S, V \setminus S\)</span> <strong>respects</strong> a set of edges <span class="math">\(A \subseteq E(G)\)</span> if and only if none of the edges in <span class="math">\(A\)</span> are crossing edges - all edges in <span class="math">\(A\)</span> have vertices that are either both in <span class="math">\(S\)</span> or both in <span class="math">\(V \setminus S\)</span>.</p>
 <p>The general algorithm is as follows:</p>
-<pre><code>def greedy_minimum_spanning_tree(vertices, edges, weight_function):
+<pre><code>def greedy_minimum_spanning_tree(vertices, edges, weights):
     spanning_tree = set()
     while len(A) &lt; len(vertices) - 1:
         let `S` and `vertices - S` be a cut that respects `spanning_tree`
@@ -896,20 +896,20 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>Let <span class="math">\(S\)</span> be the subset of vertices for which the shortest path from <span class="math">\(u_0\)</span> to all vertices in <span class="math">\(S\)</span> are known. Let <span class="math">\(D[v]\)</span> where <span class="math">\(v \in S\)</span> be the weight of the shortest path from <span class="math">\(u_0\)</span> to <span class="math">\(v\)</span> such that all vertices on the path are in <span class="math">\(S\)</span>, Let <span class="math">\(D[v]\)</span> where <span class="math">\(v \notin S\)</span>be the weight of the shortest path from <span class="math">\(u_0\)</span> to <span class="math">\(v\)</span> where all the interior vertices of the path (vertices excluding <span class="math">\(u_0\)</span> and <span class="math">\(v\)</span>) are in <span class="math">\(S\)</span>.</p>
 <p>Let <span class="math">\(\pi[v]\)</span> be the predecessor of <span class="math">\(v\)</span> on a path (vertices in this algorithm will only be part of one path at a time).</p>
 <p>Initially <span class="math">\(S = \set{u_0}\)</span> and <span class="math">\(D[v] = w(u_0, v)\)</span> for all <span class="math">\(v\)</span> (edges that don't exist have weight <span class="math">\(\infty\)</span>). At each step, we choose a <span class="math">\(v \in V(G) \setminus S\)</span> such that <span class="math">\(D[v]\)</span> is minimised, add <span class="math">\(v\)</span> to <span class="math">\(S\)</span>, then update <span class="math">\(D\)</span> and <span class="math">\(\pi\)</span> to match:</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> compute_paths(vertices, edges, weight_function, start_vertex):
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> compute_paths(vertices, edges, weights, start_vertex):
     visited = {start_vertex}
     min_path_weights = {start_vertex: <span class="dv">0</span>}
     predecessors = {}
     <span class="kw">for</span> vertex in vertices - {start_vertex}:
-        min_path_weights[vertex] = weight_function({start_vertex, vertex})
+        min_path_weights[vertex] = weights[{start_vertex, vertex}]
         predecessors[vertex] = start_vertex
 
     <span class="kw">while</span> <span class="dt">len</span>(visited) &lt; <span class="dt">len</span>(vertices):
         min_weight_vertex = <span class="dt">min</span>(vertices - tree_vertices, key=<span class="kw">lambda</span> vertex: min_path_weights[vertex]) <span class="co"># vertex in the rest of the graph with lowest current path weight</span>
         visited.add(min_weight_vertex)
         <span class="kw">for</span> vertex in vertices - tree_vertices: <span class="co"># look at the vertices in the rest of the graph</span>
-            <span class="kw">if</span> min_path_weights[min_weight_vertex] + weight_function(min_weight_vertex, vertex) &lt; min_weight_vertex[vertex]: <span class="co"># new vertex has lower path weight than the current one</span>
-                min_path_weights[vertex] = min_path_weights[min_weight_vertex] + weight_function(min_weight_vertex, vertex)
+            <span class="kw">if</span> min_path_weights[min_weight_vertex] + weights[{min_weight_vertex, vertex}] &lt; min_weight_vertex[vertex]: <span class="co"># new vertex has lower path weight than the current one</span>
+                min_path_weights[vertex] = min_path_weights[min_weight_vertex] + weights[{min_weight_vertex, vertex}]
                 predecessors[vertex] = min_weight_vertex
     
     <span class="kw">return</span> predecessors
@@ -928,7 +928,7 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <p>If there are <strong>no cycles in the graph</strong> (a DAG), there is an algorithm that can find the shortest path even if there are negative weight edges, and running more efficiently than the Bellman-Ford algorithm (see slide 160 for code).</p>
 <p>The <strong>all-pairs shortest path problem</strong> is to find the shortest path between all pairs of vertices in the graph, allowing negative weight edges but not negative weight cycles. We can solve this by running the Bellman-Ford algorithm on each vertex, but the Floyd-Warshall algorithm can do it in <span class="math">\(O(n^3)\)</span>, using a dynamic-programming-like technique (see slide 164 for code):</p>
 <p><span class="math">\(D_m[i, j]\)</span> denotes the weight of the shortest path from <span class="math">\(i\)</span> to <span class="math">\(j\)</span> such that the interior vertices of the path (vertices excluding <span class="math">\(i\)</span> and <span class="math">\(j\)</span>) are in <span class="math">\(\set{1, \ldots, m}\)</span>. At each step, we check our candidate path <span class="math">\(D_m[i, m] + D[m, j]\)</span> against the old best path <span class="math">\(D_m[i, j]\)</span>:</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> shortest_path(vertices, edges, weight_function):
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> shortest_path(vertices, edges, weights):
     min_weight_path = [[[[<span class="dt">float</span>(<span class="st">&quot;inf&quot;</span>)] * <span class="dt">len</span>(vertices)] <span class="kw">for</span> _ in vertices] <span class="kw">for</span> _ in vertices] <span class="co"># 3D array of size $n$ by $n$ by $n$:</span>
     <span class="kw">for</span> m in <span class="dt">range</span>(<span class="dt">len</span>(vertices)):
         <span class="kw">for</span> i in <span class="dt">range</span>(<span class="dt">len</span>(vertices)):
@@ -970,14 +970,80 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
 <li>Initialize <span class="math">\(F&#39;\)</span> as an empty set.</li>
 <li>For each clause <span class="math">\(C = \set{x_{i_1}, \ldots, x_{i_k}}\)</span> in <span class="math">\(F\)</span> (each sum in the product of sums):
 <ol style="list-style-type: decimal">
-<li>If <span class="math">\(\abs{C} = 1\)</span>, add the clauses <span class="math">\(x_{i_1} \vee a_1 \vee a_2, x_{i_1} \vee a_1 \vee \neg a_2, x_{i_1} \vee \neg a_1 \vee a_2, x_{i_1} \vee \neg a_1 \vee \neg a_2\)</span> to <span class="math">\(F&#39;\)</span>, where <span class="math">\(a_1, a_2\)</span> are new, unused variables (these should not used in any other clauses).</li>
-<li>If <span class="math">\(\abs{C} = 2\)</span>, add the clauses <span class="math">\(x_{i_1} \vee x_{i_2} \vee c, x_{i_1} \vee x_{i_2} \vee \neg a\)</span> to <span class="math">\(F&#39;\)</span>, where <span class="math">\(a\)</span> is a new, unused variable (this should not be used in any other clauses).</li>
-<li>If <span class="math">\(\abs{C} = 3\)</span>, add this clause to <span class="math">\(F&#39;\)</span>.</li>
-<li>If <span class="math">\(\abs{C} &gt; 3\)</span>, add <span class="math">\(\abs{C} - 2\)</span> clauses <span class="math">\(a_1 \vee a_2 \vee x{i_1}, a_3 \vee \neg x_{i_1} \vee x_{i_2}, a_4 \vee \neg x_{i_2} \vee x_{i_3}, a_5 \vee \neg x_{i_3} \vee x_{i_4}, \ldots, a_{k - 2} \vee \neg x_{i_{k - 4}} \vee x_{i_{k - 3}}, a_{k - 1} \vee a_k \vee \neg x_{i_{k - 3}}\)</span> to <span class="math">\(F&#39;\)</span> where <span class="math">\(a_1, \ldots, a_k\)</span> are new, unused variables (these should not be used in any other clauses).</li>
+<li>If <span class="math">\(\abs{C} = 1\)</span>, add the clauses <span class="math">\(x_{i_1} \vee a_1 \vee a_2, x_{i_1} \vee a_1 \vee \neg a_2, x_{i_1} \vee \neg a_1 \vee a_2, x_{i_1} \vee \neg a_1 \vee \neg a_2\)</span> to <span class="math">\(F&#39;\)</span>, where <span class="math">\(a_1, a_2\)</span> are new, unused variables (these should not used in any other clauses).
+<ul>
+<li>This is clearly true since the clauses evaluate to <span class="math">\(x_{i_1}\)</span> regardless of the values of <span class="math">\(a_1, a_2\)</span>.</li>
+</ul></li>
+<li>If <span class="math">\(\abs{C} = 2\)</span>, add the clauses <span class="math">\(x_{i_1} \vee x_{i_2} \vee c, x_{i_1} \vee x_{i_2} \vee \neg a\)</span> to <span class="math">\(F&#39;\)</span>, where <span class="math">\(a\)</span> is a new, unused variable (this should not be used in any other clauses).
+<ul>
+<li>In the same way as above, regardless of the value of the variable, the clauses are always satisfiable if and only if <span class="math">\(C\)</span> is.</li>
+</ul></li>
+<li>If <span class="math">\(\abs{C} = 3\)</span>, add this clause to <span class="math">\(F&#39;\)</span>.
+<ul>
+<li>This clause is already a valid 3SAT clause.</li>
+</ul></li>
+<li>If <span class="math">\(\abs{C} &gt; 3\)</span>, add <span class="math">\(\abs{C} - 2\)</span> clauses <span class="math">\(a_1 \vee a_2 \vee x{i_1}, a_3 \vee \neg x_{i_1} \vee x_{i_2}, a_4 \vee \neg x_{i_2} \vee x_{i_3}, a_5 \vee \neg x_{i_3} \vee x_{i_4}, \ldots, a_{k - 2} \vee \neg x_{i_{k - 4}} \vee x_{i_{k - 3}}, a_{k - 1} \vee a_k \vee \neg x_{i_{k - 3}}\)</span> to <span class="math">\(F&#39;\)</span> where <span class="math">\(a_1, \ldots, a_k\)</span> are new, unused variables (these should not be used in any other clauses).
+<ul>
+<li>We can prove this is correct by proving that <span class="math">\(C\)</span> being satisfiable implies the added clauses are satisfiable (via direct proof), and if the added clauses are satifiable, <span class="math">\(C\)</span> is also satisfiable (via contradiction).</li>
+</ul></li>
 </ol></li>
+<li>After this is done, <span class="math">\(F&#39;\)</span> is an instance of 3SAT that is a yes-instance if and only if <span class="math">\(F\)</span> is a yes-instance of <span class="math">\(F\)</span>.</li>
 </ol>
 <p>Since the transformation runs in polynomial time, 3SAT is in NP and <span class="math">\(\text{SAT} \le_P \text{3SAT}\)</span>, so 3SAT is NP-complete as well.</p>
 <p>We can also prove that 2SAT/2-CNF-satisfiability problem (same as SAT, but <span class="math">\(F\)</span> is a problem of sums where every sum has exactly 2 variables, all different) is in P.</p>
+<h1 id="section-21">30/11/15</h1>
+<p>On computers, we can represent SAT problem instances with an <span class="math">\(m\)</span> by <span class="math">\(n\)</span> matrix <span class="math">\(M\)</span> (where <span class="math">\(n\)</span> is the number of variables and <span class="math">\(m\)</span> is the number of clauses), where rows represent clauses <span class="math">\(C_1, \ldots, C_m\)</span>, and columns represent variables <span class="math">\(x_1, \ldots, x_n\)</span>. Each cell <span class="math">\(M_{i, j}\)</span>, then represents whether <span class="math">\(x_j\)</span> is in the clause <span class="math">\(C_i\)</span> as a literal (represented by 1), in the clause <span class="math">\(C_i\)</span> negated as a literal (represented by -1), or not in the clause at all (represented by 0).</p>
+<p>Clearly, the size of the problem instance <span class="math">\(M\)</span> is <span class="math">\(\Theta(mn)\)</span>, and <span class="math">\(m\)</span> can grow exponentially with respect to <span class="math">\(n\)</span>. The algorithm that converts instances of SAT to 3SAT runs in polynomial time with respect to the size of the instance, <span class="math">\(\Theta(mn)\)</span>, and so is a polynomial transformation.</p>
+<p>We've been talking about <strong>decision problems</strong> all this time, but now we want to also look at problems in general.</p>
+<p>Given a problem <span class="math">\(\Pi\)</span> (not necessarily a decision problem), an <strong>oracle</strong> for <span class="math">\(\Pi\)</span> is an (possibly hypothetical) algorithm <span class="math">\(A\)</span> that solves it.</p>
+<p>Given another problem <span class="math">\(\Pi&#39;\)</span>, an algorithm <span class="math">\(A&#39;\)</span> is a <strong>Turing reduction</strong> from <span class="math">\(\Pi&#39;\)</span> to <span class="math">\(\Pi\)</span> if and only if it solves <span class="math">\(\Pi&#39;\)</span> using <span class="math">\(A\)</span> as a subroutine (<span class="math">\(A&#39;\)</span> depends on <span class="math">\(A\)</span> to work, so <span class="math">\(A\)</span> is the solver). A Turing reduction is sort of like a generalization of the concept of polynomial transformations to all problems. We can say that a Turing reduction exists by writing <span class="math">\(\Pi&#39; \le^T \Pi\)</span>.</p>
+<p>A Turing reduction <span class="math">\(A&#39;\)</span> using <span class="math">\(A\)</span> as the solver is a <strong>polynomial-time Turing reduction</strong> if and only if <span class="math">\(A&#39;\)</span> has polynomial running time with respect to the running time of <span class="math">\(A\)</span>. If this is the case, we can write <span class="math">\(\Pi&#39; \le_P^T \Pi\)</span>.</p>
+<p>Basically, if there is a polynomial-time Turing reduction <span class="math">\(\Pi&#39; \le_P^T \Pi\)</span> and <span class="math">\(\Pi\)</span> can be solved in polynomial time, then <span class="math">\(\Pi&#39;\)</span> can also be solved in polynomial time.</p>
+<p>Turing reductions are interesting because it seems like we can reduce harder versions of problems into simpler versions.</p>
+<p>A travelling salesperson problem (TSP) involves finding paths in a graph with weighted edges such that the total weight is minimized.</p>
+<p>Given a graph <span class="math">\(G\)</span> and edge weights <span class="math">\(w: E(G) \to \mb{Z}^+\)</span>, what is a Hamiltonian cycle <span class="math">\(H\)</span> in <span class="math">\(G\)</span> that minimises <span class="math">\(\sum_{e \in H} w(e)\)</span>? This is the <strong>TSP-optimisation</strong> problem.</p>
+<p>Given a graph <span class="math">\(G\)</span> and edge weights <span class="math">\(w: E(G) \to \mb{Z}^+\)</span>, what is the smallest <span class="math">\(\sum_{e \in H} w(e)\)</span> where <span class="math">\(H\)</span> is a Hamiltonian cycle in <span class="math">\(G\)</span>? This is the <strong>TSP-optimal-value</strong> problem.</p>
+<p>Given a graph <span class="math">\(G\)</span> and edge weights <span class="math">\(w: E(G) \to \mb{Z}^+\)</span> and a positive integer <span class="math">\(T\)</span>, is there a Hamiltonian cycle <span class="math">\(H\)</span> in <span class="math">\(G\)</span> such that <span class="math">\(\sum_{e \in H} w(e) \le T\)</span>? This is the <strong>TSP-decision</strong> problem.</p>
+<p>Clearly, <span class="math">\(\text{TSP-decision} \le_P^T \text{TSP-optimal-value} \le_P^T \text{TSP-optimisation}\)</span>:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> tsp_optimisation(vertices, edges, weights):
+    <span class="kw">pass</span> <span class="co"># suppose we are given this algorithm, and it returns a list of edges (or `None` if there are no Hamiltonian cycles)</span>
+
+<span class="kw">def</span> tsp_optimal_value(vertices, edges, weights):
+    hamiltonian_cycle = tsp_optimisation(vertices, edges, weights)
+    <span class="kw">if</span> hamiltonian_cycle is <span class="ot">None</span>: <span class="kw">return</span> <span class="ot">None</span>
+    <span class="kw">return</span> <span class="dt">sum</span>(weights[edge] <span class="kw">for</span> edge in hamiltonian_cycle)
+
+<span class="kw">def</span> tsp_decision(vertices, edges, weights, threshold):
+    <span class="kw">return</span> tsp_optimal_value(vertices, edges, weights) &lt;= threshold</code></pre>
+<p>However, it is also true that <span class="math">\(\text{TSP-optimisation} \le_P^T \text{TSP-optimal-value} \le_P^T \text{TSP-decision}\)</span>! In other words, if we have a polynomial time algorithm for TSP-decision, we can solve TSP-optimal-value in polynomial time, and if we have a polynomial time algorithm for TSP-optimal-value, we can solve TSP-optimisation in polynomial time:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> tsp_decision(vertices, edges, weights, threshold):
+    <span class="kw">pass</span> <span class="co"># suppose we are given this algorithm, and it returns `True` or `False`</span>
+
+<span class="kw">def</span> tsp_optimal_value(vertices, edges, weights):
+    <span class="co"># basically, we do a binary search for the exact total weight of the Hamiltonian cycle</span>
+    low, high = <span class="dv">0</span>, <span class="dt">sum</span>(weights[edge] <span class="kw">for</span> edge in edges)
+    <span class="kw">if</span> tsp_decision(vertices, edges, weights, high): <span class="kw">return</span> <span class="dt">float</span>(<span class="st">&quot;inf&quot;</span>)
+    <span class="kw">while</span> low &lt; high:
+        middle = floor((low + high) / <span class="dv">2</span>)
+        <span class="kw">if</span> tsp_decision(vertices, edges, weights, middle):
+            high = middle
+        <span class="kw">else</span>:
+            low = middle + <span class="dv">1</span>
+    <span class="kw">return</span> high
+
+<span class="kw">def</span> tsp_optimisation(vertices, edges, weights):
+    <span class="co"># repeatedly remove edges whose removal doesn&#39;t increase the optimal total weight (removing edges can never lower the optimal total weight)</span>
+    lowest_total_weight = tsp_optimal_value(vertices, edges, weights)
+    <span class="kw">if</span> lowest_total_weight == <span class="dt">float</span>(<span class="st">&quot;inf&quot;</span>): <span class="kw">return</span> <span class="ot">None</span>
+    lowest_weight = lowest_total_weight
+    hamiltonian_cycle = <span class="dt">set</span>()
+    new_weights = <span class="dt">dict</span>(weights)
+    <span class="kw">for</span> edge in edges:
+        new_weights[edge] = <span class="dt">float</span>(<span class="st">&quot;inf&quot;</span>) <span class="co"># remove edge by making it have infinite weight</span>
+        <span class="kw">if</span> not tsp_decision(vertices, edges, new_weights, lowest_total_weight):
+            new_weights[edge] = weights[edge] <span class="co"># restore the edge, since it&#39;s part of the optimal edge</span>
+            hamiltonian_cycle.add(edge)</code></pre>
+<p>In summary, <span class="math">\(\text{subset-sum} \le_P^T \text{vertex-cover} \le_P^T \text{clique} \le_P^T \text{3SAT} \le_P^T \text{SAT}\)</span> - these are well-known NP-complete problems.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

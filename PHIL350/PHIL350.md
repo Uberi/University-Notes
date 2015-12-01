@@ -482,7 +482,7 @@ Alson admits that we do seem to have some sort of control over the long term of 
 
 It is commonly accepted that what we ought to do is limited by what we can do - "ought implies can" (OIC). If we have a moral obligation to do something, then we must have the ability to do it - promises are not binding if fulfilling them is impossible. This is widely accepted in modern philosophy and appears in everything from arguments about free will to moral dilemmas.
 
-However, most arguments defending OIC appeal to intuition or common sense, or just say that it seems obvious. However, do perceptions of someone's ability affect whether they are morally obligated? How do moral obligations 
+However, most arguments defending OIC appeal to intuition or common sense, or just say that it seems obvious. However, do perceptions of someone's ability affect whether they are morally obligated?
 
 Consider someone says they would do something, but is unable to because of a traffic accident, and is therefore physically unable to do it. Consider a similar situation, where someone says that they would do something, but is unable to due to clinical depression, and is therefore psychologically unable to do it.
 
@@ -501,8 +501,6 @@ Someone sees that there is a particular chance of rain at an outdoor event the n
 Another experiment tested perceptual evidence vs. inferential evidence, and seemed to imply that perceptual evidence results in less voluntary beliefs - when the person actually saw it was raining, people were less likely to think that the person believes it will not rain.
 
 Overall, the experiments implied that beliefs can be voluntary, and that the strength of evidence doesn't significantly affect whether voluntary beliefs are formed.
-
-;wip: critical response topic: blame is from how hard they try to do something, obligation is based on ability
 
 # 16/11/15
 
@@ -611,3 +609,40 @@ Implicit association tests for race showed that 88% of white Americans and 48% o
 That means that there are significant differences in opportunity based on race, even after we control for factors like explicit beliefs/biases.
 
 Also, biases influence scientists studying biases. Scientists sent fake studies, some finding bias, some not, were asked to evaluate those studies. Women scientists tended to find research that suggests there are biases toward men of slightly higher quality than research showing no bias, while men scientists tended to find the opposite.
+
+# 30/11/15
+
+Readings: Call/Tomasello, Drayton/Santos
+
+The final exam questions are picked out of the questions from the study guide.
+
+Knowing about our implicit biases allows us to consider them more critically, and counteract their effect by thinking in terms of other viewpoints.
+
+Do these implicit attitudes/biases releal anything about actual beliefs? Alston though that normal beliefs are just as uncontrollable as our implicit ones, but are they related?
+
+How can we have knowledge about ourselves and the world given all our implicit biases/attitudes? Do these implicit biases undermine justification for our beliefs?
+
+Are we morally responsible for actions caused by these states of mind, or having these biases? Should we blame the bus drivers that showed unconsciously racially biased behaviour towards people asking to ride for free?
+
+Primate Knowledge
+-----------------
+
+To get a better picture of our implicit biases, we want to look at how animals see the world.
+
+Humans are seemingly unique in their cognitive capacity to explain people in terms of their unique mental states and perspectives, and their ability to explain behaviour by interpreting mental states. We can look at what a person is doing, and immediately get an idea of what they're feeling, thinking, and their state of mind. Additionally, we can understand that people can have their own beliefs, and that those can even be false. These abilities are called the **theory of mind**.
+
+Do non-humans have a theory of mind? Call/Tomasello study chimpanzees to try to answer this question using experiments on chimpanzees.
+
+One experiment had two cases, where food was placed in front of a chimp, and the experimenter either could or couldn't see the food. As it turns out, the chimps would take the food more often when the experimenter couldn't see it, and could even differentiate when experimenters covered just their mouth vs. just their eyes. This seems to imply that chimps can at least understand visual perception in others.
+
+The best test for a theory of mind is the ability to understand that others have beliefs and that they can potentially be different from one's own, and the ability to predict behaviour based on those others having false beliefs. The **false belief test** detects this. Suppose the subject is observing two agents in a room. Agent 1 places a marble in box A, and then leaves the room. Agent 2 then moves the marble to box B, and after that Agent 1 comes back into the room, seemingly unaware of this. The subject is then asked which box Agent 1 will try to look in if they're trying to find the marble - if the subject says box A, then they have a model of false beliefs in others and can predict based on that model.
+
+Testing young children suggests that they do have this model. Nonverbal versions of this experiments on monkeys suggests that monkeys do not.
+
+One experiment tested this on chimps. There were two cases where food was placed in front of a chimp in one of two boxes, and it was made clear that the experimentor knew which box the food is in. Then, the box contents are switched while the experimentor can't see them. The reaction times of the monkeys when allowed to get food would, under experiment assumptions, show which box the monkey expected the experimenter to look in. The results showed that the chimps would take equally long, which implies they don't have any model of false beliefs in others.
+
+Basically, experiments found that monkeys could understand what others see/hear/know, but not what others believe - they can represent whether people have beliefs about the world identical to their own, but not any other beliefs.
+
+Some other animals like scrub jays are capable of deception - intentionally generating false beliefs in others. This is a subject under active research.
+
+This raises questions about whether the theory of mind is even applicable to other animals - perhaps the concept itself only really applies to humans. Also, if animals can know without beliefs, then perhaps knowlege doesn't require belief.
