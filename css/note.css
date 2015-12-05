@@ -20,6 +20,9 @@ h3 {
 	line-height: 90%;
 }
 
+strong { font-weight: bold; }
+emph { font-style: italic; }
+
 table {
 	margin: 0 auto;
 	border-collapse: collapse;
