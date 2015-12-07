@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -46,6 +46,8 @@ function highlight() { // highlight all code blocks using HighlightJS
     <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="contact">GPG key</a></li>
   </ul>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -1479,7 +1481,7 @@ A OtherThing is one of:
 <pre><code>(local [(define a x) (define b y) (define c z) ...] ; we use square brackets by convention to improve readability
        ...) ; do something with those definitions</code></pre>
 <p>In local definition, definitions behave like the those in the top level. We can even define functions.</p>
-<p>Consider Heron's formula, used for calculating the area of a triangle with side lengths <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, and c<span class="math">\(: \)</span>A = $ where <span class="math">\(s = \frac{a + b + c}{2}\)</span>.</p>
+<p>Consider Heron's formula, used for calculating the area of a triangle with side lengths <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, and c$: <span class="math">\(A = \sqrt{s(s - a)(s - b)(s - c)}\)</span> where <span class="math">\(s = \frac{a + b + c}{2}\)</span>.</p>
 <pre><code>(define (t-area a b c)
     (sqrt (* (/ (+ a b c) 2)
              (- (/ (+ a b c) 2) a)

@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -46,6 +46,8 @@ function highlight() { // highlight all code blocks using HighlightJS
     <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="contact">GPG key</a></li>
   </ul>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -646,7 +648,7 @@ Website: https://www.student.cs.uwaterloo.ca/~cs245/</code></pre>
 <p>We can prove a set <span class="math">\(S\)</span> is not countable by proving that the bijection cannot exist.</p>
 <p>Prove that the set of integers is countable:</p>
 <blockquote>
-<p>Clearly, there are more integers than natural numbers. However, they are both infinite, and infinite sets work in funny ways.<br />Even though there is a bijection between a subset of <span class="math">\(\mb{Z}\)</span> and <span class="math">\(\mb{N}\)</span>, it is actually still possible to define a bijective <span class="math">\(f: \mb{Z} \to \mb{N}\)</span>.<br />Let <span class="math">\(f(z) = \begin{cases} 1 - 2z &amp;\text{if } x \le 0 \\ 2z &amp;\text{if }x &gt; 0 \end{cases}\)</span>.<br />This is a bijection because we can find the inverse, <span class="math">\(f^{-1}(n) = \begin{cases} \frac{1 - n}{2} &amp;\text{if } 2 \mid n \\  \frac n 2 &amp;\text{if } 2 \nmid n \end{cases}\)</span>.<br />So the set of integers is countable.</p>
+<p>Clearly, there are more integers than natural numbers. However, they are both infinite, and infinite sets work in funny ways.<br />Even though there is a bijection between a subset of <span class="math">\(\mb{Z}\)</span> and <span class="math">\(\mb{N}\)</span>, it is actually still possible to define a bijective <span class="math">\(f: \mb{Z} \to \mb{N}\)</span>.<br />Let <span class="math">\(f(z) = \begin{cases} 1 - 2z &amp;\text{if } x \le 0 \\ 2z &amp;\text{if }x &gt; 0 \end{cases}\)</span>.<br />This is a bijection because we can find the inverse, <span class="math">\(f^{-1}(n) = \begin{cases} \frac{1 - n}{2} &amp;\text{if } 2 \mid n \\ \frac n 2 &amp;\text{if } 2 \nmid n \end{cases}\)</span>.<br />So the set of integers is countable.</p>
 </blockquote>
 <p>A countable set is one where we can enumerate or count the elements - we can assign a natural number to each element in the set.</p>
 <p>Any subset of a countable set is countable. The union of countably many countable sets is also countable:</p>

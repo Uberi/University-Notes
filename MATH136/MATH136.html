@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -46,6 +46,8 @@ function highlight() { // highlight all code blocks using HighlightJS
     <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="contact">GPG key</a></li>
   </ul>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -883,7 +885,7 @@ A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp;
 <p>In fact, this is a useful method for solving multiple systems of linear equations with the same coefficients but different right hand sides at the same time.</p>
 <p>For example, find the right inverse of <span class="math">\(A = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{bmatrix}\)</span>:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\left[\begin{array}{cc|cc} 1 &amp; 2 &amp; 1 &amp; 0 \\ 3 &amp; 4 &amp; 0 &amp; 1 \\ \end{array}\right]\)</span> in RREF is <span class="math">\(\left[\begin{array}{cc|cc} 1 &amp; 0 &amp; -2 &amp; 1 \\ 0 &amp; 1 &amp; \frac{3}{2} &amp; -\frac{1}{2} \\ \end{array}\right]\)</span>.<br />So the inverse is <span class="math">\(\begin{bmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{bmatrix}\)</span>. To verify, <span class="math">\(\begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{bmatrix} \begin{bmatrix} -2  1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{bmatrix} = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}\)</span>, as required.</p>
+<p>Clearly, <span class="math">\(\left[\begin{array}{cc|cc} 1 &amp; 2 &amp; 1 &amp; 0 \\ 3 &amp; 4 &amp; 0 &amp; 1 \\ \end{array}\right]\)</span> in RREF is <span class="math">\(\left[\begin{array}{cc|cc} 1 &amp; 0 &amp; -2 &amp; 1 \\ 0 &amp; 1 &amp; \frac{3}{2} &amp; -\frac{1}{2} \\ \end{array}\right]\)</span>.<br />So the inverse is <span class="math">\(\begin{bmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{bmatrix}\)</span>. To verify, <span class="math">\(\begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{bmatrix} \begin{bmatrix} -2 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{bmatrix} = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}\)</span>, as required.</p>
 </blockquote>
 <h3 id="theorem-5.1.1">Theorem 5.1.1</h3>
 <p>If <span class="math">\(A \in M_{m \times n}\)</span> where <span class="math">\(m &gt; n\)</span>, then <span class="math">\(A\)</span> cannot have a right inverse.</p>
@@ -964,7 +966,7 @@ A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp;
 </blockquote>
 <p>Proof of sixth:</p>
 <blockquote>
-<p>Clearly, the rows or columns of <span class="math">\(A form a basis for \)</span>^n$ if and only if they span <span class="math">\(\mb{R}^n\)</span> and are linearly independent.<br />Since the rows or columns are linearly independent, the nullspace of <span class="math">\(A\)</span> is <span class="math">\(\set{\vec{0}}\)</span>.</p>
+<p>Clearly, the rows or columns of $A form a basis for <span class="math">\(\mb{R}^n\)</span> if and only if they span <span class="math">\(\mb{R}^n\)</span> and are linearly independent.<br />Since the rows or columns are linearly independent, the nullspace of <span class="math">\(A\)</span> is <span class="math">\(\set{\vec{0}}\)</span>.</p>
 </blockquote>
 <p>Proof of seventh:</p>
 <blockquote>

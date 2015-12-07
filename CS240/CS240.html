@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -46,6 +46,8 @@ function highlight() { // highlight all code blocks using HighlightJS
     <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="contact">GPG key</a></li>
   </ul>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -132,7 +134,7 @@ for i in 1 ... n - 1:
 <p>In other words, we write our algorithms in pseudo-code, then count the number of primitive operations.</p>
 <p>We now want to plot our timing function with respect to the size of the input <span class="math">\(\abs{\mathrm{Input}} \subseteq \mb{N}\)</span>. This allows us to figure out the behaviour of the function as the size of the input gets bigger. This is difficult since finding the timing function for arbitrary inputs is often difficult. Additionally, we don't necessarily care about the constants in the function output, just its behaviour on large inputs.</p>
 <p>Usually we care about the worst case behaviour, to determine the worst possible behaviour in all cases. We may also be interested in the average case to see how things will perform in practice. Occasionally, we may also be interested in the best case - for example, in cryptography, we want to make sure the problem cannot be solved in less than some given amount of time.</p>
-<p>The worst case behaviour is <span class="math">\(T_p(n) = \max \set{S_p(I) \middle| \abs{I} = n}\)</span>. The best case behaviour is <span class="math">\(T_p(n) = \max \set{S_p(I) \middle| \abs{I} = n}\)</span>. The average case behaviour is <span class="math">\(T_p(n) = \frac{\sum_{e \in  R} i}{\abs{R}}\)</span> where <span class="math">\(R = \set{S_p(I) \middle| \abs{I} = n}\)</span>. We can now plot these functions to get the time bounds on our program.</p>
+<p>The worst case behaviour is <span class="math">\(T_p(n) = \max \set{S_p(I) \middle| \abs{I} = n}\)</span>. The best case behaviour is <span class="math">\(T_p(n) = \max \set{S_p(I) \middle| \abs{I} = n}\)</span>. The average case behaviour is <span class="math">\(T_p(n) = \frac{\sum_{e \in R} i}{\abs{R}}\)</span> where <span class="math">\(R = \set{S_p(I) \middle| \abs{I} = n}\)</span>. We can now plot these functions to get the time bounds on our program.</p>
 <p>The big-O notation is used to make life easier for computer scientists trying to calculate timing functions and to make comparing functions much easier. Refer to the CS136 notes for background. The <span class="math">\(O\)</span> in <span class="math">\(O(f(x))\)</span> is actually a capital omicron, bu nowadays the O is more common.</p>
 <p>Comparing Big O is analogous to ordering in <span class="math">\(\mb{R}\)</span>. Just like how <span class="math">\(x \le y\)</span>, we might write <span class="math">\(f(x) \in O(g(x))\)</span>. What we care about is the trends of the function, not the actual numbers.</p>
 <p>Big-O gives an upper bound behaviour on a function (analogous to <span class="math">\(x \le y\)</span>). Big-<span class="math">\(\Omega\)</span> gives a lower bound (analogous to <span class="math">\(x \ge y\)</span>). Big-<span class="math">\(\Theta\)</span> us the exact bounds - when the Big-<span class="math">\(O\)</span> is the same as the Big-<span class="math">\(\Omega\)</span> (analogous to <span class="math">\(x = y\)</span>).</p>
@@ -772,7 +774,7 @@ start &gt; c &gt; start</code></pre>
         insert `new_node` into the heap indexed by its tag
     # at this point, the heap contains only one trie, which represents the best prefix code</code></pre>
 <p>This is called <strong>Huffman encoding</strong>. Clearly, the heap starts off size <span class="math">\(d = \abs{\Sigma}\)</span>, and in every iteration of the while loop we decrease the size of the heap by 2 and then increase it by 1, so we have <span class="math">\(d\)</span> runs of the while loop, which itself takes <span class="math">\(O(\log n)\)</span> time. Therefore, Huffman encoding takes <span class="math">\(O(d \log d)\)</span> time.</p>
-<p>Suppose we have <span class="math">\(f(s) = 2, f(e) = 2, f(v) = 1, f(n) = 3, f(_) =  1, f(b) = 1, f(a) = 3\)</span>, from the string &quot;seven bananas&quot;. Using the above process, we might get something like <span class="math">\(b \to 000, s \to 001, e \to 010, v \to 0110, _ \to 0111, n \to 10, a \to 11\)</span>.</p>
+<p>Suppose we have <span class="math">\(f(s) = 2, f(e) = 2, f(v) = 1, f(n) = 3, f(_) = 1, f(b) = 1, f(a) = 3\)</span>, from the string &quot;seven bananas&quot;. Using the above process, we might get something like <span class="math">\(b \to 000, s \to 001, e \to 010, v \to 0110, _ \to 0111, n \to 10, a \to 11\)</span>.</p>
 <p>There is a theorem that states that for any given set of frequencies, the above algorithm finds a prefix code that yields the shortest possible encoding in all bitstring-based prefix codes.</p>
 <p>The problem with Huffman encoding is that we also need to send the dictionary (mapping bitstrings to characters) along with the encoded value, or the frequencies and tie-breaking rules. This adds a lot of overhead for smaller inputs, which occurs very often in practice.</p>
 <p>Additionally, we have to go through the input twice - once to get the frequencies, and once to actually encode it. This is bad if we are working with huge amounts of data that can't be randomly accessed. We could potentially use the standard English text frequencies, but that would work poorly for non-English inputs. One approach is to use a fixed-size sample of the input to get the frequencies, but this also could perform poorly if the sample is non-representative.</p>

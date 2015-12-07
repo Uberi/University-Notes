@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -46,6 +46,8 @@ function highlight() { // highlight all code blocks using HighlightJS
     <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="contact">GPG key</a></li>
   </ul>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -585,7 +587,7 @@ H(x) = \begin{cases}
 <p>In rational functions, vertical asymptotes usually occur when the denominator becomes 0.</p>
 <p>Find the left and right hand limits of <span class="math">\(f(x) = \frac{x^2 + 1}{3x - 2x^2}\)</span> at each asymptote:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(f(x) = \frac{x^2 + 1}{x(-2x + 3)}\)</span>. So the asymptotes are at <span class="math">\(x = 0\)</span> and <span class="math">\(x = \frac{3}{2}\)</span>.<br />As <span class="math">\(x \to 0^-\)</span>, <span class="math">\(x^2 + 1 &gt; 0\)</span>, <span class="math">\(x &lt; 0\)</span>, and <span class="math">\(-2x + 3 &gt; 0\)</span>.<br />So <span class="math">\(f(x) &lt; 0\)</span> for <span class="math">\(x = 0^-\)</span>.<br />So <span class="math">\(f(x) \to \)</span> ;wip: use the sign analysis with infinismals</p>
+<p>Clearly, <span class="math">\(f(x) = \frac{x^2 + 1}{x(-2x + 3)}\)</span>. So the asymptotes are at <span class="math">\(x = 0\)</span> and <span class="math">\(x = \frac{3}{2}\)</span>.<br />As <span class="math">\(x \to 0^-\)</span>, <span class="math">\(x^2 + 1 &gt; 0\)</span>, <span class="math">\(x &lt; 0\)</span>, and <span class="math">\(-2x + 3 &gt; 0\)</span>.<br />So <span class="math">\(f(x) &lt; 0\)</span> for <span class="math">\(x = 0^-\)</span>.<br />So $f(x) $ ;wip: use the sign analysis with infinismals</p>
 </blockquote>
 <h2 id="continuity">Continuity</h2>
 <p>We say <span class="math">\(f(x)\)</span> is continuous at <span class="math">\(a\)</span> if <span class="math">\(\lim_{x \to a} f(x) = f(a)\)</span>.</p>
@@ -688,7 +690,7 @@ x \sin \frac{1}{x} &amp;\text{if } x \ne 0 \\
 \lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}} = \frac{-2}{-\infty - \sqrt{\infty - \infty}} = \frac{-2}{-\infty} = 0 \\
 \]</span></p>
 </blockquote>
-<p>Evaluate <span class="math">\(\lim_{x \to \infty}  e^{-x} \sin x\)</span>:</p>
+<p>Evaluate <span class="math">\(\lim_{x \to \infty} e^{-x} \sin x\)</span>:</p>
 <blockquote>
 <p><span class="math">\[
 \begin{align}

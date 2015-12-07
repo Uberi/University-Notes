@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -46,6 +46,8 @@ function highlight() { // highlight all code blocks using HighlightJS
     <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="contact">GPG key</a></li>
   </ul>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -118,7 +120,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <h2 id="counting-techniques">Counting Techniques</h2>
 <p>When there are <span class="math">\(n\)</span> outcomes that are all equally likely, then the probability of each outcome is <span class="math">\(\frac{1}{n}\)</span>.</p>
 <p>If job A can be done in P ways and job B can be done in Q ways, then we can do either job A or job B in <span class="math">\(P + Q\)</span> ways. Here, &quot;or&quot; becomes addition. For example, the probabiity of getting heads or tails is <span class="math">\(P(Heads) + P(Heads) = \frac 1 2 + \frac 1 2 = 1\)</span></p>
-<p>If job A can be done in P ways, and for each of those P ways, job B can be done in Q distinct ways, then we can do both job A and B in <span class="math">\(p \times q\)</span> ways. For example, <span class="math">\(P((Heads, Heads)) = P(Heads)  \times P(Heads) = \frac 1 2 \times \frac 1 2 = \frac{1}{4}\)</span>.</p>
+<p>If job A can be done in P ways, and for each of those P ways, job B can be done in Q distinct ways, then we can do both job A and B in <span class="math">\(p \times q\)</span> ways. For example, <span class="math">\(P((Heads, Heads)) = P(Heads) \times P(Heads) = \frac 1 2 \times \frac 1 2 = \frac{1}{4}\)</span>.</p>
 <p>Sampling <strong>with replacement</strong> means that every time we select an object for sampling, we simply put it back into the population, so we could potentially sample it again.</p>
 <p>This means that what we get on each selection will not affect subsequent selections. For example, a coin flip has both sides of the coin replaced after each sample, so there is always the same probability of getting heads or tails.</p>
 <p>Sampling <strong>without replacement</strong> means that after selecting an object, we do not put it back. Therefore, an object can only be selected at most once.</p>
@@ -228,7 +230,7 @@ Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
 <p>So if <span class="math">\(A\)</span> is an event and <span class="math">\(B\)</span> and <span class="math">\(C\)</span> are mutually exclusive events, then <span class="math">\(P(A) = P(A \cap B) + P(A \cap C) = P(A \mid B)P(B) + P(A \mid C)P(C)\)</span>.</p>
 <p>A group of students that is 18.75% male is planning to go out for pizza. If <span class="math">\(\frac{100}{3}\)</span>% of the male students go and <span class="math">\(\frac{300}{13}\)</span>% of the female students go, what is the probability that a random student who goes out for pizza is female?</p>
 <blockquote>
-<p>Let <span class="math">\(M\)</span> represent male and <span class="math">\(O\)</span> represent going out for pizza.<br />Clearly, <span class="math">\(P(M) = 0.1875, P(\overline M) = 0.8125\)</span> and <span class="math">\(P(O \mid M) = \frac 1 3, P(O \mid \overline M) = \frac 3 {13}\)</span>.<br />We want to find <span class="math">\(P(\overline M \mid O)\)</span>. So <span class="math">\(P(\overline M \mid O) = \frac{P(\overline M \cap O)}{P(O)} = \frac{P(O \mid \overline M)P(\overline M)}{P(O \mid M)P(M) + P(O \mid \overline M)P(\overline M)}\)</span>.<br />So <span class="math">\(P(\overline M \mid O) = \frac{\frac 3 {13} \cdot 0.8125}{\frac 1 3 0.1875  + \frac 3 {13} \cdot 0.8125} = 0.75\)</span>.<br />So the probability that a random selected student from this group is female is 75%.</p>
+<p>Let <span class="math">\(M\)</span> represent male and <span class="math">\(O\)</span> represent going out for pizza.<br />Clearly, <span class="math">\(P(M) = 0.1875, P(\overline M) = 0.8125\)</span> and <span class="math">\(P(O \mid M) = \frac 1 3, P(O \mid \overline M) = \frac 3 {13}\)</span>.<br />We want to find <span class="math">\(P(\overline M \mid O)\)</span>. So <span class="math">\(P(\overline M \mid O) = \frac{P(\overline M \cap O)}{P(O)} = \frac{P(O \mid \overline M)P(\overline M)}{P(O \mid M)P(M) + P(O \mid \overline M)P(\overline M)}\)</span>.<br />So <span class="math">\(P(\overline M \mid O) = \frac{\frac 3 {13} \cdot 0.8125}{\frac 1 3 0.1875 + \frac 3 {13} \cdot 0.8125} = 0.75\)</span>.<br />So the probability that a random selected student from this group is female is 75%.</p>
 </blockquote>
 <p>A <strong>tree diagram</strong> is a diagram that helps represent conditional probabilities by showing the possibilities of several runs of an experiement as a tree. For example, we might draw a tree for flips of a coin, with each level being a subsequent flip of the coin.</p>
 <p>When we move downwards in a tree, we multiply the probabilities together. When we include other nodes, we do a union and add the probabilities.</p>
@@ -464,7 +466,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <h1 id="section-19">20/6/14</h1>
 <p>Let <span class="math">\(D\)</span> be the event of a random person having a disease. Let <span class="math">\(A, B, C\)</span> represent three disease tests giving a positive result. Test <span class="math">\(A\)</span> costs $5, <span class="math">\(B\)</span> costs $8, and <span class="math">\(C\)</span> costs $40. We know that <span class="math">\(P(D) = 0.001, P(A \mid \overline D) = 0.05, P(B \mid \overline D) = 0.03, P(C \mid \overline D) = 0\)</span> - tests <span class="math">\(A\)</span> and <span class="math">\(B\)</span> can result in false positives, but never false negatives. We want to test a large number of people for <span class="math">\(D\)</span> with 100% accuracy:</p>
 <blockquote>
-<p>Assume the tests are independent.<br />Clearly, we will choose between three strategies: <span class="math">\(A\)</span> and then <span class="math">\(C\)</span> if <span class="math">\(A\)</span> is positive, <span class="math">\(B\)</span> and then <span class="math">\(C\)</span> if <span class="math">\(B\)</span> is positive, and just <span class="math">\(C\)</span>. Every strategy must end with <span class="math">\(C\)</span> because it is necessary to make sure a person has <span class="math">\(D\)</span>.<br />We will first consider the first strategy. Clearly, <span class="math">\(P(A) = P(A \cap D) + P(A \cap \overline D) = P(D) P(A \mid D) \)</span> ;wip: strategy 1: $7.04, 2: $9.24, $40</p>
+<p>Assume the tests are independent.<br />Clearly, we will choose between three strategies: <span class="math">\(A\)</span> and then <span class="math">\(C\)</span> if <span class="math">\(A\)</span> is positive, <span class="math">\(B\)</span> and then <span class="math">\(C\)</span> if <span class="math">\(B\)</span> is positive, and just <span class="math">\(C\)</span>. Every strategy must end with <span class="math">\(C\)</span> because it is necessary to make sure a person has <span class="math">\(D\)</span>.<br />We will first consider the first strategy. Clearly, $P(A) = P(A D) + P(A D) = P(D) P(A D) $ ;wip: strategy 1: $7.04, 2: $9.24, $40</p>
 </blockquote>
 <h3 id="meansvariances-of-distributions">Means/Variances of Distributions</h3>
 <p>Recall that given <span class="math">\(g(x)\)</span>, <span class="math">\(E(g(X)) = \sum_{i = 1}^k g(x_i) f_X(x_i)\)</span>.</p>
@@ -555,7 +557,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <p><span class="math">\(\sigma_{\overline X}^2 = \frac{\sigma_X^2}{n}\)</span> where <span class="math">\(n\)</span> is the number of samples - the variance of the complement is inversely correlated to the number of samples in <span class="math">\(X\)</span>.</p>
 <p>So when we increase <span class="math">\(n\)</span>, <span class="math">\(\sigma_{\overline X}^2\)</span> gets smaller and smaller. This is because when we add more data to our sample set, our sample average becomes closer to the true expected value.</p>
 <p>An <strong>indicator variable</strong> is a binary variable, that indicates whether an event occurred or not. For example, <span class="math">\(X \sim \operatorname{Bin}(n, p)\)</span> where <span class="math">\(X_i\)</span> is 1 if the <span class="math">\(i\)</span>th trial was successful or 0 otherwise, so <span class="math">\(X = \sum_{i = 1}^n X_i\)</span>.</p>
-<p>So <span class="math">\(E(X) = E(\sum_{i = 1}^n X_i) = \sum_{i = 1}^n  E(X_i) = \sum_{i = 1}^n p = np\)</span>, as required. This is an easier way to find variance and mean when there are independent indicator variables.</p>
+<p>So <span class="math">\(E(X) = E(\sum_{i = 1}^n X_i) = \sum_{i = 1}^n E(X_i) = \sum_{i = 1}^n p = np\)</span>, as required. This is an easier way to find variance and mean when there are independent indicator variables.</p>
 <p>We have <span class="math">\(n\)</span> letters are addressed to <span class="math">\(n\)</span> people, <span class="math">\(n\)</span> envolopes are addressed to those <span class="math">\(n\)</span> people, and randomly put letters into envelopes. What is the mean and variance of the number of letters placed in the right encolope?</p>
 <blockquote>
 <p>Let <span class="math">\(X_i\)</span> be 1 if letter <span class="math">\(i\)</span> is in the right envolope and 0 otherwise. Then <span class="math">\(X = \sum X_i\)</span> is the number of letters placed in the right envelope.<br />Since the selection is done without replacement, we have a hypergeometric distribution. Note that <span class="math">\(X_i\)</span> is not independent since it depends in <span class="math">\(i\)</span>.<br />Clearly, <span class="math">\(E(X) = \sum_{i = 1}^n E(X_i)\)</span> and ;wip Clearly, <span class="math">\(\operatorname{Var}(\sum_{i = 1}^n x_i) = \operatorname{Var}(X_i)\)</span> ;wip</p>
@@ -582,7 +584,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <li><span class="math">\(X \in [a, b]\)</span> - a closed interval.</li>
 <li>All subintervals of a given length are equally likely.</li>
 </ul>
-<p>If this is the case, then <span class="math">\(X\)</span> has a continuous uniform distribution and <span class="math">\(f_X(x) = k\)</span>. However, <span class="math">\(\int_a^b f_X(x) \dee x = 1\)</span>, so <span class="math">\(\evalat{kx}_a^b = 1\)</span> and <span class="math">\(k = \frac{1}{b - a}\)</span>. So <span class="math">\(f_X(x) = \frac{1}{b - a}\)</span> and <span class="math">\(F_X(x) = \int_a^x f_X(t) \dee t = \begin{cases} 0 &amp;\text{if } x &lt; a \\ \frac{x}{b - a}  &amp;\text{if } a \le x \le b \\ 1 &amp;\text{if } b &lt; x \end{cases}\)</span>.</p>
+<p>If this is the case, then <span class="math">\(X\)</span> has a continuous uniform distribution and <span class="math">\(f_X(x) = k\)</span>. However, <span class="math">\(\int_a^b f_X(x) \dee x = 1\)</span>, so <span class="math">\(\evalat{kx}_a^b = 1\)</span> and <span class="math">\(k = \frac{1}{b - a}\)</span>. So <span class="math">\(f_X(x) = \frac{1}{b - a}\)</span> and <span class="math">\(F_X(x) = \int_a^x f_X(t) \dee t = \begin{cases} 0 &amp;\text{if } x &lt; a \\ \frac{x}{b - a} &amp;\text{if } a \le x \le b \\ 1 &amp;\text{if } b &lt; x \end{cases}\)</span>.</p>
 <p>The mean is <span class="math">\(\mu_X = \frac{b + a}{2}\)</span> and the variance is <span class="math">\(\sigma_X^2 = \frac{(b - a)^2}{12}\)</span>.</p>
 <p>If <span class="math">\(f_U(u) = 0.1e^{-0.1u}, u &gt; 0\)</span>, then <span class="math">\(Y = e^{-0.1U}\)</span> has a continuous uniform distribution.</p>
 <p>This is because <span class="math">\(F_Y(y) = P(e^{-0.1u} \le y) = P(-0.1u \le \ln y) = P(u \le -10 \ln y) = F_U(-10\ln y)\)</span>. Since <span class="math">\(F_U(u) = \int_0^u 0.1e^{-0.1t} \dee t = 1 - e^{-0.1u}\)</span>, <span class="math">\(F_Y(y) = e^{-0.1(-10\ln y)} = y\)</span>, so <span class="math">\(f_Y(y) = 1\)</span>. ;wip: wait what this can't be right</p>
@@ -631,7 +633,7 @@ Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
 <h1 id="section-31">21/7/14</h1>
 <p>Let <span class="math">\(X \sim \operatorname{N}(5, 4), Y \sim \operatorname{N}(7, 9)\)</span>. What is the probability that <span class="math">\(2X\)</span> differs from <span class="math">\(Y\)</span> by more than 4?</p>
 <blockquote>
-<p>Clearly, the probabilility is <span class="math">\(P(\abs{2X - Y} &gt; 4) = P(2X - Y &gt; 4) + P(2X - Y &lt; -4)\)</span>. Clearly, <span class="math">\(E(2X - Y) = 2E(X) - E(Y) = 2 \cdot 5 - 7 = 3\)</span>.<br />So <span class="math">\(\operatorname{Var}(2X - Y) = 25\)</span> ;wip: how? So <span class="math">\(P(\abs{2X - Y} &gt; 4) = P\left(Z &gt; \frac{4 - 3}{\sqrt{25}}\right) + P\left(Z &lt; \frac{-4 - 3}{\sqrt{25}}\right) = P\left(Z &gt; \frac 1 5\right) + P\left(Z &lt; \frac{-7} 5\right) = \left(1 - P\left(Z &lt; \frac 1 5\right)\right) + \left(1 - P\left(Z &lt; \frac 7 5\right)\right) \approxeq \)</span>. ;wip</p>
+<p>Clearly, the probabilility is <span class="math">\(P(\abs{2X - Y} &gt; 4) = P(2X - Y &gt; 4) + P(2X - Y &lt; -4)\)</span>. Clearly, <span class="math">\(E(2X - Y) = 2E(X) - E(Y) = 2 \cdot 5 - 7 = 3\)</span>.<br />So <span class="math">\(\operatorname{Var}(2X - Y) = 25\)</span> ;wip: how? So $P( &gt; 4) = P(Z &gt; ) + P(Z &lt; ) = P(Z &gt; 1 5) + P(Z &lt;  5) = (1 - P(Z &lt; 1 5)) + (1 - P(Z &lt; 7 5)) $. ;wip</p>
 </blockquote>
 <p>The normal distribution can be used to approximate linear combinations of variables with non-normal distributions. This is due to the <strong>central limit theorem</strong> - sums of random variables tend to approach a normal distribution.</p>
 <p>As we add up more and more random variables, the central limit theorem tells us that the sum of all the variables approximates a normal distribution.</p>

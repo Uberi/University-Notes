@@ -16,7 +16,7 @@ function highlight() { // highlight all code blocks using HighlightJS
     hljs.highlightBlock(code_blocks[i]);
 }
 </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -46,6 +46,8 @@ function highlight() { // highlight all code blocks using HighlightJS
     <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="contact">GPG key</a></li>
   </ul>
 <p><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -271,7 +273,7 @@ x^2 + 5x + 6 | x^3 + 4x^2 + 2x - 5
                      -------------
                              x + 1</code></pre>
 <blockquote>
-<p>Clearly, <span class="math">\(\int \frac{x^3 + 4x^2 + 2x - 5}{x^2 + 5x + 6} \dee x = \int (x - 1) \dee x + \int \frac{x + 1}{x^2 + 5x + 6} \dee x = \frac{x^2}{2} - x +  \int \frac{x + 1}{(x + 2)(x + 3)} \dee x\)</span>.<br />;wip</p>
+<p>Clearly, <span class="math">\(\int \frac{x^3 + 4x^2 + 2x - 5}{x^2 + 5x + 6} \dee x = \int (x - 1) \dee x + \int \frac{x + 1}{x^2 + 5x + 6} \dee x = \frac{x^2}{2} - x + \int \frac{x + 1}{(x + 2)(x + 3)} \dee x\)</span>.<br />;wip</p>
 </blockquote>
 <p>What if there are repeated factors? We can keep the repeated factors as part of the group to use this technique.</p>
 <p>Consider <span class="math">\(\int \frac{x + 1}{(x + 2)^2 (x + 3)}\)</span>:</p>
@@ -283,7 +285,7 @@ x^2 + 5x + 6 | x^3 + 4x^2 + 2x - 5
 <p>We want to avoid imaginary numbers when doing this. Therefore, each irreducable quadratic of the form <span class="math">\(x^2 + x + 1\)</span>, we get a term of the form <span class="math">\(\frac{A + Bx}{ax^2 + bx + c}\)</span>.</p>
 <p>Consider <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x\)</span>:</p>
 <blockquote>
-<p>Clearly, <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{A + Bx}{x^2 + x + 1} \dee x + \int \frac{C}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \frac{11}{7} \ln (x - 2)\)</span>.<br />How do we integrate the first term? We can use a trigonometric substitution to solve this.<br />Clearly, <span class="math">\(\frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} = \frac{\frac{2}{7} - \frac{11}{7}x}{(x^2 + x + \frac{1}{4}) + 1 - \frac{1}{4}} = \frac{\frac{2}{7} + \frac{11}{7}x}{(x + \frac{1}{2})^2 + \frac{3}{4}}\)</span>, by completing the square.<br />Let <span class="math">\(u = x + \frac{1}{2}\)</span>. Then <span class="math">\(\dee x = \dee u\)</span>.<br />Clearly, <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x = \frac{1}{7} \int \frac{2 - 11x}{(x + \frac{1}{2})^2 + \frac{3}{4}} \dee x = \frac{1}{7} \int \frac{-11u + \frac{15}{2}}{u^2 + \frac{3}{4}} \dee x\)</span>.<br />Let <span class="math">\(u = \frac{\sqrt{3}}{2} \tan \theta\)</span>. Then <span class="math">\(\frac{1}{7} \int \frac{-11u + \frac{15}{2}}{u^2 + \frac{3}{4}} \dee x = \frac{1}{7} \int \frac{-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}}{\frac{3}{4}(\tan^2 \theta + 1)} \dee x = \frac{1}{7} \int \frac{-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}}{\frac{3}{4\cos^2 \theta}} \dee x = \frac{1}{21} \int 4\cos^2 \theta (-11\frac{\sqrt{3}}{2}\tan \theta + \frac{15}{2}) \dee x = \frac{1}{21} \int 4\cos^2 \theta (-11\frac{\sqrt{3}}{2}\tan \theta) \dee x + \frac{4}{21}\frac{15}{2} \int \cos^2 \theta \dee x ;wip: use substitution with \)</span>s =  $</p>
+<p>Clearly, <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{A + Bx}{x^2 + x + 1} \dee x + \int \frac{C}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{5x + 1}{(x^2 + x + 1)(x - 2)} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x\)</span>.<br />So <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \int \frac{\frac{11}{7}}{x - 2} \dee x = \int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x + \frac{11}{7} \ln (x - 2)\)</span>.<br />How do we integrate the first term? We can use a trigonometric substitution to solve this.<br />Clearly, <span class="math">\(\frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} = \frac{\frac{2}{7} - \frac{11}{7}x}{(x^2 + x + \frac{1}{4}) + 1 - \frac{1}{4}} = \frac{\frac{2}{7} + \frac{11}{7}x}{(x + \frac{1}{2})^2 + \frac{3}{4}}\)</span>, by completing the square.<br />Let <span class="math">\(u = x + \frac{1}{2}\)</span>. Then <span class="math">\(\dee x = \dee u\)</span>.<br />Clearly, <span class="math">\(\int \frac{\frac{2}{7} - \frac{11}{7}x}{x^2 + x + 1} \dee x = \frac{1}{7} \int \frac{2 - 11x}{(x + \frac{1}{2})^2 + \frac{3}{4}} \dee x = \frac{1}{7} \int \frac{-11u + \frac{15}{2}}{u^2 + \frac{3}{4}} \dee x\)</span>.<br />Let <span class="math">\(u = \frac{\sqrt{3}}{2} \tan \theta\)</span>. Then $  x =   x =   x =  4^2 (-11+ ) x =  4^2 (-11) x +  ^2 x ;wip: use substitution with <span class="math">\(s = \frac{\sqrt{3}}{2} \tan \theta\)</span></p>
 </blockquote>
 <p>Completing the square: we want the resulting polynomial to have repeated roots. In the quadratic formula, this is when the discriminant <span class="math">\(b^2 - 4ac = 0\)</span>, so <span class="math">\(c = \frac{b^2}{4a}\)</span>.</p>
 <p>When we have an irreducible quadratic, we always get an <span class="math">\(\arctan\)</span> and a <span class="math">\(\ln \abs{ax^2 + bx + c}\)</span>. ;wip: do we always need the arctan? maybe we can subsitutute back to get a knarly expression with sqrt</p>
@@ -701,7 +703,7 @@ N &amp;= \frac{k}{1 + Fe^{-rt}} \\
 </blockquote>
 <p>Does <span class="math">\(a_1 = 1, a_{n + 1} = \sqrt{3 + 2a_n}\)</span> converge?</p>
 <blockquote>
-<p>The first few elements of the sequence are <span class="math">\(1, 2.23606797749979, 2.73352079834772, 2.90981813807933, 2.96978724425819\)</span>.<br />Clearly, <span class="math">\(a_{n + 1} \ge a_n \iff \sqrt{3 + 2a_n} \ge a_n \iff a_n^2 - 2a_n - 3 \le 0\)</span>, or <span class="math">\(-1 \le a_n \le 3\)</span>.<br />So <span class="math">\(a_n\)</span> is monotonically increasing if <span class="math">\([-1, 3]\)</span>.<br />Assume <span class="math">\(a_n \le 3\)</span>. Then <span class="math">\(3 + 2a_n \le 9\)</span> and <span class="math">\(\sqrt{3 + 2a_n} \le 3\)</span>. So <span class="math">\(a_{n + 1} \le 3\)</span>.<br />So by induction, <span class="math">\(a_n\)</span> has an upper bound of 3.<br />So by the monotone convergence theorem, the sequence converges.<br />Also, note that if the limit exists, we can set <span class="math">\(n \to \infty\)</span> and so <span class="math">\(a_{n + 1} = a_n\)</span>.<br />So <span class="math">\(a_n^2 - 2a_n - 3 = 0\)</span> and <span class="math">\(a_n  = -1, 3\)</span>. -1 is a extraneous answer since the function is always positive, so <span class="math">\(\lim_{n \to \infty} a_n = 3\)</span>.</p>
+<p>The first few elements of the sequence are <span class="math">\(1, 2.23606797749979, 2.73352079834772, 2.90981813807933, 2.96978724425819\)</span>.<br />Clearly, <span class="math">\(a_{n + 1} \ge a_n \iff \sqrt{3 + 2a_n} \ge a_n \iff a_n^2 - 2a_n - 3 \le 0\)</span>, or <span class="math">\(-1 \le a_n \le 3\)</span>.<br />So <span class="math">\(a_n\)</span> is monotonically increasing if <span class="math">\([-1, 3]\)</span>.<br />Assume <span class="math">\(a_n \le 3\)</span>. Then <span class="math">\(3 + 2a_n \le 9\)</span> and <span class="math">\(\sqrt{3 + 2a_n} \le 3\)</span>. So <span class="math">\(a_{n + 1} \le 3\)</span>.<br />So by induction, <span class="math">\(a_n\)</span> has an upper bound of 3.<br />So by the monotone convergence theorem, the sequence converges.<br />Also, note that if the limit exists, we can set <span class="math">\(n \to \infty\)</span> and so <span class="math">\(a_{n + 1} = a_n\)</span>.<br />So <span class="math">\(a_n^2 - 2a_n - 3 = 0\)</span> and <span class="math">\(a_n = -1, 3\)</span>. -1 is a extraneous answer since the function is always positive, so <span class="math">\(\lim_{n \to \infty} a_n = 3\)</span>.</p>
 </blockquote>
 <h1 id="section-18">24/2/14</h1>
 <p>The monotone convergence theorem only tells us whether the sequence converges, but not what the actual limit is.</p>
