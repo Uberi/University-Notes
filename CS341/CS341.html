@@ -431,21 +431,20 @@ https://www.student.cs.uwaterloo.ca/~cs341/</code></pre>
     <span class="kw">return</span> partitions</code></pre>
 <h1 id="section-9">19/10/15</h1>
 <p>Consider the <strong>knapsack problem</strong>: given profits <span class="math">\(P = [P_1, \ldots, P_n]\)</span> and weights <span class="math">\(W = [W_1, \ldots, W_n]\)</span>, and a capacity <span class="math">\(M\)</span>, all positive integers, find the <span class="math">\(x = \tup{x_1, \ldots, x_n}\)</span> that maximises <span class="math">\(\sum P_i x_i\)</span> given that <span class="math">\(\sum W_i x_i \le M\)</span>.</p>
-<p>There are several variations of this problem: for the 0-1 knapsack problem, <span class="math">\(x_i\)</span> is either 0 or 1; in the rational knapsack problem, <span class="math">\(0 \le x_i \le 1\)</span>.</p>
-<p>As it turns out, the knapsack problem can be solved greedily (though not optimally) - we simply take as much as possible of each item, considering them in decreasing order of profit divided by weight:</p>
+<p>There are several variations of this problem: for the 0-1 knapsack problem, <span class="math">\(x_i\)</span> is either 0 or 1 (we either take the item or don't); in the rational knapsack problem, <span class="math">\(0 \le x_i \le 1\)</span> (we can take a fraction of the item from none to all).</p>
+<p>As it turns out, the rational knapsack problem can be solved greedily (but not other knapsack problems; 0-1 knapsack problems are NP-complete, for example) - we simply take as much as possible of each item, considering them in decreasing order of profit divided by weight:</p>
 <pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> greedy_rational_knapsack(profits, weights, capacity):
     items = <span class="dt">sorted</span>(<span class="dt">zip</span>(profits, weights), <span class="kw">lambda</span> x: x[<span class="dv">0</span>] / x[<span class="dv">1</span>])
-    x = [<span class="dv">0</span>] * <span class="dt">len</span>(items)
     current_weight = <span class="dv">0</span>
-    <span class="kw">for</span> item in items:
+    <span class="kw">for</span> item in items: <span class="co"># consider items in decreasing order of profit to weight ratio</span>
         profit, weight = item
-        <span class="kw">if</span> current_weight + weight &lt;= capacity:
+        <span class="kw">if</span> current_weight + weight &lt;= capacity: <span class="co"># we have enough space to take all of the item, so take it</span>
             result.append(<span class="dv">1</span>)
             current_weight += weight
-        <span class="kw">else</span>:
+        <span class="kw">else</span>: <span class="co"># we can&#39;t take all of the item, but we&#39;ll take enough to fill the rest of the knapsack</span>
             result.append((capacity - current_weight) / weight)
             <span class="kw">break</span>
-    <span class="kw">return</span> x</code></pre>
+    <span class="kw">return</span> result</code></pre>
 <p>Proof of correctness:</p>
 <blockquote>
 <p>Suppose the greedy algorithm is not optimal. Then for certain inputs the output must differ from optimal algorithms.<br />Let the result of the greedy algorithm be <span class="math">\(G = [G_1, \ldots, G_n]\)</span> and a result <span class="math">\(B = [B_1, \ldots, B_n]\)</span> of all optimal algorithms for this problem such that <span class="math">\(B\)</span> and <span class="math">\(G\)</span> agree for as many items as possible, disagreeing at index <span class="math">\(d\)</span>, so <span class="math">\(B = [G_1, \ldots, G_{d - 1}, B_d, \ldots, B_n]\)</span>.<br />The greedy algorithm always chooses the item with the highest profit per weight, so the actual profit from <span class="math">\(G_1, \ldots, G_d\)</span> is at least as much as the actual profit of <span class="math">\(B_1, \ldots, B_d\)</span>, because we will pick the most.<br />Construct <span class="math">\(B&#39; = [B_1, \ldots, B_{d - 1}, G_d, B_{d + 1}, \ldots, B_n]\)</span>. Clearly, <span class="math">\(B&#39;\)</span> is at least as profitable as <span class="math">\(B\)</span>, but it agrees with <span class="math">\(G\)</span> for 1 more element than <span class="math">\(B\)</span>, a contradiction.<br />Therefore, the greedy algorithm is optimal.</p>
