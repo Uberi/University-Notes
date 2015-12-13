@@ -1513,7 +1513,7 @@ while (i &lt; 5) { // 1 * 6 operations
 </ul>
 <p>For example, <span class="math">\(T(n) = 1 + 2n + 3n^2 = O(1) + O(n) + O(n^2) = O(n^2)\)</span>.</p>
 <p>Note that at this point, this is all informal notation. Big-O notation can and will be defined more formally later on.</p>
-<p>Big-O notation isn't just for time complexity - we can fund the order of any function.</p>
+<p>Big-O notation isn't just for time complexity - we can find the order of any function.</p>
 <h3 id="contracts">Contracts</h3>
 <p>For functions that are either:</p>
 <ul>
@@ -1772,9 +1772,11 @@ void quick_sort(int a[], int len) {
 </blockquote>
 <p>Big-O notation is the <strong>asymptotic behaviour</strong> of a function - the behaviour of a function as its input approaches infinity.</p>
 <p>In future courses, we will use the formal definition to prove algorithm complexities.</p>
-<p>There are also other notations for various asymptotic behaviours. For example, <span class="math">\(\Omega(n)\)</span> is the asymptotic lower bound, just as <span class="math">\(O(n)\)</span> is the asymptotic upper bound, and it means <span class="math">\(c \cdot g(n) \le f(n)\)</span> for some <span class="math">\(c\)</span> after <span class="math">\(n\)</span> is greater than some <span class="math">\(n_0\)</span>.</p>
-<p>As especially useful one is <span class="math">\(\Theta(n)\)</span>, which defines the exact asymptotic behaviour: <span class="math">\(c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n), c_1 \ne 0, c_2 \ne 0\)</span>. This means that <span class="math">\(\Omega(n) = O(n) \implies \Omega(n) = O(n) = \Theta(n)\)</span>.</p>
+<p>There are also other notations for various asymptotic behaviours. For example, <span class="math">\(\Omega(n)\)</span> (big-omega) is the asymptotic lower bound, just as <span class="math">\(O(n)\)</span> (big-O) is the asymptotic upper bound, and it means there exists some <span class="math">\(c\)</span> such that <span class="math">\(c \cdot g(n) \le f(n)\)</span> whenever <span class="math">\(n \ge n_0\)</span>.</p>
+<p>As especially useful one is <span class="math">\(\Theta(n)\)</span>, which defines the exact asymptotic behaviour: <span class="math">\(f(n) \in \Theta(g(n))\)</span> means that there exist <span class="math">\(c_1 \ge 0, c_2 \ge 0, n_0\)</span> such that <span class="math">\(c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n)\)</span> whenever <span class="math">\(n \ge n_0\)</span>. This means that <span class="math">\(\Omega(n) = O(n) \implies \Omega(n) = O(n) = \Theta(n)\)</span>.</p>
 <p>We often use <span class="math">\(O(n)\)</span> instead of <span class="math">\(\Theta(n)\)</span>, even though <span class="math">\(\Theta(n)\)</span> is more appropriate. Maybe because it's easier to type.</p>
+<p>There's also <span class="math">\(\omega(n)\)</span> (little-omega) - <span class="math">\(f(n) \in \omega(g(n))\)</span> means that for all <span class="math">\(c &gt; 0\)</span>, there exists an <span class="math">\(n_0\)</span> such that <span class="math">\(c \cdot g(n) \le f(n)\)</span> whenever <span class="math">\(n \ge n_0\)</span>.</p>
+<p>There's also <span class="math">\(o(n)\)</span> (little-o) - <span class="math">\(f(n) \in o(g(n))\)</span> means that for all <span class="math">\(c &gt; 0\)</span>, there exists an <span class="math">\(n_0\)</span> such that <span class="math">\(f(n) \le c \cdot g(n)\)</span> whenever <span class="math">\(n \ge n_0\)</span>.</p>
 <p>;wip: slide 67 to 78</p>
 <h2 id="space-complexity">Space Complexity</h2>
 <p>We can also analyze the amount of memory a function uses as the input grows arbitrarily large. If two algorithms have the same time complexity, the one using less memory is often preferable, and it is in many cases faster as well.</p>
