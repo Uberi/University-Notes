@@ -42,11 +42,11 @@ The inductive arguments that are so essential to science cannot give us certain 
 
 Quine is essentially criticizing that superiority of old epistemology to science, its reliance on certain knowledge, and its avoidance of circularity. In Quine's naturalized epistemology, science comes first, and **epistemology is a branch of science**, specifically related to cognitive science and psychology. Here, the new goal of epistemology is to understand how science and our practices of science actually work, rather than justifying the existance of science.
 
-Additionally, science is the best way of getting information about the world, so we might as well use science to study science. It is circular to some extent, but this is fine since we no longer care about certainty. It is circular, but not in a way that blocks progress - progress can be made without certainty, through incrementally gaining confidence in our fallible beliefs as we obtain more discoveries and scrutinize our beliefs publicly.
+Additionally, science is the best way of getting information about the world, so we might as well use science to study science. It is circular to some extent, but this is fine since we no longer care about circularity. It is circular, but not in a way that blocks progress - progress can be made without certainty, through incrementally gaining confidence in our fallible beliefs as we obtain more discoveries and scrutinize our beliefs publicly.
 
-Kim's criticism of Quine's naturalized epistemology starts off by agreeing with Quine's criticism of old epistemology - that naturalized epistemology cannot replace old esptemology. According to naturalized epistemology, individuals accept senses asinput and output beliefs. However, Kim says that there is more to believing and knowing things.
+Kim's criticism of Quine's naturalized epistemology starts off by agreeing with Quine's criticism of old epistemology, but then says that naturalized epistemology cannot replace old epistemology. According to naturalized epistemology, individuals accept senses as input and output beliefs. However, Kim says that there is more to believing and knowing things.
 
-Kim says that the central tenet of epistemology is justification, that epistemologists actually catre about how justified beliefs are formed. In other words, justification is normative, while science is descriptive, so naturalized epistemology cannot answer these normative questions - science cannot tell us how we **should** form beliefs, only **how we do**.
+Kim says that the central tenet of epistemology is justification, that epistemologists actually care about how justified beliefs are formed. In other words, justification is normative, while science is descriptive, so naturalized epistemology cannot answer these normative questions - science cannot tell us how we **should** form beliefs, only **how we do**.
 
 For example, naturalized epistemology cannot tell us what makes evidence good, what beliefs count as being justified, what counts as a fallacy, what is rational to believe, and so on. According to Kim, belief isn't even possible without normative rules - to believe something, one needs a baseline of what counts as believable or not.
 
@@ -93,8 +93,6 @@ For example, a pediatrician who, in grief of his daughter being diagnosed with a
 
 In other words, selfless assertion challenges either the knowledge rule, or the idea that knowledge requires belief (this is supported by the pediatrician thinking that there being no connection is most likely to be true). Perhaps the pediatrician believes both (even though they are conflicting), or the "best interests" qualifier has some significance.
 
-;wip: potentially a good topic for the paper is whether a better rule for assertion is whether what is asserted is in the best interests of people being asserted to
-
 Another example is a Catholic teacher who believes in creationism, but still teaches students the evidence presented by science. Although the teacher's faith has her believe one thing, she asserts another, without having knowledge, and this seems to be a proper assertion. However, the examples provided so far have been quite complex, and it is important to consider other factors in play that could influence how we view the assertions or knowledge.
 
 # 23/9/15
@@ -103,11 +101,11 @@ Readings: Turri
 
 There are different types of speech acts, and each one have their own norms and rules. For example, guessing has different norms from speculating, conjecturing, asserting, promising, or guaranteeing. The norms and rules are what we are trying to define for each relevant speech act.
 
-There are different types of normativity. **Constitutive normalivity** are the internal rules that consitute a practice - the rules that basically define the practice. **Moral normativity** are rules that say when a practice is morally permissible - the rules than define when we should do the practice. **Prudential normativity** are rules that say when a practice is prudent/wise - when it would be a good idea to do a practice.
+There are different types of normativity. **Constitutive normativity** are the internal rules that consitute a practice - the rules that basically define the practice. **Moral normativity** are rules that say when a practice is morally permissible - the rules than define when we should do the practice. **Prudential normativity** are rules that say when a practice is prudent/wise - when it would be a good idea to do a practice.
 
 For example, the rules of chess is contitutive normativity, while going easy on new chess players is moral normativity. If you have a bet that you will lose a chess game, it would be prudent to lose it in order to win the bet, and this is prudential normativity.
 
-What is the constitutive norm of assertion? In other words, what is the fundamental rule of assertion? Do assertions need to be factive (requires truth)?
+What is the constitutive norm of assertion? In other words, what is the fundamental rule of assertion? Do assertions need to be factive (do assertions require truth)?
 
 One factive account of assertion is the **truth rule** - one should assert something only if it's true, and knowledge/justification/belief is not necessary.
 
@@ -117,7 +115,7 @@ A non-fictive account is the **belief rule** - one should assert something only 
 
 Another non-fictive account is the **justification rule** - one should assert something only one can justify it, so that needs belief and justification.
 
-Lackey's account is non-factive, and modern literature tends to favor non-factive accounts. It feels like when people make well-justified assertions that turn out to be false, they didn't do anything wrong and are not to blame. In other words, there are **reasonable false assertions**.
+Lackey's selfless assertion account is non-factive, and modern literature tends to favor non-factive accounts. It feels like when people make well-justified assertions that turn out to be false, they didn't do anything wrong and are not to blame. In other words, there are **reasonable false assertions**.
 
 For example, if we have 99.9% certainty that something would happen, it seems proper to assert it as true, even though we could turn out to be wrong - we should not be to blame for making such an assertion.
 
@@ -143,7 +141,7 @@ For now, we will say that one is justified in believing something if one has goo
 
 However, Fantl and McGrath deny evidentialism - there are things other than evidence that can affect whether beliefs are justified and whether one has knowledge. For example, if you know X, it is no problem to act as if X. However, if it is a problem to act as if X, then you could explain it away as though you didn't know X, even though you did. The main idea is that if you know that something is true, then it is fine to act on it - it is rational to act on your knowledge. Also, if you're justified in beliecing something is true, then it is also fine to act on it.
 
-However, how much is at stake affects how rational it is o perform certain actions - what is the cost of getting something wrong? For example, suppose we were vacationing, and we ask someone whether a train stops in Foxboro, and we don't really care if it's right or not. Since this is pretty good evidence that it does stop there, we would believe the person and get on the train. However, if we were on the way to a critical job interview, we would probably double check just in case. In this case, the evidence is not good enough to believe the person, and would get more evidence instead.
+However, how much is at stake affects how rational it is to perform certain actions - what is the cost of getting something wrong? For example, suppose we were vacationing, and we ask someone whether a train stops in Foxboro, and we don't really care if it's right or not. Since this is pretty good evidence that it does stop there, we would believe the person and get on the train. However, if we were on the way to a critical job interview, we would probably double check just in case. In this case, the evidence is not good enough to believe the person, and would get more evidence instead.
 
 In other words, in one case it is rational to believe the justification, and in another case it is not - so in one case, your belief is justified, and in another, it is not, even though there is exactly the same evidence in both cases. This implies that there is more than just evidence at play in belief and actions. This is at odds with evidentialism - perhaps each person actually has their own personal threshold of justification.
 
@@ -170,7 +168,7 @@ An interesting thing to consider is muscle memory - if muscle memory is knowledg
 
 Locke basically says that knowledge is truth, evidence, belief, and practical factors - practical factors directly influene knowledge. Descartes basically says that knowledge is truth, evidence, and belief, all of which are affected by practical factors - practical factors are removed from knowledge. We want to test these empirically, using psychological and sociological experiments.
 
-These experiments tested things like how knowledge was affected by two identical sitations with different stakes, as well as many other variables. Each of the 600+ particupants were given situations with different stakes, and then questioned regarding the state of belief, truth, evidence, action, knowledge, and importance.
+These experiments tested things like how knowledge was affected by two identical situations with different stakes, as well as many other variables. Each of the 600+ particupants were given situations with different stakes, and then questioned regarding the state of belief, truth, evidence, action, knowledge, and importance.
 
 As it turns out, stakes had a negative correlation with action, truth, and evidence, and these in turn had a positive correlation with knowledge. So if the stakes are high, actionability, confidence in truth, and amount of evidence are decreased, and if they are low they are all increased. Acting had the most significant impact on having knowledge, truth a little less, but evidence a lot less.
 
@@ -243,7 +241,9 @@ By acquaintance theory, moral/religious/aesthetic knowledge requires acquaintanc
 
 By virtue theory, moral/religious/aesthetic knowledge requires virtues, such as the virtue of figuring this out for oneself, a virtue that cannot be transferred via testimony.
 
-Basically, these theories push the testimonial asymmetry into knowledge asymmetry. Hazlett rejects all of these, and proposes a social theory instead: moral/religious/aesthetic knowledge is socially valuable, and testimony cannot transfer the social value via testimony - beliefs are not worth as much when they were just formed by testimony, since they reduce diversity of knowledge. In other words, testomonial beliefs are bad when they are bad for society.
+Hazlett rejects all of these, and proposes a social theory instead: moral/religious/aesthetic knowledge is socially valuable, and testimony cannot transfer the social value via testimony - beliefs are not worth as much when they were just formed by testimony, since they reduce diversity of knowledge. In other words, testimonial beliefs are bad when they are bad for society.
+
+One objection to these theories is that they make knowledge asymmetric. For example, why is moral/religious/aesthetic knowledge more socially valuable?
 
 # 14/10/15
 
@@ -264,11 +264,11 @@ We believe that the sun is around 93 million miles from the Earth. However, most
 
 Huemer has three possible answers to when we should believe our memories - inferential, foundational, and preservative. Huemer then rejects them in favor of a dualistic view.
 
-In the inferential theory, memory beliefs are justified by that memory being reliable in the past - if it worked out in the past, then we are justified in believing it. However, this theory is rather circular - the only things that tell us that a memory was reliable are our other memories. If we use only our present experiences and insights, it's unlikely we could judge whether memories are reliable under this theory.
+In the **inferential theory**, memory beliefs are justified by that memory being reliable in the past - if it worked out in the past, then we are justified in believing it. However, this theory is rather circular - the only things that tell us that a memory was reliable are our other memories. If we use only our present experiences and insights, it's unlikely we could judge whether memories are reliable under this theory.
 
-In the foundational theory, memories are the foundation of justification, and just as we usually trust perception, we should also usually trust remembering something - remembering something automatically gives a good reason to believe it. However, the passage of time alone shouldn't make false beliefs justified - it's easy to create a memory of an unjustified belief, and then say it's justified because it's a memory.
+In the **foundational theory**, memories are the foundation of justification, and just as we usually trust perception, we should also usually trust remembering something - remembering something automatically gives a good reason to believe it. However, the passage of time alone shouldn't make false beliefs justified - it's easy to create a memory of an unjustified belief, and then say it's justified because it's a memory.
 
-In the preservation theory, memory preserves the original justification of the belief - whatever the justification for the original belief was is also the justification for memory beliefs. Even if one does not remember what the original justification was for believing something, the belief is still justified. However, if someone gets cloned, the clone remembers doing all the things the original did, without actually having done those things - the clone should have justification to believe it did those things, since it has all the memories of the original, but under this theory it does not.
+In the **preservation theory**, memory preserves the original justification of the belief - whatever the justification for the original belief was is also the justification for memory beliefs. Even if one does not remember what the original justification was for believing something, the belief is still justified. However, if someone gets cloned, the clone remembers doing all the things the original did, without actually having done those things - the clone should have justification to believe it did those things, since it has all the memories of the original, but under this theory it does not.
 
 The dualistic theory takes parts of all of these theories. It focuses on a few issues with the other ones: beliefs can't increase in justification just by becoming memories, and justification should depend only on the current state of people - if clones have the same memory, they should also have the same justification.
 
@@ -289,7 +289,7 @@ We usually accept belief entailment becase it captures how minds try to get a me
 
 If knowledge is an achievement, then beliefs determine who gets credit for having it - belief is required to get credit for having knowledge. Also, it is hard to think of any knowledge of a topic when there are no beliefs about it. We will examine several situations where it seems like we have knowledge without belief.
 
-Radform proposes a thouht experiment: suppose a student feels certain they don't know a subject, but when asked questions about it, suddenly remembers and answers correctly. The student then concludes that they actually did have any knowledge, even though she didn't believe it before. Basically, the student believes they didn't have the knowledge, but it was stored in their brain nonetheless as knowledge. It seems that if they had knowledge even before believing they had it, then belief is not required for knowledge. In other words, the student forgot that they had previously learned the fact, and so doesn't have belief.
+Radform proposes a thought experiment: suppose a student feels certain they don't know a subject, but when asked questions about it, suddenly remembers and answers correctly. The student then concludes that they actually did have any knowledge, even though she didn't believe it before. Basically, the student believes they didn't have the knowledge, but it was stored in their brain nonetheless as knowledge. It seems that if they had knowledge even before believing they had it, then belief is not required for knowledge. In other words, the student forgot that they had previously learned the fact, and so doesn't have belief.
 
 Intuitively, this case is controversial because of the question of whether the student actually had knowledge of the subject. It seems like due to circumstances and a temporary memory deficit, the access to the belief was blocked temporarily. Myers-Schulz and Schwitzgebel also try to find these counterexamples.
 
@@ -354,7 +354,7 @@ For example, an expert birdwatcher and a novice birdwatcher both see a woodpecke
 
 Conee and Feldman say that these cases, as well as four more given in their paper, are representative of how justification works in all situations.
 
-One objection to this is that some beliefs can be justified even without internal mental state, like forgotten justification, logic/probabilistic relations, stored bliefs, and impulsive beliefs. For example, if one forgets where they learned that broccoli is healthy, yet continues to believe that broccolli is healthy, they are arguably still justified in believing that broccolli is healthy. A response to this might be that the person still has memory of there being evidence in the world that broccoli is healthy, and is justified in believing that their memory is generally accurate.
+One objection to this is that some beliefs can be justified even without internal mental state, like forgotten justification, logic/probabilistic relations, stored bliefs, and impulsive beliefs. For example, if one forgets where they learned that broccoli is healthy, yet continues to believe that broccolli is healthy, they are arguably still justified in believing that broccolli is healthy, or at least more justified than someone who just believes that broccolli is healthy for no reason. A response to this might be that the person still has memory of there being evidence in the world that broccoli is healthy, and is justified in believing that their memory is generally accurate.
 
 Goldman responds by saying that in the externalist view, justification depends on a belief's **etiology** - where the belief comes from, as well as the belief's history. For example, a person who reads a fact in an unreliable newspaper and forgets where they read it from seems to have less justification than a person who reads a fact in a reliable newspaper and forgets where they read it - this seems to imply that there are external factors in justification, since both people have the same mental state yet seem to have different levels of justification.
 
@@ -386,7 +386,7 @@ A reliable cognitive process must tend to produce more true beliefs than false b
 
 For example, if one's memory is often correct, then memory is a reliable cognitive process. If one's memory is often incorrect, then memory is not a reliable cognitive process.
 
-Consider a person who is running and a brain in a vat who is deceived into thinking it is running. Both of their internal states are the same, and they both believe they are running, but the brain in the vat is not actually running. According to internalism, the justiifcation is the same for both the runner and the brain in a vat - they both believe they are running and are justified in believing so. However, by process reliablism, the brain's belief that it is running is not justified, because it is not actually running.
+Consider a person who is running and a brain in a vat who is deceived into thinking it is running. Both of their internal states are the same, and they both believe they are running, but the brain in the vat is not actually running. According to internalism, the justiifcation is the same for both the runner and the brain in a vat - they both believe they are running and are justified in believing so. However, by externalism, the brain's belief that it is running is not justified, because it is not actually running.
 
 According to Cohen, a proponent of internalism, the brain in a vat is justified in believing it is running. If we were all brains in vats, then no beliefs would ever be justified, which definitely seems to be false. If we have every reason to believe something, then the fact that the cognitive process is unreliable and we don't know shouldn't matter - **justified beliefs are produced by good reasoning, regardless of whether it results in reliable outcomes or not**. Cohen suggests that **there is no connection between justification and truth**.
 
@@ -409,7 +409,7 @@ On the other hand, intellectual virtue seems to be the tendency to have a love o
 
 One acquires virtues through hard work over a long period of time, resulting in the tendency to have that excellence. Moral virtues motivate you to do the right thing, while intellectual virtues motivate you to seek the truth - virtues are emotional disposition to try to accomplish things.
 
-Virtues must additionally actually result in accomplishment to some extent - they have a **reliability component**. A virtuous person must, in addition to be motivated to do something, they must be successful. One cannot be intellectually virtuous if they aren't successful in finding the truth. Likewise, an honest person must be motivated to be honest, but also actually succeed to be honest.
+In addition to disposition, virtues must actually result in accomplishment to some extent - they have a **reliability component**. A virtuous person must, in addition to be motivated to do something, they must be successful. One cannot be intellectually virtuous if they aren't successful in finding the truth. Likewise, an honest person must be motivated to be honest, but also actually succeed in being honest.
 
 So a virtue, according to Zagzebski, are a deep/lasting excellence that involves motivation to produce a certain outcome and reliable success in doing so.
 
@@ -423,7 +423,7 @@ However, there is more to reliability than just the ratio of true beliefs to tot
 
 Greco supports a different virtue theory, combining this externalist view with internal views. In this view, virtues are simply abilities - how able you are to reliably achieve results.
 
-Greco criticizes Vagzebski's view by saying that people can have justification even without virtue. Also, it's possible to have reliable processes without justification - if one doesn't have any internal access to the mechanisms that resulted in the belief, how can we say that the belief is justified?
+Greco criticizes Zagzebski's view by saying that people can have justification even without virtue. Also, it's possible to have reliable processes without justification - if one doesn't have any internal access to the mechanisms that resulted in the belief, how can we say that the belief is justified?
 
 According to Greco, knowledge **must be formed from intellectual virtue**, and **on the basis of rules of belief formation that, from your perspective, you endorse** (**norm internalism**). In other words, you need to have intellectual virtue and follow your own rules for good beliefs (this is called "countenancing one's norm for belief formation"). Basically, knowledge is the result of **applying intellectual virtues for the right reasons**.
 
@@ -464,17 +464,17 @@ Basically, felicitous falsehoods should result in a theory that is true as a who
 
 So far we've been talking about how to tell when beliefs are proper/responsible/acceptable. However, does it even make sense to say a belief is proper? Can one be responsible or criticized for improper beliefs? According to Alson, we cannot control our own beliefs.
 
-**Deontological justification** is justification in terms of obligations - it is proper to hold a belief when it is fomed without breaking any of the rules of belief formation. In other words, deontological justification is a freedom from blame for believing.
+**Deontological justification** is justification in terms of obligations - it is proper to hold a belief when it is formed without breaking any of the rules of belief formation. In other words, deontological justification is a freedom from blame for believing.
 
 The deontological justification rules should forbid beliefs likely to be false, and permit beliefs likely to be true. It is based on deontological actions - actions are acceptable if they follow the rules of acting.
 
-However, Alson says that while we can choose our actions, we cannot choose our beliefs. Therefore, we can't be blamed or judged for our beliefs, and can't say they are proper or improper if we can't even control them. If we ought to do something, then we should at least be able to do it - **obligation requires ability**.
+However, Alson argues against this by saying that while we can choose our actions, we cannot choose our beliefs. Therefore, we can't be blamed or judged for our beliefs, and can't say they are proper or improper if we can't even control them. If we ought to do something, then we should at least be able to do it - **obligation requires ability**.
 
 Ginet's deontological justification model says that believing something if and only if they follow the rules of belief formation, and could not be blamed for believing it. **Doxastic voluntarism** is the view that people control their own beliefs. **Doxastic involuntarism** is the view that people cannot.
 
 Descartes says that being able to control one's beliefs is one of the most fundamental abilities that one has. Most philosophers in the past shared a similar view, but modern philosophers generally have the opposite view. Beliefs can be controlled no more than one's automatic bodily functions.
 
-According to Alson, in addition to perceptual beliefs being involutary (we can't control what we believe we perceive), inferential beliefs are as well - we can't make ourselves arbitrarily believe that 1 + 1 = 2.
+According to Alson, in addition to perceptual beliefs being involutary (we can't control what we believe we perceive), inferential beliefs are as well - we can't make ourselves arbitrarily believe that 1 + 1 = 3.
 
 Alson admits that we do seem to have some sort of control over the long term of our beliefs - pretending to believe something over a long time could eventually result in actually believing it, though the success rate probably isn't very good.
 
@@ -517,7 +517,7 @@ Are there fundamentally different types of knowledge? What is the difference bet
 
 **Anti-intellectualism** is the opposite view - that **knowing-how and knowing-that are distinct types of knowledge**. One knows how to X if and only if they possess a certain ability to X.
 
-Additionally, anti-intellectualism says that ability is necessary for know-how, while praxism says that ability is sufficient for know-how.
+Additionally, anti-intellectualism says that ability is necessary for know-how (if you know it, then you can do it), while praxism says that ability is sufficient for know-how (if you can do it, then you know it).
 
 The argument for this, presented by Ryle, is that knowing how requires us to contemplate a proposition, which requires us to know how to contemplate propositions, which requires knowing how to contemplate that proposition, and so on, ad infinitum.
 
@@ -533,8 +533,6 @@ Suppose someone knows how to bake a cake, but then the world's egg supply disapp
 
 Suppose someone is in a room with an unlocked door, but the person thinks that it is locked. It seems that the person doesn't know how to leave the room since they think the door is locked, but the person does have the ability to simply open the door and leave. Suppose someone can do 50 push-ups, but while another person can only do 20. It seems that both people know how to do push-ups equally well, but one person is simply stronger - they both know how, but have different levels of ability.
 
-;wip: critical response topic: support intellectualism, but argue that some forms of knowledge can't be transferred, and knowledge includes motor skills and reflexes
-
 # 18/11/15
 
 Readings: Stanley, Bengson/Moffett/Wright
@@ -549,7 +547,7 @@ What do psychological experiments say about knowing-that vs. knowing-how? We wan
 
 Know-how seems to have a non-cognitive nature. Experimentally, Bengson/Moffett/Wright try to test whether people think knowing-that is different from knowing-how.
 
-People were presented with a case where someone is able to teach someone else how to do stunts without ever being able to do them themselves. When asked, most of them judged that the person had know-how but didn't have ability.
+People were presented with a case where someone is able to teach someone else how to do stunts without ever being able to do them themselves. When asked, most of them judged that the person had know-that but didn't have ability, supporting anti-intellectualism.
 
 # 23/11/15
 
@@ -558,7 +556,7 @@ Readings: Longino, Okruhlik
 Bias
 ----
 
-Previously, Quine and Kim said that epistemology is a branch of science similar to cognitive science and psychology - objective science is the best way to obtain objective knowledge about the world. Science reliad on observations that everyone can evaluate, and hypotheses that the public can scrutinize.
+Previously, Quine and Kim said that epistemology is a branch of science similar to cognitive science and psychology - objective science is the best way to obtain objective knowledge about the world. Science relies on observations that everyone can evaluate, and hypotheses that the public can scrutinize.
 
 Longino and Okruhlik disagree that science is an objective activity. Longino says that objectivity depends on how scientific communities are organized, while Okruhlik says that in some areas we aren't objective.
 
@@ -588,7 +586,7 @@ In other words, science can be more objective by organizing it to best promote c
 
 # 25/11/15
 
-The final exam is basically a subset of the questions from the study guide (posted on LEARN) and from the questions at the beginning of each set of slides. On the final we choose a subset of those questions, which we choose several to answer.
+The final exam is basically a subset of the questions from the study guide (posted on LEARN) and from the questions at the beginning of each set of slides. On the final we choose a subset of those questions to answer.
 
 The **empiricists** argue that science is in fact objective and value-free, as long as the methods are followed correctly. In other words, the quality of science done doesn't depend on the beliefs/experiences/values/etc. that one has.
 
@@ -600,11 +598,11 @@ According to Logino, this is because the woman's standpoint values more complex 
 
 Longino and Okruhlik reject feminist empiricism, but still think science can be objective. They say that viewpoints do matter, but it is impossible to eliminate contextual values from science. Instead, we add more values by increasing diversity and allow existing values to be criticized.
 
-Longino and Okruhlik say that contextual values often affect us involuntarily, and without us being consciously aware of them - these are our **implicit biases**.Popular questions in psychology are how to detect these impliit biases and how they cause people to behave differently.
+Longino and Okruhlik say that contextual values often affect us involuntarily, and without us being consciously aware of them - these are our **implicit biases**. Popular questions in psychology are how to detect these impliit biases and how they cause people to behave differently.
 
-The **implicit association test** is a well-known psychological bias test that is very successful in determining their attitudes. It tests people's reaction times in linking together different concepts. For example, one version showed pictures of objects and several categories that participants could sort them into. Initially the categories would be harmless vs. dangerous, then African-American vs. European-American, and then "African-American or harmles vs. European-American or dangerous" and "African-American or dangerous vs. European-American or harmless". The last two categories either conform or don't to certain social stereotypes, and measuring the reaction times in answering these tells us about one's impliit biases (empirically, people have low reaction times when the associations are consistent with stereotypes, like "European-American vs. harmless").
+The **implicit association test** is a well-known psychological bias test that is very successful in determining their attitudes. It tests people's reaction times in linking together different concepts. For example, one version showed pictures of objects and several categories that participants could sort them into. Initially the categories would be harmless vs. dangerous, then African-American vs. European-American, and then "African-American or harmless vs. European-American or dangerous" and "African-American or dangerous vs. European-American or harmless". The last two categories either conform or don't to certain social stereotypes, and measuring the reaction times in answering these tells us about one's impliit biases (empirically, people have low reaction times when the associations are consistent with stereotypes, like "European-American vs. harmless").
 
-Implicit association tests for race showed that 88% of white Americans and 48% of black Americansshow implicit bias in favor of white people. This manifests in the real world in often unpredictable ways, such as resumes with "stereotypically white" getting 50% more employer responses compared to resumes with "stereotypically black" people, even when all of the resumes are otherwise identical. When bus riders asked to ride for free due to lack of funds, bus drivers allowed white/asian people to 72% of the time, indian people 50% of the time, and black people only 36% of the time.
+Implicit association tests for race showed that 88% of white Americans and 48% of black Americans show implicit bias in favor of white people. This manifests in the real world in often unpredictable ways, such as resumes with "stereotypically white" getting 50% more employer responses compared to resumes with "stereotypically black" people, even when all of the resumes are otherwise identical. When bus riders asked to ride for free due to lack of funds, bus drivers allowed white/asian people to 72% of the time, indian people 50% of the time, and black people only 36% of the time.
 
 That means that there are significant differences in opportunity based on race, even after we control for factors like explicit beliefs/biases.
 
@@ -618,7 +616,7 @@ The final exam questions are picked out of the questions from the study guide.
 
 Knowing about our implicit biases allows us to consider them more critically, and counteract their effect by thinking in terms of other viewpoints.
 
-Do these implicit attitudes/biases releal anything about actual beliefs? Alston though that normal beliefs are just as uncontrollable as our implicit ones, but are they related?
+Do these implicit attitudes/biases reveal anything about actual beliefs? Alston though that normal beliefs are just as uncontrollable as our implicit ones, but are they related?
 
 How can we have knowledge about ourselves and the world given all our implicit biases/attitudes? Do these implicit biases undermine justification for our beliefs?
 
@@ -639,10 +637,99 @@ The best test for a theory of mind is the ability to understand that others have
 
 Testing young children suggests that they do have this model. Nonverbal versions of this experiments on monkeys suggests that monkeys do not.
 
-One experiment tested this on chimps. There were two cases where food was placed in front of a chimp in one of two boxes, and it was made clear that the experimentor knew which box the food is in. Then, the box contents are switched while the experimentor can't see them. The reaction times of the monkeys when allowed to get food would, under experiment assumptions, show which box the monkey expected the experimenter to look in. The results showed that the chimps would take equally long, which implies they don't have any model of false beliefs in others.
+One experiment tested this on chimps. There were two cases where food was placed in front of a chimp in one of two boxes, and it was made clear that the experimentor knew which box the food is in. Then, the box contents are switched while the experimentor can't see them. The reaction times of the monkeys when allowed to get food would, under experiment assumptions, show which box the monkey expected the experimenter to look in. The results showed that the chimps would take equally long, which implies **chimpanzees don't have any model of false beliefs in others**.
 
 Basically, experiments found that monkeys could understand what others see/hear/know, but not what others believe - they can represent whether people have beliefs about the world identical to their own, but not any other beliefs.
 
 Some other animals like scrub jays are capable of deception - intentionally generating false beliefs in others. This is a subject under active research.
 
 This raises questions about whether the theory of mind is even applicable to other animals - perhaps the concept itself only really applies to humans. Also, if animals can know without beliefs, then perhaps knowlege doesn't require belief.
+
+Review
+------
+
+* What is the field of epistemology?
+    * Quine: Old epistemology just has a bunch of problems. I invented this new one called Naturalized Epistemology.
+    * Quine: In Naturalized Epistemology, epistemology is part of science rather than justifying it.
+    * Quine: In Naturalized Epistemology, we don't really need to care so much about certainty, as science can't really be certain anyways.
+    * Quine: In Naturalized Epistemology, we don't really need to care so much about circularity as long as we gain insight into knowledge.
+    * Quine: This makes epistemology into a branch of science, sort of like Cognitive Psychology.
+    * Kim: But Quine, naturalized epistemology isn't quite enough to replace old epistemology. For one, it's only descriptive rather than normative.
+* Is knowledge worth anything?
+    * Kvanvig: Knowledge isn't that important anyways. What's actually important is achieving the ideal cognitive state - being able to determine the truth value of anything that concerns our lives.
+    * Kvanvig: Knowledge isn't just justified true belief anyways. For example, if you think you see a sheep from afar, but you get closer and it's actually a goat, but there are actually sheep behind it, then you had a justified true belief, yet no knowledge.
+    * Kvanvig: I'm going to call that a Gettier case. It's a good example of why chasing the ideal cognitive state is more important.
+    * Other people: But Kvanvig, knowledge is a norm of assertion! It's still important.
+* When should we assert?
+    * Some people: You should only assert something if you know it. This is the knowledge norm of assertion.
+    * Lackey: Well, not always - there are reasonable assertions without knowledge. Like a creationist teacher that teaches evolution as part of their job.
+    * Other people: But Lackey, the teacher's assertions aren't really proper; they are only saying it because it is part of their job.
+* What determines how much justification we have?
+    * Some people: Evidence is the only factor in justification!
+    * Fantl/McGrath: But what about stakes? Wouldn't you have more justification believing someone telling you the train schedule if catching the train wasn't that important?
+* What determines how much knowledge we have?
+    * Buckwalter/Turri: You should only know something if you can demonstrate it. This is the showing norm of knowledge.
+    * Buckwalter/Turri: Most people would say that saying "do you know X?" is the same as asking for a demonstration of X, and saying "I don't know X" is a good reason not to demonstrate X.
+* When should we believe testimony?
+    * Some people: We should believe testimony whenever we don't have a reason not to. This is the PR thesis.
+    * Fricker: But that's not a very good criteria. A better one is the to believe it whenever we can critically assess it, explain it, and defend it. This is the NC thesis.
+    * Fricker: Basically, we should be confident that if the testimony is false, then we would be able to spot it.
+    * Other people: But Fricker, that's too demanding to actually expect of people!
+    * Fricker: But people actually do exactly this all the time, subconsciously.
+* Can testimony create knowledge?
+    * Lackey: Yes, when people give testimony for a fact but don't talk about the mitigating factors.
+    * Lackey: For example, you can tell someone you saw a red object, but omit that it was under a red light, so it might've actually been white - the other person gets knowledge that the object is red.
+    * Other people: But Lackey, this isn't really new knowledge, because the people's obtained knowledge that the object is red isn't justified, even if they aren't aware of it.
+    * Other people: Also, if we go by Fricker's NC thesis then this testimony wouldn't be believed in the first place.
+* Why can't we seem to transfer moral/religious/aesthetic knowledge via testimony (testimonial asymmetry)?
+    * Some people: Moral/religious/aesthetic knowledge also requires understanding/first-hand experience/virtue, which can't be transferred via testimony.
+    * Hazlett: I have a better explanation; moral/religious/aesthetic knowledge has social value, so we're incentivized to obtain it for ourselves as we can't transfer social value via testimony.
+    * Other people: But Hazlett, that just turns testimonial asymmetry into knowledge asymmetry. Why is moral/religious/aesthetic knowledge special then?
+* How is knowledge obtained from our memories justified?
+    * Some people: Memory is justification because it was reliable in the past (inferential theory).
+    * Some people: Memory is simply justification by itself, just as perception is (foundational theory).
+    * Some people: Memory only preserves the justification originally present from the knowledge that generated the memory.
+    * Huemer: I have a better explanation; the justification from memory is the justification originally present from the knowledge that generated the memory, multiplied by the confidence that the knowledge was correctly preserved by memory.
+    * Other people: But Huemer, confidence in memory is itself memory, and confidence in that confidence is also a memory, and so on, forever. How can we ever know what the confidence is?
+* Does knowledge require belief?
+    * Some people: Yes, knowledge is justified true belief.
+    * Myers-Shutz/Schwitzgebel: But sometimes belief isn't necessary. Suppose we had a student who didn't think they knew the answers to a quiz, but aces it anyways? Or a teacher with deep-rooted prejudices against certain people, but knows that they are just as capable as the rest?
+    * Other people: Actually, only deep-rooted (dispositional) beliefs are necessary for belief. Conscious (occurrent) beliefs aren't necessary for knowledge.
+* Is what determines how much justification we have all inside the mind?
+    * Some people: Yes, justification is based on what you can consciously access mentally (accessiblism).
+    * Some people: Yes, justification is based on what you can potentially access mentally (mentalism).
+    * Conee/Feldman: Mentalism actually works pretty well. For example, when two people read the same newspaper and one goes outside, that person gets more justification due to knowledge. If we have an expert birdwatcher and a novice looking at the same bird, the expert has more justification to believe it's a woodpecker.
+    * Other people: But Conee/Feldman, what if we had two people who believe X, but one originally had justification and then forgot it entirely? Isn't that person still more justified?
+    * Some people: Actually, justification is also based on factors outside the mind (externalism).
+    * Some people: What if we had a brain in a vat that was deceived into thinking it was running when it's not? It has no justification in believing it's running.
+    * Goldman: Actually, any beliefs formed from reliable cognitive processes like perception and memory are justified by nature. This is process reliablism.
+    * Goldman: So in the brain in a vat case, the brain is actually justified in believing it is running.
+* Where does knowledge come from?
+    * Zagzebski: Virtue is a deep, lasting excellence. Vice is a deep, lasting defect.
+    * Zagzebski: Virtue is disposition plus ability. For example, honesty is a disposition to tell to truth and the practice of telling the truth often.
+    * Zagzebski: Knowledge is obtained from practicing intellectual virtues like responsibility, fairness, and courage.
+* Does knowledge require truth?
+    * Some people: Yes, knowledge is justified true belief.
+    * Elgin: But sometimes falsehoods are actually beneficial for understanding (felicitous falsehoods). The tortoise and the hare fable never happened since hares can't talk, but it's still a valuable moral lesson.
+    * Elgin: Falsehoods are fine as long as the overall theory is correct, even if the details are off.
+    * Elgin: For example, we still use Newtonian mechanics to help understand the universe, even though they're wrong. It's a useful simplification.
+* When should we believe?
+    * Some people: We should hold beliefs that are the result of following the rules of belief.
+    * Alston: Actually, we can't even control what we believe, so if we're unable to follow the rules we shouldn't be obligated to (ought implies can).
+    * Alston: If you see it's raining outside, you can't just choose to believe it's not raining.
+* How does know-how relate to know-that?
+    * Some people: Know-how is the same as know-that. This is intellectualism.
+    * Some people: Know-how is different from know-that. Also, if you know-how then you can demonstrate it (anti-intellectualism).
+    * Some people: Know-how is different from know-that. Also, if you can demonstrate it then you know-how (praxism).
+    * Snowdon: Anti-intellectualism is wrong. If cake ingredients disappeared tomorrow, bakers would still know how to bake cakes, but can't demonstrate it.
+    * Snowdon: Praxism is wrong. A strong person and a weak person both know how to do push-ups the same amount, but the strong person can better demonstrate it. So the strong person can demonstrate better without any more know-how than the weak person.
+    * Cath: Intellectualism is wrong. A person who accidentally does something right every time seems to have know-how, but not know-that.
+    * Bengson/Moffet/Wright: We did a bunch of experiments asking people if people had know-how and ability in several situations, and as it turns out ability is not necessarily linked to know-how. So anti-intellectualism and praxism is wrong.
+* How can we make science more objective?
+    * Longino/Okruhlik: We can improve objectivity by improving diversity of viewpoints.
+    * Longino/Okruhlik: We should also make it easy for transformative criticism to be heard and for processes/methods to be changed in response.
+    * Okruhlik: For example, in a study bus drivers were more likely to give white people free bus rides than any other race. This is an example of these contextual values that form implicit bias.
+* Do non-humans have a theory of mind?
+    * Call/Tomasello: Not quite. We did experiments where we measured reaction times of chimps when experimenters had true/false beliefs, and they were the same.
+    * Call/Tomasello: That implies that chimps can't model false beliefs in others, which is part of a complete theory of mind.
+    * Call/Tomasello: However they did have a good model for what others perceived, showing awareness of what experimenters' eyes could see.
