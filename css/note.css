@@ -5,7 +5,7 @@ h2, h3, p, ul, ol, pre { text-align: left; }
 	margin-bottom: 2em;
 }
 
-h1[id ^= "section"] {
+h1[id ^= "section"] { /* the title at the top, excluding all the date titles from the converted Markdown */
 	font-size: 4em;
 	border-top: 1px solid #CCCCCC;
 	border-bottom: 1px solid #CCCCCC;

@@ -9,13 +9,7 @@
   <link rel="stylesheet" href="../highlight/styles/default.css">
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
-  <script>
-function highlight() { // highlight all code blocks using HighlightJS
-  var code_blocks = document.getElementsByTagName("code");
-  for (var i = 0; i < code_blocks.length; i++)
-    hljs.highlightBlock(code_blocks[i]);
-}
-</script>
+  <script>hljs.initHighlightingOnLoad();</script>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -95,25 +89,26 @@ code > span.er { color: #ff0000; font-weight: bold; }
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
 <h1 id="highlight.js">Highlight.js</h1>
-<p>Highlight.js is a syntax highlighter written in JavaScript. It works in the browser as well as on the server. It works with pretty much any markup, doesn't depend on any framework and has automatic language detection.</p>
+<p><a href="https://travis-ci.org/isagalaev/highlight.js"><img src="https://travis-ci.org/isagalaev/highlight.js.svg?branch=master" alt="Build Status" /></a></p>
+<p>Highlight.js is a syntax highlighter written in JavaScript. It works in the browser as well as on the server. It works with pretty much any markup, doesn’t depend on any framework and has automatic language detection.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>The bare minimum for using highlight.js on a web page is linking to the library along with one of the styles and calling <a href="http://highlightjs.readthedocs.org/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a>:</p>
 <pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;/path/to/styles/default.css&quot;</span><span class="kw">&gt;</span>
 <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;/path/to/highlight.pack.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
 <span class="kw">&lt;script&gt;</span><span class="ot">hljs</span>.<span class="fu">initHighlightingOnLoad</span>();&lt;<span class="ot">/script&gt;</span></code></pre>
-<p>This will find and highlight code inside of <code>&lt;pre&gt;&lt;code&gt;</code> tags trying to detect the language automatically. If automatic detection doesn't work for you, you can specify the language in the class attribute:</p>
+<p>This will find and highlight code inside of <code>&lt;pre&gt;&lt;code&gt;</code> tags; it tries to detect the language automatically. If automatic detection doesn’t work for you, you can specify the language in the <code>class</code> attribute:</p>
 <pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;html&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre>
 <p>The list of supported language classes is available in the <a href="http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html">class reference</a>. Classes can also be prefixed with either <code>language-</code> or <code>lang-</code>.</p>
-<p>To disable highlighting altogether use the <code>no-highlight</code> class:</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;no-highlight&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre>
+<p>To disable highlighting altogether use the <code>nohighlight</code> class:</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;nohighlight&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre>
 <h2 id="custom-initialization">Custom Initialization</h2>
 <p>When you need a bit more control over the initialization of highlight.js, you can use the <a href="http://highlightjs.readthedocs.org/en/latest/api.html#highlightblock-block"><code>highlightBlock</code></a> and <a href="http://highlightjs.readthedocs.org/en/latest/api.html#configure-options"><code>configure</code></a> functions. This allows you to control <em>what</em> to highlight and <em>when</em>.</p>
-<p>Here's an equivalent way to calling <a href="http://highlightjs.readthedocs.org/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a> using jQuery:</p>
+<p>Here’s an equivalent way to calling <a href="http://highlightjs.readthedocs.org/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a> using jQuery:</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="fu">$</span>(document).<span class="fu">ready</span>(<span class="kw">function</span>() {
   <span class="fu">$</span>(<span class="st">&#39;pre code&#39;</span>).<span class="fu">each</span>(<span class="kw">function</span>(i, block) {
     <span class="ot">hljs</span>.<span class="fu">highlightBlock</span>(block);
   });
-};)</code></pre>
+});</code></pre>
 <p>You can use any tags instead of <code>&lt;pre&gt;&lt;code&gt;</code> to mark up your code. If you don't use a container that preserve line breaks you will need to configure highlight.js to use the <code>&lt;br&gt;</code> tag:</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="ot">hljs</span>.<span class="fu">configure</span>({<span class="dt">useBR</span>: <span class="kw">true</span>});
 
@@ -121,13 +116,28 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <span class="ot">hljs</span>.<span class="fu">highlightBlock</span>(block);
 });</code></pre>
 <p>For other options refer to the documentation for <a href="http://highlightjs.readthedocs.org/en/latest/api.html#configure-options"><code>configure</code></a>.</p>
+<h2 id="web-workers">Web Workers</h2>
+<p>You can run highlighting inside a web worker to avoid freezing the browser window while dealing with very big chunks of code.</p>
+<p>In your main script:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="fu">addEventListener</span>(<span class="st">&#39;load&#39;</span>, <span class="kw">function</span>() {
+  <span class="kw">var</span> code = <span class="ot">document</span>.<span class="fu">querySelector</span>(<span class="st">&#39;#code&#39;</span>);
+  <span class="kw">var</span> worker = <span class="kw">new</span> <span class="fu">Worker</span>(<span class="st">&#39;worker.js&#39;</span>);
+  <span class="ot">worker</span>.<span class="fu">onmessage</span> = <span class="kw">function</span>(event) { <span class="ot">code</span>.<span class="fu">innerHTML</span> = <span class="ot">event</span>.<span class="fu">data</span>; }
+  <span class="ot">worker</span>.<span class="fu">postMessage</span>(<span class="ot">code</span>.<span class="fu">textContent</span>);
+})</code></pre>
+<p>In worker.js:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">onmessage = <span class="kw">function</span>(event) {
+  <span class="fu">importScripts</span>(<span class="st">&#39;&lt;path&gt;/highlight.pack.js&#39;</span>);
+  <span class="kw">var</span> result = <span class="ot">self</span>.<span class="ot">hljs</span>.<span class="fu">highlightAuto</span>(<span class="ot">event</span>.<span class="fu">data</span>);
+  <span class="fu">postMessage</span>(<span class="ot">result</span>.<span class="fu">value</span>);
+}</code></pre>
 <h2 id="getting-the-library">Getting the Library</h2>
-<p>You can get highlight.js as a hosted or custom-build browser script or as a server module. Head over to the <a href="http://highlightjs.org/download/">download page</a> for all the options.</p>
-<p>Note, that the library is not supposed to work straight from the source on GitHub, it requires building. If none of the pre-packaged options work for you refer to the <a href="http://highlightjs.readthedocs.org/en/latest/building-testing.html">building documentation</a>.</p>
+<p>You can get highlight.js as a hosted, or custom-build, browser script or as a server module. Right out of the box the browser script supports both AMD and CommonJS, so if you wish you can use RequireJS or Browserify without having to build from source. The server module also works perfectly fine with Browserify, but there is the option to use a build specific to browsers rather than something meant for a server. Head over to the <a href="https://highlightjs.org/download/">download page</a> for all the options.</p>
+<p><strong>Note:</strong> the library is not supposed to work straight from the source on GitHub; it requires building. If none of the pre-packaged options work for you refer to the <a href="http://highlightjs.readthedocs.org/en/latest/building-testing.html">building documentation</a>.</p>
 <h2 id="license">License</h2>
 <p>Highlight.js is released under the BSD License. See <a href="https://github.com/isagalaev/highlight.js/blob/master/LICENSE">LICENSE</a> file for details.</p>
 <h2 id="links">Links</h2>
-<p>The official site for the library is at <a href="http://highlightjs.org/" class="uri">http://highlightjs.org/</a>.</p>
+<p>The official site for the library is at <a href="https://highlightjs.org/" class="uri">https://highlightjs.org/</a>.</p>
 <p>Further in-depth documentation for the API and other topics is at <a href="http://highlightjs.readthedocs.org/" class="uri">http://highlightjs.readthedocs.org/</a>.</p>
 <p>Authors and contributors are listed in the <a href="https://github.com/isagalaev/highlight.js/blob/master/AUTHORS.en.txt">AUTHORS.en.txt</a> file.</p>
 <div class="license">

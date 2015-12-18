@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>README.ru | Anthony Zhang</title>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+</head>
+<body onload="highlight()">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68271407-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="/blog/" class="page">blog</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="/resume.pdf" class="page">résumé</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
+  </ul>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
+\]</span></p>
+<h1 id="highlight.js">Highlight.js</h1>
+<p>Highlight.js — это подсветчик синтаксиса, написанный на JavaScript. Он работает и в браузере, и на сервере. Он работает с практически любой HTML разметкой, не зависит от каких-либо фреймворков и умеет автоматически определять язык.</p>
+<h2 id="начало-работы">Начало работы</h2>
+<p>Минимум, что нужно сделать для использования highlight.js на веб-странице — это подключить библиотеку, CSS-стили и вызывать <a href="http://highlightjs.readthedocs.org/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a>:</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;/path/to/styles/default.css&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;/path/to/highlight.pack.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;script&gt;</span><span class="ot">hljs</span>.<span class="fu">initHighlightingOnLoad</span>();&lt;<span class="ot">/script&gt;</span></code></pre>
+<p>Библиотека найдёт и раскрасит код внутри тегов <code>&lt;pre&gt;&lt;code&gt;</code>, попытавшись автоматически определить язык. Когда автоопределение не срабатывает, можно явно указать язык в атрибуте class:</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;html&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre>
+<p>Список поддерживаемых классов языков доступен в <a href="http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html">справочнике по классам</a>. Класс также можно предваоить префиксами <code>language-</code> или <code>lang-</code>.</p>
+<p>Чтобы отключить подсветку для какого-то блока, используйте класс <code>nohighlight</code>:</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;nohighlight&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre>
+<h2 id="инициализация-вручную">Инициализация вручную</h2>
+<p>Чтобы иметь чуть больше контроля за инициализацией подсветки, вы можете использовать функции <a href="http://highlightjs.readthedocs.org/en/latest/api.html#highlightblock-block"><code>highlightBlock</code></a> и <a href="http://highlightjs.readthedocs.org/en/latest/api.html#configure-options"><code>configure</code></a>. Таким образом можно управлять тем, <em>что</em> подсвечивать и <em>когда</em>.</p>
+<p>Вот пример инициализация, эквивалентной вызову <a href="http://highlightjs.readthedocs.org/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a>, но с использованием jQuery:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="fu">$</span>(document).<span class="fu">ready</span>(<span class="kw">function</span>() {
+  <span class="fu">$</span>(<span class="st">&#39;pre code&#39;</span>).<span class="fu">each</span>(<span class="kw">function</span>(i, block) {
+    <span class="ot">hljs</span>.<span class="fu">highlightBlock</span>(block);
+  });
+});</code></pre>
+<p>Вы можете использовать любые теги разметки вместо <code>&lt;pre&gt;&lt;code&gt;</code>. Если используете контейнер, не сохраняющий переводы строк, вам нужно сказать highlight.js использовать для них тег <code>&lt;br&gt;</code>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="ot">hljs</span>.<span class="fu">configure</span>({<span class="dt">useBR</span>: <span class="kw">true</span>});
+
+<span class="fu">$</span>(<span class="st">&#39;div.code&#39;</span>).<span class="fu">each</span>(<span class="kw">function</span>(i, block) {
+  <span class="ot">hljs</span>.<span class="fu">highlightBlock</span>(block);
+});</code></pre>
+<p>Другие опции можно найти в документации функции <a href="http://highlightjs.readthedocs.org/en/latest/api.html#configure-options"><code>configure</code></a>.</p>
+<h2 id="web-workers">Web Workers</h2>
+<p>Подсветку можно запустить внутри web worker'а, чтобы не подвешивать окно браузера при работе с большими кусками кода.</p>
+<p>В основном скрипте:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="fu">addEventListener</span>(<span class="st">&#39;load&#39;</span>, <span class="kw">function</span>() {
+  <span class="kw">var</span> code = <span class="ot">document</span>.<span class="fu">querySelector</span>(<span class="st">&#39;#code&#39;</span>);
+  <span class="kw">var</span> worker = <span class="kw">new</span> <span class="fu">Worker</span>(<span class="st">&#39;worker.js&#39;</span>);
+  <span class="ot">worker</span>.<span class="fu">onmessage</span> = <span class="kw">function</span>(event) { <span class="ot">code</span>.<span class="fu">innerHTML</span> = <span class="ot">event</span>.<span class="fu">data</span>; }
+  <span class="ot">worker</span>.<span class="fu">postMessage</span>(<span class="ot">code</span>.<span class="fu">textContent</span>);
+})</code></pre>
+<p>В worker.js:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">onmessage = <span class="kw">function</span>(event) {
+  <span class="fu">importScripts</span>(<span class="st">&#39;&lt;path&gt;/highlight.pack.js&#39;</span>);
+  <span class="kw">var</span> result = <span class="ot">self</span>.<span class="ot">hljs</span>.<span class="fu">highlightAuto</span>(<span class="ot">event</span>.<span class="fu">data</span>);
+  <span class="fu">postMessage</span>(<span class="ot">result</span>.<span class="fu">value</span>);
+}</code></pre>
+<h2 id="установка-библиотеки">Установка библиотеки</h2>
+<p>Highlight.js можно использовать в браузере прямо с CDN хостинга или скачать индивидуальную сборку, а также установив модуль на сервере. На <a href="https://highlightjs.org/download/">страница загрузки</a> подробно описаны все варианты.</p>
+<p>Обратите внимание, что библиотека не предназначена для использования в виде исходного кода на GitHub, а требует отдельной сборки. Если вам не подходит ни один из готовых вариантов, читайте <a href="http://highlightjs.readthedocs.org/en/latest/building-testing.html">документацию по сборке</a>.</p>
+<h2 id="лицензия">Лицензия</h2>
+<p>Highlight.js распространяется под лицензией BSD. Подробнее читайте файл <a href="https://github.com/isagalaev/highlight.js/blob/master/LICENSE">LICENSE</a>.</p>
+<h2 id="ссылки">Ссылки</h2>
+<p>Официальный сайт билиотеки расположен по адресу <a href="https://highlightjs.org/" class="uri">https://highlightjs.org/</a>.</p>
+<p>Более подробная документация по API и другим темам расположена на <a href="http://highlightjs.readthedocs.org/" class="uri">http://highlightjs.readthedocs.org/</a>.</p>
+<p>Авторы и контрибьютора перечислена в файле <a href="https://github.com/isagalaev/highlight.js/blob/master/AUTHORS.ru.txt">AUTHORS.ru.txt</a> file.</p>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>

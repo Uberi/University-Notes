@@ -161,7 +161,7 @@ code {
 :not(pre) > code {
 	display: inline-block !important;
 	padding: 0 0.3em !important;
-	margin-bottom: -0.45em;
+	margin-bottom: -0.35em;
 	margin-top: 0.2em;
 }
 .highlight { margin: 1em 3em; }
