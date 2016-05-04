@@ -10,7 +10,7 @@ Instructor:
     Email: sspezial@uwaterloo.ca
     Office: M3 2128
     Advising Hours: Monday, Wednesday at 12:00-13:30, MC 4023
-    Office hours: starts week 3, details TBA ;wip
+    Office hours: starts week 3
 
 # 9/9/13
 
@@ -730,10 +730,10 @@ Find the left and right hand limits of $f(x) = \frac{x^2 + 1}{3x - 2x^2}$ at eac
 
 > Clearly, $f(x) = \frac{x^2 + 1}{x(-2x + 3)}$.
 > So the asymptotes are at $x = 0$ and $x = \frac{3}{2}$.  
-> As $x \to 0^-$, $x^2 + 1 > 0$, $x < 0$, and $-2x + 3 > 0$.  
-> So $f(x) < 0$ for $x = 0^-$.  
-> So $f(x) \to $
-> ;wip: use the sign analysis with infinismals
+> As $x \to 0^-$, $x^2 + 1 > 0$, $x < 0$, and $-2x + 3 > 0$. So $f(x) \to -\infty$ for $x = 0^-$.  
+> As $x \to 0^+$, $x^2 + 1 > 0$, $x > 0$, and $-2x + 3 > 0$. So $f(x) \to \infty$ for $x = 0^+$.  
+> As $x \to {\frac 3 2}^-$, $x^2 + 1 > 0$, $x > 0$, and $-2x + 3 > 0$. So $f(x) \to \infty$ for $x = {\frac 3 2}^-$.  
+> As $x \to {\frac 3 2}^+$, $x^2 + 1 > 0$, $x > 0$, and $-2x + 3 < 0$. So $f(x) \to -\infty$ for $x = {\frac 3 2}^+$.  
 
 Continuity
 ----------
@@ -812,11 +812,7 @@ Prove that $\ln x = 3 - 2x$ has at least one real root.
 > Clearly, $f(1) = -1$ and $f(2) = \ln 2 - 1$.  
 > Clearly, $f(1) < 0$ and $f(2) > 0$.  
 > So by the IVT, there must exist $c \in [a, b]$ such that $f(c) = 0$.  
-> So there must be a real root.  
-
-This is a trancendental function and cannot be solved analytically.
-
-;wip: prove this theorem
+> So there must be a real root (though it turns out this is transcendental, and cannot be solved analytically).  
 
 ### Bisection method
 

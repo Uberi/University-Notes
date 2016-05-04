@@ -75,8 +75,15 @@
 Section 003
 Email: klanctot@uwaterloo.ca
 Office Hours: Wednesdays at 2:00 PM-3:30 PM in DC 2131
-Website: https://www.student.cs.uwaterloo.ca/~cs350/S16/</code></pre>
+Website: https://www.student.cs.uwaterloo.ca/~cs350/S16/
+Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
+<h1 id="section">4/5/16</h1>
 <p>Assignments and questions will be distributed via Piazza.</p>
+<p>There are 5 assignments, each one building on top of the previous ones. Assignments will be software that runs on top of the OS/161 operating system, on top of a MIPS VM, SYS/161. There are 5 slip days that can be used to extend assignment deadlines, and 3 or fewer can be used for any single assignment.</p>
+<p>The role of the operating system is to both help applications do what they need to do, and to stop applications from doing what they shouldn't. For example, an operating system might expose a nice abstract filesystem for storing data in, but it might prevent applications from, say, writing to a file that was being written to by another application.</p>
+<p>To applications, the OS provides an execution environment, with interfaces to various resources, like networking, storage, and graphics (most of the code in a modern operating system lives in the various drivers). The OS is also responsible for isolating different applications from each other, making sure they don't step on each other's toes. This is the <strong>application view</strong> of operating systems.</p>
+<p>The OS is responsible for keeping all of the hardware in line, making sure that these resources get allocated among the programs in a fair way. This is the <strong>system view</strong> of operating systems.</p>
+<p>The OS is also a concurrent, real-time program (at least, most modern OSs). It needs to be able to support multiple things going on at once, but also satisfy timing constraints, such as feeding audio data to the sound card to output uninterrupted sound. This is the <strong>implementation view</strong> of the operating system.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
