@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>STAT231 | Anthony Zhang</title>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body onload="highlight()">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68271407-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="/blog/" class="page">blog</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="/resume.pdf" class="page">résumé</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
+  </ul>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
+\]</span></p>
+<h1 id="stat231">STAT231</h1>
+<p>Statistics.</p>
+<pre><code>Surya Banerjee
+Email: suryabanerje@gmail.com
+Office Hours: Fridays 9am-11am, M3 2017, phone extension 39120</code></pre>
+<h1 id="section">2/5/16</h1>
+<p>There are 3 tutorial tests, 2 midterms, and a final exam.</p>
+<p>In STAT230, we are given information about the population, and want to find the chance of a sample happening - we go from big to small. In STAT231, we go from small to big - given information about a sample of the population, we try to figure things out about the population. STAT230 asks &quot;given 100 fair coin tosses, what is the probability of getting 60 heads?&quot;, while STAT231 asks &quot;if we toss a coin 100 times and get 60 heads, what can we say about the fairness of the coin?&quot;.</p>
+<p>The batting champion of a baseball season is the player with the highest batting average (probability of hitting the ball in each attempt, times 1000). However, although there have been 13 people with a batting average above 400 before 1941, and none afterward. Why does this happen? Some theories are that pitchers have gotten better (thus lowering the batter's chances of hitting the ball), larger pitcher gloves, relief pitchers, better baseball managers, and so on. Statistics can provide a clearer explanation.</p>
+<p>The Challenger space shuttle disaster occurred due to a failed O-ring. However, the right data analysis could have presented this tragedy - there was already enough data available to find this problem, but it wasn't looked at in the right way. Statistics can help prevent this sort of error.</p>
+<p>Kansas weather reports, in a study, were found to be accurate about 85% of the time in predicting rain. However, if they just said &quot;it's not going to rain&quot;, they would be right 90% of the time. Likewise, ESPN pundits were found to correctly predict the results of games about 48% of the time. Statistics can help us evaluate which analysts and predictors are believable.</p>
+<p>Statistics also allows us to evaluate relationships between two things. For example, does smoking cause lung cancer, or does lung cancer cause smoking? Are they related at all?</p>
+<p>There are two main types of data:</p>
+<pre><code>* **Numeric data**, like a grade or a width. Numerical data can be:
+    * **Discrete** - an element of a countably large set. For example, the number of pennies in a set of coins.
+    * **Continuous** - a measure, like height or weight.
+* **Categorical data** (area of study, name, etc.). Categorical data can be:
+    * **Binary** - falling into two categories.
+    * **Ordinal** - there are categories, but there is an underlying order to the data. For example, colors are categorical data, but they have an underlying order on the EM spectrum.</code></pre>
+<p>A <strong>transformation</strong> is a function over a variable. A <strong>linear transformation</strong> is one of the form <span class="math inline">\(y = mx = b\)</span>. A linear transformation is an <strong>affine transformation</strong>.</p>
+<p>A <strong>coding</strong> is a transformation that converts categorical data to numerical data. For example, colors can be assigned numbers, like 0 for red, 1 for orange, and so on.</p>
+<p>We often want to extract important information about a data set to find its properties. When we do so, we extract <strong>data summaries</strong>. We can do this <strong>numerically</strong> (like finding the mean, stddev, median, etc.) or <strong>graphically</strong> (like making a scatter plot). Numerical summaries tell us about certain fundamental properties of data sets, while graphical summaries tell us the shape of the data.</p>
+<p>Common numerical summaries we care about are:</p>
+<ul>
+<li>The centre of the data, or <strong>central tendency</strong>:
+<ul>
+<li>The <strong>sample mean/arithmetic mean</strong>: for a variable <span class="math inline">\(y\)</span>, the sample mean is denoted <span class="math inline">\(\overline y = \frac 1 n \sum_{i = 0}^n y_i\)</span>. The nice thing about this is that the sum of the deviations from the mean is always 0, so <span class="math inline">\(\sum (y_i - \overline y) = 0\)</span>.</li>
+<li>The <strong>geometric mean</strong> is better for logarithmically distributed data: for a variable <span class="math inline">\(y\)</span>, the geometric mean is denoted <span class="math inline">\(\overline y = \left(\prod_{i = 0}^n y_i\right)^{\frac 1 n}\)</span>.</li>
+<li>The <strong>harmonic mean</strong> is rarely useful, and is the reciprocal of the arithmetic mean of the reciprocals of a variable.</li>
+</ul></li>
+<li>The volatility, or <strong>dispersion</strong>:
+<ul>
+<li>This includes standard deviation, range, etc.)</li>
+</ul></li>
+<li>How fat the tails are, or <strong>kurtosis</strong>; and how symmetric is the data about some point or axis, or <strong>symmetry</strong>.</li>
+</ul>
+<p>Suppose we have $100 in a bank account, with 4% interest the first year, 8% the second, and 12% the third. What is the average interest rate?</p>
+<blockquote>
+<p>Although it would seem at first glance to be 8%, the arithmetic mean doesn't represent the actual average here. The average interest rate is the single rate such that, after those 3 years, we would have the same interest gains as we did with this bank account.<br />
+Let's denote this rate as <span class="math inline">\(x\)</span>. Then according to the interest formula, <span class="math inline">\(100(1 + x)^3 = 100 \cdot 1.04 \cdot 1.08 \cdot 1.12\)</span>.<br />
+So <span class="math inline">\((1 + x)^3 = 1.257984\)</span> and <span class="math inline">\(x = 0.0795059\)</span>, or about 0.795%.<br />
+As it turns out, this is basically the same thing as the geometric mean of the interest rates. In this case, we use the geometric mean since the interest is defined in terms of an enponential function of <span class="math inline">\(n\)</span>.</p>
+</blockquote>
+<p>A car drives from A to B at 40 km/h, and immediately drives back at 60 km/h. What is the average speed of the car?</p>
+<blockquote>
+<p>Although it would seem at first glance to be 50 km/h, this is not the case, since the car takes less time driving back since it's going faster.<br />
+Let's denote the distance between A and B as <span class="math inline">\(x\)</span>, in km. Then the trip from A to B took <span class="math inline">\(\frac{x}{40}\)</span> hours, and the trip back took <span class="math inline">\(\frac{x}{60}\)</span> hours.<br />
+Since the total time taken is <span class="math inline">\(\frac{x}{40} + \frac{x}{60}\)</span>, the average speed is <span class="math inline">\(\frac{40\frac{x}{40} + 60\frac{x}{60}}{\frac{x}{40} + \frac{x}{60}} = \frac{2}{\frac{1}{40} + \frac{1}{60}}\)</span>, or 48 km/h.<br />
+As it turns out, this is the same thing as the harmonic mean of the speeds.</p>
+</blockquote>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>

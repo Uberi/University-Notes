@@ -98,7 +98,7 @@ ol, ul {
 .site_links .divider:after {
 	content: "//";
 	margin: 0 0.5em;
-	color:#888888;
+	color: #888888;
 }
 
 .site_links a {
@@ -122,6 +122,8 @@ ol, ul {
 .site_links .page:hover, .site_links .page:focus { border-top-color: #009900; }
 .site_links .contact { border-color: #000099; border-top-color: rgba(0, 0, 153, 0); }
 .site_links .contact:hover, .site_links .contact:focus { border-top-color: #000099; }
+.site_links .info { border-color: #990000; border-top-color: rgba(153, 0, 0, 0); }
+.site_links .info:hover, .site_links .contact:focus { border-top-color: #990000; }
 
 @media only screen and (max-width: 650px) {
 	.site_links li {
@@ -147,26 +149,6 @@ ol, ul {
 }
 
 a { color: #775555; }
-
-code {
-	font-family: monospace;
-	border: 1px solid grey;
-	border-radius: 0.3em;
-	white-space: pre;
-	display: inline-block;
-	padding: 0.1em 0.3em;
-	overflow: auto;
-	line-height: 150%;
-}
-:not(pre) > code {
-	display: inline-block !important;
-	padding: 0 0.3em !important;
-	margin-bottom: -0.35em;
-	margin-top: 0.2em;
-}
-.highlight { margin: 1em 3em; }
-pre code { padding: 1em; overflow: auto; display: block; }
-:not(.highlight) > pre { margin: 1em 3em; }
 
 .license {
 	font-size: 0.6em;
