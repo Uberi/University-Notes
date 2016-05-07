@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -76,6 +76,7 @@
 ISA: Sean Harrap
 Email: CS241@uwaterloo.ca
 Web: http://www.student.cs.uwaterloo.ca/~cs241</code></pre>
+<p><strong>Note:</strong> I made a GDB-style <a href="https://github.com/Uberi/The-Mippits">MIPS debugger</a> for the specific instruction set used by CS241, current as of Winter 2015. You might find this useful if you'd like to debug your code or disassemble MIPS binaries.</p>
 <h1 id="section">6/1/15</h1>
 <p>Weekly assignments, 11 total.</p>
 <p>A sequential program is an &quot;ordinary&quot; program - one that is not concurrent, parallel, or so on. Sequential programs only do one thing at a time - they are single threaded.</p>
@@ -88,8 +89,8 @@ Web: http://www.student.cs.uwaterloo.ca/~cs241</code></pre>
 <p>Data in a computer's memory could mean anything - it is simply data.</p>
 <p>There are a number of conventions for representing negative numbers in binary. The <strong>sign magnitude</strong> convention has the leftmost bit of a binary number represent whether it is negative. Although this system is simple, it's difficult to do math with since we have to treat the first bit separately for a lot of operations. Plus, there's two representations for the number 0 - <code>00...00</code> and <code>10...00</code>.</p>
 <p>The <strong>one's complement</strong> convention has positive numbers written normally, and negative numbers are their magnitude with their bits flipped. This works better for certain operations, but there is still two 0 representations, which complicates things unnecessarily.</p>
-<p>The <strong>two's complement</strong> convention has positive numbers written normally, and the negative numbers are simply their magnitude with their bits flipped and 1 added. The advantage of this system is that the first bit still denotes the sign. Plus, there is only one representation for 0, and operations like addition work the same way as for unsigned numbers, modulo <span class="math">\(2^n\)</span>.</p>
-<p>To find the numerical value of a number represented using <span class="math">\(n\)</span>-bit two's complement, we first check the sign bit. If 0, then we simply convert binary to a non-negative number as usual. Otherwise, we convert the binary to a non-negative number as usual, and subtract <span class="math">\(2^n\)</span> from that result to get a negative number as a result.</p>
+<p>The <strong>two's complement</strong> convention has positive numbers written normally, and the negative numbers are simply their magnitude with their bits flipped and 1 added. The advantage of this system is that the first bit still denotes the sign. Plus, there is only one representation for 0, and operations like addition work the same way as for unsigned numbers, modulo <span class="math inline">\(2^n\)</span>.</p>
+<p>To find the numerical value of a number represented using <span class="math inline">\(n\)</span>-bit two's complement, we first check the sign bit. If 0, then we simply convert binary to a non-negative number as usual. Otherwise, we convert the binary to a non-negative number as usual, and subtract <span class="math inline">\(2^n\)</span> from that result to get a negative number as a result.</p>
 <p>To quickly negate a binary number in two's complement quickly, flip all the bits and add 1, convert that to a positive number, then negate that number. This allows us to quickly convert negative numbers to binary and hex.</p>
 <p>For 3-bit numbers, each binary string, in ascneding order, represents 0, 1, 2, 3, -4, -3, -2, -1.</p>
 <p>A byte could also potentially be a character. Characters have multiple possibble encodings, such as unicode and ASCII. ASCII is a 7-bit code (for historical reasons, in order to avoid sending expensive bits) that has representations for most America-centric characters, although there are 8-bit extensions like those by IBM that add multilingual characters. In an 8-bit byte world, the eighth bit is 0 in standard ASCII. We will be using ASCII in this course to represent characters.</p>
@@ -113,7 +114,7 @@ Web: http://www.student.cs.uwaterloo.ca/~cs241</code></pre>
 <p>MAR/MDR, PC, and IR are all hidden registers - they are not visible to our programs.</p>
 <p>The control unit decodes instructions, and dispatches them to the rest of the computer to actually execute them.</p>
 <p>There are many types of memory, such as registers, CPU cache, main memory, disk memory, and network memory, in order of increasing distance from the CPU. The closer the memory to the CPU, the faster it is to work with.</p>
-<p>The main memory (RAM) is a large amount of memory stored away from the CPU, and communicates with the CPU over the bus (physically, a bunch of wires). It can be thought of as a huge array of <span class="math">\(n\)</span> bytes. Each byte in the RAM has an address, one of <span class="math">\(0, \ldots, n - 1\)</span>.</p>
+<p>The main memory (RAM) is a large amount of memory stored away from the CPU, and communicates with the CPU over the bus (physically, a bunch of wires). It can be thought of as a huge array of <span class="math inline">\(n\)</span> bytes. Each byte in the RAM has an address, one of <span class="math inline">\(0, \ldots, n - 1\)</span>.</p>
 <p>Since a word in MIPS is 32 bits (4 bytes), and we can only access memory on word boundaries, we can only get or set addresses that are multiples of 4.</p>
 <p>RAM access is much slower than register access - as much as three orders of magnitude. Usually, data in RAM must be transferred to registers before it can be used.</p>
 <h3 id="instructions">Instructions</h3>
@@ -263,7 +264,7 @@ sw $2, 0($1)</code></pre>
     jalr $2
 beq $0, $0, repeat</code></pre>
 <p>Note that the OS itself is just a program, which means it needs to be in memory as well. Since execution starts at 0x00000000, we need to put the OS at the very beginning of the memory. That means our program cannot occupy the first location in memory.</p>
-<p>That also means that the addresses of the labels will not be correct if we load them directly, since the assembler created the machine code assuming addresses start from the beginning of the program (a label at the very beginning of the assembly should result in a value of 0x00000000). If we load our program at offset <span class="math">\(d\)</span>, then we must add <span class="math">\(d\)</span> to the value of each label or reference to a label, like <code>.word some_label</code>. This process is called <strong>relocation</strong> and allows us to load the code anywhere in memory and have it run properly.</p>
+<p>That also means that the addresses of the labels will not be correct if we load them directly, since the assembler created the machine code assuming addresses start from the beginning of the program (a label at the very beginning of the assembly should result in a value of 0x00000000). If we load our program at offset <span class="math inline">\(d\)</span>, then we must add <span class="math inline">\(d\)</span> to the value of each label or reference to a label, like <code>.word some_label</code>. This process is called <strong>relocation</strong> and allows us to load the code anywhere in memory and have it run properly.</p>
 <p>Since the machine code is just a stream of bytes, we don't know which words are labels and which are not - the assembler has to give us additional information about what type of thing each word is.</p>
 <p>As a result, what most assemblers output is not actually just machine code, but actually <strong>object code</strong> - machine code with additional metadata that lets us load and run the program in a clean way. These assemblers are called <strong>relocatable assemblers</strong>.</p>
 <p>Basically, the metadata needed in object files includes the addresses of words that represent label addresses in the code so we can relocate it, plus things like exports and imports.</p>
@@ -379,11 +380,11 @@ output relocations, exports, and imports</code></pre>
 <h2 id="high-level-languages">High Level Languages</h2>
 <p>The compiler is responsible for converting a high level language to assembly. Unlike an assembler, the compiled result is not unique - there are multiple possible ways to convert high level languages to assembly.</p>
 <p>We want a formal theory of string recognition - general principles that work in the context of any programming language.</p>
-<p>An <strong>alphabet</strong> is a finite set of symbols, generally denoted <span class="math">\(\Sigma\)</span> (<span class="math">\(\Sigma = \set{a, b, c}\)</span>, for example). Symbols can be anything we want, and might not even be strings.</p>
-<p>A <strong>string/word</strong> is a finite sequence of symbols, each symbol belonging to <span class="math">\(\Sigma\)</span> (<span class="math">\(abaabbcca\)</span>, for example).</p>
-<p>The length of a string <span class="math">\(s\)</span> is <span class="math">\(\abs{s}\)</span>. The empty string is usually denoted <span class="math">\(\epsilon\)</span>. This should not be confused with any symbols in the alphabet - <span class="math">\(\abs{\epsilon} = 0\)</span> and <span class="math">\(\epsilon\)</span> is not in any alphabets.</p>
-<p>Given a string <span class="math">\(s\)</span>, <span class="math">\(s^n\)</span> is equivalent to <span class="math">\(s\)</span> repeated <span class="math">\(n\)</span> times - <span class="math">\(s^n = s \ldots s\)</span>.</p>
-<p>A <strong>language</strong> is a set of strings (<span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span>, for example, which is an even number of <span class="math">\(a\)</span> followed by a <span class="math">\(b\)</span>). The empty language is just an empty set <span class="math">\(\emptyset\)</span> - a language with no words. This is different from <span class="math">\(\set{\epsilon}\)</span>, which is a language with one word, the empty word.</p>
+<p>An <strong>alphabet</strong> is a finite set of symbols, generally denoted <span class="math inline">\(\Sigma\)</span> (<span class="math inline">\(\Sigma = \set{a, b, c}\)</span>, for example). Symbols can be anything we want, and might not even be strings.</p>
+<p>A <strong>string/word</strong> is a finite sequence of symbols, each symbol belonging to <span class="math inline">\(\Sigma\)</span> (<span class="math inline">\(abaabbcca\)</span>, for example).</p>
+<p>The length of a string <span class="math inline">\(s\)</span> is <span class="math inline">\(\abs{s}\)</span>. The empty string is usually denoted <span class="math inline">\(\epsilon\)</span>. This should not be confused with any symbols in the alphabet - <span class="math inline">\(\abs{\epsilon} = 0\)</span> and <span class="math inline">\(\epsilon\)</span> is not in any alphabets.</p>
+<p>Given a string <span class="math inline">\(s\)</span>, <span class="math inline">\(s^n\)</span> is equivalent to <span class="math inline">\(s\)</span> repeated <span class="math inline">\(n\)</span> times - <span class="math inline">\(s^n = s \ldots s\)</span>.</p>
+<p>A <strong>language</strong> is a set of strings (<span class="math inline">\(\set{a^{2n}b \mid n \ge 0}\)</span>, for example, which is an even number of <span class="math inline">\(a\)</span> followed by a <span class="math inline">\(b\)</span>). The empty language is just an empty set <span class="math inline">\(\emptyset\)</span> - a language with no words. This is different from <span class="math inline">\(\set{\epsilon}\)</span>, which is a language with one word, the empty word.</p>
 <p>We want to determine if a given string belongs to a given language. How difficult this is depends on the language. For infinite sets of strings, like the set of all valid MIPS or C programs, things get a little trickier. In fact, there exist languages where this is impossible.</p>
 <p>Therefore, we want to characterize languages by how hard they are to recognize. Noam Chomsky came up the Chomsky heirarchy to deal with this. The following is based on that, and lists language classes in ascending order of difficulty recognizing:</p>
 <ul>
@@ -420,34 +421,34 @@ output relocations, exports, and imports</code></pre>
 <p>To make the math more elegant, we define an implicit <strong>error state</strong>, and every single state goes to this state for unlabeled transitions. So if we get an unexpected input for a node (so we don't have a defined transition for the input), we implicitly define a transition to the error state. The error state is not special, but it is always a state that cannot transition to any other states, and it never matches.</p>
 <p>A DFA represents a finite language if and only if it does not contain any cycles.</p>
 <h3 id="regular-languages">Regular Languages</h3>
-<p>The regular languages are built from finite languages, plus set operations like union (set union of the words of two languages - <span class="math">\(L_1 \cup L_2 = \set{x \mid x \in L_1 \vee x \in L_2}\)</span>), concatenation (every possible combination of elements from one set concatenated to another - <span class="math">\(L_1 L_2 = \set{xy \mid x \in L_1 \wedge y \in L_2}\)</span>), and repetition (a language repeated an arbitrary number of times - <span class="math">\(L^* = \set{\epsilon} \cup \set{xy \mid x \in L^* \wedge y \in L} = \set{\epsilon} \cup L \cup LL \cup LLL \cup \ldots\)</span>).</p>
+<p>The regular languages are built from finite languages, plus set operations like union (set union of the words of two languages - <span class="math inline">\(L_1 \cup L_2 = \set{x \mid x \in L_1 \vee x \in L_2}\)</span>), concatenation (every possible combination of elements from one set concatenated to another - <span class="math inline">\(L_1 L_2 = \set{xy \mid x \in L_1 \wedge y \in L_2}\)</span>), and repetition (a language repeated an arbitrary number of times - <span class="math inline">\(L^* = \set{\epsilon} \cup \set{xy \mid x \in L^* \wedge y \in L} = \set{\epsilon} \cup L \cup LL \cup LLL \cup \ldots\)</span>).</p>
 <p>Note that repetition generally results in infinite sets - this means that the regular languages contain infinite languages.</p>
-<p>We show that a language is regular by building it up from finite languages and the set uperations (union, concatenation, and repetition). For example, <span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span> is regular because <span class="math">\(\set{a^{2n}b \mid n \ge 0} = \set{aa}*\set{b}\)</span>.</p>
-<p>A <strong>regular expression</strong> is a shorthand for all the cumbersome set notation we are using for describing regular languages, and is itself a language we will denote <span class="math">\(E\)</span>. It works as follows:</p>
+<p>We show that a language is regular by building it up from finite languages and the set uperations (union, concatenation, and repetition). For example, <span class="math inline">\(\set{a^{2n}b \mid n \ge 0}\)</span> is regular because <span class="math inline">\(\set{a^{2n}b \mid n \ge 0} = \set{aa}*\set{b}\)</span>.</p>
+<p>A <strong>regular expression</strong> is a shorthand for all the cumbersome set notation we are using for describing regular languages, and is itself a language we will denote <span class="math inline">\(E\)</span>. It works as follows:</p>
 <ul>
-<li><span class="math">\(E = \emptyset\)</span> represents <span class="math">\(L = \emptyset\)</span>.</li>
-<li><span class="math">\(E = \epsilon\)</span> represents <span class="math">\(L = \set{\epsilon}\)</span>.</li>
-<li><span class="math">\(E = aaa\)</span> and other sequences of non-special characters represent <span class="math">\(L = \set{aaa}\)</span> and themselves in a set.</li>
-<li><span class="math">\(E_1|E_2\)</span> represents <span class="math">\(L_1 \cup L_2\)</span>.</li>
-<li><span class="math">\(E_1 E_2\)</span> represents <span class="math">\(L_1 L_2\)</span>.</li>
-<li><span class="math">\(E_1 = E_2^*\)</span> represents <span class="math">\(L_1 = L_2^*\)</span>.</li>
+<li><span class="math inline">\(E = \emptyset\)</span> represents <span class="math inline">\(L = \emptyset\)</span>.</li>
+<li><span class="math inline">\(E = \epsilon\)</span> represents <span class="math inline">\(L = \set{\epsilon}\)</span>.</li>
+<li><span class="math inline">\(E = aaa\)</span> and other sequences of non-special characters represent <span class="math inline">\(L = \set{aaa}\)</span> and themselves in a set.</li>
+<li><span class="math inline">\(E_1|E_2\)</span> represents <span class="math inline">\(L_1 \cup L_2\)</span>.</li>
+<li><span class="math inline">\(E_1 E_2\)</span> represents <span class="math inline">\(L_1 L_2\)</span>.</li>
+<li><span class="math inline">\(E_1 = E_2^*\)</span> represents <span class="math inline">\(L_1 = L_2^*\)</span>.</li>
 </ul>
-<p>For example, <span class="math">\(\set{a^{2n}b \mid n \ge 0}\)</span> can be represented with <span class="math">\((aa)*b\)</span>. Regular languages are, in practice, relatively simple. For example, C is not a regular language, but C programs are made up of tokens, each of which is part of a regular language - tokens, string literals, number literals, types, and so on.</p>
+<p>For example, <span class="math inline">\(\set{a^{2n}b \mid n \ge 0}\)</span> can be represented with <span class="math inline">\((aa)*b\)</span>. Regular languages are, in practice, relatively simple. For example, C is not a regular language, but C programs are made up of tokens, each of which is part of a regular language - tokens, string literals, number literals, types, and so on.</p>
 <p>For regular languages, DFAs can have cycles - this occurs as a result of repetition.</p>
 <p>Consider the language defined as the set containing all strings that are composed of an even number of &quot;a&quot; and an odd number of &quot;b&quot;. Clearly, we can write a DFA for this using four states (even &quot;a&quot; and even &quot;b&quot; - start, odd &quot;a&quot; and even &quot;b&quot;, odd &quot;a&quot; and odd &quot;b&quot;, and even &quot;a&quot; and odd &quot;b&quot; - end/accept). The regular expression for this is rather difficult to write. ;wip: how?</p>
 <h1 id="section-9">5/2/15</h1>
-<p>Formally, a DFA is a 5-tuple <span class="math">\((Q, \Sigma, q_0, A, \delta)\)</span>, where the variables represent the following:</p>
+<p>Formally, a DFA is a 5-tuple <span class="math inline">\((Q, \Sigma, q_0, A, \delta)\)</span>, where the variables represent the following:</p>
 <ul>
-<li><span class="math">\(Q\)</span> is the set of states of the DFA - all possible states. This is a finite, non-empty set.</li>
-<li><span class="math">\(\Sigma\)</span> is the alphabet of the DFA - all possible input values. This is a finite, non-empty set.</li>
-<li><span class="math">\(q_0\)</span> is the start state - the state at which the DFA is initialized. This is an element of <span class="math">\(Q\)</span>.</li>
-<li><span class="math">\(A\)</span> is the set of accepting states of the DFA - the states that the input can terminate at. This is a subset of <span class="math">\(Q\)</span></li>
-<li><span class="math">\(\delta\)</span> is the transition function - a mapping from a state and input character to a new state. This is a function <span class="math">\(q, x \to r, q \in Q, x \in x \in \Sigma, r \in Q\)</span>.</li>
+<li><span class="math inline">\(Q\)</span> is the set of states of the DFA - all possible states. This is a finite, non-empty set.</li>
+<li><span class="math inline">\(\Sigma\)</span> is the alphabet of the DFA - all possible input values. This is a finite, non-empty set.</li>
+<li><span class="math inline">\(q_0\)</span> is the start state - the state at which the DFA is initialized. This is an element of <span class="math inline">\(Q\)</span>.</li>
+<li><span class="math inline">\(A\)</span> is the set of accepting states of the DFA - the states that the input can terminate at. This is a subset of <span class="math inline">\(Q\)</span></li>
+<li><span class="math inline">\(\delta\)</span> is the transition function - a mapping from a state and input character to a new state. This is a function <span class="math inline">\(q, x \to r, q \in Q, x \in x \in \Sigma, r \in Q\)</span>.</li>
 </ul>
-<p>DFAs don't always have to just accept characters. It is also possible to consume entire words, using an extension of the original <span class="math">\(\delta\)</span> function, which only consumes one character at a time.</p>
-<p>This <strong>word consuming function</strong> can be defined as <span class="math">\(\delta^*(q, \epsilon) = q, \delta^*(q, cw) = \delta^*(\delta(q, c), w), q \in Q, c \in \Sigma, w \in \Sigma^*\)</span>. A DFA accepts a word <span class="math">\(w\)</span> if <span class="math">\(\delta^*(q_0, w) \in A\)</span> - the DFA accepts the input if read from its start state. <span class="math">\(\delta^*\)</span> represents a function that gives the end state of the DFA given a start state and input.</p>
-<p>Given a DFA <span class="math">\(M\)</span>, <span class="math">\(L(M)\)</span> represents the set of all strings accepted by <span class="math">\(M\)</span>. This is the set of all elements in of <span class="math">\(\Sigma^*\)</span> such that <span class="math">\(M\)</span> accepts them.</p>
-<p><strong>Kleene's theorem</strong> states that <span class="math">\(L\)</span> is regular if and only if <span class="math">\(L = L(M)\)</span> for some DFA <span class="math">\(M\)</span>. In other words, the regular languages are exactly the languages for which there exists a DFA that accepts them.</p>
+<p>DFAs don't always have to just accept characters. It is also possible to consume entire words, using an extension of the original <span class="math inline">\(\delta\)</span> function, which only consumes one character at a time.</p>
+<p>This <strong>word consuming function</strong> can be defined as <span class="math inline">\(\delta^*(q, \epsilon) = q, \delta^*(q, cw) = \delta^*(\delta(q, c), w), q \in Q, c \in \Sigma, w \in \Sigma^*\)</span>. A DFA accepts a word <span class="math inline">\(w\)</span> if <span class="math inline">\(\delta^*(q_0, w) \in A\)</span> - the DFA accepts the input if read from its start state. <span class="math inline">\(\delta^*\)</span> represents a function that gives the end state of the DFA given a start state and input.</p>
+<p>Given a DFA <span class="math inline">\(M\)</span>, <span class="math inline">\(L(M)\)</span> represents the set of all strings accepted by <span class="math inline">\(M\)</span>. This is the set of all elements in of <span class="math inline">\(\Sigma^*\)</span> such that <span class="math inline">\(M\)</span> accepts them.</p>
+<p><strong>Kleene's theorem</strong> states that <span class="math inline">\(L\)</span> is regular if and only if <span class="math inline">\(L = L(M)\)</span> for some DFA <span class="math inline">\(M\)</span>. In other words, the regular languages are exactly the languages for which there exists a DFA that accepts them.</p>
 <p>A DFA is still just a representation of a computer program. In practive, these are often implemented using switch statements:</p>
 <pre><code>int state = $q_0$
 char current;
@@ -466,7 +467,7 @@ while (read_char(current)) {
 }</code></pre>
 <p>This works but is also long and error-prone. Instead, we can use a state table, where rows are chars and columns are states, and each cell points to the next state. See the assignment 3 starter code for an example.</p>
 <p>It is also possible to attach actions to the transitions in the DFA. Potentially, we could use this to do things like get the numerical value of a number literal while we are parsing it.</p>
-<p>Every regular expression can be converted into a DFA, and every DFA can be converted into a regular expression. However, the translation is not always straightforward. For example, consider <code>(a|b)*abb</code>, the set of all words in <span class="math">\(\set{a, b}^*\)</span> that end with &quot;abb&quot;. When we generate the DFA, we need to add extra transitions for the states that make up &quot;abb&quot; in order to backtrack, in order to handle inputs like &quot;aba&quot;:</p>
+<p>Every regular expression can be converted into a DFA, and every DFA can be converted into a regular expression. However, the translation is not always straightforward. For example, consider <code>(a|b)*abb</code>, the set of all words in <span class="math inline">\(\set{a, b}^*\)</span> that end with &quot;abb&quot;. When we generate the DFA, we need to add extra transitions for the states that make up &quot;abb&quot; in order to backtrack, in order to handle inputs like &quot;aba&quot;:</p>
 <pre><code>1: START
     &quot;a&quot;: 2
     &quot;b&quot;: 1
@@ -479,7 +480,7 @@ while (read_char(current)) {
 4: ACCEPT
     &quot;a&quot;: 2
     &quot;b&quot;: 1</code></pre>
-<p>The easiest way to convert between regular expressions and DFAs is to convert to an <span class="math">\(\epsilon\)</span>-NFA first, then converting to the desired form.</p>
+<p>The easiest way to convert between regular expressions and DFAs is to convert to an <span class="math inline">\(\epsilon\)</span>-NFA first, then converting to the desired form.</p>
 <h3 id="nfas">NFAs</h3>
 <p>What if we had a DFA that allowed more than one transition from the same state that have the same label? For example, a state with transitions to two other states, each with the same label.</p>
 <p>This would mean that when we have an input with multiple possible transitions, the machine would get to choose one of the transitions - the state machine is non-deterministic. This is a <strong>non-deterministic finite automata</strong> (NFA). The difference from a DFA is that the machine gets choices in which transition to use.</p>
@@ -493,10 +494,10 @@ while (read_char(current)) {
 3:
     &quot;b&quot;: 4
 4: ACCEPT</code></pre>
-<p>Formally, an NFA is a 5-tuple like a DFA - <span class="math">\((Q, \Sigma, q_0, A, \delta)\)</span>, where the variables represent the same things as with a DFA, except the transition function. With an NFA, <span class="math">\(\delta\)</span> is a mapping from a state and input character to a set of new states. This is a function <span class="math">\(q, x \to R, q \in Q, x \in x \in \Sigma, R \subseteq Q\)</span>.</p>
+<p>Formally, an NFA is a 5-tuple like a DFA - <span class="math inline">\((Q, \Sigma, q_0, A, \delta)\)</span>, where the variables represent the same things as with a DFA, except the transition function. With an NFA, <span class="math inline">\(\delta\)</span> is a mapping from a state and input character to a set of new states. This is a function <span class="math inline">\(q, x \to R, q \in Q, x \in x \in \Sigma, R \subseteq Q\)</span>.</p>
 <p>An NFA accepts the input if a path exists such that the NFA results in acceptance, and rejects if none do.</p>
 <p>We now want to define a transition function for NFAs that accepts words. What we will do is define a function that accepts a set of possible current states and a word, resulting in a new set of possible states. When we are moving through the NFA, we are basically stepping through all the possible transitions at once when we have a choice. In other words, we step through all the possible choice paths in parallel.</p>
-<p>We define this as <span class="math">\(\delta^*(S, \epsilon) = S, \delta^*(S, cw) = \delta^*(\set{\delta(q, c) \mid q \in S}, w), S \subseteq Q, c \in \Sigma, w \in \Sigma^*\)</span>. This is a function that results in the set of all possible end states of the machine. The NFA accepts a word <span class="math">\(w\)</span> if and only if <span class="math">\(\delta^*(\set{q_0}, w) \cap A \ne \emptyset\)</span> - if any of the possible end states are accepting.</p>
+<p>We define this as <span class="math inline">\(\delta^*(S, \epsilon) = S, \delta^*(S, cw) = \delta^*(\set{\delta(q, c) \mid q \in S}, w), S \subseteq Q, c \in \Sigma, w \in \Sigma^*\)</span>. This is a function that results in the set of all possible end states of the machine. The NFA accepts a word <span class="math inline">\(w\)</span> if and only if <span class="math inline">\(\delta^*(\set{q_0}, w) \cap A \ne \emptyset\)</span> - if any of the possible end states are accepting.</p>
 <p>To simulate a DFA:</p>
 <pre><code>state = $q_0$
 while read_char(current):
@@ -508,11 +509,11 @@ while read_char(current):
     states = set($\delta$(q, current) for q in states)
 return states &amp; $A$ != set()</code></pre>
 <p>If we have an NFA and give each possible set of possible states (which we get from stepping through every possible option) a name, and use these sets as the states instead, we get a DFA. In this way it is possible to convert any NFA into a DFA. This is called <strong>subset construction</strong>.</p>
-<p>Note that this means that an NFA with <span class="math">\(n\)</span> states can be converted into a DFA with at most <span class="math">\(2^n\)</span> states - one for every subset of states. We can convert an NFA to a DFA by stepping through all the possibilities for input. The accepting states of our DFA are the <strong>sets containing accepting states in the original NFA</strong>.</p>
+<p>Note that this means that an NFA with <span class="math inline">\(n\)</span> states can be converted into a DFA with at most <span class="math inline">\(2^n\)</span> states - one for every subset of states. We can convert an NFA to a DFA by stepping through all the possibilities for input. The accepting states of our DFA are the <strong>sets containing accepting states in the original NFA</strong>.</p>
 <p>Whenever we step an NFA, we are actually simulating a DFA in a simpler way - we are constructing a DFA on the fly, with only the states that we actually need for a certain input.</p>
 <h1 id="section-10">10/2/15</h1>
 <p>Every NFA must have a corresponding DFA, and every DFA is also an NFA - the set of NFAs is a superset of the set of DFAs, and every NFA has a corresponding DFA. Therefore, NFAs accept the same class of languages that DFAs do, the regular languages.</p>
-<p>Consider the language <span class="math">\(L = \set{cab} \cup \set{w \in \set{a, b, c}^* \mid w \text{ has an even number of } a}\)</span>.</p>
+<p>Consider the language <span class="math inline">\(L = \set{cab} \cup \set{w \in \set{a, b, c}^* \mid w \text{ has an even number of } a}\)</span>.</p>
 <pre><code>1, 2, 3, 4, 5, 6
 1 &gt; c &gt; 2
 2 &gt; a &gt; 3
@@ -525,7 +526,7 @@ return states &amp; $A$ != set()</code></pre>
 6 &gt; b,c &gt; 6
 1 &gt; accept
 6 &gt; accept</code></pre>
-<p>To convert this to a DFA, we start by stepping the NFA with <span class="math">\(\set{1}\)</span> (a set containing only the start state), while considering every possible next input for the currently stepped states to get the next candidate states. Repeating until no new subset states are found, we get the equivalent DFA:</p>
+<p>To convert this to a DFA, we start by stepping the NFA with <span class="math inline">\(\set{1}\)</span> (a set containing only the start state), while considering every possible next input for the currently stepped states to get the next candidate states. Repeating until no new subset states are found, we get the equivalent DFA:</p>
 <pre><code>{1} &gt; a &gt; {5}
 {1} &gt; b &gt; {6}
 {1} &gt; c &gt; {2, 6}
@@ -543,70 +544,70 @@ return states &amp; $A$ != set()</code></pre>
 {1} &gt; accept
 {6} &gt; accept
 {2, 6} &gt; accept</code></pre>
-<p>We will now consider an <span class="math">\(\epsilon\)</span>-NFA. This is like a normal NFA, but we can change states without reading any input at all. This is represented with arrows labelled with <span class="math">\(\epsilon\)</span>. This makes many alternation cases easier, because it gives a much easier way of gluing multiple small NFAs together into a bigger NFA. Basically, the <span class="math">\(\epsilon\)</span> transition is an optional transition we can take from one state to another.</p>
-<p>Using the same argument as before with states being sets of states, the <span class="math">\(\epsilon\)</span>-NFAs also accept regular languages.</p>
-<p>Also, <span class="math">\(\epsilon\)</span>-NFAs can be easily converted into a regular expression using a simple algorithm. Additionally, if we can prove that all regular expressions have an <span class="math">\(\epsilon\)</span>-NFA, then we have one direction in the proof for Kleene's theorem - that every regular expression has a DFA.</p>
-<p>The <span class="math">\(\epsilon\)</span>-NFA for any regular expression can be found recursively:</p>
+<p>We will now consider an <span class="math inline">\(\epsilon\)</span>-NFA. This is like a normal NFA, but we can change states without reading any input at all. This is represented with arrows labelled with <span class="math inline">\(\epsilon\)</span>. This makes many alternation cases easier, because it gives a much easier way of gluing multiple small NFAs together into a bigger NFA. Basically, the <span class="math inline">\(\epsilon\)</span> transition is an optional transition we can take from one state to another.</p>
+<p>Using the same argument as before with states being sets of states, the <span class="math inline">\(\epsilon\)</span>-NFAs also accept regular languages.</p>
+<p>Also, <span class="math inline">\(\epsilon\)</span>-NFAs can be easily converted into a regular expression using a simple algorithm. Additionally, if we can prove that all regular expressions have an <span class="math inline">\(\epsilon\)</span>-NFA, then we have one direction in the proof for Kleene's theorem - that every regular expression has a DFA.</p>
+<p>The <span class="math inline">\(\epsilon\)</span>-NFA for any regular expression can be found recursively:</p>
 <ul>
 <li>Empty language is a non-accepting start state.</li>
-<li>The regular expression <span class="math">\(\epsilon\)</span> is an accepting start state.</li>
+<li>The regular expression <span class="math inline">\(\epsilon\)</span> is an accepting start state.</li>
 <li>A regular expression with only one letter is a start state that transitions to an accepting state via that letter.</li>
-<li>A regular expression of the form <span class="math">\(E_1|E_2\)</span> is a start state, with two <span class="math">\(\epsilon\)</span> transitions, one to the <span class="math">\(\epsilon\)</span>-NFAs for <span class="math">\(E_1\)</span> and one to the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_2\)</span>.</li>
-<li>A regular expression of the form <span class="math">\(E_1 E_2\)</span> is the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, where the accepting states are not accepting and instead have an <span class="math">\(\epsilon\)</span> transition to the start state for the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_2\)</span>.</li>
-<li>A regular expression of the form <span class="math">\(E_1^*\)</span> is the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, where the start state is a new accepting state with an <span class="math">\(\epsilon\)</span>-transition to the original start state of the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>, and all accepting states of also have an <span class="math">\(\epsilon\)</span> transition back to the start state of the <span class="math">\(\epsilon\)</span>-NFA for <span class="math">\(E_1\)</span>.</li>
+<li>A regular expression of the form <span class="math inline">\(E_1|E_2\)</span> is a start state, with two <span class="math inline">\(\epsilon\)</span> transitions, one to the <span class="math inline">\(\epsilon\)</span>-NFAs for <span class="math inline">\(E_1\)</span> and one to the <span class="math inline">\(\epsilon\)</span>-NFA for <span class="math inline">\(E_2\)</span>.</li>
+<li>A regular expression of the form <span class="math inline">\(E_1 E_2\)</span> is the <span class="math inline">\(\epsilon\)</span>-NFA for <span class="math inline">\(E_1\)</span>, where the accepting states are not accepting and instead have an <span class="math inline">\(\epsilon\)</span> transition to the start state for the <span class="math inline">\(\epsilon\)</span>-NFA for <span class="math inline">\(E_2\)</span>.</li>
+<li>A regular expression of the form <span class="math inline">\(E_1^*\)</span> is the <span class="math inline">\(\epsilon\)</span>-NFA for <span class="math inline">\(E_1\)</span>, where the start state is a new accepting state with an <span class="math inline">\(\epsilon\)</span>-transition to the original start state of the <span class="math inline">\(\epsilon\)</span>-NFA for <span class="math inline">\(E_1\)</span>, and all accepting states of also have an <span class="math inline">\(\epsilon\)</span> transition back to the start state of the <span class="math inline">\(\epsilon\)</span>-NFA for <span class="math inline">\(E_1\)</span>.</li>
 </ul>
-<p>As a result, all regular expressions can be converted into an <span class="math">\(\epsilon\)</span>-NFA, which can be converted into a DFA.</p>
+<p>As a result, all regular expressions can be converted into an <span class="math inline">\(\epsilon\)</span>-NFA, which can be converted into a DFA.</p>
 <p>Regular expressions and DFAs are useful in writing compilers because we need to do tokenization/scanning/lexing. For example, the lexer needs to be able to scan for keywords, identifiers, literals, operators, comments, and other C tokens, and these are all regular languages. As a result, sequences of C tokens are also regular languages, and we can use finite automata to do tokenization/scanning/lexing.</p>
-<p>To do tokenization, we are given a string <span class="math">\(w\)</span>, break it into words <span class="math">\(w_1, \ldots, w_n\)</span> such that each <span class="math">\(w_i\)</span> is in the language of the tokens (or give an error otherwise), and then output each <span class="math">\(w_i\)</span> as the tokens. If <span class="math">\(E_1, \ldots, E_k\)</span> are the regular expressions that match each type of token, then <span class="math">\((E_1 | \ldots | E_k)^*\)</span> is a regular expression that recognizes sequences of valid tokens. If we add an action to output the token after a match of <span class="math">\(E_1 | \ldots | E_k\)</span>, we now have a tokenizer.</p>
-<p>Consider an <span class="math">\(\epsilon\)</span>-NFA for parsing a C-style identifier: <span class="math">\([a-zA-Z][a-zA-Z0-9]^*\)</span>. Clearly, if we parse <span class="math">\(abcd\)</span>, this could be interpreted as either 1, 2, 3, or 4 tokens, since the <span class="math">\(\epsilon\)</span> move outputs a token. This ambiguity is problematic because a program written in a programming language should only have one interpretation.</p>
+<p>To do tokenization, we are given a string <span class="math inline">\(w\)</span>, break it into words <span class="math inline">\(w_1, \ldots, w_n\)</span> such that each <span class="math inline">\(w_i\)</span> is in the language of the tokens (or give an error otherwise), and then output each <span class="math inline">\(w_i\)</span> as the tokens. If <span class="math inline">\(E_1, \ldots, E_k\)</span> are the regular expressions that match each type of token, then <span class="math inline">\((E_1 | \ldots | E_k)^*\)</span> is a regular expression that recognizes sequences of valid tokens. If we add an action to output the token after a match of <span class="math inline">\(E_1 | \ldots | E_k\)</span>, we now have a tokenizer.</p>
+<p>Consider an <span class="math inline">\(\epsilon\)</span>-NFA for parsing a C-style identifier: <span class="math inline">\([a-zA-Z][a-zA-Z0-9]^*\)</span>. Clearly, if we parse <span class="math inline">\(abcd\)</span>, this could be interpreted as either 1, 2, 3, or 4 tokens, since the <span class="math inline">\(\epsilon\)</span> move outputs a token. This ambiguity is problematic because a program written in a programming language should only have one interpretation.</p>
 <h1 id="section-11">12/2/15</h1>
-<p>We can resolve this by adding add a rule to the NFA that says that we should only take an <span class="math">\(\epsilon\)</span> move if we have no other choice - to always look for the longest possible next token, rather than trying all the options. In effect, we are removing the nondeterminism from the <span class="math">\(\epsilon\)</span>-NFA.</p>
-<p>Clearly, this doesn't always work. Consider <span class="math">\(L = \set{aa, aaa}\)</span>, and the word <span class="math">\(w = aaaa\)</span>. Clearly, <span class="math">\(w \in L\)</span>, but an <span class="math">\(\epsilon\)</span>-NFA that always took the longest possible move would not accept it. However, in practice this sort of redundancy doesn't show up, and we can implement this technique.</p>
+<p>We can resolve this by adding add a rule to the NFA that says that we should only take an <span class="math inline">\(\epsilon\)</span> move if we have no other choice - to always look for the longest possible next token, rather than trying all the options. In effect, we are removing the nondeterminism from the <span class="math inline">\(\epsilon\)</span>-NFA.</p>
+<p>Clearly, this doesn't always work. Consider <span class="math inline">\(L = \set{aa, aaa}\)</span>, and the word <span class="math inline">\(w = aaaa\)</span>. Clearly, <span class="math inline">\(w \in L\)</span>, but an <span class="math inline">\(\epsilon\)</span>-NFA that always took the longest possible move would not accept it. However, in practice this sort of redundancy doesn't show up, and we can implement this technique.</p>
 <p>This can be formalized as the <strong>maximal munch algorithm</strong> for greedy matching using DFAs:</p>
 <ol style="list-style-type: decimal">
-<li>Run the <span class="math">\(\epsilon\)</span>-NFA without any <span class="math">\(\epsilon\)</span>-moves, until no more non-error moves are possible. This is the greedy part of the algorithm, where we try to consume as much as possible.</li>
+<li>Run the <span class="math inline">\(\epsilon\)</span>-NFA without any <span class="math inline">\(\epsilon\)</span>-moves, until no more non-error moves are possible. This is the greedy part of the algorithm, where we try to consume as much as possible.</li>
 <li>If currently in an accepting state, we have found a token.</li>
 <li>Otherwise, back up to the most recent accepting state (or error if none), and the input to that point is a token. Scanning resumes from there.</li>
 <li>Output the token.</li>
-<li>Resume scanning, for the next token, by using an <span class="math">\(\epsilon\)</span>-move back to the starting state.</li>
+<li>Resume scanning, for the next token, by using an <span class="math inline">\(\epsilon\)</span>-move back to the starting state.</li>
 </ol>
 <p>We often just use a simplified maximal munch, which works on a more limited set of languages:</p>
 <ol style="list-style-type: decimal">
-<li>Run the <span class="math">\(\epsilon\)</span>-NFA without any <span class="math">\(\epsilon\)</span>-moves, until no more non-error moves are possible. This is the greedy part of the algorithm, where we try to consume as much as possible.</li>
+<li>Run the <span class="math inline">\(\epsilon\)</span>-NFA without any <span class="math inline">\(\epsilon\)</span>-moves, until no more non-error moves are possible. This is the greedy part of the algorithm, where we try to consume as much as possible.</li>
 <li>If currently in an accepting state, we have found a token.</li>
 <li>Output the token.</li>
-<li>Resume scanning, for the next token, by using an <span class="math">\(\epsilon\)</span>-move back to the starting state.</li>
+<li>Resume scanning, for the next token, by using an <span class="math inline">\(\epsilon\)</span>-move back to the starting state.</li>
 </ol>
 <p>Basically, the same thing, but without the backtracking step. This means we can't tokenize things like <code>#ifdefg</code> into <code>#ifdef</code> and <code>g</code> - whitespace or another separator is required. However, this is usually good enough because languages are often designed intentionally in such a way that this works.</p>
 <p>This sort of parser sometimes causes issues in C++, such as <code>vector&lt;vector&lt;int&gt;&gt; v;</code> not being valid because the <code>&gt;&gt;</code> is interpreted as a single token instead of two <code>&gt;</code> tokens.</p>
 <h2 id="parsing">Parsing</h2>
 <p>Tokenization is good, but it can't parse everything. For example, consider a language containing all strings consisting entirely of balanced parentheses. Clearly, we need at least one state for each level of nesting in order to keep track of how many parentheses are currently open in the input, but no finite number of states can be used to recognize all levels of nesting, and DFAs must have a finite number of states. They also can't parse palindromes for the same reason.</p>
 <p>That means that DFAs can't parse balanced parenthesis, like those in Scheme, and that this is not a regular language. Therefore, we need a higher class of languages - the <strong>context-free languages</strong>.</p>
-<p>The context-free languages are those that can be described by a <strong>context-free grammar</strong> (a set of rewrite rules, which can be recursive). For example, a context-free language for strings of balanced parentheses can be written as <span class="math">\(S \to \epsilon; S \to (S); S \to SS\)</span>. As a shorthand, we can write this as <span class="math">\(S \to \epsilon \mid (S) \mid SS\)</span>.</p>
-<p>A word is in a context-free language if and only if there exists a way to construct it from the rewrite rules in the grammar. For example, <span class="math">\((())()\)</span> can be generated by applying rule 3 to rule 2 applied to rule 2 applied to rule 1 and rule 2 applied to rule 1.</p>
+<p>The context-free languages are those that can be described by a <strong>context-free grammar</strong> (a set of rewrite rules, which can be recursive). For example, a context-free language for strings of balanced parentheses can be written as <span class="math inline">\(S \to \epsilon; S \to (S); S \to SS\)</span>. As a shorthand, we can write this as <span class="math inline">\(S \to \epsilon \mid (S) \mid SS\)</span>.</p>
+<p>A word is in a context-free language if and only if there exists a way to construct it from the rewrite rules in the grammar. For example, <span class="math inline">\((())()\)</span> can be generated by applying rule 3 to rule 2 applied to rule 2 applied to rule 1 and rule 2 applied to rule 1.</p>
 <p>A context-free grammar consists of:</p>
 <ul>
-<li>An alphabet <span class="math">\(\Sigma\)</span>, called <strong>terminal symbols</strong>. This never includes <span class="math">\(\epsilon\)</span>.</li>
-<li>A finite, non-empty set <span class="math">\(N\)</span> of <strong>nonterminal symbols</strong>, such that <span class="math">\(N \cap \Sigma = \emptyset\)</span>. The <strong>vocabulary</strong> is defined as <span class="math">\(V = N \cup \Sigma\)</span>.</li>
-<li>A finite set <span class="math">\(P\)</span> of <strong>productions</strong>, which are rules of the form <span class="math">\(A \to B\)</span> where <span class="math">\(A \in N, B \in V^*\)</span>.</li>
-<li>A starting element <span class="math">\(S\)</span> of <span class="math">\(N\)</span>.</li>
+<li>An alphabet <span class="math inline">\(\Sigma\)</span>, called <strong>terminal symbols</strong>. This never includes <span class="math inline">\(\epsilon\)</span>.</li>
+<li>A finite, non-empty set <span class="math inline">\(N\)</span> of <strong>nonterminal symbols</strong>, such that <span class="math inline">\(N \cap \Sigma = \emptyset\)</span>. The <strong>vocabulary</strong> is defined as <span class="math inline">\(V = N \cup \Sigma\)</span>.</li>
+<li>A finite set <span class="math inline">\(P\)</span> of <strong>productions</strong>, which are rules of the form <span class="math inline">\(A \to B\)</span> where <span class="math inline">\(A \in N, B \in V^*\)</span>.</li>
+<li>A starting element <span class="math inline">\(S\)</span> of <span class="math inline">\(N\)</span>.</li>
 </ul>
 <p>To make notation easier, we use these conventions:</p>
 <ul>
-<li><span class="math">\(a, b, c, \ldots \in \Sigma\)</span> - letters from the beginning of the alphabet represent characters.</li>
-<li><span class="math">\(z, y, x, \ldots \in \Sigma^*\)</span> - letters from the end of the alphabet represent strings.</li>
-<li><span class="math">\(A, B, C, \ldots, Z \in N\)</span> - capital letters represent nonterminals.</li>
-<li><span class="math">\(S\)</span> is the starting symbol/nonterminal.</li>
-<li><span class="math">\(\alpha, \beta, \ldots \in V^*\)</span> - Greek letters represent sequences of symbols.</li>
+<li><span class="math inline">\(a, b, c, \ldots \in \Sigma\)</span> - letters from the beginning of the alphabet represent characters.</li>
+<li><span class="math inline">\(z, y, x, \ldots \in \Sigma^*\)</span> - letters from the end of the alphabet represent strings.</li>
+<li><span class="math inline">\(A, B, C, \ldots, Z \in N\)</span> - capital letters represent nonterminals.</li>
+<li><span class="math inline">\(S\)</span> is the starting symbol/nonterminal.</li>
+<li><span class="math inline">\(\alpha, \beta, \ldots \in V^*\)</span> - Greek letters represent sequences of symbols.</li>
 </ul>
-<p><span class="math">\(\alpha A \beta \implies \alpha \gamma \beta\)</span> means that there is a production <span class="math">\(A \to \beta\)</span> in <span class="math">\(P\)</span> - the right side is derivable from the left side in one step.</p>
-<p><span class="math">\(\alpha A \beta \implies^* \alpha \gamma \beta\)</span> means that there exists a sequence of 0 or more derivation steps that convert the left side to the right side - the right side is somehow derivable from the left.</p>
-<p>A context-free language is therefore defined as <span class="math">\(L(G) = \set{w \in \Sigma^* \mid S \implies^* w}\)</span> - the set of all strings derivable from <span class="math">\(S\)</span>, the starting state. Here, <span class="math">\(G\)</span> is a context-free grammar and gives the values for <span class="math">\(\Sigma, N, V, P, S\)</span>.</p>
-<p>A language <span class="math">\(L\)</span> is context-free if and only if there exists a context-free grammar <span class="math">\(G\)</span> such that <span class="math">\(L = L(G)\)</span>.</p>
-<p>For example, a language that consists of palindromes over <span class="math">\(\set{a, b, c}\)</span> can be represented using the grammar <span class="math">\(S \to aSa \mid bSb \mid cSc \mid M; M \to a \mid b \mid c \mid \epsilon\)</span>.</p>
-<p>A language that consists of arithmetic expressions over <span class="math">\(\set{a, b, c, +, -, *, /}\)</span> can be written as <span class="math">\(S \to a \mid b \mid c \mid S O S \mid (S); O \to + \mid - \mid * \mid /\)</span>. We can show that <span class="math">\(S \implies^* a + b\)</span> by using <span class="math">\(S \implies S O S \implies a O S \implies a + S \implies a + b\)</span>. This is a <strong>derivation</strong> - we apply rules one by one until we have constructed the expression.</p>
+<p><span class="math inline">\(\alpha A \beta \implies \alpha \gamma \beta\)</span> means that there is a production <span class="math inline">\(A \to \beta\)</span> in <span class="math inline">\(P\)</span> - the right side is derivable from the left side in one step.</p>
+<p><span class="math inline">\(\alpha A \beta \implies^* \alpha \gamma \beta\)</span> means that there exists a sequence of 0 or more derivation steps that convert the left side to the right side - the right side is somehow derivable from the left.</p>
+<p>A context-free language is therefore defined as <span class="math inline">\(L(G) = \set{w \in \Sigma^* \mid S \implies^* w}\)</span> - the set of all strings derivable from <span class="math inline">\(S\)</span>, the starting state. Here, <span class="math inline">\(G\)</span> is a context-free grammar and gives the values for <span class="math inline">\(\Sigma, N, V, P, S\)</span>.</p>
+<p>A language <span class="math inline">\(L\)</span> is context-free if and only if there exists a context-free grammar <span class="math inline">\(G\)</span> such that <span class="math inline">\(L = L(G)\)</span>.</p>
+<p>For example, a language that consists of palindromes over <span class="math inline">\(\set{a, b, c}\)</span> can be represented using the grammar <span class="math inline">\(S \to aSa \mid bSb \mid cSc \mid M; M \to a \mid b \mid c \mid \epsilon\)</span>.</p>
+<p>A language that consists of arithmetic expressions over <span class="math inline">\(\set{a, b, c, +, -, *, /}\)</span> can be written as <span class="math inline">\(S \to a \mid b \mid c \mid S O S \mid (S); O \to + \mid - \mid * \mid /\)</span>. We can show that <span class="math inline">\(S \implies^* a + b\)</span> by using <span class="math inline">\(S \implies S O S \implies a O S \implies a + S \implies a + b\)</span>. This is a <strong>derivation</strong> - we apply rules one by one until we have constructed the expression.</p>
 <p>A derivation is a <strong>proof that a word is in the language</strong>.</p>
-<p>At our <span class="math">\(S O S\)</span> step, we had a choice as to which rule to expand next - any of the <span class="math">\(S\)</span>, <span class="math">\(O\)</span>, or <span class="math">\(S\)</span> could have been expanded next. We can do a <strong>leftmost derivation</strong>, where we always expand the leftmost symbol (in this case, the first <span class="math">\(S\)</span>), and <strong>rightmost derivation</strong>, where we always expand the rightmost symbol (in this case, the second <span class="math">\(S\)</span>).</p>
+<p>At our <span class="math inline">\(S O S\)</span> step, we had a choice as to which rule to expand next - any of the <span class="math inline">\(S\)</span>, <span class="math inline">\(O\)</span>, or <span class="math inline">\(S\)</span> could have been expanded next. We can do a <strong>leftmost derivation</strong>, where we always expand the leftmost symbol (in this case, the first <span class="math inline">\(S\)</span>), and <strong>rightmost derivation</strong>, where we always expand the rightmost symbol (in this case, the second <span class="math inline">\(S\)</span>).</p>
 <p>We can express the derivation more naturally as a <strong>parse tree</strong>:</p>
 <pre><code>  S
  /|\
@@ -615,23 +616,23 @@ S O S
 a + b</code></pre>
 <h1 id="section-12">24/2/15</h1>
 <p>For every leftmost and rightmost derivation, there exists a corresponding <strong>unique parse tree</strong>. A grammar for which some word has more than one distinct leftmost derivation is <strong>ambiguous</strong> - there are multiple possible parse trees for some strings.</p>
-<p>A string might have two leftmost derivations, and so would have two unique parse trees. For example, we can derive <span class="math">\(a + b * c\)</span> by starting with <span class="math">\(S \implies S O S \implies S O S O S \implies \implies a O S O S \implies \ldots\)</span>, or with <span class="math">\(S \implies S O S \implies a O S \implies a O S O S \implies \ldots\)</span>. This is equivalent to parsing it as <span class="math">\((a + b) * c\)</span> or <span class="math">\(a + (b * c)\)</span>.</p>
+<p>A string might have two leftmost derivations, and so would have two unique parse trees. For example, we can derive <span class="math inline">\(a + b * c\)</span> by starting with <span class="math inline">\(S \implies S O S \implies S O S O S \implies \implies a O S O S \implies \ldots\)</span>, or with <span class="math inline">\(S \implies S O S \implies a O S \implies a O S O S \implies \ldots\)</span>. This is equivalent to parsing it as <span class="math inline">\((a + b) * c\)</span> or <span class="math inline">\(a + (b * c)\)</span>.</p>
 <p>If we just care about whether a word is in a language, then it doesn't matter if we use an ambiguous grammar. However, for compilers, the shape of the parse tree determines the meaning of the program, so words that have two different parse trees would have two different meanings.</p>
 <p>To resolve ambiguity, we could use heuristics (often called <strong>precedence</strong>) to guide which rule we expand next. However, most of the time we just want to use an unambiguous grammar instead.</p>
-<p>The unambiguous version of the language can be written as <span class="math">\(E \to E O T; T \to a \mid b \mid c \mid (E); O \to + \mid - \mid * \mid /\)</span></p>
-<p>To get the multiplicative operators to have precedence over the additive operators, we can use the following grammar: <span class="math">\(E \to E \text{Plus} T \mid T; T \to T \text{Mult} F \mid F; F \to a \mid b \mid c \mid (E); \text{Plus} \to + \mid -; \text{Mult} \to * \mid /\)</span>. Note that we used a rule for each level of precedence - <span class="math">\(E\)</span> is the precedence level for additive operators, and <span class="math">\(T\)</span> is for multiplicative operators.</p>
-<p>If <span class="math">\(L\)</span> is a context-free language, there may not necessarily be an unambiguous context-free grammar for it. The languages that only have ambiguous grammars are <strong>inherently ambiguous grammars</strong>. For example, <span class="math">\(A \to \epsilon, B \to \epsilon, S \to A \mid B\)</span>.</p>
+<p>The unambiguous version of the language can be written as <span class="math inline">\(E \to E O T; T \to a \mid b \mid c \mid (E); O \to + \mid - \mid * \mid /\)</span></p>
+<p>To get the multiplicative operators to have precedence over the additive operators, we can use the following grammar: <span class="math inline">\(E \to E \text{Plus} T \mid T; T \to T \text{Mult} F \mid F; F \to a \mid b \mid c \mid (E); \text{Plus} \to + \mid -; \text{Mult} \to * \mid /\)</span>. Note that we used a rule for each level of precedence - <span class="math inline">\(E\)</span> is the precedence level for additive operators, and <span class="math inline">\(T\)</span> is for multiplicative operators.</p>
+<p>If <span class="math inline">\(L\)</span> is a context-free language, there may not necessarily be an unambiguous context-free grammar for it. The languages that only have ambiguous grammars are <strong>inherently ambiguous grammars</strong>. For example, <span class="math inline">\(A \to \epsilon, B \to \epsilon, S \to A \mid B\)</span>.</p>
 <p>It is not possible to tell if an arbitrary context-free grammar is ambiguous - this problem is undecidable. However, we can write tools that can ensure that a grammar, constrained in certain ways (like no left recursion), is always unambiguous. Tools like ANTLR can do this.</p>
 <p>Testing whether two grammars describe the same language is also an undecidable problem.</p>
 <p>A finite language can be recognized with a loop-less program. A regular language can be recognized with a program that uses finite memory (this is because regular languages are recognized with DFAs, and the states of a DFA represent the program's memory). A context-free language can be recognized with an NFA and a stack (this is a program that can use infinite memory, since the stack can grow arbitrarily).</p>
 <p>A real compiler needs a bit more than just recognition. If the program is valid, we need a proof in the form of a parse tree. If the program is invalid, we also need a proof in the form of an error message. The process of finding the derivation, and the parse tree, is known as <strong>parsing</strong>.</p>
-<p>Parsing is the following problem: given a grammar <span class="math">\(G\)</span>, start symbol <span class="math">\(S\)</span>, and a word <span class="math">\(w\)</span>, determine the derivation <span class="math">\(S \implies \ldots \implies w\)</span>, or prove that there is no possible derivation.</p>
-<p>We can do parsing in two ways - finding the derivation forwards (starting from the left, expand until we have <span class="math">\(w\)</span>, this is <strong>top-down parsing</strong>), or finding it backwards (starting from the right, unexpand until we have <span class="math">\(S\)</span>, this is <strong>bottom-up parsing</strong>). Both are used in practice, and they each have advantages for different types of grammars.</p>
+<p>Parsing is the following problem: given a grammar <span class="math inline">\(G\)</span>, start symbol <span class="math inline">\(S\)</span>, and a word <span class="math inline">\(w\)</span>, determine the derivation <span class="math inline">\(S \implies \ldots \implies w\)</span>, or prove that there is no possible derivation.</p>
+<p>We can do parsing in two ways - finding the derivation forwards (starting from the left, expand until we have <span class="math inline">\(w\)</span>, this is <strong>top-down parsing</strong>), or finding it backwards (starting from the right, unexpand until we have <span class="math inline">\(S\)</span>, this is <strong>bottom-up parsing</strong>). Both are used in practice, and they each have advantages for different types of grammars.</p>
 <h2 id="top-down-parsing">Top-down Parsing</h2>
-<p>The basic idea is to start with <span class="math">\(S\)</span>, apply grammar rules, and eventually reach <span class="math">\(w\)</span>.</p>
-<p>We start with <span class="math">\(S\)</span>, and then repeatedly attempt to resolve the leftmost non-terminal until we have obtained the input desired, or an error otherwise. In this way we obtain the leftmost derivation. Potentially, we could also obtain the rightmost derivation by always attempting to resolve the rightmost nonterminal.</p>
-<p>We will use a stack to store all the <span class="math">\(\alpha_i\)</span>, in reverse, in the derivation <span class="math">\(S \implies \alpha_1 \implies \ldots \implies \alpha_n \implies w\)</span>. We will then match against characters in <span class="math">\(w\)</span> from left to right. We will also enforce the property that the consumed input concatenated with the reversed stack contents are equal to some <span class="math">\(\alpha_i\)</span>.</p>
-<p>We will use <strong>augmented grammars</strong> to make parsing simpler. Basically, we take a normal grammar and add the symbols <span class="math">\(\vdash\)</span> and <span class="math">\(\dashv\)</span> (the beginning and ending symbols), and a new start symbol <span class="math">\(S&#39;\)</span>, defined as <span class="math">\(S&#39; \to \vdash S \dashv\)</span>. Our word is now <span class="math">\(\vdash w \dashv\)</span>.</p>
+<p>The basic idea is to start with <span class="math inline">\(S\)</span>, apply grammar rules, and eventually reach <span class="math inline">\(w\)</span>.</p>
+<p>We start with <span class="math inline">\(S\)</span>, and then repeatedly attempt to resolve the leftmost non-terminal until we have obtained the input desired, or an error otherwise. In this way we obtain the leftmost derivation. Potentially, we could also obtain the rightmost derivation by always attempting to resolve the rightmost nonterminal.</p>
+<p>We will use a stack to store all the <span class="math inline">\(\alpha_i\)</span>, in reverse, in the derivation <span class="math inline">\(S \implies \alpha_1 \implies \ldots \implies \alpha_n \implies w\)</span>. We will then match against characters in <span class="math inline">\(w\)</span> from left to right. We will also enforce the property that the consumed input concatenated with the reversed stack contents are equal to some <span class="math inline">\(\alpha_i\)</span>.</p>
+<p>We will use <strong>augmented grammars</strong> to make parsing simpler. Basically, we take a normal grammar and add the symbols <span class="math inline">\(\vdash\)</span> and <span class="math inline">\(\dashv\)</span> (the beginning and ending symbols), and a new start symbol <span class="math inline">\(S&#39;\)</span>, defined as <span class="math inline">\(S&#39; \to \vdash S \dashv\)</span>. Our word is now <span class="math inline">\(\vdash w \dashv\)</span>.</p>
 <h1 id="section-13">26/2/15</h1>
 <p>The language of WLP4 is defined using regular expressions to determine the tokenizations, a context-free grammar to define the parsing, context-sensitive code to do things like check types and declarations, and a mapping from parse tree structures to executable output to determine the semantics of the language.</p>
 <p>The basic structure of a top-down parser is as follows:</p>
@@ -643,9 +644,16 @@ while current_input != full_input:
     replace the instance of `A` chosen earlier with `value` in `current_input`</code></pre>
 <p>Basically, we are repeatedly reducing the nonterminals in the input until we have all terminals, or have determined that the word is not in the language.</p>
 <p>The step where we find which production rule to use is an important part of top-down parsing. Generally, this is based on ;wip</p>
-<p>We can implement top-down parsing using a stack <span class="math">\(S = X_n \ldots X_1, X_1, \ldots, X_n \in V\)</span> (stack contains symbols in the vocabulary). The parsing is made possible by reading the input left-to-right into <code>read_input</code> and enforcing the invariant <code>current_input = read_input + S</code> as we read through.</p>
-<p>Consider the following grammar: <span class="math">\(S \to A y B; A \to ab; A \to cd; B \to z; B \to wx\)</span>. Consider the word <span class="math">\(w = \vdash abywx \dashv\)</span>. Then to parse it, we do the following:</p>
+<p>We can implement top-down parsing using a stack <span class="math inline">\(S = X_n \ldots X_1, X_1, \ldots, X_n \in V\)</span> (stack contains symbols in the vocabulary). The parsing is made possible by reading the input left-to-right into <code>read_input</code> and enforcing the invariant <code>current_input = read_input + S</code> as we read through.</p>
+<p>Consider the following grammar: <span class="math inline">\(S \to A y B; A \to ab; A \to cd; B \to z; B \to wx\)</span>. Consider the word <span class="math inline">\(w = \vdash abywx \dashv\)</span>. Then to parse it, we do the following:</p>
 <table>
+<colgroup>
+<col width="12%" />
+<col width="14%" />
+<col width="14%" />
+<col width="44%" />
+<col width="14%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Stack</th>
@@ -657,96 +665,96 @@ while current_input != full_input:
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><span class="math">\(S&#39;\)</span></td>
-<td align="left"><span class="math">\(\epsilon\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
-<td align="left">top of stack is nonterminal, pop and pick rule <span class="math">\(S&#39; \to \vdash S \dashv\)</span></td>
-<td align="left"><span class="math">\(S&#39;\)</span></td>
+<td align="left"><span class="math inline">\(S&#39;\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
+<td align="left">top of stack is nonterminal, pop and pick rule <span class="math inline">\(S&#39; \to \vdash S \dashv\)</span></td>
+<td align="left"><span class="math inline">\(S&#39;\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(\vdash S \dashv\)</span></td>
-<td align="left"><span class="math">\(\epsilon\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
-<td align="left">read <span class="math">\(\vdash\)</span>, compare to top of stack, pop</td>
-<td align="left"><span class="math">\(\vdash S \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash S \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
+<td align="left">read <span class="math inline">\(\vdash\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math inline">\(\vdash S \dashv\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(S \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left"><span class="math">\(abywx \dashv\)</span></td>
-<td align="left">top of stack is nonterminal, pop and pick rule <span class="math">\(S \to AyB\)</span></td>
-<td align="left"><span class="math">\(\vdash S \dashv\)</span></td>
+<td align="left"><span class="math inline">\(S \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left"><span class="math inline">\(abywx \dashv\)</span></td>
+<td align="left">top of stack is nonterminal, pop and pick rule <span class="math inline">\(S \to AyB\)</span></td>
+<td align="left"><span class="math inline">\(\vdash S \dashv\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(AyB \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left"><span class="math">\(abywx \dashv\)</span></td>
-<td align="left">top of stack is nonterminal, pop and pick rule <span class="math">\(A \to ab\)</span></td>
-<td align="left"><span class="math">\(\vdash AyB \dashv\)</span></td>
+<td align="left"><span class="math inline">\(AyB \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left"><span class="math inline">\(abywx \dashv\)</span></td>
+<td align="left">top of stack is nonterminal, pop and pick rule <span class="math inline">\(A \to ab\)</span></td>
+<td align="left"><span class="math inline">\(\vdash AyB \dashv\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(abyB \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left"><span class="math">\(abywx \dashv\)</span></td>
-<td align="left">read <span class="math">\(a\)</span>, compare to top of stack, pop</td>
-<td align="left"><span class="math">\(\vdash aayB \dashv\)</span></td>
+<td align="left"><span class="math inline">\(abyB \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left"><span class="math inline">\(abywx \dashv\)</span></td>
+<td align="left">read <span class="math inline">\(a\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math inline">\(\vdash aayB \dashv\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(byB \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash a\)</span></td>
-<td align="left"><span class="math">\(bywx \dashv\)</span></td>
-<td align="left">read <span class="math">\(b\)</span>, compare to top of stack, pop</td>
-<td align="left"><span class="math">\(\vdash aayB \dashv\)</span></td>
+<td align="left"><span class="math inline">\(byB \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash a\)</span></td>
+<td align="left"><span class="math inline">\(bywx \dashv\)</span></td>
+<td align="left">read <span class="math inline">\(b\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math inline">\(\vdash aayB \dashv\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(yB \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash ab\)</span></td>
-<td align="left"><span class="math">\(ywx \dashv\)</span></td>
-<td align="left">read <span class="math">\(y\)</span>, compare to top of stack, pop</td>
-<td align="left"><span class="math">\(\vdash aayB \dashv\)</span></td>
+<td align="left"><span class="math inline">\(yB \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash ab\)</span></td>
+<td align="left"><span class="math inline">\(ywx \dashv\)</span></td>
+<td align="left">read <span class="math inline">\(y\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math inline">\(\vdash aayB \dashv\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(B \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash aby\)</span></td>
-<td align="left"><span class="math">\(wx \dashv\)</span></td>
-<td align="left">top of stack is nonterminal, pop and pick rule <span class="math">\(B \to wx\)</span></td>
-<td align="left"><span class="math">\(\vdash aayB \dashv\)</span></td>
+<td align="left"><span class="math inline">\(B \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash aby\)</span></td>
+<td align="left"><span class="math inline">\(wx \dashv\)</span></td>
+<td align="left">top of stack is nonterminal, pop and pick rule <span class="math inline">\(B \to wx\)</span></td>
+<td align="left"><span class="math inline">\(\vdash aayB \dashv\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(wx \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash aby\)</span></td>
-<td align="left"><span class="math">\(wx \dashv\)</span></td>
-<td align="left">read <span class="math">\(w\)</span>, compare to top of stack, pop</td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(wx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash aby\)</span></td>
+<td align="left"><span class="math inline">\(wx \dashv\)</span></td>
+<td align="left">read <span class="math inline">\(w\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(x \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash abyw\)</span></td>
-<td align="left"><span class="math">\(x \dashv\)</span></td>
-<td align="left">read <span class="math">\(x\)</span>, compare to top of stack, pop</td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(x \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abyw\)</span></td>
+<td align="left"><span class="math inline">\(x \dashv\)</span></td>
+<td align="left">read <span class="math inline">\(x\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(\dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx\)</span></td>
-<td align="left"><span class="math">\(\dashv\)</span></td>
-<td align="left">read <span class="math">\(\dashv\)</span>, compare to top of stack, pop</td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx\)</span></td>
+<td align="left"><span class="math inline">\(\dashv\)</span></td>
+<td align="left">read <span class="math inline">\(\dashv\)</span>, compare to top of stack, pop</td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(\epsilon\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
-<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
 <td align="left">end of input, accept since stack empty</td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
 </tr>
 </tbody>
 </table>
 <p>Note that we only really need to care about the stack and the read input. That means that we can implement a top-down parser using just a stack as storage.</p>
 <p>;wip: missed the rest due to sleep</p>
 <h1 id="section-14">3/3/15</h1>
-<p>The <strong>first set</strong> of a nonterminal is the set of all terminals that might start that rule in the parser's input. For example, if we have <span class="math">\(A \to B, B \to x\)</span>, then the first set of <span class="math">\(A\)</span> includes <span class="math">\(x\)</span>. The <strong>follow set</strong> of a nonterminal is the set of all terminals that might follow the rule in the parser's input For example, if we have <span class="math">\(A \to B C, B \to x, C \to y\)</span>, the follow set of <span class="math">\(B\)</span> includes <span class="math">\(y\)</span>.</p>
-<p>A nonterminal is <strong>nullable</strong> if and only if it can derive <span class="math">\(\epsilon\)</span>.</p>
+<p>The <strong>first set</strong> of a nonterminal is the set of all terminals that might start that rule in the parser's input. For example, if we have <span class="math inline">\(A \to B, B \to x\)</span>, then the first set of <span class="math inline">\(A\)</span> includes <span class="math inline">\(x\)</span>. The <strong>follow set</strong> of a nonterminal is the set of all terminals that might follow the rule in the parser's input For example, if we have <span class="math inline">\(A \to B C, B \to x, C \to y\)</span>, the follow set of <span class="math inline">\(B\)</span> includes <span class="math inline">\(y\)</span>.</p>
+<p>A nonterminal is <strong>nullable</strong> if and only if it can derive <span class="math inline">\(\epsilon\)</span>.</p>
 <p>Calculating first sets:</p>
 <pre><code># grammar is a list of pairs of nonterminals and their expansions (lists of vocabulary elements)
 First = {A: set() for A, expansion in grammar}
@@ -760,27 +768,27 @@ do:
                 First[A].extend(First[element])
                 if not Nullable[element]: break
 until First stops changing</code></pre>
-<p>A grammar that has matched <span class="math">\(b\)</span>-<span class="math">\(d\)</span> and <span class="math">\(p\)</span>-<span class="math">\(q\)</span> pairs with <span class="math">\(l\)</span> in between can be written as <span class="math">\(S&#39; \to \vdash S \dashv; S \to b S d; S \to p S q; S \to C; C \to lC; C \to \epsilon\)</span>.</p>
-<p>Running this algorithm on the grammar results in the first set <span class="math">\(\set{\vdash}\)</span> for <span class="math">\(S&#39;\)</span>, <span class="math">\(\set{b, p, l}\)</span> for <span class="math">\(S\)</span>, and <span class="math">\(\set{l}\)</span> for <span class="math">\(C\)</span>.</p>
-<p>The follow sets for this algorithm are <span class="math">\(\set{\dashv, d, q}\)</span> for <span class="math">\(S\)</span> and <span class="math">\(\set{\dashv, d, q}\)</span> for <span class="math">\(C\)</span>.</p>
-<p>With the first and follow sets, we can create a prediction function <span class="math">\(\text{Predict}(A, a) = \set{A \to B \middle| a \in \text{First}(B)} \cup \set{A \to B \middle| \text{Nullable}(B) \wedge a \in \text{Follow}(A)}\)</span>, where <span class="math">\(A\)</span> is a nonterminal and <span class="math">\(a\)</span> is a terminal. Basically, this describes the union of the set of rules for which the right hand side begins with the terminal <span class="math">\(a\)</span>, and the set of rules that can expand to 0 tokens and are followed by <span class="math">\(a\)</span>.</p>
-<p>We can also represent the prediction table as a table where the rows are different nonterminals <span class="math">\(A\)</span> and the columns are different terminals <span class="math">\(a\)</span>, with the cells filled with the resulting rules.</p>
-<p>This works for <span class="math">\(LL(1)\)</span> grammars. A grammar is <span class="math">\(LL(1)\)</span> if and only if:</p>
+<p>A grammar that has matched <span class="math inline">\(b\)</span>-<span class="math inline">\(d\)</span> and <span class="math inline">\(p\)</span>-<span class="math inline">\(q\)</span> pairs with <span class="math inline">\(l\)</span> in between can be written as <span class="math inline">\(S&#39; \to \vdash S \dashv; S \to b S d; S \to p S q; S \to C; C \to lC; C \to \epsilon\)</span>.</p>
+<p>Running this algorithm on the grammar results in the first set <span class="math inline">\(\set{\vdash}\)</span> for <span class="math inline">\(S&#39;\)</span>, <span class="math inline">\(\set{b, p, l}\)</span> for <span class="math inline">\(S\)</span>, and <span class="math inline">\(\set{l}\)</span> for <span class="math inline">\(C\)</span>.</p>
+<p>The follow sets for this algorithm are <span class="math inline">\(\set{\dashv, d, q}\)</span> for <span class="math inline">\(S\)</span> and <span class="math inline">\(\set{\dashv, d, q}\)</span> for <span class="math inline">\(C\)</span>.</p>
+<p>With the first and follow sets, we can create a prediction function <span class="math inline">\(\text{Predict}(A, a) = \set{A \to B \middle| a \in \text{First}(B)} \cup \set{A \to B \middle| \text{Nullable}(B) \wedge a \in \text{Follow}(A)}\)</span>, where <span class="math inline">\(A\)</span> is a nonterminal and <span class="math inline">\(a\)</span> is a terminal. Basically, this describes the union of the set of rules for which the right hand side begins with the terminal <span class="math inline">\(a\)</span>, and the set of rules that can expand to 0 tokens and are followed by <span class="math inline">\(a\)</span>.</p>
+<p>We can also represent the prediction table as a table where the rows are different nonterminals <span class="math inline">\(A\)</span> and the columns are different terminals <span class="math inline">\(a\)</span>, with the cells filled with the resulting rules.</p>
+<p>This works for <span class="math inline">\(LL(1)\)</span> grammars. A grammar is <span class="math inline">\(LL(1)\)</span> if and only if:</p>
 <ul>
-<li>No two production rules with the same left-hand side can generate the same first symbol - the set <span class="math">\(\set{A \to B \middle| a \in First^*(B)}\)</span> cannot have more than 1 element for any symbol <span class="math">\(a\)</span>.</li>
-<li>As a result, the grammar <span class="math">\(E \to E + T \mid T; T \to T * F \mid F&#39; F \to a \mid b \mid c\)</span> is not <span class="math">\(LL(1)\)</span> because it is <strong>left recursive</strong> - given an input <span class="math">\(a\)</span>, it is possible for either <span class="math">\(E\)</span> or <span class="math">\(T\)</span> to generate it.</li>
-<li>Left recursion will immediately make a grammar not <span class="math">\(LL(1)\)</span>. Right recursion could also do so, but not always.</li>
-<li>To make it <span class="math">\(LL(1)\)</span>, we could do something like <span class="math">\(E \to T E&#39;; E&#39; \to \epsilon \mid + E; T \to F T&#39;; T&#39; \to \epsilon \mid * T; F \to a \mid b \mid c\)</span>. This is called <strong>left factoring</strong>.</li>
-<li>There is only one way to nullify a nullable symbol - the set <span class="math">\(\set{A \to B \middle| Nullable(B) \wedge a \in \text{Follow}(A)}\)</span> cannot have more than 1 element.</li>
+<li>No two production rules with the same left-hand side can generate the same first symbol - the set <span class="math inline">\(\set{A \to B \middle| a \in First^*(B)}\)</span> cannot have more than 1 element for any symbol <span class="math inline">\(a\)</span>.</li>
+<li>As a result, the grammar <span class="math inline">\(E \to E + T \mid T; T \to T * F \mid F&#39; F \to a \mid b \mid c\)</span> is not <span class="math inline">\(LL(1)\)</span> because it is <strong>left recursive</strong> - given an input <span class="math inline">\(a\)</span>, it is possible for either <span class="math inline">\(E\)</span> or <span class="math inline">\(T\)</span> to generate it.</li>
+<li>Left recursion will immediately make a grammar not <span class="math inline">\(LL(1)\)</span>. Right recursion could also do so, but not always.</li>
+<li>To make it <span class="math inline">\(LL(1)\)</span>, we could do something like <span class="math inline">\(E \to T E&#39;; E&#39; \to \epsilon \mid + E; T \to F T&#39;; T&#39; \to \epsilon \mid * T; F \to a \mid b \mid c\)</span>. This is called <strong>left factoring</strong>.</li>
+<li>There is only one way to nullify a nullable symbol - the set <span class="math inline">\(\set{A \to B \middle| Nullable(B) \wedge a \in \text{Follow}(A)}\)</span> cannot have more than 1 element.</li>
 <li>In fact, if there is more than 1 way to nullify a symbol, then the grammar is ambiguous.</li>
 </ul>
-<p>To build a <strong>parse tree</strong> with a top-down parser, we simply build a node when we expand a production rule - we start with the parse tree being the start rule <span class="math">\(S\)</span>, then whenever we pick a rule <span class="math">\(A \to \ldots\)</span>, we add <span class="math">\(\ldots\)</span> as the children of <span class="math">\(A\)</span>.</p>
-<p>For example, if the tree is <span class="math">\(S\)</span> and we expand it using the rule <span class="math">\(S \to A y B\)</span>, we get the tree <span class="math">\(S(A, y, B)\)</span>. When we then expand <span class="math">\(A\)</span> using <span class="math">\(A \to wx\)</span>, we get the tree <span class="math">\(S(A(wx), y, B)\)</span>, and so on.</p>
+<p>To build a <strong>parse tree</strong> with a top-down parser, we simply build a node when we expand a production rule - we start with the parse tree being the start rule <span class="math inline">\(S\)</span>, then whenever we pick a rule <span class="math inline">\(A \to \ldots\)</span>, we add <span class="math inline">\(\ldots\)</span> as the children of <span class="math inline">\(A\)</span>.</p>
+<p>For example, if the tree is <span class="math inline">\(S\)</span> and we expand it using the rule <span class="math inline">\(S \to A y B\)</span>, we get the tree <span class="math inline">\(S(A, y, B)\)</span>. When we then expand <span class="math inline">\(A\)</span> using <span class="math inline">\(A \to wx\)</span>, we get the tree <span class="math inline">\(S(A(wx), y, B)\)</span>, and so on.</p>
 <h2 id="bottom-up-parsing">Bottom-up Parsing</h2>
-<p>The basic idea is to start with <span class="math">\(w\)</span>, and then go back using rules to get <span class="math">\(S&#39;\)</span> from <span class="math">\(S&#39; \implies \alpha_1 \implies \ldots \implies \alpha_k \implies w\)</span>.</p>
+<p>The basic idea is to start with <span class="math inline">\(w\)</span>, and then go back using rules to get <span class="math inline">\(S&#39;\)</span> from <span class="math inline">\(S&#39; \implies \alpha_1 \implies \ldots \implies \alpha_k \implies w\)</span>.</p>
 <p>Parsing will always require a stack. In our bottom-up parsing, we are going to store partially reduced input read so far.</p>
-<p>In our case, we will enforce the invariant <span class="math">\(stack + unread_input \in \set{S&#39;, \alpha_1, \ldots, \alpha_k, w}\)</span> after reading each terminal from the input.</p>
-<p>Consider the following grammar: <span class="math">\(S \to A y B; A \to ab; A \to cd; B \to z; B \to wx\)</span>. Consider the word <span class="math">\(w = abywx\)</span>. Then to parse it, we do the following:</p>
+<p>In our case, we will enforce the invariant <span class="math inline">\(stack + unread_input \in \set{S&#39;, \alpha_1, \ldots, \alpha_k, w}\)</span> after reading each terminal from the input.</p>
+<p>Consider the following grammar: <span class="math inline">\(S \to A y B; A \to ab; A \to cd; B \to z; B \to wx\)</span>. Consider the word <span class="math inline">\(w = abywx\)</span>. Then to parse it, we do the following:</p>
 <table>
 <thead>
 <tr class="header">
@@ -792,81 +800,81 @@ until First stops changing</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><span class="math">\(\epsilon\)</span></td>
-<td align="left"><span class="math">\(\epsilon\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
 <td align="left">(initial state)</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left"><span class="math">\(abywx \dashv\)</span></td>
-<td align="left">shift <span class="math">\(\vdash\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left"><span class="math inline">\(abywx \dashv\)</span></td>
+<td align="left">shift <span class="math inline">\(\vdash\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(\vdash a\)</span></td>
-<td align="left"><span class="math">\(\vdash a\)</span></td>
-<td align="left"><span class="math">\(bywx \dashv\)</span></td>
-<td align="left">shift <span class="math">\(a\)</span></td>
+<td align="left"><span class="math inline">\(\vdash a\)</span></td>
+<td align="left"><span class="math inline">\(\vdash a\)</span></td>
+<td align="left"><span class="math inline">\(bywx \dashv\)</span></td>
+<td align="left">shift <span class="math inline">\(a\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(\vdash ab\)</span></td>
-<td align="left"><span class="math">\(\vdash ab\)</span></td>
-<td align="left"><span class="math">\(ywx \dashv\)</span></td>
-<td align="left">shift <span class="math">\(b\)</span></td>
+<td align="left"><span class="math inline">\(\vdash ab\)</span></td>
+<td align="left"><span class="math inline">\(\vdash ab\)</span></td>
+<td align="left"><span class="math inline">\(ywx \dashv\)</span></td>
+<td align="left">shift <span class="math inline">\(b\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(\vdash A\)</span></td>
-<td align="left"><span class="math">\(\vdash ab\)</span></td>
-<td align="left"><span class="math">\(ywx \dashv\)</span></td>
-<td align="left">reduce <span class="math">\(A \to ab\)</span></td>
+<td align="left"><span class="math inline">\(\vdash A\)</span></td>
+<td align="left"><span class="math inline">\(\vdash ab\)</span></td>
+<td align="left"><span class="math inline">\(ywx \dashv\)</span></td>
+<td align="left">reduce <span class="math inline">\(A \to ab\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(\vdash Ay\)</span></td>
-<td align="left"><span class="math">\(\vdash aby\)</span></td>
-<td align="left"><span class="math">\(wx \dashv\)</span></td>
-<td align="left">shift <span class="math">\(y\)</span></td>
+<td align="left"><span class="math inline">\(\vdash Ay\)</span></td>
+<td align="left"><span class="math inline">\(\vdash aby\)</span></td>
+<td align="left"><span class="math inline">\(wx \dashv\)</span></td>
+<td align="left">shift <span class="math inline">\(y\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(\vdash Ayw\)</span></td>
-<td align="left"><span class="math">\(\vdash abyw\)</span></td>
-<td align="left"><span class="math">\(x \dashv\)</span></td>
-<td align="left">shift <span class="math">\(w\)</span></td>
+<td align="left"><span class="math inline">\(\vdash Ayw\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abyw\)</span></td>
+<td align="left"><span class="math inline">\(x \dashv\)</span></td>
+<td align="left">shift <span class="math inline">\(w\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(\vdash Ayw\)</span></td>
-<td align="left"><span class="math">\(\vdash abyw\)</span></td>
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left">shift <span class="math">\(x\)</span></td>
+<td align="left"><span class="math inline">\(\vdash Ayw\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abyw\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left">shift <span class="math inline">\(x\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(\vdash Aywx\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx\)</span></td>
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left">reduce <span class="math">\(B \to wx\)</span></td>
+<td align="left"><span class="math inline">\(\vdash Aywx\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left">reduce <span class="math inline">\(B \to wx\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(\vdash AyB\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx\)</span></td>
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left">reduce <span class="math">\(AyB \to S\)</span></td>
+<td align="left"><span class="math inline">\(\vdash AyB\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left">reduce <span class="math inline">\(AyB \to S\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(\vdash S\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left">shift <span class="math">\(\dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash S\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left">shift <span class="math inline">\(\dashv\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(\vdash S \dashv\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
-<td align="left"><span class="math">\(\epsilon\)</span></td>
-<td align="left">reduce <span class="math">\(S&#39; \to \vdash S \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash S \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
+<td align="left">reduce <span class="math inline">\(S&#39; \to \vdash S \dashv\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(S&#39;\)</span></td>
-<td align="left"><span class="math">\(\vdash abywx \dashv\)</span></td>
-<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math inline">\(S&#39;\)</span></td>
+<td align="left"><span class="math inline">\(\vdash abywx \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
 <td align="left">accept</td>
 </tr>
 </tbody>
@@ -876,18 +884,18 @@ until First stops changing</code></pre>
 <li>Shift - moving one character from the input to the stack.</li>
 <li>Reduce - the top of the stack is the right-hand side of some grammar rule, so replace it with the left hand side.</li>
 </ul>
-<p>We accept if the stack is <span class="math">\(S&#39;\)</span> and the unread input is <span class="math">\(\epsilon\)</span> (or we have <span class="math">\(\vdash S \dashv\)</span> on an empty input, or when we shift <span class="math">\(\dashv\)</span>).</p>
+<p>We accept if the stack is <span class="math inline">\(S&#39;\)</span> and the unread input is <span class="math inline">\(\epsilon\)</span> (or we have <span class="math inline">\(\vdash S \dashv\)</span> on an empty input, or when we shift <span class="math inline">\(\dashv\)</span>).</p>
 <p>How do we know whether to shift or reduce? We can decide based on the next token, but in practice this is very difficult.</p>
 <p>Donald Knuth is known for proposing big-O notation as an algorithm analysis tool, writing the series of books &quot;The Art Of Computer Programming&quot;, and the TeX typesetting system, among others.</p>
-<p>He also invented a theorem: the set <span class="math">\(\set{wa \middle| \exists x, S&#39; \implies^* wax}\)</span> is a regular language. In other words, if <span class="math">\(w\)</span> is our stack and <span class="math">\(a\)</span> is our next input char, then we can use a DFA to describe and decide when to shift or reduce. This technique is called <strong>LR parsing</strong> (L for left-right scanning, R for rightmost derivations).</p>
+<p>He also invented a theorem: the set <span class="math inline">\(\set{wa \middle| \exists x, S&#39; \implies^* wax}\)</span> is a regular language. In other words, if <span class="math inline">\(w\)</span> is our stack and <span class="math inline">\(a\)</span> is our next input char, then we can use a DFA to describe and decide when to shift or reduce. This technique is called <strong>LR parsing</strong> (L for left-right scanning, R for rightmost derivations).</p>
 <h1 id="section-15">5/3/15</h1>
-<p>An <strong>item</strong> is a production with a dot (<span class="math">\(\cdot\)</span>) somewhere on the right-hand side, and represents the partially completed rule.</p>
-<p>Consider the grammar <span class="math">\(S&#39; \to \vdash E \dashv, E \to E + T, E \to T, T \to id\)</span>.</p>
+<p>An <strong>item</strong> is a production with a dot (<span class="math inline">\(\cdot\)</span>) somewhere on the right-hand side, and represents the partially completed rule.</p>
+<p>Consider the grammar <span class="math inline">\(S&#39; \to \vdash E \dashv, E \to E + T, E \to T, T \to id\)</span>.</p>
 <p>;wip: define LR(0) and LR parsing</p>
 <p>When we are LR parsing, we have a DFA. The states of this DFA are sets of rules, each with a dot inserted in them to represent where we are in parsing the rule.</p>
-<p>When we create a state from another state using a transition symbol <span class="math">\(A\)</span>, we take the rules of that state that have their dot followed by <span class="math">\(A\)</span> and move the dot to the right by 1 symbol for every rule. Then, for each rule, if the dot precedes a nonterminal <span class="math">\(A\)</span>, then we include all rules <span class="math">\(A \to \ldots\)</span> as <span class="math">\(A \to \cdot \ldots\)</span>. We do this repeatedly until there are no more dots preceding nonterminals. For example, if we create a state from <span class="math">\(S&#39;\)</span>, we move the dot to the right, include <span class="math">\(E\)</span> rules, and then include <span class="math">\(T\)</span> rules, to get <span class="math">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span>.</p>
-<p>The start state has only one rule, for the starting rule for the grammar <span class="math">\(S&#39; \to \cdot \vdash S \dashv\)</span>. For the above grammar, we have <span class="math">\(S&#39; \to \cdot \vdash S \dashv\)</span>. We want to buil the entire DFA starting from this start state.</p>
-<p>For every state, we now create new states corresponding each symbol following the dots in the rules, with those following symbols as the transitions to those states. For example, a state <span class="math">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span> creates 3 states, with transitions <span class="math">\(E, T, id\)</span>. For example, the state <span class="math">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span> creates the state <span class="math">\(E \to T \cdot\)</span> using transition <span class="math">\(T\)</span>. If there are no symbols following dots, then we do not create any new states. Duplicate states are combined into one state.</p>
+<p>When we create a state from another state using a transition symbol <span class="math inline">\(A\)</span>, we take the rules of that state that have their dot followed by <span class="math inline">\(A\)</span> and move the dot to the right by 1 symbol for every rule. Then, for each rule, if the dot precedes a nonterminal <span class="math inline">\(A\)</span>, then we include all rules <span class="math inline">\(A \to \ldots\)</span> as <span class="math inline">\(A \to \cdot \ldots\)</span>. We do this repeatedly until there are no more dots preceding nonterminals. For example, if we create a state from <span class="math inline">\(S&#39;\)</span>, we move the dot to the right, include <span class="math inline">\(E\)</span> rules, and then include <span class="math inline">\(T\)</span> rules, to get <span class="math inline">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span>.</p>
+<p>The start state has only one rule, for the starting rule for the grammar <span class="math inline">\(S&#39; \to \cdot \vdash S \dashv\)</span>. For the above grammar, we have <span class="math inline">\(S&#39; \to \cdot \vdash S \dashv\)</span>. We want to buil the entire DFA starting from this start state.</p>
+<p>For every state, we now create new states corresponding each symbol following the dots in the rules, with those following symbols as the transitions to those states. For example, a state <span class="math inline">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span> creates 3 states, with transitions <span class="math inline">\(E, T, id\)</span>. For example, the state <span class="math inline">\(S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id\)</span> creates the state <span class="math inline">\(E \to T \cdot\)</span> using transition <span class="math inline">\(T\)</span>. If there are no symbols following dots, then we do not create any new states. Duplicate states are combined into one state.</p>
 <p>A state where the dot is at the end of a rule is a reduce state. All other states are shift states.</p>
 <p>We repeat this for the new states, and their new states, until we no longer have new states. For the above grammar, we get the following DFA:</p>
 <pre><code>$S&#39; \to \vdash E \dashv$ &gt; $\vdash$ (1) &gt; $S&#39; \to \vdash \cdot E \dashv, E \to \cdot E + T, E \to \cdot T, T \to \cdot id$ (1)
@@ -902,9 +910,15 @@ $E \to E + \cdot T, T \to \cdot id$ &gt; $id$ &gt; $E \to T \cdot$
 <p>To <strong>shift</strong>, we read a char from the input to stack, and then follow the transition for that char if there is one, and otherwise reduce if the state is a reduce state, and give an error otherwise. A reduce state is a state that contain a single production rule, with the dot at the very right.</p>
 <p>To <strong>reduce</strong>, we pop the right-hand side off the stack, backtrack by the size of the right-hand side, then follow the transition for the left-hand side and push the left-hand side onto the stack.</p>
 <p>We also first push the DFA state we are transitioning to into the stack before transitioning, in order to be able to backtrack later. We could also use a separate stack for this, but it is more elegant to use just one in theory.</p>
-<p>We accept when <span class="math">\(S&#39;\)</span> is on the stack by the end of the DFA.</p>
-<p>Parsing <span class="math">\(\vdash id + id + id \dashv\)</span>:</p>
-<table>
+<p>We accept when <span class="math inline">\(S&#39;\)</span> is on the stack by the end of the DFA.</p>
+<p>Parsing <span class="math inline">\(\vdash id + id + id \dashv\)</span>:</p>
+<table style="width:74%;">
+<colgroup>
+<col width="38%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Stack</th>
@@ -915,108 +929,108 @@ $E \to E + \cdot T, T \to \cdot id$ &gt; $id$ &gt; $E \to T \cdot$
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><span class="math">\(1\)</span></td>
-<td align="left"><span class="math">\(\epsilon\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id + id \dashv\)</span></td>
+<td align="left"><span class="math inline">\(1\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id + id \dashv\)</span></td>
 <td align="left">Shift, go to state 2</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(1 \vdash 2\)</span></td>
-<td align="left"><span class="math">\(\vdash\)</span></td>
-<td align="left"><span class="math">\(id + id + id \dashv\)</span></td>
+<td align="left"><span class="math inline">\(1 \vdash 2\)</span></td>
+<td align="left"><span class="math inline">\(\vdash\)</span></td>
+<td align="left"><span class="math inline">\(id + id + id \dashv\)</span></td>
 <td align="left">Shift, go to state 6</td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(1 \vdash 2 id 6\)</span></td>
-<td align="left"><span class="math">\(\vdash id\)</span></td>
-<td align="left"><span class="math">\(+ id + id \dashv\)</span></td>
-<td align="left">Reduce <span class="math">\(T \to id\)</span>: pop 1 symbol and 1 state, so now in state 2, then push <span class="math">\(T\)</span> and go to state 5.</td>
+<td align="left"><span class="math inline">\(1 \vdash 2 id 6\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id\)</span></td>
+<td align="left"><span class="math inline">\(+ id + id \dashv\)</span></td>
+<td align="left">Reduce <span class="math inline">\(T \to id\)</span>: pop 1 symbol and 1 state, so now in state 2, then push <span class="math inline">\(T\)</span> and go to state 5.</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(1 \vdash 2 T 5\)</span></td>
-<td align="left"><span class="math">\(\vdash id\)</span></td>
-<td align="left"><span class="math">\(+ id + id \dashv\)</span></td>
-<td align="left">Reduce <span class="math">\(E \to T\)</span>: pop 1 symbol and 1 state, so now in state 2, then push <span class="math">\(E\)</span> and go to state 3.</td>
+<td align="left"><span class="math inline">\(1 \vdash 2 T 5\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id\)</span></td>
+<td align="left"><span class="math inline">\(+ id + id \dashv\)</span></td>
+<td align="left">Reduce <span class="math inline">\(E \to T\)</span>: pop 1 symbol and 1 state, so now in state 2, then push <span class="math inline">\(E\)</span> and go to state 3.</td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(1 \vdash 2 E 3\)</span></td>
-<td align="left"><span class="math">\(\vdash id\)</span></td>
-<td align="left"><span class="math">\(+ id + id \dashv\)</span></td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id\)</span></td>
+<td align="left"><span class="math inline">\(+ id + id \dashv\)</span></td>
 <td align="left">Shift, go to state 7</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7\)</span></td>
-<td align="left"><span class="math">\(\vdash id +\)</span></td>
-<td align="left"><span class="math">\(id + id \dashv\)</span></td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3 + 7\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id +\)</span></td>
+<td align="left"><span class="math inline">\(id + id \dashv\)</span></td>
 <td align="left">Shift, go to state 6</td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7 id 6\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id\)</span></td>
-<td align="left"><span class="math">\(+ id \dashv\)</span></td>
-<td align="left">Reduce <span class="math">\(T \to id\)</span>: pop 1 symbol and 1 state, so now in state 2, then push <span class="math">\(T\)</span> and go to state 5.</td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3 + 7 id 6\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id\)</span></td>
+<td align="left"><span class="math inline">\(+ id \dashv\)</span></td>
+<td align="left">Reduce <span class="math inline">\(T \to id\)</span>: pop 1 symbol and 1 state, so now in state 2, then push <span class="math inline">\(T\)</span> and go to state 5.</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7 T 8\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id\)</span></td>
-<td align="left"><span class="math">\(+ id \dashv\)</span></td>
-<td align="left">Reduce <span class="math">\(E \to E + T\)</span>: pop 3 symbols and 3 states, so now in state 2, then push <span class="math">\(T\)</span> and go to state 3.</td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3 + 7 T 8\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id\)</span></td>
+<td align="left"><span class="math inline">\(+ id \dashv\)</span></td>
+<td align="left">Reduce <span class="math inline">\(E \to E + T\)</span>: pop 3 symbols and 3 states, so now in state 2, then push <span class="math inline">\(T\)</span> and go to state 3.</td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(1 \vdash 2 E 3\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id\)</span></td>
-<td align="left"><span class="math">\(+ id \dashv\)</span></td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id\)</span></td>
+<td align="left"><span class="math inline">\(+ id \dashv\)</span></td>
 <td align="left">Shift, go to state 7.</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id +\)</span></td>
-<td align="left"><span class="math">\(id \dashv\)</span></td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3 + 7\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id +\)</span></td>
+<td align="left"><span class="math inline">\(id \dashv\)</span></td>
 <td align="left">Shift, go to state 6.</td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7 id 6\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id + id\)</span></td>
-<td align="left"><span class="math">\(\dashv\)</span></td>
-<td align="left">Reduce <span class="math">\(T \to id\)</span>: pop 1 symbol and 1 state, so now in state 7, then push <span class="math">\(T\)</span> and go to state 8.</td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3 + 7 id 6\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id + id\)</span></td>
+<td align="left"><span class="math inline">\(\dashv\)</span></td>
+<td align="left">Reduce <span class="math inline">\(T \to id\)</span>: pop 1 symbol and 1 state, so now in state 7, then push <span class="math inline">\(T\)</span> and go to state 8.</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(1 \vdash 2 E 3 + 7 T 8\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id + id\)</span></td>
-<td align="left"><span class="math">\(\dashv\)</span></td>
-<td align="left">Reduce <span class="math">\(E \to E + T\)</span>: pop 3 symbols and 3 states, so now in state 2, then push <span class="math">\(E\)</span> and go to state 3.</td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3 + 7 T 8\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id + id\)</span></td>
+<td align="left"><span class="math inline">\(\dashv\)</span></td>
+<td align="left">Reduce <span class="math inline">\(E \to E + T\)</span>: pop 3 symbols and 3 states, so now in state 2, then push <span class="math inline">\(E\)</span> and go to state 3.</td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(1 \vdash 2 E 3\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id + id\)</span></td>
-<td align="left"><span class="math">\(\dashv\)</span></td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id + id\)</span></td>
+<td align="left"><span class="math inline">\(\dashv\)</span></td>
 <td align="left">Shift, go to state 4.</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math">\(1 \vdash 2 E 3 \dashv 4\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id + id \dashv\)</span></td>
-<td align="left"><span class="math">\(\epsilon\)</span></td>
-<td align="left">Reduce <span class="math">\(S&#39; \to \vdash E \dashv\)</span>.</td>
+<td align="left"><span class="math inline">\(1 \vdash 2 E 3 \dashv 4\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id + id \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
+<td align="left">Reduce <span class="math inline">\(S&#39; \to \vdash E \dashv\)</span>.</td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math">\(1 S&#39;\)</span></td>
-<td align="left"><span class="math">\(\vdash id + id + id \dashv\)</span></td>
-<td align="left"><span class="math">\(\epsilon\)</span></td>
+<td align="left"><span class="math inline">\(1 S&#39;\)</span></td>
+<td align="left"><span class="math inline">\(\vdash id + id + id \dashv\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon\)</span></td>
 <td align="left">Accept.</td>
 </tr>
 </tbody>
 </table>
-<p>If a state looks like <span class="math">\(A \to \cdot x, B \to y \cdot\)</span>, we have a <strong>shift-reduce</strong> conflict and don't know whether to shift or reduce at this state.</p>
-<p>If a state looks like <span class="math">\(A \to x \cdot, B \to y \cdot\)</span>, we have a <strong>reduce-reduce</strong> conflict, and don't know which rule to reduce by.</p>
-<p>If any complete item <span class="math">\(A \to x \cdot\)</span> that isn't the only rule in the state, we will have a shift-reduce conflict or a reduce-reduce conflict. This makes the grammar not <span class="math">\(LR(0)\)</span>.</p>
-<p>If we have a right-associative grammar like <span class="math">\(S&#39; \to \vdash E \dashv, E \to T + E, E \to T, T \to id\)</span>, when we build the DFA we notice that there is a shift-reduce conflict when we try to make the state <span class="math">\(E \to T \cdot + E, E \to T \cdot\)</span>.</p>
-<p>Basically, if the next input is <span class="math">\(id \dashv\)</span> then we need to reduce, and if the input is <span class="math">\(id + \ldots\)</span> then we should not reduce. Since we can't know this, we can't parse this grammar using LR parsing.</p>
-<p>However, we can get around this by using lookahead. For each rule in the DFA <span class="math">\(A \to x \cdot\)</span>, we attach <span class="math">\(\text{Follow}(A)\)</span> - the follow set (<span class="math">\(\set{\dashv}\)</span> for <span class="math">\(A\)</span>, <span class="math">\(\set{+, \dashv}\)</span> for <span class="math">\(T\)</span>). Basically, when we are at that state, we look ahead at the next character <span class="math">\(c\)</span>, and only consider a rule in that state <span class="math">\(A\)</span> if <span class="math">\(c \in \text{Follow}(A)\)</span> - each rule can only be used if its follow set contains the next character.</p>
-<p>With lookahead, we can figure out which rule we want to use in the conflicting cases, solving the shift-reduce conflict. This is called <span class="math">\(SLR(1)\)</span> parsing - <strong>simple LR parsing with 1 character lookahead</strong>. This is pretty good, since it resolves many but not all conflicts.</p>
+<p>If a state looks like <span class="math inline">\(A \to \cdot x, B \to y \cdot\)</span>, we have a <strong>shift-reduce</strong> conflict and don't know whether to shift or reduce at this state.</p>
+<p>If a state looks like <span class="math inline">\(A \to x \cdot, B \to y \cdot\)</span>, we have a <strong>reduce-reduce</strong> conflict, and don't know which rule to reduce by.</p>
+<p>If any complete item <span class="math inline">\(A \to x \cdot\)</span> that isn't the only rule in the state, we will have a shift-reduce conflict or a reduce-reduce conflict. This makes the grammar not <span class="math inline">\(LR(0)\)</span>.</p>
+<p>If we have a right-associative grammar like <span class="math inline">\(S&#39; \to \vdash E \dashv, E \to T + E, E \to T, T \to id\)</span>, when we build the DFA we notice that there is a shift-reduce conflict when we try to make the state <span class="math inline">\(E \to T \cdot + E, E \to T \cdot\)</span>.</p>
+<p>Basically, if the next input is <span class="math inline">\(id \dashv\)</span> then we need to reduce, and if the input is <span class="math inline">\(id + \ldots\)</span> then we should not reduce. Since we can't know this, we can't parse this grammar using LR parsing.</p>
+<p>However, we can get around this by using lookahead. For each rule in the DFA <span class="math inline">\(A \to x \cdot\)</span>, we attach <span class="math inline">\(\text{Follow}(A)\)</span> - the follow set (<span class="math inline">\(\set{\dashv}\)</span> for <span class="math inline">\(A\)</span>, <span class="math inline">\(\set{+, \dashv}\)</span> for <span class="math inline">\(T\)</span>). Basically, when we are at that state, we look ahead at the next character <span class="math inline">\(c\)</span>, and only consider a rule in that state <span class="math inline">\(A\)</span> if <span class="math inline">\(c \in \text{Follow}(A)\)</span> - each rule can only be used if its follow set contains the next character.</p>
+<p>With lookahead, we can figure out which rule we want to use in the conflicting cases, solving the shift-reduce conflict. This is called <span class="math inline">\(SLR(1)\)</span> parsing - <strong>simple LR parsing with 1 character lookahead</strong>. This is pretty good, since it resolves many but not all conflicts.</p>
 <p>To build parse trees using bottom-up parsing, we just attach the old nodes as children of the new node when we are reducing, and at the end we have a tree.</p>
 <h1 id="section-16">10/3/15</h1>
-<p>We want to do full <span class="math">\(LR(1)\)</span> parsing, which is more sophisticated than <span class="math">\(SLR(1)\)</span> and parses a superset of grammars. <span class="math">\(LR(1)\)</span> is pretty powerful, but we don't use it much in practice, because it tends to produce very large parser DFAs, with a lot of states. There's also <span class="math">\(LALR(1)\)</span> parsing, which is something of a comprimise between <span class="math">\(SLR(1)\)</span> and <span class="math">\(LR(1)\)</span>, parsing more than the former but less than the latter. <span class="math">\(LALR(1)\)</span> parsing is used quite often in the real world.</p>
-<p><span class="math">\(LR(1), SLR(1), LALR(1)\)</span> are all identical parsing algorithms, with the only difference being the state machine that each one constructs. Given a state machine, the steps afterwards are identical.</p>
+<p>We want to do full <span class="math inline">\(LR(1)\)</span> parsing, which is more sophisticated than <span class="math inline">\(SLR(1)\)</span> and parses a superset of grammars. <span class="math inline">\(LR(1)\)</span> is pretty powerful, but we don't use it much in practice, because it tends to produce very large parser DFAs, with a lot of states. There's also <span class="math inline">\(LALR(1)\)</span> parsing, which is something of a comprimise between <span class="math inline">\(SLR(1)\)</span> and <span class="math inline">\(LR(1)\)</span>, parsing more than the former but less than the latter. <span class="math inline">\(LALR(1)\)</span> parsing is used quite often in the real world.</p>
+<p><span class="math inline">\(LR(1), SLR(1), LALR(1)\)</span> are all identical parsing algorithms, with the only difference being the state machine that each one constructs. Given a state machine, the steps afterwards are identical.</p>
 <p>Some properties of valid programs in languages like C cannot be enforced by CFGs. For example, type checking, scoping, and error checking like using a variable before declaring it.</p>
 <p>Therefore, languages like C are actually context-sensitive languages (a superset of the context-free languages), and can be fully represented using <strong>context-sensitive grammars</strong>. However, in practice these grammars tend to be very difficult to work with. Instead, we usually parse the syntax using a context-free grammar, and then do context-sensitive analysis (semantic analysis) as necessary in order to enforce context-sensitive invariants.</p>
 <p>The rest of the compiler is largely tree walking:</p>
@@ -1034,8 +1048,8 @@ void print(Tree &amp;t) {
 }</code></pre>
 <p>Semantic analysis needs to catch errors and figure out variable scope and type. In WLP4, the only error checking we need to do is to find type errors, and declaration errors (multiple declarations in the same scope, or using variables without declaring them first).</p>
 <p>We can detect declaration errors by doing the same thing as we did in the assembler, by <strong>constructing a symbol table</strong> (a map from variable name to its type). We will construct one for each scope, and since we don't have nested scopes, we can just have one symbol table per function.</p>
-<p>To detect duplicate variable declarations, we traverse the parse tree and, for each function, collect all declarations (<span class="math">\(\text{dcl} \to \text{TYPE} \text{ID}\)</span>) into a symbol table, with name and type information. If the name of a variable declaration was already in the symbol table for that function, then we have an error.</p>
-<p>To detect variable use without declaration, we traverse the parse tree again and, for each scope check all the used variables (<span class="math">\(\text{factor} \to \text{ID}\)</span> or <span class="math">\(\text{lvalue} \to \text{ID}\)</span>), making sure they are already in the symbol table for that function - if they are not, then we have an error. We can do this in one pass because the language requires declarations to come before types.</p>
+<p>To detect duplicate variable declarations, we traverse the parse tree and, for each function, collect all declarations (<span class="math inline">\(\text{dcl} \to \text{TYPE} \text{ID}\)</span>) into a symbol table, with name and type information. If the name of a variable declaration was already in the symbol table for that function, then we have an error.</p>
+<p>To detect variable use without declaration, we traverse the parse tree again and, for each scope check all the used variables (<span class="math inline">\(\text{factor} \to \text{ID}\)</span> or <span class="math inline">\(\text{lvalue} \to \text{ID}\)</span>), making sure they are already in the symbol table for that function - if they are not, then we have an error. We can do this in one pass because the language requires declarations to come before types.</p>
 <p>To detect duplicate function declarations, we traverse the parse tree again and, for each function, collect all the function declarations into a global symbol table by name. If the name of a function was already in the function symbol table, then we have an error.</p>
 <p>We can implement all of the above using a single <code>map&lt;string, map&lt;string, string&gt; &gt;</code> as a symbol table, where the <code>string</code> values are the function name, variable name, and variable type, respectively. This maps function names to symbol tables for that function, each one mapping variable names to their types. It is also possible to do all of the above operations in a single tree traversal.</p>
 <p>However, we also need to check type errors, and so need to keep track of the type signature of procedures, to ensure we are passing the right types and number of parameters to each function. We will simply traverse the tree, keeping track of function signatures as a list of parameter types (we don't need to store the return type since it's always <code>int</code> in WLP4). Then, we traverse again, and for every function call we verify that its arguments are correct.</p>
@@ -1043,17 +1057,17 @@ void print(Tree &amp;t) {
 <h1 id="section-17">12/3/15</h1>
 <p>Types are how we assign interpretations to the values at some memory address. A good type system will prevent us from reinterpreting the memory values as -something else, like using a string as an int. For example, <code>int *a; a = 7;</code> should be made invalid.</p>
 <p>To check types, we determine the type for every expression, and ensure that the operators and functions are applied to arguments of the correct type - including variable initialization. We can determine the type of expressions recursively using the type rules for the language, where the variable's type is stored in the symbol table, and expressions are constructed from operators, variables, and literals. We give an error whenever there is no applicable type rule or a mismatched type.</p>
-<p>Type rules are simply formal deductions, using the Fitch bar notation. For example, the type rule for variables <span class="math">\(\frac{\tup{\text{ID.name}, \tau} \in \text{declarations}}{\text{ID}: \tau}\)</span> means that if the name of an ID and a type is in the declarations, then that ID is of that type.</p>
+<p>Type rules are simply formal deductions, using the Fitch bar notation. For example, the type rule for variables <span class="math inline">\(\frac{\tup{\text{ID.name}, \tau} \in \text{declarations}}{\text{ID}: \tau}\)</span> means that if the name of an ID and a type is in the declarations, then that ID is of that type.</p>
 <pre><code>def type_of(tree):
     for c in tree.children:
         compute `type_of(c)`
     use `tree.rule` to decide which type rules are relevant
     # the above type rule example could be written as: `if tree.rule == &quot;ID name&quot;: return symbol.lookup(name)`
     combine the types of children using a type rule to get the type of `tree`, or error if not possible</code></pre>
-<p>For WLP4, we might also have rules like <span class="math">\(\frac{}{\text{NUM}: \text{int}}\)</span>, <span class="math">\(\frac{}{\text{NULL}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr}: \tau}{(Expr): \tau}\)</span>, <span class="math">\(\frac{\text{Expr}: \text{int}}{\text{&amp;Expr}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr}: \text{int*}}{\text{*Expr}: \text{int}}\)</span>, <span class="math">\(\frac{\text{Expr}: \text{int}}{\text{new int[Expr]}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 * Expr2}: \text{int}}\)</span>.</p>
-<p>Note that the <code>+</code> operator is operloaded: we can add two integers, or an integer pointer and an integer: <span class="math">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 + Expr2}: \text{int}}\)</span>, <span class="math">\(\frac{\text{Expr1}: \text{int*}, \text{Expr2}: \text{int}}{\text{Expr1 + Expr2}: \text{int*}}\)</span>, <span class="math">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 * Expr2}: \text{int*}}\)</span>. Similarly, we can subtract two integers, an integer pointer and an integer (which is an integer pointer), or two integer pointers (which is the number of integer slots between them as an integer).</p>
-<p>For if statements and while loops we would need a Boolean-like type, although the grammar ensures already that the conditions are comparison expressions, so if the operands of the comparison operator are well-typed, then so is the if statement or while loop. These statements do not have a type, but still need to be considered in type checking. <strong>Well-typed</strong> means that an expression has a type: <span class="math">\(\frac{E: \tau}{E \text{ is well-typed}}\)</span>. For example, <span class="math">\(\frac{\text{Expr}: \text{int*}}{\text{delete []Expr} \text{ is well-typed}}\)</span> and <span class="math">\(\frac{\text{Expr1}: \tau, \text{Expr2}: \tau}{\text{Expr1 == Expr2} \text{ is well-typed}}\)</span>.</p>
-<p>Also, for statements we have <span class="math">\(\frac{\text{Statement1} \text{is well-typed}, \text{Statement2} \text{ is well-typed}}{\text{Statement1; Statement2} \text{ is well-typed}}\)</span>, <span class="math">\(\frac{\text{ID} \in \text{Expr}: \tau}{\tau \text{ ID = Expr} \text{ is well-typed}}\)</span>. A function is well-typed if its declarations and statements are well-typed and its return value is an integer. A function call is of type integer as long as all its parameters have a type, and match the signature of the function: <span class="math">\(\frac{E_1: \tau_1, \ldots, E_n: \tau_n, \tup{f, \tup{T_1, \ldots, T_n} \in \text{declarations}}}{f(E_1, \ldots, E_n): \text{int}}\)</span>.</p>
+<p>For WLP4, we might also have rules like <span class="math inline">\(\frac{}{\text{NUM}: \text{int}}\)</span>, <span class="math inline">\(\frac{}{\text{NULL}: \text{int*}}\)</span>, <span class="math inline">\(\frac{\text{Expr}: \tau}{(Expr): \tau}\)</span>, <span class="math inline">\(\frac{\text{Expr}: \text{int}}{\text{&amp;Expr}: \text{int*}}\)</span>, <span class="math inline">\(\frac{\text{Expr}: \text{int*}}{\text{*Expr}: \text{int}}\)</span>, <span class="math inline">\(\frac{\text{Expr}: \text{int}}{\text{new int[Expr]}: \text{int*}}\)</span>, <span class="math inline">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 * Expr2}: \text{int}}\)</span>.</p>
+<p>Note that the <code>+</code> operator is operloaded: we can add two integers, or an integer pointer and an integer: <span class="math inline">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 + Expr2}: \text{int}}\)</span>, <span class="math inline">\(\frac{\text{Expr1}: \text{int*}, \text{Expr2}: \text{int}}{\text{Expr1 + Expr2}: \text{int*}}\)</span>, <span class="math inline">\(\frac{\text{Expr1}: \text{int}, \text{Expr2}: \text{int}}{\text{Expr1 * Expr2}: \text{int*}}\)</span>. Similarly, we can subtract two integers, an integer pointer and an integer (which is an integer pointer), or two integer pointers (which is the number of integer slots between them as an integer).</p>
+<p>For if statements and while loops we would need a Boolean-like type, although the grammar ensures already that the conditions are comparison expressions, so if the operands of the comparison operator are well-typed, then so is the if statement or while loop. These statements do not have a type, but still need to be considered in type checking. <strong>Well-typed</strong> means that an expression has a type: <span class="math inline">\(\frac{E: \tau}{E \text{ is well-typed}}\)</span>. For example, <span class="math inline">\(\frac{\text{Expr}: \text{int*}}{\text{delete []Expr} \text{ is well-typed}}\)</span> and <span class="math inline">\(\frac{\text{Expr1}: \tau, \text{Expr2}: \tau}{\text{Expr1 == Expr2} \text{ is well-typed}}\)</span>.</p>
+<p>Also, for statements we have <span class="math inline">\(\frac{\text{Statement1} \text{is well-typed}, \text{Statement2} \text{ is well-typed}}{\text{Statement1; Statement2} \text{ is well-typed}}\)</span>, <span class="math inline">\(\frac{\text{ID} \in \text{Expr}: \tau}{\tau \text{ ID = Expr} \text{ is well-typed}}\)</span>. A function is well-typed if its declarations and statements are well-typed and its return value is an integer. A function call is of type integer as long as all its parameters have a type, and match the signature of the function: <span class="math inline">\(\frac{E_1: \tau_1, \ldots, E_n: \tau_n, \tup{f, \tup{T_1, \ldots, T_n} \in \text{declarations}}}{f(E_1, \ldots, E_n): \text{int}}\)</span>.</p>
 <h1 id="section-18">17/3/15</h1>
 <p>So far we've done lexical analyis on code to get tokens, parsing on tokens to get a parse tree, and semantic analysis to get another parse tree and symbol table. The only remaining step is to generate the assembly code from the parse tree and symbol table.</p>
 <h2 id="code-generation">Code Generation</h2>
@@ -1290,13 +1304,13 @@ jr $31</code></pre>
 <p>The <strong>scope</strong> of a variable is the part of the program in which the variable's name is visible. In WLP4, the scope of a variable is the procedure it is defined in - the scope is static and can be determined at compile time.</p>
 <p>The <strong>extent</strong> of a variable is the part of the program's execution in which the variable's value is live - when it can still be accessed. This depends on the data itself - for stack-allocated data, the extent ends at the end of the scope, but for heap-allocated data, the extent goes on until there are no references to it anymore.</p>
 <h1 id="section-23">2/4/15</h1>
-<p>The new and delete operators can be implemented in many different ways. A good implementation can actually be <span class="math">\(O(1)\)</span>.</p>
+<p>The new and delete operators can be implemented in many different ways. A good implementation can actually be <span class="math inline">\(O(1)\)</span>.</p>
 <p>One way to implement these is with <strong>free lists</strong>. In this scheme, we maintain linked lists of blocks (a pointer and a block length, which together represent a block of memory) into the heap of free memory. Initially, the free list has one entry, the entire available heap.</p>
-<p>We can implement this linked list on the heap itself. A block at address <span class="math">\(a\)</span> is a word <span class="math">\(w\)</span> (the length), followed by <span class="math">\(w\)</span> bytes (the data). The first block would always be at some fixed location, so we can always access it. When a block is not allocated, the first word of the data can be used to store a pointer to the next block in the free list.</p>
+<p>We can implement this linked list on the heap itself. A block at address <span class="math inline">\(a\)</span> is a word <span class="math inline">\(w\)</span> (the length), followed by <span class="math inline">\(w\)</span> bytes (the data). The first block would always be at some fixed location, so we can always access it. When a block is not allocated, the first word of the data can be used to store a pointer to the next block in the free list.</p>
 <p>When we allocate memory, we actually want to allocate 4 more in order to make a block. We then walk through the free list and find the first block that will fit the required size, chop off the desired size from the block, and return a pointer to one word after the new block starts - the data itself.</p>
 <p>When we deallocate memory, we are given a pointer that we know is 4 bytes after the start of the block. We then add this block to the free list to mark that memory as available for allocation. When we are inserting the block into the free list, we also need to make sure to store the next pointer in the block data, which we can use since the memory is already considered unused at this point.</p>
 <p>Basically, each block is a node in our linked list, and the next pointer is stored in the first 4 bytes of the data. When we allocate memory from a block, we no longer need the next pointer, and can use that data freely.</p>
-<p>We notice that both operations will insert elements into the list, so the free list length will grow without bound. Therefore, we need to <strong>occasionally clean up the list by merging adjacent blocks in memory</strong>. An efficient algorithm for this is beyond the scope of the course, but the naive solution is <span class="math">\(O(n^2)\)</span> - comparing every pair of blocks to check if they are adjacent.</p>
+<p>We notice that both operations will insert elements into the list, so the free list length will grow without bound. Therefore, we need to <strong>occasionally clean up the list by merging adjacent blocks in memory</strong>. An efficient algorithm for this is beyond the scope of the course, but the naive solution is <span class="math inline">\(O(n^2)\)</span> - comparing every pair of blocks to check if they are adjacent.</p>
 <p>This type of allocator suffers from <strong>fragmentation</strong> issues if we allocate and deallocate a lot - we might end up leaving small blocks of free memory in between our allocated blocks, and if we try to allocate something large afterwards, we might not have a big enough block, even though there is enough free space in the heap for it between all the free blocks.</p>
 <p>We can mitigate this by always choosing the smallest suitable block during allocation (it helps if we keep the blocks sorted by size in this case), which will still fragment it, but the fragments are smaller. This is called the <strong>best fit algorithm</strong>. Simply inserting into the beginning is known as the <strong>first-fit algorithm</strong>. Although the best-fit algorithm results in better memory layout than first-fit, it takes longer since we have to perform sorted insertion each time.</p>
 <p>The garbage collector is a component of the language that cleans up our memory for us once in a while, to avoid having to clean it up ourselves. When memory is no longer accessible, the runtime environment will reclaim it for us. The idea behind garbage collection is to give the impression that the machine has an infinite heap.</p>
