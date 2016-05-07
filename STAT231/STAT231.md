@@ -57,7 +57,7 @@ Common numerical summaries we care about are:
 * The volatility, or **dispersion**:
     * The **range of a dataset** is two numbers - the minimum value of the dataset, and the maximum value. This can also be thought of as the zeroth and fourth quartile values.
     * The **interquartile range** (IQR) is the range of the middle 50% of the dataset - the first quartile value and third quartile value.
-    * The **sample variance** is defined as $s^2 = \frac{1}{n - 1} \sum_{i = 0}^n \right(y_i - \overline y\right)^2$. Note that the variance is $s^2$, not $s$. Also, the variance of a dataset $x = \set{x_1, \ldots, x_n}$
+    * The **sample variance** is defined as $s^2 = \frac{1}{n - 1} \sum_{i = 0}^n \left(y_i - \overline y\right)^2$. Note that the variance is $s^2$, not $s$. Also, the variance of a dataset $x = \set{x_1, \ldots, x_n}$
         * This is almost, but not quite, the average of the squared deviation from the mean.
         * Basically, this measures how much the data is spread out from the mean.
         * There's a good reason to divide by $n - 1$ rather than $n$, but we'll cover that later on.

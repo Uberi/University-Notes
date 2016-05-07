@@ -84,6 +84,28 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
 <p>To applications, the OS provides an execution environment, with interfaces to various resources, like networking, storage, and graphics (most of the code in a modern operating system lives in the various drivers). The OS is also responsible for isolating different applications from each other, making sure they don't step on each other's toes. This is the <strong>application view</strong> of operating systems.</p>
 <p>The OS is responsible for keeping all of the hardware in line, making sure that these resources get allocated among the programs in a fair way. This is the <strong>system view</strong> of operating systems.</p>
 <p>The OS is also a concurrent, real-time program (at least, most modern OSs). It needs to be able to support multiple things going on at once, but also satisfy timing constraints, such as feeding audio data to the sound card to output uninterrupted sound. This is the <strong>implementation view</strong> of the operating system.</p>
+<h1 id="section-1">6/5/16</h1>
+<p>The OS <strong>kernel</strong> is the part of the OS that responds to system calls, interrupts, and exceptions. The rest of the operating system includes all of the utilities, shells, and programming libraries.</p>
+<p>Applications run on top of the OS, which in turn runs on top of the hardware. Applications interact with the OS kernel via system calls, and the OS interacts with the hardware through commands, data, and interrupts. The user space is all of the parts above the kernel, and is isolated by the kernel from the actual resources - in the user space, you cannot interact directly with resources, only through the OS system calls. Note that system calls are very different from procedure calls.</p>
+<p>Some examples of abstractions include:</p>
+<ul>
+<li>Files/filesystems abstract secondary storage.</li>
+<li>Address spaces abstract primary memory.</li>
+<li>Processes/threads abstract CPU and other executor resources.</li>
+<li>Sockets/pipes abstract network and other messaging channels.</li>
+</ul>
+<p>In the 1940's, computers didn't use OSs - programmers would work directly on the hardware. By the 1950's, these huge, time-shared computers started getting monitoring and scheduling software, and critically, shared libraries and software - this was called batch processing. UNIX followed naturally from these shared libraries and utilities, first written in assembly, then C. Since UNIX was very accessible, and the source code was often available, improvements came rapidly and soon became dominant in the computing industry..</p>
+<p>Five things make it possible for OSs to robustly manage software and hardware:</p>
+<ul>
+<li>Timers - to prevent infinite loops in applications from hanging the netire computer, we can give each application a certain number of time slices at a time, where control is returned to the OS once applications run out of time. This ensures that other software also gets a chance to run, and also that we can kill any runawway software.</li>
+<li>Interrupts: to allow devices to notify the computer of events, like for keyboard input or timer triggers, we can use special CPU inputs that can immediately modify the control flow.</li>
+<li>Memory protection - to stop one program from being able to modify others, we can use virtual mmeory and memory protection, to ensure that each application can work as if it has the entire address space to itself.</li>
+<li>Kernel/user separation - to prevent bugs in user programs from messing up the entire system, there are special, privileged instructions that can only be accessed in kernel mode. In user mode applications, it is not possible to directly access resources, like secondary storage or networks. This ensures that the OS can enforce access restrictions.</li>
+<li>Device independence - things like I/O buffering and asynchronous I/O mean that programs don't block on slow resource operations.</li>
+</ul>
+<h2 id="concurrency">Concurrency</h2>
+<p><strong>Concurrency</strong> is the ability for multiple jobs to be running at the same time. Generally, this happens through multitasking (quickly switching between different jobs on a single processor) and multiprocessing (running different jobs on different processors). Jobs are simply threads from any process - theydon't all have to be from the same program.</p>
+<p><strong>Processes</strong> represent full, independent programs. <strong>Threads</strong> represent different parts of the same program. The difference is that threads within a process share memmory, while processes do not - threads have access to each other's global data and code.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

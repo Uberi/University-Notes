@@ -158,6 +158,16 @@ Website: https://www.student.cs.uwaterloo.ca/~cs349/s16/about.html</code></pre>
         testWindow.<span class="fu">setVisible</span>(<span class="kw">true</span>);
     }
 }</code></pre></div>
+<h1 id="section-2">6/5/16</h1>
+<p>Review of DVCSs, plus a beginner's Git primer. Java review. Jeff confirms that the FOSS OpenJDK is okay for this course, contrary to what was stated on Piazza. The recommended system for building Java files is to just use Make.</p>
+<p>Some highlights:</p>
+<ul>
+<li>uWaterloo Gitlab instance is preferred, but you can technically also use, say, a GitHbu private repo. Assignments are still submitted via uWaterloo GitLab, however.</li>
+<li>Java passes the address of objects by value, which behaves a lot like pass by reference - we don't have to worry about pointer semantics.</li>
+<li>The Hotspot VM is one of the most advanced virtual machines available today, with many state of the art JIT and GC technologies. Java was one of the first mainstream languages to have a GC by default.</li>
+<li>Watch for scope - parameters of a method shadow instance variables, which shadow class variables. Access a shadowed instance variable with <code>this.VARIABLE</code>, and access a shadowed clsas variable with <code>CLASS_NAME.this.VARIABLE</code>.</li>
+<li>Java only has single inheritance, by design - interfaces should be used instead (interfaces don't have implementations, so we can avoid the diamond problem that we'd get with multiple inheritance). All classes implicitly inherit from <code>java.lang.Object</code>.</li>
+</ul>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
