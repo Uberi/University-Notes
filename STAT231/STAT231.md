@@ -35,7 +35,8 @@ A **transformation** is a function over a variable. A **linear transformation** 
 
 A **coding** is a transformation that converts categorical data to numerical data. For example, colors can be assigned numbers, like 0 for red, 1 for orange, and so on.
 
-### Summaries
+Summaries
+---------
 
 We often want to extract important information about a data set to find its properties. When we do so, we extract **data summaries**. We can do this **numerically** (like finding the mean, stddev, median, etc.) or **graphically** (like making a scatter plot). Numerical summaries tell us about certain fundamental properties of data sets, while graphical summaries tell us the shape of the data.
 
@@ -62,13 +63,13 @@ Common numerical summaries we care about are:
         * Basically, this measures how much the data is spread out from the mean.
         * There's a good reason to divide by $n - 1$ rather than $n$, but we'll cover that later on.
         * Under an affine transformation $y_i = ax_i + b$, $s_y^2 = a^2 s_x^2$ - the squared factor applies to the variance, but not the variance.
-        * Another useful formula for the sample variance is $s^2 = \frac 1 {n - 1} \sum y_i^2 - n(\overline y)^2$
+        * Another useful formula for the sample variance is $s^2 = \frac 1 {n - 1} \left(\sum y_i^2 - n(\overline y)^2\right)$.
     * The **standard deviation** is the positive square root of the sample variance, denoted $s$.
-        * Why do we square the deviations rather than just adding them up like $\sum_{i = 0}^n (y_i - \overline y)$? The negative deviations and positive deviations would cancel each other out; squaring the values ensures that the standard deviation accumulates to a non-negative value.
+        * Why do we square the deviations rather than just adding them up like $\sum_{i = 0}^n (y_i - \overline y)$? The negative deviations and positive deviations would cancel each other out; squaring the values ensures that the standard deviation accumulates to a non-negative value. This also ensures that variance is always symmetric - points above and below the mean both contribute the same amount to the variance.
         * Why do we square the deviations rather than adding their absolute values like $\sum_{i = 0}^n \abs{y_i - \overline y}$? While the absolute value function would still represent variance (the given formula is called the **mean absolute deviation**), it's harder to work with since it's not differentiable. Also, the squared deviation is affected by outliers quadratically while the absolute deviation is only affected linearly, so taking its square root later would give unintuitive results.
         * Under an affine transformation $y_i = ax_i + b$, $s_y = a s_x$ - the factor applies to the standard deviation, but not the intercept (this trivially follows from the formula for the sample variance).
-    * The **mean absolute deviation** is defined as $$
-* How fat the tails are, or **kurtosis** (this can also be viewed at the frequency of extreme obserations).
+    * The **mean absolute deviation** is defined as $\frac{1}{n - 1} \sum_{i = 0}^n \abs{y_i - \overline y}$. This is what we get if we use the absolute value function rather than squaring in the formula for variance. It's relatively rarely used.
+* How fat the tails are, or **kurtosis** - the frequency of extreme obserations.
 * How symmetric the data is about some point or axis, or **symmetry**.
 
 Suppose we have $100 in a bank account, with 4% interest the first year, 8% the second, and 12% the third. What is the average interest rate?
@@ -88,6 +89,10 @@ A car drives from A to B at 40 km/h, and immediately drives back at 60 km/h. Wha
 
 # 4/5/16
 
+When we talk about distributions, we oftne picture them as bumps or hills - a high area in the middle, and low areas on the sides. In this picture, the **tails** of a distribution are the low areas on the sides. The concept of tails doesn't really generalize that well, so we'll avoid it for actual formal explanations.
+
+### Centrality
+
 To find a percentile $\beta$, we sort the observations from low to high, and then take the value at the 1-indexed position $\beta(n + 1)$ (or the sample mean of the two values closest to the 1-indexed position $\beta(n + 1)$).
 
 The average/central tendency isn't always the only thing we care about. Suppose you flip a coin $n$ times before a heads appears. If you are paid $2^n$ dollars for doing so, at what price would you pay to play this game?
@@ -101,9 +106,9 @@ Suppose we have a dataset $x = \set{x_1, \ldots, x_n}$. Suppose we know one obse
 > Let $y = \set{y_1, \ldots, y_{n - 1}}$ be the dataset with the unreliable observation removed.  
 > Clearly, $\sum y_i = \sum x_i - k$, since we removed only that one element, and since $\sum x_i = n \overline x$, $\sum y_i = \sum x_i - k$.  
 > So the sample mean is $\overline y = \frac{\sum x_i - k}{n - 1}$.  
-> To find the variance, we can use the alternate form of the variance formula, so $s_y^2 = \frac 1 {(n - 1) - 1} \sum y_i^2 - (n - 1)(\overline y)^2$.  
-> Clearly, $\sum y_i^2 = \sum x_i^2 - k^2$ and we already know $\overline y$ from the step above.  
-> So $s_y^2 = \frac{1}{n - 2} \left(\sum x_i^2 - k^2\right) - \frac{\left(\sum x_i - k\right)^2}{n - 1}$.  
+> To find the variance, we can use the alternate form of the variance formula, so $s_y^2 = \frac 1 {(n - 1) - 1} \left(\sum y_i^2 - (n - 1)(\overline y)^2\right)$.  
+> Since $\sum y_i = \sum x_i - k$, $\sum y_i^2 = \sum x_i^2 - k^2$.  
+> Since we already know $\overline y$, $s_y^2 = \frac{1}{n - 2} \left(\sum x_i^2 - k^2\right) - \frac{\left(\sum x_i - k\right)^2}{n - 1}$.  
 > This same technique can be used to calculate the mean and variance of a dataset after adding or removing any number of items to it, without looking at the existing elements of the dataset.  
 
 When you have a dataset with sample mean $\overline x$ and remove an item with value $\overline x$, the mean stays the same, while the variance increases or stays the same.
@@ -113,3 +118,52 @@ The batting champion of a baseball season is the player with the highest batting
 In every sport, players have gotten better, absolutely speaking, over time - it doesn't seem like batters are actually getting worse. However, better pitchers, fielders, and managers can make a batter's job a lot harder.
 
 We can actually test this by looking at the batting average for individual average batters over their careers. As it turns out, the average batter's batting average stays about the same over their career. However, the variance in the average player's ball hitting rate shrinks over their careers. Since the average is lower than 400, the shrinking variances mean that the tails in the batting average distribution shrink as well (causing fewer 400+ batting averages). When we become more consistent at hitting the ball at the average rate, that means there are fewer low-performers, but also fewer high-performers.
+
+# 9/5/16
+
+### Symmetry
+
+We also often care about **skewness** - how non-symmetric the data is. This measures how different the dataset looks when comparing the side of the mean, mirrored over to the right side. Left-skewing/negative-skewing datasets have distributions that seem to "lean to the right" (they have a long left tail), while right-skewing/positive-skewing distributions seem to "lean to the left" (they have a long right tail).
+
+One way to estimate skewness is to compare the mean and median, measuring $\text{mean} - \text{median}$. If the mean is less than the median, then we'd say the dataset might be left skewed (more of the weight is on the left), if they were equal, we say the dataset is probably symmetric (weight is about the same above and below the mean), and if the mean was greater than the median, then we say the dataset might be right-skewed (more of the weight is on the right side).
+
+The real measure of skewness is $\frac{\frac 1 n \sum \left(y_i - \overline y\right)^3}{\left(\frac 1 n \sum \left(y_i - \overline y\right)\right)^{\frac 3 2}}$. We won't be expected to memorize this for the course.
+
+For example, if a person is diagnosed with a disease that has a mean time of death about 8 months after diagnoses, and survives for several months after diagnosis, then they should hope that the distribution of deaths is more right-skewed, so that most of the probability of death is already behind them.
+
+### Spikiness
+
+**Kurtosis** is the measure of how frequent extreme observations are with respect to the normal distribution. Basically, it checks if the tails of the dataset's distribution are fatter (more extreme observations) or thinner (less extreme observations) than a normal distribution. It can also be said to measure how peaky/pointy the distribution's curve is at the top.
+
+Kurtosis is defined as $K = \frac{\frac 1 n \sum \left(y_i - \overline y\right)^4}{\left(\frac 1 n \sum \left(y_i - \overline y\right)\right)^2}$. A normal distribution has $K = 3$. If $K > 3$, then the tails of the dataset's distribution are fatter than a normal distribution (there are more extreme observations), and if $K < 3$, then the tails of the dataset's distribution are thinner than a normal distribution (there are fewer extreme observations).
+
+Kurtosis is especially useful in finance, where accurate assessment of risks and expected returns are important. It basically tells us how normal-like our data is - if the kurtosis is very close to 3, we can often assume that the dataset is normally distributed, which is extremely useful for doing statistics with.
+
+### Association
+
+Suppose we have a dataset $D = \set{\tup{x_1, y_1}, \ldots, \tup{x_n, y_n}}$ with two variables. How do we measure how much these two variables are associated (how is one variable affected by the other)?
+
+For example, suppose we have categorical variables, $x = \set{\text{smoker}, \text{non-smoker}}$ and $y = \set{\text{lung cancer}, \text{no lung cancer}}$. How do we determine the relationship between these variables, given a dataset of samples?
+
+**Relative risk** is a measure of association between two categorical variables. Basically, relative risk is $\frac{P(A \mid B)}{P(A \mid \neg B)}$ - the probability of $A$ occurring given that $B$ occurrs over the probability of $A$ occurring given that $B$ does not occur. For independent variables, relative risk is 1. The farther the relative risk is from 1, the more strongly it implies that the variables are associated.
+
+For two categorical Boolean variables, relative risk is $\frac{\frac{\abs{x \wedge y}}{\abs{x}}}{\frac{\abs{\neg x \wedge y}}{\abs{\neg x}}}$. Expanded into a more useful form, it becomes $\frac{\frac{\abs{x \wedge y}}{\abs{x \wedge y} + \abs{x \wedge \neg y}}}{\frac{\abs{\neg x \wedge y}}{\abs{\neg x \wedge y} + \abs{\neg x \wedge \neg y}}}$.
+
+The **sample correlation coefficient** is a measure of association between two numerical variables, like relative risk is for two categorical variables. It's defined as $r_{xy} = \frac{\sum \left(x_i - \overline x\right)\left(y_i - \overline y\right)}{\sqrt{\sum \left(x_i - \overline x\right)^2} \sqrt{\sum \left(y_i - \overline y\right)^2}}$. Specifically, it measures **linear association**.
+
+The sign of $r_{xy}$ (specifically, the sign of the numerator) tells us the direction of the association (positive means variables tend to increase each other, while negative means one tends to increase when the other decreases, and vice versa), and the magnitude of $r$ tells us the strength of the association (0 meaning no association). The denominator ensures that $-1 \le r_{x, y} \le 1$ for any dataset.
+
+For non-linear relationships, the sample correlation coefficient doesn't work so well. For example, for two variables $x, y$ associated by $y = x^2$, the sample correlation coefficient is 0, even though we defined them to be associated by a particular function. A general measure of association for any function (not just linear ones) wouldn't really be meaningful since it's always possible to construct a function to fit a finite dataset. Therefore, all measures of association must be against a particularly chosen class of functions.
+
+For a perfect linear relationship between variables $x, y$, like $y = ax + b$, $r_{xy} = 1$ if $b > 0$, and $r_{xy} = -1$ if $b < 0$. If $b = 0$, then $r_{xy} = 0$.
+
+Since we're assuming our dataset is a sample of the population rather than the population itself, we can only find evidence of associations rather than actual associations themselves. Even if the evidence is very strong, it doesn't say for sure that the association is there. Basically, correlation doesn't imply causation.
+
+### Graphical measures
+
+There are also graphical ways to summarize datasets. Some of the common ones are:
+
+* Density histogram - bar plot of observations or ranges of observations on the X axis, and density of those observations on the Y axis.
+    * The density histogram draws the bars such that the area of each bar is the relative frequency of observations in that bar's range.
+    * The relative frequency is the frequency divided by the total number of observations.
+    * The ranges don't have to be the same size - a plot can have 10-20 as a range right beside 20-40. Also, the X axis ticks don't need to be equally spaced either.
