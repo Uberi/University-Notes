@@ -114,7 +114,7 @@ Office Hours: Fridays 9am-11am, M3 2017, phone extension 39120</code></pre>
 <li>The <strong>median</strong> is the middle-most observation, or the sample mean of the middlemost observations if there are multiple. Essentially, we arrange the dataset in ascending order, and then pick the middle one.
 <ul>
 <li>The advantage of medians is that they are less sensitive to outliers than summaries like the sample mean.</li>
-<li>The concept of the median can be extended to <strong>quartiles</strong> and <strong>percentiles</strong>. While the median is the value such that 50% of the dataset is below and 50% is above it, the quartiles and percentiles are a different fraction.</li>
+<li>The concept of the median can be extended to <strong>quartiles</strong> and <strong>percentiles</strong>, and generalized into <strong>quartiles</strong>. While the median is the value such that 50% of the dataset is below and 50% is above it, the quartiles and percentiles are a different fraction.</li>
 <li>The first quartile is a value for which 25% of the data is below that value, while the second quartile is 50%, the third 75%, and the fourth 100%.</li>
 <li>The first percentile is a value for which 1% of the data is below that value, while the second percentile is 2%, the third 3%, and so on.</li>
 </ul></li>
@@ -201,16 +201,37 @@ This same technique can be used to calculate the mean and variance of a dataset 
 <p>For non-linear relationships, the sample correlation coefficient doesn't work so well. For example, for two variables <span class="math inline">\(x, y\)</span> associated by <span class="math inline">\(y = x^2\)</span>, the sample correlation coefficient is 0, even though we defined them to be associated by a particular function. A general measure of association for any function (not just linear ones) wouldn't really be meaningful since it's always possible to construct a function to fit a finite dataset. Therefore, all measures of association must be against a particularly chosen class of functions.</p>
 <p>For a perfect linear relationship between variables <span class="math inline">\(x, y\)</span>, like <span class="math inline">\(y = ax + b\)</span>, <span class="math inline">\(r_{xy} = 1\)</span> if <span class="math inline">\(b &gt; 0\)</span>, and <span class="math inline">\(r_{xy} = -1\)</span> if <span class="math inline">\(b &lt; 0\)</span>. If <span class="math inline">\(b = 0\)</span>, then <span class="math inline">\(r_{xy} = 0\)</span>.</p>
 <p>Since we're assuming our dataset is a sample of the population rather than the population itself, we can only find evidence of associations rather than actual associations themselves. Even if the evidence is very strong, it doesn't say for sure that the association is there. Basically, correlation doesn't imply causation.</p>
-<h3 id="graphical-measures">Graphical measures</h3>
-<p>There are also graphical ways to summarize datasets. Some of the common ones are:</p>
-<ul>
-<li>Density histogram - bar plot of observations or ranges of observations on the X axis, and density of those observations on the Y axis.
-<ul>
-<li>The density histogram draws the bars such that the area of each bar is the relative frequency of observations in that bar's range.</li>
-<li>The relative frequency is the frequency divided by the total number of observations.</li>
-<li>The ranges don't have to be the same size - a plot can have 10-20 as a range right beside 20-40. Also, the X axis ticks don't need to be equally spaced either.</li>
-</ul></li>
-</ul>
+<h1 id="section-3">11/5/16</h1>
+<p>The reason we have supparies is to figure out the shape of a dataset, and see if we can identify it as following a certain distribution. obtaining the distribution allows us to make predictions about future observations and other useful statistical things.</p>
+<p>The <strong>five number summary</strong> of a dataset is a common set of summaries: minimum, first quartile, median, third quartile, and, maximum. Basically, it gives 5 equally spaced points on the histogram.</p>
+<p>Since <span class="math inline">\(\sum (x_i - \overline x)(y_i - \overline y) = \sum x_i y_i - n \overline x \overline y\)</span> and <span class="math inline">\(\sum (x_i - \overline x)\)</span>, we can write the formula for the correlation coefficient more simply as <span class="math inline">\(\frac{\sum x_i y_i - n \overline x \overline y}{s_x s_y}\)</span>.</p>
+<h3 id="graphical-summaries">Graphical Summaries</h3>
+<p>One of the most commonly used graphical summaries is the histogram. This is generally used when we have data that can be grouped/binned (organized into disjoint, ordered sets). By &quot;histogram&quot;, most people actually mean a <strong>frequency histogram</strong> - a bar plot where the X axis is the bins, and the Y axis is the frequency of observations in each bin.</p>
+<p>In contrast, statisticians usually mean <strong>density histograms</strong> when talking about histograms. This is the same thing, except the Y axis is the density of the bin.</p>
+<p>The bins in a density histogram don't all have to all have the same range - one can encompass 30 elements, while another might encompass 10. On the plot, the bars don't all have to have the same width. The height of each bar is chosen such that the area of the bar (width of the bin times the height) is equal to the relative frequency of observations that fall into its corresponding bin. The relative frequency is simply <span class="math inline">\(\frac{\text{number of observations in the bin}}{\text{total number of observations}}\)</span>.</p>
+<p>Note that the total area underneath the density histogram is always 1. Since the total area under a probability density function is also 1, the density histogram is very useful for comparing data with known probability density functions, which we do very often when trying to figure out if a dataset follows a certain distribution. We can't use the usual frequency histogram for this because the total area of the bars doesn't add up to 1.</p>
+<p>A <strong>box-and-whiskers plot</strong> is a useful way to show the five number summary that also highlights outliers. It's a 1D plot that looks something like this:</p>
+<pre><code>  o   &lt;- each outlier is plotted as a point, while non-outliers are only summarized by the box and whiskers
+
+----- &lt;- top whisker represents maximum value that isn&#39;t an outlier
+  |
+----- &lt;- top of box represents third quartile
+|   |
+|---| &lt;- line in the box represents median
+|   |
+----- &lt;- bottom of box represents first quartile
+  |
+----- &lt;- bottom whisker represents minimum value that isn&#39;t an outlier
+
+      &lt;- there might not be any outliers in the dataset</code></pre>
+<p>An <strong>outlier</strong> is an observation <span class="math inline">\(x_i\)</span> such that <span class="math inline">\(x_i &gt; Q_3 + 1.5 IQR\)</span> or <span class="math inline">\(x_i &lt; Q_1 - 1.5 IQR\)</span>, where <span class="math inline">\(Q_1, Q_3\)</span> are the first and third quartiles, and <span class="math inline">\(IQR\)</span> is the interquartile range <span class="math inline">\(Q_3 - Q_1\)</span>. The reason we use 1.5 is because it is convention, and fits the normal distribution relatively well. In other words, an outlier is any point that doesn't fall into the range <span class="math inline">\([2.5Q_1 - 1.5Q_3, 2.5Q_3 - 1.5Q_1)]\)</span>. When we're drawing a box plot, we figure out the quartiles, figure out the ranges in which observations are outliers, and then find the max/min observations that aren't outliers.</p>
+<p>Box plots visually show the shape of the data. A box with whiskers that are different lengths is skewed to one side, while the height of the box shows the dispersion.</p>
+<p>The <strong>empirical cumulative distribution function</strong> (empirical CDF) for discrete numerical data is a plot where the X axis is the range of possible observation values, and the Y axis is the number of observations that are less than or equal to that value. So for a dataset <span class="math inline">\(x = \set{x_1, \ldots, x_n}\)</span>, and <span class="math inline">\(F(x_i) = \abs{\set{v \in x \middle| v \le x_i}}\)</span>, the empirical CDF is a plot of <span class="math inline">\((x_i, F(x_i))\)</span>.</p>
+<p>The advantage of the empirical CDF is that the percentile values are directly shown on the plot - to find the <span class="math inline">\(n\)</span>th percentile, we find the X axis value such that the Y axis is <span class="math inline">\(n\)</span> percent of the maximum Y axis value. For example, to find the median, we would find the Y axis . Also, the mode is the bar that has the largest increase in height compared to the bar on its left.</p>
+<p>The Q-Q plot is used for checking if a dataset resembles a normal distribution. This is a plot of the <span class="math inline">\(\alpha\)</span>th quantile of the dataset and the <span class="math inline">\(\alpha\)</span>th quantile of the Z distribution <span class="math inline">\(N(0, 1)\)</span> (normal distribution with mean 0 and variance 0), for all <span class="math inline">\(\alpha\)</span>.</p>
+<p>So the median of the dataset is plotted at the X axis value that is the median of the Z distribution, the 95th percentile of the dataset is plotted at the X axis value that is the 95th percentile of the Z distribution, and so on. Basically, this is a plot of <span class="math inline">\((p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})\)</span> for all <span class="math inline">\(0 \le p \le 100\)</span>. The X axis goes on infinitely in both directions.</p>
+<p>If the Q-Q plot resembles a straight line, the dataset resembles a normal distribution. For example, for a normally distributed dataset, it would always be the case that the <span class="math inline">\(p\)</span>th percentile of the dataset be a linear function of the <span class="math inline">\(p\)</span>th percentile of the Z distribution, so all <span class="math inline">\((p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})\)</span> would lie along the same line.</p>
+<p>A <strong>scatter plot</strong> plots two variables against each other, where the X axis is one variable and the Y axis is the other, and points are plotted for each observation. The scatter plot is great for finding patterns in the data, like correlations, grouping, and so on.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

@@ -106,7 +106,40 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
 </ul>
 <h2 id="concurrency">Concurrency</h2>
 <p><strong>Concurrency</strong> is the ability for multiple jobs to be running at the same time. Generally, this happens through multitasking (quickly switching between different jobs on a single processor) and multiprocessing (running different jobs on different processors). Jobs are simply threads from any process - theydon't all have to be from the same program.</p>
-<p><strong>Processes</strong> represent full, independent programs. <strong>Threads</strong> represent different parts of the same program. The difference is that threads within a process share memmory, while processes do not - threads have access to each other's global data and code.</p>
+<p><strong>Processes</strong> represent full, independent programs. <strong>Threads</strong> represent different parts of the same program. The difference is that threads within a process share memmory, while processes do not - all threads within a process see the same global data and code. Each process has its very own address space - they can pretend they have all of the computer's memory to themselves.</p>
+<h1 id="tutorial">10/5/16 - Tutorial</h1>
+<p>In this course, we have apps running on top of OS/161 (our kernel), running in SYS/161 (the MIPS virtual machine for our kernel), on top of the host (our own machine). We will only really be working on the apps and OS/161. Specifically, we work mostly in the <code>os161-1.99/kern</code> folder.</p>
+<p>Overview of Git. Overview of version control in general. GDB overview. Overview of the folder heirarchy in the OS/161 codebase.</p>
+<h1 id="section-2">11/5/16</h1>
+<p>Multi-threaded have multiple advantages over single-threaded ones:</p>
+<ul>
+<li>Efficiency - one thread can block on IO while another one can continue to do computation.</li>
+<li>Multiprocessing - more processors can be used at a time.</li>
+<li>Responsiveness - one thread can be used to keep the use interface responsive while heavy computation is going on.</li>
+<li>Modularity - threads are good way to separate converns.</li>
+<li>Priority scheduling - thread scheduling can be controlled in a very fine-grained way.</li>
+</ul>
+<p>The most important operation in threading is the thread switch - running one thread for, say, 20ms, then switching to another thread so it can run for another 20ms. When we switch threads, we need to keep track of and set the correct values of the program counter, registers, the stack pointer, the frame pointer, and so on. Each thread needs its own stack.</p>
+<p>When a thread switch occurs, we need to back up the registers and other thread data on the thread's stack, and then load in the other thread's data from that thread's stack.</p>
+<p>In OS/161, we have a particular register allocation when we're making function calls. This is actually a very common calling convention in MIPS, and a lot of OSs follow something that is compatible with it:</p>
+<ul>
+<li>R0 (zero) - is always 0</li>
+<li>R1 (AT) - assembly temporary variable, reserved for use by the assembler</li>
+<li>R2 (V0) - return value or system call number</li>
+<li>R3 (V1) - return value of function call (functions can return up to two 32-bit values)</li>
+<li>R4-R7 (A0-A3) - functiona call arguments 1 to 4, respectively (the rest of the arguments, if any, go on the stack)</li>
+<li>R8-R15 (T0-T7) - temporary variables (might be clobbered by subroutines, but not by thread switches)</li>
+<li>R24-R25 (T8-T9) - more temporary variables (might be clobbered by subroutines, but not by thread switches)</li>
+<li>R16-R23 (S0-S7) - variables (preserved by thread switches and subroutines - they'll save them before changing their value, and restore them when returning if necessary)</li>
+<li>R26-R27 (K0-K1) - reserved by interrupt handlers</li>
+<li>R28 (GP) - global pointer, useful for accessing certain variables</li>
+<li>R29 (SP) - stack pointer, pointer to the top of the stack</li>
+<li>R30 (FP) - frame pointer, pointer to the beginning of the topmost frame (changes every function call or return)</li>
+<li>R31 (RA) - return address, used by the JAL instruction</li>
+</ul>
+<p>Threads are associated with the control state of a running program, known as the thread <strong>context/state</strong>. This contains the CPU state (program counter, stack pointer, registers, and whether it's user mode or kernel mode), and the stack state (the stack lives in the address space of the process). Basically, all the information we need to pause the running program and restart it from where it left off later.</p>
+<p>Note that each processor on the computer can run one thread at a time. With true concurrency, we lose program determinism - the same program run twice with the same inputs may not behave the same way each time. The hard part of concurrency is ensuring both program safety (correctness) and liveness (efficiency).</p>
+<p>In OS/161, we have a built in threading library in <code>kern/include/thread.h</code>. This exposes a simple way to create a new thread given a function (through forking), kill the current thread, and yield the current thread to the next one to be run. There are a couple of usage examples in the slides.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

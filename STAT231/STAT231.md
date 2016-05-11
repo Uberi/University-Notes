@@ -51,7 +51,7 @@ Common numerical summaries we care about are:
     * The average is usually the one value that, if applied in the problem's situation, is equivalent to applying all the original values.
     * The **median** is the middle-most observation, or the sample mean of the middlemost observations if there are multiple. Essentially, we arrange the dataset in ascending order, and then pick the middle one.
         * The advantage of medians is that they are less sensitive to outliers than summaries like the sample mean.
-        * The concept of the median can be extended to **quartiles** and **percentiles**. While the median is the value such that 50% of the dataset is below and 50% is above it, the quartiles and percentiles are a different fraction.
+        * The concept of the median can be extended to **quartiles** and **percentiles**, and generalized into **quartiles**. While the median is the value such that 50% of the dataset is below and 50% is above it, the quartiles and percentiles are a different fraction.
         * The first quartile is a value for which 25% of the data is below that value, while the second quartile is 50%, the third 75%, and the fourth 100%.
         * The first percentile is a value for which 1% of the data is below that value, while the second percentile is 2%, the third 3%, and so on.
     * The **mode** is the observation or observations that occur most often (a dataset can have more than 1 mode). This is often more useful for categorical data, or discrete numerical data with only a few possibilities.
@@ -159,11 +159,52 @@ For a perfect linear relationship between variables $x, y$, like $y = ax + b$, $
 
 Since we're assuming our dataset is a sample of the population rather than the population itself, we can only find evidence of associations rather than actual associations themselves. Even if the evidence is very strong, it doesn't say for sure that the association is there. Basically, correlation doesn't imply causation.
 
-### Graphical measures
+# 11/5/16
 
-There are also graphical ways to summarize datasets. Some of the common ones are:
+The reason we have supparies is to figure out the shape of a dataset, and see if we can identify it as following a certain distribution. obtaining the distribution allows us to make predictions about future observations and other useful statistical things.
 
-* Density histogram - bar plot of observations or ranges of observations on the X axis, and density of those observations on the Y axis.
-    * The density histogram draws the bars such that the area of each bar is the relative frequency of observations in that bar's range.
-    * The relative frequency is the frequency divided by the total number of observations.
-    * The ranges don't have to be the same size - a plot can have 10-20 as a range right beside 20-40. Also, the X axis ticks don't need to be equally spaced either.
+The **five number summary** of a dataset is a common set of summaries: minimum, first quartile, median, third quartile, and, maximum. Basically, it gives 5 equally spaced points on the histogram.
+
+Since $\sum (x_i - \overline x)(y_i - \overline y) = \sum x_i y_i - n \overline x \overline y$ and $\sum (x_i - \overline x)$, we can write the formula for the correlation coefficient more simply as $\frac{\sum x_i y_i - n \overline x \overline y}{s_x s_y}$.
+
+### Graphical Summaries
+
+One of the most commonly used graphical summaries is the histogram. This is generally used when we have data that can be grouped/binned (organized into disjoint, ordered sets). By "histogram", most people actually mean a **frequency histogram** - a bar plot where the X axis is the bins, and the Y axis is the frequency of observations in each bin.
+
+In contrast, statisticians usually mean **density histograms** when talking about histograms. This is the same thing, except the Y axis is the density of the bin.
+
+The bins in a density histogram don't all have to all have the same range - one can encompass 30 elements, while another might encompass 10. On the plot, the bars don't all have to have the same width. The height of each bar is chosen such that the area of the bar (width of the bin times the height) is equal to the relative frequency of observations that fall into its corresponding bin. The relative frequency is simply $\frac{\text{number of observations in the bin}}{\text{total number of observations}}$.
+
+Note that the total area underneath the density histogram is always 1. Since the total area under a probability density function is also 1, the density histogram is very useful for comparing data with known probability density functions, which we do very often when trying to figure out if a dataset follows a certain distribution. We can't use the usual frequency histogram for this because the total area of the bars doesn't add up to 1.
+
+A **box-and-whiskers plot** is a useful way to show the five number summary that also highlights outliers. It's a 1D plot that looks something like this:
+
+      o   <- each outlier is plotted as a point, while non-outliers are only summarized by the box and whiskers
+    
+    ----- <- top whisker represents maximum value that isn't an outlier
+      |
+    ----- <- top of box represents third quartile
+    |   |
+    |---| <- line in the box represents median
+    |   |
+    ----- <- bottom of box represents first quartile
+      |
+    ----- <- bottom whisker represents minimum value that isn't an outlier
+    
+          <- there might not be any outliers in the dataset
+
+An **outlier** is an observation $x_i$ such that $x_i > Q_3 + 1.5 IQR$ or $x_i < Q_1 - 1.5 IQR$, where $Q_1, Q_3$ are the first and third quartiles, and $IQR$ is the interquartile range $Q_3 - Q_1$. The reason we use 1.5 is because it is convention, and fits the normal distribution relatively well. In other words, an outlier is any point that doesn't fall into the range $[2.5Q_1 - 1.5Q_3, 2.5Q_3 - 1.5Q_1)]$. When we're drawing a box plot, we figure out the quartiles, figure out the ranges in which observations are outliers, and then find the max/min observations that aren't outliers.
+
+Box plots visually show the shape of the data. A box with whiskers that are different lengths is skewed to one side, while the height of the box shows the dispersion.
+
+The **empirical cumulative distribution function** (empirical CDF) for discrete numerical data is a plot where the X axis is the range of possible observation values, and the Y axis is the number of observations that are less than or equal to that value. So for a dataset $x = \set{x_1, \ldots, x_n}$, and $F(x_i) = \abs{\set{v \in x \middle| v \le x_i}}$, the empirical CDF is a plot of $(x_i, F(x_i))$.
+
+The advantage of the empirical CDF is that the percentile values are directly shown on the plot - to find the $n$th percentile, we find the X axis value such that the Y axis is $n$ percent of the maximum Y axis value. For example, to find the median, we would find the Y axis . Also, the mode is the bar that has the largest increase in height compared to the bar on its left.
+
+The Q-Q plot is used for checking if a dataset resembles a normal distribution. This is a plot of the $\alpha$th quantile of the dataset and the $\alpha$th quantile of the Z distribution $N(0, 1)$ (normal distribution with mean 0 and variance 0), for all $\alpha$.
+
+So the median of the dataset is plotted at the X axis value that is the median of the Z distribution, the 95th percentile of the dataset is plotted at the X axis value that is the 95th percentile of the Z distribution, and so on. Basically, this is a plot of $(p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})$ for all $0 \le p \le 100$. The X axis goes on infinitely in both directions.
+
+If the Q-Q plot resembles a straight line, the dataset resembles a normal distribution. For example, for a normally distributed dataset, it would always be the case that the $p$th percentile of the dataset be a linear function of the $p$th percentile of the Z distribution, so all $(p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})$ would lie along the same line.
+
+A **scatter plot** plots two variables against each other, where the X axis is one variable and the Y axis is the other, and points are plotted for each observation. The scatter plot is great for finding patterns in the data, like correlations, grouping, and so on.
