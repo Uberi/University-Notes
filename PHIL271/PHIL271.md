@@ -96,3 +96,52 @@ Plebani substitutes some nouns and gets the following absurd argument:
 Ernest talks about this divide between realists and anti-realists in more detail, clarifying that anti-realism is not the idea that anything goes in mathematics, but that there are factors outside of purely what exists in the world - mathematics is not purely discovery. To support this, he brings up the effects of Godel's incompleteness theorem in the mathematics community, social influences on mathematics, and exampled of how mathematics has been flawed in the past.
 
 One of the criticisms he addresses is "how can mathematics be invented if it works so perfectly to describe reality?". To respond, Ernest states that because of social incentives to make it work flawlessly, it would be expected that it would work as well as it did.
+
+# 16/5/16
+
+There's a holiday next monday (Victoria day). In class test on May 30th at 6:30 PM, I'm writing it in RCH 308. The rest of the class starts at 7:45PM in RCH305. There's a choice of questions about many of the key concepts, and several of them need to be answered.
+
+Assignment 1 is due on June 6. It contains many of the parts of building a good philosophy paper in isolation.
+
+Truth in Mathematics
+--------------------
+
+What makes something real? Do they need to be made out of particles? Extend into spacetime? Clearly, there seem to be something additional and something missing from this definition. For example, we say beliefs and desires exist, because they're useful for describing human behaviour. Why are people anti-realists about unicorns, but realists about things like humour?
+
+**Realism about something** is the idea that that thing is independent of us (objective vs. subjective), human beings. Additionally, basic claims about the thing are also literally true. In contrast to literally true, a **vacuously true** claim is one that is only technically true ("unicorns eat grass" is vacuously true because unicorns don't exist, but it's not literally true). Realists believe that the thing is **real**, while anti-realists believe that the thing may or may not be real.
+
+As a result, you can be an anti-realist in two ways - by rejecting the idea that the thing is not independent (**semantic anti-realism**), or by rejecting the idea that there are literally true claims about that thing (**error theory**).
+
+J.L. Mackie wrote a book called "Ethics", which argues for ethical anti-realism by rejecting the existance of ethical basic claims - an ethical error theory. His argument is simple: objective values, if they existed, would be different from anything else in the universe, because they would be intrinsically motivating (if we discovered it, we would have enough reasons to follow it). Basically, Mackie says that no ethical claim can be literally, objectively true, and therefore ethics isn't necessarily real. Some types of ethical anti-realists are emotivists (ethics is making emotional claims rather than objective ones, so they're not literally true), contractivists (ethics is making social contracts rather than objective claims, so they're not literally true).
+
+Mackie is not saying that ethics don't matter - even if it's something we just invented it, we invented it for a reason. Error theorists tend to spend a lot of time justifying why things are important regardless of whether they're true or false.
+
+Hartry Fields, author of Science Without Numbers, is the most influential source of modern fictionalism about math. The main question in this is, "if we accept fictionalism, and all mathematical claims can't be literally true, why do we still consider math important?". When we say "17 is prime", why is it still meaningful if all mathematical claims are false?
+
+According to Fields, math is just a conservative extension of science without numbers. A conservative extension of a theory in a language is a set of new words and rules that doesn't let us prove anything new that we couldn't already prove without the addition. The things we can prove from the theory are the theory's consequences. In other words, a conservative extension of a theory is a set of additions to its language that don't change its consequences.
+
+Basically, everything we do with math can also, in principle, be proved using the language of science with numbers - math is a set of shortcuts over science without numbers, but it's not required. Accordind to Fields, mathematics makes things easier, but we don't need to believe it in order to find it useful.
+
+This is in response to Quine, who says we shold believe math is real because it's necessary for science. Fields says that math is actually not indispensible, because we could theoretically do science without any math.
+
+One of the big objections to this view are that the "science without numbers" that Fields presented is not really without numbers - some of the concepts seemed quite mathematical and abstract.
+
+At this point we have our reading, Mary Leng's defence of fictionalism from John Burgess.
+
+**Hermeneutic fictionalism** is the view that mathematicians intend their assertions "fictionally" - "17 is prime" is a fictional assertion just as "Sherlock Holmes is a detective" is, because neither 17 nor 
+
+**Revollutionary fictionalism** is the view that mathematicians intend their assertions to be literally true, but they're wrong to do so and need to change (calling for a revolution).
+
+One objection to revolutionary fictionalism, presented by David Lewis, is that mathematics has been working very well and providing a lot of useful results, while philosophy asking mathematics to change the nature of their assertions wouldn't make math more useful in any way. He basically says that if revolutionary fictionalism is correct, math would need to be rejected, while in reality, it really doesn't need to be rejexted.
+
+Aside: why does philosophy often result in outlandish claims and unusual results? Wittgenstein viewed philosophy as a therapeutic activity - language tempts people to think themselves into dead ends, and looking at the language itself can help us avoid this.
+
+Carnap proposed the concept of internal and external questions. Internal questions take place within a certain language framework/practice, and are answered with empirical evidence or using the rules of the framework. In contrast, external questions are questions about which language frameworks/practices we should be using, and are answered pragmatically. 
+
+According to Carnap, the outlandish claims are the result of confusion as to whether the philisophical questions are internal questions or external questions. For example, "Are there numbers?" as an internal question is obviously yes, because we use numbers all the time. on the other hand, as an external question "Are there numbers?" isn't a meaningful statement, because it's not talking about which framework to use. This confusion, Carnap says, is why philosophy results in outlandish claims.
+
+Burgess' objection is basically that revolutionary fictionalism is wrong, because mathematicians answer the internal question with yes, but revolutionary fictionalists say that the answer to the external question is no, even though external questions don't have a yes/no answer.
+
+Mary Leng objects by quoting Quine: that there's no difference between practical external questions and internal questions. So what we should believe to exist is what our best scientific theories tells us exists. However, Leng rejects Quine's indispensiblility argument, because the conclusion that we should believe math exists isn't supported by the premise that it's necessary.
+
+Instead, she proposes an alternative argument for fictionalism: whether objects really exist don't make any difference to whether our empirical theories are successful in making predictions, as opposed to things like electrons, which, if they didn't exist, would be very obvious in our world. So if numbers stopped existing tomorrow, there wouldn't really be a difference, which is evidence that truth isn't required in mathematical claims.

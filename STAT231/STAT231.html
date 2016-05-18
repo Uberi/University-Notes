@@ -95,7 +95,7 @@ Office Hours: Fridays 9am-11am, M3 2017, phone extension 39120</code></pre>
 <li><strong>Ordinal</strong> - there are categories, but there is an underlying order to the data. For example, colors are categorical data, but they have an underlying order on the EM spectrum.</li>
 </ul></li>
 </ul>
-<p>A <strong>transformation</strong> is a function over a variable. A <strong>linear transformation</strong> is one of the form <span class="math inline">\(y = mx = b\)</span>. A linear transformation is also known as an <strong>affine transformation</strong>.</p>
+<p>A <strong>transformation</strong> is a function over a variable. A <strong>linear transformation</strong> is one of the form <span class="math inline">\(y = mx + b\)</span>. A linear transformation is also known as an <strong>affine transformation</strong>.</p>
 <p>A <strong>coding</strong> is a transformation that converts categorical data to numerical data. For example, colors can be assigned numbers, like 0 for red, 1 for orange, and so on.</p>
 <h2 id="summaries">Summaries</h2>
 <p>We often want to extract important information about a data set to find its properties. When we do so, we extract <strong>data summaries</strong>. We can do this <strong>numerically</strong> (like finding the mean, stddev, median, etc.) or <strong>graphically</strong> (like making a scatter plot). Numerical summaries tell us about certain fundamental properties of data sets, while graphical summaries tell us the shape of the data.</p>
@@ -114,9 +114,9 @@ Office Hours: Fridays 9am-11am, M3 2017, phone extension 39120</code></pre>
 <li>The <strong>median</strong> is the middle-most observation, or the sample mean of the middlemost observations if there are multiple. Essentially, we arrange the dataset in ascending order, and then pick the middle one.
 <ul>
 <li>The advantage of medians is that they are less sensitive to outliers than summaries like the sample mean.</li>
-<li>The concept of the median can be extended to <strong>quartiles</strong> and <strong>percentiles</strong>, and generalized into <strong>quartiles</strong>. While the median is the value such that 50% of the dataset is below and 50% is above it, the quartiles and percentiles are a different fraction.</li>
-<li>The first quartile is a value for which 25% of the data is below that value, while the second quartile is 50%, the third 75%, and the fourth 100%.</li>
-<li>The first percentile is a value for which 1% of the data is below that value, while the second percentile is 2%, the third 3%, and so on.</li>
+<li>The concept of the median can be extended to <strong>quartiles</strong> and <strong>percentiles</strong>, and generalized into <strong>quartiles</strong>. While the median is the value such that 50% of the dataset is at or below it, the quartiles and percentiles are a different fraction.</li>
+<li>The first quartile is a value for which 25% of the data is equal or below that value, while the second quartile is 50%, the third 75%, and the fourth 100%.</li>
+<li>The first percentile is a value for which 1% of the data is equal or below that value, while the second percentile is 2%, the third 3%, and so on.</li>
 </ul></li>
 <li>The <strong>mode</strong> is the observation or observations that occur most often (a dataset can have more than 1 mode). This is often more useful for categorical data, or discrete numerical data with only a few possibilities.</li>
 </ul></li>
@@ -232,6 +232,51 @@ This same technique can be used to calculate the mean and variance of a dataset 
 <p>So the median of the dataset is plotted at the X axis value that is the median of the Z distribution, the 95th percentile of the dataset is plotted at the X axis value that is the 95th percentile of the Z distribution, and so on. Basically, this is a plot of <span class="math inline">\((p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})\)</span> for all <span class="math inline">\(0 \le p \le 100\)</span>. The X axis goes on infinitely in both directions.</p>
 <p>If the Q-Q plot resembles a straight line, the dataset resembles a normal distribution. For example, for a normally distributed dataset, it would always be the case that the <span class="math inline">\(p\)</span>th percentile of the dataset be a linear function of the <span class="math inline">\(p\)</span>th percentile of the Z distribution, so all <span class="math inline">\((p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})\)</span> would lie along the same line.</p>
 <p>A <strong>scatter plot</strong> plots two variables against each other, where the X axis is one variable and the Y axis is the other, and points are plotted for each observation. The scatter plot is great for finding patterns in the data, like correlations, grouping, and so on.</p>
+<h1 id="section-4">16/5/16</h1>
+<p>Quiz about numerical and graphical summaries, I'm writing in DC1351 on Thursday at 3:30PM, for just under 1 hour.</p>
+<h2 id="statistical-analysis">Statistical Analysis</h2>
+<p>A common statistical problem is &quot;Given a population of observations, some of the characteristics of which are unknown, and a sample taken from that population, what can we say about the population by looking just at the sample?&quot;.</p>
+<p>The PPDAC approach is a sort of template for solving this type of problem: problem, plan, daa, analysis, and conclusion. It's specific to statistics at Waterloo.</p>
+<ul>
+<li>The <strong>problem</strong> can be descriptive (what properties of the population are we interested in?), causative (does X cause Y? how are they related?), and predictive (what will be the result of doing X?).
+<ul>
+<li>We should also identify and explicitly state the population of interest. A <strong>unit</strong> is a member of the target population, and a <strong>variate</strong> is a characteristic of a unit. An <strong>attribute</strong> is a function over the variates of a collection of units.</li>
+<li>For example, for finding the presidential approval rating, the target population is the voting population, a unit is any particular voter, a variate is whether they approve of the president, and the proportion of approvals is the attribute.</li>
+</ul></li>
+<li>The <strong>plan</strong> can be experimental (variables are chosen and controlled when making observations) or observational (variables can't be controlled when making observations).
+<ul>
+<li>We first choose a study population from which we draw the sample.</li>
+<li>For the presidental approval rating example, we might choose the subset of voters that have a phone (so we can call them to ask whether they approve).</li>
+<li>For a new drug being tested, the study population might be a collection of mice, while the target population is all humans - the study population doesn't have to be a subset of the target population.</li>
+</ul></li>
+<li>The <strong>analysis</strong> involves setting up a statistical model.
+<ul>
+<li>That means we assume (after obtaining sufficient evidence to back it up) that the data follows some known distribution, possibly with unknown parameters.</li>
+<li>For the presidental approval rating example, since we can probably assume that the voters are independently making decisions, and that approval is a binary result, we can probably use a binomial distribution.</li>
+<li>A <strong>bias</strong> is a systematic error in the data. Bias is often caused by measurement error, or selection bias (for example, people only ask for exam remarks if they got less than they feel they deserved, so marking errors might be systematically higher than the true value).</li>
+<li>When distribution parameters are unknown, we often use Greek letters like <span class="math inline">\(\mu, \sigma, \pi\)</span>. When we have sample parameters, which we do know, we often use English letters like <span class="math inline">\(\overline y, s^2, p\)</span>, or Greek letters with hats, like <span class="math inline">\(\hat \mu, \hat \sigma, \hat pi\)</span>.</li>
+<li>The <strong>study error</strong> is the difference between the target population mean and the study population mean for the attribute under study: <span class="math inline">\(\mu_1 - \mu_2\)</span>.</li>
+<li>The <strong>sampling error</strong> is the difference between the sample mean and the study population mean for the attribute under study: <span class="math inline">\(\overline y - \mu_2\)</span>.</li>
+<li>When we're picking a sample, we really want it to represent the population - the properties of the population should be likely to be similar to the properties of the population, to reduce the sampling error as much as possible. We do this by doing <strong>random sampling</strong>. Correctly doing random sampling is critical in avoiding biases, but often depends on characteristics of the problem.</li>
+</ul></li>
+<li>The <strong>conclusion</strong> is a statement that should be understandable by non-experts.</li>
+</ul>
+<h3 id="estimation">Estimation</h3>
+<p>The <strong>method of maximum likelihood</strong> is finding th most likely value of an unknown parameter of a statistical model, based on a sample. For example:</p>
+<blockquote>
+<p>We have a coin that either has a 25% chance of getting heads, or a 75% chance of getting heads.<br />
+Suppose that we flipped the coin 100 times and got 30 heads. Obviously, we would say that it's most likely that the coin has a 25% chance of getting heads.<br />
+Mentally, it seemed like we asked &quot;what is the probability of 30 heads occuring, if it were the case that the coin had a 25% chance of getting heads?&quot; and &quot;what would that probability be if it were the case that the coin had a 75% chance of getting heads instead?&quot;, and then chose the option that maximizes the probability of the event occuring.</p>
+</blockquote>
+<p>Essentially, the method of maximum likelihood is picking the parameter that makes our observed sample properties most likely.</p>
+<p>Formally, given a discrete distribution <span class="math inline">\(Y\)</span> with probability function <span class="math inline">\(f\)</span> and unknown parameter <span class="math inline">\(\theta\)</span>, then the <strong>likelihood function</strong> is defined as <span class="math inline">\(L(\theta; y_1, \ldots, y_n) = P(Y_1 = y_1, \ldots, Y_n = y_n) \text{ for the given value of } \theta\)</span>.</p>
+<p>Suppose we have a variable <span class="math inline">\(X \tilde \mathrm{Poisson}(\mu)\)</span>. What is the maximum likelihood estimate (MLE) of <span class="math inline">\(\mu\)</span>?</p>
+<blockquote>
+<p>Clearly, the probability of each sample observation is <span class="math inline">\(\frac{e^{-\mu} \mu^r}{r!}\)</span> where <span class="math inline">\(r\)</span> is the value of the observation, by the definition of the Poisson distribution.<br />
+Therefore, <span class="math inline">\(P(Y_1 = y_1, \ldots, Y_n = y_n) = \frac{e^{-\mu} \mu^{x_1}}{x_1!} \cdots \frac{e^{-\mu} \mu^{x_n}}{x_n!}\)</span> (we can just multiply the probabilities together because all of the observations are independent, which we know is the case since we're using the Poisson distribution).<br />
+We can find the value of <span class="math inline">\(\mu\)</span> that maximizes the likelihood function by taking the logarithm of the whole thing, then finding where the derivative of that is 0. This is a pretty common way to find the max.<br />
+This value of <span class="math inline">\(\mu\)</span> is the maximum likelihood estimate.</p>
+</blockquote>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.

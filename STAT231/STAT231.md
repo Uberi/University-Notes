@@ -31,7 +31,7 @@ There are two main types of data:
     * **Binary** - falling into two categories.
     * **Ordinal** - there are categories, but there is an underlying order to the data. For example, colors are categorical data, but they have an underlying order on the EM spectrum.
 
-A **transformation** is a function over a variable. A **linear transformation** is one of the form $y = mx = b$. A linear transformation is also known as an **affine transformation**.
+A **transformation** is a function over a variable. A **linear transformation** is one of the form $y = mx + b$. A linear transformation is also known as an **affine transformation**.
 
 A **coding** is a transformation that converts categorical data to numerical data. For example, colors can be assigned numbers, like 0 for red, 1 for orange, and so on.
 
@@ -51,9 +51,9 @@ Common numerical summaries we care about are:
     * The average is usually the one value that, if applied in the problem's situation, is equivalent to applying all the original values.
     * The **median** is the middle-most observation, or the sample mean of the middlemost observations if there are multiple. Essentially, we arrange the dataset in ascending order, and then pick the middle one.
         * The advantage of medians is that they are less sensitive to outliers than summaries like the sample mean.
-        * The concept of the median can be extended to **quartiles** and **percentiles**, and generalized into **quartiles**. While the median is the value such that 50% of the dataset is below and 50% is above it, the quartiles and percentiles are a different fraction.
-        * The first quartile is a value for which 25% of the data is below that value, while the second quartile is 50%, the third 75%, and the fourth 100%.
-        * The first percentile is a value for which 1% of the data is below that value, while the second percentile is 2%, the third 3%, and so on.
+        * The concept of the median can be extended to **quartiles** and **percentiles**, and generalized into **quartiles**. While the median is the value such that 50% of the dataset is at or below it, the quartiles and percentiles are a different fraction.
+        * The first quartile is a value for which 25% of the data is equal or below that value, while the second quartile is 50%, the third 75%, and the fourth 100%.
+        * The first percentile is a value for which 1% of the data is equal or below that value, while the second percentile is 2%, the third 3%, and so on.
     * The **mode** is the observation or observations that occur most often (a dataset can have more than 1 mode). This is often more useful for categorical data, or discrete numerical data with only a few possibilities.
 * The volatility, or **dispersion**:
     * The **range of a dataset** is two numbers - the minimum value of the dataset, and the maximum value. This can also be thought of as the zeroth and fourth quartile values.
@@ -208,3 +208,51 @@ So the median of the dataset is plotted at the X axis value that is the median o
 If the Q-Q plot resembles a straight line, the dataset resembles a normal distribution. For example, for a normally distributed dataset, it would always be the case that the $p$th percentile of the dataset be a linear function of the $p$th percentile of the Z distribution, so all $(p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})$ would lie along the same line.
 
 A **scatter plot** plots two variables against each other, where the X axis is one variable and the Y axis is the other, and points are plotted for each observation. The scatter plot is great for finding patterns in the data, like correlations, grouping, and so on.
+
+# 16/5/16
+
+Quiz about numerical and graphical summaries, I'm writing in DC1351 on Thursday at 3:30PM, for just under 1 hour.
+
+Statistical Analysis
+--------------------
+
+A common statistical problem is "Given a population of observations, some of the characteristics of which are unknown, and a sample taken from that population, what can we say about the population by looking just at the sample?".
+
+The PPDAC approach is a sort of template for solving this type of problem: problem, plan, daa, analysis, and conclusion. It's specific to statistics at Waterloo.
+
+* The **problem** can be descriptive (what properties of the population are we interested in?), causative (does X cause Y? how are they related?), and predictive (what will be the result of doing X?).
+    * We should also identify and explicitly state the population of interest. A **unit** is a member of the target population, and a **variate** is a characteristic of a unit. An **attribute** is a function over the variates of a collection of units.
+    * For example, for finding the presidential approval rating, the target population is the voting population, a unit is any particular voter, a variate is whether they approve of the president, and the proportion of approvals is the attribute.
+* The **plan** can be experimental (variables are chosen and controlled when making observations) or observational (variables can't be controlled when making observations).
+    * We first choose a study population from which we draw the sample.
+    * For the presidental approval rating example, we might choose the subset of voters that have a phone (so we can call them to ask whether they approve).
+    * For a new drug being tested, the study population might be a collection of mice, while the target population is all humans - the study population doesn't have to be a subset of the target population.
+* The **analysis** involves setting up a statistical model.
+    * That means we assume (after obtaining sufficient evidence to back it up) that the data follows some known distribution, possibly with unknown parameters.
+    * For the presidental approval rating example, since we can probably assume that the voters are independently making decisions, and that approval is a binary result, we can probably use a binomial distribution.
+    * A **bias** is a systematic error in the data. Bias is often caused by measurement error, or selection bias (for example, people only ask for exam remarks if they got less than they feel they deserved, so marking errors might be systematically higher than the true value).
+    * When distribution parameters are unknown, we often use Greek letters like $\mu, \sigma, \pi$. When we have sample parameters, which we do know, we often use English letters like $\overline y, s^2, p$, or Greek letters with hats, like $\hat \mu, \hat \sigma, \hat pi$.
+    * The **study error** is the difference between the target population mean and the study population mean for the attribute under study: $\mu_1 - \mu_2$.
+    * The **sampling error** is the difference between the sample mean and the study population mean for the attribute under study: $\overline y - \mu_2$.
+    * When we're picking a sample, we really want it to represent the population - the properties of the population should be likely to be similar to the properties of the population, to reduce the sampling error as much as possible. We do this by doing **random sampling**. Correctly doing random sampling is critical in avoiding biases, but often depends on characteristics of the problem.
+* The **conclusion** is a statement that should be understandable by non-experts.
+
+### Estimation
+
+The **method of maximum likelihood** is finding th most likely value of an unknown parameter of a statistical model, based on a sample. For example:
+
+> We have a coin that either has a 25% chance of getting heads, or a 75% chance of getting heads.  
+> Suppose that we flipped the coin 100 times and got 30 heads. Obviously, we would say that it's most likely that the coin has a 25% chance of getting heads.  
+> Mentally, it seemed like we asked "what is the probability of 30 heads occuring, if it were the case that the coin had a 25% chance of getting heads?" and "what would that probability be if it were the case that the coin had a 75% chance of getting heads instead?", and then chose the option that maximizes the probability of the event occuring.  
+
+Essentially, the method of maximum likelihood is picking the parameter that makes our observed sample properties most likely.
+
+Formally, given a discrete distribution $Y$ with probability function $f$ and unknown parameter $\theta$, then the **likelihood function** is defined as $L(\theta; y_1, \ldots, y_n) = P(Y_1 = y_1, \ldots, Y_n = y_n) \text{ for the given value of } \theta$.
+
+Suppose we have a variable $X \tilde \mathrm{Poisson}(\mu)$. What is the maximum likelihood estimate (MLE) of $\mu$?
+
+> Clearly, the probability of each sample observation is $\frac{e^{-\mu} \mu^r}{r!}$ where $r$ is the value of the observation, by the definition of the Poisson distribution.  
+> Therefore, $P(Y_1 = y_1, \ldots, Y_n = y_n) = \frac{e^{-\mu} \mu^{x_1}}{x_1!} \cdots \frac{e^{-\mu} \mu^{x_n}}{x_n!}$ (we can just multiply the probabilities together because all of the observations are independent, which we know is the case since we're using the Poisson distribution).  
+> We can find the value of $\mu$ that maximizes the likelihood function by taking the logarithm of the whole thing, then finding where the derivative of that is 0. This is a pretty common way to find the max.  
+> This value of $\mu$ is the maximum likelihood estimate.  
+
