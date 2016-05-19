@@ -231,7 +231,7 @@ The PPDAC approach is a sort of template for solving this type of problem: probl
     * That means we assume (after obtaining sufficient evidence to back it up) that the data follows some known distribution, possibly with unknown parameters.
     * For the presidental approval rating example, since we can probably assume that the voters are independently making decisions, and that approval is a binary result, we can probably use a binomial distribution.
     * A **bias** is a systematic error in the data. Bias is often caused by measurement error, or selection bias (for example, people only ask for exam remarks if they got less than they feel they deserved, so marking errors might be systematically higher than the true value).
-    * When distribution parameters are unknown, we often use Greek letters like $\mu, \sigma, \pi$. When we have sample parameters, which we do know, we often use English letters like $\overline y, s^2, p$, or Greek letters with hats, like $\hat \mu, \hat \sigma, \hat pi$.
+    * When distribution parameters are unknown, we often use Greek letters like $\mu, \sigma, \pi$. When we have sample parameters, which we do know, we often use English letters like $\overline y, s^2, p$, or Greek letters with hats, like $\hat, \mu, \hat \sigma, \hat pi$.
     * The **study error** is the difference between the target population mean and the study population mean for the attribute under study: $\mu_1 - \mu_2$.
     * The **sampling error** is the difference between the sample mean and the study population mean for the attribute under study: $\overline y - \mu_2$.
     * When we're picking a sample, we really want it to represent the population - the properties of the population should be likely to be similar to the properties of the population, to reduce the sampling error as much as possible. We do this by doing **random sampling**. Correctly doing random sampling is critical in avoiding biases, but often depends on characteristics of the problem.
@@ -249,10 +249,63 @@ Essentially, the method of maximum likelihood is picking the parameter that make
 
 Formally, given a discrete distribution $Y$ with probability function $f$ and unknown parameter $\theta$, then the **likelihood function** is defined as $L(\theta; y_1, \ldots, y_n) = P(Y_1 = y_1, \ldots, Y_n = y_n) \text{ for the given value of } \theta$.
 
-Suppose we have a variable $X \tilde \mathrm{Poisson}(\mu)$. What is the maximum likelihood estimate (MLE) of $\mu$?
+We then find the value of $\theta$ that maximizes the likelihood function. This value is the **maximum likelihood estimate** (MLE), denoted $\hat \theta$.
+
+Suppose we have a variable $X \tilde \mathrm{Poisson}(\mu)$. What is the MLE of $\mu$?
 
 > Clearly, the probability of each sample observation is $\frac{e^{-\mu} \mu^r}{r!}$ where $r$ is the value of the observation, by the definition of the Poisson distribution.  
 > Therefore, $P(Y_1 = y_1, \ldots, Y_n = y_n) = \frac{e^{-\mu} \mu^{x_1}}{x_1!} \cdots \frac{e^{-\mu} \mu^{x_n}}{x_n!}$ (we can just multiply the probabilities together because all of the observations are independent, which we know is the case since we're using the Poisson distribution).  
 > We can find the value of $\mu$ that maximizes the likelihood function by taking the logarithm of the whole thing, then finding where the derivative of that is 0. This is a pretty common way to find the max.  
 > This value of $\mu$ is the maximum likelihood estimate.  
 
+# 18/5/16
+
+The midterm covers everything up to next week.
+
+Most statistical inference problems start with parameter estimation. We generally start with a guess, and then try to refine it using samples.
+
+A dataset can be thought of as a a set of outcomes of a random variable, rather than just a set of numbers. This random variable is the **statistical model**.
+
+To review, lowercase Greek letters like $\mu, \theta$ are unknown parameters, lowercase Latin letters like $x, y$ are known/sample parameters, and uppercase Latin letters like $X, Y$ are random variables. These letters correspond: $y_i$ is a single outcome drawn from the random variable $Y_i$.
+
+Estimate the approval rating of the president:
+
+> The approval rating is $\pi$, a population parameter that we don't know. Suppose we interview 10 people and get $\set{A, A, D, D, D, D, A, D, D, D}$, where $A$ means approval and $D$ means disapproval.  
+> We want to find $\hat \pi$, the MLE of $\pi$. Clearly, $L(\pi; y_1, \ldots, y_n) = \pi \pi (1 - \pi) (1 - \pi) (1 - \pi) (1 - \pi) \pi (1 - \pi) (1 - \pi) (1 - \pi)$, because the probability of each person approving is just $\pi$.  
+> So $L(\pi; y_1, \ldots, y_n) = \pi^3 (1 - \pi)^7$, and the log likelihood function is $l(\pi) = \ln(\pi^3 (1 - \pi)^7) = 3 \ln \pi + 7 \ln(1 - \pi)$.  
+> Clearly, the value of $\pi$ that maximizes $l(\pi)$ is $\frac{3}{10}$ (by taking the derivative of the log likelihood function). Therefore, the MLE for the approval rating is $\frac{3}{10}$.  
+
+Estimate the average website hits per hour, given a sample of visits over $n$ hours $\set{y_1, \ldots, y_n}$:
+
+> Assume that the data is from a Poisson distribution. Then we want to figure out the distribution parameter $\mu$.  
+> Construct the likelihood function $L(\mu; y_1, \ldots, y_n) = \frac{e^{-\mu} \mu^{y_1}}{y_1!} \cdot \ldots \cdot \frac{e^{-\mu} \mu^{y_n}}{y_n!}$.  
+> So $L(\mu; y_1, \ldots, y_n) = \frac{e^{-n\mu} \mu^{\sum y_i}}{y_1! \ldots y_n!}$.  
+> So the log likelihood function is $l(\mu) = -n \mu + \sum (y_i \ln \mu) - \ln(y_1! \ldots y_n!)$.  
+> Differentiating the log likelihood function with respect to $\mu$, we get $-n + \sum \frac{y_i}{\mu}$.  
+> By setting the derivative to 0 and solving for $\mu$, we find the maximum value of the log likelihood function at $\hat \mu = \frac 1 n \sum y_i = \overline y$.  
+> So if we have a Poisson distribution, the best guess for the parameter $\mu$ is $\overline y$.  
+
+Estimate the probability that a Canadian contestant wins Jeopardy, given a sample of shows Canadian contestants appeared in $\set{y_1, \ldots, y_n}$:
+
+> Clearly, if a contestant appears in $n$ shows, then they won $n$ in a row and lost in the $n + 1$th show.  
+> We assume that shows are independent. Therefore, we have a geometric distribution, $Y \tilde \mathrm{Geo}(\pi)$.  
+> Recall that for a geometric distribution, $P(Y = y) = \pi^{y - 1}(1 - \pi)$.  
+> So $L(\pi; y_1, \ldots, y_n) = \pi^{y_1 - 1}(1 - \pi) \ldots \pi^{y_n - 1}(1 - \pi) = \pi^{\sum y_i - n} (1 - \pi)^n$.  
+> So $l(\pi) = (\sum y_i - n) \ln x + n \ln (1 - x)$. Using the usual methods, we find the value of $\pi$ that maximizes $l(\pi)$ to get the MLE of $\pi$.  
+
+Estimate the proportion of left handers in this university:
+
+> Strategy 1: Suppose we got our data by asking people from the population until we got a 10 left handers, and we needed to ask 100 before before there were 10.  
+> Strategy 2: Suppose we got our data by asking 100 people from the population, and 10 of them turned out to be left handers.  
+> Let $\pi$ be the proportion of left handers. In strategy 1, we have a negative binomial distribution.  
+> So in strategy 1, we asked 99 people and got either left or right handed, and the 100th person answered left handed. So the likelihood function is $L(\pi) = {99 \choose 9} \pi^9 (1 - \pi)^{90} \times \pi$.  
+> So in strategy 2, we asked all 100 people, and got either left or right handed. So the likelihood function is $L(\pi) = {100 \choose 10} \pi^{10} (1 - \pi)^{90}$.  
+> As it turns out, both strategies give the same MLE for $\pi$, $\frac{1}{10}$.  
+
+Note that when we're maximising value of a parameter by taking the derivative, setting it to 0, and solving for the parameter, we have to make sure that the solution is actually the global maximum, not a local maximum or even a minimum. When there are multiple solutions, we must check each of them to find the one that results in the largest likelihood value.
+
+Note that in this course, there will only ever be one solution to the derivative being equal to 0, so we won't have to worry about it.
+
+When we have lots of independent observations, the likelihood function will look like $P(Y_1 = y_1) \cdot \ldots \cdot P(Y_n = y_n)$. So if $n$ is large, we're multiplying a lot of numbers between 0 and 1, which means that the actual likelihood is going to be very small. To deal with this, we sometimes use the **relative likelihood function** $R(\theta) = \frac{L(\theta)}{L(\hat \theta)}$, which always has a maximum of 1 at $\hat \theta$.
+
+Note that this only works for discrete distributions. For continuous ones, we have other tools.

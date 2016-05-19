@@ -254,7 +254,7 @@ This same technique can be used to calculate the mean and variance of a dataset 
 <li>That means we assume (after obtaining sufficient evidence to back it up) that the data follows some known distribution, possibly with unknown parameters.</li>
 <li>For the presidental approval rating example, since we can probably assume that the voters are independently making decisions, and that approval is a binary result, we can probably use a binomial distribution.</li>
 <li>A <strong>bias</strong> is a systematic error in the data. Bias is often caused by measurement error, or selection bias (for example, people only ask for exam remarks if they got less than they feel they deserved, so marking errors might be systematically higher than the true value).</li>
-<li>When distribution parameters are unknown, we often use Greek letters like <span class="math inline">\(\mu, \sigma, \pi\)</span>. When we have sample parameters, which we do know, we often use English letters like <span class="math inline">\(\overline y, s^2, p\)</span>, or Greek letters with hats, like <span class="math inline">\(\hat \mu, \hat \sigma, \hat pi\)</span>.</li>
+<li>When distribution parameters are unknown, we often use Greek letters like <span class="math inline">\(\mu, \sigma, \pi\)</span>. When we have sample parameters, which we do know, we often use English letters like <span class="math inline">\(\overline y, s^2, p\)</span>, or Greek letters with hats, like <span class="math inline">\(\hat, \mu, \hat \sigma, \hat pi\)</span>.</li>
 <li>The <strong>study error</strong> is the difference between the target population mean and the study population mean for the attribute under study: <span class="math inline">\(\mu_1 - \mu_2\)</span>.</li>
 <li>The <strong>sampling error</strong> is the difference between the sample mean and the study population mean for the attribute under study: <span class="math inline">\(\overline y - \mu_2\)</span>.</li>
 <li>When we're picking a sample, we really want it to represent the population - the properties of the population should be likely to be similar to the properties of the population, to reduce the sampling error as much as possible. We do this by doing <strong>random sampling</strong>. Correctly doing random sampling is critical in avoiding biases, but often depends on characteristics of the problem.</li>
@@ -270,13 +270,57 @@ Mentally, it seemed like we asked &quot;what is the probability of 30 heads occu
 </blockquote>
 <p>Essentially, the method of maximum likelihood is picking the parameter that makes our observed sample properties most likely.</p>
 <p>Formally, given a discrete distribution <span class="math inline">\(Y\)</span> with probability function <span class="math inline">\(f\)</span> and unknown parameter <span class="math inline">\(\theta\)</span>, then the <strong>likelihood function</strong> is defined as <span class="math inline">\(L(\theta; y_1, \ldots, y_n) = P(Y_1 = y_1, \ldots, Y_n = y_n) \text{ for the given value of } \theta\)</span>.</p>
-<p>Suppose we have a variable <span class="math inline">\(X \tilde \mathrm{Poisson}(\mu)\)</span>. What is the maximum likelihood estimate (MLE) of <span class="math inline">\(\mu\)</span>?</p>
+<p>We then find the value of <span class="math inline">\(\theta\)</span> that maximizes the likelihood function. This value is the <strong>maximum likelihood estimate</strong> (MLE), denoted <span class="math inline">\(\hat \theta\)</span>.</p>
+<p>Suppose we have a variable <span class="math inline">\(X \tilde \mathrm{Poisson}(\mu)\)</span>. What is the MLE of <span class="math inline">\(\mu\)</span>?</p>
 <blockquote>
 <p>Clearly, the probability of each sample observation is <span class="math inline">\(\frac{e^{-\mu} \mu^r}{r!}\)</span> where <span class="math inline">\(r\)</span> is the value of the observation, by the definition of the Poisson distribution.<br />
 Therefore, <span class="math inline">\(P(Y_1 = y_1, \ldots, Y_n = y_n) = \frac{e^{-\mu} \mu^{x_1}}{x_1!} \cdots \frac{e^{-\mu} \mu^{x_n}}{x_n!}\)</span> (we can just multiply the probabilities together because all of the observations are independent, which we know is the case since we're using the Poisson distribution).<br />
 We can find the value of <span class="math inline">\(\mu\)</span> that maximizes the likelihood function by taking the logarithm of the whole thing, then finding where the derivative of that is 0. This is a pretty common way to find the max.<br />
 This value of <span class="math inline">\(\mu\)</span> is the maximum likelihood estimate.</p>
 </blockquote>
+<h1 id="section-5">18/5/16</h1>
+<p>The midterm covers everything up to next week.</p>
+<p>Most statistical inference problems start with parameter estimation. We generally start with a guess, and then try to refine it using samples.</p>
+<p>A dataset can be thought of as a a set of outcomes of a random variable, rather than just a set of numbers. This random variable is the <strong>statistical model</strong>.</p>
+<p>To review, lowercase Greek letters like <span class="math inline">\(\mu, \theta\)</span> are unknown parameters, lowercase Latin letters like <span class="math inline">\(x, y\)</span> are known/sample parameters, and uppercase Latin letters like <span class="math inline">\(X, Y\)</span> are random variables. These letters correspond: <span class="math inline">\(y_i\)</span> is a single outcome drawn from the random variable <span class="math inline">\(Y_i\)</span>.</p>
+<p>Estimate the approval rating of the president:</p>
+<blockquote>
+<p>The approval rating is <span class="math inline">\(\pi\)</span>, a population parameter that we don't know. Suppose we interview 10 people and get <span class="math inline">\(\set{A, A, D, D, D, D, A, D, D, D}\)</span>, where <span class="math inline">\(A\)</span> means approval and <span class="math inline">\(D\)</span> means disapproval.<br />
+We want to find <span class="math inline">\(\hat \pi\)</span>, the MLE of <span class="math inline">\(\pi\)</span>. Clearly, <span class="math inline">\(L(\pi; y_1, \ldots, y_n) = \pi \pi (1 - \pi) (1 - \pi) (1 - \pi) (1 - \pi) \pi (1 - \pi) (1 - \pi) (1 - \pi)\)</span>, because the probability of each person approving is just <span class="math inline">\(\pi\)</span>.<br />
+So <span class="math inline">\(L(\pi; y_1, \ldots, y_n) = \pi^3 (1 - \pi)^7\)</span>, and the log likelihood function is <span class="math inline">\(l(\pi) = \ln(\pi^3 (1 - \pi)^7) = 3 \ln \pi + 7 \ln(1 - \pi)\)</span>.<br />
+Clearly, the value of <span class="math inline">\(\pi\)</span> that maximizes <span class="math inline">\(l(\pi)\)</span> is <span class="math inline">\(\frac{3}{10}\)</span> (by taking the derivative of the log likelihood function). Therefore, the MLE for the approval rating is <span class="math inline">\(\frac{3}{10}\)</span>.</p>
+</blockquote>
+<p>Estimate the average website hits per hour, given a sample of visits over <span class="math inline">\(n\)</span> hours <span class="math inline">\(\set{y_1, \ldots, y_n}\)</span>:</p>
+<blockquote>
+<p>Assume that the data is from a Poisson distribution. Then we want to figure out the distribution parameter <span class="math inline">\(\mu\)</span>.<br />
+Construct the likelihood function <span class="math inline">\(L(\mu; y_1, \ldots, y_n) = \frac{e^{-\mu} \mu^{y_1}}{y_1!} \cdot \ldots \cdot \frac{e^{-\mu} \mu^{y_n}}{y_n!}\)</span>.<br />
+So <span class="math inline">\(L(\mu; y_1, \ldots, y_n) = \frac{e^{-n\mu} \mu^{\sum y_i}}{y_1! \ldots y_n!}\)</span>.<br />
+So the log likelihood function is <span class="math inline">\(l(\mu) = -n \mu + \sum (y_i \ln \mu) - \ln(y_1! \ldots y_n!)\)</span>.<br />
+Differentiating the log likelihood function with respect to <span class="math inline">\(\mu\)</span>, we get <span class="math inline">\(-n + \sum \frac{y_i}{\mu}\)</span>.<br />
+By setting the derivative to 0 and solving for <span class="math inline">\(\mu\)</span>, we find the maximum value of the log likelihood function at <span class="math inline">\(\hat \mu = \frac 1 n \sum y_i = \overline y\)</span>.<br />
+So if we have a Poisson distribution, the best guess for the parameter <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\overline y\)</span>.</p>
+</blockquote>
+<p>Estimate the probability that a Canadian contestant wins Jeopardy, given a sample of shows Canadian contestants appeared in <span class="math inline">\(\set{y_1, \ldots, y_n}\)</span>:</p>
+<blockquote>
+<p>Clearly, if a contestant appears in <span class="math inline">\(n\)</span> shows, then they won <span class="math inline">\(n\)</span> in a row and lost in the <span class="math inline">\(n + 1\)</span>th show.<br />
+We assume that shows are independent. Therefore, we have a geometric distribution, <span class="math inline">\(Y \tilde \mathrm{Geo}(\pi)\)</span>.<br />
+Recall that for a geometric distribution, <span class="math inline">\(P(Y = y) = \pi^{y - 1}(1 - \pi)\)</span>.<br />
+So <span class="math inline">\(L(\pi; y_1, \ldots, y_n) = \pi^{y_1 - 1}(1 - \pi) \ldots \pi^{y_n - 1}(1 - \pi) = \pi^{\sum y_i - n} (1 - \pi)^n\)</span>.<br />
+So <span class="math inline">\(l(\pi) = (\sum y_i - n) \ln x + n \ln (1 - x)\)</span>. Using the usual methods, we find the value of <span class="math inline">\(\pi\)</span> that maximizes <span class="math inline">\(l(\pi)\)</span> to get the MLE of <span class="math inline">\(\pi\)</span>.</p>
+</blockquote>
+<p>Estimate the proportion of left handers in this university:</p>
+<blockquote>
+<p>Strategy 1: Suppose we got our data by asking people from the population until we got a 10 left handers, and we needed to ask 100 before before there were 10.<br />
+Strategy 2: Suppose we got our data by asking 100 people from the population, and 10 of them turned out to be left handers.<br />
+Let <span class="math inline">\(\pi\)</span> be the proportion of left handers. In strategy 1, we have a negative binomial distribution.<br />
+So in strategy 1, we asked 99 people and got either left or right handed, and the 100th person answered left handed. So the likelihood function is <span class="math inline">\(L(\pi) = {99 \choose 9} \pi^9 (1 - \pi)^{90} \times \pi\)</span>.<br />
+So in strategy 2, we asked all 100 people, and got either left or right handed. So the likelihood function is <span class="math inline">\(L(\pi) = {100 \choose 10} \pi^{10} (1 - \pi)^{90}\)</span>.<br />
+As it turns out, both strategies give the same MLE for <span class="math inline">\(\pi\)</span>, <span class="math inline">\(\frac{1}{10}\)</span>.</p>
+</blockquote>
+<p>Note that when we're maximising value of a parameter by taking the derivative, setting it to 0, and solving for the parameter, we have to make sure that the solution is actually the global maximum, not a local maximum or even a minimum. When there are multiple solutions, we must check each of them to find the one that results in the largest likelihood value.</p>
+<p>Note that in this course, there will only ever be one solution to the derivative being equal to 0, so we won't have to worry about it.</p>
+<p>When we have lots of independent observations, the likelihood function will look like <span class="math inline">\(P(Y_1 = y_1) \cdot \ldots \cdot P(Y_n = y_n)\)</span>. So if <span class="math inline">\(n\)</span> is large, we're multiplying a lot of numbers between 0 and 1, which means that the actual likelihood is going to be very small. To deal with this, we sometimes use the <strong>relative likelihood function</strong> <span class="math inline">\(R(\theta) = \frac{L(\theta)}{L(\hat \theta)}\)</span>, which always has a maximum of 1 at <span class="math inline">\(\hat \theta\)</span>.</p>
+<p>Note that this only works for discrete distributions. For continuous ones, we have other tools.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2014 Anthony Zhang.
