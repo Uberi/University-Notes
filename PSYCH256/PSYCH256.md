@@ -121,3 +121,67 @@ That said, people often have trouble actually evaluating whether an argument is 
 The fact that fallacies are so common seems to tell us that formal logic doesn't have that much of a role in human cognition.
 
 In experiments, thinking does not seem to match probabilistic logic very well. For example, when subjects are either asked to estimate the likelihood of someone who reads a lot being a college-educated carpenter, or asked to estimate the likelihood of someone who reads a lot being a carpenter, the responses will often say that college-educated carpenter is more likely than just being a carpenter, even though being college-educated would be independent of being a carpenter. Formally, $P(\text{college-educated}) P(\text{carpenter})$ would be greater than $P(\text{carpenter})$, which is not possible under the rules of probability.
+
+# 20/5/16
+
+Rules and Rule Systems
+----------------------
+
+A **rule/production** is similar to a logical implication, but with a broader definition that includes actions rather than just arguments. Rules can be used to describe systems like chess: "IF the king is in check AND no single move can remove it from check, THEN the other player wins".
+
+Rule-based models of cognition were developed in order to address shortcomings in the formal logic model of cognition. Where formal logic is limited to representing arguments, rule-based frameworks reflect the more general-purpose nature of language.
+
+According to Newell, intelligence is the state of having knowledge and the ability to deploy that knowledge. In the 1960s, Newell and Simon developed a rule-based program to solve problems, known as the **general problem solver**. It had some interesting features:
+
+* It worked from the goal, backward to the axioms/propositions **backward chaining**).
+* It broke problems down into smaller, more manageable problems, solved those, then combined the results together (**subgoaling**).
+* It had a database of rules that associated outcomes with actions that would achieve them (**means-ends analysis**).
+* It could represent the difference between the current progress and the goal and try to reduce the difference iteratively.
+
+One of the main limitations of this program was that backward chaining quickly became intractable for any non-trivial problem. Additionally, there was no way to infer new rules, so it couldn't learn anything new that wasn't already in its database.
+
+Later programs managed to overcome these somwhat, and these paved the way for modern expert systems and various other AI applications in use today.
+
+A **rule/production system** generally has three parts:
+
+* A representation of a **goal**, and a representation of the **initial conditions**.
+    * The initial conditions are usually represented as a set of propositions that start off all true.
+    * The goal is usually represented as a set of propositions that all need to be satisfied.
+* A **database of rules**, which describe outcomes and what actions we can perform on them - the system's knowledge.
+    * These are of the form `if PROPOSITION then ACTION`, where `PROPOSITION` is the situation in which the rule applies, and `ACTION` is what we can do in that situation.
+* A **search strategy** for applying rules - this needs to find a sequence of rules that, when applied, results in the goal.
+    * The **knowledge space** is the graph of all possible outcomes of applying sequences of rules.
+        * The origin node represents the initial condition.
+        * The neighbors of a node represent the outcomes that can be reached from the current outcome by applying a single rule.
+        * The search therefore becomes a pathfinding problem over the knowledge space - trying to find a path from the initial condition to the goal.
+    * The most obvious strategy is the **forward strategy**, in which any rule that can apply to the current situation, gets applied, until we reach the goal (or don't reach the goal, if the rules aren't designed right).
+        * This is analogous to repeatedly applying modus ponens - we repeatedly find implications where the proposition is true, affirm the antecedent, and obtain the consequent.
+    * Another strategy is the **backward strategy**, in which the situations for any rule that resuls in the goal condition become subgoals, and we repeat this until one of those subgoals is already satisfied by the initial condition.
+        * This is analogous to repeatedly affirming the consequent (a fallacy), though it doesn't matter since it's just trying to find possibilities - only the final path that we find matters with regard to logical validity.
+    * There are also hybrid approaches like the **bidirectional strategy**, which simultaneously searches both from the initial condition forward using the forward strategy, and backwards from the goal using the backward strategy, and seeing if they ever meet in the middle somewhere.
+    * Heuristics are important for making search strategies tractable for many real-world problems. Some of these heuristics include breadth-first/depth-first search and ranked search (where rules are ranked numerically by how useful we expect them to be in getting to the goal using some application-specific function).
+    * Search strategies should be chosen based on the knowledge space at hand.
+        * For example, a tic-tac-toe solver has a lot of possible goal states and only one initial state, so the forward strategy should work pretty well. Since basically all of the strategies are known already, it's also easy to use a best-first heuristic for the search to find the answer more quickly. In fact, the solver can be fully specified in as little as 5 rules.
+        * For something like chess, the knowledge space is much, much larger, and under the rule-based model, most humans actually seem to use multiple different search strategies. For early-game, there are a lot of gambits that can be thought of as forward-chaining with a breadth-first heuristic. For mid-game, players often use subgoals such as taking a certain square or winning territory to make strategies tractable, and often employ the backward strategy with intuitive heuristics. For the late-game, it becomes tractable to simply use the backward strategy on the end goal with depth-first heuristics.
+
+How good are rules at actually representing how thoughts work? Well, in formal logic, an argument with contradicting premises results in a valid argument for anything, including both $X$ and $\neg X$. Obviously, allowing contradictions means we can no longer say valid arguments often have true conclusions.
+
+Likewise, in rule-based systems we could have contradicting rules like "if X then Y" and "if X then not Y", and arrive at totally different outcomes. However, this isn't an issue as long as the search strategy gets us from the initial conditions to the goal.
+
+One way to make this work is to allow rules to be overridden or retracted if some heuristic decides that it would be good to do so while searching, or if we detect contradictory actions. An interesting side effect of this is that the number of conclusions can actually decrease when a retraction occurs, and therefore the rule-based system wouldn't strictly be doing deduction. This model seems to mesh pretty well with how thinking seems to behave in the real world.
+
+The sequence of rules resulting from a rule-based system can be viewed as the explanation for a solution to the problem it was trying to solve. We could then think of the forward strategy as deductive explanation, and the backward strategy as abductive explanation.
+
+Multiple approaches have been proposed for extending rule-based systems with the ability to learn new rules. Some of these are:
+
+* Inductive generalization: the system finds that two things frequently occur together, and add the rule "if the first thing occurs, it's likely that the second thing occurs as well", or vice versa.
+* Chunking/composition: the system finds sequences of rules that are applied really often, and combines that sequence of rules into a new, single rule.
+* Specialization: the system finds certain rules in certain situations tend to not work that well in achieving the goal, and then either changes those rules or adds new rules that override the bad one for those situations.
+
+Noam Chomsky is famous for his work in linguistics, specifically the view that language is generative and based on rules that build up the structure of the language, as opposed to associative and based on modifying similar language we've previously heard. The evidence for the generative model is that people are quite capable of dealing with constructed sentences that are nothing like they've ever heard before. With this model, language syntax could potentially be represented as a rule-based system where the goal is a string that represents a particular thing we're trying to express.
+
+Chomsky also proposed that word formation (morphology) and word sound formation (phonology) rule-based as well. However, this doesn't really match up with how language is actually used. For example, making words past tense doesn't really have any good rules (consider "sing" vs. "sung"), and seem to be leanred more through association with similar examples (if you've never seen "sing" before, you might compare it to "ring" vs. "rung").
+
+Although rule-based systems are widely used today, and are quite powerful in certain fields, they don't seem to scale up into general human intelligence. One criticism of rule-based models of cognition is that search strategies and resolving conflicting/overriding rules seem to quickly become intractable. This is known as the **frame problem** - it's hard for the system to determine which rules result in relevant conclusions and which do not. Some rule-based systems solve this with relevance heuristics to avoid considering rules that are probably irrelevant, and there is also some evidence that humans seem to do something similar.
+
+Rule-based systems seem to explain the differences in performance between domain experts and novices pretty well - experts in this model would simply have more domain-specific rules. Additionally, chunking-based learning in rule-based systems also follows the same power law increase in knowledge (number of rules over time), just like humans seem to do when learning about a subject - learning a lot at first, then gradually tapering off as there's fewer new things to learn.
