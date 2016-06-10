@@ -185,3 +185,89 @@ Chomsky also proposed that word formation (morphology) and word sound formation 
 Although rule-based systems are widely used today, and are quite powerful in certain fields, they don't seem to scale up into general human intelligence. One criticism of rule-based models of cognition is that search strategies and resolving conflicting/overriding rules seem to quickly become intractable. This is known as the **frame problem** - it's hard for the system to determine which rules result in relevant conclusions and which do not. Some rule-based systems solve this with relevance heuristics to avoid considering rules that are probably irrelevant, and there is also some evidence that humans seem to do something similar.
 
 Rule-based systems seem to explain the differences in performance between domain experts and novices pretty well - experts in this model would simply have more domain-specific rules. Additionally, chunking-based learning in rule-based systems also follows the same power law increase in knowledge (number of rules over time), just like humans seem to do when learning about a subject - learning a lot at first, then gradually tapering off as there's fewer new things to learn.
+
+# 27/5/16
+
+Concepts
+--------
+
+Where rules represent human knowledge using logical statements, concepts represent knowledge through ideas/descriptions. They're basically representations of what we know about the contents/operation of the world and how we came to know them.
+
+Concepts are useful because we can **categorize** them. Socrates was famously pretty big on categorizing everything into either morally good or morally evil, for example.
+
+According to Immanuel Kant, concepts are a necessary and important part of conscious experience - the mind creates conscious experience by applying concepts to sensory experience. For example, when we hear someone speaking, we sense sounds as audio waveforms, yet consciously experience words and the meaning behind them.
+
+Concepts also serve as a basis for induction - inductively applying a concept to a new situation can let us deduce details of the structure of that situation from the structure of the concept.
+
+It seems that concepts must either be **innate** (the rationalist view, like Descartes'), or come **from sensory experience** (the empirical view, like Locke's). Modern experimental psychology suggests that there are indeed innate concepts - even infants are known to predict physical interactions, and will express surprise if they see things like a ball rolling behind a screen, and two balls rolling out the other side.
+
+Concepts have a long history - famously, Plato defined the concept of a human to be "a featherless biped". However, over the years there have been different prevailing ideas about what these concepts actually are as objects. Dictionary-like definitions, abstractions/prototypes, Form-like ideal examples, explanatory categories, and many others have all been proposed as psychological bases for the concept within the mind.
+
+The view that **concepts are like dictionary definitions** is probably the oldest one, and is what Plato used in defining a human as a featherless biped. In this view, a concept is its definition, like how "a bachelor" is "an unmarried man". For something to satisfy the definition, that thing must be both a man, and unmarried.
+
+While this works well for technical terms, it does rather poorly at explaining the kinds of concepts we encounter most often in real life (often known as natural-kind concepts) - some of them are very difficult to put into definition-like terms. For example, a "tiger" concept might be "striped carnivore", yet a tiger painted all orange should still be considered a tiger. The issue is that every property of the definition is equally necessary to satisfy it, and all of the properties must be satisfied to be sufficient in satisfying the definition.
+
+Due to these limitations, we obtain the view that **concepts are like abstractions/prototypes** - lists of features of things that typically satisfy the concept. Then, people can judge how well a concept applies to a situation by computing the weighted sum of the features shared between the situation and the prototype, minus the weighted sum of the features that differ between the situation and the prototype - $\operatorname{Similarity}(A, B) = a \cdot \operatorname{weight}(A & B) - b \cdot \operatorname{weight}(A \setminus B) - c \cdot \operatorname{weight}(B \setminus A)$. For example, a robin is a more typical bird than a penguin because it has more of the typical bird features, but a penguin can still be considered a bird under this model.
+
+However, there are some issues with this when we get to technical terms - isosceles triangles are generally considered more typical triangles than, say, scalene ones, though they should all be equally typical, as triangles are mathematically any three-sided object. Also, features aren't always independent like this model assumes - a big spoon is typically wooden, and a small spoon is typically metal, so metallic-ness and size are related to each other in terms of how typical a spoon an object is, but this isn't represented in the prototype model.
+
+There is also the view that **concepts are their best examples or particularly good examples of that concept**. Like with prototypes, we have a reference that we can obtain a similarity to for a given situation, but the similarity is either done in some way between the situation and the exemplars, or by constructing a prototype on the fly from those exemplars and computing similarity using the prototype method. Exemplar theory is interesting because it allows concepts to have variability and sizes - the concept of a vegetable just seems somehow larger than the concept of a spoon, perhaps because it has a lot more, highly varied exemplars. Also, we could have a large wooden spoon and a small metal spoon as exemplars, which seems to address the concern with prototypes storing all features independently.
+
+However, if concepts are just their examples, why do some examples group together into one concept, and others into a different one? The predictive power of this model is rather limited.
+
+The example of the tiger painted purely orange is an interesting one: despite removing many of the key features of the situation, we still consider the animal to be a tiger, because the original animal, before all the changes, was a tiger, even if it is now indistinguishable from some other animal. In other words, it seems like the **cause** of the situation matters as well when applying concepts. This is the view that **concepts are theories about what it takes to be a member of that concept**. For example, a broomstick modified with a strip of wood becomes a hockey stick, while a goose painted white doesn't become a swan, because the theory for a hockey stick needs only that it be suitable for hitting a puck, but the theory for being a particular species is a lot more strict.
+
+This causal theory essentially says that a concept is an arbitrary statement about what things can belong to that concept. As such, the exemplar view and prototype view of concepts can be considered an approximation for evaluating these theories. It still doesn't tell us why tomatoes are conceptually fruits rather than vegetables, though, which can be viewed as one of the great failings of philosophy in the twenty-first century.
+
+Going forward, we'll be using this causal theory of concepts when talking about the mind. When we're working with computational representations of concepts, however, we generally use frames.
+
+A **frame** is a list of information that typically applies in a given situation/concept. Frames were proposed by Marvin Minsky to help logical systems make more relevant inferences - where logic tells us what we can do in any situation, frames tell us what we should prioritise and what we should skip. Frames are a way to reduce computing power requirements in most situations - the frame for restaurant dining allows us to infer immediately when we see a waiter that we can ask to be seated, rather than wasting time deducing, say, that waiters exist.
+
+For example, a frame for a course might reference the concept of a course instructor, examples of courses, relations to other concepts, and so on. Basically, the frame acts as an arbitrary structure that we can use to represent the concept of a course. As a result, frames are also often called **schemas**.
+
+A schema for eating at a restaurant, for example, might contain the fact that it's a dining event, the concept of eating occuring at a location, the procedure for eating at a restaurant, examples of restaurants, and so on. It seems that when we're following our mental "autopilot", there are many different fixed scripts that it follows to get us through the day.
+
+Frames can be considered technically equivalent to meta-rules - rules that, when matched, govern things like the priority of other rules and strategies for matching them.
+
+Where **searching** is the process of finding applicable rules in a rule-based system, **matching** is the process of finding the most applicable concept for a situation in a concept-based system.
+
+Most frames can have is-a and has-a relationships with other concepts. As a result, it's possible to build up a heirarchy of concepts, where upper ones are more abstract, and lower ones are more specific. This heirarchy can be taken advantage of in searching/matching, or for finding related things. Interestingly, further meta-rules can be applied to this, like **inheritance** - sub-concepts can often inherit properties of their parents, or override them with their own values.
+
+In the frame model, when we do matching, we do so via **spreading activation** - from a start frame, we go through relevant/related frames below it in the heirarchy, finding the one that applies best by comparing similar and dissimilar features/properties. For example, if naming a child, we might start from names in general, search through everything, and when hitting Irish names, find the one that best satisfies the criteria for a good name (excitatory links) while not satisfying any criteria for a bad name (inhibitory links). This is a decent representation of how human minds tend to be organized by their contents, where considering a situation often brings up similar situations.
+
+The frame model solves the issues logic-based systems have with planning using frames that store fixed scripts - where pure logic ends up considering far too many possibilities to feasibly do planning, frames can simply store the sequence of actions that typically work in the associated situation. This doesn't always work, especially in edge cases, but it seems reasonably close to what humans actually end up doing.
+
+Likewise, frames can solve issues with explanation in logic-based systems by storing pre-packaged explanations for common situations. By not having to do the entire chain of deduction every time, we save a lot of computational effort, even if it's sometimes wrong in atypical cases. This seems like a plausible theory for how humans behave.
+
+In all concept-based models, **learning occurs by acquiring new concepts and refining existing ones**. Concepts are generally acquired by definition (describing their features directly), specialization (adapting a general concept to be more specific), generalization (adapting many specific concepts into a more general one), or composition (putting multiple, possibly unrelated, concepts together into a new one). These are quite straightforward to extend into the frames model of concepts.
+
+# 3/6/16
+
+Analogy
+-------
+
+Frames solve the relevance problem in logic-based systems by associating relevant information with concepts via links in frames, rather than searching through all known concepts every single time.
+
+While this does seem to work for typical situations, it is difficult to apply this to novel situations that we do not already have frames for. In these situations, humans will generally use analogies to apply known concepts to new things.
+
+An **analogy** is an alignment of multiple concepts/structures, generally used to adapt knowledge from some of them for the others. Analogies help us explain human creativity, which is something that concepts have a difficult time accounting for alone. One example of an analogy is "stone spear head artifacts were used for hunting, and these metal spear head artifacts are really similar to the stone ones, so they were probably used for hunting as well".
+
+Analogies are often expressed as "A is to B as C is to D", alternatively written "A:B :: C:D", and this is known as a **proportional analogy** (2 is to 4 as 6 is to 12). Here, the knowledge of the relationship between C and D is transferred and adapted to obtain knowledge about the relationship between A and B, even if A and B are very different from C and D.
+
+According to Aristotle, **analogies are inductive generalizations** - we generalize the relationship between C and D until it applies to A and B, and then we apply it. For example, 6:12 is a relation that multiplies by 2, so we generalize it to "multiply by 2" and can apply it to 2:4. Under this view, however, it is often possible to generalize something in multiple very different ways, each of which can give different results. This is a rule-based account of analogical reasoning, and often gives unreliable results when used in rule-based systems.
+
+Mill proposed a more refined way to look at it - **analogies are extrapolations**. We say that since both A:B and C:D share features 1 to $n$, and since A:B has a feature $n + 1$, C:D probably has feature $n + 1$ as well. This isn't much different from inductive generalization, though, and still suffers from unreliability when applied generally.
+
+These rule-based accounts of analogical reasoning present analogy as an unreliable source of information, and don't explain how humans do it very well. An associative view of analogy generally works better here. Modern cognitive science has many of these, one of which, multiconstraint theory, we will be studying in more depth.
+
+In **multiconstraint theory**, **an analogy is a set of associations/alignments between two sets of concepts**. One set of concepts is the **source/base**, which is the concept we are adapting knowledge from, and the other is the **target**, which we are adapting knowledge to and are trying to know more about.
+
+For example, stone spear head artifacts and metal spear head artifacts are two different concepts that we can compare, and they can be aligned along their shape, construction method, situations where we'd find them, and so on - they have **attribute mappings**. Likewise, they can be aligned along their relations to other things and between attributes, like how they're both generally attached to their own types of spear handles (even if they're different types of handles) - they have **relational mappings**. Finally, they can be aligned as systems (correspondences between relations), like how they were used for hunting because of the way they're attached to their handles - they have **system mappings**. These system mappings consitute the knowledge from stone spear head artifacts adapted for metal spear head artifacts - that metal ones were also used for hunting.
+
+Basically, in multiconstraint theory, to evaluate an analogy we adapt attributes, adapt relations between those attributes, and then generate correspondences for those relations between the two concepts. These correspondences between relations (known as system mappings/relations) are the relationships that we are trying to transfer from the source to the target.
+
+In multiconstrant theory, an analogy's **coherence** is guided by its structural consistency (whether the corresponding attributes/relations/system-mappings map one-to-one in the structure of both concepts), similarity (how similar those elements are between concepts), and pragmatic utility (how useful the analogy is in gaining knowledge). Since these are guidelines, they aren't strictly necessary to have a coherent analogy.
+
+The spear head analogy is coherent because it's structurally consistent (whenever we have an element of stone ones, we find the same element in a corresponding place in the metal ones), has similar elements (they're both attached to spear handles, even if different types), and pragmatic (it tells us more about what metal spear head artifacts are used for).
+
+Another analogy example is "dating is like wrestling: you have to stay in your own weight class". We can say that "two daters, desireability" attribute-maps to "two wrestlers, weight class", "the two daters date, the date is successful, the daters are equal in desireability" relational-maps to "the two wrestlers wrestle, the match is fair, the wrestlers are equal in weight class", and "the goal of dates is success, successful dates require equal desireability" system-maps to "the goal of wrestling matches is fairness, fair matches require equal weight classes". This is a coherent analogy, by the standards of multiconstraint theory.

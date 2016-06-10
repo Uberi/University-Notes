@@ -264,9 +264,13 @@ The midterm covers everything up to next week.
 
 Most statistical inference problems start with parameter estimation. We generally start with a guess, and then try to refine it using samples.
 
-A dataset can be thought of as a a set of outcomes of a random variable, rather than just a set of numbers. This random variable is the **statistical model**.
+A sample $y$ can be thought of as a a set of outcomes of a random variable $Y$, rather than just a set of numbers. This random variable is the **statistical model**.
 
 To review, lowercase Greek letters like $\mu, \theta$ are unknown parameters, lowercase Latin letters like $x, y$ are known/sample parameters, and uppercase Latin letters like $X, Y$ are random variables. These letters correspond: $y_i$ is a single outcome drawn from the random variable $Y_i$.
+
+Likewise, $\overline y$, the sample mean can be thought of as a single outcome of a random variable $\overline Y$. As a result, with multiple samples, we can get a whole distribution of different $\overline y$ values. The unknown population mean is $\mu$, while $\overline Y$ is the random variable with the distribution of all the different $\overline y$ values.
+
+These random variables, like $\overline Y, S^2, \overtilde \pi$ are **estimators**. These sample values, like $\overline y, s^2, \hat \pi$ are **estimates**.
 
 Estimate the approval rating of the president:
 
@@ -309,3 +313,48 @@ Note that in this course, there will only ever be one solution to the derivative
 When we have lots of independent observations, the likelihood function will look like $P(Y_1 = y_1) \cdot \ldots \cdot P(Y_n = y_n)$. So if $n$ is large, we're multiplying a lot of numbers between 0 and 1, which means that the actual likelihood is going to be very small. To deal with this, we sometimes use the **relative likelihood function** $R(\theta) = \frac{L(\theta)}{L(\hat \theta)}$, which always has a maximum of 1 at $\hat \theta$.
 
 Note that this only works for discrete distributions. For continuous ones, we have other tools.
+
+# 25/5/16
+
+;wip: missed due to interviews
+
+# 30/5/16
+
+While the likelihood interval results in a likelihood interval, the sampling distribution gives us a confidence interval.
+
+The theory of estimation deals with problems of the form "estimate an unknown population attribute $\theta$ given a sample drawn from the population, $\set{y_1, \ldots, y_n}$ to get the estimate, $\hat \theta(y_1, \ldots, y_n)$". So far, we've looked at the maximum likelihood estimation technique for solving these for discrete distributions.
+
+Another one is the **method of least squares**, where we find the value of $\theta$ that minimises some squared error function we define - minimizing $\sum E(y_i, \theta)^2$. If $\theta$ is $\mu$ in a normal distribution, then this works out to just be the sample mean, since the error is $y_i - \mu$ and we're minizing \sum (y_i - \mu)^2$. This is not the best method, but it's very popular becuase it's so simple.
+
+So far, when we're estimating we've been trying to get a single value as the estimate. However, it's often more useful to get an interval estimate instead - to find an interval $[A, B]$ such that $\theta$ has at least a given probability of being within this interval. This type of interval problem often shows up as determining margins of error.
+
+One way to obtain an interval estimate is via a relative likelihood function. Unlike the MLE method, where we find the most likely value, we're finding all values of a relative likelihood that exceed a certain probability threshold.
+
+Basically, a $p$-percent likelihood interval for an unknown parameter $\theta$ is $\set{\theta \middle| R(\theta) \ge p}$, where $R(\theta) = \frac{L(\theta)}{L(\hat \theta)}$ is the relative likelihood function and $\hat \theta$ is the MLE. The lowest and highest values in the resulting set is then the likelihood interval. The likelihood interval itself, though, is a set of all values of $\theta$ that satisfy the criteria.
+
+All $p$-percent likelihood intervals are subsets of $q$-percent intervals if $q \le p$ - smaller percentage likelihood intervals are subsets of higher percentage likelihood itnervals. The MLE belongs to all likelihood intervals. The higher the value of $p$, the higher the probability that the true value doesn't fall into the interval. Likelihood intervals are not easy to interpret and don't have an intuitive meaning, so we generally want to use something else.
+
+The **method of sampling distributions** is a better way to estimate intervals. An $n$-percent confidence interval means that we're $n$ percent sure that the value falls withint this interval, which is a lot more intuitive. Given a sample $\set{y_1, \ldots, y_n}$ and a confidence threshold $p$:
+
+1. Identify the pivotal distribution, from the model.
+2. Find the endpoints of the pivotal distribution that exceed the confidence threshold $p$.
+3. Rearrange the endpoints to construct a coverage interval.
+4. Estimate the coverage interval using the sample to get a confidence interval.
+
+;wip: for a normal dist the coverage interval is $(\overline Y - Z^* \frac{\sigma}{\sqrt{n}}, \overline Y + Z^* \frac{\sigma}{\sqrt{n}})$, and the confidence interval is $(\overline y - Z^* \frac{\sigma}{\sqrt{n}}, \overline y + Z^* \frac{\sigma}{\sqrt{n}})$
+
+The confidence interval tells us the probability that the true value falls within a certain range. However, we can also use them to say "the true value must be at most $A$ from our estimate" by choosing our sample size $n$ such that $A = \frac{Z^* \sigma}{\sqrt{n}}$.
+
+The problem with confidence intervals is if we don't know $\sigma$ or if the population isn't normal.
+
+From the central limit theorem, if $n$ is large, and $Y_1, \ldots, Y_n$ are arbitrary distributions with mean $\mu$ and variance $\sigma^2$, then $\overline Y \tilde N(\mu, \frac{\sigma^2}{n})$.
+
+# 1/6/16
+
+;wip: missed first half due to interviews
+
+Continuing with multiple examples of choosing sample sizes such that we have a certain margin of error - making the confidence interval at least a certain size. Interestingly, to get a margin of error of 3% in any population, all we need to do is ask around 1000 people, regardless of how large the population is.
+
+# 5/6/16
+
+I dropped this course due to my injuries, as it became infeasible to continue going to classes.
