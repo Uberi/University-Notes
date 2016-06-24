@@ -51,7 +51,7 @@ Originally, sets were seen as extensions of concepts, where every well-defined c
 Math: Created or Discovered?
 ----------------------------
 
-Are mathematical objects created, or discovered? Some people say axioms are created, and everything above that is discovered. Other people say that all math is a creation, while others still yet say math is discovered. **Constructivism** is the view that math is created.
+Are mathematical objects created, or discovered? Some people say axioms are created, and everything above that is discovered. Other people say that all math is a creation, while others still yet say math is discovered. **Constructivism** is the view that math is created - constructed from basic elements.
 
 If we ever ran into an advanced alien civilization, we would expect that they would also have mathematics that is quite similar to ours - math seems to be universal. This seems to be evidence that math is discovered, not created. In contrast, something like chess would not be the same across the entire universe, since it's a creation of some random person. Implicit is the assumption that discovery means the thing discovered is universal, while creation means that the thing created is not universal.
 
@@ -138,7 +138,9 @@ One objection to revolutionary fictionalism, presented by David Lewis, is that m
 
 Aside: why does philosophy often result in outlandish claims and unusual results? Wittgenstein viewed philosophy as a therapeutic activity - language tempts people to think themselves into dead ends, and looking at the language itself can help us avoid this.
 
-Carnap proposed the concept of internal and external questions. Internal questions take place within a certain language framework/practice, and are answered with empirical evidence or using the rules of the framework. In contrast, external questions are questions about which language frameworks/practices we should be using, and are answered pragmatically. 
+Carnap proposed the concept of internal and external questions. Internal questions take place within a certain language framework/practice, and are answered with empirical evidence or using the rules of the framework. In contrast, external questions are questions about which language frameworks/practices we should be using, and are answered pragmatically.
+
+One criticism of the concept of internal/external questions, proposed by Quine, is that it implies there must be a sharp analytical (matters of meaning, argued outside of a language)/synthetic (matters of fact, which can only be argued within a language) distinction, while there is no real way to distinguish them in general. In other words, there's no generally applicable distinction between internal and external questions, so the distinction wouldn't be principled.
 
 According to Carnap, the outlandish claims are the result of confusion as to whether the philisophical questions are internal questions or external questions. For example, "Are there numbers?" as an internal question is obviously yes, because we use numbers all the time. on the other hand, as an external question "Are there numbers?" isn't a meaningful statement, because it's not talking about which framework to use. This confusion, Carnap says, is why philosophy results in outlandish claims.
 
@@ -175,3 +177,64 @@ Note that there are two types of Platonism now: Platonism about the natural numb
 # 6/6/16
 
 ;wip: catch up on this one from the slides
+
+An ontological question is one like "is there something like X?". Most ontological-style questions are trivial, like "are there numbers?", because we use numbers all the time. But do these things exist on a deeper level? Are they really there?
+
+According to Carnap, these deeper ontological questions are meaningless and misguided, because of the external question vs. internal question distinction. Carnap says external ontological questions are useless - while we should ask "should we behave as if X exists?", it is nonsense to ask "does X exist?".
+
+Quine criticizes this by saying the distinction between internal and external questions is meaningless due to the analytical/synthetic distinction not being meaningful (see above). According to Quine, we should answer ontological questions by doing science, and assuming that the things our best theories tell us exist, actually exist.
+
+Yablo also thinks that these deep ontological questions are misguided, but he has a different explanations for why they are meaningless. He tries to refute quine and make the distinction between internal and external questions meaningful again.
+
+What makes it true that metal expands when it's heated? What makes newtonian mechanics "true" in many situations, even though it doesn't predict reality? Sometimes, according to Quine, scientific claims are literal, and other times, non-literal. It follows that we should seek to increase the literal claims an reduce the non-literal one.
+
+Yablo says that there's also no real principled distinction between literal and non-literal claims. For example, what kind of scientific theory is needed to tell us that cities exist? Why is it harder for a scientific theory to say cities to exist than, say, electrons? According to Yablo, it's obvious that there are cities, because we can live in them, but it's meaningless to ask if there are "really" cities. If the latter was a meaningful question, then there would be a literal/non-literal distinction, since we could non-literally say that cities exist, while literally we would have a totally different question.
+
+# 13/6/16
+
+Benacerraf wrote a lot about what truth in mathematics means. What kind of things are true/false? What does it mean to say something is true/false? Why does the idea of truth show up so often in philosophy?
+
+One common idea is that either sentences are true or false. But this doesn't seem to apply to all sentences, like questions, commands, etc. Some philosophers often say that statements are always true or false, while other philosophers say that it's the actual proposition/meaning behind sentences that is always true or false. However, paradoxical statements like "this sentence is false." could be considered to be neither true or false. While this is an interesting philisophical question in its own right, in this course when we refer to sentences being true or false, we'll actually mean whatever kinds of sentences can actually be true or false.
+
+People used to believe the earth was flat, but now we believe it is round. Should we then say "it used to be true that the earth was flat, but now it's round"? Most people would not, and instead say "we used to falsely believe the earth was flat, but it is actually true that it is round". Most conceptions of the truth is that it's universal, and if something is true, then it should be true for everyone, everywhere, at any time. Whatever the definition, however, it seems that truth is closely related to the way reality is.
+
+According to redundancy theory, the concept of true is a linguistic convenience, and doesn't actually exist. Saying "X is true" is the same thing as saying "X", so isn't really a useful, real thing. Other theories say things like true sentences being the ones that fit in the largest self-consistent web of facts, or the ones that fit in with the world after we've hypothetically obtained all possible evidence.
+
+According to Benacerraf, all satisfactory accounts of mathematical truth must mesh properly with a satisfactory theory of meaning and must explain how we have mathematical knowledge. Also, existing accounts of mathematcal truth don't satisfy both of those criteria - those that mesh with a satisfactory theory of meaning don't explain mathematical knowledge, and vice versa. Therefore, Benacerraf says, there are no existing satisfactory accounts of mathematical truth. This is a valid argument (modus tollens), but is it sound?
+
+Why must a satisfactory account of mathematical truth mesh properly with a satisfactory theory of meaning? Benaceraff argues that this is necessary since the entire language, excluding mathematics, mesh well with a satisfactory theory of meaning, so mathematics should as well. If it doesn't, then it's difficult to explain how math and the rest of the language interact.
+
+Why must a satisfactory account of mathematical truth explain how we have mathematical knowledge? Well, Benaceraff says, we do have mathematical knowledge, so any theory must be able to explain how truth leads to knowledge.
+
+Why don't theories that mesh with a satisfactory theory of meaning explain mathematical knowledge? If we accept the standard view of knowledge as justified true belief, then we will have a lot of issues with philisophical aspects of theories of mening. On the other hand, if we don't, then we can't satisfactorily explain mathematical knowledge.
+
+Why don't theories that explain mathematical knowledge mesh with satisfactory theories of meaning? Well, mathematical knowledge is acquired by proof, so knowledge can only be obtained for things that can be proved. Theories of mathematical truth based on epistemology are called combinatorial theories, like those that are based off building things from axioms, constructivism, and so on. Since truth is provability, we must stand in the right causal relationship to truth when we read a proof.
+
+Some objections to this argument are: objecting to premise 1 by rejecting that we have mathematical knowledge (like in error theory), objecting to premise 2 by saying that that other linguistic domains are also referential/use referential knowledge (like ethics and logic), so other fields also face the same problems math does while still having satisfactory accounts, or objecting to premise 3 by saying that constructivists don't fit the pattern.
+
+# 20/6/16
+
+Assignment 1 marks are coming out tonight. Suggestions for future assignments: if it's in quote marks, it should be a verbatim quote; if it's not in quotation marks, make sure to really write it in your own words. Always ackknowledge the source of ideas if they aren't your own. Make sure that objections address some part of the actual argument - often, it's helpful to restate the relevant part of the author's argument to make this clearer.
+
+Assignment 2 will be posted on Wednesday. It's due on July 4.
+
+Why is the language of mathematics so applicable and appropriate for the sciences? Eugene Wigner proposed this question in 1960, in "The Unreasonable Effectiveness of Mathematics in the Natural Sciences". For example, why does pi, which was defined for use with the properties of circles, appear in the definition of the Guassian distribution, even though it has nothing to do with cirles?
+
+In other words, why is mathematics so effective a language for doing physics, even though mathematics is done independently of physics?
+
+According to Wigner, the main activity of mathematics is to invent new concepts, and mathemeticians tend to focus on concepts that are inbteresting and beautiful. Elementary math can be derived from experience, like geometry by looking a the real world, and addition from putting things together. But it is likely that nobody has ever experienced a complex number or a Borel set.
+
+Math is essential to physics - we can't even formulate most theories in physics without mathematical concepts. Additionally, these mathematical theories often give us high quality, accurate predictions about the world based on the mathematics, despite math being done independently of the sciences. So why does the world seem to match mathematics so well? Why does the world work in a regular, seemingly rule-based way?
+
+Steiner adds that there are different ways mathematics can be essential to physics - formulating theories, making discoveries, and so on. According to Steiner, the actual puzzle is why discovering things in mathematics often corresponds to discovering things in physics.
+
+Steiner also says that this puzzle challenges naturalism (the idea that our minds work in a way not attuned to the way the world works), since if naturalism was the case, then we would expect mathematics to not be so effective.
+
+One answer to this puzzle is that the effectiveness is simply coincidence: math is making a huge number of ideas and predictions, and one would expect that at least some of them would be highly accurate. Another is that it wouldn't be possible to do science or make discoveries at all if the world didn't correspond to the mathematics, or that we just wouldn't discover things we didn't have the mathematics to describe.
+
+According to Colyvan, the puzzle of mathematics being unreasonably effective (also known as the **applicability problem**) is only really a puzzle in the formalist philosophy of math, not in most others. Formalist mathematical philosophy is a philosophy in which mathematics is a game played with symbols. The applicability problem is only really a problem because a game of symbols would not be expected to make accurate predictions about the world.
+
+Under scientific realism, if our theories say there are electrons, there are actually electrons out in the world, and it's reasonable to expect electrons exist since all of our observations act as if they do. However, Colyvan says we can't make the same argument about mathematical objects like sets, because the presence/absence of mathematical objects doesn't have any effect on what we observe. Therefore, the applicability problem is still a problem under mathematical realism.
+
+Under scientific anti-realism/fictionalism, electrons are just a convenient name for something that does what our theories say electrons do. According to Colyvan, however, scientific concepts like electorns are only effective at explaining the world because the underlying phenomena are still causing the effects. In contrast, mathematics doesn't have any of these causal powers, so while it's reaosnable to expect it to be able to explain the world (we might've written mathematics to resemble the world), it's still not reasonable for it to hel pus discover or predict things, because mathematical objects have no causal effects - sets don't cause anything to change in the world. Therefore, the applicability problem is still a problem under mathematical anti-realism.
+
