@@ -238,3 +238,32 @@ Under scientific realism, if our theories say there are electrons, there are act
 
 Under scientific anti-realism/fictionalism, electrons are just a convenient name for something that does what our theories say electrons do. According to Colyvan, however, scientific concepts like electorns are only effective at explaining the world because the underlying phenomena are still causing the effects. In contrast, mathematics doesn't have any of these causal powers, so while it's reaosnable to expect it to be able to explain the world (we might've written mathematics to resemble the world), it's still not reasonable for it to hel pus discover or predict things, because mathematical objects have no causal effects - sets don't cause anything to change in the world. Therefore, the applicability problem is still a problem under mathematical anti-realism.
 
+# 27/6/16
+
+What is a proof?
+
+Recall that a valid argument is one where the premises being true means that the conclusion is definitely true, while an inductively strong one one means that the conclusion is likely to be true.
+
+One view is that a proof is a valid argument. In mathematics, every proof can be said to be "if the axioms of the domain of our proof are true, then X is also true" - an argument where the axioms are the premises (or contained in subarguments), and the thing being proved is the conclusion.
+
+It seems like there is also another requirement for what makes a proof good - it has to **demonstrate its own validity**. The gap between premises and a conclusion needs to be small enough that humans can easily check validity. Intuitively, a proof must break a big gap into a smaller one.
+
+Accoding to Locke, a demonstration of an idea being in agreement/disagreement with another is a constant, visible, immutable connection between the two. In other words, if we can stick ideas between two ideas such that they link up to connect the two ideas, then we can demonstrate whether they are in agreement or disagreement. Locke says that a probability is an appearance of agreement/disagreement, though the connection might not be constant/immutable.
+
+According to Guass, a proof is something that makes every doubt about a statement impossible - proofs are linked to certainty. Under this view, since empirical knowledge isn't certain, empirical knowledge cannot be used in proofs. This differs from Hume's problem of induction in that Hume says there's no rational grounds for believing unobserved events resemble observed events (we can't rationally prove that the future resembles the past - induction must be used to justify induction), while this says that all events, even those we observe, are not for certain (we can't trust our observations for sure, in general). Science accepts that it doesn't produce certain knowledge, so **proofs must be a priori**.
+
+The conventionalist view is that we have intuitive, a priori knowledge of some basic truths, and proofs extend our knowledge from there. In mathematics, we might consider that intuitive knowledge to be axioms, which we simply accept are true. Without this intuitive knowledge, however, we could still have conditional knowledge of things, like "if we knew X was true, then Y is also true".
+
+According to Descartes, a proof must be something that we can hold entirely in our minds at once - proofs should be surveyable, with every single part included in a single sweep of thought. If we can't hold the whole thing in our minds, there is room for doubt to creep in.
+
+Recall the mathematical monsters from a few classes ago - the convincing, widely published proofs that were later disproved by simple counterexamples. The issue was that a convincing proof isn't necessarily a correct one. Where Descartes and Locke relied on visualizing arbitrary connections between ideas, Frege invented **concept script**, which defined a set of connections that are always guaranteed to be valid. This concept script was the beginning of modern formal logic, though it looks quite different from how it looks now.
+
+Concept scripts allow us to make **formal proofs**, as opposed to normal proofs. All systems that can generate formal proofs must have a rigorous formal language for claims to be made in, and a small set of inference rules/axioms that can be easily seen to be correct. The goal is to make sure the conclusion is close enough to the premises that we can guarantee that there is no logical gap between them.
+
+Note that the actual proofs we see in the real world, even mathematical ones, often aren't formal proofs. Some might be impractical to make formalized (formal proofs are often very long for anything non-trivial), or some might be pictoral/graphical proofs. Many philosophers think that all correct proofs must have a corresponding formal proof (except practical reasons mean we often don't try to write one), though some constructivists disagree.
+
+Before Andrew Wiles proved Fermat's Last Theorem, it was provable, but not proven. It became proven after Wiles wrote the proof. However, there are definitely things that are provable but will never be proven - for example, proofs that have steps like "list all the prime numbers", or steps that would take an impractically long time. Most real proofs have logical gaps in them - leaps of logic where we generally decide to just make the leap.
+
+When our real-world proofs have this sort of impossible step, we seem to really be telling how a hypothetical mathematician with infinite time and resources how to construct the proof. In other words, **we're giving a proof that there is a proof of something**, which is logically equivalent to a proof of that thing in the first place. An interesting example of this is the computational proof of the four-color theorem. This theorem was proved with the help of a computer, but the resulting proof is far too long for any human beings to read or understand. We could think of the computer program that generated the proof as a "proof that there is a proof for the four-color theorem", but we can't directly verify or find the proof itself in any practical way.
+
+One criticism of the four-color theorem proof is that the operation of computers is only empirical knowledge - whatever the output of a computer is, its output is empirical, and therefore not certain. The program might have bugs in it, or the hardware might even have errors (for example, the Pentium division bug). That said, most mathematicians think the four-color theorem is proved.
