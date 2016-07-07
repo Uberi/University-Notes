@@ -164,7 +164,7 @@ One way we can resolve this is by saying that the 3 isn't the abstract quantity 
 
 Generalizing, one way of constructing numbers might say "3 is a member of 7", while another way might say "7 is a member of 3". For any way of constructing numbers, as Benacerraf says, there's another way that will result in contradictory results.
 
-In fact, according to Benaceraff, numbers are not objects at all - **numbers are are places within a certain structure**. As a result, asking questions about number identity doesn't make sense, since they're not actually things that have identity, just a part of a progression of structure - **structuralism**. For example, what says that $0.9999\ldots = 1$, if each unique number is a distinct objects? If they were positions within a structure, then we could say they are equal because they have the same position within the structure.
+In fact, according to Benaceraff, numbers are not objects at all - **numbers are places within a certain structure**. As a result, asking questions about number identity doesn't make sense, since they're not actually things that have identity, just a part of a progression of structure - **structuralism**. For example, what says that $0.9999\ldots = 1$, if each unique number is a distinct objects? If they were positions within a structure, then we could say they are equal because they have the same position within the structure.
 
 One issue with structuralism is that it addresses higher-level problems than what we're dealing with - how can we talk about identity if we don't know the nature of what we're trying to determine the identity of?
 
@@ -267,3 +267,24 @@ Before Andrew Wiles proved Fermat's Last Theorem, it was provable, but not prove
 When our real-world proofs have this sort of impossible step, we seem to really be telling how a hypothetical mathematician with infinite time and resources how to construct the proof. In other words, **we're giving a proof that there is a proof of something**, which is logically equivalent to a proof of that thing in the first place. An interesting example of this is the computational proof of the four-color theorem. This theorem was proved with the help of a computer, but the resulting proof is far too long for any human beings to read or understand. We could think of the computer program that generated the proof as a "proof that there is a proof for the four-color theorem", but we can't directly verify or find the proof itself in any practical way.
 
 One criticism of the four-color theorem proof is that the operation of computers is only empirical knowledge - whatever the output of a computer is, its output is empirical, and therefore not certain. The program might have bugs in it, or the hardware might even have errors (for example, the Pentium division bug). That said, most mathematicians think the four-color theorem is proved.
+
+# 4/7/16
+
+Test 2 coming up next week, in the same format as the first test. I'm writing in RCH308, starts 6:30 and lasts 1 hour.
+
+Mathematical Pluralism
+----------------------
+
+Political pluralism in a society is when there is no fact of the matter, and it is possible to freely criticise other views. In scientific pluralism, there are competing scientific theories, and any of them might be correct. Pluralism in general is about values/morality.
+
+Pluralism about mathematics is when there are multiple competing accounts of mathematics, any of which might be true. This is an unusual problem because mathematics is the domain of absolute truth, with no room for other opinions.
+
+To defend mathematical pluralism, we must first show that pluralism is a reasonable idea - that there could be more than one account of mathematics in an interesting and non-trivial way. Then, we must show that there are actually multiple accounts of mathematics. By interesting, we mean that it's not immediately obvious whether there could be more than one account, and by non-trivial, we mean that it's not just having more than one account in a degenerate way, like when there's multiple accounts by having one account be a subset of another.
+
+For example, Martin Davies argues that constructivist (construct an example of something to prove it exists) and classical math (just prove it exists, without necessarily having to produce an example) both have their place - while constructivist math is more informative, classical mathematics can work on more cases. While this can be considered pluralism, it's not interesting pluralism, because all mathematicians are already aware of it, and those two accounts of math don't really seem all that different.
+
+Under Carnap's model, disagreements can only really happen within a model - if claims in different languages seem to disagree, it is only because they're both in different languages, using the same symbols to say different things.
+
+Longino compares mathematical plurality to scientific plurality. According to Longino, plurality about something is when there are several ineliminable theories about that thing - when multiple theories are required to account for different aspects of a single, complex reality. Ineliminability might be that any two of the theories can't be unified, or they focus on or explain different things. For example, nowadays we know Newtonian mechanics to be false, but we still keep it alongside relativity because it's more practical for many purposes, while relativity is needed for other purposes.
+
+;wip
