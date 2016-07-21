@@ -65,7 +65,7 @@ One view is that the difference between discovery and creation is the way that t
 
 An argument is a set of claims, one of which, the conclusion is defended  by the others, the premises.If you have a valid argument, then to refute the argument, you must first refute the premises.
 
-An arguzment is cogent if the premises support the conclusion, and it's reasonable to believe the premises. By support, we mean that the premises imply that the conclusion is likely (not necessarily that the premises imply that the conclusion is in fact true). When we evaluate philisophical views, we need to evaluate whether the arguments for it are cogent.
+An argument is cogent if the premises support the conclusion, and it's reasonable to believe the premises. By support, we mean that the premises imply that the conclusion is likely (not necessarily that the premises imply that the conclusion is in fact true). When we evaluate philisophical views, we need to evaluate whether the arguments for it are cogent.
 
 Sometimes, a premise isn't reasonably believable by itself. In these cases, we can still make the argument cogent by supprting the premise with a subargument.
 
@@ -158,7 +158,7 @@ In naive set theory, a set is the collection of all distinct items that satisfy 
 
 Benacerraf concludes that since there are multiple different ways to construct numbers using sets, none of them can be correct - how can 2 be both the representation in one way of constructing sets, but also a different representation in another way of constructing sets? For example, 3 could be represented in sets as $\set{0, 1, 2}$ or $\set{2}$, but $\set{0, 1, 2}$ does not equal $\set{2}$.
 
-Benacerraf is a realist about mathematics - this argument is only the case because we believe that numbers actually exist.
+Benacerraf is a realist about mathematics - this conclusion is only an issue because we believe that numbers actually exist.
 
 One way we can resolve this is by saying that the 3 isn't the abstract quantity 3, but actually $\set{2} = 3_{\text{in this particular way of constructing sets}}$. Alternatively, we could say that "this set represents so-and-so number" is actually a special operator, so actually $\set{2} =_{\text{represents in this particular way of constructing sets}} 3$. However, if we do this, it's no longer reduction, and we can't say we've really reduced numbers into set theory.
 
@@ -184,9 +184,9 @@ According to Carnap, these deeper ontological questions are meaningless and misg
 
 Quine criticizes this by saying the distinction between internal and external questions is meaningless due to the analytical/synthetic distinction not being meaningful (see above). According to Quine, we should answer ontological questions by doing science, and assuming that the things our best theories tell us exist, actually exist.
 
-Yablo also thinks that these deep ontological questions are misguided, but he has a different explanations for why they are meaningless. He tries to refute quine and make the distinction between internal and external questions meaningful again.
+Yablo also thinks that these deep ontological questions are misguided, but he has a different explanations for why they are meaningless. He tries to refute Quine and make the distinction between internal and external questions meaningful again.
 
-What makes it true that metal expands when it's heated? What makes newtonian mechanics "true" in many situations, even though it doesn't predict reality? Sometimes, according to Quine, scientific claims are literal, and other times, non-literal. It follows that we should seek to increase the literal claims an reduce the non-literal one.
+What makes it true that metal expands when it's heated? What makes Newtonian mechanics "true" in many situations, even though it doesn't predict reality? Sometimes, according to Quine, scientific claims are literal, and other times, non-literal. It follows that we should seek to increase the literal claims an reduce the non-literal one.
 
 Yablo says that there's also no real principled distinction between literal and non-literal claims. For example, what kind of scientific theory is needed to tell us that cities exist? Why is it harder for a scientific theory to say cities to exist than, say, electrons? According to Yablo, it's obvious that there are cities, because we can live in them, but it's meaningless to ask if there are "really" cities. If the latter was a meaningful question, then there would be a literal/non-literal distinction, since we could non-literally say that cities exist, while literally we would have a totally different question.
 
@@ -200,13 +200,13 @@ People used to believe the earth was flat, but now we believe it is round. Shoul
 
 According to redundancy theory, the concept of true is a linguistic convenience, and doesn't actually exist. Saying "X is true" is the same thing as saying "X", so isn't really a useful, real thing. Other theories say things like true sentences being the ones that fit in the largest self-consistent web of facts, or the ones that fit in with the world after we've hypothetically obtained all possible evidence.
 
-According to Benacerraf, all satisfactory accounts of mathematical truth must mesh properly with a satisfactory theory of meaning and must explain how we have mathematical knowledge. Also, existing accounts of mathematcal truth don't satisfy both of those criteria - those that mesh with a satisfactory theory of meaning don't explain mathematical knowledge, and vice versa. Therefore, Benacerraf says, there are no existing satisfactory accounts of mathematical truth. This is a valid argument (modus tollens), but is it sound?
+According to Benacerraf, all satisfactory accounts of mathematical truth must mesh properly with a satisfactory theory of meaning and must explain how we have mathematical knowledge. Also, existing accounts of mathematical truth don't satisfy both of those criteria - those that mesh with a satisfactory theory of meaning don't explain mathematical knowledge, and vice versa. Therefore, Benacerraf says, there are no existing satisfactory accounts of mathematical truth. This is a valid argument (modus tollens), but is it sound?
 
-Why must a satisfactory account of mathematical truth mesh properly with a satisfactory theory of meaning? Benaceraff argues that this is necessary since the entire language, excluding mathematics, mesh well with a satisfactory theory of meaning, so mathematics should as well. If it doesn't, then it's difficult to explain how math and the rest of the language interact.
+Why must a satisfactory account of mathematical truth mesh properly with a satisfactory theory of meaning? Benaceraff argues that this is necessary since the entire language, excluding mathematics, meshes well with a satisfactory theory of meaning, so mathematics should as well. If it doesn't, then it's difficult to explain how math and the rest of the language interact.
 
 Why must a satisfactory account of mathematical truth explain how we have mathematical knowledge? Well, Benaceraff says, we do have mathematical knowledge, so any theory must be able to explain how truth leads to knowledge.
 
-Why don't theories that mesh with a satisfactory theory of meaning explain mathematical knowledge? If we accept the standard view of knowledge as justified true belief, then we will have a lot of issues with philisophical aspects of theories of mening. On the other hand, if we don't, then we can't satisfactorily explain mathematical knowledge.
+Why don't theories that mesh with a satisfactory theory of meaning explain mathematical knowledge? If we accept the standard view of knowledge as justified true belief, then we will have a lot of issues with philisophical aspects of theories of meaning. On the other hand, if we don't, then we can't satisfactorily explain mathematical knowledge.
 
 Why don't theories that explain mathematical knowledge mesh with satisfactory theories of meaning? Well, mathematical knowledge is acquired by proof, so knowledge can only be obtained for things that can be proved. Theories of mathematical truth based on epistemology are called combinatorial theories, like those that are based off building things from axioms, constructivism, and so on. Since truth is provability, we must stand in the right causal relationship to truth when we read a proof.
 
@@ -222,7 +222,7 @@ Why is the language of mathematics so applicable and appropriate for the science
 
 In other words, why is mathematics so effective a language for doing physics, even though mathematics is done independently of physics?
 
-According to Wigner, the main activity of mathematics is to invent new concepts, and mathemeticians tend to focus on concepts that are inbteresting and beautiful. Elementary math can be derived from experience, like geometry by looking a the real world, and addition from putting things together. But it is likely that nobody has ever experienced a complex number or a Borel set.
+According to Wigner, the main activity of mathematics is to invent new concepts, and mathemeticians tend to focus on concepts that are interesting and beautiful. Elementary math can be derived from experience, like geometry from looking a the real world, and addition from putting things together. But it is likely that nobody has ever experienced a complex number or a Borel set.
 
 Math is essential to physics - we can't even formulate most theories in physics without mathematical concepts. Additionally, these mathematical theories often give us high quality, accurate predictions about the world based on the mathematics, despite math being done independently of the sciences. So why does the world seem to match mathematics so well? Why does the world work in a regular, seemingly rule-based way?
 
@@ -236,7 +236,7 @@ According to Colyvan, the puzzle of mathematics being unreasonably effective (al
 
 Under scientific realism, if our theories say there are electrons, there are actually electrons out in the world, and it's reasonable to expect electrons exist since all of our observations act as if they do. However, Colyvan says we can't make the same argument about mathematical objects like sets, because the presence/absence of mathematical objects doesn't have any effect on what we observe. Therefore, the applicability problem is still a problem under mathematical realism.
 
-Under scientific anti-realism/fictionalism, electrons are just a convenient name for something that does what our theories say electrons do. According to Colyvan, however, scientific concepts like electorns are only effective at explaining the world because the underlying phenomena are still causing the effects. In contrast, mathematics doesn't have any of these causal powers, so while it's reaosnable to expect it to be able to explain the world (we might've written mathematics to resemble the world), it's still not reasonable for it to hel pus discover or predict things, because mathematical objects have no causal effects - sets don't cause anything to change in the world. Therefore, the applicability problem is still a problem under mathematical anti-realism.
+Under scientific anti-realism/fictionalism, electrons are just a convenient name for something that does what our theories say electrons do. According to Colyvan, however, scientific concepts like electorns are only effective at explaining the world because the underlying phenomena are still causing the effects. In contrast, mathematics doesn't have any of these causal powers, so while it's reaosnable to expect it to be able to explain the world (we might've written mathematics to resemble the world), it's still not reasonable for it to help us discover or predict things, because mathematical objects have no causal effects - sets existing or not existing doesn't cause anything to change in the world. Therefore, the applicability problem is still a problem under mathematical anti-realism.
 
 # 27/6/16
 
@@ -264,7 +264,7 @@ Note that the actual proofs we see in the real world, even mathematical ones, of
 
 Before Andrew Wiles proved Fermat's Last Theorem, it was provable, but not proven. It became proven after Wiles wrote the proof. However, there are definitely things that are provable but will never be proven - for example, proofs that have steps like "list all the prime numbers", or steps that would take an impractically long time. Most real proofs have logical gaps in them - leaps of logic where we generally decide to just make the leap.
 
-When our real-world proofs have this sort of impossible step, we seem to really be telling how a hypothetical mathematician with infinite time and resources how to construct the proof. In other words, **we're giving a proof that there is a proof of something**, which is logically equivalent to a proof of that thing in the first place. An interesting example of this is the computational proof of the four-color theorem. This theorem was proved with the help of a computer, but the resulting proof is far too long for any human beings to read or understand. We could think of the computer program that generated the proof as a "proof that there is a proof for the four-color theorem", but we can't directly verify or find the proof itself in any practical way.
+When our real-world proofs have this sort of impossible step, we seem to really be telling how a hypothetical mathematician with infinite time and resources how to construct the proof. In other words, **we're giving a proof that there is a proof of something**, which is logically equivalent to a proof of that thing in the first place. An interesting example of this is the computational proof of the four-color theorem. This theorem was proved with the help of a computer, but the resulting proof is far too long for any human being to read or understand. We could think of the computer program that generated the proof as a "proof that there is a proof for the four-color theorem", but we can't directly verify or find the proof itself in any practical way.
 
 One criticism of the four-color theorem proof is that the operation of computers is only empirical knowledge - whatever the output of a computer is, its output is empirical, and therefore not certain. The program might have bugs in it, or the hardware might even have errors (for example, the Pentium division bug). That said, most mathematicians think the four-color theorem is proved.
 
@@ -283,8 +283,88 @@ To defend mathematical pluralism, we must first show that pluralism is a reasona
 
 For example, Martin Davies argues that constructivist (construct an example of something to prove it exists) and classical math (just prove it exists, without necessarily having to produce an example) both have their place - while constructivist math is more informative, classical mathematics can work on more cases. While this can be considered pluralism, it's not interesting pluralism, because all mathematicians are already aware of it, and those two accounts of math don't really seem all that different.
 
-Under Carnap's model, disagreements can only really happen within a model - if claims in different languages seem to disagree, it is only because they're both in different languages, using the same symbols to say different things.
+Under Carnap's model, mathematical disagreements can only really happen within a mathematical model - if claims in different languages seem to disagree, it is only because they're both in different languages, using the same symbols to say different things.
 
 Longino compares mathematical plurality to scientific plurality. According to Longino, plurality about something is when there are several ineliminable theories about that thing - when multiple theories are required to account for different aspects of a single, complex reality. Ineliminability might be that any two of the theories can't be unified, or they focus on or explain different things. For example, nowadays we know Newtonian mechanics to be false, but we still keep it alongside relativity because it's more practical for many purposes, while relativity is needed for other purposes.
 
 ;wip
+
+# 11/7/16
+
+Assignment 2 should be marked by next Monday.
+
+Mathematical Beauty
+-------------------
+
+Beauty in mathematics is often considered to be the quality of being elegant, simple, or efficient. Math seems to really be more like an art than a science, so beauty seems to play an important role in deciding what mathematics to do.
+
+Plato characterized mathematical beauty as different from conventional beauty in that it's absolute and eternal. Mathematical beauty seems to have something to do with being eternal, being rigorous, 
+
+Mathematician seems to think beauty is important for determining what to investigate and accept as correct, and that beauty is a "I'll know it when I see it" quality.
+
+Moore rewords Quine's indispensability argument (an argument for mathematical realism) using the idea that information is knowledge if and only if it improves understanding/predictability of sense experience (empiricism), the idea that science is the only way to get empirical knowledge (naturalism), the idea that hypotheses can only be tested together, not individually (holism), and the idea that we should say entities exist if and only if they are indispensible to scientific theories (indispensibility criterion).
+
+Moore says that if we assume empiricism, naturalism, holism, and the indispensibility criterion, then mathematics is indispensible to science. This is the Occamite account of mathematics.
+
+However, Moore mentions two cases where mathematical practice doesn't seem to follow Ockhamism. One is the search for new axioms that allow the continuum hypothesis to be proven - mathematicians seem to be looking for axioms that have beautiful consequences, rather than ones we know are true. As a result, mathematics doesn't seem to be about empirical knowledge at all, since it's not scientific and, according to naturalism, science is the only way to get empirical knowledge.
+
+These objections seem to be an argument against mathematical realism, since if we're a realist, then mathematics must be scientific, and it isn't if science is empirical and math isn't. So we must either accept that science isn't empirical, math is empirical, or accept mathematical anti-realism. Since mathematics is guided by beauty, it can't really be empirical, so if we're realists, we must explain how science isn't empirical.
+
+However, the anti-realist must also account for how mathematics and science benefit from being separate if mathematics doesn't even deal with empirical knowledge. Moore's point is to build a better framework for how realism indispensibility arguments should be constructed.
+
+# 18/7/16
+
+Final exam on Saturday August 6, 12:30pm to 3:00pm in RCH 307. Assignment 2 marks should be out tonight.
+
+Physicalism
+-----------
+
+Russel's paradox showed us that previously, our mathematical knowledge is flawed because it wasn't based on a solid foundation. As a result, mathematicians developed axiomatic set theories, and built the rest of mathematics on top of that. Under this view, everything we talk about in math ultimately are abstractions over sets, and if we have a solid set theory, we have a solid foundation for everything else. Also, if we're realists about sets, this means that we're realists about the rest of mathematics as well.
+
+Benacerraf said that philosophies of mathematics fall into two categories. One is realist theories explaining what mathematical statements mean, but have epistemological problems. The other is combinatorial theories that can correctly explain why mathematicians do what they do, but can't explain what mathematical statements mean.
+
+Maddy says that it is indeed possible to have both a satisfactory theory of meaning and explain how math works in the real world - we can indeed have a realist theory explaning what statements mean without epistemological problsm. She does this by showing we can have causal interactions with some sets.
+
+How does the word "Aristotle" become the philosopher in the listener's mind? This is the **naming problem**. An old explanation for this is the **description account of names**, which says that every word has a fixed, specific definition referring to a thing in the world, in this case the philosopher. However, the word might have different definitions to different people, or the definition might point to a different thing in the world in light of new evidence.
+
+If it was found that the person we always thought of as Aristotle actually didn't write his ethics book, and it was actually written by a ghost writer, and we defined Aristotle as "the person who wrote the ethics book", then it seems like the word must afterwards refer to the ghost writer instead. Then something like Pythias, which we might define as "wife of Aristotle", would no longer exist. This seems somewhat problematic, since we would expect to say that Aristotle didn't actually write the books attributed to him, not that Pythias stopped existing. Therefore, the description theory seems to be wrong.
+
+The way we normally use descriptions doesn't seem to be rigid - they might not refer to a unique object in the world, or refer to different objects under different circumstances. Therefore, descriptions don't really seem to be a good explanation for how names refer to objects. Kripke says that in order to work with proper names like Aristotle, descriptions really must be rigid, since they must always refer to the same object in the world in all circumstances.
+
+The Causal/Putnam theory of reference is another approach. In this account, names are attached to an object in the world in an event called a baptism (for example, talking to someone who knows the name, from whom you hear it for the first time). Each subsequent use of the name refers to the object the person or text we learned it from is referring to, as a sort of causal chain. In other words, when we say "Aristotle", we actually refer to the object referred to by the people who taught us the word, and those people are referring to the object referred to by the people who taught them the word, all the way until the first person who baptized the name.
+
+This is nice because it explains how we can have highly mistaken beliefs about objects, like Aristotle referring to the writer of the book even if they never wrote any books.
+
+The causal theory of reference put essential properties in the philisophical vogue again. Essential/necessary properties are the properties of an object that determine that object's identity (i.e., what makes Aristotle himself?), as opposed to accidental properties. If there is a universe with a person identical to Aristotle, but that person didn't actually write any books, we would probably still call that person Aristotle. However, if there is a universe with Aristotle being a goat, we probably wouldn't call that goat Aristotle. We might say that to be called Aristotle, the object must be a sentient being, named Aristotle, who performed philosophy in some way.
+
+This is somewhat related to the Ship of Theseus problem - the identity of the ship would be based on the essential properties of the ship, and arguably ships have no essential properties. Whether people have essential properties is still up for debate.
+
+Quine disagrees with the existance of essential properties for people - he says that two-leggedness is an essential property for people as cyclists, yet not for two-leggedness for people as philosophers.
+
+Maddy for some reason introduces kinds of kinds to help explain essential properties of people. For example, gold and water are both kinds of things, and home runs and bachelors are both kinds of things, but gold and water seem to be different kinds of kinds of things than bachelors and home runs, perhaps because one kind of kinds describes physical matter, while the other kind of kinds describes social constructs.
+
+Maddy says that there are natural kinds (e.g., water and gold), arbitrary groupings (e.g., the contents of my pockets), and cultural kinds (e.g. bachelors, home runs).  Natural kinds are distinguished by things that are defined in our best scientific theories. According to Maddy, the causal theory of reference also applies to kinds and explain how kinds are associated to sorts of things in the real world. Basically, kinds are associated with sorts of things in an event known as baptism, and later references to that kind refer to the sort of thing that the kind referred to upon us learning it or baptizing it.
+
+This is nice because it exaplins how we can be wrong about kinds yet still refer to kinds in the real world - we can call whales a kind of fish, and people will still understand what sort of thing whales are even after discovering that whales are mammals, not fish. Baptism, even if originally wrong about whether something is a kind or not, can convey meaning about what sort of thing we mean.
+
+Putnam says that definitions are not just what we hold in our head. If you see a material that looks and behaves in every way like water, but is chemically different, we would be wrong to call it water. This is an externalist account of meaning.
+
+Justified true belief is the standard way we define knowledge, but we know from Gettier cases that that definition isn't always enough. According to Maddy, knowledge additionally requires that the justification for knowledge must also be the result of a causal chain between the knowledge obtainer and the original knowledge knower. This is the causal theory of knowledge.
+
+Benacerraf approaches the problem of naming mostly from theories of knowledge, while Maddy approaches using theories of meaning. Benacerraf says that realist accounts of mathematics have epistemological problems because mathematical objects aren't located in the world, so don't have causal interactions. However, if the causal theory of knowledge is true, and the causal theory of reference is true, then we can't refer to mathematical objects at all because we need a causal chain in order to refer to things, and mathematical objects can't be a part of causal chains.
+
+According to Maddy, it is actually possible to refer to mathematical objects. She fills out Godel's ideas about mathematical realism to make a full argument for being able to refer to sets, form perceptual beliefs about sets, and have knowledge about sets. Godel's idea is that axioms in math are analogous to scientific laws, in that they organize mathematics just as scientific laws organize the world. Scientific laws can be evaluated against the real world for accuracy, but not for math, because there's no mathematical equivalent of empirical perception. However, Godel's point is that mathematical intuition is the equivalent of perception - we can evaluate axioms against out intuitions to see if they're true.
+
+Maddy lays out the argument as follows:
+
+* The person empirically perceieves something somewhere if and only if there actually is that thing there, and obtains perceptual beliefs (beliefs obtained via perception) about that thing being there, and the thing is directly involved in the formation of these perceptual beliefs.
+* The person can't form a perceptual belief if they don't have the necessary concepts to have that belief - you can't have a belief that you saw a sparrow if you don't know what a sparrow is, and we can't perceive a triangle unless we know what a triangle is.
+* Experimental evidence suggests that we aren't born with the concept of physical objects that keep existing when we can't see them, so we can't start off perceiving physical objects. Instead, we gradually develop the right structures in our brain, object detectors, to have that concept, so we can start forming perceptual beliefs about objects. Therefore, perceptual beliefs come from a causal process, and we have to develop it over time.
+* Just as we form object detectors and triangle detectors in our brains, Maddy says we also develop set detectors in our brain sometime later in our development, therefore allowing us to have the concept of sets, and therefore allowing us to have perceptual beliefs about sets.
+* Therefore, if we are realists about mathematics, we can perceive sets. If we see a dozen eggs in a carton, we can say those eggs are the set, and are directly involved in forming perceptual beliefs about that set of eggs - we can perceive a set of eggs directly, and therefore can indeed have knowledge about mathematical objects.
+
+To defend against obvious objections, Maddy says that a set of physical objects is indeed located in space and time, and it must be a set, not a physical aggregation, because physical aggregates don't really have numerical properties. Maddy, with this argument, answers Benacerraf's question of how we can perceive sets. Also, it answers how we can refer to sets, because it shows that we have sets be part of a causal chain for referring to things.
+
+How does perception of sets of physical things let us know things about sets of non-physical objects like sets of sets or sets of numbers? Well, Maddy says, if sets are a kind, then sets can have essential properties that must apply to all sets, and we can use mathematical intuition to evaluate whether any properties are essential properties and justify our knowledge. Therefore, Maddy says we can be realists and explain what mathematical statements mean, without any epistemological issues, answering Benacerraf's challenge.
+
+Some examples of these essential properties might be "any quantity of things can be collected into a set", or "for any two objects, there is a set containing them". We can baptize sets using sets of physical objects, and then use a causal chain of references to be able to refer to all other sorts of sets. Another interesting consequence of Maddy's view is that axioms can actually be falsified by observations.
