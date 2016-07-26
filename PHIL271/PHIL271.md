@@ -256,7 +256,7 @@ The conventionalist view is that we have intuitive, a priori knowledge of some b
 
 According to Descartes, a proof must be something that we can hold entirely in our minds at once - proofs should be surveyable, with every single part included in a single sweep of thought. If we can't hold the whole thing in our minds, there is room for doubt to creep in.
 
-Recall the mathematical monsters from a few classes ago - the convincing, widely published proofs that were later disproved by simple counterexamples. The issue was that a convincing proof isn't necessarily a correct one. Where Descartes and Locke relied on visualizing arbitrary connections between ideas, Frege invented **concept script**, which defined a set of connections that are always guaranteed to be valid. This concept script was the beginning of modern formal logic, though it looks quite different from how it looks now.
+Recall the mathematical monsters from a few classes ago - convincing, widely published proofs that were later disproved by simple counterexamples. The issue was that a convincing proof isn't necessarily a correct one. Where Descartes and Locke relied on visualizing arbitrary connections between ideas, Frege invented **concept script**, which defined a set of connections that are always guaranteed to be valid. This concept script was the beginning of modern formal logic, though it looks quite different from how it looks now.
 
 Concept scripts allow us to make **formal proofs**, as opposed to normal proofs. All systems that can generate formal proofs must have a rigorous formal language for claims to be made in, and a small set of inference rules/axioms that can be easily seen to be correct. The goal is to make sure the conclusion is close enough to the premises that we can guarantee that there is no logical gap between them.
 
@@ -368,3 +368,32 @@ To defend against obvious objections, Maddy says that a set of physical objects 
 How does perception of sets of physical things let us know things about sets of non-physical objects like sets of sets or sets of numbers? Well, Maddy says, if sets are a kind, then sets can have essential properties that must apply to all sets, and we can use mathematical intuition to evaluate whether any properties are essential properties and justify our knowledge. Therefore, Maddy says we can be realists and explain what mathematical statements mean, without any epistemological issues, answering Benacerraf's challenge.
 
 Some examples of these essential properties might be "any quantity of things can be collected into a set", or "for any two objects, there is a set containing them". We can baptize sets using sets of physical objects, and then use a causal chain of references to be able to refer to all other sorts of sets. Another interesting consequence of Maddy's view is that axioms can actually be falsified by observations.
+
+# 25/7/16
+
+Categories and structure
+------------------------
+
+Category theory is a field of mathematics with strong philisophical foundations.
+
+In Poincare's time, there were mathematical monsters: proofs that seemed valid, but were shown to be invalid with simple counterexamples. Poincare and Hilbert wanted to really write indisputable proofs - proofs that cannot have counterexamples. To do this, they started the rigorization movement, which tries to formalize and rigorize all of mathematics. This resulted in Cantor's set theory, in which we define all our different mathematical objects in terms of sets. By grounding our concepts in set theory, we just need to show that set theory is correct and we'll know everything else is as well.
+
+However, Russel's Paradox (does the set of all sets that don't contain themselves contain itself?) poked some holes in Cantor's set theory. To resolve this, mathematicians introduced type theory, to prevent things like sets being members of themselves. For example, type theory might say that if a set is a member of another set, then that other set must be of a higher type than the first set. This prevents Russel's paradox because it's no longer meaningful to talk about sets containing themselves.
+
+An alternative solution to Russel's paradox is to say that rather than all properties (like "not being a member of itself") defining sets, only some properties can define sets, and we call those properties **axioms**. If we choose the axioms correctly, then we can avoid allowing the set in Russel's paradox. This is known as **axiomatic set theory**, and the most well-known and popular set of axioms for this are the ZFC axioms, still in wide use today. Some axioms define sets by themselves (like the empty set and an infinite set), and others define sets in terms of other sets (like any two sets can be formed into another set containing exactly those two sets, or any subset of a set can be defined using a predicate).
+
+Note that in axiomatic set theory, every property still defines a proper class, but only well-behaved properties (properties that don't lead to paradoxes) define sets - there's a proper class of all sets, but no set of all sets.
+
+However, Godel's incompleteness theorems raised some issues in axiomatic set theory. The second incompleteness theorem says that any axiomatic theory that is strong enough to do arithmetic in can't be used to prove itself to be consistent (in other words, we can't use the theory to prove that it can't prove a contradiction). So we can only prove ZFC is consistent using a stronger theory, like Morse Kelly set theory, which is actually less likely to be consistent (because it can prove more things). Therefore, our confidence in our set theory axioms is mostly derived from the fact that nobody has proved it inconsistent yet.
+
+Traditionally, a set is a collection of unique discrete objects. For our purposes, a set is an unstructured object, and the identity of a set is its contents - any set with the same contents are the exact same set.
+
+Structuralists say that mathematics is the study of structure. For example, number theory is about the structure of numbers, while group theory is about classes of structure. Even though sets are themselves unstructured, we can arrange them to obtain structure. The universe of sets is usually denoted $V$. However, structuralists consider this sort of technique of building numbers out of sets unnatural/artificial. For example, there are many different ways to define natural numbers using sets, but no particular way is obviously the best way - all these different representations are scattered around $V$. Also, structuralists dislike the distinction between identity and equality, like how natural numbers in two different set representations are equal, but not the same.
+
+Category theory is a structuralist attempt to explain what mathematics is about, in terms of how we actually do mathematics. A category is determined by objects, arrows between objects, and some axioms - the category is a collection of objects and the structure between them. The idea is to use categories to study the structure of mathematical objects - how we know two structures are fundamentally the same structure.
+
+In category theory, there's no principled distinction between objects and arrows; for example, the arrows in one category might correspond to objects in the other. The important part of category theory is the form/structure itself.
+
+One criticism of category theory is that it is stronger, so that it's less likely to be consistent. Also, if we try to make mathematical objects out of categories, we end up having to use discrete categories, which are like sets, so it really doesn't have any advantages over just set theory. Bell suggests that category-theoretic set theory is the best way to get the advantages of both set theory and category theory. In other words, the foundation of mathematics should be the category of toposes.
+
+**APPLAUSE**
