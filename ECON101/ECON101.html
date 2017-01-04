@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -43,7 +43,7 @@
     <span class="divider"></span>
     <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
   </ul>
-<p><span class="math">\[
+<p style="display:none"><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
@@ -343,11 +343,11 @@ e |   .....       |      *****
 <li>Values smaller in magnitude than 1 are called <strong>inelastic demand</strong>.</li>
 <li>Values equal in magnitude to 1 are called <strong>unit elastic demand</strong>.</li>
 <li>Values of 0 are called <strong>perfectly inelastic demand</strong>.</li>
-<li>Values of <span class="math">\(\infty\)</span> are called <strong>perfectly elastic demand</strong>.</li>
+<li>Values of <span class="math inline">\(\infty\)</span> are called <strong>perfectly elastic demand</strong>.</li>
 </ul>
 <p>For perfectly inelastic demand, the demand curve is vertical. The quantity demanded is the same regardless of the price. For example, life-saving surguries need to be bought regardless of the price.</p>
 <p>For perfectly elastic demand, the demand curve is horizontal. The quantity demanded is highly dependent on the price. For example, in agriculture markets a slight decrease in price means much more demand.</p>
-<p><span class="math">\[
+<p><span class="math display">\[
 \text{own elasticity} = \frac{\text{% change in demand}}{\text{% change in price}} \\
 \text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
 \text{% change in price} = \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
@@ -369,7 +369,8 @@ e |    Elastic    |      *****
 <p>At low prices, a given change in price is a larger percentage of the average price. Likewise, a given change in demand is a larger percentage of the average demand at lower demand.</p>
 <p>At quantity demanded being 0, there is perfect elasticity. At price being 0, there is perfect inelasticity.</p>
 <blockquote>
-<p>The price of milk increases 2% and the quantity demanded decreases by 0.5%.<br />So the elasticity is <span class="math">\(\frac{-0.5}{2}\)</span>, or <span class="math">\(-\frac{1}{4}\)</span>.</p>
+<p>The price of milk increases 2% and the quantity demanded decreases by 0.5%.<br />
+So the elasticity is <span class="math inline">\(\frac{-0.5}{2}\)</span>, or <span class="math inline">\(-\frac{1}{4}\)</span>.</p>
 </blockquote>
 <p>In general, goods and services that are <strong>necessities or in uncompetitive markets have inelastic demand</strong>, since people need them even if they're expensive.</p>
 <p>In general, goods and services that are <strong>luxuries or in highly competitive markets have elastic demand</strong>, since people have a lot of choice with whether to buy these things.</p>
@@ -398,7 +399,7 @@ e |.                |               .
 <h3 id="cross-price-elasticity-of-demand">Cross price elasticity of demand</h3>
 <p>This measures the effect changes in the price of substitutes and complements on demand.</p>
 <p>Instead of using the percentage change in the price of a good itself, we use the percentage change in the price of a substitute or a complement.</p>
-<p><span class="math">\[
+<p><span class="math display">\[
 \text{cross elasticity} = \frac{\text{% change in demand}}{\text{% change in price of substitute or complement}} \\
 \text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
 \text{% change in price of substitute or complement} = \frac{\text{new price of substitute or complement} - \text{old price of substitute or complement}}{\frac{\text{new price of substitute or complement} + \text{old price of substitute or complement}}{2}} \\
@@ -412,7 +413,7 @@ e |.                |               .
 <h3 id="income-elasticity-of-demand">Income elasticity of demand</h3>
 <p>This measures the effect of changes in income on demand.</p>
 <p>Instead of using the percentage change in the price of a good itself, we use the percentage change in income.</p>
-<p><span class="math">\[
+<p><span class="math display">\[
 \text{income elasticity} = \frac{\text{% change in demand}}{\text{% change in income}} \\
 \text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
 \text{% change in income} = \frac{\text{new income} - \text{old income}}{\frac{\text{new income} + \text{old income}}{2}} \\
@@ -427,7 +428,7 @@ e |.                |               .
 </ul>
 <h2 id="own-price-elasticity-of-supply">Own price elasticity of supply</h2>
 <p>The <strong>elasticity of supply</strong> measures the responsiveness of the quantity supplied to a change in the price of a good, all other influences being constant.</p>
-<p><span class="math">\[
+<p><span class="math display">\[
 \text{own elasticity} = \frac{\text{% change in supply}}{\text{% change in price}} \\
 \text{% change in supply} = \frac{\text{new supply} - \text{old supply}}{\frac{\text{new supply} + \text{old supply}}{2}} \\
 \text{% change in price} = \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
@@ -595,7 +596,7 @@ e |###.....       |      *****
 <p><strong>Marginal utility</strong> is the change in total utility caused by consuming one more unit of a good or service. In other words, it is the benefit received from consuming one more unit of a good or service.</p>
 <p>Marginal utility differs from marginal benefit in that marginal benefit is the price willing to be paid for one more unit, while marginal utility is the benefit itself.</p>
 <p>The <strong>principle of diminishing marginal utility</strong> states that <strong>as quantity consumed increases, the marginal utility eventually decreases</strong>.</p>
-<p><strong>Marginal utility per dollar of a good or service</strong> is the marginal utility from <strong>spending one more dollar</strong> on the good or service. It is equivalent to the marginal utility of a good (<span class="math">\(\mathrm{MU}\)</span>) divided by its price (<span class="math">\(P\)</span>).</p>
+<p><strong>Marginal utility per dollar of a good or service</strong> is the marginal utility from <strong>spending one more dollar</strong> on the good or service. It is equivalent to the marginal utility of a good (<span class="math inline">\(\mathrm{MU}\)</span>) divided by its price (<span class="math inline">\(P\)</span>).</p>
 <h3 id="consumption-possibilities">Consumption possibilities</h3>
 <p>This measures everything that is possible for a consumer to consume, given constraints such as time and money. We can represent it using something similar to the PPF - we call this the <strong>budget line</strong>.</p>
 <p>The budget line shows various combinations that income can be spent on two particular goods or services, everything else remaining the same.</p>
@@ -614,7 +615,7 @@ a |#####################
   |___________________________________
 0               Pizza                ^ 15</code></pre>
 <p>When the spending takes place on the frontier - the budget line - the consumer has <strong>reached the limits of their consumption possibilities</strong>. So the budget line represents the limits of consumption possibilities.</p>
-<p>On the budget line, income (<span class="math">\(M\)</span>) equals expenditure (price of cola * quantity of cola + price of pizza times quantity of pizza - <span class="math">\(p_c x_c + p_p + x_p\)</span>). So <span class="math">\(M = p_c x_c + p_p x_p\)</span>.</p>
+<p>On the budget line, income (<span class="math inline">\(M\)</span>) equals expenditure (price of cola * quantity of cola + price of pizza times quantity of pizza - <span class="math inline">\(p_c x_c + p_p + x_p\)</span>). So <span class="math inline">\(M = p_c x_c + p_p x_p\)</span>.</p>
 <p>Every consumer seeks to make choices that <strong>maximise utility</strong>. To find the total utility in the budget line shown above, we add the utility obtained by the amount of cola and the utility obtained by the amount of pizza.</p>
 <p>When a consumer is spending in a way that maximises utility, the situation is known as <strong>consumer equilibrium</strong>.</p>
 <p>We can find consumer equilibrium by calculating the total utility of every combination and picking the one that results in the highest value.</p>
@@ -628,7 +629,7 @@ a |#####################
 <p>When the marginal utility per dollar of products are equal, it is equally beneficial to spend a dollar on either good. Changing any of the quantities would only reduce the total utility at this point.</p>
 <p>So to maximise utility, we <strong>spend all available income</strong> and <strong>equalize the marginal utility per dollar</strong> of all goods.</p>
 <p>For example, if the price of pizza decreased, its marginal benefit per dollar increases and we would buy more of it to make it equal to the marginal benefits per dollar of other goods.</p>
-<p>Essentially, we want to ensure <span class="math">\(\frac{\mathrm{MU}_\mathrm{pizza}}{\mathrm{P}_\mathrm{pizza}} = \frac{\mathrm{MU}_\mathrm{cola}}{\mathrm{P}_\mathrm{cola}}\)</span>.</p>
+<p>Essentially, we want to ensure <span class="math inline">\(\frac{\mathrm{MU}_\mathrm{pizza}}{\mathrm{P}_\mathrm{pizza}} = \frac{\mathrm{MU}_\mathrm{cola}}{\mathrm{P}_\mathrm{cola}}\)</span>.</p>
 <p>Marginal utility theory helps explain things like the <strong>paradox of value</strong>:</p>
 <blockquote>
 <p>Why are diamonds more expensive than water, even though water is so essential, and diamonds not essential at all?</p>
@@ -653,7 +654,7 @@ a |#####################
 <h1 id="section-6">31/10/13</h1>
 <p>A positive economic profit means that going ahead with the plan earns more than any other possible option.</p>
 <pre><code>AccountingCost = Wage*Labour + CapitalCost*CapitalAmount</code></pre>
-<p><span class="math">\[C = WL + rK\]</span></p>
+<p><span class="math display">\[C = WL + rK\]</span></p>
 <p>A firm's opportunity cost of production is the value of the best alternative use of the resources used.</p>
 <p>The three main types of opportunity costs for firms are:</p>
 <ul>
@@ -807,7 +808,7 @@ e | .                ...
 <p><strong>Total cost</strong> is the cost of all resources used - the total fixed cost plus the total variable cost.</p>
 <p><strong>Total fixed cost</strong> is the cost of a firm's fixed inputs. These do not depend on the output. This is usually capital like ovens for a bakery.</p>
 <p><strong>Total variable cost</strong> is the cost of a firm's variable inputs. These depend on the output. This is usually labour like employees.</p>
-<p><span class="math">\[\mathrm{TC} = \mathrm{TFC} + \mathrm{TVC}\]</span></p>
+<p><span class="math display">\[\mathrm{TC} = \mathrm{TFC} + \mathrm{TVC}\]</span></p>
 <p>Total cost usually does not start from 0. There is usually a fixed cost even if there isn't any output.</p>
 <p>As output increases, the total variable cost increases. The marginal variable cost is inversely correlated with the marginal product - if the total product curve is increasing, then the total variable cost curve is decreasing.</p>
 <p>The <strong>marginal cost</strong> is the increase in total cost resulting from an increase in total product by 1 unit.</p>
@@ -815,8 +816,8 @@ e | .                ...
 <p><strong>Average total cost</strong> is the total cost per unit of output - the average fixed cost plus the average variable cost.</p>
 <p><strong>Average fixed cost</strong> is the total fixed cost per unit of output - the total fixed cost divided by the output. This is decreasing since the fixed costs are constant.</p>
 <p><strong>Average variable cost</strong> is the total variable cost per unit of output - the total variable cost divided by the output.</p>
-<p><span class="math">\[\mathrm{ATC} = \mathrm{AFC} + \mathrm{AVC} = \frac{\mathrm{TC}}{Q} = \frac{\mathrm{TFC}}{Q} + \frac{\mathrm{TVC}}{Q}\]</span></p>
-<p>Where <span class="math">\(Q\)</span> is the output quantity.</p>
+<p><span class="math display">\[\mathrm{ATC} = \mathrm{AFC} + \mathrm{AVC} = \frac{\mathrm{TC}}{Q} = \frac{\mathrm{TFC}}{Q} + \frac{\mathrm{TVC}}{Q}\]</span></p>
+<p>Where <span class="math inline">\(Q\)</span> is the output quantity.</p>
 <p>The average variable cost curve is U-shaped and plotted with respect to output quantity, and as a result, so is the average total cost curve. This is because the average product is initially increasing, but later decreases - so the average cost is initially decreasing, but later increases.</p>
 <p>Average variable cost and average total cost are decreasing when the MC curve is below them, and increasing when the MC curve is above. When they intersect, the average variable cost and average total cost are at their minimum.</p>
 <p>The exact shape of the cost curves are determined by the technology.</p>
@@ -956,7 +957,7 @@ e |.
 <p>A monopoly is a <strong>price setter</strong>. The market demand is the demand for the monopoly's output.</p>
 <p>To increase quantity sold, the monopoly must reduce prices.</p>
 <p><strong>Total revenue</strong> (TR) is the product of price and quantity sold. <strong>Marginal revenue</strong> (MR) is the change in total revenue resulting from the quantity sold increasing by 1 unit.</p>
-<p>The <strong>marginal revenue is less than the price of the good</strong> (<span class="math">\(MR &lt; P\)</span>) at all levels of output in a single-price monopoly.</p>
+<p>The <strong>marginal revenue is less than the price of the good</strong> (<span class="math inline">\(MR &lt; P\)</span>) at all levels of output in a single-price monopoly.</p>
 <p>If a firm cuts the price of a good, it will also sell more. The marginal revenue is the difference between the revenue gain from selling more and the revenue loss from lower price.</p>
 <p>The price depends on the elasticity of the good. If the demand is elastic, a fall in the price brings an increase in total revenue. If the demand is inelastic, a rise in price brings an increase in total revenue.</p>
 <p>So the profit is maximized when the marginal revenue is 0, when the quantity demanded is unit elastic.</p>

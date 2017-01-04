@@ -11,23 +11,41 @@
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
 </head>
 <body onload="highlight()">
@@ -61,7 +79,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
     <span class="divider"></span>
     <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
   </ul>
-<p><span class="math">\[
+<p style="display:none"><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
@@ -93,44 +111,44 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Highlight.js is a syntax highlighter written in JavaScript. It works in the browser as well as on the server. It works with pretty much any markup, doesn’t depend on any framework and has automatic language detection.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>The bare minimum for using highlight.js on a web page is linking to the library along with one of the styles and calling <a href="http://highlightjs.readthedocs.org/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a>:</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;/path/to/styles/default.css&quot;</span><span class="kw">&gt;</span>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;/path/to/styles/default.css&quot;</span><span class="kw">&gt;</span>
 <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;/path/to/highlight.pack.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
-<span class="kw">&lt;script&gt;</span><span class="ot">hljs</span>.<span class="fu">initHighlightingOnLoad</span>();&lt;<span class="ot">/script&gt;</span></code></pre>
+<span class="kw">&lt;script&gt;</span><span class="va">hljs</span>.<span class="at">initHighlightingOnLoad</span>()<span class="op">;&lt;</span><span class="ss">/script&gt;</span></code></pre></div>
 <p>This will find and highlight code inside of <code>&lt;pre&gt;&lt;code&gt;</code> tags; it tries to detect the language automatically. If automatic detection doesn’t work for you, you can specify the language in the <code>class</code> attribute:</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;html&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;html&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
 <p>The list of supported language classes is available in the <a href="http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html">class reference</a>. Classes can also be prefixed with either <code>language-</code> or <code>lang-</code>.</p>
 <p>To disable highlighting altogether use the <code>nohighlight</code> class:</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;nohighlight&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;nohighlight&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
 <h2 id="custom-initialization">Custom Initialization</h2>
 <p>When you need a bit more control over the initialization of highlight.js, you can use the <a href="http://highlightjs.readthedocs.org/en/latest/api.html#highlightblock-block"><code>highlightBlock</code></a> and <a href="http://highlightjs.readthedocs.org/en/latest/api.html#configure-options"><code>configure</code></a> functions. This allows you to control <em>what</em> to highlight and <em>when</em>.</p>
 <p>Here’s an equivalent way to calling <a href="http://highlightjs.readthedocs.org/en/latest/api.html#inithighlightingonload"><code>initHighlightingOnLoad</code></a> using jQuery:</p>
-<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="fu">$</span>(document).<span class="fu">ready</span>(<span class="kw">function</span>() {
-  <span class="fu">$</span>(<span class="st">&#39;pre code&#39;</span>).<span class="fu">each</span>(<span class="kw">function</span>(i, block) {
-    <span class="ot">hljs</span>.<span class="fu">highlightBlock</span>(block);
-  });
-});</code></pre>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+  <span class="at">$</span>(<span class="st">&#39;pre code&#39;</span>).<span class="at">each</span>(<span class="kw">function</span>(i<span class="op">,</span> block) <span class="op">{</span>
+    <span class="va">hljs</span>.<span class="at">highlightBlock</span>(block)<span class="op">;</span>
+  <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
 <p>You can use any tags instead of <code>&lt;pre&gt;&lt;code&gt;</code> to mark up your code. If you don't use a container that preserve line breaks you will need to configure highlight.js to use the <code>&lt;br&gt;</code> tag:</p>
-<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="ot">hljs</span>.<span class="fu">configure</span>({<span class="dt">useBR</span>: <span class="kw">true</span>});
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">hljs</span>.<span class="at">configure</span>(<span class="op">{</span><span class="dt">useBR</span><span class="op">:</span> <span class="kw">true</span><span class="op">}</span>)<span class="op">;</span>
 
-<span class="fu">$</span>(<span class="st">&#39;div.code&#39;</span>).<span class="fu">each</span>(<span class="kw">function</span>(i, block) {
-  <span class="ot">hljs</span>.<span class="fu">highlightBlock</span>(block);
-});</code></pre>
+<span class="at">$</span>(<span class="st">&#39;div.code&#39;</span>).<span class="at">each</span>(<span class="kw">function</span>(i<span class="op">,</span> block) <span class="op">{</span>
+  <span class="va">hljs</span>.<span class="at">highlightBlock</span>(block)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
 <p>For other options refer to the documentation for <a href="http://highlightjs.readthedocs.org/en/latest/api.html#configure-options"><code>configure</code></a>.</p>
 <h2 id="web-workers">Web Workers</h2>
 <p>You can run highlighting inside a web worker to avoid freezing the browser window while dealing with very big chunks of code.</p>
 <p>In your main script:</p>
-<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="fu">addEventListener</span>(<span class="st">&#39;load&#39;</span>, <span class="kw">function</span>() {
-  <span class="kw">var</span> code = <span class="ot">document</span>.<span class="fu">querySelector</span>(<span class="st">&#39;#code&#39;</span>);
-  <span class="kw">var</span> worker = <span class="kw">new</span> <span class="fu">Worker</span>(<span class="st">&#39;worker.js&#39;</span>);
-  <span class="ot">worker</span>.<span class="fu">onmessage</span> = <span class="kw">function</span>(event) { <span class="ot">code</span>.<span class="fu">innerHTML</span> = <span class="ot">event</span>.<span class="fu">data</span>; }
-  <span class="ot">worker</span>.<span class="fu">postMessage</span>(<span class="ot">code</span>.<span class="fu">textContent</span>);
-})</code></pre>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">addEventListener</span>(<span class="st">&#39;load&#39;</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span>
+  <span class="kw">var</span> code <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;#code&#39;</span>)<span class="op">;</span>
+  <span class="kw">var</span> worker <span class="op">=</span> <span class="kw">new</span> <span class="at">Worker</span>(<span class="st">&#39;worker.js&#39;</span>)<span class="op">;</span>
+  <span class="va">worker</span>.<span class="at">onmessage</span> <span class="op">=</span> <span class="kw">function</span>(event) <span class="op">{</span> <span class="va">code</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="va">event</span>.<span class="at">data</span><span class="op">;</span> <span class="op">}</span>
+  <span class="va">worker</span>.<span class="at">postMessage</span>(<span class="va">code</span>.<span class="at">textContent</span>)<span class="op">;</span>
+<span class="op">}</span>)</code></pre></div>
 <p>In worker.js:</p>
-<pre class="sourceCode javascript"><code class="sourceCode javascript">onmessage = <span class="kw">function</span>(event) {
-  <span class="fu">importScripts</span>(<span class="st">&#39;&lt;path&gt;/highlight.pack.js&#39;</span>);
-  <span class="kw">var</span> result = <span class="ot">self</span>.<span class="ot">hljs</span>.<span class="fu">highlightAuto</span>(<span class="ot">event</span>.<span class="fu">data</span>);
-  <span class="fu">postMessage</span>(<span class="ot">result</span>.<span class="fu">value</span>);
-}</code></pre>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">onmessage <span class="op">=</span> <span class="kw">function</span>(event) <span class="op">{</span>
+  <span class="at">importScripts</span>(<span class="st">&#39;&lt;path&gt;/highlight.pack.js&#39;</span>)<span class="op">;</span>
+  <span class="kw">var</span> result <span class="op">=</span> <span class="va">self</span>.<span class="va">hljs</span>.<span class="at">highlightAuto</span>(<span class="va">event</span>.<span class="at">data</span>)<span class="op">;</span>
+  <span class="at">postMessage</span>(<span class="va">result</span>.<span class="at">value</span>)<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
 <h2 id="getting-the-library">Getting the Library</h2>
 <p>You can get highlight.js as a hosted, or custom-build, browser script or as a server module. Right out of the box the browser script supports both AMD and CommonJS, so if you wish you can use RequireJS or Browserify without having to build from source. The server module also works perfectly fine with Browserify, but there is the option to use a build specific to browsers rather than something meant for a server. Head over to the <a href="https://highlightjs.org/download/">download page</a> for all the options.</p>
 <p><strong>Note:</strong> the library is not supposed to work straight from the source on GitHub; it requires building. If none of the pre-packaged options work for you refer to the <a href="http://highlightjs.readthedocs.org/en/latest/building-testing.html">building documentation</a>.</p>

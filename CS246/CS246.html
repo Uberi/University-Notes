@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -43,7 +43,7 @@
     <span class="divider"></span>
     <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
   </ul>
-<p><span class="math">\[
+<p style="display:none"><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\tup}[1]{\left\langle #1 \right\rangle}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
@@ -337,7 +337,7 @@ int main() {
 }</code></pre>
 <p>When we say <code>if (!cin)</code>, <code>cin</code> is implicitly converted into a <code>void*</code>, and is truthy if the last read was successful and falsy otherwise. <code>if (cin)</code> is equivalent to <code>if (!cin.fail())</code>.</p>
 <p>Also, <code>std::cin &gt;&gt; i</code> evaluates to <code>std::cin</code>, which allows us to do things like <code>cin &gt;&gt; x &gt;&gt; y</code>. This technique is known as <strong>cascading</strong>. The same thing works with the <code>&lt;&lt;</code> operator as well, which we saw in the <code>cout &lt;&lt; i &lt;&lt; endl</code> line.</p>
-<p>Note that <code>a &gt;&gt; b</code> is also the right bit-shift operator, equivalent to <span class="math">\(\floor{\frac a {2^b}}\)</span>. This operator <strong>behaes differently depending on its operands</strong>. If the left side is an IStream such as <code>std::cin</code>, it acts as the input operator, and if the left side is an int, it acts as a right bit-shift.</p>
+<p>Note that <code>a &gt;&gt; b</code> is also the right bit-shift operator, equivalent to <span class="math inline">\(\floor{\frac a {2^b}}\)</span>. This operator <strong>behaes differently depending on its operands</strong>. If the left side is an IStream such as <code>std::cin</code>, it acts as the input operator, and if the left side is an int, it acts as a right bit-shift.</p>
 <p>With this in mind, we can have the following shorter version:</p>
 <pre><code>#include &lt;iostream&gt;
 using namespace std;
