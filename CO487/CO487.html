@@ -76,6 +76,39 @@ Section 001
 Email: ajmeneze@uwaterloo.ca
 Office hours: Mondays 3:00pm-5:00pm, Fridays 1:00pm-3:00pm in MC 5026
 Mondays/Wednesdays/Fridays 11:30pm-12:20pm</code></pre>
+<h1 id="section">4/3/16</h1>
+<p>Cryptography is a tool we can use to secure communicatoins when there are malicious adversaries. Some of the fundaental goals of cyptography are:</p>
+<ul>
+<li>Confidentiality - data is secret to all people except authoeized parties.</li>
+<li>Data Integrity - data is unaltered.</li>
+<li>Origin authentication - data can be confirmed to be from a particular source.</li>
+<li>Non-repudiation - once a statement is published, it is not possible to deny/revoke it later.</li>
+</ul>
+<p>Different applications might require different subsets of these goals.</p>
+<p>In this course, we use Bob and Alice as placeholders to represent two parties trying to communicate securely. We use Eve or Mallory as a placeholder to represent one or more adversaries trying to attack the communications (by injecting data, eavesdropping, or other approaches, depending on the threat model)</p>
+<p>Some famous early practical uses of cryptography was the enigma machine, which used multiple spinning rotors to encrypt/decrypt messages. In that cryptosystem, the German military leadership and the German U-boats had the role of Bob and Alice, trying to communicate confidentially, and Alan Turing and his team had the role of Eve, trying to break the confidentiality guarantees and read those communications.</p>
+<p>However, cryptosystems like Enigma and its successor, Lorenz, are a far cry from modern cryptosystems, which have a much more mathematically sound foundation. Modern cryptography is what makes online banking, online shopping, and cellular networks possible.</p>
+<p>For example, SSL, the protocol that makes online security possible, ensures origin authentication and confidentiality between a user and a website. SSL uses symmetric-key encryption to implement confidentiality, and a MAC scheme (HMAC) to implement origin authentication. Of course, to make this possible they both need to have the same secret key for the symmetric-key cryptography, and for the MAC. To confidentially and authentically share this secret key, we use public-key encryption. Of course, to make this possible we need a way to obtain authentic copies of the public keys of both parties - this is implemented using digital signatures, where trusted third parties known as certificate authorities keep track of public keys that are considered authentic (generally by vetting the site owner in the real world), and digitally sign them to confirm that they're authentic. The certificate authorities' public keys are pre-installed in the browser, which acts as a root of trust - if you trust that public key is authentic, and that the certificate authorities are correctly keeping track of authentic .</p>
+<p>SSL is one of the most successful cryptosystems ever deployed, used for tons of sites on the internet. However, there are a number of possible weaknesses that might result in the guarantees being broken:</p>
+<ul>
+<li>The crpyotgraphy itself might be weak (e.g., previously, SSL supportied using RC4 for the symmetric-key encryption, which is nowadays easy to break).</li>
+<li>Quantum computers can attack public-key encryption systems like RSA.</li>
+<li>Random number generators used in the protocol might have weaknesses (e.g., Netscape's flawed RNG, NSA's backdoored EC-DRBG CSPRNG).</li>
+<li>Certificate authorities (e.g., social engineering resulting in Verisign digitally signing non-authentic certificates).</li>
+<li>Bugs in crpytographic code (e.g., Heartbleed)</li>
+<li>Misuse of cryptography, like encrypting the wrong thing.</li>
+<li>Phishing/social engineering attacks on users themselves.</li>
+<li>The server itself leaking data - SSL only protects data in transit, not when it's on the server.</li>
+</ul>
+<p>This demonstrates some useful concepts:</p>
+<ul>
+<li>Symmetric-key encryption is used to ensure confidentiality.</li>
+<li>MAC schemes are used to ensure authentication.</li>
+<li>Public-key encryption is used to ensure confidentiality, integrity, authentication, and non-repudiation.</li>
+<li>Digital signatures is used to ensure integrity, authentication, and non-repudiation.</li>
+</ul>
+<p>Cryptography is only one part of a large information security ecosystem, including other things like secure operating systems, auditing mechanisms, trusted computing, and risk analysis. In this context, cryptography provides a lot of useful and essential tools, but it's not all there is to security. Attackers will generally target the weakest part of the system, and if that link fails, it is possible that the entire system will.</p>
+<p>This course focuses on breadth over depth. For depth, take CO 485 and try out the readings for this course as well.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
