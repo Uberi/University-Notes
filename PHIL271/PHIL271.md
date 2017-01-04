@@ -29,7 +29,7 @@ Cantor had a different view. He started by defining finite as something that cou
 
 Cantor also showed, through the diagonalization argument, that positive rational numbers can be bijected with the natural numbers. In other words, the number of fractions is the same as the number of natural numbers. However, note that the numerators and denominators of rational numbers are both also just natural numbers, so the set of natural numbers is the same size as the Cartesian product of the set of natural numbers - there are an "infinity of infinities", so to speak.
 
-Infinity makes arithmetic weirder. For finite numbers, $ab = bc \wedge b \ne 0 \implies a = c$, yet this doesn't apply anymore when we start dealing with infinities.
+Infinity makes arithmetic weirder. For finite numbers, $ab = bc \wedge b \ne 0 \implies a = c$. For infinite numbers, this no longer applies.
 
 Sets and Foundationalist Mathematics
 ------------------------------------
@@ -63,7 +63,7 @@ One view is that to create something, one must change something to bring it into
 
 One view is that the difference between discovery and creation is the way that they're done. Math is not like science because math requires certainty (through proofs), while science requires only that a high enough standard of certainty is reached.
 
-An argument is a set of claims, one of which, the conclusion is defended  by the others, the premises.If you have a valid argument, then to refute the argument, you must first refute the premises.
+An argument is a set of claims, one of which, the conclusion is defended  by the others, the premises. If you have a valid argument, then to refute the argument, you must first refute the premises.
 
 An argument is cogent if the premises support the conclusion, and it's reasonable to believe the premises. By support, we mean that the premises imply that the conclusion is likely (not necessarily that the premises imply that the conclusion is in fact true). When we evaluate philisophical views, we need to evaluate whether the arguments for it are cogent.
 
@@ -134,7 +134,7 @@ At this point we have our reading, Mary Leng's defence of fictionalism from John
 
 **Revolutionary fictionalism** is the view that mathematicians intend their assertions to be literally true, but they're wrong to do so and need to change (calling for a revolution).
 
-One objection to revolutionary fictionalism, presented by David Lewis, is that mathematics has been working very well and providing a lot of useful results, while philosophy asking mathematics to change the nature of their assertions wouldn't make math more useful in any way. He basically says that if revolutionary fictionalism is correct, math would need to be rejected, while in reality, it really doesn't need to be rejexted.
+One objection to revolutionary fictionalism, presented by David Lewis, is that mathematics has been working very well and providing a lot of useful results, while philosophy asking mathematics to change the nature of their assertions wouldn't make math more useful in any way. He basically says that if revolutionary fictionalism is correct, math would need to be rejected, while in reality, it really doesn't need to be rejected.
 
 Aside: why does philosophy often result in outlandish claims and unusual results? Wittgenstein viewed philosophy as a therapeutic activity - language tempts people to think themselves into dead ends, and looking at the language itself can help us avoid this.
 
@@ -196,9 +196,9 @@ Benacerraf wrote a lot about what truth in mathematics means. What kind of thing
 
 One common idea is that either sentences are true or false. But this doesn't seem to apply to all sentences, like questions, commands, etc. Some philosophers often say that statements are always true or false, while other philosophers say that it's the actual proposition/meaning behind sentences that is always true or false. However, paradoxical statements like "this sentence is false." could be considered to be neither true or false. While this is an interesting philisophical question in its own right, in this course when we refer to sentences being true or false, we'll actually mean whatever kinds of sentences can actually be true or false.
 
-People used to believe the earth was flat, but now we believe it is round. Should we then say "it used to be true that the earth was flat, but now it's round"? Most people would not, and instead say "we used to falsely believe the earth was flat, but it is actually true that it is round". Most conceptions of the truth is that it's universal, and if something is true, then it should be true for everyone, everywhere, at any time. Whatever the definition, however, it seems that truth is closely related to the way reality is.
+People used to believe the earth was flat, but now we believe it is round. Should we then say "it used to be true that the earth was flat, but now it's round"? Most people would not, and instead say "we used to falsely believe the earth was flat, but it is actually true that it is round". Most conceptions of the truth agree that it's universal, and if something is true, then it should be true for everyone, everywhere, at any time. Whatever the definition, however, it seems that truth is closely related to the way reality is.
 
-According to redundancy theory, the concept of true is a linguistic convenience, and doesn't actually exist. Saying "X is true" is the same thing as saying "X", so isn't really a useful, real thing. Other theories say things like true sentences being the ones that fit in the largest self-consistent web of facts, or the ones that fit in with the world after we've hypothetically obtained all possible evidence.
+According to redundancy theory, the concept of truth is a linguistic convenience, and doesn't actually exist. Saying "X is true" is the same thing as saying "X", so isn't really a useful, real thing. Other theories say things like true sentences being the ones that fit in the largest self-consistent web of facts, or the ones that fit in with the world after we've hypothetically obtained all possible evidence.
 
 According to Benacerraf, all satisfactory accounts of mathematical truth must mesh properly with a satisfactory theory of meaning and must explain how we have mathematical knowledge. Also, existing accounts of mathematical truth don't satisfy both of those criteria - those that mesh with a satisfactory theory of meaning don't explain mathematical knowledge, and vice versa. Therefore, Benacerraf says, there are no existing satisfactory accounts of mathematical truth. This is a valid argument (modus tollens), but is it sound?
 
@@ -228,9 +228,9 @@ Math is essential to physics - we can't even formulate most theories in physics 
 
 Steiner adds that there are different ways mathematics can be essential to physics - formulating theories, making discoveries, and so on. According to Steiner, the actual puzzle is why discovering things in mathematics often corresponds to discovering things in physics.
 
-Steiner also says that this puzzle challenges naturalism (the idea that our minds work in a way not attuned to the way the world works), since if naturalism was the case, then we would expect mathematics to not be so effective.
+Steiner also says that this puzzle challenges naturalism (the idea that there's no supernatural forces operating on the world), since if naturalism was the case, then we would expect mathematics to not be so effective.
 
-One answer to this puzzle is that the effectiveness is simply coincidence: math is making a huge number of ideas and predictions, and one would expect that at least some of them would be highly accurate. Another is that it wouldn't be possible to do science or make discoveries at all if the world didn't correspond to the mathematics, or that we just wouldn't discover things we didn't have the mathematics to describe.
+One answer to this puzzle is that the effectiveness is simply coincidence: math is making a huge number of ideas and predictions, and one would expect that at least some of them would be highly accurate. Another is that it wouldn't be possible to do science or make discoveries at all if the world didn't correspond to the mathematics, or that we just wouldn't discover things we didn't have the mathematics to describe them.
 
 According to Colyvan, the puzzle of mathematics being unreasonably effective (also known as the **applicability problem**) is only really a puzzle in the formalist philosophy of math, not in most others. Formalist mathematical philosophy is a philosophy in which mathematics is a game played with symbols. The applicability problem is only really a problem because a game of symbols would not be expected to make accurate predictions about the world.
 

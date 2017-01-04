@@ -3,9 +3,12 @@ STAT231
 
 Statistics.
 
-    Surya Banerjee
-    Email: suryabanerje@gmail.com
-    Office Hours: Fridays 9am-11am, M3 2017, phone extension 39120
+    Cyntha Struthers
+    Section 001
+    Email: castruth@gmail.com
+    Mondays/Wednesdays/Fridays 1:30pm-2:20pm in STP 105
+
+This is the second time I'm taking this course. The first time around, I received an injury about a month in that made going to this class no longer feasible. This set of notes therefore contains the Spring 2016 version of the course, combined with the Winter 2017 version of the course. Over time, these will be merged together.
 
 # 2/5/16
 

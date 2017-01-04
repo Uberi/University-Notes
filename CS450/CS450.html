@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>CS450 | Anthony Zhang</title>
+  <link rel="stylesheet" href="../css/base.css" type="text/css">
+  <link rel="stylesheet" href="../css/note.css" type="text/css">
+  <link rel="stylesheet" href="../highlight/styles/default.css">
+  <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body onload="highlight()">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68271407-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  <h1>Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+  <ul class="site_links">
+    <li><a href="/blog/" class="page">blog</a></li>
+    <span class="divider"></span>
+    <li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+    <span class="divider"></span>
+    <li><a href="/resume.pdf" class="page">résumé</a></li>
+    <span class="divider"></span>
+    <li><a href="https://github.com/Uberi" class="contact">github</a></li>
+    <span class="divider"></span>
+    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <span class="divider"></span>
+    <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
+    <span class="divider"></span>
+    <li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+    <span class="divider"></span>
+    <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+    <span class="divider"></span>
+    <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
+  </ul>
+<p><span class="math">\[
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\rem}{\operatorname{rem}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\imag}{\boldsymbol{i}}
+\newcommand{\dee}{\mathop{}\!\mathrm{d}}
+\newcommand{\lH}{\overset{\text{l'H}}{=}}
+\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\spn}{\operatorname{Span}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\prp}{\operatorname{perp}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
+\newcommand{\range}{\operatorname{Range}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\cof}{\operatorname{cof}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
+\]</span></p>
+<h1 id="cs450">CS450</h1>
+<p>Computer Architecture.</p>
+<pre><code>Andrew Morton
+Section 001
+Email: andrew.morton@uwaterloo.ca
+Website: https://www.student.cs.uwaterloo.ca/~cs450/w17/outline.shtml
+Office Hours: Tuesdays/Thursdays 11:30am-12:30pm in EIT-4015
+Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
+<h1 id="section">3/1/16</h1>
+<p>In this course, the main project (worth 30%) is to design a MIPS processor in Verilog. No required textbooks. The main topic is about how modern CPUs manage to achieve the performance that they do, building on top of the processor basics covered in earlier processor design courses.</p>
+<p>There are also two written assignments (worth 20% total) and the final exam (worth 50%). Assignments have 4 grace days allowed.</p>
+<p>Hardware description languages are used for modelling hardware, generally for the purpose of simulation or synthesis. Most complex digital hardware is designed using a hardware description language, which is then compiled and converted into specifications for FPGAs, ASICs, programmable logic, and so on.</p>
+<p>The main hardware description languages in use today are System Verilog and VHDL. VHDL is more verbose and Ada-like, while Verilog is more minimalist and C-like. Most projects in industry use Verilog for this reason. System Verilog is a superset of plain Verilog, and all Verilog code works in System Verilog. There's also System C, which looks a lot more like C/C++, but it's not commonly used. In this course, we will be using Icarus Verilog (an implementation of System Verilog).</p>
+<p>The simplest/lowest-level of hardware modelling in System Verilog is <strong>gate-level modelling</strong>. At this level, we have logic gate primitives like AND/OR, and we can connect them together into circuits via <strong>wires</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode verilog"><code class="sourceCode verilog"># <span class="ot">`a1</span>` is the name of the gate, which is optional but useful <span class="kw">for</span> labelling gates
+# <span class="ot">`y</span>` is the gate <span class="dt">output</span>, <span class="dt">and</span> <span class="ot">`a</span>`/<span class="ot">`b</span>`/<span class="ot">`c</span>` are the gate inputs (<span class="ot">`and</span>` supports one <span class="dt">or</span> more of these inputs, <span class="dt">and</span> one <span class="dt">output</span>)
+# the inputs <span class="dt">and</span> outputs are wires, identified by name - everywhere that same name is used can be thought of as being all connected together by a physical <span class="dt">wire</span>
+<span class="dt">and</span> a1(y, a, b, c)
+
+# every argument except the last are the NOT gate&#39;s outputs, <span class="dt">and</span> the last one is the <span class="dt">input</span>
+<span class="dt">not</span> (y1, y2, a)</code></pre></div>
+<p>In gate-level modelling, signal/wire values can be <code>0</code> (low), <code>1</code> (high), <code>x</code>/<code>X</code> (unknown/ignored value), or <code>z</code>/<code>Z</code> (high impedance).</p>
+<p>Gate-level modelling for a full adder (addend bits as <code>a</code>/<code>b</code>, carry-in as <code>c_in</code>, carry-out as <code>c_out</code>, sum as <code>sum</code>):</p>
+<div class="sourceCode"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span class="co">// full_adder_gate_level_modelling.sv</span>
+<span class="co">// for a full adder, `sum = a XOR b XOR c_in`, and `c_out = ((a XOR b) AND c_in) OR a AND b`</span>
+
+<span class="kw">module</span> full_adder(<span class="dt">input</span> a, b, c_in, <span class="dt">output</span> c_out, sum);
+    <span class="co">// a logic is either a wire or a register - here, we&#39;re declaring our wires</span>
+    logic w1, w2, w3; <span class="co">// these are wires that are used for connecting gates in the full adder together</span>
+    <span class="dt">xor</span> x1(w1, a, b);
+    <span class="dt">xor</span> x2(sum, w1, c_in);
+    <span class="dt">and</span> a1(w2, a, b);
+    <span class="dt">and</span> a2(w3, w1, c_in);
+    <span class="dt">or</span> o1(c_out, w2, w3);
+<span class="kw">endmodule</span></code></pre></div>
+<p>This is a <strong>design module</strong>. It fully specifies the full adder as a self-contained unit.</p>
+<p>While this looks like normal procedural code, with various function calls, it is more intuitive to think of this as a series of logical declarations - as if each of the <code>xor</code>/<code>and</code>/<code>or</code> lines were all continuously running at the same time.</p>
+<p>A <strong>test bench</strong> is a set of definitions that instantiates the design module, and simulates the circuit under different input conditions to test for functional correctness. For our full adder example:</p>
+<div class="sourceCode"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span class="co">// full_adder_test_bench.sv</span>
+<span class="kw">module</span> full_adder_test_bench;
+    logic carry_in, x, y;
+    logic carry_out, z;
+
+    <span class="co">// &quot;dut&quot; stands for &quot;device under test&quot;</span>
+    <span class="co">// below, we&#39;re basically instantiating a full adder (defined in the code above) that&#39;s connected to our logics, for testing purposes</span>
+    <span class="co">// the `.name(other_name)` syntax is a &quot;named port map&quot;, which lets us connect logics to devices by signal name</span>
+    <span class="co">// alternatively, we can just map the signals in order, like `full_adder dut(x, y, carry_in, carry_out, z)`, but this can cause issues if we change the inputs/outputs of the full adder</span>
+    full_adder dut(.c_out(carry_out), .sum(z), .c_in(carry_in), .a(x), .b(y));
+
+    <span class="co">// this is a procedural block - inside, the statements are evaluated sequentially from top to bottom</span>
+    <span class="kw">initial</span> <span class="kw">begin</span> <span class="co">// run once at time 0</span>
+        carry_in = <span class="dv">0</span>; x = <span class="dv">0</span>; y = <span class="dv">0</span>;
+        <span class="co">// delays must be used to ensure statements actually run sequentially - statements in between delays all execute in parallel</span>
+        <span class="bn">#10</span> x = <span class="dv">1</span>; <span class="co">// delay 10 time units, then continue and set x to 1</span>
+        <span class="bn">#10</span> y = <span class="dv">1</span>; <span class="co">// delay 10 time units, then continue and set y to 1</span>
+        <span class="bn">#10</span> carry_in = <span class="dv">1</span>; <span class="co">// delay 10 time units, then continue and set carry_in to 1</span>
+        <span class="bn">#10</span> <span class="dt">$stop</span>; <span class="co">// delay 10 time units, then stop the simulation (this will not compile if trying to generate hardware from this)</span>
+    <span class="kw">end</span>
+
+    <span class="co">// now we want to dump the signals out into waveforms so we can see them</span>
+    <span class="kw">initial</span> <span class="dt">$dumpvars</span>(<span class="dv">0</span>, full_adder_test_bench); <span class="co">// the first parameter is the dump level (`0` means &quot;dump all variables in the module and in the modules that instantiate it&quot;), and the rest of the parameters are the module or variables to dump</span>
+<span class="kw">endmodule</span></code></pre></div>
+<p>To compile, run <code>iverilog -g2005-sv -s full_adder_test_bench.sv -o full_adder.vvp full_adder.sv full_adder_test_bench.sv</code>:</p>
+<ul>
+<li><code>iverilog</code> is the Icarus Verilog compiler.</li>
+<li><code>-g2005-sv</code> specifies that the compiler should use the 2005 System Verilog standard.</li>
+<li><code>-s full_adder_test_bench.sv</code> specifies the top-level/root module.</li>
+<li><code>-o full_adder.vvp</code> specifies the output for the compiled Verilog.</li>
+<li><code>full_adder.sv full_adder_test_bench.sv</code> specifies the modules to include in the compilation.</li>
+</ul>
+<p>To simulate, run <code>vvp -n full_adder.vvp -lx2</code>:</p>
+<ul>
+<li><code>vvp</code> is the Icarus Verilog simulation tool.</li>
+<li><code>-n</code> specifies that <code>$stop</code> and Control-C should complete the simulation.</li>
+<li><code>full_adder.vvp</code> is the compiled Verilog file for the full adder.</li>
+<li><code>-lx2</code> specifies that the simulation should be written in LXT2 format, which is slower to process but more compact allows viewing waveforms while the simulation is running.</li>
+</ul>
+<p>To view the waveforms: <code>gtkwave dump.lx2</code>:</p>
+<ul>
+<li><code>gtkwave</code> is the GTK waveform visualizer tool.</li>
+<li><code>dump.lx2</code> is the simulation result generated by <code>vvp</code>.</li>
+</ul>
+<div class="license">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  Copyright 2013-2014 Anthony Zhang.
+</div>
+<script type="text/javascript">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/HTML-CSS"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+</body>
+</html>
