@@ -10,11 +10,59 @@ Statistics.
 
 This is the second time I'm taking this course. The first time around, I received an injury about a month in that made going to this class no longer feasible. This set of notes therefore contains the Spring 2016 version of the course, combined with the Winter 2017 version of the course. Over time, these will be merged together.
 
+# 4/1/17
+
+Course notes are available on LEARN - don't buy the paper copy unless you really want to.
+
+There are i-clicker questions, worth 5% overall. Lowest 25% of clicker answers are not included in grade calculation. There are also 5 assignments, each worth 1%, that teach the use of R. Some tutorials include tests, and there are two midterms (each worth 15%). Final exam worth 50%.
+
+In STAT230, we were given information about the population, and wanted to figure things out about individual samples. In STAT231, we will be learning about the opposite - given information about a sample of the population, what can we figure out about the population?
+
+An **empirical study** is a study in which we learn by observation or experimentation. Empirical studies involve uncertainty by nature - if we run the same experiment multiple times, we are very likely to get results that aren't totally identical. Using the probability tools we learned about in STAT230, we can model this uncertainty and use it to learn more from the study results.
+
+A **population** is a collection of units, like all students taking STAT231, or all the cars on a particular road. A **process** is a system by which units are produced, like a car insurance claim system (it produces car insurance claims as units).
+
+Both of these are collections of units, but processes generally emit units over time, while populations are generally all already there at a certain point in time. For example, a population might be "current STAT231 students", while a process might be "past, present, and future STAT231 students".
+
+;wip: merge this with the 2/5/16 content
+
+# 6/1/17
+
+Read chapter 1 and do the end of chapter problems to review STAT230. Assignment 1 due next Monday, concerns the setup and use of R.
+
+A **variate** is a characteristic of units in a population/process, usually represented as $x$, $y$, or $z$. They can be:
+
+* Continuous - real numbers or intervals of real numbers. For example, height, weight, or component lifetime.
+* Discrete - integers or intervals of integers. For example, number of vehicular accidents on a highway, number of i-clicker questions in class.
+* Categorical - elements of a set. For example, hair color or dog breed.
+* Ordinal - elements of an ordered sequence. For example, a person's health (poor, satisfactory, good, excellent), or survey responses (strongly agree, agree, neutral, disagree, strongly disagree).
+* Complex - other types of values. For example, images or written responses.
+
+Knowing the type of a variate helps us choose a good probability model for the data.
+
+An **attribute** of a population/process is a function of a variate that is defined for every unit in the population. For example, if we have all students in a class (the population), and each individual student (the unit in the population) has a grade (variate on every unit), then an attribute might be the class average or proportion of students who passed the class (a function of the grade variate).
+
+Empirical studies are either **observational** or **experimental**. Observational empirical studies are those in which information is collected about the population/process without attempting to change any variates of units in the population. When we do change variates, it is an experimental empirical study. Generally, in an experimental empirical study, researchers will do something to one subset of the population, and leave the rest as a control group. Note that even in an observational empirical study, researchers can change variates outside of the context of the study - for example, researchers might ask the entire population to complete a survey, which changes variates like "how fed up is this participant with surveys?", yet this is still an observational study, since the survey is external to the study itself.
+
+**Sample surveys** are observational empirical studied in which we select a representative sample of units from population and determine relevant variates for those units.
+
+Numerical and graphical summaries are used to make sense of large datasets, where we would otherwise not be able to by looking at the numbers directly.
+
+Some numerical summaries include measures of location (sample mean, median, mode), variability/dispersion (sample variance, sample standard deviation, range, interquartile range), and shape (sample skewness, sample kurtosis).
+
+A dataset is a set $y = \set{y_1, \ldots, y_n}$. If $y_i \in \mb{R}$, sample mean is $\overline y = \frac 1 n \sum_{y_i \in y} y_i$, sample median is $\hat{y}$, and sample mode doesn't usually have a widely accepted notation.
+
+The median of a dataset is not unique - a dataset with an even number of elements can have two medians, though usually we just average them to get a single summary value.
+
+The mode is sometimes considered to be multiple values as well when there are several values that are most common, though in this course we consider the mode to not exist when there's no single most common value. Also, the most commonly occurring group/class in grouped data is known as the **sample modal group/class**.
+
+An **order statistic** is just a sorted version of a dataset. It's denoted $\set{y_{(1)}, \ldots, y_{(n)}}$.
+
+---
+
 # 2/5/16
 
 There are 3 tutorial tests, 2 midterms, and a final exam.
-
-In STAT230, we were given information about the population, and wanted to find the chance of a sample happening. In STAT231, we will be learning about the opposite - given information about a sample of the population, what can we figure out about the population? Where STAT230 asks, "given 100 fair coin tosses, what is the probability of getting 60 heads?", STAT231 asks, "if we toss a coin 100 times and get 60 heads, what can we say about the fairness of the coin?".
 
 The Challenger space shuttle disaster occurred due to a failed O-ring. However, the right data analysis could have presented this tragedy - there was already enough data available to find this problem, but it wasn't looked at in the right way. Statistics can help prevent this sort of error.
 
