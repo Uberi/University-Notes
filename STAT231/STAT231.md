@@ -40,7 +40,7 @@ A **variate** is a characteristic of units in a population/process, usually repr
 
 Knowing the type of a variate helps us choose a good probability model for the data.
 
-An **attribute** of a population/process is a function of a variate that is defined for every unit in the population. For example, if we have all students in a class (the population), and each individual student (the unit in the population) has a grade (variate on every unit), then an attribute might be the class average or proportion of students who passed the class (a function of the grade variate).
+An **attribute** of a population/process is a function of a variate that is defined for every unit in the population (not every unit in a study or survey). For example, if we have all students in a class (the population), and each individual student (the unit in the population) has a grade (variate on every unit), then an attribute might be the class average or proportion of students who passed the class (a function of the grade variate). Common attributes are mean/median/mode/variance/proportion.
 
 Empirical studies are either **observational** or **experimental**. Observational empirical studies are those in which information is collected about the population/process without attempting to change any variates of units in the population. When we do change variates, it is an experimental empirical study. Generally, in an experimental empirical study, researchers will do something to one subset of the population, and leave the rest as a control group. Note that even in an observational empirical study, researchers can change variates outside of the context of the study - for example, researchers might ask the entire population to complete a survey, which changes variates like "how fed up is this participant with surveys?", yet this is still an observational study, since the survey is external to the study itself.
 
@@ -50,13 +50,158 @@ Numerical and graphical summaries are used to make sense of large datasets, wher
 
 Some numerical summaries include measures of location (sample mean, median, mode), variability/dispersion (sample variance, sample standard deviation, range, interquartile range), and shape (sample skewness, sample kurtosis).
 
-A dataset is a set $y = \set{y_1, \ldots, y_n}$. If $y_i \in \mb{R}$, sample mean is $\overline y = \frac 1 n \sum_{y_i \in y} y_i$, sample median is $\hat{y}$, and sample mode doesn't usually have a widely accepted notation.
+A dataset is a set $y = \set{y_1, \ldots, y_n}$. If $y_i \in \mb{R}$, sample mean is $\overline y = \frac 1 n \sum_{y_i \in y} y_i$, sample median is $\hat{y} = \frac{y_{\left(\floor{\frac n 2}\right)}}{y_{\left(\ceil{\frac n 2}\right)}}$, and sample mode doesn't usually have a widely accepted notation.
 
 The median of a dataset is not unique - a dataset with an even number of elements can have two medians, though usually we just average them to get a single summary value.
 
 The mode is sometimes considered to be multiple values as well when there are several values that are most common, though in this course we consider the mode to not exist when there's no single most common value. Also, the most commonly occurring group/class in grouped data is known as the **sample modal group/class**.
 
 An **order statistic** is just a sorted version of a dataset. It's denoted $\set{y_{(1)}, \ldots, y_{(n)}}$.
+
+# 9/1/17
+
+There's actually a shortcut to get to STP from MC - go left instead of straight and cut through St. Jerome.
+
+Tutorial test next wednesday. One question might be, "a study was conducted in October 2016 on people recovering from heart disease at a particular clinic, where they were asked to complete a questionnaire - what is the process or population?". Any reasonable answer will work: "population of people who attended the clinic in October 2016". Also look into questions like "how does the mean/median/variance change if we do something to the dataset, like add 5 to eah sample?".
+
+A bimodal distribution is one that has what appears to have multiple "humps" on its histogram. A unimodal distribution is one that looks like a single "hump" - a bell-curve-like shape.    
+
+Common numerical summaries we care about are:
+
+* The centre of the data, or **central tendency**:
+    * The **sample mean/arithmetic mean**: for a variable $y$, the sample mean is denoted $\overline y = \frac 1 n \sum_{i = 0}^n y_i$.
+        * The nice thing about this is that the sum of the deviations from the mean is always 0, so $\sum (y_i - \overline y) = 0$.
+        * Under an affine transformation $y_i = ax_i + b$, $\overline y = a \overline x + b$ - the mean can simply be transformed as well.
+    * The **geometric mean** is better for logarithmically distributed data: for a variable $y$, the geometric mean is denoted $\overline y = \left(\prod_{i = 0}^n y_i\right)^{\frac 1 n}$.
+    * The **harmonic mean** is rarely useful, and is the reciprocal of the arithmetic mean of the reciprocals of a variable.
+    * The average is usually the one value that, if applied in the problem's situation, is equivalent to applying all the original values.
+    * The **median** is the middle-most observation, or the sample mean of the middlemost observations if there are multiple. Essentially, we arrange the dataset in ascending order, and then pick the middle one.
+        * The advantage of medians is that they are less sensitive to outliers than summaries like the sample mean.
+        * The concept of the median can be extended to **quartiles** and **percentiles**, and generalized into **quartiles**. While the median is the value such that 50% of the dataset is at or below it, the quartiles and percentiles are a different fraction. Percentiles are represented with $q(p)$ where $0 \le p \le 1$.
+        * The first quartile is a value for which 25% of the data is equal or below that value ($q(0.25)$), while the second quartile is 50% ($q(0.5)$), the third 75% ($q(0.75)), and the fourth 100% ($q(1)$).
+        * The first percentile is a value for which 1% of the data is equal or below that value, while the second percentile is 2%, the third 3%, and so on.
+        * To find the $0 \le p \le 1$ percentile, we take the $p(n + 1)$th value, or average the nearest 2 values if $p(n + 1)$ is not an integer.
+    * The **mode** is the observation or observations that occur most often (a dataset can have more than 1 mode). This is often more useful for categorical data, or discrete numerical data with only a few possibilities.
+    * The mean, median, and mode aren't always a good measure of centrality. We can combine this with other types of summaries to get a more accurate picture. For example, histograms are a great way to see the entire distribution of the data.
+* The volatility, or **dispersion** - how far the values are spread out:
+    * The **range of a dataset** is two numbers - the minimum value of the dataset, and the maximum value. This can also be thought of as the zeroth and fourth quartile values. We also often subtract the smaller from the larger to get a single-number range.
+    * The **interquartile range** (IQR) is the range of the middle 50% of the dataset - the first quartile value and third quartile value.
+    * The **sample variance** is defined as $s^2 = \frac{1}{n - 1} \sum_{i = 0}^n \left(y_i - \overline y\right)^2$. Note that the variance is $s^2$, not $s$. Also, the variance of a whole dataset/population $x = \set{x_1, \ldots, x_n}$.
+        * This is almost, but not quite, the average of the squared deviation from the mean.
+        * Basically, this measures how much the data is spread out from the mean.
+        * There's a good reason to divide by $n - 1$ rather than $n$, but we'll cover that later on.
+        * Under an affine transformation $y_i = ax_i + b$, $s_y^2 = a^2 s_x^2$ - the squared factor applies to the variance, but not the variance.
+        * Another useful formula for the sample variance is $s^2 = \frac 1 {n - 1} \left(\sum y_i^2 - n(\overline y)^2\right)$.
+        * Note that the units for the variance is always the square of the units for the samples themselves.
+        * Variance is also known as $\mu_2$, the second central moment, $E[(Y - \mu)^2]$.
+    * The **standard deviation** is the positive square root of the sample variance, denoted $s$.
+        * Why do we square the deviations rather than just adding them up like $\sum_{i = 0}^n (y_i - \overline y)$? The negative deviations and positive deviations would cancel each other out; squaring the values ensures that the standard deviation accumulate
+    * The **range of a dataset** is two numbers - the minimum value of the dataset, and the maximum value. This can also be thought of as the zeroth and fourth quartile values. We also often subtract the smaller from the larger to get a single-number range.
+    * The **interquartile range** (IQR) is the range of the middle 50% of the dataset - the first quartile value and third quartile value ($q(0.75) - q(0.25)$). It's more robust than the range because it excludes extreme values and outliers.
+    * The **sample variance** is defined as $s^2 = \frac{1}{n - 1} \sum_{i = 0}^n \left(y_i - \overline y\right)^2$. Note that the variance is $s^2$, not $s$. Also, the variance of a whole dataset/population $x = \set{x_1, \ldots, x_n}$.
+        * This is almost, but not quite, the average of the squared deviation from the mean.
+        * Basically, this measures how much the data is spread out from the mean.
+        * There's a good reason to divide by $n - 1$ rather than $n$, but we'll cover that later on.
+        * Under an affine transformation $y_i = ax_i + b$, $s_y^2 = a^2 s_x^2$ - the squared factor applies to the variance, but not the variance.
+        * Another useful formula for the sample variance is $s^2 = \frac 1 {n - 1} \left(\sum y_i^2 - n(\overline y)^2\right)$.
+        * Note that the units for the variance is always the square of the units for the samples themselves.
+    * The **standard deviation** is the positive square root of the sample variance, denoted $s$.
+        * Why do we square the deviations rather than just adding them up like $\sum_{i = 0}^n (y_i - \overline y)$? The negative deviations and positive deviations would cancel each other out; squaring the values ensures that the standard deviation accumulates to a non-negative value. This also ensures that variance is always symmetric - points above and below the mean both contribute the same amount to the variance.
+        * Why do we square the deviations rather than adding their absolute values like $\sum_{i = 0}^n \abs{y_i - \overline y}$? While the absolute value function would still represent variance (the given formula is called the **mean absolute deviation**), it's harder to work with since it's not differentiable. Also, the squared deviation is affected by outliers quadratically while the absolute deviation is only affected linearly, so taking its square root later would give unintuitive results.
+        * Under an affine transformation $y_i = ax_i + b$, $s_y = a s_x$ - the factor applies to the standard deviation, but not the intercept (this trivially follows from the formula for the sample variance).
+        * If the dataset is unimodal and roughly symmetric, then about 68% of the data will be within 1 standard deviation of the mean, and around 95% of the data will be within 2 standard deviations. This is because the dataset would look somewhat like the normal distribution, which has probability values that give us those numbers. This doesn't work so well for things like bimodal distributions, but is a very common summary in the real world.
+    * The **mean absolute deviation** is defined as $\frac{1}{n - 1} \sum_{i = 0}^n \abs{y_i - \overline y}$. This is what we get if we use the absolute value function rather than squaring in the formula for variance. It's relatively rarely used.
+* How fat the tails are, or **kurtosis** - the frequency of extreme obserations.
+* How symmetric the data is about some point or axis, or **symmetry**.
+
+# 11/1/17
+
+### Symmetry
+
+We also often care about **sample skewness** - how non-symmetric the data is. This measures how different the dataset looks when comparing the side of the mean, mirrored over to the right side. Left-skewing/negative-skewing datasets have distributions that seem to "lean to the right" (they have a long left tail), while right-skewing/positive-skewing distributions seem to "lean to the left" (they have a long right tail).
+
+One way to estimate skewness is to compare the mean and median, measuring $\text{mean} - \text{median}$. If the mean is less than the median, then we'd say the dataset might be left skewed (more of the weight is on the left), if they were equal, we say the dataset is probably symmetric (weight is about the same above and below the mean), and if the mean was greater than the median, then we say the dataset might be right-skewed (more of the weight is on the right side).
+
+The real measure of skewness is $\frac{\frac 1 n \sum \left(y_i - \overline y\right)^3}{\left(\frac 1 n \sum \left(y_i - \overline y\right)^2\right)^{\frac 3 2}}$. We won't be expected to memorize this for the course. The numerator is the the mean cubed error, and the denominator somewhat resembles the population variance. The use of cubing in the numerator preserves the sign of the error, while the denominator has the $\frac 3 2$ exponent in order to scale the numerator to a reasonable range.
+
+A long right tail in a dataset distribution means a positive skewness. A long left tail means a negative skewness. A symmetric distribution has a skewness close to 0. A skewness between -1 and 1 is generally considered "close to 0" for Guassian data.
+
+For example, if a person is diagnosed with a disease that has a mean time of death about 8 months after diagnoses, and survives for several months after diagnosis, then they should hope that the distribution of deaths is more right-skewed, so that most of the probability of death is already behind them.
+
+Skewness is defined as $\frac{\mu_3}{\sigma^3}$, where $\mu_3$ is the third central moment, $E[(Y - \mu)^3]$, and $\sigma$ is the standard deviation.
+
+### Spikiness
+
+**Sample kurtosis** is the measure of how frequent extreme observations are with respect to the normal distribution - how "s". Basically, it checks if the tails of the dataset's distribution are fatter (more extreme observations) or thinner (less extreme observations) than a normal distribution. It can also be said to measure how peaky/pointy the distribution's curve is - too much stuff in the middle means big values greater than 3, too little stuff in the middle means small values less than 3.
+
+Kurtosis is defined as $K = \frac{\frac 1 n \sum \left(y_i - \overline y\right)^4}{\left(\frac 1 n \sum \left(y_i - \overline y\right)^2 \right)^2}$. Note that $K$ must be non-negative. A normal distribution has $K = 3$. If $K > 3$, then the tails of the dataset's distribution are fatter than a normal distribution (there are more extreme observations), and if $K < 3$, then the tails of the dataset's distribution are thinner than a normal distribution (there are fewer extreme observations).
+
+Kurtosis of 0 means the data is all the same - there's no error. The uniform distribution has a kurtosis close to 1.8, because it has no outliers - all of the values are within a couple standard deviations. Values between 2 and 4 are generally considered "close to 3" for Guassian data.
+
+Kurtosis is especially useful in finance, where accurate assessment of risks and expected returns are important. It basically tells us how normal-like our data is - if the kurtosis is very close to 3, we can often assume that the dataset is normally distributed, which is extremely useful for doing statistics with.
+
+Kurtosis is defined as $\frac{\mu_4}{\sigma^4}$, where $\mu_4$ is the fourth central moment, $E[(Y - \mu)^4]$, and $\sigma$ is the standard deviation.
+
+So, to tell if a Guassian model is suitable for a given dataset, we can check if the mean/median are roughly the same, the skewness is close to 0, the kurtosis is close to 3, and about 95% of samples are within 2 standard deviations.
+
+The five-number summary of any dataset is a tuple containing the min, first quartile, median, third quartile, and the max. They're useful for summarizing location and spread, but they can't represent things like bimodal distributions.
+
+Graphical summaries
+-------------------
+
+A frequency histogram has rectangles where the height is the number of observations in that bucket. Note that the bucket sizes might not be the same. A **relative frequency** histogram is a frequency histogram where the rectangle heights are scaled based on the bucket width and the total number of observations - $\text{rectangle height} = \frac{\text{number of observations in bucket}}{\text{total number of observations} \times (\text{upper bound of bucket} - \text{lower bound of bucket})}$.
+
+Relative frequency histograms are useful because we can superimpose a probability density function on top of them, since the Y axes match. The sum of the rectangle areas also sum up to 1.
+
+Potential test question: which bucket of a relative frequency histogram does the median fall into? Each percentile of a histogram lies within the first bucket whose value, when added to all previous bucket values, is greater than that percentile. For example, to find the median's bucket, we add bucket heights from left to right until we reach or exceed 0.5.
+
+Empirical CDFs are to CDFs as relative frequency histograms are to PDFs - they're a way to let us graphically compare CDFs to the actual shape of the data. An empirical CDF is a step function that jumps up by $\frac 1 n$ (where $n$ is the number of observations) for each observation, where the X axis is observation values and the Y axis is the cumulative probability. Each percentile can be found in the empirical CDF by taking the X axis value correponding to that percentage of the Y axis. The CDF technically allows us to reproduce the entire dataset, given that it's drawn with enough resolution. The distribution and skewness of the data can be found by looking at the spacing between steps on the X axis - closer spacing on the left side compared to the right side implies the data tends to be positively skewed.
+
+Empirical CDFs are often used in research papers to summarize a dataset, since most datasets are too large to include in the paper.
+
+A **box-and-whiskers plot** is a useful way to show the five number summary that also highlights outliers. It's a 1D plot that looks something like this:
+
+      o   <- each outlier is plotted as a point, while non-outliers are only summarized by the box and whiskers
+    
+    ----- <- top whisker represents maximum value that isn't an outlier
+      |
+    ----- <- top of box represents third quartile
+    |   |
+    |---| <- line in the box represents median
+    |   |
+    ----- <- bottom of box represents first quartile
+      |
+    ----- <- bottom whisker represents minimum value that isn't an outlier
+    
+          <- there might not be any outliers in the dataset
+
+An **outlier** is an observation $x_i$ such that $x_i > Q_3 + 1.5 IQR$ or $x_i < Q_1 - 1.5 IQR$, where $Q_1, Q_3$ are the first and third quartiles, and $IQR$ is the interquartile range $Q_3 - Q_1$. The reason we use 1.5 is because it is convention, and fits the normal distribution relatively well. In other words, an outlier is any point that doesn't fall into the range $[2.5Q_1 - 1.5Q_3, 2.5Q_3 - 1.5Q_1)]$. When we're drawing a box plot, we figure out the quartiles, figure out the ranges in which observations are outliers, and then find the max/min observations that aren't outliers.
+
+Box plots visually show the shape of the data. A box with whiskers that are different lengths is skewed to one side, while the height of the box shows the dispersion.
+
+Box plots tell us the approximate variance, the quartiles, the outliers, and the skewness.
+
+# 13/1/17
+
+**Order statistics** are the sorted observation values.
+
+Consider a dataset containing mortality percentages from cancer types for female humans in Ontario, including lung cancer, stomach cancer, and other. Clearly, the population is human females in Ontario, and the dataset is categorical since the types of cancer are discrete and not ordered.
+
+What kind of graphical summary should we use? News sites might use a pie chart, while a better option might be a bar graph (a bar graph looks a lot like a histogram, but we space out the bars to show that each bar is a different thing).
+
+Graphs should always have appropriate axis bounds, have clearly labelled axes and titles with units, and should only be used when really appropriate.
+
+All of the above summaries are for univariate data. To summarize bivariate datasets (datasets of the form $\set{\tup{x_1, y_1}, \ldots, \tup{x_n, y_n}}$). A common way to do graphically summarize these datasets is a scatter plot, which is very useful for showing relationships between the two variates.
+
+The **sample correlation** is a measure of association between two numerical variables. It's defined as $r_{xy} = \frac{\sum \left(x_i - \overline x\right)\left(y_i - \overline y\right)}{\sqrt{\sum \left(x_i - \overline x\right)^2} \sqrt{\sum \left(y_i - \overline y\right)^2}}$. Basically, it measures the mean squared error of each pair, scaled by the square root of the individual mean squared errors - $r_{xy} = \frac{S_{xy}}{\sqrt{S_x S_y}}$, where $S_{x_1 \ldots, }$. Note that $-1 \le r_{xy} \le 1$ - values close to 1 means that there's a linear positive correlation, and values close to 0 means that there's almost no correlation. Specifically, it measures **linear association**.
+
+The sample correlation value is generally not very intuitive to guess - it's easy to find datasets that intuitively have no correlation, that have a large sample correlation. We usually wantto see a scatter plot or something to help verify our results.
+
+An explanatory variate is a variate that's used to explain or determine the distribution in a study. A response variate is a variate that changes in response to the explanatory variate. In other words, the explanatory variate is sort of like the cause, and the response variate is sort of like the effect. For example, if we have a study that asks if clicker grades determine the final STAT231 grade, an explanatory variate might be clicker grades, while the response variate might be the final STAT231 grade. Likewise, if we have a study that asks if final grades explain clicker marks, the final grade would be the explainatory variate, and the clicker grade would be the response variate.
+
+---
+
+My previous STAT231 notes follow:
 
 ---
 
@@ -90,38 +235,6 @@ Summaries
 ---------
 
 We often want to extract important information about a data set to find its properties. When we do so, we extract **data summaries**. We can do this **numerically** (like finding the mean, stddev, median, etc.) or **graphically** (like making a scatter plot). Numerical summaries tell us about certain fundamental properties of data sets, while graphical summaries tell us the shape of the data.
-
-Common numerical summaries we care about are:
-
-* The centre of the data, or **central tendency**:
-    * The **sample mean/arithmetic mean**: for a variable $y$, the sample mean is denoted $\overline y = \frac 1 n \sum_{i = 0}^n y_i$.
-        * The nice thing about this is that the sum of the deviations from the mean is always 0, so $\sum (y_i - \overline y) = 0$.
-        * Under an affine transformation $y_i = ax_i + b$, $\overline y = a \overline x + b$ - the mean can simply be transformed as well.
-    * The **geometric mean** is better for logarithmically distributed data: for a variable $y$, the geometric mean is denoted $\overline y = \left(\prod_{i = 0}^n y_i\right)^{\frac 1 n}$.
-    * The **harmonic mean** is rarely useful, and is the reciprocal of the arithmetic mean of the reciprocals of a variable.
-    * The average is usually the one value that, if applied in the problem's situation, is equivalent to applying all the original values.
-    * The **median** is the middle-most observation, or the sample mean of the middlemost observations if there are multiple. Essentially, we arrange the dataset in ascending order, and then pick the middle one.
-        * The advantage of medians is that they are less sensitive to outliers than summaries like the sample mean.
-        * The concept of the median can be extended to **quartiles** and **percentiles**, and generalized into **quartiles**. While the median is the value such that 50% of the dataset is at or below it, the quartiles and percentiles are a different fraction.
-        * The first quartile is a value for which 25% of the data is equal or below that value, while the second quartile is 50%, the third 75%, and the fourth 100%.
-        * The first percentile is a value for which 1% of the data is equal or below that value, while the second percentile is 2%, the third 3%, and so on.
-    * The **mode** is the observation or observations that occur most often (a dataset can have more than 1 mode). This is often more useful for categorical data, or discrete numerical data with only a few possibilities.
-* The volatility, or **dispersion**:
-    * The **range of a dataset** is two numbers - the minimum value of the dataset, and the maximum value. This can also be thought of as the zeroth and fourth quartile values.
-    * The **interquartile range** (IQR) is the range of the middle 50% of the dataset - the first quartile value and third quartile value.
-    * The **sample variance** is defined as $s^2 = \frac{1}{n - 1} \sum_{i = 0}^n \left(y_i - \overline y\right)^2$. Note that the variance is $s^2$, not $s$. Also, the variance of a dataset $x = \set{x_1, \ldots, x_n}$
-        * This is almost, but not quite, the average of the squared deviation from the mean.
-        * Basically, this measures how much the data is spread out from the mean.
-        * There's a good reason to divide by $n - 1$ rather than $n$, but we'll cover that later on.
-        * Under an affine transformation $y_i = ax_i + b$, $s_y^2 = a^2 s_x^2$ - the squared factor applies to the variance, but not the variance.
-        * Another useful formula for the sample variance is $s^2 = \frac 1 {n - 1} \left(\sum y_i^2 - n(\overline y)^2\right)$.
-    * The **standard deviation** is the positive square root of the sample variance, denoted $s$.
-        * Why do we square the deviations rather than just adding them up like $\sum_{i = 0}^n (y_i - \overline y)$? The negative deviations and positive deviations would cancel each other out; squaring the values ensures that the standard deviation accumulates to a non-negative value. This also ensures that variance is always symmetric - points above and below the mean both contribute the same amount to the variance.
-        * Why do we square the deviations rather than adding their absolute values like $\sum_{i = 0}^n \abs{y_i - \overline y}$? While the absolute value function would still represent variance (the given formula is called the **mean absolute deviation**), it's harder to work with since it's not differentiable. Also, the squared deviation is affected by outliers quadratically while the absolute deviation is only affected linearly, so taking its square root later would give unintuitive results.
-        * Under an affine transformation $y_i = ax_i + b$, $s_y = a s_x$ - the factor applies to the standard deviation, but not the intercept (this trivially follows from the formula for the sample variance).
-    * The **mean absolute deviation** is defined as $\frac{1}{n - 1} \sum_{i = 0}^n \abs{y_i - \overline y}$. This is what we get if we use the absolute value function rather than squaring in the formula for variance. It's relatively rarely used.
-* How fat the tails are, or **kurtosis** - the frequency of extreme obserations.
-* How symmetric the data is about some point or axis, or **symmetry**.
 
 Suppose we have $100 in a bank account, with 4% interest the first year, 8% the second, and 12% the third. What is the average interest rate?
 
@@ -172,24 +285,6 @@ We can actually test this by looking at the batting average for individual avera
 
 # 9/5/16
 
-### Symmetry
-
-We also often care about **skewness** - how non-symmetric the data is. This measures how different the dataset looks when comparing the side of the mean, mirrored over to the right side. Left-skewing/negative-skewing datasets have distributions that seem to "lean to the right" (they have a long left tail), while right-skewing/positive-skewing distributions seem to "lean to the left" (they have a long right tail).
-
-One way to estimate skewness is to compare the mean and median, measuring $\text{mean} - \text{median}$. If the mean is less than the median, then we'd say the dataset might be left skewed (more of the weight is on the left), if they were equal, we say the dataset is probably symmetric (weight is about the same above and below the mean), and if the mean was greater than the median, then we say the dataset might be right-skewed (more of the weight is on the right side).
-
-The real measure of skewness is $\frac{\frac 1 n \sum \left(y_i - \overline y\right)^3}{\left(\frac 1 n \sum \left(y_i - \overline y\right)\right)^{\frac 3 2}}$. We won't be expected to memorize this for the course.
-
-For example, if a person is diagnosed with a disease that has a mean time of death about 8 months after diagnoses, and survives for several months after diagnosis, then they should hope that the distribution of deaths is more right-skewed, so that most of the probability of death is already behind them.
-
-### Spikiness
-
-**Kurtosis** is the measure of how frequent extreme observations are with respect to the normal distribution. Basically, it checks if the tails of the dataset's distribution are fatter (more extreme observations) or thinner (less extreme observations) than a normal distribution. It can also be said to measure how peaky/pointy the distribution's curve is at the top.
-
-Kurtosis is defined as $K = \frac{\frac 1 n \sum \left(y_i - \overline y\right)^4}{\left(\frac 1 n \sum \left(y_i - \overline y\right)\right)^2}$. A normal distribution has $K = 3$. If $K > 3$, then the tails of the dataset's distribution are fatter than a normal distribution (there are more extreme observations), and if $K < 3$, then the tails of the dataset's distribution are thinner than a normal distribution (there are fewer extreme observations).
-
-Kurtosis is especially useful in finance, where accurate assessment of risks and expected returns are important. It basically tells us how normal-like our data is - if the kurtosis is very close to 3, we can often assume that the dataset is normally distributed, which is extremely useful for doing statistics with.
-
 ### Association
 
 Suppose we have a dataset $D = \set{\tup{x_1, y_1}, \ldots, \tup{x_n, y_n}}$ with two variables. How do we measure how much these two variables are associated (how is one variable affected by the other)?
@@ -199,8 +294,6 @@ For example, suppose we have categorical variables, $x = \set{\text{smoker}, \te
 **Relative risk** is a measure of association between two categorical variables. Basically, relative risk is $\frac{P(A \mid B)}{P(A \mid \neg B)}$ - the probability of $A$ occurring given that $B$ occurrs over the probability of $A$ occurring given that $B$ does not occur. For independent variables, relative risk is 1. The farther the relative risk is from 1, the more strongly it implies that the variables are associated.
 
 For two categorical Boolean variables, relative risk is $\frac{\frac{\abs{x \wedge y}}{\abs{x}}}{\frac{\abs{\neg x \wedge y}}{\abs{\neg x}}}$. Expanded into a more useful form, it becomes $\frac{\frac{\abs{x \wedge y}}{\abs{x \wedge y} + \abs{x \wedge \neg y}}}{\frac{\abs{\neg x \wedge y}}{\abs{\neg x \wedge y} + \abs{\neg x \wedge \neg y}}}$.
-
-The **sample correlation coefficient** is a measure of association between two numerical variables, like relative risk is for two categorical variables. It's defined as $r_{xy} = \frac{\sum \left(x_i - \overline x\right)\left(y_i - \overline y\right)}{\sqrt{\sum \left(x_i - \overline x\right)^2} \sqrt{\sum \left(y_i - \overline y\right)^2}}$. Specifically, it measures **linear association**.
 
 The sign of $r_{xy}$ (specifically, the sign of the numerator) tells us the direction of the association (positive means variables tend to increase each other, while negative means one tends to increase when the other decreases, and vice versa), and the magnitude of $r$ tells us the strength of the association (0 meaning no association). The denominator ensures that $-1 \le r_{x, y} \le 1$ for any dataset.
 
@@ -227,26 +320,6 @@ In contrast, statisticians usually mean **density histograms** when talking abou
 The bins in a density histogram don't all have to all have the same range - one can encompass 30 elements, while another might encompass 10. On the plot, the bars don't all have to have the same width. The height of each bar is chosen such that the area of the bar (width of the bin times the height) is equal to the relative frequency of observations that fall into its corresponding bin. The relative frequency is simply $\frac{\text{number of observations in the bin}}{\text{total number of observations}}$.
 
 Note that the total area underneath the density histogram is always 1. Since the total area under a probability density function is also 1, the density histogram is very useful for comparing data with known probability density functions, which we do very often when trying to figure out if a dataset follows a certain distribution. We can't use the usual frequency histogram for this because the total area of the bars doesn't add up to 1.
-
-A **box-and-whiskers plot** is a useful way to show the five number summary that also highlights outliers. It's a 1D plot that looks something like this:
-
-      o   <- each outlier is plotted as a point, while non-outliers are only summarized by the box and whiskers
-    
-    ----- <- top whisker represents maximum value that isn't an outlier
-      |
-    ----- <- top of box represents third quartile
-    |   |
-    |---| <- line in the box represents median
-    |   |
-    ----- <- bottom of box represents first quartile
-      |
-    ----- <- bottom whisker represents minimum value that isn't an outlier
-    
-          <- there might not be any outliers in the dataset
-
-An **outlier** is an observation $x_i$ such that $x_i > Q_3 + 1.5 IQR$ or $x_i < Q_1 - 1.5 IQR$, where $Q_1, Q_3$ are the first and third quartiles, and $IQR$ is the interquartile range $Q_3 - Q_1$. The reason we use 1.5 is because it is convention, and fits the normal distribution relatively well. In other words, an outlier is any point that doesn't fall into the range $[2.5Q_1 - 1.5Q_3, 2.5Q_3 - 1.5Q_1)]$. When we're drawing a box plot, we figure out the quartiles, figure out the ranges in which observations are outliers, and then find the max/min observations that aren't outliers.
-
-Box plots visually show the shape of the data. A box with whiskers that are different lengths is skewed to one side, while the height of the box shows the dispersion.
 
 The **empirical cumulative distribution function** (empirical CDF) for discrete numerical data is a plot where the X axis is the range of possible observation values, and the Y axis is the number of observations that are less than or equal to that value. So for a dataset $x = \set{x_1, \ldots, x_n}$, and $F(x_i) = \abs{\set{v \in x \middle| v \le x_i}}$, the empirical CDF is a plot of $(x_i, F(x_i))$.
 
