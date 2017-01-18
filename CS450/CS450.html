@@ -134,7 +134,10 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <span class="co">// for a full adder, `sum = a XOR b XOR c_in`, and `c_out = ((a XOR b) AND c_in) OR a AND b`</span>
 
 <span class="kw">module</span> full_adder(<span class="dt">input</span> a, b, c_in, <span class="dt">output</span> c_out, sum);
-    <span class="co">// a logic is basically a wire - here, we&#39;re declaring our wires</span>
+    <span class="co">// a `logic` is basically a connection/wire - here, we&#39;re declaring our wires</span>
+    <span class="co">// a `wire` is equivalent to a `wire logic`, which is a logic that supports multiple drivers</span>
+    <span class="co">// generally, we just use logic unless we need multiple drivers - the compiler will choose the best structure depending on how they&#39;re used</span>
+    <span class="co">// there are also `bit` and `byte`, which are basically logics that can only be 0 or 1, not X or Z</span>
     logic w1, w2, w3; <span class="co">// these are wires that are used for connecting gates in the full adder together</span>
     <span class="dt">xor</span> x1(w1, a, b);
     <span class="dt">xor</span> x2(sum, w1, c_in);
@@ -217,6 +220,7 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
     <span class="kw">assign</span> carry[<span class="dv">0</span>] = c_in; <span class="co">// this is a continuous assignment statement - it&#39;s sort of like a one-way wire for the c_in signal in this case, but it can also do things like combinational logic with different gates and stuff</span>
     <span class="kw">assign</span> c_out = carry[<span class="dv">4</span>]; <span class="co">// since the assignment is unidirectional, the inputs are on the right side of the equal sign, and the outputs are on the left side</span>
 <span class="kw">endmodule</span></code></pre></div>
+<p>Usually for loops are discouraged, but they're fine for generate statements - in other contexts, they might not compile to actual hardware.</p>
 <h2 id="dataflow-modelling">Dataflow modelling</h2>
 <p>Dataflow modelling is the next level of abstraction above gate-level modelling. Dataflow modelling deals only with combinational circuits, by representing them with continuous assignment statements.</p>
 <p>Basically, we represent what logical operations the circuit needs to do, and the compiler will figure out what kind of gate layout we need. For example, for a full adder it might automatically decide to reuse the <code>xor(a, b)</code> gate.</p>
@@ -352,6 +356,33 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <span class="kw">endmodule</span></code></pre></div>
 <p>Verilog has sized literals for numbers. For example, <code>16'h0001</code> means a 16-bit hexadecimal value 1, <code>1'b1</code> means the 1-bit binary value 1, and <code>4'd8</code> means the 4-bit decimal value 8.</p>
 <p>Overview of assignment 1. Assignment involves filling out Verilog module stubs and writing test benches.</p>
+<h1 id="section-4">17/1/17</h1>
+<p>Room has been moved to HH 1102, which should be a lot closer to campus than OPT.</p>
+<h2 id="processor-design">Processor Design</h2>
+<p>There are multiple levels of abstraction when talking about a processor design. From most abstract to least abstract, the main ones are:</p>
+<ul>
+<li>Instruction-set architecture (ISA) - defines functional behaviour like instruction format, addressing modes, hazards, registers, privileges, exceptions, etc. For example, IA32 (also known as x86), IA64/AMD64 (also known as x86-64), PowerPC, MIPS, ARM, RISC-V.</li>
+<li>Microarchitecture - defines the hardware structure like pipeline structure, cache organization, branch prediction schemes. For example, Intel i386, Intel i486, Intel Skylake, MIPS R16000.</li>
+<li>Implementation - defines physical realization like gate design, transistor technology, fabrication technology.</li>
+</ul>
+<p>In the 1980s the main focus in processor design was improving single core performance and clock speed. Today, focus is on more cores at a lower clock speed, and doing more with each cycle (modern Intel CPUs can do 4-8 instructions per cycle!). New microarchitecture-level techniques like instruction-level parallelism (parallelism within 1 thread) and hyperthreading (parallelism between multiple threads on one core), speculative execution (running both sides of a branch and then throwing away the wrong one once the branch is done), out of order execution (rearranging instructions to improve parallelism) have also resulted in significant performance gains. The main issue preventing more single core performance and clock speed is the <strong>power wall</strong>.</p>
+<p><strong>Dynamic power consumption</strong> is the power consumed that depends on the processor workload. When a transistor switches, it must use energy proportional to the capacitive load times the voltage squared. So the power used (switching frequency times switching energy) quicky increases linearly with the switching frequency, resulting in increased cooling requirements and worse battery life. One technique modern processors use to try to get around this is to reduce the switching voltage to quadratically reduce the switching energy required - for example, a 15% reduction in voltage results in a 28% reduction in switching energy.</p>
+<p>There's also <strong>static energy consumption</strong>, the power consumed regardless of the processor workload. As transistors get smaller, the leakage current increases (due to quantum tunneling in the transistor junctions), which means more power used per transistor.</p>
+<p>Modern techniques involve thread-level parallelism (doing multiple tasks at once), and data-level parallelism (doing something to multiple pieces of data at once).</p>
+<p><strong>Fynn's taxonomy</strong> characterizes four classes of parallelism:</p>
+<ul>
+<li>Single-instruction single-data - single processing unit acting on single pieces of data. For example, a core calculating one scalar value. For these, we can take advantage of instruction-level parallelism.</li>
+<li>Single-instruction multiple-data - single processing unit acting on multiple pieces of data. For example, DSP units, GPUs, vector instructions. For these, we can take advantage of data-level and instruction-level parallelism.</li>
+<li>Multiple-instruction single-data - multiple processing units acting on single pieces of data. Not really used in practice.</li>
+<li>Multiple-instruction multiple-data - multiple processing units acting on multiple pieces of data. For example, multithreading and multiprocessing. For these, we can take advantage of thread-level, data-level, and instruction-level parallelism.</li>
+</ul>
+<p>Recall MIPS:</p>
+<ul>
+<li>32-bit instructions, in one of two formats. First format: 6 bits for opcode, 5 bits for register operand 1, 5 bits for register operand 2, upper 16 bits for immediate value. Second format: 6-bit opcode, 5 bits each for register operand 1, 2, and 3, 5-bit shift amount, and 6-bit shift type specifier. See CS241 notes for more details about MIPS instructions.</li>
+<li>32 registers R0 to R31, R0 always has value 0.</li>
+<li>In this course, we'll use a 5-stage pipeline for fetch, decode, execute, memory, and writeback. We can overlap up to 5 instructions at once.</li>
+<li>Instruction flow is linear (statically scheduled), and one instruction is completed per cycle (ideally). In other words, instructions are run in whatever order they're stored as, and we don't dynamically rearrange to improve parallelism.</li>
+</ul>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

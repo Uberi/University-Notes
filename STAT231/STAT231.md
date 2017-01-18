@@ -85,18 +85,6 @@ Common numerical summaries we care about are:
     * The mean, median, and mode aren't always a good measure of centrality. We can combine this with other types of summaries to get a more accurate picture. For example, histograms are a great way to see the entire distribution of the data.
 * The volatility, or **dispersion** - how far the values are spread out:
     * The **range of a dataset** is two numbers - the minimum value of the dataset, and the maximum value. This can also be thought of as the zeroth and fourth quartile values. We also often subtract the smaller from the larger to get a single-number range.
-    * The **interquartile range** (IQR) is the range of the middle 50% of the dataset - the first quartile value and third quartile value.
-    * The **sample variance** is defined as $s^2 = \frac{1}{n - 1} \sum_{i = 0}^n \left(y_i - \overline y\right)^2$. Note that the variance is $s^2$, not $s$. Also, the variance of a whole dataset/population $x = \set{x_1, \ldots, x_n}$.
-        * This is almost, but not quite, the average of the squared deviation from the mean.
-        * Basically, this measures how much the data is spread out from the mean.
-        * There's a good reason to divide by $n - 1$ rather than $n$, but we'll cover that later on.
-        * Under an affine transformation $y_i = ax_i + b$, $s_y^2 = a^2 s_x^2$ - the squared factor applies to the variance, but not the variance.
-        * Another useful formula for the sample variance is $s^2 = \frac 1 {n - 1} \left(\sum y_i^2 - n(\overline y)^2\right)$.
-        * Note that the units for the variance is always the square of the units for the samples themselves.
-        * Variance is also known as $\mu_2$, the second central moment, $E[(Y - \mu)^2]$.
-    * The **standard deviation** is the positive square root of the sample variance, denoted $s$.
-        * Why do we square the deviations rather than just adding them up like $\sum_{i = 0}^n (y_i - \overline y)$? The negative deviations and positive deviations would cancel each other out; squaring the values ensures that the standard deviation accumulate
-    * The **range of a dataset** is two numbers - the minimum value of the dataset, and the maximum value. This can also be thought of as the zeroth and fourth quartile values. We also often subtract the smaller from the larger to get a single-number range.
     * The **interquartile range** (IQR) is the range of the middle 50% of the dataset - the first quartile value and third quartile value ($q(0.75) - q(0.25)$). It's more robust than the range because it excludes extreme values and outliers.
     * The **sample variance** is defined as $s^2 = \frac{1}{n - 1} \sum_{i = 0}^n \left(y_i - \overline y\right)^2$. Note that the variance is $s^2$, not $s$. Also, the variance of a whole dataset/population $x = \set{x_1, \ldots, x_n}$.
         * This is almost, but not quite, the average of the squared deviation from the mean.
@@ -105,6 +93,7 @@ Common numerical summaries we care about are:
         * Under an affine transformation $y_i = ax_i + b$, $s_y^2 = a^2 s_x^2$ - the squared factor applies to the variance, but not the variance.
         * Another useful formula for the sample variance is $s^2 = \frac 1 {n - 1} \left(\sum y_i^2 - n(\overline y)^2\right)$.
         * Note that the units for the variance is always the square of the units for the samples themselves.
+        * Variance is also known as $\mu_2$, the second central moment, $E[(Y - \mu)^2]$.
     * The **standard deviation** is the positive square root of the sample variance, denoted $s$.
         * Why do we square the deviations rather than just adding them up like $\sum_{i = 0}^n (y_i - \overline y)$? The negative deviations and positive deviations would cancel each other out; squaring the values ensures that the standard deviation accumulates to a non-negative value. This also ensures that variance is always symmetric - points above and below the mean both contribute the same amount to the variance.
         * Why do we square the deviations rather than adding their absolute values like $\sum_{i = 0}^n \abs{y_i - \overline y}$? While the absolute value function would still represent variance (the given formula is called the **mean absolute deviation**), it's harder to work with since it's not differentiable. Also, the squared deviation is affected by outliers quadratically while the absolute deviation is only affected linearly, so taking its square root later would give unintuitive results.
@@ -191,13 +180,77 @@ What kind of graphical summary should we use? News sites might use a pie chart, 
 
 Graphs should always have appropriate axis bounds, have clearly labelled axes and titles with units, and should only be used when really appropriate.
 
-All of the above summaries are for univariate data. To summarize bivariate datasets (datasets of the form $\set{\tup{x_1, y_1}, \ldots, \tup{x_n, y_n}}$). A common way to do graphically summarize these datasets is a scatter plot, which is very useful for showing relationships between the two variates.
+All of the above summaries are for univariate data. However, bivariate datasets (datasets of the form $\set{\tup{x_1, y_1}, \ldots, \tup{x_n, y_n}}$) are also common. We often graphically summarize these datasets with a scatter plot, which is very useful for showing relationships between the two variates.
 
-The **sample correlation** is a measure of association between two numerical variables. It's defined as $r_{xy} = \frac{\sum \left(x_i - \overline x\right)\left(y_i - \overline y\right)}{\sqrt{\sum \left(x_i - \overline x\right)^2} \sqrt{\sum \left(y_i - \overline y\right)^2}}$. Basically, it measures the mean squared error of each pair, scaled by the square root of the individual mean squared errors - $r_{xy} = \frac{S_{xy}}{\sqrt{S_x S_y}}$, where $S_{x_1 \ldots, }$. Note that $-1 \le r_{xy} \le 1$ - values close to 1 means that there's a linear positive correlation, and values close to 0 means that there's almost no correlation. Specifically, it measures **linear association**.
+The **sample correlation** is a measure of association between two numerical variables. It's defined as $r_{xy} = \frac{\sum \left(x_i - \overline x\right)\left(y_i - \overline y\right)}{\sqrt{\sum \left(x_i - \overline x\right)^2} \sqrt{\sum \left(y_i - \overline y\right)^2}}$. Basically, it's a simplified version of $r_{xy} = \frac{S_{xy}}{\sqrt{S_x S_y}}$, where $S_{x_1 \ldots, x_n}$ is the covariance and $S_x$ is the variance. Note that $-1 \le r_{xy} \le 1$ - values close to 1 means that there's a linear positive correlation, and values close to 0 means that there's almost no correlation. Specifically, sample correlation measures **linear association**.
 
 The sample correlation value is generally not very intuitive to guess - it's easy to find datasets that intuitively have no correlation, that have a large sample correlation. We usually wantto see a scatter plot or something to help verify our results.
 
 An explanatory variate is a variate that's used to explain or determine the distribution in a study. A response variate is a variate that changes in response to the explanatory variate. In other words, the explanatory variate is sort of like the cause, and the response variate is sort of like the effect. For example, if we have a study that asks if clicker grades determine the final STAT231 grade, an explanatory variate might be clicker grades, while the response variate might be the final STAT231 grade. Likewise, if we have a study that asks if final grades explain clicker marks, the final grade would be the explainatory variate, and the clicker grade would be the response variate.
+
+# 16/1/17
+
+Start reading chapter 2. Look up information about tutorial test 1 on Odyssey and on LEARN. Seats are assigned.
+
+Scatter plots work for numeric datasets, like discrete or continuous ones. However, we can't use them for categorical datasets, like the dataset consisting of pairs containing whether a particular student is from Canada, and which university program they're in. For these bivariate categorical datasets, we have different summaries. One of them is a table.
+
+Another way is the relative risk. Suppose we have a dataset $D = \set{\tup{x_1, y_1}, \ldots, \tup{x_n, y_n}}$ with two variables. **Relative risk** a way of summarizing bivariate categorical data - a measurement of how two variables affect each other. Basically, relative risk is $\frac{P(A \mid B)}{P(A \mid \neg B)}$ - the probability of $A$ occurring given that $B$ occurrs over the probability of $A$ occurring given that $B$ does not occur. For independent variables, relative risk is 1. The farther the relative risk is from 1, the more strongly it implies that the variables are associated.
+
+For example, suppose we have categorical variables, $x = \set{\text{smoker}, \text{non-smoker}}$ and $y = \set{\text{lung cancer}, \text{no lung cancer}}$. How do we determine the relationship between these variables, given a dataset of samples?
+
+Statistical Problems
+--------------------
+
+We have been doing descriptive statistics so far - describing statistical phenomena that we can see with numerical and graphical techniques to show features of interest (e.g., data mining, data analysis).
+
+Now we will focus on statistical inference - predicting statistical phenomena that we can't see, and generalizing conclusions from studies to the whole process/population (i.e., machine learning). It's a form of inductive reasoning.
+
+The types of problems we'll look at in this course are:
+
+* Estimation problems (what proportion of Ontario residents aged 14-20 smoke? what's the distribution of survival times for HIV patients?)
+* Hypothesis testing problems (is it true that a particular cancer treatment works? does so-and-so reduce criminal activity?)
+* Prediction problems (what will the value of this stock be at a particular time? how much will a patient's blood pressure drop if they take this drug?)
+
+We use our numerical and graphical summaries to choose a statistical models (mathematical models incorporating probability) to fit the data. For example, we can use statistical models to fit the exchange rate between CAD and Euro, or when earthquakes/natural disasters are likely to happen. Statistical models can even be used to simulate experiments using computers.
+
+A **random variable** is a variable that represents a variate of a randomly selected unit of a population/process.
+
+Statistical models are chosen based on background knowledge about populations (for example, we might have traffic accident data, which can be a Poisson process due to the way the process works), past experience (human height data is usually normally distributed), mathematical convenience (using easy-to-understand and easy-to-use models where possible, like Guassian), and datasets that the models will be tested against (for example, we might be testing against normally distributed data).
+
+In STAT230 we covered a lot of different families of statistical models, like:
+
+* $Y \tilde \mathrm{Binomial}(n, \theta)$ for sequences of $n$ independent success/fail trials each with $\theta$ probability of success, where $Y$ is the number of successes.
+* $Y \tilde \mathrm{Poisson}(\theta)$ for random occurences of an event over time averaging $\theta$ per unit time, where $Y$ is the number of event occurences.
+* $Y \tilde \mathrm{Exponential}(\theta)$ for random occurences of an event over time averaging $\theta$ per unit time, where $Y$ is the time between event occurences.
+* $Y \tilde \mathrm{Guassian}(\theta), \theta = \tup{\mu, \sigma}$ for a wide variety of measures occurring in nature or when many statistical models are summed together, where $Y$ is the value of the quantity.
+
+The PDF of a random variable is $f(y; \theta)$ where $y \in \mathrm(range)(Y)$ - we want to show that the model is dependent on the value of the statistical model family's parameters.
+
+# 18/1/17
+
+Tutorial test 1 was today. Start working on chapter 2 end of chapter problems.
+
+The tutorial test had a few questions about parameter estimation - estimating the parameters for a statistical model based on a sample of a population/process, and quantoify how good those estimates are.
+
+For example, we can estimate $\mu$ in a normal distribution as the sample mean, or $\sigma^2$ as the sample variance. We could also use the sample proportion to estimate $p$ in a Binomial distribution. We figured this out intuitively, but there are formal ways to estimate parameters too. In this course, we'll look at the Method of Maximum Likelihood (MLE), the most often used method. Another common one is the Bayesian Estimation Method.
+
+A **point estimate** of a parameter $\theta$ is an estimate $\hat \theta$ that is the result of a function (called a point estimator) of observed data $y_1, \ldots, y_n$. For example, the sample mean $\overline y$ is a point estimate for the parameter $\mu$ in a Guassian distribution.
+
+Suppose we have a coin that has probability $\theta$ of being heads. How do we estimate $\theta$? Intiutively, to get the **best guess/estimate** we can from the available data, we could use a Binomial model, flip the coin a lot of times, and take the sample proportion to estimate the model's $p$ parameter. We could also keep flipping the coin until we got some number of failures, and use a negative binomial model.
+
+The best guess is not the same thing as a good/reasonable guess - a good/reasonable guess is just one that makes the result we got relatively probable. A bad guess would make the result we got unlikely, like guessing that our coin was fair if we only got 1/100 heads (it's highly improbably that the coin has 50% heads if we observe that).
+
+The best guess of a parameter is the one that is most likely to give us the results we did - the **maximum likelihood estimate** $\hat \theta$ (note that this is the same as the point estimate). For example, if we flip a coin 100 times and get 45 heads, assuming a binomial model, the value of parameter $p$ that is most likely to give us this result is 0.4.
+
+In other words, if we graph $P(Y = 45)$ where $Y ~ \mathrm{Binomial}(n, p)$ over all possible $p$, the graph has a peak at $p = 0.4$. Any procedure that finds the parameter that gives us the maximum likelihood estimate is called a **Method of Maximum Likelihood**. Basically, we decide how plausible each value of $\theta$ is by looking at how probably it makes our observations.
+
+Note that $Y$ is a random variable representing the potential data used to estimate $\theta$, while $y$ is the actual, observed data. Also, the set of possible values of $\theta$ is often called $\Omega$, the parameter space.
+
+The **likelihood function** for $\theta$ in a statistical model is defined as $L(\theta; y) = P(Y = y; \theta) = P(Y = y; \theta)$ (the probability of observing data $y$ as a function of $\theta$), sometimes shortened as $L(\theta)$. The method of maximum likelihood is finding the value of $\theta$ that maximizes the likelihood function. Usually, we do this by differentiating the likelihood function with respect to $\theta$, then setting that derivative to 0 and solving for $\theta$ to find the critical points, then checking to see if they're the global maximum.
+
+For example, the likelihood function for $\theta$ in a binomial model is $L(\theta; y) = P(Y = y; \theta) = {n \choose y} \theta^y (1 - \theta)^{n - y}$ - we just substituted $y$ in place of $k$.
+
+The value of the likelihood function doesn't actually matter, only how large it is relative to other values of the likelihood function. That means we can drop constant factors and terms in the likelihood function, since the maximum would still occur at the same $\theta$ value. For example, we can just as well use $L(\theta; y) = \theta^y (1 - \theta)^{n - y}$.
 
 ---
 
@@ -305,7 +358,7 @@ Since we're assuming our dataset is a sample of the population rather than the p
 
 # 11/5/16
 
-The reason we have supparies is to figure out the shape of a dataset, and see if we can identify it as following a certain distribution. obtaining the distribution allows us to make predictions about future observations and other useful statistical things.
+The reason we have summaries is to figure out the shape of a dataset, and see if we can identify it as following a certain distribution. obtaining the distribution allows us to make predictions about future observations and other useful statistical things.
 
 The **five number summary** of a dataset is a common set of summaries: minimum, first quartile, median, third quartile, and, maximum. Basically, it gives 5 equally spaced points on the histogram.
 
