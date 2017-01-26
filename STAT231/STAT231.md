@@ -246,11 +246,88 @@ In other words, if we graph $P(Y = 45)$ where $Y ~ \mathrm{Binomial}(n, p)$ over
 
 Note that $Y$ is a random variable representing the potential data used to estimate $\theta$, while $y$ is the actual, observed data. Also, the set of possible values of $\theta$ is often called $\Omega$, the parameter space.
 
-The **likelihood function** for $\theta$ in a statistical model is defined as $L(\theta; y) = P(Y = y; \theta) = P(Y = y; \theta)$ (the probability of observing data $y$ as a function of $\theta$), sometimes shortened as $L(\theta)$. The method of maximum likelihood is finding the value of $\theta$ that maximizes the likelihood function. Usually, we do this by differentiating the likelihood function with respect to $\theta$, then setting that derivative to 0 and solving for $\theta$ to find the critical points, then checking to see if they're the global maximum.
+Maximum Likelihood Estimates
+----------------------------
+
+The **likelihood function** for $\theta$ in a statistical model is defined as $L(\theta; y) = P(Y = y; \theta) = P(Y = y; \theta)$ (the probability of observing data $y$ as a function of $\theta$), sometimes shortened as $L(\theta)$. The **maximum likelihood estimate** is the value of $\theta$ that maximizes the likelihood function. Usually, we do this by differentiating the likelihood function with respect to $\theta$, then setting that derivative to 0 and solving for $\theta$ to find the critical points, then checking to see if they're the global maximum.
+
+### Discrete distributions
 
 For example, the likelihood function for $\theta$ in a binomial model is $L(\theta; y) = P(Y = y; \theta) = {n \choose y} \theta^y (1 - \theta)^{n - y}$ - we just substituted $y$ in place of $k$.
 
 The value of the likelihood function doesn't actually matter, only how large it is relative to other values of the likelihood function. That means we can drop constant factors and terms in the likelihood function, since the maximum would still occur at the same $\theta$ value. For example, we can just as well use $L(\theta; y) = \theta^y (1 - \theta)^{n - y}$.
+
+# 20/1/17
+
+The likelihood function is the probability of observing the data $y$ as a function of the unknown constant $\theta$, scaled by an arbitrary positive constant $k$.
+
+The **relative likelihood function** is defined as $R(\theta; y) = \frac{L(\theta; y)}{L(\hat \theta)}$ - the likelihood function rescaled to be between 0 and 1. This makes comparing likelohood functions easier.
+
+The binomial relative likelihood function is $\frac{\theta^y (1 - \theta)^{n - y}}{\hat \theta (1 - \hat \theta)^{n - y}}$ where $\hat \theta = \frac y n$.
+
+What is the Y axis of the relative likelihood function? It's the **likelihood** of the X axis, not the probability of anything. Likewise, $\theta$ isn't a probability either, just an unknown constant. For example, a value of $\theta$ that makes $R(\theta) = 0.6$ means that $\theta$ is 0.6 times as likely as the maximum likelihood estimate.
+
+A likelihood is different from a probability - **likelihoods are the frequency of certain hypotheses out of all hypotheses, while probabilities are the frequency of certain results out of all results**. Hypotheses are statements like "the unknown parameter $\theta$ is 0.3", and results are something like "we observed "
+
+The **log likelihood function** is just the log of the likelihood function, $l(\theta) = \ln L(\theta)$. Clearly, it has its maximum at the same point, even though the shape is different.
+
+We like the log likelihood function because it's often easier to differentiate, which makes it easier to find the maximum likelihood estimate. Since likelihood functions are often products of lots of factors, using the product rule over and over again quickly gets messy. The log likelihood function can often be written as multiple terms using the $\ln a + \ln b = \ln(ab)$ identity, after which we can differentiate individual terms really easily using the sum rule.
+
+For example, the log likelihood function is $l(\theta; y) = \ln \left(\theta^y (1 - \theta)^{n - y}\right) = y \ln \theta + (n - y) \ln (1 - \theta)$. Differentiating this is a piece of cake, and we get $\frac{\dee}{\dee \theta} l(\theta) = \frac y \theta - \frac{n - y}{1 - \theta} = \frac{y - \theta n}{\theta(1 - \theta)}$. Solving $\frac{y - \theta n}{\theta(1 - \theta)} = 0$, we get $\theta = \frac y n$, as expected.
+
+Suppose we have two independent data sets $y, z$ for two independent random variables $Y, Z$ that share a parameter $\theta$. Clearly, $P(Y = y, Z = z; \theta) = P(Y = y; Z = z; \theta)$, so the combined likelihood is $L(\theta; y) L(\theta; z)$.
+
+# 23/1/17
+
+Suppose $y_1, \ldots, y_n$ is the number of events that occurred at day 1 to $n$, respectively, and a Poisson distribution is appropriate for this dataset. What's the likelihood function for the Poisson distribution $Y \tilde \mathrm{Poisson}(\theta)$, where $\theta$ is the average rate of events?
+
+Intuitively, we know that the average rate of accidents is $\overline y$. Why is this?
+
+Here, the likelihood function is $L(\theta; y_1, \ldots, y_n)P(\text{observing the data } y_1, \ldots, y_n; \theta)$ - the probability of observing the events we did for any given average event rate.
+
+Let $Y_i$ be the number of events recorded on day $i$. Then $L(\theta; y_1, \ldots, y_n) = P(Y_1 = y_1, \ldots, Y_n = y_n; \theta)$. Since each event occurring is independent (one of the assumptions necessary to use the Poisson distribution), $P(Y_1 = y_1, \ldots, Y_n = y_n; \theta) = P(Y_1 = y_1; \theta) \ldots P(Y_n = y_n; \theta) = \prod_{i = 1}^n \frac{\theta^{y_i} e^{-\theta}}{y_i!} = \frac{1}{\prod_{i = 1}^n y_i!} \theta^{\sum_{i = 1}^n y_i} e^{-n\theta}$.
+
+To simplify the equation, we can use the fact that $n\overline y = \sum_{i = 1}^n y_i$. Then, dropping the constant factors and substituting $n \overline y$ in, we get $L(\theta; y_1, \ldots, y_n) = \theta^{n \overline y} e^{-n\theta}$. So, the log likelihood function is $l(\theta; y_1, \ldots, y_n) = n \overline y \log \theta - n \theta$.
+
+Differentiating, $l'(\theta) = \frac{n \overline y}{\theta} - n$, so if $l'(\theta) = 0$, $\theta = \overline y$.
+
+So $\hat \theta = \overline y$ - the sample mean. Also, the relative likelihood function is $\frac{\theta^{n \overline y} e^{-n \theta}}{{\hat \theta}^{n \overline y} e^{-n \hat \theta}}$.
+
+Recommended problem: course notes, example 2.2.4 (page 57-58)
+
+Suppose we have a randomly selected sample $y = \tup{y_1, \ldots, y_n}$ from a random variable $Y = \tup{Y_1, \ldots, Y_n}$. Since each $Y_i$ is independent of the others, $L(\theta; y) = P(Y_1 = y_1, \ldots, Y_n = y_n) = P(Y_1 = y_1) \cdots P(Y_n = y_n)$.
+
+### Continuous distributions
+
+For discrete distributions so far we had $L(\theta; y) = P(Y = y; \theta)$. However, this isn't suitable for continuous random variables, since $P(Y = y; \theta)$ is always 0 (what's the probability that a dart hits a particular exact point?).
+
+How do we construct a likelihood function? The basic idea is that whenever we're taking an observation in real life, we're actually rounding it to some number of decimal places. As a result, we can treat those observations as if they fall into lots of tiny intervals.
+
+Basically, we can replace $P(Y = y)$ with the probability density function (PDF) $f(y; \theta)$. So, $L(\theta; y) = \prod_{i = 1}^n f(y_i; \theta)$.
+
+What's the likelihood function for an exponential distribution $Y \tilde \mathrm{Exponential}(\theta)$ for a dataset $y_1, \ldots, y_n$, where $\theta$ is the mean rate of events? Note that the PDF is $f(y; \theta) = \frac 1 {\theta} e^{-\frac y \theta}$.
+
+Clearly, $L(\theta; y) = \frac{e^{-\frac 1 \theta \sum_{i = 0}^n y_i}}{\theta} = \frac{e^{-\frac{n \overline y}{\theta}}}{\theta}$. Dropping the constant factors, we get $e^{-n} e^{-\frac{n\overline y}{\theta}}$. So $\hat \theta = \overline y$, the sample mean again.
+
+What's the likelihood function for a Gaussian distribution $Y \tilde \mathrm{Guassian}(\mu, \sigma^2)$ for a dataset $y_1, \ldots, y_n$, where $\mu, \sigma^2$ are the mean and variance? Here, we have two parameters for our likelihood function, so we'll need to use multivariate calculus to maximize it.
+
+Details are in the course notes, but $\hat\mu = \overline y$ (the sample mean), and $\sigma^2 = \frac 1 n \sum_{i = 1}^n (y_i - \overline y)^2$ (sort of like the sample variance, but with $n$ rather than $n - 1$ for the denominator).
+
+Also, if we know one of the parameters, we can simply use a partial differential for the likelihood function to maximize the likelihood of the unknown parameter.
+
+# 25/1/17
+
+Midterm next tuesday. Midterm covers everything up to Monday's lecture. Do the practice problems at the end of chapter 2.
+
+The **invariance property** says that if $\hat \theta$ is the MLE of $\theta$, then $g(\hat \theta)$ is the MLE of $g(\theta)$. In other words, to find the maximum likelihood of a function, we just need to find the maximum likelihood of its parameter.
+
+For example, the variance of the binomial distribution is $\sigma^2 = n\theta(1 - \theta)$. Therefore, the MLE of the variance is $n \hat \theta(1 - \hat \theta)$
+
+Aside, if $Y_1, \ldots, Y_n$ are independent random variables with $E[Y_i] = \mu$ and $\mathrm{Var}(Y_i) = \sigma^2$. Then $E[\overline Y] = \my$ and $\mathrm{Var}(\overline Y) = \frac{\sigma^2}{n}$.
+
+When we solve statistical problems, we usually start by fitting a model to the data. After we fit a model, however, we should always check that the model actually represents the distribution well. Some ways we can do this are: superimposing a PDF onto the relative frequency histogram and visually checking similarity, superimposing an empirical CDF on the theoretical CDF and visually checking similarity, checking the QQ-plot for straight lines, and comparing observed frequencies with expected frequencies predicted by the model.
+
+The last one might warrant some explanation. One way to check model fit is to compare how often we see some samples to how often the model says we should see them. For example, for a Poisson model we would first fit it to the dataset using the sample mean as $\theta$. Then, we can calculate the theoretical frequency for an interval $nP(y_1 \le Y \le y_2)$ predicted by the Poisson model, and then compare them with the actual number of times we observe values between $y_1$ and $y_2$. We usually choose around 10-15 intervals for $y_1$ and $y_2$ such that each one contains at least one sample.
 
 ---
 
@@ -382,7 +459,7 @@ The Q-Q plot is used for checking if a dataset resembles a normal distribution. 
 
 So the median of the dataset is plotted at the X axis value that is the median of the Z distribution, the 95th percentile of the dataset is plotted at the X axis value that is the 95th percentile of the Z distribution, and so on. Basically, this is a plot of $(p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})$ for all $0 \le p \le 100$. The X axis goes on infinitely in both directions.
 
-If the Q-Q plot resembles a straight line, the dataset resembles a normal distribution. For example, for a normally distributed dataset, it would always be the case that the $p$th percentile of the dataset be a linear function of the $p$th percentile of the Z distribution, so all $(p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})$ would lie along the same line.
+If the Q-Q plot resembles a straight line, the dataset resembles a normal distribution. For example, for a normally distributed dataset, it would always be the case that the $p$th percentile of the dataset be a linear function of the $p$th percentile of the Z distribution, so all $(p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})$ would lie along the same line. For a uniform dataset, we would have a sigmoid-like shape, because the uniform distribution has no tails. For an exponential distribution, we would have a quadratic-looking upward curve, because the exponential distribution has a long right tail.
 
 A **scatter plot** plots two variables against each other, where the X axis is one variable and the Y axis is the other, and points are plotted for each observation. The scatter plot is great for finding patterns in the data, like correlations, grouping, and so on.
 
