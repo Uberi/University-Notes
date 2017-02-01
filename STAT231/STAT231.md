@@ -24,13 +24,11 @@ A **population** is a collection of units, like all students taking STAT231, or 
 
 Both of these are collections of units, but processes generally emit units over time, while populations are generally all already there at a certain point in time. For example, a population might be "current STAT231 students", while a process might be "past, present, and future STAT231 students".
 
-;wip: merge this with the 2/5/16 content
-
 # 6/1/17
 
 Read chapter 1 and do the end of chapter problems to review STAT230. Assignment 1 due next Monday, concerns the setup and use of R.
 
-A **variate** is a characteristic of units in a population/process, usually represented as $x$, $y$, or $z$. They can be:
+A **variate** is a characteristic of units in a population/process, usually represented as $x$, $y$, or $z$. They fall under a couple types (the type of the variate determines what kind of operations we can perform on them):
 
 * Continuous - real numbers or intervals of real numbers. For example, height, weight, or component lifetime.
 * Discrete - integers or intervals of integers. For example, number of vehicular accidents on a highway, number of i-clicker questions in class.
@@ -224,7 +222,7 @@ In STAT230 we covered a lot of different families of statistical models, like:
 * $Y \tilde \mathrm{Exponential}(\theta)$ for random occurences of an event over time averaging $\theta$ per unit time, where $Y$ is the time between event occurences.
 * $Y \tilde \mathrm{Guassian}(\theta), \theta = \tup{\mu, \sigma}$ for a wide variety of measures occurring in nature or when many statistical models are summed together, where $Y$ is the value of the quantity.
 
-The PDF of a random variable is $f(y; \theta)$ where $y \in \mathrm(range)(Y)$ - we want to show that the model is dependent on the value of the statistical model family's parameters.
+The PDF of a random variable is $f(y; \theta) = \frac{\dee}{\dee y} P(Y \le y) = \frac{\dee}{\dee y} F(y)$ where $y \in \mathrm(range)(Y)$ - we want to show that the model is dependent on the value of the statistical model family's parameters.
 
 # 18/1/17
 
@@ -240,9 +238,9 @@ Suppose we have a coin that has probability $\theta$ of being heads. How do we e
 
 The best guess is not the same thing as a good/reasonable guess - a good/reasonable guess is just one that makes the result we got relatively probable. A bad guess would make the result we got unlikely, like guessing that our coin was fair if we only got 1/100 heads (it's highly improbably that the coin has 50% heads if we observe that).
 
-The best guess of a parameter is the one that is most likely to give us the results we did - the **maximum likelihood estimate** $\hat \theta$ (note that this is the same as the point estimate). For example, if we flip a coin 100 times and get 45 heads, assuming a binomial model, the value of parameter $p$ that is most likely to give us this result is 0.4.
+The best guess of a parameter is the one that is most likely to give us the results we did - the **maximum likelihood estimate** $\hat \theta$ (note that this is the same as the point estimate). For example, if we flip a coin 100 times and get 45 heads, assuming a binomial model, the value of parameter $p$ that is most likely to give us this result is 0.45.
 
-In other words, if we graph $P(Y = 45)$ where $Y ~ \mathrm{Binomial}(n, p)$ over all possible $p$, the graph has a peak at $p = 0.4$. Any procedure that finds the parameter that gives us the maximum likelihood estimate is called a **Method of Maximum Likelihood**. Basically, we decide how plausible each value of $\theta$ is by looking at how probably it makes our observations.
+In other words, if we graph $P(Y = 45)$ where $Y ~ \mathrm{Binomial}(100, p)$ over all possible $p$, the graph has a peak at $p = 0.45$. Any procedure that finds the parameter that gives us the maximum likelihood estimate is called a **Method of Maximum Likelihood**. Basically, we decide how plausible each value of $\theta$ is by looking at how probably it makes our observations.
 
 Note that $Y$ is a random variable representing the potential data used to estimate $\theta$, while $y$ is the actual, observed data. Also, the set of possible values of $\theta$ is often called $\Omega$, the parameter space.
 
@@ -305,7 +303,7 @@ How do we construct a likelihood function? The basic idea is that whenever we're
 
 Basically, we can replace $P(Y = y)$ with the probability density function (PDF) $f(y; \theta)$. So, $L(\theta; y) = \prod_{i = 1}^n f(y_i; \theta)$.
 
-What's the likelihood function for an exponential distribution $Y \tilde \mathrm{Exponential}(\theta)$ for a dataset $y_1, \ldots, y_n$, where $\theta$ is the mean rate of events? Note that the PDF is $f(y; \theta) = \frac 1 {\theta} e^{-\frac y \theta}$.
+What's the likelihood function for an exponential distribution $Y \tilde \mathrm{Exponential}(\theta)$ for a dataset $y_1, \ldots, y_n$, where $\theta$ is the mean rate of events? Note that the PDF is $f(y; \theta) = \theta e^{-\frac y \theta}$.
 
 Clearly, $L(\theta; y) = \frac{e^{-\frac 1 \theta \sum_{i = 0}^n y_i}}{\theta} = \frac{e^{-\frac{n \overline y}{\theta}}}{\theta}$. Dropping the constant factors, we get $e^{-n} e^{-\frac{n\overline y}{\theta}}$. So $\hat \theta = \overline y$, the sample mean again.
 
@@ -317,17 +315,60 @@ Also, if we know one of the parameters, we can simply use a partial differential
 
 # 25/1/17
 
-Midterm next tuesday. Midterm covers everything up to Monday's lecture. Do the practice problems at the end of chapter 2.
+Midterm next tuesday. Midterm covers everything up to but not including Monday's lecture. Do the practice problems at the end of chapter 2.
 
 The **invariance property** says that if $\hat \theta$ is the MLE of $\theta$, then $g(\hat \theta)$ is the MLE of $g(\theta)$. In other words, to find the maximum likelihood of a function, we just need to find the maximum likelihood of its parameter.
 
 For example, the variance of the binomial distribution is $\sigma^2 = n\theta(1 - \theta)$. Therefore, the MLE of the variance is $n \hat \theta(1 - \hat \theta)$
 
-Aside, if $Y_1, \ldots, Y_n$ are independent random variables with $E[Y_i] = \mu$ and $\mathrm{Var}(Y_i) = \sigma^2$. Then $E[\overline Y] = \my$ and $\mathrm{Var}(\overline Y) = \frac{\sigma^2}{n}$.
+Aside, if $Y_1, \ldots, Y_n$ are independent random variables with $E[Y_i] = \mu$ and $\mathrm{Var}(Y_i) = \sigma^2$. Then $E[\overline Y] = \mu$ and $\mathrm{Var}(\overline Y) = \frac{\sigma^2}{n}$.
 
 When we solve statistical problems, we usually start by fitting a model to the data. After we fit a model, however, we should always check that the model actually represents the distribution well. Some ways we can do this are: superimposing a PDF onto the relative frequency histogram and visually checking similarity, superimposing an empirical CDF on the theoretical CDF and visually checking similarity, checking the QQ-plot for straight lines, and comparing observed frequencies with expected frequencies predicted by the model.
 
 The last one might warrant some explanation. One way to check model fit is to compare how often we see some samples to how often the model says we should see them. For example, for a Poisson model we would first fit it to the dataset using the sample mean as $\theta$. Then, we can calculate the theoretical frequency for an interval $nP(y_1 \le Y \le y_2)$ predicted by the Poisson model, and then compare them with the actual number of times we observe values between $y_1$ and $y_2$. We usually choose around 10-15 intervals for $y_1$ and $y_2$ such that each one contains at least one sample.
+
+# 27/1/17
+
+The **PPDAC** is an algorithm for designing statistical studies. It consists of the following steps:
+
+* Problem - study objectives.
+    * What's the target population?
+    * The target population is the group of things we want the conclusions to apply to - this can be different from the study population (generally a superset), and it's what we think the researchers consider the conclusions apply to. The target population is generally somewhat up for interpretation. For example, if we wanted to see if R assignments in STAT231 help students understand the material, the units would be students and the target process would be students in STAT231 now and in the future.
+    * What are the variates of interest?
+    * What are the questions we are trying to answer, in terms of attributes of the target population? We want to ask questions about the target population, and answer them using data from the study population
+    * This step deals only with target populations - don't talk about samples here!
+    * Problems fall into three types: descriptive (what is the value of some attribute?), causative (does A cause B?), and predictive (what would be the effect of X?).
+* Plan - procedures for collecting data, whether the data will answer the problem, etc.
+    * What's the study population?
+    * Which units are available to study? How do we choose the units to study? With or without replacement? The **sampling protocol** is the procedure used to select a sample of units from the study population. The number of units selected is the **sample size**. The sampling protocol is often difficult to choose because getting a truly random sample is expensive and involved. Most studies just use things like online surveys, which means the sampling protocol is "people who voluntarily take online surveys".
+    * What variates will we collect for each unit?
+    * What are possible study error? **Study error** is a systematic difference between a target population and a study population. The hard part of getting rid of study error is that we don't know if it's present or not. Statisticians use peer-review to avoid this. For example, if the study population is mice and the target population is humans, there are significant differences between mice and humans that we would have to account for.
+    * An example of study error is a real study on male physicians where aspirin reduced heart attacks by 44%. Applying this to female patients who are potentially not physicians is potentially a study bias, if women or non-doctors react systematically differently to aspirin.
+    * What are possible sources of sample error? **Sample error** is a systematic difference between the sample and the study population. The sampling protocol needs to be chosen carefully to avoid this.
+    * An example of sample error is when a study uses an online survey - only people who are inclined to take online surveys will be part of the sample, and if those people are systematically different in relevant ways, we have a sample error.
+    * Measurement often introduces **measurement error** - the difference between the true value of the variate and the observed value.
+    * **Response bias** is when study respondents systematically tend to give incorrect answers. For example, people tend to exaggerate their income on financial surveys, or lie about experiencing police mistreatment on studies about police behaviour.
+* Data - actual collection of data.
+* Analysis - extracting information out of the data.
+* Conclusion - answering the problem, as well as the limitations of our answers.
+
+# 30/1/17
+
+For example, a real Vitamin D study has the following PPDAC-like structure:
+
+* Problem (objective) - would taking Vitamin D reduce the proportion of school aged children in Japan who contract influenza A?
+    * The target population would be children of school age in Japan. We don't have to worry about things like children who can't take supplements, have allergies, or so on, because at this point it's too early to think about details that come up during the planning stage.
+    * The variates we care about are probably whether the children get influenza (categorical, response variate), whether they get vitamin D (categorical, explanatory variate), plus a few secondary (less important) variates, like weight, height, etc.
+    * The questions of interest might be "what proportion of the target population would get influenza if they took vitamin D?", and "what proportion of the target population would get influenza if they took the placebo?".
+    * This is a causative problem, because we're trying to determine whether vitamin D has a causal relationship to influenza A.
+* Plan (study design) - a randomized double-blind trial on schoolchildren comparing Vitamin D to a placebo. Schoolchildren in 12 hospitals in Tokyo (note that we are not doing this in all of Japan, just one city) in 2009 were asked to participate and followed for a few months. Double-blinding was performed by a computer system and placebos/supplements looked identical.
+    * The study population is the children who participated in the study at pediatricians in the 12 hospitals in Tokyo in 2009.
+    * Researchers can probably easily obtain access to the given study population since they work in the hospital, which is probably why they chose this study population.
+    * The variates we collect are whether the children contacted influenza, whether they were taking Vitamin D or the placebo, age, weight, and other factors.
+    * One possible source of study error is if only children who are already sick go to the hospital, while the target population isn't already sick.
+    * The study recruited 430 children, but only 334 were followed to the end of the study. The sample size is 430, because that's the size of the sample at the beginning of the study. Using 334 as the sample size is wrong - consider what would happen if some children dropped out of the study because they had bad reactions to the vitamin D.
+    * One possible source of sample error is that children who couldn't swallow pills or had allergies or didn't have consent from their parents were excluded from the study. If there was a systematic difference in those children, that would give us sample error.
+    * One possible source of measurement error is false positives/negatives for the influenza test. The children were given a nose swab, which might give incorrect results in a small number of cases.
 
 ---
 
@@ -359,7 +400,7 @@ There are two main types of data:
 
 A **transformation** is a function over a variable. A **linear transformation** is one of the form $y = mx + b$. A linear transformation is also known as an **affine transformation**.
 
-A **coding** is a transformation that converts categorical data to numerical data. For example, colors can be assigned numbers, like 0 for red, 1 for orange, and so on.
+A  **coding** is a transformation that converts categorical data to numerical data. For example, colors can be assigned numbers, like 0 for red, 1 for orange, and so on.
 
 Summaries
 ---------
@@ -567,10 +608,6 @@ Note that in this course, there will only ever be one solution to the derivative
 When we have lots of independent observations, the likelihood function will look like $P(Y_1 = y_1) \cdot \ldots \cdot P(Y_n = y_n)$. So if $n$ is large, we're multiplying a lot of numbers between 0 and 1, which means that the actual likelihood is going to be very small. To deal with this, we sometimes use the **relative likelihood function** $R(\theta) = \frac{L(\theta)}{L(\hat \theta)}$, which always has a maximum of 1 at $\hat \theta$.
 
 Note that this only works for discrete distributions. For continuous ones, we have other tools.
-
-# 25/5/16
-
-;wip: missed due to interviews
 
 # 30/5/16
 
