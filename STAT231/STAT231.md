@@ -138,7 +138,7 @@ Graphical summaries
 
 A frequency histogram has rectangles where the height is the number of observations in that bucket. Note that the bucket sizes might not be the same. A **relative frequency** histogram is a frequency histogram where the rectangle heights are scaled based on the bucket width and the total number of observations - $\text{rectangle height} = \frac{\text{number of observations in bucket}}{\text{total number of observations} \times (\text{upper bound of bucket} - \text{lower bound of bucket})}$.
 
-Relative frequency histograms are useful because we can superimpose a probability density function on top of them, since the Y axes match. The sum of the rectangle areas also sum up to 1.
+Relative frequency histograms are useful because we can superimpose a probability density function on top of them, since the Y axes match. The sum of the rectangle areas also sum up to 1 (the heights of the rectangles don't necessarily sum up to 1, however).
 
 Potential test question: which bucket of a relative frequency histogram does the median fall into? Each percentile of a histogram lies within the first bucket whose value, when added to all previous bucket values, is greater than that percentile. For example, to find the median's bucket, we add bucket heights from left to right until we reach or exceed 0.5.
 
@@ -217,10 +217,10 @@ Statistical models are chosen based on background knowledge about populations (f
 
 In STAT230 we covered a lot of different families of statistical models, like:
 
-* $Y \tilde \mathrm{Binomial}(n, \theta)$ for sequences of $n$ independent success/fail trials each with $\theta$ probability of success, where $Y$ is the number of successes.
-* $Y \tilde \mathrm{Poisson}(\theta)$ for random occurences of an event over time averaging $\theta$ per unit time, where $Y$ is the number of event occurences.
-* $Y \tilde \mathrm{Exponential}(\theta)$ for random occurences of an event over time averaging $\theta$ per unit time, where $Y$ is the time between event occurences.
-* $Y \tilde \mathrm{Guassian}(\theta), \theta = \tup{\mu, \sigma}$ for a wide variety of measures occurring in nature or when many statistical models are summed together, where $Y$ is the value of the quantity.
+* $Y \sim \mathrm{Binomial}(n, \theta)$ for sequences of $n$ independent success/fail trials each with $\theta$ probability of success, where $Y$ is the number of successes.
+* $Y \sim \mathrm{Poisson}(\theta)$ for random occurences of an event over time averaging $\theta$ per unit time, where $Y$ is the number of event occurences.
+* $Y \sim \mathrm{Exponential}(\theta)$ for random occurences of an event over time averaging $\theta$ per unit time, where $Y$ is the time between event occurences.
+* $Y \sim \mathrm{Guassian}(\theta), \theta = \tup{\mu, \sigma}$ for a wide variety of measures occurring in nature or when many statistical models are summed together, where $Y$ is the value of the quantity.
 
 The PDF of a random variable is $f(y; \theta) = \frac{\dee}{\dee y} P(Y \le y) = \frac{\dee}{\dee y} F(y)$ where $y \in \mathrm(range)(Y)$ - we want to show that the model is dependent on the value of the statistical model family's parameters.
 
@@ -277,7 +277,7 @@ Suppose we have two independent data sets $y, z$ for two independent random vari
 
 # 23/1/17
 
-Suppose $y_1, \ldots, y_n$ is the number of events that occurred at day 1 to $n$, respectively, and a Poisson distribution is appropriate for this dataset. What's the likelihood function for the Poisson distribution $Y \tilde \mathrm{Poisson}(\theta)$, where $\theta$ is the average rate of events?
+Suppose $y_1, \ldots, y_n$ is the number of events that occurred at day 1 to $n$, respectively, and a Poisson distribution is appropriate for this dataset. What's the likelihood function for the Poisson distribution $Y \sim \mathrm{Poisson}(\theta)$, where $\theta$ is the average rate of events?
 
 Intuitively, we know that the average rate of accidents is $\overline y$. Why is this?
 
@@ -303,11 +303,11 @@ How do we construct a likelihood function? The basic idea is that whenever we're
 
 Basically, we can replace $P(Y = y)$ with the probability density function (PDF) $f(y; \theta)$. So, $L(\theta; y) = \prod_{i = 1}^n f(y_i; \theta)$.
 
-What's the likelihood function for an exponential distribution $Y \tilde \mathrm{Exponential}(\theta)$ for a dataset $y_1, \ldots, y_n$, where $\theta$ is the mean rate of events? Note that the PDF is $f(y; \theta) = \theta e^{-\frac y \theta}$.
+What's the likelihood function for an exponential distribution $Y \sim \mathrm{Exponential}(\theta)$ for a dataset $y_1, \ldots, y_n$, where $\theta$ is the mean rate of events? Note that the PDF is $f(y; \theta) = \theta e^{-\frac y \theta}$.
 
 Clearly, $L(\theta; y) = \frac{e^{-\frac 1 \theta \sum_{i = 0}^n y_i}}{\theta} = \frac{e^{-\frac{n \overline y}{\theta}}}{\theta}$. Dropping the constant factors, we get $e^{-n} e^{-\frac{n\overline y}{\theta}}$. So $\hat \theta = \overline y$, the sample mean again.
 
-What's the likelihood function for a Gaussian distribution $Y \tilde \mathrm{Guassian}(\mu, \sigma^2)$ for a dataset $y_1, \ldots, y_n$, where $\mu, \sigma^2$ are the mean and variance? Here, we have two parameters for our likelihood function, so we'll need to use multivariate calculus to maximize it.
+What's the likelihood function for a Gaussian distribution $Y \sim \mathrm{Guassian}(\mu, \sigma^2)$ for a dataset $y_1, \ldots, y_n$, where $\mu, \sigma^2$ are the mean and variance? Here, we have two parameters for our likelihood function, so we'll need to use multivariate calculus to maximize it.
 
 Details are in the course notes, but $\hat\mu = \overline y$ (the sample mean), and $\sigma^2 = \frac 1 n \sum_{i = 1}^n (y_i - \overline y)^2$ (sort of like the sample variance, but with $n$ rather than $n - 1$ for the denominator).
 
@@ -334,7 +334,7 @@ The **PPDAC** is an algorithm for designing statistical studies. It consists of 
 * Problem - study objectives.
     * What's the target population?
     * The target population is the group of things we want the conclusions to apply to - this can be different from the study population (generally a superset), and it's what we think the researchers consider the conclusions apply to. The target population is generally somewhat up for interpretation. For example, if we wanted to see if R assignments in STAT231 help students understand the material, the units would be students and the target process would be students in STAT231 now and in the future.
-    * What are the variates of interest?
+    * What are the variates of interest? What are the units? These are often ill-defined, but we can figure out the 
     * What are the questions we are trying to answer, in terms of attributes of the target population? We want to ask questions about the target population, and answer them using data from the study population
     * This step deals only with target populations - don't talk about samples here!
     * Problems fall into three types: descriptive (what is the value of some attribute?), causative (does A cause B?), and predictive (what would be the effect of X?).
@@ -349,8 +349,18 @@ The **PPDAC** is an algorithm for designing statistical studies. It consists of 
     * Measurement often introduces **measurement error** - the difference between the true value of the variate and the observed value.
     * **Response bias** is when study respondents systematically tend to give incorrect answers. For example, people tend to exaggerate their income on financial surveys, or lie about experiencing police mistreatment on studies about police behaviour.
 * Data - actual collection of data.
+    * Note that the sample size is defined before the study starts - if we originally start our study with 500 units, and 100 drop out by the end of the study, the sample size is still 500, even though we only end up with 400 values. Our analysis step should use a sample size of 500 and handle the missing values properly.
+    * It's important to record the time and location of each measurement, and detail the measurement procedures unambiguously.
+    * If any deviations from the measurement plan occur, it's important to make note of this, because they could affect the analyses.
 * Analysis - extracting information out of the data.
+    * This is what the entire rest of the course is about - estimation, hypothesis testing, etc.
+    * This should include numerical/graphical summaries of the data.
+    * An important step to selecting an appropriate statistical model, and checking the fit of the selected statistical model using things like QQ plots, comparing frequencies, and so on.
+    * We actually need to consider two models: one model for variation of the attributes in the study population/process (Guassian/Binomial/etc.), and another which accounts for how data is collected (with/without replacement, how units are selected). In other words, one is targeting the target population, and the other one is targeting the study population.
+    * For example, the first one might be "let $Y$ be the BMI of a random male human chosen from the target population, $Y$ follows a normal distribution with unknown parameters $\mu_T, \sigma_T$ (the average and standard deviation in BMI in the target population)". For the second one we need to account for the fact that the target population is different from the study population, so it might be "let $Y$ be the BMI of a random male human chosen from the study population, $Y$ follows a normal distribution with unknown parameters $\mu, \sigma$ (the average and standard deviation in BMI in the study population)". The first one is for the target population, while the second is for the study population.
 * Conclusion - answering the problem, as well as the limitations of our answers.
+    * Make sure to address any departures from the plan in the Data step that affect the Analysis step.
+    * It's important to outline the limitations of the study - if the study didn't definitively answer the questions posed, why and how?
 
 # 30/1/17
 
@@ -369,6 +379,81 @@ For example, a real Vitamin D study has the following PPDAC-like structure:
     * The study recruited 430 children, but only 334 were followed to the end of the study. The sample size is 430, because that's the size of the sample at the beginning of the study. Using 334 as the sample size is wrong - consider what would happen if some children dropped out of the study because they had bad reactions to the vitamin D.
     * One possible source of sample error is that children who couldn't swallow pills or had allergies or didn't have consent from their parents were excluded from the study. If there was a systematic difference in those children, that would give us sample error.
     * One possible source of measurement error is false positives/negatives for the influenza test. The children were given a nose swab, which might give incorrect results in a small number of cases.
+;wip: rest of the case study
+* Conclusion
+    * One possible limitation is that the study population is relatively small - it's hard to be really confident about the answers with this sample size for cases involving humans and drugs.
+
+# 1/2/17 - Tutorial
+
+;wip: learn about chi squared and t squared distributions
+
+# 1/2/17
+
+Do chapter 3 end of chapter problems. Start reading chapter 4. Start doing assignment 2, and make sure to read the instructions about the ID carefully in the assignment template.
+
+On assignments and exams, we'll often be given a plan, and asked to critique strengths and weaknesses, sources of error, identify target population, study population, variates of interest, units, etc.
+
+For example, if we were conducting a study about financial habits of university students in Ontario, it would be a study error to only study UW students (because of the co-op program would affect student finances), and it would be a sample error to only sample UW students who were attending to a particular football game (because people who go to football games might systematically have different financial situations).
+
+When running the study, we want to take as random a sample as possible. We might try sending out an email to everyone with a UW email, but then the students themselves choose whether they're in the sample, a possibly large source of sample error. We could try posting in the UW Facebook group, but then only people who use Facebook would see it. We might ask professors to put them on final exams, but some courses don't have final exams, for example. Instead, we might go to the university registrar, randomly select students by student ID, and then ask them to participate in a study with enough monetary incentive that they are mostly convinced to participate.
+
+See section 3.3 of the course notes for a case study.
+
+# 3/2/17
+
+When we have a dataset and a Gaussian model is a good fit for the data, we usually estimate the parameter $\mu$ using the sample mean, and the parameter $\sigma$ with the sample standard deviation (even though it might be slightly off for a small population, since we divide by $n - 1$ rather than $n$). 
+
+Note that $\hat \theta$ is really only an estimate - we would expect that it approaches the true value of $\theta$ for large sample sizes. How close would $\hat \theta$ be to $\theta$? How certain is our estimate? To quantify this, we can use sampling distributions and point estimators.
+
+Suppose for our study population we have observed data $y_1, \ldots, y_n$, and the attribute of interest is fully represented by the parameter $\theta$.
+
+A **point estimate** for that parameter $\theta$ is a function $\hat \theta = g(y_1, \ldots, y_n)$, used to estimate the unknown parameter $\theta$. For example, a point estimate for $\theta$ in a Poisson distribution is $\hat \theta = \overline y$, and a point estimate for $\theta$ in a Binomial distribution is $\hat \theta = \frac {\sum y_i} n$.
+
+Since the value of $\hat \theta$ is potentially going to be different for each possible sample we take, $\hat \theta$ has a distribution. In fact, we can represent the potential samples $y_1, \ldots, y_n$ we can draw with $Y_1, \ldots, Y_n$ - each unit in our sample can be thought of as being drawn from a given distribution.
+
+We therefore associate the point estimate function with the **point estimator** function, $\widetilde \theta = g(Y_1, \ldots, Y_n)$. Note that $\widetilde \theta$ is now a random variable, rather than a simple value (this is also not standard notation, by the way). For example, a point estimator for $\theta$ in a Poisson distribution is $\widetilde \theta = \overline Y$, and a point estimator for $\theta$ in a Binomial distribution is $\hat \theta = \frac {\sum Y_i} n$.
+
+Recall that a random variable is simply a function. $\widetilde \theta$ is therefore a rule that tells us how to obtain an estimate of $\theta$ for an abstract sample $Y_1, \ldots, Y_n$, while $\hat \theta$ is the value obtained using this rule for a concrete, observed sample $y_1, \ldots, y_n$.
+
+The method of maximum likelihood is one general method for getting point estimates/point estimators. Others include the method of moments and bayesian estimation.
+
+The **sampling distribution** is the distribution of a point estimator $\widetilde \theta$ - it must have a probability function if it's discrete, and a probability density function if it's continuous.
+
+How do we figure out what the sampling distribution is? Technically, we could figure out the sampling distribution with brute force, by enumerating every possible sample and getting the point estimate for each of them. However, this is generally not feasible. Instead, we can use the central limit theorem.
+
+Recall the central limit theorem - if we average together enough iid (independent and identically distributed) random variables $Y_1, \ldots, Y_n$, they start to resemble a Gaussian distribution where the mean is about $E(Y_1) = \ldots = E(Y_n)$ and the variance is $\frac{\mathrm{Var}(Y_1)}{\sqrt{n}} = \ldots = \frac{\mathrm{Var}(Y_n)}{\sqrt{n}}$. "Large enough" is somewhat ill defined, and depends on the shape of the distributions, but symmetric distributions are faster.
+
+If $X \sim \mathrm{Poisson}(\mu_1), Y \sim \mathrm{Poisson}(\mu_2)$, then $X + Y \sim \mathrm{Poisson}(\mu_1 + \mu_2)$. When $\mu \ge 5$, a Poisson random variable will start to resemble a $\mathrm{Guassian}(\mu, \mu)$ distribution.
+
+If $X \sim \mathrm{Binomial}(n_1, \theta), Y \sim \mathrm{Binomial}(n_2, \theta)$, then $X + Y \sim \mathrm{Binomial}(n_1 + n_2, \theta)$.
+
+If $Y_i \sim \mathrm{Gaussian}(\mu_i, \sigma_i^2), 1 \le i \le n$, then $\sum a_i Y_i \sim \mathrm{Gaussian}(\sum a_i \mu_i, \sum a_i^2 \sigma_i^2), a_i \in \mb{R}$. In other words, any linear combination of Gaussian random variables also forms a Gaussian distribution. From this, we know that if $\mu = \mu_1 = \ldots = \mu_n$ and $\sigma^2 = \sigma_1^2 = \ldots = \sigma_n^2$ (all of the normal random variables are iid), then $\overline Y \sim \mathrm{Gaussian}(\mu, \frac{\sigma^2}{n})$.
+
+When we take a sample $Y_1, \ldots, Y_n$ from our population, each entry in the sample can be thought of as iid. Using this observation, we can approximate the mean of different distributions with:
+
+* If $Y \sim \mathrm{Binomial}(n, \theta)$ ($Y$ of $n$ samples are successes) and $n$ is large, then $Y \sim \mathrm{Gaussian}(n \theta, n \theta (1 - \theta))$.
+* If $Y_i \sim \mathrm{Poisson}(\theta), 1 \le i\le n$ ($n$ samples, yielding $Y_i$ events for each) and $n$ is large, then $\overline Y \sim \mathrm{Gaussian}(\theta, \frac{\theta}{n})$
+* If $Y_i \sim \mathrm{Exponential}(\theta), 1 \le i\le n$ ($n$ samples, taking $Y_i$ time before an event for each) and $n$ is large, then $\overline Y \sim \mathrm{Gaussian}(\theta, \frac{\theta^2}{n})$
+
+For more complicated cases, we can simulate experiments using software like R.
+
+# 6/2/17
+
+Tutorial test 2 is coming up, will include PPDAC question and estimators.
+
+A few classes ago we conducted the diamond experiment to estimate an unknown attribute of the study population, the mean of the diamond values, Suppose we observe data $y_1, \ldots, y_n$, and that we have a probability model with unknown parameter $\theta$. Let $\hat \theta = g(y_1, \ldots, y_n) = \overline y$ be a point estimate of $\theta$. How good is $\hat \theta$ as an estimate of $\theta$? What is the uncertainty in the estimate? To help us answer these questions, we can use **interval estimation** rather than point estimation.
+
+Recall that the sampling distribution is the distribution of a point estimator $\widetilde \theta$. This is essentially the distribution of estimates of our unknown parameter $\theta$, over all possible ways we could sample from the study population. We can approximate this by taking lots and lots of samples, estimating $\theta$ based on each sample, and form the distribution out of all the estimates we get.
+
+The sampling distribution of a point estimator when we're trying to estimate the mean has $E(\overline Y) = \mu$ and $\mathrm{Var}(\overline Y) = \frac{\sigma^2}{n}$.
+
+Given a sampling distribution, one common question we use to quantify the uncertainty is "what proportion of our point estimates within $d$ units of the true value of the unknown parameter?". We can easily answer this using histograms of sampling distributions. Factors that affect this uncertainty are the sample size, variance, and the shape of the sampling distribution.
+
+In a real empirical study, we only get one sample - we can't just repeatedly resample. How do we quantify uncertainty only from one sample?
+
+Suppose we have a dataset $y_1, \ldots, y_n$ sampled from our study population with an assumed model $Y_i \sim \mathrm{Gaussian}(\mu, 0.5), 1 \le i \le n$ (each number in our sample is in a Gaussian distribution where $\sigma = 0.5$). Suppose we're using $\widetilde \mu = \overline Y = \frac{\sum Y_i}{n}$ to estimate $\mu$ using our dataset. Clearly, we don't need to simulate the sampling distribution, because we know it's $\widetilde \mu = \mathrm{Gaussian}(\mu, \frac{\sigma}{\sqrt{n}})$. Now, how often is this estimate $\hat \mu$ within 0.1 of the true value of $\mu$?
+
+In other words, we want $P(\abs{\overline Y - \mu} \le 0.1)$ given our distribution $\mathrm{Gaussian}(\mu, \frac{0.5}{\sqrt{n}})$, but we don't know $\mu$. However, if we divide both sides by $\sigma$, we get $P(\abs{\overline Y - \mu} \le 0.1) = P(\frac{\abs{\overline Y - \mu}}{\frac{0.5}{\sqrt{n}}} \le \frac{0.1}{\frac{0.5}{\sqrt{n}}})$. Note that this is now a normalized Guassian distribution, so we have $P(\abs{Z} \le \frac{0.1}{\frac{0.5}{\sqrt{n}}}) = P(\frac{\sqrt{n}}{5} \le Z \le \frac{\sqrt{n}}{5})$, which we can then compute using the Gaussian CDF table.
 
 ---
 
@@ -500,7 +585,7 @@ The Q-Q plot is used for checking if a dataset resembles a normal distribution. 
 
 So the median of the dataset is plotted at the X axis value that is the median of the Z distribution, the 95th percentile of the dataset is plotted at the X axis value that is the 95th percentile of the Z distribution, and so on. Basically, this is a plot of $(p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})$ for all $0 \le p \le 100$. The X axis goes on infinitely in both directions.
 
-If the Q-Q plot resembles a straight line, the dataset resembles a normal distribution. For example, for a normally distributed dataset, it would always be the case that the $p$th percentile of the dataset be a linear function of the $p$th percentile of the Z distribution, so all $(p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})$ would lie along the same line. For a uniform dataset, we would have a sigmoid-like shape, because the uniform distribution has no tails. For an exponential distribution, we would have a quadratic-looking upward curve, because the exponential distribution has a long right tail.
+If the Q-Q plot resembles a straight line, the dataset resembles a normal distribution. For example, for a normally distributed dataset, it would always be the case that the $p$th percentile of the dataset be a linear function of the $p$th percentile of the Z distribution, so all $(p \text{th percentile of the Z distribution}, p \text{th percentile of the dataset})$ would lie along the same line. For a uniform dataset, we would have a sigmoid-like shape, because the uniform distribution has no tails. For an exponential distribution, we would have a U-shaped upward curve, because the exponential distribution has a thick right tail. A distribution with a thick left tail would have a Q-Q plot that looks like a U-shaped downward curve.
 
 A **scatter plot** plots two variables against each other, where the X axis is one variable and the Y axis is the other, and points are plotted for each observation. The scatter plot is great for finding patterns in the data, like correlations, grouping, and so on.
 
@@ -546,7 +631,7 @@ Formally, given a discrete distribution $Y$ with probability function $f$ and un
 
 We then find the value of $\theta$ that maximizes the likelihood function. This value is the **maximum likelihood estimate** (MLE), denoted $\hat \theta$.
 
-Suppose we have a variable $X \tilde \mathrm{Poisson}(\mu)$. What is the MLE of $\mu$?
+Suppose we have a variable $X \sim \mathrm{Poisson}(\mu)$. What is the MLE of $\mu$?
 
 > Clearly, the probability of each sample observation is $\frac{e^{-\mu} \mu^r}{r!}$ where $r$ is the value of the observation, by the definition of the Poisson distribution.  
 > Therefore, $P(Y_1 = y_1, \ldots, Y_n = y_n) = \frac{e^{-\mu} \mu^{x_1}}{x_1!} \cdots \frac{e^{-\mu} \mu^{x_n}}{x_n!}$ (we can just multiply the probabilities together because all of the observations are independent, which we know is the case since we're using the Poisson distribution).  
@@ -565,7 +650,7 @@ To review, lowercase Greek letters like $\mu, \theta$ are unknown parameters, lo
 
 Likewise, $\overline y$, the sample mean can be thought of as a single outcome of a random variable $\overline Y$. As a result, with multiple samples, we can get a whole distribution of different $\overline y$ values. The unknown population mean is $\mu$, while $\overline Y$ is the random variable with the distribution of all the different $\overline y$ values.
 
-These random variables, like $\overline Y, S^2, \overtilde \pi$ are **estimators**. These sample values, like $\overline y, s^2, \hat \pi$ are **estimates**.
+These random variables, like $\overline Y, S^2, \widetilde \pi$ are **estimators**. These sample values, like $\overline y, s^2, \hat \pi$ are **estimates**.
 
 Estimate the approval rating of the president:
 
@@ -587,7 +672,7 @@ Estimate the average website hits per hour, given a sample of visits over $n$ ho
 Estimate the probability that a Canadian contestant wins Jeopardy, given a sample of shows Canadian contestants appeared in $\set{y_1, \ldots, y_n}$:
 
 > Clearly, if a contestant appears in $n$ shows, then they won $n$ in a row and lost in the $n + 1$th show.  
-> We assume that shows are independent. Therefore, we have a geometric distribution, $Y \tilde \mathrm{Geo}(\pi)$.  
+> We assume that shows are independent. Therefore, we have a geometric distribution, $Y \sim \mathrm{Geo}(\pi)$.  
 > Recall that for a geometric distribution, $P(Y = y) = \pi^{y - 1}(1 - \pi)$.  
 > So $L(\pi; y_1, \ldots, y_n) = \pi^{y_1 - 1}(1 - \pi) \ldots \pi^{y_n - 1}(1 - \pi) = \pi^{\sum y_i - n} (1 - \pi)^n$.  
 > So $l(\pi) = (\sum y_i - n) \ln x + n \ln (1 - x)$. Using the usual methods, we find the value of $\pi$ that maximizes $l(\pi)$ to get the MLE of $\pi$.  
@@ -638,7 +723,7 @@ The confidence interval tells us the probability that the true value falls withi
 
 The problem with confidence intervals is if we don't know $\sigma$ or if the population isn't normal.
 
-From the central limit theorem, if $n$ is large, and $Y_1, \ldots, Y_n$ are arbitrary distributions with mean $\mu$ and variance $\sigma^2$, then $\overline Y \tilde N(\mu, \frac{\sigma^2}{n})$.
+From the central limit theorem, if $n$ is large, and $Y_1, \ldots, Y_n$ are arbitrary distributions with mean $\mu$ and variance $\sigma^2$, then $\overline Y \sim N(\mu, \frac{\sigma^2}{n})$.
 
 # 1/6/16
 
