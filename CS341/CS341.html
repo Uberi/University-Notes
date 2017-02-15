@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://github.com/Uberi" class="contact">github</a></li>
     <span class="divider"></span>
-    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
     <span class="divider"></span>
     <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
     <span class="divider"></span>
@@ -1105,6 +1105,7 @@ Therefore, <span class="math inline">\(f(I)\)</span> is a yes-instance if and on
 <p>Given a problem <span class="math inline">\(\Pi\)</span> (not necessarily a decision problem), an <strong>oracle</strong> for <span class="math inline">\(\Pi\)</span> is an (possibly hypothetical) algorithm <span class="math inline">\(A\)</span> that solves it.</p>
 <p>Given another problem <span class="math inline">\(\Pi&#39;\)</span>, an algorithm <span class="math inline">\(A&#39;\)</span> is a <strong>Turing reduction</strong> from <span class="math inline">\(\Pi&#39;\)</span> to <span class="math inline">\(\Pi\)</span> if and only if it solves <span class="math inline">\(\Pi&#39;\)</span> using <span class="math inline">\(A\)</span> as a subroutine (<span class="math inline">\(A&#39;\)</span> depends on <span class="math inline">\(A\)</span> to work, so <span class="math inline">\(A\)</span> is the solver). A Turing reduction is sort of like a generalization of the concept of polynomial transformations to all problems. We can say that a Turing reduction exists by writing <span class="math inline">\(\Pi&#39; \le^T \Pi\)</span>.</p>
 <p>A Turing reduction <span class="math inline">\(A&#39;\)</span> using <span class="math inline">\(A\)</span> as the solver is a <strong>polynomial-time Turing reduction</strong> if and only if <span class="math inline">\(A&#39;\)</span> has polynomial running time with respect to the running time of <span class="math inline">\(A\)</span>. If this is the case, we can write <span class="math inline">\(\Pi&#39; \le_P^T \Pi\)</span>.</p>
+<p>Alternatively, we can use a more intuitive definition: if we have a magical box called an <strong>oracle</strong> that can solve any instance of <span class="math inline">\(\Pi&#39;\)</span> in polynomial time, and we have an algorithm that transforms instances of <span class="math inline">\(\Pi\)</span> to instances <span class="math inline">\(\Pi&#39;\)</span> and vice versa in polynomial time, we could use the oracle to solve <span class="math inline">\(\Pi\)</span> in polynomial time.</p>
 <p>Basically, if there is a polynomial-time Turing reduction <span class="math inline">\(\Pi&#39; \le_P^T \Pi\)</span> and <span class="math inline">\(\Pi\)</span> can be solved in polynomial time, then <span class="math inline">\(\Pi&#39;\)</span> can also be solved in polynomial time.</p>
 <p>Turing reductions are interesting because it seems like we can reduce harder versions of problems into simpler versions.</p>
 <p>A travelling salesperson problem (TSP) involves finding paths in a graph with weighted edges such that the total weight is minimized.</p>

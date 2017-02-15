@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://github.com/Uberi" class="contact">github</a></li>
     <span class="divider"></span>
-    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
     <span class="divider"></span>
     <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
     <span class="divider"></span>
@@ -387,8 +387,8 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <p>Sometimes instructions in a pipeline depend on others. There are three main types of these dependencies:</p>
 <ul>
 <li>A read-after-write dependency is when an instruction needs to read out the value that some other instruction wrote - if the CPU ran both at once, we might read the wrong value. This is the only real dependency in scalar, statically-scheduled pipelines.</li>
-<li>A write-after-read dependency is actually an anti-dependency - if the CPU reorders these instructions so that they're in the opposite order, we might read the wrong value.</li>
-<li>A write-after-write dependency is an output dependency - if the CPU reorders these instructions so that they're in the opposite order, the final result may be wrong.</li>
+<li>A write-after-read dependency is an anti-dependency - if the CPU reorders these instructions so that they're in the opposite order, we might read the wrong value.</li>
+<li>A write-after-write dependency is an output dependency - if the CPU reorders these instructions so that they're in the opposite order, the final value of the register may be wrong.</li>
 </ul>
 <p>When instructions aren't dependent on each other, we can more-or-less freely rearrange them. This allows efficient pipelining and parallelism.</p>
 <p><strong>Total sequential execution</strong> (TSE) is an assumption in our programming model that one instruction finishes before the next starts. TSE is sufficient but not necessary for semantic correctness. In fact, semantic correctness can be satisfied just by satisfying the inter-instruction dependencies of the original program - we can otherwise rearrange and overlap instructions however we want.</p>
@@ -413,7 +413,7 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <p>For our purposes, we can route the output of the memory stage to the execute stage (for <span class="math inline">\(j = i + 1\)</span>), the output of the writeback stage to the execute stage (for <span class="math inline">\(j = i + 2\)</span>), and the output of the writeback stage to the decode stage (for <span class="math inline">\(j = i + 3\)</span>). With that in place, each stage always has the data it needs, so we never have to stall.</p>
 <p>To implement data forwarding in each stage, we can use multiplexers that choose between either reading/writing registers, or taking input directly from later stages.</p>
 <p>Turns out, this can't eliminate all our stalls, though it does make a lot of them much shorter. Consider <code>lw R1, (R2)</code> followed by <code>add R4, R1, R1</code> - the load-word instruction doesn't have its result until the memory stage is done, so we must stall the <code>add</code> for 1 cycle so we can forward it from the write-back stage to the execute stage.</p>
-<p>To solve the control dependency read-after-write stall (when we have a conditional branch), we might assume that the branch won't happen, keep executing the next instruction, and then squash it in the pipeline if we do end up taking the branch.</p>
+<p>To solve the control dependency read-after-write stall (when we have a conditional branch), we might assume that the branch won't happen, keep executing the next instruction, and then squash/suppress it in the pipeline if we do end up taking the branch.</p>
 <p>MIPS uses a different approach - the CPU will execute the instruction after the branch (the instruction after the branch is in a position called the <strong>branch delay slot</strong>), regardless of whether the branch is taken or not. The compiler will generally try to fill the branch delay slot with an instruction that doesn't depend on the branch, or NOP if it can't find one.</p>
 <h1 id="section-6">24/1/17</h1>
 <p>Recall that in <strong>static scheduling</strong>, instructions are executed in the order that they appear in, and the compiler is responsible for arranging instructions in a way that avoids hazards.</p>
@@ -468,6 +468,116 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <p>Predicated execution essentially lets the compiler turn control dependencies into data dependencies, by letting it change branches into predicated instructions. All of the instructions run, but only the ones with true predicates will actually have an effect. It's very useful when we have lots of small basic blocks.</p>
 <p>For example, in IA-64, we can denote <code>p1 = r1 == 0; p2 = r1 !== 0</code> as <code>cmp.eq p1, p2 = 0, r1;;</code>, where <code>p1</code> to <code>p64</code> are the predicate registers. Then, we can do <code>(p1) add r4 = r4, 1</code> to increment <code>r4</code> if and only if predicate register <code>p1</code> is 1.</p>
 <p>The Itanium architecture, IA-64, was also called an EPIC architecture (explicitly parallel instruction computing - VLIW with data forwarding and dynamic events like cache misses). It has 128 65-bit (64 bits, plus a poison bit, called the Not-A-Thing bit) integer registers, 128 82-bit floating point registers, and 64 1-bit predicate registers.</p>
+<h1 id="section-10">7/2/17</h1>
+<h2 id="out-of-order-pipelines">Out of order pipelines</h2>
+<p>Out of order pipelines dyanmically schedule instructions. The benefit is that they can take advantage of instruction-level parallelism not available at compile time, and allow us to make compilers a lot simpler, at the expense of more complicated CPUs.</p>
+<p>When we're designing these pipelines, we need to design around hazards in register data, memory data, and control flow.</p>
+<p>Out of order execution is inherently superscalar - there's no point in doing dynamic scheduling unless we have multiple functional units.</p>
+<p>Scheduling is usually done using Tomasulo's algorithm, an improved version of previous techniques like scoreboarding. It was invented around 1967 and used for an IBM FPU.</p>
+<p>Tomasulo's FPU has two functional units - a 2-stage pipelined, 2-cycle floating point adder, and a non-pipelined, 3-cycle floating point multiplier. The adder has 3 <strong>reservation stations</strong>, and the multiplier has 2.</p>
+<p>The FPU also has 3 sets of registers:</p>
+<ul>
+<li>Float Registers (FLR) F0, F2, F4, F6 are the floating point registers used for FPU computation.</li>
+<li>Float Load Buffer (FLB) stores 6 operands read from memory.</li>
+<li>Store Data Buffer (SDB) stores 3 results to be written to memory.</li>
+</ul>
+<p>The <strong>common data bus</strong> allows parts of the FPU to broadcast a float along with a 4-bit source tag to specify where it came from (like a reservation station or the FLB).</p>
+<p>Units like reservation stations, the FLR, and the SDB hold data and the data's tag.</p>
+<p>The key concept here is the reservation station, and the use of tags to</p>
+<p>Here's the FPU's workflow:</p>
+<ol style="list-style-type: decimal">
+<li>Up to two instructions are dispatched (in their original order) to the reservation station.</li>
+<li>Operands are copied to the reservation station.</li>
+<li>The destination register number is compared to the reservation station number.</li>
+<li>Instructions are sent to the functional unit (adder or multiplier) when all of its operands are ready and the functional unit is free.</li>
+<li>After computing the result, the functional broadcasts the result on the CDB, and waiting units like the FLR, reservation stations, and SDB update their contents.</li>
+</ol>
+<p>;wip: what even is this, read https://en.wikipedia.org/wiki/Tomasulo_algorithm#Implementation_concepts</p>
+<p>Tomasulo's algorithm has imprecise exceptions. For example, if register F4 is renamed by instruction X in cycle 1 and renamed by instruction Y in cycle 2, then W never writes its result to register F4, so if W faults, then recovery isn't possible since the semantics require the result be written. There's no real way to recover from this except to restart the computation from an earlier point.</p>
+<p>An out of order pipeline looks something like the following:</p>
+<ul>
+<li>Fetch - retrieve multiple instructions per cycle (in order).</li>
+<li>Decode - identify instruction boundaries, opcodes, operands (in order).
+<ul>
+<li>For Intel x86 processors, CISC instructions are translated into internal RISC instructions.</li>
+</ul></li>
+<li>Dispatch - send the decoded instructions off to the reservation stations (in order).</li>
+<li>Issue - send instructions from reservation stations to the execution units (out of order).</li>
+<li>Finish - broadcast result in the forwarding bus (out of order).</li>
+<li>Commit - update destination registers in order (in order).</li>
+<li>Retire - update memory-store instructions (in order).
+<ul>
+<li>This is where SW instructions actually take effect.</li>
+</ul></li>
+</ul>
+<p>The <strong>re-order buffer</strong> (ROB) remembers program order, so we can put things back in order after the Issue stage. At the dispatch stage, each instruction gets an entry in the ROB. At the finish stage, the ROB entry is updated to ;wip. At the Commit stage, the ROB entry is removed.</p>
+<p>The ROB also keeps track of which instructions raise exceptions, so we can handle them at the Commit stage of the pipeline (this is analogous to the Itanium case, where we used a poison bit to only raise exceptions when we reach the Writeback stage). This ensures that the processor state is correct/precise at the instruction that raised the exception, which allows us to recover from the exception.</p>
+<p>The width of an out of order pipeline is the number of instructions dispatched/committed per cycle.</p>
+<h1 id="section-11">9/2/17</h1>
+<p>Assignment 1 (not project 1) is due after reading week. It's about scheduling instructions in a pipelined processor.</p>
+<h3 id="register-renamingassignment">Register renaming/assignment</h3>
+<p>Data dependencies within a block of code form a data-flow graph (DFG) in the processor, where each edge <span class="math inline">\(a \to b\)</span> represents the fact that <span class="math inline">\(b\)</span> depends on the result of <span class="math inline">\(a\)</span>, so <span class="math inline">\(b\)</span> shouldn't run before <span class="math inline">\(a\)</span>. To help us run Tomasulo's algorithm, we can draw out the DFG and arrange it to minimize height.</p>
+<p>The longest path (also known as the critical path) within the dataflow graph is the minimum number of cycles we can execute those instructions in - this is called the <strong>dataflow limit</strong>. In other words, with one thread, it's impossible to execute faster than the length of the critical path of true dependencies.</p>
+<p>Operations in the CPU produce values, which are then assigned to registers. The <strong>live range</strong> of a value is the range within the code starting from when the value is first written to a register, up to and including the last use (when the value is last read from the register).</p>
+<p>DFGs can also have virtual dependencies between pairs of instructions, called <strong>false dependencies</strong>, which give us write-after-read or write-after-write hazards if we change the order of those instructions.</p>
+<p>Since there are a limited number of registers, the compiler needs to recycle registers - the compiler can use a register for a new value after the current value has been read for the last time. However, reusing registers imposes write-after-read dependencies.</p>
+<p><strong>Register renaming</strong> is a technique that tries to get rid of false data dependencies, which helps us get better parallelism. The</p>
+<p>To implement this, each operation's output value is assigned to a temporary <strong>rename register</strong> within a rename register file. The actual destination register is associated with the rename register ID, and on the commit step, we can actually copy the value from the rename register to the destination register. If we have enough rename registers, we can essentially have single assignment for each register, eliminating false dependencies and allowing us to improve parallelism.</p>
+<p>Register renaming is used by Tomasulo's algorithm.</p>
+<p>In hardware, we have an <strong>ARF</strong> (architected register file), which maps architecture registers (R0-R31 in MIPS) to rename registers. The <strong>RRF</strong> (rename register file) has one entry for each ROB entry, and the</p>
+<p>With ;wip, we replace the ARF with an RAT (register alias table), which maps registers R0-R31 to architected and rename register entries in the PRF. The RAT has two columns - the retirement RAT (which has indices of architected register in the PRF), and the front-end RAT (which points to renamed register indices in the PRF). In case of an exception, the retirement RAT is copied to the front-end RAT, which undoes any renames done by the instructions after the fault, allowing us to raise precise exceptions.</p>
+<p>;wip: read textbook section 3.4.6 (or 5.3? dunno what the numbers mean) and https://en.wikipedia.org/wiki/Register_renaming</p>
+<p>The PRF (physical register file) stores the actual contents of the architected and rename registers. The</p>
+<p>Here's what this looks like:</p>
+<ul>
+<li>During dispatch:
+<ul>
+<li>Allocate an ROB entry</li>
+<li>Allocate a reservation station entry</li>
+<li>Rename the destination register of the operation in the PRF and RAT.</li>
+<li>Copy operands from PRF (using front-end RAT) to reservation station (the values of the operands if the data is available, or the register number if not)</li>
+<li>Rename the front-end RAT with the rename register number.</li>
+</ul></li>
+<li>On commit:
+<ul>
+<li>Update the retirement RAT.</li>
+<li>Add the old PRF number to the PRF free list.</li>
+</ul></li>
+</ul>
+<p><strong>Delayed read</strong> is a technique in which the reservation station only stored the operand tag and status of the data, rather than the data itself, reducing data duplication. It can also time instruction issuing to correspond with the broadcast of the result of the operation it depends on. ;wip: what</p>
+<h1 id="section-12">14/2/17</h1>
+<p>Register renaming is a technique for undoing the hazards caused by register recycling.</p>
+<p>Speculative execution is a technique in which we predict the direction of a branch and start executing that path while the branch is being resolved. However, this presents issues for register renaming, because speculatively executed instructions need to rename registers too - we must make sure the effects of the renaming are undone if the branch turns out to be wrong. To do this, we can do either rollbacks or checkpointing.</p>
+<p>To do rollbacks, we save frontend RAT entries into the ROB (reorder buffer) as soon as the speculative instruction is dispatched. To recover upon a mispredicted branch, we can copy back the rename register number from the ROB to the frontend RAT, one at a time, until the branch instruction is actually completed. This works, but it's quite slow because of all the copying we have to do over multiple cycles.</p>
+<p>To do checkpointing, we save a full copy of the entire frontend RAT as soon as the speculative instruction is dispatched. The saved copy of the frontend RAT is copied back to the frontend RAT is copied back if we mispredict the branch. This can be a lot faster than rollbacks, but it requires more storage and hardware to support this, depending on how many branches we are speculating past.</p>
+<p>For Intel Skylake chips, we have 224 ROB entries, 180-entry integer PRF, and 168-entry floating point PRF. Haswell chips support up to 48 checkpoints - the ability to speculatively execute 48 branches at once!</p>
+<h2 id="memory-data-flow">Memory Data Flow</h2>
+<p>Data in memory includes the data segments, stack, and heap. Loads usually start a chain of instructions, because they have to wait on RAM, which is slow compared to processors. How do these work with pipelined processors?</p>
+<p>For store instructions:</p>
+<ol style="list-style-type: decimal">
+<li>Upon dispatch, calculate the effective address and store it with the data in the <strong>store buffer</strong> (SB).</li>
+<li>After commit, write the store buffer entry out to the processor cache (so it gets written to RAM).</li>
+</ol>
+<p>For load instructions:</p>
+<ol style="list-style-type: decimal">
+<li>Upon dispatch, calculate the effective address, and read the data from either the store buffer (if available) or the processor cache (so it gets read from RAM).</li>
+<li>After commit, broadcast the destination read on the forwarding bus, so the other units know that the destination register has been updated.</li>
+</ol>
+<p>We want to be able to issue store instructions out of order, to improve performance.</p>
+<p>Speculative loads are loads performed under the assumption that they are unaliased to recent stores - loads that are done from the cache, not the store buffer. When we do speculative loads, we need to detect if the load gave a valid result, and if not, retry it.</p>
+<p>The speculative load process:</p>
+<ol style="list-style-type: decimal">
+<li>Upon dispatch, calculate the effective address. If a committed store is in the store buffer, forward the data along the forwarding bus. Otherwise, get the data from the processor cache. Add the speculative load's location and effective address to the FLB (finished load buffer).</li>
+<li>After commit, remove the created entry from the FLB.</li>
+</ol>
+<p>The store process, when using speculative loads, becomes:</p>
+<ol style="list-style-type: decimal">
+<li>Upon dispatch, calculate the effective address and store it with the data in the store buffer.</li>
+<li>Upon commit, if aliased loads are present in the FLB, suppress those speculative loads. Write the store buffer entry out to the processor cache (so it gets written to RAM).</li>
+</ol>
+<p>This ensures that if a speculative load finishes before a store completes, the effect of the load gets undone.</p>
+<p>Another technique for speeding up loads is <strong>data prefetching</strong>, where data gets loaded from RAM into the processor data cache before it's actually loaded, so when we actually load it, we can do so directly from the cache. For example, in AMD64 the the <code>prefetch</code> instruction does this.</p>
+<p>Data prefetching can also be done automatically - hardware prefetchers might detect patterns of sequential access, strided access (access with a linear offset each time, like accessing the diagonals of a matrix or accessing the columns of a row-major ordered matrix). One downside of this is that it might bring in data we don't actually want, reducing cache hit rate. Some systems like SPARC have a separate cache for prefetched data, called the prefetch buffer, to avoid this issue.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

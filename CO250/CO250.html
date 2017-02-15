@@ -33,7 +33,7 @@
     <span class="divider"></span>
     <li><a href="https://github.com/Uberi" class="contact">github</a></li>
     <span class="divider"></span>
-    <li><a href="http://www.linkedin.com/pub/anthony-zhang/8b/aa5/7aa" class="contact">linkedin</a></li>
+    <li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
     <span class="divider"></span>
     <li><a href="mailto:azhang9@gmail.com" class="contact">email</a></li>
     <span class="divider"></span>
@@ -205,6 +205,10 @@ To constrain solutions to perfect matchings only, we can add the constraints <sp
 <li>Replace free variables (variables that don't have upper or lower bounds) with <span class="math inline">\(a - b\)</span> where <span class="math inline">\(a \ge 0, b \ge 0\)</span> are new variables. Their difference can have any value, positive or negative.</li>
 </ul>
 <p>Once this is done, we have an equivalent LP in SEF. Also, we can easily convert optimal solutions for the LP in SEF into optimal solutions for the original LP, simply by taking the values of the corresponding variables and ignoring the newly introduced variables.</p>
+<h1 id="section-6">25/1/17</h1>
+<p>The basic idea behind the simplex algorithm is for us to find a feasible solution <span class="math inline">\(x\)</span>, then repeatedly find a feasible solution better than <span class="math inline">\(x\)</span> until we find one that is either optimal or realize that the LP is unbounded.</p>
+<p>We can actually solve LPs by hand in this way, by building an intiution for what would maximise the objective function, and trying to satisfy the constraints with that in mind.</p>
+<p>For example, suppose we have the LP &quot;maximise <span class="math inline">\(4x_1 + 3x_2 + 7\)</span> subject to <span class="math inline">\(3x_1 + 2x_2 + x_3 = 2\)</span> and <span class="math inline">\(x_1 + x_2 + x_4 = 1\)</span> and <span class="math inline">\(x_1, x_2, x_3, x_4 \ge 0\)</span>&quot;. Clearly, we want to maximise <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> while still satisfying the constraints, and feasible solutions that</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

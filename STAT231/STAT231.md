@@ -265,7 +265,9 @@ The binomial relative likelihood function is $\frac{\theta^y (1 - \theta)^{n - y
 
 What is the Y axis of the relative likelihood function? It's the **likelihood** of the X axis, not the probability of anything. Likewise, $\theta$ isn't a probability either, just an unknown constant. For example, a value of $\theta$ that makes $R(\theta) = 0.6$ means that $\theta$ is 0.6 times as likely as the maximum likelihood estimate.
 
-A likelihood is different from a probability - **likelihoods are the frequency of certain hypotheses out of all hypotheses, while probabilities are the frequency of certain results out of all results**. Hypotheses are statements like "the unknown parameter $\theta$ is 0.3", and results are something like "we observed "
+A likelihood is different from a probability - **likelihoods are the frequency of certain hypotheses out of all hypotheses, while probabilities are the frequency of certain results out of all results**. Hypotheses are statements like "the unknown parameter $\theta$ is 0.3", and results are something like "we observed 300 of 1000 trials were successful".
+
+Likewise, a probability function is what we use when **we have a parameter value and want to describe what samples will look like**, while the likelihood function is what we use when **we have a sample and want to describe what the parameter value looked like**.
 
 The **log likelihood function** is just the log of the likelihood function, $l(\theta) = \ln L(\theta)$. Clearly, it has its maximum at the same point, even though the shape is different.
 
@@ -344,7 +346,7 @@ The **PPDAC** is an algorithm for designing statistical studies. It consists of 
     * What variates will we collect for each unit?
     * What are possible study error? **Study error** is a systematic difference between a target population and a study population. The hard part of getting rid of study error is that we don't know if it's present or not. Statisticians use peer-review to avoid this. For example, if the study population is mice and the target population is humans, there are significant differences between mice and humans that we would have to account for.
     * An example of study error is a real study on male physicians where aspirin reduced heart attacks by 44%. Applying this to female patients who are potentially not physicians is potentially a study bias, if women or non-doctors react systematically differently to aspirin.
-    * What are possible sources of sample error? **Sample error** is a systematic difference between the sample and the study population. The sampling protocol needs to be chosen carefully to avoid this.
+    * What are possible sources of sample error? **Sample/sampling error** is a systematic difference between the sample and the study population. The sampling protocol needs to be chosen carefully to avoid this.
     * An example of sample error is when a study uses an online survey - only people who are inclined to take online surveys will be part of the sample, and if those people are systematically different in relevant ways, we have a sample error.
     * Measurement often introduces **measurement error** - the difference between the true value of the variate and the observed value.
     * **Response bias** is when study respondents systematically tend to give incorrect answers. For example, people tend to exaggerate their income on financial surveys, or lie about experiencing police mistreatment on studies about police behaviour.
@@ -454,6 +456,88 @@ In a real empirical study, we only get one sample - we can't just repeatedly res
 Suppose we have a dataset $y_1, \ldots, y_n$ sampled from our study population with an assumed model $Y_i \sim \mathrm{Gaussian}(\mu, 0.5), 1 \le i \le n$ (each number in our sample is in a Gaussian distribution where $\sigma = 0.5$). Suppose we're using $\widetilde \mu = \overline Y = \frac{\sum Y_i}{n}$ to estimate $\mu$ using our dataset. Clearly, we don't need to simulate the sampling distribution, because we know it's $\widetilde \mu = \mathrm{Gaussian}(\mu, \frac{\sigma}{\sqrt{n}})$. Now, how often is this estimate $\hat \mu$ within 0.1 of the true value of $\mu$?
 
 In other words, we want $P(\abs{\overline Y - \mu} \le 0.1)$ given our distribution $\mathrm{Gaussian}(\mu, \frac{0.5}{\sqrt{n}})$, but we don't know $\mu$. However, if we divide both sides by $\sigma$, we get $P(\abs{\overline Y - \mu} \le 0.1) = P(\frac{\abs{\overline Y - \mu}}{\frac{0.5}{\sqrt{n}}} \le \frac{0.1}{\frac{0.5}{\sqrt{n}}})$. Note that this is now a normalized Guassian distribution, so we have $P(\abs{Z} \le \frac{0.1}{\frac{0.5}{\sqrt{n}}}) = P(\frac{\sqrt{n}}{5} \le Z \le \frac{\sqrt{n}}{5})$, which we can then compute using the Gaussian CDF table.
+
+# 8/2/17 - Tutorial
+
+Practice problem about identifying the PPDAC steps in a news article about a study. The example is about an observational study (researchers didn't attempt to control any variates), about the relationship about women who attend science fairs/competitions at a young age and whether they go into STEM careers later on, trying to establish whether there's a causative relationship. Data was collected by an in-class survey, though we don't know if students were required to complete it.
+
+The explanatory variate here would be whether each student is participating in science fairs/competitions, a categorical variate. The response variate is whether each student ended up going into a STEM career, and is also a categorical variate. The analysis concluded that women who participated in those things were 2.7 times more likely to go into STEM careers than women who did not - this is a relative risk numerical summary.
+
+The sample is a subset of the study population, but the study population is not necessarily a subset of the target population.
+
+# 8/2/17
+
+To indicate uncertainty in an estimate, we define an **interval estimate** of $\theta$ given observed data $y$ to be $[L(y), U(y)]$, where $L$ and $U$ are generic interval bounding functions.
+
+For example, the interval estimate $[\overline y - 2 \frac{\sigma}{\sqrt n}, \overline y + 2 \frac{\sigma}{\sqrt n}]$ summarizes the uncertainty in the point estimate $\hat \mu$. As the sample size increases, the confidence interval shrinks, converging on $\overline y$.
+
+The $100p$ percent **likelihood interval** is defined as $\set{\theta : R(\theta; y) \ge p}$, where $\theta$ is the unknown parameter, $R(\theta)$ is the relative likelihood function, and $0 \le p \le 1$. Note that this isn't necessarily a single interval unless $R(\theta; y)$ is unimodal, but all of the likelihood functions we'll look at in this course will be unimodal.
+
+The log relative likelihood function is defined as $r(\theta; y) = \ln R(\theta; y)$, and we use it because it's often easier to compute $r(\theta; y)$ than $R(\theta; y)$. The log relative likelihood function often looks pretty quadratic, while the relative likelihood function often looks like a bell curve. We sometimes write the $100p$ percent likelihood interval as $\set{\theta : r(\theta; y) \ge \ln p}$.
+
+It's important to note that the likelihood interval is always a function of the observed data. The likelihood interval is an example of an interval estimate.
+
+The wider the likelihood interval, the more uncertainty about our estimate, and the less we know about the value of the unknown parameter. Values in the 10% likelihood interval are generally considered **plausible**. Values inside the 50% likelihood interval are generally considered **very plausible**. Values outside the 1% likelihood interval are generally considered **very implausible**.
+
+We usually find the likelihood interval either by solving the inequality, or by drawing a horizontal line at $y = p$ on the graph of the relative likelihood function and reading off the X-axis values that are above the line.
+
+How often does the likelihood interval contain the true parameter value? An **interval estimator** can answer this question, much like point estimators did for point estimates.
+
+We again represent our potential dataset as random variables $Y = Y_1, \ldots, Y_n$ (as opposed to the dataset $y = y_1, \ldots, y_n$). Then, we have the **interval estimator** $[L(Y), U(Y)]$ where ;wip: likelihood estimator slides
+
+To determine how good the interval estimator is we want to compute $P(L(Y) \le \theta \le U(Y))$. This gives us the concept of the **confidence interval** - what's the **narrowest** possible interval $[L(Y), U(Y)]$ that has a $100p$ percent chance of containing the true value of $\theta$?
+
+The $100p$ percent **confidence interval** is the interval estimate $[L(y), U(y)]$ such that $P(L(y) \le \theta \le U(y)) = p$, where $\theta$ is the unknown parameter and $0 \le p \le 1$. The center of the confidence interval is always the point estimate for the mean (i.e., the sample mean), so the confidence interval is just the point estimate plus or minus the **margin of error**. Also, $p$ is called the **confidence coefficient**.
+
+It's not valid to say that a 99% confidence interval means that we'd expect the true value to have a 99% probability of being in the interval, because the true value of $\theta$ is just a constant, so doesn't have a distribution or probability of being in there - it's either in the interval or not in the interval, and we're only doing the study once. However, we can say that a 99% confidence interval means that we would be 99% **confident** that the true value is in the interval - if we did the experiment 100 times, we'd expect the interval we got to contain the true value 99 times.
+
+Turns out the confidence interval can be pretty easily calculated. We calculate the sample mean $\overline y$ and sample standard deviation $s$, and then choose a value. Then, the confidence interval is $[\overline y - z^* \frac{s}{\sqrt n}, \overline y + z^* \frac{s}{\sqrt n}]$
+
+# 10/2/17
+
+Suppose $Y_1, \ldots, Y_n$ is a random sample of a $\mathrm{Gaussian}(\mu, 1)$ distribution. Then $E(Y_i) = \mu$ and $\mathrm{Var}(Y_i) = 1$.
+
+Consider the interval $[\overline Y - \frac{1.96}{\sqrt n}, \overline Y + \frac{1.96}{\sqrt n}]$. What's the probability that $\mu$ is in this interval, or $P(\overline Y - \frac{1.96}{\sqrt n} \le \mu \le \overline Y + \frac{1.96}{\sqrt n})$?
+
+This is a somewhat unusual form for a probability calculation, because the random variable appears on the range bounds and the inner value $\mu$ is a constant. To solve this using the techniques we learned in STAT230, we want to rewrite this so the random variable is in the middle.
+
+Subtracting $\overline Y$ and multiplying by $\sqrt{n}$, we get $P(-1.96 \le \sqrt{n} (\mu - \overline Y) \le 1.96)$. We can rewrite this as $P(-1.96 \le \frac{\overline Y - \mu}{\frac 1 \sqrt{n}} \le 1.96)$.
+
+Clearly, $\overline Y \sim \mathrm{Gaussian}(\mu, \sigma = \frac{1}{\sqrt n}})$, because it's the average of $n$ samples. Therefore, $\frac{\overline Y - \mu}{\frac 1 \sqrt{n}} \sim \mathrm{Gaussian}(0, 1)$, so we can find the value of $P(-1.96 \le \frac{\overline Y - \mu}{\frac 1 \sqrt{n}} \le 1.96)$ using the Gaussian CDF table.
+
+Clearly, the width of the table is $2 \frac{1.96}{\sqrt n}$, which decreases as $n$ increases.
+
+If we had a sample of size 16 with mean 10.4, we would have a 95% confidence interval $[10.4 - \frac{1.96}{\sqrt{16}}, 10.4 + \frac{1.96}{\sqrt{16}}]$. This tells us that we are 95% confident that $10.4 - \frac{1.96}{\sqrt{16}} \le \mu \le 10.4 + \frac{1.96}{\sqrt{16}}$. Note that this is not the same thing as $P(10.4 - \frac{1.96}{\sqrt{16}} \le \mu \le 10.4 + \frac{1.96}{\sqrt{16}}) = 0.95$ - all of the values in that statement are constants, so the probability is either 0 or 1, we just don't know which it is. If we repeated the experiment many times, the range would include the true value $100p$ percent of the time (though we very rarely get the chance to repeat our experiments).
+
+A **pivotal quantity** $Q(Y; \theta)$ is a function of a random sample $Y$ and unknown parameter $\theta$ such that the distribution of $Q(Y; \theta)$ is completely known. That makes $P(a \le Q(Y; \theta) \le b)$ depends only on $a$ and $b$. The pivotal quantity must be a function of the data and unknown parameter, so $\overline Y$ is not a pivotal quantity while $\overline Y - \mu$ is.
+
+In this course we won't need to find pivotal quantities on our own, but we should be able to show why a given function is a pivotal quantity. We also need to be able to construct a confidence interval using a pivotal quantity.
+
+To use a pivotal quantity to find a $100p$ percent confidence interval, we determine values $a, b$ such that $P(a \le Q(Y; \theta) \le b) = p$. Then, we rewrite $a \le Q(Y; \theta) \le b$ as $L(Y) \le \theta \le U(Y)$. Then, we use the fact that $p = P(a \le Q(Y; \theta) \le b) = P(L(Y) \le \theta \le U(Y))$ to solve for $L(Y), U(Y)$. The interval $[L(Y), U(Y)]$ is then the $100p$ percent confidence interval.
+
+For $Y \sim \mathrm{Gaussian}(\mu, \sigma)$ where $\sigma$ is known, we use the normal table to find a value such that $P(-a \le Z \le a) = p$ (equivalently, $P(Z \le a) = \frac{1 + p}{2}$, which should be easier to look up in the normal table), and then the $100p$ percent confidence interval for samples is is $[\overline y - a \frac{\sigma}{\sqrt n}, \overline y + a \frac{\sigma}{\sqrt n}]$. This is also the case for other distributions if the sample is large enough, because of the central limit theorem.
+
+Common confidence intervals we care about are 90%, 95%, and 99%, with values of $a$ equal to 1.645, 1.960, and 2.576 respectively.
+
+# 13/2/17
+
+Suppose we have an empirical study of hand/leg dimensions of students in class. The target population might be the set of students taking STAT231, while the sample population might be the set of students that showed up to the class that the study was taking place in. This is an observational study, since even though the experimenter asked us to do something, it was not something that would affect our variate of interest.
+
+Tutorial test 2 on wednesday. Check information on LEARN.
+
+Recall the definition of a pivotal quantity: a function of the data and the unknown parameter such that the distribution is fully known. Recall that to turn a pivotal quantity into a confidence intervals, we find the bounds of the pivotal quantity, and then transform the expression until we get the form $P(L(Y) \le \theta \le U(Y)) = p$, or the confidence interval $[L(Y), U(Y)]$.
+
+Pivotal quantities are often hard to find analytically. However, we often use **approximate pivotal quantities** that apply for values as the sample size gets large, due to the central limit theorem.
+
+Recall that if $Y \sim \mathrm{Binomial}(n; \theta)$, then $E(Y) = \theta$ and $\mathrm{Var}(Y) = \frac 1 n \theta(1 - \theta)$. By the central limit theorem, the approximate sampling distribution of $\widetilde \theta = \frac Y n$ is $\frac{\widetilde \theta - \theta}{\sqrt{\frac 1 n \theta(1 - \theta)}}$ for a large enough value of $n$.
+
+However, this formula has too many $\theta$ - the function is too complicated to use as a pivotal quantity. Instead, we can replace some of our $\theta$ isntances with $\widetilde \theta$, to get $Q_n = \frac{\widetilde \theta - \theta}{\sqrt{\frac 1 n \widetilde \theta(1 - \widetilde \theta)}}$. This is an approximate pivotal quantity for the binomial distribution.
+
+We can use this to construct **approximate confidence intervals**, using the usual way of converting a pivotal quantity into a confidence interval. Given a large $n$, a $100p$ percent approximate confidence interval for $\theta$ is $\theta \pm a \sqrt{\frac 1 n \hat \theta (1 - \hat \theta)}$ where $a$ is defined the same way as for the Gaussian confidence interval above.
+
+We now have two types of interval estimates - $100p$ percent likelihood intervals, and $100p$ percent confidence intervals. There's actually an inportant connection between the two types of interval estimates, which we'll look at later.
+
+Researchers use confidence intervals to choose how large to make their samples. They compute the sample size their studies need based on a worst-case confidence interval width (and available resources like budget and manpower).
 
 ---
 
