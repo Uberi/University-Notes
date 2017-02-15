@@ -3,7 +3,7 @@ University-Notes
 
 Notes from various courses at the University of Waterloo. Written by Anthony Zhang.
 
-# [VIEW NOTES](http://uberi.github.io/University-Notes/)
+# [VIEW NOTES](http://anthony-zhang.me/University-Notes/)
 
 About
 -----
@@ -11,6 +11,13 @@ About
 I write these during lectures, and then add to them occasionally when mistakes or omissions are discovered.
 
 They're written in Markdown with LaTeX for math. There's a build script that uses [Pandoc](http://johnmacfarlane.net/pandoc/) to generate HTML with MathJax for LaTeX rendering.
+
+Deployment
+----------
+
+To compile, run `make` in the top-level directory.
+
+I then push the resulting files to GitHub, where they're hosted using GitHub Pages.
 
 License
 -------
