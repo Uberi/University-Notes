@@ -27,19 +27,14 @@ table {
 	margin: 0 auto;
 	border-collapse: collapse;
 }
-
 tr:first-child th { border-top: none; }
-
 tr:last-child td { border-bottom: none; }
-
 td, th {
 	padding: 0.5em;
 	margin: 0;
 	border: 1px solid #CCCCCC;
 }
-
 td:first-child, th:first-child { border-left: none; }
-
 td:last-child, th:last-child { border-right: none; }
 
 blockquote {

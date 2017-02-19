@@ -148,6 +148,11 @@ ol, ul {
 	.site_links .divider { display: none; }
 }
 
+@media print {
+	.site_links li { font-size: 0.5em; }
+	.site_links .divider { display: none; }
+}
+
 a { color: #775555; }
 
 .license {

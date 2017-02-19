@@ -578,6 +578,36 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <p>This ensures that if a speculative load finishes before a store completes, the effect of the load gets undone.</p>
 <p>Another technique for speeding up loads is <strong>data prefetching</strong>, where data gets loaded from RAM into the processor data cache before it's actually loaded, so when we actually load it, we can do so directly from the cache. For example, in AMD64 the the <code>prefetch</code> instruction does this.</p>
 <p>Data prefetching can also be done automatically - hardware prefetchers might detect patterns of sequential access, strided access (access with a linear offset each time, like accessing the diagonals of a matrix or accessing the columns of a row-major ordered matrix). One downside of this is that it might bring in data we don't actually want, reducing cache hit rate. Some systems like SPARC have a separate cache for prefetched data, called the prefetch buffer, to avoid this issue.</p>
+<h1 id="section-13">16/2/17</h1>
+<p>Review of caching and memory (see ECE222 notes for more details):</p>
+<ul>
+<li>Cache lines store the tag (the other bits of the address, enough to reconstruct the address later), the flags (dirty, valid, etc.), and the data itself.</li>
+<li>Direct-mapped caching: blocks of memory are mapped to cache lines according to their block index modulo the number of blocks.</li>
+<li>Fully-associative caching: blocks of memory are mapped to cache lines in an LRU fashion, and associative memory allows lookup by block index.</li>
+<li>Set-associative: the first few bits of the block index are used to determine which set of cache lines to map to, and each set of cache lines forms a fully associative cache (fully-associative caching can be thought of as 1-way set-associative caching, and direct-mapped caching can be thought of as all-way set-associative caching). Most instruction/data caches work best in practice at around 8-way set associative caching.</li>
+<li>Three types of cache misses: compulsory (data has never been in the cache before), capacity (cache is too small to hold the data, so we kicked the data we needed earlier), conflict (the associativity is too low).</li>
+<li>Suppose we have 32-bit addresses, and 1024 direct-mapped 64-byte cache lines. Then the first 16 bits of the address are stored as tags, the next 10 bits are used as the block index (because taking the bits before the block offset modulo 1024 is the same as just taking the last 10 bits), and the last 6 bits are for the offset within the block (addresses point to individual bytes).</li>
+<li>Virtual memory provides protection against other processes modifying a given process' memory, and allows processes to work with a larger, virtual address space.</li>
+<li>The MMU translates virtual to physical addresses. It translates the virtual page number to the physical segment number, and keeps the offset bits.</li>
+<li>The MMU can use multiple different indexing modes:
+<ul>
+<li>PI/PT indexing (physical indexing, physical tagging) - MMU entries are indexed and tagged by physical addresses, which means translation from virtual to physical address completes before cache lookup starts - this is easy to implement but slow.</li>
+<li>VI/PT indexing (virtual indexing, physical tagging) - MMU entries are indexed by virtual addresses but tagged by physical addresses, which means translation and cache lookup can occur in parallel. However, VI/PT results in the synonym problem, where physical blocks are cached in the MMU multiple times for shared memory, since each physical address can have a different virtual address for different processes. To solve this, the OS can do page colouring to make sure the virtual page number is always the same in all virtual address spaces. This is widely used in practice.</li>
+<li>VI/VT (virtual indexing, virtual tagging) - MMU entries are indexed and tagged by virtual addresses, which means we only need to translate virtual page numbers to physical page numbers upon cache misses. This also has the synonym problem, but it also has the homonym problem, where the same virtual tag can refer to different possible physical blocks. OSs solve this by storing the process ID in the tag. This is rarely used in practice.</li>
+</ul></li>
+</ul>
+<p>Intel's main competitive advantage nowadays is its superior branch prediction abilities.</p>
+<p>In MIPS, control flow happens either as a branch instruction (which does PC-relative addressing), or as a jump (which does indirect addressing).</p>
+<p>Speculative execution has three main concerns:</p>
+<ul>
+<li>Target speculation:
+<ul>
+<li>The <strong>branch target buffer</strong> maps branch instruction addresses to branch target addresses. It stores predictions for branches.</li>
+<li>In the fetch stage for a branch instruction, if the branch target buffer has an entry for the address of this branch instruction, we load the branch target address into PC, giving us a 0-latency branch.</li>
+<li>In the execute stage, the branch unit actually resolves the branch to validate whether the prediction is correct or not. If it correct, we can add/update the branch target buffer entry, or remove the branch target buffer entry if it wasn't correct (to delete the prediction).</li>
+<li>This works well for branches, but not really for jumps, which use indirect addressing. For example, returning from a subroutine called from many places means that the branch target address will often change, causing frequent branch mispredictions.</li>
+</ul></li>
+</ul>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

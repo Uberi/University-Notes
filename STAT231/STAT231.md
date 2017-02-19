@@ -535,9 +535,55 @@ However, this formula has too many $\theta$ - the function is too complicated to
 
 We can use this to construct **approximate confidence intervals**, using the usual way of converting a pivotal quantity into a confidence interval. Given a large $n$, a $100p$ percent approximate confidence interval for $\theta$ is $\theta \pm a \sqrt{\frac 1 n \hat \theta (1 - \hat \theta)}$ where $a$ is defined the same way as for the Gaussian confidence interval above.
 
+;wip: confidence interval formula for Poisson
+
 We now have two types of interval estimates - $100p$ percent likelihood intervals, and $100p$ percent confidence intervals. There's actually an inportant connection between the two types of interval estimates, which we'll look at later.
 
 Researchers use confidence intervals to choose how large to make their samples. They compute the sample size their studies need based on a worst-case confidence interval width (and available resources like budget and manpower).
+
+# 15/2/17
+
+Most interval estimates have the form $\text{point estimate} \pm \text{uncertainty}$.
+
+Likelihood intervals are just a different way to write approximate confidence intervals. To show this, we use the $\Chi^2(k = 1)$ distribution, which looks like a downward up-concave slope.
+
+The **maximum likelihood estimator** of $\theta$ is $A = -2 \ln \frac{L(\theta; Y)}{L(\widetilde \theta; Y)}$. $A$ is a random variable that depends on the random data $Y = Y_1, \ldots, Y_n$, and is also called the likelihood ratio statistic (likelihood ratio random variable).
+
+We won't show why this works in this class, but it turns out that with a large enough $n$, $A$ roughly has a $\Chi^2(1)$. In other words, with a large enough sample, we can use the Chi-squared distribution to approximate the likelihood ratio statistic. That means $A$ is approximately a pivotal quantity for $\theta$.
+
+The "large enough" value of $n$ depends on the distributions of the individual samples, just like the central limit theorem - 30 is usually a good value for this course. The above statement is actually quite similar to the central limit theorem, and the likelihood ratio statistic is somewhat similar to the relative likelihood function.
+
+We can then use the likelihood ratio statistic as an approximate pivotal quantity to create $100p$ percent confidence intervals. First, we find a $c$ such that $p = P(W \le c)$ where $W \sim \Chi^2(1)$. Now, we note that $P(W \le c) \approxeq P(-2 \ln \frac{L(\theta; Y)}{L(\widetilde \theta; Y)} \le c)$ for large enough $n$.
+
+Therefore, the approximate $100p$ percent confidence interval is $\set{\theta: -2 \ln \frac{L(\theta; y)}{L(\hat \theta; y)} \le c}$, or $\set{\theta: -2 \ln R(\theta; y) \le c}$, or $\set{\theta: R(\theta; y) \ge e^{-\frac c 2}}$. But, note that this is just a likelihood interval!
+
+Note that if $W \sim \Chi^2(1)$ and $Z \sim \mathrm{Gaussian}(0, 1)$, then $P(W \le c) = 2 P(Z \le \sqrt c) - 1$ - we can convert between Chi-squared and Guassian CDF values exactly. This is useful for when our Chi-squared tables don't go up to our desired values.
+
+For example, since $0.95 = 2P(Z \le 1.96) - 1$, $0.95 = P(W \le 1.96^2)$ and an approximate confidence interval for $\theta$ is $\set{\theta: R(\theta) \ge e^{-\frac{1.96^2}{2}}} = \set{\theta: R(\theta) \ge 0.147}$.
+
+Therefore, the 14.7% likelihood interval is the same thing as an approximate 95% confidence interval (for large enough sample sizes)! In the same way, the 4% likelihood interval is a 99% confidence interval, a 10% likelihood interval is a 97% confidence interval, and a 26% likelihood interval is a 90% confidence interval.
+
+Note that as $p$ increases a likelihood interval gets narrower, while a confidence interval gets wider.
+
+So to convert a $100p$ percent likelihood interval into a confidence interval (given a large enough sample size), we let $c = -2 \ln p$, and then look up the value $k$ such that $k = P(W \le c)$ in the Chi-squared CDF table, or $k = 2P(Z \le \sqrt c) - 1$ in the Gaussian CDF table.
+
+Consider the binomial distribution. We can now find the 95% approximate confidence interval with the 14.7% likelihood interval, or using the other approach $\overline y \pm \hat \theta \sqrt{\frac{\hat \theta (1 - \hat \theta)}{n}}$. The former is based on the Chi-squared approximation, while the latter is based on the central limit theorem approximation.
+
+The former tends to be a better approximation for smaller sample sizes, but is often harder to calculate as well. In fact, likelihood interval estimates are at least as good as pivotal-quantity-based estimates, in general.
+
+# 17/2/17
+
+We already looked at the confidence interval for the mean of a Gaussian distribution when $\sigma$ is known, but what about when we don't know $\sigma$?
+
+Clearly, $\overline Y$ is a point estimator for $\mu$, and $\mathrm{Var}(Y)$ is a point estimator for $\sigma^2$ (the sample variance). Note that the point estimator for $\sigma$ is NOT the MLE, $\frac{}{}$. We use the sample variance instead of the MLE because $E(\mathrm{Var}(Y)) = \sigma^2$ - it's an **unbiased estimator**. ;wip: it's not Var(Y), copy the real one and compare to MLE, write in terms of estimator $S$
+
+The confidence interval for $\mu$ is still $\overline y \pm a \frac{\sigma}{\sqrt n}$, but we have two unknowns now, which makes it hard to make a pivotal quantity. Instead, we replace $\sigma$ with the estimator $S$ to get the pivotal quantity $\frac{\overline Y - \mu}{\frac{S}{\sqrt n}}$. It turns out that this pivotal quantity exactly has the $\mathrm{student-t}(n - 1)$ distribution. The student-t distribution has $n - 1$ degrees of freedom rather than $n$ because $\sum (Y - \overline Y) = 0$ - when we estimated the mean, we essentially locked away one degree of freedom.
+
+This is a pivotal quantity for $\mu$ because $S$ is a random variable that's a function of the data, so the whole thing is a function of the data and the unknown parameter $\mu$ whose distribution is completely known.
+
+Therefore, we have the $100p$ confidence interval for $\mu$ $p = P(-a \le \frac{\overline Y - \mu}{\frac{S}{\sqrt n}} \le a)$, where $a$ is a value such that $P(T \le a) = \frac{1 + p}{2}$ where $T \sim \mathrm{student-t}(n - 1)$. Rearranging the pivotal quantity, we get $p = P(\overline Y - a\frac{S}{\sqrt n} \le \mu \le \overline Y + a \frac{S}{\sqrt n})$, or a confidence interval of $[\overline y - a\frac{s}{\sqrt n}, \overline y + a\frac{s}{\sqrt n}]$. This is actually an exact confidence interval - we didn't make any distribution approximations!
+
+To summarize, the $100p$ percent confidence interval of a Guassian distribution where both $\mu$ and $\sigma$ are unknown is $\overline y \pm a\frac{s}{\sqrt n}$ where $a$ is a value such that $P(T \le a) = \frac{1 + p}{2}$ and $T \sim \mathrm{student-t}(n - 1)$ and $s = $ ;wip
 
 ---
 
