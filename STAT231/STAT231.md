@@ -585,6 +585,38 @@ Therefore, we have the $100p$ confidence interval for $\mu$ $p = P(-a \le \frac{
 
 To summarize, the $100p$ percent confidence interval of a Guassian distribution where both $\mu$ and $\sigma$ are unknown is $\overline y \pm a\frac{s}{\sqrt n}$ where $a$ is a value such that $P(T \le a) = \frac{1 + p}{2}$ and $T \sim \mathrm{student-t}(n - 1)$ and $s = $ ;wip
 
+# 27/2/17
+
+Midterm next week, covers everything up to and including section 5.2. Review of content before reading week.
+
+How do we find a $100p$ percent conficence interval for $\sigma^2$ in a Gaussian distribution where $\mu$ is unknown?
+
+For a sample of size 25 drawn from a Gaussian distribution with unknown $\mu$ and $\sigma^2$, then $\overline y \pm a \frac{s}{5}$ is a 95% confidence interval for $\mu$ if $P(T \le a) = 0.975$ and $T \sim t(24)$.
+
+If $Y_1, \ldots, Y_N$ is a random normal sample. Then $\frac{(n - 1)S^2}{\sigma^2} = \frac{\sum (Y_i - \overline Y)}{\sigma^2} \sim \chi^2(n - 1)$, and we can use this as a pivotal quantity. We prefer $S^2$ over the MLE for the sample variance because $E(S^2) = \sigma^2$, while $E(\mathrm{Var}(Y)) \ne \sigma^2$.
+
+Note that $\frac{\sum (Y_i - \mu)^2}{\sigma^2} \sim \chi^2(n)$. This is $n$ rather than $n - 1$ because in the previous formula, we removed one degree of freedom by replacing $\mu$ by $\overline Y$.
+
+Clearly, $W = \frac{(n - 1)S^2}{\sigma^2}$ is a pivotal quantity, so to construct a $100p$ percent confidence interval, we want the values of $a, b$ such that $p = P(a \le W \le b)$. In other words, we want $P(W \le a) = \frac{1 - p}{2}$ and $P(W \le b) = \frac{1 - p}{2} + p = \frac{1 + p}{2}$. We can then look up the corresponding values of $a, b$ in the chi-squared distribution table.
+
+Rearranging the formula, we get $p = P(\frac{(n - 1)S^2}{b} \le \sigma^2 \le \frac{(n - 1)S^2}{a})$, the $100p$ percent confidence interval for $\sigma^2$ when $\mu$ is unknown is $[\frac{(n - 1)S^2}{b}, \frac{(n - 1)S^2}{a}]$.
+
+# 1/3/17
+
+In north america, the criminal court results in either "the defendant is guilty" or "the defendant is not guilty". We start by assuming the defendant is innocent, and then the prosecuter tries to find enough evidence to show that the hypothesis, that the defendant is innocent, is not plausible. Meanwhile. the defence tries to show that the hypothesis is plausible. The defendant is guilty only if we can show that the hypothesis isn't plausible - we don't have to prove the hypothesis. There are two types of possible errors here: convicting an innocent person, and failing to convict a guilty person.
+
+Statistical tests work in a way similar to these criminal trials - we start from the **null hypothesis**, and then design an experiment to show that our **alternative hypothesis** is more plausible than the null hypothesis.
+
+The null hypothesis is the "default option", and is usually denoted $H_0$. For example, in a drug trial, it would be "this new drug does not work", or "this previous drug is the best option for treating this disease". Likewise, if we were trying to prove someone had ESP, the null hypothesis would be "the person does not have ESP". Our experiment should be designed to falsify the null hypothesis and support our own hypothesis. The null hypothesis.
+
+Suppose we want to tell if someone has ESP. To do this, we might design an experiment to see if someone can guess a coin flip value better than by chance. If the person guesses right 50% of the time, they probably don't have ESP. If they guess right 100%, there's probably some evidence that they do. How do we measure the strength of this evidence?
+
+For this purpose, we need a **test statistic/discrepancy measure** - a function of the data $D = g(Y)$ that measures the degree that the data $Y$ agrees with the null hypothesis $H_0$, where smaller values indicate more agreement between the data and the null hypothesis. In this course, we're generally given the test statistic, but we will need to be able to explain why a particular test statistic makes sense.
+
+For example, a test statistic for the ESP experiment with 25 trials might be $D = \abs{Y - 12.5}$, because small values indicate that it's more likely the person is randomly guessing, while larger values indicate that it's less likely. Suppose we get a value of $y = 15$, so $d = 2.5$. Assuming the null hypothesis is true, what's probability of getting $d = 2.5$?
+
+Clearly, $P(D \ge 2.5 \mid H_0) = P(\abs{Y - 12.5} \ge 2.5 \mid H_0)$ where $Y \sim \mathrm{Binomial}(25, 0.5)$. So $P(D \ge 2.5 \mid H_0) = P(Y \le 10) + P(Y \ge 15) = P(Y \le 10) + (1 - P(Y \le 15)) = 0.4244$. So if the null hypothesis is true, we would expect $D \ge 2.5$ to happen in 42% of our experiments.
+
 ---
 
 My previous STAT231 notes follow:
