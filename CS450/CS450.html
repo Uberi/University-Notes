@@ -602,12 +602,147 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <ul>
 <li>Target speculation:
 <ul>
-<li>The <strong>branch target buffer</strong> maps branch instruction addresses to branch target addresses. It stores predictions for branches.</li>
+<li>The <strong>branch target buffer</strong> maps branch instruction addresses to branch target addresses. It can also store branch predictors by the address of the branch instruction that it predicts the target of, but we often use a separate <strong>pattern history table</strong> (PHT) that stores branch predictors, directly indexed by the lower-order bits of the address of the branch instruction (aliasing is possible, but that's fine for our use case).</li>
 <li>In the fetch stage for a branch instruction, if the branch target buffer has an entry for the address of this branch instruction, we load the branch target address into PC, giving us a 0-latency branch.</li>
 <li>In the execute stage, the branch unit actually resolves the branch to validate whether the prediction is correct or not. If it correct, we can add/update the branch target buffer entry, or remove the branch target buffer entry if it wasn't correct (to delete the prediction).</li>
 <li>This works well for branches, but not really for jumps, which use indirect addressing. For example, returning from a subroutine called from many places means that the branch target address will often change, causing frequent branch mispredictions.</li>
 </ul></li>
 </ul>
+<h1 id="section-14">28/2/17</h1>
+<p>;wip: missed due to interviews</p>
+<p>;wip: out of order pipelines: condition spec (section 8), dynamic methods based on branch history, adding a pattern history table to the BTB (branch target buffer)</p>
+<h1 id="section-15">2/3/17</h1>
+<p>The branch predictors we'll look at are 2-bit saturating counters, like one of the questions in Project Part 1. Whenever we take a branch, we increment the counter, and whenever we don't, we decrement. The counter saturating means that incrementing 11 stays at 11, and decrementing 00 stays at 00. The branch is predicted to be taken whenever the counter is 10 or 11. Branch predictors are added to the PHT whenever we encounter a branch instruction. They're initialized to 10 (&quot;weakly taken&quot;).</p>
+<p>Nair conducted a study in 1995 to check on how accurate branch prediction is in the real world, and found that prediction accuracy was 85%+ on many commonly used programs like SPICE and GCC. This is actually within 1% of an optimal 4-state branch predictor FSM, so saturating 2-bit counters are actually really good at predicting branches in real-world situations (they tried every one of the 5248 possible 4-state branch predicting FSMs!). They also looked at saturating counters with a different number of bits, and aliasing vs. the number of low-order bits we index by in the PHT, and characterized performance as those variables were changed.</p>
+<p>;wip: correlating predictors, section 8.2.3, bimodal vs local vs global predictors</p>
+<p>A <strong>bimodal branch predictor</strong> is the kind we've been looking at so far - the PHT is indexed by some subset of the bits of PC. This works decently well, but it doesn't capture behaviour like alternating branches (the branch switches between taken and not taken every time we execute), or similar patterns in branching.</p>
+<p>A <strong>local branch predictor</strong> tries to capture this. To predict a branch, we index some bits of the branch instruction address (the value of PC) into a history table, which stores the corresponding last <span class="math inline">\(k\)</span> branch results (for example, 10110 means the branch instruction branched 3 times out of the last 5 executions). Then, those last <span class="math inline">\(k\)</span> results are XORed with a subset of bits of the branch instruction address, and the result is used as indices in the PHT, which stores the usual 2-bit saturating counters. In other words, <span class="math inline">\(\text{prediction} = \text{saturating_counter_prediction}(\text{subset of bits of PC} \oplus \text{PHT}[\text{history}[\text{another subset of bits of PC}]])\)</span>. This allows us to predict based on the history of branch results for individual branch instructions, and it works really well in practice.</p>
+<p>A <strong>global branch predictor</strong> detects correlated behaviour (like two different branch instructions that only branch when the other doesn't), saves the last <span class="math inline">\(n\)</span> branch decisions of any branch instructions in a global history register (GR), a plain register that stores historical data for all branches. The global history register is used as indices in the PHT - we can look up our 2-bit saturating counters in the PHT by the history of all branches. Turns out that this doesn't work as well as local branch prediction, mostly because of aliasing - global history often looks the same for a lot of different branch instructions that behave very differently. In other words, <span class="math inline">\(\text{prediction} = \text{saturating_counter_prediction}(\text{PHT}[\text{history of last } k \text{ branches}])\)</span>.</p>
+<p>Real-world systems often combine a global and bimodal branch predictor, indexing into the PHT based on the global history XORed with some subset of the bits of PC. This scheme is what gshare uses, and performs almost as accurately as local branch prediction in real-world uses. However, it has one less level of indirection compared to local predictors (local predictors have to look up a value in history and then PHT, while we only have to look up a value in the PHT), so it can be faster.</p>
+<p>Some processors implement meta branch predictors - running different types of branch predictors in parallel, and changing the one used based on their previous performance for each particular branch instruction.</p>
+<h1 id="section-16">7/3/17</h1>
+<p>Branch prediction examples, step by step. In the diagram, branch results are shifted into the right side of the history entries.</p>
+<p>A branch predictor needs to both predict branches, check the results of those branches after they're resolved/executed, and then update the predictors based on that information. When the predictor predicts wrong and we're speculatively executing, we must also rollback the effects of the execution and restart it at the correct address.</p>
+<p>To implement this:</p>
+<ul>
+<li>Each branch instruction is assigned a tag bit index (e.g., bit 4 or bit 2).</li>
+<li>Each instruction has a set of tag bits that represent whether it's being speculatively executed for a given tag (e.g., a tag of 0101 means the instruction is speculatively executing for the branch with tag bit index 0 and tag bit index 2). The tag bits are set when the instruction is being dispatched to the reservation stations.</li>
+<li>When a branch is resolved, the tag bits and the result of the branch are broadcast:
+<ul>
+<li>If the prediction was correct, instructions with the branch instruction's tag bit index set in their tag bits have that bit cleared (e.g., if a branch with tag bit index 2 resolves correctly, we clear bit 2 of te tag bits of all instructions).</li>
+<li>If the prediction was not correct, instructions with the bit in the tag bits at the tag bit index set are cancelled, the ROB tail pointer is moved back to the branch instruction, and the frontend RAT checkpoint is restored.</li>
+</ul></li>
+</ul>
+<h2 id="thread-level-parallelism">Thread Level Parallelism</h2>
+<p>Parallel programming allows us to execute multiple things at the same time on multiple processors. Generally this is done by using shared memory (pthreads, etc.) or message passing between processes (MPI, Scala, etc.). In this course we'll look mainly at the shared memory model.</p>
+<p>For our purposes, processes are collections of threads with an address space.</p>
+<p>A critical section is code that accesses shared data. We want only one thread to be executing a critical section at a time, and we usually enforce this using locks. In CS350 we looked at the software side of implementing these syncrhonization primitives, but now we'll look at the hardware primitives that allow us to implement these operations.</p>
+<p>Common schemes for hardware synchronization from CS350:</p>
+<ul>
+<li>Compare-and-swap - atomically load some memory, compare it to a given value, and conditionally store it back (e.g., <code>CMPXCHG</code> in x86).</li>
+<li>Fetch-and-add - atomically load some memory, add a value to it, and store it back (e.g., <code>fetchadd4</code> in IA64).</li>
+<li>Load-linked/store-conditional - use load-linked to load some memory, then store-conditional tries to store, failing if the linked location was changed since we load-linked it or if there was an interrupt (e.g., <code>LL</code>/<code>SC</code> in MIPS).</li>
+</ul>
+<p>With any of these, we can implement a spinlock, the basic primitive needed to implement all of the other synchronization primitive. For example, with the compare-and-swap primitive <code>cmpswp</code> in MIPS:</p>
+<pre class="asm"><code>spin: cmpswp LOCK_VARIABLE, 0, 1 ; if LOCK_VARIABLE is 0, set it to 1
+      bne spin ; loop until we successfully set LOCK_VARIABLE to 1 from 0
+      ; we now hold the spinlock, and can do our critical section stuff
+      sw R0, LOCK_VARIABLE ; release the lock</code></pre>
+<p>Another example, with the <code>ll</code>/<code>sc</code> primitives in MIPS:</p>
+<pre class="asm"><code>spin: ll R1, ADDRESS
+      addi R1, R1, 1
+      ;wip: where&#39;s the critical section?
+      sc R1, A
+      bne spin </code></pre>
+<h1 id="section-17">9/3/17</h1>
+<p>POSIX threads are implemented in the pthreads library which expose functionality for thread creation/destruction and primitives like mutexes.</p>
+<p>Pthreads example:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;pthread.h&gt;</span>
+<span class="ot">#include stdio.h</span>
+
+<span class="ot">#define NTHREAD 4</span>
+<span class="ot">#define ARRAYSIZE 1000000</span>
+
+<span class="dt">double</span> sum = <span class="fl">0.0</span>;
+<span class="dt">double</span> a[ARRAYSIZE];
+pthread_mutex_t sum_mutex;
+
+<span class="dt">void</span> *add_array(<span class="dt">void</span> *thread_id);
+
+<span class="dt">int</span> main(<span class="dt">void</span>) {
+    <span class="co">// initialize `a` here</span>
+    
+    pthread_mutex_init(&amp;sum_mutex, NULL); <span class="co">// initialize mutex, with the default (NULL) attributes</span>
+    <span class="dt">int</span> thread_ids[NTHREAD];
+    pthread_t threads[NTHREAD];
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; NTHREAD; i ++) {
+        tid[i] = i;
+        pthread_create(&amp;threads[i], NULL, add_array, &amp;thread_ids[i]); <span class="co">// create thread from the add_array function, called with argument `&amp;thread_ids[i]`, and store the thread object in `&amp;threads[i]`</span>
+    }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; NTHREAD; i ++) {
+        pthread_join(thread[i], NULL); <span class="co">// wait for the thread to terminate</span>
+    }
+    printf(<span class="st">&quot;array sum: %f</span><span class="ch">\n</span><span class="st">&quot;</span>, sum);
+}
+
+<span class="dt">void</span> *add_array(<span class="dt">void</span> *thread_id) {
+    <span class="dt">int</span> start = (*(<span class="dt">int</span> *)thread_id) * ((<span class="dt">double</span>)ARRAYSIZE/NTHREAD);
+    <span class="dt">int</span> end = (*(<span class="dt">int</span> *)thread_id + <span class="dv">1</span>) * ((<span class="dt">double</span>)ARRAYSIZE/NTHREAD);
+    <span class="dt">double</span> my_sum = <span class="fl">0.0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = start; i &lt; end; i ++) {
+        my_sum += a[i];
+        pthread_mutex_lock(&amp;sum_mutex);
+        sum += my_sum;
+        pthread_mutex_unlock(&amp;sum_mutex);
+    }
+}</code></pre></div>
+<p>With the OpenMP library, we can use compiler directives to automatically create threads and assign work to them. This library is widely used in real-world programs. For this example we'll use C++:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;omp.h&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="dt">const</span> <span class="dt">int</span> ARRAYSIZE = <span class="dv">1000000</span>;
+<span class="dt">double</span> sum = <span class="fl">0.0</span>;
+<span class="dt">double</span> a[ARRAYSIZE];
+
+<span class="dt">int</span> main() {
+    <span class="co">// initialize `a` here</span>
+    
+    <span class="dt">double</span> my_sum;
+    
+    <span class="co">// start the parallel computation using OpenMP, with shared memory, a thread-local variable `my_sum`, and 4 threads (this defaults to the number of logical cores)</span>
+    <span class="ot">#pragma omp parallel default(shared) private(my_sum) num_threads(4)</span>
+    {
+        my_sum = <span class="fl">0.0</span>;
+        <span class="ot">#pragma omp for</span>
+        <span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; ARRAYSIZE; i ++) {
+            my_sum += a[i];
+        }
+        <span class="ot">#pragma omp critical</span>
+        sum += my_sum;
+    }
+    
+    <span class="co">// an alternative way to the above block</span>
+    <span class="ot">#pragma omp parallel for default(shared) reduction(+ : sum) num_threads(4)</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; ARRAYSIZE; i ++) {
+        sum += a[i];
+    }
+}</code></pre></div>
+<p><strong>Symmetric multiprocessing</strong> (SMP) describes a shared memory multiprocessor architecture with <strong>uniform memory access</strong> (every processor can access every memory location with the same access time).</p>
+<p>To implement uniform memory access times, we might put processors and memory modules on a shared bus (memory accesses are broadcasted on the bus), or use a crossbar switch (access to memory banks routed by processor).</p>
+<p>SMP systems tend to have limited scalability, topping out at a few tens of processors, because of the need for uniform memory access.</p>
+<p><strong>Non-uniform memory access</strong> (NUMA) is the opposite of UMA architectures - they allow processors to have different access times to different memory locations. This allows us to scale them up a lot more (e.g., IBM Blue Gene has over 65000 nodes!).</p>
+<p>To implement non-uniform memory access times, we might use a scalable interconnect system like a tree network (heirarchy of nodes), mesh networks (nodes connect to adjacent nodes, like on a grid), torus networks (nodes connected in a grid that wraps around), hypercube networks (nodes connected with every node with a binary ID that differs by 1 bit), and so on.</p>
+<p>In a NUMA architecture, we must ensure that the memory stays coherent. Coherent shared memory means that all processors will see the most recent write to any memory location (i.e., cache coherency for memory). This can be implemented by broadcasting writes on the memory bus (write-through caching), or by broadcasting invalidation messages on the bus, so future reads to that memory location will request its updated value (write-back caching).</p>
+<p>One way to do write-back caching is the MESI protocol. In this protocol, caches are divided into blocks, and each block is either:</p>
+<ul>
+<li>SHARED: local value is up to date (clean), multiple copies exist, and read-only.</li>
+<li>EXCLUSIVE: local value is up to date (clean), only local copy exists.</li>
+<li>MODIFIED: local value is out of date (dirty), only local copy exists.</li>
+<li>INVALID: local value is out of date (dirty), must reload this block before using it.</li>
+</ul>
+<p>Since all the memory messages are on the bus, the MESI protocol lets us store all the cache block states in a <strong>cache tag array</strong>, which replaces all the dirty bits and status bits. The cache controller is responsible for monitoring the bus and keeping the cache tag array up to date.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

@@ -589,11 +589,11 @@ To summarize, the $100p$ percent confidence interval of a Guassian distribution 
 
 Midterm next week, covers everything up to and including section 5.2. Review of content before reading week.
 
-How do we find a $100p$ percent conficence interval for $\sigma^2$ in a Gaussian distribution where $\mu$ is unknown?
+How do we find a $100p$ percent confidence interval for $\sigma^2$ in a Gaussian distribution where $\mu$ is unknown?
 
 For a sample of size 25 drawn from a Gaussian distribution with unknown $\mu$ and $\sigma^2$, then $\overline y \pm a \frac{s}{5}$ is a 95% confidence interval for $\mu$ if $P(T \le a) = 0.975$ and $T \sim t(24)$.
 
-If $Y_1, \ldots, Y_N$ is a random normal sample. Then $\frac{(n - 1)S^2}{\sigma^2} = \frac{\sum (Y_i - \overline Y)}{\sigma^2} \sim \chi^2(n - 1)$, and we can use this as a pivotal quantity. We prefer $S^2$ over the MLE for the sample variance because $E(S^2) = \sigma^2$, while $E(\mathrm{Var}(Y)) \ne \sigma^2$.
+If $Y_1, \ldots, Y_N$ is a random normal sample and we don't know $\mu$, then $\frac{(n - 1)S^2}{\sigma^2} = \frac{\sum (Y_i - \overline Y)}{\sigma^2} \sim \chi^2(n - 1)$, and we can use this as a pivotal quantity for $\sigma$. If we do know $\mu$, then $\frac{\sum (Y_i - \mu)}{\sigma^2} \sim \chi^2(n)$ instead (there's another degree of freedom that wasn't removed by the subtracting of $\overline Y$). We prefer $S^2$ over the MLE for the sample variance because $E(S^2) = \sigma^2$, while $E(\mathrm{Var}(Y)) \ne \sigma^2$.
 
 Note that $\frac{\sum (Y_i - \mu)^2}{\sigma^2} \sim \chi^2(n)$. This is $n$ rather than $n - 1$ because in the previous formula, we removed one degree of freedom by replacing $\mu$ by $\overline Y$.
 
@@ -613,9 +613,66 @@ Suppose we want to tell if someone has ESP. To do this, we might design an exper
 
 For this purpose, we need a **test statistic/discrepancy measure** - a function of the data $D = g(Y)$ that measures the degree that the data $Y$ agrees with the null hypothesis $H_0$, where smaller values indicate more agreement between the data and the null hypothesis. In this course, we're generally given the test statistic, but we will need to be able to explain why a particular test statistic makes sense.
 
-For example, a test statistic for the ESP experiment with 25 trials might be $D = \abs{Y - 12.5}$, because small values indicate that it's more likely the person is randomly guessing, while larger values indicate that it's less likely. Suppose we get a value of $y = 15$, so $d = 2.5$. Assuming the null hypothesis is true, what's probability of getting $d = 2.5$?
+For example, a test statistic for the ESP experiment with 25 trials might be $D = \abs{Y - E(Y)} = \abs{Y - 12.5}$, because small values indicate that it's more likely the person is randomly guessing, while larger values indicate that it's less likely. Suppose we get a value of $y = 15$, so $d = 2.5$. Assuming the null hypothesis is true, what's probability of getting $d = 2.5$?
 
 Clearly, $P(D \ge 2.5 \mid H_0) = P(\abs{Y - 12.5} \ge 2.5 \mid H_0)$ where $Y \sim \mathrm{Binomial}(25, 0.5)$. So $P(D \ge 2.5 \mid H_0) = P(Y \le 10) + P(Y \ge 15) = P(Y \le 10) + (1 - P(Y \le 15)) = 0.4244$. So if the null hypothesis is true, we would expect $D \ge 2.5$ to happen in 42% of our experiments.
+
+# 3/3/17
+
+Read sections 5.1 to 5.2 in the course notes.
+
+To statistically test a hypothesis $H$, we assume that we're testing a null hypothesis $H_0$ using data $Y$. Then, we set a discrepency measure $D(Y)$ for which large values of $D$ are less conssitent with $H_0$, where $d = D(Y)$ is the observed value of $D$. We then compute the p-value $P(D \ge d; H_0)$.
+
+A p-value's meaning depends on the test statistic and the data. It's defined as $P(D \ge d; H_0)$ - the probability of observing the discrepency measure that we did, assuming the null hypothesis is true. Essentially, for a p-value, if we ran the experiment many times, we would expect that **that percentage of the time, the experiment would be at least as unusual as the result we got**, by the definition of unusual set by the discrepency statistic.
+
+For example, the ESP experiment had the null hypothesis $\theta = 0.5$ where $Y \sim \mathrm{Binomial}(25, \theta)$, and the discrepency measure $d = D(Y) = \abs{Y - n \theta} = \abs{Y - 12.5}$. Suppose $y = 15$, so $P(D \ge d) = P(\abs{Y - 12.5} \ge 15; \theta = 0.5) \approxeq$.
+
+If the p-value is small, then either the null hypothesis is true and we only got what we did by chance, or the null hypothesis is false. A small p-value gives strong evidence against the null hypothesis, while a large p-value says that there's little evidence that the null hypothesis is false.
+
+p-values less than or equal to 0.001 is very strong evidence of null hypothesis being false, 0.001 to 0.01 is strong evidence, 0.01 to 0.05 is evidence, 0.05 to 0.1 is some evidence, and greater values are no evidence.
+
+For example, if we have a p-value 0.001, then the event "observing a value as more extreme than the value observed given that the null hypothesis is true" happens only about one time out of 1000
+
+For binomial models, $\abs{Y - E(Y)}$ is a reasonable discrepency measure, because it's 0 when the results are the same as the null hypothesis predicts, and increases as the results differ more.
+
+Suppose we have hypothesis $\mu = 5$ for a Gaussian model, where . How do we calculate p-values for that?
+
+Recall that the pivotal quantity is $\frac{\sqrt n (\overline Y - \mu)}{S} \sim \mathrm{student-t}(n - 1)$. A sensible discrepency measure for $\mu$ would be $\frac{\abs{\sqrt n (\overline Y - \mu)}}{S}$, because . ;wip: why is the absolute value of the pivotal quantity a good test statistic
+
+p-values are often accompanied by confidence intervals - when p-values are small for a null hypothesis, the confidence interval shows where the actual value falls.
+
+Basically, if we use the same pivotal quantity to construct a confidence interval and a p-value $p$, then the hypothesis $\theta = k$ is inside a $100q$ percent confidence interval if and only if $p \ge 1 - q$. For example, if $p \ge 0.05$, then $\theta$ is inside the 95% confidence interval.
+
+# 6/3/17
+
+The p-value for testing $H_0$, a hypothesis $\theta = k$, is greater or equal to a p-value $q$ if and only if $\theta = k$ is in the $100(1 - q)$ percent confidence interval for $\theta$, if we use the same pivotal quantity. In other words, the confidence interval is roughly the opposite of the p-value.
+
+There's a difference between statistical and practical significance. If you toss a fair coin millions of times, you can almost certainly find evidence against the hypothesis $\theta = 0.5$. If we calibrated a scale and noticed that it was consistently biased 1% below the true weight, then it would have strong evidence that the scale wasn't perfectly fair, but in practice a 1% interval doesn't have any practical significance for most purposes.
+
+Suppose we have a random Gaussian sample $Y_1, \ldots, Y_n \sim \mathrm{Gaussian}(\mu, \sigma)$, and we're trying to test the hypothesis $H_0$, which is $\sigma^2 = k^2$. Recall that we have the pivotal quantity $(n - 1)\frac{S^2}{\sigma^2} \sim \chi^2(n - 1)$. If we assume the hypothesis, $(n - 1)\frac{S^2}{\sigma^2} = (n - 1)\frac{S^2}{k^2} \sim \chi^2(n - 1)$.
+
+$S^2$ is the point estimator for $\sigma^2$.
+
+For normal data, we'll use the test statistic $U = (n - 1)\frac{S^2}{k^2}$ (the absolute value of the pivotal quantity). This is a reasonable test statistic because the expected value is the expected value of a $\chi^2(n - 1)$ random variable, so $n - 1$. That means $E(\frac{S^2}{k^2}) = 1$, so the expected value of $S^2$ is $k^2$. In other words, if the hypothesis is true, then the value of the test statistic is close to the mean $n - 1$. If the hypothesis is false and $\sigma^2$ is far away from $k^2$, then the test statistic increases in value.
+
+If $P(U \le u) < 0.5$, then the p-value is $2P(U \le u)$. If $P(U \ge u) < 0.5$, then the p-value is $2P(U \ge u)$, where $U \sim \chi^2(n - 1)$ (the value that is between 0 and 1 is the actual p-value, the other value is discarded).
+
+# 8/3/17
+
+**Likelihood ratio test statistic** for a single parameter: $R(\theta)$ is close to 1 if and only if $-2 \ln \frac{L(\theta)}{L(\hat \theta)}$ is close to 0. Likewise, $R(\theta)$ is close to 0 if and only if $-2 \ln \frac{L(\theta)}{L(\hat \theta)}$ is large. We can therefore use the likelihood ratio as a test statistic, because it gets smaller as the value of $\theta$ becomes more likely.
+
+Recall that $\Lambda(\theta) = -2 \ln \frac{L(\theta)}{L(\hat \theta)} \sim \chi^2(1)$, so we can use this to construct our p-values with $P(\Lambda(Y) \ge \Lambda(y); H_0)$.
+
+So for binomial data $Y \sim \mathrm{Binomial}(n, \theta)$, $L(\theta) = \theta^y(1 - \theta)^{n - 1}$. So $-2 \ln \frac{\theta^y(1 - \theta)^{n - 1}}{\hat \theta^y(1 - \hat \theta)^{n - 1}} \sim \chi^2(1)$.
+
+Recall that we also have the asymptotic normal statistic with $2(1 - P(Z \le ))$. Both approximations are used in this course. ;wip: slide before binomial example
+
+Multivariate data
+-----------------
+
+Suppose we take a sample of 30 students from this term's STAT231 and their final grades in STAT231 and STAT230, and we want to look at the relationship between a student's STAT230 mark and their STAT231 mark. This is clearly bivariate data, the units are students, and the variates are final grades in STAT230 and STAT231. The study population might be those students taking STAT231 now, the sample is those 30 students we got data for, and the target population might be all STAT230/STAT231 students now and into the future. Some of the summaries we care about are sample correlation coefficient, scatter plots, and relative risk.
+
+We're also interested in answering questions like, "how do I predict my STAT231 grade given my STAT230 grade?".
 
 ---
 
