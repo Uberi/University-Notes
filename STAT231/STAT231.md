@@ -180,7 +180,7 @@ Graphs should always have appropriate axis bounds, have clearly labelled axes an
 
 All of the above summaries are for univariate data. However, bivariate datasets (datasets of the form $\set{\tup{x_1, y_1}, \ldots, \tup{x_n, y_n}}$) are also common. We often graphically summarize these datasets with a scatter plot, which is very useful for showing relationships between the two variates.
 
-The **sample correlation** is a measure of association between two numerical variables. It's defined as $r_{xy} = \frac{\sum \left(x_i - \overline x\right)\left(y_i - \overline y\right)}{\sqrt{\sum \left(x_i - \overline x\right)^2} \sqrt{\sum \left(y_i - \overline y\right)^2}}$. Basically, it's a simplified version of $r_{xy} = \frac{S_{xy}}{\sqrt{S_x S_y}}$, where $S_{x_1 \ldots, x_n}$ is the covariance and $S_x$ is the variance. Note that $-1 \le r_{xy} \le 1$ - values close to 1 means that there's a linear positive correlation, and values close to 0 means that there's almost no correlation. Specifically, sample correlation measures **linear association**.
+The **sample correlation** is a measure of association between two numerical variables. It's defined as $r_{xy} = \frac{\sum \left(x_i - \overline x\right)\left(y_i - \overline y\right)}{\sqrt{\sum \left(x_i - \overline x\right)^2} \sqrt{\sum \left(y_i - \overline y\right)^2}}$. Basically, it's a simplified version of $r_{xy} = \frac{S_{x, y}}{\sqrt{S_x S_y}}$, where $S_{x_1 \ldots, x_n} = \frac 1 n \sum (x_i - \overline x)(y_i - \overline y)$ is the sample covariance and $S_x$ is the sample variance. Note that $-1 \le r_{xy} \le 1$ - values close to 1 means that there's a linear positive correlation, and values close to 0 means that there's almost no correlation. Specifically, sample correlation measures **linear association**.
 
 The sample correlation value is generally not very intuitive to guess - it's easy to find datasets that intuitively have no correlation, that have a large sample correlation. We usually wantto see a scatter plot or something to help verify our results.
 
@@ -672,7 +672,57 @@ Multivariate data
 
 Suppose we take a sample of 30 students from this term's STAT231 and their final grades in STAT231 and STAT230, and we want to look at the relationship between a student's STAT230 mark and their STAT231 mark. This is clearly bivariate data, the units are students, and the variates are final grades in STAT230 and STAT231. The study population might be those students taking STAT231 now, the sample is those 30 students we got data for, and the target population might be all STAT230/STAT231 students now and into the future. Some of the summaries we care about are sample correlation coefficient, scatter plots, and relative risk.
 
-We're also interested in answering questions like, "how do I predict my STAT231 grade given my STAT230 grade?".
+The explanatry variate here is the STAT230 grade, and the response variate is the STAT231 grade. To model the data, we'll need a new model we haven't looked at yet. We're mainly interested in answering questions like, "how do I predict my STAT231 grade given my STAT230 grade?".
+
+# 10/3/17
+
+Machine learning is just statistics. Our datasets become "training data", predictive experiments become "regressions", and fitting models becomes "training models".
+
+Recall that the sample correlation is defined as $S_{x, y} = \sum (x_i - \overline x)(y_i - \overline y)$. It represents the degree of the linear relationship between two variables.
+
+The **method of least squares** is used to draw a line of best fit. Essentially, we're trying to minimise the sum of squares of the difference between each point and our line, on the Y axis - given a bivariate sample $d = \tup{x_1, y_1}, \ldots, \tup{x_n, y_n}$ and a line $\beta n + \alpha$, we want to minimise $\sum_{\tup{x_i, y_i} \in d} \left( y_i - (\beta x_i + \alpha) \right)^2$. Note that this is not the same thing as minimizing the sum of the absolute value of the differences - we might get a different line if we do that.
+
+Note that if you swap $x$ and $y$, you can potentially get a different answer - the method of least squares depends on the order of the variates. $x_i$ should be the explanatory variate, and $y_i$ should be the response variate - the line of best fit is used to predict how $y_i$ should behave given $x_i$.
+
+To minimize this sum of squares of vertical distances, we can set its derivative with respect to $\alpha$ to 0 and solve for $\alpha$, do the same for $\beta$ and solve for $\beta$, then use the solution as critical points test them to find minima. Turns out, if we solve for this, we get $\hat \beta = \frac{S_{x, y}}{S_{x, x}}$ and $\hat \alpha = \overline y - \hat beta \overline x$.
+
+Recall that the ;wip: slide relating r to alpha and beta
+
+We now have the line of best fit $\hat \beta n + \hat \alpha$. Clearly, this lets us predict $y_i$ given $x_i$, just by evaluating the line at a certain $x$ value. But how good of a prediction does this line make? So far, we haven't defined a model, so we don't have anything to evaluate abstractly.
+
+We need a statistical model to get an interval estimate for each prediction the line makes.
+
+Consider the students who got exactly 75 in STAT230 as a population. If we let $Y$ be a random variable representing the STAT231 grade of those students. Clearly, we could use a Gaussian model to represent $Y$, so $Y \sim G(\mu, \sigma)$. If we generalize this to all students, we might say that the mean $\mu$ of that Gaussian distribution could be represented as a linear function $\mu(x) = \alpha + \beta x$, and $\sigma$ is just a constant. In other words, we have $Y_i \sim \mathrm{Gaussian}(\alpha + \beta x_i, \sigma)$, all independently.
+
+# 13/3/17
+
+The line of best fit with the Gaussian model is known as **simple linear regression model**, because it's the simplest way to model and predict bivariate data. We're assuming that the variance is the same for each $x_i$, so the entire model has only the unknown parameters $\alpha, \beta, \sigma$.
+
+Our goal for using Gaussian models is to be able to construct confidence intervals for the model predictions.
+
+We could also assume that the variance is a function of $x_i$, but this would be a lot harder to work with. We'll now look at graphical ways to assess whether it's reasonable to assume that the variance is constant.
+
+Consider the parameter $\mu(x) = \alpha + \beta x$. $\beta$ represents the change in mean STAT231 mark given a one mark increase in STAT230 mark. $\alpha$ represents the STAT231 mark for students that got a STAT230 mark of 0 (in this case this parameter is not really of interest, because it's not possible to get a 0 in STAT230). $\sigma$ represents the variability in the response variate $Y_i$ for each explanatory variable $X_i$.
+
+Since it's a Gaussian, we get the likelihood function $L(\alpha, \beta; \tup{x_1, y_1}, \ldots, \tup{x_n, y_n}) = \prod \exp\left(-\frac{1}{2\sigma^2} (y_i - \alpha - \beta x_i)\right)^2 = \exp\left(-\frac{1}{2\sigma^2} \sum (y_i - \alpha - \beta x_i)^2\right)$, assuming $\sigma$ is known.
+
+Maximizing the likelihood function is equivalent to minimizing $\sum (y_i - \alpha - \beta x_i)^2$, because maximizing $\exp(-f(x))$ is equivalent to minimizing $f(x)$.
+
+So the values $\hat \beta = \frac{S_{x, y}}{S_{x, x}}, \hat \alpha = \overline y - \hat \beta \overline x$ we got above, assuming the Gaussian models are reasonable.
+
+We have the point estimate $\hat \beta$, but what's the distribution of the point estimator?
+
+Clearly, $\widetilde \beta = \frac{S_{X, Y}}{S_{X, X}} = \frac{1}{S_{x, x}} \sum (x_i - \overline x)(Y - \overline Y) = \frac{1}{S_{x, x}} \sum \frac{x - \overline x}{S_{x, x}} Y_i$.
+
+Clearly, $\sum (x_i - \overline x)(Y - \overline Y) = \sum (x - \overline x) Y_i - \overline Y \sum (x_i - \overline x)$.
+
+Since $\sum (x_i - \overline x) = \sum x_i - n\overline x = 0$, $\sum (x_i - \overline x)(Y - \overline Y) = \sum (x - \overline x) Y_i$.
+
+So $\widetilde \beta = \sum \frac{x_i - \overline x}{S_{x, x}} Y_i$, which is a linear combination of Gaussians. We know that a linear combination of Guassian variables is still a Gaussian variable, where the means and variances add up. So $\widetilde \beta \sim G(E(\widetilde \beta), \sigma(\widetilde \beta))$.
+
+Clearly, $E(\widetilde \beta) = \sum \frac{x_i - \overline x}{S_{x, x}} E(Y_i)$. Since $E(Y_i) = \alpha + \beta x_i$, $E(\widetilde \beta) = \frac{1}{S_{x, x}} \left(\alpha \sum (x_i - \overline x) + \beta \sum (x_i - \overline x) x_i\right) = \frac{1}{S_{x, x}} \left(\beta \sum (x_i - \overline x) x_i\right) = \beta$ ;wip: what's that last part
+
+So we get $\widetilde \beta \sim G(\beta, \frac{\sigma}{\sqrt{S_{x, x}}})$ ;wip: variance part
 
 ---
 

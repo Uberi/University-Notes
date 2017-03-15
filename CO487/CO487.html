@@ -591,6 +591,48 @@ result <span class="op">=</span> <span class="dv">1</span>
 <p>(A live demonstration of what makes up a TLS certificate, using Amazon and the Security tab in Chrome's devtools)</p>
 <h1 id="section-24">8/3/17</h1>
 <p>QA session with the prof. Midterm is tonight at 7-9PM.</p>
+<h1 id="section-25">10/3/17</h1>
+<p>In SSL, signatures are used to prove that an entity has access to a particular private key. That means that the root CAs sign their own public keys, to verify that they actually have the private keys that correspond to the public keys they use.</p>
+<p>When Alice visits Bob's website, amazon.com:</p>
+<ol style="list-style-type: decimal">
+<li>Bob sends Alice a certificate, containing public keys for Bob (amazon.com), Symantec (the intermediate CA used by Amazon), and Verisign (the root CA used by Symantec).</li>
+<li>Alice checks that Verisign's public key is correctly signed by a root CA hard coded into its trust store.</li>
+<li>Alice checks that Symantec's public key is correctly signed by Verisign's public key.</li>
+<li>Alice checks that Bob's public key is correctly signed by Symantec's public key. If it is correct, then Bob's public key is authentic.</li>
+<li>Alice chooses a session key, encrypts it using Bob's public key, and sends it to Bob.</li>
+<li>Bob decrypts the session key using his private key, and Alice and Bob can start communicating using AES-GCM.</li>
+</ol>
+<p>In this case, Alice and Bob depend on Symantec to correctly vouch for Bob's identity, and to very carefully guard the private keys using strong physical security measures, such as ensuring the key can only be accessed with the cooperation of 3 people and keeping the key in a special, guarded signing room. Even so, there are hundreds of root CAs trusted in the browser, and it only takes one comprimised one to issue a fake certificate. Browser vendors need to carefully choose which root CAs to include in their trust store.</p>
+<p>For example, the DigiNotar root RA issued hundreds of fraudulent certificates, which were immediately used to phish around 300000 users in Iran with a fake GMail login page with the real GMail login page URL and a green padlock in the address bar. This appeared to be a state-sponsored attack. Something similar happened in 2016 when a Chinese government-controlled root CA WoSign issued fraudulent certificates for sites like GitHub and Alibaba. Browser vendors immediately removed DigiNotar and WoSign from their trust stores and pushed out updates.</p>
+<p>Extended Validation (EV) certificuates are simply those belonging to CAs that meet a set of stronger requirements (e.g., a more thorough identity check process). If CAs apply for EV status, and meet those stronger requirements, they get EV status and can issue EV certificates, which generally show up in browsers as a green box rather than just a padlock.</p>
+<h1 id="section-26">13/3/17</h1>
+<p>Overview and discussion of the recent Wikileaks CIA documents, such as the cryptographic requirements in use.</p>
+<p>Discrete logarithm public key cryptography schemes.</p>
+<p>Let <span class="math inline">\(p\)</span> be an odd prime. Let <span class="math inline">\(\mb{Z}_p = \set{0, \ldots, p - 1}\)</span> with arithmetic performed mod <span class="math inline">\(p\)</span> (e.g., in <span class="math inline">\(\mb{Z}_{17}\)</span>, <span class="math inline">\(14 + 11 = 8\)</span>, and in <span class="math inline">\(\mb{Z}_{13}\)</span>, <span class="math inline">\(5^{-1} = 8\)</span>).</p>
+<p>Also, <span class="math inline">\(\mb{Z}_p^* = \mb{Z}_p \setdiff \set{0}\)</span>.</p>
+<p>We can now write Fermat's little theorem as follows: if <span class="math inline">\(a \in \mb{Z}_p^*\)</span> for some prime <span class="math inline">\(p\)</span>, then <span class="math inline">\(a^{p - 1} \equiv 1 \pmod p\)</span>.</p>
+<p>If <span class="math inline">\(a \in \mb{Z}_p^*\)</span>, then the <strong>order</strong> <span class="math inline">\(\ord(a)\)</span> of a mod <span class="math inline">\(p\)</span> is the smallest positive integer <span class="math inline">\(t \in \mb{Z}_p^*\)</span> such that <span class="math inline">\(a^t \equiv 1 \pmod{p}\)</span>. For example, given <span class="math inline">\(p = 13\)</span>, <span class="math inline">\(\ord(1) = 1\)</span> since <span class="math inline">\(1^1 \equiv 1 \pmod{13}\)</span> and <span class="math inline">\(\ord{12} = 2\)</span> since <span class="math inline">\(12^2 \equiv 1 \pmod{13}\)</span>. Due to Fermat's little theorem, the order must exist and be between 1 and <span class="math inline">\(p - 1\)</span> inclusive. For now, we'll compute these orders by trying all the possible <span class="math inline">\(t\)</span> values.</p>
+<p>Given a prime <span class="math inline">\(p\)</span>, <span class="math inline">\(a \in \mb{Z}_p^*\)</span>, and <span class="math inline">\(t = \ord(a)\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Given <span class="math inline">\(s \in \mb{Z}\)</span>, <span class="math inline">\(a^s \equiv 1 \pmod p\)</span> if and only if <span class="math inline">\(t \mid s\)</span>.
+<ul>
+<li>Proof: <span class="math inline">\(t \mid s\)</span> if and only if <span class="math inline">\(s\)</span> can be written as <span class="math inline">\(s = qt + r\)</span> where <span class="math inline">\(q , r \in \mb{Z}\)</span> and <span class="math inline">\(0 \le r &lt; t\)</span>. So <span class="math inline">\(t \mid s\)</span> if and only if <span class="math inline">\(a^s \equiv a^{qt + r} \equiv (a^t)^q a^r \equiv 1^q a^r \equiv a^r \pmod p\)</span>. Since <span class="math inline">\(r &lt; t\)</span> and <span class="math inline">\(t\)</span> is the minimum value <span class="math inline">\(1 \le t \le n - 1\)</span> such that <span class="math inline">\(a^t \equiv 1 \pmod p\)</span>, <span class="math inline">\(a^r \equiv 1 \pmod p\)</span> implies that <span class="math inline">\(r = 0\)</span> (otherwise, <span class="math inline">\(t\)</span> wouldn't be the minimum value anymore). Therefore <span class="math inline">\(t \mid s\)</span> if and only if <span class="math inline">\(a^r \equiv 1 \equiv a^0 \equiv a \pmod p\)</span>.</li>
+</ul></li>
+<li><span class="math inline">\(t \mid p - 1\)</span>, by Fermat's little theorem and point 1.</li>
+<li>Given <span class="math inline">\(x, y \in \mb{Z}\)</span>, <span class="math inline">\(a^x \equiv a^y \pmod p\)</span> if and only if <span class="math inline">\(x \equiv y \pmod t\)</span>.
+<ul>
+<li><span class="math inline">\(a^x \equiv a^y \pmod p\)</span> if and only if <span class="math inline">\(a^{x - y} \equiv 1 \pmod p\)</span> (divide both sides by <span class="math inline">\(a^y\)</span>, or multiply by <span class="math inline">\(a^{-y}\)</span>). By point 1, <span class="math inline">\(a^x \equiv a^y \pmod p\)</span> if and only if <span class="math inline">\(t \mid (x - y)\)</span>, which is equivalent to saying <span class="math inline">\(x \equiv y \pmod t\)</span>.</li>
+</ul></li>
+</ol>
+<p>The <strong>discrete logarithm problem</strong>: let <span class="math inline">\(p\)</span> be a large prime, and <span class="math inline">\(q\)</span> be a prime divisor of <span class="math inline">\(p - 1\)</span>. Let <span class="math inline">\(g \in \mb{Z}_p^*\)</span> such that <span class="math inline">\(\ord(g) = q\)</span>.</p>
+<p>Such a <span class="math inline">\(g\)</span> must exist. Proof:</p>
+<blockquote>
+<p>Clearly, there always exists an <span class="math inline">\(\alpha \in \mb{Z}_p^*\)</span> such that <span class="math inline">\(\ord{\alpha} = p - 1\)</span>.<br />
+This value of <span class="math inline">\(\alpha\)</span> is called a <strong>generator</strong> of <span class="math inline">\(\mb{Z}_p^*\)</span> because <span class="math inline">\(\set{\alpha^k \mod p : 0 \le k \le p - 2}\)</span> (we use <span class="math inline">\(p - 2\)</span> because <span class="math inline">\(\alpha^{p - 1} \equiv 1 \pmod p\)</span> and <span class="math inline">\(\alpha^0 \equiv 1 \pmod p\)</span>, so <span class="math inline">\(k = p - 1\)</span> would be redundant with <span class="math inline">\(k = 0\)</span>) will give some permutation of the integers 1 to <span class="math inline">\(p - 1\)</span>.<br />
+Let <span class="math inline">\(g = \alpha^{\frac{p - 1}{q}}\)</span>. Clearly, <span class="math inline">\(g^q \equiv (\alpha^{\frac{p - 1}{q}})^q \equiv alpha^{p - 1} \equiv 1 \pmod p\)</span>.<br />
+So by point 1 above, <span class="math inline">\(\ord(g) \mid q\)</span>, so <span class="math inline">\(\ord(g)\)</span> is either 1 or <span class="math inline">\(q\)</span>, since <span class="math inline">\(q\)</span> is prime.<br />
+However, if <span class="math inline">\(q = 1\)</span>, then <span class="math inline">\(g \equiv \alpha^{\frac{p - 1}{q}} \equiv 1\pmod p\)</span> contradicts <span class="math inline">\(\ord{\alpha} = p - 1\)</span>, so <span class="math inline">\(\ord(g) = q\)</span>.</p>
+</blockquote>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
