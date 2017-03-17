@@ -78,7 +78,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
     <span class="divider"></span>
-    <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
+    <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
 <p style="display:none"><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -767,6 +767,40 @@ pthread_mutex_t sum_mutex;
 <p>In addition to MESI, there's also MSI, which implements cache coherency without the EXCLUSIVE state, folding it into the SHARED state instead. MESIF and MOESI are other variants, based on the idea that when there's a cache miss, it's faster for another cache to supply the value than for the main memory to.</p>
 <p>MOESI is used by ARM and ARM, and is a probing protocol rather than a snooping protocol - processors can directly ask other processors for data. Basically, this just adds an OWNED state, which means there's only one copy of the cache that serves this particular block. If a processor's cache holds a MODIFIED block and another processor does a bus read, the first one's block becomes an OWNED block, and the first processor forwards the block to the requesting processor. Likewise, bus writes modify the owner's and the writer's copy. The owner of the block simply does the writeback before evicting the block from its cache. MOESI is nice because it reduces writebacks to main memory.</p>
 <p>MESIF is used by Intel, and is another probing protocol. Basically, this just adds a FORARDING state, . For a SHARED block, only one of those holders of that SHARED block should forward the block when there's a READ/WRITE on the bus. The most recent reader of a block holds it in the FORWARDING state and does the forwarding. After responding to a bus READ/WRITE, it transitions to the SHARED state (the requesting processor now has the FORWARDING block). This is nice because it makes caches take turns forwarding the data. Also, the FORWARDING block has the freshest copy of the block's data, so it's not likely to evict that block.</p>
+<h1 id="section-19">16/3/17</h1>
+<p>To implement spinlocks with the atomic exchange instruction:</p>
+<pre class="asm"><code>     daddui R2, R0, 1 ; set R2 to 1
+spin exch R2, (R1) ; atomically exhange the value of the lock with 1
+     bnez R2, spin ; if the lock was originally held (originally had a value of 1), keep spinning</code></pre>
+<p>The <code>exch</code> is atomic, so it always generates a write miss (which then causes other lock holders to do writebacks) - this is a lot of bus traffic. This is because the last holder of the lock has the lock value as MODIFIED in memory, and the rest has it as an INVALID value, and this switches every time there's an EXCH instruction.</p>
+<p>What we really want is for the lock to be a SHARED value between all the nodes trying to get the lock, at least most of the time. We can implement this by non-atomically reading the value first before trying to atomically exchange it:</p>
+<pre class="asm"><code>spin ld R2, (R1)
+     bnez R2, spin
+     daddui R2, R0, 1
+     exch R2, (R1)
+     bnez R2, spin</code></pre>
+<p>The non-atomic read causes a read miss rather than a write miss, and makes the node with the MODIFIED lock value and the node that caused the read miss to change their lock value to SHARED. After the read miss is resolved (so the lock value becomes SHARED), nodes can now spin on their local cache values. When the lock holder releases the lock, the lock value is invalidated in the other nodes, allowing them to race to try to acquire that lock.</p>
+<p>A directory implementation of NUMA has a directory that stores the state of each block of memory, stored with each memory block. Each directory is a buffer with one entry per block, each entry storing:</p>
+<ul>
+<li>The block number corresponding to the entry.</li>
+<li>A bit representing whether the block is modified.</li>
+<li>A sharing vector - a sequence of <span class="math inline">\(n\)</span> bits (where <span class="math inline">\(n\)</span> is the number of nodes) representing which nodes have an up-to-date copy of the data.</li>
+</ul>
+<p>Note that this doesn't explicitly represent the EXCLUSIVE state - this is because EXCLUSIVE is simply a SHARED state where only 1 of the sharing vector bits is set.</p>
+<p>The directory adds overhead for each block, specifically <span class="math inline">\(\frac{\text{directory row or entry size}}{\text{block size}}\)</span>. The general architecture is that each processor is connected to a memory and a directory, and these three are all connected to a scalable interconnect.</p>
+<p>A directory implementation is comparable to a snooping implementation - it's faster and has less bus traffic, but it adds a significant amount of overhead to actually track the memory states.</p>
+<p>Suppose P1 writes a piece of data, originally SHARED between P1 and P2. P1 must then send an UPGRADE to directory 1 to make P1 the owner of that data, then directory 1 sends INVALIDATE to the rest of the processors that have a copy of the data. P1 is now</p>
+<p>When P2 reads after the above happens, P2 sends a READ MISS to directory 1, then directory 1 sends a FETCH to P1. P1 sends a WRITEBACK to directory 1 to make sure it has the most recent data. Then, directory 1 sends a DATA REPLY to P2, completing the read.</p>
+<h2 id="multi-level-caching">Multi-level caching</h2>
+<p>There are two schemes for multi-level caching:</p>
+<ul>
+<li>Inclusive: data in faster/higher levels (like L1) is a subset of data in slower/lower levels (like L2, L3). Fetches in higher levels are also fetched into lower levels. In other words, data is always replicated.</li>
+<li>Exclusive: cache levels don't replicate data.</li>
+<li>Non-inclusive: data might be replicated, or it might not be.</li>
+</ul>
+<p>In inclusive cache schemes, only the lowest level of cache maintains cache coherency. Remote UPGRADE/WRITE-MISS messages are passed up to higher levels, while local UPGRADE/WRITE-MISS messages are passed to lower levels, sort of like a write-through scheme. This has the advantage of higher levels dealing with most processor requests.</p>
+<p>In exclusive cache schemes, all levels need to snoop on UPGRADE/WRITE-MISS messages, and for a directory, messages go to all levels.</p>
+<p>In current Intel architectures, L1 and L2 are exclusive caches, and L3 is inclusive.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

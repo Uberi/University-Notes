@@ -3,6 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="author" content="$author-meta$" />
   <title>CS454 | Anthony Zhang</title>
   <link rel="stylesheet" href="../css/base.css" type="text/css">
   <link rel="stylesheet" href="../css/note.css" type="text/css">
@@ -40,7 +41,7 @@
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
     <span class="divider"></span>
-    <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
+    <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
 <p style="display:none"><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -69,38 +70,33 @@
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
-<h1 id="cs454">CS454</h1>
-<p>Distributed Systems.</p>
-<pre><code>Khuzaima Daudjee
-Section 001 (technically section 2 somehow, but it shows up as section 1 on Quest)
-Website: https://cs.uwaterloo.ca/~kdaudjee/courses/cs454/
-Tuesdays/Thursdays 10:00am</code></pre>
-<p><strong>NOTE:</strong> The professor asked the class not to share any notes for this course, so this document just contains summaries of the topics covered in each lecture, as well as any additional resources I acquire outside of the course. That said, if you'd like a specific thing explained, I'm likely to give it a try if you <script type="text/javascript">
+<p>$if(toc)$</p>
+<div id="$idprefix$TOC">
+$toc$
+</div>
+<p>$endif$</p>
+<h1 id="lecture-notes-by-anthony-zhang.">Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+<ul>
+<li><a href="/blog/" class="page">blog</a></li>
+<li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+<li><a href="/resume.pdf" class="page">résumé</a></li>
+<li><a href="https://github.com/Uberi" class="contact">github</a></li>
+<li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
+<li><script type="text/javascript">
 <!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;&#x3f;&#x73;&#x75;&#98;&#106;&#x65;&#x63;&#116;&#x3d;&#x43;&#x53;&#52;&#x35;&#52;';a='&#64;';n='&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#x6d;&#x65;'+'<\/'+'a'+'>');
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x65;&#x6d;&#x61;&#x69;&#108;'+'<\/'+'a'+'>');
 // -->
-</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#x6d;&#x65;&#32;&#40;&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x3f;&#x73;&#x75;&#98;&#106;&#x65;&#x63;&#116;&#x3d;&#x43;&#x53;&#52;&#x35;&#52;&#x29;</noscript>.</p>
-<h1 id="section">3/1/17</h1>
-<p>Lecture summary: course administrative information, what a distributed system is exactly, ten common fallacies of distributed systems.</p>
-<p>Course has 4 assignments (worth 50%), no midterms, and one final (worth 50%). Textbook &quot;Distributed Systems: Principles and Paradigms (2nd edition)&quot; is freely available online from the publisher (<a href="https://www.distributed-systems.net/index.php/books/distributed-systems/">download page</a>), though it's not strictly required.</p>
-<p>After an assignment deadline, there is a 48 hour grace period afterwards in which instructors won't answer questions on Piazza, but you can still submit your assignment with no penalty.</p>
-<h1 id="section-1">5/1/17</h1>
-<p>Lecture summary: desirable properties of distributed systems. Eight different types of transparency in distributed systems, why they're useful, and when they're applicable. Scalability in distributed systems, with examples from real-world systems.</p>
-<h1 id="section-2">10/1/17</h1>
-<p>Lecture summary: distributed system architectures (client-server, multitier, etc.), concurrency, NUMA, operating system support for distributed systems (distributed operating systems, networked operating systems).</p>
-<h1 id="section-3">12/1/17</h1>
-<p>Lecture summary: horizontal/vertical scaling (but not the kind you're thinking of!), multitier architectures and their benefits/drawbacks, peer-to-peer distributed systems and their structure (tree, DAG, benefits/drawbacks of different approaches).</p>
-<h1 id="section-4">17/1/17</h1>
-<p>Lecture summary: parallelism (intra-process, inter-process), QoS, using parallelism to build robust distributed systems, issues with making arbitrary programs parallel, introduction to computer network architecture.</p>
-<h1 id="section-5">19/1/17</h1>
-<p>Lecture summary: continuation of network architectures, network concepts (circuit-switched, packet-switched), latency/bandwidth, OSI 7 layer model overview.</p>
-<h1 id="section-6">24/1/17</h1>
-<p>Lecture summary: different ways to implement IPC (RPC, RMI, message passing), RPC failure modes, how implementations of RPC work (probably useful for assignment 3), considerations when using RPC in distributed systems.</p>
-<h1 id="section-7">31/1/17</h1>
-<p>;wip: missed due to interviews</p>
-<h1 id="section-8">2/1/17</h1>
-<p>Lecture summary: name/directory services and different architectures commonly used for them, and how they're implemented, case study with DNS, considerations when designing name/directory services, case study with LDAP/X.500.</p>
+</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+<li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+<li><a href="https://keybase.io/uberi" class="info">public key</a></li>
+</ul>
+<p><span class="math">\[ \newcommand{\set}[1]{\left\{ #1 \right\}} \newcommand{\tup}[1]{\left\langle #1 \right\rangle} \newcommand{\abs}[1]{\left\lvert #1 \right\rvert} \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} \newcommand{\ceil}[1]{\left\lceil#1 \right\rceil} \newcommand{\mb}[1]{\mathbb{#1}} \newcommand{\rem}{\operatorname{rem}} \newcommand{\sign}{\operatorname{sign}} \newcommand{\imag}{\boldsymbol{i}} \newcommand{\dee}{\mathop{}\!\mathrm{d}} \newcommand{\lH}{\overset{\text{l'H}}{=}} \newcommand{\evalat}[1]{\left.\left(#1\right)\right|} \newcommand{\sech}{\operatorname{sech}} \newcommand{\spn}{\operatorname{Span}} \newcommand{\proj}{\operatorname{proj}} \newcommand{\prp}{\operatorname{perp}} \newcommand{\refl}{\operatorname{refl}} \newcommand{\magn}[1]{\left\lVert #1 \right\rVert} \newcommand{\rank}{\operatorname{rank}} \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]} \newcommand{\range}{\operatorname{Range}} \newcommand{\adj}{\operatorname{adj}} \newcommand{\cof}{\operatorname{cof}} \newcommand{\diag}{\operatorname{diag}} \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)} \]</span></p>
+<p>$body$ $for(include-after)$ $include-after$ $endfor$</p>
+<div class="license">
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" alt="Creative Commons License" /></a> This work by <a href="https://uberi.github.io/">Anthony Zhang</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright 2013-2017 Anthony Zhang.
+</div>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

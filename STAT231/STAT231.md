@@ -706,7 +706,7 @@ Consider the parameter $\mu(x) = \alpha + \beta x$. $\beta$ represents the chang
 
 Since it's a Gaussian, we get the likelihood function $L(\alpha, \beta; \tup{x_1, y_1}, \ldots, \tup{x_n, y_n}) = \prod \exp\left(-\frac{1}{2\sigma^2} (y_i - \alpha - \beta x_i)\right)^2 = \exp\left(-\frac{1}{2\sigma^2} \sum (y_i - \alpha - \beta x_i)^2\right)$, assuming $\sigma$ is known.
 
-Maximizing the likelihood function is equivalent to minimizing $\sum (y_i - \alpha - \beta x_i)^2$, because maximizing $\exp(-f(x))$ is equivalent to minimizing $f(x)$.
+Maximizing the likelihood function is equivalent to minimizing $\sum (y_i - \alpha - \beta x_i)^2$, because maximizing $\exp(-f(x))$ is equivalent to minimizing $f(x)$. In other words, **the line of least squared error is also the maximum likelihood estimate for the line**.
 
 So the values $\hat \beta = \frac{S_{x, y}}{S_{x, x}}, \hat \alpha = \overline y - \hat \beta \overline x$ we got above, assuming the Gaussian models are reasonable.
 
@@ -714,7 +714,7 @@ We have the point estimate $\hat \beta$, but what's the distribution of the poin
 
 Clearly, $\widetilde \beta = \frac{S_{X, Y}}{S_{X, X}} = \frac{1}{S_{x, x}} \sum (x_i - \overline x)(Y - \overline Y) = \frac{1}{S_{x, x}} \sum \frac{x - \overline x}{S_{x, x}} Y_i$.
 
-Clearly, $\sum (x_i - \overline x)(Y - \overline Y) = \sum (x - \overline x) Y_i - \overline Y \sum (x_i - \overline x)$.
+Clearly, $S_{X, Y} = \sum (x_i - \overline x)(Y - \overline Y) = \sum (x - \overline x) Y_i - \overline Y \sum (x_i - \overline x) = \sum (x - \overline x) Y_i - \overline Y \times 0 = \sum (x - \overline x) Y_i$.
 
 Since $\sum (x_i - \overline x) = \sum x_i - n\overline x = 0$, $\sum (x_i - \overline x)(Y - \overline Y) = \sum (x - \overline x) Y_i$.
 
@@ -722,7 +722,41 @@ So $\widetilde \beta = \sum \frac{x_i - \overline x}{S_{x, x}} Y_i$, which is a 
 
 Clearly, $E(\widetilde \beta) = \sum \frac{x_i - \overline x}{S_{x, x}} E(Y_i)$. Since $E(Y_i) = \alpha + \beta x_i$, $E(\widetilde \beta) = \frac{1}{S_{x, x}} \left(\alpha \sum (x_i - \overline x) + \beta \sum (x_i - \overline x) x_i\right) = \frac{1}{S_{x, x}} \left(\beta \sum (x_i - \overline x) x_i\right) = \beta$ ;wip: what's that last part
 
-So we get $\widetilde \beta \sim G(\beta, \frac{\sigma}{\sqrt{S_{x, x}}})$ ;wip: variance part
+# 15/3/17
+
+Clearly, $\mathrm{Var}(\widetilde \beta) = \mathrm{Var}(\sum \frac{x_i - \overline x}{S_{x, x}} Y_i) = \sum \frac{(x_i - \overline x)^2}{S_{x, x}^2} \mathrm{Var}(Y_i) = \sum \frac{\sigma^2}{(S_{x, x})^2} \sum (x_i - \overline x)^2$. Since $\sum (x_i - \overline x)^2 = S_{x, x}$, we get $\mathrm{Var}(\widetilde \beta) = \frac{\sigma^2}{S_{x, x}}$.
+
+So knowing $\mu$ and$\sigma$, we now know that $\widetilde \beta \sim G(\beta, \frac{\sigma}{\sqrt{S_{x, x}}})$.
+
+Since $Y_i \sim G(\mu, \sigma)$, $\widetilde \mu = \overline Y \sim G(\mu, \frac{\sigma}{\sqrt n})$.
+
+We want to use $\frac{\widetilde \beta - \beta}{\sigma / \sqrt{S_{x, x}}}$ as a pivotal quantity. However, we still don't know the distribution of $\sigma$ - we need an estimator for $\sigma$.
+
+One approach is to use the MLE of the variance - $\hat \sigma^2 = \frac{1}{n} \sum (y_i - \hat \alpha - \hat \beta x_i)$. However, this is a biased estimate. Instead, we'll use $s_e^2 = \frac{1}{n - 2} \sum(y_i - \hat \alpha - \hat \beta x_i)$ - an unbiased estimate of the variance (i.e., $E(S_e^2) = \sigma^2$). There's a proof for this, but it's out of scope for this course.
+
+Now consider what happens when we replace $\sigma$ with its unbiased estimate: $\frac{\widetilde \beta - \beta}{s_e / \sqrt{S_{x, x}}} \sim t(n - 2)$. This is a **pivotal quantity for $\beta$**, which we can use to construct confidence intervals for $\beta$ and test hypotheses like $\beta = k$.
+
+The $100p$ percent confidence interval for $\beta$ is $\hat \beta \pm as_e \frac{1}{\sqrt{S_{x, x}}}$, where $P(T \le a) = \frac{1 + p}{2}$. Notice that because the pivotal quantity is the student-t distribution, which is symmetric, the confidence interval is centred at $\hat \beta$.
+
+Usually we're interested in proving or disproving the null hypothesis: "there is no relationship between these two variables". To do this, we use the null hypothesis $\beta = 0$ - this means that the explanatory variable doesn't affect the response variable at all. Because it's so important, the hypothesis $\beta = 0$ is known as the "hypothesis of no relationship".
+
+If there's a very small p-value, we have very strong evidence against the hypothesis of no relationship, which implies that there is a relationship between the two variables.
+
+# 17/3/17
+
+Recall that simple linear regression has $x$, the explanatory variate, and $y$, the response variate, where $x$ is assumed to be known and $y$ is the experimental result. In the simple linear regression model, we assume that each $y$ value has a Gaussian distribution based on constant values of $x$.
+
+We now have a confidence interval for $\beta$. Using the invariance property of MLEs, we can now easily find a point estimate for $\mu(x) = \alpha + \beta x$, as $\hat \mu = \alpha + \hat \beta x$. However, how do we get a confidence interval?
+
+First, we need the sampling distribution of $\widetilde \mu(x) = \widetilde \alpha + \beta x$. Turns out, we can write this as $\widetilde \mu(x) = \sum (\frac 1 n + (x_i - \overline x \frac{x_i - \overline x}{S_{X, X}}))Y_i$. Turns out that this is a sum of Gaussian variables, and if we do the algebra, we get $\widetilde \mu(x) \sim G(\mu(x), \sigma \sqrt{\frac 1 n + \frac{(x - \overline x)^2}{S_{x, x}}})$.
+
+If we know $\sigma$, then $\widetilde \mu(x) = \sigma + \widetilde \beta x$, and $\hat a \pm a s_e \sqrt{\frac 1 n + \frac{(x - \overline x)^2}{S_{X, X}}}$ is a confidence interval for $\mu(x)$. If we don't, then $\widetilde \mu(x) = \widetilde \sigma + \widetilde \beta x$, and $\hat a \pm a \sigma \sqrt{\frac 1 n + \frac{(x - \overline x)^2}{S_{X, X}}}$ is a confidence interval for $\mu(x)$.
+
+For $\alpha$, we likewise have the confidence interval $\hat a \pm a s_e \sqrt{\frac 1 n + \frac{(x - \overline x)^2}{S_{X, X}}}$.
+
+Note that the confidence interval for $\mu(x)$ is the confidence interval for the general population - the average for an unknown constant $x$. However, suppose we wanted ;wip: what's the distinction between invididual vs aggregate mu?
+
+;wip: prediction intervals
 
 ---
 

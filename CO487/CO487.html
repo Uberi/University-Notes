@@ -78,7 +78,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
     <span class="divider"></span>
-    <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
+    <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
 <p style="display:none"><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -624,8 +624,9 @@ result <span class="op">=</span> <span class="dv">1</span>
 <li><span class="math inline">\(a^x \equiv a^y \pmod p\)</span> if and only if <span class="math inline">\(a^{x - y} \equiv 1 \pmod p\)</span> (divide both sides by <span class="math inline">\(a^y\)</span>, or multiply by <span class="math inline">\(a^{-y}\)</span>). By point 1, <span class="math inline">\(a^x \equiv a^y \pmod p\)</span> if and only if <span class="math inline">\(t \mid (x - y)\)</span>, which is equivalent to saying <span class="math inline">\(x \equiv y \pmod t\)</span>.</li>
 </ul></li>
 </ol>
-<p>The <strong>discrete logarithm problem</strong>: let <span class="math inline">\(p\)</span> be a large prime, and <span class="math inline">\(q\)</span> be a prime divisor of <span class="math inline">\(p - 1\)</span>. Let <span class="math inline">\(g \in \mb{Z}_p^*\)</span> such that <span class="math inline">\(\ord(g) = q\)</span>.</p>
-<p>Such a <span class="math inline">\(g\)</span> must exist. Proof:</p>
+<p>The <strong>discrete logarithm problem</strong> (DLP): let <span class="math inline">\(p\)</span> be a large prime, and <span class="math inline">\(q\)</span> be a prime divisor of <span class="math inline">\(p - 1\)</span>. Let <span class="math inline">\(g \in \mb{Z}_p^*\)</span> such that <span class="math inline">\(\ord(g) = q\)</span>. Let <span class="math inline">\(h \in &lt;g&gt;\)</span>. Determine <span class="math inline">\(a = \log_g h\)</span> - in other words, find the integer <span class="math inline">\(0 \le a \le q - 1\)</span> such that <span class="math inline">\(h = g^a \pmod p\)</span> (<span class="math inline">\(a\)</span> is the <strong>discrete logarithm</strong> of <span class="math inline">\(h\)</span> in base <span class="math inline">\(g\)</span> in <span class="math inline">\(\mb{Z}_p\)</span>).</p>
+<p>For example, <span class="math inline">\(\log_{59} 22 = 9 \pmod {67}\)</span>.</p>
+<p>Proof that <span class="math inline">\(g\)</span> must exist:</p>
 <blockquote>
 <p>Clearly, there always exists an <span class="math inline">\(\alpha \in \mb{Z}_p^*\)</span> such that <span class="math inline">\(\ord{\alpha} = p - 1\)</span>.<br />
 This value of <span class="math inline">\(\alpha\)</span> is called a <strong>generator</strong> of <span class="math inline">\(\mb{Z}_p^*\)</span> because <span class="math inline">\(\set{\alpha^k \mod p : 0 \le k \le p - 2}\)</span> (we use <span class="math inline">\(p - 2\)</span> because <span class="math inline">\(\alpha^{p - 1} \equiv 1 \pmod p\)</span> and <span class="math inline">\(\alpha^0 \equiv 1 \pmod p\)</span>, so <span class="math inline">\(k = p - 1\)</span> would be redundant with <span class="math inline">\(k = 0\)</span>) will give some permutation of the integers 1 to <span class="math inline">\(p - 1\)</span>.<br />
@@ -633,6 +634,74 @@ Let <span class="math inline">\(g = \alpha^{\frac{p - 1}{q}}\)</span>. Clearly, 
 So by point 1 above, <span class="math inline">\(\ord(g) \mid q\)</span>, so <span class="math inline">\(\ord(g)\)</span> is either 1 or <span class="math inline">\(q\)</span>, since <span class="math inline">\(q\)</span> is prime.<br />
 However, if <span class="math inline">\(q = 1\)</span>, then <span class="math inline">\(g \equiv \alpha^{\frac{p - 1}{q}} \equiv 1\pmod p\)</span> contradicts <span class="math inline">\(\ord{\alpha} = p - 1\)</span>, so <span class="math inline">\(\ord(g) = q\)</span>.</p>
 </blockquote>
+<h1 id="section-27">15/3/17</h1>
+<p>;wip: copy in DLP discrete logarithm problem from photo</p>
+<p>One way of solving the discrete logarithm problem is <strong>exhaustive search</strong>: Compute <span class="math inline">\(g^i \mod p\)</span> for every <span class="math inline">\(0 \le i \le q - 1\)</span>, until we find the <span class="math inline">\(i\)</span> such that <span class="math inline">\(g^i = h\)</span>. This takes <span class="math inline">\(q\)</span> modular multiplications, so <span class="math inline">\(O(p)\)</span> runtime (since <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are the same size).</p>
+<p>Shanks's Algorithm is a faster way:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(a = im + j\)</span> for <span class="math inline">\(m = \ceil{\sqrt{q}}\)</span>, <span class="math inline">\(0 \le i \le m - 1\)</span>, and <span class="math inline">\(0 \le j \le m - 1\)</span>. If we find <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, we can find <span class="math inline">\(a\)</span>.<br />
+Clearly, <span class="math inline">\(j = a - im\)</span>, so <span class="math inline">\(g^j \equiv g^{a - im} \pmod p\)</span>. So <span class="math inline">\(g^a (g^{-m})^i \equiv g^j \pmod p\)</span>, which means <span class="math inline">\(h (g^{-m})^i \equiv g^j \pmod p\)</span>.<br />
+Therefore, we can find <span class="math inline">\(a\)</span> simply by trying all the values of Note that this is similar to the meet in the middle attack on DES.</p>
+</blockquote>
+<p>The algorithm can be written as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Construct a table of values <span class="math inline">\(\tup{j, g^j \mod p}\)</span> for all <span class="math inline">\(0 \le j \le m - 1\)</span>, indexed by the second entry.</li>
+<li>Compute <span class="math inline">\(c = (g^m)^{-1} \mod p\)</span>.</li>
+<li>Compute <span class="math inline">\(h c^i\)</span> for all <span class="math inline">\(0 \le i \le m - 1\)</span> until we find an <span class="math inline">\(i\)</span> such that <span class="math inline">\(h c^i \equiv g^j \mod p\)</span> for any <span class="math inline">\(j\)</span>.</li>
+<li>We get <span class="math inline">\(a = \log_g h = im + j\)</span>.</li>
+</ol>
+<p>Since <span class="math inline">\(m = \ceil{\sqrt{q}}\)</span>, we only need <span class="math inline">\(O(\sqrt q)\)</span> time to do the above.</p>
+<p>There are actually a lot better ways to do this. Pollard's algorithm takes <span class="math inline">\(O(\sqrt q)\)</span> as well, but uses negligible space. The Number Field Seive uses ideas similar to integer factorization for RSA, and runs in <span class="math inline">\(L_p[\frac 1 3, 1.923]\)</span> - subexponential with respect to <span class="math inline">\(\log_2 p\)</span>!</p>
+<p>There's also Shor's algorithm, which is a polynomial-time algorithm for quantum computers that can both find <span class="math inline">\(a\)</span> and factor <span class="math inline">\(n\)</span>. There seems to be an important correspondence between the integer factorization problem and the discrete logarithm problem, though at this time we don't have any proof of that.</p>
+<p>Looking at these best known algorithms, how do we get 128 bits of security? Since the number field seive is <span class="math inline">\(L_p[\frac 1 3, 1.923]\)</span> with respect to a function of <span class="math inline">\(p\)</span>, we need a <span class="math inline">\(p\)</span> of about 3072 bits to get 128 bits of security. Since Pollard's algorithm is <span class="math inline">\(O(\sqrt q)\)</span>, we need a <span class="math inline">\(q\)</span> of about 256 bits to get 128 bits of security (we need <span class="math inline">\(\sqrt{q}\)</span> to have around 128 bits).</p>
+<p>Diffie-Hellman key agreement was one of the earliest key exchange protocols, and is still widely in use. The goal is to allow Alice and Bob to agree on a shared secret key over an unsecured channel! Given public domain parameters <span class="math inline">\(p, q, g\)</span>, defined as they are for the discrete logarithm problem, and a public hash function <span class="math inline">\(H(x)\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Alice chooses a random <span class="math inline">\(1 \le x \le q - 1\)</span>.</li>
+<li>Alice sends <span class="math inline">\(X = g^x \mod p\)</span> to Bob (solving for <span class="math inline">\(x\)</span> is the discrete logarithm problem).</li>
+<li>Bob does the same, choosing a random <span class="math inline">\(1 \le y \le q - 1\)</span> and sending <span class="math inline">\(Y = g^y \mod p\)</span> to Alice.</li>
+<li>Alice computes <span class="math inline">\(K = Y^x \mod p = (g^y)^x \mod p = g^{xy} \mod p\)</span>.</li>
+<li>Bob computes <span class="math inline">\(K = X^y \mod p = (g^x)^y \mod p = g^{xy} \mod p\)</span>.</li>
+<li>Now both Alice and Bob have <span class="math inline">\(g^{xy} \mod p\)</span>, but nobody else does, without being able to efficiently solve the discrete logarithm problem. We can now compute <span class="math inline">\(k = H(k)\)</span> using some hash function, and use that as the secret key.</li>
+</ol>
+<p>Diffie-Hellman key exchange provides security against passive adversaries - adversaries that don't actively interfere with the connection. The Diffie-Hellman problem (DHP): given <span class="math inline">\(p, q, g, X, Y\)</span>, find <span class="math inline">\(K\)</span>. Clearly, DHP is at least as hard as DLP.</p>
+<h1 id="section-28">17/3/17</h1>
+<p>However, unauthenticated Diffie-Hellman key exchange isn't secure against active attackers, because an active attacker could just act as a man-in-the-middle (an intrude-in-the-middle attack), where the attacker pretends to be Alice to Bob and Bob to Alice, transparently forwarding messages through.</p>
+<p>To fix this, we use authenticated Diffie-Hellman. Alice and Bob each generate certificates containing their identity (name, email, etc.), RSA public key, and certificate authority signature (the CA signature confirms that this RSA public key actually belongs to the given identity). Now, we do the same thing as for unauthenticated Diffie-Hellman, except afterwards, they exchange signed messages containing <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and their identity, to</p>
+<p>In real-world implementations of authenticated Diffie-Hellman, like SSL, the client (Alice) doesn't have their own signature, so only Bob sends the signed message with <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and their identity.</p>
+<p>Why do we use DH, even though Alice has Bob's public key and vice versa? In other words, why don't they just communicate with RSA? Well, Diffie-Hellman provides <strong>forward secrecy</strong> - even if an adversary managed to record all their encrypted traffic, and comprimise the long-term RSA keys, the session keys are still safe. To implement this, Alice and Bob both delete their copy of <span class="math inline">\(K\)</span>, <span class="math inline">\(x\)</span>, and <span class="math inline">\(y\)</span> after they're done communicating. Since no other copies of those exist, and it's infeasible to recompute them from the available information <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, this provides forward secrecy.</p>
+<h2 id="digital-signing-algorithm-dsa">Digital Signing Algorithm (DSA)</h2>
+<p>DSA is a signature scheme that's a common alternative to RSA signatures. It's based on the hardness of the discrete logarithm problem rather than integer factorization. It was designed by David Kravitz from the NSA, and standardized by NIST in 1994.</p>
+<p>DSA has the public domain parameters <span class="math inline">\(p, q, g\)</span> and uses the SHA256 hash.</p>
+<p>For Alice to generate keys:</p>
+<ol style="list-style-type: decimal">
+<li>Select a random <span class="math inline">\(1 \le a \le q - 1\)</span>.</li>
+<li>Compute <span class="math inline">\(h = g^a \mod p\)</span> - the public key is <span class="math inline">\(h\)</span>, and the private key is <span class="math inline">\(a\)</span>.</li>
+</ol>
+<p>For Alice to generate a signature for a message <span class="math inline">\(M\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Compute <span class="math inline">\(m = \text{SHA256}(M)\)</span>.</li>
+<li>Select a random per-message secret <span class="math inline">\(1 \le k \le q - 1\)</span>. It's very important that <span class="math inline">\(k\)</span> not be reused for different messages.</li>
+<li>Compute <span class="math inline">\(r = (g^k \mod p) \mod q\)</span>. If <span class="math inline">\(r = 0\)</span> (the probability of this is tiny however) then go back to step 2.
+<ul>
+<li>We can't allow <span class="math inline">\(r = 0\)</span> because in the next step <span class="math inline">\(m + ar\)</span> would just be <span class="math inline">\(m\)</span>, which would be bad.</li>
+</ul></li>
+<li>Compute <span class="math inline">\(s = k^{-1} (m + ar) \mod q\)</span>. If <span class="math inline">\(s = 0\)</span> (the probability of this is tiny however) then go back to step 2.</li>
+<li>The signature is <span class="math inline">\(\tup{r, s}\)</span>.</li>
+</ol>
+<p>For Bob to verify Alice's signature <span class="math inline">\(\tup{r, s}\)</span> on a message <span class="math inline">\(M\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Obtain an authentic copy of Alice's public key h$$.</li>
+<li>Compute <span class="math inline">\(m = \text{SHA256}(M)\)</span>.</li>
+<li>Verify that <span class="math inline">\(1 \le r \le q - 1\)</span> and <span class="math inline">\(1 \le s \le q - 1\)</span>.</li>
+<li>Compute <span class="math inline">\(u_1 = s^{-1} m \mod q\)</span> and <span class="math inline">\(u_2 = s^{-1} r \mod q\)</span>.</li>
+<li>Compute <span class="math inline">\(v = (g^{u_1} h^{u_2} \mod p) \mod q\)</span>.</li>
+<li>Accept the signature if and only if <span class="math inline">\(v = r\)</span>.
+<ul>
+<li>Clearly, <span class="math inline">\(s = k^{-1} (m + ar) \mod q \iff k = s^{-1} (m + ar) \mod q\)</span>, so <span class="math inline">\(g^k = g^{s^{-1} (m + ar)} \mod p = g^{s^{-1} m} g^{s^{-1} ar} \mod p = g^{s^{-1} m} (g^a)^{s^{-1} r} \mod p = g^{s^{-1} m} h^{s^{-1} r} \mod p\)</span>.</li>
+<li>So ;wip</li>
+</ul></li>
+</ol>
+<p>Compared to RSA, DSA signatures are pretty short, a big practical reason people use it over RSA.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

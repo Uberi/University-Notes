@@ -3,7 +3,7 @@ OUTPUT_FILES=$(INPUT_FILES:.md=.html)
 
 all: $(OUTPUT_FILES)
 
-%.html: %.md
+%.html: %.md templates/template.html
 	pandoc "--output=$@" \
 		--data-dir=. --template=template.html \
 		--mathjax --variable=pagetitle:$(*F)\ \|\ Anthony\ Zhang "$?"

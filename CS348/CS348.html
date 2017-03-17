@@ -3,6 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="author" content="$author-meta$" />
   <title>CS348 | Anthony Zhang</title>
   <link rel="stylesheet" href="../css/base.css" type="text/css">
   <link rel="stylesheet" href="../css/note.css" type="text/css">
@@ -10,44 +11,6 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-  </style>
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -78,7 +41,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
     <span class="divider"></span>
-    <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
+    <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
 <p style="display:none"><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -107,470 +70,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
-<h1 id="cs348">CS348</h1>
-<p>Introduction to Database Management.</p>
-<pre><code>Edward Chan
-Section 002
-epfchan@uwaterloo.ca
-Office Hours: Monday, Wednesday 12:30 PM-1:15 PM, DC2338</code></pre>
-<h1 id="section">14/9/15</h1>
-<p>Databases, data modelling, and relational algebra, in theory and in practice.</p>
-<p>Assignments are due before 1 PM on their respective due dates. No late assignments. Midterm on November 6, 4:30 PM-6 PM.</p>
-<h1 id="section-1">16/9/15</h1>
-<h2 id="elements-of-databases">Elements of Databases</h2>
-<p>Databases are needed to manage data because we want to store and retrieve it in increasingly elaborate ways. Data is stored information.</p>
-<p>The goal of data management is to model part of the real world in a way that is practically useful. We want to do this efficiently and accurately, and hiding irrelevant details so we can concentrate on the common properties of the set (abstraction).</p>
-<p><strong>Intension</strong> of data is the definition of data, like the definition of employee records. <strong>Extension</strong> of data is the actual instances of the data, such as the set of employee records - it changes with the state of the world. In databases, the intension of data is the <strong>database schema</strong>. and the extension of data are the actual records in the database.</p>
-<p>A database management system (DBMS) dictates how data is organized and accessed - the structure of the data. A DBMS also exposes interfaces to store, retrieve, and update data efficiently. A modern DBMS must handle concurrent operations, ensure integrity (database constraints, such as a column being unique or a superset of another), enforce security (access control), and support versioning and recovery (ensuring data can be restored after failures such as hard drive crashes and data corruption).</p>
-<h1 id="section-2">18/9/15</h1>
-<p>Logical files are those seen by application programmers, such as database tables. Physical files are those seen by system programmers, such as the actual files organized by the database.</p>
-<p>The goal of the modern DBMS is to make the data and the applications that use it more independent. This allows us to do things like swapping out the physical storage without changing any applications, or adding and removing indices.</p>
-<p>DBMSs can require people like operators (data entry, machine operators), system developers, and database administrators. DBMSs also have associated procedures such as what to do in case of failures and how to use the interfaces</p>
-<p>DBMSs have a 3-level architecture - the external level (the application programs and views), the conceptual level (the conceptual schema/data model), and the internal level (data storage, OS, hardware).</p>
-<p>DBMSs also have various language interfaces, such as <strong>data definition language</strong> (DDL), which is used for defining schemas. The DDL is compiled into a system catalog, which is essentially just schema metadata. There is also the <strong>data manipulation language</strong> (DML), which is the instructions from the application that allows data to be manipulated, and the <strong>query language</strong>, which allows data to be manipulated.</p>
-<p>A <strong>data model</strong> is the logical organization of data. On top of the data model, we define <strong>operations</strong> to manipulate it, and constraints to ensure data integrity and enforce logical restrictions. The <strong>entity-relational model</strong> is the most common data model.</p>
-<p>Objects in DBMSs can be stored by value or by reference. Storing by reference supports everything storing by value does, but can also have multiple entries reference the same object.</p>
-<h1 id="section-3">21/9/15</h1>
-<p>An <strong>entity</strong> is an object that has properties and can be uniquely identified. An <strong>entity set</strong> is a set of entities with similar properties - an extension. An <strong>entity type</strong> is an abstraction over an entity set - an intension. An attribute is a property of an entity, and an attribute value is an instance of an attribute. Attributes can be single-valued or multi-valued (such as arrays of other values), and simple (primitive) or composite (contains other simple/composite values). The <strong>domain</strong> is the set of all possible attribute values.</p>
-<p>A <strong>relationship</strong> is an association between multiple entities. An <span class="math inline">\(n\)</span>-ary relationship associates <span class="math inline">\(n\)</span> entities with each other. A <strong>relationship set</strong> is a set of similar relationships, such as those containing common entities - an extension. A <strong>relationship type</strong> is an abstraction over a relationship set - the intension, like WORKS_IN_DEPARTMENT in an employee databse.</p>
-<p>Relationship types and entity types can have attributes.</p>
-<p>When designing databases, we need to determine the functional requirements and the database requirements. Using these, we figure out the database interface (the transaction specification) and schema, and then implement the application program and set up the DBMS.</p>
-<h2 id="constraints-and-relationships">Constraints and Relationships</h2>
-<p>A <strong>candidate key</strong> is a minimal set of attributes (least possible number of attributes) of an entity type that uniquely identifies each entity in its entity set. For example, a collection of students might have student number or social insurance number as candidate key.</p>
-<p>A <strong>primary key</strong> is a candidate key that is chosen (as part of the design) as the main way to identify entities in an entity set. Primary keys can be added to any entity type, but are always optional. These <strong>key constraints</strong> apply to entity types.</p>
-<p>An <strong>entity-relation diagram</strong> represents entity types and relationship types using a flowchart-like diagram:</p>
+<p>$if(toc)$</p>
+<div id="$idprefix$TOC">
+$toc$
+</div>
+<p>$endif$</p>
+<h1 id="lecture-notes-by-anthony-zhang.">Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
 <ul>
-<li>Entity types are represented with labelled rectangles.</li>
-<li>Entity attributes are represented with ellipses, connected to entity types with lines.
-<ul>
-<li>Attributes that are part of the primary key, if there is one, have underlined labels.</li>
-<li>Ellipses for multi-valued attributes have a double-line as their border, while single-valued attributes have a normal, single-line border.</li>
-</ul></li>
-<li>Relationships are labelled diamonds, connected to the entity types they act over with lines.
-<ul>
-<li>The cardinality is specified by labelling each of the two lines from the diamond with <code>(MIN_ENTITIES, MAX_ENTITIES)</code>. For example, a relationship between department and employee might have labels <code>(1, 1)</code> for the department side, and <code>(0, *)</code> for the employee side - departments can have any number of employees, while an employee always has just one department.</li>
-</ul></li>
-<li>Relationships and attributes should not be redundant - a relationship or attribute is redundant if its removal doesn't change the meaning of the information.
-<ul>
-<li>For example, an attribute of an employee type that represents the department is redundant if there is also a relationship that associates employee entities with departments.</li>
-<li>For example, a relationship between department and classes is redundant if there is already a department-student relationship and a student-classes relationship - we could get the same information as a department-class relationship by going through the department-student and student-classes relationship.</li>
-</ul></li>
+<li><a href="/blog/" class="page">blog</a></li>
+<li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+<li><a href="/resume.pdf" class="page">résumé</a></li>
+<li><a href="https://github.com/Uberi" class="contact">github</a></li>
+<li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
+<li><script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x65;&#x6d;&#x61;&#x69;&#108;'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+<li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+<li><a href="https://keybase.io/uberi" class="info">public key</a></li>
 </ul>
-<p>Entity-relationship diagrams often get cluttered by attribute ellipses. We can avoid this by not drawing attribute ellipses, and then also including a list with entries of the form <code>ENTITY_TYPE (ATTRIBUTE1, ATTRIBUTE2, ...)</code> to list out the entities. As before, primary key attributes are underlined in this list.</p>
-<h1 id="section-4">23/9/15</h1>
-<p>For example, for a school application we might have entity types STUDENT, PROGRAM, and CLASS. Relationships might include a STUDENT entity being ENROLLED_IN multiple CLASS entities, or a STUDENT entity MAJORED_IN a PROGRAM entity.</p>
-<p>The <strong>cardinality</strong> of a relationship type restricts the number of each entity type that can be in that relationship type. For example, for binary relationships (relationships between two entity types), common cardinalities are 1:1 (one to one, 1 of each entity type per relationship), 1:N (one to many, one or more of one entity type per each of the other), and N:M (many to many, any number of either entity type). These <strong>cardinality constraints</strong> apply to relationship types. The cardinality, essentially, retricts the number of relationships an entity can can participate in.</p>
-<p>The <strong>existance constraint</strong> constrains whether an entity can exist independently of something else. For example, a department should not exist if there are no employees in it. Since a department is always associated with an employee. An entity type is <strong>totally dependent</strong> on another if every entity of the first is always associated with at least one of the second - the first cannot exist without the second.</p>
-<h2 id="relationship-types">Relationship Types</h2>
-<p>An <strong>is-a</strong> relationship represents subclass entity types inheriting from a superclass entity type, and is drawn in entity-relationship diagrams as a down-pointing triangle labelled &quot;ISA&quot;. The superclass entity type is connected by a line, above the triangle, and the subclass entity types are connected by lines below it. Also, attributes of the superclass are inherited by subclasses.</p>
-<p>A <strong>generalization</strong> is when multiple related entity types are combined into a single, more general entity type. In ERDs, we make the new generalized entity type, and then add an is-a relationship between the specialized entity types and the new general entity type.</p>
-<h1 id="section-5">25/9/15</h1>
-<p>A <strong>specialization</strong> is when a single general entity type is broken down into multiple, more specific entity types. In ERDs, we make the new specialized entity types, and then add an is-a relationship between these new entity types and the general entity type.</p>
-<p>An <strong>aggregation</strong> is when a relationship between multiple entities is itself treated like an entity type, like having relationships between that relationship and other entity types. In ERDs, we draw these as a box around the entire relationship diamond and any entity types it relates together.</p>
-<p>For example, suppose a school offers courses, and students can enquire into offered courses, we can model this using a school entity type, related with a course entity type with a &quot;OFFERS&quot; relationship, and a student entity type. Here, we could have a &quot;ENQUIRES_ABOUT&quot; relationship between students, schools, and courses, but this rather cumberome. Instead, we can use aggregation - we treat the OFFERS relationship like an entity, and relate students to &quot;OFFERS&quot; using an &quot;ENQUIRES_ABOUT&quot; relationship.</p>
-<h1 id="section-6">28/9/15</h1>
-<p>Databases are often too large to fit in main memory. Therefore, they are generally stored on disk drives or SSDs.</p>
-<p>Disk drives have disk packs (disks on a spindle), which have multiple platters (disks), each with many concentric tracks (circles). Tracks are divided into equally sized pages/blocks/sectors (chunks), each of which stores around 512 bytes to 4 kilobytes. The tracks with corresponding radii on each platter form a cylinder.</p>
-<p>On disks themselves, 1's and 0's are stored as transitions between north and south magnetized poles. That means that within the space for 1 bit, the track needs to change in the middle, from north to south or south to north. This allows a small current to be induced in the read/write head.</p>
-<p>The disk pack is rotated at a constant speed (typically thousands of RPM), and read/write heads move back and forth over the disks to read/write the data. The blocks on each track have the track number (the cylinder in which the block resides), surface number (which platter the block is on), and block number within the track. Blocks are the unit of transfer and are uniquely identified by these 3 values.</p>
-<p>To perform a read/write a block on a disk drive, the read/write head has to seek to the right track, wait for the disk to spin around to the right track, and then perform the read/write until done. As this is a mechanical process, this can take multiple milliseconds - two orders of magnitude greater than CPU operations.</p>
-<p>As a result of the mechanical aspects of disk drives, it's a good idea to put related data close together on the same track, in order to avoid seek times and rotational delay when reading related information - this is known as <strong>clustering</strong>. We also try to cache recently used values (and marking modified cache entires as dirty to write them back later), in order to avoid disk operations entirely when possible.</p>
-<p>Solid state drives are a lot better, with access times around 150 nanoseconds, but are still very slow relative to the CPU.</p>
-<p>A <strong>file</strong> is a sequence of records (fixed or variable length). Each record is stored on at most one block. The blocks storing records can be contiguous (side by side in memory), linked (blocks point to their neighbors), or indexed (a separate mapping is maintained for where certain data is located).</p>
-<p>An <strong>ordered/sequential</strong> file has its records sorted by a particular attribute, the <strong>ordering field</strong>. This allows us to find records very fast using binary search, but it also slows down insertions - one common pattern is to accumulate records to insert in an overflow file, and merge it in periodically.</p>
-<p>An <strong>index</strong> is extra information added to a file to provide faster accesses at the cost of slower writes. The index is generally a separate file, so there is a data file and an index file.</p>
-<p>Indices are built on a particular set of attributes, called the <strong>search key</strong>. A <strong>primary index</strong> is one built on the primary key alone, and any other is a <strong>secondary index</strong>. An <strong>ordered</strong> index keeps the search key in sorted order, while an <strong>unordered</strong> index does not.</p>
-<p>Indices are generally implemented using B+ trees. These are very good for range queries, and can easily be inserted into or removed from.</p>
-<h1 id="section-7">30/9/15</h1>
-<p>B+ trees are similar to the B trees introduced in CS240, but with a few important differences:</p>
-<ul>
-<li>The interior nodes do not contain values, only ranges for its children.</li>
-<li>The leaf nodes are linked to their adjacent siblings, forming a doubly linked list of leaf nodes that makes in-order traversal very easy.</li>
-</ul>
-<p>The index is a useful concept because it is independent of the data itself - we can manage indices without touching the data at all.</p>
-<p>Although indices make data access faster, they also take up additional space, and slow down data insertion/deletion, as we also have to manage structures like the B+ tree.</p>
-<p>The B+ tree represents data as the leaf nodes of a tree in <strong>data blocks</strong>, each of which can contain multiple entries (these are generally pages on the disk). Entries within a data block contain the key and a reference/pointer to a record in the database, and are sorted by their key.</p>
-<p>The interior nodes of the tree, the <strong>index blocks</strong>, contain references to other blocks for each range they contain.</p>
-<p>Each index block will have a lot of ranges, generally around 70 or more. Each block is limited only by the size of disk pages, and we try to fill the pages as much as possible to minimise the number of page accesses - the most expensive operation. Also, index blocks are cached as much as possible, especially the upper levels, in order to avoid the first few page accesses.</p>
-<p>A B+ tree of order <span class="math inline">\(m\)</span> is a search tree in which all leaves are on the same level. Every interior node has between <span class="math inline">\(\floor{\frac {m - 1} 2}\)</span> and <span class="math inline">\(m - 1\)</span> keys sorted in asecending order (except the root, which can have between 1 and <span class="math inline">\(m - 1\)</span>), and has children for each range between its keys - for keys <span class="math inline">\(k_1, \ldots, k_n\)</span>, we have ranges <span class="math inline">\((-\infty, k_1], (k_1, k_2], \ldots, (k_{n - 1}, k_n], (k_n, \infty)\)</span>. Leaf nodes have between <span class="math inline">\(\floor{\frac d 2}\)</span> and <span class="math inline">\(d\)</span> records, where <span class="math inline">\(d\)</span> is a positive integer.</p>
-<p>The constraint on the number of keys in each node ensures that the tree's leaf level is always at least half full, to minimise the height of the tree.</p>
-<h1 id="section-8">2/10/15</h1>
-<p>Suppose we want to insert a record into a B+ tree. First, we search for the leaf node we want to insert into, and then insert it.</p>
-<p>If a leaf node overflows (has more than <span class="math inline">\(d\)</span> keys), we split the records into two new, roughly equally sized data nodes (the left size is 0 or 1 more than the right size), then add a key to the parent index node for the largest value of the left side. This can cause the parent node to overflow as well, in which case we repeat the previous steps for the parent.</p>
-<p>If an index node overflows (has more than <span class="math inline">\(m - 1\)</span> keys), we split the keys into two new, roughly equally sized index nodes (the left side is 0 or 1 more than the right size), where the middle key of the original index node (or the key right after the middle of the key list) is moved into the parent index node. This can cause the parent node to overflow as well. If this node was originally the root, the new parent node is now the new root.</p>
-<p>Suppose we want to delete a record from a B+ tree. First, we search for the leaf node we want to delete from, and then delete it.</p>
-<p>If a leaf node underflows (has less than <span class="math inline">\(\floor{\frac d 2}\)</span> keys), we check its neighbor - if the neighbor has exactly <span class="math inline">\(\floor{\frac d 2}\)</span> keys, we merge the leaf node with its neighbor, removing a key from the parent. Otherwise, we redistribute records from the neighbor into this leaf node so they have roughly the same amount (at this point, neither is underflowing), and then recalculate keys in the parent node if necessary. This can cause the parent node to underflow as well if we end up merging (merging is only done if redistribution isn't possible).</p>
-<p>If an index node underflows (has less than <span class="math inline">\(\floor{\frac m 2}\)</span> keys), we also check its neighbor - if the neighbor has <span class="math inline">\(\floor{\frac m 2}\)</span> keys, we merge the index node with its neighbor, removing a key from the parent. Otherwise, we redistribute keys from the neighbor into this index node, like with leaf nodes. This can cause the parent node to underflow as well if we end up merging (merging is only done if redistribution isn't possible).</p>
-<h1 id="section-9">5/10/15</h1>
-<p>The B+ trees we have seen so far are only for the primary key indices. For multiple indices, things get a lot more complicated.</p>
-<h2 id="the-relational-model">The Relational Model</h2>
-<p>Modern DBMS use the <strong>relational model</strong>, based on relational algebra and first order logic. Models have the structural components, contraint components, and the operational components. These DBMSs became possible to implement a few decades ago, replacing earlier heirarchical models.</p>
-<p>In relational models, the main idea is that all the information is represented using <strong>flat relations</strong>, which allows us to specify the structure of the data declaratively.</p>
-<p>The <strong>relational schema</strong> represents relations that we want to model.</p>
-<p>We can represent a <strong>relation</strong> <span class="math inline">\(R\)</span> over <span class="math inline">\(n\)</span> attributes as a set of <span class="math inline">\(n\)</span>-tuples <span class="math inline">\(\tup{a_1, \ldots, a_n} \in D_1 \times \ldots \times D_n\)</span>. <span class="math inline">\(\tup{a_1, \ldots, a_n}\)</span>, where <span class="math inline">\(D_1, \ldots, D_n\)</span> are the <strong>domains</strong>, sets of simple, single-valued attributes - <span class="math inline">\(D_i\)</span> is the set of all values of attribute <span class="math inline">\(i\)</span>. In other words, relations are sets of tuples of attributes.</p>
-<p>Attributes may also have a <code>null</code> value, which means that the value of the attribute is actually unknown.</p>
-<p>If the relation is in <span class="math inline">\(D_1 \times \ldots \times D_n\)</span>, then it is on <span class="math inline">\(n\)</span> sets and <span class="math inline">\(n\)</span> is the degree of the relation. So a binary relation is a relation of degree 2.</p>
-<p>In DBMSs, all relations are represented as flat tables, where the columns are the attributes <span class="math inline">\(D_1, \ldots, D_n\)</span>, and the rows are the instances of the relation. Note that there is no concept of entities here - relations represent both entity-relational entities and entity-relational relations.</p>
-<p>The intension of a relation is the relational schema, and the intension of the database is the database schema <span class="math inline">\(R = \set{R_1, \ldots, R_k}\)</span>. The extension of a relation is the set of possible tuples <span class="math inline">\(\tup{a_1, \ldots, a_n}\)</span>.</p>
-<h1 id="section-10">7/10/15</h1>
-<p>By the <strong>closed world assumption</strong> (if something is true, then we know it's true), relations are complete - if things are related to each other, then we also know that they are related to each other. In other words, all the things we want to represent are known to us/representable in the table - everything is true or false, and all true things are in our database.</p>
-<h3 id="converting-erds-to-relational-schemas">Converting ERDs to relational schemas</h3>
-<p>We have several heuristics for converting ERDs to relational schemas, but there isn't always a good way to.</p>
-<p>When there is a one to many relation between doctors (<code>Doctor(DOCTOR_ID, ...)</code> in the ERD) and hospitals (<code>Hospital(HOSPITAL_ID, ...)</code> in the ERD), we might represent doctors in the relational schema as <code>Doctor(DOCTOR_ID, HOSPITAL_ID, ...)</code> - we added an attribute to doctors that specifies which hospital they work in, to represent this one-to-many relation. In general, when we have a many-to-one or one-to-one relation, we can add an attribute to one of the objects identifying the instance of the other object it's associated with.</p>
-<p>When there is a many to many relation between students (<code>Student(STUDENT_ID, ...)</code>) and courses (<code>Course(COURSE_ID)</code>), we might add a new table for the relation <code>Taking(STUDENT_ID, COURSE_ID)</code>. In general, when we have a many-to-many relation, we can add a new table that associates them with each other, where the primary key is chosen from the attributes of the entity types it relates.</p>
-<p>A <strong>strong entity type</strong> is one that has a primary key, while a <strong>weak entity type</strong> does not. Strong entity types dominate weak entity types when connected by a relationship. Strong entity types are directly translated to tables where the columns are their attributes. Weak entity types result in tables with their attributes as well, but also include the primary key of entity types that dominate it and the attributes of its relationships.</p>
-<p>For specialization (is-a relationships), we have separate tables for the subclasses, and the superclass doesn't need a table. Also, attributes are inherited, so we write them out directly for each subclass.</p>
-<p>For aggregation, we create a separate table for the relationship if it doesn't exist, where the primary key is the primary key for the relationship.</p>
-<h3 id="constraints">Constraints</h3>
-<p>Constraints limit the form of the data that can exist within the DBMS. Some constraints are inherent, such as the fact that a prmary key cannot contain null values.</p>
-<p>There are also other types of constraints:</p>
-<ul>
-<li>Domain constraints limit the values attributes can have to an explicit set of values.</li>
-<li>Primary key constraints limit the attributes used to identify rows.</li>
-<li>Foreign key constraints limit attribute values to valid references to other attributes.
-<ul>
-<li>In the above example, there would be a foreign key constraint on <code>Doctor</code> ensuring that its <code>HOSPITAL_ID</code> attribute is always a valid hospital ID, that there is a corresponding <code>Hospital</code> with that <code>HOSPITAL_ID</code> value.</li>
-<li>Tuples in the relation containing the foreign key (the <strong>referencing/child relation</strong>) must have their foreign key attributes be the primary key of another relation (the <strong>referenced/parent relation</strong>), or null.</li>
-<li>The DBMS only has to check whether the referenced record exists when inserting a new tuple into the child, or deleting a tuple from the parent.</li>
-</ul></li>
-</ul>
-<h1 id="section-11">9/10/15</h1>
-<p>Table definitions have the following form:</p>
-<pre><code>&quot;CREATE TABLE &quot; &lt;TABLE NAME&gt; &quot;(&quot;
-    &lt;COLUMN DEFINITION 1&gt; &quot;,&quot;
-    &lt;COLUMN DEFINITION 2&gt; &quot;,&quot;
-    &lt;...&gt;
-    &lt;TABLE CONSTRAINT 1&gt; &quot;,&quot;
-    &lt;TABLE CONSTRAINT 2&gt; &quot;,&quot;
-    &lt;...&gt;
-&quot;);&quot;</code></pre>
-<p>Table contraints take the following form:</p>
-<pre><code>[&quot;CONSTRAINT &quot; &lt;CONSTRAINT NAME&gt;] (
-    &quot;UNIQUE&quot; &quot;(&quot; &lt;COLUMN 1&gt; &quot;,&quot; &lt;COLUMN 2&gt; &quot;,&quot; &lt;...&gt; &quot;)&quot; |
-    &quot;PRIMARY KEY&quot; &quot;(&quot; &lt;COLUMN 1&gt; &quot;,&quot; &lt;COLUMN 2&gt; &quot;,&quot; &lt;...&gt; &quot;)&quot; |
-    &quot;FOREIGN KEY&quot; &quot;(&quot; &lt;COLUMN 1&gt; &quot;,&quot; &lt;COLUMN 2&gt; &quot;,&quot; &lt;...&gt; &quot;)&quot; &quot;REFERENCES&quot; &lt;TABLE NAME&gt; &quot;(&quot; &lt;COLUMN&gt; &quot;)&quot; [&quot;ON&quot; (&quot;UPDATE&quot; | &quot;DELETE&quot;) (&quot;SET NULL&quot; | &quot;NO ACTION&quot; | &quot;CASCADE&quot; | SET DEFAULT)] |
-)</code></pre>
-<p>The <code>SET NULL</code> foreign key option sets broken references to null - when we delete the parent instance, the child reference becomes null. The <code>NO ACTION</code> option prevents the addition or deletion in the first place. The <code>CASCASE</code> option also deletes the child record when the referenced parent record is deleted. The <code>SET DEFAULT</code> option causes child reference's foreign key attribute to fall back to the default value set for the column.</p>
-<h2 id="relational-algebra">Relational Algebra</h2>
-<p><strong>Operations</strong> are functions of relations - they accept and return relations/tables. The basic operations are union (<span class="math inline">\(A \cup B\)</span>), difference (<span class="math inline">\(\setminus\)</span>), Cartesian product (<span class="math inline">\(\times\)</span>), projection (<span class="math inline">\(\pi\)</span>), selection (<span class="math inline">\(\sigma\)</span>), and renaming (<span class="math inline">\(\rho\)</span>).</p>
-<p>Relational algebra is the formal basis for modern relational models. It is the basis of SQL, the language used to query DBMSs. Relational algebra is important because it has the closure quality - operands and the results of operations are both in the set of relations.</p>
-<p>Union of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is simply the set of those tuples that are in <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>. Difference of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is simply the set of those tuples that are in <span class="math inline">\(A\)</span> but not <span class="math inline">\(B\)</span>.</p>
-<h1 id="section-12">14/10/15</h1>
-<p>The attributes of a relation scheme <span class="math inline">\(R\)</span> are represented as <span class="math inline">\(\mathrm{Attr}(R)\)</span>.</p>
-<p>A <strong>union</strong> or <strong>difference</strong> of two relational schemes <span class="math inline">\(R, S\)</span> is the set union/difference of those sets. These are written as <span class="math inline">\(R \cup S\)</span> and <span class="math inline">\(R - S\)</span>.</p>
-<p>An <strong>intersection</strong> is the set of all records that are identical between two relation schemes <span class="math inline">\(R, S\)</span>, written <span class="math inline">\(R \cap S\)</span>.</p>
-<p>A <strong>projection</strong> of a relation scheme <span class="math inline">\(R\)</span> is a permutation of a subset of every tuple in <span class="math inline">\(R\)</span> - a table where the columns are the <span class="math inline">\(R\)</span>'s columns rearranged or removed. This is written as <span class="math inline">\(\pi_{A_{i_1}, \ldots, A_{i_m}}: R[A_1, \ldots, A_n] \to A_{i_1} \times \ldots \times A_{i_m}\)</span>.</p>
-<p>Note that the resulting table for a projection may have duplicate records if <span class="math inline">\(A_{i_1}, \ldots, A_{i_m}\)</span> is not a candidate key.</p>
-<p>A <strong>selection</strong> of a relation scheme <span class="math inline">\(R\)</span> is the set of tuples in <span class="math inline">\(R\)</span> that satisfy a boolean condition <span class="math inline">\(F\)</span> (where the expression allows attributes, constants, <span class="math inline">\(\le, \ge, &lt;, &gt;, =, \ne, \wedge, \vee, \neg\)</span> operators, and parentheses). This is written as <span class="math inline">\(\sigma_F(R) = \set{t \in R \middle| F(t)}\)</span>.</p>
-<p>The <strong>Cartesian product</strong> of two relational schemes <span class="math inline">\(R, S\)</span> is the set of all possible tuples formed by concatenating a tuple in <span class="math inline">\(R\)</span> with a tuple in <span class="math inline">\(S\)</span> - each tuple in <span class="math inline">\(R\)</span> prepended to each tuple in <span class="math inline">\(S\)</span>. This is written as <span class="math inline">\(R \times S\)</span>, and results in <span class="math inline">\(\abs{R} \abs{S}\)</span> tuples, which can be a lot if both relation schemes were large.</p>
-<p>A <strong>rename</strong> of a relation scheme <span class="math inline">\(R\)</span> allows us to rename relation schemes and their attributes. This is written as <span class="math inline">\(\rho_{S[B_1, \ldots, B_n]}(R[A_1, \ldots, A_n])\)</span>, which renames <span class="math inline">\(R[A_1, \ldots, A_n]\)</span> to <span class="math inline">\(S[B_1, \ldots, B_n]\)</span>.</p>
-<p>Basically, projection is a rearrangement of columns, selection is a filter for records, Cartesian product is a combination of records, and rename is simply a renaming.</p>
-<p>A <strong>relational algebra expression</strong> is a finite expression of the following form:</p>
-<ul>
-<li>A variable or constant.</li>
-<li><span class="math inline">\(E_1 \cup E_2\)</span>, <span class="math inline">\(E_1 \cap E_2\)</span>, <span class="math inline">\(E_1 - E_2\)</span>, <span class="math inline">\(E_1 \times E_2\)</span>, <span class="math inline">\(\sigma_F(E_1)\)</span>, <span class="math inline">\(\pi_S(E_1)\)</span>, <span class="math inline">\(\rho_S(E_1)\)</span>, and other operators, where <span class="math inline">\(E_1, E_2\)</span> are relational algebra expressions.</li>
-<li>Other convenience operators, like <span class="math inline">\(R * S\)</span>.</li>
-</ul>
-<p>Any language that provides at least the retrival power of relational algebra expressions is <strong>relationally complete</strong>. Relational algebra is a useful notation since we can analyze it using first order logic techniques, and allows analysis independent of the DBMS.</p>
-<p>Relational queries are a subset of all computable queries, and represent real-world querying needs pretty well.</p>
-<h1 id="section-13">16/10/15</h1>
-<p>A <strong>natural join</strong> over relation schemes <span class="math inline">\(R, S\)</span> is a relation scheme <span class="math inline">\(R * S\)</span> with records having attributes <span class="math inline">\(\mathrm{Attr}(R) \cup \mathrm{Attr}(S)\)</span>, where <span class="math inline">\(\mathrm{Attr}(R) \cap \mathrm{Attr}(S)\)</span> are identical between <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span>. In other words, it is the set of records of unique attributes from both relation schemes where the common attributes agree between <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span>.</p>
-<p>A <strong>theta join</strong> (<span class="math inline">\(\theta\)</span>-join) over relation schemes <span class="math inline">\(R, S\)</span> and attributes <span class="math inline">\(A \in \mathrm{Attr}(R), B \in \mathrm{Attr}(S)\)</span> is <span class="math inline">\(R *_{A \theta B} S = \sigma_{A \theta B}(R \times S)\)</span>, where <span class="math inline">\(\theta\)</span> is a comparison operator like <span class="math inline">\(\ne\)</span> or <span class="math inline">\(\ge\)</span>. For example, an <strong>equijoin</strong> is a theta join where <span class="math inline">\(\theta\)</span> is <span class="math inline">\(=\)</span> - <span class="math inline">\(R *_{A = B} S = \sigma_{A = B}(R \times S)\)</span>.</p>
-<p>Note that natural join is simply an equijoin where duplicate columns are removed - <span class="math inline">\(R * S = \pi_{\mathrm{Attr}(R) \cup \mathrm{Attr}(S)}(\sigma_{A = A, A \in \mathrm{Attr}(R) \cap \mathrm{Attr}(S)}(R \times S))\)</span></p>
-<p>Universally quantified queries are those that use universal quantifiers, like &quot;for all&quot; and &quot;exists&quot;.</p>
-<p>Relational algebra examples:</p>
-<ul>
-<li>Name and salary of all interns on the evening shift: <span class="math inline">\(\pi_{\text{NAME}, \text{SALARY}}(\sigma_{\text{DUTY} = \text{&quot;intern&quot;} \wedge \text{SHIFT} = \text{&quot;evening&quot;}})\)</span>.</li>
-<li>Names of female cardiologists who are also patients: <span class="math inline">\(\pi_{\text{NAME}}(\sigma_{\text{SEX} = \text{&quot;F&quot;}}(PATIENT)) \cap \pi_{\text{NAME}}(\sigma_{\text{SPECIALTY} = \text{&quot;Cardiology&quot;}}(DOCTOR))\)</span>.</li>
-<li>Doctor ID of cardiologists that only treat heart disease patients, where heart disease patients are those with a cardiac disease diagnosis: <span class="math inline">\(\text{NON_HEART_DISEASE_PATIENT} = \pi_{\text{PATIENT_NUMBER}}(\sigma_{\text{DIAGNOSIS} \ne &quot;cardiac disease&quot;}(CHECKUPS)); \text{CARDIOLOGIST} = \pi_{\text{NAME}}(\sigma_{\text{SPECIALTY} = \text{&quot;Cardiology&quot;}}(DOCTOR)); \pi_{\text{NAME}}(\text{CARDIOLOGIST}) - \pi_{\text{NAME}}(\text{CARDIOLOGIST} * \text{NON_HEART_DISEASE_PATIENT})\)</span>.</li>
-</ul>
-<h2 id="structured-query-language-sql">Structured Query Language (SQL)</h2>
-<p>The query language we will use in this course will be SQL. This language is a way to represent relational algebra in a machine-readable way, and also allow definitions of relational schemes. Since SQL is built on sound mathematical foundations, we have certain guarantees about the data stored in the database, such as safety and consistency.</p>
-<h1 id="section-14">19/10/15</h1>
-<p>SQL is a way to write relational algebra in a machine-readable format. SQL can be either interactive or embedded in an application, and embedded SQL is either static or dynamic. SQL isn't Turing complete (no loops/recursion), but it can be combined with a Turing complete language to be able to evaluate all computable queries.</p>
-<p>In SQL, columns have data types like INTEGER, VARCHAR, VARBINARY, or others like dates and times.</p>
-<p>Columns in a table can also be null unless otherwise constrained (like primary key or not null constraints). Null values don't violate the closed world assuption because it doesn't mean that the value isn't in the database, just that it isn't known/applicable. Conditions with null values are neither true nor false (checking whether something is equal to null, for example), so we actually have <strong>three-valued logic</strong> (true, false, and unknown). SQL queries only select tuples that evaluate to true, so tuples that evaluate to neither true nor false aren't selected.</p>
-<p>A <strong>table</strong> is like a relaion, but duplicates are allowed unless otherwise constrained. Indices are generated for columns of tables to speed up selection and joins.</p>
-<p>SQL is both a data declaration language and a retrieval language. There are commands such as table create/alter/drop, index create/drop, and view create/drop, as well as access control commands such as grant/revoke. See slide 122 and after for the exact syntax used in this course.</p>
-<p>Creating tables/indices/views builds a new table/index/view, altering tables add/remove columns (expanding with nulls as necessary), and dropping tables/indices/views deletes them, removing associated indices/views as necessary.</p>
-<p>Consider <code>SELECT 'the supplier ID is ', supplier_id, ' with status ', status FROM SUPPLIER WHERE city = 'Paris'</code>, which selects tuples of the form <span class="math inline">\(\tup{\text{the supplier ID is }, x \in \mb{Z}, \text{ with status }, y \in \mb{Z}}\)</span>.</p>
-<p>SQL has <strong>tuple iteration semantics</strong> - we can iterate over the result to get a sequence of tuples.</p>
-<p>For example, <code>SELECT DISTINCT a, b FROM X, Y WHERE X.c = Y.c</code> is an equijoin/inner join on <span class="math inline">\(c\)</span> over <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, projecting the attributes <span class="math inline">\(a, b\)</span>.</p>
-<h1 id="section-15">21/10/15</h1>
-<p>Suppose we have two relation schemes <span class="math inline">\(A, B\)</span> both with attribute <span class="math inline">\(x\)</span>.</p>
-<p>An <strong>inner join</strong> on <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> over <span class="math inline">\(x\)</span> is the set of all records in <span class="math inline">\(A\)</span> extended with attributes of <span class="math inline">\(B\)</span> where <span class="math inline">\(x\)</span> in <span class="math inline">\(A\)</span> is equal to <span class="math inline">\(x\)</span> in <span class="math inline">\(B\)</span> - records of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, only if they have matches in each other.</p>
-<p>A <strong>left join</strong> on <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> over <span class="math inline">\(x\)</span> is the set of all records in <span class="math inline">\(A\)</span>, extended with attributes of <span class="math inline">\(B\)</span> where applicable (for records that don't match a record in <span class="math inline">\(B\)</span>, the record is extended with attributes of <span class="math inline">\(B\)</span> all with value null) - records of <span class="math inline">\(A\)</span>, regardless of whether they have matches in <span class="math inline">\(B\)</span> or not. A <strong>right join</strong> is the same but with <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> flipped around.</p>
-<p>An <strong>outer join</strong> on <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> over <span class="math inline">\(x\)</span> is the set of all records in <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, extended with attributes of each other where <span class="math inline">\(x\)</span> matches up - records of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, regardless of whether they have matches or not.</p>
-<p>A <strong>cross join</strong> on <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is simply <span class="math inline">\(A \times B\)</span>, the Cartesian product.</p>
-<p>In SQL, we can have subqueries that allow us to query other things in our queries. For example, <code>SELECT DISTINCT employee_id, name FROM EMPLOYEES WHERE employee_id IN (SELECT employee_id FROM BENEFIT_PLANS WHERE type = &quot;fixed&quot;)</code> - employees with at least one fixed benefit plan (here, we could also just use a join).</p>
-<p>SQL can easily compute the answer for existential quantifiers, by querying to find something. To compute the answer for universal quantifier, we simply use <span class="math inline">\(\forall x. y \equiv \neg \exists x. \neg y\)</span>. For example, <code>SELECT * FROM A WHERE NOT EXISTS (SELECT * FROM B WHERE x = 5 AND y = A.y)</code> selects all entries of <code>A</code> corresponding to entries in <code>B</code> such that none of them have <code>x</code> equal to 5.</p>
-<p><code>UNIQUE(...)</code> returns true if there are no duplicate items in <code>...</code>. <code>EXISTS(...)</code> returns true if there are any items in <code>...</code>.</p>
-<h1 id="section-16">23/10/15</h1>
-<p>In SQL, we can rename schemes using <code>AS</code>: <code>SELECT * FROM A AS B WHERE B.x = 5</code>. This is very useful when we have subqueries that operate on the same tables.</p>
-<p>Find suppliers that supply every part: <code>SELECT name FROM SUPPLIER WHERE NOT EXISTS (SELECT * FROM PART WHERE NOT EXISTS (SELECT * FROM SUPPLIER_PART WHERE supplier_id = SUPPLIER.supplier_id AND part_id = PART.part_id))</code>. Basically, <code>SELECT * FROM PART WHERE NOT EXISTS (SELECT * FROM SUPPLIER_PART WHERE supplier_id = SUPPLIER.supplier_id AND part_id = PART.part_id)</code> means &quot;select parts which are not supplied by the given supplier&quot;, so the expression overall means &quot;select supplier names for which there are no parts that are not supplied by the given supplier&quot;.</p>
-<p>The strategy for solving this kind of problem is to first write the query using formal logic, and then transform that into SQL. For the above example, we could have written the problem first as <span class="math inline">\(\set{s_{\text{name}}, s \in \text{SUPPLIER} \middle| \forall p \in \text{PART}, \exists r \in \text{SUPPLIER_PART}, s_{\text{supplier_id} = r_{supplier_id} \wedge p_{\text{part_id} = r_{part_id}}}\)</span> - the suppliers for which for every part, they supply those parts.</p>
-<p>There are also aggregate functions over tables to allow us to obtain aggregate values such as sum, average, and count, which is something that relational algebra cannot do. For example, <code>COUNT(SOME_EXPR)</code> and <code>COUNT(DISTINCT SOME_EXPR)</code> is the number of values/distinct values in <code>SOME_EXPR</code> (which can be an expression like <code>passed_amount + failed_amount</code>), and <code>SUM(SOME_EXPR)</code> and <code>AVG(SOME_EXPR)</code> obtain the sum and average.</p>
-<p>We can also group tuples together using <code>GROUP BY</code>: <code>SELECT part_id, SUM(quantity_available) FROM SUPPLIER_PART GROUP BY part_id</code> (the attributes in the <code>GROUP_BY</code> clause <strong>must uniquely identify each resulting group</strong>). Additionally, we can use the form <code>GROUP BY SOME_ATTRIBUTES HAVING SOME_EXPR</code>, such as <code>GROUP BY part_id HAVING COUNT(*) &gt; 2</code> would only show those parts where there are at least 3 suppliers for each.</p>
-<p>List the ID and average ratings for suppliers that supply at least one part that isn't supplied by any other supplier: <code>SELECT supplier_id, AVG(rating) FROM SUPPLIER GROUP BY supplier_id HAVING EXISTS (SELECT * FROM SUPPLIER_PART WHERE supplier_id = SUPPLIER.supplier_id AND part_id NOT IN (SELECT part_id FROM SUPPLIER_PART WHERE supplier_id != SUPPLIER.supplier_id))</code>. Here, <code>SELECT part_id FROM SUPPLIER_PART WHERE supplier_id != SUPPLIER.supplier_id</code> are all the part IDs for parts not supplied by the given supplier, and <code>SELECT * FROM SUPPLIER_PART WHERE supplier_id = SUPPLIER.supplier_id AND part_id NOT IN (SELECT part_id FROM SUPPLIER_PART WHERE supplier_id != SUPPLIER.supplier_id)</code> are all the supplier parts for which no supplier other than the given one supplies the part.</p>
-<p>In SQL, <code>FROM SOME_TABLES</code> generates the data sets, <code>WHERE SOME_CLAUSES</code> filters data sets, <code>GROUP BY SOME_ATTRIBUTES</code> aggregates data sets, <code>HAVING SOME_CLAUSES</code> filters aggregated data sets, <code>SELECT SOME_VALUES</code> transforms data sets, <code>ORDER BY SOME_ATTRIBUTES</code> sorts data sets, and <code>LIMIT SOME_LIMIT</code>/<code>OFFSET SOME_OFFSET</code> filters specific ranges of entries in data sets.</p>
-<h1 id="section-17">26/10/15</h1>
-<p>Midterm covers everything right up to ut not including relaitonal algebra. It takes place on November 6 and I will be writing in M3 1006.</p>
-<p>We insert tuples into the table using <code>INSERT INTO SOME_TABLE_OR_VIEW VALUES(...)</code> to insert explicit values or <code>INSERT INTO SOME_TABLE_OR_VIEW SELECT ...</code> to insert all selected tuples.</p>
-<p>We delete tuples from the table using <code>DELETE SOME_TABLE WHERE ...</code> or <code>DELETE SOME_TABLE</code> to delete all elements.</p>
-<p>A <strong>view</strong> is a virtual table, derived from one or more base tables/views. This table doesn't actually physically exist in the database, but is computed dynamically from its definition in SQL. Basically, it's a schema defined in SQL whose elements are dynamically computed. Views can be queried but not updated, since their values are purely a function of their base tables/views.</p>
-<p>Named views can be created with <code>CREATE VIEW SOME_VIEW AS SOME_SUBQUERY</code>. For example, <code>CREATE VIEW S AS SELECT * FROM SUPPLIER WHERE volume &lt;= 20 WITH CHECK OPTION</code>. <code>WITH CHECK OPTION</code> disallows changes to <code>S</code> that modify records but don't modify the view itself - in the previous example, that means that we can't insert, update, or delete suppliers who have volume greater than 20.</p>
-<p>Operations on some views can't easily be translated into operations on their base tables. For example, for <code>CREATE VIEW X AS SELECT supplier_id, AVG(rating) FROM SUPPLIER</code> there is no unambiguous way to map changes to the view to <code>SUPPLIER</code>.</p>
-<p>A <strong>cursor</strong> is similar to a pointer for a set of records, a construct that allows records to be traversed over.</p>
-<p>Embedded SQL can be embedded by allowing host applications to perform queries by preprocessing SQL statements embedded in the host language using a special SQL compiler (statement level interface), or construct queries as strings in the host language and perform queries by calling into a library (call level interface).</p>
-<p>In this course we will use C as our host language and Oracle as our database.</p>
-<p>We can do statement level interface using the <code>exec sql</code> macro:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdio.h&gt;</span>
-<span class="ot">#include &lt;ctype.h&gt;</span>
-exec sql sqlca; <span class="co">// include the SQL communication area - a structure used for communicating between Oracle and C and storing member variables</span>
-<span class="dt">int</span> main() {
-    <span class="co">// declare SQL host-side variables to use with our application</span>
-    exec sql begin declare section; <span class="co">// host variables must be defined within a declare section</span>
-        VARCHAR customer_city[<span class="dv">21</span>]; <span class="co">// variable sized character array with space for the null terminator</span>
-        VARCHAR customer_name[<span class="dv">21</span>]; customer_float discount;
-        VARCHAR db_username[<span class="dv">11</span>], db_password[<span class="dv">11</span>];
-    exec sql end declare section;
-    
-    exec sql CONNECT :db_username IDENTIFIED BY :db_password; <span class="co">// host-side variables are referenced by adding a preceding colon</span>
-    exec sql DECLARE c_city CURSOR FOR select name, discount FROM CUSTOMERS WHERE city = :customer_city;
-    exec sql OPEN c_city;
-    exec sql WHENEVER NOT FOUND GO TO next; <span class="co">// do a jump when there are no more records</span>
-    <span class="kw">while</span> (TRUE) {
-        exec sql FETCH c_city INTO :customer_name, :customer_discount; <span class="co">// automatically jumps to `next` when there are no more entries to fetch</span>
-        customer_name.arr[customer_name.len] = &#39;\<span class="dv">0</span>&#39;;
-        printf(<span class="st">&quot;name: %s, discount: %f</span><span class="ch">\n</span><span class="st">&quot;</span>, customer_name.arr, customer_discount);
-    }
-    next:
-    <span class="co">// if we modified any records above, we would have needed a `exec sql COMMIT WORK` to the </span>
-    exec sql CLOSE c_city;
-    exec sql DISCONNECT;
-}</code></pre></div>
-<h1 id="section-18">28/10/15</h1>
-<p>Cursors can be insensitive using the <code>DECLARE c_city INSENSTIVE CURSOR</code>, which means that the cursor can't update records in the database since they make a local copy (this is more efficient, since the DBMS knows we are reading but not writing).</p>
-<p>Cursors can be scrollable or not (default is not), which means that the cursor can be read forward and backward - without scrollable, we can only read the next record and can't go backward.</p>
-<p>For dynamic SQL, we can prepare a query from a character string, and then execute it as many times as we want. In dynamic SQL, host variables don't need to be declared; instead, we can bind and retrieve values from <strong>dummy variables</strong> in the query.</p>
-<p>For example, we can execute a query with <code>exec sql EXECUTE IMMEDIATE &quot;SELECT * FROM CUSTOMER&quot;</code>. We can also prepare a statement and bind some variables:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">exec sql BEGIN DECLARE SECTION;
-    <span class="dt">char</span> *db_username = <span class="st">&quot;aaaa&quot;</span>;
-    <span class="dt">char</span> *db_password = <span class="st">&quot;bbbb&quot;</span>;
-    varchar statement[<span class="dv">80</span>];
-    varchar cust_name[<span class="dv">21</span>];
-exec sql END DECLARE SECTION;
-exec sql CONNECT :db_username IDENTIFIED BY :db_password;
-
-<span class="co">// prepare the statement</span>
-statement.len = sprintf(statement.arr, <span class="st">&quot;SELECT * FROM CUSTOMER WHERE name = :name&quot;</span>);
-exec sql PREPARE S FROM :statement;
-
-<span class="co">// create cursor</span>
-exec sql DECLARE c_city CURSOR FOR S;
-exec sql OPEN c_city USING :cust_name; <span class="co">// bind the variable :name to use :cust_name as its value</span>
-
-<span class="co">// execute the query here</span></code></pre></div>
-<p>JDBC is a call-level interface for SQL. In JDBC, we connect to the database, send SQL statements, and process the results.</p>
-<h1 id="section-19">30/10/15</h1>
-<h2 id="schema-analysis">Schema Analysis</h2>
-<p><strong>Schema analysis</strong> is the analysis of relational models - what makes one schema good, and another bad?</p>
-<p>In this course, <span class="math inline">\(R, X, Y, Z\)</span> refer to relation schemes, <span class="math inline">\(r\)</span> refer to a relation, <span class="math inline">\(s, t, u, v\)</span> refer to tuples in relation schemes, <span class="math inline">\(A, B, C, D, E\)</span> refer to attributes.</p>
-<p><span class="math inline">\(ABC\)</span> and other combinations of attributes represent the set of those attributes, <span class="math inline">\(\set{A, B, C}\)</span>. <span class="math inline">\(f, g, h\)</span> represent functional dependencies, while <span class="math inline">\(F, G, H\)</span> represent sets of functional dependencies.</p>
-<h1 id="section-20">2/11/15</h1>
-<p>Midterm covers everything up to foreign key contraints, slide 93.</p>
-<p>A <strong>functional dependency</strong> is a constraint between two sets of attributes in a relation <span class="math inline">\(R\)</span>, such that the value of one set of attributes combined with the tuples in <span class="math inline">\(R\)</span> fully specify the value of the other. A functional dependency is written as <span class="math inline">\(X \to Y\)</span> - the attributes <span class="math inline">\(X\)</span> and the tuples in <span class="math inline">\(R\)</span> fully specify the attributes <span class="math inline">\(Y\)</span>. We can write this as <span class="math inline">\(X\)</span> <strong>functionally determines</strong> <span class="math inline">\(Y\)</span>.</p>
-<p>Basically, <span class="math inline">\(X \to Y\)</span> means that <strong>knowing <span class="math inline">\(X\)</span> allows you to know <span class="math inline">\(Y\)</span></strong>, if you have <span class="math inline">\(R\)</span>.</p>
-<p>For example, if the customer's fee is $2 per book bought, and a table has a &quot;fee&quot; column and a &quot;books_bought&quot; column, there is a functional dependency between those columns - we can look up the fee from the books bought, and the books bought from the fee.</p>
-<p>For example, if an employees table has employee IDs and their names, then the names are functionally determined by employee IDs - we can look up a name from an employee ID and the records in the table.</p>
-<p>A relation <span class="math inline">\(r\)</span> <strong>satisfies</strong> <span class="math inline">\(X \to Y\)</span> if and only if when two tuples in <span class="math inline">\(r\)</span> have the same values for attributes in <span class="math inline">\(X\)</span>, they also have the same values for attributes in <span class="math inline">\(Y\)</span>. In other words, a relation satisfies a functional dependency if it has that functional dependency.</p>
-<ul>
-<li>If <span class="math inline">\(Y \subseteq X\)</span>, then <span class="math inline">\(X \to Y\)</span> is <strong>trivial</strong>.</li>
-<li>If <span class="math inline">\(R(A, B, C)\)</span> has <span class="math inline">\(\set{A} \to \set{B}\)</span> and <span class="math inline">\(\set{B} \to \set{C}\)</span>, then <span class="math inline">\(\set{A} \to \set{C}\)</span>.</li>
-</ul>
-<p>If <span class="math inline">\(F\)</span> (a set of functional dependencies) being satisfied implies that <span class="math inline">\(f\)</span> (a functional dependency) is satisfied, then <span class="math inline">\(F \models f\)</span> (<span class="math inline">\(F\)</span> <strong>logically implies</strong> <span class="math inline">\(f\)</span>). For example, <span class="math inline">\(\set{A \to B, B \to C} \models A \to B, B \to C, AC \to B, AB \to C, A \to C\)</span> (as well as all trivial functional dependencies).</p>
-<p>The <strong>closure of a set of functional dependencies</strong> <span class="math inline">\(F\)</span> is the set of all the functional dependencies it logically implies - <span class="math inline">\(F^+ = \set{X \to Y \middle| F \models X \to Y}\)</span>. Saying <span class="math inline">\(f \in F^+\)</span> is equivalent to saying <span class="math inline">\(F \models f\)</span>. Note that the size of <span class="math inline">\(F^+\)</span> grows exponentially with respect to the sixe of <span class="math inline">\(F\)</span>.</p>
-<p>The <strong>closure of a set of attributes</strong> <span class="math inline">\(X\)</span> is the set of all attributes that functionally depend on <span class="math inline">\(X\)</span> - <span class="math inline">\(X^+ = \set{A \middle| X \to A \in F^+}\)</span>. Note that <span class="math inline">\(X \to Y\)</span> is in <span class="math inline">\(F^+\)</span> if and only if <span class="math inline">\(Y \in X^+\)</span>.</p>
-<p>Two sets of functional dependencies <span class="math inline">\(F, D\)</span> are <strong>equivalent</strong> or <strong>cover</strong> each other if and only if they have the same closure - <span class="math inline">\(F^+ = G^+\)</span>. We write this as <span class="math inline">\(F \approx G\)</span>.</p>
-<p>A set of attributes <span class="math inline">\(X\)</span> is a <strong>candidate key</strong> of a relation scheme <span class="math inline">\(R\)</span> if and only if <span class="math inline">\(X \to R \in F^+\)</span> (all the attributes of <span class="math inline">\(R\)</span> functionally depend on <span class="math inline">\(X\)</span>) and there is no proper subset <span class="math inline">\(Y \subset X\)</span> such that <span class="math inline">\(Y \to R \in F^+\)</span>. Basically, a key is a minimal set of attributes that specifies a single record.</p>
-<p>A <strong>superkey</strong> is a superset of any key - a set of attributes that contains a key.</p>
-<p>Given, a set of attributes <span class="math inline">\(Y = \set{A_1, \ldots, A_n}\)</span>, <span class="math inline">\(F \models X \to Y\)</span> if and only if <span class="math inline">\(F \models X \to A_1, \ldots, F \models A_n\)</span>.</p>
-<p><span class="math inline">\(F\)</span> is a <strong>minimal cover</strong> if and only if all of the following are true:</p>
-<ul>
-<li>Every functional dependency in <span class="math inline">\(F\)</span> is of the form <span class="math inline">\(X \to \set{A}\)</span> where <span class="math inline">\(A\)</span> is an attribute (all the right hand sides are single attributes) - the size of the right hand side of each funcitonal dependency is minimized.</li>
-<li>There does not exist a <span class="math inline">\(X \to A\)</span> and a <span class="math inline">\(Z \subset X\)</span> such that <span class="math inline">\((F \setminus \set{X \to A}) \cup \set{Z \to A}\)</span> covers <span class="math inline">\(F\)</span> - the size of the left hand side of each functional dependency is minimized.</li>
-<li>No functional dependencies can be removed without changing the cover - the number of functional dependencies is minimized.</li>
-</ul>
-<h1 id="section-21">4/11/15</h1>
-<p>To compute the closure of an attribute set <span class="math inline">\(X\)</span>, <span class="math inline">\(X \to Y\)</span> is logically implied by <span class="math inline">\(F\)</span>:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> attribute_set_closure(X, F):
-    closure <span class="op">=</span> X <span class="co"># initially, the closure contains all the attributes of the functional dependency</span>
-    changed <span class="op">=</span> <span class="va">True</span>
-    <span class="cf">while</span> changed: <span class="co"># loop while the closure changes</span>
-        changed <span class="op">=</span> <span class="va">False</span>
-        <span class="cf">for</span> (left_side, right_side) <span class="op">in</span> F:
-            <span class="cf">if</span> left_side.issubset(closure) <span class="op">and</span> <span class="op">not</span> right_side.issubset(closure): <span class="co"># left side is part of closure and right side has attributes not in the closure</span>
-                closure <span class="op">+=</span> right_side <span class="co"># add all the new attributes to the closure</span>
-                changed <span class="op">=</span> <span class="va">True</span>
-    <span class="cf">return</span> closure</code></pre></div>
-<p>A <strong>decomposition</strong> of a relation scheme <span class="math inline">\(R\)</span> splits its attributes over multiple new relation schemes, possibly duplicating them. Formally, a decomposition of <span class="math inline">\(R\)</span> is <span class="math inline">\(set{R_1, \ldots, R_k}\)</span> where <span class="math inline">\(\operatorname{attributes}(R_1), \ldots, \operatorname{attributes}(R_k) \subseteq \operatorname{attributes}(R)\)</span> and <span class="math inline">\(\operatorname{attributes}(R_1) \cup \ldots \cup \operatorname{attributes}(R_k) = \operatorname{attributes}(R)\)</span>.</p>
-<p>For example, a relation <span class="math inline">\(\text{CAR}(\text{model}, \text{cylinders}, \text{origin}, \text{tax})\)</span> can be decomposed into <span class="math inline">\(\set{\text{CAR}(\text{model}, \text{cylinders}, \text{origin}), \text{TAX}(\text{origin}, \text{tax})}\)</span>.</p>
-<p>An attribute in a relation <span class="math inline">\(R\)</span> is <strong>prime</strong> if and only if it is in some candidate key of <span class="math inline">\(R\)</span>, and is <strong>nonprime</strong> otherwise. Finding all candidate keys is NP-complete, but in practice it is generally quite easy to at least find some of them.</p>
-<p>An attribute <span class="math inline">\(A\)</span> is <strong>fully dependent</strong> on a set of attributes <span class="math inline">\(X\)</span> if and only if <span class="math inline">\(X\)</span> is a minimal set of attributes that functionally determines <span class="math inline">\(A\)</span> - <span class="math inline">\(X \to A\)</span> and there does not exist a proper subset <span class="math inline">\(Z \subset X\)</span> such that <span class="math inline">\(Z \to A\)</span></p>
-<p>Let <span class="math inline">\(X \to Y\)</span> be in <span class="math inline">\(R\)</span> and <span class="math inline">\(Y \to X\)</span> not in <span class="math inline">\(R\)</span> (<span class="math inline">\(X\)</span> functionally determines <span class="math inline">\(Y\)</span>, but not the other way around). An attribute <span class="math inline">\(A\)</span> is <strong>transitively dependent</strong> on a set of attributes <span class="math inline">\(X\)</span> if and only if <span class="math inline">\(A \notin X \cup Y\)</span> and <span class="math inline">\(Y \to A\)</span> is in <span class="math inline">\(R\)</span> - <span class="math inline">\(A\)</span> can be determined from <span class="math inline">\(Y\)</span>, which can be determined from <span class="math inline">\(X\)</span>, but <span class="math inline">\(X\)</span> can't be determined from <span class="math inline">\(Y\)</span>.</p>
-<p>A relation <span class="math inline">\(R\)</span> is in <strong>1NF</strong> (first normal form) if and only if the domains of all attributes in <span class="math inline">\(R\)</span> are just atomic/simple/primitive values, and each attribute only has a single value from its domain.</p>
-<p>A relation <span class="math inline">\(R\)</span> is in <strong>2NF</strong> (second normal form) if and only if <span class="math inline">\(R\)</span> is in 1NF, and each nonprime attribute (attributes that are not part of any candidate keys) are fully dependent on every candidate key of <span class="math inline">\(R\)</span> - every candidate key is a minimal set of attributes that functionally determines <span class="math inline">\(A\)</span>.</p>
-<p>A relation <span class="math inline">\(R\)</span> is in <strong>3NF</strong> (third normal form) if and only if <span class="math inline">\(R\)</span> is in 2NF, and there are no nonprime attributes (attributes that are not part of any candidate keys) that are transitively dependent on any candidate key of <span class="math inline">\(R\)</span> - every nonprime attribute is not transitively dependent on any candidate key of <span class="math inline">\(R\)</span>.</p>
-<p>A relation <span class="math inline">\(R\)</span> is in <strong>BCNF</strong> (Boyce-Codd normal form) if and only if <span class="math inline">\(X \to \set{A}\)</span> and <span class="math inline">\(A \notin X\)</span>, then <span class="math inline">\(X\)</span> is a superkey of <span class="math inline">\(R\)</span> (<span class="math inline">\(X\)</span> contains a candidate key of <span class="math inline">\(R\)</span>). This is the usual form we aim for. Also, all relations with two attributes is in BCNF.</p>
-<p>A set of relations <span class="math inline">\(\set{R_1, \ldots, R_k}\)</span> is in 2NF or 3NF or BCNF if and only if each relation in it is in that normal form.</p>
-<h1 id="section-22">6/11/15</h1>
-<p>No class today - there's a midterm at 4:30PM!</p>
-<h1 id="section-23">9/11/15</h1>
-<p>A relation <span class="math inline">\(R\)</span> <strong>satisfies</strong> a set of functional dependencies <span class="math inline">\(F\)</span> if and only if, for all functional dependencies <span class="math inline">\(f \in F\)</span> over only those attributes in <span class="math inline">\(R\)</span>, <span class="math inline">\(R\)</span> satisfies <span class="math inline">\(f\)</span> - <span class="math inline">\(R\)</span> satisfies all applicable functional dependencies in <span class="math inline">\(F\)</span>.</p>
-<p>A decomposition <span class="math inline">\(U = \tup{R_1, \ldots, R_k}\)</span> of a relation <span class="math inline">\(R\)</span> is a <strong>lossless join decomposition</strong> with respect to <span class="math inline">\(F\)</span> if and only if for all <span class="math inline">\(R_i \in U\)</span> satisfying <span class="math inline">\(F\)</span>, <span class="math inline">\(R = \pi_{A_1}(R) * \ldots * \pi_{A_n}(R)\)</span> - we can recover the original relation by natural joining all the relations in the decomposition with each other. If we cannot recover this, then <span class="math inline">\(U\)</span> is a <strong>lossy join decomposition</strong>.</p>
-<p>Basically, if we have a decomposition <span class="math inline">\(U = \tup{R_1, R_2}\)</span> such that <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> satisfy <span class="math inline">\(F\)</span>, then it is lossless if <span class="math inline">\(R_1 * R_2 = R\)</span>. There is a theorem that says <span class="math inline">\(U = \tup{R_1, R_2}\)</span> is a lossless join decomposition if and only if either <span class="math inline">\((\operatorname{Attr}(R_1) \cap \operatorname{Attr}(R_2) \to R_1) \in F^+\)</span> or <span class="math inline">\((\operatorname{Attr}(R_1) \cap \operatorname{Attr}(R_2) \to R_2) \in F^+\)</span> - the common attributes of the relations must functionally determine at least one of the two relations.</p>
-<p>The <strong>chase algorithm</strong> is a polynomial time way to check if a decomposition is lossless or not. Given a decomposition <span class="math inline">\(U = \tup{R_1, \ldots, R_k}\)</span> of <span class="math inline">\(R\)</span>, and a set of functional dependencies <span class="math inline">\(F\)</span>:</p>
-<p>A decomposition <span class="math inline">\(U = \tup{R_1, \ldots, R_k}\)</span> or a relation <span class="math inline">\(R\)</span> where <span class="math inline">\(R\)</span> has functional dependencies <span class="math inline">\(F\)</span> and <span class="math inline">\(R_i\)</span> has functional dependencies <span class="math inline">\(F_i\)</span> is <strong>dependency-preserving</strong> if and only if <span class="math inline">\(F_1^+ \cup \ldots F_k^+ = F^+\)</span> - if the combined closures of functional dependencies of all the relations in the decomposition is the same as the closure of the functional attributes of the original relation.</p>
-<p>For example, consider a relation <span class="math inline">\(\text{SUPPLIER}(\text{SUPPLIER_ID}, \text{CITY}, \text{STATUS})\)</span> with functional dependencies <span class="math inline">\(\text{SUPPLIER_ID} \to \text{CITY}\)</span> and <span class="math inline">\(\text{CITY} \to \text{STATUS}\)</span>. One possible decomposition of this is <span class="math inline">\(U = \tup{\tup{\text{SUPPLIER_ID}, \text{CITY}}, \tup{\text{CITY}, \text{STATUS}}}\)</span>, and another is <span class="math inline">\(V = \tup{\tup{\text{SUPPLIER_ID}, \text{CITY}}, \tup{\text{SUPPLIER_ID}, \text{STATUS}}}\)</span>.</p>
-<p>Clearly, <span class="math inline">\(U\)</span> preserves dependencies, while <span class="math inline">\(V\)</span> does not - there could be a case where <span class="math inline">\(\text{CITY} \to \text{STATUS}\)</span> is not the case, when two different SUPPLIER_IDs have different cities but the same STATUS. Also note that, <span class="math inline">\(U\)</span> is a lossy join decomposition while <span class="math inline">\(V\)</span> is a lossless join composition.</p>
-<p>There are actually algorithms that can generate 3NF, BCNF, lossless join decompositions, and dependency-preserving decompositions.</p>
-<h1 id="section-24">11/11/15</h1>
-<h2 id="transactions">Transactions</h2>
-<p>Consider a banking app. The following code might be used for a transfer:</p>
-<pre><code>read source account
-subtract amount to transfer
-write source account
-read target account
-add amount to transfer
-write target account</code></pre>
-<p>This is a very poor way of going about data management. For example, if a power failure occurs right after <code>write source account</code>, the amount to transfer is simply lost, and the database is left in an <strong>inconsistent state</strong>. If the source account has an amount transferred into it between <code>read source amount</code> and <code>write source amount</code>, that transfer is lost.</p>
-<p>Suppose we have concurrent operations that both read the same thing, both process the read data in different ways, then both write it back to the same place. Clearly, one of the written values must be lost - this is the <strong>lost update problem</strong>.</p>
-<p>What if we're in the middle of a series of database operations, and we suddenly find that an error occurred? If we stopped in the middle of that series of operations, we might leave the database in an inconsistent state - we need the ability to <strong>rollback changes</strong>. Also, if we change written values in one series of operations from a concurrent one, even if we abort this one the changes made by the other concurrent operations should not be rolled back - the <strong>dirty read problem</strong>. Additionally, if other concurrent operations take place in the middle of this series of operations, they might see the intermediate values instead of the final result - the <strong>inconsistent analysis problem</strong>.</p>
-<p>A <strong>transaction</strong> is a logical unit of work Transactions should have the following characteristics (ACID compliance):</p>
-<ul>
-<li>Atomicity - a transaction is either fully executed, or not executed at all.</li>
-<li>Consistency - the database should always be in a consistent state (all constraints must be satisfied, data must be valid, etc.), and transactions should bring it from one consistent state to another.</li>
-<li>Isolation - concurrently executing transactions should not interfere with each other - each transaction should see a stable, non-externally-changed state.</li>
-<li>Durability - when completed, a transaction's changes should not be lost.</li>
-</ul>
-<p>Transactions only apply to writes, since we don't really need to worry about these issues when reading. Atomicity and consistency ensure that inconsistent states never happen, even in the event of power failures. Durability ensures that the lost update problem never manifests. Atomicity and isolation ensures that the dirty read problem never manifests. Isolation ensures that the inconsistent analysis problem never manifests.</p>
-<p>The typical workflow when using transactions is to begin a transaction, make some changes, them either <strong>commit</strong> the changes (successfully execute the transaction) or <strong>abort/rollback</strong> (undo all the changes made as if the transaction never occurred).</p>
-<p>Let <span class="math inline">\(T\)</span> be a set of transactions. A <strong>schedule</strong> <span class="math inline">\(S\)</span> of <span class="math inline">\(T\)</span> is a sequence of operations formed by merging the operations in each transaction in <span class="math inline">\(T\)</span> in the order they would be executed - that means interleaving them if run concurrently.</p>
-<p>Suppose one transaction modifies something, and then second, concurrent transaction reads that modified thing and writes something else based on that. If the first transaction is aborted for any reason, the second must be too, since it is based on data that is now rolled back. The rolling back of the second transaction is called a <strong>cascading rollback</strong>. A schedule avoids cascading rollbacks if and only if every transaction on the schedule never reads something that is written by an uncommited transaction.</p>
-<p>In the <strong>read before write model</strong> of transactions, the operations in transactions are read (obtaining an item's value), read/write (modifying an item based on its value), insert (add a new item), and delete (remove an existing item). From now on, we will use this model.</p>
-<p>A schedule <span class="math inline">\(S\)</span> is <strong>serial</strong> if and only if for each transaction in <span class="math inline">\(S\)</span>, all the steps execute consecutively - one transaction runs without interruption, then another, and so on, and no steps are interleaved.</p>
-<h1 id="section-25">13/11/15</h1>
-<p>In the read before write model, two schedules <span class="math inline">\(S_1, S_2\)</span> are <strong>view equivalent</strong> when the following are satisfied:</p>
-<ul>
-<li><span class="math inline">\(S_1, S_2\)</span> have the same transactions.
-<ul>
-<li>Let <span class="math inline">\(Q\)</span> be a data item read by a transaction <span class="math inline">\(T\)</span> in <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> (they must both have the same transactions, so <span class="math inline">\(T\)</span> must be in both of them).</li>
-</ul></li>
-<li>If <span class="math inline">\(T\)</span> reads the initial value of <span class="math inline">\(Q\)</span> in <span class="math inline">\(S_1\)</span>, <span class="math inline">\(T\)</span> also reads the initial value of <span class="math inline">\(Q\)</span> in <span class="math inline">\(S_2\)</span>.
-<ul>
-<li>In other words, we can't have another transaction modify <span class="math inline">\(Q\)</span> beforehand in one schedule but not another.</li>
-</ul></li>
-<li>If <span class="math inline">\(Q\)</span> was last written in step <span class="math inline">\(k\)</span> of another transaction <span class="math inline">\(T&#39;\)</span> in <span class="math inline">\(S_1\)</span>, then this is also the case in <span class="math inline">\(S_2\)</span>, and vice versa.</li>
-<li>If a transaction <span class="math inline">\(T\)</span> is the last one to write to a data item <span class="math inline">\(Q\)</span> in <span class="math inline">\(S_1\)</span>, then it is also the last one in <span class="math inline">\(S_2\)</span>, and vice versa.</li>
-</ul>
-<p>Some non-serial schedules are equivalent to serial schedules. A schedule is <strong>serializable</strong> if and only if it is serial or equivalent to some serial schedule.</p>
-<p>Let <span class="math inline">\(S\)</span> be a schedule. Two steps <span class="math inline">\(i, j\)</span> in <span class="math inline">\(S\)</span> <strong>conflict</strong> if and only if they are from different transactions, operate on the same data item, and at least one of the steps involves a write operation. In other words, these are <strong>the pairs of steps for which the order of the steps affects the result of the operation</strong>.</p>
-<p>For the read before write model, there is actually an algorithm that determines whether a schedule <span class="math inline">\(S\)</span> is conflict-serializable (this doesn't determine view-serializability):</p>
-<ol style="list-style-type: decimal">
-<li>Generate a <strong>precedence graph</strong> <span class="math inline">\(G\)</span> for the schedule.
-<ul>
-<li>A precedence graph is a directed graph where each vertex corresponds to a transaction in <span class="math inline">\(S\)</span>, and each edge from <span class="math inline">\(T_1\)</span> to <span class="math inline">\(T_2\)</span> corresponds to the fact that some step of <span class="math inline">\(T_1\)</span> is executed before and conflicts with some step of <span class="math inline">\(T_2\)</span>.</li>
-<li>In other words, the edges of the precendence graph represent that <span class="math inline">\(T_1\)</span> has a step that does a write to <span class="math inline">\(Q\)</span> before a step in <span class="math inline">\(T_2\)</span> that does a read/write to <span class="math inline">\(Q\)</span>, or <span class="math inline">\(T_1\)</span> does a read to <span class="math inline">\(Q\)</span> before a step in <span class="math inline">\(T_2\)</span> that does a write to <span class="math inline">\(Q\)</span>.</li>
-</ul></li>
-<li>Attempt to find a topological ordering of <span class="math inline">\(G\)</span> (see CS341 notes for topological ordering properties).
-<ul>
-<li>In other words, attempt to find an ordering of the vertices of <span class="math inline">\(G\)</span> such that if <span class="math inline">\(\tup{T_1, T_2}\)</span> is an edge, then <span class="math inline">\(T_2\)</span> comes after <span class="math inline">\(T_1\)</span> in the ordering.</li>
-</ul></li>
-<li>If a topological ordering cannot be found (this would be because <span class="math inline">\(G\)</span> contains a cycle), <span class="math inline">\(S\)</span> is not serializable.</li>
-<li>Otherwise, the topological ordering is an order of transactions that form an equivalent serial schedule.</li>
-</ol>
-<p>In real-world use, serializing schedules is NP-complete and isn't practical for scheduling transactions. Instead, we use locks in the <strong>read/write lock model</strong> to ensure that we don't change or read data when we shouldn't.</p>
-<p>Locking operations are managed by the lock manager, which implements:</p>
-<ul>
-<li>RLOCK (acquire read/shared lock): block writes to the locked item, until released. All writes to the item have to wait.</li>
-<li>WLOCK (acquire write/exclusive lock): block reads/writes from other transactions to an item, until released. The current transaction gets exclusive ability to read/write that item, while all other transactions have to wait.</li>
-<li>UNLOCK (release a shared or exclusive lock).</li>
-</ul>
-<h1 id="section-26">16/11/15</h1>
-<p>Read locks and write locks are mutually exclusive - they cannot both be acquired at the same time.</p>
-<p><strong>Livelock/starvation</strong> is when a transaction wants a lock, but can never get it because it keeps getting locked by other transactions first. This can be solved by using a lock request queue - when a transaction tries to acquire a lock on a locked item, it gets put in the lock request queue and eventually gets its turn.</p>
-<p>A <strong>deadlock</strong> is when transactions in a set of two or more transactions are each waiting to acquire a lock on an item that is locked by a different transaction in that set - A is waiting for Y while locking X, while B is waiting for X while locking Y. We can solve this by requesting all the locks at once, always locking items in a fixed order, or detecting deadlocks and aborting one of the deadlocked transactions.</p>
-<p>In the read/write lock model, two schedules <span class="math inline">\(S_1, S_2\)</span> are <strong>view equivalent</strong> when the following are satisfied:</p>
-<ul>
-<li><span class="math inline">\(S_1, S_2\)</span> have the same transactions.
-<ul>
-<li>Let <span class="math inline">\(Q\)</span> be a data item read by a transaction <span class="math inline">\(T\)</span> in <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> (they must both have the same transactions, so <span class="math inline">\(T\)</span> must be in both of them).</li>
-</ul></li>
-<li>If <span class="math inline">\(T\)</span> reads the initial value of <span class="math inline">\(Q\)</span> in <span class="math inline">\(S_1\)</span>, <span class="math inline">\(T\)</span> also reads the initial value of <span class="math inline">\(Q\)</span> in <span class="math inline">\(S_2\)</span>.
-<ul>
-<li>In other words, we can't have another transaction modify <span class="math inline">\(Q\)</span> beforehand in one schedule but not another.</li>
-</ul></li>
-<li>If <span class="math inline">\(T\)</span> in <span class="math inline">\(S_1\)</span> read-locks <span class="math inline">\(Q\)</span>, or <span class="math inline">\(T\)</span> write-locks <span class="math inline">\(Q\)</span> and the value of <span class="math inline">\(Q\)</span> read is last written by another transaction <span class="math inline">\(T&#39;\)</span> in <span class="math inline">\(S_1\)</span> at step <span class="math inline">\(k\)</span>, then this is also the case in <span class="math inline">\(S_2\)</span>, and vice versa.</li>
-<li>The final value of <span class="math inline">\(Q\)</span> is the same for all <span class="math inline">\(Q\)</span>.</li>
-</ul>
-<p>We can generate a serial schedule in the read/write lock model quite simply as well, also using a topological sort:</p>
-<ol style="list-style-type: decimal">
-<li>Generate a <strong>precedence graph</strong> <span class="math inline">\(G\)</span> for the schedule.
-<ul>
-<li>A precedence graph is a directed graph where each vertex corresponds to a transaction in <span class="math inline">\(S\)</span>.</li>
-<li>If a transaction <span class="math inline">\(T\)</span> read locks <span class="math inline">\(Q\)</span> and later <span class="math inline">\(T&#39;\)</span> write-locks <span class="math inline">\(Q\)</span>, then there is an edge <span class="math inline">\(\tup{T, T&#39;}\)</span>.</li>
-<li>If a transaction <span class="math inline">\(T\)</span> write locks <span class="math inline">\(Q\)</span> and later <span class="math inline">\(T&#39;\)</span> read-locks <span class="math inline">\(Q\)</span> before <span class="math inline">\(Q\)</span> is write-locked by a transaction other than <span class="math inline">\(T\)</span>, then there is an edge <span class="math inline">\(\tup{T, T&#39;}\)</span>.</li>
-<li>If a transaction <span class="math inline">\(T\)</span> write locks <span class="math inline">\(Q\)</span> and later <span class="math inline">\(T&#39;\)</span> write-locks <span class="math inline">\(Q\)</span>, then there is an edge <span class="math inline">\(\tup{T, T&#39;}\)</span>.</li>
-<li>In other words, an edge <span class="math inline">\(\tup{T, T&#39;}\)</span> means that <span class="math inline">\(T&#39;\)</span> has to wait because of <span class="math inline">\(T\)</span> locking a data item.</li>
-</ul></li>
-<li>If there is a topological ordering, then the transactions in that ordering form a serial schedule, otherwise there is no possible serial schedule.</li>
-</ol>
-<p>In <strong>two-phase locking</strong>, locks must always appear before unlocks within individual transactions. This divides the transaction into a <strong>growing phase</strong>, when we acquire all the locks, and a <strong>shrinking phase</strong>, when we release them. There is a theorem that says that <strong>schedules with transactions using two-phase locking are always serializable</strong>.</p>
-<p>What is a data item? In our models they are the smallest unit that we can lock - a single row.</p>
-<h1 id="section-27">18/11/15</h1>
-<p>A <strong>predicate lock</strong> is another type of lock that defines a set of satisfying rows (via a <strong>predicate</strong>), like those that have a matching attribute value. Predicate locks have read and write variants just like locks on data items.</p>
-<p>A <strong>phantom read</strong> is when two identical queries in the same transaction are executed, and they give different rows. This can still happen under our locking model because we can only lock rows that already exist - if new rows get added in between, they aren't included in the locks. These rows are called <strong>phantom rows</strong>:</p>
-<pre><code>transaction A: SELECT * FROM A ; select some rows, locking the selected rows
-transaction B: INSERT INTO A VALUES(...) ; add a row, this row is not locked by the select statement above, so we can freely insert
-transaction C: SELECT * FROM A ; the newly inserted row is selected here, in addition to the previously selected rows - there are more results than before, even though both queries are in transaction A</code></pre>
-<p>Predicate locks mitigate this because when a new row that matches the predicate gets inserted, it gets automatically locked and added to the predicate lock.</p>
-<p>A <strong>non-repeatable read</strong> is when reading a row twice result in two different read values - sort of like phantom reads, but the row's value is changed rather than new rows being added:</p>
-<pre><code>transaction A: SELECT sum(x) FROM A ; select some rows, locking the selected rows
-transaction B: UPDATE A SET x = 1 WHERE x != 1 ; the sum of all the values changes
-transaction C: SELECT sum(x) FROM A ; sum is changed when reading here</code></pre>
-<p>Non-repeatable reads can only occur if we don't lock properly - long duration read/write locks prevent these.</p>
-<p>Most SQL statements operate over a set of rows - this set of rows can be expressed as a predicate. When we run a statement, we can simply acquire a predicate lock for the SQL statement's predicate to ensure isolation.</p>
-<p>Two predicate locks <strong>conflict</strong> if they have a common row matching both predicates, and one of the predicate locks is a write. If two statements have predicate locks that don't conflict, they can be run concurrently.</p>
-<p>DBMSs can have their own nuances to locks, such as how they do locking based on rows/predicates. A short duration lock is held for the duration of one statement, a long duration lock is held for the rest of a transaction, and a medium duration lock is held for a duration in between these two.</p>
-<p>Ensuring that schedules are perfectly serializable when using predicate locks can get expensive, since the locks can cover a lot of rows, and reduce concurrency. To mitigate this, DBMSs allow us to trade isolation for performance - allowing/disallowing phantom reads and non-repeatable reads to allow more transactions to execute in parallel. This can be done with <code>SET TRANSACTION READ ONLY ISOLATION_LEVEL</code> or <code>SET TRANSACTION READ WRITE ISOLATION_LEVEL</code> where <code>ISOLATION_LEVEL</code> is one of:</p>
-<ul>
-<li><code>READ UNCOMMITTED</code>: transactions can read data at any point - non-repeatable reads, dirty reads, and phantom reads all possible. Reads ignore locks entirely, including write-locked rows.</li>
-<li><code>READ COMMITTED</code>: transactions can read data that has been committed by other transactions - non-repeatable reads and phantom reads all possible. Reads use short duration read locks.</li>
-<li><code>REPEATABLE READ</code>: transactions can read data that has been committed by other transactions and is not read/write locked - phantom reads possible. Reads use long duration read locks.</li>
-<li><code>SERIALIZABLE</code>: transactions can read data that has been committed by other transactions and is not predicate locked - all transactions are isolated. Reads use long duration predicate locks.</li>
-</ul>
-<p>Writes (update/insert/delete) always need to hold long duration predicate write locks (regardless of isolation level).</p>
-<h1 id="section-28">20/11/15</h1>
-<p>The <code>CURSOR STABILITY</code> isolation level is a non-standard isolation level that is somewhere between <code>READ COMMITTED</code> and <code>REPEATABLE READ</code>. This is the same as <code>READ COMMITTED</code>, but with additional locks for cursors.</p>
-<p>With <code>CURSOR STABILITY</code>, transactions can read data that has been committed by other transactions - repeatable reads while cursor isn't moved and phantom reads possible, Reads use short duration read locks, but accessing rows through cursor uses medium duration lock (locks rows until the cursor is moved).</p>
-<p>The purpose of isolation levels is to allow us to selectively give up certain guarantees in exchange for better concurrency. Therefore, we want to use the lowest (most concurrent) isolation level we can get away with - for each transaction, we should look at what other transactions might be running concurrently, and check whether we care about repeatable reads or phantom reads.</p>
-<p>Computers can crash at any time, for a number of reasons - hardware failure, software crashes, etc. Databases should be able to fail gracefully without any loss of data, in as many situations as possible.</p>
-<p>To model this, we will assume that we have access to <strong>stable storage</strong>, a block-based storage device that can be written to atomically, and all data on this device we will consider safe. Stable storage doesn't exist in real life - RAM is volatile, while hard drves can't be written atomically, and are prone to failure.</p>
-<p><strong>Transaction-local failure</strong> is a failure of a single transaction, like a write failure. <strong>System-wide failure</strong> is a failure of the entire system, like an operating system crash, <strong>Media failure</strong> is a failure of the non-volatile storage.</p>
-<h1 id="section-29">23/11/15</h1>
-<p>A <strong>block/physical record/page</strong> is an atomic unit of storage. When we open a file, we allocate a <strong>buffer</strong> to go with it, which buffers the blocks used in the file.</p>
-<p><span class="math inline">\(\operatorname{input}(X)\)</span> represents transferring a block containing data item <span class="math inline">\(X\)</span> from storage to the buffer. <span class="math inline">\(\operatorname{output}(X)\)</span> represents transferring a block containing data item <span class="math inline">\(X\)</span> from the buffer to storage.</p>
-<p><span class="math inline">\(\operatorname{read}(X, v)\)</span> represents setting a variable <span class="math inline">\(v\)</span> to the value of data item <span class="math inline">\(X\)</span>, in the buffer (automatically runs <span class="math inline">\(\operatorname{input}\)</span> to bring <span class="math inline">\(X\)</span> into the buffer if necessary). <span class="math inline">\(\operatorname{write}(X, v)\)</span> represents assigning the value of data item <span class="math inline">\(X\)</span> to <span class="math inline">\(v\)</span>, in the buffer (automatically runs <span class="math inline">\(\operatorname{input}\)</span> to bring <span class="math inline">\(X\)</span> into the buffer if necessary).</p>
-<p>These operations are usually managed by the OS, but we can also directly control them when necessary. For example, <span class="math inline">\(\operatorname{output}\)</span> can be done using a buffer flush.</p>
-<p>A <strong>log file</strong> is a sequential file stored on stable storage. Log file based techniques can let us recover from system failures at any time.</p>
-<p>In <strong>incremental logging with deferred update</strong>, whenever we need to make a write, we record the exact changes (transaction, data item, old value, new value) to the global log file, and whenever we start a trasaction or commit a transaction we record that operation, ensuring that no data items are <span class="math inline">\(\operatorname{output}\)</span> until all log file entries are <span class="math inline">\(\operatorname{output}\)</span>. After the system fails before log file entries are output, then we are guaranteed that the writes didn't go through either, since writes are always output after log file entries are output - the transaction didn't execute at all. After the system fails after log file entries are written and the writes didn't succeed, we can redo all the writes in the failed transaction by replaying all the writes in the log (this is called the <strong>RDU</strong> algorithm) - the transaction is executed from the log file entries. This ensures transactions either execute or don't, and if commited, are on stable storage - atomicity and durability.</p>
-<p>In <strong>incremental logging with immediate update</strong>, we do the same thing, but we only need to guarantee that no data items are <span class="math inline">\(\operatorname{output}\)</span> until its corresponding log file entries are <span class="math inline">\(\operatorname{output}\)</span> (rather than all log file entries needing to be output first). After the system fails at any time, we can rollback uncommited transactions by undoing all the writes of uncommited transactions in reverse order that they were written to the log, and then redoing all the writes of committed transactions that happened with or after the first uncommited transaction in order. This tends to work better than incremental logging with deferred update in terms of performance, since we can do log writes while also performing operations on the database.</p>
-<p>Searching through the entire log after a system failure can be slow, especially when the log gets longer To get around this, we use <strong>checkpoints</strong> - periodically, when the database is in a known good state (all modified data items and log entries are output), we can write a checkpoint log entry, which contains a list of uncommitted transactions. When recovering after a system failure, we can simply go back to the last checkpoint to get the transactions that we need to replay - there is no need to search through the entire log.</p>
-<p>We can also recover from media failures using log files. Periodically, when the database is in a known good state and no transactions are running, we can make a backup of the database onto stable storage (and afterwards add a log entry noting that the backup took place). After a media failure, we can restore the (possibly outdated) backup and replay transactions in the log to get the current version of the database.</p>
-<h1 id="section-30">25/11/15</h1>
-<p><strong>Database security</strong> is the act of protecting data against unwanted disclosure or leakage. This allows us to prevent potentially malicious users from being able to make changes or read secret data. Security is generally managed by the DBA (database administrator).</p>
-<p><strong>Discretionary access control</strong> is a security model in which users have <strong>privileges</strong>, which are granted and removed by a DBA. There are two types/levels of privileges - the account level (privileges independent of database schema, like creating tables/views), and relation/table level (privileges controlling access to individual tables/views). Every relation/table/view in the database has one and only one <strong>owner</strong> account, which has all privileges, and can grant any privileges to other accounts.</p>
-<p>Granting and revoking is itself a privilege, which means we can grant/revoke the ability for other users to grant/revoke. For example, account A can run <code>GRANT SELECT, INSERT ON EMPLOYEE TO B</code> allows account B to select/insert, while <code>GRANT SELECT, INSERT ON EMPLOYEE TO B WITH GRANT OPTION</code> allows B to additionally grant select/insert privileges to other accounts. If A then runs <code>REVOKE SELECT, INSERT ON EMPLOYEE FROM B</code>, B no longer has access, while if A runs <code>REVOKE SELECT, INSERT ON EMPLOYEE FROM B CASCADE</code>, all accounts granted select/insert privileges from B also have those privileges revoked. We can also grant/revoke on a single column, with <code>GRANT SELECT ON EMPLOYEE(SALARY) TO B</code>.</p>
+<p><span class="math">\[ \newcommand{\set}[1]{\left\{ #1 \right\}} \newcommand{\tup}[1]{\left\langle #1 \right\rangle} \newcommand{\abs}[1]{\left\lvert #1 \right\rvert} \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} \newcommand{\ceil}[1]{\left\lceil#1 \right\rceil} \newcommand{\mb}[1]{\mathbb{#1}} \newcommand{\rem}{\operatorname{rem}} \newcommand{\sign}{\operatorname{sign}} \newcommand{\imag}{\boldsymbol{i}} \newcommand{\dee}{\mathop{}\!\mathrm{d}} \newcommand{\lH}{\overset{\text{l'H}}{=}} \newcommand{\evalat}[1]{\left.\left(#1\right)\right|} \newcommand{\sech}{\operatorname{sech}} \newcommand{\spn}{\operatorname{Span}} \newcommand{\proj}{\operatorname{proj}} \newcommand{\prp}{\operatorname{perp}} \newcommand{\refl}{\operatorname{refl}} \newcommand{\magn}[1]{\left\lVert #1 \right\rVert} \newcommand{\rank}{\operatorname{rank}} \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]} \newcommand{\range}{\operatorname{Range}} \newcommand{\adj}{\operatorname{adj}} \newcommand{\cof}{\operatorname{cof}} \newcommand{\diag}{\operatorname{diag}} \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)} \]</span></p>
+<p>$body$ $for(include-after)$ $include-after$ $endfor$</p>
+<div class="license">
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" alt="Creative Commons License" /></a> This work by <a href="https://uberi.github.io/">Anthony Zhang</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright 2013-2017 Anthony Zhang.
+</div>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

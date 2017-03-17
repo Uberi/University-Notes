@@ -3,6 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="author" content="$author-meta$" />
   <title>CS349 | Anthony Zhang</title>
   <link rel="stylesheet" href="../css/base.css" type="text/css">
   <link rel="stylesheet" href="../css/note.css" type="text/css">
@@ -10,44 +11,6 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-  </style>
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -78,7 +41,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
     <span class="divider"></span>
-    <li><a href="/anthony-zhang.asc" class="info">GPG key</a></li>
+    <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
 <p style="display:none"><span class="math">\[
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -107,172 +70,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
-<h1 id="cs-349">CS 349</h1>
-<p>User interfaces.</p>
-<pre><code>Jeff Avery
-Section 001
-j2avery@uwaterloo.ca
-Website: https://www.student.cs.uwaterloo.ca/~cs349/s16/about.html</code></pre>
-<h1 id="section">2/5/16</h1>
-<p>All information is available on the course website.</p>
-<p>For the purposes of the course, a <strong>user interface</strong> is any place where a person expresses <strong>intention</strong> to an artifact, and the artifact presents <strong>feedback</strong> to the person. For example, the panel and the screen/beeper on a microwave is a user interface. In most user interfaces, there is a feedback loop between intention and feedback. We call this the <strong>feedback loop</strong>.</p>
-<p>An <strong>event</strong> is an observable occurrence or phenomenon, as well as a message representing the fact that this phenomenon occurred.</p>
-<p>An <strong>interface</strong> is what is presented to the user, such as the widgets and controls, much like the intention part of the feedback loop. An <strong>interaction</strong> is an action that the user invokes to perform a task, much like the intention part of the feedback loop.</p>
-<p>The important challenges in user interfaces and interaction design largely revolve around accounting for variability - users can have very different levels of expertise, and there are often a huge possible range of tasks to support. Well designed user interfaces empower the user, allowing poeple to do more with the same tools.</p>
-<p>This course covers designing and implementing user interfaces, with a focus on desktop and mobile apps. Most of the course will be abot the design and architecture of interfaces, with interaction design as a focus.</p>
-<p>Assignments are to be submitted using Git on your uWaterloo GitLab account. You should avoid posting assignments online until the course is over, after which you are free to post whatever you like. Make sure to log into your GitLab account before the next class, in order to get your account set up properly.</p>
-<h1 id="section-1">4/5/16</h1>
-<p>The X Windows system was one of the first ever standardized UNIX windowing systems. Invented in 1984, it is still being used today in various UNIX-ey systems. X runs as a separate component that the operating system starts and manages, and window managers/games/etc. communicate with it to display windows.</p>
-<p>Note that the X Windowing system only provides the windowing primitives, with no specified window manager. These primitives include window creation, input handling, and graphical functionality at a relatively low level. X is also responsible for routing input to the correct window, and making sure only one thing can change the video buffer at a time (since the graphics card can only accept one set of instructions at a time; this is the reason most modern user interfaces are single threaded).</p>
-<p>Most window decorations, like title bars and window borders, are handled by the window manager. The window manager controls the look and feel of windows, but not the contents of the application itself.</p>
-<p>The X Windows system was designed to work on a variety of displays, allow mirroring and extending displays, device independence, and even network transparency. It was first to standardize the overlapping and resizable window conventions we're used to today.</p>
-<p>X separates the user interface and the application - they can actually run on totally different machines, due to the network transparency mentioned previously. Basically, the client is the computer that runs the custom software, and the server is the computer that displays things to the user (intuitively, the server serves up windowing capabilities).</p>
-<p>Users express intent to the X server input system. The input systems then update the X clients, which in turn notify the X server output systems. Then, the results are presented back to the user. This can be thought of as an MVC implementation, where the client is the model, the input system is the controller, and the output system is the view.</p>
-<p>A typical X client application does the following:</p>
-<ol style="list-style-type: decimal">
-<li>Initialize the program.</li>
-<li>Connect to the X server.</li>
-<li>Initialize the X portion of the program.</li>
-<li>Do the event loop:
-<ol style="list-style-type: decimal">
-<li>Get the next input event from the X server (note that the server actually drives the program).</li>
-<li>Handle the event (and break the loop if it was an exit event).</li>
-<li>Do client work if necessary.</li>
-</ol></li>
-<li>Close connection to the X server.</li>
-<li>Uninitialize the program.</li>
-</ol>
-<p>Before windowing systems, we had terminal applications that would take up the entire screen. Windowing systems introduced a new concept: different applications can take up different parts of the screen, and they can all run independently, not having to worry about which parts of the screen they need to draw, how to move/resize themselves, and whether to accept input. For applications, X exposes a buffer for the application to draw into, and a stream of input events for the application to consume.</p>
-<p>These days, X is only used on Linux and BSDs - Windows and OS X have their own windowing systems and window managers, and are often not interchangable. However, there is still the fundamental need for the same functionality.</p>
-<p>In this course, we will be using Swing with Java. Swing has a different, simpler set of assumptions, and therefore is a lot easier to use for creating most modern applications. For example, modern architectures tend to run directly on the user's computer rather than on a mainframe accessed via a thin client. Here's a simple example:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import javax.swing.*;</span>
-
-<span class="kw">public</span> <span class="kw">class</span> TestWindow <span class="kw">extends</span> JFrame {
-    <span class="kw">public</span> <span class="fu">TestWindow</span>() {
-        <span class="kw">this</span>.<span class="fu">setTitle</span>(<span class="st">&quot;Test Window&quot;</span>);
-        <span class="kw">this</span>.<span class="fu">setDefaultCloseOperation</span>(JFrame.<span class="fu">EXIT_ON_CLOSE</span>);
-    }
-
-    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String args[]) {
-        TestWindow testWindow = <span class="kw">new</span> <span class="fu">TestWindow</span>();
-        testWindow.<span class="fu">setSize</span>(<span class="dv">400</span>, <span class="dv">300</span>);
-        testWindow.<span class="fu">setVisible</span>(<span class="kw">true</span>);
-    }
-}</code></pre></div>
-<h1 id="section-2">6/5/16</h1>
-<p>Review of DVCSs, plus a beginner's Git primer. Java review. Jeff confirms that the FOSS OpenJDK is okay for this course, contrary to what was stated on Piazza. The recommended system for building Java files is to just use Make.</p>
-<p>Some highlights:</p>
+<p>$if(toc)$</p>
+<div id="$idprefix$TOC">
+$toc$
+</div>
+<p>$endif$</p>
+<h1 id="lecture-notes-by-anthony-zhang.">Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
 <ul>
-<li>uWaterloo Gitlab instance is preferred, but you can technically also use, say, a GitHbu private repo. Assignments are still submitted via uWaterloo GitLab, however.</li>
-<li>Java passes the address of objects by value, which behaves a lot like pass by reference - we don't have to worry about pointer semantics.</li>
-<li>The Hotspot VM is one of the most advanced virtual machines available today, with many state of the art JIT and GC technologies. Java was one of the first mainstream languages to have a GC by default.</li>
-<li>Watch for scope - parameters of a method shadow instance variables, which shadow class variables. Access a shadowed instance variable with <code>this.VARIABLE</code>, and access a shadowed clsas variable with <code>CLASS_NAME.this.VARIABLE</code>.</li>
-<li>Java only has single inheritance, by design - interfaces should be used instead (interfaces don't have implementations, so we can avoid the diamond problem that we'd get with multiple inheritance). All classes implicitly inherit from <code>java.lang.Object</code>, which provides things like <code>o.clone()</code> and <code>o.toString()</code>.</li>
+<li><a href="/blog/" class="page">blog</a></li>
+<li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
+<li><a href="/resume.pdf" class="page">résumé</a></li>
+<li><a href="https://github.com/Uberi" class="contact">github</a></li>
+<li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
+<li><script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x65;&#x6d;&#x61;&#x69;&#108;'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
+<li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
+<li><a href="https://keybase.io/uberi" class="info">public key</a></li>
 </ul>
-<h1 id="section-3">9/5/16</h1>
-<p>More Java stuff. Here are some of the useful class libraries:</p>
-<ul>
-<li>The widget is the <del>powerhouse of the cell</del> building block of the GUI. It's a part of the interface that is relatively self contained, and has its own behaviour, like buttons, sliders, and containers.</li>
-<li>There are, as of this writing, 4 different sets of widget toolkits in Java. From oldest to newest, there's AWT (wraps native controls, but only the lowest common denominator), Swing (implements its own controls, very commonly used), SWT (wraps native controls, exposing a lot of OS-dependent functionality), and JavaFX (in development, for rich desktop/mobile apps).</li>
-<li>In this course we will be using Swing. However, Swing basically just extends AWT with a bunch of custom components. That means we will be using a lot of AWT as well. Note that Swing and AWT have very different event models, so our Swing techniques don't transfer over to AWT.</li>
-<li>The input event listeners like <code>MouseEventListener</code> are kind of bulky for most use cases. We generally want to use <code>MouseAdapter</code> (a class that provides empty implementations of the interface methods) for our listeners. We can also use anonymous, inline classes to shorten things together - this is recommended for everything in this course. Refer to the slides for examples.</li>
-<li><code>java.awt.Graphics</code> allows you to do custom graphics in components. Refer to the slides for examples.</li>
-</ul>
-<h1 id="section-4">11/5/16</h1>
-<p>The <strong>base window system</strong> manages where the window is located, overlapping windows, and various other things related to making multiple windows work well together. It also exposes a local coordinate system to the applications, so they can draw on the screen relative to, say, the top left corner of their window.</p>
-<p>Conceptually, there are 3 different modes of drawing - pixel-by-pixel, strokes, and regions. When we're drawing real UIs, there is often the need to reuse drawing properties, like colors, stroke width, and stroke style. In X, these reusable properties are called the Graphics Context (GC). When the client sends a graphics context to the user, the server draw all subsequent things using that context, often saving us from sending a lot of redundant information.</p>
-<p>When we have overlapping windows, X doesn't draw the parts underneath the covered windows. That means when we move a window, part of covered windows underneath it get revealed, and other parts get covered. X handles this with <strong>clipping</strong>. Whenever a new part of the window gets revealed, just that part gets redrawn. All of thi part can be automatically handled by X, which will ask the application to just draw the needed part.</p>
-<p>X does this using the <strong>painter's algorithm</strong> - draw things from background to foreground, progressively layering things on top of each other. In X, we can only repaint when we receive an event from X.</p>
-<p>When an event is received form the hardware, the base window system makes sure it gets timestamped, queued up, and then handed off to the right window, or to the window manager. Applications can either check if there are any events available, or get the next event off the queue, blocking if there are no events. Most X applications are therefore structured as event loops. Applications can also opt to not receive any events that it doesn't want to handle.</p>
-<p>The JVM is still an X application. When we create a window in Java, the JVM will start a new thread with the actual event loop, which handles all of the X stuff. That thread is controlled purely by the JVM.</p>
-<p>Animation is done by simply showing a sequence of images at a fast enough rate. We do this by using a loop that sleeps enough that it only runs one iteration every, say, 1/24 seconds, and do the animation calculations and repainting on each iteration.</p>
-<p>When graphics operations are slow enough, we might see flickers while the graphics operations are being executed. This is because when we do drawing in X, everything goes directly into the screen buffer. With <strong>double buffering</strong>, we can keep another, non-screen buffer around to actually draw on, and then swap the screen buffer and the background buffer after we're actually done drawing, effectively instantly updating the screen buffer. For X applications we must do this manually. In Java, double buffering is on by default (note that if a window is double buffered, all of the child windows must also be double buffered).</p>
-<p>Notes on Assignment 1: design patterns and MVC not required (though they will be for later assignments), and the simplest way to do graphics is to have a single canvas that paints everything. A <code>Timer</code> is a great way to make sure things run at a fixed interval. It's very important that drawing and game logic are independent.</p>
-<h1 id="section-5">13/5/16</h1>
-<p>In complex applications, widgets are often nested quite deep in a heirarchy this heirarchy is known as the <strong>interactor tree</strong>.</p>
-<p>When the windowing toolkit receives an event that depends on position (like mouse clicks), it needs to figure out which widget actually shold receive the event by walking down the tree, triggering events for widgets along the way down (this is known as <strong>top-down positional dispatch</strong>). Widgets can often decide whether the event should be passed on to children, handle the event, or ignore it.</p>
-<p>There's also <strong>bottom-up positional dispatch</strong>, which is the same thing, but we go one by one through the leaf widgets in the interactor tree, and then going up the tree if we find one, triggering events for widgets on the way up.</p>
-<p>Top-down positional dispatch is useful because a parent widget can enforce policies on its children. For example, if a toolbar gets disabled, we shouldn't also have to disable all of the children as well. Bottom-up positional dispatch is useful because the parent can have events triggered on it after the leaf widget, rather than before (which we have with top-down positional dispatch).</p>
-<p>Positional dispatch by itself isn't enough. Consider what happens when you drag a scrollbar, and let the mouse leave the bounds of the scrollbar while dragging - it should continue to change the scrollbar even through the cursor isn't strictly in the bounds of the scrollbar, at least until the mouse is released. Most windowing toolkits handle this with the concept of <strong>mouse focus</strong>. This essentially overrides positional dispatch in some special situations to refine UI behaviours.</p>
-<p>There's also <strong>keyboard focus</strong>, where one designated widget receives all keyboard events, and keyboard accelerators (keyboard shortcuts) that override all of these event handling mechanisms, at a window manager level.</p>
-<p>Originally, each X application has one main event loop to receive events from X. This worked, but wasn't very scalable for larger applications, and made it harder to organize code. Early Java gave every widget every event, and each widget had to implement its own event handling, which was even less scalable, though it did make it easier to organize code. The goal is to keep the event behaviour separate from the widgets themselves.</p>
-<p>Modern Java totally decouples the widget from the event handling. When we do <code>class X extends JPanel implements MouseMotionListener</code>, <code>JPanel</code> isn't depenent on <code>MouseMotionListener</code> in any way, while we can still handle event behaviours in an intuitive way. It's often also common and good practice to use an inner class that implements the listener interface, rather than the widget class itself implementing it.</p>
-<p>In web applications, we have the DOM, which is sort of like an interactor tree that's exposed to Javascript. Over various revisions of the DOM, we currently now have very fine-grained control over event propagation. Javascript events are propagated top-down, can be captured by a particular node, and then bubble back up again. Therefore, we can choose whether to handle events when they're bubbling down, or when they're bubbling up - we don't have to choose a particular dispatch style.</p>
-<p>In .NET, we have delegates, which are basically sequences of methods. We declare a delegate signature, declare a delegate for a certain event, and then add methods to call when that delgate is called.</p>
-<p>Input devices like pens and multitouch screens often feed data too fast for dispatch mechanisms to work. For things like drawing applications with high performance inputs, applications often need to access the hardware events directly.</p>
-<h1 id="section-6">16/5/16</h1>
-<p>A <strong>model</strong> is a mathematical representation of an object. Computer graphics is the representation and manipulation of models.</p>
-<p>A shape model is a model that includes all of the data needed to draw that model, often represented as an array of points. A widget can be considered a shape model. What Java actually provides is the ability to actually draw these models, and to test whether an event falls into a drawn shape.</p>
-<p>How do we tell if a poin is inside a polygon? For convex polygons, then we can use something like SAT. One of the simplest ways that works for any kind of polygon is to shoot a ray from any point to the edge of the screen, and check whether it intersected an even or odd number of lines. However, in this course, the polygon classes have better algorithms built in.</p>
-<p>Widgets in the interactor tree can be manipulated using <strong>affine transformations</strong>. This allows us to tell widgets how to draw themselves, and let widgets tell when we're clicking or tapping on them. Note that widgets are always drawn relative to the parent - to figure out the actual postion of a widget, we need to walk down the interactor tree, applying transformations in turn to get the final transformation of the target widget. For our purposes, an affine transformation is some combination of translations, rotations, and scalings.</p>
-<p>Translation is done simply by adding values to the coordinates of each shape point. Scaling can be done by multiplying the X and Y coordinates by scalars. Rotation can be done by applying <span class="math inline">\(\tup{x \cos \theta - y \sin \theta, x \sin \theta + y \cos \theta}\)</span> to every shape point.</p>
-<p>All affine transformations are linear functions of the original coordinates. As a result, affine transformations are closed - for any affine transformation of an affine transformation of any set of points, there exists a single affine transformation that these two transformations are equivalent to.</p>
-<p>2D affine transformations can be better represented using 2 by 2 matrices, since they are simply linear combinations of 2 variables. The advantage of this is that the matrices are associative under multiplication Also, GPUs and modern toolkits are optimised to work with this representation. As a result, a scale matrix is <span class="math inline">\(\begin{bmatrix} s_x &amp; 0 \\ 0 &amp; s_y \end{bmatrix}\)</span>, and a rotation matrix is <span class="math inline">\(\begin{bmatrix} \cos \theta &amp; -\sin \theta \\ \sin \theta &amp; \cos \theta \end{bmatrix}\)</span>.</p>
-<p>A translation matrix is simply <span class="math inline">\(\begin{bmatrix} 1 &amp; \frac{t_x}{y} \\ \frac{t_y}{x} &amp; 1 \end{bmatrix}\)</span> (when <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are nonzero). Since it doesn't work for coordinates like the origin, we can't, in general, represent translations as 2 by 2 matrices. Instead, we can use <strong>homogeneous coordinates</strong>. Basicaly, in addition to the X and Y component, we also have the W component. Basically, every coordinate now has infinite equivalent vectors for all different W values. The actual coordinate is simply the X and Y values divided by the W value.</p>
-<p>The advantage of transformations over homogeneous matrices is that the transformation matrix <span class="math inline">\(\begin{bmatrix} a &amp; b &amp; t_x \\ c &amp; d &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span> - all 2D transformation can be represented using these matrices.</p>
-<h1 id="section-7">18/5/16</h1>
-<p>When we're overriding methods like <code>paintComponent</code>, we should call <code>super.paintComponent()</code> before we do any drawing in the overridden method.</p>
-<p>Although matrix transformations are nice because they're associative when we multiply then, note that they aren't commutative - order matters a lot when applying transformations.</p>
-<p>The default coordinate system has the origin at the top left corner of the window, and increase in both axes as you move rightward and downward. Transformations actually change the coordinate system we're drawing in, so they apply to things we start drawing after changing the coordinate system.</p>
-<p>In Java, when we do a translation, we're <strong>shifting the canvas</strong> by the specified offsets, not the shapes themselves - if we translate by positive values, everything we draw goes upward and leftward. When we do a rotation, we're rotating the canvas - a positive rotation value results in a clockwise rotation. When we do a scale operation, we're stretching the canvas - a value greater than 1 in both axes results in a bigger shape than the original one.</p>
-<p>Rotations and scales are always about the origin - to rotate/scale about a particular point, we need to translate such that that point is at the origin, perform the rotation/scaling, then do the opposite translate operation to return the point to where it was originally. Since this is a bit of a hassle, it's generally best to simply draw shapes at the origin to begin with, and move them into place using transformations.</p>
-<p>We can also save and restore the current transformation matrix using <code>someGraphics2D.getTransform()</code>, and restore it later with <code>someGraphics2D.setTransform(someTransform)</code>. This is useful for things like undoing a sequence of transformations without having to apply all of the inverse transformations.</p>
-<h2 id="scenes">Scenes</h2>
-<p>The scene graph is actually a tree, and allows us to represent heirarchical objects with relative coordinate systems for each objects with respect to its parent in the tree.</p>
-<p>Consider the drawing of an arm. Without a scene graph, each time we transformed the upper arm, we'd have to manually recompute the transformations for the lower arm, hand, etc., which is a big hassle. Instead, we could maintain an affine transformation for each object, and child objects would get drawn with that transformation in place:</p>
-<ol style="list-style-type: decimal">
-<li>Component draws itself using its affine transform.</li>
-<li>For each child object:
-<ol style="list-style-type: decimal">
-<li>Save the current affine transform.</li>
-<li>Do any other transforms necessary, on top of the existing transforms - multiply the current transform with the transforms needed by the child object.</li>
-<li>Recursively do all of the steps here for the child object.</li>
-<li>Restore the affine transform saved earlier.</li>
-</ol></li>
-</ol>
-<p>With a scene graph, each part of the arm only needs to consider its transformation relative to its parent - the lower arm only needs to care about where it is relative to the upper arm, the hand only needs to care about where it is relative to the lower arm, and so on.</p>
-<p>An <strong>inside test</strong> is a test for whether a point is inside a shape. Without a scene graph, this is simple because we know exactly where every shape is relative to the global coordinate space. With a scene graph, this is more difficult because shapes only know where they are relative to their parents. When we're doing testing whether the point is inside each shape, the usual solution is to transform the point into each shape's coordinate space, using the matrix inverse of the transformation.</p>
-<h1 id="section-8">20/5/16</h1>
-<p>Midterm is in 3 weeks. It's going to cover everything up until the midterm.</p>
-<h2 id="the-model-view-controller-mvc-pattern">The Model-View-Controller (MVC) Pattern</h2>
-<p>MVC is useful because we can have multiple views of loosely coupled data models. For example, in Powerpoint the . When one view gets changed by the user, or if the model changes, we want everything else updated automatically, in order to get a single true representation of our data.</p>
-<p>MVC is a pattern that decouples input handling (controller), data representation/manipulations (model), and presentation (view). When the user expresses intent to the controller, the controller takes that input, and uses it to change the model. When the model changes, it notifies the view, which then updates what is shown to the user.</p>
-<p>Ideally, the controller knows about the model (the controller calls into a public interface in the model), the view knows about the model (the view grabs all of the model's data and presents it), but the model doesn't know about the views (the model only has the view's interface, not a reference to the actual views themselves - this means we can swap out views arbitrarily).</p>
-<p>For example, for Siri, the part that converts speech to intents is the controller, the part that actually retrieves data and performs actions is the model, and the part that displays results is the view.</p>
-<p>Although the view knows about the model, the model doesn't know about the view. That means in general, the model should simply notify that it has changed, and the view should pull in all of the data it needs and reload everything, rather than having the model say exactly what changed and have the view update things selectively. This is because making sure things like cascading dependencies and other things are updated correctly in the view is hard, and should be the model's job. However, there are occasionally situations where we would want granular updates, such as when reloading the view would be very expensive.</p>
-<p>Even though the view shouldn't have anything to do with the controller, in Java, widgets like buttons act like both views (because they display things) and controllers (because they handle input). So as a comprimise, we generally treat things like buttons as a view, and for its listeners we'll just change the model directly as if the button was a controller. This is a hack, but it's necessarily for most modern UI toolkits. Additionally, this means we have to implement listener interfaces in the controller. Because this forces us to tightly couple the controller and view, it's common to just fold the controller into the view, which then knows about and updates the model, while the model doesn't know about the view/controller.</p>
-<p>The reason that we still have models at all is to ensure that we can have multiple views/controllers that work over a single data source (the model). Additionally, separating the model from everything else allows us to swap out different views as needed, such as changing a desktop UI for a smartphone UI. This also makes testing a lot easier, since we can just test each part separately at its interface.</p>
-<p>In this course, we will be following that convention, and combining the controller in the view. The model will be loosely coupled to this view/controller using the observer pattern.</p>
-<p>In Java, the model will keep a list of objects that implement the view interface, which are the views that rely on the model. This is to ensure that we can update the views properly when the model changes. Note that the model doesn't know anything about those view objects besides what's implemented in the view interface; it just tells the views that it's changed.</p>
-<p>The MVC pattern is an instance of the observer pattern, where the model is the subject, and the view is the observer. Java doesn't have MVC classes built in, but it does have classes for the bbserver pattern. When implementing MVC, we can save some work by using <code>java.util.Observable</code>.</p>
-<h1 id="section-9">25/5/16</h1>
-<p>While heavyweight widgets are nice because they have a native look and feel, they often appear different and work differently on different platforms. In contrast, lightweight widgets are nice because we can ensure the UI looks the same across every platform and can be made to be very lightweight and optimised, but they look out of place among actually native widgets.</p>
-<p>A logical input device is a graphical component, defined by what their function is rather than what their physical form is. For example, locators (X/Y coordinates), buttons, numerical inputs, and so on. Logical input devices sort of have their own model (the properties and behaviours of the input device), view (the graphical part of it), and controller (the part that generates the events).</p>
-<p>We can think of a widget as a specific type of logical input device. For example, a button widget is sort of like a logical button input device (something that generates a push event). Another example is a slider or text field widget beinng a logical number input device (something that generates number change events).</p>
-<p>Basically, widgets have their own MVC architecture internally. Our application interfaces with the widget via its properties and events that it generates and accepts. Potentially, we can also subclass the widget and modify the model to implement new behaviours.</p>
-<p>For example, a label widget has no model, no events, and various properties that determine how it appears. The text is a property rather than a model because it doesn't change - models only contain things that we interact with.</p>
-<p>A button has no model, generates push events, and has various properties that control its appearance. A checkbox has a boolean as its model, generates change/check/uncheck events, and has various properties that control its appearance.</p>
-<h1 id="section-10">27/5/16</h1>
-<p>Although we could build layouts by positioning our widgets by hand at predetermined coordinates, our windows will often not be the same size, and our content should scale to match. To do this, widgets and layouts need to be flexible - they should be adaptable using layout managers.</p>
-<p>Swing has multiple layout managers such as grids, flows, and boxes. Some of the strategies applied are:</p>
-<ul>
-<li>Fixed layout: specify the coordinates of widgets explicitly. This is implemented with the null LayoutManager.</li>
-<li>Intrinsic size layout: each container's dimensions is determined entirely by the preferred size of its child widgets. This is implemented with the BoxLayout or FlowLayout LayoutManager.</li>
-<li>Variable intrinsic size layout: container's dimensions is determined by preferred size of its child widgets, rearranged by an arrangement algorithm associated with the contianer. This is implemented with the GridBagLayout and BorderLayout LayoutManager.</li>
-<li>Struts and springs layout: aspects of widgets are marked as springs/glue (expands to fill available space) or struts (does not change size), and glue is allowed to stretch/contract to fill the available space. This is implemented with the SpringLayout or BoxLayout LayoutManager.</li>
-<li>It is also possible to write custom LayoutManager classes that implemented custom behaviours for laying out widgets.</li>
-</ul>
-<h1 id="section-11">30/5/16</h1>
-<p>Struts are fixed size conponents. Springs are variable-size components that expand to fill space.</p>
-<p>Many programming languages support defining UIs in a markup language, in order to separate presentation from content. This arose out of the need for designers to be able to build UIs directly.</p>
-<p>Assignment 2 stuff: create a vector drawing application with save/load support using the MVC pattern.</p>
-<h2 id="design">Design</h2>
-<p>Usefulness is the ability for the interface to meet requirements and actually be practical for real use. Usability is the ability for users to efficiently and effectively do the tasks allowed by the UI.</p>
-<p>Devices and their interfaces are getting more complicated over time, but our cognitive capacity for remembering and figuring these interfaces out has more or less remained unchanged. As a result, modern UI design is focused on balancing usefulness and usability. A useful but non-usable interface is hard to work with, but can do everything we need to, while a non-useful but usable interface is really easy to pick up, but doesn't do what we need it to.</p>
-<p>A good interface should help users form simple, consistent mental models of the user interfaces. To do this, the UI should do exactly what the appearance suggests - a button should perform an action, and a toggle should change a state variable. Ideally, users should get feedback as soon as possible for the results and progress on their operations.</p>
-<p>Basically, an interface should strive to surprise the user as little as possible.</p>
-<h1 id="section-12">5/6/16</h1>
-<p>I dropped this course due to my injuries, as it became infeasible to continue going to class.</p>
+<p><span class="math">\[ \newcommand{\set}[1]{\left\{ #1 \right\}} \newcommand{\tup}[1]{\left\langle #1 \right\rangle} \newcommand{\abs}[1]{\left\lvert #1 \right\rvert} \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} \newcommand{\ceil}[1]{\left\lceil#1 \right\rceil} \newcommand{\mb}[1]{\mathbb{#1}} \newcommand{\rem}{\operatorname{rem}} \newcommand{\sign}{\operatorname{sign}} \newcommand{\imag}{\boldsymbol{i}} \newcommand{\dee}{\mathop{}\!\mathrm{d}} \newcommand{\lH}{\overset{\text{l'H}}{=}} \newcommand{\evalat}[1]{\left.\left(#1\right)\right|} \newcommand{\sech}{\operatorname{sech}} \newcommand{\spn}{\operatorname{Span}} \newcommand{\proj}{\operatorname{proj}} \newcommand{\prp}{\operatorname{perp}} \newcommand{\refl}{\operatorname{refl}} \newcommand{\magn}[1]{\left\lVert #1 \right\rVert} \newcommand{\rank}{\operatorname{rank}} \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]} \newcommand{\range}{\operatorname{Range}} \newcommand{\adj}{\operatorname{adj}} \newcommand{\cof}{\operatorname{cof}} \newcommand{\diag}{\operatorname{diag}} \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)} \]</span></p>
+<p>$body$ $for(include-after)$ $include-after$ $endfor$</p>
+<div class="license">
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" alt="Creative Commons License" /></a> This work by <a href="https://uberi.github.io/">Anthony Zhang</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright 2013-2017 Anthony Zhang.
+</div>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
