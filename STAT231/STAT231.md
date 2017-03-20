@@ -758,6 +758,34 @@ Note that the confidence interval for $\mu(x)$ is the confidence interval for th
 
 ;wip: prediction intervals
 
+# 20/3/17
+
+The simple linear regression model we looked at, where the response variates have Gaussian distributions that are functions of the explanatory variate, are in general called Gaussian response models.
+
+A **Gaussian response model** is a model where $Y_i \sim G(\mu(x_i), \sigma)$ for $1 \le i \le n$. In this model, $x_i$ is assumed to be a known constant for all $i$, and $E(Y_i) = \mu(x_i)$, while $\sqrt{\mathrm{Var}(Y_i)} = \sigma$ doesn't depend on any $x_i$.
+
+We can also write $Y_i = \mu(x_i) + R_i$, where $R_i \sim G(0, \sigma)$. Here $x_i$ is the deterministic component, while $R_i$ is the stochastic/error component. For model checking we mostly care about the error component.
+
+**Linear regression models** are Gaussian response models where $\mu(x_i)$ has the form $\beta_0 + \sum \beta_i x_i$. Here, the values of $\beta_i$ are **regression coefficients**, and the explanatory variates $x_i$ are also known as covariates.
+
+Linear regression models assume that:
+
+1. The Gaussian model is a goot fit for the response variates.
+2. $E(Y_i) = \mu(x)$ is a linear function of their corresponding $x_i$ values.
+3. Each $Y_i$ has a Gaussian distribution with a standard deviation that doesn't depend on the covariates $x_i$ (assumption of constant variance).
+
+We must always check the model assumptions. We can check property 2 using something like a scatter plot, but what about the other two? For these we can use **residuals** - $\hat r_i = y_i - \hat \mu_i$, where $\hat \mu_i = \hat \alpha + \hat \beta_i x_i$
+
+The idea behind residuals is that they're observations drawn from $R_i$, the error variables. These residuals are supposed to behave like a random variable $R_i \sim G(0, \sigma)$. Therefore, the sum of the residuals should be 0.
+
+Additionally, a **residual plot** containing $\hat r_i$ with respect to $x_i$. If the model assumptions hold, we should see a random scattering of points in a band around the horizontal $\hat r_i = 0$ line, with no obvious pattern. This lets us check if assumption 2 and 3 holds.
+
+Another type of residual plot, also used to check property 2 and 3, is to scatter plot $\hat r_i, \hat \mu_i$ together. We should also see a similar belt around the horizontal $\hat r_i = 0$ line, with no obvious pattern.
+
+A third type of residual plot is to QQ plot ;wip
+
+If there is a pattern for any of these, it suggests that the assumption that $E(Y_i) = \mu(x_i)$ might not be appropriate.
+
 ---
 
 My previous STAT231 notes follow:
