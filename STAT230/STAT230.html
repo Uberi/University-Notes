@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="author" content="$author-meta$" />
   <title>STAT230 | Anthony Zhang</title>
   <link rel="stylesheet" href="../css/base.css" type="text/css">
   <link rel="stylesheet" href="../css/note.css" type="text/css">
@@ -11,6 +10,7 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -70,33 +70,734 @@
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
-<p>$if(toc)$</p>
-<div id="$idprefix$TOC">
-$toc$
-</div>
-<p>$endif$</p>
-<h1 id="lecture-notes-by-anthony-zhang.">Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+<h1 id="stat230">STAT230</h1>
+<p>Probability.</p>
+<pre><code>Section 001
+Instructor: Dina Dawoud
+Office Hours: Monday, Wednesday 2:30PM-3:20PM in M3 3126</code></pre>
+<h1 id="section">5/5/14</h1>
+<p>Probability is a tool used to model uncertainty and variability, like size, weight, and height. It allows us to work with uncertainty, though it cannot eliminate it.</p>
+<h2 id="definition">Definition</h2>
+<p>We first specify the <strong>outcome/event</strong> that we are interested in that might occur in a particular setting. This setting is the <strong>experiment/process</strong>.</p>
+<p>For example, rolling a 2 on a 6-sided die has an outcome of 2 and rolling the die is the experiment.</p>
+<p>The <strong>sample space</strong> is the set of all possible outcomes. For example, the die has a sample set of <span class="math inline">\(S = \set{1, 2, 3, 4, 5, 6}\)</span>. We usually represent the sample space as <span class="math inline">\(S\)</span>.</p>
+<p>The <strong>classical definition</strong> of the probability of an event is the ratio of the number of ways the event can occur to the total number of outcomes in <span class="math inline">\(S\)</span>.</p>
+<p>However, this only works if all outcomes are equally likely to occur. In practice, this is not always the case.</p>
+<p>The <strong>relative frequency definition</strong> of the probability of an event is the fraction of times when the event occurs when we repeat the experiment a large number of times.</p>
+<p>For example, if we toss a coin a large number of times, the fraction approaches 50%. However, we cannot always repeat the experiment due to time and other constraints. Additionally, we have to keep the setting exactly the same.</p>
+<p>We generally mean that we repeat the experiment an infinite number of times. In practice, we often settle for a lot less.</p>
+<p>The <strong>subjective definition</strong> of the probability of an event is the confidence of the person making the statement that the event will occur. Often, this is based on the person's experiences.</p>
+<h3 id="probability-model">Probability model</h3>
+<ol style="list-style-type: decimal">
+<li>Identify the experiment and the events of interest.</li>
+<li>Define the sample space <span class="math inline">\(S\)</span> of the random experiment.</li>
+<li>Define the subset of the sample space to which we can assign probabilities.</li>
+<li>Assign the probabilities to events somehow.</li>
+</ol>
+<p>A <strong>discrete sample space</strong> is one where there is a finite number of simple events.</p>
+<p>A <strong>simple event</strong> is an event that is made up of only one outcome, synonymous with outcome, like rolling a die and getting 2.</p>
+<p>A <strong>compound event</strong> is an event made up of more than one outcome, like rolling a die and getting an even number (outcomes 2, 4, and 6 trigger the event).</p>
+<p>Let <span class="math inline">\(S = \set{a_1, \ldots, a_n}\)</span>. Let <span class="math inline">\(P(a_i)\)</span> be the probability of the outcome <span class="math inline">\(a_i\)</span> taking place. Then <span class="math inline">\(0 \le P(a_i) \le 1\)</span> and <span class="math inline">\(\sum_{i = 1}^n P(a_i) = 1\)</span>.</p>
+<p>The function <span class="math inline">\(P(x)\)</span> is the <strong>probability distribution</strong> on <span class="math inline">\(S\)</span>.</p>
+<p>For a die, <span class="math inline">\(P(a_i) = \frac 1 6\)</span>.</p>
+<p>When we write <span class="math inline">\(P(a, b, c)\)</span>, we mean the probability of either <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, or <span class="math inline">\(c\)</span> occurring.</p>
+<p>The <strong>odds</strong> of an event <span class="math inline">\(x\)</span> occurring is <span class="math inline">\(\frac{P(x)}{1 - P(x)}\)</span>. So odds of 3:1 is a 25% probability. To convert odds like <span class="math inline">\(a\)</span>:<span class="math inline">\(b\)</span> to a probability, we simply do <span class="math inline">\(P(x) = \frac b {a + b}\)</span>.</p>
+<h1 id="section-1">7/5/14</h1>
+<p>If we toss a coin twice, what is the probability of getting exactly one heads?</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(S = \set{(Tails, Tails), (Tails, Heads), (Heads, Tails}, (Heads, Heads)\)</span>. Let <span class="math inline">\(A\)</span> be the event of getting one heads.<br />
+Clearly, each outcome is equally likely, so occurs 25% of the time.<br />
+We care about two of the outcomes, <span class="math inline">\((Tails, Heads)\)</span> and <span class="math inline">\((Heads, Tails)\)</span>.<br />
+So the probability of exactly one heads is <span class="math inline">\(P(A) = \frac{Event Outcomes}{Total Outcomes} = \frac{2}{4} = \frac{1}{2}\)</span>.<br />
+Alternatively, if we were to use <span class="math inline">\(S = \set{0 Heads, 1 Heads, 2 Heads}\)</span>, each outcome would no longer be equally likely - it would be a mistake to say the probability is <span class="math inline">\(\frac{1}{3}\)</span>.<br />
+Essentially, we found the probability <span class="math inline">\(P(A) = P((Tails, Heads)) + P(Heads, Tails)\)</span>.</p>
+</blockquote>
+<p>What is the probability that the sum of two dice rolls is 5?</p>
+<blockquote>
+<p>Clearly, there are <span class="math inline">\(6 \times 6 = 36\)</span> possible outcomes, all equally likely. Basically, <span class="math inline">\(S = \set{(1, 1), \ldots, (6, 6)}\)</span>. Let <span class="math inline">\(A\)</span> represent the event of the sum being 5.<br />
+Clearly, the combinations resulting in a total of 5 are <span class="math inline">\((1, 4), (2, 3), (3, 2), (4, 1)\)</span>.<br />
+Since there are 4 outcomes, <span class="math inline">\(P(A) = \frac{4}{36} = \frac{1}{9}\)</span>.<br />
+If two indistinguishable dice were used, then we could no longer tell which die was which. Since the pairs in <span class="math inline">\(S\)</span> are no longer ordered, we remove the duplicates to obtain 21 possibilities. However, they now do not all have the same probability of occurring - <span class="math inline">\((2, 2)\)</span> is only half as likely as <span class="math inline">\((1, 2)\)</span> since <span class="math inline">\((1, 2) = (2, 1)\)</span> when the dice are indistinguishable.</p>
+</blockquote>
+<h2 id="counting-techniques">Counting Techniques</h2>
+<p>When there are <span class="math inline">\(n\)</span> outcomes that are all equally likely, then the probability of each outcome is <span class="math inline">\(\frac{1}{n}\)</span>.</p>
+<p>If job A can be done in P ways and job B can be done in Q ways, then we can do either job A or job B in <span class="math inline">\(P + Q\)</span> ways. Here, &quot;or&quot; becomes addition. For example, the probabiity of getting heads or tails is <span class="math inline">\(P(Heads) + P(Heads) = \frac 1 2 + \frac 1 2 = 1\)</span></p>
+<p>If job A can be done in P ways, and for each of those P ways, job B can be done in Q distinct ways, then we can do both job A and B in <span class="math inline">\(p \times q\)</span> ways. For example, <span class="math inline">\(P((Heads, Heads)) = P(Heads) \times P(Heads) = \frac 1 2 \times \frac 1 2 = \frac{1}{4}\)</span>.</p>
+<p>Sampling <strong>with replacement</strong> means that every time we select an object for sampling, we simply put it back into the population, so we could potentially sample it again.</p>
+<p>This means that what we get on each selection will not affect subsequent selections. For example, a coin flip has both sides of the coin replaced after each sample, so there is always the same probability of getting heads or tails.</p>
+<p>Sampling <strong>without replacement</strong> means that after selecting an object, we do not put it back. Therefore, an object can only be selected at most once.</p>
+<p>This means that what we get on each selection will influence sebsequent selections and is influenced by previous selections. For example, sampling genders of students from a classroom without replacement results in a different probabilities of choosing a certain gender.</p>
+<p>Sampling without replacement has a big effect on small samples, but for larger samples its effect becomes negligible.</p>
+<p>Many problems have sample spaces that are a set of arrangements - permutations. <span class="math inline">\(n^{(r)} = \frac{n!}{(n - r)!}\)</span> means &quot;<span class="math inline">\(n\)</span> to <span class="math inline">\(r\)</span> factors&quot; and is the number of <span class="math inline">\(r\)</span>-permutations - arrangements of length <span class="math inline">\(r\)</span> of the <span class="math inline">\(n\)</span> elements without duplicates. This is often also represented as <span class="math inline">\(n^{(r)} = {}_n\operatorname{P}_r\)</span>.</p>
+<p>For example, consider a set of 20 people's birthdays:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(S\)</span> is a set containing 20 dates (each one of 365 days), so there are <span class="math inline">\(365^{20}\)</span> outcomes.<br />
+What is the probability of everyone having a different birthdays? Clearly, everyone has a different birthday if and only if the ordered birthdays are a 20-permutation of <span class="math inline">\([365]\)</span>. This is because the 20-permutations account for all possible sequence of <span class="math inline">\([365]\)</span> where all the dates are unique.<br />
+Therefore, there are <span class="math inline">\(365^{(20)}\)</span> possible outcomes, and since they are all equally likely, the probability is <span class="math inline">\(\frac{365^{(20)}}{365^{20}} \approxeq 0.59\)</span>.</p>
+</blockquote>
+<h1 id="section-2">9/5/14</h1>
+<p>The factorial function grows extremely quickly and can be difficult to calculate for large numbers. Therefore, we have various approximations that help us do this more easily.</p>
+<p><strong>Stirling's approximation</strong> is <span class="math inline">\(n! \approxeq n^n e^{-n} \sqrt{2 \pi n}\)</span> or <span class="math inline">\(n! \approxeq \left(\frac n e\right)^n\sqrt{2 \pi n}\)</span>. This approximation is asymptotically equivalent to the factorial function - as <span class="math inline">\(n \to \infty\)</span>, the percentage error gradually decreases.</p>
+<p>The <strong>complement</strong> of an event <span class="math inline">\(A\)</span> is the opposite event - the event of <span class="math inline">\(A\)</span> not <strong>occurring</strong>. It is represented using <span class="math inline">\(\overline A\)</span> or <span class="math inline">\(A^C\)</span>. It is always true that an event occurs, or it does not occur, so <span class="math inline">\(P(A) + P(\overline A) = 1\)</span>.</p>
+<p>A 4-digit PIN code is selected with replacement. What is the probability that the number is even? What is the probability that it contains at least one &quot;1&quot;?</p>
+<blockquote>
+<p>Clearly, the sample space is <span class="math inline">\(S = \set{0000, \ldots, 9999}\)</span>, with 10000 possible outcomes.<br />
+Clearly, all possible outcomes are equally likely because the PIN codes are selected randomly.<br />
+Clearly, if the number is even, then the last digit must be in <span class="math inline">\(\set{0, 2, 4, 6, 8}\)</span>.<br />
+Clearly, there are 5 possible last digits, and the other three digits can be any of the ten digits.<br />
+So there are <span class="math inline">\(10 \times 10 \times 10 \times 5\)</span> possible outcomes, or <span class="math inline">\(5000\)</span>.<br />
+So the probability of an even number is <span class="math inline">\(\frac{5000}{10000}\)</span>, or 50%.<br />
+To find the probability of containing at least one &quot;1&quot; digit, we consider the cases where there is one &quot;1&quot; digit, two, three, or four.<br />
+Alternatively, we can consider all the numbers that contain no &quot;1&quot; digits - the complement of the number containing at least one &quot;1&quot;. This is a more efficient way of finding the answer.<br />
+Clearly, if there are no &quot;1&quot; digits, then every digit can be anything but &quot;1&quot;, so there are 9 possibilities. There are therefore <span class="math inline">\(9 \times 9 \times 9 \times 9 = 6561\)</span> possible PIN codes without any &quot;1&quot; digits.<br />
+Clearly, the event of having no &quot;1&quot; digits is the complement of the event of interest, so <span class="math inline">\(P(1 occurs) = 1 - P(1 does not occur)\)</span>. Since <span class="math inline">\(P(1 does not occur) = \frac{6561}{10000}\)</span>, the probability of a &quot;1&quot; occurring is 34.39%.</p>
+</blockquote>
+<p>Now we derived the formula for <span class="math inline">\(n \choose r\)</span>, read the MATH239 notes from yesterday to get the same material.</p>
+<h1 id="section-3">12/5/14</h1>
+<p><span class="math inline">\({n \choose r} = \frac{n!}{r!(n - r)!} = \frac{n^{(r)}}{r!}\)</span>.</p>
+<p>Given an event <span class="math inline">\(B\)</span>, <span class="math inline">\(P(B) = 1 - P(\overline B)\)</span>.</p>
+<p>Also, <span class="math inline">\(n^{(k)} = n(n - 1)^{(k - 1)}\)</span> for <span class="math inline">\(k \ge 1\)</span> and <span class="math inline">\({n \choose k} = {n \choose n - k}\)</span>.</p>
+<p>The Binomial theorem states that <span class="math inline">\((1 + x)^n = \sum_{k = 0}^n {n \choose k}x^k\)</span></p>
+<p>What is the probability that a random arrangement of the letters in &quot;STATISTICS&quot; begins and ends with S?</p>
+<blockquote>
+<p>Clearly, the total number of arrangements is <span class="math inline">\(10!\)</span>, since there are 10 letters.<br />
+Let <span class="math inline">\(W\)</span> be a permutation. Assume <span class="math inline">\(W\)</span> begins and ends with an S.<br />
+Then the remaining letters are &quot;TATISTIC&quot;, and there are <span class="math inline">\(8!\)</span> possible permutations of these letters.<br />
+Therefore, there are <span class="math inline">\(8!\)</span> event outcomes and <span class="math inline">\(10!\)</span> total outcomes, so the probability is <span class="math inline">\(\frac{8!}{10!} = \frac 1 {90}\)</span>.</p>
+</blockquote>
+<p>What are the unique anagrams of the letters of &quot;STATISTICS&quot;?</p>
+<blockquote>
+<p>Clearly, there are 3 S's, 3 T's, 1 A, 2 I's, and 1 C, with 10 letters total. Then there are <span class="math inline">\(10!\)</span> possible permutations.<br />
+Clearly, for each permutation, the S, T, and I letters can be swapped around without changing the anagram - it doesn't matter which S is first or second.<br />
+So there are <span class="math inline">\(3!\)</span> permutations representing the same anagram due to S, and for each of these a factor of <span class="math inline">\(3!\)</span> more due to T, and for each of these a factor of <span class="math inline">\(2!\)</span> more due to I.<br />
+So there are <span class="math inline">\(3! 3! 2!\)</span> duplicate permutations for each anagram, and therefore <span class="math inline">\(\frac{10!}{3! 3! 2!}\)</span> unique anagrams.</p>
+</blockquote>
+<p>If we have <span class="math inline">\(n_i\)</span> symbols of type <span class="math inline">\(i\)</span>, with <span class="math inline">\(n = n_1 + \ldots + n_k\)</span>, then the number of arrangements using <span class="math inline">\(n\)</span> symbols is <span class="math inline">\({n \choose n_1} \times {n - n_1 \choose n_2} \times {n - n_1 - n_2 \choose n_3} \times \ldots \times {n_k \choose n_k} = \frac{n!}{n_1! n_2! \cdots n_k!} = \frac{(n_1 + \ldots + n_k)!}{n_1! n_2! \cdots n_k!}\)</span>.</p>
+<h1 id="section-4">14/5/14</h1>
+<p>How many ways can the 4 aces in a deck of 52 cards all be adjacent?</p>
+<blockquote>
+<p>Assume the aces are all adjacent. Then we can consider the four aces as a single large unit.<br />
+Clearly, there are <span class="math inline">\(4!\)</span> ways to arrange these 4 aces within the unit.<br />
+Clearly, for each of these ways there are <span class="math inline">\(48!\)</span> ways to arrange the other 48 cards.<br />
+Clearly, there are 49 different places to insert the aces into the other cards.<br />
+So there are <span class="math inline">\(49 \times 4! \times 48!\)</span> ways the 4 aces can be adjacent.</p>
+</blockquote>
+<p>How many ways can one choose 13 cards from a deck and have two of them be aces?</p>
+<blockquote>
+<p>Clearly, there are <span class="math inline">\(52 \choose 2\)</span> ways to choose the two aces.<br />
+For each of these ways, there are <span class="math inline">\(50 \choose 11\)</span> ways to choose the other cards.<br />
+So there are <span class="math inline">\({52 \choose 2} {50 \choose 11}\)</span> ways.</p>
+</blockquote>
+<p>What is the probability of choosing a 6-4-2-1 split between the suits from a deck of cards?</p>
+<blockquote>
+<p>Assume we have chosen 13 cards.<br />
+Clearly, there are <span class="math inline">\(4!\)</span> permutations of suits we can split between.<br />
+Clearly, there are <span class="math inline">\(13 \choose 6\)</span> ;wip: is this right? check the lecture slides Clearly, the probability is <span class="math inline">\(\frac{4! {13 \choose 6} {13 \choose 4} {13 \choose 2} {13 \choose 1}}{52 \choose 13}\)</span>.</p>
+</blockquote>
+<p>The Multinomial Theorem says that <span class="math inline">\((a_1 + \ldots + a_k)^n = \sum_{x_1, \ldots, x_k} \frac{n!}{x_1! \cdots x_k!} a^{x_1} \cdots a^{x_k}\)</span>.</p>
+<p>The Hypergeometric identity says that <span class="math inline">\(\sum_{x = 0}^\infty {a \choose x} {b \choose n - x} = {a + b \choose n}\)</span>.</p>
+<h2 id="probability-rules">Probability Rules</h2>
+<p>Events are simply sets of outcomes. We can use things like set notation and similar when working with events.</p>
+<p>If an event <span class="math inline">\(A\)</span> consists of the outcomes <span class="math inline">\(\set{a_1, \ldots, a_n}\)</span>, then <span class="math inline">\(P(A) = P(a_1) + \ldots + P(a_n)\)</span>.</p>
+<p>Also, <span class="math inline">\(0 \le P(A) \le 1\)</span>. This can be proven by proving <span class="math inline">\(P(S) = 1\)</span> (probability of one of any of the possible outcomes occurring is 1), and that <span class="math inline">\(P(A) \le P(S)\)</span>.</p>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are events, and <span class="math inline">\(A \subseteq B\)</span>, then <span class="math inline">\(P(A) \le P(B)\)</span>. This can be proven by the comparing the sum of the probabilities of the outcomes.</p>
+<h3 id="venn-diagrams">Venn Diagrams</h3>
+<p>Venn diagrams can be used to visually represent the events resulting from set operations on events.</p>
+<p>These diagrams have a rectangle representing <span class="math inline">\(S\)</span>, the sample space, and circles within the rectangle representing events. We can label the circles with names anywhere inside them. Sometimes, we also write some of the possible outcomes in the circles or rectangle.</p>
+<p>We can have circles that overlap each other to represent them sharing outcomes. To represent the resulting event, we can shade in the area representing the set of the event's outcomes.</p>
+<p>For example, a union of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> (represented as <span class="math inline">\(A \cup B\)</span>) means we shade in both events (even if they intersect), and a conjunction of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> (represented <span class="math inline">\(A \cap B\)</span> or <span class="math inline">\(AB\)</span>) would mean we only shade in the intersection of the two events. The complement of an event <span class="math inline">\(A\)</span> (represented <span class="math inline">\(\overline A\)</span>) simply shades in everything in the rectangle that is not in the event.</p>
+<h1 id="section-5">16/5/14</h1>
+<p>;wip: buy the stats textbook</p>
+<p>De Morgan's Laws:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\overline{A \cup B} = \overline A \cap \overline B\)</span></li>
+<li><span class="math inline">\(\overline{A \cap B} = \overline A \cup \overline B\)</span></li>
+</ol>
+<p>This can be proved by proving the left set is a subset of the right set, and the right set is a subset of the left set.</p>
+<p>Basically, we can &quot;break the bar&quot; and &quot;flip the operator&quot; when we have a negation of a disjunction or conjunction.</p>
+<p>The probability of a union is the sum of the probabilities of either event, minus the probability that they both occur: <span class="math inline">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span>. The last term is because when we add <span class="math inline">\(P(A)\)</span> and <span class="math inline">\(P(B)\)</span>, we added <span class="math inline">\(P(A \cap B)\)</span> twice, so we subtract it once to get the correct amount. This becomes clear if we draw a Venn diagram of the equation.</p>
+<p>The probability of a union of more events is <span class="math inline">\(P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C)\)</span>. The reason for the negative terms is because the conjunctions are being added twice, so we subtract them once to get the correct amount.</p>
+<p><span class="math inline">\(P(A_1 \cup \ldots \cup A_n) = \sum_{i = 1}^n P(A_i) - \sum_{i &lt; j} P(A_i A_j) + \sum_{i &lt; j &lt; k} P(A_i A_j A_k) -\)</span> ;wip: get it from the slides or online</p>
+<p>Events <span class="math inline">\(A_1, \ldots, A_n\)</span> are <strong>mutually exclusive</strong> if <span class="math inline">\(\forall 1 \le i \le n, 1 \le j \le n, i \ne j \implies A_i \cap A_j = \emptyset\)</span>, so <span class="math inline">\(P(A_i \cap A_j) = \emptyset\)</span>. They are basically events that can never happen together. Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are mutually exclusive if <span class="math inline">\(P(A \cap B) = 0\)</span> or <span class="math inline">\(A \cap B = \emptyset\)</span>.</p>
+<p>The equation <span class="math inline">\(P(A) = 1 - P(\overline A)\)</span> comes from the idea of mutual exclusivity:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(S = A \cup \overline A\)</span>, and <span class="math inline">\(P(S) = 1\)</span>.<br />
+So <span class="math inline">\(1 = P(S) = P(A \cup \overline A) = P(A) + P(\overline A) - P(A \cap \overline A) = P(A) + P(\overline A)\)</span>.</p>
+</blockquote>
+<h1 id="section-6">21/5/14</h1>
+<p>When our event consists of the majority of the outcomes in the sample space, it is often easier to calculate using the complement - it is generally easier to consider fewer outcomes.</p>
+<p>For example, if we wanted to find the probability that at least one of two dice rolls is a 6, there are multiple outcomes - the first is 6, the second is 6, or both. If we use the complement, we can simply find the probability that none of the rolls are 1, which is a simpler calculation.</p>
+<p>Two events are <strong>independent</strong> if and only if <span class="math inline">\(P(A \cap B) = P(A) P(B)\)</span>, and dependent otherwise. If two events are dependent, then they have some sort of relationship or association.</p>
+<p><span class="math inline">\(n\)</span> events are <strong>pairwise independent</strong> if and only if for any <span class="math inline">\(1 \le i \le n, 1 \le j \le n, i \ne j\)</span>, <span class="math inline">\(P(A_i \cap A_j) = P(A_i) P(A_j)\)</span>. This means that the events in every possible pair of events is independent to each other.</p>
+<p><span class="math inline">\(n\)</span> events are <strong>mutually independent</strong> if and only if <span class="math inline">\(P(A_1 \cap \ldots \cap A_n) = P(A_1) \cdots P(A_n)\)</span>. This means that every event is independent of every possible intersection of all other events. Mutual independence implies pairwise independence, but not the other way around.</p>
+<p>For example, separate dice rolls are independent, because they are unrelated to one another. Independence means that whether <span class="math inline">\(A\)</span> happens or not has no effect on whether <span class="math inline">\(B\)</span> happens, and vice versa.</p>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, then <span class="math inline">\(A\)</span> and <span class="math inline">\(\overline B\)</span>, <span class="math inline">\(\overline A\)</span> and <span class="math inline">\(B\)</span>, and <span class="math inline">\(\overline A\)</span> and <span class="math inline">\(\overline B\)</span> are all independent.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(P(B) = P(AB) + P(\overline A B)\)</span>. Since <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, <span class="math inline">\(P(AB) = P(A)P(B)\)</span> and <span class="math inline">\(P(B) = P(A)P(B) + P(\overline A B)\)</span>.<br />
+So <span class="math inline">\(P(B) - P(A)P(B) = P(\overline A B) = P(B)(1 - P(A)) = P(B)P(\overline A)\)</span>, and <span class="math inline">\(P(\overline A B) = P(\overline A) P(B)\)</span>, so <span class="math inline">\(\overline A\)</span> and <span class="math inline">\(B\)</span> are independent.</p>
+</blockquote>
+<p>Given a large set of elements <span class="math inline">\(S\)</span> with properties <span class="math inline">\(W\)</span> and <span class="math inline">\(F\)</span> such that <span class="math inline">\(P(F) = 0.15, P(W) = 0.45\)</span>, and that if <span class="math inline">\(W\)</span>, then <span class="math inline">\(P(F) = 0.2\)</span>, what is the probability of, in 10 randomly selected elements, at least 1 being <span class="math inline">\(W\)</span> and 1 being <span class="math inline">\(F\)</span>?</p>
+<blockquote>
+<p>Let <span class="math inline">\(T\)</span> be a set of 10 randomly selected elements.<br />
+Since <span class="math inline">\(S\)</span> is large and <span class="math inline">\(T\)</span> is small, we can pretend we are selecting with replacement even though it is without replacement. This is because the probabilities would not hold if we did not do replacement.<br />
+Let <span class="math inline">\(W_i\)</span> or <span class="math inline">\(F_i\)</span> represent the <span class="math inline">\(i\)</span>th element of <span class="math inline">\(T\)</span> being <span class="math inline">\(W\)</span> or <span class="math inline">\(F\)</span>, respectively.<br />
+Let <span class="math inline">\(W_a = W_1 \cup \ldots \cup W_{10}\)</span>, <span class="math inline">\(F_a = F_1 \cup \ldots \cup F_{10}\)</span>.<br />
+Clearly, the probability is <span class="math inline">\(P(W_a \cap F_a) = 1 - P(\overline{W_a \cap F_a}) = 1 - P(\overline{W_a} \cup \overline{F_a}) = 1 - P(\overline{W_a}) - P(\overline{F_a}) + P(\overline{W_a} \cap \overline{F_a})\)</span>.<br />
+Clearly, <span class="math inline">\(P(\overline{W_a}) = P(\overline{W_1}) \cdots P(\overline{W_{10}}) = (1 - 0.45)^{10} = 0.55^{10}\)</span>.<br />
+Clearly, <span class="math inline">\(P(\overline{F_a}) = P(\overline{F_1}) \cdots P(\overline{F_{10}}) = (1 - 0.15)^{10} = 0.85^{10}\)</span>.<br />
+We want to find <span class="math inline">\(P(\overline{F_a})\)</span> given that <span class="math inline">\(\overline{W_a}\)</span>. This will allow us to find <span class="math inline">\(P(\overline{W_a} \cap \overline{F_a})\)</span>.<br />
+Clearly, <span class="math inline">\(P(W_i) = 0.45 = P(W_i \cap \overline{F_i}) + P(W_i \cap F_i) = P(W_i \cap \overline{F_i}) + 0.09\)</span>, since <span class="math inline">\(P(F_i \cap W_i)\)</span> means we assume that <span class="math inline">\(W_i\)</span> and <span class="math inline">\(P(F_i)\)</span> then becomes 0.2.<br />
+So <span class="math inline">\(P(W_i \cap \overline{F_i}) = 0.36\)</span>.<br />
+Clearly, <span class="math inline">\(P(\overline{F_i}) = 1 - 0.15 = P(\overline{F_i} \cap W_i) + P(\overline{F_i} \cap \overline{W_i}) = 0.36 + P(\overline{F_i} \cap \overline{W_i})\)</span>.<br />
+So <span class="math inline">\(P(\overline{F_i} \cap \overline{W_i}) = 0.49\)</span> and <span class="math inline">\(P(\overline{W_a} \cap \overline{F_a}) = 0.49^{10}\)</span>.<br />
+So <span class="math inline">\(P(W_a \cap F_a) = 1 - 0.55^{10} - 0.85^{10} + 0.49^{10} \approxeq 0.801390566701062\)</span>.</p>
+</blockquote>
+<p>This demonstrated the very useful identity <span class="math inline">\(P(A) = P(A \cap B) + P(A \cap \overline B)\)</span>, where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are events.</p>
+<h1 id="section-7">23/5/14</h1>
+<p>The conditional probability of an event <span class="math inline">\(A\)</span> given event <span class="math inline">\(B\)</span> is denoted <span class="math inline">\(P(A \mid B) = \frac{P(A \cap B)}{P(B)}\)</span>, assuming that <span class="math inline">\(P(B) \ne 0\)</span>.</p>
+<p>This is the probability that <span class="math inline">\(A\)</span> will take place, given that <span class="math inline">\(B\)</span> is already known to take place.</p>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, then <span class="math inline">\(P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A) P(B)}{P(B)} = P(A)\)</span>. In other words, for independent events it does not matter whether we know <span class="math inline">\(B\)</span> occurred or not; the probability is still the same.</p>
+<p>If 5% of males are color blind and 0.25% of females are as well, what is the probability of a random color blind person selected from an equal number of males and females being male?</p>
+<blockquote>
+<p>Let <span class="math inline">\(M\)</span> represent being male and <span class="math inline">\(F\)</span> represent being female in the population. Clearly, <span class="math inline">\(P(M) = P(F) = 0.5\)</span>. Let <span class="math inline">\(C\)</span> represent being color blind in the population.<br />
+Clearly, <span class="math inline">\(P(C \mid M) = 0.05\)</span>, <span class="math inline">\(P(C \mid F) = 0.0025\)</span>, and <span class="math inline">\(F = \overline M\)</span>. We want to find <span class="math inline">\(P(M \mid C)\)</span>, the probability that the person is male given color blindness.<br />
+Clearly, <span class="math inline">\(P(M \mid C) = \frac{P(M \cap C)}{P(C)}\)</span>.<br />
+Clearly, <span class="math inline">\(P(C \mid M) = \frac{P(M \cap C)}{P(M)}\)</span>, so <span class="math inline">\(P(C \mid M) P(M) = P(M \cap C) = 0.05 \times 0.5 = 0.025\)</span>.<br />
+Clearly, <span class="math inline">\(P(C) = P(C \cap \overline M) + P(C \cap M) = P(C \mid \overline M) P(\overline M) + P(C \mid M) P(M) = P(C \mid \overline M) P(\overline M) + P(C \mid M) P(M) = P(C \mid F) P(F) + P(C \mid M) P(M) = 0.0025 \times 0.5 + 0.05 \times 0.5 = 0.02625\)</span>.<br />
+So <span class="math inline">\(P(M \mid C) = \frac{0.025}{0.02625} \approxeq 0.952380952380952\)</span>.<br />
+Note that <span class="math inline">\(P(C)\)</span> is the weighted average of all the possible conditional probabilities.</p>
+</blockquote>
+<h3 id="multiplication-rule">Multiplication Rule</h3>
+<p>The <strong>multiplication rule</strong> states that <span class="math inline">\(P(A \cap B) = P(A) P(B \mid A)\)</span>. Extending this, <span class="math inline">\(P(ABC) = P(A)P(B \mid A)P(C \mid (A \cap B))\)</span> and <span class="math inline">\(P(ABCD) = P(A) P(B \mid A) P(C \mid (A \cap B)) P(D \mid (A \cap B \cap C))\)</span>, and so on.</p>
+<h3 id="partition-rule">Partition Rule</h3>
+<p>Disjoint events are those where <span class="math inline">\(P(A \cap B) = 0\)</span> and <span class="math inline">\(A \cap B = \emptyset\)</span>. They are just mutually exclusive events.</p>
+<p>The <strong>partition rule</strong> states that if <span class="math inline">\(A_1 \cup \ldots \cup A_k = S\)</span> where <span class="math inline">\(A_1, \ldots, A_k\)</span> are disjoint sets (mutually exclusive), and <span class="math inline">\(B\)</span> is an event in <span class="math inline">\(S\)</span>, then <span class="math inline">\(P(B) = P(B \cap A_1) + \ldots + P(B \cap A_k) = \sum_{i = 1}^k P(B \mid A_i)P(A_i)\)</span>.</p>
+<p>This is because <span class="math inline">\(B = B \cap A_1 \cup \ldots \cup B \cap A_k\)</span>, and <span class="math inline">\(B \cap A_i\)</span> is mutually exclusive with any <span class="math inline">\(B \cap A_j\)</span> when <span class="math inline">\(i \ne j\)</span>. So <span class="math inline">\(P(B) = P(B \cap A_1 \cup \ldots \cup B \cap A_k) = P(B \cap A_1) + \ldots + P(B \cap A_k)\)</span>.</p>
+<p>So if <span class="math inline">\(A\)</span> is an event and <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are mutually exclusive events, then <span class="math inline">\(P(A) = P(A \cap B) + P(A \cap C) = P(A \mid B)P(B) + P(A \mid C)P(C)\)</span>.</p>
+<p>A group of students that is 18.75% male is planning to go out for pizza. If <span class="math inline">\(\frac{100}{3}\)</span>% of the male students go and <span class="math inline">\(\frac{300}{13}\)</span>% of the female students go, what is the probability that a random student who goes out for pizza is female?</p>
+<blockquote>
+<p>Let <span class="math inline">\(M\)</span> represent male and <span class="math inline">\(O\)</span> represent going out for pizza.<br />
+Clearly, <span class="math inline">\(P(M) = 0.1875, P(\overline M) = 0.8125\)</span> and <span class="math inline">\(P(O \mid M) = \frac 1 3, P(O \mid \overline M) = \frac 3 {13}\)</span>.<br />
+We want to find <span class="math inline">\(P(\overline M \mid O)\)</span>. So <span class="math inline">\(P(\overline M \mid O) = \frac{P(\overline M \cap O)}{P(O)} = \frac{P(O \mid \overline M)P(\overline M)}{P(O \mid M)P(M) + P(O \mid \overline M)P(\overline M)}\)</span>.<br />
+So <span class="math inline">\(P(\overline M \mid O) = \frac{\frac 3 {13} \cdot 0.8125}{\frac 1 3 0.1875 + \frac 3 {13} \cdot 0.8125} = 0.75\)</span>.<br />
+So the probability that a random selected student from this group is female is 75%.</p>
+</blockquote>
+<p>A <strong>tree diagram</strong> is a diagram that helps represent conditional probabilities by showing the possibilities of several runs of an experiement as a tree. For example, we might draw a tree for flips of a coin, with each level being a subsequent flip of the coin.</p>
+<p>When we move downwards in a tree, we multiply the probabilities together. When we include other nodes, we do a union and add the probabilities.</p>
+<p>We label the edges of the tree with the probability of the child occurring given that all the parent events have occurred. So in the above example, the root node has labels <span class="math inline">\(P(H)\)</span> and <span class="math inline">\(P(T)\)</span>, while the second level nodes have <span class="math inline">\(P(H \mid H), P(T \mid H), P(H \mid T), P(T \mid T)\)</span>.</p>
+<p>If we want the probability of a particular sequence of outcomes, then we would travel down the tree multplying by edges when we encounter them. So in the above example, the probability of getting a heads, and then another heads is <span class="math inline">\(P(H \cap H) = P(H) P(H \mid H) = 0.25\)</span>.</p>
+<p>We are eventually going to develop <strong>Bayes Theorem</strong>, which is <span class="math inline">\(P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)} = \frac{P(B \mid A) P(A)}{P(B \mid A)P(A) + P(B \mid \overline A)P(\overline A)}\)</span>.</p>
+<h1 id="section-8">26/5/14</h1>
+<p><span class="math inline">\(P(A \mid B) = 1 - P(\overline A \mid B) \ne 1 - P(A \mid \overline B)\)</span>.</p>
+<p>If <span class="math inline">\(P(H \cap M) = 0.1\)</span> and <span class="math inline">\(P(H \cap \overline M) = 0.15\)</span>, find <span class="math inline">\(P(M \mid H)\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(P(H) = P(H \cap M) + P(H \cap \overline M) = 0.25\)</span>.<br />
+Clearly, <span class="math inline">\(P(M \mid H) = \frac{P(M \cap H)}{P(H)} = \frac{0.1}{0.25} = 0.4\)</span>.</p>
+</blockquote>
+<h2 id="discrete-random-variablesprobability-models">Discrete Random Variables/Probability Models</h2>
+<p>Probability models are used to describe outcomes associated with random processes.</p>
+<p>Until this point we have been using sets in sample spaces to describe these outcomes.</p>
+<p>Now we introduce <strong>random variables</strong>. A random variable is a function that assigns a real number in a set <span class="math inline">\(A\)</span> to each outcome in a sample space <span class="math inline">\(S\)</span>. They are denoted with capital letters <span class="math inline">\(X, Y, \ldots\)</span> and their values are denoted with lowercase letters <span class="math inline">\(x, y, \ldots\)</span>.</p>
+<p>Random variables are defined for every outcome of an experiment - <span class="math inline">\(X: S \to A\)</span>.</p>
+<p>For example, if <span class="math inline">\(S\)</span> is the set of possible results of 3 coin tosses, <span class="math inline">\(\set{TTT, TTH, THT, THH, HTT, HTH, HHT, HHH}\)</span>, we might have a random variable <span class="math inline">\(X\)</span> map each outcome in <span class="math inline">\(S\)</span> to the number of heads in that outcome.</p>
+<p>We can also invert <span class="math inline">\(X\)</span> to get a set of all outcomes in <span class="math inline">\(S\)</span> for a given value <span class="math inline">\(x\)</span>.</p>
+<p>We are interested in finding <span class="math inline">\(P(X = x)\)</span>. This is the probability that <span class="math inline">\(x\)</span> occurs, and random variables give us new tools to work with them. In the above example, <span class="math inline">\(P(X = 3) = \frac 1 8\)</span> because there is 1 outcome with 3 heads and 8 outcomes total.</p>
+<p>There are two types of random variables - <strong>discrete</strong> and <strong>continuous</strong>. Discrete variables can only take on finite or countably infinite (like natural numbers) values. Continuous variables can take on values in some interval of real numbers.</p>
+<p>The <strong>probability function/probability mass function</strong> (PMF/PF) of a random variable <span class="math inline">\(X\)</span> is <span class="math inline">\(f_X(x) = P(X = x)\)</span>, defined for all <span class="math inline">\(x \in A\)</span>. <span class="math inline">\(f_X(x)\)</span> is a probability function if and only if <span class="math inline">\(f_X(x) \ge 0\)</span> and <span class="math inline">\(\sum_{x \in A} f_X(x) = 1\)</span>. So <span class="math inline">\(0 \le f_X(x) \le 1\)</span>.</p>
+<p>In the above example, <span class="math inline">\(f_X(x) = \begin{cases} P(\set{TTT}) &amp;\text{if } x = 0 \\ P(\set{HTT, THT, TTH}) &amp;\text{if } x = 1 \\ P(\set{HHT, HTH, THH}) &amp;\text{if } x = 2 \\ P(\set{HHH}) &amp;\text{if } x = 3 \end{cases} = \begin{cases} \frac 1 8 &amp;\text{if } x = 0 \\ \frac 3 8 &amp;\text{if } x = 1 \\ \frac 3 8 &amp;\text{if } x = 2 \\ \frac 1 8 &amp;\text{if } x = 3 \end{cases}\)</span>.</p>
+<p>For example, <span class="math inline">\(f_X(x) = \frac{kx}{2 + x}\)</span> is a probability function that gives <span class="math inline">\(x \in \set{1, 2, 3, 4, 5}\)</span>. Clearly, <span class="math inline">\(k\)</span> must satisfy <span class="math inline">\(f_X(1) + f_C(2) + f_C(3) + f_C(4) + f_C(5) = 1 = \frac k 3 + \frac {2k} 4 + \frac {3k} 5 + \frac {4k} 6 + \frac {5k} 7 = \frac {140k + 105k + 84k + 70k + 60k} {420} = \frac{459}{420}k\)</span>, so <span class="math inline">\(k = \frac{420}{459}\)</span>.</p>
+<p>The cumulative Distribution Function is <span class="math inline">\(F_X(x) = P(X \le x) = \sum_{u \le x} f_X(u)\)</span>. It is always true that <span class="math inline">\(\lim_{x \to -\infty} F_X(x) = 0\)</span> and <span class="math inline">\(\lim_{x \to \infty} F_X(x) = 1\)</span>. Therefore, <span class="math inline">\(f_X(x) = F_X(x) - F_X(x - 1)\)</span> and <span class="math inline">\(P(X = x) = P(X \le x) - P(X \le x - 1)\)</span>. It is the probability of anything less than or equal to <span class="math inline">\(x\)</span> taking place.</p>
+<h1 id="section-9">28/5/14</h1>
+<p>For discrete probability functions, we can plot <span class="math inline">\(f\)</span> as a bar graph to get a probability distribution.</p>
+<p>For cumulative distribution functions, the plot of <span class="math inline">\(F\)</span> must always have a line segment <span class="math inline">\(y = 0\)</span> from <span class="math inline">\(-\infty\)</span> to the first value of <span class="math inline">\(x\)</span> at <span class="math inline">\(y = 0\)</span>. The function itself appears as a step function, like the plot of <span class="math inline">\(\floor{x}\)</span>. At the far right side the last value should always be a line segment with <span class="math inline">\(y = 1\)</span> from the last value of <span class="math inline">\(x\)</span> to <span class="math inline">\(\infty\)</span>.</p>
+<p>So if <span class="math inline">\(x \in \set{1, 2, 3, 4}\)</span>, and <span class="math inline">\(F(2) = P(x \le 2) = 0.5\)</span>, then <span class="math inline">\(F(2.5) = P(x \le 2.5) = P(x \le 2) = 0.5\)</span>.</p>
+<p>Now we aim to identify common processes and problems that have certain probability distributions.</p>
+<p>For example, tossing a coin 10 times where <span class="math inline">\(x\)</span> represents the number of heads obtained, or examining 12 items from a factory lines and <span class="math inline">\(x\)</span> represents the number of items with no defects. These problems are similar in that each trial is independent, and there are two possible outcomes for each trial - the coin is either heads or tails, and the item is either defective or not. Additionally, the minimum value for <span class="math inline">\(x\)</span> is 0 and the maximum value is the number of trials. In fact, all of these can be represented using the <strong>binomial distribution</strong>, which will be looked at in depth later.</p>
+<p><span class="math inline">\(R\)</span> is a free software package for statistical and probabilistic computation. It is commonly used in modern statisticss due to its ability to handle huge datasets.</p>
+<h3 id="discrete-uniform-distribution">Discrete Uniform Distribution</h3>
+<p>Preconditions:</p>
 <ul>
-<li><a href="/blog/" class="page">blog</a></li>
-<li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
-<li><a href="/resume.pdf" class="page">résumé</a></li>
-<li><a href="https://github.com/Uberi" class="contact">github</a></li>
-<li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
-<li><script type="text/javascript">
-<!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x65;&#x6d;&#x61;&#x69;&#108;'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
-<li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
-<li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
-<li><a href="https://keybase.io/uberi" class="info">public key</a></li>
+<li>Multiple outcomes <span class="math inline">\(x_1, \ldots, x_n\)</span>.</li>
+<li>Every outcome is equally likely.</li>
 </ul>
-<p><span class="math">\[ \newcommand{\set}[1]{\left\{ #1 \right\}} \newcommand{\tup}[1]{\left\langle #1 \right\rangle} \newcommand{\abs}[1]{\left\lvert #1 \right\rvert} \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} \newcommand{\ceil}[1]{\left\lceil#1 \right\rceil} \newcommand{\mb}[1]{\mathbb{#1}} \newcommand{\rem}{\operatorname{rem}} \newcommand{\sign}{\operatorname{sign}} \newcommand{\imag}{\boldsymbol{i}} \newcommand{\dee}{\mathop{}\!\mathrm{d}} \newcommand{\lH}{\overset{\text{l'H}}{=}} \newcommand{\evalat}[1]{\left.\left(#1\right)\right|} \newcommand{\sech}{\operatorname{sech}} \newcommand{\spn}{\operatorname{Span}} \newcommand{\proj}{\operatorname{proj}} \newcommand{\prp}{\operatorname{perp}} \newcommand{\refl}{\operatorname{refl}} \newcommand{\magn}[1]{\left\lVert #1 \right\rVert} \newcommand{\rank}{\operatorname{rank}} \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]} \newcommand{\range}{\operatorname{Range}} \newcommand{\adj}{\operatorname{adj}} \newcommand{\cof}{\operatorname{cof}} \newcommand{\diag}{\operatorname{diag}} \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)} \]</span></p>
-<p>$body$ $for(include-after)$ $include-after$ $endfor$</p>
-<div class="license">
-<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" alt="Creative Commons License" /></a> This work by <a href="https://uberi.github.io/">Anthony Zhang</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright 2013-2017 Anthony Zhang.
-</div>
+<p>If the above are satisfied, then if <span class="math inline">\(X\)</span> represents the index of the outcome in <span class="math inline">\(x_1, \ldots, x_n\)</span> that occurred, <span class="math inline">\(X\)</span> has a discrete uniform distribution.</p>
+<p>If the random variable <span class="math inline">\(X\)</span> takes on values <span class="math inline">\(a_1, \ldots, a_n\)</span> where each value is equally likely, then <span class="math inline">\(X\)</span> has a discrete uniform distribution on the set <span class="math inline">\(\set{a_1, \ldots, a_n}\)</span>, by definition.</p>
+<p>The probability of observing any of these is simply <span class="math inline">\(\frac 1 {b - a + 1}\)</span>. The most common example of this is the rolling of a 6 sided dice several times.</p>
+<p>The cumulative distribution function would be <span class="math inline">\(F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &amp;\text{if } x &lt; 1 \\ \frac \floor{x} {b - a + 1} &amp;\text{if } 1 \le x \le 6 \\ 1 &amp;\text{if } x &gt; 6 \end{cases}\)</span>.</p>
+<p>If a 6-sided die is rolled 3 times, what is <span class="math inline">\(F_X(x)\)</span> and <span class="math inline">\(f_X(x)\)</span> where <span class="math inline">\(x\)</span> is the largest value rolled?</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(F_X(x) = P(X \le x) = \frac{x^3}{6^3}\)</span>, because there are <span class="math inline">\(x^3\)</span> possible outcomes where all the values are less than or equal to <span class="math inline">\(x\)</span> and <span class="math inline">\(6^3\)</span> possible outcomes.<br />
+So <span class="math inline">\(f_X(x) = P(X = x) = \frac{x^3 - (x - 1)^3}{6^3} = \frac{3x^2 - 3x + 1}{216}\)</span>.</p>
+</blockquote>
+<h1 id="section-10">30/5/14</h1>
+<h3 id="hypergeometric-distribution">Hypergeometric Distribution</h3>
+<p>Preconditions:</p>
+<ul>
+<li>Objects are in sample space <span class="math inline">\(S\)</span>.</li>
+<li>Two outcomes - success and failure.</li>
+<li><span class="math inline">\(n\)</span> objects chosen from <span class="math inline">\(S\)</span> <strong>without replacement</strong>.</li>
+</ul>
+<p>If the above are satisfied, then if <span class="math inline">\(r\)</span> represents the total number of successes, and <span class="math inline">\(X\)</span> represents the number of observed successes, <span class="math inline">\(X\)</span> has a hyergeometric distribution and <span class="math inline">\(f_X(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}\)</span>, where <span class="math inline">\(r\)</span> is the total number of successes, <span class="math inline">\(x\)</span> is the number of successes observed, <span class="math inline">\(N = \abs{S}\)</span>, and <span class="math inline">\(n\)</span> is the number of objects selected.</p>
+<p>Basically, <span class="math inline">\({r \choose x}{N - r \choose n - x}\)</span> is the number of ways we can choose <span class="math inline">\(x\)</span> successes out of <span class="math inline">\(r\)</span> total successes, multiplied by the number of ways we can choose the <span class="math inline">\(n - x\)</span> failures out of <span class="math inline">\(N - r\)</span> total failures. <span class="math inline">\(N \choose n\)</span> is the number of ways we cuold pick any <span class="math inline">\(n\)</span> objects from the total objects. So it is the number of ways we can pick the successes, times the number of ways we can pick the failures, divided by the total number of ways we can pick them all.</p>
+<p>Given <span class="math inline">\(N\)</span> objects that have a boolean property <span class="math inline">\(V\)</span> (success), let <span class="math inline">\(r\)</span> represent the total number of successful objects, and let <span class="math inline">\(X\)</span> represent the number of successes observed.</p>
+<p>Then if we pick <span class="math inline">\(n\)</span> objects <strong>without replacement</strong>, <span class="math inline">\(X\)</span> has a hypergeometric distribution.</p>
+<p>The total number of arrangements is <span class="math inline">\(N \choose n\)</span>, and the number of ways to select successes is <span class="math inline">\(r \choose x\)</span>, and the number of ways to choose the failures is <span class="math inline">\(N - r \choose n - x\)</span>.</p>
+<p>So <span class="math inline">\(f_X(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}\)</span>, where <span class="math inline">\(\max(0, n - (N - r)) \le x \le \min(r, n)\)</span>. <span class="math inline">\(\max(0, n - (N - r))\)</span> is the minimum possible number of successes that must be chosen, . <span class="math inline">\(N\)</span> is the number of objects in <span class="math inline">\(S\)</span>, and <span class="math inline">\(r\)</span> is the ;wip</p>
+<p>Using the hypergeometric identity, we can prove that summing up all the the values of a hypergeometric distribution is 1.</p>
+<p>A box of 12 tins of tuna contains <span class="math inline">\(d\)</span> tainted cans. 7 inspected cans are inspected and found to not be tainted. What is the probability that none are tainted for <span class="math inline">\(d = 1, 2, 3\)</span>:</p>
+<blockquote>
+<p>Clearly, this is a selection done without replacement since once we inspect cans, we cannot inspect them again.<br />
+;wip</p>
+</blockquote>
+<h3 id="binomial-distribution">Binomial Distribution</h3>
+<p>Preconditions:</p>
+<ul>
+<li>Objects are in sample space <span class="math inline">\(S\)</span>.</li>
+<li>Two outcomes, success and failure.</li>
+<li>Multiple independent trials - objects chosen from <span class="math inline">\(S\)</span> <strong>with replacement</strong>.</li>
+<li>Same probability of success in each trial.</li>
+</ul>
+<p>If the above are satisfied, then if <span class="math inline">\(X\)</span> represents the number of observed successes, <span class="math inline">\(X\)</span> has a binomial distribution and <span class="math inline">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span> where <span class="math inline">\(n\)</span> is the number of objects selected, and <span class="math inline">\(p\)</span> is the probability of success for any trial.</p>
+<p>The setup is very similar to the hypergeometric distribution, except our selection is done with replacement - every trial is independent.</p>
+<p><span class="math inline">\(X \sim \operatorname{Bin}(n, p)\)</span>. The <span class="math inline">\(n\)</span> is the number of the number of objects in <span class="math inline">\(S\)</span>, and <span class="math inline">\(p\)</span> is the probability of success for each trial.</p>
+<p>These independent trials resulting in success/failure are known as <strong>Bernoulli trials</strong>. The process is known as the <strong>Bernoulli process</strong>.</p>
+<p>With <span class="math inline">\(x\)</span> successes and <span class="math inline">\(n - x\)</span> failures, there are <span class="math inline">\(n \choose x\)</span> ways of choosing them. ;wip: justify the formula</p>
+<p>So <span class="math inline">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span> where <span class="math inline">\(0 \le x \le n\)</span>.</p>
+<p>Given that we flip a coin 12 times, let <span class="math inline">\(X\)</span> be the number of heads obtained. What is the distribution of <span class="math inline">\(X\)</span>?</p>
+<blockquote>
+<p>Clearly, this is a binomial distribution since there are multiple independent trials, two outcomes, and equal probabilities of success.<br />
+Therefore, <span class="math inline">\(X\)</span> has a binomial distribution.</p>
+</blockquote>
+<p>The binomial distribution is not always symmetric and looks like a curve. The higher <span class="math inline">\(p\)</span> is, the heavier the graph is on the right.</p>
+<p>The binomial distribution is often used as a approximation for the hypergeometric distribution because it is easier to calculate and when the sample space is large, the difference between sampling with and without replacement becomes negligible.</p>
+<p>;wip: midterm on thursday from 4:30-6pm, rooms will be posted on LEARN, 5-6 short answer with parts, bring pink tie calculators, covers lecture 1-10, just before discrete uniform distribution, check formula sheet on the practice midterm, try the practice midterms and mapleta revision quiz (not for marks)</p>
+<h1 id="section-11">2/6/14</h1>
+<p>55% of all high school seniors go to college. Given 18 high school students, what is the probability that exactly 10 will go to college?</p>
+<blockquote>
+<p>Let <span class="math inline">\(X\)</span> be the number of high school students that go to college.<br />
+Clearly, there are to outcomes (going or not going to college), and each student is an independent trial, and the selection is done with replacement (or without relacement in a large population), and each student has the same probability of going to college.<br />
+Therefore, <span class="math inline">\(X\)</span> has a binomial distribution.<br />
+So <span class="math inline">\(P(X = 10) = f(10) = {18 \choose 10} 0.55^{10} (1 - 0.55)^{18 - 10} \approxeq 0.186373632163697\)</span>.</p>
+</blockquote>
+<h3 id="negative-binomial-distribution">Negative Binomial Distribution</h3>
+<p>The negative binomial distribution has the same preconditions as the binomial distribution, but now <span class="math inline">\(X\)</span> records the number of failures before the <span class="math inline">\(k\)</span>th success and <span class="math inline">\(x\)</span> is the number of failures.</p>
+<p>This can be represented using <span class="math inline">\(X \sim \operatorname{NB}(k, p)\)</span>, where <span class="math inline">\(k\)</span> is the number of successes and <span class="math inline">\(p\)</span> is the probability of success.</p>
+<p>Clearly, there are <span class="math inline">\(x + k\)</span> trials - successes plus failures, and the last trial is always a success.</p>
+<p>So there are <span class="math inline">\(x + k - 1\)</span> trials in which there are <span class="math inline">\(x\)</span> failures, and <span class="math inline">\(x + k - 1 \choose x\)</span> arrangements.</p>
+<p>The probability of success is <span class="math inline">\(p\)</span> and the probability of failure is <span class="math inline">\(1 - p\)</span>.</p>
+<p>So <span class="math inline">\(f_X(x) = {x + k - 1 \choose x}p^k(1 - p)^x\)</span> where <span class="math inline">\(0 \le x\)</span>.</p>
+<p>Also, <span class="math inline">\({a + b \choose a} = {a + b \choose b}\)</span>.</p>
+<p>With binomial distributions we know the number of trials but not the number of successes. With negative binomial distributions we know the number of successes but not the number of trials.</p>
+<p>If 20% of people agree to buy tickets, and we want 25 people to buy tickets, what is the probability function of <span class="math inline">\(X\)</span> where <span class="math inline">\(X\)</span> is the number of people asked before 25 tickets are bought?</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(X\)</span> is the number of failures plus 25 successes, and <span class="math inline">\(k = 25, p = 0.2\)</span>.<br />
+Let <span class="math inline">\(X = Y + 25\)</span> where <span class="math inline">\(Y \sim \operatorname{NB}(25, 0.2)\)</span>, so <span class="math inline">\(x = y + 25\)</span> and <span class="math inline">\(y = x - 25\)</span>.<br />
+So <span class="math inline">\(f_Y(y) = {y + 25 - 1 \choose y}p^{25}(1 - 0.2)^y = {y + 24 \choose y}0.2^{25}0.8^y\)</span> where <span class="math inline">\(0 \le y\)</span>.<br />
+So <span class="math inline">\(f_X(x) = {x - 1 \choose x - 25}0.2^{25}0.8^{x - 25}\)</span> where <span class="math inline">\(25 \le x\)</span>.</p>
+</blockquote>
+<h1 id="section-12">4/6/14</h1>
+<p>Midterm Review.</p>
+<ul>
+<li><span class="math inline">\(S\)</span> is the sample space, <span class="math inline">\(A\)</span> is an event, events are sets.</li>
+<li><span class="math inline">\(P(A) = \frac{\abs{A}}{\abs{B}}\)</span>.</li>
+<li>&quot;OR&quot; means union/addition, &quot;and&quot; means conjunction/multiplication.</li>
+<li>Consider which elements we are selecting.</li>
+<li>Consider whether the order is important.</li>
+<li>Consider how many sets we are selecting from - if two or more sets, use the multiplication rule and multiply the individual ways together to get the total ways.</li>
+<li><span class="math inline">\(P(S) = 1, 0 \le P(A) \le 1\)</span>.</li>
+<li>De Morgan's law, expanding conjunctions and disjunctions and conditionals, mutual exclusivity and independece (<span class="math inline">\(P(A \cap B) = P(A) P(B)\)</span>).</li>
+<li>Product rule (<span class="math inline">\(P(A \cap B) = P(A \mid B) P(B)\)</span>) and partition rule (<span class="math inline">\(P(A) = P(A \cap B_1) + \ldots P(A \cap B_n)\)</span> given <span class="math inline">\(P(B_1) + \ldots + P(B_n) = 1\)</span>).</li>
+<li>Probability function: <span class="math inline">\(P(X = x)\)</span> over all <span class="math inline">\(X\)</span>, represented using a histogram.</li>
+<li>Cumulative distribution function: <span class="math inline">\(F_X(x) = P(X \le x)\)</span>, a non-decreasing function.</li>
+<li><span class="math inline">\(f_X(x) = F_X(x) - F_X(x - 1)\)</span>.</li>
+</ul>
+<h1 id="section-13">6/6/14</h1>
+<h3 id="geometric-distribution">Geometric Distribution</h3>
+<p>This basically the same as the negative binomial distribution with <span class="math inline">\(k = 1\)</span>. It has the same preconditions as the binomial distribution, but <span class="math inline">\(X\)</span> is the number of failures before the first success.</p>
+<p>If <span class="math inline">\(X\)</span> has a geometric distribution, then <span class="math inline">\(f_X(x) = p(1 - p)^x\)</span> where <span class="math inline">\(0 \le x\)</span>. This can easily be derived from the negative binomial distribution.</p>
+<p>Also, we can write <span class="math inline">\(X \sim \operatorname{NB}(1, p)\)</span> or <span class="math inline">\(X \sim \operatorname{Geo}(p)\)</span>.</p>
+<p>Note that the binomial, negative binomial, and geometric distributions all have the same preconditions - two outcomes, independent trials, and equal probability of success in each trial.</p>
+<p>The only thing different between them is what <span class="math inline">\(X\)</span> means - successes given <span class="math inline">\(n\)</span> trials, failures given <span class="math inline">\(n\)</span> successes, and failures given 1 success.</p>
+<p>Given that there is a 30% chance of a car having leaks, and that the probability that we must check at least <span class="math inline">\(n\)</span> cars to find the first one with leaks is 0.05, what is the value of <span class="math inline">\(n\)</span>?</p>
+<blockquote>
+<p>Let <span class="math inline">\(X\)</span> represent the number of cars without leaks before finding one with leaks. Then <span class="math inline">\(f_X(x) = 0.3(1 - 0.3)^x = 0.3 \cdot 0.7^x\)</span>.<br />
+We want to find <span class="math inline">\(n\)</span> such that <span class="math inline">\(P(X \ge n - 1) = 0.05\)</span>, since we want <span class="math inline">\(n - 1\)</span> or more cars to not have leaks before the first one with leaks.<br />
+So <span class="math inline">\(P(X \ge n - 1) = \sum_{i = n - 1}^\infty f_X(i) = 0.05\)</span>.<br />
+So <span class="math inline">\(0.3 \cdot 0.7^{n - 1} + 0.3 \cdot 0.7^n + 0.3 \cdot 0.7^{n + 1} + \ldots = 0.3 \cdot 0.7^{n - 1}(1 + 0.7^1 + 0.7^2 + \ldots) = 0.3 \cdot 0.7^{n - 1}\frac 1 {1 - 0.7} = 0.7^{n - 1} = 0.05\)</span>.<br />
+So <span class="math inline">\(\ln 0.7^{n - 1} = \ln 0.05\)</span> and <span class="math inline">\(n = \frac{\ln 0.05}{\ln 0.7} + 1 \approxeq 9.4\)</span>.<br />
+Since <span class="math inline">\(n\)</span> must be an integer, we have to round it. Clearly, <span class="math inline">\(P(X \ge 9.4 - 1) = P(X \ge 10 - 1) \ne P(X \ge 9 - 1)\)</span>, so we must round up.<br />
+So the probability that we must check at least 10 cars to find the first one with leaks is 0.05.</p>
+</blockquote>
+<h3 id="poisson-distribution">Poisson Distribution</h3>
+<p>Preconditions:</p>
+<ul>
+<li>Events occur at random points in time.</li>
+<li>Events occur independently of each other - observing events occur already does not change the probability of the events ooccurring later.</li>
+<li>Events occur <span class="math inline">\(\mu\)</span> times over the interval, on average.</li>
+</ul>
+<p>If the above are satisfied, then if <span class="math inline">\(X\)</span> represents the number of events of some type within some interval, <span class="math inline">\(X\)</span> has a Poisson distribution and <span class="math inline">\(f_X(x) = \frac{e^{-\mu} \mu^x}{x!}\)</span> where <span class="math inline">\(x \ge 0\)</span>.</p>
+<p>This can be represented using <span class="math inline">\(X \sim \operatorname{Poisson}(\mu)\)</span>.</p>
+<p>This distribution is defined over a countably infinite set of outcomes.</p>
+<p>This an approximation for the binomial distribution where <span class="math inline">\(\operatorname{Poisson}(\mu)\)</span> approximates <span class="math inline">\(\operatorname{Bin}(n, \frac \mu n)\)</span>. The approximation gets better for large <span class="math inline">\(n\)</span> and small <span class="math inline">\(p\)</span>.</p>
+<p>This is because for large <span class="math inline">\(n\)</span> and small <span class="math inline">\(p\)</span>, <span class="math inline">\(n\)</span>, the trials in a binomial distribution, becomes the arbitrarily small sections of time, and <span class="math inline">\(p\)</span> becomes the probability of the event occurring (which is a success) in one of those small sections of time. Since each section of time is <span class="math inline">\(\frac 1 n\)</span> long, the probability of observing an event in this section is <span class="math inline">\(p = \frac \mu n\)</span>, and we assume the sections are so small that the probability of two events occurring in one section is negligible.</p>
+<p>Examples of this distribution occurring naturally might include the number of white cars we observe in 30 minutes, or the number of bacteria in particular radius.</p>
+<h1 id="section-14">9/6/14</h1>
+<p>The rate is not necessarily over time. It could be anything that events can occur relative to. For example, we can define <span class="math inline">\(\mu\)</span> as average pollutant molecules (success event) per liter of water.</p>
+<p>When <span class="math inline">\(n \to \infty\)</span>, the binomial distribution becomes the Poisson distribution:</p>
+<blockquote>
+<p>Let <span class="math inline">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span>. We want to prove that <span class="math inline">\(\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \frac{e^{-\mu} \mu^x}{x!}\)</span>.<br />
+Clearly, <span class="math inline">\(\mu = np\)</span> - the number of samples times the probability of each sample occurring is the rate of events occurring over all <span class="math inline">\(n\)</span>.<br />
+So <span class="math inline">\(\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \lim_{n \to \infty} {n \choose x}\left(\frac \mu n\right)^x\left(1 - \frac \mu n\right)^{n - x} = \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n!}{(n - x)!}\frac 1 {n^x}\left(1 - \frac \mu n\right)^n \lim_{n \to \infty} \left(1 - \frac \mu n\right)^{-x} = \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n \cdot (n - 1) \cdots (n - x)}{n^x}\left(1 - \frac \mu n\right)^n = \frac{\mu^x}{x!}\lim_{n \to \infty} \frac{n \cdot (n - 1) \cdots (n - x)}{n^x} \lim_{n \to \infty} \left(1 - \frac \mu n\right)^n = \frac{\mu^x}{x!}\lim_{n \to \infty} \left(1 - \frac \mu n\right)^n\)</span>.<br />
+Since <span class="math inline">\(e^x = \lim_{n \to \infty} \left(1 + \frac x n\right)^n\)</span> and <span class="math inline">\(e^{-\mu} = \lim_{n \to \infty} \left(1 - \frac x n\right)^n\)</span>.<br />
+So <span class="math inline">\(\lim_{n \to \infty} {n \choose x}p^x(1 - p)^{n - x} = \frac{e^{-\mu}\mu^x}{x!}\lim_{n \to \infty}\)</span>.</p>
+</blockquote>
+<p>The idea is that as <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(p \to 0\)</span> and <span class="math inline">\(\mu = np\)</span> approaches the rate at which successes occur.</p>
+<p>Birthday problem - given 200 people at a party, what is the probability that exactly two of them are born on January 1?</p>
+<blockquote>
+<p>We assume that all days of the year are equally likely, and there are no leap years, and that birthdays are independent of each other.<br />
+Let <span class="math inline">\(X\)</span> be the number of people at the party born on January 1.<br />
+So <span class="math inline">\(X \sim \operatorname{Bin}(200, \frac 1 {365})\)</span>. Then the exact probability is <span class="math inline">\(P(X = 2) = {200 \choose 2} \frac 1 {365^2} \left(\frac{364}{365}\right)^{200 - 2} \approxeq 0.086766913252562\)</span>.<br />
+Using the Poisson approximation, <span class="math inline">\(\mu = np = 200 \times \frac 1 {365} = \frac{200}{365}\)</span>, so <span class="math inline">\(P(X = 2) = \frac{e^{-\frac{200}{365}}\mu^{\frac{200}{365}}}{x!} \approxeq 0.086790999064332\)</span>.</p>
+</blockquote>
+<h2 id="order-notation">Order Notation</h2>
+<p><span class="math inline">\(g(\Delta t) = o(\Delta t)\)</span> as <span class="math inline">\(t \to 0\)</span> means that <span class="math inline">\(g(\Delta t)\)</span> approaches 0 faster than <span class="math inline">\(\delta t\)</span> does. So <span class="math inline">\(\frac{g(\Delta t)}{\Delta t} = 0\)</span> as <span class="math inline">\(t \to 0\)</span>.</p>
+<p>For example, <span class="math inline">\(x^2\)</span> (<span class="math inline">\(g(\Delta t)\)</span>) approaches 0 faster than <span class="math inline">\(x\)</span> (<span class="math inline">\(\Delta t\)</span>), so <span class="math inline">\(x^2\)</span> is <span class="math inline">\(o(x)\)</span>. However, <span class="math inline">\(\sqrt{x}\)</span> approaches 0 slower than <span class="math inline">\(x\)</span>, so <span class="math inline">\(\sqrt{x}\)</span> is not <span class="math inline">\(o(x)\)</span>.</p>
+<p>So if something is <span class="math inline">\(o(x)\)</span>, then it approaches 0 faster than <span class="math inline">\(x\)</span> does.</p>
+<p><span class="math inline">\(f(x) \in o(g(x))\)</span> means that <span class="math inline">\(f(x)\)</span> grows much slower than <span class="math inline">\(g(x)\)</span>.</p>
+<h1 id="section-15">11/6/14</h1>
+<p>Independent events means that events occur independent of each other - observing events occurring a lot of times already in the past should not affect the probability of observing events in the future.</p>
+<p>Individual events means that <span class="math inline">\(P(\text{2 or more events in same interval } (t, t + \Delta t)) = o(\Delta t)\)</span> - that the probability of two events occurring in the same interval becomes negligible when <span class="math inline">\(\Delta t \to 0\)</span>. In other words, in any interval <span class="math inline">\((t, t + \Delta t)\)</span> there is either 1 or 0 events occurring, and the probability that two or more events occur is negligible.</p>
+<p>Hommogeneity/uniformity means that the events occur at a uniform rate <span class="math inline">\(\lambda\)</span> over some dimension (usually time or space) so that <span class="math inline">\(P(\text{one event in interval } (t, t + \
+Delta t)) = \lambda \Delta t o(\Delta t)\)</span>.</p>
+<p>If a process/experiment satisfies these three properties, then it is a <strong>Poisson process</strong> and <span class="math inline">\(\mu = \lambda t\)</span>.</p>
+<p><span class="math inline">\(\lambda\)</span> is the average rate of events per unit dimension (usually time or space). <span class="math inline">\(\mu\)</span> is the average number of occurrences over an interval <span class="math inline">\(t\)</span>. Clearly, <span class="math inline">\(\mu = \lambda t\)</span>.</p>
+<p>If there are an average of 6 earthquakes per year and earthquakes are a Poisson process, what is the probability that 7 are recorded in the next 2 years?</p>
+<blockquote>
+<p>Let <span class="math inline">\(X\)</span> be the number of earthquakes in the next 2 years.<br />
+Clearly, <span class="math inline">\(\lambda = 6 \text{earthquakes}/\text{year}\)</span>, so <span class="math inline">\(\mu = 12 \text{earthquakes}\)</span>.<br />
+So <span class="math inline">\(P(X = 7) = \frac{e^{-12} 12^7}{7!}\)</span>.</p>
+</blockquote>
+<p>The number of cars exceeding the speed limit in half an hour is a random variable <span class="math inline">\(X\)</span> with a Poisson distribution where <span class="math inline">\(\lambda = 8.4\)</span>. What is the probability that 10 cars exceed the speed limit in 1 hour?</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\mu = 8.4 \text{speeders}/\text{0.5 hours}t = k \text{speeders}/\text{hour}t\)</span>. So <span class="math inline">\(t = 2 \text{hours}\)</span> and <span class="math inline">\(\mu = 16.8 \text{speeders}\)</span>.<br />
+So <span class="math inline">\(P(X = 10) = \frac{e^{-16.8} 16.8^10}{10!}\)</span>.</p>
+</blockquote>
+<h1 id="section-16">13/6/14</h1>
+<p>Bacteria occur in water at 1 bacterium per 10 cubic centimeters of water. What is the probability that there are 5 or more bacteria in a 50 cubic centimeter sample?</p>
+<blockquote>
+<p>Clearly, &quot;1 bacterium per 10 cubic centimeters of water&quot; is the average rate per unit volume, so <span class="math inline">\(\lambda = 1 \text{bacterium}/\text{10 cubic centimeters}\)</span>.<br />
+So <span class="math inline">\(\mu = 1 \text{bacterium}/\text{10 cubic centimeters} \times \text{50 cubic centimeters} = 5 \text{bacteria}\)</span>.<br />
+Let <span class="math inline">\(X\)</span> represent the number of bacteria. Then <span class="math inline">\(X \sim \operatorname{Poisson}(5)\)</span>.<br />
+So the probability that there are 5 or more bacteria is <span class="math inline">\(P(X \ge 5) = 1 - P(X \le 4) = 1 - e^{-5}\left(\frac{5^0}{0!} + \frac{5^1}{1!} + \frac{5^2}{2!} + \frac{5^3}{3!} + \frac{5^4}{4!}\right) \approxeq 0.559506714934788\)</span>.</p>
+</blockquote>
+<p>When do we use Poisson distribution rather than the binomial distribution? We must consider the following:</p>
+<ul>
+<li>Does <span class="math inline">\(X\)</span> have a maximum value? This is <span class="math inline">\(n\)</span> in the binomial distribution, and we can use Poisson if this is countably infinite or very large.
+<ul>
+<li>For example, if <span class="math inline">\(X\)</span> is the number of seeds that germinate out of 25 planted, then <span class="math inline">\(X\)</span> has a maximum value of 25 and we should not use the Poisson distribution.</li>
+<li>For example, if <span class="math inline">\(X\)</span> is the number of airplanes taking off, then <span class="math inline">\(X\)</span> has no maximum value - there could theoretically be infinite takeoffs and we should use the Poisson distribution.</li>
+</ul></li>
+<li>Does it make sense to ask how often the event does not occur? This asks if there are finite, distinct trials.
+<ul>
+<li>For example, if a coin is tossed many times, it also makes sense to count how often heads did not occur, so we should not use the Poisson distribution.</li>
+<li>For example, it does not make sense to ask how often a plane is not taking off, so we should use the Poisson distribution.</li>
+</ul></li>
+</ul>
+<p>Calls to a phone occur at an average rate of 3 per minute. What is the probability that 2 calls occur in the next minute given that 6 calls occur in the next 2.5 minutes?</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\lambda = 3\)</span> and <span class="math inline">\(\mu = 3 \times 2.5 = 7.5\)</span>. Let <span class="math inline">\(X_t\)</span> be the number of calls received over a time <span class="math inline">\(t\)</span>.<br />
+Then <span class="math inline">\(P(X_t = x) = \frac{e^{-3t}(3t)^x}{x!}\)</span> because it is a Poisson random variable.<br />
+Clearly, <span class="math inline">\(P(\text{2 in 1 minute} \mid \text{6 in 2.5 minutes}) = \frac{P(\text{2 in 1 minute} \wedge \text{6 in 2.5 minutes})}{P(\text{6 in 2.5 minutes})}\)</span>.<br />
+Clearly, <span class="math inline">\(\frac{P(\text{2 in 1 minute} \wedge \text{6 in 2.5 minutes})}{P(\text{6 in 2.5 minutes})} = \frac{P(\text{2 in 1 minute} \wedge \text{4 in last 1.5 minutes})}{P(\text{6 in 2.5 minutes})}\)</span>, because if only two occur in the first minute and 6 occur in total, then 4 occur in the last 1.5 minutes.<br />
+Clearly, <span class="math inline">\(\text{2 in 1 minute}\)</span> and <span class="math inline">\(\text{4 in last 1.5 minutes}\)</span> are independent.<br />
+So <span class="math inline">\(P(\text{2 in 1 minute} \mid \text{6 in 2.5 minutes}) = \frac{P(\text{2 in 1 minute}) P(\text{4 in last 1.5 minutes})}{P(\text{6 in 2.5 minutes})} = \frac{P(X_1 = 2) P(X_{1.5} = 4)}{P(X_{2.5} = 6)} = \frac{\frac{e^{-3}3^2}{2!} \frac{e^{-4.5}4.5^4}{4!}}{\frac{e^{-7.5}7.5^6}{6!}}\)</span>.<br />
+Incidentally, this is equal to <span class="math inline">\({6 \choose 2}\left(\frac{3}{7.5}\right)^2\left(1 - \frac{3}{7.5}\right)^{6 - 2}\)</span>, which is <span class="math inline">\(P(Y = 2)\)</span> where <span class="math inline">\(Y \sim \operatorname{Bin}\left(6, \frac{3}{7.5}\right)\)</span>.</p>
+</blockquote>
+<p>In general, if we have a Poisson variable and we restrict its maximum value like in the above example, when we then calculate the probability it is equivalent to a binomial distribution.</p>
+<h1 id="section-17">16/6/14</h1>
+<p>We can also combine distributions together to solve problems.</p>
+<p>A large number of ladybugs are released into an orchard. They scatter randomly so that every tree has an average of 6 bugs. Find the probability that any 10 trees have 8 with more than 3 ladybugs:</p>
+<blockquote>
+<p>Let <span class="math inline">\(X\)</span> be the number of ladybugs in any given tree. Clearly, <span class="math inline">\(X \sim \operatorname{Poisson}(6)\)</span> and <span class="math inline">\(P(X &gt; 3) = 1 - P(X = 0) - P(X = 1) - P(X = 2) - P(X = 3)\)</span>.<br />
+So <span class="math inline">\(P(X &gt; 3) = 1 - \frac{e^{-6}6^0}{0!} - \frac{e^{-6}6^1}{1!} - \frac{e^{-6}6^2}{2!} - \frac{e^{-6}6^3}{3!} = 1 - 61e^{-6}\)</span>.<br />
+Let <span class="math inline">\(Y\)</span> be the number of trees out of 10 that have more than 3 ladybugs. Then <span class="math inline">\(Y \sim \operatorname{Bin}(10, P(X &gt; 3))\)</span> and <span class="math inline">\(P(Y = 8) = {10 \choose 8}(1 - 61e^{-6})^8(1 - (1 - 61e^{-6}))^{10 - 8} = 45(1 - 61e^{-6})^8(61e^{-6})^2 \approxeq 0.277182287706655\)</span>.</p>
+</blockquote>
+<p>What is the probability that, given two trees with a total of <span class="math inline">\(t\)</span> ladybugs, there are <span class="math inline">\(x\)</span> on the first tree?</p>
+<blockquote>
+<p>;wip: use the definition of conditional probability and </p>
+</blockquote>
+<h2 id="expected-value-and-variance">Expected Value and Variance</h2>
+<p>We often want summary statistics rather than the full details of the data. For example, the mean, median, and standard deviation.</p>
+<p>A useful way to present data is the frequency distribution, which plots the number of <span class="math inline">\(X = x\)</span> with respect to <span class="math inline">\(x\)</span>. For example, if <span class="math inline">\(X\)</span> represents the number of peope in cars passing over a bridge, then the frequency histogram or table is the number of trials where <span class="math inline">\(X = x\)</span> for each <span class="math inline">\(x\)</span>.</p>
+<p>The <strong>arithmetic mean</strong> or <strong>sample average</strong> of a sample of observations <span class="math inline">\(x = \set{x_1, \ldots, x_n}\)</span> is <span class="math inline">\(\overline x = \frac 1 n \sum_{i = 1}^n x_1\)</span> where <span class="math inline">\(x_1, \ldots, x_n\)</span> are the individual outcomes of each sample. It is the sum of the values divided by the number of values and is not necessarily an exact value of <span class="math inline">\(x\)</span> - it might not be an integer even if <span class="math inline">\(X\)</span> is.</p>
+<p>This is different from the mean/expected value of a sample of observations.</p>
+<h1 id="section-18">18/6/14</h1>
+<p>The set of observed outcomes <span class="math inline">\(x_1, \ldots, x_n\)</span> for a random variable <span class="math inline">\(X\)</span> is a <strong>sample</strong>.</p>
+<p>The <strong>median</strong> (represented <span class="math inline">\(Q_2\)</span>) of a sample of observations <span class="math inline">\(x = \set{x_1, \ldots, x_n}\)</span> is the value <span class="math inline">\(x\)</span> such that when the observations are numerically sorted, half the numbers are below it and half are above. If there are an even number of observations and it is impossible to divide it exactly in half, the mean of the middle two values is used. ;wip: the <span class="math inline">\(x\)</span> should have a tilde over it</p>
+<p>If a set of values is sorted, the median is the value in the middle or the mean of the two values in the middle.</p>
+<p>The <strong>mode</strong> is the value that occurs most often. This is not used very often, and there can be more than one mode if there are values that occur equally often.</p>
+<p>The mean, median, and mode are not necessarily the same, though they all measure centrality/location. Sometimes one will represent the data better than another.</p>
+<p>We previously defined the mean, median, and mode to summarize statistics for a sample of observations for a random variable <span class="math inline">\(X\)</span>. We can also extend these concepts to describe the probability distribution of <span class="math inline">\(X\)</span>.</p>
+<p>The <strong>mean</strong> of a sample set is <span class="math inline">\(\sum_{i = 1}^k x_i \times \frac{\text{the number of occurrences of } x_i}{\text{total number of occurrences of any outcome}}\)</span>, where <span class="math inline">\(x_1, \ldots, x_k\)</span> is now the set of all possible outcomes.</p>
+<p>Clearly, as the number of samples approaches infinity, <span class="math inline">\(\frac{\text{the number of occurrences of } x_i}{\text{total number of occurrences of any outcome}}\)</span> approaches <span class="math inline">\(P(X = x_i) = f(x_i)\)</span>.</p>
+<p>So in the long run, the mean will approach <span class="math inline">\(\mu = E(X) = \sum_{i = 1}^k x_i f_X(x_i)\)</span>. This is known as the <strong>theoretical mean/expected value/expectation</strong>, because it is the average value we would expect if we repeated the experiment an infinite number of times. Clearly, this depends on the probability distribution of <span class="math inline">\(X\)</span>.</p>
+<p>Also, if <span class="math inline">\(g(x)\)</span> is a function of <span class="math inline">\(x\)</span>, then <span class="math inline">\(E(g(X)) = \sum_{i = 1}^k g(x_i) f_X(x_i)\)</span>. <span class="math inline">\(f_X(X)\)</span> is simply a function of <span class="math inline">\(X\)</span>, while <span class="math inline">\(f_X(x)\)</span> is a specific value. <span class="math inline">\(x\)</span> is like a specific value that <span class="math inline">\(X\)</span> can assume.</p>
+<p><span class="math inline">\(E(g(X))\)</span> represents the average value of <span class="math inline">\(g(X)\)</span> when the experiment is repeated an infinite number of times, and can be a decimal number even if <span class="math inline">\(g(x)\)</span> only results in integers.</p>
+<p>Clearly, <span class="math inline">\(E(g(X))\)</span> must be between the smallest and largest value in <span class="math inline">\(g(x_1), \ldots, g(x_k)\)</span>. It is never possible to get a value outside of this range.</p>
+<p>Given a random variable <span class="math inline">\(X\)</span> such that <span class="math inline">\(f_X(x) = \frac 1 3\)</span> and <span class="math inline">\(x = -1, 0, 1\)</span>, and <span class="math inline">\(Y = X^2\)</span>, what is <span class="math inline">\(E(Y)\)</span>?</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(E(Y) = E(X^2) = (-1)^2 \frac 1 3 + 0^2 \frac 1 3 + 1^2 \frac 1 3 = \frac 2 3\)</span>.<br />
+So the expected value of <span class="math inline">\(X^2\)</span> is <span class="math inline">\(\frac 2 3\)</span>.</p>
+</blockquote>
+<p>Also, <span class="math inline">\(E[a_1 \cdot g_1(X) + \ldots + a_n \cdot g_n(X)] = a_1 \cdot E(g_1(x)) + \ldots + a_n \cdot E(g_n(x))\)</span>, so the expected value operator is a linear. If <span class="math inline">\(g(x)\)</span> is a linear function (of the form <span class="math inline">\(aX + b\)</span>), then <span class="math inline">\(E(g(x)) = g(E(X))\)</span>.</p>
+<p><span class="math inline">\(E(k) = k\)</span> for any constant <span class="math inline">\(k\)</span>.</p>
+<h1 id="section-19">20/6/14</h1>
+<p>Let <span class="math inline">\(D\)</span> be the event of a random person having a disease. Let <span class="math inline">\(A, B, C\)</span> represent three disease tests giving a positive result. Test <span class="math inline">\(A\)</span> costs $5, <span class="math inline">\(B\)</span> costs $8, and <span class="math inline">\(C\)</span> costs $40. We know that <span class="math inline">\(P(D) = 0.001, P(A \mid \overline D) = 0.05, P(B \mid \overline D) = 0.03, P(C \mid \overline D) = 0\)</span> - tests <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> can result in false positives, but never false negatives. We want to test a large number of people for <span class="math inline">\(D\)</span> with 100% accuracy:</p>
+<blockquote>
+<p>Assume the tests are independent.<br />
+Clearly, we will choose between three strategies: <span class="math inline">\(A\)</span> and then <span class="math inline">\(C\)</span> if <span class="math inline">\(A\)</span> is positive, <span class="math inline">\(B\)</span> and then <span class="math inline">\(C\)</span> if <span class="math inline">\(B\)</span> is positive, and just <span class="math inline">\(C\)</span>. Every strategy must end with <span class="math inline">\(C\)</span> because it is necessary to make sure a person has <span class="math inline">\(D\)</span>.<br />
+We will first consider the first strategy. Clearly, $P(A) = P(A D) + P(A D) = P(D) P(A D) $ ;wip: strategy 1: $7.04, 2: $9.24, $40</p>
+</blockquote>
+<h3 id="meansvariances-of-distributions">Means/Variances of Distributions</h3>
+<p>Recall that given <span class="math inline">\(g(x)\)</span>, <span class="math inline">\(E(g(X)) = \sum_{i = 1}^k g(x_i) f_X(x_i)\)</span>.</p>
+<p>We want to find <span class="math inline">\(E(X)\)</span> where <span class="math inline">\(X\)</span> follows various probability distributions.</p>
+<p>Find the mean of <span class="math inline">\(X\)</span> given <span class="math inline">\(X \sim \operatorname{Bin}(n, p)\)</span>:</p>
+<blockquote>
+<p>Clearly, the mean is <span class="math inline">\(E(X) = \sum_{x = 0}^n x \cdot \left({n \choose x}p^x(1 - p)^{n - x}\right) = \sum_{x = 1}^n x \frac{n!}{x!(n - x)!} p^x(1 - p)^{n - x} = n\sum_{x = 1}^n \frac{(n - 1)!}{(x - 1)!((n - 1) - (x - 1))!} p^x(1 - p)^{n - x} = np\sum_{x = 1}^n {n - 1 \choose x - 1}p^{x - 1}(1 - p)^{(n - 1) - (x - 1)}\)</span>.<br />
+Let <span class="math inline">\(y = x - 1\)</span> and <span class="math inline">\(m = n - 1\)</span>. Then <span class="math inline">\(E(X) = np\sum_{y = 0}^{n - 1} {n - 1 \choose y}p^y(1 - p)^{(n - 1) - y} = np(1 - p)^m\sum_{y = 0}^m {m \choose y}\left(\frac{p}{1 - p}\right)^y = np(1 - p)^m\left(1 + \frac{p}{1 - p}\right)^m = np(1 - p)^m\left(\frac{1}{1 - p}\right)^m = np\)</span>.</p>
+</blockquote>
+<p>So the mean of a binomial distribution is <span class="math inline">\(np\)</span>.</p>
+<p>Find the mean of <span class="math inline">\(X\)</span> given <span class="math inline">\(X \sim \operatorname{Poisson}(\mu)\)</span>:</p>
+<blockquote>
+<p>Clearly, the mean is <span class="math inline">\(E(x) = \sum_{x = 0}^\infty x \left(\frac{e^{-\mu}\mu^x}{x!}\right) = \mu e^{-\mu}\sum_{x = 1}^\infty \frac{\mu^{x - 1}}{(x - 1)!} = \mu e^{-\mu}\sum_{x = 0}^\infty \frac{\mu^x}{x!} = \mu e^{-\mu}e^x = \mu\)</span>.</p>
+</blockquote>
+<p>So the mean of a Poisson distribution is <span class="math inline">\(\mu\)</span>.</p>
+<p>The expected value is useful for summarizing the values we can expect, but it is often also important to know how much these values will deviate from this average value. Variability is a measurement of this difference.</p>
+<p>The <strong>variance</strong> of a random variable <span class="math inline">\(X\)</span> is defined as <span class="math inline">\(\sigma^2 = \operatorname{Var}(X) = E((X - \mu)^2)\)</span>. In other words, it is the average square of the distance from the mean.</p>
+<p><span class="math inline">\(\sigma\)</span> is the <strong>standard deviation</strong>, and is always the positive square root of the variance. This is useful because the variance has its units squared, so this takes the square root to get the original units of the random variable.</p>
+<h1 id="section-20">23/6/14</h1>
+<p>Also, <span class="math inline">\(\operatorname{Var}(X) = E(X^2 - 2\mu + \mu^2) = E(X^2) - 2\mu \mu + \mu^2 = E(X^2) - \mu^2 = E(X^2) - E(X)^2\)</span>.</p>
+<p>When we have factorials, the form <span class="math inline">\(\operatorname{Var}(X) = E(X(X - 1) + X) - \mu^2 = E(X(X - 1)) + E(X) - \mu^2 = E(X(X - 1)) + \mu - \mu^2\)</span> form is often useful.</p>
+<p>Find the variance of the binomial distribution:</p>
+<blockquote>
+<p>Assume <span class="math inline">\(X \sim \operatorname{Bin}(n, p)\)</span>. Then <span class="math inline">\(f_X(x) = {n \choose x}p^x(1 - p)^{n - x} = \frac{n!}{x!(n - x)!}p^x(1 - p)^{n - x}\)</span>.<br />
+So <span class="math inline">\(\operatorname{Var}(X) = E(X(X - 1)) + np - (np)^2 = n(n - 1)p^2\left(\sum_{x = 2}^n x(x - 1) \frac{(n - 2)!}{(x - 2)!(n - x)!}p^{x - 2}(1 - p)^{n - x}\right) + np - n^2p^2 = n(n - 1)p^2 (p + (1 - p))^{n - 2} + np - n^2p^2\)</span>.<br />
+So <span class="math inline">\(\operatorname{Var}(X) = n(n - 1)p^2 + np - n^2p^2 = np(1 - p)\)</span>.</p>
+</blockquote>
+<p>In the same way, the variance of the Poisson distribution is <span class="math inline">\(\mu\)</span>.</p>
+<p>In summary, the binomial distribution has mean <span class="math inline">\(np\)</span> and variance <span class="math inline">\(np(1 - p)\)</span>, and the Poisson distribution has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\mu\)</span>.</p>
+<p>If <span class="math inline">\(a, b \in \mb{R}\)</span> and <span class="math inline">\(Y = aX + B\)</span>, then <span class="math inline">\(E(Y) = aE(X) + b\)</span> and <span class="math inline">\(\operatorname{Var}(Y) = a^2\operatorname{Var}(X)\)</span>. The variance of a constant is always 0, since a constant never changes, by definition.</p>
+<h1 id="section-21">25/6/14</h1>
+<h2 id="multivariate-distributions">Multivariate Distributions</h2>
+<p>Some experiments have multiple random variables associated with them. For example, the body mass index is dependent on the height and weight of an individual.</p>
+<p>The <strong>joint probability function</strong> of <span class="math inline">\(X_1, \ldots, X_n\)</span> is <span class="math inline">\(f_{X_1, \ldots, X_n}(x_1, \ldots, x_n) = P(X_1 = x_1, \ldots, X_n = x_n)\)</span>.</p>
+<p>It is always true that <span class="math inline">\(0 \le f_{X_1, \ldots, X_n}(x_1, \ldots, x_n) \le 1\)</span> and <span class="math inline">\(\sum_{\text{all } x_1} \ldots \sum_{\text{all } x_n} f_{X_1, \ldots, X_n}(x_1, \ldots, x_n) = 1\)</span>.</p>
+<p>If we have <span class="math inline">\(f_{X, Y, Z}(x, y, z) = P(X = x, Y = y, Z = z)\)</span>, we can isolate <span class="math inline">\(P(X = x)\)</span> or <span class="math inline">\(P(Y = y)\)</span> or even <span class="math inline">\(P(X = x, Z = z)\)</span>. Clearly, <span class="math inline">\(f_Y(y) = \sum_{\text{all } x} f_{X, Y}(x, y)\)</span>. This can be generalized to any number of variables.</p>
+<p>A <strong>marginal distribution</strong> of <span class="math inline">\(X_1, \ldots, X_n\)</span> is <span class="math inline">\(f_{A_1, \ldots, A_k}(a_1, \ldots, a_k) = \sum_{\text{all } b_1} \ldots \sum_{\text{all } b_{n - k}} f_{X_1, \ldots, X_n}(x_1, \ldots, x_n)\)</span> where <span class="math inline">\(\set{A_1, \ldots, A_k} \subseteq \set{X_1, \ldots, X_n}\)</span> and <span class="math inline">\(\set{B_1, \ldots, B_{n - k}} = \set{X_1, \ldots, X_n} \setminus \set{A_1, \ldots, A_k}\)</span>.</p>
+<p>Basically, a marginal distribution of a set of random variables is the probability function if some variables of the probability function are added up to remove their effect from the resulting function. We can prove this using the partition rule.</p>
+<p>Recall that two events <span class="math inline">\(A, B\)</span> are independent if and only if <span class="math inline">\(P(A \cap B) = P(A)P(B)\)</span>. Two random variables <span class="math inline">\(X, Y\)</span> are <strong>independent</strong> if and only if <span class="math inline">\(f_{X, Y}(x, y) = f_X(x)f_Y(y)\)</span> for all <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. For more random variables, there are also similar definitions for pairwise and mutual independence.</p>
+<p>Recall that given two events <span class="math inline">\(A, B\)</span>, <span class="math inline">\(P(A \mid B) = \frac{P(A \cap B)}{P(B)}\)</span>. For two random variables <span class="math inline">\(X, Y\)</span>, <span class="math inline">\(f_X(x \mid y) = \frac{f_{X, Y}(x, y)}{f_Y(y)}\)</span>. This is defined over all <span class="math inline">\(x\)</span> with a fixed <span class="math inline">\(y\)</span>.</p>
+<p>So <span class="math inline">\(f_{X, Y}(x \mid 1) = P(X = x \mid Y = 1)\)</span>. Note that <span class="math inline">\(\sum_{\text{all } x} f_{X, Y}(x, y) = 1\)</span>.</p>
+<p>Let <span class="math inline">\(f_X(x) = \frac 1 4, 1 \le x \le 4, f_Y(y) = \frac 1 3, 1 \le y \le 3\)</span>. Find <span class="math inline">\(f_U(U)\)</span>:</p>
+<blockquote>
+<p>Since <span class="math inline">\(f_U(u) = P(2(Y - X) = u)\)</span>, so we found all the possible <span class="math inline">\(\set{(x_1, y_1), \ldots}\)</span> such that <span class="math inline">\(2(y - x) = u\)</span>.<br />
+So <span class="math inline">\(f_U(u) = \sum_{(x, y) \in \set{(x_1, y_1), \ldots}} f_{X, Y}(x, y)\)</span>.<br />
+Assume <span class="math inline">\(2(y - x) = u\)</span>. Then <span class="math inline">\(y = \frac 1 2 u + x\)</span> and <span class="math inline">\(f_U(u) = \sum_{x \in \set{x_1, \ldots}} f_{X, Y}(x, \frac 1 2 u + x)\)</span>.<br />
+Clearly, <span class="math inline">\(f_{X, Y}(x, y) = \frac 1 4 \times \frac 1 3 = \frac 1 {12}\)</span>, since <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent.<br />
+So <span class="math inline">\(f_U(u) = \begin{cases} \frac{1}{12} &amp;\text{if } u = 0 \\ \frac{2}{12} &amp;\text{if } u = 2 \\ \frac{3}{12} &amp;\text{if } u = 4 \\ \frac{3}{12} &amp;\text{if } u = 6 \\ \frac{2}{12} &amp;\text{if } u = 8 \\ \frac{1}{12} &amp;\text{if } u = 10 \\ 0 &amp;\text{otherwise} \end{cases}\)</span>.</p>
+</blockquote>
+<p>In general, if <span class="math inline">\(Y = g(X_1, \ldots, X_n)\)</span>, then <span class="math inline">\(f_Y(y) = \sum_{\text{all } x_1, \ldots, x_n \text{ where } g(x_1, \ldots, x_n) = y} f_{X_1, \ldots, X_n}(x_1, \ldots, x_n)\)</span>.</p>
+<h1 id="section-22">27/6/14</h1>
+<p>Let <span class="math inline">\(T = X + Y\)</span> where <span class="math inline">\(X \sim \operatorname{Pois}(\mu_1), Y \sim \operatorname{Pois}(\mu_2)\)</span>. What is <span class="math inline">\(f_T(t)\)</span>?</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(f_T(t) = P(X + Y = t)\)</span> where <span class="math inline">\(t = x + y\)</span>.<br />
+So <span class="math inline">\(y = t - x\)</span> and <span class="math inline">\(f_T(t) = \sum_{\text{all } x} f_{X, Y}(x, t - x) = \sum_{x = 0}^\infty f_X(x) f_Y(t - x)\)</span>, since <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent.<br />
+Clearly, <span class="math inline">\(0 \le x \le t\)</span> since <span class="math inline">\(y = t - x\)</span> must be non-negative.<br />
+So <span class="math inline">\(f_T(t) = \sum_{x = 0}^t \frac{e^{-\mu_1}\mu_1^x}{x!} \frac{e^{-\mu_2}\mu_2^{t - x}}{(t - x)!} = e^{-\mu_1 - \mu_2}\mu_2^t \sum_{x = 0}^t \frac{\mu_1^x}{x!} \frac{\mu_2^{-x}}{(t - x)!} = e^{-\mu_1 - \mu_2}\mu_2^t \sum_{x = 0}^t \frac{1}{x!(t - x)!}\left(\frac{\mu_1}{\mu_2}\right)^x\)</span>.<br />
+So <span class="math inline">\(f_T(t) = e^{-\mu_1 - \mu_2}\mu_2^t \frac{1}{t!} \sum_{x = 0}^t \frac{t!}{x!(t - x)!}\left(\frac{\mu_1}{\mu_2}\right)^x = \frac{e^{-(\mu_1 + \mu_2)}\mu_2^t}{t!} \sum_{x = 0}^t {t \choose x}\left(\frac{\mu_1}{\mu_2}\right)^x = \frac{e^{-(\mu_1 + \mu_2)}\mu_2^t}{t!} \left(1 + \frac{\mu_1}{\mu_2}\right)^t = \frac{e^{-(\mu_1 + \mu_2)}\mu_2^t}{t!} \left(\frac{\mu_1 + \mu_2}{\mu_2}\right)^t = \frac{e^{-(\mu_1 + \mu_2)}(\mu_1 + \mu_2)^t}{t!}\)</span>.<br />
+So if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, <span class="math inline">\(X + Y \sim \operatorname{Pois}(\mu_1 + \mu_2)\)</span>.</p>
+</blockquote>
+<h1 id="section-23">2/7/14</h1>
+<h2 id="multinomial-distribution">Multinomial Distribution</h2>
+<p>A <strong>multinomial distribution</strong> is an extension of the binomial distribution, except there are <span class="math inline">\(k\)</span> possible outcomes rather than just success or failure.</p>
+<p>So we have independent trials repeated <span class="math inline">\(n\)</span> times, each independent with the same outcome probabilities <span class="math inline">\(p_1, \ldots, p_k\)</span> for each trial, and our random variables are <span class="math inline">\(X_1, \ldots, X_k\)</span>, the number of times outcomes <span class="math inline">\(x_1, \ldots, x_k\)</span> occurred, respectively.</p>
+<p>For example, asking random people what their favourite color is, where our random variables are the number of people who like particular colors.</p>
+<p>Let <span class="math inline">\(p_1, \ldots, p_k\)</span> be the probability that the outcomes <span class="math inline">\(x_1, \ldots, x_k\)</span> occurs for a single trial. Let <span class="math inline">\(X_1, \ldots, X_k\)</span> be the number of times <span class="math inline">\(x_1, \ldots, x_k\)</span> occur.</p>
+<p>Note that <span class="math inline">\(X_1 + \ldots + X_k = n\)</span> and <span class="math inline">\(p_1 + \ldots + p_k = 1\)</span>.</p>
+<p>If <span class="math inline">\(X_1, \ldots, X_k\)</span> follow a multinomial distribution, then <span class="math inline">\(X_1, \ldots, X_k \sim \operatorname{Mult}(n; p_1, \ldots, p_k)\)</span>. Note that <span class="math inline">\(X_1, \ldots, X_k\)</span> are all related to each other.</p>
+<p>Clearly, there are <span class="math inline">\({n \choose x_1}{n - x_1 \choose x_2} \cdots {n - x_1 \ldots - x_{n - 1} \choose x_k} = \frac{n!}{x_1! \cdots x_k!}\)</span> ways we can arrange <span class="math inline">\(x_1, \ldots, x_k\)</span> items of type <span class="math inline">\(1, \ldots, k\)</span> repsectively.</p>
+<p>Clearly, each arrangement has probability <span class="math inline">\(p_1^{x_1} \cdots p_n^{x_k}\)</span> of occurring in a given trial.</p>
+<p>So if <span class="math inline">\(X_1, \ldots, X_k \sim \operatorname{Mult}(n; p_1, \ldots, p_k)\)</span>, then <span class="math inline">\(f_{X_1, \ldots, X_k}(x_1, \ldots, x_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_n^{x_k}\)</span>.</p>
+<p>If we want the marginal probability distribution, this distribution makes it relatively simple. If we are only interested in <span class="math inline">\(X_i\)</span>, we can set <span class="math inline">\(x_i\)</span> as success and all other outcomes as failure. So <span class="math inline">\(X_i \sim \operatorname{Bin}(n, p_i)\)</span>. This is because the physical setup of the experiments is exactly that of the binomial distribution when we do this.</p>
+<p>Basically, when we have multiple random variables with binomial distributions, all mutually exclusive, then they all form a multinomial distribution where the number of trials is the same and the probabilities are those of each binomial distribution.</p>
+<h1 id="section-24">4/7/14</h1>
+<p>Teapots are produced with a success probability of <span class="math inline">\(p\)</span>, and continue to be produced until there are 12 successes. Let <span class="math inline">\(X\)</span> be the number of rejects before a success. What is the probability that 6 pots are produced after 0 rejects, 3 after 1 reject, 2 after 2 rejects, and 1 after 3 or more?</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(X \sim \operatorname{Geo}(p)\)</span>, because <span class="math inline">\(X\)</span> is the number of failures before the first success. So <span class="math inline">\(f_X(x) = p(1 - p)^x\)</span>.<br />
+Let <span class="math inline">\(Y_0, Y_1, Y_2\)</span> be the number of teapots made after <span class="math inline">\(0, 1, 2\)</span> rejects, respectively. Let <span class="math inline">\(Y_3\)</span> be the number of teapots made after 3 or more rejects.<br />
+Then <span class="math inline">\(Y_0, Y_1, Y_2, Y_3 \sim \operatorname{Mult}(12; f_X(0), f_X(1), f_X(2), 1 - (f_X(0) + f_X(1) + f_X(2)))\)</span>.<br />
+So <span class="math inline">\(Y_0, Y_1, Y_2, Y_3 \sim \operatorname{Mult}(12; p, p(1 - p), p(1 - p)^2, (1 - p)^3)\)</span>.<br />
+So <span class="math inline">\(f_{Y_0, Y_1, Y_2, Y_3}(y_0, y_1, y_2, y_3) = \frac{12!}{y_0!y_1!y_2!y_3!} p^{y_0} p^{y_1}(1 - p)^{y_1} p^{y_2}(1 - p)^{2y_2} (1 - p)^{3y_3} = \frac{12!}{y_0!y_1!y_2!y_3!} p^{y_0 + y_1 + y_2}(1 - p)^{y_1 + 2y_2 + 3y_2}\)</span>.<br />
+So the probability is <span class="math inline">\(f_{Y_0, Y_1, Y_2, Y_3}(6, 3, 2, 1) = \frac{12!}{6!3!2!1!} p^{11}(1 - p)^{10} = 55440 p^{11}(1 - p)^{10}\)</span>.</p>
+</blockquote>
+<h2 id="covariance-and-correlation">Covariance and Correlation</h2>
+<p><span class="math inline">\(E(g(X_1, \ldots, X_n)) = \sum_{\text{all } x_1} \cdots \sum_{\text{all } x_n} g(x_1, \ldots, x_n)f(x_1, \ldots, x_n)\)</span>.</p>
+<h1 id="section-25">7/7/14</h1>
+<p>If <span class="math inline">\(X_1, \ldots, X_k \sim \operatorname{Mult}(n, p_1, \ldots, p_k)\)</span>, then <span class="math inline">\(E(X_1, \ldots, X_k) = \sum_{x_1 = 0}^n\)</span> and <span class="math inline">\(E(X_i) = np_i\)</span> since <span class="math inline">\(X_i \sim \operatorname{Bin}(n, p_i)\)</span>. ;wip</p>
+<p>THe covariance and correlation measures the strength of the relationship between two or more random variables.</p>
+<p>The <strong>covariance</strong> between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined as <span class="math inline">\(\operatorname{Cov}(X, Y) = \sigma_{XY} = E((X - E(X))(Y - E(Y)))\)</span>. We can then expand this to get <span class="math inline">\(\sigma_{XY} = E(XY) - E(X)E(Y) - E(X)E(Y) + E(X)E(Y) = E(XY) - E(X)E(Y)\)</span>. This is the expected value of the product of how much two variables differ from their expected value - the analogue of variance for two variables.</p>
+<p>For covariance, the only thing we care about is the sign - the actual magnitude of the covariance is not a useful value.</p>
+<p>If the covariance is negative, this means that two variables have a negative relationship. A negative covariance means that <span class="math inline">\(Y &gt; E(Y)\)</span> generally when <span class="math inline">\(X &gt; E(Y)\)</span> - as <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> tends to decrease, and vice versa.</p>
+<p>If the covariance is positive, this means that two variables have a positive relationship. A positive covariance means that <span class="math inline">\(Y &lt; E(Y)\)</span> generally when <span class="math inline">\(X &gt; E(Y)\)</span> - as <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> tends to increase, and vice versa.</p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(E(g(X)h(Y)) = E(g(X))E(h(Y))\)</span>. So in this case, the covariance is <span class="math inline">\(\sigma_{XY} = E(XY) - E(X)E(Y) = E(X)E(Y) - E(X)E(Y) = 0\)</span>.</p>
+<p>In fact, if two variables are independent, the covariance of the two variables will be 0. Previously, we could only test if variables were independent by calculating the marginal probability functions for each variable and checking if the product of all of them is equal to the joint probability function - checking if <span class="math inline">\(f(X, Y) = f(X) f(Y)\)</span>.</p>
+<p>However, the converse isn't true - it is possible to have dependent variables that have a covariance of 0. This is still useful because if we calculate the covariance and it is not 0, we know the two variables are not independent.</p>
+<p>The <strong>correlation coefficient</strong> between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is <span class="math inline">\(\rho_{XY} = \frac{\sigma_{XY}}{\sigma_X \sigma_Y}\)</span> - the covariance over the product of the standard deviations of each variable.</p>
+<p>The correlation coefficient measures the strength of <strong>linear</strong> relationships between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> - how closely the relationship resembles a line. There can still be other strong relationships between the variables even if the correlation is low.</p>
+<p>The correlation coefficient is bounded: <span class="math inline">\(-1 \le \rho_{XY} \le 1\)</span>. As a result, the sign and the magnitude of <span class="math inline">\(\rho_{XY}\)</span> is significant.</p>
+<p>A negative sign again means that there is a negative relationship and a positive sign again means a positive relationship. As <span class="math inline">\(\rho_{XY} \to \pm 1\)</span>, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> approach perfect linear relationships. If <span class="math inline">\(\rho_{XY} = 0\)</span>, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent and are <strong>uncorrelated</strong>.</p>
+<p>Correlation allows us to capture information about relationships between variables even when they are not independent.</p>
+<h1 id="section-26">9/7/14</h1>
+<p>It is always true that <span class="math inline">\(\operatorname{Cov}(X, X) = \operatorname{Var}(X)\)</span> and <span class="math inline">\(\operatorname{Cov}(aX + bY, cU + dV) = ac \operatorname{Cov}\)</span>. ;wip</p>
+<p><span class="math inline">\(\operatorname{Var}(aX + bY) = a^2 \operatorname{Var}(X) + b^2 \operatorname{Var}(Y) + 2ab \operatorname{Cov}(X, Y)\)</span>.</p>
+<p><span class="math inline">\(\operatorname{Var}(\sum a_i X_i) = \sum a_i \operatorname{Var}(X_i) + 2 \sum_{i &lt; j} a_i a_j \operatorname{Cov}(X_i, X_j)\)</span>.</p>
+<p><span class="math inline">\(\sigma_{\overline X}^2 = \frac{\sigma_X^2}{n}\)</span> where <span class="math inline">\(n\)</span> is the number of samples - the variance of the complement is inversely correlated to the number of samples in <span class="math inline">\(X\)</span>.</p>
+<p>So when we increase <span class="math inline">\(n\)</span>, <span class="math inline">\(\sigma_{\overline X}^2\)</span> gets smaller and smaller. This is because when we add more data to our sample set, our sample average becomes closer to the true expected value.</p>
+<p>An <strong>indicator variable</strong> is a binary variable, that indicates whether an event occurred or not. For example, <span class="math inline">\(X \sim \operatorname{Bin}(n, p)\)</span> where <span class="math inline">\(X_i\)</span> is 1 if the <span class="math inline">\(i\)</span>th trial was successful or 0 otherwise, so <span class="math inline">\(X = \sum_{i = 1}^n X_i\)</span>.</p>
+<p>So <span class="math inline">\(E(X) = E(\sum_{i = 1}^n X_i) = \sum_{i = 1}^n E(X_i) = \sum_{i = 1}^n p = np\)</span>, as required. This is an easier way to find variance and mean when there are independent indicator variables.</p>
+<p>We have <span class="math inline">\(n\)</span> letters are addressed to <span class="math inline">\(n\)</span> people, <span class="math inline">\(n\)</span> envolopes are addressed to those <span class="math inline">\(n\)</span> people, and randomly put letters into envelopes. What is the mean and variance of the number of letters placed in the right encolope?</p>
+<blockquote>
+<p>Let <span class="math inline">\(X_i\)</span> be 1 if letter <span class="math inline">\(i\)</span> is in the right envolope and 0 otherwise. Then <span class="math inline">\(X = \sum X_i\)</span> is the number of letters placed in the right envelope.<br />
+Since the selection is done without replacement, we have a hypergeometric distribution. Note that <span class="math inline">\(X_i\)</span> is not independent since it depends in <span class="math inline">\(i\)</span>.<br />
+Clearly, <span class="math inline">\(E(X) = \sum_{i = 1}^n E(X_i)\)</span> and ;wip Clearly, <span class="math inline">\(\operatorname{Var}(\sum_{i = 1}^n x_i) = \operatorname{Var}(X_i)\)</span> ;wip</p>
+</blockquote>
+<h1 id="section-27">11/7/14</h1>
+<h2 id="continuous-probability-distributions">Continuous Probability Distributions</h2>
+<p>Random variables can alsso be continuous. These are variables that can have any real number as a value. This are treated differently from discrete variables because <span class="math inline">\(P(X = x) = 0\)</span> - there are so many possible outcomes that the probability that any outcome actually occurs is negligible.</p>
+<p>For ocntinuous random variables, we actually care about the outcome falling between certain values. For this we consider the area under the curve of the probability function - the integral between two endpoints.</p>
+<p>The probability that <span class="math inline">\(a \le X \le b\)</span> is therefore <span class="math inline">\(\int_a^b f(x) \dee x\)</span>. This is called a <strong>probability density function</strong> (PDF), analogous to the probability distribution function for discrete variables.</p>
+<p>The <strong>cumulative distribution function</strong> (CDF) is similar to those in discrete variables. It is <span class="math inline">\(P(X \le x)\)</span> and here, <span class="math inline">\(F(-\infty) = 0, F(\infty) = 1\)</span>, <span class="math inline">\(F\)</span> is non-decreasing, and <span class="math inline">\(P(a \le X \le b) = F(b) - F(a)\)</span>.</p>
+<p>So <span class="math inline">\(F_X(x) = \int_{-\infty}^x f_X(t) \dee t\)</span> and <span class="math inline">\(f_X(x) = \frac{\dee F_X(x)}{\dee x}\)</span>. As a result, <span class="math inline">\(f_X(x)\)</span> can actually be more than 1 - it does not have an upper bound (it does have a lower bound since <span class="math inline">\(F_X\)</span> is non-decreasing).</p>
+<p><span class="math inline">\(f_X(x)\)</span> is not the same as <span class="math inline">\(P(X = x)\)</span>, but rather <span class="math inline">\(f(x) \Delta x\)</span> is the probability that <span class="math inline">\(X\)</span> is in the very small interval <span class="math inline">\(\Delta x\)</span>.</p>
+<p>Also, since <span class="math inline">\(P(X = a) = P(X = b) = 0\)</span>, <span class="math inline">\(P(a \le X \le b) = P(a &lt; X &lt; b)\)</span>.</p>
+<p>Let <span class="math inline">\(Y\)</span> be a function of <span class="math inline">\(X\)</span>, both random variables.</p>
+<p>First, we write the CDF of <span class="math inline">\(Y\)</span> as a function of <span class="math inline">\(X\)</span>. Then, we use <span class="math inline">\(F_X(x)\)</span> to find <span class="math inline">\(F_Y(y)\)</span>, and then write the domain of the functions.</p>
+<p>Let <span class="math inline">\(F_X(x) = \frac x 4, 0 \le x \le 4\)</span> and <span class="math inline">\(Y = \frac 1 X\)</span>. Find the PDF of <span class="math inline">\(Y\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(F_Y(y) = P(Y \le y) = P(\frac 1 X \le y) = P(X \ge \frac 1 y) = 1 - P(X &lt; \frac 1 y)\)</span>.<br />
+So <span class="math inline">\(F_Y(y) = 1 - F_X(\frac 1 y) = 1 - 1 - \frac{\frac 1 y}{4} = 1 - \frac 1 {4y}\)</span>.<br />
+So <span class="math inline">\(f_Y(y) = \frac{\dee}{\dee x} \left(1 - \frac 1 {4y}\right) = \frac 1 {4y^2}\)</span>.<br />
+Since <span class="math inline">\(0 \le x \le 4\)</span>, <span class="math inline">\(\frac 1 4 \le y \le \infty\)</span>.</p>
+</blockquote>
+<p>The expected value for continuous random variables is <span class="math inline">\(\int_{\text{all } x} x \cdot f_X(x) \dee x\)</span>.</p>
+<h1 id="section-28">14/7/14</h1>
+<h2 id="continuous-uniform-distribution">Continuous Uniform Distribution</h2>
+<ul>
+<li><span class="math inline">\(X \in [a, b]\)</span> - a closed interval.</li>
+<li>All subintervals of a given length are equally likely.</li>
+</ul>
+<p>If this is the case, then <span class="math inline">\(X\)</span> has a continuous uniform distribution and <span class="math inline">\(f_X(x) = k\)</span>. However, <span class="math inline">\(\int_a^b f_X(x) \dee x = 1\)</span>, so <span class="math inline">\(\evalat{kx}_a^b = 1\)</span> and <span class="math inline">\(k = \frac{1}{b - a}\)</span>. So <span class="math inline">\(f_X(x) = \frac{1}{b - a}\)</span> and <span class="math inline">\(F_X(x) = \int_a^x f_X(t) \dee t = \begin{cases} 0 &amp;\text{if } x &lt; a \\ \frac{x}{b - a} &amp;\text{if } a \le x \le b \\ 1 &amp;\text{if } b &lt; x \end{cases}\)</span>.</p>
+<p>The mean is <span class="math inline">\(\mu_X = \frac{b + a}{2}\)</span> and the variance is <span class="math inline">\(\sigma_X^2 = \frac{(b - a)^2}{12}\)</span>.</p>
+<p>If <span class="math inline">\(f_U(u) = 0.1e^{-0.1u}, u &gt; 0\)</span>, then <span class="math inline">\(Y = e^{-0.1U}\)</span> has a continuous uniform distribution.</p>
+<p>This is because <span class="math inline">\(F_Y(y) = P(e^{-0.1u} \le y) = P(-0.1u \le \ln y) = P(u \le -10 \ln y) = F_U(-10\ln y)\)</span>. Since <span class="math inline">\(F_U(u) = \int_0^u 0.1e^{-0.1t} \dee t = 1 - e^{-0.1u}\)</span>, <span class="math inline">\(F_Y(y) = e^{-0.1(-10\ln y)} = y\)</span>, so <span class="math inline">\(f_Y(y) = 1\)</span>. ;wip: wait what this can't be right</p>
+<p>In this way we can use this distribution to transform anything into a continuous uniform distribution.</p>
+<h2 id="exponential-distribution">Exponential Distribution</h2>
+<p>Physical Setup:</p>
+<ul>
+<li>Event is a Possion process - independent, uniform, and homogeneous.</li>
+<li>Events occur at rate <span class="math inline">\(\lambda\)</span> per unit time.</li>
+<li><span class="math inline">\(X\)</span> is the length of time we wait until the first occurrence of the event.</li>
+</ul>
+<p>If this is the case, then <span class="math inline">\(X\)</span> has an exponential distribution, and <span class="math inline">\(f_X(x) = \lambda e^{-\lambda x}\)</span> where <span class="math inline">\(\lambda\)</span> is the average rate of the event occurring per unit time.</p>
+<p>Clearly, <span class="math inline">\(F_X(x) = P(X \le x)\)</span>. If <span class="math inline">\(Y\)</span> is the number of events occurring in an interval of length <span class="math inline">\(x\)</span>, then <span class="math inline">\(Y \sim \operatorname{Pois}(\lambda x)\)</span>.</p>
+<p>So <span class="math inline">\(F_X(x) = 1 - P(\text{time to first occurrence} &gt; x) = 1 - P(Y = 0) = 1 - \frac{e^{-\lambda x}(\lambda x)^0}{0!} = 1 - e^{-\lambda x}\)</span>.</p>
+<p>So <span class="math inline">\(f_X(x) = \lambda e^{-\lambda x}\)</span>. Sometimes, we also write it in terms of <span class="math inline">\(\theta = \frac 1 \lambda\)</span>. Here, <span class="math inline">\(\theta\)</span> represents the average amount of time before an event occurring, as opposed to <span class="math inline">\(\lambda\)</span>, which is the average rate of occurrence per unit time.</p>
+<p><span class="math inline">\(\lambda\)</span> is the frequency, <span class="math inline">\(\theta\)</span> is the period.</p>
+<p>It is important to distinguish between counting the number of occurrences of an event in an interval, and counting the time until an occurrence.</p>
+<p>The mean and variance would need to be found using integration by parts. Instead, we will use the <strong>Gamma function</strong> - <span class="math inline">\(\Gamma(a) = \int_0^\infty x^{a - 1}e^{-x} \dee x\)</span>. For positive integer values of <span class="math inline">\(a\)</span>, this is equivalent to <span class="math inline">\((a - 1)!\)</span> - the gamma function is a generalization of the factorial.</p>
+<p>Clearly, <span class="math inline">\(\Gamma(a) = (a - 1)\Gamma(a - 1)\)</span>. So <span class="math inline">\(\Gamma(5) = 4! = 24\)</span>. Also, <span class="math inline">\(\Gamma\left(\frac 1 2\right) = \sqrt{\pi}\)</span>.</p>
+<p>So <span class="math inline">\(E(X) = \int_0^\infty x \lambda e^{-\lambda x} \dee x\)</span>. Let <span class="math inline">\(u = \lambda x\)</span>. Then <span class="math inline">\(E(X) = \frac 1 \lambda \int_0^\infty ue^{-u} \dee u = \frac 1 \lambda \Gamma(2) = \frac 1 \lambda\)</span>. In the same way, <span class="math inline">\(\operatorname{Var}(X) = \frac 1 {\lambda^2}\)</span>.</p>
+<h1 id="section-29">16/7/14</h1>
+<p>The <strong>memoryless property</strong> states that <span class="math inline">\(P(X &gt; a + b \mid X &gt; b) = P(X &gt; a)\)</span>. This means that if we have been waiting for 10 minutes already and someone comes and starts waiting, we both have the same probability of observing the event. In other words, given that we have already waited so long, it is exactly the same as if we just started observing.</p>
+<h2 id="normal-distribution">Normal Distribution</h2>
+<p>Physical setup:</p>
+<ul>
+<li><span class="math inline">\(X \in (-\infty, \infty)\)</span>.</li>
+<li><span class="math inline">\(X\)</span> has a normal distribution.</li>
+</ul>
+<p>If all of the above are satisfied, then <span class="math inline">\(X \sim \operatorname{N}(\mu, \sigma^2)\)</span> and <span class="math inline">\(f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac 1 2 \left(\frac{x - \mu}{\sigma}\right)^2}, -\infty &lt; x &lt; \infty\)</span>. Also, <span class="math inline">\(\mu = E(X)\)</span> and <span class="math inline">\(\sigma^2 = \operatorname{Var}(x)\)</span>.</p>
+<p>The normal distribution is symmetric, so <span class="math inline">\(f_X(-x) = f_X(x)\)</span>, and looks like a bell curve centered around <span class="math inline">\(x = \mu\)</span>.</p>
+<p>Note that the physical setup did not give any constraints that directly imply a variable has a normal distribution. This is because the normal distribution appears in so many different setups that it is difficult to list all of them. For example, a random variable representing height in a population follows a normal distribution, or adding up a large number of uniform random variables. In fact, most of the random variables we deal with in statistics follows a normal distribution.</p>
+<p><span class="math inline">\(F_X(x) = \int_{-\infty}^x \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac 1 2 \left(\frac{t - \mu}{\sigma}\right)^2} \dee t\)</span> doesn't simplify very well, so we often use numerical methods such as probability tables to approximate <span class="math inline">\(F_X(x)\)</span>.</p>
+<p>The <strong>standard normal distribution</strong> is <span class="math inline">\(Z \sim \operatorname{N}(0, 1)\)</span>. This is the one we make the probability tables for.</p>
+<p>If <span class="math inline">\(X \sim \operatorname{N}(\mu, \sigma^2)\)</span>, then <span class="math inline">\(\frac{X - \mu}{\sigma} = Z\)</span> - we can transform any normally distributed variable into the standard normal distribution.</p>
+<h1 id="section-30">18/7/14</h1>
+<p>The normal distribution is also known as the <strong>Gaussian distribution</strong>, <span class="math inline">\(\operatorname{G}(\mu, \sigma)\)</span>. This differs slightly from the normal distribution since we pass <span class="math inline">\(\sigma\)</span> instead of <span class="math inline">\(\sigma^2\)</span>. So <span class="math inline">\(X \sim N(1, 4)\)</span> is the same as <span class="math inline">\(X \sim G(1, 2)\)</span>.</p>
+<p>For example, let <span class="math inline">\(X \sim \operatorname{N}(3, 25)\)</span>. Then <span class="math inline">\(P(x &lt; 2) = P(\frac{x - \mu}{\sigma} &lt; \frac{2 - 3}{25}) = P(z &gt; 0.4) = 1 - P(z \le 0.4) = 0.34458\)</span>.</p>
+<p>;wip: finish copying this</p>
+<p>Let <span class="math inline">\(X \sim \operatorname{N}(\mu, \sigma^2)\)</span>. Then <span class="math inline">\(aX + b \sim \operatorname{N}(a\mu + b, a^2\sigma^2)\)</span>, since <span class="math inline">\(E(aX + b) = E(aX + b) = aE(x) + b\)</span>.</p>
+<p>Let <span class="math inline">\(X \sim \operatorname{N}(\mu_1, \sigma_1^2)\)</span> and <span class="math inline">\(Y \sim \operatorname{N}(\mu_2, \sigma_2^2)\)</span>. Then <span class="math inline">\(aX + bY \sim \operatorname{N}(a\mu_1 + b\mu_2, a^2\sigma_1^2 + b^2\sigma_2^2)\)</span>, since <span class="math inline">\(E(aX + bY) = aE(X) + bE(Y)\)</span> and <span class="math inline">\(\operatorname{Var}(aX + bY) = \operatorname{Var}(aX) + \operatorname{Var}(bY) = a^2\operatorname{Var}(X) + b^2\operatorname{Var}(Y)\)</span>. ;wip: check this in the slides</p>
+<p>&quot;iid&quot; stands for independently and identically distributed. If <span class="math inline">\(X_1, \ldots, X_n \sim \operatorname{N}(\mu, \sigma^2)\)</span>, then <span class="math inline">\(X_1 + \ldots + X_n \sim \operatorname{N}\left(\mu, \frac 1 n \sigma^2\right)\)</span>.</p>
+<p>Let <span class="math inline">\(X \sim \operatorname{N}(3, 5), Y \sim \operatorname{N}(6, 14)\)</span>. Find <span class="math inline">\(P(X &gt; Y)\)</span>:</p>
+<blockquote>
+<p>Let <span class="math inline">\(W = X - Y\)</span>. Then <span class="math inline">\(W \sim \operatorname{N}(-3, 19)\)</span>.<br />
+Clearly, <span class="math inline">\(P(X &gt; Y) = P(W &gt; 0) = P\left(\frac{w - \mu_W}{\sigma_W} &gt; \frac{0 - (-3)}{\sqrt{19}}\right) = 1 - P(z &lt; 0.69) = 1 - 0.7549 = 0.2451\)</span>.</p>
+</blockquote>
+<h1 id="section-31">21/7/14</h1>
+<p>Let <span class="math inline">\(X \sim \operatorname{N}(5, 4), Y \sim \operatorname{N}(7, 9)\)</span>. What is the probability that <span class="math inline">\(2X\)</span> differs from <span class="math inline">\(Y\)</span> by more than 4?</p>
+<blockquote>
+<p>Clearly, the probabilility is <span class="math inline">\(P(\abs{2X - Y} &gt; 4) = P(2X - Y &gt; 4) + P(2X - Y &lt; -4)\)</span>. Clearly, <span class="math inline">\(E(2X - Y) = 2E(X) - E(Y) = 2 \cdot 5 - 7 = 3\)</span>.<br />
+So <span class="math inline">\(\operatorname{Var}(2X - Y) = 25\)</span> ;wip: how? So $P( &gt; 4) = P(Z &gt; ) + P(Z &lt; ) = P(Z &gt; 1 5) + P(Z &lt;  5) = (1 - P(Z &lt; 1 5)) + (1 - P(Z &lt; 7 5)) $. ;wip</p>
+</blockquote>
+<p>The normal distribution can be used to approximate linear combinations of variables with non-normal distributions. This is due to the <strong>central limit theorem</strong> - sums of random variables tend to approach a normal distribution.</p>
+<p>As we add up more and more random variables, the central limit theorem tells us that the sum of all the variables approximates a normal distribution.</p>
+<p>If <span class="math inline">\(X_1, \ldots, X_n\)</span> are independent random variables with the same distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, then as <span class="math inline">\(n \to \infty\)</span>, the cumulative distribution function <span class="math inline">\(\frac{\sum X_i - n\mu}{\sigma \sqrt{n}}\)</span> (discrete) and the cumulative density function <span class="math inline">\(\frac{\overline X - \mu}{\frac{\sigma}{\sqrt{n}}}\)</span> (continuous) approaches <span class="math inline">\(\operatorname{N}(0, 1)\)</span>.</p>
+<p>We often use this to approximate multiple distributions when <span class="math inline">\(n\)</span> is large. Note that this works even if <span class="math inline">\(X_1, \ldots, X_n\)</span> has a non-normal distribution, like exponential or binomial. In fact, it works for any distribution that has a mean and variance. The accuracy of the approximation depends on how large <span class="math inline">\(n\)</span> is and how symmetric the distributions are.</p>
+<p>So for large <span class="math inline">\(n\)</span>, <span class="math inline">\(\sum_{i = 0}^n X_i \sim \operatorname{N}(n \mu, n \sigma^2)\)</span>. Also , <span class="math inline">\(\overline X \sim \operatorname{N}\left(\mu, \frac{\sigma^2}{n}\right)\)</span></p>
+<h1 id="section-32">23/7/14</h1>
+<p>When we use a continuous random distribution to approximate a discrete distribution, we need to make slight adjustments to make the approximation more accurate. This is because on a histogram, the continuous distribution is based on the left edge of the rectangle, when the center of the rectangle is a better approximation.</p>
+<p>This is called the <strong>continuity correction</strong> - the correction that improves continuous approximations of discrete distributions.</p>
+<p>This correction can be seen from a graph sketch. When we have something like <span class="math inline">\(P(X \le x)\)</span> where <span class="math inline">\(X\)</span> is a discrete distribution like Poisson or Binomial, then <span class="math inline">\(P(X \le x) = P(X &lt; x + 1)\)</span>. So if <span class="math inline">\(Y\)</span> is a normal distribution, then <span class="math inline">\(P(X \le x + 0.5)\)</span> is a better approximation than <span class="math inline">\(P(X \le x)\)</span>, since it accounts for the value at the center of the rectangle rather than at the left. This is a similar idea to the Riemann sum approximation.</p>
+<p>We apply the continuity correction as soon as we make the approximation, before we do any standardization into <span class="math inline">\(Z\)</span>.</p>
+<p>Also, if <span class="math inline">\(X \sim \operatorname{Pois}(\mu)\)</span> and <span class="math inline">\(Y = \frac{X - \mu}{\sqrt{\mu}}\)</span>, then <span class="math inline">\(Y\)</span> approximates <span class="math inline">\(\operatorname{N}(0, 1)\)</span>.</p>
+<p>We don't always add 0.5, but we do if the unit is assumed to be 1. If we have a different unit, the continuity correction should add half of that unit.</p>
+<h1 id="section-33">25/7/14</h1>
+<p>Also, if <span class="math inline">\(X \sim \operatorname{Bin}(n, p)\)</span> and <span class="math inline">\(Y = \frac{X - np}{\sqrt{np(1 - p)}}\)</span>, then <span class="math inline">\(Y\)</span> approximates <span class="math inline">\(\operatorname{N}(0, 1)\)</span>. So <span class="math inline">\(X \sim \operatorname{N}(np, np(1 - p))\)</span>.</p>
+<p>As a rule of thumb, this approximation works best when <span class="math inline">\(np \ge 5\)</span> and <span class="math inline">\(np(1 - p) \ge 5\)</span>. The approximation gets better for larger <span class="math inline">\(n\)</span>.</p>
+<h1 id="section-34">28/7/14</h1>
+<h2 id="moment-generating-functions">Moment Generating Functions</h2>
+<p>The moment generating function uniquely determines a distribution, just like the density function and the cumulative function. This is the value <span class="math inline">\(M_X(t) = E(e^{tX}) = \sum_{\text{all } x} e^{tx} f(x)\)</span>, where <span class="math inline">\(t\)</span> is a constant such that <span class="math inline">\(M_X(t)\)</span> is defined for some interval of <span class="math inline">\(t\)</span>, <span class="math inline">\([-a, a]\)</span>.</p>
+<p>For continuous random variables, <span class="math inline">\(M_X(t) = \int_{-\infty}^\infty e^{tx} f(x) \dee x\)</span>.</p>
+<p>Moment generating functions allow us to find the expected value of various exponents of the random variable.</p>
+<p>The <strong>moments</strong> of <span class="math inline">\(X\)</span> are the expected values of <span class="math inline">\(X^r\)</span> for <span class="math inline">\(r \in [-a, a]\)</span>. <span class="math inline">\(E(X^r)\)</span> is the <span class="math inline">\(r\)</span>th moment of <span class="math inline">\(X\)</span>. It is always true that <span class="math inline">\(E(X^r) = M^{(r)}(0) = \evalat{\frac{\dee^r M(t)}{\dee t^r}}_{t = 0}\)</span>.</p>
+<p>Find the moment generating function of the binomial distribution:</p>
+<blockquote>
+<p>Let <span class="math inline">\(X \sim \operatorname{Bin}(n, p)\)</span>. Then <span class="math inline">\(f(x) = {n \choose x}p^x(1 - p)^{n - x}\)</span>.<br />
+Then <span class="math inline">\(M_X(t) = E(e^{tX}) = \sum_{x = 0}^n e^{tx} {n \choose x}p^x(1 - p)^{n - x} = (pe^t + 1 - p)^n\)</span>, by the binomial theorem.</p>
+</blockquote>
+<p>So if <span class="math inline">\(X \sim \operatorname{Bin}(n, p)\)</span>, then <span class="math inline">\(M_X(t) = (pe^t + 1 - p)^n\)</span>. Also, <span class="math inline">\(E(X(X - 1)) + E(X) - E(X)^2\)</span>.</p>
+<p>In the same way, we can find the moment generating function for the Poisson distribution. If <span class="math inline">\(X \sim \operatorname{Pois}(\mu)\)</span>, then <span class="math inline">\(M_X(t) = e^{\mu(e^t - 1)}\)</span>. From this we can prove that <span class="math inline">\(E(X) = \operatorname{Var}(X) = \mu\)</span>.</p>
+<p>The moment generating function is unique, so if two random variables have the same one, they have the same distribution. We can use this to prove that the limit of some sequence of distributions approaches some limiting distribution.</p>
+<p>For example, use moment generating functions to show that the binomimal distribution can be approximated by the Poisson distribution.</p>
+<blockquote>
+<p>Let <span class="math inline">\(X \sim \operatorname{Bin}(n, p)\)</span>. Clearly, <span class="math inline">\(M_X(t) = (pe^{t} + 1 - p)^n = (1 + p(e^t - 1))^n\)</span>. Let <span class="math inline">\(\mu = np\)</span>.<br />
+Then <span class="math inline">\(M_X(t) = \left(1 + \frac \mu n (e^t - 1)\right)^n\)</span> and <span class="math inline">\(\lim_{n \to \infty} M_X(t) = e^{\mu(e^t - 1)}\)</span>, the moment generating function for <span class="math inline">\(\operatorname{Pois}(\mu)\)</span>.<br />
+So as <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(X \sim \operatorname{Pois}(\mu)\)</span> where <span class="math inline">\(\mu = np\)</span>.</p>
+</blockquote>
+<p>Also, if <span class="math inline">\(X \sim \operatorname{N}(\mu, \sigma^2)\)</span>, then <span class="math inline">\(M_X(t) = e^{\mu t + \frac{\sigma^2 t^2}{2}}\)</span>.</p>
+<h1 id="section-35">30/7/14</h1>
+<p>Find the expected value of <span class="math inline">\(X^2\)</span> if <span class="math inline">\(X \in [-2, 2]\)</span> with a uniform distribution:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(E(X) = \int_{-2}^2 x^2 f_X(x) \dee x = \frac 1 4 \int_{-2}^2 x^2 \dee x = \frac{16}{12} = \frac 4 3\)</span>.</p>
+</blockquote>
+<p>Find the probability that the mean of a sample of 108 observations is more than 46 given that the population mean is 45 with a standard deviation of 26:</p>
+<blockquote>
+<p>Let <span class="math inline">\(S\)</span> be the sample set containing 108 observations.<br />
+Clearly, each observation in <span class="math inline">\(S\)</span> has its own probability distribution, and if we add them up we get a normal distribution.<br />
+Clearly, <span class="math inline">\(E(S) \sim \operatorname{N}\left(45, \frac{26}{\sqrt{108}}\right)\)</span>. So the probability is <span class="math inline">\(P(E(S) &gt; 46) \approxeq 0.3447\)</span>.</p>
+</blockquote>
+<p>Exam on August 6, 4pm-6:30pm, PAC1-6, sections 4, 5, 7, 8, 9, 10.1, 10.2, assigned seats, 8 short answer, pink tie calculators, formula sheet + normal distrubution table, sections 8.3 and 9.4 not covered.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

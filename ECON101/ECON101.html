@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="author" content="$author-meta$" />
   <title>ECON101 | Anthony Zhang</title>
   <link rel="stylesheet" href="../css/base.css" type="text/css">
   <link rel="stylesheet" href="../css/note.css" type="text/css">
@@ -11,6 +10,7 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -70,33 +70,910 @@
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
-<p>$if(toc)$</p>
-<div id="$idprefix$TOC">
-$toc$
-</div>
-<p>$endif$</p>
-<h1 id="lecture-notes-by-anthony-zhang.">Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+<h1 id="econ101">ECON101</h1>
+<pre><code>Microeconomics
+Section: 008</code></pre>
+<p>Instructor:</p>
+<pre><code>Name:         Shadab Qaiser
+Office:       HH104
+Office Hours: Tuesdays, Thurdays at 6:00PM-7:00PM or by appointment
+Email:        s2qaiser@uwaterloo.ca (put &quot;Econ 101&quot; and full name in subject)
+T.A.:         Greg</code></pre>
+<h1 id="section">12/9/13</h1>
+<h2 id="economics">Economics</h2>
+<blockquote>
+<p>Economy - one who manages a household</p>
+</blockquote>
+<p>Economics is the study of how society manages scarce resources. Society has limited resources and can't produce all the goods and services everyone wishes to have. Economics is a social science.</p>
+<p><strong>Scarcity</strong> is the inability to satisfy all of our wants. Economics studies the choices that we make in the face of scarcity. These choices are influenced by incentives.</p>
+<p>An <strong>incentive</strong> is a reward that encourages an action, or a penalty that discourages an action. An incentive pushes people to act in a certain way. A <strong>disincentive</strong> is another word for a negative incentive.</p>
+<p>There are two main parts to economics:</p>
 <ul>
-<li><a href="/blog/" class="page">blog</a></li>
-<li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
-<li><a href="/resume.pdf" class="page">résumé</a></li>
-<li><a href="https://github.com/Uberi" class="contact">github</a></li>
-<li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
-<li><script type="text/javascript">
-<!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x65;&#x6d;&#x61;&#x69;&#108;'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
-<li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
-<li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
-<li><a href="https://keybase.io/uberi" class="info">public key</a></li>
+<li>Microeconomics: the study of the individual part of the economy - how individuals and entities make decisions and how they act individually. It studies the choices and the interactions and influence of these choices.</li>
+<li>Macroeconomics: the study of the performance of economies on the large scale. It studies phenomena such as inflation, unemployment, and growth.</li>
 </ul>
-<p><span class="math">\[ \newcommand{\set}[1]{\left\{ #1 \right\}} \newcommand{\tup}[1]{\left\langle #1 \right\rangle} \newcommand{\abs}[1]{\left\lvert #1 \right\rvert} \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} \newcommand{\ceil}[1]{\left\lceil#1 \right\rceil} \newcommand{\mb}[1]{\mathbb{#1}} \newcommand{\rem}{\operatorname{rem}} \newcommand{\sign}{\operatorname{sign}} \newcommand{\imag}{\boldsymbol{i}} \newcommand{\dee}{\mathop{}\!\mathrm{d}} \newcommand{\lH}{\overset{\text{l'H}}{=}} \newcommand{\evalat}[1]{\left.\left(#1\right)\right|} \newcommand{\sech}{\operatorname{sech}} \newcommand{\spn}{\operatorname{Span}} \newcommand{\proj}{\operatorname{proj}} \newcommand{\prp}{\operatorname{perp}} \newcommand{\refl}{\operatorname{refl}} \newcommand{\magn}[1]{\left\lVert #1 \right\rVert} \newcommand{\rank}{\operatorname{rank}} \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]} \newcommand{\range}{\operatorname{Range}} \newcommand{\adj}{\operatorname{adj}} \newcommand{\cof}{\operatorname{cof}} \newcommand{\diag}{\operatorname{diag}} \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)} \]</span></p>
-<p>$body$ $for(include-after)$ $include-after$ $endfor$</p>
-<div class="license">
-<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" alt="Creative Commons License" /></a> This work by <a href="https://uberi.github.io/">Anthony Zhang</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright 2013-2017 Anthony Zhang.
-</div>
+<p><strong>Resources</strong> are anything that can be used to produce something else. Resources are scarce. This may include life, land, labour, buildings, machines, etc.</p>
+<p>The big questions of economics are <strong>what to produce</strong>, <strong>how to produce it</strong>, and <strong>for whom to produce</strong> individuals deal with economic actions.</p>
+<h2 id="microeconomics">Microeconomics</h2>
+<pre><code>Who will work?
+What and how much goods should be produced?
+What resources are needed in production?
+What price should goods be sold at?</code></pre>
+<p>These questions are dealt with in the field of microeconomics.</p>
+<p><strong>Goods and services</strong> are the things that people value and produce to satisfy needs and wants.</p>
+<p>Canadian production:</p>
+<pre><code>Agriculture: &lt;1%
+Manufactured goods: 20%
+Services: 80%</code></pre>
+<p>Chinese production:</p>
+<pre><code>Agriculture: 10%
+Manufactured goods: 50%
+Services: 40%</code></pre>
+<p><strong>Factors of production</strong> are the resources needed to produce goods and services. These include land, labour, capital, entrepreneurship.</p>
+<p><strong>Land</strong> is a general term that refers to factors of production taken from nature, such as real estate, water, or raw materials. It means &quot;natural resources&quot; in economic contexts.</p>
+<p><strong>Labour</strong> is the work, time and, effort that people devote to producing goods and services. The quality of labour depends on <strong>human capital</strong> - the knowledge and skill people have. Human capital is created through education, training, and experience.</p>
+<p><strong>Capital</strong> are the tools, instruments, machines, buildings, etc. used to produce goods and services.</p>
+<p><strong>Entrepreneurship</strong> is the human resource organizing land, labour, and capital.</p>
+<p>Land earns <strong>rent</strong>. Labour earns <strong>wages</strong>. Capital earns <strong>interest</strong>. Entrepreneurship earns <strong>profit</strong>.</p>
+<p>It is helpful and reasonably accurate to assume that people make choices in their own self-interest - choices that people believe are best for them.</p>
+<p>However, this does not always hold - people can often be irrational or act in a way contrary to self interest, due to psychological factors such as mental capacity and willpower.</p>
+<p>The goal is to have everyone make choices in the <strong>social interest</strong> - choices that are best for society as a whole. This is the case if it uses resources efficiently and distributes goods and services fairly.</p>
+<p>Adam Smith's &quot;Invisible Hand&quot;: phenomenon in which economic agents acting purely out of self-interest also promote social interest:</p>
+<blockquote>
+<p>It is not from the benevolence of the butcher, the brewer, or the baker that we expect our dinner, but from their regard to their own interest.</p>
+</blockquote>
+<ul>
+<li>Adam Smith (regarded as the father of economics)</li>
+</ul>
+<p>Sometimes, conflicts can occur between self-interest and social interest:</p>
+<ul>
+<li>Globalization (outsourcing jobs to the lowest common denominator).</li>
+<li>Information-age economies (non-physical resources make regulation difficult).</li>
+<li>Global warming and environmental concerns (profit over pollution).</li>
+<li>Running out of natural resources (natural resource exploitation).</li>
+<li>Economic instability (stabilization of economy is difficult).</li>
+</ul>
+<h2 id="scarcity">Scarcity</h2>
+<p>Scarcity requires choices, and choices require tradeoffs - giving up certain things to get others.</p>
+<p>Canada is a labour-scarce country. Therefore, the economy favours production with less labour and more of other things such as capital.</p>
+<p>What, how, and for whom? What do we spend resources on? How do we produce goods and services with our resources? For whom do we produce for?</p>
+<p>Tradeoffs in what to produce arise when people, businesses, or governments choose how to spend money or what to produce.</p>
+<p>Tradeoffs in how to produce arise when businesses choose between different means of production.</p>
+<p>Tradeoffs in for whom to produce arise when there are choices that affect individual buying power.</p>
+<p>The big tradeoff: <strong>equality vs. efficiency</strong>. <strong>Efficiency</strong> is the ability to get the most possible out of its scarce resources. <strong>Equality</strong> or <strong>equity</strong> is the fair distribution of the benefits of those resources among the members of a society.</p>
+<p>Tradeoff: guns vs. butter - whether to build munitions or increase food output.</p>
+<p>Current consumption vs. future consumption: if we save more and consume less today, we can buy more capital and increase our future income.</p>
+<p>Leisure vs. education: If we take less leisure time, we can educate and train ourselves to be able to become more productive and earn higher income in the future.</p>
+<p>Production vs. research: if a business produces less today and devote resources to research and development, they can produce more in the future.</p>
+<p>A choice or tradeoff is essentially an opportunity given up for another. The missed opportunity with the highest value (the best alternative to the chosen option) is the <strong>opportunity cost</strong> of the choice. It is the cost of not taking the second best option.</p>
+<blockquote>
+<p>The cost of something is what is given up to get it.</p>
+</blockquote>
+<h2 id="incentives">Incentives</h2>
+<p>Rational people make choices <strong>at the margin</strong>; they look at the consequences of making <strong>incremental changes</strong> in usage of resources. For example, the decision whether to buy something might depend on the cost of buying it, compared to the benefit of buying it.</p>
+<p>People look at doing the next unit of something, rather than looking at and considering everything in the past.</p>
+<p>The benefit from incremental increase is the <strong>marginal benefit</strong>.</p>
+<p>The <strong>marginal benefit curve</strong> measures the marginal benefit as units of a good or service available changes. It measures the most people are willing to pay for one more unit of a good or service, and is not derivable from the PPF.</p>
+<p>The opportunity cost from an incremental increase (benefit of not pursuing the increase) is the <strong>marginal cost</strong>.</p>
+<p>Example: speeding tickets give a negative incentive against speeding, which goes against the social interest.</p>
+<p>If an economy is operating on the PPF, one good cannot be produced without giving up another. So as the marginal benefit of a good or service decreases, its marginal cost increases. If they are equal, we say that the economy is working at <strong>allocative efficiency</strong>. This is where the graphs of marginal cost and benefit intersect. This is efficient because the most possible people get access to the good, while each one enjoys a benefit.</p>
+<p>At allocative efficiency, the cost of doing the next unit of something is the same as its benefit, so it is not beneficial to increase or decrease the amount.</p>
+<p>For example, at allocative efficiency, the pizzas would be worth a number of colas such that if more pizzas were produced, they would not be worth the cola foregone, and if more colas were produced, they would not be worth the pizza foregone.</p>
+<p>Choices respond to incentives. If the marginal benefit exceeds the marginal cost for a certain activity, people have an incentive to perform it. Otherwise, people have an incentive not to perform it. <strong>Incentives are hugely useful in aligning self-interest and the social interest</strong>.</p>
+<p>Economic way of thinking: human nature is a given, and people always act in their self interest, which are not necessarily selfish actions. The role of institutions is to create incentives for people to behave in the social interest.</p>
+<p><strong>Institutions</strong> are rules and laws that define incentive structures in society and govern the behaviour of people and groups. Institutions have many different qualities:</p>
+<ul>
+<li>Political institutions: democracy, accountability, human rights, freedoms.</li>
+<li>Economic institutions: property rights and contract enforcement, financial policy.</li>
+<li>Other: corruption control, rule of law, civil order.</li>
+</ul>
+<h2 id="social-science">Social Science</h2>
+<p><strong>Positive statements</strong> are statements about the way things are. They can be tested by checking them against facts.</p>
+<p><strong>Normative statements</strong> are statements about how things ought to be. They cannot be tested.</p>
+<p>Economists might disagree about the validity of various positive statements, about the way things are. They may also disagree about how things should be, and have different views on different normative statements.</p>
+<p>Economics is about thinking in terms of alternatives, evaluating choices, and discovering how certain events and issues are related.</p>
+<p>Economics tries to find the cause and effects for economic phenomena.</p>
+<p>Economic science tries to discover positive statements that are consistent with what we observe in the world. It creates and tests <strong>economic models</strong>.</p>
+<h1 id="section-1">19/9/13</h1>
+<h2 id="economic-models">Economic Models</h2>
+<p>Economic models are used to simplify reality in order to improve understading, and to make predictions about potential economic outcomes.</p>
+<p>Scientific thinking requires deciding which assumptions to make. Economic models almost always require at least a few assumptions.</p>
+<p>A model is tested by comparing its predictions with facts. However, this is difficult, so economists also use natural experiments (observing natural phenomena), statistical investigations (statistical analysis of data), economic experiments (applying various incentives and seeing the result).</p>
+<p>Economics applies to personal, business, and government economic policies. It affects the decisions made about what, how, and for whom things are done.</p>
+<h2 id="production-possibility-frontier">Production Possibility Frontier</h2>
+<p>PPF (Production Possibility Frontier), also known as PPB (Production Possibilities Boundary) is a simple economic model.</p>
+<p>It is a 2D graph with each axis representing the units of a given good or service produced. There is a clearly defined boundary at the edge of being unattainable that represents the maximum efficiency of the economy.</p>
+<p>The graph is investigated in a model economy focusing on two goods, pretending that the value of all other goods are held constant.</p>
+<pre><code>        Cola vs. Pizza Production     
+v 15 million
+  |                                   
+  |             Unattainable          
+  |####                               
+C |#########                          
+o |############                       
+l |################                   
+a |#####################              
+  |##### Attainable ########          
+  |############################       
+  |##############################     
+  |___________________________________
+0               Pizza                ^ 5 million</code></pre>
+<p>All points in the shaded regions are attainable, while all others are not. Producing more of one good results in fewer resources available for the other. To produce more pizza, we need to produce less cola, and vice versa.</p>
+<p>The <strong>efficiency</strong> of the economy is determined by how close the economy works to the frontier. The goal is to have an economy that works on the frontier, the boundary of maximum efficiency.</p>
+<p>A point inside the shaded region is <strong>inefficient</strong>. At this point, resources are either unemployed or misallocated.</p>
+<p>Production efficiency is achieved when efficiency is at 100% - the economy is on the frontier.</p>
+<p>Changes to various factors of production affect the graph.</p>
+<p>For example, if a new technology is created to produce cola more efficiently, the PPF graph will be stretched along the Y axis. Likewise, if the labour force increased, the graph stretches in both axes.</p>
+<h3 id="opportunity-cost">Opportunity Cost</h3>
+<p>The <strong>opportunity cost</strong> of making more pizzas is the colas not produced.</p>
+<p>If by producing 1 million more pizzas (moving 1 unit right), we produce 5 million fewer colas (moving 5 units down), the cost of those pizzas is 5 colas each. Likewise, by moving 5 units down, we produce 1 million fewer pizzas, the cost of one cola is 1/5 pizzas.</p>
+<p>This cost is not necessarily fixed, and depends on the current state of the economy. The <strong>slope</strong> of the frontier determines the cost. For example, if the graph is quadratic, the cost of pizzas increases linearly as more are produced.</p>
+<h3 id="graph-shape">Graph Shape</h3>
+<p>This graph is concave - this means that as the quantity of the good produced increases, so does its cost.</p>
+<p>If the graph is convex, the cost of producing a good goes down as the quantity produced increases.</p>
+<p>In other words, if the resources invested are more productive in one product than another, the graph is curved. This is because as we produce more of one good, we must use resources that are less suited to producing this good and more suited for the other good, so the opportunity cost is greater.</p>
+<p>If the cost stays the same regardless of quantity, the graph is a straight downwards line - it is linear.</p>
+<h2 id="demand">Demand</h2>
+<p>Supply and demand are very common terms in economics - they are the forces that make the markets work. Microeconomics is the study of supply, demand, and market equilibrium.</p>
+<p>A <strong>market</strong> is a group of buyers and sellers of a particular good or service, and an arrangement where they can get information and do business with each other. Supply and demand describes the behaviour of people as they interact in markets.</p>
+<p>A <strong>competitive market</strong> is a market with many buyers and sellers, so no single entity can influence prices.</p>
+<p>The <strong>money price</strong> of a good is the amount of money needed to buy it.</p>
+<p>The <strong>relative price</strong> of a good is the ratio of its money price to the money price of the next best alternative. This is the opportunity cost of buying something.</p>
+<p>If you <strong>demand</strong> something, you want it, can afford it, and plan to buy it. This contrasts with <strong>wants</strong>, which are unlimited wishes or desires. The <strong>quantity demanded</strong> is the amount buyers are willing and able to purchase, in a given time period and price.</p>
+<h3 id="law-of-demand">Law of Demand</h3>
+<blockquote>
+<p>All other things being equal, price is inversely correlated to quantity demanded.</p>
+</blockquote>
+<p>This is a result of the substitution effect and the income effect.</p>
+<p>The <strong>substitution effect</strong> is a phenomena that occurs when the relative price of a good or service increases, and as a result, people seek substitutes for it, reducing the quantity demanded.</p>
+<p>The <strong>income effect</strong> is a phenomenon that occurs when the money price of a good or service increases compared to income, so people cannot afford it as much, reducing the quantity demanded.</p>
+<p>The <strong>demand curve</strong> shows the relationship between the relationship between the quantity demanded of a good and the largest price people are willing to pay for it, all other influences on consumers' planned purchases remain the same. The <strong>demand schedule</strong> is the table of values for this curve.</p>
+<p>It slopes downward because more people demand a product when the price is lower, and fewer people demand a product when the price is higher.</p>
+<p>Demand is a measure of marginal benefit - the willingness and ability to pay given a marginal cost - the price.</p>
+<p>For example, the demand curve for energy bars might appear as follows:</p>
+<pre><code>            Price vs. Demand               
+v 3.00
+  |                                        
+  |....                                    
+P |    .....                               
+r |         ....                           
+i |             ....                       
+c |                 ....                   
+e |                     .....              
+  |                           ...          
+  |________________________________________
+ 0              Demand                    ^ 25 million</code></pre>
+<p><strong>Demand</strong> refers to the relationship between quantity demanded and the price - the demand curve. The <strong>quantity demanded</strong> is the quantity demanded at a particular price - the X axis on the demand curve.</p>
+<p>The demand curve measures the <strong>marginal benefit</strong>, the benefit from consuming one more unit of a good or service. For example, the marginal benefit of money is the best good or service that can be bought with it.</p>
+<p>When an influence other than the price of a good changes, there is a <strong>change in demand</strong>.</p>
+<p>Change is demand is different from a change in quantity demanded. Change in demand is a change in the demand curve, while a change in quantity demanded is simply movement along the non-changing demand curve.</p>
+<p>When demand increases, the graph shifts rightwards.</p>
+<p>When demand decreases, the graph shifts leftwards.</p>
+<p>A <strong>substitute</strong> is a good that replaces another good. A <strong>complement</strong> is a good that is used together with another good.</p>
+<p>The price of a good is inversely correlated to the <strong>price of its substitutes</strong>, and correlated to the <strong>price of its complements</strong>.</p>
+<p>If the price of a good is <strong>expected to rise</strong>, then current demand increases - consumers want to buy at the lower price before it rises.</p>
+<p>When <strong>income</strong> increases, consumers buy more of certain goods. These are called <strong>normal goods</strong>. Some goods, however, are bought less often as income increases. These are called <strong>inferior goods</strong>. Likewise with expected increases in income, or credit.</p>
+<p><strong>Population</strong> is directly correlated to demand. The more people, the more demand.</p>
+<p>All other factors being equal, people have different demands due to <strong>personal preferences</strong>.</p>
+<h2 id="supply">Supply</h2>
+<p>A firm supplies a good or service if it has the <strong>resources/technology</strong> to produce it, can <strong>profit</strong> from it, and <strong>plans</strong> to do so.</p>
+<p>The quantity supplied is the amount that the producers plan to sell during a given time period and price.</p>
+<h3 id="law-of-supply">Law of Supply</h3>
+<blockquote>
+<p>All other things being equal, price is correlated to quantity supplied.</p>
+</blockquote>
+<p>This is a result of the general tendency for the marginal cost of producing a good or service to increase with increases in quantity produced - &quot;I've already made this many, might as well make some more&quot;.</p>
+<p>Producers will only supply a good if they can at least cover the marginal cost of production - if they can profit from it.</p>
+<p>The <strong>supply curve</strong> shows the relationship between the quantity supplied of a good and the price it is sold at, all other influences remaining the same. The <strong>supply schedule</strong> is the table of values for this curve.</p>
+<p>For example, the supply curve for energy bars might appear as follows:</p>
+<pre><code>            Price vs. Quantity Supplied    
+v 3.00
+  |                                        
+  |                         ....           
+P |                    .....               
+r |                ....                    
+i |            ....                        
+c |        ....                            
+e |   .....                                
+  |...                                     
+  |________________________________________
+ 0              Supply                    ^ 25 million</code></pre>
+<p><strong>Supply</strong> refers to the relationship between the quantity supplied and the price, all other influences held constant. The <strong>quantity supplied</strong> is the quantity supplied at a particular price - the X axis on the supply curve.</p>
+<p>The lowest price anyone is willing to sell a unit is the <strong>marginal cost of production</strong>.</p>
+<p>Like with demand, there are many influences that affect supply. A change in supply caused by one of these factors, other than price, is called a <strong>change in supply</strong>.</p>
+<p>Change is supply is different from a change in quantity supplied. Change in supply is a change in the supply curve, while a change in quantity supplied is simply movement along the non-changing supply curve.</p>
+<p>When supply increases, the graph shifts rightward.</p>
+<p>When supply decreases, the graph shifts leftward.</p>
+<p>The price is correlated to the price of production.</p>
+<p>A <strong>substitute</strong> is an alternative good that can be produced using the same resources as the good. A <strong>complement</strong> is a good that must be produced together with the good.</p>
+<p>The price is inversely correlated to the <strong>price of its substitutes</strong>, and correlated to the <strong>price of its complements</strong>.</p>
+<p>If the price of the good is <strong>expected to rise</strong>, the current supply decreases - suppliers want to wait to supply the good or service at a higher price.</p>
+<p>Supply is correlated to the <strong>number of suppliers</strong>.</p>
+<p>Advances in <strong>technology</strong> can lower costs of production, and increase supply.</p>
+<p>Supply is influenced by the <strong>state of nature</strong> - weather, natural disasters, etc. A hurricane might reduce supply by destroying factories.</p>
+<h2 id="equilibrium">Equilibrium</h2>
+<p>Market <strong>equilibrium</strong> occurs when the quantity demanded is equal to the quantity supplied.</p>
+<p>The <strong>equilibrium price</strong> is the price at which equilibrium occurs.</p>
+<p>The <strong>equilibrium quantity</strong> is the quantity bought and sold at equilibrium.</p>
+<p>If the quantity supplied exceeds the quantity demanded, there is a <strong>surplus</strong> of the good or service. This forces the price down.</p>
+<p>If the quantity demanded exceeds the quantity supplied, there is a shortage of the good or service. This forces the price up.</p>
+<p>At equilibrium, the plans of the buyers and sellers agree and the price remains constant.</p>
+<pre><code>         Price vs. Supply &amp; Demand
+v 3.00
+  |                                        
+  | ***                     ....           
+P |    *****           .....               
+r |         ****   ....                    
+i |            ...X**                      
+c |        ....   ^  ****                  
+e |   .....       |      *****             
+  |...      Equilibrium       ***
+  |________________________________________
+ 0              Quantity                  ^ 25 million</code></pre>
+<p>A <strong>price floor</strong> is the lower limit imposed on the price of a good or service. For example, the minimum wage is the price floor of labour.</p>
+<p>Increases in demand shift the demand graph rightward, raising the price and quantity.</p>
+<p>Increases in supply shifts the supply graph rightward, reducing the price and raising the quantity.</p>
+<p>Demand is <strong>correlated to price and quantity</strong>.</p>
+<p>Supply is <strong>inversely correlated to price</strong> and <strong>correlated to quantity</strong>.</p>
+<p>Increases in both supply and demand: the quantity increases, but the price change is uncertain because supply decreases price, and demand increases it.</p>
+<h2 id="in-summary">In Summary</h2>
+<ul>
+<li>Increases in demand and constant supply increase equilibrium price and quantity.</li>
+<li>Decreases in demand and constant supply decrease equilibrium price and quantity.</li>
+<li>Increases in both demand and supply increase quantity.</li>
+<li>Decreases in both demand and supply decrease quantity.</li>
+<li>Increases in demand and decreases in supply increase price.</li>
+<li>Decreases in demand and increases in supply decrease price.</li>
+</ul>
+<h1 id="section-2">3/10/13</h1>
+<h2 id="elasticity">Elasticity</h2>
+<blockquote>
+<p>What are the effects of high gas prices on buying plans?</p>
+</blockquote>
+<p>Elasticity is the measure of how responsive buyers and sellers are to changes in market conditions.</p>
+<p>We measure how the quantity demanded and supplied is affected by changes in price, income, or price of related goods.</p>
+<h3 id="own-price-elasticity-of-demand">Own price elasticity of demand</h3>
+<p><strong>Price elasticity of demand</strong> is the ratio of the percentage change in quantity demanded per percentage change in price. The percentage change is a percentage of the average of the initial and new values. This is also known as <strong>own price elasticity</strong>.</p>
+<ul>
+<li>Dimensionless value, a ratio.</li>
+<li>Negative due to law of demand.</li>
+<li>Values larger in magnitude mean higher sensitivity to price changes.</li>
+<li>Values smaller in magnitude mean lower sensitivity to price changes.</li>
+<li>Values larger in magnitude than 1 are called <strong>elastic demand</strong>.</li>
+<li>Values smaller in magnitude than 1 are called <strong>inelastic demand</strong>.</li>
+<li>Values equal in magnitude to 1 are called <strong>unit elastic demand</strong>.</li>
+<li>Values of 0 are called <strong>perfectly inelastic demand</strong>.</li>
+<li>Values of <span class="math inline">\(\infty\)</span> are called <strong>perfectly elastic demand</strong>.</li>
+</ul>
+<p>For perfectly inelastic demand, the demand curve is vertical. The quantity demanded is the same regardless of the price. For example, life-saving surguries need to be bought regardless of the price.</p>
+<p>For perfectly elastic demand, the demand curve is horizontal. The quantity demanded is highly dependent on the price. For example, in agriculture markets a slight decrease in price means much more demand.</p>
+<p><span class="math display">\[
+\text{own elasticity} = \frac{\text{% change in demand}}{\text{% change in price}} \\
+\text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
+\text{% change in price} = \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
+\]</span></p>
+<p>According to the law of demand, the <strong>own price elasticity is always negative</strong>. This is because demand is inversely correlated to price.</p>
+<p>Elasticity is not the same thing as the slope of the demand curve. It measures percentage changes. Consider a linear demand curve:</p>
+<pre><code>         Price vs. Quantity
+v 3.00
+  |                                        
+  | ***                                    
+P |    *****          Inelastic            
+r |         ****    v-----------v          
+i |             *****                      
+c | ^-----------^ ^  ****                  
+e |    Elastic    |      *****             
+  |         Unit Elastic      ***
+  |________________________________________
+ 0              Quantity                  ^ 25 million</code></pre>
+<p>At low prices, a given change in price is a larger percentage of the average price. Likewise, a given change in demand is a larger percentage of the average demand at lower demand.</p>
+<p>At quantity demanded being 0, there is perfect elasticity. At price being 0, there is perfect inelasticity.</p>
+<blockquote>
+<p>The price of milk increases 2% and the quantity demanded decreases by 0.5%.<br />
+So the elasticity is <span class="math inline">\(\frac{-0.5}{2}\)</span>, or <span class="math inline">\(-\frac{1}{4}\)</span>.</p>
+</blockquote>
+<p>In general, goods and services that are <strong>necessities or in uncompetitive markets have inelastic demand</strong>, since people need them even if they're expensive.</p>
+<p>In general, goods and services that are <strong>luxuries or in highly competitive markets have elastic demand</strong>, since people have a lot of choice with whether to buy these things.</p>
+<p>In general, <strong>goods and services with close substitutes</strong> have elastic demand. For example, Coca Cola and Pepsi.</p>
+<p>Over <strong>longer amounts of time between price changes</strong>, goods and services tend to be more elastic - people can find more substitutes with more time. In other words, the longer consumers have had time to adjust to a price change, or the longer the good can be stored without losing its value, the more elastic is the demand.</p>
+<p><strong>Narrowly defined markets</strong> are more elastic than broader ones. For example, demand for food is inelastic, but demand for broccoli is elastic.</p>
+<p>Goods on which a <strong>larger proportion of budgets are spent</strong> tend to be more elastic. For example, demand for cars is more elastic than groceries.</p>
+<h3 id="revenue">Revenue</h3>
+<p>Revenue is the product of price with quantity. The goal is to maximize revenue.</p>
+<p>When demand is elastic, there is an incentive to reduce prices. This is because any given reduction in price has a larger increase in demand, so revenue would increase.</p>
+<p>When demand is inelastic, there is an incentive to raise prices. This is because any given rise in price has a smaller decrease in demand, so revenue would increase.</p>
+<p><strong>Revenue is maximized at unit elasticity</strong> - when revenue would decrease from any changes in the price.</p>
+<pre><code>         Price vs. Quantity
+v 3.00
+  |                                        
+R |             ....X....                  
+e |          ...    ^    ...               
+v |       ..        |       ..             
+e |     .     Unit Elasticity  .           
+n |   .             |            .         
+u | .   Elastic     |  Inelastic   .       
+e |.                |               .      
+  |________________________________________
+ 0              Quantity                  ^ 25 million</code></pre>
+<p>Real elasticities: furniture is -1.26, motor vehicles is -1.14, clothing is -0.64, and oil is -0.05.</p>
+<h3 id="cross-price-elasticity-of-demand">Cross price elasticity of demand</h3>
+<p>This measures the effect changes in the price of substitutes and complements on demand.</p>
+<p>Instead of using the percentage change in the price of a good itself, we use the percentage change in the price of a substitute or a complement.</p>
+<p><span class="math display">\[
+\text{cross elasticity} = \frac{\text{% change in demand}}{\text{% change in price of substitute or complement}} \\
+\text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
+\text{% change in price of substitute or complement} = \frac{\text{new price of substitute or complement} - \text{old price of substitute or complement}}{\frac{\text{new price of substitute or complement} + \text{old price of substitute or complement}}{2}} \\
+\]</span></p>
+<p>Using this, we can determine whether a good is a substitute or a complement:</p>
+<ul>
+<li>Positive cross elasticity means the good is a substitute.</li>
+<li>Negative cross elasticity means the good is a complement.</li>
+<li>A zero cross elasticity means the good is unrelated.</li>
+</ul>
+<h3 id="income-elasticity-of-demand">Income elasticity of demand</h3>
+<p>This measures the effect of changes in income on demand.</p>
+<p>Instead of using the percentage change in the price of a good itself, we use the percentage change in income.</p>
+<p><span class="math display">\[
+\text{income elasticity} = \frac{\text{% change in demand}}{\text{% change in income}} \\
+\text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
+\text{% change in income} = \frac{\text{new income} - \text{old income}}{\frac{\text{new income} + \text{old income}}{2}} \\
+\]</span></p>
+<p>Using this, we can determine whether a good is a normal good or an inferior good:</p>
+<ul>
+<li>Positive income elasticity means the good is a normal good - greater demand as income increases.</li>
+<li>Negative income elasticity means the good is an inferior good - lesser demand as income increases.</li>
+<li>Income elasticity less in magnitude than 1 is <strong>income inelastic</strong>.</li>
+<li>Income elasticity greater in magnitude than 1 is <strong>income elastic</strong>.</li>
+<li>Income elasticity equal in magnitude to 1 is <strong>income unit elastic</strong>.</li>
+</ul>
+<h2 id="own-price-elasticity-of-supply">Own price elasticity of supply</h2>
+<p>The <strong>elasticity of supply</strong> measures the responsiveness of the quantity supplied to a change in the price of a good, all other influences being constant.</p>
+<p><span class="math display">\[
+\text{own elasticity} = \frac{\text{% change in supply}}{\text{% change in price}} \\
+\text{% change in supply} = \frac{\text{new supply} - \text{old supply}}{\frac{\text{new supply} + \text{old supply}}{2}} \\
+\text{% change in price} = \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
+\]</span></p>
+<p><strong>Perfectly inelastic supply</strong> has a vertical supply curve - supply is fixed regardless of price. For example, Picasso's paintings are fixed in number, and cannot have any more produced.</p>
+<p><strong>Perfectly elastic supply</strong> has a horizontal supply curve - price is fixed regardless of supply. For example, agriculture can be produced in variable quantities.</p>
+<p><strong>Unit elastic supply</strong> has a linear supply curve that passes through the origin.</p>
+<p>The y-intercept of a linear supply curve determines the sign of the elasticity. A negative y-intercept means supply is inelastic, while a positive one means supply is elastic.</p>
+<p>Elasticity of supply depends on:</p>
+<ul>
+<li>Resource substitution possibilities: if the resources needed to produce a good or service is easily substituted, the good has more elastic supply.</li>
+<li>Time since price change: elasticity increases as time passes.</li>
+</ul>
+<h2 id="efficiency-vs.-equity">Efficiency vs. equity</h2>
+<p>Scarce resources are allocated by a number of factors. The goal is to operate on the PPF, but we must balance this with giving out resources fairly. This is the <strong>efficiency vs. equity</strong> tradeoff.</p>
+<h3 id="market-price">Market price</h3>
+<p>People who can and do pay the price get the good or service. This works for many goods and is the most common allocation scheme.</p>
+<p>Markets are very efficient since they adjust themselves. This is because price is an efficient regulating mechanism.</p>
+<p>For example, cars are bought by those who can afford it.</p>
+<h3 id="command-system">Command system</h3>
+<p>Authorities determine resource allocation. This works for organizations but not for entire economies.</p>
+<p>For example, labour time is allocated by a boss at work.</p>
+<h3 id="majority-rule">Majority rule</h3>
+<p>The majority vote determines resource allocation. This is used for society for some of its largest decisions.</p>
+<p>For example, tax rates are decided by the government, which is in turn decided by majority vote. Tax rates influence how resources are allocated between private and public use.</p>
+<p>Majority rule is useful when self-interest must be suppressed to use resources efficiently.</p>
+<h3 id="contest">Contest</h3>
+<p>Resources are allocated to the winners. This is used for places where the efforts of players are hard to monitor and reward directly.</p>
+<p>For example, in sporting events the prize is awarded to the best individual.</p>
+<h3 id="first-come-first-served">First come, first served</h3>
+<p>Resources are allocated to those first in line. This works best when the resources can only serve people in sequence.</p>
+<p>For example, a restaurant might seat those who arrived earlier first.</p>
+<h3 id="sharing-equally">Sharing equally</h3>
+<p>Resources are shared equally between everyone. This works best for small groups with common goals and ideals.</p>
+<p>For example, people might split a dessert at a restaurant.</p>
+<p>This does not work well for larger groups, where agreement is difficult.</p>
+<h3 id="lottery">Lottery</h3>
+<p>Resources are allocated randomly. This works best when it is not possible to distinguish among potential users of a resource.</p>
+<p>For example, a provincial lottery may give out money to a random winner.</p>
+<h3 id="personal-characteristics">Personal characteristics</h3>
+<p>Resources are allocated based on characteristics of individuals.</p>
+<p>For example, people might choose their friends and partners based on their characteristics. On the other hand, it might be used in unacceptable ways, like racism and sexism.</p>
+<h3 id="force">Force</h3>
+<p>Resources are allocated based on the strongest.</p>
+<p>For example, war, revolution, theft, and robbery allocate resources to the takers.</p>
+<p>This is an effective but inefficient way to allocate resources, and makes the creation of markets possible.</p>
+<p>There is no single resource allocation mechanism resulting in full efficiency.</p>
+<h2 id="demand-and-marginal-benefit">Demand and Marginal Benefit</h2>
+<p><strong>Value</strong> is what we get. <strong>Price</strong> is what we pay.</p>
+<p>The value of obtaining one more unit of a good or service is the <strong>marginal benefit</strong>.</p>
+<p>We measure value as the <strong>maximum price</strong> that a person is willing to pay.</p>
+<p>Demand is determined by the willingness to pay. So a <strong>demand curve is a marginal benefit curve</strong>.</p>
+<p><strong>Individual demand</strong> is demand in terms of one consumer. <strong>Market demand</strong> is demand in terms of all the buyers in the market. The quantity demanded for market demand is the sum of all the quantities demanded for each buyer.</p>
+<h2 id="supply-and-marginal-cost">Supply and Marginal Cost</h2>
+<p><strong>Cost</strong> is what the producer gives up. <strong>Price</strong> is what the producer receives.</p>
+<p>The cost of obtaining one more unit of a good or service is the <strong>marginal cost</strong>.</p>
+<p>We measure cost as the <strong>minimum price</strong> the producer is willing to accept.</p>
+<p>Supply is determined by the minimum supply price. So a <strong>supply curve is a marginal cost curve</strong>.</p>
+<p><strong>Individual supply</strong> is supply in terms of one producer. <strong>Market supply</strong> is supply in terms of all the sellers in the market. The quantity supplied for market supply is the sum of all the quantities supplied for each producer.</p>
+<h1 id="section-3">10/10/13</h1>
+<p>Profit is total revenue minus total cost.</p>
+<p>Total revenue is price times quantity.</p>
+<h2 id="surplusshortage">Surplus/shortage</h2>
+<h3 id="consumers">Consumers</h3>
+<p>The <strong>consumer surplus</strong> for a given person is the <strong>area between the amount willing to be paid for a good/service and the actual price that must be paid for it</strong>. It is the amount someone is willing to pay above the actual price.</p>
+<pre><code>            Price vs. Quantity Demanded    
+v 3.00
+  |                                        
+  |....                                    
+P |$$$$.....                               
+r |$$$$$$$$$....                           
+i |$$$$$$$$$$$$$....                       
+c |-----------------....---------  Equilibrium Price
+e |^^^^^^^^^^^^^        .....              
+  |Consumer Surplus           ...          
+  |________________________________________
+ 0              Quantity Demanded         ^ 10</code></pre>
+<p>This means the consumer saved 2 units on the first 4 units he or she wanted to buy, and 1 unit on the next 4 units, before the price is the maximum he or she is willing to pay.</p>
+<p>When there is a consumer surplus, suppliers raise prices to reduce the surplus and therefore make more profit.</p>
+<h3 id="producers">Producers</h3>
+<p><strong>Producer surplus</strong> is the <strong>area between the price received for selling a good and the minimum supply-price</strong>. It is the price above what it actually costs to produce.</p>
+<pre><code>            Price vs. Quantity Supplied    
+v 3.00
+  |Producer surplus                        
+  |vvvvvvvvvvvvvvvv         ....           
+P |--------------------.....-------- Equilibrium Price
+r |$$$$$$$$$$$$$$$$....                    
+i |$$$$$$$$$$$$....                        
+c |$$$$$$$$....                            
+e |$$$.....                                
+  |...                                     
+  |________________________________________
+ 0              Supply                    ^ 25 million</code></pre>
+<p>This means the producer made 3 extra units of profit for the first units, 2 extra units on the next 4, and 1 on the next 4.</p>
+<p>When there is a producer surplus, competitors are willing to sell for less and therefore make more profit by selling more. This causes prices to be reduced.</p>
+<h3 id="equilibrium-1">Equilibrium</h3>
+<p>Markets are efficient when marginal cost equals the marginal benefit - when quantity supplied equals quantity demanded. This is efficient because consumer surplus plus producer surplus - the total surplus - is at its highest.</p>
+<p>When there is underproduction or overproduction, the total surplus is reduced and efficiency lowers. The reduction in surplus is a social loss known as <strong>deadweight loss</strong>.</p>
+<p>Underproduction and overproduction can occur for a few reasons:</p>
+<p><strong>Price/quantity regulations</strong> may limit price or production quantities to a certain value and lead to underproduction.</p>
+<p><strong>Taxes</strong> increase the price paid by buyers and reduce the prices received by sellers, leading to underproduction. <strong>Subsidies</strong> decrease the prices pair by buyers and increase the prices received by sellers, leading to overproduction.</p>
+<p><strong>Externalities</strong> are costs/benefits affecting someone other than the producer or consumer, such as acid rain caused by pollution. The producer, acting out of self interest, does not consider this cost and overproduces or underproduces.</p>
+<p><strong>Public goods</strong> benefit everyone and are available to everyone. The <strong>free-rider problem</strong> states that everyone wants to use the good, but nobody wants to pay for it, leading to underproduction.</p>
+<p><strong>Common goods</strong> are owned by nobody and can be used by everyone. The <strong>tragedy of the commons</strong> states that each user ignores the costs that fall on everyone, leading to overproduction.</p>
+<p><strong>Monopolies</strong> are the only provider of a particular good or service. As a result, there are no competitors to force them to lower prices, leading to underproduction.</p>
+<p><strong>Transaction costs</strong> cause underproduction due to the additional overhead of making each trade.</p>
+<h2 id="fairness">Fairness</h2>
+<p>Fairness can be categorized into two main groups.</p>
+<p>The first states that <strong>fairness only occurs when the result is fair</strong>. The view that equality is fairness is known as <strong>utilitarianism</strong> - that we should attempt to achieve the greatest happiness for the most people.</p>
+<p>According to this view, since marginal benefit of income decreases as income increases, and everyone gets the same marginal benefit from the same income, then taking wealth from the rich and giving it to the poor increases total benefit. Equal income means maximum benefit.</p>
+<p>The second states that <strong>fairness only occurs when the rules are fair</strong>. This is based on the <strong>symmetry principle</strong> - similar situations should be treated similarly.</p>
+<p>According to this view, there should be equality of opportunity. So private property should be protected, and exchange should be purely voluntary.</p>
+<h2 id="government-intervention">Government Intervention</h2>
+<h3 id="price-controls">Price controls</h3>
+<p>Price controls are put in place when policy makers think prices are unfair to buyers or sellers. They limit prices to a certain range to try to increase total benefit.</p>
+<p>For example, a <strong>rent ceiling</strong> might be used to ensure poorer people can afford housing if normal market prices are too high.</p>
+<p>If the ceiling is above or equal to the equilibrium price, the market is unaffected since it will continue to operate at the equilibrium price.</p>
+<p>If the ceiling is below the equilibrium price, supply is decreased and demand is increased. This causes a shortage, but it cannot be resolved because the price cannot be raised.</p>
+<p>In shortages, there is also the cost of <strong>search activity</strong> - the effort of finding someone to do business with.</p>
+<p>A rent ceiling is unfair because it blocks voluntary exchange and does not benefit everyone. Since the resources cannot be allocated by the market properly, they are then allocated by other means like lottery, which are less efficient and fair.</p>
+<p>Another example would be the <strong>minimum wage</strong>, which sets a price floor on labour.</p>
+<p>If the floor is below or equal to the equilibrium price, the market is unaffected since it will continue to operate at the equilibrium price.</p>
+<p>If the floor is above the equilibrium price, supply is increased and demand is increased. This causes a surplus, but it cannot be resolved because the price cannot be lowered.</p>
+<p>As a result, people have trouble finding jobs, since not enough employers are willing to pay the minimum wage.</p>
+<p>Price floors lead to overproduction. These surpluses are wasted since they can't be put on the open market, since there isn't enough demand.</p>
+<h3 id="taxes">Taxes</h3>
+<p>Taxes can reduce supply and demand, when applied to the supplier and consumer, respectively.</p>
+<p>Taxes include income tax, HST, and social insurance tax (paid by employers).</p>
+<p><strong>Tax incidence</strong> is the way the burden of taxes is divided between buyers and sellers. If the price rises by the full amount of the tax, buyers pay the tax. If the price doesn't rise, the sellers pay the price.</p>
+<p>This depends on elasticity - the more inelastic the demand, the more the burden of the tax is put on the buyer. Perfectly inelastic demand means buyers pay the tax. Perfectly elastic demand means sellers pay the tax.</p>
+<p>Taxes on suppliers shift the supply curve upward/leftward.</p>
+<p>Taxes on consumers shift the demand curve downward/leftward.</p>
+<p>Taxes are usually put on goods and services with inelastic supply or demand. Gasoline has inelastic demand, so the buyer pays more of the tax, while labour has inelastic supply, so the employer pays more of the tax.</p>
+<pre><code>         Price vs. Supply &amp; Demand
+v 3.00
+  |    Quantity with tax                   
+  | ***|                    ....           
+P |####*****           .....               
+r |$$$$|$$$$****   ....                    
+i |$$$$|$$$$$$$...X**                      # represents surplus with tax
+c |$$$$|$$$....   ^  ****                  $ represents difference in surplus from without tax and with tax
+e |###.....       |      *****             
+  |... |    Equilibrium       ***
+  |________________________________________
+ 0              Quantity                  ^ 25 million</code></pre>
+<p>There are conflicting principles of fairness when considering a tax system:</p>
+<ul>
+<li>people should pay taxes according to the benefits they receive from them - taxes based on use</li>
+<li>people should pay taxes according to their ability to bear the burden of the tax - taxes based on income</li>
+</ul>
+<h3 id="subsidies">Subsidies</h3>
+<p>Subsidies act like taxes, but have the opposite effect.</p>
+<p>They shift the supply curve down/right and the demand curve up/right.</p>
+<h2 id="quotas">Quotas</h2>
+<p>Quotas restrict the quantity that can be sold, generally an upper limit.</p>
+<p>For example, fishing licenses limit how much fish can be sold in order to prevent overfishing. This increases the price paid by the consumer because quantity supplied is restricted.</p>
+<h1 id="section-4">17/10/13</h1>
+<h2 id="utility-and-demand">Utility and Demand</h2>
+<p>Choices made by consumers can be categorized into <strong>consumption possiblities</strong> and <strong>preferences</strong>.</p>
+<h3 id="utility">Utility</h3>
+<p><strong>Utility</strong> is the satisfaction or benefit obtained by consuming a good or service. We can give it an imaginary unit to quantify and measure it. This is like temperature, which is also an abstract concept we measure with arbitrary units.</p>
+<p>For example, the first sip of a drink might give 50 utility units, the second 80 utility units, and the twentieth 30 utility units.</p>
+<p><strong>Total utility</strong> is the total benefit obtained by consuming a good or service. In general, <strong>total utility is correlated with quantity consumed</strong>.</p>
+<p><strong>Marginal</strong> means &quot;change in&quot;.</p>
+<p><strong>Marginal utility</strong> is the change in total utility caused by consuming one more unit of a good or service. In other words, it is the benefit received from consuming one more unit of a good or service.</p>
+<p>Marginal utility differs from marginal benefit in that marginal benefit is the price willing to be paid for one more unit, while marginal utility is the benefit itself.</p>
+<p>The <strong>principle of diminishing marginal utility</strong> states that <strong>as quantity consumed increases, the marginal utility eventually decreases</strong>.</p>
+<p><strong>Marginal utility per dollar of a good or service</strong> is the marginal utility from <strong>spending one more dollar</strong> on the good or service. It is equivalent to the marginal utility of a good (<span class="math inline">\(\mathrm{MU}\)</span>) divided by its price (<span class="math inline">\(P\)</span>).</p>
+<h3 id="consumption-possibilities">Consumption possibilities</h3>
+<p>This measures everything that is possible for a consumer to consume, given constraints such as time and money. We can represent it using something similar to the PPF - we call this the <strong>budget line</strong>.</p>
+<p>The budget line shows various combinations that income can be spent on two particular goods or services, everything else remaining the same.</p>
+<pre><code>   Monthly Cola vs. Pizza Consumption
+v 30
+  |                                   
+  |             Unaffordable          
+  |####                               
+C |#########                          
+o |############                       
+l |################                   
+a |#####################              
+  |##### Affordable ########          
+  |############################       
+  |##############################     
+  |___________________________________
+0               Pizza                ^ 15</code></pre>
+<p>When the spending takes place on the frontier - the budget line - the consumer has <strong>reached the limits of their consumption possibilities</strong>. So the budget line represents the limits of consumption possibilities.</p>
+<p>On the budget line, income (<span class="math inline">\(M\)</span>) equals expenditure (price of cola * quantity of cola + price of pizza times quantity of pizza - <span class="math inline">\(p_c x_c + p_p + x_p\)</span>). So <span class="math inline">\(M = p_c x_c + p_p x_p\)</span>.</p>
+<p>Every consumer seeks to make choices that <strong>maximise utility</strong>. To find the total utility in the budget line shown above, we add the utility obtained by the amount of cola and the utility obtained by the amount of pizza.</p>
+<p>When a consumer is spending in a way that maximises utility, the situation is known as <strong>consumer equilibrium</strong>.</p>
+<p>We can find consumer equilibrium by calculating the total utility of every combination and picking the one that results in the highest value.</p>
+<p>However, a more natural way to find consumer equilibrium is to <strong>compare the marginal utility per dollar of a good or service</strong>:</p>
+<ul>
+<li>When the marginal utility per dollar of cola is less than that of pizza, total utility would be increased by spending more on pizza.</li>
+<li>When the marginal utility per dollar of pizza is less than that of cola, total utility would be increased by spending more on cola.</li>
+<li><strong>When the marginal utility per dollar of both are equal, there is consumer equilibrium</strong>.</li>
+</ul>
+<p>This is because the more we spend on something, the less its marginal benefit, from the principle of diminishing marginal utility.</p>
+<p>When the marginal utility per dollar of products are equal, it is equally beneficial to spend a dollar on either good. Changing any of the quantities would only reduce the total utility at this point.</p>
+<p>So to maximise utility, we <strong>spend all available income</strong> and <strong>equalize the marginal utility per dollar</strong> of all goods.</p>
+<p>For example, if the price of pizza decreased, its marginal benefit per dollar increases and we would buy more of it to make it equal to the marginal benefits per dollar of other goods.</p>
+<p>Essentially, we want to ensure <span class="math inline">\(\frac{\mathrm{MU}_\mathrm{pizza}}{\mathrm{P}_\mathrm{pizza}} = \frac{\mathrm{MU}_\mathrm{cola}}{\mathrm{P}_\mathrm{cola}}\)</span>.</p>
+<p>Marginal utility theory helps explain things like the <strong>paradox of value</strong>:</p>
+<blockquote>
+<p>Why are diamonds more expensive than water, even though water is so essential, and diamonds not essential at all?</p>
+</blockquote>
+<p>We distinguish between total utility and marginal utility to resolve the paradox.</p>
+<p>The explanation is that we <strong>consume a lot of water, so marginal utility is small while total utility is large</strong>, while <strong>we consume few diamonds, so marginal utility is large while total utility is small</strong>. However, note that the marginal utility per dollar is the same for both water and diamonds.</p>
+<p>If I buy one more unit of water, I get a little benefit for a little cost. If I buy one more unit of diamond, I get a large benefit for a large cost.</p>
+<p>The consumer surplus of water is very high while the consumer surplus of diamonds is very low.</p>
+<h1 id="section-5">24/10/13</h1>
+<p>Review for first half. MIDTERM TOMORROW AT 4:30 PM COVERING CHAPTERS 4, 5, 6, 8</p>
+<p>A <strong>determinant</strong> of something is a factor affecting it, like whether it happens or not.</p>
+<p>Economics seek to <strong>optimize</strong>.</p>
+<h2 id="organizing-production">Organizing Production</h2>
+<p>A <strong>firm</strong> is an institution that hires and organizes factors of production to produce and sell goods and services.</p>
+<p>The goal of a firm is to <strong>maximise profit</strong>. If it does not, it is <strong>eliminated or bought out by other firms</strong>.</p>
+<p>Most firms don't make anything themselves. For example, Apple's iPod has its parts manufactured by Toshiba and is assembled by Inventec.</p>
+<p>Accountants are responsible for measuring profit - revenue minus explicit costs - to pay taxes and show investors how their funds are being used.</p>
+<p><strong>Explicit costs</strong> are those costs paid directly to run the firm. Accountants do not take implicit costs into account and so may overestimate economic profit.</p>
+<p>Economists are concerned with <strong>implicit costs</strong> - the opportunity cost resulting from using something instead of renting or selling it. The <strong>total costs</strong> are the sum of the implicit and explicit costs, and is always greater than or equal to the explicit costs.</p>
+<p>The <strong>total costs</strong> are the explicit costs plus implicit costs.</p>
+<p><strong>Accounting profit</strong> is revenue minus explicit costs. <strong>Economic profit</strong> is revenue minus the total costs.</p>
+<h1 id="section-6">31/10/13</h1>
+<p>A positive economic profit means that going ahead with the plan earns more than any other possible option.</p>
+<pre><code>AccountingCost = Wage*Labour + CapitalCost*CapitalAmount</code></pre>
+<p><span class="math display">\[C = WL + rK\]</span></p>
+<p>A firm's opportunity cost of production is the value of the best alternative use of the resources used.</p>
+<p>The three main types of opportunity costs for firms are:</p>
+<ul>
+<li><strong>bought in the market</strong> - the firm could have bought different resources to produce something different</li>
+<li><strong>owned by the firm</strong> - the firm could have sold or rented those resources, and using them means implicitly renting them from themselves; the cost is called the <strong>implicit rental rate</strong> of the resource</li>
+<li><strong>supplied by the firm owner</strong> - the firm owner could supply entrepreneurship and labour, where the forgone profit for entrepreneurship, or the forgone wages for labour, is an opportunity cost</li>
+</ul>
+<p>The use of resources owned by the first incurs a cost from renting it from themselves - the cost of having had the potential of renting it to other people. The cost is also made up of <strong>economic depreciation</strong> and <strong>forgone interest</strong>.</p>
+<p><strong>Economic depreciation</strong> is the change in the market value of some particular capital over time.</p>
+<p><strong>Interest forgone</strong> is the interest that could have been earned using the funds used to the acquire the capital - the return on the funds used to acquire the capital.</p>
+<p>The return on entrepreneurship is <strong>profit</strong>. In other words, entrepreneurship earns profit.</p>
+<p>The profit that an entrepreneur can expect to receive on average is known as <strong>normal profit</strong>. It is the opportunity cost of applying entrepreneurship.</p>
+<p>The wages given up by not taking wages for labour is the opportunity cost working at a firm.</p>
+<h2 id="decisions-made-by-firms">Decisions made by Firms</h2>
+<p>A firm can make several different choices to maximise profit:</p>
+<ul>
+<li>What and how much to produce.</li>
+<li>How to produce.</li>
+<li>How to organize and compensate managers and workers.</li>
+<li>How to market and price products.</li>
+<li>What to produce or buy from other firms.</li>
+</ul>
+<p>Profit is limited by constraints in <strong>technology</strong>, <strong>information</strong>, and <strong>markets</strong>:</p>
+<ul>
+<li><strong>Technology</strong> is any method of producing a good or service. It tends to improve over time. With available technology, a firm can only produce more if it hires more resources. This would increase costs and limits profits.</li>
+<li>A firm never has complete <strong>information</strong> about the past, present, and future. The cost of coping with limited information limits profit, such as not knowing the plans of its competitors or future consumer choices.</li>
+<li>The price and quantity a firm can sell a product at depends on the customers' willingness to pay, and the prices and marketing of the competition. The resources a firm can obtain is limited by the willingness of people to work or invest in it. The cost of overcoming this limits profits.</li>
+</ul>
+<p><strong>Technological efficiency</strong> is the state in which it is impossible to decrease any inputs when holding other inputs constant without changing the output.</p>
+<p><strong>Economic efficiency</strong> is the state in which a firm produces a given amount of output with the least cost. This depends on the relative costs of capital and labour.</p>
+<p>Technological efficiency is concerned with the quantity of inputs, while economic efficiency is concerned with the costs of the inputs.</p>
+<p>Economic efficiency implies technological efficiency, but it may not be the other way around.</p>
+<h3 id="organization">Organization</h3>
+<p>A firm organizes production by combining and coordinating resources using <strong>command systems</strong> and <strong>incentive systems</strong>.</p>
+<p><strong>Command systems</strong> are systems where a firm issues commands to be completed by the resources. A firm would directly control the process of production.</p>
+<p><strong>Incentive systems</strong> are systems where a firm provides incentives to induce the resources to behave in the desired way. A firm would guide the process of production.</p>
+<p>Most firms mix the systems, using command when it is easy to monitor performance, or when it is important to have the ideal performance, and incentive systems when monitoring performance is impractical.</p>
+<p>The <strong>principal-agent problem</strong> is the problem of finding incentives that induce <strong>agents</strong> to act in the interests of <strong>principals</strong>. For example, the managers of a firm are agents, and the goal is to induce them to act in the interest of the stockholders, the principals.</p>
+<p>There are three main ways to do this:</p>
+<ul>
+<li><strong>Ownership</strong> - if managers (agents) are made also to be stockholders (principals), then they are induced to act in the interest of the principals, themselves.</li>
+<li><strong>Incentive pay</strong> - if the pay of workers/managers (agents) are linked to performance, then they are induced to perform better, in the interest of the principals.</li>
+<li><strong>Long-term contracts</strong> - if the long-term rewards of workers/managers (agents) is linked to the long-term success of the firm, then they are induced to make the firm more successful, which is in the principals' interests.</li>
+</ul>
+<p>There are three main types of business organization:</p>
+<ul>
+<li><strong>Sole proprietorship</strong> - a single owner with <strong>unlimited liability</strong> - they are responsible for all the debts of the firm - who receives all of the profits and makes all the decisions. Profits are taxed the same as the owner's other income.</li>
+<li><strong>Partnership</strong> - two or more owners share <strong>unlimited liability</strong>, split profits somehow, and must agree on management decisions. Profits are taxed as personal income.</li>
+<li><strong>Corporation</strong> - owned by one or more stockholders with <strong>limited liability</strong> - they are responsible only for what they invested initially - who make decisions using some system and receive profits as <strong>dividends</strong> on their stocks. Profits are <strong>taxed twice</strong> as corporate tax on the firm, then income tax on the stockholders.</li>
+</ul>
+<p>Sole proprietership generally dies with the owner; partnerships and corporations can still survive.</p>
+<h2 id="market-types">Market Types</h2>
+<h3 id="perfect-competition">Perfect competition</h3>
+<p>Identical product, many firms, many buyers, no barrier of entry for new firms, everyone informed of prices and products available.</p>
+<h3 id="monopolistic-competition">Monopolistic competition</h3>
+<p>Similar product (known as <strong>product differentiation</strong>), many firms, no barrier of entry for new firms, each firm has some market power.</p>
+<h3 id="oligopoly">Oligopoly</h3>
+<p>Identical or similar product, few firms, barriers of entry limit new firms.</p>
+<h3 id="monopoly">Monopoly</h3>
+<p>Product without close substitutes, one firm, barriers of entry prevent new firms.</p>
+<p><strong>Market concentration</strong> is a measure of the amount of competition. High concentration means low competition; low concentration means high competition.</p>
+<p>We measure market concentration using:</p>
+<ul>
+<li>Four-firm concentration ratio - percentage of total sales in the industry by the four largest firms.</li>
+<li>Herfindahl-Hirschman Index - sum of squares of percentage market shares for largest 50 firms.</li>
+</ul>
+<p>However, these do not reflect <strong>differences specific to geographic regions</strong>, <strong>barriers to entry</strong>, and <strong>relations with the industry</strong>. As a result, they are not fully accurate in determining the structure of a market.</p>
+<p>Markets and firms both coordinate production. An example of market coordination is outsourcing - buying parts or products from other firms.</p>
+<p>However, firms do more production because they are more efficient than markets. This is caused by:</p>
+<ul>
+<li><strong>Lower transaction costs</strong> - lower costs of finding someone to do business with and ensuring the transaction is successful.</li>
+<li><strong>Economies of scale</strong> - the cost of producing a good or service falls as a firm gets bigger. This does not violate the law of supply because we are shifting the supply curve rightwards, rather than moving along it.</li>
+<li><strong>Economies of scope</strong> - specializing in a particular area allows lower costs of production.</li>
+</ul>
+<p>Firms can engage in <strong>team production</strong>, where they each specialize in mutually supportive tasks.</p>
+<h1 id="section-7">7/11/13</h1>
+<h2 id="output">Output</h2>
+<p>The main objective of a firm is to maximize profit - the difference between total revenue and total cost.</p>
+<p>Total revenue is the quantity times the price. Total cost is the explicit cost plus the implicit cost.</p>
+<p>Firms also face resource constraints.</p>
+<p>Firms need to decide:</p>
+<ul>
+<li>How much to produce.</li>
+<li>How many people to employ.</li>
+<li>How much capital and what kind of capital to use.</li>
+</ul>
+<p>Decisions are made in two possible time frames:</p>
+<ul>
+<li>A <strong>short-run period</strong> is a time frame less than a year such that at least one resource is fixed.
+<ul>
+<li>For most firms, the plant (capital) is fixed in the short run and labour, raw materials, and energy are not.</li>
+<li>Decisions made in the short run are easily reversed, since firms can take a temporary loss.</li>
+</ul></li>
+<li>A <strong>long-run period</strong> is a time frame longer than a year such that all resources are variable.
+<ul>
+<li>The plant size can change in the long run.</li>
+<li>Over time, substitutes and alternatives appear.</li>
+<li>Decisions made in the long run are difficult to reverse, since losses cannot be sustained in the long run.</li>
+</ul></li>
+</ul>
+<p>A <strong>sunk cost</strong> is a cost incurred by a firm that cannot be recovered or changed. For example, if a firm's plant has no resale value, it is a sunk cost. These costs are irrelevant to a firm's current decisions or the profit calculations.</p>
+<h3 id="output-1">Output</h3>
+<p>To increase output, a firm must increase capital or labour. The relationship between the amount of labour and output is described by total product, marginal product, and average product.</p>
+<p><strong>Total product</strong> is the total output produced in the given time period.</p>
+<p><strong>Marginal product of labour</strong> is the change in total product resulting from an increase in the amount of labour by 1 unit, all other factors remaining the same.</p>
+<p><strong>Average product of labour</strong> is the average product per unit of labour - the total product divided by the amount of labour.</p>
+<p>For example, a labour unit may be 5 workers per day, a total product may be 80 sweaters per day, a marginal product may be 4 sweaters per additional worker, and average product may be 7 sweaters per worker.</p>
+<p>As the quantity of labour increases most production processes undergo the following:</p>
+<ul>
+<li>Total product increases.</li>
+<li>Marginal product increases and then decreases - <strong>diminishing marginal returns</strong>.</li>
+<li>Average product increases and then decreases.</li>
+</ul>
+<h3 id="product-curves">Product curves</h3>
+<p>Product curves are graphs of total, marginal, or average product over labour.</p>
+<pre><code>       Total Product vs. Labour            
+v 300 units
+  |                                        
+  |                         ....           
+P |                    .....               
+r |  Impossible    ....                    
+i |            ....                        
+c |        ....                            
+e |   .....           Possible             
+  |...                                     
+  |________________________________________
+ 0           Total Product                ^ 25 workers/day</code></pre>
+<p>This is similar to the PPF - everything below or on the total product line is attainable, while everything above is not.</p>
+<pre><code>     Marginal Product vs. Labour           
+v 300 units
+  |                                        
+  |       ...                              
+P |     ..   ..                            
+r |    .       ..                          
+i |   .          ..                        
+c |  .             ..                      
+e | .                ...                   
+  |.                    ...                
+  |________________________________________
+ 0           Marginal Product             ^ 25 workers/day</code></pre>
+<h3 id="law-of-diminishing-returns">Law of diminishing returns</h3>
+<blockquote>
+<p>As a firm uses more of a variable input with all other inputs remaining constant, the marginal product with respect to the variable input <strong>eventually diminishes/decreases</strong>.</p>
+</blockquote>
+<p>As labour is increased, marginal product increases initially since the workers can divide the work and specialize better.</p>
+<p>As labour is increased even more, the marginal product starts to diminish since each worker has access to less capital and space with which to work.</p>
+<p>When the <strong>marginal product equals the average product</strong>, the <strong>average product is at its maximum</strong>.</p>
+<h2 id="costs">Costs</h2>
+<h3 id="short-run-cost">Short-run cost</h3>
+<p>To increase total product, a firm must employ more labour. As a result, costs increase.</p>
+<p><strong>Total cost</strong> is the cost of all resources used - the total fixed cost plus the total variable cost.</p>
+<p><strong>Total fixed cost</strong> is the cost of a firm's fixed inputs. These do not depend on the output. This is usually capital like ovens for a bakery.</p>
+<p><strong>Total variable cost</strong> is the cost of a firm's variable inputs. These depend on the output. This is usually labour like employees.</p>
+<p><span class="math display">\[\mathrm{TC} = \mathrm{TFC} + \mathrm{TVC}\]</span></p>
+<p>Total cost usually does not start from 0. There is usually a fixed cost even if there isn't any output.</p>
+<p>As output increases, the total variable cost increases. The marginal variable cost is inversely correlated with the marginal product - if the total product curve is increasing, then the total variable cost curve is decreasing.</p>
+<p>The <strong>marginal cost</strong> is the increase in total cost resulting from an increase in total product by 1 unit.</p>
+<p>When the marginal product is increasing, the marginal cost is decreasing. When the marginal product is decreasing, the marginal cost is increasing.</p>
+<p><strong>Average total cost</strong> is the total cost per unit of output - the average fixed cost plus the average variable cost.</p>
+<p><strong>Average fixed cost</strong> is the total fixed cost per unit of output - the total fixed cost divided by the output. This is decreasing since the fixed costs are constant.</p>
+<p><strong>Average variable cost</strong> is the total variable cost per unit of output - the total variable cost divided by the output.</p>
+<p><span class="math display">\[\mathrm{ATC} = \mathrm{AFC} + \mathrm{AVC} = \frac{\mathrm{TC}}{Q} = \frac{\mathrm{TFC}}{Q} + \frac{\mathrm{TVC}}{Q}\]</span></p>
+<p>Where <span class="math inline">\(Q\)</span> is the output quantity.</p>
+<p>The average variable cost curve is U-shaped and plotted with respect to output quantity, and as a result, so is the average total cost curve. This is because the average product is initially increasing, but later decreases - so the average cost is initially decreasing, but later increases.</p>
+<p>Average variable cost and average total cost are decreasing when the MC curve is below them, and increasing when the MC curve is above. When they intersect, the average variable cost and average total cost are at their minimum.</p>
+<p>The exact shape of the cost curves are determined by the technology.</p>
+<p>Marginal cost is at its minimum when marginal product is at its maximum, and vice versa, with respect to output.</p>
+<p>Average variable cost is at its minimum when average product is at its maximum, and vice versa, with respect to output.</p>
+<h3 id="changes">Changes</h3>
+<p><strong>Technology</strong> influences the product and cost curves. Improvements in technology shift the product curves upwards and the cost curves downwards.</p>
+<p>If a technological improvement uses more capital and less labour, then fixed costs increase and variable costs decrease.</p>
+<p>An <strong>increase in prices of factors of production</strong> increases costs. An increase shifts the product curves downwards and the cost curves upwards, and vice versa.</p>
+<h3 id="long-run-cost">Long-run cost</h3>
+<p>In the long run, we are not guaranteed that some resources are fixed. So the inputs can change and all costs are variable.</p>
+<p>The behavior of long-run cost depends on the <strong>production function</strong> of the firm - the relationship between the maximum attainable output and the quantities of inputs like capital and labour.</p>
+<p>As the firm's labour increases, the marginal product of labour increases.</p>
+<p>As the amount of labour employed per plant increases, the marginal product of capital decreases.</p>
+<p>The <strong>marginal product of capital</strong> is the increase in output resulting from an increase in the amount of capital used by 1 unit, all other factors like labour being constant.</p>
+<p>For each possible plant size, there are a set of corresponding curves for marginal cost, average variable cost, and average total cost.</p>
+<p>The larger the plant, the greater the output at which the average total cost is at a minimum.</p>
+<p>So for a given output quantity desired, we would consider each possible plant and see which possibility has the lowest average total cost.</p>
+<p>The <strong>long-run average cost curve</strong> is the minimum of all the possible curves. It has parts of many different curves that correspond to different plant sizes.</p>
+<p>We can use this to find the plant size with the minimum average total cost for a given output quantity. This is the plant size with the lowest average cost per output.</p>
+<h3 id="economies">Economies</h3>
+<p><strong>Economies of scale</strong> are aspects of the firm's technology that lead to decreasing long-run average cost with respect to output.</p>
+<p><strong>Diseconomies of scale</strong> are the opposite, with increasing long-run average cost.</p>
+<p><strong>Constant returns to scale</strong> are similar, with constant long-run average cost.</p>
+<p>A firm experiences economies of scale up to a certain output quantity, before going into diseconomies of scale or constant returns to scale.</p>
+<p>The <strong>minimum efficient scale</strong> is the smallest output quantity resulting in the minimum long-run average cost.</p>
+<p>If the long-run average cost curve is U-shaped, the minimum point identifies the output level achieving the minimum efficient scale.</p>
+<h1 id="section-8">14/11/13</h1>
+<h2 id="perfectly-competitive-markets">Perfectly Competitive Markets</h2>
+<p><strong>Perfect competition</strong> is an industry where there are:</p>
+<ul>
+<li>Many firms selling.</li>
+<li>Everyone is selling the same product.</li>
+<li>There are many buyers.</li>
+<li>There are no restrictions to entering the industry (e.g., patents, exclusive rights to needed inputs).</li>
+<li>Established firms have no advantage over new ones.</li>
+<li>Sellers and buyers are perfectly informed about all prices.</li>
+</ul>
+<p>The actions of each individual buyer or seller have a negligible effect because there are so many of them.</p>
+<p>As a result, <strong>no single firm has the power to control prices</strong>. The price comes from the market supply and demand, and firms must take the price.</p>
+<p>When a firm cannot control prices, it is called a <strong>price taker</strong> - it has to take the price.</p>
+<p>Each firm's product is a perfect substitute for the others. This means the <strong>demand for each product is perfectly elastic</strong>.</p>
+<h3 id="initiation">Initiation</h3>
+<p>Perfect competition begins when buyers don't care about which firm they buy from. This is generally caused by the products sold by each firm being perceived as the same.</p>
+<h3 id="actions">Actions</h3>
+<p>The <strong>marginal revenue</strong> is the change in total revenue resulting from an increase in the quantity sold by 1 unit.</p>
+<p>A firm in a perfectly competitive market must decide <strong>how to produce at minimum cost</strong>, <strong>how much to produce</strong>, and <strong>whether to enter/exit the market</strong>.</p>
+<p>How much should a firm produce? The firm has the highest economic profit when the quantity produced results in a point on the economic profit graph at the maximum.</p>
+<p>The maximum economic profit occurs when the marginal revenue equals the marginal cost. This is because at this point, the derivative of the economic profit is 0, and the marginal cost eventually must increase. At this point, the economic profit decreases if the quantity produced changes in any direction.</p>
+<p>A firm needs to decide whether to stay or exit the market if it takes an economic loss. If the firm decides to stay, it must decide whether to continue prodcing, or shut down temporarily. The decision is based on the one that minimizes the firm's loss.</p>
+<p>If a firm decides to shut down, it has <strong>no variable costs or revenue</strong>, but still has to <strong>pay the fixed costs</strong> (e.g., rent, insurance, security).</p>
+<p>Whether a firm should continue producing is determined by whether a firm has <strong>enough revenue to cover the variable costs</strong>. If it does, then it is better to keep producing and cover at least some of the fixed costs. Otherwise, it should stop producing and take a loss of only the fixed costs. In other words, a firm shuts down if and only if <code>price*quantity &lt; total variable costs</code>, or <code>price &lt; average variable costs</code></p>
+<h3 id="short-run-supply">Short-run Supply</h3>
+<p>In the short run, it is difficult for firms to enter or exit the market.</p>
+<p>A firm in a perfectly competitive market has a supply curve similar to the following:</p>
+<pre><code>         Price vs. Quantity Supplied
+v $30
+  |                                        
+  |                         ....           
+P |                    .....               
+r |                ....                    
+i |            ....                        
+c |............--------- SHUTDOWN POINT    
+e |.                                       
+  |.                                       
+  |________________________________________
+ 0           Quantity Supplied            ^ 25</code></pre>
+<p>When the price falls below the shutdown point, the firm stops producing in order to minimize losses. The shutdown price is determined by the point where the price becomes less than the average variable cost, or where the marginal cost equals the marginal revenue.</p>
+<p>The maximum economic profit is not necessarily positive. If the economic profit is 0, the firm is <strong>breaking even</strong>.</p>
+<h3 id="long-run-supply">Long-run Supply</h3>
+<p>In the long run, firms can enter or exit the market. Firms cannot shut down in the long run.</p>
+<p>New firms enter a market when exising firms in the market are making an economic profit. Firms exit markets where they make economic losses.</p>
+<p>When a firm <strong>enters the market</strong>, the market supply (price vs. quantity supplied for the whole market) increases, so the market price decreases.</p>
+<p>This decreases the economic profit of all firms, which can result in some firms exiting the market or shutting down. The economic profit decreases until it reaches 0.</p>
+<p>When a firm <strong>exits the market</strong>, the market supply decreases, so the market price increases.</p>
+<p>This increases the economic profit of all firms, which can result in some new firms entering the market. The economic profit increases until it reaches 0.</p>
+<p>As a result, the economic profit is held around 0.</p>
+<p>When <strong>demand decreases permanently</strong>, the price falls, which causes firms to exit and decrease supply. The price then rises again until firms stop leaving - economic profit is 0. Afterwards, there are fewer firms than before.</p>
+<p>When <strong>demand increases permanently</strong>, the price rises, which causes new firms to enter and increase supply. The price then falls again until firms stop entering - economic profit is 0. Afterwards, there are more firms than before.</p>
+<p>In the long run, <strong>firms make the normal rate of return</strong>. This is because economic profit considers opportunity costs in addition to the explicit costs.</p>
+<p>The <strong>long-run market supply curve</strong> is the measure of the equilibrium price over quantity supplied. This curve is useful because it takes into account things like plant changes and the number of firms in the market.</p>
+<p>Improvements in technology reduces the average costs and creates economic profit. Firms either adopt the new technology or exit the market. New firms then join the market and increase supply until the economic profit is 0.</p>
+<h3 id="economies-1">Economies</h3>
+<p><strong>External economies</strong> are factors beyond a single firm's control that lower a firm's costs as the market quantity supplied increases.</p>
+<p><strong>External diseconomies</strong> are factors beyond a single firm's control that increase a firm's costs as the market quantity supplied increases.</p>
+<p>These affect the new equilibrium price in the long run after a permanent change in demand.</p>
+<p>If there are no external economies or diseconomies, then <strong>each firm's costs remain constant as the market output changes</strong> - changes in the total quantity produced in a market. In this case, <strong>after a change in demand, price stays constant</strong>. The long-run market supply curve is constant.</p>
+<p>If there are external economies, the price decreases if demand increases, because quantity supplied also increases. The long-run market supply curve has a negative slope.</p>
+<p>If there are external diseconomies, the price increases if demand increases, because quantity supplied also increases. The long-run market supply curve has a positive slope.</p>
+<h3 id="efficiency">Efficiency</h3>
+<p>Resources are used efficiently when no person can be made better off without making another person worse off. This occurs when marginal social benefit equals marginal social cost.</p>
+<p>A consumer's demand curve shows the best budget allocation over changes in the price of a good. Consumers are <strong>efficient at all points on the demand curve</strong>. Without external benefits, the <strong>market demand curve is the marginal social benefit curve</strong>.</p>
+<p>A firm's supply curve shows the best profit maximization over changes in the price of a good. Firms are <strong>efficient at all points on the supply curve</strong>. Without external cost, the <strong>market supply curve is the marginal social cost curve</strong>.</p>
+<p>Because of this, <strong>competitive markets are efficient</strong> - marginal social benefit equals marginal social cost. The gains from trade for consumers and producers are consumer and producer surplus, respectively. The sum of these is the total surplus.</p>
+<p>At long-run equilibrium, <strong>total surplus is maximized</strong>.</p>
+<h1 id="section-9">21/11/13</h1>
+<h2 id="monopoly-1">Monopoly</h2>
+<p>A <strong>monopoly</strong> is a market that produces a good <strong>without good substitutes</strong> and <strong>with only one supplier protected from competition by barriers of entry</strong>.</p>
+<p>A <strong>monopoly</strong> is characterized by not having any competition.</p>
+<p>If a good has any close substitutes, then the firm faces competition from the producers of the substitute. So it is only a monopoly if there are no close substitutes.</p>
+<h3 id="barriers-to-entry">Barriers to entry</h3>
+<p>The main causes of a monopoly are the <strong>barriers to entry</strong>. Some barriers to entry are:</p>
+<ul>
+<li>A single firm has ownership of a needed resource.
+<ul>
+<li>This is rare because other firms can often find other instances of the resource needed.</li>
+<li>For example, De Beers has exclusive use of most African natural diamonds.</li>
+</ul></li>
+<li>The government gives one firm exclusive rights to produce/sell the good.
+<ul>
+<li>For example, patents and copyright.</li>
+<li>Another example is cable companies being given regions where they have exclusive rights to sell service.</li>
+</ul></li>
+</ul>
+<p>Barriers to entry fall under three categories:</p>
+<ul>
+<li>Natural barriers to entry
+<ul>
+<li><strong>Natural monopoly</strong> caused by economies of scale allowing the biggest firm to supply the good at the lowest cost, making it difficult for new, smaller firms to enter the market.</li>
+<li>For example, Walmart can sell products at a lower price than some small supermarkets because they have much higher outputs.</li>
+</ul></li>
+<li>Ownership barriers to entry
+<ul>
+<li>Monopoly caused by one firm owning a significant part of a key resource needed in producing a good.</li>
+<li>For example, De Beers owns 90% of the world's diamond sources, making it difficult or impossible for other firms to produce the good.</li>
+</ul></li>
+<li>Legal barriers to entry
+<ul>
+<li><strong>Legal monopoly</strong> caused by competition and entry restricted by government intervention.</li>
+<li>For example, public franchises like Canada Post are to deliver first-class mail.</li>
+<li>For example, there might be a government license needed to produce the good or service, like a license to practice law or medicine.</li>
+<li>For example, a patent or copyright granted to one firm would disallow other firms from producing it.</li>
+</ul></li>
+</ul>
+<h3 id="pricing">Pricing</h3>
+<p>A <strong>single-price monopoly</strong> has each unit of the good or service <strong>sold at the same price to all customers</strong>.</p>
+<p>A monopoly is a <strong>price setter</strong>. The market demand is the demand for the monopoly's output.</p>
+<p>To increase quantity sold, the monopoly must reduce prices.</p>
+<p><strong>Total revenue</strong> (TR) is the product of price and quantity sold. <strong>Marginal revenue</strong> (MR) is the change in total revenue resulting from the quantity sold increasing by 1 unit.</p>
+<p>The <strong>marginal revenue is less than the price of the good</strong> (<span class="math inline">\(MR &lt; P\)</span>) at all levels of output in a single-price monopoly.</p>
+<p>If a firm cuts the price of a good, it will also sell more. The marginal revenue is the difference between the revenue gain from selling more and the revenue loss from lower price.</p>
+<p>The price depends on the elasticity of the good. If the demand is elastic, a fall in the price brings an increase in total revenue. If the demand is inelastic, a rise in price brings an increase in total revenue.</p>
+<p>So the profit is maximized when the marginal revenue is 0, when the quantity demanded is unit elastic.</p>
+<p>In a monopoly, the demand is always elastic. So a monopoly always seeks to lower price.</p>
+<h3 id="efficiency-1">Efficiency</h3>
+<p>A monopoly faces technology constraints like a firm in a competitive market, but does not need to worry about competition. Monopolies set their price at such a value that they sell the quantity that maximizes profit.</p>
+<p>It is possible to make an economic profit in a monopolistic market. If a firm incurs an economic loss, it may shut down temporarily in the short run or exit the market in the long run.</p>
+<p>Compared to a perfectly competitive market, a good in a monopoly is sold at a <strong>higher price</strong> and <strong>lower quantity</strong>.</p>
+<p>A monopoly is inefficient because the marginal social benefit is greater than the marginal social cost, causing deadweight losses. Some of the consumer surplus also becomes producer surplus.</p>
+<p><strong>Economic rent</strong> is any type of surplus, including consumer surpus, producer surplus, and economic profit.</p>
+<p><strong>Rent seeking</strong> is the pursuit of wealth by capturing economic rent rather than creating more wealth. This can be done by buying a monopoly or creating one. Often, rent seekers work by manipulating the social and politicial environment in which economic activities happen.</p>
+<p>Profits spent rent seeking can use up all the producer surplus, and is considered a deadweight loss. Rent seeking increases deadweight loss.</p>
+<h3 id="price-discrimination">Price discrimination</h3>
+<p>Some firms practice <strong>price discrimination</strong> - goods or services are sold at different prices to different customers.</p>
+<p>A firm does not need to be a monopoly to price discriminate, but it happens most often in monopolies.</p>
+<p>For example, an energy company might sell electricity at higher prices during certain hours of the day and lower prices at other times.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

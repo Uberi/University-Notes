@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="author" content="$author-meta$" />
   <title>MATH137 | Anthony Zhang</title>
   <link rel="stylesheet" href="../css/base.css" type="text/css">
   <link rel="stylesheet" href="../css/note.css" type="text/css">
@@ -11,6 +10,7 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -70,33 +70,2098 @@
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
-<p>$if(toc)$</p>
-<div id="$idprefix$TOC">
-$toc$
-</div>
-<p>$endif$</p>
-<h1 id="lecture-notes-by-anthony-zhang.">Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+<h1 id="math-137">MATH 137</h1>
+<p>Calculus I:</p>
+<pre><code>Section 003</code></pre>
+<p>Instructor:</p>
+<pre><code>Name: Sean Speziale
+Email: sspezial@uwaterloo.ca
+Office: M3 2128
+Advising Hours: Monday, Wednesday at 12:00-13:30, MC 4023
+Office hours: starts week 3</code></pre>
+<h1 id="section">9/9/13</h1>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>Integers: <span class="math inline">\(\mb{Z} = \ldots, -2, -1, 0, 1, 2, \ldots\)</span></p>
+<p>Rational numbers: <span class="math inline">\(\mb{Q} = \frac{p}{q}, p \in \mb{Z}, q \in \mb{Z}\)</span></p>
+<p>Irrational numbers: cannot be expressed as ratio, non-terminating and non-repeating decimal expansions - <span class="math inline">\(\pi\)</span>, <span class="math inline">\(e\)</span>, <span class="math inline">\(\sqrt{2}\)</span>, <span class="math inline">\(ln(2)\)</span>.</p>
+<p>Real number (denoted <span class="math inline">\(\mb{R}\)</span>): contains <span class="math inline">\(\mb{Z}\)</span>, <span class="math inline">\(\mb{Q}\)</span>, and irrationals; any number with decimal expansion as opposed to complex/imaginary numbers.</p>
+<p>Complex number (denoted <span class="math inline">\(\mb{C}\)</span>): contains real and imaginary parts.</p>
+<h2 id="intervalssets">Intervals/Sets</h2>
+<p><span class="math inline">\([a, b]\)</span> - inclusive (closed) interval from <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span>.</p>
+<p><span class="math inline">\((a, b]\)</span> - left exclusive (left open) interval from <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span>, not including <span class="math inline">\(a\)</span>.</p>
+<p><span class="math inline">\([a, b)\)</span> - right exclusive (right open) interval from <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span>, not including <span class="math inline">\(b\)</span>.</p>
+<p><span class="math inline">\(x \in (a, b)\)</span> - <span class="math inline">\(x\)</span> is an element of <span class="math inline">\((a, b)\)</span> and <span class="math inline">\(\set{x \in R ~ \middle| ~ a &lt; x &lt; b}\)</span>.</p>
+<p>Infinity can be used as an interval endpoint, but is always excluded as it is a limit, not a number: <span class="math inline">\([4, \infty)\)</span>.</p>
+<h2 id="inequalities">Inequalities</h2>
+<p><span class="math inline">\(\iff\)</span> - if and only if; first implies second, and second implies first.</p>
+<p>Solve <span class="math inline">\(6 &lt; 1 - 3x \le 10\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+6 &amp;&lt; 1 - 3x \le 10 \\
+\text{Isolate } x \text{: } 5 &amp;&lt; -3x \le 9 \\
+-5 &amp;&gt; 3x \ge -9 \\
+-5/3 &amp;&gt; x \ge -3
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Solve <span class="math inline">\(\frac{1}{x} &lt; 2\)</span>:</p>
+<blockquote>
+<p>We know that <span class="math inline">\(\frac{1}{x} &lt; 2\)</span>.<br />
+If <span class="math inline">\(x &gt; 0\)</span>, <span class="math inline">\(1 &lt; 2x\)</span>, so <span class="math inline">\(x &gt; \frac{1}{2}\)</span>.<br />
+If <span class="math inline">\(x &lt; 0\)</span>, <span class="math inline">\(1 &gt; 2x\)</span>, so <span class="math inline">\(x &lt; \frac{1}{2}\)</span>.<br />
+If <span class="math inline">\(x &gt; 0\)</span> and <span class="math inline">\(x &gt; \frac{1}{2}\)</span>, then <span class="math inline">\(x &gt; \frac{1}{2}\)</span>.<br />
+If <span class="math inline">\(x &lt; 0\)</span> and <span class="math inline">\(x &lt; \frac{1}{2}\)</span>, then <span class="math inline">\(x &lt; 0\)</span>.<br />
+Therefore, <span class="math inline">\(x \in (-\infty, 0) \cup (1/2, \infty)\)</span>.</p>
+</blockquote>
+<h2 id="absolute-value">Absolute Value</h2>
+<p>Distance between number and 0 on the real number line.</p>
+<p><span class="math display">\[
+\abs{x} = \begin{cases}
+    x,  &amp;\text{if } x &gt;= 0 \\
+    -x, &amp;\text{if } x &lt; 0
+\end{cases}
+\]</span></p>
+<p><span class="math inline">\(\abs{x-a}\)</span> is the distance between <span class="math inline">\(x\)</span> and <span class="math inline">\(a\)</span> on the real number line:</p>
+<p><span class="math display">\[
+\abs{x} = \begin{cases}
+    x-a, &amp;\text{if } x &gt;= 0 \\
+    a-x, &amp;\text{if } x &lt; 0
+\end{cases}
+\]</span></p>
+<p>Solve by considering both cases. Deal with each case separately.</p>
+<p>Solve <span class="math inline">\(\abs{2x-3} &lt; 4\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\text{Open the inequality: } -4 &amp;&lt; 2x-3 &lt; 4 \\
+\abs{f} &lt; g &amp;\implies -g &lt; f &lt; g \\
+-1 &lt; 2x &lt; 7 &amp;\implies -\frac{1}{2} &lt; x &lt; \frac{7}{2}
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Simplify <span class="math inline">\(\abs{x} + y \le 1\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+y \le 1 - \abs{x} \\
+y \le \begin{cases}
+1 - x &amp;\text{if } x \ge 0 \\
+1 + x &amp;\text{if } x &lt; 0 \\
+\end{cases} \\
+\]</span></p>
+</blockquote>
+<h1 id="section-1">11/9/13</h1>
+<h2 id="functions">Functions</h2>
+<p>A <strong>function</strong> is a rule that assigns a single output to an input.</p>
+<pre><code>x (independent variable) -&gt; f -&gt; f(x) or y (dependent variable)</code></pre>
+<p>A function maps values in the set known as a domain into values in the set known as a range.</p>
+<p>Domain: set of allowable values for the independent variable.</p>
+<p>Common exclusions from domains:</p>
 <ul>
-<li><a href="/blog/" class="page">blog</a></li>
-<li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
-<li><a href="/resume.pdf" class="page">résumé</a></li>
-<li><a href="https://github.com/Uberi" class="contact">github</a></li>
-<li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
-<li><script type="text/javascript">
-<!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x65;&#x6d;&#x61;&#x69;&#108;'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
-<li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
-<li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
-<li><a href="https://keybase.io/uberi" class="info">public key</a></li>
+<li>Dividing by 0.</li>
+<li>Logarithm of non-positive number.</li>
+<li>Even root of negative number.</li>
 </ul>
-<p><span class="math">\[ \newcommand{\set}[1]{\left\{ #1 \right\}} \newcommand{\tup}[1]{\left\langle #1 \right\rangle} \newcommand{\abs}[1]{\left\lvert #1 \right\rvert} \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} \newcommand{\ceil}[1]{\left\lceil#1 \right\rceil} \newcommand{\mb}[1]{\mathbb{#1}} \newcommand{\rem}{\operatorname{rem}} \newcommand{\sign}{\operatorname{sign}} \newcommand{\imag}{\boldsymbol{i}} \newcommand{\dee}{\mathop{}\!\mathrm{d}} \newcommand{\lH}{\overset{\text{l'H}}{=}} \newcommand{\evalat}[1]{\left.\left(#1\right)\right|} \newcommand{\sech}{\operatorname{sech}} \newcommand{\spn}{\operatorname{Span}} \newcommand{\proj}{\operatorname{proj}} \newcommand{\prp}{\operatorname{perp}} \newcommand{\refl}{\operatorname{refl}} \newcommand{\magn}[1]{\left\lVert #1 \right\rVert} \newcommand{\rank}{\operatorname{rank}} \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]} \newcommand{\range}{\operatorname{Range}} \newcommand{\adj}{\operatorname{adj}} \newcommand{\cof}{\operatorname{cof}} \newcommand{\diag}{\operatorname{diag}} \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)} \]</span></p>
-<p>$body$ $for(include-after)$ $include-after$ $endfor$</p>
-<div class="license">
-<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" alt="Creative Commons License" /></a> This work by <a href="https://uberi.github.io/">Anthony Zhang</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright 2013-2017 Anthony Zhang.
-</div>
+<p>A function has an inverse if and only if every unique value of the independent variable in the domain has a unique value of the dependent variable - i.e., &quot;one-to-one&quot;.</p>
+<p>Range: set of possible values for the dependent variable.</p>
+<p>Finding the range can be significantly more difficult than finding the domain, which is simply a matter of looking at the function.</p>
+<p><span class="math display">\[
+\begin{align}
+f(x) &amp;= \sqrt{x - 1} \\
+\text{Restriction: } x &amp;&gt; 1 \\
+\mb{D} &amp;= [1, \infty) \\
+\mb{R} &amp;= [0, \infty)
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+f(x) &amp;= \frac{1}{1 - x^2} \\
+\text{Restriction: } x &amp;\ne 0 \\
+\mb{D} &amp;= (\infty, -1) \cup (-1, 1) \cup (1, \infty) \\
+\mb{R} &amp;= (-\infty, 0) \cup [1, \infty)
+\end{align}
+\]</span></p>
+<p>A <strong>true function</strong> must have a unique output for each input. Graphically, the vertical line test passes for all points (vertical line drawn on graph will only intersect it at most once if it is a graph of a true function).</p>
+<p>Non-functions can be described using functions by combining multiple functions into one:</p>
+<p>Unit circle: <span class="math inline">\(y = \pm \sqrt{x^2+y^2}\)</span></p>
+<p>This can be written as two functions: <span class="math inline">\(y = -\sqrt{x^2+y^2}\)</span> and <span class="math inline">\(y = \sqrt{x^2+y^2}\)</span>.</p>
+<p>Horizontal line test: a function is one-to-one if any horizontal line drawn on its graph intersects it at most once.</p>
+<p>Function examples:</p>
+<ul>
+<li>Polynomial: <span class="math inline">\(x^n\)</span>, n is a positive integer (domain real numbers)</li>
+<li>Rational: <span class="math inline">\(f(x)/g(x)\)</span> (domain real numbers such that <span class="math inline">\(g(x) \ne 0\)</span>)</li>
+<li>Trigonometric/Inverse trigonometric</li>
+<li>Exponential: <span class="math inline">\(x^n\)</span>, <span class="math inline">\(x\)</span> is a positive real number (domain real numbers)</li>
+<li>Logarithm: <span class="math inline">\(\log(x)\)</span> (domain positive real numbers)</li>
+</ul>
+<h1 id="section-2">13/9/13</h1>
+<h2 id="transformations">Transformations</h2>
+<p>Sketch <span class="math inline">\(y = x^2\)</span>, <span class="math inline">\(y = x^2-1\)</span>, <span class="math inline">\(y = (x + 1)^2\)</span>:</p>
+<blockquote>
+<p><span class="math inline">\(y = x^2\)</span> is simply a parabola.<br />
+<span class="math inline">\(y = x^2-1\)</span> is the same parabola moved down 1 unit.<br />
+<span class="math inline">\(y = (x + 1)^2\)</span> is the same parabola moved left one unit.</p>
+</blockquote>
+<p>Given function <span class="math inline">\(f(x)\)</span>:</p>
+<ul>
+<li><span class="math inline">\(f(x)+c\)</span> is a vertical translation <span class="math inline">\(c\)</span> units upward.</li>
+<li><span class="math inline">\(f(x+c)\)</span> is a horizontal translation <span class="math inline">\(c\)</span> units to the left.</li>
+<li><span class="math inline">\(cf(x)\)</span> is a vertical stretch by a factor of <span class="math inline">\(c\)</span>.</li>
+<li><span class="math inline">\(f(cx)\)</span> is a horizontal compression by a factor of <span class="math inline">\(c\)</span>.</li>
+<li><span class="math inline">\(-f(x)\)</span> is a reflection along the x-axis.</li>
+<li><span class="math inline">\(f(-x)\)</span> is a reflection along the y-axis.</li>
+<li><span class="math inline">\(\abs{f(x)}\)</span> is a reflection of all parts of the function below the x-axis along the x-axis.</li>
+<li><span class="math inline">\(f(\abs{x})\)</span> is a reflection of all parts of the function to the right of the y-axis along the y-axis replacing what was on the left.</li>
+</ul>
+<h2 id="compositions">Compositions</h2>
+<p>Given two functions <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span>:</p>
+<p><span class="math inline">\(f \circ g\)</span> (equivalent to <span class="math inline">\(f(g(x))\)</span>) is a composition of <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span>.</p>
+<p>The domain of <span class="math inline">\(f \circ g\)</span> is all values of <span class="math inline">\(x\)</span> in the domain of <span class="math inline">\(g\)</span> for which <span class="math inline">\(g(x)\)</span> is in the domain of <span class="math inline">\(f\)</span>.</p>
+<p>Given <span class="math inline">\(f(x) = \frac{1}{x}, g(x) = \sqrt{1 - x}\)</span>, find <span class="math inline">\(f \circ g\)</span>:</p>
+<blockquote>
+<p><span class="math inline">\(f \circ g\)</span> is equivalent to <span class="math inline">\(\frac{1}{\sqrt{1 - x}}\)</span>.<br />
+Restriction on square root: <span class="math inline">\(1 - x \ge 0\)</span>, so <span class="math inline">\(x \le 1\)</span>.<br />
+Restriction on division: <span class="math inline">\(g(x) \ne 0\)</span>, so <span class="math inline">\(x \ne 1\)</span>.<br />
+Domain of <span class="math inline">\(f \circ g\)</span>: <span class="math inline">\((-\infty, 1] \cup ((-\infty, 1) \cup (1, \infty))\)</span> is equal to <span class="math inline">\((-\infty, 1)\)</span>.</p>
+</blockquote>
+<h1 id="section-3">16/9/13</h1>
+<h2 id="symmetry">Symmetry</h2>
+<p>A function is <strong>even</strong> if <span class="math inline">\(f(-x) = f(x)\)</span> - the function is symmetric about the y-axis.</p>
+<p>Examples include <span class="math inline">\(y = \abs{x}\)</span> and <span class="math inline">\(y = x^2\)</span>.</p>
+<p>A function is <strong>odd</strong> if <span class="math inline">\(f(-x) = -f(x)\)</span>.</p>
+<p>Examples include <span class="math inline">\(y = x\)</span> and <span class="math inline">\(y = \sin(x)\)</span>.</p>
+<h2 id="one-to-one-functions">One-to-one Functions</h2>
+<p>A function is known as one-to-one on an interval if it never takes the same value twice - it passes the horizontal line test.</p>
+<p>Methematically, for any two numbers <span class="math inline">\(x_1 \in I, x_2 \in I\)</span>, <span class="math inline">\(f(x_1) \ne f(x_2)\)</span> whenever <span class="math inline">\(x_1 \ne x_2\)</span>.</p>
+<p>Graphically, when we take the inverse of a function, we reflect it along the line <span class="math inline">\(y = x\)</span>. So the horizontal line test is actually the vertical line test of the inverse.</p>
+<p>A function is <strong>monotonically increasing</strong> on an interval <span class="math inline">\(I\)</span> if for any <span class="math inline">\(x_1 \in I, x_2 \in I\)</span>, <span class="math inline">\(x_1 &lt; x_2 \iff f(x_1) &lt; f(x_1)\)</span>.</p>
+<p>Likewise, a function is <strong>monotonically decreasing</strong> on an interval <span class="math inline">\(I\)</span> if for any <span class="math inline">\(x_1 \in I, x_2 \in I\)</span>, <span class="math inline">\(x_1 &lt; x_2 \iff f(x_1) &gt; f(x_1)\)</span>.</p>
+<p>A function that is monotonically increasing or monotonically decreasing on an interval is always one-to-one oon that interval.</p>
+<p>Show that <span class="math inline">\(f(x) = x^2\)</span> is not one-to-one over <span class="math inline">\(\mb{R}\)</span> but is over <span class="math inline">\([0, \infty)\)</span>:</p>
+<blockquote>
+<p>Counterexample: Since, <span class="math inline">\(f(-1) = f(1)\)</span>, the function is not one-to-one.<br />
+We can prove the latter statement by proving that the function is increasing over the interval.<br />
+Let <span class="math inline">\(x_1 \in [0, \infty)\)</span> and <span class="math inline">\(x_2 \in [0, \infty)\)</span> represent two arbitrary values such that <span class="math inline">\(x_1 &lt; x_2\)</span>.<br />
+Then <span class="math inline">\(f(x_2) - f(x_1) = x_2^2 - x_1^2 = (x_2 - x_1)(x_1 + x_2)\)</span>.<br />
+Both terms are always positive, so <span class="math inline">\(f(x_2) - f(x_1) &gt; 0\)</span> and <span class="math inline">\(f(x_2) &gt; f(x_1)\)</span>.<br />
+Therefore, the function is monotonically increasing.</p>
+</blockquote>
+<h2 id="inverse">Inverse</h2>
+<p>A function has an inverse if and only if it is one-to-one. By definition:</p>
+<p>Let <span class="math inline">\(f(x)\)</span> be a one-to-one function with domain <span class="math inline">\(A\)</span> and range <span class="math inline">\(B\)</span>.</p>
+<p>The inverse function of <span class="math inline">\(f(x)\)</span>, denoted <span class="math inline">\(f^{-1}(x)\)</span>, is defined by <span class="math inline">\(f^{-1}(y) = x \iff f(x) = y\)</span>.</p>
+<p>The range of the inverse is the domain of the function, and the domain of the inverse is the range of the function.</p>
+<p>An inverse of a function &quot;undoes&quot; the operation applied by the function. In other words, the cancellation equations <span class="math inline">\(\forall x \in A, f^{-1}(f(x)) = x\)</span> and <span class="math inline">\(\forall x \in B, f(f^{-1}(x)) = x\)</span> hold for all functions with inverses.</p>
+<p>Note that <span class="math inline">\(f^{-1}(x)\)</span> is not the same as <span class="math inline">\(f(x)^{-1}\)</span> - the former is the inverse and the latter is the reciprocal.</p>
+<p>The inverse is found by swapping the variables and isolating variables.</p>
+<p>If a function is not one-to-one over <span class="math inline">\(\mb{R}\)</span>, we may restrict the domain to a region where it is, and define the inverse there. This is useful with things like trigonometric functions, for example.</p>
+<p>Find the inverse of <span class="math inline">\(f(x) = \sqrt{10 - 3x}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\mb{D} &amp;= (-\infty, \frac{10}{3}] \\
+\mb{R} &amp;= [0, \infty) \\
+x &amp;= \sqrt{10 - 3 f^{-1}(x)} \\
+x^2 &amp;= 10 - 3 f^{-1}(x) \\
+x^2 - 10 &amp;= -3 f^{-1}(x) \\
+\frac{10 - x^2}{3} &amp;= f^{-1}(x) \\
+\mb{D} &amp;= [0, \infty) \\
+\mb{R} &amp;= (-\infty, \frac{10}{3}]
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Graphically, if the point <span class="math inline">\((a, b)\)</span> is on the graph of <span class="math inline">\(f(x)\)</span>, then <span class="math inline">\((b, a)\)</span> is on the graph of <span class="math inline">\(f^{-1}(x)\)</span>. Using this information, we can sketch the inverse of a graph by reflecting it along the line <span class="math inline">\(y = x\)</span>.</p>
+<h1 id="section-4">18/9/13</h1>
+<h2 id="the-constant-e">The Constant e</h2>
+<p><span class="math inline">\(e\)</span> is a constant used in many places in mathematics. It is approximately equal to 2.718.</p>
+<p>There are several ways to define <span class="math inline">\(e\)</span>:</p>
+<ul>
+<li>As a limit: <span class="math inline">\(e = \displaystyle\lim_{x \to \infty}{(1 + \frac{1}{x})^n}\)</span>.</li>
+<li>As an infinite series: <span class="math inline">\(e = \sum_{n = 0}^\infty \frac{1}{n!}\)</span>.</li>
+<li>Graphically with tangents: of all exponential equations of the form <span class="math inline">\(y = a^x, a &gt; 0\)</span>, only where <span class="math inline">\(a = e\)</span> does the tangent of the graph have a slope of 1 at <span class="math inline">\(x = 0\)</span>.</li>
+<li>Also, <span class="math inline">\(a = e\)</span> is the only value for which <span class="math inline">\(\displaystyle\lim_{h \to 0} \frac{a^h - 1}{h} = 1\)</span>.</li>
+</ul>
+<h2 id="exponentialslogarithms">Exponentials/Logarithms</h2>
+<p>The function <span class="math inline">\(f(x) = e^x\)</span> is called the natural exponential function, just as <span class="math inline">\(f(x) = \ln(x)\)</span> is called the natural logarithm.</p>
+<p>Sketch <span class="math inline">\(f(x) = 3 + 2e^x\)</span>:</p>
+<ul>
+<li>Start with graph of <span class="math inline">\(f(x) = e^x\)</span>.</li>
+<li>Reflect the graph along the Y axis.</li>
+<li>Stretch graph vertically by a factor of 2.</li>
+<li>Move the graph up by 3 units.</li>
+</ul>
+<p>The function <span class="math inline">\(f(x) = a^x\)</span> is either increasing for <span class="math inline">\(a &gt; 1\)</span> or decreasing for <span class="math inline">\(0 &lt; a &lt; 1\)</span>, and therefore has an inverse. This inverse is called <span class="math inline">\(\log_a(x)\)</span>. <span class="math inline">\(\log_a(x) = y \iff a^y = x\)</span>.</p>
+<p>The domain of <span class="math inline">\(f(x) = a^x\)</span> is <span class="math inline">\(\mb{R}\)</span>, and the range is <span class="math inline">\(\set{ y \in \mb{R} \middle| x &gt; 0}\)</span>. Therefore, the domain of <span class="math inline">\(f(x) = log_a(x)\)</span> is <span class="math inline">\(\set{ y \in \mb{R} \middle| x &gt; 0}\)</span> and the range is <span class="math inline">\(\mb{R}\)</span>.</p>
+<p><span class="math inline">\(\ln(e) = \log_e(x)\)</span></p>
+<p><span class="math inline">\(\ln(e) = 1\)</span></p>
+<p><span class="math inline">\(\log_a(x^r) = r \log_a(x^r)\)</span>. So <span class="math inline">\(\log(\sqrt{x}) = \frac{1}{2} \log(x)\)</span>.</p>
+<p>Find the inverse of <span class="math inline">\(f(x) = e^{2x + 1}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+x &amp;= e^{2 f^{-1}(x) + 1} \\
+\ln(x) &amp;= 2 f^{-1}(x) + 1 \\
+f^{-1}(x) &amp;= \frac{1}{2} \ln(x) - \frac{1}{2} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h1 id="section-5">20/9/13</h1>
+<h2 id="trignomonetric-functions">Trignomonetric Functions</h2>
+<p>Angles are measured in radians. Radians are the ratio of the associated arc and the radius: <span class="math inline">\(\theta = \frac{a}{r}\)</span>.</p>
+<p>For a full circle, <span class="math inline">\(a = 2 \pi r\)</span>, so <span class="math inline">\(\theta = \frac{2 \pi r}{r} = 2 \pi\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Radians</th>
+<th align="left">Degrees</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\pi\)</span></td>
+<td align="left">180</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\frac{\pi}{2}\)</span></td>
+<td align="left">90</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\frac{\pi}{3}\)</span></td>
+<td align="left">60</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\frac{\pi}{4}\)</span></td>
+<td align="left">45</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\frac{\pi}{6}\)</span></td>
+<td align="left">30</td>
+</tr>
+</tbody>
+</table>
+<p>These are based on the special triangles:</p>
+<ul>
+<li>Right triangle with side lengths <span class="math inline">\(1, 1, \sqrt{2}\)</span> and internal angles <span class="math inline">\(\frac{\pi}{4}, \frac{\pi}{4}. \frac{\pi}{2}\)</span>.</li>
+<li>Right triangle with side lengths <span class="math inline">\(1, \sqrt{3}, 2\)</span> and internal angles <span class="math inline">\(\frac{\pi}{6}, \frac{\pi}{3}. \frac{\pi}{2}\)</span>.</li>
+</ul>
+<p>Parametric equations of unit circle (<span class="math inline">\(x^2 + y^2 = 1\)</span>): <span class="math inline">\(x = \cos \theta\)</span> and <span class="math inline">\(y = \sin \theta\)</span> together form a unit circle from polar coordinates.</p>
+<p><span class="math display">\[
+\begin{align}
+x^2 + y^2 &amp;= 1 \\
+\sin^2 \theta + \cos^2 \theta &amp;= 1 \\
+\end{align}
+\]</span></p>
+<h3 id="properties">Properties</h3>
+<p>Bounds: <span class="math inline">\(-1 \le \sin \theta \le 1\)</span>, <span class="math inline">\(-1 \le \cos \theta \le 1\)</span></p>
+<p>Periodicity: <span class="math inline">\(\sin(\theta + 2 \pi k) = \sin \theta, k \in \mb{Z}\)</span>, <span class="math inline">\(\cos(\theta + 2 \pi k) = \cos \theta, k \in \mb{Z}\)</span></p>
+<p>Odd/even: <span class="math inline">\(\sin(-\theta) = -\sin(\theta)\)</span> - odd function, <span class="math inline">\(\cos(-\theta) = \cos(\theta)\)</span> - even function</p>
+<p>Sign: <span class="math inline">\(\cos\)</span> is positive to the right of the y-axis, <span class="math inline">\(\sin\)</span> is positive above the x-axis</p>
+<p>Other trigoometric functions:</p>
+<ul>
+<li>Tangent: <span class="math inline">\(\tan \theta = \frac{\sin \theta}{\cos \theta}\)</span></li>
+<li>Cosecant <span class="math inline">\(\csc \theta = \frac{1}{\sin \theta}\)</span></li>
+<li>Secant: <span class="math inline">\(\sec \theta = \frac{1}{\cos \theta}\)</span></li>
+<li>Cotangent: <span class="math inline">\(\cot \theta = \frac{\cos \theta}{\sin \theta}\)</span></li>
+</ul>
+<h3 id="identities">Identities</h3>
+<p>Square Identity: <span class="math inline">\(\sin^2 \theta + \cos^2 \theta = 1\)</span>.</p>
+<p>Addition formulas: <span class="math inline">\(\sin(x + y) = \sin x \cos y + \cos x \sin y\)</span>, <span class="math inline">\(\cos(x + y) = \cos x \cos y - \sin x \sin y\)</span>.</p>
+<p>Find the subtraction formulas:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\sin(x - y) &amp;= \sin x \cos(-y) + \cos x \sin(-y) \\
+&amp;= \sin x \cos y - \cos x \sin y \\
+\cos(x - y) &amp;= \cos x \cos(-y) - \sin x \sin(-y) \\
+&amp;= \cos x \cos y + \sin x \sin y \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h2 id="inverse-trigonometric-functions">Inverse Trigonometric Functions</h2>
+<p>Trignometric functions are periodic. Therefore, they are not one-to-one on the real number line and cannot have an inverse on this interval.</p>
+<p>However, they are one-to-one if we restrict the domain. Conventionally, we use <span class="math inline">\([-\frac{\pi}{2}, \frac{\pi}{2}]\)</span> for sine and <span class="math inline">\([0, \pi]\)</span> for cosine.</p>
+<p>The inverse of the sine function is denoted <span class="math inline">\(x = \arcsin \theta\)</span>, or <span class="math inline">\(x = \sin^{-1} \theta\)</span> - &quot;the angle whose sine is <span class="math inline">\(x\)</span> in the restricted domain&quot;. Its domain is <span class="math inline">\([-1, 1]\)</span> and its range is <span class="math inline">\([-\frac{\pi}{2}, \frac{\pi}{2}]\)</span>.</p>
+<p>The inverse of the cosine function is denoted <span class="math inline">\(\arccos \theta\)</span>, or <span class="math inline">\(\cos^{-1} \theta\)</span> - &quot;the angle whose cosine is x in the restricted domain&quot;. Its domain is <span class="math inline">\([-1, 1]\)</span> and its range is <span class="math inline">\([0, \pi]\)</span>.</p>
+<p>The inverse of the tangent function is denoted <span class="math inline">\(\arctan \theta\)</span>, or <span class="math inline">\(\tan^{-1} \theta\)</span> - &quot;the angle whose tangent is x in the restricted domain&quot;. Its domain is <span class="math inline">\(\mb{R}\)</span> and its range is <span class="math inline">\((-\frac{\pi}{2}, \frac{\pi}{2})\)</span>.</p>
+<p>Evaluate <span class="math inline">\(\cos(\arctan \sqrt{3})\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\sqrt{3}}{1} &amp;= \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} &amp;= \sqrt{3} \\
+\text{adjacent} &amp;= 1 \\
+\text{hypotenuse} &amp;= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\cos(\arctan \sqrt{3}) &amp;= \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\cos(\arctan \sqrt{3}) &amp;= \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Simplify <span class="math inline">\(\sin(\arctan x)\)</span></p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{x}{1} &amp;= \frac{\text{opposite}}{\text{adjacent}} \\
+\text{opposite} &amp;= x \\
+\text{adjacent} &amp;= 1 \\
+\text{hypotenuse} &amp;= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
+\sin(\arctan x) &amp;= \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
+\sin(\arctan x) &amp;= \frac{x}{\sqrt{x^2 + 1}} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)\)</span>:</p>
+<pre><code>       pi/6
+        |\
+        | \ 2
+sqrt(3) |  \
+        |___\
+    pi/2  1  pi/3</code></pre>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\sin \left( \frac{-\pi}{3} \right) &amp;= \frac{\text{opposite}}{\text{hypotenuse}} = -\frac{\sqrt{3}}{2} \\
+\text{opposite} &amp;= \sqrt{3} \\
+\text{hypotenuse} &amp;= 2 \\
+\text{adjacent} &amp;= \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
+\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) &amp;= \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h1 id="section-6">23/9/13</h1>
+<h2 id="hyperbolic-functions">Hyperbolic Functions</h2>
+<p>The <strong>hyperbolic functions</strong> are expressible as combinations of exponential functions.</p>
+<ul>
+<li><span class="math inline">\(\sinh x = \frac{e^x - e^{-x}}{2}\)</span> (&quot;sinch ex&quot;) - hyperbolic sine function. Domain and range is <span class="math inline">\(\mb{R}\)</span>.</li>
+<li><span class="math inline">\(\cosh x = \frac{e^x + e^{-x}}{2}\)</span> (&quot;cosh ex&quot;) - hyperbolic cosine function. Domain is <span class="math inline">\(\mb{R}\)</span> and range is <span class="math inline">\([1, \infty]\)</span>.</li>
+<li><span class="math inline">\(\tanh x = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{\sinh x}{\cosh x}\)</span> - hyperbolic tangent function. Domain is <span class="math inline">\(\mb{R}\)</span> and range is <span class="math inline">\((-1, 1)\)</span>.</li>
+</ul>
+<p>There are also hyperbolic secant, cosecant, and cotangent functions, but they are rarely used.</p>
+<ul>
+<li>Hyperbolic sin is an odd function: <span class="math inline">\(\sinh(-x) = \frac{e^{-x} - e^x}{2} = -\sinh x\)</span>. As <span class="math inline">\(x \to \infty\)</span>, <span class="math inline">\(\sinh x\)</span> approaches <span class="math inline">\(\frac{1}{2} e^x\)</span> asymptotically. As <span class="math inline">\(x \to -\infty\)</span>, <span class="math inline">\(\sinh x\)</span> approaches <span class="math inline">\(-\frac{1}{2} e^{-x}\)</span> asymptotically.</li>
+<li>Hyperbolic cosine is an even function: <span class="math inline">\(\cosh(-x) = \frac{e^{-x} + e^x}{2} = \cosh x\)</span>. As <span class="math inline">\(x \to \infty\)</span>, <span class="math inline">\(\sinh x\)</span> approaches <span class="math inline">\(\frac{1}{2} e^x\)</span> asymptotically. As <span class="math inline">\(x \to -\infty\)</span>, <span class="math inline">\(\sinh x\)</span> approaches <span class="math inline">\(\frac{1}{2} e^{-x}\)</span> asymptotically.</li>
+<li>Hyperbolic tangent is an odd function: <span class="math inline">\(\tanh(-x) = \frac{e^{-x} - e^x}{e^{-x} + e^x} = -\tanh x\)</span>. As <span class="math inline">\(x \to \infty\)</span>, <span class="math inline">\(\tanh x\)</span> approaches 1 asymptotically. As <span class="math inline">\(x \to -\infty\)</span>, <span class="math inline">\(\tanh x\)</span> approaches -1 asymptotically.</li>
+</ul>
+<p>If we let <span class="math inline">\(x = \cosh t\)</span> and <span class="math inline">\(y = \sinh t\)</span>, then <span class="math inline">\(x^2 - y^2 = 1\)</span>. This is a hyperbola. The graph appears as an hourglass shape.</p>
+<h1 id="section-7">25/9/13</h1>
+<h2 id="inverse-hyperbolic-functions">Inverse Hyperbolic Functions</h2>
+<p>Hyperbolic sine is one-to-one over <span class="math inline">\(\mb{R}\)</span>.</p>
+<p>To find the inverse functions, we solve for <span class="math inline">\(y\)</span> where <span class="math inline">\(x = \sinh y = \frac{e^y - e^{-y}}{2}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+x = \sinh y &amp;= \frac{e^y - e^{-y}}{2} \\
+2x &amp;= e^y - e^{-y} \\
+0 &amp;= e^y - 2x - e^{-y} \\
+0 &amp;= e^y e^y - e^y 2x - e^y e^{-y} \\
+(e^y)^2 - 2x e^y - 1 &amp;= 0 \\
+e^y &amp;= \frac{2x \pm \sqrt{(-2x)^2 - 4 \cdot 1 \cdot -1}}{2} = x \pm \sqrt{x^2 + 1} \\
+\text{Since } x - \sqrt{x^2 + 1} &lt; 0 \text{, } e^y &amp;= x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
+e^y &amp;= x + \sqrt{x^2 + 1} \\
+y &amp;= \ln(x + \sqrt{x^2 + 1}) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>With this technique, we discover the inverses of the hyperbolic functions are:</p>
+<ul>
+<li><span class="math inline">\(\sinh^{-1} x = \ln(x + \sqrt{x^2 + 1})\)</span></li>
+<li><span class="math inline">\(\cosh^{-1} x = \ln(x + \sqrt{x^2 - 1}), x \ge 1\)</span></li>
+<li><span class="math inline">\(\tanh^{-1} x = \frac{1}{2} \ln(\frac{1 + x}{1 - x}), -1 &lt; x &lt; 1\)</span></li>
+</ul>
+<p>Find <span class="math inline">\(tanh^{-1} x\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+x = \tanh y &amp;= \frac{e^y - e^{-y}}{e^y + e^{-y}} \\
+xe^y + xe^{-y} &amp;= e^y - e^{-y} \\
+xe^{2y} + x &amp;= e^{2y} - 1 \\
+(x - 1)e^{2y} &amp;= x + 1 \\
+e^y &amp;= \pm \sqrt{\frac{x + 1}{x - 1}} \\
+\text{Since } -\sqrt{\frac{x + 1}{x - 1}} &amp;&lt; 0 \text{, the negative solution is extraneous.} \\
+e^y &amp;= \sqrt{\frac{x + 1}{x - 1}} \\
+y &amp;= \ln \left( \frac{x + 1}{x - 1} \right)^\frac{1}{2} \\
+y &amp;= \frac{1}{2} \ln \frac{x + 1}{x - 1} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h2 id="limits">Limits</h2>
+<p>Limits are a core concept in calculus, because they appear in the definitions of derivatives and definite integrals, the two main branches of calculus.</p>
+<p>A limit does not depend on what the value of the function is at the point it is approaching. Consider the following function:</p>
+<p><span class="math display">\[
+g(x) = \begin{cases}
+3x - 1 &amp;\text{if } x \ne 1 \\
+0      &amp;\text{if } x = 1
+\end{cases}
+\]</span></p>
+<p>When we say the limit of <span class="math inline">\(f(x)\)</span> is <span class="math inline">\(L\)</span> as <span class="math inline">\(x \to a\)</span>, we mean <span class="math inline">\(f(x)\)</span> gets closer and closer to <span class="math inline">\(L\)</span> as <span class="math inline">\(x\)</span> gets closer and closer to <span class="math inline">\(a\)</span>.</p>
+<p>The precise definition of a limit:</p>
+<blockquote>
+<p>Let <span class="math inline">\(f\)</span> be a function defined on an open interval that contains the number <span class="math inline">\(a\)</span>, except possibly at <span class="math inline">\(a\)</span> itself.<br />
+Then we say the <strong>limit</strong> of <span class="math inline">\(f(x)\)</span> as <span class="math inline">\(x\)</span> approaches <span class="math inline">\(a\)</span> is <span class="math inline">\(L\)</span>, if for every number <span class="math inline">\(\epsilon &gt; 0\)</span> there exists a number <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta \implies \abs{f(x) - L} &lt; \epsilon\)</span>. We write this as <span class="math inline">\(\displaystyle\lim_{x \to a} f(x) = L\)</span>, or <span class="math inline">\(f(x) \to L\)</span> as <span class="math inline">\(x \to a\)</span>.</p>
+</blockquote>
+<p>In other words, <span class="math inline">\((\forall \epsilon &gt; 0, \exists \delta &gt; 0, 0 &lt; \abs{x - a} &lt; \delta \implies \abs{f(x) - L} &lt; \epsilon) \iff (\lim_{x \to a} f(x) = L)\)</span>.</p>
+<p><span class="math inline">\(\epsilon\)</span> is Epsilon (Greek) and is associated with error.</p>
+<p><span class="math inline">\(\delta\)</span> is Delta (Greek) and is associated with difference.</p>
+<p>The key point is that the limit exists if the distance between <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(L\)</span> (the error, <span class="math inline">\(\epsilon\)</span>) <strong>can be made as small as needed</strong> by making the distance between <span class="math inline">\(x\)</span> and <span class="math inline">\(a\)</span> (the difference, <span class="math inline">\(\delta\)</span>) sufficiently small. However, <span class="math inline">\(x \ne a\)</span>.</p>
+<p>We can also write the implication <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta \implies \abs{f(x) - L} &lt; \epsilon\)</span> as <span class="math inline">\(a - \delta &lt; x &lt; a + \delta \implies L - \epsilon &lt; f(x) &lt; L + \epsilon\)</span>.</p>
+<p><span class="math inline">\(\delta\)</span> depends on <span class="math inline">\(\epsilon\)</span>.</p>
+<h1 id="section-8">27/9/13</h1>
+<p>Geometry and intuition are useful tools, but do not prove anything.</p>
+<p>Consider <span class="math inline">\(f(x) = \sin\left(\frac{1}{x}\right)\)</span>. The graph has higher and higher frequency oscillations as it approaches 0 from either direction, to a limit of infinity.</p>
+<p>Consider the following function:</p>
+<p><span class="math display">\[
+f(x) = \begin{cases}
+3x - 1 &amp;\text{if }x \ne 1 \\
+0      &amp;\text{if } x = 1
+\end{cases}
+\]</span></p>
+<p>How close must <span class="math inline">\(x\)</span> be to 1 to ensure that <span class="math inline">\(h(x)\)</span> is within 0.1 of 2?</p>
+<blockquote>
+<p>0.1 plays the role of <span class="math inline">\(\epsilon\)</span>.<br />
+We need to find the corresponding value of <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(0 &lt; \abs{x - 1} &lt; \delta \implies \abs{h(x) - 2} &lt; 0.1\)</span>.<br />
+So <span class="math inline">\(\abs{3x - 1 - 2} &lt; 0.1\)</span>, or <span class="math inline">\(3 \abs{x - 1} &lt; 0.1\)</span>.<br />
+So <span class="math inline">\(\abs{x - 1} &lt; \frac{0.1}{3}\)</span>, or <span class="math inline">\(\frac{1}{30}\)</span>.</p>
+</blockquote>
+<p>To prove that a limit exists, we need to use an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span>:</p>
+<blockquote>
+<p>We need to find the corresponding value of <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(0 &lt; \abs{x - 1} &lt; \delta \implies \abs{h(x) - 2} &lt; \epsilon\)</span>.<br />
+So <span class="math inline">\(\abs{3x - 1 - 2} &lt; \epsilon\)</span>, or <span class="math inline">\(3 \abs{x - 1} &lt; \epsilon\)</span>.<br />
+So <span class="math inline">\(\abs{x - 1} &lt; \frac{\epsilon}{3}\)</span>.<br />
+So if we choose <span class="math inline">\(\delta = \frac{\epsilon}{3}\)</span>, then we know that <span class="math inline">\(0 &lt; \abs{x - 1} &lt; \delta \implies \abs{h(x) - 2} &lt; \epsilon\)</span>.<br />
+Therefore, the limit exists, by definition.</p>
+</blockquote>
+<h3 id="heaviside-function">Heaviside Function</h3>
+<p><span class="math display">\[
+H(x) = \begin{cases}
+1 &amp;\text{if } x \ge 0 \\
+0 &amp;\text{if } x &lt; 0
+\end{cases}
+\]</span></p>
+<p>Prove that the limit does not exist at <span class="math inline">\(x = 0\)</span>:</p>
+<blockquote>
+<p>Proof by contradiction.<br />
+Suppose the limit does exist.<br />
+So <span class="math inline">\(\forall \epsilon &gt; 0, \exists \delta &gt; 0, 0 &lt; \abs{x} &lt; \delta \implies \abs{H(x) - L} &lt; \epsilon\)</span>.<br />
+Consider <span class="math inline">\(\epsilon = 0.2\)</span>.<br />
+So <span class="math inline">\(0 &lt; \abs{x} &lt; \delta \implies L - 0.2 &lt; H(x) &lt; L + 0.2\)</span>.<br />
+So the distance between <span class="math inline">\(L - 0.2\)</span> and <span class="math inline">\(L + 0.2\)</span> is 0.4.<br />
+Let <span class="math inline">\(-\delta &lt; x_1 &lt; 0\)</span> and <span class="math inline">\(0 &lt; x_2 &lt; \delta\)</span>.<br />
+So it must be that <span class="math inline">\(H(x_1) = 0\)</span> and <span class="math inline">\(H(x_2) = 1\)</span>.<br />
+So the distance between the two is 1.<br />
+But the distance between the two must be less than 0.4.<br />
+Therefore, the limit cannot exist for <span class="math inline">\(\epsilon \le \frac{1}{2}\)</span>.</p>
+</blockquote>
+<h1 id="section-9">30/9/13</h1>
+<h2 id="limit-lawstheorems">Limit Laws/Theorems</h2>
+<p>For complicated functions it is often impractical to use the definition to prove limits. Instead, we use limit laws, which can be proved from the definition.</p>
+<h3 id="limit-sum-law">Limit sum law</h3>
+<p>If <span class="math inline">\(\lim_{x \to a} f(x) = L\)</span> and <span class="math inline">\(\lim_{x \to a} g(x) = M\)</span>, then <span class="math inline">\(\lim_{x \to a} (f(x) + g(x)) = L + M\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>If <span class="math inline">\(\lim_{x \to a} (f(x) + g(x)) = L + M\)</span>, then <span class="math inline">\(\forall \epsilon &gt; 0, \exists \delta &gt; 0, 0 &lt; \abs{x - a} &lt; \delta \implies \abs{(f(x) + g(x)) - (L + M)} &lt; \epsilon\)</span>.<br />
+Clearly, <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta \implies \abs{(f(x) + g(x)) - (L + M)} &lt; \epsilon\)</span> is equivalent to <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta \implies \abs{(f(x) - L) + (g(x) - M)} &lt; \epsilon\)</span>.<br />
+By the triangle inequality, <span class="math inline">\(\abs{(f(x) - L) + (g(x) - M)} \le \abs{f(x) - L} + \abs{g(x) - M}\)</span>.<br />
+We want to make each term less than <span class="math inline">\(\frac{\epsilon}{2}\)</span>, so later we can add them together to get <span class="math inline">\(\epsilon\)</span>.<br />
+Since <span class="math inline">\(\epsilon\)</span> is arbitrary, <span class="math inline">\(\forall \epsilon &gt; 0, \exists \delta_1 &gt; 0\)</span>, <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta_1 \implies \abs{f(x) - L} &lt; \frac{\epsilon}{2}\)</span>.<br />
+In the same way, <span class="math inline">\(\forall \epsilon &gt; 0, \exists \delta_2 &gt; 0\)</span>, <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta_2 \implies \abs{g(x) - M} &lt; \frac{\epsilon}{2}\)</span>.<br />
+Choose <span class="math inline">\(\delta\)</span> as the smaller of <span class="math inline">\(\delta_1\)</span> and <span class="math inline">\(\delta_2\)</span>.<br />
+Assume <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta\)</span>.<br />
+So <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta_1\)</span>, <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta_2\)</span>.<br />
+Clearly, <span class="math inline">\(\abs{f(x) - L} + \abs{g(x) - M} &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2}\)</span>.<br />
+So <span class="math inline">\(\abs{(f(x) + g(x)) - (L + M)} &lt; \epsilon\)</span>.<br />
+Therefore, by the definition of the limit, <span class="math inline">\(\lim_{x \to a} (f(x) + g(x)) = L + M\)</span>.</p>
+</blockquote>
+<h3 id="limit-difference-law">Limit difference law</h3>
+<p>If <span class="math inline">\(\lim_{x \to a} f(x) = L\)</span> and <span class="math inline">\(\lim_{x \to a} g(x) = M\)</span>, then <span class="math inline">\(\lim_{x \to a} (f(x) - g(x)) = L - M\)</span>.</p>
+<h3 id="limit-constant-multiple-law">Limit constant multiple law</h3>
+<p>If <span class="math inline">\(\lim_{x \to a} f(x) = L\)</span>, then <span class="math inline">\(\lim_{x \to a} (c \cdot f(x)) = cL\)</span>.</p>
+<h3 id="limit-product-law">Limit product law</h3>
+<p>If <span class="math inline">\(\lim_{x \to a} f(x) = L\)</span> and <span class="math inline">\(\lim_{x \to a} g(x) = M\)</span>, then <span class="math inline">\(\lim_{x \to a} (f(x) \cdot g(x)) = L \cdot M\)</span>.</p>
+<h3 id="limit-quotient-law">Limit quotient law</h3>
+<p>If <span class="math inline">\(\lim_{x \to a} f(x) = L\)</span> and <span class="math inline">\(\lim_{x \to a} g(x) = M\)</span>, then <span class="math inline">\(\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{L}{M}\)</span>.</p>
+<h3 id="limit-power-law">Limit power law</h3>
+<p>If <span class="math inline">\(\lim_{x \to a} f(x) = L\)</span>, then <span class="math inline">\(\lim_{x \to a} f(x)^n = L^n\)</span>.</p>
+<h3 id="limit-constant-law">Limit constant law</h3>
+<p>If <span class="math inline">\(c\)</span> is a constant, <span class="math inline">\(\lim_{x \to a} c = c\)</span>.</p>
+<h3 id="limit-identity-law">Limit identity law</h3>
+<p><span class="math inline">\(\lim_{x \to a} x = x\)</span>.</p>
+<p>Evaluate <span class="math inline">\(\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} &amp;= \lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} \frac{\sqrt{x + 2} + 3}{\sqrt{x + 2} + 3} \\
+&amp;= \lim_{x \to 7} \frac{x - 7}{(x - 7)(\sqrt{x + 2} + 3)} \\
+&amp;= \lim_{x \to 7} \frac{1}{\sqrt{x + 2} + 3} \\
+&amp;= \frac{1}{6} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h2 id="squeeze-theorem">Squeeze Theorem</h2>
+<p>If <span class="math inline">\(f(x) \le g(x) \le h(x)\)</span> for all <span class="math inline">\(x\)</span> in an interval containing <span class="math inline">\(a\)</span> (except possibly at <span class="math inline">\(a\)</span>), and <span class="math inline">\(\lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L\)</span>, then <span class="math inline">\(\lim_{x \to a} g(x) = L\)</span>.</p>
+<p>;wip: prove it with a technique similar to the sum law (answer is also in textbook)</p>
+<p>This also works for one-sided limits. It is usually used on bounded functions like sine or cosine.</p>
+<p>Consider <span class="math inline">\(\lim_{x \to 0} x \sin\left(\frac{1}{x}\right)\)</span>. <span class="math inline">\(\lim_{x \to 0} \sin\left(\frac{1}{x}\right)\)</span> does not exist, but we know that <span class="math inline">\(\sin\left(\frac{1}{x}\right)\)</span> is bounded: <span class="math inline">\(-1 \le \sin\left(\frac{1}{x}\right) \le 1\)</span>.</p>
+<p>So <span class="math inline">\(-x \le x \sin\left(\frac{1}{x}\right) \le x\)</span>. Since <span class="math inline">\(\lim_{x \to 0} (-x)\)</span> and <span class="math inline">\(\lim_{x \to 0} x = 0\)</span>, then by the squeeze theorem, <span class="math inline">\(\lim_{x \to 0} x \sin\left(\frac{1}{x}\right) = 0\)</span>.</p>
+<h2 id="one-sided-limits">One sided limits</h2>
+<p>Find <span class="math inline">\(\lim_{x \to 0} \frac{\abs{x}}{x}\)</span>:</p>
+<blockquote>
+<p>Clearly, this is equivalent to <span class="math inline">\(\begin{cases} \frac{x}{x} &amp;\text{if } x \ge 0 \\ \frac{-x}{x} &amp;\text{if } x &lt; 0 \\ \end{cases}\)</span>.<br />
+Clearly, this is equivalent to <span class="math inline">\(\begin{cases} 1 &amp;\text{if } x &gt; 0 \\ -1 &amp;\text{if } x &lt; 0 \\ \end{cases}\)</span>. Since the left side limit does not equal the right side limit, the limit does not exist.</p>
+</blockquote>
+<p>Approaching from either side gives different results. This leads to the idea of a one sided limit.</p>
+<p><span class="math inline">\(\lim_{x \to a^-} f(x)\)</span> is the left side limit - approaching <span class="math inline">\(a\)</span> from below/left.</p>
+<p><span class="math inline">\(\lim_{x \to a^+} f(x)\)</span> is the right side limit - approaching <span class="math inline">\(a\)</span> from above/right.</p>
+<p><span class="math display">\[\lim_{x \to a} f(x) = L \iff \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L\]</span></p>
+<p>The limit exists if and only if the limits on either side exist.</p>
+<h1 id="section-10">2/10/13</h1>
+<h2 id="vertical-asymptotes">Vertical Asymptotes</h2>
+<p>At vertical asymptotes, the limit approaches positive or negative infinity.</p>
+<p>Consider <span class="math inline">\(f(x) = \frac{1}{x^2}\)</span> near <span class="math inline">\(x = 0\)</span>. As <span class="math inline">\(x \to 0\)</span>, <span class="math inline">\(f(x)\)</span> grows without bound.</p>
+<p>We say that <span class="math inline">\(f(x) \to \infty\)</span> as <span class="math inline">\(x \to a\)</span>, or <span class="math inline">\(\lim_{x \to a} f(x) = \infty\)</span>, if for every <span class="math inline">\(M &gt; 0\)</span> there exists <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(f(x) &gt; M\)</span> whenever <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta\)</span>.</p>
+<p>In other words, the value of <span class="math inline">\(f(x)\)</span> can become arbitrarily large for some value of <span class="math inline">\(x\)</span> close enough to <span class="math inline">\(a\)</span>.</p>
+<p>Likewise, with a downwards asymptote like <span class="math inline">\(f(x) = -\frac{1}{x^2}\)</span> near <span class="math inline">\(x = 0\)</span>, the same behavior applies, except <span class="math inline">\(f(x) \to -\infty\)</span> as <span class="math inline">\(x \to a\)</span>, or <span class="math inline">\(\lim_{x \to a} f(x) = -\infty\)</span>.</p>
+<p>Given <span class="math inline">\(f(x) = e^{\frac{1}{x^2}}\)</span>, determine how close must <span class="math inline">\(x\)</span> be to 0 so that <span class="math inline">\(f(x) &gt; 10^6\)</span>:</p>
+<blockquote>
+<p>In other words, find <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(f(x) &gt; 10^6\)</span> when <span class="math inline">\(0 &lt; \abs{x} &lt; \delta\)</span>.<br />
+Clearly, <span class="math inline">\(f(x) = 10^6\)</span> is equivalent to <span class="math inline">\(\frac{1}{x^2} = 6 \ln(10)\)</span>, and <span class="math inline">\(\frac{1}{x^2} = 6 \ln(10)\)</span>. So <span class="math inline">\(x^2 = \frac{1}{6 \ln 10}\)</span>.<br />
+So <span class="math inline">\(\abs{x} &lt; \frac{1}{\sqrt{6 \ln 10}}\)</span>.</p>
+</blockquote>
+<p>In rational functions, vertical asymptotes usually occur when the denominator becomes 0.</p>
+<p>Find the left and right hand limits of <span class="math inline">\(f(x) = \frac{x^2 + 1}{3x - 2x^2}\)</span> at each asymptote:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(f(x) = \frac{x^2 + 1}{x(-2x + 3)}\)</span>. So the asymptotes are at <span class="math inline">\(x = 0\)</span> and <span class="math inline">\(x = \frac{3}{2}\)</span>.<br />
+As <span class="math inline">\(x \to 0^-\)</span>, <span class="math inline">\(x^2 + 1 &gt; 0\)</span>, <span class="math inline">\(x &lt; 0\)</span>, and <span class="math inline">\(-2x + 3 &gt; 0\)</span>. So <span class="math inline">\(f(x) \to -\infty\)</span> for <span class="math inline">\(x = 0^-\)</span>.<br />
+As <span class="math inline">\(x \to 0^+\)</span>, <span class="math inline">\(x^2 + 1 &gt; 0\)</span>, <span class="math inline">\(x &gt; 0\)</span>, and <span class="math inline">\(-2x + 3 &gt; 0\)</span>. So <span class="math inline">\(f(x) \to \infty\)</span> for <span class="math inline">\(x = 0^+\)</span>.<br />
+As <span class="math inline">\(x \to {\frac 3 2}^-\)</span>, <span class="math inline">\(x^2 + 1 &gt; 0\)</span>, <span class="math inline">\(x &gt; 0\)</span>, and <span class="math inline">\(-2x + 3 &gt; 0\)</span>. So <span class="math inline">\(f(x) \to \infty\)</span> for <span class="math inline">\(x = {\frac 3 2}^-\)</span>.<br />
+As <span class="math inline">\(x \to {\frac 3 2}^+\)</span>, <span class="math inline">\(x^2 + 1 &gt; 0\)</span>, <span class="math inline">\(x &gt; 0\)</span>, and <span class="math inline">\(-2x + 3 &lt; 0\)</span>. So <span class="math inline">\(f(x) \to -\infty\)</span> for <span class="math inline">\(x = {\frac 3 2}^+\)</span>.</p>
+</blockquote>
+<h2 id="continuity">Continuity</h2>
+<p>We say <span class="math inline">\(f(x)\)</span> is continuous at <span class="math inline">\(a\)</span> if <span class="math inline">\(\lim_{x \to a} f(x) = f(a)\)</span>.</p>
+<p>If this is true for all <span class="math inline">\(a \in I\)</span>, with <span class="math inline">\(I\)</span> being an interval, we say <span class="math inline">\(f(x)\)</span> is continuous on <span class="math inline">\(I\)</span>.</p>
+<p>This implies the following conditions must be met:</p>
+<ul>
+<li><span class="math inline">\(f(a)\)</span> must be defined - <span class="math inline">\(a\)</span> must be in the domain of <span class="math inline">\(f(x)\)</span>.</li>
+<li>The left and right limits are equal.</li>
+<li><span class="math inline">\(f(a)\)</span> is equal to the limit at that location</li>
+</ul>
+<p>The most common discontinuities are:</p>
+<ul>
+<li>Infinite discontinuity - vertical asymptote: <span class="math inline">\(\frac{1}{x}\)</span>.</li>
+<li>Removable discontinuity (hole) - where the limit exists but the function is not defined.</li>
+<li>Jump discontinuity - where the limit doesn't exist because the left and right limits are different.</li>
+<li>Wild oscillations discontinuity - where the function oscillates too much to have a limit: <span class="math inline">\(f(x) = \sin \frac{1}{x}\)</span></li>
+</ul>
+<p>For removable discontinuities, we can remove the discontinuity by writing a related function filling in the undefined point:</p>
+<p><span class="math display">\[
+f(x) = x \sin \frac{1}{x} \\
+\text{becomes } f(x) = \begin{cases}
+x \sin \frac{1}{x} &amp;\text{if } x \ne 0 \\
+0 &amp;\text{if } x = 0 \\
+\end{cases}
+\]</span></p>
+<p>If <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span> are continuous at <span class="math inline">\(a\)</span>, then <span class="math inline">\(f(x) \pm g(x)\)</span>, <span class="math inline">\(f(x) g(x)\)</span>, and <span class="math inline">\(\frac{f(x)}{g(x)}, g(x) \ne 0\)</span> are also continuous at <span class="math inline">\(a\)</span>.</p>
+<p>Determine where <span class="math inline">\(f(x) = \frac{\ln(x - 1) + \sqrt{16 - x^2}}{x^3 - 8}\)</span> is continuous:</p>
+<blockquote>
+<p><span class="math inline">\(\ln(x - 1)\)</span> is continuous for all <span class="math inline">\(x \in (1, \infty)\)</span>.<br />
+<span class="math inline">\(\sqrt{16 - x^2}\)</span> is continuous for all <span class="math inline">\(x \in (-4, 4)\)</span>.<br />
+The denominator must not be 0, so <span class="math inline">\(x^3 - 8 \ne 0\)</span>, or <span class="math inline">\(x \in (-\infty, 2) \cup (2, \infty)\)</span>.<br />
+The function is continuous over <span class="math inline">\(x \in (1, \infty) \cap (-4, 4) \cap ((-\infty, 2) \cup (2, \infty))\)</span>, or <span class="math inline">\(x \in (1, 2) \cup (2, 4)\)</span>.</p>
+</blockquote>
+<h3 id="continuity-theorem">Continuity theorem</h3>
+<p>If <span class="math inline">\(f(x)\)</span> is continuous at <span class="math inline">\(x = b\)</span>, and <span class="math inline">\(\lim_{x \to a} g(x) = b\)</span>, then <span class="math inline">\(\lim_{x \to a} f(g(x)) = f(b)\)</span>.</p>
+<p>In other words, the limit can be moved within compositions.</p>
+<p>Evaluate <span class="math inline">\(\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2})\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2}) &amp;= \arcsin(\lim_{x \to 0.5} \sqrt{1 - x^2}) \\
+&amp;= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
+&amp;= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
+&amp;= \arcsin(\frac{\sqrt{3}}{2}) \\
+&amp;= \frac{\pi}{3} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="intermediate-value-theorem-ivt">Intermediate value theorem (IVT)</h3>
+<p>Suppose <span class="math inline">\(f(x)\)</span> is continuous over <span class="math inline">\([a, b]\)</span> and <span class="math inline">\(f(a) &lt; n &lt; f(b)\)</span>. Then there exists a number <span class="math inline">\(c \in (a, b)\)</span> such that <span class="math inline">\(f(c) = n\)</span>.</p>
+<p>In other words, for a function continuous on an interval, any value of the function in a range has a corresponding value of <span class="math inline">\(x\)</span>.</p>
+<p>This is used most often to find the roots of complicated equations - when <span class="math inline">\(n = 0\)</span>.</p>
+<p>This is an <strong>existance theorem</strong> - it tells us that a certain number with a certain property exists, but not its value.</p>
+<p>Prove that <span class="math inline">\(\ln x = 3 - 2x\)</span> has at least one real root.</p>
+<blockquote>
+<p>Construct <span class="math inline">\(f(x) = \ln x - (3 - 2x)\)</span>.<br />
+We want to prove there exists <span class="math inline">\(x\)</span> such that <span class="math inline">\(f(x) = 0\)</span>.<br />
+Clearly, this is continuous over <span class="math inline">\(x &gt; 0\)</span>.<br />
+Construct <span class="math inline">\(a = 1\)</span>, <span class="math inline">\(b = 2\)</span> (we could find these values using a graph).<br />
+Clearly, <span class="math inline">\(f(x)\)</span> is continuous over the interval.<br />
+Clearly, <span class="math inline">\(f(1) = -1\)</span> and <span class="math inline">\(f(2) = \ln 2 - 1\)</span>.<br />
+Clearly, <span class="math inline">\(f(1) &lt; 0\)</span> and <span class="math inline">\(f(2) &gt; 0\)</span>.<br />
+So by the IVT, there must exist <span class="math inline">\(c \in [a, b]\)</span> such that <span class="math inline">\(f(c) = 0\)</span>.<br />
+So there must be a real root (though it turns out this is transcendental, and cannot be solved analytically).</p>
+</blockquote>
+<h3 id="bisection-method">Bisection method</h3>
+<p>We can use the bisection to get a better approximation. Currently, we know the root is in <span class="math inline">\([1, 2]\)</span>.</p>
+<p>We can divide <span class="math inline">\([a, b]\)</span> into two equally sized intervals. Using IVT, we can determine that the root must be in one of the two intervals.</p>
+<p>So we have made the possible interval smaller, and therefore gotten a better estimate.</p>
+<p>This process can be repeated as many times as needed to get as good an estimate as needed.</p>
+<h2 id="limits-at-infinity">Limits at Infinity</h2>
+<p><span class="math inline">\(\lim_{x \to \infty} f(x) = L\)</span> means <span class="math inline">\(\forall \epsilon &gt; 0, \exists n &gt; 0, x &gt; n \implies \abs{f(x) - L} &lt; \epsilon\)</span>.</p>
+<p>So once <span class="math inline">\(x\)</span> exceeds some value <span class="math inline">\(n\)</span>, <span class="math inline">\(f(x)\)</span> must stay within <span class="math inline">\(\epsilon\)</span> of <span class="math inline">\(n\)</span>. Here, <span class="math inline">\(n\)</span> has a role similar to <span class="math inline">\(\delta\)</span>.</p>
+<p><span class="math inline">\(\lim_{x \to -\infty} f(x) = L\)</span> means <span class="math inline">\(\forall \epsilon &gt; 0, \exists n &lt; 0, x &lt; n \implies \abs{f(x) - L} &lt; \epsilon\)</span>.</p>
+<p>Limit laws also apply as <span class="math inline">\(x \to \pm \infty\)</span>, including the squeeze theorem.</p>
+<p>Prove <span class="math inline">\(\lim_{x \to \infty} \frac{1}{x^k} = 0, k &gt; 0\)</span>:</p>
+<blockquote>
+<p>Let <span class="math inline">\(\epsilon\)</span> be an arbitrary positive real number.<br />
+Construct <span class="math inline">\(n = \frac{1}{\sqrt[k]{\epsilon}}\)</span>.<br />
+Assume <span class="math inline">\(x &gt; n\)</span>. So <span class="math inline">\(x &gt; \frac{1}{\sqrt[k]{\epsilon}}\)</span>.<br />
+So <span class="math inline">\(\frac{1}{x} &lt; \sqrt[k]{\epsilon}\)</span> and <span class="math inline">\(\frac{1}{x^k} - 0 &lt; \epsilon\)</span>.<br />
+Therefore, <span class="math inline">\(\lim_{x \to \infty} \frac{1}{x^k} = 0, k &gt; 0\)</span>.</p>
+</blockquote>
+<p>Infinite limit theorem: for <span class="math inline">\(r \in \mb{Q}, r &gt; 0\)</span>, when <span class="math inline">\(x^r\)</span> is defined, <span class="math inline">\(\lim_{x \to \infty} \frac{1}{x^r} = 0\)</span>. In other words, when <span class="math inline">\(r\)</span> is rational and defined, <span class="math inline">\(\lim_{x \to \infty} \frac{1}{x^r} = 0\)</span>.</p>
+<p>Evaluate <span class="math inline">\(\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x}\)</span>:</p>
+<p><span class="math display">\[
+\begin{align}
+\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x} &amp;= \lim_{x \to \infty} \frac{\frac{x^2 + 2}{x^2}}{\frac{3x^2 - 4x}{x^2}} \\
+&amp;= \lim_{x \to \infty} \frac{\frac{x^2}{x^2} + \frac{2}{x^2}}{\frac{3x^2}{x^2} - \frac{4x}{x^2}} \\
+&amp;= \lim_{x \to \infty} \frac{1 + \frac{2}{x^2}}{3 - \frac{4}{x}} \\
+&amp;= \frac{1 + 0}{3 - 0} \\
+&amp;= \frac{1}{3} \\
+\end{align}
+\]</span></p>
+<p>Evaluate <span class="math inline">\(\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x)\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) &amp;= \lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) \frac{\sqrt{9x^2 + x} + 3x}{\sqrt{9x^2 + x} + 3x} \\
+&amp;= \lim_{x \to \infty} \frac{9x^2 + x - 9x^2}{\sqrt{9x^2 + x} + 3x} \\
+&amp;= \lim_{x \to \infty} \frac{1}{\frac{\sqrt{9x^2 + x}}{x} + 3} \\
+&amp;= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{9x^2 + x}{x^2}} + 3} \\
+&amp;= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{x^2(9 + \frac{1}{x})}{x^2}} + 3} \\
+&amp;= \lim_{x \to \infty} \frac{1}{\sqrt{9} + 3} \\
+&amp;= \frac{1}{6} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\text{Note that } \forall x &gt; 2, x^2 &gt; 2x \\
+\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}} = \frac{-2}{-\infty - \sqrt{\infty - \infty}} = \frac{-2}{-\infty} = 0 \\
+\]</span></p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\lim_{x \to \infty} e^{-x} \sin x\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+-1 &amp;\le \sin x \le 1 \\
+e^{-x} &amp;= \frac{1}{e^x} \\
+\lim_{x \to \infty}  e^{-x} &amp;= 0 \\
+\text{By the squeeze theorem: } \lim_{x \to \infty}  e^{-x} \cdot -1 &amp;\le \lim_{x \to \infty}  e^{-x} \sin x \le \lim_{x \to \infty}  e^{-x} \cdot 1 \\
+0 &amp;\le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
+\lim_{x \to \infty}  e^{-x} \sin x &amp;= 0 \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h1 id="section-11">7/10/13</h1>
+<p>General technique for <span class="math inline">\(\epsilon\)</span>-<span class="math inline">\(\delta\)</span> proofs:</p>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(\epsilon\)</span> be an arbitrary positive real number.</li>
+<li>Construct a particular <span class="math inline">\(\delta\)</span> as some function of <span class="math inline">\(\epsilon\)</span>.</li>
+<li>Show that <span class="math inline">\(\delta &gt; 0\)</span>, so it's still in the domain.</li>
+<li>Assume <span class="math inline">\(0 &lt; \abs{x - a} &lt; \delta\)</span>.</li>
+<li>Prove <span class="math inline">\(\abs{f(x) - L} &lt; \epsilon\)</span>.</li>
+<li>By the definition of the limit, <span class="math inline">\(\lim_{x \to a} f(x) = L\)</span>.</li>
+</ol>
+<p>A <strong>horizontal asymptote</strong> exists at <span class="math inline">\(y = L\)</span> if and only if <span class="math inline">\(\lim_{x \to \infty} f(x) = L\)</span> or <span class="math inline">\(\lim_{x \to -\infty} f(x) = L\)</span>.</p>
+<p>Consider <span class="math inline">\(f(x) = e^{\frac{1}{x}}\)</span>. As <span class="math inline">\(x \to 0-\)</span>, <span class="math inline">\(f(x) \to 0\)</span>. But as <span class="math inline">\(x \to 0^+\)</span>, <span class="math inline">\(f(x) \to \infty\)</span>. This is a one-sided asymptote - a vertical asymptote from the right.</p>
+<p>Evaluate <span class="math inline">\(\lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}} &amp;= \lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}} \cdot \frac{1 + \sqrt{x}}{1 + \sqrt{x}} \\
+&amp;= \lim_{x \to 1} \frac{(\sqrt{x} - x^2)(1 + \sqrt{x})}{1 - x} \\
+&amp;= \lim_{x \to 1} \frac{\sqrt{x} - x^2 + x - x^{2.5}}{1 - x} \\
+&amp;= \lim_{x \to 1} \frac{x(1 - x) + \sqrt{x}(1 - x^2)}{1 - x} \\
+&amp;= \lim_{x \to 1} \frac{(1 - x)(x + \sqrt{x}(1 + x))}{1 - x} \\
+&amp;= \lim_{x \to 1} (x + \sqrt{x}(1 + x)) \\
+&amp;= 1 + \sqrt{1}(1 + 1)) = 3 \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h2 id="derivatives">Derivatives</h2>
+<p>The derivative of a function <span class="math inline">\(f(x)\)</span> at the point <span class="math inline">\(a\)</span>, denoted <span class="math inline">\(f(a)\)</span>:</p>
+<p><span class="math display">\[f&#39;(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}\]</span></p>
+<p>This can also be written as follows:</p>
+<p><span class="math display">\[f&#39;(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}\]</span></p>
+<p>The first form is better for determining differentiability at a point, while the second is better for finding the derivative.</p>
+<p>If the limit exists at <span class="math inline">\(a\)</span>, the function is <strong>differentiable</strong> at <span class="math inline">\(a\)</span>.</p>
+<p>Two interpretations:</p>
+<ul>
+<li><span class="math inline">\(f&#39;(x)\)</span> is the slope of a tangent of <span class="math inline">\(f(x)\)</span> drawn at <span class="math inline">\(x\)</span>.</li>
+<li><span class="math inline">\(f&#39;(x)\)</span> is the instantaneous rate of change of <span class="math inline">\(f(x)\)</span>.</li>
+</ul>
+<p>The following are equivalent notations: <span class="math inline">\(f&#39;(x), y&#39;, \frac{\dee y}{\dee x}, \frac{\dee f}{\dee x}, \frac{\dee}{\dee x} f(x)\)</span>.</p>
+<p>Determine whether <span class="math inline">\(f(x) = \begin{cases} x \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+f&#39;(0) &amp;= \lim_{x \to 0} \frac{x \sin \frac{1}{x} - 0}{x - 0} \\
+&amp;= \lim_{x \to 0} \sin \frac{1}{x} \\
+&amp;\text{The limit does not exist}
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Determine whether <span class="math inline">\(f(x) = \begin{cases} x^2 \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+f&#39;(0) &amp;= \lim_{x \to 0} \frac{x^2 \sin \frac{1}{x} - 0}{x - 0} \\
+&amp;= \lim_{x \to 0} x \sin \frac{1}{x} \\
+&amp;= 0 \text{(squeeze theorem)}
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="power-law">Power law</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} x^n = nx^{n - 1}\)</span>.</p>
+<p>Proof for positive integer <span class="math inline">\(n\)</span>:</p>
+<blockquote>
+<p>Consider <span class="math inline">\(\frac{\dee}{\dee x} x^n\)</span>.<br />
+Let <span class="math inline">\(n\)</span> be a positive integer.<br />
+By definition, <span class="math inline">\(\frac{\dee}{\dee x} x^n = \lim_{h \to 0} \frac{(x + h)^n - x^n}{h}\)</span>.<br />
+Using the binomial theorem: <span class="math inline">\((x + h)^n - x^n = (x^n + nx^{n - 1}h + \frac{n(n - 1)}{2} x^{n - 2} h^2 + \ldots + nxh^{n - 1} + h^n) - x^n\)</span>.<br />
+Divide all terms by <span class="math inline">\(h\)</span>: <span class="math inline">\(\frac{(x + h)^n - x^n}{h} = nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}\)</span>.<br />
+Clearly, <span class="math inline">\(\lim_{h \to 0} (nx^{n - 1} + \frac{n(n - 1)}{2} x^{n - 2} h + \ldots + nxh^{n - 2} + h^{n - 1}) = nx^{x - 1}\)</span>.<br />
+So <span class="math inline">\(\frac{\dee}{\dee x} x^n = nx^{n - 1}\)</span>.</p>
+</blockquote>
+<p>Proof for all real <span class="math inline">\(n\)</span> (requires implicit differentiation, described later):</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(x^n = e^{\ln x^n} = e^{n \ln x}\)</span>.<br />
+So <span class="math inline">\(\frac{\dee}{\dee x} x^n = \frac{\dee}{\dee x} e^{n \ln x} = e^{n \ln x} \cdot \frac{\dee}{\dee x} (n \ln x)\)</span>.<br />
+So <span class="math inline">\(\frac{\dee}{\dee x} x^n = e^{n \ln x} \cdot n \cdot \frac{1}{x} = n\frac{x^n}{x} = nx^{n - 1}\)</span>.</p>
+</blockquote>
+<h1 id="section-12">9/10/13</h1>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} \sqrt{x} &amp;= \lim_{h \to 0} \frac{\sqrt{x + h} - \sqrt{x}}{h} \\
+&amp;= \lim_{h \to 0} \frac{\sqrt{x + h} - \sqrt{x}}{h} \frac{\sqrt{x + h} + \sqrt{x}}{\sqrt{x + h} + \sqrt{x}} \\
+&amp;= \lim_{h \to 0} \frac{x + h - x}{h(\sqrt{x + h} + \sqrt{x})} \\
+&amp;= \lim_{h \to 0} \frac{1}{\sqrt{x + h} + \sqrt{x}} \\
+&amp;= \frac{1}{2 \sqrt{x}} \\
+\end{align}
+\]</span></p>
+<h3 id="differentiability-implies-continuity">Differentiability implies continuity</h3>
+<p>If <span class="math inline">\(f(x)\)</span> is differentiable at <span class="math inline">\(x = a\)</span>, then it is also continuous at that point. Likewise, if a function is not continuous at <span class="math inline">\(x = a\)</span>, then it is also not differentiable - the contrapositive.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math inline">\(f(x)\)</span> is continuous at <span class="math inline">\(x = a\)</span> if and only if <span class="math inline">\(\lim_{x \to a} f(x) = f(a)\)</span>, or <span class="math inline">\(\lim_{x \to a} (f(x) - f(a)) \frac{x - a}{x - a} = 0\)</span>.<br />
+Clearly, this is equivalent to <span class="math inline">\(\lim_{x \to a} \frac{f(x) - f(a)}{x - a} (x - a) = 0\)</span>, or <span class="math inline">\(\lim_{x \to a} \frac{f(x) - f(a)}{x - a} \lim_{x \to a} (x - a) = 0\)</span>.<br />
+Clearly, this is equivalent to <span class="math inline">\(f&#39;(a) \cdot 0 = 0\)</span>.<br />
+Clearly, this is true whenever <span class="math inline">\(f&#39;(a)\)</span> is defined.<br />
+So <span class="math inline">\(f(x)\)</span> is continuous at <span class="math inline">\(x = a\)</span> only if <span class="math inline">\(f&#39;(a)\)</span> is defined - the function is differentiable at <span class="math inline">\(x = a\)</span>.</p>
+</blockquote>
+<p>Some continuous functions are not differentiable.</p>
+<p>Consider <span class="math inline">\(f(x) = \abs{x}\)</span>. Clearly, <span class="math inline">\(f&#39;(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{\abs{x}}{x} = \text{undefined}\)</span>. So the function is not differentiable at <span class="math inline">\(x = 0\)</span> due to a <strong>cusp</strong>. Others include piecewise functions and <span class="math inline">\(x^\frac{2}{3}\)</span>.</p>
+<p>Consider <span class="math inline">\(f(x) = \sqrt[3]{x}\)</span>. Clearly, <span class="math inline">\(f&#39;(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{1}{x^\frac{2}{3}} = \infty\)</span>. So the function is not differentiable at <span class="math inline">\(x = 0\)</span> due to a <strong>vertical tangent</strong>. Others include <span class="math inline">\(\arcsin x\)</span> and <span class="math inline">\(x^\frac{2}{3}\)</span>.</p>
+<h3 id="exponential-functions">Exponential functions</h3>
+<p>Consider <span class="math inline">\(f(x) = a^x\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+f&#39;(x) &amp;= \lim_{h \to 0} \frac{a^{x + h} - a^x}{h} \\
+&amp;= \lim_{h \to 0} \frac{a^x(a^h - 1)}{h} \\
+&amp;= a^x \lim_{h \to 0} \frac{a^h - 1}{h} \\
+\end{align}
+\]</span></p>
+<p>So the derivative of any power function is just a power function multiplied by a <strong>constant of proportionality</strong> <span class="math inline">\(\lim_{h \to 0} \frac{a^h - 1}{h}\)</span>.</p>
+<p>Consider <span class="math inline">\(f&#39;(0) = \lim_{h \to 0} \frac{a^h - 1}{h}\)</span>. Clearly, the constant of propertionality is the slope of the tangent at <span class="math inline">\(x = 0\)</span>.</p>
+<p>We know that the slope of the tangent of <span class="math inline">\(f(x)\)</span> is 1 only when <span class="math inline">\(a = e\)</span>. So we know that <span class="math inline">\(\lim_{h \to 0} \frac{e^h - 1}{h} = 1\)</span>, and so <span class="math inline">\(\frac{\dee}{\dee x} e^x = e^x\)</span>.</p>
+<h2 id="derivative-rules">Derivative Rules</h2>
+<p>If <span class="math inline">\(c\)</span> is a constant, <span class="math inline">\(\frac{\dee}{\dee x} c = 0\)</span>.</p>
+<h3 id="sumdifference-rule">Sum/difference rule</h3>
+<p>If <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span> are differentiable at <span class="math inline">\(x\)</span>, <span class="math inline">\(\frac{\dee}{\dee x} (f(x) \pm g(x))\)</span> is defined at <span class="math inline">\(x\)</span> and <span class="math inline">\(\frac{\dee}{\dee x} (f(x) \pm g(x)) = \frac{\dee}{\dee x} f(x) \pm \frac{\dee}{\dee x} g(x)\)</span>.</p>
+<h3 id="constant-multiple-rule">Constant multiple rule</h3>
+<p>If <span class="math inline">\(c\)</span> is a constant and <span class="math inline">\(f(x)\)</span> is differentiable at <span class="math inline">\(x\)</span>, <span class="math inline">\(\frac{\dee}{\dee x} c f(x)\)</span> is defined at <span class="math inline">\(x\)</span> and <span class="math inline">\(\frac{\dee}{\dee x} c f(x) = c \frac{\dee}{\dee x} f(x)\)</span>.</p>
+<h3 id="product-rule">Product rule</h3>
+<p>If <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span> are differentiable at <span class="math inline">\(x\)</span>, then <span class="math inline">\(\frac{\dee}{\dee x} f(x) g(x)\)</span> is defined at <span class="math inline">\(x\)</span> and <span class="math inline">\(\frac{\dee}{\dee x} f(x) g(x) = f&#39;(x) g(x) + f(x) g&#39;(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} f(x) g(x) &amp;= \lim_{h \to 0} \frac{f(x + h) g(x + h) - f(x) g(x)}{h} \\
+&amp;= \lim_{h \to 0} \frac{f(x + h) g(x + h) - f(x) g(x) + (f(x) g(x + h) - f(x) g(x + h))}{h} \\
+&amp;= \lim_{h \to 0} \left( g(x + h) \frac{f(x + h) - f(x)}{h} + f(x) \frac{g(x + h) - g(x)}{h} \right) \\
+&amp;= \lim_{h \to 0} g(x + h) \frac{f(x + h) - f(x)}{h} + \lim_{h \to 0} f(x) \frac{g(x + h) - g(x)}{h} \\
+&amp;= g(x) f&#39;(x) + f(x) g&#39;(x) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h1 id="section-13">11/10/13</h1>
+<p>Differentiate <span class="math inline">\(x^2 e^x\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\frac{\dee}{\dee x} (x^2 e^x) = e^x \frac{\dee}{\dee x} x^2 + x^2 \frac{\dee}{\dee x} e^x = 2xe^x + x^2 e^x
+\]</span></p>
+</blockquote>
+<h3 id="reciprocal-rule">Reciprocal rule</h3>
+<p>If <span class="math inline">\(g(x)\)</span> is differentiable at <span class="math inline">\(x\)</span>, then <span class="math inline">\(\frac{\dee}{\dee x} \frac{1}{g(x)}\)</span> is defined at <span class="math inline">\(x\)</span> and <span class="math inline">\(\frac{\dee}{\dee x} \frac{1}{g(x)} = -\frac{g&#39;(x)}{g(x)^2}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} \frac{1}{g(x)} &amp;= \lim_{h \to 0} \frac{\frac{1}{g(x + h)} - \frac{1}{g(x)}}{h} \\
+&amp;= \lim_{h \to 0} \frac{g(x) - g(x + h)}{h(g(x + h) g(x))} \\
+&amp;= \lim_{h \to 0} -\frac{g(x + h) - g(x)}{h} \cdot \lim_{h \to 0} \frac{1}{g(x + h) g(x)} \\
+&amp;= -g&#39;(x) \cdot \frac{1}{g(x)^2}
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="quotient-rule">Quotient rule</h3>
+<p>If <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span> are differentiable at <span class="math inline">\(x\)</span> and <span class="math inline">\(g(x) \ne 0\)</span>, then <span class="math inline">\(\frac{\dee}{\dee x} \frac{f(x)}{g(x)}\)</span> is defined at <span class="math inline">\(x\)</span> and <span class="math inline">\(\frac{\dee}{\dee x} \frac{f(x)}{g(x)} = \frac{f&#39;(x) g(x) - f(x) g&#39;(x)}{g(x)^2}\)</span></p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} \frac{f(x)}{g(x)} &amp;= \frac{\dee}{\dee x} (f(x) g(x)^{-1}) \\
+&amp;= f&#39;(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
+&amp;= f&#39;(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
+&amp;= f&#39;(x) g(x)^{-1} + f(x) \frac{-g&#39;(x)}{g(x)^2} \\
+&amp;= \frac{f&#39;(x) g(x) - f(x) g&#39;(x)}{g(x)^2} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>The function <span class="math inline">\(f(x) = \frac{x}{1 + x^2}\)</span> is known as a serpentine curve. Find the equations of the tangents where they have a slope of <span class="math inline">\(\frac{1}{8}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+f&#39;(x) = \frac{1}{8} &amp;= \frac{1 + x^2 - 2x^2}{(1 + x^2)^2} \\
+\frac{1}{8} &amp;= \frac{1 - x^2}{(1 + x^2)^2} \\
+(1 + x^2)^2 &amp;= 8 - 8x^2 \\
+(1 + x^2)^2 - (8 - 8x^2) = x^4 + 10x^2 - 7 &amp;= 0 \\
+x^2 &amp;= \frac{-10 \pm \sqrt{100 + 4 \cdot 1 \cdot 7}}{2} \\
+x &amp;= \pm \sqrt{-5 \pm \sqrt{\frac{128}{4}}} \\
+x &amp;= \pm \sqrt{4 \sqrt{2} - 5} \\
+t_1(-\sqrt{4 \sqrt{2} - 5}) = f(-\sqrt{4 \sqrt{2} - 5}) &amp;= \frac{1}{8} \sqrt{4 \sqrt{2} - 5} + b \\
+t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{\sqrt{4 \sqrt{2} - 5}}{4 \sqrt{2} - 4} &amp;= \frac{1}{8} \sqrt{4 \sqrt{2} - 5} + b \\
+t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sqrt{2} - 1)} - \frac{\sqrt{(\sqrt{2} - 1)(4 \sqrt{2} - 5)}}{8(\sqrt{2} - 1)} &amp;= b \\
+;wip
+\end{align}
+\]</span></p>
+</blockquote>
+<h2 id="higher-order-derivatives">Higher order derivatives</h2>
+<p>The second order derivative of <span class="math inline">\(f(x)\)</span> is <span class="math inline">\(\frac{\dee^2}{\dee x^2} f(x) = \frac{\dee}{\dee x} \left( \frac{\dee}{\dee x} f(x) \right) = f&#39;&#39;(x)\)</span>.</p>
+<p>It can be interpreted as the rate of change of the rate of change.</p>
+<p>In the same way, we can define arbitrarily high orders of derivatives, but this is rarely used.</p>
+<p>Consider <span class="math inline">\(\frac{\dee}{\dee x}\)</span> as an operator.</p>
+<p>Find <span class="math inline">\(\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2} &amp;= \frac{\dee}{\dee x} \frac{\dee}{\dee x} \frac{x}{1 + x^2} \\
+&amp;= \frac{\dee}{\dee x} \frac{1 + x^2 - 2x^2}{(x^2 + 1)^2} \\
+&amp;= \frac{\dee}{\dee x} \frac{1 - x^2}{(x^2 + 1)^2} \\
+&amp;= \frac{-2x(x^2 + 1)^2 - (1 - x^2)(4x^3 + 4x)}{(x^2 + 1)^4} \\
+&amp;= \frac{-2x(x^2 + 1)^2 - (1 - x^2)(4x^3 + 4x)}{(x^2 + 1)^4} \\
+&amp;= \frac{-2x(x^2 + 1)^2 - 4x(1 - x^2)(x^2 + 1)}{(x^2 + 1)^4} \\
+&amp;= \frac{-2x(x^2 + 1) - 4x(1 - x^2)}{(x^2 + 1)^3} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h1 id="section-14">16/10/13</h1>
+<h2 id="derivatives-of-trigonometric-and-hyperbolic-functions">Derivatives of Trigonometric and Hyperbolic Functions</h2>
+<p>Consider <span class="math inline">\(\lim_{x \to 0} \frac{\sin x}{x} = 1\)</span></p>
+<p>;wip: big ugly geometric proof, maybe find something better here: http://www.proofwiki.org/wiki/Limit_of_Sine_of_X_over_X</p>
+<p>Evaluate <span class="math inline">\(\lim_{x \to 0} \frac{\sin(3x)}{x}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\lim_{x \to 0} \frac{\sin(3x)}{x} &amp;= \lim_{x \to 0} \frac{3 \sin(3x)}{3x} \\
+&amp;= 3 \lim_{x \to 0} \frac{\sin(3x)}{3x} \\
+&amp;= 3 \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="sine-rule">Sine rule</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} \sin(x) = \cos(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} \sin(x) &amp;= \lim_{h \to 0} \frac{\sin(x + h) - \sin(x)}{h} \\
+&amp;= \lim_{h \to 0} \frac{\sin(x) \cos(h) + \sin(h) \cos(x) - \sin(x)}{h} \\
+&amp;= \sin(x) \lim_{h \to 0} \frac{\cos(x) - 1}{h} + \cos(x) \lim_{h \to 0} \frac{\sin(h)}{h} \\
+&amp;= \sin(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} + \cos(x) \cdot 1 \\
+\lim_{h \to 0} \frac{\cos(h) - 1}{h} &amp;= \lim_{h \to 0} \frac{\cos(h) - 1}{h} \cdot \frac{\cos(h) + 1}{\cos(h) + 1} \\
+&amp;= \lim_{h \to 0} \frac{\cos^2(h) - 1}{h(\cos(h) + 1)} \\
+&amp;= \lim_{h \to 0} \frac{1}{\cos(h) + 1} \lim_{h \to 0} \frac{(1 - \sin^2(h)) - 1}{h} \\
+&amp;= \frac{1}{2} \lim_{h \to 0} \frac{-\sin^2(h)}{h} \\
+&amp;= \frac{1}{2} \cdot -\lim_{h \to 0} \sin(h) \cdot \lim_{h \to 0} \frac{\sin(h)}{h} \\
+&amp;= \frac{1}{2} \cdot -0 \cdot 1 = 0 \\
+\frac{\dee}{\dee x} \sin(x) &amp;= \sin(x) \cdot 0 + \cos(x) \cdot 1 \\
+&amp;= \cos(x) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="cosine-rule">Cosine rule</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} \cos(x) = -\sin(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} \cos(x) &amp;= \lim_{h \to 0} \frac{\cos(x + h) - \cos(x)}{h} \\
+&amp;= \lim_{h \to 0} \frac{\cos(x) \cos(h) - \sin(h) \sin(x) - \cos(x)}{h} \\
+&amp;= \cos(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} - \sin(x) \lim_{h \to 0} \frac{\sin(h)}{h} \\
+&amp;= \cos(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} - \sin(x) \cdot 1 \\
+\lim_{h \to 0} \frac{\cos(h) - 1}{h} &amp;= 0 \text{, from the proof of the sine rule} \\
+\frac{\dee}{\dee x} \sin(x) &amp;= \cos(x) \cdot 0 - \sin(x) \cdot 1 \\
+&amp;= -\sin(x) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="tangent-rule">Tangent rule</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} \tan(x) = \sec(x)^2\)</span></p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} \tan(x) &amp;= \frac{\dee}{\dee x} \frac{\sin(x)}{\cos(x)} \\
+&amp;= \frac{\cos(x) \frac{\dee}{\dee x} \sin(x) - \sin(x) \frac{\dee}{\dee x} \cos(x)}{\cos(x)^2} \\
+&amp;= \frac{\cos(x)^2 + \sin(x)^2}{\cos(x)^2} \\
+&amp;= \frac{1}{\cos(x)^2} \\
+&amp;= \sec(x)^2 \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="hyperbolic-sine-rule">Hyperbolic sine rule</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} \sinh(x) = \cosh(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} \sinh(x) &amp;= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
+&amp;= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
+&amp;= \frac{1}{2} \left( e^x - \frac{-1}{e^x} \right) \\
+&amp;= \frac{e^x + e^{-x}}{2} = \cosh(x) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="hyperbolic-cosine-rule">Hyperbolic cosine rule</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} \cosh(x) = \sinh(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} \cosh(x) &amp;= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
+&amp;= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
+&amp;= \frac{1}{2} \left( e^x + \frac{-1}{e^x} \right) \\
+&amp;= \frac{e^x - e^{-x}}{2} = \sinh(x) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h3 id="hyperbolic-tangent-rule">Hyperbolic tangent rule</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} \tanh(x) = \frac{1}{\cosh(x)} = \sech(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} \tanh(x) &amp;= \frac{\dee}{\dee x} \frac{\sinh(x)}{\cosh(x)} \\
+&amp;= \frac{\cosh(x) \frac{\dee}{\dee x} \sinh(x) - \sinh(x) \frac{\dee}{\dee x} \cosh(x)}{\cosh(x)^2} \\
+&amp;= \frac{\cosh(x)^2 - \sinh(x)^2}{\cosh(x)^2} \\
+&amp;= \frac{1}{\cosh(x)^2} = \sech(x)^2 \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Alternatively, we can prove it from the definition and derivative rules.</p>
+<h1 id="section-15">18/10/13</h1>
+<p>The <strong>triangle inequality</strong> states that <span class="math inline">\(\abs{x + y} \le \abs{x} + \abs{y}, x \in \mb{R}^n, y \in \mb{R}^n\)</span></p>
+<h2 id="chain-rule">Chain Rule</h2>
+<p><span class="math inline">\(f&#39;(x) = g&#39;(h(x)) h&#39;(x) = \frac{\dee}{\dee x} g \circ h = \frac{\dee g}{\dee h} \frac{\dee h}{\dee x}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>;wip</p>
+</blockquote>
+<p>Simplify <span class="math inline">\(\frac{\dee}{\dee x} \cos(3x)\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\frac{\dee}{\dee x} \cos(3x) = -\sin(3x) \frac{\dee}{\dee x} 3x = -3 \sin(3x)
+\]</span></p>
+</blockquote>
+<p>Let <span class="math inline">\(T(x)\)</span> be the temperature at a height above the surface of the earth. Let <span class="math inline">\(h(t)\)</span> be the height of a skydiver above the earth at time <span class="math inline">\(t\)</span>. What does <span class="math inline">\(\frac{\dee T}{\dee t}\)</span> represent?</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\frac{\dee T}{\dee t} = \frac{\dee T}{\dee h} \frac{\dee h}{\dee t}\)</span>.<br />
+So <span class="math inline">\(\frac{\dee T}{\dee t}\)</span> is the rate of change in temperature with respect to height times rate of change in height with respect to time.<br />
+So it is the rate of change in temperature with respect to height time velocity.<br />
+Note that <span class="math inline">\(\frac{\dee T}{\dee h}\)</span> is independent of the skydiver - it is simply the change in temperature in the atmosphere.<br />
+Likewise, <span class="math inline">\(\frac{\dee h}{\dee t}\)</span> is independent of the atmospheric temperature.<br />
+So <span class="math inline">\(\frac{\dee T}{\dee t}\)</span> represents the rate of change in temperature with respect to time <strong>felt by the skydiver</strong>.</p>
+</blockquote>
+<h2 id="exponential-rule">Exponential Rule</h2>
+<p>We can use the chain rule to find <span class="math inline">\(\frac{\dee}{\dee x} a^x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\frac{\dee}{\dee x} a^x = \frac{\dee}{\dee x} e^{\ln(a^x)} = \frac{\dee}{\dee x} e^{x \ln a}\)</span>.<br />
+By the chain rule, <span class="math inline">\(\frac{\dee}{\dee x} a^x = \frac{\dee}{\dee x \ln a} e^{x \ln a} \cdot \frac{\dee}{\dee x} x \ln a\)</span>.<br />
+Clearly, <span class="math inline">\(\frac{\dee}{\dee x \ln a} e^{x \ln a} \cdot \frac{\dee}{\dee x} x \ln a = (e^{\ln a})^x \cdot \ln a = a^x \cdot \ln a\)</span>, since <span class="math inline">\(\frac{\dee}{\dee x} e^x = e^x\)</span>.</p>
+</blockquote>
+<p>So <span class="math inline">\(\frac{\dee}{\dee x} a^x = a^x \ln x\)</span></p>
+<h2 id="power-rule">Power Rule</h2>
+<p>If <span class="math inline">\(g(x)\)</span> is differentiable at <span class="math inline">\(x\)</span>, then <span class="math inline">\(\frac{\dee}{\dee x} g(x)^n\)</span> is defined at <span class="math inline">\(x\)</span> and <span class="math inline">\(\frac{\dee}{\dee x} g(x)^n = n \cdot g(x)^{n - 1} \cdot g&#39;(x)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math inline">\(u = g(x), y = u^n\)</span>.<br />
+Note that in this case, <span class="math inline">\(u\)</span> is called an <strong>intermediate variable</strong>, since it is dependent on <span class="math inline">\(x\)</span> but treated as an independent variable in <span class="math inline">\(\frac{\dee y}{\dee u}\)</span>.<br />
+Clearly, <span class="math inline">\(\frac{\dee}{\dee x} g(x)^n = \frac{\dee y}{\dee x} = \frac{\dee y}{\dee u} \frac{\dee u}{\dee x} = nu^{n - 1}u&#39; = ng(x)^{n - 1}g&#39;(x)\)</span>.</p>
+</blockquote>
+<h1 id="section-16">21/10/13</h1>
+<h2 id="implicit-differentiation">Implicit Differentiation</h2>
+<p>Useful when we do not have an explicit relation like <span class="math inline">\(y = f(x)\)</span>. For example, <span class="math inline">\(x^2 + y^2 = 1\)</span> or <span class="math inline">\(y^5 + 2x^2y^2 + x^4 = 1\)</span>.</p>
+<p>Useful for finding the derivatives of inverse functions.</p>
+<p>Contrasts with ordinary differentiation. This is differentiating for a general curve.</p>
+<p>Find <span class="math inline">\(\frac{\dee y}{\dee x}\)</span> for <span class="math inline">\(x^2 + y^2 = 1\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} (x^2 + y^2) &amp;= \frac{\dee}{\dee x} 1 \\
+&amp;= \frac{\dee}{\dee x} x^2 + \frac{\dee}{\dee x} y^2 = \frac{\dee}{\dee x} 1 \\
+&amp;= 2x + \frac{\dee}{\dee x} y^2 = 0 \\
+&amp;= 2x + \frac{\dee}{\dee x} y(x)^2 \\
+&amp;= 2x + \frac{\dee}{\dee y} y^2 \cdot \frac{\dee}{\dee x} y \\
+&amp;= 2x + 2y \frac{\dee}{\dee x} y \\
+2x + 2y \frac{\dee}{\dee x} y &amp;= 0 \\
+\frac{\dee}{\dee x} y &amp;= \frac{-2x}{2y} = \frac{-x}{y} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Where does <span class="math inline">\(x^3 + y^3 = 3xy\)</span> have a horizontal tangent?</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\frac{\dee}{\dee x} x^3 + \frac{\dee}{\dee x} y^3 &amp;= \frac{\dee}{\dee x} 3xy \\
+&amp;= 3x^2 + y&#39; 3y^2 = 3y + 3xy&#39; \\
+3x^2 - 3y &amp;= (3x - 3y^2)y&#39; \\
+3x^2 - 3y &amp;= (3x - 3y^2)y&#39; \\
+y&#39; &amp;= \frac{3x^2 - 3y}{3x - 3y^2} = \frac{x^2 - y}{x - y^2} = 0 \\
+x^2 - y = 0 \wedge x - y^2 \ne 0 &amp;\equiv y = x^2 \wedge y \ne \sqrt{x} \equiv y = x^2 \wedge x \ne 0 \wedge y \ne 0 \\
+x^3 + (x^2)^3 = 3xx^2 &amp;\equiv x^3 + x^6 = 3x^3 \equiv x^3(x^3 - 1) = 0 \\
+x &amp;= 0 \text{ (extraneous)}, x = 1 \\
+y = 1^2 = 1 \\
+&amp;\text{There is a horizontal tangent at } (1, 1)
+\end{align}
+\]</span></p>
+</blockquote>
+<p>We can use implicit differentiation to find the derivative of inverse functions.</p>
+<p>Consider <span class="math inline">\(y = \log_a x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(x = a^y\)</span>.<br />
+So <span class="math inline">\(\frac{\dee}{\dee x} x = \frac{\dee}{\dee x} a^y = \frac{\dee}{\dee y} a^y \cdot \frac{\dee y}{\dee x}\)</span>.<br />
+So <span class="math inline">\(1 = a^y \ln a \cdot \frac{\dee y}{\dee x}\)</span>.<br />
+Clearly, <span class="math inline">\(\frac{\dee y}{\dee x} = \frac{1}{a^y \ln a}\)</span>.<br />
+;wip: write this as a rule</p>
+</blockquote>
+<h2 id="derivative-of-inverse-trignonometric-functions">Derivative of Inverse Trignonometric Functions</h2>
+<h3 id="arcsine-rule">Arcsine rule</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} \arcsin x = \frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math inline">\(y = \arcsin x\)</span>. Then <span class="math inline">\(x = \sin y\)</span>.<br />
+Implicitly differentiating, <span class="math inline">\(1 = \cos y \frac{\dee y}{\dee x}\)</span>.<br />
+So <span class="math inline">\(\frac{\dee y}{\dee x} = \frac{1}{\cos y}\)</span>.<br />
+We want to write this in terms of <span class="math inline">\(x\)</span>.<br />
+Clearly, <span class="math inline">\(\cos y = \pm \sqrt{1 - \sin^2 y}\)</span>.<br />
+We pick the positive answer since <span class="math inline">\(\cos y \ge 0\)</span> whenever <span class="math inline">\(-\frac{\pi}{2} \le y \le \frac{\pi}{2}\)</span>, the range of <span class="math inline">\(\arcsin\)</span>.<br />
+So <span class="math inline">\(\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - \sin^2 y}}\)</span>.<br />
+So <span class="math inline">\(\frac{\dee y}{\dee x} = \frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
+</blockquote>
+<h3 id="arccosine-rule">Arccosine rule</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} \arccos x = -\frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math inline">\(y = \arccos x\)</span>. Then <span class="math inline">\(x = \cos y\)</span>.<br />
+Implicitly differentiating, <span class="math inline">\(1 = -\sin y \frac{\dee y}{\dee x}\)</span>.<br />
+So <span class="math inline">\(\frac{\dee y}{\dee x} = -\frac{1}{\sin y}\)</span>.<br />
+We want to write this is terms of <span class="math inline">\(x\)</span>.<br />
+Clearly, <span class="math inline">\(\sin y = \pm \sqrt{1 - \cos^2 y}\)</span>.<br />
+We pick the positive answer since <span class="math inline">\(\sin y \ge 0\)</span> whenever <span class="math inline">\(0 \le y \le \pi\)</span>, the range of <span class="math inline">\(\arccos\)</span>.<br />
+So <span class="math inline">\(\frac{\dee y}{\dee x} = -\frac{1}{\sqrt{1 - \cos^2 y}}\)</span>.<br />
+So <span class="math inline">\(\frac{\dee y}{\dee x} = -\frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
+</blockquote>
+<h3 id="arctangent-rule">Arctangent rule</h3>
+<p><span class="math inline">\(\frac{\dee}{\dee x} \arctan x = \frac{1}{1 + x^2}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math inline">\(y = \arctan x\)</span>. Then <span class="math inline">\(x = \tan y\)</span>.<br />
+Implicitly differentiating, <span class="math inline">\(1 = sec^2 y \frac{\dee y}{\dee x}\)</span>.<br />
+So <span class="math inline">\(\frac{\dee y}{\dee x} = -\frac{1}{\sec^2 y}\)</span>.<br />
+We want to write this in terms of <span class="math inline">\(x\)</span>.<br />
+Clearly, <span class="math inline">\(\frac{\sin^2 x}{\cos^2 x} + \frac{\cos^2 x}{\cos^2 x} = \frac{1}{\cos^2 x}\)</span>.<br />
+Clearly, <span class="math inline">\(\tan^2 x + 1 = \sec^2 x\)</span>.<br />
+So <span class="math inline">\(\frac{\dee y}{\dee x} = -\frac{1}{tan^2 x + 1}\)</span>.<br />
+So <span class="math inline">\(\frac{\dee y}{\dee x} = -\frac{1}{x^2 + 1}\)</span>.</p>
+</blockquote>
+<h1 id="section-17">23/10/13</h1>
+<h2 id="logarithmic-differentiation">Logarithmic Differentiation</h2>
+<p><strong>Logarithmic differentiation</strong> is a technique useful for differentiating complicated products and quotients with powers, or functions of the form <span class="math inline">\(f(x) = g(x)^{h(x)}\)</span>.</p>
+<p>The general process is as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Take the natural logarithm of both sides of the equation. Now we can use logarithm rules to turn products and quotients to sums and differences.</li>
+<li>Differentiate implicitly.</li>
+<li>Solve for <span class="math inline">\(y&#39;\)</span>.</li>
+</ol>
+<p>Find <span class="math inline">\(y&#39;\)</span> if <span class="math inline">\(y = \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+y &amp;= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \\
+\ln y &amp;= \ln \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \\
+\ln y &amp;= \ln (2x - 3)^3 + \ln (7x - 1)^4 - \ln (5x + 1)^5 \\
+\ln y &amp;= 3 \ln (2x - 3) + 4 \ln (7x - 1) - 5 \ln (5x + 1) \\
+\frac{\dee}{\dee x} \ln y &amp;= \frac{\dee}{\dee x} (3 \ln (2x - 3) + 4 \ln (7x - 1) - 5 \ln (5x + 1)) \\
+y&#39; \frac{\dee}{\dee y} \ln y &amp;= 3 \frac{\dee}{\dee x} \ln (2x - 3) + 4 \frac{\dee}{\dee x} \ln (7x - 1) - 5 \frac{\dee}{\dee x} \ln (5x + 1) \\
+\frac{y&#39;}{y} &amp;= 3 \frac{1}{2x - 3} \frac{\dee}{\dee x} (2x - 3) + 4 \frac{1}{7x - 1} \frac{\dee}{\dee x} (7x - 1) - 5 \frac{1}{5x + 1} \frac{\dee}{\dee x} (5x + 1) \\
+\frac{y&#39;}{y} &amp;= 3 \frac{1}{2x - 3} 2 + 4 \frac{1}{7x - 1} 7 - 5 \frac{1}{5x + 1} 5 \\
+y&#39; &amp;= y \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
+y&#39; &amp;= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>We can use this technique to differentiate functions like <span class="math inline">\(f(x) = g(x)^{h(x)}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+f(x) &amp;= g(x)^{h(x)} \\
+\ln f(x) &amp;= \ln g(x)^{h(x)} \\
+\ln f(x) &amp;= h(x) \ln g(x) \\
+\frac{\dee}{\dee x} \ln f(x) &amp;= \frac{\dee}{\dee x} h(x) \ln g(x) \\
+f&#39;(x) \frac{1}{f(x)} &amp;= h&#39;(x) \ln g(x) + h(x) \frac{\dee}{\dee x} \ln g(x) \\
+f&#39;(x) &amp;= f(x) (h&#39;(x) \ln g(x) + \frac{h(x) g&#39;(x)}{g(x)}) \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Find the equations of the tangents of <span class="math inline">\(y = x^{\ln x}\)</span> at <span class="math inline">\((1, 1)\)</span> and <span class="math inline">\((e, e)\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+y &amp;= x^{\ln x} \\
+\ln y &amp;= \ln x \ln x = (\ln x)^2 \\
+\frac{\dee}{\dee x} \ln y &amp;= \frac{\dee}{\dee x} (\ln x)^2 \\
+\frac{y&#39;}{y} &amp;= 2 \ln x \frac{1}{x} \\
+y&#39; &amp;= \frac{2 x^{\ln x} \ln x}{x} \\
+t_1(1) = 1 &amp;= \frac{2 1^{\ln 1} \ln 1}{1} 1 + b = 0 \cdot 1 + b = b \\
+t_1(a) &amp;= 1 \\
+t_e(a) = e &amp;= \frac{2 e^{\ln e} \ln e}{e} a + b = 2a + b \\
+t_e(e) = e &amp;= 2e + b \\
+t_e(a) = 2a - e \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Find <span class="math inline">\(\lim_{x \to 0^+} x^{\ln x}\)</span>:</p>
+<blockquote>
+<p><span class="math inline">\(\lim_{x \to 0^+} x^{\ln x}\)</span> is an <strong>indeterminate form</strong> - <span class="math inline">\(0^{-\infty}\)</span>. This simply means that we can't determine its value as it is.<br />
+Clearly, <span class="math inline">\(\lim_{x \to 0^+} x^{\ln x} = e^{\ln \lim_{x \to 0^+} x^{\ln x}}\)</span>.<br />
+Since <span class="math inline">\(\ln\)</span> is continuous, <span class="math inline">\(e^{\ln \lim_{x \to 0^+} x^{\ln x}} = e^{\lim_{x \to 0^+} \ln x^{\ln x}} = e^{\lim_{x \to 0^+} (\ln x)^2}\)</span>.<br />
+Clearly, <span class="math inline">\(\lim_{x \to 0^+} (\ln x)^2 = \infty\)</span>.<br />
+So <span class="math inline">\(\lim_{x \to 0^+} x^{\ln x} = e^\infty = \infty\)</span>.</p>
+</blockquote>
+<p>Suppose <span class="math inline">\(f(x)\)</span> has a domain and range <span class="math inline">\([a, b]\)</span> and is continuous. Show that the graph of <span class="math inline">\(f(x)\)</span> intersects <span class="math inline">\(y = x\)</span> - show that <span class="math inline">\(\exists c \in [a, b], f(c) = c\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(f(a) \ge a\)</span> and <span class="math inline">\(f(b) \le b\)</span>.<br />
+If <span class="math inline">\(f(a) = a\)</span> or <span class="math inline">\(f(b) = b\)</span>, then <span class="math inline">\(c\)</span> exists.<br />
+Otherwise, we can use the IVT to prove <span class="math inline">\(c\)</span> exists.<br />
+Let <span class="math inline">\(g(x) = f(x) - x\)</span>.<br />
+So <span class="math inline">\(g(a) = f(a) - a\)</span> and <span class="math inline">\(g(b) = f(b) - b\)</span>.<br />
+Clearly, <span class="math inline">\(g(a) &gt; 0\)</span> and <span class="math inline">\(g(b) &lt; 0\)</span>, and so <span class="math inline">\(g(x)\)</span> is continuous.</p>
+</blockquote>
+<h3 id="the-constant-e-as-a-limit">The constant e as a limit</h3>
+<p>We can also write <span class="math inline">\(e\)</span> as a limit:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+f(x) &amp;= \ln x \\
+f&#39;(x) &amp;= \frac{1}{x} \\
+f&#39;(1) &amp;= 1 \\
+f&#39;(x) &amp;= \lim_{h \to 0} \frac{\ln(1 + h) - \ln(1)}{h}\\
+&amp;= \lim_{h \to 0} \frac{\ln(1 + h)}{h} \\
+&amp;= \lim_{h \to 0} \frac{1}{h} \ln(1 + h) \\
+&amp;= \lim_{h \to 0} \ln(1 + h)^\frac{1}{h} = 1 \\
+e^{\lim_{h \to 0} \ln(1 + h)^\frac{1}{h}} &amp;= e^1 = e^{\ln \lim_{h \to 0} (1 + h)^\frac{1}{h}} \\
+e &amp;= \lim_{h \to 0} (1 + h)^\frac{1}{h} \\
+\end{align}
+\]</span> Consider <span class="math inline">\(f(x) = \ln x\)</span>.</p>
+</blockquote>
+<p>Alternatively, if <span class="math inline">\(n = \frac{1}{x}\)</span>, we can write the limit as <span class="math inline">\(e = \lim_{n \to \infty} (1 + \frac{1}{n})^n\)</span>.</p>
+<h1 id="section-18">25/10/13</h1>
+<h2 id="related-rates">Related Rates</h2>
+<p>Related rates have multiple variables that are related in some way, and involve the derivatives of these variables.</p>
+<p>A train departs moving Eastward traveling at 45 km/h while another departs 1 hour later moving South at 60 km/h. How fast is the distance between the trains changing 4 hours after the first train departs?</p>
+<blockquote>
+<p>Let <span class="math inline">\(P\)</span> be the point of departure of the two trains.<br />
+Let <span class="math inline">\(t\)</span> represent the time in hours.<br />
+Let <span class="math inline">\(x(t)\)</span> represent the distance train 1 travels East in km.<br />
+Let <span class="math inline">\(y(t)\)</span> represent the distance train 2 travels South in km.<br />
+Let <span class="math inline">\(z(t)\)</span> represent the distance between the trains in km.<br />
+We want to find <span class="math inline">\(z&#39;(4)\)</span>. Clearly, <span class="math inline">\(x&#39; = 45, y&#39; = 60\)</span>.<br />
+Clearly, <span class="math inline">\(z^2 = x^2 + y^2\)</span>.<br />
+So <span class="math inline">\(\frac{\dee}{\dee t} z^2 = \frac{\dee}{\dee t} x^2 + \frac{\dee}{\dee t} y^2 = 2zz&#39; = 2xx&#39; + 2yy&#39;\)</span>.<br />
+So <span class="math inline">\(z&#39; = \frac{xx&#39; + yy&#39;}{z} = \frac{45x + 60y}{z}\)</span>.<br />
+Clearly, at <span class="math inline">\(t = 4\)</span>, <span class="math inline">\(x = x(4) = 4 \cdot 45 = 180, y = y(3) = 3 \cdot 60 = 180\)</span>.<br />
+So <span class="math inline">\(z = \sqrt{180^2 + 180^2} = 180 \sqrt{2}\)</span>.<br />
+So <span class="math inline">\(z&#39;(4) = \frac{45 \cdot 180 + 60 \cdot 60 \cdot 180}{180 \sqrt{2}} = \frac{105}{\sqrt{2}}\)</span>.</p>
+</blockquote>
+<p>How fast is the shadow cast by a 50 foot tall vertical pole lengthening when the angle of elevation of the sum is <span class="math inline">\(\frac{\pi}{4} rad\)</span> and decreasing by <span class="math inline">\(\frac{1}{4}\)</span> rad per hour?</p>
+<blockquote>
+<p>Let <span class="math inline">\(\theta\)</span> be the angle of elevation in radians.<br />
+Let <span class="math inline">\(x\)</span> be the length of the shadow in feet.<br />
+Clearly, <span class="math inline">\(x(\theta) = \frac{50}{\tan \theta}\)</span>.<br />
+We know that <span class="math inline">\(\theta = \frac{\pi}{4}, \frac{\dee \theta}{\dee t} = -\frac{1}{4}\)</span>.<br />
+We want to find <span class="math inline">\(\frac{\dee x}{\dee t}\)</span> when <span class="math inline">\(\theta = (\frac{\pi}{4})\)</span>.<br />
+Clearly, <span class="math inline">\(\frac{\dee x}{\dee t} = 50 \frac{\dee}{\dee t} \frac{1}{\tan \theta} = 50 \frac{-\sec^2 \theta \frac{\dee \theta}{\dee t}}{\tan^2 \theta} = \frac{50}{4 \sin^2 \theta}\)</span>.<br />
+So <span class="math inline">\(x&#39;(\frac{\pi}{4}) = \frac{50}{4 \sin^2 \frac{\pi}{4}} = 25\)</span>.</p>
+</blockquote>
+<h1 id="section-19">28/10/13</h1>
+<h2 id="linear-approximations">Linear Approximations</h2>
+<p>In math and science we often use approximations to solve problems. This is because some problems are complex or impossible to solve analytically, and it can simplify things considerably.</p>
+<p>The <strong>linear approximation</strong> to a function <span class="math inline">\(f(x)\)</span> near a point <span class="math inline">\(x = a\)</span> is a first order polynomial (linear equation) which best approximates <span class="math inline">\(f(x)\)</span> near <span class="math inline">\(x = a\)</span>.</p>
+<p>This is also known as the <strong>linearization</strong>.</p>
+<p>It is simply the tangent line, since it has the same <strong>slope</strong> and <strong>value</strong> at the point.</p>
+<p>So if the linear approximation is <span class="math inline">\(L(x)\)</span>, it is required that <span class="math inline">\(L(a) = f(a)\)</span> and <span class="math inline">\(L&#39;(a) = f&#39;(a)\)</span>.</p>
+<p>The linear approximation can be found as follows:</p>
+<p><span class="math display">\[
+L(x) = f&#39;(a)(x - a) + f(a) = f&#39;(a)x + f(a) - f&#39;(a)a
+\]</span></p>
+<p>Find the linear approximation of <span class="math inline">\(f(x) = \sqrt{x}\)</span> near <span class="math inline">\(x = 9\)</span> and use it to estimate <span class="math inline">\(\sqrt{10}\)</span>:</p>
+<p><span class="math display">\[
+\begin{align}
+L(x) &amp;= \frac{1}{6}(x - 9) + 3 \\
+L(10) &amp;= \frac{1}{6} + 3 = \frac{19}{6} \\
+\end{align}
+\]</span></p>
+<p>The further away from the point we get, the worse the approximation gets. To regain accuracy, we need to use another linear approximation at a closer point.</p>
+<p>The key to making good approximations is being able to find a <strong>bound on the error</strong> - <span class="math inline">\(\exists M, \abs{f(x) - L(x)} &lt; M\)</span> whenever <span class="math inline">\(x\)</span> is close to <span class="math inline">\(a\)</span>. This is similar to the definition of a limit. We would like to find <span class="math inline">\(M\)</span>, or know that it exists.</p>
+<p>Ideally, we want to be able to find the <span class="math inline">\(x\)</span> values that would make <span class="math inline">\(\abs{f(x) - L(x)} &lt; M\)</span>, and vice versa. This is often difficult since it needs integration.</p>
+<p>Given <span class="math inline">\(f(x) = x^2, L(x) = 1 + 2(x - 1)\)</span> for <span class="math inline">\(x\)</span> near 1, find where the error is less than 0.1:</p>
+<blockquote>
+<p>We want to find where <span class="math inline">\(\abs{f(x) - L(x)} &lt; 0.1\)</span>.<br />
+This is equivalent to <span class="math inline">\(\abs{(x - 1)^2} &lt; 0.1\)</span>.<br />
+This is equivalent to <span class="math inline">\(\abs{x - 1} &lt; \sqrt{0.1}\)</span>.<br />
+This is equivalent to <span class="math inline">\(-\sqrt{0.1} &lt; x - 1 &lt; \sqrt{0.1}\)</span>.<br />
+This is equivalent to <span class="math inline">\(1 - \sqrt{0.1} &lt; x &lt; \sqrt{0.1} + 1\)</span>.</p>
+</blockquote>
+<h2 id="higher-order-approximations">Higher Order Approximations</h2>
+<p>Suppose we want a better approximation of <span class="math inline">\(\sqrt{10}\)</span>. We could use a quadratic instead: <span class="math inline">\(P_{2, 9}(x)\)</span>. Here, 2 represents the degree and 9 represents the a-value.</p>
+<p><span class="math inline">\(P_{2, 9}(x)\)</span> must have the <strong>same value</strong> and <strong>same slope</strong> at <span class="math inline">\(x = 9\)</span>, and the <strong>same concavity</strong>.</p>
+<p>So if the quadratic approximation is <span class="math inline">\(P_{2, 9}(x)\)</span>, then <span class="math inline">\(P_{2, 9}(a) = f(a)\)</span>, <span class="math inline">\(P_{2, 9}&#39;(a) = f&#39;(a)\)</span>, and <span class="math inline">\(P_{2, 9}&#39;&#39;(a) = f&#39;&#39;(a)\)</span>.</p>
+<p>Find the quadratic approximation of <span class="math inline">\(f(x) = \sqrt{x}\)</span> near <span class="math inline">\(x = 9\)</span> and use it to estimate <span class="math inline">\(\sqrt{10}\)</span>:</p>
+<p><span class="math display">\[f(a) + f&#39;(a)(x - a) + \frac{1}{2} f&#39;&#39;(a) (x - a)^2\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+Q(x) &amp;= 3 + \frac{1}{6}(x - 9) + \frac{1}{108} (x - 9)^2 \\
+Q(10) &amp;= 3 + \frac{1}{6} + \frac{1}{108} = \frac{1029}{324} \\
+\end{align}
+\]</span></p>
+<p>We don't have to stop at quadratics. We can use any order of polynomial to get better approximations. This is known as a Taylor series.</p>
+<p>For example, <span class="math inline">\(e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}\)</span>.</p>
+<h1 id="section-20">30/10/13</h1>
+<h2 id="minmax-values">Min/Max Values</h2>
+<p>A function <span class="math inline">\(f\)</span> has an <strong>absolute/global maximum</strong> at <span class="math inline">\(c\)</span> if <span class="math inline">\(f(c) \ge f(x)\)</span> for all <span class="math inline">\(x\)</span> in the domain of <span class="math inline">\(f\)</span>.</p>
+<p>A function <span class="math inline">\(f\)</span> has a <strong>local maximum</strong> at <span class="math inline">\(c\)</span> if <span class="math inline">\(f(c) \ge f(x)\)</span> for <span class="math inline">\(x\)</span> near <span class="math inline">\(c\)</span>.</p>
+<p>Absolute/global and local minimum are defined similarly. <strong>Local extrema</strong> and <strong>absolute/global extrema</strong> refers to both the minimum and the maximum.</p>
+<p>Consider <span class="math inline">\(f(x) = x^2\)</span>. At <span class="math inline">\(x = c\)</span>, there is a local and absolute minimum. There are no local or absolute maxima since the function tends off towards infinity.</p>
+<p>Consider <span class="math inline">\(f(x) = \arctan x\)</span>. There are horizontal asymptotes at <span class="math inline">\(f(x) = \frac{\pi}{2}\)</span> and <span class="math inline">\(f(x) = -\frac{\pi}{2}\)</span>. There are no local maxima or minima, and no absolute max/min since for any possible value of <span class="math inline">\(f(x)\)</span>, there must be another value that is greater or less than it.</p>
+<p>Consider <span class="math inline">\(f(x) = 0\)</span>. We would say that <strong>every point is both the absolute minimum and maximum, and the local minimum and maximum</strong>.</p>
+<h3 id="extreme-value-theorem-evt">Extreme value theorem (EVT)</h3>
+<p>If <span class="math inline">\(f\)</span> is continuous over <span class="math inline">\([a, b]\)</span>, then there exists an absolute minimum <span class="math inline">\(f(c)\)</span> and maximum <span class="math inline">\(f(d)\)</span> for <span class="math inline">\(c, d \in [a, b]\)</span>.</p>
+<p>This does not apply to things like <span class="math inline">\(\arctan\)</span> because its domain, <span class="math inline">\(\mb{R}\)</span>, is <strong>not a closed interval</strong>.</p>
+<p>This also does not apply to things like <span class="math inline">\(\frac{1}{x}, x \in [-1, 1]\)</span> because it is <strong>not continuous in the interval</strong>.</p>
+<p>This is an <strong>existance theorem</strong> - it tells us that a certain number with a certain property exists, but not its value.</p>
+<p>To actually find the absolute extrema, we start with the local extrema.</p>
+<h3 id="fermats-theorem">Fermat's theorem</h3>
+<p>If <span class="math inline">\(f\)</span> has a local extreme at <span class="math inline">\(c\)</span>, and <span class="math inline">\(f&#39;(c)\)</span> exists, then <span class="math inline">\(f&#39;(c) = 0\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>We will prove this folds for the maximum. The proof for the minimum is very similar.<br />
+Assume there is a local maximum at <span class="math inline">\(c\)</span> and <span class="math inline">\(f&#39;(c)\)</span> exists.<br />
+If <span class="math inline">\(f\)</span> has a local maximum at <span class="math inline">\(c\)</span>, then <span class="math inline">\(f(c) \ge f(x)\)</span> for all <span class="math inline">\(x\)</span> near <span class="math inline">\(c\)</span>.<br />
+So for some small nonzero <span class="math inline">\(h\)</span>, <span class="math inline">\(f(c) \ge f(c + h)\)</span>, or <span class="math inline">\(f(c + h) - f(c) \le 0\)</span>.<br />
+Divide both sides by <span class="math inline">\(h\)</span> and take the limit as <span class="math inline">\(h \to 0\)</span>. There are two cases: First, <span class="math inline">\(h\)</span> might be positive. So <span class="math inline">\(\lim_{h \to 0^+} \frac{f(c + h) - f(c)}{h} \le \lim_{h \to 0^+} \frac{0}{h}\)</span>. Note that we don't need to check the left hand limit since we assumed the left side limit exists.<br />
+Clearly, this is the derivative, and <span class="math inline">\(f&#39;(c) \le 0\)</span>.<br />
+Second, <span class="math inline">\(h\)</span> might be negative.<br />
+So <span class="math inline">\(\lim_{h \to 0^+} \frac{f(c + h) - f(c)}{h} \ge -\lim_{h \to 0^+} \frac{0}{h}\)</span>, and <span class="math inline">\(\lim_{h \to 0^+} \frac{f(c + h) - f(c)}{h} \ge 0\)</span>.<br />
+Clearly, this is the derivative, and <span class="math inline">\(f&#39;(c) \ge 0\)</span>.<br />
+So <span class="math inline">\(f&#39;(c) = 0\)</span>.</p>
+</blockquote>
+<p>The converse is not true. Counterexample: <span class="math inline">\(f(x) = x^3\)</span> at <span class="math inline">\(c = 0\)</span>.</p>
+<h3 id="closed-interval-method">Closed interval method</h3>
+<p>A <strong>critical number</strong> of a function <span class="math inline">\(f\)</span> is a number <span class="math inline">\(c\)</span> in the domain of <span class="math inline">\(f\)</span> such that <span class="math inline">\(f&#39;(c) = 0\)</span> or <span class="math inline">\(f&#39;(c)\)</span> does not exist.</p>
+<p>The <strong>critical number</strong> of <span class="math inline">\(f(x) = \abs(x)\)</span> is <span class="math inline">\(c = 0\)</span>, since <span class="math inline">\(f&#39;(0)\)</span> does not exist.</p>
+<p>To find the absolute extrema of <span class="math inline">\(f\)</span> in <span class="math inline">\([a, b]\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Find the critical numbers in <span class="math inline">\((a, b)\)</span> and evaluate the function at those values.</li>
+<li>Evaluate the function at <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</li>
+<li>The smallest and largest of the <span class="math inline">\(f\)</span> values are the absolute minimum and maximum, respectively.</li>
+</ol>
+<p>Find the absolute extrema of <span class="math inline">\(f(x) = x^2 - 4x + 1\)</span> on <span class="math inline">\([-1, 3]\)</span>:</p>
+<blockquote>
+<p><span class="math inline">\(f\)</span> is continuous over <span class="math inline">\(\mb{R}\)</span>, so the only critical numbers are at <span class="math inline">\(f&#39;(x) = 0 = 2x - 4\)</span>, or <span class="math inline">\(x = 2\)</span>.<br />
+Clearly, <span class="math inline">\(f(2) = -3, f(-1) = 6, f(3) = -2\)</span>.<br />
+So the absolute minimum is <span class="math inline">\(f(2) = -3\)</span>, and the absolute maximum is <span class="math inline">\(f(-1) = 6\)</span></p>
+</blockquote>
+<h3 id="rolles-theorem">Rolle's theorem</h3>
+<p>If <span class="math inline">\(f\)</span> is continuous over <span class="math inline">\([a, b]\)</span>, differentiable over <span class="math inline">\((a, b)\)</span>, and <span class="math inline">\(f(a) = f(b)\)</span>, then <span class="math inline">\(\exists c \in (a, b), f&#39;(c) = 0\)</span>.</p>
+<p>Used to prove mean value theorem.</p>
+<h1 id="section-21">1/11/13</h1>
+<h2 id="mean-value-theorem-mvt">Mean Value Theorem (MVT)</h2>
+<p>Suppose the function <span class="math inline">\(f\)</span> is continuous on <span class="math inline">\([a, b]\)</span> and differentiable on <span class="math inline">\((a, b)\)</span>. Then <span class="math inline">\(\exists c \in (a, b), f&#39;(c) = \frac{f(b) - f(a)}{b - a}\)</span>.</p>
+<p>In other words, there is at least one point at which the slope of the tangent is equal to the slope of the secant of the endpoints - there must be at least one place where the instantaneous rate of change is equal to the average rate of change.</p>
+<p>There could be multiple points where this is true. For example, a line's secant and tangent slopes are always equal. MVT simple states there must be at least one.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math inline">\(f\)</span> be continuous on <span class="math inline">\([a, b]\)</span> and differentiable on <span class="math inline">\((a, b)\)</span>.<br />
+Clearly, the equation of the secant line joining points <span class="math inline">\((a, f(a))\)</span> and <span class="math inline">\((b, f(b))\)</span> is <span class="math inline">\(y = \frac{f(b) - f(a)}{b - a}(x - a) + f(a)\)</span>.<br />
+Construct <span class="math inline">\(g(x) = f(x) - y\)</span>. The secant is continuous and differentiable everywhere, so <span class="math inline">\(g(x)\)</span> is continuous on <span class="math inline">\([a, b]\)</span> and differentiable on <span class="math inline">\((a, b)\)</span>.<br />
+Note that by definition, <span class="math inline">\(f(x) = y\)</span> at <span class="math inline">\(x = a\)</span> and <span class="math inline">\(x = b\)</span>.<br />
+So <span class="math inline">\(g(a) = 0 = g(b)\)</span>, and by Rolle's theorem, <span class="math inline">\(\exists c \in (a, b), g&#39;(c) = 0\)</span>.<br />
+So <span class="math inline">\(\exists c \in (a, b), f&#39;(c) - y&#39; = 0\)</span>, or <span class="math inline">\(\exists c \in (a, b), f&#39;(c) = y&#39; = \frac{f(b) - f(a)}{b - a}\)</span>.</p>
+</blockquote>
+<p>Find <span class="math inline">\(x\)</span> where <span class="math inline">\(f&#39;(c) = \frac{f(3) - f(1)}{3 - 1}\)</span> for <span class="math inline">\(f(x) = x^3\)</span> over <span class="math inline">\([1, 3]\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+3x^2 &amp;= \frac{27 - 1}{2} \\
+x = \sqrt{\frac{26}{6}} &amp;= \sqrt{\frac{13}{3}} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>The MVT is important because of its use in proving the <strong>fundemental theorem of calculus</strong> and <strong>Taylor's Theorem with Lagrange remainder</strong>, the two most important theorems in calculus. It is also used to prove several other results.</p>
+<h3 id="constant-function-theorem">Constant Function Theorem</h3>
+<p>If <span class="math inline">\(f&#39;(x) = 0\)</span> for all <span class="math inline">\(x\)</span> in <span class="math inline">\((a, b)\)</span>, then <span class="math inline">\(f\)</span> is a constant function (<span class="math inline">\(f(x) = k\)</span>).</p>
+<blockquote>
+<p>Note that <span class="math inline">\(f&#39;(x) = k\)</span> if and only if for an arbitrary <span class="math inline">\(x_1, x_2 \in (a, b), x_1 &lt; x_2\)</span>, <span class="math inline">\(f(x_1) = f(x_2)\)</span>.<br />
+Since <span class="math inline">\(f\)</span> is differentiable on <span class="math inline">\((a, b)\)</span>, then <span class="math inline">\(f\)</span> is differentiable on <span class="math inline">\((x_1, x_2)\)</span> and continuous on <span class="math inline">\([x_1, x_2]\)</span>.<br />
+By the MVT, <span class="math inline">\(\exists c \in [x_1, x_2], f&#39;(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}\)</span>.<br />
+Since <span class="math inline">\(f&#39;(c) = 0\)</span>, <span class="math inline">\(\frac{f(x_2) - f(x_1)}{x_2 - x_1} = 0\)</span>.<br />
+Since <span class="math inline">\(x_1, x_2\)</span> are arbitrary, <span class="math inline">\(\forall x_1, x_2 \in (a, b), x_1 &lt; x_2, f(x_1) = f(x_2)\)</span>.<br />
+Therefore, the function is constant.</p>
+</blockquote>
+<h3 id="alice-theorem">Alice Theorem</h3>
+<p>If <span class="math inline">\(f&#39;(x) = g&#39;(x)\)</span> over <span class="math inline">\((a, b)\)</span>, then <span class="math inline">\(f(x) = g(x) + c\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math inline">\(h(x) = f(x) - g(x)\)</span>. So <span class="math inline">\(h&#39;(x) = f&#39;(x) - g&#39;(x) = 0\)</span>.<br />
+So by the constant function theorem, <span class="math inline">\(h(x) = c\)</span>, and <span class="math inline">\(f(x) = g(x) + c\)</span>.</p>
+</blockquote>
+<h1 id="section-22">4/11/13</h1>
+<h3 id="increasingdecreasing-function-theorem">Increasing/Decreasing Function Theorem</h3>
+<p>If <span class="math inline">\(f&#39;(x) &gt; 0\)</span> over <span class="math inline">\((a, b)\)</span>, then <span class="math inline">\(f\)</span> is increasing on <span class="math inline">\((a, b)\)</span>.</p>
+<p>If <span class="math inline">\(f&#39;(x) &lt; 0\)</span> over <span class="math inline">\((a, b)\)</span>, then <span class="math inline">\(f\)</span> is decreasing on <span class="math inline">\((a, b)\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math inline">\(x_1, x_2 \in (a, b)\)</span>, and <span class="math inline">\(x_1 &lt; x_2\)</span>.<br />
+Assume <span class="math inline">\(f&#39;(x) &gt; 0\)</span> over <span class="math inline">\((a, b)\)</span>.<br />
+Since <span class="math inline">\(f&#39;(x)\)</span> exists, <span class="math inline">\(f\)</span> is differentiable and continuous over <span class="math inline">\((a, b)\)</span> and <span class="math inline">\([x_1, x_2]\)</span>.<br />
+By the MVT, <span class="math inline">\(\exists c \in (x_1, x_2), f&#39;(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}\)</span>.<br />
+Clearly, <span class="math inline">\(\forall x \in (a, b), f&#39;(c) &gt; 0\)</span>.<br />
+So <span class="math inline">\(\frac{f(x_2) - f(x_1)}{x_2 - x_1} &gt; 0\)</span>, and <span class="math inline">\(f(x_2) - f(x_1) &gt; 0\)</span>, or <span class="math inline">\(f(x_2) &gt; f(x_1)\)</span>.<br />
+So for arbitrary <span class="math inline">\(x_1, x_2 \in (a, b), x_1 &lt; x_2 \iff f(x_1) &lt; f(x_2)\)</span>, the definition of an increasing function.<br />
+The proof for decreasing function follows the same technique and is left as an exercise.</p>
+</blockquote>
+<p>We can use these results to classify critical numbers.</p>
+<p>Recall that if <span class="math inline">\(f\)</span> has a local extreme at <span class="math inline">\(x = c\)</span>, then <span class="math inline">\(c\)</span> is a critical number, although the converse can be false.</p>
+<h2 id="first-derivative-test">First Derivative Test</h2>
+<p>Suppose <span class="math inline">\(c\)</span> is a critical number of <span class="math inline">\(f\)</span>.</p>
+<p>If <span class="math inline">\(f&#39; &gt; 0\)</span> to the left of <span class="math inline">\(c\)</span> and <span class="math inline">\(f&#39; &lt; 0\)</span> to the right of <span class="math inline">\(c\)</span>, then <span class="math inline">\(f\)</span> has a <strong>local maximum</strong> at <span class="math inline">\(c\)</span>.</p>
+<p>If <span class="math inline">\(f&#39; &lt; 0\)</span> to the left of <span class="math inline">\(c\)</span> and <span class="math inline">\(f&#39; &gt; 0\)</span> to the right of <span class="math inline">\(c\)</span>, then <span class="math inline">\(f\)</span> has a <strong>local minimum</strong> at <span class="math inline">\(c\)</span>.</p>
+<p>If <span class="math inline">\(f&#39;\)</span> does not change sign, then <span class="math inline">\(f\)</span> has no local extrema at <span class="math inline">\(c\)</span>.</p>
+<p>Find the intervals of increase/decrease and classify the critical numbers of <span class="math inline">\(f(x) = x^4 - 2x^2 + 3\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(f&#39;(x) = 4x^3 - 4x\)</span>.<br />
+When <span class="math inline">\(f&#39;(x) = 0 = 4x(x - 1)(x + 1)\)</span>, <span class="math inline">\(x = -1, 0, 1\)</span>.<br />
+Clearly, <span class="math inline">\(f&#39;(x)\)</span> is defined over <span class="math inline">\(\mb{R}\)</span>.<br />
+Note that the critical numbers divide the number line into the intervals <span class="math inline">\((-\infty, -1), (-1, 0), (0, 1), (1, \infty)\)</span>.<br />
+We test the derivative in these intervals to obtain <span class="math inline">\(f&#39;(-2) = -24, f(-0.5) = 1.5, f(0.5) = -1.5, f(2) = 24\)</span>.<br />
+So the function is increasing over <span class="math inline">\((-1, 0) \cup (1, \infty)\)</span> and decreasing over <span class="math inline">\((-infty, -1) \cup (0, 1)\)</span>.<br />
+So <span class="math inline">\(x = -1, 1\)</span> are local minima and <span class="math inline">\(x = 0\)</span> is a local maximum.</p>
+</blockquote>
+<h2 id="second-derivative-test">Second Derivative Test</h2>
+<p>Concavity is defined in terms of where the graph sits in terms of its tangent line.</p>
+<p>A <strong>concave up</strong> function is always above at at its tangent line. Likewise, a <strong>concave down</strong> function is always below its tangent line.</p>
+<p>We usually think about this in terms of the second derivative. <span class="math inline">\(f&#39;&#39;(x) &gt; 0\)</span> means the function is concave up at <span class="math inline">\(x\)</span>, and <span class="math inline">\(f&#39;&#39;(x) &lt; 0\)</span> means the function is concave down at <span class="math inline">\(x\)</span>.</p>
+<p>A point <span class="math inline">\(y = f(x)\)</span> is a <strong>point of inflection</strong> if and only if the function changes concavity. This is not necessarily the same thing as <span class="math inline">\(f&#39;&#39;(x) = 0\)</span> since the sign may not change.</p>
+<p>For example, <span class="math inline">\(f(x) = x^3\)</span> has a point of inflection at <span class="math inline">\((0, 0)\)</span> since <span class="math inline">\(f&#39;&#39;(x) = 6x\)</span> and <span class="math inline">\(f&#39;&#39;(x) &lt; 0\)</span> when <span class="math inline">\(x &lt; 0\)</span> and <span class="math inline">\(f&#39;&#39;(x) &gt; 0\)</span> when <span class="math inline">\(x &gt; 0\)</span>.</p>
+<p>Theorem: if <span class="math inline">\((c, f(c))\)</span> is a point of inflection, then <span class="math inline">\(f&#39;&#39;(x) = 0\)</span>, or <span class="math inline">\(f&#39;&#39;(x)\)</span> does not exist.</p>
+<p>However, the converse can be false. For example, consider <span class="math inline">\(f(x) = 0\)</span> or <span class="math inline">\(f(x) = x^4\)</span>.</p>
+<p>The <strong>second derivaive test</strong> allows us to classify critical numbers using concavity.</p>
+<p>Suppose <span class="math inline">\(f&#39;&#39;(x)\)</span> is continuous near <span class="math inline">\(c\)</span> and that <span class="math inline">\(f&#39;(c) = 0\)</span>.</p>
+<p>If <span class="math inline">\(f&#39;&#39;(c) &gt; 0\)</span>, then <span class="math inline">\(f\)</span> has a <strong>local minimum</strong> at <span class="math inline">\(c\)</span>.</p>
+<p>If <span class="math inline">\(f&#39;&#39;(c) &lt; 0\)</span>, then <span class="math inline">\(f\)</span> has a <strong>local maximum</strong> at <span class="math inline">\(c\)</span>.</p>
+<p>If <span class="math inline">\(f&#39;&#39;(c) = 0\)</span> or <span class="math inline">\(f&#39;&#39;(c)\)</span> does not exist, the test is inconclusive.</p>
+<p>Find the inflection points and intervals of concavity of <span class="math inline">\(f(x) = x^4 - 2x^2 + 3\)</span>, and verify the local extrema found previously:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(f&#39;(x) = 4x^3 - 4x\)</span> and <span class="math inline">\(f&#39;&#39;(x) = 12x^2 - 4\)</span>.<br />
+When <span class="math inline">\(f&#39;&#39;(x) = 0\)</span>, <span class="math inline">\(x = -\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}}\)</span>.<br />
+Clearly, <span class="math inline">\(f&#39;(x)\)</span> and <span class="math inline">\(f&#39;&#39;(x)\)</span> are defined over <span class="math inline">\(\mb{R}\)</span>.<br />
+Clearly, the number line is divided into the intervals <span class="math inline">\((-infty, -\sqrt{\frac{1}{3}}), (-\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}}), (\sqrt{\frac{1}{3}}, \infty)\)</span>.<br />
+We test the second derivative in these intervals to obtain <span class="math inline">\(f&#39;&#39;(-1) = 8, f&#39;&#39;(0) = -4, f&#39;&#39;(1) = 8\)</span>.<br />
+So the function is concave up over <span class="math inline">\((-infty, -\sqrt{\frac{1}{3}}), (\sqrt{\frac{1}{3}}, \infty)\)</span> and concave down over <span class="math inline">\((-\sqrt{\frac{1}{3}}, \sqrt{\frac{1}{3}})\)</span>. So there are points of inflection at <span class="math inline">\((-\sqrt{\frac{1}{3}}, \frac{22}{9}), (\sqrt{\frac{1}{3}}, \frac{22}{9})\)</span>.<br />
+Clearly, <span class="math inline">\(f&#39;&#39;(-1) &gt; 0, f&#39;&#39;(0) &lt; 0, f&#39;&#39;(1) &gt; 0\)</span>, so the local extrema found previously are correct.</p>
+</blockquote>
+<h1 id="section-23">6/11/13</h1>
+<h2 id="indeterminate-forms-and-lhôpitals-rule">Indeterminate Forms and l'Hôpital's Rule</h2>
+<p>We have seen previously the limits <span class="math inline">\(\lim_{x \to 0} \frac{\sin x}{x} = 1\)</span> and <span class="math inline">\(\lim_{x \to \infty} \frac{x^2 - 1}{2x^2 + 4x + 1} = \frac{1}{2}\)</span>.</p>
+<p>If we just plug in the limit value, we get <span class="math inline">\(\frac{0}{0}\)</span> or <span class="math inline">\(\frac{infty}{\infty}\)</span>, which are <strong>indeterminate forms</strong> - in the form that they are in, we cannot evaluate it.</p>
+<p>We need some other way of making them solvable.</p>
+<p>L'Hôpital's rule is a very general method of removing indeterminate forms.</p>
+<h3 id="lhôpitals-rule">L'Hôpital's Rule</h3>
+<p>If <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span> are differentiable and <span class="math inline">\(g&#39;(x) \ne 0\)</span> near <span class="math inline">\(a\)</span> (though the value at <span class="math inline">\(a\)</span> is unimportant), and one of the following is true:</p>
+<ul>
+<li><span class="math inline">\(\lim_{x \to a} f(x) = 0 = \lim_{x \to a} g(x)\)</span></li>
+<li><span class="math inline">\(\lim_{x \to a} f(x) = \pm \infty = \lim_{x \to a} g(x)\)</span></li>
+</ul>
+<p>Then <span class="math inline">\(\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{f&#39;(x)}{g&#39;(x)}\)</span>.</p>
+<p>Proof of this is beyond this course, so let's just assume it's true for now.</p>
+<p>The rule works even if <span class="math inline">\(a\)</span> is infinite, and works with one-sided limits too.</p>
+<p>Note that it <strong>only works for the indeterminate forms</strong> <span class="math inline">\(\frac{0}{0}\)</span> and <span class="math inline">\(\frac{\infty}{\infty}\)</span>.</p>
+<p>Now we have a much easier way of evaluating <span class="math inline">\(\lim_{x \to 0} \frac{\sin x}{x}\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{\cos x}{1} = 1\]</span></p>
+</blockquote>
+<p>Consider <span class="math inline">\(\lim_{x \to \infty} \frac{x^n}{e^x} = 0, n \in \mb{N}\)</span>:</p>
+<blockquote>
+<p>If <span class="math inline">\(n = 1\)</span>, then <span class="math inline">\(\lim_{x \to \infty} \frac{nx^{n - 1}}{e^x} = 0\)</span>.<br />
+Otherwise, we get the indeterminate form <span class="math inline">\(\frac{\infty}{\infty}\)</span> and <span class="math inline">\(\lim_{x \to \infty} \frac{nx^{n - 1}}{e^x} = \lim_{x \to \infty} \frac{n(n - 1)x^{n - 2}}{e^x}\)</span>.<br />
+If <span class="math inline">\(n = 2\)</span>, then <span class="math inline">\(\lim_{x \to \infty} \frac{n(n - 1)x^{n - 2}}{e^x} = 0\)</span>.<br />
+Otherwise, we get the indeterminate form <span class="math inline">\(\frac{\infty}{\infty}\)</span> and <span class="math inline">\(\lim_{x \to \infty} \frac{n(n - 1)x^{n - 2}}{e^x} = \lim_{x \to \infty} \frac{n(n - 1)(n - 2)x^{n - 3}}{e^x}\)</span>.<br />
+If <span class="math inline">\(n = 3\)</span>, then <span class="math inline">\(\lim_{x \to \infty} \frac{n(n - 1)(n - 2)x^{n - 3}}{e^x} = 0\)</span>.<br />
+In fact, this applies to all <span class="math inline">\(n\)</span>, and <span class="math inline">\(\lim_{x \to \infty} \frac{x^n}{e^x} = 0\)</span>. We could potentially prove this through induction.</p>
+</blockquote>
+<p>This shows that <strong>exponential functions grow faster than polynomial functions</strong>.</p>
+<p>Consider <span class="math inline">\(\lim_{x \to \infty} \frac{\ln x}{x^n} = 0, n \in \mb{N}\)</span>:</p>
+<blockquote>
+<p>Indeterminate form <span class="math inline">\(\frac{\infty}{\infty}\)</span>.<br />
+<span class="math inline">\(\lim_{x \to \infty} \frac{\ln x}{x^n} = \lim_{x \to \infty} \frac{1}{nx^n} = \frac{1}{\infty} = 0\)</span>.</p>
+</blockquote>
+<p>This shows that <strong>logarithmic functions grow slower than polynomial functions</strong>.</p>
+<h3 id="other-indeterminate-forms">Other indeterminate forms</h3>
+<p><span class="math inline">\(0 \cdot \infty\)</span> is a common indeterminate form.</p>
+<p>Consider <span class="math inline">\(\lim_{x \to a} f(x) g(x)\)</span> where <span class="math inline">\(\lim_{x \to a} f(x) = 0\)</span> and <span class="math inline">\(\lim_{x \to a} g(x) = \pm \infty\)</span>.</p>
+<p>We can rewrite this as <span class="math inline">\(\lim_{x \to a} \frac{f(x)}{\frac{1}{g(x)}}\)</span> or <span class="math inline">\(\lim_{x \to a} \frac{g(x)}{\frac{1}{f(x)}}\)</span>. Now we can apply l'Hôpital's rule.</p>
+<p>Evaluate <span class="math inline">\(\lim_{x \to 0^+} x \ln x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\lim_{x \to 0^+} x \ln x = \lim_{x \to 0^+} \frac{\ln x}{\frac{1}{x}}\)</span>.<br />
+Indeterminate form <span class="math inline">\(\frac{\infty}{\infty}\)</span>.<br />
+So <span class="math inline">\(\lim_{x \to 0^+} \frac{\ln x}{\frac{1}{x}} = \lim_{x \to 0^+} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \to 0^+} -x = 0\)</span>.</p>
+</blockquote>
+<p><span class="math inline">\(\infty - \infty\)</span> is another indeterminate form.</p>
+<p>We want to write this as a fraction. This is not always possible, but is occasionally.</p>
+<p>Consider <span class="math inline">\(\lim_{x \to 0} \frac{1}{x} - \frac{1}{\sin x}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\lim_{x \to 0} \frac{1}{x} - \frac{1}{\sin x} = \lim_{x \to 0} \frac{\sin x - x}{x \sin x}\)</span>.<br />
+Indeterminate form <span class="math inline">\(\frac{0}{0}\)</span>.<br />
+Clearly, <span class="math inline">\(\lim_{x \to 0} \frac{\sin x - x}{x \sin x} = \lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x}\)</span>.<br />
+Indeterminate form <span class="math inline">\(\frac{0}{0}\)</span>/<br />
+Clearly, <span class="math inline">\(\lim_{x \to 0} \frac{\cos x - 1}{\sin x + x \cos x} = \lim_{x \to 0} \frac{-\sin x}{2 \cos x - x \sin x} = 0\)</span></p>
+</blockquote>
+<p>These are not values themselves. For example, <span class="math inline">\(0 \cdot \infty\)</span> being indeterminate means that a function that approaches 0 times a function that approaches infinity does not have a single determinate value.</p>
+<h3 id="indeterminate-powers">Indeterminate powers</h3>
+<p><span class="math inline">\(0^0\)</span>, <span class="math inline">\(\infty^0\)</span>, and <span class="math inline">\(1^\infty\)</span> are indeterminate.</p>
+<p><span class="math inline">\(0^\infty\)</span> and <span class="math inline">\(\infty^\infty\)</span> are determinate.</p>
+<p>Consider <span class="math inline">\(\lim_{x \to a} f(x)^{g(x)}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\lim_{x \to a} f(x)^{g(x)} = \lim_{x \to a} e^{\ln f(x)^{g(x)}} = \lim_{x \to a} e^{g(x) \ln f(x)} = e^{\lim_{x \to a} g(x) \ln f(x)}\)</span>.<br />
+Note that <span class="math inline">\(\lim_{x \to a} g(x) \ln f(x)\)</span> can be infinite too.</p>
+</blockquote>
+<p>Depending on how <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span> approach their values, the resulting limit differs. So it is indeterminate because there is no determinate value.</p>
+<p>Evaluate <span class="math inline">\(\lim_{x \to 0} (1 - 2x)^\frac{1}{x}\)</span>:</p>
+<blockquote>
+<p><span class="math inline">\(\lim_{x \to 0} (1 - 2x)^\frac{1}{x} = e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}}\)</span>.<br />
+Indeterminate form <span class="math inline">\(\frac{\infty}{\infty}\)</span>.<br />
+Clearly, <span class="math inline">\(e^{\lim_{x \to 0} \frac{\ln (1 - 2x)}{x}} = e^{\lim_{x \to 0} \frac{\frac{-2}{1 - 2x}}{1}} = \frac{1}{e^2}\)</span>.</p>
+</blockquote>
+<h1 id="section-24">8/11/13</h1>
+<h2 id="curve-sketching">Curve Sketching</h2>
+<p>A systematic way of sketching the graph of a function, using information about <span class="math inline">\(f\)</span>, <span class="math inline">\(f&#39;\)</span>, and <span class="math inline">\(f&#39;&#39;\)</span>.</p>
+<p>To sketch a function:</p>
+<ol style="list-style-type: decimal">
+<li>Figure out domain.</li>
+<li>Figure out intercepts.</li>
+<li>Figure out symmetry - even, odd, periodicity.</li>
+<li>Figure out asymptotes and behavior near asymptotes/discontinuities using one-sided limits for vertical and infinite limits for horizontal.</li>
+<li>Find the derivative <span class="math inline">\(f&#39;\)</span>.</li>
+<li>Figure out the critical points.</li>
+<li>Figure out intervals of increase/decrease.</li>
+<li>Classify the critical numbers as local maxima/minima.</li>
+<li>Find the derivative <span class="math inline">\(f&#39;&#39;\)</span>.</li>
+<li>Find the points of inflection and invervals of concavity.</li>
+<li>Pick reasonable axis limits based on important points like the critical numbers and points of inflection.</li>
+<li>Draw the critical points, points of inflection, and asymptotes on the graph.</li>
+<li>Indicate the intervals of increase/decrease and concavity on the graph.</li>
+<li>Draw the curve, taking into account all the information.</li>
+</ol>
+<p>Sketch <span class="math inline">\(f(x) = \frac{x}{(x + 1)^2}\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>The domain is <span class="math inline">\(\mb{R}\)</span>.</li>
+<li>The intercepts are <span class="math inline">\((0, 0)\)</span>.</li>
+<li>Not symmetric.</li>
+<li>Vertical asymptote at <span class="math inline">\(x = -1\)</span>, going to negative infinity from both sides. Horizontal asymptote at <span class="math inline">\(y = 0\)</span>.</li>
+<li><span class="math inline">\(f&#39;(x) = \frac{(x + 1)^2 - x(2x + 2)}{(x + 1)^4} = \frac{1 - x}{(x + 1)^3}\)</span>.</li>
+<li><span class="math inline">\(f&#39;(x) = 0\)</span> when <span class="math inline">\(x = 1\)</span>, and does not exist when <span class="math inline">\(x = -1\)</span>. 1 is a critical point but (-1, f(-1)) is not because it is not in the domain - <span class="math inline">\(f(-1)\)</span> is undefined.</li>
+<li>There are three intervals <span class="math inline">\((-\infty, -1), (-1, 1), (1, \infty)\)</span>. Note that we considered -1 even though it is not a critical number - we use all the intervals where <span class="math inline">\(f&#39;\)</span> is discontinuous or 0. Testing, we find that <span class="math inline">\(f\)</span> is increasing on <span class="math inline">\((-\infty, -1) \cup (1, \infty)\)</span> and decreasing on <span class="math inline">\((-1, 1)\)</span>.</li>
+<li>There is a local maximum at <span class="math inline">\(x = 1\)</span>.</li>
+<li><span class="math inline">\(f&#39;&#39;(x) = \frac{-(x + 1)^2 - (1 - x)(3(x + 1)^2)}{x + 1}^6 = \frac{2x - 4}{(x + 1)^4}\)</span>.</li>
+<li><span class="math inline">\(f&#39;&#39;(x) = 0\)</span> when <span class="math inline">\(x = 2\)</span>, is defined everywhere in the domain, and we find that <span class="math inline">\(f\)</span> is concave upward left of <span class="math inline">\(x = 2\)</span> and concave down right of <span class="math inline">\(x = 2\)</span>. So <span class="math inline">\((2, f(2))\)</span> is a point of inflection, <span class="math inline">\((-\infty, 2)\)</span> is a concave up interval, and <span class="math inline">\((2, \infty)\)</span> is a concave down interval.</li>
+<li>We want to show the critical points and points of inflection. So <span class="math inline">\(x \in [-2, 3]\)</span> and <span class="math inline">\(y \in [-0.5, 0.5]\)</span> are reasonable axis limits.</li>
+<li>The rest is left as an exercise.</li>
+</ol>
+<p>Consider <span class="math inline">\(x^\frac{5}{3} - x^\frac{2}{3}\)</span>:</p>
+<blockquote>
+<p><span class="math inline">\(f(x) = x^\frac{2}{3}(x - 1)\)</span>.<br />
+The denominator of the fractional exponent determines the domain.<br />
+The numerator determines the range and symmetry.</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li>The domain is <span class="math inline">\(\mb{R}\)</span>.</li>
+<li>The intercepts are <span class="math inline">\((0, 0)\)</span> and <span class="math inline">\((1, 0)\)</span>.</li>
+<li>Not symmetric, though each term is symmetric by itself.</li>
+<li>No asymptotes.</li>
+<li><span class="math inline">\(f&#39;(x) = \frac{5}{3}x^\frac{2}{3} - \frac{2}{3}x^\frac{-1}{3} = \frac{1}{3 \sqrt[3]{x}} (5x - 2)\)</span>.</li>
+<li><span class="math inline">\(f&#39;(x) = 0\)</span> when <span class="math inline">\(x = \frac{2}{5}\)</span>, and undefined when <span class="math inline">\(x = 0\)</span>. So <span class="math inline">\((0, 0)\)</span> and <span class="math inline">\((\frac{2}{5}, f(\frac{2}{5}))\)</span> are critical points.</li>
+<li>The intervals are <span class="math inline">\((-\infty, 0), (0, \frac{2}{5}), (\frac{2}{5}, \infty)\)</span>. The function is increasing on <span class="math inline">\((-\infty, 0) \cup (\frac{2}{5}, \infty)\)</span> and decreasing on <span class="math inline">\((0, \frac{2}{5})\)</span>.</li>
+<li>There is a local maximum at <span class="math inline">\((0, 0)\)</span> and a local minimum at <span class="math inline">\((\frac{2}{5}, f(\frac{2}{5}))\)</span>.</li>
+<li><span class="math inline">\(f&#39;&#39;(x) = \frac{10}{9}x^\frac{-1}{3} + \frac{2}{9}x^\frac{-4}{3} = \frac{2x^\frac{-1}{3}}{9}(5x + 1)\)</span>.</li>
+<li><span class="math inline">\(f&#39;&#39;(x)\)</span> does not exist when <span class="math inline">\(x = 0\)</span>, and is 0 when <span class="math inline">\(x = -\frac{1}{5}\)</span>. <span class="math inline">\(f\)</span> is concave up left of <span class="math inline">\(-\frac{1}{5}\)</span> and concave down right of <span class="math inline">\(-\frac{1}{5}\)</span>. <span class="math inline">\((-\frac{1}{5}, f(-\frac{1}{5}))\)</span> is a point of inflection.</li>
+<li>Reasonable axis limits are <span class="math inline">\(x \in [-0.5, 1.5]\)</span> and <span class="math inline">\(y \in [-0.5, 0.5]\)</span>.</li>
+<li>The rest is left as an exercise. Notice the cusp at <span class="math inline">\(x = 0\)</span>.</li>
+</ol>
+<h1 id="section-25">11/11/13</h1>
+<p>;wip: Maple is installed on all the 3rd floor labs in MC</p>
+<p>Sketch <span class="math inline">\(f(x) = x^2 \ln x\)</span>:</p>
+<blockquote>
+<p>;wip: find the limit near <span class="math inline">\(x = 0\)</span></p>
+</blockquote>
+<p>Sketch <span class="math inline">\(f(x) = \arctan(\frac{1}{x})\)</span>:</p>
+<blockquote>
+<p>;wip: the graph is a well defined curve</p>
+</blockquote>
+<h2 id="optimization-problems">Optimization Problems</h2>
+<p>Word problems where we need to find an extreme value of a certain function given a constraint.</p>
+<p>A farmer wishes to build a rectangular fence enclosing the maximum area possible with 1000m of fence. One wall of the area is a river and does not need fencing. What are the dimensions?</p>
+<blockquote>
+<p>Let <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> represent the dimensions of the rectangular fenced area, with <span class="math inline">\(y\)</span> being the side opposite the river.<br />
+We are constrained in that <span class="math inline">\(2x + y = 1000\)</span>, so <span class="math inline">\(y = 1000 - 2x\)</span>.<br />
+We want to maximize the area <span class="math inline">\(A = xy = -2x^2 + 1000x\)</span>.<br />
+This is a quadratic equation and the maximum value is at the vertex, at <span class="math inline">\(x = 250\)</span>.<br />
+So <span class="math inline">\(x = 250, y = 500\)</span>.</p>
+</blockquote>
+<p>General steps to solving optimization problems:</p>
+<ol style="list-style-type: decimal">
+<li>Determine the input variables.</li>
+<li>Write the problem constraint in terms of a function over the variables.</li>
+<li>Write the goal in terms of a function over the variables.</li>
+<li>Write the goal function in terms of a single variable, usually using the constraint.</li>
+<li>Determine the interval to consider.</li>
+<li>Find the extreme of the goal function as required.</li>
+<li>Write the conclusion statement.</li>
+</ol>
+<p>Find the points on <span class="math inline">\(f(x) = 1 - x^2\)</span> closest to the origin:</p>
+<blockquote>
+<p>The constraint is that the point must be on the function's curve.<br />
+The goal is to minimize <span class="math inline">\(g(x) = \sqrt{x^2 + f(x)^2} = \sqrt{x^2 + 1 - 2x^2 + x^4} = \sqrt{x^4 - x^2 + 1}\)</span>.<br />
+Here, we will instead minimize <span class="math inline">\(g(x)^2\)</span> since the extrema occur at the same <span class="math inline">\(x\)</span> values.<br />
+<span class="math inline">\(\frac{\dee}{\dee x} g(x)^2 = 4x^3 - 2x = 2x(2x^2 - 1) = 0\)</span> when <span class="math inline">\(x = 0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\)</span>.<br />
+We test to find <span class="math inline">\(g(0) = 1, g(-\frac{1}{\sqrt{2}}) = \frac{\sqrt{3}}{2}, g(\frac{1}{\sqrt{2}}) = \frac{\sqrt{3}}{2}\)</span>.<br />
+Since <span class="math inline">\(g(x) \to \infty\)</span> as <span class="math inline">\(x \to \pm \infty\)</span>, this is both a local and global minimum.<br />
+So the points are <span class="math inline">\((-\frac{1}{\sqrt{2}}, \frac{1}{2})\)</span> and <span class="math inline">\((\frac{1}{\sqrt{2}}, \frac{1}{2})\)</span>.</p>
+</blockquote>
+<h1 id="section-26">13/11/13</h1>
+<h2 id="newtons-method">Newton's Method</h2>
+<p>Suppose we wanted to find the root of <span class="math inline">\(x = e^{-x}\)</span>. We know that the root exists, but we can't solve it analytically.</p>
+<p>So we need to use approximation methods. Recall the <strong>bisection method</strong>.</p>
+<p>Let <span class="math inline">\(f(x) = e^{-x} - x\)</span>. So <span class="math inline">\(f(0) &gt; 0 \wedge f(1) &lt; 0\)</span> and by IVT, a root exists in <span class="math inline">\([0, 1]\)</span>.</p>
+<p>We bisect to obtain two intervals <span class="math inline">\([0, 0.5], [0.5, 1]\)</span>. Clearly, <span class="math inline">\(f(0.5) &gt; 0\)</span> and by IVT, a root exists in <span class="math inline">\([0.5, 1]\)</span>.</p>
+<p>We bisect to obtain two intervas <span class="math inline">\([0.5, 0.75], [0.75, 1]\)</span>. Clearly, <span class="math inline">\(f(0.75) &lt; 0\)</span> and by IVT, a root exists in <span class="math inline">\([0.5, 0.75]\)</span>.</p>
+<p>We repeat this to obtain successively more accurate results, though we never obtain the true value itself using this method.</p>
+<p>The problem with this method is that it takes a lot of iterations to get to high accuracy - it converges relatively slowly.</p>
+<p><strong>Newton's method</strong> converges faster. It is based on linear approximations.</p>
+<p>If we can't solve <span class="math inline">\(f(x) = 0\)</span>, then we find the linear approximation <span class="math inline">\(L(x)\)</span> and then solve <span class="math inline">\(L(x) = 0\)</span> instead.</p>
+<p>The process goes generally as follows:</p>
+<ol style="list-style-type: decimal">
+<li>We determine an initial guess <span class="math inline">\(x_0\)</span>.</li>
+<li>We find the linear approximation: <span class="math inline">\(L(x) = f&#39;(x_0)(x - x_0) + f(x_0)\)</span>.</li>
+<li>Let <span class="math inline">\(x_1\)</span> be the next guess such that <span class="math inline">\(L(x_1) = 0\)</span>: <span class="math inline">\(f&#39;(x_0)(x_1 - x_0) + f(x_0) = 0\)</span>, <span class="math inline">\(x_1 = x_0 - \frac{f(x_0)}{f&#39;(x_0)}\)</span>.</li>
+<li>Now our guess is <span class="math inline">\(x_1\)</span>. We can repeat the process to obtain successively more accuracte results.</li>
+</ol>
+<p>So the approximation <span class="math inline">\(x_n = x_{n - 1} - \frac{f(x_{n - 1})}{f&#39;(x_{n - 1})}\)</span> given initial guess <span class="math inline">\(x_0\)</span>.</p>
+<p>Find <span class="math inline">\(x\)</span> to 8 decimal places if <span class="math inline">\(f(x) = e^{-x} - x = 0\)</span>, using Newton's method:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(f&#39;(x) = -e^{-x} - 1\)</span> We take an initial guess <span class="math inline">\(x_0 = 0\)</span>, on the interval <span class="math inline">\([0, 1]\)</span> as found above. Generally, using the middle of the interval (in our case 0.5) is a better guess, but 0 makes foor simpler computations.<br />
+So <span class="math inline">\(x_1 = 0 - \frac{1}{-2} = 0.5\)</span>.<br />
+So <span class="math inline">\(x_2 = 0.5 - \frac{f(0.5)}{f&#39;(0.5)}\)</span>.<br />
+;wip</p>
+</blockquote>
+<p>We know that our guess has 8 correct decimal places because between two guesses, those decimal places did not change.</p>
+<p>Note that the initial guess is generally taken from an interval on which we prove the root exists, using IVT. However, any value will usually work.</p>
+<p>Note that the method does not converge when:</p>
+<ul>
+<li><span class="math inline">\(f&#39;(x) = 0\)</span>, so the linear approximation has no roots.</li>
+<li><span class="math inline">\(f&#39;(x)\)</span> does not exist, so we have no linear approximation.</li>
+<li><span class="math inline">\(f&#39;(x)\)</span> is not continuous.</li>
+<li>If there are multiple roots, different guesses might result in different resulting roots.</li>
+</ul>
+<h2 id="antiderivatives">Antiderivatives</h2>
+<p>If <span class="math inline">\(f&#39;(x) = 2x\)</span>, then the most general form of <span class="math inline">\(f(x)\)</span> is <span class="math inline">\(x^2 + c\)</span>, where <span class="math inline">\(c\)</span> is a constant.</p>
+<p>An <strong>antiderivative</strong> of a function <span class="math inline">\(f\)</span> is a function <span class="math inline">\(F\)</span> such that <span class="math inline">\(F&#39; = f\)</span>.</p>
+<p>Antidifferentiation is the opposite of differentiation - it undoes differentiation as subtraction undoes addition.</p>
+<p>We can modify our existing derivative laws to obtain the antiderivative laws:</p>
+<h1 id="section-27">15/11/13</h1>
+<p>If <span class="math inline">\(F(x)\)</span> is the antiderivative of <span class="math inline">\(f(x)\)</span>, then the most general antiderivative is <span class="math inline">\(F(x) + c\)</span>, where <span class="math inline">\(c\)</span> is a constant. There can be infinitely many antiderivatives due to this.</p>
+<p>To find antiderivatives, we invert our differentiation laws. ;wip: how?</p>
+<p>Let <span class="math inline">\(F&#39;(x) = f(x)\)</span>.</p>
+<h3 id="power-functions">Power Functions</h3>
+<p>Let <span class="math inline">\(f(x) = x^n\)</span>.</p>
+<p>Since <span class="math inline">\(\frac{\dee}{\dee x} (x^n + c) = nx^{n - 1}\)</span>, <span class="math inline">\(F(x) = \frac{x^{n + 1}}{n + 1} + c\)</span>.</p>
+<p>Note that this doesn't work for <span class="math inline">\(n = -1\)</span>. If this is the case, <span class="math inline">\(\frac{\dee}{\dee x} \ln \abs{x} + c = x^{-1}\)</span>.</p>
+<p>If <span class="math inline">\(n = -1\)</span>, then <span class="math inline">\(F(x) = \ln \abs{x}\)</span>.</p>
+<h3 id="exponential-functions-1">Exponential Functions</h3>
+<p>Let <span class="math inline">\(f(x) = e^x\)</span>.</p>
+<p>Since <span class="math inline">\(\frac{\dee}{\dee x} (e^x + c) = e^x\)</span>, <span class="math inline">\(F(x) = e^x + c\)</span>.</p>
+<p>Since <span class="math inline">\(\frac{\dee}{\dee x} (a^x + c) = a^x \ln x\)</span>, <span class="math inline">\(F(x) = \frac{a^x}{\ln a} + c\)</span>.</p>
+<h3 id="trigonometric-functions">Trigonometric Functions</h3>
+<p>Let <span class="math inline">\(f(x) = \sin x\)</span>.</p>
+<p>Since <span class="math inline">\(\frac{\dee}{\dee x} (\cos x + c) = -\sin x\)</span>, <span class="math inline">\(F(x) = -\cos x\)</span>.</p>
+<p>Let <span class="math inline">\(f(x) = \cos x\)</span>.</p>
+<p>Since <span class="math inline">\(\frac{\dee}{\dee x} (\sin x + c) = \cos x\)</span>, <span class="math inline">\(F(x) = \sin x\)</span>.</p>
+<p>Let <span class="math inline">\(f(x) = \sec^2 x\)</span>.</p>
+<p>Since <span class="math inline">\(\frac{\dee}{\dee x} (\tan x + c) = \sec^2 x\)</span>, <span class="math inline">\(F(x) = \tan x\)</span>.</p>
+<h3 id="inverse-trigonometric-function">Inverse Trigonometric Function</h3>
+<p>Let <span class="math inline">\(f(x) = \frac{1}{\sqrt{1 - x^2}}\)</span>.</p>
+<p>Since <span class="math inline">\(\frac{\dee}{\dee x} (\arcsin x + c) = \frac{1}{\sqrt{1 - x^2}}\)</span>, <span class="math inline">\(F(x) = \arcsin x + c\)</span>.</p>
+<p>Let <span class="math inline">\(f(x) = -\frac{1}{\sqrt{1 - x^2}}\)</span></p>
+<p>Then <span class="math inline">\(F(x) = \arccos x + c\)</span>, or alternatively, <span class="math inline">\(-\arcsin x + c\)</span>.</p>
+<p>Let <span class="math inline">\(f(x) = -\frac{1}{1 + x^2}\)</span>.</p>
+<p>Since <span class="math inline">\(\frac{\dee}{\dee x} (\arctan x + c) = \frac{1}{1 + x^2}\)</span>, <span class="math inline">\(F(x) = \arctan x + c\)</span>.</p>
+<hr />
+<p>Antidifferentiate <span class="math inline">\(\cos 2x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\frac{\dee}{\dee x} (\sin 2x + c) = 2 \cos 2x\)</span>.<br />
+Then <span class="math inline">\(\frac{\dee}{\dee x} (\frac{\sin 2x}{2} + c) = \cos 2x\)</span>.</p>
+</blockquote>
+<p>Antidifferentiate <span class="math inline">\(e^{-7x}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\frac{\dee}{\dee x} (e^{-7x} + c) = -7e^{-7x}\)</span>.<br />
+Then <span class="math inline">\(\frac{\dee}{\dee x} (\frac{e^{-7x}}{-7} + c) = e^{-7x}\)</span>.</p>
+</blockquote>
+<p>Antidifferentiate <span class="math inline">\(\sqrt{x}(1 + x)\)</span>:</p>
+<blockquote>
+<p>It is difficult to find antiderivatives of products (requires integration by parts).<br />
+So we expand: <span class="math inline">\(\sqrt{x}(1 + x) = x^\frac{1}{2} + x^\frac{3}{2}\)</span>.<br />
+Then <span class="math inline">\(\frac{\dee}{\dee x} (\frac{2}{3}x^\frac{3}{2} + \frac{2}{5}x^\frac{5}{2} + c) = x^\frac{1}{2} + x^\frac{3}{2}\)</span>.</p>
+</blockquote>
+<p>Antidifferentiate <span class="math inline">\(x^2 + \frac{2}{1 + x^2}\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(x^2 + \frac{2}{1 + x^2} = x^2 + 2 \frac{\dee}{\dee x} \arctan x\)</span>. Then <span class="math inline">\(\frac{\dee}{\dee x} x^2 + \frac{2}{1 + x^2} = \frac{x^3}{3} + 2 \arctan x + c\)</span>.</p>
+</blockquote>
+<h3 id="antidifferentiation">Antidifferentiation</h3>
+<p>There is no set method of finding the antiderivative of a function. Although there are techniques such as integration by parts, for now we will still need to try to manipulate the expressions into forms that we can antidifferentiate individually.</p>
+<p>Some useful identities used so far are:</p>
+<ul>
+<li><span class="math inline">\(f(x) \pm g(x) = \frac{\dee}{\dee x} (F(x) \pm G(x))\)</span></li>
+<li><span class="math inline">\(cf(x) = \frac{\dee}{\dee x} cF(x)\)</span></li>
+<li><span class="math inline">\(x^n = \frac{\dee}{\dee x} \frac{x^{n + 1}}{n + 1}\)</span></li>
+</ul>
+<p>;wip: use indefinite integrals and the integral notation to make things cleaner</p>
+<p>Consider projectile motion in 1D. A stone is launched upwards from a certain height at a certain velocity. What does its motion look like?</p>
+<blockquote>
+<p>Let <span class="math inline">\(y(t)\)</span> represent position above the reference, <span class="math inline">\(v(t)\)</span> represent velocity, and <span class="math inline">\(a(t)\)</span> represent acceleration.<br />
+Clearly, <span class="math inline">\(a(t)\)</span> is constant and <span class="math inline">\(a(t) = g = -9.81 m/s^2\)</span>, the acceleration due to gravity on the surface of the Earth.<br />
+Clearly, <span class="math inline">\(\frac{\dee}{\dee x} v(t) = a(t)\)</span>, so <span class="math inline">\(v(t) = gt + c\)</span>. Here, <span class="math inline">\(c\)</span> represents the initial velocity, the vecloity when <span class="math inline">\(t = 0\)</span>. We write this as <span class="math inline">\(v(t) = gt + v_0\)</span>.<br />
+Clearly, <span class="math inline">\(\frac{\dee}{\dee x} y(t) = v(t)\)</span>, so <span class="math inline">\(y(t) = \frac{1}{2}gt^2 + v_0t + v_0 + c\)</span>. Here, <span class="math inline">\(c\)</span> represents the initial height, the height when <span class="math inline">\(t = 0\)</span>. We write this as <span class="math inline">\(y(t) = x_0 + v_0t + \frac{1}{2}gt^2\)</span>.</p>
+</blockquote>
+<p>A stone is launched upwards from the surface of the earth with initial velocity <span class="math inline">\(v_0\)</span>. When does it return to the surface and where is the highest point?</p>
+<blockquote>
+<p>We want to find where <span class="math inline">\(y(t) = 0\)</span> and where it has its maximum.<br />
+Clearly, <span class="math inline">\(x_0 = 0\)</span> since the starting point is the surface of the Earth.<br />
+Assume <span class="math inline">\(y(t) = 0\)</span>.<br />
+So <span class="math inline">\(x_0 + v_0t + \frac{1}{2}gt^2 = 0 = t(v_0 + \frac{1}{2}gt)\)</span> and <span class="math inline">\(t = 0, \frac{-2v_0}{g}\)</span>.<br />
+So the stone returns to the ground at <span class="math inline">\(t = \frac{-2v_0}{g}\)</span>.<br />
+The maximum is at <span class="math inline">\(t = \frac{-v_0}{2}\)</span> since the maximum of <span class="math inline">\(ax^2 + bx + c\)</span> is at <span class="math inline">\(\frac{-b}{2a}\)</span>.<br />
+So the stone is at the highest point at <span class="math inline">\(\left(\frac{-v_0}{2}, \frac{gv_0^2}{8} - \frac{v_0^2}{2}\right)\)</span>.</p>
+</blockquote>
+<h2 id="sigma-notation">Sigma Notation</h2>
+<p><span class="math inline">\(\sum\)</span> is the Greek letter &quot;sigma&quot;, and generally represents a sum.</p>
+<p>Let <span class="math inline">\(a_1, \ldots, a_n\)</span> be real numbers. Let <span class="math inline">\(m, n\)</span> be integers, <span class="math inline">\(m \le n\)</span>.</p>
+<p>Then <span class="math inline">\(\sum_{i = m}^n a_i = a_1 + \ldots + a_n\)</span> - the &quot;sum of <span class="math inline">\(a_i\)</span> from <span class="math inline">\(i = 1\)</span> to <span class="math inline">\(i = n\)</span>&quot;.</p>
+<p>It does not have to start at 1 - the number below can be any integer.</p>
+<p>An infinite sum is when <span class="math inline">\(n = \infty\)</span>.</p>
+<h3 id="properties-1">Properties</h3>
+<p>If <span class="math inline">\(c\)</span> is a constant (doesn't depend on <span class="math inline">\(i\)</span>), then <span class="math inline">\(\sum_{i = m}^n cf(i) = c\sum_{i = m}^n f(i)\)</span>.</p>
+<p><span class="math inline">\(\sum_{i = m}^n (f(i) \pm g(i)) = (\sum_{i = m}^n f(i)) \pm (\sum_{i = m}^n g(i))\)</span>. Note that this does not work for infinite sums.</p>
+<p><span class="math inline">\(\sum_{i = m}^n 1 = n - m + 1\)</span>.</p>
+<h1 id="section-28">18/11/13</h1>
+<p><span class="math inline">\(\sum_{i = 1}^n i = \frac{n(n + 1)}{2}\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\sum_{i = 1}^n i = 1 + \ldots + n = n + \ldots + 1\)</span>.<br />
+So <span class="math inline">\(2\sum_{i = 1}^n i = (1 + \ldots + n) + (n + \ldots + 1) = (n + 1) + \ldots + (n + 1) = n(n + 1)\)</span>.<br />
+So <span class="math inline">\(\sum_{i = 1}^n i = \frac{n(n + 1)}{2}\)</span>.</p>
+</blockquote>
+<p><span class="math inline">\(\sum_{i = 1}^n i^2 = \frac{n(n + 1)(2n + 1)}{6}\)</span>.</p>
+<p><span class="math inline">\(\sum_{i = 1}^n i^3 = \frac{n^2(n + 1)^2}{4}\)</span>.</p>
+<h2 id="integral-calculus">Integral Calculus</h2>
+<p>Given a continuous function <span class="math inline">\(f(x) &gt; 0\)</span> over <span class="math inline">\([a, b]\)</span>, what is the area below the curve and above the x-axis?</p>
+<p>This is easy for things like rectangles, but there is no formula for the area below a general curve.</p>
+<h3 id="rectangle-approximation">Rectangle Approximation</h3>
+<p>However, we can approximate the area by approximating the curve using shapes we can calculate the area of.</p>
+<p>Find the area below <span class="math inline">\(y = x^2\)</span> for <span class="math inline">\(x \in [0, 1]\)</span>:</p>
+<blockquote>
+<p>We can approximate the curve using rectangles. First, we would split the interval into multiple subintervals: <span class="math inline">\([0, 0.25], [0.25, 0.5], [0.5, 0.75], [0.75, 1]\)</span>.<br />
+The width of each rectangle is 0.25, and the height is the largest value of the function in the interval - at the right endpoint, in our case.<br />
+So the rectangle dimensions are <span class="math inline">\(0.25 \times 0.0625, 0.25 \times 0.25, 0.25 \times 0.5625, 0.25 \times 1\)</span>.<br />
+So the area under the curve is <span class="math inline">\(0.25 \cdot 0.0625 + 0.25 \cdot 0.25 + 0.25 \cdot 0.5625 + 0.25 \cdot 1 = 0.46875\)</span>.<br />
+Note that the approximation of the area is always greater than the actual area because we make the rectangle height based on the largest value in their interval.<br />
+This means the approximation is an upper bound.<br />
+Now we want to find a lower bound. We can do this by making the rectangle height based on the smallest value of the function in the interval - at the left endpoint, in our case.<br />
+So the area under the curve is <span class="math inline">\(0.25 \cdot 0 + 0.25 \cdot 0.0625 + 0.25 \cdot 0.25 + 0.25 \cdot 0.5625 = 0.21875\)</span>.<br />
+So the area is between 0.21875 and 0.46875.</p>
+</blockquote>
+<p>To get a better estimate, we would increase the number of rectangles. This would refine the estimate and make the bounds closer. The idea is that the bounds eventually converge towards the same value.</p>
+<p>To get the exact value, we need to use infinitely many rectangles that are each infinitely thin. In other words, we take the limit of the bounds as the number of rectangles approaches infinity, or the subinterval length approaches 0.</p>
+<p>We divide the interval <span class="math inline">\([a, b]\)</span> into <span class="math inline">\(n\)</span> subintervals. So now there are the intervals <span class="math inline">\([x_0, x_1], \ldots, [x_{n - 1}, x_n], x_0 = a, x_n = b\)</span>.</p>
+<p>Often, we will use equally sized intervals. In this case, each interval has the width <span class="math inline">\(\frac{b - a}{2}\)</span>.</p>
+<p>Now we construct a rectangle on each interval. It has the same width as the interval. We choose a <span class="math inline">\(c_i \in [x_{i - 1}, x_i]\)</span> and make the rectangle height <span class="math inline">\(f(c_i)\)</span>. Often, we use the midpoint as <span class="math inline">\(c_i\)</span>, so <span class="math inline">\(c_i = \frac{x_{i - 1} + x_i}{2}\)</span>. The choice of sample point is largely irrelevant since the area will eventually converge.</p>
+<p>The area of the rectangle is <span class="math inline">\((x_i - x_{i - 1})f(c)\)</span>. The area of all of the rectangles is an approximation of the function's area.</p>
+<p>We write this as <span class="math inline">\(\sum_{i = 1}^n f(c_i) \delta x\)</span>. This is called the <strong>Riemann Sum</strong> (ree-men). We can use <span class="math inline">\(\delta x = \frac{b - a}{2}\)</span> if the intervals are equal in width.</p>
+<p>So the exact area under the curve is <span class="math inline">\(\lim_{n \to \infty} \sum_{i = 1}^n f(c_i) \delta x\)</span>. This is the <strong>definition of the definite integral</strong>.</p>
+<p>This can be written as <span class="math inline">\(\lim_{n \to \infty} \sum_{i = 1}^n f(\frac{b - a}{n}i + a) \frac{b - a}{n}\)</span> if we use the left endpoint and equally sized intervals.</p>
+<p>Now we apply this to the example.</p>
+<blockquote>
+<p>We want to find <span class="math inline">\(\lim_{n \to \infty} \sum_{i = 1}^n c_i^2 \frac{1}{n}\)</span>.<br />
+Clearly, <span class="math inline">\(c_i = i\frac{1}{n}\)</span> - the index times the width of an interval.<br />
+So <span class="math inline">\(\lim_{n \to \infty} \sum_{i = 1}^n c_i^2 \frac{1}{n} = \lim_{n \to \infty} \sum_{i = 1}^n i^2\frac{1}{n^2} \frac{1}{n} = \lim_{n \to \infty} \frac{1}{n^3} \sum_{i = 1}^n i^2 = \lim_{n \to \infty} \frac{1}{n^3} \frac{n(n + 1)(2n + 1)}{6} = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \frac{1}{3}\)</span>.<br />
+So the area is <span class="math inline">\(\frac{1}{3}\)</span> square units.</p>
+</blockquote>
+<h1 id="section-29">20/11/13</h1>
+<p>We can use different subinterval sizes based on the behaviour of the function. For example, if a function has some oscillation near the origin but levels out elsewhere, we would use smaller subintervals near the origin and larger ones elsewhere.</p>
+<h2 id="integration">Integration</h2>
+<p>Let <span class="math inline">\(v(t)\)</span> be the speed, <span class="math inline">\(d(t)\)</span> be the distance.</p>
+<p>For <span class="math inline">\(v(t) = k\)</span>, <span class="math inline">\(d(t) = v(t) \cdot t\)</span>.</p>
+<p>Problems involving finding the distance given speed are called <strong>distance problems</strong>.</p>
+<p>Distance is the area under the curve of the velocity graph.</p>
+<p>If we have a table of times and corresponding speeds, we can pretend it forms a curve and estimate the distance using the rectangle approximation.</p>
+<p>Velocity is the derivative of displacement - <span class="math inline">\(v(t) = d&#39;(t)\)</span>. So <strong>displacement is the antiderivative of velocity</strong>.</p>
+<h3 id="definite-integral">Definite Integral</h3>
+<p>The <strong>definite integral</strong> of <span class="math inline">\(f\)</span> from <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span> is <span class="math inline">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n f(c_i) \delta x, c_i \in [x_{i - 1}, x_i], \delta x = x_i - x_{i - 1}\)</span>.</p>
+<p>If we are using equal partition sizes, this is more easily written as <span class="math inline">\(\int_a^b f(x) \dee x = \lim_{n \to \infty} \sum_{i = 1}^n f\left(\frac{b - a}{n}i + a\right) \frac{b - a}{n}\)</span></p>
+<p>If the limit exists, we say <span class="math inline">\(f\)</span> is <strong>integrable</strong>.</p>
+<p>There are a lot more types of functions that can be integrated compared to those that can be differentiated. Integrable functions can even be discontinuous.</p>
+<p>Note that the definition says nothing about the area under the curve. The area is simply a geometric interpretation of the integral - like the derivative being interpreted as the slope of the tangent.</p>
+<p>The <span class="math inline">\(\int\)</span> symbol is an elongated &quot;S&quot;, for &quot;sum&quot;, because it is the limit of a sum.</p>
+<p><span class="math inline">\(\int_a^b f(x) \dee x\)</span> is a number. <span class="math inline">\(x\)</span> does not matter here - we could use any value here. So <span class="math inline">\(\int_a^b f(x) \dee x = \int_a^b f(t) \dee t = \int_a^b f(\theta) \dee \theta\)</span>.</p>
+<h3 id="terminology">Terminology</h3>
+<p>Given <span class="math inline">\(\int_a^b f(x) \dee x\)</span>:</p>
+<ul>
+<li><span class="math inline">\(f(x)\)</span> is the <strong>integrand</strong>.</li>
+<li><span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the <strong>limits of integration</strong>, the <strong>lower</strong> and <strong>upper</strong> limits, repsectively.</li>
+<li><span class="math inline">\(\dee x\)</span> is the <strong>differential</strong>.</li>
+</ul>
+<p>The differential simply identifies the variable of integration. It also has dimensions. So for <span class="math inline">\(\int_a^b v(t) \dee t\)</span>, the unit is <span class="math inline">\(m\)</span>, because <span class="math inline">\(v(t)\)</span> has the units <span class="math inline">\(m/s\)</span> and <span class="math inline">\(t\)</span> still carries the unit <span class="math inline">\(s\)</span>.</p>
+<h1 id="section-30">22/11/13</h1>
+<h2 id="integrability">Integrability</h2>
+<p>There are several ways to determine whether a function is integrable:</p>
+<ul>
+<li>Continuous functions - they are bounded such that the area under the curve is finite.
+<ul>
+<li>All continuous functions are integrable.</li>
+</ul></li>
+<li>Discontinuous functions - some are integrable, some are not, depending on the type of discontinuity.
+<ul>
+<li>Removable discontinuities (<span class="math inline">\(\int_{-\pi}^\pi \frac{\sin x}{x} \dee x\)</span>) can be integrated even though the function may not be defined at a point.
+<ul>
+<li>We fill in the hole when integrating - we sum the integral on the left of the hole, and the integral on the right of the hole.</li>
+<li>These are called <strong>improper integrals</strong>.</li>
+</ul></li>
+<li>Jump discontinuities (heaviside function) can be integrated.
+<ul>
+<li>We sum the integral to the left of the discontinuity and the integral to the right of the discontinuity, ignoring the function at the jump.</li>
+<li>This is also an improper integral.</li>
+</ul></li>
+<li>Infinite discontinuities (vertical asymptotes) can be integrated but require improper integrals to study properly.
+<ul>
+<li>For example, <span class="math inline">\(\int_0^1 \frac{1}{x} \dee x\)</span> has no meaning - we say it is <strong>divergent</strong>.</li>
+<li>For example, <span class="math inline">\(\int_0^1 \frac{1}{\sqrt{x}} \dee x = 2\)</span>.</li>
+<li>The value depends on how the function approaches the asymptote.</li>
+</ul></li>
+<li>The Riemann Pathological Function (infinite series) is integrable, yet it has an infinite number of jump discontinuities over a finite interval.</li>
+<li>Thomae's Function (ruler function) is integrable, yet it is continuous at the irrationals, and discontinuous at the rationals.</li>
+<li>Dirichlet's Function (<span class="math inline">\(\phi(x) = \begin{cases} 1 &amp;\text{if } x \text{ is rational} \\ 0 &amp;\text{if } x \text{ is irrational} \end{cases}\)</span>) is not integrable using the Riemann integral, yet is integrable using something like the <strong>Lebesque integral</strong>, which is in the realm of analysis.</li>
+</ul></li>
+</ul>
+<h2 id="properties-of-definite-integrals">Properties of Definite Integrals</h2>
+<p>Let <span class="math inline">\(f, g\)</span> be integrable functions. Let <span class="math inline">\(c\)</span> be a constant.</p>
+<ul>
+<li><span class="math inline">\(\int_a^a f(x) \dee x = 0\)</span> - a region of zero width has zero area.</li>
+<li><span class="math inline">\(\int_a^b f(x) \dee x = -\int_b^a \dee x\)</span> - switching the endpoints switches the sign (this is because <span class="math inline">\(\delta x = \frac{a - b}{n} = -\frac{b - a}{n}\)</span>).</li>
+<li><span class="math inline">\(\int_a^b c \dee x = c(b - a)\)</span> - integrating a constant is the area under the rectangle.</li>
+<li><span class="math inline">\(\int_a^b (f(x) \pm g(x)) \dee x = \int_a^b f(x) \dee x \pm \int_a^b g(x) \dee x\)</span> - integrals have linearity.</li>
+<li><span class="math inline">\(\int_a^b cf(x) \dee x = c\int_a^b f(x) \dee x\)</span> - constants can be moved outside the integral.</li>
+<li><span class="math inline">\(\int_a^b f(x) \dee x = \int_a^c f(x) \dee x + \int_c^b f(x) \dee x\)</span> - we can split the integral on any intervals we want. Note that <span class="math inline">\(c\)</span> does not have to be between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</li>
+<li>If <span class="math inline">\(f(x) \ge g(x)\)</span> over <span class="math inline">\([a, b]\)</span>, then <span class="math inline">\(\int_a^b f(x) \dee x \ge \int_a^b g(x) \dee x\)</span>. This works for any type of inequality or equality.</li>
+<li>If <span class="math inline">\(u \le f(x) \le v\)</span> over <span class="math inline">\([a, b]\)</span>, <span class="math inline">\(\int_a^b u \dee x \le \int_a^b f(x) \dee x \le \int_a^b v \dee x\)</span>, or <span class="math inline">\(u(b - a) \dee x \le \int_a^b f(x) \dee x \le v(b - a)\)</span> - the area under a function can be bounded.</li>
+</ul>
+<h2 id="mean-value-theorem-for-integrals">Mean Value Theorem for Integrals</h2>
+<p>If <span class="math inline">\(f\)</span> is continuous over <span class="math inline">\([a, b]\)</span>, then <span class="math inline">\(\exists c \in (a, b), \int_a^b f(x) \dee x = f(c)(b - a)\)</span>.</p>
+<p>In other words, if a function is continuous, there must exist a function value equal to the mean value of the function.</p>
+<p><span class="math inline">\(f(c)(b - a)\)</span> is the area under <span class="math inline">\(f(x) = c\)</span>.</p>
+<p>Note that <span class="math inline">\(\frac{1}{b - a} \int_a^b f(x) \dee x\)</span> is the <strong>average value of the function</strong> over <span class="math inline">\([a, b]\)</span>.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Assume <span class="math inline">\(f\)</span> is continuous over <span class="math inline">\([a, b]\)</span>.<br />
+By EVT, <span class="math inline">\(\exists u, v, u \le f(x) \le v\)</span> over <span class="math inline">\([a, b]\)</span>.<br />
+So <span class="math inline">\(u(b - a) \le \int_a^b f(x) \dee x \le v(b - a)\)</span>.<br />
+So <span class="math inline">\(u \le \frac{1}{b - a}\int_a^b f(x) \dee x \le v\)</span>.<br />
+By IVT, <span class="math inline">\(\exists c \in (a, b), f(c) = \frac{1}{b - a} \int_a^b f(x) \dee x\)</span>.<br />
+So <span class="math inline">\(\exists c \in (a, b), \int_a^b f(x) \dee x = f(c)(b - a)\)</span>.</p>
+</blockquote>
+<h2 id="integral-and-differential-calculus">Integral and Differential Calculus</h2>
+<p>Consider <span class="math inline">\(f(t) = 2t + 1\)</span>. If we plot this and geometrically find the area under the curve, we find that the area function is <span class="math inline">\(A(t) = t^2 + t + 2\)</span>.</p>
+<p>Note that <span class="math inline">\(A&#39;(t) = f(t)\)</span>. The area under the curve is an antiderivative of the curve.</p>
+<p>In effect, the differential &quot;undoes&quot; the effect of the integral. They could be thought of as the inverse operations of each other.</p>
+<h1 id="section-31">25/11/13</h1>
+<h2 id="the-fundemental-theorem-of-calculus">The Fundemental Theorem of Calculus</h2>
+<h3 id="part-1">Part 1</h3>
+<p>If <span class="math inline">\(f\)</span> is continuous over <span class="math inline">\([a, b]\)</span>, then <span class="math inline">\(g(x) = \int_a^x f(t) \dee t\)</span> is continuous over <span class="math inline">\([a, b]\)</span> and differentiable on <span class="math inline">\((a, b)\)</span>, and <span class="math inline">\(\frac{\dee}{\dee x} g(x) = f(x)\)</span>.</p>
+<p>In other words, <span class="math inline">\(\frac{\dee}{\dee x} \int_a^x f(t) \dee t = f(x)\)</span>.</p>
+<p>Differentiation and integration are inverse operations.</p>
+<p>So <span class="math inline">\(\frac{\dee}{\dee x} \int_a^x f(t) \dee t = f(x)\)</span></p>
+<p><span class="math inline">\(g(x)\)</span> is an antiderivative of <span class="math inline">\(f(x)\)</span> - the &quot;area under the curve from <span class="math inline">\(a\)</span> to <span class="math inline">\(x\)</span> function&quot;.</p>
+<p>Any continuous function has an antiderivative.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math inline">\(g(x) = \int_a^x f(t) \dee t\)</span> and <span class="math inline">\(g(x + h) = \int_a^{x + h} f(t) \dee t\)</span>.<br />
+So <span class="math inline">\(g(x + h) - g(x) = \int_a^{x + h} f(t) \dee t - \int_a^x f(t) \dee t = \int_a^{x + h} f(t) \dee t + \int_x^a f(t) \dee t = \int_x^{x + h} f(t) \dee t\)</span>.<br />
+By the MVT, <span class="math inline">\(\exists c \in (x, x + h), \int_x^{x + h} = f(c)(x + h - x) = hf(c) = g(x + h) - g(x)\)</span>.<br />
+Recall that the definition of continuity is that <span class="math inline">\(\lim_{h \to 0} f(x + h) = f(x)\)</span>, or <span class="math inline">\(\lim_{h \to 0} (f(x + h) - f(x)) = 0\)</span>.<br />
+We take the limit of both sides to get <span class="math inline">\(\lim_{h \to 0} hf(c) = \lim_{h \to 0} (g(x + h) - g(x))\)</span>. Note that we can't evalutate the limit of <span class="math inline">\(hf(c)\)</span> since <span class="math inline">\(f(c)\)</span> could be infinite and make an indeterminate form.<br />
+So <span class="math inline">\(\lim_{h \to 0} hf(c) = \lim_{h \to 0} (g(x + h) - g(x)) = \lim_{h \to 0} h \cdot \lim_{h \to 0} f(c)\)</span>. We know that <span class="math inline">\(c \in (x, x + h)\)</span>, so as <span class="math inline">\(h \to 0\)</span>, <span class="math inline">\(c = x\)</span>. So <span class="math inline">\(\lim_{h \to 0} h \cdot \lim_{h \to 0} f(c) = 0 \cdot f(x) = 0\)</span>.<br />
+So the function is continuous.<br />
+We divide both sides of <span class="math inline">\(hf(c) = g(x + h) - g(x)\)</span> by <span class="math inline">\(h\)</span> to get <span class="math inline">\(f(c) = \frac{g(x + h) - g(x)}{h}\)</span>.<br />
+We take the limit of both sides to get <span class="math inline">\(\lim_{h \to 0} f(c) = \lim_{h \to 0} \frac{g(x + h) - g(x)}{h} = g&#39;(x)\)</span>, by the definition of the derivative.<br />
+So <span class="math inline">\(g&#39;(x) = f(x)\)</span>.</p>
+</blockquote>
+<p>If <span class="math inline">\(f(x) = \int_1^x \frac{1}{t^3} \dee t\)</span>, then by Part 1, <span class="math inline">\(f&#39;(x) = \frac{1}{x^3 + 1}\)</span>.</p>
+<p>If <span class="math inline">\(f(x) = \int_x^0 \sin t^2 \dee t\)</span>, then by Part 1, <span class="math inline">\(f(x) = -\int_0^x \sin t^2 \dee t = -\sin x^2\)</span>.</p>
+<p>Differentiate <span class="math inline">\(f(x) = \int_x^{x^2} t^2 e^t \dee t\)</span>:</p>
+<blockquote>
+<p>Both integral endpoints are functions.<br />
+We can split it into two integrals <span class="math inline">\(f(x) = \int_x^c t^2 e^t \dee t + \int_c^{x^2} t^2 e^t \dee t\)</span> for some constant <span class="math inline">\(c\)</span>.<br />
+Clearly, <span class="math inline">\(\int_x^c t^2 e^t \dee t = -x^2 e^x\)</span>.<br />
+Let <span class="math inline">\(u = x^2\)</span>. Then <span class="math inline">\(\frac{\dee}{\dee x} \int_c^{x^2} t^2 e^t \dee t = \frac{\dee u}{\dee x} \frac{\dee}{\dee u} \int_c^u t^2 e^t \dee t = 2x(u^2 e^u) = 2x(x^4 e^{x^2}) = 2x^5 e^{x^2}\)</span>.<br />
+So <span class="math inline">\(f&#39;(x) = -x^2 e^x + 2x^5 e^{x^2}\)</span>.</p>
+</blockquote>
+<p>In general, to differentiate an integral with endpoints that are functions, we split it at a constant so that there is only one endpoint that is a function, then substitute temporary variables for the endpoints. We then use the chain rule to differentiate with respect to <span class="math inline">\(x\)</span> by going through the temporary variables.</p>
+<h3 id="part-2">Part 2</h3>
+<p>If <span class="math inline">\(f\)</span> is continuous over <span class="math inline">\([a, b]\)</span> and <span class="math inline">\(F\)</span> is any antiderivative of <span class="math inline">\(f\)</span>, then <span class="math inline">\(\int_a^b f(x) \dee x = F(b) - F(a)\)</span>.</p>
+<p>This allows us to easily evaluate integrals simply by finding antiderivatives. This is much simpler than using the Riemann sum or whatever.</p>
+<p>Proof:</p>
+<blockquote>
+<p>Let <span class="math inline">\(g(x) = \int_a^x f(x) \dee t\)</span>. So <span class="math inline">\(g&#39;(x) = f(x)\)</span>, by Part 1, and <span class="math inline">\(g\)</span> is an antiderivative.<br />
+Let <span class="math inline">\(F\)</span> be another antiderivative. Then <span class="math inline">\(\frac{\dee}{\dee x} (F(x) - g(x)) = F&#39;(x) - g&#39;(x) = f(x) - f(x) = 0\)</span>.<br />
+By the Constant Function Theorem, <span class="math inline">\(F(x) = g(x) + c\)</span>.<br />
+Since <span class="math inline">\(g(a) = 0\)</span>, <span class="math inline">\(F(x) - F(a) = g(x) + c - g(a) - c = g(x) = \int_a^x f(t) \dee t\)</span>.</p>
+</blockquote>
+<p>Note that <span class="math inline">\(\evalat{f(x)}_a^b\)</span> means &quot;evaluated at&quot; and <span class="math inline">\(\evalat{f(x)}_a^b = f(b) - f(a)\)</span>.</p>
+<p>Evaluate <span class="math inline">\(\int_0^1 x^2 \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math inline">\(F&#39;(x) = x^2\)</span>. One possible <span class="math inline">\(F(x)\)</span> is <span class="math inline">\(\frac{1}{3} x^3\)</span>.<br />
+By Part 2, <span class="math inline">\(\int_0^1 x^2 \dee x = F(1) - F(0) = \frac{1}{3}\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\int_0^\pi \sin x \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math inline">\(F&#39;(x) = \sin x\)</span>. One possible <span class="math inline">\(F(x)\)</span> is <span class="math inline">\(-\cos x\)</span>.<br />
+By Part 2, <span class="math inline">\(\int_0^\pi \sin x \dee x = F(\pi) - F(0) = 2\)</span>.</p>
+</blockquote>
+<h1 id="section-32">27/11/13</h1>
+<p>The integral geometricallly represents the area under the curve and above the x-axis. If it is negative, it represents the area bove the curve and below the x-axis.</p>
+<p>If <span class="math inline">\(f\)</span> is an odd function, then <span class="math inline">\(\int_{-a}^a f(x) \dee x = 0\)</span>.</p>
+<p>If <span class="math inline">\(f\)</span> is an even function, then <span class="math inline">\(\int_{-a}^a f(x) \dee x = 2\int_0^a f(x) \dee x\)</span>.</p>
+<p>So <span class="math inline">\(\int_{-\frac{\pi}{4}}^{\frac{\pi}{4}} \tan x^2 \dee x = 0\)</span>.</p>
+<p>Evaluate <span class="math inline">\(\int_{-1}^3 x \abs{x} \dee x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\abs{x}\)</span> is discontinuous at <span class="math inline">\(x = 0\)</span>.<br />
+Instead, we can evaluate <span class="math inline">\(\int_{-1}^3 x \abs{x} \dee x = \int_{-1}^0 -x^2 \dee x + \int_0^3 x^2 \dee x\)</span>.<br />
+So <span class="math inline">\(\int_{-1}^3 x \abs{x} \dee x = \evalat{-\frac{x^3}{3}}_{-1}^0 + \evalat{\frac{x^3}{3}}_0^3 = \frac{-1}{3} + \frac{27}{3} = \frac{26}{3}\)</span>.<br />
+Alternatively, we can take advantage of the fact that <span class="math inline">\(x \abs{x}\)</span> is an odd function and that <span class="math inline">\(\int_{-1}^3 x \abs{x} \dee x = \int_{-1}^1 x \abs{x} \dee x + \int_1^3 x \abs{x} \dee x\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\int_0^\pi \sin^2 x \dee x\)</span>:</p>
+<blockquote>
+<p>It is difficult to find the antiderivative if the chain rule is used in differentiating it. Instead, we use the half-angle formula: <span class="math inline">\(\sin^2 x = \frac{1}{2} (1 - \cos 2x)\)</span>.<br />
+Now we can find the antiderivative: <span class="math inline">\(\frac{1}{2}\left(x - \frac{1}{2}\sin 2x\right)\)</span>.<br />
+So <span class="math inline">\(\int_0^\pi \sin^2 x \dee x = \frac{1}{2}\left(\pi - \frac{1}{2}\sin 2\pi\right) - \frac{1}{2}\left(0 - \frac{1}{2}\sin 2 \cdot 0\right)\)</span></p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\int_1^4 \frac{x + 1}{\sqrt{x}} \dee x\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\int_1^4 \frac{x + 1}{\sqrt{x}} \dee x &amp;= \int_1^4 \frac{x}{\sqrt{x}} \dee x + \int_1^4 \frac{1}{\sqrt{x}} \dee x \\
+&amp;= \int_1^4 \sqrt{x} \dee x + \int_1^4 \frac{1}{\sqrt{x}} \dee x \\
+&amp;= \evalat{\frac{2}{3}x^\frac{3}{2}}_1^4 + \evalat{2\sqrt{x}}_1^4 \\
+&amp;= \frac{2}{3}4^\frac{3}{2} - \frac{2}{3} + 2\sqrt{4} - 2 \\
+&amp;= \frac{20}{3} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{1 - x}\right) \dee x\)</span>:</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{align}
+\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{1 - x}\right) \dee x &amp;= \int_0^{\frac{1}{\sqrt{2}}} \frac{4}{\sqrt{1 - x^2}} \dee x + \int_0^{\frac{1}{\sqrt{2}}} \frac{1}{1 - x} \dee x \\
+&amp;= \evalat{4 \arcsin x}_0^{\frac{1}{\sqrt{2}}} + \evalat{-\ln(1 - x)}_0^{\frac{1}{\sqrt{2}}} \\
+&amp;= \pi - 0 + -\ln \frac{\sqrt{2} - 1}{\sqrt{2}} - 0 = \pi + \ln \frac{\sqrt{2}}{\sqrt{2} - 1} \\
+&amp;= \pi + \ln \frac{2 + \sqrt{2}} \\
+\end{align}
+\]</span></p>
+</blockquote>
+<h2 id="indefinite-integrals">Indefinite Integrals</h2>
+<p>The <strong>indefinite integral</strong> of <span class="math inline">\(f\)</span> is <span class="math inline">\(\int f \dee x\)</span>. It is written with no integration limits.</p>
+<p>It is the <strong>collection of all possible antiderivatives</strong> of <span class="math inline">\(f(x)\)</span>.</p>
+<p><span class="math inline">\(\int_a^b f(x) \dee x\)</span> is a number, while <span class="math inline">\(\int f(x) \dee x\)</span> is a function.</p>
+<ul>
+<li><span class="math inline">\(\int x^n \dee x = \frac{x^{n + 1}}{n + 1} + c, n \ne -1\)</span></li>
+<li><span class="math inline">\(\int \frac{1}{x} = \ln \abs{x} + c\)</span></li>
+<li>other antiderivative rules...</li>
+</ul>
+<h3 id="method-of-substitution">Method of substitution</h3>
+<p>Based on the integrated form of the chain rule.</p>
+<blockquote>
+<p>Recall that <span class="math inline">\(\frac{\dee}{\dee x} f(g(x) = \frac{\dee}{\dee g} f(g) \cdot \frac{\dee}{\dee x} g(x)\)</span>.<br />
+So <span class="math inline">\(\int \frac{\dee}{\dee x} f(g(x) \dee x = \int \frac{\dee}{\dee g} f(g) \cdot \frac{\dee}{\dee x} g(x) \dee x\)</span>.<br />
+So <span class="math inline">\(f(g(x)) + c = \int \frac{\dee}{\dee g} f(g) \cdot \frac{\dee}{\dee x} g(x) \dee x\)</span>.</p>
+</blockquote>
+<blockquote>
+<p>Let <span class="math inline">\(u = g(x)\)</span>. So <span class="math inline">\(\frac{\dee u}{\dee x} = g&#39;(x)\)</span>. Then <span class="math inline">\(\dee u = g&#39;(x) \dee x\)</span>.<br />
+So <span class="math inline">\(\int \frac{\dee}{\dee g} f(g(x)) \cdot \frac{\dee}{\dee x} g(x) \dee x = \int \frac{\dee}{\dee u} f(u) \dee u = f(u) + c = f(g(x)) + c\)</span>.</p>
+</blockquote>
+<p>The basic rule is <span class="math inline">\(\int \frac{\dee}{\dee g} f(g(x)) \cdot \frac{\dee}{\dee x} g(x) \dee x = f(g(x)) + c\)</span>.</p>
+<p>Find <span class="math inline">\(\int \frac{x}{x^2 + 1} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math inline">\(u = x^2 + 1\)</span>.<br />
+So <span class="math inline">\(\dee u = 2x \dee x\)</span> and <span class="math inline">\(\int \frac{x}{x^2 + 1} \dee x = \int \frac{x \dee x}{x^2 + 1} = \int \frac{1}{x^2 + 1} \dee 2x = \int \frac{1}{u} \dee u = \frac{1}{2} \ln \abs{u} + c = \frac{\ln \abs{x^2 + 1}}{2} + c\)</span>.</p>
+</blockquote>
+<h1 id="section-33">29/11/13</h1>
+<p>The method of substitution is useful when we can use the derivative of one part of the function to cancel out another part.</p>
+<p>The method of substitution doesn't work everywhere. There are a few forms that it is most often used on:</p>
+<ul>
+<li><span class="math inline">\(\int f(x^n) \cdot x^{n - 1} \dee x\)</span>.</li>
+<li><span class="math inline">\(\int f(e^x) e^x \dee x\)</span>.</li>
+<li><span class="math inline">\(\int \frac{f(\ln x)}{x} \dee x\)</span>.</li>
+<li><span class="math inline">\(\int \frac{f(\arctan x)}{1 + x^2} \dee x\)</span>.</li>
+<li><span class="math inline">\(\int \frac{f(\arcsin x)}{\sqrt{1 - x^2}}\)</span>.</li>
+<li><span class="math inline">\(\int f(\sin x) \cos x \dee x\)</span>.</li>
+</ul>
+<p>The method is usually useful if <span class="math inline">\(g&#39;(x)\)</span> is a factor in the integrand.</p>
+<p>Evaluate <span class="math inline">\(\int \tan x \dee x\)</span>:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(\int \tan x \dee x = \int \frac{\sin x}{\cos x} \dee x\)</span>.<br />
+We have two choices for substitution here, <span class="math inline">\(\sin x\)</span> and <span class="math inline">\(\cos x\)</span>.<br />
+Let <span class="math inline">\(u = \cos x\)</span>. Then <span class="math inline">\(\dee u = -\sin x \dee x\)</span><br />
+Then <span class="math inline">\(\int \tan x \dee x = -\int \frac{1}{u} \dee u = -\ln \abs{u} + c = -\ln \abs{\cos x} + c = \ln \abs{\sec x} + c\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\int e^x \sqrt{1 + e^x} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math inline">\(u = 1 + e^x\)</span> (we also include the constant to avoid dealing with it later).<br />
+Then <span class="math inline">\(\dee x = \dee u \frac{1}{e^x}\)</span>.<br />
+So <span class="math inline">\(\int e^x \sqrt{1 + e^x} \dee x = \int e^x \sqrt{u} \dee u \frac{1}{e^x} = \int \sqrt{u} \dee u = \frac{2}{3}u^\frac{3}{2} = \frac{2}{3}(1 + e^x)^\frac{3}{2} + c\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\int x^2 \sqrt{1 + x^3} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math inline">\(u = 1 + x^3\)</span>.<br />
+Then <span class="math inline">\(\dee x = \dee u \frac{1}{3x^2}\)</span>.<br />
+So <span class="math inline">\(\int x^2 \sqrt{1 + x^3} \dee x = \int x^2 \sqrt{u} \dee u \frac{1}{3x^2} = \frac{1}{3} \int \sqrt{u} \dee u = \frac{1}{3} \frac{2}{3}u^\frac{3}{2} = \frac{2}{9}(1 + x^3)^\frac{3}{2} + c\)</span>.</p>
+</blockquote>
+<p>Evaluate <span class="math inline">\(\int x^3 \sqrt{1 + x^2} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math inline">\(u = 1 + x^2\)</span>.<br />
+Then <span class="math inline">\(\dee x = \dee u \frac{1}{2x}\)</span>.<br />
+So <span class="math inline">\(\int x^3 \sqrt{1 + x^2} \dee x = \int x^3 \sqrt{u} \dee u \frac{1}{2x} = \int x^2 \sqrt{u} \dee u \frac{1}{2}\)</span>.<br />
+We still have an <span class="math inline">\(x^2\)</span> factor. But that's OK, because clearly, <span class="math inline">\(x^2 = u - 1\)</span>.<br />
+So <span class="math inline">\(\int x^3 \sqrt{1 + x^2} \dee x = \frac{1}{2} \int (u - 1) \sqrt{u} \dee u = \frac{1}{2} \int u^\frac{3}{2} - \sqrt{u} \dee u = \frac{1}{2} \left(\frac{2}{5}u^\frac{5}{2} - \frac{2}{3}u^\frac{3}{2} + c\right) = \frac{1}{5}u^\frac{5}{2} - \frac{1}{3}u^\frac{3}{2} + c\)</span>.</p>
+</blockquote>
+<p>We can check our answer by integrating it again. It should result in the integrand if it is correct.</p>
+<p>Exercises:</p>
+<ul>
+<li><span class="math inline">\(\int \sqrt[3]{3 + x^5} x^4 \dee x\)</span></li>
+<li><span class="math inline">\(\int \frac{e^x}{1 + e^{2x}} \dee x\)</span></li>
+<li><span class="math inline">\(\int \frac{\sin(2 \ln x)}{x} \dee x\)</span></li>
+<li><span class="math inline">\(\int \frac{e^{\arctan x}}{1 + x^2} \dee x\)</span></li>
+</ul>
+<h3 id="definite-integrals">Definite Integrals</h3>
+<p>When using definite integrals, we need to be aware of the limits of integration.</p>
+<p>Consider <span class="math inline">\(\int_1^2 xe^{-x^2} \dee x\)</span>:</p>
+<blockquote>
+<p>Let <span class="math inline">\(u = -x^2\)</span>. Then <span class="math inline">\(\dee u \frac{-1}{2x} = \dee x\)</span>.<br />
+So <span class="math inline">\(\int_{u(1)}^{u(2)} xe^{-x^2} \dee x = \int_{-1}^{-4} \frac{-1}{2}e^u \dee u = -\frac{1}{2}\evalat{e^u}_{-1}^{-4} = -\frac{1}{2}(e^{-4} - e^{-1})\)</span>.</p>
+</blockquote>
+<p>Note that <code>u</code> was applied to the limits of integration when we switched the variables, and that we left the equation with <span class="math inline">\(u\)</span> rather than replacing it with <span class="math inline">\(-x^2\)</span>.</p>
+<p>Alternatively, we could avoid changing the limits of integration by substituting back again:</p>
+<blockquote>
+<p>Let <span class="math inline">\(u = -x^2\)</span>. Then <span class="math inline">\(\dee u \frac{-1}{2x} = \dee x\)</span>.<br />
+So <span class="math inline">\(\int_{u(1)}^{u(2)} xe^{-x^2} \dee x = \int_{-1}^{-4} \frac{-1}{2}e^u \dee u = -\frac{1}{2}\evalat{e^u}_{-1}^{-4} = -\frac{1}{2}\evalat{e^{-x^2}}_1^2\)</span>.</p>
+</blockquote>
+<p>Notice that this gives the same result.</p>
+<h2 id="areas-between-curves">Areas Between Curves</h2>
+<p>Given functions <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g(x)\)</span>, with <span class="math inline">\(g(x) \ge f(x)\)</span> over <span class="math inline">\([a, b]\)</span>, the area between the curves is <span class="math inline">\(\int_a^b g(x) - f(x) \dee x\)</span>.</p>
+<p>Find the area of the region bounded by <span class="math inline">\(x^2\)</span> and <span class="math inline">\(\sqrt{x}\)</span>:</p>
+<blockquote>
+<p>;wip: integrate from 0 to 1 and then do _0^1  - x^2 x</p>
+</blockquote>
+<h1 id="section-34">2/12/13</h1>
+<p>If the curves cross over (<span class="math inline">\(g(x) \ge f(x)\)</span> or <span class="math inline">\(f(x) \ge g(x)\)</span> does not hold over the entire interval), we can still find the area between the two curves. This can be done by finding the points of intersection.</p>
+<p>The points of intersection divide the interval into multiple subintervals such that <span class="math inline">\(g(x) \ge f(x)\)</span> or <span class="math inline">\(f(x) \ge g(x)\)</span> over each subinterval. The area between curves is then the sum of the areas of the subintervals.</p>
+<p>Find the area between <span class="math inline">\(y = \sin x\)</span> and <span class="math inline">\(y = \cos x\)</span> over <span class="math inline">\([0, \frac{\pi}{2}]\)</span>:</p>
+<blockquote>
+<p>The points of intersection are <span class="math inline">\((0, \frac{\pi}{4})\)</span>.<br />
+The area between curves is the sum of the area between the curves over <span class="math inline">\([0, \frac{\pi}{4}]\)</span> and the area between the curves over <span class="math inline">\([\frac{\pi}{4}, \frac{\pi}{2}]\)</span>.<br />
+So the area is <span class="math inline">\(\int_0^\frac{\pi}{4} \cos x - \sin x \dee x + \int_\frac{\pi}{4}^\frac{\pi}{2} \sin x - \cos x \dee x = \evalat{\sin x + \cos x}_0^\frac{\pi}{4} + \evalat{-\sin x - \cos x}_\frac{\pi}{4}^\frac{\pi}{2} = \sqrt{2} - 1 - 1 + \sqrt{2} = 2\sqrt{2} - 2\)</span>.</p>
+</blockquote>
+<p>Find the area of the region in the first quadrant bounded by the <span class="math inline">\(y = \frac{1}{4}x^2\)</span> and <span class="math inline">\(y = x - 1\)</span>:</p>
+<blockquote>
+<p>We find points of intersection: <span class="math inline">\(\frac{1}{4}x^2 = x - 1 \equiv x^2 - 4x + 4 = 0 \equiv (x - 2)^2\)</span>, so <span class="math inline">\(x = 2\)</span> is the point of intersection.<br />
+Note that the area is not <span class="math inline">\(\int_0^2 \left(\frac{1}{4}x^2 - (x - 1)\right) \dee x\)</span>, because that would include the area in quadrant 4.<br />
+So we split the interval into two intervals <span class="math inline">\([0, 1]\)</span> and <span class="math inline">\([1, 2]\)</span>, since <span class="math inline">\(x = 1\)</span> is where <span class="math inline">\(y = x - 1\)</span> passes below the x-axis.<br />
+In the left, we find the area between <span class="math inline">\(y = \frac{1}{4}x^2\)</span> and the x-axis (since <span class="math inline">\(y = x - 1\)</span> is outside of the first quadrant here).<br />
+On the right, we find the area between <span class="math inline">\(y = \frac{1}{4}x^2\)</span> and <span class="math inline">\(y = x - 1\)</span>.<br />
+So the area is <span class="math inline">\(\int_0^1 \frac{1}{4}x^2 \dee x + \int_1^2 (\frac{1}{4}x^2 - (x - 1)) \dee x = \evalat{\frac{1}{12}x^3}_0^1 + \evalat{\frac{1}{12}x^3 - \frac{1}{2}x^2 + x}_1^2 = \frac{1}{6}\)</span>.</p>
+</blockquote>
+<p>Exam stuff:</p>
+<ul>
+<li>Wednesday Dec. 11, 12:30pm to 3:00pm in the PAC</li>
+<li>Office hours will be posted on LEARN today.</li>
+<li>Covers everything except Newton's Method. See the course outline for a listing of topics.</li>
+<li>Basically everything from textbook chapters 1-5 plus or minus a few things.</li>
+<li>About 20% pre-midterm content, and 80% post-midterm content.</li>
+<li>Know the definitions and theorems.
+<ul>
+<li>Pre-midterm:
+<ul>
+<li>Limits</li>
+<li>Continuity</li>
+<li>Differentiability</li>
+<li>Intermediate value theorem</li>
+<li>Differentiability implies continuity</li>
+<li>Epsilon-delta proofs</li>
+</ul></li>
+<li>Post-midterm:
+<ul>
+<li>Definite integrals</li>
+<li>Indefinite integrals</li>
+<li>Mean value theorem</li>
+<li>Fundemental theorem of calculus</li>
+</ul></li>
+</ul></li>
+<li>Other things to know post-midterm:
+<ul>
+<li>Differentiation rules, implicit and logarithmic differentiation</li>
+<li>Linear approximation, related rates, optimization (just a little bit)</li>
+<li>Curve sketching</li>
+<li>l'Hopital's rule</li>
+<li>Integral definition (Riemann sum), integral properties, substitution method</li>
+<li>Areas between curves</li>
+</ul></li>
+</ul>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

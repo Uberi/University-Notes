@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="author" content="$author-meta$" />
   <title>PHIL145 | Anthony Zhang</title>
   <link rel="stylesheet" href="../css/base.css" type="text/css">
   <link rel="stylesheet" href="../css/note.css" type="text/css">
@@ -11,6 +10,7 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -70,33 +70,1134 @@
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
-<p>$if(toc)$</p>
-<div id="$idprefix$TOC">
-$toc$
-</div>
-<p>$endif$</p>
-<h1 id="lecture-notes-by-anthony-zhang.">Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+<h2 id="phil145">PHIL145</h2>
+<p>Critical Thinking</p>
+<pre><code>Instructor: Michael &quot;Mike&quot; McEwan
+Section 001
+Email: mmcewan@uwaterloo.ca
+Office: Hagey Hall 362
+Office hours: Mondays 1:00pm-3:00pm, first come, first serve
+TA: Teresa Branch-Smith
+Office Hours: Wednesdays 11:30am-1:00pm in HH 362</code></pre>
+<h1 id="section">6/1/14</h1>
+<p>Midterm Feb. 25 in AL 116 4pm.</p>
+<p>All exams are not cumulative, only covering half of the course materiel.</p>
+<p>Make sure to read the course outline on LEARN.</p>
+<p>This course uses i-Clickers. Register the clickers on the <a href="https://www.student.cs.uwaterloo.ca/~pkates/uw-clicker.html">registration page</a>.</p>
+<p>When emailing instructors, put &quot;Phil 145&quot; in the subject line.</p>
+<p>Lectures supplement the lectures, covers the important parts of the readings.</p>
+<p>People with laptops should <strong>sit at the back</strong>. I should probably bring my glasses in that case.</p>
+<p>Lecture slides, announcements, and quizzes are available on LEARN.</p>
+<p>General goal of course is to improve reasoning skills - differentiating between good/bad reasoning (evaluative), and communicate reasoning/evalutations of reasoning to others (communicative).</p>
+<p>Topics:</p>
 <ul>
-<li><a href="/blog/" class="page">blog</a></li>
-<li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
-<li><a href="/resume.pdf" class="page">résumé</a></li>
-<li><a href="https://github.com/Uberi" class="contact">github</a></li>
-<li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
-<li><script type="text/javascript">
-<!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x65;&#x6d;&#x61;&#x69;&#108;'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
-<li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
-<li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
-<li><a href="https://keybase.io/uberi" class="info">public key</a></li>
+<li>Study of arguments - structure, logical forms, types, evaluative methods/standards, standardization of natural language arguments, fallacies.</li>
+<li>Study of reasoning - features/constraints on human cognition, numbers, statistics, cognitive biases, social cognition.</li>
 </ul>
-<p><span class="math">\[ \newcommand{\set}[1]{\left\{ #1 \right\}} \newcommand{\tup}[1]{\left\langle #1 \right\rangle} \newcommand{\abs}[1]{\left\lvert #1 \right\rvert} \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} \newcommand{\ceil}[1]{\left\lceil#1 \right\rceil} \newcommand{\mb}[1]{\mathbb{#1}} \newcommand{\rem}{\operatorname{rem}} \newcommand{\sign}{\operatorname{sign}} \newcommand{\imag}{\boldsymbol{i}} \newcommand{\dee}{\mathop{}\!\mathrm{d}} \newcommand{\lH}{\overset{\text{l'H}}{=}} \newcommand{\evalat}[1]{\left.\left(#1\right)\right|} \newcommand{\sech}{\operatorname{sech}} \newcommand{\spn}{\operatorname{Span}} \newcommand{\proj}{\operatorname{proj}} \newcommand{\prp}{\operatorname{perp}} \newcommand{\refl}{\operatorname{refl}} \newcommand{\magn}[1]{\left\lVert #1 \right\rVert} \newcommand{\rank}{\operatorname{rank}} \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]} \newcommand{\range}{\operatorname{Range}} \newcommand{\adj}{\operatorname{adj}} \newcommand{\cof}{\operatorname{cof}} \newcommand{\diag}{\operatorname{diag}} \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)} \]</span></p>
-<p>$body$ $for(include-after)$ $include-after$ $endfor$</p>
-<div class="license">
-<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" alt="Creative Commons License" /></a> This work by <a href="https://uberi.github.io/">Anthony Zhang</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright 2013-2017 Anthony Zhang.
-</div>
+<p>Common sense is not as common as it might seem. Ideas are only obvious after we have already been exposed to them. Human beings make systematic and widespread errors in their reasoning that seem perfectly reasonable.</p>
+<h1 id="section-1">8/1/14</h1>
+<h2 id="critical-thinking">Critical Thinking</h2>
+<p>Refer to CS135 notes for i-Clicker setup. The frequency code is BA.</p>
+<p>What is critical thinking? How do we develop critical thinking skills?</p>
+<p>Critical thinking is a <strong>type of thinking</strong> where one reasons in a <strong>reliable or successful way</strong>.</p>
+<p>Reasoning is a cognitive process of deliberation that results in the formation of belief, a judgement, or a choice. This course focuses on beliefs.</p>
+<p>One way to determine whether reasoning is successful or reliable is to consider the properties of the beliefs, judgements, and choices that it results in.</p>
+<p>We want the resulting beliefs to be <strong>true</strong>, or at least <strong>probably true</strong>, and possibly others, like simplicity, coherence with other beliefs, correspondence with the world, etc.</p>
+<p>So we want to reason successfully, and only successful reasoning results in true beliefs. Therefore:</p>
+<blockquote>
+<p>Critical thinking is reasoning in a way that leads to the production of true (or approximately or probably true) beliefs.<br />
+Critical thinking is successful or reliable reasoning.</p>
+</blockquote>
+<p>We care about true beliefs because people are more likely to be successful (achieve their goals) if they act on true beliefs.</p>
+<p>How do we learn to reason reliably?</p>
+<p>There are two types of reasoning:</p>
+<ul>
+<li>Domain-specific reasoning is reasoning in a specific topic, like how chemistry classes teach one to reason well about what compounds will be produced in a given reaction.</li>
+<li>Domain-general reasoning is reasoning that is applicable to any field, giving much broader principles that work everywhere. This is the focus of this course.</li>
+</ul>
+<p>The <strong>metacognitive approach</strong> is learning how to think about thinking. Learning to think well about a subject means learning new concepts and how to apply them. Likewise with reasoning. We will use these concepts to analyze, explain, criticize, and correct reasoning.</p>
+<p>Critical thinking is a philosophy class for historical reasons, but there are also many connections between the fields. Math, science, psychology, and a lot of other fields are simply branches of philosophy. Philosophical questions often require looking into domain-general reasoning, and has close connections to critical thinking.</p>
+<h1 id="section-2">10/1/14</h1>
+<p>Consider Zeno's paradox:</p>
+<ol style="list-style-type: decimal">
+<li>Achilles wants to run from point A to B.</li>
+<li>To do this, he must go from the first point to halfway to the second point.</li>
+<li>He must also go to halfway again to the second point.</li>
+<li>This repeats infinitely.</li>
+<li>Therefore, Achilles can never finish the race.</li>
+</ol>
+<p>This argument seems reasonable, but the conclusion is clearly false. How is this possible? In fact, all the premises are true, but they do not support the conclusion.</p>
+<p>This is because the distance becomes infinitely small, while the amount of time taken is also infinitely small. Mathematically, the sum of the times converges to a finite value even though there are an infinite number of times.</p>
+<h2 id="reasoning">Reasoning</h2>
+<p>Philosophical questions are often questions with no established methods for solving them. &quot;Is the stove on?&quot; has established methods for solving - check the stove.</p>
+<p>Philosophers develop concepts and methods of looking at the reasoning about these questions. Domain-general reasoning is often the only way we can look a these problems when they are too new or difficult to solve otherwise. This is also useful in math, logic, science, etc.</p>
+<p>Reasoning is the <strong>process of deliberation whereby one draws a conclusion</strong>.</p>
+<p>One of our metacognitive abilities is <strong>the ability to give reasons</strong>. When we give reasons, we put the aspects of reasoning on display. Reasons are offered in support of the conclusion - they play a <strong>justificatory</strong> role.</p>
+<p>When we examine reasons, we can evaluate the reliability of the reasoning and how acceptable the conclusions are.</p>
+<p>Presenting an argument is a way of giving expression in language to our reasons - a way of putting reasoning on display.</p>
+<p>The study of argumentation lets us hone our reasoning skills.</p>
+<p>An argument can mean a fight or a disagreement, but also a reasoned defence of a claim. We are more interested in the second definition.</p>
+<p>An argument can also be abstracted into a set of premises implying a conclusion.</p>
+<p>People can say the same words in the same sentence but communicate different things: &quot;one is a prime number.&quot;, &quot;is one a prime number?&quot;. How do we differentiate assertions, promises, threats, questions, and other types of sentences? In the previous example, the two imply different relationships between the person (knowing vs. not knowing) and the claim and asks different things of the audience (agreeing vs. answering).</p>
+<p>What is the real difference between these different ways of communicate the same words? Everything is said in a certain context, which is an important part of understanding the intent of the words.</p>
+<p>Assertions are claims presented as true. By asserting a claim:</p>
+<ul>
+<li>We present the claim as true.</li>
+<li>We invite people to agree, to invite others to form the belief that the claim is true.</li>
+<li>We commit to either defend or retract assertions when challenged or when new evidence appears - a commitment to put reasoning on display when required to.</li>
+</ul>
+<h1 id="section-3">13/1/14</h1>
+<p>Committing to defending assertions has multiple benefits: filtering information, checking our beliefs against others', helping us change our minds, and explaining our reasoning being helpful for clarifying/organizing our own beliefs.</p>
+<h3 id="identifying-arguments">Identifying Arguments</h3>
+<p>The fundamental unit of rational exchange is the argument. Arguments show the reasonableness of an assertion - if the argument succeeds in doing so, everyone is justified in believing the assertion is true.</p>
+<p>Two working definitions of arguments:</p>
+<ul>
+<li>Broad definition: argumentation is the practise by which we aim to show the reasonableness of an assertion. An argument is the thing presented when trying to meet this aim - a verbal or written object.</li>
+<li>Narrow definition: an argument is a set of claims in which one or more of the claims, the premises, are offered as support of another claim, the conclusion - an abstract object.</li>
+</ul>
+<p>The broad definition focuses on the practise of argumentation and connects it to assertion - the communicative act.</p>
+<p>The narrow definition focuses on the products of the communicative act. This is what we will focus on in this course.</p>
+<p>Most things where the broad definition applies also has the narrow definition apply - the narrow definition is virtually a subset of the broad one.</p>
+<p>Arguments are often presented as sets of sentences. We will be studying the narrow definition more in the coming weeks.</p>
+<p>When is a set of sentences an argument? There must be a conclusion - an assertion - and premises that defend this assertion. A good argument has premises that the audience already accepts.</p>
+<blockquote>
+<p>Toronto is the largest city in Canada.</p>
+</blockquote>
+<p>This is not an argument, because there is only a conclusion, without any supporting premises.</p>
+<blockquote>
+<p>Will you get lost if you walk around Toronto?</p>
+</blockquote>
+<p>There is neither a conclusion or any premises.</p>
+<blockquote>
+<p>Don't get lost when you walk around Toronto. I will make fun of you forever if you do.</p>
+</blockquote>
+<p>There are two assertions, both conclusions. Neither of the assertions support each other.</p>
+<blockquote>
+<p>You will get lost if you walk around Toronto. It is the largest city in Canada.</p>
+</blockquote>
+<p>This is an argument, though not a very strong one. The premise that the city is large implies the conclusion that it is more likely that one will get lost.</p>
+<p>To determine whether something is an argument, all three of the following must be true:</p>
+<ul>
+<li>It must be a set of claims.</li>
+<li>It must have premises.</li>
+<li>It must have a conclusion.</li>
+</ul>
+<h1 id="section-4">15/1/14</h1>
+<p>Assertions are the same thing as claims in this course - the terms are interchangeable.</p>
+<blockquote>
+<p>Descartes argues that anyone who thinks, can know they exist. He reasons that a precondition of thinking is existence.</p>
+</blockquote>
+<p>This is just reporting what was said, not an argument.</p>
+<p>Note that the second sentence, describing Descartes' reasoning, does not support the claim that anyone who thinks can know they exists. In other words, the second sentence does not support the first, because the second sentence is a <strong>report</strong> rather than a premise.</p>
+<p>Rules of thumb for identifying arguments:</p>
+<ul>
+<li>Arguments are usually represented by more than one sentence in English.</li>
+<li>Both conclusions and premises of arguments are generally statements, not questions or commands.</li>
+<li>Arguments are distinguished from reports in that reports make a series of assertions but do not attempt to support them.</li>
+</ul>
+<p>Note that there are exceptions to these rules. For example, for the second point, a rhetorical question can make a claim in English, and so the conclusion can be a question. The context of the statements matters.</p>
+<p>Sometimes arguments may be explicitly identified, with &quot;I argue that <conclusion>&quot;, &quot;This is because <premise>&quot;, &quot;Therefore, <conclusion>&quot;, &quot;It follows that <conclusion>&quot;.</p>
+<p>Look out for conclusions not at the end of passages, implicit premises, implicit conclusions, and rhetorical questions. Rhetorical questions should be treated like claims.</p>
+<h3 id="explanations">Explanations</h3>
+<p>An <strong>explanation</strong> differs from an argument in that the author intends that the conclusion is already believed by others, rather than trying to convince others. Arguments aim to how something is worth believing, while explanations make better sense of what is already believed. It is the intent of the author that is important.</p>
+<p>Therefore, whether something is an argument or an explanation depends on whether the author thinks the audience already believes it: &quot;Professional athletes are physically fit because they train every day&quot; is an argument for people who don't believe that they are fit, and otherwise an explanation.</p>
+<h1 id="section-5">17/1/14</h1>
+<p>Arguments can be categorized by how the author intends for the premises to support the conclusion.</p>
+<p>Overview of argument types:</p>
+<p>Deductive arguments aim for <strong>soundness</strong>. They are <strong>non-ampliative</strong> and <strong>truth-preserving</strong> (we can never start with true premises and reach a false conclusion). Deductive arguments have their premises either support the conclusion perfectly, or not at all - they are all-or-nothing.</p>
+<p>Sound deductive arguments guarantee the truth of the conclusion. A sound deductive argument is said to <strong>entail</strong> its conclusion.</p>
+<p>An argument is <strong>sound</strong> if and only if it is <strong>valid</strong> and all the premises of the argument are <strong>true</strong>. To evaluate a deductive argument, we need to ensure that these two conditions are met.</p>
+<p>An argument is <strong>valid</strong> if and only if there is no way for the conclusion to be false if the premises are true. If an argument is valid, then the truth of the premises guarantees the truth of the conclusion. Valid arguments do not require us to look at the world - it only looks at the relationship between statements.</p>
+<p>A valid argument does not tell us whether the premises are true, and therefore does not tell us if the conclusion is true.</p>
+<p>We can prove that an argument is not valid by using the <strong>method of counter-example</strong>. A counter-example is a possible case where the premises are true, but the conclusion is false. We only need to find one counter-example to disprove validity. If there are no counter-examples, then the argument is proven valid.</p>
+<pre><code>Prime numbers are only divisible by 1 and themselves.
+All even numbers are divisible by 2.
+-----------------------------------------------------
+All prime numbers are odd.</code></pre>
+<p>Here, a counter-example would be 2, which is prime but even.</p>
+<p>We must be sure that the counter-example is possible:</p>
+<pre><code>Either you are taller than me or you are shorter than me.
+You are not taller than me.
+---------------------------------------------------------
+You are shorter than me.</code></pre>
+<p>Here, the counter-example &quot;You are the same height&quot; is not admissible because this does not satisfy the first premise.</p>
+<p>Usually, the content of the argument determines whether it is valid:</p>
+<pre><code>Bob is a bachelor
+-----------------------
+Bob is an unmarried man</code></pre>
+<p>In some special cases, the form of the argument itself is enough to determine whether it is valid:</p>
+<pre><code>Bob is a bachelor
+-----------------
+Bob is a bachelor</code></pre>
+<p>A common form is <strong>modus ponens</strong>:</p>
+<pre><code>If P, then Q
+P
+------------
+Q</code></pre>
+<p>Another is <strong>hypothetical syllogism</strong>:</p>
+<pre><code>If P, then Q
+If Q, then R
+------------
+If P, then R</code></pre>
+<p>Here, P and Q represent claims that can be asserted. They can be as complicated as we like.</p>
+<p>There are a variety of valid forms. A sample of them is available in the Week 2 lecture slides, slide 50 in particular.</p>
+<p>We can combine argument forms to get more complex arguments. For example, hypothetical syllogism and modus ponens together:</p>
+<pre><code>If P, then Q
+If Q, then R
+P
+------------
+If P, then R ; derived premises
+------------
+R</code></pre>
+<p>This is the basis of mathematical proof theory.</p>
+<h1 id="section-6">20/1/14</h1>
+<p>We can tentatively evaluate an argument's validity by matching it against the valid argument forms and trying to think of counter-examples.</p>
+<pre><code>If Pi is less than 4, then God exists.
+Pi is less than 4.
+--------------------------------------
+God exists.</code></pre>
+<p>This is valid but not <strong>rationally compelling</strong>. Validity is not enough to determine whether an argument is &quot;good&quot;.</p>
+<p>Our goal is to obtain true conclusions.</p>
+<p>However, arguments can be valid, yet have false conclusions. Additionally, they might not offer relevant support for the conclusion - the first premise in the above argument is unlikely to be accepted by the audience.</p>
+<p>Validity is a property of the structure of an argument.</p>
+<p>A premise can be supported by other premises. These other premises support a conclusion, which is then treated as a premise in our argument. These <strong>sub-arguments</strong> appear often in more complex arguments. All the sub-arguments must be valid for an argument to be valid. For example, the combined argument above can be written as:</p>
+<ul>
+<li>R, because:
+<ul>
+<li>If P, then R, because:
+<ul>
+<li>If P, then Q</li>
+<li>If Q, then R</li>
+</ul></li>
+<li>P</li>
+</ul></li>
+</ul>
+<p><strong>Linked support</strong> is when two or more premises only entail the conclusion together:</p>
+<pre><code>The snow is white
+The grass is green
+----------------------------------------
+The snow is white and the grass is green</code></pre>
+<p><strong>Convergent support</strong> is when one or more premises independently entail the conclusion. Any one of the premises can make the conclusion true:</p>
+<pre><code>The snow is white
+The grass is green
+---------------------------------------
+The snow is white or the grass is green</code></pre>
+<p>So when there is only one premise, it always offers convergent support.</p>
+<p>We can diagram arguments with their sub-arguments as trees in node-arrow diagrams. We often number the statements and then label the nodes with the statement numbers.</p>
+<p>Consider the following argument:</p>
+<blockquote>
+<p>It is either sunny or cloudy. If it is raining, then it is definitely not sunny. It is raining. Therefore, it is not sunny. Therefore, it is cloudy. Therefore, it is cloudy or Bob is your uncle.</p>
+</blockquote>
+<p>We can write it as:</p>
+<ul>
+<li>It is cloudy or Bob is your uncle, because:
+<ul>
+<li>It is cloudy, because:
+<ul>
+<li>It is either sunny or cloudy</li>
+<li>It is not sunny, because:
+<ul>
+<li>If it is raining, then it is definitely not sunny</li>
+<li>It is raining</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>This argument is valid because each sub-argument is valid and it itself is valid.</p>
+<h3 id="truth">Truth</h3>
+<p>Truth is a property of sentences, not arguments or sets of statements. When we say an argument is true, this is not a meaningful statement, but we might mean that it is sound or rationally compelling.</p>
+<p><strong>Truth conditions</strong> are the conditions under which a sentence is true.</p>
+<p>To assert a sentence means to claim it is true. We don't always know for sure if it is true or false.</p>
+<p>However, we can judge whether we have good reason to believe the sentence is true or false. We therefore judge the whether it is reasonable to believe whether a deductive argument is sound.</p>
+<p><strong>Contingent truths</strong> are truths that happen to be true but could have been false if history went a different way. For example, &quot;Waterloo has two universities&quot; could have been false if history unfolded such that one of the universities did not start. Another might be &quot;The Eiffel Tower is in France&quot;.</p>
+<p><strong>Necessary truths</strong> are truths that are true no matter which way history goes, or how the world developed. For example, &quot;All bachelors are unmarried&quot;</p>
+<p>Similarly, <strong>contingent falsehoods</strong> (Waterloo has three universities) and <strong>necessary falsehoods</strong> (All bachelors are married) exist.</p>
+<p>Necessary truths/falsehoods could be that way because of the <strong>form</strong>, or the <strong>content</strong>:</p>
+<p>&quot;All bachelors are unmarried&quot; is a necessary truth because of the meaning of the word &quot;bachelor&quot;, which is part of the content of the sentence.</p>
+<p>&quot;If it is raining, then it is raining&quot; is a necessary truth because of the form of the argument itself, and does not require us to know what rain is.</p>
+<blockquote>
+<p>This sentence is false.</p>
+</blockquote>
+<p>The above is neither necessarily true or necessarily false. It is known as the <strong>Liar's sentence</strong>. People have disagreed on the truth value of this sentence for a long time.</p>
+<h1 id="section-7">22/1/14</h1>
+<pre><code>The moon is made of cheese. Therefore, if God exists, then God exists.
+
+The moon is made of cheese
+------------------------------
+If God exists, then God exists</code></pre>
+<p>This is a valid but unsound argument. This is because the truth of the premises always implies the truth of the conclusion - the conclusion is always true, so if the premises are true, then the conclusion is also true.</p>
+<p><strong>Compound</strong> or <strong>complex</strong> sentences can be constructed out of <strong>atomic</strong> sentences. The truth value of these sentences are often determined by the truth value of their component atomic sentences, as well as the <strong>logical connectives</strong> between the atomic sentences.</p>
+<p>An atomic sentence may be something like &quot;It is raining&quot; or &quot;The sky is blue&quot;.</p>
+<h3 id="conjunctive">Conjunctive</h3>
+<p>A complex sentence might be &quot;It is raining, but it is warm&quot;.</p>
+<p>This is a <strong>conjunctive</strong> sentence - one made up of sub-sentences known as <strong>conjuncts</strong>, often appearing in the form of &quot;P and/but/however/although/moreover Q&quot;.</p>
+<p>The conjunctive statement works like a logical AND.</p>
+<h3 id="disjunctive">Disjunctive</h3>
+<p>A complex sentence might be &quot;It is raining, or it is warm&quot; (inclusive or).</p>
+<p>This is a <strong>disjunctive</strong> sentence - one made up of sub-sentences known as <strong>disjuncts</strong>, often appearing in the form of &quot;P or/unless Q&quot;</p>
+<p>The disjunctive statement works like a logical OR.</p>
+<p>Sometimes, English implicitly specifies that disjunction is restricted: &quot;You will pass the exam or fail it&quot; implies that you cannot do both. Standard disjunction is an <strong>inclusive or</strong>, but the special restricted disjunction is an <strong>exclusive or</strong>. The restricted disjunctive statement is of the form &quot;P or Q (but not both)&quot;, or &quot;either P or Q&quot;.</p>
+<p>If the type of disjunction is not specified, it is open for interpretation, but should be clarified.</p>
+<h3 id="conditional">Conditional</h3>
+<p>A complex sentence like &quot;if it is warm, then it is raining&quot; is a <strong>conditional sentence</strong>. The condition is called the <strong>antecedent</strong>, and the result is called the <strong>consequent</strong>.</p>
+<p>There are also multiple types of conditionals. The <strong>material conditional</strong> is always true unless the antecedent is true yet the conclusion is false.</p>
+<p>They often take the form of &quot;Q if P&quot;, &quot;P only if Q&quot;, or &quot;if P, then Q&quot; - these are all equivalent.</p>
+<p>It is still true when the antecedent is false because it cannot be invalidated that way.</p>
+<p>There is also the <strong>subjunctive conditionals</strong>: &quot;If Germany had won World War II, then the world would be no different today&quot;. This expresses a hypothetical claim - something that would be true if something else is true. The difference is that we already know the antecedent is false, but states what might happen if it were true. These are often distinguished by their using past tense.</p>
+<p>A complex sentence like &quot;it is not raining&quot; is a <strong>negated sentence</strong> - one where a sentence is flipped around to give its opposite. The negated sentence works like a logical NOT, with the form &quot;not P&quot;.</p>
+<h1 id="section-8">24/1/14</h1>
+<p>Two statements are <strong>logically equivalent</strong> if they are both true under the same conditions, and false under the same conditions. We represent this relation with <span class="math inline">\(P \equiv Q\)</span> or <span class="math inline">\(P \iff Q\)</span> (P if and only if Q).</p>
+<p>We can draw a truth table to do this, and I'm not going to because we already covered this in MATH135.</p>
+<h2 id="ampliative-arguments">Ampliative Arguments</h2>
+<p>An argument is <strong>ampliative</strong> if the conclusion expresses more information than that expressed in the premises. All valid deductive arguments are by definition non-ampliative, since if they had more information, we could not know that it is valid. As a result, all ampliative arguments cannot be known to be valid.</p>
+<p>A non-ampliative argument might be &quot;7 is a prime number, and therefore is only divisible by 1 and 7&quot;, while an ampliative one might be &quot;the sun set every day before yesterday, so it will set today&quot;.</p>
+<p>Ampliative arguments are evaluated based on how well it supports the conclusion. If the premises make the argument rationally believable, then the argument is good. Otherwise, it is not.</p>
+<p>We call these arguments <strong>cogent</strong>. In other words, a cogent argument is one that makes the conclusion <strong>rationally believable</strong> - it gives us good reaon to believe the conclusion. All sound arguments are by definition cogent.</p>
+<p>However, many valid arguments are not cogent, and many invalid arguments are cogent. They are not the same thing.</p>
+<p>Cogency is concerned only with the likeliness/probability of counterexamples existing. Cogent arguments have highly unlikely counterexamples or none at all, while Non-cogent arguments have likely counterexamples. In contrast, validity is concerned with the possibility of there being counterexamples at all.</p>
+<h1 id="section-9">27/1/14</h1>
+<p>An argument is cogent if the conclusion is more likely than all of its other counterexamples.</p>
+<p>The thing about deductive arguments is that since they add no information, we need to start with some information in order to have a deductive argument. Most empirical reasoning (reasoning based on experience or observation) is ampliative. This includes most scientific inferences.</p>
+<p>Ampliative arguments have two important properties:</p>
+<ul>
+<li>Support provided by the premises comes in degrees - ampliative arguments might support the conclusion more or less, though never certainly.</li>
+<li>All ampliative arguments are <strong>defeasible</strong> - no amount of support can fully guarantee the conclusion is true.</li>
+</ul>
+<p>Ampliative arguments can be strengthened or weakened by adding more premises. Cogency is a measure of how well the premises of an ampliative argument supports the conclusion. A strongly cogent argument offers a lot of support, while a weakly cogent argument offers little support.</p>
+<p>For example, consider the following ampliative argument:</p>
+<pre><code>The entity looks like a duck.
+The entity quacks like a duck.
+------------------------------
+The entity is a duck.</code></pre>
+<p>We can weaken an argument by adding information:</p>
+<pre><code>The entity looks like a duck.
+The entity quacks like a duck.
+The entity is swearing loudly in German.
+----------------------------------------
+The entity is a duck.</code></pre>
+<p>Or we can strengthen it:</p>
+<pre><code>The entity looks like a duck.
+The entity quacks like a duck.
+The DNA test indicated duck DNA.
+--------------------------------
+The entity is a duck.</code></pre>
+<h3 id="states-of-information">States of Information</h3>
+<p>When evaluating a claim, one's <strong>state of information</strong> is the set of all relevant information/evidence available. Reasoning that is defeasible is always dependent on one's state of information.</p>
+<p>The premises in an ampliative argument represent the author's state of information. The audience might have a different state of information, so the cogency of an argument can differ from person to person.</p>
+<p>When one has no information or information that points to the conclusion being equally likely to be true or false, one is in a <strong>neutral state of information</strong>.</p>
+<p>In a neutral state of information, it is reasonable to withhold judgement, where we do not accept the proposition, and do not reject it. We simply do not say anything about the truth of the information, since we won't have any information either way.</p>
+<p>For example, we are in a neutral state of information with regards to the proposition &quot;the next coin flip will result in heads&quot;, because there is no evidence that it is any more likely than tails.</p>
+<h1 id="section-10">29/1/14</h1>
+<h3 id="inductive-arguments">Inductive Arguments</h3>
+<p>Inductive arguments have conclusions that are unknown cases derived from known cases - &quot;more of the same&quot;. For example:</p>
+<pre><code>The sun rose yesterday.
+The sun rose 2 days ago.
+...
+The sun rose 394857 days ago.
+---------------------------------
+The sun will rise again tomorrow.</code></pre>
+<p>This is a pretty good inductive argument. Alternatively:</p>
+<pre><code>This rose is red.
+------------------
+All roses are red.</code></pre>
+<p>This is not so good an inductive argument.</p>
+<p>The premises of an inductive argument used to infer the conclusion are called the <strong>inductive base</strong>.</p>
+<p>How do we evaluate inductive arguments? The strength of inductive arguments is based on how similar the observed and unobserved cases are - <strong>how similar the cases in the premises are to the conclusion</strong>, in addition to the actual <strong>number of observed cases</strong>.</p>
+<p>In other words, an inductive argument is strong/cogent if and only if it has a large sample size and the samples are representative of the case in the conclusion.</p>
+<p>Inductive strength is a matter of degree. Inductive strength is changed if and only if there is new evidence introduced.</p>
+<p>Arguments can incorporate all different types of arguments as sub-arguments - for example, an argument might use induction and then modus ponens.</p>
+<pre><code>This duck quacked.
+Another duck quacked.
+All ducks quack.
+If it quacks, it is annoying.
+-----------------------------
+All ducks are annoying.</code></pre>
+<p>This is a <strong>valid argument</strong> - assuming the premises are true, the conclusion will always be true. The inductive part simply makes the argument more cogent, since it provides better reason to believe the premise &quot;All ducks quack&quot;.</p>
+<h3 id="abductive-arguments">Abductive Arguments</h3>
+<p>Abductive arguments have conclusions that unify, explain, or rationalize a set of facts. It is an explanation for the truth of the premises.</p>
+<p>They are inferences to the best way to make sense of the observations in the premises.</p>
+<pre><code>Ted was standing over the body.
+Ted was holding a weapon.
+Ted confessed to the crime.
+-------------------------------
+Ted is the murderer.</code></pre>
+<p>This is a strong/cogent abductive argument, because the conclusion explains the premises very well.</p>
+<pre><code>I rolled the die twice.
+I got 6 both times.
+-----------------------
+The die is rigged.</code></pre>
+<p>Even though the premises are true, the argument is rather weak, because the premises are not really worthy or needing of explanation.</p>
+<p>The strength of abductive arguments depends on the ability of the conclusion to explain why the premises are true.</p>
+<p>If a premise doesn't really need an explanation, it doesn't really add much support to the conclusion.</p>
+<p>As always, we can evaluate cogency/strength by considering how likely the counter-examples are true.</p>
+<h3 id="analogical-arguments">Analogical Arguments</h3>
+<p>Analogical arguments draw conclusions based on a comparison. There are three important parts:</p>
+<ul>
+<li>The <strong>analogue</strong> is the thing we draw conclusions from.</li>
+<li>The <strong>primary subject</strong> is the thing we want to make a conclusion about.</li>
+<li>The <strong>claims of similarity</strong> between the analogue and primary subject.</li>
+</ul>
+<p>For example:</p>
+<pre><code>The A is similar to B.
+The A has property Z.
+------------------------------
+The B has property Z.</code></pre>
+<p>The claims of similarity is often implicit and unstated in the text.</p>
+<p>Consider the following analogical argument: &quot;when I visited this doctor he was attentive and sympathetic. I did what he suggested and it solved my problem. If you go see him, he will solve your problem too.&quot;</p>
+<pre><code>The doctor solved my problem.
+You have the same problem as I did.
+-----------------------------------
+The doctor will solve your problem.</code></pre>
+<p>Here, the primary subject is the problem of the person being addressed (&quot;your problem&quot;). The analogue is the author's problem (&quot;my problem&quot;). The claim of similarity is that both problems are the same and that the doctor will treat it the same.</p>
+<p>There are also a few types of analogical arguments:</p>
+<ul>
+<li><strong>Inductive analogies</strong> draw conclusions about unobserved cases from relevant similar cases.</li>
+<li><strong>Consistency analogies</strong> draw conclusions about what should be true from relevantly similar cases</li>
+<li><strong>Refutations by analogy</strong> try to show that a claim cannot be true because it has problematic consequences in relevant similar cases.</li>
+</ul>
+<p>Consider the analogy &quot;the model lost stability in the wind tunnel. Since the model was built to scale, the plane will also lose stability&quot;:</p>
+<pre><code>The model lost stability.
+The model has a similar structure to the plane.
+-----------------------------------------------
+The plane will lose stability.</code></pre>
+<p>This is an inductive analogy, since it draws conclusions about an unobserved case.</p>
+<p>Consider the analogy &quot;Society does not shun those suffering from polio or tuberculosis. Why does it shun those with mental health issues?&quot;:</p>
+<pre><code>Society does not shun those with physical diseases.
+Mental and physical diseases are both diseases.
+---------------------------------------------------
+Society should not shun those with mental diseases.</code></pre>
+<p>Consider the analogy &quot;saying you shouldn't take medicine because it's unnatural is like saying we shouldn't ride bicycles because they are unnatural creations&quot;:</p>
+<pre><code>It is ridiculous to say that we shouldn&#39;t ride bicycles because they are unnatural.
+Both bicycles and medicine are unnatural.
+-----------------------------------------------------------------------------------
+It is ridiculous to say that we shouldn&#39;t take medicine because it is unnatural.</code></pre>
+<p>This is a refutation by analogy, because the consequences in a similar case mean that we cannot accept a claim.</p>
+<p>The strength of an analogy is based on the similarities between the analogue and primary subject. More similarity means more cogency and a stronger argument.</p>
+<p>We can extend the method of counterexample to analogies. When evaluating analogical arguments, we look for <strong>disanalogies</strong> - relevant dissimilarities between the primary subject and analogue that weaken the claim to similarity.</p>
+<p>Disanalogies simply add premises to an analogical argument that reduce its cogency.</p>
+<h2 id="systematic-argument-evaluation">Systematic Argument Evaluation</h2>
+<p>We now develop a systematic approach to argument evaluation. When evaluating an argument, we can do so using the following process:</p>
+<ol style="list-style-type: decimal">
+<li>Rewrite the argument in standard form.</li>
+<li>Diagram the argument structure as a tree or diagram.</li>
+<li>Evaluate the argument based on:
+<ul>
+<li>How acceptable the premises are (acceptability).</li>
+<li>How relevant the premises are to the conclusion (relevancy).</li>
+<li>How well grounded the conclusion is in the premises - how much the conclusion is supported by the premises (groundedness).</li>
+</ul></li>
+</ol>
+<p>We use these criteria to evaluate the validity, soundness, or cogency of any given argument.</p>
+<h3 id="standard-form">Standard Form</h3>
+<p>Standard form is a way of representing an argument that makes the structure of an argument explicit, making it easy to see the actual argument being made.</p>
+<p>In standard form, we put our premises in a numbered list. Implicit premises have their number underlined.</p>
+<p>The conclusion goes after the list, separated by a horizontal line (Fitch bar).</p>
+<p>When we convert arguments into standard form, we need to first process the premises and conclusion:</p>
+<ul>
+<li>Remove all sentences that are not the conclusion or sentences offered in support of the conclusion.</li>
+<li>Omit redundant/duplicate sentences (sentences that are logically equivalent to another sentence).</li>
+<li>Convert the sentences into proper standalone statements, making sure to indicate changes to the original text.</li>
+</ul>
+<p>Consider the following argument:</p>
+<blockquote>
+<p>Is littering harmful? You bet it is. After all, animals choke on plastic wrappers and people cut themselves on broken glass. I can't stand people that litter! Our elected officials should pass laws against littering because it is their duty to reduce harm whenever possible.</p>
+</blockquote>
+<p>We now identify the conclusion and obvious premises (by looking for keywords like &quot;because&quot; and &quot;after all&quot;), and write each sentence alone, making sure each sentence is fully formed and stands alone:</p>
+<pre><code>1. Is littering harmful?
+2. You bet [littering] is [harmful].
+3. After all, animals choke on plastic wrappers and people cut themselves on broken glass.
+4. I can&#39;t stand people that litter!
+5. It is [our elected officials&#39;] duty to reduce harm whenever possible.
+------------------------------------------------------------------------------------------
+6. Our elected officials should pass laws against littering.</code></pre>
+<p>Now we remove all sentences that are not premises or the conclusion, and all extraneous words to make every sentence an assertion with its own truth value:</p>
+<pre><code>1. [Littering] is [harmful].
+2. Animals choke on plastic wrappers and people cut themselves on broken glass.
+3. It is [our elected officials&#39;] duty to reduce harm whenever possible.
+-------------------------------------------------------------------------------
+4. Our elected officials should pass laws against littering.</code></pre>
+<p>Now we insert implicit premises as needed:</p>
+<pre><code>1. [Littering] is [harmful].
+2. Animals choke on plastic wrappers and people cut themselves on broken glass.
+3. It is [our elected officials&#39;] duty to reduce harm whenever possible.
+&lt;u&gt;4&lt;/u&gt;. Passing laws against something helps reduce it.
+-------------------------------------------------------------------------------
+5. Our elected officials should pass laws against littering.</code></pre>
+<h3 id="diagramming">Diagramming</h3>
+<p>We can now diagram an argument in standard form by drawing a tree-like structure that represents how the premises support the conclusion, including sub-arguments.</p>
+<p>This requires distinguishing between the argument conclusion and the conclusions of the sub-arguments.</p>
+<p>Each assertion is a node in the tree, labelled with its number, and we draw an arrow from assertion <span class="math inline">\(A\)</span> to assertion <span class="math inline">\(B\)</span> to represent that <span class="math inline">\(A\)</span> supports <span class="math inline">\(B\)</span>.</p>
+<p>We represent convergent support with an arrow from each supporting premise:</p>
+<pre><code>A B
+| |
+---
+ |
+ v
+ C</code></pre>
+<p>We represent linked support with a <code>+</code> and use only a single arrow from it:</p>
+<pre><code>A + B
+  |
+  v
+  C</code></pre>
+<p>For example, the example argument above can be diagrammed as follows:</p>
+<pre><code>2
+|
+v
+1 + 3 + 4
+    |
+    v
+    5</code></pre>
+<h3 id="evaluation">Evaluation</h3>
+<p>We first evaluate the acceptability of the premises:</p>
+<ul>
+<li>Is it reasonable to proceed as if the premises are true? We do not necessarily need to know that they are true.</li>
+<li>It is often reasonable to accept premises for the sake of argument, even if we do not know they are true.</li>
+<li>We often accept a premise if it is supported by a cogent argument, or if it is a necessary truth, a piece of common knowledge, supported by testimony, or appropriate appeal to authority.</li>
+<li>We often reject a premise if it is refutable with other knowledge, or if it is a necessary falsehood, contradictory to other premises, or relies on the truth of the conclusion to be true.</li>
+<li>The acceptability of premises is highly dependent on the person. We rely very heavily on the testimony of others to form our beliefs.</li>
+</ul>
+<p>We then evaluate the relevancy of the premises:</p>
+<ul>
+<li>Only relevant premises can support the conclusion.</li>
+<li>Many premises are relevant only when linked together, so this step is evaluating groups of premises.</li>
+<li>The diagram often helps here.</li>
+<li><strong>Positive relevance</strong> is when the truth of <span class="math inline">\(X\)</span> counts in favour of the truth of <span class="math inline">\(Y\)</span>. We say <span class="math inline">\(X\)</span> is positively relevant to <span class="math inline">\(Y\)</span>.</li>
+<li><strong>Negative relevance</strong> is when the truth of <span class="math inline">\(X\)</span> counts against the truth of <span class="math inline">\(Y\)</span>. We say <span class="math inline">\(X\)</span> is negatively relevant to <span class="math inline">\(Y\)</span>.</li>
+<li><strong>Irrelevance</strong> is when the truth of <span class="math inline">\(X\)</span> has no effect on the truth of <span class="math inline">\(Y\)</span>. We say that <span class="math inline">\(X\)</span> is irrelevant to <span class="math inline">\(Y\)</span>.</li>
+<li><span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are groups of premises.</li>
+</ul>
+<p>Finally, the groundedness:</p>
+<ul>
+<li>We can think of the relevance condition as a requirement for meeting the groundedness condition - an argument that doesn't pass the relevance condition cannot pass the groundedness condition.</li>
+<li>Groundedness is how rationally believable the conclusion is if all the premises are true.</li>
+<li>All valid arguments are well grounded, and a lot of invalid arguments too.</li>
+<li>Conclusions can be grounded via the methods described before: deductive support, inductive support, abductive support, or analogical support.</li>
+<li>We mainly evaluate this using the method of counterexamples.</li>
+<li>Groundedness is to cogency as validity is to soundness.</li>
+</ul>
+<p>After doing this, we can say whether the argument is good or bad based on the results of the evaluation.</p>
+<p>Note that not every premise of the argument needs to be acceptable, relevant, and grounded in order for the argument to be cogent. In some arguments, certain premises can be discarded without the argument losing its cogency.</p>
+<p>In contrast, certain premises are <strong>critical premises</strong>. These are the premises that are very important to the argument being cogent. If critical premises are removed, the argument is no longer cogent.</p>
+<p>When evaluating arguments, we often want to analyze the critical premises first, since if we find any issues here, we can say right away that the argument isn't good.</p>
+<p>This is often those premises comprising linked support, or convergent support that is the only support for something.</p>
+<p>A cogent argument only requires that there is <strong>enough acceptable and relevant premises</strong> to ground the conclusion.</p>
+<p>In our example above, the premises are all relevant to the conclusion (2 is positively relevant to 1, and 1+3+4 is positively relevant to 5), and the argument and all sub-arguments are all well grounded (accepting 2 makes it reasonable to accept 1, and accepting 1, 3, and 4 makes it reasonable to accept 5).</p>
+<p>However, assertion 3, that elected officials are to reduce harm, is not very acceptable. Therefore, the argument is not very cogent.</p>
+<h1 id="section-11">3/2/14</h1>
+<p>Mostly review from last class.</p>
+<h2 id="acceptability">Acceptability</h2>
+<p>There is not always a single interpretation of an argument that is considered correct. This is especially obvious when dealing with the acceptability condition - everyone holds their own set of beliefs that influences what premises they will find acceptable.</p>
+<p>Many contingent truths are widely believed. If we do not have any reason not to believe it, then it is reasonable to accept them when they appear in premises. This is often called &quot;common knowledge&quot;. For example, &quot;all humans have hearts&quot;, though there may be counterexamples.</p>
+<p>However, not all humans have hearts. The claim can be made more acceptable by changing it to &quot;virtually every living human has a heart&quot;.</p>
+<p>However, they are still defeasible and could possibly be false. For example, &quot;whales are fish&quot; - whales are actually mammals.</p>
+<p>Note that even if premises are rejected, the argument can still be cogent. For example, two premises can offer convergent support for the conclusion, and if one premise is rejected, the other still offers support.</p>
+<h3 id="testimony">Testimony</h3>
+<p>Many of our beliefs come from testimony - we believe a lot of things that we know only because other people say are true. For example, the information we learned from our parents and teachers.</p>
+<p>It is reasonable to accept all testimony as long as we don't have any good reasons to doubt the testifier.</p>
+<p>We often doubt the testifier when:</p>
+<ul>
+<li>The testifier makes <strong>implausible claims</strong> - things that don't seem reasonable.</li>
+<li>Unreliable source - people who have given unreliable testimony in the past, or flawed observers (e.g., people with hearing loss giving aural testimony).</li>
+<li>Testimony that appears to exceed the testifier's experience, competence, or abilities.</li>
+</ul>
+<p>When giving testimony, the trade-off is that the testimony gains acceptance, in return for taking on the obligations of making an assertion.</p>
+<p>Appealing to authority is a special case of testimony. A legitimate authority is an entity with special knowledge in a certain domain - experts, research institutions, etc.</p>
+<p>The same rules for testimony apply for appeals to authority. However, faulty appeals to authority are most often due to the last point - claims should not exceed the expertise of the authority. For example, claims about the weather from a climate prediction institution should be accepted, but macroeconomic analyses from that institution should not.</p>
+<p>However, this applies only to testimony given alone - without any additional justification. The acceptability of testimony without any other support is based on how much we should trust what someone says on their word alone. So even if a non-expert gives a claim, it can still be acceptable if compelling reasons are given.</p>
+<h1 id="section-12">5/1/14</h1>
+<p>If two authorities have conflicting views, it is generally reasonable to accept the claims of the more authoritative one. If they are very similar in authority, then it is reasonable to withhold judgement.</p>
+<p>Authority can be determined by the amount of experts who agree, and how credible these experts are.</p>
+<h3 id="vagenessambiguity">Vageness/Ambiguity</h3>
+<p>We sometimes reject premises because they are vague or ambiguous. In common use this generally means imprecise, but we want a more precise definition.</p>
+<p><strong>Imprecise</strong> means that the claim is <strong>literally true in a very wide range of cases</strong>. For example, &quot;the object is bigger than a breadbox, but smaller than a mountain&quot; - a lot of objects satisfy this.</p>
+<p>Imprecision often results from imprecise quantifiers like &quot;many&quot;, &quot;few&quot;, &quot;some&quot;, etc.</p>
+<p>Many claims are more imprecise than they could be. However, imprecision is a useful tool in everyday communication.</p>
+<p>Imprecision by definition makes a premise more acceptable, because it is true in a larger number of cases. It is not a reason to reject a premise.</p>
+<p>However, imprecision has a negative impact on groundedness, since an imprecise statement cannot make as many claims reasonably believable.</p>
+<p>A <strong>vague/ambiguous claim</strong> is one where it is difficult to determine if it is true or false. Since we only accept a premise if it is reasonable to believe it is true, there are certain situations where vague/ambiguous claims cannot be accepted.</p>
+<p>A <strong>vague</strong> claim is one that uses <strong>vague terms</strong> - terms that have <strong>penumbral cases</strong>, where we don't know whether they apply or not. The vagueness of a term is determined from how many penumbral cases there are. The vagueness of a claim depends on the quantity and vagueness of the terms it contains.</p>
+<p>For example, &quot;This man is balding&quot; is vague, because there are many possible cases where we can't be sure whether the man is balding or not - does losing 1 hair count as balding? Does losing 1000?</p>
+<p>A famous example is the Sorites paradox:</p>
+<pre><code>1 grain of sand is not a heap.
+Adding 1 grain of sand to a heap will not turn a non-heap into a heap.
+----------------------------------------------------------------------
+1000000 grains of sand are not a heap.</code></pre>
+<p>The argument is paradoxical because &quot;heap&quot; is a vague term. We do not know whether heap-ness applies in the penumbral cases, when the sand grains could either form a heap or not form a heap.</p>
+<p>There is still disagreement about how to evaluate this. Some people say that there is a certain number of grains that distinguish a heap from a non-heap, but we cannot know it exactly. The problem is caused by the concept of a heap being a vague concept.</p>
+<p>An <strong>ambiguous</strong> claim is one where there are multiple possible meanings of the claim without context to find the correct one. Multiple meanings happen quite often in language, but these are often resolved through context. A claim is ambiguous when the context does not allow us to determine which meaning is correct.</p>
+<p>The two types are ambiguity are <strong>syntactic</strong> (sentence structure can be read in more than one way) and <strong>lexical</strong> (phrases in sentence have multiple meanings by definition).</p>
+<p>For example, &quot;Peter saw a man taking his bike&quot; is syntactically ambiguous because the man could either be taking the man's own bike, or Peter's bike.</p>
+<p>For example, &quot;She threw a rock at the bank&quot; is lexically ambiguous because it could be a financial bank, or a river bank.</p>
+<p>For example, &quot;There is something somewhere&quot; is not ambiguous, just imprecise. There is only one meaning to this statement.</p>
+<h3 id="consistency">Consistency</h3>
+<p>Consistency/inconsistency applies to <strong>sets of sentences</strong>.</p>
+<p>A set of sentences is <strong>consistent</strong> if it possible for all of them to be true at the same time. For example, &quot;the sky is blue&quot;, &quot;the grass is green&quot;</p>
+<p>Otherwise, the set is <strong>inconsistent</strong>. For example, &quot;the sky is blue&quot;, &quot;the sky is not blue&quot;. This often occurs when two sentences are contradictory or there is a necessary falsehood.</p>
+<p>An inconsistent set of sentences is not acceptable as premises in an argument, because at least one sentence in the set is always false.</p>
+<p>Necessary falsehoods are a special case of inconsistent sets, where there is only one element in the set.</p>
+<p>Basically, a set of sentences is inconsistent if all the sentences together are necessarily false, and consistent otherwise.</p>
+<h1 id="section-13">7/2/14</h1>
+<h3 id="premises">Premises</h3>
+<p>Premises can often have <strong>faulty assumptions</strong>. These assumptions are not acceptable, so we cannot accept the premise:</p>
+<pre><code>The murder weapon was a knife but it hasn&#39;t been found yet.</code></pre>
+<p>This assumes that there was a murder, and that the murder was done using a knife.</p>
+<p><strong>Controversial premises</strong> are those that are no more acceptable than the conclusion is. If this is the case, the premises cannot help convince someone that the conclusion is true, since they do not support the conclusion.</p>
+<p>One special case of this is <strong>begging the question</strong> or <strong>circular arguments</strong>:</p>
+<pre><code>The Bible is the true word of God.
+The Bible says that humans exist if and only if God exists.
+Humans exist.
+-----------------------------------------------------------
+God exists.</code></pre>
+<p>This is a circular argument because the first premise relies on the premise being true. Only someone who already believes the conclusion will accept the premise.</p>
+<p>A premise is often acceptable when:</p>
+<ul>
+<li>supported by cogent argument.</li>
+<li>it is a necessary truth.</li>
+<li>it is common knowledge.</li>
+<li>it is reliable testimony.</li>
+<li>supported by legitimate appeals to authority.</li>
+</ul>
+<p>But not when it is <strong>vague/ambiguous</strong>, <strong>inconsistent</strong>, <strong>uses unacceptable assumptions</strong>, or <strong>controversial</strong>.</p>
+<p>These are only guidelines for accepting or rejecting premises, and there are exceptions to many of them. If we are in a neutral state of information about whether to accept or reject a premise, we simply don't consider it when evaluating the argument.</p>
+<h2 id="grounding">Grounding</h2>
+<p>Evaluations of grounding are applied to all the premises together as a group.</p>
+<p>There are a lot of common errors in reasoning. We call these errors <strong>logical fallacies</strong>. Some of these include affirming the consequent, denying the antecedent, and equivocation.</p>
+<p>Equivocation is when an <strong>ambiguous phrase</strong> is used in <strong>more than one way</strong> in the same argument. For example:</p>
+<pre><code>Bats are rodents.
+Bats are used in baseball.
+-----------------------------
+Rodents are used in baseball.</code></pre>
+<p>The ambiguity here is the dual meaning of the word &quot;bat&quot;.</p>
+<h2 id="criticism">Criticism</h2>
+<p>Effective criticism of arguments focuses on the most important deficiencies of the argument.</p>
+<p>The basic process is analyzing the acceptability, relevancy, and groundedness conditions starting with the most critical premises. This way, we can identify the most important issues with the argument.</p>
+<p>Argument criticism has to balance charity and accuracy - we want to attack the strongest possible version of the argument to refute all forms of the argument, but we don't want to go too far to fix the argument and misrepresent it as arguing something it is not.</p>
+<p>Evaluate the argument &quot;The US was successful at building democracies in Germany and Japan. Afghanistan has fewer people than Germany and Japan. So, US efforts toward democracy in Afghanistan will be successful.&quot;.</p>
+<p>First, we write it in standard form:</p>
+<pre><code>1. The US was successful at building democracies in Germany and Japan.
+2. Afghanistan has fewer people than Germany and Japan.
+----------------------------------------------------------------------
+3. US efforts toward democracy in Afghanistan will be successful.</code></pre>
+<p>Now we can diagram it:</p>
+<pre><code>1   2
+ \ /
+  3</code></pre>
+<p>The premises offer convergent support because each one individually supports the conclusion, and the support is not really improved by considering them together.</p>
+<p>And finally, evaluation:</p>
+<ul>
+<li>Premise 1 and 2 are common knowledge, and so are acceptable.</li>
+<li>Premise 1 is positively relevant, while premise 2 is basically irrelevant.</li>
+<li>Premise 1 and premise 2 ground the conclusion independently, but weakly.</li>
+</ul>
+<p>Therefore, we conclude that the argument is weakly cogent, and is weakened due to the groundedness condition.</p>
+<h1 id="section-14">10/2/14</h1>
+<h2 id="fallacies">Fallacies</h2>
+<p>A <strong>fallacy</strong> is a common mistake in arguments. We learn them in order to be able to detect them more easily and identify/communicate them to other people.</p>
+<p>A <strong>logical fallacy</strong> is a fallacy having to do with the logical form itself.</p>
+<p>The study of persuasion is <strong>rhetoric</strong>. Since the study of arguments is the study of rational persuasion, it is a subfield of rhetoric.</p>
+<p>However, by &quot;rhetoric&quot; we often mean those fields of persuasion that are not rational. For example, persuasion by force, bribery, etc.</p>
+<p>Rhetorical effects can make poor arguments more persuasive than they should be. This can be the result of:</p>
+<ul>
+<li>Structures that make them look valid (logical fallacies)</li>
+<li>Premises (distractors) that distract the audience from the real issue</li>
+<li>Framing arguments to favour one conclusion (false presuppositions)</li>
+</ul>
+<h3 id="grounding-1">Grounding</h3>
+<p>Some fallacies associated with groundedness are:</p>
+<ul>
+<li>Logical fallacies (denying the antecedent, affirming the consequent, etc)</li>
+<li>Argument from ignorance.
+<ul>
+<li>We have no evidence for P, so P is false.</li>
+<li>We have no evidence against P, so P is true.</li>
+<li>This is wrong because we should not pass judgement while in a neutral state of information.</li>
+<li>I didn't see a rhino today, so rhinos do not exist.</li>
+<li>This is wrong because the evidence is too weak to ground the conclusion.</li>
+<li>This is evaluated by checking the likeliness of counterexamples existing.</li>
+</ul></li>
+<li>Hasty generalization
+<ul>
+<li>This is simply inductive arguments that are not well grounded.</li>
+<li>This P has Q, so all P have Q.</li>
+<li>There are simply not enough inductive premises to support the conclusion.</li>
+</ul></li>
+<li>Post hoc ergo proctor hoc (post hoc fallacies)
+<ul>
+<li>X happened before Y, so X caused Y.</li>
+<li>The basic element of causation is that cause happens before effect, but this is not enough to prove causation.</li>
+<li>Correlation and causation are not necessarily the same.</li>
+<li>People with lung cancer often smoke, so lung cancer causes smoking.</li>
+<li>People who smoke often have lung cancer, so smoking causes lung cancer.</li>
+<li>Both of the above are post hoc fallacies, though the second is true for other reasons.</li>
+</ul></li>
+<li>Composition
+<ul>
+<li>All the components of P have Q, so P is Q.</li>
+<li>All the ingredients in these cookies are tasty, so these cookies are tasty (false, cookies could be not tasty).</li>
+<li>We cannot assume the whole has the properties of its parts.</li>
+</ul></li>
+<li>Division
+<ul>
+<li>The P has Q, so all the parts of P have Q.</li>
+<li>These cookies are tasty, so all the ingredients are tasty (false, could have not tasty ingredients).</li>
+<li>We cannot assume the parts have the properties of the whole.</li>
+</ul></li>
+</ul>
+<p>Conspiracy theories are not themselves fallacies, but the support given for their existing is fallacious.</p>
+<p>Conspiracy theories often use arguments from ignorance (lack of support for theory is actually used to support theory) and contrary evidence is used to support the theory (e.g., the cover-up was disproved, so there must be a deeper cover-up in place).</p>
+<h3 id="relevance">Relevance</h3>
+<p>There are two types of fallacies associated with relevance: distractors and genetic fallacies.</p>
+<p><strong>Distractors</strong> are irrelevant topics designed to distract the audience. They add rhetorical force because they draw attention away from deficiencies in the argument and makes the argument look more cogent by adding irrelevant but acceptable premises.</p>
+<ul>
+<li>Red herring
+<ul>
+<li>Offering irrelevant claims as support for the conclusion, in order to draw attention away from the real issue.</li>
+<li>This is a wide ranging fallacy and includes straw man and ad hominem fallacies.</li>
+<li>Carries the connotation that the author committed the fallacy intentionally to avoid the issue.</li>
+<li>For example, &quot;We will strengthen educational systems, while our opponents will cut budgets until nothing is left&quot;.
+<ul>
+<li>The actions of the opponents has no bearing on the party's education policies, simply diverting attention from themselves.</li>
+<li>No relevant support for the conclusion was given.</li>
+</ul></li>
+<li>Straw man fallacy
+<ul>
+<li>When challenging another's views, the other's claims are misrepresented or interpreted in a way other than intended, and it is claimed that the original claim was refuted.</li>
+<li>This is wrong because only the misrepresented claim was refuted, and the reasons offered in refutation are irrelevant to the original view.</li>
+<li>For example, &quot;Euthanasia is wrong, because everyone has a right to life, and violating rights is wrong&quot;.
+<ul>
+<li>Euthanasia requires the patient to waive the right to life, and so the argument is irrelevant.</li>
+<li>The argument misrepresents euthanasia as murder.</li>
+</ul></li>
+</ul></li>
+<li>Genetic fallacies
+<ul>
+<li>Appealing to irrelevant aspects of the origins of a claim - conclusion suggested only from the origin of the claim rather than it's actual meaning.</li>
+<li>Faulty appeals to authority fall under this category.
+<ul>
+<li>Appeal to popular opinion - popular opinion may disagree with what experts say, like washing burns with soap and water being beneficial (false, but backed by popular opinion).</li>
+</ul></li>
+<li>For example, &quot;Those hamburgers are better because they are old fashioned&quot;</li>
+<li>Ad Hominem attack
+<ul>
+<li>When claims are dismissed based on irrelevant personal aspects of the opposing arguer.</li>
+<li>For example, &quot;we should ignore Steve's argument because he was a part of a cult&quot;.</li>
+<li>However, some personal aspects are relevant, like a blind person not being able to give visual testimony.</li>
+<li>Tu Quoque fallacy
+<ul>
+<li>When a claimed impropriety is dismissed due to the accusor being guilty of the same impropriety.</li>
+<li>For example, &quot;You should not charge me to quit smoking, being a smoker yourself&quot;.
+<ul>
+<li>Whether the other person smokes or not has no bearing on whether people should smoke in general.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Normative/moral fallacies
+<ul>
+<li>Naturalistic fallacy
+<ul>
+<li>When it is argued that something should be a certain way because it is a certain way.</li>
+<li>For example, &quot;Students should not be allowed to use laptops, because they were never allowed to do so in the past&quot;.</li>
+<li>Whether something is common practice has no bearing on whether something should be common practice.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id="section-15">12/2/14</h1>
+<h3 id="acceptability-1">Acceptability</h3>
+<p>The fallacies associated with acceptability center on errors in the premises.</p>
+<ul>
+<li>Begging the question/circular argument
+<ul>
+<li>When the premises are only acceptable if the conclusion is already true.</li>
+<li>For example, &quot;Global warming is a fad, because anyone who looks at the data rejects it&quot;.</li>
+<li>It is only acceptable that people reject it if global warming is indeed a fad.</li>
+</ul></li>
+<li>False presupposition
+<ul>
+<li>When the premise assumes something that is false.</li>
+<li>For example, &quot;James no longer writes fiction because he is not writing fiction now&quot;</li>
+<li>It is not necessarily true that James had originally wrote fiction - he could have never wrote fiction in the first place.</li>
+</ul></li>
+<li>Fallacies of definition
+<ul>
+<li>When a debatable definition is used in a permise.</li>
+<li>For example, &quot;Abortion is wrong, because all persons have a right to life&quot; - the definition of person is a controversial one, and affects the premise's acceptability.</li>
+<li><strong>Persuasive definitions</strong> disguise controversial claims in the definitions.</li>
+<li>For example, &quot;A person is what is defined by the law as a person. Corporations are defined as persons, and all persons should have the right to vote, so corporations should be able to vote&quot;</li>
+<li>This relies on the premise that all persons (humans) have the right to vote, while the other definition of persons, which includes corporations, may not allow the premise to apply.</li>
+</ul></li>
+<li>False dichotomy/false enchotomy
+<ul>
+<li>When a choice is presented without presenting all the possible options in a premise.</li>
+<li>For example, &quot;You either support wiretapping or are a traitor to the nation. You do not support wiretapping, therefore you are a traitor&quot;.</li>
+<li>This ignores the possibility of someone being against wiretapping, yet not being a traitor to the nation - the first premise is false.</li>
+<li>This is an example of disjunctive syllogism (P or Q, not Q, therefore P) where the first premise is not acceptable.</li>
+<li>The dichotomy/enchotomy is more acceptable depending on the number of options presented and not presented, and the probability of those options being true.</li>
+<li>For example, &quot;the coin will land on either heads or tails&quot; is a relatively acceptable premise because it is highly unlikely that it will land on the edge.</li>
+</ul></li>
+</ul>
+<h1 id="section-16">24/2/14</h1>
+<p>Review of concepts for exam tomorrow, plus an in-class bonus quiz.</p>
+<h1 id="section-17">26/2/14</h1>
+<p>We now focus on reasoning in general, from arguments.</p>
+<p>The reason we focused on argumentation is to be able to express our reasoning and evaluate how good our reasoning is.</p>
+<h2 id="representation">Representation</h2>
+<p><strong>Representation</strong> is used very often in reasoning, and is usually the first step.</p>
+<h3 id="representation-based-reasoning">Representation-based Reasoning</h3>
+<p>We first need to <strong>encode</strong> a system in the world (the <strong>target system</strong>) as another form before we can manipulate it. This new form is called the representation. For example, we might represent the dimensions and mass of an object as numbers.</p>
+<p>Then we can <strong>manipulate</strong> the representation. For example, we can multiply numbers together, find the density of the object as a number, and discover that it is less than the density of water.</p>
+<p>Finally, we can <strong>decode</strong> the representation to draw conclusions about the target system - like drawing the conclusion that the object floats in water.</p>
+<p>So the process of reasoning by representation includes all three of these steps.</p>
+<p>This could have some problems in practice:</p>
+<ul>
+<li>We might misrepresent the thing in the world incorrectly - like representing a pendulum as without air friction, when air friction is actually significant.</li>
+<li>We might manipulate the representation incorrectly - like using the wrong equation or doing the math incorrectly.</li>
+<li>We might interpret the results in ways that lead to incorrect results - like saying a period time of zero means infinitely fast oscilation, when it actually means no oscillation at all.</li>
+</ul>
+<p>Another example is for airplane design. The scale model planes are the representation of the full size plane, and we can test it in a wind tunnel to manipulate the representation. Then, we can use this to draw conclusions about what the scale plane represents - the real airplane.</p>
+<h3 id="simplification">Simplification</h3>
+<p>Real world systems are often very complex. Representations tend to leave out everything except the most important details to make it simpler to manipulate.</p>
+<p>We need to be aware of what the representation encodes and what it doesn't encode about our target system.</p>
+<p>For example, the scale model airplane is meant to represent the shape and aerodynamic properties of the real plane, but not the mass or full sized material properties.</p>
+<p>As a result, based on the information encoded, we must constrain our manipulations of the representation to ensure that the result still represents the result in the real thing.</p>
+<h3 id="numbers">Numbers</h3>
+<p>Numbers are the most common representations used for values.</p>
+<p>We use numbers to represent quantities, ratios, changes, magnitudes, orderings, etc.</p>
+<p>For example, distances are not numbers - they are just distances, their own thing. However, they are correlated to numbers. We can then convert between distances and numbers interchangably.</p>
+<p>Alternatively, we could represent distances with the amount of time it takes to travel that distance for something moving at some speed, or even represent distances using the alphabet.</p>
+<p>Numbers have many similarities have a lot of relevant similarities to distances: they can be added together, they can be ordered, and dividing one into parts has each part also be a number or distance.</p>
+<p>As a result, we can use things like distributivity (<span class="math inline">\(A(B + C) = AB + AC\)</span>) over numbers and represent multiple sums of distances, and use <span class="math inline">\(A &gt; B\)</span> over numbers to represent one distance being longer than another.</p>
+<p>Consider the example of using numbers to represent hockey tournament rankings. In this case, the numbers obey distributivity, but the rankings do not - a hockey team can lose games yet still be first place. Therefore, the lowest number is not necessarily the best team. In this case, we manipulated the</p>
+<p><strong>Ordinal numbers</strong> are natural numbers, used to represent positions/rankings. They are used for ordering things.</p>
+<p><strong>Cardinal numbers</strong> are natural numbers, used to represent size. They are used for counting things without fractional values.</p>
+<p><strong>Nominal numbers</strong> are numbers that are only used as a name, like postal codes or phone numbers.</p>
+<h3 id="percentages-and-operations">Percentages and Operations</h3>
+<p>Percentages are useful for representing and comparing ratios. This allows us to see which ratio is higher or lower.</p>
+<p>Using percentages results in a <strong>loss of information</strong>. When we use a percentange, we lose all information about what the original numbers were - 25% could represent 10/40 or 1/4. We must make sure to be aware of the numerator and denominator.</p>
+<p>If the number of bear attacks increased 100% this decade, should we implement a bear patrol?</p>
+<blockquote>
+<p>It could be that there was 1 attack last decade increasing to 2, or that there were 100 increasing to 200, or a lot of other answers.<br />
+If there was only 1 more attack, we could not justify implementing a bear patrol due to resource constraints.<br />
+If there were 100 more attacks, we should implement a bear patrol to stop them.<br />
+We do not have enough information to answer the question using only percentages.</p>
+</blockquote>
+<p>We must be sure to manipulate numbers only <strong>when those manipulations are valid and make sense as well in the target system</strong>. For example, adding percentages to get total percentages is an invalid manipulation, as well as taking the inverse sine of a distance, or adding mass to length.</p>
+<p>Unit systems help us avoid these situations by making it obvious when we try to add different types of physical quantities. This is useful but not completely effective - it is still possible to go wrong even when using units.</p>
+<p>If we add 5 meters and 5 meters, we can straighforwardly say that it represents 10 meters. But if we add 5 meters and 5 kilograms, what does the 10 represent?</p>
+<p>A percentage can represent a multiple, or a change. A 50% increase is different from something being 50% of what it was before.</p>
+<p>A percentage increase is denoted by <span class="math inline">\(\text{Percentage Increase} = \frac{(\text{Later} - \text{Earlier})}{\text{Earlier}} \times 100%\)</span>.</p>
+<h3 id="rankings">Rankings</h3>
+<p>Numbers are also often used for ranking things due to their ability to be compared - numbers are ordered.</p>
+<p>Rankings encode only information about order. For example, the rankings for runners in a race does not encode what the actual times were, or how close the winners were to each other, only information about who was first, second, third, and more.</p>
+<p>Rankings are given based on some system of measurement, and the properties of this system determine what the ranking means.</p>
+<h3 id="metrics">Metrics</h3>
+<p>In many cases, the measurement system only measures something indirectly, like how IQ tests measure the ability to answer certain questions as a metric for intelligence in general.</p>
+<p><strong>Pseudo-precision</strong> is when the number is represented in a form that makes it seem like it has more precision than it does. For example, one might claim that pi is approximately equal to 4.03. This number only has 1 significant digit, but it is presented like it has 3.</p>
+<h3 id="average">Average</h3>
+<p>An <strong>average</strong> is a number that is supposed to represent a whole set of data. As a result, a lot of information is inevitably lost when using only the average.</p>
+<p>The most common ways of finding averages are the mean (ratio of total value to number of values), median (central value when sorted), and mode (most common value).</p>
+<h1 id="section-18">3/3/14</h1>
+<h2 id="statistics">Statistics</h2>
+<p><strong>Statistics</strong> is the study of data collection and analysis. It is related to critical thinking because it helps determine what kind of techniques, inferences, and interpretations can be used on data sets, and because statistics is used very often in reasoning.</p>
+<p><strong>Variables</strong> are a type of property. A <strong>statistic</strong> is a feature of a data set.</p>
+<p>A <strong>data set</strong> is a collection of information, often relating to a <strong>population</strong> of interest.</p>
+<p>The properties of the popoulation are represented using variables. For example a poll of a city might result in a variable being the approval of the current prime minister, and the value of this variable is the percentage of people who do approve.</p>
+<p>Often, it isn't possible to measure the whole population. As a result, we choose a smaller <strong>sample set</strong> that represents the <strong>target data set</strong>. We always want the sample set to represent the target set as accurately as possible.</p>
+<p>We often make inteferences from data sets using <strong>inductive generalizations</strong> - inferring features of the target data set from the sample data set. We use this to generate hypotheses about the data.</p>
+<p>How well a sample represents the population depends in the <strong>size of the sample relative to the population</strong>, and the <strong>randomness of the selection process</strong>. Ideally, the selection process would give each individual an equal chance of being considered in the sample. For example, polling by phone selects only those people who own phones, answer them, and have a listed number.</p>
+<p>A non-random sample set is <strong>biased</strong> and might not accurately represent the target population. However, even if we choose our sample randomly, we may still get unlucky and randomly choose a bad sample, which doesn't represent the target population.</p>
+<p>From these data sets, we can figure out correlations between variables, which can help us figure out <strong>casual relationships</strong>.</p>
+<p>For example, a political poll has a population of every eligible voter, a sample set of the people who actually voted, and the inference is that the people who voted are an accurate sample of the people who can vote.</p>
+<h3 id="correlationcausation">Correlation/Causation</h3>
+<p>A <strong>correlation</strong> is when variables are related in some way - they co-vary together. Correlations are useful because we can use them to make predictions about what will happen when a variable is a certain way.</p>
+<p>For example, if attending class is correlated with high grades, then given students that attend class, we can predict that they have higher grades than those who do not attend class.</p>
+<p><strong>Positive correlation</strong> is when, given variables <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, an increase in <span class="math inline">\(x\)</span> results in an increase in <span class="math inline">\(y\)</span>, and vice versa. For example, there is a positive correlation in street signs between signs saying &quot;STOP&quot; and signs that are red.</p>
+<p><strong>Negative correlation</strong> is when, given variables <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, an increase in <span class="math inline">\(x\)</span> results in a decrease in <span class="math inline">\(y\)</span>, and vice versa. For example, there is a negative correlation in street signs between signs saying &quot;STOP&quot; and signs that are yellow.</p>
+<p><strong>Causation</strong> is when one thing causes another thing. Where correlation can be used to make predictions in some circumstances, causation allows predictions to be made in a much larger set of circumstances, and even predict what will happen when we modify other variables.</p>
+<p>For example, knowing there is a correlation between smoking and lung cancer is good for predicting whether someone will have lung cancer or a smoking habit, but not for preventing lung cancer. Knowing that smoking causes lung cancer allows us to prevent lung cancer by predicting that stopping smoking helps reduce the incidences of lung cancer.</p>
+<p>In other words, knowing smoking is correlated to lung cancer doesn't tell us that changing smoking will change lung cancer.</p>
+<h3 id="null-hyposthesis">Null Hyposthesis</h3>
+<p>When we find a correlation in a sample set, we cann't directly apply it to the target population. The idea that a correlation exists in the target population is a <strong>hypothesis</strong>.</p>
+<p>There could be multiple hypotheses, like that there is a causal relationship between the two variables, or similar.</p>
+<p>All hypotheses must compete with the null hypothesis. The <strong>null hypothesis</strong> is that what we observed was just a fluke or an accident. It is the &quot;baseline&quot; hypothesis, so to speak.</p>
+<table>
+<colgroup>
+<col width="37%" />
+<col width="28%" />
+<col width="34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Correlation in sample</th>
+<th align="left">Correlation in population</th>
+<th align="left">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">No, don't reject null hypothesis</td>
+<td align="left">No, we were right</td>
+<td align="left">Correct inference</td>
+</tr>
+<tr class="even">
+<td align="left">No, don't reject null hypothesis</td>
+<td align="left">Yes, we were wrong</td>
+<td align="left">Type II error (false negative)</td>
+</tr>
+<tr class="odd">
+<td align="left">Yes, reject null hypothesis</td>
+<td align="left">No, we were wrong</td>
+<td align="left">Type I error (false positive)</td>
+</tr>
+<tr class="even">
+<td align="left">Yes, reject null hypothesis</td>
+<td align="left">Yes, we were right</td>
+<td align="left">Correct inference</td>
+</tr>
+</tbody>
+</table>
+<p>Note that not rejecting the null hypothesis isn't the same thing as accepting it.</p>
+<p>Suppose that several times while riding a bike up a hill, the bicycle chain derails. We can then produce some hypotheses:</p>
+<ul>
+<li>There is a positive correlation between riding up a hill and the chain derailing.</li>
+<li>My bicycle gears are misaligned when the bicycle is in a low gear, which is active while going uphill.</li>
+</ul>
+<p><strong>Confounds</strong> are alternative explanations for observations. Confounds are counterexamples to abductive arguments, and can be thought of as alternative hypotheses:</p>
+<ul>
+<li>When riding up a hill, the extra bouncing causes the chain to derail.</li>
+<li>There are wires on the hill that snag the chain.</li>
+</ul>
+<p>We must also intriduce the null hypothesis:</p>
+<ul>
+<li>The derailments were purely coincidental to riding up a hill.</li>
+</ul>
+<h3 id="testing-hypotheses">Testing Hypotheses</h3>
+<ol style="list-style-type: decimal">
+<li>Collect data from a sample to draw hypotheses from.</li>
+<li>Reject unrepresentative samples and clean up data.</li>
+<li>Figure out correlations in the sample.</li>
+<li>Introduce null hypothesis.</li>
+<li>Introduce hypotheses about correlation in the population.</li>
+<li>Introduce confounds.</li>
+<li>Introduce hypotheses about causation in the population that explain the correlations.</li>
+</ol>
+<h1 id="section-19">5/3/14</h1>
+<h2 id="probability">Probability</h2>
+<p>Probability is closely connected to statistics. A <strong>probability</strong> is a likeliness - the chance of something happening or something being true or similar.</p>
+<p>The most common meaning of probability is the <strong>relative frequency</strong> of something (how often something will happen in the long run, like flipping a coin lands on heads half the time) and <strong>degrees of belief</strong> (how rationally certain about an event occuring, where 1 is certain and 0 is impossible).</p>
+<p>Humans are good at finding patterns, but are prone to false positives - type I errors. Humans are prone to thinking certain things are improbable when they are simply the result of random chance - they are bad at evaluating the null hypothesis.</p>
+<h3 id="formal-treatment">Formal Treatment</h3>
+<p><span class="math inline">\(P(x)\)</span> represents the probability of event <span class="math inline">\(x\)</span> occurring. It is always the case that <span class="math inline">\(P(x) \in \mathbb{R}\)</span> and <span class="math inline">\(0 \le P(x) \le 1\)</span> - nothing is more impossible than impossiblity, or more certain than certainty.</p>
+<p><span class="math inline">\(\neg x\)</span> is the opposite of the event <span class="math inline">\(x\)</span> - the event of <span class="math inline">\(x\)</span> not occurring. <span class="math inline">\(P(\neg x)\)</span> is the probability of event <span class="math inline">\(x\)</span> not occuring.</p>
+<p><span class="math inline">\(P(S)\)</span>, where <span class="math inline">\(S\)</span> is a set of events, represents the probability of one of those events occurring. If <span class="math inline">\(S\)</span> includes all possible events, then <span class="math inline">\(P(S) = 1\)</span>.</p>
+<p>Usually, <span class="math inline">\(P(x) = \frac{\text{Number of cases where } x \text{ occurs}}{\text{Total number of cases}}\)</span>, assuming that all cases are equally likely.</p>
+<p><span class="math inline">\(P(x \cup y)\)</span> is a <strong>disjoint probability</strong> - the probabilty that at least one of <span class="math inline">\(x\)</span> <strong>or</strong> <span class="math inline">\(y\)</span> occur.</p>
+<p><span class="math inline">\(P(x \cap y)\)</span> is a <strong>conjoint probability</strong> - the probabilty that both <span class="math inline">\(x\)</span> <strong>and</strong> <span class="math inline">\(y\)</span> occur.</p>
+<p><span class="math inline">\(P(x \mid y)\)</span> is a <strong>conditional proability</strong> - the probability that <span class="math inline">\(x\)</span> occurs <strong>if</strong> <span class="math inline">\(y\)</span> occurs.</p>
+<p>Identities:</p>
+<ul>
+<li><span class="math inline">\(P(x) + P(\neg x) = 1\)</span> - an event must either occur or not occur.</li>
+<li><span class="math inline">\(P(x \cup y) = P(x) + P(y) - P(x \cap y)\)</span> - the probability of either event occuring is the sum of the individual probabilities of each event occuring, minus the probability that they both occur.
+<ul>
+<li><span class="math inline">\(P(x \cup y) = P(x) + P(y)\)</span> when <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are mutually exclusive - they never both occur at the same time.</li>
+</ul></li>
+<li><span class="math inline">\(P(x \cap y) = P(x \mid y) \cdot P(y)\)</span> - the probability of both events occurring is the probability of one occurring given the other times the probability of the other.
+<ul>
+<li><span class="math inline">\(P(x \cap y) = P(x) \cdot P(y)\)</span> when <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are independent - when the probability of <span class="math inline">\(x\)</span> does not change depending on <span class="math inline">\(y\)</span>, so <span class="math inline">\(P(x \mid y) = P(x)\)</span>.</li>
+</ul></li>
+</ul>
+<p>Probability of drawing a red queen from a deck of cards given that the card drawn is red:</p>
+<blockquote>
+<p>Clearly, <span class="math inline">\(P(\text{red} \cap \text{queen}) = P(\text{red} \mid \text{queen}) \cdot P(\text{queen})\)</span>.<br />
+Since the card is a queen, <span class="math inline">\(P(\text{queen}) = 1\)</span> and <span class="math inline">\(P(\text{red} \mid \text{queen}) \cdot P(\text{queen}) = P(\text{red}) = \frac{1}{2}\)</span>.</p>
+</blockquote>
+<h3 id="gamblers-fallacy">Gambler's Fallacy</h3>
+<p>When a set of events are independent, people are prone to thinking that the events are dependent of the conjoint probability of each of the other events in the set.</p>
+<p>In other words, given events <span class="math inline">\(x_1, \ldots, x_n\)</span> such that <span class="math inline">\(\forall 1 \le i \le n, 1 \le j \le n, P(x_i) = P(x_i \mid x_j)\)</span> (all events are independent), it is a mistake to assume <span class="math inline">\(P(x_i) \ne P(x_i \mid x_j)\)</span>.</p>
+<p>For example, if we flip a coin 9 times and it comes up heads every time, then it is a fallacy to think that the next flip will have anything but a 50% chance of coming up heads.</p>
+<p>The <strong>gambler's fallacy</strong> is committed whenever, after observing something that happens more often than usual, we predict that it will happen less often in the future in order to &quot;balance out&quot;.</p>
+<h3 id="regression-fallacy">Regression Fallacy</h3>
+<p>If we flip a coin 9 times and it comes up heads every time (this is a pattern that is far from the mean), then in reality, a phenomenon known as <strong>regression to the mean</strong> says that it is likely that the <strong>next set of flips will average out to the mean</strong> - that the next set of flips will be 50% heads.</p>
+<p>Regression to the mean says that if we flip enough times, eventually it will tend toward the average.</p>
+<p>Note that this does not contradict the gambler's fallacy - regression to the mean says that the next set of flips is likely to be average, while the gambler's fallacy says that the next flip is 50% likely to be heads.</p>
+<p>A <strong>regression fallacy</strong> is when we think there is a cause when there is no cause, due to natural variations.</p>
+<p>The regression fallacy is committed whenever, given a random event, one assigns a cause where there is only natural variation.</p>
+<p>For example, &quot;Jim did exceptionally well at work last year. His performance is merely average this year, so something must have happened.&quot;.</p>
+<p>This is fallacious because it is likely that in fact this is just natural variation in performance, not caused by any external factors.</p>
+<p>When we see a number of extraordinary events happening, we tend to think that they are ordinary. However, they are not; this is just natural variations in the events.</p>
+<p>A related concept is the <strong>regression effect</strong>. Basically, if we pick a number between 1 and 100, and draw a 1 the first time, the next draw will be still be independent, yet the probability of a bigger number is 99%, and the probability of a number closer to the mean is 98% (since 100 is equally far from the mean).</p>
+<h3 id="simpsons-paradox">Simpson's Paradox</h3>
+<p>Suppose hospital A cures 70% of all cancer patients and 90% of all non-cancer patients. Suppose hospital B cures 50% of all cancer patients and 80% of all non-cancer patients.</p>
+<p>We might be inclined to believe that hospital A has a better overall cure rate, since the rates for both are higher, but <strong>this is not always true</strong>.</p>
+<p>It is easy to find a counterexample:</p>
+<p>Hospital A might have 700/1000 (70%) cancer patients cured, and 9/10 (90%) non-cancer patients cured, giving an overall rate of 709/1010, or 70.2%.</p>
+<p>Hospital B might have 5/10 (50%) cancer patients cured, and 800/1000 (80%) non-cancer patients cured, giving an overall rate of 805/1010, of 79.7%.</p>
+<p>The problem arose when we tried to add percentages together.</p>
+<p>The fallacy is that the total percentage of A cannot be compared to the total percentage of B by comparing the percentages of the individual parts of A and B.</p>
+<p>Comparisons that hold within all parts of a set <strong>do not necessarily hold for the set as a whole</strong>. This is a compositional fallacy.</p>
+<h1 id="section-20">7/3/14</h1>
+<h2 id="biases">Biases</h2>
+<p>A <strong>bias</strong> is a systematic preference or tendency to favor one outcome over another. Biases can lead to people reasoning in unreliable ways, but many biases exist for very good reasons - they are what allows us to think so effectively.</p>
+<p><strong>Heuristics</strong> are simplified problem solving techniques used to solve complex problems quickly. They are closely associated with biases.</p>
+<p>Heuristics have allowed humans to become extremely effective in practical problem solving. They can sometimes be useful, but can sometimes lead to biases.</p>
+<p>Biases are often useful in a variety of situations, but they usually have a small class of problematic cases. The problem is distinguishing whether a bias is helpful, or leads to reliable reasoning.</p>
+<p>Another example of baises is seeing shapes in the clouds, or seeing faces where there are none. This may be due to the need for earlier humans to detect predators more effectively and avoid them.</p>
+<h1 id="section-21">10/3/14</h1>
+<p>As a general rule, when we add quantities that have ratios, the resulting ratio is between the largest of the ratios and the smallest of the ratios.</p>
+<p>For example, if one box is 20% full and another 80% full, then when we combine the boxes together, the result is always between 20% and 80% full.</p>
+<h3 id="types-of-biases">Types of Biases</h3>
+<p><strong>Cognitive biases</strong> are those biases associated with cognition. They are caused by our psychological characteristics, and even things like our beliefs, expectations, and fears.</p>
+<p>Some examples of cognitive biases are:</p>
+<ul>
+<li><strong>Confirmation bias</strong> is the tendency to think our own beliefs or expectations are more confirmed than evidence actually warrants.
+<ul>
+<li>This is a bias because we want to evaluate all beliefs equally in order to get the most truth out of our reasoning, and this tendency causes us to give some beliefs precedence over others.</li>
+<li>This bias is based on our beliefs and expectations.</li>
+<li><strong>Situational/structural bias</strong> is the tendency to allow features of the situation to affect our evaluation of evidence.
+<ul>
+<li>For example, sometimes an infection has symptoms, and sometimes it does not, so situational bias causes us to be biased toward identifying those with symptoms, because that is easier to detect.</li>
+<li>Confirming evidence is easier to obtain, so we prefer it.</li>
+<li>We can mitagate structural bias by trying to get a balanced view with equal representation from all points of views.</li>
+</ul></li>
+<li><strong>Attentional bias</strong> is the tendency to favor evidence that holds our attention, or how our attention affects how we examine evidence.
+<ul>
+<li>For example, people might think there are a lot of bad drivers, but this may not be true, since most people do not pay attention to good drivers, only bad ones.</li>
+<li>We cannot, in practice, focus on all sources of information at once, and bias can be introduced when selecting which ones to focus on.</li>
+<li>This can happen consciously, when we decide what evidence to examine or ignore, or unconsciously, when we automatically disregard or emphasize certain information.</li>
+<li>We are good at remembering confirming cases, but not disconfirming cases.</li>
+<li>We are also bad at estimating the number of confirming or disconfirming cases.</li>
+<li>We can mitigate this using the null hypothesis and confounds.</li>
+</ul></li>
+<li><strong>Interpretive bias</strong> is the tendency to allow our beliefs to affect our evaluation of evidence.
+<ul>
+<li>We tend to accept evidence in accordance to what we believe, and heavily criticise evidence against it.</li>
+<li>To believe is to think something is correct; we prefer evidence that supports what we believe is correct.</li>
+</ul></li>
+</ul></li>
+<li><strong>Egocentric bias</strong> is the tendency to give more significance to events that involve oneself, and events that one plays a role in.
+<ul>
+<li>This is closely related to interpretive bias.</li>
+<li>There is possibly a slight evolutionary advantage to preferring beliefs about oneself.</li>
+<li>Self-serving attributions are the things we would like to believe about ourselves, such as our rationality and marality being strong.
+<ul>
+<li>As a result, people may internalize confirming evidence, and externalize evidence otherwise - to marginalize our faults.</li>
+<li>If someone wins a board game, it is because they have good strategy. However, if they lose, it is because of bad luck. This is a bias because it favours the outcome that the person would like to believe.</li>
+</ul></li>
+<li>The <strong>Lake Wobegon Effect</strong> describes how the majority of people believe themselves to be above average in certain respects.
+<ul>
+<li>For example, most people believe themselves to be more skilled at driving a car than the average driver.</li>
+</ul></li>
+<li><strong>Hindsight bias</strong> is the tendency to believe that events in the past should have been predictable, while one is viewing it in hindsight.
+<ul>
+<li>One might find that it was obvious that a problem should be solved in a certain way after finding the answer, but before finding it it would not at all be obvious.</li>
+<li>It is often the case that contributing factors and their significance are not obvious until afterwards.</li>
+<li>We are bad at thinking in terms of past states of information.</li>
+</ul></li>
+</ul></li>
+<li><strong>Communicative bias</strong> are those biases brought about by the way we communicate.
+<ul>
+<li><strong>Repetition bias</strong> is the tendency to be more likely to believe something that is repeated more often.</li>
+<li>The <strong>continued influence effect</strong> is the phenomenon in which information continues to affect us even after we know it is not true.</li>
+<li><strong>Framing effects</strong> are the phenomena in which the way something is described affects our judgements and memories associated with it, and can lead to different lines of reasoning about it.
+<ul>
+<li>For example, given the same video of a car accident, describing it with verbs like &quot;smashed&quot; made viewers estimate the speed higher than when the video was described with verbs like &quot;bumped&quot;. The verb &quot;smashed&quot; elicited perceptions of higher speed than &quot;bumped&quot;.</li>
+<li>This is closely related to interpretive bias.</li>
+</ul></li>
+</ul></li>
+<li><strong>Biases of memory</strong> are those biases brought about by the way our memories work.
+<ul>
+<li>We often judge the quality of our memories by how vivid they are, but this is not a reliable method.</li>
+<li>Memories are influenced by framing effects - it is possible to entirely fabricate memories without realizing it.</li>
+</ul></li>
+</ul>
+<p><strong>Perceptual biases</strong> are those that affect what we perceive. They are a subset of all cognitive biases.</p>
+<p>Most optical illusions work based on <strong>low-level</strong> or <strong>bottom-up</strong> perceptual biases. These are biases that are introduced in the low-level processing that the brain does when precessing the raw sensory input.</p>
+<p>For example, if we are talking to someone, what we perceive from the lip movements can significantly affect what we hear. This is known as the McGurk effect. It probably exists to help detect errors in speech recognition and improve communication in noisy places. Interestingly, it works even if we are aware of the effect.</p>
+<p>Perceptual biases can also be introduced by explicit, conscious reasoning - <strong>top-down</strong> perceptual biases.</p>
+<h1 id="section-22">12/3/14</h1>
+<blockquote>
+<p>Critical thinking is a matter of learning not to trust yourself too much.</p>
+</blockquote>
+<p>From this overview of biases, we can see that our reasoning is prone to being unreliable at times, however much we try to avoid it. When performing critical thinking, we must take these factors into account to reason more reliably.</p>
+<h3 id="reasoning-about-others">Reasoning about others</h3>
+<p>A <strong>stereotype</strong> is a set of properties associated with a certain class of objects. <strong>Social stereotypes</strong> are those sterotypes associated with a certain group of people.</p>
+<p>Stereotypes can lead to unreliable reasoning. It is connected to the <strong>prototype theory</strong> of concepts, where membership of an object in a class is defined by how close it is to the &quot;prototypal&quot; member of that class. For example, a stool would be considered a member of the class of furniture, because it is quite close to a prototypal piece of furniture, a chair.</p>
+<p>Stereotyping allows us to look as a stool, compare it with the stereotype, the chair, and efficiently determine whether it is furniture or not.</p>
+<p>For example, two groups are given almost identical papers to evaluate, where one group has commonly male names on the papers and the other group has commonly female names on the papers, and the group with male names gives consistently higher scores, revealing that gender biases are much deeper than most people would think. Even though the test subjects believed they were being objective, biases can still be introduced.</p>
+<h1 id="section-23">14/3/14</h1>
+<p>Apparently we didn't do much on Wednesday, probably because of the snow. This class was a review of last class' notes.</p>
+<h1 id="section-24">17/3/14</h1>
+<h2 id="communication">Communication</h2>
+<p>Communication has multiple goals, such as to entertain, scare, or deceive, in addition to transmitting or receiving knowledge. Truth is not the only factor considered when deciding what to share or listen to.</p>
+<p><strong>Fundemental attribution error</strong> is the tendency to explain someone's situation or behaviour based on their personality, character, or disposition while overlooking explanations based on context, accidents, or other effects.</p>
+<p>For example, poverty might be explained as failings of character such as laziness, when there are likely numerous other effects causing this situation.</p>
+<h1 id="section-25">21/3/14</h1>
+<p>The <strong>false polarization effect</strong> is the tendency to overestimate the <strong>extent to which someone's views resemble the strongest/sterotypical views of this sort</strong>, and <strong>the difference between one's own views and the views of people disagreeing</strong>.</p>
+<p><strong>Bandwagon effects</strong> are tendencies to prefer views that they think are held by other people - the idea that &quot;if most other people believe it, then it is likely right&quot;. This may be caused by believing that everyone else has justification, and possibly because defending a minority view requires effort.</p>
+<p>The <strong>false consensus effect</strong> is the tendency to believe that the <strong>absence of disagreement is agreement</strong>. This is due to the convention that assertions are considered accepted until challenged. However, in practice there are social costs to dissenting, and there are therefore pressures not to express the dissenting view. In other words, it is the tendency to believe that one's own opinion is the norm.</p>
+<p>Society allows us to access information otherwise unavailable, but information might not flow perfectly - it can become corrupted, and there are other aims to communication that can lead to unreliable reasoning. Which social group we associate with will bias the information we have access to.</p>
+<p>For example, we might think that Harper is a highly respected prime minister, but this likely reflects our friend group more than the view of all Canadians.</p>
+<p>For efficiency reasons, humans interpret stories, arguments, and reports, and identify the &quot;main points&quot; rather than memorizing the whole thing. As a result, every reading of every article is relative to the reader's state of information, preferences, and world view.</p>
+<p>When we relay information, we tend to emphasize the information perceived to be important/relevant (sharpening), while deemphasizing the less important/relevant aspects (leveling). Repeated sharpening or levelling over multiple relayings can heavily distort the original information.</p>
+<p>People also tend to correct the aspects of reports that they find implausible relative to their own views.</p>
+<h1 id="section-26">24/3/14</h1>
+<h2 id="science">Science</h2>
+<p>Science is seen as an authority or privileged source of information. It has high standards for empirical evidence and follows very careful methods to most successfully obtain information.</p>
+<p>The philosophy of sciecne is a subcategory of philosophy, like metaphysics or epistemology. It focuses on questions such as what should be considered science, how it relates to our learning about world, and how science should be done.</p>
+<p><strong>Science</strong> is a term applied to two distinct things: a set of <strong>social activities</strong> (experiment design, running experiments), and the <strong>representations</strong> (hypotheses, theories, laws, models, etc.) and <strong>artifacts</strong> (instruments, machines, etc.) that result from this.</p>
+<p>We can then define science in terms of these two things. There is the practice of science, which results in the products of science.</p>
+<p>The <strong>demarcation problem</strong> is the problem of determining whether something is or isn't science. This is a useful problem to consider because it can help us understand how some sources of information aare better than others.</p>
+<p>For example: astronomy vs. astrology. It is generally agreed that the former is science, while the latter is pseudo-science.</p>
+<p>Some common criteria for demarcating science are:</p>
+<ul>
+<li>Science is fact based.
+<ul>
+<li>Facts are simply observations we make in the world - empirical observations.</li>
+<li>Assertions based on subjective observations are not science, but assertions based on fact can be.</li>
+</ul></li>
+<li>Scientific claims/theories are verifiable or falsifiable.
+<ul>
+<li>Horoscopes are not science, while astronomy is science.</li>
+<li>Popper stated that falsifiability is the criteria for something being science.</li>
+</ul></li>
+<li>Science employs the scientific method.
+<ul>
+<li>Science makes use of hypotheses and experiments to draw conclusions.</li>
+</ul></li>
+</ul>
+<h1 id="section-27">26/3/14</h1>
+<p><strong>Theory-ladeness</strong> is a phenomenon where all observations are always made against some sort of existing theory and assumptions. In other words, all theories in a paradigm are tied to that paradigm.</p>
+<p>For example, in psychology the diagnoses of a condition is almost always dependent on the mental model being used.</p>
+<p>For example, in electricity, the idea of current is theory-laden because it is tied to our current model of electricity, where electrons flow around.</p>
+<h1 id="section-28">28/3/14</h1>
+<p>The Popperian falsifiability criteria states that something is scientific if it can be falsified - if there is a practical way of showing that it is false.</p>
+<p>In this model, a theory would be more scientifically believable if it survived strong attempts to falsify it - if it passes tests that appeared to be very likely to make it fail.</p>
+<p>However, Quine proposed that there are also intiial conditions and auxilary hypotheses to account for - hypotheses that must be true at the same time as our main hypothesis in order for the conclusion to be true.</p>
+<p>Because of this, falsifying evidence might not actually falsify a theory because it is also possible that one of our auxilary hypotheses are false. For example, &quot;If Mary studies for the test, then Mary will do well&quot; has many auxilary hypotheses, such as &quot;Mary writes the test&quot; and &quot;The test was graded fairly&quot;.</p>
+<p>Even if the conclusion is falsified, &quot;Mary did not do well on the test&quot;, we can only say that one of the hypotheses were false, and it still might be true that &quot;Mark studied for the test&quot;.</p>
+<p>This is covered in more depth in the Philosophy of Science section in the PHIL110A notes.</p>
+<p>The difference between science and pseudoscience can also be said to be whether it uses the scientific method:</p>
+<ol style="list-style-type: decimal">
+<li>Observe a phenomenon.</li>
+<li>Form hypothesis to explain phenomenon.</li>
+<li>Deduce implications of hypothesis.</li>
+<li>Observe some more phenomenon to test hypothesis.</li>
+<li>Evaluate hypothesis by checking it and its implications against the observations.</li>
+</ol>
+<p>Thagard proposed that a discipline is pseudoscience if it is less progressive than alternative theories, and the community does not attempt to develop theories to solve problems, or look at evidence in an unbiased way.</p>
+<p>Science can also be defined by its use of peer review and the way it takes advantage of social cognition. It may be that the structure of the communities themselves determine whether a practice is science or not.</p>
+<p>Science is simply application of critical thinking to empirical evidence. Instead of focusing on what is and isn't science, we should instead focus on what methods of generating information are reliable.</p>
+<p>A <strong>single blind</strong> study is one where the participants are not given all the information, but the experimentors are, to avoid bias.</p>
+<p>A <strong>double blind</strong> study is one where both the participants and experiments are not given all the information, to avoid bias.</p>
+<h3 id="consistency-1">Consistency</h3>
+<p>Consistency between theories also affects whether a theory is a good one. A theory that fits with existing theories is more likely to be scientific, and vice versa.</p>
+<p><strong>Consilience</strong> is a related concept - where a theory developed for one domain also explains phenomena in another domain. For example, the Newtonian theory of gravitation explains the motion of planets, but also the tides on Earth.</p>
+<p>If we generalize this, we might find that we want science to give a single, unified world view, like how Maxwell unified electricity and magnitism into electromagnetism.</p>
+<h3 id="reliability">Reliability</h3>
+<p>We can judge whether some scientific activity is likely reliable by looking at its features and products.</p>
+<p>First, it must be driven by evidence. It should use something like the scientific method, heavily scrutinize the resulting theories, and make use of all evidence available in an objective way.</p>
+<p>Second, it must produce hypotheses/theories that can actually be evaluated against real evidence. It should be verifiable or falsifiable, having clear implications and fitting well with existing theories.</p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

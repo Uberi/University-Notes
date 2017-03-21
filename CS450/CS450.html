@@ -801,6 +801,77 @@ spin exch R2, (R1) ; atomically exhange the value of the lock with 1
 <p>In inclusive cache schemes, only the lowest level of cache maintains cache coherency. Remote UPGRADE/WRITE-MISS messages are passed up to higher levels, while local UPGRADE/WRITE-MISS messages are passed to lower levels, sort of like a write-through scheme. This has the advantage of higher levels dealing with most processor requests.</p>
 <p>In exclusive cache schemes, all levels need to snoop on UPGRADE/WRITE-MISS messages, and for a directory, messages go to all levels.</p>
 <p>In current Intel architectures, L1 and L2 are exclusive caches, and L3 is inclusive.</p>
+<h1 id="section-20">21/3/17</h1>
+<h2 id="hardware-transactional-memory">Hardware Transactional Memory</h2>
+<p>Transactional memory allows memory operations to be organized into transactions, much like database transactions. Compared to locks, it's a simpler paradigm and is easier to reason about.</p>
+<p>There are some research implementations of software transactional memory, but they generally result in poor performance. Hardware implementations can be a lot faster</p>
+<p>For our purposes, a <strong>transaction</strong> is a set of instructions that either all succeed (runs normally), or none do (all those instructions have no effect). In other words, an atomic block of instructions. Our goal is to allow transactions to execute in parallel.</p>
+<p>Reads in transactions are tracked in the <strong>read set</strong> (RS) buffer, and writes are tracked in the <strong>write set</strong> (WS) buffer (reads/writes aren't actually executed, just tracked). A <strong>conflict</strong> is when a thread writes to a memory location that is in another transaction's RS or WS.</p>
+<p>Locks are pessimistic parallism - they optimize for the case in which a conflict occurs, by preventing conflicts from happening in the first place. Transactions are optimistic parallelism - they optimize for the case in which no conflicts occur, by recovering from conflicts when we encounter them.</p>
+<p>Transactional memory example in C++:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;random&gt;</span>
+<span class="ot">#include &lt;thread&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="ot">#define NUM_THREADS 10</span>
+<span class="ot">#define NUM_ACCOUNTS 1000</span>
+
+<span class="dt">int</span> balance[NUM_ACCOUNTS];
+
+<span class="dt">void</span> func() {
+    random_device rnd;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">1000000</span>; i ++) {
+        <span class="dt">int</span> a1 = rnd() % NUM_ACCOUNTS;
+        <span class="dt">int</span> a1 = rnd() % NUM_ACCOUNTS;
+        <span class="dt">int</span> amount = rnd() % <span class="dv">100</span>;
+
+        <span class="co">// this block executes atomically, as a single transaction</span>
+        __transaction_atomic {
+            <span class="kw">if</span> (amount &gt; balance[a1]) { amount = balance[a1]; }
+            balance[a1] -= amount;
+            balance[a2] += amount;
+        }
+    }
+}
+
+<span class="dt">int</span> main() {
+    <span class="co">// initialize every account to have balance 100</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; NUM_ACCOUNTS; i ++) { balance[i] = <span class="dv">100</span>; }
+
+    thread thr[NUM_THREADS];
+    <span class="kw">for</span> (<span class="kw">auto</span> &amp;t : thr) { t = thread(func); }
+}</code></pre></div>
+<p>This compiles with experimental features of GCC, which implements software transactional memory. However, without hardware support, this turns out to have half the performance of the mutex-based version. The main issue is that resolving conflicts is really expensive in hardware.</p>
+<p>Herlihy and Moss proposed the first hardware transactional memory architecture in 1993. This architecture added a transactional cache in parallel to the L1 data cache, and improved performance over software transactional memory by an order of magnitude.</p>
+<p>The first commercially available hardware transactional memory implementation was the IBM POWER8 in 2013, followed by the Intel Haswell chips later that year. The POWER8 processor's HTM implementation was complicated by its cache structure, and the fact that it had 8 hardware threads per core.</p>
+<p>A typical implementation of HTM looks like this:</p>
+<ul>
+<li>A <code>tbegin FALLBACK_ADDRESS</code> instruction to start a transaction.
+<ul>
+<li><code>FALLBACK_ADDRESS</code> is the address to resume execution at if the transaction ends up failing.</li>
+<li>Nested <code>tbegin</code> instructions are flattened into a single transaction (since the inner transaction failing would also cause the outer one to fail anyways).</li>
+<li>All reads and writes that happen in the transaction are tracked, but not actually executed until the transaction is committed.</li>
+</ul></li>
+<li>A <code>tend</code> instruction to atomically commit the current transaction.
+<ul>
+<li>Basically, this atomically runs all of the writes in the transaction's write set.</li>
+<li>For nested transactions, a counter keeps track of the current nesting depth, and ignores all non-top-level commits.</li>
+</ul></li>
+<li>A <code>tabort</code> instruction to abort the current transaction.
+<ul>
+<li>For nested transactions, this causes all transactions up the stack, all the way to the top-level transaction, to be aborted.</li>
+</ul></li>
+<li>Version management for memory.
+<ul>
+<li>Register renaming hardware can be used to checkpoint register contents, just like we did for speculative branches.</li>
+<li>The first-level data cache (L1 for current Intel processors) can be used for storing the WS and RS.</li>
+<li>The last-level data cache (L3 for current Intel processors) can be used to save pre-transaction memory block state.</li>
+<li>Cache-coherence traffic can be used to detect conflicts.</li>
+<li>Atomic writes for the WS need to be implemented on the memory bus.</li>
+<li>For example, suppose we have a 2-level cache where L2 is inclusive of L1. First, we might add a Transaction tag to the L1 cache (set by loads/stores in a transaction). A conflict occurs when a bus upgrade/write-miss occurs on a value in RS or WS, or a read-miss occurs on a value in WS. Upon a conflict occuring, we abort, which clears the Transaction tag from conflicted blocks in RS, invalidates conflicted blocks in WS, and jumps to the fallback address. Upon transaction commit, we copy blocks from the transaction's WS to L2, and clear all Transaction tags matching it.</li>
+</ul></li>
+</ul>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.

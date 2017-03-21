@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="author" content="$author-meta$" />
   <title>CS135 | Anthony Zhang</title>
   <link rel="stylesheet" href="../css/base.css" type="text/css">
   <link rel="stylesheet" href="../css/note.css" type="text/css">
@@ -11,6 +10,7 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body onload="highlight()">
   <script>
@@ -70,33 +70,2034 @@
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
 \]</span></p>
-<p>$if(toc)$</p>
-<div id="$idprefix$TOC">
-$toc$
-</div>
-<p>$endif$</p>
-<h1 id="lecture-notes-by-anthony-zhang.">Lecture Notes by <a href="/">Anthony Zhang</a>.</h1>
+<h1 id="cs135">CS135</h1>
+<pre><code>Designing Functional Programs</code></pre>
+<p>Instructor:</p>
+<pre><code>Name: Sandra (Sandy) Graham
+Email: sandy.graham@uwaterloo.ca
+Office: MC 6423
+Office hours: Tuesdays in MC 2062/2063, Thursdays in MC 4065, 1:15-2:15 PM</code></pre>
+<p>ISA = instructional support assistant</p>
+<p>Drop by the Tutorial Center (MC 4065) during the <a href="https://www.student.cs.uwaterloo.ca/~cs135/TutorOfficeHours">scheduled hours</a> for assistance, no appointments needed.</p>
+<h2 id="i-clicker">i-clicker</h2>
+<p>Do this before every class:</p>
+<ol style="list-style-type: decimal">
+<li>Hold On/Off until power button blinks.</li>
+<li>There is an i-clicker sticker on the wall, says DA. Press D and then A.</li>
+<li>The Vote Status light should flash green.</li>
+</ol>
+<h2 id="programming-language-design">Programming Language Design</h2>
+<p>Two important branches of language design:</p>
 <ul>
-<li><a href="/blog/" class="page">blog</a></li>
-<li><a href="http://uberi.github.io/University-Notes" class="page">notes</a></li>
-<li><a href="/resume.pdf" class="page">résumé</a></li>
-<li><a href="https://github.com/Uberi" class="contact">github</a></li>
-<li><a href="https://www.linkedin.com/in/uberi/" class="contact">linkedin</a></li>
-<li><script type="text/javascript">
-<!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x65;&#x6d;&#x61;&#x69;&#108;'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x61;&#122;&#104;&#x61;&#110;&#x67;&#x39;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
-<li><a href="https://www.facebook.com/anthony.zhang.user" class="contact">facebook</a></li>
-<li><a href="https://twitter.com/anthony926535" class="contact">twitter</a></li>
-<li><a href="https://keybase.io/uberi" class="info">public key</a></li>
+<li>Imperative: frequent changes to data - Java, C++</li>
+<li>Functional: computation of new values rather than changing old ones - LISP, ML, Haskell, Erlang, F# - closely connected to math, easier to reason about/design programs</li>
 </ul>
-<p><span class="math">\[ \newcommand{\set}[1]{\left\{ #1 \right\}} \newcommand{\tup}[1]{\left\langle #1 \right\rangle} \newcommand{\abs}[1]{\left\lvert #1 \right\rvert} \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} \newcommand{\ceil}[1]{\left\lceil#1 \right\rceil} \newcommand{\mb}[1]{\mathbb{#1}} \newcommand{\rem}{\operatorname{rem}} \newcommand{\sign}{\operatorname{sign}} \newcommand{\imag}{\boldsymbol{i}} \newcommand{\dee}{\mathop{}\!\mathrm{d}} \newcommand{\lH}{\overset{\text{l'H}}{=}} \newcommand{\evalat}[1]{\left.\left(#1\right)\right|} \newcommand{\sech}{\operatorname{sech}} \newcommand{\spn}{\operatorname{Span}} \newcommand{\proj}{\operatorname{proj}} \newcommand{\prp}{\operatorname{perp}} \newcommand{\refl}{\operatorname{refl}} \newcommand{\magn}[1]{\left\lVert #1 \right\rVert} \newcommand{\rank}{\operatorname{rank}} \newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]} \newcommand{\range}{\operatorname{Range}} \newcommand{\adj}{\operatorname{adj}} \newcommand{\cof}{\operatorname{cof}} \newcommand{\diag}{\operatorname{diag}} \newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)} \]</span></p>
-<p>$body$ $for(include-after)$ $include-after$ $endfor$</p>
-<div class="license">
-<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" alt="Creative Commons License" /></a> This work by <a href="https://uberi.github.io/">Anthony Zhang</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright 2013-2017 Anthony Zhang.
-</div>
+<h2 id="scheme">Scheme</h2>
+<p>Member of the LISP family of languages.</p>
+<ul>
+<li>Usually no side effects - operations do not affect other ones</li>
+<li>Functional language</li>
+</ul>
+<p>Basic Scheme forms:</p>
+<pre><code>;; block comment
+5 ; inline comment
+6 ; atom number
+&quot;abc&quot; ; atom string</code></pre>
+<p>Stylistically, single line comments should use two semicolons; however, this is not required by the syntax.</p>
+<p>Primary aspects of course:</p>
+<ul>
+<li>Design</li>
+<li>Abstraction</li>
+<li>Refinement of old ideas</li>
+<li>Syntax, expressiveness, semantics</li>
+<li>Communication with human and computer</li>
+</ul>
+<h3 id="functions">Functions</h3>
+<p>In math, functions generalize similar expressions:</p>
+<pre><code>f(x) = x^2+4*x+2
+g(x,y) = x+y</code></pre>
+<p>Function consist of:</p>
+<ul>
+<li>Function name</li>
+<li>Parameters</li>
+<li>Algebraic expression of parameters</li>
+</ul>
+<p>Application of function:</p>
+<pre><code>f(3)
+g(5,6)</code></pre>
+<p>Application supplies arguments (the values) that correspond to the parameters.</p>
+<p>In math, application is evaluated by substitution:</p>
+<pre><code>f(g(5,6)) = f(5+6) = f(11) = 11^2+4*11+2 = 167</code></pre>
+<p>Evaluation can be done in any order:</p>
+<pre><code>g(g(1,3),f(2)) = g(1+3,f(2)) or g(1,3) + f(2)</code></pre>
+<p>The Scheme interpreter (program that evaluates Scheme code) uses a left to right, depth-first evaluation order - inside-out, left to right.</p>
+<p>Math is written in infix notation - the operator is placed between its operands. There are also notations known as prefix and postfix notation - operator before operands, and operator after operands, respectively.</p>
+<p>Scheme uses prefix notation. Prefix notation needs no order of operations because there is no ambiguity.</p>
+<p>Convert infix to prefix:</p>
+<pre><code>(6-4)/(5+7)
+What is the last operator to be applied?
+/ (6-4) (5+7)
+Repeat process.
+/ - 6 4 + 5 7
+This is valid prefix notation, but not valid Scheme.
+Since in Scheme arbitrary numbers of operands are supported, we need to add brackets to make it explicit.
+(/ (- 6 4) (+ 5 7))</code></pre>
+<p>Conversion is done by moving the last operator to be applied to the beginning of the subexpression until no infix operators remain. Operand order remains the same.</p>
+<h2 id="prefix-notation">Prefix Notation</h2>
+<p>If we treat infix operators as functions, we don't need to use parentheses to specify order of operations:</p>
+<pre><code>3 - 2 ;infix notation
+-(3, 2) ;prefix notation</code></pre>
+<p>Convert to prefix notation:</p>
+<pre><code>(((3+8)-(7+9))/12) ;infix notation
+/ ((3+8)-(7+9)) 12
+/ - (3+8) (7+9) 12
+/ - + 3 8 + 7 9 12 ;prefix expression
+(/ (- (+ 3 8) (+ 7 9) 12)) ;scheme code</code></pre>
+<p>Scheme code needs the brackets in order to support arbitrary numbers of parameters.</p>
+<h2 id="drracket">DrRacket</h2>
+<p>Racket (Scheme) development environment.</p>
+<p>DrRacket has interactions and definitions panes. Definitions are persistent and are saved on permanent storage. Interactions are realtime and users interact with programs here, but are not saved.</p>
+<p>The interactions pane is a REPL (read-eval-print-loop), a way to write some code, execute it, and get results immediately.</p>
+<p>Integers in Scheme are unbounded - they can be arbitrarily large without fear of overflows.</p>
+<p>Rational numbers in Scheme are represented and computed exactly, without any loss in precision. Scheme tries to use exact numbers whenever possible.</p>
+<p>When an exact value is not possible, such as with irrational numbers, they are marked as <strong>inexact</strong>. Inexact values taint all computations it is used in with inexactness.</p>
+<pre><code>(sqrt 2) evaluates to #i1.414213562370951 ; #iX represents a literal inexact value
+(expt 2 100) evaluates to 1267650600228229401496703205376 ;exact
+(/ -5 12) evaluates to $-\frac{5}{12}$ ;exact
+#i1.23 ;inexact
+1.2e12 ;exact
+1.234567 ;exact
+12345 ;exact</code></pre>
+<p>Common errors:</p>
+<ul>
+<li>Mismatched brackets: <code>(+ 1 2</code></li>
+<li>Infix operators: <code>(1 + 2)</code></li>
+<li>Runtime errors: <code>(/ 3 (- 2 2))</code> (division by 0)</li>
+</ul>
+<p>The stepper tool is useful for tracing execution one step at a time.</p>
+<p>Scheme is a dynamically typed language - types do not need to be declared. Contracts are not enforced by the language since they are just comments. However, we can explicitly check for types to catch errors.</p>
+<p>This contrasts with statically typed languages such as Java, where the type is associated with identifiers and only certain values are allowed to be stored in them.</p>
+<p>Types are associated with <strong>values</strong>, but not with identifiers such as parameters or constants.</p>
+<h2 id="definitions">Definitions</h2>
+<p>Defining functions in math:</p>
+<p><span class="math inline">\(f(x) = x^2\)</span></p>
+<p>This follows the general pattern of <code>name(formal_parameters) = body</code></p>
+<p>In Scheme, this is written <code>(define (name formal_parameters) body)</code>. For example:</p>
+<pre><code>(define (sum x y) (+ x y)) is equivalent to sum(x,y) = x + y</code></pre>
+<p>This is called with something like the following:</p>
+<pre><code>(sum 5 6) ; 5 and 6 are the arguments</code></pre>
+<p><code>define</code> is a <strong>special form</strong>. It looks like a Scheme function, but its arguments are not necessarily evaluated, and this form may do something special normal functions cannot. <code>define</code> <strong>binds</strong> a name to an expression.</p>
+<p>A definition can only be defined once - <code>define</code> cannot be used twice on the same identifier. However, redefinition is possible in the full Scheme language.</p>
+<p>All operators in scheme are actually just functions: <code>+</code>, <code>-</code>, <code>sqrt</code> are predefined in the environment when the program starts. This means that they can be redefined, too.</p>
+<p>Evaluate <code>(* (- 6 4) (+ 3 2))</code>:</p>
+<pre><code>(* (- 6 4) (+ 3 2))
+(* 2 (+ 3 2))
+(* 2 5)
+10</code></pre>
+<p>On paper:</p>
+<p><span class="math display">\[
+\text{(* (- 6 4) (+ 3 2))}
+\implies \text{(* 2 (+ 3 2))}
+\implies \text{(* 2 5)}
+\implies 10
+\]</span></p>
+<p>Functions are applied via substitution, as in math. There is only one solution to every possible expression - there is no ambiguity. Functions can only return one value.</p>
+<h2 id="constants">Constants</h2>
+<p>Constants do not accept parameters, and simply have a constant value:</p>
+<pre><code>(define pi 3.1415926535)
+(define density (/ mass volume))</code></pre>
+<p>Orders of definitions are not important at this point. Definitions can be done in any order.</p>
+<p>Constants are a special case of definitions. Constants are only evaluated once, and are not evaluated again upon substitution.</p>
+<h2 id="scope">Scope</h2>
+<p>Inner scopes override outer scopes:</p>
+<pre><code>(define x 3)
+(define (f x) (* x x))
+(f 4) ; in the body of f, x is 4, since the parameter is in the inner scope and overrides x=3 in the outer scope</code></pre>
+<p>Every function has its own scope. Scopes are environments where bindings exist.</p>
+<h1 id="section">17/9/13</h1>
+<p>Constants have various advantages:</p>
+<ul>
+<li>Gives meaningful names to magic numbers.</li>
+<li>Reduces typing and errors if values need to be changed.</li>
+<li>Makes programs easier to understand.</li>
+</ul>
+<p>Constants are sometimes called variables, but are generally not changed.</p>
+<p>Unevaluated code is highlighted in black. Tests try to evaluate all possible code paths and all the highlighting should disappear.</p>
+<p>Scheme programs are sequences of definitions and expressions.</p>
+<p>Expressions are evaluated using substitution to produce values.</p>
+<p>Expressions may use special forms such as <code>define</code>, which may not necessarily behave in the same way as normal expressions.</p>
+<h2 id="the-design-recipe">The Design Recipe</h2>
+<p>Programs are acts of communication: between person and computer, between person and same person in the future, and between person and others.</p>
+<pre><code>; comments start with a semicoolon and go on until the end of the line</code></pre>
+<p><strong>Block comments</strong> are comments that generally go on for multiple lines. These are, by convention, written with two semicolons:</p>
+<pre><code>;; block comments
+;; generally apepar at the beginning of files
+;; and before functions</code></pre>
+<p>Every function must follow the design recipe - a development process that leaves behind a written explanation of development.</p>
+<p>Design recipes result in robust and reliable functions that are easy to understand.</p>
+<p>The five parts of the design recipe are, in order of submission:</p>
+<ul>
+<li>Contract: information for the user - function signature - argument types and descriptions, return types and descriptions.</li>
+<li>Purpose: description of what the function is designed to compute - what it produces or returns.</li>
+<li>Examples: clarification of the general use of the function and what usage of it looks like. Should represent each part of the data definition.</li>
+<li>Definition: The Scheme header and body of the function.</li>
+<li>Tests: a representative set of inputs and expected outputs showing that the function works - expected outputs must be calculated by hand or some other source.</li>
+</ul>
+<p>Examples are similar to tests, but tests generally only show the function works while examples show people how to use it. There are usually more tests than examples.</p>
+<p>Recommended order of execution:</p>
+<ul>
+<li>Write contract.</li>
+<li>Write purpose.</li>
+<li>Write examples.</li>
+<li>Write definition body.</li>
+<li>Write tests.</li>
+</ul>
+<p>Write a function that sums the squres of two numbers:</p>
+<pre><code>Contract:
+;; sum-of-squares: Num Num -&gt; Num
+Purpose:
+;; Purpose: produces the sum of squares of arg1 and arg24
+Examples:
+;; Examples:
+(check-expect (sum-of-squares 3 4) 25)
+(check-expect (sum-of-squares 0 2.5) 6.25)
+Body:
+(define (sum-of-squares arg1 arg2)
+    (+ (sqr arg1) (sqr arg2)))
+Tests:
+(check-expect (sum-of-squares -1 2) 5)
+(check-expect (sum-of-squares 0.01 1000) 1000000.0001)
+(check-expect (sum-of-squares 50 -28) 3284)
+(check-expect (sum-of-squares 1/25 65) 4225.0016)</code></pre>
+<p>Types used in contract (case sensitive):</p>
+<ul>
+<li>Num: any Scheme numeric value</li>
+<li>Int: any integers</li>
+<li>Nat: natural numbers</li>
+<li>Boolean: Boolean value</li>
+<li>Symbol: symbolic value</li>
+<li>String: string value</li>
+<li>Char: character value</li>
+<li>Any: any type of value</li>
+</ul>
+<p>Tests should be written after the code body. They should be small and focused with a clear purpose.</p>
+<pre><code>(check-expect (+ 1 2) 3) ; checks that a value is exactly equal to another
+(check-within (sqrt 2) 1.414 0.001) ; checks that a value is equal to another within a tolerance
+(check-error (/ 1 0) &quot;/: division by zero&quot;) ;checks that a certain error occurs</code></pre>
+<p>These are special forms and are evaluated at the end. A summary of the test results are shown in the interactions window.</p>
+<p>Write a function that rounds to a given number of decimal places:</p>
+<pre><code>;; round-to: Num Int -&gt; Num
+;; Purpose: produces the value given rounded to a given number of decimal places
+;; Examples:
+(check-expect (round-to 1.25 1) 1.2)
+(check-expect (round-to 23.45 -1) 20)
+
+(define (round-to value decimal-places)
+    (/ (round (* value
+                 (expt 10 decimal-places)))
+       (expt 10 decimal-places)))
+
+;; Tests
+(check-expect (round-to 1.25 1) 1.2) ; round down towards even number
+(check-expect (round-to 1.35 1) 1.4) ; round up towards even number
+(check-expect (round-to 12.3 5) 12.3) ; fewer decimal places than requested
+(check-expect (round-to 12 0) 12) ; boundary condition</code></pre>
+<p>We can put <code>...</code> as a placeholder for the function body before actually writing the body.</p>
+<p>If the contract is violated, the result may be undefined. For example, <code>(round-to 3 0.5)</code>.</p>
+<p>Starting with the Intermediate Student teaching language, helper functions that supplement a wrapper function need only a contract and purpose if the wrapper function obeys all of the following:</p>
+<ul>
+<li><strong>One line of code</strong> in the body.</li>
+<li>Includes a function application of the helper function with <strong>modified or additional</strong> parameters.</li>
+</ul>
+<p><strong>Mutually recursive functions</strong>, should be directly adjacent. They only need one set of examples and tests for all of them, but each one still neesd a contract and purpose.</p>
+<p>The tests for the wrapper function, however, must fully test the helper function as well.</p>
+<p>Templates are useful, but are <strong>not required</strong> to unless <strong>specifically requested to</strong>, or <strong>for custom data types</strong>.</p>
+<p>See &quot;Generative Recursion and the Design Recipe&quot; for more concerns when using the design recipe with generative recursion.</p>
+<h1 id="section-1">19/9/13</h1>
+<h2 id="boolean-values">Boolean Values</h2>
+<p>Scheme represents Boolean values with the literals <code>#t</code> and <code>#f</code> (<code>true</code> and <code>false</code> are also usable in the Scheme teaching languages), representing true and false respectively.</p>
+<p>The equality function <code>(= x y)</code> (<code>(= Num Num) -&gt; Boolean</code>) tests whether two numbers are equal and results in a boolean value. <code>(&lt; x y)</code> and <code>(&gt;= x y)</code> behave similarly.</p>
+<p><strong>Predicates</strong> are expressions that result in Boolean values. They are, by convention, given names that end with a question mark. For example, <code>(even? x)</code> is clearly a predicate.</p>
+<p>The most common Boolean operators are <code>(and x y ...)</code>, <code>(or x y ...)</code>, and <code>(not x)</code>. They represent <span class="math inline">\(x \wedge y\)</span>, <span class="math inline">\(x \vee y\)</span>, and <span class="math inline">\(\neg x\)</span>, respectively.</p>
+<p>Scheme has no inequality (not-equals) operator. However, it can be implemented as follows: <code>(not (= x y))</code>.</p>
+<p>Scheme uses short circuit evaluation. For <code>and</code> and <code>or</code>, if the result of the expression is known before the evaluation is complete, the rest is not evaluated:</p>
+<ul>
+<li>If <code>or</code> has a true argument, it knows that the result must be true regardless of other arguments - <code>(or #t (/ 1  0))</code> will not give an error, since the division is never evaluated.</li>
+<li>If <code>and</code> has a false argument, it knows that the result must be false regardless of other arguments - <code>(and #f (/ 1 0))</code> will not give an error, since the division is never evaluated.</li>
+</ul>
+<p>This is made possible by <code>and</code> and <code>or</code> being special forms.</p>
+<p>Many types have an equality predicate, like <code>symbol=?</code> and <code>string=?</code>, which should be used whenever possible. However, if the types of the operands are not known befrehand, <code>(equal? x y ...)</code> can be used to check that they are compatible types and that they have the same value. This does not work with inexact numbers.</p>
+<h2 id="strings">Strings</h2>
+<p>Strings are denoted by double quotes: <code>&quot;CS135&quot;</code>, <code>&quot;abc&quot;</code>, <code>&quot;&quot;</code>.</p>
+<p>The length of a string is determined with <code>(string-length x)</code>. We determine if a value is a string with the predicate function <code>(string? x)</code>. We concatenate strings using <code>(string-append x y ...)</code></p>
+<p>String comparisons are done based on ASCII values.</p>
+<h2 id="symbols">Symbols</h2>
+<p>Symbols are denoted by a single quote: <code>'symbol</code>. A symbol represents a particular idea. They are used to define a finite set of values, each one with a name.</p>
+<p>Symbols can only be compared, not manipulated like with strings.</p>
+<p>Write a predicate function that checks if the input is a valid multiple choice answer:</p>
+<pre><code>;; valid-choice: Any -&gt; Boolean
+;; Purpose: produces true when the answer is one of &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, false otherwise.
+;; Examples:
+(check-expect (valid-choice? 123) #f)
+(check-expect (valid-choice? &quot;C&quot;) #t)
+
+(define (valid-choice? value)
+    (and (string? value)
+         (or (string=? value &quot;A&quot;)
+             (string=? value &quot;B&quot;)
+             (string=? value &quot;C&quot;)
+             (string=? value &quot;D&quot;))))
+
+;; Tests
+(check-expect (valid-choice? &quot;A&quot;) true)
+(check-expect (valid-choice? &quot;B&quot;) true)
+(check-expect (valid-choice? &quot;C&quot;) true)
+(check-expect (valid-choice? &quot;D&quot;) true)
+(check-expect (valid-choice? &quot;potato&quot;) false)
+(check-expect (valid-choice? 123) false)</code></pre>
+<h2 id="conditional-expressions">Conditional Expressions</h2>
+<p>The special form <code>cond</code> is used to write conditionaal expressions in Scheme. Each argument is a question/answer pair, where the question is a boolean expression:</p>
+<pre><code>(cond
+    [(&lt; x 0) (- x)]
+    [(&gt;= x 0) x])</code></pre>
+<p>The above results in the absolute value of <code>x</code>.</p>
+<p>Square brackets are used by convention. Square brackets are equivalent to parentheses in the teaching languages.</p>
+<p><code>cond</code> evaluates the question in each pair from top to bottom. As soon as one is true, its associated answer is evaluated and returned. If no pair matches, a runtime error is generated.</p>
+<p>The last pair can use the question <code>else</code> to always match:</p>
+<pre><code>(cond
+    [(= 1 2) 3]
+    [(= 4 5) 6]
+    [else 7])</code></pre>
+<p>Write a program that converts a numeric grade to a letter grade:</p>
+<pre><code>(define (convert-grade percentage advanced?)
+    (string-append
+        (cond
+            [(&gt;= percentage 80) &quot;A&quot;]
+            [(&gt;= percentage 70) &quot;B&quot;]
+            [(&gt;= percentage 60) &quot;C&quot;]
+            [(&gt;= percentage 50) &quot;D&quot;]
+            [else &quot;F&quot;])
+        (cond
+            [advanced? &quot;+&quot;]
+            [else &quot;&quot;])))</code></pre>
+<p>When testing <code>cond</code> statements, test values on boundaries, and test values for each case. A statement with 4 cases might need 7 tests.</p>
+<h1 id="section-2">24/9/13</h1>
+<h3 id="simplifying-conditionals">Simplifying Conditionals</h3>
+<p>If a question is asked, we know that all the questions before it are false.</p>
+<p>For example, we can simplify the following:</p>
+<pre><code>(cond
+    [(&lt; grade 50) &#39;fail]
+    [(and (&lt; grade 60) (&gt;= 50)) &#39;poor]
+    [(&gt;= grade 60) &#39;acceptable])</code></pre>
+<p>Into the following:</p>
+<pre><code>(cond
+    [(&lt; grade 50) &#39;fail]
+    [(&lt; grade 60) &#39;poor]
+    [else &#39;acceptable])</code></pre>
+<p>For conditional expressions, each question and answer should have one corresponding tests. The tests should be simple and directly test a particular answer. More tests are appropriate at boundary points as well.</p>
+<p>In the above case, good test values would be 40, 50, 55, 60, and 70.</p>
+<p>Every way each argument could be false needs to be false, and each one needs a test.</p>
+<p>Some tests are based on the problem description - these are <strong>black-box tests</strong>. They are not based on anything in the code, such as implementation details.</p>
+<p>Some tests are based on the code itself - these are <strong>white-box tests</strong>. They may check things like specific conditionals or boolean expressions.</p>
+<p>Both types of testing are important.</p>
+<p>Helper functions generalize similar expressions, and help avoid overly complex expressions. Helper functions should use meaningful names and must follow the design recipe.</p>
+<h2 id="syntaxsemantics">Syntax/Semantics</h2>
+<p><strong>Syntax</strong> is the way we're allowed to say things.</p>
+<p><strong>Semantics</strong> is the meaning of what we say.</p>
+<p><strong>Ambiguity</strong> is the property of sentence having multiple meanings.</p>
+<p>Scheme programs must have correct syntax, meaningful semantics, and be unambiguous.</p>
+<h3 id="syntax">Syntax</h3>
+<p>Grammars enforce syntax and avoid ambiguity. For example, an English sentence might be described as follows:</p>
+<pre><code>&lt;sentence&gt; = &lt;subject&gt; &lt;verb&gt; &lt;object&gt;</code></pre>
+<p>The grammar is the <strong>syntactic model</strong> of the Scheme language.</p>
+<h3 id="semantics">Semantics</h3>
+<p>A <strong>semantic model</strong> provides a way to predict the result of running any program.</p>
+<p>Ellipses (<code>...</code>) can represent omissions, indicate patterns, and more. Pattern ellipses often represent multiple arguments or parameters.</p>
+<p>A semantic model for Scheme is based on substitution, where we step through the program one substitution at a time:</p>
+<ol style="list-style-type: decimal">
+<li>Find the leftmost (from beginning) expression that can have a rule applied to it.
+<ul>
+<li>A rule can only be applied if the expression depends only on simple values.</li>
+<li>Otherwise, the non-simple values need to be simplified first.</li>
+</ul></li>
+<li>Rewrite it according to the substitution rules:
+<ul>
+<li><strong>Built-in function applications</strong> become their values.
+<ul>
+<li><code>(f ...)</code> =&gt; <code>(result of evaluating f(...))</code></li>
+</ul></li>
+<li><strong>User defined function applications</strong> become their bodies, with arguments inserted.
+<ul>
+<li>when <code>(define (f ...) e)</code> occurs to the left, <code>(f ...)</code> =&gt; <code>(e with substitution of parameters for arguments)</code></li>
+<li>note that this excludes functions that were defined using lambda, which should be treated like any other constant definition: <code>(define f (lambda (x) x)) (f 5)</code> =&gt; <code>((lambda (x) x) 5)</code></li>
+<li>otherwise, there is an error</li>
+</ul></li>
+<li><strong>Constants</strong> become their values.
+<ul>
+<li>when <code>(define x ...)</code> occurs to the left, <code>x</code> =&gt; <code>...</code></li>
+<li>this rule includes values that are lambda functions, even though they are equivalent to <code>(define (f ...) ...)</code></li>
+<li>otherwise, there is an error</li>
+</ul></li>
+<li><strong>Conditional expressions</strong> become an answer if a question is true, or lose a question/answer pair otherwise.
+<ul>
+<li><code>(cond [true e])</code> =&gt; <code>e</code></li>
+<li><code>(cond [false e] ...)</code> =&gt; <code>(cond ...)</code></li>
+<li><code>(cond [else e])</code> =&gt; <code>e</code></li>
+</ul></li>
+<li><strong>And</strong> and <strong>or</strong> become short circuiting arguments, and lose non-short-circuiting arguments.
+<ul>
+<li><code>(and false ...)</code> =&gt; <code>false</code></li>
+<li><code>(and true ...)</code> =&gt; <code>(and ...)</code></li>
+<li><code>(and)</code> =&gt; <code>true</code></li>
+<li><code>(or true ...)</code> =&gt; <code>true</code></li>
+<li><code>(or false ...)</code> =&gt; <code>(or ...)</code></li>
+<li><code>(or)</code> =&gt; <code>false</code></li>
+</ul></li>
+<li><strong>Structure constructors</strong> stay as-is, though arguments are simplified.
+<ul>
+<li><code>(make-posn ...)</code> =&gt; <code>(make-posn ...)</code></li>
+<li><code>(make-posn 8 1)</code> =&gt; <code>(make-posn 8 1)</code></li>
+</ul></li>
+<li><strong>Structure selectors</strong> become the value of its corresponding field.
+<ul>
+<li><code>(posn-x (make-posn 4 2))</code> =&gt; <code>4</code></li>
+</ul></li>
+<li><strong>Structure predicates</strong> become a boolean representing whether the argument is an instance of the structure.
+<ul>
+<li><code>(posn? (make-posn 1 2))</code> =&gt; <code>true</code></li>
+<li><code>(posn? 5)</code> =&gt; <code>false</code></li>
+</ul></li>
+<li><strong>Lists</strong> stay as-is, though arguments are simplified.
+<ul>
+<li><code>(cons 1 (cons 2 empty))</code> =&gt; <code>(cons 1 (cons 2 empty))</code></li>
+<li><code>(list 1 2 3 4 5)</code> =&gt; <code>(list 1 2 3 4 5)</code> in &quot;Beginner Student with List Abbreviations&quot; and above.</li>
+</ul></li>
+<li><strong>Local definitions</strong> are renamed, rebound, and hoisted. See &quot;Local Definitions and Lexical Scope&quot; for more details.
+<ul>
+<li><code>(local [(define x ...) ...] ...)</code> =&gt; <code>(define (new name for x) ...) (body of local with x substituted with the new name for x)</code></li>
+<li><code>(local [(define (f ...) ...) ...] ...)</code> =&gt; <code>(define ((new name for f) ...) ...) (body of local with f substituted with the new name for f)</code></li>
+<li>if there are multiple defines and they have identifiers in their values, they are considered to be inside the local scope: <code>(local [(define x y) (define y 5)] x)</code> =&gt; <code>(define x_0 y_0) (define y_0 5) x</code>, which then results in an error.</li>
+</ul></li>
+<li><strong>Anonymous functions</strong> become their bodies, with arguments inserted.
+<ul>
+<li><code>((lambda (x) (* x 2)) 5)</code> =&gt; <code>(* 5 2)</code></li>
+</ul></li>
+</ul></li>
+<li>This is one <strong>evaluation step</strong>. Return to step 1 until the entire expression is in the simplest possible form, or results in an error.</li>
+</ol>
+<p>Note that constant and function definitions are already in their simplest form.</p>
+<p>These rules may differ from those in DrRacket's stepper feature.</p>
+<p>Evaluating a program by stepping through is called <strong>tracing</strong>. In more complex programs, <strong>condensed traces</strong> are used - traces that can skip multiple steps to show only important parts.</p>
+<p>Trace <code>(term (- 3 1) (+ 1 2))</code> given <code>(define (term x y) (* x (sqr y)))</code>:</p>
+<pre><code>(term (- 3 1) (+ 1 2))
+=&gt; (term 2 (+ 1 2))
+=&gt; (term 2 3)
+=&gt; (* 2 (sqr 3))
+=&gt; (* 2 9)
+=&gt; 18
+=&gt; (simplest form)</code></pre>
+<p>Trace <code>(cond [( &gt; 3 4) x])</code>:</p>
+<pre><code>(cond [( &gt; 3 4) x])
+=&gt; (cond [false x])
+=&gt; (cond)
+=&gt; (error: no questions answered)</code></pre>
+<h2 id="templates">Templates</h2>
+<p>The form of a program should mirror the form of the data.</p>
+<p>A template is a general outline of code that consumes some type of data, that we can fill in to create a program.</p>
+<p>Templates must appear <strong>after data definitions</strong> and <strong>before function definitions</strong>.</p>
+<p>We start by making the template of a function, and then flesh out the template to create the finished function.</p>
+<p>For every form of data, we create a template and use it to write functions that work with that type of data.</p>
+<p>Templates should be <strong>commented out</strong> in Scheme code due to issues with MarkUs.</p>
+<p>For example, a template for a list of a datatype called <code>X</code> might appear as follows:</p>
+<pre><code>;; my-listof-x-fn: (listof X) -&gt; Any
+;; (define (my-listof-x-fn lox)
+;;    (cond
+;;       [(empty? lox) ...]
+;;       [else (... (first lox) ...
+;;                  (my-listof-x-fn (rest lox)) ...)]))</code></pre>
+<p>The template must always produce <code>Any</code> since we don't know what type of data it will give.</p>
+<p>Templates only require the contract, but functions written using a template still require the full design recipe.</p>
+<h2 id="structures">Structures</h2>
+<p>Structures are a bundling of several values into one. They are complex values.</p>
+<p>They work only with finite sets of values, and have a fixed size and field count.</p>
+<p>For example, a structure might represent a product in an online store. It would store, for example, the name (String), product ID (Nat), price (Num), and availability (Boolean).</p>
+<p>The two parts of a structure definition is the code and the data definition:</p>
+<pre><code>;; this is the code part
+(define-struct product
+    (name product-id price availability))
+
+;; this is the data definition part
+;; A Product = (make-product String Nat Num Boolean) ; use CamelCase in data definitions</code></pre>
+<p><code>define-struct</code> is a special form that defines a structure and a set of corresponding helper functions.</p>
+<p>Here, Racket has made a number of functions automatically:</p>
+<ul>
+<li><code>make-product</code> - the <strong>constructor</strong> creates an instance of the struture, and is named <code>make-{x}</code>, where <code>{x}</code> is the structure name.</li>
+<li><code>product-name</code>, <code>product-product-id</code>, <code>product-price</code>, <code>product-availability</code> - the <strong>selector functions</strong> obtain a particular field in the structure, and are named <code>{x}-{y}</code>, where <code>{x}</code> is the structure name and <code>{y}</code> is a field name.</li>
+<li><code>product?</code> - the <strong>type predicate</strong> checks if a particular value is an instance of the structure, and are named <code>{x}?</code>, where <code>{x}</code> is the structure name.</li>
+</ul>
+<p>We can now work with this structure:</p>
+<pre><code>(define item (make-product &quot;Television&quot; 412 899.99 false))
+(product? item) =&gt; true
+(product-name item) =&gt; &quot;Television&quot;</code></pre>
+<p>Structures are <strong>immutable</strong> - they cannot be changed. Once created, they remain the same.</p>
+<p>Structures can contain structures.</p>
+<p>In contracts, product structures can now be referenced as <code>Product</code>. For example: <code>fake-product: String Boolean -&gt; Product</code>.</p>
+<p>In the Scheme teaching languages, the <code>Posn</code> structure is defined, and is designed to represent a 2D coordinate.</p>
+<pre><code>;; distance: Posn Posn -&gt; Num
+;; Purpose: productes the Euclidean distance between `p1` and `p2`
+;; Examples:
+(check-expect (distance (make-posn 1 1) (make-posn 4 5)) 5)
+
+(define (distance p1 p2)
+    (sqrt (+ (sqr (- (posn-x p2) (posn-x p1)))
+             (sqr (- (posn-y p2) (posn-y p1))))))</code></pre>
+<p>In code, the structure name is lowercase. In contracts, data definitions, and a few other places, the name is written in CamelCase - each word is capitalized, and dashes are removed.</p>
+<h3 id="templates-1">Templates</h3>
+<p>The template is written right after the data definition.</p>
+<p>A template for a function that consumes a structure selects every field in the structure, even if the function itself doesn't use all of them. When we want to write a function, we write it based on the template:</p>
+<pre><code>;; product-fn: Product -&gt; Any
+(define (product-fn prod)
+    (... (product-name prod) ...
+     ... (product-id prod) ...
+     ... (product-price prod) ...
+     ... (product-availability prod)))</code></pre>
+<p>We use <code>Any</code> since we don't know what it returns yet. This needs to be reviewed later when actually writing the function.</p>
+<p>We then fill in the placeholders, <code>...</code>, to create the finished function:</p>
+<pre><code>(define (change-price prod price)
+    (make-product (product-name prod)
+                  (product-id prod)
+                  price
+                  (product-availability prod)))</code></pre>
+<h1 id="section-3">1/10/13</h1>
+<p>For each new structure type, we need:</p>
+<ul>
+<li><strong>data analysis</strong>: looking at the problem, we need to determine if there is a need for compound data type.</li>
+<li><strong>data definition</strong>: describe the compound data type - what each field is, what they are used for.</li>
+<li><strong>template</strong>: describe the basic structure of functions that consume this type, after the data definition.</li>
+</ul>
+<p>In contracts, we can use atomic data types as well as data definition names (capitalized).</p>
+<p>It is best to define constants for tests and examples to represent structures, in order to shorten the code.</p>
+<h2 id="data-definitions">Data definitions</h2>
+<h3 id="unions">Unions</h3>
+<pre><code>(define-struct movieinfo (name director))
+;; A MovieInfo = (make-movieinfo String String)
+
+(define-struct mp3info (title length))
+;; An Mp3Info = (make-mp3info String Num)
+
+;; THIS IS A UNION TYPE
+;; A MultimediaInfo is one of:
+;; * a MovieInfo
+;; * an Mp3Info
+
+;; THIS IS THE TEMPLATE FOR A FUNCTION THAT CONSUMES THE UNION TYPE
+;; my-multimediainfo-fn: MultimediaInfo -&gt; Any
+(define (my-multimediainfo-fn info)
+    (cond [(movieinfo? info)
+           (... (movieinfo-name info) ...
+            ... (movieinfo-director info) ...)]
+          [(mp3info? info)
+           (... (mp3info-title info) ...
+            ... (mp3info-length info) ...)]))</code></pre>
+<p>Now when we write a function, we use the template as a basis:</p>
+<pre><code>;; multimediainfo-identifier: MultimediaInfo -&gt; String
+;; WE CAN ALSO WRITE THE CONTRACT AS ;; multimediainfo-identifier: (union MovieInfo Mp3Info) -&gt; String
+(define (multimediainfo-identifier info)
+    (cond [(movieinfo? info)
+           (movieinfo-name info)]
+          [(mp3info? info)
+           (mp3info-title info)]))</code></pre>
+<p>In the above code, the union data type <code>MultimediaInfo</code> (also known as <code>(union MovieInfo Mp3Info)</code>) represents either a <code>MovieInfo</code> or an <code>Mp3Info</code>.</p>
+<p>Data definitions do not necessarily need to correspond to any structures in the code:</p>
+<pre><code>;; A Nat is an integer greater than or equal to zero</code></pre>
+<p>Above we defined the natural number, but there is no data type in Scheme that corresponds to this. It is intended for the human readers.</p>
+<h2 id="error-checking">Error Checking</h2>
+<pre><code>(define (safe-make-posn x y)
+    (cond [(and (number? x) (number? y)) (make-posn x y)]
+          [else (error &quot;numerical arguments required&quot;)]))
+
+;; Tests
+(check-expect (safe-make-posn 2 3) (make-posn 2 3))
+(check-error (safe-make-posn 2 &#39;abc) &quot;numerical arguments required&quot;)</code></pre>
+<p>We generally assume inputs are valid unless explicitly required to do error checking.</p>
+<h2 id="lists">Lists</h2>
+<p>A recursive definition defines something in terms of itself.</p>
+<p>A list is a compound data type. It is a recursively defined. They are known as &quot;cons&quot; types.</p>
+<blockquote>
+<p>A list of 5 numbers is a number followed by a list of 4 numbers.<br />
+A list of 4 numbers is a number followed by a list of 3 numbers.<br />
+A list of 3 numbers is a number followed by a list of 2 numbers.<br />
+A list of 2 numbers is a number followed by a list of 1 numbers.<br />
+A list of 1 numbers is a number followed by a list of 0 numbers.<br />
+A list of 0 numbers is the base case and handled specially.</p>
+</blockquote>
+<p>Lists in Scheme are similar to singly linked lists.</p>
+<p>We have access only to the first element and the rest of the list.</p>
+<h3 id="basic-list-constructs">Basic list constructs</h3>
+<ul>
+<li><code>empty</code> - list of 0 elements.</li>
+<li><code>(cons element rest)</code> (construct) - creates a list with <code>value</code> followed by <code>rest</code>.</li>
+<li><code>(first list)</code> - obtains the first element of non-empty list <code>list</code>.</li>
+<li><code>(rest list)</code> - obtains the (possibly empty) list of all the elements of non-empty list <code>list</code>, excluding the first.</li>
+<li><code>(empty? list)</code> - determines whether list <code>list</code> is empty.</li>
+<li><code>(cons? value)</code> - determines whether value <code>value</code> is a cons type (except for <code>empty</code>).</li>
+<li><code>(member? element list)</code> - determines whether <code>element</code> is contained in <code>list</code>.</li>
+<li><code>(length list)</code> - obtains the number of elements in <code>list</code>.</li>
+</ul>
+<h3 id="list-operations">List operations</h3>
+<pre><code>(cons &#39;a (cons &#39;b (cons &#39;c empty)))</code></pre>
+<p>This is a list of <code>'a</code>, <code>'b</code>, and <code>'c</code>, in that order.</p>
+<p>To append lists, we cannot use <code>(cons list1 list2)</code>. This would simply create a list with the first element being <code>list1</code>, and the rest being <code>list2</code>. For list appending, we can use the built-in function <code>append</code>.</p>
+<h1 id="section-4">3/10/13</h1>
+<p>A list is one of:</p>
+<ul>
+<li><code>empty</code> - the empty list.</li>
+<li><code>(cons element list)</code> - a recursive list definition.</li>
+</ul>
+<h3 id="data-definitions-and-templates">Data Definitions and Templates</h3>
+<p>For each new list type, we need:</p>
+<ul>
+<li><strong>data analysis</strong>: looking at the problem, we need to determine if there is a need for a recursive data type.</li>
+<li><strong>data definition</strong>: describe the recursive data type - what each element is, what the base cases are.</li>
+<li><strong>template</strong>: describe the basic structure of functions that consume this type, after the data definition.</li>
+</ul>
+<p>The template is written right after the data definition. It is based on the data definition and so appears generally as a <code>cond</code> expression with one qeustion/answer pair for each possibility.</p>
+<p>Self-referential data definition clauses lead to recursion in the template, while base cases do not.</p>
+<p>Example of a list of strings:</p>
+<pre><code>;; A ListOfStrings is either
+;; * empty or
+;; * (cons String ListOfStrings)
+
+;; Template for ListOfStrings
+;; my-los-fn: ListOfStrings -&gt; Any
+(define (my-los-fn los)
+    (cond [(empty? los) ...] ; base case
+          [else (... (first los) ...
+                     ... (my-los-fn (rest los) ...))]))</code></pre>
+<p>We can write <code>ListOfStrings</code> (or alternatively, <code>(listof String)</code>) in data definitions. The <code>(listof X)</code> notation is shorter and does not require any other definitions. Here, <code>X</code> represents any type, even a list or structure.</p>
+<p>The implicit template when using <code>(listof X)</code> is as follows:</p>
+<pre><code>;; my-listof-X-fn: (listof X) -&gt; Any
+(define (my-listof-X-fn lst)
+    (cond [(empty? lst) ...]
+          [else (... (first lst)
+                     ... (my-listof-X-fn (rest lst)) ...)]))</code></pre>
+<p>Sometimes we need non-empty lists. A data definition could be written as <code>(ne-listof X)</code>, or using a definition like the following:</p>
+<pre><code>;; A NeListOfStrings is either
+;; * (cons String empty) or
+;; * (cons String NeListOfStrings)
+
+;; Template for NeListOfStrings
+;; my-nelos-fn: NeListOfStrings -&gt; Any
+(define (my-nelos-fn nelos)
+    (cond [(empty? (rest nelos)) ; base case
+           (... (first nelos) ...)]
+          [else (... (first nelos) ...
+                     ... (my-los-fn (rest nelos) ...))]))</code></pre>
+<p>Function that makes an acronym from a list of strings:</p>
+<pre><code>;; make-acronym: ListOfStrings -&gt; String
+;; Purpose: produces an acronym formed by the first letter of each of the elements of `strings`.
+;; Examples:
+(check-expect (make-acronym (cons &quot;Kentucky&quot; (cons &quot;Fried&quot; (cons &quot;Chicken&quot; empty)))) &quot;KFC&quot;)
+
+(define (make-acronym strings)
+    (cond [(empty? strings) &quot;&quot;]
+          [else (string-append (substring (first strings) 0 1)
+                               (make-acronym (rest strings)))]))</code></pre>
+<h2 id="recursion">Recursion</h2>
+<p>Recursive definitions should have a <strong>base case</strong>. This allows the recursion to eventually terminate.</p>
+<p>It should also always be possible to get <strong>closer to the base case</strong> upon each step. It may not have to happen for every call, but it must eventually reach the base case.</p>
+<p>If either of these are not true, it may result in <strong>infinite recursion</strong>, when the function calls itself indefinitely.</p>
+<p><strong>Structural recursion</strong>, as opposed to <strong>generative recursion</strong>, is recursion guided by the data definition - the form of the code matches the form of the data definition.</p>
+<p>In other words, our functions should follow the template closely and work with the first element of the list and recurse only with the rest of the list.</p>
+<p><strong>Pure structural recursion</strong> requires that at every call of the recursive function, all parameters are either unchanged or one step closer to the base case. The parameters should be driving the recursion, while everything else stays unchanged.</p>
+<p><strong>Mutual recursion</strong> is recursion involving two or more functions that call each other recursively. It occurs when we have data definitions that refer to each other.</p>
+<p>Care must be taken to ensure that the base case is eventually reached. Data definitions can be mutually recursive:</p>
+<pre><code>A NestedThing is one of:
+* empty
+* (listof OtherThing)
+
+A OtherThing is one of:
+* Symbol
+* (list Symbol NestedThing)</code></pre>
+<h2 id="condensed-traces">Condensed Traces</h2>
+<p>A condensed trace is a way of writing traces that skips the excessive detail that would result from a full trace. Here, we skip steps to show only the most important information.</p>
+<p>It is always important to specify whether a trace is condensed or full.</p>
+<p>For example, we might do a condensed trace of a function as follows:</p>
+<pre><code>(make-acronym (cons &quot;Kentucky&quot; (cons &quot;Fried&quot; (cons &quot;Chicken&quot; empty))))
+=&gt; (string-append &quot;K&quot; (make-acronym (cons &quot;Fried&quot; (cons &quot;Chicken&quot; empty))))
+=&gt; (string-append &quot;K&quot; (string-append &quot;F&quot; (make-acronym (cons &quot;Chicken&quot; empty))))
+=&gt; (string-append &quot;K&quot; (string-append &quot;F&quot; (string-append &quot;C&quot; (make-acronym empty))))
+=&gt; (string-append &quot;K&quot; (string-append &quot;F&quot; (string-append &quot;C&quot; &quot;&quot;)))
+=&gt; &quot;KFC&quot;</code></pre>
+<p>This better shows the way the application of the recursive function leads to the application of that function to a smaller list, until the base case is reached.</p>
+<p>There aren't strict rules for condensed traces, since everyone might have a different idea of what is an important step. It is possible to condense more or less depending on whether it makes the trace more clear.</p>
+<h1 id="section-5">8/10/13</h1>
+<p>Strings are used to represent text. In Scheme, strings are actually sequences of characters.</p>
+<pre><code>(string-&gt;list &quot;abc &quot;) -&gt; (cons #\a (cons #\b (cons #\c (cons #\space empty))))
+(list-&gt;string (cons #\a (cons #\b (cons #\c (cons #\space empty))))) -&gt; &quot;abc &quot;</code></pre>
+<p>Characters are denoted by <code>#\a</code>, where <code>a</code> represents the character value - in this case, a lowercase A.</p>
+<pre><code>;; replace-space: String -&gt; String
+;; Purpose: produces a copy of `str` where all spaces are replaced by underscores.
+;; Examples:
+(check-expect (replace-space &quot;&quot;) &quot;&quot;)
+(check-expect (replace-space &quot;CS 135&quot;) &quot;CS_135&quot;)
+
+;; THIS IS A WRAPPER FUNCTION; IT MAINLY CALLS ANOTHER FUNCTION TO DO THE ACTUAL WORK
+(define (replace-space str)
+    (list-&gt;string (replace-space-list (string-&gt;list str))))
+
+;; Tests:
+;; NOT INCLUDED FOR BREVITY
+
+;; replace-space-list: (listof Char) -&gt; (listof Char)
+;; Purpose: produces a copy of `loc` where all #\space is replaced by #\_
+;; Examples:
+(check-expect (replace-space-list empty) &quot;&quot;)
+(check-expect (replace-space (cons #\C (cons #\S (cons #\space (cons #\1 (cons #\3 (cons #\5 empty)))))))
+              (cons #\C (cons #\S (cons #\_ (cons #\1 (cons #\3 (cons #\5 empty)))))))
+
+(define (replace-space-list loc)
+    (cond [(empty? loc) empty]
+          [else (cons (cond [(char=? (first loc) #\space) #\_]
+                            [else (first loc)])
+                      (replace-space-list (rest loc)))]))
+
+;; Tests:
+;; NOT INCLUDED FOR BREVITY</code></pre>
+<h2 id="nested-templates">Nested Templates</h2>
+<p>Template for a Polygon:</p>
+<pre><code>;; A Polygon is one of:
+;; * empty
+;; * (cons Posn Polygon)
+
+(define (my-polygon-fn poly)
+    (cond [(empty? poly) ...]
+          [else (... (first poly) ...
+                 ... (my-polygon-fn (rest poly)) ...)]))</code></pre>
+<p>However, we know that <code>(first poly)</code> is a Posn. So we should refer to its template:</p>
+<pre><code>(define (my-polygon-fn poly)
+    (cond [(empty? poly) ...]
+          [else (... (my-posn-fn (first poly)) ...
+                 ... (my-polygon-fn (rest poly)) ...)]))
+
+(define (my-posn-fn p)
+    (... (posn-x p) ...
+     ... (posn-y p) ...))</code></pre>
+<p>Alternatively, it is possible to combine the two templates:</p>
+<pre><code>(define (my-polygon-fn poly)
+    (cond [(empty? poly) ...]
+          [else (... (... (posn-x p) ...
+                      ... (posn-y p) ...) ...
+                 ... (my-polygon-fn (rest poly)) ...)]))</code></pre>
+<p>A data definition for Nat:</p>
+<pre><code>;; A Nat is one of:
+;; * 0
+;; * (add1 Nat)
+
+;; NATURAL NUMBERS START AT 0 IN COMPUTER SCIENCE AND LOGIC
+
+;; TEMPLATE FOR NATURAL NUMBERS
+(define (my-nat-fn n)
+    (cond [(&lt;= n 0) ...] ; WE USE &lt;= HERE INSTEAD OF zero? IN ORDER TO CATCH NEGATIVE OR FRACTIONAL INPUTS. THIS IS DEFENSIVE PROGRAMMING
+          [else (... (my-nat-fn (sub1 n)) ...)]))
+;; WE USE THE INVERSE OF THE `add1` FUNCTION TO GET THE NUMBER `x` SUCH THAT `(add1 x)` IS `n`</code></pre>
+<p>A natural number like 5 would therefore be representable as something like <code>(add1 (add1 (add1 (add1 (add1 0)))))</code>. This is similar to the recursive formulation of a list.</p>
+<p>Since in each call we need to get closer to the base case, we need to invert the function, so we use <code>sub1</code> to get closer to the base case.</p>
+<p>This isn't the usual way we'd think of numbers, but writing it in the form of a data definition allows us to make good templates that consume this type of data.</p>
+<p>Countdown example:</p>
+<pre><code>;; countdown-to: Int Int -&gt; (listof Int)
+;; Purpose: produces a list of integers from `start` to `end`
+;; Examples:
+;; NOT INCLUDED FOR BREVITY
+
+(define (countdown-to start end)
+    (cond [(&lt;= start end) (cons end empty)]
+          [else (cons start (countdown-to (sub1 start) end))]))</code></pre>
+<h1 id="section-6">10/10/13</h1>
+<p>We can denote subsets of certain sets using subscript notation:</p>
+<ul>
+<li>Natural numbers: <span class="math inline">\(\mathbb{Z}_{\ge 0}\)</span></li>
+<li>Negative integers: <span class="math inline">\(\mathbb{Z}_{&lt; 0}\)</span></li>
+<li>Real numbers greater than 100: <span class="math inline">\(\mathbb{R}_{&gt; 100}\)</span></li>
+</ul>
+<p>In data definitions, we can represent this as follows:</p>
+<pre><code>;; ascii-&gt;listofchar: Nat[&lt;256] Nat[&lt;256] -&gt; (listof Char)</code></pre>
+<p>Here, <code>Nat[&lt;256]</code> is equivalent to <span class="math inline">\(\mathbb{N}_{&lt;256}\)</span>, or natural numbers less than 256. Other possible uses of the square braket notation are <code>Int[&gt;=20]</code>, <code>String[&lt;&quot;abc&quot;]</code>.</p>
+<p>Primality test:</p>
+<pre><code>;; prime?: Nat[&gt;0] -&gt; Boolean
+;; Purpose: produces true if `n` is prime and false otherwise
+;; Examples:
+(check-expect (prime? 1) false)
+(check-expect (prime? 2) true)
+(check-expect (prime? 4) false)
+
+(define (prime? n)
+    (not (or (= n 1)
+             (has-factors? 2 n))))
+
+;; Tests:
+;; OMITTED FOR BREVITY
+
+;; has-factors?: Nat[&gt;1] Nat[&gt;0] -&gt; Boolean
+;; Purpose: produces true if any numbers between `factor` and one less than `n` divide `n`, and false otherwise
+;; Examples:
+;; OMITTED FOR BREVITY
+
+(define (has-factors? factor n)
+    (cond [(&gt;= factor n) #f]
+          [(zero? (remainder n factor)) #t]
+          [else (has-factors? (add1 factor) n)]))
+
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>Consider a basic list sorting function template:</p>
+<pre><code>(define (sort list)
+    (cond [(empty? list) ...]
+          [else (... (first list) ... (sort (rest list)) ...)]))</code></pre>
+<p>Now we need to do something with the first element of the list and the (assumed sorted) rest of the list. What we can do is use <code>insert</code>, a helper function that inserts an element into a list in sorted order:</p>
+<pre><code>(define (sort list)
+    (cond [(empty? list) empty]
+          [else (insert (first list) (sort (rest list)))]))</code></pre>
+<p>We simply need to assume that when we call <code>sort</code>, we will get a sorted list, and that <code>insert</code> will correctly insert the element in sorted order.</p>
+<p>We start with a template for the insertion function:</p>
+<pre><code>;; insert: Any (listof Any) -&gt; (listof Any)
+(define (insert element list)
+    (cond [(empty? list) ...]
+          [else (... (first list) ... (insert element (rest list)) ...)]))</code></pre>
+<p>We can assume the list is in sorted order since it will only ever be called on the result of <code>sort</code>. So we just need to put it at the beginning if it's already in the proper place, or recurse to put it in the correct place in the rest of the list:</p>
+<pre><code>;; insert: Num (listof Num) -&gt; (listof Num)
+;; Purpose: produces a list equal to `list` except with `element` inserted in sorted order
+;; Examples:
+(check-expect (insert 1 (list 2 3)) (list 1 2 3))
+(check-expect (insert 2 (list 1 3)) (list 1 2 3))
+
+(define (insert element list)
+    (cond [(empty? list) (cons element empty)]
+          [(&lt;= element (first list)) (cons element list)]
+          [else (cons (first list) (insert element (rest list)))]))
+
+;; Tests:
+(check-expect (insert 1 (list 2 3)) (list 1 2 3))
+(check-expect (insert 2 (list 1 3)) (list 1 2 3))
+(check-expect (insert 2 empty) (list 2))</code></pre>
+<p>Together, this forms a sorting function based on the <strong>insertion sort</strong> algorithm.</p>
+<h2 id="list-abbreviations">List Abbreviations</h2>
+<p>Lists can be written in a few ways. All of the following are equivalent:</p>
+<ul>
+<li><code>(cons 3 (cons (cons 'a (cons 'b empty)) (cons &quot;test&quot; (cons #\a empty))))</code></li>
+<li><code>(list 3 (list 'a 'b) &quot;test&quot; #\a)</code></li>
+<li><code>'(3 (a b) &quot;test&quot; #\a)</code> - only available starting in &quot;Beginning Student with List Abbreviations&quot;. In the quoted part, only symbols, numbers, strings, and lists are allowed. No quotes are used inside the outer brackets. <code>'()</code> is the same as <code>empty</code>.</li>
+</ul>
+<p>We use <code>list</code> for lists of fixed size, where the length of the list is known beforehand. We still need <code>cons</code> for constructing a list of variable length.</p>
+<p>In data definitions, we can use notation like <code>(list String Num)</code> to represent a list with the first element being a string, and the second a number.</p>
+<p>We can <strong>simulate structures with lists</strong> - each element could hold a field, and the list itself would be a collection of fields, just like a structure. This could be useful for things like type unions, where instead of writing very similar code for two different types of structures, we simply use lists for both and assume the needed fields are at the same place in both types of lists.</p>
+<p>Beginning Student with List Abbreviations also has extra functions for working with lists:</p>
+<ul>
+<li><code>(second list)</code> is equivalent to <code>(first (rest list))</code>. It obtains the second element of a list.</li>
+<li><code>(third list)</code> is equivalent to <code>(first (rest (rest list)))</code>. It obtains the third element of a lsit.</li>
+<li>...</li>
+<li><code>(eighth list)</code> is equivalent to <code>(first (rest (rest (rest (rest (rest (rest (rest list))))))))</code>. It obtains the eighth element of a list.</li>
+</ul>
+<h1 id="section-7">15/10/13</h1>
+<h2 id="dictionaries">Dictionaries</h2>
+<p><strong>Dictionaries</strong> are abstract data types (not a primitive type, but a commonly used pattern). They are associations of <strong>keys</strong> with <strong>values</strong>.</p>
+<p>A telephone directory is a dictionary - the names are the key, which we use to look up phone numbers, which are the values.</p>
+<p>Keys must be <strong>unique</strong> in a dictionary - there can be no duplicates. However, values do not need to be unique.</p>
+<p>The most important operations on dictionaries are:</p>
+<ul>
+<li><strong>Lookup</strong> - given a key, produce the value associated with it.</li>
+<li><strong>Add</strong> - add a new key and its associated value.</li>
+<li><strong>Remove</strong> - given a key remove it and the value associated with it.</li>
+</ul>
+<p>The actual implementation of the dictionary is dependent on what we want from it. For example, some implementations might have faster lookup but slower add and remove.</p>
+<h3 id="association-lists">Association Lists</h3>
+<p>This is simply a list of key/value pairs:</p>
+<pre><code>;; An AL is one of:
+* empty
+* (cons (list Num String) AL)
+
+;; Template for AL:
+;; my-al-fn: AL -&gt; Any
+(define (my-al-fn al)
+    (cond [(empty? al) ...]
+          [else (... (first (first al)) ...
+                 ... (second (first al)) ...
+                 ... (my-al-fn (rest al)) ...)]))
+
+;; OR USE (listof (list Num String))</code></pre>
+<p>Now we can implement a few operations on this data type:</p>
+<pre><code>;; al-lookup: AL Num -&gt; (union String false)
+;; Purpose: produces the value associated with `key` in `al` if it exists, and false otherwise
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (al-lookup al key)
+    (cond [(empty? al) false] ; false represents the element not being found
+          [(= key (first (first al))) (second (first al))]
+          [else (al-lookup (rest al) key))]))
+;; Tests:
+;; OMITTED FOR BREVITY
+
+;; al-remove: AL Num -&gt; AL
+;; Purpose: produces an AL equal to `al` without the key `key`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (al-remove al key)
+    (cond [(empty? al) empty]
+          [(= key (first (first al)))
+           (al-remove (rest al) key)]
+          [else (cons (first al) (al-remove (rest al) key))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h2 id="processing-multiple-lists">Processing Multiple Lists</h2>
+<h3 id="processing-one-list">Processing one list</h3>
+<p>Consider an appending function:</p>
+<pre><code>;; my-append: (listof Any) (listof Any) -&gt; (listof Any)
+(define (my-append list1 list2)
+    (cond [(empty? list1) list2]
+          [else (cons (first list1) (my-append (rest list1) list2))]))</code></pre>
+<p>This uses only structural recursion - <code>list2</code> does not change between calls.</p>
+<p>Note that the run time of this function depends on the length of <code>list1</code>. If <code>list1</code> is very large, the function may need a significant amount of time to run.</p>
+<h3 id="processing-in-lockstep">Processing in lockstep</h3>
+<p>If both lists are of the same length, we can assume that the first list will be empty if and only if the second is.</p>
+<p>Consider a dot product function:</p>
+<pre><code>;; dot-product: (listof Num) (listof Num) -&gt; Num
+(define (dot-product vec1 vec2)
+    (cond [(empty? vec1) 0]
+          [else (+ (* (first list1) (first list2))
+                   (dot-product (rest vec1) (rest vec2)))]))</code></pre>
+<h3 id="processing-at-different-rates">Processing at different rates</h3>
+<p>There are four possible cases to consider if the two lists are of differing lengths.</p>
+<ul>
+<li>Both are empty.</li>
+<li>The first is empty, but the second isn't.</li>
+<li>The second is empty, but the first isn't.</li>
+<li>Both are non-empty.</li>
+</ul>
+<p>This is reflected in the template:</p>
+<pre><code>;; my-double-list-fn: (listof Any) (listof Any) -&gt; Any
+(define (my-double-list-fn list1 list2)
+    (cond [(and (empty? list1) (empty? list2)) ...]
+          [(and (empty? list1) (cons? list2)) ...]
+          [(and (cons? list1) (empty? list2)) ...]
+          [else ...]))</code></pre>
+<p>Consider an element count test function:</p>
+<pre><code>;; minimum-occurrences?: (listof Any) Any Nat -&gt; Boolean
+;; Purpose: produces true if `value` appears in `list` at least `count` times, and false otherwise
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (minimum-occurrences? list value count)
+    (cond [(&lt;= count 0) true]
+          [(empty? list) false]
+          [(equal? value (first list))
+           (minimum-occurrences? (rest list) (sub1 count))]
+          [else (minimum-occurrences? (rest list) count)]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>Consider a list comparison function:</p>
+<pre><code>;; list=?: (listof Any) (listof Any) -&gt; Boolean
+;; Purpose: produces true if `list1` and `list2` are equal, and false otherwise
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (list=? list1 list2)
+    (cond [(and (empty? list1) (empty? list2)) #t]
+          [else (and (cons? list1) (cons? list2)
+                     (equal? (first list1) (first list2))
+                     (list=? (rest list1) (rest list2)))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h1 id="section-8">17/10/13</h1>
+<h2 id="types-of-recursion">Types of Recursion</h2>
+<h3 id="pure-structural-recursion">Pure structural recursion</h3>
+<p><strong>Structural recursion</strong> is based on a recursive data definition - it is <strong>driven by</strong> and follows the form of the data definition.</p>
+<p>On each call, all parameters must be either unchanged, or <strong>one step closer</strong> to a base case <strong>according to the data definition</strong>.</p>
+<p>However this can have disadvantages. Consider a function finding the maximum element of a list, written in pure structural recursion style:</p>
+<pre><code>;; list-max: (ne-listof Num) -&gt; Num
+(define (list-max list)
+    (cond [(empty? (rest list)) (first list)]
+          [(&gt;= (first list) (list-max (rest list))) (first list)]
+          [else (list-max (rest list))]))</code></pre>
+<p>In the worst case - a strictly increasing list - the function will call itself twice for each step, which means it takes exponential time based on the length of the list.</p>
+<h3 id="accumulative-recursionstructural-recursion-with-an-accumulator">Accumulative recursion/Structural recursion with an accumulator</h3>
+<p>This is similar to pure structural recursion, but it can also have <strong>parameters with partial answers</strong>.</p>
+<p>Consider a function finding the maximum element of a list, written in accumulative recursion style:</p>
+<pre><code>;; list-max-helper: (listof Num) Num -&gt; Num
+(define (list-max-helper list partial-max)
+    (cond [(empty? list) partial-max]
+          [(&gt;= (first list) partial-max)
+           (list-max-helper (rest list) (first list))]
+          [else
+           (list-max-helper (rest list) partial-max)]))
+
+;; list-max: (ne-listof Num) -&gt; Num
+(define (list-max list)
+    (list-max-helper (rest list) (first list)))</code></pre>
+<p>Here, we recurse at most once per call. The extra parameter allows us to move extra data downwards through the calls so we don't need to restructure it to move data upwards only.</p>
+<p>We can use as many extra parameters as needed. The key is that we make extra data available to the callee.</p>
+<p>Generally, the accumulatively recursive function needs a wrapper function to start it off with initial values for the extra parameters.</p>
+<p>Consider a function that reverses a list:</p>
+<pre><code>;; list-reverse: (listof Any) -&gt; (listof Any)
+(define (list-reverse list current)
+    (cond [(empty? list) current]
+          [else (list-reverse (rest list) (cons (first list) current))]))</code></pre>
+<p>Note that <code>reverse</code> is actually a built-in function that has the same functionality, though it doesn't require the second parameter.</p>
+<p>We use the function as follows:</p>
+<pre><code>(list-reverse &#39;(a b c) empty) -&gt; &#39;(c b a)</code></pre>
+<h3 id="generativegeneral-recursion">Generative/general recursion</h3>
+<p><strong>Generative/general recursion</strong> allows us to get closer to a base case in any way we want - we can calculate the parameters freely.</p>
+<p>If there is even just one generated parameter, it is generative recursion.</p>
+<p>Consider the GCD for <span class="math inline">\(m &gt; 0\)</span>:</p>
+<ul>
+<li><span class="math inline">\(\gcd(n, 0) = n\)</span></li>
+<li><span class="math inline">\(\gcd(n, m) = \gcd(m, n \mod m)\)</span></li>
+</ul>
+<p>We do not have a data definition. Here, we use generative recursion to create a function to compute the GCD of two numbers:</p>
+<pre><code>(define (gcd n m)
+    (cond [(zero? m) n]
+          [else (gcd m (remainder n m))]))</code></pre>
+<p>This is written in generatively recursive style because the arguments are generated by computation on <code>n</code> and <code>m</code>.</p>
+<p>Generative recursion is easier to get wrong, harder to debug, and harder to reason about.</p>
+<h1 id="section-9">22/10/13</h1>
+<h2 id="trees">Trees</h2>
+<p>A tree is an abtract data type, like a dictionary. It is a recursive data structure made up of nodes:</p>
+<ul>
+<li><strong>internal/interior nodes</strong> refer to one or more other nodes.</li>
+<li><strong>leaf nodes</strong> do not refer to any other nodes.</li>
+</ul>
+<p>Nodes can also store their own value. This value is known as a <strong>label</strong>.</p>
+<pre><code>;; A Tree is one of:
+;; * (Leaf-constructor Value)
+;; * (Node-constructor Tree Tree)</code></pre>
+<p>Every node is also a tree in itself. If we look at a node and its descendents as a tree, we call it a <strong>subtree</strong> in this context.</p>
+<p>For example, we can represent arithmetic expressions as trees. Consider <span class="math inline">\((4 + 1) * (7 - (6 / 2))\)</span>:</p>
+<ul>
+<li><span class="math inline">\(*\)</span></li>
+<li><span class="math inline">\(+\)</span>
+<ul>
+<li>4</li>
+<li>1</li>
+</ul></li>
+<li><span class="math inline">\(-\)</span>
+<ul>
+<li>7</li>
+<li><span class="math inline">\(/\)</span></li>
+<li>6</li>
+<li>2</li>
+</ul></li>
+</ul>
+<p>If node A refers to node B, and node B refers to node C, and so on, until node Z, then nodes B to Z are <strong>descendents</strong> of A, and nodes A to Y are <strong>ancestors</strong> of Z.</p>
+<p>A node is its own ancestor and descendent.</p>
+<p>If node A refers to node B, A is the <strong>parent/direct ancestor</strong> of B, and B is the <strong>child/direct descendent</strong> of A.</p>
+<p>If two nodes have the same parent, then they are <strong>siblings</strong>.</p>
+<p>Additional constraints for trees are:</p>
+<ul>
+<li>A node cannot have a descendent that is its ancestor.</li>
+<li>A node can have only one parent.</li>
+</ul>
+<p>The very top node is known as the <strong>root node</strong>.</p>
+<p>Trees have various classifying properties:</p>
+<ul>
+<li>Number of children each internal node has: two or less (binary tree), exactly two (variant of binary tree), or even any amount (general tree).</li>
+<li>Whether all nodes have labels, or just leaf nodes.</li>
+<li>Whether the order of children of an internal node matters.</li>
+<li>Actual structure of the tree in the implementation.</li>
+</ul>
+<p>So for the binary arithmetic expression above:</p>
+<ul>
+<li>Each internal node has exactly two children.</li>
+<li>Leaf nodes have number labels, and internal nodes have symbol labels</li>
+<li>The order of children is significant.</li>
+<li><p>We can use the following data definition for a binary arithmetic expression tree:</p>
+<p>(define-struct bae (operation arg1 arg2))</p>
+<p>;; A BinExp is one of: ;; * Num ;; * (make-bae Symbol BinExp BinExp)</p></li>
+</ul>
+<p>So the expression above would be representable as <code>(make-bae '* (make-bae '+ 4 1) (make-bae '- 7 (make-bae '/ 6 2)))</code>.</p>
+<p>Now we can write a template for this:</p>
+<pre><code>;; binexp-fn: BinExp -&gt; Any
+(define (binexp-fn tree)
+    (cond [(number? tree) ...]
+          [(bae? tree) (... (bae-operation tree) ...
+                            (bae-arg1 tree) ...
+                            (bae-arg2 tree) ...)]))</code></pre>
+<p>Since we know that <code>(bae-arg1 tree)</code> and <code>(bae-arg2 tree)</code> are both of type BinExp, we can apply the BinExp processing function on it:</p>
+<pre><code>;; binexp-fn: BinExp -&gt; Any
+(define (binexp-fn tree)
+    (cond [(number? tree) ...]
+          [(bae? tree) (... (bae-operation tree) ...
+                            (binexp-fn (bae-arg1 tree)) ...
+                            (binexp-fn (bae-arg2 tree)) ...)]))</code></pre>
+<p>Now we can make functions consuming BinExp values, such as an evaluator:</p>
+<pre><code>(define (eval ex)
+    (cond [(number? ex) ex]
+          [(bae? ex) (cond [(symbol=? (bae-operation ex) &#39;*)
+                            (* (eval (bae-arg1 ex)) (eval (bae-arg2 ex)))]
+                           [(symbol=? (bae-operation ex) &#39;+)
+                            (+ (eval (bae-arg1 ex)) (eval (bae-arg2 ex)))]
+                           [(symbol=? (bae-operation ex) &#39;/)
+                            (/ (eval (bae-arg1 ex)) (eval (bae-arg2 ex)))]
+                           [(symbol=? (bae-operation ex) &#39;-)
+                            (- (eval (bae-arg1 ex)) (eval (bae-arg2 ex)))])))</code></pre>
+<h3 id="traversal">Traversal</h3>
+<p><strong>Traversal</strong> simply means going through every node of a tree.</p>
+<p>There are two broad types of traversal:</p>
+<ul>
+<li><strong>breadth-first</strong> traversal deals with one nesting level at a time - it deals with all of an interna node's children before dealing with their children.</li>
+<li><strong>depth-first</strong> traversal deals with one path at a time - it deals with a node, its children, and so on, until the entire node is processed, before moving on to the next child.</li>
+</ul>
+<p>Depth-first traversal is quite natural to implement recursively. As a result, it is used quite often in this course.</p>
+<p>We can represent traversal as a flat list of the nodes in the tree, in the order that they were traversed.</p>
+<p>When we do traversal, there is also a question of the order in which we deal with children of an internal node and the node itself. For example, we can process the tree <code>(+ 1 2)</code> in the following ways:</p>
+<ol style="list-style-type: decimal">
+<li>process the <code>+</code>, then <code>1</code> and <code>2</code> - this is called <strong>pre-order traversal</strong>. The result would be <code>'+ 1 2</code>.</li>
+<li>process <code>1</code>, then <code>+</code>, and then <code>2</code> - this is called <strong>in-order traversal</strong>. The result would be <code>1 '+ 2</code>.</li>
+<li>process <code>1</code>, <code>2</code>, and then <code>+</code> - this is called <strong>post-order traversal</strong>. The result would be <code>1 2 '+</code>.</li>
+<li>process all the nodes on the same level as <code>+</code>, and then all the nodes on the same level as <code>1</code> and <code>2</code> - this is called <strong>level-order traversal</strong>. In this case, it gives the same result as pre-order traversal.</li>
+</ol>
+<p>We can implement pre-order traversal pretty simply:</p>
+<pre><code>traverse-binexp: BinExp -&gt; (listof (union Symbol Num))
+(define (traverse-binexp tree)
+    (cond [(number? tree) (list tree)] ; leaf node
+          [(bae? tree)
+           (append (bae-operation tree)
+                   (traverse-binexp (bae-arg1 tree))
+                   (traverse-binexp (bae-arg2 tree)))]))</code></pre>
+<p>In a similar way, in-order and post-order traversal can be done by switching the order of the arguments to <code>append</code>.</p>
+<h1 id="section-10">24/10/13</h1>
+<h2 id="binary-search">Binary Search</h2>
+<p>Dictionaries were previously implemented using an association list of two-element lists. However, this had the problem that it could potentially require us to search through thte entire list to lookup a value.</p>
+<p>We could instead put the key-value pairs into a <strong>binary tree</strong>:</p>
+<pre><code>(define-struct node (key val left right))
+
+;; A binary tree (BT) is one of:
+;; * empty
+;; * (make-node Num String BT BT)</code></pre>
+<p>Here, if a node has <code>empty</code> as its left and right branches, it is a leaf node. Otherwise, it refers to other values and is an internal node.</p>
+<p>Template for a binary tree:</p>
+<pre><code>;; my-bt-fn: BT -&gt; Any
+(define (my-bt-fn tree)
+    (cond [(empty? tree) ...]
+          [else (... (node-key tree) ...
+                     (node-val tree) ...
+                     (my-bt-fn (node-left tree)) ...
+                     (my-bt-fn (node-right tree)) ...)]))</code></pre>
+<p>Consider a function that counts the number of nodes equal to a certain value in a tree:</p>
+<pre><code>;; count-bt-equal: BT Any -&gt; Any
+;; Purpose: returns the number of nodes in `tree` equal to `value`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (count-bt-equal tree value)
+    (cond [(empty? tree) ...]
+          [else (+ (cond [(equal? (node-val tree) value) 1]
+                         [else 0])
+                   (count-bt-equal (node-left tree))
+                   (count-bt-equal (node-right tree)))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>We can search through this type of tree pretty easily - if not found or empty, search through the left and right subtrees recursively.</p>
+<p>However, this is no more efficient than an association list - we could still potentially search through the whole thing in order to lookup a value.</p>
+<p>Draw the tree <code>(make-node 5 'a (make-node 1 'b empty empty) (make-node 6 'c empty (make-node 14 'd empty empty)))</code>:</p>
+<pre><code>  5
+ / \
+1   6
+     \
+      14</code></pre>
+<p>We do not represent the <code>value</code> field - only keys matter here.</p>
+<h3 id="ordering-property">Ordering property</h3>
+<p>We can add a constraint that makes this much more efficient:</p>
+<pre><code>(define-struct node (key val left right))
+
+;; A binary search tree (BST) is one of:
+;; * empty
+;; * (make-node Num String BST BST)
+
+;; And satisfies the ordering property:
+;; * every key in `left` is less than `key`
+;; * every key in `right` is greater than `key`</code></pre>
+<p>The <strong>ordering property</strong> allows us to make the following assumptions:</p>
+<ul>
+<li>if a key is less than a given node's key, it is <strong>not in the right subtree</strong>.</li>
+<li>if a key is greater than a given node's key, it is <strong>not in the left subtree</strong>.</li>
+</ul>
+<p>This is very useful for operations like searching and insertion.</p>
+<h3 id="searching">Searching</h3>
+<p>Searching is made more efficient because we can use these assumptions to get a faster algorithm:</p>
+<ul>
+<li>If the tree is empty, the search key does not exist. Otherwise, we know we have a node.</li>
+<li>If the search key is equal to a node's key, we found the node.</li>
+<li>If the search key is less than a node's key, then we <strong>only need to search in the left subtree</strong>.</li>
+<li>If the search key is greater than a node's key, then we <strong>only need to search in the right subtree</strong>.</li>
+</ul>
+<p>Basically, we avoid doing one recursive call each time - so we would only need to make as many recursive calls as the tree is deep.</p>
+<p>If a tree is nicely <strong>balanced</strong> (internal nodes try to have both subtrees non-empty as much as possible), we can do a search in only <span class="math inline">\(\log_2 n\)</span> calls, where <span class="math inline">\(n\)</span> is the number of leaf nodes.</p>
+<p>Otherwise, degenerate trees such as one with all internal nodes having empty left or right subtrees are no more efficient than an association list.</p>
+<p>This can be implemented as follows:</p>
+<pre><code>;; search-bst: Num BST -&gt; (union Any false)
+;; Purpose: produces the value associated with `key` in `tree`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (search-bst key tree)
+    (cond [(empty? tree) false]
+          [(= key (node-key tree)) (node-val tree)]
+          [(&lt; key (node-key tree)) (search-bst key (node-left tree))]
+          [(&gt; key (node-key tree)) (search-bst key (node-right tree))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h3 id="adding">Adding</h3>
+<p>We can add an element to a binary search tree in a similar fashion:</p>
+<ul>
+<li>If the tree is empty, we can simply produce the new node.</li>
+<li>If the new node's key is equal to the node's key, we have a duplicate. We often handle this by replacing the node's value with the new node's value.</li>
+<li>If the new node's key is less than the node's key, we try to insert recursively in the left subtree of the node.</li>
+<li>If the new node's key is greater than the node's key, we try to insert recursively in the right subtree of the node.</li>
+</ul>
+<p>This can be implemented as follows:</p>
+<pre><code>;; insert-bst: Num Any BST -&gt; BST
+;; Purpose: produces `tree` with `key` associated with `value`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (insert-bst key value tree)
+    (cond [(empty? tree) (make-node key value empty empty)]
+          [(= key (node-key tree)) (make-node key value (node-left tree) (node-right tree))]
+          [(&lt; key (node-key tree)) (make-node (node-key tree) (node-val tree) (insert-bst key value (node-left tree)) (node-right tree))]
+          [(&gt; key (node-key tree)) (make-node (node-key tree) (node-val tree) (node-left tree) (insert-bst key value (node-right tree)))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h3 id="removing">Removing</h3>
+<p>Removing is a bit more complex. There are three cases to consider:</p>
+<ul>
+<li>No subtrees - leaf node. We can remove this directly.</li>
+<li>One subtree - internal node. We can remove the node and promote its child to the node's original place without violating the ordering property.</li>
+<li>Two subtrees - internal node. We can remove the node and promote the rightmost node of the left subtree of the node being removed, or the leftmost node of the right subtree of the node being removed, to the node's original place without violating the ordering property. This works because:</li>
+<li>Here, the <strong>rightmost node</strong> is the node we get if we keep taking the right subtree, never taking any left subtrees, until we get to a node without a right subtree.</li>
+<li>Likewise, the <strong>leftmost node</strong> is the node we get if we keep taking the left subtree, never taking any right subtrees, until we get to a node without a left subtree.</li>
+<li>The rightmost element of the left subtree is the largest element of the left subtree, yet is still smaller than every element of the right subtree.</li>
+<li>The leftmost element of the right subtree is the smallest element of the right subtree, yet is still larger than every element of the left subtree.</li>
+</ul>
+<p>This can be implemented as follows:</p>
+<pre><code>;; remove-min-bst: Node -&gt; BST
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (remove-min-bst tree)
+    (cond [(empty? (node-left tree)) empty]
+          [else (make-node (node-key tree) (node-val tree)
+                           (remove-min-bst (node-left tree))
+                           (node-right tree))]))
+
+;; min-bst: Node -&gt; Node
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (min-bst tree)
+    (cond [(empty? (node-left tree)) tree]
+          [else (min-bst (node-left tree))]))
+
+;; remove-bst: Num BST -&gt; BST
+;; Purpose: produces `tree` without the node with key `key`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (remove-bst key tree)
+    (cond [(empty? tree) empty]
+          [(= key (node-key tree))
+           (cond [(and (empty? (node-left tree)) ; leaf node
+                       (empty? (node-right tree)))
+                  empty])]
+                 [(empty? (node-left tree)) (node-right tree)] ; right child only
+                 [(empty? (node-right tree)) (node-left tree)] ; left child only
+                 [else ; two children
+                  (make-node (node-key (min-bst (node-right tree)))
+                             (node-val (min-bst (node-right tree)))
+                             (node-left tree)
+                             (remove-min-bst (node-right tree))]
+          [(&lt; key (node-key tree))
+           (make-node (node-key tree) (node-val tree)
+                      (remove-bst key (node-left tree))
+                      (node-right tree))]
+          [(&gt; key (node-key tree))
+           (make-node (node-key tree) (node-val tree)
+                      (node-left tree)
+                      (remove-bst key (node-right tree)))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h2 id="general-trees">General Trees</h2>
+<p>Binary trees are useful, but it is occasionally useful to allow a larger, fixed number of children. For example, a ternary tree has at most 3 elements.</p>
+<p>Here, we would modify our implementation to use a different definition for a node structure with additional fields.</p>
+<p>However, if there could be any number of children, we should represent a node's subtrees as a list.</p>
+<h3 id="scheme-expressions">Scheme expressions</h3>
+<p>Scheme expressions could be represented using one of these general trees:</p>
+<pre><code>(define-struct ae (operation args))
+
+;; An arithmetic expression (AE) is one of:
+;; * Num
+;; * (make-ae Symbol (listof AE))
+
+;; Template for AE:
+
+;; my-ae-fn: AE -&gt; Any
+(define (my-ae-fn ae)
+    (cond [(number? ae) ...]
+          [else (... (ae-operation ae) ...
+                     (my-ae-args-fn (ae-args ae)) ...)]))
+
+;; my-ae-args-fn: (listof AE) -&gt; Any
+(define (my-ae-args-fn args)
+    (cond [(empty? args) ...]
+          [else (... (my-ae-fn (first args)) ...
+                     (my-ae-args-fn (rest args)) ...)]))</code></pre>
+<p>Note the mutually recursive data definition results in a mutually recursive set of functions.</p>
+<p>Now we can write an evaluator for arithmetic expressions:</p>
+<pre><code>;; eval: AE -&gt; Num
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (eval ae)
+    (cond [(number? ae) ae]
+          [else (apply (ae-operation ae) (ae-args ae))]))
+
+;; apply: (listof AE) -&gt; Num
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (apply operation args)
+    (cond [(empty? args) (cond [(symbol=? operation &#39;*) 1]
+                               [(symbol=? operation &#39;+) 0])]
+          [(symbol=? operation &#39;*)
+           (* (eval (first args)) (apply operation (rest args)))]
+          [(symbol=? operation &#39;+)
+           (+ (eval (first args)) (apply operation (rest args)))]))</code></pre>
+<p>However, we could also write the expression with just lists: <code>'(+ 1 2 (* 4 5 6) 3)</code>. The data definition would look something like this:</p>
+<pre><code>;; An arithmetic expression (AE) is one of:
+;; * Num
+;; * (cons Symbol (listof AE))
+
+;; Template for AE:
+
+;; my-ae-fn: AE -&gt; Any
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (my-ae-fn ae)
+    (cond [(number? ae) ...]
+          [else (... (first ae) ...
+                     (my-ae-args-fn (rest ae)) ...)]))
+
+;; SEE DEFINITION OF my-ae-args-fn ABOVE</code></pre>
+<p>The evaluator function for this representation would look something like this:</p>
+<pre><code>;; eval: AE -&gt; Num
+;; DESIGN RECIPE OMITTED FOR BREVITY
+(define (eval ae)
+    (cond [(number? ae) ae]
+          [else (apply (first ae) (rest ae))]))
+
+;; SEE DEFINITION OF apply ABOVE</code></pre>
+<p>Note that <code>apply</code> did not change when the data definition did not change.</p>
+<p>This is the beginnings of a full Scheme interpreter.</p>
+<h3 id="nested-lists">Nested lists</h3>
+<p>Nested lists can also be represented as <strong>leaf-labelled</strong> trees. Leaves correspond to list elements, and internal nodes correspond to nesting:</p>
+<pre><code>&#39;(1 (2 3) 4)
+
+      *
+     /|\
+    / * \
+   / / \ \
+  1 2   3 4</code></pre>
+<p>Note that the empty list is simply a single node:</p>
+<pre><code>&#39;()
+
+(nothing here)</code></pre>
+<p>Also, a tree containing empty has an empty tree as its value:</p>
+<pre><code>&#39;(1 empty 2)
+
+      *
+     /|\
+    1   2</code></pre>
+<p>The data definition looks like this:</p>
+<pre><code>A NestedList is one of:
+* empty
+* (cons Num NestedList)
+* (cons NestedList NestedList)
+
+;; Template for NestedList
+;; my-nestedlist-fn: NestedList -&gt; Any
+(define (my-nestedlist-fn list)
+    (cond [(empty? list) ...]
+          [(number? (first list))
+           (... (first list) ...
+                (my-nestedlist-fn (rest list)) ...)]
+          [else (... (my-nestedlist-fn (first list)) ...
+                     (my-nestedlist-fn (rest list)) ...]))</code></pre>
+<p>Consider a list flattening function:</p>
+<pre><code>;; flatten: NestedList -&gt; Any
+(define (flatten list)
+    (cond [(empty? list) empty]
+          [(number? (first list))
+           (cons (first list) (flatten (rest list)))]
+          [else (append (flatten (first list))
+                        (flatten (rest list)))]))</code></pre>
+<h1 id="section-11">29/10/13</h1>
+<p>Consider now a representation for algebraic expressions. These are simply the expressions we saw earlier, except now with support for variables. For example, <code>'(+ 4 #\x (* 5 3 #\x))</code>:</p>
+<pre><code>An AlgExp is one of:
+* Num
+* Char ;WE USE CHAR HERE BECAUSE AN OPERATOR IS A SYMBOL AND IT WOULD BE CONFUSING TO HAVE SYMBOLS MEAN TWO DIFFERENT THINGS
+* (cons Symbol (listof AlgExp))
+
+;; my-listof-algexp-fn: (listof AlgExp) -&gt; Any
+(define (my-listof-algexp-fn alglist)
+    (cond [(empty? alglist) ...]
+          [else (... (my-algexp-fn (first alglist)) ...
+                     (my-listof-algexp-fn (rest alglist)))]))
+
+;; my-algexp-fn: AlgExp -&gt; Any
+(define (my-algexp-fn alg)
+    (cond [(number? alg) ...]
+          [(char? alg) ...]
+          [else (... (first alg) ...
+                     (my-listof-algexp-fn (rest alg)) ...)]))</code></pre>
+<p>Now we can write a substitution function:</p>
+<pre><code>;; substitute-list: (listof AlgExp) Char Num -&gt; (listof AlgExp)
+;; Purpose: produces `alglist` where `var` is replaced by `value`
+;; Examples:
+;; NOT REQUIRED DUE TO MUTUAL RECURSION
+(define (substitute-list alglist var value)
+    (cond [(empty? alglist) empty]
+          [else (cons (substitute (first alglist) var value)
+                      (substitute-list (rest alglist) var value))]))
+;; Tests:
+;; NOT REQUIRED DUE TO MUTUAL RECURSION
+
+;; substitute: AlgExp Char Num -&gt; AlgExp
+;; Purpose: produces `alg` where `var` is replaced by `value`
+;; Examples:
+(check-expect (substitute &#39;(+ 1 #\x 2 #\y #\x) #\x 5) &#39;(+ 1 5 2 #\y 5))
+(check-expect (substitute #\x #\x 5) 5)
+(define (substitute alg var value)
+    (cond [(number? alg) alg]
+          [(char? alg) (cond [(char=? alg var) value]
+                             [else alg])]
+          [else (cons (first alg)
+                      (substitute-list (rest alg)))]))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>General trees are useful for representing any sort of nested data. For example, a book might be represented as follows:</p>
+<pre><code>&#39;(chapter (section (paragraph &quot;First sentence.&quot;
+                              &quot;Second sentence.&quot;)
+                   (paragraph &quot;Continued.&quot;))
+          (section ...)
+          ...)</code></pre>
+<h2 id="local-definitions-and-lexical-scope">Local Definitions and Lexical Scope</h2>
+<p>Only available beginning with Intermediate Student. Not part of Standard Scheme, but there are similar constructs available there which are simpler, but not as general.</p>
+<p>Definitions have to this point been made at the &quot;top level&quot;, outside of any expressions.</p>
+<p>However, there is also a special form <code>local</code>, which allows us to make definitions inside an expression and use them only inside that expression:</p>
+<pre><code>(local [(define a x) (define b y) (define c z) ...] ; we use square brackets by convention to improve readability
+       ...) ; do something with those definitions</code></pre>
+<p>In local definition, definitions behave like the those in the top level. We can even define functions.</p>
+<p>Consider Heron's formula, used for calculating the area of a triangle with side lengths <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and c$: <span class="math inline">\(A = \sqrt{s(s - a)(s - b)(s - c)}\)</span> where <span class="math inline">\(s = \frac{a + b + c}{2}\)</span>.</p>
+<pre><code>(define (t-area a b c)
+    (sqrt (* (/ (+ a b c) 2)
+             (- (/ (+ a b c) 2) a)
+             (- (/ (+ a b c) 2) b)
+             (- (/ (+ a b c) 2) c))))</code></pre>
+<p>The repeated calculation of <code>(/ (+ a b c) 2)</code> is messy. We can instead use <code>local</code>:</p>
+<pre><code>(define (t-area a b c)
+    (local [(define s (/ (+ a b c) 2))]
+        (sqrt (* s (- s a) (- s b) (- s c))))</code></pre>
+<p>This is significantly more readable and more efficient.</p>
+<p>Note that we can also refer to earlier definitions:</p>
+<pre><code>(define (t-area a b c)
+    (local [(define sum (+ a b c))
+            (define s (/ sum 2))]
+        (sqrt (* s (- s a) (- s b) (- s c)))))</code></pre>
+<p>Here, we can reference <code>sum</code> from a definition right after it. Note that the order is significant - definitions must be defined before they are used.</p>
+<h1 id="section-12">31/10/13</h1>
+<h3 id="lexical-scope">Lexical scope</h3>
+<p>A <strong>binding occurrence</strong> of a name is an occurrence of the name when it is used as a definition or a formal parameter to a function.</p>
+<p>The <strong>bound occurrences</strong> associated with a binding occurrence and a name are the occurrences of the name that correspond to the binding occurrence.</p>
+<p>The <strong>scope</strong> is where the binding takes effect. This is generally the area where it can be referenced, and excludes the &quot;holes&quot; (nested scopes) where the binding is shadowed.</p>
+<p>Definitions are resolved from the innermost scope to the outermost scope. Definitions are said to <strong>shadow</strong> definitions in the parent scope if a name in the inner definition is the same as one in the outer one. In this case, the inner one takes precedence and the parent one is <strong>shadowed</strong>.</p>
+<p><strong>Lexical scoping</strong> means that binding resolution is based on where the scope is textually located in the code. So the parent scope of a given scope is the scope that is textually surrounding it. For example, the scope of variables in a <code>local</code> is exactly the area within the brackets surrounding <code>local</code>. This contrasts with dynamic scoping, where the parent scope can change depending on use.</p>
+<p>When we define something in a local scope that has the same name as something in the parent scope (this is <strong>not recommended</strong>), references to that name in the local scope reference the local definition, while references outside are unchanged.</p>
+<p>The <strong>global/top-level scope</strong> is the scope of top-level definitions. All programs initially statrt off in the global scope.</p>
+<h3 id="stepping">Stepping</h3>
+<p>The stepping rules for local are the most complex we have seen so far:</p>
+<ol style="list-style-type: decimal">
+<li>Create new, unique names for the every local definitions.</li>
+<li>Bind the new names to the values of the definitions.</li>
+<li>Substitute the new names for the old names everywhere inside the local scope.</li>
+<li>Move all the definitions outside of the local, into the top scope, making sure to preserve the order. We can do this because the names are all unique.</li>
+<li>Replace the <code>local</code> with its body expression.</li>
+</ol>
+<p>This all happens in <strong>one step</strong>.</p>
+<p>Consider the following:</p>
+<pre><code>(define s &#39;blah)
+(local [(define sum (+ a b c))
+        (define s (/ sum 2))]
+    (sqrt (* s (- s a) (- s b) (- s c))))
+
+;; ONE STEP BEGINS
+
+;; create names, bind values, and substitute the new names
+(define s &#39;blah)
+(local [(define sum_0 (+ a b c))
+        (define s_0 (/ sum_0 2))]
+    (sqrt (* s_0 (- s_0 a) (- s_0 b) (- s_0 c))))
+
+;; move definitions outside of the local
+(define s &#39;blah)
+(define sum_0 (+ a b c))
+(define s_0 (/ sum_0 2))
+(local [] (sqrt (* s_0 (- s_0 a) (- s_0 b) (- s_0 c))))
+
+;; replace local with its body
+(define s &#39;blah)
+(define sum_0 (+ a b c))
+(define s_0 (/ sum_0 2))
+(sqrt (* s_0 (- s_0 a) (- s_0 b) (- s_0 c)))
+
+;; ONE STEP ENDS</code></pre>
+<h3 id="purpose">Purpose</h3>
+<p>We use <code>local</code> to make code more readable, by factoring out common subexpressions.</p>
+<p>This is also useful for efficiency purposes. Recall the exponential-time list maximum function:</p>
+<pre><code>;; list-max: (ne-listof Num) -&gt; Num
+(define (list-max list)
+    (cond [(empty? (rest list)) (first list)]
+          [(&gt;= (first list) (list-max (rest list))) (first list)]
+          [else (list-max (rest list))]))</code></pre>
+<p>We can now use <code>local</code> to make it much more efficient:</p>
+<pre><code>;; list-max: (ne-listof Num) -&gt; Num
+(define (list-max list)
+    (cond [(empty? (rest list)) (first list)]
+          [else (local [(define m (list-max (rest list)))]
+                    (cond [(&gt;= (first list) m) (first list)]
+                          [else m]))]))</code></pre>
+<p>Now it calls the function ony once per call, and runs in linear time.</p>
+<h3 id="encapsulation">Encapsulation</h3>
+<p>Encapsulation is the process of grouping things together into a <strong>capsule</strong> or a <strong>black box</strong>. We choose the hide the irrelevant details to make things simpler.</p>
+<p><strong>Behavior encapsulation</strong> is the encapsulation of functions.</p>
+<p>Since we can define functions locally, we use this to encapsulate related functions.</p>
+<p>For example, helper functions that are only used by one function can and should be moved inside that function as a local definition. This makes them invisible outside the function and avoids cluttering the top-level namespace.</p>
+<pre><code>;; sum-list: (listof Num) -&gt; Num
+;; Purpose: produces the sum of every element in `lon`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (sum-list lon)
+    (local [;; sum-acc: (listof Num) -&gt; Num
+            ;; Purpose: produces the sum of every element in `lst` plus `acc`
+            (define (sum-acc lst acc)
+                (cond [(empty? lst) acc]
+                      [else (sum-acc (rest lst)
+                            (+ (first lst) acc))]))]
+        (sum-acc lon 0)))
+
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>Note that the locally defined function does not require examples or tests. However, the function it is located in must fully test the locally defined function.</p>
+<p>It's useful that <code>sum-acc</code> can access any of the bindings available in the scope of <code>sum-list</code>. For example, this can remove the need for parameters that &quot;go along for the ride&quot;:</p>
+<pre><code>(define (count-to upper)
+    (local [(define (count-from lower)
+                (cond [(&gt; lower upper) empty]
+                      [else (cons lower (count-from (add1 lower)))]))]
+        (count-from 0)))</code></pre>
+<p>Each time we evaluate a local, we are lifting out another set of definitions - defining a different function.</p>
+<p>If we evaluate <code>(count-to 1)</code>, a function gets created with a body equal to <code>count-from</code>, except with <code>upper</code> replaced by <code>1</code>.</p>
+<p>If we evaluate <code>(count-to 2)</code>, another function gets created with a body equal to <code>count-from</code>, except with <code>upper</code> replaced by <code>2</code>.</p>
+<p>This allows us to create different functions as needed.</p>
+<p>Now we can fully encapsulate the sort function defined earlier:</p>
+<pre><code>;; sort: (listof Num) -&gt; (listof Num)
+;; Purpose: produces `list` sorted in ascending order
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (sort list)
+    (local [;; insert: Num (listof Num) -&gt; (listof Num)
+            ;; Purpose: produces `list` with `element` inserted in sorted order
+            (define (insert element list)
+                (cond [(empty? list) (cons element empty)]
+                      [(&lt;= element (first list)) (cons element list)]
+                      [else (cons (first list) (insert element (rest list)))]))]
+        (cond [(empty? list) empty]
+              [else (insert (first list) (sort (rest list)))])))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<h1 id="section-13">5/11/13</h1>
+<p>Functions are <strong>first-class values</strong>. This means functions can be passed as arguments to other functions, returned as values, and otherwise treated just like other values like numbers or strings.</p>
+<p>Consider the sorting funtion example shown previously. What would we need to change to make it work with strings rather than numbers?</p>
+<pre><code>(define (sort list)
+    (local [;; insert: Num (listof Num) -&gt; (listof Num)
+            ;; Purpose: produces `list` with `element` inserted in sorted order
+            (define (insert element list)
+                (cond [(empty? list) (cons element empty)]
+                      [(string&lt;=? element (first list)) (cons element list)]
+                      [else (cons (first list) (insert element (rest list)))]))]
+        (cond [(empty? list) empty]
+              [else (insert (first list) (sort (rest list)))])))</code></pre>
+<p>This is not very elegant - for every type, we need to define a new function.</p>
+<h2 id="abstract-list-functions">Abstract List Functions</h2>
+<h3 id="sort">Sort</h3>
+<p>Instead, we can pass a comparison function as an argument to the sort, which will <strong>abstract</strong> away the details of comparison:</p>
+<pre><code>;;sort: (X X -&gt; Boolean) (listof X) -&gt; (listof X)
+(define (sort list less-equal?)
+    (local [;; insert: Num (listof Num) -&gt; (listof Num)
+            ;; Purpose: produces `list` with `element` inserted in sorted order
+            (define (insert element list)
+                (cond [(empty? list) (cons element empty)]
+                      [(less-equal? element (first list)) (cons element list)]
+                      [else (cons (first list) (insert element (rest list)))]))]
+        (cond [(empty? list) empty]
+              [else (insert (first list) (sort (rest list) less-equal))])))</code></pre>
+<p>Note the use of <code>X</code> to represent a particular type (that is possibly a union), in order to show that the input types and output types are the same.</p>
+<p>This is known as a <strong>type variable</strong>. We can also use ones like <code>W</code>, <code>Y</code>, or <code>Z</code>, as long as the meaning is clear. We use type variables whenever two or more places within a contract need to have the same type.</p>
+<p>The function works with many different types of data. THis makes it <strong>generic</strong> or <strong>polymorphic</strong>, a positive quality.</p>
+<p>We also used <code>(X X -&gt; Boolean)</code> to represent a function type. The <strong>type of a function is its contract</strong>.</p>
+<p>Now we can call the function thus</p>
+<pre><code>(sort (&quot;b&quot; &quot;d&quot; &quot;a&quot; &quot;c&quot;) string&lt;=?)
+(sort (5 2 9 1 3) &lt;=)</code></pre>
+<p>We can also define custom comparators:</p>
+<pre><code>(define (posn-less-equal? p1 p2)
+    (&lt;= (+ (sqr (posn-x p1)) (sqr (posn-y p1)))
+        (+ (sqr (posn-x p2)) (sqr (posn-y p2)))))
+(sort (list (make-posn 1 2) (make-posn 4 3) (make-posn 0 0))) -&gt; (list (make-posn 0 0) (make-posn 1 2) (make-posn 4 3))</code></pre>
+<p>The built-in function <code>(quicksort list less-equal?)</code> does the same thing. These are <strong>abstract list functions</strong> - they work on a whole class of lists.</p>
+<h3 id="map">Map</h3>
+<p>Using this technique, we find that there are a lot of different abstract list operations that we often do. For example, applying a function to every element in a list:</p>
+<pre><code>;; map: (X -&gt; Y) (listof X) -&gt; (listof Y)
+(define (map f list)
+    (cond [(empty? list) empty]
+          [else (cons (f (first list)) (map f (rest list)))]))</code></pre>
+<p>Note that <code>map</code> is also a built-in function that does the same thing.</p>
+<p>How do we use this?</p>
+<pre><code>(map sqr &#39;(1 2 3 4 5)) -&gt; &#39;(1 4 9 16 25)
+(map even? &#39;(1 2 3 4 5)) -&gt; &#39;(#f #t #f #t #f)</code></pre>
+<h3 id="filter">Filter</h3>
+<p>Another example is removing elements that do not fit a certain criteria:</p>
+<pre><code>;; filter: (X -&gt; Boolean) (listof X) -&gt; (listof X)
+(define (filter keep? list)
+    (cond [(empty? list) empty]
+          [(keep? (first list)) (cons (f (first list)) (map f (rest list)))]
+          [else (filter keep? (rest list))]))</code></pre>
+<p>Note that <code>filter</code> is also a built-in function that does the same thing.</p>
+<p>How do we use this?</p>
+<p>(filter negative? '(1 -5 -7 3 0)) -&gt; '(-5 -7) (filter #t '(1 2 3 4 5)) -&gt; '(1 2 3 4 5) (list-&gt;string (filter char-alphabetic? (string-&gt;list &quot;a89erha ae 23*%$%44 yusdh&quot;))) -&gt; &quot;aerhaaeyusdh&quot;</p>
+<p>Consider the original <code>elements-more-than</code> in assignment 4, question 2a. Now we can write it much more simply using the abstract list functions:</p>
+<pre><code>;; elements-more-than: (listof Num) -&gt; (listof Num)
+;; Purpose: produces the elements of `lon` strictly greater than `n`
+(define (elements-more-than lon n)
+    (local [;; keep?: Num -&gt; Boolean
+            ;; Purpose: produces `true` if `number` is greater than `n`
+            (define (keep? number)
+                (&gt; number n))]
+           (filter keep? lon)))</code></pre>
+<h3 id="fold-right">Fold Right</h3>
+<p>How do we add up a list of numbers?</p>
+<pre><code>;; total: (listof Num) -&gt; Num
+(define (total lon)
+    (cond [(empty? lon) 0]
+          [else (+ (first lon) (total (rest lon)))]))</code></pre>
+<p>This basic form is also used in <code>make-acronym</code>, as well as many other places. How do we abstract this?</p>
+<p>An abstract list function could apply a function to the first element of a list and the result of applying it to the rest of the list:</p>
+<pre><code>foldr: (X Y -&gt; Y) Y (listof X) -&gt; Y
+(define (foldr f base-case list)
+    (cond [(empty? list) base-case]
+          [else (f (first list) (foldr f base-case (rest list)))]))</code></pre>
+<p>Note that <code>foldr</code> is also a built-in function that does the same thing.</p>
+<p>The function <code>f</code> should accept an element and the &quot;folded&quot; rest of the list.</p>
+<p>How do we use this?</p>
+<pre><code>(foldr + 0 &#39;(5 2 3 7)) -&gt; 17
+
+(define (glue-first word acronym)
+    (string-append (substring word 0 1) acronym))
+(foldr glue-first &quot;&quot; &#39;(&quot;Kentucky&quot; &quot;Fried&quot; &quot;Chicken&quot;)) -&gt; &quot;KFC&quot;</code></pre>
+<p><code>foldr</code> abstracts the list template using pure structural recursion.</p>
+<p>Intuitively, <code>(foldr f base '(a b c ...))</code> is equivalent to <code>(f a (f b (f c ...)))</code></p>
+<h3 id="fold-left">Fold Left</h3>
+<p>This is less commonly used.</p>
+<p>It does the same thing as <code>foldr</code>, but in the opposite order.</p>
+<p>We can implement it as follows:</p>
+<pre><code>foldl: (Y X -&gt; Y) Y (listof X) -&gt; Y
+(define (foldl f base-case list)
+    (local [;; fold-from-left: (Y X -&gt; Y) Y (listof X) -&gt; Y
+            (define (fold-from-left f previous list)
+                (cond [(empty? list) previous]
+                      [else (fold-from-left f (f previous (first list)) (rest list))]))]
+        (fold-from-left f base-case list)))</code></pre>
+<p>Note that <code>foldr</code> is also a built-in function that does the same thing.</p>
+<p><code>foldl</code> abstracts the list template using structural recursion with one accumulator.</p>
+<p>Intuitively, <code>(foldl f base '(... x y z))</code> is equivalent to <code>(f z (f y (f x ...)))</code></p>
+<h3 id="build-list">Build List</h3>
+<p>How do we apply a function to numbers from 1 to <code>n</code>?</p>
+<pre><code>;; even-numbers: Nat -&gt; (listof Nat)
+;; Purpose: produces a list of even numbers including 0 up to but not including `n`
+(define (even-numbers n)
+    (local [(define (even-numbers-from start)
+                (cond [(&gt;= start n) empty]
+                      [else (cons (* start 2) (even-numbers-from (add1 start)))]))]
+        (even-numbers-from 0)))</code></pre>
+<p>How can we abstract this?</p>
+<p>An abstract list function could apply a function to every number from 0 to the target value:</p>
+<pre><code>;; build-list: Nat (Nat -&gt; X) -&gt; (listof X)
+(define (build-list n f)
+    (local [(define (build-list-from start)
+                (cond [(&gt;= start n) empty]
+                      [else (cons (f start) (build-list (add1 start)))]))]
+        (build-list-from 0)))</code></pre>
+<p>Note that <code>build-list</code> is also a built-in function that does the same thing.</p>
+<p>The function <code>f</code> should accept a natural number and produce an element of the resulting list.</p>
+<p><code>build-list</code> abstracts the count-up pattern.</p>
+<p><code>(string-ref String Nat) -&gt; Char</code> obtains the character at a given index in a given string. The first character is at index 0.</p>
+<p>We can use this to implement <code>string-&gt;list</code> ourselves using <code>build-list</code>:</p>
+<pre><code>;; string-&gt;list: String -&gt; (listof Char)
+;; Purpose: produces a list of characters for each character in `s`
+(define (string-&gt;list s)
+    (build-list (string-length s) (lambda (i) (string-ref s i))))</code></pre>
+<p>From now on, we should use the abstract list function whenever possible, rather than dealing with <code>first</code> and <code>rest</code>. The opposite of abstract list functions is <strong>explicit recursion</strong>.</p>
+<h1 id="section-14">7/11/13</h1>
+<p>Create a function that when given a list of numbers, produces the list of those numbers greater than the average:</p>
+<pre><code>(define (above-average lon)
+    (local [(define average (/ (foldr + 0 lon) (length lon)))
+            (define (higher? n)
+                (&gt; n average))]
+        (filter higher? lon)))</code></pre>
+<p>Create a funciton that checks if a given list of strings is a word chain - where the last letter of each word is the first letter of the next word:</p>
+<pre><code>(define (word-chain? los)
+    (local [(define (check-letter word1 word2-or-bool)
+                (local [(define word1-length (string-length word1))]
+                    (cond [(boolean? word2-or-bool)
+                           (cond [word2-or-bool word1] ; ignore the starting case
+                                 [else false])] ; already failed test
+                          [(string=? (substring word1 (sub1 word1-length) word1-length)
+                                     (substring word2-or-bool 0 1))
+                           word1]
+                          [else false])))]
+        (string? (foldr check-letter true los))))</code></pre>
+<p>We can have lists and structures that produce functions. We can also have functions that produce functions:</p>
+<pre><code>;; generate-line: Posn Posn -&gt; (Num -&gt; Num)
+;; Purpose: produces a function that represents a line passing through `p1` and `p2`
+;; Examples:
+;; OMITTED FOR BREVITY
+(define (generate-line p1 p2)
+    (local [(define slope (/ (- (posn-y p2) (- (posn-y p1)))
+                             (- (posn-y p2) (- (posn-y p1)))))
+            (define intercept (- (posn-y p1) (* slope (posn-x p1))))]
+        (lambda (x) (+ (* slope x) b))))
+;; Tests:
+;; OMITTED FOR BREVITY</code></pre>
+<p>Note that due to the halting problem, we cannot compare two functions for equality. Therefore, we can't directly test the function that <code>generate-line</code> produces. However, we can just test the function that it produces instead of <code>generate-line</code> itself.</p>
+<p>We can use it like this:</p>
+<pre><code>((generate-line (make-posn 0 0) (make-posn 1 2)) 5) -&gt; 10</code></pre>
+<p>We can test it like this:</p>
+<pre><code>(check-expect ((generate-line (make-posn 0 0) (make-posn 1 2)) 5) 10)
+(check-expect ((generate-line (make-posn 0 0) (make-posn 1 2)) 0) 0)
+(check-expect ((generate-line (make-posn 0 0) (make-posn 1 2)) 1) 2)</code></pre>
+<h2 id="lambda">Lambda</h2>
+<pre><code>(lambda (arg1 arg2 ...) body)</code></pre>
+<p><code>lambda</code> creates an <strong>anonymous/unnamed function</strong> - a function that is not bound to a name. This is roughly equivalent to the following:</p>
+<pre><code>(local [(define (temporary-function arg1 arg2 ...)
+            body)]
+    temporary-function)</code></pre>
+<p>This is simply a function like any other, except there are no names that refer to them.</p>
+<p>A lambda is an anonymous function.</p>
+<p>This is very useful for the abstract list functions. Where we previously made small helper functions in local definitions, now we can simply use <code>lambda</code>.</p>
+<p>Anonymous functions <strong>do not need any parts of the design recipe</strong>.</p>
+<p><code>(define (f ...) ...)</code> is actually a short form for <code>(define f (lambda (...) ...))</code>.</p>
+<h3 id="stepping-1">Stepping</h3>
+<p>Lambdas by themselves are values and are in their simplest form.</p>
+<p>When applied, lambdas are substituted for their bodies, with arguments inserted in the place of parameters, just like with normal functions.</p>
+<p>In Intermediate Student, function applications and definitions with zero arguments are allowed. Note that <code>(+)</code> is 0 and <code>(*)</code> is 1.</p>
+<p><strong>Functional abstraction</strong> is the process of creating abstract functions like <code>filter</code>. When we abstract the details into an abstract function, we reduce code size and make it easier to fix bugs.</p>
+<h3 id="scope-1">Scope</h3>
+<p>Consider the following function:</p>
+<pre><code>(define (make-adder n)
+    (lambda (x) (+ x n)))</code></pre>
+<p>We use it as follows:</p>
+<pre><code>(define add5 (make-adder 5))
+(add5 6) =&gt; 11</code></pre>
+<p>The binding occurrence of <code>n</code> is outside of the lambda. <code>(make-adder 5)</code> creates a new function that is equivalent to <code>(lambda (x) (+ x 5))</code>.</p>
+<p>Note that <code>add5</code> still has access to <code>n</code> inside <code>make-adder</code>, even though we are no longer inside of <code>make-adder</code> when we are calling <code>add5</code>. This is because the function body itself is still inside <code>make-adder</code>, and so still follows the rules of lexical scoping.</p>
+<p>Functions that consume or produce functions are sometimes known as <strong>higher-order</strong> functions.</p>
+<h1 id="section-15">12/11/13</h1>
+<p>We are actually not as behind as we thought. So today we will go through module 10 again, but slower this time.</p>
+<p>We can actually implement <code>map</code> and <code>filter</code> all using <code>foldr</code>:</p>
+<pre><code>(define (my-map f l)
+    (foldr (lambda (x y) (cons (f x) y)) empty l))
+(define (my-filter f l)
+    (foldr (lambda (x y) (cond [(f x) (cons x y)] [else y])) empty l))</code></pre>
+<h1 id="section-16">14/11/13</h1>
+<p>Everything that can be done with the list template can be done via <code>foldr</code>, unless it terminates the recursion before the base case, like <code>insert</code>.</p>
+<p>Abstract list functions should be used in addition to the list template, when it makes for more understandable code.</p>
+<h2 id="generative-recursion">Generative Recursion</h2>
+<p>Structural recursion is a way of writing code that results in the code following the form of the data definition.</p>
+<p>In contrast, generative recursion has the recursive cases and base cases <strong>generated based on the problem to be solved</strong>.</p>
+<p>Consider the GCD function using the Euclidean algorithm:</p>
+<pre><code>(define (gcd n m)
+    (cond [(zero? m) n]
+          [else (gcd m (remainder n m))]))</code></pre>
+<p>We know this is <strong>correct</strong> because we have proven it in MATH135 - see the proof of GCD-WR. In other words, we know that it will give the correct result.</p>
+<h3 id="termination">Termination</h3>
+<p>We want to know if the function terminates - if an application of the function results in a simplest form in finite time.</p>
+<p>For structurally recursive functions, this is easy because we know that each recursive case recurses on a value closer to the base case, and so it <strong>must eventually terminate</strong>.</p>
+<p>Therefore, we can always bound the <strong>depth of recursion</strong> based on certain characteristics of the input.</p>
+<p>For generatively recursive functions, we must be able to make a similar proof of termination. This will depend on the function itself.</p>
+<p>For <code>gcd</code>, we know that <code>(remainder n m) &lt; m</code> and that both are positive or 0. So <code>m</code> is <strong>decreasing on every call</strong>. Since it can never shoot past 0 into the negatives, it must eventually reach 0, the base case.</p>
+<p>Therefore, for any input, the depth of recursion is bounded by the argument <code>m</code>.</p>
+<p>It is not possible to analyze an arbitrary function to see if it will terminate due to the <strong>halting problem</strong>.</p>
+<p>Consider the Collatz conjecture, which states that the hailstone sequence, <span class="math inline">\(x_n = \begin{cases} \frac{x_{n - 1}}{2} &amp;\text{ if } x_{n - 1} \text{ is even} 3x_{n - 1} + 1 &amp;\text{ if } x_{n - 1} \text{ is odd} \end{cases}\)</span>, must eventually result in the sequence <span class="math inline">\(1, 4, 2, 1, 4, 2, \ldots\)</span>.</p>
+<p>This is, as of 2013, an unsolved problem in mathematics. We do not know if an arbitrary starting value will eventually result in 1.</p>
+<p>As a result, whether the following function terminates is also an unsolved problem in mathematics:</p>
+<pre><code>(define (collatz n)
+    (cond [(= n 1) 1]
+          [(even? n) (/ n 2)]
+          [else (add1 (* n 3))]))</code></pre>
+<h2 id="quicksort">Quicksort</h2>
+<p>Consider a more practical example of generative recursion. Quicksort is a sorting algorithm used very widely due to its performance in real-world situations.</p>
+<p>This is generative recursion because we are not following the data definition for a list.</p>
+<p>It is a <strong>divide and conquer</strong> algorithm - we divide the problem into smaller subproblems, then recursively solve each one. Afterwards, we combine the results together to obtain the final result.</p>
+<p>Quicksort works by picking a pivot, then recursively sorting all the elements lower than the pivot, and all the elements higher than the pivot. Afterwards, the two sorted sublists and the pivots are simply put back together again.</p>
+<p>Now we will implement it.</p>
+<p>We can simply select the first element of the list as a pivot. This is done with <code>(first list)</code>.</p>
+<p>Now we need to obtain those elements less than the pivot, excluding the pivot itself: <code>(filter (lambda (x) (&lt; x (first list))) (rest list))</code>.</p>
+<p>Now we need to obtain those elements greater than the pivot, excluding the pivot itself: <code>(filter (lambda (x) (&gt;= x (first list))) (rest list))</code>.</p>
+<p>We can combine the results as follows: <code>(append sorted-less pivot sorted-greater)</code>.</p>
+<p>We can now implement the function as follows:</p>
+<pre><code>(define (quicksort l)
+    (cond [(empty? l) empty]
+          [else (local [(define pivot (first l))
+                        (define less (filter (lambda (x) (&lt; x pivot)) (rest l)))
+                        (define greater (filter (lambda (x) (&gt;= x pivot)) (rest l)))]
+                    (append less (list l) greater)))</code></pre>
+<p>We know that this function terminates because each recursive call is given a smaller list, which is closer to the base case. Therefore, the function is bounded by the size of the list.</p>
+<p>Note that if the list is already sorted, our choice of pivot causes the <code>less</code> list to be empty and the <code>greater</code> list to have every elemetn except the pivot. This would cause it to have the worst-case behavior - quadratic time based on the size of the list. Likewise with lists sorted in descending order.</p>
+<p>This is caused by our choice of pivot. Choosing a better pivot in this case would probably help, but it wouldn't work in every case. Consider a list where all elements are equal. This would exhibit worst-case behavior regardless of the pivot choice.</p>
+<p>Quicksort has similarities to constructing a binary search search tree out of the elements in the list, and then flattening the tree into a list using in-order traversal. Quicksort can be seen as doing all of this, except without explicitly using trees.</p>
+<p>To continue the metaphor, we would simply choose the first element in the list as the root node of the current tree, and then add the rest of the elements of the tree recursively according to their value.</p>
+<p>The tree sorting technique would use structural recursion, with accumulators. Quicksort uses generative recursion to do the same task but more efficiently.</p>
+<h2 id="generative-recursion-and-the-design-recipe">Generative Recursion and the Design Recipe</h2>
+<p>When doing generative recursion, the following must also be taken into consideration when writing the design recipe:</p>
+<ul>
+<li>Purpose statements should also describe <strong>how the function works</strong> in addition to what it does.</li>
+<li>Examples must reflect the algorithm - more <strong>white-box testing</strong>.</li>
+<li>Templates are <strong>not used as often</strong>.</li>
+</ul>
+<h1 id="section-17">19/11/13</h1>
+<h2 id="mergesort">Mergesort</h2>
+<p>Mergesort recursively merges sorted sublists together, and eventually merges two lists into one sorted ist.</p>
+<p>We want to implement mergesort. This function is generatively recursive because we need to split the list into two halves.</p>
+<pre><code>;; mergesort: (listof Num) -&gt; (listof Num)
+(define (mergesort values)
+    (local [;; merge: (listof Num) (listof Num) -&gt; (listof Num)
+            (define (merge list1 list2)
+                (cond [(empty? list1) list2]
+                      [(empty? list2) list1]
+                      [(&lt;= (first list1) (first list2))
+                       (cons (first list1) (merge (rest list1) list2))]
+                      [else
+                       (cons (first list2) (merge list1 (rest list2)))]))]
+        (cond [(empty? values) empty]
+            (merge (mergesort (left-half-of values)
+                              (right-half-of values))))))</code></pre>
+<p>However, it is difficult and computationally expensive to split a list in two - we can't implement <code>left-half-of</code> and <code>right-half-of</code> in a simple way.</p>
+<p>Instead, we take a different approach - we work from the bottom, and convert a list of lists into a smaller list of lists. Eventually, we merge two lists into one sorted list.</p>
+<pre><code>(define (mergesort values)
+    (cond [(empty? values) empty]
+          [(empty? (rest values)) (first values)] ; one element
+          [else (mergesort (merge-pairs (map list values)))]))
+
+(define (merge-pairs values)
+    (cond [(empty? values) empty] ; no elements
+          [(empty? (rest values)) (first values)] ; one element
+          [else (cons (merge (first values) (second values)) ; merge two adjacent elements together
+                      (rest (rest values)))]))
+
+;; (listof Num) (listof Num) -&gt; (listof Num)
+(define (merge list1 list2)
+    (cond [(empty? list1) list2]
+          [(empty? list2) list1]
+          [(&lt;= (first list1) (first list2))
+           (cons (first list1) (merge (rest list1) list2))]
+          [else
+           (cons (first list2) (merge list1 (rest list2)))]))</code></pre>
+<p>;wip: we are probably not supposed to use the same <code>merge</code> here in the second version</p>
+<p>We can also simplify <code>mergesort</code> by using a local definition:</p>
+<pre><code>(define (mergesort values)
+    (local [(define (mergesort-ne values)
+                (cond [(empty? (rest values)) (first values)] ; one element
+                      [else (mergesort-ne (merge-pairs (map list values)))]))]
+        (cond [(empty? values) empty]
+              [else (mergesort-ne values)]))</code></pre>
+<p>We know this terminates because <code>merge-pairs</code> always produces a list that is around half the given list. As a result, if we call it enough times, we will get a list of length 1, the base case.</p>
+<h1 id="section-18">21/11/13</h1>
+<h2 id="graphs">Graphs</h2>
+<p>A graph is simply a collection of nodes where each node can refer to zero or more nodes, including themselves.</p>
+<p>A <strong>directed graph</strong> is a collection of <strong>nodes</strong> together with a collection of <strong>edges</strong>.</p>
+<p>In a directed graph, <strong>edges have direction</strong> - the edges <span class="math inline">\((A, B)\)</span> is different from <span class="math inline">\((B, A)\)</span>. The first points from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span>, while the second points from <span class="math inline">\(B\)</span> to <span class="math inline">\(A\)</span>.</p>
+<p>There are also <strong>undirected graphs</strong> where edges have no direction.</p>
+<p>Trees are always graphs, but graphs are not always trees. Trees are graphs that obey some additional constraints.</p>
+<p>We can draw graphs graphically. Nodes can be represented as dots with or without labels, and edges can be represented as arrows leading from one node to another.</p>
+<p>A graph is useful for solving a lot of different types of problems. For example, internet routing, solving sliding puzzles, and finding road directions.</p>
+<h3 id="definitions-1">Definitions</h3>
+<p>In a graph, a <strong>vertex</strong> is a node.</p>
+<p>An edge connects two nodes together.</p>
+<p>An <strong>edge</strong> is an ordered pair of nodes like <span class="math inline">\((A, B)\)</span>, where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are nodes.</p>
+<p><span class="math inline">\((A, B)\)</span> is an edge connecting <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. <span class="math inline">\(A\)</span> is an <strong>in-neighbor</strong> of <span class="math inline">\(B\)</span> (<span class="math inline">\(A\)</span> points inward to <span class="math inline">\(B\)</span>), and <span class="math inline">\(B\)</span> is an <strong>out-neighbor</strong> of <span class="math inline">\(A\)</span> (<span class="math inline">\(A\)</span> points outward towards <span class="math inline">\(B\)</span>).</p>
+<p>A sequence of nodes <span class="math inline">\(v_1, \ldots, v_k\)</span> is a <strong>path</strong> or <strong>route</strong> with length <span class="math inline">\(k - 1\)</span> if <span class="math inline">\((v_1, v_2), (v_2, v_3), \ldots, (v_{k - 1}, v_k)\)</span> are edges in the graph.</p>
+<p>The length of a path is the number of edges that make it up.</p>
+<p>A <strong>cycle</strong> is a path where <span class="math inline">\(v_1 = v_k\)</span> - the path starts and ends at the same node.</p>
+<p>A <strong>directed acyclic graph</strong> (DAG) is a graph with no possible cycles.</p>
+<h3 id="representations">Representations</h3>
+<p>We can represent a graph as a list of nodes, each of which has a list of the nodes it points to. This is called the <strong>adjecency list representation</strong>.</p>
+<p>We will be using the adjacency list representation unless otherwise specified.</p>
+<p>This is basically an association list with nodes as keys and a list of their out-neighbors as values.</p>
+<p>In Scheme, we can represent a graph with <code>(listof (list Symbol (listof Symbol)))</code>:</p>
+<pre><code>;; A Node is a Symbol. It is a vertex in a graph.
+;; A NodeEntry is a (list Node (listof Node)). It stores a vertex and a list of vertices that the vertex points to.
+;; A Graph is a (listof NodeEntry). It is a collection of vertices and their out-neighbors.</code></pre>
+<p>An example graph in this representation would be:</p>
+<pre><code>&#39;((P (Q))
+  (Q (Z))
+  (W (X Y))
+  (X (Q Z))
+  (Y ())
+  (Z ()))</code></pre>
+<p>Note that the order of the nodes in each list is completely arbitrary and does not matter.</p>
+<p>Since in this representation, a graph is a list, we can use a list template:</p>
+<pre><code>;; my-graph-fn: Graph -&gt; Any
+(define (my-graph-fn graph)
+    (cond [(empty? graph) ...]
+          [else (... (first (first graph)) ... ; node
+                     (second (first graph)) ... ; node out-neighbors
+                     (my-graph-fn (rest graph)) ...)]))</code></pre>
+<h3 id="working-with-graphs">Working with Graphs</h3>
+<p>Backtracking algorithms try to find a route from an origin to a destination. They try a possibility, and if it doesn't work out, goes back and tries another, until either there are no possibilities or a route is found.</p>
+<p>Suppose we wanted to write <code>find-route</code>, a function that finds a path from one node to another in a DAG. First we write a <code>neighbor</code> function:</p>
+<pre><code>;; neighbors: Node Graph -&gt; (listof Node)
+;; Purpose: looks up the list of out-neighbors of `node` in `graph`
+(define (neighbors node graph)
+    (cond [(symbol=? node (first (first graph))) ; we do not use a base case because the node is known to be in the graph
+           (second (first graph))]
+          [else (neighbors node (rest graph))]))</code></pre>
+<p>If there is a path, either the starting location is equal to the target location (base case), or the path exists in one of the node's out-neighbors.</p>
+<pre><code>;; find-route: Node Graph -&gt; (listof Node)
+;; Purpose: produces a path leading from `start` to `end` in `graph`
+(define (find-route start end graph)
+    (cond [(symbol=? start end) (list end)]
+          [else
+           (local [(define found-paths
+                       (filter cons?
+                           (map (lambda (node) (find-route node end graph))
+                                (neighbors start))))]
+               (cond [(empty? found-paths) false]
+                     [else (first found-paths)]))]))</code></pre>
+<p>This works, but it isn't very efficient since we only really care about one possible path, and it would be more efficient to stop searching when we've found a path already:</p>
+<pre><code>;; find-route: Node Node Graph -&gt; (union (listof Node) false)
+;; Purpose: produces a path leading from `start` to `end` in `graph` or false if not possible
+(define (find-route start end graph)
+    (cond [(symbol=? start end) (list end)]
+          [else (local [(define route (find-route-list (neighbors start graph) end))]
+                    (cond [(false? route) false]
+                          [else (cons start route)]))]))
+
+;; find-route-list: (listof Node) Node Graph -&gt; (union (listof Node) false)
+;; Purpose: produces a path leading from one of `nodes` to `end` or false if not possible
+(define (find-route-list nodes end graph)
+    (cond [(empty? nodes) false]
+          [else (local [(define route (find-route (first nodes) end graph))]
+                    (cond [(cons? route) route]
+                          [else (find-route-list (rest nodes) end graph)]))]))</code></pre>
+<p>We could trace this, but in this case it is more useful to do a <strong>trace tree</strong>. This is a tree drawn with the recursive call as each node.</p>
+<h1 id="section-19">26/11/13</h1>
+<p><code>find-route</code> is designed to work with acyclic graphs. If there is a cycle, it could potentially loop through the cycle infinitely.</p>
+<p>For example, the graph <code>'((A (B)) (B (C)) (C (A)) (D ()))</code> would result in infinite recursion if we tried to find a route from <code>A</code> to <code>D</code>.</p>
+<p>For directed acyclic graphs, any route must have no more nodes in it than the number of nodes in the graph. So <code>find-route</code> has an upper bound on the number of times it recurses - the number of routes to any destination in the graph. So the function always terminates if there are no cycles.</p>
+<p>What if there are cycles?</p>
+<p>Some possible solution is to pass down a list of visited nodes to avoid visiting them again, since the visited nodes are still being processed:</p>
+<pre><code>;; find-route: Node Node Graph (listof Node) -&gt; (union (listof Node) false)
+;; Purpose: produces a path leading from `start` to `end` in `graph` having visited `visited` or false if not possible
+(define (find-route start end graph visited)
+    (cond [(symbol=? start end) (list end)]
+          [else (local [(define route (find-route-list (neighbors start graph) end
+                                                       graph (cons start visited)))]
+                    (cond [(false? route) false]
+                          [else (cons start route)]))]))
+
+;; find-route-list: (listof Node) Graph Node -&gt; (union (listof Node) false)
+;; Purpose: produces a path leading from one of `nodes` having visited `visited` or false if not possible
+(define (find-route-list nodes end graph visited)
+    (cond [(empty? nodes) false]
+          [(member? (first nodes) visited)
+           (find-route-list (rest nodes) visited)]
+          [else (local [(define route (find-route (first nodes) end graph visited))]
+                    (cond [(cons? route) route]
+                          [else (find-route-list (rest nodes) end graph visited)]))]))</code></pre>
+<p>Note that the value of <code>visited</code> is always the reverse of the route, if there is one.</p>
+<p>In practice, we would usually write a wrapper function to avoid having to pass the extra <code>visited</code> parameter.</p>
+<p>The accumulator makes sure we never recurse deeper than there are nodes in the graph, so the function always terminates, even if there are cycles.</p>
+<p>However, this is still not very efficient. Consider the following graph:</p>
+<pre><code>&#39;((A (B1 B2)) ; diamond 1
+  (B1 (C))
+  (B2 (C))
+  (C (D1 D2)) ; diamond 2
+  (D1 (E))
+  (D2 (E))
+  (E (F1 F2)) ; diamond 3
+  (F1 (G))
+  (F2 (G))
+  (G (H1 H2)) ; diamond 4
+  (H1 (I))
+  (H2 (I))
+  (I ()) ;end of diamond 4
+  (Z ()))</code></pre>
+<p>If we tried to search for a path from <code>A</code> to <code>Z</code>, the backtracking search would check every possible path variation. For example, there are 2 ways to get from <code>A</code> to <code>C</code>, but <code>C</code> doesn't lead to <code>Z</code> in the first place, so searching to <code>C</code> is a waste of time the second time we try to get to it.</p>
+<p>In fact, with this diamond-shaped pattern of graph, the number of paths checked is an exponential function of the number of diamonds - <span class="math inline">\(2^n\)</span>, in our case.</p>
+<p>We can make this more efficient by having a failed route finding in <code>find-route-list</code> return the list of nodes that were visited so that we can avoid visiting them again in the remaining candidates in the list of neighbors:</p>
+<pre><code>;; find-route: Node Node Graph -&gt; (union (listof Node) false)
+;; Purpose: produces a path leading from `start` to `end` in `graph` or false if not possible
+(define (find-route start end graph)
+    (local [(define route (find-route-fast start end graph empty))]
+        (cond [(empty? (first route)) false] ; no route found
+              [else route])))
+
+;; find-route-fast: Node Node Graph (listof Node) -&gt; (union (listof Node) (listof (union empty Node)))
+;; Purpose: produces a path leading from `start` to `end` in `graph` having visited `visited` or the list of visited nodes with empty prepended if not possible
+(define (find-route-fast start end graph visited)
+    (cond [(symbol=? start end) (list end)]
+          [else (local [(define route (find-route-list (neighbors start graph) end
+                                                       graph (cons start visited)))]
+                    (cond [(empty? (first route)) route]
+                          [else (cons start route)]))]))
+
+;; find-route-list: (listof Node) Graph (listof Node) -&gt; (union (listof Node) (listof (union empty Node)))
+;; Purpose: produces a path leading from one of `nodes` having visited `visited` or the list of visited nodes with empty prepended if not possible
+(define (find-route-list nodes end graph visited)
+    (cond [(empty? nodes) (cons empty visited)]
+          [(member? (first nodes) visited)
+           (find-route-list (rest nodes) end graph visited)]
+          [else (local [(define route (find-route-fast (first nodes) end graph visited))]
+                    (cond [(empty? (first route)) ; route not found
+                           (find-route-list (rest nodes) end graph (rest route))]
+                          [else route]))]))</code></pre>
+<p>Now each node is visited at most once, since once a node has been visited, it stays in <code>visited</code> for the rest of the search. Therefore, the number of nodes we check is a linear function of the number of nodes in the graph.</p>
+<p>Since each node check calls <code>neighbors</code>, which takes linear time proportional to the number of nodes in the graph, the runtime of <code>find-route</code> is a quadratic function of the number of nodes in the graph.</p>
+<h2 id="implicit-graphs">Implicit Graphs</h2>
+<p>Sometimes it is impractical or inefficient to build the entire graph explicitly. An <strong>implicit graph</strong> is one that isn't explicitly represented as a graph.</p>
+<p>For example, the possible legal moves in a chess game could be an implicit graph, with nodes representing possible game states and edges representing legal moves between these states. It is not practical to represent all the possible moves explicitly, so we do not.</p>
+<p>What if we wanted to use <code>find-route</code> to search for a path through an implicit graph?</p>
+<p>Note that the only part of the function that actually does anything with the graph is <code>neighbors</code>. In fact, all we have to do is implement a different <code>neighbors</code> function. A neighbor function that returned the list of legal moves in chess given the current game state would allow us to use a backtracking search to implement a simple chess solver, though its performance is impractically poor.</p>
+<p>In artificial intelligence applications, implementations usually add heuristics to determine which neighbors to explore first or which to skip entirely, in order to save time.</p>
+<h1 id="section-20">28/11/13</h1>
+<h2 id="history">History</h2>
+<p>Computer Science is not a well defined field, having only existed for about 75 years.</p>
+<p>Early computations were done by humans, who were called &quot;computers&quot;.</p>
+<p>Charles Babbage (1791-1871) was a mathematician who invented but never built the difference engine and analytical engine - mechanical computing machines where the specification of the operations to be executed were separated from actually execution. This is the first autonomous computing machine.</p>
+<p>Ada &quot;Lovelace&quot; Augusta Byron (1815-1852) assisted Babbage in the design of the machines and could be considered the first computer scientist or programmer. Wrote about the actual operation and use of the engines rather than just the design.</p>
+<p>David Hilbert (1862-1943) was a mathemtician who formalized the axiomatic treatment of Euclidean geometry. He is famous for posing 23 unsolved problems, some of which have since been solved.</p>
+<p>Most famously, Hilbert posed the question of whether mathematics is consistent (a statement cannot be proven true and false), or complete (all true statements are provable).</p>
+<p>Kurt Godel (1906-1978) finally proved that any non-trivial system of axioms (a system of axioms capable of describing integer arithmetic) is not complete. If it is consistent, it cannot be proved within the system.</p>
+<p>The proof is based on &quot;this statement cannot be proved&quot; written in mathematical notation. It would be inconsistent if the statement was false, since it would be a proof of a false statement, so it must be true but not provable.</p>
+<p>Another one of Hilbert's questions asked if there was a procedure that, given a formula, proves it true, shows it false, or shows that it is unprovable. This requires a precise definition of a procedure - a formal model of computation.</p>
+<p>Alonzo Church (1903-1995) showed that such a procedure is not possible. He invented lambda calculus with his student Kleene.</p>
+<p>The notation is as simple as possible: <span class="math inline">\(\lambda x . E\)</span> is a single-argument function with body <span class="math inline">\(E\)</span>, while ;wip</p>
+<p>Alan Turing (1912 1954) defined a different model of computation and resulted in a simpler and more influential proof.</p>
+<p>His Turing machine was a theoretical device with unlimited memory and a finite number of states. It could be thought of as a machine with an infinite tape and a finite state machine.</p>
+<p>One could represent a Turing machine using characters stored in the memory of another machine. Suppose there was a machine that could process one of these descriptions and result in whether it would eventually halt or not. Then there exists another machine that would halt if and only if the first machine said it wouldn't. This is a contradiction, so it is impossible for such a machine to exist.</p>
+<p>This is called the halting/undecidability problem and was a very significant result. This was later adapted into lambda calculus, and an equivalence was established between the two models.</p>
+<p>Turing is also known for his contributions to code breaking in World War 2, and to the first electronic computer, Colossus.</p>
+<p>John von Neumann (1903-1957) is known for his von Neumann computer architecture, with programs stored in the same memory as data. This is still the standard model for computation today, along with the Harvard architecture. However, it doesn't take advantage of parallel processing.</p>
+<p>;wip: von neumann bottleneck</p>
+<p>Grace Murray Hopper (1906-1992) was the author of the first compiler defining an english-like data processing language, which later became COBOL.</p>
+<p>John Backus designed FORTRAN, which became the dominant language of numerical and scientific computation. The Backus-Naur notation is also attributable to him.</p>
+<p>He also proposed a functional programming language, and led to the development of LISP.</p>
+<p>John McCarthy (1927-2011) was an AI researcher at MIT known for designing and implementing LISP, based on ideas from lambda calculus and recursive function theory.</p>
+<p>It was described with only the functions <code>atom</code> (<code>(lambda (x) (not (cons? x)))</code>), <code>eq</code> (<code>equal?</code>), <code>car</code> (<code>first</code>), <code>cdr</code> (<code>rest</code>), and <code>cons</code>. It also had the special forms <code>lambda</code>, <code>quote</code>, <code>cond</code>, and <code>label</code> (<code>define</code>). Many other functions could be implemented using just these functions.</p>
+<p>LISP (LISt Processing) eventually evolved into a general purpose programming language with many other useful functions. It became the dominant language in artificial intelligence due to its encouragement of modifying the language itself. It became two main standards after the 1980s - Common Lisp and Scheme.</p>
+<p>Gerald Sussman invented Scheme after an idea for a Lisp-like programming language had actors and lexical scoping added (as opposed to Common Lisp's dynamic scoping). It became popular in the study of programming languages. He also wrote the textbook &quot;Structure and Interpretation of Computer Programs&quot;, based on Scheme.</p>
+<p>The textbook &quot;How to Design Programs&quot; was written to remedy some issues with that book, such as a steep learning curve and a lack of methodology.</p>
+<p><strong>APPLAUSE</strong></p>
 <div class="license">
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
