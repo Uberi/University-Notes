@@ -782,9 +782,71 @@ Additionally, a **residual plot** containing $\hat r_i$ with respect to $x_i$. I
 
 Another type of residual plot, also used to check property 2 and 3, is to scatter plot $\hat r_i, \hat \mu_i$ together. We should also see a similar belt around the horizontal $\hat r_i = 0$ line, with no obvious pattern.
 
-A third type of residual plot is to QQ plot ;wip
+A third type of residual plot is a QQ plot showing the sample quantiles versus the Gaussian quantiles. This lets us check if assumption 1 holds.
 
-If there is a pattern for any of these, it suggests that the assumption that $E(Y_i) = \mu(x_i)$ might not be appropriate.
+If there is a pattern in the Y-axis location on the plot, it suggests that the second assumption, that $E(Y_i) = \mu(x_i)$, might not be appropriate. For example, if the residuals plot curves upward, a quadratic regression might be more appropriate.
+
+# 22/3/17
+
+If there is a pattern in the spread in the Y-axis on the plot, it suggests that the third assumption, that the variance is constant, might not be appropriate. For example, if the residuals plot fans out toward the right, it seems like the variance increases as the X-axis value increases.
+
+(In-class bean counting experiment)
+
+Suppose we want to study whether hand spans of female students enrolled in STAT231 in Fall 2016 is different on average from the hand spans of male students in that same class.
+
+First, we need a model. Let $Y_{1, i}$ be the handspan of the $i$th male student, and $Y_{2, i}$ the handspan of the $i$ female student. Based on the given histograms and QQ plots, a Gaussian model seems to be reasonable for these - $Y_{1, i} \sim G(\mu_1, \sigma)$ and $Y_{2, i} \sim G(\mu_2, \sigma)$.
+
+This is called a two-sample Gaussian problem - two datasets where each data point independently has a Gaussian distribution, with two different means for each dataset, and we're assuming that the variance is the same for both. This is a special case of the Gaussian response model.
+
+A point estimator for the difference in average hand span is $\widetilde \mu_1 - \widetilde \mu_2 = \overline Y_1 - \overline Y_2$. We can also take the sample variance for one of the populations to get an estimate for $\sigma^2$ (and check our model assumptions by comparing it to the sample variance for the other population); we'd probably pick the bigger population since that would give a more precise estimate.
+
+A **pooled estimator** for $\sigma^2$ in the two-sample Gaussian problem is simply a weighted average of the estimators for each population in the problem - a weighted average of the sample variances, weighted by the number of observations in each sample.
+
+# 24/3/17
+
+Note that $S_p^2 = \frac{1}{n_1 + n_2 - 2}\left((n_1 - 1)S_1^2 + (n_2 - 1)S_2^2\right)$, where $S_1 = \frac 1 {n_1 - 2} \sum (Y_{1, i} - \overline Y_1)^2$ and $S_2 = \frac 1 {n_2 - 2} \sum (Y_{2, i} - \overline Y_2)^2$. This is a pooled estimator for $\sigma^2$ for the two-sample Gaussian model.
+
+Note that the $\frac{\overline Y_1 - \overline Y_2 - (\mu_1 - \mu_2)}{\sigma \sqrt{\frac 1 {n_1} + \frac 1 {n_2}}} \sim G(0, 1)$, because we have a linear combination of Gaussian random variables.
+
+Since we don't know $\sigma$, we can replace it with an unbiased estimator to get $\frac{\overline Y_1 - \overline Y_2 - (\mu_1 - \mu_2)}{S_p \sqrt{\frac 1 {n_1} + \frac 1 {n_2}}} \sim t(n_1 + n_2 - 2)$. We can use this as a pivotal quantity to construct a confidence interval. ;wip: why is this a pivotal quantity? it's not even a function of sigma
+
+Since $S_p^2 = \frac{1}{n_1 + n_2 - 2}\left((n_1 - 1)S_1^2 + (n_2 - 1)S_2^2\right)$, we can find a pivotal quantity for $\sigma^2$ as $\frac{(n_1 + n_2 - 2)S_p^2}{\sigma^2} \sim \chi^2(n_1 + n_2 - 2)$.
+
+Using the same approach as for previous pivotal quantities, and the fact that, a $100p$ percent confidence interval is $\overline y_1 + \overline y_2 \pm a s_p \sqrt{\frac 1 {n_1} + \frac 1 {n_2}}$, where $P(T < a) = \frac{1 + p}{2}$ and $T \sim t(n_1 + n_2 - 2)$.
+
+If $n_1$ and $n_2$ are large enough (at least 30 entries each), the student-t distribution approaches the Gaussian distribution, so we can approximately say that $\frac{\overline Y_1 - \overline Y_2 - (\mu_1 - \mu_2)}{S_p \sqrt{\frac 1 {n_1} + \frac 1 {n_2}}} \sim G(0, 1)$.
+
+The bean experiment from yesterday is a **paired experiment**, because observations were deliberately paired up to eliminate factors like finger size, agility, and so on (each left hand observation was paired with the right hand observation from the same person). This reduces the variance (compared to, say, mixing all of the observations up) whenever the covariance is positive between the two samples. We don't do this if the covariance is negative, because then they're negatively correlated, so the resulting variance would actually be higher.
+
+For two-sample models, we often care about $Y_1 - Y_2$. Since $Y_1 - Y_2$ is a single sample, we can then apply single-sample model techniques. For our bean experiment, since $Y_1 \sim G(\mu_1, \sigma)$ and $Y_2 \sim G(\mu_2, \sigma)$, $\overline Y_1 - \overline Y_2 \sim G(\mu_1 + \mu_2, \sigma \sqrt{\frac 1 {n_1} + \frac 1 {n_2}})$.
+
+The result of the experiment showed that there's strong evidence against the null hypothesis that the true value of the average bean counts are the same between both hands. This difference might be of practical significance if dealing with things like playing an instrument, designing hand tools, and so on.
+
+# 27/3/17
+
+Paired experiments can only be used in situations in observational experiments, because then the order in which the observations are taken would affect the result. 
+
+Suppose we want to determine if the distribution of the colour of Smarties is uniform. We buy hundreds of  boxes of Smarties, and then count their colors. How do we determine how well the resulting data confirms/disconfirms the hypothesis that the colour distribution is uniform?
+
+Clearly, the number each colour can be represented as $Y_i \sim \mathrm{Binomial}(n, \theta_i)$. All together, they form a multinomial distribution $Y_1, \ldots, Y_k \sim \mathrm{Multinomial}(n; \theta_1, \ldots, \theta_k)$.
+
+So the likelihood function is $L(\theta_1, \ldots, \theta_k; y_1, \ldots, y_k) = \theta_1^{y_1} \cdots \theta_k^{y_k}$, with all the constant factors removed. Note that $0 \le \theta \le 1$ and $\sum \theta_i = 1$. If we take the maximum likelihood estimate, we get $\theta_i = \frac{y_i}{n}$.
+
+Our null hypothesis is $\theta_1 = \ldots = \theta_k = \frac 1 n$, or $\theta = \theta_0$ where $\theta_0 = \tup{\theta_1, \ldots, \theta_k}$.
+
+To test how good this hypothesis is, we now need a test statistic. For this, we can use the likelihood ratio test statistic, $A = -2 \log \frac{L(\theta_0)}{L(\widetilde \theta)} \sim \chi^2(k - 1)$ (we have $k$ variables $\theta_1, \ldots, \theta_k$, but since $\sum \theta_i = 1$, there's actually only $k - 1$ unknown values). If we expand $\frac{L(\theta_0)}{L(\widetilde \theta)}$, we get $\left(\frac{E_i}{Y_i}\right)^{Y_i}$, where $E_i = \frac{;wip: get this from slides}$ is the expected frequency of successes for $i$. So $A = 2 \sum Y_i \ln \frac{Y_i}{E_i}$.
+
+This test statistic makes sense because it has large values when the hypothesis isn't supported, and small values when it is. Using this test statistic, we have the pivotal quantity $\lambda = 2 \sum y_i \ln \frac{Y_i}{E_i} \sim \chi^2(1)$. We can now generate a confidence interval or p-value from this.
+
+Before the likelihood ratio statistic was around, there was also the Pearson Chi-squared Goodness of Fit Statistic, $D = \sum \frac{(Y_i - E_i)^2}{E_i}$, where $E_i = n \theta_i$ - the expected frequencies.
+
+# 29/3/17
+
+Alpha particle example.
+
+For an approximate p-value, the p-value is around $P(W \ge \lambda)$, where $W \sim \chi^2(k - 1 - p)$, where $p$ is the number of parameters being estimated assuming the null hypothesis is true.
+
+For bivariate categorical data, we used relative risk to summarize this data.
 
 ---
 
