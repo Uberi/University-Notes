@@ -6,7 +6,8 @@ all: $(OUTPUT_FILES)
 %.html: %.md templates/template.html
 	pandoc "--output=$@" \
 		--data-dir=. --template=template.html \
-		--mathjax --variable=pagetitle:$(*F)\ \|\ Anthony\ Zhang "$<"
+		"--mathjax=https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" \
+		--variable=pagetitle:$(*F)\ \|\ Anthony\ Zhang "$<"
 
 clean:
 	rm $(OUTPUT_FILES)

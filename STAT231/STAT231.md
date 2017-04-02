@@ -848,6 +848,29 @@ For an approximate p-value, the p-value is around $P(W \ge \lambda)$, where $W \
 
 For bivariate categorical data, we used relative risk to summarize this data.
 
+# 31/3/17
+
+Exam will include a 2-way table question.
+
+The generalized two-way table has the model $Y_{1, 1}, Y_{1, 2}, \ldots, Y_{a, b} \sim \mathrm{Multinomial}(n; \theta_{1, 1}, \theta_{1, 2}, \ldots, \theta_{a, b})$
+
+In the two-way table, the null hypothesis is usually that the variables are independent.
+
+Each $e_{i,j} = \frac{r_i c_i}{n}$, where $r_i$ is the row value and $c_i$ is the column value.
+
+For a two-way table, the number of degrees of freedom is $ab - 1 - (a - 1 + b - 1)$.
+
+Causal Relationships
+--------------------
+
+What does it means to say that X causes Y? We usually mean that if we change X, we cause a change in Y, but how do we determine when this is the case - how do we know smoking causes lung cancer, versus lung cancer causing smoking? Does your final STAT230 grade cause your final STAT231 grade? In a lot of cases, causation is hard to define.
+
+One definition of a causal relationship is: a variate $x$, has a causal effect on a random variable $Y$ if and only if changing X gets a change in Y, all other factors being held constant. However, a change in X might only change the distribution of Y, and this should still be considered a causal relationship.
+
+A better definition is to say that changing the variate $x$ should result in a change in some property of the random variable $Y$, like $E(Y)$ or $P(Y \ge c)$.
+
+It's usually not possible to hold all other factors constant as per the definition, but we should design studies so that all of the alternative explanations we can think of for $Y$ changing are ruled out. Generally, we can only do this using experimental studies, so we can actually change the explanatory variate $x$.
+
 ---
 
 My previous STAT231 notes follow:
