@@ -871,6 +871,27 @@ A better definition is to say that changing the variate $x$ should result in a c
 
 It's usually not possible to hold all other factors constant as per the definition, but we should design studies so that all of the alternative explanations we can think of for $Y$ changing are ruled out. Generally, we can only do this using experimental studies, so we can actually change the explanatory variate $x$.
 
+# 3/4/17
+
+Actually, there are ways to detect causal relationships in observational studies. Usually we can't do this because there are multiple other reasons we could have gotten the relationship we saw:
+
+* The explanatory variate causes the response variate (e.g., eating food causes lowering of hunger).
+* The response variate is causing changes in the explanatory variate (e.g., hotel occupancy rates increase advertising spend).
+* The explanatory variate is contributing but not the cause of the response variate (e.g., dietary choices affect but don't solely cause cancer).
+* Both variates are changing over time (e.g., number of pirates vs. global temperature increase).
+* The variates are coincidentally the way they are (e.g., thinking about a song and it suddenly coming on the radio).
+* There are confounding variates (e.g. people who eat healthy vs. people who exercise vs. risk of cancer - the effects of diet and exercise are inextricable from each other).
+* The variates might be changing due to another, common cause, a lurking variate (e.g., tobacco companies saying smoking and lung cancer are both caused by genetic predispositions).
+
+If we can do an observational study where we control all of these confounding and lurking variates, we can establish a causal relationship. However, it's often not ethical to do so. To correct for these factors, we can instead use randomization.
+
+If we have a large enough group, we can assume that the levels of confounding variates are about the same between the groups. We need to ensure the following hold:
+
+* The association between the variates needs to be visible in many different types of studies in many different groups (e.g., smoking and lung cancer are related in all countries and in second hand smoking groups as well).
+* The association must hold even when we account for plausible confounding variables (e.g., genetic factors causing smoking and lung cancer are ruled out).
+* There is a plausible scientific explanation for the causal relation - it must fit into our existing theoretical frameworks (e.g., carcinogens causing DNA mutations).
+* The association must be consistent - the variates must always have the same relationship in all situations (e.g., smoking consistently increases cancer rates).
+
 ---
 
 My previous STAT231 notes follow:
