@@ -42,7 +42,7 @@ An **attribute** of a population/process is a function of a variate that is defi
 
 Empirical studies are either **observational** or **experimental**. Observational empirical studies are those in which information is collected about the population/process without attempting to change any variates of units in the population. When we do change variates, it is an experimental empirical study. Generally, in an experimental empirical study, researchers will do something to one subset of the population, and leave the rest as a control group. Note that even in an observational empirical study, researchers can change variates outside of the context of the study - for example, researchers might ask the entire population to complete a survey, which changes variates like "how fed up is this participant with surveys?", yet this is still an observational study, since the survey is external to the study itself.
 
-**Sample surveys** are observational empirical studied in which we select a representative sample of units from population and determine relevant variates for those units.
+**Sample surveys** are observational empirical studies in which we select a representative sample of units from population and determine relevant variates for those units.
 
 Numerical and graphical summaries are used to make sense of large datasets, where we would otherwise not be able to by looking at the numbers directly.
 
@@ -228,7 +228,7 @@ The PDF of a random variable is $f(y; \theta) = \frac{\dee}{\dee y} P(Y \le y) =
 
 Tutorial test 1 was today. Start working on chapter 2 end of chapter problems.
 
-The tutorial test had a few questions about parameter estimation - estimating the parameters for a statistical model based on a sample of a population/process, and quantoify how good those estimates are.
+The tutorial test had a few questions about parameter estimation - estimating the parameters for a statistical model based on a sample of a population/process, and quantify how good those estimates are.
 
 For example, we can estimate $\mu$ in a normal distribution as the sample mean, or $\sigma^2$ as the sample variance. We could also use the sample proportion to estimate $p$ in a Binomial distribution. We figured this out intuitively, but there are formal ways to estimate parameters too. In this course, we'll look at the Method of Maximum Likelihood (MLE), the most often used method. Another common one is the Bayesian Estimation Method.
 
@@ -261,7 +261,7 @@ The likelihood function is the probability of observing the data $y$ as a functi
 
 The **relative likelihood function** is defined as $R(\theta; y) = \frac{L(\theta; y)}{L(\hat \theta)}$ - the likelihood function rescaled to be between 0 and 1. This makes comparing likelohood functions easier.
 
-The binomial relative likelihood function is $\frac{\theta^y (1 - \theta)^{n - y}}{\hat \theta (1 - \hat \theta)^{n - y}}$ where $\hat \theta = \frac y n$.
+The binomial relative likelihood function is $\frac{\theta^y (1 - \theta)^{n - y}}{\hat \theta^y (1 - \hat \theta)^{n - y}}$ where $\hat \theta = \frac y n$.
 
 What is the Y axis of the relative likelihood function? It's the **likelihood** of the X axis, not the probability of anything. Likewise, $\theta$ isn't a probability either, just an unknown constant. For example, a value of $\theta$ that makes $R(\theta) = 0.6$ means that $\theta$ is 0.6 times as likely as the maximum likelihood estimate.
 
@@ -487,7 +487,7 @@ We again represent our potential dataset as random variables $Y = Y_1, \ldots, Y
 
 To determine how good the interval estimator is we want to compute $P(L(Y) \le \theta \le U(Y))$. This gives us the concept of the **confidence interval** - what's the **narrowest** possible interval $[L(Y), U(Y)]$ that has a $100p$ percent chance of containing the true value of $\theta$?
 
-The $100p$ percent **confidence interval** is the interval estimate $[L(y), U(y)]$ such that $P(L(y) \le \theta \le U(y)) = p$, where $\theta$ is the unknown parameter and $0 \le p \le 1$. The center of the confidence interval is always the point estimate for the mean (i.e., the sample mean), so the confidence interval is just the point estimate plus or minus the **margin of error**. Also, $p$ is called the **confidence coefficient**.
+The $100p$ percent **confidence interval** is the interval estimate $[L(y), U(y)]$ such that $P(L(y) \le \theta \le U(y)) = p$, where $\theta$ is the unknown parameter and $0 \le p \le 1$. The center of the confidence interval is usually the point estimate for the mean (i.e., the sample mean), so the confidence interval is often just the point estimate plus or minus the **margin of error**. Also, $p$ is called the **confidence coefficient**.
 
 It's not valid to say that a 99% confidence interval means that we'd expect the true value to have a 99% probability of being in the interval, because the true value of $\theta$ is just a constant, so doesn't have a distribution or probability of being in there - it's either in the interval or not in the interval, and we're only doing the study once. However, we can say that a 99% confidence interval means that we would be 99% **confident** that the true value is in the interval - if we did the experiment 100 times, we'd expect the interval we got to contain the true value 99 times.
 
@@ -501,9 +501,9 @@ Consider the interval $[\overline Y - \frac{1.96}{\sqrt n}, \overline Y + \frac{
 
 This is a somewhat unusual form for a probability calculation, because the random variable appears on the range bounds and the inner value $\mu$ is a constant. To solve this using the techniques we learned in STAT230, we want to rewrite this so the random variable is in the middle.
 
-Subtracting $\overline Y$ and multiplying by $\sqrt{n}$, we get $P(-1.96 \le \sqrt{n} (\mu - \overline Y) \le 1.96)$. We can rewrite this as $P(-1.96 \le \frac{\overline Y - \mu}{\frac 1 \sqrt{n}} \le 1.96)$.
+Subtracting $\overline Y$ and multiplying by $\sqrt{n}$, we get $P(-1.96 \le \sqrt{n} (\mu - \overline Y) \le 1.96)$. We can rewrite this as $P(-1.96 \le \frac{\overline Y - \mu}{\frac{1}{\sqrt{n}}} \le 1.96)$.
 
-Clearly, $\overline Y \sim \mathrm{Gaussian}(\mu, \sigma = \frac{1}{\sqrt n}})$, because it's the average of $n$ samples. Therefore, $\frac{\overline Y - \mu}{\frac 1 \sqrt{n}} \sim \mathrm{Gaussian}(0, 1)$, so we can find the value of $P(-1.96 \le \frac{\overline Y - \mu}{\frac 1 \sqrt{n}} \le 1.96)$ using the Gaussian CDF table.
+Clearly, $\overline Y \sim \mathrm{Gaussian}(\mu, \sigma = \frac{1}{\sqrt n})$, because it's the average of $n$ samples. Therefore, $\frac{\overline Y - \mu}{\frac{1}{\sqrt{n}}} \sim \mathrm{Gaussian}(0, 1)$, so we can find the value of $P(-1.96 \le \frac{\overline Y - \mu}{\frac{1}{\sqrt{n}}} \le 1.96)$ using the Gaussian CDF table.
 
 Clearly, the width of the table is $2 \frac{1.96}{\sqrt n}$, which decreases as $n$ increases.
 
@@ -545,19 +545,19 @@ Researchers use confidence intervals to choose how large to make their samples. 
 
 Most interval estimates have the form $\text{point estimate} \pm \text{uncertainty}$.
 
-Likelihood intervals are just a different way to write approximate confidence intervals. To show this, we use the $\Chi^2(k = 1)$ distribution, which looks like a downward up-concave slope.
+Likelihood intervals are just a different way to write approximate confidence intervals. To show this, we use the $\chi^2(k = 1)$ distribution, which looks like a downward up-concave slope.
 
 The **maximum likelihood estimator** of $\theta$ is $A = -2 \ln \frac{L(\theta; Y)}{L(\widetilde \theta; Y)}$. $A$ is a random variable that depends on the random data $Y = Y_1, \ldots, Y_n$, and is also called the likelihood ratio statistic (likelihood ratio random variable).
 
-We won't show why this works in this class, but it turns out that with a large enough $n$, $A$ roughly has a $\Chi^2(1)$. In other words, with a large enough sample, we can use the Chi-squared distribution to approximate the likelihood ratio statistic. That means $A$ is approximately a pivotal quantity for $\theta$.
+We won't show why this works in this class, but it turns out that with a large enough $n$, $A$ roughly has a $\chi^2(1)$. In other words, with a large enough sample, we can use the Chi-squared distribution to approximate the likelihood ratio statistic. That means $A$ is approximately a pivotal quantity for $\theta$.
 
 The "large enough" value of $n$ depends on the distributions of the individual samples, just like the central limit theorem - 30 is usually a good value for this course. The above statement is actually quite similar to the central limit theorem, and the likelihood ratio statistic is somewhat similar to the relative likelihood function.
 
-We can then use the likelihood ratio statistic as an approximate pivotal quantity to create $100p$ percent confidence intervals. First, we find a $c$ such that $p = P(W \le c)$ where $W \sim \Chi^2(1)$. Now, we note that $P(W \le c) \approxeq P(-2 \ln \frac{L(\theta; Y)}{L(\widetilde \theta; Y)} \le c)$ for large enough $n$.
+We can then use the likelihood ratio statistic as an approximate pivotal quantity to create $100p$ percent confidence intervals. First, we find a $c$ such that $p = P(W \le c)$ where $W \sim \chi^2(1)$. Now, we note that $P(W \le c) \approxeq P(-2 \ln \frac{L(\theta; Y)}{L(\widetilde \theta; Y)} \le c)$ for large enough $n$.
 
 Therefore, the approximate $100p$ percent confidence interval is $\set{\theta: -2 \ln \frac{L(\theta; y)}{L(\hat \theta; y)} \le c}$, or $\set{\theta: -2 \ln R(\theta; y) \le c}$, or $\set{\theta: R(\theta; y) \ge e^{-\frac c 2}}$. But, note that this is just a likelihood interval!
 
-Note that if $W \sim \Chi^2(1)$ and $Z \sim \mathrm{Gaussian}(0, 1)$, then $P(W \le c) = 2 P(Z \le \sqrt c) - 1$ - we can convert between Chi-squared and Guassian CDF values exactly. This is useful for when our Chi-squared tables don't go up to our desired values.
+Note that if $W \sim \chi^2(1)$ and $Z \sim \mathrm{Gaussian}(0, 1)$, then $P(W \le c) = 2 P(Z \le \sqrt c) - 1$ - we can convert between Chi-squared and Guassian CDF values exactly. This is useful for when our Chi-squared tables don't go up to our desired values.
 
 For example, since $0.95 = 2P(Z \le 1.96) - 1$, $0.95 = P(W \le 1.96^2)$ and an approximate confidence interval for $\theta$ is $\set{\theta: R(\theta) \ge e^{-\frac{1.96^2}{2}}} = \set{\theta: R(\theta) \ge 0.147}$.
 
@@ -565,7 +565,7 @@ Therefore, the 14.7% likelihood interval is the same thing as an approximate 95%
 
 Note that as $p$ increases a likelihood interval gets narrower, while a confidence interval gets wider.
 
-So to convert a $100p$ percent likelihood interval into a confidence interval (given a large enough sample size), we let $c = -2 \ln p$, and then look up the value $k$ such that $k = P(W \le c)$ in the Chi-squared CDF table, or $k = 2P(Z \le \sqrt c) - 1$ in the Gaussian CDF table.
+So to convert a $100p$ percent likelihood interval into a confidence interval (given a large enough sample size), we let $c = -2 \ln p$, and then look up the value $k$ such that $k = P(W \le c)$ in the Chi-squared CDF table, or $k = 2P(Z \le \sqrt c) - 1$ in the Gaussian CDF table. ;wip
 
 Consider the binomial distribution. We can now find the 95% approximate confidence interval with the 14.7% likelihood interval, or using the other approach $\overline y \pm \hat \theta \sqrt{\frac{\hat \theta (1 - \hat \theta)}{n}}$. The former is based on the Chi-squared approximation, while the latter is based on the central limit theorem approximation.
 
@@ -621,7 +621,7 @@ Clearly, $P(D \ge 2.5 \mid H_0) = P(\abs{Y - 12.5} \ge 2.5 \mid H_0)$ where $Y \
 
 Read sections 5.1 to 5.2 in the course notes.
 
-To statistically test a hypothesis $H$, we assume that we're testing a null hypothesis $H_0$ using data $Y$. Then, we set a discrepency measure $D(Y)$ for which large values of $D$ are less conssitent with $H_0$, where $d = D(Y)$ is the observed value of $D$. We then compute the p-value $P(D \ge d; H_0)$.
+To statistically test a hypothesis $H$, we assume that we're testing a null hypothesis $H_0$ using data $Y$. Then, we set a discrepency measure $D(Y)$ for which large values of $D$ are less consistent with $H_0$, where $d = D(Y)$ is the observed value of $D$. We then compute the p-value $P(D \ge d; H_0)$.
 
 A p-value's meaning depends on the test statistic and the data. It's defined as $P(D \ge d; H_0)$ - the probability of observing the discrepency measure that we did, assuming the null hypothesis is true. Essentially, for a p-value, if we ran the experiment many times, we would expect that **that percentage of the time, the experiment would be at least as unusual as the result we got**, by the definition of unusual set by the discrepency statistic.
 
@@ -770,7 +770,7 @@ We can also write $Y_i = \mu(x_i) + R_i$, where $R_i \sim G(0, \sigma)$. Here $x
 
 Linear regression models assume that:
 
-1. The Gaussian model is a goot fit for the response variates.
+1. The Gaussian model is a good fit for the response variates.
 2. $E(Y_i) = \mu(x)$ is a linear function of their corresponding $x_i$ values.
 3. Each $Y_i$ has a Gaussian distribution with a standard deviation that doesn't depend on the covariates $x_i$ (assumption of constant variance).
 
