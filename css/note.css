@@ -5,6 +5,19 @@ h2, h3, p, ul, ol, pre { text-align: left; }
 	margin-bottom: 2em;
 }
 
+/* bottom bar for showing the current page status */
+.status-banner {
+	position: fixed;
+	bottom: 0; left: 0; right: 0;
+	text-align: center;
+}
+.status-banner > div {
+	display: inline-block;
+	padding: 0.8em 2em 0.5em 2em;
+	background: black; color: white;
+	font-size: 2em;
+}
+
 h1[id ^= "section"] { /* the title at the top, excluding all the date titles from the converted Markdown */
 	font-size: 4em;
 	border-top: 1px solid #CCCCCC;
