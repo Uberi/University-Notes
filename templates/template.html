@@ -71,9 +71,9 @@ $if(math)$
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
 
         // not yet available in KaTeX
-        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
-        "\\not": "\\cancel", //wip: looks off
-        "\\bm": "\\mathbf", //wip: not italic
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
+        "\\not": "\\rlap{\\kern{7.5mu}/}", //wip: slash angle is slightly off
+        "\\bm": "\\mathbf", //wip: should be italic, but isn't
       },
       throwOnError: false,
     };
