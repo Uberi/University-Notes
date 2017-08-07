@@ -10,7 +10,7 @@ About
 
 I write these during lectures, and then add to them occasionally when mistakes or omissions are discovered.
 
-They're written in Markdown with LaTeX for math. There's a build script that uses [Pandoc](http://johnmacfarlane.net/pandoc/) to generate HTML with MathJax for LaTeX rendering.
+They're written in Markdown with LaTeX for math. There's a build script that uses [Pandoc](http://johnmacfarlane.net/pandoc/) to generate HTML with [KaTeX](https://khan.github.io/KaTeX/) for math rendering.
 
 Deployment
 ----------
@@ -18,6 +18,19 @@ Deployment
 To compile, run `make` in the top-level directory.
 
 I then push the resulting files to GitHub, where they're hosted using GitHub Pages.
+
+To compile KaTeX, I use [Docker](https://www.docker.com/):
+
+    git clone --depth 1 https://github.com/Khan/KaTeX.git
+    sudo docker run --volume "$(pwd)/KaTeX:/files" --interactive --tty pritunl/archlinux:latest /bin/bash
+
+    # run inside Docker image
+    pacman -S make nodejs zip
+    cd /files
+    make
+    exit
+
+    # the output folder with all the files is now in KaTeX/build/katex
 
 License
 -------
