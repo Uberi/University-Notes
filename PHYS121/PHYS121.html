@@ -10,9 +10,68 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -43,33 +102,7 @@
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h1 id="phys121">PHYS121</h1>
 <p>Mechanics</p>
 <pre><code>Instructor: Guenter Scholz
@@ -86,7 +119,7 @@ Email: scholz@uwaterloo.ca</code></pre>
 </ul>
 <h2 id="doing-physics">Doing Physics</h2>
 <p>Problem solving strategy:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Read the question and understand what it gives you and what you are being asked to do.</li>
 <li>Draw a diagram to clarify things if needed (for example, a free-body diagram).</li>
 <li>Define a coordinate system or reference points.</li>
@@ -105,7 +138,7 @@ Email: scholz@uwaterloo.ca</code></pre>
 <p>All of the laws we will be using have already been recognized by people such as Galileo and Newton. Although they are only empirically based, we will assume them to be true, and ignore effects such as relativity.</p>
 <p>These laws were recognized through doing experiments, and using the observations obtained to figure out mathematical relationships between quantities.</p>
 <p>Some examples of physical quantities are distance, time, velocity, density, temperature, and force.</p>
-<p>Some examples of laws are <span class="math inline">\(\vec{F} = m\vec{a}\)</span> and <span class="math inline">\(\vec{a}_{av} = \frac{\Delta \vec{v}}{\Delta t}\)</span>.</p>
+<p>Some examples of laws are <span class="math inline">\vec{F} = m\vec{a}</span> and <span class="math inline">\vec{a}_{av} = \frac{\Delta \vec{v}}{\Delta t}</span>.</p>
 <p>Classical mechanics is predictive - knowing everything about a system is enough to predict its future states for all time. This contrasts with newer paradigms of mechanics like quantum mechanics.</p>
 <p>There are no such things as absolute laws. Our laws are based on observation, and the possibility of a counterexample always exists.</p>
 <p>For example, Newton's laws fell apart under relativistic conditions, where relativistic physics prevailed.</p>
@@ -117,46 +150,46 @@ Email: scholz@uwaterloo.ca</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">Quantity</th>
-<th align="left">Symbol</th>
-<th align="left">Unit</th>
+<th style="text-align: left;">Quantity</th>
+<th style="text-align: left;">Symbol</th>
+<th style="text-align: left;">Unit</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Distance</td>
-<td align="left"><span class="math inline">\(d\)</span></td>
-<td align="left">m</td>
+<td style="text-align: left;">Distance</td>
+<td style="text-align: left;"><span class="math inline">d</span></td>
+<td style="text-align: left;">m</td>
 </tr>
 <tr class="even">
-<td align="left">Time</td>
-<td align="left"><span class="math inline">\(t\)</span></td>
-<td align="left">s</td>
+<td style="text-align: left;">Time</td>
+<td style="text-align: left;"><span class="math inline">t</span></td>
+<td style="text-align: left;">s</td>
 </tr>
 <tr class="odd">
-<td align="left">Mass</td>
-<td align="left"><span class="math inline">\(m\)</span></td>
-<td align="left">kg</td>
+<td style="text-align: left;">Mass</td>
+<td style="text-align: left;"><span class="math inline">m</span></td>
+<td style="text-align: left;">kg</td>
 </tr>
 <tr class="even">
-<td align="left">Speed</td>
-<td align="left"><span class="math inline">\(v\)</span></td>
-<td align="left">m/s</td>
+<td style="text-align: left;">Speed</td>
+<td style="text-align: left;"><span class="math inline">v</span></td>
+<td style="text-align: left;">m/s</td>
 </tr>
 <tr class="odd">
-<td align="left">Acceleration</td>
-<td align="left"><span class="math inline">\(a\)</span></td>
-<td align="left">m/s^2</td>
+<td style="text-align: left;">Acceleration</td>
+<td style="text-align: left;"><span class="math inline">a</span></td>
+<td style="text-align: left;">m/s^2</td>
 </tr>
 <tr class="even">
-<td align="left">Force</td>
-<td align="left"><span class="math inline">\(F\)</span></td>
-<td align="left">kg m/s^2</td>
+<td style="text-align: left;">Force</td>
+<td style="text-align: left;"><span class="math inline">F</span></td>
+<td style="text-align: left;">kg m/s^2</td>
 </tr>
 <tr class="odd">
-<td align="left">Area</td>
-<td align="left"><span class="math inline">\(A\)</span></td>
-<td align="left">m^2</td>
+<td style="text-align: left;">Area</td>
+<td style="text-align: left;"><span class="math inline">A</span></td>
+<td style="text-align: left;">m^2</td>
 </tr>
 </tbody>
 </table>
@@ -166,13 +199,13 @@ Email: scholz@uwaterloo.ca</code></pre>
 <p>Dimensional analysis can help us derive new insights into the nature of things, simply by seeing how the units relate to each other.</p>
 <p>Consider the example of drag force on an object moving through a fluid:</p>
 <blockquote>
-<p>Clearly, drag force is correlated with the object area (<span class="math inline">\(A = L^2\)</span>), velocity (<span class="math inline">\(v = L/T\)</span>), and fluid density (<span class="math inline">\(\rho = M/L^3\)</span>).<br />
-So <span class="math inline">\(F \propto A^w v^x \rho^y\)</span>, where <span class="math inline">\(w, x, y\)</span> are unknown.<br />
+<p>Clearly, drag force is correlated with the object area (<span class="math inline">A = L^2</span>), velocity (<span class="math inline">v = L/T</span>), and fluid density (<span class="math inline">\rho = M/L^3</span>).<br />
+So <span class="math inline">F \propto A^w v^x \rho^y</span>, where <span class="math inline">w, x, y</span> are unknown.<br />
 We can figure out the powers using dimensional analysis.<br />
-Clearly, <span class="math inline">\(F = ma = ML/T^2\)</span>, and <span class="math inline">\(A^w v^x \rho^y = L^{2w} (L^x/T^x) M^y/L^{3y} = L^{2w + x} M^y / (L^{3y} T^x) = L^{2w + x - 3y} M^y / T^x\)</span>.<br />
-So <span class="math inline">\(1 = y, 1 = 2w + x - 3y, 2 = x\)</span>.<br />
-Solving for the variables, we get <span class="math inline">\(w = 1, x = 2, y = 1\)</span> as the only solution.<br />
-So <span class="math inline">\(F \propto A v^2 \rho\)</span>. We have now found a law for drag force on an object moving through a fluid, all other factors held constant.<br />
+Clearly, <span class="math inline">F = ma = ML/T^2</span>, and <span class="math inline">A^w v^x \rho^y = L^{2w} (L^x/T^x) M^y/L^{3y} = L^{2w + x} M^y / (L^{3y} T^x) = L^{2w + x - 3y} M^y / T^x</span>.<br />
+So <span class="math inline">1 = y, 1 = 2w + x - 3y, 2 = x</span>.<br />
+Solving for the variables, we get <span class="math inline">w = 1, x = 2, y = 1</span> as the only solution.<br />
+So <span class="math inline">F \propto A v^2 \rho</span>. We have now found a law for drag force on an object moving through a fluid, all other factors held constant.<br />
 Note that this is just a proportionality, not an equation. We can call the constant of proportionality the &quot;drag coefficient&quot;.<br />
 We could determine the drag coefficient experimentally for particular objects (or through the hydrodynamic equations), but not through dimensional analysis.<br />
 This shows that we can derive basic physical relationships using just dimensional analysis.</p>
@@ -182,7 +215,7 @@ This shows that we can derive basic physical relationships using just dimensiona
 <p>Exponential functions accept only unitless values as well.</p>
 <h3 id="accuracy">Accuracy</h3>
 <p>Whenever we do measurements, we can never measure quantities to their exact values. Therefore, there is always some error in our measurements.</p>
-<p>If we measure a value, there is always a range to that value in which we measure things. For example, a pencil might be <span class="math inline">\(5.4 \pm 0.1 \text{cm}\)</span>, which means that it could be anywhere from <span class="math inline">\(5.3\)</span> to <span class="math inline">\(5.5\)</span> cm.</p>
+<p>If we measure a value, there is always a range to that value in which we measure things. For example, a pencil might be <span class="math inline">5.4 \pm 0.1 \text{cm}</span>, which means that it could be anywhere from <span class="math inline">5.3</span> to <span class="math inline">5.5</span> cm.</p>
 <p>We can use significant digits as a short and concise way of representing the amount of precision our measurements have. Significant digits are represented in the format of the number. The more significant digits a number has, the more precision there is. We count significant digits using these rule:</p>
 <ul>
 <li>Non-zero digits are always significant (e.g., 111 has 3 significant digits).</li>
@@ -191,20 +224,20 @@ This shows that we can derive basic physical relationships using just dimensiona
 <li>Zeros that appear at the end of a number with a decimal point are always significant (e.g., 100.0 has 4 significant digits).</li>
 <li>Zeros that appear at the end of a number without a decimal point are sometimes significant - this is ambiguous (e.g., 100 can have 1, 2, or 3 significant digits)</li>
 </ul>
-<p>With these rules, <span class="math inline">\(1.0\)</span> is not the same thing as <span class="math inline">\(1.000\)</span> - the first has 2 significant digits, while the second has 4.</p>
-<p>Note the ambiguous case for numbers like 10000. We can disambiguate the number of significant digits available by using scientific notation - 10000 can be represented as <span class="math inline">\(1 \times 10^4\)</span>, <span class="math inline">\(1.0 \times 10^4\)</span>, <span class="math inline">\(1.00 \times 10^4\)</span>, <span class="math inline">\(1.000 \times 10^4\)</span>, or <span class="math inline">\(1.0000 \times 10^4\)</span>, with 1, 2, 3, 4, or 5 significant digits, respectively.</p>
+<p>With these rules, <span class="math inline">1.0</span> is not the same thing as <span class="math inline">1.000</span> - the first has 2 significant digits, while the second has 4.</p>
+<p>Note the ambiguous case for numbers like 10000. We can disambiguate the number of significant digits available by using scientific notation - 10000 can be represented as <span class="math inline">1 \times 10^4</span>, <span class="math inline">1.0 \times 10^4</span>, <span class="math inline">1.00 \times 10^4</span>, <span class="math inline">1.000 \times 10^4</span>, or <span class="math inline">1.0000 \times 10^4</span>, with 1, 2, 3, 4, or 5 significant digits, respectively.</p>
 <p>When we multiply or divide numbers, the resulting number has the same number of significant digits as the multiplicand, divisor, or dividend with the lowest number of significant digits.</p>
 <p>When we add numbers, the location of the last significant digit is the rightmost digit column that is significant in both numbers.</p>
-<p>If we have a number that has more digits than significant digits (which can occur when doing operations on measurements), and we don't want to round the numbers yet, we can simply write all the digits after the last significant digit in a subscript. For example, if 23.456 has only 3 significant digits, we can write it as <span class="math inline">\(23.4_{56}\)</span> to make the number of significant digits clear.</p>
+<p>If we have a number that has more digits than significant digits (which can occur when doing operations on measurements), and we don't want to round the numbers yet, we can simply write all the digits after the last significant digit in a subscript. For example, if 23.456 has only 3 significant digits, we can write it as <span class="math inline">23.4_{56}</span> to make the number of significant digits clear.</p>
 <p>Alternatively, we can underline the last significant digit, though this is an informal convention.</p>
 <h3 id="estimation">Estimation</h3>
 <p>Estimation is an extremely important skill in physics.</p>
 <p>We can estimate roughly how much a number is by using the <strong>order of magnitude</strong> scale.</p>
-<p>The exact order of magnitude of a number is simply the base 10 logarithm of the number rounded down to the nearest integer. This is equivalent to counting the number of digits and subtracting 1. For example, <span class="math inline">\(3763567\)</span> has an order of magnitude of 6.</p>
+<p>The exact order of magnitude of a number is simply the base 10 logarithm of the number rounded down to the nearest integer. This is equivalent to counting the number of digits and subtracting 1. For example, <span class="math inline">3763567</span> has an order of magnitude of 6.</p>
 <p>When we estimate the order of magnitude of a number, or find the nearest order of magnitude we simply use the base 10 logarithm of a number rounded to the nearest integer (not just rounded down).</p>
-<p>We can intuitively do this by representing the number in scientific notation, and looking at the non-exponent value. If this value is greater than or equal to <span class="math inline">\(\sqrt{10} \approx 3.1623\)</span>, then the logarithm has a decimal part greater than or equal to 0.5, and we round up - the order of magnitude is the exponent in the number plus 1. Otherwise, the order of magnitude is simply the exponent.</p>
-<p>For example, <span class="math inline">\(3.2 \times 10^3\)</span> has an order of magnitude of 4, while <span class="math inline">\(3.1 \times 10^3\)</span> has an order of magnitude of 3.</p>
-<p>This is because <span class="math inline">\(\log \sqrt{10} = 0.5\)</span>, and 0.5 is the threshold for rounding up.</p>
+<p>We can intuitively do this by representing the number in scientific notation, and looking at the non-exponent value. If this value is greater than or equal to <span class="math inline">\sqrt{10} \approx 3.1623</span>, then the logarithm has a decimal part greater than or equal to 0.5, and we round up - the order of magnitude is the exponent in the number plus 1. Otherwise, the order of magnitude is simply the exponent.</p>
+<p>For example, <span class="math inline">3.2 \times 10^3</span> has an order of magnitude of 4, while <span class="math inline">3.1 \times 10^3</span> has an order of magnitude of 3.</p>
+<p>This is because <span class="math inline">\log \sqrt{10} = 0.5</span>, and 0.5 is the threshold for rounding up.</p>
 <h1 id="section-1">5/1/14</h1>
 <h2 id="kinematics">Kinematics</h2>
 <p>Kinematics is the study of the motion of objects - positions, velocities, accelerations, etc. Dynamics is the study of a broader range of physical phenomena like motions, forces, and materials.</p>
@@ -221,46 +254,46 @@ This shows that we can derive basic physical relationships using just dimensiona
 <li>Position/displacement/distance.
 <ul>
 <li>Position is simply an offset from the origin in a coordinate system.</li>
-<li>Positions (<span class="math inline">\(\vec{x}\)</span>) are therefore always relative to the origin.</li>
-<li>Displacements (<span class="math inline">\(\Delta \vec{x}\)</span>) are a change in position - from <span class="math inline">\(x_i\)</span> to <span class="math inline">\(x_f\)</span> (initial <span class="math inline">\(x\)</span> to final <span class="math inline">\(f\)</span>). <span class="math inline">\(\Delta \vec{x} - \vec{x}_f - \vec{x}_i\)</span>.</li>
-<li>Distance <span class="math inline">\(d\)</span> is <strong>not always the magnitude of displacement</strong>.</li>
+<li>Positions (<span class="math inline">\vec{x}</span>) are therefore always relative to the origin.</li>
+<li>Displacements (<span class="math inline">\Delta \vec{x}</span>) are a change in position - from <span class="math inline">x_i</span> to <span class="math inline">x_f</span> (initial <span class="math inline">x</span> to final <span class="math inline">f</span>). <span class="math inline">\Delta \vec{x} - \vec{x}_f - \vec{x}_i</span>.</li>
+<li>Distance <span class="math inline">d</span> is <strong>not always the magnitude of displacement</strong>.</li>
 <li>Distance is the <strong>total distance travelled</strong>. If we travel to a point and then back to where we started, the displacement is 0, but the distance is twice the distance from the starting point to the destination.</li>
 </ul></li>
 <li>Velocity/speed - average and instantaneous.
 <ul>
 <li>Velocity is the rate of change in displacement with respect to time.</li>
-<li>The average velocity is <span class="math inline">\(\vec{v}_{av} = \frac{\Delta \vec{x}}{\Delta t} = \frac{\vec{v}_i + \vec{v}_f}{2}\)</span>. Often, the initial time will be 0, so <span class="math inline">\(\Delta t = t\)</span> and we just write <span class="math inline">\(t\)</span>.</li>
+<li>The average velocity is <span class="math inline">\vec{v}_{av} = \frac{\Delta \vec{x}}{\Delta t} = \frac{\vec{v}_i + \vec{v}_f}{2}</span>. Often, the initial time will be 0, so <span class="math inline">\Delta t = t</span> and we just write <span class="math inline">t</span>.</li>
 <li>Speed is the rate of change in distance with respect to time. It is <strong>not always the magnitude of velocity</strong>.</li>
 <li>When we say velocity/speed, we usually mean instantaneous velocity/speed.</li>
-<li>Instantaneous velocity is the velocity at a moment in time: <span class="math inline">\(\vec{v} = \lim_{\Delta t \to 0} \frac{\Delta \vec{x}}{\Delta t} = \lim_{t_f \to t_i} \frac{\Delta \vec{x}(t_f) - \vec{x}(t_i)}{t_f - t_i} = \frac{\dee \vec{x}}{\dee t}\)</span>.</li>
+<li>Instantaneous velocity is the velocity at a moment in time: <span class="math inline">\vec{v} = \lim_{\Delta t \to 0} \frac{\Delta \vec{x}}{\Delta t} = \lim_{t_f \to t_i} \frac{\Delta \vec{x}(t_f) - \vec{x}(t_i)}{t_f - t_i} = \frac{\dee \vec{x}}{\dee t}</span>.</li>
 <li>Instantaneous speed is simply the magnitude of the instantaneous velocity. This is because the instantaneous rate of change in distance is always the same as the magnitude of the instantaneous rate of change in displacement.</li>
 </ul></li>
 <li>Acceleration - average and instantaneous.
 <ul>
 <li>Acceleration is the rate of change in velocity with respect to time.</li>
-<li>The average acceleration is <span class="math inline">\(\vec{a}_{av} = \frac{\Delta \vec{v}}{\Delta t}\)</span>.</li>
-<li>When we say acceleration, we usually mean instantaneous acceleration <span class="math inline">\(\vec{a} = \frac{\dee \vec{v}}{\dee t} = \frac{\dee^2 \vec{v}}{\dee t^2}\)</span>.</li>
+<li>The average acceleration is <span class="math inline">\vec{a}_{av} = \frac{\Delta \vec{v}}{\Delta t}</span>.</li>
+<li>When we say acceleration, we usually mean instantaneous acceleration <span class="math inline">\vec{a} = \frac{\dee \vec{v}}{\dee t} = \frac{\dee^2 \vec{v}}{\dee t^2}</span>.</li>
 </ul></li>
 </ul>
-<p>The motion of an object is <strong>completely defined</strong> if and only if the position <span class="math inline">\(\vec{x}(t)\)</span> is known. We can use this to calculate the velocity and acceleration functions.</p>
+<p>The motion of an object is <strong>completely defined</strong> if and only if the position <span class="math inline">\vec{x}(t)</span> is known. We can use this to calculate the velocity and acceleration functions.</p>
 <p>In 1D kinematics, we can do a position-time graph. Here, one dimension is our displacement, and time is the other. The time is represented on the x-axis.</p>
-<p>Sometimes, we write <span class="math inline">\(\bar{a}\)</span> to represent average acceleration. The bar means &quot;average&quot;. This works for velocity too.</p>
+<p>Sometimes, we write <span class="math inline">\bar{a}</span> to represent average acceleration. The bar means &quot;average&quot;. This works for velocity too.</p>
 <p>In this course, we will only be using constant accelerations. That means that instantaneous acceleration is always the same as average acceleration.</p>
-<p>Therefore, <span class="math inline">\(\vec{a}(t) = \frac{\vec{v}_f - \vec{v}_i}{\Delta t}\)</span>. So <span class="math inline">\(\vec{v}_f = \vec{v}_i + \vec{a}\Delta t\)</span>.</p>
+<p>Therefore, <span class="math inline">\vec{a}(t) = \frac{\vec{v}_f - \vec{v}_i}{\Delta t}</span>. So <span class="math inline">\vec{v}_f = \vec{v}_i + \vec{a}\Delta t</span>.</p>
 <h3 id="kinematic-equations">Kinematic Equations</h3>
-<p>There are five easily derived <strong>kinematic equations</strong> in 1D kinematics that relate commonly used quantities to each other. These are equations where we assume <span class="math inline">\(a\)</span> is constant, and each have four of the five quantities <span class="math inline">\(a, v_i, v_f, \Delta t, \Delta x\)</span>.</p>
+<p>There are five easily derived <strong>kinematic equations</strong> in 1D kinematics that relate commonly used quantities to each other. These are equations where we assume <span class="math inline">a</span> is constant, and each have four of the five quantities <span class="math inline">a, v_i, v_f, \Delta t, \Delta x</span>.</p>
 <p>Using these equations, we can solve for any one of these quantities given the values of three of these quantities.</p>
 <p>All five are listed below:</p>
 <ul>
-<li><span class="math inline">\(\vec{v}_f = \vec{v}_i + \vec{a} \Delta t\)</span> (contains <span class="math inline">\(\vec{a}, \vec{v}_f, \vec{v}_i, \Delta t\)</span>).</li>
-<li><span class="math inline">\(\Delta \vec{x} = \vec{v}_{av} \Delta t = \frac{1}{2}(\vec{v}_i + \vec{v}_f) \Delta t\)</span> (contains <span class="math inline">\(\vec{x}, \vec{v}_f, \vec{v}_i, \Delta t\)</span>).</li>
-<li><span class="math inline">\(\Delta \vec{x} = \frac{1}{2}(\vec{v}_i + \vec{v}_f) \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{v}_f \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} (\vec{v}_i + \vec{a} \Delta t) \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{a} \Delta t \Delta t = \vec{v}_i \Delta t + \frac{1}{2} \vec{a} (\Delta t)^2\)</span> (contains <span class="math inline">\(\vec{a}, \vec{v}_i, \Delta t, \Delta \vec{x}\)</span>).</li>
-<li>A variation on the above is <span class="math inline">\(\Delta \vec{x} = (\vec{v}_f - \vec{a} \Delta t) \Delta t + \frac{1}{2} \vec{a} (\Delta t)^2 = \vec{v}_f \Delta t - \frac{1}{2} \vec{a} (\Delta t)^2\)</span> (contains <span class="math inline">\(\vec{a}, \vec{v}_f, \Delta t, \Delta \vec{x}\)</span>).</li>
-<li><span class="math inline">\(v_f^2 = v_i^2 + 2\vec{a} \cdot \Delta \vec{x}\)</span> (contains <span class="math inline">\(\vec{a}, \vec{v}_f, \vec{v}_i, \Delta \vec{x}\)</span>).</li>
+<li><span class="math inline">\vec{v}_f = \vec{v}_i + \vec{a} \Delta t</span> (contains <span class="math inline">\vec{a}, \vec{v}_f, \vec{v}_i, \Delta t</span>).</li>
+<li><span class="math inline">\Delta \vec{x} = \vec{v}_{av} \Delta t = \frac{1}{2}(\vec{v}_i + \vec{v}_f) \Delta t</span> (contains <span class="math inline">\vec{x}, \vec{v}_f, \vec{v}_i, \Delta t</span>).</li>
+<li><span class="math inline">\Delta \vec{x} = \frac{1}{2}(\vec{v}_i + \vec{v}_f) \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{v}_f \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} (\vec{v}_i + \vec{a} \Delta t) \Delta t = \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{v}_i \Delta t + \frac{1}{2} \vec{a} \Delta t \Delta t = \vec{v}_i \Delta t + \frac{1}{2} \vec{a} (\Delta t)^2</span> (contains <span class="math inline">\vec{a}, \vec{v}_i, \Delta t, \Delta \vec{x}</span>).</li>
+<li>A variation on the above is <span class="math inline">\Delta \vec{x} = (\vec{v}_f - \vec{a} \Delta t) \Delta t + \frac{1}{2} \vec{a} (\Delta t)^2 = \vec{v}_f \Delta t - \frac{1}{2} \vec{a} (\Delta t)^2</span> (contains <span class="math inline">\vec{a}, \vec{v}_f, \Delta t, \Delta \vec{x}</span>).</li>
+<li><span class="math inline">v_f^2 = v_i^2 + 2\vec{a} \cdot \Delta \vec{x}</span> (contains <span class="math inline">\vec{a}, \vec{v}_f, \vec{v}_i, \Delta \vec{x}</span>).</li>
 </ul>
 <p>The last one needs some more proof:</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\displaystyle 
+\begin{aligned}
 \vec{v}_{av} \Delta t &amp;= \Delta \vec{x} \\
 \vec{v}_{av} \cdot \frac{\Delta \vec{v}}{\Delta t} \Delta t &amp;= \frac{\Delta \vec{v}}{\Delta t} \cdot \Delta \vec{x} \\
 \vec{v}_{av} \Delta \vec{v} &amp;= \vec{a} \cdot \Delta \vec{x} \\
@@ -268,77 +301,77 @@ This shows that we can derive basic physical relationships using just dimensiona
 (\vec{v}_f + \vec{v}_i) \cdot (\vec{v}_f - \vec{v}_i) &amp;= 2\vec{a} \cdot \Delta \vec{x} \\
 \magn{\vec{v}_f}^2 - \magn{\vec{v}_i}^2 &amp;= 2\vec{a} \cdot \Delta \vec{x} \\
 v_f^2 &amp;= v_i^2 + 2\vec{a} \cdot \Delta \vec{x} \\
-\end{align}
-\]</span></p>
+\end{aligned}
+</span></p>
 <h1 id="section-2">8/2/14</h1>
 <h3 id="integral-definitions">Integral Definitions</h3>
 <p>We can also write our definitions using integrals.</p>
-<p>For example, <span class="math inline">\(\vec{a} = \frac{\dee \vec{v}}{\dee t}\)</span>, assuming <span class="math inline">\(\vec{a}\)</span> is constant:</p>
+<p>For example, <span class="math inline">\vec{a} = \frac{\dee \vec{v}}{\dee t}</span>, assuming <span class="math inline">\vec{a}</span> is constant:</p>
 <blockquote>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\displaystyle 
+\begin{aligned}
 \vec{a} \dee t &amp;= \dee \vec{v} \\
 \int_{t_i}^{t_f} \vec{a} \dee t &amp;= \int_{\vec{v}_i}^{\vec{v}_f} \dee \vec{v} \\
 \vec{a}\Delta t &amp;= \vec{v}_f - \vec{v}_i \\
 \vec{v}_i + \vec{a}\Delta t &amp;= \vec{v}_f \\
-\end{align}
-\]</span></p>
+\end{aligned}
+</span></p>
 </blockquote>
-<p>We can also do this for velocity, where <span class="math inline">\(\vec{v} = \frac{\dee \vec{x}}{\dee t}\)</span>:</p>
+<p>We can also do this for velocity, where <span class="math inline">\vec{v} = \frac{\dee \vec{x}}{\dee t}</span>:</p>
 <blockquote>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\displaystyle 
+\begin{aligned}
 \vec{v} \dee t &amp;= \dee \vec{x} \\
 \int_{t_i}^{t_f} \vec{v} \dee t &amp;= \int_{\vec{x}_i}^{\vec{x}_f}\dee \vec{x} \\
 \int_{t_i}^{t_f} \vec{v}_i + \vec{a}\Delta t \dee t &amp;= \int_{\vec{x}_i}^{\vec{x}_f}\dee \vec{x} \\
 \vec{v}_i\Delta t + \frac{1}{2}\vec{a}(\Delta t)^2 &amp;= \Delta \vec{x} \\
-\end{align}
-\]</span></p>
+\end{aligned}
+</span></p>
 </blockquote>
 <h3 id="free-fall">Free Fall</h3>
-<p>Free fall is a type of motion when an object is affected only by the influence of gravity. Near the Earth's surface, <span class="math inline">\(\vec{F}_g = m\vec{g}\)</span>, where <span class="math inline">\(\vec{g}\)</span> is around <span class="math inline">\(9.8 m/s^2\)</span> with the direction pointing toward the center of the Earth.</p>
-<p>Using our standard frame of reference and <span class="math inline">\(t_i = 0\)</span>, <span class="math inline">\(a = -g, v = v_0 - gt, x = x_0 + v_0t - \frac{1}{2}gt^2\)</span>.</p>
+<p>Free fall is a type of motion when an object is affected only by the influence of gravity. Near the Earth's surface, <span class="math inline">\vec{F}_g = m\vec{g}</span>, where <span class="math inline">\vec{g}</span> is around <span class="math inline">9.8 m/s^2</span> with the direction pointing toward the center of the Earth.</p>
+<p>Using our standard frame of reference and <span class="math inline">t_i = 0</span>, <span class="math inline">a = -g, v = v_0 - gt, x = x_0 + v_0t - \frac{1}{2}gt^2</span>.</p>
 <p>Is the speed at which an object hits the ground the same as the speed we threw it up at, if they are both on the same level?</p>
 <blockquote>
-<p>The time when the object is thrown and when it hits the ground is <span class="math inline">\(t\)</span> when <span class="math inline">\(x = x_0\)</span>, or <span class="math inline">\(v_0t - \frac{1}{2}gt^2 = 0 = t(v_0 - \frac{1}{2}gt)\)</span>.<br />
-So <span class="math inline">\(t = 0\)</span> when thrown and <span class="math inline">\(t = \frac{2v_0}{g}\)</span> when it hits the ground.<br />
-The velocity when thrown is <span class="math inline">\(v = v_0 - gt\)</span>, so <span class="math inline">\(v = v_0\)</span>, and the velocity when hitting the ground is <span class="math inline">\(v = v_0 - 2v_0 = -v_0\)</span>.<br />
+<p>The time when the object is thrown and when it hits the ground is <span class="math inline">t</span> when <span class="math inline">x = x_0</span>, or <span class="math inline">v_0t - \frac{1}{2}gt^2 = 0 = t(v_0 - \frac{1}{2}gt)</span>.<br />
+So <span class="math inline">t = 0</span> when thrown and <span class="math inline">t = \frac{2v_0}{g}</span> when it hits the ground.<br />
+The velocity when thrown is <span class="math inline">v = v_0 - gt</span>, so <span class="math inline">v = v_0</span>, and the velocity when hitting the ground is <span class="math inline">v = v_0 - 2v_0 = -v_0</span>.<br />
 So both speeds are the same, though in opposite directions.</p>
 </blockquote>
 <h2 id="d-kinematics">2D Kinematics</h2>
 <p>In 2D, we simply apply the concepts we used in 1D kinematics, and extend them to use vectors.</p>
-<p>In 2D, rather than using <span class="math inline">\(\vec{x}\)</span> for displacement, we now use <span class="math inline">\(\vec{r}\)</span>.</p>
+<p>In 2D, rather than using <span class="math inline">\vec{x}</span> for displacement, we now use <span class="math inline">\vec{r}</span>.</p>
 <p>When we have a 2 dimensional problem, we almost always simply break it down into two 1 dimensional problems - one for each dimension - solve the two problems, and then combine the solutions into the solution for the 2 dimensional problem.</p>
-<p>In 2D and 3D, we use vectors to represent quantities that have a magnitude and a direction. Vectors are written as <span class="math inline">\(\vec{x}\)</span> or <span class="math inline">\(\boldsymbol{x}\)</span>. When a vector is simply written as <span class="math inline">\(x\)</span>, we assume this means the magnitude of the vector.</p>
-<p>We will mostly be using vectors in Cartesian coordinates (<span class="math inline">\(\vec{a} = (a_x, a_y)\)</span>), but for rotating systems, we will sometimes use polar coordinates (<span class="math inline">\(\vec{a} = (r, \theta)\)</span>).</p>
-<p>We can convert from polar to Cartesian using <span class="math inline">\(a_x = r \cos \theta; a_y = r \sin \theta\)</span>, and from Cartesian to polar using <span class="math inline">\(r = \magn{a}; \theta = \arctan \frac{a_y}{a_x}\)</span>.</p>
+<p>In 2D and 3D, we use vectors to represent quantities that have a magnitude and a direction. Vectors are written as <span class="math inline">\vec{x}</span> or <span class="math inline">\bm{x}</span>. When a vector is simply written as <span class="math inline">x</span>, we assume this means the magnitude of the vector.</p>
+<p>We will mostly be using vectors in Cartesian coordinates (<span class="math inline">\vec{a} = (a_x, a_y)</span>), but for rotating systems, we will sometimes use polar coordinates (<span class="math inline">\vec{a} = (r, \theta)</span>).</p>
+<p>We can convert from polar to Cartesian using <span class="math inline">a_x = r \cos \theta; a_y = r \sin \theta</span>, and from Cartesian to polar using <span class="math inline">r = \magn{a}; \theta = \arctan \frac{a_y}{a_x}</span>.</p>
 <p>In 3D, rather than polar coordinates, we have spherical or cylindrical coordinates.</p>
 <p>A unit vector is a vector of length 1.</p>
-<p>In a Cartesian coordinate system, we represent vectors in terms of coefficients of the basis vectors, <span class="math inline">\(\hat{i}, \hat{j}, \hat{k}\)</span>, extending along the x, y, and z axes, respectively. They are dimensionless and have a length of 1. For example, <span class="math inline">\(\vec{a} = a_x \hat{i} + a_y \hat{j}\)</span>.</p>
+<p>In a Cartesian coordinate system, we represent vectors in terms of coefficients of the basis vectors, <span class="math inline">\hat{i}, \hat{j}, \hat{k}</span>, extending along the x, y, and z axes, respectively. They are dimensionless and have a length of 1. For example, <span class="math inline">\vec{a} = a_x \hat{i} + a_y \hat{j}</span>.</p>
 <h3 id="dot-product">Dot Product</h3>
-<p>The basis vectors are all perpendicular. Thus, <span class="math inline">\(\hat{i} \cdot \hat{j} = \hat{j} \cdot \hat{k} = \hat{k} \cdot \hat{i} = 0\)</span>.</p>
-<p>So <span class="math inline">\(A \cdot B = (A_x \hat{i} + A_y \hat{j}) \cdot (B_x \hat{i} + B_y \hat{j}) = A_x B_x \hat{i} \cdot \hat{i} + A_x B_y \hat{i} \hat{j} + A_y B_x \hat{j} \hat{i} + A_y B_y \hat{j} \hat{j} = A_x B_x + A_y B_y\)</span>.</p>
-<p>When we square a vector, we are simply taking a dot product of it with itself: <span class="math inline">\(\vec{v}^2 = \vec{v} \cdot \vec{v}\)</span>.</p>
+<p>The basis vectors are all perpendicular. Thus, <span class="math inline">\hat{i} \cdot \hat{j} = \hat{j} \cdot \hat{k} = \hat{k} \cdot \hat{i} = 0</span>.</p>
+<p>So <span class="math inline">A \cdot B = (A_x \hat{i} + A_y \hat{j}) \cdot (B_x \hat{i} + B_y \hat{j}) = A_x B_x \hat{i} \cdot \hat{i} + A_x B_y \hat{i} \hat{j} + A_y B_x \hat{j} \hat{i} + A_y B_y \hat{j} \hat{j} = A_x B_x + A_y B_y</span>.</p>
+<p>When we square a vector, we are simply taking a dot product of it with itself: <span class="math inline">\vec{v}^2 = \vec{v} \cdot \vec{v}</span>.</p>
 <h3 id="projectile-motion">Projectile Motion</h3>
 <p>An object exhibiting projectile motion has <strong>constant horizontal velocity</strong> and <strong>constant vertical acceleration</strong>.</p>
-<p>The initial speed <span class="math inline">\(v_0\)</span> at angle <span class="math inline">\(\theta\)</span> from the vertical has be broken up into <span class="math inline">\(v_x = v_0 \cos \theta\)</span> and <span class="math inline">\(v_y = v_0 \sin \theta\)</span>.</p>
+<p>The initial speed <span class="math inline">v_0</span> at angle <span class="math inline">\theta</span> from the vertical has be broken up into <span class="math inline">v_x = v_0 \cos \theta</span> and <span class="math inline">v_y = v_0 \sin \theta</span>.</p>
 <p>Note that we can find the maximum point of a projectile's motion by setting velocity in the y-axis to 0.</p>
-<p>The position of <span class="math inline">\(\vec{v}_a\)</span> relative to <span class="math inline">\(\vec{v}_b\)</span> is <span class="math inline">\(\vec{v}_b - \vec{v}_a\)</span>. We write this as <span class="math inline">\(\vec{v}_{a, b}\)</span></p>
-<p>Sine law: <span class="math inline">\(\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}\)</span>.</p>
-<p>Cosine law: <span class="math inline">\(a^2 - b^2 + c^2 - 2bc \cos A\)</span></p>
+<p>The position of <span class="math inline">\vec{v}_a</span> relative to <span class="math inline">\vec{v}_b</span> is <span class="math inline">\vec{v}_b - \vec{v}_a</span>. We write this as <span class="math inline">\vec{v}_{a, b}</span></p>
+<p>Sine law: <span class="math inline">\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}</span>.</p>
+<p>Cosine law: <span class="math inline">a^2 - b^2 + c^2 - 2bc \cos A</span></p>
 <h3 id="uniform-circular-motion">Uniform Circular Motion</h3>
 <p>An object exhibiting uniform circular motion is moving in a <strong>circular path of constant radius</strong> at a <strong>constant speed</strong> The <strong>tangential velocity</strong> is the velocity at the tangent of the circle.</p>
 <p>Since the tangential velocity is always perpendicular to the radius, any rotation has two similar triangles formed from the rotated radius, and the rotated velocity.</p>
-<p>Therefore, <span class="math inline">\(\frac{\magn{\Delta \vec{r}}}{\magn{r}} = \frac{\magn{\Delta \vec{v}}}{\magn{\vec{v}}}\)</span>.</p>
-<p>Since the average acceleration magnitude is <span class="math inline">\(\frac{\Delta v}{\Delta t}\)</span>, and <span class="math inline">\(\frac{\magn{\Delta \vec{r}}}{\magn{r}} v = \magn{\Delta \vec{v}}\)</span>, <span class="math inline">\(\magn{\vec{a}} = \frac{v \magn{\Delta \vec{r}}}{r \Delta t}\)</span>.</p>
-<p>As <span class="math inline">\(\Delta t \to 0\)</span>, the magnitude of the displacement approaches the distance (distance is along the arc line, while the displacement is along a straight line). If <span class="math inline">\(\delta s\)</span> is the change in the distance (along the arc), then <span class="math inline">\(\frac{\magn{\Delta \vec{r}}}{\Delta t} \to \frac{\magn{\Delta \vec{s}}}{\Delta t}\)</span> as <span class="math inline">\(\Delta t \to 0\)</span>.</p>
-<p>Since <span class="math inline">\(\frac{\magn{\Delta \vec{s}}}{\Delta t} = v\)</span>, as <span class="math inline">\(\Delta t \to 0\)</span>, <span class="math inline">\(\magn{\vec{a}} = \frac{v \magn{\Delta \vec{r}}}{r \Delta t} = \frac{v^2}{r}\)</span>.</p>
-<p>The direction of the acceleration is the same as the direction of the change in velocity: <span class="math inline">\(\hat{a} = \hat{\Delta \vec{v}}\)</span>.</p>
-<p>So as <span class="math inline">\(\Delta t \to 0\)</span>, <span class="math inline">\(\Delta \vec{v}\)</span> and <span class="math inline">\(\vec{a}\)</span> becomes perpendicular to the direction of motion, and lies along <span class="math inline">\(\vec{r}\)</span>. Because it is toward the center, we call it centripetal (&quot;center-seeking&quot;) acceleration.</p>
-<p>Basically, the centripetal acceleration is <span class="math inline">\(\magn{\vec{a}} = \frac{v^2}{r}\)</span>.</p>
-<p>The <strong>period</strong> is the amount of time taken for the object to complete one revolution around the circle. The period is <span class="math inline">\(\frac{d}{v} = \frac{2\pi r}{v}\)</span>.</p>
+<p>Therefore, <span class="math inline">\frac{\magn{\Delta \vec{r}}}{\magn{r}} = \frac{\magn{\Delta \vec{v}}}{\magn{\vec{v}}}</span>.</p>
+<p>Since the average acceleration magnitude is <span class="math inline">\frac{\Delta v}{\Delta t}</span>, and <span class="math inline">\frac{\magn{\Delta \vec{r}}}{\magn{r}} v = \magn{\Delta \vec{v}}</span>, <span class="math inline">\magn{\vec{a}} = \frac{v \magn{\Delta \vec{r}}}{r \Delta t}</span>.</p>
+<p>As <span class="math inline">\Delta t \to 0</span>, the magnitude of the displacement approaches the distance (distance is along the arc line, while the displacement is along a straight line). If <span class="math inline">\delta s</span> is the change in the distance (along the arc), then <span class="math inline">\frac{\magn{\Delta \vec{r}}}{\Delta t} \to \frac{\magn{\Delta \vec{s}}}{\Delta t}</span> as <span class="math inline">\Delta t \to 0</span>.</p>
+<p>Since <span class="math inline">\frac{\magn{\Delta \vec{s}}}{\Delta t} = v</span>, as <span class="math inline">\Delta t \to 0</span>, <span class="math inline">\magn{\vec{a}} = \frac{v \magn{\Delta \vec{r}}}{r \Delta t} = \frac{v^2}{r}</span>.</p>
+<p>The direction of the acceleration is the same as the direction of the change in velocity: <span class="math inline">\hat{a} = \hat{\Delta \vec{v}}</span>.</p>
+<p>So as <span class="math inline">\Delta t \to 0</span>, <span class="math inline">\Delta \vec{v}</span> and <span class="math inline">\vec{a}</span> becomes perpendicular to the direction of motion, and lies along <span class="math inline">\vec{r}</span>. Because it is toward the center, we call it centripetal (&quot;center-seeking&quot;) acceleration.</p>
+<p>Basically, the centripetal acceleration is <span class="math inline">\magn{\vec{a}} = \frac{v^2}{r}</span>.</p>
+<p>The <strong>period</strong> is the amount of time taken for the object to complete one revolution around the circle. The period is <span class="math inline">\frac{d}{v} = \frac{2\pi r}{v}</span>.</p>
 <p>The <strong>frequency</strong> is the number of trips the object makes around the path in a given amount of time. The frequency is the reciprocal of the period.</p>
-<p>If the speed is not constant (non-uniform circular motion), the centripetal force is still <span class="math inline">\(\magn{\vec{a}} = \frac{v^2}{r}\)</span>, but there is also an element of acceleration along the direction of motion. This tangential acceleration is <span class="math inline">\(\magn{\vec{a}} = \frac{\dee v}{\dee t}\)</span>.</p>
+<p>If the speed is not constant (non-uniform circular motion), the centripetal force is still <span class="math inline">\magn{\vec{a}} = \frac{v^2}{r}</span>, but there is also an element of acceleration along the direction of motion. This tangential acceleration is <span class="math inline">\magn{\vec{a}} = \frac{\dee v}{\dee t}</span>.</p>
 <h2 id="dynamics">Dynamics</h2>
 <p>In kinematics we learned how to describe the motion of an object. In dynamics we will now learn about what causes the motion.</p>
 <p>Isaac Newton (and independently Leibniz) discovered three laws governing the relationship between forces applied to an object and the resulting motion of the object. These laws form the basis of classical mechanics and allow us to explain the motion of objects.</p>
@@ -354,7 +387,7 @@ So both speeds are the same, though in opposite directions.</p>
 <p>For example, an accelerating car or elevator is a non-inertial reference frame - an accelerometer fixed to the car would read an acceleration.</p>
 <h3 id="net-force">Net Force</h3>
 <p>Net force is the vector sum of all the forces acting on an object.</p>
-<p>We write it as <span class="math inline">\(\\vec{F}_{net} = \sum \vec{F}\)</span>.</p>
+<p>We write it as <span class="math inline">\vec{F}_{net} = \sum \vec{F}</span>.</p>
 <h2 id="first-law-of-motion">First Law of Motion</h2>
 <p>Force causes a <strong>change</strong> in motion. If there is no net force on an object, there is no change in the motion.</p>
 <p>Note that this applies to the change in the motion, not the motion itself - the object could have a constant velocity without having any net force acting on it.</p>
@@ -363,39 +396,39 @@ So both speeds are the same, though in opposite directions.</p>
 <p>The first law is then stated thusly:</p>
 <blockquote>
 <p>In an inertial reference frame, a body in uniform motion remains in uniform motion if and only if there are no net forces acting on it.<br />
-In other words, <span class="math inline">\(\vec{F}_{net} = \vec{0} \implies \vec{a} = \vec{0}\)</span>.</p>
+In other words, <span class="math inline">\vec{F}_{net} = \vec{0} \implies \vec{a} = \vec{0}</span>.</p>
 </blockquote>
 <p>In other words, if and only if the velocity is constant, the net force is 0.</p>
-<p>Also, the net force on an object is the sum of all the forces acting on the object. In other words, <span class="math inline">\(\vec{F}_{net} = \sum \vec{F} = \vec{F}_1 + \ldots + \vec{F}_n\)</span></p>
+<p>Also, the net force on an object is the sum of all the forces acting on the object. In other words, <span class="math inline">\vec{F}_{net} = \sum \vec{F} = \vec{F}_1 + \ldots + \vec{F}_n</span></p>
 <h3 id="inertia">Inertia</h3>
 <p>The first law is also called the <strong>law of inertia</strong>. In order to change the motion of an object, we need to apply a force.</p>
 <p>The resistance an object has to its motion changing is called <strong>inertia</strong>. The more inertia, the slower the motion of an object changes when we apply a force to it - <strong>inertia is quantified by mass</strong>.</p>
 <h3 id="weight">Weight</h3>
-<p>When we informally say something weighs <span class="math inline">\(x\)</span>, we actually mean that its mass is <span class="math inline">\(x\)</span>. Mass is a property of the object, and weight is simply the force exerted by gravity on the object. Weight is denoted <span class="math inline">\(F_g\)</span>.</p>
-<p>In general, the force exerted by gravity is given by the equation <span class="math inline">\(F_g = G\frac{m_1 m_2}{d^2}\)</span>, where <span class="math inline">\(G \approx 6.67 \times 10^{-11} m^3 / (kg s)\)</span> (universal gravitational constant), <span class="math inline">\(m_1, m_2\)</span> are the masses of the objects, and <span class="math inline">\(d\)</span> is the distance between the center of masses of the objects.</p>
-<p>Near the Earth's surface, <span class="math inline">\(G\frac{m_1}{d^2} \approx g\)</span> since <span class="math inline">\(d\)</span> is the radius of the Earth and <span class="math inline">\(m_1\)</span> is the mass of the Earth. So this simplifies to <span class="math inline">\(F_g = mg\)</span>.</p>
-<p>To convert between weight and mass, we simply use the formula <span class="math inline">\(F_g = mg\)</span>.</p>
-<p>The variable <span class="math inline">\(\vec{W}\)</span> is also occasionally used to represent weight, or the force of gravity.</p>
+<p>When we informally say something weighs <span class="math inline">x</span>, we actually mean that its mass is <span class="math inline">x</span>. Mass is a property of the object, and weight is simply the force exerted by gravity on the object. Weight is denoted <span class="math inline">F_g</span>.</p>
+<p>In general, the force exerted by gravity is given by the equation <span class="math inline">F_g = G\frac{m_1 m_2}{d^2}</span>, where <span class="math inline">G \approx 6.67 \times 10^{-11} m^3 / (kg s)</span> (universal gravitational constant), <span class="math inline">m_1, m_2</span> are the masses of the objects, and <span class="math inline">d</span> is the distance between the center of masses of the objects.</p>
+<p>Near the Earth's surface, <span class="math inline">G\frac{m_1}{d^2} \approx g</span> since <span class="math inline">d</span> is the radius of the Earth and <span class="math inline">m_1</span> is the mass of the Earth. So this simplifies to <span class="math inline">F_g = mg</span>.</p>
+<p>To convert between weight and mass, we simply use the formula <span class="math inline">F_g = mg</span>.</p>
+<p>The variable <span class="math inline">\vec{W}</span> is also occasionally used to represent weight, or the force of gravity.</p>
 <h3 id="mathematical-model">Mathematical Model</h3>
-<p>If <span class="math inline">\(\vec{F}_{net} = \vec{0}\)</span>, then <span class="math inline">\(\vec{a} = \frac{\dee \vec{v}}{\dee t} = \vec{0}\)</span>.</p>
+<p>If <span class="math inline">\vec{F}_{net} = \vec{0}</span>, then <span class="math inline">\vec{a} = \frac{\dee \vec{v}}{\dee t} = \vec{0}</span>.</p>
 <h1 id="section-3">18/2/14</h1>
 <h2 id="second-law-of-motion">Second Law of Motion</h2>
-<p><strong>Momentum</strong> is a property of matter, like inertia. It is defined as <span class="math inline">\(\vec{p} = m\vec{v}\)</span> - mass times velocity. However, this is not the only definition of momentum - photons are massless yet still have momentum.</p>
-<p>The rate of change in an object's momentum is the net force acting on the body. In other words, <span class="math inline">\(\frac{\dee p}{\dee t} = \vec{F}_{net}\)</span>.</p>
+<p><strong>Momentum</strong> is a property of matter, like inertia. It is defined as <span class="math inline">\vec{p} = m\vec{v}</span> - mass times velocity. However, this is not the only definition of momentum - photons are massless yet still have momentum.</p>
+<p>The rate of change in an object's momentum is the net force acting on the body. In other words, <span class="math inline">\frac{\dee p}{\dee t} = \vec{F}_{net}</span>.</p>
 <p>An example of mass changing is a train car driving underneath a hopper that loads the car with cargo.</p>
 <p>The second law of motion is then stated thusly:</p>
 <blockquote>
-<p>In an inertial reference frame, the rate of change in an object's momentum is the net force acting on the body. Formally, <span class="math inline">\(\vec{F} = m\vec{a}\)</span>.</p>
+<p>In an inertial reference frame, the rate of change in an object's momentum is the net force acting on the body. Formally, <span class="math inline">\vec{F} = m\vec{a}</span>.</p>
 </blockquote>
 <h3 id="mathematical-model-1">Mathematical Model</h3>
 <p>When we push two objects of different mass, we observe that the objects have different accelerations. We observe that acceleration is proportional to force, for a fixed mass. We also observe that mass, is inversely proportional to acceleration, for a fixed force.</p>
-<p>Therefore, we write <span class="math inline">\(\vec{a} = \frac{\vec{F}}{m}\)</span>, or <span class="math inline">\(\vec{F} = m\vec{a}\)</span>.</p>
-<p>If <span class="math inline">\(m\)</span> is constant, <span class="math inline">\(\vec{F}_{net} = \frac{\dee \vec{p}}{\dee t} = m\frac{\dee \vec{v}}{\dee t} = m\vec{a}\)</span>.</p>
-<p>If <span class="math inline">\(\vec{v}\)</span> is constant, <span class="math inline">\(\vec{F}_{net} = \frac{\dee \vec{p}}{\dee t} = \vec{v} \frac{\dee m}{\dee t}\)</span>.</p>
-<p>If we choose one object as the &quot;mass standard&quot; and assign it a unit of exactly <span class="math inline">\(1 kg\)</span>, we can then quantify mass (resistance to acceleration). We can then measure the mass of all other objects against this standard. Mass is a scalar quantity - the resistance to acceleration is always the same regardless of direction.</p>
-<p>Likewise, the unit force can be chosen arbitrarily to be the amount such that this mass standard accelerates at <span class="math inline">\(1 m/s^2\)</span> when the force is applied to it.</p>
-<p>So if we have two objects of differing mass in space, pushed apart by a spring, they both have the same force applied to them, yet the acceleration of each is different. In fact, <span class="math inline">\(m_1 a_1 = m_2 a_2\)</span>, and so <span class="math inline">\(a_1 = \frac{m_2}{m_1} a_2\)</span>.</p>
-<p>In the imperial system, mass is measured using slugs, where 1 slug is <span class="math inline">\(\frac{1 lb}{1 ft/s^2}\)</span>. <span class="math inline">\(lb\)</span> (pounds) is a measure of weight. A <span class="math inline">\(1 kg\)</span> mass weighs about <span class="math inline">\(2.2 lb\)</span> near the Earth's surface.</p>
+<p>Therefore, we write <span class="math inline">\vec{a} = \frac{\vec{F}}{m}</span>, or <span class="math inline">\vec{F} = m\vec{a}</span>.</p>
+<p>If <span class="math inline">m</span> is constant, <span class="math inline">\vec{F}_{net} = \frac{\dee \vec{p}}{\dee t} = m\frac{\dee \vec{v}}{\dee t} = m\vec{a}</span>.</p>
+<p>If <span class="math inline">\vec{v}</span> is constant, <span class="math inline">\vec{F}_{net} = \frac{\dee \vec{p}}{\dee t} = \vec{v} \frac{\dee m}{\dee t}</span>.</p>
+<p>If we choose one object as the &quot;mass standard&quot; and assign it a unit of exactly <span class="math inline">1 kg</span>, we can then quantify mass (resistance to acceleration). We can then measure the mass of all other objects against this standard. Mass is a scalar quantity - the resistance to acceleration is always the same regardless of direction.</p>
+<p>Likewise, the unit force can be chosen arbitrarily to be the amount such that this mass standard accelerates at <span class="math inline">1 m/s^2</span> when the force is applied to it.</p>
+<p>So if we have two objects of differing mass in space, pushed apart by a spring, they both have the same force applied to them, yet the acceleration of each is different. In fact, <span class="math inline">m_1 a_1 = m_2 a_2</span>, and so <span class="math inline">a_1 = \frac{m_2}{m_1} a_2</span>.</p>
+<p>In the imperial system, mass is measured using slugs, where 1 slug is <span class="math inline">\frac{1 lb}{1 ft/s^2}</span>. <span class="math inline">lb</span> (pounds) is a measure of weight. A <span class="math inline">1 kg</span> mass weighs about <span class="math inline">2.2 lb</span> near the Earth's surface.</p>
 <h2 id="third-law-of-motion">Third Law of Motion</h2>
 <p>All forces act on at least two objects. Therefore, if there is only one object there can be no forces.</p>
 <p>When two objects interact, the force exerted by object 1 on object 2 is equal in magnitude but opposite in direction to the force exerted by object 2 on object 1.</p>
@@ -404,18 +437,18 @@ In other words, <span class="math inline">\(\vec{F}_{net} = \vec{0} \implies \ve
 <p>THe third law can then be stated thusly:</p>
 <blockquote>
 <p>In an inertial reference frame, every action force has an equal but opposite reaction force.<br />
-In other words, <span class="math inline">\(\vec{F}_{12} = -\vec{F}_{21}\)</span>.</p>
+In other words, <span class="math inline">\vec{F}_{12} = -\vec{F}_{21}</span>.</p>
 </blockquote>
 <h3 id="mathematical-model-2">Mathematical Model</h3>
-<p>Ifobject 1 interacts with object 2, and <span class="math inline">\(\vec{F}_{12}\)</span> is the force exerted by object 1 on object 2, and <span class="math inline">\(\vec{F}_{21}\)</span> is the force exerted by object 2 on object 1, then <span class="math inline">\(\vec{F}_{12} = -\vec{F}_{21}\)</span>.</p>
-<p>In other words, <span class="math inline">\(\vec{F}_{12} + \vec{F}_{21} = 0\)</span>.</p>
-<p><span class="math inline">\(\vec{F}_{ij}\)</span> represents the force exerted by object <span class="math inline">\(i\)</span> on object <span class="math inline">\(j\)</span>.</p>
-<p>For 3 objects interacting, <span class="math inline">\(\vec{F}_{12} + \vec{f}_{13} + \vec{F}_{21} + \vec{F}_{23} + \vec{F}_{31} + \vec{F}_{32} = \vec{0}\)</span></p>
-<p>If objects <span class="math inline">\(1, \ldots, n\)</span> interact, then <span class="math inline">\(\sum_{i = 1}^n \sum_{j = 1}^n \vec{F}_{ij} = \vec{0}\)</span>, where <span class="math inline">\(\vec{F}_{kk} = 0\)</span> for <span class="math inline">\(1 \le k \le n\)</span>.</p>
+<p>Ifobject 1 interacts with object 2, and <span class="math inline">\vec{F}_{12}</span> is the force exerted by object 1 on object 2, and <span class="math inline">\vec{F}_{21}</span> is the force exerted by object 2 on object 1, then <span class="math inline">\vec{F}_{12} = -\vec{F}_{21}</span>.</p>
+<p>In other words, <span class="math inline">\vec{F}_{12} + \vec{F}_{21} = 0</span>.</p>
+<p><span class="math inline">\vec{F}_{ij}</span> represents the force exerted by object <span class="math inline">i</span> on object <span class="math inline">j</span>.</p>
+<p>For 3 objects interacting, <span class="math inline">\vec{F}_{12} + \vec{f}_{13} + \vec{F}_{21} + \vec{F}_{23} + \vec{F}_{31} + \vec{F}_{32} = \vec{0}</span></p>
+<p>If objects <span class="math inline">1, \ldots, n</span> interact, then <span class="math inline">\sum_{i = 1}^n \sum_{j = 1}^n \vec{F}_{ij} = \vec{0}</span>, where <span class="math inline">\vec{F}_{kk} = 0</span> for <span class="math inline">1 \le k \le n</span>.</p>
 <h3 id="free-body-diagrams">Free Body Diagrams</h3>
 <p>Free body diagrams (FBDs) are diagrams that we use to keep track of all the forces acting on an object in 2D.</p>
 <p>We basically follow these steps:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Draw a box and label it with the mass.</li>
 <li>Draw arrows leading out of the box in the direction of the force, optionally with length proportional to the magnitude.</li>
 <li>Label the arrows with the forces.</li>
@@ -437,17 +470,17 @@ In other words, <span class="math inline">\(\vec{F}_{12} = -\vec{F}_{21}\)</span
 <p>About 36 orders of magnitude stronger than gravity.</p>
 <h3 id="electromagnetism">Electromagnetism</h3>
 <p>Interaction affecting many types of particles, including at the macroscopic scale. Works at infinite ranges. It is responsible for everything from electromagnetic radiation to electricity.</p>
-<p>The electromagnetic force is governed by Coulomb's law: <span class="math inline">\(\magn{\vec{F}_{em}} = k_e \frac{q_1 q_2}{r^2}\)</span>, where <span class="math inline">\(\magn{\vec{F}_{em}}\)</span> is the magnitude of the electromagnetic force between two point charges, <span class="math inline">\(k_e \approxeq 8.988 \times 10^9 Nm^2/C^2\)</span> is Coulomb's constant, <span class="math inline">\(q_1, q_2\)</span> are the values of the charges in <span class="math inline">\(C\)</span> (Coulombs), and <span class="math inline">\(r\)</span> is the distance between the two charges. The direction of the force is toward each other if one is positive and the other negative, or away from each other if they have the same sign.</p>
+<p>The electromagnetic force is governed by Coulomb's law: <span class="math inline">\magn{\vec{F}_{em}} = k_e \frac{q_1 q_2}{r^2}</span>, where <span class="math inline">\magn{\vec{F}_{em}}</span> is the magnitude of the electromagnetic force between two point charges, <span class="math inline">k_e \approxeq 8.988 \times 10^9 Nm^2/C^2</span> is Coulomb's constant, <span class="math inline">q_1, q_2</span> are the values of the charges in <span class="math inline">C</span> (Coulombs), and <span class="math inline">r</span> is the distance between the two charges. The direction of the force is toward each other if one is positive and the other negative, or away from each other if they have the same sign.</p>
 <p>About 25 orders of magnitude stronger than gravity.</p>
 <h3 id="gravity">Gravity</h3>
 <p>Interaction affecting all marticles with mass, including at the macroscopic scale. Works at infinite ranges. It is responsible for phenomena like planet and galaxy formation.</p>
-<p>The gravitational force is governed by Newton's law of gravitation: <span class="math inline">\(\magn{\vec{F}_g} = G\frac{m_1 m_2}{r^2}\)</span>, where <span class="math inline">\(\magn{\vec{F}_g}\)</span> is the magnitude of the gravitational force between the two point masses, <span class="math inline">\(G \approxeq 6.67 \times 10^{-11} m^3 / (kg s)\)</span> is the universal gravitational constant, <span class="math inline">\(m_1, m_2\)</span> are the masses in <span class="math inline">\(kg\)</span>, and <span class="math inline">\(r\)</span> is the distance between the two point masses. The direction of the force is always toward each other.</p>
+<p>The gravitational force is governed by Newton's law of gravitation: <span class="math inline">\magn{\vec{F}_g} = G\frac{m_1 m_2}{r^2}</span>, where <span class="math inline">\magn{\vec{F}_g}</span> is the magnitude of the gravitational force between the two point masses, <span class="math inline">G \approxeq 6.67 \times 10^{-11} m^3 / (kg s)</span> is the universal gravitational constant, <span class="math inline">m_1, m_2</span> are the masses in <span class="math inline">kg</span>, and <span class="math inline">r</span> is the distance between the two point masses. The direction of the force is always toward each other.</p>
 <h2 id="contactnormal-forces">Contact/Normal Forces</h2>
 <p><strong>Contact forces</strong> are the forces between two rigid objects that are in contact with one another.</p>
-<p><strong>Normal forces</strong> (denoted <span class="math inline">\(\vec{F}_N\)</span> or <span class="math inline">\(\vec{N}\)</span>) are the components of the contact forces that are along the normal. It is basically a projection of the contact force along the normal to an object's surface.</p>
+<p><strong>Normal forces</strong> (denoted <span class="math inline">\vec{F}_N</span> or <span class="math inline">\vec{N}</span>) are the components of the contact forces that are along the normal. It is basically a projection of the contact force along the normal to an object's surface.</p>
 <p>For example, friction is a contact force, but since it is perpendicular to the normal, it is not included in normal force.</p>
 <h3 id="block-pushing">Block Pushing</h3>
-<p>A 2kg block and a 5kg block are floating in space beside each other, and there is an applied force of <span class="math inline">\(10N \text{ [rightward]}\)</span>. Find the normal forces in the system:</p>
+<p>A 2kg block and a 5kg block are floating in space beside each other, and there is an applied force of <span class="math inline">10N \text{ [rightward]}</span>. Find the normal forces in the system:</p>
 <pre><code>        ----------- -----------
 10N --&gt; | A (2kg) | | B (5kg) |
         ----------- -----------</code></pre>
@@ -455,21 +488,21 @@ In other words, <span class="math inline">\(\vec{F}_{12} = -\vec{F}_{21}\)</span
 <pre><code>                                 -----------
 (REACTION FORCE $\vec{F}_r$) &lt;-- | A (2kg) | --&gt; 10N
                                  -----------</code></pre>
-<p>So <span class="math inline">\(\sum \vec{F}_A = 10N + \vec{F}_r\)</span>.</p>
+<p>So <span class="math inline">\sum \vec{F}_A = 10N + \vec{F}_r</span>.</p>
 <pre><code>------------
 | B (10kg) | --&gt; (ACTION FORCE $\vec{F}_a$)
 ------------</code></pre>
-<p>So <span class="math inline">\(\sum \vec{F}_B = \vec{F}_a\)</span>.</p>
-<p>We know that <span class="math inline">\(\sum \vec{F}_A = 10 \text{ [rightward]} + \vec{F}_r = m_A\vec{a}_A = 2\vec{a}_A\)</span></p>
-<p>We know that <span class="math inline">\(\sum \vec{F}_B = \vec{F}_a = m_B\vec{a}_B = 5\vec{a}_B\)</span>.</p>
-<p>From the third law, we know that <span class="math inline">\(\vec{F}_r = -\vec{F}_a\)</span>.</p>
-<p>We also observe that since the boxes are in contact, they both have the same acceleration. So <span class="math inline">\(\vec{a}_A = \vec{a}_B\)</span>.</p>
-<p>So <span class="math inline">\(2\vec{a}_A = 10 + \vec{F}_r = 10 \text{ [rightward]} - \vec{F}_a = 10 \text{ [rightward]} - 5\vec{a}_B = 10 \text{ [rightward]} - 5\vec{a}_A\)</span>.</p>
-<p>Solving, we get <span class="math inline">\(\vec{a} = \frac{10}{7} \text{ [rightward]}\)</span>.</p>
-<p>So <span class="math inline">\(\vec{F}_a = 5\vec{a}_B = 5\vec{a}_A = \frac{50}{7} \text{ [rightward]}\)</span> and <span class="math inline">\(\vec{F}_r = \frac{50}{7} \text{ [leftward]}\)</span>.</p>
-<p>The net force on A is <span class="math inline">\(10 \text{ [rightward]} + \vec{F}_r = \frac{20}{7} \text{ [rightward]}\)</span>, and the net force on <span class="math inline">\(B\)</span> is <span class="math inline">\(\frac{50}{7} \text{ [rightward]}\)</span>.</p>
+<p>So <span class="math inline">\sum \vec{F}_B = \vec{F}_a</span>.</p>
+<p>We know that <span class="math inline">\sum \vec{F}_A = 10 \text{ [rightward]} + \vec{F}_r = m_A\vec{a}_A = 2\vec{a}_A</span></p>
+<p>We know that <span class="math inline">\sum \vec{F}_B = \vec{F}_a = m_B\vec{a}_B = 5\vec{a}_B</span>.</p>
+<p>From the third law, we know that <span class="math inline">\vec{F}_r = -\vec{F}_a</span>.</p>
+<p>We also observe that since the boxes are in contact, they both have the same acceleration. So <span class="math inline">\vec{a}_A = \vec{a}_B</span>.</p>
+<p>So <span class="math inline">2\vec{a}_A = 10 + \vec{F}_r = 10 \text{ [rightward]} - \vec{F}_a = 10 \text{ [rightward]} - 5\vec{a}_B = 10 \text{ [rightward]} - 5\vec{a}_A</span>.</p>
+<p>Solving, we get <span class="math inline">\vec{a} = \frac{10}{7} \text{ [rightward]}</span>.</p>
+<p>So <span class="math inline">\vec{F}_a = 5\vec{a}_B = 5\vec{a}_A = \frac{50}{7} \text{ [rightward]}</span> and <span class="math inline">\vec{F}_r = \frac{50}{7} \text{ [leftward]}</span>.</p>
+<p>The net force on A is <span class="math inline">10 \text{ [rightward]} + \vec{F}_r = \frac{20}{7} \text{ [rightward]}</span>, and the net force on <span class="math inline">B</span> is <span class="math inline">\frac{50}{7} \text{ [rightward]}</span>.</p>
 <h3 id="ramp-block">Ramp Block</h3>
-<p>A 1kg block slides down a frictionless a ramp at angle <span class="math inline">\(\theta\)</span>. What is the normal force acting on the block?</p>
+<p>A 1kg block slides down a frictionless a ramp at angle <span class="math inline">\theta</span>. What is the normal force acting on the block?</p>
 <pre><code>|\  /\
 | \/  \
 |  \  /
@@ -488,11 +521,11 @@ In other words, <span class="math inline">\(\vec{F}_{12} = -\vec{F}_{21}\)</span
    v
 $\vec{F}_g$</code></pre>
 <p>(we ignore the effects of friction for now)</p>
-<p>So <span class="math inline">\(\sum \vec{F} = \vec{F}_g + \vec{N} = mg \text{ [downward]} + \vec{N}\)</span>.</p>
+<p>So <span class="math inline">\sum \vec{F} = \vec{F}_g + \vec{N} = mg \text{ [downward]} + \vec{N}</span>.</p>
 <p>We observe that the net force along the normal of the ramp must be 0, since the block is sliding down the ramp.</p>
-<p>So we use a coordinate system rotated at angle <span class="math inline">\(\theta\)</span> in order to simplify calculations. With the normal <span class="math inline">\(\vec{n}\)</span>, we observe that <span class="math inline">\(\vec{N} + \proj_{\vec{n}} \vec{F}_g = \vec{0}\)</span>.</p>
-<p>Since <span class="math inline">\(\vec{F}_g\)</span> has a downward direction, <span class="math inline">\(\proj_{\vec{n}} \vec{F}_g = \vec{F}_g \cos \theta = mg \cos \theta \text{ [along the normal]}\)</span>.</p>
-<p>So <span class="math inline">\(N - mg \cos \theta = 0\)</span> and <span class="math inline">\(N = mg \cos \theta\)</span>.</p>
+<p>So we use a coordinate system rotated at angle <span class="math inline">\theta</span> in order to simplify calculations. With the normal <span class="math inline">\vec{n}</span>, we observe that <span class="math inline">\vec{N} + \proj_{\vec{n}} \vec{F}_g = \vec{0}</span>.</p>
+<p>Since <span class="math inline">\vec{F}_g</span> has a downward direction, <span class="math inline">\proj_{\vec{n}} \vec{F}_g = \vec{F}_g \cos \theta = mg \cos \theta \text{ [along the normal]}</span>.</p>
+<p>So <span class="math inline">N - mg \cos \theta = 0</span> and <span class="math inline">N = mg \cos \theta</span>.</p>
 <h2 id="tension">Tension</h2>
 <p>Tension forces are those exerted by a rope, string, chain, or similar. We assume tension forces can only pull, and never push. We usually also assume that there is no stretching and that the rope has no mass.</p>
 <p>Tensional forces also obey the third law of motion - every tug on a rope also has an equal but opposite reaction tug from the object on the other end.</p>
@@ -506,7 +539,7 @@ $\vec{F}_g$</code></pre>
   |   | &lt;-- rope
  1kg 2kg</code></pre>
 <p>The force on the axle of the pulley is the sum of the tensions on both sides of the rope. This is why pulleys provide a mechanical advantage.</p>
-<p>If the pulley has infinite mass, then it cannot rotate. As a result, the tension on both sides is as if the rope is anchored to the pulley. On the left, there is a tensional force of <span class="math inline">\(1kg \vec{g}\)</span>, and on the right, <span class="math inline">\(2kg \vec{g}\)</span>.</p>
+<p>If the pulley has infinite mass, then it cannot rotate. As a result, the tension on both sides is as if the rope is anchored to the pulley. On the left, there is a tensional force of <span class="math inline">1kg \vec{g}</span>, and on the right, <span class="math inline">2kg \vec{g}</span>.</p>
 <p>If the pulley is massless (has a mass of 0), then the tension on both sides is distributed equally between the two sides. The tension is not the average of the tensions, since the masses will also be accelerating.</p>
 <p>If the pulley has a mass in between these extremes, the tension will be distributed unequally between the two sides. This can be determined by applying rotational dynamics, covered later.</p>
 <p>We will assume the pulley is massless and then solve for the tension forces.</p>
@@ -520,7 +553,7 @@ $\vec{F}_g$</code></pre>
      |
      v
   $\vec{F}_g$</code></pre>
-<p>So <span class="math inline">\(\sum \vec{F}_A = \vec{T} + \vec{F}_g = \vec{T}_A + m_A\vec{g} = m_A\vec{a}_A\)</span>.</p>
+<p>So <span class="math inline">\sum \vec{F}_A = \vec{T} + \vec{F}_g = \vec{T}_A + m_A\vec{g} = m_A\vec{a}_A</span>.</p>
 <pre><code>  $\vec{T}$
      ^
      |
@@ -530,82 +563,82 @@ $\vec{F}_g$</code></pre>
      |
      v
   $\vec{F}_g$</code></pre>
-<p>So <span class="math inline">\(\sum \vec{F}_B = \vec{T} + \vec{F}_g = \vec{T}_B + m_B\vec{g} = m_B\vec{a}_B\)</span>.</p>
-<p>Since the pulley is massless, <span class="math inline">\(\vec{T}_A = \vec{T}_B\)</span>.</p>
-<p>Since the masses are connected by a rope, <span class="math inline">\(\vec{a}_A = -\vec{a}_B\)</span>.</p>
-<p>So now we know <span class="math inline">\(m_A, m_B, \vec{g}\)</span>, and we want to find <span class="math inline">\(\vec{a}_A, \vec{T}_A\)</span>.</p>
-<p>Subtracting the two equations, we get <span class="math inline">\(\vec{T}_A + m_A\vec{g} - \vec{T}_B - m_B\vec{g} = m_A\vec{a}_A - m_B\vec{a}_B\)</span>, which is <span class="math inline">\(\vec{T}_A - \vec{T}_B - (m_B - m_A)\vec{g} = (m_A + m_B)\vec{a}_A\)</span>, or <span class="math inline">\((m_A - m_B)\vec{g} = (m_A + m_B)\vec{a}_A\)</span>.</p>
-<p>So <span class="math inline">\(\frac{m_A - m_B}{m_A + m_B}\vec{g} = \vec{a}_A = -\frac{1}{3}\vec{g}\)</span>.</p>
-<p>So <span class="math inline">\(\vec{T}_A = m_A\vec{a}_A - m_A\vec{g} = -\frac{1}{3}\vec{g} - \vec{g} = -\frac{4}{3}\vec{g} \approxeq 13.067 \text{ [upward]}\)</span>.</p>
+<p>So <span class="math inline">\sum \vec{F}_B = \vec{T} + \vec{F}_g = \vec{T}_B + m_B\vec{g} = m_B\vec{a}_B</span>.</p>
+<p>Since the pulley is massless, <span class="math inline">\vec{T}_A = \vec{T}_B</span>.</p>
+<p>Since the masses are connected by a rope, <span class="math inline">\vec{a}_A = -\vec{a}_B</span>.</p>
+<p>So now we know <span class="math inline">m_A, m_B, \vec{g}</span>, and we want to find <span class="math inline">\vec{a}_A, \vec{T}_A</span>.</p>
+<p>Subtracting the two equations, we get <span class="math inline">\vec{T}_A + m_A\vec{g} - \vec{T}_B - m_B\vec{g} = m_A\vec{a}_A - m_B\vec{a}_B</span>, which is <span class="math inline">\vec{T}_A - \vec{T}_B - (m_B - m_A)\vec{g} = (m_A + m_B)\vec{a}_A</span>, or <span class="math inline">(m_A - m_B)\vec{g} = (m_A + m_B)\vec{a}_A</span>.</p>
+<p>So <span class="math inline">\frac{m_A - m_B}{m_A + m_B}\vec{g} = \vec{a}_A = -\frac{1}{3}\vec{g}</span>.</p>
+<p>So <span class="math inline">\vec{T}_A = m_A\vec{a}_A - m_A\vec{g} = -\frac{1}{3}\vec{g} - \vec{g} = -\frac{4}{3}\vec{g} \approxeq 13.067 \text{ [upward]}</span>.</p>
 <h2 id="cetripetalcentrifugal-forces">Cetripetal/Centrifugal Forces</h2>
 <p><strong>Centrifugal force</strong> are <strong>fictitious forces</strong> (not real forces) that occur only in non-inertial reference frames. We will not be dealing with non-inertial reference frames in this course, so we will also not be dealing with centrifugal forces. When an object travels along a curve, the inertia of an object causes it to resist curving its path, the centrifugal force points outwards.</p>
 <p><strong>Centripetal force</strong> (center-seeking force) is the real force that counteracts centrifugal force and keeps the object travelling in a curve.</p>
 <p>For example, on a swing set, the centripetal force is the tension force from the chain connecting the seat and the frame.</p>
 <p>For example, for a planet orbiting a star, the centripetal force is the gravitational force exerted by the star.</p>
 <p>When we use the reference frame of an object travelling in a curve, Newton's laws of motion do not apply because the reference frame is non-inertial.</p>
-<p>In uniform circular motion, recall that the centripetal force is <span class="math inline">\(\vec{F}_c = m\frac{v^2}{r} \text{ [outwards]}\)</span>.</p>
-<p>If the tangential velocity at the edge of a spinning wheel of radius <span class="math inline">\(r\)</span> is <span class="math inline">\(\vec{v}\)</span>, <span class="math inline">\(v = s2\pi r\)</span>, where <span class="math inline">\(s\)</span> is the rate of rotation.</p>
+<p>In uniform circular motion, recall that the centripetal force is <span class="math inline">\vec{F}_c = m\frac{v^2}{r} \text{ [outwards]}</span>.</p>
+<p>If the tangential velocity at the edge of a spinning wheel of radius <span class="math inline">r</span> is <span class="math inline">\vec{v}</span>, <span class="math inline">v = s2\pi r</span>, where <span class="math inline">s</span> is the rate of rotation.</p>
 <h2 id="gravitational-forces">Gravitational Forces</h2>
 <p>Gravitatonal force is exerted by all objects with mass. Usually, at an everyday scale, the masses are so small as for the gravitational force to be negligible, so we don't consider them.</p>
-<p>At a planetary scale and above, though, gravity becomes significant. For example, everything on Earth is affected by the Earth's gravity, which can be approximated by <span class="math inline">\(\vec{g}\)</span> near the surface.</p>
+<p>At a planetary scale and above, though, gravity becomes significant. For example, everything on Earth is affected by the Earth's gravity, which can be approximated by <span class="math inline">\vec{g}</span> near the surface.</p>
 <p>When an object is in the Earth's gravitational field, it has a downward force exerted on it by the Earth. At the same time, there is an upward force applied to the Earth, but the Earth is so massive that this force is negligible.</p>
-<p>The constant <span class="math inline">\(\vec{g}\)</span> was determined in this way. <span class="math inline">\(\vec{F}_g = mg = mG\frac{M}{r^2}\)</span>. If we set <span class="math inline">\(r = r_E\)</span> (average radius of the Earth - sea level) and <span class="math inline">\(M = M_E\)</span> (mass of the Earth), we get <span class="math inline">\(\vec{F}_g = mg = mG\frac{M_E}{r_E^2}\)</span>. So <span class="math inline">\(g = G\frac{M_E}{r_E^2} \approxeq m 6.67 \times 10^{-11} Nm^2/kg^2 \frac{5.9721986 \times 10^{24} kg}{6371000 m^2} \approxeq m9.81397314206351 N/kg\)</span>. So <span class="math inline">\(\vec{g} \approxeq 9.81397314206351 N/kg \text{ [downward]}\)</span>.</p>
-<p>In practice, we use <span class="math inline">\(9.8 N/kg = 9.8 m/s^2\)</span>, which is more suited for North America.</p>
-<p>On Mars, the acceleration due to gravity would be <span class="math inline">\(G\frac{M_M}{r_M^2} = 3.7 m/s^2\)</span>.</p>
-<p>The <strong>apparent weight</strong> of an object is the weight an object actually experiences. For example, the apparent weight of an object in free fall in a vacuum is <span class="math inline">\(\vec{0} N\)</span>, since the reference frame is accelerating at <span class="math inline">\(\vec{g}\)</span>, so the net force in this reference frame is <span class="math inline">\(\vec{0} N\)</span>. This applies to forces only in the vertical axis - if the object is accelerating sideways, this does not affect the apparent weight.</p>
-<p>Acceleration of the reference frame is added to all <span class="math inline">\(\vec{a}\)</span> in <span class="math inline">\(\vec{F} = m\vec{a}\)</span>. In other words, <span class="math inline">\(\vec{F} = m(\vec{a}_{frame} + \vec{a}_{object})\)</span>.</p>
+<p>The constant <span class="math inline">\vec{g}</span> was determined in this way. <span class="math inline">\vec{F}_g = mg = mG\frac{M}{r^2}</span>. If we set <span class="math inline">r = r_E</span> (average radius of the Earth - sea level) and <span class="math inline">M = M_E</span> (mass of the Earth), we get <span class="math inline">\vec{F}_g = mg = mG\frac{M_E}{r_E^2}</span>. So <span class="math inline">g = G\frac{M_E}{r_E^2} \approxeq m 6.67 \times 10^{-11} Nm^2/kg^2 \frac{5.9721986 \times 10^{24} kg}{6371000 m^2} \approxeq m9.81397314206351 N/kg</span>. So <span class="math inline">\vec{g} \approxeq 9.81397314206351 N/kg \text{ [downward]}</span>.</p>
+<p>In practice, we use <span class="math inline">9.8 N/kg = 9.8 m/s^2</span>, which is more suited for North America.</p>
+<p>On Mars, the acceleration due to gravity would be <span class="math inline">G\frac{M_M}{r_M^2} = 3.7 m/s^2</span>.</p>
+<p>The <strong>apparent weight</strong> of an object is the weight an object actually experiences. For example, the apparent weight of an object in free fall in a vacuum is <span class="math inline">\vec{0} N</span>, since the reference frame is accelerating at <span class="math inline">\vec{g}</span>, so the net force in this reference frame is <span class="math inline">\vec{0} N</span>. This applies to forces only in the vertical axis - if the object is accelerating sideways, this does not affect the apparent weight.</p>
+<p>Acceleration of the reference frame is added to all <span class="math inline">\vec{a}</span> in <span class="math inline">\vec{F} = m\vec{a}</span>. In other words, <span class="math inline">\vec{F} = m(\vec{a}_{frame} + \vec{a}_{object})</span>.</p>
 <h2 id="hookes-law">Hooke's Law</h2>
 <blockquote>
 <p>A spring exerts a force opposite in direction to its dispacement proportional to the magnitude of its displacement.<br />
-In other words, <span class="math inline">\(F_s = -k\Delta x\)</span>, where <span class="math inline">\(\vec{F}_s\)</span> is the spring force, <span class="math inline">\(k\)</span> is the spring constant (in <span class="math inline">\(N/m\)</span>), and <span class="math inline">\(x\)</span> is the distance from the rest position.</p>
+In other words, <span class="math inline">F_s = -k\Delta x</span>, where <span class="math inline">\vec{F}_s</span> is the spring force, <span class="math inline">k</span> is the spring constant (in <span class="math inline">N/m</span>), and <span class="math inline">x</span> is the distance from the rest position.</p>
 </blockquote>
 <p>The displacement of a spring is the distance it has been stretched or compressed from its rest position.</p>
 <p>This law describes the behavior of <strong>ideal springs</strong> - springs that have no friction or mass, or any other undesired properties. I reject your reality, and subsitutute my own.</p>
 <p>The direction of the force is always toward the rest position of the spring.</p>
-<p>Springs also obey Newton's third law. If we compress a spring with force <span class="math inline">\(\vec{F}_a\)</span>, it pushes back with force <span class="math inline">\(\vec{F}_s = -\vec{F}_a\)</span></p>
+<p>Springs also obey Newton's third law. If we compress a spring with force <span class="math inline">\vec{F}_a</span>, it pushes back with force <span class="math inline">\vec{F}_s = -\vec{F}_a</span></p>
 <h2 id="frictional-forces">Frictional Forces</h2>
 <p>Frictional forces are a type of contact force. It is always perpendicular to the normal force.</p>
 <p>Frictional force is the force that resists sliding of two surfaces across each other when they are in contact. Therefore, the direction of frictional force exerted on one of a pair of objects is always the opposite of the motion or attempted motion of the object relative to the other object.</p>
 <p>We divide friction into two types, static and kinetic, because most materials result in higher amounts of static friction than kinetic friction.</p>
-<p>Frictional forces are usually denoted with <span class="math inline">\(\vec{F}_f\)</span>.</p>
+<p>Frictional forces are usually denoted with <span class="math inline">\vec{F}_f</span>.</p>
 <h3 id="static-friction">Static Friction</h3>
-<p>Static friction is the frictional force between two objects that are <strong>not moving relative to each other</strong>. It is often denoted <span class="math inline">\(\vec{F}_s\)</span> or <span class="math inline">\(f_s\)</span>.</p>
+<p>Static friction is the frictional force between two objects that are <strong>not moving relative to each other</strong>. It is often denoted <span class="math inline">\vec{F}_s</span> or <span class="math inline">f_s</span>.</p>
 <p>This force balances out all the other forces attempting to move the objects relative to each other.</p>
 <p>An example is a heavy cardboard box on a wooden surface. If we push on it lightly, it stays in place. This is because of static friction exactly balancing out the pushing force, meaning there is no net force and the box does not move.</p>
-<p>The <strong>coefficient of static friction</strong> is denoted <span class="math inline">\(\mu_s\)</span>. It is the ratio of static friction to the normal force, and is dimensionless and dependent on the material properties of both surfaces. This is often determined through experiment.</p>
-<p>Static frictional force is governed by the equation <span class="math inline">\(\magn{\vec{F}_s} \le \mu_s \magn{\vec{N}}\)</span>, where <span class="math inline">\(\vec{N}\)</span> is the normal force exerted on the object by the other object. The direction is the opposite of the applied force acting on the object relative to the other object. In other words, it is opposite to the direction the object would move in if not for this force.</p>
-<p>We also write <span class="math inline">\(\magn{\vec{F}_{s, \mathrm{max}}} = \mu_s \magn{\vec{N}}\)</span>. This is the largest possible force that can be applied to the object before static friction is overcome and the object will start moving.</p>
-<p>The magnitude of static frictional force is exactly equal to the applied force up until the point <span class="math inline">\(\magn{\vec{F}_{s, \mathrm{max}}}\)</span>, after which the object starts moving and static friction is no longer applicable.</p>
+<p>The <strong>coefficient of static friction</strong> is denoted <span class="math inline">\mu_s</span>. It is the ratio of static friction to the normal force, and is dimensionless and dependent on the material properties of both surfaces. This is often determined through experiment.</p>
+<p>Static frictional force is governed by the equation <span class="math inline">\magn{\vec{F}_s} \le \mu_s \magn{\vec{N}}</span>, where <span class="math inline">\vec{N}</span> is the normal force exerted on the object by the other object. The direction is the opposite of the applied force acting on the object relative to the other object. In other words, it is opposite to the direction the object would move in if not for this force.</p>
+<p>We also write <span class="math inline">\magn{\vec{F}_{s, \mathrm{max}}} = \mu_s \magn{\vec{N}}</span>. This is the largest possible force that can be applied to the object before static friction is overcome and the object will start moving.</p>
+<p>The magnitude of static frictional force is exactly equal to the applied force up until the point <span class="math inline">\magn{\vec{F}_{s, \mathrm{max}}}</span>, after which the object starts moving and static friction is no longer applicable.</p>
 <p>This force is usually greater in magnitude than kinetic friction.</p>
 <h3 id="kinetic-friction">Kinetic Friction</h3>
-<p>Kinetic friction is the frictional force between two objects that are <strong>moving relative to each other</strong>. It is often denoted <span class="math inline">\(\vec{F}_k\)</span> or <span class="math inline">\(f_k\)</span>.</p>
+<p>Kinetic friction is the frictional force between two objects that are <strong>moving relative to each other</strong>. It is often denoted <span class="math inline">\vec{F}_k</span> or <span class="math inline">f_k</span>.</p>
 <p>This force reduces the other forces attempting to move objects relative to each other.</p>
 <p>An example is pushing a heavy cardboard box on a wooden surface. Initially it resists pushing, but after we first overcome the friction it moves relatively easily. In fact, we can apply less force than we used to start it moving, and it will still continue to move.</p>
-<p>The <strong>coefficient of kinetic friction</strong> is denoted <span class="math inline">\(\mu_k\)</span>. It is the ratio of kinetic friction to the normal force, and is dimensionless and dependent on the material properties of both surfaces. This is often determined through experiment.</p>
-<p>Kinetic frictional force is governed the the equation <span class="math inline">\(\magn{\vec{F}_k} = \mu_k \magn{\vec{N}}\)</span>, where <span class="math inline">\(\vec{N}\)</span> is the normal force exerted on the object by the other object. The direction of the force is the opposite of the velocity of the object relative to the other object. In other words, <span class="math inline">\(\hat{\vec{F}_k} = -\hat{\vec{v}_{\text{object}} - \vec{v}_{\text{other object}}}\)</span>.</p>
+<p>The <strong>coefficient of kinetic friction</strong> is denoted <span class="math inline">\mu_k</span>. It is the ratio of kinetic friction to the normal force, and is dimensionless and dependent on the material properties of both surfaces. This is often determined through experiment.</p>
+<p>Kinetic frictional force is governed the the equation <span class="math inline">\magn{\vec{F}_k} = \mu_k \magn{\vec{N}}</span>, where <span class="math inline">\vec{N}</span> is the normal force exerted on the object by the other object. The direction of the force is the opposite of the velocity of the object relative to the other object. In other words, <span class="math inline">\hat{\vec{F}_k} = -\hat{\vec{v}_{\text{object}} - \vec{v}_{\text{other object}}}</span>.</p>
 <p>This force is often less than static frictional force. As a result, there is a significant difference in the amount of force needed to move an object in contact with a surface when it is not moving relative to the surface, and when it is moving, even if very slowly.</p>
 <p>This force starts applying as soon as the object starts moving, and stops applying the moment the object stops.</p>
 <p>If we graphed frictional force for a heavy cardboard box at rest on a wooden surface as we pushed it, we would see that the force would increase as applied force increased. At a certain point, the frictional force would drop suddenly to a lower value as the object started to move. This force would stay constant until the object is again at rest.</p>
-<p>A 1.2kg box is at rest on the ground. We know that <span class="math inline">\(\mu_s = 0.61, \mu_k = 0.32\)</span>. What is the acceleration of the box just after it starts to move?</p>
+<p>A 1.2kg box is at rest on the ground. We know that <span class="math inline">\mu_s = 0.61, \mu_k = 0.32</span>. What is the acceleration of the box just after it starts to move?</p>
 <blockquote>
-<p>The magnitude of the normal force is <span class="math inline">\(N = F_g = mg = 1.2kg \cdot g\)</span>.<br />
-The applied force at which it will start to move is <span class="math inline">\(F_a = F_{s, \mathrm{max}} = \mu_s N = 0.61 \cdot 1.2kg \cdot g\)</span>.<br />
-The kinetic friction is <span class="math inline">\(\vec{F}_k = \mu_k N = 0.32 \cdot 1.2kg \cdot g\)</span>.<br />
-So the net force at the moment the book starts moving is <span class="math inline">\(F_a - F_k = 0.61 \cdot 1.2kg \cdot g - 0.32 \cdot 1.2kg \cdot g = 0.29 \cdot 1.2kg \cdot g\)</span>.<br />
-So the acceleration at that moment is <span class="math inline">\(a = 0.29 \cdot g\)</span>.</p>
+<p>The magnitude of the normal force is <span class="math inline">N = F_g = mg = 1.2kg \cdot g</span>.<br />
+The applied force at which it will start to move is <span class="math inline">F_a = F_{s, \mathrm{max}} = \mu_s N = 0.61 \cdot 1.2kg \cdot g</span>.<br />
+The kinetic friction is <span class="math inline">\vec{F}_k = \mu_k N = 0.32 \cdot 1.2kg \cdot g</span>.<br />
+So the net force at the moment the book starts moving is <span class="math inline">F_a - F_k = 0.61 \cdot 1.2kg \cdot g - 0.32 \cdot 1.2kg \cdot g = 0.29 \cdot 1.2kg \cdot g</span>.<br />
+So the acceleration at that moment is <span class="math inline">a = 0.29 \cdot g</span>.</p>
 </blockquote>
 <h3 id="general-problem">General Problem</h3>
-<p>A car of mass <span class="math inline">\(m\)</span> is travelling on a circular track with radius <span class="math inline">\(r = 50m\)</span> at speed <span class="math inline">\(v\)</span>, where <span class="math inline">\(\mu_s\)</span> betwen the car and road is <span class="math inline">\(\mu_s = 0.56\)</span>. How fast can the car drive just before sliding off the road?</p>
-<p>If the car is travelling at <span class="math inline">\(\frac{50}{3}m/s\)</span> and the road is frictionless, what angle does the road need to be banked at to avoid sliding off the road?</p>
-<p>Clearly, the centripetal force is <span class="math inline">\(F_c = m\frac{v^2}{r}\)</span>. Clearly, the normal force with the road is <span class="math inline">\(\vec{N} = -m\vec{g}\)</span>.</p>
-<p>So the maximum frictional force is <span class="math inline">\(F_{s, \mathrm{max}} = \mu_s mg\)</span>.</p>
-<p>At the point where the car starts to slide off the road, <span class="math inline">\(F_c = F_{s, \mathrm{max}}\)</span>. So <span class="math inline">\(\frac{v^2}{r} = \mu_s g\)</span> and <span class="math inline">\(\frac{v^2}{50m} = 0.56g\)</span>.</p>
-<p>Solving, we get <span class="math inline">\(v = \sqrt{28g} \approxeq 16.5650233926789 m/s\)</span>.</p>
-<p>Now we assume there is no friction and that the road is banked inward at angle <span class="math inline">\(\theta\)</span>.</p>
-<p>The outward fictional force is <span class="math inline">\(\vec{F}_c = m\frac{v^2}{r} \text{ [outward]}\)</span>. The gravitational force is <span class="math inline">\(\vec{F}_g = mg \text{ [downward]}\)</span>.</p>
-<p>Since the car is not sliding, the normal force balances out the gravitational and outward fictional force. So <span class="math inline">\(m\frac{v^2}{r} \text{ [outward]} + mg \text{ [downward]} + \vec{N} = \sum \vec{F} = \vec{0}\)</span>.</p>
-<p>Since <span class="math inline">\(\sum F_y = 0\)</span>, <span class="math inline">\(N_y = mg\)</span> and <span class="math inline">\(N = \frac{mg}{\cos \theta}\)</span>. So <span class="math inline">\(N_x = N \sin \theta = mg \tan \theta\)</span>.</p>
-<p>Since <span class="math inline">\(\sum F_x = 0\)</span>, <span class="math inline">\(N_x = m\frac{v^2}{r} = mg \tan \theta\)</span>. So <span class="math inline">\(\arctan \frac{v^2}{rg} = \theta = \arctan \frac{\frac{50}{3}^2}{50g} \approxeq 29.5486156312315^\circ\)</span>.</p>
+<p>A car of mass <span class="math inline">m</span> is travelling on a circular track with radius <span class="math inline">r = 50m</span> at speed <span class="math inline">v</span>, where <span class="math inline">\mu_s</span> betwen the car and road is <span class="math inline">\mu_s = 0.56</span>. How fast can the car drive just before sliding off the road?</p>
+<p>If the car is travelling at <span class="math inline">\frac{50}{3}m/s</span> and the road is frictionless, what angle does the road need to be banked at to avoid sliding off the road?</p>
+<p>Clearly, the centripetal force is <span class="math inline">F_c = m\frac{v^2}{r}</span>. Clearly, the normal force with the road is <span class="math inline">\vec{N} = -m\vec{g}</span>.</p>
+<p>So the maximum frictional force is <span class="math inline">F_{s, \mathrm{max}} = \mu_s mg</span>.</p>
+<p>At the point where the car starts to slide off the road, <span class="math inline">F_c = F_{s, \mathrm{max}}</span>. So <span class="math inline">\frac{v^2}{r} = \mu_s g</span> and <span class="math inline">\frac{v^2}{50m} = 0.56g</span>.</p>
+<p>Solving, we get <span class="math inline">v = \sqrt{28g} \approxeq 16.5650233926789 m/s</span>.</p>
+<p>Now we assume there is no friction and that the road is banked inward at angle <span class="math inline">\theta</span>.</p>
+<p>The outward fictional force is <span class="math inline">\vec{F}_c = m\frac{v^2}{r} \text{ [outward]}</span>. The gravitational force is <span class="math inline">\vec{F}_g = mg \text{ [downward]}</span>.</p>
+<p>Since the car is not sliding, the normal force balances out the gravitational and outward fictional force. So <span class="math inline">m\frac{v^2}{r} \text{ [outward]} + mg \text{ [downward]} + \vec{N} = \sum \vec{F} = \vec{0}</span>.</p>
+<p>Since <span class="math inline">\sum F_y = 0</span>, <span class="math inline">N_y = mg</span> and <span class="math inline">N = \frac{mg}{\cos \theta}</span>. So <span class="math inline">N_x = N \sin \theta = mg \tan \theta</span>.</p>
+<p>Since <span class="math inline">\sum F_x = 0</span>, <span class="math inline">N_x = m\frac{v^2}{r} = mg \tan \theta</span>. So <span class="math inline">\arctan \frac{v^2}{rg} = \theta = \arctan \frac{\frac{50}{3}^2}{50g} \approxeq 29.5486156312315^\circ</span>.</p>
 <h2 id="conservation-of-energy">Conservation of Energy</h2>
 <p>If the net force acting on an object is constant, then so is the acceleration. With constant acceleration, we can always solve for the motion of the object using the five kinematic equations.</p>
 <p>However, if the net force varies, it is no longer possible to solve for the motion. We could use numerical methods, but if we do not need all the details, conservation principles work better.</p>
@@ -619,28 +652,28 @@ So the acceleration at that moment is <span class="math inline">\(a = 0.29 \cdot
 </ul>
 <p>In this course we will mostly be considering <strong>mechanical energy</strong>, which is an umbrella term for kinetic and potential energy.</p>
 <p>Most energy conversions convert at least some of the energy into thermal energy. However, in many cases the amount is negligible and we can ignore it.</p>
-<p>Energy is the ability to do work. We denote it with <span class="math inline">\(E\)</span>. If we have different types of energy, like kinetic and elastic, the total energy is simply the sum of all these different types.</p>
-<p>The total energy in the universe must remain constant. If we consider the universe as a single system, and everything else (the environment), then <span class="math inline">\(E_{universe} = E_{system} + E_{environment}\)</span>.</p>
-<p>So <span class="math inline">\(\Delta E_{universe} = \Delta E_{system} + \Delta E_{environment}\)</span> and <span class="math inline">\(\Delta E_{system} = -\Delta E_{environment}\)</span>. In other words, an increase in energy in a system must result in a decrease of energy in its surroundings, and vice versa.</p>
+<p>Energy is the ability to do work. We denote it with <span class="math inline">E</span>. If we have different types of energy, like kinetic and elastic, the total energy is simply the sum of all these different types.</p>
+<p>The total energy in the universe must remain constant. If we consider the universe as a single system, and everything else (the environment), then <span class="math inline">E_{universe} = E_{system} + E_{environment}</span>.</p>
+<p>So <span class="math inline">\Delta E_{universe} = \Delta E_{system} + \Delta E_{environment}</span> and <span class="math inline">\Delta E_{system} = -\Delta E_{environment}</span>. In other words, an increase in energy in a system must result in a decrease of energy in its surroundings, and vice versa.</p>
 <h2 id="work">Work</h2>
-<p>A change in energy is known as <strong>work</strong>. We denote this as <span class="math inline">\(W = \Delta E\)</span>. So work has the same units as energy.</p>
+<p>A change in energy is known as <strong>work</strong>. We denote this as <span class="math inline">W = \Delta E</span>. So work has the same units as energy.</p>
 <p>Work includes things like heat (thermal energy transfer across a boundary) and electromagnetic waves (transfer of electromagnetic energy). However, what we mean by work most of the time is <strong>mechanical work</strong>, which is a change in mechanical energy.</p>
-<p>The definition of mechanical work is <span class="math inline">\(W = \vec{F} \cdot \Delta \vec{x}\)</span> - the dot product of the force applied to an object and the displacement of the object. This is also written as <span class="math inline">\(F\delta x \cos \theta\)</span>, where <span class="math inline">\(\theta\)</span> is the angle between the directions of <span class="math inline">\(\vec{F}\)</span> and <span class="math inline">\(\delta \vec{x}\)</span>. The <strong>force must be constant</strong> for this to make sense.</p>
-<p>If <span class="math inline">\(W\)</span> is positive, it means emergu was put into the system. If it is negative, it means energy was taken out of the system.</p>
-<p>Assume the force applied is constant. Then <span class="math inline">\(v_f^2 = v_i^2 + 2\vec{a} \cdot \Delta \vec{x}\)</span> (kinematic equation 5). Solving, we get <span class="math inline">\(\vec{a} \cdot \Delta \vec{x} = \frac{1}{2}(v_f^2 - v_i^2)\)</span>.</p>
-<p>So <span class="math inline">\(W = \vec{F} \cdot \Delta \vec{x} = m\vec{a} \cdot \Delta x = m\frac{1}{2}(v_f^2 - v_i^2) = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2\)</span>.</p>
-<p>We therefore define kinetic energy as <span class="math inline">\(E_k = \frac{1}{2}mv^2\)</span>.</p>
-<p>The unit of work and energy is the <strong>Joule</strong>, which we define using <span class="math inline">\(mv^2\)</span> to be <span class="math inline">\(kg(m/s)^2 = Nm\)</span> (Newton meters).</p>
-<p>If the force is not constant (for example, a spring would have <span class="math inline">\(F(\vec{x}) = -k\vec{x}\)</span>), the more general definition is <span class="math inline">\(W = \int_{\vec{x}_i}^{\vec{x}_f} F(\vec{x}) \cdot \dee \vec{x}\)</span>. If it is only in one dimension, we can write it as <span class="math inline">\(W = \int_{x_i}^{x_f} F(x) \dee x\)</span>.</p>
+<p>The definition of mechanical work is <span class="math inline">W = \vec{F} \cdot \Delta \vec{x}</span> - the dot product of the force applied to an object and the displacement of the object. This is also written as <span class="math inline">F\delta x \cos \theta</span>, where <span class="math inline">\theta</span> is the angle between the directions of <span class="math inline">\vec{F}</span> and <span class="math inline">\delta \vec{x}</span>. The <strong>force must be constant</strong> for this to make sense.</p>
+<p>If <span class="math inline">W</span> is positive, it means emergu was put into the system. If it is negative, it means energy was taken out of the system.</p>
+<p>Assume the force applied is constant. Then <span class="math inline">v_f^2 = v_i^2 + 2\vec{a} \cdot \Delta \vec{x}</span> (kinematic equation 5). Solving, we get <span class="math inline">\vec{a} \cdot \Delta \vec{x} = \frac{1}{2}(v_f^2 - v_i^2)</span>.</p>
+<p>So <span class="math inline">W = \vec{F} \cdot \Delta \vec{x} = m\vec{a} \cdot \Delta x = m\frac{1}{2}(v_f^2 - v_i^2) = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2</span>.</p>
+<p>We therefore define kinetic energy as <span class="math inline">E_k = \frac{1}{2}mv^2</span>.</p>
+<p>The unit of work and energy is the <strong>Joule</strong>, which we define using <span class="math inline">mv^2</span> to be <span class="math inline">kg(m/s)^2 = Nm</span> (Newton meters).</p>
+<p>If the force is not constant (for example, a spring would have <span class="math inline">F(\vec{x}) = -k\vec{x}</span>), the more general definition is <span class="math inline">W = \int_{\vec{x}_i}^{\vec{x}_f} F(\vec{x}) \cdot \dee \vec{x}</span>. If it is only in one dimension, we can write it as <span class="math inline">W = \int_{x_i}^{x_f} F(x) \dee x</span>.</p>
 <p>This is called a <strong>line integral</strong> - an integral taken along a line in space. For example, a line integral in 2D geometrically represents the area under the 2D curve in 3D, just as the line integral in 1D geometrically represents the area under a 1D curve in 2D.</p>
-<p><span class="math inline">\(\dee \vec{x}\)</span> represents the infinisimal displacement, and <span class="math inline">\(\dee \vec{x} = \frac{\dee \vec{x}}{\dee t} \dee t = \vec{v} \dee t\)</span>.</p>
-<p>Note that <span class="math inline">\(F(\vec{x}) \cdot \dee \vec{x} = (F(\vec{x}) \cdot \hat{\vec{v}}) \dee x\)</span>.</p>
+<p><span class="math inline">\dee \vec{x}</span> represents the infinisimal displacement, and <span class="math inline">\dee \vec{x} = \frac{\dee \vec{x}}{\dee t} \dee t = \vec{v} \dee t</span>.</p>
+<p>Note that <span class="math inline">F(\vec{x}) \cdot \dee \vec{x} = (F(\vec{x}) \cdot \hat{\vec{v}}) \dee x</span>.</p>
 <h3 id="in-practice">In Practice</h3>
-<p>Consider the example of a spring. Here, <span class="math inline">\(F(x) = -k\Delta x\)</span>, so the work done by stretching or compressing a spring is <span class="math inline">\(W = \int_{x_i}^{x_f} -k x \dee x = -k\int_{x_i}^{x_f} x \dee x = \frac{1}{2}kx_i^2 - \frac{1}{2}kx_f^2\)</span>.</p>
-<p>Note that <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_f\)</span> are the initial and final distances from the rest position of the spring, and increase as the spring stretches or compresses. The work done is negative when stretching or compressing the spring, and positive if the spring is returning to its rest position.</p>
-<p>So the energy from stretching or compressing a spring (elastic energy) is <span class="math inline">\(E_e = -\frac{1}{2}kx^2\)</span>, where <span class="math inline">\(k\)</span> is the spring constant and <span class="math inline">\(x\)</span> is the displacement from rest position.</p>
-<p>Gravitational potential energy is similar. Since gravity only acts downwards, the work done by gravity is <span class="math inline">\(W_g = \vec{F} \cdot \Delta \vec{x} = F \cdot \Delta x = -mg \Delta x\)</span>. So if the object falls downwards as gravity acts on it, then gravity has done positive work to it.</p>
-<p>For example, a box sliding a distance <span class="math inline">\(d\)</span> down a ramp with angle <span class="math inline">\(\theta\)</span> has work done by gravitational potential energy given by <span class="math inline">\(W_g = -mg \Delta y\)</span>. Since <span class="math inline">\(\Delta y = -d \sin \theta\)</span>, <span class="math inline">\(W_g = mgd \sin \theta\)</span>.</p>
+<p>Consider the example of a spring. Here, <span class="math inline">F(x) = -k\Delta x</span>, so the work done by stretching or compressing a spring is <span class="math inline">W = \int_{x_i}^{x_f} -k x \dee x = -k\int_{x_i}^{x_f} x \dee x = \frac{1}{2}kx_i^2 - \frac{1}{2}kx_f^2</span>.</p>
+<p>Note that <span class="math inline">x_i</span> and <span class="math inline">x_f</span> are the initial and final distances from the rest position of the spring, and increase as the spring stretches or compresses. The work done is negative when stretching or compressing the spring, and positive if the spring is returning to its rest position.</p>
+<p>So the energy from stretching or compressing a spring (elastic energy) is <span class="math inline">E_e = -\frac{1}{2}kx^2</span>, where <span class="math inline">k</span> is the spring constant and <span class="math inline">x</span> is the displacement from rest position.</p>
+<p>Gravitational potential energy is similar. Since gravity only acts downwards, the work done by gravity is <span class="math inline">W_g = \vec{F} \cdot \Delta \vec{x} = F \cdot \Delta x = -mg \Delta x</span>. So if the object falls downwards as gravity acts on it, then gravity has done positive work to it.</p>
+<p>For example, a box sliding a distance <span class="math inline">d</span> down a ramp with angle <span class="math inline">\theta</span> has work done by gravitational potential energy given by <span class="math inline">W_g = -mg \Delta y</span>. Since <span class="math inline">\Delta y = -d \sin \theta</span>, <span class="math inline">W_g = mgd \sin \theta</span>.</p>
 <p>Normal force never does any work, since it only applies when an object is in contact with a surface, and it is perpendicular to the surface, which means it does no work on sliding, which is the only type of motion possible while maintining contact.</p>
 <h3 id="usage">Usage</h3>
 <p>Going back to the example of a box rolling down a frictionless bumpy ramp, we can now use work to analyze this system. Kinematically, it would not be possible to determine the exact motion unless we knew the exact shape of the bumps.</p>
@@ -649,73 +682,73 @@ So the acceleration at that moment is <span class="math inline">\(a = 0.29 \cdot
 ..........
 ................ BUMP
 ...................</code></pre>
-<p>However, we can observe that the normal force is always perpendicular to the velocity of the box as slides down the ramp, so <span class="math inline">\(\vec{N} \cdot \frac{\dee \vec{x}}{\dee t} = \vec{N} \cdot \dee \vec{x} = 0\)</span>. So <span class="math inline">\(\int_{y_1}^{y_2} \vec{N} \cdot \dee \vec{x} = 0 = W_N\)</span>. In other words, the nromal force does no work on the object.</p>
-<p>So the only work done is by gravitational potential energy in the component of the direction of motion. The work done by gravity is <span class="math inline">\(W_g = \int_{y_1}^{y_2} m\vec{g} \cdot \dee \vec{y} = \int_{y_1}^{y_2} mg \cos \theta \dee y\)</span>.</p>
+<p>However, we can observe that the normal force is always perpendicular to the velocity of the box as slides down the ramp, so <span class="math inline">\vec{N} \cdot \frac{\dee \vec{x}}{\dee t} = \vec{N} \cdot \dee \vec{x} = 0</span>. So <span class="math inline">\int_{y_1}^{y_2} \vec{N} \cdot \dee \vec{x} = 0 = W_N</span>. In other words, the nromal force does no work on the object.</p>
+<p>So the only work done is by gravitational potential energy in the component of the direction of motion. The work done by gravity is <span class="math inline">W_g = \int_{y_1}^{y_2} m\vec{g} \cdot \dee \vec{y} = \int_{y_1}^{y_2} mg \cos \theta \dee y</span>.</p>
 <h3 id="frictional-forces-1">Frictional Forces</h3>
 <p>Friction is always opposite to the direction of displacement (the angle between the two is 180 degrees). Therefore, it always does negative work - it always reduces the energy.</p>
-<p>So <span class="math inline">\(W_f = \int_\vec{a}^\vec{b} \vec{F}_f \cdot \dee \vec{x} = \int_\vec{a}^\vec{b} F_f \cos 180^\circ \dee x = -\int_\vec{a}^\vec{b} F_f \dee x = -F_f x\)</span>.</p>
-<p>Note that <span class="math inline">\(x\)</span> is the <strong>path length</strong> from <span class="math inline">\(\vec{a}\)</span> to <span class="math inline">\(\vec{b}\)</span>, not the distance between <span class="math inline">\(\vec{a}\)</span> and <span class="math inline">\(\vec{b}\)</span>. If the path is a curve, it is the length of the curve, not the line from <span class="math inline">\(\vec{a}\)</span> to <span class="math inline">\(\vec{b}\)</span>.</p>
+<p>So <span class="math inline">W_f = \int_{\vec{a}}^{\vec{b}} \vec{F}_f \cdot \dee \vec{x} = \int_{\vec{a}}^{\vec{b}} F_f \cos 180^\circ \dee x = -\int_{\vec{a}}^{\vec{b}} F_f \dee x = -F_f x</span>.</p>
+<p>Note that <span class="math inline">x</span> is the <strong>path length</strong> from <span class="math inline">\vec{a}</span> to <span class="math inline">\vec{b}</span>, not the distance between <span class="math inline">\vec{a}</span> and <span class="math inline">\vec{b}</span>. If the path is a curve, it is the length of the curve, not the line from <span class="math inline">\vec{a}</span> to <span class="math inline">\vec{b}</span>.</p>
 <p>Note that static frictional forces can do work too, if both objects the friction applies to are displaced in our reference frame.</p>
-<p>Here, <span class="math inline">\(\vec{a}\)</span> represents the initial position, and <span class="math inline">\(\vec{b}\)</span> represents the final position. This is independent of time but the ordering matters.</p>
+<p>Here, <span class="math inline">\vec{a}</span> represents the initial position, and <span class="math inline">\vec{b}</span> represents the final position. This is independent of time but the ordering matters.</p>
 <h3 id="work-kinetic-energy-theorem-wke">Work-Kinetic-Energy Theorem (WKE)</h3>
-<p>If an object is acted on by multiple forces, then <span class="math inline">\(W_{net} = \sum W = \sum \int_\vec{a}^\vec{b} \vec{F} \cdot \dee \vec{x}\)</span>.</p>
-<p>Since <span class="math inline">\(\vec{x}\)</span> is the same for all the different forces, <span class="math inline">\(W_{net} = \int_\vec{a}^\vec{b} \left(\sum \vec{F}\right) \cdot \dee \vec{x}\)</span>.</p>
-<p>So <span class="math inline">\(W_{net} = \int_\vec{a}^\vec{b} \vec{F}_{net} \cdot \dee \vec{x}\)</span>.</p>
-<p><span class="math display">\[
-\begin{align}
-m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &amp;= m\int_\vec{a}^\vec{b} \frac{\dee \vec{v}}{\dee t} \cdot \dee \vec{x} \\
-&amp;= m\int_\vec{a}^\vec{b} \dee \vec{v} \cdot \frac{\dee \vec{x}}{\dee t} \\
-&amp;= m\int_\vec{a}^\vec{b} \vec{v} \cdot \dee \vec{v} \\
-&amp;= \frac{1}{2}m\evalat{\vec{v}^2}_{\vec{a}^\vec{b}} \\
-&amp;= \frac{1}{2}m\evalat{v^2}_{\vec{a}^\vec{b}} \\
+<p>If an object is acted on by multiple forces, then <span class="math inline">W_{net} = \sum W = \sum \int_{\vec{a}}^{\vec{b}} \vec{F} \cdot \dee \vec{x}</span>.</p>
+<p>Since <span class="math inline">\vec{x}</span> is the same for all the different forces, <span class="math inline">W_{net} = \int_{\vec{a}}^{\vec{b}} \left(\sum \vec{F}\right) \cdot \dee \vec{x}</span>.</p>
+<p>So <span class="math inline">W_{net} = \int_{\vec{a}}^{\vec{b}} \vec{F}_{net} \cdot \dee \vec{x}</span>.</p>
+<p><span class="math display">\displaystyle 
+\begin{aligned}
+m\int_{\vec{a}}^{\vec{b}} \vec{a} \cdot \dee \vec{x} &amp;= m\int_{\vec{a}}^{\vec{b}} \frac{\dee \vec{v}}{\dee t} \cdot \dee \vec{x} \\
+&amp;= m\int_{\vec{a}}^{\vec{b}} \dee \vec{v} \cdot \frac{\dee \vec{x}}{\dee t} \\
+&amp;= m\int_{\vec{a}}^{\vec{b}} \vec{v} \cdot \dee \vec{v} \\
+&amp;= \frac{1}{2}m\evalat{\vec{v}^2}_{\vec{a}^{\vec{b}}} \\
+&amp;= \frac{1}{2}m\evalat{v^2}_{\vec{a}^{\vec{b}}} \\
 &amp;= \frac{1}{2}mb^2 - \frac{1}{2}ma^2 = \Delta W_K \\
-\end{align}
-\]</span></p>
-<p>In short, the WKE theorem states that <span class="math inline">\(W_{net} = W_K\)</span> - that net work is equivalent to change in kinetic energy in a system.</p>
+\end{aligned}
+</span></p>
+<p>In short, the WKE theorem states that <span class="math inline">W_{net} = W_K</span> - that net work is equivalent to change in kinetic energy in a system.</p>
 <p>So if the work done is positive, final speed is greater than initial speed, and vice versa.</p>
 <p>A skier takes some path down a slope that is 500m high, starting at the top. What is the final speed of the skier?</p>
 <blockquote>
-<p>Clearly, <span class="math inline">\(W_g = -mg \Delta x_y = W_K = \Delta \frac{1}{2}mv^2\)</span>.<br />
-So <span class="math inline">\(-mg(-500 m) = \frac{1}{2}m(v_f^2 - v_i^2)\)</span> and <span class="math inline">\(-2g(-500 m) = v_f^2 - v_i^2\)</span>.<br />
-So <span class="math inline">\(g(1000 m) + v_i^2 = v_f^2\)</span>. Clearly, <span class="math inline">\(v_i = 0\)</span> since the skier starts from rest.<br />
-So <span class="math inline">\(v_f = \sqrt{g(1000 m)} \approxeq 98.9949493661167m/s\)</span>.</p>
+<p>Clearly, <span class="math inline">W_g = -mg \Delta x_y = W_K = \Delta \frac{1}{2}mv^2</span>.<br />
+So <span class="math inline">-mg(-500 m) = \frac{1}{2}m(v_f^2 - v_i^2)</span> and <span class="math inline">-2g(-500 m) = v_f^2 - v_i^2</span>.<br />
+So <span class="math inline">g(1000 m) + v_i^2 = v_f^2</span>. Clearly, <span class="math inline">v_i = 0</span> since the skier starts from rest.<br />
+So <span class="math inline">v_f = \sqrt{g(1000 m)} \approxeq 98.9949493661167m/s</span>.</p>
 </blockquote>
 <h3 id="power">Power</h3>
-<p>Power is the <strong>rate at which work is done</strong>. It is defined as <span class="math inline">\(P = \frac{\dee W}{\dee t}\)</span>, or <span class="math inline">\(P = \frac{\dee (\vec{F} \cdot \vec{x})}{\dee t} = \vec{F} \cdot \frac{\dee \vec{x}}{\dee t} = \vec{F} \cdot \vec{v}\)</span>.</p>
-<p>Average power is defined as <span class="math inline">\(\frac{\Delta W}{\Delta t}\)</span>.</p>
-<p>The unit of power is the Watt, where <span class="math inline">\(1W = J/s\)</span> (joules per second).</p>
+<p>Power is the <strong>rate at which work is done</strong>. It is defined as <span class="math inline">P = \frac{\dee W}{\dee t}</span>, or <span class="math inline">P = \frac{\dee (\vec{F} \cdot \vec{x})}{\dee t} = \vec{F} \cdot \frac{\dee \vec{x}}{\dee t} = \vec{F} \cdot \vec{v}</span>.</p>
+<p>Average power is defined as <span class="math inline">\frac{\Delta W}{\Delta t}</span>.</p>
+<p>The unit of power is the Watt, where <span class="math inline">1W = J/s</span> (joules per second).</p>
 <h3 id="potential-energy">Potential Energy</h3>
-<p>We often represent kinetic energy with <span class="math inline">\(E_k = K\)</span>, and potential energy with <span class="math inline">\(E_p = U\)</span>.</p>
+<p>We often represent kinetic energy with <span class="math inline">E_k = K</span>, and potential energy with <span class="math inline">E_p = U</span>.</p>
 <p>A force is <strong>conservative</strong> if and only if the amount of work done by the force is independent of the specific path travelled. Otherwise, it is <strong>non-conservative</strong>.</p>
 <p>In other words, a conservative force is one that does the same amount of work regardless of whether an object travels from point A to B by a straight line, spiral, or semicircle. If an object travels in a circle, a conservative force will always do zero work on the object.</p>
 <p>For example, friction is non-conservative, because if an object travels in a circle back to its original position, negative work is done. The amount of work done by friction depends on the distance travelled, not the displacement.</p>
 <p>For example, gravitational force is conservative because as an object moves up, work is negative and stored as potential energy, and as it moves down, the potential energy is converted into kinetic energy. These two balance out and the amount of work done depends only on the displacement.</p>
 <p>For example, force from an ideal spring is conservative because the work is negative when compressing/stretching and positive when returning to rest position, and these two balance out.</p>
-<p>We can mathematically determine if a force is conservative by setting <span class="math inline">\(\Delta \vec{x} = \vec{0}\)</span> and <span class="math inline">\(x &gt; 0\)</span> and checking if the work done is always 0.</p>
+<p>We can mathematically determine if a force is conservative by setting <span class="math inline">\Delta \vec{x} = \vec{0}</span> and <span class="math inline">x &gt; 0</span> and checking if the work done is always 0.</p>
 <p>To expand on a previous point, potential energy (specifically, elastic energy) is stored in a spring when we compress it. When the spring exapnds again, the potential energy is converted into kinetic energy and a negligible amount of other types of energy (like thermal energy).</p>
-<p>The change in potential energy associated with a conservative force is the opposite of the work done by the force as it acts over any path from point A to point B. So <span class="math inline">\(\Delta U_{AB} = -W_{AB}\)</span>.</p>
+<p>The change in potential energy associated with a conservative force is the opposite of the work done by the force as it acts over any path from point A to point B. So <span class="math inline">\Delta U_{AB} = -W_{AB}</span>.</p>
 <p>So if work was done by a force and kinetic energy increases, then potential energy must decrease.</p>
-<p>So the potential energy associated with a force is the opposite of the amount of work done by it. So the amount of potential energy stored by a spring is <span class="math inline">\(U_S = \frac{1}{2}kx^2\)</span>.</p>
+<p>So the potential energy associated with a force is the opposite of the amount of work done by it. So the amount of potential energy stored by a spring is <span class="math inline">U_S = \frac{1}{2}kx^2</span>.</p>
 <h3 id="spring-block-systems">Spring-Block Systems</h3>
 <p>Consider a spring anchored at one end to a fixed point in the reference frame, and the other end anchored to a block:</p>
 <pre><code>#        -------
 #/\/\/\/\| $m$ |
 #        -------</code></pre>
-<p>This is almost an isolated system, since is basically no interactions with its environment. So the energy in the system is constant and <span class="math inline">\(\Delta E = 0\)</span>.</p>
-<p>So <span class="math inline">\(\Delta E = \Delta K + \Delta U = 0\)</span> (total energy is kinetic plus potential energy) and <span class="math inline">\(\Delta K = -\Delta U\)</span>.</p>
+<p>This is almost an isolated system, since is basically no interactions with its environment. So the energy in the system is constant and <span class="math inline">\Delta E = 0</span>.</p>
+<p>So <span class="math inline">\Delta E = \Delta K + \Delta U = 0</span> (total energy is kinetic plus potential energy) and <span class="math inline">\Delta K = -\Delta U</span>.</p>
 <p>In this system, all of the potential energy is that stored in the spring, and all the kinetic energy is provided by the block (since the spring is massless).</p>
 <h3 id="mechanical-energy-conservation">Mechanical Energy Conservation</h3>
 <p>The basic idea is to be able to identify systems that are mechanically isolated (mechanical energy is constant), so we can convert between potential and kinetic energy.</p>
-<p>If no external forces act on the system and all internal forces are conservative, then mechanical energy, <span class="math inline">\(E = K + U\)</span>, is constant.</p>
-<p>Since <span class="math inline">\(\Delta E = \Delta K + \Delta U = 0\)</span>, then <span class="math inline">\(\Delta K = -\Delta U\)</span>. Also, <span class="math inline">\(W = K = -U\)</span>, where <span class="math inline">\(W\)</span> is the work done.</p>
+<p>If no external forces act on the system and all internal forces are conservative, then mechanical energy, <span class="math inline">E = K + U</span>, is constant.</p>
+<p>Since <span class="math inline">\Delta E = \Delta K + \Delta U = 0</span>, then <span class="math inline">\Delta K = -\Delta U</span>. Also, <span class="math inline">W = K = -U</span>, where <span class="math inline">W</span> is the work done.</p>
 <p>If there are non-conservative forces in the system, then mechanical energy is not necessarily constant. For example, friction turns kinetic energy into thermal energy.</p>
-<p>For these systems, <span class="math inline">\(W_{net} = \Delta K = W_{conserved} + W_{nonconserved}\)</span> and <span class="math inline">\(\Delta K + \Delta U = W_{nonconserved}\)</span>.</p>
+<p>For these systems, <span class="math inline">W_{net} = \Delta K = W_{conserved} + W_{nonconserved}</span> and <span class="math inline">\Delta K + \Delta U = W_{nonconserved}</span>.</p>
 <h3 id="potential-plots">Potential Plots</h3>
 <p>We can plot potential energy vs. time to perform qualitative analysis of physical systems. For example, the potential curve of a roller coaster looks roughly like the track itself.</p>
 <p>We can also use a stacked area plot to show the kinetic and potential energy at the same time. For example, if we have a roller coaster and plot the kinetic and potential energy, we notice that the roller coaster car cannot move above the top line due to a lack of energy.</p>
 <p>If the car is bounded on both sides by hills that rise above the total energy, then the car is trapped in this valley and cannot escape due to a lack of energy. Instead, it rocks back and forth between the two hills.</p>
 <p>An <strong>equilibrium</strong> is a point where the potential is lowest.</p>
-<p>The slope of the plot is the force on the object. In other words, <span class="math inline">\(\frac{\dee U}{\dee t} = F\)</span>.</p>
+<p>The slope of the plot is the force on the object. In other words, <span class="math inline">\frac{\dee U}{\dee t} = F</span>.</p>
 <p>The x-axis doesn't necessarily have to be time. It could also be distance from a reference point, angle, or something else.</p>
 <p>For example, a person on a swing set usually does not have enough mechanical energy to swing all the way around in a full circle. As a result, the person oscillates back and forth between maximum potential energy with zero kinetic energy at the top of each swing, and zero potential energy and maximum kinetic energy at the bottom of each swing.</p>
 <p>However, if we were to start with enough kinetic energy, we would be able to overcome this &quot;hill&quot; at the top and go all the way around the swing.</p>
@@ -724,32 +757,32 @@ So <span class="math inline">\(v_f = \sqrt{g(1000 m)} \approxeq 98.9949493661167
 <p>So far we have been working with point masses - masses that occupy only a single point in space. In the real world though, objects are made of many particles.</p>
 <p>We model objects as a collection of particles with distinct locations and masses, and give them constraints such as having a fixed distance to other particles in order to make rigid objects.</p>
 <h3 id="linear-momentum">Linear Momentum</h3>
-<p>The linear momentum of an object is the product of its mass and its velocity. In other words, <span class="math inline">\(\vec{p} = m\vec{v}\)</span>.</p>
-<p>We can therefore write the second law of motion as <span class="math inline">\(\vec{F} = m\vec{a} = \frac{\dee m\vec{v}}{\dee t} = \frac{\dee \vec{p}}{\dee t}\)</span>.</p>
-<p>The <strong>net momentum</strong> is the total momentum in a system. It is denoted <span class="math inline">\(\vec{P} = \sum_{i = 1}^N m_i \vec{v}_i\)</span>.</p>
+<p>The linear momentum of an object is the product of its mass and its velocity. In other words, <span class="math inline">\vec{p} = m\vec{v}</span>.</p>
+<p>We can therefore write the second law of motion as <span class="math inline">\vec{F} = m\vec{a} = \frac{\dee m\vec{v}}{\dee t} = \frac{\dee \vec{p}}{\dee t}</span>.</p>
+<p>The <strong>net momentum</strong> is the total momentum in a system. It is denoted <span class="math inline">\vec{P} = \sum_{i = 1}^N m_i \vec{v}_i</span>.</p>
 <p>This can also represent the net momentum of an object - an object can be considered its own system.</p>
-<p>So <span class="math inline">\(\frac{\dee \vec{P}}{\dee t} = \vec{F}_{net}\)</span> - the change in total momentum is the net force.</p>
-<p>If an isolated system has <span class="math inline">\(\vec{F}_{net} = 0\)</span>, then <span class="math inline">\(\Delta \vec{P} = \vec{P}_f - \vec{P}_i = 0\)</span> and <span class="math inline">\(\vec{P}_f = \vec{P}_i\)</span>. In other words, if there is no net force, then <strong>total linear momentum is conserved</strong>.</p>
+<p>So <span class="math inline">\frac{\dee \vec{P}}{\dee t} = \vec{F}_{net}</span> - the change in total momentum is the net force.</p>
+<p>If an isolated system has <span class="math inline">\vec{F}_{net} = 0</span>, then <span class="math inline">\Delta \vec{P} = \vec{P}_f - \vec{P}_i = 0</span> and <span class="math inline">\vec{P}_f = \vec{P}_i</span>. In other words, if there is no net force, then <strong>total linear momentum is conserved</strong>.</p>
 <h2 id="center-of-mass">Center of Mass</h2>
 <p>The center of mass (CM) of an object is the point on an object on which it balances. More importantly, if we consider the center of mass for an object, it behaves a lot like a point mass, which significantly simplifies many calculations.</p>
-<p>Clearly, <span class="math inline">\(F_{net} = \frac{\dee \vec{P}}{\dee t} = \frac{\dee}{\dee t} \sum_{i = 0}^N m_i \vec{v}_i = \frac{\dee^2}{\dee t^2} \sum_{i = 0}^N m_i \vec{x}_i\)</span>.</p>
-<p>Let <span class="math inline">\(M = \sum_{i = 0}^N m_i\)</span>. Then <span class="math inline">\(F_{net} = M\vec{a}_{net} = M \frac{\dee^2}{\dee t^2} \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i\)</span>.</p>
-<p>Then <span class="math inline">\(\vec{a}_{net} = \frac{\dee^2}{\dee t^2} \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i\)</span> and <span class="math inline">\(\vec{x}_{CM} = \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i\)</span>.</p>
-<p>The location <span class="math inline">\(\vec{x}_{CM}\)</span> is the point on an object where <span class="math inline">\(F_{net} = M\vec{a}\)</span>. In other words, the point where the second law of motion holds.</p>
-<p>In the same way, we can define the velocity and acceleration of an object in terms of its center of mass. So <span class="math inline">\(\vec{v}_{CM} = \frac{\dee \vec{x}_{CM}}{\dee t}\)</span> and <span class="math inline">\(\vec{a}_{CM} = \frac{\dee^2 \vec{x}_{CM}}{\dee t^2}\)</span>.</p>
-<p>However, finding <span class="math inline">\(\vec{x}_{CM}\)</span> can be difficult, since in reality objects will have a huge number of particles, and it would be highly impractical to calculate the center of mass using the obvious way.</p>
+<p>Clearly, <span class="math inline">F_{net} = \frac{\dee \vec{P}}{\dee t} = \frac{\dee}{\dee t} \sum_{i = 0}^N m_i \vec{v}_i = \frac{\dee^2}{\dee t^2} \sum_{i = 0}^N m_i \vec{x}_i</span>.</p>
+<p>Let <span class="math inline">M = \sum_{i = 0}^N m_i</span>. Then <span class="math inline">F_{net} = M\vec{a}_{net} = M \frac{\dee^2}{\dee t^2} \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i</span>.</p>
+<p>Then <span class="math inline">\vec{a}_{net} = \frac{\dee^2}{\dee t^2} \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i</span> and <span class="math inline">\vec{x}_{CM} = \frac{1}{M} \sum_{i = 0}^N m_i \vec{x}_i</span>.</p>
+<p>The location <span class="math inline">\vec{x}_{CM}</span> is the point on an object where <span class="math inline">F_{net} = M\vec{a}</span>. In other words, the point where the second law of motion holds.</p>
+<p>In the same way, we can define the velocity and acceleration of an object in terms of its center of mass. So <span class="math inline">\vec{v}_{CM} = \frac{\dee \vec{x}_{CM}}{\dee t}</span> and <span class="math inline">\vec{a}_{CM} = \frac{\dee^2 \vec{x}_{CM}}{\dee t^2}</span>.</p>
+<p>However, finding <span class="math inline">\vec{x}_{CM}</span> can be difficult, since in reality objects will have a huge number of particles, and it would be highly impractical to calculate the center of mass using the obvious way.</p>
 <h3 id="rigid-bodies">Rigid Bodies</h3>
 <p>We must use some tricks to make this process easier. For example, spheres and boxes of uniform density have their center of mass at their geometric center.</p>
 <p>In this course, we will focus on objects of uniform density that are perfectly rigid (no deformations).</p>
 <p>When we have the center of mass for an object, we can break down its motion into translational motion of the center of mass, and the rotational motion of particles about the center of mass.</p>
-<p><strong>Density</strong> is the amount of mass given a volume. It is often represented using <span class="math inline">\(\rho = \frac{m}{V}\)</span>, and has units of <span class="math inline">\(kg/m^3\)</span>.</p>
+<p><strong>Density</strong> is the amount of mass given a volume. It is often represented using <span class="math inline">\rho = \frac{m}{V}</span>, and has units of <span class="math inline">kg/m^3</span>.</p>
 <p>Assume that the density is constant.</p>
-<p>Clearly, <span class="math inline">\(\vec{x}_{CM} = \frac{\sum m_i \vec{x}_i}{\sum m_i} = \vec{x}_{CM} = \frac{\sum \rho_i V \vec{x}_i}{\sum \rho_i V}\)</span> for an object made up of particles. It is useful to pretend that rigid bodies (objects that do not deform) are actually made of <strong>infinitely many infinitely small particles</strong>.</p>
+<p>Clearly, <span class="math inline">\vec{x}_{CM} = \frac{\sum m_i \vec{x}_i}{\sum m_i} = \vec{x}_{CM} = \frac{\sum \rho_i V \vec{x}_i}{\sum \rho_i V}</span> for an object made up of particles. It is useful to pretend that rigid bodies (objects that do not deform) are actually made of <strong>infinitely many infinitely small particles</strong>.</p>
 <p>The center of mass in an object is the weighted average of all the positions, weighted by the mass of each position.</p>
-<p>When we do this, we can generalize this using integrals, so <span class="math inline">\(\vec{x}_{CM} = \frac{\int \vec{x}_i \dee m}{\int \dee m} = \frac{\int \rho(\vec{x}) \vec{x} \dee V}{\int \rho(\vec{x}) \dee V}\)</span>. The mass of each particle becomes <span class="math inline">\(\dee m = \rho \dee V\)</span>.</p>
-<p>Basically, we make it so that density and mass are functions of position, so <span class="math inline">\(\rho(\vec{x}) = \frac{m(\vec{x})}{V}\)</span></p>
-<p>When we integrate with respect to volume <span class="math inline">\(V\)</span>, it is known as a <strong>volume integral</strong>. Basically, <span class="math inline">\(\int f \dee V = \iiint f(x, y, z) \dee x \dee y \dee z\)</span>.</p>
-<p>Find the center of mass of a solid cone with height <span class="math inline">\(h\)</span> and base radius <span class="math inline">\(r\)</span>:</p>
+<p>When we do this, we can generalize this using integrals, so <span class="math inline">\vec{x}_{CM} = \frac{\int \vec{x}_i \dee m}{\int \dee m} = \frac{\int \rho(\vec{x}) \vec{x} \dee V}{\int \rho(\vec{x}) \dee V}</span>. The mass of each particle becomes <span class="math inline">\dee m = \rho \dee V</span>.</p>
+<p>Basically, we make it so that density and mass are functions of position, so <span class="math inline">\rho(\vec{x}) = \frac{m(\vec{x})}{V}</span></p>
+<p>When we integrate with respect to volume <span class="math inline">V</span>, it is known as a <strong>volume integral</strong>. Basically, <span class="math inline">\int f \dee V = \iiint f(x, y, z) \dee x \dee y \dee z</span>.</p>
+<p>Find the center of mass of a solid cone with height <span class="math inline">h</span> and base radius <span class="math inline">r</span>:</p>
 <pre><code>           $h$ $x$
     /|\     &lt;   &lt;
    / | \    |   |
@@ -760,113 +793,113 @@ So <span class="math inline">\(v_f = \sqrt{g(1000 m)} \approxeq 98.9949493661167
      ^--^   $R$</code></pre>
 <blockquote>
 <p>Since the cone is symmetric about its central axis, the center of mass must be located on this axis.<br />
-Let <span class="math inline">\(R(x) = kx\)</span> represent the radius at any extent <span class="math inline">\(x\)</span>.<br />
-Since <span class="math inline">\(R(h) = r\)</span>, <span class="math inline">\(R(x) = \frac{r}{h}x\)</span>. Clearly, for each disk of the cone, <span class="math inline">\(\dee m = \rho(x) \dee x = \rho_0 \pi R(x)^2 \dee x\)</span>. So <span class="math inline">\(x_{CM} = \frac{\int_0^h x \dee m}{\int_0^h \dee m} = \frac{\int_0^h x \rho_0 \pi R(x)^2 \dee x}{\int_0^h \rho_0 \pi R(x)^2 \dee x} = \frac{\rho_0 \pi r^2}{h^2} \frac{h^2}{\rho_0 \pi r^2} \frac{\int_0^h x^3 \dee x}{\int_0^h x^2 \dee x} = \frac{\frac{h^4}{4}}{\frac{h^3}{3}} = \frac{3}{4}h\)</span>.</p>
+Let <span class="math inline">R(x) = kx</span> represent the radius at any extent <span class="math inline">x</span>.<br />
+Since <span class="math inline">R(h) = r</span>, <span class="math inline">R(x) = \frac{r}{h}x</span>. Clearly, for each disk of the cone, <span class="math inline">\dee m = \rho(x) \dee x = \rho_0 \pi R(x)^2 \dee x</span>. So <span class="math inline">x_{CM} = \frac{\int_0^h x \dee m}{\int_0^h \dee m} = \frac{\int_0^h x \rho_0 \pi R(x)^2 \dee x}{\int_0^h \rho_0 \pi R(x)^2 \dee x} = \frac{\rho_0 \pi r^2}{h^2} \frac{h^2}{\rho_0 \pi r^2} \frac{\int_0^h x^3 \dee x}{\int_0^h x^2 \dee x} = \frac{\frac{h^4}{4}}{\frac{h^3}{3}} = \frac{3}{4}h</span>.</p>
 </blockquote>
-<p>The formula for finding the center of mass for a symmetric object is <span class="math inline">\(x_{CM} = \frac{\int_{x_1}^{x_2} x A(x) \dee x}{\int_{x_1}^{x_2} A(x) \dee x}\)</span> where <span class="math inline">\(x\)</span> is the extent along the axis of symmetry and <span class="math inline">\(A(x)\)</span> is the area of the cross section at extent <span class="math inline">\(x\)</span>.</p>
+<p>The formula for finding the center of mass for a symmetric object is <span class="math inline">x_{CM} = \frac{\int_{x_1}^{x_2} x A(x) \dee x}{\int_{x_1}^{x_2} A(x) \dee x}</span> where <span class="math inline">x</span> is the extent along the axis of symmetry and <span class="math inline">A(x)</span> is the area of the cross section at extent <span class="math inline">x</span>.</p>
 <h1 id="section-5">7/4/14</h1>
 <h2 id="collisions">Collisions</h2>
 <p>Collisions are generally isolated systems. As a result, linear momentum and is conserved.</p>
 <p><strong>Elastic collisions</strong> are those where where kinetic energy is conserved. In nature, only things like electrons can do this. Bouncy balls are a close approximation of elastic collision.</p>
 <p><strong>Inelastic collisions</strong> are those where kinetic energy is not conserved - energy is converted into other forms like thermal energy or sound energy. Examples of this are car collisions and dropped eggs.</p>
 <p><strong>Completely inelastic collisions</strong> are those where the largest possible amount of kinetic energy is lost. In this case, the two objects simply stay together, rather than bounce apart, because the energy is lost.</p>
-<p>Linear momentum being conserved means that <span class="math inline">\(\sum \vec{p}_f = \sum \vec{p}_i\)</span>. Kinetic energy being conserved means that <span class="math inline">\(\sum \frac{1}{2}mv_f^2 = \sum \frac{1}{2}mv_i^2\)</span>. However, the linear momentum and kinetic energy of individual objects in the system can still change.</p>
-<p>Assume kinetic energy is conserved. Then <span class="math inline">\(\frac{1}{2}m_1v_{1, f}^2 + \frac{1}{2}m_2v_{2, f}^2 = \frac{1}{2}m_1v_{1, i}^2 + \frac{1}{2}m_2v_{2, i}^2\)</span>.</p>
-<p>So <span class="math inline">\(m_1v_{1, f}^2 - m_1v_{1, i}^2 = m_2v_{2, i}^2 - m_2v_{2, f}^2\)</span> and <span class="math inline">\(m_1(v_{1, f} - v_{1, i})(v_{1, f} + v_{1, i}) = m_2(v_{2, f} - v_{2, i})(v_{2, f} + v_{2, i})\)</span>.</p>
-<p>Since momentum is conserved, <span class="math inline">\(m_1(v_{1, f} - v_{1, i}) = m_2(v_{2, f} - v_{2, i})\)</span>. So <span class="math inline">\(m_1(v_{1, f} - v_{1, i})(v_{1, f} + v_{1, i}) = m_1(v_{1, f} - v_{1, i})(v_{2, f} + v_{2, i})\)</span>.</p>
-<p>So <span class="math inline">\(v_{1, f} + v_{1, i} = v_{2, f} + v_{2, i}\)</span> if kinetic energy is conserved. Interestingly, if object 1 is moving and object 2 is stationary, then object 1 stops and object 2 starts moving with velocity proportional to the mass ratio.</p>
+<p>Linear momentum being conserved means that <span class="math inline">\sum \vec{p}_f = \sum \vec{p}_i</span>. Kinetic energy being conserved means that <span class="math inline">\sum \frac{1}{2}mv_f^2 = \sum \frac{1}{2}mv_i^2</span>. However, the linear momentum and kinetic energy of individual objects in the system can still change.</p>
+<p>Assume kinetic energy is conserved. Then <span class="math inline">\frac{1}{2}m_1v_{1, f}^2 + \frac{1}{2}m_2v_{2, f}^2 = \frac{1}{2}m_1v_{1, i}^2 + \frac{1}{2}m_2v_{2, i}^2</span>.</p>
+<p>So <span class="math inline">m_1v_{1, f}^2 - m_1v_{1, i}^2 = m_2v_{2, i}^2 - m_2v_{2, f}^2</span> and <span class="math inline">m_1(v_{1, f} - v_{1, i})(v_{1, f} + v_{1, i}) = m_2(v_{2, f} - v_{2, i})(v_{2, f} + v_{2, i})</span>.</p>
+<p>Since momentum is conserved, <span class="math inline">m_1(v_{1, f} - v_{1, i}) = m_2(v_{2, f} - v_{2, i})</span>. So <span class="math inline">m_1(v_{1, f} - v_{1, i})(v_{1, f} + v_{1, i}) = m_1(v_{1, f} - v_{1, i})(v_{2, f} + v_{2, i})</span>.</p>
+<p>So <span class="math inline">v_{1, f} + v_{1, i} = v_{2, f} + v_{2, i}</span> if kinetic energy is conserved. Interestingly, if object 1 is moving and object 2 is stationary, then object 1 stops and object 2 starts moving with velocity proportional to the mass ratio.</p>
 <p>A 0.05kg bullet travelling 85m/s horizintally hits a 2kg pendulum. How much energy is lost and how high does the pendulum swing?</p>
 <blockquote>
 <p>Clearly, the collision is perfectly inelastic since the bullet embeds itself in the pendulum. So the final speed of the two is constant.<br />
-Clearly, <span class="math inline">\(0.05 kg \cdot 85 m/s \text{ [right]} + 2 kg \cdot 0 m/s = (0.05 kg + 2 kg) \cdot \vec{v}\)</span>, so <span class="math inline">\(\frac{0.05 kg \cdot 85 m/s \text{ [right]}}{2.05 kg} = \vec{v} = 2.073170731707317 m/s \text{ [right]}\)</span>.<br />
+Clearly, <span class="math inline">0.05 kg \cdot 85 m/s \text{ [right]} + 2 kg \cdot 0 m/s = (0.05 kg + 2 kg) \cdot \vec{v}</span>, so <span class="math inline">\frac{0.05 kg \cdot 85 m/s \text{ [right]}}{2.05 kg} = \vec{v} = 2.073170731707317 m/s \text{ [right]}</span>.<br />
 So the bullet and pendulum are moving 2.07 m/s rightward after collision.<br />
-Clearly, <span class="math inline">\(E_g = E_k\)</span>, so <span class="math inline">\(mgh = \frac{1}{2}mv^2\)</span>. So <span class="math inline">\(h = \frac{\frac{1}{2}(2.073170731707317 m/s)^2}{9.8 m/s^2} = 0.219287596061625 m\)</span>.<br />
+Clearly, <span class="math inline">E_g = E_k</span>, so <span class="math inline">mgh = \frac{1}{2}mv^2</span>. So <span class="math inline">h = \frac{\frac{1}{2}(2.073170731707317 m/s)^2}{9.8 m/s^2} = 0.219287596061625 m</span>.<br />
 So the max height of the pendulum is 0.22 m.</p>
 </blockquote>
 <h3 id="impulses">Impulses</h3>
-<p><strong>Impulses</strong> are changes in momentum - force applied over time, usually on small time scales. They are represented with <span class="math inline">\(\vec{J} = \Delta \vec{p} = \int \vec{F}(t) \dee t\)</span>.</p>
+<p><strong>Impulses</strong> are changes in momentum - force applied over time, usually on small time scales. They are represented with <span class="math inline">\vec{J} = \Delta \vec{p} = \int \vec{F}(t) \dee t</span>.</p>
 <p>For example, a tennis ball bouncing off a wall has the wall exert an impulse on it - it applies a normal force to the ball over the duration that they are colliding. Since the wall is stationary and the ball ends up travelling in the opposite direction, the impulse applies twice the momentum the ball had before impact (one times the momentum to stop the ball, one more time to make it bounce back).</p>
 <p>Also, the third law of motion applies here, so any impulse an object applies has an equal and opposite impulse applied to it.</p>
-<p>Impulse is measured with Newton-seconds <span class="math inline">\(N s\)</span>, just like momentum. Force is the change in momentum, so <span class="math inline">\(\vec{p} = \int \vec{F}(t) \dee t\)</span> and <span class="math inline">\(\frac{\dee \vec{p}}{\dee t} = F(t)\)</span>.</p>
+<p>Impulse is measured with Newton-seconds <span class="math inline">N s</span>, just like momentum. Force is the change in momentum, so <span class="math inline">\vec{p} = \int \vec{F}(t) \dee t</span> and <span class="math inline">\frac{\dee \vec{p}}{\dee t} = F(t)</span>.</p>
 <p>In collisions like bouncing a ball, the actual time the objects are colliding are very small, so the forces applied are very large. It is often simpler to treat the collisions as instantaneously transferring momentum of the object rather than as a force working over time.</p>
 <p>The amount of impulse applied can be determined by looking at the change in the speed of an object. For example, a ball that bounces right back after hitting a wall has had applied to it</p>
 <p>If 100 0.05kg marbles are being poured on a scale over 5 s from 5 m up, each one bouncing off the scale after impact, then what is the average reading shown on the scale?</p>
 <blockquote>
-<p>Clearly, the marbles hit the scale at <span class="math inline">\(100/5 s = 20/s\)</span>.<br />
-Clearly, <span class="math inline">\(v_f^2 = (0 m/s)^2 + 2\vec{g} \cdot 1.5 m [down]\)</span>, so <span class="math inline">\(v_f = \sqrt{2 \cdot 9.8 m/s^2 \cdot 1.5 m} = 5.422176684690384 m/s\)</span>, the final velocity of the marbles.<br />
-Since the marbles bounce off perfectly elastically, the velocity after impact is <span class="math inline">\(-\vec{v}_f\)</span> and the impulse delivered is twice the momentum of the marble.<br />
-So each marble delivers an impulse of <span class="math inline">\(2 \cdot 0.05 kg \cdot 5.422176684690384 m/s = 0.542217668469038 kg m/s\)</span> (the 2 is because it is twice the momentum), and the force is <span class="math inline">\(20/s \cdot 0.542217668469038 kg m/s = 10.844353369380767 N\)</span>.<br />
-So the scale reads <span class="math inline">\(\frac{10.844353369380767 N}{9.8 m/s^2} = 1.106566670344976 kg\)</span>.</p>
+<p>Clearly, the marbles hit the scale at <span class="math inline">100/5 s = 20/s</span>.<br />
+Clearly, <span class="math inline">v_f^2 = (0 m/s)^2 + 2\vec{g} \cdot 1.5 m [down]</span>, so <span class="math inline">v_f = \sqrt{2 \cdot 9.8 m/s^2 \cdot 1.5 m} = 5.422176684690384 m/s</span>, the final velocity of the marbles.<br />
+Since the marbles bounce off perfectly elastically, the velocity after impact is <span class="math inline">-\vec{v}_f</span> and the impulse delivered is twice the momentum of the marble.<br />
+So each marble delivers an impulse of <span class="math inline">2 \cdot 0.05 kg \cdot 5.422176684690384 m/s = 0.542217668469038 kg m/s</span> (the 2 is because it is twice the momentum), and the force is <span class="math inline">20/s \cdot 0.542217668469038 kg m/s = 10.844353369380767 N</span>.<br />
+So the scale reads <span class="math inline">\frac{10.844353369380767 N}{9.8 m/s^2} = 1.106566670344976 kg</span>.</p>
 </blockquote>
-<p>A 40 kg block and a 10 kg block at rest connected with a spring with constant <span class="math inline">\(k = 10 N/m\)</span>. The 40 kg block applies an impulse of 20 N s to the other one. What is the longest distance the spring compresses?</p>
+<p>A 40 kg block and a 10 kg block at rest connected with a spring with constant <span class="math inline">k = 10 N/m</span>. The 40 kg block applies an impulse of 20 N s to the other one. What is the longest distance the spring compresses?</p>
 <pre><code>--------  ---&gt; 20 Ns  --------
 | 40kg |-/\/\/\/\/\/\-| 10kg |
 --------  k = 10 N/m  --------</code></pre>
 <blockquote>
-<p>Clearly, the collision is fully elastic, since it is connected by an ideal spring. So kinetic energy combined with elastic energy is conserved - <span class="math inline">\(E_k + E_e\)</span> is constant.<br />
+<p>Clearly, the collision is fully elastic, since it is connected by an ideal spring. So kinetic energy combined with elastic energy is conserved - <span class="math inline">E_k + E_e</span> is constant.<br />
 In an elastic collision, the first block must stop and the second will start moving.<br />
 Clearly, the spring is compressed when both blocks are moving at the same speed. Assume they are.<br />
-So <span class="math inline">\(E_{k, \text{after}} + E_{e, \text{after}} = E_{k, \text{same speed}} + E_{e, \text{same speed}}\)</span>.<br />
-Clearly, <span class="math inline">\(J = 20 N s = mv_{\text{same speed}}\)</span>, so <span class="math inline">\(v_{\text{same speed}} = \frac{20 N s}{10 kg} = 2 m/s\)</span>, the final velocity of the 10 kg block when the collision is completely over.<br />
-Clearly, the final kinetic energy is <span class="math inline">\(\frac{1}{2} 10 kg \cdot (2 m/s)^2 = 20 J\)</span>.<br />
-Clearly, if the two blocks have the same speed, then <span class="math inline">\(v = \frac{20 N s}{40 kg + 10 kg} = 0.4 m/s\)</span>, the velocity of both blocks at the moment when their speeds are the same.<br />
-Clearly, the kinetic energy when the objects have the same speed is <span class="math inline">\(\frac{1}{2} 50 kg \cdot (0.4 m/s)^2 = 4 J\)</span>.<br />
-So <span class="math inline">\(20 J + 0 J = 4 J + E_{e, \text{same speed}}\)</span>, and <span class="math inline">\(E_{e, \text{same speed}} = 16 J\)</span>.<br />
-Clearly, <span class="math inline">\(E_{e, \text{same speed}} = 16 J = \frac{1}{2}(10 N/m)x^2\)</span>, so <span class="math inline">\(x = 1.788854381999832 m\)</span>.<br />
+So <span class="math inline">E_{k, \text{after}} + E_{e, \text{after}} = E_{k, \text{same speed}} + E_{e, \text{same speed}}</span>.<br />
+Clearly, <span class="math inline">J = 20 N s = mv_{\text{same speed}}</span>, so <span class="math inline">v_{\text{same speed}} = \frac{20 N s}{10 kg} = 2 m/s</span>, the final velocity of the 10 kg block when the collision is completely over.<br />
+Clearly, the final kinetic energy is <span class="math inline">\frac{1}{2} 10 kg \cdot (2 m/s)^2 = 20 J</span>.<br />
+Clearly, if the two blocks have the same speed, then <span class="math inline">v = \frac{20 N s}{40 kg + 10 kg} = 0.4 m/s</span>, the velocity of both blocks at the moment when their speeds are the same.<br />
+Clearly, the kinetic energy when the objects have the same speed is <span class="math inline">\frac{1}{2} 50 kg \cdot (0.4 m/s)^2 = 4 J</span>.<br />
+So <span class="math inline">20 J + 0 J = 4 J + E_{e, \text{same speed}}</span>, and <span class="math inline">E_{e, \text{same speed}} = 16 J</span>.<br />
+Clearly, <span class="math inline">E_{e, \text{same speed}} = 16 J = \frac{1}{2}(10 N/m)x^2</span>, so <span class="math inline">x = 1.788854381999832 m</span>.<br />
 So the maximum compression of the spring is 1.79 m.</p>
 </blockquote>
 <h2 id="rotational-dynamics">Rotational Dynamics</h2>
 <p>A rigid body cannot be deformed. As a result, the locations of all the particles in the object stay the same relative to each other.</p>
-<p>Consider a point on a rotating object, <span class="math inline">\(P\)</span>, rotating around a point, <span class="math inline">\(\vec{C}\)</span>. In 3D, the object rotates around a line.</p>
-<p><span class="math inline">\(P\)</span> is in circular motion about the point/line of rotation, since the distance between the point of rotation and the point is constant. Every particle in the body is in circular motion with its own radius and velocity.</p>
-<p>Here, <span class="math inline">\(\vec{r}\)</span> represents the displacement of <span class="math inline">\(P\)</span> from the point/line of rotation - <span class="math inline">\(\vec{r} = \vec{P} - \vec{C}\)</span>. In 3D, this is the shortest distance between the line and the point.</p>
+<p>Consider a point on a rotating object, <span class="math inline">P</span>, rotating around a point, <span class="math inline">\vec{C}</span>. In 3D, the object rotates around a line.</p>
+<p><span class="math inline">P</span> is in circular motion about the point/line of rotation, since the distance between the point of rotation and the point is constant. Every particle in the body is in circular motion with its own radius and velocity.</p>
+<p>Here, <span class="math inline">\vec{r}</span> represents the displacement of <span class="math inline">P</span> from the point/line of rotation - <span class="math inline">\vec{r} = \vec{P} - \vec{C}</span>. In 3D, this is the shortest distance between the line and the point.</p>
 <h3 id="kinematics-1">Kinematics</h3>
-<p>The motion along the arc of the circle can be treated using 1D kinematics. We simply choose a reference point <span class="math inline">\(s(0)\)</span>, and <span class="math inline">\(s(t)\)</span> represents how far we travel along the arc. We don't use vectors because the distance travelled is not the same as displacement.</p>
-<p>The velocity and the acceleration are always tangent to the circle, so <span class="math inline">\(\vec{v} = \frac{\dee s}{\dee t} \text{ [perpendicular to } \vec{r} \text{]}\)</span> and <span class="math inline">\(\vec{a} = \frac{\dee^2 s}{\dee t^2} \text{ [perpendicular to } \vec{r} \text{]}\)</span>.</p>
+<p>The motion along the arc of the circle can be treated using 1D kinematics. We simply choose a reference point <span class="math inline">s(0)</span>, and <span class="math inline">s(t)</span> represents how far we travel along the arc. We don't use vectors because the distance travelled is not the same as displacement.</p>
+<p>The velocity and the acceleration are always tangent to the circle, so <span class="math inline">\vec{v} = \frac{\dee s}{\dee t} \text{ [perpendicular to } \vec{r} \text{]}</span> and <span class="math inline">\vec{a} = \frac{\dee^2 s}{\dee t^2} \text{ [perpendicular to } \vec{r} \text{]}</span>.</p>
 <p>We define the positive direction to be counterclockwise in this course.</p>
-<p>The problem with this approach is that each particle has its own value of <span class="math inline">\(\vec{r}\)</span>, so every particle has a different formula for velocity and acceleration.</p>
-<p>However, angle of rotation is the same for all the particles. Clearly, <span class="math inline">\(s(t) = r \theta(t)\)</span>, where <span class="math inline">\(\theta(t)\)</span> is in radians. So <span class="math inline">\(v = r \frac{\dee \theta}{\dee t}\)</span> and <span class="math inline">\(a = r \frac{\dee^2 \theta}{\dee t^2}\)</span>.</p>
-<p>Now we define angular quantities for convenience. <span class="math inline">\(\theta\)</span> is angular position, <span class="math inline">\(\omega = \frac{\dee \theta}{\dee t}\)</span> is angular velocity, and <span class="math inline">\(\alpha = \frac{\dee^2 \theta}{\dee t^2}\)</span> is the angular acceleration. The units are all based on radians.</p>
-<p>For example, the angular velocity of the second hand on a clock is <span class="math inline">\(2 \pi rad / 1 min = \frac{1}{30}\pi rad\)</span>.</p>
+<p>The problem with this approach is that each particle has its own value of <span class="math inline">\vec{r}</span>, so every particle has a different formula for velocity and acceleration.</p>
+<p>However, angle of rotation is the same for all the particles. Clearly, <span class="math inline">s(t) = r \theta(t)</span>, where <span class="math inline">\theta(t)</span> is in radians. So <span class="math inline">v = r \frac{\dee \theta}{\dee t}</span> and <span class="math inline">a = r \frac{\dee^2 \theta}{\dee t^2}</span>.</p>
+<p>Now we define angular quantities for convenience. <span class="math inline">\theta</span> is angular position, <span class="math inline">\omega = \frac{\dee \theta}{\dee t}</span> is angular velocity, and <span class="math inline">\alpha = \frac{\dee^2 \theta}{\dee t^2}</span> is the angular acceleration. The units are all based on radians.</p>
+<p>For example, the angular velocity of the second hand on a clock is <span class="math inline">2 \pi rad / 1 min = \frac{1}{30}\pi rad</span>.</p>
 <p>The advantage of angular quantities is that they are the same for every possible particle in the rigid body. That means that we can describe the rotational kinematics of the whole object at once.</p>
-<p>To convert between angular and regular quantities, <span class="math inline">\(s = r \theta\)</span>, <span class="math inline">\(v = \omega r\)</span>, and <span class="math inline">\(a = r \alpha\)</span>.</p>
-<p>We can actually use the kinematic equations on this 1D motion, provided <span class="math inline">\(a\)</span> is constant:</p>
+<p>To convert between angular and regular quantities, <span class="math inline">s = r \theta</span>, <span class="math inline">v = \omega r</span>, and <span class="math inline">a = r \alpha</span>.</p>
+<p>We can actually use the kinematic equations on this 1D motion, provided <span class="math inline">a</span> is constant:</p>
 <ul>
-<li><span class="math inline">\(s(t) = s(0) + v(0) t + \frac{1}{2}at^2\)</span>, so <span class="math inline">\(\theta(t) = \theta(0) + \omega(0) t + \frac{1}{2} \alpha t^2\)</span>.</li>
-<li><span class="math inline">\(v(t) = v(0) + at\)</span>, so <span class="math inline">\(\omega(t) = \omega(0) + \alpha t\)</span>.</li>
-<li><span class="math inline">\(v(t)^2 = v(0)^2 + 2a s(t)\)</span>, so <span class="math inline">\(\omega(t)^2 = \omega(0)^2 + 2 \alpha \theta(t)^2\)</span>.</li>
+<li><span class="math inline">s(t) = s(0) + v(0) t + \frac{1}{2}at^2</span>, so <span class="math inline">\theta(t) = \theta(0) + \omega(0) t + \frac{1}{2} \alpha t^2</span>.</li>
+<li><span class="math inline">v(t) = v(0) + at</span>, so <span class="math inline">\omega(t) = \omega(0) + \alpha t</span>.</li>
+<li><span class="math inline">v(t)^2 = v(0)^2 + 2a s(t)</span>, so <span class="math inline">\omega(t)^2 = \omega(0)^2 + 2 \alpha \theta(t)^2</span>.</li>
 </ul>
 <h3 id="representations">Representations</h3>
 <p>How do we represent angular quantities like position, velocity, and acceleration?</p>
-<p>We could represent them in world space, where <span class="math inline">\(\vec{\omega} = \omega_x\hat{i} + \omega_y\hat{j}\)</span>, but this is unwieldy. In particular, for constant speeds the components keep changing.</p>
+<p>We could represent them in world space, where <span class="math inline">\vec{\omega} = \omega_x\hat{i} + \omega_y\hat{j}</span>, but this is unwieldy. In particular, for constant speeds the components keep changing.</p>
 <p>Instead, we use Eulerian rotations. Each component of the quantity is the rotational quantity in that axis. So in 2D, all rotation is about the z-axis, and the x-axis and y-axis rotations are always 0.</p>
 <p>That means the direction of rotational quantities are always parallel to the actual axis the object is rotating about. This applies to torque as well.</p>
 <h3 id="kinetic-energy">Kinetic Energy</h3>
-<p>Clearly, the rotational kinetic energy is the sum of the rotational kinetic energies of each of the particles in the object, <span class="math inline">\(E_k = \sum \frac{1}{2} m_i v_i^2 = \frac{1}{2} \left(\sum m_i r_i^2\right) \omega^2\)</span>.</p>
-<p>Since ordinary kinetic energy is <span class="math inline">\(\frac{1}{2}mv^2\)</span>, the <span class="math inline">\(\sum m_i r_i^2\)</span> acts something like the mass factor, giving inertia to the rotation.</p>
-<p>We define the <strong>moment of inertia</strong> to be <span class="math inline">\(I = \sum m_i r_i^2 = \int r^2 \dee m = \int r^2 \rho \dee V\)</span>. Then <span class="math inline">\(E_k = \frac{1}{2}I\omega^2\)</span>, the rotational kinetic energy.</p>
-<p>Since <span class="math inline">\(r\)</span> is the distance from the axis of rotation to <span class="math inline">\(P\)</span>, the moment of inertia depends on the axis we are rotating in. It is easier to rotate a pole along its length than to twirl it. In 2D, this menas it matters which point we are rotating around.</p>
+<p>Clearly, the rotational kinetic energy is the sum of the rotational kinetic energies of each of the particles in the object, <span class="math inline">E_k = \sum \frac{1}{2} m_i v_i^2 = \frac{1}{2} \left(\sum m_i r_i^2\right) \omega^2</span>.</p>
+<p>Since ordinary kinetic energy is <span class="math inline">\frac{1}{2}mv^2</span>, the <span class="math inline">\sum m_i r_i^2</span> acts something like the mass factor, giving inertia to the rotation.</p>
+<p>We define the <strong>moment of inertia</strong> to be <span class="math inline">I = \sum m_i r_i^2 = \int r^2 \dee m = \int r^2 \rho \dee V</span>. Then <span class="math inline">E_k = \frac{1}{2}I\omega^2</span>, the rotational kinetic energy.</p>
+<p>Since <span class="math inline">r</span> is the distance from the axis of rotation to <span class="math inline">P</span>, the moment of inertia depends on the axis we are rotating in. It is easier to rotate a pole along its length than to twirl it. In 2D, this menas it matters which point we are rotating around.</p>
 <p>The moment of inertia is not always easy to calculate. Some useful ones are below:</p>
 <ul>
-<li>Rotating a point mass, a thin cylindrical shell, or a hoop about its axis of symmetry: <span class="math inline">\(I = mR^2\)</span>, where <span class="math inline">\(R\)</span> is the radius.</li>
-<li>Rotating a thin spherical shell about its center: <span class="math inline">\(I = \frac{2}{3}mR^2\)</span>, where <span class="math inline">\(R\)</span> is the radius.</li>
-<li>Rotating a solid cylinder or disk about its axis of symmetry: <span class="math inline">\(I = \frac{1}{2}mR^2\)</span>, where <span class="math inline">\(R\)</span> is the radius.</li>
-<li>Rotating a solid sphere about its center: <span class="math inline">\(I = \frac{2}{5}mR^2\)</span>, where <span class="math inline">\(R\)</span> i the radius.</li>
-<li>Rotating a long thin rod perpendicular to its length at the center: <span class="math inline">\(I = \frac{1}{12}mL^2\)</span>, where <span class="math inline">\(L\)</span> is the length of the rod.</li>
-<li>Rotating a long thin rod perpendicular to its length at one end: <span class="math inline">\(I = \frac{1}{3}mL^2\)</span>, where <span class="math inline">\(L\)</span> is the length of the rod.</li>
+<li>Rotating a point mass, a thin cylindrical shell, or a hoop about its axis of symmetry: <span class="math inline">I = mR^2</span>, where <span class="math inline">R</span> is the radius.</li>
+<li>Rotating a thin spherical shell about its center: <span class="math inline">I = \frac{2}{3}mR^2</span>, where <span class="math inline">R</span> is the radius.</li>
+<li>Rotating a solid cylinder or disk about its axis of symmetry: <span class="math inline">I = \frac{1}{2}mR^2</span>, where <span class="math inline">R</span> is the radius.</li>
+<li>Rotating a solid sphere about its center: <span class="math inline">I = \frac{2}{5}mR^2</span>, where <span class="math inline">R</span> i the radius.</li>
+<li>Rotating a long thin rod perpendicular to its length at the center: <span class="math inline">I = \frac{1}{12}mL^2</span>, where <span class="math inline">L</span> is the length of the rod.</li>
+<li>Rotating a long thin rod perpendicular to its length at one end: <span class="math inline">I = \frac{1}{3}mL^2</span>, where <span class="math inline">L</span> is the length of the rod.</li>
 </ul>
 <p>For example, finding the moment of inertia for a solid cylinder rotated about its axis of symmetry:</p>
 <blockquote>
-<p>Let <span class="math inline">\(R\)</span> be the radius of the cylinder and <span class="math inline">\(L\)</span> be the length. Then <span class="math inline">\(V = \pi R^2 L\)</span>.<br />
-Clearly, <span class="math inline">\(I = \int r^2 \rho \dee V = \rho \int r^2 \dee V\)</span><br />
-Clearly, <span class="math inline">\(V = \int_0^R 2 \pi r \dee r L\)</span>, so <span class="math inline">\(\dee V = 2 \pi r \dee r L\)</span>.<br />
-So <span class="math inline">\(I = \rho L \int_0^R r^2 2 \pi r \dee r = 2 \pi \rho L \int_0^R r^3 \dee R = 2 \pi \rho L \frac{R^4}{4} = 2 \pi \frac{m}{\pi R^2 L} L \frac{R^4}{4} = m \frac{R^2}{2} = \frac{1}{2}mR^2\)</span>.</p>
+<p>Let <span class="math inline">R</span> be the radius of the cylinder and <span class="math inline">L</span> be the length. Then <span class="math inline">V = \pi R^2 L</span>.<br />
+Clearly, <span class="math inline">I = \int r^2 \rho \dee V = \rho \int r^2 \dee V</span><br />
+Clearly, <span class="math inline">V = \int_0^R 2 \pi r \dee r L</span>, so <span class="math inline">\dee V = 2 \pi r \dee r L</span>.<br />
+So <span class="math inline">I = \rho L \int_0^R r^2 2 \pi r \dee r = 2 \pi \rho L \int_0^R r^3 \dee R = 2 \pi \rho L \frac{R^4}{4} = 2 \pi \frac{m}{\pi R^2 L} L \frac{R^4}{4} = m \frac{R^2}{2} = \frac{1}{2}mR^2</span>.</p>
 </blockquote>
-<p>The <strong>parallel axis theorem</strong> states that <span class="math inline">\(I = I_{CM} + md^2\)</span>. In other words, the moment of inertia for rotating about any point on an object can be calculated from the moment of inertia about the center of mass and the distance from the center of mass.</p>
-<p>For example, the moment of inertia at the end of a long thin rod is <span class="math inline">\(I = I_{CM} + m\left(\frac{L}{2}\right)^2 = \frac{1}{12}mL^2 + \frac{1}{4}mL^2 = \frac{1}{3}mL^2\)</span>, as required.</p>
-<p>If we have multiple parts of an object, like a pendulum having a rod and a bob at the bottom, the total moment of inertia is simply the sum of all the inertias of each object. So <span class="math inline">\(I_{pendulum} = I_{rod} + I_{bob}\)</span>.</p>
+<p>The <strong>parallel axis theorem</strong> states that <span class="math inline">I = I_{CM} + md^2</span>. In other words, the moment of inertia for rotating about any point on an object can be calculated from the moment of inertia about the center of mass and the distance from the center of mass.</p>
+<p>For example, the moment of inertia at the end of a long thin rod is <span class="math inline">I = I_{CM} + m\left(\frac{L}{2}\right)^2 = \frac{1}{12}mL^2 + \frac{1}{4}mL^2 = \frac{1}{3}mL^2</span>, as required.</p>
+<p>If we have multiple parts of an object, like a pendulum having a rod and a bob at the bottom, the total moment of inertia is simply the sum of all the inertias of each object. So <span class="math inline">I_{pendulum} = I_{rod} + I_{bob}</span>.</p>
 <h3 id="torque">Torque</h3>
-<p><strong>Torque</strong> is the tendency for an applied force to cause rotation in an object. We represent it with <span class="math inline">\(\tau\)</span> with the unit Newton-meters <span class="math inline">\(N m\)</span>.</p>
+<p><strong>Torque</strong> is the tendency for an applied force to cause rotation in an object. We represent it with <span class="math inline">\tau</span> with the unit Newton-meters <span class="math inline">N m</span>.</p>
 <pre><code>  lever (r)
 v----------------v
 v pivot
@@ -876,35 +909,35 @@ X================O &lt; force is applied here
     d\       F/
        \    /
          \/ &lt; perpendicular</code></pre>
-<p>Here, <span class="math inline">\(\vec{r}\)</span> is the displacement of the end of the lever, <span class="math inline">\(\vec{F}\)</span> is the applied force, <span class="math inline">\(\theta\)</span> is the angle between <span class="math inline">\(\vec{F}\)</span> and <span class="math inline">\(\vec{r}\)</span>, and <span class="math inline">\(\vec{d}\)</span> is a vector perpendicular to <span class="math inline">\(F\)</span> passing through the pivot.</p>
-<p>In this example, the component of the force along the x-axis, <span class="math inline">\(F \cos \theta\)</span> produces a translational force since it can't turn the object, while the component of the force along the y-axis, <span class="math inline">\(F_t = F \sin \theta\)</span>, goes toward turning the object.</p>
+<p>Here, <span class="math inline">\vec{r}</span> is the displacement of the end of the lever, <span class="math inline">\vec{F}</span> is the applied force, <span class="math inline">\theta</span> is the angle between <span class="math inline">\vec{F}</span> and <span class="math inline">\vec{r}</span>, and <span class="math inline">\vec{d}</span> is a vector perpendicular to <span class="math inline">F</span> passing through the pivot.</p>
+<p>In this example, the component of the force along the x-axis, <span class="math inline">F \cos \theta</span> produces a translational force since it can't turn the object, while the component of the force along the y-axis, <span class="math inline">F_t = F \sin \theta</span>, goes toward turning the object.</p>
 <p>If we applied the force along the displacement of the end of the lever, the object would not be able to rotate, so all the force is applied toward translating the object. If we applied the force exactly perpendicular to the displacement of the end of the lever, all of the force would go toward rotating the object.</p>
-<p>Torque is basically the component of the force that goes into rotating the object - <span class="math inline">\(\magn{\tau} = F r \sin \theta = dF\)</span>. It is positive when the object is being pushed counterclockwise.</p>
+<p>Torque is basically the component of the force that goes into rotating the object - <span class="math inline">\magn{\tau} = F r \sin \theta = dF</span>. It is positive when the object is being pushed counterclockwise.</p>
 <p>The net torque is simply the sum of all torques acting on the object.</p>
-<p>In 3D, <span class="math inline">\(\vec{\tau} = \vec{r} \times \vec{F}\)</span>. In 2D, torque is simply a scalar. However, it still has direction, since it can be positive or negative.</p>
-<p>The cross product of two vectors is always a vector perpendicular to both. To find the direction of the torque, we use the right hand rule - if we make a thumbs-up with our right hand, with the fingers curling from <span class="math inline">\(\vec{r}\)</span> to <span class="math inline">\(\vec{F}\)</span>, the thumb points along the direction of the torque.</p>
-<p>Clearly, <span class="math inline">\(F \sin \theta = ma_{arc} = mr\alpha\)</span>. So <span class="math inline">\(rF \sin \theta = \tau = mr^2 \alpha = I\alpha\)</span>. This is the rotational version of the second law of motion: <span class="math inline">\(\vec{\tau} = I\vec{\alpha}\)</span>.</p>
-<p>Also, if <span class="math inline">\(\tau = rF \sin \theta\)</span>, then <span class="math inline">\(\tau = dF\)</span>. This is useful because sometimes <span class="math inline">\(\vec{d}\)</span> is easier to find than <span class="math inline">\(\vec{r}\)</span>.</p>
-<p>We can summarize with <span class="math inline">\(\vec{\tau}_{net} = \vec{r} \times \vec{F} = I\vec{\alpha}\)</span>.</p>
+<p>In 3D, <span class="math inline">\vec{\tau} = \vec{r} \times \vec{F}</span>. In 2D, torque is simply a scalar. However, it still has direction, since it can be positive or negative.</p>
+<p>The cross product of two vectors is always a vector perpendicular to both. To find the direction of the torque, we use the right hand rule - if we make a thumbs-up with our right hand, with the fingers curling from <span class="math inline">\vec{r}</span> to <span class="math inline">\vec{F}</span>, the thumb points along the direction of the torque.</p>
+<p>Clearly, <span class="math inline">F \sin \theta = ma_{arc} = mr\alpha</span>. So <span class="math inline">rF \sin \theta = \tau = mr^2 \alpha = I\alpha</span>. This is the rotational version of the second law of motion: <span class="math inline">\vec{\tau} = I\vec{\alpha}</span>.</p>
+<p>Also, if <span class="math inline">\tau = rF \sin \theta</span>, then <span class="math inline">\tau = dF</span>. This is useful because sometimes <span class="math inline">\vec{d}</span> is easier to find than <span class="math inline">\vec{r}</span>.</p>
+<p>We can summarize with <span class="math inline">\vec{\tau}_{net} = \vec{r} \times \vec{F} = I\vec{\alpha}</span>.</p>
 <p>A 6kg pulley is attached by a rope to a 2kg block. What is the tension on the rope?</p>
 <blockquote>
-<p>Let <span class="math inline">\(r\)</span> be the radius of the pulley, <span class="math inline">\(T\)</span> be the tension on the rope, and <span class="math inline">\(a\)</span> be the acceleration at the edge of the pulley.<br />
-Clearly, <span class="math inline">\(a\)</span> would be <span class="math inline">\(g\)</span> if not for the tension on the rope. So <span class="math inline">\(a = g - \frac{T}{2 kg}\)</span>.<br />
-Clearly, the torque on the pulley is <span class="math inline">\(r T \sin \frac{\pi}{2} = rT\)</span>, with the angle being 90 degrees since the rope is always perpendicular to the displacement.<br />
-Clearly, <span class="math inline">\(I_{pulley} = \frac{1}{2} 6 kg r^2 = r^2 3 kg\)</span>. So <span class="math inline">\(\tau = I\alpha = rT = r^2 3 kg \alpha\)</span>, and <span class="math inline">\(\alpha = \frac{T}{r 3 kg}\)</span>, so <span class="math inline">\(a = \frac{T}{3 kg}\)</span>.<br />
-So <span class="math inline">\(a = g - \frac{T}{2 kg} = \frac{T}{3 kg}\)</span>, and <span class="math inline">\(T = g \frac{6}{5} kg = 11.76 N\)</span>.</p>
+<p>Let <span class="math inline">r</span> be the radius of the pulley, <span class="math inline">T</span> be the tension on the rope, and <span class="math inline">a</span> be the acceleration at the edge of the pulley.<br />
+Clearly, <span class="math inline">a</span> would be <span class="math inline">g</span> if not for the tension on the rope. So <span class="math inline">a = g - \frac{T}{2 kg}</span>.<br />
+Clearly, the torque on the pulley is <span class="math inline">r T \sin \frac{\pi}{2} = rT</span>, with the angle being 90 degrees since the rope is always perpendicular to the displacement.<br />
+Clearly, <span class="math inline">I_{pulley} = \frac{1}{2} 6 kg r^2 = r^2 3 kg</span>. So <span class="math inline">\tau = I\alpha = rT = r^2 3 kg \alpha</span>, and <span class="math inline">\alpha = \frac{T}{r 3 kg}</span>, so <span class="math inline">a = \frac{T}{3 kg}</span>.<br />
+So <span class="math inline">a = g - \frac{T}{2 kg} = \frac{T}{3 kg}</span>, and <span class="math inline">T = g \frac{6}{5} kg = 11.76 N</span>.</p>
 </blockquote>
 <p><strong>Statics</strong> problems are those where the net torque is 0.</p>
-<p>A force applied to a point on the object applies <span class="math inline">\(\vec{r} \times \vec{F}\)</span> as torque and <span class="math inline">\(\vec{r} \cdot \vec{F}\)</span> as translational movement to the object overall.</p>
+<p>A force applied to a point on the object applies <span class="math inline">\vec{r} \times \vec{F}</span> as torque and <span class="math inline">\vec{r} \cdot \vec{F}</span> as translational movement to the object overall.</p>
 <p>A 2 kg, 3 m horizontal rod is secured to a pivot at one end. What is the acceleration of the board?</p>
 <pre><code>v---- 3m ----v
 X============= 2kg</code></pre>
 <blockquote>
 <p>The acceleration is the acceleration of the center of mass, which is 1.5 m along the rod.<br />
-Gravity applies a force of <span class="math inline">\(g2 kg\)</span> on the center of mass and a torque of <span class="math inline">\(\tau = mg\frac{L}{2} \sin \theta\)</span>. Since the force is perpendicular to the displacement, <span class="math inline">\(\theta = \frac{\pi}{2}\)</span>.<br />
-Clearly, <span class="math inline">\(I = \frac{1}{3}mL^2\)</span>.<br />
-Clearly, <span class="math inline">\(\tau = mg\frac{L}{2} = I\alpha = \frac{1}{3}mL^2\alpha\)</span>, and <span class="math inline">\(\alpha = \frac{3}{2}\frac{g}{L}\)</span>.<br />
-Clearly, <span class="math inline">\(a = r \alpha\)</span>, and <span class="math inline">\(r = \frac{L}{2}\)</span>, so <span class="math inline">\(a = \frac{3}{4}g\)</span>.</p>
+Gravity applies a force of <span class="math inline">g2 kg</span> on the center of mass and a torque of <span class="math inline">\tau = mg\frac{L}{2} \sin \theta</span>. Since the force is perpendicular to the displacement, <span class="math inline">\theta = \frac{\pi}{2}</span>.<br />
+Clearly, <span class="math inline">I = \frac{1}{3}mL^2</span>.<br />
+Clearly, <span class="math inline">\tau = mg\frac{L}{2} = I\alpha = \frac{1}{3}mL^2\alpha</span>, and <span class="math inline">\alpha = \frac{3}{2}\frac{g}{L}</span>.<br />
+Clearly, <span class="math inline">a = r \alpha</span>, and <span class="math inline">r = \frac{L}{2}</span>, so <span class="math inline">a = \frac{3}{4}g</span>.</p>
 </blockquote>
 <p>A 10 kg box 1 m wide and 4 m high, is on a board. What is the minimum acceleration of the board before the box tips over?</p>
 <pre><code>       1m
@@ -922,62 +955,62 @@ Clearly, <span class="math inline">\(a = r \alpha\)</span>, and <span class="mat
         &gt; A
 =============== &lt; cart</code></pre>
 <blockquote>
-<p>Clearly, <span class="math inline">\(\vec{N} = \vec{F}_g = m\vec{g}\)</span>. We have <span class="math inline">\(\vec{N}\)</span> applied at the left because the block is going to tip to the left, and <span class="math inline">\(\vec{A}\)</span> is at the bottom because the force is being applied by the cart.<br />
-Clearly, <span class="math inline">\(\vec{N}\)</span> applies <span class="math inline">\(N \frac{1 m}{2}\)</span> of torque to the center of mass, and <span class="math inline">\(\vec{A}\)</span> applies <span class="math inline">\(A 2 m\)</span> of torque to the center of mass.<br />
-Clearly, the block can tip when the net torque is 0, so it can freely rotate. So <span class="math inline">\(N \frac{1 m}{2} + A 2 m = 0\)</span> and <span class="math inline">\(A = \frac{N}{4}\)</span>.<br />
-So the acceleration is <span class="math inline">\(a = \frac{A}{m} = \frac{mg}{4m} = \frac{g}{4}\)</span>.</p>
+<p>Clearly, <span class="math inline">\vec{N} = \vec{F}_g = m\vec{g}</span>. We have <span class="math inline">\vec{N}</span> applied at the left because the block is going to tip to the left, and <span class="math inline">\vec{A}</span> is at the bottom because the force is being applied by the cart.<br />
+Clearly, <span class="math inline">\vec{N}</span> applies <span class="math inline">N \frac{1 m}{2}</span> of torque to the center of mass, and <span class="math inline">\vec{A}</span> applies <span class="math inline">A 2 m</span> of torque to the center of mass.<br />
+Clearly, the block can tip when the net torque is 0, so it can freely rotate. So <span class="math inline">N \frac{1 m}{2} + A 2 m = 0</span> and <span class="math inline">A = \frac{N}{4}</span>.<br />
+So the acceleration is <span class="math inline">a = \frac{A}{m} = \frac{mg}{4m} = \frac{g}{4}</span>.</p>
 </blockquote>
 <h3 id="rolling-motion">Rolling Motion</h3>
 <p>When there is no slipping, the bottommost point of a wheel is at rest, and the topmost point is moving aat twice the speed of the axle.</p>
 <p>Rolling motion is described using a combination of pure rotation and pure translation. Sometimes the rotation is about the point of contact with the ground, but mostly it is about the axle.</p>
 <p>What is the kinetic energy of a 3kg cylindrical wheel with radius 1 m rolling at 2 m/s?</p>
 <blockquote>
-<p>Clearly, the linear kinetic energy is <span class="math inline">\(E_k = \frac{1}{2}mv^2 = 6 J\)</span>.<br />
-Clearly, <span class="math inline">\(I = \frac{1}{2} 3 kg 1 m^2 = \frac{3}{2} kg m^2\)</span> and <span class="math inline">\(\omega = \frac{2 m/s}{1 m} = 2 rad/s\)</span>.<br />
-Clearly, the rotational kinetic energy is <span class="math inline">\(E_k = \frac{1}{2}I\omega^2 = \frac{3}{4} kg m^2 4 rad^2/s^2 = 3 kg m^2 rad^2/s^2 = 3 J\)</span>.<br />
-So the total kinetic energy is <span class="math inline">\(6 J + 3 J = 9 J\)</span>.</p>
+<p>Clearly, the linear kinetic energy is <span class="math inline">E_k = \frac{1}{2}mv^2 = 6 J</span>.<br />
+Clearly, <span class="math inline">I = \frac{1}{2} 3 kg 1 m^2 = \frac{3}{2} kg m^2</span> and <span class="math inline">\omega = \frac{2 m/s}{1 m} = 2 rad/s</span>.<br />
+Clearly, the rotational kinetic energy is <span class="math inline">E_k = \frac{1}{2}I\omega^2 = \frac{3}{4} kg m^2 4 rad^2/s^2 = 3 kg m^2 rad^2/s^2 = 3 J</span>.<br />
+So the total kinetic energy is <span class="math inline">6 J + 3 J = 9 J</span>.</p>
 </blockquote>
-<p>A yo-yo of mass <span class="math inline">\(m\)</span> and radius <span class="math inline">\(r\)</span> has a string wrapped around it. When released, what is the tension in the string?</p>
+<p>A yo-yo of mass <span class="math inline">m</span> and radius <span class="math inline">r</span> has a string wrapped around it. When released, what is the tension in the string?</p>
 <blockquote>
-<p>Clearly, <span class="math inline">\(I = \frac{1}{2}mr^2\)</span>. Clearly, the force applied by the string and the displacement are perpendicular, so <span class="math inline">\(\theta = \frac{\pi}{2}\)</span>.<br />
-Clearly, <span class="math inline">\(\tau = rT \sin \theta = rT = I\alpha = \frac{Ia}{r}\)</span>. So <span class="math inline">\(T = \frac{Ia}{r^2}\)</span>.<br />
-Clearly, <span class="math inline">\(\sum \vec{F} = m\vec{a} = \vec{T} + m\vec{g} = \frac{Ia}{r^2} + m\vec{g}\)</span>. So <span class="math inline">\(\vec{a}mr^2 - I\vec{a} = \vec{g}mr^2\)</span> and <span class="math inline">\(\vec{a} = \frac{\vec{g}mr^2}{mr^2 - I}\)</span>.<br />
-So <span class="math inline">\(T = \frac{I\vec{g}m}{mr^2 - I}\)</span>.<br />
-Basically, we wrote tension in terms of overall acceleration using torque (<span class="math inline">\(a \to T\)</span>), then used the effects of gravity to find overall acceleration (<span class="math inline">\(\to a\)</span>), then used overall acceleration to calculate torque.</p>
+<p>Clearly, <span class="math inline">I = \frac{1}{2}mr^2</span>. Clearly, the force applied by the string and the displacement are perpendicular, so <span class="math inline">\theta = \frac{\pi}{2}</span>.<br />
+Clearly, <span class="math inline">\tau = rT \sin \theta = rT = I\alpha = \frac{Ia}{r}</span>. So <span class="math inline">T = \frac{Ia}{r^2}</span>.<br />
+Clearly, <span class="math inline">\sum \vec{F} = m\vec{a} = \vec{T} + m\vec{g} = \frac{Ia}{r^2} + m\vec{g}</span>. So <span class="math inline">\vec{a}mr^2 - I\vec{a} = \vec{g}mr^2</span> and <span class="math inline">\vec{a} = \frac{\vec{g}mr^2}{mr^2 - I}</span>.<br />
+So <span class="math inline">T = \frac{I\vec{g}m}{mr^2 - I}</span>.<br />
+Basically, we wrote tension in terms of overall acceleration using torque (<span class="math inline">a \to T</span>), then used the effects of gravity to find overall acceleration (<span class="math inline">\to a</span>), then used overall acceleration to calculate torque.</p>
 </blockquote>
 <h3 id="angular-momentum">Angular Momentum</h3>
-<p>Angular momentum is defined as <span class="math inline">\(\vec{l} = \vec{r} \times \vec{p} = I\omega\)</span> (measured in <span class="math inline">\(m N s = kg m^2/s\)</span>) - it is the tendency of linear momentum to impart rotation onto an object.</p>
-<p>Here, <span class="math inline">\(\vec{r}\)</span> is the displacement from the center of mass, and <span class="math inline">\(\vec{p}\)</span> is the linear momentum.</p>
-<p>Clearly, <span class="math inline">\(\frac{\dee \vec{l}}{\dee t} = \frac{\dee}{\dee t} (\vec{r} \times \vec{p}) = \vec{r} \times \frac{\dee \vec{p}}{\dee x} + \frac{\dee \vec{r}}{\dee t} \times \vec{p}\)</span>.</p>
-<p>Since <span class="math inline">\(\frac{\dee \vec{r}}{\dee t} = \vec{v}\)</span> is parallel to <span class="math inline">\(\vec{p} = m\vec{v}\)</span>, <span class="math inline">\(\frac{\dee \vec{r}}{\dee t} \times \vec{p} = \vec{0}\)</span>.</p>
-<p>So <span class="math inline">\(\frac{\dee \vec{l}}{\dee t} = \vec{r} \times \frac{\dee \vec{p}}{\dee x} = \vec{r} \times \vec{F} = \vec{\tau}\)</span>.</p>
-<p>In other words, <strong>torque is the derivative of angular momentum</strong>. It is similar to the second law of motion, where <span class="math inline">\(\frac{\dee \vec{p}}{\dee t} = \vec{F}\)</span>. Just as force changes linear momentum, torque changes angular momentum.</p>
-<p>Also, angular momentum adds up, so <span class="math inline">\(\sum \vec{l} = \vec{L}\)</span> is the total angular momentum.</p>
-<p>There is also <strong>conservation of angular momentum</strong>, which states that in an isolated system, the net torque is 0 - <span class="math inline">\(\sum \vec{\tau} = \vec{0}\)</span> and <span class="math inline">\(\sum \vec{l}_f = \sum \vec{l}_i\)</span>. In practice, we usually write it as <span class="math inline">\(I_f\omega_f = I_i\omega_i\)</span>.</p>
+<p>Angular momentum is defined as <span class="math inline">\vec{l} = \vec{r} \times \vec{p} = I\omega</span> (measured in <span class="math inline">m N s = kg m^2/s</span>) - it is the tendency of linear momentum to impart rotation onto an object.</p>
+<p>Here, <span class="math inline">\vec{r}</span> is the displacement from the center of mass, and <span class="math inline">\vec{p}</span> is the linear momentum.</p>
+<p>Clearly, <span class="math inline">\frac{\dee \vec{l}}{\dee t} = \frac{\dee}{\dee t} (\vec{r} \times \vec{p}) = \vec{r} \times \frac{\dee \vec{p}}{\dee x} + \frac{\dee \vec{r}}{\dee t} \times \vec{p}</span>.</p>
+<p>Since <span class="math inline">\frac{\dee \vec{r}}{\dee t} = \vec{v}</span> is parallel to <span class="math inline">\vec{p} = m\vec{v}</span>, <span class="math inline">\frac{\dee \vec{r}}{\dee t} \times \vec{p} = \vec{0}</span>.</p>
+<p>So <span class="math inline">\frac{\dee \vec{l}}{\dee t} = \vec{r} \times \frac{\dee \vec{p}}{\dee x} = \vec{r} \times \vec{F} = \vec{\tau}</span>.</p>
+<p>In other words, <strong>torque is the derivative of angular momentum</strong>. It is similar to the second law of motion, where <span class="math inline">\frac{\dee \vec{p}}{\dee t} = \vec{F}</span>. Just as force changes linear momentum, torque changes angular momentum.</p>
+<p>Also, angular momentum adds up, so <span class="math inline">\sum \vec{l} = \vec{L}</span> is the total angular momentum.</p>
+<p>There is also <strong>conservation of angular momentum</strong>, which states that in an isolated system, the net torque is 0 - <span class="math inline">\sum \vec{\tau} = \vec{0}</span> and <span class="math inline">\sum \vec{l}_f = \sum \vec{l}_i</span>. In practice, we usually write it as <span class="math inline">I_f\omega_f = I_i\omega_i</span>.</p>
 <p>This is similar to the conservation of linear momentum, which states that the net force in an isolated system is 0.</p>
-<p>If two particles of mass <span class="math inline">\(m\)</span> are travelling in opposite directions, what is the angular momentum?</p>
+<p>If two particles of mass <span class="math inline">m</span> are travelling in opposite directions, what is the angular momentum?</p>
 <blockquote>
-<p>Clearly, the linear momentum is <span class="math inline">\(\vec{0}\)</span> since the objects are moving in opposite directions.<br />
+<p>Clearly, the linear momentum is <span class="math inline">\vec{0}</span> since the objects are moving in opposite directions.<br />
 Without loss of generality, assume the particles are travelling along the x-axis, and the origin is at the first particle. The total angular momentum is independent of the origin we choose.<br />
-Clearly, <span class="math inline">\(\vec{l} = \vec{r}_1 \times \vec{p}_1 + \vec{r}_2 \times \vec{p}_2\)</span>, and <span class="math inline">\(\vec{r}_1 = \vec{0}\)</span>, so <span class="math inline">\(\vec{l} = \vec{r}_2 \times \vec{p}_2 = r_2 p_2 \sin \theta\)</span>.<br />
-Clearly, <span class="math inline">\(r_2 \sin \theta\)</span> is the displacement along the y-axis, so <span class="math inline">\(r_2 \sin \theta = r_{2, y}\)</span>.<br />
-So <span class="math inline">\(\vec{l} = p_2 r_{2, y}\)</span>.</p>
+Clearly, <span class="math inline">\vec{l} = \vec{r}_1 \times \vec{p}_1 + \vec{r}_2 \times \vec{p}_2</span>, and <span class="math inline">\vec{r}_1 = \vec{0}</span>, so <span class="math inline">\vec{l} = \vec{r}_2 \times \vec{p}_2 = r_2 p_2 \sin \theta</span>.<br />
+Clearly, <span class="math inline">r_2 \sin \theta</span> is the displacement along the y-axis, so <span class="math inline">r_2 \sin \theta = r_{2, y}</span>.<br />
+So <span class="math inline">\vec{l} = p_2 r_{2, y}</span>.</p>
 </blockquote>
-<p>If a 50 kg student runs onto the edge of a 1.6 m radius stationary merry-go-round with <span class="math inline">\(I = 1200 kg m^2\)</span> at <span class="math inline">\(\frac{25}{9} m/s\)</span>, what is the student's angular momentum? What is the angular velocity of the merry-go-round afterward? How much kinetic energy was lost in the collision? How much work needs to be done to move to the center? What is the angular velocity after moving to the center?</p>
+<p>If a 50 kg student runs onto the edge of a 1.6 m radius stationary merry-go-round with <span class="math inline">I = 1200 kg m^2</span> at <span class="math inline">\frac{25}{9} m/s</span>, what is the student's angular momentum? What is the angular velocity of the merry-go-round afterward? How much kinetic energy was lost in the collision? How much work needs to be done to move to the center? What is the angular velocity after moving to the center?</p>
 <blockquote>
-<p>Clearly, <span class="math inline">\(\vec{l}_{student} = 1.6 m 50 kg \frac{25}{9} m/s \sin \theta\)</span>. Since the student is perpendicular to the displacement of the point on the edge, <span class="math inline">\(\sin \theta = 1\)</span>. So <span class="math inline">\(\vec{l}_{student} = 1.6 m 50 kg \frac{25}{9} m/s = \frac{2000}{9} kg m^2/s\)</span>.<br />
-So the angular momentum of the student is <span class="math inline">\(222.2 kg m^2/s\)</span>.<br />
-Clearly, <span class="math inline">\(\vec{l}_{student, f} + \vec{l}_{wheel, f} = \vec{l}_{student, i} + \vec{l}_{wheel, i}\)</span>. So <span class="math inline">\(\vec{l}_{student, f} + \vec{l}_{wheel, f} = \vec{l}_{student, i} = \frac{2000}{9} kg m^2/s\)</span> since the wheel was stationary.<br />
-Clearly, <span class="math inline">\(I_{student} = mr^2 = 50 kg (1.6 m)^2 = 128 kg m^2\)</span>.<br />
-Since <span class="math inline">\(\vec{\omega}_{student, f} = \vec{\omega}_{wheel, f}\)</span>, <span class="math inline">\(\vec{\omega}_{student, f}(I_{student} + I_{wheel}) = \frac{2000}{9} kg m^2/s = \vec{\omega}_{student, f} 1328 kg m^2\)</span>. So <span class="math inline">\(\vec{\omega}_{student, f} = \frac{\frac{2000}{9} kg m^2/s}{1328 kg m^2} = \frac{125}{747} rad/s\)</span>.<br />
-So the angular velocity of the merry-go-round after collision was <span class="math inline">\(0.167 rad/s\)</span>.<br />
-Clearly, <span class="math inline">\(E_{k, i} = \frac{1}{2} 50 kg \left(\frac{25}{9} m/s\right)^2 = 192.901234567901234 J\)</span>.<br />
-Clearly, <span class="math inline">\(E_{k, f} = \frac{1}{2} (I_{student} + I_{wheel}) \omega_{student, f}^2 = \frac{1}{2} 1328 kg m^2 (\frac{125}{747} rad/s)^2 = 18.592890078833854 J\)</span>.<br />
-So the collision was inelastic, losing <span class="math inline">\(192.901234567901234 J - 18.592890078833854 J = 174.308344489067380 J\)</span> of kinetic energy.<br />
-If the student moves the the center <span class="math inline">\(I_{wheel}\omega = (I_{wheel} + I_{student})\frac{125}{747} rad/s = 1328 kg m^2 \frac{125}{747} rad/s\)</span>, since the moment of inertia provided by the student is simply removed by being at the center.<br />
-So <span class="math inline">\(\omega = \frac{1328 kg m^2 \frac{125}{747} rad/s}{1200 kg m^2} = 0.185185185185185 rad/s\)</span>.<br />
-So the speed after the student moves to the center is <span class="math inline">\(0.185 rad/s\)</span>.<br />
-So <span class="math inline">\(E_k = \frac{1}{2} 1200 kg m^2 (0.185185185185185 rad/s)^2 = 20.576131687242757 J\)</span>, and <span class="math inline">\(W = \Delta E_k = 20.576131687242757 J - 18.592890078833854 J = 1.983241608408903 J\)</span>.<br />
+<p>Clearly, <span class="math inline">\vec{l}_{student} = 1.6 m 50 kg \frac{25}{9} m/s \sin \theta</span>. Since the student is perpendicular to the displacement of the point on the edge, <span class="math inline">\sin \theta = 1</span>. So <span class="math inline">\vec{l}_{student} = 1.6 m 50 kg \frac{25}{9} m/s = \frac{2000}{9} kg m^2/s</span>.<br />
+So the angular momentum of the student is <span class="math inline">222.2 kg m^2/s</span>.<br />
+Clearly, <span class="math inline">\vec{l}_{student, f} + \vec{l}_{wheel, f} = \vec{l}_{student, i} + \vec{l}_{wheel, i}</span>. So <span class="math inline">\vec{l}_{student, f} + \vec{l}_{wheel, f} = \vec{l}_{student, i} = \frac{2000}{9} kg m^2/s</span> since the wheel was stationary.<br />
+Clearly, <span class="math inline">I_{student} = mr^2 = 50 kg (1.6 m)^2 = 128 kg m^2</span>.<br />
+Since <span class="math inline">\vec{\omega}_{student, f} = \vec{\omega}_{wheel, f}</span>, <span class="math inline">\vec{\omega}_{student, f}(I_{student} + I_{wheel}) = \frac{2000}{9} kg m^2/s = \vec{\omega}_{student, f} 1328 kg m^2</span>. So <span class="math inline">\vec{\omega}_{student, f} = \frac{\frac{2000}{9} kg m^2/s}{1328 kg m^2} = \frac{125}{747} rad/s</span>.<br />
+So the angular velocity of the merry-go-round after collision was <span class="math inline">0.167 rad/s</span>.<br />
+Clearly, <span class="math inline">E_{k, i} = \frac{1}{2} 50 kg \left(\frac{25}{9} m/s\right)^2 = 192.901234567901234 J</span>.<br />
+Clearly, <span class="math inline">E_{k, f} = \frac{1}{2} (I_{student} + I_{wheel}) \omega_{student, f}^2 = \frac{1}{2} 1328 kg m^2 (\frac{125}{747} rad/s)^2 = 18.592890078833854 J</span>.<br />
+So the collision was inelastic, losing <span class="math inline">192.901234567901234 J - 18.592890078833854 J = 174.308344489067380 J</span> of kinetic energy.<br />
+If the student moves the the center <span class="math inline">I_{wheel}\omega = (I_{wheel} + I_{student})\frac{125}{747} rad/s = 1328 kg m^2 \frac{125}{747} rad/s</span>, since the moment of inertia provided by the student is simply removed by being at the center.<br />
+So <span class="math inline">\omega = \frac{1328 kg m^2 \frac{125}{747} rad/s}{1200 kg m^2} = 0.185185185185185 rad/s</span>.<br />
+So the speed after the student moves to the center is <span class="math inline">0.185 rad/s</span>.<br />
+So <span class="math inline">E_k = \frac{1}{2} 1200 kg m^2 (0.185185185185185 rad/s)^2 = 20.576131687242757 J</span>, and <span class="math inline">W = \Delta E_k = 20.576131687242757 J - 18.592890078833854 J = 1.983241608408903 J</span>.<br />
 So the student needs to do 1.98 J of work to get to the center.</p>
 </blockquote>
 <p>A force applied along the center of mass applies zero torque to the object. This is called a <strong>central force</strong>.</p>
@@ -985,14 +1018,5 @@ So the student needs to do 1.98 J of work to get to the center.</p>
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

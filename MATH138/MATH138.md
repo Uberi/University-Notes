@@ -145,12 +145,12 @@ When we use integration by parts, we differentiate one factor, and integrate the
 Simplify $\int_0^1 x e^{-x} \dee x$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \int_0^1 x e^{-x} \dee x &= \int_0^1 x \frac{\dee}{\dee x} (-e^{-x}) \dee x \\
 &= \evalat{x (-e^{-x})}_0^1 - \int_0^1 \left(\frac{\dee}{\dee x} x\right) (-e^{-x}) \dee x \\
 &= \evalat{x (-e^{-x})}_0^1 + \int_0^1 e^{-x} \dee x \\
 &= -\frac{2}{e} \\
-\end{align}
+\end{aligned}
 $$
 
 Simplify $\int_0^1 x^n (\ln x)^n \dee x$:
@@ -256,7 +256,7 @@ Consider $\int \frac{1}{x^2 \sqrt{x^2 + 4}} \dee x$:
 = \int \frac{1}{4 \tan^2 \theta \sqrt{4 (\tan^2 \theta + 1)}} 2 \sec^2 \theta \dee \theta
 = \int \frac{1}{4 \tan^2 \theta 2 \sec \theta} 2 \sec^2 \theta \dee \theta
 = \frac{1}{4} \int \frac{\sec \theta}{\tan^2 \theta} \dee \theta
-= \frac{1}{4} \int \frac{\\cos \theta}{\sin^2 \theta} \dee \theta$.  
+= \frac{1}{4} \int \frac{\cos \theta}{\sin^2 \theta} \dee \theta$.  
 > Let $u = \sin \theta$. Then $\dee x = \frac{1}{\cos \theta} \dee \theta$.  
 > So $\frac{1}{4} \int \frac{\cos \theta}{\sin^2 \theta} \dee \theta = \frac{1}{4} \int \frac{\cos \theta}{u^2} \frac{1}{\cos \theta} \dee u = \frac{1}{4} \int \frac{1}{u^2} \dee u = -\frac{1}{4u} + c = -\frac{1}{4 \sin \theta} + c$.  
 > Since $x = 2 \tan \theta$, $\theta = \arctan \frac{x}{2}$.  
@@ -744,7 +744,7 @@ Solve $\frac{\dee y}{\dee x} = \frac{x}{y}$ for $y(0) = -3$:
 Solve $\sqrt{x \frac{\dee x}{\dee t}} = \frac{1}{1 + t}$ for $x(t) = x(0) = 0, t \ge 0$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \sqrt{x \frac{\dee x}{\dee t}} &= \frac{1}{1 + t} \\
 x \frac{\dee x}{\dee t} &= \frac{1}{(1 + t)^2} \\
 x \dee x &= \frac{1}{(1 + t)^2} \dee t \\
@@ -755,7 +755,7 @@ t &= 0; x(0) = 0 \\
 c &= 1 \\
 \frac{x^2}{2} &= -\frac{1}{1 + t} + 1 \\
 x &= \sqrt{2 - \frac{2}{1 + t}} = \sqrt{\frac{2(1 + t) - 2}{1 + t}} = \sqrt{\frac{2t}{1 + t}} \\
-\end{align}
+\end{aligned}
 $$
 
 First we rearrange until there is only one variable on each side, then we integrate, and finally, fix the constant of integration $c$ by solving for it with the given values for the axis variables.
@@ -763,7 +763,7 @@ First we rearrange until there is only one variable on each side, then we integr
 Solve $\frac{\dee T}{\dee t} = -k(T - T_{ambient})$ - Newton's law of cooling:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee T}{\dee t} &= -k(T - T_{ambient}) \\
 \frac{1}{T - T_{ambient}} \dee T &= -k \dee t \\
 \int \frac{1}{T - T_{ambient}} \dee T &= -k \int 1 \dee t \\
@@ -771,7 +771,7 @@ Solve $\frac{\dee T}{\dee t} = -k(T - T_{ambient})$ - Newton's law of cooling:
 e^{\ln \abs{T - T_{ambient}}} &= e^{-kt + c} \\
 \abs{T - T_{ambient}} &= e^{-kt}e^c \\
 T - T_{ambient} &= \pm e^ce^{-kt} \\
-\end{align}
+\end{aligned}
 $$
 > Let $A = \pm e^c$. Then $T - T_{ambient} = Ae^{-kt}$.  
 > Note that at $t = 0$, $T = T_0$ for some fixed $T_0$.  
@@ -781,13 +781,13 @@ $$
 Suppose we have a population of $n$ individuals. The simplest population model is $\frac{\dee n}{\dee t} = kn$ for some $k \ge 0$. Solve for $n$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee n}{n} &= k \dee t \\
 \int \frac{\dee n}{n} &= k \int \dee t \\
 \ln \abs{n} &= kt + c \\
 n &= \pm e^ce^{kt} \\
 A = \pm e^c; n &= Ae^{kt} \\
-\end{align}
+\end{aligned}
 $$
 > Note that at $t = 0$, $n = n_0$ for some constant $n_0$ - the starting population.  
 > So $n_0 = Ae^{k0}$ and $A = n_0$.  
@@ -808,7 +808,7 @@ Even when we solve the equation, it does not tell us much about how the function
 Solve $\frac{\dee N}{\dee t} = rN\left(1 - \frac{N}{k}\right)$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee N}{\dee t} &= rN\left(1 - \frac{N}{k}\right) \\
 \int \frac{1}{N\left(1 - \frac{N}{k}\right)} \frac{\dee N}{\dee t} \dee t &= \int r \dee t \\
 \int \frac{1}{N\left(1 - \frac{N}{k}\right)} \dee N &= rt + c \\
@@ -826,7 +826,7 @@ F &= \pm e^{-c} \\
 1 - \frac{k}{N} &= Fe^{-rt} \\
 \frac{k}{N} &= Fe^{-rt} + 1 \\
 N &= \frac{k}{1 + Fe^{-rt}} \\
-\end{align}
+\end{aligned}
 $$
 > Note that all solutions tend toward $k$, which we can verify by taking the limit of $N$ at infinity.  
 > Now we will solve for $F$ - at $t = 0$, $N = N_0$. Assume $t = 0$.  

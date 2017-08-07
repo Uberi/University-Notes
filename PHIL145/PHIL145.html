@@ -10,9 +10,68 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -43,33 +102,7 @@
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h2 id="phil145">PHIL145</h2>
 <p>Critical Thinking</p>
 <pre><code>Instructor: Michael &quot;Mike&quot; McEwan
@@ -119,7 +152,7 @@ Critical thinking is successful or reliable reasoning.</p>
 <p>Critical thinking is a philosophy class for historical reasons, but there are also many connections between the fields. Math, science, psychology, and a lot of other fields are simply branches of philosophy. Philosophical questions often require looking into domain-general reasoning, and has close connections to critical thinking.</p>
 <h1 id="section-2">10/1/14</h1>
 <p>Consider Zeno's paradox:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Achilles wants to run from point A to B.</li>
 <li>To do this, he must go from the first point to halfway to the second point.</li>
 <li>He must also go to halfway again to the second point.</li>
@@ -346,7 +379,7 @@ If God exists, then God exists</code></pre>
 <p>There is also the <strong>subjunctive conditionals</strong>: &quot;If Germany had won World War II, then the world would be no different today&quot;. This expresses a hypothetical claim - something that would be true if something else is true. The difference is that we already know the antecedent is false, but states what might happen if it were true. These are often distinguished by their using past tense.</p>
 <p>A complex sentence like &quot;it is not raining&quot; is a <strong>negated sentence</strong> - one where a sentence is flipped around to give its opposite. The negated sentence works like a logical NOT, with the form &quot;not P&quot;.</p>
 <h1 id="section-8">24/1/14</h1>
-<p>Two statements are <strong>logically equivalent</strong> if they are both true under the same conditions, and false under the same conditions. We represent this relation with <span class="math inline">\(P \equiv Q\)</span> or <span class="math inline">\(P \iff Q\)</span> (P if and only if Q).</p>
+<p>Two statements are <strong>logically equivalent</strong> if they are both true under the same conditions, and false under the same conditions. We represent this relation with <span class="math inline">P \equiv Q</span> or <span class="math inline">P \iff Q</span> (P if and only if Q).</p>
 <p>We can draw a truth table to do this, and I'm not going to because we already covered this in MATH135.</p>
 <h2 id="ampliative-arguments">Ampliative Arguments</h2>
 <p>An argument is <strong>ampliative</strong> if the conclusion expresses more information than that expressed in the premises. All valid deductive arguments are by definition non-ampliative, since if they had more information, we could not know that it is valid. As a result, all ampliative arguments cannot be known to be valid.</p>
@@ -477,7 +510,7 @@ It is ridiculous to say that we shouldn&#39;t take medicine because it is unnatu
 <p>Disanalogies simply add premises to an analogical argument that reduce its cogency.</p>
 <h2 id="systematic-argument-evaluation">Systematic Argument Evaluation</h2>
 <p>We now develop a systematic approach to argument evaluation. When evaluating an argument, we can do so using the following process:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Rewrite the argument in standard form.</li>
 <li>Diagram the argument structure as a tree or diagram.</li>
 <li>Evaluate the argument based on:
@@ -526,7 +559,7 @@ It is ridiculous to say that we shouldn&#39;t take medicine because it is unnatu
 <h3 id="diagramming">Diagramming</h3>
 <p>We can now diagram an argument in standard form by drawing a tree-like structure that represents how the premises support the conclusion, including sub-arguments.</p>
 <p>This requires distinguishing between the argument conclusion and the conclusions of the sub-arguments.</p>
-<p>Each assertion is a node in the tree, labelled with its number, and we draw an arrow from assertion <span class="math inline">\(A\)</span> to assertion <span class="math inline">\(B\)</span> to represent that <span class="math inline">\(A\)</span> supports <span class="math inline">\(B\)</span>.</p>
+<p>Each assertion is a node in the tree, labelled with its number, and we draw an arrow from assertion <span class="math inline">A</span> to assertion <span class="math inline">B</span> to represent that <span class="math inline">A</span> supports <span class="math inline">B</span>.</p>
 <p>We represent convergent support with an arrow from each supporting premise:</p>
 <pre><code>A B
 | |
@@ -561,10 +594,10 @@ v
 <li>Only relevant premises can support the conclusion.</li>
 <li>Many premises are relevant only when linked together, so this step is evaluating groups of premises.</li>
 <li>The diagram often helps here.</li>
-<li><strong>Positive relevance</strong> is when the truth of <span class="math inline">\(X\)</span> counts in favour of the truth of <span class="math inline">\(Y\)</span>. We say <span class="math inline">\(X\)</span> is positively relevant to <span class="math inline">\(Y\)</span>.</li>
-<li><strong>Negative relevance</strong> is when the truth of <span class="math inline">\(X\)</span> counts against the truth of <span class="math inline">\(Y\)</span>. We say <span class="math inline">\(X\)</span> is negatively relevant to <span class="math inline">\(Y\)</span>.</li>
-<li><strong>Irrelevance</strong> is when the truth of <span class="math inline">\(X\)</span> has no effect on the truth of <span class="math inline">\(Y\)</span>. We say that <span class="math inline">\(X\)</span> is irrelevant to <span class="math inline">\(Y\)</span>.</li>
-<li><span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are groups of premises.</li>
+<li><strong>Positive relevance</strong> is when the truth of <span class="math inline">X</span> counts in favour of the truth of <span class="math inline">Y</span>. We say <span class="math inline">X</span> is positively relevant to <span class="math inline">Y</span>.</li>
+<li><strong>Negative relevance</strong> is when the truth of <span class="math inline">X</span> counts against the truth of <span class="math inline">Y</span>. We say <span class="math inline">X</span> is negatively relevant to <span class="math inline">Y</span>.</li>
+<li><strong>Irrelevance</strong> is when the truth of <span class="math inline">X</span> has no effect on the truth of <span class="math inline">Y</span>. We say that <span class="math inline">X</span> is irrelevant to <span class="math inline">Y</span>.</li>
+<li><span class="math inline">X</span> and <span class="math inline">Y</span> are groups of premises.</li>
 </ul>
 <p>Finally, the groundedness:</p>
 <ul>
@@ -867,7 +900,7 @@ Rodents are used in baseball.</code></pre>
 <p>For example, distances are not numbers - they are just distances, their own thing. However, they are correlated to numbers. We can then convert between distances and numbers interchangably.</p>
 <p>Alternatively, we could represent distances with the amount of time it takes to travel that distance for something moving at some speed, or even represent distances using the alphabet.</p>
 <p>Numbers have many similarities have a lot of relevant similarities to distances: they can be added together, they can be ordered, and dividing one into parts has each part also be a number or distance.</p>
-<p>As a result, we can use things like distributivity (<span class="math inline">\(A(B + C) = AB + AC\)</span>) over numbers and represent multiple sums of distances, and use <span class="math inline">\(A &gt; B\)</span> over numbers to represent one distance being longer than another.</p>
+<p>As a result, we can use things like distributivity (<span class="math inline">A(B + C) = AB + AC</span>) over numbers and represent multiple sums of distances, and use <span class="math inline">A &gt; B</span> over numbers to represent one distance being longer than another.</p>
 <p>Consider the example of using numbers to represent hockey tournament rankings. In this case, the numbers obey distributivity, but the rankings do not - a hockey team can lose games yet still be first place. Therefore, the lowest number is not necessarily the best team. In this case, we manipulated the</p>
 <p><strong>Ordinal numbers</strong> are natural numbers, used to represent positions/rankings. They are used for ordering things.</p>
 <p><strong>Cardinal numbers</strong> are natural numbers, used to represent size. They are used for counting things without fractional values.</p>
@@ -886,7 +919,7 @@ We do not have enough information to answer the question using only percentages.
 <p>Unit systems help us avoid these situations by making it obvious when we try to add different types of physical quantities. This is useful but not completely effective - it is still possible to go wrong even when using units.</p>
 <p>If we add 5 meters and 5 meters, we can straighforwardly say that it represents 10 meters. But if we add 5 meters and 5 kilograms, what does the 10 represent?</p>
 <p>A percentage can represent a multiple, or a change. A 50% increase is different from something being 50% of what it was before.</p>
-<p>A percentage increase is denoted by <span class="math inline">\(\text{Percentage Increase} = \frac{(\text{Later} - \text{Earlier})}{\text{Earlier}} \times 100%\)</span>.</p>
+<p>A percentage increase is denoted by <span class="math inline">\text{Percentage Increase} = \frac{(\text{Later} - \text{Earlier})}{\text{Earlier}} \times 100\%</span>.</p>
 <h3 id="rankings">Rankings</h3>
 <p>Numbers are also often used for ranking things due to their ability to be compared - numbers are ordered.</p>
 <p>Rankings encode only information about order. For example, the rankings for runners in a race does not encode what the actual times were, or how close the winners were to each other, only information about who was first, second, third, and more.</p>
@@ -912,8 +945,8 @@ We do not have enough information to answer the question using only percentages.
 <h3 id="correlationcausation">Correlation/Causation</h3>
 <p>A <strong>correlation</strong> is when variables are related in some way - they co-vary together. Correlations are useful because we can use them to make predictions about what will happen when a variable is a certain way.</p>
 <p>For example, if attending class is correlated with high grades, then given students that attend class, we can predict that they have higher grades than those who do not attend class.</p>
-<p><strong>Positive correlation</strong> is when, given variables <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, an increase in <span class="math inline">\(x\)</span> results in an increase in <span class="math inline">\(y\)</span>, and vice versa. For example, there is a positive correlation in street signs between signs saying &quot;STOP&quot; and signs that are red.</p>
-<p><strong>Negative correlation</strong> is when, given variables <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, an increase in <span class="math inline">\(x\)</span> results in a decrease in <span class="math inline">\(y\)</span>, and vice versa. For example, there is a negative correlation in street signs between signs saying &quot;STOP&quot; and signs that are yellow.</p>
+<p><strong>Positive correlation</strong> is when, given variables <span class="math inline">x</span> and <span class="math inline">y</span>, an increase in <span class="math inline">x</span> results in an increase in <span class="math inline">y</span>, and vice versa. For example, there is a positive correlation in street signs between signs saying &quot;STOP&quot; and signs that are red.</p>
+<p><strong>Negative correlation</strong> is when, given variables <span class="math inline">x</span> and <span class="math inline">y</span>, an increase in <span class="math inline">x</span> results in a decrease in <span class="math inline">y</span>, and vice versa. For example, there is a negative correlation in street signs between signs saying &quot;STOP&quot; and signs that are yellow.</p>
 <p><strong>Causation</strong> is when one thing causes another thing. Where correlation can be used to make predictions in some circumstances, causation allows predictions to be made in a much larger set of circumstances, and even predict what will happen when we modify other variables.</p>
 <p>For example, knowing there is a correlation between smoking and lung cancer is good for predicting whether someone will have lung cancer or a smoking habit, but not for preventing lung cancer. Knowing that smoking causes lung cancer allows us to prevent lung cancer by predicting that stopping smoking helps reduce the incidences of lung cancer.</p>
 <p>In other words, knowing smoking is correlated to lung cancer doesn't tell us that changing smoking will change lung cancer.</p>
@@ -923,37 +956,37 @@ We do not have enough information to answer the question using only percentages.
 <p>All hypotheses must compete with the null hypothesis. The <strong>null hypothesis</strong> is that what we observed was just a fluke or an accident. It is the &quot;baseline&quot; hypothesis, so to speak.</p>
 <table>
 <colgroup>
-<col width="37%" />
-<col width="28%" />
-<col width="34%" />
+<col style="width: 37%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">Correlation in sample</th>
-<th align="left">Correlation in population</th>
-<th align="left">Result</th>
+<th style="text-align: left;">Correlation in sample</th>
+<th style="text-align: left;">Correlation in population</th>
+<th style="text-align: left;">Result</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">No, don't reject null hypothesis</td>
-<td align="left">No, we were right</td>
-<td align="left">Correct inference</td>
+<td style="text-align: left;">No, don't reject null hypothesis</td>
+<td style="text-align: left;">No, we were right</td>
+<td style="text-align: left;">Correct inference</td>
 </tr>
 <tr class="even">
-<td align="left">No, don't reject null hypothesis</td>
-<td align="left">Yes, we were wrong</td>
-<td align="left">Type II error (false negative)</td>
+<td style="text-align: left;">No, don't reject null hypothesis</td>
+<td style="text-align: left;">Yes, we were wrong</td>
+<td style="text-align: left;">Type II error (false negative)</td>
 </tr>
 <tr class="odd">
-<td align="left">Yes, reject null hypothesis</td>
-<td align="left">No, we were wrong</td>
-<td align="left">Type I error (false positive)</td>
+<td style="text-align: left;">Yes, reject null hypothesis</td>
+<td style="text-align: left;">No, we were wrong</td>
+<td style="text-align: left;">Type I error (false positive)</td>
 </tr>
 <tr class="even">
-<td align="left">Yes, reject null hypothesis</td>
-<td align="left">Yes, we were right</td>
-<td align="left">Correct inference</td>
+<td style="text-align: left;">Yes, reject null hypothesis</td>
+<td style="text-align: left;">Yes, we were right</td>
+<td style="text-align: left;">Correct inference</td>
 </tr>
 </tbody>
 </table>
@@ -973,7 +1006,7 @@ We do not have enough information to answer the question using only percentages.
 <li>The derailments were purely coincidental to riding up a hill.</li>
 </ul>
 <h3 id="testing-hypotheses">Testing Hypotheses</h3>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Collect data from a sample to draw hypotheses from.</li>
 <li>Reject unrepresentative samples and clean up data.</li>
 <li>Figure out correlations in the sample.</li>
@@ -988,33 +1021,33 @@ We do not have enough information to answer the question using only percentages.
 <p>The most common meaning of probability is the <strong>relative frequency</strong> of something (how often something will happen in the long run, like flipping a coin lands on heads half the time) and <strong>degrees of belief</strong> (how rationally certain about an event occuring, where 1 is certain and 0 is impossible).</p>
 <p>Humans are good at finding patterns, but are prone to false positives - type I errors. Humans are prone to thinking certain things are improbable when they are simply the result of random chance - they are bad at evaluating the null hypothesis.</p>
 <h3 id="formal-treatment">Formal Treatment</h3>
-<p><span class="math inline">\(P(x)\)</span> represents the probability of event <span class="math inline">\(x\)</span> occurring. It is always the case that <span class="math inline">\(P(x) \in \mathbb{R}\)</span> and <span class="math inline">\(0 \le P(x) \le 1\)</span> - nothing is more impossible than impossiblity, or more certain than certainty.</p>
-<p><span class="math inline">\(\neg x\)</span> is the opposite of the event <span class="math inline">\(x\)</span> - the event of <span class="math inline">\(x\)</span> not occurring. <span class="math inline">\(P(\neg x)\)</span> is the probability of event <span class="math inline">\(x\)</span> not occuring.</p>
-<p><span class="math inline">\(P(S)\)</span>, where <span class="math inline">\(S\)</span> is a set of events, represents the probability of one of those events occurring. If <span class="math inline">\(S\)</span> includes all possible events, then <span class="math inline">\(P(S) = 1\)</span>.</p>
-<p>Usually, <span class="math inline">\(P(x) = \frac{\text{Number of cases where } x \text{ occurs}}{\text{Total number of cases}}\)</span>, assuming that all cases are equally likely.</p>
-<p><span class="math inline">\(P(x \cup y)\)</span> is a <strong>disjoint probability</strong> - the probabilty that at least one of <span class="math inline">\(x\)</span> <strong>or</strong> <span class="math inline">\(y\)</span> occur.</p>
-<p><span class="math inline">\(P(x \cap y)\)</span> is a <strong>conjoint probability</strong> - the probabilty that both <span class="math inline">\(x\)</span> <strong>and</strong> <span class="math inline">\(y\)</span> occur.</p>
-<p><span class="math inline">\(P(x \mid y)\)</span> is a <strong>conditional proability</strong> - the probability that <span class="math inline">\(x\)</span> occurs <strong>if</strong> <span class="math inline">\(y\)</span> occurs.</p>
+<p><span class="math inline">P(x)</span> represents the probability of event <span class="math inline">x</span> occurring. It is always the case that <span class="math inline">P(x) \in \mathbb{R}</span> and <span class="math inline">0 \le P(x) \le 1</span> - nothing is more impossible than impossiblity, or more certain than certainty.</p>
+<p><span class="math inline">\neg x</span> is the opposite of the event <span class="math inline">x</span> - the event of <span class="math inline">x</span> not occurring. <span class="math inline">P(\neg x)</span> is the probability of event <span class="math inline">x</span> not occuring.</p>
+<p><span class="math inline">P(S)</span>, where <span class="math inline">S</span> is a set of events, represents the probability of one of those events occurring. If <span class="math inline">S</span> includes all possible events, then <span class="math inline">P(S) = 1</span>.</p>
+<p>Usually, <span class="math inline">P(x) = \frac{\text{Number of cases where } x \text{ occurs}}{\text{Total number of cases}}</span>, assuming that all cases are equally likely.</p>
+<p><span class="math inline">P(x \cup y)</span> is a <strong>disjoint probability</strong> - the probabilty that at least one of <span class="math inline">x</span> <strong>or</strong> <span class="math inline">y</span> occur.</p>
+<p><span class="math inline">P(x \cap y)</span> is a <strong>conjoint probability</strong> - the probabilty that both <span class="math inline">x</span> <strong>and</strong> <span class="math inline">y</span> occur.</p>
+<p><span class="math inline">P(x \mid y)</span> is a <strong>conditional proability</strong> - the probability that <span class="math inline">x</span> occurs <strong>if</strong> <span class="math inline">y</span> occurs.</p>
 <p>Identities:</p>
 <ul>
-<li><span class="math inline">\(P(x) + P(\neg x) = 1\)</span> - an event must either occur or not occur.</li>
-<li><span class="math inline">\(P(x \cup y) = P(x) + P(y) - P(x \cap y)\)</span> - the probability of either event occuring is the sum of the individual probabilities of each event occuring, minus the probability that they both occur.
+<li><span class="math inline">P(x) + P(\neg x) = 1</span> - an event must either occur or not occur.</li>
+<li><span class="math inline">P(x \cup y) = P(x) + P(y) - P(x \cap y)</span> - the probability of either event occuring is the sum of the individual probabilities of each event occuring, minus the probability that they both occur.
 <ul>
-<li><span class="math inline">\(P(x \cup y) = P(x) + P(y)\)</span> when <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are mutually exclusive - they never both occur at the same time.</li>
+<li><span class="math inline">P(x \cup y) = P(x) + P(y)</span> when <span class="math inline">x</span> and <span class="math inline">y</span> are mutually exclusive - they never both occur at the same time.</li>
 </ul></li>
-<li><span class="math inline">\(P(x \cap y) = P(x \mid y) \cdot P(y)\)</span> - the probability of both events occurring is the probability of one occurring given the other times the probability of the other.
+<li><span class="math inline">P(x \cap y) = P(x \mid y) \cdot P(y)</span> - the probability of both events occurring is the probability of one occurring given the other times the probability of the other.
 <ul>
-<li><span class="math inline">\(P(x \cap y) = P(x) \cdot P(y)\)</span> when <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are independent - when the probability of <span class="math inline">\(x\)</span> does not change depending on <span class="math inline">\(y\)</span>, so <span class="math inline">\(P(x \mid y) = P(x)\)</span>.</li>
+<li><span class="math inline">P(x \cap y) = P(x) \cdot P(y)</span> when <span class="math inline">x</span> and <span class="math inline">y</span> are independent - when the probability of <span class="math inline">x</span> does not change depending on <span class="math inline">y</span>, so <span class="math inline">P(x \mid y) = P(x)</span>.</li>
 </ul></li>
 </ul>
 <p>Probability of drawing a red queen from a deck of cards given that the card drawn is red:</p>
 <blockquote>
-<p>Clearly, <span class="math inline">\(P(\text{red} \cap \text{queen}) = P(\text{red} \mid \text{queen}) \cdot P(\text{queen})\)</span>.<br />
-Since the card is a queen, <span class="math inline">\(P(\text{queen}) = 1\)</span> and <span class="math inline">\(P(\text{red} \mid \text{queen}) \cdot P(\text{queen}) = P(\text{red}) = \frac{1}{2}\)</span>.</p>
+<p>Clearly, <span class="math inline">P(\text{red} \cap \text{queen}) = P(\text{red} \mid \text{queen}) \cdot P(\text{queen})</span>.<br />
+Since the card is a queen, <span class="math inline">P(\text{queen}) = 1</span> and <span class="math inline">P(\text{red} \mid \text{queen}) \cdot P(\text{queen}) = P(\text{red}) = \frac{1}{2}</span>.</p>
 </blockquote>
 <h3 id="gamblers-fallacy">Gambler's Fallacy</h3>
 <p>When a set of events are independent, people are prone to thinking that the events are dependent of the conjoint probability of each of the other events in the set.</p>
-<p>In other words, given events <span class="math inline">\(x_1, \ldots, x_n\)</span> such that <span class="math inline">\(\forall 1 \le i \le n, 1 \le j \le n, P(x_i) = P(x_i \mid x_j)\)</span> (all events are independent), it is a mistake to assume <span class="math inline">\(P(x_i) \ne P(x_i \mid x_j)\)</span>.</p>
+<p>In other words, given events <span class="math inline">x_1, \ldots, x_n</span> such that <span class="math inline">\forall 1 \le i \le n, 1 \le j \le n, P(x_i) = P(x_i \mid x_j)</span> (all events are independent), it is a mistake to assume <span class="math inline">P(x_i) \ne P(x_i \mid x_j)</span>.</p>
 <p>For example, if we flip a coin 9 times and it comes up heads every time, then it is a fallacy to think that the next flip will have anything but a 50% chance of coming up heads.</p>
 <p>The <strong>gambler's fallacy</strong> is committed whenever, after observing something that happens more often than usual, we predict that it will happen less often in the future in order to &quot;balance out&quot;.</p>
 <h3 id="regression-fallacy">Regression Fallacy</h3>
@@ -1178,7 +1211,7 @@ Since the card is a queen, <span class="math inline">\(P(\text{queen}) = 1\)</sp
 <p>Even if the conclusion is falsified, &quot;Mary did not do well on the test&quot;, we can only say that one of the hypotheses were false, and it still might be true that &quot;Mark studied for the test&quot;.</p>
 <p>This is covered in more depth in the Philosophy of Science section in the PHIL110A notes.</p>
 <p>The difference between science and pseudoscience can also be said to be whether it uses the scientific method:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Observe a phenomenon.</li>
 <li>Form hypothesis to explain phenomenon.</li>
 <li>Deduce implications of hypothesis.</li>
@@ -1202,14 +1235,5 @@ Since the card is a queen, <span class="math inline">\(P(\text{queen}) = 1\)</sp
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

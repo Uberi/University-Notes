@@ -10,9 +10,68 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -43,33 +102,7 @@
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h1 id="cs135">CS135</h1>
 <pre><code>Designing Functional Programs</code></pre>
 <p>Instructor:</p>
@@ -81,7 +114,7 @@ Office hours: Tuesdays in MC 2062/2063, Thursdays in MC 4065, 1:15-2:15 PM</code
 <p>Drop by the Tutorial Center (MC 4065) during the <a href="https://www.student.cs.uwaterloo.ca/~cs135/TutorOfficeHours">scheduled hours</a> for assistance, no appointments needed.</p>
 <h2 id="i-clicker">i-clicker</h2>
 <p>Do this before every class:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Hold On/Off until power button blinks.</li>
 <li>There is an i-clicker sticker on the wall, says DA. Press D and then A.</li>
 <li>The Vote Status light should flash green.</li>
@@ -180,7 +213,7 @@ Since in Scheme arbitrary numbers of operands are supported, we need to add brac
 <p>Types are associated with <strong>values</strong>, but not with identifiers such as parameters or constants.</p>
 <h2 id="definitions">Definitions</h2>
 <p>Defining functions in math:</p>
-<p><span class="math inline">\(f(x) = x^2\)</span></p>
+<p><span class="math inline">f(x) = x^2</span></p>
 <p>This follows the general pattern of <code>name(formal_parameters) = body</code></p>
 <p>In Scheme, this is written <code>(define (name formal_parameters) body)</code>. For example:</p>
 <pre><code>(define (sum x y) (+ x y)) is equivalent to sum(x,y) = x + y</code></pre>
@@ -195,12 +228,12 @@ Since in Scheme arbitrary numbers of operands are supported, we need to add brac
 (* 2 5)
 10</code></pre>
 <p>On paper:</p>
-<p><span class="math display">\[
+<p><span class="math display">\displaystyle 
 \text{(* (- 6 4) (+ 3 2))}
 \implies \text{(* 2 (+ 3 2))}
 \implies \text{(* 2 5)}
 \implies 10
-\]</span></p>
+</span></p>
 <p>Functions are applied via substitution, as in math. There is only one solution to every possible expression - there is no ambiguity. Functions can only return one value.</p>
 <h2 id="constants">Constants</h2>
 <p>Constants do not accept parameters, and simply have a constant value:</p>
@@ -318,7 +351,7 @@ Tests:
 <p>Scheme represents Boolean values with the literals <code>#t</code> and <code>#f</code> (<code>true</code> and <code>false</code> are also usable in the Scheme teaching languages), representing true and false respectively.</p>
 <p>The equality function <code>(= x y)</code> (<code>(= Num Num) -&gt; Boolean</code>) tests whether two numbers are equal and results in a boolean value. <code>(&lt; x y)</code> and <code>(&gt;= x y)</code> behave similarly.</p>
 <p><strong>Predicates</strong> are expressions that result in Boolean values. They are, by convention, given names that end with a question mark. For example, <code>(even? x)</code> is clearly a predicate.</p>
-<p>The most common Boolean operators are <code>(and x y ...)</code>, <code>(or x y ...)</code>, and <code>(not x)</code>. They represent <span class="math inline">\(x \wedge y\)</span>, <span class="math inline">\(x \vee y\)</span>, and <span class="math inline">\(\neg x\)</span>, respectively.</p>
+<p>The most common Boolean operators are <code>(and x y ...)</code>, <code>(or x y ...)</code>, and <code>(not x)</code>. They represent <span class="math inline">x \wedge y</span>, <span class="math inline">x \vee y</span>, and <span class="math inline">\neg x</span>, respectively.</p>
 <p>Scheme has no inequality (not-equals) operator. However, it can be implemented as follows: <code>(not (= x y))</code>.</p>
 <p>Scheme uses short circuit evaluation. For <code>and</code> and <code>or</code>, if the result of the expression is known before the evaluation is complete, the rest is not evaluated:</p>
 <ul>
@@ -414,7 +447,7 @@ Tests:
 <p>A <strong>semantic model</strong> provides a way to predict the result of running any program.</p>
 <p>Ellipses (<code>...</code>) can represent omissions, indicate patterns, and more. Pattern ellipses often represent multiple arguments or parameters.</p>
 <p>A semantic model for Scheme is based on substitution, where we step through the program one substitution at a time:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Find the leftmost (from beginning) expression that can have a rule applied to it.
 <ul>
 <li>A rule can only be applied if the expression depends only on simple values.</li>
@@ -816,13 +849,13 @@ A OtherThing is one of:
 <h1 id="section-6">10/10/13</h1>
 <p>We can denote subsets of certain sets using subscript notation:</p>
 <ul>
-<li>Natural numbers: <span class="math inline">\(\mathbb{Z}_{\ge 0}\)</span></li>
-<li>Negative integers: <span class="math inline">\(\mathbb{Z}_{&lt; 0}\)</span></li>
-<li>Real numbers greater than 100: <span class="math inline">\(\mathbb{R}_{&gt; 100}\)</span></li>
+<li>Natural numbers: <span class="math inline">\mathbb{Z}_{\ge 0}</span></li>
+<li>Negative integers: <span class="math inline">\mathbb{Z}_{&lt; 0}</span></li>
+<li>Real numbers greater than 100: <span class="math inline">\mathbb{R}_{&gt; 100}</span></li>
 </ul>
 <p>In data definitions, we can represent this as follows:</p>
 <pre><code>;; ascii-&gt;listofchar: Nat[&lt;256] Nat[&lt;256] -&gt; (listof Char)</code></pre>
-<p>Here, <code>Nat[&lt;256]</code> is equivalent to <span class="math inline">\(\mathbb{N}_{&lt;256}\)</span>, or natural numbers less than 256. Other possible uses of the square braket notation are <code>Int[&gt;=20]</code>, <code>String[&lt;&quot;abc&quot;]</code>.</p>
+<p>Here, <code>Nat[&lt;256]</code> is equivalent to <span class="math inline">\mathbb{N}_{&lt;256}</span>, or natural numbers less than 256. Other possible uses of the square braket notation are <code>Int[&gt;=20]</code>, <code>String[&lt;&quot;abc&quot;]</code>.</p>
 <p>Primality test:</p>
 <pre><code>;; prime?: Nat[&gt;0] -&gt; Boolean
 ;; Purpose: produces true if `n` is prime and false otherwise
@@ -1045,10 +1078,10 @@ A OtherThing is one of:
 <h3 id="generativegeneral-recursion">Generative/general recursion</h3>
 <p><strong>Generative/general recursion</strong> allows us to get closer to a base case in any way we want - we can calculate the parameters freely.</p>
 <p>If there is even just one generated parameter, it is generative recursion.</p>
-<p>Consider the GCD for <span class="math inline">\(m &gt; 0\)</span>:</p>
+<p>Consider the GCD for <span class="math inline">m &gt; 0</span>:</p>
 <ul>
-<li><span class="math inline">\(\gcd(n, 0) = n\)</span></li>
-<li><span class="math inline">\(\gcd(n, m) = \gcd(m, n \mod m)\)</span></li>
+<li><span class="math inline">\gcd(n, 0) = n</span></li>
+<li><span class="math inline">\gcd(n, m) = \gcd(m, n \mod m)</span></li>
 </ul>
 <p>We do not have a data definition. Here, we use generative recursion to create a function to compute the GCD of two numbers:</p>
 <pre><code>(define (gcd n m)
@@ -1068,18 +1101,18 @@ A OtherThing is one of:
 ;; * (Leaf-constructor Value)
 ;; * (Node-constructor Tree Tree)</code></pre>
 <p>Every node is also a tree in itself. If we look at a node and its descendents as a tree, we call it a <strong>subtree</strong> in this context.</p>
-<p>For example, we can represent arithmetic expressions as trees. Consider <span class="math inline">\((4 + 1) * (7 - (6 / 2))\)</span>:</p>
+<p>For example, we can represent arithmetic expressions as trees. Consider <span class="math inline">(4 + 1) * (7 - (6 / 2))</span>:</p>
 <ul>
-<li><span class="math inline">\(*\)</span></li>
-<li><span class="math inline">\(+\)</span>
+<li><span class="math inline">*</span></li>
+<li><span class="math inline">+</span>
 <ul>
 <li>4</li>
 <li>1</li>
 </ul></li>
-<li><span class="math inline">\(-\)</span>
+<li><span class="math inline">-</span>
 <ul>
 <li>7</li>
-<li><span class="math inline">\(/\)</span></li>
+<li><span class="math inline">/</span></li>
 <li>6</li>
 <li>2</li>
 </ul></li>
@@ -1146,7 +1179,7 @@ A OtherThing is one of:
 <p>Depth-first traversal is quite natural to implement recursively. As a result, it is used quite often in this course.</p>
 <p>We can represent traversal as a flat list of the nodes in the tree, in the order that they were traversed.</p>
 <p>When we do traversal, there is also a question of the order in which we deal with children of an internal node and the node itself. For example, we can process the tree <code>(+ 1 2)</code> in the following ways:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>process the <code>+</code>, then <code>1</code> and <code>2</code> - this is called <strong>pre-order traversal</strong>. The result would be <code>'+ 1 2</code>.</li>
 <li>process <code>1</code>, then <code>+</code>, and then <code>2</code> - this is called <strong>in-order traversal</strong>. The result would be <code>1 '+ 2</code>.</li>
 <li>process <code>1</code>, <code>2</code>, and then <code>+</code> - this is called <strong>post-order traversal</strong>. The result would be <code>1 2 '+</code>.</li>
@@ -1227,7 +1260,7 @@ A OtherThing is one of:
 <li>If the search key is greater than a node's key, then we <strong>only need to search in the right subtree</strong>.</li>
 </ul>
 <p>Basically, we avoid doing one recursive call each time - so we would only need to make as many recursive calls as the tree is deep.</p>
-<p>If a tree is nicely <strong>balanced</strong> (internal nodes try to have both subtrees non-empty as much as possible), we can do a search in only <span class="math inline">\(\log_2 n\)</span> calls, where <span class="math inline">\(n\)</span> is the number of leaf nodes.</p>
+<p>If a tree is nicely <strong>balanced</strong> (internal nodes try to have both subtrees non-empty as much as possible), we can do a search in only <span class="math inline">\log_2 n</span> calls, where <span class="math inline">n</span> is the number of leaf nodes.</p>
 <p>Otherwise, degenerate trees such as one with all internal nodes having empty left or right subtrees are no more efficient than an association list.</p>
 <p>This can be implemented as follows:</p>
 <pre><code>;; search-bst: Num BST -&gt; (union Any false)
@@ -1480,7 +1513,7 @@ A OtherThing is one of:
 <pre><code>(local [(define a x) (define b y) (define c z) ...] ; we use square brackets by convention to improve readability
        ...) ; do something with those definitions</code></pre>
 <p>In local definition, definitions behave like the those in the top level. We can even define functions.</p>
-<p>Consider Heron's formula, used for calculating the area of a triangle with side lengths <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and c$: <span class="math inline">\(A = \sqrt{s(s - a)(s - b)(s - c)}\)</span> where <span class="math inline">\(s = \frac{a + b + c}{2}\)</span>.</p>
+<p>Consider Heron's formula, used for calculating the area of a triangle with side lengths <span class="math inline">a</span>, <span class="math inline">b</span>, and c$: <span class="math inline">A = \sqrt{s(s - a)(s - b)(s - c)}</span> where <span class="math inline">s = \frac{a + b + c}{2}</span>.</p>
 <pre><code>(define (t-area a b c)
     (sqrt (* (/ (+ a b c) 2)
              (- (/ (+ a b c) 2) a)
@@ -1508,7 +1541,7 @@ A OtherThing is one of:
 <p>The <strong>global/top-level scope</strong> is the scope of top-level definitions. All programs initially statrt off in the global scope.</p>
 <h3 id="stepping">Stepping</h3>
 <p>The stepping rules for local are the most complex we have seen so far:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Create new, unique names for the every local definitions.</li>
 <li>Bind the new names to the values of the definitions.</li>
 <li>Substitute the new names for the old names everywhere inside the local scope.</li>
@@ -1827,7 +1860,7 @@ A OtherThing is one of:
 <p>For <code>gcd</code>, we know that <code>(remainder n m) &lt; m</code> and that both are positive or 0. So <code>m</code> is <strong>decreasing on every call</strong>. Since it can never shoot past 0 into the negatives, it must eventually reach 0, the base case.</p>
 <p>Therefore, for any input, the depth of recursion is bounded by the argument <code>m</code>.</p>
 <p>It is not possible to analyze an arbitrary function to see if it will terminate due to the <strong>halting problem</strong>.</p>
-<p>Consider the Collatz conjecture, which states that the hailstone sequence, <span class="math inline">\(x_n = \begin{cases} \frac{x_{n - 1}}{2} &amp;\text{ if } x_{n - 1} \text{ is even} 3x_{n - 1} + 1 &amp;\text{ if } x_{n - 1} \text{ is odd} \end{cases}\)</span>, must eventually result in the sequence <span class="math inline">\(1, 4, 2, 1, 4, 2, \ldots\)</span>.</p>
+<p>Consider the Collatz conjecture, which states that the hailstone sequence, <span class="math inline">x_n = \begin{cases} \frac{x_{n - 1}}{2} &amp;\text{ if } x_{n - 1} \text{ is even} 3x_{n - 1} + 1 &amp;\text{ if } x_{n - 1} \text{ is odd} \end{cases}</span>, must eventually result in the sequence <span class="math inline">1, 4, 2, 1, 4, 2, \ldots</span>.</p>
 <p>This is, as of 2013, an unsolved problem in mathematics. We do not know if an arbitrary starting value will eventually result in 1.</p>
 <p>As a result, whether the following function terminates is also an unsolved problem in mathematics:</p>
 <pre><code>(define (collatz n)
@@ -1915,7 +1948,7 @@ A OtherThing is one of:
 <h2 id="graphs">Graphs</h2>
 <p>A graph is simply a collection of nodes where each node can refer to zero or more nodes, including themselves.</p>
 <p>A <strong>directed graph</strong> is a collection of <strong>nodes</strong> together with a collection of <strong>edges</strong>.</p>
-<p>In a directed graph, <strong>edges have direction</strong> - the edges <span class="math inline">\((A, B)\)</span> is different from <span class="math inline">\((B, A)\)</span>. The first points from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span>, while the second points from <span class="math inline">\(B\)</span> to <span class="math inline">\(A\)</span>.</p>
+<p>In a directed graph, <strong>edges have direction</strong> - the edges <span class="math inline">(A, B)</span> is different from <span class="math inline">(B, A)</span>. The first points from <span class="math inline">A</span> to <span class="math inline">B</span>, while the second points from <span class="math inline">B</span> to <span class="math inline">A</span>.</p>
 <p>There are also <strong>undirected graphs</strong> where edges have no direction.</p>
 <p>Trees are always graphs, but graphs are not always trees. Trees are graphs that obey some additional constraints.</p>
 <p>We can draw graphs graphically. Nodes can be represented as dots with or without labels, and edges can be represented as arrows leading from one node to another.</p>
@@ -1923,11 +1956,11 @@ A OtherThing is one of:
 <h3 id="definitions-1">Definitions</h3>
 <p>In a graph, a <strong>vertex</strong> is a node.</p>
 <p>An edge connects two nodes together.</p>
-<p>An <strong>edge</strong> is an ordered pair of nodes like <span class="math inline">\((A, B)\)</span>, where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are nodes.</p>
-<p><span class="math inline">\((A, B)\)</span> is an edge connecting <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. <span class="math inline">\(A\)</span> is an <strong>in-neighbor</strong> of <span class="math inline">\(B\)</span> (<span class="math inline">\(A\)</span> points inward to <span class="math inline">\(B\)</span>), and <span class="math inline">\(B\)</span> is an <strong>out-neighbor</strong> of <span class="math inline">\(A\)</span> (<span class="math inline">\(A\)</span> points outward towards <span class="math inline">\(B\)</span>).</p>
-<p>A sequence of nodes <span class="math inline">\(v_1, \ldots, v_k\)</span> is a <strong>path</strong> or <strong>route</strong> with length <span class="math inline">\(k - 1\)</span> if <span class="math inline">\((v_1, v_2), (v_2, v_3), \ldots, (v_{k - 1}, v_k)\)</span> are edges in the graph.</p>
+<p>An <strong>edge</strong> is an ordered pair of nodes like <span class="math inline">(A, B)</span>, where <span class="math inline">A</span> and <span class="math inline">B</span> are nodes.</p>
+<p><span class="math inline">(A, B)</span> is an edge connecting <span class="math inline">A</span> and <span class="math inline">B</span>. <span class="math inline">A</span> is an <strong>in-neighbor</strong> of <span class="math inline">B</span> (<span class="math inline">A</span> points inward to <span class="math inline">B</span>), and <span class="math inline">B</span> is an <strong>out-neighbor</strong> of <span class="math inline">A</span> (<span class="math inline">A</span> points outward towards <span class="math inline">B</span>).</p>
+<p>A sequence of nodes <span class="math inline">v_1, \ldots, v_k</span> is a <strong>path</strong> or <strong>route</strong> with length <span class="math inline">k - 1</span> if <span class="math inline">(v_1, v_2), (v_2, v_3), \ldots, (v_{k - 1}, v_k)</span> are edges in the graph.</p>
 <p>The length of a path is the number of edges that make it up.</p>
-<p>A <strong>cycle</strong> is a path where <span class="math inline">\(v_1 = v_k\)</span> - the path starts and ends at the same node.</p>
+<p>A <strong>cycle</strong> is a path where <span class="math inline">v_1 = v_k</span> - the path starts and ends at the same node.</p>
 <p>A <strong>directed acyclic graph</strong> (DAG) is a graph with no possible cycles.</p>
 <h3 id="representations">Representations</h3>
 <p>We can represent a graph as a list of nodes, each of which has a list of the nodes it points to. This is called the <strong>adjecency list representation</strong>.</p>
@@ -2033,7 +2066,7 @@ A OtherThing is one of:
   (I ()) ;end of diamond 4
   (Z ()))</code></pre>
 <p>If we tried to search for a path from <code>A</code> to <code>Z</code>, the backtracking search would check every possible path variation. For example, there are 2 ways to get from <code>A</code> to <code>C</code>, but <code>C</code> doesn't lead to <code>Z</code> in the first place, so searching to <code>C</code> is a waste of time the second time we try to get to it.</p>
-<p>In fact, with this diamond-shaped pattern of graph, the number of paths checked is an exponential function of the number of diamonds - <span class="math inline">\(2^n\)</span>, in our case.</p>
+<p>In fact, with this diamond-shaped pattern of graph, the number of paths checked is an exponential function of the number of diamonds - <span class="math inline">2^n</span>, in our case.</p>
 <p>We can make this more efficient by having a failed route finding in <code>find-route-list</code> return the list of nodes that were visited so that we can avoid visiting them again in the remaining candidates in the list of neighbors:</p>
 <pre><code>;; find-route: Node Node Graph -&gt; (union (listof Node) false)
 ;; Purpose: produces a path leading from `start` to `end` in `graph` or false if not possible
@@ -2081,7 +2114,7 @@ A OtherThing is one of:
 <p>The proof is based on &quot;this statement cannot be proved&quot; written in mathematical notation. It would be inconsistent if the statement was false, since it would be a proof of a false statement, so it must be true but not provable.</p>
 <p>Another one of Hilbert's questions asked if there was a procedure that, given a formula, proves it true, shows it false, or shows that it is unprovable. This requires a precise definition of a procedure - a formal model of computation.</p>
 <p>Alonzo Church (1903-1995) showed that such a procedure is not possible. He invented lambda calculus with his student Kleene.</p>
-<p>The notation is as simple as possible: <span class="math inline">\(\lambda x . E\)</span> is a single-argument function with body <span class="math inline">\(E\)</span>, while ;wip</p>
+<p>The notation is as simple as possible: <span class="math inline">\lambda x . E</span> is a single-argument function with body <span class="math inline">E</span>, while ;wip</p>
 <p>Alan Turing (1912 1954) defined a different model of computation and resulted in a simpler and more influential proof.</p>
 <p>His Turing machine was a theoretical device with unlimited memory and a finite number of states. It could be thought of as a machine with an infinite tape and a finite state machine.</p>
 <p>One could represent a Turing machine using characters stored in the memory of another machine. Suppose there was a machine that could process one of these descriptions and result in whether it would eventually halt or not. Then there exists another machine that would halt if and only if the first machine said it wouldn't. This is a contradiction, so it is impossible for such a machine to exist.</p>
@@ -2102,14 +2135,5 @@ A OtherThing is one of:
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

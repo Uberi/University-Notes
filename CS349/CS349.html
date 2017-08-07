@@ -47,9 +47,68 @@ code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Ann
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -80,33 +139,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h1 id="cs-349">CS 349</h1>
 <p>User interfaces.</p>
 <pre><code>Jeff Avery
@@ -129,12 +162,12 @@ Website: https://www.student.cs.uwaterloo.ca/~cs349/s16/about.html</code></pre>
 <p>X separates the user interface and the application - they can actually run on totally different machines, due to the network transparency mentioned previously. Basically, the client is the computer that runs the custom software, and the server is the computer that displays things to the user (intuitively, the server serves up windowing capabilities).</p>
 <p>Users express intent to the X server input system. The input systems then update the X clients, which in turn notify the X server output systems. Then, the results are presented back to the user. This can be thought of as an MVC implementation, where the client is the model, the input system is the controller, and the output system is the view.</p>
 <p>A typical X client application does the following:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Initialize the program.</li>
 <li>Connect to the X server.</li>
 <li>Initialize the X portion of the program.</li>
 <li>Do the event loop:
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Get the next input event from the X server (note that the server actually drives the program).</li>
 <li>Handle the event (and break the loop if it was an exit event).</li>
 <li>Do client work if necessary.</li>
@@ -205,11 +238,11 @@ Website: https://www.student.cs.uwaterloo.ca/~cs349/s16/about.html</code></pre>
 <p>A shape model is a model that includes all of the data needed to draw that model, often represented as an array of points. A widget can be considered a shape model. What Java actually provides is the ability to actually draw these models, and to test whether an event falls into a drawn shape.</p>
 <p>How do we tell if a poin is inside a polygon? For convex polygons, then we can use something like SAT. One of the simplest ways that works for any kind of polygon is to shoot a ray from any point to the edge of the screen, and check whether it intersected an even or odd number of lines. However, in this course, the polygon classes have better algorithms built in.</p>
 <p>Widgets in the interactor tree can be manipulated using <strong>affine transformations</strong>. This allows us to tell widgets how to draw themselves, and let widgets tell when we're clicking or tapping on them. Note that widgets are always drawn relative to the parent - to figure out the actual postion of a widget, we need to walk down the interactor tree, applying transformations in turn to get the final transformation of the target widget. For our purposes, an affine transformation is some combination of translations, rotations, and scalings.</p>
-<p>Translation is done simply by adding values to the coordinates of each shape point. Scaling can be done by multiplying the X and Y coordinates by scalars. Rotation can be done by applying <span class="math inline">\(\tup{x \cos \theta - y \sin \theta, x \sin \theta + y \cos \theta}\)</span> to every shape point.</p>
+<p>Translation is done simply by adding values to the coordinates of each shape point. Scaling can be done by multiplying the X and Y coordinates by scalars. Rotation can be done by applying <span class="math inline">\tup{x \cos \theta - y \sin \theta, x \sin \theta + y \cos \theta}</span> to every shape point.</p>
 <p>All affine transformations are linear functions of the original coordinates. As a result, affine transformations are closed - for any affine transformation of an affine transformation of any set of points, there exists a single affine transformation that these two transformations are equivalent to.</p>
-<p>2D affine transformations can be better represented using 2 by 2 matrices, since they are simply linear combinations of 2 variables. The advantage of this is that the matrices are associative under multiplication Also, GPUs and modern toolkits are optimised to work with this representation. As a result, a scale matrix is <span class="math inline">\(\begin{bmatrix} s_x &amp; 0 \\ 0 &amp; s_y \end{bmatrix}\)</span>, and a rotation matrix is <span class="math inline">\(\begin{bmatrix} \cos \theta &amp; -\sin \theta \\ \sin \theta &amp; \cos \theta \end{bmatrix}\)</span>.</p>
-<p>A translation matrix is simply <span class="math inline">\(\begin{bmatrix} 1 &amp; \frac{t_x}{y} \\ \frac{t_y}{x} &amp; 1 \end{bmatrix}\)</span> (when <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are nonzero). Since it doesn't work for coordinates like the origin, we can't, in general, represent translations as 2 by 2 matrices. Instead, we can use <strong>homogeneous coordinates</strong>. Basicaly, in addition to the X and Y component, we also have the W component. Basically, every coordinate now has infinite equivalent vectors for all different W values. The actual coordinate is simply the X and Y values divided by the W value.</p>
-<p>The advantage of transformations over homogeneous matrices is that the transformation matrix <span class="math inline">\(\begin{bmatrix} a &amp; b &amp; t_x \\ c &amp; d &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span> - all 2D transformation can be represented using these matrices.</p>
+<p>2D affine transformations can be better represented using 2 by 2 matrices, since they are simply linear combinations of 2 variables. The advantage of this is that the matrices are associative under multiplication Also, GPUs and modern toolkits are optimised to work with this representation. As a result, a scale matrix is <span class="math inline">\begin{bmatrix} s_x &amp; 0 \\ 0 &amp; s_y \end{bmatrix}</span>, and a rotation matrix is <span class="math inline">\begin{bmatrix} \cos \theta &amp; -\sin \theta \\ \sin \theta &amp; \cos \theta \end{bmatrix}</span>.</p>
+<p>A translation matrix is simply <span class="math inline">\begin{bmatrix} 1 &amp; \frac{t_x}{y} \\ \frac{t_y}{x} &amp; 1 \end{bmatrix}</span> (when <span class="math inline">x</span> and <span class="math inline">y</span> are nonzero). Since it doesn't work for coordinates like the origin, we can't, in general, represent translations as 2 by 2 matrices. Instead, we can use <strong>homogeneous coordinates</strong>. Basicaly, in addition to the X and Y component, we also have the W component. Basically, every coordinate now has infinite equivalent vectors for all different W values. The actual coordinate is simply the X and Y values divided by the W value.</p>
+<p>The advantage of transformations over homogeneous matrices is that the transformation matrix <span class="math inline">\begin{bmatrix} a &amp; b &amp; t_x \\ c &amp; d &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}</span> - all 2D transformation can be represented using these matrices.</p>
 <h1 id="section-7">18/5/16</h1>
 <p>When we're overriding methods like <code>paintComponent</code>, we should call <code>super.paintComponent()</code> before we do any drawing in the overridden method.</p>
 <p>Although matrix transformations are nice because they're associative when we multiply then, note that they aren't commutative - order matters a lot when applying transformations.</p>
@@ -220,10 +253,10 @@ Website: https://www.student.cs.uwaterloo.ca/~cs349/s16/about.html</code></pre>
 <h2 id="scenes">Scenes</h2>
 <p>The scene graph is actually a tree, and allows us to represent heirarchical objects with relative coordinate systems for each objects with respect to its parent in the tree.</p>
 <p>Consider the drawing of an arm. Without a scene graph, each time we transformed the upper arm, we'd have to manually recompute the transformations for the lower arm, hand, etc., which is a big hassle. Instead, we could maintain an affine transformation for each object, and child objects would get drawn with that transformation in place:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Component draws itself using its affine transform.</li>
 <li>For each child object:
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Save the current affine transform.</li>
 <li>Do any other transforms necessary, on top of the existing transforms - multiply the current transform with the transforms needed by the child object.</li>
 <li>Recursively do all of the steps here for the child object.</li>
@@ -277,14 +310,5 @@ Website: https://www.student.cs.uwaterloo.ca/~cs349/s16/about.html</code></pre>
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

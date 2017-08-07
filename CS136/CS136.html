@@ -10,9 +10,68 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -43,33 +102,7 @@
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h1 id="cs136">CS136</h1>
 <p>Algorithm Design and Data Abstraction.</p>
 <pre><code>Instructor: Dave Tompkins
@@ -649,23 +682,23 @@ int main(void) {
 <h1 id="section-5">23/1/14</h1>
 <h2 id="c-memory-model">C Memory Model</h2>
 <p>The most common number systems in use today are binary, decimal, and hexadecimal.</p>
-<p>Hexadecimal has the special property of each digit representing 4 digits of binary, simply by replacing the digit with the binary digits. This is because <span class="math inline">\(2^4 = 16\)</span> and there are 16 digits.</p>
+<p>Hexadecimal has the special property of each digit representing 4 digits of binary, simply by replacing the digit with the binary digits. This is because <span class="math inline">2^4 = 16</span> and there are 16 digits.</p>
 <p>In C, hex numbers are written as <code>0x1234</code>. Without the <code>0x</code> prefix, the number is assumed to be decimal.</p>
 <p>Computers use bits internally, which are grouped into groups of 8 called bytes. Because they have 8 digits, they have 256 possible states.</p>
 <p>The size of a kilobyte can be 1000 or 1024 bytes, depending on the context. In scientific literature, the kilobyte (KB) is 1000 bytes, and a kibibyte (KiB) is 1024. Likewise with megabytes, gigabytes, etc. These two can differ up to 7% for gibibytes vs. gigabytes.</p>
 <p>Most computer archtectures have primary memory (RAM) and secondary memory (HDD, SSD, flash drives, optical disks, etc.). When we say memory, we usually refer to primary memory.</p>
 <p>Primary memory is very fast, smaller, higher cost, and volatile. Contrast this with secondary storage is slower, larger, cheaper, and persistent.</p>
 <p>Programs can only really run in primary memory - programs need to be copied into primary memory before executing. In this course, we will only need to think in terms of primary memory.</p>
-<p>The smallest unit of memory we can access is a byte. The location of the byte in memory is the <strong>address</strong> of the byte. For example, with 1 MB of memory, the address of the first byte is 0 and the last is <span class="math inline">\(2^{20} - 1\)</span>. We usually represent addresses in hex.</p>
+<p>The smallest unit of memory we can access is a byte. The location of the byte in memory is the <strong>address</strong> of the byte. For example, with 1 MB of memory, the address of the first byte is 0 and the last is <span class="math inline">2^{20} - 1</span>. We usually represent addresses in hex.</p>
 <p>In this course, we will now need to be aware of the memory our program is using. In CS135 we had stepping rules. Now we introduce the C memory model.</p>
 <p>When C gets to a variable definition, it reserves the storage for that variable, keeps track of the address of that storage location to refer to it later, and stores the initial value of the variable in that location. Then, when we reference a variable, we retrieve or set it from the address we determined earlier. Note that variable declarations <strong>do not do this</strong>.</p>
 <p>In the CS135 model, variables are basically aliases for values. Now, we consider them as names for locations where a value is stored. When a variable appears in an expression, C obtains the contents of that location.</p>
 <p>We can determine how much memory a variable uses by using the <code>sizeof(X)</code> operator. This looks like a function but is actually an operator. Usually <code>sizeof(int)</code> is 4. <code>sizeof</code> also works on variables and literals. We can assume integers are 4 bytes in this course.</p>
 <p>If we define an int, C finds 4 consecutive bytes of memory to store it, and then keeps track of the first address. Then, it updates those 4 bytes to the initial value.</p>
-<p>Note that because integers only has 4 bytes, we can only represent the integers from <span class="math inline">\(-2^{31}\)</span> to <span class="math inline">\(2^{31} - 1\)</span>.</p>
+<p>Note that because integers only has 4 bytes, we can only represent the integers from <span class="math inline">-2^{31}</span> to <span class="math inline">2^{31} - 1</span>.</p>
 <p>If we <code>#include &lt;limits.h&gt;</code>, <code>INT_MIN</code> and <code>INT_MAX</code> are defined to these limiting values.</p>
-<p>If we use <code>unsigned int</code>, we can represent integers from 0 to <span class="math inline">\(2^{32} - 1\)</span>.</p>
-<p>We should always try to work within these limits. If we work outside of these ranges, an <strong>overflow</strong> occurs. For example, if we add 1 to <span class="math inline">\(2^{31} - 1\)</span>, we wrap around to <span class="math inline">\(-2^{31}\)</span>, like in modular arithmetic.</p>
+<p>If we use <code>unsigned int</code>, we can represent integers from 0 to <span class="math inline">2^{32} - 1</span>.</p>
+<p>We should always try to work within these limits. If we work outside of these ranges, an <strong>overflow</strong> occurs. For example, if we add 1 to <span class="math inline">2^{31} - 1</span>, we wrap around to <span class="math inline">-2^{31}</span>, like in modular arithmetic.</p>
 <p>In C, we can also have variables that use only 1 byte. The <code>char</code> type can store any integer from -128 to 127. They are not very useful for calculations, but we often use them to store characters, like ASCII character codes.</p>
 <p>In ASCII, upper case chars start with &quot;A&quot; at 65, lower case starts with &quot;a&quot; at 97, and a space is 32. 0 to 31 are the control sequences. For example, 7 is a bell and 10 is a linefeed (newline or <code>\n</code>).</p>
 <p>On Windows, the end of line character is a line feed and a carriage return. On Linux the end of line character is just a line feed. This can cause confusion when working on files made on different operating systems.</p>
@@ -724,7 +757,7 @@ printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints
 <p>The sections can have different sizes depending on the program, but each program has a fixed size for each section.</p>
 <p>As a result, once <code>main</code> is called, no more global variables can be defined.</p>
 <p>Running Programs:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>For each module:
 <ul>
 <li>Scan for <code>#include</code>s, and add entries to the internal module list.</li>
@@ -742,7 +775,7 @@ printf(&quot;%d %c&quot;, a, a); // %d prints the integer value, while %c prints
 <h3 id="call-stack">Call Stack</h3>
 <p>While running our program, we keep track of the program location, which is where we currently are in the code.</p>
 <p>However, when we call a function, we need to keep track of the new program location (the function we called) and the place we want to go back to when we use <code>return</code> (right after the place we called the function). The place we want to go back to is called the <strong>return address</strong>.</p>
-<p>If <span class="math inline">\(f\)</span> calls <span class="math inline">\(g\)</span>, and <span class="math inline">\(g\)</span> calls <span class="math inline">\(h\)</span>, we need to keep track of where we were in <span class="math inline">\(f\)</span> when we called <span class="math inline">\(g\)</span>, and where we were in <span class="math inline">\(g\)</span> when we called <span class="math inline">\(h\)</span>, and where we currently are in <span class="math inline">\(h\)</span>.</p>
+<p>If <span class="math inline">f</span> calls <span class="math inline">g</span>, and <span class="math inline">g</span> calls <span class="math inline">h</span>, we need to keep track of where we were in <span class="math inline">f</span> when we called <span class="math inline">g</span>, and where we were in <span class="math inline">g</span> when we called <span class="math inline">h</span>, and where we currently are in <span class="math inline">h</span>.</p>
 <p>In this course, we represent return addresses with <code>CALLING_FUNCTION:LINE_NUMBER</code>, except for <code>main</code>. The return address for the <code>main</code> function is <code>OS</code>, for the operating system.</p>
 <p>We can store these chunks of context information in a stack. This stack we call the <strong>call stack</strong>. Every time we call a function is called, we push an entry onto the stack. Every time a function returns, we pop an entry off the top of the stack and go back to the return address specified in the entry.</p>
 <p>The entries stored on the stack are known as <strong>stack frames</strong>, or <strong>frames of reference</strong>. Every stack frame contains the return address, all currently existing local variables, and all arguments to the function. Note that the return value goes into the temporary storage section.</p>
@@ -1084,7 +1117,7 @@ const int * const p = &amp;i; // pointer and pointed value immutable</code></pre
 <p>Instead of recursion, we now have iteration. The interesting thing about iterating is that it will never result in a stack overflow.</p>
 <h3 id="while-loop">While loop</h3>
 <p>The while control flow statement takes the form of <code>while (CONDITION) BODY;</code>. It works as follows:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Evaluate <code>CONDITION</code>. If false, we are done with the loop and move on.</li>
 <li>Evaluate <code>BODY</code>.</li>
 <li>Go back to step 1.</li>
@@ -1102,7 +1135,7 @@ while (i = 100) f(x); // assignment rather than equality
 while (true) f(x); // best way to make an infinite loop intentionally</code></pre>
 <h3 id="do-while-loop">Do-While Loop</h3>
 <p>The do-while control flow statement takes the form of <code>do STATEMENT while (CONDITION);</code>. It works almost exactly like the while loop, except the condition is evaluated at the end:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Evaluate <code>BODY</code>.</li>
 <li>Evaluate <code>CONDITION</code>. If false, we are done with the loop and move on.</li>
 <li>Go back to step 1.</li>
@@ -1119,7 +1152,7 @@ do {
 <p>The for control flow statement takes the form of <code>for (SETUP; CONDITION; UPDATE) BODY;</code>. It is simply a shortcut for writing a very common pattern used in while loops.</p>
 <p>This is almost exactly equivalent to <code>{ SETUP; while (CONDITION) { BODY; UPDATE; } }</code>.</p>
 <p>The only difference is that when we use <code>continue</code>, the for loop will also execute <code>UPDATE</code> before continuing with the next iteration.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Evaluate <code>SETUP</code>.</li>
 <li>Evaluate <code>CONDITION</code>. If false, we are done with the loop and move on.</li>
 <li>Evaluate <code>BODY</code>. If <code>continue</code> is encountered, <code>UPDATE</code> and go back to step 2.</li>
@@ -1464,55 +1497,55 @@ while (i &lt; 5) { // 1 * 6 operations
 }</code></pre>
 <p>Here, there are a total of 28 operations.</p>
 <h1 id="section-15">6/3/14</h1>
-<p>We are always interested in the time taken <strong>with respect to the size of the input</strong>. We represent this using <span class="math inline">\(n\)</span>, <span class="math inline">\(m\)</span>, or <span class="math inline">\(k\)</span>, for different inputs.</p>
+<p>We are always interested in the time taken <strong>with respect to the size of the input</strong>. We represent this using <span class="math inline">n</span>, <span class="math inline">m</span>, or <span class="math inline">k</span>, for different inputs.</p>
 <p>For example, consider the following:</p>
 <pre><code>(define (sum lon)
     (cond [(empty? lon) 0]
         [else (+ (first lon) (sum (rest lon)))]))</code></pre>
-<p>The number of steps needed to run this function is dependent on <code>(length lon)</code>. As an asid, it happens to be <span class="math inline">\(7n + 2\)</span> steps, where <span class="math inline">\(n\)</span> is the number of elements in <code>lon</code>.</p>
-<p>What <span class="math inline">\(n\)</span> or other variables represent can depend on the context. For example, a list of numbers might have <span class="math inline">\(n\)</span> represent the length of the list.</p>
-<p>Another example is a list of strings. Here, <span class="math inline">\(n\)</span> can represent the length of the list, the total length of the string, or even the longest string.</p>
-<p>A good example is for trees. We may have <span class="math inline">\(n\)</span> represent the number of nodes, or the depth of the tree, or a variety of other properties.</p>
+<p>The number of steps needed to run this function is dependent on <code>(length lon)</code>. As an asid, it happens to be <span class="math inline">7n + 2</span> steps, where <span class="math inline">n</span> is the number of elements in <code>lon</code>.</p>
+<p>What <span class="math inline">n</span> or other variables represent can depend on the context. For example, a list of numbers might have <span class="math inline">n</span> represent the length of the list.</p>
+<p>Another example is a list of strings. Here, <span class="math inline">n</span> can represent the length of the list, the total length of the string, or even the longest string.</p>
+<p>A good example is for trees. We may have <span class="math inline">n</span> represent the number of nodes, or the depth of the tree, or a variety of other properties.</p>
 <p>The idea is that sometimes the time taken is dependent on more than just the size of something, and that there can be multiple variables. Also, there can be ambiguity as to what the variables represent, and it is important to clarify if it is unclear.</p>
-<p>This type of analysis is known as <strong>running time analysis</strong>, and we denote the running time of a function as <span class="math inline">\(T(n)\)</span>.</p>
+<p>This type of analysis is known as <strong>running time analysis</strong>, and we denote the running time of a function as <span class="math inline">T(n)</span>.</p>
 <p>Consider now another function, <code>rsum&gt;?</code>:</p>
 <pre><code>(define (rsum&gt;? lon k)
     (cond [(empty? lon) #f]
         [(&lt; k (first lon)) #t]
         [else (rsum&gt;? (rest lon) (- k (first lon)))]))</code></pre>
-<p>Notice that the running time now depends on both the length of <code>lon</code> and the value of <code>k</code>. We write this as <span class="math inline">\(T(n, k) = \ldots\)</span>.</p>
+<p>Notice that the running time now depends on both the length of <code>lon</code> and the value of <code>k</code>. We write this as <span class="math inline">T(n, k) = \ldots</span>.</p>
 <p>We sometimes also care about the amount of memory used for any given input.</p>
 <h2 id="asymptotic-complexity">Asymptotic Complexity</h2>
 <p>We are interested in the <strong>worst case</strong> and <strong>best case</strong> - the smallest possible running time, and the largest possible running time, given all possible inputs.</p>
-<p>In other words, we want to minimize or maximise <span class="math inline">\(T(n)\)</span>.</p>
-<p>For example, for <code>rsum&gt;?</code>, the best case is <span class="math inline">\(T(n) = 5\)</span> (if <span class="math inline">\(k\)</span> is less than the first element), and the worst case is <span class="math inline">\(T(n) = 10n + 2\)</span> (if <span class="math inline">\(k\)</span> is greater than the sum of the entire list).</p>
+<p>In other words, we want to minimize or maximise <span class="math inline">T(n)</span>.</p>
+<p>For example, for <code>rsum&gt;?</code>, the best case is <span class="math inline">T(n) = 5</span> (if <span class="math inline">k</span> is less than the first element), and the worst case is <span class="math inline">T(n) = 10n + 2</span> (if <span class="math inline">k</span> is greater than the sum of the entire list).</p>
 <p>When we say running time, by default we mean the <strong>worst case running time</strong>. The average case running time is also useful to know about, but this is much harder to determine.</p>
 <h3 id="big-o-notation">Big-O Notation</h3>
 <p>In practice, we do not really care about these small variations in running time - they are not significant and are highly dependent on hardware and implementation. Instead, we care about the <strong>behaviour of the running time as the input grows arbitrarily large</strong>.</p>
-<p>This is the <strong>order</strong> (growth rate) of the running time - the term that gets the largest as <span class="math inline">\(n \to \infty\)</span>, without any constant coefficients. For example, <span class="math inline">\(7n + 4\)</span> has order <span class="math inline">\(n\)</span>, and so does <span class="math inline">\(10n + 2\)</span>.</p>
-<p>We can represent an order <span class="math inline">\(f(n)\)</span> with <span class="math inline">\(O(f(n))\)</span>. This is <strong>big-O notation</strong>. So the order <span class="math inline">\(n^2\)</span> is represented as <span class="math inline">\(O(n^2)\)</span>.</p>
-<p>In this course, we will only encounter the following orders: <span class="math inline">\(O(1) &lt; O(\log n) &lt; O(n) &lt; O(n \log n) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n)\)</span>.</p>
+<p>This is the <strong>order</strong> (growth rate) of the running time - the term that gets the largest as <span class="math inline">n \to \infty</span>, without any constant coefficients. For example, <span class="math inline">7n + 4</span> has order <span class="math inline">n</span>, and so does <span class="math inline">10n + 2</span>.</p>
+<p>We can represent an order <span class="math inline">f(n)</span> with <span class="math inline">O(f(n))</span>. This is <strong>big-O notation</strong>. So the order <span class="math inline">n^2</span> is represented as <span class="math inline">O(n^2)</span>.</p>
+<p>In this course, we will only encounter the following orders: <span class="math inline">O(1) &lt; O(\log n) &lt; O(n) &lt; O(n \log n) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n)</span>.</p>
 <p>For example:</p>
 <ul>
-<li><span class="math inline">\(23478905 = O(1)\)</span></li>
-<li><span class="math inline">\(\frac{n(n + 1)(2n + 1)}{6} = O(n^3)\)</span></li>
-<li><span class="math inline">\(n^3 + 3^n = O(2^n)\)</span></li>
+<li><span class="math inline">23478905 = O(1)</span></li>
+<li><span class="math inline">\frac{n(n + 1)(2n + 1)}{6} = O(n^3)</span></li>
+<li><span class="math inline">n^3 + 3^n = O(2^n)</span></li>
 </ul>
-<p>Note that <span class="math inline">\(a^n = O(2^n), a &gt; 1\)</span> because we can rewrite it as <span class="math inline">\(O(a^n) = O(a^{n \log_a 2}) = O(2^n)\)</span>. Likewise, we can write the base of a logarithm as a constant factor and remove it.</p>
+<p>Note that <span class="math inline">a^n = O(2^n), a &gt; 1</span> because we can rewrite it as <span class="math inline">O(a^n) = O(a^{n \log_a 2}) = O(2^n)</span>. Likewise, we can write the base of a logarithm as a constant factor and remove it.</p>
 <p>Big-O notation is much more abstract than running time analysis. Big-O notation can then be associated with an entire algorithm rather than just an implementation of an algorithm.</p>
-<p>Given orders <span class="math inline">\(O(f(n)), O(g(n))\)</span>, the following are identities:</p>
+<p>Given orders <span class="math inline">O(f(n)), O(g(n))</span>, the following are identities:</p>
 <ul>
-<li><span class="math inline">\(O(f(n)) + O(g(n)) = \max(O(f(n)), O(g(n)))\)</span> (<span class="math inline">\(O(1) + O(1) = O(1)\)</span>)</li>
-<li><span class="math inline">\(O(f(n)) \times O(g(n)) = O(f(n) \times g(n))\)</span> (<span class="math inline">\(O(n) \times O(\log n) = O(n \log n)\)</span>)</li>
+<li><span class="math inline">O(f(n)) + O(g(n)) = \max(O(f(n)), O(g(n)))</span> (<span class="math inline">O(1) + O(1) = O(1)</span>)</li>
+<li><span class="math inline">O(f(n)) \times O(g(n)) = O(f(n) \times g(n))</span> (<span class="math inline">O(n) \times O(\log n) = O(n \log n)</span>)</li>
 </ul>
-<p>For example, <span class="math inline">\(T(n) = 1 + 2n + 3n^2 = O(1) + O(n) + O(n^2) = O(n^2)\)</span>.</p>
+<p>For example, <span class="math inline">T(n) = 1 + 2n + 3n^2 = O(1) + O(n) + O(n^2) = O(n^2)</span>.</p>
 <p>Note that at this point, this is all informal notation. Big-O notation can and will be defined more formally later on.</p>
 <p>Big-O notation isn't just for time complexity - we can find the order of any function.</p>
 <h3 id="contracts">Contracts</h3>
 <p>For functions that are either:</p>
 <ul>
-<li>have <span class="math inline">\(O(1)\)</span> time complexity, but where this is not obvious,</li>
-<li>have a time complexity greater than <span class="math inline">\(O(1)\)</span>,</li>
+<li>have <span class="math inline">O(1)</span> time complexity, but where this is not obvious,</li>
+<li>have a time complexity greater than <span class="math inline">O(1)</span>,</li>
 </ul>
 <p>We add an additional field to the contract to denote the time complexity:</p>
 <pre><code>;; merge-sort: (listof Int) -&gt; (listof Int)
@@ -1521,24 +1554,24 @@ while (i &lt; 5) { // 1 * 6 operations
 ;;     TIME: O(n \log n), n is the length of `lon`
 (define (merge-sort lon) ...)</code></pre>
 <h2 id="efficiency-analysis">Efficiency Analysis</h2>
-<p>The lower the order of an algorithm, the more efficient it is. So a <span class="math inline">\(O(n \log n)\)</span> algorithm is more efficient than a <span class="math inline">\(O(n^2)\)</span> algorithm. If two algorithms have the same order, they are equivalent for our purposes.</p>
-<p>We can intuitively analyze an algorithm to determine its time complexity. For example, <code>rsum&gt;?</code> is clearly <span class="math inline">\(O(n)\)</span>, simply by inspection. However, we can also find the order algorithmically:</p>
-<ol style="list-style-type: decimal">
+<p>The lower the order of an algorithm, the more efficient it is. So a <span class="math inline">O(n \log n)</span> algorithm is more efficient than a <span class="math inline">O(n^2)</span> algorithm. If two algorithms have the same order, they are equivalent for our purposes.</p>
+<p>We can intuitively analyze an algorithm to determine its time complexity. For example, <code>rsum&gt;?</code> is clearly <span class="math inline">O(n)</span>, simply by inspection. However, we can also find the order algorithmically:</p>
+<ol type="1">
 <li>If the function does not use recursion or iteration:
-<ol style="list-style-type: decimal">
-<li>Operators in C are all <span class="math inline">\(O(1)\)</span>.</li>
-<li>Functions can have their own orders, like the <span class="math inline">\(O(n)\)</span> <code>length</code> in Racket. Make sure to account for the input size being changed, like passing a constant list to <code>length</code>.</li>
+<ol type="1">
+<li>Operators in C are all <span class="math inline">O(1)</span>.</li>
+<li>Functions can have their own orders, like the <span class="math inline">O(n)</span> <code>length</code> in Racket. Make sure to account for the input size being changed, like passing a constant list to <code>length</code>.</li>
 <li>The order of this function is the sum of all the orders in the function - the largest order. This ensures we always consider the worst case.</li>
 </ol></li>
 <li>If the function uses recursion:
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Determine the order of the function if it did not use any recursion.</li>
 <li>Determine the size of the input given to the next recursive call.</li>
 <li>Write the running time function as a recurrence relation.</li>
 <li>Look up the closed form of the recurrence relation in the table.</li>
 </ol></li>
 <li>If the function uses iteration:
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Work from the innermost loop to the outermost, nesting their summations.</li>
 <li>Determine the number of iterations in each loop in the worst case as a function of the input size or outer loop counter.</li>
 <li>Determine the worst case running time of each iteration.</li>
@@ -1548,50 +1581,50 @@ while (i &lt; 5) { // 1 * 6 operations
 <h3 id="racket-built-in-efficiencies">Racket Built-in Efficiencies</h3>
 <p>Function time complexities in Racket:</p>
 <ul>
-<li><code>cons</code>, <code>cons?</code>, <code>empty?</code>, <code>rest</code>, <code>first</code>, <code>second</code>, <code>third</code>, etc. are <span class="math inline">\(O(1)\)</span>.</li>
-<li><code>length</code>, <code>last</code>, <code>reverse</code>, <code>member</code>, <code>remove</code>, <code>list-ref</code>, <code>drop-right</code>, <code>take-right</code>, <code>append</code>, etc. are <span class="math inline">\(O(n)\)</span>.</li>
-<li><code>foldr</code>, <code>foldl</code>, <code>map</code>, <code>filter</code>, etc. are <span class="math inline">\(O(n) \times O(f(n))\)</span> where <span class="math inline">\(O(f(n))\)</span> is the order of the processing function.</li>
-<li><code>sort</code> is <span class="math inline">\(O(n \log n)\)</span>.</li>
+<li><code>cons</code>, <code>cons?</code>, <code>empty?</code>, <code>rest</code>, <code>first</code>, <code>second</code>, <code>third</code>, etc. are <span class="math inline">O(1)</span>.</li>
+<li><code>length</code>, <code>last</code>, <code>reverse</code>, <code>member</code>, <code>remove</code>, <code>list-ref</code>, <code>drop-right</code>, <code>take-right</code>, <code>append</code>, etc. are <span class="math inline">O(n)</span>.</li>
+<li><code>foldr</code>, <code>foldl</code>, <code>map</code>, <code>filter</code>, etc. are <span class="math inline">O(n) \times O(f(n))</span> where <span class="math inline">O(f(n))</span> is the order of the processing function.</li>
+<li><code>sort</code> is <span class="math inline">O(n \log n)</span>.</li>
 </ul>
-<p>The differences between lists and arrays can now be made clear. Array lookup is <span class="math inline">\(O(1)\)</span>, while list lookup is <span class="math inline">\(O(n)\)</span> (lookup means retrieving a given element in the collection), which makes arrays much more efficient in this aspect. However, arrays cannot be expanded, while lists can.</p>
+<p>The differences between lists and arrays can now be made clear. Array lookup is <span class="math inline">O(1)</span>, while list lookup is <span class="math inline">O(n)</span> (lookup means retrieving a given element in the collection), which makes arrays much more efficient in this aspect. However, arrays cannot be expanded, while lists can.</p>
 <p>Racket has arrays as well, but they are known as <strong>vectors</strong>. We create them with the <code>(vector ...)</code> function (for example, <code>(vector 1 2 3)</code>) and lookup elements using the <code>(vector-ref some-vector position)</code>.</p>
-<p>Functions like <code>max</code> and <code>list</code> in Racket have their running time determined by the number of parameters they are given. Since at this point, we can only pass a constant number of parameters to a function, these are always <span class="math inline">\(O(1)\)</span>.</p>
-<p>We assume in this course that all operators in C are <span class="math inline">\(O(1)\)</span>, and all arithmetic functions in Racket (like <code>+</code>, <code>*</code>, <code>expt</code>) are also <span class="math inline">\(O(1)\)</span>. In practice, since Racket supports arbitrarily large numbers, things like <code>+</code> are actually <span class="math inline">\(O(\log n)\)</span>, where <span class="math inline">\(n\)</span> is the larger of the numbers.</p>
-<p>As a result of the above, <code>=</code> is <span class="math inline">\(O(1)\)</span>. Note that <code>string=?</code> is <span class="math inline">\(O(n)\)</span> where <span class="math inline">\(n\)</span> is the length of the shortest string, since it must compare lexicographically. Likewise, <code>equal?</code> is <span class="math inline">\(O(n)\)</span> where <span class="math inline">\(n\)</span> is the size of the smallest argument. However, symbols are special in that <code>symbol=?</code> is <span class="math inline">\(O(1)\)</span>.</p>
-<p><code>(member e lst)</code> is <span class="math inline">\(O(mn)\)</span> where <span class="math inline">\(n\)</span> is <code>(length lst)</code> and <span class="math inline">\(m\)</span> is the size of <code>e</code>. This is because it could potentially call <code>equal?</code> on every element of <code>lst</code>.</p>
+<p>Functions like <code>max</code> and <code>list</code> in Racket have their running time determined by the number of parameters they are given. Since at this point, we can only pass a constant number of parameters to a function, these are always <span class="math inline">O(1)</span>.</p>
+<p>We assume in this course that all operators in C are <span class="math inline">O(1)</span>, and all arithmetic functions in Racket (like <code>+</code>, <code>*</code>, <code>expt</code>) are also <span class="math inline">O(1)</span>. In practice, since Racket supports arbitrarily large numbers, things like <code>+</code> are actually <span class="math inline">O(\log n)</span>, where <span class="math inline">n</span> is the larger of the numbers.</p>
+<p>As a result of the above, <code>=</code> is <span class="math inline">O(1)</span>. Note that <code>string=?</code> is <span class="math inline">O(n)</span> where <span class="math inline">n</span> is the length of the shortest string, since it must compare lexicographically. Likewise, <code>equal?</code> is <span class="math inline">O(n)</span> where <span class="math inline">n</span> is the size of the smallest argument. However, symbols are special in that <code>symbol=?</code> is <span class="math inline">O(1)</span>.</p>
+<p><code>(member e lst)</code> is <span class="math inline">O(mn)</span> where <span class="math inline">n</span> is <code>(length lst)</code> and <span class="math inline">m</span> is the size of <code>e</code>. This is because it could potentially call <code>equal?</code> on every element of <code>lst</code>.</p>
 <h3 id="c-built-in-efficiencies">C Built-in Efficiencies</h3>
 <p>Function time complexities in C:</p>
 <ul>
-<li><code>strcmp</code>, <code>strlen</code>, <code>strcpy</code>, etc. are <span class="math inline">\(O(n)\)</span>.</li>
-<li><code>getchar</code> is <span class="math inline">\(O(1)\)</span>.</li>
-<li><code>printf</code>, <code>scanf</code> are <span class="math inline">\(O(n)\)</span> when working with strings, <span class="math inline">\(O(1)\)</span> otherwise.</li>
+<li><code>strcmp</code>, <code>strlen</code>, <code>strcpy</code>, etc. are <span class="math inline">O(n)</span>.</li>
+<li><code>getchar</code> is <span class="math inline">O(1)</span>.</li>
+<li><code>printf</code>, <code>scanf</code> are <span class="math inline">O(n)</span> when working with strings, <span class="math inline">O(1)</span> otherwise.</li>
 </ul>
 <h3 id="fixed-inputs">Fixed Inputs</h3>
 <p>If the length of the input is fixed or has an upper bound, then it takes constant time by definition.</p>
 <p>However, practical limits such as the size of computer memory are not considered upper bounds, because technology allows us to basically arbitrarily increase this as time goes on.</p>
-<p>For example, <code>(length l)</code> is <span class="math inline">\(O(n)\)</span> where <span class="math inline">\(n\)</span> is the length of <code>l</code>, but if we know that <code>l</code> has no more than 25 elements, then <span class="math inline">\(n \le 25\)</span> and <span class="math inline">\(O(n) \le O(25)\)</span>, so this is <span class="math inline">\(O(1)\)</span>.</p>
-<p>The time complexity is only a function of <span class="math inline">\(n\)</span> when it can become arbitrarily large.</p>
+<p>For example, <code>(length l)</code> is <span class="math inline">O(n)</span> where <span class="math inline">n</span> is the length of <code>l</code>, but if we know that <code>l</code> has no more than 25 elements, then <span class="math inline">n \le 25</span> and <span class="math inline">O(n) \le O(25)</span>, so this is <span class="math inline">O(1)</span>.</p>
+<p>The time complexity is only a function of <span class="math inline">n</span> when it can become arbitrarily large.</p>
 <h3 id="recurrence-relations">Recurrence relations</h3>
 <p><strong>Recurrence relations</strong> are used to analyze the running time of recursive functions.</p>
 <p>It is possible to derive <strong>closed forms</strong> for many recurrence relations - forms that are non-recursive. In this course, we encounter the following:</p>
 <ul>
-<li><span class="math inline">\(T(n) = O(f(n)) + T(n - k_1) = O(n) \times O(f(n))\)</span></li>
-<li><span class="math inline">\(T(n) = O(f(n)) + T\left(\frac{n}{c}\right) = O(\log n) \times O(f(n))\)</span></li>
-<li><span class="math inline">\(T(n) = O(f(n)) + c \times T\left(\frac{n}{c}\right) = O(n) \times O(f(n))\)</span></li>
-<li><span class="math inline">\(T(n) = O(f(n)) + T(n - k_1) + T(n - k_2) = O(2^n) \times O(f(n))\)</span></li>
+<li><span class="math inline">T(n) = O(f(n)) + T(n - k_1) = O(n) \times O(f(n))</span></li>
+<li><span class="math inline">T(n) = O(f(n)) + T\left(\frac{n}{c}\right) = O(\log n) \times O(f(n))</span></li>
+<li><span class="math inline">T(n) = O(f(n)) + c \times T\left(\frac{n}{c}\right) = O(n) \times O(f(n))</span></li>
+<li><span class="math inline">T(n) = O(f(n)) + T(n - k_1) + T(n - k_2) = O(2^n) \times O(f(n))</span></li>
 </ul>
-<p>Where <span class="math inline">\(k_1, k_2 \ge 1, c &gt; 1\)</span>. It is not necessary to memorize this table, though it should be intuitively obvious how it is derived.</p>
+<p>Where <span class="math inline">k_1, k_2 \ge 1, c &gt; 1</span>. It is not necessary to memorize this table, though it should be intuitively obvious how it is derived.</p>
 <p>Consider the following code:</p>
 <pre><code>(define (find-max lon)
     (cond [(empty? (rest lon)) (first lon)]
           [(&gt; (first lon) (find-max (rest lon))) (first lon)]
           [else (find-max (rest lon))]))</code></pre>
-<p>In the worst case, when the list <code>lon</code> is sorted in ascending order, <code>find-max</code> gets recursed on twice, so <span class="math inline">\(T(n) = O(1) + 2T(n - 1) = O(2^n)\)</span>.</p>
+<p>In the worst case, when the list <code>lon</code> is sorted in ascending order, <code>find-max</code> gets recursed on twice, so <span class="math inline">T(n) = O(1) + 2T(n - 1) = O(2^n)</span>.</p>
 <p>However, if we avoid calling the function twice, the function can be made significantly more efficient:</p>
 <pre><code>(define (fast-max lon)
     (cond [(empty? (rest lon)) (first lon)]
           [else (max (first lon) (fast-max (rest lon)))]))</code></pre>
-<p>The worst case for this function is still when the list <code>lon</code> is sorted in ascending order, but since the function is only recursed on once, <span class="math inline">\(T(n) = O(1) + T(n - 1) = O(n)\)</span>.</p>
+<p>The worst case for this function is still when the list <code>lon</code> is sorted in ascending order, but since the function is only recursed on once, <span class="math inline">T(n) = O(1) + T(n - 1) = O(n)</span>.</p>
 <p>;wip: do an example</p>
 <h1 id="section-16">11/3/14</h1>
 <h3 id="iterative-summation">Iterative summation</h3>
@@ -1601,27 +1634,27 @@ while (i &lt; 5) { // 1 * 6 operations
 for (i = 0; i &lt; n; i++) {
     sum += i;
 }</code></pre>
-<p>We can write the time complexity of this code as <span class="math inline">\(\sum_{i = 0}^n O(1)\)</span>, since the body of the loop is <span class="math inline">\(O(1)\)</span>.</p>
+<p>We can write the time complexity of this code as <span class="math inline">\sum_{i = 0}^n O(1)</span>, since the body of the loop is <span class="math inline">O(1)</span>.</p>
 <p>Some commonly used summations are:</p>
 <ul>
-<li><span class="math inline">\(\sum_{i = 0}^{f(n)} O(g(n)) = O(f(n)) \times O(g(n))\)</span></li>
-<li><span class="math inline">\(\sum_{i = 0}^{f(n)} O(g(i)) = O(f(n)) \times O(g(n))\)</span></li>
+<li><span class="math inline">\sum_{i = 0}^{f(n)} O(g(n)) = O(f(n)) \times O(g(n))</span></li>
+<li><span class="math inline">\sum_{i = 0}^{f(n)} O(g(i)) = O(f(n)) \times O(g(n))</span></li>
 </ul>
-<p>Note that <span class="math inline">\(\sum_{i = 1}^n (n - i) = \sum_{i = 0}^{n - 1} i\)</span></p>
+<p>Note that <span class="math inline">\sum_{i = 1}^n (n - i) = \sum_{i = 0}^{n - 1} i</span></p>
 <p>The summation index does not have to perfectly represent the actual loop counter. For example:</p>
 <pre><code>k = n; // n is size of the input
 while (k &gt; 0) {
     printf(&quot; * &quot;);
     k /= 10;
 }</code></pre>
-<p>This code is <span class="math inline">\(\sum_{k = 0}^{\log n} O(1) = O(\log n)\)</span>.</p>
+<p>This code is <span class="math inline">\sum_{k = 0}^{\log n} O(1) = O(\log n)</span>.</p>
 <p>When we have nested loops, we can analyze them individually:</p>
 <pre><code>for (j = 0; j &lt; n; j++) {
     for (i = 0; i &lt; j; i++)
         printf(&quot; * &quot;);
     printf(&quot;\n&quot;);
 }</code></pre>
-<p>The time complexity for this is <span class="math inline">\(\sum_{j = 0}^n \left(O(1) + \sum_{i = 0}^j O(1)) = \sum_{j = 0}^n \left(O(1) + O(j)\right) = \sum_{j = 0}^n O(j) = O(n^2)\)</span>.</p>
+<p>The time complexity for this is <span class="math inline">\sum_{j = 0}^n \left(O(1) + \sum_{i = 0}^j O(1)\right) = \sum_{j = 0}^n \left(O(1) + O(j)\right) = \sum_{j = 0}^n O(j) = O(n^2)</span>.</p>
 <h2 id="sorting">Sorting</h2>
 <p>Sorting is a common way to put efficiency analysis to practice.</p>
 <h3 id="insertion-sort">Insertion sort</h3>
@@ -1636,7 +1669,7 @@ while (k &gt; 0) {
 (define (insertion-sort lon)
     (cond [(empty? lon) empty]
           [else (insert (first lon) (insertion-sort (rest lon)))]))</code></pre>
-<p>Clearly, <code>insert</code> is <span class="math inline">\(T(n) = O(1) + T(n - 1)\)</span>, or <span class="math inline">\(O(n)\)</span> worst case and <span class="math inline">\(O(1)\)</span> best case, so <code>insertion-sort</code> is <span class="math inline">\(T(n) = O(n) + T(n - 1)\)</span>, <span class="math inline">\(O(n^2)\)</span> worst case (when the numbers are sorted in reverse order) and <span class="math inline">\(O(n)\)</span> best case (when the numbers are already sorted).</p>
+<p>Clearly, <code>insert</code> is <span class="math inline">T(n) = O(1) + T(n - 1)</span>, or <span class="math inline">O(n)</span> worst case and <span class="math inline">O(1)</span> best case, so <code>insertion-sort</code> is <span class="math inline">T(n) = O(n) + T(n - 1)</span>, <span class="math inline">O(n^2)</span> worst case (when the numbers are sorted in reverse order) and <span class="math inline">O(n)</span> best case (when the numbers are already sorted).</p>
 <p>We may also want to have an in-place version - one that sorts the array without building another array in memory. For an in-place insertion sort, we start at index 1 and assume everything to the left is sorted, then for each element, we shift elements from the left rightward until the new element can be put into the correct position:</p>
 <pre><code>void insertion_sort(int a[], int len) {
     for (int i = 1; i &lt; len; i ++) { // go through each element
@@ -1649,7 +1682,7 @@ while (k &gt; 0) {
         a[pos] = value;
     }
 }</code></pre>
-<p>It is easy to see that the worst case time complexity is <span class="math inline">\(\sum_{i = 1}^n \sum_{j = 0}^i O(n) = O(n^2)\)</span> where <span class="math inline">\(n\)</span> is the numerical value of <code>len</code>, and the best case is <span class="math inline">\(O(n)\)</span>.</p>
+<p>It is easy to see that the worst case time complexity is <span class="math inline">\sum_{i = 1}^n \sum_{j = 0}^i O(n) = O(n^2)</span> where <span class="math inline">n</span> is the numerical value of <code>len</code>, and the best case is <span class="math inline">O(n)</span>.</p>
 <h3 id="selection-sort">Selection Sort</h3>
 <p>In selection sort, we start with the empty result, pick the lowest element in the list, append it to the result, and repeat this picking and appending process until the list is empty and the result is sorted:</p>
 <pre><code>(define (find-min lon current-min)
@@ -1661,7 +1694,7 @@ while (k &gt; 0) {
     (cond [(empty? (rest lon)) lon]
           [else (define m (find-min lon)) ; O(n)
                 (cons m (selection-sort (remove m lon)))]))</code></pre>
-<p><code>selection-sort</code> is always <span class="math inline">\(O(n^2)\)</span>, even in the best case, since <code>find-min</code> is <span class="math inline">\(O(n)\)</span>.</p>
+<p><code>selection-sort</code> is always <span class="math inline">O(n^2)</span>, even in the best case, since <code>find-min</code> is <span class="math inline">O(n)</span>.</p>
 <p>The in-place version of this can be implemented by going left to right through the an array, finding the smallest element of this one and those on the right of the current element, and swapping the current element with the smallest one:</p>
 <pre><code>void selection _ sort(int a[], int len) {
     for (int i = 0; i &lt; len - 1; i ++) {
@@ -1671,7 +1704,7 @@ while (k &gt; 0) {
         swap(&amp;a[i], &amp;a[pos]); // see Section 06
     }
 }</code></pre>
-<p>This implementation can be analyzed to have a worst and best case of <span class="math inline">\(O(n^2)\)</span></p>
+<p>This implementation can be analyzed to have a worst and best case of <span class="math inline">O(n^2)</span></p>
 <h3 id="merge-sort">Merge Sort</h3>
 <p>In merge sort, the list is split into halves, and each of these two sublists are sorted using merge sort (merge sorting a list with one element is the same list), then merged back together:</p>
 <pre><code>(define (merge slon1 slon2)
@@ -1690,10 +1723,10 @@ while (k &gt; 0) {
     (cond [(&lt;= len 1) lon]
           [else (merge (merge-sort left)
                        (merge-sort right))]))</code></pre>
-<p>Note that when <code>merge</code> recurses, either the length of <code>slon1</code> or <code>slon2</code> decreases by 1. It is difficult to analyze these two values since they depend on the input, but if we define <span class="math inline">\(n\)</span> to be the total length of both lists, <code>(+ slon1 slon2)</code>, then we can simply say that <span class="math inline">\(n\)</span> decreases by 1 on each recursive call.</p>
-<p>So <code>merge</code> has a time complexity of <span class="math inline">\(T(n) = O(1) + T(n - 1) = O(n)\)</span>.</p>
-<p>So <code>merge-sort</code> has a time complexity of <span class="math inline">\(T(n) = O(n) + 2T(n / 2) = O(n \log n)\)</span>.</p>
-<p>Merge sort has a best and worst case time complexity of <span class="math inline">\(O(n \log n)\)</span>. In fact, this is the fastest possible time complexity for comparison sorting algorithms.</p>
+<p>Note that when <code>merge</code> recurses, either the length of <code>slon1</code> or <code>slon2</code> decreases by 1. It is difficult to analyze these two values since they depend on the input, but if we define <span class="math inline">n</span> to be the total length of both lists, <code>(+ slon1 slon2)</code>, then we can simply say that <span class="math inline">n</span> decreases by 1 on each recursive call.</p>
+<p>So <code>merge</code> has a time complexity of <span class="math inline">T(n) = O(1) + T(n - 1) = O(n)</span>.</p>
+<p>So <code>merge-sort</code> has a time complexity of <span class="math inline">T(n) = O(n) + 2T(n / 2) = O(n \log n)</span>.</p>
+<p>Merge sort has a best and worst case time complexity of <span class="math inline">O(n \log n)</span>. In fact, this is the fastest possible time complexity for comparison sorting algorithms.</p>
 <p>Because merge sort has a reliable time complexity (as well as due to its stability and parallelizability), merge sort is very commonly used in practice. In fact, Racket's built in <code>sort</code> uses merge sort.</p>
 <p>An in-place version of merge sort is more difficult to implement than the other sorting algorithms, but it is still possible:</p>
 <p>;wip: implement it using the bottom-up approach</p>
@@ -1705,7 +1738,7 @@ while (k &gt; 0) {
            (define less (filter (lambda (x) (&lt;= x pivot)) (rest lon)))
            (define greater (filter (lambda (x) (&gt; x pivot)) (rest lon)))
            (append (quick-sort less) (list pivot) (quick-sort greater))]))</code></pre>
-<p>The worst case, when the pivot is always the lowest element, makes this function have a time complexity of <span class="math inline">\(T(n) = O(n) + T(n - 1) = O(n^2)\)</span>.</p>
+<p>The worst case, when the pivot is always the lowest element, makes this function have a time complexity of <span class="math inline">T(n) = O(n) + T(n - 1) = O(n^2)</span>.</p>
 <p>The best case, when the pivot is the median of the elements, makes this function have a time complexity of %T(n) = O(n) + T(n / 2) = O(n n)%.</p>
 <p>The in-place version works by selecting the pivot, partitioning the array, and then recursively sorting the partitions:</p>
 <pre><code>void quick_sort_range(int a[], int len, int first, int last) {
@@ -1726,7 +1759,7 @@ while (k &gt; 0) {
 void quick_sort(int a[], int len) {
     quick_sort_range(a, len, 0, len - 1);
 }</code></pre>
-<p>This works the same way as the Racket version, so it also has <span class="math inline">\(O(n^2)\)</span> worst case time complexity and <span class="math inline">\(O(n \log n)\)</span> best case time complexity.</p>
+<p>This works the same way as the Racket version, so it also has <span class="math inline">O(n^2)</span> worst case time complexity and <span class="math inline">O(n \log n)</span> best case time complexity.</p>
 <p>Quick sort is used a lot in practice because it is very fast for a lot of real world data sets - its average case time complexity is good. There are ways to mitigate the worst case, such as by choosing a random pivot.</p>
 <h1 id="section-17">13/3/14</h1>
 <p>Consider the <code>member</code> function for arrays inf integers in C:</p>
@@ -1736,7 +1769,7 @@ void quick_sort(int a[], int len) {
                 return true;
     return false;
 }</code></pre>
-<p>This runs in <span class="math inline">\(O(n)\)</span> time. However, if we know that the array is sorted before calling this function, we can use binary search:</p>
+<p>This runs in <span class="math inline">O(n)</span> time. However, if we know that the array is sorted before calling this function, we can use binary search:</p>
 <pre><code>bool sorted_member(int item, const int a[], int len) {
     int low = 0;
     int high = len-1;
@@ -1751,27 +1784,27 @@ void quick_sort(int a[], int len) {
     }
     return false;
 }</code></pre>
-<p>Since the length of <code>high - low</code> (the range of input we are looking at) is halved on each iteration, there are <span class="math inline">\(O(\log n)\)</span> iterations. Since each iteration is <span class="math inline">\(O(1)\)</span>, the function is <span class="math inline">\(O(\log n)\)</span>.</p>
+<p>Since the length of <code>high - low</code> (the range of input we are looking at) is halved on each iteration, there are <span class="math inline">O(\log n)</span> iterations. Since each iteration is <span class="math inline">O(1)</span>, the function is <span class="math inline">O(\log n)</span>.</p>
 <h2 id="formal-big-o-notation">Formal Big-O Notation</h2>
-<p><span class="math inline">\(O(g(n))\)</span> is the <strong>set</strong> of all functions with &quot;order&quot; <strong>less than or equal to</strong> <span class="math inline">\(g(n)\)</span>.</p>
-<p>So <span class="math inline">\(O(1)\)</span> is actually the set of all constant functions.</p>
-<p>Since the order is less than or equal, we can say things like <span class="math inline">\(3 \in O(2^n)\)</span> and <span class="math inline">\(n^2 \in O(n^{100})\)</span>. Even though this is mathematically correct, this isn't very useful.</p>
+<p><span class="math inline">O(g(n))</span> is the <strong>set</strong> of all functions with &quot;order&quot; <strong>less than or equal to</strong> <span class="math inline">g(n)</span>.</p>
+<p>So <span class="math inline">O(1)</span> is actually the set of all constant functions.</p>
+<p>Since the order is less than or equal, we can say things like <span class="math inline">3 \in O(2^n)</span> and <span class="math inline">n^2 \in O(n^{100})</span>. Even though this is mathematically correct, this isn't very useful.</p>
 <p>In this course, we will always use the smallest possible order to represent a given function.</p>
-<p>Or alternatively, <span class="math inline">\(f(n) \in O(g(n)) \iff \exists c \in \mathbb{R}, n_0 &gt; 0, \forall n \in \mathbb{R}, n \ge n_0 \implies f(n) \le c \cdot g(n)\)</span>.</p>
-<p>This basically means that we can ignore constant coefficients. Also, that after a certain threshold value of <span class="math inline">\(n\)</span>, the order function multiplied by a constant is an upper bound for <span class="math inline">\(f(n)\)</span>.</p>
-<p>The <span class="math inline">\(c\)</span> is necessary (rather than just using 1) in order to account for functions with the same order. For example, if we have two constant functions with different constants, then one would always be above the other, yet it is still in the same order.</p>
-<p>Prove that <span class="math inline">\(0.001n^3 + 1000n \in O(n^3)\)</span>:</p>
+<p>Or alternatively, <span class="math inline">f(n) \in O(g(n)) \iff \exists c \in \mathbb{R}, n_0 &gt; 0, \forall n \in \mathbb{R}, n \ge n_0 \implies f(n) \le c \cdot g(n)</span>.</p>
+<p>This basically means that we can ignore constant coefficients. Also, that after a certain threshold value of <span class="math inline">n</span>, the order function multiplied by a constant is an upper bound for <span class="math inline">f(n)</span>.</p>
+<p>The <span class="math inline">c</span> is necessary (rather than just using 1) in order to account for functions with the same order. For example, if we have two constant functions with different constants, then one would always be above the other, yet it is still in the same order.</p>
+<p>Prove that <span class="math inline">0.001n^3 + 1000n \in O(n^3)</span>:</p>
 <blockquote>
-<p>Assume <span class="math inline">\(n &gt; 11\)</span>. Let <span class="math inline">\(c = 1\)</span>. Clearly, <span class="math inline">\(0.001n^3 + 1000n \le 11n^3\)</span>.<br />
-So <span class="math inline">\(0.001n^3 + 1000n \in O(n^3)\)</span>.</p>
+<p>Assume <span class="math inline">n &gt; 11</span>. Let <span class="math inline">c = 1</span>. Clearly, <span class="math inline">0.001n^3 + 1000n \le 11n^3</span>.<br />
+So <span class="math inline">0.001n^3 + 1000n \in O(n^3)</span>.</p>
 </blockquote>
 <p>Big-O notation is the <strong>asymptotic behaviour</strong> of a function - the behaviour of a function as its input approaches infinity.</p>
 <p>In future courses, we will use the formal definition to prove algorithm complexities.</p>
-<p>There are also other notations for various asymptotic behaviours. For example, <span class="math inline">\(\Omega(n)\)</span> (big-omega) is the asymptotic lower bound, just as <span class="math inline">\(O(n)\)</span> (big-O) is the asymptotic upper bound, and it means there exists some <span class="math inline">\(c\)</span> such that <span class="math inline">\(c \cdot g(n) \le f(n)\)</span> whenever <span class="math inline">\(n \ge n_0\)</span>.</p>
-<p>As especially useful one is <span class="math inline">\(\Theta(n)\)</span>, which defines the exact asymptotic behaviour: <span class="math inline">\(f(n) \in \Theta(g(n))\)</span> means that there exist <span class="math inline">\(c_1 \ge 0, c_2 \ge 0, n_0\)</span> such that <span class="math inline">\(c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n)\)</span> whenever <span class="math inline">\(n \ge n_0\)</span>. This means that <span class="math inline">\(\Omega(n) = O(n) \implies \Omega(n) = O(n) = \Theta(n)\)</span>.</p>
-<p>We often use <span class="math inline">\(O(n)\)</span> instead of <span class="math inline">\(\Theta(n)\)</span>, even though <span class="math inline">\(\Theta(n)\)</span> is more appropriate. Maybe because it's easier to type.</p>
-<p>There's also <span class="math inline">\(\omega(n)\)</span> (little-omega) - <span class="math inline">\(f(n) \in \omega(g(n))\)</span> means that for all <span class="math inline">\(c &gt; 0\)</span>, there exists an <span class="math inline">\(n_0\)</span> such that <span class="math inline">\(c \cdot g(n) \le f(n)\)</span> whenever <span class="math inline">\(n \ge n_0\)</span>.</p>
-<p>There's also <span class="math inline">\(o(n)\)</span> (little-o) - <span class="math inline">\(f(n) \in o(g(n))\)</span> means that for all <span class="math inline">\(c &gt; 0\)</span>, there exists an <span class="math inline">\(n_0\)</span> such that <span class="math inline">\(f(n) \le c \cdot g(n)\)</span> whenever <span class="math inline">\(n \ge n_0\)</span>.</p>
+<p>There are also other notations for various asymptotic behaviours. For example, <span class="math inline">\Omega(n)</span> (big-omega) is the asymptotic lower bound, just as <span class="math inline">O(n)</span> (big-O) is the asymptotic upper bound, and it means there exists some <span class="math inline">c</span> such that <span class="math inline">c \cdot g(n) \le f(n)</span> whenever <span class="math inline">n \ge n_0</span>.</p>
+<p>As especially useful one is <span class="math inline">\Theta(n)</span>, which defines the exact asymptotic behaviour: <span class="math inline">f(n) \in \Theta(g(n))</span> means that there exist <span class="math inline">c_1 \ge 0, c_2 \ge 0, n_0</span> such that <span class="math inline">c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n)</span> whenever <span class="math inline">n \ge n_0</span>. This means that <span class="math inline">\Omega(n) = O(n) \implies \Omega(n) = O(n) = \Theta(n)</span>.</p>
+<p>We often use <span class="math inline">O(n)</span> instead of <span class="math inline">\Theta(n)</span>, even though <span class="math inline">\Theta(n)</span> is more appropriate. Maybe because it's easier to type.</p>
+<p>There's also <span class="math inline">\omega(n)</span> (little-omega) - <span class="math inline">f(n) \in \omega(g(n))</span> means that for all <span class="math inline">c &gt; 0</span>, there exists an <span class="math inline">n_0</span> such that <span class="math inline">c \cdot g(n) \le f(n)</span> whenever <span class="math inline">n \ge n_0</span>.</p>
+<p>There's also <span class="math inline">o(n)</span> (little-o) - <span class="math inline">f(n) \in o(g(n))</span> means that for all <span class="math inline">c &gt; 0</span>, there exists an <span class="math inline">n_0</span> such that <span class="math inline">f(n) \le c \cdot g(n)</span> whenever <span class="math inline">n \ge n_0</span>.</p>
 <p>;wip: slide 67 to 78</p>
 <h2 id="space-complexity">Space Complexity</h2>
 <p>We can also analyze the amount of memory a function uses as the input grows arbitrarily large. If two algorithms have the same time complexity, the one using less memory is often preferable, and it is in many cases faster as well.</p>
@@ -1785,7 +1818,7 @@ So <span class="math inline">\(0.001n^3 + 1000n \in O(n^3)\)</span>.</p>
         (cond [(empty? lst) sofar]
               [else (asum/acc (rest lst) (+ (first lst) sofar))]))
     (asum/acc lst 0))</code></pre>
-<p>Both functions have <span class="math inline">\(O(n)\)</span> time complexity, but the first one uses <span class="math inline">\(O(n)\)</span> memory, while the second one uses <span class="math inline">\(O(1)\)</span> memory.</p>
+<p>Both functions have <span class="math inline">O(n)</span> time complexity, but the first one uses <span class="math inline">O(n)</span> memory, while the second one uses <span class="math inline">O(1)</span> memory.</p>
 <h3 id="tail-recursion">Tail Recursion</h3>
 <p>This is because the second one uses <strong>tail recursion</strong>.</p>
 <p>Tail recursion is when the function directly returns the value of its recursive call. For example, the following are recursive:</p>
@@ -1817,12 +1850,12 @@ So <span class="math inline">\(0.001n^3 + 1000n \in O(n^3)\)</span>.</p>
 <h3 id="malloc">malloc</h3>
 <p><code>void *malloc(size_t s)</code> is a function that requests <code>s</code> bytes of memory from the heap. It can be found in <code>stdlib.h</code>.</p>
 <p>It returns a pointer to a block of <code>s</code> bytes. If there isn't enough memory available, then the function returns <code>NULL</code>.</p>
-<p>Good implementations of <code>malloc</code> are <span class="math inline">\(O(1)\)</span>. In this course, we will assume that <code>malloc</code> is always <span class="math inline">\(O(1)\)</span>.</p>
+<p>Good implementations of <code>malloc</code> are <span class="math inline">O(1)</span>. In this course, we will assume that <code>malloc</code> is always <span class="math inline">O(1)</span>.</p>
 <p>As a result, it is highly recommended that we check for <code>NULL</code> after every <code>malloc</code>:</p>
 <pre><code>int *p = malloc(sizeof(int));
 if (p == NULL)
     exit(EXIT_FAILURE);</code></pre>
-<p>The values at the allocated memory are uninitialized and can contain anything. <code>calloc</code> works identically to <code>malloc</code>, except it initializes the memory to 0 first. <code>calloc</code> is <span class="math inline">\(O(n)\)</span>, where <span class="math inline">\(n\)</span> is the amount of memory requested.</p>
+<p>The values at the allocated memory are uninitialized and can contain anything. <code>calloc</code> works identically to <code>malloc</code>, except it initializes the memory to 0 first. <code>calloc</code> is <span class="math inline">O(n)</span>, where <span class="math inline">n</span> is the amount of memory requested.</p>
 <p><code>void *</code> is known as a <strong>generic pointer</strong>. It is a pointer that can point to type in memory. It is basically a pointer that does not have an associated type.</p>
 <p>Since the result of <code>malloc</code> is a generic pointer, we can store any type of value in the heap.</p>
 <p><code>size_t</code> is an integer-like type that represents the size of something. The <code>sizeof</code> operator returns a <code>size_t</code> value. The placeholder for <code>size_t</code> in <code>printf</code> and similar is <code>%zd</code>.</p>
@@ -1835,7 +1868,7 @@ struct posn *pp = malloc(sizeof(struct posn));</code></pre>
 <p><code>malloc</code> remembers how much memory we actually allocated at the address, so we do not need to give it the amount of memory we originally allocated - just the address of the memory we allocated.</p>
 <p>The pointer <code>p</code> must have been allocated by a previous <code>malloc</code>, and must be heap memory. After calling it, the memory pointed to by <code>p</code> is no longer safe to access or modify. This pointer is no longer safe to perform any operations on, but it may be returned by a future call to <code>malloc</code>.</p>
 <p>In RunC, it is required that every <code>malloc</code> is paired with a corresponding <code>free</code>. Freeing a null pointer does nothing.</p>
-<p><code>free(p)</code> is <span class="math inline">\(O(1)\)</span> in this course.</p>
+<p><code>free(p)</code> is <span class="math inline">O(1)</span> in this course.</p>
 <h3 id="common-errors">Common Errors</h3>
 <p>Some common mistakes associated with dynamic memory are:</p>
 <ul>
@@ -1896,7 +1929,7 @@ int *resize_array(int * old, int oldlen, int newlen) {
     return new;
 }</code></pre>
 <p><code>void *realloc(void *ptr, size_t s)</code> is a function designed to make it easier to resize arrays. It allows a block of memory allocated previously by <code>malloc</code> to be made bigger or smaller, preserving the contents of the memory. New space is uninitialized.</p>
-<p>We assume that the running time of <code>realloc</code> is <span class="math inline">\(O(s)\)</span>, where <span class="math inline">\(s\)</span> is <code>s</code>. <code>realloc(NULL, s)</code> is the same as <code>malloc(s)</code>, and <code>realloc(ptr, 0)</code> is the same as <code>free(ptr)</code> (though it returns <code>NULL</code> in this case).</p>
+<p>We assume that the running time of <code>realloc</code> is <span class="math inline">O(s)</span>, where <span class="math inline">s</span> is <code>s</code>. <code>realloc(NULL, s)</code> is the same as <code>malloc(s)</code>, and <code>realloc(ptr, 0)</code> is the same as <code>free(ptr)</code> (though it returns <code>NULL</code> in this case).</p>
 <p>Although we can now use <code>realloc</code> to implement <code>resize_array</code>, in practice most people just directly use <code>realloc</code>.</p>
 <p>Note that the original pointer passed to <code>realloc</code> should no longer be used. It is common to overwrite the original pointer, like <code>my_array = realloc(my_array, sizeof(int) * length)</code>, but in practice this could cause a memory leak due to what happens when there is an error.</p>
 <p>If <code>realloc</code> fails to allocate enough memory, then it returns <code>NULL</code> and <strong>does not free the original memory block</strong>.</p>
@@ -1911,7 +1944,7 @@ void append_number(int i) {
     numbers[numbers_len] = i;
     numbers_len ++;
 }</code></pre>
-<p>This works, but the function is <span class="math inline">\(O(m)\)</span> where <span class="math inline">\(m\)</span> is <code>numbers_len</code>, so using the function to add up <span class="math inline">\(n\)</span> numbers is <span class="math inline">\(\sum_{i = 1}^n O(i) = O(n^2)\)</span> - it performs rather poorly.</p>
+<p>This works, but the function is <span class="math inline">O(m)</span> where <span class="math inline">m</span> is <code>numbers_len</code>, so using the function to add up <span class="math inline">n</span> numbers is <span class="math inline">\sum_{i = 1}^n O(i) = O(n^2)</span> - it performs rather poorly.</p>
 <p>An interesting strategy is to allocate more memory than necessary, and only call <code>realloc</code> when the array is full.</p>
 <p>Consider a <strong>doubling strategy</strong>. Every time we hit the limit of the array length, we simply double the length of the array.</p>
 <pre><code>struct dyn_array {
@@ -1941,11 +1974,11 @@ void append_number(struct dyn_array *da, int i) {
     da-&gt;data[da-&gt;len] = i;
     da-&gt;len++;
 }</code></pre>
-<p>Now the function is <span class="math inline">\(O(n)\)</span> only when we are resizing, and <span class="math inline">\(O(1)\)</span> otherwise. For example, for the first 33 calls to <code>append_number</code>, we copy the following number of elements: 0, 1, 2, 0, 4, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32.</p>
-<p>We can see that for <span class="math inline">\(n + 1\)</span> calls, we have <span class="math inline">\(n + \frac{1}{2}n + \frac{1}{4}n + \ldots + 1 = n\sum_{i = 0}^{\lceil\log_2 n\rceil} \frac{1}{2^i} = n\frac{1 - \left(\frac{1}{2}\right)^{\lceil\log_2 n\rceil + 1}}{1 - \frac{1}{2}} = 2n\left(1 - \frac{1}{2}\frac{1}{2^{\lceil\log_2 n\rceil}}\right) = O\left(n - n\frac{1}{n}\right) = O(n)\)</span> copying operations.</p>
-<p>Since everything else in <code>append_number</code> takes <span class="math inline">\(O(1)\)</span> for one call and <span class="math inline">\(O(n)\)</span> for <span class="math inline">\(n\)</span> calls, <code>append_number</code> has a <span class="math inline">\(O(n)\)</span> worst case time complexity, averaged over <span class="math inline">\(n\)</span> calls.</p>
-<p>So the <strong>amortized runtime</strong> (averaged worst case) of <code>append_number</code> per call is <span class="math inline">\(O(n) / n = O(1)\)</span>.</p>
-<p>For shrinking arrays, we might shirnk when the length of the data is less than or equal to a quarter of the maximum capacity. This would also have <span class="math inline">\(O(1)\)</span> amortized time complexity.</p>
+<p>Now the function is <span class="math inline">O(n)</span> only when we are resizing, and <span class="math inline">O(1)</span> otherwise. For example, for the first 33 calls to <code>append_number</code>, we copy the following number of elements: 0, 1, 2, 0, 4, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32.</p>
+<p>We can see that for <span class="math inline">n + 1</span> calls, we have <span class="math inline">n + \frac{1}{2}n + \frac{1}{4}n + \ldots + 1 = n\sum_{i = 0}^{\lceil\log_2 n\rceil} \frac{1}{2^i} = n\frac{1 - \left(\frac{1}{2}\right)^{\lceil\log_2 n\rceil + 1}}{1 - \frac{1}{2}} = 2n\left(1 - \frac{1}{2}\frac{1}{2^{\lceil\log_2 n\rceil}}\right) = O\left(n - n\frac{1}{n}\right) = O(n)</span> copying operations.</p>
+<p>Since everything else in <code>append_number</code> takes <span class="math inline">O(1)</span> for one call and <span class="math inline">O(n)</span> for <span class="math inline">n</span> calls, <code>append_number</code> has a <span class="math inline">O(n)</span> worst case time complexity, averaged over <span class="math inline">n</span> calls.</p>
+<p>So the <strong>amortized runtime</strong> (averaged worst case) of <code>append_number</code> per call is <span class="math inline">O(n) / n = O(1)</span>.</p>
+<p>For shrinking arrays, we might shirnk when the length of the data is less than or equal to a quarter of the maximum capacity. This would also have <span class="math inline">O(1)</span> amortized time complexity.</p>
 <p>This is actually what the <code>vector</code> data type in Racket uses internally.</p>
 <h2 id="linked-data-structures">Linked Data Structures</h2>
 <p>In computer science terms, Racket's lists are known as <strong>linked lists</strong>. A linked list is a set of <strong>nodes</strong> that store data, that are connected by <strong>links</strong>.</p>
@@ -2113,8 +2146,8 @@ destroy_list(lst);</code></pre>
 <h1 id="section-20">25/3/14</h1>
 <p>There are two ways to mutate a list structure: changing the structure of nodes (adding nodes, etc.), and changing the values (mutating the contents of nodes).</p>
 <p>Notice that the structure contains a <code>length</code> field. If we start this off at 0, increment it whenever we add an element, and decrement it whenever we remove an element, then it is always the exact length of the list.</p>
-<p>This allows us to obtain the length of the list in <span class="math inline">\(O(1)\)</span> time, rather than <span class="math inline">\(O(n)\)</span> time to calculate it usually. We <strong>cache</strong> the length of the list in the list structure.</p>
-<p>The <code>back</code> field allows us to directly reference the last node in the list in <span class="math inline">\(O(1)\)</span> time. This allows us to implement things like list appending in <span class="math inline">\(O(1)\)</span> time. In this case, the list removal function would need to update this <code>back</code> pointer when there are no items left, and the appending function would need to update this pointer to the new item as well:</p>
+<p>This allows us to obtain the length of the list in <span class="math inline">O(1)</span> time, rather than <span class="math inline">O(n)</span> time to calculate it usually. We <strong>cache</strong> the length of the list in the list structure.</p>
+<p>The <code>back</code> field allows us to directly reference the last node in the list in <span class="math inline">O(1)</span> time. This allows us to implement things like list appending in <span class="math inline">O(1)</span> time. In this case, the list removal function would need to update this <code>back</code> pointer when there are no items left, and the appending function would need to update this pointer to the new item as well:</p>
 <pre><code>void add_to_back(int n, struct llist *lst) {
     struct llnode *new = malloc(sizeof(struct llnode));
     new-&gt;item = n;
@@ -2140,7 +2173,7 @@ destroy_list(lst);</code></pre>
     }
 }</code></pre>
 <h3 id="augmentation-strategy">Augmentation Strategy</h3>
-<p>The augmentation strategy stores additional information in each node. For example, a <strong>doubly linked list</strong> stores a pointer to the previous node in each node in addition to the next node. This allows insertion and <strong>removal</strong> in <span class="math inline">\(O(1)\)</span> time.</p>
+<p>The augmentation strategy stores additional information in each node. For example, a <strong>doubly linked list</strong> stores a pointer to the previous node in each node in addition to the next node. This allows insertion and <strong>removal</strong> in <span class="math inline">O(1)</span> time.</p>
 <p>Things like skip lists and trees are all simply linked lists that are augmented.</p>
 <h3 id="summary">Summary</h3>
 <p>The functional approach works best when no memory management or mutation is required. It has the advantage of being simple, clear, and concise.</p>
@@ -2187,12 +2220,12 @@ struct bstnode *bst_insert(int i, struct bstnode *t) {
         bst_insert(i, &amp;(t-&gt;right));
 }</code></pre>
 <h3 id="efficiency-1">Efficiency</h3>
-<p>A <strong>balanced</strong> tree is one where the height is <span class="math inline">\(O(\log n)\)</span>, where <span class="math inline">\(n\)</span> is the number of nodes. This is the minimum possible height for the tree. Any tree with a greater height is <strong>unbalanced</strong> and has a height of <span class="math inline">\(O(n)\)</span>.</p>
+<p>A <strong>balanced</strong> tree is one where the height is <span class="math inline">O(\log n)</span>, where <span class="math inline">n</span> is the number of nodes. This is the minimum possible height for the tree. Any tree with a greater height is <strong>unbalanced</strong> and has a height of <span class="math inline">O(n)</span>.</p>
 <p>For example, <code>(node 1 empty (node 2 empty (node 3 empty (node 4 empty (node 5 empty (node 6 empty (node 7 empty empty)))))))</code> is an unbalanced tree, while <code>(node 4 (node 2 (node 1 empty empty) (node 3 empty empty)) (node 6 (node 5 empty empty) (node 7 empty empty)))</code> is balanced.</p>
 <p>Note that if we insert elements into the tree in sorted order, we get the worst case balanced tree, which basically becomes a linked list.</p>
-<p>The worst case time complexity of BST insertion, removal, and search is <span class="math inline">\(O(h)\)</span>, where <span class="math inline">\(h\)</span> is the height of the tree. As a result, if the tree is balanced, then these operations are all <span class="math inline">\(O(\log n)\)</span>, and otherwise <span class="math inline">\(O(n)\)</span>.</p>
-<p>There are trees that are <strong>self balancing</strong>, like AVL trees or red-black trees. These balance themselves automatically and have <span class="math inline">\(O(\log n)\)</span> time complexity for all operations.</p>
-<p>Many trees are also augmented with the number of nodes they contain in total. This allows us to implement a <span class="math inline">\(O(h)\)</span> <code>select(k)</code> operation, which produces the <code>k</code>th smallest or largest element in the tree.</p>
+<p>The worst case time complexity of BST insertion, removal, and search is <span class="math inline">O(h)</span>, where <span class="math inline">h</span> is the height of the tree. As a result, if the tree is balanced, then these operations are all <span class="math inline">O(\log n)</span>, and otherwise <span class="math inline">O(n)</span>.</p>
+<p>There are trees that are <strong>self balancing</strong>, like AVL trees or red-black trees. These balance themselves automatically and have <span class="math inline">O(\log n)</span> time complexity for all operations.</p>
+<p>Many trees are also augmented with the number of nodes they contain in total. This allows us to implement a <span class="math inline">O(h)</span> <code>select(k)</code> operation, which produces the <code>k</code>th smallest or largest element in the tree.</p>
 <h3 id="graphs">Graphs</h3>
 <p>Trees and linked lists are all simply special cases of graphs. Graphs are more flexible, and allow things like reference cycles, direction (and the possibility of non-directed graphs), and even have labelled edges.</p>
 <p>Graphs are, as in CS135, collections of nodes and the edges that link nodes together.</p>
@@ -2349,14 +2382,5 @@ void *lookup(Dictionary d, void *k) {
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

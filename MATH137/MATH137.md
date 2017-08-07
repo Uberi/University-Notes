@@ -48,12 +48,12 @@ $\iff$ - if and only if; first implies second, and second implies first.
 Solve $6 < 1 - 3x \le 10$:
 
 >$$
-\begin{align}
+\begin{aligned}
 6 &< 1 - 3x \le 10 \\
 \text{Isolate } x \text{: } 5 &< -3x \le 9 \\
 -5 &> 3x \ge -9 \\
 -5/3 &> x \ge -3
-\end{align}
+\end{aligned}
 $$
 
 Solve $\frac{1}{x} < 2$:
@@ -90,21 +90,23 @@ Solve by considering both cases. Deal with each case separately.
 Solve $\abs{2x-3} < 4$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \text{Open the inequality: } -4 &< 2x-3 < 4 \\
 \abs{f} < g &\implies -g < f < g \\
 -1 < 2x < 7 &\implies -\frac{1}{2} < x < \frac{7}{2}
-\end{align}
+\end{aligned}
 $$
 
 Simplify $\abs{x} + y \le 1$:
 
 > $$
-y \le 1 - \abs{x} \\
-y \le \begin{cases}
+\begin{aligned}
+y &\le 1 - \abs{x} \\
+y &\le \begin{cases}
     1 - x &\text{if } x \ge 0 \\
     1 + x &\text{if } x < 0 \\
-\end{cases} \\
+\end{cases}
+\end{aligned}
 $$
 
 # 11/9/13
@@ -133,21 +135,21 @@ Range: set of possible values for the dependent variable.
 Finding the range can be significantly more difficult than finding the domain, which is simply a matter of looking at the function.
 
 $$
-\begin{align}
+\begin{aligned}
 f(x) &= \sqrt{x - 1} \\
 \text{Restriction: } x &> 1 \\
 \mb{D} &= [1, \infty) \\
 \mb{R} &= [0, \infty)
-\end{align}
+\end{aligned}
 $$
 
 $$
-\begin{align}
+\begin{aligned}
 f(x) &= \frac{1}{1 - x^2} \\
 \text{Restriction: } x &\ne 0 \\
 \mb{D} &= (\infty, -1) \cup (-1, 1) \cup (1, \infty) \\
 \mb{R} &= (-\infty, 0) \cup [1, \infty)
-\end{align}
+\end{aligned}
 $$
 
 A **true function** must have a unique output for each input. Graphically, the vertical line test passes for all points (vertical line drawn on graph will only intersect it at most once if it is a graph of a true function).
@@ -265,7 +267,7 @@ If a function is not one-to-one over $\mb{R}$, we may restrict the domain to a r
 Find the inverse of $f(x) = \sqrt{10 - 3x}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \mb{D} &= (-\infty, \frac{10}{3}] \\
 \mb{R} &= [0, \infty) \\
 x &= \sqrt{10 - 3 f^{-1}(x)} \\
@@ -274,7 +276,7 @@ x^2 - 10 &= -3 f^{-1}(x) \\
 \frac{10 - x^2}{3} &= f^{-1}(x) \\
 \mb{D} &= [0, \infty) \\
 \mb{R} &= (-\infty, \frac{10}{3}]
-\end{align}
+\end{aligned}
 $$
 
 Graphically, if the point $(a, b)$ is on the graph of $f(x)$, then $(b, a)$ is on the graph of $f^{-1}(x)$. Using this information, we can sketch the inverse of a graph by reflecting it along the line $y = x$.
@@ -318,11 +320,11 @@ $\log_a(x^r) = r \log_a(x^r)$. So $\log(\sqrt{x}) = \frac{1}{2} \log(x)$.
 Find the inverse of $f(x) = e^{2x + 1}$:
 
 >$$
-\begin{align}
+\begin{aligned}
 x &= e^{2 f^{-1}(x) + 1} \\
 \ln(x) &= 2 f^{-1}(x) + 1 \\
 f^{-1}(x) &= \frac{1}{2} \ln(x) - \frac{1}{2} \\
-\end{align}
+\end{aligned}
 $$
 
 # 20/9/13
@@ -350,10 +352,10 @@ These are based on the special triangles:
 Parametric equations of unit circle ($x^2 + y^2 = 1$): $x = \cos \theta$ and $y = \sin \theta$ together form a unit circle from polar coordinates.
 
 $$
-\begin{align}
+\begin{aligned}
 x^2 + y^2 &= 1 \\
 \sin^2 \theta + \cos^2 \theta &= 1 \\
-\end{align}
+\end{aligned}
 $$
 
 ### Properties
@@ -382,12 +384,12 @@ Addition formulas: $\sin(x + y) = \sin x \cos y + \cos x \sin y$, $\cos(x + y) =
 Find the subtraction formulas:
 
 > $$
-\begin{align}
+\begin{aligned}
 \sin(x - y) &= \sin x \cos(-y) + \cos x \sin(-y) \\
 &= \sin x \cos y - \cos x \sin y \\
 \cos(x - y) &= \cos x \cos(-y) - \sin x \sin(-y) \\
 &= \cos x \cos y + \sin x \sin y \\
-\end{align}
+\end{aligned}
 $$
 
 Inverse Trigonometric Functions
@@ -406,27 +408,27 @@ The inverse of the tangent function is denoted $\arctan \theta$, or $\tan^{-1} \
 Evaluate $\cos(\arctan \sqrt{3})$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\sqrt{3}}{1} &= \frac{\text{opposite}}{\text{adjacent}} \\
 \text{opposite} &= \sqrt{3} \\
 \text{adjacent} &= 1 \\
 \text{hypotenuse} &= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
 \cos(\arctan \sqrt{3}) &= \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
 \cos(\arctan \sqrt{3}) &= \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
-\end{align}
+\end{aligned}
 $$
 
 Simplify $\sin(\arctan x)$
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{x}{1} &= \frac{\text{opposite}}{\text{adjacent}} \\
 \text{opposite} &= x \\
 \text{adjacent} &= 1 \\
 \text{hypotenuse} &= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
 \sin(\arctan x) &= \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
 \sin(\arctan x) &= \frac{x}{\sqrt{x^2 + 1}} \\
-\end{align}
+\end{aligned}
 $$
 
 Evaluate $\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)$:
@@ -439,13 +441,13 @@ Evaluate $\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)$:
         pi/2  1  pi/3
 
 > $$
-\begin{align}
+\begin{aligned}
 \sin \left( \frac{-\pi}{3} \right) &= \frac{\text{opposite}}{\text{hypotenuse}} = -\frac{\sqrt{3}}{2} \\
 \text{opposite} &= \sqrt{3} \\
 \text{hypotenuse} &= 2 \\
 \text{adjacent} &= \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
 \arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) &= \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\
-\end{align}
+\end{aligned}
 $$
 
 # 23/9/13
@@ -477,7 +479,7 @@ Hyperbolic sine is one-to-one over $\mb{R}$.
 To find the inverse functions, we solve for $y$ where $x = \sinh y = \frac{e^y - e^{-y}}{2}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 x = \sinh y &= \frac{e^y - e^{-y}}{2} \\
 2x &= e^y - e^{-y} \\
 0 &= e^y - 2x - e^{-y} \\
@@ -487,7 +489,7 @@ e^y &= \frac{2x \pm \sqrt{(-2x)^2 - 4 \cdot 1 \cdot -1}}{2} = x \pm \sqrt{x^2 + 
 \text{Since } x - \sqrt{x^2 + 1} < 0 \text{, } e^y &= x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
 e^y &= x + \sqrt{x^2 + 1} \\
 y &= \ln(x + \sqrt{x^2 + 1}) \\
-\end{align}
+\end{aligned}
 $$
 
 With this technique, we discover the inverses of the hyperbolic functions are:
@@ -499,7 +501,7 @@ With this technique, we discover the inverses of the hyperbolic functions are:
 Find $tanh^{-1} x$:
 
 > $$
-\begin{align}
+\begin{aligned}
 x = \tanh y &= \frac{e^y - e^{-y}}{e^y + e^{-y}} \\
 xe^y + xe^{-y} &= e^y - e^{-y} \\
 xe^{2y} + x &= e^{2y} - 1 \\
@@ -509,7 +511,7 @@ e^y &= \pm \sqrt{\frac{x + 1}{x - 1}} \\
 e^y &= \sqrt{\frac{x + 1}{x - 1}} \\
 y &= \ln \left( \frac{x + 1}{x - 1} \right)^\frac{1}{2} \\
 y &= \frac{1}{2} \ln \frac{x + 1}{x - 1} \\
-\end{align}
+\end{aligned}
 $$
 
 Limits
@@ -656,12 +658,12 @@ $\lim_{x \to a} x = x$.
 Evaluate $\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} &= \lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} \frac{\sqrt{x + 2} + 3}{\sqrt{x + 2} + 3} \\
 &= \lim_{x \to 7} \frac{x - 7}{(x - 7)(\sqrt{x + 2} + 3)} \\
 &= \lim_{x \to 7} \frac{1}{\sqrt{x + 2} + 3} \\
 &= \frac{1}{6} \\
-\end{align}
+\end{aligned}
 $$
 
 Squeeze Theorem
@@ -758,11 +760,13 @@ The most common discontinuities are:
 For removable discontinuities, we can remove the discontinuity by writing a related function filling in the undefined point:
 
 $$
-f(x) = x \sin \frac{1}{x} \\
-\text{becomes } f(x) = \begin{cases}
+\begin{aligned}
+f(x) &= x \sin \frac{1}{x} \\
+\text{becomes } f(x) &= \begin{cases}
 x \sin \frac{1}{x} &\text{if } x \ne 0 \\
 0 &\text{if } x = 0 \\
 \end{cases}
+\end{aligned}
 $$
 
 If $f(x)$ and $g(x)$ are continuous at $a$, then $f(x) \pm g(x)$, $f(x) g(x)$, and $\frac{f(x)}{g(x)}, g(x) \ne 0$ are also continuous at $a$.
@@ -783,13 +787,13 @@ In other words, the limit can be moved within compositions.
 Evaluate $\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2})$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2}) &= \arcsin(\lim_{x \to 0.5} \sqrt{1 - x^2}) \\
 &= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
 &= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
 &= \arcsin(\frac{\sqrt{3}}{2}) \\
 &= \frac{\pi}{3} \\
-\end{align}
+\end{aligned}
 $$
 
 ### Intermediate value theorem (IVT)
@@ -848,19 +852,19 @@ Infinite limit theorem: for $r \in \mb{Q}, r > 0$, when $x^r$ is defined, $\lim_
 Evaluate $\lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x}$:
 
 $$
-\begin{align}
+\begin{aligned}
 \lim_{x \to \infty} \frac{x^2 + 2}{3x^2 - 4x} &= \lim_{x \to \infty} \frac{\frac{x^2 + 2}{x^2}}{\frac{3x^2 - 4x}{x^2}} \\
 &= \lim_{x \to \infty} \frac{\frac{x^2}{x^2} + \frac{2}{x^2}}{\frac{3x^2}{x^2} - \frac{4x}{x^2}} \\
 &= \lim_{x \to \infty} \frac{1 + \frac{2}{x^2}}{3 - \frac{4}{x}} \\
 &= \frac{1 + 0}{3 - 0} \\
 &= \frac{1}{3} \\
-\end{align}
+\end{aligned}
 $$
 
 Evaluate $\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x)$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) &= \lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x) \frac{\sqrt{9x^2 + x} + 3x}{\sqrt{9x^2 + x} + 3x} \\
 &= \lim_{x \to \infty} \frac{9x^2 + x - 9x^2}{\sqrt{9x^2 + x} + 3x} \\
 &= \lim_{x \to \infty} \frac{1}{\frac{\sqrt{9x^2 + x}}{x} + 3} \\
@@ -868,27 +872,29 @@ Evaluate $\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x)$:
 &= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{x^2(9 + \frac{1}{x})}{x^2}} + 3} \\
 &= \lim_{x \to \infty} \frac{1}{\sqrt{9} + 3} \\
 &= \frac{1}{6} \\
-\end{align}
+\end{aligned}
 $$
 
 Evaluate $\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}$:
 
 > $$
+\begin{aligned}
 \text{Note that } \forall x > 2, x^2 > 2x \\
 \lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}} = \frac{-2}{-\infty - \sqrt{\infty - \infty}} = \frac{-2}{-\infty} = 0 \\
+\end{aligned}
 $$
 
 Evaluate $\lim_{x \to \infty}  e^{-x} \sin x$:
 
 > $$
-\begin{align}
+\begin{aligned}
 -1 &\le \sin x \le 1 \\
 e^{-x} &= \frac{1}{e^x} \\
 \lim_{x \to \infty}  e^{-x} &= 0 \\
 \text{By the squeeze theorem: } \lim_{x \to \infty}  e^{-x} \cdot -1 &\le \lim_{x \to \infty}  e^{-x} \sin x \le \lim_{x \to \infty}  e^{-x} \cdot 1 \\
 0 &\le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
 \lim_{x \to \infty}  e^{-x} \sin x &= 0 \\
-\end{align}
+\end{aligned}
 $$
 
 # 7/10/13
@@ -909,7 +915,7 @@ Consider $f(x) = e^{\frac{1}{x}}$. As $x \to 0-$, $f(x) \to 0$. But as $x \to 0^
 Evaluate $\lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}} &= \lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}} \cdot \frac{1 + \sqrt{x}}{1 + \sqrt{x}} \\
 &= \lim_{x \to 1} \frac{(\sqrt{x} - x^2)(1 + \sqrt{x})}{1 - x} \\
 &= \lim_{x \to 1} \frac{\sqrt{x} - x^2 + x - x^{2.5}}{1 - x} \\
@@ -917,7 +923,7 @@ Evaluate $\lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}}$:
 &= \lim_{x \to 1} \frac{(1 - x)(x + \sqrt{x}(1 + x))}{1 - x} \\
 &= \lim_{x \to 1} (x + \sqrt{x}(1 + x)) \\
 &= 1 + \sqrt{1}(1 + 1)) = 3 \\
-\end{align}
+\end{aligned}
 $$
 
 Derivatives
@@ -945,21 +951,21 @@ The following are equivalent notations: $f'(x), y', \frac{\dee y}{\dee x}, \frac
 Determine whether $f(x) = \begin{cases} x \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 f'(0) &= \lim_{x \to 0} \frac{x \sin \frac{1}{x} - 0}{x - 0} \\
 &= \lim_{x \to 0} \sin \frac{1}{x} \\
 &\text{The limit does not exist}
-\end{align}
+\end{aligned}
 $$
 
 Determine whether $f(x) = \begin{cases} x^2 \sin \frac{1}{x}, x \ne 0 \\ 0, x = 0 \end{cases}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 f'(0) &= \lim_{x \to 0} \frac{x^2 \sin \frac{1}{x} - 0}{x - 0} \\
 &= \lim_{x \to 0} x \sin \frac{1}{x} \\
 &= 0 \text{(squeeze theorem)}
-\end{align}
+\end{aligned}
 $$
 
 ### Power law
@@ -985,13 +991,13 @@ Proof for all real $n$ (requires implicit differentiation, described later):
 # 9/10/13
 
 $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} \sqrt{x} &= \lim_{h \to 0} \frac{\sqrt{x + h} - \sqrt{x}}{h} \\
 &= \lim_{h \to 0} \frac{\sqrt{x + h} - \sqrt{x}}{h} \frac{\sqrt{x + h} + \sqrt{x}}{\sqrt{x + h} + \sqrt{x}} \\
 &= \lim_{h \to 0} \frac{x + h - x}{h(\sqrt{x + h} + \sqrt{x})} \\
 &= \lim_{h \to 0} \frac{1}{\sqrt{x + h} + \sqrt{x}} \\
 &= \frac{1}{2 \sqrt{x}} \\
-\end{align}
+\end{aligned}
 $$
 
 ### Differentiability implies continuity
@@ -1017,11 +1023,11 @@ Consider $f(x) = \sqrt[3]{x}$. Clearly, $f'(0) = \lim_{x \to 0} \frac{f(x) - f(0
 Consider $f(x) = a^x$.
 
 $$
-\begin{align}
+\begin{aligned}
 f'(x) &= \lim_{h \to 0} \frac{a^{x + h} - a^x}{h} \\
 &= \lim_{h \to 0} \frac{a^x(a^h - 1)}{h} \\
 &= a^x \lim_{h \to 0} \frac{a^h - 1}{h} \\
-\end{align}
+\end{aligned}
 $$
 
 So the derivative of any power function is just a power function multiplied by a **constant of proportionality** $\lim_{h \to 0} \frac{a^h - 1}{h}$.
@@ -1050,13 +1056,13 @@ If $f(x)$ and $g(x)$ are differentiable at $x$, then $\frac{\dee}{\dee x} f(x) g
 Proof:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} f(x) g(x) &= \lim_{h \to 0} \frac{f(x + h) g(x + h) - f(x) g(x)}{h} \\
 &= \lim_{h \to 0} \frac{f(x + h) g(x + h) - f(x) g(x) + (f(x) g(x + h) - f(x) g(x + h))}{h} \\
 &= \lim_{h \to 0} \left( g(x + h) \frac{f(x + h) - f(x)}{h} + f(x) \frac{g(x + h) - g(x)}{h} \right) \\
 &= \lim_{h \to 0} g(x + h) \frac{f(x + h) - f(x)}{h} + \lim_{h \to 0} f(x) \frac{g(x + h) - g(x)}{h} \\
 &= g(x) f'(x) + f(x) g'(x) \\
-\end{align}
+\end{aligned}
 $$
 
 # 11/10/13
@@ -1074,12 +1080,12 @@ If $g(x)$ is differentiable at $x$, then $\frac{\dee}{\dee x} \frac{1}{g(x)}$ is
 Proof:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} \frac{1}{g(x)} &= \lim_{h \to 0} \frac{\frac{1}{g(x + h)} - \frac{1}{g(x)}}{h} \\
 &= \lim_{h \to 0} \frac{g(x) - g(x + h)}{h(g(x + h) g(x))} \\
 &= \lim_{h \to 0} -\frac{g(x + h) - g(x)}{h} \cdot \lim_{h \to 0} \frac{1}{g(x + h) g(x)} \\
 &= -g'(x) \cdot \frac{1}{g(x)^2}
-\end{align}
+\end{aligned}
 $$
 
 ### Quotient rule
@@ -1089,19 +1095,19 @@ If $f(x)$ and $g(x)$ are differentiable at $x$ and $g(x) \ne 0$, then $\frac{\de
 Proof:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} \frac{f(x)}{g(x)} &= \frac{\dee}{\dee x} (f(x) g(x)^{-1}) \\
 &= f'(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
 &= f'(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
 &= f'(x) g(x)^{-1} + f(x) \frac{-g'(x)}{g(x)^2} \\
 &= \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2} \\
-\end{align}
+\end{aligned}
 $$
 
 The function $f(x) = \frac{x}{1 + x^2}$ is known as a serpentine curve. Find the equations of the tangents where they have a slope of $\frac{1}{8}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 f'(x) = \frac{1}{8} &= \frac{1 + x^2 - 2x^2}{(1 + x^2)^2} \\
 \frac{1}{8} &= \frac{1 - x^2}{(1 + x^2)^2} \\
 (1 + x^2)^2 &= 8 - 8x^2 \\
@@ -1113,7 +1119,7 @@ t_1(-\sqrt{4 \sqrt{2} - 5}) = f(-\sqrt{4 \sqrt{2} - 5}) &= \frac{1}{8} \sqrt{4 \
 t_1(-\sqrt{4 \sqrt{2} - 5}) = -\frac{\sqrt{4 \sqrt{2} - 5}}{4 \sqrt{2} - 4} &= \frac{1}{8} \sqrt{4 \sqrt{2} - 5} + b \\
 t_1 \left(-\sqrt{4 \sqrt{2} - 5} \right) = -\frac{2 \sqrt{4 \sqrt{2} - 5}}{8(\sqrt{2} - 1)} - \frac{\sqrt{(\sqrt{2} - 1)(4 \sqrt{2} - 5)}}{8(\sqrt{2} - 1)} &= b \\
 ;wip
-\end{align}
+\end{aligned}
 $$
 
 Higher order derivatives
@@ -1130,7 +1136,7 @@ Consider $\frac{\dee}{\dee x}$ as an operator.
 Find $\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2} &= \frac{\dee}{\dee x} \frac{\dee}{\dee x} \frac{x}{1 + x^2} \\
 &= \frac{\dee}{\dee x} \frac{1 + x^2 - 2x^2}{(x^2 + 1)^2} \\
 &= \frac{\dee}{\dee x} \frac{1 - x^2}{(x^2 + 1)^2} \\
@@ -1138,7 +1144,7 @@ Find $\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2}$:
 &= \frac{-2x(x^2 + 1)^2 - (1 - x^2)(4x^3 + 4x)}{(x^2 + 1)^4} \\
 &= \frac{-2x(x^2 + 1)^2 - 4x(1 - x^2)(x^2 + 1)}{(x^2 + 1)^4} \\
 &= \frac{-2x(x^2 + 1) - 4x(1 - x^2)}{(x^2 + 1)^3} \\
-\end{align}
+\end{aligned}
 $$
 
 # 16/10/13
@@ -1153,11 +1159,11 @@ Consider $\lim_{x \to 0} \frac{\sin x}{x} = 1$
 Evaluate $\lim_{x \to 0} \frac{\sin(3x)}{x}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \lim_{x \to 0} \frac{\sin(3x)}{x} &= \lim_{x \to 0} \frac{3 \sin(3x)}{3x} \\
 &= 3 \lim_{x \to 0} \frac{\sin(3x)}{3x} \\
 &= 3 \\
-\end{align}
+\end{aligned}
 $$
 
 ### Sine rule
@@ -1167,7 +1173,7 @@ $\frac{\dee}{\dee x} \sin(x) = \cos(x)$.
 Proof:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} \sin(x) &= \lim_{h \to 0} \frac{\sin(x + h) - \sin(x)}{h} \\
 &= \lim_{h \to 0} \frac{\sin(x) \cos(h) + \sin(h) \cos(x) - \sin(x)}{h} \\
 &= \sin(x) \lim_{h \to 0} \frac{\cos(x) - 1}{h} + \cos(x) \lim_{h \to 0} \frac{\sin(h)}{h} \\
@@ -1180,7 +1186,7 @@ Proof:
 &= \frac{1}{2} \cdot -0 \cdot 1 = 0 \\
 \frac{\dee}{\dee x} \sin(x) &= \sin(x) \cdot 0 + \cos(x) \cdot 1 \\
 &= \cos(x) \\
-\end{align}
+\end{aligned}
 $$
 
 ### Cosine rule
@@ -1190,7 +1196,7 @@ $\frac{\dee}{\dee x} \cos(x) = -\sin(x)$.
 Proof:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} \cos(x) &= \lim_{h \to 0} \frac{\cos(x + h) - \cos(x)}{h} \\
 &= \lim_{h \to 0} \frac{\cos(x) \cos(h) - \sin(h) \sin(x) - \cos(x)}{h} \\
 &= \cos(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} - \sin(x) \lim_{h \to 0} \frac{\sin(h)}{h} \\
@@ -1198,7 +1204,7 @@ Proof:
 \lim_{h \to 0} \frac{\cos(h) - 1}{h} &= 0 \text{, from the proof of the sine rule} \\
 \frac{\dee}{\dee x} \sin(x) &= \cos(x) \cdot 0 - \sin(x) \cdot 1 \\
 &= -\sin(x) \\
-\end{align}
+\end{aligned}
 $$
 
 ### Tangent rule
@@ -1208,13 +1214,13 @@ $\frac{\dee}{\dee x} \tan(x) = \sec(x)^2$
 Proof:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} \tan(x) &= \frac{\dee}{\dee x} \frac{\sin(x)}{\cos(x)} \\
 &= \frac{\cos(x) \frac{\dee}{\dee x} \sin(x) - \sin(x) \frac{\dee}{\dee x} \cos(x)}{\cos(x)^2} \\
 &= \frac{\cos(x)^2 + \sin(x)^2}{\cos(x)^2} \\
 &= \frac{1}{\cos(x)^2} \\
 &= \sec(x)^2 \\
-\end{align}
+\end{aligned}
 $$
 
 ### Hyperbolic sine rule
@@ -1224,12 +1230,12 @@ $\frac{\dee}{\dee x} \sinh(x) = \cosh(x)$.
 Proof:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} \sinh(x) &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
 &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
 &= \frac{1}{2} \left( e^x - \frac{-1}{e^x} \right) \\
 &= \frac{e^x + e^{-x}}{2} = \cosh(x) \\
-\end{align}
+\end{aligned}
 $$
 
 ### Hyperbolic cosine rule
@@ -1239,12 +1245,12 @@ $\frac{\dee}{\dee x} \cosh(x) = \sinh(x)$.
 Proof:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} \cosh(x) &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
 &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
 &= \frac{1}{2} \left( e^x + \frac{-1}{e^x} \right) \\
 &= \frac{e^x - e^{-x}}{2} = \sinh(x) \\
-\end{align}
+\end{aligned}
 $$
 
 ### Hyperbolic tangent rule
@@ -1254,12 +1260,12 @@ $\frac{\dee}{\dee x} \tanh(x) = \frac{1}{\cosh(x)} = \sech(x)$.
 Proof:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} \tanh(x) &= \frac{\dee}{\dee x} \frac{\sinh(x)}{\cosh(x)} \\
 &= \frac{\cosh(x) \frac{\dee}{\dee x} \sinh(x) - \sinh(x) \frac{\dee}{\dee x} \cosh(x)}{\cosh(x)^2} \\
 &= \frac{\cosh(x)^2 - \sinh(x)^2}{\cosh(x)^2} \\
 &= \frac{1}{\cosh(x)^2} = \sech(x)^2 \\
-\end{align}
+\end{aligned}
 $$
 
 Alternatively, we can prove it from the definition and derivative rules.
@@ -1328,7 +1334,7 @@ Contrasts with ordinary differentiation. This is differentiating for a general c
 Find $\frac{\dee y}{\dee x}$ for $x^2 + y^2 = 1$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} (x^2 + y^2) &= \frac{\dee}{\dee x} 1 \\
 &= \frac{\dee}{\dee x} x^2 + \frac{\dee}{\dee x} y^2 = \frac{\dee}{\dee x} 1 \\
 &= 2x + \frac{\dee}{\dee x} y^2 = 0 \\
@@ -1337,13 +1343,13 @@ Find $\frac{\dee y}{\dee x}$ for $x^2 + y^2 = 1$:
 &= 2x + 2y \frac{\dee}{\dee x} y \\
 2x + 2y \frac{\dee}{\dee x} y &= 0 \\
 \frac{\dee}{\dee x} y &= \frac{-2x}{2y} = \frac{-x}{y} \\
-\end{align}
+\end{aligned}
 $$
 
 Where does $x^3 + y^3 = 3xy$ have a horizontal tangent?
 
 > $$
-\begin{align}
+\begin{aligned}
 \frac{\dee}{\dee x} x^3 + \frac{\dee}{\dee x} y^3 &= \frac{\dee}{\dee x} 3xy \\
 &= 3x^2 + y' 3y^2 = 3y + 3xy' \\
 3x^2 - 3y &= (3x - 3y^2)y' \\
@@ -1354,7 +1360,7 @@ x^3 + (x^2)^3 = 3xx^2 &\equiv x^3 + x^6 = 3x^3 \equiv x^3(x^3 - 1) = 0 \\
 x &= 0 \text{ (extraneous)}, x = 1 \\
 y = 1^2 = 1 \\
 &\text{There is a horizontal tangent at } (1, 1)
-\end{align}
+\end{aligned}
 $$
 
 We can use implicit differentiation to find the derivative of inverse functions.
@@ -1431,7 +1437,7 @@ The general process is as follows:
 Find $y'$ if $y = \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 y &= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \\
 \ln y &= \ln \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \\
 \ln y &= \ln (2x - 3)^3 + \ln (7x - 1)^4 - \ln (5x + 1)^5 \\
@@ -1442,26 +1448,26 @@ y' \frac{\dee}{\dee y} \ln y &= 3 \frac{\dee}{\dee x} \ln (2x - 3) + 4 \frac{\de
 \frac{y'}{y} &= 3 \frac{1}{2x - 3} 2 + 4 \frac{1}{7x - 1} 7 - 5 \frac{1}{5x + 1} 5 \\
 y' &= y \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
 y' &= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
-\end{align}
+\end{aligned}
 $$
 
 We can use this technique to differentiate functions like $f(x) = g(x)^{h(x)}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 f(x) &= g(x)^{h(x)} \\
 \ln f(x) &= \ln g(x)^{h(x)} \\
 \ln f(x) &= h(x) \ln g(x) \\
 \frac{\dee}{\dee x} \ln f(x) &= \frac{\dee}{\dee x} h(x) \ln g(x) \\
 f'(x) \frac{1}{f(x)} &= h'(x) \ln g(x) + h(x) \frac{\dee}{\dee x} \ln g(x) \\
 f'(x) &= f(x) (h'(x) \ln g(x) + \frac{h(x) g'(x)}{g(x)}) \\
-\end{align}
+\end{aligned}
 $$
 
 Find the equations of the tangents of $y = x^{\ln x}$ at $(1, 1)$ and $(e, e)$:
 
 > $$
-\begin{align}
+\begin{aligned}
 y &= x^{\ln x} \\
 \ln y &= \ln x \ln x = (\ln x)^2 \\
 \frac{\dee}{\dee x} \ln y &= \frac{\dee}{\dee x} (\ln x)^2 \\
@@ -1472,7 +1478,7 @@ t_1(a) &= 1 \\
 t_e(a) = e &= \frac{2 e^{\ln e} \ln e}{e} a + b = 2a + b \\
 t_e(e) = e &= 2e + b \\
 t_e(a) = 2a - e \\
-\end{align}
+\end{aligned}
 $$
 
 Find $\lim_{x \to 0^+} x^{\ln x}$:
@@ -1497,7 +1503,7 @@ Suppose $f(x)$ has a domain and range $[a, b]$ and is continuous. Show that the 
 We can also write $e$ as a limit:
 
 > $$
-\begin{align}
+\begin{aligned}
 f(x) &= \ln x \\
 f'(x) &= \frac{1}{x} \\
 f'(1) &= 1 \\
@@ -1507,7 +1513,7 @@ f'(x) &= \lim_{h \to 0} \frac{\ln(1 + h) - \ln(1)}{h}\\
 &= \lim_{h \to 0} \ln(1 + h)^\frac{1}{h} = 1 \\
 e^{\lim_{h \to 0} \ln(1 + h)^\frac{1}{h}} &= e^1 = e^{\ln \lim_{h \to 0} (1 + h)^\frac{1}{h}} \\
 e &= \lim_{h \to 0} (1 + h)^\frac{1}{h} \\
-\end{align}
+\end{aligned}
 $$
 > Consider $f(x) = \ln x$.
 
@@ -1570,10 +1576,10 @@ $$
 Find the linear approximation of $f(x) = \sqrt{x}$ near $x = 9$ and use it to estimate $\sqrt{10}$:
 
 $$
-\begin{align}
+\begin{aligned}
 L(x) &= \frac{1}{6}(x - 9) + 3 \\
 L(10) &= \frac{1}{6} + 3 = \frac{19}{6} \\
-\end{align}
+\end{aligned}
 $$
 
 The further away from the point we get, the worse the approximation gets. To regain accuracy, we need to use another linear approximation at a closer point.
@@ -1604,10 +1610,10 @@ Find the quadratic approximation of $f(x) = \sqrt{x}$ near $x = 9$ and use it to
 $$f(a) + f'(a)(x - a) + \frac{1}{2} f''(a) (x - a)^2$$
 
 $$
-\begin{align}
+\begin{aligned}
 Q(x) &= 3 + \frac{1}{6}(x - 9) + \frac{1}{108} (x - 9)^2 \\
 Q(10) &= 3 + \frac{1}{6} + \frac{1}{108} = \frac{1029}{324} \\
-\end{align}
+\end{aligned}
 $$
 
 We don't have to stop at quadratics. We can use any order of polynomial to get better approximations. This is known as a Taylor series.
@@ -1711,10 +1717,10 @@ Proof:
 Find $x$ where $f'(c) = \frac{f(3) - f(1)}{3 - 1}$ for $f(x) = x^3$ over $[1, 3]$:
 
 > $$
-\begin{align}
+\begin{aligned}
 3x^2 &= \frac{27 - 1}{2} \\
 x = \sqrt{\frac{26}{6}} &= \sqrt{\frac{13}{3}} \\
-\end{align}
+\end{aligned}
 $$
 
 The MVT is important because of its use in proving the **fundemental theorem of calculus** and **Taylor's Theorem with Lagrange remainder**, the two most important theorems in calculus. It is also used to prove several other results.
@@ -2483,24 +2489,24 @@ Evaluate $\int_0^\pi \sin^2 x \dee x$:
 Evaluate $\int_1^4 \frac{x + 1}{\sqrt{x}} \dee x$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \int_1^4 \frac{x + 1}{\sqrt{x}} \dee x &= \int_1^4 \frac{x}{\sqrt{x}} \dee x + \int_1^4 \frac{1}{\sqrt{x}} \dee x \\
 &= \int_1^4 \sqrt{x} \dee x + \int_1^4 \frac{1}{\sqrt{x}} \dee x \\
 &= \evalat{\frac{2}{3}x^\frac{3}{2}}_1^4 + \evalat{2\sqrt{x}}_1^4 \\
 &= \frac{2}{3}4^\frac{3}{2} - \frac{2}{3} + 2\sqrt{4} - 2 \\
 &= \frac{20}{3} \\
-\end{align}
+\end{aligned}
 $$
 
 Evaluate $\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{1 - x}\right) \dee x$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{1 - x}\right) \dee x &= \int_0^{\frac{1}{\sqrt{2}}} \frac{4}{\sqrt{1 - x^2}} \dee x + \int_0^{\frac{1}{\sqrt{2}}} \frac{1}{1 - x} \dee x \\
 &= \evalat{4 \arcsin x}_0^{\frac{1}{\sqrt{2}}} + \evalat{-\ln(1 - x)}_0^{\frac{1}{\sqrt{2}}} \\
 &= \pi - 0 + -\ln \frac{\sqrt{2} - 1}{\sqrt{2}} - 0 = \pi + \ln \frac{\sqrt{2}}{\sqrt{2} - 1} \\
-&= \pi + \ln \frac{2 + \sqrt{2}} \\
-\end{align}
+&= \pi + 0.5 \ln 2 - \ln(\sqrt{2} - 1) \\
+\end{aligned}
 $$
 
 Indefinite Integrals

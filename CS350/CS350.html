@@ -47,9 +47,68 @@ code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Ann
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -80,33 +139,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h1 id="cs350">CS350</h1>
 <p>Operating systems.</p>
 <pre><code>Kevin Lanctot
@@ -232,7 +265,7 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
 <li>A semaphore has an integer value, which can be incremented or decremented. This value is always non-negative, and represents the remaining capacity for the semaphore's concurrency - how many more threads can simultaneously hold the semaphore.</li>
 <li>When a thread tries to procure/acquire a semaphore, it will block until the integer value is positive (or won't block at all if it's already positive). Regardless of the value, the semaphore value is decremented afterward.</li>
 <li>When a thread tries to vacate/release a semaphore, it increments the semaphore value.</li>
-<li>Basically, a semaphore allows <span class="math inline">\(n\)</span> threads to hold on to a resource at a time, and other threads get blocked when they try to acquire it. It acts like a fixed-size buffer for a resource.</li>
+<li>Basically, a semaphore allows <span class="math inline">n</span> threads to hold on to a resource at a time, and other threads get blocked when they try to acquire it. It acts like a fixed-size buffer for a resource.</li>
 <li>A binary semaphore always has a value between 0 and 1. A counting semaphore can have any valid semaphore value. A binary semaphore works a lot like a lock, except they can be locked/unlocked from different threads.</li>
 <li>The starting value of a semaphore determines the total number of threads that can acquire it at the same time.</li>
 <li>A good analogy for semaphores is the grocery store checkout line, where the semaphore starting value is the number of cashiers. Each person in the line attempts to procure a cashier, blocks (waits in line) if there's no cashiers available, and then when one does become available, goes to the cashier, decreasing the number of available cashiers by 1.</li>
@@ -306,23 +339,23 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
 <h1 id="section-8">1/6/16</h1>
 <p>A syscall is generally rather expensive, since it involves a lot of context switching. However, it's the only way for user programs to safely call into kernel functionality.</p>
 <p>On OS/161 specifically, the process for a syscall is as follows:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>User-mode program makes the syscall.
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>The CPU is set to kernel mode.</li>
 <li>The current thread context is saved using a trap frame.</li>
 <li>The syscall code (a number identifying which system call to make) goes into the cause register, R2, and up to four syscall arguments can go in R4, R5, R6, and R7.</li>
 <li>The program counter is set to the fixed syscall address.</li>
 </ol></li>
 <li>The kernel executes the syscall.
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>The kernel determines which syscall was actually called using the cause register, R2.</li>
 <li>The kernel performs the requested operation.</li>
 <li>The last argument register R7 is set to 0 if the operation succeeded, and 1 otherwise.</li>
 <li>The cause register R2 is set to the syscall return value if the operation succeeded, and the error number (errno) otherwise.</li>
 </ol></li>
 <li>Control is handed back to the user program.
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>The current thread context is restored from the saved trap frame.</li>
 <li>The CPU is set to user mode.</li>
 </ol></li>
@@ -332,7 +365,7 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
 <h1 id="section-11">10/6/16</h1>
 <p>;wip: catch up in everything - needed three weeks to recover from injury enough to get out of bed</p>
 <h1 id="section-12">15/6/16</h1>
-<p>The standard page size for almost all applications is 4096 bytes. In some server environments and similar, the page size may be increased to improve memory performance. If we have 0x123456 bytes of data, we need <span class="math inline">\(0x123 + 1\)</span> pages to hold them.</p>
+<p>The standard page size for almost all applications is 4096 bytes. In some server environments and similar, the page size may be increased to improve memory performance. If we have 0x123456 bytes of data, we need <span class="math inline">0x123 + 1</span> pages to hold them.</p>
 <p>With paging, address translation is an additional thing we need to do every single time we try to access RAM, which slows down all those memory operations that use it. To improve this, we have TLBs, which are basically much faster caches for page table lookups, usually with about 64 entries. The MMU uses the TLB to translate between virtual and physical addresses. If the address can't be translated using the TLB, the MMU will raise a VM exception/address exception, at which point OS/161 is supposed to catch it, generate a TLB entry for that address, and retry the memory operation.</p>
 <p>OS/161 has a software-controlled TLB with 64 entries, providing operations like TLB Write (modify TLB entry), TLB read (get TLB entry), and TLB probe (look for a page number in the TLB).</p>
 <p>Every application in OS/161 has three sections in its virtual address space, usually in the following order:</p>
@@ -359,7 +392,7 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
 <h1 id="section-14">22/6/16</h1>
 <p>Segmentation example: suppose we have a 32-bit address with a 28-bit segment offset. Then the first 4 bits of every virtual address is the segment number, and the remaining 28 bits are the offset within the segment. When we want to translate a virtual address into a physical one, like 0x20002004, we first extract the segment number from the first 4 bits to get 0x2, and then extract the segment offset, 0x2004. Then, we can check that the segment number is within the bounds of the segment table, and that the offset is within the segment bounds. We can then add the segment offset to the physical base address to get the translated physical address.</p>
 <p>An alternative to segmentation is to use multi-level paging - the single large, linear page table is replaced with a hierarchy of smaller page tables, and parent page tables can manage their child page tables to assign memory sparsely. In this scheme, each virtual address consists of bits for a page directory index (an index within the page directory), bits for a page table index (an index within the page table), and bits for the page offset, which is the offset within the page. Since page directories and page tables both store their own lengths, we can also do bounds checks at the page directory, page table, and offset levels. We can even have nested page directories, where directories point to other directories, and so on, until they finally point to page tables.</p>
-<p>When we have large address spaces and small page sizes, our page tables become huge - an architecture with 64-bit virtual addresses and 4 kB byte pages, we need <span class="math inline">\(\frac{2^{64}}{2^12} = 2^{52}\)</span> page table entries, which would take an impractical amount of memory to store. Instead, we can use a <strong>page directory</strong>, which is like a page table for page tables. Each entry in the page directory points to a page table elsewhere in memory. This allows us to only have page tables for the parts of memory we're actually using, which means that we don't have to have the entire page table in memory if we don't need it.</p>
+<p>When we have large address spaces and small page sizes, our page tables become huge - an architecture with 64-bit virtual addresses and 4 kB byte pages, we need <span class="math inline">\frac{2^{64}}{2^12} = 2^{52}</span> page table entries, which would take an impractical amount of memory to store. Instead, we can use a <strong>page directory</strong>, which is like a page table for page tables. Each entry in the page directory points to a page table elsewhere in memory. This allows us to only have page tables for the parts of memory we're actually using, which means that we don't have to have the entire page table in memory if we don't need it.</p>
 <p>The multi-level page table needs multiple lookups just to translate an address. As a result, this is often makes memory operations quite a bit slower - we usually want to make the heirarchy as flat as possible.</p>
 <p>One interesting thing we can do with virtual address spaces is mapping some pages to secondary storage - some pages can be made to resolve onto the hard drive. This allows us to put some pages in RAM, and some on disk, allowing us to pretend we have more RAM than we actually do and run programs that use more total memory than we physically have RAM for. On Linux, this is generally accomplished using the swap partition. To actually implement this, each entry in the page tables can have a bit that determines whether it's present in memory - the <strong>present bit</strong>.</p>
 <p>Since secondary storage is an order of magnitude slower than RAM, we want to minimise the amount of secordary storage we're actually using. To do this, we have multiple <strong>paging strategies</strong>: for example, the OS can bring pages from secondary storage as needed (demand paging), or it can predict which ones will be retrieved and then fetch them pre-emptively (prefetch paging). There's also many possible <strong>replacement policies</strong> (how do we replace old pages in memory if no spaces are available?). For segmentation, we can also make use of secondary storage, but in addition to the considerations for paging, we also need to consider <strong>placement policies</strong> (where do we fetch the pages into memory if there are multiple possible spaces?).</p>
@@ -376,7 +409,7 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
 <p><strong>Thrashing</strong> is when a system is getting bogged down by too many page faults. This is generally resolved by suspending/killing some processes to free up some RAM - suspending a process frees up its resident set.</p>
 <h1 id="section-16">29/6/16</h1>
 <p>Midterm average was in the 60's after curving (IIRC, the curve was 2%). We're going over many of the questions in the midterm that a lot of people got wrong.</p>
-<p>The <strong>Job Scheduling Problem</strong> is the problem of how to executing multiple jobs <span class="math inline">\(\set{J_1, \ldots, J_n}\)</span> on a single server, where each job <span class="math inline">\(J_i\)</span> stores the arrival time (when the job arrived and is available to run), and the run time (how long the job will take to run). For now, we'll assume that only one job can run at a time (so no multi-core processing), and switching between jobs can be done at any time (no scheduling quantums) and has no cost (instant context switching).</p>
+<p>The <strong>Job Scheduling Problem</strong> is the problem of how to executing multiple jobs <span class="math inline">\set{J_1, \ldots, J_n}</span> on a single server, where each job <span class="math inline">J_i</span> stores the arrival time (when the job arrived and is available to run), and the run time (how long the job will take to run). For now, we'll assume that only one job can run at a time (so no multi-core processing), and switching between jobs can be done at any time (no scheduling quantums) and has no cost (instant context switching).</p>
 <p>The <strong>scheduler</strong> accepts these pairs of arrival and run times (or estimates of run times), and outputs the times that we should start each of the inputted jobs at. We can characterize different scheduling algorithms by their <strong>response time</strong> characteristics (how long does it take from the job to arrive to when it starts?), and their <strong>turnaround time</strong> characteristics (how long does it take from the job to arrive to when it finishes?).</p>
 <p>There are 4 basic scheduling algorithms: first-come-first-serve (run jobs in the order they arrive; pre-emptive version is round robin), shortest-runtime-first (run jobs that take the least time first; pre-emptive version is shortest-remaining-runtime-first).</p>
 <p>Shortest-runtime-first has the disadvantage that long jobs can potentially starve if new, short jobs keep becoming available.</p>
@@ -388,8 +421,8 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
 <p>A good way to implement priority scheduling is to use <strong>multi-level feedback queues</strong>. In this scheme, we distinguish between interactive applications (which tend to run for short bursts and sleep most of the time due to waiting for human input), and non-interactive applications (which tend to run for longer bursts and sleep less often). The idea is to gradually reduce priority of threads that behave like interactive applications.</p>
 <p>To implement priorities, we have one round-robin ready queue for each priority level. To implement multi-level feedback queues, the thread has its priority raised if it blocks/yields before the quantum ends, and has its priority reduced if it gets preempted. This ensures that things like UIs and other small, fast tasks get scheduled with higher priority than long-running computations. The scheduler always runs the first thread from the non-empty ready queue with the highest priority. Each ready queue can even have its own quantum length - lower priority queues should generally have longer quantums to minimize time wasted on context switching, since lower priority threads under this scheme often use their entire quantum.</p>
 <p>Although this works, it can starve lower-priority threads. One way to get around this is to occasionally migrate every thread into the highest priority.</p>
-<p>Modern Linux does <strong>completely fair scheduling</strong>. Ideal processor sharing means that priority exactly determines the fraction of processor time it's given: <span class="math inline">\(c_1 \frac{\sum_{i = 1}^n p_i}{p_1} = \ldots = c_n \frac{\sum_{i = 1}^n p_i}{p_n}\)</span>, where <span class="math inline">\(c_i\)</span> is the amount of time thread <span class="math inline">\(i\)</span> takes in its quantum, and <span class="math inline">\(p_i\)</span> is the priority of thread <span class="math inline">\(i\)</span>. Each term <span class="math inline">\(c_j \frac{\sum_{j = 1}^n p_j}{p_i}\)</span> is called a <strong>virtual runtime</strong>, and the scheduler always schedules the thread with the lowest virtual runtime.</p>
-<p>Simplifying, the scheduler tries to make it so that <span class="math inline">\(\frac{c_1}{p_1} = \ldots = \frac{c_n}{p_n}\)</span>, by always scheduling the thread with the smallest <span class="math inline">\(\frac{c_i}{p_i}\)</span> value.</p>
+<p>Modern Linux does <strong>completely fair scheduling</strong>. Ideal processor sharing means that priority exactly determines the fraction of processor time it's given: <span class="math inline">c_1 \frac{\sum_{i = 1}^n p_i}{p_1} = \ldots = c_n \frac{\sum_{i = 1}^n p_i}{p_n}</span>, where <span class="math inline">c_i</span> is the amount of time thread <span class="math inline">i</span> takes in its quantum, and <span class="math inline">p_i</span> is the priority of thread <span class="math inline">i</span>. Each term <span class="math inline">c_j \frac{\sum_{j = 1}^n p_j}{p_i}</span> is called a <strong>virtual runtime</strong>, and the scheduler always schedules the thread with the lowest virtual runtime.</p>
+<p>Simplifying, the scheduler tries to make it so that <span class="math inline">\frac{c_1}{p_1} = \ldots = \frac{c_n}{p_n}</span>, by always scheduling the thread with the smallest <span class="math inline">\frac{c_i}{p_i}</span> value.</p>
 <p>Completely fair scheduling also ensures responsiveness, since all threads will get run regularly.</p>
 <p>On multicore processors, we can either give each core its own set of ready queues, or have a single ready queue for all cores. While giving each core their own queues is fast since we don't need any synchronization, it might not use the cores in the best way since some cores might be heavily loaded while others might be lightly loaded. On the other hand, having a single set of ready queues ensures good resource utilization, but has a lot of overhead from ensuring that the queue is only modified by one core at a time using synchronization primitives.</p>
 <p>Most modern cores have a few levels of per-core cache (L1 and L2, generally), and one level of cache shared between all cores (L3, generally). When we move a thread from one core to another, we lose all of the benefits of the already warmed-up cache from the original core. As a result, threads run a lot better if we keep them on the same core (this is known as <strong>CPU cache affinity</strong>). However, if a core is heavily loaded while another is lightly loaded, it might still be better to move it over. moving threads from heavily loaded cores to lightly loaded cores is called <strong>thread mogration</strong>.</p>
@@ -474,14 +507,5 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

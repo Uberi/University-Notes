@@ -47,9 +47,68 @@ code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Ann
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -80,33 +139,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h1 id="cs450">CS450</h1>
 <p>Computer Architecture.</p>
 <pre><code>Andrew Morton
@@ -395,22 +428,22 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <p>Since we have five stages (fetch, decode, execute, memory, writeback), an instruction that writes registers takes 4 cycles after it's been fetched before the write actually takes effect, assuming 1 cycle per pipeline stage. Likewise, an instruction that reads registers takes 1 cycle after fetching before actually performing the read.</p>
 <p>A control dependency is basically a special case of a register dependency, where the register is the program counter. An instruction that branches (writes to the program counter) has its write take effect 1 cycle after being fetched (the MIPS datapath reads PC in fetch stage and writes in decode stage).</p>
 <p>In the same way, an instruction that writes to memory has a memory dependency, and has its write take effect 3 cycles after being fetched.</p>
-<p>Therefore, if we have two instructions <span class="math inline">\(A, B\)</span> that run at clock cycle <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, respectively, such that <span class="math inline">\(i &gt; j\)</span>:</p>
+<p>Therefore, if we have two instructions <span class="math inline">A, B</span> that run at clock cycle <span class="math inline">i</span> and <span class="math inline">j</span>, respectively, such that <span class="math inline">i &gt; j</span>:</p>
 <ul>
-<li>If there is a read-after-write register dependency from <span class="math inline">\(B\)</span> on <span class="math inline">\(A\)</span>, we must satisfy <span class="math inline">\(j + 1 &gt; i + 4\)</span> (<span class="math inline">\(A\)</span> must do writeback before <span class="math inline">\(B\)</span> can decode). Hazards occur if <span class="math inline">\(j - i \le 3\)</span>.</li>
-<li>If there is a write-after-read register dependency from <span class="math inline">\(B\)</span> on <span class="math inline">\(A\)</span>, we must satisfy <span class="math inline">\(j + 4 &gt; i + 1\)</span> (<span class="math inline">\(A\)</span> must decode before <span class="math inline">\(B\)</span> can writeback). Hazards are impossible without reordering instructions.</li>
-<li>If there is a write-after-write register dependency from <span class="math inline">\(B\)</span> on <span class="math inline">\(A\)</span>, we must satisfy <span class="math inline">\(j + 4 &gt; i + 4\)</span> (<span class="math inline">\(A\)</span> must writeback before <span class="math inline">\(B\)</span> can writeback). Hazards are impossible without reordering instructions.</li>
-<li>If there is a read-after-write control dependency from <span class="math inline">\(B\)</span> on <span class="math inline">\(A\)</span>, we must satisfy <span class="math inline">\(j + 0 &gt; i + 1\)</span> (<span class="math inline">\(A\)</span> must decode before <span class="math inline">\(B\)</span> fetches). Hazards occur if <span class="math inline">\(j - i \le 1\)</span>.</li>
-<li>If there is a write-after-read control dependency from <span class="math inline">\(B\)</span> on <span class="math inline">\(A\)</span>, we must satisfy <span class="math inline">\(j + 1 &gt; i + 0\)</span> (<span class="math inline">\(A\)</span> must fetch before <span class="math inline">\(B\)</span> decodes). Hazards are impossible without reordering instructions.</li>
-<li>If there is a write-after-write control dependency from <span class="math inline">\(B\)</span> on <span class="math inline">\(A\)</span>, we must satisfy <span class="math inline">\(j + 1 &gt; i + 1\)</span> (<span class="math inline">\(A\)</span> must decode before <span class="math inline">\(B\)</span> decodes). Hazards are impossible without reordering instructions.</li>
-<li>If there is a read-after-write memory dependency from <span class="math inline">\(B\)</span> on <span class="math inline">\(A\)</span>, we must satisfy <span class="math inline">\(j + 3 &gt; i + 3\)</span> (<span class="math inline">\(A\)</span> must do memory before <span class="math inline">\(B\)</span> does memory). Hazards are impossible without reordering instructions.</li>
-<li>If there is a write-after-read memory dependency from <span class="math inline">\(B\)</span> on <span class="math inline">\(A\)</span>, we must satisfy <span class="math inline">\(j + 3 &gt; i + 3\)</span> (<span class="math inline">\(A\)</span> must do memory before <span class="math inline">\(B\)</span> does memory). Hazards are impossible without reordering instructions.</li>
-<li>If there is a write-after-write memory dependency from <span class="math inline">\(B\)</span> on <span class="math inline">\(A\)</span>, we must satisfy <span class="math inline">\(j + 3 &gt; i + 3\)</span> (<span class="math inline">\(A\)</span> must do memory before <span class="math inline">\(B\)</span> does memory). Hazards are impossible without reordering instructions.</li>
+<li>If there is a read-after-write register dependency from <span class="math inline">B</span> on <span class="math inline">A</span>, we must satisfy <span class="math inline">j + 1 &gt; i + 4</span> (<span class="math inline">A</span> must do writeback before <span class="math inline">B</span> can decode). Hazards occur if <span class="math inline">j - i \le 3</span>.</li>
+<li>If there is a write-after-read register dependency from <span class="math inline">B</span> on <span class="math inline">A</span>, we must satisfy <span class="math inline">j + 4 &gt; i + 1</span> (<span class="math inline">A</span> must decode before <span class="math inline">B</span> can writeback). Hazards are impossible without reordering instructions.</li>
+<li>If there is a write-after-write register dependency from <span class="math inline">B</span> on <span class="math inline">A</span>, we must satisfy <span class="math inline">j + 4 &gt; i + 4</span> (<span class="math inline">A</span> must writeback before <span class="math inline">B</span> can writeback). Hazards are impossible without reordering instructions.</li>
+<li>If there is a read-after-write control dependency from <span class="math inline">B</span> on <span class="math inline">A</span>, we must satisfy <span class="math inline">j + 0 &gt; i + 1</span> (<span class="math inline">A</span> must decode before <span class="math inline">B</span> fetches). Hazards occur if <span class="math inline">j - i \le 1</span>.</li>
+<li>If there is a write-after-read control dependency from <span class="math inline">B</span> on <span class="math inline">A</span>, we must satisfy <span class="math inline">j + 1 &gt; i + 0</span> (<span class="math inline">A</span> must fetch before <span class="math inline">B</span> decodes). Hazards are impossible without reordering instructions.</li>
+<li>If there is a write-after-write control dependency from <span class="math inline">B</span> on <span class="math inline">A</span>, we must satisfy <span class="math inline">j + 1 &gt; i + 1</span> (<span class="math inline">A</span> must decode before <span class="math inline">B</span> decodes). Hazards are impossible without reordering instructions.</li>
+<li>If there is a read-after-write memory dependency from <span class="math inline">B</span> on <span class="math inline">A</span>, we must satisfy <span class="math inline">j + 3 &gt; i + 3</span> (<span class="math inline">A</span> must do memory before <span class="math inline">B</span> does memory). Hazards are impossible without reordering instructions.</li>
+<li>If there is a write-after-read memory dependency from <span class="math inline">B</span> on <span class="math inline">A</span>, we must satisfy <span class="math inline">j + 3 &gt; i + 3</span> (<span class="math inline">A</span> must do memory before <span class="math inline">B</span> does memory). Hazards are impossible without reordering instructions.</li>
+<li>If there is a write-after-write memory dependency from <span class="math inline">B</span> on <span class="math inline">A</span>, we must satisfy <span class="math inline">j + 3 &gt; i + 3</span> (<span class="math inline">A</span> must do memory before <span class="math inline">B</span> does memory). Hazards are impossible without reordering instructions.</li>
 </ul>
 <p>A <strong>hazard</strong> is a potential for a violated dependency (and therefore, violation of semantic correctness). In our pipelined, statically scheduled CPU, the hazards are a 3-cycle register read-after-write, and a 1-cycle control read-after-write.</p>
 <p>To avoid hazards, we can insert no-op instructions - 3 NOP instructions after each register read-after-write, or 1 after every control read-after-write. These can be inserted either by the compiler, or the CPU can stall for the necessary number of cycles when the relevant dependencies are found. Compilers are responsible for this in MIPS.</p>
 <p>However, a 3-cycle stall for a 3-cycle register read-after-write is quite long. We can shorten register/memory dependency stalls by using <strong>data forwarding</strong> - routing the output of later stages directly to earlier stages to avoid the need for a write/read - earlier stages can read directly from the later stages.</p>
-<p>For our purposes, we can route the output of the memory stage to the execute stage (for <span class="math inline">\(j = i + 1\)</span>), the output of the writeback stage to the execute stage (for <span class="math inline">\(j = i + 2\)</span>), and the output of the writeback stage to the decode stage (for <span class="math inline">\(j = i + 3\)</span>). With that in place, each stage always has the data it needs, so we never have to stall.</p>
+<p>For our purposes, we can route the output of the memory stage to the execute stage (for <span class="math inline">j = i + 1</span>), the output of the writeback stage to the execute stage (for <span class="math inline">j = i + 2</span>), and the output of the writeback stage to the decode stage (for <span class="math inline">j = i + 3</span>). With that in place, each stage always has the data it needs, so we never have to stall.</p>
 <p>To implement data forwarding in each stage, we can use multiplexers that choose between either reading/writing registers, or taking input directly from later stages.</p>
 <p>Turns out, this can't eliminate all our stalls, though it does make a lot of them much shorter. Consider <code>lw R1, (R2)</code> followed by <code>add R4, R1, R1</code> - the load-word instruction doesn't have its result until the memory stage is done, so we must stall the <code>add</code> for 1 cycle so we can forward it from the write-back stage to the execute stage.</p>
 <p>To solve the control dependency read-after-write stall (when we have a conditional branch), we might assume that the branch won't happen, keep executing the next instruction, and then squash/suppress it in the pipeline if we do end up taking the branch.</p>
@@ -418,12 +451,12 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <h1 id="section-6">24/1/17</h1>
 <p>Recall that in <strong>static scheduling</strong>, instructions are executed in the order that they appear in, and the compiler is responsible for arranging instructions in a way that avoids hazards.</p>
 <p>Code example with instruction reordering by the compiler for hazard avoidance.</p>
-<p>The cycles per instruction (CPI) is a measure of CPU performance, and is ideally somewhere around 1 for our scalar processor. However, penalty cycles caused by hazards will increase this. For example, if we have 6 instructions that incur 3 penalty cycles, we get <span class="math inline">\(\frac{6 + 3}{6} = 1.5\)</span> as the CPI.</p>
-<p>The program execution time is <span class="math inline">\(\frac{n \times \text{CPI}}{f}\)</span>, where <span class="math inline">\(n\)</span> is the number of instructions in the basic block, and <span class="math inline">\(f\)</span> is the clock frequency. The speedup of any given piece of code is the new CPI over the old CPI.</p>
+<p>The cycles per instruction (CPI) is a measure of CPU performance, and is ideally somewhere around 1 for our scalar processor. However, penalty cycles caused by hazards will increase this. For example, if we have 6 instructions that incur 3 penalty cycles, we get <span class="math inline">\frac{6 + 3}{6} = 1.5</span> as the CPI.</p>
+<p>The program execution time is <span class="math inline">\frac{n \times \text{CPI}}{f}</span>, where <span class="math inline">n</span> is the number of instructions in the basic block, and <span class="math inline">f</span> is the clock frequency. The speedup of any given piece of code is the new CPI over the old CPI.</p>
 <p><strong>Local scheduling</strong> is when the compiler rearranges instructions within a basic block. A <strong>basic block</strong> is a sequence of consecutive instructions such that if one instruction is executed, all of them are - that means only the first instruction can be the target of a branch instruction, and only the last instruction can be a branch instruction (or the second to last for MIPS, due to the branch delay slot).</p>
 <p>To perform local scheduling, we first identify the hazards in the code, leaving slots to put other instructions in according to how many penalty cycles are present. For example, if we have a load followed by a dependent add instruction, we might have 1 penalty cycle in our architecture, so we would leave one slot for an instruction. Then, we try to fill in the slots with other instructions while keeping dependencies satisfied.</p>
 <p><strong>Global scheduling</strong> is when the compiler rearranges instructions across multiple basic blocks.</p>
-<p>A common example of this is loop unrolling, where the body of a loop known to execute <span class="math inline">\(n\)</span> times is simply duplicated <span class="math inline">\(n\)</span> times - this reduces branching overhead, and makes local scheduling better since it may result in larger basic blocks. While loop unrolling can make our code faster, it results in larger programs, which might cause more instruction cache misses. The compiler must make the tradeoff depending on what would be faster.</p>
+<p>A common example of this is loop unrolling, where the body of a loop known to execute <span class="math inline">n</span> times is simply duplicated <span class="math inline">n</span> times - this reduces branching overhead, and makes local scheduling better since it may result in larger basic blocks. While loop unrolling can make our code faster, it results in larger programs, which might cause more instruction cache misses. The compiler must make the tradeoff depending on what would be faster.</p>
 <h1 id="section-7">26/1/17</h1>
 <p>Project part 1 marks come out on Monday. Part 2 is out on the course website, building a 5-stage MIPS pipeline. In-class overview of assignment.</p>
 <p>In the scalar pipelines we are looking at, exceptions are events that alter program flow. Exceptions are harder to handle than normal program flow because they can occur at any time, and we must make sure registers and memory are properly stored/restored to ensure the TPE assumption is upheld.</p>
@@ -452,7 +485,7 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <p>Consider a VLIW architecture where each instruction contains two memory operations, two floating point operations, and one ALU/branch operation. Each operation can have its own pipeline, so we'll give memory operations the usual fetch/decode/execute/memory/writeback, floating point operations a fetch/decode/execute 1/execute 2/execute 3/writeback pipeline, and ALU/branch operations a fetch/decode/execute/writeback pipeline. We'll also say branches resolve in the decode stage for all types of operation, so we need 1 branch delay slot (since decode is 1 pipeline stage after fetch).</p>
 <p>Fetches occur at the same time for every pipeline - one instruction is fetched for every cycle.</p>
 <p>Assuming full data forwarding is implemented, the latency of memory operations could be up to 1 if the execute stage has a dependency on the memory stage, the latency of ALU/branch operations could be up to 1 if the decode stage has a dependency on the execute stage, and the latency of floating point operations could be up to 2 if the execute 1 stage has a dependency on the execute 3 stage.</p>
-<p><strong>Slot utilization</strong> is how well the available operation slots for each instructions are filled, defined as <span class="math inline">\(\frac{\text{slots filled}}{\text{number of instructions} \times \text{slots per instruction}}\)</span>.</p>
+<p><strong>Slot utilization</strong> is how well the available operation slots for each instructions are filled, defined as <span class="math inline">\frac{\text{slots filled}}{\text{number of instructions} \times \text{slots per instruction}}</span>.</p>
 <h1 id="section-8">31/1/17</h1>
 <p>;wip: global scheduling, software pipelining, catch up on the rest, gotta run for interviews</p>
 <h1 id="section-9">2/1/17</h1>
@@ -485,7 +518,7 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <p>Units like reservation stations, the FLR, and the SDB hold data and the data's tag.</p>
 <p>The key concept here is the reservation station, and the use of tags to</p>
 <p>Here's the FPU's workflow:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Up to two instructions are dispatched (in their original order) to the reservation station.</li>
 <li>Operands are copied to the reservation station.</li>
 <li>The destination register number is compared to the reservation station number.</li>
@@ -516,7 +549,7 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <h1 id="section-11">9/2/17</h1>
 <p>Assignment 1 (not project 1) is due after reading week. It's about scheduling instructions in a pipelined processor.</p>
 <h3 id="register-renamingassignment">Register renaming/assignment</h3>
-<p>Data dependencies within a block of code form a data-flow graph (DFG) in the processor, where each edge <span class="math inline">\(a \to b\)</span> represents the fact that <span class="math inline">\(b\)</span> depends on the result of <span class="math inline">\(a\)</span>, so <span class="math inline">\(b\)</span> shouldn't run before <span class="math inline">\(a\)</span>. To help us run Tomasulo's algorithm, we can draw out the DFG and arrange it to minimize height.</p>
+<p>Data dependencies within a block of code form a data-flow graph (DFG) in the processor, where each edge <span class="math inline">a \to b</span> represents the fact that <span class="math inline">b</span> depends on the result of <span class="math inline">a</span>, so <span class="math inline">b</span> shouldn't run before <span class="math inline">a</span>. To help us run Tomasulo's algorithm, we can draw out the DFG and arrange it to minimize height.</p>
 <p>The longest path (also known as the critical path) within the dataflow graph is the minimum number of cycles we can execute those instructions in - this is called the <strong>dataflow limit</strong>. In other words, with one thread, it's impossible to execute faster than the length of the critical path of true dependencies.</p>
 <p>Operations in the CPU produce values, which are then assigned to registers. The <strong>live range</strong> of a value is the range within the code starting from when the value is first written to a register, up to and including the last use (when the value is last read from the register).</p>
 <p>DFGs can also have virtual dependencies between pairs of instructions, called <strong>false dependencies</strong>, which give us write-after-read or write-after-write hazards if we change the order of those instructions.</p>
@@ -554,24 +587,24 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <h2 id="memory-data-flow">Memory Data Flow</h2>
 <p>Data in memory includes the data segments, stack, and heap. Loads usually start a chain of instructions, because they have to wait on RAM, which is slow compared to processors. How do these work with pipelined processors?</p>
 <p>For store instructions:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Upon dispatch, calculate the effective address and store it with the data in the <strong>store buffer</strong> (SB).</li>
 <li>After commit, write the store buffer entry out to the processor cache (so it gets written to RAM).</li>
 </ol>
 <p>For load instructions:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Upon dispatch, calculate the effective address, and read the data from either the store buffer (if available) or the processor cache (so it gets read from RAM).</li>
 <li>After commit, broadcast the destination read on the forwarding bus, so the other units know that the destination register has been updated.</li>
 </ol>
 <p>We want to be able to issue store instructions out of order, to improve performance.</p>
 <p>Speculative loads are loads performed under the assumption that they are unaliased to recent stores - loads that are done from the cache, not the store buffer. When we do speculative loads, we need to detect if the load gave a valid result, and if not, retry it.</p>
 <p>The speculative load process:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Upon dispatch, calculate the effective address. If a committed store is in the store buffer, forward the data along the forwarding bus. Otherwise, get the data from the processor cache. Add the speculative load's location and effective address to the FLB (finished load buffer).</li>
 <li>After commit, remove the created entry from the FLB.</li>
 </ol>
 <p>The store process, when using speculative loads, becomes:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Upon dispatch, calculate the effective address and store it with the data in the store buffer.</li>
 <li>Upon commit, if aliased loads are present in the FLB, suppress those speculative loads. Write the store buffer entry out to the processor cache (so it gets written to RAM).</li>
 </ol>
@@ -617,8 +650,8 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <p>Nair conducted a study in 1995 to check on how accurate branch prediction is in the real world, and found that prediction accuracy was 85%+ on many commonly used programs like SPICE and GCC. This is actually within 1% of an optimal 4-state branch predictor FSM, so saturating 2-bit counters are actually really good at predicting branches in real-world situations (they tried every one of the 5248 possible 4-state branch predicting FSMs!). They also looked at saturating counters with a different number of bits, and aliasing vs. the number of low-order bits we index by in the PHT, and characterized performance as those variables were changed.</p>
 <p>;wip: correlating predictors, section 8.2.3, bimodal vs local vs global predictors</p>
 <p>A <strong>bimodal branch predictor</strong> is the kind we've been looking at so far - the PHT is indexed by some subset of the bits of PC. This works decently well, but it doesn't capture behaviour like alternating branches (the branch switches between taken and not taken every time we execute), or similar patterns in branching.</p>
-<p>A <strong>local branch predictor</strong> tries to capture this. To predict a branch, we index some bits of the branch instruction address (the value of PC) into a history table, which stores the corresponding last <span class="math inline">\(k\)</span> branch results (for example, 10110 means the branch instruction branched 3 times out of the last 5 executions). Then, those last <span class="math inline">\(k\)</span> results are XORed with a subset of bits of the branch instruction address, and the result is used as indices in the PHT, which stores the usual 2-bit saturating counters. In other words, <span class="math inline">\(\text{prediction} = \text{saturating_counter_prediction}(\text{subset of bits of PC} \oplus \text{PHT}[\text{history}[\text{another subset of bits of PC}]])\)</span>. This allows us to predict based on the history of branch results for individual branch instructions, and it works really well in practice.</p>
-<p>A <strong>global branch predictor</strong> detects correlated behaviour (like two different branch instructions that only branch when the other doesn't), saves the last <span class="math inline">\(n\)</span> branch decisions of any branch instructions in a global history register (GR), a plain register that stores historical data for all branches. The global history register is used as indices in the PHT - we can look up our 2-bit saturating counters in the PHT by the history of all branches. Turns out that this doesn't work as well as local branch prediction, mostly because of aliasing - global history often looks the same for a lot of different branch instructions that behave very differently. In other words, <span class="math inline">\(\text{prediction} = \text{saturating_counter_prediction}(\text{PHT}[\text{history of last } k \text{ branches}])\)</span>.</p>
+<p>A <strong>local branch predictor</strong> tries to capture this. To predict a branch, we index some bits of the branch instruction address (the value of PC) into a history table, which stores the corresponding last <span class="math inline">k</span> branch results (for example, 10110 means the branch instruction branched 3 times out of the last 5 executions). Then, those last <span class="math inline">k</span> results are XORed with a subset of bits of the branch instruction address, and the result is used as indices in the PHT, which stores the usual 2-bit saturating counters. In other words, <span class="math inline">\text{prediction} = \text{saturating\_counter\_prediction}(\text{subset of bits of PC} \oplus \text{PHT}[\text{history}[\text{another subset of bits of PC}]])</span>. This allows us to predict based on the history of branch results for individual branch instructions, and it works really well in practice.</p>
+<p>A <strong>global branch predictor</strong> detects correlated behaviour (like two different branch instructions that only branch when the other doesn't), saves the last <span class="math inline">n</span> branch decisions of any branch instructions in a global history register (GR), a plain register that stores historical data for all branches. The global history register is used as indices in the PHT - we can look up our 2-bit saturating counters in the PHT by the history of all branches. Turns out that this doesn't work as well as local branch prediction, mostly because of aliasing - global history often looks the same for a lot of different branch instructions that behave very differently. In other words, <span class="math inline">\text{prediction} = \text{saturating\_counter\_prediction}(\text{PHT}[\text{history of last } k \text{ branches}])</span>.</p>
 <p>Real-world systems often combine a global and bimodal branch predictor, indexing into the PHT based on the global history XORed with some subset of the bits of PC. This scheme is what gshare uses, and performs almost as accurately as local branch prediction in real-world uses. However, it has one less level of indirection compared to local predictors (local predictors have to look up a value in history and then PHT, while we only have to look up a value in the PHT), so it can be faster.</p>
 <p>Some processors implement meta branch predictors - running different types of branch predictors in parallel, and changing the one used based on their previous performance for each particular branch instruction.</p>
 <h1 id="section-16">7/3/17</h1>
@@ -776,7 +809,7 @@ pthread_mutex_t sum_mutex;
 <p>Tips about project part 3: make sure to copy the <code>.x</code> files into the project folder.</p>
 <p>MESI is a snooping protocol, which means that processor caches are both listening to requests from the processor, and snooping on traffic generated by other processors on the bus.</p>
 <p>Suppose we have processors P1, P2, P3, all sharing one block B1 of memory. P1 writes to B1, then P2 reads from B1. In a MESI system, this shows up as:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Initially, B1's corresponding cache entries for each processor are all in the SHARED state.</li>
 <li>P1 writes to B1, which sends out a P1 upgrade message on the bus. This sets P1's cache entry for B1 to MODIFIED, and P2 and P3's cache entry for B1 to INVALID.</li>
 <li>P2 reads B1, and since P2's cache entry is INVALID, P2 doesn't do anything. However, P1 gives a snoop response of DIRTY and performs a writeback. This sets all cache entries for B1 to SHARED again.</li>
@@ -801,10 +834,10 @@ spin exch R2, (R1) ; atomically exhange the value of the lock with 1
 <ul>
 <li>The block number corresponding to the entry.</li>
 <li>A bit representing whether the block is modified.</li>
-<li>A sharing vector - a sequence of <span class="math inline">\(n\)</span> bits (where <span class="math inline">\(n\)</span> is the number of nodes) representing which nodes have an up-to-date copy of the data.</li>
+<li>A sharing vector - a sequence of <span class="math inline">n</span> bits (where <span class="math inline">n</span> is the number of nodes) representing which nodes have an up-to-date copy of the data.</li>
 </ul>
 <p>Note that this doesn't explicitly represent the EXCLUSIVE state - this is because EXCLUSIVE is simply a SHARED state where only 1 of the sharing vector bits is set.</p>
-<p>The directory adds overhead for each block, specifically <span class="math inline">\(\frac{\text{directory row or entry size}}{\text{block size}}\)</span>. The general architecture is that each processor is connected to a memory and a directory, and these three are all connected to a scalable interconnect.</p>
+<p>The directory adds overhead for each block, specifically <span class="math inline">\frac{\text{directory row or entry size}}{\text{block size}}</span>. The general architecture is that each processor is connected to a memory and a directory, and these three are all connected to a scalable interconnect.</p>
 <p>A directory implementation is comparable to a snooping implementation - it's faster and has less bus traffic, but it adds a significant amount of overhead to actually track the memory states.</p>
 <p>Suppose P1 writes a piece of data, originally SHARED between P1 and P2. P1 must then send an UPGRADE to directory 1 to make P1 the owner of that data, then directory 1 sends INVALIDATE to the rest of the processors that have a copy of the data. P1 is now</p>
 <p>When P2 reads after the above happens, P2 sends a READ MISS to directory 1, then directory 1 sends a FETCH to P1. P1 sends a WRITEBACK to directory 1 to make sure it has the most recent data. Then, directory 1 sends a DATA REPLY to P2, completing the read.</p>
@@ -956,14 +989,5 @@ spin exch R2, (R1) ; atomically exhange the value of the lock with 1
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

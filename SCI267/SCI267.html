@@ -10,9 +10,68 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -43,33 +102,7 @@
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h1 id="sci267">SCI267</h1>
 <p>Introduction to the Philosophy of Science.</p>
 <pre><code>Doreen Fraser
@@ -146,7 +179,7 @@ Office: HH330</code></pre>
 <p>Most importantly, David Hume proposed the <strong>problem of induction</strong> - how do we know that future experiences will resemble past and present experiences? Hume states that objects have a secret nature and our mental models of these objects, based on observations, might not be a good representation. By this, it is only habit that leads us to conclude that the sun will rise tomorrow from all our past experiences of the sun rising.</p>
 <p>It is the role of the philosophers to check the form, and the scientists to check the content.</p>
 <p><strong>Hypothetico-deductivism</strong> is the idea that an observation is deduced from the hypothesis, and is then confirmed by actually making the observation. A confirmation lends inductive support for the hypothesis. Basically, scientists form a hypothesis, make a prediction based on the hypothesis, try to observe the predicted observation, and then confirm the hypothesis with that observation (or reject it if the observation disconfirms it).</p>
-<p>Recall the statement &quot;metals expand when heated or the nothing nothings&quot;. In other words, if <span class="math inline">\(M \implies O\)</span> is a valid deductive argument, then so is <span class="math inline">\(M \wedge S \implies O\)</span>. This is something Carnap seeks to avoid, since the second clause of that statement is meaningless.</p>
+<p>Recall the statement &quot;metals expand when heated or the nothing nothings&quot;. In other words, if <span class="math inline">M \implies O</span> is a valid deductive argument, then so is <span class="math inline">M \wedge S \implies O</span>. This is something Carnap seeks to avoid, since the second clause of that statement is meaningless.</p>
 <h1 id="section-5">23/1/15</h1>
 <p>However, logical equivalence presents a problem: &quot;all ravens are black&quot; is logically equivalant to &quot;all non-black things are non-ravens&quot;. Therefore, in inductive logic, any evidence that confirms the latter also confirms the former. So finding a white shoe confirms that all ravens are black, which seems to be absurd.</p>
 <p>However, this is in fact perfectly valid. If we looked at all non-black things and determined that they are not ravens, then it stands to reason that ravens must be a part of everything else, the black things.</p>
@@ -199,7 +232,7 @@ Office: HH330</code></pre>
 <p>Kuhn criticizes Popperian falsificationism by saying that in practice it would not work, since people would waste all their time trying to falsify the foundations of everything. To make progress, he says, researchers need to be on the same page.</p>
 <h1 id="section-8">4/2/15</h1>
 <p>An example of this is the view of light in physics:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Pre-paradigm: multiple competing views of light - modification of a medium, interaction of the medium and the eye, etc.</li>
 <li>Normal science: Newton's &quot;Optiks&quot; - light is particles.</li>
 <li>Crisis: Young's double slit experiment - if light was actually just particles, it would just form two lines, not a wave diffraction pattern.</li>
@@ -371,7 +404,7 @@ Mars is at its particular position at this time of the year</code></pre>
 <p>For example, Darwinian evolution provides an argument schema where we add examples of properties of past generations of a creature, apply the premise that properties of a creature are inheritable from past generations, and results in the conclusion that the current generation has those properties. However, does this mean that using no laws is the best possible explanation?</p>
 <p>However, this view can't explain unique events, because we can't use it to take something apart and ask how it works. It doesn't look at the actual phenomena - figuring out what the causes must be from the argument schemas, rather than directly looking for causes by taking the phenomena apart into its parts.</p>
 <p>The final view is the <strong>pragmatic view</strong>, associated with Bas van Fraassen, and it is somewhat pluralistic. This view basically includes both causal-mechanical and unification views, by saying that we should use whichever view results in the more satisfying answer - the right relevance relation for a question is the one that gets the best explanation.</p>
-<p>This view includes a theory of questions, sort of like a meta-schema (a schema for schemas). In this theory, <span class="math inline">\(P_k\)</span> is the question, <span class="math inline">\(X\)</span> is the contrast class (the context - additional information about what specifically we are looking for, like which field or time period we are talking about), <span class="math inline">\(A\)</span> is the answer, and <span class="math inline">\(R\)</span> is the relevance relation (what makes an answer to the question a good answer - the kind of answer we are looking for).</p>
+<p>This view includes a theory of questions, sort of like a meta-schema (a schema for schemas). In this theory, <span class="math inline">P_k</span> is the question, <span class="math inline">X</span> is the contrast class (the context - additional information about what specifically we are looking for, like which field or time period we are talking about), <span class="math inline">A</span> is the answer, and <span class="math inline">R</span> is the relevance relation (what makes an answer to the question a good answer - the kind of answer we are looking for).</p>
 <p>The relavence relation is what makes this powerful - it could be a causal relation, where correct answers are causal-mechanical, or it could be laws or regularities, where correct answers would be the laws and regularities of nature that result in the phenomena. Different contrast classes lets us have entirely different types of answers to the same problem, all of which are correct.</p>
 <p>For example, &quot;Why did he rob the bank?&quot; could be answered with &quot;Because the money that was there.&quot; (if we use the contrast class &quot;as opposed to some other place&quot;), but also with &quot;Because it was easier than other professions&quot; (if we use the contrast class &quot;as opposed to getting another career&quot;), or &quot;Because nobody else would do it&quot; (if we use the contrast class &quot;as opposed to someone else robbing the bank&quot;).</p>
 <p>This view is very practical and works very well in practice. Helen Longino states that different fields of science often have different relevance relations, and that difference relevance relations often give varying results in different fields. In light of this, the pragmatic view is best overall for science.</p>
@@ -400,33 +433,33 @@ The current positions of the sun, moon, and earth</code></pre>
 <p>Khun says that the choice between competing theories can't be resolved by proof - we often pick theories based on things like simplicity and practical usefulness rather than how correct they are.</p>
 <h2 id="bayesianism">Bayesianism</h2>
 <p>We want to work with induction in a more formal way. Bayesianism is a modern account of the relationship between evidence and theory.</p>
-<p>How much more likely is it that a hypothesis <span class="math inline">\(h\)</span> is true after a piece of evidence <span class="math inline">\(e\)</span> is taken into account?</p>
-<p><strong>Bayes theorem</strong> says that the answer is <span class="math inline">\(P(h \mid e) = \frac{P(e \mid h) P(h)}{P(e \mid h)P(h) + P(e \mid \overline h)P(\overline h)}\)</span>:</p>
+<p>How much more likely is it that a hypothesis <span class="math inline">h</span> is true after a piece of evidence <span class="math inline">e</span> is taken into account?</p>
+<p><strong>Bayes theorem</strong> says that the answer is <span class="math inline">P(h \mid e) = \frac{P(e \mid h) P(h)}{P(e \mid h)P(h) + P(e \mid \overline h)P(\overline h)}</span>:</p>
 <ul>
-<li><span class="math inline">\(P(h \mid e)\)</span> is the probability that the hypothesis is true given our evidence. This is the <strong>posterior probability</strong>.</li>
-<li><span class="math inline">\(P(e \mid h)\)</span> is the probability that the evidence would be observed, if our hypothesis is true. This is a <strong>likelihood</strong>.</li>
-<li><span class="math inline">\(P(h)\)</span> is the probability that the hypothesis is true, in general. This is a <strong>prior probability</strong> - how likely we believe the hypothesis to be true before seeing the evidence <span class="math inline">\(e\)</span>.</li>
-<li><span class="math inline">\(P(e \mid \overline h)\)</span> is the probability that the evidence would be observed, if the hypothesis is false. This is a <strong>likelihood</strong>.</li>
-<li><span class="math inline">\(P(\overline h)\)</span> is the probability that the hypothesis is false, in general. This is a <strong>prior probability</strong> - how likely we believe the hypothesis to be false before seeing the evidence <span class="math inline">\(e\)</span>.</li>
+<li><span class="math inline">P(h \mid e)</span> is the probability that the hypothesis is true given our evidence. This is the <strong>posterior probability</strong>.</li>
+<li><span class="math inline">P(e \mid h)</span> is the probability that the evidence would be observed, if our hypothesis is true. This is a <strong>likelihood</strong>.</li>
+<li><span class="math inline">P(h)</span> is the probability that the hypothesis is true, in general. This is a <strong>prior probability</strong> - how likely we believe the hypothesis to be true before seeing the evidence <span class="math inline">e</span>.</li>
+<li><span class="math inline">P(e \mid \overline h)</span> is the probability that the evidence would be observed, if the hypothesis is false. This is a <strong>likelihood</strong>.</li>
+<li><span class="math inline">P(\overline h)</span> is the probability that the hypothesis is false, in general. This is a <strong>prior probability</strong> - how likely we believe the hypothesis to be false before seeing the evidence <span class="math inline">e</span>.</li>
 </ul>
 <p>This theorem is a model for scientific reasoning, and is a rational account of how evidence supports theories, as derived from probability theory.</p>
 <p>Suppose we have a test that is 99% accurate, and we test 1000 people. Given one person who tested positive, what is the probability that the person actually has HIV?</p>
 <p>Here, the hypothesis is &quot;the person has HIV&quot;, and the evidence is &quot;the person tested positive, and the test is 99% accurate, plus we tested it on 1000 people&quot;.</p>
-<p>We <strong>do not have enough information to give an accurate answer</strong> for this, because we don't know and can't calculate <span class="math inline">\(P(h)\)</span> - the probability, in general, that the person has HIV. If everyone has HIV (<span class="math inline">\(P(h) = 1\)</span>), then the person definitely has HIV. But if nobody has HIV (<span class="math inline">\(P(h) = 0\)</span>), then the person does not, and the test was a false positive.</p>
+<p>We <strong>do not have enough information to give an accurate answer</strong> for this, because we don't know and can't calculate <span class="math inline">P(h)</span> - the probability, in general, that the person has HIV. If everyone has HIV (<span class="math inline">P(h) = 1</span>), then the person definitely has HIV. But if nobody has HIV (<span class="math inline">P(h) = 0</span>), then the person does not, and the test was a false positive.</p>
 <p>Consider the eclipse experiment being used to confirm Einstein's theory of general relativity. Our hypothesis is &quot;general relativity is true&quot;, and our new evidence is &quot;light was observed to be bent by gravity&quot;.</p>
-<p>Suppose our prior probabilities are <span class="math inline">\(P(h) = 0.5\)</span> (so <span class="math inline">\(P(\overline h) = 1 - P(h) = 0.5\)</span>) - before seeing this evidence, we thought the hypothesis had a 50% chance of being true.</p>
-<p>Suppose our likelihoods are <span class="math inline">\(P(e \mid h) = 0.8, P(e \mid \overline h) = 0.1\)</span> - we think that if the hypothesis is true, then it is 80% likely that we would see the evidence, and if it was false, then it would only be 10% likely (there is a 10% false positive rate and a 20% false negative rate).</p>
-<p>So calculating this, we get <span class="math inline">\(P(h \mid e) = \frac{0.8 \cdot 0.5}{0.8 \cdot 0.5 + 0.1 \cdot 0.5} = 0.89\)</span>.</p>
-<p>Now for future experiments, <span class="math inline">\(P(h \mid e)\)</span> becomes <span class="math inline">\(P(h)\)</span> - we take the evidence into account in the future when we are considering how likely to be true we think the hypothesis is. This is the <strong>Bayesian update</strong>.</p>
+<p>Suppose our prior probabilities are <span class="math inline">P(h) = 0.5</span> (so <span class="math inline">P(\overline h) = 1 - P(h) = 0.5</span>) - before seeing this evidence, we thought the hypothesis had a 50% chance of being true.</p>
+<p>Suppose our likelihoods are <span class="math inline">P(e \mid h) = 0.8, P(e \mid \overline h) = 0.1</span> - we think that if the hypothesis is true, then it is 80% likely that we would see the evidence, and if it was false, then it would only be 10% likely (there is a 10% false positive rate and a 20% false negative rate).</p>
+<p>So calculating this, we get <span class="math inline">P(h \mid e) = \frac{0.8 \cdot 0.5}{0.8 \cdot 0.5 + 0.1 \cdot 0.5} = 0.89</span>.</p>
+<p>Now for future experiments, <span class="math inline">P(h \mid e)</span> becomes <span class="math inline">P(h)</span> - we take the evidence into account in the future when we are considering how likely to be true we think the hypothesis is. This is the <strong>Bayesian update</strong>.</p>
 <p>What do these probabilities mean? For epistemology and decision theory, the probabilities are often subjective.</p>
 <p>An <strong>objective probability</strong> is something like a coin flip resulting in heads always having probability 0.5 - it is this value regardless of our beliefs. A <strong>subjective probability</strong> is something like an estimate that someone will enjoy a class - it depends on the user's <strong>degree of belief</strong> in the statement.</p>
-<p>We can measure subjective probability with something like a &quot;willingness to bet&quot; - we ask them what they'd be willing to wager that it is true. In decision theory we assume people are perfectly rational and have complete information, so people would consider a wager with expected value <span class="math inline">\(w\)</span> to being paid <span class="math inline">\(w\)</span>.</p>
+<p>We can measure subjective probability with something like a &quot;willingness to bet&quot; - we ask them what they'd be willing to wager that it is true. In decision theory we assume people are perfectly rational and have complete information, so people would consider a wager with expected value <span class="math inline">w</span> to being paid <span class="math inline">w</span>.</p>
 <p>So for the above example, we would ask someone how much they'd be willing to bet (or at what odds they'd be willing to bet at) that the eclipse experiment would turn out to be true.</p>
 <p>We need to ensure that our subjective probabilities obey the laws of probability, like how the sum of all options can't exceed 1.</p>
 <p>If we have a set of bets where the probabilities add up to more than or less than 1, then we have a <strong>Dutch book</strong> - this is a set of bets where, if someone takes all of the bets in the set, the bet maker always gains something.</p>
-<p>For example, if we have three horses, and we think each one has a 50% chance of winning a race (when only one horse can win a race), then we have a total probability of 150% (which breaks the axioms of probability). Suppose a person <span class="math inline">\(A\)</span> proposes bets for each horse at these probabilities, and person <span class="math inline">\(B\)</span> makes a bet of <span class="math inline">\(x_1, x_2, x_3\)</span> on each horse - if a horse <span class="math inline">\(i\)</span> wins, then <span class="math inline">\(A\)</span> pays <span class="math inline">\(B\)</span> <span class="math inline">\(\frac 1 {2 \cdot 50%} x_i\)</span>, and if <span class="math inline">\(A\)</span> wins then <span class="math inline">\(B\)</span> pays <span class="math inline">\(A\)</span> <span class="math inline">\(\frac 1 {2(1 - 50%)} x_i\)</span>.</p>
-<p>Clearly, one of the horses must win. Therefore, <span class="math inline">\(B\)</span> wins a bet <span class="math inline">\(i\)</span>, and <span class="math inline">\(A\)</span> wins the other two bets <span class="math inline">\(j, k\)</span>. So <span class="math inline">\(A\)</span> is paid <span class="math inline">\(x_j + x_k\)</span> from <span class="math inline">\(B\)</span> and pays <span class="math inline">\(x_i\)</span> to <span class="math inline">\(B\)</span>. With the right values of <span class="math inline">\(x_1, x_2, x_3\)</span> (like <span class="math inline">\(x_1 = x_2 = x_3\)</span>), it can be guaranteed that <span class="math inline">\(x_j + x_k &gt; x_i\)</span>, so <span class="math inline">\(A\)</span> will always gain more than what is lost and <span class="math inline">\(B\)</span> will always lose more than what is gained.</p>
-<p><span class="math inline">\(B\)</span> doesn't even have to be one person - the bet maker could be up against multiple people, each person betting on one horse. Although individual people may gain something from the bet, overall the bet takers lose money and the bet maker earns money. The opposite is true if the probabilities add up to less than 1.</p>
+<p>For example, if we have three horses, and we think each one has a 50% chance of winning a race (when only one horse can win a race), then we have a total probability of 150% (which breaks the axioms of probability). Suppose a person <span class="math inline">A</span> proposes bets for each horse at these probabilities, and person <span class="math inline">B</span> makes a bet of <span class="math inline">x_1, x_2, x_3</span> on each horse - if a horse <span class="math inline">i</span> wins, then <span class="math inline">A</span> pays <span class="math inline">B</span> <span class="math inline">\frac 1 {2 \cdot 50\%} x_i</span>, and if <span class="math inline">A</span> wins then <span class="math inline">B</span> pays <span class="math inline">A</span> <span class="math inline">\frac 1 {2(1 - 50\%)} x_i</span>.</p>
+<p>Clearly, one of the horses must win. Therefore, <span class="math inline">B</span> wins a bet <span class="math inline">i</span>, and <span class="math inline">A</span> wins the other two bets <span class="math inline">j, k</span>. So <span class="math inline">A</span> is paid <span class="math inline">x_j + x_k</span> from <span class="math inline">B</span> and pays <span class="math inline">x_i</span> to <span class="math inline">B</span>. With the right values of <span class="math inline">x_1, x_2, x_3</span> (like <span class="math inline">x_1 = x_2 = x_3</span>), it can be guaranteed that <span class="math inline">x_j + x_k &gt; x_i</span>, so <span class="math inline">A</span> will always gain more than what is lost and <span class="math inline">B</span> will always lose more than what is gained.</p>
+<p><span class="math inline">B</span> doesn't even have to be one person - the bet maker could be up against multiple people, each person betting on one horse. Although individual people may gain something from the bet, overall the bet takers lose money and the bet maker earns money. The opposite is true if the probabilities add up to less than 1.</p>
 <p>One criticism of this (from Kuhn) is that different people can have very different degrees of belief for the likelihoods, and prior probabilities. In other words, there are still rhetorical and political factors influencing the probabilities.</p>
 <p>The answer to this is to apply the theorem a lot of times, so regardless of what our prior probabilities are (as long as those are not 0 or 1), we always get closer to the same probabilities as we apply more evidence (assuming that the likelihoods are agreed upon). This is known as <strong>convergence</strong>.</p>
 <h1 id="section-21">27/3/15</h1>
@@ -449,14 +482,5 @@ The current positions of the sun, moon, and earth</code></pre>
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

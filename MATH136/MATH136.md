@@ -211,7 +211,7 @@ A $k$-plane in $\mb{R}^n$ takes the form of $\vec{x} = c_1 \vec{v}_1 + \ldots + 
 
 A hyperplane is a $k$-plane, where $k = n - 1$. It is an $n - 1$-dimensional plane.
 
-For example, $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \\ −2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 1 \\ −1 \end{bmatrix}}$ defines a hyperplane in $\mb{R}^n$, since the set is linearly independent.
+For example, $\spn \set{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \\ -2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 1 \\ -1 \end{bmatrix}}$ defines a hyperplane in $\mb{R}^n$, since the set is linearly independent.
 
 # 20/1/14
 
@@ -435,7 +435,7 @@ a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
 \end{cases}$ more concisely as $\left[\begin{array}{ccc|c}
 a_{1, 1} & \ldots & a_{1, n} & b_1 \\
 \vdots & \vdots & \vdots & \vdots \\
-a_{m, 1} & \ldots & a_{m, n} & b_1 \\
+a_{m, 1} & \ldots & a_{m, n} & b_1
 \end{array}\right]$.
 
 This is called the **augmented matrix** of the system of linear equations.
@@ -443,7 +443,7 @@ This is called the **augmented matrix** of the system of linear equations.
 The **coefficient matrix** of the system of linear equations is the same thing, but without the last column containing the constant value. In this case, it would be $\left[\begin{array}{ccc}
 a_{1, 1} & \ldots & a_{1, n} \\
 \vdots & \vdots & \vdots \\
-a_{m, 1} & \ldots & a_{m, n} \\
+a_{m, 1} & \ldots & a_{m, n}
 \end{array}\right]$.
 
 We can combine a coefficient matrix $A$ and a constant vector $\vec{b}$ into an augmented matrix by using the $\left[A \middle| \vec{b}\right]$. This simply adds $\vec{b}$ as a column to the end of $A$.
@@ -463,32 +463,32 @@ Solve $\begin{cases}
 
 Now solve using operations on the matrix form of the equations, $\left[\begin{array}{cc|c}
 2 & 3 & 11 \\
-3 & 6 & 7 \\
+3 & 6 & 7
 \end{array}\right]$:
 
 > We multiply the first row by $-3$ to obtain $\left[\begin{array}{cc|c}
 -6 & -9 & -33 \\
-3 & 6 & 7 \\
+3 & 6 & 7
 \end{array}\right]$.  
 > We multiply the second row by $2$ to obtain $\left[\begin{array}{cc|c}
 -6 & -9 & -33 \\
-6 & 12 & 14 \\
+6 & 12 & 14
 \end{array}\right]$.  
 > We add the first to the seocnd to obtain $\left[\begin{array}{cc|c}
 -6 & -9 & -33 \\
-0 & 3 & -19 \\
+0 & 3 & -19
 \end{array}\right]$.  
 > We multiply the second equation by $\frac{1}{3}$ to obtain $\left[\begin{array}{cc|c}
 -6 & -9 & -33 \\
-0 & 1 & -\frac{19}{3} \\
+0 & 1 & -\frac{19}{3}
 \end{array}\right]$.  
 > Now we add the second equation multiplied by 9 to the first equation to obtain $\left[\begin{array}{cc|c}
 -6 & 0 & -90 \\
-0 & 1 & -\frac{19}{3} \\
+0 & 1 & -\frac{19}{3}
 \end{array}\right]$.  
 > Now we multiply the first equation by $-\frac{1}{6}$ to obtain $\left[\begin{array}{cc|c}
 1 & 0 & 15 \\
-0 & 1 & -\frac{19}{3} \\
+0 & 1 & -\frac{19}{3}
 \end{array}\right]$.  
 > So $x_1 = 15$ and $x_2 = -\frac{19}{3}$.  
 
@@ -530,36 +530,36 @@ Row reduce $\left[\begin{array}{ccc|c} 1 & 1 & 0 & -7 \\ 2 & 4 & 1 & -16 \\ 1 & 
 > $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 2 & 4 & 1 & -16 \\
-1 & 2 & 1 & 9 \\
+1 & 2 & 1 & 9
 \end{array}\right]$ is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 0 & 0 & -1 & -34 \\
-1 & 2 & 1 & 9 \\
+1 & 2 & 1 & 9
 \end{array}\right]$ via $R_2 + (-2)R_3$.  
 > This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 1 & 2 & 1 & 9 \\
-0 & 0 & -1 & -34 \\
+0 & 0 & -1 & -34
 \end{array}\right]$ via $R_2 \leftrightarrow R_3$.  
 > This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 1 & 2 & 1 & 9 \\
-0 & 0 & 1 & 34 \\
+0 & 0 & 1 & 34
 \end{array}\right]$ via $(-1)R_3$.  
 > This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 0 & 1 & 1 & 16 \\
-0 & 0 & 1 & 34 \\
+0 & 0 & 1 & 34
 \end{array}\right]$ via $R_2 - R_1$.  
 > This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 1 & 0 & -7 \\
 0 & 1 & 0 & -18 \\
-0 & 0 & 1 & 34 \\
+0 & 0 & 1 & 34
 \end{array}\right]$ via $R_2 - R_3$.  
 > This is row equivalent to $\left[\begin{array}{ccc|c}
 1 & 0 & 0 & 11 \\
 0 & 1 & 0 & -18 \\
-0 & 0 & 1 & 34 \\
+0 & 0 & 1 & 34
 \end{array}\right]$ via $R_2 - R_3$.  
 > This is in RREF.  
 
@@ -972,11 +972,11 @@ To prove that a function is a lienar mapping, we simply need to prove that it ha
 Prove that $\proj_{\vec{a}}$ is a linear operator:
 
 > $$
-\begin{align}
+\begin{aligned}
 \proj_{\vec{a}} (s\vec{x} + t\vec{y}) &= \left((s\vec{x} + t\vec{y}) \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
 &= \left(s\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} + \left(t\vec{y} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
 &= s\proj_{\vec{a}} \vec{x} + t\proj_{\vec{a}} \vec{y} \\
-\end{align}
+\end{aligned}
 $$
 > Therefore, $\proj_{\vec{a}}$ has the linearity property and is a linear mapping.  
 
@@ -998,12 +998,12 @@ We denote this as $A = [L]$, where $L$ is a linear mapping. Additionally, $L(\ve
 Find the standard matrix of $\proj_{\vec{a}}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \proj_{\vec{a}} \vec{x} &= \left(\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
 \proj_{\vec{a}} \vec{e}_i &= \frac{\vec{a}_i}{\magn{a}} \frac{\vec{a}}{\magn{a}} = \vec{a}_i \frac{\vec{a}}{\magn{a}^2} \\
 f(\vec{x}) &= A\vec{x} = \proj_{\vec{a}} \\
 A &= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} & \ldots & \vec{a}_n \frac{\vec{a}}{\magn{a}^2} \end{bmatrix} \\
-\end{align}
+\end{aligned}
 $$
 
 # 11/2/14
@@ -1443,12 +1443,12 @@ Let $A_1 = \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}, A_2 = \begin{bmatrix} 1
 1 & 1 & 1 & 0 & 0 & 0 & 0 \\
 1 & 1 & 0 & 1 & 0 & 0 & 0 \\
 0 & 1 & 0 & 0 & 1 & 0 & 0 \\
-0 & -1 & 0 & 0 & 0 & 1 & 0 \\
+0 & -1 & 0 & 0 & 0 & 1 & 0
 \end{array}\right]$, and the RREF is $\left[\begin{array}{cccccc|c}
 1 & 0 & 0 & 1 & 0 & 1 & 0 \\
 0 & 1 & 0 & 0 & 0 & -1 & 0 \\
 0 & 0 & 1 & -1 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 & 1 & 0
 \end{array}\right]$.  
 > So $\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = s\begin{bmatrix} -1 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \end{bmatrix} + t\begin{bmatrix} -1 \\ 1 \\ 0 \\ 0 \\ -1 \\ 1 \end{bmatrix}, s, t \in \mb{R}$.  
 > So $\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = \begin{bmatrix} -1 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \end{bmatrix}$ and $\begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \end{bmatrix} = \begin{bmatrix} -1 \\ 1 \\ 0 \\ 0 \\ -1 \\ 1 \end{bmatrix}$ are solutions.  
@@ -1472,24 +1472,24 @@ Let $\mb{V}$ be an $n$-dimensional vector space. Let $\mathcal{B} = \set{\vec{e}
 
 Then $\exists c_1, \ldots, c_n \in \mb{R}, \vec{x} = c_1 \vec{e}_1 + \ldots + c_n \vec{e}_n$.
 
-The **coordinate vector** of $\vec{x}$ with respect to $\mathcal{B}$ is defined as $[\vec{x}]_\mathcal{B} = \begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}$. The **coordinates** are simply $c_1, \ldots, c_n$ - the values of the variables themselves.
+The **coordinate vector** of $\vec{x}$ with respect to $\mathcal{B}$ is defined as $\coord{\vec x}{\mathcal{B}} = \begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}$. The **coordinates** are simply $c_1, \ldots, c_n$ - the values of the variables themselves.
 
 A $\mathcal{B}$-coordinate is a coordinate with respect to $\mathcal{B}$.
 
-Note that $\vec{x}$ is not the same thing as $[\vec{x}]_\mathcal{B}$ - $\vec{x}$ can be whatever type of thing exists in the vector space, like polynomials or matrices, but $[\vec{x}]_\mathcal{B}$ is always a vector in $\mb{R}^n$.
+Note that $\vec{x}$ is not the same thing as $\coord{\vec x}{\mathcal{B}}$ - $\vec{x}$ can be whatever type of thing exists in the vector space, like polynomials or matrices, but $\coord{\vec x}{\mathcal{B}}$ is always a vector in $\mb{R}^n$.
 
 Note that all coordinates are relative to a vector, so it is important to know which basis a coordinate vector is written with respect to. The order of the basis vectors matter too, so we must give the vectors in the basis a particular fixed order.
 
 ### Theorem 4.3.2
 
-For all $\vec{v}, \vec{w} \in \mb{V}, s, t \in \mb{R}$, $[s\vec{v} + t\vec{w}]_\mathcal{B} = s[\vec{v}]_\mathcal{B} + t[\vec{w}]_\mathcal{B}$.
+For all $\vec{v}, \vec{w} \in \mb{V}, s, t \in \mb{R}$, $[s\vec{v} + t\vec{w}]_\mathcal{B} = s\coord{\vec v}{\mathcal{B}} + t\coord{\vec w}{\mathcal{B}}$.
 
 Proof:
 
 > Clearly, $\exists b_1, \ldots, b_n \in \mb{R}, \vec{v} = b_1 \vec{e}_1 + \ldots + b_n \vec{e}_n$.  
 > Clearly, $\exists c_1, \ldots, c_n \in \mb{R}, \vec{w} = c_1 \vec{e}_1 + \ldots + c_n \vec{e}_n$.  
 > So $s\vec{v} + t\vec{w} = (sb_1 + tc_1)\vec{e}_1 + \ldots + (sb_n + tc_n)\vec{e}_n$.  
-> So $[s\vec{v} + t\vec{w}]_\mathcal{B} = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = s\begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}_\mathcal{B} + t\begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}_\mathcal{B} = s[\vec{v}]_\mathcal{B} + t[\vec{w}]_\mathcal{B}$.  
+> So $[s\vec{v} + t\vec{w}]_\mathcal{B} = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = \begin{bmatrix} sb_1 + tc_1 \\ \vdots \\ sb_n + tc_n \end{bmatrix}_\mathcal{B} = s\begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}_\mathcal{B} + t\begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}_\mathcal{B} = s\coord{\vec v}{\mathcal{B}} + t\coord{\vec w}{\mathcal{B}}$.  
 
 ### Change of Coordinates
 
@@ -1499,17 +1499,17 @@ Let $\mb{V}$ be an $n$-dimensional vector space. Let $\vec{x} \in \mb{V}$.
 
 Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ and $\mathcal{C}$ be bases for $\mb{V}$.
 
-Given a coordinate with respect to $\mathcal{B}$, we want to find a coordinate with respect to $\mathcal{C}$ that represents the same vector. In other words, given $[\vec{x}]_\mathcal{B}$, we want to quickly find $[\vec{x}]_\mathcal{C}$.
+Given a coordinate with respect to $\mathcal{B}$, we want to find a coordinate with respect to $\mathcal{C}$ that represents the same vector. In other words, given $\coord{\vec x}{\mathcal{B}}$, we want to quickly find $\coord{\vec x}{\mathcal{C}}$.
 
-Clearly, $\exists b_1, \ldots, b_n \in \mb{R}, \vec{x} = b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n$. So $[\vec{x}]_\mathcal{B} = \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}$.
+Clearly, $\exists b_1, \ldots, b_n \in \mb{R}, \vec{x} = b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n$. So $\coord{\vec x}{\mathcal{B}} = \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}$.
 
-Clearly, $[\vec{x}]_\mathcal{C} = [b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n]_\mathcal{C} = b_1 [\vec{v}_1]_\mathcal{C} + \ldots + b_n [\vec{v}_n]_\mathcal{C}$.
+Clearly, $\coord{\vec x}{\mathcal{C}} = \coord{b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n}{\mathcal{C}} = b_1 \coord{\vec{v}_1}{\mathcal{C}} + \ldots + b_n \coord{\vec{v}_n}{\mathcal{C}}$.
 
-We can write this using vectors or matrices: $[\vec{x}]_\mathcal{C} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} \\ \vdots \\ [\vec{v}_n]_\mathcal{C} \end{bmatrix} \cdot [\vec{x}]_\mathcal{B} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} & \ldots & [\vec{v}_n]_\mathcal{C} \end{bmatrix} [\vec{x}]_\mathcal{B}$.
+We can write this using vectors or matrices: $\coord{\vec x}{\mathcal{C}} = \begin{bmatrix} \coord{\vec{v}_1}{\mathcal{C}} \\ \vdots \\ \coord{\vec{v}_n}{\mathcal{C}} \end{bmatrix} \cdot \coord{\vec x}{\mathcal{B}} = \begin{bmatrix} \coord{\vec{v}_1}{\mathcal{C}} & \ldots & \coord{\vec{v}_n}{\mathcal{C}} \end{bmatrix} \coord{\vec x}{\mathcal{B}}$.
 
-The matrix ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [\vec{v}_1]_\mathcal{C} & \ldots & [\vec{v}_n]_\mathcal{C} \end{bmatrix}$ is called the **change of coordinates matrix/change of basis matrix** from $\mathcal{B}$ to $\mathcal{C}$.
+The matrix ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} \coord{\vec{v}_1}{\mathcal{C}} & \ldots & \coord{\vec{v}_n}{\mathcal{C}} \end{bmatrix}$ is called the **change of coordinates matrix/change of basis matrix** from $\mathcal{B}$ to $\mathcal{C}$.
 
-This is the matrix that satisfies $[\vec{x}]_\mathcal{C} = {}_\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B}$.
+This is the matrix that satisfies $\coord{\vec x}{\mathcal{C}} = {}_\mathcal{C}P_\mathcal{B} \coord{\vec x}{\mathcal{B}}$.
 
 ### Theorem 4.3.3
 
@@ -1518,14 +1518,14 @@ ${}_\mathcal{C}P_\mathcal{B} {}_\mathcal{B}P_\mathcal{C} = I = {}_\mathcal{B}P_\
 Proof:
 
 > Let $A = {}_\mathcal{B}P_\mathcal{C} {}_\mathcal{C}P_\mathcal{B}$.  
-> Then $A[\vec{x}]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{C} {}_\mathcal{C}P_\mathcal{B} [\vec{x}]_\mathcal{B} = {}_\mathcal{B}P_\mathcal{C} [\vec{x}]_\mathcal{C} = [\vec{x}]_\mathcal{B}$.  
-> So $A[\vec{x}]_\mathcal{B} = [\vec{x}]_\mathcal{B}$, so $A = {}_\mathcal{B}P_\mathcal{C} {}_\mathcal{C}P_\mathcal{B} = I$.  
+> Then $A\coord{\vec x}{\mathcal{B}} = {}_\mathcal{B}P_\mathcal{C} {}_\mathcal{C}P_\mathcal{B} \coord{\vec x}{\mathcal{B}} = {}_\mathcal{B}P_\mathcal{C} \coord{\vec x}{\mathcal{C}} = \coord{\vec x}{\mathcal{B}}$.  
+> So $A\coord{\vec x}{\mathcal{B}} = \coord{\vec x}{\mathcal{B}}$, so $A = {}_\mathcal{B}P_\mathcal{C} {}_\mathcal{C}P_\mathcal{B} = I$.  
 > The same technique can be used for for ${}_\mathcal{C}P_\mathcal{B} {}_\mathcal{B}P_\mathcal{C} = I$.  
 
 Given $\mathcal{B} = \set{1, x, x^2}, \mathcal{C} = \set{1, x + 1, (x + 1)^2}$, find ${}_\mathcal{C}P_\mathcal{B}$:
 
-> Clearly, ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} [1]_\mathcal{C} & [x]_\mathcal{C} & [x^2]_\mathcal{C} \end{bmatrix}$.  
-> Clearly, $[1]_\mathcal{C} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, [x]_\mathcal{C} = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}, [x^2]_\mathcal{C} = \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}$, by inspection.  
+> Clearly, ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} \coord{1}{\mathcal{C}} & \coord{x}{\mathcal{C}} & \coord{x^2}{\mathcal{C}} \end{bmatrix}$.  
+> Clearly, $\coord{1}{\mathcal{C}} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \coord{x}{\mathcal{C}} = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}, \coord{x^2}{\mathcal{C}} = \begin{bmatrix} 1 \\ -2 \\ 1 \end{bmatrix}$, by inspection.  
 > So ${}_\mathcal{C}P_\mathcal{B} = \begin{bmatrix} 1 & -1 & 1 \\ 0 & 1 & -2 \\ 0 & 0 & 1 \end{bmatrix}$.  
 
 # 17/3/14
@@ -1557,10 +1557,10 @@ For example, find the right inverse of $A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{
 
 > Clearly, $\left[\begin{array}{cc|cc}
 1 & 2 & 1 & 0 \\
-3 & 4 & 0 & 1 \\
+3 & 4 & 0 & 1
 \end{array}\right]$ in RREF is $\left[\begin{array}{cc|cc}
 1 & 0 & -2 & 1 \\
-0 & 1 & \frac{3}{2} & -\frac{1}{2} \\
+0 & 1 & \frac{3}{2} & -\frac{1}{2}
 \end{array}\right]$.  
 > So the inverse is $\begin{bmatrix} -2 & 1 \\ \frac{3}{2} & -\frac{1}{2} \end{bmatrix}$. To verify, $\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \begin{bmatrix} -2  1 \\ \frac{3}{2} & -\frac{1}{2} \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$, as required.  
 
@@ -1627,10 +1627,10 @@ Find the general inverse of $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$:
 
 > Clearly, $\left[\begin{array}{cc|cc}
 a & b & 1 & 0 \\
-c & d & 0 & 1 \\
+c & d & 0 & 1
 \end{array}\right]$ in RREF is $\left[\begin{array}{cc|cc}
 1 & 0 & \frac{d}{ad - bc} & -\frac{b}{ad - bc} \\
-0 & 1 & -\frac{c}{ad - bc} & \frac{a}{ad - bc} \\
+0 & 1 & -\frac{c}{ad - bc} & \frac{a}{ad - bc}
 \end{array}\right]$.  
 > So $A^{-1} = \begin{bmatrix} \frac{d}{ad - bc} & -\frac{b}{ad - bc} \\ -\frac{c}{ad - bc} & \frac{a}{ad - bc} \end{bmatrix} = \frac{1}{ad - bc}\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$, and is defined whenever $ad - bc \ne 0$.  
 
@@ -1839,39 +1839,39 @@ Find $\begin{vmatrix} 3 & 4 & 3 & -1 \\ 1 & 0 & -2 & 2 \\ -2 & 1 & 1 & 4 \\ 1 & 
 3 & 4 & 3 & -1 \\
 1 & 0 & -2 & 2 \\
 -2 & 1 & 1 & 4 \\
-1 & 2 & 1 & 1 \\
+1 & 2 & 1 & 1
 \end{bmatrix} = \det \begin{bmatrix} 1 & 0 & 0 & -\frac{21}{9} \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 & -4 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & -2 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & -1 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 2 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & -3 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix}
 3 & 4 & 3 & -1 \\
 1 & 0 & -2 & 2 \\
 -2 & 1 & 1 & 4 \\
-1 & 2 & 1 & 1 \\
+1 & 2 & 1 & 1
 \end{bmatrix} = \det \begin{bmatrix}
 0 & 0 & 0 & \frac{2}{3} \\
 1 & 0 & -2 & 2 \\
 0 & 1 & -3 & 8 \\
-0 & 0 & 9 & -17 \\
+0 & 0 & 9 & -17
 \end{bmatrix}$.  
 > Clearly, $\det \begin{bmatrix}
 0 & 0 & 0 & \frac{2}{3} \\
 1 & 0 & -2 & 2 \\
 0 & 1 & -3 & 8 \\
-0 & 0 & 9 & -17 \\
+0 & 0 & 9 & -17
 \end{bmatrix} = -\det \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{bmatrix}\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix}
 0 & 0 & 0 & \frac{2}{3} \\
 1 & 0 & -2 & 2 \\
 0 & 1 & -3 & 8 \\
-0 & 0 & 9 & -17 \\
+0 & 0 & 9 & -17
 \end{bmatrix} = -\det \begin{bmatrix}
 1 & 0 & -2 & 2 \\
 0 & 1 & -3 & 8 \\
 0 & 0 & 9 & -17 \\
-0 & 0 & 0 & \frac{2}{3} \\
+0 & 0 & 0 & \frac{2}{3}
 \end{bmatrix}$.  
 > Clearly, the matrix is now in upper triangular form, so $-\det \begin{bmatrix}
 1 & 0 & -2 & 2 \\
 0 & 1 & -3 & 8 \\
 0 & 0 & 9 & -17 \\
-0 & 0 & 0 & \frac{2}{3} \\
+0 & 0 & 0 & \frac{2}{3}
 \end{bmatrix} = -(1 \cdot 1 \cdot 9 \cdot \frac{2}{3}) = -6$, by theorem 5.3.2.  
 
 The basic technique is using elementary row operations to reduce the matrix into upper triangular form, and then using theorem 5.3.2 to easily calculate the determinant just by multiplying the numbers in the diagonal together.
@@ -1986,7 +1986,7 @@ Clearly, $A^2 = \magn{\vec{u}}^2 \magn{\vec{v}}^2 \sin^2 \theta = \magn{\vec{u}}
 = u_1^2 v_1^2 + u_1^2 v_2^2 + u_2^2 v_1^2 + u_2^2 v_2^2 - (u_1^2 v_1^2 + 2 u_1 v_1 u_2 v_2 + u_2^2 v_2^2)
 = u_1^2 v_2^2 - 2 u_1 v_1 u_2 v_2 + u_2^2 v_1^2 = (u_1 v_2 - u_2 v_1)^2$.
 
-Clearly, $\det \begin{bmatrix} \vec{u} & \vec{v} \end{bmatrix} = \det \begin{bmatrix} u_1 & v_1 \\ u_2 v_2 \end{bmatrix} = u_1 v_2 - v_1 u_2$.
+Clearly, $\det \begin{bmatrix} \vec{u} & \vec{v} \end{bmatrix} = \det \begin{bmatrix} u_1 & v_1 \\ u_2 & v_2 \end{bmatrix} = u_1 v_2 - v_1 u_2$.
 
 So $A^2 = (\det \begin{bmatrix} \vec{u} & \vec{v} \end{bmatrix})^2$. Since $A$ is always non-negative, $A = \abs{\det \begin{bmatrix} \vec{u} & \vec{v} \end{bmatrix}}$.
 
@@ -2011,15 +2011,15 @@ Linear Mappings and Bases
 
 Let $L: \mb{R}^n \to \mb{R}^n$ be a linear operator. Let $\mathcal{B} = \set{\vec{v}_1, \ldots, \vec{v}_n}$ be a basis for $\mb{R}^n$. Let $\vec{x} \in \mb{R}^n$.
 
-Then $\exists b_1, \ldots, b_n \in \mb{R}, \vec{x} = b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n$. So $[\vec{x}]_\mathcal{B} = \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}$.
+Then $\exists b_1, \ldots, b_n \in \mb{R}, \vec{x} = b_1 \vec{v}_1 + \ldots + b_n \vec{v}_n$. So $\coord{\vec x}{\mathcal{B}} = \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}$.
 
 We want to determine a matrix $A$ such that $[L(\vec{x})]_\mathcal{B} = [[L]\vec{x}]_\mathcal{B} = A\vec{x}_\mathcal{B}$ - a linear operator that works the same as $L$, but accepts and produces $\mathcal{B}$-coordinates.
 
 Clearly, $[L(\vec{x})]_\mathcal{B} = [b_1 L(\vec{v}_1) + \ldots + b_n L(\vec{v}_n)]_\mathcal{B} = b_1 [L(\vec{v}_1)]_\mathcal{B} + \ldots + b_n [L(\vec{v}_n)]_\mathcal{B} = \begin{bmatrix} [L(\vec{v}_n)]_\mathcal{B} & \ldots & [L(\vec{v}_n)]_\mathcal{B} \end{bmatrix} \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}$.
 
-So $[L(\vec{x})]_\mathcal{B} = [L]_\mathcal{B} [\vec{x}]_\mathcal{B}$.
+So $[L(\vec{x})]_\mathcal{B} = [L]_\mathcal{B} \coord{\vec x}{\mathcal{B}}$.
 
-In other words, the matrix of $L$ with respect to $\mathcal{B}$, is $[L]_\mathcal{B} = \begin{bmatrix} [L(\vec{v}_n)]_\mathcal{B} & \ldots & [L(\vec{v}_n)]_\mathcal{B} \end{bmatrix} [\vec{x}]_\mathcal{B}$. We call $[L]_\mathcal{B}$ the $\mathcal{B}$-matrix of $L$.
+In other words, the matrix of $L$ with respect to $\mathcal{B}$, is $[L]_\mathcal{B} = \begin{bmatrix} [L(\vec{v}_n)]_\mathcal{B} & \ldots & [L(\vec{v}_n)]_\mathcal{B} \end{bmatrix} \coord{\vec x}{\mathcal{B}}$. We call $[L]_\mathcal{B}$ the $\mathcal{B}$-matrix of $L$.
 
 Given $L(\vec{x}) = A\vec{x} = \begin{bmatrix} 1 & 2 & 2 \\ 2 & 1 & 2 \\ 2 & 2 & 1 \end{bmatrix} \vec{x}$ and $\mathcal{B} = \set{\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}} = \set{\vec{v}_1, \vec{v}_2, \vec{v}_3}$, find $[L]_\mathcal{B}$:
 
@@ -2048,7 +2048,7 @@ Also, ${}_\mathcal{S}P_\mathcal{B} = \begin{bmatrix} \vec{v}_1, \ldots, \vec{v}_
 
 Given $A \in M_{n \times n}$, the **trace** of $A$ is $\operatorname{tr}(A) = \sum_{i = 1}^n A_{i, i}$. In other words, it is the sum of all the diagonal values.
 
-The $[L]_\mathcal{B}$ notation is similar to the $[\vec{v}]_\mathcal{B}$, except instead of a coordinate being put into another basis, it is a linear mapping converted to work in another basis.
+The $[L]_\mathcal{B}$ notation is similar to the $\coord{\vec v}{\mathcal{B}}$, except instead of a coordinate being put into another basis, it is a linear mapping converted to work in another basis.
 
 ### Theorem 6.1.1
 
@@ -2089,7 +2089,7 @@ Also, the eigenvector and eigenvalue of a linear operator is the eigenvector and
 
 Every eigenvalue is associated with eigenvectors. An eigenvalue can have a whole set of associated eigenvectors.
 
-Find the eigenvectors and eigenvalues of $L(\vec{x}) = \proj_\vec{a} \vec{x}$:
+Find the eigenvectors and eigenvalues of $L(\vec{x}) = \proj_{\vec{a}} \vec{x}$:
 
 > Let $\lambda \in \mb{R}$. Clearly, $L(\vec{x}) = \lambda \vec{x}$ if $\vec{x}$ lies along $\vec{a}$ - $\vec{x}$ is already a scalar multiple of $\vec{a}$.  
 > So the eigenvectors of $L(\vec{x})$ include $k\vec{a}, k \ne 0$ with the eigenvalue $\lambda = 1$.  

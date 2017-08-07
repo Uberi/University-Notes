@@ -362,7 +362,7 @@ Procedure:
     * We draw a ground symbol (;wip: symbol) connected to that node in order to denote this.
 2. Write out the equations implied by voltage sources to calculate voltage relations between nodes.
     * For example, a 5V voltage source means that the voltage on one side is equal to the voltage on the other side plus 5: $V_{positive} = 5V + V_{negative}$.
-3. For each node we assume all currents are **leaving the node**, and write down the equations implied by KCL - $I_1 + \dots I_n = 0$ at each node. Substitute the values implied by current sources.
+3. For each node we assume all currents are **leaving the node**, and write down the equations implied by KCL - $I_1 + \ldots I_n = 0$ at each node. Substitute the values implied by current sources.
 4. Write each $I_1, \ldots, I_n$ in terms of voltage, generally using resistance and Ohm's law for resistors. Now we have a set of equations in terms of node voltages.
 5. Solving the system, we get the voltages at each node. Using this, it is possible to calculate the current at each node as well.
 

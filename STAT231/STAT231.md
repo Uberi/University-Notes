@@ -76,7 +76,7 @@ Common numerical summaries we care about are:
     * The **median** is the middle-most observation, or the sample mean of the middlemost observations if there are multiple. Essentially, we arrange the dataset in ascending order, and then pick the middle one.
         * The advantage of medians is that they are less sensitive to outliers than summaries like the sample mean.
         * The concept of the median can be extended to **quartiles** and **percentiles**, and generalized into **quartiles**. While the median is the value such that 50% of the dataset is at or below it, the quartiles and percentiles are a different fraction. Percentiles are represented with $q(p)$ where $0 \le p \le 1$.
-        * The first quartile is a value for which 25% of the data is equal or below that value ($q(0.25)$), while the second quartile is 50% ($q(0.5)$), the third 75% ($q(0.75)), and the fourth 100% ($q(1)$).
+        * The first quartile is a value for which 25% of the data is equal or below that value ($q(0.25)$), while the second quartile is 50% ($q(0.5)$), the third 75% ($q(0.75)$), and the fourth 100% ($q(1)$).
         * The first percentile is a value for which 1% of the data is equal or below that value, while the second percentile is 2%, the third 3%, and so on.
         * To find the $0 \le p \le 1$ percentile, we take the $p(n + 1)$th value, or average the nearest 2 values if $p(n + 1)$ is not an integer.
     * The **mode** is the observation or observations that occur most often (a dataset can have more than 1 mode). This is often more useful for categorical data, or discrete numerical data with only a few possibilities.
@@ -834,7 +834,7 @@ So the likelihood function is $L(\theta_1, \ldots, \theta_k; y_1, \ldots, y_k) =
 
 Our null hypothesis is $\theta_1 = \ldots = \theta_k = \frac 1 n$, or $\theta = \theta_0$ where $\theta_0 = \tup{\theta_1, \ldots, \theta_k}$.
 
-To test how good this hypothesis is, we now need a test statistic. For this, we can use the likelihood ratio test statistic, $A = -2 \log \frac{L(\theta_0)}{L(\widetilde \theta)} \sim \chi^2(k - 1)$ (we have $k$ variables $\theta_1, \ldots, \theta_k$, but since $\sum \theta_i = 1$, there's actually only $k - 1$ unknown values). If we expand $\frac{L(\theta_0)}{L(\widetilde \theta)}$, we get $\left(\frac{E_i}{Y_i}\right)^{Y_i}$, where $E_i = \frac{;wip: get this from slides}$ is the expected frequency of successes for $i$. So $A = 2 \sum Y_i \ln \frac{Y_i}{E_i}$.
+To test how good this hypothesis is, we now need a test statistic. For this, we can use the likelihood ratio test statistic, $A = -2 \log \frac{L(\theta_0)}{L(\widetilde \theta)} \sim \chi^2(k - 1)$ (we have $k$ variables $\theta_1, \ldots, \theta_k$, but since $\sum \theta_i = 1$, there's actually only $k - 1$ unknown values). If we expand $\frac{L(\theta_0)}{L(\widetilde \theta)}$, we get $\left(\frac{E_i}{Y_i}\right)^{Y_i}$, where $E_i = \frac{;wip: get this from slides}{}$ is the expected frequency of successes for $i$. So $A = 2 \sum Y_i \ln \frac{Y_i}{E_i}$.
 
 This test statistic makes sense because it has large values when the hypothesis isn't supported, and small values when it is. Using this test statistic, we have the pivotal quantity $\lambda = 2 \sum y_i \ln \frac{Y_i}{E_i} \sim \chi^2(1)$. We can now generate a confidence interval or p-value from this.
 

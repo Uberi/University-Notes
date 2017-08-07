@@ -214,7 +214,7 @@ All five are listed below:
 The last one needs some more proof:
 
 $$
-\begin{align}
+\begin{aligned}
 \vec{v}_{av} \Delta t &= \Delta \vec{x} \\
 \vec{v}_{av} \cdot \frac{\Delta \vec{v}}{\Delta t} \Delta t &= \frac{\Delta \vec{v}}{\Delta t} \cdot \Delta \vec{x} \\
 \vec{v}_{av} \Delta \vec{v} &= \vec{a} \cdot \Delta \vec{x} \\
@@ -222,7 +222,7 @@ $$
 (\vec{v}_f + \vec{v}_i) \cdot (\vec{v}_f - \vec{v}_i) &= 2\vec{a} \cdot \Delta \vec{x} \\
 \magn{\vec{v}_f}^2 - \magn{\vec{v}_i}^2 &= 2\vec{a} \cdot \Delta \vec{x} \\
 v_f^2 &= v_i^2 + 2\vec{a} \cdot \Delta \vec{x} \\
-\end{align}
+\end{aligned}
 $$
 
 # 8/2/14
@@ -234,23 +234,23 @@ We can also write our definitions using integrals.
 For example, $\vec{a} = \frac{\dee \vec{v}}{\dee t}$, assuming $\vec{a}$ is constant:
 
 > $$
-\begin{align}
+\begin{aligned}
 \vec{a} \dee t &= \dee \vec{v} \\
 \int_{t_i}^{t_f} \vec{a} \dee t &= \int_{\vec{v}_i}^{\vec{v}_f} \dee \vec{v} \\
 \vec{a}\Delta t &= \vec{v}_f - \vec{v}_i \\
 \vec{v}_i + \vec{a}\Delta t &= \vec{v}_f \\
-\end{align}
+\end{aligned}
 $$
 
 We can also do this for velocity, where $\vec{v} = \frac{\dee \vec{x}}{\dee t}$:
 
 > $$
-\begin{align}
+\begin{aligned}
 \vec{v} \dee t &= \dee \vec{x} \\
 \int_{t_i}^{t_f} \vec{v} \dee t &= \int_{\vec{x}_i}^{\vec{x}_f}\dee \vec{x} \\
 \int_{t_i}^{t_f} \vec{v}_i + \vec{a}\Delta t \dee t &= \int_{\vec{x}_i}^{\vec{x}_f}\dee \vec{x} \\
 \vec{v}_i\Delta t + \frac{1}{2}\vec{a}(\Delta t)^2 &= \Delta \vec{x} \\
-\end{align}
+\end{aligned}
 $$
 
 ### Free Fall
@@ -275,7 +275,7 @@ In 2D, rather than using $\vec{x}$ for displacement, we now use $\vec{r}$.
 
 When we have a 2 dimensional problem, we almost always simply break it down into two 1 dimensional problems - one for each dimension - solve the two problems, and then combine the solutions into the solution for the 2 dimensional problem.
 
-In 2D and 3D, we use vectors to represent quantities that have a magnitude and a direction. Vectors are written as $\vec{x}$ or $\boldsymbol{x}$. When a vector is simply written as $x$, we assume this means the magnitude of the vector.
+In 2D and 3D, we use vectors to represent quantities that have a magnitude and a direction. Vectors are written as $\vec{x}$ or $\bm{x}$. When a vector is simply written as $x$, we assume this means the magnitude of the vector.
 
 We will mostly be using vectors in Cartesian coordinates ($\vec{a} = (a_x, a_y)$), but for rotating systems, we will sometimes use polar coordinates ($\vec{a} = (r, \theta)$).
 
@@ -366,7 +366,7 @@ For example, an accelerating car or elevator is a non-inertial reference frame -
 
 Net force is the vector sum of all the forces acting on an object.
 
-We write it as $\\vec{F}_{net} = \sum \vec{F}$.
+We write it as $\vec{F}_{net} = \sum \vec{F}$.
 
 First Law of Motion
 -------------------
@@ -895,7 +895,7 @@ So the only work done is by gravitational potential energy in the component of t
 
 Friction is always opposite to the direction of displacement (the angle between the two is 180 degrees). Therefore, it always does negative work - it always reduces the energy.
 
-So $W_f = \int_\vec{a}^\vec{b} \vec{F}_f \cdot \dee \vec{x} = \int_\vec{a}^\vec{b} F_f \cos 180^\circ \dee x = -\int_\vec{a}^\vec{b} F_f \dee x = -F_f x$.
+So $W_f = \int_{\vec{a}}^{\vec{b}} \vec{F}_f \cdot \dee \vec{x} = \int_{\vec{a}}^{\vec{b}} F_f \cos 180^\circ \dee x = -\int_{\vec{a}}^{\vec{b}} F_f \dee x = -F_f x$.
 
 Note that $x$ is the **path length** from $\vec{a}$ to $\vec{b}$, not the distance between $\vec{a}$ and $\vec{b}$. If the path is a curve, it is the length of the curve, not the line from $\vec{a}$ to $\vec{b}$.
 
@@ -905,21 +905,21 @@ Here, $\vec{a}$ represents the initial position, and $\vec{b}$ represents the fi
 
 ### Work-Kinetic-Energy Theorem (WKE)
 
-If an object is acted on by multiple forces, then $W_{net} = \sum W = \sum \int_\vec{a}^\vec{b} \vec{F} \cdot \dee \vec{x}$.
+If an object is acted on by multiple forces, then $W_{net} = \sum W = \sum \int_{\vec{a}}^{\vec{b}} \vec{F} \cdot \dee \vec{x}$.
 
-Since $\vec{x}$ is the same for all the different forces, $W_{net} = \int_\vec{a}^\vec{b} \left(\sum \vec{F}\right) \cdot \dee \vec{x}$.
+Since $\vec{x}$ is the same for all the different forces, $W_{net} = \int_{\vec{a}}^{\vec{b}} \left(\sum \vec{F}\right) \cdot \dee \vec{x}$.
 
-So $W_{net} = \int_\vec{a}^\vec{b} \vec{F}_{net} \cdot \dee \vec{x}$.
+So $W_{net} = \int_{\vec{a}}^{\vec{b}} \vec{F}_{net} \cdot \dee \vec{x}$.
 
 $$
-\begin{align}
-m\int_\vec{a}^\vec{b} \vec{a} \cdot \dee \vec{x} &= m\int_\vec{a}^\vec{b} \frac{\dee \vec{v}}{\dee t} \cdot \dee \vec{x} \\
-&= m\int_\vec{a}^\vec{b} \dee \vec{v} \cdot \frac{\dee \vec{x}}{\dee t} \\
-&= m\int_\vec{a}^\vec{b} \vec{v} \cdot \dee \vec{v} \\
-&= \frac{1}{2}m\evalat{\vec{v}^2}_{\vec{a}^\vec{b}} \\
-&= \frac{1}{2}m\evalat{v^2}_{\vec{a}^\vec{b}} \\
+\begin{aligned}
+m\int_{\vec{a}}^{\vec{b}} \vec{a} \cdot \dee \vec{x} &= m\int_{\vec{a}}^{\vec{b}} \frac{\dee \vec{v}}{\dee t} \cdot \dee \vec{x} \\
+&= m\int_{\vec{a}}^{\vec{b}} \dee \vec{v} \cdot \frac{\dee \vec{x}}{\dee t} \\
+&= m\int_{\vec{a}}^{\vec{b}} \vec{v} \cdot \dee \vec{v} \\
+&= \frac{1}{2}m\evalat{\vec{v}^2}_{\vec{a}^{\vec{b}}} \\
+&= \frac{1}{2}m\evalat{v^2}_{\vec{a}^{\vec{b}}} \\
 &= \frac{1}{2}mb^2 - \frac{1}{2}ma^2 = \Delta W_K \\
-\end{align}
+\end{aligned}
 $$
 
 In short, the WKE theorem states that $W_{net} = W_K$ - that net work is equivalent to change in kinetic energy in a system.

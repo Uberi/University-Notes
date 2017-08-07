@@ -17,10 +17,10 @@ Instructor:
 Show $\sqrt{x}(x-\sqrt{x}) = x(1-\sqrt{x})$:
 
 $$
-\begin{align}
+\begin{aligned}
 \sqrt{x}(\sqrt{x}\sqrt{x}-\sqrt{x}) &= \sqrt{x}\sqrt{x}(1-\sqrt{x}) \\
 \sqrt{x}\sqrt{x}(\sqrt{x}-1) &= \sqrt{x}\sqrt{x}(1-\sqrt{x})
-\end{align}
+\end{aligned}
 $$
 
 This is not a proof.
@@ -211,9 +211,11 @@ Set builder notation is used when there are too many elements in a set to list a
 One way of writing it is as follows (type I):
 
 $$
+\begin{aligned}
 \set{x \in \mb{R} \middle | 0 \le x < 2} \\
 \set{x \in \mb{N} : 6 \mid n} = \set{6, 12, 18, 24} \\
-\set{\text{var} \in \text{domain (} \middle | \text{ or } : \text{) open_sentence}}
+\set{\text{var} \in \text{domain (} \middle | \text{ or } : \text{) open\_sentence}}
+\end{aligned}
 $$
 
 "Set of $\text{var}$ in $\text{domain}$ such that $\text{open sentence}$"
@@ -694,14 +696,14 @@ We can write $d = gcd(a, b)$, provided all of the following are true:
 Also, $0 = \gcd(a, b)$, rather than undefined. This is to smooth out certain operations. The GCD is always positive.
 
 $$
-\begin{align}
+\begin{aligned}
 \gcd(8, 15) &= 1 \\
 \gcd(-6, -15) &= 3 \\
 \gcd(10, 0) &= 10 \\
 \gcd(0, 0) &= 0 \\
 \gcd(a, 0) &= \abs{a} \\
 \gcd(a, b) &= \gcd(b, a) \\
-\end{align}
+\end{aligned}
 $$
 
 Proposition: $\forall x \in \mb{Z}, \gcd(n, n + 1) = 1$.
@@ -832,14 +834,14 @@ We start by constructing a table, always with the same initial configuration:
 Then, we construct the rows after them with their recursive definitions:
 
 $$
-\begin{align}
+\begin{aligned}
 q_1 &= 0 \\
 q_2 &= 0 \\
 q_n &= \floor{\frac{r_{n - 2}}{r_{n - 1}}} \\
 r_n &= r_{n - 2} - q_n \cdot r_{n - 1} \\
 x_n &= x_{n - 2} - q_n \cdot x_{n - 1} \\
 y_n &= y_{n - 2} - q_n \cdot y_{n - 1} \\
-\end{align}
+\end{aligned}
 $$
 
 We stop when r_n = 0. The value of $r$ in the row before this is the GCD.
@@ -893,7 +895,7 @@ Consider $42042x + 1071y = gcd(42042, 1071) = 21$. How do we find $x$ and $y$?
 
 > Consider the GCD calculated with GCD-WR:  
 > $$
-\begin{align}
+\begin{aligned}
 42042 &= 39 \cdot 1071 + 273 \\
 \gcd(42042, 1071) &= \gcd(1071, 273) \\
 1071 &= 3 \cdot 273 + 252 \\
@@ -903,7 +905,7 @@ Consider $42042x + 1071y = gcd(42042, 1071) = 21$. How do we find $x$ and $y$?
 252 &= 12 \cdot 21 + 0 \\
 \gcd(252, 21) &= \gcd(21, 0) \\
 &= 21 \\
-\end{align}
+\end{aligned}
 $$  
 > Write the last value as a linear combination of the previous values: $21 = 273 - 1 \cdot 252$.  
 > Rewrite term: $21 = 273 - 1 \cdot (1071 - 3 \cdot 273)$.  
@@ -1929,7 +1931,7 @@ We generally denote complex variables with $w$ and $z$ rather than $x$ and $y$. 
 
 ### Sum/Difference
 
-Let $w = a + bi$ and $z = c + di$.
+Let $w = a + b\imag$ and $z = c + d\imag$.
 
 $w$ and $z$ are **equal** if and only if $a = c \wedge b = d$. In other words, their real and imaginary parts are equal.
 
@@ -2029,7 +2031,7 @@ Proof of fourth:
 
 > Clearly, $\abs{z}, \abs{w}, \abs{zw}$ are non-negative real numbers.  
 > So we can just prove $\abs{zw}^2 = \abs{z}^2 \abs{w}^2$.  
-> Let $z = a + b\imag, w = c + di$. So $\abs{zw}^2 = (ac - bd)^2 + (ad + bc)^2 = (a^2 + b^2)(c^2 + d^2) = \abs{z}^2 \abs{w}^2$.  
+> Let $z = a + b\imag, w = c + d\imag$. So $\abs{zw}^2 = (ac - bd)^2 + (ad + bc)^2 = (a^2 + b^2)(c^2 + d^2) = \abs{z}^2 \abs{w}^2$.  
 
 The rest is either trivial to prove or I'm too tired to.
 

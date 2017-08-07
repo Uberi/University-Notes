@@ -443,9 +443,11 @@ For perfectly inelastic demand, the demand curve is vertical. The quantity deman
 For perfectly elastic demand, the demand curve is horizontal. The quantity demanded is highly dependent on the price. For example, in agriculture markets a slight decrease in price means much more demand.
 
 $$
-\text{own elasticity} = \frac{\text{% change in demand}}{\text{% change in price}} \\
-\text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
-\text{% change in price} = \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
+\begin{aligned}
+\text{own elasticity} &= \frac{\text{\% change in demand}}{\text{\% change in price}} \\
+\text{\% change in demand} &= \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
+\text{\% change in price} &= \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
+\end{aligned}
 $$
 
 According to the law of demand, the **own price elasticity is always negative**. This is because demand is inversely correlated to price.
@@ -516,9 +518,11 @@ This measures the effect changes in the price of substitutes and complements on 
 Instead of using the percentage change in the price of a good itself, we use the percentage change in the price of a substitute or a complement.
 
 $$
-\text{cross elasticity} = \frac{\text{% change in demand}}{\text{% change in price of substitute or complement}} \\
-\text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
-\text{% change in price of substitute or complement} = \frac{\text{new price of substitute or complement} - \text{old price of substitute or complement}}{\frac{\text{new price of substitute or complement} + \text{old price of substitute or complement}}{2}} \\
+\begin{aligned}
+\text{cross elasticity} &= \frac{\text{\% change in demand}}{\text{\% change in price of substitute or complement}} \\
+\text{\% change in demand} &= \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
+\text{\% change in price of substitute or complement} &= \frac{\text{new price of substitute or complement} - \text{old price of substitute or complement}}{\frac{\text{new price of substitute or complement} + \text{old price of substitute or complement}}{2}} \\
+\end{aligned}
 $$
 
 Using this, we can determine whether a good is a substitute or a complement:
@@ -534,9 +538,11 @@ This measures the effect of changes in income on demand.
 Instead of using the percentage change in the price of a good itself, we use the percentage change in income.
 
 $$
-\text{income elasticity} = \frac{\text{% change in demand}}{\text{% change in income}} \\
-\text{% change in demand} = \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
-\text{% change in income} = \frac{\text{new income} - \text{old income}}{\frac{\text{new income} + \text{old income}}{2}} \\
+\begin{aligned}
+\text{income elasticity} &= \frac{\text{\% change in demand}}{\text{\% change in income}} \\
+\text{\% change in demand} &= \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
+\text{\% change in income} &= \frac{\text{new income} - \text{old income}}{\frac{\text{new income} + \text{old income}}{2}} \\
+\end{aligned}
 $$
 
 Using this, we can determine whether a good is a normal good or an inferior good:
@@ -552,9 +558,11 @@ Using this, we can determine whether a good is a normal good or an inferior good
 The **elasticity of supply** measures the responsiveness of the quantity supplied to a change in the price of a good, all other influences being constant.
 
 $$
-\text{own elasticity} = \frac{\text{% change in supply}}{\text{% change in price}} \\
-\text{% change in supply} = \frac{\text{new supply} - \text{old supply}}{\frac{\text{new supply} + \text{old supply}}{2}} \\
-\text{% change in price} = \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
+\begin{aligned}
+\text{own elasticity} &= \frac{\text{\% change in supply}}{\text{\% change in price}} \\
+\text{\% change in supply} &= \frac{\text{new supply} - \text{old supply}}{\frac{\text{new supply} + \text{old supply}}{2}} \\
+\text{\% change in price} &= \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
+\end{aligned}
 $$
 
 **Perfectly inelastic supply** has a vertical supply curve - supply is fixed regardless of price. For example, Picasso's paintings are fixed in number, and cannot have any more produced.

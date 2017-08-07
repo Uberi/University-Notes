@@ -376,7 +376,7 @@ If the random variable $X$ takes on values $a_1, \ldots, a_n$ where each value i
 
 The probability of observing any of these is simply $\frac 1 {b - a + 1}$. The most common example of this is the rolling of a 6 sided dice several times.
 
-The cumulative distribution function would be $F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &\text{if } x < 1 \\ \frac \floor{x} {b - a + 1} &\text{if } 1 \le x \le 6 \\ 1 &\text{if } x > 6 \end{cases}$.
+The cumulative distribution function would be $F(x) = \sum_{u \le x} \frac 1 {b - a + 1} = \begin{cases} 0 &\text{if } x < 1 \\ \frac{\floor x}{b - a + 1} &\text{if } 1 \le x \le 6 \\ 1 &\text{if } x > 6 \end{cases}$.
 
 If a 6-sided die is rolled 3 times, what is $F_X(x)$ and $f_X(x)$ where $x$ is the largest value rolled?
 
@@ -581,8 +581,7 @@ Independent events means that events occur independent of each other - observing
 
 Individual events means that $P(\text{2 or more events in same interval } (t, t + \Delta t)) = o(\Delta t)$ - that the probability of two events occurring in the same interval becomes negligible when $\Delta t \to 0$. In other words, in any interval $(t, t + \Delta t)$ there is either 1 or 0 events occurring, and the probability that two or more events occur is negligible.
 
-Hommogeneity/uniformity means that the events occur at a uniform rate $\lambda$ over some dimension (usually time or space) so that $P(\text{one event in interval } (t, t + \
-Delta t)) = \lambda \Delta t o(\Delta t)$.
+Hommogeneity/uniformity means that the events occur at a uniform rate $\lambda$ over some dimension (usually time or space) so that $P(\text{one event in interval } (t, t + \Delta t)) = \lambda \Delta t o(\Delta t)$.
 
 If a process/experiment satisfies these three properties, then it is a **Poisson process** and $\mu = \lambda t$.
 

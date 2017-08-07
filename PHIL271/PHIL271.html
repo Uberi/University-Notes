@@ -10,9 +10,68 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso.light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -43,33 +102,7 @@
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h1 id="phil271">PHIL271</h1>
 <p>Philosophy of math - ten philosophical puzzles about mathematics. This is listed in the undergraduate calendar as &quot;Special Topics&quot;, and there are usually different topics for this course every term.</p>
 <pre><code>Section 001
@@ -82,11 +115,11 @@ david.devidi@uwaterloo.ca</code></pre>
 <h2 id="infinity">Infinity</h2>
 <p>What is infinity? Colloquially, it can be said to be a value that is larger than any number that can be conceived of. However, these sorts of explanations tend to run into trouble in practice. Throughout the years, infinity has been described as something that is unlimited, unbounded, or even beyond comprehension.</p>
 <p>A <strong>potential infinity</strong> is a process that doesn't end. For example, the natural numbers are a sequence without an ending, and infinity simply denotes the direction that it grows toward, rather than some thing or value we actually reach. An <strong>actual/completed infinity</strong> is an unending quantity that we actually reach - the process actually completes. Most historical philosophers thought that potential infinities exist, but completed infinities do not. Eventually, as the field of mathematics advanced, completed infinities became necessary.</p>
-<p>However, accepting completed infinities has some nonintuitive consequences. For example, it was previously thought that for any particular thing, the whole thing would be greater than the sum of its parts. With infinite sized sets, this isn't necessarily true. For example, we can make a bijection between the set <span class="math inline">\(\set{n \middle| n \in \mb{N}}\)</span> and <span class="math inline">\(\set{n + 1 \middle| n \in \mb{N}}\)</span> with <span class="math inline">\(f(x) = x + 1\)</span>, yet the second set is only a part of the first (all the same elements, except for <span class="math inline">\(1\)</span>). Essentially, even though we took out an item, it seems like the set remained the same size.</p>
+<p>However, accepting completed infinities has some nonintuitive consequences. For example, it was previously thought that for any particular thing, the whole thing would be greater than the sum of its parts. With infinite sized sets, this isn't necessarily true. For example, we can make a bijection between the set <span class="math inline">\set{n \middle| n \in \mb{N}}</span> and <span class="math inline">\set{n + 1 \middle| n \in \mb{N}}</span> with <span class="math inline">f(x) = x + 1</span>, yet the second set is only a part of the first (all the same elements, except for <span class="math inline">1</span>). Essentially, even though we took out an item, it seems like the set remained the same size.</p>
 <p>Dedikind actually used this to define infinity: as something that is the same size as one of its parts. Anything that doesn't obey &quot;the whole is the same size as the sum of its parts&quot;, he said, would be called infinity.</p>
-<p>Cantor had a different view. He started by defining finite as something that could be bijected with some fragment of the natural numbers - that there exists a natural number <span class="math inline">\(n\)</span> such that all natural numbers up to <span class="math inline">\(n\)</span> can be put in a one to one correspondence to that thing. Then, infinity can be defined as anything that isn't finite.</p>
+<p>Cantor had a different view. He started by defining finite as something that could be bijected with some fragment of the natural numbers - that there exists a natural number <span class="math inline">n</span> such that all natural numbers up to <span class="math inline">n</span> can be put in a one to one correspondence to that thing. Then, infinity can be defined as anything that isn't finite.</p>
 <p>Cantor also showed, through the diagonalization argument, that positive rational numbers can be bijected with the natural numbers. In other words, the number of fractions is the same as the number of natural numbers. However, note that the numerators and denominators of rational numbers are both also just natural numbers, so the set of natural numbers is the same size as the Cartesian product of the set of natural numbers - there are an &quot;infinity of infinities&quot;, so to speak.</p>
-<p>Infinity makes arithmetic weirder. For finite numbers, <span class="math inline">\(ab = bc \wedge b \ne 0 \implies a = c\)</span>. For infinite numbers, this no longer applies.</p>
+<p>Infinity makes arithmetic weirder. For finite numbers, <span class="math inline">ab = bc \wedge b \ne 0 \implies a = c</span>. For infinite numbers, this no longer applies.</p>
 <h2 id="sets-and-foundationalist-mathematics">Sets and Foundationalist Mathematics</h2>
 <p>Historically, not all numbers came into use all at once. The natural numbers came first, and then zero (originally used as a placeholder for numbers like 10), and then negative numbers, rational numbers, irrational numbers, and finally, imaginary numbers.</p>
 <p>Kronecker argued that we should only say mathematical objects exist if they can be constructed from the integers - rationals being pairs of integers, reals as a sequence of rationals, and so on. To Kronecker, anything that could not be constructed out of integers simply didn't exist.</p>
@@ -113,12 +146,12 @@ david.devidi@uwaterloo.ca</code></pre>
 <p>Platonists say that because we must use math to formulate our best mathematical theories, mathematical objects must exist.</p>
 <p>Plebani argues against the Platonist view of this, that mathematical objects must exist because they are indispensible in our theories of the world. The Plebani reading is essentially a refutation of Quine's argument. He basically says, &quot;even if the premise of math being indispensible is correct, it doesn't support the conclusion that mathematical objects exist&quot;.</p>
 <p>Plebani does this by constructing an argument that has the same form, but gives an absurd result - reductio ad absurdum. Plebani formulates Quine's argument in simpler terms:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>We can't represent a complex world unless we are using numbers.</li>
 <li>Therefore, we can't represent a complex world lacking numbers - numbers must exist!</li>
 </ol>
 <p>Plebani substitutes some nouns and gets the following absurd argument:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Person A can't see person B unless Person A is using glasses.</li>
 <li>Therefore, Person A can't see Person B unless Person B is using glasses.</li>
 </ol>
@@ -152,12 +185,12 @@ david.devidi@uwaterloo.ca</code></pre>
 <p>Instead, she proposes an alternative argument for fictionalism: whether objects really exist don't make any difference to whether our empirical theories are successful in making predictions, as opposed to things like electrons, which, if they didn't exist, would be very obvious in our world. So if numbers stopped existing tomorrow, there wouldn't really be a difference, which is evidence that truth isn't required in mathematical claims.</p>
 <h1 id="section-3">30/5/16</h1>
 <p>In the mid-20th century, there was a big movement to reduce all of mathematics to naive set theory. If mathematics can all be reduced to sets, then we can anchor and ensure that they're correct simply by proving properties of those sets.</p>
-<p>In naive set theory, a set is the collection of all distinct items that satisfy a predicate associated with that set. For example, the empty set can be defined as <span class="math inline">\(\set{x \middle| x \ne x}\)</span>. If we call this set &quot;0&quot;, we can define &quot;1&quot; as <span class="math inline">\(\set{x \middle| x = 0}\)</span>, &quot;2&quot; as <span class="math inline">\(\set{x \middle| x = 1}\)</span>, and so on, as <span class="math inline">\(n + 1\)</span> = . This is sort of like the <span class="math inline">\(0, \mathrm{succ}(x)\)</span> mechanism for non-negative numbers. From this we can define addition, multiplication, exponentiation, and so on.</p>
-<p>Benacerraf concludes that since there are multiple different ways to construct numbers using sets, none of them can be correct - how can 2 be both the representation in one way of constructing sets, but also a different representation in another way of constructing sets? For example, 3 could be represented in sets as <span class="math inline">\(\set{0, 1, 2}\)</span> or <span class="math inline">\(\set{2}\)</span>, but <span class="math inline">\(\set{0, 1, 2}\)</span> does not equal <span class="math inline">\(\set{2}\)</span>.</p>
+<p>In naive set theory, a set is the collection of all distinct items that satisfy a predicate associated with that set. For example, the empty set can be defined as <span class="math inline">\set{x \middle| x \ne x}</span>. If we call this set &quot;0&quot;, we can define &quot;1&quot; as <span class="math inline">\set{x \middle| x = 0}</span>, &quot;2&quot; as <span class="math inline">\set{x \middle| x = 1}</span>, and so on, as <span class="math inline">n + 1</span> = . This is sort of like the <span class="math inline">0, \mathrm{succ}(x)</span> mechanism for non-negative numbers. From this we can define addition, multiplication, exponentiation, and so on.</p>
+<p>Benacerraf concludes that since there are multiple different ways to construct numbers using sets, none of them can be correct - how can 2 be both the representation in one way of constructing sets, but also a different representation in another way of constructing sets? For example, 3 could be represented in sets as <span class="math inline">\set{0, 1, 2}</span> or <span class="math inline">\set{2}</span>, but <span class="math inline">\set{0, 1, 2}</span> does not equal <span class="math inline">\set{2}</span>.</p>
 <p>Benacerraf is a realist about mathematics - this conclusion is only an issue because we believe that numbers actually exist.</p>
-<p>One way we can resolve this is by saying that the 3 isn't the abstract quantity 3, but actually <span class="math inline">\(\set{2} = 3_{\text{in this particular way of constructing sets}}\)</span>. Alternatively, we could say that &quot;this set represents so-and-so number&quot; is actually a special operator, so actually <span class="math inline">\(\set{2} =_{\text{represents in this particular way of constructing sets}} 3\)</span>. However, if we do this, it's no longer reduction, and we can't say we've really reduced numbers into set theory.</p>
+<p>One way we can resolve this is by saying that the 3 isn't the abstract quantity 3, but actually <span class="math inline">\set{2} = 3_{\text{in this particular way of constructing sets}}</span>. Alternatively, we could say that &quot;this set represents so-and-so number&quot; is actually a special operator, so actually <span class="math inline">\set{2} =_{\text{represents in this particular way of constructing sets}} 3</span>. However, if we do this, it's no longer reduction, and we can't say we've really reduced numbers into set theory.</p>
 <p>Generalizing, one way of constructing numbers might say &quot;3 is a member of 7&quot;, while another way might say &quot;7 is a member of 3&quot;. For any way of constructing numbers, as Benacerraf says, there's another way that will result in contradictory results.</p>
-<p>In fact, according to Benaceraff, numbers are not objects at all - <strong>numbers are places within a certain structure</strong>. As a result, asking questions about number identity doesn't make sense, since they're not actually things that have identity, just a part of a progression of structure - <strong>structuralism</strong>. For example, what says that <span class="math inline">\(0.9999\ldots = 1\)</span>, if each unique number is a distinct objects? If they were positions within a structure, then we could say they are equal because they have the same position within the structure.</p>
+<p>In fact, according to Benaceraff, numbers are not objects at all - <strong>numbers are places within a certain structure</strong>. As a result, asking questions about number identity doesn't make sense, since they're not actually things that have identity, just a part of a progression of structure - <strong>structuralism</strong>. For example, what says that <span class="math inline">0.9999\ldots = 1</span>, if each unique number is a distinct objects? If they were positions within a structure, then we could say they are equal because they have the same position within the structure.</p>
 <p>One issue with structuralism is that it addresses higher-level problems than what we're dealing with - how can we talk about identity if we don't know the nature of what we're trying to determine the identity of?</p>
 <p>Another criticises the vagueness in the definition of structuralism - what is structure? If we lived in a universe that had no structure whatsoever, would there still be numbers?</p>
 <p>Ante Rem (before the thing) structuralism says that structures exist without any instantiations, while In Re (in the thing) says that structure is the thing that is shared between all physical instantiations of that structure. With Ante Rem numbers, the criticism is that it's no better than just Platonic numbers - what's the point of adding all this complexity for no apparent philisophical improvement? All of the issues of Platonic numbers also apply to Ante Rem structuralism. With In Re numbers, the criticism is that not all imaginable structures will exist physically in the universe, and if the structure doesn't exist, it seems that the corresponding numbers don't actually exist.</p>
@@ -271,7 +304,7 @@ david.devidi@uwaterloo.ca</code></pre>
 <p>Note that in axiomatic set theory, every property still defines a proper class, but only well-behaved properties (properties that don't lead to paradoxes) define sets - there's a proper class of all sets, but no set of all sets.</p>
 <p>However, Godel's incompleteness theorems raised some issues in axiomatic set theory. The second incompleteness theorem says that any axiomatic theory that is strong enough to do arithmetic in can't be used to prove itself to be consistent (in other words, we can't use the theory to prove that it can't prove a contradiction). So we can only prove ZFC is consistent using a stronger theory, like Morse Kelly set theory, which is actually less likely to be consistent (because it can prove more things). Therefore, our confidence in our set theory axioms is mostly derived from the fact that nobody has proved it inconsistent yet.</p>
 <p>Traditionally, a set is a collection of unique discrete objects. For our purposes, a set is an unstructured object, and the identity of a set is its contents - any set with the same contents are the exact same set.</p>
-<p>Structuralists say that mathematics is the study of structure. For example, number theory is about the structure of numbers, while group theory is about classes of structure. Even though sets are themselves unstructured, we can arrange them to obtain structure. The universe of sets is usually denoted <span class="math inline">\(V\)</span>. However, structuralists consider this sort of technique of building numbers out of sets unnatural/artificial. For example, there are many different ways to define natural numbers using sets, but no particular way is obviously the best way - all these different representations are scattered around <span class="math inline">\(V\)</span>. Also, structuralists dislike the distinction between identity and equality, like how natural numbers in two different set representations are equal, but not the same.</p>
+<p>Structuralists say that mathematics is the study of structure. For example, number theory is about the structure of numbers, while group theory is about classes of structure. Even though sets are themselves unstructured, we can arrange them to obtain structure. The universe of sets is usually denoted <span class="math inline">V</span>. However, structuralists consider this sort of technique of building numbers out of sets unnatural/artificial. For example, there are many different ways to define natural numbers using sets, but no particular way is obviously the best way - all these different representations are scattered around <span class="math inline">V</span>. Also, structuralists dislike the distinction between identity and equality, like how natural numbers in two different set representations are equal, but not the same.</p>
 <p>Category theory is a structuralist attempt to explain what mathematics is about, in terms of how we actually do mathematics. A category is determined by objects, arrows between objects, and some axioms - the category is a collection of objects and the structure between them. The idea is to use categories to study the structure of mathematical objects - how we know two structures are fundamentally the same structure.</p>
 <p>In category theory, there's no principled distinction between objects and arrows; for example, the arrows in one category might correspond to objects in the other. The important part of category theory is the form/structure itself.</p>
 <p>One criticism of category theory is that it is stronger, so that it's less likely to be consistent. Also, if we try to make mathematical objects out of categories, we end up having to use discrete categories, which are like sets, so it really doesn't have any advantages over just set theory. Bell suggests that category-theoretic set theory is the best way to get the advantages of both set theory and category theory. In other words, the foundation of mathematics should be the category of toposes.</p>
@@ -280,14 +313,5 @@ david.devidi@uwaterloo.ca</code></pre>
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

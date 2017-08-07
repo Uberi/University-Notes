@@ -47,9 +47,68 @@ code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Ann
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js" type="text/javascript"></script>
+  <script src="../katex/katex.min.js"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 1);
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits",
+        "\\not": "\\cancel", //wip: looks off
+        "\\bm": "\\mathbf", //wip: not italic
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
-<body onload="highlight()">
+<body>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -80,33 +139,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="divider"></span>
     <li><a href="https://keybase.io/uberi" class="info">public key</a></li>
   </ul>
-<p style="display:none"><span class="math">\[
-\newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\tup}[1]{\left\langle #1 \right\rangle}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1 \right\rceil}
-\newcommand{\mb}[1]{\mathbb{#1}}
-\newcommand{\rem}{\operatorname{rem}}
-\newcommand{\sign}{\operatorname{sign}}
-\newcommand{\imag}{\boldsymbol{i}}
-\newcommand{\dee}{\mathop{}\!\mathrm{d}}
-\newcommand{\lH}{\overset{\text{l'H}}{=}}
-\newcommand{\evalat}[1]{\left.\left(#1\right)\right|}
-\newcommand{\sech}{\operatorname{sech}}
-\newcommand{\spn}{\operatorname{Span}}
-\newcommand{\proj}{\operatorname{proj}}
-\newcommand{\prp}{\operatorname{perp}}
-\newcommand{\refl}{\operatorname{refl}}
-\newcommand{\magn}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\sys}[2]{\left[ #1 \mid #2\hskip2pt \right]}
-\newcommand{\range}{\operatorname{Range}}
-\newcommand{\adj}{\operatorname{adj}}
-\newcommand{\cof}{\operatorname{cof}}
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\formlp}{\operatorname{Form}(\mathcal{L}^P)}
-\]</span></p>
+<div class="status-banner" style="display: none"><div>Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...</div></div>
 <h1 id="psych256">PSYCH256</h1>
 <p>Introduction to Cognitive Science.</p>
 <pre><code>Phil Bériault
@@ -137,45 +170,45 @@ Office: HH 337</code></pre>
 <p>One of the most useful things we can use logic for is to determine the strength of an argument - whether we should be convinced or not. Generally, there's a consensus that the strength of an argument is determined solely from its form (the argument must use valid logical reasoning for the premises to support the conclusion) and content (the premises must actually already be believed if we are to be convinced).</p>
 <p>Overview of argumentation and propositional logic goes here. See PHIL110A and PHIL145 notes for details.</p>
 <p>A <strong>syllogism</strong> is an argument that has exactly two premises. Aristotle was first to discover that certain forms of arguments have their premises always support their conclusion - he discovered valid argument forms.</p>
-<p>For some strange reason, this course also uses the nonstandard symbols <span class="math inline">\(\to\)</span> and <span class="math inline">\(\subset\)</span> to represent <span class="math inline">\(\implies\)</span>. All of these operators should be considered equivalent.</p>
-<p>Propositional logic uses uppercase letters to represent variables, and the usual logical operators such as <span class="math inline">\(\wedge, \vee, \implies\)</span> to form statements that are either true or false.</p>
+<p>For some strange reason, this course also uses the nonstandard symbols <span class="math inline">\to</span> and <span class="math inline">\subset</span> to represent <span class="math inline">\implies</span>. All of these operators should be considered equivalent.</p>
+<p>Propositional logic uses uppercase letters to represent variables, and the usual logical operators such as <span class="math inline">\wedge, \vee, \implies</span> to form statements that are either true or false.</p>
 <p><strong>Predicate logic</strong> is an extension of propositional logic, much like we learned in CS245. It basically allows us to express variables in a more fine-grained way.</p>
-<p>Lowercase letters, such as <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, represent objects, while uppercase letters, such as <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, represent properties/relations (relations in the CS245 sense, which result in either true or false).</p>
-<p>So if <span class="math inline">\(T(a, b) = a \text{is taller than } b\)</span> and <span class="math inline">\(x\)</span> is Bill and <span class="math inline">\(y\)</span> is Tina, then <span class="math inline">\(T(x, y)\)</span> (or <span class="math inline">\(Txy\)</span> for short) means &quot;Bill is taller than Tina&quot;.</p>
+<p>Lowercase letters, such as <span class="math inline">x</span> and <span class="math inline">y</span>, represent objects, while uppercase letters, such as <span class="math inline">A</span> and <span class="math inline">B</span>, represent properties/relations (relations in the CS245 sense, which result in either true or false).</p>
+<p>So if <span class="math inline">T(a, b) = a \text{is taller than } b</span> and <span class="math inline">x</span> is Bill and <span class="math inline">y</span> is Tina, then <span class="math inline">T(x, y)</span> (or <span class="math inline">Txy</span> for short) means &quot;Bill is taller than Tina&quot;.</p>
 <p>Predicate logic also has the universal and existential quantifiers, which work much as you'd expect. There are also a lot of common valid forms in predicate logic, and many of them are simply extended versions of the common valid forms in propositional logic.</p>
-<p>For example, <span class="math inline">\(\forall x, G(x) \implies B(x)\)</span> and <span class="math inline">\(\forall x, B(x) \implies W(x)\)</span> supports the conclusion that <span class="math inline">\(\forall x, G(x) \implies W(x)\)</span>. &quot;All men are mortal; Socrates is a man; so Socrates is mortal&quot; can be written as follows:</p>
+<p>For example, <span class="math inline">\forall x, G(x) \implies B(x)</span> and <span class="math inline">\forall x, B(x) \implies W(x)</span> supports the conclusion that <span class="math inline">\forall x, G(x) \implies W(x)</span>. &quot;All men are mortal; Socrates is a man; so Socrates is mortal&quot; can be written as follows:</p>
 <blockquote>
-<p>Let <span class="math inline">\(M(x)\)</span> represent <span class="math inline">\(x \text{ is a man}\)</span>, <span class="math inline">\(D(x)\)</span> represent <span class="math inline">\(x \text{ is mortal}\)</span>, and <span class="math inline">\(s\)</span> represent Socrates.<br />
-<span class="math inline">\(\forall x, M(x) \implies D(x)\)</span>.<br />
-<span class="math inline">\(M(s)\)</span>.<br />
-Therefore, <span class="math inline">\(D(s)\)</span>.</p>
+<p>Let <span class="math inline">M(x)</span> represent <span class="math inline">x \text{ is a man}</span>, <span class="math inline">D(x)</span> represent <span class="math inline">x \text{ is mortal}</span>, and <span class="math inline">s</span> represent Socrates.<br />
+<span class="math inline">\forall x, M(x) \implies D(x)</span>.<br />
+<span class="math inline">M(s)</span>.<br />
+Therefore, <span class="math inline">D(s)</span>.</p>
 </blockquote>
 <p><strong>Probabilistic logic</strong> allows us to represent arguments that are not necessarily valid, but are still useful to consider, generally because the premises being true makes the conclusion likely to be true, even if it's not certain.</p>
 <p>To review, some commonly used probability rules are:</p>
 <ul>
-<li><span class="math inline">\(P(\neg x) = 1 - P(x)\)</span>.</li>
-<li>If <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are mutually exclusive events, then <span class="math inline">\(P(x \vee y) = P(x) + P(y)\)</span>.</li>
-<li>If <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are independent events, then <span class="math inline">\(P(x \wedge y) = P(x) P(y)\)</span>.</li>
-<li><span class="math inline">\(P(x \mid y) = \frac{P(x \wedge y)}{P(y)}\)</span>.</li>
+<li><span class="math inline">P(\neg x) = 1 - P(x)</span>.</li>
+<li>If <span class="math inline">x</span> and <span class="math inline">y</span> are mutually exclusive events, then <span class="math inline">P(x \vee y) = P(x) + P(y)</span>.</li>
+<li>If <span class="math inline">x</span> and <span class="math inline">y</span> are independent events, then <span class="math inline">P(x \wedge y) = P(x) P(y)</span>.</li>
+<li><span class="math inline">P(x \mid y) = \frac{P(x \wedge y)}{P(y)}</span>.</li>
 </ul>
 <p>Probabilistic arguments aren't formalized as much because they rely a lot more on the context and the content of the argument themselves, rather than the form. As a result, we mostly just evaluate whether probabilistic arguments are strong or not.</p>
-<p>A probabilistic argument is strong if and only if, when given that the premises are true, the conclusion is a lot more likely to be true than false: <span class="math inline">\(P(y \mid (x_1 \wedge \ldots \wedge x_n))\)</span> should be a lot more than <span class="math inline">\(P(\neg y \mid (x_1 \wedge \ldots \wedge x_n))\)</span>. Since the latter is just <span class="math inline">\(1 - P(y \mid (x_1 \wedge \ldots \wedge x_n))\)</span>, we could also just say an argument is strong if and only if <span class="math inline">\(P(y \mid (x_1 \wedge \ldots \wedge x_n))\)</span> is a lot better than 0.5.</p>
-<p>Consider the following argument: &quot;There are no dinosaurs around. Therefore, my dinosaur repellant is working.&quot;. It's easy to see that this is not a strong argument, because <span class="math inline">\(P(W \mid B)\)</span> is about the same as <span class="math inline">\(P(\neg W \mid B)\)</span>, where <span class="math inline">\(W\)</span> is the event of the dinosaur repellant working, and <span class="math inline">\(B\)</span> is the event of dinosaurs not being around. When we don't know whether events are likely or not, we often just use 0.5 as a placeholder for its probability.</p>
+<p>A probabilistic argument is strong if and only if, when given that the premises are true, the conclusion is a lot more likely to be true than false: <span class="math inline">P(y \mid (x_1 \wedge \ldots \wedge x_n))</span> should be a lot more than <span class="math inline">P(\neg y \mid (x_1 \wedge \ldots \wedge x_n))</span>. Since the latter is just <span class="math inline">1 - P(y \mid (x_1 \wedge \ldots \wedge x_n))</span>, we could also just say an argument is strong if and only if <span class="math inline">P(y \mid (x_1 \wedge \ldots \wedge x_n))</span> is a lot better than 0.5.</p>
+<p>Consider the following argument: &quot;There are no dinosaurs around. Therefore, my dinosaur repellant is working.&quot;. It's easy to see that this is not a strong argument, because <span class="math inline">P(W \mid B)</span> is about the same as <span class="math inline">P(\neg W \mid B)</span>, where <span class="math inline">W</span> is the event of the dinosaur repellant working, and <span class="math inline">B</span> is the event of dinosaurs not being around. When we don't know whether events are likely or not, we often just use 0.5 as a placeholder for its probability.</p>
 <p>Many logicians think that logical rules are actually the laws of thought, and that logic reflects how thinking is actually being done in the mind. It seems that being logical is a trait that's closely associated with being intelligent. This is far from a consensus, however.</p>
-<p>Arguments can be valid in English without being valid in, say, propositional logic. For example, &quot;all men are mortal&quot; can't really be represented in propositional logic, besides as a single variable <span class="math inline">\(M\)</span>, because we don't have things like quantifiers.</p>
+<p>Arguments can be valid in English without being valid in, say, propositional logic. For example, &quot;all men are mortal&quot; can't really be represented in propositional logic, besides as a single variable <span class="math inline">M</span>, because we don't have things like quantifiers.</p>
 <p>In the same way, logic can't represent all types of English sentences, such as questions, orders, and requests - logic focuses only on arguments. It seems like there is more than just argumentation to human thinking, and there are more than just arguments in our mental representations. However, logic is still useful for explaining many different mental manipulations.</p>
 <p>For example, <strong>deduction</strong> is a possible model for how human minds draw conclusions from available information - people might use modus ponens to figure out what the result of an implication might be. To test this theory within the classical cognitive science framework, we will look at how well it explains observed cognitive phenomena.</p>
 <p>The deduction theory explains <strong>planning</strong> quite well. For example, if I plan a route to get to the grocery store, I certainly could have been deducing that since I know how to get to point A, and how to go from point A to point B, and how to get from point B to the grocery store, and that going along multiple routes results in getting to the final point, I can go from here to point A to point B to the grocery store to get there.</p>
 <p>One objection to this is that choosing the premises and coming up with the conclusion would be extremely computationally expensive if we do it purely deductively, because there are virtually limitless other, useless deductions we could also have made, that don't result in getting to the grocery store.</p>
-<p>When there are multiple plans, we need to make <strong>decisions</strong> about which one to take, based on certain criteria and preferences. Deductive theory can explain this by using relations like <span class="math inline">\(\mathrm{prefers}(x, y) = \text{I prefer to } x \text{ over } y\)</span>.</p>
+<p>When there are multiple plans, we need to make <strong>decisions</strong> about which one to take, based on certain criteria and preferences. Deductive theory can explain this by using relations like <span class="math inline">\mathrm{prefers}(x, y) = \text{I prefer to } x \text{ over } y</span>.</p>
 <p>One objection to this is that it assumes that preferences can be ordered, and that preferences can be known before the plans are, which are rarely the case. One way to deal with this is to use probabilistic logic, which can give us probabilistic preferences that we can then use to deduce what is likely to be the most preferable solution. However, this is also very computationally expensive, since it relies on computing a lot of conditional probabilities.</p>
 <p><strong>Explanations</strong> are what we use to understand why something does or doesn't happen. Under deduction theory, this occurs by finding premises that support the conclusion that the thing did or didn't happen, such that it makes a valid argument.</p>
-<p>One objection to this is that a better way to explain explanation is that the mind generates hypotheses like &quot;<span class="math inline">\(x \implies y\)</span> and <span class="math inline">\(y\)</span>, therefore <span class="math inline">\(x\)</span> was the explanation for <span class="math inline">\(y\)</span>&quot; (this is called <strong>abduction</strong>, and is also the &quot;affirming the consequent&quot; fallacy). We can also add probabilistic logic on top to find the most likely <span class="math inline">\(x\)</span> out of many generated hypotheses. Although this is not a valid argument, it seems to work out well in a lot of cases, and humans seem to use something like this.</p>
+<p>One objection to this is that a better way to explain explanation is that the mind generates hypotheses like &quot;<span class="math inline">x \implies y</span> and <span class="math inline">y</span>, therefore <span class="math inline">x</span> was the explanation for <span class="math inline">y</span>&quot; (this is called <strong>abduction</strong>, and is also the &quot;affirming the consequent&quot; fallacy). We can also add probabilistic logic on top to find the most likely <span class="math inline">x</span> out of many generated hypotheses. Although this is not a valid argument, it seems to work out well in a lot of cases, and humans seem to use something like this.</p>
 <p>While deductive arguments can only yield information that was already in the premises of the argument, inductive and abductive arguments can generate new information, and involve a certain amount of risk that they're wrong.</p>
 <p>Even though deductive theory has a lot of problems with explaining cognition, it's still a very useful model for how people evaluate whether arguments are good or not. A valid argument is almost always considered a good one, and a logically fallacious one is often considered bad.</p>
 <p>That said, people often have trouble actually evaluating whether an argument is good or not - modus tollens is often difficult for people to apply without training. One explanation for this is that people are often more sensitive to the content of the argument than the form. According to Johnson-Laird and Byrne, people build a mental model of the situation, including only features of it that are contained in the argument and excluding the parts that aren't, then reason over that mental model. Since the mental model is missing features that aren't mentioned in the argument, people wouldn't consider them in the reasoning.</p>
 <p>The fact that fallacies are so common seems to tell us that formal logic doesn't have that much of a role in human cognition.</p>
-<p>In experiments, thinking does not seem to match probabilistic logic very well. For example, when subjects are either asked to estimate the likelihood of someone who reads a lot being a college-educated carpenter, or asked to estimate the likelihood of someone who reads a lot being a carpenter, the responses will often say that college-educated carpenter is more likely than just being a carpenter, even though being college-educated would be independent of being a carpenter. Formally, <span class="math inline">\(P(\text{college-educated}) P(\text{carpenter})\)</span> would be greater than <span class="math inline">\(P(\text{carpenter})\)</span>, which is not possible under the rules of probability.</p>
+<p>In experiments, thinking does not seem to match probabilistic logic very well. For example, when subjects are either asked to estimate the likelihood of someone who reads a lot being a college-educated carpenter, or asked to estimate the likelihood of someone who reads a lot being a carpenter, the responses will often say that college-educated carpenter is more likely than just being a carpenter, even though being college-educated would be independent of being a carpenter. Formally, <span class="math inline">P(\text{college-educated}) P(\text{carpenter})</span> would be greater than <span class="math inline">P(\text{carpenter})</span>, which is not possible under the rules of probability.</p>
 <h1 id="section-2">20/5/16</h1>
 <h2 id="rules-and-rule-systems">Rules and Rule Systems</h2>
 <p>A <strong>rule/production</strong> is similar to a logical implication, but with a broader definition that includes actions rather than just arguments. Rules can be used to describe systems like chess: &quot;IF the king is in check AND no single move can remove it from check, THEN the other player wins&quot;.</p>
@@ -225,7 +258,7 @@ Therefore, <span class="math inline">\(D(s)\)</span>.</p>
 </ul></li>
 </ul></li>
 </ul>
-<p>How good are rules at actually representing how thoughts work? Well, in formal logic, an argument with contradicting premises results in a valid argument for anything, including both <span class="math inline">\(X\)</span> and <span class="math inline">\(\neg X\)</span>. Obviously, allowing contradictions means we can no longer say valid arguments often have true conclusions.</p>
+<p>How good are rules at actually representing how thoughts work? Well, in formal logic, an argument with contradicting premises results in a valid argument for anything, including both <span class="math inline">X</span> and <span class="math inline">\neg X</span>. Obviously, allowing contradictions means we can no longer say valid arguments often have true conclusions.</p>
 <p>Likewise, in rule-based systems we could have contradicting rules like &quot;if X then Y&quot; and &quot;if X then not Y&quot;, and arrive at totally different outcomes. However, this isn't an issue as long as the search strategy gets us from the initial conditions to the goal.</p>
 <p>One way to make this work is to allow rules to be overridden or retracted if some heuristic decides that it would be good to do so while searching, or if we detect contradictory actions. An interesting side effect of this is that the number of conclusions can actually decrease when a retraction occurs, and therefore the rule-based system wouldn't strictly be doing deduction. This model seems to mesh pretty well with how thinking seems to behave in the real world.</p>
 <p>The sequence of rules resulting from a rule-based system can be viewed as the explanation for a solution to the problem it was trying to solve. We could then think of the forward strategy as deductive explanation, and the backward strategy as abductive explanation.</p>
@@ -249,7 +282,7 @@ Therefore, <span class="math inline">\(D(s)\)</span>.</p>
 <p>Concepts have a long history - famously, Plato defined the concept of a human to be &quot;a featherless biped&quot;. However, over the years there have been different prevailing ideas about what these concepts actually are as objects. Dictionary-like definitions, abstractions/prototypes, Form-like ideal examples, explanatory categories, and many others have all been proposed as psychological bases for the concept within the mind.</p>
 <p>The view that <strong>concepts are like dictionary definitions</strong> is probably the oldest one, and is what Plato used in defining a human as a featherless biped. In this view, a concept is its definition, like how &quot;a bachelor&quot; is &quot;an unmarried man&quot;. For something to satisfy the definition, that thing must be both a man, and unmarried.</p>
 <p>While this works well for technical terms, it does rather poorly at explaining the kinds of concepts we encounter most often in real life (often known as natural-kind concepts) - some of them are very difficult to put into definition-like terms. For example, a &quot;tiger&quot; concept might be &quot;striped carnivore&quot;, yet a tiger painted all orange should still be considered a tiger. The issue is that every property of the definition is equally necessary to satisfy it, and all of the properties must be satisfied to be sufficient in satisfying the definition.</p>
-<p>Due to these limitations, we obtain the view that <strong>concepts are like abstractions/prototypes</strong> - lists of features of things that typically satisfy the concept. Then, people can judge how well a concept applies to a situation by computing the weighted sum of the features shared between the situation and the prototype, minus the weighted sum of the features that differ between the situation and the prototype - <span class="math inline">\(\operatorname{Similarity}(A, B) = a \cdot \operatorname{weight}(A \wedge B) - b \cdot \operatorname{weight}(A \setminus B) - c \cdot \operatorname{weight}(B \setminus A)\)</span>. For example, a robin is a more typical bird than a penguin because it has more of the typical bird features, but a penguin can still be considered a bird under this model.</p>
+<p>Due to these limitations, we obtain the view that <strong>concepts are like abstractions/prototypes</strong> - lists of features of things that typically satisfy the concept. Then, people can judge how well a concept applies to a situation by computing the weighted sum of the features shared between the situation and the prototype, minus the weighted sum of the features that differ between the situation and the prototype - <span class="math inline">\operatorname{Similarity}(A, B) = a \cdot \operatorname{weight}(A \wedge B) - b \cdot \operatorname{weight}(A \setminus B) - c \cdot \operatorname{weight}(B \setminus A)</span>. For example, a robin is a more typical bird than a penguin because it has more of the typical bird features, but a penguin can still be considered a bird under this model.</p>
 <p>However, there are some issues with this when we get to technical terms - isosceles triangles are generally considered more typical triangles than, say, scalene ones, though they should all be equally typical, as triangles are mathematically any three-sided object. Also, features aren't always independent like this model assumes - a big spoon is typically wooden, and a small spoon is typically metal, so metallic-ness and size are related to each other in terms of how typical a spoon an object is, but this isn't represented in the prototype model.</p>
 <p>There is also the view that <strong>concepts are their best examples or particularly good examples of that concept</strong>. Like with prototypes, we have a reference that we can obtain a similarity to for a given situation, but the similarity is either done in some way between the situation and the exemplars, or by constructing a prototype on the fly from those exemplars and computing similarity using the prototype method. Exemplar theory is interesting because it allows concepts to have variability and sizes - the concept of a vegetable just seems somehow larger than the concept of a spoon, perhaps because it has a lot more, highly varied exemplars. Also, we could have a large wooden spoon and a small metal spoon as exemplars, which seems to address the concern with prototypes storing all features independently.</p>
 <p>However, if concepts are just their examples, why do some examples group together into one concept, and others into a different one? The predictive power of this model is rather limited.</p>
@@ -273,7 +306,7 @@ Therefore, <span class="math inline">\(D(s)\)</span>.</p>
 <p>An <strong>analogy</strong> is an alignment of multiple concepts/structures, generally used to adapt knowledge from some of them for the others. Analogies help us explain human creativity, which is something that concepts have a difficult time accounting for alone. One example of an analogy is &quot;stone spear head artifacts were used for hunting, and these metal spear head artifacts are really similar to the stone ones, so they were probably used for hunting as well&quot;.</p>
 <p>Analogies are often expressed as &quot;A is to B as C is to D&quot;, alternatively written &quot;A:B :: C:D&quot;, and this is known as a <strong>proportional analogy</strong> (2 is to 4 as 6 is to 12). Here, the knowledge of the relationship between C and D is transferred and adapted to obtain knowledge about the relationship between A and B, even if A and B are very different from C and D.</p>
 <p>According to Aristotle, <strong>analogies are inductive generalizations</strong> - we generalize the relationship between C and D until it applies to A and B, and then we apply it. For example, 6:12 is a relation that multiplies by 2, so we generalize it to &quot;multiply by 2&quot; and can apply it to 2:4. Under this view, however, it is often possible to generalize something in multiple very different ways, each of which can give different results. This is a rule-based account of analogical reasoning, and often gives unreliable results when used in rule-based systems.</p>
-<p>Mill proposed a more refined way to look at it - <strong>analogies are extrapolations</strong>. We say that since both A:B and C:D share features 1 to <span class="math inline">\(n\)</span>, and since A:B has a feature <span class="math inline">\(n + 1\)</span>, C:D probably has feature <span class="math inline">\(n + 1\)</span> as well. This isn't much different from inductive generalization, though, and still suffers from unreliability when applied generally.</p>
+<p>Mill proposed a more refined way to look at it - <strong>analogies are extrapolations</strong>. We say that since both A:B and C:D share features 1 to <span class="math inline">n</span>, and since A:B has a feature <span class="math inline">n + 1</span>, C:D probably has feature <span class="math inline">n + 1</span> as well. This isn't much different from inductive generalization, though, and still suffers from unreliability when applied generally.</p>
 <p>These rule-based accounts of analogical reasoning present analogy as an unreliable source of information, and don't explain how humans do it very well. An associative view of analogy generally works better here. Modern cognitive science has many of these, one of which, multiconstraint theory, we will be studying in more depth.</p>
 <p>In <strong>multiconstraint theory</strong>, <strong>an analogy is a set of associations/alignments between two sets of concepts</strong>. One set of concepts is the <strong>source/base</strong>, which is the concept we are adapting knowledge from, and the other is the <strong>target</strong>, which we are adapting knowledge to and are trying to know more about.</p>
 <p>For example, stone spear head artifacts and metal spear head artifacts are two different concepts that we can compare, and they can be aligned along their shape, construction method, situations where we'd find them, and so on - they have <strong>attribute mappings</strong>. Likewise, they can be aligned along their relations to other things and between attributes, like how they're both generally attached to their own types of spear handles (even if they're different types of handles) - they have <strong>relational mappings</strong>. Finally, they can be aligned as systems (correspondences between relations), like how they were used for hunting because of the way they're attached to their handles - they have <strong>system mappings</strong>. These system mappings consitute the knowledge from stone spear head artifacts adapted for metal spear head artifacts - that metal ones were also used for hunting.</p>
@@ -311,7 +344,7 @@ Therefore, <span class="math inline">\(D(s)\)</span>.</p>
 <p>Classical cognitive science sees thinking as computation over mental representations. So far we've looked at rule-based systems, concept-based systems, and image-based systems. However, all of these systems have been based on creating a mind on a digital computer, while the human brain is structured nothing like our computers. We will now look at non-classical models of cognitive science.</p>
 <p>Due to the massive differences between the structure of computers and brains, <strong>connectionist models of cognition</strong> were developed, which attempt to explain cognition in terms of <strong>connected networks of neurons</strong>. In connectionism, knowledge is represented in the state of neurons and the connections between them, and thinking is the process of constraint satisfaction over those units. Additionally, all neurons operate in parallel, unlike a digital computer, which can only really do one thing at a time. Connectionist accounts of cognition are focused around satisfying constraints.</p>
 <p>A <strong>neural network</strong> consists of a set of nodes and a set of connections (known as <strong>links</strong>) between them - a directed graph with labelled edges and nodes, where the edge labels are <strong>constraint weights</strong> (generally -1 to 1) and the node labels are the neuron's <strong>activation value</strong>. Edges with negative weights are called <strong>inhibitory</strong>, edges with positive weights are called <strong>excitatory</strong>, and the magnitude is the <strong>strength</strong> of the connection.</p>
-<p>The activation level of a node (if not explicitly specified) is the value of an <strong>activation function</strong> called over sum of the activation levels of all nodes that connect to it, weighted by the constraint weight of each connection - for a node <span class="math inline">\(i\)</span>, this is <span class="math inline">\(\operatorname{activationFunction}\left(\sum_{j \in \text{nodes that connect to } i} \operatorname{activationLevel}(j) \times \operatorname{connectionWeight}(j, i)\right)\)</span>. The activation function is generally linear, Heaviside (step function), or a sigmoid function (like <span class="math inline">\(\tanh(x)\)</span>), though the sigmoid function best approximates how real neurons work, so it's the most popular.</p>
+<p>The activation level of a node (if not explicitly specified) is the value of an <strong>activation function</strong> called over sum of the activation levels of all nodes that connect to it, weighted by the constraint weight of each connection - for a node <span class="math inline">i</span>, this is <span class="math inline">\operatorname{activationFunction}\left(\sum_{j \in \text{nodes that connect to } i} \operatorname{activationLevel}(j) \times \operatorname{connectionWeight}(j, i)\right)</span>. The activation function is generally linear, Heaviside (step function), or a sigmoid function (like <span class="math inline">\tanh(x)</span>), though the sigmoid function best approximates how real neurons work, so it's the most popular.</p>
 <p>It takes time for the activation level of a node's neighbors to be updated when the activation level of that node is changed. Eventually, all node activation levels stop changing, and the system settles down into a steady state. The propagation process can be thought of as each node trying to maximize the activation level of its &quot;friends&quot; (nodes it's connected to via an excitatory link) while minimizing its &quot;enemies&quot; (nodes it's connected to via an inhibitory link).</p>
 <p>One way to do useful processing with neural networks is to use <strong>localized networks</strong> - certain nodes are assigned specific, concrete meanings. In a network that tries to categorize things into cats and dogs, one node might represent &quot;the thing we're seeing is a dog&quot;, while another node might represent &quot;the thing we're seeing is a cat&quot;.</p>
 <p>In localized connectionist models, neurons operating in parallel modify the behaviour of other neurons they're connected to (the characteristics of these modifications are known as neural constraints). According to Gestalt psychology, thinking is an optimization process: neurons constrain other neurons they're connected to, and thinking is the process of satisfying those constraints as much as possible over the whole network by changing its inputs. The network can learn new things by changing the constraint weightings.</p>
@@ -326,7 +359,7 @@ Therefore, <span class="math inline">\(D(s)\)</span>.</p>
 <p>A layer within a neural network is a collection of neurons that serve a specific purpose, such as representing the output of the neural network, or recognizing convolutions.</p>
 <p>A <strong>perceptron</strong> is a two-layer neural network with an input layer with multiple neurons and an output layer with a single neuron, where all nodes use the Heaviside activation function (step/threshold function) with a certain threshold, and there are only connections between the input neurons and the output neuron. Sometimes, we use a bias instead of a threshold, so we add the bias to the activation level and activate if and only if it's positive.</p>
 <p>Minsky and Papert proved that perceptrons can learn to exactly mimic any linearly separable Boolean functions - any function where the function values that are true can be separated from the function values that are false by a hyperplane in the function's parameter space. This includes functions like AND/OR/NOT, but not functions like XOR and XNOR. The idea is that each neuron might be represented by a perceptron.</p>
-<p>To teach a perceptron, we initialize all the weights <span class="math inline">\(W_1, \ldots, W_n\)</span> (where <span class="math inline">\(W_i\)</span> is the weight of the link between the <span class="math inline">\(i\)</span>th input neuron and the output neuron) to 0 or small random numbers. Then for each sample in the training set, if the output <span class="math inline">\(y\)</span> of the perceptron for the sample inputs <span class="math inline">\(x_1, \ldots, x_n\)</span> doesn't match the sample output <span class="math inline">\(O\)</span>, we update each weight with <span class="math inline">\(W_i = W_i + C(O - y)x_i\)</span>, where <span class="math inline">\(C\)</span> is the chosen learning rate between 0 and 1 (this is chosen by the user to maximise training effectiveness). In code:</p>
+<p>To teach a perceptron, we initialize all the weights <span class="math inline">W_1, \ldots, W_n</span> (where <span class="math inline">W_i</span> is the weight of the link between the <span class="math inline">i</span>th input neuron and the output neuron) to 0 or small random numbers. Then for each sample in the training set, if the output <span class="math inline">y</span> of the perceptron for the sample inputs <span class="math inline">x_1, \ldots, x_n</span> doesn't match the sample output <span class="math inline">O</span>, we update each weight with <span class="math inline">W_i = W_i + C(O - y)x_i</span>, where <span class="math inline">C</span> is the chosen learning rate between 0 and 1 (this is chosen by the user to maximise training effectiveness). In code:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Perceptron:
     <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, num_inputs <span class="op">=</span> <span class="dv">1</span>, threshold <span class="op">=</span> <span class="fl">0.5</span>, learning_rate <span class="op">=</span> <span class="fl">0.5</span>):
         <span class="va">self</span>.weights, <span class="va">self</span>.threshold, <span class="va">self</span>.learning_rate <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> num_inputs, threshold, learning_rate
@@ -341,10 +374,10 @@ Therefore, <span class="math inline">\(D(s)\)</span>.</p>
 <p>Minsky and Papert also speculated that there is no learning rule that guarantees that a neural network can learn to mimic an arbitrary function. This is still an open question for research, though in practice we have algorithms that can give pretty impressive results already, even if they don't work for everything. Note that neural networks can in fact mimic any continuous function - it's just that there might not necessarily be a general algorithm that teaches the network to do so.</p>
 <p>One of these learning rules is <strong>backpropagation</strong>, which is known to not be able to teach a neural network correctly for all inputs, but works great for certain problems. Backpropagation is capable of teaching 3+ layer networks functions like XOR and XNOR. Common backpropagation algorithms rely on differentiating the error function (how accurate the network is overall) with respect to each weight, and then using something like gradient descent to update the weights in order to minimize the error function.</p>
 <p>Backpropogation somewhat resembles the perceptron learning rule:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Set all weights randomly.</li>
 <li>For each sample in the training set:
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Let the network settle.</li>
 <li>Calculate the error - how far each output node is from the corresponding sample output.</li>
 <li>Update weights for links between the output layer and the previous layer according to the error: reduce weight for links going to an output neuron if it has negative error, increase weight for positive error.</li>
@@ -483,14 +516,5 @@ Likewise, a digital computer doing blind symbol manipulation can't understand an
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://uberi.github.io/" property="cc:attributionName" rel="cc:attributionURL">Anthony Zhang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
   Copyright 2013-2017 Anthony Zhang.
 </div>
-<script type="text/javascript">
-MathJax.Hub.Config({
-  jax: ["input/TeX","output/HTML-CSS"],
-  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-});
-</script>
 </body>
 </html>

@@ -1126,7 +1126,7 @@ If we add 5 meters and 5 meters, we can straighforwardly say that it represents 
 
 A percentage can represent a multiple, or a change. A 50% increase is different from something being 50% of what it was before.
 
-A percentage increase is denoted by $\text{Percentage Increase} = \frac{(\text{Later} - \text{Earlier})}{\text{Earlier}} \times 100%$.
+A percentage increase is denoted by $\text{Percentage Increase} = \frac{(\text{Later} - \text{Earlier})}{\text{Earlier}} \times 100\%$.
 
 ### Rankings
 
