@@ -104,7 +104,7 @@ Simplify $\abs{x} + y \le 1$:
 y &\le 1 - \abs{x} \\
 y &\le \begin{cases}
     1 - x &\text{if } x \ge 0 \\
-    1 + x &\text{if } x < 0 \\
+    1 + x &\text{if } x < 0
 \end{cases}
 \end{aligned}
 $$
@@ -323,7 +323,7 @@ Find the inverse of $f(x) = e^{2x + 1}$:
 \begin{aligned}
 x &= e^{2 f^{-1}(x) + 1} \\
 \ln(x) &= 2 f^{-1}(x) + 1 \\
-f^{-1}(x) &= \frac{1}{2} \ln(x) - \frac{1}{2} \\
+f^{-1}(x) &= \frac{1}{2} \ln(x) - \frac{1}{2}
 \end{aligned}
 $$
 
@@ -354,7 +354,7 @@ Parametric equations of unit circle ($x^2 + y^2 = 1$): $x = \cos \theta$ and $y 
 $$
 \begin{aligned}
 x^2 + y^2 &= 1 \\
-\sin^2 \theta + \cos^2 \theta &= 1 \\
+\sin^2 \theta + \cos^2 \theta &= 1
 \end{aligned}
 $$
 
@@ -388,7 +388,7 @@ Find the subtraction formulas:
 \sin(x - y) &= \sin x \cos(-y) + \cos x \sin(-y) \\
 &= \sin x \cos y - \cos x \sin y \\
 \cos(x - y) &= \cos x \cos(-y) - \sin x \sin(-y) \\
-&= \cos x \cos y + \sin x \sin y \\
+&= \cos x \cos y + \sin x \sin y
 \end{aligned}
 $$
 
@@ -414,7 +414,7 @@ Evaluate $\cos(\arctan \sqrt{3})$:
 \text{adjacent} &= 1 \\
 \text{hypotenuse} &= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
 \cos(\arctan \sqrt{3}) &= \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{1}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
-\cos(\arctan \sqrt{3}) &= \frac{1}{\sqrt{3 + 1}} = \frac{1}{2} \\
+\cos(\arctan \sqrt{3}) &= \frac{1}{\sqrt{3 + 1}} = \frac{1}{2}
 \end{aligned}
 $$
 
@@ -427,7 +427,7 @@ Simplify $\sin(\arctan x)$
 \text{adjacent} &= 1 \\
 \text{hypotenuse} &= \sqrt{\text{opposite}^2 + \text{adjacent}^2} \\
 \sin(\arctan x) &= \frac{\text{opposite}}{\text{hypotenuse}} = \frac{x}{\sqrt{\text{opposite}^2 + \text{adjacent}^2}} \\
-\sin(\arctan x) &= \frac{x}{\sqrt{x^2 + 1}} \\
+\sin(\arctan x) &= \frac{x}{\sqrt{x^2 + 1}}
 \end{aligned}
 $$
 
@@ -446,7 +446,7 @@ Evaluate $\arccos \left( \sin \left( -\frac{\pi}{3} \right) \right)$:
 \text{opposite} &= \sqrt{3} \\
 \text{hypotenuse} &= 2 \\
 \text{adjacent} &= \sqrt{\text{hypotenuse}^2 - \text{opposite}^2} = \sqrt{4 - 3} = 1 \\
-\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) &= \pi - \frac{\pi}{6} = \frac{5 \pi}{6} \\
+\arccos \left( \sin \left(-\frac{\pi}{3} \right) \right) &= \pi - \frac{\pi}{6} = \frac{5 \pi}{6}
 \end{aligned}
 $$
 
@@ -488,7 +488,7 @@ x = \sinh y &= \frac{e^y - e^{-y}}{2} \\
 e^y &= \frac{2x \pm \sqrt{(-2x)^2 - 4 \cdot 1 \cdot -1}}{2} = x \pm \sqrt{x^2 + 1} \\
 \text{Since } x - \sqrt{x^2 + 1} < 0 \text{, } e^y &= x - \sqrt{x^2 + 1} \text{ is extraneous.} \\
 e^y &= x + \sqrt{x^2 + 1} \\
-y &= \ln(x + \sqrt{x^2 + 1}) \\
+y &= \ln(x + \sqrt{x^2 + 1})
 \end{aligned}
 $$
 
@@ -510,7 +510,7 @@ e^y &= \pm \sqrt{\frac{x + 1}{x - 1}} \\
 \text{Since } -\sqrt{\frac{x + 1}{x - 1}} &< 0 \text{, the negative solution is extraneous.} \\
 e^y &= \sqrt{\frac{x + 1}{x - 1}} \\
 y &= \ln \left( \frac{x + 1}{x - 1} \right)^\frac{1}{2} \\
-y &= \frac{1}{2} \ln \frac{x + 1}{x - 1} \\
+y &= \frac{1}{2} \ln \frac{x + 1}{x - 1}
 \end{aligned}
 $$
 
@@ -662,7 +662,7 @@ Evaluate $\lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7}$:
 \lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} &= \lim_{x \to 7} \frac{\sqrt{x + 2} - 3}{x - 7} \frac{\sqrt{x + 2} + 3}{\sqrt{x + 2} + 3} \\
 &= \lim_{x \to 7} \frac{x - 7}{(x - 7)(\sqrt{x + 2} + 3)} \\
 &= \lim_{x \to 7} \frac{1}{\sqrt{x + 2} + 3} \\
-&= \frac{1}{6} \\
+&= \frac{1}{6}
 \end{aligned}
 $$
 
@@ -686,11 +686,11 @@ Find $\lim_{x \to 0} \frac{\abs{x}}{x}$:
 
 > Clearly, this is equivalent to $\begin{cases}
 \frac{x}{x} &\text{if } x \ge 0 \\
-\frac{-x}{x} &\text{if } x < 0 \\
+\frac{-x}{x} &\text{if } x < 0
 \end{cases}$.  
 > Clearly, this is equivalent to $\begin{cases}
 1 &\text{if } x > 0 \\
--1 &\text{if } x < 0 \\
+-1 &\text{if } x < 0
 \end{cases}$. 
 > Since the left side limit does not equal the right side limit, the limit does not exist.  
 
@@ -764,7 +764,7 @@ $$
 f(x) &= x \sin \frac{1}{x} \\
 \text{becomes } f(x) &= \begin{cases}
 x \sin \frac{1}{x} &\text{if } x \ne 0 \\
-0 &\text{if } x = 0 \\
+0 &\text{if } x = 0
 \end{cases}
 \end{aligned}
 $$
@@ -792,7 +792,7 @@ Evaluate $\lim_{x \to 0.5} \arcsin(\sqrt{1 - x^2})$:
 &= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
 &= \arcsin(\sqrt{\lim_{x \to 0.5} 1 - x^2}) \\
 &= \arcsin(\frac{\sqrt{3}}{2}) \\
-&= \frac{\pi}{3} \\
+&= \frac{\pi}{3}
 \end{aligned}
 $$
 
@@ -857,7 +857,7 @@ $$
 &= \lim_{x \to \infty} \frac{\frac{x^2}{x^2} + \frac{2}{x^2}}{\frac{3x^2}{x^2} - \frac{4x}{x^2}} \\
 &= \lim_{x \to \infty} \frac{1 + \frac{2}{x^2}}{3 - \frac{4}{x}} \\
 &= \frac{1 + 0}{3 - 0} \\
-&= \frac{1}{3} \\
+&= \frac{1}{3}
 \end{aligned}
 $$
 
@@ -871,7 +871,7 @@ Evaluate $\lim_{x \to \infty} (\sqrt{9x^2 + x} - 3x)$:
 &= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{9x^2 + x}{x^2}} + 3} \\
 &= \lim_{x \to \infty} \frac{1}{\sqrt{\frac{x^2(9 + \frac{1}{x})}{x^2}} + 3} \\
 &= \lim_{x \to \infty} \frac{1}{\sqrt{9} + 3} \\
-&= \frac{1}{6} \\
+&= \frac{1}{6}
 \end{aligned}
 $$
 
@@ -880,7 +880,7 @@ Evaluate $\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}}$:
 > $$
 \begin{aligned}
 \text{Note that } \forall x > 2, x^2 > 2x \\
-\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}} = \frac{-2}{-\infty - \sqrt{\infty - \infty}} = \frac{-2}{-\infty} = 0 \\
+\lim_{x \to -\infty} \frac{-2}{x - \sqrt{x^2 - 2x}} = \frac{-2}{-\infty - \sqrt{\infty - \infty}} = \frac{-2}{-\infty} = 0
 \end{aligned}
 $$
 
@@ -893,7 +893,7 @@ e^{-x} &= \frac{1}{e^x} \\
 \lim_{x \to \infty}  e^{-x} &= 0 \\
 \text{By the squeeze theorem: } \lim_{x \to \infty}  e^{-x} \cdot -1 &\le \lim_{x \to \infty}  e^{-x} \sin x \le \lim_{x \to \infty}  e^{-x} \cdot 1 \\
 0 &\le \lim_{x \to \infty}  e^{-x} \sin x \le 0 \\
-\lim_{x \to \infty}  e^{-x} \sin x &= 0 \\
+\lim_{x \to \infty}  e^{-x} \sin x &= 0
 \end{aligned}
 $$
 
@@ -922,7 +922,7 @@ Evaluate $\lim_{x \to 1} \frac{\sqrt{x} - x^2}{1 - \sqrt{x}}$:
 &= \lim_{x \to 1} \frac{x(1 - x) + \sqrt{x}(1 - x^2)}{1 - x} \\
 &= \lim_{x \to 1} \frac{(1 - x)(x + \sqrt{x}(1 + x))}{1 - x} \\
 &= \lim_{x \to 1} (x + \sqrt{x}(1 + x)) \\
-&= 1 + \sqrt{1}(1 + 1)) = 3 \\
+&= 1 + \sqrt{1}(1 + 1)) = 3
 \end{aligned}
 $$
 
@@ -996,7 +996,7 @@ $$
 &= \lim_{h \to 0} \frac{\sqrt{x + h} - \sqrt{x}}{h} \frac{\sqrt{x + h} + \sqrt{x}}{\sqrt{x + h} + \sqrt{x}} \\
 &= \lim_{h \to 0} \frac{x + h - x}{h(\sqrt{x + h} + \sqrt{x})} \\
 &= \lim_{h \to 0} \frac{1}{\sqrt{x + h} + \sqrt{x}} \\
-&= \frac{1}{2 \sqrt{x}} \\
+&= \frac{1}{2 \sqrt{x}}
 \end{aligned}
 $$
 
@@ -1026,7 +1026,7 @@ $$
 \begin{aligned}
 f'(x) &= \lim_{h \to 0} \frac{a^{x + h} - a^x}{h} \\
 &= \lim_{h \to 0} \frac{a^x(a^h - 1)}{h} \\
-&= a^x \lim_{h \to 0} \frac{a^h - 1}{h} \\
+&= a^x \lim_{h \to 0} \frac{a^h - 1}{h}
 \end{aligned}
 $$
 
@@ -1061,7 +1061,7 @@ Proof:
 &= \lim_{h \to 0} \frac{f(x + h) g(x + h) - f(x) g(x) + (f(x) g(x + h) - f(x) g(x + h))}{h} \\
 &= \lim_{h \to 0} \left( g(x + h) \frac{f(x + h) - f(x)}{h} + f(x) \frac{g(x + h) - g(x)}{h} \right) \\
 &= \lim_{h \to 0} g(x + h) \frac{f(x + h) - f(x)}{h} + \lim_{h \to 0} f(x) \frac{g(x + h) - g(x)}{h} \\
-&= g(x) f'(x) + f(x) g'(x) \\
+&= g(x) f'(x) + f(x) g'(x)
 \end{aligned}
 $$
 
@@ -1100,7 +1100,7 @@ Proof:
 &= f'(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
 &= f'(x) g(x)^{-1} + f(x) \frac{\dee}{\dee x} g(x)^{-1} \\
 &= f'(x) g(x)^{-1} + f(x) \frac{-g'(x)}{g(x)^2} \\
-&= \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2} \\
+&= \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}
 \end{aligned}
 $$
 
@@ -1143,7 +1143,7 @@ Find $\frac{\dee^2}{\dee x^2} \frac{x}{1 + x^2}$:
 &= \frac{-2x(x^2 + 1)^2 - (1 - x^2)(4x^3 + 4x)}{(x^2 + 1)^4} \\
 &= \frac{-2x(x^2 + 1)^2 - (1 - x^2)(4x^3 + 4x)}{(x^2 + 1)^4} \\
 &= \frac{-2x(x^2 + 1)^2 - 4x(1 - x^2)(x^2 + 1)}{(x^2 + 1)^4} \\
-&= \frac{-2x(x^2 + 1) - 4x(1 - x^2)}{(x^2 + 1)^3} \\
+&= \frac{-2x(x^2 + 1) - 4x(1 - x^2)}{(x^2 + 1)^3}
 \end{aligned}
 $$
 
@@ -1162,7 +1162,7 @@ Evaluate $\lim_{x \to 0} \frac{\sin(3x)}{x}$:
 \begin{aligned}
 \lim_{x \to 0} \frac{\sin(3x)}{x} &= \lim_{x \to 0} \frac{3 \sin(3x)}{3x} \\
 &= 3 \lim_{x \to 0} \frac{\sin(3x)}{3x} \\
-&= 3 \\
+&= 3
 \end{aligned}
 $$
 
@@ -1185,7 +1185,7 @@ Proof:
 &= \frac{1}{2} \cdot -\lim_{h \to 0} \sin(h) \cdot \lim_{h \to 0} \frac{\sin(h)}{h} \\
 &= \frac{1}{2} \cdot -0 \cdot 1 = 0 \\
 \frac{\dee}{\dee x} \sin(x) &= \sin(x) \cdot 0 + \cos(x) \cdot 1 \\
-&= \cos(x) \\
+&= \cos(x)
 \end{aligned}
 $$
 
@@ -1203,7 +1203,7 @@ Proof:
 &= \cos(x) \lim_{h \to 0} \frac{\cos(h) - 1}{h} - \sin(x) \cdot 1 \\
 \lim_{h \to 0} \frac{\cos(h) - 1}{h} &= 0 \text{, from the proof of the sine rule} \\
 \frac{\dee}{\dee x} \sin(x) &= \cos(x) \cdot 0 - \sin(x) \cdot 1 \\
-&= -\sin(x) \\
+&= -\sin(x)
 \end{aligned}
 $$
 
@@ -1219,7 +1219,7 @@ Proof:
 &= \frac{\cos(x) \frac{\dee}{\dee x} \sin(x) - \sin(x) \frac{\dee}{\dee x} \cos(x)}{\cos(x)^2} \\
 &= \frac{\cos(x)^2 + \sin(x)^2}{\cos(x)^2} \\
 &= \frac{1}{\cos(x)^2} \\
-&= \sec(x)^2 \\
+&= \sec(x)^2
 \end{aligned}
 $$
 
@@ -1234,7 +1234,7 @@ Proof:
 \frac{\dee}{\dee x} \sinh(x) &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
 &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x - \frac{\dee}{\dee x} e^{-x} \right) \\
 &= \frac{1}{2} \left( e^x - \frac{-1}{e^x} \right) \\
-&= \frac{e^x + e^{-x}}{2} = \cosh(x) \\
+&= \frac{e^x + e^{-x}}{2} = \cosh(x)
 \end{aligned}
 $$
 
@@ -1249,7 +1249,7 @@ Proof:
 \frac{\dee}{\dee x} \cosh(x) &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
 &= \frac{1}{2} \left( \frac{\dee}{\dee x} e^x + \frac{\dee}{\dee x} e^{-x} \right) \\
 &= \frac{1}{2} \left( e^x + \frac{-1}{e^x} \right) \\
-&= \frac{e^x - e^{-x}}{2} = \sinh(x) \\
+&= \frac{e^x - e^{-x}}{2} = \sinh(x)
 \end{aligned}
 $$
 
@@ -1264,7 +1264,7 @@ Proof:
 \frac{\dee}{\dee x} \tanh(x) &= \frac{\dee}{\dee x} \frac{\sinh(x)}{\cosh(x)} \\
 &= \frac{\cosh(x) \frac{\dee}{\dee x} \sinh(x) - \sinh(x) \frac{\dee}{\dee x} \cosh(x)}{\cosh(x)^2} \\
 &= \frac{\cosh(x)^2 - \sinh(x)^2}{\cosh(x)^2} \\
-&= \frac{1}{\cosh(x)^2} = \sech(x)^2 \\
+&= \frac{1}{\cosh(x)^2} = \sech(x)^2
 \end{aligned}
 $$
 
@@ -1342,7 +1342,7 @@ Find $\frac{\dee y}{\dee x}$ for $x^2 + y^2 = 1$:
 &= 2x + \frac{\dee}{\dee y} y^2 \cdot \frac{\dee}{\dee x} y \\
 &= 2x + 2y \frac{\dee}{\dee x} y \\
 2x + 2y \frac{\dee}{\dee x} y &= 0 \\
-\frac{\dee}{\dee x} y &= \frac{-2x}{2y} = \frac{-x}{y} \\
+\frac{\dee}{\dee x} y &= \frac{-2x}{2y} = \frac{-x}{y}
 \end{aligned}
 $$
 
@@ -1447,7 +1447,7 @@ y' \frac{\dee}{\dee y} \ln y &= 3 \frac{\dee}{\dee x} \ln (2x - 3) + 4 \frac{\de
 \frac{y'}{y} &= 3 \frac{1}{2x - 3} \frac{\dee}{\dee x} (2x - 3) + 4 \frac{1}{7x - 1} \frac{\dee}{\dee x} (7x - 1) - 5 \frac{1}{5x + 1} \frac{\dee}{\dee x} (5x + 1) \\
 \frac{y'}{y} &= 3 \frac{1}{2x - 3} 2 + 4 \frac{1}{7x - 1} 7 - 5 \frac{1}{5x + 1} 5 \\
 y' &= y \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
-y' &= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right) \\
+y' &= \frac{(2x - 3)^3 (7x - 1)^4}{(5x + 1)^5} \left( \frac{6}{2x - 3} + \frac{28}{7x - 1} - \frac{25}{5x + 1} \right)
 \end{aligned}
 $$
 
@@ -1460,7 +1460,7 @@ f(x) &= g(x)^{h(x)} \\
 \ln f(x) &= h(x) \ln g(x) \\
 \frac{\dee}{\dee x} \ln f(x) &= \frac{\dee}{\dee x} h(x) \ln g(x) \\
 f'(x) \frac{1}{f(x)} &= h'(x) \ln g(x) + h(x) \frac{\dee}{\dee x} \ln g(x) \\
-f'(x) &= f(x) (h'(x) \ln g(x) + \frac{h(x) g'(x)}{g(x)}) \\
+f'(x) &= f(x) (h'(x) \ln g(x) + \frac{h(x) g'(x)}{g(x)})
 \end{aligned}
 $$
 
@@ -1477,7 +1477,7 @@ t_1(1) = 1 &= \frac{2 1^{\ln 1} \ln 1}{1} 1 + b = 0 \cdot 1 + b = b \\
 t_1(a) &= 1 \\
 t_e(a) = e &= \frac{2 e^{\ln e} \ln e}{e} a + b = 2a + b \\
 t_e(e) = e &= 2e + b \\
-t_e(a) = 2a - e \\
+t_e(a) = 2a - e
 \end{aligned}
 $$
 
@@ -1512,7 +1512,7 @@ f'(x) &= \lim_{h \to 0} \frac{\ln(1 + h) - \ln(1)}{h}\\
 &= \lim_{h \to 0} \frac{1}{h} \ln(1 + h) \\
 &= \lim_{h \to 0} \ln(1 + h)^\frac{1}{h} = 1 \\
 e^{\lim_{h \to 0} \ln(1 + h)^\frac{1}{h}} &= e^1 = e^{\ln \lim_{h \to 0} (1 + h)^\frac{1}{h}} \\
-e &= \lim_{h \to 0} (1 + h)^\frac{1}{h} \\
+e &= \lim_{h \to 0} (1 + h)^\frac{1}{h}
 \end{aligned}
 $$
 > Consider $f(x) = \ln x$.
@@ -1578,7 +1578,7 @@ Find the linear approximation of $f(x) = \sqrt{x}$ near $x = 9$ and use it to es
 $$
 \begin{aligned}
 L(x) &= \frac{1}{6}(x - 9) + 3 \\
-L(10) &= \frac{1}{6} + 3 = \frac{19}{6} \\
+L(10) &= \frac{1}{6} + 3 = \frac{19}{6}
 \end{aligned}
 $$
 
@@ -1612,7 +1612,7 @@ $$f(a) + f'(a)(x - a) + \frac{1}{2} f''(a) (x - a)^2$$
 $$
 \begin{aligned}
 Q(x) &= 3 + \frac{1}{6}(x - 9) + \frac{1}{108} (x - 9)^2 \\
-Q(10) &= 3 + \frac{1}{6} + \frac{1}{108} = \frac{1029}{324} \\
+Q(10) &= 3 + \frac{1}{6} + \frac{1}{108} = \frac{1029}{324}
 \end{aligned}
 $$
 
@@ -1719,7 +1719,7 @@ Find $x$ where $f'(c) = \frac{f(3) - f(1)}{3 - 1}$ for $f(x) = x^3$ over $[1, 3]
 > $$
 \begin{aligned}
 3x^2 &= \frac{27 - 1}{2} \\
-x = \sqrt{\frac{26}{6}} &= \sqrt{\frac{13}{3}} \\
+x = \sqrt{\frac{26}{6}} &= \sqrt{\frac{13}{3}}
 \end{aligned}
 $$
 
@@ -2494,7 +2494,7 @@ Evaluate $\int_1^4 \frac{x + 1}{\sqrt{x}} \dee x$:
 &= \int_1^4 \sqrt{x} \dee x + \int_1^4 \frac{1}{\sqrt{x}} \dee x \\
 &= \evalat{\frac{2}{3}x^\frac{3}{2}}_1^4 + \evalat{2\sqrt{x}}_1^4 \\
 &= \frac{2}{3}4^\frac{3}{2} - \frac{2}{3} + 2\sqrt{4} - 2 \\
-&= \frac{20}{3} \\
+&= \frac{20}{3}
 \end{aligned}
 $$
 
@@ -2505,7 +2505,7 @@ Evaluate $\int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{
 \int_0^{\frac{1}{\sqrt{2}}} \left(\frac{4}{\sqrt{1 - x^2}} + \frac{1}{1 - x}\right) \dee x &= \int_0^{\frac{1}{\sqrt{2}}} \frac{4}{\sqrt{1 - x^2}} \dee x + \int_0^{\frac{1}{\sqrt{2}}} \frac{1}{1 - x} \dee x \\
 &= \evalat{4 \arcsin x}_0^{\frac{1}{\sqrt{2}}} + \evalat{-\ln(1 - x)}_0^{\frac{1}{\sqrt{2}}} \\
 &= \pi - 0 + -\ln \frac{\sqrt{2} - 1}{\sqrt{2}} - 0 = \pi + \ln \frac{\sqrt{2}}{\sqrt{2} - 1} \\
-&= \pi + 0.5 \ln 2 - \ln(\sqrt{2} - 1) \\
+&= \pi + 0.5 \ln 2 - \ln(\sqrt{2} - 1)
 \end{aligned}
 $$
 

@@ -446,7 +446,7 @@ $$
 \begin{aligned}
 \text{own elasticity} &= \frac{\text{\% change in demand}}{\text{\% change in price}} \\
 \text{\% change in demand} &= \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
-\text{\% change in price} &= \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
+\text{\% change in price} &= \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}}
 \end{aligned}
 $$
 
@@ -521,7 +521,7 @@ $$
 \begin{aligned}
 \text{cross elasticity} &= \frac{\text{\% change in demand}}{\text{\% change in price of substitute or complement}} \\
 \text{\% change in demand} &= \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
-\text{\% change in price of substitute or complement} &= \frac{\text{new price of substitute or complement} - \text{old price of substitute or complement}}{\frac{\text{new price of substitute or complement} + \text{old price of substitute or complement}}{2}} \\
+\text{\% change in price of substitute or complement} &= \frac{\text{new price of substitute or complement} - \text{old price of substitute or complement}}{\frac{\text{new price of substitute or complement} + \text{old price of substitute or complement}}{2}}
 \end{aligned}
 $$
 
@@ -541,7 +541,7 @@ $$
 \begin{aligned}
 \text{income elasticity} &= \frac{\text{\% change in demand}}{\text{\% change in income}} \\
 \text{\% change in demand} &= \frac{\text{new demand} - \text{old demand}}{\frac{\text{new demand} + \text{old demand}}{2}} \\
-\text{\% change in income} &= \frac{\text{new income} - \text{old income}}{\frac{\text{new income} + \text{old income}}{2}} \\
+\text{\% change in income} &= \frac{\text{new income} - \text{old income}}{\frac{\text{new income} + \text{old income}}{2}}
 \end{aligned}
 $$
 
@@ -561,7 +561,7 @@ $$
 \begin{aligned}
 \text{own elasticity} &= \frac{\text{\% change in supply}}{\text{\% change in price}} \\
 \text{\% change in supply} &= \frac{\text{new supply} - \text{old supply}}{\frac{\text{new supply} + \text{old supply}}{2}} \\
-\text{\% change in price} &= \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}} \\
+\text{\% change in price} &= \frac{\text{new price} - \text{old price}}{\frac{\text{new price} + \text{old price}}{2}}
 \end{aligned}
 $$
 

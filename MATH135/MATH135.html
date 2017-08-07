@@ -712,7 +712,7 @@ So <span class="math inline">a \le b</span>.</p>
 \gcd(10, 0) &amp;= 10 \\
 \gcd(0, 0) &amp;= 0 \\
 \gcd(a, 0) &amp;= \abs{a} \\
-\gcd(a, b) &amp;= \gcd(b, a) \\
+\gcd(a, b) &amp;= \gcd(b, a)
 \end{aligned}
 </span></p>
 <p>Proposition: <span class="math inline">\forall x \in \mb{Z}, \gcd(n, n + 1) = 1</span>.</p>
@@ -849,7 +849,7 @@ q_2 &amp;= 0 \\
 q_n &amp;= \floor{\frac{r_{n - 2}}{r_{n - 1}}} \\
 r_n &amp;= r_{n - 2} - q_n \cdot r_{n - 1} \\
 x_n &amp;= x_{n - 2} - q_n \cdot x_{n - 1} \\
-y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
+y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1}
 \end{aligned}
 </span></p>
 <p>We stop when r_n = 0. The value of <span class="math inline">r</span> in the row before this is the GCD.</p>
@@ -937,7 +937,7 @@ y_n &amp;= y_{n - 2} - q_n \cdot y_{n - 1} \\
 \gcd(273, 252) &amp;= \gcd(252, 21) \\
 252 &amp;= 12 \cdot 21 + 0 \\
 \gcd(252, 21) &amp;= \gcd(21, 0) \\
-&amp;= 21 \\
+&amp;= 21
 \end{aligned}
 </span><br />
 Write the last value as a linear combination of the previous values: <span class="math inline">21 = 273 - 1 \cdot 252</span>.<br />
@@ -1443,7 +1443,7 @@ Likewise, we can do this for <span class="math inline">x^9</span> to find that <
 <li>Sun Tsu</li>
 </ul>
 <p>This is a <strong>system</strong> of linear congruences.</p>
-<p>Essentially, we want to solve for <span class="math inline">n</span> in the system <span class="math inline">\begin{cases} n \equiv 2 \pmod{3} \\ n \equiv 3 \pmod{5} \\ n \equiv 2 \pmod{7} \\ \end{cases}</span>.</p>
+<p>Essentially, we want to solve for <span class="math inline">n</span> in the system <span class="math inline">\begin{cases} n \equiv 2 \pmod{3} \\ n \equiv 3 \pmod{5} \\ n \equiv 2 \pmod{7} \end{cases}</span>.</p>
 <p>A linear congruence of the form <span class="math inline">x \equiv n \pmod{m}</span> (where <span class="math inline">a = 0</span>) always has solutions.</p>
 <p>We can always solve these systems when the moduli are pairwise coprime ;wip: why? prove it</p>
 <p>Solve the system:</p>
@@ -1456,7 +1456,7 @@ So <span class="math inline">n = 3x + 2 = 3(5y + 2) + 2 = 15y + 8 \iff n - 8 = 1
 So <span class="math inline">n \equiv 8 \pmod{15}</span>.</p>
 </blockquote>
 <blockquote>
-<p>Note that we simplified two congruences into one. Now we have a system of two congruences again, <span class="math inline">\begin{cases} n \equiv 8 \pmod{15} \\ n \equiv 2 \pmod{7} \\ \end{cases}</span>.<br />
+<p>Note that we simplified two congruences into one. Now we have a system of two congruences again, <span class="math inline">\begin{cases} n \equiv 8 \pmod{15} \\ n \equiv 2 \pmod{7} \end{cases}</span>.<br />
 We apply the same technique again.<br />
 Note that <span class="math inline">n \equiv 8 \pmod{15} \iff 15 \mid n - 8 \iff \exists x \in \mb{Z}, n - 8 = 15x \iff n = 15x + 8</span>.<br />
 Since <span class="math inline">n \equiv 2 \pmod{7}</span>, <span class="math inline">15x + 8 \equiv 2 \pmod{7} \iff 15x \equiv -6 \pmod{7}</span>.<br />
@@ -1466,16 +1466,16 @@ So <span class="math inline">n = 15x + 8 = 15(7y + 1) + 8 = 105y + 23 \iff n - 2
 So <span class="math inline">n \equiv 23 \pmod{105}</span>.</p>
 </blockquote>
 <p>We solved two congruences by writing <span class="math inline">n</span> in terms of <span class="math inline">x</span>. Then, substituting <span class="math inline">n</span> in terms of <span class="math inline">x</span> for <span class="math inline">n</span> in the second congruence, we solve for <span class="math inline">x</span> and write it in terms of <span class="math inline">y</span>. Then we write <span class="math inline">n</span> in terms of <span class="math inline">y</span> and determine that the equation is of the form <span class="math inline">n - b = ay</span>, or <span class="math inline">a \mid n - b</span>, or <span class="math inline">n \equiv b \pmod{a}</span>.</p>
-<p>Proposition: Given integers <span class="math inline">a_1</span> and positive integers <span class="math inline">m_1, m_2</span>, if <span class="math inline">\gcd(m_1, m_2) = 1</span>, then the system <span class="math inline">\begin{cases} n \equiv a_1 \pmod{m_1} \\ n \equiv a_2 \pmod{m_2} \\ \end{cases}</span> has a unique solution mod <span class="math inline">m_1 m_2</span>. So if <span class="math inline">n = n_0</span> is one solution, then the complete solution is <span class="math inline">n \equiv n_0 \pmod{m_1 m_2}</span>.</p>
+<p>Proposition: Given integers <span class="math inline">a_1</span> and positive integers <span class="math inline">m_1, m_2</span>, if <span class="math inline">\gcd(m_1, m_2) = 1</span>, then the system <span class="math inline">\begin{cases} n \equiv a_1 \pmod{m_1} \\ n \equiv a_2 \pmod{m_2} \end{cases}</span> has a unique solution mod <span class="math inline">m_1 m_2</span>. So if <span class="math inline">n = n_0</span> is one solution, then the complete solution is <span class="math inline">n \equiv n_0 \pmod{m_1 m_2}</span>.</p>
 <p>Basically, if we can find a single solution to a system of two linear congruences, then we can immediately write the complete solution.</p>
 <p>For more than two linear congruences, we can solve the first two, then solve for the solution and the third one, and then solve for that solution, and so on, until there is only one left.</p>
-<p>Application: if <span class="math inline">a \in \mb{Z}, m_1, m_2 \in \mb{Z}, \gcd(m_1, m_2) = 1</span>, then <span class="math inline">x \equiv a \pmod{m_1 m_1} \iff \begin{cases} x \equiv a \pmod{m_1} \\ x \equiv a \pmod{m_2} \\ \end{cases}</span>.</p>
+<p>Application: if <span class="math inline">a \in \mb{Z}, m_1, m_2 \in \mb{Z}, \gcd(m_1, m_2) = 1</span>, then <span class="math inline">x \equiv a \pmod{m_1 m_1} \iff \begin{cases} x \equiv a \pmod{m_1} \\ x \equiv a \pmod{m_2} \end{cases}</span>.</p>
 <p>In other words, the solutions to a system of congruences with coprime moduli are also the solutions to the congruence with the product of the moduli.</p>
 <p>Solving one is equivalent to solving the other.</p>
 <p>;wip: prove this using LCT 1</p>
 <p>Solve <span class="math inline">x^{43} + 28x^9 + 10x \equiv 1 \pmod{35}</span>:</p>
 <blockquote>
-<p>We know that <span class="math inline">35 = 5 \cdot 7</span>, and <span class="math inline">\gcd(5, 7) = 1</span>. So <span class="math inline">x^{43} + 28x^9 + 10x \equiv 1 \pmod{35} \equiv \begin{cases} x^{43} + 28x^9 + 10x \equiv 1 \pmod{5} \\ x^{43} + 28x^9 + 10x \equiv 1 \pmod{7} \\ \end{cases}</span>.<br />
+<p>We know that <span class="math inline">35 = 5 \cdot 7</span>, and <span class="math inline">\gcd(5, 7) = 1</span>. So <span class="math inline">x^{43} + 28x^9 + 10x \equiv 1 \pmod{35} \equiv \begin{cases} x^{43} + 28x^9 + 10x \equiv 1 \pmod{5} \\ x^{43} + 28x^9 + 10x \equiv 1 \pmod{7} \end{cases}</span>.<br />
 We already know that <span class="math inline">x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}</span>.<br />
 By FLT, if <span class="math inline">[x] \ne 0</span>, then <span class="math inline">x^4 \equiv 1 \pmod{5}</span>.<br />
 By testing, <span class="math inline">x = 0</span> is not a solution. So <span class="math inline">x^4 \equiv 1 \pmod{5}</span>. So <span class="math inline">x^3 + 8x \equiv 1 \pmod{5}</span>.<br />
@@ -1484,7 +1484,7 @@ We already know that <span class="math inline">x^{43} + 28x^9 + 10x \equiv 1 \pm
 By FLT, if <span class="math inline">[x] \ne 0</span>, then <span class="math inline">x^6 \equiv 1 \pmod{7}</span>.<br />
 By testing, <span class="math inline">x = 0</span> is not a solution. So <span class="math inline">x^6 \equiv 1 \pmod{7}</span>. So <span class="math inline">x + 10x \equiv 11x \equiv 1 \pmod{7}</span>.<br />
 By inspection, <span class="math inline">x \equiv 2 \pmod{7}</span>.<br />
-Now we resolve the cases: either <span class="math inline">\begin{cases} x \equiv 3 \pmod{5} \\ x \equiv 2 \pmod{7} \\ \end{cases}</span> or <span class="math inline">\begin{cases} x \equiv 4 \pmod{5} \\ x \equiv 2 \pmod{7} \\ \end{cases}</span>.<br />
+Now we resolve the cases: either <span class="math inline">\begin{cases} x \equiv 3 \pmod{5} \\ x \equiv 2 \pmod{7} \end{cases}</span> or <span class="math inline">\begin{cases} x \equiv 4 \pmod{5} \\ x \equiv 2 \pmod{7} \end{cases}</span>.<br />
 We will solve the first case.<br />
 Clearly, <span class="math inline">\exists k \in \mb{Z}, x = 5k + 3</span> and <span class="math inline">5k \equiv 6 \pmod{7}</span>. So <span class="math inline">k \equiv 4 \pmod{7}</span>, by inspection.<br />
 So <span class="math inline">\exists l \in \mb{Z}, k = 7l + 4</span> and <span class="math inline">x = 35l + 23</span>, so <span class="math inline">x \equiv 23 \pmod{35}</span>.<br />

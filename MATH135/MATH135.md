@@ -702,7 +702,7 @@ $$
 \gcd(10, 0) &= 10 \\
 \gcd(0, 0) &= 0 \\
 \gcd(a, 0) &= \abs{a} \\
-\gcd(a, b) &= \gcd(b, a) \\
+\gcd(a, b) &= \gcd(b, a)
 \end{aligned}
 $$
 
@@ -840,7 +840,7 @@ q_2 &= 0 \\
 q_n &= \floor{\frac{r_{n - 2}}{r_{n - 1}}} \\
 r_n &= r_{n - 2} - q_n \cdot r_{n - 1} \\
 x_n &= x_{n - 2} - q_n \cdot x_{n - 1} \\
-y_n &= y_{n - 2} - q_n \cdot y_{n - 1} \\
+y_n &= y_{n - 2} - q_n \cdot y_{n - 1}
 \end{aligned}
 $$
 
@@ -904,7 +904,7 @@ Consider $42042x + 1071y = gcd(42042, 1071) = 21$. How do we find $x$ and $y$?
 \gcd(273, 252) &= \gcd(252, 21) \\
 252 &= 12 \cdot 21 + 0 \\
 \gcd(252, 21) &= \gcd(21, 0) \\
-&= 21 \\
+&= 21
 \end{aligned}
 $$  
 > Write the last value as a linear combination of the previous values: $21 = 273 - 1 \cdot 252$.  
@@ -1555,7 +1555,7 @@ This is a **system** of linear congruences.
 Essentially, we want to solve for $n$ in the system $\begin{cases}
 n \equiv 2 \pmod{3} \\
 n \equiv 3 \pmod{5} \\
-n \equiv 2 \pmod{7} \\
+n \equiv 2 \pmod{7}
 \end{cases}$.
 
 A linear congruence of the form $x \equiv n \pmod{m}$ (where $a = 0$) always has solutions.
@@ -1573,7 +1573,7 @@ Solve the system:
 
 > Note that we simplified two congruences into one. Now we have a system of two congruences again, $\begin{cases}
 n \equiv 8 \pmod{15} \\
-n \equiv 2 \pmod{7} \\
+n \equiv 2 \pmod{7}
 \end{cases}$.  
 > We apply the same technique again.  
 > Note that $n \equiv 8 \pmod{15} \iff 15 \mid n - 8 \iff \exists x \in \mb{Z}, n - 8 = 15x \iff n = 15x + 8$.  
@@ -1587,7 +1587,7 @@ We solved two congruences by writing $n$ in terms of $x$. Then, substituting $n$
 
 Proposition: Given integers $a_1$ and positive integers $m_1, m_2$, if $\gcd(m_1, m_2) = 1$, then the system $\begin{cases}
 n \equiv a_1 \pmod{m_1} \\
-n \equiv a_2 \pmod{m_2} \\
+n \equiv a_2 \pmod{m_2}
 \end{cases}$ has a unique solution mod $m_1 m_2$. So if $n = n_0$ is one solution, then the complete solution is $n \equiv n_0 \pmod{m_1 m_2}$.
 
 Basically, if we can find a single solution to a system of two linear congruences, then we can immediately write the complete solution.
@@ -1596,7 +1596,7 @@ For more than two linear congruences, we can solve the first two, then solve for
 
 Application: if $a \in \mb{Z}, m_1, m_2 \in \mb{Z}, \gcd(m_1, m_2) = 1$, then $x \equiv a \pmod{m_1 m_1} \iff \begin{cases}
 x \equiv a \pmod{m_1} \\
-x \equiv a \pmod{m_2} \\
+x \equiv a \pmod{m_2}
 \end{cases}$.
 
 In other words, the solutions to a system of congruences with coprime moduli are also the solutions to the congruence with the product of the moduli.
@@ -1610,7 +1610,7 @@ Solve $x^{43} + 28x^9 + 10x \equiv 1 \pmod{35}$:
 > We know that $35 = 5 \cdot 7$, and $\gcd(5, 7) = 1$.
 > So $x^{43} + 28x^9 + 10x \equiv 1 \pmod{35} \equiv \begin{cases}
 x^{43} + 28x^9 + 10x \equiv 1 \pmod{5} \\
-x^{43} + 28x^9 + 10x \equiv 1 \pmod{7} \\
+x^{43} + 28x^9 + 10x \equiv 1 \pmod{7}
 \end{cases}$.  
 > We already know that $x^{43} + 28x^9 + 10x \equiv 1 \pmod{5}$.  
 > By FLT, if $[x] \ne 0$, then $x^4 \equiv 1 \pmod{5}$.  
@@ -1624,10 +1624,10 @@ x^{43} + 28x^9 + 10x \equiv 1 \pmod{7} \\
 > By inspection, $x \equiv 2 \pmod{7}$.  
 > Now we resolve the cases: either $\begin{cases}
 x \equiv 3 \pmod{5} \\
-x \equiv 2 \pmod{7} \\
+x \equiv 2 \pmod{7}
 \end{cases}$ or $\begin{cases}
 x \equiv 4 \pmod{5} \\
-x \equiv 2 \pmod{7} \\
+x \equiv 2 \pmod{7}
 \end{cases}$.  
 > We will solve the first case.  
 > Clearly, $\exists k \in \mb{Z}, x = 5k + 3$ and $5k \equiv 6 \pmod{7}$. So $k \equiv 4 \pmod{7}$, by inspection.  

@@ -149,7 +149,7 @@ Simplify $\int_0^1 x e^{-x} \dee x$:
 \int_0^1 x e^{-x} \dee x &= \int_0^1 x \frac{\dee}{\dee x} (-e^{-x}) \dee x \\
 &= \evalat{x (-e^{-x})}_0^1 - \int_0^1 \left(\frac{\dee}{\dee x} x\right) (-e^{-x}) \dee x \\
 &= \evalat{x (-e^{-x})}_0^1 + \int_0^1 e^{-x} \dee x \\
-&= -\frac{2}{e} \\
+&= -\frac{2}{e}
 \end{aligned}
 $$
 
@@ -754,7 +754,7 @@ t &= 0; x(0) = 0 \\
 \frac{0^2}{2} &= -\frac{1}{1 + 0} + c \\
 c &= 1 \\
 \frac{x^2}{2} &= -\frac{1}{1 + t} + 1 \\
-x &= \sqrt{2 - \frac{2}{1 + t}} = \sqrt{\frac{2(1 + t) - 2}{1 + t}} = \sqrt{\frac{2t}{1 + t}} \\
+x &= \sqrt{2 - \frac{2}{1 + t}} = \sqrt{\frac{2(1 + t) - 2}{1 + t}} = \sqrt{\frac{2t}{1 + t}}
 \end{aligned}
 $$
 
@@ -770,7 +770,7 @@ Solve $\frac{\dee T}{\dee t} = -k(T - T_{ambient})$ - Newton's law of cooling:
 \ln \abs{T - T_{ambient}} &= -kt + c \\
 e^{\ln \abs{T - T_{ambient}}} &= e^{-kt + c} \\
 \abs{T - T_{ambient}} &= e^{-kt}e^c \\
-T - T_{ambient} &= \pm e^ce^{-kt} \\
+T - T_{ambient} &= \pm e^ce^{-kt}
 \end{aligned}
 $$
 > Let $A = \pm e^c$. Then $T - T_{ambient} = Ae^{-kt}$.  
@@ -786,7 +786,7 @@ Suppose we have a population of $n$ individuals. The simplest population model i
 \int \frac{\dee n}{n} &= k \int \dee t \\
 \ln \abs{n} &= kt + c \\
 n &= \pm e^ce^{kt} \\
-A = \pm e^c; n &= Ae^{kt} \\
+A = \pm e^c; n &= Ae^{kt}
 \end{aligned}
 $$
 > Note that at $t = 0$, $n = n_0$ for some constant $n_0$ - the starting population.  
@@ -825,7 +825,7 @@ A\left(1 - \frac{N}{k}\right) + BN &= 1; A = 1; B = \frac{1}{k} \\
 F &= \pm e^{-c} \\
 1 - \frac{k}{N} &= Fe^{-rt} \\
 \frac{k}{N} &= Fe^{-rt} + 1 \\
-N &= \frac{k}{1 + Fe^{-rt}} \\
+N &= \frac{k}{1 + Fe^{-rt}}
 \end{aligned}
 $$
 > Note that all solutions tend toward $k$, which we can verify by taking the limit of $N$ at infinity.  

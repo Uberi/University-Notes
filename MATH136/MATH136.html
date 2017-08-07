@@ -334,28 +334,28 @@ So <span class="math inline">\vec{x} \cdot \vec{y} \le \magn{x}\magn{y}</span>.<
 <h2 id="systems-of-linear-equations">Systems of Linear Equations</h2>
 <p>A <strong>linear equation</strong> is an equation of the form <span class="math inline">a_1 x_1 + \ldots + a_n x_n = b, a_k, b \in \mb{C}, 1 \le k \le n, n \in \mb{N}</span>. This also includes equations that can be rewritten into this form.</p>
 <p>A set of linear equations with the same variables <span class="math inline">x_1, \ldots, x_n</span> (including those where there are zero coefficients) is called a <strong>system of linear equations</strong>.</p>
-<p>A system of linear equations can be written as <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}</span>. Here, <span class="math inline">a_{i, j}</span> represents the <span class="math inline">j</span>th coefficient in the <span class="math inline">i</span>th equation.</p>
+<p>A system of linear equations can be written as <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \end{cases}</span>. Here, <span class="math inline">a_{i, j}</span> represents the <span class="math inline">j</span>th coefficient in the <span class="math inline">i</span>th equation.</p>
 <p>A <strong>solution</strong> to a system of linear equation is a vector <span class="math inline">\vec{s} = \begin{bmatrix} s_1 \\ \vdots \\ s_n \end{bmatrix}, \vec{s} \in \mb{R}^n</span> such that if <span class="math inline">(\forall 1 \le i \le n, x_i = s_i)</span>, all the equations in the system are satisfied.</p>
 <p>A system of linear equations is <strong>consistent</strong> if it has at least one solution, and <strong>inconsistent</strong> otherwise.</p>
 <p>Two systems of linear equations are <strong>equivalent</strong> if and only if they both have the same solution set.</p>
 <p>Interpreted geometrically, a system of <span class="math inline">m</span> linear equations with <span class="math inline">n</span> variables is a set of <span class="math inline">m</span> hyperplanes in <span class="math inline">\mb{R}^n</span>. The solution to this system is represented by a vector that lies on all these hyperplanes.</p>
 <h3 id="theorem-2.1.1">Theorem 2.1.1</h3>
 <p>If a set of linear equations is consistent with more than 1 solution, then it has infinite solutions.</p>
-<p>In other words, if <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots \\ a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}</span> has solutions <span class="math inline">\vec{s}</span> and <span class="math inline">\vec{t}</span> such that <span class="math inline">\vec{s} \ne \vec{t}</span>, then <span class="math inline">\vec{s} + c(\vec{s} - \vec{t})</span> is a solution for all <span class="math inline">c \in \mb{R}</span>.</p>
+<p>In other words, if <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots \\ a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \end{cases}</span> has solutions <span class="math inline">\vec{s}</span> and <span class="math inline">\vec{t}</span> such that <span class="math inline">\vec{s} \ne \vec{t}</span>, then <span class="math inline">\vec{s} + c(\vec{s} - \vec{t})</span> is a solution for all <span class="math inline">c \in \mb{R}</span>.</p>
 <p>Proof:</p>
 <blockquote>
-<p>Assume <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}</span> has solutions <span class="math inline">\vec{s}</span> and <span class="math inline">\vec{t}</span>.<br />
+<p>Assume <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \end{cases}</span> has solutions <span class="math inline">\vec{s}</span> and <span class="math inline">\vec{t}</span>.<br />
 Clearly, for all <span class="math inline">1 \le i \le n</span>, <span class="math inline">a_{i, 1} (s_1 + c(s_1 - t_1)) + \ldots + a_{i, n} (s_n + c(s_n - t_n)) = (a_{i, 1} s_1 + \ldots + a_{i, n} s_n) + c(a_{i, 1} s_1 + \ldots + a_{i, n} s_n) - c(a_{i, 1} t_1 + \ldots + a_{i, n} t_n) = b_i + cb_i - cb_i = b_i</span>.<br />
 So each equation is satisfied, and the system is consistent.</p>
 </blockquote>
 <p>The set of all solutions to a system of linear equations is known as a <strong>solution set</strong>.</p>
 <h3 id="solving">Solving</h3>
 <p>When we use the substitution and elimination techniques for solving systems of linear equations, we are forming new systems of lienar equations that have the same solution set as the original. We aim to obtain one that is easier to find the solution set for, and therefore solve the original system.</p>
-<p>Note that when we solve a linear system, we don't really need the <span class="math inline">x</span> variables. Instead, we could write the system <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}</span> more concisely as <span class="math inline">\left[\begin{array}{ccc|c} a_{1, 1} &amp; \ldots &amp; a_{1, n} &amp; b_1 \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ a_{m, 1} &amp; \ldots &amp; a_{m, n} &amp; b_1 \end{array}\right]</span>.</p>
+<p>Note that when we solve a linear system, we don't really need the <span class="math inline">x</span> variables. Instead, we could write the system <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \end{cases}</span> more concisely as <span class="math inline">\left[\begin{array}{ccc|c} a_{1, 1} &amp; \ldots &amp; a_{1, n} &amp; b_1 \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ a_{m, 1} &amp; \ldots &amp; a_{m, n} &amp; b_1 \end{array}\right]</span>.</p>
 <p>This is called the <strong>augmented matrix</strong> of the system of linear equations.</p>
 <p>The <strong>coefficient matrix</strong> of the system of linear equations is the same thing, but without the last column containing the constant value. In this case, it would be <span class="math inline">\left[\begin{array}{ccc} a_{1, 1} &amp; \ldots &amp; a_{1, n} \\ \vdots &amp; \vdots &amp; \vdots \\ a_{m, 1} &amp; \ldots &amp; a_{m, n} \end{array}\right]</span>.</p>
 <p>We can combine a coefficient matrix <span class="math inline">A</span> and a constant vector <span class="math inline">\vec{b}</span> into an augmented matrix by using the <span class="math inline">\left[A \middle| \vec{b}\right]</span>. This simply adds <span class="math inline">\vec{b}</span> as a column to the end of <span class="math inline">A</span>.</p>
-<p>Solve <span class="math inline">\begin{cases} 2x_1 + 3x_2 &amp;= 11 \\ 3x_1 + 6x_2 &amp;= 7 \\ \end{cases}</span>:</p>
+<p>Solve <span class="math inline">\begin{cases} 2x_1 + 3x_2 &amp;= 11 \\ 3x_1 + 6x_2 &amp;= 7 \end{cases}</span>:</p>
 <blockquote>
 <p>We multiply the first equation by <span class="math inline">-3</span> to obtain <span class="math inline">-6x_1 - 9x_2 = -33</span>.<br />
 We multiply the second equation by <span class="math inline">2</span> to obtain <span class="math inline">6x_1 + 12x_2 = 14</span>.<br />
@@ -574,7 +574,7 @@ So <span class="math inline">(cA)^T = c(A^T)</span>.</p>
 <p>Basically, we take the dot product of each row and assemble it together into a vector. The product of a matrix and a vector is therefore a vector.</p>
 <p>Note that in order for matrix-vector multiplication to be defined, the number of columns in <span class="math inline">A</span> must equal the number of rows/components in <span class="math inline">\vec{x}</span> in order for the dot product to work. An <span class="math inline">m \times n</span> matrix can only be multiplied by vectors in <span class="math inline">\mb{R}^n</span>.</p>
 <p>Now we can also define it in terms of column vectors.</p>
-<p>Note that the system <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\ \end{cases}</span> has the coefficient matrix <span class="math inline">A = \begin{bmatrix} \begin{bmatrix} a_{1, 1} \\ \vdots \\ a_{m, 1} \end{bmatrix} \cdots \begin{bmatrix} a_{1, n} \\ \vdots \\ a_{m, n} \end{bmatrix} \end{bmatrix} = \begin{bmatrix} \vec{c}_1 \ldots \vec{c}_n \end{bmatrix}</span>, where <span class="math inline">\vec{c}_i</span> represents the <span class="math inline">i</span>th column of the matrix.</p>
+<p>Note that the system <span class="math inline">\begin{cases} a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\ \vdots a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \end{cases}</span> has the coefficient matrix <span class="math inline">A = \begin{bmatrix} \begin{bmatrix} a_{1, 1} \\ \vdots \\ a_{m, 1} \end{bmatrix} \cdots \begin{bmatrix} a_{1, n} \\ \vdots \\ a_{m, n} \end{bmatrix} \end{bmatrix} = \begin{bmatrix} \vec{c}_1 \ldots \vec{c}_n \end{bmatrix}</span>, where <span class="math inline">\vec{c}_i</span> represents the <span class="math inline">i</span>th column of the matrix.</p>
 <p>Note that the system can be written as <span class="math inline">x_1\begin{bmatrix} a_{1, 1} \\ \vdots \\ a_{m, 1} \end{bmatrix} + \ldots + x_n\begin{bmatrix} a_{1, n} \\ \vdots \\ a_{m, n} \end{bmatrix} = \vec{b}</span>.</p>
 <p>So we can write the system as <span class="math inline">x_1 \vec{c}_1 + \ldots + x_n \vec{c}_n = \vec{b}</span>.</p>
 <p>Now we define matrix-vector multiplication in terms of columns as <span class="math inline">A\vec{x} = x_1 \vec{c}_1 + \ldots + x_n \vec{c}_n</span>, where <span class="math inline">\vec{c}_i</span> represents the <span class="math inline">i</span>th column of <span class="math inline">A</span>.</p>
@@ -679,7 +679,7 @@ Then <span class="math inline">f(s\vec{x} + t\vec{y}) = A(s\vec{x} + t\vec{y}) =
 \begin{aligned}
 \proj_{\vec{a}} (s\vec{x} + t\vec{y}) &amp;= \left((s\vec{x} + t\vec{y}) \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
 &amp;= \left(s\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} + \left(t\vec{y} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
-&amp;= s\proj_{\vec{a}} \vec{x} + t\proj_{\vec{a}} \vec{y} \\
+&amp;= s\proj_{\vec{a}} \vec{x} + t\proj_{\vec{a}} \vec{y}
 \end{aligned}
 </span> Therefore, <span class="math inline">\proj_{\vec{a}}</span> has the linearity property and is a linear mapping.</p>
 </blockquote>
@@ -701,7 +701,7 @@ Then <span class="math inline">L(\vec{x}) = A\vec{x}</span>.</p>
 \proj_{\vec{a}} \vec{x} &amp;= \left(\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
 \proj_{\vec{a}} \vec{e}_i &amp;= \frac{\vec{a}_i}{\magn{a}} \frac{\vec{a}}{\magn{a}} = \vec{a}_i \frac{\vec{a}}{\magn{a}^2} \\
 f(\vec{x}) &amp;= A\vec{x} = \proj_{\vec{a}} \\
-A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp; \vec{a}_n \frac{\vec{a}}{\magn{a}^2} \end{bmatrix} \\
+A &amp;= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} &amp; \ldots &amp; \vec{a}_n \frac{\vec{a}}{\magn{a}^2} \end{bmatrix}
 \end{aligned}
 </span></p>
 </blockquote>

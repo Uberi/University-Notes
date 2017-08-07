@@ -221,7 +221,7 @@ $$
 \frac{\vec{v}_f + \vec{v}_i}{2} \cdot (\vec{v}_f - \vec{v}_i) &= \vec{a} \cdot \Delta \vec{x} \\
 (\vec{v}_f + \vec{v}_i) \cdot (\vec{v}_f - \vec{v}_i) &= 2\vec{a} \cdot \Delta \vec{x} \\
 \magn{\vec{v}_f}^2 - \magn{\vec{v}_i}^2 &= 2\vec{a} \cdot \Delta \vec{x} \\
-v_f^2 &= v_i^2 + 2\vec{a} \cdot \Delta \vec{x} \\
+v_f^2 &= v_i^2 + 2\vec{a} \cdot \Delta \vec{x}
 \end{aligned}
 $$
 
@@ -238,7 +238,7 @@ For example, $\vec{a} = \frac{\dee \vec{v}}{\dee t}$, assuming $\vec{a}$ is cons
 \vec{a} \dee t &= \dee \vec{v} \\
 \int_{t_i}^{t_f} \vec{a} \dee t &= \int_{\vec{v}_i}^{\vec{v}_f} \dee \vec{v} \\
 \vec{a}\Delta t &= \vec{v}_f - \vec{v}_i \\
-\vec{v}_i + \vec{a}\Delta t &= \vec{v}_f \\
+\vec{v}_i + \vec{a}\Delta t &= \vec{v}_f
 \end{aligned}
 $$
 
@@ -249,7 +249,7 @@ We can also do this for velocity, where $\vec{v} = \frac{\dee \vec{x}}{\dee t}$:
 \vec{v} \dee t &= \dee \vec{x} \\
 \int_{t_i}^{t_f} \vec{v} \dee t &= \int_{\vec{x}_i}^{\vec{x}_f}\dee \vec{x} \\
 \int_{t_i}^{t_f} \vec{v}_i + \vec{a}\Delta t \dee t &= \int_{\vec{x}_i}^{\vec{x}_f}\dee \vec{x} \\
-\vec{v}_i\Delta t + \frac{1}{2}\vec{a}(\Delta t)^2 &= \Delta \vec{x} \\
+\vec{v}_i\Delta t + \frac{1}{2}\vec{a}(\Delta t)^2 &= \Delta \vec{x}
 \end{aligned}
 $$
 
@@ -918,7 +918,7 @@ m\int_{\vec{a}}^{\vec{b}} \vec{a} \cdot \dee \vec{x} &= m\int_{\vec{a}}^{\vec{b}
 &= m\int_{\vec{a}}^{\vec{b}} \vec{v} \cdot \dee \vec{v} \\
 &= \frac{1}{2}m\evalat{\vec{v}^2}_{\vec{a}^{\vec{b}}} \\
 &= \frac{1}{2}m\evalat{v^2}_{\vec{a}^{\vec{b}}} \\
-&= \frac{1}{2}mb^2 - \frac{1}{2}ma^2 = \Delta W_K \\
+&= \frac{1}{2}mb^2 - \frac{1}{2}ma^2 = \Delta W_K
 \end{aligned}
 $$
 

@@ -389,7 +389,7 @@ A set of linear equations with the same variables $x_1, \ldots, x_n$ (including 
 A system of linear equations can be written as $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
 \vdots
-a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m
 \end{cases}$. Here, $a_{i, j}$ represents the $j$th coefficient in the $i$th equation.
 
 A **solution** to a system of linear equation is a vector $\vec{s} = \begin{bmatrix} s_1 \\ \vdots \\ s_n \end{bmatrix}, \vec{s} \in \mb{R}^n$ such that if $(\forall 1 \le i \le n, x_i = s_i)$, all the equations in the system are satisfied.
@@ -407,7 +407,7 @@ If a set of linear equations is consistent with more than 1 solution, then it ha
 In other words, if $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
 \vdots \\
-a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m
 \end{cases}$ has solutions $\vec{s}$ and $\vec{t}$ such that $\vec{s} \ne \vec{t}$, then $\vec{s} + c(\vec{s} - \vec{t})$ is a solution for all $c \in \mb{R}$.
 
 Proof:
@@ -415,7 +415,7 @@ Proof:
 > Assume $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
 \vdots
-a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m
 \end{cases}$ has solutions $\vec{s}$ and $\vec{t}$.  
 > Clearly, for all $1 \le i \le n$, $a_{i, 1} (s_1 + c(s_1 - t_1)) + \ldots + a_{i, n} (s_n + c(s_n - t_n))
 = (a_{i, 1} s_1 + \ldots + a_{i, n} s_n) + c(a_{i, 1} s_1 + \ldots + a_{i, n} s_n) - c(a_{i, 1} t_1 + \ldots + a_{i, n} t_n)
@@ -431,7 +431,7 @@ When we use the substitution and elimination techniques for solving systems of l
 Note that when we solve a linear system, we don't really need the $x$ variables. Instead, we could write the system $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
 \vdots
-a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m
 \end{cases}$ more concisely as $\left[\begin{array}{ccc|c}
 a_{1, 1} & \ldots & a_{1, n} & b_1 \\
 \vdots & \vdots & \vdots & \vdots \\
@@ -450,7 +450,7 @@ We can combine a coefficient matrix $A$ and a constant vector $\vec{b}$ into an 
 
 Solve $\begin{cases}
 2x_1 + 3x_2 &= 11 \\
-3x_1 + 6x_2 &= 7 \\
+3x_1 + 6x_2 &= 7
 \end{cases}$:
 
 > We multiply the first equation by $-3$ to obtain $-6x_1 - 9x_2 = -33$.  
@@ -803,7 +803,7 @@ Now we can also define it in terms of column vectors.
 Note that the system $\begin{cases}
 a_{1, 1} x_1 + \ldots + a_{1, n} x_n = b_1 \\
 \vdots
-a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m \\
+a_{m, 1} x_1 + \ldots + a_{m, n} x_n = b_m
 \end{cases}$ has the coefficient matrix $A = \begin{bmatrix} \begin{bmatrix} a_{1, 1} \\ \vdots \\ a_{m, 1} \end{bmatrix} \cdots \begin{bmatrix} a_{1, n} \\ \vdots \\ a_{m, n} \end{bmatrix} \end{bmatrix} = \begin{bmatrix} \vec{c}_1 \ldots \vec{c}_n \end{bmatrix}$, where $\vec{c}_i$ represents the $i$th column of the matrix.
 
 Note that the system can be written as $x_1\begin{bmatrix} a_{1, 1} \\ \vdots \\ a_{m, 1} \end{bmatrix} + \ldots + x_n\begin{bmatrix} a_{1, n} \\ \vdots \\ a_{m, n} \end{bmatrix} = \vec{b}$.
@@ -975,7 +975,7 @@ Prove that $\proj_{\vec{a}}$ is a linear operator:
 \begin{aligned}
 \proj_{\vec{a}} (s\vec{x} + t\vec{y}) &= \left((s\vec{x} + t\vec{y}) \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
 &= \left(s\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} + \left(t\vec{y} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
-&= s\proj_{\vec{a}} \vec{x} + t\proj_{\vec{a}} \vec{y} \\
+&= s\proj_{\vec{a}} \vec{x} + t\proj_{\vec{a}} \vec{y}
 \end{aligned}
 $$
 > Therefore, $\proj_{\vec{a}}$ has the linearity property and is a linear mapping.  
@@ -1002,7 +1002,7 @@ Find the standard matrix of $\proj_{\vec{a}}$:
 \proj_{\vec{a}} \vec{x} &= \left(\vec{x} \cdot \frac{\vec{a}}{\magn{a}}\right) \frac{\vec{a}}{\magn{a}} \\
 \proj_{\vec{a}} \vec{e}_i &= \frac{\vec{a}_i}{\magn{a}} \frac{\vec{a}}{\magn{a}} = \vec{a}_i \frac{\vec{a}}{\magn{a}^2} \\
 f(\vec{x}) &= A\vec{x} = \proj_{\vec{a}} \\
-A &= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} & \ldots & \vec{a}_n \frac{\vec{a}}{\magn{a}^2} \end{bmatrix} \\
+A &= \begin{bmatrix} \vec{a}_1 \frac{\vec{a}}{\magn{a}^2} & \ldots & \vec{a}_n \frac{\vec{a}}{\magn{a}^2} \end{bmatrix}
 \end{aligned}
 $$
 
