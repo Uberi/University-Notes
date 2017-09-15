@@ -10,6 +10,61 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso-light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+  <script src="../katex/katex.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 50); // delay to allow status banner to show
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+
+        // not yet available in KaTeX
+        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
+        "\\not": "\\rlap{\\kern{7.5mu}/}", //wip: slash angle is slightly off
+        "\\bm": "\\mathbf", //wip: should be italic, but isn't
+      },
+      throwOnError: false,
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      katex.render(texText.data, mathElements[i], mathOptions);
+    }
+  }
+  </script>
 </head>
 <body>
   <script>
@@ -47,9 +102,37 @@
 <pre><code>Sergey Gorbunov
 Section 002
 Email: sgorbunov@uwaterloo.ca
-Website: 
-Office Hours: 
+Office Hours: Mondays 11am-12pm
 Mondays/Wednesdays 2:30pm-3:50pm</code></pre>
+<h1 id="section">11/9/17</h1>
+<p>Course content on LEARN and Piazza. Three assignments, worth 40% overall. 20% midterm and 40% final.</p>
+<p>Textbook: computer networking, a top-down approach, 7th edition.</p>
+<p>The internet can be thought of as a network of networks, such as mobile networks, regional ISPs, and home networks. The internet consists of connected computers known as hosts, running network apps that communicate over communication links like fiber/copper/satellite. To implement these communications, we use packet switches like routers and switches to forward packets to the right places.</p>
+<p>A <strong>protocol</strong> is an agreed-upon standard for communication, defining the format, order, and actions to take upon communications. An access network connected end users to the rest of the internet, such as DSL (internet over phone lines) and cable (many channels of data encoded in one wire on different frequencies - frequency division multiplexing). Devices in a network have to share access to the cable/DSL modem, using a network switch, or more commonly, a router.</p>
+<p>Hosts send packets of data, by breaking up the data into units of length <span class="math inline">L</span>. The packets are transmitted at the transmission rate <span class="math inline">R</span>, determined by the link capacity (bandwidth). At the core of a network is a mesh of interconnected routers, making sure every packet gets to the right place. When we visit a website, our local router checks whether the website is on the local network, and if not, forwards it to the router's default gateway, which is the next network along the way to the destination. Every router has a default gateway, which is where the packet should get forwarded to if the router doesn't know what to do with it explicitly.</p>
+<p>Routers receive entire packets and store them before processing them and transmitting them to the next link - <strong>store and forward</strong>. This ensures that we can do error correction properly on the packet, and so that we have all of the packet metadata so we can implement traffic shaping. Since it takes <span class="math inline">L/R</span> time to transmit/receive a packet, it takes <span class="math inline">2L/R</span> time to receive and then retransmit a packet, assuming no propagation delay. To implement store-and-forward, it's generally necessary to queue up incoming packets, and drop packets if the queue fills up.</p>
+<p>The key functionality of the network core is to route (determine the path from source to destination using routing algorithms) and forwarding (move packets from the input of the router to the correct output). Other networks use circuit switching, where there are reserved routes between each node that are not shared. This is less efficient but has much better guarantees for things like bandwidth and latency - we don't have issues with congestion, packet loss, or delays like with packet switching, but we're wasting resources when the network isn't at capacity. Circuit switching can use either frequency division multiplexing (channels send data on different frequencies) or time division multiplexing (channels take turns sending data on all frequencies, sort of like packet switching).</p>
+<p>Circuit switching vs. packet switching is more of a reserved resources vs. on-demand resources distinction. For applications like audio/video, we'd like to get circuit-like properties over a packet network - this is still an unsolved problem.</p>
+<h1 id="section-1">13/9/17</h1>
+<p>Assignment 1 posted, writing a simple socket program.</p>
+<p>End users usually connect to the internet via access networks provided by access ISPs, and then the millions of access ISPs are connected to each other. ISPs can be connected to each other in a ring, but tihs has reliability issues, makes routes between hosts very long, and doesn't scale up, since the amount of traffic each ISP would have to handle increases linearly with respect to the number of ISPs. ISPs could all be fully connected with each other, but this is impractical, since this would require millions of connections per ISP.</p>
+<p>What we end up doing is to use higher-tier ISPs that each connect many access ISPs. These higher-tier ISPs can then connect to each other via peering links, and they can agree to forward each other's packets. Internet exchange points (IXPs) control peering links to make sure their resources are being used efficiently. Due to the tiering, the internet can be considered a network of networks. There are also many tiers in between global and access ISPs, like regional networks and content provider networks (like Google CDN, Akamai). So at the center, we have a small number of well-connected Tier 1 ISPs (there's about 7 of them now, like Level3, Sprint, AT&amp;T), then content providers like Google and Akamai connect to those.</p>
+<p>Packet delay and loss usually occur at routers. Routers have to queue up packets when their incoming packet rate exceeds its available packet output capacity, and if the queue becomes full, the router has to start dropping packets from the queue, causing packet loss. Packet loss and delay also commonly happens due to bad connections, when they simply get lost in transmission or are delayed because we have to retransmit them. Specifically, routers induce <strong>queueing delay</strong> (time spent waiting in the incoming packet queue), <strong>transmission delay</strong> (time spent transmitting packet on output channel, a function of the packet size and link bandwidth), <strong>processing delay</strong> (time spent for router to determine where to send a packet), and <strong>propagation delay</strong> (time spent for packet to travel along the outgoing connection, a function of the link's physical length and the propagation speed, usually the speed of light).</p>
+<p>The queueing delay depends on the average incoming packet rate <span class="math inline">a</span>, the link bandwidth <span class="math inline">R</span>, and the average packet length <span class="math inline">L</span>. If <span class="math inline">La/R \le 1</span>, the queueing delay is proportional to that value. Otherwise, queueing delay will tend to infinity, as the router can no longer keep up.</p>
+<p>Real delays on the internet can be inspected using tools like <code>traceroute</code>. Traceroute uses ICMP to find individual delays from the source to each router along the way to a destination. Essentially, for each router <span class="math inline">i</span> along the path, we send three ICMP packets that will be detected specifically by router <span class="math inline">i</span> along the path, which then responds to the ping. Traceroute then times how long it took for the three replies to come back, then shows the delays and the hosts at which our packets were dropped. The packet won't always take the same path, but it can give us a general idea of what routing delays are like.</p>
+<p>Packets what's called a TTL (time to live), which determine the number of times the packet can pass through a router. This ensures that if we end up with a cyclic route, packets don't go back and forth forever - instead, packets get their TTL decremented each time they're retransmitted, and are dropped if their TTL reaches 0. For ICMP, we can also request that the router that dropped the packet notify us via ICMP that they dropped our packet. The TTL is a hop count rather than a real-world time because real-world time doesn't really map to how much congestion a packet might cause, only how much it clogs up routers does.</p>
+<p>To make sure the traceroute packets go specifically to router <span class="math inline">i</span> and not any other routers, we set the ICMP packet's TTL to <span class="math inline">i</span> and request that we get notified if the packet is dropped. After <span class="math inline">i</span> hops, the packet gets to router <span class="math inline">i</span> and we get an ICMP packet back telling us that router <span class="math inline">i</span> dropped it.</p>
+<p>Throughput is the maximum transmitting/receiving rate. Usually this is a bottleneck at access ISP and server-to-ISP connections, rather than in things like peering links - the lowest throughput link in a route determines the overall throughput of the entire route.</p>
+<p>The internet is organized into many layers, to allow different components to operate at simple levels of abstraction. The 7-layer model is the main way to look at these:</p>
+<ul>
+<li>Application layer - supporting network applications (e.g., HTTP, FTP)</li>
+<li>Transport layer - process to process data transfer (e.g., TCP, UDP)</li>
+<li>Network layer - routing of datagrams (e.g., IP, ICMP)</li>
+<li>Link layer - encoding of datagrams into bits (e.g., Ethernet, 802.11n)</li>
+<li>Physical layer - transfer data in the physical world (e.g., copper, fiber optic cables, satellite)</li>
+</ul>
+<p>Generally, lower layers will add headers/footers to the higher layers' units during transportation, and then strip them out when they arrive.</p>
+<p>The internet wasn't originally designed with much security, assuming mutually trusting users on a network - a lot of work has taken place since to make sure the internet still works today.</p>
 <div class="status-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; text-align: center;">
     <div style="display: inline-block; padding: 0.8em 2em 0.5em 2em; background: black; color: white; font-size: 2em;">
         Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...
