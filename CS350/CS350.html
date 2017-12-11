@@ -88,6 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+        "\\argmin": "\operatorname{argmin}}",
+        "\\argmax": "\operatorname{argmax}}",
+        "\\sgn": "\operatorname{sgn}}",
 
         // not yet available in KaTeX
         "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
@@ -301,7 +304,7 @@ Wednesdays/Fridays 4:00 PM in MC 4040</code></pre>
     <span class="co">// when the lock is already locked, setting it to true repeatedly does nothing since it was already true to begin with, which means we&#39;ll keep looping until it becomes unlocked</span>
     <span class="co">// when it becomes unlocked, the locked flag gets sets to false elsewhere, and this loop sets it to true then breaks, which means we acquired the lock and can continue</span>
     <span class="co">// this test-and-set has to be atomic because we don&#39;t want to risk the possibility of another thread acquiring the spinlock in between us finding that the value of the locked field is false, and us setting the locked field to true - if that happens, then two threads have acquired the spinlock, which is Very Bad</span>
-    <span class="kw">while</span> (test_and_set(&amp;locked, true)) { }
+    <span class="cf">while</span> (test_and_set(&amp;locked, true)) { }
     <span class="co">// the atomic instructions tend to slow everything down, since they need to stop all the other cores when they run</span>
     <span class="co">// as an optimization, we could do `locked &amp;&amp; test_and_set(&amp;locked, true)` instead of just `test_and_set(&amp;locked, true)` so multiple threads waiting on the lock to be released don&#39;t constantly spam slow atomic instructions</span>
 }

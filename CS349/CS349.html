@@ -88,6 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+        "\\argmin": "\operatorname{argmin}}",
+        "\\argmax": "\operatorname{argmax}}",
+        "\\sgn": "\operatorname{sgn}}",
 
         // not yet available in KaTeX
         "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
@@ -172,15 +175,15 @@ Website: https://www.student.cs.uwaterloo.ca/~cs349/s16/about.html</code></pre>
 <p>Before windowing systems, we had terminal applications that would take up the entire screen. Windowing systems introduced a new concept: different applications can take up different parts of the screen, and they can all run independently, not having to worry about which parts of the screen they need to draw, how to move/resize themselves, and whether to accept input. For applications, X exposes a buffer for the application to draw into, and a stream of input events for the application to consume.</p>
 <p>These days, X is only used on Linux and BSDs - Windows and OS X have their own windowing systems and window managers, and are often not interchangable. However, there is still the fundamental need for the same functionality.</p>
 <p>In this course, we will be using Swing with Java. Swing has a different, simpler set of assumptions, and therefore is a lot easier to use for creating most modern applications. For example, modern architectures tend to run directly on the user's computer rather than on a mainframe accessed via a thin client. Here's a simple example:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import javax.swing.*;</span>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span><span class="im"> javax.swing.*;</span>
 
-<span class="kw">public</span> <span class="kw">class</span> TestWindow <span class="kw">extends</span> JFrame {
+<span class="kw">public</span> <span class="kw">class</span> TestWindow <span class="kw">extends</span> <span class="bu">JFrame</span> {
     <span class="kw">public</span> <span class="fu">TestWindow</span>() {
         <span class="kw">this</span>.<span class="fu">setTitle</span>(<span class="st">&quot;Test Window&quot;</span>);
-        <span class="kw">this</span>.<span class="fu">setDefaultCloseOperation</span>(JFrame.<span class="fu">EXIT_ON_CLOSE</span>);
+        <span class="kw">this</span>.<span class="fu">setDefaultCloseOperation</span>(<span class="bu">JFrame</span>.<span class="fu">EXIT_ON_CLOSE</span>);
     }
 
-    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String args[]) {
+    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span> args[]) {
         TestWindow testWindow = <span class="kw">new</span> <span class="fu">TestWindow</span>();
         testWindow.<span class="fu">setSize</span>(<span class="dv">400</span>, <span class="dv">300</span>);
         testWindow.<span class="fu">setVisible</span>(<span class="kw">true</span>);

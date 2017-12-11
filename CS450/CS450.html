@@ -88,6 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+        "\\argmin": "\operatorname{argmin}}",
+        "\\argmax": "\operatorname{argmax}}",
+        "\\sgn": "\operatorname{sgn}}",
 
         // not yet available in KaTeX
         "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
@@ -224,7 +227,7 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <p>Live demonstration of the above Verilog workflow, including an overview of GtkWave's features and a shell script that builds and simulates the module.</p>
 <p><strong>Heirarchical design</strong> is the idea of using lower-level modules in higher-level modules. For example, a carry-lookahead adder module might instantiate a few ripple-carry adders, which in turn might instantiate a bunch of full-adders:</p>
 <div class="sourceCode"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span class="co">// adder_4_bit.sv</span>
-<span class="kw">module</span> adder_4_bit(<span class="dt">output</span> c_out, <span class="dt">output</span> [<span class="dv">3</span>:<span class="dv">0</span>] sum, <span class="dt">input</span> c_in, <span class="dt">input</span> [<span class="dv">3</span>:<span class="dv">0</span>] a, b);
+<span class="kw">module</span> adder_<span class="dv">4</span>_bit(<span class="dt">output</span> c_out, <span class="dt">output</span> [<span class="dv">3</span>:<span class="dv">0</span>] sum, <span class="dt">input</span> c_in, <span class="dt">input</span> [<span class="dv">3</span>:<span class="dv">0</span>] a, b);
     logic [<span class="dv">3</span>:<span class="dv">1</span>] carry;
     full_adder fa0(.c_out(carry[<span class="dv">1</span>]), .sum(sum[<span class="dv">0</span>]), .c_in(c_in), .a(a[<span class="dv">0</span>]), .b(b[<span class="dv">0</span>]));
     full_adder fa0(.c_out(carry[<span class="dv">2</span>]), .sum(sum[<span class="dv">1</span>]), .c_in(carry[<span class="dv">1</span>]), .a(a[<span class="dv">1</span>]), .b(b[<span class="dv">1</span>]));
@@ -233,13 +236,13 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <span class="kw">endmodule</span></code></pre></div>
 <p>Note that there's a lot of similar statements for the full adder definitions. In these cases, we can use generate statements to remove duplicated code. It looks somewhat like a loop, but it's more of a macro that gets expanded into multiple statements at compile time:</p>
 <div class="sourceCode"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span class="co">// adder_4_bit_generate.sv</span>
-<span class="kw">module</span> adder_4_bit(<span class="dt">output</span> c_out, <span class="dt">output</span> [<span class="dv">3</span>:<span class="dv">0</span>] sum, <span class="dt">input</span> c_in, <span class="dt">input</span> [<span class="dv">3</span>:<span class="dv">0</span>] a, b);
+<span class="kw">module</span> adder_<span class="dv">4</span>_bit(<span class="dt">output</span> c_out, <span class="dt">output</span> [<span class="dv">3</span>:<span class="dv">0</span>] sum, <span class="dt">input</span> c_in, <span class="dt">input</span> [<span class="dv">3</span>:<span class="dv">0</span>] a, b);
     logic [<span class="dv">4</span>:<span class="dv">0</span>] carry;
     
     <span class="kw">generate</span>
         <span class="dt">genvar</span> i;
-        <span class="kw">for</span>(i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i=i<span class="dv">+1</span>) <span class="kw">begin:</span><span class="dt"> adder</span>
-            full_adder fa(.c_out(carry[i<span class="dv">+1</span>]), .sum(sum[i]), .c_in(carry[i]) ,.a(a[i]), .b(b[i]));
+        <span class="kw">for</span>(i=<span class="dv">0</span>; i&lt;<span class="dv">4</span>; i=i+<span class="dv">1</span>) <span class="kw">begin:</span><span class="dt"> a</span>dder
+            full_adder fa(.c_out(carry[i+<span class="dv">1</span>]), .sum(sum[i]), .c_in(carry[i]) ,.a(a[i]), .b(b[i]));
         <span class="kw">end</span>
     <span class="kw">endgenerate</span>
 
@@ -299,7 +302,7 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 </ul>
 <p>Note that with if statements and other conditionals, if we don't explicitly set the value of a logic, then it retains its current value.</p>
 <p>Let's implement a mux:</p>
-<div class="sourceCode"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span class="kw">module</span> mux_2_input(<span class="dt">output</span> logic d, <span class="dt">input</span> i0, i1, select);
+<div class="sourceCode"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span class="kw">module</span> mux_<span class="dv">2</span>_input(<span class="dt">output</span> logic d, <span class="dt">input</span> i0, i1, select);
     <span class="kw">always</span> @ *
         <span class="kw">case</span> (select)
             <span class="dv">0</span>: d = i0;
@@ -672,24 +675,24 @@ Tuesdays/Thursdays 1:00pm-2:20pm</code></pre>
 <li>Load-linked/store-conditional - use load-linked to load some memory, then store-conditional tries to store, failing if the linked location was changed since we load-linked it or if there was an interrupt (e.g., <code>LL</code>/<code>SC</code> in MIPS).</li>
 </ul>
 <p>With any of these, we can implement a spinlock, the basic primitive needed to implement all of the other synchronization primitive. For example, with the compare-and-swap primitive <code>cmpswp</code> in MIPS:</p>
-<pre class="asm"><code>spin: cmpswp LOCK_VARIABLE, 0, 1 ; if LOCK_VARIABLE is 0, set it to 1
-      bne spin ; loop until we successfully set LOCK_VARIABLE to 1 from 0
-      ; we now hold the spinlock, and can do our critical section stuff
-      sw R0, LOCK_VARIABLE ; release the lock</code></pre>
+<div class="sourceCode"><pre class="sourceCode asm"><code class="sourceCode fasm"><span class="fu">spin:</span> cmpswp LOCK_VARIABLE, <span class="dv">0</span>, <span class="dv">1</span> <span class="co">; if LOCK_VARIABLE is 0, set it to 1</span>
+      bne spin <span class="co">; loop until we successfully set LOCK_VARIABLE to 1 from 0</span>
+      <span class="co">; we now hold the spinlock, and can do our critical section stuff</span>
+      sw R0, LOCK_VARIABLE <span class="co">; release the lock</span></code></pre></div>
 <p>Another example, with the <code>ll</code>/<code>sc</code> primitives in MIPS:</p>
-<pre class="asm"><code>spin: ll R1, ADDRESS
-      addi R1, R1, 1
-      ;wip: where&#39;s the critical section?
+<div class="sourceCode"><pre class="sourceCode asm"><code class="sourceCode fasm"><span class="fu">spin:</span> ll R1, ADDRESS
+      addi R1, R1, <span class="dv">1</span>
+      <span class="co">;wip: where&#39;s the critical section?</span>
       sc R1, A
-      bne spin </code></pre>
+      bne spin </code></pre></div>
 <h1 id="section-17">9/3/17</h1>
 <p>POSIX threads are implemented in the pthreads library which expose functionality for thread creation/destruction and primitives like mutexes.</p>
 <p>Pthreads example:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;pthread.h&gt;</span>
-<span class="ot">#include stdio.h</span>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#include </span><span class="im">&lt;pthread.h&gt;</span>
+<span class="pp">#include stdio.h</span>
 
-<span class="ot">#define NTHREAD 4</span>
-<span class="ot">#define ARRAYSIZE 1000000</span>
+<span class="pp">#define NTHREAD 4</span>
+<span class="pp">#define ARRAYSIZE 1000000</span>
 
 <span class="dt">double</span> sum = <span class="fl">0.0</span>;
 <span class="dt">double</span> a[ARRAYSIZE];
@@ -703,21 +706,21 @@ pthread_mutex_t sum_mutex;
     pthread_mutex_init(&amp;sum_mutex, NULL); <span class="co">// initialize mutex, with the default (NULL) attributes</span>
     <span class="dt">int</span> thread_ids[NTHREAD];
     pthread_t threads[NTHREAD];
-    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; NTHREAD; i ++) {
+    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; NTHREAD; i ++) {
         tid[i] = i;
         pthread_create(&amp;threads[i], NULL, add_array, &amp;thread_ids[i]); <span class="co">// create thread from the add_array function, called with argument `&amp;thread_ids[i]`, and store the thread object in `&amp;threads[i]`</span>
     }
-    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; NTHREAD; i ++) {
+    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; NTHREAD; i ++) {
         pthread_join(thread[i], NULL); <span class="co">// wait for the thread to terminate</span>
     }
-    printf(<span class="st">&quot;array sum: %f</span><span class="ch">\n</span><span class="st">&quot;</span>, sum);
+    printf(<span class="st">&quot;array sum: %f</span><span class="sc">\n</span><span class="st">&quot;</span>, sum);
 }
 
 <span class="dt">void</span> *add_array(<span class="dt">void</span> *thread_id) {
     <span class="dt">int</span> start = (*(<span class="dt">int</span> *)thread_id) * ((<span class="dt">double</span>)ARRAYSIZE/NTHREAD);
     <span class="dt">int</span> end = (*(<span class="dt">int</span> *)thread_id + <span class="dv">1</span>) * ((<span class="dt">double</span>)ARRAYSIZE/NTHREAD);
     <span class="dt">double</span> my_sum = <span class="fl">0.0</span>;
-    <span class="kw">for</span> (<span class="dt">int</span> i = start; i &lt; end; i ++) {
+    <span class="cf">for</span> (<span class="dt">int</span> i = start; i &lt; end; i ++) {
         my_sum += a[i];
         pthread_mutex_lock(&amp;sum_mutex);
         sum += my_sum;
@@ -725,12 +728,12 @@ pthread_mutex_t sum_mutex;
     }
 }</code></pre></div>
 <p>With the OpenMP library, we can use compiler directives to automatically create threads and assign work to them. This library is widely used in real-world programs. For this example we'll use C++:</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
-<span class="ot">#include &lt;omp.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;omp.h&gt;</span>
 
 <span class="kw">using</span> <span class="kw">namespace</span> std;
 
-<span class="dt">const</span> <span class="dt">int</span> ARRAYSIZE = <span class="dv">1000000</span>;
+<span class="at">const</span> <span class="dt">int</span> ARRAYSIZE = <span class="dv">1000000</span>;
 <span class="dt">double</span> sum = <span class="fl">0.0</span>;
 <span class="dt">double</span> a[ARRAYSIZE];
 
@@ -740,20 +743,20 @@ pthread_mutex_t sum_mutex;
     <span class="dt">double</span> my_sum;
     
     <span class="co">// start the parallel computation using OpenMP, with shared memory, a thread-local variable `my_sum`, and 4 threads (this defaults to the number of logical cores)</span>
-    <span class="ot">#pragma omp parallel default(shared) private(my_sum) num_threads(4)</span>
+    <span class="pp">#pragma omp parallel default(shared) private(my_sum) num_threads(4)</span>
     {
         my_sum = <span class="fl">0.0</span>;
-        <span class="ot">#pragma omp for</span>
-        <span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; ARRAYSIZE; i ++) {
+        <span class="pp">#pragma omp for</span>
+        <span class="cf">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; ARRAYSIZE; i ++) {
             my_sum += a[i];
         }
-        <span class="ot">#pragma omp critical</span>
+        <span class="pp">#pragma omp critical</span>
         sum += my_sum;
     }
     
     <span class="co">// an alternative way to the above block</span>
-    <span class="ot">#pragma omp parallel for default(shared) reduction(+ : sum) num_threads(4)</span>
-    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; ARRAYSIZE; i ++) {
+    <span class="pp">#pragma omp parallel for default(shared) reduction(+ : sum) num_threads(4)</span>
+    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; ARRAYSIZE; i ++) {
         sum += a[i];
     }
 }</code></pre></div>
@@ -813,16 +816,16 @@ pthread_mutex_t sum_mutex;
 <p>MESIF is used by Intel, and is another probing protocol. Basically, this just adds a FORWARDING state, . For a SHARED block, only one of those holders of that SHARED block should forward the block when there's a READ/WRITE on the bus. The most recent reader of a block holds it in the FORWARDING state and does the forwarding. After responding to a bus READ/WRITE, it transitions to the SHARED state (the requesting processor now has the FORWARDING block). This is nice because it makes caches take turns forwarding the data. Also, the FORWARDING block has the freshest copy of the block's data, so it's not likely to evict that block (which would be slow due to needing to write back to main memory).</p>
 <h1 id="section-19">16/3/17</h1>
 <p>To implement spinlocks with the atomic exchange instruction:</p>
-<pre class="asm"><code>     daddui R2, R0, 1 ; set R2 to 1
-spin exch R2, (R1) ; atomically exhange the value of the lock with 1
-     bnez R2, spin ; if the lock was originally held (originally had a value of 1), keep spinning</code></pre>
+<div class="sourceCode"><pre class="sourceCode asm"><code class="sourceCode fasm">     daddui R2, R0, <span class="dv">1</span> <span class="co">; set R2 to 1</span>
+spin exch R2, (R1) <span class="co">; atomically exhange the value of the lock with 1</span>
+     bnez R2, spin <span class="co">; if the lock was originally held (originally had a value of 1), keep spinning</span></code></pre></div>
 <p>The <code>exch</code> is atomic, so it always generates a write miss (which then causes other lock holders to do writebacks) - this is a lot of bus traffic. This is because the last holder of the lock has the lock value as MODIFIED in memory, and the rest has it as an INVALID value, and this switches every time there's an EXCH instruction.</p>
 <p>What we really want is for the lock to be a SHARED value between all the nodes trying to get the lock, at least most of the time. We can implement this by non-atomically reading the value first before trying to atomically exchange it:</p>
-<pre class="asm"><code>spin ld R2, (R1)
+<div class="sourceCode"><pre class="sourceCode asm"><code class="sourceCode fasm">spin ld R2, (R1)
      bnez R2, spin
-     daddui R2, R0, 1
+     daddui R2, R0, <span class="dv">1</span>
      exch R2, (R1)
-     bnez R2, spin</code></pre>
+     bnez R2, spin</code></pre></div>
 <p>The non-atomic read causes a read miss rather than a write miss, and makes the node with the MODIFIED lock value and the node that caused the read miss to change their lock value to SHARED. After the read miss is resolved (so the lock value becomes SHARED), nodes can now spin on their local cache values. When the lock holder releases the lock, the lock value is invalidated in the other nodes, allowing them to race to try to acquire that lock.</p>
 <p>A directory implementation of MESI has a directory that stores the state of each block of memory, stored with each memory block. Each directory is a buffer with one entry per block, each entry storing:</p>
 <ul>
@@ -853,26 +856,26 @@ spin exch R2, (R1) ; atomically exhange the value of the lock with 1
 <p>Reads in transactions are tracked in the <strong>read set</strong> (RS) buffer, and writes are tracked in the <strong>write set</strong> (WS) buffer (reads/writes aren't actually executed, just tracked). A <strong>conflict</strong> is when a thread writes to a memory location that is in another transaction's RS or WS.</p>
 <p>Locks are pessimistic parallism - they optimize for the case in which a conflict occurs, by preventing conflicts from happening in the first place. Transactions are optimistic parallelism - they optimize for the case in which no conflicts occur, by recovering from conflicts when we encounter them.</p>
 <p>Transactional memory example in C++:</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;random&gt;</span>
-<span class="ot">#include &lt;thread&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;random&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;thread&gt;</span>
 
 <span class="kw">using</span> <span class="kw">namespace</span> std;
 
-<span class="ot">#define NUM_THREADS 10</span>
-<span class="ot">#define NUM_ACCOUNTS 1000</span>
+<span class="pp">#define NUM_THREADS 10</span>
+<span class="pp">#define NUM_ACCOUNTS 1000</span>
 
 <span class="dt">int</span> balance[NUM_ACCOUNTS];
 
 <span class="dt">void</span> func() {
     random_device rnd;
-    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">1000000</span>; i ++) {
+    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">1000000</span>; i ++) {
         <span class="dt">int</span> a1 = rnd() % NUM_ACCOUNTS;
         <span class="dt">int</span> a1 = rnd() % NUM_ACCOUNTS;
         <span class="dt">int</span> amount = rnd() % <span class="dv">100</span>;
 
         <span class="co">// this block executes atomically, as a single transaction</span>
         __transaction_atomic {
-            <span class="kw">if</span> (amount &gt; balance[a1]) { amount = balance[a1]; }
+            <span class="cf">if</span> (amount &gt; balance[a1]) { amount = balance[a1]; }
             balance[a1] -= amount;
             balance[a2] += amount;
         }
@@ -881,10 +884,10 @@ spin exch R2, (R1) ; atomically exhange the value of the lock with 1
 
 <span class="dt">int</span> main() {
     <span class="co">// initialize every account to have balance 100</span>
-    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; NUM_ACCOUNTS; i ++) { balance[i] = <span class="dv">100</span>; }
+    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; NUM_ACCOUNTS; i ++) { balance[i] = <span class="dv">100</span>; }
 
     thread thr[NUM_THREADS];
-    <span class="kw">for</span> (<span class="kw">auto</span> &amp;t : thr) { t = thread(func); }
+    <span class="cf">for</span> (<span class="kw">auto</span> &amp;t : thr) { t = thread(func); }
 }</code></pre></div>
 <p>This compiles with experimental features of GCC, which implements software transactional memory. However, without hardware support, this turns out to have half the performance of the mutex-based version. The main issue is that resolving conflicts is really expensive in hardware.</p>
 <p>Herlihy and Moss proposed the first hardware transactional memory architecture in 1993. This architecture added a transactional cache in parallel to the L1 data cache, and improved performance over software transactional memory by an order of magnitude.</p>
@@ -966,8 +969,8 @@ spin exch R2, (R1) ; atomically exhange the value of the lock with 1
 <h1 id="section-23">30/3/17</h1>
 <p>Many-core architectures combine many simple cores onto a single core. They're easier to program than GPUs, since each core is a lot more CPU-like.</p>
 <p>For example, the Intel Phi architecture has a VPU (Vector Processing Unit), with 512 bit operands, 32 vector registers (which can hold floats/ints), and 8 mask registers (which determine whether a particular instruction will execute) per thread. Individual cores could run operations on each of these registers independently, allowing us to do things like masked vector add in parallel:</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;n; i ++) {
-    <span class="kw">if</span> (residual[i] &gt; epsilon) {
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;n; i ++) {
+    <span class="cf">if</span> (residual[i] &gt; epsilon) {
         x[i] += correction[i];
     }
 }</code></pre></div>

@@ -88,6 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+        "\\argmin": "\operatorname{argmin}}",
+        "\\argmax": "\operatorname{argmax}}",
+        "\\sgn": "\operatorname{sgn}}",
 
         // not yet available in KaTeX
         "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
@@ -223,7 +226,7 @@ By the limit order rule, <span class="math inline">(\ln n)^a \in o(n^b)</span>.<
 <h1 id="section-3">23/9/15</h1>
 <p>Consider the following program:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> useless(n):
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n):
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):
         j <span class="op">=</span> i
         <span class="cf">while</span> j <span class="op">&gt;=</span> <span class="dv">1</span>:
             j <span class="op">/=</span> <span class="dv">2</span></code></pre></div>
@@ -295,14 +298,14 @@ So the sum of the tree is <span class="math inline">\sum_{i = 0}^j (j - i) 2^j =
     left <span class="op">=</span> non_dominated(points[:pivot])
     right <span class="op">=</span> non_dominated(points[pivot <span class="op">+</span> <span class="dv">1</span>:])
     i <span class="op">=</span> <span class="dv">0</span>
-    <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(left) <span class="op">and</span> left[i].y <span class="op">&gt;</span> right[<span class="dv">1</span>].y:
+    <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(left) <span class="kw">and</span> left[i].y <span class="op">&gt;</span> right[<span class="dv">1</span>].y:
         i <span class="op">+=</span> <span class="dv">1</span>
     <span class="cf">return</span> left[:i] <span class="op">+</span> right</code></pre></div>
 <p>Clearly, the time complexity of this algorithm is <span class="math inline">T(n) = T\left(\floor{\frac n 2}\right) + T\left(\ceil{\frac n 2}\right) = O(n \log n)</span> (the sloppy version of this can be proven using the master theorem).</p>
 <p>Without divide and conquer, we could also just sort the list, and then iterate though it from right to left, keeping track of the largest Y axis coordinate seen so far and eliminating points at or below this Y coordinate:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> non_dominated(points):
     largest <span class="op">=</span> <span class="bu">float</span>(<span class="st">&quot;-inf&quot;</span>)
-    <span class="cf">for</span> point <span class="op">in</span> <span class="bu">reversed</span>(<span class="bu">sorted</span>(points, key<span class="op">=</span><span class="kw">lambda</span> p: p.x)):
+    <span class="cf">for</span> point <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">sorted</span>(points, key<span class="op">=</span><span class="kw">lambda</span> p: p.x)):
         <span class="cf">if</span> point.y <span class="op">&lt;=</span> largest:
             <span class="cf">yield</span> point
         <span class="cf">else</span>:
@@ -388,7 +391,7 @@ So the sum of the tree is <span class="math inline">\sum_{i = 0}^j (j - i) 2^j =
 <p>Using divide and conquer, we might do something similar to quicksort, called quickselect - we pick a pivot, partition the elements, and then recursively quickselect within the partition that contains the desired element:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> quickselect(array, k):
     pivot <span class="op">=</span> array[<span class="dv">0</span>]
-    partition1, partition2 <span class="op">=</span> [x <span class="cf">for</span> x <span class="op">in</span> array <span class="cf">if</span> x <span class="op">&lt;</span> pivot], [x <span class="cf">for</span> x <span class="op">in</span> array <span class="cf">if</span> x <span class="op">&gt;</span> pivot]
+    partition1, partition2 <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> array <span class="cf">if</span> x <span class="op">&lt;</span> pivot], [x <span class="cf">for</span> x <span class="kw">in</span> array <span class="cf">if</span> x <span class="op">&gt;</span> pivot]
     <span class="cf">if</span> k <span class="op">-</span> <span class="dv">1</span> <span class="op">==</span> <span class="bu">len</span>(partition1):
         <span class="cf">return</span> pivot
     <span class="cf">elif</span> k <span class="op">-</span> <span class="dv">1</span> <span class="op">&lt;</span> <span class="bu">len</span>(partition1):
@@ -409,7 +412,7 @@ So the sum of the tree is <span class="math inline">\sum_{i = 0}^j (j - i) 2^j =
     pivot <span class="op">=</span> median_of_medians_quickselect(M, r <span class="op">+</span> <span class="dv">1</span>)
     
     <span class="co"># do the rest of the steps from quickselect</span>
-    partition1, partition2 <span class="op">=</span> [x <span class="cf">for</span> x <span class="op">in</span> array <span class="cf">if</span> x <span class="op">&lt;</span> pivot], [x <span class="cf">for</span> x <span class="op">in</span> array <span class="cf">if</span> x <span class="op">&gt;</span> pivot]
+    partition1, partition2 <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> array <span class="cf">if</span> x <span class="op">&lt;</span> pivot], [x <span class="cf">for</span> x <span class="kw">in</span> array <span class="cf">if</span> x <span class="op">&gt;</span> pivot]
     <span class="cf">if</span> k <span class="op">-</span> <span class="dv">1</span> <span class="op">==</span> <span class="bu">len</span>(partition1):
         <span class="cf">return</span> pivot
     <span class="cf">elif</span> k <span class="op">-</span> <span class="dv">1</span> <span class="op">&lt;</span> <span class="bu">len</span>(partition1):
@@ -440,7 +443,7 @@ So the sum of the tree is <span class="math inline">\sum_{i = 0}^j (j - i) 2^j =
     intervals <span class="op">=</span> <span class="bu">sorted</span>(intervals, key<span class="op">=</span><span class="kw">lambda</span> interval: interval[<span class="dv">1</span>])
     solution <span class="op">=</span> [intervals[<span class="dv">0</span>]]
     latest_finish <span class="op">=</span> intervals[<span class="dv">0</span>][<span class="dv">1</span>]
-    <span class="cf">for</span> interval <span class="op">in</span> intervals[<span class="dv">1</span>:]:
+    <span class="cf">for</span> interval <span class="kw">in</span> intervals[<span class="dv">1</span>:]:
         <span class="cf">if</span> interval[<span class="dv">0</span>] <span class="op">&gt;=</span> latest_finish:
             solution.append(interval)
             latest_finish <span class="op">=</span> interval[<span class="dv">1</span>]
@@ -468,9 +471,9 @@ Since <span class="math inline">k \le l</span> and <span class="math inline">k \
     intervals <span class="op">=</span> <span class="bu">sorted</span>(intervals, key<span class="op">=</span><span class="kw">lambda</span> interval: interval[<span class="dv">0</span>])
     partitions <span class="op">=</span> [{intervals[<span class="dv">0</span>]}]
     partition_latest_finishes <span class="op">=</span> [intervals[<span class="dv">0</span>][<span class="dv">1</span>]]
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(intervals)):
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(intervals)):
         interval <span class="op">=</span> intervals[i]
-        <span class="cf">for</span> partition_index, latest_finish <span class="op">in</span> <span class="bu">enumerate</span>(partition_latest_finishes): <span class="co"># try to assign interval to existing partitions</span>
+        <span class="cf">for</span> partition_index, latest_finish <span class="kw">in</span> <span class="bu">enumerate</span>(partition_latest_finishes): <span class="co"># try to assign interval to existing partitions</span>
             <span class="cf">if</span> latest_finish <span class="op">&lt;=</span> interval[<span class="dv">0</span>]:
                 partitions[partition_index].add(interval)
                 partition_latest_finishes[partition_index] <span class="op">=</span> interval[<span class="dv">1</span>]
@@ -492,7 +495,7 @@ Therefore there must be at least <span class="math inline">D</span> colors, whic
     intervals <span class="op">=</span> <span class="bu">sorted</span>(intervals, key<span class="op">=</span><span class="kw">lambda</span> interval: interval[<span class="dv">0</span>])
     partitions <span class="op">=</span> [{intervals[<span class="dv">0</span>]}]
     partition_latest_finishes_heap <span class="op">=</span> [(intervals[<span class="dv">0</span>][<span class="dv">1</span>], <span class="dv">0</span>)]
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(intervals)):
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(intervals)):
         interval <span class="op">=</span> intervals[i]
         latest_finish, partition_index <span class="op">=</span> heapq.heappop(partition_latest_finishes_heap)
         <span class="cf">if</span> latest_finish <span class="op">&lt;=</span> interval[<span class="dv">0</span>]: <span class="co"># try to assign interval to the existing partition that ends earliest</span>
@@ -510,7 +513,7 @@ Therefore there must be at least <span class="math inline">D</span> colors, whic
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> greedy_rational_knapsack(profits, weights, capacity):
     items <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">zip</span>(profits, weights), <span class="kw">lambda</span> x: x[<span class="dv">0</span>] <span class="op">/</span> x[<span class="dv">1</span>])
     current_weight <span class="op">=</span> <span class="dv">0</span>
-    <span class="cf">for</span> item <span class="op">in</span> items: <span class="co"># consider items in decreasing order of profit to weight ratio</span>
+    <span class="cf">for</span> item <span class="kw">in</span> items: <span class="co"># consider items in decreasing order of profit to weight ratio</span>
         profit, weight <span class="op">=</span> item
         <span class="cf">if</span> current_weight <span class="op">+</span> weight <span class="op">&lt;=</span> capacity: <span class="co"># we have enough space to take all of the item, so take it</span>
             result.append(<span class="dv">1</span>)
@@ -543,14 +546,14 @@ Therefore, the greedy algorithm is optimal.</p>
 
 <span class="kw">def</span> gale_shapley(men, women, preference_function):
     engagements <span class="op">=</span> {}
-    men_ranks <span class="op">=</span> {man: <span class="dv">0</span> <span class="cf">for</span> man <span class="op">in</span> men}
+    men_ranks <span class="op">=</span> {man: <span class="dv">0</span> <span class="cf">for</span> man <span class="kw">in</span> men}
     unengaged_men <span class="op">=</span> <span class="bu">set</span>(men)
     <span class="cf">while</span> unengaged_men:
         man <span class="op">=</span> <span class="bu">next</span>(unengaged_men.keys())
         men_ranks[man] <span class="op">+=</span> <span class="dv">1</span> <span class="co"># next rank in preferences</span>
         woman <span class="op">=</span> preference_function(man, men_ranks[man])
-        <span class="cf">if</span> woman <span class="op">not</span> <span class="op">in</span> engagements <span class="op">or</span> woman_prefers(woman, preference_function, man, engagements[woman]):
-            <span class="cf">if</span> woman <span class="op">in</span> engagements: unengaged_men.add(engagements[man])
+        <span class="cf">if</span> woman <span class="kw">not</span> <span class="kw">in</span> engagements <span class="kw">or</span> woman_prefers(woman, preference_function, man, engagements[woman]):
+            <span class="cf">if</span> woman <span class="kw">in</span> engagements: unengaged_men.add(engagements[man])
             unengaged_men.remove(man)
             engagements[woman] <span class="op">=</span> man
     <span class="cf">return</span> <span class="bu">set</span>(engagements.items())</code></pre></div>
@@ -577,14 +580,14 @@ This is a contradiction, so Alice and Bob cannot exist, and the matching is stab
 <p>For example, if we were to write the above function iteratively, we might start from the base case and build upward toward the result:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> fibinacci(n):
     saved <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>]
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">2</span>, n <span class="op">+</span> <span class="dv">1</span>):
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, n <span class="op">+</span> <span class="dv">1</span>):
         saved[i] <span class="op">=</span> saved[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> saved[i <span class="op">-</span> <span class="dv">2</span>]
     <span class="cf">return</span> saved[n]</code></pre></div>
 <p>However, note that at any given time, we only really use the last two elements of <code>saved</code>. Therefore, we can just store the last two elements:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> fibinacci(n):
     <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>: <span class="cf">return</span> n
     last1, last2 <span class="op">=</span> <span class="dv">0</span>, <span class="dv">1</span>
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">2</span>, n <span class="op">+</span> <span class="dv">1</span>):
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, n <span class="op">+</span> <span class="dv">1</span>):
         current <span class="op">=</span> last1 <span class="op">+</span> last2
         last1, last2 <span class="op">=</span> current, last1
     <span class="cf">return</span> current</code></pre></div>
@@ -623,13 +626,13 @@ This is a contradiction, so Alice and Bob cannot exist, and the matching is stab
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> collections <span class="im">import</span> defaultdict
 <span class="kw">def</span> knapsack(profits, weights, max_weight):
     max_profits <span class="op">=</span> defaultdict(<span class="bu">dict</span>)
-    <span class="cf">for</span> weight <span class="op">in</span> <span class="bu">range</span>(max_weight):
+    <span class="cf">for</span> weight <span class="kw">in</span> <span class="bu">range</span>(max_weight):
         <span class="cf">if</span> weight <span class="op">&gt;=</span> weights[<span class="dv">0</span>]:
             max_profits[<span class="dv">0</span>][m] <span class="op">=</span> profits[<span class="dv">0</span>]
         <span class="cf">else</span>:
             max_profits[<span class="dv">0</span>][m] <span class="op">=</span> <span class="dv">0</span>
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(profits)):
-        <span class="cf">for</span> weight <span class="op">in</span> <span class="bu">range</span>(max_weight):
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(profits)):
+        <span class="cf">for</span> weight <span class="kw">in</span> <span class="bu">range</span>(max_weight):
             <span class="cf">if</span> weight <span class="op">&lt;</span> weights[i]:
                 max_profits[i][weight] <span class="op">=</span> P[i <span class="op">-</span> <span class="dv">1</span>][weight]
             <span class="cf">else</span>:
@@ -640,13 +643,13 @@ This is a contradiction, so Alice and Bob cannot exist, and the matching is stab
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> collections <span class="im">import</span> defaultdict
 <span class="kw">def</span> knapsack(profits, weights, max_weight):
     max_profits <span class="op">=</span> defaultdict(<span class="bu">dict</span>)
-    <span class="cf">for</span> weight <span class="op">in</span> <span class="bu">range</span>(max_weight):
+    <span class="cf">for</span> weight <span class="kw">in</span> <span class="bu">range</span>(max_weight):
         <span class="cf">if</span> weight <span class="op">&gt;=</span> weights[<span class="dv">0</span>]:
             max_profits[<span class="dv">0</span>][m] <span class="op">=</span> profits[<span class="dv">0</span>]
         <span class="cf">else</span>:
             max_profits[<span class="dv">0</span>][m] <span class="op">=</span> <span class="dv">0</span>
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(profits)):
-        <span class="cf">for</span> weight <span class="op">in</span> <span class="bu">range</span>(max_weight):
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(profits)):
+        <span class="cf">for</span> weight <span class="kw">in</span> <span class="bu">range</span>(max_weight):
             <span class="cf">if</span> weight <span class="op">&lt;</span> weights[i]:
                 max_profits[i][weight] <span class="op">=</span> P[i <span class="op">-</span> <span class="dv">1</span>][weight]
             <span class="cf">else</span>:
@@ -656,7 +659,7 @@ This is a contradiction, so Alice and Bob cannot exist, and the matching is stab
     weight <span class="op">=</span> max_weight
     items <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="bu">len</span>(profits)
     profit <span class="op">=</span> max_profits[<span class="bu">len</span>(profits) <span class="op">-</span> <span class="dv">1</span>, capacity <span class="op">-</span> <span class="dv">1</span>]
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>[<span class="bu">len</span>(profits) <span class="op">-</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>]: <span class="co"># go through indices from the last row&#39;s index to the second row&#39;s index</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>[<span class="bu">len</span>(profits) <span class="op">-</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">-1</span>]: <span class="co"># go through indices from the last row&#39;s index to the second row&#39;s index</span>
         <span class="cf">if</span> profit <span class="op">==</span> max_profits[i <span class="op">-</span> <span class="dv">1</span>, weight]:
             items[i] <span class="op">=</span> <span class="va">False</span>
         <span class="cf">else</span>:
@@ -691,10 +694,10 @@ The final answer is in <span class="math inline">N[n, T]</span>. We could also s
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> collections <span class="im">import</span> defaultdict
 <span class="kw">def</span> LCS(X, Y):
     c <span class="op">=</span> defaultdict(<span class="bu">dict</span>)
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(X) <span class="op">+</span> <span class="dv">1</span>): c[i][<span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span>
-    <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(Y) <span class="op">+</span> <span class="dv">1</span>): c[<span class="dv">0</span>][j] <span class="op">=</span> <span class="dv">0</span>
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(X) <span class="op">+</span> <span class="dv">1</span>):
-        <span class="cf">for</span> j <span class="op">in</span> rnage(<span class="dv">1</span>, <span class="bu">len</span>(Y) <span class="op">+</span> <span class="dv">1</span>):
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(X) <span class="op">+</span> <span class="dv">1</span>): c[i][<span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(Y) <span class="op">+</span> <span class="dv">1</span>): c[<span class="dv">0</span>][j] <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(X) <span class="op">+</span> <span class="dv">1</span>):
+        <span class="cf">for</span> j <span class="kw">in</span> rnage(<span class="dv">1</span>, <span class="bu">len</span>(Y) <span class="op">+</span> <span class="dv">1</span>):
             <span class="cf">if</span> X[i] <span class="op">=</span> Y[j]:
                 c[i, j] <span class="op">=</span> c[i <span class="op">-</span> <span class="dv">1</span>][j <span class="op">-</span> <span class="dv">1</span>]
             <span class="cf">else</span>:
@@ -705,10 +708,10 @@ The final answer is in <span class="math inline">N[n, T]</span>. We could also s
 <span class="kw">def</span> LCS(X, Y):
     c <span class="op">=</span> defaultdict(<span class="bu">dict</span>)
     direction <span class="op">=</span> defaultdict(<span class="bu">dict</span>)
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(X) <span class="op">+</span> <span class="dv">1</span>): c[i][<span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span>
-    <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(Y) <span class="op">+</span> <span class="dv">1</span>): c[<span class="dv">0</span>][j] <span class="op">=</span> <span class="dv">0</span>
-    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(X) <span class="op">+</span> <span class="dv">1</span>):
-        <span class="cf">for</span> j <span class="op">in</span> rnage(<span class="dv">1</span>, <span class="bu">len</span>(Y) <span class="op">+</span> <span class="dv">1</span>):
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(X) <span class="op">+</span> <span class="dv">1</span>): c[i][<span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(Y) <span class="op">+</span> <span class="dv">1</span>): c[<span class="dv">0</span>][j] <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(X) <span class="op">+</span> <span class="dv">1</span>):
+        <span class="cf">for</span> j <span class="kw">in</span> rnage(<span class="dv">1</span>, <span class="bu">len</span>(Y) <span class="op">+</span> <span class="dv">1</span>):
             <span class="cf">if</span> X[i] <span class="op">=</span> Y[j]:
                 c[i, j] <span class="op">=</span> c[i <span class="op">-</span> <span class="dv">1</span>][j <span class="op">-</span> <span class="dv">1</span>]
                 direction[i][j] <span class="op">=</span> <span class="st">&quot;up_left&quot;</span>
@@ -719,7 +722,7 @@ The final answer is in <span class="math inline">N[n, T]</span>. We could also s
     <span class="co"># retrieve the LCS</span>
     i, j <span class="op">=</span> <span class="bu">len</span>(X), <span class="bu">len</span>(Y)
     sequence <span class="op">=</span> []
-    <span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">and</span> j <span class="op">&gt;</span> <span class="dv">0</span>:
+    <span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> j <span class="op">&gt;</span> <span class="dv">0</span>:
         <span class="cf">if</span> direction[i][j] <span class="op">==</span> <span class="st">&quot;up_left&quot;</span>:
             sequence <span class="op">=</span> X[i] <span class="op">+</span> sequence <span class="co"># we could also use `Y[j]` rather than `X[i]` since they are identical here</span>
             i <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span> j <span class="op">-=</span> <span class="dv">1</span>
@@ -750,14 +753,14 @@ The final answer is in <span class="math inline">N[n, T]</span>. We could also s
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> collections <span class="im">import</span> deque
 <span class="kw">def</span> breadth_first_search(vertices, adjacency_list, start_vertex):
     colors, predecessors <span class="op">=</span> {}, {}
-    <span class="cf">for</span> vertex <span class="op">in</span> vertices:
+    <span class="cf">for</span> vertex <span class="kw">in</span> vertices:
         colors[vertex] <span class="op">=</span> <span class="st">&quot;white&quot;</span>
         predecessors[v] <span class="op">=</span> <span class="bu">set</span>()
     colors[start_vertex] <span class="op">=</span> <span class="st">&quot;gray&quot;</span>
     q <span class="op">=</span> deque([start_vertex])
     <span class="cf">while</span> q:
         vertex <span class="op">=</span> q.popleft()
-        <span class="cf">for</span> neighbor <span class="op">in</span> adjacency_list[vertex]:
+        <span class="cf">for</span> neighbor <span class="kw">in</span> adjacency_list[vertex]:
             <span class="cf">if</span> colors[neighbor] <span class="op">==</span> <span class="st">&quot;white&quot;</span>:
                 colors[neighbors] <span class="op">=</span> <span class="st">&quot;gray&quot;</span>
                 predecessors[neighbor] <span class="op">=</span> vertex
@@ -774,8 +777,8 @@ The final answer is in <span class="math inline">N[n, T]</span>. We could also s
     <span class="cf">while</span> q:
         vertex <span class="op">=</span> q.popleft()
         visited.add(vertex)
-        <span class="cf">for</span> neighbor <span class="op">in</span> adjacency_list[vertex]:
-            <span class="cf">if</span> neighbor <span class="op">not</span> <span class="op">in</span> visited:
+        <span class="cf">for</span> neighbor <span class="kw">in</span> adjacency_list[vertex]:
+            <span class="cf">if</span> neighbor <span class="kw">not</span> <span class="kw">in</span> visited:
                 q.append(neighbor)</code></pre></div>
 <p>Note that breadth first search, since it visits every vertex and could potentially visit every edge, takes <span class="math inline">\Theta(\abs{V} + \abs{E})</span> worst case time.</p>
 <p>Shortest path from a starting vertex:</p>
@@ -788,8 +791,8 @@ The final answer is in <span class="math inline">N[n, T]</span>. We could also s
     <span class="cf">while</span> q:
         vertex <span class="op">=</span> q.popleft()
         visited.add(vertex)
-        <span class="cf">for</span> neighbor <span class="op">in</span> adjacency_list[vertex]:
-            <span class="cf">if</span> neighbor <span class="op">not</span> <span class="op">in</span> visited:
+        <span class="cf">for</span> neighbor <span class="kw">in</span> adjacency_list[vertex]:
+            <span class="cf">if</span> neighbor <span class="kw">not</span> <span class="kw">in</span> visited:
                 q.append(neighbor)
                 distance_to_start[neighbor] <span class="op">=</span> distance_to_start[vertex] <span class="op">+</span> <span class="dv">1</span></code></pre></div>
 <p>Proof of correctness:</p>
@@ -820,11 +823,11 @@ Otherwise, if we go through the entire graph without finding an odd cycle, there
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> depth_first_search(adjacency_list):
     colors, predecessors <span class="op">=</span> {}, {}
     discovery_time, finish_time <span class="op">=</span> {}, {}
-    <span class="cf">for</span> vertex <span class="op">in</span> adjacency_list:
+    <span class="cf">for</span> vertex <span class="kw">in</span> adjacency_list:
         colors[vertex] <span class="op">=</span> <span class="st">&quot;white&quot;</span>
         predecessors[vertex] <span class="op">=</span> <span class="va">None</span>
     current_time <span class="op">=</span> [<span class="dv">0</span>]
-    <span class="cf">for</span> vertex <span class="op">in</span> adjacency_list:
+    <span class="cf">for</span> vertex <span class="kw">in</span> adjacency_list:
         <span class="cf">if</span> colors[vertex] <span class="op">==</span> <span class="st">&quot;white&quot;</span>:
             visit(adjacency_list, vertex, colors, predecessors, current_time, discovery_time, finish_time)
 
@@ -832,7 +835,7 @@ Otherwise, if we go through the entire graph without finding an odd cycle, there
     colors[vertex] <span class="op">=</span> <span class="st">&quot;gray&quot;</span>
     current_time[<span class="dv">0</span>] <span class="op">+=</span> <span class="dv">1</span>
     discovery_time[vertex] <span class="op">=</span> time
-    <span class="cf">for</span> neighbor <span class="op">in</span> adjacency_list[vertex]:
+    <span class="cf">for</span> neighbor <span class="kw">in</span> adjacency_list[vertex]:
         <span class="cf">if</span> colors[neighbor] <span class="op">=</span> <span class="st">&quot;white&quot;</span>:
             predecessors[neighbor] <span class="op">=</span> vertex
             visit(adjacency_list, neighbor, colors, predecessors, current_time, discovery_time, finish_time)
@@ -842,14 +845,14 @@ Otherwise, if we go through the entire graph without finding an odd cycle, there
 <p>Note that we keep track of the discovery and finish times for each vertex. This information can be useful in some situations. A simplified version of DFS can be written as follows:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> depth_first_search(vertices, adjacency_list):
     visited <span class="op">=</span> <span class="bu">set</span>()
-    <span class="cf">for</span> vertex <span class="op">in</span> vertices:
-        <span class="cf">if</span> vertex <span class="op">not</span> <span class="op">in</span> visited:
+    <span class="cf">for</span> vertex <span class="kw">in</span> vertices:
+        <span class="cf">if</span> vertex <span class="kw">not</span> <span class="kw">in</span> visited:
             depth_first_search_visit(vertices, adjacency_list, vertex, visited)
 
 <span class="kw">def</span> depth_first_search_visit(vertices, adjacency_list, vertex, visited):
     visited.add(vertex)
-    <span class="cf">for</span> neighbor <span class="op">in</span> adjacency_list[vertex]:
-        <span class="cf">if</span> neighbor <span class="op">not</span> <span class="op">in</span> visited:
+    <span class="cf">for</span> neighbor <span class="kw">in</span> adjacency_list[vertex]:
+        <span class="cf">if</span> neighbor <span class="kw">not</span> <span class="kw">in</span> visited:
             depth_first_search_visit(vertices, adjacency_list, neighbor, visited)</code></pre></div>
 <p>In depth-first search, an edge <span class="math inline">\tup{\pi(v), v}</span> is a <strong>tree edge</strong>. The set of all tree edges forms a <strong>DFS forest</strong> (there is a DFS tree for each graph component). If the graph is connected, the DFS forest is a spanning tree. For a tree edge, we discover and finish with <span class="math inline">v</span> during <span class="math inline">u</span>'s processing - <span class="math inline">v</span>'s discovery and finish time interval is nested within <span class="math inline">u</span>'s discovery and finish time interval. Additionally, <span class="math inline">v</span> will be white when the edge is dicovered.</p>
 <p>An edge <span class="math inline">\tup{u, v}</span> is a <strong>forward edge</strong> if and only if it is not a tree edge, and <span class="math inline">v</span> is a descendant of <span class="math inline">u</span> in the depth-first forest - an edge that connects a vertex with a descendant that is not a direct child. Like for tree edges, <span class="math inline">v</span>'s time interval is nested in <span class="math inline">v</span>'s, but <span class="math inline">v</span> will be black when we the edge is discovered.</p>
@@ -886,16 +889,16 @@ Note that this proof gives an algorithm for constructing a topological ordering,
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> topological_ordering(vertices, adjacency_list):
     visited <span class="op">=</span> {}
     topological_ordering <span class="op">=</span> []
-    <span class="cf">for</span> vertex <span class="op">in</span> vertices: visited[vertex] <span class="op">=</span> <span class="va">False</span>
-    <span class="cf">for</span> vertex <span class="op">in</span> vertices:
-        <span class="cf">if</span> <span class="op">not</span> visited[vertex]:
+    <span class="cf">for</span> vertex <span class="kw">in</span> vertices: visited[vertex] <span class="op">=</span> <span class="va">False</span>
+    <span class="cf">for</span> vertex <span class="kw">in</span> vertices:
+        <span class="cf">if</span> <span class="kw">not</span> visited[vertex]:
             topological_ordering_visit(vertices, adjacency_list, vertex, colors, predecessors, current_time, discovery_time, finish_time)
     <span class="cf">return</span> <span class="bu">reversed</span>(topological_ordering)
 
 <span class="kw">def</span> topological_ordering_visit(vertices, adjacency_list, vertex, colors, visited, topological_ordering):
     visited[vertex] <span class="op">=</span> <span class="va">True</span>
-    <span class="cf">for</span> neighbor <span class="op">in</span> adjacency_list[vertex]:
-        <span class="cf">if</span> <span class="op">not</span> visited[neighbor]:
+    <span class="cf">for</span> neighbor <span class="kw">in</span> adjacency_list[vertex]:
+        <span class="cf">if</span> <span class="kw">not</span> visited[neighbor]:
             topological_ordering_visit(vertices, adjacency_list, neighbor, visited, topological_ordering)
     topological_ordering.append(vertex)</code></pre></div>
 <h1 id="section-16">11/11/15</h1>
@@ -949,7 +952,7 @@ So we can only reach the vertices in <span class="math inline">C</span> from <sp
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> spanning_tree(vertices, edges, weights):
     leaders <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(vertices)))
     tree_edges <span class="op">=</span> <span class="bu">set</span>()
-    <span class="cf">for</span> edge <span class="op">in</span> <span class="bu">sorted</span>(edges, key<span class="op">=</span><span class="kw">lambda</span> edge: weights[edge]):
+    <span class="cf">for</span> edge <span class="kw">in</span> <span class="bu">sorted</span>(edges, key<span class="op">=</span><span class="kw">lambda</span> edge: weights[edge]):
         vertex1_root, vertex1_depth <span class="op">=</span> find(edge[<span class="dv">0</span>], leaders)
         vertex2_root, vertex2_depth <span class="op">=</span> find(edge[<span class="dv">1</span>], leaders)
         <span class="cf">if</span> vertex1_root <span class="op">!=</span> vertex2_root:
@@ -976,7 +979,7 @@ So we can only reach the vertices in <span class="math inline">C</span> from <sp
     tree_edges <span class="op">=</span> <span class="bu">set</span>()
     start_vertex <span class="op">=</span> vertices[<span class="dv">0</span>]
     tree_vertices <span class="op">=</span> {start_vertex}
-    <span class="cf">for</span> vertex <span class="op">in</span> vertices <span class="op">-</span> {start_vertex}:
+    <span class="cf">for</span> vertex <span class="kw">in</span> vertices <span class="op">-</span> {start_vertex}:
         W[vertex] <span class="op">=</span> weights[{start_vertex, vertex}]
         N[vertex] <span class="op">=</span> start_vertex
 
@@ -986,7 +989,7 @@ So we can only reach the vertices in <span class="math inline">C</span> from <sp
         edge_vertex <span class="op">=</span> N[min_weight_vertex]
         tree_edges.add({min_weight_vertex, edge_vertex})
 
-        <span class="cf">for</span> vertex <span class="op">in</span> vertices <span class="op">-</span> tree_vertices: <span class="co"># look at the vertices in the rest of the graph</span>
+        <span class="cf">for</span> vertex <span class="kw">in</span> vertices <span class="op">-</span> tree_vertices: <span class="co"># look at the vertices in the rest of the graph</span>
             <span class="cf">if</span> weights[min_weight_vertex, vertex] <span class="op">&lt;</span> W[vertex]: <span class="co"># new edge has a lower weight than the current one</span>
                 W[vertex] <span class="op">=</span> weights[min_weight_vertex, vertex]
                 N[vertex] <span class="op">=</span> min_weight_vertex
@@ -1026,14 +1029,14 @@ So by induction, the spanning tree is minimal.</p>
     visited <span class="op">=</span> {start_vertex}
     min_path_weights <span class="op">=</span> {start_vertex: <span class="dv">0</span>}
     predecessors <span class="op">=</span> {}
-    <span class="cf">for</span> vertex <span class="op">in</span> vertices <span class="op">-</span> {start_vertex}:
+    <span class="cf">for</span> vertex <span class="kw">in</span> vertices <span class="op">-</span> {start_vertex}:
         min_path_weights[vertex] <span class="op">=</span> weights[{start_vertex, vertex}]
         predecessors[vertex] <span class="op">=</span> start_vertex
 
     <span class="cf">while</span> <span class="bu">len</span>(visited) <span class="op">&lt;</span> <span class="bu">len</span>(vertices):
         min_weight_vertex <span class="op">=</span> <span class="bu">min</span>(vertices <span class="op">-</span> visited, key<span class="op">=</span><span class="kw">lambda</span> vertex: min_path_weights[vertex]) <span class="co"># vertex in the rest of the graph with lowest current path weight</span>
         visited.add(min_weight_vertex)
-        <span class="cf">for</span> vertex <span class="op">in</span> vertices <span class="op">-</span> visited: <span class="co"># look at the vertices in the rest of the graph</span>
+        <span class="cf">for</span> vertex <span class="kw">in</span> vertices <span class="op">-</span> visited: <span class="co"># look at the vertices in the rest of the graph</span>
             <span class="cf">if</span> min_path_weights[min_weight_vertex] <span class="op">+</span> weights[{min_weight_vertex, vertex}] <span class="op">&lt;</span> min_weight_vertex[vertex]: <span class="co"># new vertex has lower path weight than the current one</span>
                 min_path_weights[vertex] <span class="op">=</span> min_path_weights[min_weight_vertex] <span class="op">+</span> weights[{min_weight_vertex, vertex}]
                 predecessors[vertex] <span class="op">=</span> min_weight_vertex
@@ -1055,10 +1058,10 @@ So by induction, the spanning tree is minimal.</p>
 <p>The <strong>all-pairs shortest path problem</strong> is to find the shortest path between all pairs of vertices in the graph, allowing negative weight edges but not negative weight cycles. We can solve this by running the Bellman-Ford algorithm on each vertex, but the Floyd-Warshall algorithm can do it in <span class="math inline">O(n^3)</span>, using a dynamic-programming-like technique (see slide 164 for code). Like Bellman-ford, Floyd-Warshall also supports negative edge weights as long as there are no negative weight cycles.</p>
 <p><span class="math inline">D_m[i, j]</span> denotes the weight of the shortest path from <span class="math inline">i</span> to <span class="math inline">j</span> such that the interior vertices of the path (vertices excluding <span class="math inline">i</span> and <span class="math inline">j</span>) are in <span class="math inline">\set{1, \ldots, m}</span>. At each step, we check our candidate path <span class="math inline">D_m[i, m] + D[m, j]</span> against the old best path <span class="math inline">D_m[i, j]</span>:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> shortest_path(vertices, edges, weights):
-    min_weight_path <span class="op">=</span> [[[[<span class="bu">float</span>(<span class="st">&quot;inf&quot;</span>)] <span class="op">*</span> <span class="bu">len</span>(vertices)] <span class="cf">for</span> _ <span class="op">in</span> vertices] <span class="cf">for</span> _ <span class="op">in</span> vertices] <span class="co"># 3D array of size $n$ by $n$ by $n$:</span>
-    <span class="cf">for</span> m <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(vertices)):
-        <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(vertices)):
-            <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(vertices)):
+    min_weight_path <span class="op">=</span> [[[[<span class="bu">float</span>(<span class="st">&quot;inf&quot;</span>)] <span class="op">*</span> <span class="bu">len</span>(vertices)] <span class="cf">for</span> _ <span class="kw">in</span> vertices] <span class="cf">for</span> _ <span class="kw">in</span> vertices] <span class="co"># 3D array of size $n$ by $n$ by $n$:</span>
+    <span class="cf">for</span> m <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(vertices)):
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(vertices)):
+            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(vertices)):
                 D[m][i][j] <span class="op">=</span> <span class="bu">min</span>(D[m <span class="op">-</span> <span class="dv">1</span>][i][j], D[m <span class="op">-</span> <span class="dv">1</span>][i][m] <span class="op">+</span> D[m <span class="op">-</span> <span class="dv">1</span>][m][j])</code></pre></div>
 <h1 id="section-19">23/11/15</h1>
 <h2 id="intractability-and-undecidability">Intractability and Undecidability</h2>
@@ -1145,8 +1148,8 @@ Therefore, <span class="math inline">f(I)</span> is a yes-instance if and only i
 
 <span class="kw">def</span> tsp_optimal_value(vertices, edges, weights):
     hamiltonian_cycle <span class="op">=</span> tsp_optimisation(vertices, edges, weights)
-    <span class="cf">if</span> hamiltonian_cycle <span class="op">is</span> <span class="va">None</span>: <span class="cf">return</span> <span class="va">None</span>
-    <span class="cf">return</span> <span class="bu">sum</span>(weights[edge] <span class="cf">for</span> edge <span class="op">in</span> hamiltonian_cycle)
+    <span class="cf">if</span> hamiltonian_cycle <span class="kw">is</span> <span class="va">None</span>: <span class="cf">return</span> <span class="va">None</span>
+    <span class="cf">return</span> <span class="bu">sum</span>(weights[edge] <span class="cf">for</span> edge <span class="kw">in</span> hamiltonian_cycle)
 
 <span class="kw">def</span> tsp_decision(vertices, edges, weights, threshold):
     <span class="cf">return</span> tsp_optimal_value(vertices, edges, weights) <span class="op">&lt;=</span> threshold</code></pre></div>
@@ -1156,7 +1159,7 @@ Therefore, <span class="math inline">f(I)</span> is a yes-instance if and only i
 
 <span class="kw">def</span> tsp_optimal_value(vertices, edges, weights):
     <span class="co"># basically, we do a binary search for the exact total weight of the Hamiltonian cycle</span>
-    low, high <span class="op">=</span> <span class="dv">0</span>, <span class="bu">sum</span>(weights[edge] <span class="cf">for</span> edge <span class="op">in</span> edges)
+    low, high <span class="op">=</span> <span class="dv">0</span>, <span class="bu">sum</span>(weights[edge] <span class="cf">for</span> edge <span class="kw">in</span> edges)
     <span class="cf">if</span> tsp_decision(vertices, edges, weights, high): <span class="cf">return</span> <span class="bu">float</span>(<span class="st">&quot;inf&quot;</span>)
     <span class="cf">while</span> low <span class="op">&lt;</span> high:
         middle <span class="op">=</span> floor((low <span class="op">+</span> high) <span class="op">/</span> <span class="dv">2</span>)
@@ -1173,9 +1176,9 @@ Therefore, <span class="math inline">f(I)</span> is a yes-instance if and only i
     lowest_weight <span class="op">=</span> lowest_total_weight
     hamiltonian_cycle <span class="op">=</span> <span class="bu">set</span>()
     new_weights <span class="op">=</span> <span class="bu">dict</span>(weights)
-    <span class="cf">for</span> edge <span class="op">in</span> edges:
+    <span class="cf">for</span> edge <span class="kw">in</span> edges:
         new_weights[edge] <span class="op">=</span> <span class="bu">float</span>(<span class="st">&quot;inf&quot;</span>) <span class="co"># remove edge by making it have infinite weight</span>
-        <span class="cf">if</span> <span class="op">not</span> tsp_decision(vertices, edges, new_weights, lowest_total_weight):
+        <span class="cf">if</span> <span class="kw">not</span> tsp_decision(vertices, edges, new_weights, lowest_total_weight):
             new_weights[edge] <span class="op">=</span> weights[edge] <span class="co"># restore the edge, since it&#39;s part of the optimal edge</span>
             hamiltonian_cycle.add(edge)</code></pre></div>
 <p>In summary, <span class="math inline">\text{subset-sum} \le_P^T \text{vertex-cover} \le_P^T \text{clique} \le_P^T \text{3SAT} \le_P^T \text{SAT}</span> - these are well-known NP-complete problems.</p>

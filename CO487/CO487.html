@@ -88,6 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+        "\\argmin": "\operatorname{argmin}}",
+        "\\argmax": "\operatorname{argmax}}",
+        "\\sgn": "\operatorname{sgn}}",
 
         // not yet available in KaTeX
         "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
@@ -803,7 +806,7 @@ Therefore, we can find <span class="math inline">a</span> simply by trying all t
 
     x_1, y_1 <span class="op">=</span> point_1
     x_2, y_2 <span class="op">=</span> point_2
-    <span class="cf">if</span> x_1 <span class="op">==</span> x_2 <span class="op">and</span> point_1 <span class="op">!=</span> point_2: <span class="cf">return</span> () <span class="co"># vertical line, the sum is the point at infinity</span>
+    <span class="cf">if</span> x_1 <span class="op">==</span> x_2 <span class="kw">and</span> point_1 <span class="op">!=</span> point_2: <span class="cf">return</span> () <span class="co"># vertical line, the sum is the point at infinity</span>
     <span class="cf">if</span> point_1 <span class="op">==</span> point_2: <span class="co"># doubled point - use the tangent of the curve as the slope</span>
         slope <span class="op">=</span> ((<span class="dv">3</span> <span class="op">*</span> <span class="bu">pow</span>(x_1, <span class="dv">2</span>, modulus) <span class="op">+</span> curve_a) <span class="op">*</span> integer_multiplicative_inverse(<span class="dv">2</span> <span class="op">*</span> y_1, modulus)) <span class="op">%</span> modulus
     <span class="cf">else</span>: <span class="co"># find the slope of the line joining point_1 and point_2</span>

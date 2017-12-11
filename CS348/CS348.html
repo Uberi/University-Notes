@@ -88,6 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+        "\\argmin": "\operatorname{argmin}}",
+        "\\argmax": "\operatorname{argmax}}",
+        "\\sgn": "\operatorname{sgn}}",
 
         // not yet available in KaTeX
         "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
@@ -351,8 +354,8 @@ Office Hours: Monday, Wednesday 12:30 PM-1:15 PM, DC2338</code></pre>
 <p>Embedded SQL can be embedded by allowing host applications to perform queries by preprocessing SQL statements embedded in the host language using a special SQL compiler (statement level interface), or construct queries as strings in the host language and perform queries by calling into a library (call level interface).</p>
 <p>In this course we will use C as our host language and Oracle as our database.</p>
 <p>We can do statement level interface using the <code>exec sql</code> macro:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdio.h&gt;</span>
-<span class="ot">#include &lt;ctype.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;ctype.h&gt;</span>
 exec sql sqlca; <span class="co">// include the SQL communication area - a structure used for communicating between Oracle and C and storing member variables</span>
 <span class="dt">int</span> main() {
     <span class="co">// declare SQL host-side variables to use with our application</span>
@@ -366,10 +369,10 @@ exec sql sqlca; <span class="co">// include the SQL communication area - a struc
     exec sql DECLARE c_city CURSOR FOR select name, discount FROM CUSTOMERS WHERE city = :customer_city;
     exec sql OPEN c_city;
     exec sql WHENEVER NOT FOUND GO TO next; <span class="co">// do a jump when there are no more records</span>
-    <span class="kw">while</span> (TRUE) {
+    <span class="cf">while</span> (TRUE) {
         exec sql FETCH c_city INTO :customer_name, :customer_discount; <span class="co">// automatically jumps to `next` when there are no more entries to fetch</span>
         customer_name.arr[customer_name.len] = &#39;\<span class="dv">0</span>&#39;;
-        printf(<span class="st">&quot;name: %s, discount: %f</span><span class="ch">\n</span><span class="st">&quot;</span>, customer_name.arr, customer_discount);
+        printf(<span class="st">&quot;name: %s, discount: %f</span><span class="sc">\n</span><span class="st">&quot;</span>, customer_name.arr, customer_discount);
     }
     next:
     <span class="co">// if we modified any records above, we would have needed a `exec sql COMMIT WORK` to the </span>
@@ -435,8 +438,8 @@ exec sql OPEN c_city USING :cust_name; <span class="co">// bind the variable :na
     changed <span class="op">=</span> <span class="va">True</span>
     <span class="cf">while</span> changed: <span class="co"># loop while the closure changes</span>
         changed <span class="op">=</span> <span class="va">False</span>
-        <span class="cf">for</span> (left_side, right_side) <span class="op">in</span> F:
-            <span class="cf">if</span> left_side.issubset(closure) <span class="op">and</span> <span class="op">not</span> right_side.issubset(closure): <span class="co"># left side is part of closure and right side has attributes not in the closure</span>
+        <span class="cf">for</span> (left_side, right_side) <span class="kw">in</span> F:
+            <span class="cf">if</span> left_side.issubset(closure) <span class="kw">and</span> <span class="kw">not</span> right_side.issubset(closure): <span class="co"># left side is part of closure and right side has attributes not in the closure</span>
                 closure <span class="op">+=</span> right_side <span class="co"># add all the new attributes to the closure</span>
                 changed <span class="op">=</span> <span class="va">True</span>
     <span class="cf">return</span> closure</code></pre></div>

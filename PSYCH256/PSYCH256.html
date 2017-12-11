@@ -88,6 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+        "\\argmin": "\operatorname{argmin}}",
+        "\\argmax": "\operatorname{argmax}}",
+        "\\sgn": "\operatorname{sgn}}",
 
         // not yet available in KaTeX
         "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
@@ -359,10 +362,10 @@ Therefore, <span class="math inline">D(s)</span>.</p>
         <span class="va">self</span>.weights, <span class="va">self</span>.threshold, <span class="va">self</span>.learning_rate <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> num_inputs, threshold, learning_rate
     <span class="kw">def</span> train(<span class="va">self</span>, sample_inputs, sample_output):
         output_error <span class="op">=</span> <span class="bu">float</span>(sample_output) <span class="op">-</span> <span class="bu">float</span>(<span class="va">self</span>.classify(sample_inputs)) <span class="co"># how different the expected and actual outputs are</span>
-        <span class="va">self</span>.weights <span class="op">=</span> [weight <span class="op">+</span> <span class="va">self</span>.learning_rate <span class="op">*</span> output_error <span class="op">*</span> <span class="bu">input</span> <span class="cf">for</span> <span class="bu">input</span>, weight <span class="op">in</span> <span class="bu">zip</span>(sample_inputs, <span class="va">self</span>.weights)]
+        <span class="va">self</span>.weights <span class="op">=</span> [weight <span class="op">+</span> <span class="va">self</span>.learning_rate <span class="op">*</span> output_error <span class="op">*</span> <span class="bu">input</span> <span class="cf">for</span> <span class="bu">input</span>, weight <span class="kw">in</span> <span class="bu">zip</span>(sample_inputs, <span class="va">self</span>.weights)]
         <span class="va">self</span>.threshold <span class="op">=</span> <span class="va">self</span>.threshold <span class="op">-</span> <span class="va">self</span>.learning_rate <span class="op">*</span> output_error
     <span class="kw">def</span> classify(<span class="va">self</span>, inputs):
-        level <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">input</span> <span class="op">*</span> weight <span class="cf">for</span> <span class="bu">input</span>, weight <span class="op">in</span> <span class="bu">zip</span>(inputs, <span class="va">self</span>.weights))
+        level <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">input</span> <span class="op">*</span> weight <span class="cf">for</span> <span class="bu">input</span>, weight <span class="kw">in</span> <span class="bu">zip</span>(inputs, <span class="va">self</span>.weights))
         <span class="cf">return</span> <span class="bu">int</span>(level <span class="op">&gt;=</span> <span class="va">self</span>.threshold) <span class="co"># the activation function here is the Heaviside function centred at `self.threshold`, but some perceptrons might use something like a sigmoid function instead</span></code></pre></div>
 <p>A multilayered network is one with 3 or more layers. Generally, we talk about networks with 3 layers: input layer, hidden layer, and output layer, each with varying numbers of neurons. A 3-layer network can actually mimic any continuous function within a certain interval for each input (universal approximation theorem), so networks with more than 3 layers theoretically have an equivalent 3-layer network under common conditions. To simplify things, we often just talk about 3-layer networks, as it's easy to generalize to more layers.</p>
 <p>Minsky and Papert also speculated that there is no learning rule that guarantees that a neural network can learn to mimic an arbitrary function. This is still an open question for research, though in practice we have algorithms that can give pretty impressive results already, even if they don't work for everything. Note that neural networks can in fact mimic any continuous function - it's just that there might not necessarily be a general algorithm that teaches the network to do so.</p>

@@ -51,6 +51,9 @@
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+        "\\argmin": "\operatorname{argmin}}",
+        "\\argmax": "\operatorname{argmax}}",
+        "\\sgn": "\operatorname{sgn}}",
 
         // not yet available in KaTeX
         "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
@@ -216,36 +219,36 @@ Which is in fact:
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;"><span class="math inline">A</span></th>
-<th style="text-align: left;"><span class="math inline">B</span></th>
-<th style="text-align: left;"><span class="math inline">A \implies B</span></th>
-<th style="text-align: left;"><span class="math inline">(\neg A) \vee B</span></th>
+<th><span class="math inline">A</span></th>
+<th><span class="math inline">B</span></th>
+<th><span class="math inline">A \implies B</span></th>
+<th><span class="math inline">(\neg A) \vee B</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">T</td>
-<td style="text-align: left;">T</td>
-<td style="text-align: left;">T</td>
-<td style="text-align: left;">T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">T</td>
-<td style="text-align: left;">F</td>
-<td style="text-align: left;">F</td>
-<td style="text-align: left;">F</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">F</td>
-<td style="text-align: left;">T</td>
-<td style="text-align: left;">T</td>
-<td style="text-align: left;">T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">F</td>
-<td style="text-align: left;">F</td>
-<td style="text-align: left;">T</td>
-<td style="text-align: left;">T</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
 </tr>
 </tbody>
 </table>
