@@ -81,6 +81,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\refl": "\\operatorname{refl}",
         "\\magn": "\\left\\lVert #1 \\right\\rVert",
         "\\rank": "\\operatorname{rank}",
+        "\\trace": "\\operatorname{trace}",
         "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
         "\\range": "\\operatorname{Range}",
         "\\adj": "\\operatorname{adj}",
@@ -88,20 +89,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
-        "\\argmin": "\operatorname{argmin}}",
-        "\\argmax": "\operatorname{argmax}}",
-        "\\sgn": "\operatorname{sgn}}",
+        "\\argmin": "\operatorname{argmin}",
+        "\\argmax": "\operatorname{argmax}",
+        "\\sgn": "\operatorname{sgn}",
 
         // not yet available in KaTeX
-        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
-        "\\not": "\\rlap{\\kern{7.5mu}/}", //wip: slash angle is slightly off
         "\\bm": "\\mathbf", //wip: should be italic, but isn't
       },
-      throwOnError: false,
     };
     for (var i=0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      katex.render(texText.data, mathElements[i], mathOptions);
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
     }
   }
   </script>

@@ -81,6 +81,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\refl": "\\operatorname{refl}",
         "\\magn": "\\left\\lVert #1 \\right\\rVert",
         "\\rank": "\\operatorname{rank}",
+        "\\trace": "\\operatorname{trace}",
         "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
         "\\range": "\\operatorname{Range}",
         "\\adj": "\\operatorname{adj}",
@@ -88,20 +89,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
-        "\\argmin": "\operatorname{argmin}}",
-        "\\argmax": "\operatorname{argmax}}",
-        "\\sgn": "\operatorname{sgn}}",
+        "\\argmin": "\operatorname{argmin}",
+        "\\argmax": "\operatorname{argmax}",
+        "\\sgn": "\operatorname{sgn}",
 
         // not yet available in KaTeX
-        "\\operatorname": "\\mathop{\\text{#1}}\\nolimits", //wip: spacing is slightly off
-        "\\not": "\\rlap{\\kern{7.5mu}/}", //wip: slash angle is slightly off
         "\\bm": "\\mathbf", //wip: should be italic, but isn't
       },
-      throwOnError: false,
     };
     for (var i=0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      katex.render(texText.data, mathElements[i], mathOptions);
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
     }
   }
   </script>
@@ -456,7 +459,7 @@ Agent 1 Turn Away | 10, 10    | 0, 20     |
 <p>A feedforward network is a directed acyclic graph of neurons. A recurrent network is a directed cyclic graph of neurons. Feedforward networks are fully described by their structure and weights, while recurrent networks additionally have their previous neuron outputs as state - this makes them harder to train but capable of remembering past inputs.</p>
 <p>Input units are neurons that get their inputs directly from the network inputs. Hidden units are neurons that get their inputs entirely from other neurons, and give their output entirely to other neurons. Output units are neurons that give their output directly to the network outputs.</p>
 <p>A perceptron is a single-layer feedforward network, where all neurons get their inputs directly from the network inputs and their outputs are given directly to the network outputs, and all neurons use the threshold activation function. The error/cost/loss of a perceptron is <span class="math inline">E = \frac 1 2 \sum (y_i - g(\vec w \cdot \vec x_i))^2</span>, where <span class="math inline">\vec x</span> is the network inputs and <span class="math inline">g(v)</span> is the network outputs (the outputs of the activation function from each neuron). We use squared loss because we'd rather have lots of small errors than some large errors.</p>
-<p>We train neural networks using local search techniques. The most commonly used one is gradient descent - we take our loss function <span class="math inline">E</span>, take its derivative with respect to the weights <span class="math inline">\Delta E = \frac{\dee E}{\dee \vec w}</span>, and then update those weights according to <span class="math inline">\vec w \from \vec w - \alpha \Delta E</span>, where <span class="math inline">\alpha</span> is the learning rate.</p>
+<p>We train neural networks using local search techniques. The most commonly used one is gradient descent - we take our loss function <span class="math inline">E</span>, take its derivative with respect to the weights <span class="math inline">\Delta E = \frac{\dee E}{\dee \vec w}</span>, and then update those weights according to <span class="math inline">\vec w \leftarrow \vec w - \alpha \Delta E</span>, where <span class="math inline">\alpha</span> is the learning rate.</p>
 <p>For example, for the perceptron we have <span class="math inline">\Delta E = \frac 1 2 \frac{\dee}{\dee \vec w} \sum (y_i - g(\vec x_i))^2 = \sum (y_i - g(\vec x_i))(-\frac{\dee g}{\dee v} (\vec w \cdot \vec x)) \vec x</span>.</p>
 <h1 id="section-20">22/11/17</h1>
 <p>;wip: catch up on this class, the one before statistical learning</p>
