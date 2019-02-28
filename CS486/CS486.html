@@ -89,9 +89,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
         "\\diag": "\\operatorname{diag}",
         "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
-        "\\argmin": "\operatorname{argmin}",
-        "\\argmax": "\operatorname{argmax}",
-        "\\sgn": "\operatorname{sgn}",
+        "\\argmin": "\\operatorname{argmin}",
+        "\\argmax": "\\operatorname{argmax}",
+        "\\sgn": "\\operatorname{sgn}",
 
         // not yet available in KaTeX
         "\\bm": "\\mathbf", //wip: should be italic, but isn't
@@ -188,7 +188,7 @@ So <span class="math inline">f(e&#39;) &gt; f(n)</span>, which isn't possible si
 <h2 id="constraint-satisfaction">Constraint Satisfaction</h2>
 <p>Informed search uses domain specific knowledge to make search faster. Constraint satisfaction problems (CSPs) use knowledge about the current state itself to help us find solutions. In a standard search problem the states are black boxes, with a goal test and successor function to deal with them. A constraint satisfaction problem has states defined by variables <span class="math inline">X_1, \ldots, X_n</span> whose values are from a domain <span class="math inline">D</span>, and the goal test is a set of constraints that tell us about what values a subset of the variables <span class="math inline">S \subseteq \set{X_1, \ldots, X_n}</span> must take on. We can then exploit knowledge of these constraints to improve our performance.</p>
 <p>Consider the map coloring problem: coloring a map such that no neighboring regions have the same color. Here, the constraints are that neighboring regions cannot have the same color, <span class="math inline">X_1, \ldots, X_n</span> is the color of each region, and the domain might be <span class="math inline">D = \set{\text{red}, \text{green}, \text{blue}}</span>. We want to find a solution, which is an assignment of values to <span class="math inline">X_1, \ldots, X_n</span> satisfying all the constraints. Another famous constraint solving problem is 3-SAT, which tries to find boolean values that satisfy a set of constraints in a particular form.</p>
-<p>We distinguish betwen finite constraint satisfaction problems like 3-SAT, and infinite ones like linear systems. We also care about the arity of the constraints - for example, binary constraints operate over two variables, ternary over three, and so on. There's also soft constraints, which don't have to be satisfied but are preferred if possible - this forms a constrained optimization problem.</p>
+<p>We distinguish betwen finite-domain constraint satisfaction problems like 3-SAT (variables have finite possible values), and infinite-domain ones like linear systems (variables have infinite possible values). We also care about the arity of the constraints - for example, binary constraints operate over two variables, ternary over three, and so on. There's also soft constraints, which don't have to be satisfied but are preferred if possible - this forms a constrained optimization problem.</p>
 <p>We can use standard search algorithms to solve these binary constraint satisfaction problems. For example, for the map coloring problem, all the constraints are binary, so we can perform a search - states in the graph are partial assignments of colors, the search graph is the map's graph, the initial state is the uncolored map, the successor function colors one currently uncolored region, and the goal is that all colors are assigned and no two adjacent regions have the same color.</p>
 <p>In general, we can solve a CSP using search: states are partial assignments of variables, initial state is that no variables are assigned, successor function assigns a value to a variable that isn't currently assigned, and the goal is that all variables are assigned and all constraints are satisfied.</p>
 <p>CSPs are commutative - the order that we assign values to variables doesn't matter. This can be used to significantly reduce our search space - at each node in the search tree, we only have to consider the value of a single variable, not the values of variables we looked at before it.</p>
@@ -197,8 +197,8 @@ So <span class="math inline">f(e&#39;) &gt; f(n)</span>, which isn't possible si
 <ul>
 <li>Ordering: choose unassigned variables and variable values in a specific order using heuristics. This can help us avoid a lot of bad branches, if we look at promising branches first.
 <ul>
-<li>A common way to choose variables is to choose the one with the fewest remaining possible values (<strong>most constrained variable/minimum remaining values</strong> heuristic), and as a tiebreaker, select the one referenced by the largest number of unsatisfied constraints (<strong>most constraining variable</strong>).</li>
-<li>A common way to choose values for a variable is to choose the one that rules out the fewest values in the remaining variables (<strong>least-constraining value heuristic</strong>) - the value that allows variables that will be chosen next to have the largest number of values.</li>
+<li>A common way to choose variables is to choose the one with the fewest remaining possible values (<strong>most constrained variable/minimum remaining values</strong> heuristic), and as a tiebreaker, select the one referenced by the largest number of unsatisfied constraints (<strong>most constraining variable</strong>). This helps us eliminate bad previous choices as fast as possible, because anything that will eliminate all possible variable values gets detected more quickly.</li>
+<li>A common way to choose values for a variable is to choose the one that rules out the fewest values in the remaining variables (<strong>least-constraining value heuristic</strong>) - the value that allows variables that will be chosen next to have the largest number of values. In other words, we try different values of the variable, and pick the one that reduces the sum of the remaining variables' possible values the least.</li>
 </ul></li>
 <li>Filtering: detect when the state we're currently in definitely won't lead to a solution if we continue searching, so we can immediately backtrack.
 <ul>
@@ -214,9 +214,9 @@ So <span class="math inline">f(e&#39;) &gt; f(n)</span>, which isn't possible si
 <h2 id="local-searchoptimization">Local Search/Optimization</h2>
 <p>So far we've looked at uninformed and informed search. Today we'll look at local search and optimization - searching in very large problems, where we're willing to settle for a non-optimal but workable solution. Local search is used when we can't use global search/optimization techniques like A* or linear programming.</p>
 <p>As with the other search techniques so far, we have a domain, constraints, and a cost function <span class="math inline">V(P)</span>. We're trying to find a point <span class="math inline">P</span> in that domain that satisfies the constraints and has a low cost function value (not necessarily the lowest one, though).</p>
-<p>Search algorithms so far have systemically explored the search graph, and the path is the solution, but in many cases we don't care about the path. For example, scheduling exams without conflicts (the thing we care about is the final exam schedule, not the path to the schedule), or chip design (routing wires around to minimize chip footprint). Local search techniques take advantage of this to make larger problems feasible.</p>
+<p>Search algorithms so far have systemically explored the search graph, and the path is the solution, but in many cases we don't care about the path. For example, scheduling exams without conflicts (the thing we care about is the final exam schedule, not the path of partial schedules we used to arrive at a conflict-free schedule), or chip design (we care about routing wires around to minimize chip footprint, not which wires we should route first). Local search techniques take advantage of this to make larger problems feasible.</p>
 <p>Local search problems tend to have a wide search tree and a cost function that tells us how good a given solution is. Many of these problems are NP-hard to find optimal solutions, but <strong>we just want feasible solutions that are good enough, even if they're not optimal</strong>.</p>
-<p>For example, for N-queens, we might try to find a solution that removes a lot of the queens from attacking positions, rather than a solution that gets all of the queens out of attacking positions. When there are few constraints vs. variables, it's easy to solve - if we just throw the queens on the board somewhere, it's probably a valid solution. When there are lots of constraints vs. variables, it's easy to see it's infeasible - if there are no non-attacking positions left to put queens in. However, when there's roughly the same number of constraints and variables, there are some solutions, but they're hard to find - searching for any solutions becomes very computationally intensive. Local search problems tend to have the &quot;phase transitions&quot;, where most problems are really easy, but in certain cases are really difficult.</p>
+<p>For example, for N-queens, we might try to find a solution that removes a lot of the queens from attacking positions, rather than a solution that gets all of the queens out of attacking positions. When there are few constraints vs. variables, it's easy to solve - if we just throw the queens on the board somewhere, it's probably a valid solution. When there are lots of constraints vs. variables, it's easy to see it's infeasible - if there are no non-attacking positions left to put queens in. However, when there's roughly the same number of constraints and variables, there are some solutions, but they're hard to find - searching for any solutions becomes very computationally intensive. Local search problems tend to have these sorts of &quot;phase transitions&quot; - most problem instances tend to be really easy, but a certain smaller number of problem instances are really difficult.</p>
 <h3 id="hill-climbing">Hill Climbing</h3>
 <p>One way we commonly solve search problems is by iteratively improving a random initial state - a greedy <strong>hill climbing</strong> algorithm often also known as gradient descent. Essentially, we repeatedly move in the direction that would improve our current situation the most:</p>
 <ol type="1">
@@ -251,10 +251,10 @@ So <span class="math inline">f(e&#39;) &gt; f(n)</span>, which isn't possible si
 <li>Let <span class="math inline">P = {S_1, \ldots, S_n}</span> be a population of random initial states.</li>
 <li>Repeat until we have a state <span class="math inline">S_i</span> with high-enough <span class="math inline">f(S_i)</span> value:
 <ol type="1">
-<li>Randomly choose two distinct states <span class="math inline">S_i, S_j</span> from <span class="math inline">P</span>, weighted by <span class="math inline">f</span> value.</li>
-<li>Crossover <span class="math inline">S_i</span> and <span class="math inline">S_j</span> to produce a child <span class="math inline">S&#39; = c(S_i, S_j)</span>.</li>
-<li>With some small probability <span class="math inline">m</span>, mutate <span class="math inline">S&#39;</span> to get <span class="math inline">m(S&#39;)</span>. In some variations of genetic algorithms, we might mutate a randomly chosen state in <span class="math inline">P</span> instead.</li>
-<li>Add <span class="math inline">S&#39;</span> to <span class="math inline">P</span>. In some setups, we also kick out the lowest-fitness <span class="math inline">S_i</span> if <span class="math inline">P</span> has reached a certain size.</li>
+<li>Randomly choose two distinct states <span class="math inline">S_i, S_j</span> from <span class="math inline">P</span>, where the choice is weighted by each element's <span class="math inline">f</span> value.</li>
+<li>Combine <span class="math inline">S_i</span> and <span class="math inline">S_j</span> to produce a child <span class="math inline">S&#39; = c(S_i, S_j)</span>.</li>
+<li>With some small probability <span class="math inline">m</span>, mutate <span class="math inline">S&#39;</span> to get <span class="math inline">m(S&#39;)</span>. Also, in some variations of genetic algorithms, we instead mutate a randomly chosen state in <span class="math inline">P</span> instead.</li>
+<li>Add <span class="math inline">S&#39;</span> to <span class="math inline">P</span>. In most variations, we also kick out the lowest-fitness <span class="math inline">S_i</span> once <span class="math inline">P</span> has reached a certain size.</li>
 </ol></li>
 <li>The solution is the highest-fitness <span class="math inline">S_i</span> in <span class="math inline">P</span>.</li>
 </ol>
@@ -270,11 +270,11 @@ So <span class="math inline">f(e&#39;) &gt; f(n)</span>, which isn't possible si
 <p>We can analyze this using <strong>minimax search</strong>. We represent the value of each node in a tree as <span class="math inline">\text{minimax}(s) = \begin{cases} \text{utility}(s) &amp;\text{if } s \text{ is a terminal state} \\ \max\set{\text{minimax}(s&#39;) : s&#39; \in \text{successors}(s)} &amp;\text{if } s \text{ is a max-node (our turn)} \\ \min\set{\text{minimax}(s&#39;) : s&#39; \in \text{successors}(s)} &amp;\text{if } s \text{ is a min-node (their turn)} \end{cases}</span> (this is also called the <strong>security value</strong>). Essentially, it represents the worst-case utility of the game starting from the current state, assuming both players are playing optimally (they're both minimaxing). Essentially, each player is minimizing the amount it can possibly lose by.</p>
 <p>Minimax search is essentially DFS through this minimax tree. This isn't complete since it doesn't work if the game doesn't terminate, but it has pretty good space complexity.</p>
 <p>In the centipede game, the course of action that minimizes the amount we lose by in the worst-case is to betray at the first possible turn. However, real people will generally play more than that. For chess, the branching factor was empirically determined to be around 35, and the tree depth is around 100, at least. This is impractical to search exhaustively.</p>
-<p>For certain types of games, we can do <strong>alpha-beta pruning</strong>. Essentially, <span class="math inline">\alpha</span> is the max-player's best (highest) security value guaranteed so far, and beta is the min-player's best (lowest) security value guaranteed so far. We then skip searching nodes where <span class="math inline">\beta \le \alpha</span> - taking this move will make the current player worse off than before, because the min-player's guaranteed low score is no longer greater than the max-player's guaranteed high score, so a win or draw is guaranteed for the other player. In a minimax tree, this gives us the same result as an exhaustive DFS.</p>
+<p>For certain types of games, we can do <strong>alpha-beta pruning</strong>. Essentially, at each node <span class="math inline">\alpha</span> is the max-player's best (highest) utility guaranteed so far, and beta is the min-player's best (lowest) utility guaranteed so far (including sibling nodes we just visited). We then skip visiting nodes where <span class="math inline">\beta \le \alpha</span> - taking this move will make the current player worse off than before, because the min-player's guaranteed low score is no longer greater than the max-player's guaranteed high score, so a win or draw is guaranteed for the other player. In a minimax tree, this gives us the same result as an exhaustive DFS. Usually, the effect of alpha-beta pruning is to stop looping through a node's children when we've found a child that guarantees us a win.</p>
 <p>Alpha-beta pruning lets us eliminate branches from consideration. If we look at branches in a game tree left to right, we'd update <span class="math inline">\alpha</span> and <span class="math inline">\beta</span> for each node as we traverse the tree, and alpha-beta prune branches as we move from left to right. Alpha-beta pruning in this case will tend to remove branches from the right hand sides of nodes that would give poor results.</p>
 <p>This is very helpful - minimax search on chess can look 5 moves ahead, but alpha-beta pruning gives us enough performance to look up to 10 moves ahead! This still isn't good enough - alpha-beta pruning requires us to go all the way down to terminal nodes in order to get the alpha/beta values. We can supplement this using heuristics to estimate alpha and beta. A fast evaluation function gives the true utility for a terminal state, and the estimated expected utility for any other state. There's a lot of AI research in making a good evaluation function using expert knowledge and experience - one that makes good estimates of how much payoff we'll get from a given game state.</p>
 <p>We also don't have to go down all the way to the terminal states, and cut off the search at certain thresholds. We'll usually want to cut off the search when we reach a certain depth, or when the state becomes relatively stable (not really leading towards a win/loss), though we'll often want to give <strong>singular extensions</strong> - additional depth for moves that seem particularly promising (this helps avoid some cases where we'll miss promising options just beyond the cutoff). The parameters for the cutoff would also depend on the opponent - a novice chess player might only need 5 move lookeahead, while a grandmaster might need even 14, with exhaustive search near the endgame and a good evaluation function.</p>
-<p>For stochastic games, we treat chance itself as a player, so there's the max-player (us), the min-player (the opponent), and the chance player (the whims of nature), where the chance player makes its move with probabilities defined by the path in the tree, in between every max-player and min-player turns. We then construct an <strong>expectiminimax tree</strong> and consider it a search problem. The expectiminimax tree is the same as the minimax tree, but with another case: <span class="math inline">\text{expectiminimax}(s) = \begin{cases} \text{utility}(s) &amp;\text{if } s \text{ is a terminal state} \\ \max\set{\text{expectiminimax}(s&#39;) : s&#39; \in \text{successors}(s)} &amp;\text{if } s \text{ is a max-node (our turn)} \\ \min\set{\text{expectiminimax}(s&#39;) : s&#39; \in \text{successors}(s)} &amp;\text{if } s \text{ is a min-node (their turn)} \\ E(\set{\text{expectiminimax}(s&#39;) : s&#39; \in \text{successors}(s)}) &amp;\text{if } s \text{ is a min-node (their turn)} \end{cases}</span>, where <span class="math inline">E(X)</span> is the expected value.</p>
+<p>For stochastic games, we treat chance itself as a player, so there's the max-player (us), the min-player (the opponent), and the chance player (the whims of nature), where the chance player makes its move with probabilities defined by the path in the tree, in between every max-player and min-player turns. We then construct an <strong>expectiminimax tree</strong> and consider it a search problem. The expectiminimax tree is the same as the minimax tree, but with another case: <span class="math inline">\text{expectiminimax}(s) = \begin{cases} \text{utility}(s) &amp;\text{if } s \text{ is a terminal state} \\ \max\set{\text{expectiminimax}(s&#39;) : s&#39; \in \text{successors}(s)} &amp;\text{if } s \text{ is a max-node (our turn)} \\ \min\set{\text{expectiminimax}(s&#39;) : s&#39; \in \text{successors}(s)} &amp;\text{if } s \text{ is a min-node (their turn)} \\ E(\set{\text{expectiminimax}(s&#39;) : s&#39; \in \text{successors}(s)}) &amp;\text{if } s \text{ is a chance-node (nature&#39;s turn)} \end{cases}</span>, where <span class="math inline">E(X)</span> is the expected value.</p>
 <p>For Go, the branching factor is about 250, and the terminal states are usually up to 150 moves deep. For this we can use techniques like Monte-Carlo tree search.</p>
 <h1 id="section-6">2/10/17</h1>
 <h2 id="utility-theory">Utility Theory</h2>
@@ -322,7 +322,7 @@ So <span class="math inline">f(e&#39;) &gt; f(n)</span>, which isn't possible si
 <li>For a choice node <span class="math inline">s = \set{a_1, \ldots, a_k}</span> (actions and their associated chance nodes), we take the expected utility of the action with the greatest expected utility to get <span class="math inline">U(s) = \max U(a_i)</span>.</li>
 </ul>
 <p>When implementing the above, we would usually compute expected utilities bottom-up, in a dynamic programming fashion. This allows us to compute the utility value of each node in the tree in <span class="math inline">O((\abs{A} \abs{O}))^d</span> time where <span class="math inline">d</span> is the depth of the tree, so it's in the same order as the number of possible policies. Note that the naive, top-down implementation that computes <span class="math inline">U(s)</span> for each node would instead take <span class="math inline">O(n^d m^{2d})</span>.</p>
-<p>A policy essentially defines a decision for choice nodes in the tree. We can represent it as a mapping from states to actions. Note that because we took only the maximum-expected-utility action at each choice node as we were evaluating our utility function, the nodes under every other possible action will never be reached. Therefore, what action we assign there is more-or-less arbitrary. Two policies are <strong>implementationally indistinguishable</strong> if they assign the same actions to on all reachable choice nodes (though they may be different for unreachable ones).</p>
+<p>A policy essentially defines a decision for choice nodes in the tree. We can represent it as a mapping from states to actions. Note that because we took only the maximum-expected-utility action at each choice node as we were evaluating our utility function, the nodes under every other possible action will never be reached. Therefore, what action we assign there is more-or-less arbitrary. Two policies are <strong>implementationally indistinguishable</strong> if they assign the same actions to all choice nodes that are reachable from the start node, when applying either policy (though they may be different for unreachable ones).</p>
 <p>Most decision problems aren't fully observable - we usually work around this by using heuristics. Additionally, representing outcome distributions often requires a huge number of states and probabilities - these are usually worked around by using decision networks or Bayes net representations, which we'll cover later on.</p>
 <p>A decision problem is <strong>fully observable</strong> if and only if we know the initial state, and it's possible to know the outcome of every action (which state we ended up being in). For partially observable decision problems, we might only know the outcomes of some actions after taking them. If we have a partially observable decision problem, we can sometimes design the choices to move the unobservable outcomes into leaf nodes, where we won't need to observe their outcomes: for example, instead of a decision tree that decides whether to proceed as if a patient has malaria or the flu, and then decides whether to prescibe drug A or B in each case, we might have a decision tree that decides whether to prescribe drug A or B, and then decides whether to proceed as if the patient has malaria or the flu.</p>
 <h1 id="section-7">4/10/17</h1>
@@ -534,6 +534,179 @@ Agent 1 Turn Away | 10, 10    | 0, 20     |
 <li>&quot;How would you use AI techniques to solve problem X?&quot;.</li>
 <li>Same format as midterm, but focusing on post-midterm material.</li>
 <li>Ask lead TA if you have questions.</li>
+</ul>
+<h1 id="section-24">17/12/17</h1>
+<p>Notes from exam review session by yours truly.</p>
+<ul>
+<li>search:
+<ul>
+<li>algorithms: DFS, BFS, A<em>, IDA</em>, SMA*</li>
+<li>completeness (always finds an answer)</li>
+<li>optimality (always finds best answer)</li>
+</ul></li>
+<li>constraint satisfaction:
+<ul>
+<li>backtracking</li>
+<li>ordering: most constrained variable (least remaining values), most constraining variable (most unsatisfied constraints references), least constraining value (precludes least number of other variable values)</li>
+<li>filtering: forward checking, arc consistency</li>
+</ul></li>
+<li>local search: hill climbing, simulated annealing, genetic algorithms</li>
+<li>adversarial search:
+<ul>
+<li>computing minimax utility bottom-up</li>
+<li>minimax search (dfs through minimax tree, possibly where minimax utility values are estimated after a certain depth)</li>
+<li>alpha-beta pruning (stop looping through the children of a node when we're guaranteed that one option is guaranteed win in minimax)</li>
+<li>estimating minimax utility when the tree is too large to expand, singular extensions (keep expanding past depth limit for especially promising options)</li>
+<li>for stochastic games: chance player and the expectiminimax tree (chance player takes average of all children weighted by their probabilities)</li>
+</ul></li>
+<li>utility theory:
+<ul>
+<li>preference ordering, lotteries (mapping from outcomes to probabilities of those outcomes; a distribution over outcomes)</li>
+<li>decision problems under certainty/uncertainty: a set of actions <span class="math inline">D</span>, a set of action outcomes <span class="math inline">S</span>, a mapping from actions to outcomes/lotteries <span class="math inline">f</span>, and a utility function <span class="math inline">U</span></li>
+<li>policies: mapping from outcomes to actions to take at those outcomes (these are better than sequences of actions because they allow us to incorporate new info available to us after taking each action)</li>
+<li>computing policies from expected utility tree (bottom up, from leaf nodes using dynamic programming)</li>
+</ul></li>
+<li>markov chains:
+<ul>
+<li>markov property: distribution of next states depends only on current state, not how we got to current state</li>
+<li>markov transition matrix: matrix <span class="math inline">P</span> where <span class="math inline">P_{ij}</span> is probability of going into state <span class="math inline">j</span> given that we're currently on state <span class="math inline">i</span>, rows and columns represent outcomes/states</li>
+<li>markov problem: set of states <span class="math inline">S</span>, state rewards <span class="math inline">R</span>, time discount factor <span class="math inline">\gamma</span>, transition probability function (probability of going to state <span class="math inline">j</span> given that we're on state <span class="math inline">i</span> and just took action <span class="math inline">k</span>)</li>
+<li>expected utility: reward at current state plus (expected utility of each possible next state, weighted by probability of reaching that state) multiplied by time discount factor</li>
+<li>solving markov problems: goal is to find policy that maximizes expected utility</li>
+<li>value iteration: repeatedly compute maximum expected discounted future reward for each action for 1 iteration, 2 iterations, etc. until reward value converges (dynamic programming)</li>
+<li>bellman's equation: <span class="math inline">V^{t + 1}(s_i) = \max_k \set{r_i + \gamma \sum_j P_{ij}^k V^t(s_j)}</span> where <span class="math inline">P_{ij}^k</span> is probability of going to state <span class="math inline">j</span> from <span class="math inline">i</span> when taking action <span class="math inline">k</span> (this equation is suitable for solving wih dynamic programming, or linear system solver due to being linear equation)</li>
+<li>partially-observable MDPs: state for MDP replaced by distribution over states called belief states, solutions are policies mapping belief states to actions</li>
+</ul></li>
+<li>reinforcement learning:
+<ul>
+<li>learning actions that maximize expected discounted reward, difficult because of time-delayed reward</li>
+<li>problem formulation: states <span class="math inline">S</span>, actions <span class="math inline">A</span>, rewards <span class="math inline">R</span> (usually delayed from actions by multiple steps), time is usually discretized</li>
+<li>goal is to find optimal policy, just like MDPs but we initially don't know the transition probability function or the rewards, can only execute actions and observe results later</li>
+<li>model-based (learns transition probability function and rewards to compute policy) vs. model-free (learns policy directly)</li>
+<li>passive (given a policy, evaluate it) vs. active (output actions, and given action results, output policy)</li>
+<li>on-policy reinforcement learning (behaviour while training converges to the final learned policy) vs off-policy reinforcement learning (behaviour while training can always differ from final learned policy)</li>
+<li>explore (try new unknown actions) vs. exploit (take current best action)</li>
+<li>boltzmann exploration: choose best action with probability <span class="math inline">\frac{\exp(Q(s, a)/T)}{\sum_a \exp(Q(s, a)/T)}</span> and random action otherwise (sort of like lowering temperature in simulated annealing)</li>
+<li>RL techniques:
+<ul>
+<li>direct estimation: run a policy many times, average utility values from each run to get expected utilities</li>
+<li>adaptive dynamic programming: solve as per MDPs using bellman's equation - we always have <span class="math inline">r(s_i)</span>, and we can estimate <span class="math inline">P_{ij}^k</span> by the fraction of times performing action <span class="math inline">k</span> at state <span class="math inline">i</span> moved us to state <span class="math inline">j</span>, and with these we have enough data to perform the update</li>
+<li>temporal difference: use observed transitions to update expected utilities as per Bellman's equation <span class="math inline">V^\pi(s_i) \leftarrow (1 - \alpha) V^\pi(s_i) + \alpha(r(s_i) + \gamma V^\pi(s_j))</span>, decrease <span class="math inline">\alpha</span> over time to ensure convergence, <span class="math inline">\pi</span> is the current policy</li>
+<li>Q-learning: replace <span class="math inline">V^\pi(s_i)</span> with <span class="math inline">Q(s, a)</span> to get <span class="math inline">Q(s_i, a) = (1 - \alpha) Q(s_i, a) + \alpha(r(s_i) + \gamma \sum_{s_j} \max_{a&#39;} Q(s_j, a&#39;))</span> - current reward plus discounted expected Q value - this is like temporal difference except more suitable for implementation</li>
+<li>SARSA is on-policy learning: policy maps each state to the action with highest Q value, initialize <span class="math inline">Q</span>, <span class="math inline">s</span>, <span class="math inline">a</span>, take action <span class="math inline">a</span> then record <span class="math inline">s&#39;</span> and choose <span class="math inline">a&#39;</span> from policy, update Q values per <span class="math inline">Q(s, a) \leftarrow Q(s, a) + \alpha(r + \gamma Q(s&#39;, a&#39;) - Q(s, a))</span>, set <span class="math inline">a = a&#39;, s = s&#39;</span></li>
+<li>Q-learning is off-policy learning: at each step do arbitrary action <span class="math inline">a</span>, update <span class="math inline">Q</span> with same formula as SARSA, go to new state <span class="math inline">s = s&#39;</span> (with boltzmann exploration, this converges as we visit states infinitely often and temperature and learning rate go to 0)</li>
+</ul></li>
+</ul></li>
+<li>bayes nets:
+<ul>
+<li>bayes rule: <span class="math inline">P(A \mid B) = P(B \mid A) P(A) / P(B)</span>, aka posterior = likelihood * prior / normalization_constant (for Bayesian inference, posterior is P(hypothesis evidence))</li>
+<li>posterior joint distribution: table of <span class="math inline">P(Y \mid E_1, \ldots, E_n)</span> values where each dimension <span class="math inline">i</span> of the table is possible values of <span class="math inline">E_i</span></li>
+<li>conditional independence: <span class="math inline">P(A \mid B, C) = P(A \mid C)</span> means <span class="math inline">A</span> and <span class="math inline">B</span> are conditionally independent under <span class="math inline">C</span> - knowing <span class="math inline">B</span> doesn't change our belief in <span class="math inline">A</span> if we already know <span class="math inline">C</span></li>
+<li>independence: <span class="math inline">P(A \land B) = P(A) P(B)</span> means <span class="math inline">A</span> and <span class="math inline">B</span> are independent (this is used to make joint probability tables smaller, since we only need to know <span class="math inline">P(A)</span> and <span class="math inline">P(B)</span>, rather than every combination of values for <span class="math inline">P(A \land B)</span>)</li>
+<li>bayes net: digraph where nodes are events and edges <span class="math inline">A \to B</span> are conditional dependence &quot;<span class="math inline">B</span> depends on the value of <span class="math inline">A</span>&quot; (each node is directly dependent only on the nodes that are directly connected into it!), also every node includes a conditional probability table P(the node first parent of this node, second parent of this node, ...)</li>
+<li>sibling and cousin nodes are conditionally independent of each other given their shared ancestor, non-connected nodes are independent</li>
+<li>nodes are conditionally independent of every non-decendent given its parents</li>
+<li>markov blanket: nodes are conditionally independent of all other nodes given its parents, children, and children's parents</li>
+<li>factor: function over a set of random variables, or a table for each combination of values of those variables, where last variable is conditional on rest (<span class="math inline">f(a, b, c, d)</span> is table for <span class="math inline">P(D \mid A, B, C)</span>)</li>
+<li>a set of nodes <span class="math inline">E</span> d-separates nodes <span class="math inline">X</span> and <span class="math inline">Y</span> if removing every node in <span class="math inline">E</span> from the bayes net disconnects <span class="math inline">X</span> and <span class="math inline">Y</span> - <span class="math inline">X</span> and <span class="math inline">Y</span> are conditionally independent given <span class="math inline">E</span></li>
+<li>factor rule: <span class="math inline">f(A, B) \times g(B, C)</span> is table where each row's value is the product of the corresponding rows in <span class="math inline">f</span> and <span class="math inline">g</span> - <span class="math inline">abc = f(a, b) g(b, c)</span></li>
+<li>relevant nodes: given evidence (nodes whose values are known) and a query (nodes whose values we're trying to compute), the nodes that can affect the query node's value if we knew their values</li>
+</ul></li>
+<li>stochastic processes:
+<ul>
+<li>used to represent probabilistic inference over time, where distributions of variables can change over time</li>
+<li>one-variable stochastic process can be represented with a bayes net where each node represents the variable at a certain time-slice and nodes are pointed to by all older nodes</li>
+<li>stationary assumption: state probabilities don't change over time</li>
+<li>markov assumption: state probabilities depend on a fixed number <span class="math inline">k</span> of past states (a <span class="math inline">k</span>-order markov process is one where state probabilities depend on the last <span class="math inline">k</span> states), this lets us specify the entire process using observations from a finite number of time slices</li>
+<li>we generally can't directly observe our state (hidden states), sensors reduce uncertainty about current state</li>
+</ul></li>
+<li>hidden markov model (of order <span class="math inline">k</span>):
+<ul>
+<li>set of states <span class="math inline">S</span>, set of observations <span class="math inline">O</span>, transition model <span class="math inline">P(s_t \mid s_{t - 1}, \ldots, s_{t - k})</span>, observation model <span class="math inline">P(o_t \mid s_t)</span>, prior <span class="math inline">P(s_0)</span></li>
+<li>example of first-order hidden markov model: <span class="math inline">S</span> is robot's coordinates, <span class="math inline">O</span> is distances to nearby objects, transition model is movements of robot (including uncertainty about where we'll end up), observation model is distance measurements (including uncertainly from sensor noise), model is trying to compute <span class="math inline">P(s_t \mid o_1, \ldots, o_t)</span> (position given all sensor measurements)</li>
+<li>common tasks: monitoriing <span class="math inline">P(s_t \mid o_1, \ldots, o_t)</span> (e.g., robot localization), prediction <span class="math inline">P(s_t \mid o_1, \ldots, o_t)</span> (stock trading), hindsignt <span class="math inline">P(s_{t - k} \mid o_1, \ldots, o_t)</span> (crime scene investigation), explanation <span class="math inline">\argmax_{s_1, \ldots, s_t} P(s_1, \ldots, s_t \mid o_1, \ldots, o_t)</span> (speech recognition, autocorrect)</li>
+<li>for all use cases, solved using variations of variable elimination over the corresponding bayes net, for explanation we can use viterbi algorithm</li>
+<li>dynamic bayes nets: represent states/observations using multiple random variables, rather than just one state variable and one observation variable, which allows us to exploit conditional dependence for better time complexity</li>
+<li>for non-markovian or non-stationary processes, just add state components until it's markovian and stationary again (e.g., if state depends on history length, add history length to the state tuples)</li>
+</ul></li>
+<li>decision networks:
+<ul>
+<li>networks consisting of random variable nodes (like in bayes nets, includes conditional probability tables, oval shape), choice nodes (where choices are made, based entirely on information available from parents, rectangle shape), and value nodes (contains utility of every combination of parents' values, diamond shape, usually only one in a network)</li>
+<li>decision networks make decisions always in the same order and don't forget previously available info (parents of a decision are also parents of all subsequent decisions)</li>
+<li>policy: a set of mappings from parent assignments (values of parent nodes) to decision values for each decision node</li>
+<li>expected utility of policy: expected utility for all possible assignments of the random variables (average utility for those assignments weighted by probability of those assignments occurring)</li>
+<li>optimal policy can be computed using dynamic programming, just like for bayes nets - at each decision node just pick the highest-expected-utility choice</li>
+</ul></li>
+<li>game theory:
+<ul>
+<li>a rational agent has beliefs about what other players will do, will perform the action that maximizes its own utility under those beliefs - we study how rational agents behave</li>
+<li>normal form game: set of agents <span class="math inline">I</span>, set of actions <span class="math inline">A</span>, action profile/outcomes <span class="math inline">\tup{a_1, \ldots, a_n}</span> (decisions made by each player), outcome utility <span class="math inline">U</span></li>
+<li>dominant strategy: a way of choosing actions that has better expected utility than any other strategy, regardless of other players' actions (necessary but insufficient condition for rational strategy)</li>
+<li>nash equilibrium: an outcome profile <span class="math inline">\tup{a_1, \ldots, a_n}</span> such that no single agent would change their decision if they knew every other agent was going to choose what they did</li>
+<li>mixed strategy: probability distribution over set of actions</li>
+<li>strategy profile: tuple of probability distributions over set of actions, one entry per player</li>
+<li>mixed nash equilibrium: a strategy profile such that no single agent would change their strategy profile if they knew every other agent was going to use the strategy profile they did</li>
+<li>every game with a finite action set has a mixed nash equilibrium</li>
+<li>we can find nash equilibria of two player zero sum games using linear programming, but is PPAD hard problem in general</li>
+<li>extensive form game: set of agents <span class="math inline">I</span>, set of actions <span class="math inline">A</span>, choice nodes <span class="math inline">H</span> (with associated valid actions/resulting node, player), terminal nodes <span class="math inline">Z</span>, and utility function (this can be represented as a game tree)</li>
+<li>extensive form game vs. normal form: normal form game is where players all play their moves at the same time, extensive form game is where they take turns, can be written as game tree</li>
+<li>any extensive form game can be written as a normal form game: each player precommits to playing a certain sequence of games</li>
+<li>subgame perfect equilibria: nash equilibria in extensive form game that are also nash equilibria in all subtrees (this exists in every finite extensive form game, find them by computing all equilibria bottom-up)</li>
+</ul></li>
+<li>mechanism design:
+<ul>
+<li>designing games to account for rational agents to make certain outcomes occur</li>
+<li>mechanism: set of outcomes <span class="math inline">O</span>, set of agents <span class="math inline">N</span> (each with private information <span class="math inline">\theta_i</span> and utility function <span class="math inline">u_i(o, \theta)</span> and strategy space <span class="math inline">S_i</span>), outcome function <span class="math inline">g: S_1 \times \ldots \times S_n \to O</span></li>
+<li>social choice function: <span class="math inline">f: \theta_1 \times \ldots \theta_n \to O</span> (e.g., accepts agent votes and outputs winning vote, accepts bids and outputs auction winner)</li>
+<li>mechanism implements social choice function iff there exists a nash equilibrium such that <span class="math inline">g(s_1(\theta_1), \ldots) = f(\theta_1, \ldots)</span> (equilibria at social choice function's outcome given rational agents)</li>
+<li>direct mechanism: each agent reports one of its possible private information values as its action</li>
+<li>incentive compatible direct mechanism: direct mechanism where there's a nash equilibrium for every agent to tell the truth about its private information</li>
+<li>strategy proof direct mechanism: incentive compatible direct mechanism where that nash equilibrium is equilibrium of the dominant strategy</li>
+<li>revelation principle: if mechanism implements social choice function in dominant strategies, we can transform it into a strategy proof direct mechanism by moving the agents' transformation of <span class="math inline">\theta_i</span> into the mechanism itself</li>
+<li>gibbard-satterthwaite theorem: under pretty common conditions, social cost functions can only be implemented if they're dictatorial (one agent controls the rest)</li>
+<li>to get around having to be dictatorial, we design mechanisms to make it computationally hard to avoid social cost function outcomes rather than just relying on rationality, and restrict agent preferences</li>
+<li>quasilinear preferences: outcomes are vote result and transfers of money, where money linearly influences utility</li>
+<li>groves mechanisms: mechanisms for quasilinear preferences where money is used to pay agents who didn't get their top choice, and agents pay to get their top choice, results in efficient and strategy-proof mechanisms</li>
+<li>vickrey mechanisms: special case of groves mechanisms, where equilibrium utility of each agent is how much utility they add to the system by being there vs. not being there (e.g., vickrey auction: highest bidder gets item by paying the second-highest bid value to system)</li>
+</ul></li>
+<li>machine learning:
+<ul>
+<li>inductive learning hypothesis: hypothesis that approximates training set well will also approximate testing set well</li>
+<li>realizable target function: target function (true function that is being approximated) is contained in hypothesis space</li>
+<li>binary decision trees can represent any boolean function</li>
+<li>implementing decision trees: output mode of examples if no attributes left or all examples have same class, otherwise choose best attribute, partition examples along that attribute, and recurse on the two partitions and the remaining attributes</li>
+<li>entropy: <span class="math inline">\sum_i -P(v_i) \log_2 P(v_i)</span>, for binary training set we have <span class="math inline">P(v_1) = \frac{p}{p + n}</span> and <span class="math inline">P(v_2) = \frac{n}{p + n}</span></li>
+<li>choosing best attribute: pick the attribute that has higest information gain - lowers the sum of entropies in the two partitions the most</li>
+<li>overfitting: finding patterns that aren't there (avoid this using regularization and cross validation)</li>
+<li>bagging: train a bunch of models on training set (sampled with replacement) and take majority vote</li>
+<li>boosting: each training set point has a weight, repeatedly train models on training set, but after each one, weight the misclassified examples higher so future classifiers will focus on getting those right more (e.g., adaboost)</li>
+</ul></li>
+<li>neural nets:
+<ul>
+<li>feedforward, recurrent</li>
+<li>perceptrons: single-layer feedforward network with threshold activation, only one weights matrix, can only learn linear boundary, train by adding or subtracting <span class="math inline">\alpha \vec x_i</span> whenever <span class="math inline">\vec x_i</span> is misclassified, as appropriate</li>
+<li>backpropagation: technique for training deeper networks, compute gradient of loss function with respect to weights, subtract gradient from weights to get weights that give lower loss function value</li>
+<li>deep learning: neural networks with many layers (tends to overfit due to huge hypothesis space, hard to interpret, but can learn very complex hypotheses given a lot of data)</li>
+<li>neural network with single hidden layer can approximate any function, but requires fewer neurons if we use more layers</li>
+</ul></li>
+<li>bayesian learning:
+<ul>
+<li><span class="math inline">P(x \mid d) = \sum_i P(x \mid h_i) P(h_i \mid d)</span>, as we get more values of <span class="math inline">d</span> some hypotheses will get better predictions and <span class="math inline">P(h_i \mid d)</span> will increase - prediction is prediction of every hypothesis, weighted by our belief in that hypothesis being true</li>
+<li>optimal given prior: no other prediction will be correct more often (and prior can be used to regularize - complex hypotheses get lower prior)</li>
+<li>true bayesian learning is usually intractable - instead we might use maximum a posteriori learning, where we only use prediction of the hypothesis with highest <span class="math inline">P(h_i \mid d)</span> value (this is less accurate but converges to same predictions with enough data, but can still be intractable)</li>
+<li>maximum a posteriori learning: <span class="math inline">\argmax_h P(h \mid d) = \argmax_h P(h \land d) = \argmax_h P(h) P(d \mid h) = \argmax_h P(h) \prod P(d_i \mid h) = \argmax_h \ln P(h) + \sum \ln P(d_i \mid h)</span>, can then use linear programming to compute the argmax value</li>
+<li>maximum likelihood learning: maximum a posteriori learning, but with uniform priors (all <span class="math inline">P(h)</span> are equal, so we just have <span class="math inline">\argmax_h \prod P(d_i \mid h)</span>), still converges to same values as MAP and Bayesian but less accurate before converging, and faster to compute because no need for priors</li>
+<li>laplace smoothing: when we have observation <span class="math inline">\vec x</span> from multinomial distribution, we get maximum likelihood estimate for multinomial distribution means as <span class="math inline">\hat \theta = \frac{x_i}{n}</span>, but if we laplace smooth <span class="math inline">\vec x</span>, we get the estimate <span class="math inline">\hat \theta_i = \frac{x_i + \alpha}{n + \alpha d}</span></li>
+<li>naive bayes model: assume all <span class="math inline">x_i</span> are independent of each other, <span class="math inline">P(C \mid x_1, \ldots, x_n)</span> is proportional to <span class="math inline">P(C) P(x_1 \mid C) \cdots P(x_n \mid C)</span>, then pick <span class="math inline">C</span> that maximizes <span class="math inline">P(C \mid x_1, \ldots, x_n)</span> (even though the assumption is rarely true, scales and performs well in practice)</li>
+<li>naive bayes example: document classification, assume each word is independent, P(class_i document_i) is proportional to <span class="math inline">\prod P(word_i in document \mid class_i) / P(class_i)</span></li>
+</ul></li>
+<li>expectation maximization:
+<ul>
+<li>used when some attribute values missing or when learning directly is infeasible</li>
+<li>guess maximum likelihood hypothesis, then repeatedly predict missing attributes values using hypothesis, and use those predicted values to compute new maximum likelihood hypothesis, repeat until hypothesis stops changing</li>
+<li>formally, repeatedly compute: <span class="math inline">h_{i + 1} = \argmax_h \sum_Z P(Z \mid h_i, e) \ln P(Z \land e \mid h_i)</span> where <span class="math inline">Z</span> is missing attribute values and <span class="math inline">e</span> is known attribute values</li>
+<li>monotonically increases <span class="math inline">P(e \mid h_i)</span> as <span class="math inline">i</span> increases</li>
+</ul></li>
 </ul>
 <div class="status-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; text-align: center;">
     <div style="display: inline-block; padding: 0.8em 2em 0.5em 2em; background: black; color: white; font-size: 2em;">

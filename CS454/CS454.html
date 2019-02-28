@@ -10,6 +10,67 @@
   <link rel="stylesheet" href="../highlight/styles/paraiso-light.css">
   <script src="../highlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+  <script src="../katex/katex.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="../katex/katex.min.css" />
+  <script type="text/javascript">
+  window.onload = function() {
+    document.getElementsByClassName("status-banner")[0].style.display = "block";
+    setTimeout(function() {
+      renderMathElements(document.getElementsByClassName("math"));
+      document.getElementsByClassName("status-banner")[0].style.display = "none";
+    }, 50); // delay to allow status banner to show
+  }
+
+  function renderMathElements(mathElements) {
+    var mathOptions = {
+      macros: {
+        "\\set": "\\left\\{ #1 \\right\\}",
+        "\\tup": "\\left\\langle #1 \\right\\rangle",
+        "\\abs": "\\left\\lvert #1 \\right\\rvert",
+        "\\floor": "\\left\\lfloor #1 \\right\\rfloor",
+        "\\ceil": "\\left\\lceil#1 \\right\\rceil",
+        "\\mb": "\\mathbb{#1}",
+        "\\rem": "\\operatorname{rem}",
+        "\\ord": "\\operatorname{ord}",
+        "\\sign": "\\operatorname{sign}",
+        "\\imag": "\\bm{i}",
+        "\\dee": "\\mathop{}\\!\\mathrm{d}",
+        "\\lH": "\\overset{\\text{l'H}}{=}",
+        "\\evalat": "\\left.\\left(#1\\right)\\right|",
+        "\\sech": "\\operatorname{sech}",
+        "\\spn": "\\operatorname{Span}",
+        "\\proj": "\\operatorname{proj}",
+        "\\prp": "\\operatorname{perp}",
+        "\\refl": "\\operatorname{refl}",
+        "\\magn": "\\left\\lVert #1 \\right\\rVert",
+        "\\rank": "\\operatorname{rank}",
+        "\\trace": "\\operatorname{trace}",
+        "\\sys": "\\left[ #1 \\mid #2\\space \\right]",
+        "\\range": "\\operatorname{Range}",
+        "\\adj": "\\operatorname{adj}",
+        "\\cof": "\\operatorname{cof}",
+        "\\coord": "{\\left\\lbrack #1 \\right\\rbrack}_{#2}",
+        "\\diag": "\\operatorname{diag}",
+        "\\formlp": "\\operatorname{Form}(\\mathcal{L}^P)",
+        "\\argmin": "\\operatorname{argmin}",
+        "\\argmax": "\\operatorname{argmax}",
+        "\\sgn": "\\operatorname{sgn}",
+
+        // not yet available in KaTeX
+        "\\bm": "\\mathbf", //wip: should be italic, but isn't
+      },
+    };
+    for (var i=0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      try {
+        katex.render(texText.data, mathElements[i], mathOptions);
+      } catch (e) {
+        console.error(e);
+        console.log(mathElements[i]);
+      }
+    }
+  }
+  </script>
 </head>
 <body>
   <script>
@@ -48,27 +109,354 @@
 Section 001 (technically section 2 somehow, but it shows up as section 1 on Quest)
 Website: https://cs.uwaterloo.ca/~kdaudjee/courses/cs454/
 Tuesdays/Thursdays 10:00am</code></pre>
-<p><strong>NOTE:</strong> The professor asked the class not to share any notes for this course, so this document just contains summaries of the topics covered in each lecture, as well as any additional resources I acquire outside of the course. That said, if you'd like a specific thing explained, I'm likely to give it a try if you <a href="mailto:me@anthonyz.ca?subject=CS454">email me</a>.</p>
 <h1 id="section">3/1/17</h1>
-<p>Lecture summary: course administrative information, what a distributed system is exactly, ten common fallacies of distributed systems.</p>
+<p>Introduction to the fundamentals of distributed systems given computers with facilities for data transmission - distributed algorithms, file systems, databases, and so on, as well as related topics.</p>
 <p>Course has 4 assignments (worth 50%), no midterms, and one final (worth 50%). Textbook &quot;Distributed Systems: Principles and Paradigms (2nd edition)&quot; is freely available online from the publisher (<a href="https://www.distributed-systems.net/index.php/books/distributed-systems/">download page</a>), though it's not strictly required.</p>
+<p>To pass the course, you must pass both the assignments and exams. There's also a Piazza class. Also, there is a lot of information that is only going to be mentioned in class, so the class notes on LEARN are not comprehensive.</p>
 <p>After an assignment deadline, there is a 48 hour grace period afterwards in which instructors won't answer questions on Piazza, but you can still submit your assignment with no penalty.</p>
+<h2 id="definitions">Definitions</h2>
+<p>A <strong>distributed system</strong> is a collection of independent computers that appear to users as a single computer - a system that acts like one computer. In other words, a number of computers that all appear as a single machine. This includes things like popular web applications, to multicore processors.</p>
+<p>There are a few common fallacies of distributed systems, which often prevent distributed systems from working well:</p>
+<ul>
+<li>Does the system need to handle failures in network reliability? Assuming the network is reliable is a fallacy.</li>
+<li>How is the system impacted by latency for transmitting data between parts of the system? Assuming latency is zero is a fallacy.</li>
+<li>How is the system impacted by real-world limits on bandwidth? Assuming bandwidth is infinite is a fallacy.</li>
+<li>Can we ensure the system is secure to attack, however that might take place? Assuming the system is secure is a fallacy.</li>
+<li>Does the system need to handle changes in network topology/structure? Assuming the topology is always unchanging is a fallacy.</li>
+<li>How is the system administrated? Assuming there is always one administrator is a fallacy.</li>
+<li>How is the system impacted by network transport costs? Assuming there is never a network transport cost is a fallacy.</li>
+<li>Does the system need to handle non-homogenous networks/machines (e.g., some machines are faster, some slower)? Assuming all machines and all parts of the network are the same is a fallacy.</li>
+<li>How is the system impacted by wall-clock differences (e.g., some machines think it's 1:00pm, some think it's 1:01pm)? Assuming the system will preserve its guarantees without syncing clocks is a fallacy.</li>
+</ul>
 <h1 id="section-1">5/1/17</h1>
-<p>Lecture summary: desirable properties of distributed systems. Eight different types of transparency in distributed systems, why they're useful, and when they're applicable. Scalability in distributed systems, with examples from real-world systems.</p>
+<p>The main reasons we use distributed systems over centralized systems are economy (lots of small computers is often cheaper than an equivalent single big computer), performance (distributed systems can scale beyond what's possible to do with a single machine, and having multiple computers means the I/O capabilities far exceed single machine performance), suitability for inherently distributed problems (for example, serving web applications from servers that are as close to the client as possible, in many different countries), reliability (distributed systems can be designed so that machines can fail without the whole thing going down), and scalability (distributed systems can be designed to grow as needed if requirements change).</p>
+<p>Most distributed systems are designed so that individual machines are executing their programs concurrently, operate as independently as possible, and tolerate failures.</p>
+<p>Most distributed systems avoid using a global clock - each machine can potentially have its own idea of what time it is. While it is possible to do synchronization (confirmation requests, TrueTime, etc.), it unavoidably adds complexity and overhead.</p>
+<p>Well-designed distributed systems are designed to be transparent, which means the user just sees the system as a single machine. Although two visitors to gmail.com in different countries are likely talking to two entirely different machines, both visitors see the same application. If it was not transparent, it would expose internal details of the distributed system, like having to visit &quot;us-west1.gmail.com&quot; for western north american users, or &quot;us-east1.gmail.com&quot; for eastern ones.</p>
+<h3 id="transparency">Transparency</h3>
+<p>Transparency in a distributed system means that resources can be accessed without knowing about the internal details of the distributed system. There are several kinds of transparency in distributed systems:</p>
+<ul>
+<li>Access transparency - we don't have to know whether resources are local or remote (resources are accessed in a uniform way).</li>
+<li>Location transparency - we don't have to know the resource's location (e.g., DNS lets you connect to a website without knowing its IP address).</li>
+<li>Concurrency transparency - we don't have to know whether a shared resource is being used elsewhere (other processes won't interfere with accessing our shared resource).</li>
+<li>Replication transparency - we don't have to know about multiple copies of a particular resource, we just see a single instance of it.</li>
+<li>Failure transparency - we don't have to know whether machines have failed, because the distributed system will automatically switch to working machines.</li>
+<li>Mobility transparency - we don't have to know whether resources and clients have been moved around (e.g., our wifi network, eduroam, shows up as one network even when you move between buildings on campus).</li>
+<li>Performance transparency - we don't have to know when the system is being tweaked to improve performance (and the system doesn't unpredictably become slow).</li>
+<li>Scale transparency - we don't need to know when the system is being scaled up or down.</li>
+</ul>
+<p>Real-world systems often try to implement many of these kinds of transparency, but sometimes it is useful to avoid making things transparent in return for more control, which can be useful for things like performance.</p>
+<p>The distributed system fallacies mentioned earlier touched on some of the challenges facing the building of transparent systributed systems. There are different networks, hardware, operating systems, programming languages, and protocol implementations.</p>
+<h3 id="scalability">Scalability</h3>
+<p>A well-designed distributed system should behave properly if the number of users and components increases. For example, the system shouldn't slow down when it gets more users, and should become faster as we add more resources to the system. A scalable system should also maintain its behaviour when it becomes more complex, and when more functionality is added. Nowadays, a common concern is also data scalability - the system shouldn't slow down when the amount of data being processed and stored increases.</p>
+<p>In other words, scalability generally means preserving correct behaviour when increasing: system resources, number of users, software complexity, and quantity of data.</p>
+<p>Scalability is often made difficult by the need for distributed ways to store data (we often need all machines to see the same or generally very similar data), implement services (it's a lot easier to write a centralized service since we don't need to think about communication with resources as much), and run algorithms (many algorithms are much more complicated to implement when it can't see all of its input at once).</p>
+<p>Consider a situation where we have a popular web application. As requests come in, how do we ensure that they're distributed to our servers in a way that no single server doesn't get overloaded? Turns out, perfect load balancing is NP-hard, but we can get pretty close. For example, round-robin load balancing works pretty well if requests have relatively consistent resource requirements.</p>
 <h1 id="section-2">10/1/17</h1>
-<p>Lecture summary: distributed system architectures (client-server, multitier, etc.), concurrency, NUMA, operating system support for distributed systems (distributed operating systems, networked operating systems).</p>
+<p>Scalability is also made difficult by partial failures - working nodes need to keep working, and failed nodes need to try and recover. Detecting failure, hiding failure from the end user (failure masking), continuing to work properly (failure tolerance), and failure recovery are all often important goals of distributed systems. This is often implemented using different schemes for replication. For example, the space shuttle has 3 redundant onboard computers, which compute the exact same thing multiple times in order to prevent errors from showing up.</p>
+<h3 id="concurrency">Concurrency</h3>
+<p>Concurrency is made difficult by using shared resources - how do yoou ensure that the shared resource is changed correctly if there are multiple entities trying to change it at the smae time? If you have a banking system, and a client is depositing money from one location into an empty bank account, and then withdrawing from another location at the same time, does the withdrawal go through?</p>
+<h2 id="system-architecture">System Architecture</h2>
+<p>The architecture of a system defined the components of that system, their functionality, and the relationships/interactions between them.</p>
+<p>A reference model is a conceptual framework that breaks the system into manageable pieces and relates them to each other in a high-level way. Reference models can be <strong>component-based</strong> (relate components to each other) or <strong>function-based</strong> (relate individual functions to each other).</p>
+<p>Generally, distributed systems are implemented in layers:</p>
+<ul>
+<li>Applications/services (like email, FTP, and so on).
+<ul>
+<li>Networking hardware/machines. The applications/services communicate with the middleware using various APIs and RPC schemes.</li>
+</ul></li>
+<li>Middleware (software that provides a high-level programming model)
+<ul>
+<li>The middleware is responsible for managing how those applications/services are distributed among the machines - there's one middleware that abstracts the distribution of the application across all the machines.</li>
+<li>Hadoop and Spark are often considered high-level middleware - they run on top of the things we cover in this course, like replication and partitioning, but they can't really be classified as applications either.</li>
+</ul></li>
+<li>Operating systems.</li>
+</ul>
+<p>There are two main dimensions to hardware organization we care about: shared/private memory (whether the memory is shared between processors or not), and bus/switch memory routing (whether processors/memory are connected via a bus, or everything is routed through a switch). For shared memory, the bus/switch connects processors and memory. For private memory, the bus switch only connects processors. Private memory with buses tend to be the cheapest, which is why they're often used in modern real-world distributed systems. Note that a processor or memory unit might be an entire machine by itself.</p>
+<p>NUMA (non-uniform memory access) is a type of architecture in which different processors might need different amounts of time to access a given piece of memory. It's making a comeback in large-scale computing because they're cheaper, as it's a lot harder to match memory access patterns across a lot of connected machines.</p>
+<p>A distributed operating system (DOS) is one that transparently manages hardware resources for multiprocess and homogenous collections of computers. A networked operating system (NOS) is one that isn't transparent, but provides communication facilities between different, heterogenous computers. Middleware runs on top of NOSs to implement distributed transparency. Most real-world systems use NOSs with middleware, since that allows us to use heterogenous hardware.</p>
+<p>Different types of system architectures include client-server (including multi-client-single-server, multi-client-multi-server, and so on), multitier systems. Real-world large-scale systems are almost always client-server, because it allows us to scale services horizontally and vertically, allows the client to potentially use really cheap hardware, allows a huge variety of different clients, and overall just provides better price for a given performance. We usually use multi-client-multi-server, because with multi-client-single-server, the server forms a bottleneck and a single points of failure.</p>
 <h1 id="section-3">12/1/17</h1>
-<p>Lecture summary: horizontal/vertical scaling (but not the kind you're thinking of!), multitier architectures and their benefits/drawbacks, peer-to-peer distributed systems and their structure (tree, DAG, benefits/drawbacks of different approaches).</p>
+<p><strong>Vertical scaling</strong> in terms of software is partitioning of a service into multiple parts. For example, one part of the service might implement the business logic, another might implement the database, and another might implement the web frontend. The downside of vertical scaling is the service is harder to develop, it doesn't make sense to split up a service beyond a certain point (so the amount that we can scale up is limited), and some parts of the service might end up as bottlenecks anyways (for example, the frontend server might get bogged down).</p>
+<p><strong>Horizontal scaling</strong> in terms of software is replication of a service across different machines - each one of the servers is fully capable of completing the request from start to finish. The upside is you can scale pretty much arbitrarily, but the downside of this is that the service needs a lot more effort to develop - we need to consider synchronization, and similar issues. One example of horisontal scaling is a load balancer that distributes requests to a server in a round-robin fashion.</p>
+<p>Real-world systems often use a mix of these two. For example, a web service might have a horizontally-scaled set of servers for the web frontend (horizontal scaling), that then make use of a single storage server (vertical scaling).</p>
+<p>A thin client is sort of like a client-server application, but the entire application runs on the server, only the user interface running on the client. For example, X11 servers that we connect to over the internet.</p>
+<p>A multitier system is one in which servers are clients of other servers. For example, a search engine might have a user interface, processing, and data tier, each of which makes requests to lower tiers. Multitier architectures are a superset of client-server architectures; a client-server architecture can be thought of as a 2-tier multitier architecture. Note that each tier incurs additional costs (latency, resource usage, etc.) for making requests and returning data on the network, compared to just combining the tiers, but the upside is that each tier can be scaled in a more granular way.</p>
+<p>Peer-to-peer systems are decentralized - each peer has the application, which has the ability to coordinate with other peers running the application. We might think of this as a system in which every member is both a client and a server. When properly designed, a peer-to-peer system can arbitrarily scale, though designing robust peer-to-peer systems is much more difficult than the other systems we mentioned.</p>
+<p>Popular examples of peer-to-peer systems are Napster (centralized server connecting peers to other peers) and GNUtella (nodes autoamtically organized in a tree, accesses start at root node and propagate downward). While these are peer-to-peer, they have poor fault tolerance overall - Napster can get shut down just by taking out the centralized server, and GNUtella is susceptible to partitioning nodes when interior nodes fail.</p>
+<p>RPC is any mechanism by which calls are made to remote services in the same way as local procedure calls. CORBA is a specific RPC mechanism that can be checkpointed, implemented using an object request broker that routes requests and responses. CORBA was meant to be the middleware to replace all middleware, but it isn't used much these days because it's very specific to object-oriented applications.</p>
+<p>Request time is the time between the request being made on the client, until the response is done being received. Service time is the time between the request being received on the server, and when it starts being sent out. Throughput is the number of jobs per unit time (like requests per second). We also care about the system resource utilization and the network capacity utilization.</p>
 <h1 id="section-4">17/1/17</h1>
-<p>Lecture summary: parallelism (intra-process, inter-process), QoS, using parallelism to build robust distributed systems, issues with making arbitrary programs parallel, introduction to computer network architecture.</p>
+<p>In the past, the main source of messaging overhead was hardware and network overhead - software overhead was relatively low in comparison. Nowadays, with gigibit ethernet, infiniband, and fiberchannel, the main source of messaging ovehead is from the software itself.</p>
+<p>The two kinds of parallelism are intra-process parallelism (threads, or using more resources within a process), and inter-process (multiple processes, possibly on different machines).</p>
+<p>Most things can be made parallel, but some things can be made more parallel than others. Some things that usually prevent parallelism are centralized components (e.g., a single mail server), centralized data/tables (e.g., a single database server, a single DNS server), and centralized algorithms (e.g., a routing algorithm that needs complete system state to work). Usually we get around these by using caching and data replication.</p>
+<p>The quality of service is how well it satisfies the requirements. Functional QoS is whether the service can perform its specified functions. Non-functional QoS is how well it performs those functions with respect to performance, reliability (probability of system not experiencing failure in a particular time period, and the characteristics of potential failures), and availability (the fraction of the time the system is operational, even if experiencing failures). For example, a video game might have a QoS guarantee that the framerate is at least 60fps, or a database might have a QoS guarantee that it will be up 99.99999% of the time.</p>
+<p>Usually we improve dependability by using hardware and software redundancy, and masking failures in individual instances. The system should be designed to tolerate as many simultaneous failures as possible. Usually, we have to balance this with performance, since more redundancy means more synchronization overhead. For example, we might have a setup where we have two servers are running for each application, one acting as a backup for the other. There are also more advanced schemes like replicating only some parts, or using the backup system for non-critical activities. Redundancy also includes adding backup routes in the network, if network failures are expected.</p>
+<p>Redundancy can be divided into process redundancy (processes can take over for other, failing processes), and data redundancy (permanent data can be recovered or rolled back when faults/inconsistencies detected).</p>
+<h2 id="networks-in-the-context-of-distributed-systems">Networks (in the context of distributed systems)</h2>
+<p>Networks in our context route requests/responses between nodes (network entities) in an undirected graph. We will look at connection-oriented networks (where messages are sent over a connection made specifically between two nodes, like how words are sent over a telephone call connection), and connection-less networks (where messages are simply sent, no explicit connection required, like how packets are sent over the internet).</p>
+<p>Network protocols determine the order/format of messages sent between network entities, as well as the semantics of those messages. On the internet, we have 7 layers of protocols, according to the ISO OSI layered network architecture (physical, data link, network, transport, session, presentation, application). Each layer is responsible for one specific function to allow messages to be sent across the network. This allows us to focus on the upper layers to simplify our mental model of how the network works.</p>
+<p>Each layer adds its own wrapper/framing around the data from the layer above it. For example, a packet might have a header with the packet length, synchronization (makes packet match up with the network), packet number, destination address, and source address, and have a footer with a CRC checksum.</p>
 <h1 id="section-5">19/1/17</h1>
-<p>Lecture summary: continuation of network architectures, network concepts (circuit-switched, packet-switched), latency/bandwidth, OSI 7 layer model overview.</p>
+<p>We usually simplify the 7-layer OSI architecture for the internet to only 5 layers:</p>
+<ul>
+<li>The application layer has the actual application-specific functionality, like HTTP or FTP.</li>
+<li>The transport layer controls host-to-host data transfer, like TCP or UDP.
+<ul>
+<li>Some things we need to consider when choosing implementations are data loss (audio might be tolerant to losing some of the data, while file transfer might need no data loss), bandwidth (multimedia might require a lot of it to work, file transfer can probably use whatever's available), and timing (games might require low latency, while email probably doesn't care much).</li>
+<li>The common protocols here are TCP and UDP. TCP is connection-oriented, reliable (data will arrive at destination), has flow control (sending is limited to rate that receiver can handle), congestion control (sending is limited to rate network can handle), but doesn't provide upper bounds on timing or lower bounds on bandwith. UDP is packet-oriented, and doesn't provide any those guarantees, but it's a lot faster and has less overhead, so has better timing and bandwidth in practice. So things like SMTP, FTP, and HTTP use TCP, and things like streaming, multiplayer games, and VoIP protocols use UDP.</li>
+</ul></li>
+<li>The network layer handles routing of datagrams from sources to destinations, like IP.</li>
+<li>The link layer deals with transferring data between neighboring network entities, like ethernet.</li>
+<li>The physical layer deals with the physical transfer of data, like wires or radio waves.</li>
+</ul>
+<p>The application layer can contain its own layers, like an RPC mechanism over HTTP. The application runs on a set of network hosts, exchanging messages between hosts to implement the app.</p>
+<p>The API defines the interface between the application and the transport layer. For example, POSIX sockets constitute an internet API.</p>
+<p>A common way to make latencies and bandwidth more predictable is by using buffering. For example, video buffering allows video playback to remain unaffected by short dips in latency/bandwidth.</p>
+<p>Circuit-switched networks are those that connect nodes directly using dedicated links, like telephone networks - this gives us bandwidth and latency guarantees, but it's relatively inflexible because it depends on whether dedicated resources are available (providers share resources by multiplexing and providing a lower but still fixed bandwidth).</p>
+<p>In contrast, packet-switched networks route packets around using whatever links are available, like the internet - this gives us a lot of flexibility and reliability (since broken links can be routed around), but we can't get bandwidth, latency, or congestion/contention guarantees. Plus, each packet gets the max bandwidth available for each link, rather than being multiplexed. This is an improved version of message-switching networks, which is the same as before but entire messages are routed around instead of individual packets.</p>
+<p>Packet switching can support a lot more users than circuit switching, and uses available resources more efficiently, which is why it's used for the internet.</p>
+<p>One way to get circuit-switching-like latency and bandwidth guarantees on packet-switched networks is to have routers remember a particular route. This at least ensures somewhat consistent timing, and packets are more likely to arrive in order this way.</p>
+<p>Packet switching networks have multiple kinds of packet delays when processing packets on nodes (time spent reading addresses, computing route, etc.), queueing delays (time spent waiting for packet to go through transmission queue), transmission packets (time to send packets into the link), and propagation delay (time on the wire). Routers have their own routing tables storing the addresses of the next hop for every reachable destination (and the cost of each link), and by making local decisions about where to route packets to next, result in a globally efficient path to the destination.</p>
 <h1 id="section-6">24/1/17</h1>
-<p>Lecture summary: different ways to implement IPC (RPC, RMI, message passing), RPC failure modes, how implementations of RPC work (probably useful for assignment 3), considerations when using RPC in distributed systems.</p>
-<h1 id="section-7">31/1/17</h1>
+<p>There are multiple ways to implement IPC:</p>
+<ul>
+<li>Remote Procedure Call (RPC) is any mechanism that allows client programs to call procedures on server programs directly, using similar semantics to normal procedure calls - the caller suspends, the callee runs, and then the caller continues after receiving result.
+<ul>
+<li>Ideally the programmer doesn't have to realize it's a remote call at all - all the message passing and IO should be transparent. However, there are quite a few considerations in practice, like having different address spaces between caller/callee, difficulty in passing unserializable things (like pointers and function objects), and the function call failing when the remote machine is down (reliability is hard).</li>
+<li>When you make a call using RPC, you actually call a client stub, which marshalls your call and delivers it to the right server using the OS networking facilities. The server stub then unmarshalls it and actually calls the server procedure.</li>
+<li>The client stub and server stub form the RPC middleware, which takes care of serialization, endianness, error handling, calling conventions, and so on.</li>
+<li>The mechanism can either convert structures into a defined canonical form (with a given endianness, padding, etc.) before sending, or simply send structures in native format, adding metadata to make them unambiguous. The first is a lot easier to implement, but often has performance overhead for conversion even if the source and target machine use the same settings.</li>
+<li>When calling procedures by reference, RPC middleware might do copy/restore - copy the referenced object and sending it to the remote server, and then retrieving the final version of those copies from the server and updating the original referenced objects. This is how RPC maintains transparency when doing call-by-reference.</li>
+<li>Interfaces are defined by the server interface.</li>
+<li>RPC has five failure modes in addition to all the ones provided by normal procedure calls: client can't locate server, request is lost before it reaches server, reply is lost before it reaches client, server crashes after getting request, and client crashes after sending request. The mechanism therefore needs to provide these semantics to the caller somehow.</li>
+<li>For example, the client might raise an error if it can't find the server, and use a timeout to detect lost requests/replies/server crashes and retry or raise an error. Note that retrying should only be done for idempotent requests, since the previous requests might arrive eventually (alternatively, we can use sequence numbers bundled with each request, and the server only executes the lowest sequence number received).</li>
+<li>RPC failures can be handled with three broad strategies: we can keep retrying until the operation works (at least once semantics), we can give up immediately and report an error (at most once semantics), and we can just not do anything and possibly fail silently (we might want this for performance reasons in very specific cases).</li>
+<li>One way to get around client crashes after sending out requests is to divide time into epochs, and at the beginning of each epoch (or after a crash), the client broadcasts that a new epoch starts, and all running remote computations are killed (or alternatively, each node checks that its owner is still around, and kills it computation if it can't find the owner). Alternatively, we can simply give each RPC call a limited amount of time.</li>
+</ul></li>
+<li>Remote Method Invocation (RMI) is any mechanism that allows objects in one process to invoke methods of an object in a different process, sort of like the object oriented version of RPC.
+<ul>
+<li>Interfaces are defined by remote interfaces.</li>
+</ul></li>
+<li>Message passing is any mechanism that allows processes to asynchronously pass messages around.
+<ul>
+<li>This is what powers the other IPC mechanisms.</li>
+</ul></li>
+</ul>
+<h1 id="section-7">26/1/17</h1>
+<p>;wip: catch up in this</p>
+<h1 id="section-8">31/1/17</h1>
 <p>;wip: missed due to interviews</p>
-<h1 id="section-8">2/1/17</h1>
-<p>Lecture summary: name/directory services and different architectures commonly used for them, and how they're implemented, case study with DNS, considerations when designing name/directory services, case study with LDAP/X.500.</p>
+<h1 id="section-9">2/1/17</h1>
+<p>Name/directory services are used to look up network resources by their names. For example, DNS, LDAP, and X.500 (e.g., WatIAm).</p>
+<p>We can think of them as geographically distributed databases, generally implemented as a heirarchy of many name servers. Name services have to be distributed in order to provide availability (some parts can fail without bringing the system down), performance (servers should be close to users around the world), and ease of maintenance (we can take down some parts of the system as needed).</p>
+<p>Name/directory services have multiple possible issues:</p>
+<ul>
+<li>Partitioning - name server data is partitioned across multiple name servers, because no single server is capable of holding all of the data.</li>
+<li>Replication - name server data is duplicated across multiple name servers, because it improves availability and performance.</li>
+<li>Caching - servers and clients can both cache name resolutions performed on other servers.</li>
+<li>Heirarchy - servers are organized in a tree, to better distribute requests (also, this helps us deal with things like cyclic aliases).</li>
+</ul>
+<p>There are two schemes for name server resolution: iterative and recursive. Iterative resolution has the client request a lookup from a server, and if the server doesn't have it, it tells the client so and the client makes a request to that server's parent server, and so on, until the record is found. Recursive resolution has the client request the lookup from a server, and if the server doesn't have it, it requests it from its parent, and so on, until the record is found, returning them down the chain back to the client. Recursive resolution is generally faster, because servers are generally geographically arranged heirarchically as well - the server making the request to its parent is generally a lot closer to its parent than the client. However, iterative resolution is easier on the server, because they don't need to make any requests themselves.</p>
+<p>One of the most common name/directory services is DNS, which maps domain names to IPs at the application layer.</p>
+<p>A <strong>resolver</strong> is a DNS client, generally a library distributed as part of the OS. It communicates with name servers using a UDP request/reply protocol (each message can have multiple requests/replies), and implements timeouts, retry, and so on. The resolver has a hardcoded list of name server IPs to start with, generally provided by the ISP, known as the <strong>local DNS server</strong>. The resolver first contacts the local DNS server, and if it doesn't have the record, it'll contact the <strong>root DNS server</strong>, and work its way down the heirarchy until it gets to the <strong>authoritative DNS server</strong> for that host - the one that contains the record the host themselves publish.</p>
+<p>DNS supports iterative and recursive navigation, and specifies which one to use when making requests (the server doesn't have to obey, though).</p>
+<p>DNS records are called <strong>resource records</strong>, containing the following fields:</p>
+<ul>
+<li>Name - the key that we look this record up by.</li>
+<li>Value - the value associated with this record.</li>
+<li>Type - the meaning of the value associated with this record. For example, A for IP address mapping (value should be IP address), CNAME for a name alias (value should be name to alias), PTR for IP lookup by name (value should be IP address), TXT for arbitrary text (value is arbitrary text).</li>
+<li>Time to live - how long this record is valid for (it will be dropped after this amount of time).</li>
+</ul>
+<p>LDAP is a lightweight version of X.500, widely used for intranets within companies. It's also organized as a tree, mapping names to values, but the big difference is that you can query with boolean operators on directory attributes. Jini is another lookup service, intended to hold information about available/online services.</p>
+<h1 id="section-10">7/2/17</h1>
+<h2 id="distributed-filesystems">Distributed Filesystems</h2>
+<p>Filesystems are the OS's interface to storage. A distributed filesystem emulates the behaviour of a normal filesystem, using a physically distributed set of files.</p>
+<p>Usually, these should provide access transparency, location transparency, mobility transparency, performance transparency, and scaling transparency.</p>
+<p>Distributed filesystems should also allow concurrent access, replicating files, and handle heterogenous hardware. Often, we also want them to have security metadata and access control.</p>
+<p>It should be fault tolerant, so at-most-once semantics are preserved for file operations, and at-least-once semantics for idempotent file operations. Replication helps with fault tolerance, because after failure we can just restart the servers (assuming the servers themselves are stateless).</p>
+<p>Consistency is another important property of filesystems. All the clients should see the contents of the file identically as if there was only one copy of the file. Often, we settle for eventual consistency, where consistency may be temporarily broken but is guaranteed to occur eventually.</p>
+<p>We also care a lot about efficiency - file accesses should be fast, and capabilities should scale up with more resources. The ability to scale up is why we would use a distributed filesystem over a normal one, even though a distributed filesystem's single-computer performance and storage capacity would probably be worse than a normal filesystem.</p>
+<p>Distributed filesystem architectures usually contain a client module that runs on the application's server, which makes requests to a filesystem server running a directory service and a flat file service. The flat file service identifies file contents by UUID, and exposes them via an RPC mechanism. The directory service then maps file paths to those UUIDs. The client module exposes a filesystem-like interface to the distributed filesystem server, and might perform caching to improve performance for commonly used files.</p>
+<p>Two models under this architecture are <strong>remote access</strong> (each file operation is done by requesting that the server perform the operation) and <strong>download/upload</strong> (every file operation is done by downloading the file from the server, performing the operation, and sending it back to the server). The advantage of remote access is that it makes implementing concurrent access easier (because the server knows and controls the ordering of operations), while the advantage of download/upload is higher performance when making many changes to a small set of files (because we can do them all locally, distributing the load of file operations to the clients).</p>
+<p>One well-known distributed filesystem is NFS - network file system. It actually exposes a full virtual filesystem to the client using a kernel module, integrating both NFS servers and many other types of filesystems. This allows us to put EXT4, NTFS, and NFS filesystems all together into what appears to the application as a single filesystem.</p>
+<p>The virtual filesystem uses v-nodes (analogous to v-nodes) for open files, for each mounted filesystem. For local files, the v-node just stores the i-node. For remote files, the v-node can store the file handle on the NFS server. This makes it a lot easier to provide access transparency.</p>
+<p>NFS requests are done over RPC, originally unauthenticated - this was very bad for cases where access control was required. Security was added later on with Kerberos-based authentication and symmetric encryption (specifically, DES).</p>
+<p>NFS uses the remote access model, so every file operation is done on the server. NFS version 4 supports requesting multiple file operations in a single NFS request, while earlier versions required one request per file operation. This is somewhat analogous to recursive vs. iterative name resolution - one requires the client to make many requests, while the other allows the server to do more of it.</p>
+<p>Also, for recursive mounts, where we have a client that mounts a folder from a server that in turn mounts a folder from another server, NFS clients use iterative resolution - the client has to make requests to both servers, not just the original one it mounted. This makes security easier (since you only need to think about whether a given client can access something, not whether a client accessing some chain of servers can access something), and is simpler to implement overall.</p>
+<p>NFS supports soft-mounting and hard-mounting. Hard-mounting means that applications that are accessing files are suspended and the operation is retried until it completes successfully, while soft-mounting means that applications that are accessing files are blocked for a while, and eventually get an error if it fails after a couple retries. Hard mounting means if the server goes down, applications might be blocked indefinitely, but soft mounting means that data corruption is possible when writes are reported as succeeding when they actually failed.</p>
+<p>Mounting allows distributed filesystems to appear as a single filesystem. By adding another filesystem's namespace into our own namespace, it appears as a unified, local filesystem, when it might actually be many different computers providing the files.</p>
+<p>Assignment 2 is supposed to be pretty straightforward, intended as a warm-up for assignment 3, which is the big one. Assignment 3 is a 2-person project, while assignment 2 is individual.</p>
+<h1 id="section-11">9/2/17</h1>
+<p>For NFS, it's important to use caching on the client and server to make the performance acceptable.</p>
+<p>On the server, we can do write-through caching: when we write to a file that's cached, we update the cached copy, then make sure it's written to disk until replying to the client, and when we read a file, we just read from the cache. However, this makes write operations slower than if we were just writing/reading to the cache instead of the cache and the disk.</p>
+<p>One alternative to write-through caching is to add a commit operation, which forces cached data to be written to disk, and otherwise just read/write from the cache.</p>
+<p>On the client for read operations, we can cache files we're working on, especially for read, write, attribute, and directory listing operations. To maintain cache consistency, NFS uses a freshness timestamp associated with each file (and assumes a global clock), and periodically polls the server to check whether it has an updated copy. If it does, we update the data from the server, as well as the freshness timestamp. The freshness interval is configurable and can be set per-directory.</p>
+<p>On the client for write operations, we can mark the modified pages as dirty, and schedule them to be sent to the server asynchronously, like when we flush or close the file.</p>
+<p>On a single processor, when we write a file and then read it in again, we expect to get the value we just wrote. However, on a distributed filesystem with caching, it is possible that we will see obselete values.</p>
+<p>One way to get around this is to make applications lock files before they start changing them, so only one client can change a file at a time. However, this would be a big performance hit.</p>
+<p>In fact, the unix-style one-copy update semantics can't be implemented in distributed systems in general. Distributed filesystems instead often relax that requirement and implement unix session semantics instead - the application opens a session, and within the session the application expect that all of its reads/writes are executed in order, and read its own writes, but other clients might not see any of those operations until the session ends. In other words, changes aren't visible until the file is closed.</p>
+<p>So four ways to implement file sharing in a distributed filesystem are unix one-copy update semantics (all clients see all changes), unix session semantics (all clients see changes after file is closed), immutable (files can't be changed in the first place), and transaction-based (changes are batched in atomic changesets).</p>
+<p>NFS supports unix session semantics, and also shared reservations, which can be used as read-locks and write-locks.</p>
+<p>The Andrew File System (AFS) is the basis for the OSF's distributed computing environment, and is a more ground-up redesign of the filesystem. It takes advantage of the fact that infrequently updated shared files (like binaries, configuration, etc.) will remain valid for long periods of time, and that most of the files used by an application are usually a small set (so we can hae a reasonably-sized cache and expect most files to hit the cache). It's optimized for the common case where files are small, reads are more common than writes, sequential access is common, recently used files are likely to be used again soon, and most files are only accessed by one user.</p>
+<p>AFS consists of a client called Venus, and a server called Vice. AFS uses <strong>callback promises</strong> to represent locally cached files - a token that means the server will inform them if the cached file has been invalidated (each client can have up to one callback promise per file). Whenever a file is updated, the server informs all other clients holding a callback promise for that file that it's been updated, and the client can decide whether to they want to continue using their cached copy or update their cache.</p>
+<p>When you open a file in AFS, Venus checks if the file is cached and the file's callback promise is valid, and uses the cached file if both are true, or updated the local cache otherwise. Also, after a failure, it's possible that we've missed callback promise callbacks while we were offline - Venus solves this by periodically checking on callback promises to make sure they're still actually valid (usually every 10 minutes).</p>
+<p>This implements weak consistency, and a one-update guarantee (we won't inadvertantly overwrite updates). read/write operations are performed on the local copy, and when the file is closed, the file is copied back to the server (in practice, just the changed parts). This model also works really poorly for files heavily written to by multiple users, like databases, because every change invalidates everyone else's changes, but AFS was not designed for this use case.</p>
+<p>AFS doesn't handle concurrent file updates, and leaves it up to applications. It has cache consistency only on open and close operations.</p>
+<h1 id="section-12">13/2/17</h1>
+<p>A <strong>synchronization problem</strong> is one in which we need processes to cooperate and synchronize with each other. On a single system, we've altready looked at constructs to make this possible, like mutexes, semaphores, and so on. However, these don't generalize to distributed systems.</p>
+<p>In a centralized system, we can have a fully unambiguous, well-defined clock. In contrast, a distributed system might have a different clock for every single machine, cause by <strong>clock skew</strong> (different quartz crystals oscillate at slightly different frequencies).</p>
+<p>Many applications depend on time only moving in one direction and cause to precede effect. For example, GNU Make detects modified files on a single machine by checking the timestamps of the source and object files. Synchronization is needed whenever two processes interact and need to agree on an order in which events occur.</p>
+<p><strong>Physical clocks</strong> measure time in the real world. Real world time is a mess, even in the main standard, UTC. For example, September 1752 is missing days 3 through 13. There's also leap years and leap seconds (which are even unpredictable, added whenever required). Google's physical timekeeping system tries to mitigate this by slowly skewing the clock to the correct value over a full day.</p>
+<p>One way to do clock synchronization is to give every machine a WWV receiver to get atomic time from the NIST-run atomic clocks. However, this requires special hardware, and being within range of the broadcasts (out of Colerado).</p>
+<p>The <strong>Berkeley algorithm</strong> is another way to do physical clock synchronization. There's a time server that periodically gets elected, polls every other server, and then tells each of them how much they should adjust their clock by to get to the average of all polled times (rather than just telling them what the time should be). Also, the time server should take the round trip time into account for each other server.</p>
+<p>The <strong>averaging algorithm</strong> is somewhat similar, but is fully decentralized. Each machine divides time into distinct intervals (e.g., every second), and broadcasts its current clock at the beginning of each interval. Then, every machine adjusts its clock toward the average of all the clock value broadcasts it received. Also, each server should take the round trip time into account for each server.</p>
+<p>The issue with these two algorithms is that they both adjust toward the average of all the clocks, which will slowly skew away from real-world time.</p>
+<p>NTP is a time synchronization protocol, based on UDP. It arranges servers heirarchically, starting from a strata 1 server (the root node). It's nice for intranets and fast connections, when we have low average latency, and supports fault tolerance by reparing the heirarchy upon server failure.</p>
+<p>Using clock synchronization hardware like the kind used by Google, we can do a lot of interesting things. For example, we can enforce at-most-once message delivery to servers even if we crash (keep the highest seen timestamp so far, reject anything that has a lower timestamp, and initialize highest seen timestamp to current timestamp on start).</p>
+<p>We usually don't actually need a real clock for synchronization. A <strong>logical clock</strong> just enforces an ordering in a sequence that might be scrambled out of order, like the sequence number in TCP packets.</p>
+<p>An event A that starts and ends before event B means that A happens before B, and so B must have a higher timestamp - this is called the happens-before relation, denoted <span class="math inline">A \to B</span>. This is transitive, so if <span class="math inline">A \to B</span> and <span class="math inline">B \to C</span>, <span class="math inline">A \to C</span>. If A doesn't happen before B and B doesn't happen before A, then A is concurrent with B (it overlaps in terms of time). For example, the event of sending a message on a client, event A, happens-before the event of receiving a message on the corresponding server, event B, so <span class="math inline">A \to B</span>.</p>
+<p>Lamport timestamps are a common way to capture the happens-before relation, for implementing logical clocks:</p>
+<ul>
+<li>Each process <span class="math inline">p_i</span> has a monotonically increasing logical clock <span class="math inline">L_i</span>.</li>
+<li>When <span class="math inline">p_j</span> wants to do an event, it computes <span class="math inline">L_i = L_i + 1, t = L_i</span>, and then we send out the message as <span class="math inline">\tup{m, t}</span>.</li>
+<li>Upon a process <span class="math inline">p_j</span> receiving a message <span class="math inline">\tup{m, t}</span>, it computes <span class="math inline">L_j = \max(L_j, t) + 1</span>.</li>
+</ul>
+<p>This ensures that if an event A has a lower lamport timestamp than an event B, A is guaranteed to happen before B.</p>
+<h1 id="section-13">16/2/17</h1>
+<p>A replicated database can use lamport timestamps to make sure that updates get applied to all copies of the database in the correct order.</p>
+<p>One way to implement updates in a distributed database is to have clients send updates to the database's sequencer, which decides what order to process them in. The sequencer then sends the updates to each replica in a way.</p>
+<p>However, the sequencer can potentially become a bottleneck - instead, we might use independent replicas that talk to each other to synchronize their transactions.</p>
+<h2 id="global-stateelections">Global State/Elections</h2>
+<p>The <strong>global state</strong> of the distributed system is the local state of each process and the messages in transit.</p>
+<p>Sometimes it's useful to know the global state for a system, for things that cross process boundaries like garbage collection and detecting deadlocks.</p>
+<p>A <strong>distributed snapshot/cut</strong> is a consistent representation of the system at a certain time. Consistent in this context means &quot;if A sends B a message, we either record both A sending the message and B receiving the message, or neither A sending the message nor B receiving the message&quot;. Formally, consistency means that if an event <span class="math inline">e</span> is in the snapshot, and <span class="math inline">f \to e</span> (<span class="math inline">f</span> happens before <span class="math inline">e</span>), then <span class="math inline">f</span> must also be in the cut.</p>
+<p>For example, if we have a distributed banking algorithm where messages are transactions, a consistent snapshot of the system must ensure that the total amount of money on each node and on messages in transit should always equal the total balance. The state of each node might be &quot;how much money do I hold?&quot; and messages in transit might be &quot;A has taken out $50 and is sending it to B&quot;.</p>
+<p>The <strong>Chandy-Lamport algorithm</strong> is one way to take distributed snapshots. To take a snapshot with this algorithm:</p>
+<ol type="1">
+<li>The process taking the snapshot (i.e., the observer process), <span class="math inline">P_i</span>, saves its own local state.</li>
+<li>For each outgoing channel C (i.e., send to every other process it's connected to), <span class="math inline">P_i</span> sends a unique marker on that channel and marks all further messages with that marker.</li>
+<li>When a process <span class="math inline">P_j</span> receives a marker on channel <span class="math inline">C</span>:
+<ol type="1">
+<li>If <span class="math inline">P_j</span> has never received any markers before (on any channel, at any time), then it runs steps 1-2 itself and sends its saved local state to <span class="math inline">P_i</span>.</li>
+<li>If <span class="math inline">P_j</span> has received markers before, save the state of channel <span class="math inline">C</span> as the set of messages received along <span class="math inline">C</span> after <span class="math inline">P_j</span>'s state was last recorded, and <span class="math inline">P_j</span> received the marker on <span class="math inline">C</span>. Then, send the channel state to the observer processor.</li>
+</ol></li>
+</ol>
+<p>A lot of algorithms need a single process to coordinate/lead, but don't particularly care which process does it - we just need to choose exactly one process to do it. Electing this coordinator process is called the <strong>election problem</strong>.</p>
+<p>The general approach for this is to give every process a unique ID number, and let each process know the process number of every other process (but not whether those other processes are up or not). We want to elect the process that is up and has the highest ID number.</p>
+<p>Lamport proposed paxos for this, but it's pretty complicated and not used much. A more recent algorithm, raft, is simpler but also not used much.</p>
+<p>The bully algorithm is used a bit more often. If a process <span class="math inline">P_i</span> needs to know who the coordinator is, but the current coordinator isn't responding (or if we just started):</p>
+<ol type="1">
+<li><span class="math inline">P_i</span> starts the election process:
+<ol type="1">
+<li><span class="math inline">P_i</span> sends an ELECTION message to every node with a higher ID number than itself - <span class="math inline">P_{i + 1}, \ldots, P_n</span>.</li>
+<li><span class="math inline">P_i</span> waits for a little while, for other processes to get a chance to respond.</li>
+<li>If <span class="math inline">P_i</span> doesn't get any responses, it has the highest ID number and broadcasts a VICTORY message to every other node (establishing <span class="math inline">P_i</span> as the coordinator).</li>
+<li>If <span class="math inline">P_i</span> gets responses, it waits for a while for another process <span class="math inline">P_j</span> to broadcast a VICTORY message (establishing <span class="math inline">P_j</span> as the coordinator), or if none do, restarts the entire procedure (the higher ones probably died before one could declare victory).</li>
+</ol></li>
+<li>If a process <span class="math inline">P_j</span> receives an ELECTION message:
+<ol type="1">
+<li><span class="math inline">P_j</span> responds to the sender with an OK message (to tell the sender that it's still alive)</li>
+<li><span class="math inline">P_j</span> sends an ELECTION message to every node with a higher ID number than itself - <span class="math inline">P_{j + 1}, \ldots, P_n</span>.</li>
+</ol></li>
+</ol>
+<p>This algorithm, compared to more naive ways of finding the coordinator, has the advantage of having all nodes always agreeing on who the coordinator is, even if nodes fail or come online partway through. However, it sends a quadratic number of messages with respect to the number of nodes.</p>
+<p>The <strong>ring algorithm</strong> (also known as the Chang and Roberts algorithm) is a variant of the bully algorithm, where processes send/pass ELECTION messages along a ring of nodes. If a process <span class="math inline">P_i</span> needs to know who the coordinator is, but the current coordinator isn't responding (or we just started):</p>
+<ol type="1">
+<li><span class="math inline">P_i</span> starts the election process. All processes initially have an unset flag PARTICIPATED, representing whether they've participated in the election:
+<ol type="1">
+<li><span class="math inline">P_i</span> sends an ELECTION message to its neighbor containing <span class="math inline">P_i</span>'s ID number, and sets PARTICIPATED for itself. Neighbors that don't acknowledge the message are skipped and we go to the neighbor's neighbor, and so on, until our ELECTION message sends successfully.</li>
+</ol></li>
+<li>If a process <span class="math inline">P_j</span> receives an ELECTION message from its neighbor:
+<ol type="1">
+<li>If the ID number for the ELECTION message is greater than <span class="math inline">P_j</span>'s ID number, <span class="math inline">P_j</span> forwards it to its other neighbor and sets PARTICIPATED for itself. Neighbors that don't acknowledge the message are skipped and we go to the neighbor's neighbor, and so on, until our ELECTION message sends successfully.</li>
+<li>If the ID number for the ELECTION message is less than <span class="math inline">P_j</span>'s ID number, <span class="math inline">P_j</span> discards it if <span class="math inline">P_j</span> has PARTICIPATED set, or otherwise sends a new ELECTION message to its other neighbor containing <span class="math inline">P_j</span>'s own ID number. Neighbors that don't acknowledge the message are skipped and we go to the neighbor's neighbor, and so on, until our ELECTION message sends successfully.</li>
+<li>If the ID number of the ELECTION message matches <span class="math inline">P_j</span>'s ID number:
+<ol type="1">
+<li><span class="math inline">P_j</span> unsets PARTICIPATED for itself, and then sends a VICTORY message to its neighbor containing its ID number.</li>
+</ol></li>
+</ol></li>
+<li>If a process <span class="math inline">P_k</span> receives a VICTORY message from its neighbor:
+<ol type="1">
+<li>If <span class="math inline">P_k</span>'s ID number matches the ID number in the VICTORY message, <span class="math inline">P_k</span> stores the fact that it is the coordinator.</li>
+<li>Otherwise, <span class="math inline">P_k</span> unsets PARTICIPATED for itself, stores the fact that the ID number in the VICTORY message is the coordinator, and then forwards the message to its other neighbor.</li>
+</ol></li>
+</ol>
+<p>The advantage of the ring algorithm is that it only sends a linear number of messages with respect to the number of nodes. However, it takes longer to forward all those messages around, and it isn't very fault tolerant if nodes in the ring go down or new ones come online while the algorithm is running.</p>
+<h1 id="section-14">28/2/17</h1>
+<p>;wip: missed due to interviews</p>
+<h1 id="section-15">2/3/17</h1>
+<p>What we really want in a database is a guarantee of serializability - transactions should run concurrently, but give the same results as if we ran them one at a time.</p>
+<p>Some of the possible issues when we don't have isolation but still run transactions concurrently are:</p>
+<ul>
+<li>Lost updates - transactions A and B read, then both write to the same thing, so the first write is lost.</li>
+<li>Inconsistent retrievals/dirty reads - transaction A temporarily mutates data, and transaction B reads A's intermediate values, when the data might be in an inconsistent state.</li>
+<li>Incomplete reads - if we read values in a transaction from another transaction, and the other transaction then aborts, then we also have to abort, since we need the result to be the same as if that transaction never ran. This can cause a series of cascading aborted transactions.</li>
+</ul>
+<p>An <strong>execution schedule/history</strong> is a partial order over the operations in a set of transactions.</p>
+<p>A serial history is one where for any tranaction, all operations for that transactions appear together, with no interleaving between transactions. Serial histories are inefficient, so our goal is to find a more concurrent execution history that has the same effect as a serial history.</p>
+<p>We really just care about the operations in the transactions that conflict - the relative order of conflicting operations being equal in any two equivalent transactions (this is called <strong>conflict equivalence</strong>).</p>
+<p>Specifically, conflicting operations means a read in transaction A and a write in transaction B to the same data (since the read value depends on whether we read before or after the write), and a write in transaction A and a write in transaction B to the same data (since only the last write will take effect). In other words, <strong>we can have read-write and write-write conflicts when accessing the same data from different transactions</strong>. For non-conflicting instructions, we can freely run them concurrently and so on (if A writes to X and B writes to Y, we can do both writes at the same time, since they don't conflict).</p>
+<p>So, we can freely reorder non-conflicting instructions while retaining conflict equivalence, as long as the relative order of conflicting instructions always stays the same. If an execution history gives a result equivalent to a serial history, it is a <strong>serializable history</strong>. Furthermore, if an execution history is conflict equivalent to a serial history, it is always a serializable history. In other words, a serializable schedule is one that has the exact same effect as running the transactions serially in some order.</p>
+<p>A <strong>precedence/serialization graph</strong> for an execution history is a directed graph where nodes are transactions and an edge from A to B means that B has an operation that depends on an operation in A. There is a theorem that says that if there are no edges in the precedence graph, then the transaction is serializable. Additionally, we can obtain the corresponding serial history by doing a topological sort on the precedence graph (essentially, arranging the nodes in a horizontal line such that all the arrows point right).</p>
+<p>For distributed transactions, we have to make sure both local and global histories are serializable. A global history is serializable when each local history is serializable, and conflicting operations in transactions in local histories are in the same order in every local history (e.g., if transaction A has an operation that conflicts with one in transaction B, we can't have one local history that runs A's operation before B's operation, and another that rns B's operation before A's operation).</p>
+<p>The goal is to allow transactions to execute as concurrently as possible, while ensuring that the database is always consistent. While the serialization graph is a useful way to understand serializability, it's expensive to do in the real world.</p>
+<p>Instead, we usually use something like <strong>two-phase locking</strong>. In this scheme, transactions lock all the objects they need in a locking phase, and then release locks as we're done with them (we can't lock anything after we unlock anything). It's straightforward to prove that this guarantees serializability, and is relatively resource-efficient. However, we don't always know what we'll need to lock beforehand, it's highly prone to deadlock, and dirty reads are still possible (since we might unlock something before we actually commit).</p>
+<p>In <strong>strict/rigorous two-phase locking</strong>, we hold all of the locks until we commit, instead of whenever we're done with them. This fixes the dirty reads issue, but it's also slower since the locks are held for longer. We can also fix the deadlock issue by always ensuring that the locks are acquired in a particular order (this ensures that cycles in the lock dependency graph are impossible).</p>
+<p>There's also something in between non-strict and strict two-phase locking, called strong two-phase locking, that is used a lot in the real world.</p>
+<h1 id="section-16">7/3/17</h1>
+<p>A deadlock occurs when A is locking something and waiting for B's lock to release, while B is locking something andwaiting for A's lock to release. In other words, there's a cycle in the wait-for graph.</p>
+<p>When dealing with deadlocks, we ideally want to prevent them from happening (e.g., formally prove correctness, pre-declare resources). Alternative options are to avoid them at runtime (e.g., order lock acquisitions and transactions such that deadlocks don't occur), or detect/recover from deadlocks at runtime (e.g., deadlocks are detected, and the cycle is broken by killing off a part of the cycle).</p>
+<p>In real-world systems, the last one is generally the most practical - letting deadlocks form and then recovering from it. When we have a deadlock, we usually want to kill off the transactions that have done the least work so far (to minimise the amount of work lost), and transactions that are in as many deadlocks as possible (to minimise the number of transactions to kill to get rid of all the deadlocks).</p>
+<p>In a distributed system, we generally detect deadlocks either using a centralized system that keeps track of the global wait-for graph, or by keeping track of the leaf node in the chain of wait-for statements (this allows us to detect cycles as they form).</p>
+<p><strong>Timestamp ordering</strong> schemes are an alternative to lock-based schemes like 2-phase locking. Instead of resolving conflicts between transactions when they're executed, timestamp ordering resolves them while transactions are being created.</p>
+<p>In a timestamp ordering scheme, transactions are assigned a globally-unique timestamp, which is attached to every operation they perform. Given a set of transactions, we start off with <span class="math inline">rts(x) = 0</span> and <span class="math inline">wts(x) = 0</span>, which represent the largest timestamps that have read/written an object <span class="math inline">x</span>, respectively.</p>
+<p>Then, for any read from <span class="math inline">x</span> from a transaction with timestamp <span class="math inline">t</span> <span class="math inline">R_t(x)</span>, we perform the operation if <span class="math inline">t \ge wts(x)</span> or abort otherwise (because the value is out of date), and then set <span class="math inline">rts(x)</span> to <span class="math inline">t</span>. Likewise, for any write <span class="math inline">W_t(x)</span>, we perform the operation if <span class="math inline">t \ge rts(x) \land t \ge wts(x)</span>, skip the write if <span class="math inline">t &lt; wts(x)</span> (because the value will be overwritten later anyways), or abort otherwise (because the old value is still being used), and then set <span class="math inline">wts(x)</span> to <span class="math inline">t</span>.</p>
+<p>The globally-unique timestamps ensure that we have a relative ordering over every operation in every transaction. The conditions we check ensure that we can't read stale values, and can't write over values other transactions are reading or writing to.</p>
+<p>Timestamp ordering works fine for read-intensive loads, but for write-intensive loads it's pretty bad - a lot of transactions will abort relative to lock-based schemes.</p>
+<p>Timestamp ordering can be extended to get multi-version timestamp ordering (MVTO), where each write to <span class="math inline">x</span> makes a new version <span class="math inline">x&#39;</span> instead of changing the old value, and reads of <span class="math inline">x</span> are always reading the largest timestamp that's before the read's timestamp. So in addition to ensuring that operations are in timestamp order, we also enforce version order, where operations can't see versions with timestamps after their own timestamps. Turns out though, this is somewhat inefficient in the real world.</p>
+<h2 id="replication">Replication</h2>
+<p>Replication in distributed systems is very commonly used to improve performance (server can be closer to client, more servers online) and availability (more copies of data available, failover upon server going offline). However, it also makes consistency more difficult, because when we have multiple copies of state, they can get out of sync.</p>
+<h1 id="section-17">9/3/17</h1>
+<p>;wip: missed due to midterm studying</p>
+<h1 id="section-18">14/3/17</h1>
+<p>;wip: went to get food instead of class</p>
+<h1 id="section-19">16/3/17</h1>
+<p>;wip: overslept</p>
+<h1 id="section-20">21/3/17</h1>
+<p>;wip: ACID properties</p>
+<p>Write-Ahead Logging: log database operations as we're performing them. We add a checkpoint to the lock every time we commit.</p>
+<p>If the node goes down, the log keeps track of all the operations we were performing. Upon recovery, we can scan the log from tail to head, reconstruct the list of transactions, and then replay them.</p>
+<p>Two-part commits (2PC) ensure atomicity and durability. It's one of the most common ways to implement these properties:</p>
+<ul>
+<li>Relevant parties: Tranaction Manager, Participants, Coordinator (elected by participants).</li>
+<li>Starting state: coordinator knows all participants and participant transaction states, participants know coordinator.</li>
+<li>Coordinator sends each participant a &quot;prepared?&quot; message.</li>
+<li>Each participant responds yes if and only if it's ready to commit - if it has executed all the operations in its transaction except the commit message.</li>
+<li>Once te coordinator gets all the responses from participants, it's responsible for ensuring either all participants commit, or none of them commit - reaching a global decision. It sends a &quot;global-commit&quot; (all participants vote yes) or a &quot;global-abort&quot; (any participant voted no).</li>
+<li>Participants commit/abort depending on which global message they received.</li>
+<li>Participants send the coordinator a &quot;done&quot; message.</li>
+<li>If a coordinator fails at any point and recovers, it won't know about the previous transaction states. If it sees a transaction it doesn't recognize, it does a <strong>unilateral abort</strong>.</li>
+<li>If a participant fails before the &quot;prepare?&quot; message and recovers, it checks its transaction log, and unilateral aborts any transactions that were running before.</li>
+<li>If a participant fails after the &quot;prepare?&quot; message, but before voting on it, the coordinator will global-abort, because no global decision has been made.</li>
+<li>If a participant fails after voting, but before receiving the global decision, the participant can't carry out the global decision. This phase is therefore called the <strong>uncertain phase</strong>.</li>
+<li>If the coordinator fails between receiving votes and finishing sending out the global decision, participants can run a &quot;termination protocol&quot; to recover. If some participants received a global message, participants might ask other participants if they received a global decision (in case the coordinator went down while sending out decisions). Otherwise, they might block until a coordinator comes back online.</li>
+<li>One optimization is to replace &quot;prepare?&quot; messages with &quot;presume?&quot; messages, which assume the participants vote yes unless they explicitly vote no.</li>
+</ul>
+<p>The two phases here are the <strong>voting phase</strong> and the <strong>decision phase</strong>.</p>
+<h1 id="section-21">23/3/17</h1>
+<p>;wip: catch up on this</p>
+<h1 id="section-22">28/3/17</h1>
+<p>Software as a service is the idea of delivering applications over the internet as services. This was made economically feasible with the advent of cheap, reliable virtualization, which allows us to granularly divide computer resources.</p>
+<p>Virtualization can take many forms. For example, Amazon EC2 exposes full virtual machines that behave as if they're full computers, while something like AppEngine will manage things like the OS and backing storage for you.</p>
+<p>Companies want to use cloud computing because they can then pay by use instead of having to pay for enough capacity to handle peak load. Cloud companies are essentially taking on the server hardware risk. If there isn't enough capacity, users get a bad experience. If there's too much capacity, the company is wasting money on capacity it isn't currently using.</p>
+<p>In practice, cloud computing is 5 to 7 times cheaper than in-house daacenters. Another advantage is that the extra capacity can be used in other projects like compute for research teams or Spot Instances.</p>
+<p>Most of the popular cloud apps are highly data-intensive, and many cloud providers expose data management solutions such as mapreduce, online transaction processing (OLTP), and online analytics processing (OLAP).</p>
+<p>Some cloud database architectures are shared-nothing (processors share interconnect, but have their own memory and disk), shared-memory (processors share memory, but not disk), and shared-disk (processors share disk, but not memory).</p>
+<p><strong>Mapreduce</strong> is a programming model that's been around since Lisp, but it's become more popular lately due to how suitable it is for large scale data processing. In the Mapreduce data model, there's only a simple key-value store that supports retrieving and storing values by key.</p>
+<p>The ideal case is when we have straightforward computations on a very large dataset, and we want to distribute this workload over hundreds or thousands of machines. Mapreduce proceeds with two components: a map function is mapped to the dataset to create an <strong>index</strong> from the source data, and a reduce function is used to compute <strong>grouped aggregates</strong> from this index.</p>
+<p>Some considerations for mapreduce are conserving network bandwidth, moving mappers/reducers closer to the data, and balancing the number of mappers and reducers. Additionally, mapreduce is only really suitable for certain situations, and can't begin to match the feature set of real databases.</p>
+<p>Final exam info and review next class.</p>
 <div class="status-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; text-align: center;">
     <div style="display: inline-block; padding: 0.8em 2em 0.5em 2em; background: black; color: white; font-size: 2em;">
         Rendering <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewbox="0 0 1200 500" style="vertical-align: text-bottom"><title>LaTeX logo</title><g transform="matrix(45 0 0 45 40 40)" fill="white"><path d="M5.5 4.4C5.5 4.4 5.2 4.4 5.2 4.4 5.1 5.4 5 6.7 3.2 6.7 3.2 6.7 2.4 6.7 2.4 6.7 1.9 6.7 1.9 6.6 1.9 6.3 1.9 6.3 1.9 1 1.9 1 1.9 0.6 1.9 0.5 2.9 0.5 2.9 0.5 3.2 0.5 3.2 0.5 3.2 0.5 3.2 0.2 3.2 0.2 2.8 0.2 1.9 0.2 1.5 0.2 1.1 0.2 0.3 0.2 0 0.2 0 0.2 0 0.5 0 0.5 0 0.5 0.2 0.5 0.2 0.5 1 0.5 1 0.6 1 0.9 1 0.9 1 6.2 1 6.2 1 6.6 1 6.7 0.2 6.7 0.2 6.7 0 6.7 0 6.7 0 6.7 0 7 0 7 0 7 5.2 7 5.2 7 5.2 7 5.5 4.4 5.5 4.4z"/><path d="M5.3 0.2C5.3 0 5.2 0 5.1 0 5 0 4.9 0 4.9 0.2 4.9 0.2 3.3 4.2 3.3 4.2 3.2 4.4 3.1 4.7 2.5 4.7 2.5 4.7 2.5 5 2.5 5 2.5 5 4 5 4 5 4 5 4 4.7 4 4.7 3.7 4.7 3.5 4.6 3.5 4.4 3.5 4.3 3.5 4.3 3.6 4.2 3.6 4.2 3.9 3.4 3.9 3.4 3.9 3.4 5.9 3.4 5.9 3.4 5.9 3.4 6.3 4.4 6.3 4.4 6.3 4.4 6.3 4.5 6.3 4.5 6.3 4.7 5.9 4.7 5.8 4.7 5.8 4.7 5.8 5 5.8 5 5.8 5 7.7 5 7.7 5 7.7 5 7.7 4.7 7.7 4.7 7.7 4.7 7.6 4.7 7.6 4.7 7.1 4.7 7.1 4.7 7 4.5 7 4.5 5.3 0.2 5.3 0.2zM4.9 0.9C4.9 0.9 5.8 3.1 5.8 3.1 5.8 3.1 4 3.1 4 3.1 4 3.1 4.9 0.9 4.9 0.9z"/><path d="M13.3 0.2C13.3 0.2 7.2 0.2 7.2 0.2 7.2 0.2 7 2.5 7 2.5 7 2.5 7.3 2.5 7.3 2.5 7.4 0.9 7.6 0.5 9.1 0.5 9.3 0.5 9.5 0.5 9.6 0.6 9.8 0.6 9.8 0.7 9.8 0.9 9.8 0.9 9.8 6.2 9.8 6.2 9.8 6.5 9.8 6.7 8.8 6.7 8.8 6.7 8.4 6.7 8.4 6.7 8.4 6.7 8.4 7 8.4 7 8.8 6.9 9.8 6.9 10.3 6.9 10.7 6.9 11.7 6.9 12.2 7 12.2 7 12.2 6.7 12.2 6.7 12.2 6.7 11.8 6.7 11.8 6.7 10.7 6.7 10.7 6.5 10.7 6.2 10.7 6.2 10.7 0.9 10.7 0.9 10.7 0.7 10.7 0.6 10.9 0.6 11 0.5 11.3 0.5 11.5 0.5 13 0.5 13.1 0.9 13.2 2.5 13.2 2.5 13.5 2.5 13.5 2.5 13.5 2.5 13.3 0.2 13.3 0.2z"/><path d="M18.7 6.7C18.7 6.7 18.4 6.7 18.4 6.7 18.2 8.2 17.9 8.9 16.2 8.9 16.2 8.9 14.9 8.9 14.9 8.9 14.4 8.9 14.4 8.8 14.4 8.5 14.4 8.5 14.4 5.9 14.4 5.9 14.4 5.9 15.3 5.9 15.3 5.9 16.3 5.9 16.4 6.2 16.4 7 16.4 7 16.6 7 16.6 7 16.6 7 16.6 4.4 16.6 4.4 16.6 4.4 16.4 4.4 16.4 4.4 16.4 5.2 16.3 5.5 15.3 5.5 15.3 5.5 14.4 5.5 14.4 5.5 14.4 5.5 14.4 3.2 14.4 3.2 14.4 2.8 14.4 2.8 14.9 2.8 14.9 2.8 16.2 2.8 16.2 2.8 17.7 2.8 18 3.3 18.1 4.7 18.1 4.7 18.4 4.7 18.4 4.7 18.4 4.7 18.1 2.5 18.1 2.5 18.1 2.5 12.5 2.5 12.5 2.5 12.5 2.5 12.5 2.8 12.5 2.8 12.5 2.8 12.7 2.8 12.7 2.8 13.5 2.8 13.5 2.9 13.5 3.2 13.5 3.2 13.5 8.4 13.5 8.4 13.5 8.8 13.5 8.9 12.7 8.9 12.7 8.9 12.5 8.9 12.5 8.9 12.5 8.9 12.5 9.2 12.5 9.2 12.5 9.2 18.2 9.2 18.2 9.2 18.2 9.2 18.7 6.7 18.7 6.7z"/><path d="M21.7 3.1C21.7 3.1 23 1.1 23 1.1 23.3 0.8 23.6 0.5 24.5 0.5 24.5 0.5 24.5 0.2 24.5 0.2 24.5 0.2 22.1 0.2 22.1 0.2 22.1 0.2 22.1 0.5 22.1 0.5 22.5 0.5 22.7 0.7 22.7 0.9 22.7 1 22.7 1.1 22.6 1.2 22.6 1.2 21.5 2.8 21.5 2.8 21.5 2.8 20.2 0.9 20.2 0.9 20.2 0.9 20.1 0.8 20.1 0.8 20.1 0.7 20.4 0.5 20.8 0.5 20.8 0.5 20.8 0.2 20.8 0.2 20.4 0.2 19.7 0.2 19.3 0.2 19 0.2 18.4 0.2 18 0.2 18 0.2 18 0.5 18 0.5 18 0.5 18.2 0.5 18.2 0.5 18.8 0.5 19 0.5 19.2 0.8 19.2 0.8 21 3.6 21 3.6 21 3.6 19.4 6 19.4 6 19.2 6.2 18.9 6.7 17.9 6.7 17.9 6.7 17.9 7 17.9 7 17.9 7 20.3 7 20.3 7 20.3 7 20.3 6.7 20.3 6.7 19.8 6.7 19.7 6.4 19.7 6.2 19.7 6.1 19.7 6.1 19.8 6 19.8 6 21.2 3.9 21.2 3.9 21.2 3.9 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.3 22.8 6.4 22.8 6.5 22.6 6.7 22.2 6.7 22.2 6.7 22.2 7 22.2 7 22.5 6.9 23.2 6.9 23.6 6.9 24 6.9 24.5 7 24.9 7 24.9 7 24.9 6.7 24.9 6.7 24.9 6.7 24.7 6.7 24.7 6.7 24.2 6.7 24 6.6 23.8 6.3 23.8 6.3 21.7 3.1 21.7 3.1z"/></g></svg> math...
